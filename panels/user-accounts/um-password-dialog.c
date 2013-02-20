@@ -46,8 +46,6 @@ struct _UmPasswordDialog {
         GtkWidget *verify_entry;
         GtkWidget *strength_indicator;
         GtkWidget *strength_indicator_label;
-        GtkWidget *normal_hint_entry;
-        GtkWidget *normal_hint_label;
         GtkWidget *show_password_button;
         GtkWidget *ok_button;
 
@@ -141,7 +139,6 @@ finish_password_change (UmPasswordDialog *um)
 
         gtk_entry_set_text (GTK_ENTRY (um->password_entry), " ");
         gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
-        gtk_entry_set_text (GTK_ENTRY (um->normal_hint_entry), "");
         gtk_entry_set_text (GTK_ENTRY (um->old_password_entry), "");
 
         um_password_dialog_set_user (um, NULL);
@@ -228,7 +225,7 @@ accept_password_dialog (GtkButton        *button,
         gtk_tree_model_get (model, &iter, 1, &mode, -1);
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
-        hint = gtk_entry_get_text (GTK_ENTRY (um->normal_hint_entry));
+        hint = NULL;
 
         switch (mode) {
                 case UM_PASSWORD_DIALOG_MODE_NORMAL:
@@ -339,8 +336,6 @@ action_changed (GtkComboBox      *combo,
                 gtk_entry_set_icon_sensitive (GTK_ENTRY (um->password_entry), GTK_ENTRY_ICON_SECONDARY, TRUE);
                 gtk_widget_set_sensitive (um->verify_entry, TRUE);
                 gtk_widget_set_sensitive (um->old_password_entry, TRUE);
-                gtk_widget_set_sensitive (um->normal_hint_entry, TRUE);
-                gtk_widget_set_sensitive (um->normal_hint_label, TRUE);
                 gtk_widget_set_sensitive (um->strength_indicator_label, TRUE);
                 gtk_widget_set_sensitive (um->show_password_button, TRUE);
 
@@ -351,8 +346,6 @@ action_changed (GtkComboBox      *combo,
                 gtk_entry_set_icon_sensitive (GTK_ENTRY (um->password_entry), GTK_ENTRY_ICON_SECONDARY, FALSE);
                 gtk_widget_set_sensitive (um->verify_entry, FALSE);
                 gtk_widget_set_sensitive (um->old_password_entry, FALSE);
-                gtk_widget_set_sensitive (um->normal_hint_entry, FALSE);
-                gtk_widget_set_sensitive (um->normal_hint_label, FALSE);
                 gtk_widget_set_sensitive (um->strength_indicator_label, FALSE);
                 gtk_widget_set_sensitive (um->show_password_button, FALSE);
                 gtk_widget_set_sensitive (um->ok_button, TRUE);
@@ -426,14 +419,6 @@ verify_entry_focus_out (GtkWidget        *entry,
 {
         update_password_match (um);
         return FALSE;
-}
-
-static void
-entry_size_changed (GtkWidget     *entry,
-                    GtkAllocation *allocation,
-                    GtkWidget     *label)
-{
-        gtk_widget_set_size_request (label, allocation->width, -1);
 }
 
 static void
@@ -612,16 +597,6 @@ um_password_dialog_new (void)
         widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
         gtk_label_set_width_chars (GTK_LABEL (widget), len);
 
-        um->normal_hint_entry = (GtkWidget *) gtk_builder_get_object (builder, "normal-hint-entry");
-
-        /* Label size hack.
-         * This only sort-of works because the dialog is non-resizable.
-         */
-        widget = (GtkWidget *)gtk_builder_get_object (builder, "password-normal-hint-description-label");
-        g_signal_connect (um->normal_hint_entry, "size-allocate",
-                          G_CALLBACK (entry_size_changed), widget);
-        um->normal_hint_label = widget;
-
         um->strength_indicator = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator");
 
         um->strength_indicator_label = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
@@ -691,7 +666,6 @@ um_password_dialog_set_user (UmPasswordDialog *um,
 
                 gtk_entry_set_text (GTK_ENTRY (um->password_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
-                gtk_entry_set_text (GTK_ENTRY (um->normal_hint_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->old_password_entry), "");
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button), FALSE);
                 if (act_user_get_uid (um->user) == getuid () &&
