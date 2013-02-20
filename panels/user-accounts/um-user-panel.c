@@ -1117,6 +1117,7 @@ on_permission_changed (GPermission *permission,
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (get_widget (d, "account-fingerprint-notebook")), 0);
         }
 
+        um_password_dialog_set_user (d->password_dialog, user);
         um_password_dialog_set_privileged (d->password_dialog, is_authorized);
 
         g_object_unref (user);
