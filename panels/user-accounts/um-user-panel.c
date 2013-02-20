@@ -770,7 +770,7 @@ language_response (GtkDialog         *dialog,
                 act_user_set_language (user, lang);
         }
         else {
-                lang = act_user_get_language (user);
+                lang = g_strdup (act_user_get_language (user));
                 if (!lang) {
                         lang = cc_common_language_get_current_language ();
                 }
