@@ -122,8 +122,16 @@ cc_region_panel_finalize (GObject *object)
 	CcRegionPanel *self = CC_REGION_PANEL (object);
 	CcRegionPanelPrivate *priv = self->priv;
 
-        priv->user_manager = NULL;
-        priv->user = NULL;
+        if (priv->user_manager) {
+                g_signal_handlers_disconnect_by_data (priv->user_manager, self);
+                priv->user_manager = NULL;
+        }
+
+        if (priv->user) {
+                g_signal_handlers_disconnect_by_data (priv->user, self);
+                priv->user = NULL;
+        }
+
         g_clear_object (&priv->permission);
         g_clear_object (&priv->localed);
         g_clear_object (&priv->builder);
