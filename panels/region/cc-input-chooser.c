@@ -203,7 +203,7 @@ input_source_widget_new (GtkWidget   *chooser,
                          const gchar *id)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-  GtkWidget *widget;
+  GtkWidget *widget = NULL;
 
   if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
     {
@@ -350,7 +350,7 @@ static void
 show_locale_widgets (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
-  GHashTable *initial;
+  GHashTable *initial = NULL;
   LocaleInfo *info;
   GHashTableIter iter;
 
