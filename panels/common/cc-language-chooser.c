@@ -69,7 +69,8 @@ set_locale_id (GtkDialog *chooser,
 
                 if (g_strcmp0 (locale_id, language) == 0) {
                         gboolean is_extra;
-                        gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+
+                        gtk_widget_show (check);
 
                         /* make sure the selected language is shown */
                         is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
@@ -80,6 +81,7 @@ set_locale_id (GtkDialog *chooser,
                 } else {
                         gtk_image_clear (GTK_IMAGE (check));
                         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
+                        gtk_widget_hide (check);
                 }
         }
         g_list_free (children);
@@ -141,10 +143,12 @@ language_widget_new (const gchar *locale_id,
         widget = padded_label_new (locale_name, is_extra);
 
         check = gtk_image_new ();
+        gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+        gtk_widget_set_no_show_all (check, TRUE);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
         gtk_box_pack_start (GTK_BOX (widget), check, FALSE, FALSE, 0);
         if (g_strcmp0 (locale_id, current_locale_id) == 0)
-                gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+                gtk_widget_show (check);
 
         g_object_set_data (G_OBJECT (widget), "check", check);
         g_object_set_data_full (G_OBJECT (widget), "locale-id", g_strdup (locale_id), g_free);
