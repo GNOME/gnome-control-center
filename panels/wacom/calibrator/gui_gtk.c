@@ -327,7 +327,7 @@ set_calibration_status (CalibArea *area)
 							  NULL,
 							  NULL,
 							  NULL);
-	gtk_icon_info_free (icon_info);
+	g_object_unref (icon_info);
 	if (!area->icon_success)
 		g_warning ("Failed to load icon \"%s\"", ICON_SUCCESS);
 
@@ -488,7 +488,7 @@ calib_area_new (GdkScreen      *screen,
 
 	/* Black background */
 	gdk_rgba_parse (&black, "rgb(0,0,0)");
-	gtk_window_set_opacity (GTK_WINDOW (calib_area->window), WINDOW_OPACITY);
+	gtk_widget_set_opacity (GTK_WIDGET (calib_area->window), WINDOW_OPACITY);
 
 	gtk_widget_realize (calib_area->window);
 	window = gtk_widget_get_window (calib_area->window);
