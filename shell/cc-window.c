@@ -32,6 +32,7 @@
 #include <string.h>
 #include <libgd/gd-styled-text-renderer.h>
 #include <libgd/gd-header-bar.h>
+#include <libgd/gd-stack.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
@@ -60,6 +61,9 @@ G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
 #define DEFAULT_WINDOW_TITLE N_("Settings")
 #define DEFAULT_WINDOW_ICON_NAME "preferences-desktop"
 
+#define SEARCH_PAGE "_search"
+#define OVERVIEW_PAGE "_overview"
+
 typedef enum {
 	SMALL_SCREEN_UNSET,
 	SMALL_SCREEN_TRUE,
@@ -68,7 +72,7 @@ typedef enum {
 
 struct _CcWindowPrivate
 {
-  GtkWidget  *notebook;
+  GtkWidget  *stack;
   GtkWidget  *header;
   GtkWidget  *main_vbox;
   GtkWidget  *scrolled_window;
@@ -106,63 +110,6 @@ static gboolean cc_window_set_active_panel_from_id (CcShell      *shell,
                                                     const gchar  *start_id,
                                                     const gchar **argv,
                                                     GError      **err);
-
-/* Notebook helpers */
-static GtkWidget *
-notebook_get_selected_page (GtkWidget *notebook)
-{
-  int curr;
-
-  curr = gtk_notebook_get_current_page (GTK_NOTEBOOK (notebook));
-  if (curr == -1)
-    return NULL;
-  return gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), curr);
-}
-
-static void
-notebook_select_page (GtkWidget *notebook,
-                      GtkWidget *page)
-{
-  int i, num;
-
-  num = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
-  for (i = 0; i < num; i++)
-    {
-      if (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i) == page)
-        {
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), i);
-          return;
-        }
-    }
-
-  g_warning ("Couldn't select GtkNotebook page %p", page);
-}
-
-static void
-notebook_remove_page (GtkWidget *notebook,
-                      GtkWidget *page)
-{
-  int i, num;
-
-  num = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
-  for (i = 0; i < num; i++)
-    {
-      if (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i) == page)
-        {
-          gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), i);
-          return;
-        }
-    }
-
-  g_warning ("Couldn't find GtkNotebook page to remove %p", page);
-}
-
-static void
-notebook_add_page (GtkWidget *notebook,
-		   GtkWidget *page)
-{
-  gtk_notebook_append_page (GTK_NOTEBOOK (notebook), page, NULL);
-}
 
 static const gchar *
 get_icon_name_from_g_icon (GIcon *gicon)
@@ -211,12 +158,11 @@ activate_panel (CcWindow           *self,
 
   gtk_container_add (GTK_CONTAINER (box), priv->current_panel);
 
-  gtk_widget_set_name (box, id);
-  notebook_add_page (priv->notebook, box);
+  gd_stack_add_named (GD_STACK (priv->stack), box, id);
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  notebook_select_page (priv->notebook, box);
+  gd_stack_set_visible_child_name (GD_STACK (priv->stack), id);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
@@ -269,10 +215,10 @@ shell_show_overview_page (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
 
-  notebook_select_page (priv->notebook, priv->scrolled_window);
+  gd_stack_set_visible_child_name (GD_STACK (priv->stack), OVERVIEW_PAGE);
 
   if (priv->current_panel_box)
-    notebook_remove_page (priv->notebook, priv->current_panel_box);
+    gtk_container_remove (GTK_CONTAINER (priv->stack), priv->current_panel_box);
   priv->current_panel = NULL;
   priv->current_panel_box = NULL;
   g_clear_pointer (&priv->current_panel_id, g_free);
@@ -660,7 +606,7 @@ search_entry_changed_cb (GtkEntry *entry,
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
-      notebook_select_page (priv->notebook, priv->search_scrolled);
+      gd_stack_set_visible_child_name (GD_STACK (priv->stack), SEARCH_PAGE);
     }
 }
 
@@ -921,19 +867,19 @@ previous_button_clicked_cb (GtkButton *button,
 }
 
 static void
-notebook_page_notify_cb (GtkNotebook *notebook,
-                         GParamSpec  *spec,
-                         CcWindow    *self)
+stack_page_notify_cb (GdStack     *stack,
+                      GParamSpec  *spec,
+                      CcWindow    *self)
 {
   CcWindowPrivate *priv = self->priv;
   int nat_height;
-  GtkWidget *child;
+  const char *id;
 
-  child = notebook_get_selected_page (GTK_WIDGET (notebook));
+  id = gd_stack_get_visible_child_name (stack);
 
   /* make sure the home button is shown on all pages except the overview page */
 
-  if (child == priv->scrolled_window || child == priv->search_scrolled)
+  if (g_strcmp0 (id, OVERVIEW_PAGE) == 0 || g_strcmp0 (id, SEARCH_PAGE) == 0)
     {
       gtk_widget_hide (priv->previous_button);
       gtk_widget_show (priv->search_entry);
@@ -1049,7 +995,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
       priv->current_panel_id = g_strdup (start_id);
 
       if (old_panel)
-        notebook_remove_page (priv->notebook, old_panel);
+        gtk_container_remove (GTK_CONTAINER (priv->stack), old_panel);
     }
 
   g_free (name);
@@ -1137,6 +1083,14 @@ static void
 cc_window_dispose (GObject *object)
 {
   CcWindowPrivate *priv = CC_WINDOW (object)->priv;
+
+  /* Avoid receiving notifications about the pages changing
+   * when destroying the children one-by-one */
+  if (priv->stack)
+    {
+      g_signal_handlers_disconnect_by_func (priv->stack, stack_page_notify_cb, object);
+      priv->stack = NULL;
+    }
 
   g_free (priv->current_panel_id);
   priv->current_panel_id = NULL;
@@ -1234,7 +1188,7 @@ window_key_press_event (GtkWidget   *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (notebook_get_selected_page (self->priv->notebook) != self->priv->scrolled_window)
+            if (g_strcmp0 (gd_stack_get_visible_child_name (GD_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
               shell_show_overview_page (self);
             retval = TRUE;
             break;
@@ -1242,7 +1196,7 @@ window_key_press_event (GtkWidget   *win,
     }
   else if (state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up)
     {
-      if (notebook_get_selected_page (self->priv->notebook) != self->priv->scrolled_window)
+      if (g_strcmp0 (gd_stack_get_visible_child_name (GD_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
         shell_show_overview_page (self);
       retval = TRUE;
     }
@@ -1327,7 +1281,7 @@ update_small_screen_settings (CcWindow *self)
   self->priv->small_screen = small;
 
   /* And update the minimum sizes */
-  notebook_page_notify_cb (GTK_NOTEBOOK (self->priv->notebook), NULL, self);
+  stack_page_notify_cb (GD_STACK (self->priv->stack), NULL, self);
 }
 
 static gboolean
@@ -1396,7 +1350,7 @@ create_main_page (CcWindow *self)
   gtk_style_context_add_class (context, "view");
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), priv->scrolled_window, NULL);
+  gd_stack_add_named (GD_STACK (priv->stack), priv->scrolled_window, OVERVIEW_PAGE);
 
   priv->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_margin_top (priv->main_vbox, 8);
@@ -1421,7 +1375,7 @@ create_search_page (CcWindow *self)
   priv->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->search_scrolled),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), priv->search_scrolled, NULL);
+  gd_stack_add_named (GD_STACK (priv->stack), priv->search_scrolled, SEARCH_PAGE);
 
   /* setup search functionality */
   setup_search (self);
@@ -1478,9 +1432,9 @@ create_window (CcWindow *self)
   create_header (self);
   gtk_box_pack_start (GTK_BOX (box), priv->header, FALSE, FALSE, 0);
 
-  priv->notebook = gtk_notebook_new ();
-  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
-  gtk_box_pack_start (GTK_BOX (box), priv->notebook, TRUE, TRUE, 0);
+  priv->stack = gd_stack_new ();
+  gd_stack_set_homogeneous (GD_STACK (priv->stack), TRUE);
+  gtk_box_pack_start (GTK_BOX (box), priv->stack, TRUE, TRUE, 0);
 
   create_main_page (self);
   create_search_page (self);
@@ -1495,8 +1449,8 @@ create_window (CcWindow *self)
                           G_CALLBACK (window_key_press_event), self);
   g_signal_connect (self, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
 
-  g_signal_connect (priv->notebook, "notify::page",
-                    G_CALLBACK (notebook_page_notify_cb), self);
+  g_signal_connect (priv->stack, "notify::visible-child",
+                    G_CALLBACK (stack_page_notify_cb), self);
 
   gtk_widget_show_all (box);
 }
@@ -1518,7 +1472,7 @@ cc_window_init (CcWindow *self)
   /* keep a list of custom widgets to unload on panel change */
   priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
-  notebook_page_notify_cb (GTK_NOTEBOOK (priv->notebook), NULL, self);
+  stack_page_notify_cb (GD_STACK (priv->stack), NULL, self);
 }
 
 CcWindow *
