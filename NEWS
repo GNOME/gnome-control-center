@@ -1,3 +1,87 @@
+==============
+Version 3.7.90
+==============
+
+- Use header bar to show the current panel's name
+- Add sound and user-accounts panels to the command-line completion,
+  and ensure the completion is sorted by default
+- Update man page
+- Do not forcibly suppress debug messages if --verbose not set
+- Add GNOME Shell search provider and remove unused menu definition
+- Update descriptions for all the panels
+- Use a back arrow in the header bar, and go back to the previous
+  panel if navigated from one
+
+Color:
+- Bump the required colord version
+- Don't stretch the device switch
+- Add widget relations for accessibility, and make all buttons keyboard accessible
+- When calibrating inhibit logout, switching users and suspending
+- Expand profiles assigned to the device when single clicked
+
+Details:
+- Remove fallback from keywords
+
+Keyboard:
+- Be more specific in input source switch label
+
+Network:
+- Require newly released NetworkManager 0.9.8
+- Disable the Hotspot button if the device does not support it
+- Add support for newer versions of ModemManager
+- Try to guess the operator name for WWAN connections
+- Fix warnings when virtual connections exist
+- Display "device state reason" to show, eg., locked modems
+- Fix some alignment, spacing problems
+- Make symbolic icons sharper
+- Add widget relations for accessibility
+- Avoid all access points being named after the shared connection in some cases
+- Fix connection editor's apply button not working
+- Plug some memory leaks
+
+Notifications:
+- Fix some spacing problems
+
+Mouse:
+- Fix possible bad state when reopening the mouse panel
+
+Online Accounts:
+- Don't use GOA specific warning macro
+
+Power:
+- Update idle time and suspend idle time ranges
+- Fix layout of the automatic suspend dialogue
+- Better label for the idle-delay selection
+- Add widget relations for accessibility
+
+Printers:
+- Visual improvements of driver selection dialog
+- Search for samba printers in new printer dialog
+- Add authentication dialog for samba printers
+- Disable building the printers panel if libsmbclient isn't available
+
+Privacy:
+- Clarify "Lock Screen After" string
+- Remove redundant option from the recent files combobox
+
+Region & Language:
+- Update design based
+
+Search:
+- Don't make the settings search configurable
+
+Sharing:
+- Start or stop Rygel when Media Sharing is enabled or disabled
+- Add a master switch to disable all the services
+
+Sound:
+- Show a different icon for different input/output ports
+
+User Accounts:
+- Add widget relations for accessibility
+- Don't reject passwords that pwquality says are ok
+- Remove password hints feature from the UI as they are not implemented in GDM
+
 ===============
 Version 3.7.5.1
 ===============
