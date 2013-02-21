@@ -417,7 +417,7 @@ else
 fi
 
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 panels/Makefile
 panels/common/Makefile
@@ -528,6 +528,8 @@ shell/Makefile
 shell/gnome-control-center.desktop.in
 man/Makefile
 ])
+
+AC_OUTPUT
 
 AC_MSG_NOTICE([gnome-control-center was configured with the following options:])
 if test "x$have_networkmanager" = "xyes"; then
