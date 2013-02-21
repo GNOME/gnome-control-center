@@ -101,6 +101,7 @@ POLKIT_REQUIRED_VERSION=0.103
 GSD_REQUIRED_VERSION=3.7.3
 NETWORK_MANAGER_REQUIRED_VERSION=0.9.7.995
 NETWORK_MANAGER_APPLET_REQUIRED_VERSION=0.9.7.995
+MODEM_MANAGER_REQUIRED_VERSION=0.7
 LIBNOTIFY_REQUIRED_VERSION=0.7.3
 GNOME_DESKTOP_REQUIRED_VERSION=3.7.5
 SCHEMAS_REQUIRED_VERSION=3.7.2.2
@@ -184,10 +185,11 @@ PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_V
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib-vpn >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-util >= $NETWORK_MANAGER_REQUIRED_VERSION
-                  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION,
+                  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION
+                  mm-glib >= $MODEM_MANAGER_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
-        AC_MSG_WARN(*** Network panel will not be built (NetworkManager not found) ***)
+        AC_MSG_WARN(*** Network panel will not be built (NetworkManager or ModemManager not found) ***)
 else
 	AC_DEFINE(BUILD_NETWORK, 1, [Define to 1 to build the Network panel])
 fi
@@ -199,16 +201,6 @@ if test x${have_networkmanager} = xyes; then
   AC_SUBST(NM_VPN_CONFIG_DIR)
   AC_SUBST(NM_VPN_MODULE_DIR)
 fi
-
-# Check for libmm-glib for ModemManager1 support
-PKG_CHECK_MODULES(MM_GLIB, mm-glib,
-                  [have_libmm_glib=yes], have_libmm_glib=no)
-if test "x$have_libmm_glib" = xno ; then
-  AC_MSG_WARN(*** Network panel will not be built with ModemManager1 support (libmm-glib not found) ***)
-else
-  AC_DEFINE(HAVE_MM_GLIB, 1, [Defined if libmm-glib is available])
-fi
-AM_CONDITIONAL(HAVE_MM_GLIB, test "x$have_libmm_glib" = "xyes")
 
 # Check for gnome-bluetooth
 PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.5.5,
@@ -542,11 +534,6 @@ if test "x$have_networkmanager" = "xyes"; then
 	AC_MSG_NOTICE([** NetworkManager (Network panel)])
 else
 	AC_MSG_NOTICE([   Network panel disabled])
-fi
-if test "x$have_libmm_glib" = "xyes"; then
-	AC_MSG_NOTICE([** ModemManager1 support (Network panel)])
-else
-	AC_MSG_NOTICE([   ModemManager1 support disabled])
 fi
 if test "x$have_bluetooth" = "xyes"; then
 	AC_MSG_NOTICE([** gnome-bluetooth (Bluetooth panel)])

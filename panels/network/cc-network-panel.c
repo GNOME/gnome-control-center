@@ -51,9 +51,7 @@
 #include "network-dialogs.h"
 #include "connection-editor/net-connection-editor.h"
 
-#if HAVE_MM_GLIB
 #include <libmm-glib.h>
-#endif /* HAVE_MM_GLIB */
 
 CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
 
@@ -75,9 +73,7 @@ struct _CcNetworkPanelPrivate
         GtkBuilder       *builder;
         GtkWidget        *treeview;
         NMClient         *client;
-#if HAVE_MM_GLIB
         MMManager        *modem_manager;
-#endif /* HAVE_MM_GLIB */
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
         guint             nm_warning_idle;
@@ -220,9 +216,7 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&priv->cancellable);
         g_clear_object (&priv->builder);
         g_clear_object (&priv->client);
-#if HAVE_MM_GLIB
         g_clear_object (&priv->modem_manager);
-#endif /* HAVE_MM_GLIB */
         g_clear_object (&priv->remote_settings);
         g_clear_object (&priv->kill_switch_header);
         g_clear_object (&priv->rfkill);
@@ -692,7 +686,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                    "id", nm_device_get_udi (device),
                                    NULL);
 
-#if HAVE_MM_GLIB
         if (type == NM_DEVICE_TYPE_MODEM &&
             g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
                 GDBusObject *modem_object;
@@ -717,7 +710,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                               NULL);
                 g_object_unref (modem_object);
         }
-#endif /* HAVE_MM_GLIB */
 
         /* add as a panel */
         if (device_g_type != NET_TYPE_DEVICE) {
@@ -1334,9 +1326,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkTreeSelection *selection;
         GtkWidget *widget;
         GtkWidget *toplevel;
-#if HAVE_MM_GLIB
         GDBusConnection *system_bus;
-#endif /* HAVE_MM_GLIB */
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
         g_resources_register (cc_network_get_resource ());
@@ -1386,7 +1376,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_signal_connect (panel->priv->client, "device-removed",
                           G_CALLBACK (device_removed_cb), panel);
 
-#if HAVE_MM_GLIB
         /* Setup ModemManager client */
         system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (system_bus == NULL) {
@@ -1405,7 +1394,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                 }
                 g_object_unref (system_bus);
         }
-#endif /* HAVE_MM_GLIB */
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "add_toolbutton"));
