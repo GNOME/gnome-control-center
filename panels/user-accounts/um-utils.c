@@ -94,7 +94,7 @@ icon_shape_renderer (cairo_t        *cr,
                                                        (gint)height,
                                                        GTK_ICON_LOOKUP_FORCE_SIZE | GTK_ICON_LOOKUP_USE_BUILTIN);
                 pixbuf = gtk_icon_info_load_icon (info, NULL);
-                gtk_icon_info_free (info);
+                g_object_unref (info);
 
                 cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
                 cairo_reset_clip (cr);
