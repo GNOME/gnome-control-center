@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-15 17:34+0000\n"
-"PO-Revision-Date: 2013-02-15 21:44+0200\n"
+"POT-Creation-Date: 2013-02-20 19:19+0000\n"
+"PO-Revision-Date: 2013-02-22 21:47+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -119,65 +119,49 @@ msgid "Background"
 msgstr "Fonas"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
-msgid "Change the background"
-msgstr "Pakeisti foną"
+msgid "Change your background image to a wallpaper or photo"
+msgstr "Pakeiskite fono paveikslėlį foną ar nuotrauką"
 
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Fonas;Ekranas;Darbastalis;"
 
-#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Keisti „Bluetooth“ nustatymus"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#: ../panels/bluetooth/bluetooth.ui.h:2
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../panels/bluetooth/bluetooth.ui.h:3
+#: ../panels/bluetooth/bluetooth.ui.h:1
 msgid "Set Up New Device"
 msgstr "Nustatyti naują įrenginį"
 
-#: ../panels/bluetooth/bluetooth.ui.h:4 ../panels/network/network.ui.h:9
+#: ../panels/bluetooth/bluetooth.ui.h:2 ../panels/network/network.ui.h:9
 msgid "Remove Device"
 msgstr "Pašalinti įrenginį"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5
+#: ../panels/bluetooth/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "Prisijungimas"
 
-#: ../panels/bluetooth/bluetooth.ui.h:6
+#: ../panels/bluetooth/bluetooth.ui.h:4
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/printers/printers.ui.h:14
-#: ../panels/region/gnome-region-panel.ui.h:3
 msgid "page 1"
 msgstr "puslapis 1"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7
+#: ../panels/bluetooth/bluetooth.ui.h:5
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:5
 #: ../panels/printers/printers.ui.h:16
-#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "page 2"
 msgstr "puslapis 2"
 
-#: ../panels/bluetooth/bluetooth.ui.h:8
+#: ../panels/bluetooth/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "Suporuotas"
 
-#: ../panels/bluetooth/bluetooth.ui.h:9 ../panels/wacom/cc-wacom-page.c:789
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:789
 msgid "Type"
 msgstr "Tipas"
 
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:8
 #: ../panels/network/connection-editor/ce-page-ip4.c:189
 #: ../panels/network/connection-editor/ce-page-ip4.c:441
 #: ../panels/network/connection-editor/ce-page-ip6.c:191
@@ -185,20 +169,20 @@ msgstr "Tipas"
 msgid "Address"
 msgstr "Adresas"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:9
 msgid "Mouse & Touchpad Settings"
 msgstr "Pelės ir jutiklinio kilimėlio nustatymai"
 
-#: ../panels/bluetooth/bluetooth.ui.h:12
+#: ../panels/bluetooth/bluetooth.ui.h:10
 #: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Garso nustatymai"
 
-#: ../panels/bluetooth/bluetooth.ui.h:13
+#: ../panels/bluetooth/bluetooth.ui.h:11
 msgid "Keyboard Settings"
 msgstr "Klaviatūros nustatymai"
 
-#: ../panels/bluetooth/bluetooth.ui.h:14
+#: ../panels/bluetooth/bluetooth.ui.h:12
 msgid "Send Files…"
 msgstr "Siųsti failus..."
 
@@ -244,6 +228,14 @@ msgid ""
 msgstr ""
 "Jei pašalinsite šį įrenginį, prieš kitą naudojimą jį vėl turėsite iš naujo "
 "nustatyti."
+
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
+msgid "Turn Bluetooth on and off and connect your devices"
+msgstr "Įjunkite ir išjunkite Bluetooth bei prisijunkite prie savo įrenginių"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:360
@@ -365,7 +357,6 @@ msgstr "%s internetinė kamera"
 
 #: ../panels/color/cc-color-device.c:89
 #, c-format
-#| msgid "Learn more about color management"
 msgid "Enable color management for %s"
 msgstr "Įjungti %s spalvų valdymą"
 
@@ -375,64 +366,64 @@ msgid "Show color profiles for %s"
 msgstr "Rodyti %s spalvų profilius"
 
 #. not calibrated
-#: ../panels/color/cc-color-device.c:318
+#: ../panels/color/cc-color-device.c:322
 msgid "Not calibrated"
 msgstr "Nekalibruotas"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:132
+#: ../panels/color/cc-color-panel.c:133
 msgid "Default: "
 msgstr "Numatytasis: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:140
+#: ../panels/color/cc-color-panel.c:141
 msgid "Colorspace: "
 msgstr "Spalvų erdvė:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:147
+#: ../panels/color/cc-color-panel.c:148
 msgid "Test profile: "
 msgstr "Bandomasis profilis: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:215
+#: ../panels/color/cc-color-panel.c:216
 msgid "Select ICC Profile File"
 msgstr "Pasirinkite ICC profilio failą"
 
-#: ../panels/color/cc-color-panel.c:218
+#: ../panels/color/cc-color-panel.c:219
 msgid "_Import"
 msgstr "_Importuoti"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:229
+#: ../panels/color/cc-color-panel.c:230
 msgid "Supported ICC profiles"
 msgstr "Palaikomi ICC profiliai"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:236
+#: ../panels/color/cc-color-panel.c:237
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Visi failai"
 
-#: ../panels/color/cc-color-panel.c:580
+#: ../panels/color/cc-color-panel.c:581
 msgid "Screen"
 msgstr "Ekranas"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:852
+#: ../panels/color/cc-color-panel.c:853
 msgid "Save Profile"
 msgstr "Įrašyti profilį"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1213
+#: ../panels/color/cc-color-panel.c:1214
 msgid "Create a color profile for the selected device"
 msgstr "Sukurti spalvų profilį pasirinktam įrenginiui"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1228 ../panels/color/cc-color-panel.c:1252
+#: ../panels/color/cc-color-panel.c:1229 ../panels/color/cc-color-panel.c:1253
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -441,12 +432,12 @@ msgstr ""
 "prijungtas."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1262
+#: ../panels/color/cc-color-panel.c:1263
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Matavimo prietaisas nepalaiko spausdintuvo profiliavimo."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1273
+#: ../panels/color/cc-color-panel.c:1274
 msgid "The device type is not currently supported."
 msgstr "Įrenginio tipas šiuo metu nepalaikomas."
 
@@ -531,6 +522,7 @@ msgid "Display Calibration"
 msgstr "Vaizduoklio kalibravimas"
 
 #: ../panels/color/color-calibrate.ui.h:2
+#: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
 #: ../panels/user-accounts/um-account-dialog.c:1067
@@ -829,68 +821,154 @@ msgid "D75"
 msgstr "D75"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
-msgid "Color management settings"
-msgstr "Spalvų derinimo nustatymai"
+msgid ""
+"Calibrate the color of your devices, such as displays, cameras or printers"
+msgstr ""
+"Kalibruokite spalvas savo įrenginiuose, tokiuose kaip vaizduokliai, kameros "
+"ar spausdintuvai"
 
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Spalva;ICC;Profilis;Kalibravimas;Spausdintuvas;Ekranas;"
 
-#: ../panels/common/cc-common-language.c:639
-msgid "British English"
-msgstr "Anglų (Didž. Britanija)"
-
-#: ../panels/common/cc-common-language.c:642
-msgid "Spanish"
-msgstr "Ispanų"
-
-#: ../panels/common/cc-common-language.c:643
-msgid "Chinese (simplified)"
-msgstr "Kinų (supaprastinta)"
-
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:687
+#: ../panels/common/cc-common-language.c:677
 msgid "United States"
 msgstr "Jungtinės Amerikos Valstijos"
 
-#: ../panels/common/cc-common-language.c:688
+#: ../panels/common/cc-common-language.c:678
 msgid "Germany"
 msgstr "Vokietija"
 
-#: ../panels/common/cc-common-language.c:689
+#: ../panels/common/cc-common-language.c:679
 msgid "France"
 msgstr "Prancūzija"
 
-#: ../panels/common/cc-common-language.c:690
+#: ../panels/common/cc-common-language.c:680
 msgid "Spain"
 msgstr "Ispanija"
 
-#: ../panels/common/cc-common-language.c:691
+#: ../panels/common/cc-common-language.c:681
 msgid "China"
 msgstr "Kinija"
 
-#: ../panels/common/cc-language-chooser.c:120
+#: ../panels/common/cc-common-language.c:747
 msgid "Other…"
 msgstr "Kitas..."
 
-#: ../panels/common/cc-language-chooser.c:292
-msgid "Select a region"
-msgstr "Pasirinkite regioną"
+#: ../panels/common/cc-language-chooser.c:165
+#: ../panels/region/cc-format-chooser.c:256
+#: ../panels/region/cc-input-chooser.c:171
+msgid "More…"
+msgstr "Daugiau…"
 
-#: ../panels/common/language-chooser.ui.h:1
-msgid "Select a language"
-msgstr "Pasirinkite kalbą"
+#: ../panels/common/cc-language-chooser.c:174
+#| msgid "No applications found"
+msgid "No languages found"
+msgstr "Nerasta kalbų"
+
+#. translators:
+#. * The device has been disabled
+#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
+#: ../panels/keyboard/cc-keyboard-option.c:408
+#: ../panels/keyboard/keyboard-shortcuts.c:1160
+#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Išjungta"
+
+#: ../panels/common/cc-util.c:29
+msgid "Left Shift"
+msgstr "Kairysis lyg2"
+
+#: ../panels/common/cc-util.c:30
+msgid "Left Alt"
+msgstr "Kairysis alt"
+
+#: ../panels/common/cc-util.c:31
+msgid "Left Ctrl"
+msgstr "Kairysis vald"
+
+#: ../panels/common/cc-util.c:32
+msgid "Right Shift"
+msgstr "Dešinysis lyg2"
+
+#: ../panels/common/cc-util.c:33
+msgid "Right Alt"
+msgstr "Dešinysis alt"
+
+#: ../panels/common/cc-util.c:34
+msgid "Right Ctrl"
+msgstr "Dešinysis vald"
+
+#: ../panels/common/cc-util.c:35
+msgid "Left Alt+Shift"
+msgstr "Kairysis alt+lyg2"
+
+#: ../panels/common/cc-util.c:36
+msgid "Right Alt+Shift"
+msgstr "Dešinysis alt+lyg2"
+
+#: ../panels/common/cc-util.c:37
+msgid "Left Ctrl+Shift"
+msgstr "Kairysis Vald+Lyg2"
+
+#: ../panels/common/cc-util.c:38
+msgid "Right Ctrl+Shift"
+msgstr "Dešinysis vald+lyg2"
+
+#: ../panels/common/cc-util.c:39
+msgid "Left+Right Shift"
+msgstr "Kairėn+dešinysys lyg2"
+
+#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Kairėn+dešinysis alt"
+
+#: ../panels/common/cc-util.c:41
+msgid "Left+Right Ctrl"
+msgstr "Kairėn+Dešinysis Vald"
+
+#: ../panels/common/cc-util.c:42
+msgid "Alt+Shift"
+msgstr "Alt+Lyg2"
+
+#: ../panels/common/cc-util.c:43
+msgid "Ctrl+Shift"
+msgstr "Vald+Lyg2"
+
+#: ../panels/common/cc-util.c:44
+msgid "Alt+Ctrl"
+msgstr "Alt+Vald"
+
+#: ../panels/common/cc-util.c:45
+msgid "Caps"
+msgstr "Didžiosios"
+
+#: ../panels/common/cc-util.c:46
+msgid "Shift+Caps"
+msgstr "Lyg2+Didžiosios"
+
+#: ../panels/common/cc-util.c:47
+msgid "Alt+Caps"
+msgstr "Alt+Didžiosios"
+
+#: ../panels/common/cc-util.c:48
+msgid "Ctrl+Caps"
+msgstr "Vald+Didžiosios"
+
+#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+msgid "Language"
+msgstr "Kalba"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
-msgid "_Cancel"
-msgstr "_Atsisakyti"
-
-#: ../panels/common/language-chooser.ui.h:3
-msgid "_Select"
-msgstr "_Pasirinkti"
+#: ../panels/region/format-chooser.ui.h:2
+#| msgid "Done"
+msgid "_Done"
+msgstr "_Atlikta"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "_Region:"
@@ -1002,8 +1080,8 @@ msgid "Date & Time"
 msgstr "Data ir laikas"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
-msgid "Date and Time preferences panel"
-msgstr "Datos ir laiko nustatymų skydelis"
+msgid "Change the date and time, including time zone"
+msgstr "Pakeiskite datą ir laiką, įskaitant laiko juostą"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
@@ -1051,7 +1129,7 @@ msgstr "180 laipsnių"
 #. * the Spanish translation could be "Pantallas en Espejo".
 #.
 #: ../panels/display/cc-display-panel.c:625
-#: ../panels/display/cc-rr-labeler.c:449
+#: ../panels/display/cc-rr-labeler.c:418
 msgid "Mirrored Displays"
 msgstr "Dubliuoti ekranai"
 
@@ -1124,8 +1202,9 @@ msgid "Displays"
 msgstr "Ekranai"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Change resolution and position of monitors and projectors"
-msgstr "Pakeisti ekranų ar projektorių raišką ir poziciją"
+#| msgid "Change resolution and position of monitors and projectors"
+msgid "Choose how to use connected monitors and projectors"
+msgstr "Pasirinkite, kaip naudoti prijungtus monitorius ir projektorius"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
@@ -1133,53 +1212,53 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Skydelis;Projektorius;xrandr;Ekranas;Raiška;Atnaujinimas;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#: ../panels/info/cc-info-panel.c:542
+#: ../panels/info/cc-info-panel.c:541
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bitų"
 
-#: ../panels/info/cc-info-panel.c:544
+#: ../panels/info/cc-info-panel.c:543
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bitų"
 
-#: ../panels/info/cc-info-panel.c:1219
+#: ../panels/info/cc-info-panel.c:1218
 msgid "Ask what to do"
 msgstr "Klausti, ką daryti"
 
-#: ../panels/info/cc-info-panel.c:1223
+#: ../panels/info/cc-info-panel.c:1222
 msgid "Do nothing"
 msgstr "Nieko nedaryti"
 
-#: ../panels/info/cc-info-panel.c:1227
+#: ../panels/info/cc-info-panel.c:1226
 msgid "Open folder"
 msgstr "Atverti aplanką"
 
-#: ../panels/info/cc-info-panel.c:1318
+#: ../panels/info/cc-info-panel.c:1317
 msgid "Other Media"
 msgstr "Kitos laikmenos"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1348
 msgid "Select an application for audio CDs"
 msgstr "Parinkite programą, kuria norėtumėte klausytis garso CD"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1349
 msgid "Select an application for video DVDs"
 msgstr "Parinkite programą vaizdo DVD rodymui"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1350
 msgid "Select an application to run when a music player is connected"
 msgstr "Pasirinkite paleistiną programą, kai muzikos grotuvas prijungiamas"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1351
 msgid "Select an application to run when a camera is connected"
 msgstr "Pasirinkite paleistiną programą, kai prijungiamas fotoaparatas"
 
-#: ../panels/info/cc-info-panel.c:1353
+#: ../panels/info/cc-info-panel.c:1352
 msgid "Select an application for software CDs"
 msgstr "Parinkite programą programinės įrangos CD paleidimui"
 
@@ -1188,89 +1267,89 @@ msgstr "Parinkite programą programinės įrangos CD paleidimui"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1364
 msgid "audio DVD"
 msgstr "garso DVD"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1365
 msgid "blank Blu-ray disc"
 msgstr "tuščias Blu-ray diskas"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1366
 msgid "blank CD disc"
 msgstr "tuščias CD diskas"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1367
 msgid "blank DVD disc"
 msgstr "tuščias DVD diskas"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1368
 msgid "blank HD DVD disc"
 msgstr "tuščias HD DVD diskas"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1369
 msgid "Blu-ray video disc"
 msgstr "Blu-ray vaizdo diskas"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1370
 msgid "e-book reader"
 msgstr "el. knygų skaitytuvas"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1371
 msgid "HD DVD video disc"
 msgstr "HD DVD vaizdo diskas"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1372
 msgid "Picture CD"
 msgstr "Paveikslėlių CD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1373
 msgid "Super Video CD"
 msgstr "Super vaizdo CD"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1374
 msgid "Video CD"
 msgstr "Vaizdo CD"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1375
 msgid "Windows software"
 msgstr "Windows programinė įranga"
 
-#: ../panels/info/cc-info-panel.c:1377
+#: ../panels/info/cc-info-panel.c:1376
 msgid "Software"
 msgstr "Programinė įranga"
 
-#: ../panels/info/cc-info-panel.c:1500
+#: ../panels/info/cc-info-panel.c:1499
 #: ../panels/keyboard/keyboard-shortcuts.c:1697
 msgid "Section"
 msgstr "Skyrius"
 
-#: ../panels/info/cc-info-panel.c:1509 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Apžvalga"
 
-#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1514 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Numatytosios programos"
 
-#: ../panels/info/cc-info-panel.c:1520 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1519 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Išimamos laikmenos"
 
-#: ../panels/info/cc-info-panel.c:1545
+#: ../panels/info/cc-info-panel.c:1544
 #, c-format
 msgid "Version %s"
 msgstr "Versija %s"
 
-#: ../panels/info/cc-info-panel.c:1595
+#: ../panels/info/cc-info-panel.c:1594
 msgid "Install Updates"
 msgstr "Įdiegti atnaujinimus"
 
-#: ../panels/info/cc-info-panel.c:1599
+#: ../panels/info/cc-info-panel.c:1598
 msgid "System Up-To-Date"
 msgstr "Sistema yra atnaujinta"
 
-#: ../panels/info/cc-info-panel.c:1603
+#: ../panels/info/cc-info-panel.c:1602
 msgid "Checking for Updates"
 msgstr "Ieškoma atnaujinimų"
 
@@ -1281,18 +1360,20 @@ msgid "Details"
 msgstr "Išsamiau"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
-msgid "System Information"
-msgstr "Sistemos informacija"
+msgid "View information about your system"
+msgstr "Rodyti informaciją apie sistemą"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+#| msgid ""
+#| "device;system;information;memory;processor;version;default;application;"
+#| "fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+"preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
 "įrenginys;sistema;informacija;atmintis;procesorius;versija;numatyta;programa;"
-"atsarginė;pageidaujama;cd;dvd;usb;audio;video;diskas;išimama;laikmena;"
-"autopaleidimas;"
+"pageidaujama;cd;dvd;usb;audio;video;diskas;išimama;laikmena;autopaleidimas;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
@@ -1442,14 +1523,14 @@ msgid "Typing"
 msgstr "Spausdinimas"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
-#: ../panels/region/gnome-region-panel.ui.h:27
-msgid "Switch to next source"
-msgstr "Perjungti į kitą šaltinį"
+#| msgid "Switch to next source"
+msgid "Switch to next input source"
+msgstr "Perjungti į kitą įvesties šaltinį"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:25
-msgid "Switch to previous source"
-msgstr "Perjungti į ankstesnį šaltinį"
+#| msgid "Switch to previous source"
+msgid "Switch to previous input source"
+msgstr "Perjungti į ankstesnį įvesties šaltinį"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:1
 msgid "Launchers"
@@ -1512,7 +1593,6 @@ msgid "Copy a screenshot of an area to clipboard"
 msgstr "Kopijuoti srities nuotrauką į iškarpinę"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:43
 msgid "System"
 msgstr "Sistema"
 
@@ -1561,108 +1641,15 @@ msgstr "Sumažinti teksto dydį"
 msgid "High contrast on or off"
 msgstr "Įjungti arba išjungti didelį kontrastą"
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:254
-#: ../panels/keyboard/cc-keyboard-option.c:304
-#: ../panels/keyboard/cc-keyboard-option.c:436
-#: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:30
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Išjungta"
-
-#: ../panels/keyboard/cc-keyboard-option.c:255
-msgid "Left Shift"
-msgstr "Kairysis lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:256
-msgid "Left Alt"
-msgstr "Kairysis alt"
-
-#: ../panels/keyboard/cc-keyboard-option.c:257
-msgid "Left Ctrl"
-msgstr "Kairysis vald"
-
-#: ../panels/keyboard/cc-keyboard-option.c:258
-msgid "Right Shift"
-msgstr "Dešinysis lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:259
-msgid "Right Alt"
-msgstr "Dešinysis alt"
-
-#: ../panels/keyboard/cc-keyboard-option.c:260
-msgid "Right Ctrl"
-msgstr "Dešinysis vald"
-
-#: ../panels/keyboard/cc-keyboard-option.c:261
-msgid "Left Alt+Shift"
-msgstr "Kairysis alt+lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:262
-msgid "Right Alt+Shift"
-msgstr "Dešinysis alt+lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:263
-msgid "Left Ctrl+Shift"
-msgstr "Kairysis Vald+Lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:264
-msgid "Right Ctrl+Shift"
-msgstr "Dešinysis vald+lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:265
-msgid "Left+Right Shift"
-msgstr "Kairėn+dešinysys lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:266
-msgid "Left+Right Alt"
-msgstr "Kairėn+dešinysis alt"
-
-#: ../panels/keyboard/cc-keyboard-option.c:267
-msgid "Left+Right Ctrl"
-msgstr "Kairėn+Dešinysis Vald"
-
-#: ../panels/keyboard/cc-keyboard-option.c:268
-msgid "Alt+Shift"
-msgstr "Alt+Lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:269
-msgid "Ctrl+Shift"
-msgstr "Vald+Lyg2"
-
-#: ../panels/keyboard/cc-keyboard-option.c:270
-msgid "Alt+Ctrl"
-msgstr "Alt+Vald"
-
-#: ../panels/keyboard/cc-keyboard-option.c:271
-msgid "Caps"
-msgstr "Didžiosios"
-
-#: ../panels/keyboard/cc-keyboard-option.c:272
-msgid "Shift+Caps"
-msgstr "Lyg2+Didžiosios"
-
-#: ../panels/keyboard/cc-keyboard-option.c:273
-msgid "Alt+Caps"
-msgstr "Alt+Didžiosios"
-
-#: ../panels/keyboard/cc-keyboard-option.c:274
-msgid "Ctrl+Caps"
-msgstr "Vald+Didžiosios"
-
-#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/cc-keyboard-option.c:362
 msgid "Alternative Characters Key"
 msgstr "Alternatyvių simbolių klavišas"
 
-#: ../panels/keyboard/cc-keyboard-option.c:395
+#: ../panels/keyboard/cc-keyboard-option.c:367
 msgid "Compose Key"
 msgstr "Rašymo klavišas"
 
-#: ../panels/keyboard/cc-keyboard-option.c:399
+#: ../panels/keyboard/cc-keyboard-option.c:371
 msgid "Modifiers-only switch to next source"
 msgstr "Tik modifikatoriai perjungia į kitą šaltinį"
 
@@ -1672,8 +1659,9 @@ msgid "Keyboard"
 msgstr "Klaviatūra"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-msgid "Change keyboard settings"
-msgstr "Keisti klaviatūros nustatymus"
+msgid "View and change keyboard shortcuts and set your typing preferences"
+msgstr ""
+"Rodyti ir keisti klaviatūros trumpinius bei nustatyti rašymo nustatymus"
 
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
@@ -1749,8 +1737,9 @@ msgid "Cursor blink speed"
 msgstr "Žymeklio mirksėjimo greitis"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-msgid "Layout Settings"
-msgstr "Išdėstymo nustatymai"
+#: ../panels/region/region.ui.h:5
+msgid "Input Sources"
+msgstr "Įvesties šaltiniai"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 msgid "Add Shortcut"
@@ -1770,7 +1759,6 @@ msgstr ""
 "paspauskite spartųjį klavišą arba spauskite Backspace išvalymui."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
-#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Shortcuts"
 msgstr "Trumpiniai"
 
@@ -1822,8 +1810,11 @@ msgid "Mouse & Touchpad"
 msgstr "Pelė ir jutiklinis kilimėlis"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-msgid "Set your mouse and touchpad preferences"
-msgstr "Nustatykite pelės ir jutiklinio kilimėlio nustatymus"
+msgid ""
+"Change your mouse or touchpad sensitivity and select right or left-handed"
+msgstr ""
+"Keiskite pelės ir jutiklinio kilimėlio jautrumą bei pasirinkite kairiarankio "
+"ar dešiniarankio veikseną"
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
@@ -1935,21 +1926,21 @@ msgstr "Vienas paspaudimas, antraeilis mygtukas"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:341
+#: ../panels/network/cc-network-panel.c:347
 msgid "Air_plane Mode"
 msgstr "_Skrydžio veiksena"
 
-#: ../panels/network/cc-network-panel.c:904
+#: ../panels/network/cc-network-panel.c:912
 msgid "Network proxy"
 msgstr "Tarpinis tinklo serveris"
 
-#: ../panels/network/cc-network-panel.c:1083 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1217
+#: ../panels/network/cc-network-panel.c:1225
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemos tinklo tarnybos nesuderinamos su šia versija."
 
@@ -1976,6 +1967,10 @@ msgstr "Vidinis t_apatybės patvirtinimas"
 #: ../panels/network/network-wifi.ui.h:4
 msgid "Security"
 msgstr "Sauga"
+
+#: ../panels/network/connection-editor/ce-page.c:502
+msgid "automatic"
+msgstr "automatinis"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
@@ -2096,13 +2091,11 @@ msgstr "Tinklų sietuvas"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:233
 #: ../panels/network/connection-editor/ce-page-ip6.c:234
-#| msgid "_Cloned Address"
 msgid "Delete Address"
 msgstr "Ištrinti adresą"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:285
 #: ../panels/network/connection-editor/ce-page-ip6.c:286
-#| msgid "_Add"
 msgid "Add"
 msgstr "Pridėti"
 
@@ -2125,7 +2118,6 @@ msgstr "Metrinė"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:502
 #: ../panels/network/connection-editor/ce-page-ip6.c:510
-#| msgid "Default Route"
 msgid "Delete Route"
 msgstr "Ištrinti kelią"
 
@@ -2206,10 +2198,6 @@ msgstr "WPA & WPA2 asmeninis"
 #: ../panels/network/connection-editor/ce-page-security.c:337
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 kompanijos"
-
-#: ../panels/network/connection-editor/ce-page.c:502
-msgid "automatic"
-msgstr "automatinis"
 
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 msgid "_Apply"
@@ -2348,7 +2336,6 @@ msgstr "_Adresai"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
 #: ../panels/network/connection-editor/ip6-page.ui.h:5
-#| msgid "Automatic"
 msgid "Automatic DNS"
 msgstr "Automatinis DNS"
 
@@ -2360,7 +2347,6 @@ msgstr "Keliai"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:7
 #: ../panels/network/connection-editor/ip6-page.ui.h:7
-#| msgid "Automatic Suspend"
 msgid "Automatic Routes"
 msgstr "Automatiniai keliai"
 
@@ -2533,8 +2519,9 @@ msgid "Network"
 msgstr "Tinklas"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-msgid "Network settings"
-msgstr "Tinklo nustatymai"
+#| msgid "Control how you appear on the screen and the network."
+msgid "Control how you connect to the Internet"
+msgstr "Valdykite, kaip jungiatės prie interneto"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
@@ -2589,7 +2576,7 @@ msgstr "Parinktys..."
 msgid "Profile %d"
 msgstr "Profilis %d"
 
-#: ../panels/network/net-device-mobile.c:239
+#: ../panels/network/net-device-mobile.c:241
 msgid "Add new connection"
 msgstr "Pridėti naują ryšį"
 
@@ -2627,7 +2614,6 @@ msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistemos taisyklės neleidžia naudoti kaip prieigos taško"
 
 #: ../panels/network/net-device-wifi.c:1280
-#| msgid "InfiniBand device does not support connected mode"
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Belaidis įrenginys nepalaiko prieigos taško veiksenos"
 
@@ -2731,17 +2717,14 @@ msgid "_Ignore Hosts"
 msgstr "Nepa_isyti kompiuterių"
 
 #: ../panels/network/network-proxy.ui.h:11
-#| msgid "_HTTP Proxy"
 msgid "HTTP proxy port"
 msgstr "HTTP tarpinio serverio prievadas"
 
 #: ../panels/network/network-proxy.ui.h:12
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS proxy port"
 msgstr "HTTPS tarpinio serverio prievadas"
 
 #: ../panels/network/network-proxy.ui.h:13
-#| msgid "_FTP Proxy"
 msgid "FTP proxy port"
 msgstr "FTP tarpinio serverio prievadas"
 
@@ -2750,7 +2733,6 @@ msgid "Socks proxy port"
 msgstr "Socks tarpinio serverio prievadas"
 
 #: ../panels/network/network-simple.ui.h:6
-#| msgid "Turn on or off:"
 msgid "Turn device off"
 msgstr "Išjungti įrenginį"
 
@@ -2783,11 +2765,11 @@ msgid "Group Password"
 msgstr "Grupės slaptažodis"
 
 #: ../panels/network/network-vpn.ui.h:6
+#: ../panels/printers/authentication-dialog.ui.h:4
 msgid "Username"
 msgstr "Naudotojo vardas"
 
 #: ../panels/network/network-vpn.ui.h:7
-#| msgid "Export VPN connection..."
 msgid "Turn VPN connection off"
 msgstr "Išjungti VPN ryšį"
 
@@ -2936,7 +2918,6 @@ msgid "Wi-Fi"
 msgstr "Belaidis"
 
 #: ../panels/network/network-wifi.ui.h:67
-#| msgid "Turn on or off:"
 msgid "Turn Wi-Fi off"
 msgstr "Išjungti Wi-Fi"
 
@@ -3258,6 +3239,36 @@ msgstr "Trūksta aparatinės programinės įrangos"
 msgid "Cable unplugged"
 msgstr "Kabelis neįjungtas"
 
+#: ../panels/network/wireless-security/eap-method.c:275
+msgid "No Certificate Authority certificate chosen"
+msgstr "Nepasirinktas liudijimų įstaigos liudijimas"
+
+#: ../panels/network/wireless-security/eap-method.c:276
+msgid ""
+"Not using a Certificate Authority (CA) certificate can result in connections "
+"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
+"Authority certificate?"
+msgstr ""
+"Nenaudojamas liudijimų įstaigos (LĮ) liudijimas gali sukurti nesaugius, "
+"kenkėjiškus belaidžius tinklus.  Ar norite pasirinkti liudijimų įstaigos "
+"liudijimą?"
+
+#: ../panels/network/wireless-security/eap-method.c:281
+msgid "Ignore"
+msgstr "Nepaisyti"
+
+#: ../panels/network/wireless-security/eap-method.c:285
+msgid "Choose CA Certificate"
+msgstr "Pasirinkti LĮ liudijimą"
+
+#: ../panels/network/wireless-security/eap-method.c:645
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
+msgstr "DER, PEM, or PKCS#12 privatūs raktai (*.der, *.pem, *.p12)"
+
+#: ../panels/network/wireless-security/eap-method.c:648
+msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+msgstr "DER arba PEM liudijimai (*.der, *.pem, *.crt, *.cer)"
+
 #: ../panels/network/wireless-security/eap-method-fast.c:261
 #: ../panels/network/wireless-security/eap-method-peap.c:280
 msgid "GTC"
@@ -3296,6 +3307,7 @@ msgstr "PAC _paskyrimas"
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
+#: ../panels/printers/authentication-dialog.ui.h:1
 msgid " "
 msgstr " "
 
@@ -3412,36 +3424,6 @@ msgstr "MSCHAP"
 #: ../panels/network/wireless-security/eap-method-ttls.c:280
 msgid "CHAP"
 msgstr "CHAP"
-
-#: ../panels/network/wireless-security/eap-method.c:275
-msgid "No Certificate Authority certificate chosen"
-msgstr "Nepasirinktas liudijimų įstaigos liudijimas"
-
-#: ../panels/network/wireless-security/eap-method.c:276
-msgid ""
-"Not using a Certificate Authority (CA) certificate can result in connections "
-"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
-"Authority certificate?"
-msgstr ""
-"Nenaudojamas liudijimų įstaigos (LĮ) liudijimas gali sukurti nesaugius, "
-"kenkėjiškus belaidžius tinklus.  Ar norite pasirinkti liudijimų įstaigos "
-"liudijimą?"
-
-#: ../panels/network/wireless-security/eap-method.c:281
-msgid "Ignore"
-msgstr "Nepaisyti"
-
-#: ../panels/network/wireless-security/eap-method.c:285
-msgid "Choose CA Certificate"
-msgstr "Pasirinkti LĮ liudijimą"
-
-#: ../panels/network/wireless-security/eap-method.c:645
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr "DER, PEM, or PKCS#12 privatūs raktai (*.der, *.pem, *.p12)"
-
-#: ../panels/network/wireless-security/eap-method.c:648
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER arba PEM liudijimai (*.der, *.pem, *.crt, *.cer)"
 
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
 msgid "Don't _warn me again"
@@ -3561,8 +3543,8 @@ msgid "Notifications"
 msgstr "Pranešimai"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
-msgid "Manage notifications"
-msgstr "Valdyti pranešimus"
+msgid "Control which notifications are displayed and what they show"
+msgstr "Valdykite, kurio pranešimai yra rodomi ir ką jie rodo"
 
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
@@ -3620,8 +3602,9 @@ msgid "Online Accounts"
 msgstr "Interneto paslaugų paskyros"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
-msgid "Manage online accounts"
-msgstr "Tvarkyti internetinių paslaugų paskyras"
+msgid "Connect to your online accounts and decide what to use them for"
+msgstr ""
+"Prisijunkite prie savo internetinių paskyrų ir nuspręskite, kam jas naudoti"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
@@ -3847,7 +3830,6 @@ msgid "_Dim Screen when Inactive"
 msgstr "_Pritemdyti ekraną, kai kompiuteris nenaudojamas"
 
 #: ../panels/power/cc-power-panel.c:1481
-#| msgid "Full Screen"
 msgid "_Blank Screen"
 msgstr "_Tuščias ekranas"
 
@@ -3896,8 +3878,8 @@ msgid "Power"
 msgstr "Energija"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
-msgid "Power management settings"
-msgstr "Energijos valdymo nustatymai"
+msgid "View your battery status and change power saving settings"
+msgstr "Rodyti baterijos būklę ir keisti energijos taupymo nustatymus"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
@@ -3916,7 +3898,6 @@ msgid "Power off"
 msgstr "Išjungti"
 
 #: ../panels/power/power.ui.h:5
-#| msgid "5 minutes"
 msgid "45 minutes"
 msgstr "45 minutės"
 
@@ -3925,22 +3906,18 @@ msgid "1 hour"
 msgstr "1 valanda"
 
 #: ../panels/power/power.ui.h:7
-#| msgid "40 minutes"
 msgid "80 minutes"
 msgstr "80 minučių"
 
 #: ../panels/power/power.ui.h:8
-#| msgid "40 minutes"
 msgid "90 minutes"
 msgstr "90 minučių"
 
 #: ../panels/power/power.ui.h:9
-#| msgid "10 minutes"
 msgid "100 minutes"
 msgstr "100 minučių"
 
 #: ../panels/power/power.ui.h:10
-#| msgid "1 hour"
 msgid "2 hours"
 msgstr "2 valandos"
 
@@ -3957,7 +3934,6 @@ msgid "3 minutes"
 msgstr "3 minutės"
 
 #: ../panels/power/power.ui.h:14
-#| msgid "40 minutes"
 msgid "4 minutes"
 msgstr "4 minutės"
 
@@ -3966,7 +3942,6 @@ msgid "5 minutes"
 msgstr "5 minutės"
 
 #: ../panels/power/power.ui.h:16
-#| msgid "5 minutes"
 msgid "8 minutes"
 msgstr "8 minutės"
 
@@ -3975,7 +3950,6 @@ msgid "10 minutes"
 msgstr "10 minučių"
 
 #: ../panels/power/power.ui.h:18
-#| msgid "2 minutes"
 msgid "12 minutes"
 msgstr "12 minučių"
 
@@ -3988,18 +3962,31 @@ msgid "_Close"
 msgstr "_Užverti"
 
 #: ../panels/power/power.ui.h:22
-#| msgid "When _Plugged In"
 msgid "_Plugged In"
 msgstr "_Prijungtas prie elektros tinklo"
 
 #: ../panels/power/power.ui.h:23
+msgid "On _Battery Power"
+msgstr "Naudoja _baterijos energiją"
+
+#: ../panels/power/power.ui.h:24
 msgid "Delay"
 msgstr "Delsa"
 
-#: ../panels/power/power.ui.h:24
-#| msgid "When on _Battery Power"
-msgid "On _Battery Power"
-msgstr "Naudoja _baterijos energiją"
+#: ../panels/printers/authentication-dialog.ui.h:3
+#| msgid "Authenticated"
+msgid "Authenticate"
+msgstr "Patvirtinkite tapatybę"
+
+#: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/sharing/sharing.ui.h:21
+msgid "Password"
+msgstr "Slaptažodis"
+
+#: ../panels/printers/authentication-dialog.ui.h:6
+#| msgid "Authentication required"
+msgid "Authentication Required"
+msgstr "Reikia patvirtinti tapatybę"
 
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:591
@@ -4196,8 +4183,10 @@ msgid "Printers"
 msgstr "Spausdintuvai"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
-msgid "Change printer settings"
-msgstr "Keisti spausdintuvo nustatymus"
+msgid "Add printers, view printer jobs and decide how you want to print"
+msgstr ""
+"Pridėkite spausdintuvus, matykite spausdintuvo darbus ir nuspręskite, kaip "
+"norite spausdinti"
 
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
@@ -4230,6 +4219,11 @@ msgstr "Atšaukti spausdinimo darbą"
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
 msgstr "Pridėti naują spausdintuvą"
+
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/user-accounts/um-user-panel.c:467
+msgid "_Cancel"
+msgstr "_Atsisakyti"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
 msgid "Search for network printers or filter result"
@@ -4477,15 +4471,20 @@ msgstr "Nėra pradinio filtravimo"
 
 #. Translators: Name of column showing printer manufacturers
 #: ../panels/printers/pp-ppd-selection-dialog.c:233
-#| msgid "Manufacturer:"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
 #. Translators: Name of column showing printer drivers
 #: ../panels/printers/pp-ppd-selection-dialog.c:250
-#| msgid "Drivers"
 msgid "Driver"
 msgstr "Tvarkyklė"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-samba.c:247
+#, c-format
+msgid "Enter your username and password to view printers available on %s."
+msgstr ""
+"Įveskite naudotojo vardą ir slaptažodį %s prieinamiems spausdintuvams matyti."
 
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
@@ -4588,8 +4587,9 @@ msgid "Privacy"
 msgstr "Privatumas"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:2
-msgid "Privacy settings"
-msgstr "Privatumo nustatymai"
+msgid "Protect your personal information and control what others might see"
+msgstr ""
+"Apsaugokite savo asmeninę informaciją ir valdykite, ką kiti gali matyti"
 
 #. Translators: those are keywords for the privacy control-center panel
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:4
@@ -4697,7 +4697,6 @@ msgid "Automatic Screen _Lock"
 msgstr "Automatinis ekrano už_rakinimas"
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "Lock Screen _After"
 msgid "Lock Screen _After Blank For"
 msgstr "Užr_akinti ekraną po tuščio praėjus"
 
@@ -4733,199 +4732,179 @@ msgstr "Automatiškai išvalyti laikinuosius _failus"
 msgid "Purge _After"
 msgstr "Išv_alyti po"
 
+#: ../panels/region/cc-format-chooser.c:122
+msgctxt "measurement format"
+msgid "Imperial"
+msgstr "Imperinė"
+
+#: ../panels/region/cc-format-chooser.c:124
+msgctxt "measurement format"
+msgid "Metric"
+msgstr "Metrinė"
+
+#: ../panels/region/cc-format-chooser.c:265
+#| msgid "No applications found"
+msgid "No regions found"
+msgstr "Nerasta regionų"
+
+#: ../panels/region/cc-input-chooser.c:179
+#| msgid "Move Input Source Down"
+msgid "No input sources found"
+msgstr "Nerasta įvesties šaltinių"
+
+#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/search/cc-search-locations-dialog.c:479
+msgid "Other"
+msgstr "Kita"
+
+#: ../panels/region/cc-region-panel.c:225
+#| msgid "Log out for changes to take effect"
+msgid "Your session needs to be restarted for changes to take effect"
+msgstr "Pakeitimams pritaikyti reikia atsijungti"
+
+#: ../panels/region/cc-region-panel.c:226
+msgid "Restart Now"
+msgstr "Paleisti iš naujo dabar"
+
+#: ../panels/region/cc-region-panel.c:436
+#| msgid "None"
+msgctxt "Language"
+msgid "None"
+msgstr "Joks"
+
+#: ../panels/region/cc-region-panel.c:898
+msgid "Sorry"
+msgstr "Atleiskite"
+
+#: ../panels/region/cc-region-panel.c:900
+msgid "Input methods can't be used on the login screen"
+msgstr "Įvesties metodai negali būti naudojami prisijungimo ekrane"
+
+#: ../panels/region/cc-region-panel.c:1345
+#| msgid "None"
+msgctxt "Input source"
+msgid "None"
+msgstr "Joks"
+
+#: ../panels/region/cc-region-panel.c:1502
+#| msgid "Laptop Screen"
+msgid "Login Screen"
+msgstr "Prisijungimo ekranas"
+
+#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+msgid "Formats"
+msgstr "Formatai"
+
+#: ../panels/region/format-chooser.ui.h:3
+#| msgid "Overview"
+msgid "Preview"
+msgstr "Peržiūra"
+
+#: ../panels/region/format-chooser.ui.h:4
+msgid "Dates"
+msgstr "Datos"
+
+#: ../panels/region/format-chooser.ui.h:5
+msgid "Times"
+msgstr "Laikai"
+
+#: ../panels/region/format-chooser.ui.h:6
+msgid "Numbers"
+msgstr "Skaičiai"
+
+#: ../panels/region/format-chooser.ui.h:7
+msgid "Measurement"
+msgstr "Matavimas"
+
+#: ../panels/region/format-chooser.ui.h:8
+#| msgid "Paper Type"
+msgid "Paper"
+msgstr "Popierius"
+
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Region & Language"
 msgstr "Regionas ir kalba"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:2
-msgid "Change your region and language settings"
-msgstr "Keiskite savo regiono ir kalbos nustatymus"
+msgid ""
+"Select your display language, formats, keyboard layouts and input sources"
+msgstr ""
+"Pasirinkite rodymo kalbą, formatus, klaviatūros išdėstymus ir įvesties "
+"šaltinius"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Kalba;Išdėstymas;Klaviatūra;Įvestis;"
 
-#: ../panels/region/gnome-region-panel-formats.c:144
-msgctxt "measurement format"
-msgid "Imperial"
-msgstr "Imperinė"
-
-#: ../panels/region/gnome-region-panel-formats.c:146
-msgctxt "measurement format"
-msgid "Metric"
-msgstr "Metrinė"
-
-#: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
-msgid "Select an input source"
-msgstr "Pasirinkite įvesties šaltinį"
-
-#: ../panels/region/gnome-region-panel-lang.c:115
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "Log out for changes to take effect"
-msgstr "Atsijungti pakeitimams pritaikyti"
-
-#: ../panels/region/gnome-region-panel-system.c:471
-msgid ""
-"The login screen, system accounts and new user accounts use the system-wide "
-"Region and Language settings."
-msgstr ""
-"Prisijungimo ekranas, sistemos paskyros ir naujos naudotojų paskyros naudoja "
-"sistemos regiono ir kalbos nustatymus."
-
-#: ../panels/region/gnome-region-panel-system.c:476
-#: ../panels/region/gnome-region-panel.ui.h:35
-msgid ""
-"The login screen, system accounts and new user accounts use the system-wide "
-"Region and Language settings. You may change the system settings to match "
-"yours."
-msgstr ""
-"Prisijungimo ekranas, sistemos paskyros ir naujos naudotojų paskyros naudoja "
-"sistemos regiono ir kalbos nustatymus. Galite pakeisti sistemos nustatymus, "
-"kad jie sutaptų su jūsiškiais."
-
-#: ../panels/region/gnome-region-panel-system.c:479
-msgid "Copy Settings"
-msgstr "Kopijuoti nustatymus"
-
-#: ../panels/region/gnome-region-panel-system.c:482
-#: ../panels/region/gnome-region-panel.ui.h:42
-msgid "Copy Settings…"
-msgstr "Kopijuoti nustatymus..."
-
-#: ../panels/region/gnome-region-panel.ui.h:1
-msgid "Region and Language"
-msgstr "Regionas ir kalba"
-
-#: ../panels/region/gnome-region-panel.ui.h:2
-msgid "Select a display language"
-msgstr "Pasirinkite rodymo kalbą"
-
-#: ../panels/region/gnome-region-panel.ui.h:6
-msgid "Add Language"
-msgstr "Pridėti kalbą"
-
-#: ../panels/region/gnome-region-panel.ui.h:7
-msgid "Language"
-msgstr "Kalba"
-
-#: ../panels/region/gnome-region-panel.ui.h:8
-msgid "Select a region (change will be applied the next time you log in)"
-msgstr ""
-"Pasirinkite regioną (pakeitimas bus pritaikytas kitą kartą prisijungus)"
-
-#: ../panels/region/gnome-region-panel.ui.h:9
-msgid "Add Region"
-msgstr "Pridėti regioną"
-
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "Remove Region"
-msgstr "Pašalinti regioną"
-
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "Dates"
-msgstr "Datos"
-
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Times"
-msgstr "Laikai"
-
-#: ../panels/region/gnome-region-panel.ui.h:13
-msgid "Numbers"
-msgstr "Skaičiai"
-
-#: ../panels/region/gnome-region-panel.ui.h:14
-msgid "Currency"
-msgstr "Valiuta"
-
-#: ../panels/region/gnome-region-panel.ui.h:15
-msgid "Measurement"
-msgstr "Matavimas"
-
-#: ../panels/region/gnome-region-panel.ui.h:16
-msgid "Examples"
-msgstr "Pavyzdžiai"
-
-#: ../panels/region/gnome-region-panel.ui.h:17
-msgid "Formats"
-msgstr "Formatai"
-
-#: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Select keyboards or other input sources"
-msgstr "Pasirinkite klaviatūras ir kitus įvesties įrenginius"
-
-#: ../panels/region/gnome-region-panel.ui.h:19
-msgid "Add Input Source"
+#: ../panels/region/input-chooser.ui.h:1
+#| msgid "Add Input Source"
+msgid "Add an Input Source"
 msgstr "Pridėti įvesties šaltinį"
 
-#: ../panels/region/gnome-region-panel.ui.h:20
-msgid "Remove Input Source"
-msgstr "Pašalinti įvesties šaltinį"
-
-#: ../panels/region/gnome-region-panel.ui.h:21
-msgid "Move Input Source Up"
-msgstr "Pakelti įvesties šaltinį"
-
-#: ../panels/region/gnome-region-panel.ui.h:22
-msgid "Move Input Source Down"
-msgstr "Nuleisti įvesties šaltinį"
-
-#: ../panels/region/gnome-region-panel.ui.h:23
-msgid "Input Source Settings"
+#: ../panels/region/input-options.ui.h:1
+#| msgid "Input Source Settings"
+msgid "Input Source Options"
 msgstr "Įvesties šaltinio nustatymai"
 
-#: ../panels/region/gnome-region-panel.ui.h:24
-msgid "Show Keyboard Layout"
-msgstr "Rodyti klaviatūros išdėstymą"
+#: ../panels/region/input-options.ui.h:2
+#| msgid "Use the same source for all windows"
+msgid "Use the _same source for all windows"
+msgstr "_Naudoti tą patį šaltinį visiems langams"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
-msgid "Ctrl+Alt+Space"
-msgstr "Vald+Alt+Tarpas"
+#: ../panels/region/input-options.ui.h:3
+#| msgid "Allow different sources for each window"
+msgid "Allow _different sources for each window"
+msgstr "Leisti _skirtingus šaltinius kiekvienam langui"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
-msgid "Ctrl+Alt+Shift+Space"
-msgstr "Vald+Alt+Lyg2+Tarpas"
+#: ../panels/region/input-options.ui.h:4
+#| msgid "Keyboard Settings"
+msgid "Keyboard Shortcuts"
+msgstr "Klaviatūros trumpiniai"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
-msgid "Shortcut Settings"
-msgstr "Trumpinių nustatymai"
+#: ../panels/region/input-options.ui.h:5
+msgid "Switch to previous source"
+msgstr "Perjungti į ankstesnį šaltinį"
 
-#: ../panels/region/gnome-region-panel.ui.h:31
-msgid "Use the same source for all windows"
-msgstr "Naudoti tą patį šaltinį visiems langams"
+#: ../panels/region/input-options.ui.h:6
+#| msgid "Ctrl+Alt+Shift+Space"
+msgid "Super+Shift+Space"
+msgstr "Super+Lyg2+Tarpas"
 
-#: ../panels/region/gnome-region-panel.ui.h:32
-msgid "Allow different sources for each window"
-msgstr "Leisti skirtingus šaltinius kiekvienam langui"
+#: ../panels/region/input-options.ui.h:7
+msgid "Switch to next source"
+msgstr "Perjungti į kitą šaltinį"
 
-#: ../panels/region/gnome-region-panel.ui.h:33
+#: ../panels/region/input-options.ui.h:8
+msgid "Super+Space"
+msgstr "Super+Tarpas"
+
+#: ../panels/region/input-options.ui.h:9
+msgid "You can change these shortcuts in the keyboard settings"
+msgstr "Galite pakeisti šiuos trumpinius klaviatūros nustatymuose"
+
+#: ../panels/region/input-options.ui.h:10
+#| msgid "Switch to next source"
+msgid "Alternative switch to next source"
+msgstr "Alternatyvus persijungimas į kitą šaltinį"
+
+#: ../panels/region/region.ui.h:2
+msgid "English (United Kingdom)"
+msgstr "Anglų (Jungtinė Karalystė)"
+
+#: ../panels/region/region.ui.h:4
+msgid "United Kingdom"
+msgstr "Jungtinė Karalystė"
+
+#: ../panels/region/region.ui.h:6
 msgid "Options"
 msgstr "Parinktys"
 
-#: ../panels/region/gnome-region-panel.ui.h:34
-msgid "Input Sources"
-msgstr "Įvesties šaltiniai"
-
-#. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:37
-msgid "Display language:"
-msgstr "Rodymo kalba:"
-
-#: ../panels/region/gnome-region-panel.ui.h:38
-msgid "Input source:"
-msgstr "Įvesties šaltinis:"
-
-#: ../panels/region/gnome-region-panel.ui.h:39
-msgid "Format:"
-msgstr "Formatas:"
-
-#: ../panels/region/gnome-region-panel.ui.h:40
-msgid "Your settings"
-msgstr "Jūsų nustatymai"
-
-#: ../panels/region/gnome-region-panel.ui.h:41
-msgid "System settings"
-msgstr "Sistemos nustatymai"
+#: ../panels/region/region.ui.h:7
+msgid "Login settings are used by all users when logging into the system"
+msgstr ""
+"Prisijungimo nustatymai yra naudojami visų naudotojų prisijungiam prie "
+"sistemos"
 
 #: ../panels/search/cc-search-locations-dialog.c:275
 msgid "Home"
@@ -4939,10 +4918,6 @@ msgstr "Vietos"
 msgid "Bookmarks"
 msgstr "Žymikliai"
 
-#: ../panels/search/cc-search-locations-dialog.c:479
-msgid "Other"
-msgstr "Kita"
-
 #: ../panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "Pasirinkite vietą"
@@ -4951,19 +4926,14 @@ msgstr "Pasirinkite vietą"
 msgid "No applications found"
 msgstr "Nerasta programų"
 
-#: ../panels/search/cc-search-panel.c:551
-#: ../panels/user-accounts/um-fingerprint-dialog.c:219
-#: ../panels/user-accounts/um-fingerprint-dialog.c:220
-msgid "Enabled"
-msgstr "Išjungta"
-
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:1
 msgid "Search"
 msgstr "Ieškoti"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
-msgid "Search settings"
-msgstr "Paieškos nustatymai"
+msgid ""
+"Control which applications show search results in the Activities Overview"
+msgstr "Valdykite, kurios programos rodo paieškos rezultatus veiklų apžvalgoje"
 
 #. Translators: those are keywords for the search control-center panel
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:4
@@ -4986,21 +4956,21 @@ msgstr "Perkelti žemyn"
 msgid "Preferences"
 msgstr "Nustatymai"
 
-#: ../panels/sharing/cc-sharing-panel.c:220
+#: ../panels/sharing/cc-sharing-panel.c:259
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Įjungta"
 
-#: ../panels/sharing/cc-sharing-panel.c:222
+#: ../panels/sharing/cc-sharing-panel.c:261
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Išjungta"
 
-#: ../panels/sharing/cc-sharing-panel.c:362
+#: ../panels/sharing/cc-sharing-panel.c:407
 msgid "Choose a Folder"
 msgstr "Pasirinkite aplanką"
 
-#: ../panels/sharing/cc-sharing-panel.c:540
+#: ../panels/sharing/cc-sharing-panel.c:585
 msgid "Copy"
 msgstr "Kopijuoti"
 
@@ -5008,8 +4978,12 @@ msgstr "Kopijuoti"
 msgid "Sharing"
 msgstr "Dalinimasis"
 
+#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:2
+msgid "Control what you want to share with others"
+msgstr "Valdykite, ką norite bendrinti su kitais"
+
 #. Translators: those are keywords for the sharing control-center panel
-#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:3
+#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
 msgid ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
 "pictures;photos;movies;server;renderer;"
@@ -5113,10 +5087,6 @@ msgstr "Dalintis viešų aplanku šiame tinkle"
 msgid "Require Password"
 msgstr "Reikalausi slaptažodžio"
 
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Password"
-msgstr "Slaptažodis"
-
 #: ../panels/sharing/sharing.ui.h:22
 msgid "Remote Login"
 msgstr "Nuotolinis prisijungimas"
@@ -5165,8 +5135,9 @@ msgid "Sound"
 msgstr "Garsas"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
-msgid "Change sound volume and event sounds"
-msgstr "Keisti garso garsumą ir įvykių garsus"
+#| msgid "Change sound volume and event sounds"
+msgid "Change sound levels, inputs, outputs, and alert sounds"
+msgstr "Keisti garso lygius, įvestį, išvestį ir garsinius signalus"
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -5275,7 +5246,7 @@ msgstr[0] "%u įvestis"
 msgstr[1] "%u įvestys"
 msgstr[2] "%u įvesčių"
 
-#: ../panels/sound/gvc/gvc-mixer-control.c:2371
+#: ../panels/sound/gvc/gvc-mixer-control.c:2373
 msgid "System Sounds"
 msgstr "Sistemos garsai"
 
@@ -5287,65 +5258,65 @@ msgstr "_Tikrinti garsiakalbius"
 msgid "Peak detect"
 msgstr "Viršūnių aptikimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1511
+#: ../panels/sound/gvc-mixer-dialog.c:1508
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1530
+#: ../panels/sound/gvc-mixer-dialog.c:1527
 msgid "Device"
 msgstr "Įrenginys"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1593
+#: ../panels/sound/gvc-mixer-dialog.c:1590
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s garsiakalbių testavimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1647
+#: ../panels/sound/gvc-mixer-dialog.c:1644
 msgid "_Output volume:"
 msgstr "_Išvesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1661
+#: ../panels/sound/gvc-mixer-dialog.c:1658
 msgid "Output"
 msgstr "Išvestis"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1666
+#: ../panels/sound/gvc-mixer-dialog.c:1663
 msgid "C_hoose a device for sound output:"
 msgstr "_Pasirinkite garso išvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1691
+#: ../panels/sound/gvc-mixer-dialog.c:1688
 msgid "Settings for the selected device:"
 msgstr "Pasirinkto įrenginio nustatymai:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1702
+#: ../panels/sound/gvc-mixer-dialog.c:1699
 msgid "Input"
 msgstr "Įvestis"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1709
+#: ../panels/sound/gvc-mixer-dialog.c:1706
 msgid "_Input volume:"
 msgstr "Į_vesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1732
+#: ../panels/sound/gvc-mixer-dialog.c:1729
 msgid "Input level:"
 msgstr "Įvesties lygmuo:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1760
+#: ../panels/sound/gvc-mixer-dialog.c:1757
 msgid "C_hoose a device for sound input:"
 msgstr "_Pasirinkite garso įvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1787
+#: ../panels/sound/gvc-mixer-dialog.c:1784
 msgid "Sound Effects"
 msgstr "Garso efektai"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1794
+#: ../panels/sound/gvc-mixer-dialog.c:1791
 msgid "_Alert volume:"
 msgstr "_Įspėjimų garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1807
+#: ../panels/sound/gvc-mixer-dialog.c:1804
 msgid "Applications"
 msgstr "Programos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1811
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "No application is currently playing or recording audio."
 msgstr "Jokia programa šiuo metu negroja ir neįrašinėja garso."
 
@@ -5400,8 +5371,8 @@ msgid "No shortcut set"
 msgstr "Spartusis klavišas nenurodytas"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-msgid "Universal Access Preferences"
-msgstr "Universalios prieigos nustatymai"
+msgid "Make it easier to see, hear, type, point and click"
+msgstr "Padaryti paprasčiau pamatyti, išgirsti, rašyti, nurodyti ir spausti"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
@@ -6010,8 +5981,9 @@ msgid "Users"
 msgstr "Naudotojai"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
-msgid "Add or remove users"
-msgstr "Pridėti arba šalinti naudotojus"
+#| msgid "Add or remove users"
+msgid "Add or remove users and change your password"
+msgstr "Pridėti arba šalinti naudotojus bei keisti savo slaptažodį"
 
 #. Translators: those are keywords for the user accounts control-center panel
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
@@ -6021,17 +5993,14 @@ msgstr ""
 "Slaptažodis;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:2
-#| msgid "Previous track"
 msgid "Previous Week"
 msgstr "Praeitą savaitę"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:3
-#| msgid "Last Week"
 msgid "Next Week"
 msgstr "Kitą savaitę"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:4
-#| msgid "Next track"
 msgid "Next week"
 msgstr "Kitą savaitę"
 
@@ -6056,54 +6025,38 @@ msgid "Enable this account"
 msgstr "Įjungti šią paskyrą"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "_Hint"
-msgstr "_Patarimas"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid ""
-"This hint may be displayed at the login screen.  It will be visible to all "
-"users of this system.  Do <b>not</b> include the password here."
-msgstr ""
-"Šis patarimas gali būti rodomas prisijungimo ekrane.  Jis bus matomas "
-"visiems sistemos naudotojams. <b>Nerašykite</b> čia slaptažodžių."
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
 msgid "C_onfirm password"
 msgstr "Pa_tvirtinti slaptažodį"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
 msgid "_New password"
 msgstr "_Naujas slaptažodis"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
 msgid "Generate a password"
 msgstr "Generuoti slaptažodį"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Fair"
-msgstr "Tinkamas"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Current _password"
 msgstr "_Dabartinis slaptažodis"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
 msgid "_Action"
 msgstr "_Veiksmas"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Changing password for"
 msgstr "Keičiamas slaptažodis naudotojui"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:15
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "_Show password"
 msgstr "_Rodyti slaptažodį:"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:16
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
 msgid "How to choose a strong password"
 msgstr "Kaip pasirinkti saugų slaptažodį"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:17
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
 msgid "Ch_ange"
 msgstr "Pa_keisti"
 
@@ -6183,7 +6136,7 @@ msgid "Authentication is required to change user data"
 msgstr "Reikia patvirtinti tapatybę naudotojų duomenims keisti"
 
 #: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:605
+#: ../panels/user-accounts/um-password-dialog.c:597
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Per trumpas"
@@ -6194,25 +6147,25 @@ msgid "Not good enough"
 msgstr "Nepakankamai geras"
 
 #: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:606
+#: ../panels/user-accounts/um-password-dialog.c:598
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Silpnas"
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:607
+#: ../panels/user-accounts/um-password-dialog.c:599
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Tinkamas"
 
 #: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:608
+#: ../panels/user-accounts/um-password-dialog.c:600
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Geras"
 
 #: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:609
+#: ../panels/user-accounts/um-password-dialog.c:601
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Stiprus"
@@ -6302,6 +6255,11 @@ msgstr "Įrenginys jau naudojamas."
 msgid "An internal error occurred."
 msgstr "Įvyko vidinė klaida."
 
+#: ../panels/user-accounts/um-fingerprint-dialog.c:219
+#: ../panels/user-accounts/um-fingerprint-dialog.c:220
+msgid "Enabled"
+msgstr "Išjungta"
+
 #: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "Delete registered fingerprints?"
 msgstr "Ar ištrinti įrašytus pirštų antspaudus?"
@@ -6377,44 +6335,43 @@ msgstr "Ši savaitė"
 msgid "Last Week"
 msgstr "Preitą savaitę"
 
-#: ../panels/user-accounts/um-password-dialog.c:130
+#: ../panels/user-accounts/um-password-dialog.c:128
 msgid "_Generate a password"
 msgstr "_Generuoti slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:184
+#: ../panels/user-accounts/um-password-dialog.c:181
 msgid "Please choose another password."
 msgstr "Pasirinkite kitą slaptažodį."
 
-#: ../panels/user-accounts/um-password-dialog.c:193
+#: ../panels/user-accounts/um-password-dialog.c:190
 msgid "Please type your current password again."
 msgstr "Įveskite savo slaptažodį dar kartą."
 
-#: ../panels/user-accounts/um-password-dialog.c:199
+#: ../panels/user-accounts/um-password-dialog.c:196
 msgid "Password could not be changed"
 msgstr "Nepavyko pakeisti slaptažodžio"
 
-#: ../panels/user-accounts/um-password-dialog.c:297
+#: ../panels/user-accounts/um-password-dialog.c:301
 msgid "You need to enter a new password"
 msgstr "Jums reikia įvesti naują slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:300
-#| msgid "The new password is too short"
+#: ../panels/user-accounts/um-password-dialog.c:304
 msgid "The new password is not strong enough"
 msgstr "Naujas slaptažodis per silpnas"
 
-#: ../panels/user-accounts/um-password-dialog.c:306
+#: ../panels/user-accounts/um-password-dialog.c:310
 msgid "You need to confirm the password"
 msgstr "Jums reikia patvirtinti slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:309
+#: ../panels/user-accounts/um-password-dialog.c:313
 msgid "The passwords do not match"
 msgstr "Slaptažodžiai nesutampa"
 
-#: ../panels/user-accounts/um-password-dialog.c:315
+#: ../panels/user-accounts/um-password-dialog.c:319
 msgid "You need to enter your current password"
 msgstr "Jums reikia įvesti dabartinį slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:318
+#: ../panels/user-accounts/um-password-dialog.c:322
 msgid "The current password is not correct"
 msgstr "Dabartinis slaptažodis neteisingas"
 
@@ -6422,7 +6379,7 @@ msgstr "Dabartinis slaptažodis neteisingas"
 msgid "Passwords do not match"
 msgstr "Slaptažodžiai nesutampa"
 
-#: ../panels/user-accounts/um-password-dialog.c:447
+#: ../panels/user-accounts/um-password-dialog.c:439
 msgid "Wrong password"
 msgstr "Blogas slaptažodis"
 
@@ -6526,15 +6483,15 @@ msgstr "Joks"
 msgid "Logged in"
 msgstr "Prisijunges prie"
 
-#: ../panels/user-accounts/um-user-panel.c:941
+#: ../panels/user-accounts/um-user-panel.c:942
 msgid "Failed to contact the accounts service"
 msgstr "Nepavyko susisiekti su paskyrų tarnyba"
 
-#: ../panels/user-accounts/um-user-panel.c:943
+#: ../panels/user-accounts/um-user-panel.c:944
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Įsitikinkite, kad AccountService yra įdiegta ir įjungta."
 
-#: ../panels/user-accounts/um-user-panel.c:984
+#: ../panels/user-accounts/um-user-panel.c:985
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6542,12 +6499,12 @@ msgstr ""
 "Pakeitimams atlikti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1022
+#: ../panels/user-accounts/um-user-panel.c:1023
 msgid "Create a user account"
 msgstr "Sukurti naują paskyrą"
 
-#: ../panels/user-accounts/um-user-panel.c:1033
-#: ../panels/user-accounts/um-user-panel.c:1319
+#: ../panels/user-accounts/um-user-panel.c:1034
+#: ../panels/user-accounts/um-user-panel.c:1320
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6555,12 +6512,12 @@ msgstr ""
 "Naudotojui sukurti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1042
+#: ../panels/user-accounts/um-user-panel.c:1043
 msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
-#: ../panels/user-accounts/um-user-panel.c:1054
-#: ../panels/user-accounts/um-user-panel.c:1324
+#: ../panels/user-accounts/um-user-panel.c:1055
+#: ../panels/user-accounts/um-user-panel.c:1325
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6568,11 +6525,11 @@ msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1228
+#: ../panels/user-accounts/um-user-panel.c:1229
 msgid "My Account"
 msgstr "Mano paskyra"
 
-#: ../panels/user-accounts/um-user-panel.c:1237
+#: ../panels/user-accounts/um-user-panel.c:1238
 msgid "Other Accounts"
 msgstr "Kitos paskyros"
 
@@ -6694,8 +6651,10 @@ msgid "Wacom Tablet"
 msgstr "Wacom planšetė"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:2
-msgid "Set your Wacom tablet preferences"
-msgstr "Keisti Wacom piešimo planšetės nustatymus"
+msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
+msgstr ""
+"Nustatyti mygtukų susiejimus bei pritaikyti pieštuko jautrumą grafinėms "
+"planšetėms"
 
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
@@ -6899,40 +6858,40 @@ msgstr "Apatinysis mygtukas"
 msgid "Tip Pressure Feel"
 msgstr "Pieštuko spaudimo jutimas"
 
-#: ../shell/control-center.c:66
+#: ../shell/cc-application.c:67
 msgid "Enable verbose mode"
 msgstr "Įjungti derinimo veikseną"
 
-#: ../shell/control-center.c:67
+#: ../shell/cc-application.c:68
 msgid "Show the overview"
 msgstr "Rodyti apžvalgą"
 
-#: ../shell/control-center.c:68
+#: ../shell/cc-application.c:69
 msgid "Search for the string"
 msgstr "Ieškoti eilutės"
 
-#: ../shell/control-center.c:69
+#: ../shell/cc-application.c:70
 msgid "List possible panel names and exit"
 msgstr "Išvardinti galimus skydelių pavadinimus ir išeiti"
 
-#: ../shell/control-center.c:70 ../shell/control-center.c:71
-#: ../shell/control-center.c:72
+#: ../shell/cc-application.c:71 ../shell/cc-application.c:72
+#: ../shell/cc-application.c:73
 msgid "Show help options"
 msgstr "Rodyti pagalbos parinktis"
 
-#: ../shell/control-center.c:73
+#: ../shell/cc-application.c:74
 msgid "Panel to display"
 msgstr "Rodomas skydelis"
 
-#: ../shell/control-center.c:73
+#: ../shell/cc-application.c:74
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[SKYDELIS] [ARGUMENTAS…]"
 
-#: ../shell/control-center.c:95
+#: ../shell/cc-application.c:116
 msgid "- Settings"
 msgstr "- nustatymai"
 
-#: ../shell/control-center.c:103
+#: ../shell/cc-application.c:124
 #, c-format
 msgid ""
 "%s\n"
@@ -6941,47 +6900,43 @@ msgstr ""
 "%s\n"
 "Paleiskite „%s --help“ visam komandų eilutės parinkčių sąrašui gauti.\n"
 
-#: ../shell/control-center.c:133
+#: ../shell/cc-application.c:154
 msgid "Available panels:"
 msgstr "Prieinami skydeliai:"
 
-#: ../shell/control-center.c:244
+#: ../shell/cc-application.c:273
 msgid "Help"
 msgstr "Žinynas"
 
-#: ../shell/control-center.c:245
+#: ../shell/cc-application.c:274
 msgid "Quit"
 msgstr "Išeiti"
 
+#: ../shell/cc-window.c:60 ../shell/gnome-control-center.desktop.in.in.h:1
+msgid "Settings"
+msgstr "Nustatymai"
+
 #. Add categories
-#: ../shell/gnome-control-center.c:887
+#: ../shell/cc-window.c:899
 msgctxt "category"
 msgid "Personal"
 msgstr "Asmeninis"
 
-#: ../shell/gnome-control-center.c:888
+#: ../shell/cc-window.c:900
 msgctxt "category"
 msgid "Hardware"
 msgstr "Aparatinė įranga"
 
-#: ../shell/gnome-control-center.c:889
+#: ../shell/cc-window.c:901
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/gnomecc.directory.in.h:1
-msgid "Control Center"
-msgstr "Valdymo centras"
-
-#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
-msgid "Settings"
-msgstr "Nustatymai"
+#: ../shell/cc-window.c:1447
+msgid "All Settings"
+msgstr "Visi nustatymai"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nustatymai;Parinktys;"
-
-#: ../shell/shell.ui.h:2
-msgid "All Settings"
-msgstr "Visi nustatymai"
 
