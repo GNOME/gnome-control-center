@@ -31,6 +31,19 @@ typedef struct
 } CallbackData;
 
 static void
+set_switch_state (GtkSwitch *gtkswitch,
+                  gboolean   active)
+{
+  if (gtk_switch_get_active (gtkswitch) != active)
+    {
+      g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus",
+                         GINT_TO_POINTER (1));
+      gtk_switch_set_active (gtkswitch, active);
+    }
+  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), TRUE);
+}
+
+static void
 active_state_ready_callback (GObject      *source_object,
                              GAsyncResult *result,
                              CallbackData *callback_data)
@@ -68,15 +81,7 @@ active_state_ready_callback (GObject      *source_object,
 
   /* set the switch to the correct state */
   if (callback_data->gtkswitch)
-    {
-      if (gtk_switch_get_active (callback_data->gtkswitch) != active)
-        {
-          g_object_set_data (G_OBJECT (callback_data->gtkswitch), "set-from-dbus",
-                             GINT_TO_POINTER (1));
-          gtk_switch_set_active (callback_data->gtkswitch, active);
-        }
-      gtk_widget_set_sensitive (GTK_WIDGET (callback_data->gtkswitch), TRUE);
-    }
+    set_switch_state (callback_data->gtkswitch, active);
 
   g_free (callback_data);
 }
@@ -138,6 +143,77 @@ path_ready_callback (GObject      *source_object,
 }
 
 static void
+state_ready_callback (GObject      *source_object,
+                      GAsyncResult *result,
+                      CallbackData *callback_data)
+{
+  GVariant *state_variant;
+  const gchar *state_string;
+  GError *error = NULL;
+
+  state_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                                 result, &error);
+  if (!state_variant)
+    {
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_free (callback_data);
+          g_clear_error (&error);
+
+          return;
+        }
+
+      /* this may fail if systemd or remote login service is not available */
+      g_debug ("Error getting remote login state: %s", error->message);
+
+      g_clear_error (&error);
+
+      /* hide the remote login button, since the service is not available */
+      if (callback_data->button)
+        gtk_widget_hide (callback_data->button);
+
+      g_free (callback_data);
+
+      return;
+    }
+
+  g_variant_get (state_variant, "(s)", &state_string);
+
+  if (g_str_equal (state_string, "enabled"))
+    {
+      /* service is enabled, so check whether it is running or not */
+      g_dbus_connection_call (G_DBUS_CONNECTION (source_object),
+                              "org.freedesktop.systemd1",
+                              "/org/freedesktop/systemd1",
+                              "org.freedesktop.systemd1.Manager",
+                              "GetUnit",
+                              g_variant_new ("(s)", SSHD_SERVICE),
+                              (GVariantType*) "(o)",
+                              G_DBUS_CALL_FLAGS_NONE,
+                              -1,
+                              callback_data->cancellable,
+                              (GAsyncReadyCallback) path_ready_callback,
+                              callback_data);
+    }
+  else if (g_str_equal (state_string, "disabled"))
+    {
+      /* service is available, but is currently disabled */
+      set_switch_state (callback_data->gtkswitch, FALSE);
+
+      g_free (callback_data);
+    }
+  else
+    {
+      /* unknown state */
+      g_warning ("Unknown state %s for %s", state_string, SSHD_SERVICE);
+
+      g_free (callback_data);
+    }
+
+  g_variant_unref (state_variant);
+}
+
+static void
 bus_ready_callback (GObject      *source_object,
                     GAsyncResult *result,
                     CallbackData *callback_data)
@@ -161,13 +237,13 @@ bus_ready_callback (GObject      *source_object,
                           "org.freedesktop.systemd1",
                           "/org/freedesktop/systemd1",
                           "org.freedesktop.systemd1.Manager",
-                          "GetUnit",
+                          "GetUnitFileState",
                           g_variant_new ("(s)", SSHD_SERVICE),
-                          (GVariantType*) "(o)",
+                          (GVariantType*) "(s)",
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
                           callback_data->cancellable,
-                          (GAsyncReadyCallback) path_ready_callback,
+                          (GAsyncReadyCallback) state_ready_callback,
                           callback_data);
 }
 
