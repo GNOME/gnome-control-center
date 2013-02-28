@@ -3347,7 +3347,8 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
       g_error_free (error);
     }
 
-  data->callback (success, data->user_data);
+  if (!g_cancellable_is_cancelled (data->cancellable))
+    data->callback (success, data->user_data);
 
   if (data->cancellable)
     g_object_unref (data->cancellable);
@@ -3386,7 +3387,8 @@ printer_add_option_async (const gchar   *printer_name,
     }
 
   data = g_new0 (PAOData, 1);
-  data->cancellable = cancellable;
+  if (cancellable)
+    data->cancellable = g_object_ref (cancellable);
   data->callback = callback;
   data->user_data = user_data;
 
