@@ -56,6 +56,8 @@ struct PpPPDOptionWidgetPrivate
 
   gchar    *ppd_filename;
   gboolean  ppd_filename_set;
+
+  GCancellable *cancellable;
 };
 
 G_DEFINE_TYPE (PpPPDOptionWidget, pp_ppd_option_widget, GTK_TYPE_HBOX)
@@ -202,6 +204,12 @@ pp_ppd_option_widget_finalize (GObject *object)
           g_unlink (priv->ppd_filename);
           g_free (priv->ppd_filename);
           priv->ppd_filename = NULL;
+        }
+
+      if (priv->cancellable)
+        {
+          g_cancellable_cancel (priv->cancellable);
+          g_object_unref (priv->cancellable);
         }
     }
 
@@ -361,7 +369,11 @@ static void
 printer_add_option_async_cb (gboolean success,
                              gpointer user_data)
 {
+  PpPPDOptionWidget        *widget = (PpPPDOptionWidget *) user_data;
+  PpPPDOptionWidgetPrivate *priv = widget->priv;
+
   update_widget (user_data);
+  g_clear_object (&priv->cancellable);
 }
 
 static void
@@ -379,11 +391,18 @@ switch_changed_cb (GtkWidget         *switch_button,
   else
     values[0] = g_strdup ("False");
 
+  if (priv->cancellable)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      g_object_unref (priv->cancellable);
+    }
+
+  priv->cancellable = g_cancellable_new ();
   printer_add_option_async (priv->printer_name,
                             priv->option_name,
                             values,
                             FALSE,
-                            NULL,
+                            priv->cancellable,
                             printer_add_option_async_cb,
                             widget);
 
@@ -400,11 +419,18 @@ combo_changed_cb (GtkWidget         *combo,
   values = g_new0 (gchar *, 2);
   values[0] = combo_box_get (combo);
 
+  if (priv->cancellable)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      g_object_unref (priv->cancellable);
+    }
+
+  priv->cancellable = g_cancellable_new ();
   printer_add_option_async (priv->printer_name,
                             priv->option_name,
                             values,
                             FALSE,
-                            NULL,
+                            priv->cancellable,
                             printer_add_option_async_cb,
                             widget);
 
