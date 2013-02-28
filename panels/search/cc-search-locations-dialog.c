@@ -111,12 +111,13 @@ get_bookmarks (void)
                 }
 
               bookmark = g_slice_new0 (Place);
+              bookmark->location = g_file_new_for_uri (lines[idx]);
+
               if (label != NULL)
                 bookmark->display_name = label;
               else
-                bookmark->display_name = g_path_get_basename (lines[idx]);
+                bookmark->display_name = g_file_get_basename (bookmark->location);
 
-              bookmark->location = g_file_new_for_uri (lines[idx]);
               bookmark->place_type = PLACE_BOOKMARKS;
 
               bookmarks = g_list_prepend (bookmarks, bookmark);
@@ -162,7 +163,7 @@ get_xdg_dirs (void)
 
       xdg_dir = g_slice_new0 (Place);
       xdg_dir->location = g_file_new_for_path (path);
-      xdg_dir->display_name = g_path_get_basename (path);
+      xdg_dir->display_name = g_file_get_basename (xdg_dir->location);
       xdg_dir->place_type = PLACE_XDG;
 
       xdg_dirs = g_list_prepend (xdg_dirs, xdg_dir);
@@ -247,7 +248,7 @@ get_tracker_locations (void)
 
       location = g_slice_new0 (Place);
       location->location = g_file_new_for_commandline_arg (path);
-      location->display_name = g_path_get_basename (path);
+      location->display_name = g_file_get_basename (location->location);
       location->place_type = PLACE_OTHER;
 
       list = g_list_prepend (list, location);
