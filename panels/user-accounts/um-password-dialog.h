@@ -33,8 +33,6 @@ UmPasswordDialog *um_password_dialog_new      (void);
 void              um_password_dialog_free     (UmPasswordDialog *dialog);
 void              um_password_dialog_set_user (UmPasswordDialog *dialog,
                                                ActUser          *user);
-void              um_password_dialog_set_privileged (UmPasswordDialog *dialog,
-                                                     gboolean          privileged);
 void              um_password_dialog_show     (UmPasswordDialog *dialog,
                                                GtkWindow        *parent);
 

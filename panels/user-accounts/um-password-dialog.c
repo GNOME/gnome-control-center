@@ -36,37 +36,35 @@
 #include "run-passwd.h"
 #include "pw-utils.h"
 
+#define PASSWORD_CHECK_TIMEOUT 500
+
 struct _UmPasswordDialog {
         GtkWidget *dialog;
-        GtkWidget *user_icon;
-        GtkWidget *user_name;
-        GtkWidget *action_label;
-        GtkWidget *action_combo;
+        GtkWidget *action_radio_box;
+        GtkWidget *action_now_radio;
+        GtkWidget *action_login_radio;
         GtkWidget *password_entry;
         GtkWidget *verify_entry;
+        gint       password_entry_timeout_id;
         GtkWidget *strength_indicator;
         GtkWidget *strength_indicator_label;
-        GtkWidget *show_password_button;
         GtkWidget *ok_button;
+        GtkWidget *password_hint;
 
         ActUser *user;
+        ActUserPasswordMode password_mode;
 
         GtkWidget *old_password_label;
         GtkWidget *old_password_entry;
+        GtkWidget *old_password_checkmark;
+        GtkWidget *old_password_spinner;
         gboolean   old_password_ok;
+        gint       old_password_entry_timeout_id;
 
         PasswdHandler *passwd_handler;
 };
 
-typedef enum {
-        UM_PASSWORD_DIALOG_MODE_NORMAL = 0,
-        UM_PASSWORD_DIALOG_MODE_SET_AT_LOGIN,
-        UM_PASSWORD_DIALOG_MODE_NO_PASSWORD,
-        UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT,
-        UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT
-} UmPasswordDialogMode;
-
-static int
+static gint
 update_password_strength (UmPasswordDialog *um)
 {
         const gchar *password;
@@ -75,6 +73,12 @@ update_password_strength (UmPasswordDialog *um)
         gint strength_level;
         const gchar *hint;
         const gchar *long_hint;
+        const gchar *verify;
+        const gchar *strength_hint;
+
+        if (um->user == NULL) {
+                return 0;
+        }
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
@@ -83,53 +87,22 @@ update_password_strength (UmPasswordDialog *um)
         pw_strength (password, old_password, username,
                      &hint, &long_hint, &strength_level);
 
+        if (strlen (password) == 0) {
+                strength_hint = "";
+        } else {
+                strength_hint = hint;
+        }
+
         gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
-        gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
-        gtk_widget_set_tooltip_text (um->strength_indicator, long_hint);
-        gtk_widget_set_tooltip_text (um->strength_indicator_label, long_hint);
+        gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), strength_hint);
+        gtk_label_set_label (GTK_LABEL (um->password_hint), long_hint);
+
+        verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
+        if (strlen (verify) == 0) {
+                gtk_widget_set_sensitive (um->verify_entry, strength_level > 0);
+        }
 
         return strength_level;
-}
-
-static void
-generate_one_password (GtkWidget        *widget,
-                       UmPasswordDialog *um)
-{
-        gchar *pwd;
-
-        pwd = pw_generate ();
-
-        gtk_entry_set_text (GTK_ENTRY (um->password_entry), pwd);
-        gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
-
-
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button),
-                                      TRUE);
-
-        g_free (pwd);
-}
-
-static void
-activate_icon (GtkEntry             *entry,
-               GtkEntryIconPosition  pos,
-               GdkEventButton       *event,
-               UmPasswordDialog     *um)
-{
-        generate_one_password (GTK_WIDGET (entry), um);
-}
-
-static void
-populate_menu (GtkEntry         *entry,
-               GtkMenu          *menu,
-               UmPasswordDialog *um)
-{
-        GtkWidget *item;
-
-        item = gtk_menu_item_new_with_mnemonic (_("_Generate a password"));
-        g_signal_connect (item, "activate",
-                          G_CALLBACK (generate_one_password), um);
-        gtk_widget_show (item);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 }
 
 static void
@@ -214,21 +187,12 @@ static void
 accept_password_dialog (GtkButton        *button,
                         UmPasswordDialog *um)
 {
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gint mode;
-        const gchar *hint;
         const gchar *password;
 
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->action_combo));
-        gtk_combo_box_get_active_iter (GTK_COMBO_BOX (um->action_combo), &iter);
-        gtk_tree_model_get (model, &iter, 1, &mode, -1);
-
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
-        hint = NULL;
 
-        switch (mode) {
-                case UM_PASSWORD_DIALOG_MODE_NORMAL:
+        switch (um->password_mode) {
+                case ACT_USER_PASSWORD_MODE_REGULAR:
                         if (act_user_get_uid (um->user) == getuid ()) {
                                 GdkDisplay *display;
                                 GdkCursor *cursor;
@@ -248,25 +212,12 @@ accept_password_dialog (GtkButton        *button,
                                 return;
                         }
 
-                        act_user_set_password (um->user, password, hint);
+                        act_user_set_password (um->user, password, "");
                         break;
 
-                case UM_PASSWORD_DIALOG_MODE_SET_AT_LOGIN:
-                        act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+                case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
+                        act_user_set_password_mode (um->user,  um->password_mode);
                         act_user_set_automatic_login (um->user, FALSE);
-                        break;
-
-                case UM_PASSWORD_DIALOG_MODE_NO_PASSWORD:
-                        act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_NONE);
-                        break;
-
-                case UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT:
-                        act_user_set_locked (um->user, TRUE);
-                        act_user_set_automatic_login (um->user, FALSE);
-                        break;
-
-                case UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT:
-                        act_user_set_locked (um->user, FALSE);
                         break;
 
                 default:
@@ -280,96 +231,53 @@ static void
 update_sensitivity (UmPasswordDialog *um)
 {
         const gchar *password, *verify;
-        const gchar *old_password;
-        const gchar *tooltip;
         gboolean can_change;
-        int strength_level;
+        int strength;
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
-        old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
 
-        /* Don't update the password strength if we didn't enter anything */
-        if (password && *password == '\0' &&
-            verify && *verify == '\0' &&
-            old_password && *old_password == '\0')
-                return;
-
-        strength_level = update_password_strength (um);
-
-        if (strength_level < 1) {
-                can_change = FALSE;
-                if (password[0] == '\0') {
-                        tooltip = _("You need to enter a new password");
-                }
-                else {
-                        tooltip = _("The new password is not strong enough");
-                }
-        }
-        else if (strcmp (password, verify) != 0) {
-                can_change = FALSE;
-                if (verify[0] == '\0') {
-                        tooltip = _("You need to confirm the password");
-                }
-                else {
-                        tooltip = _("The passwords do not match");
-                }
-        }
-        else if (!um->old_password_ok) {
-                can_change = FALSE;
-                if (old_password[0] == '\0') {
-                        tooltip = _("You need to enter your current password");
-                }
-                else {
-                        tooltip = _("The current password is not correct");
-                }
+        if (um->password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
+                strength = update_password_strength (um);
+                can_change = strength > 0 && strcmp (password, verify) == 0 &&
+                             (um->old_password_ok || !gtk_widget_get_visible (um->old_password_entry));
         }
         else {
                 can_change = TRUE;
-                tooltip = NULL;
         }
 
         gtk_widget_set_sensitive (um->ok_button, can_change);
-        gtk_widget_set_tooltip_text (um->ok_button, tooltip);
 }
 
 static void
-action_changed (GtkComboBox      *combo,
-                UmPasswordDialog *um)
-{
-        gint active;
-
-        active = gtk_combo_box_get_active (combo);
-        if (active == 0) {
-                gtk_widget_set_sensitive (um->password_entry, TRUE);
-                gtk_entry_set_icon_sensitive (GTK_ENTRY (um->password_entry), GTK_ENTRY_ICON_SECONDARY, TRUE);
-                gtk_widget_set_sensitive (um->verify_entry, TRUE);
-                gtk_widget_set_sensitive (um->old_password_entry, TRUE);
-                gtk_widget_set_sensitive (um->strength_indicator_label, TRUE);
-                gtk_widget_set_sensitive (um->show_password_button, TRUE);
-
-                update_sensitivity (um);
-        }
-        else {
-                gtk_widget_set_sensitive (um->password_entry, FALSE);
-                gtk_entry_set_icon_sensitive (GTK_ENTRY (um->password_entry), GTK_ENTRY_ICON_SECONDARY, FALSE);
-                gtk_widget_set_sensitive (um->verify_entry, FALSE);
-                gtk_widget_set_sensitive (um->old_password_entry, FALSE);
-                gtk_widget_set_sensitive (um->strength_indicator_label, FALSE);
-                gtk_widget_set_sensitive (um->show_password_button, FALSE);
-                gtk_widget_set_sensitive (um->ok_button, TRUE);
-        }
-}
-
-static void
-show_password_toggled (GtkToggleButton  *button,
-                       UmPasswordDialog *um)
+mode_change (UmPasswordDialog *um,
+             ActUserPasswordMode mode)
 {
         gboolean active;
 
-        active = gtk_toggle_button_get_active (button);
-        gtk_entry_set_visibility (GTK_ENTRY (um->password_entry), active);
-        gtk_entry_set_visibility (GTK_ENTRY (um->verify_entry), active);
+        active = (mode == ACT_USER_PASSWORD_MODE_REGULAR);
+        gtk_widget_set_sensitive (um->password_entry, active);
+        gtk_widget_set_sensitive (um->verify_entry, active);
+        gtk_widget_set_sensitive (um->old_password_entry, active);
+        gtk_widget_set_sensitive (um->strength_indicator_label, active);
+        gtk_widget_set_sensitive (um->password_hint, active);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->action_now_radio), active);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->action_login_radio), !active);
+
+        um->password_mode = mode;
+        update_sensitivity (um);
+}
+
+static void
+action_changed (GtkRadioButton   *radio,
+                UmPasswordDialog *um)
+{
+        gint active;
+        ActUserPasswordMode mode;
+
+        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
+        mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+        mode_change (um, mode);
 }
 
 static void
@@ -383,6 +291,8 @@ update_password_match (UmPasswordDialog *um)
 
         if (strlen (password) > 0 && strlen (verify) > 0) {
                 if (strcmp (password, verify) != 0) {
+                        gtk_label_set_label (GTK_LABEL (um->password_hint),
+                                             _("The passwords do not match."));
                         set_entry_validation_error (GTK_ENTRY (um->verify_entry),
                                                     _("Passwords do not match"));
                 }
@@ -392,42 +302,62 @@ update_password_match (UmPasswordDialog *um)
         }
 }
 
-static void
-password_entry_changed (GtkEntry         *entry,
-                        GParamSpec       *pspec,
-                        UmPasswordDialog *um)
+static gboolean
+password_entry_timeout (UmPasswordDialog *um)
 {
         update_password_strength (um);
         update_sensitivity (um);
         update_password_match (um);
+
+        um->password_entry_timeout_id = 0;
+
+        return FALSE;
+}
+
+static void
+password_entry_changed (GtkEntry         *entry,
+                      GParamSpec       *pspec,
+                      UmPasswordDialog *um)
+{
+        if (um->password_entry_timeout_id != 0) {
+                g_source_remove (um->password_entry_timeout_id);
+                um->password_entry_timeout_id = 0;
+        }
+
+        clear_entry_validation_error (GTK_ENTRY (entry));
+
+        um->password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
+                                                     (GSourceFunc) password_entry_timeout,
+                                                     um);
 }
 
 static gboolean
 password_entry_focus_out (GtkWidget        *entry,
-                          GdkEventFocus    *event,
-                          UmPasswordDialog *um)
+                        GdkEventFocus    *event,
+                        UmPasswordDialog *um)
 {
-        update_password_match (um);
+        if (um->password_entry_timeout_id != 0) {
+                g_source_remove (um->password_entry_timeout_id);
+                um->password_entry_timeout_id = 0;
+        }
+
+        password_entry_timeout (um);
+
         return FALSE;
 }
 
 static void
-verify_entry_changed (GtkEntry         *entry,
-                      GParamSpec       *pspec,
-                      UmPasswordDialog *um)
+begin_action (UmPasswordDialog *um)
 {
-        clear_entry_validation_error (GTK_ENTRY (entry));
-        update_password_strength (um);
-        update_sensitivity (um);
+        gtk_widget_show (um->old_password_spinner);
+        gtk_spinner_start (GTK_SPINNER (um->old_password_spinner));
 }
 
-static gboolean
-verify_entry_focus_out (GtkWidget        *entry,
-                        GdkEventFocus    *event,
-                        UmPasswordDialog *um)
+static void
+finish_action (UmPasswordDialog *um)
 {
-        update_password_match (um);
-        return FALSE;
+        gtk_widget_hide (um->old_password_spinner);
+        gtk_spinner_stop (GTK_SPINNER (um->old_password_spinner));
 }
 
 static void
@@ -435,6 +365,8 @@ auth_cb (PasswdHandler    *handler,
          GError           *error,
          UmPasswordDialog *um)
 {
+        finish_action (um);
+
         if (error) {
                 um->old_password_ok = FALSE;
                 set_entry_validation_error (GTK_ENTRY (um->old_password_entry),
@@ -443,9 +375,26 @@ auth_cb (PasswdHandler    *handler,
         else {
                 um->old_password_ok = TRUE;
                 clear_entry_validation_error (GTK_ENTRY (um->old_password_entry));
+                gtk_widget_show (um->old_password_checkmark);
         }
 
         update_sensitivity (um);
+}
+
+static gboolean
+old_password_entry_timeout (UmPasswordDialog *um)
+{
+        const char *text;
+
+        text = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
+        if (strlen (text) > 0 && !um->old_password_ok) {
+                begin_action (um);
+                passwd_authenticate (um->passwd_handler, text, (PasswdCallback)auth_cb, um);
+        }
+
+        um->old_password_entry_timeout_id = 0;
+
+        return FALSE;
 }
 
 static gboolean
@@ -453,54 +402,46 @@ old_password_entry_focus_out (GtkWidget        *entry,
                               GdkEventFocus    *event,
                               UmPasswordDialog *um)
 {
-        const char *text;
-
-        text = gtk_entry_get_text (GTK_ENTRY (entry));
-        if (strlen (text) > 0) {
-                passwd_authenticate (um->passwd_handler, text,
-                                     (PasswdCallback)auth_cb, um);
+        if (um->old_password_entry_timeout_id != 0) {
+                g_source_remove (um->old_password_entry_timeout_id);
+                um->old_password_entry_timeout_id = 0;
         }
+
+        old_password_entry_timeout (um);
 
         return FALSE;
 }
-
-static void
-old_password_entry_activate (GtkWidget        *entry,
-                             UmPasswordDialog *um)
-{
-        const char *text;
-
-        text = gtk_entry_get_text (GTK_ENTRY (entry));
-        if (strlen (text) > 0) {
-                passwd_authenticate (um->passwd_handler, text,
-                                     (PasswdCallback)auth_cb, um);
-        }
-}
-
 
 static void
 old_password_entry_changed (GtkEntry         *entry,
                             GParamSpec       *pspec,
                             UmPasswordDialog *um)
 {
+        if (um->old_password_entry_timeout_id != 0) {
+                g_source_remove (um->old_password_entry_timeout_id);
+                um->old_password_entry_timeout_id = 0;
+        }
+
+        gtk_widget_hide (um->old_password_checkmark);
         clear_entry_validation_error (GTK_ENTRY (entry));
         um->old_password_ok = FALSE;
         update_sensitivity (um);
+
+        um->old_password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
+                                                           (GSourceFunc) old_password_entry_timeout,
+                                                           um);
 }
 
-void
-um_password_dialog_set_privileged (UmPasswordDialog *um,
-                                   gboolean          privileged)
+static void
+hint_allocate (GtkWidget        *label,
+               GtkAllocation    *allocation,
+               UmPasswordDialog *um)
 {
-        if (privileged) {
-                gtk_widget_set_visible (um->action_label, TRUE);
-                gtk_widget_set_visible (um->action_combo, TRUE);
-        }
-        else {
-                gtk_combo_box_set_active (GTK_COMBO_BOX (um->action_combo), 0);
-                gtk_widget_set_visible (um->action_label, FALSE);
-                gtk_widget_set_visible (um->action_combo, FALSE);
-        }
+        gint height;
+
+        /* Allocate enought space for hint and don't change */
+        height = gtk_widget_get_allocated_height (um->strength_indicator_label);
+        gtk_widget_set_size_request (label, allocation->width, height * 3);
 }
 
 UmPasswordDialog *
@@ -510,8 +451,6 @@ um_password_dialog_new (void)
         GError *error;
         UmPasswordDialog *um;
         GtkWidget *widget;
-        const char *old_label;
-        char *label;
         gint len;
 
         builder = gtk_builder_new ();
@@ -527,19 +466,16 @@ um_password_dialog_new (void)
 
         um = g_new0 (UmPasswordDialog, 1);
 
-        um->action_label = (GtkWidget *) gtk_builder_get_object (builder, "action-label");
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "action-combo");
-        g_signal_connect (widget, "changed",
-                          G_CALLBACK (action_changed), um);
-        um->action_combo = widget;
+        um->action_radio_box = (GtkWidget *) gtk_builder_get_object (builder, "action-radio-box");
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "action-now-radio");
+        g_signal_connect (widget, "toggled", G_CALLBACK (action_changed), um);
+        um->action_now_radio = widget;
+        um->action_login_radio = (GtkWidget *) gtk_builder_get_object (builder, "action-login-radio");
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "dialog");
         g_signal_connect (widget, "delete-event",
                           G_CALLBACK (gtk_widget_hide_on_delete), NULL);
         um->dialog = widget;
-
-        um->user_icon = (GtkWidget *) gtk_builder_get_object (builder, "user-icon");
-        um->user_name = (GtkWidget *) gtk_builder_get_object (builder, "user-name");
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "cancel-button");
         g_signal_connect (widget, "clicked",
@@ -551,31 +487,12 @@ um_password_dialog_new (void)
         gtk_widget_grab_default (widget);
         um->ok_button = widget;
 
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "password-normal-strength-hints-label");
-        old_label = gtk_label_get_label (GTK_LABEL (widget));
-        label = g_strdup_printf ("<a href=\"%s\">%s</a>",
-                                 "help:gnome-help/user-goodpassword",
-                                 old_label);
-        gtk_label_set_markup (GTK_LABEL (widget), label);
-        g_free (label);
-
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "show-password-checkbutton");
-        g_signal_connect (widget, "toggled",
-                          G_CALLBACK (show_password_toggled), um);
-        um->show_password_button = widget;
-
         widget = (GtkWidget *) gtk_builder_get_object (builder, "password-entry");
         g_signal_connect (widget, "notify::text",
                           G_CALLBACK (password_entry_changed), um);
         g_signal_connect_after (widget, "focus-out-event",
                                 G_CALLBACK (password_entry_focus_out), um);
         gtk_entry_set_visibility (GTK_ENTRY (widget), FALSE);
-
-        g_signal_connect (widget, "icon-press",
-                          G_CALLBACK (activate_icon), um);
-        g_signal_connect (widget, "populate-popup",
-                          G_CALLBACK (populate_menu), um);
-
         um->password_entry = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "old-password-entry");
@@ -583,32 +500,30 @@ um_password_dialog_new (void)
                                 G_CALLBACK (old_password_entry_focus_out), um);
         g_signal_connect (widget, "notify::text",
                           G_CALLBACK (old_password_entry_changed), um);
-        g_signal_connect (widget, "activate",
-                          G_CALLBACK (old_password_entry_activate), um);
         um->old_password_entry = widget;
         um->old_password_label = (GtkWidget *) gtk_builder_get_object (builder, "old-password-label");
+        um->old_password_spinner = (GtkWidget *) gtk_builder_get_object (builder, "old-password-spinner");
+        um->old_password_checkmark = (GtkWidget *) gtk_builder_get_object (builder, "old-password-checkmark");
+        um->old_password_entry_timeout_id = 0;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "verify-entry");
         g_signal_connect (widget, "notify::text",
-                          G_CALLBACK (verify_entry_changed), um);
+                          G_CALLBACK (password_entry_changed), um);
         g_signal_connect_after (widget, "focus-out-event",
-                                G_CALLBACK (verify_entry_focus_out), um);
+                                G_CALLBACK (password_entry_focus_out), um);
         um->verify_entry = widget;
-
-        len = 0;
-        len = MAX (len, strlen (C_("Password strength", "Too short")));
-        len = MAX (len, strlen (C_("Password strength", "Weak")));
-        len = MAX (len, strlen (C_("Password strength", "Fair")));
-        len = MAX (len, strlen (C_("Password strength", "Good")));
-        len = MAX (len, strlen (C_("Password strength", "Strong")));
-        len += 2;
+        um->password_entry_timeout_id = 0;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
+        len = pw_strenght_hint_get_width_chars ();
         gtk_label_set_width_chars (GTK_LABEL (widget), len);
+        um->strength_indicator_label = widget;
 
         um->strength_indicator = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator");
 
-        um->strength_indicator_label = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "password-hint");
+        g_signal_connect (widget, "size-allocate", G_CALLBACK (hint_allocate), um);
+        um->password_hint = widget;
 
         g_object_unref (builder);
 
@@ -620,50 +535,28 @@ um_password_dialog_free (UmPasswordDialog *um)
 {
         gtk_widget_destroy (um->dialog);
 
-        if (um->user)
-                g_object_unref (um->user);
+        g_clear_object (&um->user);
 
         if (um->passwd_handler)
                 passwd_destroy (um->passwd_handler);
 
-        g_free (um);
-}
-
-static gboolean
-visible_func (GtkTreeModel     *model,
-              GtkTreeIter      *iter,
-              UmPasswordDialog *um)
-{
-        if (um->user) {
-                gint mode; 
-                gboolean locked = act_user_get_locked (um->user);
-
-                gtk_tree_model_get (model, iter, 1, &mode, -1);
-
-                /* We don't allow the current user to disable their own account,
-                 * as this can lead to them being 'locked out'.
-                 */
-                if (mode == UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT &&
-                    (locked || act_user_get_uid (um->user) == getuid ()
-                     || would_demote_only_admin (um->user)))
-                        return FALSE;
-
-                if (mode == UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT && !locked)
-                        return FALSE;
-
-                return TRUE;
+        if (um->old_password_entry_timeout_id != 0) {
+                g_source_remove (um->old_password_entry_timeout_id);
+                um->old_password_entry_timeout_id = 0;
+        }
+ 
+        if (um->password_entry_timeout_id != 0) {
+                g_source_remove (um->password_entry_timeout_id);
+                um->password_entry_timeout_id = 0;
         }
 
-        return TRUE;
+        g_free (um);
 }
 
 void
 um_password_dialog_set_user (UmPasswordDialog *um,
                              ActUser          *user)
 {
-        GdkPixbuf *pixbuf;
-        GtkTreeModel *model;
-
         if (um->user) {
                 g_object_unref (um->user);
                 um->user = NULL;
@@ -671,24 +564,23 @@ um_password_dialog_set_user (UmPasswordDialog *um,
         if (user) {
                 um->user = g_object_ref (user);
 
-                pixbuf = render_user_icon (user, UM_ICON_STYLE_NONE, 48);
-                gtk_image_set_from_pixbuf (GTK_IMAGE (um->user_icon), pixbuf);
-                g_object_unref (pixbuf);
-
-                gtk_label_set_label (GTK_LABEL (um->user_name),
-                                     act_user_get_real_name (user));
-
                 gtk_entry_set_text (GTK_ENTRY (um->password_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->old_password_entry), "");
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button), FALSE);
-                if (act_user_get_uid (um->user) == getuid () &&
-                    act_user_get_password_mode (um->user) == ACT_USER_PASSWORD_MODE_REGULAR) {
+                gtk_widget_hide (um->old_password_checkmark);
+                gtk_widget_hide (um->old_password_spinner);
+
+                if (act_user_get_uid (um->user) == getuid ()) {
+                        mode_change (um, ACT_USER_PASSWORD_MODE_REGULAR);
+                        gtk_widget_hide (um->action_radio_box);
                         gtk_widget_show (um->old_password_label);
                         gtk_widget_show (um->old_password_entry);
                         um->old_password_ok = FALSE;
                 }
                 else {
+                        mode_change (um, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+                        gtk_widget_show (um->action_radio_box);
+
                         gtk_widget_hide (um->old_password_label);
                         gtk_widget_hide (um->old_password_entry);
                         um->old_password_ok = TRUE;
@@ -699,18 +591,6 @@ um_password_dialog_set_user (UmPasswordDialog *um,
                         um->passwd_handler = passwd_init ();
                 }
         }
-
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->action_combo));
-        if (!GTK_IS_TREE_MODEL_FILTER (model)) {
-                model = gtk_tree_model_filter_new (model, NULL);
-                gtk_combo_box_set_model (GTK_COMBO_BOX (um->action_combo), model);
-                gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (model),
-                                                        (GtkTreeModelFilterVisibleFunc) visible_func,
-                                                        um, NULL);
-        }
-
-        gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
-        gtk_combo_box_set_active (GTK_COMBO_BOX (um->action_combo), 0);
 }
 
 void
