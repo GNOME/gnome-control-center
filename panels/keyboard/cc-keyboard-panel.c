@@ -37,7 +37,7 @@ struct _CcKeyboardPanelPrivate
 
 enum {
   PROP_0,
-  PROP_ARGV
+  PROP_PARAMETERS
 };
 
 enum {
@@ -81,14 +81,32 @@ cc_keyboard_panel_set_property (GObject      *object,
 
   switch (property_id)
     {
-    case PROP_ARGV: {
-      gchar **args;
+    case PROP_PARAMETERS: {
+      GVariant *parameters, *v;
+      const gchar *page, *section;
 
-      args = g_value_get_boxed (value);
-
-      if (args && args[0]) {
-        cc_keyboard_panel_set_page (panel, args[0], args[1]);
-      }
+      parameters = g_value_get_variant (value);
+      if (!parameters)
+        break;
+      page = section = NULL;
+      switch (g_variant_n_children (parameters))
+        {
+          case 2:
+            g_variant_get_child (parameters, 1, "v", &v);
+            section = g_variant_get_string (v, NULL);
+            g_variant_unref (v);
+            /* fall-through */
+          case 1:
+            g_variant_get_child (parameters, 0, "v", &v);
+            page = g_variant_get_string (v, NULL);
+            g_variant_unref (v);
+            cc_keyboard_panel_set_page (panel, page, section);
+            /* fall-through */
+          case 0:
+            break;
+          default:
+            g_warning ("Unexpected parameters found, ignore request");
+        }
       break;
     }
 
@@ -164,7 +182,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   object_class->dispose = cc_keyboard_panel_dispose;
   object_class->finalize = cc_keyboard_panel_finalize;
 
-  g_object_class_override_property (object_class, PROP_ARGV, "argv");
+  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static void

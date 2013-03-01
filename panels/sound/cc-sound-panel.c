@@ -38,7 +38,7 @@ CC_PANEL_REGISTER (CcSoundPanel, cc_sound_panel)
 
 enum {
         PROP_0,
-        PROP_ARGV
+        PROP_PARAMETERS
 };
 
 static void cc_sound_panel_finalize (GObject *object);
@@ -52,13 +52,15 @@ cc_sound_panel_set_property (GObject      *object,
         CcSoundPanel *self = CC_SOUND_PANEL (object);
 
         switch (property_id) {
-        case PROP_ARGV: {
-                gchar **args;
+        case PROP_PARAMETERS: {
+                GVariant *parameters;
 
-                args = g_value_get_boxed (value);
-
-                if (args && args[0]) {
-                        gvc_mixer_dialog_set_page (self->dialog, args[0]);
+                parameters = g_value_get_variant (value);
+                if (parameters && g_variant_n_children (parameters) > 0) {
+                        GVariant *v;
+                        g_variant_get_child (parameters, 0, "v", &v);
+                        gvc_mixer_dialog_set_page (self->dialog, g_variant_get_string (v, NULL));
+                        g_variant_unref (v);
                 }
                 break;
         }
@@ -84,7 +86,7 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
         object_class->finalize = cc_sound_panel_finalize;
         object_class->set_property = cc_sound_panel_set_property;
 
-        g_object_class_override_property (object_class, PROP_ARGV, "argv");
+        g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static void

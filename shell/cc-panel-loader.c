@@ -200,7 +200,7 @@ ensure_panel_types (void)
 CcPanel *
 cc_panel_loader_load_by_name (CcShell     *shell,
                               const char  *name,
-                              const char **argv)
+                              GVariant    *parameters)
 {
   GType (*get_type) (void);
 
@@ -211,7 +211,7 @@ cc_panel_loader_load_by_name (CcShell     *shell,
 
   return g_object_new (get_type (),
                        "shell", shell,
-                       "argv", argv,
+                       "parameters", parameters,
                        NULL);
 }
 

@@ -102,7 +102,7 @@ enum {
 
 enum {
         PROP_0,
-        PROP_ARGV
+        PROP_PARAMETERS
 };
 
 static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id, GtkTreeIter *iter_out);
@@ -163,6 +163,23 @@ verify_argv (CcNetworkPanel *self,
 	}
 }
 
+static GPtrArray *
+variant_av_to_string_array (GVariant *array)
+{
+        GVariantIter iter;
+        GVariant *v;
+        GPtrArray *strv;
+        gsize count;
+        count = g_variant_iter_init (&iter, array);
+        strv = g_ptr_array_sized_new (count + 1);
+        while (g_variant_iter_next (&iter, "v", &v)) {
+                g_ptr_array_add (strv, (gpointer *)g_variant_get_string (v, NULL));
+                g_variant_unref (v);
+        }
+        g_ptr_array_add (strv, NULL); /* NULL-terminate the strv data array */
+        return strv;
+}
+
 static void
 cc_network_panel_set_property (GObject      *object,
                                guint         property_id,
@@ -173,14 +190,18 @@ cc_network_panel_set_property (GObject      *object,
         CcNetworkPanelPrivate *priv = self->priv;
 
         switch (property_id) {
-        case PROP_ARGV: {
-                gchar **args;
+        case PROP_PARAMETERS: {
+                GVariant *parameters;
 
                 reset_command_line_args (self);
 
-                args = g_value_get_boxed (value);
+                parameters = g_value_get_variant (value);
+                if (parameters) {
+                        GPtrArray *array;
+                        const gchar **args;
+                        array = variant_av_to_string_array (parameters);
+                        args = array->pdata;
 
-                if (args) {
                         g_debug ("Invoked with operation %s", args[0]);
 
                         if (args[0])
@@ -192,9 +213,10 @@ cc_network_panel_set_property (GObject      *object,
 
                         if (verify_argv (self, (const char **) args) == FALSE) {
                                 reset_command_line_args (self);
+                                g_ptr_array_unref (array);
                                 return;
                         }
-
+                        g_ptr_array_unref (array);
                         g_debug ("Calling handle_argv() after setting property");
                         handle_argv (self);
                 }
@@ -377,7 +399,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         object_class->finalize = cc_network_panel_finalize;
         object_class->constructed = cc_network_panel_constructed;
 
-        g_object_class_override_property (object_class, PROP_ARGV, "argv");
+        g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static NetObject *

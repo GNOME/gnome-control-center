@@ -32,7 +32,7 @@ void     cc_panel_loader_fill_model     (CcShellModel  *model);
 GList   *cc_panel_loader_get_panels     (void);
 CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
                                          const char    *name,
-                                         const char   **argv);
+                                         GVariant      *parameters);
 
 G_END_DECLS
 

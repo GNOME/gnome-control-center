@@ -58,7 +58,7 @@ enum
 {
     PROP_0,
     PROP_SHELL,
-    PROP_ARGV
+    PROP_PARAMETERS
 };
 
 G_DEFINE_ABSTRACT_TYPE (CcPanel, cc_panel, GTK_TYPE_BIN)
@@ -80,11 +80,12 @@ cc_panel_set_property (GObject      *object,
       panel->priv->shell = g_value_get_object (value);
       break;
 
-    case PROP_ARGV:
+    case PROP_PARAMETERS:
       {
-        gchar **argv = g_value_get_boxed (value);
-        if (argv && argv[0])
-          g_warning ("Ignoring additional argument %s", argv[0]);
+        GVariant *parameters = g_value_get_variant (value);
+
+        if (parameters)
+          g_warning ("Ignoring additional parameters");
         break;
       }
     default:
@@ -208,12 +209,13 @@ cc_panel_class_init (CcPanelClass *klass)
                                | G_PARAM_CONSTRUCT_ONLY);
   g_object_class_install_property (object_class, PROP_SHELL, pspec);
 
-  pspec = g_param_spec_boxed ("argv",
-                              "Argument vector",
-                              "Additional arguments passed on the command line",
-                              G_TYPE_STRV,
-                              G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
-  g_object_class_install_property (object_class, PROP_ARGV, pspec);
+  pspec = g_param_spec_variant ("parameters",
+                                "Structured parameters",
+                                "Additional parameters passed externally (ie. command line, dbus activation)",
+                                G_VARIANT_TYPE ("av"),
+                                NULL,
+                                G_PARAM_WRITABLE);
+  g_object_class_install_property (object_class, PROP_PARAMETERS, pspec);
 }
 
 static void

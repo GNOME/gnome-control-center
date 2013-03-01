@@ -108,7 +108,7 @@ enum
 
 static gboolean cc_window_set_active_panel_from_id (CcShell      *shell,
                                                     const gchar  *start_id,
-                                                    const gchar **argv,
+                                                    GVariant     *parameters,
                                                     GError      **err);
 
 static const gchar *
@@ -136,7 +136,7 @@ get_icon_name_from_g_icon (GIcon *gicon)
 static gboolean
 activate_panel (CcWindow           *self,
                 const gchar        *id,
-                const gchar       **argv,
+                GVariant           *parameters,
                 const gchar        *name,
                 GIcon              *gicon)
 {
@@ -147,7 +147,7 @@ activate_panel (CcWindow           *self,
   if (!id)
     return FALSE;
 
-  priv->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, argv));
+  priv->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (priv->current_panel));
   gtk_widget_show (priv->current_panel);
 
@@ -933,7 +933,7 @@ _shell_embed_widget_in_header (CcShell      *shell,
 static gboolean
 cc_window_set_active_panel_from_id (CcShell      *shell,
                                     const gchar  *start_id,
-                                    const gchar **argv,
+                                    GVariant     *parameters,
                                     GError      **err)
 {
   GtkTreeIter iter;
@@ -943,10 +943,10 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
   CcWindowPrivate *priv = CC_WINDOW (shell)->priv;
   GtkWidget *old_panel;
 
-  /* When loading the same panel again, just set the argv */
+  /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (priv->current_panel_id, start_id) == 0)
     {
-      g_object_set (G_OBJECT (priv->current_panel), "argv", argv, NULL);
+      g_object_set (G_OBJECT (priv->current_panel), "parameters", parameters, NULL);
       return TRUE;
     }
 
@@ -994,7 +994,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
     }
-  else if (activate_panel (CC_WINDOW (shell), start_id, argv,
+  else if (activate_panel (CC_WINDOW (shell), start_id, parameters,
                            name, gicon) == FALSE)
     {
       /* Failed to activate the panel for some reason,
@@ -1020,11 +1020,11 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
 static gboolean
 _shell_set_active_panel_from_id (CcShell      *shell,
                                  const gchar  *start_id,
-                                 const gchar **argv,
+                                 GVariant     *parameters,
                                  GError      **err)
 {
   add_current_panel_to_history (shell, start_id);
-  return cc_window_set_active_panel_from_id (shell, start_id, argv, err);
+  return cc_window_set_active_panel_from_id (shell, start_id, parameters, err);
 }
 
 static GtkWidget *

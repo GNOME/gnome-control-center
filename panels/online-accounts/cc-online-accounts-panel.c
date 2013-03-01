@@ -91,7 +91,7 @@ CC_PANEL_REGISTER (CcGoaPanel, cc_goa_panel);
 
 enum {
   PROP_0,
-  PROP_ARGV
+  PROP_PARAMETERS
 };
 
 static void
@@ -102,14 +102,29 @@ cc_goa_panel_set_property (GObject *object,
 {
   switch (property_id)
     {
-      case PROP_ARGV:
+      case PROP_PARAMETERS:
         {
-          gchar **args;
+          GVariant *parameters, *v;
+          const gchar *first_arg = NULL;
 
-          args = g_value_get_boxed (value);
+          parameters = g_value_get_variant (value);
+          if (parameters == NULL)
+            return;
 
-          if (args != NULL && *args != '\0')
-            select_account_by_id (CC_GOA_PANEL (object), args[0]);
+          if (g_variant_n_children (parameters) > 0)
+            {
+                g_variant_get_child (parameters, 0, "v", &v);
+                if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+                  first_arg = g_variant_get_string (v, NULL);
+                else
+                  g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
+                             (gchar *)g_variant_get_type (v));
+                g_variant_unref (v);
+            }
+
+          if (first_arg != NULL)
+            select_account_by_id (CC_GOA_PANEL (object), first_arg);
+
           return;
         }
     }
@@ -280,7 +295,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   object_class->set_property = cc_goa_panel_set_property;
   object_class->finalize = cc_goa_panel_finalize;
 
-  g_object_class_override_property (object_class, PROP_ARGV, "argv");
+  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
