@@ -86,6 +86,13 @@ endif
 
 AM_CPPFLAGS = -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
+# Dbus service file
+servicefiledir = $(datadir)/dbus-1/services
+servicefile_in_files = org.gnome.ControlCenter.service.in
+servicefile_DATA = $(servicefile_in_files:.service.in=.service)
+$(servicefile_DATA): $(servicefile_in_files) Makefile
+	$(AM_V_GEN) sed -e 's|[@]bindir[@]|$(bindir)|' $< > $@
+
 sysdir = $(datadir)/applications
 sys_in_files = gnome-control-center.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
@@ -99,10 +106,11 @@ completions/gnome-control-center: completions/gnome-control-center.in list-panel
 
 EXTRA_DIST =					\
 	gnome-control-center.desktop.in.in	\
+	$(servicefile_in_files)                 \
 	$(completion_in_files)			\
 	list-panel.sh
 
-CLEANFILES = $(BUILT_SOURCES) $(completion_DATA)
+CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
 noinst_PROGRAMS = test-hostname
