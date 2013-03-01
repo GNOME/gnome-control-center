@@ -71,21 +71,21 @@ get_casefolded_terms (char **terms)
 }
 
 static gboolean
-matches_multiple_terms (GtkTreeModel  *model,
-                        GtkTreeIter   *iter,
-                        char         **terms)
+matches_all_terms (GtkTreeModel  *model,
+                   GtkTreeIter   *iter,
+                   char         **terms)
 {
   int i;
 
   for (i = 0; terms[i]; i++)
     {
-      if (cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
-                                              iter,
-                                              terms[i]))
-        return TRUE;
+      if (!cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
+                                               iter,
+                                               terms[i]))
+        return FALSE;
     }
 
-  return FALSE;
+  return TRUE;
 }
 
 static GtkTreeModel *
@@ -116,8 +116,7 @@ handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
   ok = gtk_tree_model_get_iter_first (model, &iter);
   while (ok)
     {
-      if (matches_multiple_terms (model, &iter,
-                                  casefolded_terms))
+      if (matches_all_terms (model, &iter, casefolded_terms))
         {
           g_ptr_array_add (results,
                            gtk_tree_model_get_string_from_iter (model,
@@ -159,7 +158,7 @@ handle_get_subsearch_result_set (CcShellSearchProvider2  *skeleton,
     {
       if (gtk_tree_model_get_iter_from_string (model, &iter,
                                                previous_results[i]) &&
-          matches_multiple_terms (model, &iter, casefolded_terms))
+          matches_all_terms (model, &iter, casefolded_terms))
         {
           g_ptr_array_add (results, g_strdup (previous_results[i]));
         }
