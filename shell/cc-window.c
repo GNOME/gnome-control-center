@@ -556,12 +556,24 @@ model_filter_func (GtkTreeModel    *model,
                    GtkTreeIter     *iter,
                    CcWindowPrivate *priv)
 {
+  char **terms, **t;
+  gboolean matches;
+
   if (!priv->filter_string)
     return FALSE;
 
-  return cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
-                                             iter,
-                                             priv->filter_string);
+  terms = g_strsplit (priv->filter_string, " ", -1);
+  for (t = terms; *t; t++)
+    {
+      matches = cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
+                                                    iter,
+                                                    *t);
+      if (!matches)
+        break;
+    }
+  g_strfreev (terms);
+
+  return matches;
 }
 
 static gboolean
