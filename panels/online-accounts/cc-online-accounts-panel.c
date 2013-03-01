@@ -86,6 +86,9 @@ static void on_account_changed (GoaClient  *client,
 
 static gboolean select_account_by_id (CcGoaPanel    *panel,
                                       const gchar *account_id);
+static void     add_account          (CcGoaPanel *panel,
+                                      GoaProvider *provider,
+                                      GVariant *preseed);
 
 CC_PANEL_REGISTER (CcGoaPanel, cc_goa_panel);
 
@@ -93,6 +96,56 @@ enum {
   PROP_0,
   PROP_PARAMETERS
 };
+
+static void
+command_add (CcGoaPanel *panel,
+             GVariant   *parameters)
+{
+  GVariant *v, *preseed = NULL;
+  GoaProvider *provider = NULL;
+  const gchar *provider_name = NULL;
+
+  g_assert (panel != NULL);
+  g_assert (parameters != NULL);
+
+  switch (g_variant_n_children (parameters))
+    {
+      case 4:
+        g_variant_get_child (parameters, 3, "v", &preseed);
+      case 3:
+        g_variant_get_child (parameters, 2, "v", &v);
+        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+          provider_name = g_variant_get_string (v, NULL);
+        else
+          g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
+                     (gchar *)g_variant_get_type (v));
+        g_variant_unref (v);
+      case 2:
+        /* Nothing to see here, move along */
+      case 1:
+        /* No flag to handle here */
+        break;
+      default:
+        g_warning ("Unexpected parameters found, ignore request");
+        goto out;
+    }
+
+  if (provider_name != NULL)
+    {
+      provider = goa_provider_get_for_provider_type (provider_name);
+      if (provider == NULL)
+        {
+          g_warning ("Unable to get a provider for type '%s'", provider_name);
+          goto out;
+        }
+    }
+
+  add_account (panel, provider, preseed);
+
+out:
+  g_clear_object (&provider);
+  g_clear_pointer (&preseed, g_variant_unref);
+}
 
 static void
 cc_goa_panel_set_property (GObject *object,
@@ -122,7 +175,9 @@ cc_goa_panel_set_property (GObject *object,
                 g_variant_unref (v);
             }
 
-          if (first_arg != NULL)
+          if (g_strcmp0 (first_arg, "add") == 0)
+            command_add (CC_GOA_PANEL (object), parameters);
+          else if (first_arg != NULL)
             select_account_by_id (CC_GOA_PANEL (object), first_arg);
 
           return;
@@ -628,17 +683,16 @@ on_model_row_inserted (GtkTreeModel *tree_model,
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
-add_account (CcGoaPanel *panel)
+add_account (CcGoaPanel *panel,
+             GoaProvider *provider,
+             GVariant *preseed)
 {
   GtkWindow *parent;
   GtkWidget *dialog;
-  gint response;
   GList *providers;
   GList *l;
   GoaObject *object;
   GError *error;
-
-  providers = NULL;
 
   parent = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
 
@@ -649,18 +703,16 @@ add_account (CcGoaPanel *panel)
   for (l = providers; l != NULL; l = l->next)
     {
       GoaProvider *provider;
-
       provider = GOA_PROVIDER (l->data);
+
       goa_panel_add_account_dialog_add_provider (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), provider);
     }
 
+  goa_panel_add_account_dialog_set_preseed_data (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog),
+                                                 provider, preseed);
+
   gtk_widget_show_all (dialog);
-  response = gtk_dialog_run (GTK_DIALOG (dialog));
-  if (response != GTK_RESPONSE_OK)
-    {
-      gtk_widget_destroy (dialog);
-      goto out;
-    }
+  goa_panel_add_account_dialog_run (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog));
 
   error = NULL;
   object = goa_panel_add_account_dialog_get_account (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), &error);
@@ -703,7 +755,6 @@ add_account (CcGoaPanel *panel)
       g_error_free (error);
     }
 
- out:
   g_list_free_full (providers, g_object_unref);
 }
 
@@ -714,7 +765,7 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
                                gpointer       user_data)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  add_account (panel);
+  add_account (panel, NULL, NULL);
 }
 
 static void
@@ -795,5 +846,5 @@ on_add_button_clicked (GtkButton *button,
                        gpointer   user_data)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  add_account (panel);
+  add_account (panel, NULL, NULL);
 }

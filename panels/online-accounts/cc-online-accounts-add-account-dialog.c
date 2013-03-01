@@ -45,6 +45,7 @@ struct _GoaPanelAddAccountDialogPrivate
   GError *error;
   GoaClient *client;
   GoaObject *object;
+  GoaProvider *provider;
   GtkListStore *list_store;
   GtkWidget *contacts_grid;
   GtkWidget *mail_grid;
@@ -72,7 +73,8 @@ enum
 G_DEFINE_TYPE (GoaPanelAddAccountDialog, goa_panel_add_account_dialog, GTK_TYPE_DIALOG)
 
 static void
-add_account_dialog_add_account (GoaPanelAddAccountDialog *add_account, GoaProvider *provider)
+add_account_dialog_add_account (GoaPanelAddAccountDialog *add_account,
+                                GoaProvider *provider)
 {
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
   GList *children;
@@ -91,6 +93,7 @@ add_account_dialog_add_account (GoaPanelAddAccountDialog *add_account, GoaProvid
     }
   g_list_free (children);
 
+  /* This spins gtk_dialog_run() */
   priv->object = goa_provider_add_account (provider,
                                            priv->client,
                                            GTK_DIALOG (add_account),
@@ -111,7 +114,6 @@ list_box_child_activated_cb (GoaPanelAddAccountDialog *add_account, GtkWidget *c
     }
 
   add_account_dialog_add_account (add_account, provider);
-  gtk_dialog_response (GTK_DIALOG (add_account), GTK_RESPONSE_OK);
 }
 
 static void
@@ -240,6 +242,7 @@ goa_panel_add_account_dialog_dispose (GObject *object)
 
   g_clear_object (&priv->object);
   g_clear_object (&priv->client);
+  g_clear_object (&priv->provider);
 
   G_OBJECT_CLASS (goa_panel_add_account_dialog_parent_class)->dispose (object);
 }
@@ -378,6 +381,22 @@ goa_panel_add_account_dialog_new (GoaClient *client)
 }
 
 void
+goa_panel_add_account_dialog_set_preseed_data (GoaPanelAddAccountDialog *add_account,
+                                               GoaProvider *provider,
+                                               GVariant *preseed)
+{
+  GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
+
+  g_clear_object (&priv->provider);
+
+  if (provider != NULL)
+    {
+      priv->provider = g_object_ref (provider);
+      goa_provider_set_preseed_data (provider, preseed);
+    }
+}
+
+void
 goa_panel_add_account_dialog_add_provider (GoaPanelAddAccountDialog *add_account, GoaProvider *provider)
 {
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
@@ -429,6 +448,16 @@ goa_panel_add_account_dialog_add_provider (GoaPanelAddAccountDialog *add_account
       gtk_widget_set_no_show_all (group_grid, FALSE);
       gtk_widget_show_all (group_grid);
     }
+}
+
+void
+goa_panel_add_account_dialog_run (GoaPanelAddAccountDialog *add_account)
+{
+  GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
+  if (priv->provider != NULL)
+    add_account_dialog_add_account (add_account, priv->provider);
+  else
+    gtk_dialog_run (GTK_DIALOG (add_account));
 }
 
 GoaObject *

@@ -54,6 +54,10 @@ GType                  goa_panel_add_account_dialog_get_type               (void
 GtkWidget             *goa_panel_add_account_dialog_new                    (GoaClient *client);
 void                   goa_panel_add_account_dialog_add_provider           (GoaPanelAddAccountDialog *add_account,
                                                                             GoaProvider              *provider);
+void                   goa_panel_add_account_dialog_set_preseed_data       (GoaPanelAddAccountDialog *add_account,
+                                                                            GoaProvider              *provider,
+                                                                            GVariant                 *preseed);
+void                   goa_panel_add_account_dialog_run                    (GoaPanelAddAccountDialog *add_account);
 GoaObject             *goa_panel_add_account_dialog_get_account            (GoaPanelAddAccountDialog *add_account,
                                                                             GError                   **error);
 
