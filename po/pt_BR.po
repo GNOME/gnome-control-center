@@ -22,15 +22,15 @@
 # Antonio Fernandes C. Neto <fernandes@pelivre.org>, 2010.
 # Hugo Vaz Sampaio <hvazsampaio@gmail.com>, 2010.
 # Enrico Nicoletto <liverig@gmail.com>, 2012.
-# Rafael Ferreira <rafael.f.f1@gmail.com>, 2012.
 # Djavan Fagundes <djavan@comum.org>, 2012.
+# Rafael Ferreira <rafael.f.f1@gmail.com>, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-25 23:17+0000\n"
-"PO-Revision-Date: 2013-02-26 02:00-0300\n"
+"POT-Creation-Date: 2013-02-28 12:46+0000\n"
+"PO-Revision-Date: 2013-02-28 21:02-0300\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -873,13 +873,13 @@ msgstr "China"
 msgid "Other…"
 msgstr "Outro…"
 
-#: ../panels/common/cc-language-chooser.c:165
-#: ../panels/region/cc-format-chooser.c:256
+#: ../panels/common/cc-language-chooser.c:169
+#: ../panels/region/cc-format-chooser.c:259
 #: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Mais..."
 
-#: ../panels/common/cc-language-chooser.c:174
+#: ../panels/common/cc-language-chooser.c:178
 msgid "No languages found"
 msgstr "Nenhum idioma encontrado"
 
@@ -3582,35 +3582,40 @@ msgstr "Mostrar na tela de bloqueio"
 msgid "Add Account"
 msgstr "Adicionar conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:357
 msgid "Error logging into the account"
 msgstr "Erro ao iniciar sessão com a conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:412
-msgid "Expired credentials. Please log in again."
-msgstr "Credenciais expiradas. Por favor, conecte-se novamente."
+#: ../panels/online-accounts/cc-online-accounts-panel.c:429
+msgid "Credentials have expired."
+msgstr "As credenciais expiraram."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:415
-msgid "_Log In"
-msgstr "_Conectar"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:433
+#| msgid "Enable this account"
+msgid "Sign in to enable this account."
+msgstr "Autentique para habilitar esta conta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:651
+#: ../panels/online-accounts/cc-online-accounts-panel.c:438
+msgid "_Sign In"
+msgstr "_Autenticação"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:679
 msgid "Error creating account"
 msgstr "Erro ao criar conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:693
+#: ../panels/online-accounts/cc-online-accounts-panel.c:721
 msgid "Error removing account"
 msgstr "Erro ao remover conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:729
+#: ../panels/online-accounts/cc-online-accounts-panel.c:757
 msgid "Are you sure you want to remove the account?"
 msgstr "Tem certeza de que deseja remover a conta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:731
+#: ../panels/online-accounts/cc-online-accounts-panel.c:759
 msgid "This will not remove the account on the server."
 msgstr "Isso não irá remover a conta no servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:732
+#: ../panels/online-accounts/cc-online-accounts-panel.c:760
 msgid "_Remove"
 msgstr "_Remover"
 
@@ -4752,7 +4757,7 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Métrica"
 
-#: ../panels/region/cc-format-chooser.c:265
+#: ../panels/region/cc-format-chooser.c:268
 msgid "No regions found"
 msgstr "Nenhuma região encontrada"
 
@@ -6946,6 +6951,12 @@ msgstr "Todas as configurações"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferências;Configurações;"
+
+#~ msgid "Expired credentials. Please log in again."
+#~ msgstr "Credenciais expiradas. Por favor, conecte-se novamente."
+
+#~ msgid "_Log In"
+#~ msgstr "_Conectar"
 
 #~ msgid "Change the background"
 #~ msgstr "Alterar o plano de fundo"
