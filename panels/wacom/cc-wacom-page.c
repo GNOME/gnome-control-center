@@ -50,9 +50,10 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 #define THRESHOLD_MISCLICK	15
 #define THRESHOLD_DOUBLECLICK	7
 
-#define ACTION_TYPE_KEY         "action-type"
-#define CUSTOM_ACTION_KEY       "custom-action"
+#define ACTION_TYPE_KEY            "action-type"
+#define CUSTOM_ACTION_KEY          "custom-action"
 #define KEY_CUSTOM_ELEVATOR_ACTION "custom-elevator-action"
+#define OLED_LABEL                 "oled-label"
 
 enum {
 	MAPPING_DESCRIPTION_COLUMN,
@@ -577,6 +578,9 @@ accel_edited_callback (GtkCellRendererText   *cell,
 	    g_strfreev (strv);
   } else {
     g_settings_set_string (button->settings, CUSTOM_ACTION_KEY, str);
+    g_free (str);
+    str = gtk_accelerator_get_label (keyval, mask);
+    g_settings_set_string (button->settings, OLED_LABEL, str);
   }
   g_settings_set_enum (button->settings, ACTION_TYPE_KEY, GSD_WACOM_ACTION_TYPE_CUSTOM);
   g_free (str);
@@ -638,6 +642,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
   } else {
 	  g_settings_set_enum (button->settings, ACTION_TYPE_KEY, GSD_WACOM_ACTION_TYPE_NONE);
 	  g_settings_set_string (button->settings, CUSTOM_ACTION_KEY, "");
+	  g_settings_set_string (button->settings, OLED_LABEL, "");
   }
 }
 
