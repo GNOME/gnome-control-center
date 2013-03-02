@@ -192,30 +192,101 @@ search_panel_move_selected (CcSearchPanel *self,
   GtkWidget *box, *other_box;
   GAppInfo *app_info, *other_app_info;
   const gchar *app_id, *other_app_id;
+  const gchar *last_good_app, *target_app;
   gint idx, other_idx;
-  GList *children, *l;
+  gpointer idx_ptr;
+  gboolean found;
+  GList *children, *l, *other;
 
   box = egg_list_box_get_selected_child (EGG_LIST_BOX (self->priv->list_box));
   app_info = g_object_get_data (G_OBJECT (box), "app-info");
   app_id = g_app_info_get_id (app_info);
 
-  other_app_id = NULL;
   children = gtk_container_get_children (GTK_CONTAINER (self->priv->list_box));
-  l = g_list_find (children, box);
 
-  if (l != NULL)
+  /* The assertions are valid only as long as we don't move the first
+     or the last item. */
+
+  l = g_list_find (children, box);
+  g_assert (l != NULL);
+
+  other = down ? g_list_next(l) : g_list_previous(l);
+  g_assert (other != NULL);
+
+  other_box = other->data;
+  other_app_info = g_object_get_data (G_OBJECT (other_box), "app-info");
+  other_app_id = g_app_info_get_id (other_app_info);
+
+  g_assert (other_app_id != NULL);
+
+  /* Check if we're moving one of the unsorted providers at the end of
+     the list; in that case, the value we obtain from the sort order table
+     is garbage.
+     We need to find the last app with a valid sort order, and
+     then set the sort order on all intermediate apps until we find the
+     one we want to move, if moving up, or the neighbor, if moving down.
+  */
+  last_good_app = target_app = app_id;
+  found = g_hash_table_lookup_extended (self->priv->sort_order, last_good_app, NULL, &idx_ptr);
+  while (!found)
     {
-      other_box = down ? g_list_next (l)->data : g_list_previous (l)->data;
-      other_app_info = g_object_get_data (G_OBJECT (other_box), "app-info");
-      other_app_id = g_app_info_get_id (other_app_info);
+      GAppInfo *tmp;
+      const char *tmp_id;
+
+      l = g_list_previous (l);
+      if (l == NULL)
+        {
+          last_good_app = NULL;
+          break;
+        }
+
+      tmp =  g_object_get_data (G_OBJECT (l->data), "app-info");
+      tmp_id = g_app_info_get_id (tmp);
+
+      last_good_app = tmp_id;
+      found = g_hash_table_lookup_extended (self->priv->sort_order, tmp_id, NULL, &idx_ptr);
+    }
+
+  /* For simplicity's sake, set all sort orders to the previously visible state
+     first, and only then do the modification requested.
+
+     The loop actually sets the sort order on last_good_app even if we found a
+     valid one already, but I preferred to keep the logic simple, at the expense
+     of a small performance penalty.
+  */
+  if (found)
+    {
+      idx = GPOINTER_TO_INT (idx_ptr);
+    }
+  else
+    {
+      /* If not found, there is no configured app that has a sort order, so we start
+         from the first position and walk the entire list.
+         Sort orders are 1 based, so that 0 (NULL) is not a valid value.
+      */
+      idx = 1;
+      l = children;
+    }
+
+  while (last_good_app != target_app)
+    {
+      GAppInfo *tmp;
+      const char *tmp_id;
+
+      tmp = g_object_get_data (G_OBJECT (l->data), "app-info");
+      tmp_id = g_app_info_get_id (tmp);
+
+      g_hash_table_replace (self->priv->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
+
+      l = g_list_next (l);
+      idx++;
+      last_good_app = tmp_id;
     }
 
   other_idx = GPOINTER_TO_INT (g_hash_table_lookup (self->priv->sort_order, app_id));
   idx = down ? (other_idx + 1) : (other_idx - 1);
 
-  if (other_app_id != NULL)
-    g_hash_table_replace (self->priv->sort_order, g_strdup (other_app_id), GINT_TO_POINTER (other_idx));
-
+  g_hash_table_replace (self->priv->sort_order, g_strdup (other_app_id), GINT_TO_POINTER (other_idx));
   g_hash_table_replace (self->priv->sort_order, g_strdup (app_id), GINT_TO_POINTER (idx));
 
   search_panel_propagate_sort_order (self);
