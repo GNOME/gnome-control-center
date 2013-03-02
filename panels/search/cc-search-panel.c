@@ -55,7 +55,7 @@ list_sort_func (gconstpointer a,
   GtkWidget *widget_a, *widget_b;
   GAppInfo *app_a, *app_b;
   const gchar *id_a, *id_b;
-  gint idx_a, idx_b, num_sorted;
+  gint idx_a, idx_b;
   gpointer lookup;
 
   widget_a = GTK_WIDGET (a);
@@ -82,17 +82,6 @@ list_sort_func (gconstpointer a,
   /* if neither app is found, use alphabetical order */
   if ((idx_a == -1) && (idx_b == -1))
     return g_utf8_collate (g_app_info_get_name (app_a), g_app_info_get_name (app_b));
-
-  num_sorted = g_hash_table_size (self->priv->sort_order) - 1;
-  if (num_sorted > 1)
-    {
-      /* if app_a is the last, it goes after everything */
-      if (idx_a == num_sorted)
-        return 1;
-      /* if app_b is the last, it goes after everything */
-      else if (idx_b == num_sorted)
-        return -1;
-    }
 
   /* if app_a isn't found, it's sorted after app_b */
   if (idx_a == -1)
