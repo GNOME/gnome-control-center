@@ -29,7 +29,9 @@ libconnection_editor_la_SOURCES = 		\
 	ce-page-vpn.h				\
 	ce-page-vpn.c				\
 	vpn-helpers.h				\
-	vpn-helpers.c
+	vpn-helpers.c				\
+	firewall-helpers.h			\
+	firewall-helpers.c
 
 libconnection_editor_la_CPPFLAGS = 		\
 	$(PANEL_CFLAGS)				\
