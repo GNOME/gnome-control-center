@@ -29,6 +29,7 @@
 
 #include <net/if_arp.h>
 
+#include "firewall-helpers.h"
 #include "ce-page-ethernet.h"
 
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
@@ -111,6 +112,11 @@ connect_ethernet_page (CEPageEthernet *page)
                                       nm_setting_connection_get_num_permissions (sc) == 0);
         g_signal_connect (widget, "toggled",
                           G_CALLBACK (all_user_changed), page);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
+        firewall_ui_setup (sc, widget, CE_PAGE (page)->cancellable);
+        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
+
 }
 
 static void
@@ -139,6 +145,10 @@ ui_to_setting (CEPageEthernet *page)
         g_object_set (page->setting_connection,
                       NM_SETTING_CONNECTION_ID, gtk_entry_get_text (page->name),
                       NULL);
+
+        entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
+        firewall_ui_to_setting (page->setting_connection, entry);
+
 }
 
 static gboolean
