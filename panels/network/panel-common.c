@@ -63,8 +63,8 @@ panel_device_to_icon_name (NMDevice *device, gboolean symbolic)
                 caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
                 if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
                     (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        value = symbolic ? "network-wireless-signal-excellent-symbolic"
-                                         : "network-wireless-signal-excellent";
+                        value = symbolic ? "network-cellular-signal-excellent-symbolic"
+                                         : "network-cellular-signal-excellent";
                         break;
                 }
                 /* fall thru */
