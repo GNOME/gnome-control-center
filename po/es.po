@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-21 16:01+0000\n"
-"PO-Revision-Date: 2013-02-25 13:41+0100\n"
+"POT-Creation-Date: 2013-03-04 11:25+0000\n"
+"PO-Revision-Date: 2013-03-04 14:10+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -702,7 +702,6 @@ msgstr ""
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Color"
 
@@ -806,10 +805,9 @@ msgid "15 minutes"
 msgstr "15 minutos"
 
 #: ../panels/color/color.ui.h:55
-#, fuzzy
 #| msgid "Panel to display"
 msgid "Native to display"
-msgstr "Panel que mostrar"
+msgstr "Nativo de la pantalla"
 
 #: ../panels/color/color.ui.h:56
 msgid "D50 (Printing and publishing)"
@@ -863,13 +861,13 @@ msgstr "China"
 msgid "Other…"
 msgstr "Otro…"
 
-#: ../panels/common/cc-language-chooser.c:165
-#: ../panels/region/cc-format-chooser.c:256
+#: ../panels/common/cc-language-chooser.c:169
+#: ../panels/region/cc-format-chooser.c:259
 #: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Más…"
 
-#: ../panels/common/cc-language-chooser.c:174
+#: ../panels/common/cc-language-chooser.c:178
 msgid "No languages found"
 msgstr "No se han encontrado idiomas"
 
@@ -951,19 +949,19 @@ msgstr "Alt+Ctrl"
 
 #: ../panels/common/cc-util.c:45
 msgid "Caps"
-msgstr ""
+msgstr "Bloq. Mayús."
 
 #: ../panels/common/cc-util.c:46
 msgid "Shift+Caps"
-msgstr ""
+msgstr "Mayús+Bloq. Mayús."
 
 #: ../panels/common/cc-util.c:47
 msgid "Alt+Caps"
-msgstr ""
+msgstr "Alt+Bloq. Mayús."
 
 #: ../panels/common/cc-util.c:48
 msgid "Ctrl+Caps"
-msgstr ""
+msgstr "Ctrl+Bloq. Mayús."
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1651,10 +1649,9 @@ msgid "Compose Key"
 msgstr "Tecla de composición"
 
 #: ../panels/keyboard/cc-keyboard-option.c:371
-#, fuzzy
 #| msgid "Switch to next source"
 msgid "Modifiers-only switch to next source"
-msgstr "Cambiar a la fuente siguiente"
+msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
@@ -2385,7 +2382,7 @@ msgstr "VPN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:587
 msgid "Bond"
-msgstr ""
+msgstr "Bond"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
@@ -2801,7 +2798,7 @@ msgstr "Ninguna"
 
 #: ../panels/network/network-wifi.ui.h:19
 msgid "blablabla"
-msgstr ""
+msgstr "blablabla"
 
 #: ../panels/network/network-wifi.ui.h:20
 msgid "Show P_assword"
@@ -2834,6 +2831,10 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"Aquí\n"
+"va la\n"
+"sección\n"
+"dirección"
 
 #: ../panels/network/network-wifi.ui.h:35
 msgid ""
@@ -2842,6 +2843,10 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"Aquí\n"
+"va la\n"
+"sección\n"
+"DNS"
 
 #: ../panels/network/network-wifi.ui.h:40
 msgid ""
@@ -2850,6 +2855,10 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"Aquí\n"
+"va la\n"
+"sección\n"
+"rutas"
 
 #: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
@@ -3559,35 +3568,40 @@ msgstr "Mostrar en la pantalla de bloqueo"
 msgid "Add Account"
 msgstr "Añadir cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:357
 msgid "Error logging into the account"
 msgstr "Error al iniciar sesión en la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:412
-msgid "Expired credentials. Please log in again."
-msgstr "Las credenciales han expirado. Inicie sesión de nuevo."
+#: ../panels/online-accounts/cc-online-accounts-panel.c:429
+msgid "Credentials have expired."
+msgstr "Las credenciales han caducado"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:415
-msgid "_Log In"
-msgstr "_Iniciar sesión"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:433
+#| msgid "Enable this account"
+msgid "Sign in to enable this account."
+msgstr "Inicie sesión para activar esta cuenta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:651
+#: ../panels/online-accounts/cc-online-accounts-panel.c:438
+msgid "_Sign In"
+msgstr "Iniciar _sesión"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:679
 msgid "Error creating account"
 msgstr "Error al crear la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:693
+#: ../panels/online-accounts/cc-online-accounts-panel.c:721
 msgid "Error removing account"
 msgstr "Error al quitar la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:729
+#: ../panels/online-accounts/cc-online-accounts-panel.c:757
 msgid "Are you sure you want to remove the account?"
 msgstr "¿Está seguro de que quiere quitar la cuenta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:731
+#: ../panels/online-accounts/cc-online-accounts-panel.c:759
 msgid "This will not remove the account on the server."
 msgstr "Esto no quitará la cuenta en el servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:732
+#: ../panels/online-accounts/cc-online-accounts-panel.c:760
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -3818,7 +3832,6 @@ msgid "_Dim Screen when Inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
 #: ../panels/power/cc-power-panel.c:1481
-#| msgid "Full Screen"
 msgid "_Blank Screen"
 msgstr "_Apagar la pantalla"
 
@@ -4229,40 +4242,40 @@ msgid "Loading drivers database..."
 msgstr "Cargando bases de datos de controladores…"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:65
-#: ../panels/printers/pp-ppd-option-widget.c:69
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "One Sided"
 msgstr "Una cara"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:67
-#: ../panels/printers/pp-ppd-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Long Edge (Standard)"
 msgstr "Margen largo (estándar)"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:69
-#: ../panels/printers/pp-ppd-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ppd-option-widget.c:75
 msgid "Short Edge (Flip)"
 msgstr "Margen corto (girar)"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Portrait"
 msgstr "Vertical"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Landscape"
 msgstr "Apaisado"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:75
+#: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse landscape"
 msgstr "Apaisado invertido"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:77
+#: ../panels/printers/pp-ipp-option-widget.c:79
 msgid "Reverse portrait"
 msgstr "Vertical invertido"
 
@@ -4421,38 +4434,38 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #. Translators: this is an option of "Paper Source"
-#: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
-#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:87
 msgid "Auto Select"
 msgstr "Seleccionar automáticamente"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
-#: ../panels/printers/pp-ppd-option-widget.c:87
+#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Printer Default"
 msgstr "Impresora predeterminada"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:89
+#: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
 msgstr "Sólo empotrar tipografías GhostScript"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:91
+#: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 1"
 msgstr "Convertir a PS nivel 1"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:93
+#: ../panels/printers/pp-ppd-option-widget.c:95
 msgid "Convert to PS level 2"
 msgstr "Convertir a PS nivel 2"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:95
+#: ../panels/printers/pp-ppd-option-widget.c:97
 msgid "No pre-filtering"
 msgstr "Sin prefiltrado"
 
@@ -4684,10 +4697,9 @@ msgid "Automatic Screen _Lock"
 msgstr "_Bloque de pantalla automático"
 
 #: ../panels/privacy/privacy.ui.h:34
-#, fuzzy
 #| msgid "Lock Screen _After"
 msgid "Lock Screen _After Blank For"
-msgstr "B_loquear pantalla después de"
+msgstr "B_loquear la pantalla después de"
 
 #: ../panels/privacy/privacy.ui.h:35
 msgid "Show _Notifications"
@@ -4731,7 +4743,7 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Métrico"
 
-#: ../panels/region/cc-format-chooser.c:265
+#: ../panels/region/cc-format-chooser.c:268
 msgid "No regions found"
 msgstr "No se han encontrado regiones"
 
@@ -4740,7 +4752,7 @@ msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
 
 #: ../panels/region/cc-input-chooser.c:997
-#: ../panels/search/cc-search-locations-dialog.c:479
+#: ../panels/search/cc-search-locations-dialog.c:480
 msgid "Other"
 msgstr "Otra"
 
@@ -4860,10 +4872,9 @@ msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Puede cambiar estos atajos en la configuración del teclado"
 
 #: ../panels/region/input-options.ui.h:10
-#, fuzzy
 #| msgid "Switch to next source"
 msgid "Alternative switch to next source"
-msgstr "Cambiar a la fuente siguiente"
+msgstr "Cambio alternativo a la fuente siguiente"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
@@ -4883,19 +4894,19 @@ msgstr ""
 "La configuración de inicio de sesión la usan todos los usuarios cuando "
 "inician sesión en el sistema"
 
-#: ../panels/search/cc-search-locations-dialog.c:275
+#: ../panels/search/cc-search-locations-dialog.c:276
 msgid "Home"
 msgstr "Domicilio"
 
-#: ../panels/search/cc-search-locations-dialog.c:475
+#: ../panels/search/cc-search-locations-dialog.c:476
 msgid "Places"
 msgstr "Lugares"
 
-#: ../panels/search/cc-search-locations-dialog.c:477
+#: ../panels/search/cc-search-locations-dialog.c:478
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: ../panels/search/cc-search-locations-dialog.c:675
+#: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
 msgstr "Seleccionar ubicación"
 
@@ -5360,7 +5371,7 @@ msgstr ""
 "teclas;Teclas del ratón"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Bajo"
@@ -5371,7 +5382,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Alto"
@@ -5795,31 +5806,38 @@ msgstr "Brillo:"
 msgid "Contrast:"
 msgstr "Contraste:"
 
+#. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:29
+#| msgid "Color"
+msgctxt "universal access, contrast"
+msgid "Color"
+msgstr "Color"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Completo"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Bajo"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Alto"
 
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects:"
 msgstr "Efectos de color:"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects"
 msgstr "Efectos de color"
 
@@ -6889,33 +6907,39 @@ msgstr "Ayuda"
 msgid "Quit"
 msgstr "Salir"
 
-#: ../shell/cc-window.c:60 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Configuración"
 
 #. Add categories
-#: ../shell/cc-window.c:899
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
 msgstr "Personal"
 
-#: ../shell/cc-window.c:900
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:901
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1447
+#: ../shell/cc-window.c:1413
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Expired credentials. Please log in again."
+#~ msgstr "Las credenciales han expirado. Inicie sesión de nuevo."
+
+#~ msgid "_Log In"
+#~ msgstr "_Iniciar sesión"
 
 #~ msgid "Change the background"
 #~ msgstr "Cambiar el fondo"
