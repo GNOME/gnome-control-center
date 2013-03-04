@@ -576,7 +576,7 @@ find_builtin_output (GnomeRRScreen *rr_screen)
 		if (!gnome_rr_output_is_connected (rr_outputs[i]))
 			continue;
 
-		if (gnome_rr_output_is_laptop(rr_outputs[i])) {
+		if (gnome_rr_output_is_builtin_display(rr_outputs[i])) {
 			retval = rr_outputs[i];
 			break;
 		}
