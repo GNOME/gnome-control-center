@@ -33,122 +33,102 @@
 
 #include "zoom-options.h"
 
-#define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
+#define WID(w) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, w))
 
 #define DPI_FACTOR_LARGE 1.25
 #define DPI_FACTOR_NORMAL 1.0
-
 #define HIGH_CONTRAST_THEME     "HighContrast"
-#define KEY_TEXT_SCALING_FACTOR "text-scaling-factor"
-#define KEY_GTK_THEME           "gtk-theme"
-#define KEY_ICON_THEME          "icon-theme"
-#define KEY_WM_THEME            "theme"
+
+/* shell settings */
+#define A11Y_SETTINGS               "org.gnome.desktop.a11y"
+#define KEY_ALWAYS_SHOW_STATUS       "always-show-universal-access-status"
+
+/* interface settings */
+#define INTERFACE_SETTINGS           "org.gnome.desktop.interface"
+#define KEY_TEXT_SCALING_FACTOR      "text-scaling-factor"
+#define KEY_GTK_THEME                "gtk-theme"
+#define KEY_ICON_THEME               "icon-theme"
+
+/* application settings */
+#define APPLICATION_SETTINGS         "org.gnome.desktop.a11y.applications"
+#define KEY_SCREEN_KEYBOARD_ENABLED  "screen-keyboard-enabled"
+#define KEY_SCREEN_MAGNIFIER_ENABLED "screen-magnifier-enabled"
+#define KEY_SCREEN_READER_ENABLED    "screen-reader-enabled"
+
+/* wm settings */
+#define WM_SETTINGS                  "org.gnome.desktop.wm.preferences"
+#define KEY_VISUAL_BELL_ENABLED      "visual-bell"
+#define KEY_VISUAL_BELL_TYPE         "visual-bell-type"
+#define KEY_WM_THEME                 "theme"
+
+/* keyboard settings */
+#define KEYBOARD_SETTINGS            "org.gnome.desktop.a11y.keyboard"
+#define KEY_KEYBOARD_TOGGLE          "enable"
+#define KEY_STICKYKEYS_ENABLED       "stickykeys-enable"
+#define KEY_STICKYKEYS_TWO_KEY_OFF   "stickykeys-two-key-off"
+#define KEY_STICKYKEYS_MODIFIER_BEEP "stickykeys-modifier-beep"
+#define KEY_SLOWKEYS_ENABLED         "slowkeys-enable"
+#define KEY_SLOWKEYS_DELAY           "slowkeys-delay"
+#define KEY_SLOWKEYS_BEEP_PRESS      "slowkeys-beep-press"
+#define KEY_SLOWKEYS_BEEP_ACCEPT     "slowkeys-beep-accept"
+#define KEY_SLOWKEYS_BEEP_REJECT     "slowkeys-beep-reject"
+#define KEY_BOUNCEKEYS_ENABLED       "bouncekeys-enable"
+#define KEY_BOUNCEKEYS_DELAY         "bouncekeys-delay"
+#define KEY_BOUNCEKEYS_BEEP_REJECT   "bouncekeys-beep-reject"
+#define KEY_MOUSEKEYS_ENABLED        "mousekeys-enable"
+#define KEY_TOGGLEKEYS_ENABLED       "togglekeys-enable"
+
+/* mouse settings */
+#define MOUSE_SETTINGS               "org.gnome.desktop.a11y.mouse"
+#define KEY_SECONDARY_CLICK_ENABLED  "secondary-click-enabled"
+#define KEY_SECONDARY_CLICK_TIME     "secondary-click-time"
+#define KEY_DWELL_CLICK_ENABLED      "dwell-click-enabled"
+#define KEY_DWELL_TIME               "dwell-time"
+#define KEY_DWELL_THRESHOLD          "dwell-threshold"
+
+#define SCROLL_HEIGHT 490
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
-
-#define UA_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_UA_PANEL, CcUaPanelPrivate))
 
 struct _CcUaPanelPrivate
 {
   GtkBuilder *builder;
+
   GSettings *wm_settings;
+  GSettings *a11y_settings;
   GSettings *interface_settings;
   GSettings *kb_settings;
   GSettings *mouse_settings;
   GSettings *application_settings;
-  GSettings *mediakeys_settings;
 
   ZoomOptions *zoom_options;
+
+  GtkAdjustment *focus_adjustment;
+
+  GList *sections;
+  GList *sections_reverse;
 };
-
-
-static void
-cc_ua_panel_get_property (GObject    *object,
-                          guint       property_id,
-                          GValue     *value,
-                          GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
-cc_ua_panel_set_property (GObject      *object,
-                          guint         property_id,
-                          const GValue *value,
-                          GParamSpec   *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
 
 static void
 cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanelPrivate *priv = CC_UA_PANEL (object)->priv;
 
-  if (priv->builder)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
+  g_clear_object (&priv->builder);
 
-  if (priv->wm_settings)
-    {
-      g_object_unref (priv->wm_settings);
-      priv->wm_settings = NULL;
-    }
+  g_clear_object (&priv->wm_settings);
+  g_clear_object (&priv->a11y_settings);
+  g_clear_object (&priv->interface_settings);
+  g_clear_object (&priv->kb_settings);
+  g_clear_object (&priv->mouse_settings);
+  g_clear_object (&priv->application_settings);
 
-  if (priv->interface_settings)
-    {
-      g_object_unref (priv->interface_settings);
-      priv->interface_settings = NULL;
-    }
+  g_clear_object (&priv->zoom_options);
 
-  if (priv->kb_settings)
-    {
-      g_object_unref (priv->kb_settings);
-      priv->kb_settings = NULL;
-    }
-
-  if (priv->mouse_settings)
-    {
-      g_object_unref (priv->mouse_settings);
-      priv->mouse_settings = NULL;
-    }
-
-  if (priv->application_settings)
-    {
-      g_object_unref (priv->application_settings);
-      priv->application_settings = NULL;
-    }
-
-  if (priv->mediakeys_settings)
-    {
-      g_object_unref (priv->mediakeys_settings);
-      priv->mediakeys_settings = NULL;
-    }
-
-  if (priv->zoom_options)
-    {
-      g_object_unref (priv->zoom_options);
-      priv->zoom_options = NULL;
-    }
+  g_clear_pointer (&priv->sections, g_list_free);
+  g_clear_pointer (&priv->sections_reverse, g_list_free);
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
-}
-
-static void
-cc_ua_panel_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (cc_ua_panel_parent_class)->finalize (object);
 }
 
 static const char *
@@ -167,51 +147,12 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 
   panel_class->get_help_uri = cc_ua_panel_get_help_uri;
 
-  object_class->get_property = cc_ua_panel_get_property;
-  object_class->set_property = cc_ua_panel_set_property;
   object_class->dispose = cc_ua_panel_dispose;
-  object_class->finalize = cc_ua_panel_finalize;
 }
-
-static gchar *sticky_keys_section[] = {
-    "typing_sticky_keys_disable_two_keys_checkbutton",
-    "typing_sticky_keys_beep_modifier_checkbutton",
-    NULL
-};
-
-static gchar *slow_keys_section[]= {
-    "typing_slowkeys_delay_box",
-    "typing_slow_keys_beeb_box",
-    NULL
-};
-
-static gchar *bounce_keys_section[] = {
-    "typing_bouncekeys_delay_box",
-    "typing_bounce_keys_beep_rejected_checkbutton",
-    NULL
-};
-
-static gchar *secondary_click_section[] = {
-    "pointing_secondary_click_scale_box",
-    NULL
-};
-
-static gchar *dwell_click_section[] = {
-    "pointing_hover_click_delay_scale_box",
-    "pointing_hover_click_threshold_scale_box",
-    NULL
-};
-
-static gchar *visual_alerts_section[] = {
-    "hearing_test_flash_button",
-    "hearing_flash_window_title_button",
-    "hearing_flash_screen_button",
-    NULL
-};
 
 /* zoom options dialog */
 static void
-zoom_options_launch_cb (GtkWidget *options_button, CcUaPanel *self)
+zoom_options_launch (CcUaPanel *self)
 {
   if (self->priv->zoom_options == NULL)
     self->priv->zoom_options = zoom_options_new ();
@@ -221,80 +162,12 @@ zoom_options_launch_cb (GtkWidget *options_button, CcUaPanel *self)
 			     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
 }
 
-static void
-cc_ua_panel_section_switched (GObject    *object,
-                              GParamSpec *pspec,
-                              GtkBuilder *builder)
-{
-  GtkWidget *w;
-  gboolean enabled;
-  gchar **widgets, **s;
-
-  widgets = g_object_get_data (object, "section-widgets");
-
-  g_object_get (object, "active", &enabled, NULL);
-
-  for (s = widgets; *s; s++)
-    {
-      w = WID (builder, *s);
-      gtk_widget_set_sensitive (w, enabled);
-    }
-}
-
-static void
-settings_on_off_editor_new (CcUaPanelPrivate  *priv,
-                            GSettings         *settings,
-                            const gchar       *key,
-                            GtkWidget         *widget,
-                            gchar            **section)
-{
-  /* set data to enable/disable the section this on/off switch controls */
-  if (section)
-    {
-      g_object_set_data (G_OBJECT (widget), "section-widgets", section);
-      g_signal_connect (widget, "notify::active",
-                        G_CALLBACK (cc_ua_panel_section_switched),
-                        priv->builder);
-    }
-
-  /* set up the boolean editor */
-  g_settings_bind (settings, key, widget, "active", G_SETTINGS_BIND_DEFAULT);
-}
-
 /* seeing section */
 
-static void
-cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
-				const char *label,
-				const char *key)
+static gboolean
+is_large_factor (gdouble factor)
 {
-	GtkWidget *widget;
-	char *value;
-	char *text;
-	guint accel_key, *keycode;
-	GdkModifierType mods;
-
-	widget = WID (self->priv->builder, label);
-	value = g_settings_get_string (self->priv->mediakeys_settings, key);
-
-	if (value == NULL || *value == '\0') {
-		gtk_label_set_text (GTK_LABEL (widget), _("No shortcut set"));
-		g_free (value);
-		return;
-	}
-	gtk_accelerator_parse_with_keycode (value, &accel_key, &keycode, &mods);
-	if (accel_key == 0 && keycode == NULL && mods == 0) {
-		gtk_label_set_text (GTK_LABEL (widget), _("No shortcut set"));
-		g_free (value);
-		g_warning ("Failed to parse keyboard shortcut: '%s'", value);
-		return;
-	}
-	g_free (value);
-
-	text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (widget), accel_key, *keycode, mods);
-	g_free (keycode);
-	gtk_label_set_text (GTK_LABEL (widget), text);
-	g_free (text);
+  return (factor > DPI_FACTOR_NORMAL);
 }
 
 static gboolean
@@ -303,11 +176,9 @@ get_large_text_mapping (GValue   *value,
                         gpointer  user_data)
 {
   gdouble factor;
-  gboolean large;
 
   factor = g_variant_get_double (variant);
-  large = factor > DPI_FACTOR_NORMAL;
-  g_value_set_boolean (value, large);
+  g_value_set_boolean (value, is_large_factor (factor));
 
   return TRUE;
 }
@@ -374,64 +245,245 @@ set_contrast_mapping (const GValue       *value,
   return ret;
 }
 
+static gboolean
+on_off_label_mapping_get (GValue   *value,
+                          GVariant *variant,
+                          gpointer  user_data)
+{
+  g_value_set_string (value, g_variant_get_boolean (variant) ? _("On") : _("Off"));
+
+  return TRUE;
+}
+
+static void
+update_separator_func (GtkListBoxRow  *row,
+                       GtkListBoxRow  *before,
+                       gpointer        user_data)
+{
+  GtkWidget *current;
+
+  if (before == NULL)
+    return;
+
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
+    {
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
+    }
+}
+
+static void
+add_separators (GtkListBox *list)
+{
+  gtk_list_box_set_header_func (list, update_separator_func, NULL, NULL);
+}
+
+static gboolean
+keynav_failed (GtkWidget *list, GtkDirectionType direction, CcUaPanel *self)
+{
+  CcUaPanelPrivate *priv = self->priv;
+  GList *item, *sections;
+  gdouble value, lower, upper, page;
+
+  /* Find the list in the list of GtkListBoxes */
+  if (direction == GTK_DIR_DOWN)
+    sections = priv->sections;
+  else
+    sections = priv->sections_reverse;
+
+  item = g_list_find (sections, list);
+  g_assert (item);
+  if (item->next)
+    {
+      gtk_widget_child_focus (GTK_WIDGET (item->next->data), direction);
+      return TRUE;
+    }
+
+  value = gtk_adjustment_get_value (priv->focus_adjustment);
+  lower = gtk_adjustment_get_lower (priv->focus_adjustment);
+  upper = gtk_adjustment_get_upper (priv->focus_adjustment);
+  page  = gtk_adjustment_get_page_size (priv->focus_adjustment);
+
+  if (direction == GTK_DIR_UP && value > lower)
+    {
+      gtk_adjustment_set_value (priv->focus_adjustment, lower);
+      return TRUE;
+    }
+  else if (direction == GTK_DIR_DOWN && value < upper - page)
+    {
+      gtk_adjustment_set_value (priv->focus_adjustment, upper - page);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static void
+add_section (GtkWidget *list, CcUaPanel *self)
+{
+  CcUaPanelPrivate *priv = self->priv;
+
+  g_signal_connect (list, "keynav-failed", G_CALLBACK (keynav_failed), self);
+
+  priv->sections = g_list_append (priv->sections, list);
+  priv->sections_reverse = g_list_prepend (priv->sections_reverse, list);
+}
+
+static void
+cc_ua_panel_init_status (CcUaPanel *self)
+{
+  CcUaPanelPrivate *priv = self->priv;
+  GtkWidget *box;
+
+  box = GTK_WIDGET (gtk_builder_get_object (priv->builder, "section_status"));
+  priv->sections_reverse = g_list_prepend (priv->sections_reverse, box);
+
+  g_settings_bind (priv->a11y_settings, KEY_ALWAYS_SHOW_STATUS,
+                   WID ("switch_status"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
+}
+
+static void
+activate_row (CcUaPanel *self, GtkListBoxRow *row)
+{
+  GtkWidget *dialog;
+  const gchar *dialog_id;
+
+  dialog_id = (const gchar *)g_object_get_data (G_OBJECT (row), "dialog-id");
+  if (g_strcmp0 (dialog_id, "zoom") == 0)
+    {
+      zoom_options_launch (self);
+      return;
+    }
+
+  dialog = (GtkWidget *)g_object_get_data (G_OBJECT (row), "dialog");
+  if (dialog == NULL)
+    return;
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+mnemonic_activate (GtkLabel *label, gboolean cycling, CcUaPanel *self)
+{
+  GtkWidget *row;
+
+  row = gtk_widget_get_parent (GTK_WIDGET (label));
+  activate_row (self, GTK_LIST_BOX_ROW (row));
+}
+
 static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
+  GtkWidget *list;
+  GtkWidget *dialog;
+
+  list = WID ("list_seeing");
+  add_section (list, self);
+
+  add_separators (GTK_LIST_BOX (list));
+
+  g_signal_connect_swapped (list, "row-activated",
+                            G_CALLBACK (activate_row), self);
 
   g_settings_bind_with_mapping (priv->interface_settings, KEY_GTK_THEME,
-                                WID (priv->builder, "seeing_contrast_switch"),
+                                WID ("value_highcontrast"),
                                 "active", G_SETTINGS_BIND_DEFAULT,
                                 get_contrast_mapping,
                                 set_contrast_mapping,
                                 self,
                                 NULL);
+
+  /* large text */
+
   g_settings_bind_with_mapping (priv->interface_settings, KEY_TEXT_SCALING_FACTOR,
-                                WID (priv->builder, "seeing_large_text_switch"),
+                                WID ("value_large_text"),
                                 "active", G_SETTINGS_BIND_DEFAULT,
                                 get_large_text_mapping,
                                 set_large_text_mapping,
                                 priv->interface_settings,
                                 NULL);
 
-  g_settings_bind (priv->kb_settings, "togglekeys-enable",
-                   WID (priv->builder, "seeing_toggle_keys_switch"), "active",
+  g_signal_connect (WID ("heading_large_text"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
+
+  /* zoom */
+
+  g_settings_bind_with_mapping (priv->application_settings, "screen-magnifier-enabled",
+                                WID ("value_zoom"),
+                                "label", G_SETTINGS_BIND_GET,
+                                on_off_label_mapping_get,
+                                NULL, NULL, NULL);
+
+  g_object_set_data (G_OBJECT (WID ("row_zoom")), "dialog-id", "zoom");
+  g_signal_connect (WID ("heading_zoom"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
+
+  /* screen reader */
+
+  g_settings_bind_with_mapping (priv->application_settings, "screen-reader-enabled",
+                                WID ("value_screen_reader"), "label",
+                                G_SETTINGS_BIND_GET,
+                                on_off_label_mapping_get,
+                                NULL, NULL, NULL);
+
+  g_settings_bind (priv->application_settings, "screen-reader-enabled",
+                   WID ("screen_reader_switch"), "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  g_signal_connect (WID (priv->builder, "seeing_zoom_preferences_button"),
-                    "clicked",
-                    G_CALLBACK (zoom_options_launch_cb), self);
-  g_settings_bind (priv->application_settings, "screen-magnifier-enabled",
-                   WID (priv->builder, "seeing_zoom_switch"), "active",
+  dialog = WID ("screen_reader_dialog");
+
+  g_object_set_data (G_OBJECT (WID ("row_screen_reader")), "dialog", dialog);
+  g_signal_connect_swapped (WID ("screen_reader_done"), "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+  g_signal_connect (WID ("heading_screen_reader"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
+
+  /* sound keys */
+
+  g_settings_bind_with_mapping (priv->kb_settings, KEY_TOGGLEKEYS_ENABLED,
+                                WID ("value_sound_keys"), "label",
+                                G_SETTINGS_BIND_GET,
+                                on_off_label_mapping_get,
+                                NULL, NULL, NULL);
+
+  g_settings_bind (priv->kb_settings, KEY_TOGGLEKEYS_ENABLED,
+                   WID ("sound_keys_switch"), "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  settings_on_off_editor_new (priv, priv->application_settings,
-                              "screen-reader-enabled",
-                              WID (priv->builder, "seeing_reader_switch"),
-                              NULL);
+  dialog = WID ("sound_keys_dialog");
 
-  cc_ua_panel_set_shortcut_label (self, "seeing_zoom_enable_keybinding_label", "magnifier");
-  cc_ua_panel_set_shortcut_label (self, "seeing_zoom_in_keybinding_label", "magnifier-zoom-in");
-  cc_ua_panel_set_shortcut_label (self, "seeing_zoom_out_keybinding_label", "magnifier-zoom-out");
-  cc_ua_panel_set_shortcut_label (self, "seeing_reader_enable_keybinding_label", "screenreader");
+  g_object_set_data (G_OBJECT (WID ("row_sound_keys")), "dialog", dialog);
+  g_signal_connect_swapped (WID ("sound_keys_done"), "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+  g_signal_connect (WID ("heading_sound_keys"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
 }
-
 
 /* hearing/sound section */
 static void
 visual_bell_type_notify_cb (GSettings   *settings,
                             const gchar *key,
-                            CcUaPanel   *panel)
+                            CcUaPanel   *self)
 {
   GtkWidget *widget;
   GDesktopVisualBellType type;
 
-  type = g_settings_get_enum (panel->priv->wm_settings, "visual-bell-type");
+  type = g_settings_get_enum (self->priv->wm_settings, KEY_VISUAL_BELL_TYPE);
 
   if (type == G_DESKTOP_VISUAL_BELL_FRAME_FLASH)
-    widget = WID (panel->priv->builder, "hearing_flash_window_title_button");
+    widget = WID ("visual_alerts_window_radio");
   else
-    widget = WID (panel->priv->builder, "hearing_flash_screen_button");
+    widget = WID ("visual_alerts_screen_radio");
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 }
@@ -449,209 +501,331 @@ visual_bell_type_toggle_cb (GtkWidget *button,
     type = G_DESKTOP_VISUAL_BELL_FRAME_FLASH;
   else
     type = G_DESKTOP_VISUAL_BELL_FULLSCREEN_FLASH;
-  g_settings_set_enum (panel->priv->wm_settings, "visual-bell-type", type);
-}
-
-static gboolean
-hearing_sound_preferences_clicked (GtkButton  *button,
-                                   CcUaPanel  *panel)
-{
-  CcShell *shell;
-
-  shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_set_active_panel_from_id (shell, "sound", NULL, NULL);
-
-  return TRUE;
+  g_settings_set_enum (panel->priv->wm_settings, KEY_VISUAL_BELL_TYPE, type);
 }
 
 static void
 cc_ua_panel_init_hearing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
-  GtkWidget *w;
+  GtkWidget *list;
+  GtkWidget *dialog;
+
+  list = WID ("list_hearing");
+  add_section (list, self);
+
+  add_separators (GTK_LIST_BOX (list));
+
+  g_signal_connect_swapped (list, "row-activated",
+                            G_CALLBACK (activate_row), self);
 
   /* set the initial visual bell values */
   visual_bell_type_notify_cb (NULL, NULL, self);
 
   /* and listen */
-  w = WID (priv->builder, "hearing_visual_alerts_switch");
-  settings_on_off_editor_new (priv, priv->wm_settings, "visual-bell", w, visual_alerts_section);
+  g_settings_bind (priv->wm_settings, KEY_VISUAL_BELL_ENABLED,
+                   WID ("visual_alerts_switch"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
-  g_signal_connect (priv->wm_settings, "changed::visual-bell-type",
+  g_settings_bind_with_mapping (priv->wm_settings, KEY_VISUAL_BELL_ENABLED,
+                                WID ("value_visual_alerts"),
+                                "label", G_SETTINGS_BIND_GET,
+                                on_off_label_mapping_get,
+                                NULL, NULL, NULL);
+
+  g_object_bind_property (WID ("visual_alerts_switch"), "active",
+                          WID ("visual_alerts_window_radio"), "sensitive",
+                          G_BINDING_SYNC_CREATE);
+  g_object_bind_property (WID ("visual_alerts_switch"), "active",
+                          WID ("visual_alerts_screen_radio"), "sensitive",
+                          G_BINDING_SYNC_CREATE);
+
+  g_signal_connect (priv->wm_settings, "changed::" KEY_VISUAL_BELL_TYPE,
                     G_CALLBACK (visual_bell_type_notify_cb), self);
-  g_signal_connect (WID (priv->builder, "hearing_flash_window_title_button"),
+  g_signal_connect (WID ("visual_alerts_window_radio"),
                     "toggled", G_CALLBACK (visual_bell_type_toggle_cb), self);
 
-  /* test flash */
-  g_signal_connect (WID (priv->builder, "hearing_test_flash_button"),
-                    "clicked", G_CALLBACK (gdk_beep), NULL);
+  dialog = WID ("visual_alerts_dialog");
 
-  g_signal_connect (WID (priv->builder, "hearing_sound_preferences_link"),
-                    "activate-link",
-                    G_CALLBACK (hearing_sound_preferences_clicked), self);
+  g_object_set_data (G_OBJECT (WID ("row_visual_alerts")), "dialog", dialog);
+
+  g_signal_connect_swapped (WID ("visual_alerts_done"), "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  g_signal_connect (WID ("visual_alerts_test_button"),
+                    "clicked", G_CALLBACK (gdk_beep), NULL);
+  g_signal_connect (WID ("heading_visual_alerts"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
 }
 
 /* typing/keyboard section */
+static void
+update_accessx_label (GSettings *settings, const gchar *key, CcUaPanel *self)
+{
+  gboolean on;
+
+  on = g_settings_get_boolean (settings, KEY_STICKYKEYS_ENABLED) ||
+       g_settings_get_boolean (settings, KEY_SLOWKEYS_ENABLED) ||
+       g_settings_get_boolean (settings, KEY_BOUNCEKEYS_ENABLED);
+
+  gtk_label_set_text (GTK_LABEL (WID ("value_accessx")), on ? _("On") : _("Off"));
+}
 
 static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
+  GtkWidget *list;
   GtkWidget *w;
+  GtkWidget *sw;
+  GtkWidget *dialog;
 
-  /* Typing assistant (on-screen keyboard) */
-  w = WID (priv->builder, "typing_assistant_switch");
-  g_settings_bind (priv->application_settings, "screen-keyboard-enabled",
-                   w, "active", G_SETTINGS_BIND_DEFAULT);
+  list = WID ("list_typing");
+  add_section (list, self);
+
+  add_separators (GTK_LIST_BOX (list));
+
+  g_signal_connect_swapped (list, "row-activated",
+                            G_CALLBACK (activate_row), self);
+
+  /* on-screen keyboard */
+  sw = WID ("screen_keyboard_switch");
+  g_settings_bind (priv->application_settings, KEY_SCREEN_KEYBOARD_ENABLED,
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  /* accessx */
+  g_signal_connect (priv->kb_settings, "changed",
+                    G_CALLBACK (update_accessx_label), self);
+  update_accessx_label (priv->kb_settings, NULL, self);
 
   /* enable shortcuts */
-  w = WID (priv->builder, "typing_keyboard_toggle_switch");
-  g_settings_bind (priv->kb_settings, "enable", w, "active", G_SETTINGS_BIND_DEFAULT);
+  sw = WID ("typing_keyboard_toggle_switch");
+  g_settings_bind (priv->kb_settings, KEY_KEYBOARD_TOGGLE,
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* sticky keys */
-  w = WID (priv->builder, "typing_sticky_keys_switch");
-  settings_on_off_editor_new (priv, priv->kb_settings, "stickykeys-enable", w, sticky_keys_section);
+  sw = WID ("typing_stickykeys_switch");
+  g_settings_bind (priv->kb_settings, KEY_STICKYKEYS_ENABLED,
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
-  w = WID (priv->builder, "typing_sticky_keys_disable_two_keys_checkbutton");
-  g_settings_bind (priv->kb_settings, "stickykeys-two-key-off", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
+  w = WID ("typing_stickykeys_disable_two_keys_check");
+  g_settings_bind (priv->kb_settings, KEY_STICKYKEYS_TWO_KEY_OFF,
+                   w, "active",
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
-  w = WID (priv->builder, "typing_sticky_keys_beep_modifier_checkbutton");
-  g_settings_bind (priv->kb_settings, "stickykeys-modifier-beep", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
+  w = WID ("typing_stickykeys_beep_modifier_check");
+  g_settings_bind (priv->kb_settings, KEY_STICKYKEYS_MODIFIER_BEEP,
+                   w, "active",
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
   /* slow keys */
-  w = WID (priv->builder, "typing_slow_keys_switch");
-  settings_on_off_editor_new (priv, priv->kb_settings, "slowkeys-enable", w, slow_keys_section);
-
-  w = WID (priv->builder, "typing_slowkeys_delay_scale");
-  g_settings_bind (priv->kb_settings, "slowkeys-delay",
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+  sw = WID ("typing_slowkeys_switch");
+  g_settings_bind (priv->kb_settings, KEY_SLOWKEYS_ENABLED,
+                   sw, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = WID (priv->builder, "typing_slow_keys_beep_pressed_checkbutton");
-  g_settings_bind (priv->kb_settings, "slowkeys-beep-press", w, "active", G_SETTINGS_BIND_DEFAULT);
+  w = WID ("typing_slowkeys_delay_scale");
+  g_settings_bind (priv->kb_settings, KEY_SLOWKEYS_DELAY,
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+  w = WID ("typing_slowkeys_delay_box");
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
-  w = WID (priv->builder, "typing_slow_keys_beep_accepted_checkbutton");
-  g_settings_bind (priv->kb_settings, "slowkeys-beep-accept", w, "active", G_SETTINGS_BIND_DEFAULT);
+  w = WID ("typing_slowkeys_beep_pressed_check");
+  g_settings_bind (priv->kb_settings, KEY_SLOWKEYS_BEEP_PRESS,
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
-  w = WID (priv->builder, "typing_slow_keys_beep_rejected_checkbutton");
-  g_settings_bind (priv->kb_settings, "slowkeys-beep-reject", w, "active", G_SETTINGS_BIND_DEFAULT);
+  w = WID ("typing_slowkeys_beep_accepted_check");
+  g_settings_bind (priv->kb_settings, KEY_SLOWKEYS_BEEP_ACCEPT,
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
+
+  w = WID ("typing_slowkeys_beep_rejected_check");
+  g_settings_bind (priv->kb_settings, KEY_SLOWKEYS_BEEP_REJECT,
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
   /* bounce keys */
-  w = WID (priv->builder, "typing_bounce_keys_switch");
-  settings_on_off_editor_new (priv, priv->kb_settings, "bouncekeys-enable", w, bounce_keys_section);
-
-  w = WID (priv->builder, "typing_bouncekeys_delay_scale");
-  g_settings_bind (priv->kb_settings, "bouncekeys-delay",
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+  sw = WID ("typing_bouncekeys_switch");
+  g_settings_bind (priv->kb_settings, KEY_BOUNCEKEYS_ENABLED,
+                   sw, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = WID (priv->builder, "typing_bounce_keys_beep_rejected_checkbutton");
-  g_settings_bind (priv->kb_settings, "bouncekeys-beep-reject", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
+  w = WID ("typing_bouncekeys_delay_scale");
+  g_settings_bind (priv->kb_settings, KEY_BOUNCEKEYS_DELAY,
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+  w = WID ("typing_bouncekeys_delay_box");
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
+
+  w = WID ("typing_bouncekeys_beep_rejected_check");
+  g_settings_bind (priv->kb_settings, KEY_BOUNCEKEYS_BEEP_REJECT,
+                   w, "active",
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
+
+  dialog = WID ("typing_dialog");
+
+  g_object_set_data (G_OBJECT (WID ("row_accessx")), "dialog", dialog);
+
+  g_signal_connect_swapped (WID ("typing_done"), "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+  g_signal_connect (WID ("heading_accessx"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
 }
 
 /* mouse/pointing & clicking section */
-static gboolean
-pointing_mouse_preferences_clicked_cb (GtkButton  *button,
-                                       CcUaPanel  *panel)
+static void
+update_click_assist_label (GSettings *settings, const gchar *key, CcUaPanel *self)
 {
-  CcShell *shell;
+  gboolean on;
 
-  shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_set_active_panel_from_id (shell, "mouse", NULL, NULL);
+  on = g_settings_get_boolean (settings, KEY_SECONDARY_CLICK_ENABLED) ||
+       g_settings_get_boolean (settings, KEY_DWELL_CLICK_ENABLED);
 
-  return TRUE;
+  gtk_label_set_text (GTK_LABEL (WID ("value_click_assist")), on ? _("On") : _("Off"));
 }
+
 
 static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
+  GtkWidget *list;
+  GtkWidget *dialog;
+  GtkWidget *sw;
   GtkWidget *w;
 
-  /* mouse keys */
-  w = WID (priv->builder, "pointing_mouse_keys_switch");
-  settings_on_off_editor_new (priv, priv->kb_settings, "mousekeys-enable", w, NULL);
+  list = WID ("list_pointing");
+  add_section (list, self);
+
+  add_separators (GTK_LIST_BOX (list));
+
+  g_signal_connect_swapped (list, "row-activated",
+                            G_CALLBACK (activate_row), self);
+
+  g_settings_bind (priv->kb_settings, KEY_MOUSEKEYS_ENABLED,
+                   WID ("mouse_keys_switch"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (priv->mouse_settings, "changed",
+                    G_CALLBACK (update_click_assist_label), self);
+  update_click_assist_label (priv->mouse_settings, NULL, self);
 
   /* simulated secondary click */
-  w = WID (priv->builder, "pointing_second_click_switch");
-  settings_on_off_editor_new (priv, priv->mouse_settings, "secondary-click-enabled", w, secondary_click_section);
+  sw = WID ("pointing_secondary_click_switch");
+  g_settings_bind (priv->mouse_settings, KEY_SECONDARY_CLICK_ENABLED,
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
-  w = WID (priv->builder, "pointing_secondary_click_delay_scale");
-  g_settings_bind (priv->mouse_settings, "secondary-click-time",
+  w = WID ("pointing_secondary_click_delay_scale");
+  g_settings_bind (priv->mouse_settings, KEY_SECONDARY_CLICK_TIME,
                    gtk_range_get_adjustment (GTK_RANGE (w)), "value",
                    G_SETTINGS_BIND_DEFAULT);
+  w = WID ("pointing_secondary_click_delay_box");
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
   /* dwell click */
-  w = WID (priv->builder, "pointing_hover_click_switch");
-  settings_on_off_editor_new (priv, priv->mouse_settings, "dwell-click-enabled", w, dwell_click_section);
-
-  w = WID (priv->builder, "pointing_dwell_delay_scale");
-  g_settings_bind (priv->mouse_settings, "dwell-time",
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+  sw = WID ("pointing_hover_click_switch");
+  g_settings_bind (priv->mouse_settings, KEY_DWELL_CLICK_ENABLED,
+                   sw, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = WID (priv->builder, "pointing_dwell_threshold_scale");
-  g_settings_bind (priv->mouse_settings, "dwell-threshold",
+  w = WID ("pointing_dwell_delay_scale");
+  g_settings_bind (priv->mouse_settings, KEY_DWELL_TIME,
                    gtk_range_get_adjustment (GTK_RANGE (w)), "value",
                    G_SETTINGS_BIND_DEFAULT);
+  w = WID ("pointing_dwell_delay_box");
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
-  /* mouse preferences button */
-  g_signal_connect (WID (priv->builder, "pointing_mouse_preferences_link"),
-                    "activate-link",
-                    G_CALLBACK (pointing_mouse_preferences_clicked_cb), self);
+  w = WID ("pointing_dwell_threshold_scale");
+  g_settings_bind (priv->mouse_settings, KEY_DWELL_THRESHOLD,
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+  w = WID ("pointing_dwell_threshold_box");
+  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
+
+  dialog = WID ("pointing_dialog");
+
+  g_object_set_data (G_OBJECT (WID ("row_click_assist")), "dialog", dialog);
+
+  g_signal_connect_swapped (WID ("pointing_done"), "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+  g_signal_connect (WID ("heading_click_assist"), "mnemonic-activate",
+                    G_CALLBACK (mnemonic_activate), self);
+}
+
+static void
+on_content_size_changed (GtkWidget *content, GtkAllocation *allocation, GtkWidget *panel)
+{
+  if (allocation->height < SCROLL_HEIGHT)
+    {
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (panel),
+                                      GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+    }
+  else
+    {
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (panel),
+                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (panel), SCROLL_HEIGHT);
+    }
 }
 
 static void
 cc_ua_panel_init (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv;
-  GtkWidget *widget;
-  GError *err = NULL;
-  gchar *objects[] = { "universal_access_box", "contrast_model",
-                       "text_size_model", "slowkeys_delay_adjustment",
-                       "bouncekeys_delay_adjustment", "click_delay_adjustment",
-                       "dwell_time_adjustment", "dwell_threshold_adjustment",
-                       "seeing_sizegroup", "typing_sizegroup",
-                       "pointing_sizegroup", "pointing_sizegroup2",
-                       "pointing_scale_sizegroup", "sizegroup1",
-                       "hearing_sizegroup",
-                       NULL };
+  GtkWidget *panel;
+  GtkWidget *content;
 
-  priv = self->priv = UA_PANEL_PRIVATE (self);
+  priv = self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self,
+                                                   CC_TYPE_UA_PANEL,
+                                                   CcUaPanelPrivate);
+
   g_resources_register (cc_universal_access_get_resource ());
 
+  priv->interface_settings = g_settings_new (INTERFACE_SETTINGS);
+  priv->a11y_settings = g_settings_new (A11Y_SETTINGS);
+  priv->wm_settings = g_settings_new (WM_SETTINGS);
+  priv->kb_settings = g_settings_new (KEYBOARD_SETTINGS);
+  priv->mouse_settings = g_settings_new (MOUSE_SETTINGS);
+  priv->application_settings = g_settings_new (APPLICATION_SETTINGS);
+
   priv->builder = gtk_builder_new ();
+  gtk_builder_add_from_resource (priv->builder,
 
-  gtk_builder_add_objects_from_resource (priv->builder,
-                                         "/org/gnome/control-center/universal-access/uap.ui",
-                                         objects,
-                                         &err);
+                                 "/org/gnome/control-center/universal-access/uap.ui",
+                                 NULL);
 
-  if (err)
-    {
-      g_warning ("Could not load interface file: %s", err->message);
-      g_error_free (err);
-
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-
-      return;
-    }
-
-  priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
-  priv->wm_settings = g_settings_new ("org.gnome.desktop.wm.preferences");
-  priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
-  priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
-  priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
-  priv->mediakeys_settings = g_settings_new ("org.gnome.settings-daemon.plugins.media-keys");
-
+  cc_ua_panel_init_status (self);
+  cc_ua_panel_init_seeing (self);
+  cc_ua_panel_init_hearing (self);
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
-  cc_ua_panel_init_hearing (self);
-  cc_ua_panel_init_seeing (self);
 
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
-                                                "universal_access_box");
+  panel = WID ("universal_access_panel");
+  content = WID ("universal_access_content");
 
-  gtk_container_add (GTK_CONTAINER (self), widget);
+  g_signal_connect (content, "size-allocate",
+                    G_CALLBACK (on_content_size_changed), panel);
+
+  priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel));
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (content), priv->focus_adjustment);
+
+  gtk_widget_reparent (panel, GTK_WIDGET (self));
 }
