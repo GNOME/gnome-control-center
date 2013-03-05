@@ -30,8 +30,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-05 10:44+0000\n"
-"PO-Revision-Date: 2013-03-05 09:27-0300\n"
+"POT-Creation-Date: 2013-03-05 12:42+0000\n"
+"PO-Revision-Date: 2013-03-05 09:54-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -1938,21 +1938,21 @@ msgstr "Clique único, botão secundário"
 # Traduções viáveis são "Modo avião", "Modo voo" ou até "Modo de avião". Achei por melhor manter a primeira opção
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:341
 msgid "Air_plane Mode"
 msgstr "Modo a_vião"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:904
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1083 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1217
 msgid "The system network services are not compatible with this version."
 msgstr "Os serviços de rede do sistema não são compatíveis com esta versão."
 
@@ -1980,7 +1980,7 @@ msgstr "_Autenticação interna"
 msgid "Security"
 msgstr "Segurança"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "automático"
 
@@ -2080,9 +2080,9 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
+#: ../panels/network/connection-editor/ce-page-ethernet.c:210
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:253
 #: ../panels/network/network-wifi.ui.h:59
 msgid "Identity"
 msgstr "Identidade"
@@ -2322,17 +2322,24 @@ msgid "_Cloned Address"
 msgstr "Endereço _clonado"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "Conectar _automaticamente"
+msgid "bytes"
+msgstr "bytes"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "Disponibilizar para outros _usuários"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "bytes"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "Conectar _automaticamente"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "_Zona de firewall"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:23
@@ -2501,7 +2508,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "Exportar conexão VPN..."
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Erro: não foi possível carregar o editor de conexão VPN)"
 
@@ -2520,7 +2527,7 @@ msgstr "_BSSID"
 msgid "My Home Network"
 msgstr "Minha rede pessoal"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "Disponibilizar para _outros usuários"
 
@@ -2576,6 +2583,8 @@ msgstr "Último uso"
 #: ../panels/network/net-device-ethernet.c:337
 #: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:7
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "Opções..."
@@ -2585,7 +2594,7 @@ msgstr "Opções..."
 msgid "Profile %d"
 msgstr "Perfil %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "Adicionar nova conexão"
 
@@ -2678,11 +2687,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "Provedor"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
-msgid "_Options…"
-msgstr "_Opções..."
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -3922,8 +3926,8 @@ msgstr ""
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
-"Energia;Dormir;Suspender;Hibernar;Bateria;Brilho;Escurecer;Vazio;Monitor;"
-"DPMS;Inativo"
+"Energia;Dormir;Suspender;Hibernar;Bateria;Brilho;Escurecer;Vazio;Branca;"
+"Monitor;DPMS;Inativo"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -4233,7 +4237,7 @@ msgstr "Trabalhos ativos"
 
 #: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#: ../panels/user-accounts/data/history-dialog.ui.h:2
 msgid "Close"
 msgstr "Fechar"
 
@@ -4613,7 +4617,7 @@ msgstr "Uso & histórico"
 
 #: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
 msgid "Purge Trash & Temporary Files"
-msgstr "Apagar lixeira & arquivos temporários"
+msgstr "Excluir permanentemente arquivos da lixeira e temporários"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -4729,8 +4733,8 @@ msgid "Automatic Screen _Lock"
 msgstr "B_loqueio de tela automático"
 
 #: ../panels/privacy/privacy.ui.h:34
-msgid "Lock Screen _After Blank For"
-msgstr "Bloquear tela _após"
+msgid "Lock screen _after blank for"
+msgstr "Bloquear tela _após tela branca"
 
 #: ../panels/privacy/privacy.ui.h:35
 msgid "Show _Notifications"
@@ -4742,27 +4746,28 @@ msgstr "Es_vaziar lixeira"
 
 #: ../panels/privacy/privacy.ui.h:38
 msgid "_Purge Temporary Files"
-msgstr "A_pagar arquivos temporários"
+msgstr "Excluir _permanentemente arquivos temporários"
 
 #: ../panels/privacy/privacy.ui.h:39
 msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
 msgstr ""
-"Apague automaticamente a lixeira e arquivos temporários para ajudar a manter "
-"seu computador livre de informações sensíveis e desnecessárias."
+"Exclui permanentemente, de forma automática, os arquivos da lixeira e "
+"temporários para ajudar a manter seu computador livre de informações "
+"sensíveis e desnecessárias."
 
 #: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+msgid "Automatically empty _Trash"
 msgstr "Esvaziar a _lixeira automaticamente"
 
 #: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
-msgstr "Apagar a_rquivos temporários automaticamente"
+msgid "Automatically purge Temporary _Files"
+msgstr "Excluir permanentemente a_rquivos temporários de forma automática"
 
 #: ../panels/privacy/privacy.ui.h:42
 msgid "Purge _After"
-msgstr "Apagar _após"
+msgstr "Excluir permanentemente _após"
 
 #: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
@@ -4772,7 +4777,7 @@ msgstr "Imperial"
 #: ../panels/region/cc-format-chooser.c:124
 msgctxt "measurement format"
 msgid "Metric"
-msgstr "Métrica"
+msgstr "Métrico"
 
 #: ../panels/region/cc-format-chooser.c:268
 msgid "No regions found"
@@ -6014,15 +6019,19 @@ msgstr "Adicionar ou remover usuários e alterar sua senha"
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "Iniciar sessão;Nome;Impressão digital;Avatar;Logotipo;Face;Senha;"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:2
+#: ../panels/user-accounts/data/history-dialog.ui.h:1
+msgid "Login History"
+msgstr "Histórico de início de sessão"
+
+#: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
 msgstr "Semana anterior"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
+#: ../panels/user-accounts/data/history-dialog.ui.h:4
 msgid "Next Week"
 msgstr "Próxima semana"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
+#: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "Próxima semana"
 
@@ -6969,6 +6978,9 @@ msgstr "Todas as configurações"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferências;Configurações;"
+
+#~ msgid "_Options…"
+#~ msgstr "_Opções..."
 
 #~ msgid "Expired credentials. Please log in again."
 #~ msgstr "Credenciais expiradas. Por favor, conecte-se novamente."
