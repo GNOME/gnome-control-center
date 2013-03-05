@@ -1,5 +1,5 @@
 # Brazilian Portuguese translation of GNOME Control Center.
-# Copyright (C) 1999-2012 The GNOME Control Center authors.
+# Copyright (C) 1999-2013 The GNOME Control Center authors.
 # This file is distributed under the same license as the gnome-control-center package.
 # Ivan Passos <ivan@cyclades.com>, 1999.
 # Sandro Nunes Henrique <sandro@conectiva.com.br>, 1999.
@@ -21,17 +21,18 @@
 # Krix Apolinário <krixapolinario@gmail.com>, 2009, 2011.
 # Antonio Fernandes C. Neto <fernandes@pelivre.org>, 2010.
 # Hugo Vaz Sampaio <hvazsampaio@gmail.com>, 2010.
-# Enrico Nicoletto <liverig@gmail.com>, 2012.
+# Enrico Nicoletto <liverig@gmail.com>, 2012, 2013.
 # Djavan Fagundes <djavan@comum.org>, 2012.
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2012, 2013.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-28 12:46+0000\n"
-"PO-Revision-Date: 2013-02-28 21:02-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2013-03-05 10:44+0000\n"
+"PO-Revision-Date: 2013-03-05 09:27-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -711,7 +712,6 @@ msgstr ""
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Cor"
 
@@ -3576,46 +3576,63 @@ msgstr "Mostrar janelas instantâneas de banners"
 msgid "Show in Lock Screen"
 msgstr "Mostrar na tela de bloqueio"
 
-#. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
+#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgid "Other"
+msgstr "Outro"
+
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Adicionar conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+msgid "Mail"
+msgstr "Correio"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+msgid "Contacts"
+msgstr "Contatos"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+msgid "Resources"
+msgstr "Recursos"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Erro ao iniciar sessão com a conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:429
+#: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
 msgstr "As credenciais expiraram."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:433
-#| msgid "Enable this account"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:434
 msgid "Sign in to enable this account."
 msgstr "Autentique para habilitar esta conta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:438
+#: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
 msgstr "_Autenticação"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:679
+#: ../panels/online-accounts/cc-online-accounts-panel.c:680
 msgid "Error creating account"
 msgstr "Erro ao criar conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:721
+#: ../panels/online-accounts/cc-online-accounts-panel.c:722
 msgid "Error removing account"
 msgstr "Erro ao remover conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:758
 msgid "Are you sure you want to remove the account?"
 msgstr "Tem certeza de que deseja remover a conta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:759
+#: ../panels/online-accounts/cc-online-accounts-panel.c:760
 msgid "This will not remove the account on the server."
 msgstr "Isso não irá remover a conta no servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:761
 msgid "_Remove"
 msgstr "_Remover"
 
@@ -3632,7 +3649,7 @@ msgstr "Conecte-se às suas contas on-line e decida para que usá-las"
 msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Conectado;Bate-papo;Calendário;E-mail;"
-"Contato;"
+"Correio;Contato;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4258,40 +4275,40 @@ msgid "Loading drivers database..."
 msgstr "Carregando banco de dados de drivers..."
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:65
-#: ../panels/printers/pp-ppd-option-widget.c:69
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "One Sided"
 msgstr "Um lado"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:67
-#: ../panels/printers/pp-ppd-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Long Edge (Standard)"
 msgstr "Lado maior (padrão)"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:69
-#: ../panels/printers/pp-ppd-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ppd-option-widget.c:75
 msgid "Short Edge (Flip)"
 msgstr "Lado menor (virar)"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Portrait"
 msgstr "Retrato"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Landscape"
 msgstr "Paisagem"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:75
+#: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse landscape"
 msgstr "Paisagem invertida"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:77
+#: ../panels/printers/pp-ipp-option-widget.c:79
 msgid "Reverse portrait"
 msgstr "Retrato invertido"
 
@@ -4450,38 +4467,38 @@ msgid "Advanced"
 msgstr "Avançado"
 
 #. Translators: this is an option of "Paper Source"
-#: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
-#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:87
 msgid "Auto Select"
 msgstr "Auto-selecionar"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
-#: ../panels/printers/pp-ppd-option-widget.c:87
+#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Printer Default"
 msgstr "Padrão da impressora"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:89
+#: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
 msgstr "Somente fontes embutidas do GhostScript"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:91
+#: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 1"
 msgstr "Converter para PS nível 1"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:93
+#: ../panels/printers/pp-ppd-option-widget.c:95
 msgid "Convert to PS level 2"
 msgstr "Converter para PS nível 2"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:95
+#: ../panels/printers/pp-ppd-option-widget.c:97
 msgid "No pre-filtering"
 msgstr "Nenhum pré-filtro"
 
@@ -4765,11 +4782,6 @@ msgstr "Nenhuma região encontrada"
 msgid "No input sources found"
 msgstr "Nenhuma fonte de entrada encontrada"
 
-#: ../panels/region/cc-input-chooser.c:997
-#: ../panels/search/cc-search-locations-dialog.c:479
-msgid "Other"
-msgstr "Outro"
-
 #: ../panels/region/cc-region-panel.c:225
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
@@ -4907,19 +4919,19 @@ msgstr ""
 "Configurações de inicialização são usadas por todos usuários ao iniciar a "
 "sessão no sistema"
 
-#: ../panels/search/cc-search-locations-dialog.c:275
+#: ../panels/search/cc-search-locations-dialog.c:276
 msgid "Home"
 msgstr "Pasta pessoal"
 
-#: ../panels/search/cc-search-locations-dialog.c:475
+#: ../panels/search/cc-search-locations-dialog.c:476
 msgid "Places"
 msgstr "Locais"
 
-#: ../panels/search/cc-search-locations-dialog.c:477
+#: ../panels/search/cc-search-locations-dialog.c:478
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: ../panels/search/cc-search-locations-dialog.c:675
+#: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
 msgstr "Selecione localização"
 
@@ -5390,7 +5402,7 @@ msgstr ""
 "Teclas do mouse;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Baixo"
@@ -5401,7 +5413,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Alto"
@@ -5825,31 +5837,37 @@ msgstr "Brilho:"
 msgid "Contrast:"
 msgstr "Contraste:"
 
+#. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:29
+msgctxt "universal access, contrast"
+msgid "Color"
+msgstr "Colorido"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Nenhum"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Completo"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Baixo"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Alto"
 
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects:"
 msgstr "Efeitos de cor:"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects"
 msgstr "Efeitos de cor"
 
@@ -6929,22 +6947,22 @@ msgid "Settings"
 msgstr "Configurações"
 
 #. Add categories
-#: ../shell/cc-window.c:845
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
 msgstr "Pessoal"
 
-#: ../shell/cc-window.c:846
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:847
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1401
+#: ../shell/cc-window.c:1413
 msgid "All Settings"
 msgstr "Todas as configurações"
 
