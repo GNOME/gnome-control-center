@@ -4,6 +4,7 @@
  <interface name="org.freedesktop.timedate1">
   <property name="Timezone" type="s" access="read"/>
   <property name="LocalRTC" type="b" access="read"/>
+  <property name="CanNTP" type="b" access="read"/>
   <property name="NTP" type="b" access="read"/>
   <method name="SetTime">
    <arg name="usec_utc" type="x" direction="in"/>

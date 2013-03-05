@@ -848,6 +848,30 @@ update_ntp_switch_from_system (CcDateTimePanel *self)
 }
 
 static void
+on_can_ntp_changed (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *switch_widget;
+  gboolean sensitive = TRUE;
+  GVariant *value;
+
+  switch_widget = W("network_time_switch");
+
+  /* We need to access this directly so that we can default to TRUE if
+   * it is not set.
+   */
+  value = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (self->priv->dtm), "CanNTP");
+  if (value)
+    {
+      if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
+        sensitive = g_variant_get_boolean (value);
+      g_variant_unref (value);
+    }
+
+  gtk_widget_set_sensitive (switch_widget, sensitive);
+}
+
+static void
 on_ntp_changed (CcDateTimePanel *self)
 {
   update_ntp_switch_from_system (self);
@@ -990,7 +1014,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* set up network time button */
   if (priv->dtm != NULL)
-    update_ntp_switch_from_system (self);
+    {
+      update_ntp_switch_from_system (self);
+      on_can_ntp_changed (self);
+    }
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
 
@@ -1119,6 +1146,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                         G_CALLBACK (on_timedated_properties_changed), self);
       g_signal_connect_swapped (priv->dtm, "notify::ntp",
                                 G_CALLBACK (on_ntp_changed), self);
+      g_signal_connect_swapped (priv->dtm, "notify::can-ntp",
+                                G_CALLBACK (on_can_ntp_changed), self);
       g_signal_connect_swapped (priv->dtm, "notify::timezone",
                                 G_CALLBACK (on_timezone_changed), self);
     }
