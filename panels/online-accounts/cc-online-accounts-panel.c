@@ -224,6 +224,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);
   g_object_set (G_OBJECT (renderer),
+                "follow-state", TRUE,
                 "stock-size", GTK_ICON_SIZE_DIALOG,
                 NULL);
   gtk_tree_view_column_set_attributes (column,
