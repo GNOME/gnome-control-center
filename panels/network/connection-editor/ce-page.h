@@ -55,6 +55,7 @@ struct _CEPage
         NMConnection *connection;
         NMClient *client;
         NMRemoteSettings *settings;
+        GCancellable *cancellable;
 };
 
 struct _CEPageClass
