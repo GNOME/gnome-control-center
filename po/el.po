@@ -39,8 +39,8 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-03 07:07+0000\n"
-"PO-Revision-Date: 2013-03-03 13:42+0300\n"
+"POT-Creation-Date: 2013-03-05 20:09+0000\n"
+"PO-Revision-Date: 2013-03-06 12:56+0300\n"
 "Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
 "Language-Team: team@gnome.gr\n"
 "Language: el\n"
@@ -730,7 +730,6 @@ msgstr ""
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Χρώμα"
 
@@ -3599,46 +3598,65 @@ msgstr "Εμφάνιση αναδυόμενων τίτλων"
 msgid "Show in Lock Screen"
 msgstr "Εμφάνιση σε κλείδωμα οθόνης"
 
-#. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
+#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgid "Other"
+msgstr "Άλλο"
+
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Προσθήκη λογαριασμού"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#| msgid "_Mail"
+msgid "Mail"
+msgstr "Αλληλογραφία"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#| msgid "Contrast:"
+msgid "Contacts"
+msgstr "Επαφές"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+msgid "Resources"
+msgstr "Πόροι"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Σφάλμα σύνδεσης στο λογαριασμό"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:429
+#: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
 msgstr "Τα διαπιστευτήρια έχουν λήξει."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:433
-#| msgid "Enable this account"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:434
 msgid "Sign in to enable this account."
 msgstr "Σύνδεση για ενεργοποίηση αυτού του λογαριασμού."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:438
+#: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
 msgstr "_Σύνδεση"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:679
+#: ../panels/online-accounts/cc-online-accounts-panel.c:680
 msgid "Error creating account"
 msgstr "Σφάλμα δημιουργίας λογαριασμού"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:721
+#: ../panels/online-accounts/cc-online-accounts-panel.c:722
 msgid "Error removing account"
 msgstr "Σφάλμα αφαίρεσης λογαριασμού"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:758
 msgid "Are you sure you want to remove the account?"
 msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το λογαριασμό;"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:759
+#: ../panels/online-accounts/cc-online-accounts-panel.c:760
 msgid "This will not remove the account on the server."
 msgstr "Ο λογαριασμός σας δε θα διαγραφεί από τον εξυπηρετητή."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:761
 msgid "_Remove"
 msgstr "Α_φαίρεση"
 
@@ -4241,7 +4259,7 @@ msgstr "Ενεργές εργασίες"
 
 #: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#: ../panels/user-accounts/data/history-dialog.ui.h:2
 msgid "Close"
 msgstr "Κλείσιμο"
 
@@ -4283,40 +4301,40 @@ msgid "Loading drivers database..."
 msgstr "Φόρτωση βάσης δεδομένων των οδηγών..."
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:65
-#: ../panels/printers/pp-ppd-option-widget.c:69
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "One Sided"
 msgstr "Μονής όψης"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:67
-#: ../panels/printers/pp-ppd-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Long Edge (Standard)"
 msgstr "Μακρύ άκρο (κανονικό)"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:69
-#: ../panels/printers/pp-ppd-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ppd-option-widget.c:75
 msgid "Short Edge (Flip)"
 msgstr "Βραχύ άκρο (αναστροφή)"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Portrait"
 msgstr "Κάθετα"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Landscape"
 msgstr "Οριζόντια"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:75
+#: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse landscape"
 msgstr "Αντίστροφα οριζόντιο"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:77
+#: ../panels/printers/pp-ipp-option-widget.c:79
 msgid "Reverse portrait"
 msgstr "Αντίστροφα κάθετο"
 
@@ -4475,38 +4493,38 @@ msgid "Advanced"
 msgstr "Για προχωρημένους"
 
 #. Translators: this is an option of "Paper Source"
-#: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
-#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:87
 msgid "Auto Select"
 msgstr "Αυτόματη επιλογή"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
-#: ../panels/printers/pp-ppd-option-widget.c:87
+#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Printer Default"
 msgstr "Προεπιλογή εκτυπωτή"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:89
+#: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
 msgstr "Ενσωμάτωση μόνο των γραμματοσειρών GhostScript"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:91
+#: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 1"
 msgstr "Μετατροπή σε PS επιπέδου 1"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:93
+#: ../panels/printers/pp-ppd-option-widget.c:95
 msgid "Convert to PS level 2"
 msgstr "Μετατροπή σε PS επιπέδου 2"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:95
+#: ../panels/printers/pp-ppd-option-widget.c:97
 msgid "No pre-filtering"
 msgstr "Χωρίς προ-φιλτράρισμα"
 
@@ -4790,11 +4808,6 @@ msgstr "Δε βρέθηκαν περιοχές"
 #: ../panels/region/cc-input-chooser.c:179
 msgid "No input sources found"
 msgstr "Δεν βρέθηκαν πηγές εισόδου"
-
-#: ../panels/region/cc-input-chooser.c:997
-#: ../panels/search/cc-search-locations-dialog.c:480
-msgid "Other"
-msgstr "Άλλο"
 
 #: ../panels/region/cc-region-panel.c:225
 msgid "Your session needs to be restarted for changes to take effect"
@@ -5413,7 +5426,7 @@ msgstr ""
 "αναπήδησης;Πλήκτρα ποντικιού"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Χαμηλό"
@@ -5424,7 +5437,7 @@ msgid "Normal"
 msgstr "Κανονική"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Υψηλό"
@@ -5850,31 +5863,38 @@ msgstr "Φωτεινότητα:"
 msgid "Contrast:"
 msgstr "Αντίθεση:"
 
+#. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:29
+#| msgid "Color"
+msgctxt "universal access, contrast"
+msgid "Color"
+msgstr "Χρώμα"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Κανένα"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Πλήρες"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Χαμηλή"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Υψηλή"
 
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects:"
 msgstr "Εφέ χρώματος:"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects"
 msgstr "Εφέ χρώματος"
 
@@ -6024,15 +6044,20 @@ msgstr ""
 "Σύνδεση;Όνομα;Δακτυλικό αποτύπωμα;Avatar;Λογότυπο;Πρόσωπο;Συνθηματικό;Login;"
 "Name;Fingerprint;Logo;Face;Password;"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:2
+#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#| msgid "Retain _History"
+msgid "Login History"
+msgstr "Ιστορικό συνδέσεων"
+
+#: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
 msgstr "Προηγούμενη εβδομάδα"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
+#: ../panels/user-accounts/data/history-dialog.ui.h:4
 msgid "Next Week"
 msgstr "Επόμενη εβδομάδα"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
+#: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "Επόμενη εβδομάδα"
 
