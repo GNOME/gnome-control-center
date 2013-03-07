@@ -952,6 +952,7 @@ get_locale_infos (GtkWidget *chooser)
     {
       gchar *lang_code, *country_code;
       gchar *simple_locale;
+      gchar *tmp;
       const gchar *type = NULL;
       const gchar *id = NULL;
 
@@ -971,7 +972,9 @@ get_locale_infos (GtkWidget *chooser)
       info->id = simple_locale; /* Take ownership */
       info->name = gnome_get_language_from_locale (simple_locale, NULL);
       info->unaccented_name = cc_util_normalize_casefold_and_unaccent (info->name);
-      info->untranslated_name = gnome_get_language_from_locale (simple_locale, "C");
+      tmp = gnome_get_language_from_locale (simple_locale, "C");
+      info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
+      g_free (tmp);
 
       g_hash_table_replace (priv->locales, simple_locale, info);
       add_locale_to_table (priv->locales_by_language, lang_code, info);
