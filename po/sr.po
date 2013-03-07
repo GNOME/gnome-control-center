@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-28 12:46+0000\n"
-"PO-Revision-Date: 2013-03-01 09:08+0200\n"
+"POT-Creation-Date: 2013-03-06 13:19+0000\n"
+"PO-Revision-Date: 2013-03-07 10:42+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -689,7 +689,6 @@ msgstr ""
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Боја"
 
@@ -3542,46 +3541,65 @@ msgstr "Прикажи искачуће врпце"
 msgid "Show in Lock Screen"
 msgstr "Прикажи у екрану закључавања"
 
-#. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
+#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgid "Other"
+msgstr "Друго"
+
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Додај налог"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#| msgid "_Mail"
+msgid "Mail"
+msgstr "Пошта"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#| msgid "Contrast:"
+msgid "Contacts"
+msgstr "Контакти"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+msgid "Resources"
+msgstr "Извори"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Грешка пријављивања на налог"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:429
+#: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
 msgstr "Пуномоћства су истекла."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:433
-#| msgid "Enable this account"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:434
 msgid "Sign in to enable this account."
 msgstr "Учланите се да укључи овај налог."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:438
+#: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
 msgstr "_Учлани ме"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:679
+#: ../panels/online-accounts/cc-online-accounts-panel.c:680
 msgid "Error creating account"
 msgstr "Грешка у стварању налога"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:721
+#: ../panels/online-accounts/cc-online-accounts-panel.c:722
 msgid "Error removing account"
 msgstr "Грешка у уклањању налога"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:758
 msgid "Are you sure you want to remove the account?"
 msgstr "Да ли сте сигурни да желите да уклоните налог?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:759
+#: ../panels/online-accounts/cc-online-accounts-panel.c:760
 msgid "This will not remove the account on the server."
 msgstr "Ово неће уклонити налог на серверу."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:761
 msgid "_Remove"
 msgstr "_Уклони"
 
@@ -4143,8 +4161,8 @@ msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 msgstr ""
-"Датотеке описа Пост скрипт штампача (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, "
-"*.PPD.GZ)"
+"Датотеке описа Пост скрипт штампача (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, *.PPD."
+"GZ)"
 
 #: ../panels/printers/cc-printers-panel.c:2254
 msgid "No suitable driver found"
@@ -4196,7 +4214,7 @@ msgstr "Активни послови"
 
 #: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#: ../panels/user-accounts/data/history-dialog.ui.h:2
 msgid "Close"
 msgstr "Затвори"
 
@@ -4239,40 +4257,40 @@ msgid "Loading drivers database..."
 msgstr "Учитавам базу података управљачких програма..."
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:65
-#: ../panels/printers/pp-ppd-option-widget.c:69
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "One Sided"
 msgstr "Једнострано"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:67
-#: ../panels/printers/pp-ppd-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Long Edge (Standard)"
 msgstr "По дужој страни (стандардно)"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:69
-#: ../panels/printers/pp-ppd-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ppd-option-widget.c:75
 msgid "Short Edge (Flip)"
 msgstr "По краћој страни (окренуто)"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Portrait"
 msgstr "Усправно"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Landscape"
 msgstr "Положено"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:75
+#: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse landscape"
 msgstr "Обрнуто положено"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:77
+#: ../panels/printers/pp-ipp-option-widget.c:79
 msgid "Reverse portrait"
 msgstr "Обрнуто усправно"
 
@@ -4431,38 +4449,38 @@ msgid "Advanced"
 msgstr "Напредно"
 
 #. Translators: this is an option of "Paper Source"
-#: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
-#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:87
 msgid "Auto Select"
 msgstr "Сам одреди"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
-#: ../panels/printers/pp-ppd-option-widget.c:87
+#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Printer Default"
 msgstr "Подразумевано"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:89
+#: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
 msgstr "Само угњеждени Гост скрипт фонтови"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:91
+#: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 1"
 msgstr "Преведи у 1° ниво постскрипта"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:93
+#: ../panels/printers/pp-ppd-option-widget.c:95
 msgid "Convert to PS level 2"
 msgstr "Преведи у 2° ниво постскрипта"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:95
+#: ../panels/printers/pp-ppd-option-widget.c:97
 msgid "No pre-filtering"
 msgstr "Без предфилтрирања"
 
@@ -4746,11 +4764,6 @@ msgstr "Нисам пронашао подручја"
 msgid "No input sources found"
 msgstr "Нисам пронашао изворе улаза"
 
-#: ../panels/region/cc-input-chooser.c:997
-#: ../panels/search/cc-search-locations-dialog.c:479
-msgid "Other"
-msgstr "Друго"
-
 #: ../panels/region/cc-region-panel.c:225
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Морате поново да покренете сесију како би измене ступиле у дејство"
@@ -4885,19 +4898,19 @@ msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Подешавања пријављивања користе сви корисници када се пријављују на систем"
 
-#: ../panels/search/cc-search-locations-dialog.c:275
+#: ../panels/search/cc-search-locations-dialog.c:276
 msgid "Home"
 msgstr "Личнo"
 
-#: ../panels/search/cc-search-locations-dialog.c:475
+#: ../panels/search/cc-search-locations-dialog.c:476
 msgid "Places"
 msgstr "Пречице"
 
-#: ../panels/search/cc-search-locations-dialog.c:477
+#: ../panels/search/cc-search-locations-dialog.c:478
 msgid "Bookmarks"
 msgstr "Обележивачи"
 
-#: ../panels/search/cc-search-locations-dialog.c:675
+#: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
 msgstr "Изабери место"
 
@@ -5365,7 +5378,7 @@ msgstr ""
 "миша;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Низак"
@@ -5376,7 +5389,7 @@ msgid "Normal"
 msgstr "Нормалан"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Висок"
@@ -5798,31 +5811,38 @@ msgstr "Осветљење:"
 msgid "Contrast:"
 msgstr "Контраст:"
 
+#. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:29
+#| msgid "Color"
+msgctxt "universal access, contrast"
+msgid "Color"
+msgstr "Боја"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Ништа"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Пун"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Низак"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Висок"
 
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects:"
 msgstr "Дејства боје:"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects"
 msgstr "Дејства боје"
 
@@ -5969,15 +5989,20 @@ msgstr "Додајте или уклоните кориснике и измен�
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "пријављивање;име;отисак прстију;аватар;лого;лице;лозинка;"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:2
+#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#| msgid "Retain _History"
+msgid "Login History"
+msgstr "Историјат пријаве"
+
+#: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
 msgstr "Претходна седмица"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
+#: ../panels/user-accounts/data/history-dialog.ui.h:4
 msgid "Next Week"
 msgstr "Следећа седмица"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
+#: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "Следећа седмица"
 
@@ -6896,22 +6921,22 @@ msgid "Settings"
 msgstr "Подешавања"
 
 #. Add categories
-#: ../shell/cc-window.c:845
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
 msgstr "Лично"
 
-#: ../shell/cc-window.c:846
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Hardware"
 msgstr "Уређаји"
 
-#: ../shell/cc-window.c:847
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "System"
 msgstr "Систем"
 
-#: ../shell/cc-window.c:1401
+#: ../shell/cc-window.c:1413
 msgid "All Settings"
 msgstr "Сва подешавања"
 
