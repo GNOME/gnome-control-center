@@ -481,6 +481,22 @@ end_refilter (EggListBox *list_box,
 }
 
 static void
+update_separator_func (GtkWidget **separator,
+                       GtkWidget  *child,
+                       GtkWidget  *before,
+                       gpointer    user_data)
+{
+        if (before == NULL)
+                return;
+
+        if (*separator == NULL) {
+                *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+                g_object_ref_sink (*separator);
+                gtk_widget_show (*separator);
+        }
+}
+
+static void
 cc_format_chooser_private_free (gpointer data)
 {
         CcFormatChooserPrivate *priv = data;
@@ -536,6 +552,8 @@ cc_format_chooser_new (GtkWidget *parent)
                                       region_visible, chooser, NULL);
         egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list),
                                          GTK_SELECTION_NONE);
+        egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list),
+                                          update_separator_func, NULL, NULL);
 
         add_all_regions (GTK_DIALOG (chooser));
 
