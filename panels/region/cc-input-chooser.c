@@ -194,7 +194,19 @@ locale_widget_new (const gchar *text)
 static GtkWidget *
 locale_separator_widget_new (const gchar *text)
 {
-  return padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_NONE, TRUE);
+  GtkWidget *widget;
+
+  widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_box_pack_start (GTK_BOX (widget),
+                      gtk_separator_new (GTK_ORIENTATION_HORIZONTAL),
+                      FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (widget),
+                      padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_NONE, TRUE),
+                      FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (widget),
+                      gtk_separator_new (GTK_ORIENTATION_HORIZONTAL),
+                      FALSE, FALSE, 0);
+  return widget;
 }
 
 static GtkWidget *
@@ -288,6 +300,26 @@ set_fixed_size (GtkWidget *chooser)
 }
 
 static void
+update_separator (GtkWidget **separator,
+                  GtkWidget  *child,
+                  GtkWidget  *before,
+                  gpointer    user_data)
+{
+  if (*separator && !GTK_IS_SEPARATOR (*separator))
+    {
+      gtk_widget_destroy (*separator);
+      *separator = NULL;
+    }
+
+  if (*separator == NULL)
+    {
+      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      g_object_ref_sink (*separator);
+      gtk_widget_show (*separator);
+    }
+}
+
+static void
 add_input_source_widgets_for_locale (GtkWidget  *chooser,
                                      LocaleInfo *info)
 {
@@ -332,7 +364,7 @@ show_input_sources_for_locale (GtkWidget   *chooser,
 
   gtk_adjustment_set_value (priv->adjustment,
                             gtk_adjustment_get_lower (priv->adjustment));
-  egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list), NULL, NULL, NULL);
+  egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list), update_separator, NULL, NULL);
   egg_list_box_refilter (EGG_LIST_BOX (priv->list));
   egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
 
@@ -386,7 +418,7 @@ show_locale_widgets (GtkWidget *chooser)
 
   gtk_adjustment_set_value (priv->adjustment,
                             gtk_adjustment_get_lower (priv->adjustment));
-  egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list), NULL, NULL, NULL);
+  egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list), update_separator, NULL, NULL);
   egg_list_box_refilter (EGG_LIST_BOX (priv->list));
   egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list), GTK_SELECTION_NONE);
 
@@ -510,16 +542,13 @@ list_filter (GtkWidget *child,
 }
 
 static void
-update_separator (GtkWidget **separator,
-                  GtkWidget  *child,
-                  GtkWidget  *before,
-                  gpointer    user_data)
+update_separator_filter (GtkWidget **separator,
+                         GtkWidget  *child,
+                         GtkWidget  *before,
+                         gpointer    user_data)
 {
   LocaleInfo *child_info = NULL;
   LocaleInfo *before_info = NULL;
-
-  if (*separator)
-    return;
 
   if (child)
     child_info = g_object_get_data (G_OBJECT (child), "locale-info");
@@ -527,10 +556,34 @@ update_separator (GtkWidget **separator,
   if (before)
     before_info = g_object_get_data (G_OBJECT (before), "locale-info");
 
-  if (child_info == before_info || !child_info)
+  if (!child_info && !before_info)
     return;
 
-  *separator = locale_separator_widget_new (child_info->name);
+  if (child_info == before_info)
+    {
+      /* Create a regular separator if we don't have one */
+      if (*separator && !GTK_IS_SEPARATOR (*separator))
+        {
+          gtk_widget_destroy (*separator);
+          *separator = NULL;
+        }
+
+      if (*separator == NULL)
+        *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+    }
+  else
+    {
+      /* Create a locale heading separator if we don't have one */
+      if (*separator && GTK_IS_SEPARATOR (*separator))
+        {
+          gtk_widget_destroy (*separator);
+          *separator = NULL;
+        }
+
+      if (*separator == NULL)
+        *separator = locale_separator_widget_new (child_info->name);
+    }
+
   g_object_ref_sink (*separator);
   gtk_widget_show_all (*separator);
 }
@@ -554,8 +607,8 @@ show_filter_widgets (GtkWidget *chooser)
 
   gtk_adjustment_set_value (priv->adjustment,
                             gtk_adjustment_get_lower (priv->adjustment));
-  egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list), update_separator,
-                                    chooser, NULL);
+  egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->list),
+                                    update_separator_filter, NULL, NULL);
   egg_list_box_refilter (EGG_LIST_BOX (priv->list));
   egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
 
