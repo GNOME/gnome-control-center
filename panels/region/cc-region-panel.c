@@ -59,6 +59,8 @@
 #define INPUT_SOURCE_TYPE_XKB "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
 
+#define MAX_INPUT_ROWS_VISIBLE 5
+
 CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
@@ -106,6 +108,8 @@ struct _CcRegionPanelPrivate {
         GtkWidget *remove_input;
         GtkWidget *show_config;
         GtkWidget *show_layout;
+        GtkWidget *input_scrolledwindow;
+        guint n_input_rows;
 
         GSettings *input_settings;
         GnomeXkbInfo *xkb_info;
@@ -634,6 +638,28 @@ setup_app_info_for_id (const gchar *id)
 }
 #endif
 
+static void
+adjust_input_list_scrolling (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+
+        if (priv->n_input_rows >= MAX_INPUT_ROWS_VISIBLE) {
+                GtkWidget *parent;
+                gint height;
+
+                parent = gtk_widget_get_parent (priv->input_scrolledwindow);
+                gtk_widget_get_preferred_height (parent, NULL, &height);
+                gtk_widget_set_size_request (parent, -1, height);
+
+                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->input_scrolledwindow),
+                                                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+        } else {
+                gtk_widget_set_size_request (gtk_widget_get_parent (priv->input_scrolledwindow), -1, -1);
+                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->input_scrolledwindow),
+                                                GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+        }
+}
+
 static GtkWidget *
 add_input_row (CcRegionPanel   *self,
                const gchar     *type,
@@ -641,6 +667,7 @@ add_input_row (CcRegionPanel   *self,
                const gchar     *name,
                GDesktopAppInfo *app_info)
 {
+        CcRegionPanelPrivate *priv = self->priv;
         GtkWidget *row;
         GtkWidget *label;
         GtkWidget *image;
@@ -673,6 +700,9 @@ add_input_row (CcRegionPanel   *self,
         if (app_info) {
                 g_object_set_data_full (G_OBJECT (row), "app-info", g_object_ref (app_info), g_object_unref);
         }
+
+        priv->n_input_rows += 1;
+        adjust_input_list_scrolling (self);
 
         return row;
 }
@@ -745,6 +775,9 @@ clear_input_sources (CcRegionPanel *self)
                 gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (l->data));
         }
         g_list_free (list);
+
+        priv->n_input_rows = 0;
+        adjust_input_list_scrolling (self);
 }
 
 static void
@@ -1052,6 +1085,9 @@ do_remove_selected_input (CcRegionPanel *self)
         gtk_container_remove (GTK_CONTAINER (priv->input_list), selected);
         egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), sibling);
 
+        priv->n_input_rows -= 1;
+        adjust_input_list_scrolling (self);
+
         update_buttons (self);
         update_input (self);
 }
@@ -1217,6 +1253,7 @@ setup_input_section (CcRegionPanel *self)
         priv->remove_input = WID ("input_source_remove");
         priv->show_config = WID ("input_source_config");
         priv->show_layout = WID ("input_source_layout");
+        priv->input_scrolledwindow = WID ("input_scrolledwindow");
 
         g_signal_connect_swapped (priv->options_button, "clicked",
                                   G_CALLBACK (show_input_options), self);

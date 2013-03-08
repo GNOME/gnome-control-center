@@ -175,9 +175,21 @@
                 <property name="label_xalign">0</property>
                 <property name="shadow_type">in</property>
                 <child>
-                  <object class="EggListBox" id="input_list">
+                  <object class="GtkScrolledWindow" id="input_scrolledwindow">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="vscrollbar-policy">never</property>
+                    <child>
+                      <object class="GtkViewport" id="input_viewport">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="EggListBox" id="input_list">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
