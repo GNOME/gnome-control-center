@@ -854,7 +854,7 @@ get_ibus_locale_infos (GtkWidget *chooser)
             }
           else
             {
-              g_warning ("IBus returned locale '%s' that we don't know about", locale);
+              add_widget_other (chooser, INPUT_SOURCE_TYPE_IBUS, engine_id);
             }
 
           g_free (locale);
@@ -881,6 +881,10 @@ get_ibus_locale_infos (GtkWidget *chooser)
               while (g_hash_table_iter_next (&iter, (gpointer *) &info, NULL))
                 if (!maybe_set_as_default (chooser, info, engine_id))
                   add_widget (chooser, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
+            }
+          else
+            {
+              add_widget_other (chooser, INPUT_SOURCE_TYPE_IBUS, engine_id);
             }
         }
       else
