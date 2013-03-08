@@ -166,9 +166,16 @@ static GtkWidget *
 more_widget_new (void)
 {
   GtkWidget *widget;
+  GtkWidget *arrow;
 
-  widget = padded_label_new ("…", ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_NONE, FALSE);
+  widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_widget_set_tooltip_text (widget, _("More…"));
+
+  arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
+  gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
+  set_row_widget_margins (arrow);
+  gtk_misc_set_alignment (GTK_MISC (arrow), 0.5, 0.5);
+  gtk_box_pack_start (GTK_BOX (widget), arrow, TRUE, TRUE, 0);
 
   return widget;
 }
