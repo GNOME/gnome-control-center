@@ -42,6 +42,7 @@
 #define ARROW_PREV "go-previous-symbolic"
 
 #define MAIN_WINDOW_WIDTH_RATIO 0.60
+#define FILTER_TIMEOUT 150 /* ms */
 
 typedef enum {
   ROW_TRAVEL_DIRECTION_NONE,
@@ -71,6 +72,7 @@ typedef struct {
   GHashTable *locales;
   GHashTable *locales_by_language;
   gboolean showing_extra;
+  guint filter_timeout_id;
   gchar **filter_words;
 } CcInputChooserPrivate;
 
@@ -642,13 +644,15 @@ strvs_differ (gchar **av,
   return TRUE;
 }
 
-static void
-filter_changed (GtkWidget *chooser)
+static gboolean
+do_filter (GtkWidget *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
   gboolean was_filtering;
   gchar **previous_words;
   gchar *filter_contents = NULL;
+
+  priv->filter_timeout_id = 0;
 
   previous_words = priv->filter_words;
   was_filtering = previous_words != NULL;
@@ -677,6 +681,17 @@ filter_changed (GtkWidget *chooser)
     }
 
   g_strfreev (previous_words);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+filter_changed (GtkWidget *chooser)
+{
+  CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
+
+  if (priv->filter_timeout_id == 0)
+    priv->filter_timeout_id = g_timeout_add (FILTER_TIMEOUT, (GSourceFunc) do_filter, chooser);
 }
 
 typedef struct {
@@ -1103,6 +1118,8 @@ cc_input_chooser_private_free (gpointer data)
   g_hash_table_destroy (priv->locales);
   g_hash_table_destroy (priv->locales_by_language);
   g_strfreev (priv->filter_words);
+  if (priv->filter_timeout_id)
+    g_source_remove (priv->filter_timeout_id);
   g_free (priv);
 }
 
