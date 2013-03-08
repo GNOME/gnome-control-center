@@ -375,7 +375,8 @@ show_input_sources_for_locale (GtkWidget   *chooser,
   egg_list_box_refilter (EGG_LIST_BOX (priv->list));
   egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
 
-  if (gtk_widget_is_visible (priv->filter_entry))
+  if (gtk_widget_is_visible (priv->filter_entry) &&
+      !gtk_widget_is_focus (priv->filter_entry))
     gtk_widget_grab_focus (priv->filter_entry);
 }
 
@@ -429,7 +430,8 @@ show_locale_widgets (GtkWidget *chooser)
   egg_list_box_refilter (EGG_LIST_BOX (priv->list));
   egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list), GTK_SELECTION_NONE);
 
-  if (gtk_widget_is_visible (priv->filter_entry))
+  if (gtk_widget_is_visible (priv->filter_entry) &&
+      !gtk_widget_is_focus (priv->filter_entry))
     gtk_widget_grab_focus (priv->filter_entry);
 
   if (!priv->showing_extra)
@@ -619,7 +621,8 @@ show_filter_widgets (GtkWidget *chooser)
   egg_list_box_refilter (EGG_LIST_BOX (priv->list));
   egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
 
-  if (gtk_widget_is_visible (priv->filter_entry))
+  if (gtk_widget_is_visible (priv->filter_entry) &&
+      !gtk_widget_is_focus (priv->filter_entry))
     gtk_widget_grab_focus (priv->filter_entry);
 }
 
