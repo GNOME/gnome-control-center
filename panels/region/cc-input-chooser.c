@@ -768,6 +768,27 @@ add_widgets_to_table (GtkWidget   *chooser,
     }
 }
 
+static void
+add_widget (GtkWidget   *chooser,
+            LocaleInfo  *info,
+            const gchar *type,
+            const gchar *id)
+{
+  GList tmp = { 0 };
+  tmp.data = (gpointer) id;
+  add_widgets_to_table (chooser, info, &tmp, type, NULL);
+}
+
+static void
+add_widget_other (GtkWidget   *chooser,
+                  const gchar *type,
+                  const gchar *id)
+{
+  CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
+  LocaleInfo *info = g_hash_table_lookup (priv->locales, "");
+  add_widget (chooser, info, type, id);
+}
+
 #ifdef HAVE_IBUS
 static gboolean
 maybe_set_as_default (GtkWidget   *chooser,
@@ -828,9 +849,7 @@ get_ibus_locale_infos (GtkWidget *chooser)
                 }
               else
                 {
-                  GList tmp = { 0 };
-                  tmp.data = (gpointer) engine_id;
-                  add_widgets_to_table (chooser, info, &tmp, INPUT_SOURCE_TYPE_IBUS, NULL);
+                  add_widget (chooser, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
                 }
             }
           else
@@ -860,23 +879,13 @@ get_ibus_locale_infos (GtkWidget *chooser)
             {
               g_hash_table_iter_init (&iter, locales_for_language);
               while (g_hash_table_iter_next (&iter, (gpointer *) &info, NULL))
-                {
-                  if (!maybe_set_as_default (chooser, info, engine_id))
-                    {
-                      GList tmp = { 0 };
-                      tmp.data = (gpointer) engine_id;
-                      add_widgets_to_table (chooser, info, &tmp, INPUT_SOURCE_TYPE_IBUS, NULL);
-                    }
-                }
+                if (!maybe_set_as_default (chooser, info, engine_id))
+                  add_widget (chooser, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
             }
         }
       else
         {
-          /* Add it to the "Other" locale */
-          GList tmp = { 0 };
-          tmp.data = (gpointer) engine_id;
-          info = g_hash_table_lookup (priv->locales, "");
-          add_widgets_to_table (chooser, info, &tmp, INPUT_SOURCE_TYPE_IBUS, NULL);
+          add_widget_other (chooser, INPUT_SOURCE_TYPE_IBUS, engine_id);
         }
 
       g_free (country_code);
@@ -1007,11 +1016,7 @@ get_locale_infos (GtkWidget *chooser)
   list = gnome_xkb_info_get_all_layouts (priv->xkb_info);
   for (l = list; l; l = l->next)
     if (!g_hash_table_contains (layouts_with_locale, l->data))
-      {
-        GList tmp = { 0 };
-        tmp.data = l->data;
-        add_widgets_to_table (chooser, info, &tmp, INPUT_SOURCE_TYPE_XKB, NULL);
-      }
+      add_widget_other (chooser, INPUT_SOURCE_TYPE_XKB, l->data);
 
   g_list_free (list);
 
