@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-02 14:19+0000\n"
-"PO-Revision-Date: 2013-03-02 17:19+0200\n"
+"POT-Creation-Date: 2013-03-07 19:52+0000\n"
+"PO-Revision-Date: 2013-03-09 16:09+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -697,7 +697,6 @@ msgstr ""
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Spalva"
 
@@ -3550,46 +3549,65 @@ msgstr "Rodyti iššokančios pranešimus"
 msgid "Show in Lock Screen"
 msgstr "Rodyti užrakinimo ekrane"
 
-#. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
+#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgid "Other"
+msgstr "Kita"
+
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Pridėti paskyrą"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#| msgid "_Mail"
+msgid "Mail"
+msgstr "Paštas"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#| msgid "Contrast:"
+msgid "Contacts"
+msgstr "Kontaktai"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+msgid "Resources"
+msgstr "Resursai"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Klaida prisijungiant prie paskyros"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:429
+#: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
 msgstr "Baigėsi įgaliojimų laikas."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:433
-#| msgid "Enable this account"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:434
 msgid "Sign in to enable this account."
 msgstr "Prisijunkite šiai paskyrai įjungti."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:438
+#: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
 msgstr "Pri_sijungti"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:679
+#: ../panels/online-accounts/cc-online-accounts-panel.c:680
 msgid "Error creating account"
 msgstr "Klaida kuriant paskyrą"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:721
+#: ../panels/online-accounts/cc-online-accounts-panel.c:722
 msgid "Error removing account"
 msgstr "Klaida šalinant paskyrą"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:758
 msgid "Are you sure you want to remove the account?"
 msgstr "Ar tikrai norite pašalinti paskyrą?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:759
+#: ../panels/online-accounts/cc-online-accounts-panel.c:760
 msgid "This will not remove the account on the server."
 msgstr "Tai nepašalins šios paskyros serveryje."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:761
 msgid "_Remove"
 msgstr "_Pašalinti"
 
@@ -4194,7 +4212,7 @@ msgstr "Aktyvūs darbai"
 
 #: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#: ../panels/user-accounts/data/history-dialog.ui.h:2
 msgid "Close"
 msgstr "Užverti"
 
@@ -4236,40 +4254,40 @@ msgid "Loading drivers database..."
 msgstr "Įkeliama tvarkyklių duomenų bazė..."
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:65
-#: ../panels/printers/pp-ppd-option-widget.c:69
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "One Sided"
 msgstr "Viepusis"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:67
-#: ../panels/printers/pp-ppd-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Long Edge (Standard)"
 msgstr "Ilgos kraštinės (standartinis)"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:69
-#: ../panels/printers/pp-ppd-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ppd-option-widget.c:75
 msgid "Short Edge (Flip)"
 msgstr "Trumpos kraštinės (apverstas)"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Portrait"
 msgstr "Stačias"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Landscape"
 msgstr "Gulsčias"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:75
+#: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse landscape"
 msgstr "Apverstas gulsčias"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:77
+#: ../panels/printers/pp-ipp-option-widget.c:79
 msgid "Reverse portrait"
 msgstr "Apverstas stačias"
 
@@ -4428,38 +4446,38 @@ msgid "Advanced"
 msgstr "Sudėtingesni"
 
 #. Translators: this is an option of "Paper Source"
-#: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
-#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:87
 msgid "Auto Select"
 msgstr "Automatiškai pasirinkti"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
-#: ../panels/printers/pp-ppd-option-widget.c:87
+#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Printer Default"
 msgstr "Spausdintuvo numatytieji"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:89
+#: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
 msgstr "Tik integruoti GhostScript šriftai"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:91
+#: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 1"
 msgstr "Konvertuoti į PS lygmenį 1"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:93
+#: ../panels/printers/pp-ppd-option-widget.c:95
 msgid "Convert to PS level 2"
 msgstr "Konvertuoti į PS lygmenį 2"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:95
+#: ../panels/printers/pp-ppd-option-widget.c:97
 msgid "No pre-filtering"
 msgstr "Nėra pradinio filtravimo"
 
@@ -4743,11 +4761,6 @@ msgstr "Nerasta regionų"
 #: ../panels/region/cc-input-chooser.c:179
 msgid "No input sources found"
 msgstr "Nerasta įvesties šaltinių"
-
-#: ../panels/region/cc-input-chooser.c:997
-#: ../panels/search/cc-search-locations-dialog.c:480
-msgid "Other"
-msgstr "Kita"
 
 #: ../panels/region/cc-region-panel.c:225
 msgid "Your session needs to be restarted for changes to take effect"
@@ -5363,7 +5376,7 @@ msgstr ""
 "Pasikartojantys klavišai;Pelės klavišai;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Neryškus"
@@ -5374,7 +5387,7 @@ msgid "Normal"
 msgstr "Įprastinis"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Aukštas"
@@ -5796,31 +5809,38 @@ msgstr "Ryškumas:"
 msgid "Contrast:"
 msgstr "Kontrastas:"
 
+#. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:29
+#| msgid "Color"
+msgctxt "universal access, contrast"
+msgid "Color"
+msgstr "Spalva"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Joks"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Pilnas"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Žemas"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Aukštas"
 
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects:"
 msgstr "Spalvų efektai:"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects"
 msgstr "Spalvų efektai"
 
@@ -5969,15 +5989,20 @@ msgstr ""
 "Prisijungimo vardas;Vardas;Piršo atspaudas;Atvaizdas;Logotipas;Veidas;"
 "Slaptažodis;"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:2
+#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#| msgid "Retain _History"
+msgid "Login History"
+msgstr "Prisijungimų istorija"
+
+#: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
 msgstr "Praeitą savaitę"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
+#: ../panels/user-accounts/data/history-dialog.ui.h:4
 msgid "Next Week"
 msgstr "Kitą savaitę"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
+#: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "Kitą savaitę"
 
@@ -6916,4 +6941,3 @@ msgstr "Visi nustatymai"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nustatymai;Parinktys;"
-
