@@ -195,7 +195,7 @@ back_widget_new (const gchar *text)
 static GtkWidget *
 locale_widget_new (const gchar *text)
 {
-  return padded_label_new (text, ROW_LABEL_POSITION_START, ROW_TRAVEL_DIRECTION_FORWARD, FALSE);
+  return padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_NONE, FALSE);
 }
 
 static GtkWidget *
