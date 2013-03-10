@@ -209,15 +209,22 @@ restart_now (CcRegionPanel *self)
 }
 
 static void
-show_restart_notification (CcRegionPanel *self)
+show_restart_notification (CcRegionPanel *self,
+                           const gchar   *locale)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkWidget *box;
         GtkWidget *label;
         GtkWidget *button;
+        gchar *current_locale;
 
         if (priv->notification)
                 return;
+
+        if (locale) {
+                current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
+                setlocale (LC_MESSAGES, locale);
+        }
 
         priv->notification = gd_notification_new ();
         g_object_add_weak_pointer (G_OBJECT (priv->notification),
@@ -238,6 +245,11 @@ show_restart_notification (CcRegionPanel *self)
         gtk_container_add (GTK_CONTAINER (priv->notification), box);
         gtk_overlay_add_overlay (GTK_OVERLAY (self->priv->overlay), priv->notification);
         gtk_widget_show (priv->notification);
+
+        if (locale) {
+                setlocale (LC_MESSAGES, current_locale);
+                g_free (current_locale);
+        }
 }
 
 static void
@@ -296,7 +308,7 @@ language_response (GtkDialog     *chooser,
         gtk_widget_destroy (GTK_WIDGET (chooser));
 
         if (changed)
-                show_restart_notification (self);
+                show_restart_notification (self, language);
 }
 
 static gboolean
@@ -330,7 +342,7 @@ format_response (GtkDialog *chooser,
         gtk_widget_destroy (GTK_WIDGET (chooser));
 
         if (changed)
-                show_restart_notification (self);
+                show_restart_notification (self, NULL);
 }
 
 static void
