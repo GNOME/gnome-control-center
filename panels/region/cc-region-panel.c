@@ -352,8 +352,7 @@ maybe_notify (CcRegionPanel *self,
                            mnd);
 }
 
-static void set_localed_locale (CcRegionPanel *self,
-                                const gchar   *language);
+static void set_localed_locale (CcRegionPanel *self);
 
 static void
 update_language (CcRegionPanel *self,
@@ -364,7 +363,7 @@ update_language (CcRegionPanel *self,
         if (priv->login) {
                 if (g_strcmp0 (language, priv->system_language) == 0)
                         return;
-                set_localed_locale (self, language);
+                set_localed_locale (self);
         } else {
                 if (g_strcmp0 (language, priv->language) == 0)
                         return;
@@ -1497,15 +1496,14 @@ add_input_sources_from_localed (CcRegionPanel *self)
 }
 
 static void
-set_localed_locale (CcRegionPanel *self,
-                    const gchar   *language)
+set_localed_locale (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GVariantBuilder *b;
         gchar *s;
 
         b = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-        s = g_strconcat ("LANG=", language, NULL);
+        s = g_strconcat ("LANG=", priv->system_language, NULL);
         g_variant_builder_add (b, "s", s);
         g_free (s);
 
