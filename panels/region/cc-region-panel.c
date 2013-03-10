@@ -20,6 +20,7 @@
  */
 
 #include <config.h>
+#include <locale.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
@@ -424,6 +425,33 @@ activate_language_child (CcRegionPanel *self, GtkWidget *child)
 }
 
 static void
+update_region_label (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        const gchar *region;
+        gchar *name;
+
+        if (priv->region == NULL || priv->region[0] == '\0')
+                region = priv->language;
+        else
+                region = priv->region;
+
+        name = gnome_get_country_from_locale (region, region);
+        gtk_label_set_label (GTK_LABEL (priv->formats_label), name);
+        g_free (name);
+}
+
+static void
+update_region_from_setting (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+
+        g_free (priv->region);
+        priv->region = g_settings_get_string (priv->locale_settings, KEY_REGION);
+        update_region_label (self);
+}
+
+static void
 update_language_label (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
@@ -440,6 +468,9 @@ update_language_label (CcRegionPanel *self)
                 name = g_strdup (C_("Language", "None"));
         gtk_label_set_label (GTK_LABEL (priv->language_label), name);
         g_free (name);
+
+        /* Formats will change too if not explicitly set. */
+        update_region_label (self);
 }
 
 static void
@@ -456,19 +487,6 @@ update_language_from_user (CcRegionPanel *self)
         g_free (priv->language);
         priv->language = g_strdup (language);
         update_language_label (self);
-}
-
-static void
-update_region_from_setting (CcRegionPanel *self)
-{
-	CcRegionPanelPrivate *priv = self->priv;
-        gchar *name;
-
-        g_free (priv->region);
-        priv->region = g_settings_get_string (priv->locale_settings, KEY_REGION);
-        name = gnome_get_country_from_locale (priv->region, priv->region);
-        gtk_label_set_label (GTK_LABEL (priv->formats_label), name);
-        g_free (name);
 }
 
 static void
@@ -502,8 +520,8 @@ setup_language_section (CcRegionPanel *self)
         g_signal_connect_swapped (widget, "child-activated",
                                   G_CALLBACK (activate_language_child), self);
 
-        update_region_from_setting (self);
         update_language_from_user (self);
+        update_region_from_setting (self);
 }
 
 #ifdef HAVE_IBUS
