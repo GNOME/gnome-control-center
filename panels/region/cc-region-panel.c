@@ -672,6 +672,15 @@ add_input_row (CcRegionPanel   *self,
         GtkWidget *label;
         GtkWidget *image;
 
+        if (priv->login) {
+                GList *l;
+                l = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
+                if (l && l->next == NULL &&
+                    g_strcmp0 (g_object_get_data (G_OBJECT (l->data), "type"), "none") == 0)
+                        gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (l->data));
+                g_list_free (l);
+        }
+
         row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         label = gtk_label_new (name);
         gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
