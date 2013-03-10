@@ -170,8 +170,6 @@ set_locale_id (GtkDialog   *chooser,
 
                 } else {
                         /* mark as unselected */
-                        gtk_image_clear (GTK_IMAGE (check));
-                        g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
                         gtk_widget_hide (check);
                 }
         }
