@@ -1379,7 +1379,7 @@ add_input_sources_from_localed (CcRegionPanel *self)
                 g_free (id);
         }
         if (n == 0) {
-                add_input_row (self, "none", "none", C_("Input source", "None"), NULL);
+                add_input_row (self, "none", "none", _("No input source selected"), NULL);
         }
 
         g_strfreev (variants);
