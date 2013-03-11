@@ -8,6 +8,7 @@ DIST_SUBDIRS = libgd egg-list-box po panels shell man search-provider
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \
+	$(srcdir)/ar-lib \
 	$(srcdir)/aclocal.m4 \
 	$(srcdir)/autoscan.log \
 	$(srcdir)/compile \
