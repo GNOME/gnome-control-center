@@ -270,10 +270,92 @@ update_separator_func (GtkWidget **separator,
         }
 }
 
+typedef struct {
+        CcRegionPanel *self;
+        int category;
+        gchar *target_locale;
+} MaybeNotifyData;
+
+static void
+maybe_notify_finish (GObject      *source,
+                     GAsyncResult *res,
+                     gpointer      data)
+{
+        MaybeNotifyData *mnd = data;
+        CcRegionPanel *self = mnd->self;
+        GError *error = NULL;
+        GVariant *retval = NULL;
+        gchar *current_lang_code = NULL;
+        gchar *current_country_code = NULL;
+        gchar *target_lang_code = NULL;
+        gchar *target_country_code = NULL;
+        const gchar *current_locale = NULL;
+
+        retval = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
+        if (!retval) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to get locale: %s\n", error->message);
+                goto out;
+        }
+
+        g_variant_get (retval, "(&s)", &current_locale);
+
+        if (!gnome_parse_locale (current_locale,
+                                 &current_lang_code,
+                                 &current_country_code,
+                                 NULL,
+                                 NULL))
+                goto out;
+
+        if (!gnome_parse_locale (mnd->target_locale,
+                                 &target_lang_code,
+                                 &target_country_code,
+                                 NULL,
+                                 NULL))
+                goto out;
+
+        if (g_str_equal (current_lang_code, target_lang_code) == FALSE ||
+            g_str_equal (current_country_code, target_country_code) == FALSE)
+                show_restart_notification (self,
+                                           mnd->category == LC_MESSAGES ? mnd->target_locale : NULL);
+out:
+        g_free (target_country_code);
+        g_free (target_lang_code);
+        g_free (current_country_code);
+        g_free (current_lang_code);
+        g_clear_pointer (&retval, g_variant_unref);
+        g_clear_error (&error);
+        g_free (mnd->target_locale);
+        g_free (mnd);
+}
+
+static void
+maybe_notify (CcRegionPanel *self,
+              int            category,
+              const gchar   *target_locale)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        MaybeNotifyData *mnd;
+
+        mnd = g_new0 (MaybeNotifyData, 1);
+        mnd->self = self;
+        mnd->category = category;
+        mnd->target_locale = g_strdup (target_locale);
+
+        g_dbus_proxy_call (priv->session,
+                           "GetLocale",
+                           g_variant_new ("(i)", category),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           priv->cancellable,
+                           maybe_notify_finish,
+                           mnd);
+}
+
 static void set_localed_locale (CcRegionPanel *self,
                                 const gchar   *language);
 
-static gboolean
+static void
 update_language (CcRegionPanel *self,
                  const gchar   *language)
 {
@@ -281,14 +363,13 @@ update_language (CcRegionPanel *self,
 
         if (priv->login) {
                 if (g_strcmp0 (language, priv->system_language) == 0)
-                        return FALSE;
+                        return;
                 set_localed_locale (self, language);
-                return FALSE; /* don't show notification for login */
         } else {
                 if (g_strcmp0 (language, priv->language) == 0)
-                        return FALSE;
+                        return;
                 act_user_set_language (priv->user, language);
-                return TRUE;
+                maybe_notify (self, LC_MESSAGES, language);
         }
 }
 
@@ -298,32 +379,26 @@ language_response (GtkDialog     *chooser,
                    CcRegionPanel *self)
 {
         const gchar *language;
-        gboolean changed;
-
-        changed = FALSE;
 
         if (response_id == GTK_RESPONSE_OK) {
                 language = cc_language_chooser_get_language (GTK_WIDGET (chooser));
-                changed = update_language (self, language);
+                update_language (self, language);
         }
 
         gtk_widget_destroy (GTK_WIDGET (chooser));
-
-        if (changed)
-                show_restart_notification (self, language);
 }
 
-static gboolean
+static void
 update_region (CcRegionPanel *self,
                const gchar   *region)
 {
 	CcRegionPanelPrivate *priv = self->priv;
 
         if (g_strcmp0 (region, priv->region) == 0)
-                return FALSE;
+                return;
 
         g_settings_set_string (priv->locale_settings, KEY_REGION, region);
-        return TRUE;
+        maybe_notify (self, LC_TIME, region);
 }
 
 static void
@@ -332,19 +407,13 @@ format_response (GtkDialog *chooser,
                  CcRegionPanel *self)
 {
         const gchar *region;
-        gboolean changed;
-
-        changed = FALSE;
 
         if (response_id == GTK_RESPONSE_OK) {
                 region = cc_format_chooser_get_region (GTK_WIDGET (chooser));
-                changed = update_region (self, region);
+                update_region (self, region);
         }
 
         gtk_widget_destroy (GTK_WIDGET (chooser));
-
-        if (changed)
-                show_restart_notification (self, NULL);
 }
 
 static void
