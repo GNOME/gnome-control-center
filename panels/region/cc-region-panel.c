@@ -83,6 +83,7 @@ struct _CcRegionPanelPrivate {
         GPermission *permission;
         SystemOp     op;
         GDBusProxy  *localed;
+        GDBusProxy  *session;
         GCancellable *cancellable;
 
         GtkWidget *overlay;
@@ -143,6 +144,7 @@ cc_region_panel_finalize (GObject *object)
 
         g_clear_object (&priv->permission);
         g_clear_object (&priv->localed);
+        g_clear_object (&priv->session);
         g_clear_object (&priv->builder);
         g_clear_object (&priv->locale_settings);
         g_clear_object (&priv->input_settings);
@@ -197,19 +199,15 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 static void
 restart_now (CcRegionPanel *self)
 {
-        GDBusConnection *bus;
+        CcRegionPanelPrivate *priv = self->priv;
 
         gd_notification_dismiss (GD_NOTIFICATION (self->priv->notification));
 
-        bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
-        g_dbus_connection_call (bus,
-                                "org.gnome.SessionManager",
-                                "/org/gnome/SessionManager",
-                                "org.gnome.SessionManager",
-                                "Logout",
-                                g_variant_new ("(u)", 0),
-                                NULL, 0, G_MAXINT,
-                                NULL, NULL, NULL);
+        g_dbus_proxy_call (priv->session,
+                           "Logout",
+                           g_variant_new ("(u)", 0),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1, NULL, NULL, NULL);
 }
 
 static void
@@ -1597,6 +1595,27 @@ setup_login_button (CcRegionPanel *self)
 }
 
 static void
+session_proxy_ready (GObject      *source,
+                     GAsyncResult *res,
+                     gpointer      data)
+{
+        CcRegionPanel *self = data;
+        GDBusProxy *proxy;
+        GError *error = NULL;
+
+        proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
+        if (!proxy) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to contact gnome-session: %s\n", error->message);
+                g_error_free (error);
+                return;
+        }
+
+        self->priv->session = proxy;
+}
+
+static void
 cc_region_panel_init (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv;
@@ -1619,6 +1638,16 @@ cc_region_panel_init (CcRegionPanel *self)
         priv->user_manager = act_user_manager_get_default ();
 
         priv->cancellable = g_cancellable_new ();
+
+        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                                  G_DBUS_PROXY_FLAGS_NONE,
+                                  NULL,
+                                  "org.gnome.SessionManager",
+                                  "/org/gnome/SessionManager",
+                                  "org.gnome.SessionManager",
+                                  priv->cancellable,
+                                  session_proxy_ready,
+                                  self);
 
         setup_login_button (self);
         setup_language_section (self);
