@@ -129,7 +129,7 @@ child_watch_cb (GPid pid, gint status, PasswdHandler *passwd_handler)
                                 if (passwd_handler->chpasswd_cb)
                                                 passwd_handler->chpasswd_cb (passwd_handler,
                                                                              NULL,
-                                                                             passwd_handler->auth_cb_data);
+                                                                             passwd_handler->chpasswd_cb_data);
                         }
                 }
         }
