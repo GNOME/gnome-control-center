@@ -250,8 +250,7 @@ goa_panel_add_account_dialog_finalize (GObject *object)
   GoaPanelAddAccountDialog *add_account = GOA_PANEL_ADD_ACCOUNT_DIALOG (object);
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
 
-  if (priv->error != NULL)
-    g_error_free (priv->error);
+  g_clear_error (&priv->error);
 
   G_OBJECT_CLASS (goa_panel_add_account_dialog_parent_class)->finalize (object);
 }

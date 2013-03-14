@@ -122,12 +122,9 @@ cc_goa_panel_finalize (GObject *object)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (object);
 
-  if (panel->accounts_model != NULL)
-    g_clear_object (&panel->accounts_model);
-
-  if (panel->client != NULL)
-    g_object_unref (panel->client);
-  g_object_unref (panel->builder);
+  g_clear_object (&panel->accounts_model);
+  g_clear_object (&panel->client);
+  g_clear_object (&panel->builder);
 
   G_OBJECT_CLASS (cc_goa_panel_parent_class)->finalize (object);
 }
@@ -476,8 +473,7 @@ show_page_account (CcGoaPanel  *panel,
 
   gtk_widget_show_all (panel->accounts_vbox);
 
-  if (provider != NULL)
-    g_object_unref (provider);
+  g_clear_object (&provider);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -693,8 +689,7 @@ add_account (CcGoaPanel *panel)
     }
 
  out:
-  g_list_foreach (providers, (GFunc) g_object_unref, NULL);
-  g_list_free (providers);
+  g_list_free_full (providers, g_object_unref);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
