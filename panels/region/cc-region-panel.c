@@ -83,6 +83,7 @@ struct _CcRegionPanelPrivate {
         GPermission *permission;
         SystemOp     op;
         GDBusProxy  *localed;
+        GCancellable *cancellable;
 
         GtkWidget *overlay;
         GtkWidget *notification;
@@ -126,6 +127,9 @@ cc_region_panel_finalize (GObject *object)
 {
 	CcRegionPanel *self = CC_REGION_PANEL (object);
 	CcRegionPanelPrivate *priv = self->priv;
+
+        g_cancellable_cancel (priv->cancellable);
+        g_clear_object (&priv->cancellable);
 
         if (priv->user_manager) {
                 g_signal_handlers_disconnect_by_data (priv->user_manager, self);
@@ -1510,16 +1514,21 @@ localed_proxy_ready (GObject      *source,
                      gpointer      data)
 {
         CcRegionPanel *self = data;
-	CcRegionPanelPrivate *priv = self->priv;
+        CcRegionPanelPrivate *priv;
+        GDBusProxy *proxy;
         GError *error = NULL;
 
-        priv->localed = g_dbus_proxy_new_finish (res, &error);
+        proxy = g_dbus_proxy_new_finish (res, &error);
 
-        if (!priv->localed) {
-                g_warning ("Failed to contact localed: %s\n", error->message);
+        if (!proxy) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to contact localed: %s\n", error->message);
                 g_error_free (error);
                 return;
         }
+
+        priv = self->priv;
+        priv->localed = proxy;
 
         gtk_widget_set_sensitive (priv->login_button, TRUE);
 
@@ -1569,7 +1578,7 @@ setup_login_button (CcRegionPanel *self)
                           "org.freedesktop.locale1",
                           "/org/freedesktop/locale1",
                           "org.freedesktop.locale1",
-                          NULL,
+                          priv->cancellable,
                           (GAsyncReadyCallback) localed_proxy_ready,
                           self);
         g_object_unref (bus);
@@ -1608,6 +1617,8 @@ cc_region_panel_init (CcRegionPanel *self)
 	}
 
         priv->user_manager = act_user_manager_get_default ();
+
+        priv->cancellable = g_cancellable_new ();
 
         setup_login_button (self);
         setup_language_section (self);
