@@ -1,7 +1,7 @@
 # Slovak translation for gnome-control-center.
 # Copyright (C) 2000-2005, 2007-2009, 2011-2013 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
-# Stanislav Višňovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000, 2001, 2002, 2003, 2004.
+# Stanislav Višňovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000-2004.
 # Marcel Telka <marcel@telka.sk>, 2005.
 # Peter Tuhársky <tuharsky@misbb.sk>, 2007.
 # Pavol Šimo <palo.simo@gmail.com>, 2007-2011.
@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-07 19:52+0000\n"
-"PO-Revision-Date: 2013-03-07 20:56+0100\n"
+"POT-Creation-Date: 2013-03-12 13:59+0000\n"
+"PO-Revision-Date: 2013-03-10 15:00+0100\n"
 "Last-Translator: Pavol Klačanský <pavol@klacansky.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -1202,21 +1202,15 @@ msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Normálne"
 
-# PM: toto je trosku nepresné malo by tu byť O 90° proti smeru...
-# PK: preco o 90 stupnov? teoreticky to moze byt aj 30 stupnov
-# PM: a je to tak aj naozaj? Vie sa obraz na monitore otočiť len o 30 % danou voľbou?
-# PK: ano, napr. wayland by to mal zvladat
-# PM: ja len že je tam  GNOME_RR_ROTATION_90 čo hovorí o 90 stupňoch - opýtaj sa vývojárov, nech to máme čierne na bielom
 #: ../panels/display/cc-display-panel.c:484
-#, fuzzy
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
-msgstr "Proti smeru hodinových ručičiek"
+msgstr "O 90 stupňov proti smeru hodinových ručičiek"
 
 #: ../panels/display/cc-display-panel.c:485
 msgctxt "display panel, rotation"
 msgid "Clockwise"
-msgstr "V smere hodinových ručičiek"
+msgstr "O 90 stupňov v smere hodinových ručičiek"
 
 #: ../panels/display/cc-display-panel.c:486
 msgctxt "display panel, rotation"
@@ -1240,17 +1234,15 @@ msgstr "O 180 stupňov"
 #: ../panels/display/cc-display-panel.c:625
 #: ../panels/display/cc-rr-labeler.c:418
 msgid "Mirrored Displays"
-msgstr "Zrkadlené displeje"
+msgstr "Zrkadlené monitory"
 
 #: ../panels/display/cc-display-panel.c:649
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "Monitor"
 
-# PM: vyššie trváš na displeji 
 # tooltip
 #: ../panels/display/cc-display-panel.c:1669
-#, fuzzy
 msgid "Drag to change primary display."
 msgstr "Primárny monitor zmeníte ťahaním."
 
@@ -1305,12 +1297,10 @@ msgstr "_Otočenie"
 msgid "_Mirror displays"
 msgstr "_Zrkadliť monitory"
 
-# PM: Zavádzanie, nie je to príčina ale dôsledok čiže význam je taký,že zaškrtnutie voľby môže obmedziť počet rozlíšení, ktoré sa dajú vybrať, čo je logické, lebo ak sú to dva rozdielne monitory tak sa musia vybrať iba rozlíšenia ktoré po výške budú rovnaké
 # GtkLabel label
 #: ../panels/display/display-capplet.ui.h:6
-#, fuzzy
 msgid "Note: may limit resolution options"
-msgstr "Poznámka: týmto sa myslí to, že nebude na výber tak veľa rozlíšení"
+msgstr "Poznámka: môže obmedziť výber rozlíšení"
 
 # button
 #: ../panels/display/display-capplet.ui.h:7
@@ -1403,12 +1393,12 @@ msgstr "Vyberte si aplikáciu, ktorá sa spustí pri pripojení fotoaparátu"
 msgid "Select an application for software CDs"
 msgstr "Vyberte si aplikáciu pre CD so softvérom"
 
+# listore item
 #. translators: these strings are duplicates of shared-mime-info
 #. * strings, just here to fix capitalization of the English originals.
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-# listore item
 #: ../panels/info/cc-info-panel.c:1364
 msgid "audio DVD"
 msgstr "audio DVD"
@@ -2138,9 +2128,9 @@ msgstr "Myš"
 # PM: nehovoríme tomuto kurzor?
 #  PK: kurzor je v terminali
 # PM: ja som počul iba o textovom kurzore a kurzore myši, tak je to podľa mňa zaužívané (aj keď je diskutabilné či je to zaužívané správne)
+# PK: ja trvam na ukazovatel, nebudeme vsade pisat textovyy kurzor alebo kurzor mysi
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#, fuzzy
 msgid "_Pointer speed"
 msgstr "Rých_losť ukazovateľa"
 
@@ -2210,11 +2200,11 @@ msgstr "Kliknutie, sekundárne tlačidlo"
 msgid "Air_plane Mode"
 msgstr "Režim v _lietadle"
 
-#  PM: správne by malo byť Sprostredkovaná sieť
+# MČ: je to vo funkcii panel_add_proxy_device. Nepodarilo sa mi zistiť, ako sa to presne vypíše, ale skôr si myslím, že ide o zariadene, ktoré sieť sprostredkuje a teda preklad by mal byt (keď už nechcete proxy) „sieťový sprostredkovateľ (proxy)“
 #: ../panels/network/cc-network-panel.c:912
 #, fuzzy
 msgid "Network proxy"
-msgstr "Sieťové proxy"
+msgstr "Sieťový sprostredkovateľ (proxy)"
 
 #: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
 #, c-format
@@ -2248,7 +2238,7 @@ msgstr "Anony_mná identita"
 msgid "Inner _authentication"
 msgstr "Vnútorné _overenie totožnosti"
 
-# 1.2. page; 3. 4. GtkLabel label
+#  1.2. page; 3. 4. GtkLabel label
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
 #: ../panels/network/connection-editor/ce-page-security.c:455
 #: ../panels/network/connection-editor/details-page.ui.h:3
@@ -2340,7 +2330,7 @@ msgstr[2] "pred %i dňami"
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mbit/s"
-   
+
 # PM: rod? - viackrát
 # sila signálu
 #: ../panels/network/connection-editor/ce-page-details.c:181
@@ -2386,13 +2376,11 @@ msgstr "Vynikajúci"
 msgid "Identity"
 msgstr "Totožnosť"
 
-# PM: neviem či nie maska siete, pozri ako je to v iných moduloch
 # label
 #: ../panels/network/connection-editor/ce-page-ip4.c:202
 #: ../panels/network/connection-editor/ce-page-ip4.c:454
-#, fuzzy
 msgid "Netmask"
-msgstr "Sieťová maska"
+msgstr "Maska siete"
 
 # label
 #: ../panels/network/connection-editor/ce-page-ip4.c:216
@@ -2427,14 +2415,12 @@ msgstr "Server"
 msgid "Delete DNS Server"
 msgstr "Odstrániť server DNS"
 
-# PM: asi Metrika
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: ../panels/network/connection-editor/ce-page-ip4.c:481
 #: ../panels/network/connection-editor/ce-page-ip6.c:489
-#, fuzzy
 msgctxt "network parameters"
 msgid "Metric"
-msgstr "Metrické"
+msgstr "Metrika"
 
 # button atk
 #: ../panels/network/connection-editor/ce-page-ip4.c:502
@@ -2442,7 +2428,7 @@ msgstr "Metrické"
 msgid "Delete Route"
 msgstr "Odstrániť smerovanie"
 
-# PM: Zistiť automaticky a nebude problém s rodom tak ako inde - viackrát
+#  PM: Zistiť automaticky a nebude problém s rodom tak ako inde - viackrát
 # GtkComboBox item
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
 #: ../panels/network/network-wifi.ui.h:26
@@ -2485,7 +2471,7 @@ msgid "Automatic"
 msgstr "Zistiť automaticky"
 
 # PM asi tiež Zistiť automaticky
-# ListStore item (Automatic, manual, link-local)
+#  ListStore item (Automatic, manual, link-local)
 #: ../panels/network/connection-editor/ce-page-ip6.c:618
 msgid "Automatic, DHCP only"
 msgstr "Automatické, len DHCP"
@@ -2516,27 +2502,23 @@ msgstr "WEP 40/128 bitový kľúč (šestnástkový alebo ASCII)"
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 bitové heslo"
 
+# liststore item
 #: ../panels/network/connection-editor/ce-page-security.c:296
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
 msgstr "LEAP"
 
-# Dinamické WEP - podstatné meno je privacy - súkromie
 #: ../panels/network/connection-editor/ce-page-security.c:309
-#, fuzzy
 msgid "Dynamic WEP (802.1x)"
-msgstr "Dynamický WEP (802.1x)"
+msgstr "Dynamické WEP (802.1x)"
 
-# PM: Osobný WPA - podstatné meno je access - prístup
 #: ../panels/network/connection-editor/ce-page-security.c:323
-#, fuzzy
 msgid "WPA & WPA2 Personal"
-msgstr "Osobné WPA a WPA2"
+msgstr "Osobný WPA a WPA2"
 
 #: ../panels/network/connection-editor/ce-page-security.c:337
-#, fuzzy
 msgid "WPA & WPA2 Enterprise"
-msgstr "Podnikové WPA a WPA 2"
+msgstr "Podnikový WPA a WPA 2"
 
 # GtkButton label
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
@@ -2590,7 +2572,6 @@ msgstr "Hardvérová adresa"
 msgid "Default Route"
 msgstr "Predvolené smerovanie"
 
-# PM: načo to dali na preklad? navrhujem "Systém pre názvy domén (DNS)"
 # GtkLabel label
 #: ../panels/network/connection-editor/details-page.ui.h:8
 #: ../panels/network/connection-editor/ip4-page.ui.h:3
@@ -2599,9 +2580,8 @@ msgstr "Predvolené smerovanie"
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:9
-#, fuzzy
 msgid "DNS"
-msgstr "DNS"
+msgstr "Systém pre názvy domén (DNS)"
 
 # pripojenie - je za tým čas kedy bolo definované pripojenie naposledy použité
 # GtkLabel
@@ -2662,13 +2642,10 @@ msgstr "_Názov"
 msgid "_MAC Address"
 msgstr "Adresa _MAC"
 
-# PM: som za preloženie skratky so skratkou v zátvorke
-# maximalna prenosova jednotka
 # GtkLabel label
 #: ../panels/network/connection-editor/ethernet-page.ui.h:12
-#, fuzzy
 msgid "M_TU"
-msgstr "M_TU"
+msgstr "M_aximálna prenosová jednotka (MTU)"
 
 # GtkLabel label
 #: ../panels/network/connection-editor/ethernet-page.ui.h:13
@@ -2788,13 +2765,11 @@ msgstr "Importovať zo súboru…"
 msgid "Add Network Connection"
 msgstr "Pridanie nového pripojenia"
 
-# PM: vynulovať je dosť zavádzajúce vráti to predvolené hodnoty
 # GtkButton label
-#, fuzzy
 #: ../panels/network/connection-editor/reset-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:53
 msgid "_Reset"
-msgstr "_Vynulovať"
+msgstr "_Vrátiť predvolené"
 
 # GtkButton label
 #: ../panels/network/connection-editor/reset-page.ui.h:2
@@ -2916,25 +2891,29 @@ msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
 msgstr ""
 "Sieť;Wi-Fi;Wifi;IP;Proxy;LAN;WAN;Modem;Bluetooth;Broadband;Mobil;Široko;"
 
-# PM: tu som skončil kontrolu
+# asi názov virtuálneho zariadenia
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
 msgstr ""
 
+# asi názov virtuálneho zariadenia
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
 msgstr ""
 
+# last used
 #: ../panels/network/net-device-ethernet.c:112
 #: ../panels/network/net-device-wifi.c:465
 msgid "never"
 msgstr "nikdy"
 
+# last used
 #: ../panels/network/net-device-ethernet.c:122
 #: ../panels/network/net-device-wifi.c:475
 msgid "today"
 msgstr "dnes"
 
+# last used
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
 msgid "yesterday"
@@ -2953,6 +2932,7 @@ msgstr "Adresa IP"
 msgid "Last used"
 msgstr "Naposledy použité"
 
+# button atk;
 #: ../panels/network/net-device-ethernet.c:337
 #: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:2
@@ -2961,11 +2941,13 @@ msgid "Options…"
 msgstr "Voľby…"
 
 # PK: tu si nejsom isty
+# PM: typujem že sa to zobrazuje na karte takž asi tam má byť č. %d
 #: ../panels/network/net-device-ethernet.c:472
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
 
+# liststore item
 #: ../panels/network/net-device-mobile.c:241
 msgid "Add new connection"
 msgstr "Pridať nové pripojenie"
@@ -2995,19 +2977,20 @@ msgstr ""
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Zastaviť hotspot a odpojiť všetkých používateľov?"
 
+# button
 #: ../panels/network/net-device-wifi.c:1205
 msgid "_Stop Hotspot"
 msgstr "_Zastaviť hotspot"
 
+# PM: dal by som režimu Hotspot
 #: ../panels/network/net-device-wifi.c:1277
+#, fuzzy
 msgid "System policy prohibits use as a Hotspot"
-msgstr ""
+msgstr "Systémové pravidlá zakazujú použitie ako Hotspot"
 
 #: ../panels/network/net-device-wifi.c:1280
-#, fuzzy
-#| msgid "InfiniBand device does not support connected mode"
 msgid "Wireless device does not support Hotspot mode"
-msgstr "Zariadenie InfiniBand nepodporuje pripojený režim"
+msgstr "Bezdrôtové zariadenie nepodporuje režim Hotspot"
 
 #: ../panels/network/net-device-wifi.c:1407
 #, fuzzy
@@ -3017,11 +3000,13 @@ msgid ""
 msgstr ""
 "Podrobnosti siete %s vrátane hesla a vlastných nastavení budú stratené."
 
+# window title;
 #: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "História"
 
+# button
 #. translators: This is the label for the "Forget wireless network" functionality
 #: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
@@ -3032,7 +3017,7 @@ msgstr "_Zabudnúť"
 #: ../panels/network/net-proxy.c:67
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
-msgstr "Ak nezadáte URL konfigurácie, použije sa automatické zistenie proxy."
+msgstr "Ak nezadáte URL konfigurácie, použije sa automatické zistenie sprostredkovateľa."
 
 #. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
 #. * network, then anyone else on that network can tell your
@@ -3042,139 +3027,159 @@ msgstr "Ak nezadáte URL konfigurácie, použije sa automatické zistenie proxy.
 msgid "This is not recommended for untrusted public networks."
 msgstr "Toto sa neodporúča pre nedôveryhodné verejné siete."
 
+# label
 #: ../panels/network/net-proxy.c:408
 msgid "Proxy"
 msgstr "Proxy"
 
+# GtkButton label
 #: ../panels/network/network-ethernet.ui.h:1
 msgid "_Add Profile…"
 msgstr "_Pridať profil…"
 
+# GtkLabel label
 #: ../panels/network/network-mobile.ui.h:1
 msgid "IMEI"
 msgstr "IMEI"
 
+# GtkLabel label
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "Poskytovateľ"
 
+# GtkButton label
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:7
 msgid "_Options…"
 msgstr "_Voľby…"
 
+# GtkListStore item
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
 msgid "None"
 msgstr "Bez proxy"
 
+# GtkListStore item
 #: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:6
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Zadať ručne"
 
+# GtkListStore item
 #: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:7
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Zistiť automaticky"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:4
 msgid "_Method"
 msgstr "_Metóda"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:5
 msgid "_Configuration URL"
 msgstr "_URL konfigurácie"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:6
 msgid "_HTTP Proxy"
 msgstr "Sprostredkovateľ _HTTP"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:7
 msgid "H_TTPS Proxy"
 msgstr "Sprostredkovateľ H_TTPS"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:8
 msgid "_FTP Proxy"
 msgstr "Sprostredkovateľ _FTP"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:9
 msgid "_Socks Host"
 msgstr "Hostiteľ _Socks"
 
+# GtkLabel label
 #: ../panels/network/network-proxy.ui.h:10
 msgid "_Ignore Hosts"
 msgstr "_Ignorovať hostiteľov"
 
+# GtkSpinButton AtkObject
 #: ../panels/network/network-proxy.ui.h:11
-#, fuzzy
-#| msgid "_HTTP Proxy"
 msgid "HTTP proxy port"
-msgstr "Sprostredkovateľ _HTTP"
+msgstr "Port sprostredkovateľa _HTTP"
 
+# GtkSpinButton AtkObject
 #: ../panels/network/network-proxy.ui.h:12
-#, fuzzy
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS proxy port"
-msgstr "Sprostredkovateľ H_TTPS"
+msgstr "Port sprostredkovateľa H_TTPS"
 
+# GtkSpinButton AtkObject
 #: ../panels/network/network-proxy.ui.h:13
-#, fuzzy
-#| msgid "_FTP Proxy"
 msgid "FTP proxy port"
-msgstr "Sprostredkovateľ _FTP"
+msgstr "Port sprostredkovateľa _FTP"
 
+# GtkSpinButton AtkObject
 #: ../panels/network/network-proxy.ui.h:14
 msgid "Socks proxy port"
-msgstr ""
+msgstr "Port sprostredkovateľa Socks"
 
+# GtkSwitch AtkObject
 #: ../panels/network/network-simple.ui.h:6
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn device off"
-msgstr "Zapnúť alebo vypnúť:"
+msgstr "Vypnúť zariadenie"
 
+# PM: znie mi to neprirodzene - ktoré sa má použiť
+# GtkLabel label
 #: ../panels/network/network.ui.h:1
+#, fuzzy
 msgid "Select the interface to use for the new service"
 msgstr "Vyberte si rozhranie na použitie v novej službe"
 
-# button
+# GtkButton label
 #: ../panels/network/network.ui.h:2
 msgid "C_reate…"
 msgstr "_Vytvoriť…"
 
 # sieťové rozhranie
+# GtkLabel label
 #: ../panels/network/network.ui.h:3
 msgid "_Interface"
 msgstr "_Rozhranie"
 
+# GtkToolButton label
 #: ../panels/network/network.ui.h:8
 msgid "Add Device"
 msgstr "Pridať zariadenie"
 
+# GtkLabel label
 #: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "Typ VPN"
 
 # týka sa (Cisco) VPN
+# GtkLabel label
 #: ../panels/network/network-vpn.ui.h:4
 msgid "Group Name"
 msgstr "Skupinový názov"
 
+# GtkLabel label
 #: ../panels/network/network-vpn.ui.h:5
 msgid "Group Password"
 msgstr "Skupinové heslo"
 
+# GtkLabel label
 #: ../panels/network/network-vpn.ui.h:6
 #: ../panels/printers/authentication-dialog.ui.h:4
 msgid "Username"
 msgstr "Meno používateľa"
 
+# GtkSwitch AtkObject
 #: ../panels/network/network-vpn.ui.h:7
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn VPN connection off"
-msgstr "Zapnúť alebo vypnúť:"
+msgstr "Vypnúť pripojenie VPN"
 
 # GtkLabel label
 #: ../panels/network/network-wifi.ui.h:1
@@ -3198,10 +3203,11 @@ msgstr "podrobnosti"
 msgid "_Password"
 msgstr "_Heslo"
 
-# PM: 1. mi evokuje že by sa to mohlo vzťahovať k položke Zabezpečenie a tým pádom by tu malo byť Žiadne
+#  PM: 1. mi evokuje že by sa to mohlo vzťahovať k položke Zabezpečenie a tým pádom by tu malo byť Žiadne
 # 1. combobox item s položkou WPA 2.
 #: ../panels/network/network-wifi.ui.h:18
 #: ../panels/universal-access/uap.ui.h:8
+#, fuzzy
 msgid "None"
 msgstr "Nič"
 
@@ -3356,10 +3362,8 @@ msgstr "Wi-Fi"
 
 # GtkSwitch AtkObject
 #: ../panels/network/network-wifi.ui.h:67
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn Wi-Fi off"
-msgstr "Zapnúť alebo vypnúť:"
+msgstr "Vypnúť Wi-Fi"
 
 # GtkButton label
 #: ../panels/network/network-wifi.ui.h:68
@@ -3422,7 +3426,6 @@ msgstr "Neznámy stav"
 msgid "Unmanaged"
 msgstr "Nespravované"
 
-# stav zariadenia
 #. TRANSLATORS: device status
 #: ../panels/network/panel-common.c:159
 msgid "Unavailable"
@@ -3700,27 +3703,33 @@ msgid ""
 "Authority certificate?"
 msgstr ""
 
+# button
 #: ../panels/network/wireless-security/eap-method.c:281
 msgid "Ignore"
 msgstr "Ignorovať"
 
+# button
 #: ../panels/network/wireless-security/eap-method.c:285
 msgid "Choose CA Certificate"
 msgstr ""
 
+# file filter
 #: ../panels/network/wireless-security/eap-method.c:645
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
 msgstr ""
 
+# file filter
 #: ../panels/network/wireless-security/eap-method.c:648
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr ""
 
+# liststore item
 #: ../panels/network/wireless-security/eap-method-fast.c:261
 #: ../panels/network/wireless-security/eap-method-peap.c:280
 msgid "GTC"
 msgstr ""
 
+# liststore item
 #: ../panels/network/wireless-security/eap-method-fast.c:277
 #: ../panels/network/wireless-security/eap-method-peap.c:246
 #: ../panels/network/wireless-security/eap-method-ttls.c:263
@@ -3735,6 +3744,7 @@ msgstr ""
 msgid "PAC files (*.pac)"
 msgstr ""
 
+# PM: nebude lepšie súbor s povereniami?
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "PAC _file"
 msgstr "_Súbor PAC"
@@ -3745,35 +3755,43 @@ msgstr "_Súbor PAC"
 msgid "_Inner authentication"
 msgstr "_Vnútorné overenie totožnosti"
 
+# PM: zaobstarávanie PAC
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 msgid "PAC pro_visioning"
 msgstr ""
 
+# PM: čo je to za medzeru - nahlás bug
+# GtkListStore item
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
 #: ../panels/printers/authentication-dialog.ui.h:1
+#, fuzzy
 msgid " "
 msgstr " "
 
 # PAC provisioning
+# GtkListStore item
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:6
 msgid "Anonymous"
 msgstr ""
 
 # PAC provisioning
+# GtkListStore item
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:7
 #, fuzzy
 msgid "Authenticated"
 msgstr "Overenie totožnosti zlyhalo"
 
 # PAC provisioning
+# GtkListStore item
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
 msgid "Both"
 msgstr ""
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
@@ -3781,6 +3799,7 @@ msgstr ""
 msgid "_Username"
 msgstr "_Používateľské meno"
 
+# GtkCheckButton label
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:3
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:4
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:6
@@ -3789,11 +3808,13 @@ msgstr "_Používateľské meno"
 msgid "Sho_w password"
 msgstr "_Zobraziť heslo"
 
+# liststore (MSCHAPv2,GTC)
 #: ../panels/network/wireless-security/eap-method-peap.c:263
 #: ../panels/network/wireless-security/wireless-security.c:385
 msgid "MD5"
 msgstr "MD5"
 
+# filechooser dialog title
 #: ../panels/network/wireless-security/eap-method-peap.c:350
 #: ../panels/network/wireless-security/eap-method-tls.c:434
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
@@ -3801,29 +3822,35 @@ msgid "Choose a Certificate Authority certificate..."
 msgstr ""
 
 # PEAP version
+# GtkListStore item
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 0"
 msgstr "Verzia 0"
 
 # PEAP version
+# GtkListStore item
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:4
 msgid "Version 1"
 msgstr "Verzia 1"
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:6
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
 msgid "C_A certificate"
 msgstr ""
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
 msgstr ""
 
+# GtkCheckButton
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:3
 msgid "As_k for this password every time"
 msgstr ""
 
+# gtkdialog title
 #: ../panels/network/wireless-security/eap-method-tls.c:260
 msgid "Unencrypted private keys are insecure"
 msgstr ""
@@ -3837,63 +3864,77 @@ msgid ""
 "(You can password-protect your private key with openssl)"
 msgstr ""
 
+# window title
 #: ../panels/network/wireless-security/eap-method-tls.c:428
 msgid "Choose your personal certificate..."
-msgstr ""
+msgstr "Výber vášho osobného certifikátu…"
 
+#  window title
 #: ../panels/network/wireless-security/eap-method-tls.c:440
 msgid "Choose your private key..."
-msgstr ""
+msgstr "Výber vášho súkromného kľúča…"
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
-msgstr ""
+msgstr "I_dentita"
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:2
 msgid "_User certificate"
-msgstr ""
+msgstr "_Používateľský certifikát"
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
 msgid "Private _key"
-msgstr ""
+msgstr "Súkromný _kľúč"
 
+# GtkLabel label
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:5
-#, fuzzy
 msgid "_Private key password"
-msgstr "_Generovať heslo"
+msgstr "_Heslo súkromného kľúča"
 
+# litstore item
 #: ../panels/network/wireless-security/eap-method-ttls.c:230
 msgid "PAP"
 msgstr "PAP"
 
+# litstore item
 #: ../panels/network/wireless-security/eap-method-ttls.c:247
 msgid "MSCHAP"
 msgstr ""
 
+# litstore item
 #: ../panels/network/wireless-security/eap-method-ttls.c:280
 msgid "CHAP"
 msgstr ""
 
+# GtkCheckButton label
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
 msgid "Don't _warn me again"
-msgstr ""
+msgstr "Znovu _ma neupozorňovať"
 
+# litstore item
 #: ../panels/network/wireless-security/wireless-security.c:397
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
+# litstore item
 #: ../panels/network/wireless-security/wireless-security.c:421
 msgid "FAST"
 msgstr ""
 
+# litstore item
 #: ../panels/network/wireless-security/wireless-security.c:432
 msgid "Tunneled TLS"
 msgstr ""
 
+# litstore item
 #: ../panels/network/wireless-security/wireless-security.c:443
 msgid "Protected EAP (PEAP)"
 msgstr ""
 
+# GtkLabel label
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:9
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
@@ -3901,88 +3942,107 @@ msgid "Au_thentication"
 msgstr "_Overenie totožnosti"
 
 # WEP index
+# GtkListStore item
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
 msgid "1 (Default)"
 msgstr "1 (predvolený)"
 
 # WEP index
+# GtkListStore item
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:2
 msgid "2"
 msgstr "2"
 
 # WEP index
+# GtkListStore item
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:3
 msgid "3"
 msgstr "3"
 
 # WEP index
+# GtkListStore item
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:4
 msgid "4"
 msgstr "4"
 
 # PM: nemá tu byť Otvoreným systémom
+# MČ: priznám sa, že toto by ma riadne zmiatlo. Myslí sa tým OpenID, či niečo iné dostatočne otvorené na overovanie totožnosti? Bez skloňovania sa to dalo pochopiť. Ak skloňovať dal by som to popisne: „bez overovania“, alebo „voľne prístupná sieť“
+# PM: Majo má pravdu ide o šifrovanie bez overenia totožnosti - nechám na teba ako sa s tým popasuješ
 # Overenie totožnosti
+# GtkListStore item
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-msgid "Open System"
-msgstr "Otvorený systém"
-
-# PM: nemá tu byť Zdieľaným kľúčom
-# Overenie totožnosti
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
 #, fuzzy
-msgid "Shared Key"
-msgstr "Zdieľaný kľúč"
+msgid "Open System"
+msgstr "Otvoreným systémom"
 
+# Overenie totožnosti
+# GtkListStore item
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+msgid "Shared Key"
+msgstr "Spoločným kľúčom"
+
+# GtkLabel label
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "_Key"
 msgstr "_Kľúč"
 
+# GtkCheckButton label
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:8
 msgid "Sho_w key"
 msgstr "_Zobraziť kľúč"
 
-# PM: čo je to za index?
+# PM: ak som tomu dobre porozumel niektoré systémy umožňujú definovať 4 klúče, dosť dobre som ale nepochopil na čo je to dobré ked klient moze použit len jeden
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:10
 msgid "WEP inde_x"
 msgstr ""
 
+# GtkLabel label
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type"
 msgstr "_Typ"
 
+# policy_settings
 #. TRANSLATORS: this is the per application switch for message tray usage.
 #: ../panels/notifications/cc-edit-dialog.c:39
 msgctxt "notifications"
 msgid "Notifications"
 msgstr "Oznámenia"
 
+# policy_settings
 #. TRANSLATORS: this is the setting to configure sounds associated with notifications
 #: ../panels/notifications/cc-edit-dialog.c:41
 msgctxt "notifications"
 msgid "Sound Alerts"
 msgstr "Zvukové varovania"
 
+# policy_settings
 #: ../panels/notifications/cc-edit-dialog.c:42
 msgctxt "notifications"
 msgid "Show Popup Banners"
 msgstr "Zobrazovať vyskakovacie bubliny"
 
+# PM: asi všade zobrazovať
+# policy_settings
 #. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
+#, fuzzy
 #: ../panels/notifications/cc-edit-dialog.c:44
 msgctxt "notifications"
 msgid "Show Details in Banners"
 msgstr "Zobraziť podrobnosti v bublinách"
 
+# policy_settings
 #: ../panels/notifications/cc-edit-dialog.c:45
 msgctxt "notifications"
 msgid "View in Lock Screen"
 msgstr "Zobraziť v uzamknutej obrazovke"
 
+# policy_settings
 #: ../panels/notifications/cc-edit-dialog.c:46
 msgctxt "notifications"
 msgid "Show Details in Lock Screen"
 msgstr "Zobraziť podrobnosti v uzamknutej obrazovke"
 
+# 
 #: ../panels/notifications/cc-notifications-panel.c:203
 #: ../panels/power/cc-power-panel.c:1637 ../panels/power/cc-power-panel.c:1644
 #: ../panels/privacy/cc-privacy-panel.c:78
@@ -3997,10 +4057,12 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
+# desktop entry name
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
 msgstr "Oznámenia"
 
+# desktop entry comment
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
 msgid "Control which notifications are displayed and what they show"
 msgstr ""
@@ -4010,43 +4072,46 @@ msgstr ""
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Oznámenia;Bublina;Správa;Oblasť upozornení;Vyskakovacie;"
 
-# label
+# GtkLabel label
 #: ../panels/notifications/notifications.ui.h:1
 msgid "Show Pop Up Banners"
 msgstr "Zobraziť vyskakovacie bubliny"
 
-# label
+# GtkLabel label
 #: ../panels/notifications/notifications.ui.h:2
 msgid "Show in Lock Screen"
 msgstr "Zobraziť v uzamknutej obrazovke"
 
+# PM: je to dobre vo všetkých prípadoch? Čoho sa to týka?
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/region/cc-input-chooser.c:1010
 #: ../panels/search/cc-search-locations-dialog.c:480
+#, fuzzy
 msgid "Other"
 msgstr "Ostatné"
 
+# PM: lenže v druhom prípade je to toolbuton - nahlás bug
 #. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
 #: ../panels/online-accounts/online-accounts.ui.h:2
+#, fuzzy
 msgid "Add Account"
 msgstr "Pridanie účtu"
 
+# account dialog group
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
-#, fuzzy
-#| msgid "_Mail"
 msgid "Mail"
-msgstr "_Email"
+msgstr "Pošta"
 
+# account dialog group
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
-#, fuzzy
-#| msgid "Contrast:"
 msgid "Contacts"
-msgstr "Kontrast:"
+msgstr "Kontakty"
 
+# account dialog group
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
 msgid "Resources"
-msgstr ""
+msgstr "Zdroje"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
@@ -4054,14 +4119,16 @@ msgstr "Chyba pri prihlásení do účtu"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
-msgstr ""
+msgstr "Poverenia vypršali."
 
+# PM: poverenia vypršali takže je potrebné znova aktivovať účet ručným prihlásením
+# PM: dal by som Keď chcete tento účet povoliť, prihláste sa.
 #: ../panels/online-accounts/cc-online-accounts-panel.c:434
 #, fuzzy
-#| msgid "Enable this account"
 msgid "Sign in to enable this account."
-msgstr "Povoliť tento účet"
+msgstr "Prihláste sa, aby ste povolili tento účet."
 
+# button
 #: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
 msgstr ""
@@ -4082,6 +4149,7 @@ msgstr "Naozaj chcete odstrániť tento účet?"
 msgid "This will not remove the account on the server."
 msgstr "Toto neodstráni účet zo servera."
 
+# button
 #: ../panels/online-accounts/cc-online-accounts-panel.c:761
 msgid "_Remove"
 msgstr "O_dstrániť"
@@ -4091,6 +4159,7 @@ msgstr "O_dstrániť"
 msgid "Online Accounts"
 msgstr "Online účty"
 
+# desktop entry comment
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
 msgid "Connect to your online accounts and decide what to use them for"
 msgstr ""
@@ -4102,18 +4171,22 @@ msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Rozhovor;Kalendár;Mail;Email;"
 "Kontakt;"
 
+# GtkLabel label
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
 msgstr "Žiadny online účet nie je nastavený"
 
+# GtkToolButton label
 #: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Remove Account"
 msgstr "Odstrániť účet"
 
+# GtkButton label
 #: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an online account"
 msgstr "Pridať online účet"
 
+# GtkLabel label
 #: ../panels/online-accounts/online-accounts.ui.h:5
 msgid ""
 "Adding an account allows your applications to access it for documents, mail, "
@@ -4182,7 +4255,6 @@ msgstr "Výstraha: zostáva %s"
 msgid "%s remaining"
 msgstr "zostáva %s"
 
-# Cast obrazovky:
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:248 ../panels/power/cc-power-panel.c:276
 msgid "Fully charged"
@@ -4203,6 +4275,7 @@ msgstr "Nabíja sa"
 msgid "Discharging"
 msgstr "Vybíja sa"
 
+# %s time string
 #: ../panels/power/cc-power-panel.c:324
 #, c-format
 msgid "Estimated battery capacity: %s"
@@ -4310,64 +4383,79 @@ msgstr "Batérie"
 msgid "When _idle"
 msgstr "Pri neč_innosti"
 
+# label
 #: ../panels/power/cc-power-panel.c:1401
 msgid "Power Saving"
 msgstr "Šetrenie energie"
 
+# label
 #: ../panels/power/cc-power-panel.c:1430
 msgid "_Screen Brightness"
 msgstr "_Jas obrazovky"
 
+# label
 #: ../panels/power/cc-power-panel.c:1458
 msgid "_Dim Screen when Inactive"
 msgstr "_Stmaviť obrazovku pri neaktivite"
 
-# Cast obrazovky:
+# PM: za týmto je kombobox s časmi - Vyprázdniť obrazovku po - a budeto asi sedieť
+# label
 #: ../panels/power/cc-power-panel.c:1481
 #, fuzzy
-#| msgid "Full Screen"
 msgid "_Blank Screen"
-msgstr "Celá"
+msgstr "_Prázdna obrazovka"
 
+# PM: pozerám že je tam aj reťazec Turns off wireless devices ako label, nemá byť aj on na preklad?
+# label
 #: ../panels/power/cc-power-panel.c:1516
+#, fuzzy
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
+# PM: aj tu je Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices
+# label
 #: ../panels/power/cc-power-panel.c:1544
+#, fuzzy
 msgid "_Mobile Broadband"
 msgstr "Širokopásmové _mobilné pripojenie"
 
-# desktop entry name
+# label
 #: ../panels/power/cc-power-panel.c:1582
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
+# label
 #: ../panels/power/cc-power-panel.c:1633
 msgid "When on battery power"
 msgstr "Pri napájaní z batérie"
 
-# čo za zapojenie sa myslí, a po novom by to malo byť zastrčenie
 # PK: ked je zastrceny v zasuvke
+# label
 #: ../panels/power/cc-power-panel.c:1635
 msgid "When plugged in"
 msgstr "Pri zastrčení do zásuvky"
 
+# label
 #: ../panels/power/cc-power-panel.c:1762
 msgid "Suspend & Power Off"
 msgstr "Uspanie a vypnútie"
 
+# label
 #: ../panels/power/cc-power-panel.c:1793
 msgid "_Automatic Suspend"
 msgstr "_Automaticky uspať"
 
+# label
 #: ../panels/power/cc-power-panel.c:1815
 msgid "When Battery Power is _Critical"
 msgstr "Pri _kritickom vybití batérie"
 
+# label
 #: ../panels/power/cc-power-panel.c:1848
 msgid "Power Off"
 msgstr "Vypnúť"
 
+# label
 #: ../panels/power/cc-power-panel.c:1990
 msgid "Devices"
 msgstr "Zariadenia"
@@ -4377,6 +4465,7 @@ msgstr "Zariadenia"
 msgid "Power"
 msgstr "Napájanie"
 
+# desktop entry comment
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
 msgid "View your battery status and change power saving settings"
 msgstr ""
@@ -4389,133 +4478,158 @@ msgstr ""
 "Napájanie;Uspať;Hibernovať;Batéria;Jas;Stmavenie;Prázdny;Monitor;Obrazovka;"
 "DPMS;Nečinnosť;"
 
+# GtkListStore item
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
 msgstr "Hibernovať"
 
+# GtkListStore item
 #: ../panels/power/power.ui.h:2
 msgid "Power off"
 msgstr "Vypnúť"
 
 # Oneskorenie
+# GtkListStore item
 #: ../panels/power/power.ui.h:5
-#, fuzzy
-#| msgid "5 minutes"
 msgid "45 minutes"
-msgstr "5 minútach"
+msgstr "45 minút"
 
 # Oneskorenie
+# Uzamknut obrazovku pri necinnosti po
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+# GtkListStore item
 #: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
-#, fuzzy
 msgid "1 hour"
-msgstr "1 hodine"
+msgstr "1 hodina"
 
 # Oneskorenie
+# GtkListStore item
 #: ../panels/power/power.ui.h:7
-#, fuzzy
-#| msgid "40 minutes"
 msgid "80 minutes"
-msgstr "40 minútach"
+msgstr "80 minút"
 
 # Oneskorenie
+# GtkListStore item
 #: ../panels/power/power.ui.h:8
-#, fuzzy
-#| msgid "40 minutes"
 msgid "90 minutes"
-msgstr "40 minútach"
+msgstr "90 minút"
 
 # Oneskorenie
+# GtkListStore item
 #: ../panels/power/power.ui.h:9
-#, fuzzy
-#| msgid "10 minutes"
 msgid "100 minutes"
-msgstr "10 minútach"
+msgstr "100 minút"
 
 # Oneskorenie
+# GtkListStore item
 #: ../panels/power/power.ui.h:10
-#, fuzzy
-#| msgid "1 hour"
 msgid "2 hours"
-msgstr "1 hodine"
+msgstr "2 hodiny"
 
+# Blank Screen
+# Uzamknut obrazovku pri necinnosti po
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+# GtkListStore item
 #: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:3
 msgid "1 minute"
 msgstr "1 minúte"
 
+# Blank Screen
+# Uzamknut obrazovku pri necinnosti po
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+# GtkListStore item
 #: ../panels/power/power.ui.h:12 ../panels/privacy/privacy.ui.h:4
 msgid "2 minutes"
 msgstr "2 minútach"
 
+# Blank Screen
+# Uzamknut obrazovku pri necinnosti po
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+# GtkListStore item
 #: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:5
 msgid "3 minutes"
 msgstr "3 minútach"
 
+# Blank Screen
+# GtkListStore item
 #: ../panels/power/power.ui.h:14
 #, fuzzy
 #| msgid "40 minutes"
 msgid "4 minutes"
-msgstr "40 minútach"
+msgstr "4 minútach"
 
+# Blank Screen
+# Uzamknut obrazovku pri necinnosti po
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+# GtkListStore item
 #: ../panels/power/power.ui.h:15 ../panels/privacy/privacy.ui.h:6
 msgid "5 minutes"
 msgstr "5 minútach"
 
+# Blank Screen
+# GtkListStore item
 #: ../panels/power/power.ui.h:16
 #, fuzzy
-#| msgid "5 minutes"
 msgid "8 minutes"
-msgstr "5 minútach"
+msgstr "8 minút"
 
+# Blank Screen
+# GtkListStore item
 #: ../panels/power/power.ui.h:17
+#, fuzzy
 msgid "10 minutes"
-msgstr "10 minútach"
+msgstr "10 minút"
 
+# Blank Screen
+# GtkListStore item
 #: ../panels/power/power.ui.h:18
 #, fuzzy
-#| msgid "2 minutes"
 msgid "12 minutes"
-msgstr "2 minútach"
+msgstr "12 minút"
 
-# window title
+# GtkDialog title
 #: ../panels/power/power.ui.h:20
 msgid "Automatic Suspend"
 msgstr "Automatické uspanie"
 
+# GtkButton label
 #: ../panels/power/power.ui.h:21 ../panels/privacy/privacy.ui.h:10
 msgid "_Close"
 msgstr "_Zavrieť"
 
-# čo za zapojenie sa myslí, a po novom by to malo byť zastrčenie
-# PK: ked je zastrceny v zasuvke
+# GtkLabel label
 #: ../panels/power/power.ui.h:22
-#, fuzzy
-#| msgid "When _Plugged In"
 msgid "_Plugged In"
-msgstr "Pri z_astrčení do zásuvky"
+msgstr "Z_astrčený do zásuvky"
 
+# GtkLabel label
 #: ../panels/power/power.ui.h:23
-#, fuzzy
-#| msgid "When on _Battery Power"
 msgid "On _Battery Power"
-msgstr "Pri napájaní z _batérie"
+msgstr "Napájaný z _batérie"
 
+# MČ: Je to čudný preklad, keď to má hovoriť po akom čase nečinnosti sa má počítač uspať. Či som to zle pochopil? Možno by som preložil „oddialiť o“, alebo niečo podobné.
+# PM: http://deckard.malizor.org/ - pozrite si to tu jak to bude vyzerať, to čo hovorí Majo stojí za uváženie
+# GtkLabel label
 #: ../panels/power/power.ui.h:24
+#, fuzzy
 msgid "Delay"
 msgstr "Oneskorenie"
 
+# GtkButton label
 #: ../panels/printers/authentication-dialog.ui.h:3
-#, fuzzy
 msgid "Authenticate"
-msgstr "Overenie totožnosti zlyhalo"
+msgstr "Overeniť totožnosť"
 
+# GtkLabel label
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/sharing/sharing.ui.h:21
 msgid "Password"
 msgstr "Heslo"
 
+# PM: nebude lepšie vyžaduje sa?
+# GtkLabel label
 #: ../panels/printers/authentication-dialog.ui.h:6
 #, fuzzy
-#| msgid "Authentication required"
 msgid "Authentication Required"
 msgstr "Vyžadované je overenie totožnosti"
 
@@ -4669,11 +4783,14 @@ msgstr[2] "%u aktívne"
 msgid "Failed to add new printer."
 msgstr "Pridávanie novej tlačiarne zlyhalo."
 
+# file chooser dialog title
 #: ../panels/printers/cc-printers-panel.c:1940
 msgid "Select PPD File"
-msgstr "Vyberte súbor PPD"
+msgstr "Výber súboru PPD"
 
+# PM: tieto súbory definujú aké postscriptové funkcie tlačiareň zvláda. dal by som teda Súbor popisu PostScriptu tlačiarne alebo by to mohlo byť ešte aj takto Súbor popisu postscriptovej tlačiarne
 #: ../panels/printers/cc-printers-panel.c:1949
+#, fuzzy
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4681,18 +4798,24 @@ msgstr ""
 "Popisné tlačové súbory pre PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
+# gtk_menu_item
 #: ../panels/printers/cc-printers-panel.c:2254
 msgid "No suitable driver found"
 msgstr "Nenašiel sa žiadny vhodný ovládač"
 
+# PM: Je to dobre? prečo je to v menu s obrázkom?
+# gtk_image_menu_item
 #: ../panels/printers/cc-printers-panel.c:2323
+#, fuzzy
 msgid "Searching for preferred drivers…"
 msgstr "Hľadajú sa preferované ovládače…"
 
+# gtk_image_menu_item
 #: ../panels/printers/cc-printers-panel.c:2338
 msgid "Select from database…"
 msgstr "Vybrať z databázy…"
 
+# gtk_image_menu_item
 #: ../panels/printers/cc-printers-panel.c:2347
 msgid "Provide PPD File…"
 msgstr "Poskytnúť súbor PPD…"
@@ -4714,6 +4837,7 @@ msgstr "Nepodarilo sa načítať súbor používateľského rozhrania: %s"
 msgid "Printers"
 msgstr "Tlačiarne"
 
+# desktop entry comment
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
 msgid "Add printers, view printer jobs and decide how you want to print"
 msgstr ""
@@ -4723,53 +4847,61 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Tlačiareň;Rad;Tlač;Papier;Atrament;Toner;"
 
-# PM: že sú tlačové vyplýva z kontextu
+# GtkDialog title
 #. Translators: This dialog contains list of active print jobs of the selected printer
 #: ../panels/printers/jobs-dialog.ui.h:2
 msgid "Active Jobs"
 msgstr "Aktívne úlohy"
 
+# GtkButton label
 #: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/user-accounts/data/history-dialog.ui.h:2
 msgid "Close"
 msgstr "Zavrieť"
 
+# GtkToolButton label
 #: ../panels/printers/jobs-dialog.ui.h:4
 msgid "Resume Printing"
 msgstr "Pokračovať v tlači"
 
+# GtkToolButton label
 #: ../panels/printers/jobs-dialog.ui.h:5
 msgid "Pause Printing"
 msgstr "Pozastaviť tlač"
 
+# GtkToolButton label
 #: ../panels/printers/jobs-dialog.ui.h:6
 msgid "Cancel Print Job"
 msgstr "Zrušiť tlačovú úlohu"
 
-# window heading
+# GtkDialog title
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
 msgstr "Pridajte novú tlačiareň"
 
+# GtkButton label
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/user-accounts/um-user-panel.c:467
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
-# tooltip
+# GtkSearchEntry tooltip
 #: ../panels/printers/new-printer-dialog.ui.h:4
 msgid "Search for network printers or filter result"
 msgstr "Hľadá sieťové tlačiarne alebo filtruje výsledky"
 
+# GtkLabel label
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "Načítavajú sa voľby…"
 
+# GtkDialog title
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
-msgstr "Vyberte ovládač pre tlačiareň"
+msgstr "Výber ovládača pre tlačiareň"
 
+# GtkLabel label
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
 msgstr "Načítava sa databáza ovládačov…"
@@ -4873,9 +5005,10 @@ msgstr "Stav"
 msgid "Time"
 msgstr "Čas"
 
+# PM: nebude lepšie Aktívne úlohy tlačiarne %s?
 # %s je názov tlačiarne
 #: ../panels/printers/pp-jobs-dialog.c:496
-#, c-format
+#,fuzzy, c-format
 msgid "%s Active Jobs"
 msgstr "%s - aktívne úlohy"
 
@@ -4935,8 +5068,10 @@ msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Nastavenie strany"
 
+# PM: dal by som skôr Inštalované vybavenie
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
 #: ../panels/printers/pp-options-dialog.c:660
+#, fuzzy
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Parametre"
@@ -4959,8 +5094,10 @@ msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Farba"
 
+# PM: toto asi nebude dobre
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
 #: ../panels/printers/pp-options-dialog.c:672
+#, fuzzy
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Dokončuje sa"
@@ -4971,7 +5108,6 @@ msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Pokročilé"
 
-# tlačidlo
 #. Translators: this is an option of "Paper Source"
 #: ../panels/printers/pp-ppd-option-widget.c:77
 #: ../panels/printers/pp-ppd-option-widget.c:79
@@ -4988,7 +5124,6 @@ msgstr "Automatický výber"
 msgid "Printer Default"
 msgstr "Predvolené hodnoty tlačiarne"
 
-#  combo box
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
@@ -5027,19 +5162,23 @@ msgstr "Ovládač"
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
 
+# GtkToolButton label
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
 msgstr "Pridať tlačiareň"
 
+# GtkToolButton label
 #: ../panels/printers/printers.ui.h:2
 msgid "Remove Printer"
 msgstr "Odstrániť tlačiareň"
 
+# GtkLabel label
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/printers.ui.h:4
 msgid "Supply"
 msgstr "Náplň"
 
+# GtkLabel label
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 #: ../panels/printers/printers.ui.h:6
 msgid "Location"
@@ -5050,27 +5189,33 @@ msgstr "Umiestnenie"
 msgid "_Default"
 msgstr "_Predvolená"
 
+# GtkLabel label
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
 msgstr "Úlohy"
 
+# GtkButton label
 #. Translators: Opens a dialog containing printer's jobs
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
 msgstr ""
 
+# GtkLabel label
 #: ../panels/printers/printers.ui.h:12
 msgid "Model"
 msgstr "Model"
 
+# GtkLabel label
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "menovka"
 
+# GtkLabel label
 #: ../panels/printers/printers.ui.h:17
 msgid "Setting new driver…"
 msgstr "Nastavuje sa nový ovládač…"
 
+# tab
 #: ../panels/printers/printers.ui.h:18
 msgid "page 3"
 msgstr "strana č. 3"
@@ -5099,6 +5244,7 @@ msgstr ""
 "Ľutujeme, ale systémová služba tlače\n"
 "sa zdá byť nedostupná."
 
+# PM: tu som skončil
 # status
 #: ../panels/privacy/cc-privacy-panel.c:105
 msgid "Hidden"
@@ -5150,12 +5296,10 @@ msgstr "Vypnúť obrazovku po"
 msgid "30 seconds"
 msgstr "30 sekundách"
 
-# PM: asi malo byť na obrazovke
 # label
 #: ../panels/privacy/privacy.ui.h:11
-#, fuzzy
 msgid "Control how you appear on the screen and the network."
-msgstr "Ovládajte zobrazenie vás na obrazovk a sieti."
+msgstr "Ovládajte zobrazenie vás na obrazovke a sieti."
 
 # label
 #: ../panels/privacy/privacy.ui.h:12
@@ -5167,19 +5311,16 @@ msgstr "Zobraziť _celé meno v hornom paneli"
 msgid "Display full name in _lock screen"
 msgstr "Zobraziť celé meno v _uzamknutej obrazovke"
 
-# PM: Režim utajenia sa mi tu hodí viac
 #: ../panels/privacy/privacy.ui.h:14
-#, fuzzy
 msgid "_Stealth Mode"
-msgstr "_Utajený režim"
+msgstr "_Režim utajenia"
 
 #: ../panels/privacy/privacy.ui.h:15
 msgid "Immediately"
 msgstr "Okamžite"
 
-# PM: toto je aj pri ukladať históriu - nahlás bug
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 #: ../panels/privacy/privacy.ui.h:16
-#, fuzzy
 msgid "1 day"
 msgstr "1 dni"
 
@@ -5203,9 +5344,8 @@ msgstr "5 dňoch"
 msgid "6 days"
 msgstr "6 dňoch"
 
-# PM: toto je aj pri ukladať históriu - nahlás bug
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 #: ../panels/privacy/privacy.ui.h:22
-#, fuzzy
 msgid "7 days"
 msgstr "týždni"
 
@@ -5213,7 +5353,7 @@ msgstr "týždni"
 msgid "14 days"
 msgstr "2 týždňoch"
 
-# PM: toto je aj pri ukladať históriu - nahlás bug
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 #: ../panels/privacy/privacy.ui.h:24
 msgid "30 days"
 msgstr "30 dňoch"
@@ -5240,19 +5380,18 @@ msgstr "_Naposledy použíté"
 msgid "Retain _History"
 msgstr "Ukladať _históriu"
 
+#  label
 #: ../panels/privacy/privacy.ui.h:32
 msgid "The Screen Lock protects your privacy when you are away."
-msgstr ""
+msgstr "Uzamknutá obrazovka chráni vašu bezpečnosť pri neprítomnosti."
 
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Automatic Screen _Lock"
 msgstr "A_utomatické uzamykanie obrazovky"
 
 #: ../panels/privacy/privacy.ui.h:34
-#, fuzzy
-#| msgid "Lock Screen _After"
 msgid "Lock Screen _After Blank For"
-msgstr "_Uzamknúť obrazovku po"
+msgstr "_Uzamknúť obrazovku pri necinnosti po"
 
 #: ../panels/privacy/privacy.ui.h:35
 msgid "Show _Notifications"
@@ -5266,11 +5405,16 @@ msgstr "_Vyprázdniť kôš"
 msgid "_Purge Temporary Files"
 msgstr "_Vymazať dočasné súbory"
 
+# MČ: neviem čo je správne: udržovať, alebo udržiavať
+# label
 #: ../panels/privacy/privacy.ui.h:39
+#, fuzzy
 msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
 msgstr ""
+"Automatické vymazanie Koša a dočasných súborov pomáha udržovať váš počítač "
+"bez nepotrebných citlivých informácií."
 
 #: ../panels/privacy/privacy.ui.h:40
 msgid "Automatically Empty _Trash"
@@ -5302,33 +5446,34 @@ msgstr "Nenašli sa žiadne regióny"
 msgid "No input sources found"
 msgstr "Nenašli sa žiadne zdroje vstupu"
 
-#: ../panels/region/cc-region-panel.c:225
+#: ../panels/region/cc-region-panel.c:229
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Aby sa prejavili zmeny, musíte reštartovať vašu reláciu"
 
-#: ../panels/region/cc-region-panel.c:226
+#: ../panels/region/cc-region-panel.c:230
 msgid "Restart Now"
 msgstr "Reštartovať teraz"
 
-#: ../panels/region/cc-region-panel.c:436
+#: ../panels/region/cc-region-panel.c:440
 msgctxt "Language"
 msgid "None"
 msgstr "Žiadny"
 
-#: ../panels/region/cc-region-panel.c:898
+#: ../panels/region/cc-region-panel.c:940
 msgid "Sorry"
 msgstr "Prepáčte"
 
-#: ../panels/region/cc-region-panel.c:900
+#: ../panels/region/cc-region-panel.c:942
 msgid "Input methods can't be used on the login screen"
-msgstr ""
+msgstr "Vstupné metódy nemôžu byť použité na prihlasovacej obrazovke"
 
-#: ../panels/region/cc-region-panel.c:1345
-msgctxt "Input source"
-msgid "None"
-msgstr "Žiadny"
+#: ../panels/region/cc-region-panel.c:1391
+#, fuzzy
+#| msgid "No input sources found"
+msgid "No input source selected"
+msgstr "Nenašli sa žiadne zdroje vstupu"
 
-#: ../panels/region/cc-region-panel.c:1502
+#: ../panels/region/cc-region-panel.c:1548
 msgid "Login Screen"
 msgstr "Prihlasovacia obrazovka"
 
@@ -5338,10 +5483,8 @@ msgid "Formats"
 msgstr "Formáty"
 
 #: ../panels/region/format-chooser.ui.h:3
-#, fuzzy
-#| msgid "Overview"
 msgid "Preview"
-msgstr "Prehľad"
+msgstr "Ukážka"
 
 #: ../panels/region/format-chooser.ui.h:4
 msgid "Dates"
@@ -5560,12 +5703,11 @@ msgstr "Zdieľať priečinok Verejné"
 msgid "Only Receive From Trusted Devices"
 msgstr "Prijímať len z dôverných zariadení"
 
-# PK: Prebrate?? je to zmenene v xdg-dirs?
-# PM: neviem ktorý modul určuje ako sa ten priečinok má volať neviem či nie Preberanie - prever to
+# MČ: „Preberania“ je šialený preklad. Pozeral som si aj ten modul, čo si nahodil tam tieto šialené preklady a radšej som ho odmietol kontrolovať, lebo by som ti tie preklady všetky zrušil. Nech sa na to podujme niekto iný.
 #: ../panels/sharing/sharing.ui.h:5
 #, fuzzy
 msgid "Save Received Files to Downloads Folder"
-msgstr "Uložiť prijaté súbory do priečinka Stiahnuté"
+msgstr "Uložiť prijaté súbory do priečinka Preberania"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Only share with Trusted Devices"
@@ -5580,20 +5722,21 @@ msgid "Some services are disabled because of no network access."
 msgstr "Niektoré služby sú zakázané kvôli nedostupnosti sieťového pripojenia."
 
 #: ../panels/sharing/sharing.ui.h:9
+#, fuzzy
 msgid "Media Sharing"
 msgstr "Zdieľanie multimédií"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Share Music, Photos and Videos with others on the current network."
-msgstr "Zdieľanie hudby, fotografií a videí s ostatnými na aktuálnej sieti."
+msgstr "Podeliť sa o hudbu, fotografie a videá s ostatnými v aktuálnej sieti."
 
-# PM: skôr v tejto sieti
 #: ../panels/sharing/sharing.ui.h:11
-#, fuzzy
 msgid "Share Media On This Network"
-msgstr "Zdieľať multimédiá na tejto sieti"
+msgstr "Podeliť sa o multimédiá v tejto sieti"
 
+# PK: tu ako?
 #: ../panels/sharing/sharing.ui.h:12
+#, fuzzy
 msgid "Shared Folders"
 msgstr "Zdieľané priečinky"
 
@@ -5616,7 +5759,7 @@ msgid "Personal File Sharing"
 msgstr "Zdieľanie osobných súborov"
 
 #: ../panels/sharing/sharing.ui.h:18
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
 "your current network using: <a href=\"dav://%s\">dav://%s</a>"
@@ -5626,7 +5769,7 @@ msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:19
 msgid "Share Public Folder On This Network"
-msgstr "Zdieľať priečinok Verejné na tejto sieti"
+msgstr "Podeliť sa o priečinok Verejné v tejto sieti"
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Require Password"
@@ -5645,9 +5788,11 @@ msgstr ""
 "Umožniť vzdialeným používateľom pripojenie pomocou prikazu Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
+# MČ: „Sprístupnenie obrazovky“?
 #: ../panels/sharing/sharing.ui.h:26
+#, fuzzy
 msgid "Screen Sharing"
-msgstr "Zdieľanie obrazovky"
+msgstr "Podelenie sa o obrazovku"
 
 #: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
@@ -5659,9 +5804,8 @@ msgstr ""
 "pripojením k: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:29
-#, fuzzy
 msgid "Remote View"
-msgstr "Odstrániť zobrazenie"
+msgstr "Vzdialené zobrazenie"
 
 # desktop entry name
 #: ../panels/sharing/sharing.ui.h:30
@@ -6381,13 +6525,10 @@ msgstr "Jas:"
 msgid "Contrast:"
 msgstr "Kontrast:"
 
-# PM: a čo dvojbodka? všetky ostatné položky ju majú viď vyššie - nahlás nový bug
 # * https://bugzilla.gnome.org/show_bug.cgi?id=694766
 # 3 GtkLabel label
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:29
-#, fuzzy
-#| msgid "Color"
 msgctxt "universal access, contrast"
 msgid "Color"
 msgstr "Farby"
@@ -6562,11 +6703,11 @@ msgstr "Pridáva alebo odstraňuje používateľov a mení vaše heslo"
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "Prihlásenie;Meno;Odtlačok prsta;Podobizeň;Logo;Tvár;Heslo;"
 
+# MČ: asi skôr „história prihlásení“, alebo „história prihlasovania“
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
 #, fuzzy
-#| msgid "Retain _History"
 msgid "Login History"
-msgstr "Ukladať _históriu"
+msgstr "História prihlásenia"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
@@ -7540,6 +7681,10 @@ msgstr "Všetky nastavenia"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nastavenia;Konfigurácia;"
+
+#~ msgctxt "Input source"
+#~ msgid "None"
+#~ msgstr "Žiadny"
 
 #~ msgid "Expired credentials. Please log in again."
 #~ msgstr "Platnosť poverení vypršala. Prihláste sa, prosím, znova."
