@@ -961,7 +961,7 @@ users_loaded (ActUserManager     *manager,
                 g_debug ("adding user %s\n", get_real_or_user_name (user));
                 user_added (d->um, user, d);
         }
-        g_slist_free_full (list, g_object_unref);
+        g_slist_free (list);
 
         g_signal_connect (d->um, "user-added", G_CALLBACK (user_added), d);
         g_signal_connect (d->um, "user-removed", G_CALLBACK (user_removed), d);
