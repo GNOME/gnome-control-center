@@ -2274,6 +2274,60 @@ out:
   g_free (data);
 }
 
+/*
+ * Special item for the list of backends. It represents
+ * backends not present in the list itself.
+ */
+#define OTHER_BACKENDS "other-backends"
+
+/*
+ * List of CUPS backends sorted according to their speed,
+ * the fastest is the first one. The last item represents
+ * backends not present in the list.
+ */
+const gchar *cups_backends[] = {
+  "usb",
+  "socket",
+  "serial",
+  "parallel",
+  "lpd",
+  "ipp",
+  "hp",
+  "dnssd",
+  "snmp",
+  "bluetooth",
+  "beh",
+  "ncp",
+  "hpfax",
+  OTHER_BACKENDS
+};
+
+static GList *
+create_backends_list ()
+{
+  GList *list = NULL;
+  gint   i;
+
+  for (i = 0; i < G_N_ELEMENTS (cups_backends); i++)
+    list = g_list_prepend (list, g_strdup (cups_backends[i]));
+  list = g_list_reverse (list);
+
+  return list;
+}
+
+static GVariantBuilder *
+create_other_backends_array ()
+{
+  GVariantBuilder *builder;
+  gint             i;
+
+  builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+  for (i = 0; i < G_N_ELEMENTS (cups_backends) - 1; i++)
+    g_variant_builder_add (builder, "s", cups_backends[i]);
+
+  return builder;
+}
+
 static void
 get_device_attributes_async_dbus_cb (GObject      *source_object,
                                      GAsyncResult *res,
@@ -2399,7 +2453,8 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
 
   if (!device_id || !device_make_and_model)
     {
-      GVariantBuilder include_scheme_builder;
+      GVariantBuilder *include_scheme_builder = NULL;
+      GVariantBuilder *exclude_scheme_builder = NULL;
 
       g_free (device_id);
       g_free (device_make_and_model);
@@ -2409,8 +2464,19 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
 
       if (data->backend_list && !g_cancellable_is_cancelled (data->cancellable))
         {
-          g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
-          g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
+          const gchar *backend_name;
+
+          backend_name = data->backend_list->data;
+
+          if (g_strcmp0 (backend_name, OTHER_BACKENDS) != 0)
+            {
+              include_scheme_builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+              g_variant_builder_add (include_scheme_builder, "s", backend_name);
+            }
+          else
+            {
+              exclude_scheme_builder = create_other_backends_array ();
+            }
 
           tmp = data->backend_list;
           data->backend_list = g_list_remove_link (data->backend_list, tmp);
@@ -2424,14 +2490,21 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                                   g_variant_new ("(iiasas)",
                                                  0,
                                                  0,
-                                                 &include_scheme_builder,
-                                                 NULL),
+                                                 include_scheme_builder,
+                                                 exclude_scheme_builder),
                                   G_VARIANT_TYPE ("(sa{ss})"),
                                   G_DBUS_CALL_FLAGS_NONE,
                                   DBUS_TIMEOUT,
                                   data->cancellable,
                                   get_device_attributes_async_dbus_cb,
                                   user_data);
+
+          if (include_scheme_builder)
+            g_variant_builder_unref (include_scheme_builder);
+
+          if (exclude_scheme_builder)
+            g_variant_builder_unref (exclude_scheme_builder);
+
           return;
         }
     }
@@ -2466,11 +2539,6 @@ get_device_attributes_async_scb (GHashTable *result,
   GDAData         *data = (GDAData *) user_data;
   GError          *error = NULL;
   GList           *tmp;
-  gint             i;
-  const gchar     *backends[] =
-    {"hpfax", "ncp", "beh", "bluetooth", "snmp",
-     "dnssd", "hp", "ipp", "lpd", "parallel",
-     "serial", "socket", "usb", NULL};
 
   if (result)
     {
@@ -2495,8 +2563,7 @@ get_device_attributes_async_scb (GHashTable *result,
       goto out;
     }
 
-  for (i = 0; backends[i]; i++)
-    data->backend_list = g_list_prepend (data->backend_list, g_strdup (backends[i]));
+  data->backend_list = create_backends_list ();
 
   g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
   g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
@@ -3567,17 +3634,28 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
     {
       if (!g_cancellable_is_cancelled (data->cancellable))
         {
-          GVariantBuilder include_scheme_builder;
+          GVariantBuilder *include_scheme_builder = NULL;
+          GVariantBuilder *exclude_scheme_builder = NULL;
+          gchar           *backend_name;
+
+          backend_name = data->backend_list->data;
 
           data->callback (result,
                           FALSE,
                           FALSE,
                           data->user_data);
 
-          g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
-          g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
+          if (g_strcmp0 (backend_name, OTHER_BACKENDS) != 0)
+            {
+              include_scheme_builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+              g_variant_builder_add (include_scheme_builder, "s", backend_name);
+            }
+          else
+            {
+              exclude_scheme_builder = create_other_backends_array ();
+            }
 
-          g_free (data->backend_list->data);
+          g_free (backend_name);
           data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
 
           g_dbus_connection_call (G_DBUS_CONNECTION (g_object_ref (source_object)),
@@ -3588,14 +3666,21 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                                   g_variant_new ("(iiasas)",
                                                  0,
                                                  0,
-                                                 &include_scheme_builder,
-                                                 NULL),
+                                                 include_scheme_builder,
+                                                 exclude_scheme_builder),
                                   G_VARIANT_TYPE ("(sa{ss})"),
                                   G_DBUS_CALL_FLAGS_NONE,
                                   DBUS_TIMEOUT,
                                   data->cancellable,
                                   get_cups_devices_async_dbus_cb,
                                   user_data);
+
+          if (include_scheme_builder)
+            g_variant_builder_unref (include_scheme_builder);
+
+          if (exclude_scheme_builder)
+            g_variant_builder_unref (exclude_scheme_builder);
+
           return;
         }
       else
@@ -3632,11 +3717,7 @@ get_cups_devices_async (GCancellable *cancellable,
   GVariantBuilder  include_scheme_builder;
   GCDData         *data;
   GError          *error = NULL;
-  gint             i;
-  const gchar     *backends[] =
-    {"hpfax", "ncp", "beh", "bluetooth", "snmp",
-     "dnssd", "hp", "ipp", "lpd", "parallel",
-     "serial", "socket", "usb", NULL};
+  gchar           *backend_name;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
@@ -3652,13 +3733,14 @@ get_cups_devices_async (GCancellable *cancellable,
     data->cancellable = g_object_ref (cancellable);
   data->callback = callback;
   data->user_data = user_data;
-  for (i = 0; backends[i]; i++)
-    data->backend_list = g_list_prepend (data->backend_list, g_strdup (backends[i]));
+  data->backend_list = create_backends_list ();
+
+  backend_name = data->backend_list->data;
 
   g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
-  g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
+  g_variant_builder_add (&include_scheme_builder, "s", backend_name);
 
-  g_free (data->backend_list->data);
+  g_free (backend_name);
   data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
 
   g_dbus_connection_call (bus,
