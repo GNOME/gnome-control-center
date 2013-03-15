@@ -159,7 +159,7 @@ set_locale_id (GtkDialog   *chooser,
                         gboolean is_extra;
 
                         /* mark as selected */
-                        gtk_widget_show (check);
+                        gtk_widget_set_opacity (check, 1.0);
 
                         /* make sure this row is shown */
                         is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
@@ -170,7 +170,7 @@ set_locale_id (GtkDialog   *chooser,
 
                 } else {
                         /* mark as unselected */
-                        gtk_widget_hide (check);
+                        gtk_widget_set_opacity (check, 0.0);
                 }
         }
         g_list_free (children);
@@ -232,9 +232,17 @@ region_widget_new (const gchar *locale_id,
 
         widget = padded_label_new (locale_name, is_extra);
 
+        /* We add a check on each side of the label to keep it centered. */
         check = gtk_image_new ();
         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-        gtk_widget_set_no_show_all (check, TRUE);
+        gtk_widget_set_opacity (check, 0.0);
+        g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
+        gtk_box_pack_start (GTK_BOX (widget), check, FALSE, FALSE, 0);
+        gtk_box_reorder_child (GTK_BOX (widget), check, 0);
+
+        check = gtk_image_new ();
+        gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
+        gtk_widget_set_opacity (check, 0.0);
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
         gtk_box_pack_start (GTK_BOX (widget), check, FALSE, FALSE, 0);
 
