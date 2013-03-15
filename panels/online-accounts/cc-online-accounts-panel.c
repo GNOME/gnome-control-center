@@ -108,12 +108,12 @@ cc_goa_panel_set_property (GObject *object,
           const gchar *first_arg = NULL;
 
           parameters = g_value_get_variant (value);
-          if (parameters == NULL)
+          if (parameters == NULL || g_variant_n_children (parameters) == 0)
             return;
 
-          if (g_variant_n_children (parameters) > 0)
+          if (g_variant_n_children (parameters) > 1)
             {
-                g_variant_get_child (parameters, 0, "v", &v);
+                g_variant_get_child (parameters, 1, "v", &v);
                 if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
                   first_arg = g_variant_get_string (v, NULL);
                 else

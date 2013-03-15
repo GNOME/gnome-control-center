@@ -215,4 +215,21 @@ cc_panel_loader_load_by_name (CcShell     *shell,
                        NULL);
 }
 
+void
+cc_panel_loader_add_option_groups (GOptionContext  *context,
+                                   GVariantBuilder *builder)
+{
+  int i;
+
+  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
+    {
+      GType (*get_type) (void);
+      get_type = all_panels[i].get_type;
+      GOptionGroup *group = cc_panel_get_option_group (get_type(), builder);
+      if (group == NULL)
+        continue;
+      g_option_context_add_group (context, group);
+    }
+}
+
 #endif /* CC_PANEL_LOADER_NO_GTYPES */
