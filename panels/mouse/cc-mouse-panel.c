@@ -65,12 +65,6 @@ cc_mouse_panel_dispose (GObject *object)
       priv->prefs_widget = NULL;
     }
 
-  if (priv->test_widget)
-    {
-      gnome_mouse_test_dispose (priv->test_widget);
-      priv->test_widget = NULL;
-    }
-
   if (priv->builder)
     {
       g_object_unref (priv->builder);
@@ -92,19 +86,10 @@ shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
 {
   GtkNotebook *notebook = GTK_NOTEBOOK (panel->priv->widget);
   gint page_num;
+  gboolean active;
 
-  if (gtk_toggle_button_get_active (button)) {
-    GtkBuilder *dialog = panel->priv->builder;
-    GtkAdjustment *adjustment;
-
-    page_num = CC_MOUSE_PAGE_TEST;
-
-    adjustment = GTK_ADJUSTMENT (WID ("scrolled_window_adjustment"));
-    gtk_adjustment_set_value (adjustment,
-                              gtk_adjustment_get_upper (adjustment));
-  } else {
-    page_num = CC_MOUSE_PAGE_PREFS;
-  }
+  active = gtk_toggle_button_get_active (button);
+  page_num = active ? CC_MOUSE_PAGE_TEST : CC_MOUSE_PAGE_PREFS;
 
   gtk_notebook_set_current_page (notebook, page_num);
 }
@@ -155,19 +140,10 @@ cc_mouse_panel_init (CcMousePanel *self)
       return;
     }
 
-  gtk_builder_add_from_resource (priv->builder,
-                                 "/org/gnome/control-center/mouse/gnome-mouse-test.ui",
-                                 &error);
-  if (error != NULL)
-    {
-      g_warning ("Error loading UI file: %s", error->message);
-      return;
-    }
-
   dialog = priv->builder;
 
   priv->prefs_widget = gnome_mouse_properties_init (priv->builder);
-  priv->test_widget = gnome_mouse_test_init (priv->builder);
+  priv->test_widget = cc_mouse_test_new ();
 
   priv->widget = gtk_notebook_new ();
   gtk_widget_set_margin_left (priv->widget, 6);
@@ -178,9 +154,10 @@ cc_mouse_panel_init (CcMousePanel *self)
   gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->widget), FALSE);
 
   gtk_widget_reparent (WID ("prefs_widget"), priv->widget);
-  gtk_widget_reparent (WID ("test_widget"), priv->widget);
+  gtk_notebook_append_page (GTK_NOTEBOOK (priv->widget), priv->test_widget, NULL);
 
   gtk_container_add (GTK_CONTAINER (self), priv->widget);
+  gtk_widget_show (priv->test_widget);
   gtk_widget_show (priv->widget);
 }
 
