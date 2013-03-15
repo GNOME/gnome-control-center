@@ -52,61 +52,6 @@ typedef struct {
 
 #define GET_PRIVATE(chooser) ((CcLanguageChooserPrivate *) g_object_get_data (G_OBJECT (chooser), "private"))
 
-static void
-set_locale_id (GtkDialog *chooser,
-               const gchar       *locale_id)
-{
-        CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
-        GList *children, *l;
-
-        children = gtk_container_get_children (GTK_CONTAINER (priv->language_list));
-        for (l = children; l; l = l->next) {
-                GtkWidget *row = l->data;
-                GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-                const gchar *language = g_object_get_data (G_OBJECT (row), "locale-id");
-                if (check == NULL || language == NULL)
-                        continue;
-
-                if (g_strcmp0 (locale_id, language) == 0) {
-                        gboolean is_extra;
-
-                        gtk_widget_set_opacity (check, 1.0);
-
-                        /* make sure the selected language is shown */
-                        is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
-                        if (!priv->showing_extra && is_extra) {
-                                g_object_set_data (G_OBJECT (row), "is-extra", GINT_TO_POINTER (FALSE));
-                                egg_list_box_refilter (EGG_LIST_BOX (priv->language_list));
-                        }
-                } else {
-                        gtk_widget_set_opacity (check, 0.0);
-                }
-        }
-        g_list_free (children);
-
-        g_free (priv->language);
-        priv->language = g_strdup (locale_id);
-}
-
-static gint
-sort_languages (gconstpointer a,
-            gconstpointer b,
-            gpointer      data)
-{
-        const gchar *la;
-        const gchar *lb;
-
-        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL)
-                return 1;
-        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL)
-                return -1;
-
-        la = g_object_get_data (G_OBJECT (a), "locale-name");
-        lb = g_object_get_data (G_OBJECT (b), "locale-name");
-
-        return g_strcmp0 (la, lb);
-}
-
 static GtkWidget *
 padded_label_new (char *text, gboolean narrow)
 {
@@ -306,6 +251,25 @@ out:
         return visible;
 }
 
+static gint
+sort_languages (gconstpointer a,
+            gconstpointer b,
+            gpointer      data)
+{
+        const gchar *la;
+        const gchar *lb;
+
+        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL)
+                return 1;
+        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL)
+                return -1;
+
+        la = g_object_get_data (G_OBJECT (a), "locale-name");
+        lb = g_object_get_data (G_OBJECT (b), "locale-name");
+
+        return g_strcmp0 (la, lb);
+}
+
 static void
 filter_changed (GtkDialog *chooser)
 {
@@ -347,6 +311,44 @@ show_more (GtkDialog *chooser)
         priv->showing_extra = TRUE;
 
         egg_list_box_refilter (EGG_LIST_BOX (priv->language_list));
+}
+
+static void
+set_locale_id (GtkDialog *chooser,
+               const gchar       *locale_id)
+{
+        CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
+        GList *children, *l;
+
+        children = gtk_container_get_children (GTK_CONTAINER (priv->language_list));
+        for (l = children; l; l = l->next) {
+                GtkWidget *row = l->data;
+                GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
+                const gchar *language = g_object_get_data (G_OBJECT (row), "locale-id");
+                if (check == NULL || language == NULL)
+                        continue;
+
+                if (g_strcmp0 (locale_id, language) == 0) {
+                        gboolean is_extra;
+
+                        gtk_widget_show (check);
+
+                        /* make sure the selected language is shown */
+                        is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
+                        if (!priv->showing_extra && is_extra) {
+                                g_object_set_data (G_OBJECT (row), "is-extra", GINT_TO_POINTER (FALSE));
+                                egg_list_box_refilter (EGG_LIST_BOX (priv->language_list));
+                        }
+                } else {
+                        gtk_image_clear (GTK_IMAGE (check));
+                        g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
+                        gtk_widget_hide (check);
+                }
+        }
+        g_list_free (children);
+
+        g_free (priv->language);
+        priv->language = g_strdup (locale_id);
 }
 
 static void
