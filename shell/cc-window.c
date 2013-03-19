@@ -30,7 +30,10 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
 #include <string.h>
-#include <libgd/gd.h>
+#include <libgd/gd-stack.h>
+#include <libgd/gd-header-bar.h>
+#include <libgd/gd-header-button.h>
+#include <libgd/gd-styled-text-renderer.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
