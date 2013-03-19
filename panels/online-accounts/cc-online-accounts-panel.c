@@ -501,12 +501,16 @@ select_account_by_id (CcGoaPanel    *panel,
 
   if (iter_set)
     {
+      GtkTreePath *path;
       GtkTreeView *tree_view;
       GtkTreeSelection *selection;
 
       tree_view = GTK_TREE_VIEW (panel->accounts_treeview);
       selection = gtk_tree_view_get_selection (tree_view);
       gtk_tree_selection_select_iter (selection, &iter);
+      path = gtk_tree_model_get_path (GTK_TREE_MODEL (panel->accounts_model), &iter);
+      gtk_tree_view_scroll_to_cell (tree_view, path, NULL, FALSE, 0.0, 0.0);
+      gtk_tree_path_free (path);
     }
 
   return iter_set;
