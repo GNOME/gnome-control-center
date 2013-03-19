@@ -30,9 +30,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
 #include <string.h>
-#include <libgd/gd-styled-text-renderer.h>
-#include <libgd/gd-header-bar.h>
-#include <libgd/gd-stack.h>
+#include <libgd/gd.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
@@ -1398,23 +1396,18 @@ create_header (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
   GtkWidget *button;
-  GtkWidget *image;
   AtkObject *accessible;
-  GtkStyleContext *context;
 
   priv->header = gd_header_bar_new ();
 
-  image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_widget_show (image);
-  priv->previous_button = button = gtk_button_new ();
-  gtk_button_set_image (GTK_BUTTON (button), image);
+  priv->previous_button = button = gd_header_simple_button_new ();
+  gd_header_button_set_symbolic_icon_name (GD_HEADER_BUTTON (button),
+                                           "go-previous-symbolic");
   gtk_widget_set_no_show_all (button, TRUE);
   accessible = gtk_widget_get_accessible (button);
   atk_object_set_name (accessible, _("All Settings"));
   gd_header_bar_pack_start (GD_HEADER_BAR (priv->header), button);
   g_signal_connect (button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
-  context = gtk_widget_get_style_context (priv->previous_button);
-  gtk_style_context_add_class (context, "image-button");
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gd_header_bar_pack_end (GD_HEADER_BAR (priv->header), priv->top_right_box);
