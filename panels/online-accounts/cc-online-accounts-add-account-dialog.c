@@ -301,6 +301,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   priv->list_store = gtk_list_store_new (N_COLUMNS, GOA_TYPE_PROVIDER, G_TYPE_ICON, G_TYPE_STRING);
 
   priv->stack = gd_stack_new ();
+  gd_stack_set_transition_type (GD_STACK (priv->stack), GD_STACK_TRANSITION_TYPE_CROSSFADE);
   gtk_container_add (GTK_CONTAINER (grid), priv->stack);
 
   sw = gtk_scrolled_window_new (NULL, NULL);
