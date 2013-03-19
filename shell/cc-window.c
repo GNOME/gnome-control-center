@@ -1439,6 +1439,7 @@ create_window (CcWindow *self)
 
   priv->stack = gd_stack_new ();
   gd_stack_set_homogeneous (GD_STACK (priv->stack), TRUE);
+  gd_stack_set_transition_type (GD_STACK (priv->stack), GD_STACK_TRANSITION_TYPE_CROSSFADE);
   gtk_box_pack_start (GTK_BOX (box), priv->stack, TRUE, TRUE, 0);
 
   create_main_page (self);
