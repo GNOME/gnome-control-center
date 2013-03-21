@@ -72,6 +72,9 @@ struct _CcUserPanelPrivate {
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
         UmHistoryDialog *history_dialog;
+
+        gint other_accounts;
+        GtkTreeIter *other_iter;
 };
 
 static GtkWidget *
@@ -140,7 +143,7 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkTreeIter iter;
         GtkTreeIter dummy;
         GdkPixbuf *pixbuf;
-        gchar *text;
+        gchar *text, *title;
         GtkTreeSelection *selection;
         gint sort_key;
 
@@ -157,6 +160,7 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
                 sort_key = 1;
         }
         else {
+                d->other_accounts++;
                 sort_key = 3;
         }
         gtk_list_store_append (store, &iter);
@@ -176,6 +180,19 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         if (sort_key == 1 &&
             !gtk_tree_selection_get_selected (selection, &model, &dummy)) {
                 gtk_tree_selection_select_iter (selection, &iter);
+        }
+
+        /* Show heading for other accounts if new one have been added. */
+        if (d->other_accounts == 1 && sort_key == 3) {
+                title = g_strdup_printf ("<small><span foreground=\"#555555\">%s</span></small>", _("Other Accounts"));
+                gtk_list_store_append (store, &iter);
+                gtk_list_store_set (store, &iter,
+                                    TITLE_COL, title,
+                                    HEADING_ROW_COL, TRUE,
+                                    SORT_KEY_COL, 2,
+                                    -1);
+                d->other_iter = gtk_tree_iter_copy (&iter);
+                g_free (title);
         }
 }
 
@@ -227,6 +244,7 @@ user_removed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkListStore *store;
         GtkTreeIter iter, next;
         ActUser *u;
+        gint key;
 
         g_debug ("user removed: %s\n", act_user_get_user_name (user));
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
@@ -235,12 +253,15 @@ user_removed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         store = GTK_LIST_STORE (model);
         if (gtk_tree_model_get_iter_first (model, &iter)) {
                 do {
-                        gtk_tree_model_get (model, &iter, USER_COL, &u, -1);
+                        gtk_tree_model_get (model, &iter, USER_COL, &u, SORT_KEY_COL, &key, -1);
 
                         if (u != NULL) {
                                 if (act_user_get_uid (user) == act_user_get_uid (u)) {
                                         if (!get_next_user_row (model, &iter, &next))
                                                 get_previous_user_row (model, &iter, &next);
+                                        if (key == 3) {
+                                                d->other_accounts--;
+                                        }
                                         gtk_list_store_remove (store, &iter);
                                         gtk_tree_selection_select_iter (selection, &next);
                                         g_object_unref (u);
@@ -249,6 +270,13 @@ user_removed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
                                 g_object_unref (u);
                         }
                 } while (gtk_tree_model_iter_next (model, &iter));
+        }
+
+        /* Hide heading for other accounts if last one have been removed. */
+        if (d->other_iter != NULL && d->other_accounts == 0 && key == 3) {
+                gtk_list_store_remove (store, d->other_iter);
+                gtk_tree_iter_free (d->other_iter);
+                d->other_iter = NULL;
         }
 }
 
@@ -1236,14 +1264,8 @@ setup_main_window (CcUserPanelPrivate *d)
                             -1);
         g_free (title);
 
-        title = g_strdup_printf ("<small><span foreground=\"#555555\">%s</span></small>", _("Other Accounts"));
-        gtk_list_store_append (store, &iter);
-        gtk_list_store_set (store, &iter,
-                            TITLE_COL, title,
-                            HEADING_ROW_COL, TRUE,
-                            SORT_KEY_COL, 2,
-                            -1);
-        g_free (title);
+        d->other_accounts = 0;
+        d->other_iter = NULL;
 
         column = gtk_tree_view_column_new ();
         cell = gtk_cell_renderer_pixbuf_new ();
@@ -1408,6 +1430,10 @@ cc_user_panel_dispose (GObject *object)
         if (priv->permission) {
                 g_object_unref (priv->permission);
                 priv->permission = NULL;
+        }
+        if (priv->other_iter) {
+                gtk_tree_iter_free (priv->other_iter);
+                priv->other_iter = NULL;
         }
         G_OBJECT_CLASS (cc_user_panel_parent_class)->dispose (object);
 }
