@@ -28,7 +28,6 @@
 
 #include <pwquality.h>
 
-
 static pwquality_settings_t *
 get_pwq (void)
 {
@@ -74,6 +73,52 @@ pw_generate (void)
         return res;
 }
 
+static const gchar *
+pw_error_hint (gint error)
+{
+        switch (error) {
+        case PWQ_ERROR_SAME_PASSWORD:
+                return C_("Password hint", "The new password needs to be different from the old one.");
+        case PWQ_ERROR_CASE_CHANGES_ONLY:
+                return C_("Password hint", "Try changing some letters and numbers.");
+        case PWQ_ERROR_TOO_SIMILAR:
+                return C_("Password hint", "Try changing the password a bit more.");
+        case PWQ_ERROR_USER_CHECK:
+                return C_("Password hint", "A password without your user name would be stronger.");
+        case PWQ_ERROR_GECOS_CHECK:
+                return C_("Password hint", "Try to avoid using your name in the password.");
+        case PWQ_ERROR_BAD_WORDS:
+                return C_("Password hint", "Try to avoid some of the words included in the password.");
+        case PWQ_ERROR_ROTATED:
+                return C_("Password hint", "Try changing the password a bit more.");
+        case PWQ_ERROR_CRACKLIB_CHECK:
+                return C_("Password hint", "Try to avoid common words.");
+        case PWQ_ERROR_PALINDROME:
+                return C_("Password hint", "Try to avoid reordering existing words.");
+        case PWQ_ERROR_MIN_DIGITS:
+                return C_("Password hint", "Try to use more numbers.");
+        case PWQ_ERROR_MIN_UPPERS:
+                return C_("Password hint", "Try to use more uppercase letters.");
+        case PWQ_ERROR_MIN_LOWERS:
+                return C_("Password hint", "Try to use more lowercase letters.");
+        case PWQ_ERROR_MIN_OTHERS:
+                return C_("Password hint", "Try to use more special characters, like punctuation.");
+        case PWQ_ERROR_MIN_CLASSES:
+                return C_("Password hint", "Try to use a mixture of letters, numbers and punctuation.");
+        case PWQ_ERROR_MAX_CONSECUTIVE:
+                return C_("Password hint", "Try to avoid repeating the same character.");
+        case PWQ_ERROR_MAX_CLASS_REPEAT:
+                return C_("Password hint", "Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation.");
+        case PWQ_ERROR_MAX_SEQUENCE:
+                return C_("Password hint", "Try to avoid sequences like 1234 or abcd.");
+        case PWQ_ERROR_MIN_LENGTH:
+                return C_("Password hint", "Try to add more characters.");
+        case PWQ_ERROR_EMPTY_PASSWORD:
+        default:
+                return C_("Password hint", "Mix uppercase and lowercase and use a number or two.");
+        }
+}
+
 gdouble
 pw_strength (const gchar  *password,
              const gchar  *old_password,
@@ -90,38 +135,44 @@ pw_strength (const gchar  *password,
                               password, old_password, username,
                               &auxerror);
 
-        if (rv == PWQ_ERROR_MIN_LENGTH) {
-                *hint = C_("Password strength", "Too short");
-                *long_hint = pwquality_strerror (NULL, 0, rv, auxerror);
-                goto out;
-        }
-        else if (rv < 0) {
-                *hint = C_("Password strength", "Not good enough");
-                *long_hint = pwquality_strerror (NULL, 0, rv, auxerror);
-                goto out;
-        }
-
         strength = CLAMP (0.01 * rv, 0.0, 1.0);
-
-        if (strength < 0.50) {
+        if (rv < 0) {
+                *hint = C_("Password strength", "Strength: Weak");
+        }
+        else if (strength < 0.50) {
                 level = 1;
-                *hint = C_("Password strength", "Weak");
+                *hint = C_("Password strength", "Strength: Low");
         } else if (strength < 0.75) {
                 level = 2;
-                *hint = C_("Password strength", "Fair");
+                *hint = C_("Password strength", "Strength: Medium");
         } else if (strength < 0.90) {
                 level = 3;
-                *hint = C_("Password strength", "Good");
+                *hint = C_("Password strength", "Strength: Good");
         } else {
                 level = 4;
-                *hint = C_("Password strength", "Strong");
+                *hint = C_("Password strength", "Strength: High");
         }
 
-        *long_hint = NULL;
+        *long_hint = pw_error_hint (rv);
 
- out:
         if (strength_level)
                 *strength_level = level;
 
         return strength;
+}
+
+int
+pw_strenght_hint_get_width_chars ()
+{
+        gint len;
+
+        len = 0;
+        len = MAX (len, strlen (C_("Password strength", "Strength: Weak")));
+        len = MAX (len, strlen (C_("Password strength", "Strength: Low")));
+        len = MAX (len, strlen (C_("Password strength", "Strength: Medium")));
+        len = MAX (len, strlen (C_("Password strength", "Strength: Good")));
+        len = MAX (len, strlen (C_("Password strength", "Strength: High")));
+        len += 2;
+
+        return len;
 }
