@@ -53,7 +53,7 @@
             <child>
               <object class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
-                <property name="spacing">12</property>
+                <property name="spacing">18</property>
                 <child>
                   <object class="GtkVBox" id="userlist-vbox">
                     <property name="visible">True</property>
@@ -216,9 +216,11 @@
                                 <property name="visible">True</property>
                                 <property name="scale">1.2</property>
                                 <property name="weight">700</property>
+                                <property name="width-chars">30</property>
+                                <property name="max-width-chars">30</property>
+                                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
