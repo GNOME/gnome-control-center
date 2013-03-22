@@ -69,6 +69,15 @@ gint         cc_editable_entry_get_weight     (CcEditableEntry *entry);
 void         cc_editable_entry_set_scale      (CcEditableEntry *entry,
                                                gdouble          scale);
 gdouble      cc_editable_entry_get_scale      (CcEditableEntry *entry);
+void         cc_editable_entry_set_width_chars     (CcEditableEntry *entry,
+                                                    gint n_chars);
+gint         cc_editable_entry_get_width_chars     (CcEditableEntry *entry);
+void         cc_editable_entry_set_max_width_chars (CcEditableEntry *entry,
+                                                    gint n_chars);
+gint         cc_editable_entry_get_max_width_chars (CcEditableEntry *entry);
+void         cc_editable_entry_set_ellipsize       (CcEditableEntry *entry,
+                                                    PangoEllipsizeMode mode);
+PangoEllipsizeMode cc_editable_entry_get_ellipsize (CcEditableEntry *entry);
 
 G_END_DECLS
 
