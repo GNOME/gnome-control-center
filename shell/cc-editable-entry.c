@@ -37,6 +37,9 @@ struct _CcEditableEntryPrivate {
         gboolean weight_set;
         gdouble scale;
         gboolean scale_set;
+        gint width_chars;
+        gint max_width_chars;
+        PangoEllipsizeMode ellipsize;
 
         gboolean in_stop_editing;
 };
@@ -51,7 +54,10 @@ enum {
         PROP_SCALE,
         PROP_SCALE_SET,
         PROP_WEIGHT,
-        PROP_WEIGHT_SET
+        PROP_WEIGHT_SET,
+        PROP_WIDTH_CHARS,
+        PROP_MAX_WIDTH_CHARS,
+        PROP_ELLIPSIZE
 };
 
 enum {
@@ -224,6 +230,84 @@ cc_editable_entry_get_scale (CcEditableEntry *e)
         return e->priv->scale;
 }
 
+void
+cc_editable_entry_set_width_chars (CcEditableEntry *e,
+                                   gint             n_chars)
+{
+        CcEditableEntryPrivate *priv = e->priv;
+        GtkWidget *label;
+
+        if (priv->width_chars != n_chars) {
+                label = gtk_bin_get_child (GTK_BIN (priv->button));
+                gtk_entry_set_width_chars (priv->entry, n_chars);
+                gtk_label_set_width_chars (priv->label, n_chars);
+                gtk_label_set_width_chars (GTK_LABEL (label), n_chars);
+
+                priv->width_chars = n_chars;
+                g_object_notify (G_OBJECT (e), "width-chars");
+                gtk_widget_queue_resize (GTK_WIDGET (priv->entry));
+                gtk_widget_queue_resize (GTK_WIDGET (priv->label));
+                gtk_widget_queue_resize (GTK_WIDGET (label));
+        }
+}
+
+gint
+cc_editable_entry_get_width_chars (CcEditableEntry *e)
+{
+        return e->priv->width_chars;
+}
+
+void
+cc_editable_entry_set_max_width_chars (CcEditableEntry *e,
+                                       gint             n_chars)
+{
+        CcEditableEntryPrivate *priv = e->priv;
+        GtkWidget *label;
+
+        if (priv->max_width_chars != n_chars) {
+                label = gtk_bin_get_child (GTK_BIN (priv->button));
+                gtk_label_set_max_width_chars (priv->label, n_chars);
+                gtk_label_set_max_width_chars (GTK_LABEL (label), n_chars);
+
+                priv->max_width_chars = n_chars;
+                g_object_notify (G_OBJECT (e), "max-width-chars");
+                gtk_widget_queue_resize (GTK_WIDGET (priv->entry));
+                gtk_widget_queue_resize (GTK_WIDGET (priv->label));
+                gtk_widget_queue_resize (GTK_WIDGET (label));
+        }
+}
+
+gint
+cc_editable_entry_get_max_width_chars (CcEditableEntry *e)
+{
+        return e->priv->max_width_chars;
+}
+
+void
+cc_editable_entry_set_ellipsize (CcEditableEntry   *e,
+                                 PangoEllipsizeMode mode)
+{
+        CcEditableEntryPrivate *priv = e->priv;
+        GtkWidget *label;
+
+        if ((PangoEllipsizeMode) priv->ellipsize != mode) {
+                label = gtk_bin_get_child (GTK_BIN (priv->button));
+                gtk_label_set_ellipsize (priv->label, mode);
+                gtk_label_set_ellipsize (GTK_LABEL (label), mode);
+
+                priv->ellipsize = mode;
+                g_object_notify (G_OBJECT (e), "ellipsize");
+                gtk_widget_queue_resize (GTK_WIDGET (priv->label));
+                gtk_widget_queue_resize (GTK_WIDGET (label));
+        }
+}
+
+PangoEllipsizeMode
+cc_editable_entry_get_ellipsize (CcEditableEntry *e)
+{
+        return e->priv->ellipsize;
+}
+
 static void
 cc_editable_entry_set_property (GObject      *object,
                                 guint         prop_id,
@@ -253,6 +337,15 @@ cc_editable_entry_set_property (GObject      *object,
                 break;
         case PROP_SCALE_SET:
                 e->priv->scale_set = g_value_get_boolean (value);
+                break;
+        case PROP_WIDTH_CHARS:
+                cc_editable_entry_set_width_chars (e, g_value_get_int (value));
+                break;
+        case PROP_MAX_WIDTH_CHARS:
+                cc_editable_entry_set_max_width_chars (e, g_value_get_int (value));
+                break;
+        case PROP_ELLIPSIZE:
+                cc_editable_entry_set_ellipsize (e, g_value_get_enum (value));
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -294,6 +387,18 @@ cc_editable_entry_get_property (GObject    *object,
                 break;
         case PROP_SCALE_SET:
                 g_value_set_boolean (value, e->priv->scale_set);
+                break;
+        case PROP_WIDTH_CHARS:
+                g_value_set_int (value,
+                                 cc_editable_entry_get_width_chars (e));
+                break;
+        case PROP_MAX_WIDTH_CHARS:
+                g_value_set_int (value,
+                                 cc_editable_entry_get_max_width_chars (e));
+                break;
+        case PROP_ELLIPSIZE:
+                g_value_set_enum (value,
+                                  cc_editable_entry_get_ellipsize (e));
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -372,6 +477,24 @@ cc_editable_entry_class_init (CcEditableEntryClass *class)
                                       "Font Scale Set", "Whether a font scale is set",
                                       FALSE,
                                       G_PARAM_READWRITE));
+
+        g_object_class_install_property (object_class, PROP_WIDTH_CHARS,
+                g_param_spec_int ("width-chars",
+                                  "Width In Characters", "The desired width of the editable entry, in characters",
+                                  -1, G_MAXINT, -1,
+                                  G_PARAM_READWRITE));
+
+        g_object_class_install_property (object_class, PROP_MAX_WIDTH_CHARS,
+                g_param_spec_int ("max-width-chars",
+                                  "Maximum Width In Characters","The desired maximum width of the editable entry, in characters",
+                                  -1, G_MAXINT, -1,
+                                  G_PARAM_READWRITE));
+
+        g_object_class_install_property (object_class, PROP_ELLIPSIZE,
+                g_param_spec_enum ("ellipsize",
+                                   "Ellipsize", "The preferred place to ellipsize the string, if the editable entry does not have enough room to display the entire string",
+                                   PANGO_TYPE_ELLIPSIZE_MODE, PANGO_ELLIPSIZE_NONE,
+                                   G_PARAM_READWRITE));
 
         g_type_class_add_private (class, sizeof (CcEditableEntryPrivate));
 }
@@ -468,6 +591,9 @@ cc_editable_entry_init (CcEditableEntry *e)
         priv->weight_set = FALSE;
         priv->scale = 1.0;
         priv->scale_set = FALSE;
+        priv->width_chars = -1;
+        priv->max_width_chars = -1;
+        priv->ellipsize = PANGO_ELLIPSIZE_NONE;
 
         priv->notebook = (GtkNotebook*)gtk_notebook_new ();
         gtk_notebook_set_show_tabs (priv->notebook, FALSE);
