@@ -14,7 +14,7 @@
 # Petr Kovar <pknbe@volny.cz>, 2007, 2008, 2009, 2010, 2011, 2012.
 # Andre Klapper <ak-47@gmx.net>, 2009.
 # Ondřej Kopka <ondrej.kopka@gmail.com>, 2011.
-# Marek Černocký <marek@manet.cz>, 2011, 2012, 2013 (just fixes).
+# Marek Černocký <marek@manet.cz>, 2011, 2012, 2013.
 # Adam Matoušek <adamatousek@gmail.com>, 2012.
 # Jiri Eischmann <jiri@eischmann.cz>, 2013.
 #
@@ -23,9 +23,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-05 12:38+0000\n"
+"POT-Creation-Date: 2013-03-24 20:57+0000\n"
 "PO-Revision-Date: 2013-03-22 15:35+0100\n"
-"Last-Translator: Jiri Eischmann <jiri@eischmann.cz>\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -776,50 +776,70 @@ msgid "Plasma"
 msgstr "Plasma"
 
 #: ../panels/color/color.ui.h:49
+msgid "LCD (CCFL backlight)"
+msgstr "LCD (podsvětlení výbojkami CCFL)"
+
+#: ../panels/color/color.ui.h:50
+msgid "LCD (RGB LED backlight)"
+msgstr "LCD (podsvětlení RGB LED)"
+
+#: ../panels/color/color.ui.h:51
+msgid "LCD (white LED backlight)"
+msgstr "LCD (podsvětlení bílými LED)"
+
+#: ../panels/color/color.ui.h:52
+msgid "Wide gamut LCD (CCFL backlight)"
+msgstr "Široký gamut LCD (podsvětlení výbojkami CCFL)"
+
+#: ../panels/color/color.ui.h:53
+msgid "Wide gamut LCD (RGB LED backlight)"
+msgstr "Široký gamut LCD (podsvětlení RGB LED)"
+
+#: ../panels/color/color.ui.h:54
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Vysoká"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:55
 msgid "40 minutes"
 msgstr "40 minut"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:56
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Střední"
 
-#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minut"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:58
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Nízká"
 
-#: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 minut"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:60
 msgid "Native to display"
 msgstr "Nativní pro zobrazení"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:61
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (tisk a publikování)"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:62
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:63
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (fotografie a grafika)"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:64
 msgid "D75"
 msgstr "D75"
 
@@ -1806,7 +1826,8 @@ msgstr "Myš a touchpad"
 msgid ""
 "Change your mouse or touchpad sensitivity and select right or left-handed"
 msgstr ""
-"Změnit citlivost myši nebo touchpadu a vybrat ovládání pro praváky nebo leváky"
+"Změnit citlivost myši nebo touchpadu a vybrat ovládání pro praváky nebo "
+"leváky"
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
@@ -1916,21 +1937,21 @@ msgstr "Kliknutí, vedlejší tlačítko"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:341
 msgid "Air_plane Mode"
 msgstr "Režim „_Letadlo“"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:904
 msgid "Network proxy"
 msgstr "Proxy sítě"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1083 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1217
 msgid "The system network services are not compatible with this version."
 msgstr "Systémová služba sítě není kompatibilní s touto verzí."
 
@@ -1958,7 +1979,7 @@ msgstr "Vnitřní _oveření totožnosti"
 msgid "Security"
 msgstr "Zabezpečení"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "automaticky"
 
@@ -2063,9 +2084,9 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Výborná"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
+#: ../panels/network/connection-editor/ce-page-ethernet.c:210
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:253
 #: ../panels/network/network-wifi.ui.h:59
 msgid "Identity"
 msgstr "Identita"
@@ -2305,17 +2326,34 @@ msgid "_Cloned Address"
 msgstr "_Klonovaná adresa"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "Připojit _automaticky"
+msgid "bytes"
+msgstr "bajtů"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "Zpřístupnit ostatním _uživatelům"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "bajtů"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "Připojit _automaticky"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "_Zóna firewallu"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "Výchozí"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr "Zóna definuje úroveň důvěry k připojení"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:23
@@ -2484,7 +2522,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "Exportovat připojení VPN..."
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Chyba: nelze načíst editor připojení VPN)"
 
@@ -2503,7 +2541,7 @@ msgstr "_BSSID"
 msgid "My Home Network"
 msgstr "Má domácí síť"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "Zpřístupnit _ostatním uživatelům"
 
@@ -2561,6 +2599,8 @@ msgstr "Naposledy použito"
 #: ../panels/network/net-device-ethernet.c:337
 #: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:7
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "Volby…"
@@ -2570,7 +2610,7 @@ msgstr "Volby…"
 msgid "Profile %d"
 msgstr "Profil %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "Přidat nové připojení"
 
@@ -2663,11 +2703,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "Poskytovatel"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
-msgid "_Options…"
-msgstr "V_olby…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -3559,7 +3594,7 @@ msgid "Show in Lock Screen"
 msgstr "Zobrazovat na uzamčené obrazovce"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/region/cc-input-chooser.c:1013
 #: ../panels/search/cc-search-locations-dialog.c:480
 msgid "Other"
 msgstr "Další"
@@ -3570,15 +3605,15 @@ msgstr "Další"
 msgid "Add Account"
 msgstr "Přidání účtu"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
 msgid "Mail"
 msgstr "Pošta"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
 msgid "Contacts"
 msgstr "Kontakty"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
 msgid "Resources"
 msgstr "Zdroje"
 
@@ -3598,23 +3633,23 @@ msgstr "Přihlaste se, chcete-li tento účet povolit."
 msgid "_Sign In"
 msgstr "_Přihlásit se"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:680
+#: ../panels/online-accounts/cc-online-accounts-panel.c:684
 msgid "Error creating account"
 msgstr "Chyba při vytváření účtu"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:722
+#: ../panels/online-accounts/cc-online-accounts-panel.c:726
 msgid "Error removing account"
 msgstr "Chyba při odebírání účtu"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:758
+#: ../panels/online-accounts/cc-online-accounts-panel.c:762
 msgid "Are you sure you want to remove the account?"
 msgstr "Opravdu chcete odebrat tento účet?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:764
 msgid "This will not remove the account on the server."
 msgstr "Tímto se neodstraní účet na serveru."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:761
+#: ../panels/online-accounts/cc-online-accounts-panel.c:765
 msgid "_Remove"
 msgstr "Odeb_rat"
 
@@ -4714,7 +4749,7 @@ msgid "Automatic Screen _Lock"
 msgstr "Automatické zamknutí _obrazovky"
 
 #: ../panels/privacy/privacy.ui.h:34
-msgid "Lock Screen _After Blank For"
+msgid "Lock screen _after blank for"
 msgstr "Z_amknout obrazovku po ztmavnutí a po"
 
 #: ../panels/privacy/privacy.ui.h:35
@@ -4738,11 +4773,11 @@ msgstr ""
 "nezůstávaly citlivé informace."
 
 #: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+msgid "Automatically empty _Trash"
 msgstr "Automaticky vyprázdnit _koš"
 
 #: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
+msgid "Automatically purge Temporary _Files"
 msgstr "Automaticky odstranit dočasné _soubory"
 
 #: ../panels/privacy/privacy.ui.h:42
@@ -4767,33 +4802,32 @@ msgstr "Žádné regiony nenalezeny"
 msgid "No input sources found"
 msgstr "Žádné vstupní zdroje nenalezeny"
 
-#: ../panels/region/cc-region-panel.c:225
+#: ../panels/region/cc-region-panel.c:239
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Aby se změny projevily, musí být sezení restartováno"
 
-#: ../panels/region/cc-region-panel.c:226
+#: ../panels/region/cc-region-panel.c:240
 msgid "Restart Now"
 msgstr "Restartovat nyní"
 
-#: ../panels/region/cc-region-panel.c:436
+#: ../panels/region/cc-region-panel.c:550
 msgctxt "Language"
 msgid "None"
 msgstr "Žádný"
 
-#: ../panels/region/cc-region-panel.c:898
+#: ../panels/region/cc-region-panel.c:1040
 msgid "Sorry"
 msgstr "Promiňte"
 
-#: ../panels/region/cc-region-panel.c:900
+#: ../panels/region/cc-region-panel.c:1042
 msgid "Input methods can't be used on the login screen"
 msgstr "Vstupní metody nemohou být použity na přihlašovací obrazovce"
 
-#: ../panels/region/cc-region-panel.c:1345
-msgctxt "Input source"
-msgid "None"
-msgstr "Žádná"
+#: ../panels/region/cc-region-panel.c:1491
+msgid "No input source selected"
+msgstr "Není vybrán žádný vstupní zdroj"
 
-#: ../panels/region/cc-region-panel.c:1502
+#: ../panels/region/cc-region-panel.c:1652
 msgid "Login Screen"
 msgstr "Přihlašovací obrazovka"
 
@@ -5380,7 +5414,7 @@ msgstr ""
 "jedním prstem;pomalé klávesy;vícenásobná zmáčknutí kláves;klávesnice myší;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Nízký"
@@ -5391,7 +5425,7 @@ msgid "Normal"
 msgstr "Běžný"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Vysoký"
@@ -5786,65 +5820,66 @@ msgstr "Tlustý"
 msgid "Length:"
 msgstr "Délka:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
+#. The color of the accessibility crosshair
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Color:"
 msgstr "Barva:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Crosshairs:"
 msgstr "Zaměřovací kříž:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Overlaps mouse cursor"
 msgstr "Překrývat ukazatel myši"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Zaměřovací kříž"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "White on black:"
 msgstr "Bílá na černém:"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Brightness:"
 msgstr "Jas:"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Contrast:"
 msgstr "Kontrast:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
 msgid "Color"
 msgstr "Barva"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Žádná"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Plná"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Nízký"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Vysoký"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Barevné efekty:"
 
-#: ../panels/universal-access/zoom-options.ui.h:37
+#: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
 msgstr "Barevné efekty"
 
@@ -6918,27 +6953,27 @@ msgstr "Nápověda"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:59 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Nastavení"
 
 #. Add categories
-#: ../shell/cc-window.c:857
+#: ../shell/cc-window.c:855
 msgctxt "category"
 msgid "Personal"
 msgstr "Osobní"
 
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:856
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1413
+#: ../shell/cc-window.c:1408
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
