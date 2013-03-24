@@ -1,8 +1,8 @@
 # gnome-control-center ja.po.
-# Copyright (C) 1998-2012 Free Software Foundation, Inc.
+# Copyright (C) 1998-2013 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2012.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2013.
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2001.
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2008.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-22 21:14+0000\n"
-"PO-Revision-Date: 2013-03-04 00:49+0000\n"
+"POT-Creation-Date: 2013-03-23 08:48+0000\n"
+"PO-Revision-Date: 2013-03-24 01:41+0900\n"
 "Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -290,10 +290,8 @@ msgstr "完了!"
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
 #: ../panels/color/cc-color-calibrate.c:474
-#, fuzzy
-#| msgid "Configuration failed"
 msgid "Calibration failed!"
-msgstr "設定に失敗しました"
+msgstr "キャリブレーションに失敗!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
 #: ../panels/color/cc-color-calibrate.c:481
@@ -404,18 +402,13 @@ msgid "All files"
 msgstr "すべてのファイル"
 
 #: ../panels/color/cc-color-panel.c:581
-#, fuzzy
-#| msgctxt "Distance"
-#| msgid "¼ Screen"
 msgid "Screen"
-msgstr "画面の¼"
+msgstr "画面"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
 #: ../panels/color/cc-color-panel.c:853
-#, fuzzy
-#| msgid "Remove profile"
 msgid "Save Profile"
-msgstr "プロファイルの削除"
+msgstr "プロファイルの保存"
 
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:1214
@@ -441,27 +434,20 @@ msgstr "このデバイスの種類は現在サポートされていません。
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
 #, fuzzy
-#| msgctxt "Experience"
-#| msgid "Standard"
 msgid "Standard Space"
 msgstr "標準"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
 #: ../panels/color/cc-color-profile.c:107
-#, fuzzy
-#| msgid "Test profile: "
 msgid "Test Profile"
-msgstr "テスト用プロファイル: "
+msgstr "テスト用プロファイル"
 
 #. TRANSLATORS: automatic profiles are generated automatically
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
 #: ../panels/color/cc-color-profile.c:115
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "自動"
@@ -470,32 +456,23 @@ msgstr "自動"
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
 #: ../panels/color/cc-color-profile.c:125
-#, fuzzy
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Low Quality"
-msgstr "画質"
+msgstr "低品質"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:130
-#, fuzzy
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Medium Quality"
-msgstr "画質"
+msgstr "中品質"
 
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
 #: ../panels/color/cc-color-profile.c:137
-#, fuzzy
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "High Quality"
-msgstr "画質"
+msgstr "高品質"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
@@ -528,13 +505,11 @@ msgstr ""
 
 #: ../panels/color/cc-color-profile.c:223
 #, fuzzy
-#| msgid "This device has an old profile that may no longer be accurate."
 msgid "This profile may no longer be accurate"
 msgstr "このデバイスには、すでに正確でない可能性のある古いプロファイルがあります。"
 
 #: ../panels/color/color-calibrate.ui.h:1
 #, fuzzy
-#| msgid "Calibration"
 msgid "Display Calibration"
 msgstr "キャリブレーション"
 
@@ -577,8 +552,6 @@ msgstr ""
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
 #, fuzzy
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgid "Quality"
 msgstr "画質"
 
@@ -687,7 +660,7 @@ msgstr "色"
 
 #: ../panels/color/color.ui.h:32
 msgid "Each device needs an up to date color profile to be color managed."
-msgstr "色の管理を行うには、各デバイスの最新のカラープロファイルが必要になります。"
+msgstr "カラーマネージメントを行うには、各デバイスの最新のカラープロファイルが必要になります。"
 
 #: ../panels/color/color.ui.h:33
 msgid "Learn more"
@@ -755,11 +728,9 @@ msgid "Plasma"
 msgstr "プラズマ"
 
 #: ../panels/color/color.ui.h:49
-#, fuzzy
-#| msgid "High"
 msgctxt "Calibration quality"
 msgid "High"
-msgstr "高い"
+msgstr "高"
 
 #: ../panels/color/color.ui.h:50
 msgid "40 minutes"
@@ -768,7 +739,7 @@ msgstr "40 分"
 #: ../panels/color/color.ui.h:51
 msgctxt "Calibration quality"
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
@@ -776,11 +747,9 @@ msgid "30 minutes"
 msgstr "30 分"
 
 #: ../panels/color/color.ui.h:53
-#, fuzzy
-#| msgid "Low"
 msgctxt "Calibration quality"
 msgid "Low"
-msgstr "低い"
+msgstr "低"
 
 #: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
 msgid "15 minutes"
@@ -788,15 +757,12 @@ msgstr "15 分"
 
 #: ../panels/color/color.ui.h:55
 #, fuzzy
-#| msgid "Panel to display"
 msgid "Native to display"
 msgstr "表示するパネル"
 
 #: ../panels/color/color.ui.h:56
-#, fuzzy
-#| msgid "Pointing and Clicking"
 msgid "D50 (Printing and publishing)"
-msgstr "ポインター操作とクリック"
+msgstr "D50 (印刷および出版)"
 
 #: ../panels/color/color.ui.h:57
 msgid "D55"
@@ -1903,10 +1869,8 @@ msgid "The system network services are not compatible with this version."
 msgstr "システムのネットワークサービスはこのバージョンと互換性がありません。"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
-#, fuzzy
-#| msgid "Security"
 msgid "802.1x _Security"
-msgstr "セキュリティ"
+msgstr "802.1x セキュリティ(_S)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
 #: ../panels/network/connection-editor/security-page.ui.h:3
@@ -1914,14 +1878,12 @@ msgstr "セキュリティ"
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
 msgid "Anony_mous identity"
-msgstr ""
+msgstr "匿名の識別子(_M)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
 #: ../panels/network/connection-editor/security-page.ui.h:4
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "Inner _authentication"
-msgstr "認証に失敗しました"
+msgstr "内部認証(_A)"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
 #: ../panels/network/connection-editor/ce-page-security.c:455
@@ -1931,9 +1893,6 @@ msgid "Security"
 msgstr "セキュリティ"
 
 #: ../panels/network/connection-editor/ce-page.c:502
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "automatic"
 msgstr "自動"
 
@@ -2037,12 +1996,12 @@ msgstr "非常に良い"
 #: ../panels/network/connection-editor/ce-page-wifi.c:243
 #: ../panels/network/network-wifi.ui.h:59
 msgid "Identity"
-msgstr ""
+msgstr "Identity"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:202
 #: ../panels/network/connection-editor/ce-page-ip4.c:454
 msgid "Netmask"
-msgstr ""
+msgstr "ネットマスク"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:216
 #: ../panels/network/connection-editor/ce-page-ip4.c:467
@@ -2054,151 +2013,122 @@ msgstr "ゲートウェイ"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:233
 #: ../panels/network/connection-editor/ce-page-ip6.c:234
-#, fuzzy
-#| msgid "IP Address"
 msgid "Delete Address"
-msgstr "IP アドレス"
+msgstr "アドレスを削除"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:285
 #: ../panels/network/connection-editor/ce-page-ip6.c:286
-#, fuzzy
-#| msgid "_Add"
 msgid "Add"
-msgstr "追加(_A)"
+msgstr "追加"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:350
 #: ../panels/network/connection-editor/ce-page-ip6.c:354
 msgid "Server"
-msgstr ""
+msgstr "サーバー"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:367
 #: ../panels/network/connection-editor/ce-page-ip6.c:371
-#, fuzzy
-#| msgid "Delete device"
 msgid "Delete DNS Server"
-msgstr "デバイスの削除"
+msgstr "DNS サーバーを削除"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: ../panels/network/connection-editor/ce-page-ip4.c:481
 #: ../panels/network/connection-editor/ce-page-ip6.c:489
-#, fuzzy
-#| msgid "Metric"
 msgctxt "network parameters"
 msgid "Metric"
-msgstr "メートル法"
+msgstr "メトリック"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:502
 #: ../panels/network/connection-editor/ce-page-ip6.c:510
-#, fuzzy
-#| msgid "Default Route"
 msgid "Delete Route"
-msgstr "デフォルトルート"
+msgstr "ルートを削除"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
 #: ../panels/network/network-wifi.ui.h:26
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic (DHCP)"
-msgstr "自動"
+msgstr "自動 (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:620
 #: ../panels/network/connection-editor/ce-page-ip6.c:622
 #: ../panels/network/network-wifi.ui.h:25
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Manual"
 msgid "Manual"
 msgstr "手動"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:624
 #: ../panels/network/connection-editor/ce-page-ip6.c:626
 msgid "Link-Local Only"
-msgstr ""
+msgstr "リンクローカルのみ"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:925
 #: ../panels/network/network-wifi.ui.h:60
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:204
 #: ../panels/network/connection-editor/ce-page-ip6.c:458
 msgid "Prefix"
-msgstr ""
+msgstr "プレフィックス"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:614
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic"
 msgstr "自動"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:618
-#, fuzzy
-#| msgid "A_utomatic Login"
 msgid "Automatic, DHCP only"
-msgstr "自動ログイン(_U)"
+msgstr "自動、DHCP のみ"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:886
 #: ../panels/network/network-wifi.ui.h:61
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
 #: ../panels/network/network-wifi.ui.h:63
 msgid "Reset"
-msgstr ""
+msgstr "リセット"
 
 #: ../panels/network/connection-editor/ce-page-security.c:250
-#, fuzzy
-#| msgid "None"
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
-msgstr "何もしない"
+msgstr "なし"
 
 #: ../panels/network/connection-editor/ce-page-security.c:273
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
-msgstr ""
+msgstr "WEP 40/128-bit キー (HEX または ASCII)"
 
 #: ../panels/network/connection-editor/ce-page-security.c:283
 msgid "WEP 128-bit Passphrase"
-msgstr ""
+msgstr "WEP 128-bit パスフレーズ"
 
 #: ../panels/network/connection-editor/ce-page-security.c:296
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
-msgstr ""
+msgstr "LEAP"
 
 #: ../panels/network/connection-editor/ce-page-security.c:309
 msgid "Dynamic WEP (802.1x)"
-msgstr ""
+msgstr "動的 WEP (802.1x)"
 
 #: ../panels/network/connection-editor/ce-page-security.c:323
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 Personal"
 
 #: ../panels/network/connection-editor/ce-page-security.c:337
-#, fuzzy
-#| msgid "Enterprise"
 msgid "WPA & WPA2 Enterprise"
-msgstr "Enterprise"
+msgstr "WPA & WPA2 Enterprise"
 
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
-#, fuzzy
-#| msgid "Supply"
 msgid "_Apply"
-msgstr "サプライ"
+msgstr "適用(_A)"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
-#, fuzzy
-#| msgid "Strength"
 msgid "Signal Strength"
-msgstr "長さ:"
+msgstr "信号強度"
 
 #: ../panels/network/connection-editor/details-page.ui.h:2
 #: ../panels/network/network-wifi.ui.h:3
@@ -2226,7 +2156,7 @@ msgstr "IPv6 アドレス"
 #: ../panels/network/network-simple.ui.h:1
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
-msgstr "ハードウェア・アドレス"
+msgstr "ハードウェアアドレス"
 
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:171
@@ -2247,143 +2177,119 @@ msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/connection-editor/details-page.ui.h:9
-#, fuzzy
-#| msgid "Last used"
 msgid "Last Used"
-msgstr "最後の利用"
+msgstr "前回の使用"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
-msgstr ""
+msgstr "ツイストペア (TP)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:3
 msgid "Attachment Unit Interface (AUI)"
-msgstr ""
+msgstr "Attachment Unit Interface (AUI)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:4
 msgid "BNC"
-msgstr ""
+msgstr "BNC"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:5
 msgid "Media Independent Interface (MII)"
-msgstr ""
+msgstr "Media Independent Interface (MII)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:6
-#, fuzzy
-#| msgid "%d Mb/s"
 msgid "10 Mb/s"
-msgstr "%d Mb/s"
+msgstr "10 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:7
-#, fuzzy
-#| msgid "%d Mb/s"
 msgid "100 Mb/s"
-msgstr "%d Mb/s"
+msgstr "100 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:8
 msgid "1 Gb/s"
-msgstr ""
+msgstr "1 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:9
 msgid "10 Gb/s"
-msgstr ""
+msgstr "10 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:10
 #: ../panels/network/connection-editor/vpn-page.ui.h:1
-#, fuzzy
-#| msgid "_Name:"
 msgid "_Name"
-msgstr "名前(_N):"
+msgstr "名前(_N)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
 #: ../panels/network/network-wifi.ui.h:49
-#, fuzzy
-#| msgid "Address"
 msgid "_MAC Address"
-msgstr "アドレス"
+msgstr "MAC アドレス(_M)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:12
 msgid "M_TU"
-msgstr ""
+msgstr "MTU(_T)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:13
 #: ../panels/network/connection-editor/wifi-page.ui.h:5
-#, fuzzy
-#| msgid "IP Address"
 msgid "_Cloned Address"
-msgstr "IP アドレス"
+msgstr "クローンしたアドレス(_C)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
 #: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Connect _automatically"
-msgstr ""
+msgstr "自動接続する(_A) "
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
 msgid "Make available to other _users"
-msgstr ""
+msgstr "他のユーザーにも利用可能にする(_U)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
 msgid "bytes"
-msgstr ""
+msgstr "バイト"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:23
 msgid "IPv_4"
-msgstr ""
+msgstr "IPv4(_4)"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
 #: ../panels/network/network-wifi.ui.h:24
-#, fuzzy
-#| msgid "Address"
 msgid "_Addresses"
-msgstr "アドレス"
+msgstr "アドレス(_A)"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
 #: ../panels/network/connection-editor/ip6-page.ui.h:5
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic DNS"
-msgstr "自動"
+msgstr "自動 DNS"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
 #: ../panels/network/network-wifi.ui.h:39
 msgid "Routes"
-msgstr ""
+msgstr "ルート"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:7
 #: ../panels/network/connection-editor/ip6-page.ui.h:7
-#, fuzzy
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic Routes"
-msgstr "自動"
+msgstr "自動ルート"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
 #: ../panels/network/network-wifi.ui.h:45
 msgid "Use this connection _only for resources on its network"
-msgstr ""
+msgstr "この接続はネットワーク上のリソースのためだけに使用(_O)"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv_6"
-msgstr ""
+msgstr "IPv6(_6)"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:267
-#, fuzzy
-#| msgid "Bluetooth connection failed"
 msgid "Unable to open connection editor"
-msgstr "Bluetooth接続に失敗しました"
+msgstr "接続エディターを起動できません"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:282
-#, fuzzy
-#| msgid "No profile"
 msgid "New Profile"
-msgstr "プロファイルなし"
+msgstr "新規プロファイル"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:504
 #: ../panels/printers/new-printer-dialog.ui.h:3
@@ -2398,65 +2304,55 @@ msgstr "VPN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:587
 msgid "Bond"
-msgstr ""
+msgstr "Bond"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
-msgstr ""
+msgstr "Bridge"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "VLAN"
-msgstr ""
+msgstr "VLAN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:739
-#, fuzzy
-#| msgid "Could not load ui: %s"
 msgid "Could not load VPN plugins"
-msgstr "ui ファイルを読み込めませんでした: %s"
+msgstr "VPN プラグインを読み込めませんでした"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:803
-#, fuzzy
-#| msgid "Other profile…"
 msgid "Import from file…"
-msgstr "他のプロファイル…"
+msgstr "ファイルからインポート…"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:870
-#, fuzzy
-#| msgid "Add new connection"
 msgid "Add Network Connection"
 msgstr "新規の接続を追加"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:53
 msgid "_Reset"
-msgstr ""
+msgstr "リセット(_R)"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1411
 #: ../panels/network/network-wifi.ui.h:54
-#, fuzzy
-#| msgid "Forget"
 msgid "_Forget"
-msgstr "破棄"
+msgstr "破棄(_F)"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:3
 msgid "Reset the settings for this network, including passwords, but remember it as a preferred network"
-msgstr ""
+msgstr "パスワードを含め、このネットワークの設定をリセットします。ただし、推奨ネットワークであることは記憶"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:4
 msgid "Remove all details relating to this network and do not try to automatically connect"
-msgstr ""
+msgstr "このネットワークに関する詳細を削除し、自動的に接続しないようにします"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:14
-#, fuzzy
-#| msgid "Security"
 msgid "S_ecurity"
-msgstr "セキュリティ"
+msgstr "セキュリティ(_E)"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:205
 msgid "Cannot import VPN connection"
-msgstr ""
+msgstr "VPN 接続をインポートできません"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:207
 #, c-format
@@ -2465,29 +2361,31 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
+"ファイル '%s' は読み込めなかったか、または処理できる VPN 接続情報がありません\n"
+"\n"
+"エラー: %s"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:242
 msgid "Select file to import"
-msgstr ""
+msgstr "インポートするファイルを選択する"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
-#, fuzzy, c-format
-#| msgid "A user with name '%s' already exists."
+#, c-format
 msgid "A file named \"%s\" already exists."
-msgstr "'%s' という名前のユーザーはすでに存在します。"
+msgstr "'%s' というファイルはすでに存在します。"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:296
 msgid "_Replace"
-msgstr ""
+msgstr "入れ替え(_R)"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:298
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
-msgstr ""
+msgstr "%s を、保存している VPN 接続に入れ替えますか?"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:334
 msgid "Cannot export VPN connection"
-msgstr ""
+msgstr "VPN 接続をエクスポートできません"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:336
 #, c-format
@@ -2496,35 +2394,36 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
+"VPN 接続 '%s' は %s にエクスポートできませんでした。\n"
+"\n"
+"エラー: %s"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
 msgid "Export VPN connection..."
-msgstr ""
+msgstr "VPN 接続をエクスポートする..."
 
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "(Error: unable to load VPN connection editor)"
-msgstr ""
+msgstr "(エラー: VPN 接続エディターを読み込めません)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:12
 msgid "_SSID"
-msgstr ""
+msgstr "SSID(_S)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:2
 #: ../panels/network/network-wifi.ui.h:13
 msgid "_BSSID"
-msgstr ""
+msgstr "BSSID(_B)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:16
-#, fuzzy
-#| msgid "_Forget Network"
 msgid "My Home Network"
-msgstr "ネットワークを破棄(_F)"
+msgstr "マイホームネットワーク"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Make available to _other users"
-msgstr ""
+msgstr "他のユーザーも利用可能(_O)"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -2532,28 +2431,26 @@ msgid "Network"
 msgstr "ネットワーク"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-#, fuzzy
-#| msgid "Not connected to the internet."
 msgid "Control how you connect to the Internet"
-msgstr "インターネットに接続していません。"
+msgstr "ネットワークへの接続方法を設定します。"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-msgstr ""
+msgstr "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;ネットワーク;インターネット;無線;ワイヤレス;有線;プロキシー;プロクシー;ブロードバンド;モデム;ブルートゥース;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
-msgstr ""
+msgstr "Bond のスレーブ"
 
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
-msgstr ""
+msgstr "ブリッジのスレーブ"
 
 #: ../panels/network/net-device-ethernet.c:112
 #: ../panels/network/net-device-wifi.c:465
 msgid "never"
-msgstr "まったくない"
+msgstr "未接続"
 
 #: ../panels/network/net-device-ethernet.c:122
 #: ../panels/network/net-device-wifi.c:475
@@ -2585,20 +2482,17 @@ msgid "Options…"
 msgstr "オプション…"
 
 #: ../panels/network/net-device-ethernet.c:472
-#, fuzzy, c-format
-#| msgid "_Profile:"
+#, c-format
 msgid "Profile %d"
-msgstr "プロファイル(_P):"
+msgstr "プロファイル %d"
 
 #: ../panels/network/net-device-mobile.c:241
 msgid "Add new connection"
 msgstr "新規の接続を追加"
 
 #: ../panels/network/net-device-wifi.c:1120
-#, fuzzy
-#| msgid "If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."
 msgid "If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with others."
-msgstr "ワイヤレス以外のインターネット接続がある場合には、 他の人とそのインターネット接続を共有することができます。"
+msgstr "ワイヤレス以外のインターネット接続がある場合には、 ワイヤレスホットスポットを設定し、他の人とインターネット接続を共有することができます。"
 
 #: ../panels/network/net-device-wifi.c:1124
 #, c-format
@@ -2606,10 +2500,8 @@ msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "ワイヤレスホットスポットをオンにすると <b>%s</b> の接続が切断されます。"
 
 #: ../panels/network/net-device-wifi.c:1128
-#, fuzzy
-#| msgid "It is not possible to access the internet through your wireless while the hotspot is active."
 msgid "It is not possible to access the Internet through your wireless while the hotspot is active."
-msgstr "ホットスポットがアクティブな場合、ワイヤレスによるインターネット接続は できません。"
+msgstr "ホットスポットがアクティブな場合、ワイヤレスによるインターネット接続はできません。"
 
 #: ../panels/network/net-device-wifi.c:1202
 msgid "Stop hotspot and disconnect any users?"
@@ -2621,19 +2513,15 @@ msgstr "停止(_S)"
 
 #: ../panels/network/net-device-wifi.c:1277
 msgid "System policy prohibits use as a Hotspot"
-msgstr ""
+msgstr "システムのポリシーによりホットスポットとしての利用は禁止されています"
 
 #: ../panels/network/net-device-wifi.c:1280
-#, fuzzy
-#| msgid "InfiniBand device does not support connected mode"
 msgid "Wireless device does not support Hotspot mode"
-msgstr "InfiniBandデバイスは接続モードに対応していません"
+msgstr "ワイヤレスデバイスがホットスポットモードに対応していません"
 
 #: ../panels/network/net-device-wifi.c:1407
-#, fuzzy
-#| msgid "Network details for %s including password and any custom configuration will be lost."
 msgid "Network details for the selected networks, including passwords and any custom configuration will be lost."
-msgstr "パスワードや独自の設定など、 %s のネットワーク詳細はすべて失われることになります。"
+msgstr "パスワードや独自の設定など、 選択したネットワークの詳細は失われます。"
 
 #: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
@@ -2642,11 +2530,9 @@ msgstr "履歴"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: ../panels/network/net-device-wifi.c:1726
-#, fuzzy
-#| msgid "Forget"
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
-msgstr "破棄"
+msgstr "破棄(_F)"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -2666,10 +2552,8 @@ msgid "Proxy"
 msgstr "プロキシ"
 
 #: ../panels/network/network-ethernet.ui.h:1
-#, fuzzy
-#| msgid "Add profile"
 msgid "_Add Profile…"
-msgstr "プロファイルの追加"
+msgstr "プロファイルの追加(_A)…"
 
 #: ../panels/network/network-mobile.ui.h:1
 msgid "IMEI"
@@ -2681,10 +2565,8 @@ msgstr "プロバイダー"
 
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:7
-#, fuzzy
-#| msgid "_Options"
 msgid "_Options…"
-msgstr "オプション(_O)"
+msgstr "オプション(_O)…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2727,37 +2609,27 @@ msgstr "Socks ホスト(_S)"
 
 #: ../panels/network/network-proxy.ui.h:10
 msgid "_Ignore Hosts"
-msgstr ""
+msgstr "次のホストを無視する(_I)"
 
 #: ../panels/network/network-proxy.ui.h:11
-#, fuzzy
-#| msgid "_HTTP Proxy"
 msgid "HTTP proxy port"
-msgstr "HTTP プロキシ(_H)"
+msgstr "HTTP プロキシポート"
 
 #: ../panels/network/network-proxy.ui.h:12
-#, fuzzy
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS proxy port"
-msgstr "HTTPS プロキシ(_T)"
+msgstr "HTTPS プロキシポート"
 
 #: ../panels/network/network-proxy.ui.h:13
-#, fuzzy
-#| msgid "_FTP Proxy"
 msgid "FTP proxy port"
-msgstr "FTP プロキシ(_F)"
+msgstr "FTP プロキシポート"
 
 #: ../panels/network/network-proxy.ui.h:14
-#, fuzzy
-#| msgid "Socks Port"
 msgid "Socks proxy port"
-msgstr "Socks ポート"
+msgstr "Socks プロキシポート"
 
 #: ../panels/network/network-simple.ui.h:6
-#, fuzzy
-#| msgid "Device Off"
 msgid "Turn device off"
-msgstr "デバイスをオフ"
+msgstr "デバイスをオフにする"
 
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
@@ -2765,7 +2637,6 @@ msgstr "新しいサービスに使用するインターフェースを選択"
 
 #: ../panels/network/network.ui.h:2
 #, fuzzy
-#| msgid "Calibrate…"
 msgid "C_reate…"
 msgstr "キャリブレート…"
 
@@ -2795,20 +2666,14 @@ msgid "Username"
 msgstr "ユーザー名"
 
 #: ../panels/network/network-vpn.ui.h:7
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn VPN connection off"
-msgstr "オン/オフ の切り替え:"
+msgstr "VPN 接続をオフにする"
 
 #: ../panels/network/network-wifi.ui.h:1
-#, fuzzy
-#| msgid "A_utomatic Login"
 msgid "Automatic _Connect"
-msgstr "自動ログイン(_U)"
+msgstr "自動接続(_C)"
 
 #: ../panels/network/network-wifi.ui.h:11
-#, fuzzy
-#| msgid "Details"
 msgid "details"
 msgstr "詳細"
 
@@ -2829,19 +2694,15 @@ msgstr "何もしない"
 
 #: ../panels/network/network-wifi.ui.h:19
 msgid "blablabla"
-msgstr ""
+msgstr "blablabla"
 
 #: ../panels/network/network-wifi.ui.h:20
-#, fuzzy
-#| msgid "_Show password"
 msgid "Show P_assword"
-msgstr "パスワードを表示(_S)"
+msgstr "パスワードを表示(_A)"
 
 #: ../panels/network/network-wifi.ui.h:21
-#, fuzzy
-#| msgid "Failed to delete user"
 msgid "Make available to other users"
-msgstr "ユーザーの削除に失敗しました"
+msgstr "他のユーザーに利用可能にする"
 
 #: ../panels/network/network-wifi.ui.h:22
 msgid "identity"
@@ -2849,15 +2710,15 @@ msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP) addresses only"
-msgstr ""
+msgstr "自動 (DHCP) アドレスのみ"
 
 #: ../panels/network/network-wifi.ui.h:28
 msgid "Link-local only"
-msgstr ""
+msgstr "リンクローカルのみ"
 
 #: ../panels/network/network-wifi.ui.h:29
 msgid "Shared with other computers"
-msgstr ""
+msgstr "他のコンピューターと共有する"
 
 #: ../panels/network/network-wifi.ui.h:31
 msgid ""
@@ -2866,6 +2727,10 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"アドレスの\n"
+"セクションが\n"
+"ここに\n"
+"入る"
 
 #: ../panels/network/network-wifi.ui.h:35
 msgid ""
@@ -2874,6 +2739,10 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"DNSの\n"
+"セクションが\n"
+"ここに\n"
+"入る"
 
 #: ../panels/network/network-wifi.ui.h:40
 msgid ""
@@ -2882,56 +2751,54 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"ルートの\n"
+"セクションが\n"
+"ここに\n"
+"入る"
 
 #: ../panels/network/network-wifi.ui.h:44
-#, fuzzy
-#| msgid "Cannot remove automatically added profile"
 msgid "_Ignore automatically obtained routes"
-msgstr "自動で追加されたプロファイルを削除できません"
+msgstr "自動的に得られたルートを無視する(_I)"
 
 #: ../panels/network/network-wifi.ui.h:46
 msgid "ipv4"
-msgstr ""
+msgstr "ipv4"
 
 #: ../panels/network/network-wifi.ui.h:48
 msgid "ipv6"
-msgstr ""
+msgstr "ipv6"
 
 #: ../panels/network/network-wifi.ui.h:50
 msgid "_Cloned MAC Address"
-msgstr ""
+msgstr "クローンしたMACアドレス(_C)"
 
 #: ../panels/network/network-wifi.ui.h:51
 msgid "00:24:16:31:8G:7A"
-msgstr ""
+msgstr "00:24:16:31:8G:7A"
 
 #: ../panels/network/network-wifi.ui.h:52
-#, fuzzy
-#| msgid "Hardware"
 msgid "hardware"
 msgstr "ハードウェア"
 
 #: ../panels/network/network-wifi.ui.h:55
 msgid "Reset the settings for this connection to their defaults, but remember as a preferred connection."
-msgstr ""
+msgstr "この接続の設定をデフォルトにリセットしますが、推奨接続であることは記憶します。"
 
 #: ../panels/network/network-wifi.ui.h:56
 msgid "Remove all details relating to this network and do not try to automatically connect to it."
-msgstr ""
+msgstr "このネットワークに関する詳細はすべて削除しますあ、自動的に接続しないようにします。"
 
 #: ../panels/network/network-wifi.ui.h:57
 msgid "reset"
-msgstr ""
+msgstr "リセット"
 
 #: ../panels/network/network-wifi.ui.h:62
 msgid "Hardware"
 msgstr "ハードウェア"
 
 #: ../panels/network/network-wifi.ui.h:64
-#, fuzzy
-#| msgid "Hotspot"
 msgid "Wi-Fi Hotspot"
-msgstr "アクセスポイント"
+msgstr "Wi-Fi アクセスポイント"
 
 #: ../panels/network/network-wifi.ui.h:65
 msgid "_Turn On"
@@ -2939,35 +2806,27 @@ msgstr "オン(_T)"
 
 #: ../panels/network/network-wifi.ui.h:66
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ../panels/network/network-wifi.ui.h:67
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn Wi-Fi off"
-msgstr "オン/オフ の切り替え:"
+msgstr "Wi-Fi をオフにする"
 
 #: ../panels/network/network-wifi.ui.h:68
-#, fuzzy
-#| msgid "_Use as Hotspot..."
 msgid "_Use as Hotspot…"
-msgstr "アクセスポイントとして使用(_U)..."
+msgstr "アクセスポイントとして使用(_U)…"
 
 #: ../panels/network/network-wifi.ui.h:69
-#, fuzzy
-#| msgid "Connect to a Hidden Network"
 msgid "_Connect to Hidden Network…"
-msgstr "非表示のネットワークに接続"
+msgstr "非表示のネットワークに接続(_C)…"
 
 #: ../panels/network/network-wifi.ui.h:70
 msgid "_History"
-msgstr ""
+msgstr "履歴(_H)"
 
 #: ../panels/network/network-wifi.ui.h:71
-#, fuzzy
-#| msgid "Switch off to connect to a wireless network"
 msgid "Switch off to connect to a Wi-Fi network"
-msgstr "ワイヤレスネットワークへの接続をオフにする"
+msgstr "Wi-Fiネットワークへ接続するためスイッチをオフ"
 
 #: ../panels/network/network-wifi.ui.h:72
 msgid "Network Name"
@@ -3027,7 +2886,7 @@ msgstr "認証が要求されました"
 #. TRANSLATORS: VPN status
 #: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
 msgid "Connected"
-msgstr "接続"
+msgstr "接続済み"
 
 #. TRANSLATORS: device status
 #: ../panels/network/panel-common.c:181
@@ -3273,64 +3132,60 @@ msgstr "ケーブル抜け"
 
 #: ../panels/network/wireless-security/eap-method.c:275
 msgid "No Certificate Authority certificate chosen"
-msgstr ""
+msgstr "認証局(CA)の証明書が選択されていません"
 
 #: ../panels/network/wireless-security/eap-method.c:276
 msgid "Not using a Certificate Authority (CA) certificate can result in connections to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate Authority certificate?"
-msgstr ""
+msgstr "認証局(CA)証明書を使用しなければ接続は安全でなく、危険な W-Fi ネットワークになってしまいます。認証局証明書を選択しますか?"
 
 #: ../panels/network/wireless-security/eap-method.c:281
 msgid "Ignore"
-msgstr ""
+msgstr "無視する"
 
 #: ../panels/network/wireless-security/eap-method.c:285
 msgid "Choose CA Certificate"
-msgstr ""
+msgstr "CA 証明書を選択する"
 
 #: ../panels/network/wireless-security/eap-method.c:645
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr ""
+msgstr "DER, PEM, PKCS#12 のプライベートキー (*.der, *.pem, *.p12)"
 
 #: ../panels/network/wireless-security/eap-method.c:648
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "DER か PEM の証明書 (*.der, *.pem, *.crt, *.cer)"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:261
 #: ../panels/network/wireless-security/eap-method-peap.c:280
 msgid "GTC"
-msgstr ""
+msgstr "GTC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:277
 #: ../panels/network/wireless-security/eap-method-peap.c:246
 #: ../panels/network/wireless-security/eap-method-ttls.c:263
 msgid "MSCHAPv2"
-msgstr ""
+msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
 msgid "Choose a PAC file..."
-msgstr ""
+msgstr "PAC ファイルを選択..."
 
 #: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "PAC files (*.pac)"
-msgstr ""
+msgstr "PAC ファイル (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:2
-#, fuzzy
-#| msgid "All files"
 msgid "PAC _file"
-msgstr "すべてのファイル"
+msgstr "PAC ファイル(_F)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "_Inner authentication"
-msgstr "認証に失敗しました"
+msgstr "内部認証(_I)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 msgid "PAC pro_visioning"
-msgstr ""
+msgstr "PACプロビジョニング(_V)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:1
@@ -3343,17 +3198,15 @@ msgstr " "
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:6
 msgid "Anonymous"
-msgstr ""
+msgstr "匿名"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "Authenticated"
-msgstr "認証に失敗しました"
+msgstr "認証"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
 msgid "Both"
-msgstr ""
+msgstr "両方"
 
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
@@ -3367,51 +3220,45 @@ msgstr "ユーザー名(_U)"
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:6
 #: ../panels/network/wireless-security/ws-leap.ui.h:3
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
-#, fuzzy
-#| msgid "_Show password"
 msgid "Sho_w password"
-msgstr "パスワードを表示(_S)"
+msgstr "パスワードを表示(_W)"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:263
 #: ../panels/network/wireless-security/wireless-security.c:385
 msgid "MD5"
-msgstr ""
+msgstr "MD5"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:350
 #: ../panels/network/wireless-security/eap-method-tls.c:434
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
 msgid "Choose a Certificate Authority certificate..."
-msgstr ""
+msgstr "認証局(CA)証明書を選択..."
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
-#, fuzzy
-#| msgid "Version %s"
 msgid "Version 0"
-msgstr "バージョン %s"
+msgstr "バージョン 0"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:4
-#, fuzzy
-#| msgid "Version %s"
 msgid "Version 1"
-msgstr "バージョン %s"
+msgstr "バージョン 1"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:6
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
 msgid "C_A certificate"
-msgstr ""
+msgstr "CA証明書(_A)"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
-msgstr ""
+msgstr "PEAPバージョン(_V)"
 
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:3
 msgid "As_k for this password every time"
-msgstr ""
+msgstr "毎回このパスワードを要求する(_K)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:260
 msgid "Unencrypted private keys are insecure"
-msgstr ""
+msgstr "暗号化のないプライベートキーは安全ではありません"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:263
 msgid ""
@@ -3419,120 +3266,111 @@ msgid ""
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
+"選択したプライベートキーはパスワードで保護されていないようです。この状態は 信用情報の侵害を許してしまいます。パスワード保護のあるプライベートキーを選択してください。\n"
+"\n"
+"(プライベートキーは openssl を使用してパスワード保護ができます)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:428
 msgid "Choose your personal certificate..."
-msgstr ""
+msgstr "個人用証明書を選択する..."
 
 #: ../panels/network/wireless-security/eap-method-tls.c:440
 msgid "Choose your private key..."
-msgstr ""
+msgstr "プライベートキーを選択する..."
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
-msgstr ""
+msgstr "アイデンティティ(_D)"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:2
 msgid "_User certificate"
-msgstr ""
+msgstr "ユーザー証明書(_U)"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
 msgid "Private _key"
-msgstr ""
+msgstr "プライベートキー(_K)"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:5
-#, fuzzy
-#| msgid "_Generate a password"
 msgid "_Private key password"
-msgstr "パスワードの生成(_G)"
+msgstr "プライベートキーのパスワード(_P)"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:230
-#, fuzzy
-#| msgid "WPA"
 msgid "PAP"
-msgstr "WPA"
+msgstr "PAP"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:247
 msgid "MSCHAP"
-msgstr ""
+msgstr "MSCHAP"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:280
 msgid "CHAP"
-msgstr ""
+msgstr "CHAP"
 
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
 msgid "Don't _warn me again"
-msgstr ""
+msgstr "二度と警告しない(_W)"
 
 #: ../panels/network/wireless-security/wireless-security.c:397
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #: ../panels/network/wireless-security/wireless-security.c:421
 msgid "FAST"
-msgstr ""
+msgstr "FAST"
 
 #: ../panels/network/wireless-security/wireless-security.c:432
 msgid "Tunneled TLS"
-msgstr ""
+msgstr "トンネル化 TLS"
 
 #: ../panels/network/wireless-security/wireless-security.c:443
 msgid "Protected EAP (PEAP)"
-msgstr ""
+msgstr "保護つき EAP (PEAP)"
 
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:9
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "Au_thentication"
-msgstr "認証に失敗しました"
+msgstr "認証(_T)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
-#, fuzzy
-#| msgid "Default"
 msgid "1 (Default)"
-msgstr "デフォルト"
+msgstr "1 (デフォルト)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:2
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:3
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:4
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-#, fuzzy
-#| msgid "System"
 msgid "Open System"
-msgstr "システム"
+msgstr "オープンシステム"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:6
 msgid "Shared Key"
-msgstr ""
+msgstr "共有鍵"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "_Key"
-msgstr ""
+msgstr "キー(_K)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:8
 msgid "Sho_w key"
-msgstr ""
+msgstr "キーを表示(_W)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:10
 msgid "WEP inde_x"
-msgstr ""
+msgstr "WEPインデックス(_X)"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
-#, fuzzy
-#| msgid "_Type:"
 msgid "_Type"
-msgstr "種類(_T):"
+msgstr "種類(_T)"
 
 #. TRANSLATORS: this is the per application switch for message tray usage.
 #: ../panels/notifications/cc-edit-dialog.c:39
@@ -3615,20 +3453,16 @@ msgid "Add Account"
 msgstr "アカウントの追加"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
-#, fuzzy
-#| msgid "_Mail"
 msgid "Mail"
-msgstr "メール(_M)"
+msgstr "メール"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
-#, fuzzy
-#| msgid "Contrast:"
 msgid "Contacts"
-msgstr "コントラスト:"
+msgstr "連絡先"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
 msgid "Resources"
-msgstr ""
+msgstr "リソース"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
@@ -3636,17 +3470,15 @@ msgstr "アカウントのログインに失敗"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
-msgstr ""
+msgstr "認証情報の有効期限が切れました。"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:434
-#, fuzzy
-#| msgid "Enable this account"
 msgid "Sign in to enable this account."
-msgstr "アカウントを有効にする"
+msgstr "アカウントを有効にするにはサインインしてください"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
-msgstr ""
+msgstr "サインイン(_S)"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:684
 msgid "Error creating account"
@@ -3674,7 +3506,7 @@ msgstr "オンラインアカウント"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
 msgid "Connect to your online accounts and decide what to use them for"
-msgstr ""
+msgstr "オンラインアカウントへの接続や利用方法を設定します。"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
@@ -4027,10 +3859,8 @@ msgid "Delay"
 msgstr "時間"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "Authenticate"
-msgstr "認証に失敗しました"
+msgstr "認証"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/sharing/sharing.ui.h:21
@@ -4038,8 +3868,6 @@ msgid "Password"
 msgstr "パスワード"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
-#, fuzzy
-#| msgid "Authentication required"
 msgid "Authentication Required"
 msgstr "認証が要求されました"
 
@@ -4145,7 +3973,7 @@ msgstr "準備完了"
 #: ../panels/printers/cc-printers-panel.c:797
 msgctxt "printer state"
 msgid "Does not accept jobs"
-msgstr ""
+msgstr "ジョブ受付不可"
 
 #. Translators: Printer's state (jobs are processing)
 #: ../panels/printers/cc-printers-panel.c:802
@@ -4204,22 +4032,16 @@ msgid "No suitable driver found"
 msgstr "適切なドライバーが見つかりませんでした"
 
 #: ../panels/printers/cc-printers-panel.c:2323
-#, fuzzy
-#| msgid "Searching for preferred drivers..."
 msgid "Searching for preferred drivers…"
-msgstr "推奨ドライバーの検索中..."
+msgstr "推奨ドライバーの検索中…"
 
 #: ../panels/printers/cc-printers-panel.c:2338
-#, fuzzy
-#| msgid "Select from database..."
 msgid "Select from database…"
-msgstr "データベースから選択..."
+msgstr "データベースから選択…"
 
 #: ../panels/printers/cc-printers-panel.c:2347
-#, fuzzy
-#| msgid "Provide PPD File..."
 msgid "Provide PPD File…"
-msgstr "PPDファイルを指定..."
+msgstr "PPDファイルを指定…"
 
 #. Translators: Name of job which makes printer to print test page
 #: ../panels/printers/cc-printers-panel.c:2498
@@ -4239,7 +4061,7 @@ msgstr "プリンター"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
 msgid "Add printers, view printer jobs and decide how you want to print"
-msgstr ""
+msgstr "プリンターの追加、プリンタージョブの表示、印刷方法の設定を行います。"
 
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
@@ -4283,10 +4105,8 @@ msgid "Search for network printers or filter result"
 msgstr "ネットワークプリンターの検索または結果をフィルター"
 
 #: ../panels/printers/options-dialog.ui.h:1
-#, fuzzy
-#| msgid "Loading options..."
 msgid "Loading options…"
-msgstr "オプションをロード中..."
+msgstr "オプションをロード中…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4527,10 +4347,8 @@ msgstr "プレフィルタリングなし"
 
 #. Translators: Name of column showing printer manufacturers
 #: ../panels/printers/pp-ppd-selection-dialog.c:233
-#, fuzzy
-#| msgid "Manufacturer:"
 msgid "Manufacturer"
-msgstr "製造元:"
+msgstr "製造元"
 
 #. Translators: Name of column showing printer drivers
 #: ../panels/printers/pp-ppd-selection-dialog.c:250
@@ -4541,7 +4359,7 @@ msgstr "ドライバー"
 #: ../panels/printers/pp-samba.c:247
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
-msgstr ""
+msgstr "%s で利用可能なプリンターを表示するにはユーザー名とパスワードを入力してください。"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
@@ -4573,7 +4391,7 @@ msgstr "ジョブ"
 #. Translators: Opens a dialog containing printer's jobs
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
-msgstr ""
+msgstr "ジョブを表示(_J)"
 
 #: ../panels/printers/printers.ui.h:12
 msgid "Model"
