@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-13 14:50+0000\n"
-"PO-Revision-Date: 2013-03-13 22:09+0400\n"
+"POT-Creation-Date: 2013-03-23 08:48+0000\n"
+"PO-Revision-Date: 2013-03-24 10:22+0400\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
 "Language-Team: русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -862,13 +862,13 @@ msgstr "Китай"
 msgid "Other…"
 msgstr "Другой…"
 
-#: ../panels/common/cc-language-chooser.c:169
-#: ../panels/region/cc-format-chooser.c:259
-#: ../panels/region/cc-input-chooser.c:171
+#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/region/cc-format-chooser.c:266
+#: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "Ещё…"
 
-#: ../panels/common/cc-language-chooser.c:178
+#: ../panels/common/cc-language-chooser.c:193
 msgid "No languages found"
 msgstr "Ни один язык не найден"
 
@@ -1649,9 +1649,8 @@ msgid "Compose Key"
 msgstr "Композиционная клавиша"
 
 #: ../panels/keyboard/cc-keyboard-option.c:371
-#, fuzzy
 msgid "Modifiers-only switch to next source"
-msgstr "Переключиться на следующий источник"
+msgstr "Только клавиши-модификаторы переключают на следующий источник"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
@@ -2178,9 +2177,8 @@ msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "40/128-битный ключ WEP (Hex или ASCII)"
 
 #: ../panels/network/connection-editor/ce-page-security.c:283
-#, fuzzy
 msgid "WEP 128-bit Passphrase"
-msgstr "128-битная идентификационная фраза WEP"
+msgstr "128-битная парольная фраза WEP"
 
 #: ../panels/network/connection-editor/ce-page-security.c:296
 #: ../panels/network/wireless-security/wireless-security.c:409
@@ -2260,19 +2258,19 @@ msgstr "Последнее использование"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
-msgstr ""
+msgstr "Витая пара"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:3
 msgid "Attachment Unit Interface (AUI)"
-msgstr ""
+msgstr "Интерфейс AUI"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:4
 msgid "BNC"
-msgstr ""
+msgstr "BNC"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:5
 msgid "Media Independent Interface (MII)"
-msgstr ""
+msgstr "Интерфейс MII"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:6
 msgid "10 Mb/s"
@@ -2382,7 +2380,7 @@ msgstr "VPN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:587
 msgid "Bond"
-msgstr ""
+msgstr "Связка"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
@@ -2393,18 +2391,16 @@ msgid "VLAN"
 msgstr "VLAN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:739
-#, fuzzy
 msgid "Could not load VPN plugins"
-msgstr "Не удалось загрузить интерфейс пользователя: %s"
+msgstr "Не удалось загрузить VPN-модули"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:803
 msgid "Import from file…"
 msgstr "Импортировать из файла…"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:870
-#, fuzzy
 msgid "Add Network Connection"
-msgstr "Добавить новое подключение"
+msgstr "Добавить сетевое подключение"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:53
@@ -2422,12 +2418,16 @@ msgid ""
 "Reset the settings for this network, including passwords, but remember it as "
 "a preferred network"
 msgstr ""
+"Сбросить параметры этой сети, включая пароли, но запомнить сеть в качестве "
+"предпочтительной"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:4
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect"
 msgstr ""
+"Удалить все параметры, относящиеся к этой сети, и не пытаться автоматически "
+"подключаться к этой сети"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:14
@@ -2436,7 +2436,7 @@ msgstr "З_ащита"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:205
 msgid "Cannot import VPN connection"
-msgstr ""
+msgstr "Не удалось импортировать VPN-соединение"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:207
 #, c-format
@@ -2446,15 +2446,19 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
+"Невозможно прочитать файл «%s» или файл содержит некорректную информацию о "
+"VPN-соединении\n"
+"\n"
+"Ошибка: %s"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:242
 msgid "Select file to import"
-msgstr ""
+msgstr "Выберите файл для импортирования"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
-#, fuzzy, c-format
+#, c-format
 msgid "A file named \"%s\" already exists."
-msgstr "Пользователь «%s» уже существует"
+msgstr "Файл с именем «%s» уже существует."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:296
 msgid "_Replace"
@@ -2463,11 +2467,11 @@ msgstr "За_менить"
 #: ../panels/network/connection-editor/vpn-helpers.c:298
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
-msgstr ""
+msgstr "Заменить %s сохраняемым VPN-соединением?"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:334
 msgid "Cannot export VPN connection"
-msgstr ""
+msgstr "Не удалось экспортировать VPN-соединение"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:336
 #, c-format
@@ -2476,14 +2480,17 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
+"Не удалось импортировать VPN-соединение «%s» в %s.\n"
+"\n"
+"Ошибка: %s."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
 msgid "Export VPN connection..."
-msgstr ""
+msgstr "Экспортировать VPN-соединение…"
 
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "(Error: unable to load VPN connection editor)"
-msgstr ""
+msgstr "(Ошибка: невозможно загрузить редактор VPN-соединений)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:12
@@ -2497,13 +2504,12 @@ msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:16
-#, fuzzy
 msgid "My Home Network"
-msgstr "_Забыть сеть"
+msgstr "Моя домашняя сеть"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Make available to _other users"
-msgstr ""
+msgstr "Сделать доступным для _других пользователей"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -2512,7 +2518,7 @@ msgstr "Сеть"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Control how you connect to the Internet"
-msgstr ""
+msgstr "Управление подключением к Интернету"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
@@ -2523,11 +2529,11 @@ msgstr ""
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
-msgstr ""
+msgstr "Подчинённые в связке"
 
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
-msgstr ""
+msgstr "Подчинённые моста"
 
 #: ../panels/network/net-device-ethernet.c:112
 #: ../panels/network/net-device-wifi.c:465
@@ -2606,21 +2612,19 @@ msgstr "_Остановить точку доступа"
 
 #: ../panels/network/net-device-wifi.c:1277
 msgid "System policy prohibits use as a Hotspot"
-msgstr ""
+msgstr "Использование в качестве точки доступа запрещено системной политикой"
 
 #: ../panels/network/net-device-wifi.c:1280
-#, fuzzy
 msgid "Wireless device does not support Hotspot mode"
-msgstr "Устройство InfiniBand не поддерживает режим подключения"
+msgstr "Беспроводное устройство не поддерживает режим точки доступа"
 
 #: ../panels/network/net-device-wifi.c:1407
-#, fuzzy
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr ""
-"Сетевые данные для %s, включая пароль и любые пользовательские настройки, "
-"будут утеряны."
+"Сетевые данные для выбранных сетей, включая пароль и любые пользовательские "
+"параметры, будут утеряны."
 
 #: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
@@ -2830,6 +2834,9 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"Раздел\n"
+"для\n"
+"адресов"
 
 #: ../panels/network/network-wifi.ui.h:35
 msgid ""
@@ -2838,6 +2845,9 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"Раздел\n"
+"для\n"
+"DNS"
 
 #: ../panels/network/network-wifi.ui.h:40
 msgid ""
@@ -2846,10 +2856,13 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"Раздел\n"
+"для\n"
+"маршрутов"
 
 #: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
-msgstr ""
+msgstr "_Игнорировать полученные автоматически маршруты"
 
 #: ../panels/network/network-wifi.ui.h:46
 msgid "ipv4"
@@ -2876,12 +2889,16 @@ msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
 msgstr ""
+"Сбросить параметры для этого соединения в значения по умолчанию, но "
+"сохранить соединение в качестве предпочтительного."
 
 #: ../panels/network/network-wifi.ui.h:56
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
 msgstr ""
+"Удалить все параметры, относящиеся к этой сети, и не пытаться автоматически "
+"подключаться к этой сети."
 
 #: ../panels/network/network-wifi.ui.h:57
 msgid "reset"
@@ -3227,7 +3244,7 @@ msgstr "Кабель не подключён"
 
 #: ../panels/network/wireless-security/eap-method.c:275
 msgid "No Certificate Authority certificate chosen"
-msgstr ""
+msgstr "Сертификат центра сертификации не выбран"
 
 #: ../panels/network/wireless-security/eap-method.c:276
 msgid ""
@@ -3235,6 +3252,8 @@ msgid ""
 "to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
 "Authority certificate?"
 msgstr ""
+"Если вы не используете сертификат центра сертификации, это может привести к "
+"проблемам безопасности. Хотите выбрать сертификат центра сертификации?"
 
 #: ../panels/network/wireless-security/eap-method.c:281
 msgid "Ignore"
@@ -3242,20 +3261,20 @@ msgstr "Игнорировать"
 
 #: ../panels/network/wireless-security/eap-method.c:285
 msgid "Choose CA Certificate"
-msgstr ""
+msgstr "Выбрать сертификат CA"
 
 #: ../panels/network/wireless-security/eap-method.c:645
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr ""
+msgstr "Приватные ключи DER, PEM или PKCS#12 (*.der, *.pem, *.p12)"
 
 #: ../panels/network/wireless-security/eap-method.c:648
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Сертификаты DER или PEM (*.der, *.pem, *.crt, *.cer)"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:261
 #: ../panels/network/wireless-security/eap-method-peap.c:280
 msgid "GTC"
-msgstr ""
+msgstr "GTC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:277
 #: ../panels/network/wireless-security/eap-method-peap.c:246
@@ -3264,29 +3283,26 @@ msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
-#, fuzzy
 msgid "Choose a PAC file..."
-msgstr "Выберите папку"
+msgstr "Выберите файл PAC…"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "PAC files (*.pac)"
-msgstr ""
+msgstr "Файлы PAC (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:2
-#, fuzzy
 msgid "PAC _file"
-msgstr "Все файлы"
+msgstr "_Файл PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#, fuzzy
 msgid "_Inner authentication"
-msgstr "Сбой аутентификации"
+msgstr "_Внутренняя аутентификация"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 msgid "PAC pro_visioning"
-msgstr ""
+msgstr "_Инициализация PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:1
@@ -3333,7 +3349,7 @@ msgstr "MD5"
 #: ../panels/network/wireless-security/eap-method-tls.c:434
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
 msgid "Choose a Certificate Authority certificate..."
-msgstr ""
+msgstr "Выберите сертификат центра сертификации…"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 0"
@@ -3347,19 +3363,19 @@ msgstr "Версия 1"
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
 msgid "C_A certificate"
-msgstr ""
+msgstr "Сертификат _CA"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
-msgstr ""
+msgstr "_Версия PEAP"
 
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:3
 msgid "As_k for this password every time"
-msgstr ""
+msgstr "_Спрашивать каждый раз этот пароль"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:260
 msgid "Unencrypted private keys are insecure"
-msgstr ""
+msgstr "Незашифрованные приватные ключи не являются безопасными"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:263
 msgid ""
@@ -3369,32 +3385,35 @@ msgid ""
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
+"Кажется, выбранный приватный ключ не защищён паролем. Это может привести к "
+"компрометированию ваших учётных данных. Выберите приватный ключ, защищённый "
+"паролем.\n"
+"\n"
+"(Вы можете защитить приватный ключ с помощью openssl)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:428
 msgid "Choose your personal certificate..."
-msgstr ""
+msgstr "Выберите свой персональный сертификат…"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:440
 msgid "Choose your private key..."
-msgstr ""
+msgstr "Выберите ваш приватный ключ…"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
-msgstr ""
+msgstr "_Идентификация"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:2
 msgid "_User certificate"
-msgstr ""
+msgstr "Сертификат _пользователя"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-#, fuzzy
 msgid "Private _key"
-msgstr "Конфиденциальность"
+msgstr "Приватный _ключ"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:5
-#, fuzzy
 msgid "_Private key password"
-msgstr "_Сгенерировать пароль"
+msgstr "_Пароль приватного ключа"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:230
 msgid "PAP"
@@ -3418,15 +3437,15 @@ msgstr "TLS"
 
 #: ../panels/network/wireless-security/wireless-security.c:421
 msgid "FAST"
-msgstr ""
+msgstr "FAST"
 
 #: ../panels/network/wireless-security/wireless-security.c:432
 msgid "Tunneled TLS"
-msgstr ""
+msgstr "TLS с туннелем"
 
 #: ../panels/network/wireless-security/wireless-security.c:443
 msgid "Protected EAP (PEAP)"
-msgstr ""
+msgstr "Защищённый EAP (PEAP)"
 
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:9
@@ -3451,14 +3470,12 @@ msgid "4"
 msgstr "4"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-#, fuzzy
 msgid "Open System"
-msgstr "Система"
+msgstr "Open System"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:6
-#, fuzzy
 msgid "Shared Key"
-msgstr "Общедоступные папки"
+msgstr "Общий ключ"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "_Key"
@@ -3466,11 +3483,11 @@ msgstr "_Ключ"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:8
 msgid "Sho_w key"
-msgstr ""
+msgstr "_Показать ключ"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:10
 msgid "WEP inde_x"
-msgstr ""
+msgstr "_Индекс WEP"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type"
@@ -3513,17 +3530,15 @@ msgstr "Показывать подробности в уведомлениях 
 #: ../panels/power/cc-power-panel.c:1637 ../panels/power/cc-power-panel.c:1644
 #: ../panels/privacy/cc-privacy-panel.c:78
 #: ../panels/privacy/cc-privacy-panel.c:145
-#, fuzzy
 msgid "On"
-msgstr "Включён"
+msgstr "Включено"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
 #: ../panels/power/cc-power-panel.c:1631 ../panels/power/cc-power-panel.c:1642
 #: ../panels/privacy/cc-privacy-panel.c:78
 #: ../panels/privacy/cc-privacy-panel.c:145
-#, fuzzy
 msgid "Off"
-msgstr "Выключен"
+msgstr "Выключено"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3531,7 +3546,7 @@ msgstr "Уведомления"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
 msgid "Control which notifications are displayed and what they show"
-msgstr ""
+msgstr "Управление уведомлениями"
 
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
@@ -3547,7 +3562,7 @@ msgid "Show in Lock Screen"
 msgstr "Показывать уведомления при заблокированном экране"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:1010
+#: ../panels/region/cc-input-chooser.c:1073
 #: ../panels/search/cc-search-locations-dialog.c:480
 msgid "Other"
 msgstr "Другое"
@@ -3558,20 +3573,18 @@ msgstr "Другое"
 msgid "Add Account"
 msgstr "Добавление учётной записи"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
-#, fuzzy
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
 #| msgid "_Mail"
 msgid "Mail"
-msgstr "_Почта"
+msgstr "Почта"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
-#| msgid "Contrast:"
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
 msgid "Contacts"
 msgstr "Контакты"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
 msgid "Resources"
-msgstr ""
+msgstr "Ресурсы"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
@@ -3579,35 +3592,34 @@ msgstr "Ошибка при входе в систему под учётной �
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Credentials have expired."
-msgstr ""
+msgstr "Срок действия учётных данных истёк."
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:434
-#, fuzzy
 #| msgid "Enable this account"
 msgid "Sign in to enable this account."
-msgstr "Включить эту учётную запись"
+msgstr "Войдите, чтобы включить эту учётную запись."
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:439
 msgid "_Sign In"
-msgstr ""
+msgstr "_Войти"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:680
+#: ../panels/online-accounts/cc-online-accounts-panel.c:684
 msgid "Error creating account"
 msgstr "Ошибка при создании учётной записи"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:722
+#: ../panels/online-accounts/cc-online-accounts-panel.c:726
 msgid "Error removing account"
 msgstr "Ошибка при удалении учётной записи"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:758
+#: ../panels/online-accounts/cc-online-accounts-panel.c:762
 msgid "Are you sure you want to remove the account?"
 msgstr "Действительно удалить учётную запись?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:764
 msgid "This will not remove the account on the server."
 msgstr "Это не приведёт к удалению учётной записи на сервере."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:761
+#: ../panels/online-accounts/cc-online-accounts-panel.c:765
 msgid "_Remove"
 msgstr "_Удалить"
 
@@ -3618,6 +3630,7 @@ msgstr "Сетевые учётные записи"
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
 msgid "Connect to your online accounts and decide what to use them for"
 msgstr ""
+"Подключиться к сетевым учётным записям и решить для чего их использовать"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
@@ -4631,7 +4644,7 @@ msgstr "30 секунд"
 
 #: ../panels/privacy/privacy.ui.h:11
 msgid "Control how you appear on the screen and the network."
-msgstr ""
+msgstr "Как вы появляетесь на экране и в сети."
 
 #: ../panels/privacy/privacy.ui.h:12
 msgid "Display _full name in top bar"
@@ -4694,18 +4707,18 @@ msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
 msgstr ""
+"Использование истории упрощает поиск. Эти объекты никогда не будут доступны "
+"по сети."
 
 #: ../panels/privacy/privacy.ui.h:28
 msgid "Cl_ear Recent History"
 msgstr "О_чистить недавнюю историю"
 
 #: ../panels/privacy/privacy.ui.h:29
-#, fuzzy
 msgid "_Recently Used"
 msgstr "Н_едавно использованные"
 
 #: ../panels/privacy/privacy.ui.h:30
-#, fuzzy
 msgid "Retain _History"
 msgstr "Сохранение _истории"
 
@@ -4764,44 +4777,43 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Метрический"
 
-#: ../panels/region/cc-format-chooser.c:268
+#: ../panels/region/cc-format-chooser.c:283
 msgid "No regions found"
 msgstr "Регионы не найдены"
 
-#: ../panels/region/cc-input-chooser.c:179
+#: ../panels/region/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Источники ввода не найдены"
 
-#: ../panels/region/cc-region-panel.c:230
+#: ../panels/region/cc-region-panel.c:239
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Чтобы изменения вступили в силу, нужно перезапустить текущий сеанс "
 "пользователя"
 
-#: ../panels/region/cc-region-panel.c:231
+#: ../panels/region/cc-region-panel.c:240
 msgid "Restart Now"
 msgstr "Перезапустить сейчас"
 
-#: ../panels/region/cc-region-panel.c:468
+#: ../panels/region/cc-region-panel.c:550
 msgctxt "Language"
 msgid "None"
 msgstr "Нет"
 
-#: ../panels/region/cc-region-panel.c:958
+#: ../panels/region/cc-region-panel.c:1040
 msgid "Sorry"
 msgstr "Извините"
 
-#: ../panels/region/cc-region-panel.c:960
+#: ../panels/region/cc-region-panel.c:1042
 msgid "Input methods can't be used on the login screen"
-msgstr ""
+msgstr "Методы ввода нельзя использовать на экране входа в систему"
 
-#: ../panels/region/cc-region-panel.c:1409
-#, fuzzy
+#: ../panels/region/cc-region-panel.c:1491
 #| msgid "No input sources found"
 msgid "No input source selected"
-msgstr "Источники ввода не найдены"
+msgstr "Не выбран источник ввода"
 
-#: ../panels/region/cc-region-panel.c:1566
+#: ../panels/region/cc-region-panel.c:1652
 msgid "Login Screen"
 msgstr "Экран входа в систему"
 
@@ -4890,9 +4902,8 @@ msgstr ""
 "В параметрах клавиатуры можно изменить комбинации клавиш для переключения"
 
 #: ../panels/region/input-options.ui.h:10
-#, fuzzy
 msgid "Alternative switch to next source"
-msgstr "Переключиться на следующий источник"
+msgstr "Альтернативный переключатель источника"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
@@ -4908,7 +4919,7 @@ msgstr "Параметры"
 
 #: ../panels/region/region.ui.h:7
 msgid "Login settings are used by all users when logging into the system"
-msgstr ""
+msgstr "Параметры входа в систему используются всеми пользователями"
 
 #: ../panels/search/cc-search-locations-dialog.c:276
 msgid "Home"
@@ -4937,7 +4948,7 @@ msgstr "Поиск"
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
 msgid ""
 "Control which applications show search results in the Activities Overview"
-msgstr ""
+msgstr "Какие приложения показывают результаты поиска в режиме «Обзор»"
 
 #. Translators: those are keywords for the search control-center panel
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:4
@@ -4984,7 +4995,7 @@ msgstr "Общий доступ"
 
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:2
 msgid "Control what you want to share with others"
-msgstr ""
+msgstr "Общий доступ для других пользователей"
 
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
@@ -4992,6 +5003,9 @@ msgid ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
 "pictures;photos;movies;server;renderer;"
 msgstr ""
+"общий;узел;имя;удалённый;рабочий;медиа;звук;аудио;видео;изображения;фото;"
+"сервер;share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;"
+"video;pictures;photos;movies;server;renderer;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5078,6 +5092,8 @@ msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
 "your current network using: <a href=\"dav://%s\">dav://%s</a>"
 msgstr ""
+"Общий доступ к файлам позволяет открыть доступ к папкам для других "
+"пользователей сети с помощью: <a href=\"dav://%s\">dav://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:19
 msgid "Share Public Folder On This Network"
@@ -5097,6 +5113,8 @@ msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
+"Позволить удалённым пользователям подключаться, используя команду SSH:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/sharing.ui.h:26
 msgid "Screen Sharing"
@@ -5108,6 +5126,8 @@ msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
 msgstr ""
+"Разрешить удалённым пользователям просматривать и управлять вашим экраном, "
+"подключившись к: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:29
 msgid "Remote View"
@@ -5367,7 +5387,7 @@ msgstr "Комбинация не установлена"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Make it easier to see, hear, type, point and click"
-msgstr ""
+msgstr "Помогает людям видеть, слышать и вводить"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
@@ -5380,7 +5400,7 @@ msgstr ""
 "отскакивающие клавиши;клавиши мыши"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Низкая"
@@ -5391,7 +5411,7 @@ msgid "Normal"
 msgstr "Обычная"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Высокая"
@@ -5785,66 +5805,66 @@ msgstr "Толще"
 msgid "Length:"
 msgstr "Длина:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
+#. The color of the accessibility crosshair
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Color:"
 msgstr "Цвет:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Crosshairs:"
 msgstr "Перекрестие:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Overlaps mouse cursor"
 msgstr "Перекрывать курсор мыши"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Перекрестие"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "White on black:"
 msgstr "Белый на чёрном:"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Brightness:"
 msgstr "Яркость:"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Contrast:"
 msgstr "Контрастность:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: ../panels/universal-access/zoom-options.ui.h:29
-#| msgid "Color"
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
 msgid "Color"
 msgstr "Цвет"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Нет"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Полный"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Низкая"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Высокая"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Цветовые эффекты:"
 
-#: ../panels/universal-access/zoom-options.ui.h:37
+#: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
 msgstr "Цветовые эффекты"
 
@@ -5992,10 +6012,9 @@ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "Вход;Имя;Отпечаток;Аватар;Логотип;Лицо;Пароль;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
-#, fuzzy
 #| msgid "Retain _History"
 msgid "Login History"
-msgstr "Сохранение _истории"
+msgstr "Журнал входа в систему"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
@@ -6921,27 +6940,27 @@ msgstr "Справка"
 msgid "Quit"
 msgstr "Выйти"
 
-#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:62 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Параметры"
 
 #. Add categories
-#: ../shell/cc-window.c:857
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Personal"
 msgstr "Личное"
 
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "Hardware"
 msgstr "Аппаратура"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:860
 msgctxt "category"
 msgid "System"
 msgstr "Система"
 
-#: ../shell/cc-window.c:1413
+#: ../shell/cc-window.c:1411
 msgid "All Settings"
 msgstr "Все параметры"
 
