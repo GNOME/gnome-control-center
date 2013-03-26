@@ -1493,7 +1493,7 @@ cc_window_new (GtkApplication *application)
                        "application", application,
                        "hide-titlebar-when-maximized", TRUE,
                        "resizable", TRUE,
-                       "title", DEFAULT_WINDOW_TITLE,
+                       "title", _(DEFAULT_WINDOW_TITLE),
                        "icon-name", DEFAULT_WINDOW_ICON_NAME,
                        "window-position", GTK_WIN_POS_CENTER,
                        NULL);
