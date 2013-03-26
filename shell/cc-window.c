@@ -56,6 +56,8 @@ G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
 
 #define MIN_ICON_VIEW_HEIGHT 300
 
+#define MOUSE_BACK_BUTTON 8
+
 #define DEFAULT_WINDOW_TITLE N_("Settings")
 #define DEFAULT_WINDOW_ICON_NAME "preferences-desktop"
 
@@ -1158,6 +1160,18 @@ cc_window_class_init (CcWindowClass *klass)
 }
 
 static gboolean
+window_button_release_event (GtkWidget          *win,
+			     GdkEventButton     *event,
+			     CcWindow           *self)
+{
+	g_message ("button release");
+  /* back button */
+  if (event->button == MOUSE_BACK_BUTTON)
+    shell_show_overview_page (self);
+  return FALSE;
+}
+
+static gboolean
 window_key_press_event (GtkWidget   *win,
                         GdkEventKey *event,
                         CcWindow    *self)
@@ -1453,6 +1467,10 @@ create_window (CcWindow *self)
   g_signal_connect (self, "notify::application", G_CALLBACK (application_set_cb), self);
   g_signal_connect_after (self, "key_press_event",
                           G_CALLBACK (window_key_press_event), self);
+  gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
+  g_signal_connect (self, "button-release-event",
+                    G_CALLBACK (window_button_release_event), self);
+
   g_signal_connect (self, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
 
   g_signal_connect (priv->stack, "notify::visible-child",
