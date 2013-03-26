@@ -270,13 +270,20 @@ maybe_add_app_id (CcNotificationsPanel *panel,
   full_app_id = g_settings_get_string (settings, "application-id");
   app_info = G_APP_INFO (g_desktop_app_info_new (full_app_id));
 
-  app = g_slice_new (Application);
-  app->canonical_app_id = g_strdup (canonical_app_id);
-  app->settings = settings;
-  app->app_info = app_info;
+  if (app_info == NULL) {
+    /* The application cannot be found, probably it was uninstalled */
+    g_object_unref (settings);
+  } else {
+    app = g_slice_new (Application);
+    app->canonical_app_id = g_strdup (canonical_app_id);
+    app->settings = settings;
+    app->app_info = app_info;
 
-  add_application (panel, app);
+    add_application (panel, app);
+  }
+
   g_free (path);
+  g_free (full_app_id);
 }
 
 static gboolean
