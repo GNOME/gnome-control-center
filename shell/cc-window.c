@@ -1164,7 +1164,6 @@ window_button_release_event (GtkWidget          *win,
 			     GdkEventButton     *event,
 			     CcWindow           *self)
 {
-	g_message ("button release");
   /* back button */
   if (event->button == MOUSE_BACK_BUTTON)
     shell_show_overview_page (self);
