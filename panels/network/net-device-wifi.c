@@ -1451,7 +1451,7 @@ make_row (GtkSizeGroup   *rows,
         GtkWidget *row;
         GtkWidget *widget;
         GtkWidget *box;
-        gchar *title;
+        const gchar *title;
         gboolean active;
         gboolean in_range;
         gboolean connecting;
@@ -1479,7 +1479,7 @@ make_row (GtkSizeGroup   *rows,
                 timestamp = 0;
         }
 
-        title = g_markup_escape_text (nm_utils_escape_ssid (ssid->data, ssid->len), -1);
+        title = nm_utils_escape_ssid (ssid->data, ssid->len);
 
         if (ap != NULL) {
                 in_range = TRUE;
@@ -1595,8 +1595,6 @@ make_row (GtkSizeGroup   *rows,
         }
 
         gtk_widget_show_all (row);
-
-        g_free (title);
 
         g_object_set_data (G_OBJECT (row), "ap", ap);
         g_object_set_data (G_OBJECT (row), "connection", connection);
