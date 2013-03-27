@@ -59,7 +59,8 @@ selection_changed (GtkTreeSelection *selection, NetConnectionEditor *editor)
         GtkTreeIter iter;
         gint page;
 
-        gtk_tree_selection_get_selected (selection, &model, &iter);
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+                return;
         gtk_tree_model_get (model, &iter, 1, &page, -1);
 
         widget = GTK_WIDGET (gtk_builder_get_object (editor->builder,
