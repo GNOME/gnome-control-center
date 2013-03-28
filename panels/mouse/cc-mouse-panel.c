@@ -36,8 +36,6 @@ CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 #define MOUSE_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_MOUSE_PANEL, CcMousePanelPrivate))
 
-#define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
-
 struct _CcMousePanelPrivate
 {
   GtkBuilder *builder;
@@ -58,18 +56,6 @@ cc_mouse_panel_dispose (GObject *object)
   CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
 
   g_clear_object (&priv->shell_header);
-
-  if (priv->prefs_widget)
-    {
-      gnome_mouse_properties_dispose (priv->prefs_widget);
-      priv->prefs_widget = NULL;
-    }
-
-  if (priv->builder)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
@@ -123,26 +109,11 @@ static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
   CcMousePanelPrivate *priv;
-  GtkBuilder *dialog;
-  GError *error = NULL;
 
   priv = self->priv = MOUSE_PANEL_PRIVATE (self);
   g_resources_register (cc_mouse_get_resource ());
 
-  priv->builder = gtk_builder_new ();
-
-  gtk_builder_add_from_resource (priv->builder,
-                                 "/org/gnome/control-center/mouse/gnome-mouse-properties.ui",
-                                 &error);
-  if (error != NULL)
-    {
-      g_warning ("Error loading UI file: %s", error->message);
-      return;
-    }
-
-  dialog = priv->builder;
-
-  priv->prefs_widget = gnome_mouse_properties_init (priv->builder);
+  priv->prefs_widget = cc_mouse_properties_new ();
   priv->test_widget = cc_mouse_test_new ();
 
   priv->widget = gtk_notebook_new ();
@@ -153,10 +124,11 @@ cc_mouse_panel_init (CcMousePanel *self)
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->widget), FALSE);
   gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->widget), FALSE);
 
-  gtk_widget_reparent (WID ("prefs_widget"), priv->widget);
+  gtk_notebook_append_page (GTK_NOTEBOOK (priv->widget), priv->prefs_widget, NULL);
   gtk_notebook_append_page (GTK_NOTEBOOK (priv->widget), priv->test_widget, NULL);
 
   gtk_container_add (GTK_CONTAINER (self), priv->widget);
+  gtk_widget_show (priv->prefs_widget);
   gtk_widget_show (priv->test_widget);
   gtk_widget_show (priv->widget);
 }
