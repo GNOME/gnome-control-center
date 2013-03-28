@@ -256,8 +256,16 @@ if test x"$enable_cups" != x"no" ; then
 
   AC_DEFINE(BUILD_PRINTERS, 1, [Define to 1 to build the Printers panel])
 
+  # https://bugzilla.gnome.org/show_bug.cgi?id=696766
+  CUPS_CPPFLAGS=""
+  if test $CUPS_API_MAJOR -gt 1 -o \
+          $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 6 ; then
+     CUPS_CPPFLAGS=-D_PPD_DEPRECATED=""
+  fi
+
   CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e 's/-O\w*//g' -e 's/-m\w*//g'`
   CUPS_LIBS=`$CUPS_CONFIG --libs`
+  AC_SUBST(CUPS_CPPFLAGS)
   AC_SUBST(CUPS_CFLAGS)
   AC_SUBST(CUPS_LIBS)
 fi
