@@ -1427,7 +1427,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
   priv->brightness_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  label = gtk_label_new (_("_Screen Brightness"));
+  label = gtk_label_new (_("_Screen brightness"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
@@ -1455,7 +1455,7 @@ add_power_saving_section (CcPowerPanel *self)
 
   priv->dim_screen_row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
 
-  label = gtk_label_new (_("_Dim Screen when Inactive"));
+  label = gtk_label_new (_("_Dim screen when inactive"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
@@ -1478,7 +1478,7 @@ add_power_saving_section (CcPowerPanel *self)
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
 
-  label = gtk_label_new (_("_Blank Screen"));
+  label = gtk_label_new (_("_Blank screen"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
@@ -1541,12 +1541,12 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_set_margin_bottom (box2, 6);
   gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
 
-  label = gtk_label_new (_("_Mobile Broadband"));
+  label = gtk_label_new (_("_Mobile broadband"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  w = gtk_label_new (_("Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"));
+  w = gtk_label_new (_("Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"));
   gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), w, TRUE, TRUE, 0);
@@ -1790,7 +1790,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
   self->priv->automatic_suspend_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
-  label = gtk_label_new (_("_Automatic Suspend"));
+  label = gtk_label_new (_("_Automatic suspend"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
@@ -1812,7 +1812,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   update_automatic_suspend_label (self);
 
   priv->critical_battery_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  label = gtk_label_new (_("When Battery Power is _Critical"));
+  label = gtk_label_new (_("When battery power is _critical"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
