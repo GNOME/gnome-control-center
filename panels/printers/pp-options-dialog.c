@@ -423,8 +423,7 @@ tab_add (const gchar *tab_name,
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER,
                                       GTK_POLICY_AUTOMATIC);
-      gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window),
-                                             grid);
+      gtk_container_add (GTK_CONTAINER (scrolled_window), grid);
 
       id = gtk_notebook_append_page (GTK_NOTEBOOK (options_notebook),
                                      scrolled_window,
