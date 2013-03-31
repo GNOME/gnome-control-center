@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-24 06:36+0000\n"
-"PO-Revision-Date: 2013-03-24 18:01+0200\n"
+"POT-Creation-Date: 2013-03-30 15:07+0000\n"
+"PO-Revision-Date: 2013-03-31 16:45+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -977,7 +977,7 @@ msgstr "_Kaupunki:"
 
 #: ../panels/datetime/datetime.ui.h:3
 msgid "_Network Time"
-msgstr "_Verkko-aika"
+msgstr "_Verkkoaika"
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:5
@@ -2360,46 +2360,46 @@ msgstr "Käytä tätä yhteyttä _vain tässä verkossa oleviin resursseihin"
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:267
+#: ../panels/network/connection-editor/net-connection-editor.c:268
 msgid "Unable to open connection editor"
 msgstr "Yhteyseditorin avaaminen epäonnistui"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:282
+#: ../panels/network/connection-editor/net-connection-editor.c:283
 msgid "New Profile"
 msgstr "Uusi profiili"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:504
+#: ../panels/network/connection-editor/net-connection-editor.c:505
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1068
 msgid "_Add"
 msgstr "_Lisää"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
+#: ../panels/network/connection-editor/net-connection-editor.c:587
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bond"
 msgstr "Liitos"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "Bridge"
 msgstr "Silta"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:590
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:739
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "VPN-liittänäisten lataus epäonnistui"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:804
 msgid "Import from file…"
 msgstr "Tuo tiedostosta…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:870
+#: ../panels/network/connection-editor/net-connection-editor.c:871
 msgid "Add Network Connection"
 msgstr "Lisää verkkoyhteys"
 
@@ -2419,8 +2419,8 @@ msgid ""
 "Reset the settings for this network, including passwords, but remember it as "
 "a preferred network"
 msgstr ""
-"Tyhjennä tämän verkon asetukset, myös salasanat, mutta muista "
-"tämä verkko ensisijaisena"
+"Tyhjennä tämän verkon asetukset, myös salasanat, mutta muista tämä verkko "
+"ensisijaisena"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:4
 msgid ""
@@ -2626,13 +2626,13 @@ msgid ""
 msgstr ""
 "Valittujen verkkojen tiedot, kuten salasanat ja omat asetukset, häviävät."
 
-#: ../panels/network/net-device-wifi.c:1714
+#: ../panels/network/net-device-wifi.c:1712
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Historia"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1726
+#: ../panels/network/net-device-wifi.c:1724
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Unohda"
@@ -2888,8 +2888,8 @@ msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
 msgstr ""
-"Tyhjennä tämän yhteyden asetukset ja palauta oletusasetukset, mutta "
-"muista yhteys ensisijaisena."
+"Tyhjennä tämän yhteyden asetukset ja palauta oletusasetukset, mutta muista "
+"yhteys ensisijaisena."
 
 #: ../panels/network/network-wifi.ui.h:56
 msgid ""
@@ -3472,7 +3472,6 @@ msgid "4"
 msgstr "4"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-#| msgid "System"
 msgid "Open System"
 msgstr "Avoin järjestelmä"
 
@@ -3860,9 +3859,17 @@ msgstr "Ty_hjä näyttö"
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
+#: ../panels/power/cc-power-panel.c:1521
+msgid "Turns off wireless devices"
+msgstr "Sammuttaa langattomat laitteet"
+
 #: ../panels/power/cc-power-panel.c:1544
 msgid "_Mobile Broadband"
 msgstr "_Mobiililaajakaista"
+
+#: ../panels/power/cc-power-panel.c:1549
+msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgstr "Sammuttaa mobiililaajakaistalaitteet (3G, 4G, WiMax jne.)"
 
 #: ../panels/power/cc-power-panel.c:1582
 msgid "_Bluetooth"
@@ -4927,7 +4934,7 @@ msgstr "Sovelluksia ei löytynyt"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:1
 msgid "Search"
-msgstr "Etsi"
+msgstr "Haku"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
 msgid ""
@@ -4990,8 +4997,8 @@ msgid ""
 "pictures;photos;movies;server;renderer;"
 msgstr ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;jako;jakaiminen;etä;työpöytä;ääni;video"
-";kuvat;palvelin;"
+"pictures;photos;movies;server;renderer;jako;jakaiminen;etä;työpöytä;ääni;"
+"video;kuvat;palvelin;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
