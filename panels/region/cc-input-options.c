@@ -23,7 +23,6 @@
 #include <config.h>
 #include <glib/gi18n.h>
 
-#include "cc-util.h"
 #include "cc-input-options.h"
 
 typedef struct {
@@ -81,8 +80,6 @@ update_shortcuts (GtkWidget *options)
         gchar **next;
         gchar *previous_shortcut;
         GSettings *settings;
-        gchar *s;
-        gint i;
 
         settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
 
@@ -103,21 +100,7 @@ update_shortcuts (GtkWidget *options)
 
         g_object_unref (settings);
 
-        settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
-        s = g_settings_get_string (settings, "input-sources-switcher");
-
-        if (strcmp (s, "off") == 0) {
-                gtk_widget_hide (priv->alt_next_source);
-        } else {
-                for (i = 0; cc_input_switcher_options[i].value; i++) {
-                        if (strcmp (s, cc_input_switcher_options[i].value) == 0) {
-                                gtk_label_set_text (GTK_LABEL (priv->alt_next_source), _(cc_input_switcher_options[i].description));
-                                break;
-                        }
-                }
-        }
-        g_free (s);
-        g_object_unref (settings);
+        gtk_widget_hide (priv->alt_next_source); /* FIXME */
 }
 
 #define WID(name) ((GtkWidget *) gtk_builder_get_object (builder, name))
