@@ -19,13 +19,11 @@
  * 02110-1301, USA.
  */
 
-#include <config.h>
 #include <glib/gi18n.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
 
-#include "cc-util.h"
 #include "cc-keyboard-option.h"
 
 #define CC_TYPE_KEYBOARD_OPTION            (cc_keyboard_option_get_type ())
@@ -247,6 +245,36 @@ cc_keyboard_option_finalize (GObject *object)
   G_OBJECT_CLASS (cc_keyboard_option_parent_class)->finalize (object);
 }
 
+static struct
+{
+  const gchar *value;
+  const gchar *description;
+} input_switcher_options[] =
+{
+  { "off", N_("Disabled") },
+  { "shift-l", N_("Left Shift") },
+  { "alt-l", N_("Left Alt") },
+  { "ctrl-l", N_("Left Ctrl") },
+  { "shift-r", N_("Right Shift") },
+  { "alt-r", N_("Right Alt") },
+  { "ctrl-r", N_("Right Ctrl") },
+  { "alt-shift-l", N_("Left Alt+Shift") },
+  { "alt-shift-r", N_("Right Alt+Shift") },
+  { "ctrl-shift-l", N_("Left Ctrl+Shift") },
+  { "ctrl-shift-r", N_("Right Ctrl+Shift") },
+  { "shift-l-shift-r", N_("Left+Right Shift") },
+  { "alt-l-alt-r", N_("Left+Right Alt") },
+  { "ctrl-l-ctrl-r", N_("Left+Right Ctrl") },
+  { "alt-shift", N_("Alt+Shift") },
+  { "ctrl-shift", N_("Ctrl+Shift") },
+  { "alt-ctrl", N_("Alt+Ctrl") },
+  { "caps", N_("Caps") },
+  { "shift-caps", N_("Shift+Caps") },
+  { "alt-caps", N_("Alt+Caps") },
+  { "ctrl-caps", N_("Ctrl+Caps") },
+  { NULL, NULL }
+};
+
 static void
 cc_keyboard_option_constructed (GObject *object)
 {
@@ -296,11 +324,11 @@ cc_keyboard_option_constructed (GObject *object)
   else
     {
       gint i;
-      for (i = 0; cc_input_switcher_options[i].value; i++)
+      for (i = 0; input_switcher_options[i].value; i++)
         {
           gtk_list_store_insert_with_values (self->store, NULL, -1,
-                                             XKB_OPTION_DESCRIPTION_COLUMN, _(cc_input_switcher_options[i].description),
-                                             XKB_OPTION_ID_COLUMN, cc_input_switcher_options[i].value,
+                                             XKB_OPTION_DESCRIPTION_COLUMN, input_switcher_options[i].description,
+                                             XKB_OPTION_ID_COLUMN, input_switcher_options[i].value,
                                              -1);
         }
     }
