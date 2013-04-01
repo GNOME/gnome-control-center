@@ -12,13 +12,14 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">18</property>
+        <property name="spacing">6</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkImage" id="system_image">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="resource">/org/gnome/control-center/info/GnomeLogoVerticalMedium.svg</property>
+            <property name="pixel_size">128</property>
+            <property name="icon_name">fedora-logo-icon</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -27,11 +28,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="version_label">
+          <object class="GtkLabel" id="os_name_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label">Version 3.0</property>
             <property name="selectable">True</property>
+            <property name="margin-bottom">24</property>
             <attributes>
               <attribute name="scale" value="1.25"/>
             </attributes>
@@ -118,8 +120,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
-                <property name="label" translatable="yes" comments="To translators: this field contains the distro name and version">OS name</property>
-                <property name="mnemonic_widget">os_name_label</property>
+                <property name="label">GNOME</property>
+                <property name="mnemonic_widget">version_label</property>
                 <style>
                  <class name="dim-label"/>
                 </style>
@@ -228,7 +230,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="os_name_label">
+              <object class="GtkLabel" id="version_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>

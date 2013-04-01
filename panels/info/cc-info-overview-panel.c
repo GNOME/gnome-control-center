@@ -435,7 +435,7 @@ static char *
 get_os_name (void)
 {
   GHashTable *os_info;
-  gchar *name, *version_id, *pretty_name, *build_id;
+  gchar *name, *version_id, *build_id;
   gchar *result = NULL;
   g_autofree gchar *name_version = NULL;
 
@@ -446,12 +446,9 @@ get_os_name (void)
 
   name = g_hash_table_lookup (os_info, "NAME");
   version_id = g_hash_table_lookup (os_info, "VERSION_ID");
-  pretty_name = g_hash_table_lookup (os_info, "PRETTY_NAME");
   build_id = g_hash_table_lookup (os_info, "BUILD_ID");
 
-  if (pretty_name)
-    name_version = g_strdup (pretty_name);
-  else if (name && version_id)
+  if (name && version_id)
     name_version = g_strdup_printf ("%s %s", name, version_id);
   else
     name_version = g_strdup (_("Unknown"));
