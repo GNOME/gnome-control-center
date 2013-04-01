@@ -38,6 +38,7 @@
 
 #define XKB_OPTION_GROUP_LVL3 "lv3"
 #define XKB_OPTION_GROUP_COMP "Compose key"
+#define XKB_OPTION_GROUP_GRP  "grp"
 
 enum
 {
@@ -93,6 +94,30 @@ static const gchar *xkb_option_comp_whitelist[] = {
   "compose:lctrl",
   "compose:rctrl",
   "compose:caps",
+  NULL
+};
+
+static const gchar *xkb_option_grp_whitelist[] = {
+  "grp:toggle",
+  "grp:lalt_toggle",
+  "grp:lwin_toggle",
+  "grp:rwin_toggle",
+  "grp:lshift_toggle",
+  "grp:rshift_toggle",
+  "grp:lctrl_toggle",
+  "grp:rctrl_toggle",
+  "grp:sclk_toggle",
+  "grp:menu_toggle",
+  "grp:caps_toggle",
+  "grp:shift_caps_toggle",
+  "grp:alt_caps_toggle",
+  "grp:alt_space_toggle",
+  "grp:ctrl_shift_toggle",
+  "grp:lctrl_lshift_toggle",
+  "grp:rctrl_rshift_toggle",
+  "grp:ctrl_alt_toggle",
+  "grp:alt_shift_toggle",
+  "grp:lalt_lshift_toggle",
   NULL
 };
 
@@ -232,6 +257,8 @@ cc_keyboard_option_constructed (GObject *object)
     self->whitelist = xkb_option_lvl3_whitelist;
   else if (g_str_equal (self->group, XKB_OPTION_GROUP_COMP))
     self->whitelist = xkb_option_comp_whitelist;
+  else if (g_str_equal (self->group, XKB_OPTION_GROUP_GRP))
+    self->whitelist = xkb_option_grp_whitelist;
   else
     g_assert_not_reached ();
 
@@ -318,6 +345,11 @@ cc_keyboard_option_get_all (void)
                                  g_object_new (CC_TYPE_KEYBOARD_OPTION,
                                                "group", XKB_OPTION_GROUP_COMP,
                                                "description", _("Compose Key"),
+                                               NULL));
+  objects_list = g_list_prepend (objects_list,
+                                 g_object_new (CC_TYPE_KEYBOARD_OPTION,
+                                               "group", XKB_OPTION_GROUP_GRP,
+                                               "description", _("Modifiers-only switch to next source"),
                                                NULL));
   return objects_list;
 }
