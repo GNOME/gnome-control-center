@@ -3,7 +3,6 @@
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkDialog" id="locations_dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="default_height">400</property>
     <property name="default_width">400</property>
     <property name="modal">True</property>
@@ -45,6 +44,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
+            <property name="border-width">5</property>
             <child>
               <object class="GtkScrolledWindow" id="locations_scrolledwindow">
                 <property name="visible">True</property>
