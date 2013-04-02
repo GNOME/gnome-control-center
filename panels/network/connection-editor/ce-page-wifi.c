@@ -117,13 +117,15 @@ connect_wifi_page (CEPageWifi *page)
         g_object_bind_property (sc, "autoconnect",
                                 widget, "active",
                                 G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+        g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
+
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
                                                      "all_user_check"));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
                                       nm_setting_connection_get_num_permissions (sc) == 0);
-
         g_signal_connect (widget, "toggled",
                           G_CALLBACK (all_user_changed), page);
+        g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
 }
 
 static void
