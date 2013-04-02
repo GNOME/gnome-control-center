@@ -24,7 +24,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <libnotify/notify.h>
 
 #include "cc-application.h"
 #include "cc-panel-loader.h"
@@ -288,8 +287,6 @@ cc_application_startup (GApplication *application)
 
   /* register a symbolic icon size for use in sidebar lists */
   gtk_icon_size_register ("cc-sidebar-list", 24, 24);
-
-  notify_init ("gnome-control-center");
 
   action = g_simple_action_new ("help", NULL);
   g_action_map_add_action (G_ACTION_MAP (application), G_ACTION (action));

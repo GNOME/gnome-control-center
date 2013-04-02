@@ -117,8 +117,7 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  gthread-2.0
  gio-2.0
  gio-unix-2.0
- gsettings-desktop-schemas >= $SCHEMAS_REQUIRED_VERSION
- libnotify >= $LIBNOTIFY_REQUIRED_VERSION"
+ gsettings-desktop-schemas >= $SCHEMAS_REQUIRED_VERSION"
 
 LIBGD_INIT([_view-common notification main-toolbar header-bar stack static])
 
