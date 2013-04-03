@@ -359,11 +359,19 @@ cc_keyboard_option_get_all (void)
   objects_list = g_list_prepend (objects_list,
                                  g_object_new (CC_TYPE_KEYBOARD_OPTION,
                                                "group", XKB_OPTION_GROUP_LVL3,
+                                               /* Translators: This key is also known as 'third level
+                                                * chooser'. AltGr is often used for this purpose. See
+                                                * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+                                                */
                                                "description", _("Alternative Characters Key"),
                                                NULL));
   objects_list = g_list_prepend (objects_list,
                                  g_object_new (CC_TYPE_KEYBOARD_OPTION,
                                                "group", XKB_OPTION_GROUP_COMP,
+                                              /* Translators: The Compose key is used to initiate key
+                                               * sequences that are combined to form a single character.
+                                               * See http://en.wikipedia.org/wiki/Compose_key
+                                               */
                                                "description", _("Compose Key"),
                                                NULL));
 
