@@ -473,11 +473,11 @@ static const gchar *
 get_heading_name (PlaceType place)
 {
   if (place == PLACE_XDG)
-    return _("Places");
+    return C_("Search Location", "Places");
   if (place == PLACE_BOOKMARKS)
-    return _("Bookmarks");
+    return C_("Search Location", "Bookmarks");
   if (place == PLACE_OTHER)
-    return _("Other");
+    return C_("Search Location", "Other");
 
   g_assert_not_reached ();
   return NULL;

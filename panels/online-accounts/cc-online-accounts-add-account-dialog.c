@@ -188,7 +188,7 @@ add_account_dialog_create_provider_ui (GoaPanelAddAccountDialog *add_account,
     {
       g_object_set_data (G_OBJECT (row_grid), "provider", NULL);
       icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
-      name = g_strdup (_("Other"));
+      name = g_strdup (C_("Online Account", "Other"));
     }
   else
     {

@@ -1088,7 +1088,7 @@ get_locale_infos (GtkWidget *chooser)
   /* Add a "Other" locale to hold the remaining input sources */
   info = g_new0 (LocaleInfo, 1);
   info->id = g_strdup ("");
-  info->name = g_strdup (_("Other"));
+  info->name = g_strdup (C_("Input Source", "Other"));
   info->unaccented_name = g_strdup ("");
   info->untranslated_name = g_strdup ("");
   g_hash_table_replace (priv->locales, info->id, info);
