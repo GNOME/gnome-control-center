@@ -1142,7 +1142,6 @@ static const guint forbidden_keyvals[] = {
   GDK_KEY_KP_Enter,
   GDK_KEY_Return,
 
-  GDK_KEY_space,
   GDK_KEY_Mode_switch
 };
 
@@ -1285,8 +1284,8 @@ accel_edited_callback (GtkCellRendererText   *cell,
            || (keyval >= GDK_KEY_Greek_ALPHAaccent && keyval <= GDK_KEY_Greek_omega)
            || (keyval >= GDK_KEY_hebrew_doublelowline && keyval <= GDK_KEY_hebrew_taf)
            || (keyval >= GDK_KEY_Thai_kokai && keyval <= GDK_KEY_Thai_lekkao)
-           || (keyval >= GDK_KEY_Hangul && keyval <= GDK_KEY_Hangul_Special)
            || (keyval >= GDK_KEY_Hangul_Kiyeog && keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
+           || (keyval == GDK_KEY_space && mask == 0)
            || keyval_is_forbidden (keyval)) {
         GtkWidget *dialog;
         char *name;
