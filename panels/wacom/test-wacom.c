@@ -11,7 +11,7 @@
 void
 cc_wacom_panel_switch_to_panel (CcWacomPanel *self, const char *panel)
 {
-	g_message ("Should launch display preferences here");
+	g_message ("Should launch %s preferences here", panel);
 }
 
 static void

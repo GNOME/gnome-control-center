@@ -1033,6 +1033,14 @@ display_clicked_cb (GtkButton   *button,
 	return TRUE;
 }
 
+static gboolean
+mouse_clicked_cb (GtkButton   *button,
+		  CcWacomPage *page)
+{
+	cc_wacom_panel_switch_to_panel (page->priv->panel, "mouse");
+	return TRUE;
+}
+
 /* Boilerplate code goes below */
 
 static void
@@ -1158,6 +1166,9 @@ cc_wacom_page_init (CcWacomPage *self)
 	g_signal_connect (G_OBJECT (WID ("display-link")), "activate-link",
 			  G_CALLBACK (display_clicked_cb), self);
 
+	g_signal_connect (G_OBJECT (WID ("mouse-link")), "activate-link",
+			  G_CALLBACK (mouse_clicked_cb), self);
+
 	g_signal_connect (G_OBJECT (WID ("display-mapping-button")), "clicked",
 			  G_CALLBACK (display_mapping_button_clicked_cb), self);
 
@@ -1272,13 +1283,27 @@ remove_display_link (CcWacomPagePrivate *priv)
 }
 
 static void
+remove_mouse_link (CcWacomPagePrivate *priv)
+{
+        gtk_widget_destroy (WID ("mouse-link"));
+
+        gtk_container_child_set (CWID ("main-grid"),
+                                 WID ("tablet-buttons-box"),
+                                 "top_attach", 2, NULL);
+}
+
+static void
 update_tablet_ui (CcWacomPage *page,
 		  int          layout)
 {
 	CcWacomPagePrivate *priv;
 	gboolean has_monitor = FALSE;
+	GsdWacomStylus *puck;
 
 	priv = page->priv;
+	puck = gsd_wacom_device_get_stylus_for_type (priv->stylus, WACOM_STYLUS_TYPE_PUCK);
+	if (puck == NULL)
+		remove_mouse_link (priv);
 
 	/* Hide the pad buttons if no pad is present */
 	gtk_widget_set_visible (WID ("map-buttons-button"), priv->pad != NULL);
@@ -1302,7 +1327,6 @@ update_tablet_ui (CcWacomPage *page,
 		if (gsd_wacom_device_get_display_monitor (priv->stylus) >= 0)
 			has_monitor = TRUE;
 		gtk_widget_set_sensitive (WID ("button-calibrate"), has_monitor);
-		gtk_widget_show (WID ("display-link"));
 
 		gtk_container_child_set (CWID ("main-grid"),
 					 WID ("tablet-buttons-box"),
