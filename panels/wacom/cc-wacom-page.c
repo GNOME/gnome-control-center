@@ -22,6 +22,10 @@
 
 #include <config.h>
 
+#ifdef FAKE_AREA
+#include <gdk/gdk.h>
+#endif /* FAKE_AREA */
+
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
@@ -267,7 +271,26 @@ calibrate_button_clicked_cb (GtkButton   *button,
 	    calibration[2] == -1 &&
 	    calibration[3] == -1) {
 		gint *device_cal;
+
+#ifdef FAKE_AREA
+		GdkScreen *screen;
+		screen = gdk_screen_get_default ();
+
+		device_cal = g_new0 (int, 4);
+		device_cal[0] = 0;
+		device_cal[1] = gdk_screen_get_width (screen);
+		device_cal[2] = 0;
+		device_cal[3] = gdk_screen_get_height (screen);
+#else
 		device_cal = gsd_wacom_device_get_area (page->priv->stylus);
+
+		if (device_cal == NULL) {
+			g_warning ("Failed to get device's area. "
+				   "Not running calibration.");
+			return;
+		}
+#endif /* FAKE_AREA */
+
 		for (i = 0; i < 4; i++)
 			calibration[i] = device_cal[i];
 		g_free (device_cal);

@@ -55,8 +55,8 @@ test_wacom_SOURCES =			\
 	gsd-input-helper.h		\
 	gsd-enums.h
 
-test_wacom_CPPFLAGS = $(INCLUDES)
-test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
+test_wacom_CPPFLAGS = $(INCLUDES) -DFAKE_AREA
+test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator-test.la
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/wacom.gresource.xml)
 cc-wacom-resources.c: wacom.gresource.xml $(resource_files)
