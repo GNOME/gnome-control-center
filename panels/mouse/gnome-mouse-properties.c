@@ -83,6 +83,7 @@ scrollmethod_changed_event (GtkToggleButton *button, GtkBuilder *dialog)
 		method = GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING;
 
 	g_settings_set_enum (touchpad_settings, "scroll-method", method);
+	g_settings_set_boolean (touchpad_settings, "horiz-scroll-enabled", TRUE);
 }
 
 static void
