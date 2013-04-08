@@ -80,6 +80,7 @@ struct _CcRegionPanelPrivate {
         GtkWidget   *login_button;
         GtkWidget   *login_label;
         gboolean     login;
+        gboolean     login_auto_apply;
         GPermission *permission;
         SystemOp     op;
         GDBusProxy  *localed;
@@ -368,6 +369,8 @@ update_language (CcRegionPanel *self,
                 if (g_strcmp0 (language, priv->language) == 0)
                         return;
                 act_user_set_language (priv->user, language);
+                if (priv->login_auto_apply)
+                        set_localed_locale (self);
                 maybe_notify (self, LC_MESSAGES, language);
         }
 }
@@ -1021,6 +1024,8 @@ update_input (CcRegionPanel *self)
                 set_localed_input (self);
         } else {
                 set_input_settings (self);
+                if (priv->login_auto_apply)
+                        set_localed_input (self);
         }
 }
 
@@ -1630,10 +1635,30 @@ login_changed (CcRegionPanel *self)
 }
 
 static void
+set_login_button_visibility (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        gboolean has_multiple_users;
+        gboolean loaded;
+
+        g_object_get (priv->user_manager, "is-loaded", &loaded, NULL);
+        if (!loaded)
+          return;
+
+        g_object_get (priv->user_manager, "has-multiple-users", &has_multiple_users, NULL);
+
+        priv->login_auto_apply = !has_multiple_users && g_permission_get_allowed (priv->permission);
+        gtk_widget_set_visible (priv->login_button, !priv->login_auto_apply);
+
+        g_signal_handlers_disconnect_by_func (priv->user_manager, set_login_button_visibility, self);
+}
+
+static void
 setup_login_button (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GDBusConnection *bus;
+        gboolean loaded;
 
         priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
@@ -1650,15 +1675,17 @@ setup_login_button (CcRegionPanel *self)
 
         priv->login_label = WID ("login-label");
         priv->login_button = gtk_toggle_button_new_with_label (_("Login Screen"));
-
+        gtk_widget_set_visible (priv->login_button, FALSE);
         gtk_widget_set_sensitive (priv->login_button, FALSE);
-
-        g_object_bind_property (priv->user_manager, "has-multiple-users",
-                                priv->login_button, "visible",
-                                G_BINDING_SYNC_CREATE);
-
         g_signal_connect_swapped (priv->login_button, "notify::active",
                                   G_CALLBACK (login_changed), self);
+
+        g_object_get (priv->user_manager, "is-loaded", &loaded, NULL);
+        if (loaded)
+                set_login_button_visibility (self);
+        else
+                g_signal_connect_swapped (priv->user_manager, "notify::is-loaded",
+                                          G_CALLBACK (set_login_button_visibility), self);
 }
 
 static void
