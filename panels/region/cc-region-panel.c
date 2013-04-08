@@ -356,21 +356,34 @@ maybe_notify (CcRegionPanel *self,
 static void set_localed_locale (CcRegionPanel *self);
 
 static void
+set_system_language (CcRegionPanel *self,
+                     const gchar   *language)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+
+        if (g_strcmp0 (language, priv->system_language) == 0)
+                return;
+
+        g_free (priv->system_language);
+        priv->system_language = g_strdup (language);
+
+        set_localed_locale (self);
+}
+
+static void
 update_language (CcRegionPanel *self,
                  const gchar   *language)
 {
 	CcRegionPanelPrivate *priv = self->priv;
 
         if (priv->login) {
-                if (g_strcmp0 (language, priv->system_language) == 0)
-                        return;
-                set_localed_locale (self);
+                set_system_language (self, language);
         } else {
                 if (g_strcmp0 (language, priv->language) == 0)
                         return;
                 act_user_set_language (priv->user, language);
                 if (priv->login_auto_apply)
-                        set_localed_locale (self);
+                        set_system_language (self, language);
                 maybe_notify (self, LC_MESSAGES, language);
         }
 }
