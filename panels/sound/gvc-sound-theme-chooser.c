@@ -671,7 +671,7 @@ update_theme (GvcSoundThemeChooser *chooser)
         }
 
         if (g_strcmp0 (last_theme, chooser->priv->current_theme) != 0) {
-                g_free (chooser->priv->current_parent);
+                g_clear_pointer (&chooser->priv->current_parent, g_free);
                 if (load_theme_name (chooser->priv->current_theme,
                                      &chooser->priv->current_parent) == FALSE) {
                         g_free (chooser->priv->current_theme);
