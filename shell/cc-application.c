@@ -30,9 +30,12 @@
 #include "cc-shell-log.h"
 #include "cc-window.h"
 
+#if defined(HAVE_CHEESE) || defined(HAVE_WACOM)
+#include <clutter-gtk/clutter-gtk.h>
+#endif /* HAVE_CHEESE || HAVE_WACOM */
+
 #ifdef HAVE_CHEESE
 #include <cheese-gtk.h>
-#include <clutter-gtk/clutter-gtk.h>
 #endif /* HAVE_CHEESE */
 
 struct _CcApplicationPrivate
@@ -277,13 +280,13 @@ cc_application_startup (GApplication *application)
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
 
-#ifdef HAVE_CHEESE
+#if defined(HAVE_CHEESE) || defined(HAVE_WACOM)
   if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS)
     {
       g_critical ("Unable to initialize Clutter");
       return;
     }
-#endif /* HAVE_CHEESE */
+#endif /* HAVE_CHEESE || HAVE_WACOM */
 
   /* register a symbolic icon size for use in sidebar lists */
   gtk_icon_size_register ("cc-sidebar-list", 24, 24);

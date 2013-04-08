@@ -34,7 +34,7 @@
 #include "cc-wacom-mapping-panel.h"
 #include "cc-wacom-stylus-page.h"
 #include "gsd-enums.h"
-#include "gui_gtk.h"
+#include "calibrator-gui.h"
 
 #include <string.h>
 

@@ -28,10 +28,11 @@
 #include <string.h>
 #include <dirent.h>
 #include <glib/gi18n.h>
+#include <clutter-gtk/clutter-gtk.h>
 
 #include <X11/extensions/XInput.h>
 
-#include "gui_gtk.h"
+#include "calibrator-gui.h"
 #include "calibrator.h"
 
 /**
@@ -397,7 +398,11 @@ int main(int argc, char** argv)
     g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
     /* GTK setup */
-    gtk_init(&argc, &argv);
+    if (gtk_clutter_init (&argc, &argv) != CLUTTER_INIT_SUCCESS)
+    {
+      g_critical ("Unable to initialize Clutter");
+      return 1;
+    }
 
     calib_area = calib_area_new (NULL,
 				 0,  /* monitor */

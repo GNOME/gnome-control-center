@@ -2,6 +2,7 @@ INCLUDES =					\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	$(CHEESE_CFLAGS)			\
+	$(WACOM_PANEL_CFLAGS)			\
 	-I$(top_srcdir)/panels/common/		\
 	-I$(top_srcdir)/libgd
 

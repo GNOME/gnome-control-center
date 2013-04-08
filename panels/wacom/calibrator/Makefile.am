@@ -13,8 +13,12 @@ noinst_LTLIBRARIES = libwacom-calibrator.la libwacom-calibrator-test.la
 libwacom_calibrator_la_SOURCES =	\
 	calibrator.c			\
 	calibrator.h			\
-	gui_gtk.c			\
-	gui_gtk.h
+	calibrator-gui.c		\
+	calibrator-gui.h		\
+	cc-clock-actor.c		\
+	cc-clock-actor.h		\
+	cc-target-actor.c		\
+	cc-target-actor.h
 
 libwacom_calibrator_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
 libwacom_calibrator_la_LDFLAGS = $(PANEL_LDFLAGS)
@@ -31,8 +35,12 @@ test_calibrator_SOURCES =		\
 	main.c				\
 	calibrator.c			\
 	calibrator.h			\
-	gui_gtk.c			\
-	gui_gtk.h
+	calibrator-gui.c		\
+	calibrator-gui.h		\
+	cc-clock-actor.c		\
+	cc-clock-actor.h		\
+	cc-target-actor.c		\
+	cc-target-actor.h
 
 test_calibrator_CPPFLAGS = $(INCLUDES)
 test_calibrator_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)

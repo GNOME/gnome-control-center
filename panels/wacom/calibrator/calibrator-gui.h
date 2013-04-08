@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  */
 
-#ifndef _gui_gtk_h
-#define _gui_gtk_h
+#ifndef __CALIBRATOR_GUI_H__
+#define __CALIBRATOR_GUI_H__
 
 #include <gtk/gtk.h>
 
@@ -53,6 +53,8 @@ gboolean calib_area_finish (CalibArea *area,
 
 void calib_area_free (CalibArea *area);
 
-void calib_area_get_display_size (CalibArea *area, gint *width, gint *height);
+void calib_area_get_display_size (CalibArea *area,
+				  gint      *width,
+				  gint      *height);
 
-#endif /* _gui_gtk_h */
+#endif /* __CALIBRATOR_GUI_H__ */
