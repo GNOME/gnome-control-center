@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-26 19:10+0000\n"
-"PO-Revision-Date: 2013-03-26 20:31+0100\n"
+"POT-Creation-Date: 2013-04-09 21:55+0000\n"
+"PO-Revision-Date: 2013-04-10 23:37+0200\n"
 "Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -884,7 +884,7 @@ msgstr "Nem találhatók nyelvek"
 #: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:408
 #: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1364,7 +1364,7 @@ msgstr "Frissítések keresése"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:44
 msgid "Details"
 msgstr "Részletek"
 
@@ -1838,7 +1838,9 @@ msgid "General"
 msgstr "Általános"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "double click, speed"
 msgid "Slow"
 msgstr "Lassú"
 
@@ -1847,7 +1849,9 @@ msgid "Double-click timeout"
 msgstr "Dupla kattintás időköze"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "double click, speed"
 msgid "Fast"
 msgstr "Gyors"
 
@@ -1878,22 +1882,50 @@ msgid "_Pointer speed"
 msgstr "M_utató sebessége"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "mouse pointer, speed"
+msgid "Slow"
+msgstr "Lassú"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "mouse pointer, speed"
+msgid "Fast"
+msgstr "Gyors"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "Érintőtábla"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "touchpad pointer, speed"
+msgid "Slow"
+msgstr "Lassú"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "touchpad pointer, speed"
+msgid "Fast"
+msgstr "Gyors"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Disable while _typing"
 msgstr "_Kikapcsolás gépelés közben"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
 msgstr "K_oppintás a kattintáshoz"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Two _finger scroll"
 msgstr "Kétujjas gö_rgetés"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "C_ontent sticks to fingers"
 msgstr "Ujjak_hoz tapadó tartalom"
 
@@ -1932,21 +1964,21 @@ msgstr "Egy kattintás, másodlagos gomb"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:341
+#: ../panels/network/cc-network-panel.c:364
 msgid "Air_plane Mode"
 msgstr "_Repülő mód"
 
-#: ../panels/network/cc-network-panel.c:904
+#: ../panels/network/cc-network-panel.c:927
 msgid "Network proxy"
 msgstr "Hálózati proxy"
 
-#: ../panels/network/cc-network-panel.c:1083 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1217
+#: ../panels/network/cc-network-panel.c:1240
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "A rendszer hálózati szolgáltatásai nem kompatibilisek ezzel a verzióval."
@@ -2078,7 +2110,7 @@ msgstr "Kitűnő"
 #: ../panels/network/connection-editor/ce-page-ethernet.c:210
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
 #: ../panels/network/connection-editor/ce-page-wifi.c:253
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "Személyazonosság"
 
@@ -2128,13 +2160,13 @@ msgid "Delete Route"
 msgstr "Útvonal törlése"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "Automatikus (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:620
 #: ../panels/network/connection-editor/ce-page-ip6.c:622
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "Kézi"
 
@@ -2144,7 +2176,7 @@ msgid "Link-Local Only"
 msgstr "Csak közvetlen kapcsolat"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:925
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2166,12 +2198,12 @@ msgid "Automatic, DHCP only"
 msgstr "Automatikus, csak DHCP"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:886
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:63
+#: ../panels/network/network-wifi.ui.h:49
 msgid "Reset"
 msgstr "Visszaállítás"
 
@@ -2221,7 +2253,7 @@ msgstr "Kapcsolat sebessége"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
-#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "IPv4-cím"
@@ -2230,14 +2262,14 @@ msgstr "IPv4-cím"
 #: ../panels/network/net-device-ethernet.c:160
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "IPv6-cím"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
-#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "Hardvercím"
@@ -2245,7 +2277,7 @@ msgstr "Hardvercím"
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
 msgid "Default Route"
 msgstr "Alapértelmezett útvonal"
@@ -2255,7 +2287,7 @@ msgstr "Alapértelmezett útvonal"
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
 msgid "DNS"
 msgstr "DNS"
@@ -2303,7 +2335,7 @@ msgstr "_Név"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:36
 msgid "_MAC Address"
 msgstr "_MAC cím"
 
@@ -2347,13 +2379,13 @@ msgid "The zone defines the trust level of the connection"
 msgstr "A zóna határozza meg a kapcsolat megbízhatósági szintjét"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:22
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:23
 msgid "_Addresses"
 msgstr "_Cím"
 
@@ -2364,7 +2396,7 @@ msgstr "Automatikus DNS"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Routes"
 msgstr "Útvonalak"
 
@@ -2375,66 +2407,66 @@ msgstr "Automatikus útvonalak"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Use this connection _only for resources on its network"
 msgstr "A kapcsolat _használata csak a hálózatán lévő erőforrásokhoz"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:34
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:267
+#: ../panels/network/connection-editor/net-connection-editor.c:268
 msgid "Unable to open connection editor"
 msgstr "A kapcsolatszerkesztő megnyitása sikertelen"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:282
+#: ../panels/network/connection-editor/net-connection-editor.c:283
 msgid "New Profile"
 msgstr "Új profil"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:504
+#: ../panels/network/connection-editor/net-connection-editor.c:505
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1068
 msgid "_Add"
 msgstr "_Hozzáadás"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
+#: ../panels/network/connection-editor/net-connection-editor.c:587
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bond"
 msgstr "Bond"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "Bridge"
 msgstr "Bridge"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:590
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:739
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "A VPN bővítmények nem tölthetők be"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:804
 msgid "Import from file…"
 msgstr "Importálás fájlból…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:870
+#: ../panels/network/connection-editor/net-connection-editor.c:871
 msgid "Add Network Connection"
 msgstr "Hálózati kapcsolat hozzáadása"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Reset"
 msgstr "_Visszaállítás"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1411
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Elfelejtés"
 
@@ -2589,9 +2621,9 @@ msgstr "Utolsó használat"
 
 #: ../panels/network/net-device-ethernet.c:337
 #: ../panels/network/net-device-wifi.c:1549
-#: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
+#: ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "Beállítások…"
@@ -2683,6 +2715,11 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "Vezetékes"
+
+#: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
 msgstr "_Profil hozzáadása…"
 
@@ -2753,7 +2790,7 @@ msgstr "FTP proxy port"
 msgid "Socks proxy port"
 msgstr "SOCKS proxy port"
 
-#: ../panels/network/network-simple.ui.h:6
+#: ../panels/network/network-simple.ui.h:7
 msgid "Turn device off"
 msgstr "Eszköz kikapcsolása"
 
@@ -2818,94 +2855,50 @@ msgid "None"
 msgstr "Nincs"
 
 #: ../panels/network/network-wifi.ui.h:19
-msgid "blablabla"
-msgstr "blablabla"
-
-#: ../panels/network/network-wifi.ui.h:20
 msgid "Show P_assword"
 msgstr "J_elszó megjelenítése"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Make available to other users"
 msgstr "Elérhetővé tétel más felhasználóknak"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
 msgstr "személyazonosság"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
 msgstr "Csak automatikus (DHCP) címek"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Link-local only"
 msgstr "Csak közvetlen kapcsolat"
 
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Shared with other computers"
 msgstr "Más gépekkel megosztott"
 
 #: ../panels/network/network-wifi.ui.h:31
-msgid ""
-"Address\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Address\n"
-"section\n"
-"goes\n"
-"here"
-
-#: ../panels/network/network-wifi.ui.h:35
-msgid ""
-"DNS\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"DNS\n"
-"section\n"
-"goes\n"
-"here"
-
-#: ../panels/network/network-wifi.ui.h:40
-msgid ""
-"Routes\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Routes\n"
-"section\n"
-"goes\n"
-"here"
-
-#: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
 msgstr "A_utomatikusan lekért utak mellőzése"
 
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:33
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:37
 msgid "_Cloned MAC Address"
 msgstr "_Klónozott MAC-cím"
 
-#: ../panels/network/network-wifi.ui.h:51
-msgid "00:24:16:31:8G:7A"
-msgstr "00:24:16:31:8G:7A"
-
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:38
 msgid "hardware"
 msgstr "hardware"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:41
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2913,7 +2906,7 @@ msgstr ""
 "A kapcsolat beállításainak visszaállítása az alapértelmezésekre, de "
 "megjegyzés előnyben részesítettként."
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:42
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2921,59 +2914,59 @@ msgstr ""
 "A hálózattal kapcsolatos minden adat eltávolítása, és ne próbáljon "
 "automatikusan csatlakozni."
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
 msgstr "visszaállítás"
 
-#: ../panels/network/network-wifi.ui.h:62
+#: ../panels/network/network-wifi.ui.h:48
 msgid "Hardware"
 msgstr "Hardver"
 
-#: ../panels/network/network-wifi.ui.h:64
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Wi-Fi Hotspot"
 msgstr "Wi-Fi hotspot"
 
-#: ../panels/network/network-wifi.ui.h:65
+#: ../panels/network/network-wifi.ui.h:51
 msgid "_Turn On"
 msgstr "_Bekapcsolás"
 
-#: ../panels/network/network-wifi.ui.h:66
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:67
+#: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
 msgstr "Wi-Fi kikapcsolása"
 
-#: ../panels/network/network-wifi.ui.h:68
+#: ../panels/network/network-wifi.ui.h:54
 msgid "_Use as Hotspot…"
 msgstr "H_asználat hotspotként…"
 
-#: ../panels/network/network-wifi.ui.h:69
+#: ../panels/network/network-wifi.ui.h:55
 msgid "_Connect to Hidden Network…"
 msgstr "Kapcsolódás _rejtett hálózathoz…"
 
-#: ../panels/network/network-wifi.ui.h:70
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
 msgstr "_Előzmények"
 
-#: ../panels/network/network-wifi.ui.h:71
+#: ../panels/network/network-wifi.ui.h:57
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Kapcsolja ki a Wi-Fi hálózathoz kapcsolódáshoz"
 
-#: ../panels/network/network-wifi.ui.h:72
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Network Name"
 msgstr "Hálózat neve"
 
-#: ../panels/network/network-wifi.ui.h:73
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Connected Devices"
 msgstr "Kapcsolódott eszközök"
 
-#: ../panels/network/network-wifi.ui.h:74
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Security type"
 msgstr "Biztonsági típus"
 
-#: ../panels/network/network-wifi.ui.h:75
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Security key"
 msgstr "Biztonsági kulcs"
 
@@ -3590,56 +3583,56 @@ msgid "Other"
 msgstr "Egyéb"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Fiók hozzáadása"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
 msgid "Mail"
 msgstr "Levelek"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
 msgid "Contacts"
 msgstr "Névjegyek"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
 msgid "Resources"
 msgstr "Erőforrások"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:370
 msgid "Error logging into the account"
 msgstr "Hiba lépett fel a fiókba bejelentkezéskor"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:430
+#: ../panels/online-accounts/cc-online-accounts-panel.c:442
 msgid "Credentials have expired."
 msgstr "A hitelesítési adatok lejártak."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:434
+#: ../panels/online-accounts/cc-online-accounts-panel.c:446
 msgid "Sign in to enable this account."
 msgstr "Jelentkezzen be a fiók engedélyezéséhez."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:439
+#: ../panels/online-accounts/cc-online-accounts-panel.c:451
 msgid "_Sign In"
 msgstr "_Bejelentkezés"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:684
+#: ../panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error creating account"
 msgstr "Hiba a fiók létrehozásakor"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:726
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Error removing account"
 msgstr "Hiba a fiók eltávolításakor"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:762
+#: ../panels/online-accounts/cc-online-accounts-panel.c:772
 msgid "Are you sure you want to remove the account?"
 msgstr "Biztos benne, hogy el kívánja távolítani a fiókot?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:764
+#: ../panels/online-accounts/cc-online-accounts-panel.c:774
 msgid "This will not remove the account on the server."
 msgstr "Ez nem törli a kiszolgálón a fiókot."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:765
+#: ../panels/online-accounts/cc-online-accounts-panel.c:775
 msgid "_Remove"
 msgstr "_Eltávolítás"
 
@@ -4029,7 +4022,7 @@ msgid "Authenticate"
 msgstr "Hitelesítés"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Password"
 msgstr "Jelszó"
 
@@ -4949,7 +4942,7 @@ msgstr "Könyvjelzők"
 msgid "Select Location"
 msgstr "Válasszon régiót"
 
-#: ../panels/search/cc-search-panel.c:193
+#: ../panels/search/cc-search-panel.c:182
 msgid "No applications found"
 msgstr "Nem találhatók alkalmazások"
 
@@ -5061,42 +5054,46 @@ msgid "Computer Name"
 msgstr "Számítógép neve"
 
 #: ../panels/sharing/sharing.ui.h:8
+msgid "Remote Login"
+msgstr "Távoli bejelentkezés"
+
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Some services are disabled because of no network access."
 msgstr "Egyes szolgáltatások le vannak tiltva, mert nincs hálózati kapcsolat"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "Médiamegosztás"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "Zenék, fényképek és videók megosztása a jelenlegi hálózaton."
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "Média megosztása ezen a hálózaton"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "Megosztott mappák"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "Oszlop"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "Mappa hozzáadása"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "Mappa eltávolítása"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Personal File Sharing"
 msgstr "Személyes fájlmegosztás"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:19
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5106,17 +5103,13 @@ msgstr ""
 "másokkal a jelenlegi hálózaton <a href=\"dav://%s\">dav://%s</a> "
 "használatával."
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Share Public Folder On This Network"
 msgstr "Nyilvános mappa megosztása ezen a hálózaton"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require Password"
 msgstr "Jelszó kérése"
-
-#: ../panels/sharing/sharing.ui.h:22
-msgid "Remote Login"
-msgstr "Távoli bejelentkezés"
 
 #: ../panels/sharing/sharing.ui.h:24
 #, no-c-format
@@ -6920,11 +6913,11 @@ msgstr "Megjelenítendő panel"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTUM…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:140
 msgid "- Settings"
 msgstr "- Beállítások"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:149
 #, c-format
 msgid ""
 "%s\n"
@@ -6934,15 +6927,15 @@ msgstr ""
 "Adja ki a(z) „%s --help” parancsot az elérhető parancssori kapcsolók teljes "
 "listájáért.\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:179
 msgid "Available panels:"
 msgstr "Elérhető panelek:"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:316
 msgid "Help"
 msgstr "Súgó"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:317
 msgid "Quit"
 msgstr "Kilépés"
 
@@ -6973,6 +6966,53 @@ msgstr "Minden beállítás"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Tulajdonságok;Beállítások;"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Slow"
+#~ msgstr "Lassú"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Fast"
+#~ msgstr "Gyors"
+
+#~ msgid "blablabla"
+#~ msgstr "blablabla"
+
+#~ msgid ""
+#~ "Address\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Address\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+
+#~ msgid ""
+#~ "DNS\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "DNS\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+
+#~ msgid ""
+#~ "Routes\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Routes\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+
+#~ msgid "00:24:16:31:8G:7A"
+#~ msgstr "00:24:16:31:8G:7A"
 
 #~| msgid "_Options"
 #~ msgid "_Options…"
@@ -7177,9 +7217,6 @@ msgstr "Tulajdonságok;Beállítások;"
 
 #~ msgid "_Connect"
 #~ msgstr "_Kapcsolódás"
-
-#~ msgid "Wired"
-#~ msgstr "Vezetékes"
 
 #~ msgid "Mesh"
 #~ msgstr "Háló"
