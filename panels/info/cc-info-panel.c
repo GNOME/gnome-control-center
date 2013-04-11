@@ -314,6 +314,8 @@ get_graphics_data_glx_renderer ()
   GLXFBConfig *config;
   GLXWindow glxwin;
   GLXContext context;
+  XSetWindowAttributes win_attributes;
+  XVisualInfo *visualInfo;
   char *renderer;
 
   gdk_error_trap_push ();
@@ -328,15 +330,21 @@ get_graphics_data_glx_renderer ()
     gdk_error_trap_pop_ignored ();
     return NULL;
   }
+  visualInfo = glXGetVisualFromFBConfig (display, *config);
+  win_attributes.colormap = XCreateColormap (display, DefaultRootWindow(display),
+                                        visualInfo->visual, AllocNone );
 
-  window = XCreateSimpleWindow (display, DefaultRootWindow (display),
+  window = XCreateWindow (display, DefaultRootWindow (display),
                                 0, 0, /* x, y */
                                 1, 1, /* width, height */
-                                0, 0, 0  /* border_width, border, background */);
+                                0,   /* border_width */
+                                visualInfo->depth, InputOutput,
+                                visualInfo->visual, CWColormap, &win_attributes);
   glxwin = glXCreateWindow (display, *config, window, NULL);
 
   context = glXCreateNewContext (display, *config, GLX_RGBA_TYPE,
                                  NULL, TRUE);
+  XFree (config);
 
   glXMakeContextCurrent (display, glxwin, glxwin, context);
   renderer = (char *) glGetString (GL_RENDERER);
@@ -346,6 +354,7 @@ get_graphics_data_glx_renderer ()
   glXDestroyContext (display, context);
   glXDestroyWindow (display, glxwin);
   XDestroyWindow (display, window);
+  XFree (visualInfo);
 
   if (gdk_error_trap_pop () != Success) {
     g_warning ("Failed to get OpenGL driver info");
