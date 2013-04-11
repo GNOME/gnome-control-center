@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-21 16:01+0000\n"
-"PO-Revision-Date: 2013-02-25 13:41+0100\n"
+"POT-Creation-Date: 2013-04-10 21:38+0000\n"
+"PO-Revision-Date: 2013-04-11 10:37+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -702,7 +702,6 @@ msgstr ""
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Color"
 
@@ -778,52 +777,71 @@ msgid "Plasma"
 msgstr "Plasma"
 
 #: ../panels/color/color.ui.h:49
+msgid "LCD (CCFL backlight)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:50
+msgid "LCD (RGB LED backlight)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:51
+msgid "LCD (white LED backlight)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:52
+msgid "Wide gamut LCD (CCFL backlight)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:53
+msgid "Wide gamut LCD (RGB LED backlight)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:54
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Alta"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:55
 msgid "40 minutes"
 msgstr "40 minutos"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:56
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Media"
 
-#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minutos"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:58
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baja"
 
-#: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 minutos"
 
-#: ../panels/color/color.ui.h:55
-#, fuzzy
+#: ../panels/color/color.ui.h:60
 #| msgid "Panel to display"
 msgid "Native to display"
-msgstr "Panel que mostrar"
+msgstr "Nativo de la pantalla"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:61
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Impresiones y publicaciones)"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:62
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:63
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografía y gráficos)"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:64
 msgid "D75"
 msgstr "D75"
 
@@ -863,13 +881,13 @@ msgstr "China"
 msgid "Other…"
 msgstr "Otro…"
 
-#: ../panels/common/cc-language-chooser.c:165
-#: ../panels/region/cc-format-chooser.c:256
+#: ../panels/common/cc-language-chooser.c:169
+#: ../panels/region/cc-format-chooser.c:259
 #: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Más…"
 
-#: ../panels/common/cc-language-chooser.c:174
+#: ../panels/common/cc-language-chooser.c:178
 msgid "No languages found"
 msgstr "No se han encontrado idiomas"
 
@@ -878,7 +896,7 @@ msgstr "No se han encontrado idiomas"
 #: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:408
 #: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -951,19 +969,19 @@ msgstr "Alt+Ctrl"
 
 #: ../panels/common/cc-util.c:45
 msgid "Caps"
-msgstr ""
+msgstr "Bloq. Mayús."
 
 #: ../panels/common/cc-util.c:46
 msgid "Shift+Caps"
-msgstr ""
+msgstr "Mayús+Bloq. Mayús."
 
 #: ../panels/common/cc-util.c:47
 msgid "Alt+Caps"
-msgstr ""
+msgstr "Alt+Bloq. Mayús."
 
 #: ../panels/common/cc-util.c:48
 msgid "Ctrl+Caps"
-msgstr ""
+msgstr "Ctrl+Bloq. Mayús."
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1360,7 +1378,7 @@ msgstr "Comprobando actualizaciones"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:44
 msgid "Details"
 msgstr "Detalles"
 
@@ -1579,7 +1597,7 @@ msgstr "Guardar la captura de una ventana en $PICTURES"
 #. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:7
 msgid "Save a screenshot of an area to $PICTURES"
-msgstr "Guardar la captura de una ventana en $PICTURES"
+msgstr "Guardar la captura de un área en $PICTURES"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:8
 msgid "Copy a screenshot to clipboard"
@@ -1651,10 +1669,9 @@ msgid "Compose Key"
 msgstr "Tecla de composición"
 
 #: ../panels/keyboard/cc-keyboard-option.c:371
-#, fuzzy
 #| msgid "Switch to next source"
 msgid "Modifiers-only switch to next source"
-msgstr "Cambiar a la fuente siguiente"
+msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
@@ -1836,7 +1853,9 @@ msgid "General"
 msgstr "General"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "double click, speed"
 msgid "Slow"
 msgstr "Lenta"
 
@@ -1845,7 +1864,9 @@ msgid "Double-click timeout"
 msgstr "Tiempo de espera de la pulsación doble"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "double click, speed"
 msgid "Fast"
 msgstr "Rápida"
 
@@ -1876,22 +1897,50 @@ msgid "_Pointer speed"
 msgstr "_Velocidad del puntero"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "mouse pointer, speed"
+msgid "Slow"
+msgstr "Lento"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "mouse pointer, speed"
+msgid "Fast"
+msgstr "Rápido"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "touchpad pointer, speed"
+msgid "Slow"
+msgstr "Lento"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "touchpad pointer, speed"
+msgid "Fast"
+msgstr "Rápido"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Disable while _typing"
 msgstr "Desac_tivar al escribir"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
 msgstr "Tocar para pulsar"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Two _finger scroll"
 msgstr "Despla_zamiento con dos dedos"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "C_ontent sticks to fingers"
 msgstr "El c_ontenido se adhiere a los dedos"
 
@@ -1930,21 +1979,21 @@ msgstr "Una sola pulsación, botón secundario"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:364
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:927
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1240
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
@@ -1972,7 +2021,7 @@ msgstr "Autenticación i_nterna"
 msgid "Security"
 msgstr "Seguridad"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "automático"
 
@@ -2072,10 +2121,10 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:255
+#: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "Identidad"
 
@@ -2125,13 +2174,13 @@ msgid "Delete Route"
 msgstr "Eliminar ruta"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "Automático (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:620
 #: ../panels/network/connection-editor/ce-page-ip6.c:622
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "Manual"
 
@@ -2141,7 +2190,7 @@ msgid "Link-Local Only"
 msgstr "Sólo enlace local"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:925
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2163,12 +2212,12 @@ msgid "Automatic, DHCP only"
 msgstr "Automático, DHCP únicamente"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:886
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:63
+#: ../panels/network/network-wifi.ui.h:49
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -2218,7 +2267,7 @@ msgstr "Velocidad de conexión"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
-#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
@@ -2227,14 +2276,14 @@ msgstr "Dirección IPv4"
 #: ../panels/network/net-device-ethernet.c:160
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
-#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "Dirección física"
@@ -2242,7 +2291,7 @@ msgstr "Dirección física"
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
 msgid "Default Route"
 msgstr "Ruta predeterminada"
@@ -2252,7 +2301,7 @@ msgstr "Ruta predeterminada"
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
 msgid "DNS"
 msgstr "DNS"
@@ -2300,7 +2349,7 @@ msgstr "_Nombre"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:36
 msgid "_MAC Address"
 msgstr "Dirección _MAC"
 
@@ -2314,26 +2363,44 @@ msgid "_Cloned Address"
 msgstr "Dirección _clonada"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "Conectar _automáticamente"
+msgid "bytes"
+msgstr "bytes"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "Hacer disponible para _otros usuarios"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "bytes"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "Conectar _automáticamente"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr ""
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+#| msgid "Default"
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "Predeterminada"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr ""
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:22
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:23
 msgid "_Addresses"
 msgstr "_Direcciones"
 
@@ -2344,7 +2411,7 @@ msgstr "DNS automático"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Routes"
 msgstr "Rutas"
 
@@ -2355,66 +2422,66 @@ msgstr "Rutas automáticas"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Use this connection _only for resources on its network"
 msgstr "Usar esta c_onexión sólo para los recursos en su red"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:34
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:267
+#: ../panels/network/connection-editor/net-connection-editor.c:268
 msgid "Unable to open connection editor"
 msgstr "No se pudo abrir el editor de conexiones"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:282
+#: ../panels/network/connection-editor/net-connection-editor.c:283
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:504
+#: ../panels/network/connection-editor/net-connection-editor.c:505
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1068
 msgid "_Add"
 msgstr "_Añadir"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
+#: ../panels/network/connection-editor/net-connection-editor.c:587
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bond"
 msgstr ""
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "Bridge"
 msgstr "Puente"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:590
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:739
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "No se pudieron cargar los complementos de VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:804
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:870
+#: ../panels/network/connection-editor/net-connection-editor.c:871
 msgid "Add Network Connection"
 msgstr "Añadir conexión de red"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Reset"
 msgstr "_Reiniciar"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1411
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Olvidar"
 
@@ -2493,7 +2560,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "Exportar conexión VPN…"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Error: no se pudo cargar el editor de conexiones VPN)"
 
@@ -2512,7 +2579,7 @@ msgstr "_BSSID"
 msgid "My Home Network"
 msgstr "Mi red privada"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "Hacer disponible para _otros usuarios"
 
@@ -2569,7 +2636,9 @@ msgstr "Usada última vez"
 
 #: ../panels/network/net-device-ethernet.c:337
 #: ../panels/network/net-device-wifi.c:1549
-#: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "Opciones…"
@@ -2579,7 +2648,7 @@ msgstr "Opciones…"
 msgid "Profile %d"
 msgstr "Perfil %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "Añadir una conexión nueva"
 
@@ -2628,13 +2697,13 @@ msgstr ""
 "Se perderán los detalles de las redes seleccionadas, incluyendo la "
 "contraseña y cualquier configuración personalizada."
 
-#: ../panels/network/net-device-wifi.c:1714
+#: ../panels/network/net-device-wifi.c:1712
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Histórico"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1726
+#: ../panels/network/net-device-wifi.c:1724
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
@@ -2660,6 +2729,11 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "Cableada"
+
+#: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
 msgstr "_Añadir perfil…"
 
@@ -2670,11 +2744,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "Proveedor"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
-msgid "_Options…"
-msgstr "_Opciones…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2735,7 +2804,7 @@ msgstr "Puerto para proxy FTP"
 msgid "Socks proxy port"
 msgstr "Puerto para proxy Socks"
 
-#: ../panels/network/network-simple.ui.h:6
+#: ../panels/network/network-simple.ui.h:7
 msgid "Turn device off"
 msgstr "Apagar dispositivo"
 
@@ -2800,82 +2869,50 @@ msgid "None"
 msgstr "Ninguna"
 
 #: ../panels/network/network-wifi.ui.h:19
-msgid "blablabla"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:20
 msgid "Show P_assword"
 msgstr "Mostrar contr_aseña"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Make available to other users"
 msgstr "Hacer disponible para el resto de usuarios"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
 msgstr "indentidad"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
 msgstr "Sólo direcciones automáticas (DHCP)"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Link-local only"
 msgstr "Solo enlace local"
 
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Shared with other computers"
 msgstr "Compartir con estos usuarios"
 
 #: ../panels/network/network-wifi.ui.h:31
-msgid ""
-"Address\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:35
-msgid ""
-"DNS\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:40
-msgid ""
-"Routes\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
 msgstr "_Ignorar rutas obtenidas automáticamente"
 
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:33
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:37
 msgid "_Cloned MAC Address"
 msgstr "Dirección MAC _clonada"
 
-#: ../panels/network/network-wifi.ui.h:51
-msgid "00:24:16:31:8G:7A"
-msgstr "00:24:16:31:8G:7A"
-
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:38
 msgid "hardware"
 msgstr "hardware"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:41
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2883,7 +2920,7 @@ msgstr ""
 "Restablecer la configuración de esta conexión a sus valores predeterminados, "
 "pero recordarla como una conexión favorita."
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:42
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2891,59 +2928,59 @@ msgstr ""
 "Quitar todos los detalles relativos a esta red y no volver a intentar "
 "conectarse automáticamente a ella."
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
 msgstr "reiniciar"
 
-#: ../panels/network/network-wifi.ui.h:62
+#: ../panels/network/network-wifi.ui.h:48
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../panels/network/network-wifi.ui.h:64
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Wi-Fi Hotspot"
 msgstr "Punto de acceso Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:65
+#: ../panels/network/network-wifi.ui.h:51
 msgid "_Turn On"
 msgstr "_Activar"
 
-#: ../panels/network/network-wifi.ui.h:66
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi"
 msgstr "Inalámbrica"
 
-#: ../panels/network/network-wifi.ui.h:67
+#: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
 msgstr "Apagar la Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:68
+#: ../panels/network/network-wifi.ui.h:54
 msgid "_Use as Hotspot…"
 msgstr "_Usar como «hotspot»…"
 
-#: ../panels/network/network-wifi.ui.h:69
+#: ../panels/network/network-wifi.ui.h:55
 msgid "_Connect to Hidden Network…"
 msgstr "Conectar a una red oculta…"
 
-#: ../panels/network/network-wifi.ui.h:70
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
 msgstr "_Histórico"
 
-#: ../panels/network/network-wifi.ui.h:71
+#: ../panels/network/network-wifi.ui.h:57
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Apagar para conectarse a una red inalámbrica"
 
-#: ../panels/network/network-wifi.ui.h:72
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Network Name"
 msgstr "Nombre de red"
 
-#: ../panels/network/network-wifi.ui.h:73
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Connected Devices"
 msgstr "Dispositivos conectados"
 
-#: ../panels/network/network-wifi.ui.h:74
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Security type"
 msgstr "Tipo de seguridad"
 
-#: ../panels/network/network-wifi.ui.h:75
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Security key"
 msgstr "Clave de seguridad"
 
@@ -3553,41 +3590,66 @@ msgstr "Mostrar los banners emergentes"
 msgid "Show in Lock Screen"
 msgstr "Mostrar en la pantalla de bloqueo"
 
-#. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
+#: ../panels/region/cc-input-chooser.c:1013
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgid "Other"
+msgstr "Otra"
+
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Añadir cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#| msgid "_Mail"
+msgid "Mail"
+msgstr "Correo"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#| msgid "Contact"
+msgid "Contacts"
+msgstr "Contactos"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+msgid "Resources"
+msgstr "Recursos"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:370
 msgid "Error logging into the account"
 msgstr "Error al iniciar sesión en la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:412
-msgid "Expired credentials. Please log in again."
-msgstr "Las credenciales han expirado. Inicie sesión de nuevo."
+#: ../panels/online-accounts/cc-online-accounts-panel.c:442
+msgid "Credentials have expired."
+msgstr "Las credenciales han caducado."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:415
-msgid "_Log In"
-msgstr "_Iniciar sesión"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:446
+#| msgid "Enable this account"
+msgid "Sign in to enable this account."
+msgstr "Firme para activar esta cuenta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:651
+#: ../panels/online-accounts/cc-online-accounts-panel.c:451
+msgid "_Sign In"
+msgstr "Iniciar _sesión"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error creating account"
 msgstr "Error al crear la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:693
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Error removing account"
 msgstr "Error al quitar la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:729
+#: ../panels/online-accounts/cc-online-accounts-panel.c:772
 msgid "Are you sure you want to remove the account?"
 msgstr "¿Está seguro de que quiere quitar la cuenta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:731
+#: ../panels/online-accounts/cc-online-accounts-panel.c:774
 msgid "This will not remove the account on the server."
 msgstr "Esto no quitará la cuenta en el servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:732
+#: ../panels/online-accounts/cc-online-accounts-panel.c:775
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -3818,7 +3880,6 @@ msgid "_Dim Screen when Inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
 #: ../panels/power/cc-power-panel.c:1481
-#| msgid "Full Screen"
 msgid "_Blank Screen"
 msgstr "_Apagar la pantalla"
 
@@ -3826,9 +3887,17 @@ msgstr "_Apagar la pantalla"
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
+#: ../panels/power/cc-power-panel.c:1521
+msgid "Turns off wireless devices"
+msgstr "Apaga los dispositivos inalámbricos"
+
 #: ../panels/power/cc-power-panel.c:1544
 msgid "_Mobile Broadband"
 msgstr "Banda ancha _móvil"
+
+#: ../panels/power/cc-power-panel.c:1549
+msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgstr ""
 
 #: ../panels/power/cc-power-panel.c:1582
 msgid "_Bluetooth"
@@ -3968,7 +4037,7 @@ msgid "Authenticate"
 msgstr "Autenticar"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Password"
 msgstr "Contraseña"
 
@@ -4187,7 +4256,7 @@ msgstr "Trabajos activos"
 
 #: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#: ../panels/user-accounts/data/history-dialog.ui.h:2
 msgid "Close"
 msgstr "Cerrar"
 
@@ -4229,40 +4298,40 @@ msgid "Loading drivers database..."
 msgstr "Cargando bases de datos de controladores…"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:65
-#: ../panels/printers/pp-ppd-option-widget.c:69
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "One Sided"
 msgstr "Una cara"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:67
-#: ../panels/printers/pp-ppd-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Long Edge (Standard)"
 msgstr "Margen largo (estándar)"
 
 #. Translators: this is an option of "Two Sided"
-#: ../panels/printers/pp-ipp-option-widget.c:69
-#: ../panels/printers/pp-ppd-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ppd-option-widget.c:75
 msgid "Short Edge (Flip)"
 msgstr "Margen corto (girar)"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:71
+#: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Portrait"
 msgstr "Vertical"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:73
+#: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Landscape"
 msgstr "Apaisado"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:75
+#: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse landscape"
 msgstr "Apaisado invertido"
 
 #. Translators: this is an option of "Orientation"
-#: ../panels/printers/pp-ipp-option-widget.c:77
+#: ../panels/printers/pp-ipp-option-widget.c:79
 msgid "Reverse portrait"
 msgstr "Vertical invertido"
 
@@ -4421,38 +4490,38 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #. Translators: this is an option of "Paper Source"
-#: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
-#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:87
 msgid "Auto Select"
 msgstr "Seleccionar automáticamente"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
-#: ../panels/printers/pp-ppd-option-widget.c:87
+#: ../panels/printers/pp-ppd-option-widget.c:85
+#: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Printer Default"
 msgstr "Impresora predeterminada"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:89
+#: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Embed GhostScript fonts only"
 msgstr "Sólo empotrar tipografías GhostScript"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:91
+#: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 1"
 msgstr "Convertir a PS nivel 1"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:93
+#: ../panels/printers/pp-ppd-option-widget.c:95
 msgid "Convert to PS level 2"
 msgstr "Convertir a PS nivel 2"
 
 #. Translators: this is an option of "GhostScript"
-#: ../panels/printers/pp-ppd-option-widget.c:95
+#: ../panels/printers/pp-ppd-option-widget.c:97
 msgid "No pre-filtering"
 msgstr "Sin prefiltrado"
 
@@ -4686,7 +4755,7 @@ msgstr "_Bloque de pantalla automático"
 #: ../panels/privacy/privacy.ui.h:34
 #, fuzzy
 #| msgid "Lock Screen _After"
-msgid "Lock Screen _After Blank For"
+msgid "Lock screen _after blank for"
 msgstr "B_loquear pantalla después de"
 
 #: ../panels/privacy/privacy.ui.h:35
@@ -4710,11 +4779,13 @@ msgstr ""
 "ayudarle a mantener su equipo libre de información sensible."
 
 #: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+#| msgid "Automatically Empty _Trash"
+msgid "Automatically empty _Trash"
 msgstr "Vaciar la papelera automá_ticamente"
 
 #: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
+#| msgid "Automatically Purge Temporary _Files"
+msgid "Automatically purge Temporary _Files"
 msgstr "Li_mpiar los archivos temporales automáticamente"
 
 #: ../panels/privacy/privacy.ui.h:42
@@ -4731,7 +4802,7 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Métrico"
 
-#: ../panels/region/cc-format-chooser.c:265
+#: ../panels/region/cc-format-chooser.c:268
 msgid "No regions found"
 msgstr "No se han encontrado regiones"
 
@@ -4739,39 +4810,34 @@ msgstr "No se han encontrado regiones"
 msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
 
-#: ../panels/region/cc-input-chooser.c:997
-#: ../panels/search/cc-search-locations-dialog.c:479
-msgid "Other"
-msgstr "Otra"
-
-#: ../panels/region/cc-region-panel.c:225
+#: ../panels/region/cc-region-panel.c:239
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Debe reiniciar la sesión para que se apliquen los cambios"
 
-#: ../panels/region/cc-region-panel.c:226
+#: ../panels/region/cc-region-panel.c:240
 msgid "Restart Now"
 msgstr "Reiniciar ahora"
 
-#: ../panels/region/cc-region-panel.c:436
+#: ../panels/region/cc-region-panel.c:550
 msgctxt "Language"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/region/cc-region-panel.c:898
+#: ../panels/region/cc-region-panel.c:1040
 msgid "Sorry"
 msgstr "Disculpe"
 
-#: ../panels/region/cc-region-panel.c:900
+#: ../panels/region/cc-region-panel.c:1042
 msgid "Input methods can't be used on the login screen"
 msgstr ""
 "Los métodos de entrada no se pueden usar en la pantalla de inicio de sesión"
 
-#: ../panels/region/cc-region-panel.c:1345
-msgctxt "Input source"
-msgid "None"
-msgstr "Ninguna"
+#: ../panels/region/cc-region-panel.c:1491
+#| msgid "No input sources found"
+msgid "No input source selected"
+msgstr "No se ha seleccionado ninguna fuente de entrada"
 
-#: ../panels/region/cc-region-panel.c:1502
+#: ../panels/region/cc-region-panel.c:1652
 msgid "Login Screen"
 msgstr "Pantalla de inicio de sesión"
 
@@ -4860,10 +4926,9 @@ msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Puede cambiar estos atajos en la configuración del teclado"
 
 #: ../panels/region/input-options.ui.h:10
-#, fuzzy
 #| msgid "Switch to next source"
 msgid "Alternative switch to next source"
-msgstr "Cambiar a la fuente siguiente"
+msgstr "Cambio alternativo a la fuente siguiente"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
@@ -4883,23 +4948,23 @@ msgstr ""
 "La configuración de inicio de sesión la usan todos los usuarios cuando "
 "inician sesión en el sistema"
 
-#: ../panels/search/cc-search-locations-dialog.c:275
+#: ../panels/search/cc-search-locations-dialog.c:276
 msgid "Home"
 msgstr "Domicilio"
 
-#: ../panels/search/cc-search-locations-dialog.c:475
+#: ../panels/search/cc-search-locations-dialog.c:476
 msgid "Places"
 msgstr "Lugares"
 
-#: ../panels/search/cc-search-locations-dialog.c:477
+#: ../panels/search/cc-search-locations-dialog.c:478
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: ../panels/search/cc-search-locations-dialog.c:675
+#: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
 msgstr "Seleccionar ubicación"
 
-#: ../panels/search/cc-search-panel.c:193
+#: ../panels/search/cc-search-panel.c:182
 msgid "No applications found"
 msgstr "No se han encontrado aplicaciones"
 
@@ -5013,42 +5078,46 @@ msgid "Computer Name"
 msgstr "Nombre del equipo"
 
 #: ../panels/sharing/sharing.ui.h:8
+msgid "Remote Login"
+msgstr "Inicio de sesión remoto"
+
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Some services are disabled because of no network access."
 msgstr "Se han desactivado algunos servicios porque no hay acceso a la red."
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "Compartición multimedia"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "Compartir música, fotos y vídeos con otros en la red actual."
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "Compartir multimedia en esta red"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "Carpetas compartidas"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "columna"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "Añadir carpeta"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "Quitar carpeta"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Personal File Sharing"
 msgstr "Compartición de archivos personales"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:19
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5057,17 +5126,13 @@ msgstr ""
 "La compartición de archivos personales le permite compartir su carpeta "
 "«Público» con otros en su red actual usando: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Share Public Folder On This Network"
 msgstr "Compartir la carpeta pública en esta red"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require Password"
 msgstr "Solicitar contraseña"
-
-#: ../panels/sharing/sharing.ui.h:22
-msgid "Remote Login"
-msgstr "Inicio de sesión remoto"
 
 #: ../panels/sharing/sharing.ui.h:24
 #, no-c-format
@@ -5360,7 +5425,7 @@ msgstr ""
 "teclas;Teclas del ratón"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Bajo"
@@ -5371,7 +5436,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Alto"
@@ -5767,59 +5832,67 @@ msgstr "Grueso"
 msgid "Length:"
 msgstr "Longitud:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
+#. The color of the accessibility crosshair
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Color:"
 msgstr "Color:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Crosshairs:"
 msgstr "Cruces:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Overlaps mouse cursor"
 msgstr "Solapa el cursor del ratón"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Cruces"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "White on black:"
 msgstr "Blanco sobre negro:"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Brightness:"
 msgstr "Brillo:"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Contrast:"
 msgstr "Contraste:"
 
-#: ../panels/universal-access/zoom-options.ui.h:29
+#. The contrast scale goes from Color to None (grayscale)
+#: ../panels/universal-access/zoom-options.ui.h:30
+#| msgid "Color"
+msgctxt "universal access, contrast"
+msgid "Color"
+msgstr "Color"
+
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Completo"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Bajo"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Alto"
 
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Efectos de color:"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
 msgstr "Efectos de color"
 
@@ -5966,15 +6039,21 @@ msgstr "Añadir o quitar usuarios y cambiar su contraseña"
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "inicio;sesión;nombre;huella;avatar;logo;cara;contraseña;"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:2
+#: ../panels/user-accounts/data/history-dialog.ui.h:1
+#, fuzzy
+#| msgid "Retain _History"
+msgid "Login History"
+msgstr "Recordar _histórico"
+
+#: ../panels/user-accounts/data/history-dialog.ui.h:3
 msgid "Previous Week"
 msgstr "Semana anterior"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
+#: ../panels/user-accounts/data/history-dialog.ui.h:4
 msgid "Next Week"
 msgstr "Siguiente semana"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
+#: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "La semana que viene"
 
@@ -6863,11 +6942,11 @@ msgstr "Panel que mostrar"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTO…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:140
 msgid "- Settings"
 msgstr "- Configuración"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:149
 #, c-format
 msgid ""
 "%s\n"
@@ -6877,45 +6956,69 @@ msgstr ""
 "Ejecutar «%s --help» para ver una lista completa de las opciones de comando "
 "disponibles.\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:179
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:316
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:317
 msgid "Quit"
 msgstr "Salir"
 
-#: ../shell/cc-window.c:60 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Configuración"
 
 #. Add categories
-#: ../shell/cc-window.c:899
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
 msgstr "Personal"
 
-#: ../shell/cc-window.c:900
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:901
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1447
+#: ../shell/cc-window.c:1421
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Slow"
+#~ msgstr "Lenta"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Fast"
+#~ msgstr "Rápida"
+
+#~ msgid "_Options…"
+#~ msgstr "_Opciones…"
+
+#~ msgid "00:24:16:31:8G:7A"
+#~ msgstr "00:24:16:31:8G:7A"
+
+#~ msgid "Expired credentials. Please log in again."
+#~ msgstr "Las credenciales han expirado. Inicie sesión de nuevo."
+
+#~ msgid "_Log In"
+#~ msgstr "_Iniciar sesión"
+
+#~ msgctxt "Input source"
+#~ msgid "None"
+#~ msgstr "Ninguna"
 
 #~ msgid "Change the background"
 #~ msgstr "Cambiar el fondo"
@@ -7102,9 +7205,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Control Center"
 #~ msgstr "Centro de control"
-
-#~ msgid "Wired"
-#~ msgstr "Cableada"
 
 #~ msgid "Mobile broadband"
 #~ msgstr "Banda ancha móvil"
@@ -9450,9 +9550,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Ci_ty:"
 #~ msgstr "_Ciudad:"
-
-#~ msgid "Contact"
-#~ msgstr "Contacto"
 
 #~ msgid "Cou_ntry:"
 #~ msgstr "_País:"
