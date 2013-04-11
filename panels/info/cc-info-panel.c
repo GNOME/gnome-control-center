@@ -416,6 +416,7 @@ get_graphics_data_xorg_vesa_hardware (void)
       result = g_strdup_printf ("VESA: %s", pretty_tmp);
       g_free (pretty_tmp);
     }
+  g_free (log_contents);
   g_match_info_free (match);
   g_regex_unref (re);
 
