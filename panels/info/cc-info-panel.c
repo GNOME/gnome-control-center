@@ -1758,13 +1758,28 @@ on_updates_button_clicked (GtkWidget   *widget,
     }
 }
 
+static gboolean
+get_pk_version_property (GDBusProxy *pk_proxy,
+                         const char *property,
+                         guint32 *retval)
+{
+  GVariant *v;
+
+  v = g_dbus_proxy_get_cached_property (pk_proxy, property);
+  if (!v)
+    return FALSE;
+
+  g_variant_get (v, "u", retval);
+  g_variant_unref (v);
+  return TRUE;
+}
+
 static void
 got_pk_proxy_cb (GObject *source_object,
 		 GAsyncResult *res,
 		 CcInfoPanel *self)
 {
   GError *error = NULL;
-  GVariant *v;
   guint32 major, minor, micro;
 
   self->priv->pk_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -1778,15 +1793,16 @@ got_pk_proxy_cb (GObject *source_object,
       return;
     }
 
-  v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMajor");
-  g_variant_get (v, "u", &major);
-  g_variant_unref (v);
-  v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMinor");
-  g_variant_get (v, "u", &minor);
-  g_variant_unref (v);
-  v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMicro");
-  g_variant_get (v, "u", &micro);
-  g_variant_unref (v);
+  if (!get_pk_version_property(self->priv->pk_proxy, "VersionMajor", &major) ||
+      !get_pk_version_property(self->priv->pk_proxy, "VersionMinor", &minor) ||
+      !get_pk_version_property(self->priv->pk_proxy, "VersionMicro", &micro))
+    {
+      g_warning ("Unable to get PackageKit version");
+      g_clear_object (&self->priv->pk_proxy);
+      self->priv->updates_state = PK_NOT_AVAILABLE;
+      refresh_update_button (self);
+      return;
+    }
 
   if (major != 0 || minor != 8)
     {
