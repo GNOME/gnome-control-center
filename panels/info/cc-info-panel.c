@@ -457,29 +457,10 @@ cc_info_panel_dispose (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
 
-  if (priv->builder != NULL)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
-
-  if (priv->pk_proxy != NULL)
-    {
-      g_object_unref (priv->pk_proxy);
-      priv->pk_proxy = NULL;
-    }
-
-  if (priv->pk_transaction_proxy != NULL)
-    {
-      g_object_unref (priv->pk_transaction_proxy);
-      priv->pk_transaction_proxy = NULL;
-    }
-
-  if (priv->graphics_data != NULL)
-    {
-      graphics_data_free (priv->graphics_data);
-      priv->graphics_data = NULL;
-    }
+  g_clear_object (&priv->builder);
+  g_clear_object (&priv->pk_proxy);
+  g_clear_object (&priv->pk_transaction_proxy);
+  g_clear_pointer (&priv->graphics_data, graphics_data_free);
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->dispose (object);
 }
@@ -1638,8 +1619,7 @@ on_pk_transaction_signal (GDBusProxy *proxy,
     }
   else if (g_strcmp0 (signal_name, "Destroy") == 0)
     {
-      g_object_unref (self->priv->pk_transaction_proxy);
-      self->priv->pk_transaction_proxy = NULL;
+      g_clear_object (&self->priv->pk_transaction_proxy);
     }
 }
 
