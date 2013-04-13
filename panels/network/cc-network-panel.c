@@ -1152,6 +1152,7 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
                                  "id", id,
                                  "connection", connection,
                                  "client", panel->priv->client,
+                                 "remote-settings", panel->priv->remote_settings,
                                  NULL);
         g_signal_connect_object (net_virt, "removed",
                                  G_CALLBACK (object_removed_cb), panel, 0);
