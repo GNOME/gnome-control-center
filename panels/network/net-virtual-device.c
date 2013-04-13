@@ -60,6 +60,39 @@ static guint signals[SIGNAL_LAST] = { 0 };
 G_DEFINE_TYPE (NetVirtualDevice, net_virtual_device, NET_TYPE_DEVICE)
 
 static void
+connection_changed_cb (NMConnection *connection,
+                       NetObject    *object)
+{
+        net_object_emit_changed (object);
+}
+
+static void
+connection_removed_cb (NMConnection *connection,
+                       NetObject    *object)
+{
+        net_object_emit_removed (object);
+}
+
+static void
+net_virtual_device_set_connection (NetVirtualDevice *virtual_device,
+                                   NMConnection     *connection)
+{
+        NetVirtualDevicePrivate *priv = virtual_device->priv;
+
+        priv->connection = g_object_ref (connection);
+        priv->iface = nm_connection_get_virtual_iface_name (priv->connection);
+
+        g_signal_connect (priv->connection,
+                          NM_REMOTE_CONNECTION_REMOVED,
+                          G_CALLBACK (connection_removed_cb),
+                          virtual_device);
+        g_signal_connect (priv->connection,
+                          NM_REMOTE_CONNECTION_UPDATED,
+                          G_CALLBACK (connection_changed_cb),
+                          virtual_device);
+}
+
+static void
 net_virtual_device_get_property (GObject *object,
                                  guint prop_id,
                                  GValue *value,
@@ -86,12 +119,12 @@ net_virtual_device_set_property (GObject *object,
                                  GParamSpec *pspec)
 {
         NetVirtualDevice *virtual_device = NET_VIRTUAL_DEVICE (object);
-        NetVirtualDevicePrivate *priv = virtual_device->priv;
+        NMConnection *connection;
 
         switch (prop_id) {
         case PROP_CONNECTION:
-                priv->connection = g_value_dup_object (value);
-                priv->iface = nm_connection_get_virtual_iface_name (priv->connection);
+                connection = NM_CONNECTION (g_value_get_object (value));
+                net_virtual_device_set_connection (virtual_device, connection);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (virtual_device, prop_id, pspec);
@@ -195,6 +228,21 @@ net_virtual_device_refresh (NetObject *object)
                 panel_set_device_widgets (priv->builder, nm_device);
         else
                 panel_unset_device_widgets (priv->builder);
+}
+
+static void
+net_virtual_device_delete (NetObject *object)
+{
+        NetVirtualDevice *virtual_device = NET_VIRTUAL_DEVICE (object);
+        NetVirtualDevicePrivate *priv = virtual_device->priv;
+        const char *path;
+        NMRemoteSettings *settings;
+        NMRemoteConnection *connection;
+
+        settings = net_object_get_remote_settings (object);
+        path = nm_connection_get_path (priv->connection);
+        connection = nm_remote_settings_get_connection_by_path (settings, path);
+        nm_remote_connection_delete (connection, NULL, NULL);
 }
 
 static void
@@ -333,6 +381,7 @@ net_virtual_device_class_init (NetVirtualDeviceClass *klass)
 
         net_object_class->refresh = net_virtual_device_refresh;
         net_object_class->add_to_notebook = net_virtual_device_add_to_notebook;
+        net_object_class->delete = net_virtual_device_delete;
 
         device_class->get_find_connection = net_virtual_device_get_find_connection;
 
