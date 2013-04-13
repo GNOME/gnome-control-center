@@ -392,6 +392,9 @@ recheck_initialization (NetConnectionEditor *editor)
         notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_notebook"));
         gtk_notebook_set_current_page (notebook, 0);
 
+        if (editor->show_when_initialized)
+                gtk_window_present (GTK_WINDOW (editor->window));
+
         g_idle_add (idle_validate, editor);
 }
 
@@ -930,6 +933,10 @@ net_connection_editor_new (GtkWindow        *parent_window,
 void
 net_connection_editor_present (NetConnectionEditor *editor)
 {
+        if (!editor_is_initialized (editor)) {
+                editor->show_when_initialized = TRUE;
+                return;
+        }
         gtk_window_present (GTK_WINDOW (editor->window));
 }
 

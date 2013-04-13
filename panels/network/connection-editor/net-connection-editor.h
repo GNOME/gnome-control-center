@@ -66,6 +66,7 @@ struct _NetConnectionEditor
         NMClientPermissionResult can_modify;
 
         gboolean          title_set;
+        gboolean          show_when_initialized;
 };
 
 struct _NetConnectionEditorClass
