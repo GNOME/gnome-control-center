@@ -246,7 +246,7 @@ editor_done (NetConnectionEditor *editor,
 }
 
 static void
-show_details_for_row (GtkButton *button, NetDeviceEthernet *device)
+show_details (GtkButton *button, NetDeviceEthernet *device, const gchar *title)
 {
         GtkWidget *row;
         NMConnection *connection;
@@ -265,8 +265,27 @@ show_details_for_row (GtkButton *button, NetDeviceEthernet *device)
         client = net_object_get_client (NET_OBJECT (device));
         settings = net_object_get_remote_settings (NET_OBJECT (device));
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client, settings);
+        if (title)
+                net_connection_editor_set_title (editor, title);
         g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
         net_connection_editor_run (editor);
+}
+
+static void
+show_details_for_row (GtkButton *button, NetDeviceEthernet *device)
+{
+        show_details (button, device, NULL);
+}
+
+static void
+show_details_for_wired (GtkButton *button, NetDeviceEthernet *device)
+{
+        /* Translators: This is used as the title of the connection
+         * details window for ethernet, if there is only a single
+         * profile. It is also used to display ethernet in the
+         * device list.
+         */
+        show_details (button, device, _("Wired"));
 }
 
 static void
@@ -550,7 +569,7 @@ device_ethernet_constructed (GObject *object)
 
         device->details_button = GTK_WIDGET (gtk_builder_get_object (NET_DEVICE_ETHERNET (object)->builder, "details_button"));
         g_signal_connect (device->details_button, "clicked",
-                          G_CALLBACK (show_details_for_row), device);
+                          G_CALLBACK (show_details_for_wired), device);
 
         device->add_profile_button = GTK_WIDGET (gtk_builder_get_object (NET_DEVICE_ETHERNET (object)->builder, "add_profile_button"));
         g_signal_connect (device->add_profile_button, "clicked",
