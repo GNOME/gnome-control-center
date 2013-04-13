@@ -64,6 +64,8 @@ struct _NetConnectionEditor
 
         guint                    permission_id;
         NMClientPermissionResult can_modify;
+
+        gboolean          title_set;
 };
 
 struct _NetConnectionEditorClass
@@ -80,6 +82,8 @@ NetConnectionEditor *net_connection_editor_new      (GtkWindow        *parent_wi
                                                      NMAccessPoint    *ap,
                                                      NMClient         *client,
                                                      NMRemoteSettings *settings);
+void                 net_connection_editor_set_title (NetConnectionEditor  *editor,
+                                                      const gchar          *title);
 void                 net_connection_editor_run      (NetConnectionEditor   *editor);
 void                 net_connection_editor_present  (NetConnectionEditor   *editor);
 void                 net_connection_editor_forget   (NetConnectionEditor   *editor);
