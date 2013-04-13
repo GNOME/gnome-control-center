@@ -277,6 +277,10 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         /* update title */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_device"));
+        /* Translators: this is the title of the connection details
+         * window for vpn connections, it is also used to display
+         * vpn connections in the device list.
+         */
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (vpn->priv->connection));
         net_object_set_title (NET_OBJECT (vpn), title);
         gtk_label_set_label (GTK_LABEL (widget), title);
@@ -400,6 +404,7 @@ vpn_proxy_edit (NetObject *object)
         NetConnectionEditor *editor;
         NMClient *client;
         NMRemoteSettings *settings;
+        gchar *title;
 
         button = GTK_WIDGET (gtk_builder_get_object (vpn->priv->builder,
                                                      "button_options"));
@@ -411,6 +416,10 @@ vpn_proxy_edit (NetObject *object)
         editor = net_connection_editor_new (GTK_WINDOW (window),
                                             vpn->priv->connection,
                                             NULL, NULL, client, settings);
+        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (vpn->priv->connection));
+        net_connection_editor_set_title (editor, title);
+        g_free (title);
+
         g_signal_connect (editor, "done", G_CALLBACK (editor_done), vpn);
         net_connection_editor_run (editor);
 }
