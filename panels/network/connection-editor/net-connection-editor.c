@@ -278,6 +278,9 @@ net_connection_editor_update_title (NetConnectionEditor *editor)
 {
         gchar *id;
 
+        if (editor->title_set)
+                return;
+
         if (editor->is_new_connection) {
                 if (editor->device) {
                         id = g_strdup (_("New Profile"));
@@ -960,4 +963,12 @@ net_connection_editor_reset (NetConnectionEditor *editor)
         settings = nm_connection_to_hash (editor->orig_connection, NM_SETTING_HASH_FLAG_ALL);
         nm_connection_replace_settings (editor->connection, settings, NULL);
         g_hash_table_destroy (settings);
+}
+
+void
+net_connection_editor_set_title (NetConnectionEditor *editor,
+                                 const gchar         *title)
+{
+        gtk_window_set_title (GTK_WINDOW (editor->window), title);
+        editor->title_set = TRUE;
 }
