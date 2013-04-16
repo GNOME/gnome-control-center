@@ -8,7 +8,7 @@ INCLUDES = 						\
 	$(NULL)
 
 
-noinst_LTLIBRARIES = libwacom-calibrator.la
+noinst_LTLIBRARIES = libwacom-calibrator.la libwacom-calibrator-test.la
 
 libwacom_calibrator_la_SOURCES =	\
 	calibrator.c			\
@@ -18,6 +18,11 @@ libwacom_calibrator_la_SOURCES =	\
 
 libwacom_calibrator_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
 libwacom_calibrator_la_LDFLAGS = $(PANEL_LDFLAGS)
+
+libwacom_calibrator_test_la_SOURCES = $(libwacom_calibrator_la_SOURCES)
+
+libwacom_calibrator_test_la_LIBADD = $(libwacom_calibrator_la_LIBADD)
+libwacom_calibrator_test_la_LDFLAGS = $(libwacom_calibrator_la_LDFLAGS)
 
 noinst_PROGRAMS = test-calibrator
 
