@@ -21,6 +21,7 @@ libwacom_calibrator_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 libwacom_calibrator_test_la_SOURCES = $(libwacom_calibrator_la_SOURCES)
 
+libwacom_calibrator_test_la_CPPFLAGS = -DFAKE_AREA
 libwacom_calibrator_test_la_LIBADD = $(libwacom_calibrator_la_LIBADD)
 libwacom_calibrator_test_la_LDFLAGS = $(libwacom_calibrator_la_LDFLAGS)
 
