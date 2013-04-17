@@ -167,13 +167,12 @@ set_sensitivity (UmHistoryDialog *um)
         if (login_history != NULL) {
                 history = g_array_index (login_history, UmLoginHistory, 0);
                 sensitive = g_date_time_to_unix (um->week) > history.login_time;
+                g_array_free (login_history, TRUE);
         }
         gtk_widget_set_sensitive (get_widget (um, "previous-button"), sensitive);
 
         sensitive = (g_date_time_compare (um->current_week, um->week) == 1);
         gtk_widget_set_sensitive (get_widget (um, "next-button"), sensitive);
-
-        g_array_free (login_history, TRUE);
 }
 
 static void
