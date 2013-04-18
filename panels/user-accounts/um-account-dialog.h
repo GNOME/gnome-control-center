@@ -38,6 +38,7 @@ GType            um_account_dialog_get_type (void) G_GNUC_CONST;
 UmAccountDialog *um_account_dialog_new      (void);
 void             um_account_dialog_show     (UmAccountDialog     *self,
                                              GtkWindow           *parent,
+                                             GPermission         *permission,
                                              GAsyncReadyCallback  callback,
                                              gpointer             user_data);
 ActUser *        um_account_dialog_finish   (UmAccountDialog     *self,

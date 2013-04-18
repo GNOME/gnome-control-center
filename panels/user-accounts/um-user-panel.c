@@ -354,7 +354,7 @@ add_user (GtkButton *button, CcUserPanelPrivate *d)
 
         dialog = um_account_dialog_new ();
         um_account_dialog_show (dialog, GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
-                                select_created_user, d);
+                                d->permission, select_created_user, d);
 }
 
 static void

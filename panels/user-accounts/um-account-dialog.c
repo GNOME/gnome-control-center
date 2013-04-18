@@ -49,6 +49,9 @@ static void   on_realm_joined      (GObject *source,
                                     GAsyncResult *result,
                                     gpointer user_data);
 
+static void   um_account_dialog_response  (GtkDialog *dialog,
+                                           gint response_id);
+
 #define UM_ACCOUNT_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_ACCOUNT_DIALOG, \
                                                                     UmAccountDialogClass))
 #define UM_IS_ACCOUNT_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_ACCOUNT_DIALOG))
@@ -60,6 +63,7 @@ struct _UmAccountDialog {
         GtkWidget *container_widget;
         GSimpleAsyncResult *async;
         GCancellable *cancellable;
+        GPermission *permission;
         GtkSpinner *spinner;
 
         /* Buttons to switch modes between local/enterprise */
@@ -1081,6 +1085,28 @@ um_account_dialog_init (UmAccountDialog *self)
 }
 
 static void
+on_permission_acquired (GObject *source_object,
+                        GAsyncResult *res,
+                        gpointer user_data)
+{
+	UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+	GError *error = NULL;
+
+	/* Paired with begin_action in um_account_dialog_response () */
+	finish_action (self);
+
+	if (g_permission_acquire_finish (self->permission, res, &error)) {
+		g_return_if_fail (g_permission_get_allowed (self->permission));
+		um_account_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
+	} else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+		g_warning ("Failed to acquire permission: %s", error->message);
+	}
+
+	g_clear_error (&error);
+	g_object_unref (self);
+}
+
+static void
 um_account_dialog_response (GtkDialog *dialog,
                             gint response_id)
 {
@@ -1088,6 +1114,14 @@ um_account_dialog_response (GtkDialog *dialog,
 
         switch (response_id) {
         case GTK_RESPONSE_OK:
+                /* We don't (or no longer) have necessary permissions */
+                if (self->permission && !g_permission_get_allowed (self->permission)) {
+                        begin_action (self);
+                        g_permission_acquire_async (self->permission, self->cancellable,
+                                                    on_permission_acquired, g_object_ref (self));
+                        return;
+                }
+
                 switch (self->mode) {
                 case UM_LOCAL:
                         local_create_user (self);
@@ -1137,6 +1171,7 @@ um_account_dialog_finalize (GObject *obj)
 
         if (self->cancellable)
                 g_object_unref (self->cancellable);
+        g_clear_object (&self->permission);
         g_object_unref (self->enterprise_realms);
 
         G_OBJECT_CLASS (um_account_dialog_parent_class)->finalize (obj);
@@ -1163,6 +1198,7 @@ um_account_dialog_new (void)
 void
 um_account_dialog_show (UmAccountDialog     *self,
                         GtkWindow           *parent,
+                        GPermission         *permission,
                         GAsyncReadyCallback  callback,
                         gpointer             user_data)
 {
@@ -1177,6 +1213,9 @@ um_account_dialog_show (UmAccountDialog     *self,
         if (self->cancellable)
                 g_object_unref (self->cancellable);
         self->cancellable = g_cancellable_new ();
+
+        g_clear_object (&self->permission);
+        self->permission = permission ? g_object_ref (permission) : NULL;
 
         local_prepare (self);
         enterprise_prepare (self);

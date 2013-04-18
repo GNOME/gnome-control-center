@@ -52,7 +52,7 @@ main (int argc,
 	dialog = um_account_dialog_new ();
 	loop = g_main_loop_new (NULL, FALSE);
 
-	um_account_dialog_show (dialog, NULL, on_dialog_complete, loop);
+	um_account_dialog_show (dialog, NULL, NULL, on_dialog_complete, loop);
 
 	g_main_loop_run (loop);
 	g_main_loop_unref (loop);
