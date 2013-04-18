@@ -1070,6 +1070,7 @@ um_account_dialog_init (UmAccountDialog *self)
 
         gtk_dialog_add_button (dialog, _("Cancel"), GTK_RESPONSE_CANCEL);
         widget = gtk_dialog_add_button (dialog, _("_Add"), GTK_RESPONSE_OK);
+        gtk_dialog_set_default_response (dialog, GTK_RESPONSE_OK);
         gtk_widget_grab_default (widget);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-dialog");
