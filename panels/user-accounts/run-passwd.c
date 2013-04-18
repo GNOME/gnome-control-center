@@ -430,7 +430,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                         if (passwd_handler->chpasswd_cb)
                                                 passwd_handler->chpasswd_cb (passwd_handler,
                                                                              error,
-                                                                             passwd_handler->auth_cb_data);
+                                                                             passwd_handler->chpasswd_cb_data);
                                         else if (passwd_handler->auth_cb)
                                                 passwd_handler->auth_cb (passwd_handler,
                                                                          error,
