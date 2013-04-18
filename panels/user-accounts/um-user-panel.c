@@ -75,6 +75,8 @@ struct _CcUserPanelPrivate {
 
         gint other_accounts;
         GtkTreeIter *other_iter;
+
+        UmAccountDialog *account_dialog;
 };
 
 static GtkWidget *
@@ -349,6 +351,7 @@ select_created_user (GObject *object,
         dialog = UM_ACCOUNT_DIALOG (object);
         user = um_account_dialog_finish (dialog, result);
         gtk_widget_destroy (GTK_WIDGET (dialog));
+        d->account_dialog = NULL;
 
         if (user == NULL)
                 return;
@@ -378,10 +381,8 @@ select_created_user (GObject *object,
 static void
 add_user (GtkButton *button, CcUserPanelPrivate *d)
 {
-        UmAccountDialog *dialog;
-
-        dialog = um_account_dialog_new ();
-        um_account_dialog_show (dialog, GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
+        d->account_dialog = um_account_dialog_new ();
+        um_account_dialog_show (d->account_dialog, GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                 d->permission, select_created_user, d);
 }
 
@@ -1422,6 +1423,10 @@ cc_user_panel_dispose (GObject *object)
         if (priv->history_dialog) {
                 um_history_dialog_free (priv->history_dialog);
                 priv->history_dialog = NULL;
+        }
+        if (priv->account_dialog) {
+                gtk_dialog_response (GTK_DIALOG (priv->account_dialog), GTK_RESPONSE_DELETE_EVENT);
+                priv->account_dialog = NULL;
         }
         if (priv->language_chooser) {
                 gtk_widget_destroy (priv->language_chooser);
