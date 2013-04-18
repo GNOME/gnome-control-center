@@ -26,6 +26,7 @@
 #include <colord.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <libsoup/soup.h>
 
 #include "cc-color-calibrate.h"
 #include "cc-color-cell-renderer-text.h"
@@ -50,6 +51,7 @@ struct _CcColorPanelPrivate
   GCancellable  *cancellable;
   GDBusProxy    *proxy;
   GSettings     *settings;
+  GSettings     *settings_colord;
   GtkBuilder    *builder;
   GtkWidget     *main_window;
   CcColorCalibrate *calibrate;
@@ -93,6 +95,7 @@ enum {
   COLUMN_CALIB_TEMP_LAST
 };
 
+#define COLORD_SETTINGS_SCHEMA                          "org.freedesktop.ColorHelper"
 #define GCM_SETTINGS_SCHEMA                             "org.gnome.settings-daemon.plugins.color"
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
 #define GCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD      "recalibrate-display-threshold"
@@ -302,6 +305,9 @@ gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
   GtkWindow *window = NULL;
 
   /* setup the calibration object with items that can fail */
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "button_calib_upload"));
+  gtk_widget_show (widget);
   ret = cc_color_calibrate_setup (prefs->priv->calibrate,
                                   &error);
   if (!ret)
@@ -836,6 +842,112 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 out:
   if (profile_array != NULL)
     g_ptr_array_unref (profile_array);
+}
+
+static void
+gcm_prefs_calib_upload_cb (GtkWidget *widget, CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  CdProfile *profile;
+  const gchar *uri;
+  gboolean ret;
+  gchar *upload_uri = NULL;
+  gchar *msg_result = NULL;
+  gchar *data = NULL;
+  GError *error = NULL;
+  gsize length;
+  guint status_code;
+  SoupBuffer *buffer = NULL;
+  SoupMessage *msg = NULL;
+  SoupMultipart *multipart = NULL;
+  SoupSession *session = NULL;
+
+  profile = cc_color_calibrate_get_profile (prefs->priv->calibrate);
+  ret = cd_profile_connect_sync (profile, NULL, &error);
+  if (!ret)
+    {
+      g_warning ("Failed to get imported profile: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  /* read file */
+  ret = g_file_get_contents (cd_profile_get_filename (profile),
+                             &data,
+                             &length,
+                             &error);
+  if (!ret)
+    {
+      g_warning ("Failed to read file: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  /* setup the session */
+  session = soup_session_sync_new_with_options (SOUP_SESSION_USER_AGENT, "gnome-control-center",
+                                                SOUP_SESSION_TIMEOUT, 5000,
+                                                NULL);
+  if (session == NULL)
+  {
+    g_warning ("Failed to setup networking");
+    goto out;
+  }
+  soup_session_add_feature_by_type (session, SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
+
+  /* create multipart form and upload file */
+  multipart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
+  buffer = soup_buffer_new (SOUP_MEMORY_STATIC, data, length);
+  soup_multipart_append_form_file (multipart,
+                                   "upload",
+                                   cd_profile_get_filename (profile),
+                                   NULL,
+                                   buffer);
+  upload_uri = g_settings_get_string (priv->settings_colord, "profile-upload-uri");
+  msg = soup_form_request_new_from_multipart (upload_uri, multipart);
+  status_code = soup_session_send_message (session, msg);
+  if (status_code != 201)
+    {
+      widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                   "label_calib_upload_location"));
+      /* TRANSLATORS: this is when the upload of the profile failed */
+      msg_result = g_strdup_printf (_("Failed to upload file: %s"), msg->reason_phrase),
+      gtk_label_set_label (GTK_LABEL (widget), msg_result);
+      gtk_widget_show (widget);
+      goto out;
+    }
+
+  /* show instructions to the user */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "label_calib_upload_location"));
+  uri = soup_message_headers_get_one (msg->response_headers, "Location");
+  msg_result = g_strdup_printf ("%s %s\n\n• %s\n• %s\n• %s",
+                                /* TRANSLATORS: these are instructions on how to recover
+                                 * the ICC profile on the native operating system and are
+                                 * only shown when the user uses a LiveCD to calibrate */
+                                _("The profile has been uploaded to:"),
+                                uri,
+                                _("Write down this URL."),
+                                _("Restart this computer and boot your normal operating system."),
+                                _("Type the URL into your browser to download and install the profile.")),
+  gtk_label_set_label (GTK_LABEL (widget), msg_result);
+  gtk_widget_show (widget);
+
+  /* hide the upload button as duplicate uploads will fail */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "button_calib_upload"));
+  gtk_widget_hide (widget);
+out:
+  if (session != NULL)
+    g_object_unref (session);
+  if (buffer != NULL)
+    soup_buffer_free (buffer);
+  if (msg != NULL)
+    g_object_unref (msg);
+  if (multipart != NULL)
+    soup_multipart_free (multipart);
+  g_free (data);
+  g_free (upload_uri);
+  g_free (msg_result);
 }
 
 static void
@@ -2013,6 +2125,7 @@ cc_color_panel_dispose (GObject *object)
   if (priv->cancellable != NULL)
     g_cancellable_cancel (priv->cancellable);
   g_clear_object (&priv->settings);
+  g_clear_object (&priv->settings_colord);
   g_clear_object (&priv->cancellable);
   g_clear_object (&priv->builder);
   g_clear_object (&priv->client);
@@ -2155,6 +2268,7 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* setup defaults */
   priv->settings = g_settings_new (GCM_SETTINGS_SCHEMA);
+  priv->settings_colord = g_settings_new (COLORD_SETTINGS_SCHEMA);
 
   /* assign buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -2426,6 +2540,10 @@ cc_color_panel_init (CcColorPanel *prefs)
                                                "button_calib_export"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_calib_export_cb), prefs);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "button_calib_upload"));
+  g_signal_connect (widget, "clicked",
+                    G_CALLBACK (gcm_prefs_calib_upload_cb), prefs);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "label_calib_summary_message"));
   g_signal_connect (widget, "activate-link",
