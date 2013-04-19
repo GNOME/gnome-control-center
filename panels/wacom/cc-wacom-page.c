@@ -147,15 +147,19 @@ get_layout_type (GsdWacomDevice *device)
 }
 
 static void
-set_calibration (gint      *cal,
-                 gsize      ncal,
-                 GSettings *settings)
+set_calibration (GsdWacomDevice *device,
+                 const gint      display_width,
+                 const gint      display_height,
+                 gint           *cal,
+                 gsize           ncal,
+                 GSettings      *settings)
 {
 	GVariant    *current; /* current calibration */
 	GVariant    *array;   /* new calibration */
+	GVariant    *last_resolution;
 	GVariant   **tmp;
 	gsize        nvalues;
-	int          i;
+	gint         i;
 
 	current = g_settings_get_value (settings, "area");
 	g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
@@ -172,6 +176,14 @@ set_calibration (gint      *cal,
 	g_settings_set_value (settings, "area", array);
 
 	g_free (tmp);
+
+	/* set the last-calibration-resolution */
+	last_resolution = g_variant_new ("(ii)", display_width, display_height);
+	settings = gsd_wacom_device_get_settings (device);
+	g_settings_set_value (settings,
+			      "last-calibrated-resolution",
+			      last_resolution);
+	g_clear_pointer (&last_resolution, g_variant_unref);
 }
 
 static void
@@ -182,7 +194,7 @@ finish_calibration (CalibArea *area,
 	CcWacomPagePrivate *priv = page->priv;
 	XYinfo axis;
 	gboolean swap_xy;
-	int cal[4];
+	gint cal[4], display_width, display_height;
 
 	if (calib_area_finish (area, &axis, &swap_xy)) {
 		cal[0] = axis.x_min;
@@ -190,7 +202,12 @@ finish_calibration (CalibArea *area,
 		cal[2] = axis.x_max;
 		cal[3] = axis.y_max;
 
-		set_calibration(cal, 4, priv->wacom_settings);
+		calib_area_get_display_size (area, &display_width, &display_height);
+
+		set_calibration (page->priv->stylus,
+				 display_width,
+				 display_height,
+				 cal, 4, priv->wacom_settings);
 	}
 
 	calib_area_free (area);

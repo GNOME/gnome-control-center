@@ -582,3 +582,10 @@ calib_area_free (CalibArea *area)
 	gtk_widget_destroy (area->window);
 	g_free (area);
 }
+
+void
+calib_area_get_display_size (CalibArea *area, gint *width, gint *height)
+{
+	*width = area->display_width;
+	*height = area->display_height;
+}

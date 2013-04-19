@@ -53,4 +53,6 @@ gboolean calib_area_finish (CalibArea *area,
 
 void calib_area_free (CalibArea *area);
 
+void calib_area_get_display_size (CalibArea *area, gint *width, gint *height);
+
 #endif /* _gui_gtk_h */
