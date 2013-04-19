@@ -818,6 +818,7 @@ kinit_thread_func (GSimpleAsyncResult *async,
                                                  login->user, login->domain);
                 break;
         case KRB5KDC_ERR_PREAUTH_FAILED:
+        case KRB5KRB_AP_ERR_BAD_INTEGRITY:
                 g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD,
                                                  _("Invalid password, please try again"));
                 break;
