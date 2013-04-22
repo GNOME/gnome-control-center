@@ -688,7 +688,7 @@ enroll_fingerprints (GtkWindow *parent,
 
         dialog = gtk_builder_new ();
         if (!gtk_builder_add_from_resource (dialog,
-                                            "/org/gnome/control-center/account-fingerprint.ui",
+                                            "/org/gnome/control-center/user-accounts/account-fingerprint.ui",
                                             &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);
