@@ -1352,6 +1352,7 @@ populate_printers_list (CcPrintersPanel *self)
   GtkCellRenderer        *icon_renderer2;
   GtkCellRenderer        *renderer;
   GtkWidget              *treeview;
+  int                     icon_width;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -1390,6 +1391,8 @@ populate_printers_list (CcPrintersPanel *self)
   g_object_set (G_OBJECT (icon_renderer2), "follow-state", TRUE, NULL);
   column = gtk_tree_view_column_new_with_attributes ("Default", icon_renderer2,
                                                      "icon-name", PRINTER_DEFAULT_ICON_COLUMN, NULL);
+  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &icon_width, NULL);
+  gtk_cell_renderer_set_fixed_size (icon_renderer2, icon_width, -1);
   gtk_tree_view_column_set_expand (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 }
