@@ -39,8 +39,8 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-05 20:09+0000\n"
-"PO-Revision-Date: 2013-03-06 13:03+0300\n"
+"POT-Creation-Date: 2013-04-22 18:35+0000\n"
+"PO-Revision-Date: 2013-04-23 09:05+0300\n"
 "Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
 "Language-Team: team@gnome.gr\n"
 "Language: el\n"
@@ -179,7 +179,7 @@ msgstr "σελίδα 2"
 msgid "Paired"
 msgstr "Συζευγμένα"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:789
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:812
 msgid "Type"
 msgstr "Τύπος"
 
@@ -398,58 +398,88 @@ msgstr "Αβαθμονόμητο"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:133
+#: ../panels/color/cc-color-panel.c:136
 msgid "Default: "
 msgstr "Προεπιλεγμένο: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:141
+#: ../panels/color/cc-color-panel.c:144
 msgid "Colorspace: "
 msgstr "Χρωματικός χώρος: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:148
+#: ../panels/color/cc-color-panel.c:151
 msgid "Test profile: "
 msgstr "Δοκιμαστική κατατομή: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:216
+#: ../panels/color/cc-color-panel.c:219
 msgid "Select ICC Profile File"
 msgstr "Επιλογή αρχείου κατατομής ICC"
 
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:222
 msgid "_Import"
 msgstr "Ε_ισαγωγή"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:230
+#: ../panels/color/cc-color-panel.c:233
 msgid "Supported ICC profiles"
 msgstr "Υποστηριζόμενες κατατομές ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:237
+#: ../panels/color/cc-color-panel.c:240
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: ../panels/color/cc-color-panel.c:581
+#: ../panels/color/cc-color-panel.c:587
 msgid "Screen"
 msgstr "Οθόνη"
 
+#. TRANSLATORS: this is when the upload of the profile failed
+#: ../panels/color/cc-color-panel.c:913
+#, c-format
+#| msgid "Failed to apply configuration: %s"
+msgid "Failed to upload file: %s"
+msgstr "Αποτυχία ανεβάσματος αρχείου: %s"
+
+#. TRANSLATORS: these are instructions on how to recover
+#. * the ICC profile on the native operating system and are
+#. * only shown when the user uses a LiveCD to calibrate
+#: ../panels/color/cc-color-panel.c:927
+msgid "The profile has been uploaded to:"
+msgstr "Η κατατομή έχει ανέβει στο:"
+
+#: ../panels/color/cc-color-panel.c:929
+msgid "Write down this URL."
+msgstr "Καταγραφή αυτού του URL."
+
+#: ../panels/color/cc-color-panel.c:930
+msgid "Restart this computer and boot your normal operating system."
+msgstr ""
+"Επανεκκίνηση αυτού του υπολογιστή και εκκίνηση του κανονικού λειτουργικού "
+"σας συστήματος."
+
+#: ../panels/color/cc-color-panel.c:931
+msgid "Type the URL into your browser to download and install the profile."
+msgstr ""
+"Πληκτρολογήστε το URL στον περιηγητή σας για μεταφόρτωση και εγκαταστήστε "
+"την κατατομή."
+
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:853
+#: ../panels/color/cc-color-panel.c:965
 msgid "Save Profile"
 msgstr "Αποθήκευση κατατομής"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1214
+#: ../panels/color/cc-color-panel.c:1326
 msgid "Create a color profile for the selected device"
 msgstr "Δημιουργία κατατομής χρώματος για την επιλεγμένη συσκευή"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1229 ../panels/color/cc-color-panel.c:1253
+#: ../panels/color/cc-color-panel.c:1341 ../panels/color/cc-color-panel.c:1365
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -458,12 +488,12 @@ msgstr ""
 "και σωστά συνδεδεμένο."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1263
+#: ../panels/color/cc-color-panel.c:1375
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Το όργανο μέτρησης δεν υποστηρίζει δημιουργία προφίλ εκτυπωτών."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1274
+#: ../panels/color/cc-color-panel.c:1386
 msgid "The device type is not currently supported."
 msgstr "Δεν υποστηρίζεται ο τύπος της συσκευής."
 
@@ -679,10 +709,25 @@ msgid "Profile successfully created!"
 msgstr "Η κατατομή δημιουργήθηκε με επιτυχία!"
 
 #: ../panels/color/color.ui.h:22
-msgid "Export"
-msgstr "Εξαγωγή"
+#| msgid "No profile"
+msgid "Copy profile"
+msgstr "Αντιγραφή κατατομής"
 
 #: ../panels/color/color.ui.h:23
+msgid "Requires writable media"
+msgstr "Απαιτεί εγγράψιμα μέσα"
+
+#: ../panels/color/color.ui.h:24
+#| msgid "No profile"
+msgid "Upload profile"
+msgstr "Ανέβασμα κατατομής"
+
+#: ../panels/color/color.ui.h:25
+#| msgid "Add new connection"
+msgid "Requires Internet connection"
+msgstr "Απαιτεί σύνδεση διαδικτύου"
+
+#: ../panels/color/color.ui.h:26
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -692,16 +737,16 @@ msgstr ""
 "href=\"linux\">GNU/Λίνουξ</a>, <a href=\"osx\">Apple OS X</a> και <a href="
 "\"windows\">Microsoft Windows</a> χρήσιμες."
 
-#: ../panels/color/color.ui.h:24
+#: ../panels/color/color.ui.h:27
 #: ../panels/user-accounts/um-fingerprint-dialog.c:743
 msgid "Summary"
 msgstr "Σύνοψη"
 
-#: ../panels/color/color.ui.h:25
+#: ../panels/color/color.ui.h:28
 msgid "Import File…"
 msgstr "Εισαγωγή αρχείου…"
 
-#: ../panels/color/color.ui.h:26
+#: ../panels/color/color.ui.h:29
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -709,146 +754,166 @@ msgstr ""
 "Ανιχνεύτηκαν προβλήματα. Η κατατομή μπορεί να μην δουλεύει σωστά. <a href="
 "\"\">Προβολή λεπτομερειών.</a>"
 
-#: ../panels/color/color.ui.h:27
+#: ../panels/color/color.ui.h:30
 msgid "Device type:"
 msgstr "Τύπος συσκευής:"
 
-#: ../panels/color/color.ui.h:28
+#: ../panels/color/color.ui.h:31
 msgid "Manufacturer:"
 msgstr "Κατασκευαστής:"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:32
 msgid "Model:"
 msgstr "Μοντέλο:"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:33
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
 "Τα αρχεία εικόνων μπορούν να μεταφερθούν σε αυτό το παράθυρο για αυτόματη "
 "συμπλήρωση των παραπάνω πεδίων."
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:34
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 msgid "Color"
 msgstr "Χρώμα"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:35
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Κάθε συσκευή χρειάζεται μια ενημερωμένη κατατομή χρωμάτων για χρωματική "
 "διαχείριση."
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:36
 msgid "Learn more"
 msgstr "Μάθετε περισσότερα"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:37
 msgid "Learn more about color management"
 msgstr "Μάθετε περισσότερα για τη διαχείριση χρωμάτων"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:38
 msgid "Set for all users"
 msgstr "Ορισμός για όλους τους χρήστες"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:39
 msgid "Set this profile for all users on this computer"
 msgstr "Ορισμός της κατατομής για όλους τους χρήστες σε αυτόν τον υπολογιστή"
 
-#: ../panels/color/color.ui.h:37
+#: ../panels/color/color.ui.h:40
 msgid "Enable"
 msgstr "Ενεργό"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:41
 msgid "Add profile"
 msgstr "Προσθήκη κατατομής"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:42
 #: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Calibrate…"
 msgstr "Βαθμονόμηση…"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:43
 msgid "Calibrate the device"
 msgstr "Βαθμονόμηση της συσκευής"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:44
 msgid "Remove profile"
 msgstr "Αφαίρεση κατατομής"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:45
 msgid "View details"
 msgstr "Προβολή λεπτομερειών"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:46
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Αδυναμία ανίχνευσης συσκευών που μπορούν να διαχειριστούν χρώμα"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:47
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:48
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:49
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:50
 msgid "Projector"
 msgstr "Προβολέας"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:51
 msgid "Plasma"
 msgstr "Πλάσμα"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:52
+msgid "LCD (CCFL backlight)"
+msgstr "LCD (πίσω φως CCFL)"
+
+#: ../panels/color/color.ui.h:53
+msgid "LCD (RGB LED backlight)"
+msgstr "LCD (πίσω φως RGB LED)"
+
+#: ../panels/color/color.ui.h:54
+msgid "LCD (white LED backlight)"
+msgstr "LCD (λευκό πίσω φως LED)"
+
+#: ../panels/color/color.ui.h:55
+msgid "Wide gamut LCD (CCFL backlight)"
+msgstr "Ευρύ φάσμα LCD (πίσω φως CCFL)"
+
+#: ../panels/color/color.ui.h:56
+msgid "Wide gamut LCD (RGB LED backlight)"
+msgstr "Ευρύ φάσμα LCD (πίσω φως RGB LED)"
+
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Υψηλή"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:58
 msgid "40 minutes"
 msgstr "40 λεπτά"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Μεσαία"
 
-#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 λεπτά"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:61
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Χαμηλή"
 
-#: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:62 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 λεπτά"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:63
 msgid "Native to display"
 msgstr "Εγγενής εμφάνιση"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:64
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (εκτύπωση και δημοσίευση)"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:65
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:66
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (φωτογραφία και γραφικά)"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:67
 msgid "D75"
 msgstr "D75"
 
@@ -889,13 +954,13 @@ msgstr "Κίνα"
 msgid "Other…"
 msgstr "Άλλη…"
 
-#: ../panels/common/cc-language-chooser.c:169
-#: ../panels/region/cc-format-chooser.c:259
-#: ../panels/region/cc-input-chooser.c:171
+#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/region/cc-format-chooser.c:266
+#: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "Περισσότερα…"
 
-#: ../panels/common/cc-language-chooser.c:178
+#: ../panels/common/cc-language-chooser.c:193
 msgid "No languages found"
 msgstr "Δε βρέθηκαν γλώσσες"
 
@@ -903,8 +968,8 @@ msgstr "Δε βρέθηκαν γλώσσες"
 #. * The device has been disabled
 #: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1245,55 +1310,55 @@ msgstr ""
 "Resolution;Refresh;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: ../panels/info/cc-info-panel.c:541
+#: ../panels/info/cc-info-panel.c:532
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-δυαδικό"
 
-#: ../panels/info/cc-info-panel.c:543
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1218
+#: ../panels/info/cc-info-panel.c:1209
 msgid "Ask what to do"
 msgstr "Ερώτηση για την ενέργεια"
 
-#: ../panels/info/cc-info-panel.c:1222
+#: ../panels/info/cc-info-panel.c:1213
 msgid "Do nothing"
 msgstr "Καμία ενέργεια"
 
-#: ../panels/info/cc-info-panel.c:1226
+#: ../panels/info/cc-info-panel.c:1217
 msgid "Open folder"
 msgstr "Άνοιγμα φακέλου"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Other Media"
 msgstr "Άλλα μέσα"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1339
 msgid "Select an application for audio CDs"
 msgstr "Επιλέξτε μια εφαρμογή για τα μουσικά σας CDs"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1340
 msgid "Select an application for video DVDs"
 msgstr "Επιλέξτε μια εφαρμογή για DVDs ταινιών"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1341
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Επιλέξτε μια εφαρμογή που θα εκτελείτε όταν θα συνδέεται ένας αναπαραγωγέας "
 "μουσικής"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1342
 msgid "Select an application to run when a camera is connected"
 msgstr "Επιλέξτε μια εφαρμογή που θα εκτελεστεί όταν θα συνδεθεί μια κάμερα"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1343
 msgid "Select an application for software CDs"
 msgstr "Επιλέξτε μια εφαρμογή για CDs λογισμικού"
 
@@ -1302,95 +1367,95 @@ msgstr "Επιλέξτε μια εφαρμογή για CDs λογισμικού
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1355
 msgid "audio DVD"
 msgstr "μουσικό DVD"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1356
 msgid "blank Blu-ray disc"
 msgstr "κενός δίσκος Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1357
 msgid "blank CD disc"
 msgstr "κενός δίσκος CD"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1358
 msgid "blank DVD disc"
 msgstr "κενός δίσκος DVD"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1359
 msgid "blank HD DVD disc"
 msgstr "κενός δίσκος HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1360
 msgid "Blu-ray video disc"
 msgstr "Δίσκος βίντεο Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1361
 msgid "e-book reader"
 msgstr "αναγνώστης ηλεκτρονικών βιβλίων"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1362
 msgid "HD DVD video disc"
 msgstr "Δίσκος βίντεο HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1363
 msgid "Picture CD"
 msgstr "CD εικόνων"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1364
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1365
 msgid "Video CD"
 msgstr "Βίντεο CD"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1366
 msgid "Windows software"
 msgstr "Λογισμικό Windows"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1367
 msgid "Software"
 msgstr "Λογισμικό"
 
-#: ../panels/info/cc-info-panel.c:1499
-#: ../panels/keyboard/keyboard-shortcuts.c:1697
+#: ../panels/info/cc-info-panel.c:1490
+#: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "Ενότητα"
 
-#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1499 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Επισκόπηση"
 
-#: ../panels/info/cc-info-panel.c:1514 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1505 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Προεπιλεγμένες εφαρμογές"
 
-#: ../panels/info/cc-info-panel.c:1519 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Αφαιρούμενα μέσα"
 
-#: ../panels/info/cc-info-panel.c:1544
+#: ../panels/info/cc-info-panel.c:1535
 #, c-format
 msgid "Version %s"
 msgstr "Έκδοση %s"
 
-#: ../panels/info/cc-info-panel.c:1594
+#: ../panels/info/cc-info-panel.c:1585
 msgid "Install Updates"
 msgstr "Εγκατάσταση ενημερώσεων"
 
-#: ../panels/info/cc-info-panel.c:1598
+#: ../panels/info/cc-info-panel.c:1589
 msgid "System Up-To-Date"
 msgstr "Το σύστημα είναι ενημερωμένο"
 
-#: ../panels/info/cc-info-panel.c:1602
+#: ../panels/info/cc-info-panel.c:1593
 msgid "Checking for Updates"
 msgstr "Έλεγχος για ενημερώσεις"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:44
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
@@ -1803,7 +1868,7 @@ msgstr "Προσαρμοσμένες συντομεύσεις"
 msgid "<Unknown Action>"
 msgstr "<Άγνωστη ενέργεια>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1301
+#: ../panels/keyboard/keyboard-shortcuts.c:1300
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1814,7 +1879,7 @@ msgstr ""
 "πληκτρολόγηση.\n"
 "Χρησιμοποιήστε την σε συνδυασμό με πλήκτρα όπως το Control, Alt ή Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1333
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1823,7 +1888,7 @@ msgstr ""
 "Η συντόμευση \"%s\" χρησιμοποιείται ήδη για:\n"
 " \"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1338
+#: ../panels/keyboard/keyboard-shortcuts.c:1337
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -1831,7 +1896,7 @@ msgstr ""
 "Αν αναθέσετε ξανά τη συντόμευση στο \"%s\", η συντόμευση \"%s\" θα "
 "απενεργοποιηθεί."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1344
+#: ../panels/keyboard/keyboard-shortcuts.c:1343
 msgid "_Reassign"
 msgstr "Ανά_θεση ξανά"
 
@@ -1866,7 +1931,9 @@ msgid "General"
 msgstr "Γενικά"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "double click, speed"
 msgid "Slow"
 msgstr "Αργή"
 
@@ -1875,7 +1942,9 @@ msgid "Double-click timeout"
 msgstr "Διάρκεια διπλού κλικ"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "double click, speed"
 msgid "Fast"
 msgstr "Γρήγορη"
 
@@ -1906,22 +1975,50 @@ msgid "_Pointer speed"
 msgstr "Ταχύτητα δεί_κτη"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "mouse pointer, speed"
+msgid "Slow"
+msgstr "Αργή"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "mouse pointer, speed"
+msgid "Fast"
+msgstr "Γρήγορη"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "Επιφάνεια αφής"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "touchpad pointer, speed"
+msgid "Slow"
+msgstr "Αργή"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "touchpad pointer, speed"
+msgid "Fast"
+msgstr "Γρήγορη"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Disable while _typing"
 msgstr "Απενεργοποίηση κατά την πληκ_τρολόγηση"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
 msgstr "Χτύπημα για _κλικ"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Two _finger scroll"
 msgstr "Κύλιση με δυο _δάκτυλα"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "C_ontent sticks to fingers"
 msgstr "Το περιε_χόμενο κολλάει στα δάκτυλα"
 
@@ -1960,21 +2057,26 @@ msgstr "Μονό κλικ, δευτερεύοντος κουμπιού"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:364
 msgid "Air_plane Mode"
 msgstr "Λειτουργία αερο_πλάνου"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:927
 msgid "Network proxy"
 msgstr "Διαμεσολαβητής δικτύου"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#. Translators: this is the title of the connection details
+#. * window for vpn connections, it is also used to display
+#. * vpn connections in the device list.
+#.
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:284
+#: ../panels/network/net-vpn.c:419
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1241
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Οι υπηρεσίες δικτύου του συστήματος δεν είναι συμβατές με αυτή την έκδοση."
@@ -2003,7 +2105,7 @@ msgstr "Εσωτερική _πιστοποίηση"
 msgid "Security"
 msgstr "Ασφάλεια"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "αυτόματο"
 
@@ -2103,10 +2205,10 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Εξαιρετικό"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:255
+#: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "Ταυτότητα"
 
@@ -2156,13 +2258,13 @@ msgid "Delete Route"
 msgstr "Διαγραφή δρομολογητή"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "Αυτόματα (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:620
 #: ../panels/network/connection-editor/ce-page-ip6.c:622
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "Χειροκίνητο"
 
@@ -2172,7 +2274,7 @@ msgid "Link-Local Only"
 msgstr "Μόνο τοπική σύνδεση"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:925
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2194,12 +2296,12 @@ msgid "Automatic, DHCP only"
 msgstr "Αυτόματα, μόνο DHCP"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:886
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:63
+#: ../panels/network/network-wifi.ui.h:49
 msgid "Reset"
 msgstr "Επαναφορά"
 
@@ -2249,7 +2351,7 @@ msgstr "Ταχύτητα σύνδεσης"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
-#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "Διεύθυνση IPv4"
@@ -2258,14 +2360,14 @@ msgstr "Διεύθυνση IPv4"
 #: ../panels/network/net-device-ethernet.c:160
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "Διεύθυνση IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
-#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "Διεύθυνση υλικού"
@@ -2273,7 +2375,7 @@ msgstr "Διεύθυνση υλικού"
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
 msgid "Default Route"
 msgstr "Προεπιλεγμένος δρομολογητής"
@@ -2283,7 +2385,7 @@ msgstr "Προεπιλεγμένος δρομολογητής"
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
 msgid "DNS"
 msgstr "DNS"
@@ -2331,7 +2433,7 @@ msgstr "Ό_νομα"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:36
 msgid "_MAC Address"
 msgstr "Διεύθυνση _MAC"
 
@@ -2345,26 +2447,44 @@ msgid "_Cloned Address"
 msgstr "_Κλωνοποιημένη διεύθυνση"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "Α_υτόματη σύνδεση"
+msgid "bytes"
+msgstr "οκτάδες"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "Να είναι διαθέσιμο σε άλλους _χρήστες"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "οκτάδες"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "Α_υτόματη σύνδεση"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "_Ζώνη τοίχους προστασίας"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+#| msgid "Default"
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "Προεπιλογή"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr "Η ζώνη ορίζει το επίπεδο εμπιστοσύνης της σύνδεσης"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:22
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:23
 msgid "_Addresses"
 msgstr "_Διευθύνσεις"
 
@@ -2375,7 +2495,7 @@ msgstr "Αυτόματο DNS"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Routes"
 msgstr "Διαδρομές"
 
@@ -2386,66 +2506,66 @@ msgstr "Αυτόματος διαδρομές"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Use this connection _only for resources on its network"
 msgstr "Χ_ρήση αυτής της σύνδεσης μόνο για πόρους του δικτύου της"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:34
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:267
+#: ../panels/network/connection-editor/net-connection-editor.c:268
 msgid "Unable to open connection editor"
 msgstr "Αποτυχία ανοίγματος επεξεργαστή σύνδεσης"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:282
+#: ../panels/network/connection-editor/net-connection-editor.c:286
 msgid "New Profile"
 msgstr "Νέα κατατομή"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:504
+#: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1068
 msgid "_Add"
 msgstr "Προσ_θήκη"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
+#: ../panels/network/connection-editor/net-connection-editor.c:593
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:594
 msgid "Bond"
 msgstr "Δεσμός"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 msgid "Bridge"
 msgstr "Γέφυρα"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:739
+#: ../panels/network/connection-editor/net-connection-editor.c:746
 msgid "Could not load VPN plugins"
 msgstr "Αδυναμία φόρτωσης προσθέτων VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:810
 msgid "Import from file…"
 msgstr "Εισαγωγή από αρχείο…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:870
+#: ../panels/network/connection-editor/net-connection-editor.c:877
 msgid "Add Network Connection"
 msgstr "Προσθήκη σύνδεσης δικτύου"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Reset"
 msgstr "_Επαναφορά"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1411
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Παράλειψη"
 
@@ -2524,7 +2644,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "Εξαγωγή σύνδεσης VPN..."
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Σφάλμα: αδυναμία φόρτωσης επεξεργαστή σύνδεσης VPN)"
 
@@ -2543,7 +2663,7 @@ msgstr "_BSSID"
 msgid "My Home Network"
 msgstr "Το οικιακό μου δίκτυο"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "Να είναι διαθέσιμο σε ά_λλους χρήστες"
 
@@ -2558,10 +2678,14 @@ msgstr "Έλεγχος τρόπου σύνδεσης με το διαδίκτυ�
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+#| msgid ""
+#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+msgid ""
+"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
+"vlan;bridge;bond;"
 msgstr ""
-"Δίκτυο;ασύρματο;ασύρματη πιστότητα;ασύρματη "
-"πιστότητα;IP;LAN;μεσολαβητής;ευρυζωνικό;μόντεμ;Bluetooth;"
+"Δίκτυο;ασύρματο;ασύρματη πιστότητα;ασύρματη πιστότητα;IP;LAN;μεσολαβητής;WAN"
+";ευρυζωνικό;μόντεμ;Bluetooth;vpn;vlan;γέφυρα;δεσμός;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -2598,19 +2722,32 @@ msgstr "Διεύθυνση IP"
 msgid "Last used"
 msgstr "Τελευταία χρησιμοποιημένο"
 
-#: ../panels/network/net-device-ethernet.c:337
+#. Translators: This is used as the title of the connection
+#. * details window for ethernet, if there is only a single
+#. * profile. It is also used to display ethernet in the
+#. * device list.
+#.
+#: ../panels/network/net-device-ethernet.c:288
+#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "Ενσύρματη"
+
+#: ../panels/network/net-device-ethernet.c:356
 #: ../panels/network/net-device-wifi.c:1549
-#: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "Επιλογές…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:491
 #, c-format
 msgid "Profile %d"
 msgstr "Κατατομή %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "Προσθήκη νέας σύνδεσης"
 
@@ -2661,13 +2798,13 @@ msgstr ""
 "Θα χαθούν οι λεπτομέρειες των επιλεγμένων δικτύων, συμπεριλαμβανομένων των "
 "κωδικών πρόσβασης και των προσαρμοσμένων ρυθμίσεων."
 
-#: ../panels/network/net-device-wifi.c:1714
+#: ../panels/network/net-device-wifi.c:1712
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Ιστορικό"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1726
+#: ../panels/network/net-device-wifi.c:1724
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Παράλειψη"
@@ -2692,7 +2829,7 @@ msgstr "Αυτό δεν το συνιστούμε για δίκτυα τα οπ�
 msgid "Proxy"
 msgstr "Διαμεσολαβητής"
 
-#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
 msgstr "_Προσθήκη κατατομής…"
 
@@ -2703,11 +2840,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "Πάροχος"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
-msgid "_Options…"
-msgstr "Επιλ_ογές…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2768,7 +2900,7 @@ msgstr "Θύρα διαμεσολαβητή FTP"
 msgid "Socks proxy port"
 msgstr "Θύρα μεσολαβητή Socks"
 
-#: ../panels/network/network-simple.ui.h:6
+#: ../panels/network/network-simple.ui.h:7
 msgid "Turn device off"
 msgstr "Απενεργοποίηση συσκευής"
 
@@ -2833,94 +2965,50 @@ msgid "None"
 msgstr "Κανένα"
 
 #: ../panels/network/network-wifi.ui.h:19
-msgid "blablabla"
-msgstr "blablabla"
-
-#: ../panels/network/network-wifi.ui.h:20
 msgid "Show P_assword"
 msgstr "Εμφάνιση κ_ωδικού πρόσβασης"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Make available to other users"
 msgstr "Να είναι διαθέσιμο σε άλλους χρήστες"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
 msgstr "ταυτότητα"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
 msgstr "Μόνο αυτόματες διευθύνσεις (DHCP)"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Link-local only"
 msgstr "Μόνο τοπική σύνδεση"
 
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Shared with other computers"
 msgstr "Μερισμός με άλλους υπολογιστές"
 
 #: ../panels/network/network-wifi.ui.h:31
-msgid ""
-"Address\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Διεύθυνση\n"
-"ενότητα\n"
-"πηγαίνει\n"
-"εδώ"
-
-#: ../panels/network/network-wifi.ui.h:35
-msgid ""
-"DNS\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"DNS\n"
-"ενότητα\n"
-"πηγαίνει\n"
-"εδώ"
-
-#: ../panels/network/network-wifi.ui.h:40
-msgid ""
-"Routes\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Διαδρομές\n"
-"ενότητα\n"
-"πηγαίνει\n"
-"εδώ"
-
-#: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
 msgstr "_Παράβλεψη διαδρομών που ελήφθησαν αυτόματα"
 
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:33
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:37
 msgid "_Cloned MAC Address"
 msgstr "_Κλωνοποιημένη διεύθυνση MAC"
 
-#: ../panels/network/network-wifi.ui.h:51
-msgid "00:24:16:31:8G:7A"
-msgstr "00:24:16:31:8G:7A"
-
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:38
 msgid "hardware"
 msgstr "υλικό"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:41
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2928,7 +3016,7 @@ msgstr ""
 "Επαναφορά των ρυθμίσεων για αυτή τη σύνδεση με τις προεπιλογές τους, αλλά να "
 "τις θυμάται ως προτιμώμενη σύνδεση."
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:42
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2936,59 +3024,59 @@ msgstr ""
 "Αφαίρεση όλων των λεπτομερειών των σχετικών με αυτό το δίκτυο και μην "
 "δοκιμάστε αυτόματη σύνδεση σε αυτό."
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
 msgstr "επαναφορά"
 
-#: ../panels/network/network-wifi.ui.h:62
+#: ../panels/network/network-wifi.ui.h:48
 msgid "Hardware"
 msgstr "Υλικό"
 
-#: ../panels/network/network-wifi.ui.h:64
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Wi-Fi Hotspot"
 msgstr "Σημείο αναμετάδοσης υψηλής πιστότητας"
 
-#: ../panels/network/network-wifi.ui.h:65
+#: ../panels/network/network-wifi.ui.h:51
 msgid "_Turn On"
 msgstr "_Ενεργοποίηση"
 
-#: ../panels/network/network-wifi.ui.h:66
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi"
 msgstr "Υψηλή πιστότητα"
 
-#: ../panels/network/network-wifi.ui.h:67
+#: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
 msgstr "Σβήσιμο ασύρματης σύνδεσης"
 
-#: ../panels/network/network-wifi.ui.h:68
+#: ../panels/network/network-wifi.ui.h:54
 msgid "_Use as Hotspot…"
 msgstr "_Χρήση ως ενεργού σημείου…"
 
-#: ../panels/network/network-wifi.ui.h:69
+#: ../panels/network/network-wifi.ui.h:55
 msgid "_Connect to Hidden Network…"
 msgstr "_Σύνδεση σε κρυφό δίκτυο…"
 
-#: ../panels/network/network-wifi.ui.h:70
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
 msgstr "_Ιστορικό"
 
-#: ../panels/network/network-wifi.ui.h:71
+#: ../panels/network/network-wifi.ui.h:57
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Απενεργοποίηση σύνδεσης σε δίκτυο ασύρματης πιστότητας"
 
-#: ../panels/network/network-wifi.ui.h:72
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Network Name"
 msgstr "Όνομα δικτύου"
 
-#: ../panels/network/network-wifi.ui.h:73
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Connected Devices"
 msgstr "Συνδεδεμένες συσκευές"
 
-#: ../panels/network/network-wifi.ui.h:74
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Security type"
 msgstr "Τύπος ασφάλειας"
 
-#: ../panels/network/network-wifi.ui.h:75
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Security key"
 msgstr "Κλειδί ασφαλείας"
 
@@ -3599,24 +3687,22 @@ msgid "Show in Lock Screen"
 msgstr "Εμφάνιση σε κλείδωμα οθόνης"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:997
+#: ../panels/region/cc-input-chooser.c:1073
 #: ../panels/search/cc-search-locations-dialog.c:480
 msgid "Other"
 msgstr "Άλλο"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Προσθήκη λογαριασμού"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
-#| msgid "_Mail"
 msgid "Mail"
 msgstr "Αλληλογραφία"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
-#| msgid "Contrast:"
 msgid "Contacts"
 msgstr "Επαφές"
 
@@ -3624,39 +3710,39 @@ msgstr "Επαφές"
 msgid "Resources"
 msgstr "Πόροι"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:370
 msgid "Error logging into the account"
 msgstr "Σφάλμα σύνδεσης στο λογαριασμό"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:430
+#: ../panels/online-accounts/cc-online-accounts-panel.c:442
 msgid "Credentials have expired."
 msgstr "Τα διαπιστευτήρια έχουν λήξει."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:434
+#: ../panels/online-accounts/cc-online-accounts-panel.c:446
 msgid "Sign in to enable this account."
 msgstr "Σύνδεση για ενεργοποίηση αυτού του λογαριασμού."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:439
+#: ../panels/online-accounts/cc-online-accounts-panel.c:451
 msgid "_Sign In"
 msgstr "_Σύνδεση"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:680
+#: ../panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error creating account"
 msgstr "Σφάλμα δημιουργίας λογαριασμού"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:722
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Error removing account"
 msgstr "Σφάλμα αφαίρεσης λογαριασμού"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:758
+#: ../panels/online-accounts/cc-online-accounts-panel.c:772
 msgid "Are you sure you want to remove the account?"
 msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το λογαριασμό;"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:760
+#: ../panels/online-accounts/cc-online-accounts-panel.c:774
 msgid "This will not remove the account on the server."
 msgstr "Ο λογαριασμός σας δε θα διαγραφεί από τον εξυπηρετητή."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:761
+#: ../panels/online-accounts/cc-online-accounts-panel.c:775
 msgid "_Remove"
 msgstr "Α_φαίρεση"
 
@@ -3672,10 +3758,12 @@ msgstr ""
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+#| msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+msgid ""
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
-"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Ημερολόγιο;Αλληλογραφία;Επαφές;"
-"Chat;Calendar;Mail;Contact;"
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Ημερολόγιο;Αλληλογραφία;Επαφές"
+";ownCloud;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3897,9 +3985,17 @@ msgstr "_Κενή οθόνη"
 msgid "_Wi-Fi"
 msgstr "_Υψηλή πιστότητα"
 
+#: ../panels/power/cc-power-panel.c:1521
+msgid "Turns off wireless devices"
+msgstr "Σβήνει ασύρματες συσκευές"
+
 #: ../panels/power/cc-power-panel.c:1544
 msgid "_Mobile Broadband"
 msgstr "Ευρυζωνικό _κινητό"
+
+#: ../panels/power/cc-power-panel.c:1549
+msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgstr "Σβήνει κινητές ευρυζωνικές συσκευές (3G, 4G, WiMax, κλπ.)"
 
 #: ../panels/power/cc-power-panel.c:1582
 msgid "_Bluetooth"
@@ -4039,7 +4135,7 @@ msgid "Authenticate"
 msgstr "Πιστοποίηση"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
@@ -4756,7 +4852,8 @@ msgid "Automatic Screen _Lock"
 msgstr "Αυτόματη _κλείδωμα οθόνης"
 
 #: ../panels/privacy/privacy.ui.h:34
-msgid "Lock Screen _After Blank For"
+#| msgid "Lock Screen _After Blank For"
+msgid "Lock screen _after blank for"
 msgstr "Κλείδωμα οθόνης _μετά από κενό για"
 
 #: ../panels/privacy/privacy.ui.h:35
@@ -4780,11 +4877,13 @@ msgstr ""
 "κρατήσετε τον υπολογιστή σας ελεύθερο από περιττές ευαίσθητες πληροφορίες."
 
 #: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+#| msgid "Automatically Empty _Trash"
+msgid "Automatically empty _Trash"
 msgstr "Αυτόματο άδειασμα _απορριμμάτων"
 
 #: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
+#| msgid "Automatically Purge Temporary _Files"
+msgid "Automatically purge Temporary _Files"
 msgstr "Αυτόματη εκκαθάριση προσωρινών α_ρχείων"
 
 #: ../panels/privacy/privacy.ui.h:42
@@ -4801,42 +4900,42 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Μετρικό"
 
-#: ../panels/region/cc-format-chooser.c:268
+#: ../panels/region/cc-format-chooser.c:283
 msgid "No regions found"
 msgstr "Δε βρέθηκαν περιοχές"
 
-#: ../panels/region/cc-input-chooser.c:179
+#: ../panels/region/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Δεν βρέθηκαν πηγές εισόδου"
 
-#: ../panels/region/cc-region-panel.c:225
+#: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Η συνεδρία σας πρέπει να επανεκκινηθεί για να εφαρμοστούν οι αλλαγές"
 
-#: ../panels/region/cc-region-panel.c:226
+#: ../panels/region/cc-region-panel.c:241
 msgid "Restart Now"
 msgstr "Επανεκκίνηση τώρα"
 
-#: ../panels/region/cc-region-panel.c:436
+#: ../panels/region/cc-region-panel.c:566
 msgctxt "Language"
 msgid "None"
 msgstr "Καμία"
 
-#: ../panels/region/cc-region-panel.c:898
+#: ../panels/region/cc-region-panel.c:1058
 msgid "Sorry"
 msgstr "Συγνώμη"
 
-#: ../panels/region/cc-region-panel.c:900
+#: ../panels/region/cc-region-panel.c:1060
 msgid "Input methods can't be used on the login screen"
 msgstr ""
 "Οι μέθοδοι εισαγωγής δεν μπορούν να χρησιμοποιηθούν στην οθόνη σύνδεσης"
 
-#: ../panels/region/cc-region-panel.c:1345
-msgctxt "Input source"
-msgid "None"
-msgstr "Καμία"
+#: ../panels/region/cc-region-panel.c:1509
+#| msgid "No input sources found"
+msgid "No input source selected"
+msgstr "Δεν επιλέχτηκαν πηγές εισόδου"
 
-#: ../panels/region/cc-region-panel.c:1502
+#: ../panels/region/cc-region-panel.c:1690
 msgid "Login Screen"
 msgstr "Οθόνη σύνδεσης"
 
@@ -4962,7 +5061,7 @@ msgstr "Σελιδοδείκτες"
 msgid "Select Location"
 msgstr "Επιλογή περιοχής"
 
-#: ../panels/search/cc-search-panel.c:193
+#: ../panels/search/cc-search-panel.c:182
 msgid "No applications found"
 msgstr "Δε βρέθηκαν εφαρμογές"
 
@@ -5077,42 +5176,46 @@ msgid "Computer Name"
 msgstr "Όνομα υπολογιστή"
 
 #: ../panels/sharing/sharing.ui.h:8
+msgid "Remote Login"
+msgstr "Απομακρυσμένη σύνδεση"
+
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Some services are disabled because of no network access."
 msgstr "Μερικές υπηρεσίες είναι ανενεργές λόγω έλλειψης πρόσβασης δικτύου."
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "Μερισμός μέσων"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "Μερισμός μουσικής, φωτογραφιών και βίντεο με άλλους στο τρέχον δίκτυο."
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "Μερισμός μέσων σε αυτό το δίκτυο"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "Κοινόχρηστοι φάκελοι"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "στήλη"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "Προσθήκη φακέλου"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "Αφαίρεση φακέλου"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Personal File Sharing"
 msgstr "Προσωπικός μερισμός αρχείου"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:19
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5122,17 +5225,13 @@ msgstr ""
 "σας με άλλους στο τρέχον δίκτυό σας χρησιμοποιώντας: <a href=\"dav://%s"
 "\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Share Public Folder On This Network"
 msgstr "Μερισμός δημόσιου φακέλου σε αυτό το δίκτυο"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require Password"
 msgstr "Απαιτείται κωδικός πρόσβασης"
-
-#: ../panels/sharing/sharing.ui.h:22
-msgid "Remote Login"
-msgstr "Απομακρυσμένη σύνδεση"
 
 #: ../panels/sharing/sharing.ui.h:24
 #, no-c-format
@@ -5426,7 +5525,7 @@ msgstr ""
 "αναπήδησης;Πλήκτρα ποντικιού;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Χαμηλό"
@@ -5437,7 +5536,7 @@ msgid "Normal"
 msgstr "Κανονική"
 
 #: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:35
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Υψηλό"
@@ -5835,66 +5934,66 @@ msgstr "Παχύ"
 msgid "Length:"
 msgstr "Διάρκεια:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
+#. The color of the accessibility crosshair
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Color:"
 msgstr "Χρώμα:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Crosshairs:"
 msgstr "Τομές:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Overlaps mouse cursor"
 msgstr "Επικάλυψη δρομέα του ποντικιού"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Στόχος"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "White on black:"
 msgstr "Μαύρο σε λευκό:"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Brightness:"
 msgstr "Φωτεινότητα:"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Contrast:"
 msgstr "Αντίθεση:"
 
 #. The contrast scale goes from Color to None (grayscale)
-#: ../panels/universal-access/zoom-options.ui.h:29
-#| msgid "Color"
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
 msgid "Color"
 msgstr "Χρώμα"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
+#: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
 msgid "None"
 msgstr "Κανένα"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
+#: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "universal access, color"
 msgid "Full"
 msgstr "Πλήρες"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Χαμηλή"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Υψηλή"
 
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Εφέ χρώματος:"
 
-#: ../panels/universal-access/zoom-options.ui.h:37
+#: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
 msgstr "Εφέ χρώματος"
 
@@ -6045,7 +6144,6 @@ msgstr ""
 "Name;Fingerprint;Logo;Face;Password;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
-#| msgid "Retain _History"
 msgid "Login History"
 msgstr "Ιστορικό συνδέσεων"
 
@@ -6469,16 +6567,16 @@ msgstr "Αδυναμία αυτόματης ένωσης αυτού του τύ�
 msgid "No such domain or realm found"
 msgstr "Δεν βρέθηκε τέτοιος τομέας ή realm"
 
-#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:817
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Αδυναμία σύνδεσης ως %s στον τομέα %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:820
+#: ../panels/user-accounts/um-realm-manager.c:822
 msgid "Invalid password, please try again"
 msgstr "Λάθος κωδικός πρόσβασης, παρακαλώ προσπαθήστε ξανά"
 
-#: ../panels/user-accounts/um-realm-manager.c:824
+#: ../panels/user-accounts/um-realm-manager.c:826
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Αδυναμία σύνδεσης στον τομέα %s: %s"
@@ -6661,50 +6759,50 @@ msgstr "Χαρτογράφηση σε μια οθόνη"
 msgid "%d of %d"
 msgstr "%d από %d"
 
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:384
+#: ../panels/wacom/cc-wacom-page.c:122 ../panels/wacom/cc-wacom-page.c:407
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Καμία"
 
-#: ../panels/wacom/cc-wacom-page.c:119
+#: ../panels/wacom/cc-wacom-page.c:123
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Αποστολή πατήματος πλήκτρου"
 
-#: ../panels/wacom/cc-wacom-page.c:120
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Αλλαγή οθόνης"
 
-#: ../panels/wacom/cc-wacom-page.c:121
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Εμφάνιση βοήθειας στην οθόνη"
 
-#: ../panels/wacom/cc-wacom-page.c:621
+#: ../panels/wacom/cc-wacom-page.c:644
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Πάνω"
 
-#: ../panels/wacom/cc-wacom-page.c:621
+#: ../panels/wacom/cc-wacom-page.c:644
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Κάτω"
 
-#: ../panels/wacom/cc-wacom-page.c:662
+#: ../panels/wacom/cc-wacom-page.c:685
 msgid "Switch Modes"
 msgstr "Εναλλαγή λειτουργιών"
 
-#: ../panels/wacom/cc-wacom-page.c:752
+#: ../panels/wacom/cc-wacom-page.c:775
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Κουμπί"
 
-#: ../panels/wacom/cc-wacom-page.c:810
+#: ../panels/wacom/cc-wacom-page.c:833
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: ../panels/wacom/cc-wacom-page.c:920
+#: ../panels/wacom/cc-wacom-page.c:943
 msgid "Display Mapping"
 msgstr "Χαρτογράφηση οθόνης"
 
@@ -6761,10 +6859,15 @@ msgid "Adjust display resolution"
 msgstr "Καθορισμός ανάλυσης οθόνης"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#| msgid "Mouse Settings"
+msgid "Adjust mouse settings"
+msgstr "Προσαρμογή ρυθμίσεων ποντικιού"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Tracking Mode"
 msgstr "Λειτουργία εντοπισμού"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Left-Handed Orientation"
 msgstr "Προσανατολισμός για αριστερόχειρες"
 
@@ -6921,40 +7024,40 @@ msgstr "Κάτω πλήκτρο"
 msgid "Tip Pressure Feel"
 msgstr "Αίσθηση πίεσης tip"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:66
 msgid "Enable verbose mode"
 msgstr "Ενεργοποίηση περιφραστικών μηνυμάτων"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:67
 msgid "Show the overview"
 msgstr "Εμφάνιση της επισκόπησης"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:68
 msgid "Search for the string"
 msgstr "Αναζήτηση συμβολοσειράς"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:69
 msgid "List possible panel names and exit"
 msgstr "Λίστα πιθανών ονομάτων πίνακα και έξοδος"
 
-#: ../shell/cc-application.c:71 ../shell/cc-application.c:72
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
+#: ../shell/cc-application.c:72
 msgid "Show help options"
 msgstr "Εμφάνιση επιλογών βοήθειας"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:73
 msgid "Panel to display"
 msgstr "Πλαίσιο για εμφάνιση"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:73
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[ΠΛΑΙΣΙΟ] [ΟΡΙΣΜΑ…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:139
 msgid "- Settings"
 msgstr "- Ρυθμίσεις"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:148
 #, c-format
 msgid ""
 "%s\n"
@@ -6964,15 +7067,15 @@ msgstr ""
 "Εκτελέστε '%s --help' για να δείτε μια πλήρη λίστα των διαθέσιμων επιλογών "
 "της γραμμής εντολών.\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:178
 msgid "Available panels:"
 msgstr "Διαθέσιμα πλαίσια:"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:313
 msgid "Help"
 msgstr "Βοήθεια"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:314
 msgid "Quit"
 msgstr "Έξοδος"
 
@@ -6996,13 +7099,70 @@ msgctxt "category"
 msgid "System"
 msgstr "Σύστημα"
 
-#: ../shell/cc-window.c:1413
+#: ../shell/cc-window.c:1421
 msgid "All Settings"
 msgstr "Όλες οι ρυθμίσεις"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Προτιμήσεις;Ρυθμίσεις;"
+
+#~ msgid "Export"
+#~ msgstr "Εξαγωγή"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Slow"
+#~ msgstr "Αργή"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Fast"
+#~ msgstr "Γρήγορη"
+
+#~ msgid "_Options…"
+#~ msgstr "Επιλ_ογές…"
+
+#~ msgid "blablabla"
+#~ msgstr "blablabla"
+
+#~ msgid ""
+#~ "Address\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Διεύθυνση\n"
+#~ "ενότητα\n"
+#~ "πηγαίνει\n"
+#~ "εδώ"
+
+#~ msgid ""
+#~ "DNS\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "DNS\n"
+#~ "ενότητα\n"
+#~ "πηγαίνει\n"
+#~ "εδώ"
+
+#~ msgid ""
+#~ "Routes\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Διαδρομές\n"
+#~ "ενότητα\n"
+#~ "πηγαίνει\n"
+#~ "εδώ"
+
+#~ msgid "00:24:16:31:8G:7A"
+#~ msgstr "00:24:16:31:8G:7A"
+
+#~ msgctxt "Input source"
+#~ msgid "None"
+#~ msgstr "Καμία"
 
 #~ msgid "Expired credentials. Please log in again."
 #~ msgstr "Τα διαπιστευτήρια έληξαν. Παρακαλώ συνδεθείτε ξανά."
@@ -7253,9 +7413,6 @@ msgstr "Προτιμήσεις;Ρυθμίσεις;"
 
 #~ msgid "Available Profiles for Webcams"
 #~ msgstr "Διαθέσιμα προφίλ για κάμερες web"
-
-#~ msgid "No profile"
-#~ msgstr "Δεν υπάρχει προφίλ"
 
 #~ msgid "%i year"
 #~ msgid_plural "%i years"
@@ -7517,9 +7674,6 @@ msgstr "Προτιμήσεις;Ρυθμίσεις;"
 
 #~ msgid "Wireless"
 #~ msgstr "Ασύρματη"
-
-#~ msgid "Wired"
-#~ msgstr "Ενσύρματη"
 
 #~ msgid "Mesh"
 #~ msgstr "Mesh"
