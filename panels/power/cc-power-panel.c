@@ -831,9 +831,10 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
   /* push this to g-s-d */
   percentage = (guint) gtk_range_get_value (range);
   g_dbus_proxy_call (priv->screen_proxy,
-                     "SetPercentage",
-                     g_variant_new ("(u)",
-                                    percentage),
+                     "org.freedesktop.DBus.Properties.Set",
+                     g_variant_new_parsed ("('org.gnome.SettingsDaemon.Power.Screen',"
+                                           "'Brightness', %v)",
+                                           g_variant_new_int32 (percentage)),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
                      priv->cancellable,
@@ -842,79 +843,50 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
 }
 
 static void
-get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+sync_brightness (CcPowerPanel *self)
 {
-  CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  GError *error = NULL;
   GVariant *result;
   guint brightness;
+  gboolean visible;
   GtkRange *range;
 
-  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
-  if (result == NULL)
-    {
-      /* We got cancelled, so we're probably exiting */
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_error_free (error);
-          return;
-        }
-
-      gtk_widget_hide (self->priv->brightness_row);
-      gtk_widget_hide (self->priv->dim_screen_row);
-
-      if (error->message &&
-          strstr (error->message, "No backlight devices present") == NULL)
-        {
-          g_warning ("Error getting brightness: %s", error->message);
-        }
-      g_error_free (error);
-      return;
-    }
+  result = g_dbus_proxy_get_cached_property (self->priv->screen_proxy, "Brightness");
 
   /* set the slider */
-  g_variant_get (result, "(u)", &brightness);
-  range = GTK_RANGE (self->priv->brightness_scale);
-  gtk_range_set_range (range, 0, 100);
-  gtk_range_set_increments (range, 1, 10);
-  gtk_range_set_value (range, brightness);
-  g_signal_connect (range, "value-changed",
-                    G_CALLBACK (brightness_slider_value_changed_cb), user_data);
-  g_variant_unref (result);
+  g_variant_get (result, "i", &brightness);
+  visible = brightness >= 0.0;
+
+  gtk_widget_set_visible (self->priv->brightness_row, visible);
+  gtk_widget_set_visible (self->priv->dim_screen_row, visible);
+
+  if (visible)
+    {
+      range = GTK_RANGE (self->priv->brightness_scale);
+      gtk_range_set_range (range, 0, 100);
+      gtk_range_set_increments (range, 1, 10);
+      self->priv->setting_brightness = TRUE;
+      gtk_range_set_value (range, brightness);
+      self->priv->setting_brightness = FALSE;
+      g_variant_unref (result);
+    }
 }
 
 static void
-on_signal (GDBusProxy *proxy,
-           gchar      *sender_name,
-           gchar      *signal_name,
-           GVariant   *parameters,
-           gpointer    user_data)
+on_property_change (GDBusProxy *proxy,
+                    GVariant   *changed_properties,
+                    GVariant   *invalidated_properties,
+                    gpointer    user_data)
 {
   CcPowerPanel *self = CC_POWER_PANEL (user_data);
-
-  if (g_strcmp0 (signal_name, "Changed") == 0)
-    {
-      /* changed, but ignoring */
-      if (self->priv->setting_brightness)
-        return;
-
-      /* retrieve the value again from g-s-d */
-      g_dbus_proxy_call (self->priv->screen_proxy,
-                         "GetPercentage",
-                         NULL,
-                         G_DBUS_CALL_FLAGS_NONE,
-                         200, /* we don't want to randomly move the bar */
-                         self->priv->cancellable,
-                         get_brightness_cb,
-                         user_data);
-    }
+  sync_brightness (self);
 }
 
 static void
 got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   GError *error = NULL;
-  CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
+  CcPowerPanel *self = CC_POWER_PANEL (user_data);
+  CcPowerPanelPrivate *priv = self->priv;
 
   priv->screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (priv->screen_proxy == NULL)
@@ -925,18 +897,10 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
     }
 
   /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect (priv->screen_proxy, "g-signal",
-                    G_CALLBACK (on_signal), user_data);
+  g_signal_connect (priv->screen_proxy, "g-properties-changed",
+                    G_CALLBACK (on_property_change), self);
 
-  /* get the initial state */
-  g_dbus_proxy_call (priv->screen_proxy,
-                     "GetPercentage",
-                     NULL,
-                     G_DBUS_CALL_FLAGS_NONE,
-                     200, /* we don't want to randomly move the bar */
-                     priv->cancellable,
-                     get_brightness_cb,
-                     user_data);
+  sync_brightness (self);
 }
 
 static void
@@ -1448,6 +1412,8 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_set_margin_right (scale, 20);
   gtk_box_pack_start (GTK_BOX (box2), scale, TRUE, TRUE, 0);
   gtk_size_group_add_widget (priv->level_sizegroup, scale);
+  g_signal_connect (scale, "value-changed",
+                    G_CALLBACK (brightness_slider_value_changed_cb), self);
 
   gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (widget), box);
