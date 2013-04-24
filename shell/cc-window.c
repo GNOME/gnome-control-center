@@ -168,7 +168,7 @@ activate_panel (CcWindow           *self,
   icon_name = get_icon_name_from_g_icon (gicon);
 
   gtk_window_set_role (GTK_WINDOW (self), id);
-  gd_header_bar_set_title (GD_HEADER_BAR (priv->header), name);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), name);
   gtk_window_set_default_icon_name (icon_name);
   gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
 
@@ -237,7 +237,7 @@ shell_show_overview_page (CcWindow *self)
 
   /* reset window title and icon */
   gtk_window_set_role (GTK_WINDOW (self), NULL);
-  gd_header_bar_set_title (GD_HEADER_BAR (priv->header), NULL);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), NULL);
   gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
   gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
 
@@ -1411,7 +1411,7 @@ create_header (CcWindow *self)
   GtkWidget *button;
   AtkObject *accessible;
 
-  priv->header = gd_header_bar_new ();
+  priv->header = gtk_header_bar_new ();
 
   priv->previous_button = button = gd_header_simple_button_new ();
   gd_header_button_set_symbolic_icon_name (GD_HEADER_BUTTON (button),
@@ -1419,11 +1419,11 @@ create_header (CcWindow *self)
   gtk_widget_set_no_show_all (button, TRUE);
   accessible = gtk_widget_get_accessible (button);
   atk_object_set_name (accessible, _("All Settings"));
-  gd_header_bar_pack_start (GD_HEADER_BAR (priv->header), button);
+  gtk_header_bar_pack_start (GTK_HEADER_BAR (priv->header), button);
   g_signal_connect (button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gd_header_bar_pack_end (GD_HEADER_BAR (priv->header), priv->top_right_box);
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
 
   priv->search_entry = gtk_search_entry_new ();
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->search_entry);
