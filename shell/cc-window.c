@@ -158,11 +158,11 @@ activate_panel (CcWindow           *self,
 
   gtk_container_add (GTK_CONTAINER (box), priv->current_panel);
 
-  gd_stack_add_named (GD_STACK (priv->stack), box, id);
+  gtk_stack_add_named (GTK_STACK (priv->stack), box, id);
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  gd_stack_set_visible_child_name (GD_STACK (priv->stack), id);
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), id);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
@@ -215,7 +215,7 @@ shell_show_overview_page (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
 
-  gd_stack_set_visible_child_name (GD_STACK (priv->stack), OVERVIEW_PAGE);
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), OVERVIEW_PAGE);
 
   if (priv->current_panel_box)
     gtk_container_remove (GTK_CONTAINER (priv->stack), priv->current_panel_box);
@@ -618,7 +618,7 @@ search_entry_changed_cb (GtkEntry *entry,
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
-      gd_stack_set_visible_child_name (GD_STACK (priv->stack), SEARCH_PAGE);
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), SEARCH_PAGE);
     }
 }
 
@@ -879,7 +879,7 @@ previous_button_clicked_cb (GtkButton *button,
 }
 
 static void
-stack_page_notify_cb (GdStack     *stack,
+stack_page_notify_cb (GtkStack     *stack,
                       GParamSpec  *spec,
                       CcWindow    *self)
 {
@@ -887,7 +887,7 @@ stack_page_notify_cb (GdStack     *stack,
   int nat_height;
   const char *id;
 
-  id = gd_stack_get_visible_child_name (stack);
+  id = gtk_stack_get_visible_child_name (stack);
 
   /* make sure the home button is shown on all pages except the overview page */
 
@@ -1211,7 +1211,7 @@ window_key_press_event (GtkWidget   *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (g_strcmp0 (gd_stack_get_visible_child_name (GD_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
+            if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
               shell_show_overview_page (self);
             retval = TRUE;
             break;
@@ -1219,7 +1219,7 @@ window_key_press_event (GtkWidget   *win,
     }
   else if (state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up)
     {
-      if (g_strcmp0 (gd_stack_get_visible_child_name (GD_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
+      if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
         shell_show_overview_page (self);
       retval = TRUE;
     }
@@ -1304,7 +1304,7 @@ update_small_screen_settings (CcWindow *self)
   self->priv->small_screen = small;
 
   /* And update the minimum sizes */
-  stack_page_notify_cb (GD_STACK (self->priv->stack), NULL, self);
+  stack_page_notify_cb (GTK_STACK (self->priv->stack), NULL, self);
 }
 
 static gboolean
@@ -1373,7 +1373,7 @@ create_main_page (CcWindow *self)
   gtk_style_context_add_class (context, "view");
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gd_stack_add_named (GD_STACK (priv->stack), priv->scrolled_window, OVERVIEW_PAGE);
+  gtk_stack_add_named (GTK_STACK (priv->stack), priv->scrolled_window, OVERVIEW_PAGE);
 
   priv->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_margin_top (priv->main_vbox, 8);
@@ -1398,7 +1398,7 @@ create_search_page (CcWindow *self)
   priv->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->search_scrolled),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gd_stack_add_named (GD_STACK (priv->stack), priv->search_scrolled, SEARCH_PAGE);
+  gtk_stack_add_named (GTK_STACK (priv->stack), priv->search_scrolled, SEARCH_PAGE);
 
   /* setup search functionality */
   setup_search (self);
@@ -1450,9 +1450,9 @@ create_window (CcWindow *self)
   create_header (self);
   gtk_box_pack_start (GTK_BOX (box), priv->header, FALSE, FALSE, 0);
 
-  priv->stack = gd_stack_new ();
-  gd_stack_set_homogeneous (GD_STACK (priv->stack), TRUE);
-  gd_stack_set_transition_type (GD_STACK (priv->stack), GD_STACK_TRANSITION_TYPE_CROSSFADE);
+  priv->stack = gtk_stack_new ();
+  gtk_stack_set_homogeneous (GTK_STACK (priv->stack), TRUE);
+  gtk_stack_set_transition_type (GTK_STACK (priv->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
   gtk_box_pack_start (GTK_BOX (box), priv->stack, TRUE, TRUE, 0);
 
   create_main_page (self);
@@ -1495,7 +1495,7 @@ cc_window_init (CcWindow *self)
   /* keep a list of custom widgets to unload on panel change */
   priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
-  stack_page_notify_cb (GD_STACK (priv->stack), NULL, self);
+  stack_page_notify_cb (GTK_STACK (priv->stack), NULL, self);
 }
 
 CcWindow *
