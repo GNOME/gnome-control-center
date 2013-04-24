@@ -29,7 +29,6 @@
 #include <goabackend/goabackend.h>
 
 #include <egg-list-box/egg-list-box.h>
-#include <libgd/gd-stack.h>
 
 #include "cc-online-accounts-add-account-dialog.h"
 
@@ -109,7 +108,7 @@ list_box_child_activated_cb (GoaPanelAddAccountDialog *add_account, GtkWidget *c
   provider = g_object_get_data (G_OBJECT (child), "provider");
   if (provider == NULL)
     {
-      gd_stack_set_visible_child_name (GD_STACK (add_account->priv->stack), OTHER_PAGE);
+      gtk_stack_set_visible_child_name (GTK_STACK (add_account->priv->stack), OTHER_PAGE);
       return;
     }
 
@@ -302,8 +301,8 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
 
   priv->list_store = gtk_list_store_new (N_COLUMNS, GOA_TYPE_PROVIDER, G_TYPE_ICON, G_TYPE_STRING);
 
-  priv->stack = gd_stack_new ();
-  gd_stack_set_transition_type (GD_STACK (priv->stack), GD_STACK_TRANSITION_TYPE_CROSSFADE);
+  priv->stack = gtk_stack_new ();
+  gtk_stack_set_transition_type (GTK_STACK (priv->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
   gtk_container_add (GTK_CONTAINER (grid), priv->stack);
 
   sw = gtk_scrolled_window_new (NULL, NULL);
@@ -311,7 +310,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
   gtk_widget_set_hexpand (sw, TRUE);
   gtk_widget_set_vexpand (sw, TRUE);
-  gd_stack_add_named (GD_STACK (priv->stack), sw, BRANDED_PAGE);
+  gtk_stack_add_named (GTK_STACK (priv->stack), sw, BRANDED_PAGE);
 
   priv->branded_list_box = egg_list_box_new ();
   egg_list_box_add_to_scrolled (priv->branded_list_box, GTK_SCROLLED_WINDOW (sw));
@@ -323,7 +322,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   grid = gtk_grid_new ();
   gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
   gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
-  gd_stack_add_named (GD_STACK (priv->stack), grid, OTHER_PAGE);
+  gtk_stack_add_named (GTK_STACK (priv->stack), grid, OTHER_PAGE);
 
   add_account_dialog_create_group_ui (add_account,
                                       &priv->mail_list_box,
@@ -343,7 +342,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
                                       grid,
                                       _("Resources"));
 
-  gd_stack_set_visible_child_name (GD_STACK (priv->stack), BRANDED_PAGE);
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), BRANDED_PAGE);
 
   gtk_dialog_add_button (GTK_DIALOG (add_account), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
   gtk_dialog_set_default_response (GTK_DIALOG (add_account), GTK_RESPONSE_CANCEL);
