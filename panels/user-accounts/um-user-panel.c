@@ -437,6 +437,11 @@ delete_user_response (GtkWidget         *dialog,
 
         user = get_selected_user (d);
 
+        /* remove autologin */
+        if (act_user_get_automatic_login (user)) {
+                act_user_set_automatic_login (user, FALSE);
+        }
+
         act_user_manager_delete_user_async (d->um,
                                             user,
                                             remove_files,
