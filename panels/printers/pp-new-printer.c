@@ -683,6 +683,7 @@ printer_add_async_scb (GObject      *source_object,
   GDBusConnection     *bus;
   GVariantBuilder      array_builder;
   GVariant            *output;
+  gboolean             cancelled = FALSE;
   PPDName             *ppd_item = NULL;
   GError              *error = NULL;
 
@@ -698,15 +699,15 @@ printer_add_async_scb (GObject      *source_object,
     }
   else
     {
-      if (error->domain != G_IO_ERROR ||
-          error->code != G_IO_ERROR_CANCELLED)
+      cancelled = g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED);
+
+      if (!cancelled)
         g_warning ("%s", error->message);
-      g_error_free (error);
+
+      g_clear_error (&error);
     }
 
-  if (!error ||
-      error->domain != G_IO_ERROR ||
-      error->code != G_IO_ERROR_CANCELLED)
+  if (!cancelled)
     {
       if (ppd_item == NULL || ppd_item->ppd_match_level < PPD_EXACT_MATCH)
         {
