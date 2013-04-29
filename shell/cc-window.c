@@ -557,7 +557,7 @@ model_filter_func (GtkTreeModel    *model,
                    CcWindowPrivate *priv)
 {
   char **terms, **t;
-  gboolean matches;
+  gboolean matches = FALSE;
 
   if (!priv->filter_string)
     return FALSE;
