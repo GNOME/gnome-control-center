@@ -809,10 +809,7 @@ kinit_thread_func (GSimpleAsyncResult *async,
                 break;
 
         case KRB5KDC_ERR_C_PRINCIPAL_UNKNOWN:
-        case KRB5KDC_ERR_CLIENT_REVOKED:
-        case KRB5KDC_ERR_KEY_EXP:
         case KRB5KDC_ERR_POLICY:
-        case KRB5KDC_ERR_ETYPE_NOSUPP:
                 g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN,
                                                  _("Cannot log in as %s at the %s domain"),
                                                  login->user, login->domain);
@@ -821,6 +818,15 @@ kinit_thread_func (GSimpleAsyncResult *async,
         case KRB5KRB_AP_ERR_BAD_INTEGRITY:
                 g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD,
                                                  _("Invalid password, please try again"));
+                break;
+        case KRB5_PREAUTH_FAILED:
+        case KRB5KDC_ERR_KEY_EXP:
+        case KRB5KDC_ERR_CLIENT_REVOKED:
+        case KRB5KDC_ERR_ETYPE_NOSUPP:
+        case KRB5_PROG_ETYPE_NOSUPP:
+                g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_CANNOT_AUTH,
+                                                 _("Cannot log in as %s at the %s domain"),
+                                                 login->user, login->domain);
                 break;
         default:
                 g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,

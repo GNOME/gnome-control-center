@@ -648,9 +648,19 @@ on_realm_login (GObject *source,
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GError *error = NULL;
-        GBytes *creds;
+        GBytes *creds = NULL;
 
         um_realm_login_finish (result, &creds, &error);
+
+        /*
+         * User login is valid, but cannot authenticate right now (eg: user needs
+         * to change password at next login etc.)
+         */
+        if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_CANNOT_AUTH)) {
+                g_clear_error (&error);
+                creds = NULL;
+        }
+
         if (error == NULL) {
 
                 /* Already joined to the domain, just register this user */
@@ -659,7 +669,8 @@ on_realm_login (GObject *source,
                         enterprise_permit_user_login (self);
 
                 /* Join the domain, try using the user's creds */
-                } else if (!um_realm_join_as_user (self->selected_realm,
+                } else if (creds == NULL ||
+                           !um_realm_join_as_user (self->selected_realm,
                                                    gtk_entry_get_text (self->enterprise_login),
                                                    gtk_entry_get_text (self->enterprise_password),
                                                    creds, self->cancellable,
