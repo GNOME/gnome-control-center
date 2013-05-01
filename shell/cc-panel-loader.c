@@ -163,6 +163,7 @@ cc_panel_loader_fill_model (CcShellModel *model)
       desktop_name = g_strconcat ("gnome-", all_panels[i].name,
                                   "-panel.desktop", NULL);
       app = g_desktop_app_info_new (desktop_name);
+      g_free (desktop_name);
 
       if (app == NULL)
         {
