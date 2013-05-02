@@ -182,6 +182,9 @@ setup_dialog (GtkBuilder *dialog)
 
 	g_signal_connect (WID ("pointer_speed_scale"), "value-changed",
 			  G_CALLBACK (pointer_speed_scale_event), dialog);
+	g_settings_bind (mouse_settings, "motion-acceleration",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("pointer_speed_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Trackpad page */
 	touchpad_present = touchpad_is_present ();
@@ -203,6 +206,9 @@ setup_dialog (GtkBuilder *dialog)
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (touchpad_settings, "natural-scroll",
 			 WID ("natural_scroll_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "motion-acceleration",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_pointer_speed_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	g_signal_connect (WID ("touchpad_pointer_speed_scale"), "value-changed",
