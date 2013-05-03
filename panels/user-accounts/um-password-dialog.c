@@ -435,6 +435,14 @@ auth_cb (PasswdHandler    *handler,
          GError           *error,
          UmPasswordDialog *um)
 {
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gint mode;
+
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->action_combo));
+        gtk_combo_box_get_active_iter (GTK_COMBO_BOX (um->action_combo), &iter);
+        gtk_tree_model_get (model, &iter, 1, &mode, -1);
+
         if (error) {
                 um->old_password_ok = FALSE;
                 set_entry_validation_error (GTK_ENTRY (um->old_password_entry),
@@ -443,6 +451,11 @@ auth_cb (PasswdHandler    *handler,
         else {
                 um->old_password_ok = TRUE;
                 clear_entry_validation_error (GTK_ENTRY (um->old_password_entry));
+        }
+
+        /* Check if we are still in normal mode */
+        if (mode != UM_PASSWORD_DIALOG_MODE_NORMAL){
+                return;
         }
 
         update_sensitivity (um);
