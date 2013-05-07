@@ -319,40 +319,6 @@ foo_scroll_area_init (FooScrollArea *scroll_area)
   scroll_area->priv->update_region = cairo_region_create ();
 }
 
-typedef void (* PathForeachFunc) (double  *x,
-                                  double  *y,
-                                  gpointer data);
-
-static void
-path_foreach_point (cairo_path_t     *path,
-                    PathForeachFunc   func,
-                    gpointer          user_data)
-{
-  int i;
-
-  for (i = 0; i < path->num_data; i += path->data[i].header.length)
-    {
-      cairo_path_data_t *data = &(path->data[i]);
-
-      switch (data->header.type)
-        {
-        case CAIRO_PATH_MOVE_TO:
-        case CAIRO_PATH_LINE_TO:
-          func (&(data[1].point.x), &(data[1].point.y), user_data);
-          break;
-
-        case CAIRO_PATH_CURVE_TO:
-          func (&(data[1].point.x), &(data[1].point.y), user_data);
-          func (&(data[2].point.x), &(data[2].point.y), user_data);
-          func (&(data[3].point.x), &(data[3].point.y), user_data);
-          break;
-
-        case CAIRO_PATH_CLOSE_PATH:
-          break;
-        }
-    }
-}
-
 typedef struct
 {
   double x1, y1, x2, y2;
@@ -1180,25 +1146,6 @@ foo_scroll_area_set_min_size (FooScrollArea *scroll_area,
   gtk_widget_queue_resize (GTK_WIDGET (scroll_area));
 }
 
-typedef struct {
-  cairo_t *cr;
-  GtkAllocation allocation;
-} user_to_device_data;
-
-static void
-user_to_device (double *x, double *y,
-                gpointer user_data)
-{
-  user_to_device_data* data = user_data;
-
-  /* The translations by the user */
-  cairo_user_to_device (data->cr, x, y);
-
-  /* The position of the widget on the window. */
-  *x -= data->allocation.x;
-  *y -= data->allocation.y;
-}
-
 static InputPath *
 make_path (FooScrollArea *area,
            cairo_t *cr,
@@ -1206,18 +1153,12 @@ make_path (FooScrollArea *area,
            FooScrollAreaEventFunc func,
            gpointer data)
 {
-  user_to_device_data conversion_data;
-
   InputPath *path = g_new0 (InputPath, 1);
-
-  conversion_data.cr = cr;
-  gtk_widget_get_allocation(GTK_WIDGET (area), &conversion_data.allocation);
 
   path->is_stroke = is_stroke;
   path->fill_rule = cairo_get_fill_rule (cr);
   path->line_width = cairo_get_line_width (cr);
   path->path = cairo_copy_path (cr);
-  path_foreach_point (path->path, user_to_device, &conversion_data);
   path->func = func;
   path->data = data;
   path->next = area->priv->current_input->paths;
