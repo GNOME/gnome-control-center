@@ -720,7 +720,8 @@ change_name_done (GtkWidget          *entry,
         user = get_selected_user (d);
 
         text = cc_editable_entry_get_text (CC_EDITABLE_ENTRY (entry));
-        if (g_strcmp0 (text, act_user_get_real_name (user)) != 0) {
+        if (g_strcmp0 (text, act_user_get_real_name (user)) != 0 &&
+            is_valid_name (text)) {
                 act_user_set_real_name (user, text);
         }
 
