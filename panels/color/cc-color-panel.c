@@ -1935,6 +1935,7 @@ gcm_prefs_connect_cb (GObject *object,
 static gboolean
 gcm_prefs_is_livecd (void)
 {
+#ifdef __linux__
   gboolean ret = TRUE;
   gchar *data = NULL;
   GError *error = NULL;
@@ -1957,6 +1958,9 @@ gcm_prefs_is_livecd (void)
 out:
   g_free (data);
   return ret;
+#else
+  return FALSE;
+#endif
 }
 
 static void
