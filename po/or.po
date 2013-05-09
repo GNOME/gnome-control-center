@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master.or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-28 15:10+0000\n"
-"PO-Revision-Date: 2013-03-28 20:42+0530\n"
+"POT-Creation-Date: 2013-04-24 19:44+0000\n"
+"PO-Revision-Date: 2013-05-09 22:39+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
 "Language: or\n"
@@ -158,7 +158,7 @@ msgstr "ପୃଷ୍ଠା 2"
 msgid "Paired"
 msgstr "ଯୁଗଳ"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:789
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:812
 msgid "Type"
 msgstr "ପ୍ରକାର"
 
@@ -375,58 +375,86 @@ msgstr "ମପା ହୋଇନଥିବା"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:133
+#: ../panels/color/cc-color-panel.c:136
 msgid "Default: "
 msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:141
+#: ../panels/color/cc-color-panel.c:144
 msgid "Colorspace: "
 msgstr "ରଙ୍ଗ ସ୍ଥାନ:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:148
+#: ../panels/color/cc-color-panel.c:151
 msgid "Test profile: "
 msgstr "ପରୀକ୍ଷଣ ରୂପରେଖା: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:216
+#: ../panels/color/cc-color-panel.c:219
 msgid "Select ICC Profile File"
 msgstr "ICC ରୂପରେଖା ଫାଇଲ ମନୋନୀତ କରନ୍ତୁ"
 
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:222
 msgid "_Import"
 msgstr "ଆମଦାନୀ କରନ୍ତୁ (_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:230
+#: ../panels/color/cc-color-panel.c:233
 msgid "Supported ICC profiles"
 msgstr "ସମର୍ଥିତ ICC ରୂପରେଖାଗୁଡ଼ିକ"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:237
+#: ../panels/color/cc-color-panel.c:240
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "ସମସ୍ତ ଫାଇଲଗୁଡ଼ିକ"
 
-#: ../panels/color/cc-color-panel.c:581
+#: ../panels/color/cc-color-panel.c:587
 msgid "Screen"
 msgstr "ପରଦା"
 
+#. TRANSLATORS: this is when the upload of the profile failed
+#: ../panels/color/cc-color-panel.c:913
+#, c-format
+#| msgid "Failed to apply configuration: %s"
+msgid "Failed to upload file: %s"
+msgstr "ଫାଇଲ ଧାରଣ କରିବାରେ ବିଫଳ : %s"
+
+#. TRANSLATORS: these are instructions on how to recover
+#. * the ICC profile on the native operating system and are
+#. * only shown when the user uses a LiveCD to calibrate
+#: ../panels/color/cc-color-panel.c:927
+msgid "The profile has been uploaded to:"
+msgstr "ଏହି ରୂପରେଖାଟି ଏଥିରେ ଧାରଣ କରାଯାଇଛି:"
+
+#: ../panels/color/cc-color-panel.c:929
+msgid "Write down this URL."
+msgstr "ଏହି URL କୁ ଲେଖନ୍ତୁ।"
+
+#: ../panels/color/cc-color-panel.c:930
+msgid "Restart this computer and boot your normal operating system."
+msgstr ""
+"ଏହି କମ୍ପୁଟରକୁ ପୁନଃଚାଳନ କରନ୍ତୁ ଏବଂ ଆପଣଙ୍କର ସାଧାରଣ ପ୍ରଚାଳନ ତନ୍ତ୍ରକୁ ବୁଟ କରନ୍ତୁ।"
+
+#: ../panels/color/cc-color-panel.c:931
+msgid "Type the URL into your browser to download and install the profile."
+msgstr ""
+"ରୂପରେଖାକୁ ଆହରଣ କରି ସ୍ଥାପନ କରିବା ପାଇଁ ଏହି URL କୁ ଆପଣଙ୍କ ବ୍ରାଉଜରରେ ଲେଖନ୍ତୁ।"
+
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:853
+#: ../panels/color/cc-color-panel.c:965
 msgid "Save Profile"
 msgstr "ରୂପରେଖା ସରକ୍ଷଣ କରନ୍ତୁ"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1214
+#: ../panels/color/cc-color-panel.c:1326
 msgid "Create a color profile for the selected device"
 msgstr "ବଚ୍ଛିତ ଉପକରଣ ପାଇଁ ଗୋଟିଏ ରଙ୍ଗ ରୂପରେଖା ପ୍ରସ୍ତୁତ କରନ୍ତୁ"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1229 ../panels/color/cc-color-panel.c:1253
+#: ../panels/color/cc-color-panel.c:1341 ../panels/color/cc-color-panel.c:1365
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -435,12 +463,12 @@ msgstr ""
 "ନାହିଁ ଯାଞ୍ଚ କରନ୍ତୁ।"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1263
+#: ../panels/color/cc-color-panel.c:1375
 msgid "The measuring instrument does not support printer profiling."
 msgstr "ମାପ ଯନ୍ତ୍ରଟି ମୁଦ୍ରଣୀ ରୂପରେଖାକୁ ସମର୍ଥନ କରିନଥାଏ।"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1274
+#: ../panels/color/cc-color-panel.c:1386
 msgid "The device type is not currently supported."
 msgstr "ଉପକରଣ ପ୍ରକାରଟି ବର୍ତ୍ତମାନ ସମର୍ଥିତ ନୁହଁ।"
 
@@ -528,7 +556,7 @@ msgstr "ମାପ ଦର୍ଶାନ୍ତୁ"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
+#: ../panels/user-accounts/um-account-dialog.c:1071
 msgid "Cancel"
 msgstr "ବାତିଲ କରନ୍ତୁ"
 
@@ -652,10 +680,25 @@ msgid "Profile successfully created!"
 msgstr "ରୂପରେଖା ସଫଳତାର ସହିତ ନିର୍ମିତ!"
 
 #: ../panels/color/color.ui.h:22
-msgid "Export"
-msgstr "ରତ୍ପାନୀ କର"
+#| msgid "Add profile"
+msgid "Copy profile"
+msgstr "ରୂପରେଖା ନକଲ କରନ୍ତୁ"
 
 #: ../panels/color/color.ui.h:23
+msgid "Requires writable media"
+msgstr "ଲିଖନଯୋଗ୍ୟ ମେଡିଆ ଆବଶ୍ୟକ"
+
+#: ../panels/color/color.ui.h:24
+#| msgid "Add profile"
+msgid "Upload profile"
+msgstr "ରୂପରେଖା ଧାରଣ କରନ୍ତୁ"
+
+#: ../panels/color/color.ui.h:25
+#| msgid "<b>Di_rect internet connection</b>"
+msgid "Requires Internet connection"
+msgstr "ଇଣ୍ଟରନେଟ ସଂଯୋଗ ଆବଶ୍ୟକ କରିଥାଏ"
+
+#: ../panels/color/color.ui.h:26
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -667,16 +710,16 @@ msgstr ""
 "ତାହା "
 "ପାଇପାରିବେ।"
 
-#: ../panels/color/color.ui.h:24
+#: ../panels/color/color.ui.h:27
 #: ../panels/user-accounts/um-fingerprint-dialog.c:743
 msgid "Summary"
 msgstr "ସାରାଂଶ"
 
-#: ../panels/color/color.ui.h:25
+#: ../panels/color/color.ui.h:28
 msgid "Import File…"
 msgstr "ଫାଇଲ ଆମଦାନୀକରନ୍ତୁ…"
 
-#: ../panels/color/color.ui.h:26
+#: ../panels/color/color.ui.h:29
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -684,145 +727,165 @@ msgstr ""
 "ସମସ୍ୟା ଦେଖାଦେଇଛି। ରୂପରେଖା ସଠିକ ଭାବରେ କାମ କରିନପାରେ।<a href=\"\">ବିବରଣୀ "
 "ଦର୍ଶାନ୍ତୁ।</a>"
 
-#: ../panels/color/color.ui.h:27
+#: ../panels/color/color.ui.h:30
 msgid "Device type:"
 msgstr "ଉପକରଣ ପ୍ରକାର:"
 
-#: ../panels/color/color.ui.h:28
+#: ../panels/color/color.ui.h:31
 msgid "Manufacturer:"
 msgstr "ନିର୍ମାତା:"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:32
 msgid "Model:"
 msgstr "ମୋଡେଲ:"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:33
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
 "ଉପର ଲିଖିତ ସ୍ଥାନଗୁଡ଼ିକୁ ସ୍ୱୟଂ-ସମ୍ପୂର୍ଣ୍ଣ କରିବା ପାଇଁ ପ୍ରତିଛବି ଫାଇଲଗୁଡ଼ିକୁ ଏହି "
 "ୱିଣ୍ଡୋରେ ଅଣା ହୋଇଛି।"
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:34
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 msgid "Color"
 msgstr "ରଙ୍ଗ"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:35
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "ପ୍ରତ୍ୟେକ ଉପକରଣ ରଙ୍ଗ ପରିଚାଳିତ ହେବା ପାଇଁ ଏକ ଅଦ୍ୟତିତ ରଙ୍ଗ ରୂପରେଖା ଆବଶ୍ୟକ କରିଥାଏ।"
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:36
 msgid "Learn more"
 msgstr "ଅଧିକ ଜ୍ଞାନ ଆହରଣ କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:37
 msgid "Learn more about color management"
 msgstr "ରଙ୍ଗ ପରିଚାଳନା ବିଷୟରେ ଅଧିକ ଜ୍ଞାନ ଆହରଣ କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:38
 msgid "Set for all users"
 msgstr "ସମସ୍ତ ଚାଳକମାନଙ୍କ ପାଇଁ ସେଟ କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:39
 msgid "Set this profile for all users on this computer"
 msgstr "ଏହି କମ୍ପୁଟରରେ ଥିବା ସମସ୍ତ ବ୍ଯବହାରକାରୀଙ୍କ ପାଇଁ ଏହି ଉପକରଣକୁ ସେଟ କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:37
+#: ../panels/color/color.ui.h:40
 msgid "Enable"
 msgstr "ସକ୍ରିୟ କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:41
 msgid "Add profile"
 msgstr "ରୂପରେଖା ଯୋଗ କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:42
 #: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Calibrate…"
 msgstr "ମାପନ୍ତୁ..."
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:43
 msgid "Calibrate the device"
 msgstr "ଏହି ଉପକରଣକୁ ମାପନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:44
 msgid "Remove profile"
 msgstr "ରୂପରେଖାକୁ ବାହାର କରନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:45
 msgid "View details"
 msgstr "ବିବରଣୀ ଦେଖନ୍ତୁ"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:46
 msgid "Unable to detect any devices that can be color managed"
 msgstr "ରଙ୍ଗ ପରିଚାଳିତ କୌଣସି ଉପକରଣକୁ ଚିହ୍ନିବାରେ ଅସମର୍ଥ"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:47
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:48
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:49
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:50
 msgid "Projector"
 msgstr "ପ୍ରକ୍ଷେପକ"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:51
 msgid "Plasma"
 msgstr "ପ୍ଲାଜମା"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:52
+msgid "LCD (CCFL backlight)"
+msgstr "LCD (CCFL ବ୍ୟାକଲାଇଟ)"
+
+#: ../panels/color/color.ui.h:53
+msgid "LCD (RGB LED backlight)"
+msgstr "LCD (RGB LED ବ୍ୟାକଲାଇଟ)"
+
+#: ../panels/color/color.ui.h:54
+msgid "LCD (white LED backlight)"
+msgstr "LCD (ଧଳା LED ବ୍ୟାକଲାଇଟ)"
+
+#: ../panels/color/color.ui.h:55
+msgid "Wide gamut LCD (CCFL backlight)"
+msgstr "ସମ୍ପୂର୍ଣ୍ଣ ପ୍ରସସ୍ତ  LCD (CCFL ବ୍ୟାକଲାଇଟ)"
+
+#: ../panels/color/color.ui.h:56
+msgid "Wide gamut LCD (RGB LED backlight)"
+msgstr "ସମ୍ପୂର୍ଣ୍ଣ ପ୍ରସସ୍ତ LCD (RGB LED ବ୍ୟାକଲାଇଟ)"
+
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "ଉଚ୍ଚ"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:58
 msgid "40 minutes"
 msgstr "40 ମିନିଟ"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "ମଧ୍ଯମ"
 
-#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 ମିନିଟ"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:61
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "ନିମ୍ନ"
 
-#: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:62 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 ମିନିଟ"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:63
 msgid "Native to display"
 msgstr "ଦର୍ଶାଇବା ପାଇଁ ସ୍ଥାନ"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:64
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (ମୁଦ୍ରଣ କରୁଅଛି ଏବଂ ପ୍ରକାଶ କରୁଅଛି)"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:65
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:66
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (ଫୋଟୋଗ୍ରାଫି ଏବଂ ଆଲେଖିକ)"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:67
 msgid "D75"
 msgstr "D75"
 
@@ -876,8 +939,8 @@ msgstr "କୌଣସି ଭାଷା ମିଳିଲା ନାହିଁ"
 #. * The device has been disabled
 #: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1216,55 +1279,55 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "ପ୍ୟାନେଲ;ପ୍ରଦର୍ଶିକା;xrandr;ପରଦା;ବିଭେଦନ;ସତେଜ;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "ଅଜଣା"
 
-#: ../panels/info/cc-info-panel.c:541
+#: ../panels/info/cc-info-panel.c:532
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:543
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%d-bit"
 msgstr "%d-ବିଟ"
 
-#: ../panels/info/cc-info-panel.c:1218
+#: ../panels/info/cc-info-panel.c:1209
 msgid "Ask what to do"
 msgstr "କଣ କରିବାକୁ ହେବ ପଚାରନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1222
+#: ../panels/info/cc-info-panel.c:1213
 msgid "Do nothing"
 msgstr "କିଛି କରନ୍ତୁ ନାହିଁ"
 
-#: ../panels/info/cc-info-panel.c:1226
+#: ../panels/info/cc-info-panel.c:1217
 msgid "Open folder"
 msgstr "ଫୋଲଡର ଖୋଲନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Other Media"
 msgstr "ଅନ୍ଯାନ୍ଯ ସଞ୍ଚାର ମାଧ୍ଯମ"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1339
 msgid "Select an application for audio CDs"
 msgstr "ଧ୍ୱନୀ CD ଗୁଡ଼ିକ ପାଇଁ ଗୋଟିଏ ପ୍ରୟୋଗ ବାଛନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1340
 msgid "Select an application for video DVDs"
 msgstr "ଭିଡିଓ DVD ଗୁଡ଼ିକ ପାଇଁ ଗୋଟିଏ ପ୍ରୟୋଗ ବାଛନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1341
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "ଏକ ସଙ୍ଗୀତ ଚାଳକ ସଂଯୁକ୍ତ ହୋଇଥିବା ସମୟରେ ତାହାକୁ ଚଲାଇବା ପାଇଁ ଏକ ପ୍ରୟୋଗକୁ ବାଛନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1342
 msgid "Select an application to run when a camera is connected"
 msgstr ""
 "ଏକ କ୍ୟାମେରା ସଂଯୁକ୍ତ ହୋଇଥିବା ସମୟରେ ତାହାକୁ ଚଲାଇବା ପାଇଁ ଏକ ପ୍ରୟୋଗକୁ ବାଛନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1343
 msgid "Select an application for software CDs"
 msgstr "ସଫ୍ଟୱେର CD ଗୁଡ଼ିକ ପାଇଁ ଗୋଟିଏ ପ୍ରୟୋଗ ବାଛନ୍ତୁ"
 
@@ -1273,95 +1336,95 @@ msgstr "ସଫ୍ଟୱେର CD ଗୁଡ଼ିକ ପାଇଁ ଗୋଟିଏ
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1355
 msgid "audio DVD"
 msgstr "ଧ୍ୱନି DVD"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1356
 msgid "blank Blu-ray disc"
 msgstr "ଖାଲି Blu-Ray ଡିସ୍କ"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1357
 msgid "blank CD disc"
 msgstr "ଖାଲି CD ଡିସ୍କ"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1358
 msgid "blank DVD disc"
 msgstr "ଖାଲି DVD ଡିସ୍କ"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1359
 msgid "blank HD DVD disc"
 msgstr "ଖାଲି HD DVD ଡିସ୍କ"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1360
 msgid "Blu-ray video disc"
 msgstr "Blu-Ray ଭିଡିଓ ଡିସ୍କ"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1361
 msgid "e-book reader"
 msgstr "ଇ-ପୁସ୍ତକ ପାଠକ"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1362
 msgid "HD DVD video disc"
 msgstr "HD DVD ଭିଡିଓ ଡିସ୍କ"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1363
 msgid "Picture CD"
 msgstr "ଛବି CD"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1364
 msgid "Super Video CD"
 msgstr "ଉତ୍ତମ ଭିଡ଼ିଓ CD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1365
 msgid "Video CD"
 msgstr "ଭିଡିଓ ସି.ଡି."
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1366
 msgid "Windows software"
 msgstr "Windows ସଫ୍ଟୱେର"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1367
 msgid "Software"
 msgstr "ସଫ୍ଟୱେର"
 
-#: ../panels/info/cc-info-panel.c:1499
-#: ../panels/keyboard/keyboard-shortcuts.c:1697
+#: ../panels/info/cc-info-panel.c:1490
+#: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "ବିଭାଗ"
 
-#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1499 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "ସମୀକ୍ଷା"
 
-#: ../panels/info/cc-info-panel.c:1514 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1505 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପ୍ରୟୋଗଗୁଡ଼ିକ"
 
-#: ../panels/info/cc-info-panel.c:1519 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "ଅପସାରଣଯୋଗ୍ୟ ସଞ୍ଚାରମାଧ୍ଯମ"
 
-#: ../panels/info/cc-info-panel.c:1544
+#: ../panels/info/cc-info-panel.c:1535
 #, c-format
 msgid "Version %s"
 msgstr "ସଂସ୍କରଣ %s"
 
-#: ../panels/info/cc-info-panel.c:1594
+#: ../panels/info/cc-info-panel.c:1585
 msgid "Install Updates"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ସ୍ଥାପନ କରନ୍ତୁ"
 
-#: ../panels/info/cc-info-panel.c:1598
+#: ../panels/info/cc-info-panel.c:1589
 msgid "System Up-To-Date"
 msgstr "ତନ୍ତ୍ର ଅଦ୍ୟତିତ ଅଛି"
 
-#: ../panels/info/cc-info-panel.c:1602
+#: ../panels/info/cc-info-panel.c:1593
 msgid "Checking for Updates"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରୁଅଛି"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:44
 msgid "Details"
 msgstr "ବିସ୍ତୃତ ବିବରଣୀ"
 
@@ -1776,7 +1839,7 @@ msgstr "ସଂକ୍ଷିପ୍ତ ପଥକୁ ଇଚ୍ଛାରୂପଣ କ
 msgid "<Unknown Action>"
 msgstr "<ଅଜ୍ଞାତ କାର୍ୟ୍ଯ>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1301
+#: ../panels/keyboard/keyboard-shortcuts.c:1300
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1788,7 +1851,7 @@ msgstr ""
 "ଅସମ୍ଭବ।\n"
 "ଦୟାକରି ଏକା ସମୟରେ Control, Alt କିମ୍ବା Shift କି ସାହାଯ୍ୟରେ ଚେଷ୍ଟାକରନ୍ତୁ।"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1333
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1797,7 +1860,7 @@ msgstr ""
 "ସଂକ୍ଷିପ୍ତ ପଥ \"%s\" ଟି ପୂର୍ବରୁ \n"
 "\"%s\" ପାଇଁ ବ୍ୟବହୃତ ହୋଇଛି"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1338
+#: ../panels/keyboard/keyboard-shortcuts.c:1337
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -1806,7 +1869,7 @@ msgstr ""
 "ସଂକ୍ଷିପ୍ତ ପଥଟି ନିଷ୍କ୍ରିୟ "
 "ହୋଇଯିବ।"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1344
+#: ../panels/keyboard/keyboard-shortcuts.c:1343
 msgid "_Reassign"
 msgstr "ପୁଣିଥରେ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବା (_R)"
 
@@ -1840,7 +1903,9 @@ msgid "General"
 msgstr "ସାଧାରଣ"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "double click, speed"
 msgid "Slow"
 msgstr "ମନ୍ଥର"
 
@@ -1849,7 +1914,9 @@ msgid "Double-click timeout"
 msgstr "ଦୁଇଥର ଦବାଇବାର ସମୟ ସମାପ୍ତି"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgctxt "mouse, speed"
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "double click, speed"
 msgid "Fast"
 msgstr "ଦ୍ରୁତ"
 
@@ -1880,22 +1947,50 @@ msgid "_Pointer speed"
 msgstr "ସୂଚକ ଗତି (_P)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "mouse pointer, speed"
+msgid "Slow"
+msgstr "ମନ୍ଥର"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "mouse pointer, speed"
+msgid "Fast"
+msgstr "ଦ୍ରୁତ"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "ଟଚପ୍ୟାଡ"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgctxt "keyboard, speed"
+#| msgid "Slow"
+msgctxt "touchpad pointer, speed"
+msgid "Slow"
+msgstr "ମନ୍ଥର"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#| msgctxt "keyboard, speed"
+#| msgid "Fast"
+msgctxt "touchpad pointer, speed"
+msgid "Fast"
+msgstr "ଦ୍ରୁତ"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Disable while _typing"
 msgstr "ଟାଇପ କରିବା ସମୟରେ ନିଷ୍କ୍ରିୟ କରନ୍ତୁ (_t)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
 msgstr "କ୍ଲିକ କରିବା ପାଇଁ ଟ୍ୟାପ (_c)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Two _finger scroll"
 msgstr "ଦୁଇ-ଅଙ୍ଗୁଳି ଟଣା (_f)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "C_ontent sticks to fingers"
 msgstr "ବିଷୟବସ୍ତୁ ଅଙ୍ଗୁଳିଗୁଡ଼ିକରେ ଲାଗିଥାଏ (_o)"
 
@@ -1934,21 +2029,26 @@ msgstr "ଏକ କ୍ଲିକ, ଦ୍ୱିତୀୟ ବଟନ"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:364
 msgid "Air_plane Mode"
 msgstr "ବିମାନ ଧାରା (_p)"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:927
 msgid "Network proxy"
 msgstr "ନେଟୱର୍କ ପ୍ରକ୍ସି"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#. Translators: this is the title of the connection details
+#. * window for vpn connections, it is also used to display
+#. * vpn connections in the device list.
+#.
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:284
+#: ../panels/network/net-vpn.c:419
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1241
 msgid "The system network services are not compatible with this version."
 msgstr "ତନ୍ତ୍ର ନେଟୱର୍କ ସର୍ଭିସଗୁଡ଼ିକ ଏହି ସଂସ୍କରଣ ସହିତ ସୁସଙ୍ଗତ ନୁହଁ।"
 
@@ -1976,7 +2076,7 @@ msgstr "ଭିତର ବୈଧିକରଣ (_a)"
 msgid "Security"
 msgstr "ସୁରକ୍ଷା"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "ସ୍ବୟଂଚାଳିତ"
 
@@ -2076,10 +2176,10 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "ଅତି ଉତ୍ତମ"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:255
+#: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "ପରିଚୟ"
 
@@ -2129,13 +2229,13 @@ msgid "Delete Route"
 msgstr "ପଥ ଅପସାରଣ କରନ୍ତୁ"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "ସ୍ୱୟଂଚାଳିତ (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:620
 #: ../panels/network/connection-editor/ce-page-ip6.c:622
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "ପୁସ୍ତିକା"
 
@@ -2145,7 +2245,7 @@ msgid "Link-Local Only"
 msgstr "କେବଳ ସଂଯୋଗ-ସ୍ଥାନୀୟ"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:925
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2167,12 +2267,12 @@ msgid "Automatic, DHCP only"
 msgstr "ସ୍ୱୟଂଚାଳିତ, କେବଳ DHCP"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:886
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:63
+#: ../panels/network/network-wifi.ui.h:49
 msgid "Reset"
 msgstr "ପୁନଃସ୍ଥାପନ କରନ୍ତୁ"
 
@@ -2222,7 +2322,7 @@ msgstr "ସଂଯୋଗ ଗତି"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
-#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "IPv4 ଠିକଣା"
@@ -2231,14 +2331,14 @@ msgstr "IPv4 ଠିକଣା"
 #: ../panels/network/net-device-ethernet.c:160
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "IPv6 ଠିକଣା"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
-#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "ହାର୍ଡୱେର ଠିକଣା"
@@ -2246,7 +2346,7 @@ msgstr "ହାର୍ଡୱେର ଠିକଣା"
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
 msgid "Default Route"
 msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପଥ"
@@ -2256,7 +2356,7 @@ msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପଥ"
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
 msgid "DNS"
 msgstr "DNS"
@@ -2304,7 +2404,7 @@ msgstr "ନାମ (_N)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:36
 msgid "_MAC Address"
 msgstr "MAC ଠିକଣା(_M)"
 
@@ -2318,26 +2418,44 @@ msgid "_Cloned Address"
 msgstr "ପ୍ରତିରୂପି ଠିକଣା (_C)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ସଂଯୁକ୍ତ (_a)"
+msgid "bytes"
+msgstr "ବାଇଟଗୁଡିକ"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "ଅନ୍ୟ ବ୍ୟବହାରକାରୀମାନଙ୍କ ପାଇଁ ଉପଲବ୍ଧ କରାନ୍ତୁ (_u)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "ବାଇଟଗୁଡିକ"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ସଂଯୁକ୍ତ (_a)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "ଫାୟାରୱାଲ ସ୍ଥାନ (_Z)"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+#| msgid "Default"
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr "ଏହି ସ୍ଥାନଟି ସଂଯୋଗର ବିଶ୍ୱାସ ସ୍ତରକୁ ବ୍ୟାଖ୍ୟା କରିଥାଏ"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:22
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:23
 msgid "_Addresses"
 msgstr "ଠିକଣା (_A)"
 
@@ -2348,7 +2466,7 @@ msgstr "ସ୍ବୟଂଚାଳିତ DNS"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Routes"
 msgstr "ପଥଗୁଡ଼ିକୁ"
 
@@ -2359,12 +2477,12 @@ msgstr "ସ୍ବୟଂଚାଳିତ ପଥଗୁଡ଼ିକ"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Use this connection _only for resources on its network"
 msgstr "ଏହି ସଂଯୋଗକୁ କେବଳ ଏହି ନେଟୱର୍କରେ ଥିବା ଉତ୍ସଗୁଡିକ ପାଇଁ ବ୍ୟବହାର କରନ୍ତୁ (_o)"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:34
 msgid "IPv_6"
 msgstr "IPv_6"
 
@@ -2372,53 +2490,53 @@ msgstr "IPv_6"
 msgid "Unable to open connection editor"
 msgstr "ସଂଯୋଗ ସମ୍ପାଦକଙ୍କୁ ଖୋଲିବାରେ ଅସମର୍ଥ"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:283
+#: ../panels/network/connection-editor/net-connection-editor.c:286
 msgid "New Profile"
 msgstr "ନୂତନ ରୂପରେଖ"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:505
+#: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1068
+#: ../panels/user-accounts/um-account-dialog.c:1072
 msgid "_Add"
 msgstr "ଯୋଗ କରନ୍ତୁ (_A)"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:593
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:594
 msgid "Bond"
 msgstr "ବନ୍ଧନ"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 msgid "Bridge"
 msgstr "ବ୍ରିଜ"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:590
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:740
+#: ../panels/network/connection-editor/net-connection-editor.c:746
 msgid "Could not load VPN plugins"
 msgstr "VPN ପ୍ଲଗଇନଗୁଡ଼ିକୁ ଧାରଣ କରିପାରିଲା ନାହିଁ"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:804
+#: ../panels/network/connection-editor/net-connection-editor.c:810
 msgid "Import from file…"
 msgstr "ଫାଇଲରୁ ଆମଦାନୀ କରନ୍ତୁ…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:871
+#: ../panels/network/connection-editor/net-connection-editor.c:877
 msgid "Add Network Connection"
 msgstr "ନେଟୱର୍କ ସଂଯୋଗ ଯୋଗ କରନ୍ତୁ"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Reset"
 msgstr "ପୁନଃ ସ୍ଥାପନ କରନ୍ତୁ (_R)"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1411
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "ଭୁଲିଯାଆନ୍ତୁ (_F)"
 
@@ -2498,7 +2616,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "VPN ସଂଯୋଗକୁ ରପ୍ତାନୀ କରନ୍ତୁ..."
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(ତ୍ରୁଟି: VPN ସଂଯୋଗ ସମ୍ପାଦକକୁ ଧାରଣ କରିବାରେ ଅସମର୍ଥ)"
 
@@ -2517,7 +2635,7 @@ msgstr "BSSID (_B)"
 msgid "My Home Network"
 msgstr "ନିଜସ୍ୱ ନେଟୱର୍କ"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "ଅନ୍ୟ ଚାଳକ ମାନଙ୍କ ପାଇଁ ଉପଲବ୍ଧକରାନ୍ତୁ (_o)"
 
@@ -2532,9 +2650,15 @@ msgstr "ଇଣ୍ଟରନେଟ ସହିତ କିପରି ସଂଯୁକ୍
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+#| msgid ""
+#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+msgid ""
+"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
+"vlan;bridge;bond;"
 msgstr ""
-"ନେଟୱର୍କ୍‌;ବେତାର;Wi-Fi;Wifi;IP;LAN;ପ୍ରକ୍ସି;WAN;ବ୍ରୋଡ଼୍‌ବ୍ୟାଣ୍ଡ୍‌;ମଡେମ;ବ୍ଲୁଟୁଥ;"
+"ନେଟୱର୍କ୍‌;ବେତାର;Wi-Fi;Wifi;IP;LAN;ପ୍ରକ୍ସି;WAN;ବ୍ରୋଡ଼୍‌ବ୍ୟାଣ୍ଡ୍‌;ମଡେମ;ବ୍ଲୁଟୁଥ;;"
+"vpn;"
+"vlan;bridge;bond;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -2571,19 +2695,32 @@ msgstr "IP ଠିକଣା"
 msgid "Last used"
 msgstr "ଶେଷରେ ବ୍ୟବହୃତ"
 
-#: ../panels/network/net-device-ethernet.c:337
+#. Translators: This is used as the title of the connection
+#. * details window for ethernet, if there is only a single
+#. * profile. It is also used to display ethernet in the
+#. * device list.
+#.
+#: ../panels/network/net-device-ethernet.c:288
+#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "ତାରଯୁକ୍ତ"
+
+#: ../panels/network/net-device-ethernet.c:356
 #: ../panels/network/net-device-wifi.c:1549
-#: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "ବିକଳ୍ପଗୁଡିକ…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:491
 #, c-format
 msgid "Profile %d"
 msgstr "ରୂପରେଖା %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "ନୂଆ ସଂଯୋଗ ଯୋଗକରନ୍ତୁ"
 
@@ -2664,7 +2801,7 @@ msgstr "ଏହା ଅବିଶ୍ୱସ୍ତ ସର୍ବସାଧାରଣ ନ
 msgid "Proxy"
 msgstr "ପ୍ରକ୍ସି"
 
-#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
 msgstr "ରୂପରେଖା ଯୋଗ କରନ୍ତୁ (_A)..."
 
@@ -2675,11 +2812,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "ପ୍ରଦାତା"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
-msgid "_Options…"
-msgstr "ବିକଳ୍ପଗୁଡ଼ିକ (_O)…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2740,7 +2872,7 @@ msgstr "FTP ପ୍ରକ୍ସି ପୋର୍ଟ୍‌"
 msgid "Socks proxy port"
 msgstr "Socks ପ୍ରକ୍ସି ପୋର୍ଟ୍‌"
 
-#: ../panels/network/network-simple.ui.h:6
+#: ../panels/network/network-simple.ui.h:7
 msgid "Turn device off"
 msgstr "ଉପକରଣକୁ ଅଫ କରନ୍ତୁ"
 
@@ -2805,94 +2937,50 @@ msgid "None"
 msgstr "କିଛି ନୁହେଁ"
 
 #: ../panels/network/network-wifi.ui.h:19
-msgid "blablabla"
-msgstr "ଏହିପରି କିଛି"
-
-#: ../panels/network/network-wifi.ui.h:20
 msgid "Show P_assword"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ ଦେଖାନ୍ତୁ (_a)"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Make available to other users"
 msgstr "ଅନ୍ୟ ବ୍ୟବହାରକାରୀଙ୍କ ପାଇଁ ଉପଲବ୍ଧ କରାନ୍ତୁ"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
 msgstr "ପରିଚୟ"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
 msgstr "କେବଳ ସ୍ୱୟଂଚାଳିତ (DHCP) ଠିକଣାଗୁଡ଼ିକ"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Link-local only"
 msgstr "କେବଳ ସଂଯୋଗ-ସ୍ଥାନୀୟ"
 
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Shared with other computers"
 msgstr "ଅନ୍ୟ କମ୍ପୁଟର ସହିତ ସହଭାଗ କରାଯାଇଛି"
 
 #: ../panels/network/network-wifi.ui.h:31
-msgid ""
-"Address\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"ଠିକଣା\n"
-"ବିଭାଗ\n"
-"ଯାଇଥାଏ\n"
-"ଏଠାରେ"
-
-#: ../panels/network/network-wifi.ui.h:35
-msgid ""
-"DNS\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"DNS\n"
-"ବିଭାଗ\n"
-"ଯାଇଥାଏ\n"
-"ଏଠାରେ"
-
-#: ../panels/network/network-wifi.ui.h:40
-msgid ""
-"Routes\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"ପଥଗୁଡ଼ିକ\n"
-"ବିଭାଗ\n"
-"ଯାଇଥାଏ\n"
-"ଏଠାରେ"
-
-#: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
 msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ମିଳିଥିବା ପଥକୁ ଅଗ୍ରାହ୍ୟ କରନ୍ତୁ (_I)"
 
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:33
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:37
 msgid "_Cloned MAC Address"
 msgstr "ପ୍ରତିରୂପି MAC ଠିକଣା (_C)"
 
-#: ../panels/network/network-wifi.ui.h:51
-msgid "00:24:16:31:8G:7A"
-msgstr "00:24:16:31:8G:7A"
-
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:38
 msgid "hardware"
 msgstr "ହାର୍ଡୱେର"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:41
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2901,7 +2989,7 @@ msgstr ""
 "ପସନ୍ଦମୁତାବକ ସଂଯୋଗ ଭାବରେ "
 "ମନେରଖନ୍ତୁ।"
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:42
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2910,59 +2998,59 @@ msgstr ""
 "ସଂଯୋଗ କରିବା "
 "ପାଇଁ ଚେଷ୍ଟା କରନ୍ତୁ।"
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
 msgstr "ପୁନଃସ୍ଥାପନ କରନ୍ତୁ"
 
-#: ../panels/network/network-wifi.ui.h:62
+#: ../panels/network/network-wifi.ui.h:48
 msgid "Hardware"
 msgstr "ହାର୍ଡୱେର"
 
-#: ../panels/network/network-wifi.ui.h:64
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Wi-Fi Hotspot"
 msgstr "Wi-Fi ହଟସ୍ପଟ"
 
-#: ../panels/network/network-wifi.ui.h:65
+#: ../panels/network/network-wifi.ui.h:51
 msgid "_Turn On"
 msgstr "ଅନ କରନ୍ତୁ (_T)"
 
-#: ../panels/network/network-wifi.ui.h:66
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:67
+#: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
 msgstr "Wi-Fi କୁ ଅଫ କରନ୍ତୁ"
 
-#: ../panels/network/network-wifi.ui.h:68
+#: ../panels/network/network-wifi.ui.h:54
 msgid "_Use as Hotspot…"
 msgstr "ହଟସ୍ପଟ ପରି ବ୍ୟବହାର କରନ୍ତୁ (_U)…"
 
-#: ../panels/network/network-wifi.ui.h:69
+#: ../panels/network/network-wifi.ui.h:55
 msgid "_Connect to Hidden Network…"
 msgstr "ଲୁକ୍କାଇତ ନେଟୱର୍କ ସହିତ ସଂଯୁକ୍ତ ହୁଅନ୍ତୁ (_C)…"
 
-#: ../panels/network/network-wifi.ui.h:70
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
 msgstr "ପୁରୁଣା ତଥ୍ୟ (_H)"
 
-#: ../panels/network/network-wifi.ui.h:71
+#: ../panels/network/network-wifi.ui.h:57
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Wi-Fi ନେଟୱର୍କ ସହିତ ସଂଯୋଗ କରିବା ପାଇଁ ଅଫ କରନ୍ତୁ"
 
-#: ../panels/network/network-wifi.ui.h:72
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Network Name"
 msgstr "ନେଟୱାର୍କ ନାମ"
 
-#: ../panels/network/network-wifi.ui.h:73
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Connected Devices"
 msgstr "ସଂଯୁକ୍ତ ଉପକରଣଗୁଡ଼ିକ"
 
-#: ../panels/network/network-wifi.ui.h:74
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Security type"
 msgstr "ସୁରକ୍ଷା ପ୍ରକାର"
 
-#: ../panels/network/network-wifi.ui.h:75
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Security key"
 msgstr "ସୁରକ୍ଷା କି"
 
@@ -3577,63 +3665,63 @@ msgstr "ପପଅପ୍‌ ବ୍ୟାନେରଗୁଡ଼ିକୁ ଦର୍�
 msgid "Show in Lock Screen"
 msgstr "ତାଲା ପରଦାରେ ଦର୍ଶାନ୍ତୁ"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
 #: ../panels/region/cc-input-chooser.c:1073
 #: ../panels/search/cc-search-locations-dialog.c:480
 msgid "Other"
 msgstr "ଅନ୍ଯାନ୍ଯ"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:292
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "ଖାତା ଯୋଗ କରନ୍ତୁ"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
 msgid "Mail"
 msgstr "ମେଲ"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
 msgid "Contacts"
 msgstr "ସମ୍ପର୍କଗୁଡ଼ିକ"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:343
 msgid "Resources"
 msgstr "ଉତ୍ସଗୁଡ଼ିକ"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Error logging into the account"
 msgstr "ଖାତାରେ ଲଗଇନ କରିବାରେ ତ୍ରୁଟି"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:430
+#: ../panels/online-accounts/cc-online-accounts-panel.c:497
 msgid "Credentials have expired."
 msgstr "ଅଧିକାର ସମାପ୍ତ ହୋଇଛି।"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:434
+#: ../panels/online-accounts/cc-online-accounts-panel.c:501
 msgid "Sign in to enable this account."
 msgstr "ଏହି ଖାତାକୁ ସକ୍ରିୟ କରିବା ପାଇଁ ସାଇନ୍‌ ଇନ୍‌ କରନ୍ତୁ।"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:439
+#: ../panels/online-accounts/cc-online-accounts-panel.c:506
 msgid "_Sign In"
 msgstr "ସାଇନ୍‌ ଇନ୍‌ (_S)"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:684
+#: ../panels/online-accounts/cc-online-accounts-panel.c:747
 msgid "Error creating account"
 msgstr "ଖାତା ନିର୍ମାଣ କରିବାରେ ତ୍ରୁଟି"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:726
+#: ../panels/online-accounts/cc-online-accounts-panel.c:787
 msgid "Error removing account"
 msgstr "ଖାତା ବାହାର କରିବାରେ ତ୍ରୁଟି"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:762
+#: ../panels/online-accounts/cc-online-accounts-panel.c:823
 msgid "Are you sure you want to remove the account?"
 msgstr "ଏହି ଖାତାକୁ ଅପସାରଣ କରିବାକୁ ଚାହୁଁଛନ୍ତି ବୋଲି ଆପଣ ନିଶ୍ଚିତ କି?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:764
+#: ../panels/online-accounts/cc-online-accounts-panel.c:825
 msgid "This will not remove the account on the server."
 msgstr "ଏହା ସର୍ଭରରେ ସେହି ଖାତାକୁ ଅପସାରଣ କରିବ ନାହିଁ।"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:765
+#: ../panels/online-accounts/cc-online-accounts-panel.c:826
 msgid "_Remove"
 msgstr "ଅପସାରଣ କରନ୍ତୁ (_R)"
 
@@ -3650,8 +3738,12 @@ msgstr ""
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
-msgstr "Google;Facebook;Twitter;Yahoo;ୱେବ;ଅନଲାଇନ;ଚାର୍ଟ;କ୍ୟାଲେଣ୍ଡର;ମେଲ;ସମ୍ପର୍କ;"
+#| msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+msgid ""
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+msgstr ""
+"Google;Facebook;Twitter;Yahoo;ୱେବ;ଅନଲାଇନ;ଚାର୍ଟ;କ୍ୟାଲେଣ୍ଡର;ମେଲ;ସମ୍ପର୍କ;ownCloud"
+";"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4024,7 +4116,7 @@ msgid "Authenticate"
 msgstr "ବୈଧିକୃତ"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Password"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ"
 
@@ -4169,7 +4261,7 @@ msgid "No printers available"
 msgstr "କୌଣସି ମୁଦ୍ରଣୀ ଉପଲବ୍ଧ ନାହିଁ"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1432
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4177,15 +4269,15 @@ msgstr[0] "%u ସକ୍ରିୟ"
 msgstr[1] "%u ସକ୍ରିୟ"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1773
+#: ../panels/printers/cc-printers-panel.c:1776
 msgid "Failed to add new printer."
 msgstr "ନୂତନ ମୁଦ୍ରଣୀ ଯୋଗକରିବାରେ ବିଫଳ।"
 
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1943
 msgid "Select PPD File"
 msgstr "PPD ଫାଇଲ ବାଛନ୍ତୁ"
 
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1952
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4193,30 +4285,30 @@ msgstr ""
 "ପୋଷ୍ଟସ୍କ୍ରିପ୍ଟ ମୁଦ୍ରଣୀ ବର୍ଣ୍ଣନା ଫାଇଲ୍ ଗୁଡାକ (*.ppd, *.PPD, *.ppd.gz, "
 "*.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2254
+#: ../panels/printers/cc-printers-panel.c:2257
 msgid "No suitable driver found"
 msgstr "କୌଣସି  ଉପଯୁକ୍ତ ଡ୍ରାଇଭର ମିଳିଲା ନାହିଁ"
 
-#: ../panels/printers/cc-printers-panel.c:2323
+#: ../panels/printers/cc-printers-panel.c:2326
 msgid "Searching for preferred drivers…"
 msgstr "ପସନ୍ଦ ଯୋଗ୍ୟ ଡ୍ରାଇଭର ଖୋଜୁଅଛି …"
 
-#: ../panels/printers/cc-printers-panel.c:2338
+#: ../panels/printers/cc-printers-panel.c:2341
 msgid "Select from database…"
 msgstr "ତଥ୍ୟାଧାରରୁ ବାଛନ୍ତୁ …"
 
-#: ../panels/printers/cc-printers-panel.c:2347
+#: ../panels/printers/cc-printers-panel.c:2350
 msgid "Provide PPD File…"
 msgstr "PPD ଫାଇଲ ପ୍ରଦାନ କରନ୍ତୁ…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2498
-#: ../panels/printers/cc-printers-panel.c:2521
+#: ../panels/printers/cc-printers-panel.c:2501
+#: ../panels/printers/cc-printers-panel.c:2524
 msgid "Test page"
 msgstr "ପରୀକ୍ଷା ପୃଷ୍ଠା"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2929
+#: ../panels/printers/cc-printers-panel.c:2932
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui କୁ ଧାରଣ କରିପାରିଲା ନାହିଁ : %s"
@@ -4744,8 +4836,9 @@ msgid "Automatic Screen _Lock"
 msgstr "ସ୍ୱୟଂଚାଳିତ ପରଦା ତାଲା (_L)"
 
 #: ../panels/privacy/privacy.ui.h:34
-msgid "Lock Screen _After Blank For"
-msgstr "ଏତିକି ସମୟ ଖାଲି ରହିବା ପରେ ପରଦାକୁ ତାଲା ପକାନ୍ତୁ (_A)"
+#| msgid "Lock Screen _After Blank For"
+msgid "Lock screen _after blank for"
+msgstr "ଏତିକି ସମୟ ଖାଲି ରହିବା ପରେ ପରଦାକୁ ତାଲା ପକାନ୍ତୁ (_a)"
 
 #: ../panels/privacy/privacy.ui.h:35
 msgid "Show _Notifications"
@@ -4769,11 +4862,13 @@ msgstr ""
 "ଅସ୍ଥାୟୀ ଫାଇଲଗୁଡ଼ିକୁ ଖାଲିକରନ୍ତୁ।"
 
 #: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+#| msgid "Automatically Empty _Trash"
+msgid "Automatically empty _Trash"
 msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଆବର୍ଜନା ପାତ୍ରକୁ ଖାଲି କରନ୍ତୁ (_T)"
 
 #: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
+#| msgid "Automatically Purge Temporary _Files"
+msgid "Automatically purge Temporary _Files"
 msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଅସ୍ଥାୟୀ ଫାଇଲଗୁଡ଼ିକୁ ଖାଲି କରନ୍ତୁ (_F)"
 
 #: ../panels/privacy/privacy.ui.h:42
@@ -4798,34 +4893,34 @@ msgstr "କୌଣସି ସ୍ଥାନ ମିଳିଲା ନାହିଁ"
 msgid "No input sources found"
 msgstr "କୌଣସି ନିବେଶ ଉତ୍ସ ମିଳିଲା ନାହିଁ"
 
-#: ../panels/region/cc-region-panel.c:239
+#: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ କାର୍ଯ୍ୟକାରୀ କରିବା ପାଇଁ ଆପଣଙ୍କର ଅଧିବେଶନକୁ ପୁନଃଚାଳନ କରିବା "
 "ଆବଶ୍ୟକ"
 
-#: ../panels/region/cc-region-panel.c:240
+#: ../panels/region/cc-region-panel.c:241
 msgid "Restart Now"
 msgstr "ବର୍ତ୍ତମାନ ପୁନଃଚାଳନ କରନ୍ତୁ"
 
-#: ../panels/region/cc-region-panel.c:550
+#: ../panels/region/cc-region-panel.c:566
 msgctxt "Language"
 msgid "None"
 msgstr "କିଛି ନାହିଁ"
 
-#: ../panels/region/cc-region-panel.c:1040
+#: ../panels/region/cc-region-panel.c:1058
 msgid "Sorry"
 msgstr "କ୍ଷମା କରନ୍ତୁ"
 
-#: ../panels/region/cc-region-panel.c:1042
+#: ../panels/region/cc-region-panel.c:1060
 msgid "Input methods can't be used on the login screen"
 msgstr "ନିବେଶ ପ୍ରଣାଳୀଗୁଡ଼ିକୁ ଲଗଇନ ପରଦାରେ ବ୍ୟବହାର କରାଯାଇପାରିବ ନାହିଁ"
 
-#: ../panels/region/cc-region-panel.c:1491
+#: ../panels/region/cc-region-panel.c:1509
 msgid "No input source selected"
 msgstr "କୌଣସି  ନିବେଶ ଉତ୍ସ ବଛା ହୋଇନାହିଁ"
 
-#: ../panels/region/cc-region-panel.c:1652
+#: ../panels/region/cc-region-panel.c:1690
 msgid "Login Screen"
 msgstr "ଲଗଇନ୍‌ ପରଦା"
 
@@ -4950,7 +5045,7 @@ msgstr "ପୃଷ୍ଟାସଂକେତଗୁଡିକ"
 msgid "Select Location"
 msgstr "ଗୋଟିଏ ସ୍ଥାନ ମନୋନୀତ କରନ୍ତୁ"
 
-#: ../panels/search/cc-search-panel.c:193
+#: ../panels/search/cc-search-panel.c:182
 msgid "No applications found"
 msgstr "କୌଣସି ପ୍ରୟୋଗ ମିଳିଲା ନାହିଁ"
 
@@ -5062,43 +5157,47 @@ msgid "Computer Name"
 msgstr "କମ୍ପୁଟର ନାମ"
 
 #: ../panels/sharing/sharing.ui.h:8
+msgid "Remote Login"
+msgstr "ସୁଦୂର ଲଗଇନ"
+
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Some services are disabled because of no network access."
 msgstr "ନେଟୱର୍କ ଅଭିଗମ୍ୟତା ନଥିବା ହେତୁ କିଛି ସର୍ଭିସଗୁଡ଼ିକ ନିଷ୍କ୍ରିୟ ଅଛି।"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "ମେଡ଼ିଆ ସହଭାଗ"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr ""
 "ସଙ୍ଗୀତ, ଫୋଟ ଏବଂ ଭିଡ଼ିଓଗୁଡ଼ିକୁ ଅନ୍ୟମାନଙ୍କ ସହିତ ପ୍ରଚଳିତ ନେଟୱର୍କରେ ସହଭାଗ କରନ୍ତୁ।"
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "ଏହି ନେଟୱର୍କରେ ମେଡିଆ ସହଭାଗ କରିପାରିବେ"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "ସହଭାଗୀ ଫୋଲଡରଗୁଡ଼ିକ"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "ସ୍ତମ୍ଭ"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "ଫୋଲଡର ଯୋଗ କରନ୍ତୁ"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "ଫୋଲଡ଼ରକୁ କାଢ଼ିବେ କି"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Personal File Sharing"
 msgstr "ବ୍ୟକ୍ତିଗତ ଫାଇଲ ସହଭାଗ"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:19
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5108,17 +5207,13 @@ msgstr ""
 "ଅନ୍ୟମାନଙ୍କ ସହିତ "
 "ସହଭାଗ ପାଇଁ ଅନୁମତି ଦେଇଥାଏ: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Share Public Folder On This Network"
 msgstr "ଏହି ନେଟୱର୍କରେ ସାର୍ବଜନିକ ଫାଇଲକୁ ସହଭାଗ କରନ୍ତୁ"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require Password"
 msgstr "ପ୍ରବେଶ ସଂଙ୍କେତ ଆବଶ୍ୟକ"
-
-#: ../panels/sharing/sharing.ui.h:22
-msgid "Remote Login"
-msgstr "ସୁଦୂର ଲଗଇନ"
 
 #: ../panels/sharing/sharing.ui.h:24
 #, no-c-format
@@ -6261,24 +6356,24 @@ msgstr "ନୂତନ ପ୍ରବେଶ ସଙ୍କେତରେ ଯଥେଷ୍
 msgid "Unknown error"
 msgstr "ଅଜଣା ତ୍ରୁଟି"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:186
 msgid "Failed to add account"
 msgstr "ଖାତା ଯୋଗ କରିବାରେ ବିଫଳ"
 
-#: ../panels/user-accounts/um-account-dialog.c:403
-#: ../panels/user-accounts/um-account-dialog.c:444
+#: ../panels/user-accounts/um-account-dialog.c:407
+#: ../panels/user-accounts/um-account-dialog.c:448
 msgid "Failed to register account"
 msgstr "ଖାତା ପଞ୍ଜିକରଣ କରିବାରେ ବିଫଳ"
 
-#: ../panels/user-accounts/um-account-dialog.c:577
+#: ../panels/user-accounts/um-account-dialog.c:581
 msgid "No supported way to authenticate with this domain"
 msgstr "ଏହି ଡମେନ ସହିତ ବୈଧିକୃତ କରିବା ପାଇଁ ସହାୟତା ପ୍ରାପ୍ତ ନୁହଁ"
 
-#: ../panels/user-accounts/um-account-dialog.c:631
+#: ../panels/user-accounts/um-account-dialog.c:635
 msgid "Failed to join domain"
 msgstr "ଡମେନରେ ଯୋଗ ହେବାରେ ବିଫଳ"
 
-#: ../panels/user-accounts/um-account-dialog.c:688
+#: ../panels/user-accounts/um-account-dialog.c:692
 msgid "Failed to log into domain"
 msgstr "ଡମେନରେ ଲଗଇନ୍‌ ହେବାରେ ବିଫଳ"
 
@@ -6454,16 +6549,16 @@ msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଏହି ପ୍ରକା
 msgid "No such domain or realm found"
 msgstr "ଏପରି କୌଣସି ଡମେନ କିମ୍ବା realm ମିଳି ନାହିଁ"
 
-#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:817
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "%s ଭାବରେ %s ଡମେନରେ ଲଗଇନ କରିପାରିବେ ନାହିଁ"
 
-#: ../panels/user-accounts/um-realm-manager.c:820
+#: ../panels/user-accounts/um-realm-manager.c:823
 msgid "Invalid password, please try again"
 msgstr "ଅବୈଧ ପ୍ରବେଶ ସଂକେତ, ଦୟାକରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ"
 
-#: ../panels/user-accounts/um-realm-manager.c:824
+#: ../panels/user-accounts/um-realm-manager.c:827
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%s ଡମେନ ସହିତ ସଂଯୁକ୍ତ ହୋଇପାରିଲା ନାହିଁ: %s"
@@ -6645,50 +6740,50 @@ msgstr "ଗୋଟିଏ ମନିଟରରେ ମେଳାନ୍ତୁ"
 msgid "%d of %d"
 msgstr "%d ର %d"
 
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:384
+#: ../panels/wacom/cc-wacom-page.c:122 ../panels/wacom/cc-wacom-page.c:407
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "କିଛି ନାହିଁ"
 
-#: ../panels/wacom/cc-wacom-page.c:119
+#: ../panels/wacom/cc-wacom-page.c:123
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "କିଷ୍ଟ୍ରୋକ ପଠାନ୍ତୁ"
 
-#: ../panels/wacom/cc-wacom-page.c:120
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "ମନିଟର ବଦଳାନ୍ତୁ"
 
-#: ../panels/wacom/cc-wacom-page.c:121
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "ଅନସ୍କ୍ରିନ୍‌ ସହାୟତା ଦେଖାନ୍ତୁ"
 
-#: ../panels/wacom/cc-wacom-page.c:621
+#: ../panels/wacom/cc-wacom-page.c:644
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "ଉପର"
 
-#: ../panels/wacom/cc-wacom-page.c:621
+#: ../panels/wacom/cc-wacom-page.c:644
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "ତଳ"
 
-#: ../panels/wacom/cc-wacom-page.c:662
+#: ../panels/wacom/cc-wacom-page.c:685
 msgid "Switch Modes"
 msgstr "ବଦଳାଇବା ଧାରା"
 
-#: ../panels/wacom/cc-wacom-page.c:752
+#: ../panels/wacom/cc-wacom-page.c:775
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "ବଟନ"
 
-#: ../panels/wacom/cc-wacom-page.c:810
+#: ../panels/wacom/cc-wacom-page.c:833
 msgid "Action"
 msgstr "କାର୍ଯ୍ଯ"
 
-#: ../panels/wacom/cc-wacom-page.c:920
+#: ../panels/wacom/cc-wacom-page.c:943
 msgid "Display Mapping"
 msgstr "ମ୍ୟାପିଙ୍ଗକୁ ଦର୍ଶାନ୍ତୁ"
 
@@ -6745,10 +6840,15 @@ msgid "Adjust display resolution"
 msgstr "ପ୍ରଦର୍ଶନୀ ବିଭେଦନକୁ ସଜାଡ଼ନ୍ତୁ"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#| msgid "Mouse Settings"
+msgid "Adjust mouse settings"
+msgstr "ମାଉସ ସେଟିଙ୍ଗଗୁଡିକୁ ସଜାଡ଼ନ୍ତୁ"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Tracking Mode"
 msgstr "ଅନୁସନ୍ଧାନ ଧାରା"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Left-Handed Orientation"
 msgstr "ବାମ-ହାତ ଆବର୍ତ୍ତନ"
 
@@ -6905,40 +7005,40 @@ msgstr "ତଳ ବଟନ"
 msgid "Tip Pressure Feel"
 msgstr "ଉପର ଚାପ ଅନୁଭବ"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:66
 msgid "Enable verbose mode"
 msgstr "ଦୃଷ୍ଟ ସୂଚନାଯୁକ୍ତ ଧାରାକୁ ସକ୍ରିୟ କରନ୍ତୁ"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:67
 msgid "Show the overview"
 msgstr "ସମୀକ୍ଷାକୁ ଦର୍ଶାନ୍ତୁ"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:68
 msgid "Search for the string"
 msgstr "ଏହି ବାକ୍ୟଖଣ୍ଡକୁ ଖୋଜନ୍ତୁ"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:69
 msgid "List possible panel names and exit"
 msgstr "ସମ୍ଭାବ୍ୟ ପ୍ୟାନେଲ ନାମଗୁଡ଼ିକୁ ତାଲିକାଭୁକ୍ତ କରନ୍ତୁ ଏବଂ ପ୍ରସ୍ଥାନ କରନ୍ତୁ"
 
-#: ../shell/cc-application.c:71 ../shell/cc-application.c:72
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
+#: ../shell/cc-application.c:72
 msgid "Show help options"
 msgstr "ସାହାଯ୍ଯ ପସନ୍ଦ ଦେଖାନ୍ତୁ"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:73
 msgid "Panel to display"
 msgstr "ଦର୍ଶାଇବା ପାଇଁ ପ୍ୟାନେଲ"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:73
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:139
 msgid "- Settings"
 msgstr "- ସେଟିଙ୍ଗଗୁଡିକ"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:148
 #, c-format
 msgid ""
 "%s\n"
@@ -6948,45 +7048,98 @@ msgstr ""
 "ଉପଲବ୍ଧ ନିର୍ଦ୍ଦେଶନାମା ବିକଳ୍ପଗୁଡ଼ିକର ସମ୍ପୂର୍ଣ୍ଣ ତାଲିକା ଦେଖିବା ପାଇଁ'%s --help' "
 "କୁ ଚଲାନ୍ତୁ.\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:178
 msgid "Available panels:"
 msgstr "ଉପଲବ୍ଧ ପ୍ୟାନେଲଗୁଡ଼ିକ:"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:313
 msgid "Help"
 msgstr "ସହାୟତା"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:314
 msgid "Quit"
 msgstr "ବିଦାୟ ନିଅନ୍ତୁ"
 
-#: ../shell/cc-window.c:62 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "ସେଟିଙ୍ଗଗୁଡିକ"
 
 #. Add categories
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
 msgstr "ବ୍ଯକ୍ତିଗତ"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Hardware"
 msgstr "ହାର୍ଡୱେର"
 
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "System"
 msgstr "ତନ୍ତ୍ର"
 
-#: ../shell/cc-window.c:1411
+#: ../shell/cc-window.c:1421
 msgid "All Settings"
 msgstr "ସମସ୍ତ ସେଟିଙ୍ଗଗୁଡିକ"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "ପସନ୍ଦ;ସେଟିଙ୍ଗଗୁଡ଼ିକ;"
+
+#~ msgid "Export"
+#~ msgstr "ରତ୍ପାନୀ କର"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Slow"
+#~ msgstr "ମନ୍ଥର"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Fast"
+#~ msgstr "ଦ୍ରୁତ"
+
+#~ msgid "_Options…"
+#~ msgstr "ବିକଳ୍ପଗୁଡ଼ିକ (_O)…"
+
+#~ msgid "blablabla"
+#~ msgstr "ଏହିପରି କିଛି"
+
+#~ msgid ""
+#~ "Address\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "ଠିକଣା\n"
+#~ "ବିଭାଗ\n"
+#~ "ଯାଇଥାଏ\n"
+#~ "ଏଠାରେ"
+
+#~ msgid ""
+#~ "DNS\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "DNS\n"
+#~ "ବିଭାଗ\n"
+#~ "ଯାଇଥାଏ\n"
+#~ "ଏଠାରେ"
+
+#~ msgid ""
+#~ "Routes\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "ପଥଗୁଡ଼ିକ\n"
+#~ "ବିଭାଗ\n"
+#~ "ଯାଇଥାଏ\n"
+#~ "ଏଠାରେ"
+
+#~ msgid "00:24:16:31:8G:7A"
+#~ msgstr "00:24:16:31:8G:7A"
 
 #~ msgid "Change the background"
 #~ msgstr "ପୃଷ୍ଠଭୂମିକୁ ପରିବର୍ତ୍ତନ କରନ୍ତୁ"
@@ -7187,9 +7340,6 @@ msgstr "ପସନ୍ଦ;ସେଟିଙ୍ଗଗୁଡ଼ିକ;"
 #~| msgid "Connected"
 #~ msgid "_Connect"
 #~ msgstr "ସଂଯୋଗ କରନ୍ତୁ (_C)"
-
-#~ msgid "Wired"
-#~ msgstr "ତାରଯୁକ୍ତ"
 
 #~ msgid "Mesh"
 #~ msgstr "ମେଶ"
@@ -8984,9 +9134,6 @@ msgstr "ପସନ୍ଦ;ସେଟିଙ୍ଗଗୁଡ଼ିକ;"
 
 #~ msgid "Set your network proxy preferences"
 #~ msgstr "ଆପଣଙ୍କର ନେଟୱର୍କ ପ୍ରକ୍ସି ପସନ୍ଦକୁ ସେଟକରନ୍ତୁ"
-
-#~ msgid "<b>Di_rect internet connection</b>"
-#~ msgstr "<b>ସିଧାସଳଖ ଇଣ୍ଟରନେଟ ସଂଯୋଗ (_r)</b>"
 
 #~ msgid "<b>_Manual proxy configuration</b>"
 #~ msgstr "<b>ହସ୍ତଚାଳିତ ପ୍ରକ୍ସି ବିନ୍ୟାସ (_M)</b>"
