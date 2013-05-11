@@ -1,5 +1,14 @@
 --- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method.c	2012-12-11 15:51:57.191216362 +0100
 +++ eap-method.c	2013-01-09 17:58:22.167402957 +0100
+@@ -43,7 +43,7 @@
+        static GType type_id = 0;
+ 
+        if (!type_id) {
+-               type_id = g_boxed_type_register_static ("EAPMethod",
++               type_id = g_boxed_type_register_static ("CcEAPMethod",
+                                                        (GBoxedCopyFunc) eap_method_ref,
+                                                        (GBoxedFreeFunc) eap_method_unref);
+        }
 @@ -203,7 +203,7 @@ eap_method_nag_user (EAPMethod *method)
  	return method->nag_dialog;
  }
@@ -150,7 +159,8 @@
  	if (!type_id) {
 +		g_resources_register (wireless_security_get_resource ());
 +
- 		type_id = g_boxed_type_register_static ("WirelessSecurity",
++ 		type_id = g_boxed_type_register_static ("CcWirelessSecurity",
+-		type_id = g_boxed_type_register_static ("WirelessSecurity",
  		                                        (GBoxedCopyFunc) wireless_security_ref,
  		                                        (GBoxedFreeFunc) wireless_security_unref);
 @@ -155,7 +158,7 @@ wireless_security_init (gsize obj_size,
