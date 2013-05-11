@@ -43,7 +43,7 @@ eap_method_get_g_type (void)
 	static GType type_id = 0;
 
 	if (!type_id) {
-		type_id = g_boxed_type_register_static ("EAPMethod",
+		type_id = g_boxed_type_register_static ("CcEAPMethod",
 		                                        (GBoxedCopyFunc) eap_method_ref,
 		                                        (GBoxedFreeFunc) eap_method_unref);
 	}
