@@ -20,9 +20,34 @@
 #include "config.h"
 
 #include <string.h>
-
+#include <glib/gi18n.h>
 
 #include "cc-util.h"
+
+CcInputSwitcherOptions cc_input_switcher_options[] = {
+  { "off", N_("Disabled") },
+  { "shift-l", N_("Left Shift") },
+  { "alt-l", N_("Left Alt") },
+  { "ctrl-l", N_("Left Ctrl") },
+  { "shift-r", N_("Right Shift") },
+  { "alt-r", N_("Right Alt") },
+  { "ctrl-r", N_("Right Ctrl") },
+  { "alt-shift-l", N_("Left Alt+Shift") },
+  { "alt-shift-r", N_("Right Alt+Shift") },
+  { "ctrl-shift-l", N_("Left Ctrl+Shift") },
+  { "ctrl-shift-r", N_("Right Ctrl+Shift") },
+  { "shift-l-shift-r", N_("Left+Right Shift") },
+  { "alt-l-alt-r", N_("Left+Right Alt") },
+  { "ctrl-l-ctrl-r", N_("Left+Right Ctrl") },
+  { "alt-shift", N_("Alt+Shift") },
+  { "ctrl-shift", N_("Ctrl+Shift") },
+  { "alt-ctrl", N_("Alt+Ctrl") },
+  { "caps", N_("Caps") },
+  { "shift-caps", N_("Shift+Caps") },
+  { "alt-caps", N_("Alt+Caps") },
+  { "ctrl-caps", N_("Ctrl+Caps") },
+  { NULL, NULL }
+};
 
 /* Combining diacritical mark?
  *  Basic range: [0x0300,0x036F]

@@ -23,6 +23,13 @@
 
 #include <glib.h>
 
+typedef struct {
+  const gchar *value;
+  const gchar *description;
+} CcInputSwitcherOptions;
+
+extern CcInputSwitcherOptions cc_input_switcher_options[];
+
 char *cc_util_normalize_casefold_and_unaccent (const char *str);
 
 #endif
