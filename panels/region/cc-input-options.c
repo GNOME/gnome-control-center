@@ -74,36 +74,6 @@ update_shortcut_label (GtkWidget   *widget,
         g_free (text);
 }
 
-static struct
-{
-  const gchar *value;
-  const gchar *description;
-} input_switcher_options[] =
-{
-  { "off", N_("Disabled") },
-  { "shift-l", N_("Left Shift") },
-  { "alt-l", N_("Left Alt") },
-  { "ctrl-l", N_("Left Ctrl") },
-  { "shift-r", N_("Right Shift") },
-  { "alt-r", N_("Right Alt") },
-  { "ctrl-r", N_("Right Ctrl") },
-  { "alt-shift-l", N_("Left Alt+Shift") },
-  { "alt-shift-r", N_("Right Alt+Shift") },
-  { "ctrl-shift-l", N_("Left Ctrl+Shift") },
-  { "ctrl-shift-r", N_("Right Ctrl+Shift") },
-  { "shift-l-shift-r", N_("Left+Right Shift") },
-  { "alt-l-alt-r", N_("Left+Right Alt") },
-  { "ctrl-l-ctrl-r", N_("Left+Right Ctrl") },
-  { "alt-shift", N_("Alt+Shift") },
-  { "ctrl-shift", N_("Ctrl+Shift") },
-  { "alt-ctrl", N_("Alt+Ctrl") },
-  { "caps", N_("Caps") },
-  { "shift-caps", N_("Shift+Caps") },
-  { "alt-caps", N_("Alt+Caps") },
-  { "ctrl-caps", N_("Ctrl+Caps") },
-  { NULL, NULL }
-};
-
 static void
 update_shortcuts (GtkWidget *options)
 {
@@ -112,8 +82,6 @@ update_shortcuts (GtkWidget *options)
         gchar **next;
         gchar *previous_shortcut;
         GSettings *settings;
-        gchar *s;
-        gint i;
 
         settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
 
@@ -134,21 +102,7 @@ update_shortcuts (GtkWidget *options)
 
         g_object_unref (settings);
 
-        settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
-        s = g_settings_get_string (settings, "input-sources-switcher");
-
-        if (strcmp (s, "off") == 0) {
-                gtk_widget_hide (priv->alt_next_source);
-        } else {
-                for (i = 0; input_switcher_options[i].value; i++) {
-                        if (strcmp (s, input_switcher_options[i].value) == 0) {
-                                gtk_label_set_text (GTK_LABEL (priv->alt_next_source), _(input_switcher_options[i].description));
-                                break;
-                        }
-                }
-        }
-        g_free (s);
-        g_object_unref (settings);
+        gtk_widget_hide (priv->alt_next_source); /* FIXME */
 }
 
 #define WID(name) ((GtkWidget *) gtk_builder_get_object (builder, name))
