@@ -23,6 +23,9 @@
 #include <config.h>
 #include <glib/gi18n.h>
 
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-xkb-info.h>
+
 #include "cc-input-options.h"
 
 typedef struct {
@@ -99,8 +102,35 @@ update_shortcuts (GtkWidget *options)
         g_strfreev (next);
 
         g_object_unref (settings);
+}
 
-        gtk_widget_hide (priv->alt_next_source); /* FIXME */
+static void
+update_modifiers_shortcut (GtkWidget *dialog)
+{
+        CcInputOptionsPrivate *priv = GET_PRIVATE (dialog);
+        gchar **options, **p;
+        GSettings *settings;
+        GnomeXkbInfo *xkb_info;
+        const gchar *text;
+
+        xkb_info = gnome_xkb_info_new ();
+        settings = g_settings_new ("org.gnome.desktop.input-sources");
+        options = g_settings_get_strv (settings, "xkb-options");
+
+        for (p = options; p && *p; ++p)
+                if (g_str_has_prefix (*p, "grp:"))
+                        break;
+
+        if (p && *p) {
+                text = gnome_xkb_info_description_for_option (xkb_info, "grp", *p);
+                gtk_label_set_text (GTK_LABEL (priv->alt_next_source), text);
+        } else {
+                gtk_widget_hide (priv->alt_next_source);
+        }
+
+        g_strfreev (options);
+        g_object_unref (settings);
+        g_object_unref (xkb_info);
 }
 
 #define WID(name) ((GtkWidget *) gtk_builder_get_object (builder, name))
@@ -151,6 +181,7 @@ cc_input_options_new (GtkWidget *parent)
                          G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
 
         update_shortcuts (options);
+        update_modifiers_shortcut (options);
 
         gtk_window_set_transient_for (GTK_WINDOW (options), GTK_WINDOW (parent));
 
