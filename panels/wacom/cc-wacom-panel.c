@@ -60,6 +60,70 @@ enum {
 	PLUG_IN_PAGE = 0,
 };
 
+enum {
+	PROP_0,
+	PROP_PARAMETERS
+};
+
+static CcWacomPage *
+set_device_page (CcWacomPanel *self, const gchar *device_name)
+{
+	CcWacomPanelPrivate *priv;
+	CcWacomPage *page;
+	gint current;
+
+	priv = self->priv;
+
+	if (device_name == NULL)
+		return NULL;
+
+	/* Choose correct device */
+	page = g_hash_table_lookup (priv->pages, device_name);
+
+	if (page == NULL) {
+		g_warning ("Failed to find device '%s', supplied in the command line.", device_name);
+		return page;
+	}
+
+	current = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook), GTK_WIDGET (page));
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), current);
+
+	return page;
+}
+
+static void
+run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
+{
+	GVariant *v;
+	const gchar *device_name = NULL;
+	gint n_params;
+
+	n_params = g_variant_n_children (parameters);
+
+	g_variant_get_child (parameters, 1, "v", &v);
+	device_name = g_variant_get_string (v, NULL);
+
+	if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
+		g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
+			   g_variant_get_type_string (v));
+		g_variant_unref (v);
+
+		return;
+	}
+
+	g_variant_unref (v);
+
+	switch (n_params) {
+		case 2:
+			set_device_page (self, device_name);
+			break;
+		case 1:
+			g_assert_not_reached ();
+		default:
+			g_warning ("Unexpected number of parameters found: %d. Request ignored.", n_params);
+	}
+}
+
 /* Boilerplate code goes below */
 
 static void
@@ -81,8 +145,22 @@ cc_wacom_panel_set_property (GObject      *object,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
+	CcWacomPanel *self;
+	self = CC_WACOM_PANEL (object);
+
 	switch (property_id)
 	{
+		case PROP_PARAMETERS: {
+			GVariant *parameters;
+
+			parameters = g_value_get_variant (value);
+			if (parameters == NULL || g_variant_n_children (parameters) <= 1)
+				return;
+
+			run_operation_from_params (self, parameters);
+
+			break;
+		}
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 	}
@@ -140,6 +218,8 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 	object_class->dispose = cc_wacom_panel_dispose;
 
 	panel_class->get_help_uri = cc_wacom_panel_get_help_uri;
+
+	g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static void
