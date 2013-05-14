@@ -520,7 +520,6 @@ device_off_toggled (GtkSwitch         *sw,
         NMClient *client;
         NMDevice *nm_device;
         NMConnection *connection;
-        NMActiveConnection *a;
 
         if (device->updating_device)
                 return;
@@ -537,10 +536,7 @@ device_off_toggled (GtkSwitch         *sw,
                                                        NULL, NULL, NULL);
                 }
         } else {
-                a = nm_device_get_active_connection (nm_device);
-                if (a) {
-                        nm_client_deactivate_connection (client, a);
-                }
+                nm_device_disconnect (nm_device, NULL, NULL);
         }
 }
 
