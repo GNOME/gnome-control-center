@@ -521,6 +521,15 @@ net_vpn_finalize (GObject *object)
                 g_object_unref (priv->active_connection);
         }
 
+        g_signal_handlers_disconnect_by_func (priv->connection,
+                                              connection_vpn_state_changed_cb,
+                                              vpn);
+        g_signal_handlers_disconnect_by_func (priv->connection,
+                                              connection_removed_cb,
+                                              vpn);
+        g_signal_handlers_disconnect_by_func (priv->connection,
+                                              connection_changed_cb,
+                                              vpn);
         g_object_unref (priv->connection);
         g_free (priv->service_type);
 
