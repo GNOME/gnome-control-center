@@ -39,6 +39,7 @@ struct _NetVpnPrivate
 {
         GtkBuilder              *builder;
         NMConnection            *connection;
+        NMActiveConnection      *active_connection;
         gchar                   *service_type;
         gboolean                 valid;
         gboolean                 updating_device;
@@ -286,6 +287,14 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         gtk_label_set_label (GTK_LABEL (widget), title);
         g_free (title);
 
+        if (priv->active_connection) {
+                g_signal_handlers_disconnect_by_func (vpn->priv->active_connection,
+                                                      nm_device_refresh_vpn_ui,
+                                                      vpn);
+                g_clear_object (&priv->active_connection);
+        }
+
+
         /* use status */
         state = net_vpn_get_state (vpn);
         client = net_object_get_client (NET_OBJECT (vpn));
@@ -297,6 +306,10 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
 
                         apath = nm_active_connection_get_connection (a);
                         if (NM_IS_VPN_CONNECTION (a) && strcmp (apath, path) == 0) {
+                                priv->active_connection = g_object_ref (a);
+                                g_signal_connect_swapped (a, "notify::vpn-state",
+                                                          G_CALLBACK (nm_device_refresh_vpn_ui),
+                                                          vpn);
                                 state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
                                 break;
                         }
@@ -337,6 +350,12 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
         panel_set_device_widget_details (vpn->priv->builder,
                                          "group_password",
                                          net_vpn_get_password (vpn));
+}
+
+static void
+nm_active_connections_changed (NetVpn *vpn)
+{
+        nm_device_refresh_vpn_ui (vpn);
 }
 
 static void
@@ -471,10 +490,17 @@ static void
 net_vpn_constructed (GObject *object)
 {
         NetVpn *vpn = NET_VPN (object);
+        NMClient *client = net_object_get_client (NET_OBJECT (object));
 
         G_OBJECT_CLASS (net_vpn_parent_class)->constructed (object);
 
         nm_device_refresh_vpn_ui (vpn);
+
+        g_signal_connect_swapped (client,
+                                  "notify::active-connections",
+                                  G_CALLBACK (nm_active_connections_changed),
+                                  vpn);
+
 }
 
 static void
@@ -482,6 +508,18 @@ net_vpn_finalize (GObject *object)
 {
         NetVpn *vpn = NET_VPN (object);
         NetVpnPrivate *priv = vpn->priv;
+        NMClient *client = net_object_get_client (NET_OBJECT (object));
+
+        g_signal_handlers_disconnect_by_func (client,
+                                              nm_active_connections_changed,
+                                              vpn);
+
+        if (priv->active_connection) {
+                g_signal_handlers_disconnect_by_func (priv->active_connection,
+                                                      nm_device_refresh_vpn_ui,
+                                                      vpn);
+                g_object_unref (priv->active_connection);
+        }
 
         g_object_unref (priv->connection);
         g_free (priv->service_type);
