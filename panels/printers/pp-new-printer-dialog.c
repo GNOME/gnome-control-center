@@ -286,7 +286,7 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   GtkStyleContext           *context;
   GtkWidget                 *widget;
   GError                    *error = NULL;
-  gchar                     *objects[] = { "dialog", NULL };
+  gchar                     *objects[] = { "dialog", "devices-liststore", NULL };
   guint                      builder_result;
 
   priv = PP_NEW_PRINTER_DIALOG_GET_PRIVATE (dialog);
@@ -1406,7 +1406,10 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
   treeview = (GtkTreeView *)
     gtk_builder_get_object (priv->builder, "devices-treeview");
 
-  store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+  store = (GtkListStore *)
+    gtk_builder_get_object (priv->builder, "devices-liststore");
+
+  gtk_list_store_clear (store);
 
   for (item = priv->devices; item; item = item->next)
     {
@@ -1484,14 +1487,11 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
       gtk_widget_set_sensitive (GTK_WIDGET (treeview), TRUE);
     }
 
-  gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
-
   if (!no_device &&
       gtk_tree_model_get_iter_first ((GtkTreeModel *) store, &iter) &&
       (selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))) != NULL)
     gtk_tree_selection_select_iter (selection, &iter);
 
-  g_object_unref (store);
   update_spinner_state (dialog);
 }
 
