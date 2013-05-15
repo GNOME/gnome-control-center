@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkListStore" id="devices-liststore">
+    <columns>
+      <!-- column-name device_icon -->
+      <column type="gchararray"/>
+      <!-- column-name device_name -->
+      <column type="gchararray"/>
+      <!-- column-name device_display_name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkDialog" id="dialog">
     <property name="width_request">500</property>
     <property name="height_request">350</property>
@@ -76,6 +86,7 @@
                       <object class="GtkTreeView" id="devices-treeview">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="model">devices-liststore</property>
                         <property name="headers_visible">False</property>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection" id="treeview-selection"/>
