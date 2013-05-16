@@ -80,7 +80,7 @@ type_to_string (unsigned int type)
 	case RFKILL_TYPE_WWAN:
 		return "WWAN";
 	default:
-		g_assert_not_reached ();
+		return "UNKNOWN";
 	}
 }
 
