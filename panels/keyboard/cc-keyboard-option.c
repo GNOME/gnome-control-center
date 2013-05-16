@@ -25,6 +25,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
 
+#include "cc-util.h"
 #include "cc-keyboard-option.h"
 
 #define CC_TYPE_KEYBOARD_OPTION            (cc_keyboard_option_get_type ())
@@ -280,7 +281,7 @@ cc_keyboard_option_constructed (GObject *object)
           gtk_list_store_append (self->store, &iter);
           gtk_list_store_set (self->store, &iter,
                               XKB_OPTION_DESCRIPTION_COLUMN,
-                              gnome_xkb_info_description_for_option (xkb_info, self->group, option_id),
+                              cc_util_xkb_info_description_for_option (xkb_info, self->group, option_id),
                               XKB_OPTION_ID_COLUMN,
                               option_id,
                               -1);
@@ -381,7 +382,7 @@ cc_keyboard_option_get_current_value_description (CcKeyboardOption *self)
   if (!self->current_value)
     return _("Disabled");
 
-  return gnome_xkb_info_description_for_option (xkb_info, self->group, self->current_value);
+  return cc_util_xkb_info_description_for_option (xkb_info, self->group, self->current_value);
 }
 
 static void

@@ -25,4 +25,8 @@
 
 char *cc_util_normalize_casefold_and_unaccent (const char *str);
 
+const gchar *cc_util_xkb_info_description_for_option (void        *info,
+                                                      const gchar *group_id,
+                                                      const gchar *id);
+
 #endif

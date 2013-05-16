@@ -23,7 +23,7 @@ libkeyboard_la_SOURCES =   \
 	keyboard-shortcuts.h
 
 libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS) -I$(top_srcdir)/panels/common/
-libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS)
+libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS) $(top_builddir)/panels/common/liblanguage.la
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/keyboard.gresource.xml)
 cc-keyboard-resources.c: keyboard.gresource.xml $(resource_files)

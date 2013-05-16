@@ -20,7 +20,10 @@
 #include "config.h"
 
 #include <string.h>
+#include <glib/gi18n.h>
 
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-xkb-info.h>
 
 #include "cc-util.h"
 
@@ -102,4 +105,45 @@ cc_util_normalize_casefold_and_unaccent (const char *str)
   tmp[j] = '\0';
 
   return tmp;
+}
+
+typedef struct {
+  const gchar *value;
+  const gchar *description;
+} CcInputSwitcherOptions;
+
+static CcInputSwitcherOptions cc_input_switcher_options[] = {
+  { "grp:lshift_toggle", N_("Left Shift") },
+  { "grp:lalt_toggle", N_("Left Alt") },
+  { "grp:lctrl_toggle", N_("Left Ctrl") },
+  { "grp:rshift_toggle", N_("Right Shift") },
+  { "grp:toggle", N_("Right Alt") },
+  { "grp:rctrl_toggle", N_("Right Ctrl") },
+  { "grp:lalt_lshift_toggle", N_("Left Alt+Shift") },
+  { "grp:lctrl_lshift_toggle", N_("Left Ctrl+Shift") },
+  { "grp:rctrl_rshift_toggle", N_("Right Ctrl+Shift") },
+  { "grp:alt_shift_toggle", N_("Alt+Shift") },
+  { "grp:ctrl_shift_toggle", N_("Ctrl+Shift") },
+  { "grp:ctrl_alt_toggle", N_("Alt+Ctrl") },
+  { "grp:caps_toggle", N_("Caps") },
+  { "grp:shift_caps_toggle", N_("Shift+Caps") },
+  { "grp:alt_caps_toggle", N_("Alt+Caps") },
+  { NULL, NULL }
+};
+
+const gchar *
+cc_util_xkb_info_description_for_option (void        *info,
+                                         const gchar *group_id,
+                                         const gchar *id)
+{
+  CcInputSwitcherOptions *option;
+
+  if (!g_str_equal (group_id, "grp"))
+    return gnome_xkb_info_description_for_option (info, group_id, id);
+
+  for (option = &cc_input_switcher_options[0]; option->value != NULL; option++)
+    if (g_str_equal (id, option->value))
+      return _(option->description);
+
+  return gnome_xkb_info_description_for_option (info, group_id, id);
 }

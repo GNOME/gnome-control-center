@@ -26,6 +26,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
 
+#include "cc-util.h"
 #include "cc-input-options.h"
 
 typedef struct {
@@ -122,7 +123,7 @@ update_modifiers_shortcut (GtkWidget *dialog)
                         break;
 
         if (p && *p) {
-                text = gnome_xkb_info_description_for_option (xkb_info, "grp", *p);
+                text = cc_util_xkb_info_description_for_option (xkb_info, "grp", *p);
                 gtk_label_set_text (GTK_LABEL (priv->alt_next_source), text);
         } else {
                 gtk_widget_hide (priv->alt_next_source);
