@@ -445,6 +445,10 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		      "accel-mods", mask,
 		      "style", PANGO_STYLE_NORMAL,
 		      NULL);
+
+	str = gtk_accelerator_get_label (keyval, mask);
+	g_settings_set_string (button->settings, OLED_LABEL, str);
+	g_free (str);
 }
 
 static gboolean
@@ -586,9 +590,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
 	    g_strfreev (strv);
   } else {
     g_settings_set_string (button->settings, CUSTOM_ACTION_KEY, str);
-    g_free (str);
-    str = gtk_accelerator_get_label (keyval, mask);
-    g_settings_set_string (button->settings, OLED_LABEL, str);
   }
   g_settings_set_enum (button->settings, ACTION_TYPE_KEY, GSD_WACOM_ACTION_TYPE_CUSTOM);
   g_free (str);
@@ -775,6 +776,13 @@ combo_action_cell_changed (GtkCellRendererCombo *cell,
 	if (button->settings == NULL)
 		return;
 	g_settings_set_enum (button->settings, ACTION_TYPE_KEY, type);
+
+	if ((type == GSD_WACOM_ACTION_TYPE_SWITCH_MONITOR) || 
+	   (type == GSD_WACOM_ACTION_TYPE_HELP))
+		g_settings_set_string (button->settings, OLED_LABEL, WACOM_C(action_table[type].action_name));
+
+	if (type == GSD_WACOM_ACTION_TYPE_NONE)
+		g_settings_set_string (button->settings, OLED_LABEL, "");
 
 	gtk_widget_grab_focus (GTK_WIDGET (tree_view));
 }
