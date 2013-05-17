@@ -83,9 +83,29 @@ cc_panel_set_property (GObject      *object,
     case PROP_PARAMETERS:
       {
         GVariant *parameters = g_value_get_variant (value);
+        GVariant *v;
+        gsize n_parameters;
 
-        if (parameters)
+        if (parameters == NULL)
+          return;
+
+        n_parameters = g_variant_n_children (parameters);
+        if (n_parameters == 0)
+          return;
+
+        g_variant_get_child (parameters, 0, "v", &v);
+
+        if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
+          g_warning ("Wrong type for the first argument GVariant, expected 'a{sv}' but got '%s'",
+                     (gchar *)g_variant_get_type (v));
+        else if (g_variant_n_children (v) > 0)
+          g_warning ("Ignoring additional flags");
+
+        g_variant_unref (v);
+
+        if (n_parameters > 1)
           g_warning ("Ignoring additional parameters");
+
         break;
       }
     default:
