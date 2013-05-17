@@ -123,6 +123,7 @@ typedef struct
 	GsdWacomTabletButtonPos   pos;
 	int                       group_id, idx;
 	int                       status_led;
+	int                       has_oled;
 } GsdWacomTabletButton;
 
 void                  gsd_wacom_tablet_button_free (GsdWacomTabletButton *button);
