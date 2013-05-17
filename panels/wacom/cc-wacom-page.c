@@ -184,7 +184,6 @@ set_calibration (GsdWacomDevice *device,
 	g_settings_set_value (settings,
 			      "last-calibrated-resolution",
 			      last_resolution);
-	g_clear_pointer (&last_resolution, g_variant_unref);
 }
 
 static void
