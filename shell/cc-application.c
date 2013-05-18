@@ -146,6 +146,15 @@ cc_application_command_line (GApplication *application,
   cc_panel_loader_add_option_groups (context, flags_builder);
   g_option_context_set_help_enabled (context, FALSE);
 
+  start_panels = NULL;
+  search_str = NULL;
+  show_overview = FALSE;
+  verbose = FALSE;
+  show_help = FALSE;
+  show_help_gtk = FALSE;
+  show_help_all = FALSE;
+  list_panels = FALSE;
+
   if (g_option_context_parse (context, &argc, &argv, &error) == FALSE)
     {
       g_print (_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
