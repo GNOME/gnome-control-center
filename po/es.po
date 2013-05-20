@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-04-22 11:20+0000\n"
-"PO-Revision-Date: 2013-04-24 17:59+0200\n"
+"POT-Creation-Date: 2013-05-19 08:46+0000\n"
+"PO-Revision-Date: 2013-05-20 12:44+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -156,7 +156,7 @@ msgstr "página 2"
 msgid "Paired"
 msgstr "Emparejado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:812
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:833
 msgid "Type"
 msgstr "Tipo"
 
@@ -417,7 +417,6 @@ msgstr "Pantalla"
 #. TRANSLATORS: this is when the upload of the profile failed
 #: ../panels/color/cc-color-panel.c:913
 #, c-format
-#| msgid "Failed to apply configuration: %s"
 msgid "Failed to upload file: %s"
 msgstr "Falló al subir el archivo: %s"
 
@@ -555,7 +554,7 @@ msgstr "Calibración de la pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
+#: ../panels/user-accounts/um-account-dialog.c:1082
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -574,8 +573,11 @@ msgstr "Reanudar"
 msgid "Done"
 msgstr "Hecho"
 
+#. Timeout parameters
+#. 5000 = 5 sec
+#. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
 msgid "Screen Calibration"
 msgstr "Calibración de la pantalla"
 
@@ -677,7 +679,6 @@ msgid "Profile successfully created!"
 msgstr "Perfil creado correctamente."
 
 #: ../panels/color/color.ui.h:22
-#| msgid "No profile"
 msgid "Copy profile"
 msgstr "Copiar perfil"
 
@@ -686,12 +687,10 @@ msgid "Requires writable media"
 msgstr "Requiere un medio escribible"
 
 #: ../panels/color/color.ui.h:24
-#| msgid "No profile"
 msgid "Upload profile"
 msgstr "Subir perfil"
 
 #: ../panels/color/color.ui.h:25
-#| msgid "<b>Di_rect internet connection</b>"
 msgid "Requires Internet connection"
 msgstr "Requiere conexión a Internet"
 
@@ -897,33 +896,33 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Perfil;Calibrado;Impresora;Pantalla;"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:677
+#: ../panels/common/cc-common-language.c:682
 msgid "United States"
 msgstr "Estados Unidos"
 
-#: ../panels/common/cc-common-language.c:678
+#: ../panels/common/cc-common-language.c:683
 msgid "Germany"
 msgstr "Alemania"
 
-#: ../panels/common/cc-common-language.c:679
+#: ../panels/common/cc-common-language.c:684
 msgid "France"
 msgstr "Francia"
 
-#: ../panels/common/cc-common-language.c:680
+#: ../panels/common/cc-common-language.c:685
 msgid "Spain"
 msgstr "España"
 
-#: ../panels/common/cc-common-language.c:681
+#: ../panels/common/cc-common-language.c:686
 msgid "China"
 msgstr "China"
 
-#: ../panels/common/cc-common-language.c:747
+#: ../panels/common/cc-common-language.c:752
 msgid "Other…"
 msgstr "Otro…"
 
 #: ../panels/common/cc-language-chooser.c:176
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:172
+#: ../panels/region/cc-input-chooser.c:174
 msgid "More…"
 msgstr "Más…"
 
@@ -934,7 +933,7 @@ msgstr "No se han encontrado idiomas"
 #. translators:
 #. * The device has been disabled
 #: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
+#: ../panels/keyboard/cc-keyboard-option.c:416
 #: ../panels/keyboard/keyboard-shortcuts.c:1159
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1700,15 +1699,23 @@ msgstr "Reducir el tamaño del texto:"
 msgid "High contrast on or off"
 msgstr "Contraste alto activado o desactivado"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. Translators: This key is also known as 'third level
+#. * chooser'. AltGr is often used for this purpose. See
+#. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:366
 msgid "Alternative Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#. Translators: The Compose key is used to initiate key
+#. * sequences that are combined to form a single character.
+#. * See http://en.wikipedia.org/wiki/Compose_key
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:375
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:379
 msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
@@ -2018,8 +2025,8 @@ msgstr "Proxy de la red"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:284
-#: ../panels/network/net-vpn.c:419
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
@@ -2097,12 +2104,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:789
 msgid "Today"
 msgstr "Hoy"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:792
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -2472,7 +2479,7 @@ msgstr "Perfil nuevo"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1068
+#: ../panels/user-accounts/um-account-dialog.c:1083
 msgid "_Add"
 msgstr "_Añadir"
 
@@ -2625,8 +2632,6 @@ msgstr "Controlar cómo se conecta a Internet"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;"
@@ -3631,63 +3636,63 @@ msgstr "Mostrar los banners emergentes"
 msgid "Show in Lock Screen"
 msgstr "Mostrar en la pantalla de bloqueo"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:1073
-#: ../panels/search/cc-search-locations-dialog.c:480
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
+#| msgid "Other"
+msgctxt "Online Account"
 msgid "Other"
 msgstr "Otra"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:292
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Añadir cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
 msgid "Mail"
 msgstr "Correo"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
 msgid "Contacts"
 msgstr "Contactos"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:343
 msgid "Resources"
 msgstr "Recursos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:370
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Error logging into the account"
 msgstr "Error al iniciar sesión en la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:442
+#: ../panels/online-accounts/cc-online-accounts-panel.c:497
 msgid "Credentials have expired."
 msgstr "Las credenciales han caducado."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:446
+#: ../panels/online-accounts/cc-online-accounts-panel.c:501
 msgid "Sign in to enable this account."
 msgstr "Firme para activar esta cuenta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:451
+#: ../panels/online-accounts/cc-online-accounts-panel.c:506
 msgid "_Sign In"
 msgstr "Iniciar _sesión"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:695
+#: ../panels/online-accounts/cc-online-accounts-panel.c:747
 msgid "Error creating account"
 msgstr "Error al crear la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:736
+#: ../panels/online-accounts/cc-online-accounts-panel.c:787
 msgid "Error removing account"
 msgstr "Error al quitar la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:772
+#: ../panels/online-accounts/cc-online-accounts-panel.c:823
 msgid "Are you sure you want to remove the account?"
 msgstr "¿Está seguro de que quiere quitar la cuenta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:774
+#: ../panels/online-accounts/cc-online-accounts-panel.c:825
 msgid "This will not remove the account on the server."
 msgstr "Esto no quitará la cuenta en el servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:775
+#: ../panels/online-accounts/cc-online-accounts-panel.c:826
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -3701,7 +3706,6 @@ msgstr "Conectarse a sus cuentas en línea y decidir para qué usarlas"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#| msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
@@ -4223,7 +4227,7 @@ msgid "No printers available"
 msgstr "No hay impresoras disponibles"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1432
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4231,15 +4235,15 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1773
+#: ../panels/printers/cc-printers-panel.c:1776
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1943
 msgid "Select PPD File"
 msgstr "Seleccionar archivo PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1952
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4247,30 +4251,30 @@ msgstr ""
 "Archivos de descripción de impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *."
 "PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2254
+#: ../panels/printers/cc-printers-panel.c:2257
 msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
-#: ../panels/printers/cc-printers-panel.c:2323
+#: ../panels/printers/cc-printers-panel.c:2326
 msgid "Searching for preferred drivers…"
 msgstr "Buscando controladores preferidos…"
 
-#: ../panels/printers/cc-printers-panel.c:2338
+#: ../panels/printers/cc-printers-panel.c:2341
 msgid "Select from database…"
 msgstr "Seleccionar de la base de datos…"
 
-#: ../panels/printers/cc-printers-panel.c:2347
+#: ../panels/printers/cc-printers-panel.c:2350
 msgid "Provide PPD File…"
 msgstr "Proporcionar archivo PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2498
-#: ../panels/printers/cc-printers-panel.c:2521
+#: ../panels/printers/cc-printers-panel.c:2501
+#: ../panels/printers/cc-printers-panel.c:2524
 msgid "Test page"
 msgstr "Página de prueba"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2929
+#: ../panels/printers/cc-printers-panel.c:2932
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -4468,64 +4472,64 @@ msgid "GhostScript pre-filtering"
 msgstr "Prefiltrado GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "Páginas por cara"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "Dos caras"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "Orientación"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuración de página"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opciones instalables"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Trabajo"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Calidad de la imagen"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Terminando"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avanzado"
@@ -4794,7 +4798,6 @@ msgid "Automatic Screen _Lock"
 msgstr "_Bloque de pantalla automático"
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "Lock Screen _After"
 msgid "Lock screen _after blank for"
 msgstr "B_loquear la pantalla después de"
 
@@ -4844,9 +4847,15 @@ msgstr "Métrico"
 msgid "No regions found"
 msgstr "No se han encontrado regiones"
 
-#: ../panels/region/cc-input-chooser.c:186
+#: ../panels/region/cc-input-chooser.c:188
 msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
+
+#: ../panels/region/cc-input-chooser.c:1091
+#| msgid "Other"
+msgctxt "Input Source"
+msgid "Other"
+msgstr "Otra"
 
 #: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
@@ -4989,12 +4998,22 @@ msgid "Home"
 msgstr "Domicilio"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
+#| msgid "Places"
+msgctxt "Search Location"
 msgid "Places"
 msgstr "Lugares"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
+#| msgid "Bookmarks"
+msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Marcadores"
+
+#: ../panels/search/cc-search-locations-dialog.c:480
+#| msgid "Other"
+msgctxt "Search Location"
+msgid "Other"
+msgstr "Otra"
 
 #: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
@@ -6075,7 +6094,6 @@ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "inicio;sesión;nombre;huella;avatar;logo;cara;contraseña;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
-#| msgid "Retain _History"
 msgid "Login History"
 msgstr "Histórico de inicio de sesión"
 
@@ -6307,24 +6325,24 @@ msgstr "La contraseña nueva no contiene suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:186
 msgid "Failed to add account"
 msgstr "Falló al añadir la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:403
-#: ../panels/user-accounts/um-account-dialog.c:444
+#: ../panels/user-accounts/um-account-dialog.c:407
+#: ../panels/user-accounts/um-account-dialog.c:448
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:577
+#: ../panels/user-accounts/um-account-dialog.c:581
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:631
+#: ../panels/user-accounts/um-account-dialog.c:635
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:688
+#: ../panels/user-accounts/um-account-dialog.c:703
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
@@ -6497,16 +6515,17 @@ msgstr "No se puede unir automáticamente a este tipo de dominio"
 msgid "No such domain or realm found"
 msgstr "No existe el dominio o no se ha encontrado el reino"
 
-#: ../panels/user-accounts/um-realm-manager.c:817
+#: ../panels/user-accounts/um-realm-manager.c:814
+#: ../panels/user-accounts/um-realm-manager.c:828
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "No se puede iniciar sesión como %s en el dominio %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:822
+#: ../panels/user-accounts/um-realm-manager.c:820
 msgid "Invalid password, please try again"
 msgstr "Contraseña no válida, inténtelo de nuevo"
 
-#: ../panels/user-accounts/um-realm-manager.c:826
+#: ../panels/user-accounts/um-realm-manager.c:833
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
@@ -6572,15 +6591,15 @@ msgstr "Ninguno"
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:943
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:945
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:986
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6588,12 +6607,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1024
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1035
+#: ../panels/user-accounts/um-user-panel.c:1321
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6601,12 +6620,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1044
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1056
+#: ../panels/user-accounts/um-user-panel.c:1326
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6614,29 +6633,29 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1230
 msgid "My Account"
 msgstr "Mi cuenta"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
+#: ../panels/user-accounts/um-user-panel.c:1239
 msgid "Other Accounts"
 msgstr "Otras cuentas"
 
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:535
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Ya existe un nombre de usuario con el nombre «%s»"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:539
 #, c-format
 msgid "The username is too long"
 msgstr "El nombre de usuario es demasiado largo"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:542
 msgid "The username cannot start with a '-'"
 msgstr "El nombre de usuario no puede comenzar por «-»"
 
-#: ../panels/user-accounts/um-utils.c:526
+#: ../panels/user-accounts/um-utils.c:545
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -6656,7 +6675,7 @@ msgstr "Mapear botones"
 msgid "Map buttons to functions"
 msgstr "Mapear botones a funciones"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:79
+#: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -6664,7 +6683,7 @@ msgstr ""
 "Pulse los marcadores objetivo a medida que aparecen en la pantalla para "
 "calibrar la tableta."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:368
+#: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
 
@@ -6687,50 +6706,50 @@ msgstr "Mapear una única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:122 ../panels/wacom/cc-wacom-page.c:407
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/wacom/cc-wacom-page.c:123
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Enviar pulsación de tecla"
 
-#: ../panels/wacom/cc-wacom-page.c:124
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Cambiar monitor"
 
-#: ../panels/wacom/cc-wacom-page.c:125
+#: ../panels/wacom/cc-wacom-page.c:126
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Mostrar la ayuda en pantalla"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:665
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:665
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Abajo"
 
-#: ../panels/wacom/cc-wacom-page.c:685
+#: ../panels/wacom/cc-wacom-page.c:706
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:775
+#: ../panels/wacom/cc-wacom-page.c:796
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/wacom/cc-wacom-page.c:854
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/wacom/cc-wacom-page.c:943
+#: ../panels/wacom/cc-wacom-page.c:964
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -6787,7 +6806,6 @@ msgid "Adjust display resolution"
 msgstr "Ajustar la resolución de la pantalla"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
-#| msgid "Mouse Settings"
 msgid "Adjust mouse settings"
 msgstr "Ajustar la configuración del ratón"
 
@@ -6800,86 +6818,86 @@ msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1076
+#: ../panels/wacom/gsd-wacom-device.c:1078
 msgid "Left Ring"
 msgstr "Anillo izquierdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1086
+#: ../panels/wacom/gsd-wacom-device.c:1089
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo del anillo izquierdo nº %d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1105
+#: ../panels/wacom/gsd-wacom-device.c:1109
 msgid "Right Ring"
 msgstr "Anillo derecho"
 
-#: ../panels/wacom/gsd-wacom-device.c:1115
+#: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo del anillo derecho nº %d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1156
+#: ../panels/wacom/gsd-wacom-device.c:1162
 msgid "Left Touchstrip"
 msgstr "Banda táctil izquierda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1166
+#: ../panels/wacom/gsd-wacom-device.c:1173
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de la banda táctil izquierda nº %d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1185
+#: ../panels/wacom/gsd-wacom-device.c:1193
 msgid "Right Touchstrip"
 msgstr "Banda táctil derecha"
 
-#: ../panels/wacom/gsd-wacom-device.c:1195
+#: ../panels/wacom/gsd-wacom-device.c:1204
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de la banda táctil derecha nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1220
+#: ../panels/wacom/gsd-wacom-device.c:1230
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio del anillo táctil izquierdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1222
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio del anillo táctil derecho"
 
-#: ../panels/wacom/gsd-wacom-device.c:1225
+#: ../panels/wacom/gsd-wacom-device.c:1235
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio de la banda táctil izquierda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1227
+#: ../panels/wacom/gsd-wacom-device.c:1237
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio de la banda táctil derecha"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1242
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo de cambio nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1336
+#: ../panels/wacom/gsd-wacom-device.c:1351
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón izquierdo nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1339
+#: ../panels/wacom/gsd-wacom-device.c:1354
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón derecho nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1342
+#: ../panels/wacom/gsd-wacom-device.c:1357
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1345
+#: ../panels/wacom/gsd-wacom-device.c:1360
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior nº %d"
@@ -6952,40 +6970,40 @@ msgstr "Botón inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidad de presión del lápiz"
 
-#: ../shell/cc-application.c:66
+#: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
 msgstr "Activar el modo detallado"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:70
 msgid "Show the overview"
 msgstr "Mostrar la visión general"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:71
 msgid "Search for the string"
 msgstr "Buscar la cadena"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:72
 msgid "List possible panel names and exit"
 msgstr "Listar todos los nombres de paneles posibles y salir"
 
-#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
+#: ../shell/cc-application.c:75
 msgid "Show help options"
 msgstr "Mostrar opciones de ayuda"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "Panel que mostrar"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTO…]"
 
-#: ../shell/cc-application.c:139
+#: ../shell/cc-application.c:142
 msgid "- Settings"
 msgstr "- Configuración"
 
-#: ../shell/cc-application.c:148
+#: ../shell/cc-application.c:160
 #, c-format
 msgid ""
 "%s\n"
@@ -6995,15 +7013,15 @@ msgstr ""
 "Ejecutar «%s --help» para ver una lista completa de las opciones de comando "
 "disponibles.\n"
 
-#: ../shell/cc-application.c:178
+#: ../shell/cc-application.c:190
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
-#: ../shell/cc-application.c:313
+#: ../shell/cc-application.c:325
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../shell/cc-application.c:314
+#: ../shell/cc-application.c:326
 msgid "Quit"
 msgstr "Salir"
 
