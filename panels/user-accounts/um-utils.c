@@ -559,7 +559,7 @@ void
 generate_username_choices (const gchar  *name,
                            GtkListStore *store)
 {
-        gboolean in_use;
+        gboolean in_use, same_as_initial;
         char *lc_name, *ascii_name, *stripped_name;
         char **words1;
         char **words2 = NULL;
@@ -707,7 +707,8 @@ generate_username_choices (const gchar  *name,
         }
 
         in_use = is_username_used (item1->str);
-        if (nwords2 > 0 && !in_use && !g_ascii_isdigit (item1->str[0])) {
+        same_as_initial = (g_strcmp0 (item0->str, item1->str) == 0);
+        if (!same_as_initial && nwords2 > 0 && !in_use && !g_ascii_isdigit (item1->str[0])) {
                 gtk_list_store_append (store, &iter);
                 gtk_list_store_set (store, &iter, 0, item1->str, -1);
                 g_hash_table_insert (items, item1->str, item1->str);
