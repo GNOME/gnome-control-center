@@ -638,7 +638,11 @@ visible_func (GtkTreeModel     *model,
 
                 gtk_tree_model_get (model, iter, 1, &mode, -1);
 
-                if (mode == UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT && locked)
+                /* We don't allow the current user to disable their own account,
+                 * as this can lead to them being 'locked out'.
+                 */
+                if (mode == UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT &&
+                    (locked || act_user_get_uid (um->user) == getuid ()))
                         return FALSE;
 
                 if (mode == UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT && !locked)
