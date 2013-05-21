@@ -51,6 +51,18 @@ CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 #define SOUND_PREFS		"sound"
 #define WIZARD			"bluetooth-wizard"
 
+static const char *connectable_uuids[] = {
+	"HSP",
+	"AudioSource",
+	"AudioSink",
+	"A/V_RemoteControlTarget",
+	"A/V_RemoteControl",
+	"Headset_-_AG",
+	"Handsfree",
+	"HandsfreeAudioGateway",
+	"HumanInterfaceDeviceService",
+};
+
 struct CcBluetoothPanelPrivate {
 	GtkBuilder          *builder;
 	GtkWidget           *chooser;
@@ -305,6 +317,18 @@ remove_extra_setup_widgets (CcBluetoothPanel *self)
 	gtk_widget_hide (WID ("additional_setup_box"));
 }
 
+static gboolean
+device_is_connectable(const char *uuid)
+{
+	int i;
+
+	for (i = 0; i < G_N_ELEMENTS (connectable_uuids); i++) {
+		if (g_str_equal (connectable_uuids[i], uuid))
+			return TRUE;
+	}
+	return FALSE;
+}
+
 static void
 cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 {
@@ -335,7 +359,6 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		BluetoothType type;
 		gboolean connected;
 		GValue value = { 0 };
-		GHashTable *services;
 
 		if (self->priv->debug)
 			bluetooth_chooser_dump_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
@@ -358,25 +381,20 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 				    g_value_get_boolean (&value) ? _("Yes") : _("No"));
 		g_value_unset (&value);
 
-		/* Connection */
-		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
-							    "services", &value);
-		services = g_value_get_boxed (&value);
-		gtk_widget_set_sensitive (GTK_WIDGET (button), (services != NULL));
-		g_value_unset (&value);
-
 		/* UUIDs */
 		if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
 								"uuids", &value)) {
 			const char **uuids;
 			guint i;
 
+			gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 			uuids = (const char **) g_value_get_boxed (&value);
 			for (i = 0; uuids && uuids[i] != NULL; i++) {
-				if (g_str_equal (uuids[i], "OBEXObjectPush")) {
+				if (g_str_equal (uuids[i], "OBEXObjectPush"))
 					gtk_widget_show (WID ("send_box"));
-					break;
-				}
+
+				if (device_is_connectable(uuids[i]))
+					gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
 			}
 			g_value_unset (&value);
 		}
