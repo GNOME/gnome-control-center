@@ -199,17 +199,6 @@ update_mapping (CcWacomMappingPanel *self)
 	}
 
 	gsd_wacom_device_set_display (self->priv->device, monitor);
-
-	if (monitor >= 0) {
-		GsdWacomRotation rotation;
-		GSettings *settings;
-
-		rotation = gsd_wacom_device_get_display_rotation (self->priv->device);
-		settings = gsd_wacom_device_get_settings (self->priv->device);
-		g_settings_set_string (settings,
-				       "rotation",
-				       gsd_wacom_device_rotation_type_to_name (rotation));
-	}
 }
 
 void
