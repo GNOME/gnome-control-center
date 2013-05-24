@@ -43,6 +43,9 @@ CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
+#define BLUEZ_SERVICE	"org.bluez"
+#define ADAPTER_IFACE	"org.bluez.Adapter1"
+
 #define KEYBOARD_PREFS		"keyboard"
 #define MOUSE_PREFS		"mouse"
 #define SOUND_PREFS		"sound"
@@ -660,9 +663,9 @@ remove_selected_device (CcBluetoothPanel *self)
 	adapter_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 						       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
 						       NULL,
-						       "org.bluez",
+						       BLUEZ_SERVICE,
 						       adapter,
-						       "org.bluez.Adapter",
+						       ADAPTER_IFACE,
 						       NULL,
 						       &error);
 	g_free (adapter);
