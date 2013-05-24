@@ -396,6 +396,11 @@ on_register_user (GObject *source,
         GError *error = NULL;
         ActUser *user;
 
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
+                return;
+        }
+
         user = act_user_manager_cache_user_finish (ACT_USER_MANAGER (source), result, &error);
 
         /* This is where we're finally done */
@@ -424,6 +429,11 @@ on_permit_user_login (GObject *source,
         ActUserManager *manager;
         GError *error = NULL;
         gchar *login;
+
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
+                return;
+        }
 
         common = UM_REALM_COMMON (source);
         um_realm_common_call_change_login_policy_finish (common, result, &error);
@@ -570,6 +580,11 @@ on_join_login (GObject *source,
         GError *error = NULL;
         GBytes *creds;
 
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
+                return;
+        }
+
         um_realm_login_finish (result, &creds, &error);
 
         /* Logged in as admin successfully, use creds to join domain */
@@ -617,6 +632,11 @@ on_realm_joined (GObject *source,
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GError *error = NULL;
 
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
+                return;
+        }
+
         um_realm_join_finish (self->selected_realm,
                               result, &error);
 
@@ -650,6 +670,11 @@ on_realm_login (GObject *source,
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GError *error = NULL;
         GBytes *creds = NULL;
+
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
+                return;
+        }
 
         um_realm_login_finish (result, &creds, &error);
 
@@ -732,6 +757,11 @@ on_realm_discover_input (GObject *source,
         GError *error = NULL;
         GList *realms;
 
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
+                return;
+        }
+
         realms = um_realm_manager_discover_finish (self->realm_manager,
                                                    result, &error);
 
@@ -783,6 +813,18 @@ enterprise_add_user (UmAccountDialog *self)
 }
 
 static void
+clear_realm_manager (UmAccountDialog *self)
+{
+        if (self->realm_manager) {
+                g_signal_handlers_disconnect_by_func (self->realm_manager,
+                                                      on_manager_realm_added,
+                                                      self);
+                g_object_unref (self->realm_manager);
+                self->realm_manager = NULL;
+        }
+}
+
+static void
 on_realm_manager_created (GObject *source,
                            GAsyncResult *result,
                            gpointer user_data)
@@ -791,12 +833,18 @@ on_realm_manager_created (GObject *source,
         GError *error = NULL;
         GList *realms, *l;
 
-        g_clear_object (&self->realm_manager);
+        clear_realm_manager (self);
 
         self->realm_manager = um_realm_manager_new_finish (result, &error);
         if (error != NULL) {
                 g_warning ("Couldn't contact realmd service: %s", error->message);
+                g_object_unref (self);
                 g_error_free (error);
+                return;
+        }
+
+        if (g_cancellable_is_cancelled (self->cancellable)) {
+                g_object_unref (self);
                 return;
         }
 
@@ -815,6 +863,7 @@ on_realm_manager_created (GObject *source,
         /* Show the 'Enterprise Login' stuff, and update mode */
         gtk_widget_show (self->enterprise_button);
         mode_change (self, self->mode);
+        g_object_unref (self);
 }
 
 static void
@@ -824,7 +873,8 @@ on_realmd_appeared (GDBusConnection *connection,
                     gpointer user_data)
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
-        um_realm_manager_new (self->cancellable, on_realm_manager_created, self);
+        um_realm_manager_new (self->cancellable, on_realm_manager_created,
+                              g_object_ref (self));
 }
 
 static void
@@ -834,14 +884,7 @@ on_realmd_disappeared (GDBusConnection *unused1,
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
 
-        if (self->realm_manager) {
-                g_signal_handlers_disconnect_by_func (self->realm_manager,
-                                                      on_manager_realm_added,
-                                                      self);
-                g_object_unref (self->realm_manager);
-                self->realm_manager = NULL;
-        }
-
+        clear_realm_manager (self);
         gtk_list_store_clear (self->enterprise_realms);
         gtk_widget_hide (self->enterprise_button);
         mode_change (self, UM_LOCAL);
