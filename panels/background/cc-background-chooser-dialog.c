@@ -56,6 +56,8 @@ struct _CcBackgroundChooserDialogPrivate
 {
   GtkListStore *sources;
   GtkWidget *icon_view;
+  GtkWidget *empty_pictures_box;
+  GtkWidget *sw_content;
 
   BgWallpapersSource *wallpapers_source;
   BgPicturesSource *pictures_source;
@@ -70,6 +72,9 @@ struct _CcBackgroundChooserDialogPrivate
   GCancellable *copy_cancellable;
 
   GtkWidget *spinner;
+
+  gulong row_inserted_id;
+  gulong row_deleted_id;
 };
 
 #define CC_CHOOSER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TYPE_BACKGROUND_CHOOSER_DIALOG, CcBackgroundChooserDialogPrivate))
@@ -133,18 +138,107 @@ cc_background_chooser_dialog_finalize (GObject *object)
 }
 
 static void
+ensure_iconview_shown (CcBackgroundChooserDialog *chooser)
+{
+  gtk_widget_hide (chooser->priv->empty_pictures_box);
+  gtk_widget_show (chooser->priv->sw_content);
+}
+
+static void
+possibly_show_empty_pictures_box (GtkTreeModel              *model,
+                                  CcBackgroundChooserDialog *chooser)
+{
+  GtkTreeIter iter;
+
+  if (gtk_tree_model_get_iter_first (model, &iter))
+    {
+      ensure_iconview_shown (chooser);
+    }
+  else
+    {
+      gtk_widget_hide (chooser->priv->sw_content);
+      gtk_widget_show (chooser->priv->empty_pictures_box);
+    }
+}
+
+static void
+on_source_added_cb (GtkTreeModel *model,
+                    GtkTreePath  *path,
+                    GtkTreeIter  *iter,
+                    gpointer     user_data)
+{
+  possibly_show_empty_pictures_box (model, CC_BACKGROUND_CHOOSER_DIALOG (user_data));
+}
+
+static void
+on_source_removed_cb (GtkTreeModel *model,
+                      GtkTreePath  *path,
+                      gpointer     user_data)
+{
+  possibly_show_empty_pictures_box (model, CC_BACKGROUND_CHOOSER_DIALOG (user_data));
+}
+
+static void
+monitor_pictures_model (CcBackgroundChooserDialog *chooser)
+{
+  GtkTreeModel *model;
+
+  model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (chooser->priv->pictures_source)));
+
+  chooser->priv->row_inserted_id = g_signal_connect (model, "row-inserted",
+                                                     G_CALLBACK (on_source_added_cb),
+                                                     chooser);
+
+  chooser->priv->row_deleted_id = g_signal_connect (model, "row-deleted",
+                                                    G_CALLBACK (on_source_removed_cb),
+                                                    chooser);
+
+  possibly_show_empty_pictures_box (model, chooser);
+}
+
+static void
+cancel_monitor_pictures_model (CcBackgroundChooserDialog *chooser)
+{
+  GtkTreeModel *model;
+
+  model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (chooser->priv->pictures_source)));
+
+  if (chooser->priv->row_inserted_id > 0)
+    {
+      g_signal_handler_disconnect (model, chooser->priv->row_inserted_id);
+      chooser->priv->row_inserted_id = 0;
+    }
+
+  if (chooser->priv->row_deleted_id > 0)
+    {
+      g_signal_handler_disconnect (model, chooser->priv->row_deleted_id);
+      chooser->priv->row_deleted_id = 0;
+    }
+
+  ensure_iconview_shown (chooser);
+}
+
+static void
 on_view_toggled (GtkToggleButton           *button,
                  CcBackgroundChooserDialog *chooser)
 {
   BgSource *source;
+  GtkTreeModel *model;
 
   if (!gtk_toggle_button_get_active (button))
     return;
 
   source = g_object_get_data (G_OBJECT (button), "source");
-  gtk_icon_view_set_model (GTK_ICON_VIEW (chooser->priv->icon_view),
-                           GTK_TREE_MODEL (bg_source_get_liststore (source)));
-
+  model = GTK_TREE_MODEL (bg_source_get_liststore (source));
+  gtk_icon_view_set_model (GTK_ICON_VIEW (chooser->priv->icon_view), model);
+  /* When there are not any appropriate image files as direct children of
+   * ~/Pictures show the empty_pictures_box to inform the user what's wrong
+   * and how to add images to show here.
+   */
+  if (source == BG_SOURCE (chooser->priv->pictures_source))
+    monitor_pictures_model (chooser);
+  else
+    cancel_monitor_pictures_model (chooser);
 }
 
 static void
@@ -174,13 +268,17 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 {
   CcBackgroundChooserDialogPrivate *priv;
   GtkCellRenderer *renderer;
-  GtkWidget *sw_content;
   GtkWidget *vbox;
   GtkWidget *button1;
   GtkWidget *button;
   GtkWidget *hbox;
   GtkWidget *grid;
+  GtkWidget *img;
+  GtkWidget *labels_grid;
+  GtkWidget *label;
   GtkStyleContext *context;
+  gchar *markup, *href;
+  const gchar *pictures_dir;
 
   chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
   priv = chooser->priv;
@@ -191,6 +289,9 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 #ifdef HAVE_LIBSOCIALWEB
   priv->flickr_source = bg_flickr_source_new ();
 #endif
+
+  priv->row_inserted_id = 0;
+  priv->row_deleted_id = 0;
 
   gtk_container_set_border_width (GTK_CONTAINER (chooser), 6);
   gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
@@ -250,20 +351,77 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   g_object_set_data (G_OBJECT (button), "source", priv->flickr_source);
 #endif
 
-  sw_content = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw_content), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw_content), GTK_SHADOW_IN);
-  gtk_widget_set_hexpand (sw_content, TRUE);
-  gtk_widget_set_vexpand (sw_content, TRUE);
-  gtk_container_add (GTK_CONTAINER (grid), sw_content);
-  g_object_set (sw_content,
+  priv->sw_content = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->sw_content), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->sw_content), GTK_SHADOW_IN);
+  gtk_widget_set_hexpand (priv->sw_content, TRUE);
+  gtk_widget_set_vexpand (priv->sw_content, TRUE);
+  gtk_container_add (GTK_CONTAINER (grid), priv->sw_content);
+  g_object_set (priv->sw_content,
                 "width-request", 860,
                 "height-request", 550,
                 NULL);
 
+  priv->empty_pictures_box = gtk_grid_new ();
+  gtk_widget_set_no_show_all (priv->empty_pictures_box, TRUE);
+  gtk_grid_set_column_spacing (GTK_GRID (priv->empty_pictures_box), 12);
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (priv->empty_pictures_box),
+                                  GTK_ORIENTATION_HORIZONTAL);
+  context = gtk_widget_get_style_context (priv->empty_pictures_box);
+  gtk_style_context_add_class (context, "dim-label");
+  gtk_container_add (GTK_CONTAINER (grid), priv->empty_pictures_box);
+  g_object_set (priv->empty_pictures_box,
+                "width-request", 860,
+                "height-request", 550,
+                NULL);
+  img = gtk_image_new_from_icon_name ("emblem-photos-symbolic", GTK_ICON_SIZE_DIALOG);
+  gtk_image_set_pixel_size (GTK_IMAGE (img), 64);
+  gtk_widget_set_halign (img, GTK_ALIGN_END);
+  gtk_widget_set_valign (img, GTK_ALIGN_CENTER);
+  gtk_widget_set_hexpand (img, TRUE);
+  gtk_widget_set_vexpand (img, TRUE);
+  gtk_widget_show (img);
+  gtk_container_add (GTK_CONTAINER (priv->empty_pictures_box), img);
+  labels_grid = gtk_grid_new ();
+  gtk_widget_set_halign (labels_grid, GTK_ALIGN_START);
+  gtk_widget_set_valign (labels_grid, GTK_ALIGN_CENTER);
+  gtk_widget_set_hexpand (labels_grid, TRUE);
+  gtk_widget_set_vexpand (labels_grid, TRUE);
+  gtk_grid_set_row_spacing (GTK_GRID (labels_grid), 6);
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (labels_grid),
+                                  GTK_ORIENTATION_VERTICAL);
+  gtk_widget_show (labels_grid);
+  gtk_container_add (GTK_CONTAINER (priv->empty_pictures_box), labels_grid);
+  label = gtk_label_new ("");
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  markup = g_markup_printf_escaped ("<b><span size='large'>%s</span></b>",
+                                    /* translators: No pictures were found */
+                                    _("No Pictures Found"));
+  gtk_label_set_markup (GTK_LABEL (label), (const gchar *) markup);
+  g_free (markup);
+  gtk_widget_show (label);
+  gtk_container_add (GTK_CONTAINER (labels_grid), label);
+  label = gtk_label_new ("");
+  gtk_label_set_max_width_chars (GTK_LABEL (label), 24);
+  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  pictures_dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  href = g_markup_printf_escaped ("<a href=\"file://%s\">%s</a>", pictures_dir,
+                                  g_path_get_basename (pictures_dir));
+  /* translators: %s here is the name of the Pictures directory, the string should be translated in
+   * the context "You can add images to your Pictures folder and they will show up here" */
+  markup = g_strdup_printf (_("You can add images to your %s folder and they will show up here"), href);
+  g_free (href);
+  gtk_label_set_markup (GTK_LABEL (label), (const gchar *) markup);
+  g_free (markup);
+  gtk_widget_show (label);
+  gtk_container_add (GTK_CONTAINER (labels_grid), label);
+
   priv->icon_view = gtk_icon_view_new ();
   gtk_widget_set_hexpand (priv->icon_view, TRUE);
-  gtk_container_add (GTK_CONTAINER (sw_content), priv->icon_view);
+  gtk_container_add (GTK_CONTAINER (priv->sw_content), priv->icon_view);
   g_signal_connect (priv->icon_view, "selection-changed", G_CALLBACK (on_selection_changed), chooser);
   g_signal_connect (priv->icon_view, "item-activated", G_CALLBACK (on_item_activated), chooser);
 
