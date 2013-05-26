@@ -356,6 +356,7 @@ enterprise_add_realm (UmAccountDialog *self,
                 g_free (name);
                 if (match) {
                         g_debug ("ignoring duplicate realm: %s", realm_name);
+                        g_object_unref (common);
                         return;
                 }
                 ret = gtk_tree_model_iter_next (model, &iter);
