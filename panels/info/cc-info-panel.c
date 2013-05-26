@@ -310,6 +310,7 @@ get_graphics_data_glx_renderer ()
     None
   };
   int nconfigs;
+  int major, minor;
   Window window;
   GLXFBConfig *config;
   GLXWindow glxwin;
@@ -322,6 +323,7 @@ get_graphics_data_glx_renderer ()
 
   display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
+  glXQueryVersion (display, &major, &minor);
   config = glXChooseFBConfig (display, DefaultScreen (display),
                               attributes, &nconfigs);
   if (config == NULL) {
