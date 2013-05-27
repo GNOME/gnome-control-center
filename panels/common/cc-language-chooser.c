@@ -252,9 +252,9 @@ out:
 }
 
 static gint
-sort_languages (gconstpointer a,
-            gconstpointer b,
-            gpointer      data)
+sort_languages (GtkWidget *a,
+                GtkWidget *b,
+                gpointer   data)
 {
         const gchar *la;
         const gchar *lb;
