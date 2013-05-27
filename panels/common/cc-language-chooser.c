@@ -331,7 +331,7 @@ set_locale_id (GtkDialog *chooser,
                 if (g_strcmp0 (locale_id, language) == 0) {
                         gboolean is_extra;
 
-                        gtk_widget_show (check);
+                        gtk_widget_set_opacity (check, 1.0);
 
                         /* make sure the selected language is shown */
                         is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
@@ -340,9 +340,7 @@ set_locale_id (GtkDialog *chooser,
                                 egg_list_box_refilter (EGG_LIST_BOX (priv->language_list));
                         }
                 } else {
-                        gtk_image_clear (GTK_IMAGE (check));
-                        g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
-                        gtk_widget_hide (check);
+                        gtk_widget_set_opacity (check, 0.0);
                 }
         }
         g_list_free (children);
