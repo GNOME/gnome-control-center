@@ -470,8 +470,6 @@ cc_language_chooser_new (GtkWidget *parent)
                                     sort_languages, chooser, NULL);
         egg_list_box_set_filter_func (EGG_LIST_BOX (priv->language_list),
                                       language_visible, chooser, NULL);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->language_list),
-                                          update_separator_func, chooser, NULL);
         egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->language_list),
                                          GTK_SELECTION_NONE);
         egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->language_list),
