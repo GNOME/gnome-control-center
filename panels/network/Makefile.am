@@ -45,10 +45,7 @@ libnetwork_la_SOURCES =					\
 	network-dialogs.c				\
 	network-dialogs.h				\
 	cc-network-panel.c				\
-	cc-network-panel.h				\
-	rfkill-glib.c					\
-	rfkill-glib.h					\
-	rfkill.h
+	cc-network-panel.h
 
 libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS) $(builddir)/connection-editor/libconnection-editor.la
 

@@ -44,8 +44,6 @@
 #include "net-virtual-device.h"
 #include "net-vpn.h"
 
-#include "rfkill-glib.h"
-
 #include "panel-common.h"
 
 #include "network-dialogs.h"
@@ -80,10 +78,9 @@ struct _CcNetworkPanelPrivate
         guint             refresh_idle;
 
         /* Killswitch stuff */
+        GDBusProxy       *rfkill_proxy;
         GtkWidget        *kill_switch_header;
-        CcRfkillGlib       *rfkill;
         GtkSwitch        *rfkill_switch;
-        GHashTable       *killswitches;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -242,8 +239,6 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&priv->modem_manager);
         g_clear_object (&priv->remote_settings);
         g_clear_object (&priv->kill_switch_header);
-        g_clear_object (&priv->rfkill);
-        g_clear_pointer (&priv->killswitches, g_hash_table_destroy);
         priv->rfkill_switch = NULL;
 
         if (priv->refresh_idle != 0) {
@@ -279,63 +274,33 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
                                           GParamSpec *pspec,
                                           CcNetworkPanel *panel)
 {
+        CcNetworkPanelPrivate *priv = panel->priv;
 	gboolean enable;
-	struct rfkill_event event;
-
 	enable = gtk_switch_get_active (sw);
-	g_debug ("Setting killswitch to %d", enable);
-
-	memset (&event, 0, sizeof(event));
-	event.op = RFKILL_OP_CHANGE_ALL;
-	event.type = RFKILL_TYPE_ALL;
-	event.soft = enable ? 1 : 0;
-	if (cc_rfkill_glib_send_event (panel->priv->rfkill, &event) < 0)
-		g_warning ("Setting the killswitch %s failed", enable ? "on" : "off");
+        g_dbus_proxy_call (priv->rfkill_proxy,
+                           "org.freedesktop.DBus.Properties.Set",
+                           g_variant_new_parsed ("('org.gnome.SettingsDaemon.Rfkill',"
+                                                 "'AirplaneMode', %v)",
+                                                 g_variant_new_boolean (enable)),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           priv->cancellable,
+                           NULL, NULL);
 }
 
 static void
-rfkill_changed (CcRfkillGlib     *rfkill,
-		GList          *events,
-		CcNetworkPanel *panel)
+on_property_change (GDBusProxy *proxy,
+                    GVariant   *changed_properties,
+                    GVariant   *invalidated_properties,
+                    gpointer    user_data)
 {
-	gboolean enabled;
-	GList *l;
-	GHashTableIter iter;
-	gpointer key, value;
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+        GVariant *result;
+        gboolean enabled;
 
-	enabled = TRUE;
+        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "AirplaneMode");
 
-	for (l = events; l != NULL; l = l->next) {
-		struct rfkill_event *event = l->data;
-
-		if (event->op == RFKILL_OP_ADD)
-			g_hash_table_insert (panel->priv->killswitches,
-					     GINT_TO_POINTER (event->idx),
-					     GINT_TO_POINTER (event->soft || event->hard));
-		else if (event->op == RFKILL_OP_CHANGE)
-			g_hash_table_insert (panel->priv->killswitches,
-					     GINT_TO_POINTER (event->idx),
-					     GINT_TO_POINTER (event->soft || event->hard));
-		else if (event->op == RFKILL_OP_DEL)
-			g_hash_table_remove (panel->priv->killswitches,
-					     GINT_TO_POINTER (event->idx));
-	}
-
-	g_hash_table_iter_init (&iter, panel->priv->killswitches);
-	while (g_hash_table_iter_next (&iter, &key, &value)) {
-		int idx, state;
-
-		idx = GPOINTER_TO_INT (key);
-		state = GPOINTER_TO_INT (value);
-		g_debug ("Killswitch %d is %s", idx, state ? "enabled" : "disabled");
-
-		/* A single device that's enabled? airplane mode is off */
-		if (state == FALSE) {
-			enabled = FALSE;
-			break;
-		}
-	}
-
+        enabled = g_variant_get_boolean (result);
 	if (enabled != gtk_switch_get_active (panel->priv->rfkill_switch)) {
 		g_signal_handlers_block_by_func (panel->priv->rfkill_switch,
 						 cc_network_panel_notify_enable_active_cb,
@@ -345,6 +310,24 @@ rfkill_changed (CcRfkillGlib     *rfkill,
 						 cc_network_panel_notify_enable_active_cb,
 						 panel);
 	}
+
+}
+
+static void
+got_rfkill_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+        GError *error = NULL;
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+
+        panel->priv->rfkill_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+        if (panel->priv->rfkill_proxy == NULL) {
+                g_printerr ("Error creating rfkill proxy: %s\n", error->message);
+                g_error_free (error);
+                return;
+        }
+
+        g_signal_connect (panel->priv->rfkill_proxy, "g-properties-changed",
+                          G_CALLBACK (on_property_change), panel);
 }
 
 static void
@@ -372,12 +355,15 @@ cc_network_panel_constructed (GObject *object)
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
         panel->priv->kill_switch_header = g_object_ref (box);
 
-        panel->priv->killswitches = g_hash_table_new (g_direct_hash, g_direct_equal);
-        panel->priv->rfkill = cc_rfkill_glib_new ();
-        g_signal_connect (G_OBJECT (panel->priv->rfkill), "changed",
-                          G_CALLBACK (rfkill_changed), panel);
-        if (cc_rfkill_glib_open (panel->priv->rfkill) < 0)
-                gtk_widget_hide (box);
+        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                                  G_DBUS_PROXY_FLAGS_NONE,
+                                  NULL,
+                                  "org.gnome.SettingsDaemon.Rfkill",
+                                  "/org/gnome/SettingsDaemon/Rfkill",
+                                  "org.gnome.SettingsDaemon.Rfkill",
+                                  panel->priv->cancellable,
+                                  got_rfkill_proxy_cb,
+                                  panel);
 
         g_signal_connect (panel->priv->rfkill_switch, "notify::active",
                           G_CALLBACK (cc_network_panel_notify_enable_active_cb),
