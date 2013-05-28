@@ -1,3 +1,132 @@
+=============
+Version 3.9.2
+=============
+
+Shell:
+- Sort completion items
+- Add support for additional arguments
+- Do not forcibly suppress debug messages if --verbose not set
+- Remove gnomecc.directory
+- Add a gnome-shell search-provider for settings panel
+- Put the panel title in the shell's header
+- Update panel comments
+- Add navigation support through back button
+- Don't prelight icons in the icon view
+- Use GVariant to convey panel arguments instead of a string array
+- Expose panel launching with D-Bus activation
+- Remove unneeded libnotify dependency
+
+Notifications:
+- Don't fail if a referenced application does not exist
+
+Search:
+- Don't use a label for the enabled switch
+- Special case gnome-control-center
+- Unescape the names in Search Locations
+- Fix ordering and sorting of applications
+
+Bluetooth:
+- Don't show label next to power switch
+
+Keyboard:
+- Be more specific in input source switch label
+- Allow input of Hangul and Modifier+space shortcuts
+
+Background:
+- Offload the sorting of the initial list of files
+- Monitor the Pictures and cache directory for new files
+- Fix possible crashes when exiting the panel
+
+Network:
+- Fix some alignment problems
+- Display "device state reason", and remove duplicate code
+- Improve accessibility
+- Be more careful in ignoring shared connection
+- Add support for ModemManager 1.x API
+- Try to guess operator name from MCCMNC or SID
+- Disable the Hotspot button if the device does not support it
+- Mark connection editor changed when editing IPv4/IPv6 pages
+- Fix initial sensitivity of editor "Add" button
+- Add firewall zone support for wifi, wired and VPN
+- Add icon for WWAN
+- Fix display of some characters in WiFi AP names
+- Fix possible crash in connection editor
+- Update VPN switch when enabled from shell
+
+Date & Time:
+- Add support for new timedated CanNTP property
+
+Online Accounts:
+- Use g_warning instead of goa_warning
+- Scroll the tree view when showing an account
+- Accept requests for account creation on DBus/cmdline
+
+Color:
+- Bump required colord version
+- Improve accessibility
+- When calibrating inhibit logout, switching users and suspending
+- Expand profiles assigned to the device when single clicked
+- Add translatable strings for newer display types
+
+Power:
+- Improve accessibility
+- Change the range of idle time and suspend idle time
+- Simplify "Mark As Inactive After" string
+- Clarify "Lock Screen After" string
+- Expand the "Automatic suspend" dialogue's layout
+
+User Accounts:
+- Add accessible labels in history dialog
+- Don't reject passwords that pwquality says are ok
+- Deal with pre-loaded users
+- Remove password hints feature from UI
+- Stop crash when changing the password
+- Tell realmd not to setup system management
+- Fix fingerprint dialogue causing a crash
+- Ellipsize long user names in the password dialog
+- Disallow whitespace-only names
+
+Privacy:
+- Remove redundant option from the recent files combobox
+
+Sharing:
+- Start or stop Rygel when Media Sharing is enabled or disabled
+- Add master switch
+
+Mouse:
+- Fix bad state and critical error caused by reopening mouse test panel in clicked state.
+- Enable horizontal scrolling when changing scroll method
+- Fix incorrect initial values
+
+Printers:
+- Visual improvements of driver selection dialog
+- Add authentication dialog for samba printers
+- Search for samba printers in new printer dialog
+- Show printer name only in the title of options dialog
+
+Sound:
+- Show a different icon for different input/output ports
+- Fix potential memory corruption
+
+Region and Language:
+- Update interface
+- Fix crash when changing the language
+- Always add ibus engine widgets regardless of locale info
+- Prevent window from getting too tall with many input sources
+- Improve explanation when there are no input sources
+- Display current locale country in formats if setting is empty
+- Translate restart notification into the target language
+- Show restart notification only if strictly needed
+- Apply user settings system-wide on single account systems
+- Handle input switching through mutter/gnome-shell
+
+Details:
+- Fix display of graphic driver name
+
+Wacom:
+- Add basic OLED handling for Intuos4
+- Add animations to calibration window
+
 ===============
 Version 3.7.5.1
 ===============
