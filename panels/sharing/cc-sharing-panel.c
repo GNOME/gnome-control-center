@@ -166,15 +166,24 @@ cc_sharing_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_sharing_panel_parent_class)->dispose (object);
 }
 
+static const char *
+cc_sharing_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/settings-sharing";
+}
+
 static void
 cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcSharingPanelPrivate));
 
   object_class->constructed = cc_sharing_panel_constructed;
   object_class->dispose = cc_sharing_panel_dispose;
+
+  panel_class->get_help_uri = cc_sharing_panel_get_help_uri;
 }
 
 static void
