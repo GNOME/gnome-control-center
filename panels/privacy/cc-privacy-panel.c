@@ -619,6 +619,12 @@ cc_privacy_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
 
+static const char *
+cc_privacy_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/privacy";
+}
+
 static void
 update_separator_func (GtkWidget **separator,
                        GtkWidget  *child,
@@ -720,6 +726,9 @@ static void
 cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 {
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  panel_class->get_help_uri = cc_privacy_panel_get_help_uri;
 
   oclass->finalize = cc_privacy_panel_finalize;
 
