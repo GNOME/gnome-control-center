@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-04-23 06:07+0000\n"
-"PO-Revision-Date: 2013-05-30 17:17+0500\n"
+"POT-Creation-Date: 2013-05-30 12:20+0000\n"
+"PO-Revision-Date: 2013-05-30 17:24+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "Language: tg\n"
@@ -145,7 +145,7 @@ msgstr "саҳифаи 2"
 msgid "Paired"
 msgstr "Ҷуфтдор"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:812
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:833
 msgid "Type"
 msgstr "Навъ"
 
@@ -543,7 +543,7 @@ msgstr "Санҷиши дисплей"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
+#: ../panels/user-accounts/um-account-dialog.c:1083
 msgid "Cancel"
 msgstr "Бекор кардан"
 
@@ -562,8 +562,11 @@ msgstr "Давом додан"
 msgid "Done"
 msgstr "Тайёр"
 
+#. Timeout parameters
+#. 5000 = 5 sec
+#. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
 msgid "Screen Calibration"
 msgstr "Санҷиши экран"
 
@@ -882,131 +885,39 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Ранг;ICC;Профил;Танзими андоза;Принтер;Дисплей;"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:677
+#: ../panels/common/cc-common-language.c:682
 msgid "United States"
 msgstr "Иёлоти Муттаҳида"
 
-#: ../panels/common/cc-common-language.c:678
+#: ../panels/common/cc-common-language.c:683
 msgid "Germany"
 msgstr "Олмон"
 
-#: ../panels/common/cc-common-language.c:679
+#: ../panels/common/cc-common-language.c:684
 msgid "France"
 msgstr "Фаронса"
 
-#: ../panels/common/cc-common-language.c:680
+#: ../panels/common/cc-common-language.c:685
 msgid "Spain"
 msgstr "Испания"
 
-#: ../panels/common/cc-common-language.c:681
+#: ../panels/common/cc-common-language.c:686
 msgid "China"
 msgstr "Хитой"
 
-#: ../panels/common/cc-common-language.c:747
+#: ../panels/common/cc-common-language.c:752
 msgid "Other…"
 msgstr "Дигар…"
 
-#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:172
+#: ../panels/region/cc-input-chooser.c:174
 msgid "More…"
 msgstr "Бештар…"
 
-#: ../panels/common/cc-language-chooser.c:193
+#: ../panels/common/cc-language-chooser.c:138
 msgid "No languages found"
 msgstr "Ягон забон ёфт нашудааст"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1159
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Ғайрифаъол"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "Shift-и чап"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "Alt-и чап"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "Ctrl-и чап"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "Shift-и рост"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "Alt-и рост"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "Ctrl-и рост"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "Alt-и чап + Shift"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "Alt-и рост + Shift"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "Ctrl-и чап + Shift"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "Ctrl-и рост + Shift"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "Shift-и рост + чап"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "Alt-и рост + чап"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "Ctrl-и рост + чап"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt+Shift"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Ctrl+Shift"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt+Ctrl"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Caps"
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Shift+Caps"
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt+Caps"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Ctrl+Caps"
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1686,15 +1597,35 @@ msgstr "Хурд кардани андозаи матн"
 msgid "High contrast on or off"
 msgstr "Фаъол ё хомӯш кардани контрасти баланд"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Ғайрифаъол"
+
+#. Translators: This key is also known as 'third level
+#. * chooser'. AltGr is often used for this purpose. See
+#. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "Тугмаҳои аломатдори иловагӣ"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#. Translators: The Compose key is used to initiate key
+#. * sequences that are combined to form a single character.
+#. * See http://en.wikipedia.org/wiki/Compose_key
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Тугмаи эҷодкунӣ"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
 msgstr "Табдилдиҳандагон-танҳо гузариш ба манбаи навбатӣ"
 
@@ -1849,7 +1780,7 @@ msgstr ""
 msgid "_Reassign"
 msgstr "_Аз нав таъин кардан"
 
-#: ../panels/mouse/cc-mouse-panel.c:123
+#: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
 msgstr "Санҷиши _танзимот"
 
@@ -1958,36 +1889,36 @@ msgstr "Ҳаракатдиҳии _дуангушта"
 msgid "C_ontent sticks to fingers"
 msgstr "_Мӯҳтаво ба ангушт мечаспад"
 
-#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Зеркунӣ, зеркунии дубора, ҳаракатдиҳиро кӯшиш кунед"
 
-#: ../panels/mouse/gnome-mouse-test.c:139
+#: ../panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "Панҷ зеркунӣ, вақти GEGL!"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "Зеркунии дубора, тугмаи асосӣ"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "Зеркунии якбора, тугмаи асосӣ"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "Зеркунии дубора, тугмаи миёна"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "Зеркунии якбора, тугмаи миёна"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "Зеркунии дубора, тугмаи иловагӣ"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "Зеркунии якбора, тугмаи иловагӣ"
 
@@ -2005,8 +1936,8 @@ msgstr "Прокси шабака"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:284
-#: ../panels/network/net-vpn.c:419
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "VPN-и %s"
@@ -2084,12 +2015,12 @@ msgid "Never"
 msgstr "Ҳеҷ гоҳ"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Today"
 msgstr "Имрӯз"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:793
 msgid "Yesterday"
 msgstr "Дирӯз"
 
@@ -2459,7 +2390,7 @@ msgstr "Профили нав"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1068
+#: ../panels/user-accounts/um-account-dialog.c:1084
 msgid "_Add"
 msgstr "_Илова кардан"
 
@@ -3617,63 +3548,63 @@ msgstr "Намоиш додани баннерҳои пайдошаванда"
 msgid "Show in Lock Screen"
 msgstr "Намоиш додан дар экрани қулф"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:1073
-#: ../panels/search/cc-search-locations-dialog.c:480
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
+#| msgid "Other"
+msgctxt "Online Account"
 msgid "Other"
 msgstr "Дигар"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:292
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Илова кардани ҳисоб"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
 msgid "Mail"
 msgstr "Почта"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
 msgid "Contacts"
 msgstr "Тамосҳо"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:343
 msgid "Resources"
 msgstr "Захираҳо"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:370
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Error logging into the account"
 msgstr "Ҳангоми ворид шудан ба ҳисоб хатогӣ ба вуҷуд омад"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:442
+#: ../panels/online-accounts/cc-online-accounts-panel.c:497
 msgid "Credentials have expired."
 msgstr "Маълумоти корбар аз мӯҳлаташ гузашт."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:446
+#: ../panels/online-accounts/cc-online-accounts-panel.c:501
 msgid "Sign in to enable this account."
 msgstr "Барои фаъол кардани ин ҳисоб ворид шавед."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:451
+#: ../panels/online-accounts/cc-online-accounts-panel.c:506
 msgid "_Sign In"
 msgstr "_Ворид шудан"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:695
+#: ../panels/online-accounts/cc-online-accounts-panel.c:747
 msgid "Error creating account"
 msgstr "Ҳангоми эҷодкунии ҳисоб хатогӣ ба вуҷуд омад"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:736
+#: ../panels/online-accounts/cc-online-accounts-panel.c:787
 msgid "Error removing account"
 msgstr "Ҳангоми тозакунии ҳисоб хатогӣ ба вуҷуд омад"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:772
+#: ../panels/online-accounts/cc-online-accounts-panel.c:823
 msgid "Are you sure you want to remove the account?"
 msgstr "Шумо мутмаин ҳастед, ки мехоҳед ин ҳисобро тоза кунед?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:774
+#: ../panels/online-accounts/cc-online-accounts-panel.c:825
 msgid "This will not remove the account on the server."
 msgstr "Ин ҳисобро аз сервер тоза намекунад."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:775
+#: ../panels/online-accounts/cc-online-accounts-panel.c:826
 msgid "_Remove"
 msgstr "_Тоза кардан"
 
@@ -4209,7 +4140,7 @@ msgid "No printers available"
 msgstr "Ягон принтер дастрас нест"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1432
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4217,15 +4148,15 @@ msgstr[0] "%u фаъол"
 msgstr[1] "%u фаъол"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1773
+#: ../panels/printers/cc-printers-panel.c:1776
 msgid "Failed to add new printer."
 msgstr "Иловакунии принтери нав қатъ шуд."
 
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1943
 msgid "Select PPD File"
 msgstr "Интихоби файли PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1952
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4233,30 +4164,30 @@ msgstr ""
 "Файлҳои тавсифи принтери PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
 "GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2254
+#: ../panels/printers/cc-printers-panel.c:2257
 msgid "No suitable driver found"
 msgstr "Ягон драйвери мувофиқ ёфт нашудааст"
 
-#: ../panels/printers/cc-printers-panel.c:2323
+#: ../panels/printers/cc-printers-panel.c:2326
 msgid "Searching for preferred drivers…"
 msgstr "Ҷустуҷӯи драйверҳои мувофиқ…"
 
-#: ../panels/printers/cc-printers-panel.c:2338
+#: ../panels/printers/cc-printers-panel.c:2341
 msgid "Select from database…"
 msgstr "Интихоб кардан аз пойгоҳи иттилоотӣ…"
 
-#: ../panels/printers/cc-printers-panel.c:2347
+#: ../panels/printers/cc-printers-panel.c:2350
 msgid "Provide PPD File…"
 msgstr "Таъмини файли PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2498
-#: ../panels/printers/cc-printers-panel.c:2521
+#: ../panels/printers/cc-printers-panel.c:2501
+#: ../panels/printers/cc-printers-panel.c:2524
 msgid "Test page"
 msgstr "Саҳифаи санҷишӣ"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2929
+#: ../panels/printers/cc-printers-panel.c:2932
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Интерфейси корбар бор нашуд: %s"
@@ -4423,7 +4354,7 @@ msgid "%s Active Jobs"
 msgstr "%s вазифаи фаъол"
 
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1468
 msgid "No printers detected."
 msgstr "Ягон принтер муайян нашуд."
 
@@ -4452,64 +4383,64 @@ msgid "GhostScript pre-filtering"
 msgstr "Филтркунии пешакии GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "Саҳифаҳо дар як тараф"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "Дутарафа"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "Самт"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Умумӣ"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Танзими саҳифа"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Имконоти насбшаванда"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Вазифа"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Сифати тасвир"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Ранг"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Ба анҷом расида истоддаст"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Иловагӣ"
@@ -4830,9 +4761,15 @@ msgstr "Метрӣ"
 msgid "No regions found"
 msgstr "Ягон минтақа ёфт нашуд"
 
-#: ../panels/region/cc-input-chooser.c:186
+#: ../panels/region/cc-input-chooser.c:188
 msgid "No input sources found"
 msgstr "Ягон манбаи вуруд ёфт нашудааст"
+
+#: ../panels/region/cc-input-chooser.c:1091
+#| msgid "Other"
+msgctxt "Input Source"
+msgid "Other"
+msgstr "Дигар"
 
 #: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
@@ -4951,6 +4888,10 @@ msgstr "Шумо метавонед ин миёнбурҳоро дар танз�
 msgid "Alternative switch to next source"
 msgstr "Қатъу васлкунии иловагӣ ба манбаи навбатӣ"
 
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Alt-и рост + чап"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Англисӣ (Шоҳигарии Муттаҳида)"
@@ -4974,12 +4915,22 @@ msgid "Home"
 msgstr "Асосӣ"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
+#| msgid "Places"
+msgctxt "Search Location"
 msgid "Places"
 msgstr "Ҷойҳо"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
+#| msgid "Bookmarks"
+msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Хатбаракҳо"
+
+#: ../panels/search/cc-search-locations-dialog.c:480
+#| msgid "Other"
+msgctxt "Search Location"
+msgid "Other"
+msgstr "Дигар"
 
 #: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
@@ -5021,21 +4972,21 @@ msgstr "Ба поён"
 msgid "Preferences"
 msgstr "Хусусиятҳо"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:268
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Фаъол"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:270
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Хомӯш"
 
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:416
 msgid "Choose a Folder"
 msgstr "Интихоб кардани ҷузвдон"
 
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:594
 msgid "Copy"
 msgstr "Нусха бардоштан"
 
@@ -6295,25 +6246,25 @@ msgstr "Пароли нав аломатҳои дигаргунро дар ба�
 msgid "Unknown error"
 msgstr "Хатогии номаълум"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:186
 msgid "Failed to add account"
 msgstr "Иловакунии ҳисоб қатъ шуд"
 
-#: ../panels/user-accounts/um-account-dialog.c:403
-#: ../panels/user-accounts/um-account-dialog.c:444
+#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-account-dialog.c:449
 msgid "Failed to register account"
 msgstr "Қайдкунии ҳисоб қатъ шуд"
 
-#: ../panels/user-accounts/um-account-dialog.c:577
+#: ../panels/user-accounts/um-account-dialog.c:582
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 "Ягон имконияти дастгирӣ барои санҷиши ҳаққоният бо ин домен вуҷуд надорад"
 
-#: ../panels/user-accounts/um-account-dialog.c:631
+#: ../panels/user-accounts/um-account-dialog.c:636
 msgid "Failed to join domain"
 msgstr "Ҳамроҳ шудан ба домен қатъ шуд"
 
-#: ../panels/user-accounts/um-account-dialog.c:688
+#: ../panels/user-accounts/um-account-dialog.c:704
 msgid "Failed to log into domain"
 msgstr "Ворид шудан ба домен қатъ шуд"
 
@@ -6487,16 +6438,17 @@ msgstr "Ба ин намуди домен ба таври худкор пайв�
 msgid "No such domain or realm found"
 msgstr "Ягон домен ё соҳиб ёфт нашудааст"
 
-#: ../panels/user-accounts/um-realm-manager.c:817
+#: ../panels/user-accounts/um-realm-manager.c:814
+#: ../panels/user-accounts/um-realm-manager.c:828
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ҳамчун %s ба домени %s пайваст намешавад"
 
-#: ../panels/user-accounts/um-realm-manager.c:822
+#: ../panels/user-accounts/um-realm-manager.c:820
 msgid "Invalid password, please try again"
 msgstr "Пароли нодуруст, лутфан амалро такрор кунед"
 
-#: ../panels/user-accounts/um-realm-manager.c:826
+#: ../panels/user-accounts/um-realm-manager.c:833
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Ба домени %s пайваст нашуд: %s"
@@ -6561,17 +6513,17 @@ msgstr "Ҳеҷ"
 msgid "Logged in"
 msgstr "Ворид шудааст"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:943
 msgid "Failed to contact the accounts service"
 msgstr "Тамосгирӣ бо хадамоти ҳисобҳо қатъ шуд"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:945
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Лутфан, мутмаин шавед, ки AccountService насб шудааст ва дар ҳоли иҷро "
 "мебошад."
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:986
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6579,12 +6531,12 @@ msgstr ""
 "Барои даровардани тағйирот,\n"
 "аввал нишонаи \"*\"-ро зер кунед"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1024
 msgid "Create a user account"
 msgstr "Эҷод кардани ҳисоби корбар"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1035
+#: ../panels/user-accounts/um-user-panel.c:1321
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6592,12 +6544,12 @@ msgstr ""
 "Барои эҷод кардани ҳисоби корбар,\n"
 "пеш аз ҳама нишонаи * -ро зер кунед"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1044
 msgid "Delete the selected user account"
 msgstr "Нест кардани ҳисоби корбари интихобшуда"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1056
+#: ../panels/user-accounts/um-user-panel.c:1326
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6605,29 +6557,29 @@ msgstr ""
 "Барои нест кардани ҳисоби корбари интихобшуда,\n"
 "пеш аз ҳама нишонаи * -ро зер кунед"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1230
 msgid "My Account"
 msgstr "Ҳисоби ман"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
+#: ../panels/user-accounts/um-user-panel.c:1239
 msgid "Other Accounts"
 msgstr "Ҳисобҳои дигар"
 
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:535
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Корбар бо номи '%s' аллакай мавҷуд аст"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:539
 #, c-format
 msgid "The username is too long"
 msgstr "Номи корбар хеле дароз аст"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:542
 msgid "The username cannot start with a '-'"
 msgstr "Номи корбар бояд бо '-' сар нашавад"
 
-#: ../panels/user-accounts/um-utils.c:526
+#: ../panels/user-accounts/um-utils.c:545
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -6647,7 +6599,7 @@ msgstr "Нишона гузоштани тугмаҳо"
 msgid "Map buttons to functions"
 msgstr "Нишона гузоштани тугмаҳо ба функсияҳо"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:79
+#: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -6655,7 +6607,7 @@ msgstr ""
 "Лутфан, барои санҷидани планшет маркерҳои ҳадафиро ҳангоми пайдо шудани "
 "онгҳо зарба занед."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:368
+#: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Зеркунии нодуруст ташхис карда шуд, бозоғозӣ шуда истодааст..."
 
@@ -6678,50 +6630,50 @@ msgstr "Нишона гузоштан ба монитори ягона"
 msgid "%d of %d"
 msgstr "%d аз %d"
 
-#: ../panels/wacom/cc-wacom-page.c:122 ../panels/wacom/cc-wacom-page.c:407
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Ҳеҷ"
 
-#: ../panels/wacom/cc-wacom-page.c:123
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Фиристодани пахши тугмаҳо"
 
-#: ../panels/wacom/cc-wacom-page.c:124
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Қатъу васл кардани монитор"
 
-#: ../panels/wacom/cc-wacom-page.c:125
+#: ../panels/wacom/cc-wacom-page.c:126
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Намоиш додани кӯмаки экранӣ"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:665
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Ба боло"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:665
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Ба поён"
 
-#: ../panels/wacom/cc-wacom-page.c:685
+#: ../panels/wacom/cc-wacom-page.c:706
 msgid "Switch Modes"
 msgstr "Ҳолатҳои қатъу васл"
 
-#: ../panels/wacom/cc-wacom-page.c:775
+#: ../panels/wacom/cc-wacom-page.c:796
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Тугма"
 
-#: ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/wacom/cc-wacom-page.c:854
 msgid "Action"
 msgstr "Амал"
 
-#: ../panels/wacom/cc-wacom-page.c:943
+#: ../panels/wacom/cc-wacom-page.c:964
 msgid "Display Mapping"
 msgstr "Нақшабандии дисплей"
 
@@ -6790,86 +6742,86 @@ msgid "Left-Handed Orientation"
 msgstr "Самти чап"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1076
+#: ../panels/wacom/gsd-wacom-device.c:1078
 msgid "Left Ring"
 msgstr "Ҳалқаи чап"
 
-#: ../panels/wacom/gsd-wacom-device.c:1086
+#: ../panels/wacom/gsd-wacom-device.c:1089
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Ҳолати ҳалқаи чапи #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1105
+#: ../panels/wacom/gsd-wacom-device.c:1109
 msgid "Right Ring"
 msgstr "Ҳалқаи рост"
 
-#: ../panels/wacom/gsd-wacom-device.c:1115
+#: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Ҳолати ҳалқаи рости #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1156
+#: ../panels/wacom/gsd-wacom-device.c:1162
 msgid "Left Touchstrip"
 msgstr "Тасмаи ламсии чап"
 
-#: ../panels/wacom/gsd-wacom-device.c:1166
+#: ../panels/wacom/gsd-wacom-device.c:1173
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Ҳолати тасмаи ламсии чапи #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1185
+#: ../panels/wacom/gsd-wacom-device.c:1193
 msgid "Right Touchstrip"
 msgstr "Ҳолати тасмаи ламсии рост"
 
-#: ../panels/wacom/gsd-wacom-device.c:1195
+#: ../panels/wacom/gsd-wacom-device.c:1204
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Ҳолати тасмаи ламсии #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1220
+#: ../panels/wacom/gsd-wacom-device.c:1230
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Ивазкунии ҳолати ҳалқаи ламсии чап"
 
-#: ../panels/wacom/gsd-wacom-device.c:1222
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Ивазкунии ҳолати ҳалқаи ламсии рост"
 
-#: ../panels/wacom/gsd-wacom-device.c:1225
+#: ../panels/wacom/gsd-wacom-device.c:1235
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Ивазкунии ҳолати тасмаи ламсии чап"
 
-#: ../panels/wacom/gsd-wacom-device.c:1227
+#: ../panels/wacom/gsd-wacom-device.c:1237
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Ивазкунии ҳолати тасмаи ламсии рост"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1242
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Ивазкунии ҳолати #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1336
+#: ../panels/wacom/gsd-wacom-device.c:1351
 #, c-format
 msgid "Left Button #%d"
 msgstr "Тугмаи чап #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1339
+#: ../panels/wacom/gsd-wacom-device.c:1354
 #, c-format
 msgid "Right Button #%d"
 msgstr "Тугмаи рост #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1342
+#: ../panels/wacom/gsd-wacom-device.c:1357
 #, c-format
 msgid "Top Button #%d"
 msgstr "Поёни боло #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1345
+#: ../panels/wacom/gsd-wacom-device.c:1360
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Тугмаи поён #%d"
@@ -6942,40 +6894,40 @@ msgstr "Тугмаи пасткунӣ"
 msgid "Tip Pressure Feel"
 msgstr "Ҳассосияти фишори нӯг"
 
-#: ../shell/cc-application.c:66
+#: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
 msgstr "Фаъол кардани ҳолати ботафсил"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:70
 msgid "Show the overview"
 msgstr "Намоиш додани хулоса"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:71
 msgid "Search for the string"
 msgstr "Ҷустуҷӯи сатр"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:72
 msgid "List possible panel names and exit"
 msgstr "Пайванд гузоштани номҳои эҳтимолии наворҳо ва баромад"
 
-#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
+#: ../shell/cc-application.c:75
 msgid "Show help options"
 msgstr "Намоиш додани имконоти кӯмак"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "Панел барои намоиш"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: ../shell/cc-application.c:139
+#: ../shell/cc-application.c:142
 msgid "- Settings"
 msgstr "- Танзимот"
 
-#: ../shell/cc-application.c:148
+#: ../shell/cc-application.c:160
 #, c-format
 msgid ""
 "%s\n"
@@ -6985,15 +6937,15 @@ msgstr ""
 "Барои дидани рӯйхати пурраи фармонҳои дастрас, фармони '%s --help' -ро иҷро "
 "кунед.\n"
 
-#: ../shell/cc-application.c:178
+#: ../shell/cc-application.c:190
 msgid "Available panels:"
 msgstr "Лавҳаҳои дастрас:"
 
-#: ../shell/cc-application.c:313
+#: ../shell/cc-application.c:325
 msgid "Help"
 msgstr "Кӯмак"
 
-#: ../shell/cc-application.c:314
+#: ../shell/cc-application.c:326
 msgid "Quit"
 msgstr "Баромад"
 
@@ -7024,3 +6976,60 @@ msgstr "Ҳамаи танзимот"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Хусусиятҳо;Танзимот;"
+
+#~ msgid "Left Shift"
+#~ msgstr "Shift-и чап"
+
+#~ msgid "Left Alt"
+#~ msgstr "Alt-и чап"
+
+#~ msgid "Left Ctrl"
+#~ msgstr "Ctrl-и чап"
+
+#~ msgid "Right Shift"
+#~ msgstr "Shift-и рост"
+
+#~ msgid "Right Alt"
+#~ msgstr "Alt-и рост"
+
+#~ msgid "Right Ctrl"
+#~ msgstr "Ctrl-и рост"
+
+#~ msgid "Left Alt+Shift"
+#~ msgstr "Alt-и чап + Shift"
+
+#~ msgid "Right Alt+Shift"
+#~ msgstr "Alt-и рост + Shift"
+
+#~ msgid "Left Ctrl+Shift"
+#~ msgstr "Ctrl-и чап + Shift"
+
+#~ msgid "Right Ctrl+Shift"
+#~ msgstr "Ctrl-и рост + Shift"
+
+#~ msgid "Left+Right Shift"
+#~ msgstr "Shift-и рост + чап"
+
+#~ msgid "Left+Right Ctrl"
+#~ msgstr "Ctrl-и рост + чап"
+
+#~ msgid "Alt+Shift"
+#~ msgstr "Alt+Shift"
+
+#~ msgid "Ctrl+Shift"
+#~ msgstr "Ctrl+Shift"
+
+#~ msgid "Alt+Ctrl"
+#~ msgstr "Alt+Ctrl"
+
+#~ msgid "Caps"
+#~ msgstr "Caps"
+
+#~ msgid "Shift+Caps"
+#~ msgstr "Shift+Caps"
+
+#~ msgid "Alt+Caps"
+#~ msgstr "Alt+Caps"
+
+#~ msgid "Ctrl+Caps"
+#~ msgstr "Ctrl+Caps"
