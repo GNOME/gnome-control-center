@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-24 09:13+0200\n"
-"PO-Revision-Date: 2013-04-24 09:26+0200\n"
+"POT-Creation-Date: 2013-05-31 00:59+0200\n"
+"PO-Revision-Date: 2013-05-31 01:01+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -154,7 +154,7 @@ msgstr "páxina 2"
 msgid "Paired"
 msgstr "Emparellado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:812
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:833
 msgid "Type"
 msgstr "Tipo"
 
@@ -549,7 +549,7 @@ msgstr "Calibración de pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1071
+#: ../panels/user-accounts/um-account-dialog.c:1083
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -568,8 +568,11 @@ msgstr "Reanudar"
 msgid "Done"
 msgstr "Feito"
 
+#. Timeout parameters
+#. 5000 = 5 sec
+#. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
 msgid "Screen Calibration"
 msgstr "Calibración de pantalla"
 
@@ -888,131 +891,39 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Cor;ICC;Perfil;Calibrado;Impresora;Pantalla;"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:677
+#: ../panels/common/cc-common-language.c:682
 msgid "United States"
 msgstr "Estados Unidos de América"
 
-#: ../panels/common/cc-common-language.c:678
+#: ../panels/common/cc-common-language.c:683
 msgid "Germany"
 msgstr "Alemaña"
 
-#: ../panels/common/cc-common-language.c:679
+#: ../panels/common/cc-common-language.c:684
 msgid "France"
 msgstr "Francia"
 
-#: ../panels/common/cc-common-language.c:680
+#: ../panels/common/cc-common-language.c:685
 msgid "Spain"
 msgstr "España"
 
-#: ../panels/common/cc-common-language.c:681
+#: ../panels/common/cc-common-language.c:686
 msgid "China"
 msgstr "China"
 
-#: ../panels/common/cc-common-language.c:747
+#: ../panels/common/cc-common-language.c:752
 msgid "Other…"
 msgstr "Outro…"
 
-#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:172
+#: ../panels/region/cc-input-chooser.c:174
 msgid "More…"
 msgstr "Máis…"
 
-#: ../panels/common/cc-language-chooser.c:193
+#: ../panels/common/cc-language-chooser.c:138
 msgid "No languages found"
 msgstr "Non se atoparon idiomas"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1159
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Desactivado"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "Maiús esquerda"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "Alt esquerda"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "Ctrl esquerda"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "Maiús dereito"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "Alt dereito"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "Ctrl dereito"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "Alt esquerdo+Maiús"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "Alt dereito+Maiús"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "Ctrl esquerdo+Maiús"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "Ctrl dereito+Maiús"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "Maiús dereito+esquerdo"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "Alt esquerdo+dereito"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "Ctrl esquerdo+dereito"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt+Maiús"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Ctrl+Maiús"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt+Ctrl"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Maiúsculas"
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Maiús+Bloq Maiús"
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt+Bloq Maiús"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Ctl+Bloq Maiús"
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1691,15 +1602,35 @@ msgstr "Reducir o tamaño do texto"
 msgid "High contrast on or off"
 msgstr "Contraste alto activado ou desactivado"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Desactivado"
+
+#. Translators: This key is also known as 'third level
+#. * chooser'. AltGr is often used for this purpose. See
+#. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#. Translators: The Compose key is used to initiate key
+#. * sequences that are combined to form a single character.
+#. * See http://en.wikipedia.org/wiki/Compose_key
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
 msgstr "Só modificadores cambian á seguinte orixe"
 
@@ -1851,7 +1782,7 @@ msgstr "Se reasigna o atallo para «%s», desactivarase o atallo «%s»."
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/mouse/cc-mouse-panel.c:123
+#: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
 msgstr "Comprobar a súa _configuración"
 
@@ -1959,36 +1890,36 @@ msgstr "Despra_zamento con dous dedos"
 msgid "C_ontent sticks to fingers"
 msgstr "O c_ontido pégase aos dedos"
 
-#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Tente facer clic, dobre clic, desprazarse coa roda do rato"
 
-#: ../panels/mouse/gnome-mouse-test.c:139
+#: ../panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "Cinco clics, tempo de GEGL!"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "Dobre clic, botón primario"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "Un clic, botón primario"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "Dobre clic, botón do medio"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "Un clic, botón do medio"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "Dobre clic, botón secundario"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "Un clic, botón secundario"
 
@@ -2006,8 +1937,8 @@ msgstr "Proxy da rede"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:284
-#: ../panels/network/net-vpn.c:419
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
@@ -2085,12 +2016,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Today"
 msgstr "Hoxe"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:793
 msgid "Yesterday"
 msgstr "Mañá"
 
@@ -2460,7 +2391,7 @@ msgstr "Novo perfil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1072
+#: ../panels/user-accounts/um-account-dialog.c:1084
 msgid "_Add"
 msgstr "_Engadir"
 
@@ -2617,8 +2548,8 @@ msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;"
 msgstr ""
-"Rede;Sen fíos;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Banda "
-"larga;Modem;Bluetooth;vpn;vlan;bridge;bond;"
+"Rede;Sen fíos;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Banda larga;Modem;Bluetooth;vpn;"
+"vlan;bridge;bond;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -3617,27 +3548,26 @@ msgstr "Mostrar anuncios emerxentes"
 msgid "Show in Lock Screen"
 msgstr "Mostrar na pantalla de bloqueo"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:192
-#: ../panels/region/cc-input-chooser.c:1073
-#: ../panels/search/cc-search-locations-dialog.c:480
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
+msgctxt "Online Account"
 msgid "Other"
 msgstr "Outra"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:293
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:292
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Engadir conta"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:332
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
 msgid "Mail"
 msgstr "Correo"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:338
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
 msgid "Contacts"
 msgstr "Contactos"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:344
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:343
 msgid "Resources"
 msgstr "Recursos"
 
@@ -3690,8 +3620,8 @@ msgstr "Conéctese ás súas contas en liña a decida para que usalas"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
-"Google;Facebook;Twitter;Yahoo;Web;En "
-"liña;Conversa;Calendario;Correo-e;Contacto;ownCloud;"
+"Google;Facebook;Twitter;Yahoo;Web;En liña;Conversa;Calendario;Correo-e;"
+"Contacto;ownCloud;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4424,7 +4354,7 @@ msgid "%s Active Jobs"
 msgstr "%s traballos activos"
 
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1468
 msgid "No printers detected."
 msgstr "Non se detectactou ningunha impresora."
 
@@ -4453,64 +4383,64 @@ msgid "GhostScript pre-filtering"
 msgstr "Prefiltrado GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "Páxinas por cara"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "Dúas caras"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "Orientación"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Xeral"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuración da páxina"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opcións instalábeis"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Traballo"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Calidade da imaxe"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Cor"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Rematado"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avanzado"
@@ -4828,9 +4758,14 @@ msgstr "Métrico"
 msgid "No regions found"
 msgstr "Non se atoparon rexións"
 
-#: ../panels/region/cc-input-chooser.c:186
+#: ../panels/region/cc-input-chooser.c:188
 msgid "No input sources found"
 msgstr "Non se atopou ningunha orixe de entrada"
+
+#: ../panels/region/cc-input-chooser.c:1091
+msgctxt "Input Source"
+msgid "Other"
+msgstr "Outra"
 
 #: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
@@ -4949,6 +4884,10 @@ msgstr "Pode cambiar estes atallos nas preferencias de teclado"
 msgid "Alternative switch to next source"
 msgstr "Cambiar á orixe seguinte"
 
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Alt esquerdo+dereito"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Inglés (Reino Unido)"
@@ -4972,12 +4911,19 @@ msgid "Home"
 msgstr "Cartafol persoal"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
+msgctxt "Search Location"
 msgid "Places"
 msgstr "Lugares"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
+msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Marcadores"
+
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgctxt "Search Location"
+msgid "Other"
+msgstr "Outra"
 
 #: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
@@ -5018,21 +4964,21 @@ msgstr "Baixar"
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:268
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Activado"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:270
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Desactivado"
 
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:416
 msgid "Choose a Folder"
 msgstr "Seleccione un cartafol"
 
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:594
 msgid "Copy"
 msgstr "Copiar"
 
@@ -6289,20 +6235,20 @@ msgstr "Erro descoñecido"
 msgid "Failed to add account"
 msgstr "Produciuse un erro ao engadir a conta"
 
-#: ../panels/user-accounts/um-account-dialog.c:407
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-account-dialog.c:449
 msgid "Failed to register account"
 msgstr "Produciuse un erro ao rexistrar a conta"
 
-#: ../panels/user-accounts/um-account-dialog.c:581
+#: ../panels/user-accounts/um-account-dialog.c:582
 msgid "No supported way to authenticate with this domain"
 msgstr "Non hai unha maneira admitida de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:636
 msgid "Failed to join domain"
 msgstr "Produciuse un erro ao unirse ao dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:692
+#: ../panels/user-accounts/um-account-dialog.c:704
 msgid "Failed to log into domain"
 msgstr "Produciuse un erro ao iniciar sesión no dominio"
 
@@ -6475,16 +6421,17 @@ msgstr "Non é posíbel unirse automaticamente a este tipo de dominio"
 msgid "No such domain or realm found"
 msgstr "Non existe o dominio ou non se atopou o reino"
 
-#: ../panels/user-accounts/um-realm-manager.c:817
+#: ../panels/user-accounts/um-realm-manager.c:814
+#: ../panels/user-accounts/um-realm-manager.c:828
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Non é posíbel iniciar sesión como %s no dominio %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:823
+#: ../panels/user-accounts/um-realm-manager.c:820
 msgid "Invalid password, please try again"
 msgstr "Contrasinal incorrecto, ténteo de novo"
 
-#: ../panels/user-accounts/um-realm-manager.c:827
+#: ../panels/user-accounts/um-realm-manager.c:833
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Non foi posíbel conectarse ao dominio %s: %s"
@@ -6550,15 +6497,15 @@ msgstr "Ningún"
 msgid "Logged in"
 msgstr "Conectado"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:943
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un erro ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:945
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:986
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6566,12 +6513,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1024
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1035
+#: ../panels/user-accounts/um-user-panel.c:1321
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6579,12 +6526,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1044
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1056
+#: ../panels/user-accounts/um-user-panel.c:1326
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6592,29 +6539,29 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1230
 msgid "My Account"
 msgstr "A miña conta"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
+#: ../panels/user-accounts/um-user-panel.c:1239
 msgid "Other Accounts"
 msgstr "Outras contas"
 
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:535
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Xa existe un usuario co nome de usuario «%s»"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:539
 #, c-format
 msgid "The username is too long"
 msgstr "O nome de usuario é demasiado longo"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:542
 msgid "The username cannot start with a '-'"
 msgstr "O nome de usuario non pode comezar con «-»"
 
-#: ../panels/user-accounts/um-utils.c:526
+#: ../panels/user-accounts/um-utils.c:545
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -6634,7 +6581,7 @@ msgstr "Mapear botóns"
 msgid "Map buttons to functions"
 msgstr "Mapear botóns a funcións"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:79
+#: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -6642,7 +6589,7 @@ msgstr ""
 "Prema nos marcadores obxectivo a medida que aparezan na pantalla para "
 "calibrar a tableta."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:368
+#: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
 
@@ -6665,50 +6612,50 @@ msgstr "Asignar a unha única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:122 ../panels/wacom/cc-wacom-page.c:407
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Ningunha"
 
-#: ../panels/wacom/cc-wacom-page.c:123
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Enviar pulsación de tecla"
 
-#: ../panels/wacom/cc-wacom-page.c:124
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Cambiar monitor"
 
-#: ../panels/wacom/cc-wacom-page.c:125
+#: ../panels/wacom/cc-wacom-page.c:126
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Mostrar axuda en pantalla"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:665
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:665
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Abaixo"
 
-#: ../panels/wacom/cc-wacom-page.c:685
+#: ../panels/wacom/cc-wacom-page.c:706
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:775
+#: ../panels/wacom/cc-wacom-page.c:796
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/wacom/cc-wacom-page.c:854
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/wacom/cc-wacom-page.c:943
+#: ../panels/wacom/cc-wacom-page.c:964
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -6777,86 +6724,86 @@ msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1076
+#: ../panels/wacom/gsd-wacom-device.c:1078
 msgid "Left Ring"
 msgstr "Anel esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1086
+#: ../panels/wacom/gsd-wacom-device.c:1089
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo de anel esquerdo #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1105
+#: ../panels/wacom/gsd-wacom-device.c:1109
 msgid "Right Ring"
 msgstr "Anel dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1115
+#: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo de anel dereito #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1156
+#: ../panels/wacom/gsd-wacom-device.c:1162
 msgid "Left Touchstrip"
 msgstr "Banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1166
+#: ../panels/wacom/gsd-wacom-device.c:1173
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de banda táctil esquerda nº %d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1185
+#: ../panels/wacom/gsd-wacom-device.c:1193
 msgid "Right Touchstrip"
 msgstr "Banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1195
+#: ../panels/wacom/gsd-wacom-device.c:1204
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de banda táctil dereita nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1220
+#: ../panels/wacom/gsd-wacom-device.c:1230
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1222
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1225
+#: ../panels/wacom/gsd-wacom-device.c:1235
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1227
+#: ../panels/wacom/gsd-wacom-device.c:1237
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1242
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo conmutador #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1336
+#: ../panels/wacom/gsd-wacom-device.c:1351
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1339
+#: ../panels/wacom/gsd-wacom-device.c:1354
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1342
+#: ../panels/wacom/gsd-wacom-device.c:1357
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1345
+#: ../panels/wacom/gsd-wacom-device.c:1360
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior #%d"
@@ -6929,40 +6876,40 @@ msgstr "Botón inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidade de presión do lapis"
 
-#: ../shell/cc-application.c:66
+#: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
 msgstr "Activar o modo detallado"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:70
 msgid "Show the overview"
 msgstr "Mostrar a vista previa"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:71
 msgid "Search for the string"
 msgstr "Buscar unha cadea"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:72
 msgid "List possible panel names and exit"
 msgstr "Listar posíbeis nomes de paneis e saír"
 
-#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
+#: ../shell/cc-application.c:75
 msgid "Show help options"
 msgstr "Mostrar opcións de axuda"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "Panel a mostrar"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTO…]"
 
-#: ../shell/cc-application.c:139
+#: ../shell/cc-application.c:142
 msgid "- Settings"
 msgstr "- Preferencias"
 
-#: ../shell/cc-application.c:148
+#: ../shell/cc-application.c:160
 #, c-format
 msgid ""
 "%s\n"
@@ -6972,15 +6919,15 @@ msgstr ""
 "Execute «%s --help» para ver unha lista completa de preferencias de orde "
 "dispoñíbeis.\n"
 
-#: ../shell/cc-application.c:178
+#: ../shell/cc-application.c:190
 msgid "Available panels:"
 msgstr "Paneis dispoñíbeis:"
 
-#: ../shell/cc-application.c:313
+#: ../shell/cc-application.c:325
 msgid "Help"
 msgstr "Axuda"
 
-#: ../shell/cc-application.c:314
+#: ../shell/cc-application.c:326
 msgid "Quit"
 msgstr "Saír"
 
@@ -7011,6 +6958,63 @@ msgstr "Todas as preferencias"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Left Shift"
+#~ msgstr "Maiús esquerda"
+
+#~ msgid "Left Alt"
+#~ msgstr "Alt esquerda"
+
+#~ msgid "Left Ctrl"
+#~ msgstr "Ctrl esquerda"
+
+#~ msgid "Right Shift"
+#~ msgstr "Maiús dereito"
+
+#~ msgid "Right Alt"
+#~ msgstr "Alt dereito"
+
+#~ msgid "Right Ctrl"
+#~ msgstr "Ctrl dereito"
+
+#~ msgid "Left Alt+Shift"
+#~ msgstr "Alt esquerdo+Maiús"
+
+#~ msgid "Right Alt+Shift"
+#~ msgstr "Alt dereito+Maiús"
+
+#~ msgid "Left Ctrl+Shift"
+#~ msgstr "Ctrl esquerdo+Maiús"
+
+#~ msgid "Right Ctrl+Shift"
+#~ msgstr "Ctrl dereito+Maiús"
+
+#~ msgid "Left+Right Shift"
+#~ msgstr "Maiús dereito+esquerdo"
+
+#~ msgid "Left+Right Ctrl"
+#~ msgstr "Ctrl esquerdo+dereito"
+
+#~ msgid "Alt+Shift"
+#~ msgstr "Alt+Maiús"
+
+#~ msgid "Ctrl+Shift"
+#~ msgstr "Ctrl+Maiús"
+
+#~ msgid "Alt+Ctrl"
+#~ msgstr "Alt+Ctrl"
+
+#~ msgid "Caps"
+#~ msgstr "Maiúsculas"
+
+#~ msgid "Shift+Caps"
+#~ msgstr "Maiús+Bloq Maiús"
+
+#~ msgid "Alt+Caps"
+#~ msgstr "Alt+Bloq Maiús"
+
+#~ msgid "Ctrl+Caps"
+#~ msgstr "Ctl+Bloq Maiús"
 
 #~ msgid "Export"
 #~ msgstr "Exportar"
