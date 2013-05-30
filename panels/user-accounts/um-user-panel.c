@@ -1043,6 +1043,42 @@ remove_unlock_tooltip (GtkWidget *button)
                                               G_CALLBACK (show_tooltip_now), NULL);
 }
 
+static guint
+get_num_admin (ActUserManager *um)
+{
+        GSList *list;
+        GSList *l;
+        guint num_admin = 0;
+
+        list = act_user_manager_list_users (um);
+        for (l = list; l != NULL; l = l->next) {
+                ActUser *u = l->data;
+                if (act_user_get_account_type (u) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+                        num_admin++;
+                }
+        }
+        g_slist_free (list);
+
+        return num_admin;
+}
+
+static gboolean
+would_demote_only_admin (ActUser        *user,
+                         ActUserManager *um)
+{
+        /* Prevent the user from demoting the only admin account.
+         * Returns TRUE when user is an administrator and there is only
+         * one administrator */
+
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_STANDARD)
+                return FALSE;
+
+        if (get_num_admin (um) > 1)
+                return FALSE;
+
+        return TRUE;
+}
+
 static void
 on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
@@ -1110,7 +1146,11 @@ on_permission_changed (GPermission *permission,
                 remove_unlock_tooltip (get_widget (d, "autologin-switch"));
 
         } else if (is_authorized && act_user_is_local_account (user)) {
-                um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), TRUE);
+                if (would_demote_only_admin (user, d->um)) {
+                        um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
+                } else {
+                        um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), TRUE);
+                }
                 remove_unlock_tooltip (get_widget (d, "account-type-combo"));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), get_autologin_possible (user));
@@ -1118,7 +1158,11 @@ on_permission_changed (GPermission *permission,
         }
         else {
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
-                add_unlock_tooltip (get_widget (d, "account-type-combo"));
+                if (would_demote_only_admin (user, d->um)) {
+                        remove_unlock_tooltip (get_widget (d, "account-type-combo"));
+                } else {
+                        add_unlock_tooltip (get_widget (d, "account-type-combo"));
+                }
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
                 add_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
