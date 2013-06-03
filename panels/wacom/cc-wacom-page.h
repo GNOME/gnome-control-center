@@ -83,6 +83,10 @@ void cc_wacom_page_set_navigation (CcWacomPage *page,
 				   GtkNotebook *notebook,
 				   gboolean     ignore_first_page);
 
+void        cc_wacom_page_calibrate        (CcWacomPage *page);
+
+gboolean    cc_wacom_page_can_calibrate    (CcWacomPage *page);
+
 G_END_DECLS
 
 #endif /* _CC_WACOM_PAGE_H */

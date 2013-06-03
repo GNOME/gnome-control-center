@@ -253,14 +253,16 @@ run_calibration (CcWacomPage *page,
 }
 
 static void
-calibrate_button_clicked_cb (GtkButton   *button,
-			     CcWacomPage *page)
+calibrate (CcWacomPage *page)
 {
+	CcWacomPagePrivate *priv;
 	int i, calibration[4];
 	GVariant *variant;
 	int *current;
 	gsize ncal;
 	gint monitor;
+
+	priv = page->priv;
 
 	monitor = gsd_wacom_device_get_display_monitor (page->priv->stylus);
 	if (monitor < 0) {
@@ -314,7 +316,14 @@ calibrate_button_clicked_cb (GtkButton   *button,
 	}
 
 	run_calibration (page, calibration, monitor);
-	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+	gtk_widget_set_sensitive (WID ("button-calibrate"), FALSE);
+}
+
+static void
+calibrate_button_clicked_cb (GtkButton   *button,
+			     CcWacomPage *page)
+{
+	calibrate (page);
 }
 
 /* This avoids us crashing when a newer version of
@@ -1336,12 +1345,17 @@ remove_mouse_link (CcWacomPagePrivate *priv)
                                  "top_attach", 2, NULL);
 }
 
+static gboolean
+has_monitor (CcWacomPage *page)
+{
+	return gsd_wacom_device_get_display_monitor (page->priv->stylus) >= 0;
+}
+
 static void
 update_tablet_ui (CcWacomPage *page,
 		  int          layout)
 {
 	CcWacomPagePrivate *priv;
-	gboolean has_monitor = FALSE;
 	GsdWacomStylus *puck;
 
 	priv = page->priv;
@@ -1368,9 +1382,8 @@ update_tablet_ui (CcWacomPage *page,
 		gtk_widget_destroy (WID ("display-mapping-button"));
 
 		gtk_widget_show (WID ("button-calibrate"));
-		if (gsd_wacom_device_get_display_monitor (priv->stylus) >= 0)
-			has_monitor = TRUE;
-		gtk_widget_set_sensitive (WID ("button-calibrate"), has_monitor);
+		gtk_widget_set_sensitive (WID ("button-calibrate"),
+					  has_monitor (priv));
 
 		gtk_container_child_set (CWID ("main-grid"),
 					 WID ("tablet-buttons-box"),
@@ -1476,4 +1489,21 @@ cc_wacom_page_set_navigation (CcWacomPage *page,
 		      "notebook", notebook,
 		      "ignore-first", ignore_first_page,
 		      NULL);
+}
+
+void
+cc_wacom_page_calibrate (CcWacomPage *page)
+{
+	g_return_if_fail (CC_IS_WACOM_PAGE (page));
+
+	calibrate (page);
+}
+
+gboolean
+cc_wacom_page_can_calibrate (CcWacomPage *page)
+{
+	g_return_val_if_fail (CC_IS_WACOM_PAGE (page),
+			      FALSE);
+
+	return has_monitor (page);
 }
