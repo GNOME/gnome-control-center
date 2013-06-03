@@ -76,6 +76,7 @@ struct GvcMixerDialogPrivate
         GtkWidget       *sound_theme_chooser;
         GtkWidget       *click_feedback_button;
         GtkWidget       *audible_bell_button;
+        GtkWidget       *test_dialog;
         GtkSizeGroup    *size_group;
 
         gdouble          last_input_peak;
@@ -1602,6 +1603,9 @@ on_test_speakers_clicked (GvcComboBox *widget,
         container = gtk_dialog_get_content_area (GTK_DIALOG (d));
         gtk_container_add (GTK_CONTAINER (container), speaker_test);
 
+        dialog->priv->test_dialog = d;
+        g_object_add_weak_pointer (G_OBJECT (d),
+                                   (gpointer *) &dialog->priv->test_dialog);
         gtk_dialog_run (GTK_DIALOG (d));
         gtk_widget_destroy (d);
 }
@@ -1887,6 +1891,11 @@ gvc_mixer_dialog_dispose (GObject *object)
         if (dialog->priv->bars != NULL) {
                 g_hash_table_destroy (dialog->priv->bars);
                 dialog->priv->bars = NULL;
+        }
+
+        if (dialog->priv->test_dialog != NULL) {
+                gtk_dialog_response (GTK_DIALOG (dialog->priv->test_dialog),
+                                     GTK_RESPONSE_OK);
         }
 
         G_OBJECT_CLASS (gvc_mixer_dialog_parent_class)->dispose (object);
