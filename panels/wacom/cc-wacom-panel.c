@@ -95,12 +95,14 @@ static void
 run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 {
 	GVariant *v;
+	CcWacomPage *page;
+	const gchar *operation = NULL;
 	const gchar *device_name = NULL;
 	gint n_params;
 
 	n_params = g_variant_n_children (parameters);
 
-	g_variant_get_child (parameters, 1, "v", &v);
+	g_variant_get_child (parameters, n_params - 1, "v", &v);
 	device_name = g_variant_get_string (v, NULL);
 
 	if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
@@ -114,6 +116,29 @@ run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 	g_variant_unref (v);
 
 	switch (n_params) {
+		case 3:
+			page = set_device_page (self, device_name);
+			if (page == NULL)
+				return;
+
+			g_variant_get_child (parameters, 1, "v", &v);
+
+			if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
+				g_warning ("Wrong type for the operation name argument. A string is expected.");
+				g_variant_unref (v);
+				break;
+			}
+
+			operation = g_variant_get_string (v, NULL);
+			if (g_strcmp0 (operation, "run-calibration") == 0) {
+				if (cc_wacom_page_can_calibrate (page))
+					cc_wacom_page_calibrate (page);
+				else
+					g_warning ("The device %s cannot be calibrated.", device_name);
+			} else {
+				g_warning ("Ignoring unrecognized operation '%s'", operation);
+			}
+			g_variant_unref (v);
 		case 2:
 			set_device_page (self, device_name);
 			break;
