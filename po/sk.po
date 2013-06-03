@@ -6,15 +6,16 @@
 # Peter Tuhársky <tuharsky@misbb.sk>, 2007.
 # Pavol Šimo <palo.simo@gmail.com>, 2007-2011.
 # Pavol Klačanský <pavol@klacansky.com>, 2012, 2013.
+# Dušan Kazik <prescott66@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-05-24 13:15+0000\n"
-"PO-Revision-Date: 2013-04-13 20:33+0100\n"
-"Last-Translator: Peter Mráz <etkinator@gmail.com>\n"
+"POT-Creation-Date: 2013-06-03 13:35+0000\n"
+"PO-Revision-Date: 2013-05-31 14:05+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -199,44 +200,44 @@ msgstr "Nastavenia klávesnice"
 msgid "Send Files…"
 msgstr "Odoslať súbory…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Áno"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "Nie"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:472
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth je zakázaný"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:477
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth je zakázaný hardvérovým prepínačom"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:481
 msgid "No Bluetooth adapters found"
 msgstr "Nenašli sa žiadne Bluetooth adaptéry"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:580
 msgid "Visibility"
 msgstr "Viditeľnosť"
 
 # nazov zariadenia, napr. ubuntu-0
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:584
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Viditeľnosť „%s“"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Odstrániť „%s“ zo zoznamu známych zariadení?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:630
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -435,29 +436,31 @@ msgstr "Obrazovka"
 
 #. TRANSLATORS: this is when the upload of the profile failed
 #: ../panels/color/cc-color-panel.c:913
-#, fuzzy, c-format
-#| msgid "Failed to apply configuration: %s"
+#, c-format
 msgid "Failed to upload file: %s"
-msgstr "Zlyhalo použitie nastavení: %s"
+msgstr "Zlyhalo odovzdanie súboru: %s"
 
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
 #: ../panels/color/cc-color-panel.c:927
 msgid "The profile has been uploaded to:"
-msgstr ""
+msgstr "Profil bol odovzdaný do:"
 
 #: ../panels/color/cc-color-panel.c:929
 msgid "Write down this URL."
-msgstr ""
+msgstr "Opíšte si túto adresu URL."
 
 #: ../panels/color/cc-color-panel.c:930
 msgid "Restart this computer and boot your normal operating system."
-msgstr ""
+msgstr "Reštartujte počítač a spustite váš obvyklý operačný systém."
 
+# PM: znie mi to neprirodzene. Čo je to za hlášku? Nebude lepšie Keď chcete ... alebo Aby sa ... alebo Profil prevezmete a ...
 #: ../panels/color/cc-color-panel.c:931
+#, fuzzy
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
+"Na prevzatie a inštaláciu profilu zadajte adresu URL do vášho prehliadača."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
 #: ../panels/color/cc-color-panel.c:965
@@ -578,7 +581,7 @@ msgstr "Kalibrácia displeja"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1082
+#: ../panels/user-accounts/um-account-dialog.c:1083
 msgid "Cancel"
 msgstr "Zrušiť"
 
@@ -725,28 +728,22 @@ msgstr "Profil bol úspešne vytvorený!"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:22
-#, fuzzy
-#| msgid "Add profile"
 msgid "Copy profile"
-msgstr "Pridať profil"
+msgstr "Kopírovať profil"
 
 #: ../panels/color/color.ui.h:23
 msgid "Requires writable media"
-msgstr ""
+msgstr "Vyžaduje zapisovateľné médium"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:24
-#, fuzzy
-#| msgid "Add profile"
 msgid "Upload profile"
-msgstr "Pridať profil"
+msgstr "Odovzdať profil"
 
 # liststore item
 #: ../panels/color/color.ui.h:25
-#, fuzzy
-#| msgid "Add new connection"
 msgid "Requires Internet connection"
-msgstr "Pridať nové pripojenie"
+msgstr "Vyžaduje pripojenie k internetu"
 
 # GtkLabel label
 #: ../panels/color/color.ui.h:26
@@ -897,23 +894,28 @@ msgstr "Plazma"
 
 #: ../panels/color/color.ui.h:52
 msgid "LCD (CCFL backlight)"
-msgstr ""
+msgstr "LCD (technológia podsvietenia CCFL)"
 
 #: ../panels/color/color.ui.h:53
 msgid "LCD (RGB LED backlight)"
-msgstr ""
+msgstr "LCD (technológia podsvietenia RGB LED)"
 
 #: ../panels/color/color.ui.h:54
 msgid "LCD (white LED backlight)"
-msgstr ""
+msgstr "LCD (technológia podsvietenia bielymi LED diódami)"
 
+#  PK: mozno to Wide by som prelozil
+# PM: aj gamut som videl už kdesi preložené tuším ako farebný priestor alebo priesto farieb treba pozrieť gimp a muduly zaoberajúce sa farbami
 #: ../panels/color/color.ui.h:55
+#, fuzzy
 msgid "Wide gamut LCD (CCFL backlight)"
-msgstr ""
+msgstr "Wide gamut LCD (technológia podsvietenia CCFL)"
 
+# PK: mozno to Wide by som prelozil
 #: ../panels/color/color.ui.h:56
+#, fuzzy
 msgid "Wide gamut LCD (RGB LED backlight)"
-msgstr ""
+msgstr "Wide gamut LCD (technológia podsvietenia RGB LED)"
 
 #: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
@@ -1023,99 +1025,6 @@ msgstr "Viac…"
 #: ../panels/common/cc-language-chooser.c:138
 msgid "No languages found"
 msgstr "Nenašli sa žiadne jazyky"
-
-# 4. GtkComboBox item (manual, dhcp, link-local...)
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:416
-#: ../panels/keyboard/keyboard-shortcuts.c:1159
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Zakázané"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "Ľavý Shift"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "Ľavý Alt"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "Ľavý Ctrl"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "Pravý Shift"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "Pravý Alt"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "Pravý Ctrl"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "Ľavý Alt+Shift"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "Pravý Alt+Shift"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "Ľavý Ctrl+Shift"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "Pravý Ctrl+Shift"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "Ľavý a pravý Shift"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "Ľavý a pravý Alt"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "Ľavý a pravý Ctrl"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt+Shift"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Ctrl+Shift"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt+Ctrl"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Caps"
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Shift+Caps"
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt+Caps"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Ctrl+Caps"
 
 # GtkDialog title; GtkLabel label
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
@@ -1938,13 +1847,26 @@ msgstr "Zmenšiť text"
 msgid "High contrast on or off"
 msgstr "Zapnúť alebo vypnúť vysoký kontrast"
 
+# 4. GtkComboBox item (manual, dhcp, link-local...)
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Zakázané"
+
 # https://bugzilla.gnome.org/show_bug.cgi?id=697213
 # PM: chcelo by to komentár od vývojárov čo to je - typujem že dajaká modifikačná klávesa na neštandardnej klávesnici
 #. Translators: This key is also known as 'third level
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:366
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "Kláves pre alternatívne znaky"
 
@@ -1954,16 +1876,14 @@ msgstr "Kláves pre alternatívne znaky"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:375
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Kláves Compose"
 
-# PM: nie som si istý či to nehovorí o tom že zdroj sa prepína len modifikátormi - prosím doriešiť v master vetve
 # description
-#: ../panels/keyboard/cc-keyboard-option.c:379
-#, fuzzy
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
-msgstr "Prepínač na ďalší zdroj iba pre modifikátory"
+msgstr "Prepnutie na ďalší zdroj iba pomocou modifikátorov"
 
 # desktop entry name; GtkDialog title
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
@@ -2180,12 +2100,9 @@ msgstr "Všeobecné"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-#, fuzzy
-#| msgctxt "keyboard, speed"
-#| msgid "Slow"
 msgctxt "double click, speed"
 msgid "Slow"
-msgstr "Nízka"
+msgstr "Pomaly"
 
 # GtkHScale AtkObject
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
@@ -2194,12 +2111,9 @@ msgstr "Interval dvojitého kliknutia"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#, fuzzy
-#| msgctxt "keyboard, speed"
-#| msgid "Fast"
 msgctxt "double click, speed"
 msgid "Fast"
-msgstr "Vysoká"
+msgstr "Rýchlo"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
@@ -2239,18 +2153,12 @@ msgstr "Rých_losť ukazovateľa"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
-#, fuzzy
-#| msgctxt "keyboard, speed"
-#| msgid "Slow"
 msgctxt "mouse pointer, speed"
 msgid "Slow"
 msgstr "Nízka"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#, fuzzy
-#| msgctxt "keyboard, speed"
-#| msgid "Fast"
 msgctxt "mouse pointer, speed"
 msgid "Fast"
 msgstr "Vysoká"
@@ -2262,18 +2170,12 @@ msgstr "Touchpad"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#, fuzzy
-#| msgctxt "keyboard, speed"
-#| msgid "Slow"
 msgctxt "touchpad pointer, speed"
 msgid "Slow"
 msgstr "Nízka"
 
 # GtkLabel label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#, fuzzy
-#| msgctxt "keyboard, speed"
-#| msgid "Fast"
 msgctxt "touchpad pointer, speed"
 msgid "Fast"
 msgstr "Vysoká"
@@ -2388,6 +2290,7 @@ msgid "Security"
 msgstr "Zabezpečenie"
 
 # PM: rod? na akých miestach tento spinbutton je? Ja to vidím pri MTU, ale možno je to aj inde
+# DK: nenechame tvar: "automaticky" ?
 # spinbutton default
 # doriesit v master vetve
 #: ../panels/network/connection-editor/ce-page.c:507
@@ -2816,19 +2719,17 @@ msgstr "Pripojiť _automaticky"
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
 #: ../panels/network/connection-editor/wifi-page.ui.h:8
 msgid "Firewall _Zone"
-msgstr ""
+msgstr "_Zóna firewallu"
 
 #: ../panels/network/connection-editor/firewall-helpers.c:48
 #: ../panels/network/connection-editor/firewall-helpers.c:112
-#, fuzzy
-#| msgid "Default"
 msgctxt "Firewall zone"
 msgid "Default"
-msgstr "Predvolený"
+msgstr "Predvolená"
 
 #: ../panels/network/connection-editor/firewall-helpers.c:49
 msgid "The zone defines the trust level of the connection"
-msgstr ""
+msgstr "Zóna určuje úroveň dôveryhodnosti pripojenia"
 
 # GtkLabel label
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
@@ -2885,7 +2786,7 @@ msgstr "Nový profil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1083
+#: ../panels/user-accounts/um-account-dialog.c:1084
 msgid "_Add"
 msgstr "P_ridať"
 
@@ -3056,14 +2957,12 @@ msgstr "Ovláda spôsob pripojenia k internetu"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;"
 msgstr ""
-"Sieť;Wi-Fi;Wifi;IP;Proxy;LAN;WAN;Modem;Bluetooth;Broadband;Mobil;Široko;"
+"Sieť;Bezdrôtová;Wi-Fi;Wifi;IP;Proxy;LAN;WAN;Modem;Bluetooth;Broadband;Mobil;"
+"Široko pásmové;vpn;premostenie;previazanie;"
 
 # asi názov virtuálneho zariadenia
 #: ../panels/network/net-device-bond.c:77
@@ -3128,12 +3027,10 @@ msgstr "Drôtové"
 msgid "Options…"
 msgstr "Voľby…"
 
-# PK: tu si nejsom isty
-# PM: typujem že sa to zobrazuje na karte takž asi tam má byť č. %d
 #: ../panels/network/net-device-ethernet.c:491
 #, c-format
 msgid "Profile %d"
-msgstr "Profil %d"
+msgstr "Profil č. %d"
 
 # liststore item
 #: ../panels/network/net-device-mobile.c:239
@@ -4218,14 +4115,10 @@ msgstr "Zobraziť vyskakovacie bubliny"
 msgid "Show in Lock Screen"
 msgstr "Zobraziť v uzamknutej obrazovke"
 
-# DK:https://bugzilla.gnome.org/show_bug.cgi?id=697211
-# DK:poskytovateľ,miestne nastavenie,umiestnenie
-# Doriešiť v master
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
-#, fuzzy
 msgctxt "Online Account"
 msgid "Other"
-msgstr "Ostatné"
+msgstr "Iný"
 
 # * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 #. translators: This is the title of the "Add Account" dialog.
@@ -4300,13 +4193,11 @@ msgstr "Pripojí vás k vašim online účtom a rozhodne na čo sa použijú"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Rozhovor;Kalendár;Mail;Email;"
-"Kontakt;"
+"Kontakt;ownCloud;"
 
 # GtkLabel label
 #: ../panels/online-accounts/online-accounts.ui.h:1
@@ -5431,11 +5322,10 @@ msgstr "vypnutí obrazovky"
 msgid "30 seconds"
 msgstr "30 sekundách"
 
-# PM: tu by sa asi viac hodilo nastavte
 # label
 #: ../panels/privacy/privacy.ui.h:11
 msgid "Control how you appear on the screen and the network."
-msgstr "Ovládajte zobrazenie vás na obrazovke a sieti."
+msgstr "Nastavte zobrazenie vás na obrazovke a sieti."
 
 # GtkLabel label
 #: ../panels/privacy/privacy.ui.h:12
@@ -5548,10 +5438,8 @@ msgstr "A_utomatické uzamykanie obrazovky"
 
 # GtkLabel label
 #: ../panels/privacy/privacy.ui.h:34
-#, fuzzy
-#| msgid "Lock Screen _After Blank For"
 msgid "Lock screen _after blank for"
-msgstr "_Uzamknúť obrazovku pri necinnosti po"
+msgstr "_Uzamknúť obrazovku pri nečinnosti po"
 
 # GtkLabel label
 #: ../panels/privacy/privacy.ui.h:35
@@ -5579,17 +5467,13 @@ msgstr ""
 
 # GtkLabel label
 #: ../panels/privacy/privacy.ui.h:40
-#, fuzzy
-#| msgid "Automatically Empty _Trash"
 msgid "Automatically empty _Trash"
-msgstr "Automaticky vyprádniť _Kôš"
+msgstr "Automaticky vyprázdniť _Kôš"
 
 # GtkLabel label
 #: ../panels/privacy/privacy.ui.h:41
-#, fuzzy
-#| msgid "Automatically Purge Temporary _Files"
 msgid "Automatically purge Temporary _Files"
-msgstr "Automaticky vymazať dočasné _súbory"
+msgstr "Automaticky vymazať Dočasné _súbory"
 
 # GtkLabel label
 #: ../panels/privacy/privacy.ui.h:42
@@ -5614,14 +5498,10 @@ msgstr "Nenašli sa žiadne regióny"
 msgid "No input sources found"
 msgstr "Nenašli sa žiadne zdroje vstupu"
 
-# DK:https://bugzilla.gnome.org/show_bug.cgi?id=697211
-# DK:poskytovateľ,miestne nastavenie,umiestnenie
-# Doriešiť v master
 #: ../panels/region/cc-input-chooser.c:1091
-#, fuzzy
 msgctxt "Input Source"
 msgid "Other"
-msgstr "Ostatné"
+msgstr "Iný"
 
 # label
 #: ../panels/region/cc-region-panel.c:240
@@ -5764,6 +5644,10 @@ msgstr "Klávesové skratky môžete zmeniť v nastaveniach klávesnice"
 msgid "Alternative switch to next source"
 msgstr "Alternatívny prepínač na ďalší zdroj"
 
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Ľavý a pravý Alt"
+
 # GtkLabel label
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
@@ -5787,31 +5671,24 @@ msgstr ""
 
 # PM: nemá tu byť "Domov" ako v nautiluse?
 #: ../panels/search/cc-search-locations-dialog.c:276
+#, fuzzy
 msgid "Home"
 msgstr "Domovský priečinok"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
-#, fuzzy
-#| msgid "Places"
 msgctxt "Search Location"
 msgid "Places"
 msgstr "Miesta"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
-#, fuzzy
-#| msgid "Bookmarks"
 msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-# DK:https://bugzilla.gnome.org/show_bug.cgi?id=697211
-# DK:poskytovateľ,miestne nastavenie,umiestnenie
-# Doriešiť v master
 #: ../panels/search/cc-search-locations-dialog.c:480
-#, fuzzy
 msgctxt "Search Location"
 msgid "Other"
-msgstr "Ostatné"
+msgstr "Iné"
 
 # file chooser dialog title
 #: ../panels/search/cc-search-locations-dialog.c:676
@@ -5859,23 +5736,23 @@ msgstr "Presunúť nadol"
 msgid "Preferences"
 msgstr "Nastavenia"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:268
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Zapnuté"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:270
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Vypnuté"
 
 # file chooser dialog title
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:416
 msgid "Choose a Folder"
 msgstr "Výber priečinka"
 
 # menu item
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:594
 msgid "Copy"
 msgstr "Kopírovať"
 
@@ -5922,8 +5799,7 @@ msgid ""
 "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
 "devices"
 msgstr ""
-"Sprístupnenie cez Bluetooth umožňuje sprístupniť súbory "
-"ostatným zariadeniam"
+"Sprístupnenie cez Bluetooth umožňuje sprístupniť súbory ostatným zariadeniam"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:3
@@ -6081,7 +5957,7 @@ msgstr "Zvuk"
 # desktop entry comment
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "Mení hlasitosť zvuku, vstupy, výstupy a zvukové upozornenia"
+msgstr "Mení hlasitosť zvuku, vstupy, výstupy a zvukové varovania"
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -6126,19 +6002,17 @@ msgctxt "balance"
 msgid "Right"
 msgstr "Vpravo"
 
-# PM: nie som si istý či by to nemalo byť skôr dopredu a dozadu - pozri aj ostatné preklady týkajúce sa balance
 # Prelínanie:
 #: ../panels/sound/gvc-balance-bar.c:110
-#, fuzzy
 msgctxt "balance"
 msgid "Rear"
-msgstr "Vzadu"
+msgstr "Dozadu"
 
 # Prelínanie:
 #: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
 msgid "Front"
-msgstr "Vpredu"
+msgstr "Dopredu"
 
 # Basový reproduktor:
 #: ../panels/sound/gvc-balance-bar.c:114
@@ -6177,7 +6051,6 @@ msgstr "100 %"
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Nezosilnená"
-
 
 #: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
 #: ../panels/sound/gvc-mixer-dialog.c:526
@@ -6295,6 +6168,8 @@ msgid "No application is currently playing or recording audio."
 msgstr "Žiadna aplikácia teraz neprehráva ani nenahráva zvuk."
 
 # PM: je tu správny rod? čoho sa to týka?
+# DK: netusim.neviem to ani najst nikde
+# PK: asi zvuk vystrahy, radsej sa opytaj vyvojarov
 #: ../panels/sound/gvc-sound-theme-chooser.c:189
 #, fuzzy
 msgid "Built-in"
@@ -6307,14 +6182,12 @@ msgstr "Zabudované"
 msgid "Sound Preferences"
 msgstr "Nastavenia zvuku"
 
-# PM: isto je to dobre? Nemá to byť skúška zvukovej udalosti alebo zvuková skúška udalosti alebo testovacia zvuková udalosť?
 # event description
 #: ../panels/sound/gvc-sound-theme-chooser.c:458
 #: ../panels/sound/gvc-sound-theme-chooser.c:469
 #: ../panels/sound/gvc-sound-theme-chooser.c:481
-#, fuzzy
 msgid "Testing event sound"
-msgstr "Skúša sa zvuk udalosti"
+msgstr "Skúška zvukovej udalosti"
 
 # sound id
 #: ../panels/sound/gvc-sound-theme-chooser.c:585
@@ -6326,11 +6199,9 @@ msgstr "Predvolený"
 msgid "From theme"
 msgstr "Z témy"
 
-#  PM: varovný zvuk
 #: ../panels/sound/gvc-sound-theme-chooser.c:770
-#, fuzzy
 msgid "C_hoose an alert sound:"
-msgstr "_Zvoľte si zvuk výstrahy:"
+msgstr "_Zvoľte varovný zvuk:"
 
 # button label
 #: ../panels/sound/gvc-speaker-test.c:220
@@ -6521,7 +6392,7 @@ msgstr "Vizuálne výstrahy"
 # GtkLabel
 #: ../panels/universal-access/uap.ui.h:32
 msgid "Use a visual indication when an alert sound occurs"
-msgstr "Vizuálne oznámiť zvuk výstrahy"
+msgstr "Vizuálne oznámiť zvuk varovania"
 
 # GtkRadioButton
 #: ../panels/universal-access/uap.ui.h:33
@@ -6717,11 +6588,9 @@ msgstr "Kliknutie zotrvaním"
 msgid "Trigger a click when the pointer hovers"
 msgstr "Vyvolať kliknutie keď sa ukazovateľ zastaví"
 
-# PM: inde oneskorenie prečo tu pauza? navyše je za tým krátke/dlhé
 #: ../panels/universal-access/uap.ui.h:76
-#, fuzzy
 msgid "D_elay:"
-msgstr "Pau_za:"
+msgstr "On_eskorenie:"
 
 # GtkLabel
 #: ../panels/universal-access/uap.ui.h:77
@@ -6905,15 +6774,12 @@ msgstr "Jas:"
 msgid "Contrast:"
 msgstr "Kontrast:"
 
-# PM:asi to treba nahlásiť znova lebo v uzavretom hlaseni si to nik nevsimne; navyše je tu zlý msgctxt
-# * https://bugzilla.gnome.org/show_bug.cgi?id=694766
-# GtkLabel label
+# DK: https://bugzilla.gnome.org/show_bug.cgi?id=701343
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "Color"
-msgstr "Farby"
+msgstr "Farba"
 
 # farba
 #: ../panels/universal-access/zoom-options.ui.h:31
@@ -7230,8 +7096,7 @@ msgstr ""
 msgid "Gallery"
 msgstr "Galéria"
 
-# PM: asi treba rozdeliť
-# dialog title; GtkRadioButton label
+# DK: https://bugzilla.gnome.org/show_bug.cgi?id=701344
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 #: ../panels/user-accounts/um-photo-dialog.c:218
 #, fuzzy
@@ -7398,22 +7263,20 @@ msgstr "Neznáma chyba"
 msgid "Failed to add account"
 msgstr "Zlyhalo pridanie účtu"
 
-#: ../panels/user-accounts/um-account-dialog.c:407
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-account-dialog.c:449
 msgid "Failed to register account"
 msgstr "Zlyhala registrácia účtu"
 
-# PM: dal by som: nie je pri tejto doméne podporované
-#: ../panels/user-accounts/um-account-dialog.c:581
-#, fuzzy
+#: ../panels/user-accounts/um-account-dialog.c:582
 msgid "No supported way to authenticate with this domain"
-msgstr "Overenie totožnosti na tejto doméne nie je podporované"
+msgstr "Overenie totožnosti nie je pri tejto doméne podporované"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:636
 msgid "Failed to join domain"
 msgstr "Zlyhalo pripojenie k doméne"
 
-#: ../panels/user-accounts/um-account-dialog.c:703
+#: ../panels/user-accounts/um-account-dialog.c:704
 msgid "Failed to log into domain"
 msgstr "Zlyhalo prihlásenie do domény"
 
@@ -7620,14 +7483,12 @@ msgstr "Nemôžete odstrániť vlastný účet."
 msgid "%s is still logged in"
 msgstr "Používateľ %s je stále prihlásený"
 
-# PM: skôr spôsobiť nestabilitu systému
 #: ../panels/user-accounts/um-user-panel.c:449
-#, fuzzy
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
-"Odstránenie prihláseného používateľa môže viesť k nestabilnému stavu systému."
+"Odstránenie prihláseného používateľa môže spôsobiť nestabilitu systému."
 
 #: ../panels/user-accounts/um-user-panel.c:458
 #, c-format
@@ -7651,7 +7512,6 @@ msgstr "O_dstrániť súbory"
 #: ../panels/user-accounts/um-user-panel.c:466
 msgid "_Keep Files"
 msgstr "Po_nechať súbory"
-
 
 #: ../panels/user-accounts/um-user-panel.c:518
 msgctxt "Password mode"
@@ -7764,15 +7624,13 @@ msgstr "Priradenie tlačidiel"
 msgid "Map buttons to functions"
 msgstr "Priraďte tlačidlá k funkciám"
 
-# PM: skôr aby sa tablet nakalibroval
 #: ../panels/wacom/calibrator/calibrator-gui.c:82
-#, fuzzy
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr ""
-"Prosím, dotknite sa cieľových značiek, tak ako sa objavujú na obrazovke, pre "
-"kalibráciu tabletu."
+"Prosím, dotknite sa cieľových značiek, tak ako sa objavujú na obrazovke, aby "
+"sa tablet nakalibroval."
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
@@ -7798,12 +7656,10 @@ msgstr "Mapovať na jeden displej"
 msgid "%d of %d"
 msgstr "%d. z %d"
 
-# PM: tu by sa mi skôr hodilo "Nerobiť nič"
 #: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
-#, fuzzy
 msgctxt "Wacom action-type"
 msgid "None"
-msgstr "Žiadny"
+msgstr "Nerobiť nič"
 
 #: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
@@ -7846,12 +7702,11 @@ msgstr "Akcia"
 
 # PK: mozno priradenie
 # PM: doriesit v master vetve
-# PM: dalej je priradiť k displeju 
+# PM: dalej je priradiť k displeju
 # dialog title
 #: ../panels/wacom/cc-wacom-page.c:964
-#, fuzzy
 msgid "Display Mapping"
-msgstr "Mapovanie zobrazenia"
+msgstr "Priradenie zobrazenia"
 
 # desktop entry name
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
@@ -7859,21 +7714,18 @@ msgstr "Mapovanie zobrazenia"
 msgid "Wacom Tablet"
 msgstr "Tablet Wacom"
 
-# PM: sa mi vidí že hovoríme pero aj ďalej je taký preklad, netreba ďalší anglický termín ktorý je málo zaužívaný
 # desktop entry comment
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Nastavuje mapovanie tlačidiel a upravuje citlivosť stylusu grafických "
-"tabletov"
+"Nastavuje mapovanie tlačidiel a upravuje citlivosť pera grafických tabletov"
 
+# DK: nechal by som aj Stylus.niekto ma zauzivene toto slovo
 # desktop entry keywords
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr "Tablet;Wacom;Stylus;Guma;Myš;"
+msgstr "Tablet;Wacom;Stylus;Pero;Guma;Myš;"
 
 # GtkListStore item
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
@@ -7915,19 +7767,15 @@ msgstr "Priradiť k displeju…"
 msgid "Map Buttons…"
 msgstr "Priradiť tlačidlá…"
 
-# PM: je to odkaz na inú časť GCC neviem či "prispôsobiť" je dobre
 # GtkLinkButton
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
-#, fuzzy
 msgid "Adjust display resolution"
-msgstr "Prispôsobiť rozlíšenie displeja"
+msgstr "Upraviť rozlíšenie displeja"
 
 # GtkLinkButton
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
-#, fuzzy
-#| msgid "Mouse Settings"
 msgid "Adjust mouse settings"
-msgstr "Nastavenia myši"
+msgstr "Upraviť nastavenia myši"
 
 # GtkLabel
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
@@ -8193,22 +8041,3 @@ msgstr "Všetky nastavenia"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nastavenia;Konfigurácia;"
-
-# GtkButton label
-#~ msgid "Export"
-#~ msgstr "Exportovať"
-
-# GtkLabel label
-#~ msgctxt "mouse, speed"
-#~ msgid "Slow"
-#~ msgstr "Pomalá"
-
-# toto je za Rýchlosť: a Akcelerácia:
-# GtkLabel label
-#~ msgctxt "mouse, speed"
-#~ msgid "Fast"
-#~ msgstr "Rýchla"
-
-# GtkButton label
-#~ msgid "_Options…"
-#~ msgstr "_Voľby…"
