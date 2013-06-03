@@ -64,6 +64,7 @@ struct _CcBackgroundPanelPrivate
   GCancellable *capture_cancellable;
 
   GtkWidget *spinner;
+  GtkWidget *chooser;
 
   GdkPixbuf *display_screenshot;
   char *screenshot_path;
@@ -105,6 +106,12 @@ cc_background_panel_dispose (GObject *object)
 
       g_object_unref (priv->capture_cancellable);
       priv->capture_cancellable = NULL;
+    }
+
+  if (priv->chooser)
+    {
+      gtk_widget_destroy (priv->chooser);
+      priv->chooser = NULL;
     }
 
   g_clear_object (&priv->thumb_factory);
@@ -716,6 +723,8 @@ on_background_button_clicked (GtkButton         *button,
                                 GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))));
   gtk_widget_show (dialog);
   g_signal_connect (dialog, "response", G_CALLBACK (on_chooser_dialog_response), self);
+  priv->chooser = dialog;
+  g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &priv->chooser);
 }
 
 static void
