@@ -629,6 +629,18 @@ get_login_time_text (ActUser *user)
         return text;
 }
 
+static gboolean
+get_autologin_possible (ActUser *user)
+{
+        gboolean locked;
+        gboolean set_password_at_login;
+
+        locked = act_user_get_locked (user);
+        set_password_at_login = (act_user_get_password_mode (user) == ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+
+        return !(locked || set_password_at_login);
+}
+
 static void
 show_user (ActUser *user, CcUserPanelPrivate *d)
 {
@@ -669,9 +681,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         g_signal_handlers_block_by_func (widget, autologin_changed, d);
         gtk_switch_set_active (GTK_SWITCH (widget), act_user_get_automatic_login (user));
         g_signal_handlers_unblock_by_func (widget, autologin_changed, d);
-
-        if (act_user_get_locked (user))
-                gtk_widget_set_sensitive (widget, FALSE);
+        gtk_widget_set_sensitive (widget, get_autologin_possible (user));
 
         widget = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
@@ -1102,7 +1112,8 @@ on_permission_changed (GPermission *permission,
         } else if (is_authorized && act_user_is_local_account (user)) {
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-type-combo"));
-                gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), TRUE);
+
+                gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), get_autologin_possible (user));
                 remove_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
         else {

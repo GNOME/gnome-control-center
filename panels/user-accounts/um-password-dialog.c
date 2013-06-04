@@ -253,6 +253,7 @@ accept_password_dialog (GtkButton        *button,
 
                 case UM_PASSWORD_DIALOG_MODE_SET_AT_LOGIN:
                         act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+                        act_user_set_automatic_login (um->user, FALSE);
                         break;
 
                 case UM_PASSWORD_DIALOG_MODE_NO_PASSWORD:
@@ -261,6 +262,7 @@ accept_password_dialog (GtkButton        *button,
 
                 case UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT:
                         act_user_set_locked (um->user, TRUE);
+                        act_user_set_automatic_login (um->user, FALSE);
                         break;
 
                 case UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT:
