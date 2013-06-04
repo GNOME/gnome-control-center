@@ -644,7 +644,8 @@ visible_func (GtkTreeModel     *model,
                  * as this can lead to them being 'locked out'.
                  */
                 if (mode == UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT &&
-                    (locked || act_user_get_uid (um->user) == getuid ()))
+                    (locked || act_user_get_uid (um->user) == getuid ()
+                     || would_demote_only_admin (um->user)))
                         return FALSE;
 
                 if (mode == UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT && !locked)

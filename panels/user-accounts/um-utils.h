@@ -81,6 +81,8 @@ GdkPixbuf * render_user_icon              (ActUser         *user,
 void     set_user_icon_data               (ActUser         *user,
                                            GdkPixbuf       *pixbuf);
 
+gboolean would_demote_only_admin          (ActUser *user);
+
 G_END_DECLS
 
 #endif
