@@ -1034,3 +1034,41 @@ set_user_icon_data (ActUser   *user,
 
         g_free (path);
 }
+
+static guint
+get_num_admin (ActUserManager *um)
+{
+        GSList *list;
+        GSList *l;
+        guint num_admin = 0;
+
+        list = act_user_manager_list_users (um);
+        for (l = list; l != NULL; l = l->next) {
+                ActUser *u = l->data;
+                if (act_user_get_account_type (u) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+                        num_admin++;
+                }
+        }
+        g_slist_free (list);
+
+        return num_admin;
+}
+
+gboolean
+would_demote_only_admin (ActUser *user)
+{
+
+        ActUserManager *um = act_user_manager_get_default ();
+
+        /* Prevent the user from demoting the only admin account.
+         * Returns TRUE when user is an administrator and there is only
+         * one administrator */
+
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_STANDARD)
+                return FALSE;
+
+        if (get_num_admin (um) > 1)
+                return FALSE;
+
+        return TRUE;
+}
