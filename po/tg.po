@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-05-30 12:20+0000\n"
-"PO-Revision-Date: 2013-06-04 12:54+0500\n"
+"POT-Creation-Date: 2013-06-04 16:08+0000\n"
+"PO-Revision-Date: 2013-06-05 10:07+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "Language: tg\n"
@@ -56,27 +56,42 @@ msgid "Span"
 msgstr "Ваҷаб"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:300
 msgid "Select Background"
 msgstr "Интихоби пасзамина"
 
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:319
 msgid "Wallpapers"
 msgstr "Тасвирҳои экран"
 
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:328
 msgid "Pictures"
 msgstr "Тасвирҳо"
 
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:336
 msgid "Colors"
 msgstr "Рангҳо"
 
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:345
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:400
+#| msgid "No input sources found"
+msgid "No Pictures Found"
+msgstr "Ягон тасвир ёфт нашудааст"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:415
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr ""
+"Шумо метавонед тасвирҳоро ба ҷузвдони %s илова кунед ва онҳо дар ин ҷо "
+"намоиш дода мешаванд"
+
+#: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -98,7 +113,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Бе пасзаминаи мизи корӣ"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "Пасзаминаи ҷорӣ"
 
@@ -174,43 +189,43 @@ msgstr "Танзимоти клавиатура"
 msgid "Send Files…"
 msgstr "Фиристодани файлҳо…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Ҳа"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "Не"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:472
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth ғайрифаъол аст"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:477
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth бо калиди сахтафзор ғайрифаъол карда шуд"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:481
 msgid "No Bluetooth adapters found"
 msgstr "Ягон адаптери Bluetooth ёфт нашуд"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:580
 msgid "Visibility"
 msgstr "Қобилияти намоиш"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:584
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Намоённокии “%s”"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "'%s'-ро аз рӯйхати дастгоҳҳо тоза мекунед?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:630
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -543,7 +558,7 @@ msgstr "Санҷиши дисплей"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1083
+#: ../panels/user-accounts/um-account-dialog.c:1126
 msgid "Cancel"
 msgstr "Бекор кардан"
 
@@ -2390,7 +2405,7 @@ msgstr "Профили нав"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1084
+#: ../panels/user-accounts/um-account-dialog.c:1127
 msgid "_Add"
 msgstr "_Илова кардан"
 
@@ -3549,7 +3564,6 @@ msgid "Show in Lock Screen"
 msgstr "Намоиш додан дар экрани қулф"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
-#| msgid "Other"
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Дигар"
@@ -3830,15 +3844,18 @@ msgid "Power Saving"
 msgstr "Захиракунии барқ"
 
 #: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+#| msgid "_Screen Brightness"
+msgid "_Screen brightness"
 msgstr "_Равшании экран"
 
 #: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+#| msgid "_Dim Screen when Inactive"
+msgid "_Dim screen when inactive"
 msgstr "_Камнур кардани экран дар ҳолати ғайрифаъол"
 
 #: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+#| msgid "_Blank Screen"
+msgid "_Blank screen"
 msgstr "_Экрани холӣ"
 
 #: ../panels/power/cc-power-panel.c:1516
@@ -3850,12 +3867,14 @@ msgid "Turns off wireless devices"
 msgstr "Хомӯш кардани дастгоҳҳои бесим"
 
 #: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+#| msgid "_Mobile Broadband"
+msgid "_Mobile broadband"
 msgstr "_Паҳннавори мобилӣ"
 
 #: ../panels/power/cc-power-panel.c:1549
-msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "Хомӯш кардани дастгоҳҳои паҳннавори мобилӣ (3G, 4G, WiMax, ва ғайра)"
+#| msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
+msgstr "Дастгоҳҳои паҳннавори мобилиро (3G, 4G, WiMax, ва ғайра) хомӯш мекунад"
 
 #: ../panels/power/cc-power-panel.c:1582
 msgid "_Bluetooth"
@@ -3874,11 +3893,13 @@ msgid "Suspend & Power Off"
 msgstr "Таваққуф ва анҷоми кор"
 
 #: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+#| msgid "_Automatic Suspend"
+msgid "_Automatic suspend"
 msgstr "_Таваққуфи худкор"
 
 #: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
+#| msgid "When Battery Power is _Critical"
+msgid "When battery power is _critical"
 msgstr "_Вақте ки барқи батарея қариб ба анҷом расид"
 
 #: ../panels/power/cc-power-panel.c:1848
@@ -4233,7 +4254,7 @@ msgid "Add a New Printer"
 msgstr "Илова кардани принтери нав"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "_Бекор кардан"
 
@@ -4766,7 +4787,6 @@ msgid "No input sources found"
 msgstr "Ягон манбаи вуруд ёфт нашудааст"
 
 #: ../panels/region/cc-input-chooser.c:1091
-#| msgid "Other"
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Дигар"
@@ -4915,19 +4935,16 @@ msgid "Home"
 msgstr "Асосӣ"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
-#| msgid "Places"
 msgctxt "Search Location"
 msgid "Places"
 msgstr "Ҷойҳо"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
-#| msgid "Bookmarks"
 msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Хатбаракҳо"
 
 #: ../panels/search/cc-search-locations-dialog.c:480
-#| msgid "Other"
 msgctxt "Search Location"
 msgid "Other"
 msgstr "Дигар"
@@ -5239,8 +5256,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Беқувват"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "_Профил:"
 
@@ -5266,73 +5283,73 @@ msgstr[1] "%u Inputs"
 msgid "System Sounds"
 msgstr "Овозҳои система"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "_Санҷидани баландгӯякҳо"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "Ташхиси баландтарин"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Ном"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "Дастгоҳ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Санҷиши баландгӯяк барои %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "_Баландии садои барориш:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "Барориш"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "Интихоб _кардани дастгоҳ барои барориши садо:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "Танзимот барои дастгоҳҳои интихобшуда:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "Вуруд"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "_Баландии садои вуруд:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "Сатҳи вуруд:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "_Интихоб кардани дастгоҳ барои вуруди садо:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "Таъсири садо"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "_Баландии садои огоҳӣ:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "Барномаҳо"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "Ягон барнома дар айни ҳол аудиоро пахш ё сабт накарда истодааст."
 
@@ -6250,21 +6267,21 @@ msgstr "Хатогии номаълум"
 msgid "Failed to add account"
 msgstr "Иловакунии ҳисоб қатъ шуд"
 
-#: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-account-dialog.c:449
+#: ../panels/user-accounts/um-account-dialog.c:413
+#: ../panels/user-accounts/um-account-dialog.c:459
 msgid "Failed to register account"
 msgstr "Қайдкунии ҳисоб қатъ шуд"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:597
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 "Ягон имконияти дастгирӣ барои санҷиши ҳаққоният бо ин домен вуҷуд надорад"
 
-#: ../panels/user-accounts/um-account-dialog.c:636
+#: ../panels/user-accounts/um-account-dialog.c:656
 msgid "Failed to join domain"
 msgstr "Ҳамроҳ шудан ба домен қатъ шуд"
 
-#: ../panels/user-accounts/um-account-dialog.c:704
+#: ../panels/user-accounts/um-account-dialog.c:729
 msgid "Failed to log into domain"
 msgstr "Ворид шудан ба домен қатъ шуд"
 
@@ -6453,32 +6470,36 @@ msgstr "Пароли нодуруст, лутфан амалро такрор к
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Ба домени %s пайваст нашуд: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "Ҳисобҳои дигар"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "Несткунии корбар қатъ шуд"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "Шумо наметавонед ҳисоби худро нест кунед."
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s то ҳол воридшуда мебошад"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 "Несткунии корбари воридшуда метавонад системаро ба ҳолати номунтазам дарорад."
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Шумо мехоҳед, ки файлҳои %s-ро нигоҳ доред?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6486,44 +6507,44 @@ msgstr ""
 "Ҳангоми нест кардани ҳисоби корбар шумо метавонед директорияи аслӣ, файлҳои "
 "навбати почта ва файлҳои муваққатиро нигоҳ доред."
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "_Нест кардани файлҳо"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "_Нигоҳ доштани файлҳо"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Ҳисоб ғайрифаъол аст"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Ҳангоми воридшавии навбатӣ таъин карда мешавад"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ҳеҷ"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "Ворид шудааст"
 
-#: ../panels/user-accounts/um-user-panel.c:943
+#: ../panels/user-accounts/um-user-panel.c:977
 msgid "Failed to contact the accounts service"
 msgstr "Тамосгирӣ бо хадамоти ҳисобҳо қатъ шуд"
 
-#: ../panels/user-accounts/um-user-panel.c:945
+#: ../panels/user-accounts/um-user-panel.c:979
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Лутфан, мутмаин шавед, ки AccountService насб шудааст ва дар ҳоли иҷро "
 "мебошад."
 
-#: ../panels/user-accounts/um-user-panel.c:986
+#: ../panels/user-accounts/um-user-panel.c:1020
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6531,12 +6552,12 @@ msgstr ""
 "Барои даровардани тағйирот,\n"
 "аввал нишонаи \"*\"-ро зер кунед"
 
-#: ../panels/user-accounts/um-user-panel.c:1024
+#: ../panels/user-accounts/um-user-panel.c:1058
 msgid "Create a user account"
 msgstr "Эҷод кардани ҳисоби корбар"
 
-#: ../panels/user-accounts/um-user-panel.c:1035
-#: ../panels/user-accounts/um-user-panel.c:1321
+#: ../panels/user-accounts/um-user-panel.c:1069
+#: ../panels/user-accounts/um-user-panel.c:1349
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6544,12 +6565,12 @@ msgstr ""
 "Барои эҷод кардани ҳисоби корбар,\n"
 "пеш аз ҳама нишонаи * -ро зер кунед"
 
-#: ../panels/user-accounts/um-user-panel.c:1044
+#: ../panels/user-accounts/um-user-panel.c:1078
 msgid "Delete the selected user account"
 msgstr "Нест кардани ҳисоби корбари интихобшуда"
 
-#: ../panels/user-accounts/um-user-panel.c:1056
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1090
+#: ../panels/user-accounts/um-user-panel.c:1354
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6557,13 +6578,9 @@ msgstr ""
 "Барои нест кардани ҳисоби корбари интихобшуда,\n"
 "пеш аз ҳама нишонаи * -ро зер кунед"
 
-#: ../panels/user-accounts/um-user-panel.c:1230
+#: ../panels/user-accounts/um-user-panel.c:1264
 msgid "My Account"
 msgstr "Ҳисоби ман"
-
-#: ../panels/user-accounts/um-user-panel.c:1239
-msgid "Other Accounts"
-msgstr "Ҳисобҳои дигар"
 
 #: ../panels/user-accounts/um-utils.c:535
 #, c-format
