@@ -38,9 +38,6 @@
 #define INPUT_SOURCE_TYPE_XKB "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
 
-#define ARROW_NEXT "go-next-symbolic"
-#define ARROW_PREV "go-previous-symbolic"
-
 #define MAIN_WINDOW_WIDTH_RATIO 0.60
 #define FILTER_TIMEOUT 150 /* ms */
 
@@ -142,7 +139,7 @@ padded_label_new (const gchar        *text,
 
   if (direction == ROW_TRAVEL_DIRECTION_BACKWARD)
     {
-      arrow = gtk_image_new_from_icon_name (rtl ? ARROW_NEXT : ARROW_PREV,
+      arrow = gtk_image_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" : "go-previous-symbolic",
                                             GTK_ICON_SIZE_MENU);
       gtk_box_pack_start (GTK_BOX (widget), arrow, FALSE, TRUE, 0);
     }
@@ -156,7 +153,7 @@ padded_label_new (const gchar        *text,
 
   if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
     {
-      arrow = gtk_image_new_from_icon_name (rtl ? ARROW_PREV : ARROW_NEXT,
+      arrow = gtk_image_new_from_icon_name (rtl ? "go-next-rtl-symbolic" : "go-next-symbolic",
                                             GTK_ICON_SIZE_MENU);
       gtk_box_pack_start (GTK_BOX (widget), arrow, FALSE, TRUE, 0);
     }
