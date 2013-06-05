@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-23 08:48+0000\n"
-"PO-Revision-Date: 2013-03-23 16:08+0100\n"
+"POT-Creation-Date: 2013-06-05 16:30+0000\n"
+"PO-Revision-Date: 2013-06-05 20:51+0100\n"
 "Last-Translator: Jorge Pérez Pérez <jorgtum@gmail.com>\n"
 "Language-Team: Aragonese <softaragones@googlegroups.com>\n"
 "Language: an\n"
@@ -55,27 +55,39 @@ msgid "Span"
 msgstr "Expandir"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:300
 msgid "Select Background"
 msgstr "Seleccionar un fondo"
 
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:319
 msgid "Wallpapers"
 msgstr "Fondos d'escritorio"
 
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:328
 msgid "Pictures"
 msgstr "Imachens"
 
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:336
 msgid "Colors"
 msgstr "Colors"
 
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:345
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:400
+msgid "No Pictures Found"
+msgstr "No s'han trobau imachens"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:415
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr "Puetz adhibir imachens a  la tuya carpeta %s y s'amostrarán aquí alto"
+
+#: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -97,7 +109,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo d'escritorio"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -144,7 +156,7 @@ msgstr "pachina 2"
 msgid "Paired"
 msgstr "Emparellau"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:789
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
 msgid "Type"
 msgstr "Mena"
 
@@ -173,43 +185,43 @@ msgstr "Configuración d'o teclau"
 msgid "Send Files…"
 msgstr "Ninviar fichers…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Sí"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "No"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:472
 msgid "Bluetooth is disabled"
 msgstr "O Bluetooth ye desactivau"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:477
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "O Bluetooth ye fisicament desactivau"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:481
 msgid "No Bluetooth adapters found"
 msgstr "No s'han trobau adaptadors Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:580
 msgid "Visibility"
 msgstr "Visibilidat"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:584
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibilidat de «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Sacar «%s» d'a lista de dispositivos?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:630
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -359,58 +371,83 @@ msgstr "Sin calibrar"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:133
+#: ../panels/color/cc-color-panel.c:136
 msgid "Default: "
 msgstr "Predeterminau: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:141
+#: ../panels/color/cc-color-panel.c:144
 msgid "Colorspace: "
 msgstr "Espacio de color: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:148
+#: ../panels/color/cc-color-panel.c:151
 msgid "Test profile: "
 msgstr "Perfil de preba:"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:216
+#: ../panels/color/cc-color-panel.c:219
 msgid "Select ICC Profile File"
 msgstr "Seleccionar o fichero de perfil ICC"
 
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:222
 msgid "_Import"
 msgstr "_Importar"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:230
+#: ../panels/color/cc-color-panel.c:233
 msgid "Supported ICC profiles"
 msgstr "Perfils ICC suportaus"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:237
+#: ../panels/color/cc-color-panel.c:240
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Totz os fichers"
 
-#: ../panels/color/cc-color-panel.c:581
+#: ../panels/color/cc-color-panel.c:587
 msgid "Screen"
 msgstr "Pantalla"
 
+#. TRANSLATORS: this is when the upload of the profile failed
+#: ../panels/color/cc-color-panel.c:913
+#, c-format
+msgid "Failed to upload file: %s"
+msgstr "Ha fallau en puyar o fichero: %s"
+
+#. TRANSLATORS: these are instructions on how to recover
+#. * the ICC profile on the native operating system and are
+#. * only shown when the user uses a LiveCD to calibrate
+#: ../panels/color/cc-color-panel.c:927
+msgid "The profile has been uploaded to:"
+msgstr "O perfil s'ha puyau ta:"
+
+#: ../panels/color/cc-color-panel.c:929
+msgid "Write down this URL."
+msgstr "Anota ista URL"
+
+#: ../panels/color/cc-color-panel.c:930
+msgid "Restart this computer and boot your normal operating system."
+msgstr "Reinicia l'equipo y ranqa o tuyo sistema operativo normal."
+
+#: ../panels/color/cc-color-panel.c:931
+msgid "Type the URL into your browser to download and install the profile."
+msgstr "Escribe a URL en o tuyo navegador pa descargar y instalar o perfil."
+
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:853
+#: ../panels/color/cc-color-panel.c:965
 msgid "Save Profile"
 msgstr "Alzar o perfil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1214
+#: ../panels/color/cc-color-panel.c:1326
 msgid "Create a color profile for the selected device"
 msgstr "Creyar un perfil de color ta lo dispositivo seleccionau"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1229 ../panels/color/cc-color-panel.c:1253
+#: ../panels/color/cc-color-panel.c:1341 ../panels/color/cc-color-panel.c:1365
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -419,12 +456,12 @@ msgstr ""
 "connectau correctament."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1263
+#: ../panels/color/cc-color-panel.c:1375
 msgid "The measuring instrument does not support printer profiling."
 msgstr "L'instrumento de medida no suporta perfilau d'impresoras."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1274
+#: ../panels/color/cc-color-panel.c:1386
 msgid "The device type is not currently supported."
 msgstr "A mena de dispositivo no ye suportada actualment."
 
@@ -513,7 +550,7 @@ msgstr "Calibración de pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
+#: ../panels/user-accounts/um-account-dialog.c:1407
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -532,8 +569,11 @@ msgstr "Reprener"
 msgid "Done"
 msgstr "Feito"
 
+#. Timeout parameters
+#. 5000 = 5 sec
+#. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
 msgid "Screen Calibration"
 msgstr "Calibración d'a pantalla"
 
@@ -635,10 +675,22 @@ msgid "Profile successfully created!"
 msgstr "O perfil ha estau creyau satisfactoriament!"
 
 #: ../panels/color/color.ui.h:22
-msgid "Export"
-msgstr "Exportar"
+msgid "Copy profile"
+msgstr "Copiar o perfil"
 
 #: ../panels/color/color.ui.h:23
+msgid "Requires writable media"
+msgstr "Requier un meyo escribible"
+
+#: ../panels/color/color.ui.h:24
+msgid "Upload profile"
+msgstr "Puyar o perfil"
+
+#: ../panels/color/color.ui.h:25
+msgid "Requires Internet connection"
+msgstr "Requerir una connexión a internet"
+
+#: ../panels/color/color.ui.h:26
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -648,16 +700,16 @@ msgstr ""
 "\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> y <a href=\"windows"
 "\">Microsoft Windows</a>."
 
-#: ../panels/color/color.ui.h:24
+#: ../panels/color/color.ui.h:27
 #: ../panels/user-accounts/um-fingerprint-dialog.c:743
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../panels/color/color.ui.h:25
+#: ../panels/color/color.ui.h:28
 msgid "Import File…"
 msgstr "Importar un fichero…"
 
-#: ../panels/color/color.ui.h:26
+#: ../panels/color/color.ui.h:29
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -665,146 +717,166 @@ msgstr ""
 "S'han trobau problemas. O perfil puet no funcionar correctament. <a href="
 "\"\">Amostrar os detalles.</a>"
 
-#: ../panels/color/color.ui.h:27
+#: ../panels/color/color.ui.h:30
 msgid "Device type:"
 msgstr "Mena de dispositivo:"
 
-#: ../panels/color/color.ui.h:28
+#: ../panels/color/color.ui.h:31
 msgid "Manufacturer:"
 msgstr "Fabricant:"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:32
 msgid "Model:"
 msgstr "Modelo:"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:33
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
 "Se pueden arrocegar fichers d'imachen en ista finestra ta autocompletar os "
 "campos superiors."
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:34
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 msgid "Color"
 msgstr "Color"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:35
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Cada dispositivo ameneste un perfil de color actualizau ta poder chestionar "
 "a color."
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:36
 msgid "Learn more"
 msgstr "Aprender mas"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:37
 msgid "Learn more about color management"
 msgstr "Aprende mas sobre a chestión d'a color"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:38
 msgid "Set for all users"
 msgstr "Establir ta totz os usuarios"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:39
 msgid "Set this profile for all users on this computer"
 msgstr "Establir iste perfil ta totz os usuarios d'iste equipo"
 
-#: ../panels/color/color.ui.h:37
+#: ../panels/color/color.ui.h:40
 msgid "Enable"
 msgstr "Activar"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:41
 msgid "Add profile"
 msgstr "Adhibir un perfil"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:42
 #: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Calibrate…"
 msgstr "Calibrar…"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:43
 msgid "Calibrate the device"
 msgstr "Calibrar o dispositivo"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:44
 msgid "Remove profile"
 msgstr "Sacar o perfil"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:45
 msgid "View details"
 msgstr "Veyer os detalles"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:46
 msgid "Unable to detect any devices that can be color managed"
 msgstr "No s'han detectau dispositivos que se puedan chestionar por color"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:47
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:48
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:49
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:50
 msgid "Projector"
 msgstr "Prochector"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:51
 msgid "Plasma"
 msgstr "Plasma"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:52
+msgid "LCD (CCFL backlight)"
+msgstr "LCD (CCFL retroiluminau)"
+
+#: ../panels/color/color.ui.h:53
+msgid "LCD (RGB LED backlight)"
+msgstr "LCD (RGB LED retroiluminau)"
+
+#: ../panels/color/color.ui.h:54
+msgid "LCD (white LED backlight)"
+msgstr "LCD (LED blanco retroiluminau)"
+
+#: ../panels/color/color.ui.h:55
+msgid "Wide gamut LCD (CCFL backlight)"
+msgstr "Gama LCD amplo (CCFL retroiluminau)"
+
+#: ../panels/color/color.ui.h:56
+msgid "Wide gamut LCD (RGB LED backlight)"
+msgstr "Gama LCD amplo (RGB LED retroiluminau)"
+
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Alta"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:58
 msgid "40 minutes"
 msgstr "40 menutos"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Meya"
 
-#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 menutos"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:61
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baixa"
 
-#: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:62 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 menutos"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:63
 msgid "Native to display"
 msgstr "Nativo d'a pantalla"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:64
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Impresions y publicacions)"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:65
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:66
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografía y graficos)"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:67
 msgid "D75"
 msgstr "D75"
 
@@ -821,131 +893,39 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Perfil;Calibrau;Impresora;Pantalla;"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:677
+#: ../panels/common/cc-common-language.c:682
 msgid "United States"
 msgstr "Estaus Unius"
 
-#: ../panels/common/cc-common-language.c:678
+#: ../panels/common/cc-common-language.c:683
 msgid "Germany"
 msgstr "Alemanya"
 
-#: ../panels/common/cc-common-language.c:679
+#: ../panels/common/cc-common-language.c:684
 msgid "France"
 msgstr "Francia"
 
-#: ../panels/common/cc-common-language.c:680
+#: ../panels/common/cc-common-language.c:685
 msgid "Spain"
 msgstr "Espanya"
 
-#: ../panels/common/cc-common-language.c:681
+#: ../panels/common/cc-common-language.c:686
 msgid "China"
 msgstr "China"
 
-#: ../panels/common/cc-common-language.c:747
+#: ../panels/common/cc-common-language.c:752
 msgid "Other…"
 msgstr "Unatro…"
 
-#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:172
+#: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Mas…"
 
-#: ../panels/common/cc-language-chooser.c:193
+#: ../panels/common/cc-language-chooser.c:138
 msgid "No languages found"
 msgstr "No s'han trobau idiomas"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:30
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Desactivau"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "Mayus cucha"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "Alt cucha"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "Control cucha"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "Mayus dreita"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "Alt dreita"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "Control dreita"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "Alt cucha+Mayús"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "Alt dreita+Mayús"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "Control cucha + Mayus"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "Control dreita + Mayus"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "Cucha + Mayus dreita"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "Cucha + Alt dreita"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "Cucha + Control dreita"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt + Mayus"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Control + Mayus"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt + Control"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Bloqueyo de mayusculas"
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Mayus + Bloqueyo de mayusculas"
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt + Bloqueyo de mayusculas"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Control + Bloqueyo de mayusculas"
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1198,55 +1178,55 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Prochector;xranrd;Pantalla;Resolución;refrescar;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Desconoixiu"
 
-#: ../panels/info/cc-info-panel.c:541
+#: ../panels/info/cc-info-panel.c:532
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d bits"
 
-#: ../panels/info/cc-info-panel.c:543
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%d-bit"
 msgstr "%d bits"
 
-#: ../panels/info/cc-info-panel.c:1218
+#: ../panels/info/cc-info-panel.c:1209
 msgid "Ask what to do"
 msgstr "Preguntar qué fer"
 
-#: ../panels/info/cc-info-panel.c:1222
+#: ../panels/info/cc-info-panel.c:1213
 msgid "Do nothing"
 msgstr "No fer cosa"
 
-#: ../panels/info/cc-info-panel.c:1226
+#: ../panels/info/cc-info-panel.c:1217
 msgid "Open folder"
 msgstr "Ubrir una carpeta"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Other Media"
 msgstr "Atros suportes"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1339
 msgid "Select an application for audio CDs"
 msgstr "Seleccionar una aplicación ta CD de son"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1340
 msgid "Select an application for video DVDs"
 msgstr "Seleccionar una aplicación ta DVD de video"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1341
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccionar una aplicación que executar quan se connecta un reproductor de "
 "mosica"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1342
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccionar una aplicación que executar quan se connecta una camera"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1343
 msgid "Select an application for software CDs"
 msgstr "Seleccionar una aplicación ta CD de software"
 
@@ -1255,95 +1235,95 @@ msgstr "Seleccionar una aplicación ta CD de software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1355
 msgid "audio DVD"
 msgstr "DVD de son"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1356
 msgid "blank Blu-ray disc"
 msgstr "disco Blu-ray virchen"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1357
 msgid "blank CD disc"
 msgstr "CD virchen"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1358
 msgid "blank DVD disc"
 msgstr "DVD virchen"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1359
 msgid "blank HD DVD disc"
 msgstr "disco HD DVD virchen"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1360
 msgid "Blu-ray video disc"
 msgstr "Disco Blu-ray de video"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1361
 msgid "e-book reader"
 msgstr "lector de libros electronicos"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1362
 msgid "HD DVD video disc"
 msgstr "Disco HD DVD de video"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1363
 msgid "Picture CD"
 msgstr "CD d'imachens"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1364
 msgid "Super Video CD"
 msgstr "CD de super video"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1365
 msgid "Video CD"
 msgstr "CD de video"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1366
 msgid "Windows software"
 msgstr "Software de Windows"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1367
 msgid "Software"
 msgstr "Software"
 
-#: ../panels/info/cc-info-panel.c:1499
-#: ../panels/keyboard/keyboard-shortcuts.c:1697
+#: ../panels/info/cc-info-panel.c:1490
+#: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1499 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Anvista cheneral"
 
-#: ../panels/info/cc-info-panel.c:1514 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1505 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Aplicacions predeterminadas"
 
-#: ../panels/info/cc-info-panel.c:1519 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Suportes extraíbles"
 
-#: ../panels/info/cc-info-panel.c:1544
+#: ../panels/info/cc-info-panel.c:1535
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
 
-#: ../panels/info/cc-info-panel.c:1594
+#: ../panels/info/cc-info-panel.c:1585
 msgid "Install Updates"
 msgstr "Instalar actualizacions"
 
-#: ../panels/info/cc-info-panel.c:1598
+#: ../panels/info/cc-info-panel.c:1589
 msgid "System Up-To-Date"
 msgstr "Sistema a lo diya"
 
-#: ../panels/info/cc-info-panel.c:1602
+#: ../panels/info/cc-info-panel.c:1593
 msgid "Checking for Updates"
 msgstr "Comprebando actualizacions"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:44
 msgid "Details"
 msgstr "Detalles"
 
@@ -1625,15 +1605,35 @@ msgstr "Achiquir a mida d'o texto"
 msgid "High contrast on or off"
 msgstr "Alto contraste activau u desactivau"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Desactivau"
+
+#. Translators: This key is also known as 'third level
+#. * chooser'. AltGr is often used for this purpose. See
+#. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "Tecla de caracters alternativos"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#. Translators: The Compose key is used to initiate key
+#. * sequences that are combined to form a single character.
+#. * See http://en.wikipedia.org/wiki/Compose_key
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
 msgstr "Solament os modificadors cambean a la fuent siguient"
 
@@ -1756,7 +1756,7 @@ msgstr "Alcorces presonalizaus"
 msgid "<Unknown Action>"
 msgstr "<Acción desconoixida>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1301
+#: ../panels/keyboard/keyboard-shortcuts.c:1300
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1768,7 +1768,7 @@ msgstr ""
 "Por favor, intenta-lo con una tecla como Control, Alt u Mayús. a lo mesmo "
 "tiempo."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1333
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1777,17 +1777,17 @@ msgstr ""
 "L'alcorce «%s» ya se ye usando ta\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1338
+#: ../panels/keyboard/keyboard-shortcuts.c:1337
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Si reasignas l'alcorce a «%s» se desactivará l'alcorce «%s»."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1344
+#: ../panels/keyboard/keyboard-shortcuts.c:1343
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/mouse/cc-mouse-panel.c:123
+#: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
 msgstr "_Prebar a tuya configuración"
 
@@ -1816,7 +1816,7 @@ msgid "General"
 msgstr "Cheneral"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgctxt "mouse, speed"
+msgctxt "double click, speed"
 msgid "Slow"
 msgstr "Lenta"
 
@@ -1825,7 +1825,7 @@ msgid "Double-click timeout"
 msgstr "Tiempo d'aspera d'o dople clic"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgctxt "mouse, speed"
+msgctxt "double click, speed"
 msgid "Fast"
 msgstr "Rapida"
 
@@ -1856,75 +1856,100 @@ msgid "_Pointer speed"
 msgstr "_Velocidat d'o puntero"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
+msgctxt "mouse pointer, speed"
+msgid "Slow"
+msgstr "Lenta"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgctxt "mouse pointer, speed"
+msgid "Fast"
+msgstr "Rapida"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+msgctxt "touchpad pointer, speed"
+msgid "Slow"
+msgstr "Lenta"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+msgctxt "touchpad pointer, speed"
+msgid "Fast"
+msgstr "Rapida"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Disable while _typing"
 msgstr "Desac_tivar en escribir"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
 msgstr "Tocar ta pretar"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Two _finger scroll"
 msgstr "Despla_zamiento con dos didos"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "C_ontent sticks to fingers"
 msgstr "O c_onteniu s'adhiere a los didos"
 
-#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Preba a pretar una vegada, dos vegadas, desplazar-te"
 
-#: ../panels/mouse/gnome-mouse-test.c:139
+#: ../panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "Cinco clics, ye tiempo de GEGL."
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "Dople clic, botón primario"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "Un clic, botón primario"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "Dople clic, botón meyo"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "Un clic, botón meyo"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "Dople clic, botón secundario"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "Un clic, botón secundario"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:364
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:927
 msgid "Network proxy"
 msgstr "Proxy d'o ret"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#. Translators: this is the title of the connection details
+#. * window for vpn connections, it is also used to display
+#. * vpn connections in the device list.
+#.
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1241
 msgid "The system network services are not compatible with this version."
 msgstr "Os servicios de ret d'o sistema no son compatibles con ista versión."
 
@@ -1952,7 +1977,7 @@ msgstr "Autenticación i_nterna"
 msgid "Security"
 msgstr "Seguranza"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "automatico"
 
@@ -1996,12 +2021,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:787
 msgid "Today"
 msgstr "Hue"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Yesterday"
 msgstr "Ahiere"
 
@@ -2052,10 +2077,10 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelent"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:255
+#: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "Identidat"
 
@@ -2105,13 +2130,13 @@ msgid "Delete Route"
 msgstr "Eliminar a rota"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:616
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "Automatico (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:620
 #: ../panels/network/connection-editor/ce-page-ip6.c:622
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "Manual"
 
@@ -2121,7 +2146,7 @@ msgid "Link-Local Only"
 msgstr "Nomás vinclo local"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:925
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2143,12 +2168,12 @@ msgid "Automatic, DHCP only"
 msgstr "Automatico, nomás DHCP"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:886
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:63
+#: ../panels/network/network-wifi.ui.h:49
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -2198,7 +2223,7 @@ msgstr "Velocidat de connexión"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
-#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "Adreza IPv4"
@@ -2207,14 +2232,14 @@ msgstr "Adreza IPv4"
 #: ../panels/network/net-device-ethernet.c:160
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "Adreza IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
-#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "Adreza fisica"
@@ -2222,7 +2247,7 @@ msgstr "Adreza fisica"
 #: ../panels/network/connection-editor/details-page.ui.h:7
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
 msgid "Default Route"
 msgstr "Rota predeterminada"
@@ -2232,7 +2257,7 @@ msgstr "Rota predeterminada"
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
 msgid "DNS"
 msgstr "DNS"
@@ -2280,7 +2305,7 @@ msgstr "_Nombre"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:36
 msgid "_MAC Address"
 msgstr "Adreza _MAC"
 
@@ -2294,26 +2319,43 @@ msgid "_Cloned Address"
 msgstr "Adreza _clonada"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "Connectar-ne _automaticament"
+msgid "bytes"
+msgstr "bytes"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "Fer-ne disponible ta _atros usuarios"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "bytes"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "Connectar-ne _automaticament"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "Zona d'o tallafuegos"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "Predeterminada"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr "A zona define o libel de confianza d'a connexión"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:22
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:23
 msgid "_Addresses"
 msgstr "_Adrezas"
 
@@ -2324,7 +2366,7 @@ msgstr "DNS automatico"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Routes"
 msgstr "Rotas"
 
@@ -2335,66 +2377,66 @@ msgstr "Rotas automaticas"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Use this connection _only for resources on its network"
 msgstr "Usar ista c_onnexion nomás ta os recursos en o tuyo ret"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:34
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:267
+#: ../panels/network/connection-editor/net-connection-editor.c:268
 msgid "Unable to open connection editor"
 msgstr "No s'ha puesto ubrir l'editor de connexions"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:282
+#: ../panels/network/connection-editor/net-connection-editor.c:286
 msgid "New Profile"
 msgstr "Nuevo perfil"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:504
+#: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1068
+#: ../panels/user-accounts/um-account-dialog.c:1408
 msgid "_Add"
 msgstr "Adhibir"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
+#: ../panels/network/connection-editor/net-connection-editor.c:593
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:594
 msgid "Bond"
 msgstr "Bond"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 msgid "Bridge"
 msgstr "Puente"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:739
+#: ../panels/network/connection-editor/net-connection-editor.c:746
 msgid "Could not load VPN plugins"
 msgstr "No s'han puesto cargar os complementos de VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:810
 msgid "Import from file…"
 msgstr "Importar dende un fichero…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:870
+#: ../panels/network/connection-editor/net-connection-editor.c:877
 msgid "Add Network Connection"
 msgstr "Adhibir una connexión de ret"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Reset"
 msgstr "_Reiniciar"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1411
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Ixuplidar"
 
@@ -2473,7 +2515,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "Exportar a connexión VPN…"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Error: no s'ha puesto cargar l'editor de connexions VPN)"
 
@@ -2492,7 +2534,7 @@ msgstr "_BSSID"
 msgid "My Home Network"
 msgstr "O mío ret privau"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "Fer-ne disponible ta _atros usuarios"
 
@@ -2507,10 +2549,12 @@ msgstr "Controlar cómo se connecta ta Internet"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+msgid ""
+"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
+"vlan;bridge;bond;"
 msgstr ""
-"Ret;Inalambrica;Wireless;Wi-Fi;Wifi;IP;Ret;Proxy;WAN;LAN;Banda ampla;Modem;"
-"Bluetooth;"
+"Ret;Inalambrica;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;LAN;Banda ampla;Modem;Bluetooth;"
+"VPN;WLAN;Puente;Enlaz;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -2547,19 +2591,32 @@ msgstr "Adreza IP"
 msgid "Last used"
 msgstr "Usada por zaguera vegada"
 
-#: ../panels/network/net-device-ethernet.c:337
+#. Translators: This is used as the title of the connection
+#. * details window for ethernet, if there is only a single
+#. * profile. It is also used to display ethernet in the
+#. * device list.
+#.
+#: ../panels/network/net-device-ethernet.c:288
+#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "Cableyau"
+
+#: ../panels/network/net-device-ethernet.c:356
 #: ../panels/network/net-device-wifi.c:1549
-#: ../panels/network/network-ethernet.ui.h:2
+#: ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "Opcions…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:491
 #, c-format
 msgid "Profile %d"
 msgstr "Perfil %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "Adhibir una nueva connexión"
 
@@ -2609,13 +2666,13 @@ msgstr ""
 "Se perderán os detalles d'os retz seleccionaus, incluindo a clau y "
 "qualsiquier configuración presonalizada."
 
-#: ../panels/network/net-device-wifi.c:1714
+#: ../panels/network/net-device-wifi.c:1712
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Historia"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1726
+#: ../panels/network/net-device-wifi.c:1724
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Ixuplidar"
@@ -2640,7 +2697,7 @@ msgstr "No se recomienda ta retz publicos en as qualas no se confida."
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
 msgstr "_Adhibir un perfil…"
 
@@ -2651,11 +2708,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "Furnidor"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:7
-msgid "_Options…"
-msgstr "_Opcions…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2716,7 +2768,7 @@ msgstr "Puerto ta proxy FTP"
 msgid "Socks proxy port"
 msgstr "Puerto ta proxy Socks"
 
-#: ../panels/network/network-simple.ui.h:6
+#: ../panels/network/network-simple.ui.h:7
 msgid "Turn device off"
 msgstr "Amortar o dispositivo"
 
@@ -2770,7 +2822,7 @@ msgstr "Detalles"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Clau"
@@ -2781,94 +2833,50 @@ msgid "None"
 msgstr "Denguna"
 
 #: ../panels/network/network-wifi.ui.h:19
-msgid "blablabla"
-msgstr "blablablá"
-
-#: ../panels/network/network-wifi.ui.h:20
 msgid "Show P_assword"
 msgstr "Amostrar a _clau"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Make available to other users"
 msgstr "Fer-ne disponible ta la resta d'usuarios"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
 msgstr "Identidat"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
 msgstr "Nomás adrezas automaticas (DHCP)"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Link-local only"
 msgstr "Nomás o vinclo local"
 
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Shared with other computers"
 msgstr "Compartiu con atros ordinadors"
 
 #: ../panels/network/network-wifi.ui.h:31
-msgid ""
-"Address\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Aquí\n"
-"va la\n"
-"sección\n"
-"Adreza"
-
-#: ../panels/network/network-wifi.ui.h:35
-msgid ""
-"DNS\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Aquí\n"
-"va la\n"
-"sección\n"
-"DNS"
-
-#: ../panels/network/network-wifi.ui.h:40
-msgid ""
-"Routes\n"
-"section\n"
-"goes\n"
-"here"
-msgstr ""
-"Aquí\n"
-"va la\n"
-"sección\n"
-"Rotas"
-
-#: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
 msgstr "_Ignorar as rotas obtenidas automaticament"
 
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:33
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:37
 msgid "_Cloned MAC Address"
 msgstr "Adreza MAC _clonada"
 
-#: ../panels/network/network-wifi.ui.h:51
-msgid "00:24:16:31:8G:7A"
-msgstr "00:24:16:31:8G:7A"
-
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:38
 msgid "hardware"
 msgstr "hardware"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:41
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2876,7 +2884,7 @@ msgstr ""
 "Restablir a configuración d'ista connexión a las suyas valors "
 "predeterminadas, pero recordar-la como una connexión favorita."
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:42
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2884,59 +2892,59 @@ msgstr ""
 "Sacar totz os detalles relativos a iste ret y no tornar a intentar connectar-"
 "se automaticament a ella."
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
 msgstr "Reiniciar"
 
-#: ../panels/network/network-wifi.ui.h:62
+#: ../panels/network/network-wifi.ui.h:48
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../panels/network/network-wifi.ui.h:64
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Wi-Fi Hotspot"
 msgstr "Punto d'acceso inalambrico"
 
-#: ../panels/network/network-wifi.ui.h:65
+#: ../panels/network/network-wifi.ui.h:51
 msgid "_Turn On"
 msgstr "_Enchegar"
 
-#: ../panels/network/network-wifi.ui.h:66
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi"
 msgstr "Inalambrica"
 
-#: ../panels/network/network-wifi.ui.h:67
+#: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
 msgstr "Amortar o Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:68
+#: ../panels/network/network-wifi.ui.h:54
 msgid "_Use as Hotspot…"
 msgstr "_Usar-ne como un punto d'acceso…"
 
-#: ../panels/network/network-wifi.ui.h:69
+#: ../panels/network/network-wifi.ui.h:55
 msgid "_Connect to Hidden Network…"
 msgstr "Connectar-se a un ret amagau…"
 
-#: ../panels/network/network-wifi.ui.h:70
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
 msgstr "_Historico"
 
-#: ../panels/network/network-wifi.ui.h:71
+#: ../panels/network/network-wifi.ui.h:57
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Amortar ta connectar-se a un ret inalambrico"
 
-#: ../panels/network/network-wifi.ui.h:72
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Network Name"
 msgstr "Nombre d'o ret"
 
-#: ../panels/network/network-wifi.ui.h:73
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Connected Devices"
 msgstr "Dispositivos connectaus"
 
-#: ../panels/network/network-wifi.ui.h:74
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Security type"
 msgstr "Menade seguranza"
 
-#: ../panels/network/network-wifi.ui.h:75
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Security key"
 msgstr "Clau de seguranza"
 
@@ -3313,7 +3321,7 @@ msgstr "Totz dos"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Username"
 msgstr "Nombre d'_usuario"
 
@@ -3546,63 +3554,62 @@ msgstr "Amostrar os anuncios emerchents"
 msgid "Show in Lock Screen"
 msgstr "Amostrar-ne en a pantalla de bloqueyo"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:1073
-#: ../panels/search/cc-search-locations-dialog.c:480
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
+msgctxt "Online Account"
 msgid "Other"
 msgstr "Atra"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:292
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Adhibir una cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
 msgid "Mail"
 msgstr "Correu"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
 msgid "Contacts"
 msgstr "Contactos"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:343
 msgid "Resources"
 msgstr "Recursos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Error logging into the account"
 msgstr "S'ha produciu una error en encetar a sesión en a cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:430
+#: ../panels/online-accounts/cc-online-accounts-panel.c:497
 msgid "Credentials have expired."
 msgstr "As credencials han caducau"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:434
+#: ../panels/online-accounts/cc-online-accounts-panel.c:501
 msgid "Sign in to enable this account."
 msgstr "Encieta la sesión ta activar ista cuenta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:439
+#: ../panels/online-accounts/cc-online-accounts-panel.c:506
 msgid "_Sign In"
 msgstr "Encetar a _sesión"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:684
+#: ../panels/online-accounts/cc-online-accounts-panel.c:747
 msgid "Error creating account"
 msgstr "S'ha produciu una error en creyar a cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:726
+#: ../panels/online-accounts/cc-online-accounts-panel.c:787
 msgid "Error removing account"
 msgstr "S'ha produciu una error en sacar a cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:762
+#: ../panels/online-accounts/cc-online-accounts-panel.c:823
 msgid "Are you sure you want to remove the account?"
 msgstr "Yes seguro que quiers sacar a cuenta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:764
+#: ../panels/online-accounts/cc-online-accounts-panel.c:825
 msgid "This will not remove the account on the server."
 msgstr "Isto no sacará la cuenta en o servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:765
+#: ../panels/online-accounts/cc-online-accounts-panel.c:826
 msgid "_Remove"
 msgstr "_Sacar"
 
@@ -3616,9 +3623,11 @@ msgstr "Connectar-se a las tuyas cuentas en linia y decidir ta qué usar-las"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+msgid ""
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;En linia;Chat;Calandario;Correu;Contacto;"
+"ownCloud;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3825,24 +3834,32 @@ msgid "Power Saving"
 msgstr "Cabido d'enerchía"
 
 #: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+msgid "_Screen brightness"
 msgstr "_Brilo d'a pantalla"
 
 #: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+msgid "_Dim screen when inactive"
 msgstr "_Enfoscar a pantalla quan siga inactiva"
 
 #: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+msgid "_Blank screen"
 msgstr "_Amortar a pantalla"
 
 #: ../panels/power/cc-power-panel.c:1516
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
+#: ../panels/power/cc-power-panel.c:1521
+msgid "Turns off wireless devices"
+msgstr "Amorta os dispositivos inalambricos"
+
 #: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+msgid "_Mobile broadband"
 msgstr "Banda ampla _mobil"
+
+#: ../panels/power/cc-power-panel.c:1549
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
+msgstr "Amorta os dispositivos de banda amplamóvil (3G, 4G, WiMax, etc.)"
 
 #: ../panels/power/cc-power-panel.c:1582
 msgid "_Bluetooth"
@@ -3861,11 +3878,11 @@ msgid "Suspend & Power Off"
 msgstr "Suspender y amortar"
 
 #: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+msgid "_Automatic suspend"
 msgstr "Suspender _automaticament"
 
 #: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
+msgid "When battery power is _critical"
 msgstr "_Quan a carga ye criticament baixa"
 
 #: ../panels/power/cc-power-panel.c:1848
@@ -3982,7 +3999,8 @@ msgid "Authenticate"
 msgstr "Autenticar-se"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Clau"
 
@@ -4127,7 +4145,7 @@ msgid "No printers available"
 msgstr "No bi ha impresoras disponibles"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1432
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4135,15 +4153,15 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1773
+#: ../panels/printers/cc-printers-panel.c:1776
 msgid "Failed to add new printer."
 msgstr "S'ha produciu una error en adhibir una impresora nueva."
 
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1943
 msgid "Select PPD File"
 msgstr "Seleccionar un fichero PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1952
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4151,30 +4169,30 @@ msgstr ""
 "Fichers de descripción d'impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD."
 "gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2254
+#: ../panels/printers/cc-printers-panel.c:2257
 msgid "No suitable driver found"
 msgstr "No s'ha trobau dengún controlador adequau"
 
-#: ../panels/printers/cc-printers-panel.c:2323
+#: ../panels/printers/cc-printers-panel.c:2326
 msgid "Searching for preferred drivers…"
 msgstr "Buscando os controladors preferius…"
 
-#: ../panels/printers/cc-printers-panel.c:2338
+#: ../panels/printers/cc-printers-panel.c:2341
 msgid "Select from database…"
 msgstr "Seleccionar dende a base de datos…"
 
-#: ../panels/printers/cc-printers-panel.c:2347
+#: ../panels/printers/cc-printers-panel.c:2350
 msgid "Provide PPD File…"
 msgstr "Proporcionar un fichero PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2498
-#: ../panels/printers/cc-printers-panel.c:2521
+#: ../panels/printers/cc-printers-panel.c:2501
+#: ../panels/printers/cc-printers-panel.c:2524
 msgid "Test page"
 msgstr "Pachina de preba"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2929
+#: ../panels/printers/cc-printers-panel.c:2932
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha puesto cargar a IU: %s"
@@ -4222,7 +4240,7 @@ msgid "Add a New Printer"
 msgstr "Adhibir una impresora nueva"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -4343,7 +4361,7 @@ msgid "%s Active Jobs"
 msgstr "%s treballos activos"
 
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1468
 msgid "No printers detected."
 msgstr "No s'ha detectau garra impresora."
 
@@ -4372,64 +4390,64 @@ msgid "GhostScript pre-filtering"
 msgstr "Prefiltrau GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "Pachinas por cara"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "Dos caras"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "Orientación"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Cheneral"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuración de pachina"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opcions instalables"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Treballo"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Calidat d'a imachen"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Rematando"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Abanzau"
@@ -4699,7 +4717,7 @@ msgid "Automatic Screen _Lock"
 msgstr "_Bloqueyo de pantalla automatico"
 
 #: ../panels/privacy/privacy.ui.h:34
-msgid "Lock Screen _After Blank For"
+msgid "Lock screen _after blank for"
 msgstr "B_loqueyar a pantalla dimpués de"
 
 #: ../panels/privacy/privacy.ui.h:35
@@ -4723,11 +4741,11 @@ msgstr ""
 "mantener o tuyo equipo libre d'información sensible."
 
 #: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+msgid "Automatically empty _Trash"
 msgstr "Vuedar automa_ticament a papelera"
 
 #: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
+msgid "Automatically purge Temporary _Files"
 msgstr "Li_mpiar os fichers temporals automaticament"
 
 #: ../panels/privacy/privacy.ui.h:42
@@ -4748,37 +4766,42 @@ msgstr "Metrico"
 msgid "No regions found"
 msgstr "No s'han trobau rechions"
 
-#: ../panels/region/cc-input-chooser.c:186
+#: ../panels/region/cc-input-chooser.c:185
 msgid "No input sources found"
 msgstr "No s'han trobau fuents de dentrada"
 
-#: ../panels/region/cc-region-panel.c:239
+#: ../panels/region/cc-input-chooser.c:1088
+msgctxt "Input Source"
+msgid "Other"
+msgstr "Atra"
+
+#: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Cal reiniciar a sesión ta que s'apliquen os cambeos"
 
-#: ../panels/region/cc-region-panel.c:240
+#: ../panels/region/cc-region-panel.c:241
 msgid "Restart Now"
 msgstr "Reiniciar-ne agora"
 
-#: ../panels/region/cc-region-panel.c:550
+#: ../panels/region/cc-region-panel.c:566
 msgctxt "Language"
 msgid "None"
 msgstr "Dengún"
 
-#: ../panels/region/cc-region-panel.c:1040
+#: ../panels/region/cc-region-panel.c:1058
 msgid "Sorry"
 msgstr "Desincusa"
 
-#: ../panels/region/cc-region-panel.c:1042
+#: ../panels/region/cc-region-panel.c:1060
 msgid "Input methods can't be used on the login screen"
 msgstr ""
 "Os metodos de dentrada no se pueden usar en a pantalla d'inicio de sesión"
 
-#: ../panels/region/cc-region-panel.c:1491
+#: ../panels/region/cc-region-panel.c:1509
 msgid "No input source selected"
 msgstr "No s'ha seleccionau garra fuent de dentrada"
 
-#: ../panels/region/cc-region-panel.c:1652
+#: ../panels/region/cc-region-panel.c:1690
 msgid "Login Screen"
 msgstr "Pantalla d'inicio de sesión"
 
@@ -4870,6 +4893,10 @@ msgstr "Puetz cambiar istos alcorces en a configuración d'o teclau"
 msgid "Alternative switch to next source"
 msgstr "Cambeo alternativo a la fuent siguient"
 
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Cucha + Alt dreita"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Anglés (Reino Uniu)"
@@ -4893,18 +4920,25 @@ msgid "Home"
 msgstr "Domicilio"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
+msgctxt "Search Location"
 msgid "Places"
-msgstr "uestos"
+msgstr "Puestos"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
+msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Marcapachinas"
+
+#: ../panels/search/cc-search-locations-dialog.c:480
+msgctxt "Search Location"
+msgid "Other"
+msgstr "Atra"
 
 #: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
 msgstr "Seleccionar una ubicación"
 
-#: ../panels/search/cc-search-panel.c:193
+#: ../panels/search/cc-search-panel.c:182
 msgid "No applications found"
 msgstr "No s'han trobau aplicacions"
 
@@ -4940,21 +4974,21 @@ msgstr "Baixar"
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:268
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Encendiu"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:270
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Amortau"
 
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:416
 msgid "Choose a Folder"
 msgstr "Triga una carpeta"
 
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:594
 msgid "Copy"
 msgstr "Copiar"
 
@@ -5017,42 +5051,46 @@ msgid "Computer Name"
 msgstr "Nombre de l'ordinador"
 
 #: ../panels/sharing/sharing.ui.h:8
+msgid "Remote Login"
+msgstr "Encieto de sesión remoto"
+
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Some services are disabled because of no network access."
 msgstr "S'han desactivau qualques servicios porque no bi ha acceso a lo ret."
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "Compartición multimeya"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "Compartir mosica, fotos y videos con atros en o ret actual."
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "Compartir multimeya en iste ret"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "Carpetas compartidas"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "columna"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "Adhibir una carpeta"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "Sacar a carpeta"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Personal File Sharing"
 msgstr "Compartición de fichers presonals"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:19
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5062,17 +5100,13 @@ msgstr ""
 "Publica con atros en o tuyo ret actual usando: <a href=\"dav://%s\">dav://"
 "%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Share Public Folder On This Network"
 msgstr "Compartir a carpeta publica en iste ret"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require Password"
 msgstr "Solicitar a clau"
-
-#: ../panels/sharing/sharing.ui.h:22
-msgid "Remote Login"
-msgstr "Encieto de sesión remoto"
 
 #: ../panels/sharing/sharing.ui.h:24
 #, no-c-format
@@ -5203,8 +5237,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sin amplificar"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "_Perfil:"
 
@@ -5230,73 +5264,73 @@ msgstr[1] "%u dentradas"
 msgid "System Sounds"
 msgstr "Sons d'o sistema"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "_Prebar os altavoces"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "Detección de picos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Nombre"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Preba d'altavoces ta %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "Volumen de sali_da:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "Salida"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "_Trigar un dispositivo ta la salida de son:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "Configuración ta lo dispositivo seleccionau:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "Dentrada"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "Volumen de dentrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "Libel de dentrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "_Trigar un dispositivo ta la dentrada de son:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "Efectos de son"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "Volumen de _alerta:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "Aplicacions"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "Actualment garra aplicación ye reproducindo u gravando son."
 
@@ -5848,48 +5882,58 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Add account"
-msgstr "Adhibir a cuenta"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "_Local Account"
-msgstr "Cuenta _local"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Enterprise Login"
-msgstr "Encieto de s_esión corporativo"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name"
+#, fuzzy
+#| msgid "_Full name"
+msgid "_Full Name"
 msgstr "Nombre _completo"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "_mena de cuenta"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#, fuzzy
+#| msgid "Choose password at next login"
+msgid "Allow user to set a password when they next login"
+msgstr "Trigar una clau en o siguient inicio de sesión"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "Set a password now"
+msgstr "Establir una clau agora"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#, fuzzy
+#| msgid "C_onfirm password"
+msgid "_Confirm Password"
+msgstr "C_onfirmar a clau"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "_Domain"
 msgstr "_Dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Login Name"
 msgstr "Nombre de _inicio de sesión"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "Tip: Enterprise domain or realm name"
-msgstr "Consello: dominio d'a interpresa u nombre real"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "C_ontinue"
-msgstr "C_ontinar"
+#, fuzzy
+#| msgid "_Password"
+msgid "Login _Password"
+msgstr "_Clau"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid "_Enroll"
+msgstr ""
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "Domain Administrator Login"
 msgstr "Encieto de sesión de l'administrador d'o dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5899,11 +5943,11 @@ msgstr ""
 "formar parti d'un dominio. Pide a l'administrador d'o tuyo\n"
 "sistema que escriba aquí a clau d'o dominio."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid "Administrator _Name"
 msgstr "_Nombre de l'administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator Password"
 msgstr "Clau d'administrador"
 
@@ -5992,10 +6036,6 @@ msgstr "Siguient semana"
 #: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "A semana que vien"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "Set a password now"
-msgstr "Establir una clau agora"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "Choose password at next login"
@@ -6125,40 +6165,133 @@ msgstr "Chestionar as cuentas d'usuario"
 msgid "Authentication is required to change user data"
 msgstr "Se requier autenticación ta cambiar os datos de l'usuario"
 
-#: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Masiau curta"
+#: ../panels/user-accounts/pw-utils.c:81
+#, fuzzy
+#| msgid "The new password does not contain enough different characters"
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr "A nueva clau no contién suficients caracters diferents"
+
+#: ../panels/user-accounts/pw-utils.c:83
+msgctxt "Password hint"
+msgid "Try changing some letters and numbers."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+#, fuzzy
+#| msgid "Changing password for"
+msgctxt "Password hint"
+msgid "Try changing the password a bit more."
+msgstr "Cambiando a clau ta"
+
+#: ../panels/user-accounts/pw-utils.c:87
+msgctxt "Password hint"
+msgid "A password without your user name would be stronger."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:89
+msgctxt "Password hint"
+msgid "Try to avoid using your name in the password."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:91
+msgctxt "Password hint"
+msgid "Try to avoid some of the words included in the password."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:95
+msgctxt "Password hint"
+msgid "Try to avoid common words."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:97
+msgctxt "Password hint"
+msgid "Try to avoid reordering existing words."
+msgstr ""
 
 #: ../panels/user-accounts/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "No ye suficientment buena"
+msgctxt "Password hint"
+msgid "Try to use more numbers."
+msgstr ""
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Feble"
+#: ../panels/user-accounts/pw-utils.c:101
+msgctxt "Password hint"
+msgid "Try to use more uppercase letters."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:103
+msgctxt "Password hint"
+msgid "Try to use more lowercase letters."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:105
+msgctxt "Password hint"
+msgid "Try to use more special characters, like punctuation."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:107
+msgctxt "Password hint"
+msgid "Try to use a mixture of letters, numbers and punctuation."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:109
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same character."
+msgstr ""
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Regular"
+msgctxt "Password hint"
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
 
-#: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Buena"
+#: ../panels/user-accounts/pw-utils.c:113
+msgctxt "Password hint"
+msgid "Try to avoid sequences like 1234 or abcd."
+msgstr ""
 
-#: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/pw-utils.c:115
+msgctxt "Password hint"
+msgid "Try to add more characters."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:118
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and use a number or two."
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:140
+#: ../panels/user-accounts/pw-utils.c:170
 msgctxt "Password strength"
-msgid "Strong"
-msgstr "Fura"
+msgid "Strength: Weak"
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:144
+#: ../panels/user-accounts/pw-utils.c:171
+#, fuzzy
+#| msgid "Length:"
+msgctxt "Password strength"
+msgid "Strength: Low"
+msgstr "Longaria:"
+
+#: ../panels/user-accounts/pw-utils.c:147
+#: ../panels/user-accounts/pw-utils.c:172
+msgctxt "Password strength"
+msgid "Strength: Medium"
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:150
+#: ../panels/user-accounts/pw-utils.c:173
+msgctxt "Password strength"
+msgid "Strength: Good"
+msgstr ""
+
+#: ../panels/user-accounts/pw-utils.c:153
+#: ../panels/user-accounts/pw-utils.c:174
+msgctxt "Password strength"
+msgid "Strength: High"
+msgstr ""
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -6209,26 +6342,72 @@ msgstr "A nueva clau no contién suficients caracters diferents"
 msgid "Unknown error"
 msgstr "Error desconoixida"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:212
 msgid "Failed to add account"
 msgstr "S'ha produciu una error en adhibir a cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:403
-#: ../panels/user-accounts/um-account-dialog.c:444
+#: ../panels/user-accounts/um-account-dialog.c:317
+msgid "This will be used to name your home folder and can't be changed."
+msgstr ""
+
+#: ../panels/user-accounts/um-account-dialog.c:407
+#, fuzzy
+#| msgid "Passwords do not match"
+msgid "Passwords do not match."
+msgstr "As claus no coinciden"
+
+#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "Passwords do not match"
+msgstr "As claus no coinciden"
+
+#: ../panels/user-accounts/um-account-dialog.c:661
+#: ../panels/user-accounts/um-account-dialog.c:707
 msgid "Failed to register account"
 msgstr "S'ha produciu una error en rechistrar a cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:577
+#: ../panels/user-accounts/um-account-dialog.c:845
 msgid "No supported way to authenticate with this domain"
 msgstr "No bi ha una traza suportada d'autenticar-se con iste dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:631
+#: ../panels/user-accounts/um-account-dialog.c:904
 msgid "Failed to join domain"
 msgstr "S'ha produciu una error en unir-se a lo dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:688
+#: ../panels/user-accounts/um-account-dialog.c:965
+msgid ""
+"Login not recognized.\n"
+"Please try again."
+msgstr ""
+
+#: ../panels/user-accounts/um-account-dialog.c:973
+#, fuzzy
+#| msgid "Invalid password, please try again"
+msgid ""
+"Invalid password.\n"
+"Please try again."
+msgstr "A clau no ye valida, intenta-lo de nuevo"
+
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to log into domain"
 msgstr "S'ha produciu una error en encetar a sesión en o dominio"
+
+#: ../panels/user-accounts/um-account-dialog.c:1040
+#, fuzzy
+#| msgid "Modem not found"
+msgid "Domain not found."
+msgstr "No s'ha trobau lo modem"
+
+#: ../panels/user-accounts/um-account-dialog.c:1383
+#, fuzzy
+#| msgid "Add User Account"
+msgid "Add User"
+msgstr "Adhibir una cuenta d'usuario"
+
+#. Create enterprise toggle button.
+#: ../panels/user-accounts/um-account-dialog.c:1396
+msgid "_Enterprise Login"
+msgstr "Encieto de s_esión corporativo"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -6341,37 +6520,58 @@ msgstr "Escribe de nuevas a tuya clau actual."
 msgid "Password could not be changed"
 msgstr "No s'ha puesto cambiar a clau"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "You need to enter a new password"
 msgstr "Debes introducir una clau"
 
-#: ../panels/user-accounts/um-password-dialog.c:304
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "The new password is not strong enough"
 msgstr "A clau nueva no ye suficientment segura"
 
-#: ../panels/user-accounts/um-password-dialog.c:310
+#: ../panels/user-accounts/um-password-dialog.c:312
 msgid "You need to confirm the password"
 msgstr "Debes confirmar a clau"
 
-#: ../panels/user-accounts/um-password-dialog.c:313
+#: ../panels/user-accounts/um-password-dialog.c:315
 msgid "The passwords do not match"
 msgstr "As claus no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:319
+#: ../panels/user-accounts/um-password-dialog.c:321
 msgid "You need to enter your current password"
 msgstr "Debes introducir a tuya clau actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:322
+#: ../panels/user-accounts/um-password-dialog.c:324
 msgid "The current password is not correct"
 msgstr "A clau actual no ye correcta"
 
-#: ../panels/user-accounts/um-password-dialog.c:385
-msgid "Passwords do not match"
-msgstr "As claus no coinciden"
-
-#: ../panels/user-accounts/um-password-dialog.c:439
+#: ../panels/user-accounts/um-password-dialog.c:441
 msgid "Wrong password"
 msgstr "clau erronia"
+
+#: ../panels/user-accounts/um-password-dialog.c:599
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Masiau curta"
+
+#: ../panels/user-accounts/um-password-dialog.c:600
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Feble"
+
+#: ../panels/user-accounts/um-password-dialog.c:601
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Regular"
+
+#: ../panels/user-accounts/um-password-dialog.c:602
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Buena"
+
+#: ../panels/user-accounts/um-password-dialog.c:603
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Fura"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6399,7 +6599,8 @@ msgstr "No se puet unir automaticament ta ista mena de dominio"
 msgid "No such domain or realm found"
 msgstr "No existe o dominio u no s'ha trobau o reino"
 
-#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:814
+#: ../panels/user-accounts/um-realm-manager.c:828
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "No se puet encetar a sesión como %s en o dominio %s"
@@ -6408,25 +6609,29 @@ msgstr "No se puet encetar a sesión como %s en o dominio %s"
 msgid "Invalid password, please try again"
 msgstr "A clau no ye valida, intenta-lo de nuevo"
 
-#: ../panels/user-accounts/um-realm-manager.c:824
+#: ../panels/user-accounts/um-realm-manager.c:833
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "No s'ha puesto connectar a lo dominio %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "Atras cuentas"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "S'ha produciu una error en eliminar l'usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "No puetz eliminar a tuya propia cuenta."
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s agún no ye rechistrau en o sistema"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6434,12 +6639,12 @@ msgstr ""
 "Eliminar un usuario entre que ye rechistrau en o sistema puede deixar lo "
 "sistema en un estau inconsistent."
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Quiers mantener os fichers de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6447,42 +6652,42 @@ msgstr ""
 "Ye posible mantener a carpeta presonal, a ringlera d'o correu y os fichers "
 "temporals en eliminar una cuenta d'usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "_Eliminar os fichers"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "_Mantener os fichers"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Ta configurar-ne en o siguient inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "Dengún"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "Sesión encetada"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:987
 msgid "Failed to contact the accounts service"
 msgstr "S'ha produciu una error a lo contactar con o servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:989
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegura-te que o servicio de cuentas ye instalau y activau."
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:1030
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6490,12 +6695,12 @@ msgstr ""
 "Ta realizar os cambeos\n"
 "preta en primeras l'icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Create a user account"
 msgstr "Creyar una cuenta d'usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1079
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6503,12 +6708,12 @@ msgstr ""
 "Ta creyar un usuario\n"
 "preta en primeras l'icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "Delete the selected user account"
 msgstr "Eliminar a cuenta d'usuario seleccionadapreta en primeras l'icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6516,34 +6721,34 @@ msgstr ""
 "Ta eliminar a cuenta d'usuario seleccionada\n"
 "preta en primeras l'icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1284
 msgid "My Account"
 msgstr "A mía cuenta"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
-msgid "Other Accounts"
-msgstr "Atras cuentas"
-
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:535
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Ya existe un nombre d'usuario clamau «%s»"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:539
 #, c-format
 msgid "The username is too long"
 msgstr "O nombre d'usuario ye masiau largo"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:542
 msgid "The username cannot start with a '-'"
 msgstr "O nombre d'usuario no puet prencipiar por «-»"
 
-#: ../panels/user-accounts/um-utils.c:526
+#: ../panels/user-accounts/um-utils.c:545
+#, fuzzy
+#| msgid ""
+#| "The username must only consist of:\n"
+#| " ➣ letters from the English alphabet\n"
+#| " ➣ digits\n"
+#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
+"The username should only consist of lower and upper case letters from a-z, "
+"digits and any of characters '.', '-' and '_'"
 msgstr ""
 "O nombre d'usuario debe consistir de:\n"
 " ➣ letras de l'alfabeto anglés\n"
@@ -6558,7 +6763,7 @@ msgstr "Mapear os botons"
 msgid "Map buttons to functions"
 msgstr "Mapear botons a funcions"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:79
+#: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -6566,7 +6771,7 @@ msgstr ""
 "Preta as marcas d'obchectivo en que amaneixen en a pantalla ta calibrar a "
 "tableta."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:368
+#: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Clic erronio detectau, se ye reiniciando…"
 
@@ -6589,50 +6794,50 @@ msgstr "Mapear una sola pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:384
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Dengún"
 
-#: ../panels/wacom/cc-wacom-page.c:119
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Ninviar a pulsación de tecla"
 
-#: ../panels/wacom/cc-wacom-page.c:120
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Cambiar o monitor"
 
-#: ../panels/wacom/cc-wacom-page.c:121
+#: ../panels/wacom/cc-wacom-page.c:126
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Amostrar l'aduya en a pantalla"
 
-#: ../panels/wacom/cc-wacom-page.c:621
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Alto"
 
-#: ../panels/wacom/cc-wacom-page.c:621
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Abaixo"
 
-#: ../panels/wacom/cc-wacom-page.c:662
+#: ../panels/wacom/cc-wacom-page.c:715
 msgid "Switch Modes"
 msgstr "Cambiar os modos"
 
-#: ../panels/wacom/cc-wacom-page.c:752
+#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:810
+#: ../panels/wacom/cc-wacom-page.c:863
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/wacom/cc-wacom-page.c:920
+#: ../panels/wacom/cc-wacom-page.c:973
 msgid "Display Mapping"
 msgstr "Amostrar o mapeo"
 
@@ -6689,94 +6894,98 @@ msgid "Adjust display resolution"
 msgstr "Achustar a resolución d'a pantalla"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Adjust mouse settings"
+msgstr "Achustar as opcions d'o churi"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Tracking Mode"
 msgstr "Modo de seguimiento"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Left-Handed Orientation"
 msgstr "Orientación ta zurdos"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1076
+#: ../panels/wacom/gsd-wacom-device.c:1078
 msgid "Left Ring"
 msgstr "Aniello cucho"
 
-#: ../panels/wacom/gsd-wacom-device.c:1086
+#: ../panels/wacom/gsd-wacom-device.c:1089
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo de l'aniello cucho nº %d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1105
+#: ../panels/wacom/gsd-wacom-device.c:1109
 msgid "Right Ring"
 msgstr "Aniello dreito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1115
+#: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo de l'aniello dreito nº %d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1156
+#: ../panels/wacom/gsd-wacom-device.c:1162
 msgid "Left Touchstrip"
 msgstr "Banda tactil cucha"
 
-#: ../panels/wacom/gsd-wacom-device.c:1166
+#: ../panels/wacom/gsd-wacom-device.c:1173
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo d'a banda tactil cucha nº %d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1185
+#: ../panels/wacom/gsd-wacom-device.c:1193
 msgid "Right Touchstrip"
 msgstr "Banda tactil dreita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1195
+#: ../panels/wacom/gsd-wacom-device.c:1204
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo d'a banda tactil dreita nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1220
+#: ../panels/wacom/gsd-wacom-device.c:1230
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambeo de l'aniello tactil cucho"
 
-#: ../panels/wacom/gsd-wacom-device.c:1222
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambeo de l'aniello tactil dreito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1225
+#: ../panels/wacom/gsd-wacom-device.c:1235
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambeo d'a banda tactil cucha"
 
-#: ../panels/wacom/gsd-wacom-device.c:1227
+#: ../panels/wacom/gsd-wacom-device.c:1237
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambeo d'a banda tactil dreita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1242
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo de cambeo nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1336
+#: ../panels/wacom/gsd-wacom-device.c:1351
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón cucho nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1339
+#: ../panels/wacom/gsd-wacom-device.c:1354
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón dreito nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1342
+#: ../panels/wacom/gsd-wacom-device.c:1357
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1345
+#: ../panels/wacom/gsd-wacom-device.c:1360
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior nº %d"
@@ -6849,40 +7058,40 @@ msgstr "Botón inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidat de presión d'o lapiz"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
 msgstr "Activar o modo detallau"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:70
 msgid "Show the overview"
 msgstr "Amostrar a visión cheneral"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:71
 msgid "Search for the string"
 msgstr "Mirar a cadena"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:72
 msgid "List possible panel names and exit"
 msgstr "Listar totz os nombres de panels posibles y salir"
 
-#: ../shell/cc-application.c:71 ../shell/cc-application.c:72
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
+#: ../shell/cc-application.c:75
 msgid "Show help options"
 msgstr "Amostrar as opcions d'aduya"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "Panel ta amostrar"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTO…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:142
 msgid "- Settings"
 msgstr "- Configuración"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:160
 #, c-format
 msgid ""
 "%s\n"
@@ -6892,42 +7101,168 @@ msgstr ""
 "Executar «%s --help» ta veyer una lista completa d'as opcions de comando "
 "disponibles.\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:190
 msgid "Available panels:"
 msgstr "Panels disponibles:"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:325
 msgid "Help"
 msgstr "Aduya"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:326
 msgid "Quit"
 msgstr "Salir"
 
-#: ../shell/cc-window.c:62 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Configuración"
 
 #. Add categories
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
 msgstr "Presonal"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1411
+#: ../shell/cc-window.c:1424
 msgid "All Settings"
 msgstr "Todas as configuracions"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Add account"
+#~ msgstr "Adhibir a cuenta"
+
+#~ msgid "_Local Account"
+#~ msgstr "Cuenta _local"
+
+#~ msgid "Tip: Enterprise domain or realm name"
+#~ msgstr "Consello: dominio d'a interpresa u nombre real"
+
+#~ msgid "C_ontinue"
+#~ msgstr "C_ontinar"
+
+#~ msgctxt "Password strength"
+#~ msgid "Not good enough"
+#~ msgstr "No ye suficientment buena"
+
+#~ msgid "Export"
+#~ msgstr "Exportar"
+
+#~ msgid "Left Shift"
+#~ msgstr "Mayus cucha"
+
+#~ msgid "Left Alt"
+#~ msgstr "Alt cucha"
+
+#~ msgid "Left Ctrl"
+#~ msgstr "Control cucha"
+
+#~ msgid "Right Shift"
+#~ msgstr "Mayus dreita"
+
+#~ msgid "Right Alt"
+#~ msgstr "Alt dreita"
+
+#~ msgid "Right Ctrl"
+#~ msgstr "Control dreita"
+
+#~ msgid "Left Alt+Shift"
+#~ msgstr "Alt cucha+Mayús"
+
+#~ msgid "Right Alt+Shift"
+#~ msgstr "Alt dreita+Mayús"
+
+#~ msgid "Left Ctrl+Shift"
+#~ msgstr "Control cucha + Mayus"
+
+#~ msgid "Right Ctrl+Shift"
+#~ msgstr "Control dreita + Mayus"
+
+#~ msgid "Left+Right Shift"
+#~ msgstr "Cucha + Mayus dreita"
+
+#~ msgid "Left+Right Ctrl"
+#~ msgstr "Cucha + Control dreita"
+
+#~ msgid "Alt+Shift"
+#~ msgstr "Alt + Mayus"
+
+#~ msgid "Ctrl+Shift"
+#~ msgstr "Control + Mayus"
+
+#~ msgid "Alt+Ctrl"
+#~ msgstr "Alt + Control"
+
+#~ msgid "Caps"
+#~ msgstr "Bloqueyo de mayusculas"
+
+#~ msgid "Shift+Caps"
+#~ msgstr "Mayus + Bloqueyo de mayusculas"
+
+#~ msgid "Alt+Caps"
+#~ msgstr "Alt + Bloqueyo de mayusculas"
+
+#~ msgid "Ctrl+Caps"
+#~ msgstr "Control + Bloqueyo de mayusculas"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Slow"
+#~ msgstr "Lenta"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Fast"
+#~ msgstr "Rapida"
+
+#~ msgid "_Options…"
+#~ msgstr "_Opcions…"
+
+#~ msgid "blablabla"
+#~ msgstr "blablablá"
+
+#~ msgid ""
+#~ "Address\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Aquí\n"
+#~ "va la\n"
+#~ "sección\n"
+#~ "Adreza"
+
+#~ msgid ""
+#~ "DNS\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Aquí\n"
+#~ "va la\n"
+#~ "sección\n"
+#~ "DNS"
+
+#~ msgid ""
+#~ "Routes\n"
+#~ "section\n"
+#~ "goes\n"
+#~ "here"
+#~ msgstr ""
+#~ "Aquí\n"
+#~ "va la\n"
+#~ "sección\n"
+#~ "Rotas"
+
+#~ msgid "00:24:16:31:8G:7A"
+#~ msgstr "00:24:16:31:8G:7A"
