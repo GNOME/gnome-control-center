@@ -211,6 +211,9 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	CcWacomNavButtonPrivate *priv;
 	GtkStyleContext *context;
 	GtkWidget *image, *box;
+	gboolean rtl;
+
+	rtl = (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL);
 
 	priv = self->priv = WACOM_NAV_BUTTON_PRIVATE (self);
 
@@ -228,7 +231,8 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 
 	/* Prev button */
 	priv->prev = gtk_button_new ();
-	image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
+	image = gtk_image_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" : "go-previous-symbolic",
+					      GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (priv->prev), image);
 	g_signal_connect (G_OBJECT (priv->prev), "clicked",
 			  G_CALLBACK (prev_clicked), self);
@@ -236,7 +240,8 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 
 	/* Next button */
 	priv->next = gtk_button_new ();
-	image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
+	image = gtk_image_new_from_icon_name (rtl ? "go-next-rtl-symbolic" : "go-next-symbolic",
+					      GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (priv->next), image);
 	g_signal_connect (G_OBJECT (priv->next), "clicked",
 			  G_CALLBACK (next_clicked), self);
