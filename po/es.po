@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-05-19 08:46+0000\n"
-"PO-Revision-Date: 2013-05-20 12:44+0200\n"
+"POT-Creation-Date: 2013-06-05 09:28+0000\n"
+"PO-Revision-Date: 2013-06-05 18:28+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -67,27 +67,40 @@ msgid "Span"
 msgstr "Expandir"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:300
 msgid "Select Background"
 msgstr "Seleccionar fondo"
 
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:319
 msgid "Wallpapers"
 msgstr "Fondos de escritorio"
 
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:328
 msgid "Pictures"
 msgstr "Imágenes"
 
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:336
 msgid "Colors"
 msgstr "Colores"
 
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:345
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:400
+#| msgid "No input sources found"
+msgid "No Pictures Found"
+msgstr "No se han encontrado imágenes"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:415
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
+
+#: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -109,7 +122,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -185,43 +198,43 @@ msgstr "Configuración del teclado"
 msgid "Send Files…"
 msgstr "Enviar archivos…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Sí"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "No"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:472
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth está desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:477
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "El Bluetooth está físicamente desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:481
 msgid "No Bluetooth adapters found"
 msgstr "No se encontraron adaptadores Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:580
 msgid "Visibility"
 msgstr "Visibilidad"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:584
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibilidad de «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "¿Quitar «%s» de la lista de dispositivos?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:630
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -554,7 +567,7 @@ msgstr "Calibración de la pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1082
+#: ../panels/user-accounts/um-account-dialog.c:1126
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -920,107 +933,15 @@ msgstr "China"
 msgid "Other…"
 msgstr "Otro…"
 
-#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:174
+#: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Más…"
 
-#: ../panels/common/cc-language-chooser.c:193
+#: ../panels/common/cc-language-chooser.c:138
 msgid "No languages found"
 msgstr "No se han encontrado idiomas"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:416
-#: ../panels/keyboard/keyboard-shortcuts.c:1159
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Desactivado"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "Mayús izquierda"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "Alt izquierda"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "Ctrl derecho"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "Mayús derecha"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "Alt derecha"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "Ctrl derecha"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "Alt izquierda+Mayús"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "Alt derecha+Mayús"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "Ctrl izquierdo +Mayús"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "Ctrl derecha+Mayús"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "Izquierda+Mayús derecha"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "Izquierda+Alt derecha"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "Izquierda+Ctrl derecho"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt+Mayús"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Ctrl+Mayús"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt+Ctrl"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Bloq. Mayús."
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Mayús+Bloq. Mayús."
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt+Bloq. Mayús."
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Ctrl+Bloq. Mayús."
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1699,11 +1620,23 @@ msgstr "Reducir el tamaño del texto:"
 msgid "High contrast on or off"
 msgstr "Contraste alto activado o desactivado"
 
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Desactivado"
+
 #. Translators: This key is also known as 'third level
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:366
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
@@ -1711,11 +1644,11 @@ msgstr "Tecla de caracteres alternativos"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:375
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: ../panels/keyboard/cc-keyboard-option.c:379
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
@@ -1870,7 +1803,7 @@ msgstr "Si reasigna la combinación a «%s» se desactivará la combinación «%
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/mouse/cc-mouse-panel.c:123
+#: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
 msgstr "_Probar su configuración"
 
@@ -1978,36 +1911,36 @@ msgstr "Despla_zamiento con dos dedos"
 msgid "C_ontent sticks to fingers"
 msgstr "El c_ontenido se adhiere a los dedos"
 
-#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Pruebe a pulsar una vez, dos veces, desplazarse"
 
-#: ../panels/mouse/gnome-mouse-test.c:139
+#: ../panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "Cinco pulsaciones, es tiempo de GEGL."
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "Doble pulsación, botón primario"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "Una sola pulsación, botón primario"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "Doble pulsación, botón central"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "Una sola pulsación, botón central"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "Doble pulsación, botón secundario"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "Una sola pulsación, botón secundario"
 
@@ -2104,12 +2037,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:789
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Today"
 msgstr "Hoy"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:792
+#: ../panels/user-accounts/um-utils.c:793
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -2479,7 +2412,7 @@ msgstr "Perfil nuevo"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1083
+#: ../panels/user-accounts/um-account-dialog.c:1127
 msgid "_Add"
 msgstr "_Añadir"
 
@@ -3637,7 +3570,6 @@ msgid "Show in Lock Screen"
 msgstr "Mostrar en la pantalla de bloqueo"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
-#| msgid "Other"
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Otra"
@@ -3917,15 +3849,18 @@ msgid "Power Saving"
 msgstr "Ahorro de energía"
 
 #: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+#| msgid "_Screen Brightness"
+msgid "_Screen brightness"
 msgstr "_Brillo de la pantalla"
 
 #: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+#| msgid "_Dim Screen when Inactive"
+msgid "_Dim screen when inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
 #: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+#| msgid "_Blank Screen"
+msgid "_Blank screen"
 msgstr "_Apagar la pantalla"
 
 #: ../panels/power/cc-power-panel.c:1516
@@ -3937,11 +3872,13 @@ msgid "Turns off wireless devices"
 msgstr "Apaga los dispositivos inalámbricos"
 
 #: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+#| msgid "Mobile broadband"
+msgid "_Mobile broadband"
 msgstr "Banda ancha _móvil"
 
 #: ../panels/power/cc-power-panel.c:1549
-msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+#| msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Apaga los dispositivos de banda ancha móvil (3G, 4G, WiMax, etc.)"
 
 #: ../panels/power/cc-power-panel.c:1582
@@ -3961,11 +3898,13 @@ msgid "Suspend & Power Off"
 msgstr "Suspender y apagar"
 
 #: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+#| msgid "_Automatic Suspend"
+msgid "_Automatic suspend"
 msgstr "Suspender _automáticamente"
 
 #: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
+#| msgid "When Battery Power is _Critical"
+msgid "When battery power is _critical"
 msgstr "_Cuando la carga está críticamente baja"
 
 #: ../panels/power/cc-power-panel.c:1848
@@ -4322,7 +4261,7 @@ msgid "Add a New Printer"
 msgstr "Añadir una impresora nueva"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -4443,7 +4382,7 @@ msgid "%s Active Jobs"
 msgstr "%s trabajos activos"
 
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1468
 msgid "No printers detected."
 msgstr "No se ha detectado ninguna impresora."
 
@@ -4847,12 +4786,11 @@ msgstr "Métrico"
 msgid "No regions found"
 msgstr "No se han encontrado regiones"
 
-#: ../panels/region/cc-input-chooser.c:188
+#: ../panels/region/cc-input-chooser.c:185
 msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
 
-#: ../panels/region/cc-input-chooser.c:1091
-#| msgid "Other"
+#: ../panels/region/cc-input-chooser.c:1088
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Otra"
@@ -4975,6 +4913,10 @@ msgstr "Puede cambiar estos atajos en la configuración del teclado"
 msgid "Alternative switch to next source"
 msgstr "Cambio alternativo a la fuente siguiente"
 
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Izquierda+Alt derecha"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Inglés (Reino Unido)"
@@ -4998,19 +4940,16 @@ msgid "Home"
 msgstr "Domicilio"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
-#| msgid "Places"
 msgctxt "Search Location"
 msgid "Places"
 msgstr "Lugares"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
-#| msgid "Bookmarks"
 msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
 #: ../panels/search/cc-search-locations-dialog.c:480
-#| msgid "Other"
 msgctxt "Search Location"
 msgid "Other"
 msgstr "Otra"
@@ -5055,21 +4994,21 @@ msgstr "Bajar"
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:268
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Encendido"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:270
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Apagado"
 
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:416
 msgid "Choose a Folder"
 msgstr "Elija una carpeta"
 
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:594
 msgid "Copy"
 msgstr "Copiar"
 
@@ -5318,8 +5257,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sin amplificar"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "_Perfil:"
 
@@ -5345,73 +5284,73 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "_Probar los altavoces"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "Detección de picos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Nombre"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Prueba de altavoces para %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "Volumen de sali_da:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "Salida"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "_Elegir un dispositivo para la salida de sonido:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "Configuración para el dispositivo seleccionado:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "Entrada"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "Volumen de _entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "Nivel de entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "_Elegir un dispositivo para la entrada de sonido:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "Efectos de sonido"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "Volumen de _alerta:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "Actualmente ninguna aplicación está reproduciendo o grabando sonido."
 
@@ -6329,20 +6268,20 @@ msgstr "Error desconocido"
 msgid "Failed to add account"
 msgstr "Falló al añadir la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:407
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:413
+#: ../panels/user-accounts/um-account-dialog.c:459
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:581
+#: ../panels/user-accounts/um-account-dialog.c:597
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:656
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:703
+#: ../panels/user-accounts/um-account-dialog.c:729
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
@@ -6530,20 +6469,24 @@ msgstr "Contraseña no válida, inténtelo de nuevo"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "Otras cuentas"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6551,12 +6494,12 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6564,42 +6507,42 @@ msgstr ""
 "Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
 "temporales al eliminar una cuenta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:943
+#: ../panels/user-accounts/um-user-panel.c:977
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:945
+#: ../panels/user-accounts/um-user-panel.c:979
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: ../panels/user-accounts/um-user-panel.c:986
+#: ../panels/user-accounts/um-user-panel.c:1020
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6607,12 +6550,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1024
+#: ../panels/user-accounts/um-user-panel.c:1058
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1035
-#: ../panels/user-accounts/um-user-panel.c:1321
+#: ../panels/user-accounts/um-user-panel.c:1069
+#: ../panels/user-accounts/um-user-panel.c:1349
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6620,12 +6563,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1044
+#: ../panels/user-accounts/um-user-panel.c:1078
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1056
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1090
+#: ../panels/user-accounts/um-user-panel.c:1354
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6633,13 +6576,9 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1230
+#: ../panels/user-accounts/um-user-panel.c:1264
 msgid "My Account"
 msgstr "Mi cuenta"
-
-#: ../panels/user-accounts/um-user-panel.c:1239
-msgid "Other Accounts"
-msgstr "Otras cuentas"
 
 #: ../panels/user-accounts/um-utils.c:535
 #, c-format
@@ -7045,13 +6984,73 @@ msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1421
+#: ../shell/cc-window.c:1424
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Left Shift"
+#~ msgstr "Mayús izquierda"
+
+#~ msgid "Left Alt"
+#~ msgstr "Alt izquierda"
+
+#~ msgid "Left Ctrl"
+#~ msgstr "Ctrl derecho"
+
+#~ msgid "Right Shift"
+#~ msgstr "Mayús derecha"
+
+#~ msgid "Right Alt"
+#~ msgstr "Alt derecha"
+
+#~ msgid "Right Ctrl"
+#~ msgstr "Ctrl derecha"
+
+#~ msgid "Left Alt+Shift"
+#~ msgstr "Alt izquierda+Mayús"
+
+#~ msgid "Right Alt+Shift"
+#~ msgstr "Alt derecha+Mayús"
+
+#~ msgid "Left Ctrl+Shift"
+#~ msgstr "Ctrl izquierdo +Mayús"
+
+#~ msgid "Right Ctrl+Shift"
+#~ msgstr "Ctrl derecha+Mayús"
+
+#~ msgid "Left+Right Shift"
+#~ msgstr "Izquierda+Mayús derecha"
+
+#~ msgid "Left+Right Ctrl"
+#~ msgstr "Izquierda+Ctrl derecho"
+
+#~ msgid "Alt+Shift"
+#~ msgstr "Alt+Mayús"
+
+#~ msgid "Ctrl+Shift"
+#~ msgstr "Ctrl+Mayús"
+
+#~ msgid "Alt+Ctrl"
+#~ msgstr "Alt+Ctrl"
+
+#~ msgid "Caps"
+#~ msgstr "Bloq. Mayús."
+
+#~ msgid "Shift+Caps"
+#~ msgstr "Mayús+Bloq. Mayús."
+
+#~ msgid "Alt+Caps"
+#~ msgstr "Alt+Bloq. Mayús."
+
+#~ msgid "Ctrl+Caps"
+#~ msgstr "Ctrl+Bloq. Mayús."
+
+#~ msgid "_Mobile Broadband"
+#~ msgstr "Banda ancha _móvil"
 
 #~ msgid "Export"
 #~ msgstr "Exportar"
@@ -7265,9 +7264,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Control Center"
 #~ msgstr "Centro de control"
-
-#~ msgid "Mobile broadband"
-#~ msgstr "Banda ancha móvil"
 
 #~ msgid "Mesh"
 #~ msgstr "Malla"
