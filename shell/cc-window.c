@@ -1410,12 +1410,15 @@ create_header (CcWindow *self)
   CcWindowPrivate *priv = self->priv;
   GtkWidget *button;
   AtkObject *accessible;
+  gboolean rtl;
+
+  rtl = (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL);
 
   priv->header = gtk_header_bar_new ();
 
   priv->previous_button = button = gd_header_simple_button_new ();
   gd_header_button_set_symbolic_icon_name (GD_HEADER_BUTTON (button),
-                                           "go-previous-symbolic");
+                                           rtl ? "go-previous-rtl-symbolic" : "go-previous-symbolic");
   gtk_widget_set_no_show_all (button, TRUE);
   accessible = gtk_widget_get_accessible (button);
   atk_object_set_name (accessible, _("All Settings"));
