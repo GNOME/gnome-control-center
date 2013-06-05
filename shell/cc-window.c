@@ -1525,5 +1525,5 @@ cc_window_present (CcWindow *center)
 void
 cc_window_show (CcWindow *center)
 {
-  gtk_widget_present (GTK_WIDGET (center));
+  gtk_window_present (GTK_WINDOW (center));
 }
