@@ -1383,7 +1383,7 @@ update_tablet_ui (CcWacomPage *page,
 
 		gtk_widget_show (WID ("button-calibrate"));
 		gtk_widget_set_sensitive (WID ("button-calibrate"),
-					  has_monitor (priv));
+					  has_monitor (page));
 
 		gtk_container_child_set (CWID ("main-grid"),
 					 WID ("tablet-buttons-box"),
