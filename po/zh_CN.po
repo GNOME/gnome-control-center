@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-04-08 04:04+0000\n"
+"POT-Creation-Date: 2013-06-05 16:00+0000\n"
 "PO-Revision-Date: 2013-03-12 14:38+0800\n"
 "Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -116,7 +116,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "无桌面背景"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "当前背景"
 
@@ -525,7 +525,7 @@ msgstr "显示校准"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
+#: ../panels/user-accounts/um-account-dialog.c:1126
 msgid "Cancel"
 msgstr "取消"
 
@@ -842,7 +842,7 @@ msgstr "其他…"
 
 #: ../panels/common/cc-language-chooser.c:176
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:172
+#: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "更多…"
 
@@ -850,97 +850,65 @@ msgstr "更多…"
 msgid "No languages found"
 msgstr "未找到语言"
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "禁用"
-
-#: ../panels/common/cc-util.c:29
+#: ../panels/common/cc-util.c:116
 msgid "Left Shift"
 msgstr "左 Shift"
 
-#: ../panels/common/cc-util.c:30
+#: ../panels/common/cc-util.c:117
 msgid "Left Alt"
 msgstr "左 Alt"
 
-#: ../panels/common/cc-util.c:31
+#: ../panels/common/cc-util.c:118
 msgid "Left Ctrl"
 msgstr "左 Ctrl"
 
-#: ../panels/common/cc-util.c:32
+#: ../panels/common/cc-util.c:119
 msgid "Right Shift"
 msgstr "右 Shift"
 
-#: ../panels/common/cc-util.c:33
+#: ../panels/common/cc-util.c:120
 msgid "Right Alt"
 msgstr "右 Alt"
 
-#: ../panels/common/cc-util.c:34
+#: ../panels/common/cc-util.c:121
 msgid "Right Ctrl"
 msgstr "右 Ctrl"
 
-#: ../panels/common/cc-util.c:35
+#: ../panels/common/cc-util.c:122
 msgid "Left Alt+Shift"
 msgstr "左 Alt+Shift"
 
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "右 Alt+Shift"
-
-#: ../panels/common/cc-util.c:37
+#: ../panels/common/cc-util.c:123
 msgid "Left Ctrl+Shift"
 msgstr "左 Ctrl+Shift"
 
-#: ../panels/common/cc-util.c:38
+#: ../panels/common/cc-util.c:124
 msgid "Right Ctrl+Shift"
 msgstr "右 Ctrl+Shift"
 
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "左+右 Shift"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "左+右 Alt"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "左+右 Ctrl"
-
-#: ../panels/common/cc-util.c:42
+#: ../panels/common/cc-util.c:125
 msgid "Alt+Shift"
 msgstr "Ctrl+Alt+Shift+Space"
 
-#: ../panels/common/cc-util.c:43
+#: ../panels/common/cc-util.c:126
 msgid "Ctrl+Shift"
 msgstr "Ctrl+Alt+Shift+Space"
 
-#: ../panels/common/cc-util.c:44
+#: ../panels/common/cc-util.c:127
 msgid "Alt+Ctrl"
 msgstr "Alt+Ctrl"
 
-#: ../panels/common/cc-util.c:45
+#: ../panels/common/cc-util.c:128
 msgid "Caps"
 msgstr "Caps"
 
-#: ../panels/common/cc-util.c:46
+#: ../panels/common/cc-util.c:129
 msgid "Shift+Caps"
 msgstr "Shift+Caps"
 
-#: ../panels/common/cc-util.c:47
+#: ../panels/common/cc-util.c:130
 msgid "Alt+Caps"
 msgstr "Alt+Caps"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Ctrl+Caps"
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1192,53 +1160,53 @@ msgstr ""
 "新;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "未知"
 
-#: ../panels/info/cc-info-panel.c:541
+#: ../panels/info/cc-info-panel.c:551
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d 位"
 
-#: ../panels/info/cc-info-panel.c:543
+#: ../panels/info/cc-info-panel.c:553
 #, c-format
 msgid "%d-bit"
 msgstr "%d 位"
 
-#: ../panels/info/cc-info-panel.c:1218
+#: ../panels/info/cc-info-panel.c:1228
 msgid "Ask what to do"
 msgstr "询问如何处理"
 
-#: ../panels/info/cc-info-panel.c:1222
+#: ../panels/info/cc-info-panel.c:1232
 msgid "Do nothing"
 msgstr "不处理"
 
-#: ../panels/info/cc-info-panel.c:1226
+#: ../panels/info/cc-info-panel.c:1236
 msgid "Open folder"
 msgstr "打开文件夹"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1327
 msgid "Other Media"
 msgstr "其他媒体"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1358
 msgid "Select an application for audio CDs"
 msgstr "选择播放音频 CD 的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1359
 msgid "Select an application for video DVDs"
 msgstr "选择播放视频 DVD 的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1360
 msgid "Select an application to run when a music player is connected"
 msgstr "选择要在连接音乐播放器后运行的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1361
 msgid "Select an application to run when a camera is connected"
 msgstr "选择要在连接相机后运行的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1362
 msgid "Select an application for software CDs"
 msgstr "选择要在插入软件 CD 时运行的应用程序"
 
@@ -1247,90 +1215,90 @@ msgstr "选择要在插入软件 CD 时运行的应用程序"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1374
 msgid "audio DVD"
 msgstr "音频 DVD"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1375
 msgid "blank Blu-ray disc"
 msgstr "空白蓝光光盘"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1376
 msgid "blank CD disc"
 msgstr "空白 CD 光盘"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1377
 msgid "blank DVD disc"
 msgstr "空白 DVD 光盘"
 
 # 空白 HD DVD 光盘
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1378
 msgid "blank HD DVD disc"
 msgstr "空白 HD DVD 光盘"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1379
 msgid "Blu-ray video disc"
 msgstr "蓝光视频光盘"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1380
 msgid "e-book reader"
 msgstr "电子书阅读器"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1381
 msgid "HD DVD video disc"
 msgstr "HD DVD 视频光盘"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1382
 msgid "Picture CD"
 msgstr "图片 CD"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1383
 msgid "Super Video CD"
 msgstr "超级 VCD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1384
 msgid "Video CD"
 msgstr "视频 CD"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1385
 msgid "Windows software"
 msgstr "Windows 软件"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1386
 msgid "Software"
 msgstr "软件"
 
-#: ../panels/info/cc-info-panel.c:1499
+#: ../panels/info/cc-info-panel.c:1509
 #: ../panels/keyboard/keyboard-shortcuts.c:1697
 msgid "Section"
 msgstr "节"
 
-#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1518 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "总览"
 
-#: ../panels/info/cc-info-panel.c:1514 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1524 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "默认应用程序"
 
-#: ../panels/info/cc-info-panel.c:1519 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1529 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "可移动介质"
 
-#: ../panels/info/cc-info-panel.c:1544
+#: ../panels/info/cc-info-panel.c:1554
 #, c-format
 msgid "Version %s"
 msgstr "版本 %s"
 
-#: ../panels/info/cc-info-panel.c:1594
+#: ../panels/info/cc-info-panel.c:1604
 msgid "Install Updates"
 msgstr "安装更新"
 
-#: ../panels/info/cc-info-panel.c:1598
+#: ../panels/info/cc-info-panel.c:1608
 msgid "System Up-To-Date"
 msgstr "系统已是最新"
 
-#: ../panels/info/cc-info-panel.c:1602
+#: ../panels/info/cc-info-panel.c:1612
 msgid "Checking for Updates"
 msgstr "正在检查更新"
 
@@ -1620,15 +1588,27 @@ msgstr "减小文本字号"
 msgid "High contrast on or off"
 msgstr "高对比度开或关"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:272
+#: ../panels/keyboard/cc-keyboard-option.c:383
+#: ../panels/keyboard/keyboard-shortcuts.c:1160
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "禁用"
+
+#: ../panels/keyboard/cc-keyboard-option.c:346
 msgid "Alternative Characters Key"
 msgstr "替代的字符键"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#: ../panels/keyboard/cc-keyboard-option.c:351
 msgid "Compose Key"
 msgstr "组合键"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:356
 #, fuzzy
 msgid "Modifiers-only switch to next source"
 msgstr "修饰键仅切换至下个源"
@@ -1910,13 +1890,18 @@ msgstr "飞行模式(_P)"
 msgid "Network proxy"
 msgstr "网络代理"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#. Translators: this is the title of the connection details
+#. * window for vpn connections, it is also used to display
+#. * vpn connections in the device list.
+#.
+#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1226
 msgid "The system network services are not compatible with this version."
 msgstr "系统的网络服务与此版本的网络管理器不兼容。"
 
@@ -1988,12 +1973,12 @@ msgid "Never"
 msgstr "从不"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:789
 msgid "Today"
 msgstr "今天"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:792
 msgid "Yesterday"
 msgstr "昨天"
 
@@ -2043,9 +2028,9 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "良好"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
+#: ../panels/network/connection-editor/ce-page-ethernet.c:203
 #: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
+#: ../panels/network/connection-editor/ce-page-wifi.c:245
 #: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "认证"
@@ -2339,42 +2324,42 @@ msgstr "IPv_6"
 msgid "Unable to open connection editor"
 msgstr "蓝牙连接失败"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:283
+#: ../panels/network/connection-editor/net-connection-editor.c:286
 msgid "New Profile"
 msgstr "无配置"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:505
+#: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1068
+#: ../panels/user-accounts/um-account-dialog.c:1127
 msgid "_Add"
 msgstr "添加(_A)"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:593
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:594
 msgid "Bond"
 msgstr "绑定"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 msgid "Bridge"
 msgstr "桥接"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:590
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "VLAN"
 msgstr "虚拟局域网"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:740
+#: ../panels/network/connection-editor/net-connection-editor.c:746
 msgid "Could not load VPN plugins"
 msgstr "无法装入 VPN 插件"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:804
+#: ../panels/network/connection-editor/net-connection-editor.c:810
 msgid "Import from file…"
 msgstr "从文件导入..."
 
-#: ../panels/network/connection-editor/net-connection-editor.c:871
+#: ../panels/network/connection-editor/net-connection-editor.c:877
 msgid "Add Network Connection"
 msgstr "添加网络连接"
 
@@ -2533,14 +2518,25 @@ msgstr "IP 地址"
 msgid "Last used"
 msgstr "上次使用的"
 
-#: ../panels/network/net-device-ethernet.c:337
+#. Translators: This is used as the title of the connection
+#. * details window for ethernet, if there is only a single
+#. * profile. It is also used to display ethernet in the
+#. * device list.
+#.
+#: ../panels/network/net-device-ethernet.c:288
+#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "有线"
+
+#: ../panels/network/net-device-ethernet.c:356
 #: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
 msgid "Options…"
 msgstr "选项…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:491
 #, c-format
 msgid "Profile %d"
 msgstr "配置 %d"
@@ -2616,11 +2612,6 @@ msgstr "对于不可信的公共网络，不建议这样做。"
 #: ../panels/network/net-proxy.c:408
 msgid "Proxy"
 msgstr "代理"
-
-#: ../panels/network/network-ethernet.ui.h:1
-#: ../panels/network/network-simple.ui.h:1
-msgid "Wired"
-msgstr "有线"
 
 #: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
@@ -3480,7 +3471,7 @@ msgid "Show in Lock Screen"
 msgstr "在锁屏显示"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:1073
+#: ../panels/region/cc-input-chooser.c:1088
 #: ../panels/search/cc-search-locations-dialog.c:480
 msgid "Other"
 msgstr "其他"
@@ -3549,7 +3540,10 @@ msgstr "连接在线账户并决定如何使用"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+#, fuzzy
+#| msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+msgid ""
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;谷歌;脸"
 "谱;脸书;推特;雅虎;微博;网络;在线;聊天;日历;邮件;联系人;"
@@ -4157,7 +4151,7 @@ msgid "Add a New Printer"
 msgstr "添加新打印机"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -4278,7 +4272,7 @@ msgid "%s Active Jobs"
 msgstr "%s 个活动的任务"
 
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1468
 msgid "No printers detected."
 msgstr "未检测到打印机。"
 
@@ -4307,65 +4301,65 @@ msgid "GhostScript pre-filtering"
 msgstr "GhostScript 预过滤"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "每面页数"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "双面"
 
 # 左撇子有歧视色彩。
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "方向"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "常规"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "页面设置"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "可安装选项"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "作业"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "图像质量"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "色彩"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "完成"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "高级"
@@ -4675,36 +4669,36 @@ msgstr "公制"
 msgid "No regions found"
 msgstr "未找到区域"
 
-#: ../panels/region/cc-input-chooser.c:186
+#: ../panels/region/cc-input-chooser.c:185
 msgid "No input sources found"
 msgstr "未找到输入源"
 
-#: ../panels/region/cc-region-panel.c:239
+#: ../panels/region/cc-region-panel.c:240
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "修改需要重启会话才能生效"
 
-#: ../panels/region/cc-region-panel.c:240
+#: ../panels/region/cc-region-panel.c:241
 msgid "Restart Now"
 msgstr "现在重启"
 
-#: ../panels/region/cc-region-panel.c:550
+#: ../panels/region/cc-region-panel.c:566
 msgctxt "Language"
 msgid "None"
 msgstr "无"
 
-#: ../panels/region/cc-region-panel.c:1040
+#: ../panels/region/cc-region-panel.c:1058
 msgid "Sorry"
 msgstr "抱歉"
 
-#: ../panels/region/cc-region-panel.c:1042
+#: ../panels/region/cc-region-panel.c:1060
 msgid "Input methods can't be used on the login screen"
 msgstr "输入法不能在登录屏幕使用"
 
-#: ../panels/region/cc-region-panel.c:1491
+#: ../panels/region/cc-region-panel.c:1509
 msgid "No input source selected"
 msgstr "未选择输入源"
 
-#: ../panels/region/cc-region-panel.c:1652
+#: ../panels/region/cc-region-panel.c:1690
 msgid "Login Screen"
 msgstr "登录屏幕"
 
@@ -4793,6 +4787,10 @@ msgstr "可以在键盘设置中修改快捷键"
 #: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
 msgstr "选择性的切换至下个源"
+
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "左+右 Alt"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
@@ -5119,8 +5117,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "减弱"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "配置(_P)："
 
@@ -5144,73 +5142,73 @@ msgstr[0] "%u 路输入"
 msgid "System Sounds"
 msgstr "系统声音"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "测试扬声器(_T)"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "峰值检测"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "名称"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "设备"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s 扬声器测试"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "输出音量(_O)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "输出"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "选择音频输出设备(_H)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "选中设备的设置："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "输入"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "输入音量(_I)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "输入等级："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "选择音频输入设备(_H)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "声音效果"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "警告音量(_A)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "应用程序"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "没有程序正在播放或录制音频。"
 
@@ -6037,7 +6035,7 @@ msgid "Authentication is required to change user data"
 msgstr "改变用户数据需要认证"
 
 #: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
+#: ../panels/user-accounts/um-password-dialog.c:599
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "太短"
@@ -6048,25 +6046,25 @@ msgid "Not good enough"
 msgstr "不够好"
 
 #: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
+#: ../panels/user-accounts/um-password-dialog.c:600
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "弱"
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
+#: ../panels/user-accounts/um-password-dialog.c:601
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "一般"
 
 #: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
+#: ../panels/user-accounts/um-password-dialog.c:602
 msgctxt "Password strength"
 msgid "Good"
 msgstr "好"
 
 #: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/um-password-dialog.c:603
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "强"
@@ -6120,24 +6118,24 @@ msgstr "新密码必须包含足够的不同字符"
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:186
 msgid "Failed to add account"
 msgstr "添加账户失败"
 
-#: ../panels/user-accounts/um-account-dialog.c:403
-#: ../panels/user-accounts/um-account-dialog.c:444
+#: ../panels/user-accounts/um-account-dialog.c:413
+#: ../panels/user-accounts/um-account-dialog.c:459
 msgid "Failed to register account"
 msgstr "注册用户失败"
 
-#: ../panels/user-accounts/um-account-dialog.c:577
+#: ../panels/user-accounts/um-account-dialog.c:597
 msgid "No supported way to authenticate with this domain"
 msgstr "没有支持这个域验证的方法"
 
-#: ../panels/user-accounts/um-account-dialog.c:631
+#: ../panels/user-accounts/um-account-dialog.c:656
 msgid "Failed to join domain"
 msgstr "加入域失败"
 
-#: ../panels/user-accounts/um-account-dialog.c:688
+#: ../panels/user-accounts/um-account-dialog.c:729
 msgid "Failed to log into domain"
 msgstr "登入域失败"
 
@@ -6246,35 +6244,35 @@ msgstr "请再次输入您的当前密码。"
 msgid "Password could not be changed"
 msgstr "无法更改密码"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "You need to enter a new password"
 msgstr "您需要输入一个新密码"
 
-#: ../panels/user-accounts/um-password-dialog.c:304
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "The new password is not strong enough"
 msgstr "新密码不够强"
 
-#: ../panels/user-accounts/um-password-dialog.c:310
+#: ../panels/user-accounts/um-password-dialog.c:312
 msgid "You need to confirm the password"
 msgstr "你需要重新输入密码以便确认"
 
-#: ../panels/user-accounts/um-password-dialog.c:313
+#: ../panels/user-accounts/um-password-dialog.c:315
 msgid "The passwords do not match"
 msgstr "密码不匹配"
 
-#: ../panels/user-accounts/um-password-dialog.c:319
+#: ../panels/user-accounts/um-password-dialog.c:321
 msgid "You need to enter your current password"
 msgstr "您需要输入当前密码"
 
-#: ../panels/user-accounts/um-password-dialog.c:322
+#: ../panels/user-accounts/um-password-dialog.c:324
 msgid "The current password is not correct"
 msgstr "当前密码错误"
 
-#: ../panels/user-accounts/um-password-dialog.c:385
+#: ../panels/user-accounts/um-password-dialog.c:387
 msgid "Passwords do not match"
 msgstr "密码不匹配"
 
-#: ../panels/user-accounts/um-password-dialog.c:439
+#: ../panels/user-accounts/um-password-dialog.c:441
 msgid "Wrong password"
 msgstr "密码错误"
 
@@ -6304,7 +6302,8 @@ msgstr "不能自动加入此类域"
 msgid "No such domain or realm found"
 msgstr "未发现此域或 realm"
 
-#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:814
+#: ../panels/user-accounts/um-realm-manager.c:828
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "不能以 %s 身份登录 %s 域"
@@ -6313,77 +6312,81 @@ msgstr "不能以 %s 身份登录 %s 域"
 msgid "Invalid password, please try again"
 msgstr "无效密码，请重试"
 
-#: ../panels/user-accounts/um-realm-manager.c:824
+#: ../panels/user-accounts/um-realm-manager.c:833
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "无法连接到 %s 域：%s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "其他账户"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "删除用户失败"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "您不能删除自己的账户。"
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s 仍在登录状态"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "在用户已登录时删除账户可能导致系统处于不一致状态。"
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "您想要保留 %s 的文件吗？"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "删除用户时可以保留用户主目录、电子邮件目录和临时文件。"
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "删除文件(_D)"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "保留文件(_K)"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "账户已禁用"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "下次登录时设置"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "无"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "已登录"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:987
 msgid "Failed to contact the accounts service"
 msgstr "联系账户服务失败"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:989
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "请确定 AccountService 已经正确安装并启用。"
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:1030
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6391,12 +6394,12 @@ msgstr ""
 "要进行更改，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Create a user account"
 msgstr "创建用户账户"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1079
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6404,12 +6407,12 @@ msgstr ""
 "要创建用户账户，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "Delete the selected user account"
 msgstr "删除选中的用户账户"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6417,29 +6420,25 @@ msgstr ""
 "要删除选中的用户账户，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1284
 msgid "My Account"
 msgstr "我的账户"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
-msgid "Other Accounts"
-msgstr "其他账户"
-
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:535
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "以 %s 为用户名的用户已存在"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:539
 #, c-format
 msgid "The username is too long"
 msgstr "用户名太长"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:542
 msgid "The username cannot start with a '-'"
 msgstr "用户名不能以“-”开头"
 
-#: ../panels/user-accounts/um-utils.c:526
+#: ../panels/user-accounts/um-utils.c:545
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -6749,40 +6748,40 @@ msgstr "下键"
 msgid "Tip Pressure Feel"
 msgstr "指尖压力感应"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:66
 msgid "Enable verbose mode"
 msgstr "启用详细模式"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:67
 msgid "Show the overview"
 msgstr "显示摘要"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:68
 msgid "Search for the string"
 msgstr "搜索字符串"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:69
 msgid "List possible panel names and exit"
 msgstr "列出可能的面板名并退出"
 
-#: ../shell/cc-application.c:71 ../shell/cc-application.c:72
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
+#: ../shell/cc-application.c:72
 msgid "Show help options"
 msgstr "显示帮助选项"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:73
 msgid "Panel to display"
 msgstr "显示面板"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:73
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[面板] [参数…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:115
 msgid "- Settings"
 msgstr "- 设置"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:132
 #, c-format
 msgid ""
 "%s\n"
@@ -6791,15 +6790,15 @@ msgstr ""
 "%s\n"
 "运行 “%s --help” 查看所有可用的命令行选项。\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:162
 msgid "Available panels:"
 msgstr "可用面板"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:279
 msgid "Help"
 msgstr "帮助"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:280
 msgid "Quit"
 msgstr "退出"
 
@@ -6823,13 +6822,25 @@ msgctxt "category"
 msgid "System"
 msgstr "系统"
 
-#: ../shell/cc-window.c:1411
+#: ../shell/cc-window.c:1414
 msgid "All Settings"
 msgstr "全部设置"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;首选项;设置;"
+
+#~ msgid "Right Alt+Shift"
+#~ msgstr "右 Alt+Shift"
+
+#~ msgid "Left+Right Shift"
+#~ msgstr "左+右 Shift"
+
+#~ msgid "Left+Right Ctrl"
+#~ msgstr "左+右 Ctrl"
+
+#~ msgid "Ctrl+Caps"
+#~ msgstr "Ctrl+Caps"
 
 #~ msgid "blablabla"
 #~ msgstr "blablabla"
