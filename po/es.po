@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-05 09:28+0000\n"
-"PO-Revision-Date: 2013-06-05 18:28+0200\n"
+"POT-Creation-Date: 2013-06-06 05:06+0000\n"
+"PO-Revision-Date: 2013-06-06 13:09+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -89,7 +89,6 @@ msgstr "Flickr"
 
 #. translators: No pictures were found
 #: ../panels/background/cc-background-chooser-dialog.c:400
-#| msgid "No input sources found"
 msgid "No Pictures Found"
 msgstr "No se han encontrado imágenes"
 
@@ -169,7 +168,7 @@ msgstr "página 2"
 msgid "Paired"
 msgstr "Emparejado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
 msgid "Type"
 msgstr "Tipo"
 
@@ -567,7 +566,7 @@ msgstr "Calibración de la pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1126
+#: ../panels/user-accounts/um-account-dialog.c:1407
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -2037,12 +2036,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:790
+#: ../panels/user-accounts/um-utils.c:787
 msgid "Today"
 msgstr "Hoy"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:793
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -2412,7 +2411,7 @@ msgstr "Perfil nuevo"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1127
+#: ../panels/user-accounts/um-account-dialog.c:1408
 msgid "_Add"
 msgstr "_Añadir"
 
@@ -2837,7 +2836,7 @@ msgstr "detalles"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Contraseña"
@@ -3336,7 +3335,7 @@ msgstr "Ambos"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Username"
 msgstr "Nombre de _usuario"
 
@@ -3849,17 +3848,14 @@ msgid "Power Saving"
 msgstr "Ahorro de energía"
 
 #: ../panels/power/cc-power-panel.c:1430
-#| msgid "_Screen Brightness"
 msgid "_Screen brightness"
 msgstr "_Brillo de la pantalla"
 
 #: ../panels/power/cc-power-panel.c:1458
-#| msgid "_Dim Screen when Inactive"
 msgid "_Dim screen when inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
 #: ../panels/power/cc-power-panel.c:1481
-#| msgid "_Blank Screen"
 msgid "_Blank screen"
 msgstr "_Apagar la pantalla"
 
@@ -3872,12 +3868,10 @@ msgid "Turns off wireless devices"
 msgstr "Apaga los dispositivos inalámbricos"
 
 #: ../panels/power/cc-power-panel.c:1544
-#| msgid "Mobile broadband"
 msgid "_Mobile broadband"
 msgstr "Banda ancha _móvil"
 
 #: ../panels/power/cc-power-panel.c:1549
-#| msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Apaga los dispositivos de banda ancha móvil (3G, 4G, WiMax, etc.)"
 
@@ -3898,12 +3892,10 @@ msgid "Suspend & Power Off"
 msgstr "Suspender y apagar"
 
 #: ../panels/power/cc-power-panel.c:1793
-#| msgid "_Automatic Suspend"
 msgid "_Automatic suspend"
 msgstr "Suspender _automáticamente"
 
 #: ../panels/power/cc-power-panel.c:1815
-#| msgid "When Battery Power is _Critical"
 msgid "When battery power is _critical"
 msgstr "_Cuando la carga está críticamente baja"
 
@@ -4022,6 +4014,7 @@ msgstr "Autenticar"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/sharing/sharing.ui.h:22
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Contraseña"
 
@@ -5903,48 +5896,56 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Add account"
-msgstr "Añadir cuenta"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "_Local Account"
-msgstr "Cuenta _local"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Enterprise Login"
-msgstr "Inicio de s_esión corporativo"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name"
+#| msgid "_Full name"
+msgid "_Full Name"
 msgstr "Nombre _completo"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "_Tipo de cuenta"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#| msgid "Choose password at next login"
+msgid "Allow user to set a password when they next login"
+msgstr ""
+"Permitir al usuario establecer una contraseña en el siguiente inicio de "
+"sesión"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "Set a password now"
+msgstr "Establecer una contraseña ahora"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#| msgid "C_onfirm password"
+msgid "_Confirm Password"
+msgstr "_Confirmar contraseña"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "_Domain"
 msgstr "_Dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Login Name"
 msgstr "Nombre de _inicio de sesión"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "Tip: Enterprise domain or realm name"
-msgstr "Consejo: dominio de la empresa o nombre real"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "C_ontinue"
-msgstr "C_ontinuar"
+#| msgid "_Password"
+msgid "Login _Password"
+msgstr "_Contraseña de inicio de sesión"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid "_Enroll"
+msgstr "_Unir"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "Domain Administrator Login"
 msgstr "Inicio de sesión del administrador del dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5954,11 +5955,11 @@ msgstr ""
 "formar parte de un dominio. Pida al administrador de su\n"
 "sistema que escriba aquí la contraseña del dominio."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid "Administrator _Name"
 msgstr "_Nombre del administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator Password"
 msgstr "Contraseña de administrador"
 
@@ -6047,10 +6048,6 @@ msgstr "Siguiente semana"
 #: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "La semana que viene"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "Set a password now"
-msgstr "Establecer una contraseña ahora"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "Choose password at next login"
@@ -6180,40 +6177,132 @@ msgstr "Gestionar cuentas de usuario"
 msgid "Authentication is required to change user data"
 msgstr "Se requiere autenticación para cambiar los datos del usuario"
 
-#: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Demasiado corta"
+#: ../panels/user-accounts/pw-utils.c:81
+#| msgid "The new password does not contain enough different characters"
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr "La contraseña nueva debe ser diferente de la antigua."
+
+#: ../panels/user-accounts/pw-utils.c:83
+msgctxt "Password hint"
+msgid "Try changing some letters and numbers."
+msgstr "Pruebe a cambiar algunas letras y números."
+
+#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+#| msgid "Changing password for"
+msgctxt "Password hint"
+msgid "Try changing the password a bit more."
+msgstr "Pruebe a cambiar la contraseña un poco más."
+
+#: ../panels/user-accounts/pw-utils.c:87
+msgctxt "Password hint"
+msgid "A password without your user name would be stronger."
+msgstr "Una contraseña sin su nombre de usuario será más robusta."
+
+#: ../panels/user-accounts/pw-utils.c:89
+msgctxt "Password hint"
+msgid "Try to avoid using your name in the password."
+msgstr "Evite usar su nombre en la contraseña"
+
+#: ../panels/user-accounts/pw-utils.c:91
+msgctxt "Password hint"
+msgid "Try to avoid some of the words included in the password."
+msgstr "Evite algunas de las palabras incluidas en la contraseña."
+
+#: ../panels/user-accounts/pw-utils.c:95
+msgctxt "Password hint"
+msgid "Try to avoid common words."
+msgstr "Trate de evitar palabras comunes."
+
+#: ../panels/user-accounts/pw-utils.c:97
+msgctxt "Password hint"
+msgid "Try to avoid reordering existing words."
+msgstr "Evite reordenar las palabras existentes."
 
 #: ../panels/user-accounts/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "No es suficientemente buena"
+msgctxt "Password hint"
+msgid "Try to use more numbers."
+msgstr "Pruebe a usar más números."
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Débil"
+#: ../panels/user-accounts/pw-utils.c:101
+msgctxt "Password hint"
+msgid "Try to use more uppercase letters."
+msgstr "Pruebe a usar más letras en mayúscula."
+
+#: ../panels/user-accounts/pw-utils.c:103
+msgctxt "Password hint"
+msgid "Try to use more lowercase letters."
+msgstr "Pruebe a usar más letras en minúscula."
+
+#: ../panels/user-accounts/pw-utils.c:105
+msgctxt "Password hint"
+msgid "Try to use more special characters, like punctuation."
+msgstr "Pruebe a usar más caracteres especiales, como signos de puntuación."
+
+#: ../panels/user-accounts/pw-utils.c:107
+msgctxt "Password hint"
+msgid "Try to use a mixture of letters, numbers and punctuation."
+msgstr "Pruebe a usar una mezcla de letras, números y signos de puntuación."
+
+#: ../panels/user-accounts/pw-utils.c:109
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same character."
+msgstr "Evite repetir el mismo carácter."
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Regular"
+msgctxt "Password hint"
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Evite repetir el mismo tipo de carácter: debe mezclar letras, números y "
+"signos de puntuación."
 
-#: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Buena"
+#: ../panels/user-accounts/pw-utils.c:113
+msgctxt "Password hint"
+msgid "Try to avoid sequences like 1234 or abcd."
+msgstr "Evite secuencias como 1234 o abcd."
 
-#: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/pw-utils.c:115
+msgctxt "Password hint"
+msgid "Try to add more characters."
+msgstr "Pruebe añadiendo más caracteres."
+
+#: ../panels/user-accounts/pw-utils.c:118
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and use a number or two."
+msgstr "Mezcle letras mayúsculas y minúsculas y use uno o dos números."
+
+#: ../panels/user-accounts/pw-utils.c:140
+#: ../panels/user-accounts/pw-utils.c:170
 msgctxt "Password strength"
-msgid "Strong"
-msgstr "Fuerte"
+msgid "Strength: Weak"
+msgstr "Fortaleza: débil"
+
+#: ../panels/user-accounts/pw-utils.c:144
+#: ../panels/user-accounts/pw-utils.c:171
+#| msgid "Length:"
+msgctxt "Password strength"
+msgid "Strength: Low"
+msgstr "Fortaleza: baja"
+
+#: ../panels/user-accounts/pw-utils.c:147
+#: ../panels/user-accounts/pw-utils.c:172
+msgctxt "Password strength"
+msgid "Strength: Medium"
+msgstr "Fortaleza: media"
+
+#: ../panels/user-accounts/pw-utils.c:150
+#: ../panels/user-accounts/pw-utils.c:173
+msgctxt "Password strength"
+msgid "Strength: Good"
+msgstr "Fortaleza: buena"
+
+#: ../panels/user-accounts/pw-utils.c:153
+#: ../panels/user-accounts/pw-utils.c:174
+msgctxt "Password strength"
+msgid "Strength: High"
+msgstr "Fortaleza: alta"
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -6264,26 +6353,71 @@ msgstr "La contraseña nueva no contiene suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: ../panels/user-accounts/um-account-dialog.c:186
+#: ../panels/user-accounts/um-account-dialog.c:212
 msgid "Failed to add account"
 msgstr "Falló al añadir la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:413
-#: ../panels/user-accounts/um-account-dialog.c:459
+#: ../panels/user-accounts/um-account-dialog.c:317
+msgid "This will be used to name your home folder and can't be changed."
+msgstr "Esto se usará para nombrar su carpeta personal y no se puede cambiar."
+
+#: ../panels/user-accounts/um-account-dialog.c:407
+#| msgid "Passwords do not match"
+msgid "Passwords do not match."
+msgstr "Las contraseñas no coinciden."
+
+#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "Passwords do not match"
+msgstr "Las contraseñas no coinciden"
+
+#: ../panels/user-accounts/um-account-dialog.c:661
+#: ../panels/user-accounts/um-account-dialog.c:707
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:597
+#: ../panels/user-accounts/um-account-dialog.c:845
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:656
+#: ../panels/user-accounts/um-account-dialog.c:904
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:729
+#: ../panels/user-accounts/um-account-dialog.c:965
+msgid ""
+"Login not recognized.\n"
+"Please try again."
+msgstr ""
+"Inicio de sesión no reconocido.\n"
+"Inténtelo de nuevo."
+
+#: ../panels/user-accounts/um-account-dialog.c:973
+#| msgid "Invalid password, please try again"
+msgid ""
+"Invalid password.\n"
+"Please try again."
+msgstr ""
+"Contraseña no válida.\n"
+"Inténtelo de nuevo."
+
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
+
+#: ../panels/user-accounts/um-account-dialog.c:1040
+#| msgid "Modem not found"
+msgid "Domain not found."
+msgstr "Dominio no encontrado."
+
+#: ../panels/user-accounts/um-account-dialog.c:1383
+msgid "Add User"
+msgstr "Añadir usuario"
+
+#. Create enterprise toggle button.
+#: ../panels/user-accounts/um-account-dialog.c:1396
+msgid "_Enterprise Login"
+msgstr "Inicio de s_esión corporativo"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -6396,37 +6530,58 @@ msgstr "Escriba de nuevo su contraseña actual."
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "You need to enter a new password"
 msgstr "Debe introducir una contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:304
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "The new password is not strong enough"
 msgstr "La contraseña nueva no es suficientemente segura"
 
-#: ../panels/user-accounts/um-password-dialog.c:310
+#: ../panels/user-accounts/um-password-dialog.c:312
 msgid "You need to confirm the password"
 msgstr "Debe confirmar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:313
+#: ../panels/user-accounts/um-password-dialog.c:315
 msgid "The passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:319
+#: ../panels/user-accounts/um-password-dialog.c:321
 msgid "You need to enter your current password"
 msgstr "Debe introducir su contraseña actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:322
+#: ../panels/user-accounts/um-password-dialog.c:324
 msgid "The current password is not correct"
 msgstr "La contraseña actual no es correcta"
 
-#: ../panels/user-accounts/um-password-dialog.c:385
-msgid "Passwords do not match"
-msgstr "Las contraseñas no coinciden"
-
-#: ../panels/user-accounts/um-password-dialog.c:439
+#: ../panels/user-accounts/um-password-dialog.c:441
 msgid "Wrong password"
 msgstr "Contraseña errónea"
+
+#: ../panels/user-accounts/um-password-dialog.c:599
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Demasiado corta"
+
+#: ../panels/user-accounts/um-password-dialog.c:600
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Débil"
+
+#: ../panels/user-accounts/um-password-dialog.c:601
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Regular"
+
+#: ../panels/user-accounts/um-password-dialog.c:602
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Buena"
+
+#: ../panels/user-accounts/um-password-dialog.c:603
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Fuerte"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6534,15 +6689,15 @@ msgstr "Ninguno"
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:977
+#: ../panels/user-accounts/um-user-panel.c:987
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:979
+#: ../panels/user-accounts/um-user-panel.c:989
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: ../panels/user-accounts/um-user-panel.c:1020
+#: ../panels/user-accounts/um-user-panel.c:1030
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6550,12 +6705,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1058
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1069
-#: ../panels/user-accounts/um-user-panel.c:1349
+#: ../panels/user-accounts/um-user-panel.c:1079
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6563,12 +6718,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1078
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1090
-#: ../panels/user-accounts/um-user-panel.c:1354
+#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6576,7 +6731,7 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1264
+#: ../panels/user-accounts/um-user-panel.c:1284
 msgid "My Account"
 msgstr "Mi cuenta"
 
@@ -6595,16 +6750,17 @@ msgid "The username cannot start with a '-'"
 msgstr "El nombre de usuario no puede comenzar por «-»"
 
 #: ../panels/user-accounts/um-utils.c:545
+#| msgid ""
+#| "The username must only consist of:\n"
+#| " ➣ letters from the English alphabet\n"
+#| " ➣ digits\n"
+#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
+"The username should only consist of lower and upper case letters from a-z, "
+"digits and any of characters '.', '-' and '_'"
 msgstr ""
-"El nombre de usuario debe consistir de:\n"
-" ➣ letras del alfabeto inglés\n"
-" ➣ dígitos\n"
-" ➣ cualquiera de los caracteres «.», «-» y «_»"
+"El nombre de usuario debe consistir en letras mayúsculas y minúsculas de la "
+"a-z, dígitos y cualquiera de los caracteres «.», «-» y «_»"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6645,7 +6801,7 @@ msgstr "Mapear una única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Ninguna"
@@ -6665,30 +6821,30 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Mostrar la ayuda en pantalla"
 
-#: ../panels/wacom/cc-wacom-page.c:665
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:665
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Abajo"
 
-#: ../panels/wacom/cc-wacom-page.c:706
+#: ../panels/wacom/cc-wacom-page.c:715
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:796
+#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:854
+#: ../panels/wacom/cc-wacom-page.c:863
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/wacom/cc-wacom-page.c:964
+#: ../panels/wacom/cc-wacom-page.c:973
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -6991,6 +7147,22 @@ msgstr "Todas las configuraciones"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Add account"
+#~ msgstr "Añadir cuenta"
+
+#~ msgid "_Local Account"
+#~ msgstr "Cuenta _local"
+
+#~ msgid "Tip: Enterprise domain or realm name"
+#~ msgstr "Consejo: dominio de la empresa o nombre real"
+
+#~ msgid "C_ontinue"
+#~ msgstr "C_ontinuar"
+
+#~ msgctxt "Password strength"
+#~ msgid "Not good enough"
+#~ msgstr "No es suficientemente buena"
 
 #~ msgid "Left Shift"
 #~ msgstr "Mayús izquierda"
@@ -7755,9 +7927,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Printer Options"
 #~ msgstr "Opciones de la impresora"
-
-#~ msgid "Add User"
-#~ msgstr "Añadir usuario"
 
 #~ msgid "Allowed users"
 #~ msgstr "Usuarios permitidos"
