@@ -229,6 +229,7 @@ accept_password_dialog (GtkButton        *button,
 
         switch (mode) {
                 case UM_PASSWORD_DIALOG_MODE_NORMAL:
+                        act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_REGULAR);
                         if (act_user_get_uid (um->user) == getuid ()) {
                                 GdkDisplay *display;
                                 GdkCursor *cursor;
