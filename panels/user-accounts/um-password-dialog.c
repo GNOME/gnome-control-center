@@ -192,6 +192,7 @@ accept_password_dialog (GtkButton        *button,
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
 
         switch (um->password_mode) {
+                act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_REGULAR);
                 case ACT_USER_PASSWORD_MODE_REGULAR:
                         if (act_user_get_uid (um->user) == getuid ()) {
                                 GdkDisplay *display;
