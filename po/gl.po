@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-31 00:59+0200\n"
-"PO-Revision-Date: 2013-05-31 01:01+0200\n"
+"POT-Creation-Date: 2013-06-06 11:12+0200\n"
+"PO-Revision-Date: 2013-06-06 11:19+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -65,27 +65,39 @@ msgid "Span"
 msgstr "Expandir"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:300
 msgid "Select Background"
 msgstr "Seleccionar fondo"
 
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:319
 msgid "Wallpapers"
 msgstr "Fondo de escritorio"
 
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:328
 msgid "Pictures"
 msgstr "Imaxes"
 
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:336
 msgid "Colors"
 msgstr "Cores"
 
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:345
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:400
+msgid "No Pictures Found"
+msgstr "Non se atopou ningunha imaxe"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:415
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
+
+#: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -107,7 +119,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sen fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -154,7 +166,7 @@ msgstr "páxina 2"
 msgid "Paired"
 msgstr "Emparellado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
 msgid "Type"
 msgstr "Tipo"
 
@@ -183,43 +195,43 @@ msgstr "Preferencias do teclado"
 msgid "Send Files…"
 msgstr "Enviar ficheiros…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Si"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "Non"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:472
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth está desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:477
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "O Bluetooth está fisicamente desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:481
 msgid "No Bluetooth adapters found"
 msgstr "Non se atoparon adaptadores Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:580
 msgid "Visibility"
 msgstr "Visibilidade"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:584
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibilidade de «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Retirar «%s» da lista de dispositivos?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:630
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -549,7 +561,7 @@ msgstr "Calibración de pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1083
+#: ../panels/user-accounts/um-account-dialog.c:1407
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -917,7 +929,7 @@ msgstr "Outro…"
 
 #: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:174
+#: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Máis…"
 
@@ -2016,12 +2028,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:790
+#: ../panels/user-accounts/um-utils.c:787
 msgid "Today"
 msgstr "Hoxe"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:793
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Yesterday"
 msgstr "Mañá"
 
@@ -2391,7 +2403,7 @@ msgstr "Novo perfil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1084
+#: ../panels/user-accounts/um-account-dialog.c:1408
 msgid "_Add"
 msgstr "_Engadir"
 
@@ -2816,7 +2828,7 @@ msgstr "detalles"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Contrasinal:"
@@ -3315,7 +3327,7 @@ msgstr "Ambos"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Username"
 msgstr "Nome de u_suario"
 
@@ -3828,15 +3840,15 @@ msgid "Power Saving"
 msgstr "Aforro de enerxí­a"
 
 #: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+msgid "_Screen brightness"
 msgstr "Brillo da pantall_a"
 
 #: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+msgid "_Dim screen when inactive"
 msgstr "_Escurecer a pantalla se está inactivo"
 
 #: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+msgid "_Blank screen"
 msgstr "Pantalla en _branco"
 
 #: ../panels/power/cc-power-panel.c:1516
@@ -3848,11 +3860,11 @@ msgid "Turns off wireless devices"
 msgstr "Desactiva os dispositivos sen fíos"
 
 #: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+msgid "_Mobile broadband"
 msgstr "Banda larga _móbil"
 
 #: ../panels/power/cc-power-panel.c:1549
-msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Desactiva os dispositivos de banda larga móbil (3G, 4G, WiMax, etc.)"
 
 #: ../panels/power/cc-power-panel.c:1582
@@ -3872,12 +3884,12 @@ msgid "Suspend & Power Off"
 msgstr "Suspender e apagar"
 
 #: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+msgid "_Automatic suspend"
 msgstr "Suspensión _automática"
 
 #: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
-msgstr "Cando a enerxía da batería é crítica"
+msgid "When battery power is _critical"
+msgstr "Cando a enerxía da batería é _crítica"
 
 #: ../panels/power/cc-power-panel.c:1848
 msgid "Power Off"
@@ -3994,6 +4006,7 @@ msgstr "Autenticar"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/sharing/sharing.ui.h:22
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Contrasinal"
 
@@ -4233,7 +4246,7 @@ msgid "Add a New Printer"
 msgstr "Engadir unha nova impresora"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -4758,11 +4771,11 @@ msgstr "Métrico"
 msgid "No regions found"
 msgstr "Non se atoparon rexións"
 
-#: ../panels/region/cc-input-chooser.c:188
+#: ../panels/region/cc-input-chooser.c:185
 msgid "No input sources found"
 msgstr "Non se atopou ningunha orixe de entrada"
 
-#: ../panels/region/cc-input-chooser.c:1091
+#: ../panels/region/cc-input-chooser.c:1088
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Outra"
@@ -5225,8 +5238,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sen amplificación"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "_Perfíl:"
 
@@ -5252,73 +5265,73 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sistemas de son"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "_Probar altofalantes"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "Detección de picos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Nome"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Proba de altofalantes para %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "V_olume de saída:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "Saída"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "_Seleccione un dispositivo para o son de saída:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "Preferencias para o dispositivo seleccionado:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "Entrada"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "Volume de _entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "Nivel de entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "_Seleccione un dispositivo para o son de entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "Efectos de son"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "Volume das _alertas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "Aplicativos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "Neste momento non hai ningún aplicativo reproducindo ou gravando son."
 
@@ -5870,48 +5883,52 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Add account"
-msgstr "Engadir conta"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "_Local Account"
-msgstr "Conta _local"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Enterprise Login"
-msgstr "Inicio de s_esión corporativo"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name"
+msgid "_Full Name"
 msgstr "Nome _completo"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "_Tipo de conta"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr ""
+"Permitirlle ao usuario estabelecer o contrasinal no seguinte inicio de "
+"sesión"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "Set a password now"
+msgstr "Estabelecer un contrasinal agora"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+msgid "_Confirm Password"
+msgstr "_Confirmar contrasinal"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "_Domain"
 msgstr "_Dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Login Name"
 msgstr "Nome de _usuario"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "Tip: Enterprise domain or realm name"
-msgstr "Consello: dominio da empresa ou nome real"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "C_ontinue"
-msgstr "C_ontinuar"
+msgid "Login _Password"
+msgstr "_Contrasinal de inicio de sesión"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid "_Enroll"
+msgstr "_Unirse"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "Domain Administrator Login"
 msgstr "Inicio de sesión do administrador do dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5921,11 +5938,11 @@ msgstr ""
 "formar parte dun dominio. Pida ao administrador do seu sistema \n"
 "que escriba aquí o contrasinal do dominio."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid "Administrator _Name"
 msgstr "_Nome do administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator Password"
 msgstr "Contrasinal do administrador"
 
@@ -6014,10 +6031,6 @@ msgstr "Seguinte semana"
 #: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "Seguinte semana"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "Set a password now"
-msgstr "Estabelecer un contrasinal agora"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "Choose password at next login"
@@ -6147,40 +6160,129 @@ msgstr "Xestionar contas de usuario"
 msgid "Authentication is required to change user data"
 msgstr "Requírese autenticación para cambiar os datos do usuario"
 
-#: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Demasiado curto"
+#: ../panels/user-accounts/pw-utils.c:81
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr "O novo contrasinal debe ser distinto do antigo."
+
+#: ../panels/user-accounts/pw-utils.c:83
+msgctxt "Password hint"
+msgid "Try changing some letters and numbers."
+msgstr "Tente cambiar algunhas letras e números."
+
+#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+msgctxt "Password hint"
+msgid "Try changing the password a bit more."
+msgstr "Tente cambiar o contrasinal un pouco máis."
+
+#: ../panels/user-accounts/pw-utils.c:87
+msgctxt "Password hint"
+msgid "A password without your user name would be stronger."
+msgstr "Un contrasinal sen o seu nome de usuario pode ser máis forte."
+
+#: ../panels/user-accounts/pw-utils.c:89
+msgctxt "Password hint"
+msgid "Try to avoid using your name in the password."
+msgstr "Tente evitar o uso do seu nome no contrasinal."
+
+#: ../panels/user-accounts/pw-utils.c:91
+msgctxt "Password hint"
+msgid "Try to avoid some of the words included in the password."
+msgstr "Tente evitar algunhas das palabras que inclúe o seu contrasinal."
+
+#: ../panels/user-accounts/pw-utils.c:95
+msgctxt "Password hint"
+msgid "Try to avoid common words."
+msgstr "Tente evitar palabras comúns."
+
+#: ../panels/user-accounts/pw-utils.c:97
+msgctxt "Password hint"
+msgid "Try to avoid reordering existing words."
+msgstr "Tente evitar a reordenación de palabras."
 
 #: ../panels/user-accounts/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "Non é boa dabondo"
+msgctxt "Password hint"
+msgid "Try to use more numbers."
+msgstr "Tente usar máis números."
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Débil"
+#: ../panels/user-accounts/pw-utils.c:101
+msgctxt "Password hint"
+msgid "Try to use more uppercase letters."
+msgstr "Tente usar máis letras en maiúsculas."
+
+#: ../panels/user-accounts/pw-utils.c:103
+msgctxt "Password hint"
+msgid "Try to use more lowercase letters."
+msgstr "Tente usar máis letras en minúsculas."
+
+#: ../panels/user-accounts/pw-utils.c:105
+msgctxt "Password hint"
+msgid "Try to use more special characters, like punctuation."
+msgstr "Tente usar máis caracteres especiais, como signos de puntuacións."
+
+#: ../panels/user-accounts/pw-utils.c:107
+msgctxt "Password hint"
+msgid "Try to use a mixture of letters, numbers and punctuation."
+msgstr "Tente usar unha mistura de letras, números e signos de puntuación."
+
+#: ../panels/user-accounts/pw-utils.c:109
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same character."
+msgstr "Tente evitar a repetición do mesmo caracter."
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Aceptábel"
+msgctxt "Password hint"
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Tente evitar a repetición do mesmo tipo de caracter: debe formar unha "
+"mistura de letras, números e signos de puntuación."
 
-#: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Boa"
+#: ../panels/user-accounts/pw-utils.c:113
+msgctxt "Password hint"
+msgid "Try to avoid sequences like 1234 or abcd."
+msgstr "Tente evitar secuencias como 1234 ou abcd."
 
-#: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/pw-utils.c:115
+msgctxt "Password hint"
+msgid "Try to add more characters."
+msgstr "Tente engadir máis caracteres."
+
+#: ../panels/user-accounts/pw-utils.c:118
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and use a number or two."
+msgstr "Misture letras en maiúsculas e minúsculas, e use un número ou dous."
+
+#: ../panels/user-accounts/pw-utils.c:140
+#: ../panels/user-accounts/pw-utils.c:170
 msgctxt "Password strength"
-msgid "Strong"
-msgstr "Forte"
+msgid "Strength: Weak"
+msgstr "Forza: Débil"
+
+#: ../panels/user-accounts/pw-utils.c:144
+#: ../panels/user-accounts/pw-utils.c:171
+msgctxt "Password strength"
+msgid "Strength: Low"
+msgstr "Forza: Baixa"
+
+#: ../panels/user-accounts/pw-utils.c:147
+#: ../panels/user-accounts/pw-utils.c:172
+msgctxt "Password strength"
+msgid "Strength: Medium"
+msgstr "Forza: Media"
+
+#: ../panels/user-accounts/pw-utils.c:150
+#: ../panels/user-accounts/pw-utils.c:173
+msgctxt "Password strength"
+msgid "Strength: Good"
+msgstr "Forza: Boa"
+
+#: ../panels/user-accounts/pw-utils.c:153
+#: ../panels/user-accounts/pw-utils.c:174
+msgctxt "Password strength"
+msgid "Strength: High"
+msgstr "Forza: Alta"
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -6231,26 +6333,68 @@ msgstr "O novo contrasinal non contén suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: ../panels/user-accounts/um-account-dialog.c:186
+#: ../panels/user-accounts/um-account-dialog.c:212
 msgid "Failed to add account"
 msgstr "Produciuse un erro ao engadir a conta"
 
+#: ../panels/user-accounts/um-account-dialog.c:317
+msgid "This will be used to name your home folder and can't be changed."
+msgstr "Usarase como nome para o seu cartafol persoal e non pode cambiarse."
+
+#: ../panels/user-accounts/um-account-dialog.c:407
+msgid "Passwords do not match."
+msgstr "Os contrasinais non coinciden."
+
 #: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-account-dialog.c:449
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "Passwords do not match"
+msgstr "Os contrasinais non coinciden"
+
+#: ../panels/user-accounts/um-account-dialog.c:661
+#: ../panels/user-accounts/um-account-dialog.c:707
 msgid "Failed to register account"
 msgstr "Produciuse un erro ao rexistrar a conta"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:845
 msgid "No supported way to authenticate with this domain"
 msgstr "Non hai unha maneira admitida de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:636
+#: ../panels/user-accounts/um-account-dialog.c:904
 msgid "Failed to join domain"
 msgstr "Produciuse un erro ao unirse ao dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:704
+#: ../panels/user-accounts/um-account-dialog.c:965
+msgid ""
+"Login not recognized.\n"
+"Please try again."
+msgstr ""
+"Inicio de sesión non recoñecido.\n"
+"Ténteo de novo."
+
+#: ../panels/user-accounts/um-account-dialog.c:973
+msgid ""
+"Invalid password.\n"
+"Please try again."
+msgstr ""
+"Contrasinal incorrecto.\n"
+"Ténteo de novo"
+
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to log into domain"
 msgstr "Produciuse un erro ao iniciar sesión no dominio"
+
+#: ../panels/user-accounts/um-account-dialog.c:1040
+msgid "Domain not found."
+msgstr "Dominio non atopado."
+
+#: ../panels/user-accounts/um-account-dialog.c:1383
+msgid "Add User"
+msgstr "Engadir usuario"
+
+#. Create enterprise toggle button.
+#: ../panels/user-accounts/um-account-dialog.c:1396
+msgid "_Enterprise Login"
+msgstr "Inicio de s_esión corporativo"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -6363,37 +6507,58 @@ msgstr "Escriba o seu contrasinal actual de novo."
 msgid "Password could not be changed"
 msgstr "Non foi posíbel cambiar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "You need to enter a new password"
 msgstr "Debe escribir un novo contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:304
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "The new password is not strong enough"
 msgstr "O novo contrasinal non é forte dabondo"
 
-#: ../panels/user-accounts/um-password-dialog.c:310
+#: ../panels/user-accounts/um-password-dialog.c:312
 msgid "You need to confirm the password"
 msgstr "Debe confirmar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:313
+#: ../panels/user-accounts/um-password-dialog.c:315
 msgid "The passwords do not match"
 msgstr "Os contrasinais non coninciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:319
+#: ../panels/user-accounts/um-password-dialog.c:321
 msgid "You need to enter your current password"
 msgstr "Debe escribir o seu contrasinal actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:322
+#: ../panels/user-accounts/um-password-dialog.c:324
 msgid "The current password is not correct"
 msgstr "O contrasinal actual non é correcto"
 
-#: ../panels/user-accounts/um-password-dialog.c:385
-msgid "Passwords do not match"
-msgstr "Os contrasinais non coinciden"
-
-#: ../panels/user-accounts/um-password-dialog.c:439
+#: ../panels/user-accounts/um-password-dialog.c:441
 msgid "Wrong password"
 msgstr "Contrasinal incorrecto"
+
+#: ../panels/user-accounts/um-password-dialog.c:599
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Demasiado curto"
+
+#: ../panels/user-accounts/um-password-dialog.c:600
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Débil"
+
+#: ../panels/user-accounts/um-password-dialog.c:601
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Aceptábel"
+
+#: ../panels/user-accounts/um-password-dialog.c:602
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Boa"
+
+#: ../panels/user-accounts/um-password-dialog.c:603
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Forte"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6436,20 +6601,24 @@ msgstr "Contrasinal incorrecto, ténteo de novo"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Non foi posíbel conectarse ao dominio %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "Outras contas"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "Produciuse un erro ao eliminar o usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "Non pode eliminar a súa propia conta."
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aínda ten a sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6457,12 +6626,12 @@ msgstr ""
 "Se elimina un usuario mentres ten a sesión iniciada pode poñer deixar o "
 "sistema nun estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Desexa manter os ficheiros de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6470,42 +6639,42 @@ msgstr ""
 "É posíbel manter o cartafol persoal, a caixa de correo e os ficheiros "
 "temporais ao eliminar unha conta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "_Eliminar os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "_Manter os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Conta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar no seguinte inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ningún"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "Conectado"
 
-#: ../panels/user-accounts/um-user-panel.c:943
+#: ../panels/user-accounts/um-user-panel.c:987
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un erro ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:945
+#: ../panels/user-accounts/um-user-panel.c:989
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:986
+#: ../panels/user-accounts/um-user-panel.c:1030
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6513,12 +6682,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1024
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1035
-#: ../panels/user-accounts/um-user-panel.c:1321
+#: ../panels/user-accounts/um-user-panel.c:1079
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6526,12 +6695,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1044
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1056
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6539,13 +6708,9 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1230
+#: ../panels/user-accounts/um-user-panel.c:1284
 msgid "My Account"
 msgstr "A miña conta"
-
-#: ../panels/user-accounts/um-user-panel.c:1239
-msgid "Other Accounts"
-msgstr "Outras contas"
 
 #: ../panels/user-accounts/um-utils.c:535
 #, c-format
@@ -6563,15 +6728,11 @@ msgstr "O nome de usuario non pode comezar con «-»"
 
 #: ../panels/user-accounts/um-utils.c:545
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
+"The username should only consist of lower and upper case letters from a-z, "
+"digits and any of characters '.', '-' and '_'"
 msgstr ""
-"O nome de usuario debe estar formado por:\n"
-" ➣ letras do alfabeto inglés\n"
-" ➣ díxitos\n"
-" ➣ calquera dos caracteres «.», «-» e «_»"
+"O nome de usuario debe estar formado por letras en maiúsculas e minúsculas "
+"desde o «a» ao «z», díxitos, e calquera dos caracteres «.», «-» e «_»"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6612,7 +6773,7 @@ msgstr "Asignar a unha única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Ningunha"
@@ -6632,30 +6793,30 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Mostrar axuda en pantalla"
 
-#: ../panels/wacom/cc-wacom-page.c:665
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:665
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Abaixo"
 
-#: ../panels/wacom/cc-wacom-page.c:706
+#: ../panels/wacom/cc-wacom-page.c:715
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:796
+#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:854
+#: ../panels/wacom/cc-wacom-page.c:863
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/wacom/cc-wacom-page.c:964
+#: ../panels/wacom/cc-wacom-page.c:973
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -6951,13 +7112,29 @@ msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1421
+#: ../shell/cc-window.c:1424
 msgid "All Settings"
 msgstr "Todas as preferencias"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Add account"
+#~ msgstr "Engadir conta"
+
+#~ msgid "_Local Account"
+#~ msgstr "Conta _local"
+
+#~ msgid "Tip: Enterprise domain or realm name"
+#~ msgstr "Consello: dominio da empresa ou nome real"
+
+#~ msgid "C_ontinue"
+#~ msgstr "C_ontinuar"
+
+#~ msgctxt "Password strength"
+#~ msgid "Not good enough"
+#~ msgstr "Non é boa dabondo"
 
 #~ msgid "Left Shift"
 #~ msgstr "Maiús esquerda"
