@@ -1,4 +1,36 @@
 =============
+Version 3.8.3
+=============
+
+- Handle repeated commandline parsing properly
+- Fix arrow icons in RTL locales
+- Fix interaction issues with some dialogs when the panel underneath
+  is switched
+- Raise the existing window when already opened
+- Translation updates
+
+Keyboard:
+- Use the XKB "grp" option for the input source switch shortcut
+
+Network:
+- Prevent ethernet device to switch back to 'on' state
+- Update on/off switch button when vpn becomes active/inactive
+- Avoid assertion in rfkill support with newer kernel versions
+
+Printers:
+- Don't reset position of tree view containing new devices when
+  discovery is running
+
+User Accounts:
+- Fix a memory leak
+- Prevent users from setting invalid real names
+- Don't let user disable own account
+- Remove autologin when an account is deleted
+- Prevent an account from being set to automatically logged in if it
+  is disabled or requires the password to be changed at next login
+- Prevent the last Administrator account demoted, deleted or disabled
+
+=============
 Version 3.8.2
 =============
 
