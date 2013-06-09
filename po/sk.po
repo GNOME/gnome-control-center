@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-03 13:35+0000\n"
-"PO-Revision-Date: 2013-05-31 14:05+0100\n"
+"POT-Creation-Date: 2013-06-08 08:41+0000\n"
+"PO-Revision-Date: 2013-06-08 11:45+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -62,32 +62,44 @@ msgstr "Rozprestrieť"
 
 # window title
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:300
 msgid "Select Background"
 msgstr "Výber pozadia"
 
 # radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:319
 msgid "Wallpapers"
 msgstr "Tapety"
 
 # radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:328
 msgid "Pictures"
 msgstr "Obrázky"
 
 # radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:336
 msgid "Colors"
 msgstr "Farby"
 
 # radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:345
 msgid "Flickr"
 msgstr "Flickr"
 
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:400
+msgid "No Pictures Found"
+msgstr "Nenašli sa žiadne obrázky"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:415
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia tu"
+
 # tlačidlo
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -109,7 +121,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Bez pozadia plochy"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "Aktuálne pozadie"
 
@@ -166,7 +178,7 @@ msgid "Paired"
 msgstr "Spárované"
 
 # GtkLabel label
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
 msgid "Type"
 msgstr "Typ"
 
@@ -455,12 +467,10 @@ msgstr "Opíšte si túto adresu URL."
 msgid "Restart this computer and boot your normal operating system."
 msgstr "Reštartujte počítač a spustite váš obvyklý operačný systém."
 
-# PM: znie mi to neprirodzene. Čo je to za hlášku? Nebude lepšie Keď chcete ... alebo Aby sa ... alebo Profil prevezmete a ...
 #: ../panels/color/cc-color-panel.c:931
-#, fuzzy
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
-"Na prevzatie a inštaláciu profilu zadajte adresu URL do vášho prehliadača."
+"Profil prevezmete a nainštalujete zadaním adresy URL do vášho prehliadača."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
 #: ../panels/color/cc-color-panel.c:965
@@ -581,7 +591,7 @@ msgstr "Kalibrácia displeja"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1083
+#: ../panels/user-accounts/um-account-dialog.c:1407
 msgid "Cancel"
 msgstr "Zrušiť"
 
@@ -904,18 +914,14 @@ msgstr "LCD (technológia podsvietenia RGB LED)"
 msgid "LCD (white LED backlight)"
 msgstr "LCD (technológia podsvietenia bielymi LED diódami)"
 
-#  PK: mozno to Wide by som prelozil
-# PM: aj gamut som videl už kdesi preložené tuším ako farebný priestor alebo priesto farieb treba pozrieť gimp a muduly zaoberajúce sa farbami
 #: ../panels/color/color.ui.h:55
-#, fuzzy
 msgid "Wide gamut LCD (CCFL backlight)"
-msgstr "Wide gamut LCD (technológia podsvietenia CCFL)"
+msgstr "LCD so širokým farebným priestorom (technológia podsvietenia CCFL)"
 
 # PK: mozno to Wide by som prelozil
 #: ../panels/color/color.ui.h:56
-#, fuzzy
 msgid "Wide gamut LCD (RGB LED backlight)"
-msgstr "Wide gamut LCD (technológia podsvietenia RGB LED)"
+msgstr "LCD so širokým farebným priestorom (technológia podsvietenia RGB LED)"
 
 #: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
@@ -1018,7 +1024,7 @@ msgstr "Iný…"
 
 #: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:174
+#: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Viac…"
 
@@ -2294,9 +2300,8 @@ msgstr "Zabezpečenie"
 # spinbutton default
 # doriesit v master vetve
 #: ../panels/network/connection-editor/ce-page.c:507
-#, fuzzy
 msgid "automatic"
-msgstr "automatické"
+msgstr "automaticky"
 
 # zabezpečenie
 #. TRANSLATORS: this WEP WiFi security
@@ -2346,13 +2351,13 @@ msgstr "Nikdy"
 
 # naposledy použité
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:790
+#: ../panels/user-accounts/um-utils.c:787
 msgid "Today"
 msgstr "Dnes"
 
 # naposledy použité
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:793
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Yesterday"
 msgstr "Včera"
 
@@ -2786,7 +2791,7 @@ msgstr "Nový profil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1084
+#: ../panels/user-accounts/um-account-dialog.c:1408
 msgid "_Add"
 msgstr "P_ridať"
 
@@ -3275,7 +3280,7 @@ msgstr "podrobnosti"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Heslo"
@@ -3827,7 +3832,7 @@ msgstr "Oba spôsoby"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Username"
 msgstr "_Používateľské meno"
 
@@ -4418,17 +4423,19 @@ msgstr "Šetrenie energie"
 
 # label
 #: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
 # label
 #: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+msgid "_Dim screen when inactive"
 msgstr "_Stmaviť obrazovku pri neaktivite"
 
+# PK: toto je divne, skor vypnut obrazovku
+# PM: no blank screen praveze nie je vypnutie obrazovky, balnk screen je vyplnenie obrazovky čiernou ale je stále zapnutá. Používa sa to pri starých monitoroch, ktoré zobrazujú pri ATM hlásku ze nie je signál.
 # label
 #: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+msgid "_Blank screen"
 msgstr "Vy_prázdniť obrazovku po"
 
 # PM: pozerám že je tam aj reťazec Turns off wireless devices ako label, nemá byť aj on na preklad?
@@ -4444,11 +4451,11 @@ msgstr "Vypne bezdrôtové zariadenia"
 
 # label
 #: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+msgid "_Mobile broadband"
 msgstr "Širokopásmové _mobilné pripojenie"
 
 #: ../panels/power/cc-power-panel.c:1549
-msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Vypne širokopásmové mobilné zariadenia (3G, 4G, WiMax, atď)"
 
 # label
@@ -4474,12 +4481,12 @@ msgstr "Uspanie a vypnútie"
 
 # label
 #: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+msgid "_Automatic suspend"
 msgstr "_Automaticky uspať"
 
 # label
 #: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
+msgid "When battery power is _critical"
 msgstr "Pri _kritickom vybití batérie"
 
 # label
@@ -4648,6 +4655,7 @@ msgstr "Overeniť totožnosť"
 # GtkLabel label
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/sharing/sharing.ui.h:22
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Heslo"
 
@@ -4903,7 +4911,7 @@ msgstr "Pridajte novú tlačiareň"
 
 # GtkButton label
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
@@ -5494,11 +5502,11 @@ msgstr "Metrické"
 msgid "No regions found"
 msgstr "Nenašli sa žiadne regióny"
 
-#: ../panels/region/cc-input-chooser.c:188
+#: ../panels/region/cc-input-chooser.c:185
 msgid "No input sources found"
 msgstr "Nenašli sa žiadne zdroje vstupu"
 
-#: ../panels/region/cc-input-chooser.c:1091
+#: ../panels/region/cc-input-chooser.c:1088
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Iný"
@@ -5669,11 +5677,9 @@ msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Nastavenia prihlásenia sú používané všetkými používateľmi na tomto systéme"
 
-# PM: nemá tu byť "Domov" ako v nautiluse?
 #: ../panels/search/cc-search-locations-dialog.c:276
-#, fuzzy
 msgid "Home"
-msgstr "Domovský priečinok"
+msgstr "Domov"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
 msgctxt "Search Location"
@@ -6052,8 +6058,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Nezosilnená"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "_Profil:"
 
@@ -6082,98 +6088,96 @@ msgid "System Sounds"
 msgstr "Systémové zvuky"
 
 # button lablel
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "V_yskúšať reproduktory"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "Detekcia špičiek"
 
 # tree view column
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Názov"
 
 # tree view column
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "Zariadenie"
 
 # dialog title
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Skúška reproduktorov pre %s"
 
 # label
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "Hlasitosť vý_stupu:"
 
 # tab
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "Výstup"
 
 # frame
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "Zv_oľte si zariadenie výstupu zvuku:"
 
 # frame
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "Nastavenia zvoleného zariadenia:"
 
 # tab
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "Vstup"
 
 # label
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "_Hlasitosť vstupu:"
 
 # label
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "Intenzita vstupu:"
 
 # frame
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "Zv_oľte si zariadenie vstupu zvuku:"
 
 # tab
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
 # label
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "_Hlasitosť varovania:"
 
 # tab
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "Aplikácie"
 
 # label
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "Žiadna aplikácia teraz neprehráva ani nenahráva zvuk."
 
-# PM: je tu správny rod? čoho sa to týka?
-# DK: netusim.neviem to ani najst nikde
-# PK: asi zvuk vystrahy, radsej sa opytaj vyvojarov
+# DK: https://bugzilla.gnome.org/show_bug.cgi?id=701810
 #: ../panels/sound/gvc-sound-theme-chooser.c:189
 #, fuzzy
 msgid "Built-in"
-msgstr "Zabudované"
+msgstr "Zabudovaná"
 
 # widget name
 #: ../panels/sound/gvc-sound-theme-chooser.c:455
@@ -6832,58 +6836,59 @@ msgid "Administrator"
 msgstr "Správca"
 
 # GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Add account"
-msgstr "Pridať účet"
-
-# GtkToggleButton label
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "_Local Account"
-msgstr "_Miestny účet"
-
-# GtkToggleButton label
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Enterprise Login"
-msgstr "_Firemné prihlásenie"
-
-# GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name"
+msgid "_Full Name"
 msgstr "_Celé meno"
 
 # GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "_Typ účtu:"
 
+# GtkListStore item
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Umožniť používateľovi nastaviť heslo pri najbližšom prihlásení"
+
+# GtkListStore item
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "Set a password now"
+msgstr "Nastaviť heslo teraz"
+
 # GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+msgid "_Confirm Password"
+msgstr "Po_tvrdenie hesla"
+
+# GtkLabel
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "_Domain"
 msgstr "_Doména"
 
 # GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Login Name"
 msgstr "_Prihlasovacie meno"
 
-# GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "Tip: Enterprise domain or realm name"
-msgstr "Rada: Firemná doména alebo názov pôsobiska"
-
-# GtkButton label
+# GtkLabel label
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "C_ontinue"
-msgstr "P_okračovať"
+msgid "Login _Password"
+msgstr "_Heslo pre prihlásenie"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid "_Enroll"
+msgstr "Zar_egistrovať"
 
 # GtkLabel label
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "Domain Administrator Login"
 msgstr "Prihlásenie správcu domény"
 
 # GtkLabel label
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -6894,12 +6899,12 @@ msgstr ""
 "aby sem zadal heslo k doméne."
 
 # GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid "Administrator _Name"
 msgstr "_Meno správcu"
 
 # GtkLabel
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator Password"
 msgstr "Heslo správcu"
 
@@ -7008,11 +7013,6 @@ msgid "Next week"
 msgstr "Nasledujúci týždeň"
 
 # GtkListStore item
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "Set a password now"
-msgstr "Nastaviť heslo teraz"
-
-# GtkListStore item
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "Choose password at next login"
 msgstr "Zvoliť heslo pri najbližšom prihlásení"
@@ -7101,7 +7101,7 @@ msgstr "Galéria"
 #: ../panels/user-accounts/um-photo-dialog.c:218
 #, fuzzy
 msgid "Browse for more pictures"
-msgstr "Výber obrázka"
+msgstr "Výber ďalších obrázkov"
 
 # GtkRadioButton label
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
@@ -7173,40 +7173,131 @@ msgstr "Správa používateľských účtov"
 msgid "Authentication is required to change user data"
 msgstr "Na zmenu používateľských údajov je vyžadované overenie totožnosti"
 
-#: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Príliš krátke"
+#: ../panels/user-accounts/pw-utils.c:81
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr "Nové heslo musí byť odlišné od pôvodného hesla."
+
+#: ../panels/user-accounts/pw-utils.c:83
+msgctxt "Password hint"
+msgid "Try changing some letters and numbers."
+msgstr "Skúste zmeniť niektoré písmená a čísla."
+
+# GtkLabel
+#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+msgctxt "Password hint"
+msgid "Try changing the password a bit more."
+msgstr "Skúste ešte viac zmeniť heslo."
+
+#: ../panels/user-accounts/pw-utils.c:87
+msgctxt "Password hint"
+msgid "A password without your user name would be stronger."
+msgstr "Heslo bez vášho mena bude silnejšie."
+
+#: ../panels/user-accounts/pw-utils.c:89
+msgctxt "Password hint"
+msgid "Try to avoid using your name in the password."
+msgstr "Skúste sa vyhnúť použitiu vášho mena v hesle."
+
+#: ../panels/user-accounts/pw-utils.c:91
+msgctxt "Password hint"
+msgid "Try to avoid some of the words included in the password."
+msgstr "Skúste sa vyhnúť slovám, ktoré sú obsiahnuté v hesle."
+
+#: ../panels/user-accounts/pw-utils.c:95
+msgctxt "Password hint"
+msgid "Try to avoid common words."
+msgstr "Skúste sa vyhnúť často používaným slovám."
+
+#: ../panels/user-accounts/pw-utils.c:97
+msgctxt "Password hint"
+msgid "Try to avoid reordering existing words."
+msgstr "Skúste sa vyhnúť zmene poradia existujúcich slov."
 
 #: ../panels/user-accounts/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "Nedostatočné"
+msgctxt "Password hint"
+msgid "Try to use more numbers."
+msgstr "Skúste použiť viac čísel."
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Slabé"
+#: ../panels/user-accounts/pw-utils.c:101
+msgctxt "Password hint"
+msgid "Try to use more uppercase letters."
+msgstr "Skúste použiť viac veľkých písmen."
+
+#: ../panels/user-accounts/pw-utils.c:103
+msgctxt "Password hint"
+msgid "Try to use more lowercase letters."
+msgstr "Skúste použiť viac malých písmen."
+
+#: ../panels/user-accounts/pw-utils.c:105
+msgctxt "Password hint"
+msgid "Try to use more special characters, like punctuation."
+msgstr "Skúste použiť viac špeciálnych znakov ako sú interpunkčné znamienka."
+
+#: ../panels/user-accounts/pw-utils.c:107
+msgctxt "Password hint"
+msgid "Try to use a mixture of letters, numbers and punctuation."
+msgstr "Skúste použiť zmes písmen, čísel a interpunkčných znamienok."
+
+#: ../panels/user-accounts/pw-utils.c:109
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same character."
+msgstr "Skúste sa vyhnúť opakovaniu toho istého znaku."
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Uspokojivé"
+msgctxt "Password hint"
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Skúste sa vyhnúť opakovaniu toho istého znaku: musíte zmiešať písmená, čísla "
+"a interpunkčné znamienka."
 
-#: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Dobré"
+#: ../panels/user-accounts/pw-utils.c:113
+msgctxt "Password hint"
+msgid "Try to avoid sequences like 1234 or abcd."
+msgstr "Skúste sa vyhnúť frázam ako 1234 alebo abcd."
 
-#: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/pw-utils.c:115
+msgctxt "Password hint"
+msgid "Try to add more characters."
+msgstr "Skúste pridať viac znakov."
+
+#: ../panels/user-accounts/pw-utils.c:118
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and use a number or two."
+msgstr "Zmiešajte veľké a malé písmená a použite jedno alebo viac číslic."
+
+#: ../panels/user-accounts/pw-utils.c:140
+#: ../panels/user-accounts/pw-utils.c:170
 msgctxt "Password strength"
-msgid "Strong"
-msgstr "Silné"
+msgid "Strength: Weak"
+msgstr "Sila: Slabé"
+
+# GtkLabel
+#: ../panels/user-accounts/pw-utils.c:144
+#: ../panels/user-accounts/pw-utils.c:171
+msgctxt "Password strength"
+msgid "Strength: Low"
+msgstr "Sila: Nepostačujúce"
+
+#: ../panels/user-accounts/pw-utils.c:147
+#: ../panels/user-accounts/pw-utils.c:172
+msgctxt "Password strength"
+msgid "Strength: Medium"
+msgstr "Sila: Priemerné"
+
+#: ../panels/user-accounts/pw-utils.c:150
+#: ../panels/user-accounts/pw-utils.c:173
+msgctxt "Password strength"
+msgid "Strength: Good"
+msgstr "Sila: Postačujúce"
+
+#: ../panels/user-accounts/pw-utils.c:153
+#: ../panels/user-accounts/pw-utils.c:174
+msgctxt "Password strength"
+msgid "Strength: High"
+msgstr "Sila: Silné"
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -7259,26 +7350,72 @@ msgstr "Nové heslo neobsahuje dostatočný počet rôznych znakov"
 msgid "Unknown error"
 msgstr "Neznáma chyba"
 
-#: ../panels/user-accounts/um-account-dialog.c:186
+#: ../panels/user-accounts/um-account-dialog.c:212
 msgid "Failed to add account"
 msgstr "Zlyhalo pridanie účtu"
 
+#: ../panels/user-accounts/um-account-dialog.c:317
+msgid "This will be used to name your home folder and can't be changed."
+msgstr ""
+"Toto sa použije ako názov vášho domovského priečinka a nie je možné ho "
+"zmeniť."
+
+#: ../panels/user-accounts/um-account-dialog.c:407
+msgid "Passwords do not match."
+msgstr "Heslá sa nezhodujú."
+
 #: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-account-dialog.c:449
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "Passwords do not match"
+msgstr "Heslá sa nezhodujú"
+
+#: ../panels/user-accounts/um-account-dialog.c:661
+#: ../panels/user-accounts/um-account-dialog.c:707
 msgid "Failed to register account"
 msgstr "Zlyhala registrácia účtu"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:845
 msgid "No supported way to authenticate with this domain"
 msgstr "Overenie totožnosti nie je pri tejto doméne podporované"
 
-#: ../panels/user-accounts/um-account-dialog.c:636
+#: ../panels/user-accounts/um-account-dialog.c:904
 msgid "Failed to join domain"
 msgstr "Zlyhalo pripojenie k doméne"
 
-#: ../panels/user-accounts/um-account-dialog.c:704
+#: ../panels/user-accounts/um-account-dialog.c:965
+msgid ""
+"Login not recognized.\n"
+"Please try again."
+msgstr ""
+"Prihlasovacie údaje neboli rozpoznané.\n"
+"Prosím, skúste to znovu."
+
+#: ../panels/user-accounts/um-account-dialog.c:973
+msgid ""
+"Invalid password.\n"
+"Please try again."
+msgstr ""
+"Neplatné heslo.\n"
+"Prosím, skúste to znovu."
+
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to log into domain"
 msgstr "Zlyhalo prihlásenie do domény"
+
+#: ../panels/user-accounts/um-account-dialog.c:1040
+msgid "Domain not found."
+msgstr "Doména nenájdená."
+
+# GtkToolButton label
+#: ../panels/user-accounts/um-account-dialog.c:1383
+msgid "Add User"
+msgstr "Pridať používateľa"
+
+# GtkToggleButton label
+#. Create enterprise toggle button.
+#: ../panels/user-accounts/um-account-dialog.c:1396
+msgid "_Enterprise Login"
+msgstr "_Firemné prihlásenie"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -7394,37 +7531,58 @@ msgstr "Prosím, zadajte vaše aktuálne heslo ešte raz."
 msgid "Password could not be changed"
 msgstr "Heslo nemohlo byť zmenené"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "You need to enter a new password"
 msgstr "Je potrebné znova zadať nové heslo"
 
-#: ../panels/user-accounts/um-password-dialog.c:304
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "The new password is not strong enough"
 msgstr "Nové heslo nie je dostatočne silné"
 
-#: ../panels/user-accounts/um-password-dialog.c:310
+#: ../panels/user-accounts/um-password-dialog.c:312
 msgid "You need to confirm the password"
 msgstr "Je potrebné potvrdiť heslo"
 
-#: ../panels/user-accounts/um-password-dialog.c:313
+#: ../panels/user-accounts/um-password-dialog.c:315
 msgid "The passwords do not match"
 msgstr "Heslá sa nezhodujú"
 
-#: ../panels/user-accounts/um-password-dialog.c:319
+#: ../panels/user-accounts/um-password-dialog.c:321
 msgid "You need to enter your current password"
 msgstr "Je potrebné zadať vaše aktuálne heslo"
 
-#: ../panels/user-accounts/um-password-dialog.c:322
+#: ../panels/user-accounts/um-password-dialog.c:324
 msgid "The current password is not correct"
 msgstr "Aktuálne heslo nie je správne"
 
-#: ../panels/user-accounts/um-password-dialog.c:385
-msgid "Passwords do not match"
-msgstr "Heslá sa nezhodujú"
-
-#: ../panels/user-accounts/um-password-dialog.c:439
+#: ../panels/user-accounts/um-password-dialog.c:441
 msgid "Wrong password"
 msgstr "Nesprávne heslo"
+
+#: ../panels/user-accounts/um-password-dialog.c:599
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Príliš krátke"
+
+#: ../panels/user-accounts/um-password-dialog.c:600
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Slabé"
+
+#: ../panels/user-accounts/um-password-dialog.c:601
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Uspokojivé"
+
+#: ../panels/user-accounts/um-password-dialog.c:602
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Dobré"
+
+#: ../panels/user-accounts/um-password-dialog.c:603
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Silné"
 
 # menuitem
 #: ../panels/user-accounts/um-photo-dialog.c:443
@@ -7470,32 +7628,36 @@ msgstr "Neplatné heslo, skúste to znovu"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "Iné účty"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "Odstránenie používateľa zlyhalo"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "Nemôžete odstrániť vlastný účet."
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "Používateľ %s je stále prihlásený"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 "Odstránenie prihláseného používateľa môže spôsobiť nestabilitu systému."
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Chcete ponechať súbory používateľa %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7504,45 +7666,45 @@ msgstr ""
 "súbory pošty a dočasné súbory."
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "O_dstrániť súbory"
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "Po_nechať súbory"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet je zakázaný"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastaviť pri najbližšom prihlásení"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žiadne"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "Prihlásený"
 
-#: ../panels/user-accounts/um-user-panel.c:943
+#: ../panels/user-accounts/um-user-panel.c:987
 msgid "Failed to contact the accounts service"
 msgstr "Spojenie so službou účtov zlyhalo"
 
-#: ../panels/user-accounts/um-user-panel.c:945
+#: ../panels/user-accounts/um-user-panel.c:989
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Uistite sa, prosím, že je služba AccountService nainštalovaná a povolená."
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:986
+#: ../panels/user-accounts/um-user-panel.c:1030
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7551,13 +7713,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1024
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Create a user account"
 msgstr "Vytvorí používateľský účet"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1035
-#: ../panels/user-accounts/um-user-panel.c:1321
+#: ../panels/user-accounts/um-user-panel.c:1079
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7566,13 +7728,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1044
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "Delete the selected user account"
 msgstr "Odstráni vybraný používateľský účet"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1056
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7580,13 +7742,9 @@ msgstr ""
 "Keď chcete odstrániť používateľský účet,\n"
 "kliknite najprv na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1230
+#: ../panels/user-accounts/um-user-panel.c:1284
 msgid "My Account"
 msgstr "Môj účet"
-
-#: ../panels/user-accounts/um-user-panel.c:1239
-msgid "Other Accounts"
-msgstr "Iné účty"
 
 #: ../panels/user-accounts/um-utils.c:535
 #, c-format
@@ -7604,15 +7762,11 @@ msgstr "Používateľské meno nemôže začínať znakom '-'"
 
 #: ../panels/user-accounts/um-utils.c:545
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
+"The username should only consist of lower and upper case letters from a-z, "
+"digits and any of characters '.', '-' and '_'"
 msgstr ""
-"Používateľské meno sa musí skladať iba z:\n"
-" ➣ písmen anglickej abecedy\n"
-" ➣ číslic\n"
-" ➣ niektorého zo znakov '.', '-' a '_'"
+"Používateľské meno sa musí skladať iba z malých a veľkých písmen a-z, číslic "
+"a niektorého zo znakov '.', '-' a '_'"
 
 # window title
 #: ../panels/wacom/button-mapping.ui.h:1
@@ -7656,7 +7810,7 @@ msgstr "Mapovať na jeden displej"
 msgid "%d of %d"
 msgstr "%d. z %d"
 
-#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:424
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Nerobiť nič"
@@ -7676,27 +7830,27 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Zobraziť pomocníka na obrazovke"
 
-#: ../panels/wacom/cc-wacom-page.c:665
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Hore"
 
-#: ../panels/wacom/cc-wacom-page.c:665
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Dole"
 
 # PK: tu mi viac sedi jednotne čislo
-#: ../panels/wacom/cc-wacom-page.c:706
+#: ../panels/wacom/cc-wacom-page.c:715
 msgid "Switch Modes"
 msgstr "Prepnúť režim"
 
-#: ../panels/wacom/cc-wacom-page.c:796
+#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Tlačidlo"
 
-#: ../panels/wacom/cc-wacom-page.c:854
+#: ../panels/wacom/cc-wacom-page.c:863
 msgid "Action"
 msgstr "Akcia"
 
@@ -7704,7 +7858,7 @@ msgstr "Akcia"
 # PM: doriesit v master vetve
 # PM: dalej je priradiť k displeju
 # dialog title
-#: ../panels/wacom/cc-wacom-page.c:964
+#: ../panels/wacom/cc-wacom-page.c:973
 msgid "Display Mapping"
 msgstr "Priradenie zobrazenia"
 
@@ -8034,7 +8188,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1421
+#: ../shell/cc-window.c:1424
 msgid "All Settings"
 msgstr "Všetky nastavenia"
 
