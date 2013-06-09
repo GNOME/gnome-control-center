@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-05-10 15:30+0000\n"
-"PO-Revision-Date: 2013-05-11 00:02+0300\n"
+"POT-Creation-Date: 2013-06-08 07:23+0000\n"
+"PO-Revision-Date: 2013-06-09 22:56+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -68,27 +68,40 @@ msgid "Span"
 msgstr "Apgaubti"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:300
 msgid "Select Background"
 msgstr "Pasirinkti foną"
 
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:319
 msgid "Wallpapers"
 msgstr "Darbastalio paveikslėliai"
 
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:328
 msgid "Pictures"
 msgstr "Paveikslėliai"
 
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:336
 msgid "Colors"
 msgstr "Spalvos"
 
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:345
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:400
+#| msgid "No input sources found"
+msgid "No Pictures Found"
+msgstr "Nerasta paveikslėlių"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:415
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
+
+#: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -110,7 +123,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Nėra darbastalio fono"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:460
 msgid "Current background"
 msgstr "Dabartinis fonas"
 
@@ -157,7 +170,7 @@ msgstr "puslapis 2"
 msgid "Paired"
 msgstr "Suporuotas"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:812
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
 msgid "Type"
 msgstr "Tipas"
 
@@ -186,43 +199,43 @@ msgstr "Klaviatūros nustatymai"
 msgid "Send Files…"
 msgstr "Siųsti failus..."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Taip"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:358
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "Ne"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:472
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth yra išjungtas"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:477
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth yra išjungtas aparatiniu jungikliu"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:481
 msgid "No Bluetooth adapters found"
 msgstr "Nėra Bluetooth adapterių"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:580
 msgid "Visibility"
 msgstr "Matomumas"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:584
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "„%s“ matomumas"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Pašalinti „%s“ iš įrenginių sąrašo?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:630
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -415,7 +428,6 @@ msgstr "Ekranas"
 #. TRANSLATORS: this is when the upload of the profile failed
 #: ../panels/color/cc-color-panel.c:913
 #, c-format
-#| msgid "Failed to apply configuration: %s"
 msgid "Failed to upload file: %s"
 msgstr "Nepavyko nusiųsti failo: %s"
 
@@ -551,7 +563,7 @@ msgstr "Vaizduoklio kalibravimas"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1082
+#: ../panels/user-accounts/um-account-dialog.c:1407
 msgid "Cancel"
 msgstr "Atsisakyti"
 
@@ -570,8 +582,11 @@ msgstr "Tęsti"
 msgid "Done"
 msgstr "Atlikta"
 
+#. Timeout parameters
+#. 5000 = 5 sec
+#. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
 msgid "Screen Calibration"
 msgstr "Ekrano kalibravimas"
 
@@ -672,7 +687,6 @@ msgid "Profile successfully created!"
 msgstr "Profilis sėkmingai sukurtas!"
 
 #: ../panels/color/color.ui.h:22
-#| msgid "Add profile"
 msgid "Copy profile"
 msgstr "Kopijuoti profilį"
 
@@ -681,12 +695,10 @@ msgid "Requires writable media"
 msgstr "Reikalauja įrašomos laikmenos"
 
 #: ../panels/color/color.ui.h:24
-#| msgid "Add profile"
 msgid "Upload profile"
 msgstr "Nusiųsti profilį"
 
 #: ../panels/color/color.ui.h:25
-#| msgid "Add new connection"
 msgid "Requires Internet connection"
 msgstr "Reikalauja interneto ryšio"
 
@@ -917,108 +929,15 @@ msgstr "Kinija"
 msgid "Other…"
 msgstr "Kitas..."
 
-#: ../panels/common/cc-language-chooser.c:176
+#: ../panels/common/cc-language-chooser.c:121
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:172
+#: ../panels/region/cc-input-chooser.c:171
 msgid "More…"
 msgstr "Daugiau…"
 
-#: ../panels/common/cc-language-chooser.c:193
-#| msgid "No applications found"
+#: ../panels/common/cc-language-chooser.c:138
 msgid "No languages found"
 msgstr "Nerasta kalbų"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1159
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Išjungta"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "Kairysis lyg2"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "Kairysis alt"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "Kairysis vald"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "Dešinysis lyg2"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "Dešinysis alt"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "Dešinysis vald"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "Kairysis alt+lyg2"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "Dešinysis alt+lyg2"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "Kairysis Vald+Lyg2"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "Dešinysis vald+lyg2"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "Kairėn+dešinysys lyg2"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "Kairėn+dešinysis alt"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "Kairėn+Dešinysis Vald"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt+Lyg2"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Vald+Lyg2"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt+Vald"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Didžiosios"
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Lyg2+Didžiosios"
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt+Didžiosios"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Vald+Didžiosios"
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
@@ -1026,7 +945,6 @@ msgstr "Kalba"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/region/format-chooser.ui.h:2
-#| msgid "Done"
 msgid "_Done"
 msgstr "_Atlikta"
 
@@ -1262,7 +1180,6 @@ msgid "Displays"
 msgstr "Ekranai"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-#| msgid "Change resolution and position of monitors and projectors"
 msgid "Choose how to use connected monitors and projectors"
 msgstr "Pasirinkite, kaip naudoti prijungtus monitorius ir projektorius"
 
@@ -1425,9 +1342,6 @@ msgstr "Rodyti informaciją apie sistemą"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-#| msgid ""
-#| "device;system;information;memory;processor;version;default;application;"
-#| "fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
@@ -1584,12 +1498,10 @@ msgid "Typing"
 msgstr "Spausdinimas"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
-#| msgid "Switch to next source"
 msgid "Switch to next input source"
 msgstr "Perjungti į kitą įvesties šaltinį"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
-#| msgid "Switch to previous source"
 msgid "Switch to previous input source"
 msgstr "Perjungti į ankstesnį įvesties šaltinį"
 
@@ -1702,15 +1614,35 @@ msgstr "Sumažinti teksto dydį"
 msgid "High contrast on or off"
 msgstr "Įjungti arba išjungti didelį kontrastą"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Išjungta"
+
+#. Translators: This key is also known as 'third level
+#. * chooser'. AltGr is often used for this purpose. See
+#. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "Alternatyvių simbolių klavišas"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#. Translators: The Compose key is used to initiate key
+#. * sequences that are combined to form a single character.
+#. * See http://en.wikipedia.org/wiki/Compose_key
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Rašymo klavišas"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
 msgstr "Tik modifikatoriai perjungia į kitą šaltinį"
 
@@ -1862,7 +1794,7 @@ msgstr "Jei priskirsite spartųjį klavišą komandai „%s“, „%s“ bus iš
 msgid "_Reassign"
 msgstr "_Priskirti iš naujo"
 
-#: ../panels/mouse/cc-mouse-panel.c:123
+#: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
 msgstr "Tikrinkite savo _nustatymus"
 
@@ -1893,8 +1825,6 @@ msgid "General"
 msgstr "Bendri"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-#| msgctxt "keyboard, speed"
-#| msgid "Slow"
 msgctxt "double click, speed"
 msgid "Slow"
 msgstr "Lėtas"
@@ -1904,8 +1834,6 @@ msgid "Double-click timeout"
 msgstr "Dvigubo paspaudimo laikas"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#| msgctxt "keyboard, speed"
-#| msgid "Fast"
 msgctxt "double click, speed"
 msgid "Fast"
 msgstr "Greitas"
@@ -1937,15 +1865,11 @@ msgid "_Pointer speed"
 msgstr "Žymeklio _greitis"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
-#| msgctxt "keyboard, speed"
-#| msgid "Slow"
 msgctxt "mouse pointer, speed"
 msgid "Slow"
 msgstr "Lėtas"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#| msgctxt "keyboard, speed"
-#| msgid "Fast"
 msgctxt "mouse pointer, speed"
 msgid "Fast"
 msgstr "Greitas"
@@ -1955,15 +1879,11 @@ msgid "Touchpad"
 msgstr "Jutiklinis kilimėlis"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#| msgctxt "keyboard, speed"
-#| msgid "Slow"
 msgctxt "touchpad pointer, speed"
 msgid "Slow"
 msgstr "Lėtas"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#| msgctxt "keyboard, speed"
-#| msgid "Fast"
 msgctxt "touchpad pointer, speed"
 msgid "Fast"
 msgstr "Greitas"
@@ -1984,36 +1904,36 @@ msgstr "Slinktis dviem _pirštais"
 msgid "C_ontent sticks to fingers"
 msgstr "_Turinys limpa prie pirštų"
 
-#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Mėginkite spausti, dvigubą paspaudimą, slinkti"
 
-#: ../panels/mouse/gnome-mouse-test.c:139
+#: ../panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "Penki paspaudimai, GEGL laikas!"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "Dvigubas paspaudimas, pagrindinis mygtukas"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "Vienas paspaudimas, pagrindinis mygtukas"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "Dvigubas paspaudimas, vidurinysis mygtukas"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "Vienas paspaudimas, vidurinysis klavišas"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "Dvigubas paspaudimas, antraeilis mygtukas"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "Vienas paspaudimas, antraeilis mygtukas"
 
@@ -2031,8 +1951,8 @@ msgstr "Tarpinis tinklo serveris"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:284
-#: ../panels/network/net-vpn.c:419
+#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
@@ -2110,12 +2030,12 @@ msgid "Never"
 msgstr "Niekada"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:787
 msgid "Today"
 msgstr "šiandien"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:790
 msgid "Yesterday"
 msgstr "Vakar"
 
@@ -2430,7 +2350,6 @@ msgstr "Ugniasienės _zona"
 
 #: ../panels/network/connection-editor/firewall-helpers.c:48
 #: ../panels/network/connection-editor/firewall-helpers.c:112
-#| msgid "Default"
 msgctxt "Firewall zone"
 msgid "Default"
 msgstr "Numatyta"
@@ -2487,7 +2406,7 @@ msgstr "Nauja profilis"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1083
+#: ../panels/user-accounts/um-account-dialog.c:1408
 msgid "_Add"
 msgstr "_Pridėti"
 
@@ -2635,14 +2554,11 @@ msgid "Network"
 msgstr "Tinklas"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-#| msgid "Control how you appear on the screen and the network."
 msgid "Control how you connect to the Internet"
 msgstr "Valdykite, kaip jungiatės prie interneto"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;"
@@ -2693,7 +2609,6 @@ msgstr "Paskutinį kartą naudota"
 #: ../panels/network/net-device-ethernet.c:288
 #: ../panels/network/network-ethernet.ui.h:1
 #: ../panels/network/network-simple.ui.h:1
-#| msgid "Paired"
 msgid "Wired"
 msgstr "Laidinis"
 
@@ -2916,7 +2831,7 @@ msgstr "išsamiau"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Slaptažodis"
@@ -3415,7 +3330,7 @@ msgstr "Abu"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Username"
 msgstr "_Naudotojo vardas"
 
@@ -3649,8 +3564,8 @@ msgid "Show in Lock Screen"
 msgstr "Rodyti užrakinimo ekrane"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
-#: ../panels/region/cc-input-chooser.c:1073
-#: ../panels/search/cc-search-locations-dialog.c:480
+#| msgid "Other"
+msgctxt "Online Account"
 msgid "Other"
 msgstr "Kita"
 
@@ -3661,12 +3576,10 @@ msgid "Add Account"
 msgstr "Pridėti paskyrą"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
-#| msgid "_Mail"
 msgid "Mail"
 msgstr "Paštas"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
-#| msgid "Contrast:"
 msgid "Contacts"
 msgstr "Kontaktai"
 
@@ -3683,7 +3596,6 @@ msgid "Credentials have expired."
 msgstr "Baigėsi įgaliojimai"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:501
-#| msgid "Enable this account"
 msgid "Sign in to enable this account."
 msgstr "Prisijunkite šiai paskyrai įjungti."
 
@@ -3722,7 +3634,6 @@ msgstr ""
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#| msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 msgstr ""
@@ -3938,15 +3849,18 @@ msgid "Power Saving"
 msgstr "Energijos taupymas"
 
 #: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+#| msgid "_Screen Brightness"
+msgid "_Screen brightness"
 msgstr "_Ekrano ryškumas"
 
 #: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+#| msgid "_Dim Screen when Inactive"
+msgid "_Dim screen when inactive"
 msgstr "_Pritemdyti ekraną, kai kompiuteris nenaudojamas"
 
 #: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+#| msgid "_Blank Screen"
+msgid "_Blank screen"
 msgstr "_Tuščias ekranas"
 
 #: ../panels/power/cc-power-panel.c:1516
@@ -3958,11 +3872,13 @@ msgid "Turns off wireless devices"
 msgstr "Išjungia visus belaidžius įrenginius"
 
 #: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+#| msgid "_Mobile Broadband"
+msgid "_Mobile broadband"
 msgstr "_Mobilus plačiajuostis"
 
 #: ../panels/power/cc-power-panel.c:1549
-msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+#| msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Išjungia mobilius plačiajuosčius (3G, 4G, WiMax, ir kt.) įrenginius"
 
 #: ../panels/power/cc-power-panel.c:1582
@@ -3982,11 +3898,13 @@ msgid "Suspend & Power Off"
 msgstr "Užmigdyti ir išjungti"
 
 #: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+#| msgid "_Automatic Suspend"
+msgid "_Automatic suspend"
 msgstr "_Automatinis užmigdymas"
 
 #: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
+#| msgid "When Battery Power is _Critical"
+msgid "When battery power is _critical"
 msgstr "Kai baterijos įkrovos lygis _kritiškai žemas"
 
 #: ../panels/power/cc-power-panel.c:1848
@@ -4098,17 +4016,16 @@ msgid "Delay"
 msgstr "Delsa"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
-#| msgid "Authenticated"
 msgid "Authenticate"
 msgstr "Patvirtinti tapatybę"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
 #: ../panels/sharing/sharing.ui.h:22
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Slaptažodis"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
-#| msgid "Authentication required"
 msgid "Authentication Required"
 msgstr "Reikia patvirtinti tapatybę"
 
@@ -4345,7 +4262,7 @@ msgid "Add a New Printer"
 msgstr "Pridėti naują spausdintuvą"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:501
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
@@ -4466,7 +4383,7 @@ msgid "%s Active Jobs"
 msgstr "%s aktyvūs darbai"
 
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1468
 msgid "No printers detected."
 msgstr "Nerasta spausdintuvų."
 
@@ -4495,64 +4412,64 @@ msgid "GhostScript pre-filtering"
 msgstr "GhostScript pradinis filtravimas"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "Puslapių vienoje pusėje"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "Dvipusis"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "Orientacija"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Bendri"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Puslapio nustatymai"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Įdiegiamos parinktys"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Darbas"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Paveikslėlio kokybė"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Spalva"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Užbaigiama"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Sudėtingesni"
@@ -4821,7 +4738,6 @@ msgid "Automatic Screen _Lock"
 msgstr "Automatinis ekrano už_rakinimas"
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "Lock Screen _After Blank For"
 msgid "Lock screen _after blank for"
 msgstr "Užr_akinti ekraną po tuščio praėjus"
 
@@ -4846,12 +4762,10 @@ msgstr ""
 "kompiuteryje nereikalingos ir jautrios informacijos."
 
 #: ../panels/privacy/privacy.ui.h:40
-#| msgid "Automatically Empty _Trash"
 msgid "Automatically empty _Trash"
 msgstr "Automatiškai išvalyti _šiukšlinę"
 
 #: ../panels/privacy/privacy.ui.h:41
-#| msgid "Automatically Purge Temporary _Files"
 msgid "Automatically purge Temporary _Files"
 msgstr "Automatiškai išvalyti laikinuosius _failus"
 
@@ -4870,17 +4784,20 @@ msgid "Metric"
 msgstr "Metrinė"
 
 #: ../panels/region/cc-format-chooser.c:283
-#| msgid "No applications found"
 msgid "No regions found"
 msgstr "Nerasta regionų"
 
-#: ../panels/region/cc-input-chooser.c:186
-#| msgid "Move Input Source Down"
+#: ../panels/region/cc-input-chooser.c:185
 msgid "No input sources found"
 msgstr "Nerasta įvesties šaltinių"
 
+#: ../panels/region/cc-input-chooser.c:1088
+#| msgid "Other"
+msgctxt "Input Source"
+msgid "Other"
+msgstr "Kita"
+
 #: ../panels/region/cc-region-panel.c:240
-#| msgid "Log out for changes to take effect"
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Pakeitimams pritaikyti reikia perleisti seansą"
 
@@ -4889,7 +4806,6 @@ msgid "Restart Now"
 msgstr "Perleisti dabar"
 
 #: ../panels/region/cc-region-panel.c:566
-#| msgid "None"
 msgctxt "Language"
 msgid "None"
 msgstr "Nėra"
@@ -4903,12 +4819,10 @@ msgid "Input methods can't be used on the login screen"
 msgstr "Įvesties metodų negalima naudoti prisijungimo ekrane"
 
 #: ../panels/region/cc-region-panel.c:1509
-#| msgid "No printers detected."
 msgid "No input source selected"
 msgstr "Nepasirinktas įvesties šaltinis"
 
 #: ../panels/region/cc-region-panel.c:1690
-#| msgid "Laptop Screen"
 msgid "Login Screen"
 msgstr "Prisijungimo ekranas"
 
@@ -4917,7 +4831,6 @@ msgid "Formats"
 msgstr "Formatai"
 
 #: ../panels/region/format-chooser.ui.h:3
-#| msgid "Overview"
 msgid "Preview"
 msgstr "Peržiūra"
 
@@ -4938,7 +4851,6 @@ msgid "Measurement"
 msgstr "Matavimas"
 
 #: ../panels/region/format-chooser.ui.h:8
-#| msgid "Paper Type"
 msgid "Paper"
 msgstr "Popierius"
 
@@ -4959,27 +4871,22 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "Kalba;Išdėstymas;Klaviatūra;Įvestis;"
 
 #: ../panels/region/input-chooser.ui.h:1
-#| msgid "Add Input Source"
 msgid "Add an Input Source"
 msgstr "Pridėti įvesties šaltinį"
 
 #: ../panels/region/input-options.ui.h:1
-#| msgid "Input Source Settings"
 msgid "Input Source Options"
 msgstr "Įvesties šaltinio nustatymai"
 
 #: ../panels/region/input-options.ui.h:2
-#| msgid "Use the same source for all windows"
 msgid "Use the _same source for all windows"
 msgstr "Naudoti tą patį _šaltinį visiems langams"
 
 #: ../panels/region/input-options.ui.h:3
-#| msgid "Allow different sources for each window"
 msgid "Allow _different sources for each window"
 msgstr "Leisti skirtingus šaltinius kiekvienam _langui"
 
 #: ../panels/region/input-options.ui.h:4
-#| msgid "Keyboard Settings"
 msgid "Keyboard Shortcuts"
 msgstr "Klaviatūros trumpiniai"
 
@@ -4988,7 +4895,6 @@ msgid "Switch to previous source"
 msgstr "Perjungti į ankstesnį šaltinį"
 
 #: ../panels/region/input-options.ui.h:6
-#| msgid "Ctrl+Alt+Shift+Space"
 msgid "Super+Shift+Space"
 msgstr "Super+Lyg2+Tarpas"
 
@@ -5005,9 +4911,12 @@ msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Galite pakeisti šiuos trumpinius klaviatūros nustatymuose"
 
 #: ../panels/region/input-options.ui.h:10
-#| msgid "Switch to next source"
 msgid "Alternative switch to next source"
 msgstr "Alternatyvus perjungimas į kitą šaltinį"
+
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "Kairėn+dešinysis alt"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
@@ -5032,12 +4941,22 @@ msgid "Home"
 msgstr "Namų aplankas"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
+#| msgid "Places"
+msgctxt "Search Location"
 msgid "Places"
 msgstr "Vietos"
 
 #: ../panels/search/cc-search-locations-dialog.c:478
+#| msgid "Bookmarks"
+msgctxt "Search Location"
 msgid "Bookmarks"
-msgstr "Žymikliai"
+msgstr "Gairės"
+
+#: ../panels/search/cc-search-locations-dialog.c:480
+#| msgid "Other"
+msgctxt "Search Location"
+msgid "Other"
+msgstr "Kita"
 
 #: ../panels/search/cc-search-locations-dialog.c:676
 msgid "Select Location"
@@ -5077,21 +4996,21 @@ msgstr "Perkelti žemyn"
 msgid "Preferences"
 msgstr "Nustatymai"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:268
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Įjungta"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:270
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Išjungta"
 
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:416
 msgid "Choose a Folder"
 msgstr "Pasirinkite aplanką"
 
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:594
 msgid "Copy"
 msgstr "Kopijuoti"
 
@@ -5256,7 +5175,6 @@ msgid "Sound"
 msgstr "Garsas"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
-#| msgid "Change sound volume and event sounds"
 msgid "Change sound levels, inputs, outputs, and alert sounds"
 msgstr "Keisti garso garsumą, įvedimą ir įvykių garsus"
 
@@ -5342,8 +5260,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Nesustiprintas"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "_Profilis:"
 
@@ -5371,73 +5289,73 @@ msgstr[2] "%u įvesčių"
 msgid "System Sounds"
 msgstr "Sistemos garsai"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "_Tikrinti garsiakalbius"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "Viršūnių aptikimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1509
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1528
 msgid "Device"
 msgstr "Įrenginys"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s garsiakalbių testavimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
 msgstr "_Išvesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1662
 msgid "Output"
 msgstr "Išvestis"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1667
 msgid "C_hoose a device for sound output:"
 msgstr "_Pasirinkite garso išvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1692
 msgid "Settings for the selected device:"
 msgstr "Pasirinkto įrenginio nustatymai:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "Input"
 msgstr "Įvestis"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1710
 msgid "_Input volume:"
 msgstr "Į_vesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 msgid "Input level:"
 msgstr "Įvesties lygmuo:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "C_hoose a device for sound input:"
 msgstr "_Pasirinkite garso įvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "Sound Effects"
 msgstr "Garso efektai"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "_Alert volume:"
 msgstr "_Įspėjimų garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Applications"
 msgstr "Programos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1812
 msgid "No application is currently playing or recording audio."
 msgstr "Jokia programa šiuo metu negroja ir neįrašinėja garso."
 
@@ -5942,7 +5860,6 @@ msgstr "Kontrastas:"
 
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
-#| msgid "Color"
 msgctxt "universal access, contrast"
 msgid "Color"
 msgstr "Spalva"
@@ -5989,48 +5906,54 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administratorius"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Add account"
-msgstr "Pridėti paskyrą"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "_Local Account"
-msgstr "_Vietinė paskyra"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Enterprise Login"
-msgstr "_Kompanijos prisijungimas"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name"
+#| msgid "_Full name"
+msgid "_Full Name"
 msgstr "_Pilnas vardas"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "Paskyros _tipas"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#| msgid "Choose password at next login"
+msgid "Allow user to set a password when they next login"
+msgstr "Leisti naudotojui nustatyti slaptažodį kito prisijungimo metu"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "Set a password now"
+msgstr "Nustatyti slaptažodį dabar"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#| msgid "C_onfirm password"
+msgid "_Confirm Password"
+msgstr "Pa_tvirtinti slaptažodį"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "_Domain"
 msgstr "_Sritis"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Login Name"
 msgstr "_Prisijungimo vardas"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "Tip: Enterprise domain or realm name"
-msgstr "Patarimas: Kompanijos arba srities vardas"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "C_ontinue"
-msgstr "_Tęsti"
+#| msgid "_Password"
+msgid "Login _Password"
+msgstr "_Prisijungimo slaptažodis"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid "_Enroll"
+msgstr "Į_traukti"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "Domain Administrator Login"
 msgstr "Srities administratoriaus prisijungimas"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -6040,11 +5963,11 @@ msgstr ""
 "įtrauktas į sritį. Paprašykite tinklo administratoriaus čia\n"
 "įvesti jų srities slaptažodį."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid "Administrator _Name"
 msgstr "Administratoriaus _vardas"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator Password"
 msgstr "Administratoriaus slaptažodis"
 
@@ -6110,7 +6033,6 @@ msgid "Users"
 msgstr "Naudotojai"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
-#| msgid "Add or remove users"
 msgid "Add or remove users and change your password"
 msgstr "Pridėti arba šalinti naudotojus bei keiskite savo slaptažodį"
 
@@ -6122,7 +6044,6 @@ msgstr ""
 "Slaptažodis;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
-#| msgid "Retain _History"
 msgid "Login History"
 msgstr "Prisijungimo istorija"
 
@@ -6137,10 +6058,6 @@ msgstr "Kitą savaitę"
 #: ../panels/user-accounts/data/history-dialog.ui.h:5
 msgid "Next week"
 msgstr "Kitą savaitę"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "Set a password now"
-msgstr "Nustatyti slaptažodį dabar"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "Choose password at next login"
@@ -6269,40 +6186,132 @@ msgstr "Tvarkyti naudotojų paskyras"
 msgid "Authentication is required to change user data"
 msgstr "Reikia patvirtinti tapatybę naudotojų duomenims keisti"
 
-#: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Per trumpas"
+#: ../panels/user-accounts/pw-utils.c:81
+#| msgid "The new password does not contain enough different characters"
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr "Naujas slaptažodis turi skirtis nuo senojo."
+
+#: ../panels/user-accounts/pw-utils.c:83
+msgctxt "Password hint"
+msgid "Try changing some letters and numbers."
+msgstr "Bandykite raides ir skaitmenis."
+
+#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+#| msgid "Changing password for"
+msgctxt "Password hint"
+msgid "Try changing the password a bit more."
+msgstr "Mėginkite labiau pakeisti slaptažodį."
+
+#: ../panels/user-accounts/pw-utils.c:87
+msgctxt "Password hint"
+msgid "A password without your user name would be stronger."
+msgstr "Slaptažodis be naudotojo vardą būtų saugesnis."
+
+#: ../panels/user-accounts/pw-utils.c:89
+msgctxt "Password hint"
+msgid "Try to avoid using your name in the password."
+msgstr "Venkite savo vardo slaptažodyje."
+
+#: ../panels/user-accounts/pw-utils.c:91
+msgctxt "Password hint"
+msgid "Try to avoid some of the words included in the password."
+msgstr "Venkite kai kurių į slaptažodį įtrauktų žodžių."
+
+#: ../panels/user-accounts/pw-utils.c:95
+msgctxt "Password hint"
+msgid "Try to avoid common words."
+msgstr "Venkite dažnų žodžių."
+
+#: ../panels/user-accounts/pw-utils.c:97
+msgctxt "Password hint"
+msgid "Try to avoid reordering existing words."
+msgstr "Venkite esamų žodžių tvarkos keitimo."
 
 #: ../panels/user-accounts/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "Nepakankamai geras"
+msgctxt "Password hint"
+msgid "Try to use more numbers."
+msgstr "Mėginkite naudoti daugiau skaitmenų."
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Silpnas"
+#: ../panels/user-accounts/pw-utils.c:101
+msgctxt "Password hint"
+msgid "Try to use more uppercase letters."
+msgstr "Mėginkite naudoti daugiau didžiųjų raidžių."
+
+#: ../panels/user-accounts/pw-utils.c:103
+msgctxt "Password hint"
+msgid "Try to use more lowercase letters."
+msgstr "Mėginkite naudoti daugiau mažųjų raidžių."
+
+#: ../panels/user-accounts/pw-utils.c:105
+msgctxt "Password hint"
+msgid "Try to use more special characters, like punctuation."
+msgstr "Mėginkite naudoti daugiau specialiųjų simbolių, pvz. skyrybos ženklų."
+
+#: ../panels/user-accounts/pw-utils.c:107
+msgctxt "Password hint"
+msgid "Try to use a mixture of letters, numbers and punctuation."
+msgstr "Mėginkite naudoti raidžių, skaitmenų ir skyrybos ženklų mišinį."
+
+#: ../panels/user-accounts/pw-utils.c:109
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same character."
+msgstr "Venkite to paties simbolio pasikartojimų."
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Tinkamas"
+msgctxt "Password hint"
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Venkite to paties simbolio pasikartojimų: reikia maišyti raides, skaitmenis "
+"ir skyrybos ženklus."
 
-#: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Geras"
+#: ../panels/user-accounts/pw-utils.c:113
+msgctxt "Password hint"
+msgid "Try to avoid sequences like 1234 or abcd."
+msgstr "Venkite sekų 1234, abcd ir pan."
 
-#: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/pw-utils.c:115
+msgctxt "Password hint"
+msgid "Try to add more characters."
+msgstr "Mėginkite pridėti daugiau simbolių."
+
+#: ../panels/user-accounts/pw-utils.c:118
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and use a number or two."
+msgstr "Maišykite didžiąsias ir mažąsias raides bei panaudokite skaitmenų."
+
+#: ../panels/user-accounts/pw-utils.c:140
+#: ../panels/user-accounts/pw-utils.c:170
 msgctxt "Password strength"
-msgid "Strong"
-msgstr "Stiprus"
+msgid "Strength: Weak"
+msgstr "Stiprumas: silpnas"
+
+#: ../panels/user-accounts/pw-utils.c:144
+#: ../panels/user-accounts/pw-utils.c:171
+#| msgid "Length:"
+msgctxt "Password strength"
+msgid "Strength: Low"
+msgstr "Stiprumas: silpnokas"
+
+#: ../panels/user-accounts/pw-utils.c:147
+#: ../panels/user-accounts/pw-utils.c:172
+msgctxt "Password strength"
+msgid "Strength: Medium"
+msgstr "Stiprumas: vidutinis"
+
+#: ../panels/user-accounts/pw-utils.c:150
+#: ../panels/user-accounts/pw-utils.c:173
+msgctxt "Password strength"
+msgid "Strength: Good"
+msgstr "Stiprumas: geras"
+
+#: ../panels/user-accounts/pw-utils.c:153
+#: ../panels/user-accounts/pw-utils.c:174
+msgctxt "Password strength"
+msgid "Strength: High"
+msgstr "Stiprumas: labai geras"
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -6353,26 +6362,72 @@ msgstr "Naujas slaptažodis Nesusideda iš pakankamai skirtingų simbolių"
 msgid "Unknown error"
 msgstr "Nežinoma klaida"
 
-#: ../panels/user-accounts/um-account-dialog.c:186
+#: ../panels/user-accounts/um-account-dialog.c:212
 msgid "Failed to add account"
 msgstr "Nepavyko pridėti Pasirinkite paskyros"
 
+#: ../panels/user-accounts/um-account-dialog.c:317
+msgid "This will be used to name your home folder and can't be changed."
+msgstr "Tai bus naudojama kaip jūsų namų aplankas ir negalės būti pakeista."
+
 #: ../panels/user-accounts/um-account-dialog.c:407
-#: ../panels/user-accounts/um-account-dialog.c:448
+#| msgid "Passwords do not match"
+msgid "Passwords do not match."
+msgstr "Slaptažodžiai nesutampa."
+
+#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "Passwords do not match"
+msgstr "Slaptažodžiai nesutampa"
+
+#: ../panels/user-accounts/um-account-dialog.c:661
+#: ../panels/user-accounts/um-account-dialog.c:707
 msgid "Failed to register account"
 msgstr "Nepavyko priregistruoti paskyros"
 
-#: ../panels/user-accounts/um-account-dialog.c:581
+#: ../panels/user-accounts/um-account-dialog.c:845
 msgid "No supported way to authenticate with this domain"
 msgstr "Nėra palaikomo būdo patvirtinti tapatybę šiame serveryje"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:904
 msgid "Failed to join domain"
 msgstr "Nepavyko prisijungti prie srities"
 
-#: ../panels/user-accounts/um-account-dialog.c:703
+#: ../panels/user-accounts/um-account-dialog.c:965
+msgid ""
+"Login not recognized.\n"
+"Please try again."
+msgstr ""
+"Prisijungimas neatpažintas.\n"
+"Bandykite vėl."
+
+#: ../panels/user-accounts/um-account-dialog.c:973
+#| msgid "Invalid password, please try again"
+msgid ""
+"Invalid password.\n"
+"Please try again."
+msgstr ""
+"Netinkamas slaptažodis.\n"
+"Bandykite dar kartą."
+
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to log into domain"
 msgstr "Nepavyko prisijungti prie srities"
+
+#: ../panels/user-accounts/um-account-dialog.c:1040
+#| msgid "Modem not found"
+msgid "Domain not found."
+msgstr "Domenas nerastas."
+
+#: ../panels/user-accounts/um-account-dialog.c:1383
+#| msgid "Add User Account"
+msgid "Add User"
+msgstr "Pridėti naudotojo paskyrą"
+
+#. Create enterprise toggle button.
+#: ../panels/user-accounts/um-account-dialog.c:1396
+msgid "_Enterprise Login"
+msgstr "_Kompanijos prisijungimas"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -6485,37 +6540,58 @@ msgstr "Įveskite savo slaptažodį dar kartą."
 msgid "Password could not be changed"
 msgstr "Nepavyko pakeisti slaptažodžio"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "You need to enter a new password"
 msgstr "Jums reikia įvesti naują slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:304
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "The new password is not strong enough"
 msgstr "Naujas slaptažodis per silpnas"
 
-#: ../panels/user-accounts/um-password-dialog.c:310
+#: ../panels/user-accounts/um-password-dialog.c:312
 msgid "You need to confirm the password"
 msgstr "Jums reikia patvirtinti slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:313
+#: ../panels/user-accounts/um-password-dialog.c:315
 msgid "The passwords do not match"
 msgstr "Slaptažodžiai nesutampa"
 
-#: ../panels/user-accounts/um-password-dialog.c:319
+#: ../panels/user-accounts/um-password-dialog.c:321
 msgid "You need to enter your current password"
 msgstr "Jums reikia įvesti dabartinį slaptažodį"
 
-#: ../panels/user-accounts/um-password-dialog.c:322
+#: ../panels/user-accounts/um-password-dialog.c:324
 msgid "The current password is not correct"
 msgstr "Dabartinis slaptažodis neteisingas"
 
-#: ../panels/user-accounts/um-password-dialog.c:385
-msgid "Passwords do not match"
-msgstr "Slaptažodžiai nesutampa"
-
-#: ../panels/user-accounts/um-password-dialog.c:439
+#: ../panels/user-accounts/um-password-dialog.c:441
 msgid "Wrong password"
 msgstr "Blogas slaptažodis"
+
+#: ../panels/user-accounts/um-password-dialog.c:599
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Per trumpas"
+
+#: ../panels/user-accounts/um-password-dialog.c:600
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Silpnas"
+
+#: ../panels/user-accounts/um-password-dialog.c:601
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Tinkamas"
+
+#: ../panels/user-accounts/um-password-dialog.c:602
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Geras"
+
+#: ../panels/user-accounts/um-password-dialog.c:603
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Stiprus"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6558,20 +6634,24 @@ msgstr "Netinkamas slaptažodis, bandykite dar kartą"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Nepavyko prisijungti prie %s srities: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:189
+msgid "Other Accounts"
+msgstr "Kitos paskyros"
+
+#: ../panels/user-accounts/um-user-panel.c:405
 msgid "Failed to delete user"
 msgstr "Nepavyko ištrinti naudotojo"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:470
 msgid "You cannot delete your own account."
 msgstr "Jūs negalite ištrinti savo paskyros."
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:479
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s vis dar prisijungęs"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:483
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6579,54 +6659,54 @@ msgstr ""
 "Naudotojų ištrynimas, kai jie yra prisijungę, gali palikti sistemą "
 "nekorektiškoje būsenoje."
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:492
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Ar norite palikti naudotojo %s failus?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:496
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 "Trinant naudotoją galima palikti namų katalogą, paštą ir laikinus failus."
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:499
 msgid "_Delete Files"
 msgstr "_Ištrinti failus"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:500
 msgid "_Keep Files"
 msgstr "_Palikti failus"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:552
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Paskyra išjungta"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:560
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bus nustatyta kito prisijungimo metu"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:563
 msgctxt "Password mode"
 msgid "None"
 msgstr "Joks"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:612
 msgid "Logged in"
 msgstr "Prisijunges prie"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:987
 msgid "Failed to contact the accounts service"
 msgstr "Nepavyko susisiekti su paskyrų tarnyba"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:989
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Įsitikinkite, kad AccountService yra įdiegta ir įjungta."
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:1030
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6634,12 +6714,12 @@ msgstr ""
 "Pakeitimams atlikti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Create a user account"
 msgstr "Sukurti naują paskyrą"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1079
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6647,12 +6727,12 @@ msgstr ""
 "Naudotojui sukurti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6660,39 +6740,36 @@ msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1284
 msgid "My Account"
 msgstr "Mano paskyra"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
-msgid "Other Accounts"
-msgstr "Kitos paskyros"
-
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:535
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Naudotojas vardu „%s“ jau yra"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:539
 #, c-format
 msgid "The username is too long"
 msgstr "Naudotojo vardas per ilgas"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:542
 msgid "The username cannot start with a '-'"
 msgstr "Naudotojo vardas negali prasidėti simboliu „-“"
 
-#: ../panels/user-accounts/um-utils.c:526
+#: ../panels/user-accounts/um-utils.c:545
+#| msgid ""
+#| "The username must only consist of:\n"
+#| " ➣ letters from the English alphabet\n"
+#| " ➣ digits\n"
+#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
+"The username should only consist of lower and upper case letters from a-z, "
+"digits and any of characters '.', '-' and '_'"
 msgstr ""
-"Naudotojo vardą gali sudaryti tik:\n"
-" ➣ anglų kalbos abėcėlės raidės\n"
-" ➣ skaitmenys\n"
-" ➣ „.“, „-“ ir „_“ simboliai"
+"Naudotojo vardą gali sudaryti tik anglų kalbos abėcėlės raidės ir simboliai "
+"„.“, „-“ bei „_“"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6702,7 +6779,7 @@ msgstr "Susieti mygtukus"
 msgid "Map buttons to functions"
 msgstr "Susieti mygtukus su funkcijomis"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:79
+#: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -6710,7 +6787,7 @@ msgstr ""
 "Palieskite taikinio žymeklius jiems pasirodžius ekrane planšetės "
 "kalibravimui."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:368
+#: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Aptiktas klaidingas paspaudimas, perleidžiama..."
 
@@ -6733,50 +6810,50 @@ msgstr "Rodyti viename monitoriuje"
 msgid "%d of %d"
 msgstr "%d iš %d"
 
-#: ../panels/wacom/cc-wacom-page.c:122 ../panels/wacom/cc-wacom-page.c:407
+#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Nėra"
 
-#: ../panels/wacom/cc-wacom-page.c:123
+#: ../panels/wacom/cc-wacom-page.c:124
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Siųsti klavišų seką"
 
-#: ../panels/wacom/cc-wacom-page.c:124
+#: ../panels/wacom/cc-wacom-page.c:125
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Perjungti monitorių"
 
-#: ../panels/wacom/cc-wacom-page.c:125
+#: ../panels/wacom/cc-wacom-page.c:126
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Rodyti pagalbą ekrane"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Aukštyn"
 
-#: ../panels/wacom/cc-wacom-page.c:644
+#: ../panels/wacom/cc-wacom-page.c:674
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Žemyn"
 
-#: ../panels/wacom/cc-wacom-page.c:685
+#: ../panels/wacom/cc-wacom-page.c:715
 msgid "Switch Modes"
 msgstr "Jungiklių veiksenos"
 
-#: ../panels/wacom/cc-wacom-page.c:775
+#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Apačia"
 
-#: ../panels/wacom/cc-wacom-page.c:833
+#: ../panels/wacom/cc-wacom-page.c:863
 msgid "Action"
 msgstr "Veiksmas"
 
-#: ../panels/wacom/cc-wacom-page.c:943
+#: ../panels/wacom/cc-wacom-page.c:973
 msgid "Display Mapping"
 msgstr "Vaizduoklio susiejimas"
 
@@ -6833,7 +6910,6 @@ msgid "Adjust display resolution"
 msgstr "Pritaikyti vaizduoklio raišką"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
-#| msgid "Mouse Settings"
 msgid "Adjust mouse settings"
 msgstr "Koreguokite pelės nustatymus"
 
@@ -6846,86 +6922,86 @@ msgid "Left-Handed Orientation"
 msgstr "Kairiarankiams skirta orientacija"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1076
+#: ../panels/wacom/gsd-wacom-device.c:1078
 msgid "Left Ring"
 msgstr "Kairysis ratukas"
 
-#: ../panels/wacom/gsd-wacom-device.c:1086
+#: ../panels/wacom/gsd-wacom-device.c:1089
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Skambinimo veiksena #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1105
+#: ../panels/wacom/gsd-wacom-device.c:1109
 msgid "Right Ring"
 msgstr "Dešinysis ratukas"
 
-#: ../panels/wacom/gsd-wacom-device.c:1115
+#: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Dešiniojo ratuko veiksena #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1156
+#: ../panels/wacom/gsd-wacom-device.c:1162
 msgid "Left Touchstrip"
 msgstr "Kairiosios liečiamosios juostelės"
 
-#: ../panels/wacom/gsd-wacom-device.c:1166
+#: ../panels/wacom/gsd-wacom-device.c:1173
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Kairiųjų liečiamų juostelių veiksena #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1185
+#: ../panels/wacom/gsd-wacom-device.c:1193
 msgid "Right Touchstrip"
 msgstr "Dešiniosios liečiamosios juostelės"
 
-#: ../panels/wacom/gsd-wacom-device.c:1195
+#: ../panels/wacom/gsd-wacom-device.c:1204
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Dešiniųjų liečiamų juostelių veiksena #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1220
+#: ../panels/wacom/gsd-wacom-device.c:1230
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Kairiojo liečiamojo rateliu veiksenos jungiklis"
 
-#: ../panels/wacom/gsd-wacom-device.c:1222
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Dešiniojo liečiamojo rateliu veiksenos jungiklis"
 
-#: ../panels/wacom/gsd-wacom-device.c:1225
+#: ../panels/wacom/gsd-wacom-device.c:1235
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Kairiųjų liečiamųjų juostelių veiksenos jungiklis"
 
-#: ../panels/wacom/gsd-wacom-device.c:1227
+#: ../panels/wacom/gsd-wacom-device.c:1237
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Dešiniųjų liečiamųjų juostelių veiksenos jungiklis"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1242
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Veiksenos jungiklis #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1336
+#: ../panels/wacom/gsd-wacom-device.c:1351
 #, c-format
 msgid "Left Button #%d"
 msgstr "Kairysis mygtukas #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1339
+#: ../panels/wacom/gsd-wacom-device.c:1354
 #, c-format
 msgid "Right Button #%d"
 msgstr "Dešinysis mygtukas #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1342
+#: ../panels/wacom/gsd-wacom-device.c:1357
 #, c-format
 msgid "Top Button #%d"
 msgstr "Viršutinis mygtukas #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1345
+#: ../panels/wacom/gsd-wacom-device.c:1360
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Apatinis mygtukas #%d"
@@ -6998,40 +7074,40 @@ msgstr "Apatinysis mygtukas"
 msgid "Tip Pressure Feel"
 msgstr "Pieštuko spaudimo jutimas"
 
-#: ../shell/cc-application.c:66
+#: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
 msgstr "Įjungti derinimo veikseną"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:70
 msgid "Show the overview"
 msgstr "Rodyti apžvalgą"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:71
 msgid "Search for the string"
 msgstr "Ieškoti eilutės"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:72
 msgid "List possible panel names and exit"
 msgstr "Išvardinti galimus skydelių pavadinimus ir išeiti"
 
-#: ../shell/cc-application.c:70 ../shell/cc-application.c:71
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
+#: ../shell/cc-application.c:75
 msgid "Show help options"
 msgstr "Rodyti pagalbos parinktis"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "Rodomas skydelis"
 
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[SKYDELIS] [ARGUMENTAS…]"
 
-#: ../shell/cc-application.c:139
+#: ../shell/cc-application.c:142
 msgid "- Settings"
 msgstr "- nustatymai"
 
-#: ../shell/cc-application.c:148
+#: ../shell/cc-application.c:160
 #, c-format
 msgid ""
 "%s\n"
@@ -7040,15 +7116,15 @@ msgstr ""
 "%s\n"
 "Paleiskite „%s --help“ visam komandų eilutės parinkčių sąrašui gauti.\n"
 
-#: ../shell/cc-application.c:178
+#: ../shell/cc-application.c:190
 msgid "Available panels:"
 msgstr "Prieinami skydeliai:"
 
-#: ../shell/cc-application.c:313
+#: ../shell/cc-application.c:325
 msgid "Help"
 msgstr "Žinynas"
 
-#: ../shell/cc-application.c:314
+#: ../shell/cc-application.c:326
 msgid "Quit"
 msgstr "Išeiti"
 
@@ -7072,7 +7148,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1421
+#: ../shell/cc-window.c:1424
 msgid "All Settings"
 msgstr "Visi nustatymai"
 
