@@ -1070,6 +1070,10 @@ set_active_panel (CcWindow *shell,
         {
           shell->priv->active_panel = g_object_ref (panel);
         }
+      else
+        {
+          shell_show_overview_page (shell);
+        }
       g_object_notify (G_OBJECT (shell), "active-panel");
     }
 }
