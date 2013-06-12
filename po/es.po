@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-06 05:06+0000\n"
-"PO-Revision-Date: 2013-06-06 13:09+0200\n"
+"POT-Creation-Date: 2013-06-11 14:52+0000\n"
+"PO-Revision-Date: 2013-06-12 13:11+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -197,43 +197,43 @@ msgstr "Configuración del teclado"
 msgid "Send Files…"
 msgstr "Enviar archivos…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:358
+#: ../panels/bluetooth/cc-bluetooth-panel.c:381
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Sí"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:358
+#: ../panels/bluetooth/cc-bluetooth-panel.c:381
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "No"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:472
+#: ../panels/bluetooth/cc-bluetooth-panel.c:490
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth está desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:477
+#: ../panels/bluetooth/cc-bluetooth-panel.c:495
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "El Bluetooth está físicamente desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:481
+#: ../panels/bluetooth/cc-bluetooth-panel.c:499
 msgid "No Bluetooth adapters found"
 msgstr "No se encontraron adaptadores Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:580
+#: ../panels/bluetooth/cc-bluetooth-panel.c:598
 msgid "Visibility"
 msgstr "Visibilidad"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:584
+#: ../panels/bluetooth/cc-bluetooth-panel.c:602
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibilidad de «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:628
+#: ../panels/bluetooth/cc-bluetooth-panel.c:646
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "¿Quitar «%s» de la lista de dispositivos?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:630
+#: ../panels/bluetooth/cc-bluetooth-panel.c:648
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -1906,9 +1906,11 @@ msgstr "Tocar para pulsar"
 msgid "Two _finger scroll"
 msgstr "Despla_zamiento con dos dedos"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-msgid "C_ontent sticks to fingers"
-msgstr "El c_ontenido se adhiere a los dedos"
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#| msgid "_Edge scrolling"
+msgid "_Natural scrolling"
+msgstr "Desplazamiento _natural"
 
 #: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -5897,7 +5899,6 @@ msgid "Administrator"
 msgstr "Administrador"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#| msgid "_Full name"
 msgid "_Full Name"
 msgstr "Nombre _completo"
 
@@ -5907,19 +5908,18 @@ msgid "Account _Type"
 msgstr "_Tipo de cuenta"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#| msgid "Choose password at next login"
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
 msgid "Allow user to set a password when they next login"
 msgstr ""
 "Permitir al usuario establecer una contraseña en el siguiente inicio de "
 "sesión"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
 msgid "Set a password now"
 msgstr "Establecer una contraseña ahora"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
-#| msgid "C_onfirm password"
 msgid "_Confirm Password"
 msgstr "_Confirmar contraseña"
 
@@ -5932,7 +5932,6 @@ msgid "_Login Name"
 msgstr "Nombre de _inicio de sesión"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#| msgid "_Password"
 msgid "Login _Password"
 msgstr "_Contraseña de inicio de sesión"
 
@@ -6049,55 +6048,22 @@ msgstr "Siguiente semana"
 msgid "Next week"
 msgstr "La semana que viene"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+#| msgid "_Confirm Password"
+msgid "C_onfirm New Password"
+msgstr "_Confirmar la contraseña nueva"
+
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-msgid "Choose password at next login"
-msgstr "Elegir una contraseña en el siguiente inicio de sesión"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "Log in without a password"
-msgstr "Iniciar sesión sin contraseña"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
-msgid "Disable this account"
-msgstr "Desactivar esta cuenta"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Enable this account"
-msgstr "Activar esta cuenta"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "C_onfirm password"
-msgstr "C_onfirmar contraseña"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "_New password"
+#| msgid "_New password"
+msgid "_New Password"
 msgstr "Contraseña _nueva"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Generate a password"
-msgstr "Generar una contraseña"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
-msgid "Current _password"
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+#| msgid "Current _password"
+msgid "Current _Password"
 msgstr "Contraseña _actual"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "_Action"
-msgstr "_Acción"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Changing password for"
-msgstr "Cambiando la contraseña para"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
-msgid "_Show password"
-msgstr "_Mostrar contraseña"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
-msgid "How to choose a strong password"
-msgstr "Cómo elegir una contraseña fuerte"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Ch_ange"
 msgstr "Cam_biar"
 
@@ -6178,7 +6144,6 @@ msgid "Authentication is required to change user data"
 msgstr "Se requiere autenticación para cambiar los datos del usuario"
 
 #: ../panels/user-accounts/pw-utils.c:81
-#| msgid "The new password does not contain enough different characters"
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one."
 msgstr "La contraseña nueva debe ser diferente de la antigua."
@@ -6189,7 +6154,6 @@ msgid "Try changing some letters and numbers."
 msgstr "Pruebe a cambiar algunas letras y números."
 
 #: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
-#| msgid "Changing password for"
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
 msgstr "Pruebe a cambiar la contraseña un poco más."
@@ -6281,7 +6245,6 @@ msgstr "Fortaleza: débil"
 
 #: ../panels/user-accounts/pw-utils.c:144
 #: ../panels/user-accounts/pw-utils.c:171
-#| msgid "Length:"
 msgctxt "Password strength"
 msgid "Strength: Low"
 msgstr "Fortaleza: baja"
@@ -6362,12 +6325,11 @@ msgid "This will be used to name your home folder and can't be changed."
 msgstr "Esto se usará para nombrar su carpeta personal y no se puede cambiar."
 
 #: ../panels/user-accounts/um-account-dialog.c:407
-#| msgid "Passwords do not match"
 msgid "Passwords do not match."
 msgstr "Las contraseñas no coinciden."
 
 #: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:297
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
@@ -6393,7 +6355,6 @@ msgstr ""
 "Inténtelo de nuevo."
 
 #: ../panels/user-accounts/um-account-dialog.c:973
-#| msgid "Invalid password, please try again"
 msgid ""
 "Invalid password.\n"
 "Please try again."
@@ -6406,7 +6367,6 @@ msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
 #: ../panels/user-accounts/um-account-dialog.c:1040
-#| msgid "Modem not found"
 msgid "Domain not found."
 msgstr "Dominio no encontrado."
 
@@ -6514,74 +6474,26 @@ msgstr "Esta semana"
 msgid "Last Week"
 msgstr "Última semana"
 
-#: ../panels/user-accounts/um-password-dialog.c:128
-msgid "_Generate a password"
-msgstr "_Generar una contraseña"
-
-#: ../panels/user-accounts/um-password-dialog.c:181
+#: ../panels/user-accounts/um-password-dialog.c:154
 msgid "Please choose another password."
 msgstr "Elija otra contraseña."
 
-#: ../panels/user-accounts/um-password-dialog.c:190
+#: ../panels/user-accounts/um-password-dialog.c:163
 msgid "Please type your current password again."
 msgstr "Escriba de nuevo su contraseña actual."
 
-#: ../panels/user-accounts/um-password-dialog.c:196
+#: ../panels/user-accounts/um-password-dialog.c:169
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:303
-msgid "You need to enter a new password"
-msgstr "Debe introducir una contraseña"
+#: ../panels/user-accounts/um-password-dialog.c:295
+#| msgid "The passwords do not match"
+msgid "The passwords do not match."
+msgstr "Las contraseñas no coinciden."
 
-#: ../panels/user-accounts/um-password-dialog.c:306
-msgid "The new password is not strong enough"
-msgstr "La contraseña nueva no es suficientemente segura"
-
-#: ../panels/user-accounts/um-password-dialog.c:312
-msgid "You need to confirm the password"
-msgstr "Debe confirmar la contraseña"
-
-#: ../panels/user-accounts/um-password-dialog.c:315
-msgid "The passwords do not match"
-msgstr "Las contraseñas no coinciden"
-
-#: ../panels/user-accounts/um-password-dialog.c:321
-msgid "You need to enter your current password"
-msgstr "Debe introducir su contraseña actual"
-
-#: ../panels/user-accounts/um-password-dialog.c:324
-msgid "The current password is not correct"
-msgstr "La contraseña actual no es correcta"
-
-#: ../panels/user-accounts/um-password-dialog.c:441
+#: ../panels/user-accounts/um-password-dialog.c:373
 msgid "Wrong password"
 msgstr "Contraseña errónea"
-
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Demasiado corta"
-
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Débil"
-
-#: ../panels/user-accounts/um-password-dialog.c:601
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Regular"
-
-#: ../panels/user-accounts/um-password-dialog.c:602
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Buena"
-
-#: ../panels/user-accounts/um-password-dialog.c:603
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Fuerte"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6710,7 +6622,7 @@ msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
 #: ../panels/user-accounts/um-user-panel.c:1079
-#: ../panels/user-accounts/um-user-panel.c:1369
+#: ../panels/user-accounts/um-user-panel.c:1368
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6723,7 +6635,7 @@ msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
 #: ../panels/user-accounts/um-user-panel.c:1101
-#: ../panels/user-accounts/um-user-panel.c:1374
+#: ../panels/user-accounts/um-user-panel.c:1373
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6731,7 +6643,7 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1284
+#: ../panels/user-accounts/um-user-panel.c:1283
 msgid "My Account"
 msgstr "Mi cuenta"
 
@@ -6750,11 +6662,6 @@ msgid "The username cannot start with a '-'"
 msgstr "El nombre de usuario no puede comenzar por «-»"
 
 #: ../panels/user-accounts/um-utils.c:545
-#| msgid ""
-#| "The username must only consist of:\n"
-#| " ➣ letters from the English alphabet\n"
-#| " ➣ digits\n"
-#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
@@ -6782,17 +6689,17 @@ msgstr ""
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+#: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
 msgstr "Salida:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+#: ../panels/wacom/cc-wacom-mapping-panel.c:276
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Mantener relación de aspecto («letterbox»):"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:298
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Map to single monitor"
 msgstr "Mapear una única pantalla"
 
@@ -7147,6 +7054,77 @@ msgstr "Todas las configuraciones"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "C_ontent sticks to fingers"
+#~ msgstr "El c_ontenido se adhiere a los dedos"
+
+#~ msgid "Choose password at next login"
+#~ msgstr "Elegir una contraseña en el siguiente inicio de sesión"
+
+#~ msgid "Log in without a password"
+#~ msgstr "Iniciar sesión sin contraseña"
+
+#~ msgid "Disable this account"
+#~ msgstr "Desactivar esta cuenta"
+
+#~ msgid "Enable this account"
+#~ msgstr "Activar esta cuenta"
+
+#~ msgid "C_onfirm password"
+#~ msgstr "C_onfirmar contraseña"
+
+#~ msgid "Generate a password"
+#~ msgstr "Generar una contraseña"
+
+#~ msgid "_Action"
+#~ msgstr "_Acción"
+
+#~ msgid "Changing password for"
+#~ msgstr "Cambiando la contraseña para"
+
+#~ msgid "_Show password"
+#~ msgstr "_Mostrar contraseña"
+
+#~ msgid "How to choose a strong password"
+#~ msgstr "Cómo elegir una contraseña fuerte"
+
+#~ msgid "_Generate a password"
+#~ msgstr "_Generar una contraseña"
+
+#~ msgid "You need to enter a new password"
+#~ msgstr "Debe introducir una contraseña"
+
+#~ msgid "The new password is not strong enough"
+#~ msgstr "La contraseña nueva no es suficientemente segura"
+
+#~ msgid "You need to confirm the password"
+#~ msgstr "Debe confirmar la contraseña"
+
+#~ msgid "You need to enter your current password"
+#~ msgstr "Debe introducir su contraseña actual"
+
+#~ msgid "The current password is not correct"
+#~ msgstr "La contraseña actual no es correcta"
+
+#~ msgctxt "Password strength"
+#~ msgid "Too short"
+#~ msgstr "Demasiado corta"
+
+#~ msgctxt "Password strength"
+#~ msgid "Weak"
+#~ msgstr "Débil"
+
+#~ msgctxt "Password strength"
+#~ msgid "Fair"
+#~ msgstr "Regular"
+
+#~ msgctxt "Password strength"
+#~ msgid "Good"
+#~ msgstr "Buena"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strong"
+#~ msgstr "Fuerte"
 
 #~ msgid "Add account"
 #~ msgstr "Añadir cuenta"
@@ -7885,9 +7863,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "_Disabled"
 #~ msgstr "_Desactivado"
-
-#~ msgid "_Edge scrolling"
-#~ msgstr "Desplazamiento en el _borde"
 
 #~ msgid "Add wallpaper"
 #~ msgstr "Añadir fondo"
