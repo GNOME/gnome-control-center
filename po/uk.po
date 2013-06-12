@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-07 00:10+0300\n"
-"PO-Revision-Date: 2013-06-06 18:00+0300\n"
+"POT-Creation-Date: 2013-06-12 14:02+0300\n"
+"PO-Revision-Date: 2013-06-07 15:08+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
 "Language: uk\n"
@@ -1887,9 +1887,11 @@ msgstr "Натиск для _клацання"
 msgid "Two _finger scroll"
 msgstr "Прокручування _двома пальцями"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-msgid "C_ontent sticks to fingers"
-msgstr " В_міст тримається пальців"
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#, fuzzy
+msgid "_Natural scrolling"
+msgstr "_Прокрутка з краю"
 
 #: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -3905,10 +3907,11 @@ msgstr "Переглянути стан вашої батареї і зміни�
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-#, fuzzy
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
-msgstr "Живлення;Сон;Призупинити;Приспати;Батарея;"
+msgstr ""
+"Живлення;Сон;Призупинити;Приспати;Батарея;Яскравість;Затемнення;Порожній;"
+"DPMS;Бездіяльність;"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -4614,6 +4617,8 @@ msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;"
 msgstr ""
+"екран;блокування;діагностика;крах;особисте;нещодавнє;тимчасове;tmp;індекс;"
+"назва;мережа;засвідчення;"
 
 #: ../panels/privacy/privacy.ui.h:1
 msgid "Screen Turns Off"
@@ -4629,7 +4634,7 @@ msgstr "Вказує, як ви показуєтесь на екрані та в
 
 #: ../panels/privacy/privacy.ui.h:12
 msgid "Display _full name in top bar"
-msgstr "Показує повне ім'я на верхній панелі"
+msgstr "Показує _повне ім'я на верхній панелі"
 
 #: ../panels/privacy/privacy.ui.h:13
 msgid "Display full name in _lock screen"
@@ -4715,7 +4720,7 @@ msgstr "Автоматично _блокувати екран"
 #: ../panels/privacy/privacy.ui.h:34
 #, fuzzy
 msgid "Lock screen _after blank for"
-msgstr "За_блокувати екран після:"
+msgstr "За_блокувати екран "
 
 #: ../panels/privacy/privacy.ui.h:35
 msgid "Show _Notifications"
@@ -4743,7 +4748,7 @@ msgstr "Автоматично спорожняти смі_тник"
 
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Automatically purge Temporary _Files"
-msgstr "Автоматчино чистити тимчасові _файли"
+msgstr "Автоматично чистити тимчасові _файли"
 
 #: ../panels/privacy/privacy.ui.h:42
 msgid "Purge _After"
@@ -4791,7 +4796,7 @@ msgstr "Вибачте"
 
 #: ../panels/region/cc-region-panel.c:1060
 msgid "Input methods can't be used on the login screen"
-msgstr "Способи введення неможливо використоувати у вікні входу"
+msgstr "Способи введення неможливо використовувати у вікні входу"
 
 #: ../panels/region/cc-region-panel.c:1509
 msgid "No input source selected"
@@ -5052,7 +5057,7 @@ msgstr "Деякі служби вимкнено через недоступні
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
-msgstr "Оприлюденння матеріалів"
+msgstr "Оприлюднення матеріалів"
 
 #: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
@@ -5060,7 +5065,7 @@ msgstr "Ділитись музикою, світлинами та відеоз�
 
 #: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
-msgstr "Оприлюднути матеріали в мережі"
+msgstr "Оприлюднити матеріали в мережі"
 
 #: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
@@ -5094,7 +5099,7 @@ msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Share Public Folder On This Network"
-msgstr "Оприлюднути привселюдну теку в цій мережі"
+msgstr "Оприлюднити привселюдну теку в цій мережі"
 
 #: ../panels/sharing/sharing.ui.h:21
 msgid "Require Password"
@@ -5873,7 +5878,6 @@ msgid "Administrator"
 msgstr "Адміністратор"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#, fuzzy
 msgid "_Full Name"
 msgstr "_Повне ім'я"
 
@@ -5883,17 +5887,17 @@ msgid "Account _Type"
 msgstr "_Тип облікового запису"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#, fuzzy
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
 msgid "Allow user to set a password when they next login"
-msgstr "Вибрати пароль при наступному вході"
+msgstr ""
+"Дозволяє користувачу вказати пароль, коли він входитиме наступного разу"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
 msgid "Set a password now"
 msgstr "Вкажіть пароль зараз"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
-#, fuzzy
 msgid "_Confirm Password"
 msgstr "_Підтвердити пароль"
 
@@ -5906,14 +5910,13 @@ msgid "_Login Name"
 msgstr "_Користувач"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#, fuzzy
 msgid "Login _Password"
-msgstr "_Пароль"
+msgstr "_Пароль входу"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
 msgid "_Enroll"
-msgstr ""
+msgstr "З_ареєструвати"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "Domain Administrator Login"
@@ -6023,55 +6026,22 @@ msgstr "Наступний тиждень"
 msgid "Next week"
 msgstr "Наступний тиждень"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:2
-msgid "Choose password at next login"
-msgstr "Вибрати пароль при наступному вході"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "Log in without a password"
-msgstr "Вхід без паролю"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
-msgid "Disable this account"
-msgstr "Вимкнути обліковий запис"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Enable this account"
-msgstr "Увімкнути обліковий запис"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "C_onfirm password"
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+#, fuzzy
+msgid "C_onfirm New Password"
 msgstr "_Підтвердити пароль"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "_New password"
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+#, fuzzy
+msgid "_New Password"
 msgstr "_Новий пароль"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Generate a password"
-msgstr "Породити пароль"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
-msgid "Current _password"
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+#, fuzzy
+msgid "Current _Password"
 msgstr "_Поточний пароль"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "_Action"
-msgstr "_Дія"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Changing password for"
-msgstr "Зміна паролю для"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
-msgid "_Show password"
-msgstr "_Показати пароль:"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
-msgid "How to choose a strong password"
-msgstr "Як вибрати сильний пароль"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Ch_ange"
 msgstr "З_мінити"
 
@@ -6151,76 +6121,76 @@ msgid "Authentication is required to change user data"
 msgstr "Потрібна автентифікація, щоб змінити дані про користувача"
 
 #: ../panels/user-accounts/pw-utils.c:81
-#, fuzzy
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one."
-msgstr "Новий пароль не містити достатньо різноманітних символів"
+msgstr "Новий пароль повинен бути відмінним від попереднього."
 
 #: ../panels/user-accounts/pw-utils.c:83
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers."
-msgstr ""
+msgstr "Спробуйте змінити якісь цифри або букви."
 
 #: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
-#, fuzzy
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
-msgstr "Зміна паролю для"
+msgstr "Спробуйте трохи переінакшити пароль."
 
 #: ../panels/user-accounts/pw-utils.c:87
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger."
-msgstr ""
+msgstr "Пароль без згадування користувача буде надійніший."
 
 #: ../panels/user-accounts/pw-utils.c:89
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password."
-msgstr ""
+msgstr "Намагайтесь уникати згадування користувача в паролі."
 
 #: ../panels/user-accounts/pw-utils.c:91
+#, fuzzy
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password."
-msgstr ""
+msgstr "Намагайтесь уникати "
 
 #: ../panels/user-accounts/pw-utils.c:95
 msgctxt "Password hint"
 msgid "Try to avoid common words."
-msgstr ""
+msgstr "Намагайтесь уникати звичайних слів."
 
 #: ../panels/user-accounts/pw-utils.c:97
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words."
-msgstr ""
+msgstr "Намагайтесь уникати переставлення наявних слів."
 
 #: ../panels/user-accounts/pw-utils.c:99
 msgctxt "Password hint"
 msgid "Try to use more numbers."
-msgstr ""
+msgstr "Намагайтесь використовувати більше чисел."
 
 #: ../panels/user-accounts/pw-utils.c:101
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters."
-msgstr ""
+msgstr "Намагайтесь використовувати великі букви."
 
 #: ../panels/user-accounts/pw-utils.c:103
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters."
-msgstr ""
+msgstr "Намагайтесь використовувати малі букви."
 
 #: ../panels/user-accounts/pw-utils.c:105
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation."
 msgstr ""
+"Намагайтесь використовувати спеціальні символи, наприклад, розділові знаки."
 
 #: ../panels/user-accounts/pw-utils.c:107
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation."
-msgstr ""
+msgstr "Намагайтесь використовувати суміш букв, чисел і розділових знаків."
 
 #: ../panels/user-accounts/pw-utils.c:109
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character."
-msgstr ""
+msgstr "Намагайтесь уникати повторення однакових символів."
 
 #: ../panels/user-accounts/pw-utils.c:111
 msgctxt "Password hint"
@@ -6228,52 +6198,53 @@ msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
+"Намагайтесь уникати повторення однакового типу символів: варто змішувати "
+"букви з числами і розділові знаки."
 
 #: ../panels/user-accounts/pw-utils.c:113
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd."
-msgstr ""
+msgstr "Намагайтесь уникати послідовностей, наприклад, 1234 або абвг."
 
 #: ../panels/user-accounts/pw-utils.c:115
 msgctxt "Password hint"
 msgid "Try to add more characters."
-msgstr ""
+msgstr "Намагайтесь додавати якнайбільше символів."
 
 #: ../panels/user-accounts/pw-utils.c:118
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
-msgstr ""
+msgstr "Змішуйте великі букви з малими і використайте число або навіть два."
 
 #: ../panels/user-accounts/pw-utils.c:140
 #: ../panels/user-accounts/pw-utils.c:170
 msgctxt "Password strength"
 msgid "Strength: Weak"
-msgstr ""
+msgstr "Надійність: слабка"
 
 #: ../panels/user-accounts/pw-utils.c:144
 #: ../panels/user-accounts/pw-utils.c:171
-#, fuzzy
 msgctxt "Password strength"
 msgid "Strength: Low"
-msgstr "Довжина:"
+msgstr "Надійність: низька"
 
 #: ../panels/user-accounts/pw-utils.c:147
 #: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
 msgid "Strength: Medium"
-msgstr ""
+msgstr "Надійність: середня"
 
 #: ../panels/user-accounts/pw-utils.c:150
 #: ../panels/user-accounts/pw-utils.c:173
 msgctxt "Password strength"
 msgid "Strength: Good"
-msgstr ""
+msgstr "Надійність: непогана"
 
 #: ../panels/user-accounts/pw-utils.c:153
 #: ../panels/user-accounts/pw-utils.c:174
 msgctxt "Password strength"
 msgid "Strength: High"
-msgstr ""
+msgstr "Надійність: хороша"
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -6331,14 +6302,14 @@ msgstr "Не вдалось додати обліковий запис"
 #: ../panels/user-accounts/um-account-dialog.c:317
 msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
+"Це буде назвою вашого домашнього каталогу, яку згодом змінити буде неможливо."
 
 #: ../panels/user-accounts/um-account-dialog.c:407
-#, fuzzy
 msgid "Passwords do not match."
-msgstr "Паролі не збігаються"
+msgstr "Паролі не збігаються."
 
 #: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:297
 msgid "Passwords do not match"
 msgstr "Паролі не збігаються"
 
@@ -6360,22 +6331,24 @@ msgid ""
 "Login not recognized.\n"
 "Please try again."
 msgstr ""
+"Вхід не здійснено.\n"
+"Спробуйте ще раз."
 
 #: ../panels/user-accounts/um-account-dialog.c:973
-#, fuzzy
 msgid ""
 "Invalid password.\n"
 "Please try again."
-msgstr "Неправильний пароль, спробуйте ще раз"
+msgstr ""
+"Неправильний пароль.\n"
+"Спробуйте ще раз."
 
 #: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to log into domain"
 msgstr "Не вдалось увійти до домену"
 
 #: ../panels/user-accounts/um-account-dialog.c:1040
-#, fuzzy
 msgid "Domain not found."
-msgstr "Не знайдено модему"
+msgstr "Домен не знайдено."
 
 #: ../panels/user-accounts/um-account-dialog.c:1383
 msgid "Add User"
@@ -6480,74 +6453,26 @@ msgstr "Цього тижня"
 msgid "Last Week"
 msgstr "Минулого тижня"
 
-#: ../panels/user-accounts/um-password-dialog.c:128
-msgid "_Generate a password"
-msgstr "По_родити пароль"
-
-#: ../panels/user-accounts/um-password-dialog.c:181
+#: ../panels/user-accounts/um-password-dialog.c:154
 msgid "Please choose another password."
 msgstr "Будь ласка, виберіть інший пароль."
 
-#: ../panels/user-accounts/um-password-dialog.c:190
+#: ../panels/user-accounts/um-password-dialog.c:163
 msgid "Please type your current password again."
 msgstr "Будь ласка, введіть поточний пароль ще раз."
 
-#: ../panels/user-accounts/um-password-dialog.c:196
+#: ../panels/user-accounts/um-password-dialog.c:169
 msgid "Password could not be changed"
 msgstr "Пароль неможливо змінити"
 
-#: ../panels/user-accounts/um-password-dialog.c:303
-msgid "You need to enter a new password"
-msgstr "Потрібно ввести новий пароль"
-
-#: ../panels/user-accounts/um-password-dialog.c:306
-msgid "The new password is not strong enough"
-msgstr "Новий пароль не надто надійний"
-
-#: ../panels/user-accounts/um-password-dialog.c:312
-msgid "You need to confirm the password"
-msgstr "Потрібно підтвердити пароль"
-
-#: ../panels/user-accounts/um-password-dialog.c:315
-msgid "The passwords do not match"
+#: ../panels/user-accounts/um-password-dialog.c:295
+#, fuzzy
+msgid "The passwords do not match."
 msgstr "Паролі не збігаються"
 
-#: ../panels/user-accounts/um-password-dialog.c:321
-msgid "You need to enter your current password"
-msgstr "Потрібно ввести поточний пароль"
-
-#: ../panels/user-accounts/um-password-dialog.c:324
-msgid "The current password is not correct"
-msgstr "Поточний пароль некоректний"
-
-#: ../panels/user-accounts/um-password-dialog.c:441
+#: ../panels/user-accounts/um-password-dialog.c:373
 msgid "Wrong password"
 msgstr "Неправильний пароль"
-
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Надто короткий"
-
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Слабкий"
-
-#: ../panels/user-accounts/um-password-dialog.c:601
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Прийнятний"
-
-#: ../panels/user-accounts/um-password-dialog.c:602
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Непоганий"
-
-#: ../panels/user-accounts/um-password-dialog.c:603
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Сильний"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6676,7 +6601,7 @@ msgid "Create a user account"
 msgstr "Створити обліковий запис користувача"
 
 #: ../panels/user-accounts/um-user-panel.c:1079
-#: ../panels/user-accounts/um-user-panel.c:1369
+#: ../panels/user-accounts/um-user-panel.c:1368
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6689,7 +6614,7 @@ msgid "Delete the selected user account"
 msgstr "Вилучити вибраний обліковий запис користувача"
 
 #: ../panels/user-accounts/um-user-panel.c:1101
-#: ../panels/user-accounts/um-user-panel.c:1374
+#: ../panels/user-accounts/um-user-panel.c:1373
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6697,7 +6622,7 @@ msgstr ""
 "Щоб вилучити вибраний обліковий запис користувача,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:1284
+#: ../panels/user-accounts/um-user-panel.c:1283
 msgid "My Account"
 msgstr "Мій обліковий запис"
 
@@ -6716,15 +6641,12 @@ msgid "The username cannot start with a '-'"
 msgstr "Користувач не може мати на початку «-»"
 
 #: ../panels/user-accounts/um-utils.c:545
-#, fuzzy
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
 msgstr ""
-"Найменування користувача може містити:\n"
-" ➣ букви з англійської абетки\n"
-" ➣ цифри\n"
-" ➣ будь-який з таких символів, як «.», «-» та «_»"
+"Щоб найменувати користувача, потрібно використовувати великі і малі букви "
+"від a до z, числа і будь-який символ з «.», «-» і «_»"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6746,17 +6668,17 @@ msgstr ""
 msgid "Mis-click detected, restarting..."
 msgstr "Промах виявлено, перезавантаження…"
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+#: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
 msgstr "Вивід:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+#: ../panels/wacom/cc-wacom-mapping-panel.c:276
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Зберегти відношення (поштова скринька):"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:298
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Map to single monitor"
 msgstr "Відбити на одному моніторі"
 
@@ -6851,23 +6773,20 @@ msgid "Bluetooth Settings"
 msgstr "Параметри Bluetooth"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:8
-#, fuzzy
 msgid "Map to Monitor…"
 msgstr "Відбити на моніторі…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:9
-#, fuzzy
 msgid "Map Buttons…"
-msgstr "Кнопка відбиття"
+msgstr "Кнопки відбиття…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Adjust display resolution"
 msgstr "Коригувати роздільність екрана"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
-#, fuzzy
 msgid "Adjust mouse settings"
-msgstr "Параметри миші"
+msgstr "Скоригувати параметри миші"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Tracking Mode"
@@ -6879,9 +6798,8 @@ msgstr "Орієнтація на лівшів"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1078
-#, fuzzy
 msgid "Left Ring"
-msgstr "Режим лівого кільця #%d"
+msgstr "Ліве кільце"
 
 #: ../panels/wacom/gsd-wacom-device.c:1089
 #, c-format
@@ -6890,9 +6808,8 @@ msgstr "Режим лівого кільця #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1109
-#, fuzzy
 msgid "Right Ring"
-msgstr "Режим правого кільця #%d"
+msgstr "Праве кільце"
 
 #: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
@@ -6901,9 +6818,8 @@ msgstr "Режим правого кільця #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1162
-#, fuzzy
 msgid "Left Touchstrip"
-msgstr "Режим лівого Touchstrip #%d"
+msgstr ""
 
 #: ../panels/wacom/gsd-wacom-device.c:1173
 #, c-format
@@ -7064,9 +6980,8 @@ msgid "[PANEL] [ARGUMENT…]"
 msgstr ""
 
 #: ../shell/cc-application.c:142
-#, fuzzy
 msgid "- Settings"
-msgstr "Усі параметри"
+msgstr "— Параметри"
 
 #: ../shell/cc-application.c:160
 #, c-format
@@ -7079,9 +6994,8 @@ msgstr ""
 "команди.\n"
 
 #: ../shell/cc-application.c:190
-#, fuzzy
 msgid "Available panels:"
-msgstr "Доступні профілі"
+msgstr "Доступні панелі:"
 
 #: ../shell/cc-application.c:325
 msgid "Help"
@@ -7092,24 +7006,21 @@ msgid "Quit"
 msgstr "Вийти"
 
 #: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
-#, fuzzy
 msgid "Settings"
-msgstr "_Параметри…"
+msgstr "Параметри"
 
 #. Add categories
 #: ../shell/cc-window.c:857
 msgctxt "category"
 msgid "Personal"
-msgstr ""
+msgstr "Особисте"
 
 #: ../shell/cc-window.c:858
-#, fuzzy
 msgctxt "category"
 msgid "Hardware"
 msgstr "Обладнання"
 
 #: ../shell/cc-window.c:859
-#, fuzzy
 msgctxt "category"
 msgid "System"
 msgstr "Система"
@@ -7121,6 +7032,77 @@ msgstr "Усі параметри"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Налаштування;Параметри;"
+
+#~ msgid "C_ontent sticks to fingers"
+#~ msgstr " В_міст тримається пальців"
+
+#~ msgid "Choose password at next login"
+#~ msgstr "Вибрати пароль при наступному вході"
+
+#~ msgid "Log in without a password"
+#~ msgstr "Вхід без паролю"
+
+#~ msgid "Disable this account"
+#~ msgstr "Вимкнути обліковий запис"
+
+#~ msgid "Enable this account"
+#~ msgstr "Увімкнути обліковий запис"
+
+#~ msgid "C_onfirm password"
+#~ msgstr "_Підтвердити пароль"
+
+#~ msgid "Generate a password"
+#~ msgstr "Породити пароль"
+
+#~ msgid "_Action"
+#~ msgstr "_Дія"
+
+#~ msgid "Changing password for"
+#~ msgstr "Зміна паролю для"
+
+#~ msgid "_Show password"
+#~ msgstr "_Показати пароль:"
+
+#~ msgid "How to choose a strong password"
+#~ msgstr "Як вибрати сильний пароль"
+
+#~ msgid "_Generate a password"
+#~ msgstr "По_родити пароль"
+
+#~ msgid "You need to enter a new password"
+#~ msgstr "Потрібно ввести новий пароль"
+
+#~ msgid "The new password is not strong enough"
+#~ msgstr "Новий пароль не надто надійний"
+
+#~ msgid "You need to confirm the password"
+#~ msgstr "Потрібно підтвердити пароль"
+
+#~ msgid "You need to enter your current password"
+#~ msgstr "Потрібно ввести поточний пароль"
+
+#~ msgid "The current password is not correct"
+#~ msgstr "Поточний пароль некоректний"
+
+#~ msgctxt "Password strength"
+#~ msgid "Too short"
+#~ msgstr "Надто короткий"
+
+#~ msgctxt "Password strength"
+#~ msgid "Weak"
+#~ msgstr "Слабкий"
+
+#~ msgctxt "Password strength"
+#~ msgid "Fair"
+#~ msgstr "Прийнятний"
+
+#~ msgctxt "Password strength"
+#~ msgid "Good"
+#~ msgstr "Непоганий"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strong"
+#~ msgstr "Сильний"
 
 #~ msgid "Add account"
 #~ msgstr "Додати обліковий запис"
@@ -7749,9 +7731,6 @@ msgstr "Налаштування;Параметри;"
 
 #~ msgid "_Disabled"
 #~ msgstr "_Вимкнено"
-
-#~ msgid "_Edge scrolling"
-#~ msgstr "_Прокрутка з краю"
 
 #~ msgctxt "Wireless access point"
 #~ msgid "Other..."
