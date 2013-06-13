@@ -20,7 +20,6 @@
  */
 
 #include "cc-sharing-panel.h"
-#include "egg-list-box/egg-list-box.h"
 #include "shell/cc-hostname-entry.h"
 
 #include "cc-sharing-resources.h"
@@ -209,18 +208,18 @@ cc_sharing_panel_run_dialog (CcSharingPanel *self,
 }
 
 static void
-cc_sharing_panel_main_list_box_child_activated (EggListBox     *listbox,
-                                                GtkWidget      *widget,
-                                                CcSharingPanel *self)
+cc_sharing_panel_main_list_box_row_activated (GtkListBox     *listbox,
+                                              GtkListBoxRow  *row,
+                                              CcSharingPanel *self)
 {
   gchar *widget_name, *found;
 
-  widget_name = g_strdup (gtk_buildable_get_name (GTK_BUILDABLE (widget)));
+  widget_name = g_strdup (gtk_buildable_get_name (GTK_BUILDABLE (row)));
 
   if (!widget_name)
     return;
 
-  egg_list_box_select_child (listbox, NULL);
+  gtk_list_box_select_row (listbox, NULL);
 
   /* replace "button" with "dialog" */
   found = g_strrstr (widget_name, "button");
@@ -237,22 +236,22 @@ out:
 }
 
 static void
-cc_sharing_panel_main_list_box_update_separator (GtkWidget **separator,
-                                                 GtkWidget *child,
-                                                 GtkWidget *before,
-                                                 gpointer user_data)
+cc_sharing_panel_main_list_box_update_header (GtkListBoxRow  *row,
+                                              GtkListBoxRow  *before,
+                                              gpointer    user_data)
 {
-  if (before == NULL)
-    {
-      g_clear_object (separator);
-      return;
-    }
+  GtkWidget *current;
 
-  if (*separator != NULL)
+  if (before == NULL)
     return;
 
-  *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-  g_object_ref_sink (*separator);
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
+    {
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
+    }
 }
 
 static gboolean
@@ -984,8 +983,8 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   gtk_container_add (GTK_CONTAINER (self), WID ("sharing-panel"));
 
-  g_signal_connect (WID ("main-list-box"), "child-activated",
-                    G_CALLBACK (cc_sharing_panel_main_list_box_child_activated), self);
+  g_signal_connect (WID ("main-list-box"), "row-activated",
+                    G_CALLBACK (cc_sharing_panel_main_list_box_row_activated), self);
 
   priv->hostname_cancellable = g_cancellable_new ();
 
@@ -1007,11 +1006,11 @@ cc_sharing_panel_init (CcSharingPanel *self)
   g_signal_connect (priv->screen_sharing_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
 
-  egg_list_box_set_activate_on_single_click (EGG_LIST_BOX (WID ("main-list-box")),
+  gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (WID ("main-list-box")),
                                              TRUE);
-  egg_list_box_set_separator_funcs (EGG_LIST_BOX (WID ("main-list-box")),
-                                    cc_sharing_panel_main_list_box_update_separator,
-                                    NULL, NULL);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("main-list-box")),
+                                cc_sharing_panel_main_list_box_update_header,
+                                NULL, NULL);
 
   /* create the master switch */
   priv->master_switch = gtk_switch_new ();

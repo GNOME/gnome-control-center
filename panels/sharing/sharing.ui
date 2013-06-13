@@ -264,10 +264,13 @@
             <property name="label_xalign">0</property>
             <property name="shadow_type">in</property>
             <child>
-              <object class="EggListBox" id="main-list-box">
+              <object class="GtkListBox" id="main-list-box">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkListBoxRow" id="bluetooth-sharing-button">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkBox" id="bluetooth-sharing-button">
+                      <object class="GtkBox" id="box1">
                         <property name="border-width">12</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -299,8 +302,13 @@
                         </child>
                       </object>
                     </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBoxRow" id="personal-file-sharing-button">
+                    <property name="visible">True</property>
                     <child>
-                      <object class="GtkBox" id="personal-file-sharing-button">
+                      <object class="GtkBox" id="box2">
                         <property name="border-width">12</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -332,8 +340,13 @@
                         </child>
                       </object>
                     </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBoxRow" id="screen-sharing-button">
+                    <property name="visible">True</property>
                     <child>
-                      <object class="GtkBox" id="screen-sharing-button">
+                      <object class="GtkBox" id="box3">
                         <property name="border-width">12</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -365,8 +378,13 @@
                         </child>
                       </object>
                     </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBoxRow" id="media-sharing-button">
+                    <property name="visible">True</property>
                     <child>
-                      <object class="GtkBox" id="media-sharing-button">
+                      <object class="GtkBox" id="box4">
                         <property name="border-width">12</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -398,8 +416,13 @@
                         </child>
                       </object>
                     </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBoxRow" id="remote-login-button">
+                    <property name="visible">True</property>
                     <child>
-                      <object class="GtkBox" id="remote-login-button">
+                      <object class="GtkBox" id="box5">
                         <property name="border-width">12</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -433,6 +456,8 @@
                       </object>
                     </child>
                   </object>
+                </child>
+              </object>
             </child>
           </object>
           <packing>
@@ -1081,7 +1106,7 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkBox" id="box1">
+                      <object class="GtkBox" id="box6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
