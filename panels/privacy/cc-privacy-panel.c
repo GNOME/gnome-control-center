@@ -22,7 +22,6 @@
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
 
-#include <egg-list-box/egg-list-box.h>
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
@@ -171,12 +170,14 @@ add_row (CcPrivacyPanel *self,
          const gchar    *dialog_id,
          GtkWidget      *status)
 {
-  GtkWidget *box, *w;
+  GtkWidget *box, *row, *w;
 
+  row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
-  g_object_set_data (G_OBJECT (box), "dialog-id", (gpointer)dialog_id);
+  gtk_container_add (GTK_CONTAINER (row), box);
+  g_object_set_data (G_OBJECT (row), "dialog-id", (gpointer)dialog_id);
   gtk_widget_set_hexpand (box, TRUE);
-  gtk_container_add (GTK_CONTAINER (self->priv->list_box), box);
+  gtk_container_add (GTK_CONTAINER (self->priv->list_box), row);
 
   w = gtk_label_new (label);
   gtk_misc_set_alignment (GTK_MISC (w), 0.0f, 0.5f);
@@ -194,7 +195,7 @@ add_row (CcPrivacyPanel *self,
   gtk_widget_set_valign (status, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
 
-  gtk_widget_show_all (box);
+  gtk_widget_show_all (row);
 }
 
 static void
@@ -626,31 +627,33 @@ cc_privacy_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-update_separator_func (GtkWidget **separator,
-                       GtkWidget  *child,
-                       GtkWidget  *before,
-                       gpointer    user_data)
+update_header_func (GtkListBoxRow  *row,
+                    GtkListBoxRow  *before,
+                    gpointer    user_data)
 {
+  GtkWidget *current;
+
   if (before == NULL)
     return;
 
-  if (*separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
     {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (*separator);
-      g_object_ref_sink (*separator);
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
 static void
-activate_child (CcPrivacyPanel *self,
-                GtkWidget      *child)
+activate_row (CcPrivacyPanel *self,
+              GtkListBoxRow  *row)
 {
   GObject *w;
   const gchar *dialog_id;
   GtkWidget *toplevel;
 
-  dialog_id = g_object_get_data (G_OBJECT (child), "dialog-id");
+  dialog_id = g_object_get_data (G_OBJECT (row), "dialog-id");
   w = gtk_builder_get_object (self->priv->builder, dialog_id);
   if (w == NULL)
     {
@@ -691,18 +694,18 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
     }
 
   frame = WID ("frame");
-  widget = GTK_WIDGET (egg_list_box_new ());
-  egg_list_box_set_selection_mode (EGG_LIST_BOX (widget), GTK_SELECTION_NONE);
+  widget = gtk_list_box_new ();
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_container_add (GTK_CONTAINER (frame), widget);
   self->priv->list_box = widget;
   gtk_widget_show (widget);
 
-  g_signal_connect_swapped (widget, "child-activated",
-                            G_CALLBACK (activate_child), self);
+  g_signal_connect_swapped (widget, "row-activated",
+                            G_CALLBACK (activate_row), self);
 
-  egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
-                                    update_separator_func,
-                                    NULL, NULL);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
+                                update_header_func,
+                                NULL, NULL);
 
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
