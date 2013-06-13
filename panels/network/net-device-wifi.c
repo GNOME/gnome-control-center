@@ -39,8 +39,6 @@
 #include "network-dialogs.h"
 #include "panel-common.h"
 
-#include "egg-list-box/egg-list-box.h"
-
 #include "connection-editor/net-connection-editor.h"
 #include "net-device-wifi.h"
 
@@ -1448,7 +1446,7 @@ make_row (GtkSizeGroup   *rows,
           GtkWidget     **check_out,
           GtkWidget     **edit_out)
 {
-        GtkWidget *row;
+        GtkWidget *row, *row_box;
         GtkWidget *widget;
         GtkWidget *box;
         const gchar *title;
@@ -1500,10 +1498,13 @@ make_row (GtkSizeGroup   *rows,
                 strength = 0;
         }
 
-        row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        row = gtk_list_box_row_new ();
         gtk_widget_set_margin_left (row, 12);
         gtk_widget_set_margin_right (row, 12);
         gtk_size_group_add_widget (rows, row);
+
+        row_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        gtk_container_add (GTK_CONTAINER (row), row_box);
 
         widget = NULL;
         if (forget) {
@@ -1512,7 +1513,7 @@ make_row (GtkSizeGroup   *rows,
                                   G_CALLBACK (check_toggled), forget);
                 gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
                 gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-                gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
         }
         if (check_out)
                 *check_out = widget;
@@ -1520,16 +1521,16 @@ make_row (GtkSizeGroup   *rows,
         widget = gtk_label_new (title);
         gtk_widget_set_margin_top (widget, 12);
         gtk_widget_set_margin_bottom (widget, 12);
-        gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
 
         if (active) {
                 widget = gtk_image_new_from_icon_name ("object-select-symbolic", GTK_ICON_SIZE_MENU);
                 gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
                 gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-                gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
         }
 
-        gtk_box_pack_start (GTK_BOX (row), gtk_label_new (""), TRUE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), gtk_label_new (""), TRUE, FALSE, 0);
 
         spinner_button_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
         g_object_set_data_full (G_OBJECT (row), "spinner_button_group", spinner_button_group, g_object_unref);
@@ -1547,9 +1548,9 @@ make_row (GtkSizeGroup   *rows,
                 gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
                 gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
                 atk_object_set_name (gtk_widget_get_accessible (widget), _("Options…"));
-                gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
                 gtk_size_group_add_widget (spinner_button_group, widget);
-                g_object_set_data (G_OBJECT (row), "edit", widget);
+                g_object_set_data (G_OBJECT (row_box), "edit", widget);
         }
         if (edit_out)
                 *edit_out = widget;
@@ -1562,14 +1563,14 @@ make_row (GtkSizeGroup   *rows,
         }
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
         gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-        gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
         gtk_size_group_add_widget (spinner_button_group, widget);
-        g_object_set_data (G_OBJECT (row), "spinner", widget);
+        g_object_set_data (G_OBJECT (row_box), "spinner", widget);
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
         gtk_size_group_add_widget (icons, box);
-        gtk_box_pack_start (GTK_BOX (row), box, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), box, FALSE, FALSE, 0);
 
         if (in_range) {
                 if (security != NM_AP_SEC_UNKNOWN &&
@@ -1607,19 +1608,21 @@ make_row (GtkSizeGroup   *rows,
 }
 
 static void
-update_separator (GtkWidget **separator,
-                  GtkWidget  *child,
-                  GtkWidget  *before,
-                  gpointer    user_data)
+update_header (GtkListBoxRow  *row,
+               GtkListBoxRow  *before,
+               gpointer    user_data)
 {
+  GtkWidget *current;
+
   if (before == NULL)
     return;
 
-  if (*separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
     {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (*separator);
-      g_object_ref_sink (*separator);
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
@@ -1740,12 +1743,12 @@ open_history (NetDeviceWifi *device_wifi)
         gtk_widget_set_margin_bottom (swin, 12);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), swin, TRUE, TRUE, 0);
 
-        list = GTK_WIDGET (egg_list_box_new ());
+        list = GTK_WIDGET (gtk_list_box_new ());
         gtk_widget_show (list);
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (list), GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (list), update_separator, NULL, NULL);
-        egg_list_box_set_sort_func (EGG_LIST_BOX (list), history_sort, NULL, NULL);
-        egg_list_box_add_to_scrolled (EGG_LIST_BOX (list), GTK_SCROLLED_WINDOW (swin));
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)history_sort, NULL, NULL);
+        gtk_container_add (GTK_CONTAINER (swin), list);
 
         rows = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
         icons = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -1869,7 +1872,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
 }
 
 static void
-ap_activated (EggListBox *list, GtkWidget *row, NetDeviceWifi *device_wifi)
+ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
 {
         NMConnection *connection;
         NMAccessPoint *ap;
@@ -1937,13 +1940,13 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
 
         swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                    "scrolledwindow_list"));
-        list = GTK_WIDGET (egg_list_box_new ());
+        list = GTK_WIDGET (gtk_list_box_new ());
         gtk_widget_show (list);
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (list), GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (list), update_separator, NULL, NULL);
-        egg_list_box_set_sort_func (EGG_LIST_BOX (list), ap_sort, NULL, NULL);
-        egg_list_box_add_to_scrolled (EGG_LIST_BOX (list), GTK_SCROLLED_WINDOW (swin));
-        g_signal_connect (list, "child-activated",
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)ap_sort, NULL, NULL);
+        gtk_container_add (GTK_CONTAINER (swin), list);
+        g_signal_connect (list, "row-activated",
                           G_CALLBACK (ap_activated), device_wifi);
 
         rows = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);

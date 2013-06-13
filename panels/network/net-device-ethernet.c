@@ -32,7 +32,6 @@
 
 #include "panel-common.h"
 
-#include "egg-list-box/egg-list-box.h"
 #include "connection-editor/net-connection-editor.h"
 #include "connection-editor/ce-page.h"
 
@@ -451,19 +450,21 @@ remote_settings_read_cb (NMRemoteSettings  *settings,
 }
 
 static void
-update_separator (GtkWidget **separator,
-                  GtkWidget  *child,
-                  GtkWidget  *before,
-                  gpointer    user_data)
+update_header (GtkListBoxRow  *row,
+               GtkListBoxRow  *before,
+               gpointer    user_data)
 {
+  GtkWidget *current;
+
   if (before == NULL)
     return;
 
-  if (*separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
     {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (*separator);
-      g_object_ref_sink (*separator);
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
@@ -555,10 +556,10 @@ device_ethernet_constructed (GObject *object)
                           G_CALLBACK (device_off_toggled), device);
 
         device->scrolled_window = swin = GTK_WIDGET (gtk_builder_get_object (device->builder, "list"));
-        device->list = list = GTK_WIDGET (egg_list_box_new ());
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (list), GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (list), update_separator, NULL, NULL);
-        egg_list_box_add_to_scrolled (EGG_LIST_BOX (list), GTK_SCROLLED_WINDOW (swin));
+        device->list = list = GTK_WIDGET (gtk_list_box_new ());
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_container_add (GTK_CONTAINER (swin), list);
         gtk_widget_show (list);
 
         device->details = GTK_WIDGET (gtk_builder_get_object (NET_DEVICE_ETHERNET (object)->builder, "details"));
