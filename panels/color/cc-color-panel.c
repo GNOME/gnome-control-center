@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include <egg-list-box/egg-list-box.h>
 #include <glib/gi18n.h>
 #include <colord.h>
 #include <gtk/gtk.h>
@@ -55,7 +54,7 @@ struct _CcColorPanelPrivate
   GtkBuilder    *builder;
   GtkWidget     *main_window;
   CcColorCalibrate *calibrate;
-  EggListBox    *list_box;
+  GtkListBox    *list_box;
   gchar         *list_box_filter;
   guint          list_box_selected_id;
   GtkSizeGroup  *list_box_size;
@@ -1049,12 +1048,13 @@ gcm_prefs_profile_remove_cb (GtkWidget *widget, CcColorPanel *prefs)
   CdProfile *profile;
   gboolean ret = FALSE;
   GError *error = NULL;
+  GtkListBoxRow *row;
 
   /* get the selected profile */
-  widget = egg_list_box_get_selected_child (priv->list_box);
-  if (widget == NULL)
+  row = gtk_list_box_get_selected_row (priv->list_box);
+  if (row == NULL)
     return;
-  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (widget));
+  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (row));
   if (profile == NULL)
     {
         g_warning ("failed to get the active profile");
@@ -1099,12 +1099,13 @@ gcm_prefs_device_profile_enable_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
   CcColorPanelPrivate *priv = prefs->priv;
   CdProfile *profile;
+  GtkListBoxRow *row;
 
   /* get the selected profile */
-  widget = egg_list_box_get_selected_child (priv->list_box);
-  if (widget == NULL)
+  row = gtk_list_box_get_selected_row (priv->list_box);
+  if (row == NULL)
     return;
-  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (widget));
+  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (row));
   if (profile == NULL)
     {
         g_warning ("failed to get the active profile");
@@ -1160,13 +1161,13 @@ gcm_prefs_profile_assign_link_activate_cb (GtkLabel *label,
 {
   CcColorPanelPrivate *priv = prefs->priv;
   CdProfile *profile;
-  GtkWidget *widget;
+  GtkListBoxRow *row;
 
   /* get the selected profile */
-  widget = egg_list_box_get_selected_child (priv->list_box);
-  if (widget == NULL)
+  row = gtk_list_box_get_selected_row (priv->list_box);
+  if (row == NULL)
     return;
-  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (widget));
+  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (row));
   if (profile == NULL)
     {
         g_warning ("failed to get the active profile");
@@ -1181,12 +1182,13 @@ static void
 gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
   CdProfile *profile;
+  GtkListBoxRow *row;
 
   /* get the selected profile */
-  widget = egg_list_box_get_selected_child (prefs->priv->list_box);
-  if (widget == NULL)
+  row = gtk_list_box_get_selected_row (prefs->priv->list_box);
+  if (row == NULL)
     return;
-  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (widget));
+  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (row));
   if (profile == NULL)
     {
         g_warning ("failed to get the active profile");
@@ -1724,8 +1726,11 @@ gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
       profile_tmp = cc_color_profile_get_profile (CC_COLOR_PROFILE (l->data));
       ret = gcm_prefs_find_profile_by_object_path (profiles,
                                                    cd_profile_get_object_path (profile_tmp));
-      if (!ret)
+      if (!ret) {
         gtk_widget_destroy (GTK_WIDGET (l->data));
+        /* Don't look at the destroyed widget below */
+        l->data = NULL;
+      }
     }
 
   /* add anything in Device.Profiles that's not in the list view */
@@ -1741,7 +1746,7 @@ gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
   g_list_free (list);
 
   /* resort */
-  egg_list_box_resort (priv->list_box);
+  gtk_list_box_invalidate_sort (priv->list_box);
 }
 
 static void
@@ -1779,7 +1784,7 @@ gcm_prefs_device_expanded_changed_cb (CcColorDevice *widget,
     {
       priv->list_box_filter = NULL;
     }
-  egg_list_box_refilter (priv->list_box);
+  gtk_list_box_invalidate_filter (priv->list_box);
 }
 
 static void
@@ -1813,7 +1818,7 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
   /* watch for changes */
   g_signal_connect (device, "changed",
                     G_CALLBACK (gcm_prefs_device_changed_cb), prefs);
-  egg_list_box_resort (priv->list_box);
+  gtk_list_box_invalidate_sort (priv->list_box);
 out:
   return;
 }
@@ -1928,62 +1933,37 @@ out:
 }
 
 static void
-gcm_prefs_list_box_handle_selection_flags (EggListBox *list_box,
-                                           GtkWidget *child)
-{
-  GList *l;
-  GList *list;
-
-  list = gtk_container_get_children (GTK_CONTAINER (list_box));
-  for (l = list; l != NULL; l = l->next)
-    {
-      if (child != l->data)
-        {
-          gtk_widget_unset_state_flags (GTK_WIDGET (l->data),
-                                        GTK_STATE_FLAG_SELECTED);
-          continue;
-        }
-        gtk_widget_set_state_flags (child, GTK_STATE_FLAG_SELECTED, FALSE);
-    }
-  g_list_free (list);
-}
-
-static void
-gcm_prefs_list_box_child_selected_cb (EggListBox *list_box,
-                                      GtkWidget *child,
-                                      CcColorPanel *panel)
+gcm_prefs_list_box_row_selected_cb (GtkListBox *list_box,
+                                    GtkListBoxRow *row,
+                                    CcColorPanel *panel)
 {
   CdProfile *profile = NULL;
   GtkWidget *widget;
   CcColorPanelPrivate *priv = panel->priv;
-  gboolean is_device = CC_IS_COLOR_DEVICE (child);
+  gboolean is_device = CC_IS_COLOR_DEVICE (row);
 
   /* nothing selected */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbar_devices"));
-  gtk_widget_set_visible (widget, child != NULL);
-  if (child == NULL)
+  gtk_widget_set_visible (widget, row != NULL);
+  if (row == NULL)
     return;
-
-  /* until Alex works out what to do with forwarding the state onto
-   * children in an EggListBox, we have to do this ourselves */
-  gcm_prefs_list_box_handle_selection_flags (list_box, child);
 
   /* save current device */
   if (priv->current_device != NULL)
     g_object_unref (priv->current_device);
-  g_object_get (child, "device", &priv->current_device, NULL);
+  g_object_get (row, "device", &priv->current_device, NULL);
 
   /* device actions */
   g_debug ("%s selected", is_device ? "device" : "profile");
-  if (CC_IS_COLOR_DEVICE (child))
+  if (CC_IS_COLOR_DEVICE (row))
     {
       gcm_prefs_device_clicked (panel, priv->current_device);
-      cc_color_device_set_expanded (CC_COLOR_DEVICE (child), TRUE);
+      cc_color_device_set_expanded (CC_COLOR_DEVICE (row), TRUE);
     }
-  else if (CC_IS_COLOR_PROFILE (child))
+  else if (CC_IS_COLOR_PROFILE (row))
     {
-      profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (child));
+      profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (row));
       gcm_prefs_profile_clicked (panel, profile, priv->current_device);
     }
   else
@@ -1991,13 +1971,13 @@ gcm_prefs_list_box_child_selected_cb (EggListBox *list_box,
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_default"));
-  gtk_widget_set_visible (widget, !is_device && cc_color_profile_get_is_default (CC_COLOR_PROFILE (child)));
+  gtk_widget_set_visible (widget, !is_device && cc_color_profile_get_is_default (CC_COLOR_PROFILE (row)));
   if (profile)
     gtk_widget_set_sensitive (widget, !cd_profile_get_is_system_wide (profile));
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_enable"));
-  gtk_widget_set_visible (widget, !is_device && !cc_color_profile_get_is_default (CC_COLOR_PROFILE (child)));
+  gtk_widget_set_visible (widget, !is_device && !cc_color_profile_get_is_default (CC_COLOR_PROFILE (row)));
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_calibrate"));
@@ -2165,8 +2145,8 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
 }
 
 static gint
-cc_color_panel_sort_func (gconstpointer a,
-                          gconstpointer b,
+cc_color_panel_sort_func (GtkListBoxRow *a,
+                          GtkListBoxRow *b,
                           gpointer user_data)
 {
   const gchar *sort_a = NULL;
@@ -2187,36 +2167,38 @@ cc_color_panel_sort_func (gconstpointer a,
 }
 
 static gboolean
-cc_color_panel_filter_func (GtkWidget *child, void *user_data)
+cc_color_panel_filter_func (GtkListBoxRow *row, void *user_data)
 {
   CcColorPanel *prefs = CC_COLOR_PANEL (user_data);
   CdDevice *device;
   gboolean ret;
 
   /* always show all devices */
-  if (CC_IS_COLOR_DEVICE (child))
+  if (CC_IS_COLOR_DEVICE (row))
     return TRUE;
 
-  g_object_get (child, "device", &device, NULL);
+  g_object_get (row, "device", &device, NULL);
   ret = g_strcmp0 (cd_device_get_id (device), prefs->priv->list_box_filter) == 0;
   g_object_unref (device);
   return ret;
 }
 
 static void
-cc_color_panel_separator_func (GtkWidget **separator,
-                               GtkWidget  *child,
-                               GtkWidget  *before,
-                               gpointer    user_data)
+cc_color_panel_header_func (GtkListBoxRow  *row,
+                            GtkListBoxRow  *before,
+                            gpointer    user_data)
 {
+  GtkWidget *current;
+
   if (before == NULL)
     return;
 
-  if (*separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
     {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      g_object_ref_sink (*separator);
-      gtk_widget_show (*separator);
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
@@ -2493,29 +2475,28 @@ cc_color_panel_init (CcColorPanel *prefs)
                            G_CALLBACK (gcm_prefs_device_removed_cb), prefs, 0);
 
   /* use a listbox for the main UI */
-  priv->list_box = egg_list_box_new ();
-  egg_list_box_set_filter_func (priv->list_box,
+  priv->list_box = GTK_LIST_BOX (gtk_list_box_new ());
+  gtk_list_box_set_filter_func (priv->list_box,
                                 cc_color_panel_filter_func,
                                 prefs,
                                 NULL);
-  egg_list_box_set_sort_func (priv->list_box,
+  gtk_list_box_set_sort_func (priv->list_box,
                               cc_color_panel_sort_func,
                               prefs,
                               NULL);
-  egg_list_box_set_separator_funcs (priv->list_box,
-                                    cc_color_panel_separator_func,
-                                    prefs, NULL);
-  egg_list_box_set_selection_mode (priv->list_box,
+  gtk_list_box_set_header_func (priv->list_box,
+                                cc_color_panel_header_func,
+                                prefs, NULL);
+  gtk_list_box_set_selection_mode (priv->list_box,
                                    GTK_SELECTION_SINGLE);
   priv->list_box_selected_id =
-    g_signal_connect (priv->list_box, "child-selected",
-                      G_CALLBACK (gcm_prefs_list_box_child_selected_cb),
+    g_signal_connect (priv->list_box, "row-selected",
+                      G_CALLBACK (gcm_prefs_list_box_row_selected_cb),
                       prefs);
   priv->list_box_size = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_devices"));
-  egg_list_box_add_to_scrolled (priv->list_box,
-                                GTK_SCROLLED_WINDOW (widget));
+  gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (priv->list_box));
   gtk_widget_show (GTK_WIDGET (priv->list_box));
 
   /* connect to colord */

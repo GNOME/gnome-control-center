@@ -40,7 +40,7 @@ struct _CcColorDevicePrivate
   guint        device_changed_id;
 };
 
-G_DEFINE_TYPE (CcColorDevice, cc_color_device, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcColorDevice, cc_color_device, GTK_TYPE_LIST_BOX_ROW)
 
 enum
 {
@@ -326,7 +326,7 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_box_pack_start (GTK_BOX (box), priv->widget_nocalib, FALSE, FALSE, 0);
 
   /* refresh */
-  gtk_box_pack_start (GTK_BOX (color_device), box, TRUE, TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (color_device), box);
   gtk_widget_set_visible (box, TRUE);
 }
 

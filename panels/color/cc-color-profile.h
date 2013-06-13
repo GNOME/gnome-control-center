@@ -40,7 +40,7 @@ typedef struct _CcColorProfilePrivate            CcColorProfilePrivate;
 
 struct _CcColorProfile
 {
-        GtkBox                   parent;
+        GtkListBoxRow             parent;
 
         /*< private >*/
         CcColorProfilePrivate    *priv;
@@ -48,7 +48,7 @@ struct _CcColorProfile
 
 struct _CcColorProfileClass
 {
-        GtkBoxClass              parent_class;
+        GtkListBoxRowClass        parent_class;
 };
 
 GType        cc_color_profile_get_type         (void);

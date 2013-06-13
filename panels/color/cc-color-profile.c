@@ -29,6 +29,7 @@
 
 struct _CcColorProfilePrivate
 {
+  GtkWidget   *box;
   CdDevice    *device;
   CdProfile   *profile;
   gboolean     is_default;
@@ -46,7 +47,7 @@ struct _CcColorProfilePrivate
 
 #define IMAGE_WIDGET_PADDING 12
 
-G_DEFINE_TYPE (CcColorProfile, cc_color_profile, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcColorProfile, cc_color_profile, GTK_TYPE_LIST_BOX_ROW)
 
 enum
 {
@@ -479,7 +480,7 @@ cc_color_profile_init (CcColorProfile *color_profile)
   gtk_box_pack_start (GTK_BOX (box), priv->widget_info, FALSE, FALSE, 0);
 
   /* refresh */
-  gtk_box_pack_start (GTK_BOX (color_profile), box, TRUE, TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (color_profile), box);
   gtk_widget_set_visible (box, TRUE);
 }
 

@@ -40,7 +40,7 @@ typedef struct _CcColorDevicePrivate      CcColorDevicePrivate;
 
 struct _CcColorDevice
 {
-        GtkBox                         parent;
+        GtkListBoxRow            parent;
 
         /*< private >*/
         CcColorDevicePrivate    *priv;
@@ -48,7 +48,7 @@ struct _CcColorDevice
 
 struct _CcColorDeviceClass
 {
-        GtkBoxClass     parent_class;
+        GtkListBoxRowClass       parent_class;
         void            (*expanded_changed) (CcColorDevice  *color_device,
                                              gboolean        expanded);
 };
