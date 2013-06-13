@@ -21,7 +21,6 @@
 
 #include "cc-search-locations-dialog.h"
 
-#include <egg-list-box/egg-list-box.h>
 #include <glib/gi18n.h>
 
 #define TRACKER_SCHEMA "org.freedesktop.Tracker.Miner.Files"
@@ -418,7 +417,7 @@ place_query_info_ready (GObject *source,
                         GAsyncResult *res,
                         gpointer user_data)
 {
-  GtkWidget *child, *w;
+  GtkWidget *row, *box, *w;
   Place *place;
   GFileInfo *info;
   const gchar *desktop_path;
@@ -428,9 +427,11 @@ place_query_info_ready (GObject *source,
   if (!info)
     return;
 
-  child = user_data;
-  place = g_object_get_data (G_OBJECT (child), "place");
+  row = user_data;
+  place = g_object_get_data (G_OBJECT (row), "place");
   g_clear_object (&place->cancellable);
+
+  box = gtk_bin_get_child (GTK_BIN (row));
 
   /* FIXME: GLib is currently buggy and returns a non-existent icon name
    * when asked for the desktop symbolic icon.
@@ -451,13 +452,13 @@ place_query_info_ready (GObject *source,
   g_free (path);
 
   w = gtk_image_new_from_gicon (place->icon, GTK_ICON_SIZE_MENU);
-  gtk_container_add (GTK_CONTAINER (child), w);
+  gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_label_new (place->display_name);
-  gtk_container_add (GTK_CONTAINER (child), w);
+  gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_switch_new ();
-  gtk_box_pack_end (GTK_BOX (child), w, FALSE, FALSE, 0);
+  gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
   g_settings_bind_with_mapping (tracker_preferences, place->settings_key,
                                 w, "active",
                                 G_SETTINGS_BIND_DEFAULT,
@@ -465,7 +466,7 @@ place_query_info_ready (GObject *source,
                                 switch_tracker_set_mapping,
                                 place, NULL);
 
-  gtk_widget_show_all (child);
+  gtk_widget_show_all (row);
   g_object_unref (info);
 }
 
@@ -484,18 +485,18 @@ get_heading_name (PlaceType place)
 }
 
 static void
-place_separator_func (GtkWidget **separator,
-                      GtkWidget *child,
-                      GtkWidget *before,
-                      gpointer user_data)
+place_header_func (GtkListBoxRow *row,
+                   GtkListBoxRow *before,
+                   gpointer user_data)
 {
   gboolean need_separator;
+  GtkWidget *current;
   Place *place, *place_before;
   gchar *text;
   GtkWidget *w;
 
   need_separator = FALSE;
-  place = g_object_get_data (G_OBJECT (child), "place");
+  place = g_object_get_data (G_OBJECT (row), "place");
 
   if (before != NULL)
     {
@@ -510,7 +511,8 @@ place_separator_func (GtkWidget **separator,
       need_separator = TRUE;
     }
 
-  if (need_separator && *separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (need_separator && current == NULL)
     {
       text = g_strdup_printf ("<b>%s</b>", get_heading_name (place->place_type));
       w = gtk_label_new (NULL);
@@ -524,14 +526,13 @@ place_separator_func (GtkWidget **separator,
       gtk_widget_set_halign (w, GTK_ALIGN_START);
       gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
 
-      g_object_ref_sink (w);
-      *separator = w;
+      gtk_list_box_row_set_header (row, w);
 
       g_free (text);
     }
-  else if (!need_separator && *separator != NULL)
+  else if (!need_separator && current != NULL)
     {
-      gtk_widget_destroy (*separator);
+      gtk_list_box_row_set_header (row, NULL);
     }
 }
 
@@ -571,51 +572,53 @@ place_compare_func (gconstpointer a,
 }
 
 static GtkWidget *
-create_child_for_place (Place *place)
+create_row_for_place (Place *place)
 {
-  GtkWidget *child;
+  GtkWidget *child, *row;
 
+  row = gtk_list_box_row_new ();
   child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  g_object_set (child, "margin-left", 16, "margin-right", 16, NULL);
-  g_object_set_data_full (G_OBJECT (child), "place", place, (GDestroyNotify) place_free);
+  gtk_container_add (GTK_CONTAINER (row), child);
+  g_object_set (row, "margin-left", 16, "margin-right", 16, NULL);
+  g_object_set_data_full (G_OBJECT (row), "place", place, (GDestroyNotify) place_free);
 
   place->cancellable = g_cancellable_new ();
   g_file_query_info_async (place->location, "standard::symbolic-icon",
                            G_FILE_QUERY_INFO_NONE, G_PRIORITY_DEFAULT,
-                           place->cancellable, place_query_info_ready, child);
+                           place->cancellable, place_query_info_ready, row);
 
-  return child;
+  return row;
 }
 
 static void
 populate_list_box (GtkWidget *list_box)
 {
   GList *places, *l;
-  GtkWidget *child;
+  GtkWidget *row;
 
   places = get_places_list ();
   for (l = places; l != NULL; l = l->next)
     {
       /* assumes ownership of place */
-      child = create_child_for_place (l->data);
-      gtk_container_add (GTK_CONTAINER (list_box), child);
+      row = create_row_for_place (l->data);
+      gtk_container_add (GTK_CONTAINER (list_box), row);
     }
 
   g_list_free (places);
 }
 
 static void
-list_box_child_selected (EggListBox *list_box,
-                         GtkWidget *child,
-                         gpointer user_data)
+list_box_row_selected (GtkListBox *list_box,
+                       GtkListBoxRow *row,
+                       gpointer user_data)
 {
   GtkWidget *remove_button = user_data;
   Place *place;
   gboolean sensitive = FALSE;
 
-  if (child != NULL)
+  if (row != NULL)
     {
-      place = g_object_get_data (G_OBJECT (child), "place");
+      place = g_object_get_data (G_OBJECT (row), "place");
       sensitive = (place->place_type == PLACE_OTHER);
     }
 
@@ -627,12 +630,12 @@ remove_button_clicked (GtkWidget *widget,
                        gpointer user_data)
 {
   GtkWidget *list_box = user_data;
-  GtkWidget *child;
+  GtkListBoxRow *row;
   Place *place;
   GPtrArray *new_values;
 
-  child = egg_list_box_get_selected_child (EGG_LIST_BOX (list_box));
-  place = g_object_get_data (G_OBJECT (child), "place");
+  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (list_box));
+  place = g_object_get_data (G_OBJECT (row), "place");
   new_values = place_get_new_settings_values (place, TRUE);
   g_settings_set_strv (tracker_preferences, place->settings_key, (const gchar **) new_values->pdata);
 
@@ -721,18 +724,18 @@ cc_search_locations_dialog_new (CcSearchPanel *self)
 
   locations_dialog = GTK_WIDGET (gtk_builder_get_object (dialog_builder, "locations_dialog"));
   widget = GTK_WIDGET (gtk_builder_get_object (dialog_builder, "locations_scrolledwindow"));
-  list_box = GTK_WIDGET (egg_list_box_new ());
-  egg_list_box_add_to_scrolled (EGG_LIST_BOX (list_box), GTK_SCROLLED_WINDOW (widget));
-  egg_list_box_set_sort_func (EGG_LIST_BOX (list_box),
-                              place_compare_func, NULL, NULL);
-  egg_list_box_set_separator_funcs (EGG_LIST_BOX (list_box),
-                                    place_separator_func, NULL, NULL);
+  list_box = GTK_WIDGET (gtk_list_box_new ());
+  gtk_container_add (GTK_CONTAINER (widget), list_box);
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (list_box),
+                              (GtkListBoxSortFunc)place_compare_func, NULL, NULL);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (list_box),
+                                place_header_func, NULL, NULL);
   gtk_widget_show (list_box);
 
   widget = GTK_WIDGET (gtk_builder_get_object (dialog_builder, "locations_remove"));
   gtk_widget_set_sensitive (widget, FALSE);
-  g_signal_connect (list_box, "child-selected",
-                    G_CALLBACK (list_box_child_selected), widget);
+  g_signal_connect (list_box, "row-selected",
+                    G_CALLBACK (list_box_row_selected), widget);
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (remove_button_clicked), list_box);
   g_signal_connect_swapped (tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,

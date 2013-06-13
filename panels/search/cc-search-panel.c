@@ -23,7 +23,6 @@
 #include "cc-search-locations-dialog.h"
 #include "cc-search-resources.h"
 
-#include <egg-list-box/egg-list-box.h>
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
@@ -52,17 +51,13 @@ list_sort_func (gconstpointer a,
                 gpointer user_data)
 {
   CcSearchPanel *self = user_data;
-  GtkWidget *widget_a, *widget_b;
   GAppInfo *app_a, *app_b;
   const gchar *id_a, *id_b;
   gint idx_a, idx_b;
   gpointer lookup;
 
-  widget_a = GTK_WIDGET (a);
-  widget_b = GTK_WIDGET (b);
-
-  app_a = g_object_get_data (G_OBJECT (widget_a), "app-info");
-  app_b = g_object_get_data (G_OBJECT (widget_b), "app-info");
+  app_a = g_object_get_data (G_OBJECT (a), "app-info");
+  app_b = g_object_get_data (G_OBJECT (b), "app-info");
 
   id_a = g_app_info_get_id (app_a);
   id_b = g_app_info_get_id (app_b);
@@ -100,16 +95,16 @@ search_panel_invalidate_button_state (CcSearchPanel *self)
 {
   GList *children;
   gboolean is_first, is_last;
-  GtkWidget *child;
+  GtkListBoxRow *row;
 
-  child = egg_list_box_get_selected_child (EGG_LIST_BOX (self->priv->list_box));
+  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->priv->list_box));
   children = gtk_container_get_children (GTK_CONTAINER (self->priv->list_box));
 
-  if (!child || !children)
+  if (!row || !children)
     return;
 
-  is_first = (child == g_list_first (children)->data);
-  is_last = (child == g_list_last (children)->data);
+  is_first = (row == g_list_first (children)->data);
+  is_last = (row == g_list_last (children)->data);
 
   gtk_widget_set_sensitive (self->priv->up_button, !is_first);
   gtk_widget_set_sensitive (self->priv->down_button, !is_last);
@@ -129,7 +124,7 @@ search_panel_invalidate_sort_order (CcSearchPanel *self)
   for (idx = 0; sort_order[idx] != NULL; idx++)
     g_hash_table_insert (self->priv->sort_order, g_strdup (sort_order[idx]), GINT_TO_POINTER (idx + 1));
 
-  egg_list_box_resort (EGG_LIST_BOX (self->priv->list_box));
+  gtk_list_box_invalidate_sort (GTK_LIST_BOX (self->priv->list_box));
   g_strfreev (sort_order);
 
   search_panel_invalidate_button_state (self);
@@ -189,7 +184,7 @@ static void
 search_panel_move_selected (CcSearchPanel *self,
                             gboolean down)
 {
-  GtkWidget *box, *other_box;
+  GtkListBoxRow *row, *other_row;
   GAppInfo *app_info, *other_app_info;
   const gchar *app_id, *other_app_id;
   const gchar *last_good_app, *target_app;
@@ -198,8 +193,8 @@ search_panel_move_selected (CcSearchPanel *self,
   gboolean found;
   GList *children, *l, *other;
 
-  box = egg_list_box_get_selected_child (EGG_LIST_BOX (self->priv->list_box));
-  app_info = g_object_get_data (G_OBJECT (box), "app-info");
+  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->priv->list_box));
+  app_info = g_object_get_data (G_OBJECT (row), "app-info");
   app_id = g_app_info_get_id (app_info);
 
   children = gtk_container_get_children (GTK_CONTAINER (self->priv->list_box));
@@ -207,14 +202,14 @@ search_panel_move_selected (CcSearchPanel *self,
   /* The assertions are valid only as long as we don't move the first
      or the last item. */
 
-  l = g_list_find (children, box);
+  l = g_list_find (children, row);
   g_assert (l != NULL);
 
   other = down ? g_list_next(l) : g_list_previous(l);
   g_assert (other != NULL);
 
-  other_box = other->data;
-  other_app_info = g_object_get_data (G_OBJECT (other_box), "app-info");
+  other_row = other->data;
+  other_app_info = g_object_get_data (G_OBJECT (other_row), "app-info");
   other_app_id = g_app_info_get_id (other_app_info);
 
   g_assert (other_app_id != NULL);
@@ -329,9 +324,9 @@ switch_settings_mapping_set (const GValue *value,
                              const GVariantType *expected_type,
                              gpointer user_data)
 {
-  GtkWidget *box = user_data;
-  CcSearchPanel *self = g_object_get_data (G_OBJECT (box), "self");
-  GAppInfo *app_info = g_object_get_data (G_OBJECT (box), "app-info");
+  GtkWidget *row = user_data;
+  CcSearchPanel *self = g_object_get_data (G_OBJECT (row), "self");
+  GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
   gchar **disabled;
   GPtrArray *new_disabled;
   gint idx;
@@ -373,8 +368,8 @@ switch_settings_mapping_get (GValue *value,
                              GVariant *variant,
                              gpointer user_data)
 {
-  GtkWidget *box = user_data;
-  GAppInfo *app_info = g_object_get_data (G_OBJECT (box), "app-info");
+  GtkWidget *row = user_data;
+  GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
   const gchar **disabled;
   gint idx;
   gboolean found;
@@ -400,7 +395,7 @@ static void
 search_panel_add_one_app_info (CcSearchPanel *self,
                                GAppInfo *app_info)
 {
-  GtkWidget *box, *w;
+  GtkWidget *row, *box, *w;
   GIcon *icon;
 
   /* gnome-control-center is special cased in the shell,
@@ -412,13 +407,15 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   /* reset valignment of the list box */
   gtk_widget_set_valign (self->priv->list_box, GTK_ALIGN_FILL);
 
+  row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_container_add (GTK_CONTAINER (row), box);
   gtk_widget_set_hexpand (box, TRUE);
   gtk_container_set_border_width (GTK_CONTAINER (box), 6);
-  g_object_set_data_full (G_OBJECT (box), "app-info",
+  g_object_set_data_full (G_OBJECT (row), "app-info",
                           g_object_ref (app_info), g_object_unref);
-  g_object_set_data (G_OBJECT (box), "self", self);
-  gtk_container_add (GTK_CONTAINER (self->priv->list_box), box);
+  g_object_set_data (G_OBJECT (row), "self", self);
+  gtk_container_add (GTK_CONTAINER (self->priv->list_box), row);
 
   icon = g_app_info_get_icon (app_info);
   if (icon == NULL)
@@ -442,9 +439,9 @@ search_panel_add_one_app_info (CcSearchPanel *self,
                                 G_SETTINGS_BIND_DEFAULT,
                                 switch_settings_mapping_get,
                                 switch_settings_mapping_set,
-                                box, NULL);
+                                row, NULL);
 
-  gtk_widget_show_all (box);
+  gtk_widget_show_all (row);
 }
 
 static void
@@ -658,14 +655,14 @@ cc_search_panel_init (CcSearchPanel *self)
     }
 
   scrolled_window = WID ("scrolled_window");
-  widget = GTK_WIDGET (egg_list_box_new ());
-  egg_list_box_set_sort_func (EGG_LIST_BOX (widget),
-                              list_sort_func, self, NULL);
-  egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (scrolled_window));
+  widget = GTK_WIDGET (gtk_list_box_new ());
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
+                              (GtkListBoxSortFunc)list_sort_func, self, NULL);
+  gtk_container_add (GTK_CONTAINER (scrolled_window), widget);
   self->priv->list_box = widget;
   gtk_widget_show (widget);
 
-  g_signal_connect_swapped (widget, "child-selected",
+  g_signal_connect_swapped (widget, "row-selected",
                             G_CALLBACK (search_panel_invalidate_button_state), self);
 
   self->priv->up_button = WID ("up_button");
