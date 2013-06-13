@@ -72,6 +72,7 @@ struct _CcSharingPanelPrivate
   GtkWidget *personal_file_sharing_dialog;
   GtkWidget *remote_login_dialog;
   GCancellable *remote_login_cancellable;
+  GCancellable *hostname_cancellable;
   GtkWidget *screen_sharing_dialog;
 
 #ifdef HAVE_BLUETOOTH
@@ -149,6 +150,12 @@ cc_sharing_panel_dispose (GObject *object)
     {
       g_cancellable_cancel (priv->remote_login_cancellable);
       g_clear_object (&priv->remote_login_cancellable);
+    }
+
+  if (priv->hostname_cancellable)
+    {
+      g_cancellable_cancel (priv->hostname_cancellable);
+      g_clear_object (&priv->hostname_cancellable);
     }
 
   if (priv->remote_login_dialog)
@@ -580,13 +587,119 @@ copy_uri_to_clipboard (GtkMenuItem *item,
 }
 
 static void
+cc_sharing_panel_setup_label (GtkLabel    *label,
+                              const gchar *hostname)
+{
+  gchar *text;
+
+  hostname = g_strdup (hostname);
+
+  text = g_strdup_printf (gtk_label_get_label (GTK_LABEL (label)), hostname, hostname);
+
+  gtk_label_set_label (GTK_LABEL (label), text);
+
+  g_free (text);
+}
+
+typedef struct
+{
+  CcSharingPanel *panel;
+  GtkWidget *label;
+} GetHostNameData;
+
+static void
+cc_sharing_panel_get_host_name_fqdn_done (GDBusConnection *connection,
+                                          GAsyncResult    *res,
+                                          GetHostNameData *data)
+{
+  GError *error = NULL;
+  GVariant *variant;
+  const gchar *fqdn;
+
+  variant = g_dbus_connection_call_finish (connection, res, &error);
+
+  if (variant == NULL)
+    {
+      /* Avahi service may not be available */
+      g_debug ("Error calling GetHostNameFqdn: %s", error->message);
+
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          gchar *hostname;
+
+          hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->priv->hostname_entry));
+
+          cc_sharing_panel_setup_label (GTK_LABEL (data->label), hostname);
+
+          g_free (hostname);
+        }
+
+      g_free (data);
+      g_error_free (error);
+      return;
+    }
+
+  g_variant_get (variant, "(&s)", &fqdn);
+
+  cc_sharing_panel_setup_label (GTK_LABEL (data->label), fqdn);
+
+  g_variant_unref (variant);
+  g_object_unref (connection);
+  g_free (data);
+}
+
+static void
+cc_sharing_panel_bus_ready (GObject         *object,
+                            GAsyncResult    *res,
+                            GetHostNameData *data)
+{
+  GDBusConnection *connection;
+  GError *error = NULL;
+
+  connection = g_bus_get_finish (res, &error);
+
+  if (connection == NULL)
+    {
+      g_warning ("Could not connect to system bus: %s", error->message);
+
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          gchar *hostname;
+
+          hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->priv->hostname_entry));
+
+          cc_sharing_panel_setup_label (GTK_LABEL (data->label), hostname);
+
+          g_free (hostname);
+        }
+
+      g_error_free (error);
+      g_free (data);
+      return;
+    }
+
+  g_dbus_connection_call (connection,
+                          "org.freedesktop.Avahi",
+                          "/",
+                          "org.freedesktop.Avahi.Server",
+                          "GetHostNameFqdn",
+                          NULL,
+                          (GVariantType*)"(s)",
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          (GAsyncReadyCallback) cc_sharing_panel_get_host_name_fqdn_done,
+                          data);
+}
+
+
+static void
 cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
                                             GtkWidget      *label)
 {
-  gchar *text;
-  gchar *hostname;
   GtkWidget *menu;
   GtkWidget *menu_item;
+  GetHostNameData *get_hostname_data;
 
   /* create the menu */
   menu = gtk_menu_new ();
@@ -599,14 +712,6 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
 
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
-  /* set the hostname */
-  hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (self->priv->hostname_entry));
-
-  text = g_strdup_printf (gtk_label_get_label (GTK_LABEL (label)), hostname,
-                          hostname);
-
-  gtk_label_set_label (GTK_LABEL (label), text);
-
   /* show the menu when the link is activated */
   g_signal_connect (label, "activate-link",
                     G_CALLBACK (cc_sharing_panel_label_activate_link), menu);
@@ -615,8 +720,14 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
   g_signal_connect_swapped (label, "destroy", G_CALLBACK (gtk_widget_destroy),
                             menu);
 
-  g_free (hostname);
-  g_free (text);
+
+  /* set the hostname */
+  get_hostname_data = g_new (GetHostNameData, 1);
+  get_hostname_data->panel = self;
+  get_hostname_data->label = label;
+  g_bus_get (G_BUS_TYPE_SYSTEM, NULL,
+             (GAsyncReadyCallback) cc_sharing_panel_bus_ready,
+             get_hostname_data);
 }
 
 static gboolean
@@ -832,6 +943,8 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   g_signal_connect (WID ("main-list-box"), "child-activated",
                     G_CALLBACK (cc_sharing_panel_main_list_box_child_activated), self);
+
+  priv->hostname_cancellable = g_cancellable_new ();
 
   priv->bluetooth_sharing_dialog = WID ("bluetooth-sharing-dialog");
   priv->media_sharing_dialog = WID ("media-sharing-dialog");
