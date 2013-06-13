@@ -27,7 +27,6 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
-#include <egg-list-box/egg-list-box.h>
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
 #include "cc-edit-dialog.h"
@@ -41,7 +40,7 @@ struct _CcNotificationsPanel {
 
   GSettings *master_settings;
   GtkBuilder *builder;
-  EggListBox *list_box;
+  GtkListBox *list_box;
 
   GCancellable *apps_load_cancellable;
 
@@ -64,7 +63,7 @@ typedef struct {
 
 static void application_free (Application *app);
 static void build_app_store (CcNotificationsPanel *panel);
-static void select_app      (EggListBox *box, GtkWidget *child, CcNotificationsPanel *panel);
+static void select_app      (GtkListBox *box, GtkListBoxRow *row, CcNotificationsPanel *panel);
 static int  sort_apps       (gconstpointer one, gconstpointer two, gpointer user_data);
 
 CC_PANEL_REGISTER (CcNotificationsPanel, cc_notifications_panel);
@@ -94,18 +93,21 @@ cc_notifications_panel_finalize (GObject *object)
 }
 
 static void
-update_separator_func (GtkWidget **separator,
-                       GtkWidget  *child,
-                       GtkWidget  *before,
-                       gpointer    user_data)
+update_header_func (GtkListBoxRow  *row,
+                    GtkListBoxRow  *before,
+                    gpointer    user_data)
 {
-  if (*separator == NULL && before != NULL)
-    {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+  GtkWidget *current;
 
-      /* https://bugzilla.gnome.org/show_bug.cgi?id=690545 */
-      g_object_ref_sink (*separator);
-      gtk_widget_show (*separator);
+  if (before == NULL)
+    return;
+
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
+    {
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
@@ -138,18 +140,18 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                    gtk_builder_get_object (panel->builder, "ccnotify-switch-lock-screen"),
                    "active", G_SETTINGS_BIND_DEFAULT);
 
-  panel->list_box = egg_list_box_new ();
+  panel->list_box = GTK_LIST_BOX (gtk_list_box_new ());
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
                                           "ccnotify-app-scrolledwindow"));
 
-  egg_list_box_add_to_scrolled (panel->list_box, GTK_SCROLLED_WINDOW (w));
-  egg_list_box_set_selection_mode (panel->list_box, GTK_SELECTION_NONE);
-  egg_list_box_set_sort_func (panel->list_box, sort_apps, NULL, NULL);
-  egg_list_box_set_separator_funcs (panel->list_box,
-                                    update_separator_func,
-                                    NULL, NULL);
+  gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (panel->list_box));
+  gtk_list_box_set_selection_mode (panel->list_box, GTK_SELECTION_NONE);
+  gtk_list_box_set_sort_func (panel->list_box, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
+  gtk_list_box_set_header_func (panel->list_box,
+                                update_header_func,
+                                NULL, NULL);
 
-  g_signal_connect (panel->list_box, "child-activated",
+  g_signal_connect (panel->list_box, "row-activated",
                     G_CALLBACK (select_app), panel);
 
   gtk_widget_set_visible (GTK_WIDGET (panel->list_box), TRUE);
@@ -209,7 +211,7 @@ static void
 add_application (CcNotificationsPanel *panel,
                  Application          *app)
 {
-  GtkWidget *box, *w;
+  GtkWidget *box, *w, *row;
   GIcon *icon;
 
   icon = g_app_info_get_icon (app->app_info);
@@ -219,10 +221,13 @@ add_application (CcNotificationsPanel *panel,
     g_object_ref (icon);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  g_object_set_qdata_full (G_OBJECT (box), application_quark (),
+
+  row = gtk_list_box_row_new ();
+  g_object_set_qdata_full (G_OBJECT (row), application_quark (),
                            app, (GDestroyNotify) application_free);
 
-  gtk_container_add (GTK_CONTAINER (panel->list_box), box);
+  gtk_container_add (GTK_CONTAINER (panel->list_box), row);
+  gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
   gtk_widget_set_margin_left (w, 12);
@@ -245,7 +250,7 @@ add_application (CcNotificationsPanel *panel,
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
 
-  gtk_widget_show_all (box);
+  gtk_widget_show_all (row);
 
   g_hash_table_add (panel->known_applications, g_strdup (app->canonical_app_id));
 }
@@ -447,13 +452,13 @@ build_app_store (CcNotificationsPanel *panel)
 }
 
 static void
-select_app (EggListBox           *list_box,
-            GtkWidget            *child,
+select_app (GtkListBox           *list_box,
+            GtkListBoxRow        *row,
             CcNotificationsPanel *panel)
 {
   Application *app;
 
-  app = g_object_get_qdata (G_OBJECT (child), application_quark ());
+  app = g_object_get_qdata (G_OBJECT (row), application_quark ());
   cc_build_edit_dialog (panel, app->app_info, app->settings);
 }
 
