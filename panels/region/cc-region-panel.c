@@ -47,7 +47,6 @@
 
 #include <act/act.h>
 
-#include "egg-list-box/egg-list-box.h"
 #include <libgd/gd-notification.h>
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
@@ -90,11 +89,11 @@ struct _CcRegionPanelPrivate {
         GtkWidget *overlay;
         GtkWidget *notification;
 
-        GtkWidget *language_section;
-        GtkWidget *language_row;
-        GtkWidget *language_label;
-        GtkWidget *formats_row;
-        GtkWidget *formats_label;
+        GtkWidget     *language_section;
+        GtkListBoxRow *language_row;
+        GtkWidget     *language_label;
+        GtkListBoxRow *formats_row;
+        GtkWidget     *formats_label;
 
         ActUserManager *user_manager;
         ActUser        *user;
@@ -256,19 +255,22 @@ show_restart_notification (CcRegionPanel *self,
 }
 
 static void
-update_separator_func (GtkWidget **separator,
-                       GtkWidget  *child,
-                       GtkWidget  *before,
-                       gpointer    user_data)
+update_header_func (GtkListBoxRow  *row,
+                    GtkListBoxRow  *before,
+                    gpointer    user_data)
 {
-        if (before == NULL)
-                return;
+  GtkWidget *current;
 
-        if (*separator == NULL) {
-                *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-                g_object_ref_sink (*separator);
-                gtk_widget_show (*separator);
-        }
+  if (before == NULL)
+    return;
+
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
+    {
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
+    }
 }
 
 typedef struct {
@@ -501,11 +503,12 @@ show_format_chooser (CcRegionPanel *self)
 }
 
 static void
-activate_language_child (CcRegionPanel *self, GtkWidget *child)
+activate_language_row (CcRegionPanel *self,
+                       GtkListBoxRow *row)
 {
 	CcRegionPanelPrivate *priv = self->priv;
 
-        if (child == priv->language_row) {
+        if (row == priv->language_row) {
                 if (!priv->login) {
                         show_language_chooser (self, priv->language);
                 } else if (g_permission_get_allowed (priv->permission)) {
@@ -517,7 +520,7 @@ activate_language_child (CcRegionPanel *self, GtkWidget *child)
                                                     permission_acquired,
                                                     self);
                 }
-        } else if (child == priv->formats_row) {
+        } else if (row == priv->formats_row) {
                 show_format_chooser (self);
         }
 }
@@ -604,19 +607,19 @@ setup_language_section (CcRegionPanel *self)
                                   G_CALLBACK (update_region_from_setting), self);
 
         priv->language_section = WID ("language_section");
-        priv->language_row = WID ("language_row");
+        priv->language_row = GTK_LIST_BOX_ROW (WID ("language_row"));
         priv->language_label = WID ("language_label");
-        priv->formats_row = WID ("formats_row");
+        priv->formats_row = GTK_LIST_BOX_ROW (WID ("formats_row"));
         priv->formats_label = WID ("formats_label");
 
         widget = WID ("language_list");
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (widget),
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget),
                                          GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
-                                          update_separator_func,
-                                          NULL, NULL);
-        g_signal_connect_swapped (widget, "child-activated",
-                                  G_CALLBACK (activate_language_child), self);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
+                                      update_header_func,
+                                      NULL, NULL);
+        g_signal_connect_swapped (widget, "row-activated",
+                                  G_CALLBACK (activate_language_row), self);
 
         update_language_from_user (self);
         update_region_from_setting (self);
@@ -801,19 +804,22 @@ add_input_row (CcRegionPanel   *self,
 {
         CcRegionPanelPrivate *priv = self->priv;
         GtkWidget *row;
+        GtkWidget *box;
         GtkWidget *label;
         GtkWidget *image;
 
         remove_no_input_row (GTK_CONTAINER (priv->input_list));
 
-        row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        row = gtk_list_box_row_new ();
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_container_add (GTK_CONTAINER (row), box);
         label = gtk_label_new (name);
         gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
         gtk_widget_set_margin_left (label, 20);
         gtk_widget_set_margin_right (label, 20);
         gtk_widget_set_margin_top (label, 6);
         gtk_widget_set_margin_bottom (label, 6);
-        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
         if (strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0) {
                 image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_BUTTON);
@@ -822,7 +828,7 @@ add_input_row (CcRegionPanel   *self,
                 gtk_widget_set_margin_top (image, 6);
                 gtk_widget_set_margin_bottom (image, 6);
                 gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-                gtk_box_pack_start (GTK_BOX (row), image, FALSE, TRUE, 0);
+                gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 0);
         }
 
         gtk_widget_show_all (row);
@@ -934,7 +940,7 @@ select_by_id (GtkWidget   *row,
 
         row_id = (const gchar *)g_object_get_data (G_OBJECT (row), "id");
         if (g_strcmp0 (row_id, id) == 0)
-                egg_list_box_select_child (EGG_LIST_BOX (gtk_widget_get_parent (row)), row);
+                gtk_list_box_select_row (GTK_LIST_BOX (gtk_widget_get_parent (row)), GTK_LIST_BOX_ROW (row));
 }
 
 static void
@@ -951,10 +957,10 @@ input_sources_changed (GSettings     *settings,
                        CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *selected;
+        GtkListBoxRow *selected;
         gchar *id = NULL;
 
-        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected)
                 id = g_strdup (g_object_get_data (G_OBJECT (selected), "id"));
         clear_input_sources (self);
@@ -970,7 +976,7 @@ static void
 update_buttons (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *selected;
+        GtkListBoxRow *selected;
         GList *children;
         gboolean multiple_sources;
 
@@ -978,7 +984,7 @@ update_buttons (CcRegionPanel *self)
         multiple_sources = g_list_next (children) != NULL;
         g_list_free (children);
 
-        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL) {
                 gtk_widget_set_visible (priv->show_config, FALSE);
                 gtk_widget_set_sensitive (priv->remove_input, FALSE);
@@ -1221,16 +1227,16 @@ static void
 do_remove_selected_input (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *selected;
+        GtkListBoxRow *selected;
         GtkWidget *sibling;
 
-        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL)
                 return;
 
-        sibling = find_sibling (GTK_CONTAINER (priv->input_list), selected);
-        gtk_container_remove (GTK_CONTAINER (priv->input_list), selected);
-        egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), sibling);
+        sibling = find_sibling (GTK_CONTAINER (priv->input_list), GTK_WIDGET (selected));
+        gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (selected));
+        gtk_list_box_select_row (GTK_LIST_BOX (priv->input_list), GTK_LIST_BOX_ROW (sibling));
 
         priv->n_input_rows -= 1;
         adjust_input_list_scrolling (self);
@@ -1261,13 +1267,13 @@ static void
 show_selected_settings (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *selected;
+        GtkListBoxRow *selected;
         GdkAppLaunchContext *ctx;
         GDesktopAppInfo *app_info;
         const gchar *id;
         GError *error = NULL;
 
-        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL)
                 return;
 
@@ -1294,14 +1300,14 @@ static void
 show_selected_layout (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *selected;
+        GtkListBoxRow *selected;
         const gchar *type;
         const gchar *id;
         const gchar *layout;
         const gchar *variant;
         gchar *commandline;
 
-        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
         if (selected == NULL)
                 return;
 
@@ -1413,12 +1419,12 @@ setup_input_section (CcRegionPanel *self)
         g_signal_connect_swapped (priv->show_layout, "clicked",
                                   G_CALLBACK (show_selected_layout), self);
 
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->input_list),
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (priv->input_list),
-                                          update_separator_func,
-                                          NULL, NULL);
-        g_signal_connect_swapped (priv->input_list, "child-selected",
+        gtk_list_box_set_header_func (GTK_LIST_BOX (priv->input_list),
+                                      update_header_func,
+                                      NULL, NULL);
+        g_signal_connect_swapped (priv->input_list, "row-selected",
                                   G_CALLBACK (update_buttons), self);
 
         g_signal_connect (priv->input_settings, "changed::" KEY_INPUT_SOURCES,
@@ -1647,7 +1653,7 @@ login_changed (CcRegionPanel *self)
         gboolean can_acquire;
 
         priv->login = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->login_button));
-        gtk_widget_set_visible (priv->formats_row, !priv->login);
+        gtk_widget_set_visible (GTK_WIDGET (priv->formats_row), !priv->login);
         gtk_widget_set_visible (priv->login_label, priv->login);
 
         can_acquire = priv->permission &&
