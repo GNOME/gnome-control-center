@@ -1432,6 +1432,10 @@ cc_user_panel_dispose (GObject *object)
 {
         CcUserPanelPrivate *priv = UM_USER_PANEL (object)->priv;
 
+        if (priv->um) {
+                g_signal_handlers_disconnect_by_data (priv->um, priv);
+                priv->um = NULL;
+        }
         if (priv->builder) {
                 g_object_unref (priv->builder);
                 priv->builder = NULL;
