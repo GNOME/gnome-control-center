@@ -776,6 +776,22 @@ adjust_input_list_scrolling (CcRegionPanel *self)
         }
 }
 
+static void
+remove_no_input_row (GtkContainer *list)
+{
+        GList *l;
+
+        l = gtk_container_get_children (list);
+        if (!l)
+                return;
+        if (l->next != NULL)
+                goto out;
+        if (g_strcmp0 (g_object_get_data (G_OBJECT (l->data), "type"), "none") == 0)
+                gtk_container_remove (list, GTK_WIDGET (l->data));
+out:
+        g_list_free (l);
+}
+
 static GtkWidget *
 add_input_row (CcRegionPanel   *self,
                const gchar     *type,
@@ -788,14 +804,7 @@ add_input_row (CcRegionPanel   *self,
         GtkWidget *label;
         GtkWidget *image;
 
-        if (priv->login) {
-                GList *l;
-                l = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
-                if (l && l->next == NULL &&
-                    g_strcmp0 (g_object_get_data (G_OBJECT (l->data), "type"), "none") == 0)
-                        gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (l->data));
-                g_list_free (l);
-        }
+        remove_no_input_row (GTK_CONTAINER (priv->input_list));
 
         row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         label = gtk_label_new (name);
@@ -833,6 +842,12 @@ add_input_row (CcRegionPanel   *self,
 }
 
 static void
+add_no_input_row (CcRegionPanel *self)
+{
+        add_input_row (self, "none", "none", _("No input source selected"), NULL);
+}
+
+static void
 add_input_sources (CcRegionPanel *self,
                    GVariant      *sources)
 {
@@ -843,6 +858,11 @@ add_input_sources (CcRegionPanel *self,
         const gchar *name;
         gchar *display_name;
         GDesktopAppInfo *app_info;
+
+        if (g_variant_n_children (sources) < 1) {
+                add_no_input_row (self);
+                return;
+        }
 
         g_variant_iter_init (&iter, sources);
         while (g_variant_iter_next (&iter, "(&s&s)", &type, &id)) {
@@ -1506,7 +1526,7 @@ add_input_sources_from_localed (CcRegionPanel *self)
                 g_free (id);
         }
         if (n == 0) {
-                add_input_row (self, "none", "none", _("No input source selected"), NULL);
+                add_no_input_row (self);
         }
 
         g_strfreev (variants);
