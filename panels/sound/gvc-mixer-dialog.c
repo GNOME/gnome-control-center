@@ -1594,7 +1594,7 @@ on_test_speakers_clicked (GvcComboBox *widget,
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
                                          NULL);
-        gtk_window_set_has_resize_grip (GTK_WINDOW (d), FALSE);
+        gtk_window_set_resizable (GTK_WINDOW (d), FALSE);
 
         g_free (title);
         speaker_test = gvc_speaker_test_new (dialog->priv->mixer_control,
