@@ -1033,7 +1033,7 @@ set_user_icon_data (ActUser   *user,
 }
 
 static guint
-get_num_admin (ActUserManager *um)
+get_num_active_admin (ActUserManager *um)
 {
         GSList *list;
         GSList *l;
@@ -1042,7 +1042,7 @@ get_num_admin (ActUserManager *um)
         list = act_user_manager_list_users (um);
         for (l = list; l != NULL; l = l->next) {
                 ActUser *u = l->data;
-                if (act_user_get_account_type (u) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+                if (act_user_get_account_type (u) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR && !act_user_get_locked (u)) {
                         num_admin++;
                 }
         }
@@ -1059,12 +1059,13 @@ would_demote_only_admin (ActUser *user)
 
         /* Prevent the user from demoting the only admin account.
          * Returns TRUE when user is an administrator and there is only
-         * one administrator */
+         * one enabled administrator. */
 
-        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_STANDARD)
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_STANDARD
+            ||  act_user_get_locked (user))
                 return FALSE;
 
-        if (get_num_admin (um) > 1)
+        if (get_num_active_admin (um) > 1)
                 return FALSE;
 
         return TRUE;
