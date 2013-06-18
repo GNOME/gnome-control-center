@@ -1,3 +1,58 @@
+=============
+Version 3.9.3
+=============
+
+Bluetooth:
+- Port to BlueZ 5
+
+Background:
+- show explanation of why pictures source might be empty
+
+Power:
+- Update UI strings to follow the HIG
+
+All:
+- Make a number of dialogues non-resizable
+
+Region, Wacom, Shell:
+- Set button arrow icons according to locale's text direction
+
+Sound, Background:
+- ensure dialogs are closed if panel changed
+
+Shell:
+- Raise the existing window when already opened
+- Go back to overview when setting panel to NULL
+
+Mouse:
+- Rename "Content sticks to fingers" to "Natural Scrolling"
+
+Sharing:
+- retrieve the mDNS hostname from Avahi, if available
+
+Region:
+- Make sure not to display an empty input sources list
+
+User Accounts:
+- Don't let user disable own account
+- Don't show heading for other accounts if there are none
+- Hide 'Add Account' dialog when panel goes away
+- After the add account dialog is cancelled, discard results
+- Remove autologin when an account is deleted
+- avoid problems with automatic login and disabled accounts
+- prevent the only Administrator from being demoted
+- prevent the only admin from being deleted or disabled
+- User friendly password hints
+- "Add user account" and password dialogs redesign
+- Set the password mode to regular immediately
+- Fix possible crashes when changing the language in the region panel
+  if done after the user panel was opened
+
+Wacom:
+- Add command line argument support for choosing the tablet
+- Add command line support for calibration
+- Fix discrepancy when switching monitors from g-c-c
+
 ===============
 Version 3.9.2.1
 ===============
