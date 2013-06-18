@@ -65,6 +65,7 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
                 "title", g_app_info_get_name (app),
                 "width-request", 450,
                 "transient-for", shell,
+                "resizable", FALSE,
                 NULL);
   gtk_dialog_add_button (win, "gtk-close", GTK_RESPONSE_CLOSE);
   gtk_dialog_set_default_response (win, GTK_RESPONSE_CLOSE);
