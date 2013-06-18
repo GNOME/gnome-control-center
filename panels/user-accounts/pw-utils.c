@@ -113,7 +113,7 @@ pw_error_hint (gint error)
         case PWQ_ERROR_MAX_SEQUENCE:
                 return C_("Password hint", "Try to avoid sequences like 1234 or abcd.");
         case PWQ_ERROR_MIN_LENGTH:
-                return C_("Password hint", "Try to add more characters.");
+                return C_("Password hint", "Try to add more letters, numbers and symbols.");
         case PWQ_ERROR_EMPTY_PASSWORD:
         default:
                 return C_("Password hint", "Mix uppercase and lowercase and use a number or two.");
