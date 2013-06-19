@@ -630,7 +630,8 @@ search_entry_key_press_event_cb (GtkEntry        *entry,
 {
   CcWindowPrivate *priv = self->priv;
 
-  if (event->keyval == GDK_KEY_Return)
+  if (event->keyval == GDK_KEY_Return &&
+      g_strcmp0 (priv->filter_string, "") != 0)
     {
       GtkTreePath *path;
       GtkTreeSelection *selection;
