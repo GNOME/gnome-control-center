@@ -204,7 +204,7 @@ if test x${have_networkmanager} = xyes; then
 fi
 
 # Check for gnome-bluetooth
-PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.5.5,
+PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.9.3,
 		  [have_bluetooth=yes], have_bluetooth=no)
 if test "x$have_bluetooth" = xyes ; then
 	AC_DEFINE(BUILD_BLUETOOTH, 1, [Define to 1 to build the Bluetooth panel])
