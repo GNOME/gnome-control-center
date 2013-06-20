@@ -335,7 +335,6 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   details = get_details_string (percentage, state, time);
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_size_group_add_widget (priv->battery_sizegroup, box);
   gtk_widget_set_margin_left (box, 20);
   gtk_widget_set_margin_right (box, 20);
   gtk_widget_set_margin_top (box, 6);
