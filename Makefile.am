@@ -1,10 +1,10 @@
 ACLOCAL_AMFLAGS = -I m4 -I libgd ${ACLOCAL_FLAGS}
 
-SUBDIRS = libgd po egg-list-box panels shell search-provider
+SUBDIRS = libgd po panels shell search-provider
 if BUILD_DOCUMENTATION
 SUBDIRS += man
 endif
-DIST_SUBDIRS = libgd egg-list-box po panels shell man search-provider
+DIST_SUBDIRS = libgd po panels shell man search-provider
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \

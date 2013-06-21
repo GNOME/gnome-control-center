@@ -23,10 +23,6 @@ rm -f .using-gnome-libs-package
 echo "+ Setting up submodules"
 git submodule update --init --recursive
 
-cd egg-list-box
-sh autogen.sh --no-configure
-cd ..
-
 if ! which gnome-autogen.sh ; then
   echo "You need to install the gnome-common module and make"
   echo "sure the gnome-autogen.sh script is in your \$PATH."
