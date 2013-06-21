@@ -40,8 +40,6 @@
 #include "ce-page-vpn.h"
 #include "vpn-helpers.h"
 
-#include "egg-list-box/egg-list-box.h"
-
 enum {
         DONE,
         LAST_SIGNAL
@@ -568,19 +566,21 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
 }
 
 static void
-update_separator (GtkWidget **separator,
-                  GtkWidget  *child,
-                  GtkWidget  *before,
-                  gpointer    user_data)
+update_header (GtkListBoxRow *row,
+               GtkListBoxRow *before,
+               gpointer       user_data)
 {
+  GtkWidget *current;
+
   if (before == NULL)
     return;
 
-  if (*separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
     {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (*separator);
-      g_object_ref_sink (*separator);
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
@@ -705,7 +705,7 @@ vpn_import_complete (NMConnection *connection, gpointer user_data)
 }
 
 static void
-vpn_type_activated (EggListBox *list, GtkWidget *row, NetConnectionEditor *editor)
+vpn_type_activated (GtkListBox *list, GtkWidget *row, NetConnectionEditor *editor)
 {
         const char *service_name = g_object_get_data (G_OBJECT (row), "service_name");
         NMConnection *connection;
@@ -730,13 +730,14 @@ vpn_type_activated (EggListBox *list, GtkWidget *row, NetConnectionEditor *edito
 }
 
 static void
-select_vpn_type (NetConnectionEditor *editor, EggListBox *list)
+select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
 {
         GHashTable *vpn_plugins;
         GHashTableIter vpn_iter;
         gpointer service_name, vpn_plugin;
         GList *children, *plugin_list, *iter;
-        GtkWidget *row, *name_label, *desc_label;
+        GtkWidget *row, *row_box;
+        GtkWidget *name_label, *desc_label;
         GError *error = NULL;
 
         /* Get the available VPN types */
@@ -773,15 +774,17 @@ select_vpn_type (NetConnectionEditor *editor, EggListBox *list)
                               NULL);
                 desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
 
-                row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-                gtk_widget_set_margin_left (row, 12);
-                gtk_widget_set_margin_right (row, 12);
-                gtk_widget_set_margin_top (row, 12);
-                gtk_widget_set_margin_bottom (row, 12);
+                row = gtk_list_box_row_new ();
+
+                row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+                gtk_widget_set_margin_left (row_box, 12);
+                gtk_widget_set_margin_right (row_box, 12);
+                gtk_widget_set_margin_top (row_box, 12);
+                gtk_widget_set_margin_bottom (row_box, 12);
 
                 name_label = gtk_label_new (name);
                 gtk_misc_set_alignment (GTK_MISC (name_label), 0.0, 0.5);
-                gtk_box_pack_start (GTK_BOX (row), name_label, FALSE, TRUE, 0);
+                gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
 
                 desc_label = gtk_label_new (NULL);
                 gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
@@ -789,38 +792,42 @@ select_vpn_type (NetConnectionEditor *editor, EggListBox *list)
                 gtk_misc_set_alignment (GTK_MISC (desc_label), 0.0, 0.5);
                 context = gtk_widget_get_style_context (desc_label);
                 gtk_style_context_add_class (context, "dim-label");
-                gtk_box_pack_start (GTK_BOX (row), desc_label, FALSE, TRUE, 0);
+                gtk_box_pack_start (GTK_BOX (row_box), desc_label, FALSE, TRUE, 0);
 
                 g_free (name);
                 g_free (desc);
                 g_free (desc_markup);
 
+                gtk_container_add (GTK_CONTAINER (row), row_box);
                 gtk_widget_show_all (row);
                 g_object_set_data_full (G_OBJECT (row), "service_name", service_name, g_free);
                 gtk_container_add (GTK_CONTAINER (list), row);
         }
 
         /* Import */
-        row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-        gtk_widget_set_margin_left (row, 12);
-        gtk_widget_set_margin_right (row, 12);
-        gtk_widget_set_margin_top (row, 12);
-        gtk_widget_set_margin_bottom (row, 12);
+        row = gtk_list_box_row_new ();
+
+        row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+        gtk_widget_set_margin_left (row_box, 12);
+        gtk_widget_set_margin_right (row_box, 12);
+        gtk_widget_set_margin_top (row_box, 12);
+        gtk_widget_set_margin_bottom (row_box, 12);
 
         name_label = gtk_label_new (_("Import from file…"));
         gtk_misc_set_alignment (GTK_MISC (name_label), 0.0, 0.5);
-        gtk_box_pack_start (GTK_BOX (row), name_label, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
 
+        gtk_container_add (GTK_CONTAINER (row), row_box);
         gtk_widget_show_all (row);
         g_object_set_data (G_OBJECT (row), "service_name", "import");
         gtk_container_add (GTK_CONTAINER (list), row);
 
-        g_signal_connect (list, "child-activated",
+        g_signal_connect (list, "row-activated",
                           G_CALLBACK (vpn_type_activated), editor);
 }
 
 static void
-connection_type_activated (EggListBox *list, GtkWidget *row, NetConnectionEditor *editor)
+connection_type_activated (GtkListBox *list, GtkWidget *row, NetConnectionEditor *editor)
 {
         const NetConnectionType *connection_type = g_object_get_data (G_OBJECT (row), "connection_type");
         NMConnection *connection;
@@ -841,31 +848,34 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
 {
         GtkNotebook *notebook;
         GtkContainer *frame;
-        EggListBox *list;
+        GtkListBox *list;
         int i;
 
         notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_toplevel_notebook"));
         frame = GTK_CONTAINER (gtk_builder_get_object (editor->builder, "details_add_connection_frame"));
 
-        list = egg_list_box_new ();
-        egg_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (list, update_separator, NULL, NULL);
-        g_signal_connect (list, "child-activated",
+        list = GTK_LIST_BOX (gtk_list_box_new ());
+        gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (list, update_header, NULL, NULL);
+        g_signal_connect (list, "row-activated",
                           G_CALLBACK (connection_type_activated), editor);
 
         for (i = 0; i < G_N_ELEMENTS (connection_types); i++) {
-                GtkWidget *row, *label;
+                GtkWidget *row, *row_box, *label;
 
-                row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+                row = gtk_list_box_row_new ();
+
+                row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
                 label = gtk_label_new (_(connection_types[i].name));
                 gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
                 gtk_widget_set_margin_left (label, 12);
                 gtk_widget_set_margin_right (label, 12);
                 gtk_widget_set_margin_top (label, 12);
                 gtk_widget_set_margin_bottom (label, 12);
-                gtk_box_pack_start (GTK_BOX (row), label, FALSE, TRUE, 0);
-                g_object_set_data (G_OBJECT (row), "connection_type", (gpointer) &connection_types[i]);
+                gtk_box_pack_start (GTK_BOX (row_box), label, FALSE, TRUE, 0);
 
+                g_object_set_data (G_OBJECT (row), "connection_type", (gpointer) &connection_types[i]);
+                gtk_container_add (GTK_CONTAINER (row), row_box);
                 gtk_container_add (GTK_CONTAINER (list), row);
         }
 

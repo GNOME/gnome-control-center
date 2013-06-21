@@ -29,8 +29,6 @@
 #include "ce-page-ip4.h"
 #include <nm-utils.h>
 
-#include "egg-list-box/egg-list-box.h"
-
 G_DEFINE_TYPE (CEPageIP4, ce_page_ip4, CE_TYPE_PAGE)
 
 enum {
@@ -93,19 +91,21 @@ switch_toggled (GObject    *object,
 }
 
 static void
-update_separator (GtkWidget **separator,
-                  GtkWidget  *child,
-                  GtkWidget  *before,
-                  gpointer    user_data)
+update_header (GtkListBoxRow *row,
+               GtkListBoxRow *before,
+               gpointer       user_data)
 {
+  GtkWidget *current;
+
   if (before == NULL)
     return;
 
-  if (*separator == NULL)
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
     {
-      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (*separator);
-      g_object_ref_sink (*separator);
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
     }
 }
 
@@ -138,10 +138,12 @@ update_row_sensitivity (CEPageIP4 *page, GtkWidget *list)
 static void
 remove_row (GtkButton *button, CEPageIP4 *page)
 {
-        GtkWidget *row;
         GtkWidget *list;
+        GtkWidget *row;
+        GtkWidget *row_box;
 
-        row = gtk_widget_get_parent (GTK_WIDGET (button));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (button));
+        row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 
         gtk_container_remove (GTK_CONTAINER (list), row);
@@ -180,15 +182,18 @@ add_address_row (CEPageIP4   *page,
                  const gchar *gateway)
 {
         GtkWidget *row;
+        GtkWidget *row_grid;
         GtkWidget *widget;
         GtkWidget *label;
         GtkWidget *delete_button;
         GtkWidget *image;
 
-        row = gtk_grid_new ();
+        row = gtk_list_box_row_new ();
+
+        row_grid = gtk_grid_new ();
         label = gtk_label_new (_("Address"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 1, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 1, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -197,11 +202,11 @@ add_address_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 1, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 1, 1, 1);
 
         label = gtk_label_new (_("Netmask"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 2, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 2, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -210,12 +215,12 @@ add_address_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 2, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 2, 1, 1);
 
 
         label = gtk_label_new (_("Gateway"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 3, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 3, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -224,7 +229,7 @@ add_address_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 3, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 3, 1, 1);
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
@@ -232,15 +237,17 @@ add_address_row (CEPageIP4   *page,
         image = gtk_image_new_from_icon_name ("user-trash-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Address"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
-        gtk_grid_attach (GTK_GRID (row), delete_button, 3, 2, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), delete_button, 3, 2, 1, 1);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        gtk_grid_set_row_spacing (GTK_GRID (row), 10);
-        gtk_widget_set_margin_left (row, 10);
-        gtk_widget_set_margin_right (row, 10);
-        gtk_widget_set_margin_top (row, 10);
-        gtk_widget_set_margin_bottom (row, 10);
-        gtk_widget_set_halign (row, GTK_ALIGN_FILL);
+        gtk_grid_set_row_spacing (GTK_GRID (row_grid), 10);
+        gtk_widget_set_margin_left (row_grid, 10);
+        gtk_widget_set_margin_right (row_grid, 10);
+        gtk_widget_set_margin_top (row_grid, 10);
+        gtk_widget_set_margin_bottom (row_grid, 10);
+        gtk_widget_set_halign (row_grid, GTK_ALIGN_FILL);
+
+        gtk_container_add (GTK_CONTAINER (row), row_grid);
         gtk_widget_show_all (row);
         gtk_container_add (GTK_CONTAINER (page->address_list), row);
 
@@ -300,10 +307,10 @@ add_address_section (CEPageIP4 *page)
 
         frame = gtk_frame_new (NULL);
         gtk_container_add (GTK_CONTAINER (widget), frame);
-        page->address_list = list = GTK_WIDGET (egg_list_box_new ());
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (list), GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (list), update_separator, NULL, NULL);
-        egg_list_box_set_sort_func (EGG_LIST_BOX (list), sort_first_last, NULL, NULL);
+        page->address_list = list = gtk_list_box_new ();
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
 
         add_section_toolbar (page, widget, G_CALLBACK (add_empty_address_row));
@@ -341,15 +348,18 @@ add_dns_row (CEPageIP4   *page,
              const gchar *address)
 {
         GtkWidget *row;
+        GtkWidget *row_box;
         GtkWidget *label;
         GtkWidget *widget;
         GtkWidget *delete_button;
         GtkWidget *image;
 
-        row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        row = gtk_list_box_row_new ();
+
+        row_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         label = gtk_label_new (_("Server"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_box_pack_start (GTK_BOX (row), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), label, FALSE, FALSE, 0);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -358,7 +368,7 @@ add_dns_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_box_pack_start (GTK_BOX (row), widget, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), widget, TRUE, TRUE, 0);
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
@@ -366,14 +376,16 @@ add_dns_row (CEPageIP4   *page,
         image = gtk_image_new_from_icon_name ("user-trash-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete DNS Server"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
-        gtk_box_pack_start (GTK_BOX (row), delete_button, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (row_box), delete_button, FALSE, FALSE, 0);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        gtk_widget_set_margin_left (row, 10);
-        gtk_widget_set_margin_right (row, 10);
-        gtk_widget_set_margin_top (row, 10);
-        gtk_widget_set_margin_bottom (row, 10);
-        gtk_widget_set_halign (row, GTK_ALIGN_FILL);
+        gtk_widget_set_margin_left (row_box, 10);
+        gtk_widget_set_margin_right (row_box, 10);
+        gtk_widget_set_margin_top (row_box, 10);
+        gtk_widget_set_margin_bottom (row_box, 10);
+        gtk_widget_set_halign (row_box, GTK_ALIGN_FILL);
+
+        gtk_container_add (GTK_CONTAINER (row), row_box);
         gtk_widget_show_all (row);
         gtk_container_add (GTK_CONTAINER (page->dns_list), row);
 
@@ -398,10 +410,10 @@ add_dns_section (CEPageIP4 *page)
 
         frame = gtk_frame_new (NULL);
         gtk_container_add (GTK_CONTAINER (widget), frame);
-        page->dns_list = list = GTK_WIDGET (egg_list_box_new ());
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (list), GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (list), update_separator, NULL, NULL);
-        egg_list_box_set_sort_func (EGG_LIST_BOX (list), sort_first_last, NULL, NULL);
+        page->dns_list = list = gtk_list_box_new ();
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
         gtk_switch_set_active (page->auto_dns, !nm_setting_ip4_config_get_ignore_auto_dns (page->setting));
@@ -432,15 +444,18 @@ add_route_row (CEPageIP4   *page,
                gint         metric)
 {
         GtkWidget *row;
+        GtkWidget *row_grid;
         GtkWidget *label;
         GtkWidget *widget;
         GtkWidget *delete_button;
         GtkWidget *image;
 
-        row = gtk_grid_new ();
+        row = gtk_list_box_row_new ();
+
+        row_grid = gtk_grid_new ();
         label = gtk_label_new (_("Address"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 1, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 1, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -449,11 +464,11 @@ add_route_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 1, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 1, 1, 1);
 
         label = gtk_label_new (_("Netmask"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 2, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 2, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -462,11 +477,11 @@ add_route_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 2, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 2, 1, 1);
 
         label = gtk_label_new (_("Gateway"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 3, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 3, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -475,12 +490,12 @@ add_route_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 3, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 3, 1, 1);
 
         /* Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking) */
         label = gtk_label_new (C_("network parameters", "Metric"));
         gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), label, 1, 4, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 4, 1, 1);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -493,7 +508,7 @@ add_route_row (CEPageIP4   *page,
         gtk_widget_set_margin_left (widget, 10);
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row), widget, 2, 4, 1, 1);
+        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 4, 1, 1);
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
@@ -503,16 +518,17 @@ add_route_row (CEPageIP4   *page,
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
         gtk_widget_set_halign (delete_button, GTK_ALIGN_CENTER);
         gtk_widget_set_valign (delete_button, GTK_ALIGN_CENTER);
-        gtk_grid_attach (GTK_GRID (row), delete_button, 3, 1, 1, 4);
+        gtk_grid_attach (GTK_GRID (row_grid), delete_button, 3, 1, 1, 4);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        gtk_grid_set_row_spacing (GTK_GRID (row), 10);
-        gtk_widget_set_margin_left (row, 10);
-        gtk_widget_set_margin_right (row, 10);
-        gtk_widget_set_margin_top (row, 10);
-        gtk_widget_set_margin_bottom (row, 10);
-        gtk_widget_set_halign (row, GTK_ALIGN_FILL);
+        gtk_grid_set_row_spacing (GTK_GRID (row_grid), 10);
+        gtk_widget_set_margin_left (row_grid, 10);
+        gtk_widget_set_margin_right (row_grid, 10);
+        gtk_widget_set_margin_top (row_grid, 10);
+        gtk_widget_set_margin_bottom (row_grid, 10);
+        gtk_widget_set_halign (row_grid, GTK_ALIGN_FILL);
 
+        gtk_container_add (GTK_CONTAINER (row), row_grid);
         gtk_widget_show_all (row);
         gtk_container_add (GTK_CONTAINER (page->routes_list), row);
 
@@ -537,10 +553,10 @@ add_routes_section (CEPageIP4 *page)
 
         frame = gtk_frame_new (NULL);
         gtk_container_add (GTK_CONTAINER (widget), frame);
-        page->routes_list = list = GTK_WIDGET (egg_list_box_new ());
-        egg_list_box_set_selection_mode (EGG_LIST_BOX (list), GTK_SELECTION_NONE);
-        egg_list_box_set_separator_funcs (EGG_LIST_BOX (list), update_separator, NULL, NULL);
-        egg_list_box_set_sort_func (EGG_LIST_BOX (list), sort_first_last, NULL, NULL);
+        page->routes_list = list = gtk_list_box_new ();
+        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_routes = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
         gtk_switch_set_active (page->auto_routes, !nm_setting_ip4_config_get_ignore_auto_routes (page->setting));
