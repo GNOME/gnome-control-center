@@ -24,7 +24,6 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <egg-list-box.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
@@ -45,8 +44,6 @@ main (int argc, char **argv)
 #ifdef GDK_WINDOWING_X11
   XInitThreads ();
 #endif
-
-  g_type_ensure (egg_list_box_get_type ());
 
   application = cc_application_new ();
   status = g_application_run (G_APPLICATION (application), argc, argv);
