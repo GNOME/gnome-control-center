@@ -734,6 +734,15 @@ cc_sharing_panel_check_schema_available (CcSharingPanel *self,
 }
 
 static void
+screen_sharing_show_cb (GtkWidget *widget, CcSharingPanel *self)
+{
+  CcSharingPanelPrivate *priv = self->priv;
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("show-password-checkbutton")),
+                                FALSE);
+}
+
+static void
 cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
@@ -789,6 +798,10 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
   g_object_bind_property (WID ("show-password-checkbutton"), "active",
                           WID ("remote-control-password-entry"), "visibility",
                           G_BINDING_SYNC_CREATE);
+
+  /* make sure the password entry is hidden by default */
+  g_signal_connect (priv->screen_sharing_dialog, "show",
+                    G_CALLBACK (screen_sharing_show_cb), self);
 }
 
 static void
