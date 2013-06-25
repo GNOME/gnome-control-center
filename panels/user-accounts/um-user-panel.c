@@ -149,6 +149,10 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkTreeSelection *selection;
         gint sort_key;
 
+        if (act_user_is_system_account (user)) {
+                return;
+        }
+
         g_debug ("user added: %d %s\n", act_user_get_uid (user), get_real_or_user_name (user));
         widget = get_widget (d, "list-treeview");
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
