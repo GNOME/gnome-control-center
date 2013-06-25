@@ -853,7 +853,7 @@ setup_mapping_treeview (CcWacomPage *page)
 							   NULL);
 	gtk_tree_view_column_set_cell_data_func (column, renderer, action_set_func, NULL, NULL);
 	gtk_tree_view_column_set_resizable (column, FALSE);
-	gtk_tree_view_column_set_expand (column, FALSE);
+	gtk_tree_view_column_set_expand (column, TRUE);
 
 	gtk_tree_view_append_column (treeview, column);
 
@@ -871,7 +871,7 @@ setup_mapping_treeview (CcWacomPage *page)
 	column = gtk_tree_view_column_new_with_attributes (_("Action"), renderer, NULL);
 	gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
 	gtk_tree_view_column_set_resizable (column, FALSE);
-	gtk_tree_view_column_set_expand (column, FALSE);
+	gtk_tree_view_column_set_expand (column, TRUE);
 
 	gtk_tree_view_append_column (treeview, column);
 
