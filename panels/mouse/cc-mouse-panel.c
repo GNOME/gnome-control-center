@@ -39,7 +39,7 @@ CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 struct _CcMousePanelPrivate
 {
   GtkBuilder *builder;
-  GtkWidget  *widget;
+  GtkWidget  *test_dialog;
   GtkWidget  *prefs_widget;
   GtkWidget  *test_widget;
   GtkWidget  *shell_header;
@@ -57,6 +57,12 @@ cc_mouse_panel_dispose (GObject *object)
 
   g_clear_object (&priv->shell_header);
 
+  if (priv->test_dialog)
+    {
+      gtk_widget_destroy (priv->test_dialog);
+      priv->test_dialog = NULL;
+    }
+
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
 
@@ -66,43 +72,53 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
   return "help:gnome-help/mouse";
 }
 
-/* Toggle between mouse panel properties and testing area. */
 static void
-shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
+shell_test_button_clicked (GtkButton *button, CcMousePanel *panel)
 {
-  GtkNotebook *notebook = GTK_NOTEBOOK (panel->priv->widget);
-  gint page_num;
-  gboolean active;
+  CcMousePanelPrivate *priv = panel->priv;
 
-  active = gtk_toggle_button_get_active (button);
-  page_num = active ? CC_MOUSE_PAGE_TEST : CC_MOUSE_PAGE_PREFS;
-
-  gtk_notebook_set_current_page (notebook, page_num);
+  /* GTK_RESPONSE_NONE is returned if the dialog is being destroyed, so only
+   * hide the dialog if it is not being destroyed */
+  if (gtk_dialog_run (GTK_DIALOG (priv->test_dialog)) != GTK_RESPONSE_NONE)
+    gtk_widget_hide (priv->test_dialog);
 }
 
 static void
 cc_mouse_panel_constructed (GObject *object)
 {
   CcMousePanel *self = CC_MOUSE_PANEL (object);
-  GtkWidget *box, *button;
+  CcMousePanelPrivate *priv = self->priv;
+  GtkWidget *box, *button, *container, *toplevel;
+  CcShell *shell;
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->constructed (object);
 
-  /* Add test area toggle to shell header. */
+  /* Add test area button to shell header. */
+  shell = cc_panel_get_shell (CC_PANEL (self));
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
 
-  button = gtk_toggle_button_new_with_mnemonic (_("Test Your _Settings"));
+  button = gtk_button_new_with_mnemonic (_("Test Your _Settings"));
   gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
   gtk_widget_set_visible (button, TRUE);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), box);
+  cc_shell_embed_widget_in_header (shell, box);
   gtk_widget_set_visible (box, TRUE);
 
-  self->priv->shell_header = g_object_ref (box);
+  priv->shell_header = g_object_ref (box);
 
-  g_signal_connect (GTK_BUTTON (button), "toggled",
-                    G_CALLBACK (shell_test_button_toggle_event),
+  g_signal_connect (GTK_BUTTON (button), "clicked",
+                    G_CALLBACK (shell_test_button_clicked),
                     self);
+
+  toplevel = cc_shell_get_toplevel (shell);
+  priv->test_dialog = gtk_dialog_new_with_buttons (_("Test Your Settings"),
+                                                   GTK_WINDOW (toplevel),
+                                                   GTK_DIALOG_MODAL,
+                                                   _("_Done"), GTK_RESPONSE_ACCEPT, NULL);
+  gtk_window_set_resizable (GTK_WINDOW (priv->test_dialog), FALSE);
+
+  container = gtk_dialog_get_content_area (GTK_DIALOG (priv->test_dialog));
+  gtk_container_add (GTK_CONTAINER (container), priv->test_widget);
 }
 
 static void
@@ -116,21 +132,14 @@ cc_mouse_panel_init (CcMousePanel *self)
   priv->prefs_widget = cc_mouse_properties_new ();
   priv->test_widget = cc_mouse_test_new ();
 
-  priv->widget = gtk_notebook_new ();
-  gtk_widget_set_margin_left (priv->widget, 6);
-  gtk_widget_set_margin_right (priv->widget, 6);
-  gtk_widget_set_margin_top (priv->widget, 6);
-  gtk_widget_set_margin_bottom (priv->widget, 6);
-  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->widget), FALSE);
-  gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->widget), FALSE);
+  gtk_widget_set_margin_left (priv->prefs_widget, 6);
+  gtk_widget_set_margin_right (priv->prefs_widget, 6);
+  gtk_widget_set_margin_top (priv->prefs_widget, 6);
+  gtk_widget_set_margin_bottom (priv->prefs_widget, 6);
 
-  gtk_notebook_append_page (GTK_NOTEBOOK (priv->widget), priv->prefs_widget, NULL);
-  gtk_notebook_append_page (GTK_NOTEBOOK (priv->widget), priv->test_widget, NULL);
-
-  gtk_container_add (GTK_CONTAINER (self), priv->widget);
+  gtk_container_add (GTK_CONTAINER (self), priv->prefs_widget);
   gtk_widget_show (priv->prefs_widget);
   gtk_widget_show (priv->test_widget);
-  gtk_widget_show (priv->widget);
 }
 
 static void
