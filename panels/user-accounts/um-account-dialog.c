@@ -976,7 +976,6 @@ on_realm_login (GObject *source,
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
                 g_debug ("Problem with the user's login: %s", error->message);
                 message = _("Login not recognized.\nPlease try again.");
-                set_entry_validation_error (self->enterprise_login, message);
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login));
@@ -984,7 +983,6 @@ on_realm_login (GObject *source,
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Problem with the user's password: %s", error->message);
                 message = _("Invalid password.\nPlease try again.");
-                set_entry_validation_error (self->enterprise_password, message);
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password));
@@ -1054,7 +1052,6 @@ on_realm_discover_input (GObject *source,
                 } else {
                         message = g_strdup_printf ("%s.", error->message);
                 }
-                set_entry_validation_error (self->enterprise_domain_entry, message);
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
 
                 g_free (message);
@@ -1214,7 +1211,6 @@ on_domain_changed (GtkComboBox *widget,
 
         gtk_label_set_text (GTK_LABEL (self->enterprise_hint), "");
         dialog_validate (self);
-        clear_entry_validation_error (self->enterprise_domain_entry);
 }
 
 static gboolean
