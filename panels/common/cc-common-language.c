@@ -596,7 +596,10 @@ insert_language (GHashTable *ht,
 
         g_debug ("We have translations for %s", lang);
 
-        key = g_strdup_printf ("%s.utf8", lang);
+        if (g_str_has_suffix (lang, ".utf8"))
+                key = g_strdup (lang);
+        else
+                key = g_strdup_printf ("%s.utf8", lang);
 
         label_own_lang = gnome_get_language_from_locale (key, key);
         label_current_lang = gnome_get_language_from_locale (key, NULL);
@@ -733,6 +736,10 @@ cc_common_language_add_user_languages (GtkTreeModel *model)
         /* Add the current locale first */
         name = cc_common_language_get_current_language ();
         display = g_hash_table_lookup (user_langs, name);
+        if (!display) {
+                insert_language (user_langs, name);
+                display = g_hash_table_lookup (user_langs, name);
+        }
 
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, display, -1);
