@@ -1062,6 +1062,7 @@ on_control_stream_added (GvcMixerControl *control,
             (GVC_IS_MIXER_SOURCE (stream) == FALSE &&
              GVC_IS_MIXER_SINK (stream) == FALSE &&
              gvc_mixer_stream_is_virtual (stream) == FALSE &&
+             gvc_mixer_stream_is_event_stream (stream) == FALSE &&
              g_strcmp0 (app_id, "org.gnome.VolumeControl") != 0 &&
              g_strcmp0 (app_id, "org.PulseAudio.pavucontrol") != 0)) {
                 GtkWidget      *bar;
