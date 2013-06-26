@@ -742,6 +742,38 @@ screen_sharing_show_cb (GtkWidget *widget, CcSharingPanel *self)
                                 FALSE);
 }
 
+#define MAX_PASSWORD_SIZE 8
+static void
+screen_sharing_password_insert_text_cb (GtkEditable *editable,
+                                        gchar       *new_text,
+                                        gint         new_text_length,
+                                        gpointer     position,
+                                        gpointer     user_data)
+{
+  int l, available_size;
+
+  l = gtk_entry_buffer_get_bytes (gtk_entry_get_buffer (GTK_ENTRY (editable)));
+
+  if (l + new_text_length <= MAX_PASSWORD_SIZE)
+    return;
+
+  g_signal_stop_emission_by_name (editable, "insert-text");
+  gtk_widget_error_bell (GTK_WIDGET (editable));
+
+  available_size = g_utf8_strlen (new_text, MAX_PASSWORD_SIZE - l);
+  if (available_size == 0)
+    return;
+
+  g_signal_handlers_block_by_func (editable,
+                                   (gpointer) screen_sharing_password_insert_text_cb,
+                                   user_data);
+  gtk_editable_insert_text (editable, new_text, available_size, position);
+  g_signal_handlers_unblock_by_func (editable,
+                                     (gpointer) screen_sharing_password_insert_text_cb,
+                                     user_data);
+}
+#undef MAX_PASSWORD_SIZE
+
 static void
 cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
 {
@@ -802,6 +834,10 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
   /* make sure the password entry is hidden by default */
   g_signal_connect (priv->screen_sharing_dialog, "show",
                     G_CALLBACK (screen_sharing_show_cb), self);
+
+  /* accept at most 8 bytes in password entry */
+  g_signal_connect (WID ("remote-control-password-entry"), "insert-text",
+                    G_CALLBACK (screen_sharing_password_insert_text_cb), self);
 }
 
 static void
