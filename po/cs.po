@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-06 05:06+0000\n"
-"PO-Revision-Date: 2013-06-08 08:33+0200\n"
+"POT-Creation-Date: 2013-06-28 14:56+0000\n"
+"PO-Revision-Date: 2013-06-28 18:43+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -201,43 +201,43 @@ msgstr "Nastavení klávesnice"
 msgid "Send Files…"
 msgstr "Poslat soubory…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:358
+#: ../panels/bluetooth/cc-bluetooth-panel.c:357
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Ano"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:358
+#: ../panels/bluetooth/cc-bluetooth-panel.c:357
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "Ne"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:472
+#: ../panels/bluetooth/cc-bluetooth-panel.c:470
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth je vypnuto"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:477
+#: ../panels/bluetooth/cc-bluetooth-panel.c:475
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth je vypnuto hardwarovým vypínačem"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:481
+#: ../panels/bluetooth/cc-bluetooth-panel.c:479
 msgid "No Bluetooth adapters found"
 msgstr "Nebyl nalezen žádný adaptér Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:580
+#: ../panels/bluetooth/cc-bluetooth-panel.c:578
 msgid "Visibility"
 msgstr "Viditelnost"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:584
+#: ../panels/bluetooth/cc-bluetooth-panel.c:582
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Viditelnost zařízení „%s“"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:628
+#: ../panels/bluetooth/cc-bluetooth-panel.c:626
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Odebrat „%s“ ze seznamu zařízení?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:630
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -907,27 +907,27 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "barvy;ICC;profil;kalibrace;tiskárna;obrazovka;displej"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:682
+#: ../panels/common/cc-common-language.c:685
 msgid "United States"
 msgstr "Spojené státy"
 
-#: ../panels/common/cc-common-language.c:683
+#: ../panels/common/cc-common-language.c:686
 msgid "Germany"
 msgstr "Německo"
 
-#: ../panels/common/cc-common-language.c:684
+#: ../panels/common/cc-common-language.c:687
 msgid "France"
 msgstr "Francie"
 
-#: ../panels/common/cc-common-language.c:685
+#: ../panels/common/cc-common-language.c:688
 msgid "Spain"
 msgstr "Španělsko"
 
-#: ../panels/common/cc-common-language.c:686
+#: ../panels/common/cc-common-language.c:689
 msgid "China"
 msgstr "Čína"
 
-#: ../panels/common/cc-common-language.c:752
+#: ../panels/common/cc-common-language.c:759
 msgid "Other…"
 msgstr "Ostatní…"
 
@@ -946,7 +946,7 @@ msgid "Language"
 msgstr "Jazyk"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:117 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Hotovo"
 
@@ -1795,9 +1795,14 @@ msgstr "Změníte-li přiřazení zkratky k „%s“, zkratka „%s“ bude vypn
 msgid "_Reassign"
 msgstr "Z_měnit přiřazení"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:100
 msgid "Test Your _Settings"
-msgstr "_Vyzkoušejte nastavení"
+msgstr "_Vyzkoušejte své nastavení"
+
+#: ../panels/mouse/cc-mouse-panel.c:114
+#| msgid "Test Your _Settings"
+msgid "Test Your Settings"
+msgstr "Test vašeho nastavení"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1899,9 +1904,10 @@ msgstr "_Klepnout ťuknutím"
 msgid "Two _finger scroll"
 msgstr "Posuv dvě_ma prsty"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-msgid "C_ontent sticks to fingers"
-msgstr "_Obsah se posouvá s prsty"
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+msgid "_Natural scrolling"
+msgstr "Přiroze_ný posuv"
 
 #: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -3534,14 +3540,14 @@ msgid "Show Details in Lock Screen"
 msgstr "Zobrazovat na uzamčené obrazovce podrobnosti"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1637 ../panels/power/cc-power-panel.c:1644
+#: ../panels/power/cc-power-panel.c:1602 ../panels/power/cc-power-panel.c:1609
 #: ../panels/privacy/cc-privacy-panel.c:78
 #: ../panels/privacy/cc-privacy-panel.c:145
 msgid "On"
 msgstr "Zapnuto"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1631 ../panels/power/cc-power-panel.c:1642
+#: ../panels/power/cc-power-panel.c:1596 ../panels/power/cc-power-panel.c:1607
 #: ../panels/privacy/cc-privacy-panel.c:78
 #: ../panels/privacy/cc-privacy-panel.c:145
 msgid "Off"
@@ -3747,167 +3753,167 @@ msgstr "Vybíjí se"
 msgid "Estimated battery capacity: %s"
 msgstr "Odhadovaná kapacita baterie: %s"
 
-#: ../panels/power/cc-power-panel.c:404
+#: ../panels/power/cc-power-panel.c:403
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Hlavní"
 
-#: ../panels/power/cc-power-panel.c:406
+#: ../panels/power/cc-power-panel.c:405
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Přídavná"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:492
 msgid "Wireless mouse"
 msgstr "Bezdrátová myš"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:496
 msgid "Wireless keyboard"
 msgstr "Bezdrátová klávesnice"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:501
+#: ../panels/power/cc-power-panel.c:500
 msgid "Uninterruptible power supply"
 msgstr "Záložní zdroj napájení"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:506
+#: ../panels/power/cc-power-panel.c:505
 msgid "Personal digital assistant"
 msgstr "Osobní digitální asistent (PDA)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:510
+#: ../panels/power/cc-power-panel.c:509
 msgid "Cellphone"
 msgstr "Mobilní telefon"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:514
+#: ../panels/power/cc-power-panel.c:513
 msgid "Media player"
 msgstr "Multimediální přehrávač"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:517
 msgid "Tablet"
 msgstr "Tablet"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:521
 msgid "Computer"
 msgstr "Počítač"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:526 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:1938
+#: ../panels/power/cc-power-panel.c:525 ../panels/power/cc-power-panel.c:733
+#: ../panels/power/cc-power-panel.c:1903
 msgid "Battery"
 msgstr "Baterie"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:535
+#: ../panels/power/cc-power-panel.c:534
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Nabíjí se"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:541
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Pozor"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:546
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Nízká"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:551
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Dobrá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:556
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Plně nabitá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:560
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vybitá"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:731
 msgid "Batteries"
 msgstr "Baterie"
 
-#: ../panels/power/cc-power-panel.c:1074
+#: ../panels/power/cc-power-panel.c:1037
 msgid "When _idle"
 msgstr "Při _nečinnosti"
 
-#: ../panels/power/cc-power-panel.c:1401
+#: ../panels/power/cc-power-panel.c:1364
 msgid "Power Saving"
 msgstr "Šetření energií"
 
-#: ../panels/power/cc-power-panel.c:1430
+#: ../panels/power/cc-power-panel.c:1393
 msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
-#: ../panels/power/cc-power-panel.c:1458
+#: ../panels/power/cc-power-panel.c:1423
 msgid "_Dim screen when inactive"
 msgstr "_Ztlumit jas obrazovky při neaktivitě"
 
-#: ../panels/power/cc-power-panel.c:1481
+#: ../panels/power/cc-power-panel.c:1446
 msgid "_Blank screen"
 msgstr "_Vypnout obrazovku"
 
-#: ../panels/power/cc-power-panel.c:1516
+#: ../panels/power/cc-power-panel.c:1481
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1521
+#: ../panels/power/cc-power-panel.c:1486
 msgid "Turns off wireless devices"
 msgstr "Vypne bezdrátová zařízení"
 
-#: ../panels/power/cc-power-panel.c:1544
+#: ../panels/power/cc-power-panel.c:1509
 msgid "_Mobile broadband"
 msgstr "_Mobilní připojení"
 
-#: ../panels/power/cc-power-panel.c:1549
+#: ../panels/power/cc-power-panel.c:1514
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Vypne mobilní širokopásmová zařízení (3G, 4G, WiMax atd.)"
 
-#: ../panels/power/cc-power-panel.c:1582
+#: ../panels/power/cc-power-panel.c:1547
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1633
+#: ../panels/power/cc-power-panel.c:1598
 msgid "When on battery power"
 msgstr "Při napájení z baterie"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1600
 msgid "When plugged in"
 msgstr "Při napájení ze sítě"
 
-#: ../panels/power/cc-power-panel.c:1762
+#: ../panels/power/cc-power-panel.c:1727
 msgid "Suspend & Power Off"
 msgstr "Uspávání a vypínání"
 
-#: ../panels/power/cc-power-panel.c:1793
+#: ../panels/power/cc-power-panel.c:1758
 msgid "_Automatic suspend"
 msgstr "_Automaticky uspat"
 
-#: ../panels/power/cc-power-panel.c:1815
+#: ../panels/power/cc-power-panel.c:1780
 msgid "When battery power is _critical"
 msgstr "Když je napájení z baterie kriti_cky nízké"
 
-#: ../panels/power/cc-power-panel.c:1848
+#: ../panels/power/cc-power-panel.c:1813
 msgid "Power Off"
 msgstr "Vypnout"
 
-#: ../panels/power/cc-power-panel.c:1990
+#: ../panels/power/cc-power-panel.c:1955
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -4016,7 +4022,7 @@ msgid "Authenticate"
 msgstr "Ověření totožnosti"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:23
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Heslo"
@@ -4804,19 +4810,19 @@ msgctxt "Language"
 msgid "None"
 msgstr "Žádný"
 
-#: ../panels/region/cc-region-panel.c:1058
-msgid "Sorry"
-msgstr "Promiňte"
-
-#: ../panels/region/cc-region-panel.c:1060
-msgid "Input methods can't be used on the login screen"
-msgstr "Vstupní metody nemohou být použity na přihlašovací obrazovce"
-
-#: ../panels/region/cc-region-panel.c:1509
+#: ../panels/region/cc-region-panel.c:847
 msgid "No input source selected"
 msgstr "Není vybrán žádný vstupní zdroj"
 
-#: ../panels/region/cc-region-panel.c:1690
+#: ../panels/region/cc-region-panel.c:1078
+msgid "Sorry"
+msgstr "Promiňte"
+
+#: ../panels/region/cc-region-panel.c:1080
+msgid "Input methods can't be used on the login screen"
+msgstr "Vstupní metody nemohou být použity na přihlašovací obrazovce"
+
+#: ../panels/region/cc-region-panel.c:1710
 msgid "Login Screen"
 msgstr "Přihlašovací obrazovka"
 
@@ -4987,21 +4993,21 @@ msgstr "Posunout níž"
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: ../panels/sharing/cc-sharing-panel.c:268
+#: ../panels/sharing/cc-sharing-panel.c:275
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Zapnuto"
 
-#: ../panels/sharing/cc-sharing-panel.c:270
+#: ../panels/sharing/cc-sharing-panel.c:277
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: ../panels/sharing/cc-sharing-panel.c:416
+#: ../panels/sharing/cc-sharing-panel.c:423
 msgid "Choose a Folder"
 msgstr "Výběr složky"
 
-#: ../panels/sharing/cc-sharing-panel.c:594
+#: ../panels/sharing/cc-sharing-panel.c:707
 msgid "Copy"
 msgstr "Kopírovat"
 
@@ -5065,46 +5071,50 @@ msgid "Computer Name"
 msgstr "Název počítače"
 
 #: ../panels/sharing/sharing.ui.h:8
-msgid "Remote Login"
-msgstr "Vzdálené přihlášení"
+msgid "Personal File Sharing"
+msgstr "Sdílení osobních souborů"
 
 #: ../panels/sharing/sharing.ui.h:9
-msgid "Some services are disabled because of no network access."
-msgstr "Některé služby jsou zakázány kvůli tomu, že není přístup k síti."
+msgid "Screen Sharing"
+msgstr "Sdílení obrazovky"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "Sdílení médií"
 
 #: ../panels/sharing/sharing.ui.h:11
+msgid "Remote Login"
+msgstr "Vzdálené přihlášení"
+
+#: ../panels/sharing/sharing.ui.h:12
+msgid "Some services are disabled because of no network access."
+msgstr "Některé služby jsou zakázány kvůli tomu, že není přístup k síti."
+
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "Sdílet hudbu, fotografie a videa s ostatními v aktuální síti."
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:14
 msgid "Share Media On This Network"
 msgstr "Sdílet média v této síti"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Shared Folders"
 msgstr "Sdílené složky"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:16
 msgid "column"
 msgstr "sloupec"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Add Folder"
 msgstr "Přidat složku"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Remove Folder"
 msgstr "Odebrat složku"
 
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Personal File Sharing"
-msgstr "Sdílení osobních souborů"
-
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5113,15 +5123,15 @@ msgstr ""
 "Sdílení osobních souborů vám umožňuje sdílet složku Veřejné s ostatními v "
 "aktuální síti pomocí: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Share Public Folder On This Network"
 msgstr "Sdílet složku Veřejné v této síti"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Require Password"
 msgstr "Vyžadovat heslo"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:25
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5129,10 +5139,6 @@ msgid ""
 msgstr ""
 "Umožnit ostatním uživatelům, aby se připojili příkazem Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
-
-#: ../panels/sharing/sharing.ui.h:26
-msgid "Screen Sharing"
-msgstr "Sdílení obrazovky"
 
 #: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
@@ -5287,65 +5293,65 @@ msgstr "O_testovat reproduktory"
 msgid "Peak detect"
 msgstr "Rozpoznávání špiček"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1509
+#: ../panels/sound/gvc-mixer-dialog.c:1510
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Název"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1528
+#: ../panels/sound/gvc-mixer-dialog.c:1529
 msgid "Device"
 msgstr "Zařízení"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1591
+#: ../panels/sound/gvc-mixer-dialog.c:1592
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Test reproduktorů pro %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1648
+#: ../panels/sound/gvc-mixer-dialog.c:1649
 msgid "_Output volume:"
 msgstr "Výst_upní hlasitost:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1662
+#: ../panels/sound/gvc-mixer-dialog.c:1663
 msgid "Output"
 msgstr "Výstup"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1667
+#: ../panels/sound/gvc-mixer-dialog.c:1668
 msgid "C_hoose a device for sound output:"
 msgstr "Zvo_lte zařízení pro zvukový výstup:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1692
+#: ../panels/sound/gvc-mixer-dialog.c:1693
 msgid "Settings for the selected device:"
 msgstr "Nastavení pro vybrané zařízení:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1703
+#: ../panels/sound/gvc-mixer-dialog.c:1704
 msgid "Input"
 msgstr "Vstup"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1710
+#: ../panels/sound/gvc-mixer-dialog.c:1711
 msgid "_Input volume:"
 msgstr "_Vstupní hlasitost:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1733
+#: ../panels/sound/gvc-mixer-dialog.c:1734
 msgid "Input level:"
 msgstr "Vstupní úroveň:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1761
+#: ../panels/sound/gvc-mixer-dialog.c:1762
 msgid "C_hoose a device for sound input:"
 msgstr "Zvo_lte zařízení pro zvukový vstup:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1788
+#: ../panels/sound/gvc-mixer-dialog.c:1789
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1795
+#: ../panels/sound/gvc-mixer-dialog.c:1796
 msgid "_Alert volume:"
 msgstr "Hl_asitost upozornění:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1809
 msgid "Applications"
 msgstr "Aplikace"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1812
+#: ../panels/sound/gvc-mixer-dialog.c:1813
 msgid "No application is currently playing or recording audio."
 msgstr "Žádná aplikace právě nepřehrává ani nezaznamenává zvuk."
 
@@ -5907,11 +5913,12 @@ msgid "Account _Type"
 msgstr "_Typ účtu"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
 msgid "Allow user to set a password when they next login"
 msgstr "Umožnit uživateli nastavit si heslo při příštím přihlášení"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
 msgid "Set a password now"
 msgstr "Nastavit heslo nyní"
 
@@ -6044,57 +6051,19 @@ msgstr "Následující týden"
 msgid "Next week"
 msgstr "Následující týden"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "C_onfirm New Password"
+msgstr "_Ověřit nové heslo"
+
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-msgid "Choose password at next login"
-msgstr "Zvolit heslo při příštím přihlášení"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "Log in without a password"
-msgstr "Přihlašovat se bez hesla"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
-msgid "Disable this account"
-msgstr "Zakázat tento účet"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Enable this account"
-msgstr "Povolit tento účet"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "C_onfirm password"
-msgstr "_Ověřit heslo"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "_New password"
+msgid "_New Password"
 msgstr "_Nové heslo"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Generate a password"
-msgstr "Vygenerovat heslo"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
-msgid "Current _password"
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "Current _Password"
 msgstr "Současné _heslo"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "_Action"
-msgstr "_Akce"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Changing password for"
-msgstr "Změna hesla pro"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
-msgid "_Show password"
-msgstr "Ukázat he_slo"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
-msgid "How to choose a strong password"
-msgstr ""
-"<a href=\"http://cs.wikipedia.org/wiki/Bezpe%C4%8Dn%C3%A9_heslo\">Jak zvolit "
-"silné heslo</a>"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Ch_ange"
 msgstr "Změn_it"
 
@@ -6361,7 +6330,7 @@ msgid "Passwords do not match."
 msgstr "Hesla si neodpovídají."
 
 #: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:298
 msgid "Passwords do not match"
 msgstr "Hesla si neodpovídají"
 
@@ -6505,74 +6474,25 @@ msgstr "Tento týden"
 msgid "Last Week"
 msgstr "Poslední týden"
 
-#: ../panels/user-accounts/um-password-dialog.c:128
-msgid "_Generate a password"
-msgstr "Vy_generovat heslo"
-
-#: ../panels/user-accounts/um-password-dialog.c:181
+#: ../panels/user-accounts/um-password-dialog.c:154
 msgid "Please choose another password."
 msgstr "Zvolte prosím jiné heslo."
 
-#: ../panels/user-accounts/um-password-dialog.c:190
+#: ../panels/user-accounts/um-password-dialog.c:163
 msgid "Please type your current password again."
 msgstr "Zadejte prosím své současné heslo ještě jednou."
 
-#: ../panels/user-accounts/um-password-dialog.c:196
+#: ../panels/user-accounts/um-password-dialog.c:169
 msgid "Password could not be changed"
 msgstr "Heslo nelze změnit"
 
-#: ../panels/user-accounts/um-password-dialog.c:303
-msgid "You need to enter a new password"
-msgstr "Musíte zadat nové heslo"
+#: ../panels/user-accounts/um-password-dialog.c:296
+msgid "The passwords do not match."
+msgstr "Hesla si neodpovídají."
 
-#: ../panels/user-accounts/um-password-dialog.c:306
-msgid "The new password is not strong enough"
-msgstr "Nové heslo není dostatečně silné"
-
-#: ../panels/user-accounts/um-password-dialog.c:312
-msgid "You need to confirm the password"
-msgstr "Musíte zadat heslo ještě jednou pro ověření"
-
-#: ../panels/user-accounts/um-password-dialog.c:315
-msgid "The passwords do not match"
-msgstr "Hesla si neodpovídají"
-
-#: ../panels/user-accounts/um-password-dialog.c:321
-msgid "You need to enter your current password"
-msgstr "Musíte zadat své současné heslo"
-
-#: ../panels/user-accounts/um-password-dialog.c:324
-msgid "The current password is not correct"
-msgstr "Současné heslo není správně"
-
-#: ../panels/user-accounts/um-password-dialog.c:441
+#: ../panels/user-accounts/um-password-dialog.c:374
 msgid "Wrong password"
 msgstr "Nesprávné heslo"
-
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Příliš krátké"
-
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Slabé"
-
-#: ../panels/user-accounts/um-password-dialog.c:601
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Slušné"
-
-#: ../panels/user-accounts/um-password-dialog.c:602
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Dobré"
-
-#: ../panels/user-accounts/um-password-dialog.c:603
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Silné"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6703,7 +6623,7 @@ msgid "Create a user account"
 msgstr "Vytvořit uživatelský účet"
 
 #: ../panels/user-accounts/um-user-panel.c:1079
-#: ../panels/user-accounts/um-user-panel.c:1369
+#: ../panels/user-accounts/um-user-panel.c:1368
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6716,7 +6636,7 @@ msgid "Delete the selected user account"
 msgstr "Odstranit vybraný uživatelský účet"
 
 #: ../panels/user-accounts/um-user-panel.c:1101
-#: ../panels/user-accounts/um-user-panel.c:1374
+#: ../panels/user-accounts/um-user-panel.c:1373
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6724,7 +6644,7 @@ msgstr ""
 "Pro odstranění uživatelského účtu\n"
 "nejprve klikněte na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1284
+#: ../panels/user-accounts/um-user-panel.c:1283
 msgid "My Account"
 msgstr "Můj účet"
 
@@ -6747,8 +6667,8 @@ msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
 msgstr ""
-"Uživatelské jméno se musí skládat jen z malých a velkých písmen a-z, číslic a "
-"některého ze znaků z „.“, „-“ a „_“"
+"Uživatelské jméno se musí skládat jen z malých a velkých písmen a-z, číslic "
+"a některého ze znaků z „.“, „-“ a „_“"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6770,17 +6690,17 @@ msgstr ""
 msgid "Mis-click detected, restarting..."
 msgstr "Zjištěno chybějící kliknutí, začíná se znovu…"
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+#: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
 msgstr "Výstup:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+#: ../panels/wacom/cc-wacom-mapping-panel.c:276
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Zachovat poměr (širokoúhlé):"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:298
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Map to single monitor"
 msgstr "Mapovat na jedinou obrazovku"
 
@@ -7111,22 +7031,22 @@ msgid "Settings"
 msgstr "Nastavení"
 
 #. Add categories
-#: ../shell/cc-window.c:857
+#: ../shell/cc-window.c:858
 msgctxt "category"
 msgid "Personal"
 msgstr "Osobní"
 
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:859
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:860
 msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1424
+#: ../shell/cc-window.c:1429
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
