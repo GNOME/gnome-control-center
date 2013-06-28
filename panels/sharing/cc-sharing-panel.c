@@ -784,17 +784,11 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                                          WID ("screen-sharing-status-label"));
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-view-switch"),
-                                           WID ("remote-control-switch"),
-                                           WID ("remote-control-label"),
-                                           WID ("remote-control-grid"),
+                                           WID ("remote-control-box"),
                                            NULL);
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-switch"),
-                                           WID ("approve-all-connections-switch"),
-                                           WID ("remote-control-require-password-switch"),
-                                           WID ("remote-control-require-password-label"),
-                                           WID ("approve-all-connections-label"),
-                                           WID ("password-grid"),
+                                           WID ("remote-control-grid"),
                                            NULL);
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-require-password-switch"),
