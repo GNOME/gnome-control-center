@@ -413,7 +413,7 @@ set_retain_history_value_for_combo (GtkComboBox    *combo_box,
                           1, &value_tmp,
                           -1);
       if (value == value_tmp ||
-          (value_tmp > value_prev && value < value_tmp))
+          (value > 0 && value_tmp > value_prev && value < value_tmp))
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
           return;
