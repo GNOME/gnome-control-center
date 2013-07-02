@@ -376,18 +376,17 @@ update_header_func (GtkListBoxRow  *row,
                     GtkListBoxRow  *before,
                     gpointer    user_data)
 {
-  GtkWidget *current;
+        GtkWidget *current;
 
-  if (before == NULL)
-    return;
+        if (before == NULL)
+                return;
 
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
+        current = gtk_list_box_row_get_header (row);
+        if (current == NULL) {
+                current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+                gtk_widget_show (current);
+                gtk_list_box_row_set_header (row, current);
+        }
 }
 
 static void
