@@ -42,7 +42,6 @@ typedef struct {
         GtkWidget *filter_entry;
         GtkWidget *language_list;
         GtkWidget *scrolledwindow;
-        gboolean adding_languages;
         gboolean showing_extra;
         gchar *language;
         gchar **filter_words;
@@ -150,8 +149,6 @@ add_languages (GtkDialog   *chooser,
 {
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
 
-        priv->adding_languages = TRUE;
-
         while (*locale_ids) {
                 gchar *locale_id;
                 gboolean is_initial;
@@ -171,8 +168,6 @@ add_languages (GtkDialog   *chooser,
         gtk_container_add (GTK_CONTAINER (priv->language_list), GTK_WIDGET (priv->more_item));
 
         gtk_widget_show_all (priv->language_list);
-
-        priv->adding_languages = FALSE;
 }
 
 static void
@@ -356,9 +351,6 @@ row_activated (GtkListBox        *box,
 {
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
         gchar *new_locale_id;
-
-        if (priv->adding_languages)
-                return;
 
         if (row == NULL)
                 return;
