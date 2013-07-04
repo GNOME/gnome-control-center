@@ -37,6 +37,7 @@
 typedef enum {
         UM_LOCAL,
         UM_ENTERPRISE,
+        UM_OFFLINE,
         NUM_MODES
 } UmAccountMode;
 
@@ -1178,6 +1179,17 @@ on_realmd_disappeared (GDBusConnection *unused1,
         mode_change (self, UM_LOCAL);
 }
 
+static void
+on_network_changed (GNetworkMonitor *monitor,
+                    gboolean available,
+                    gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        if (self->mode != UM_LOCAL)
+                mode_change (self, UM_ENTERPRISE);
+}
+
 static gboolean
 enterprise_domain_timeout (UmAccountDialog *self)
 {
@@ -1247,6 +1259,7 @@ enterprise_init (UmAccountDialog *self,
                  GtkBuilder *builder)
 {
         GtkWidget *widget;
+        GNetworkMonitor *monitor;
 
         self->enterprise_realms = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_OBJECT);
         self->enterprise_check_credentials = FALSE;
@@ -1290,6 +1303,9 @@ enterprise_init (UmAccountDialog *self,
                                                G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
                                                on_realmd_appeared, on_realmd_disappeared,
                                                self, NULL);
+
+        monitor = g_network_monitor_get_default ();
+        g_signal_connect (monitor, "network-changed", G_CALLBACK (on_network_changed), self);
 }
 
 static void
@@ -1323,12 +1339,19 @@ static void
 mode_change (UmAccountDialog *self,
              UmAccountMode mode)
 {
-        gboolean active;
+        gboolean active, available;
+        GNetworkMonitor *monitor;
+
+        if (mode != UM_LOCAL) {
+                monitor = g_network_monitor_get_default ();
+                available = g_network_monitor_get_network_available (monitor);
+                mode = available ? UM_ENTERPRISE : UM_OFFLINE;
+        }
 
         gtk_notebook_set_current_page (GTK_NOTEBOOK (self->container_widget), mode);
 
         /* The enterprise toggle state */
-        active = (mode == UM_ENTERPRISE);
+        active = (mode != UM_LOCAL);
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->enterprise_button)) != active)
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->enterprise_button), active);
 
