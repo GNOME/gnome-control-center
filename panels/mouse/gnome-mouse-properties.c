@@ -221,7 +221,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	touchpad_present = touchpad_is_present ();
 	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_present);
 	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
-				show_touchpad_enabling_switch (touchpad_settings));
+				show_touchpad_enabling_switch (d->touchpad_settings));
 
 	g_settings_bind (d->touchpad_settings, "touchpad-enabled",
 			 WID ("touchpad_enabled_switch"), "active",
@@ -303,7 +303,7 @@ device_changed (GdkDeviceManager *device_manager,
 	present = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse_vbox"), present);
 	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
-				show_touchpad_enabling_switch (touchpad_settings));
+				show_touchpad_enabling_switch (d->touchpad_settings));
 }
 
 
