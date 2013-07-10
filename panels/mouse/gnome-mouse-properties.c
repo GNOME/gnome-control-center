@@ -165,6 +165,26 @@ pointer_speed_scale_event (GtkRange *scale, CcMousePropertiesPrivate *d)
 	g_settings_set_int (settings, "motion-threshold", value);
 }
 
+static gboolean
+show_touchpad_enabling_switch (GSettings *touchpad_settings)
+{
+	gboolean enabled;
+
+	if (!touchpad_is_present())
+		return FALSE;
+
+	/* Lets show the button when the mouse/touchscreen is present */
+	if (mouse_is_present() || touchscreen_is_present())
+		return TRUE;
+	
+	/* Lets also show when touch pad is disabled. */
+	enabled = g_settings_get_boolean (touchpad_settings,  "touchpad-enabled");
+	if (!enabled)
+		return TRUE;
+	
+	return FALSE;
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePropertiesPrivate *d)
@@ -200,7 +220,8 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	/* Trackpad page */
 	touchpad_present = touchpad_is_present ();
 	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_present);
-	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), mouse_present);
+	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
+				show_touchpad_enabling_switch (touchpad_settings));
 
 	g_settings_bind (d->touchpad_settings, "touchpad-enabled",
 			 WID ("touchpad_enabled_switch"), "active",
@@ -281,7 +302,8 @@ device_changed (GdkDeviceManager *device_manager,
 
 	present = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse_vbox"), present);
-	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), present);
+	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
+				show_touchpad_enabling_switch (touchpad_settings));
 }
 
 
