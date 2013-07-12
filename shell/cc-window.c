@@ -1441,6 +1441,8 @@ create_header (CcWindow *self)
   g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
 
   priv->lock_button = gtk_lock_button_new (NULL);
+  gtk_style_context_add_class (gtk_widget_get_style_context (priv->lock_button),
+                               "text-button");
   gtk_widget_set_no_show_all (button, TRUE);
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
 }
