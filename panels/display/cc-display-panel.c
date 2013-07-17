@@ -1742,6 +1742,13 @@ set_primary_output (CcDisplayPanel *self,
 }
 
 static void
+grab_weak_ref_notify (gpointer  area,
+                      GObject  *object)
+{
+  foo_scroll_area_end_grab (area, NULL);
+}
+
+static void
 on_output_event (FooScrollArea *area,
                  FooScrollAreaEvent *event,
                  gpointer data)
@@ -1783,6 +1790,7 @@ on_output_event (FooScrollArea *area,
 	  gnome_rr_output_info_get_geometry (output, &output_x, &output_y, NULL, NULL);
 
 	  foo_scroll_area_begin_grab (area, on_output_event, data);
+	  g_object_weak_ref (data, grab_weak_ref_notify, area);
 
 	  info = g_new0 (GrabInfo, 1);
 	  info->grab_x = event->x;
@@ -1855,6 +1863,7 @@ on_output_event (FooScrollArea *area,
 
 	      g_free (g_object_get_data (G_OBJECT (output), "grab-info"));
 	      g_object_set_data (G_OBJECT (output), "grab-info", NULL);
+	      g_object_weak_unref (data, grab_weak_ref_notify, area);
 
 #if 0
               g_debug ("new position: %d %d %d %d", output->x, output->y, output->width, output->height);
