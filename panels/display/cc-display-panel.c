@@ -1829,7 +1829,7 @@ on_output_event (FooScrollArea *area,
 
 	  g_array_sort (snaps, compare_snaps);
 
-	  gnome_rr_output_info_set_geometry (output, new_x, new_y, width, height);
+	  gnome_rr_output_info_set_geometry (output, old_x, old_y, width, height);
 
 	  for (i = 0; i < snaps->len; ++i)
 	    {
