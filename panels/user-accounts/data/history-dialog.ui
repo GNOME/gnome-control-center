@@ -56,22 +56,20 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="previous-button-atkobject">
-                        <property name="accessible-name" translatable="yes">Previous Week</property>
-                      </object>
-                    </child>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
                     <child>
-                      <object class="GtkArrow" id="arrow1">
+                      <object class="GtkImage" id="previous-image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="arrow_type">left</property>
                       </object>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -94,26 +92,20 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="next-button-atkobject">
-                        <property name="accessible-name" translatable="yes">Next Week</property>
-                      </object>
-                    </child>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
                     <child>
-                      <object class="GtkArrow" id="arrow2">
+                      <object class="GtkImage" id="next-image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="arrow2-atkobject">
-                            <property name="accessible-name" translatable="yes">Next week</property>
-                          </object>
-                        </child>
+                        <property name="valign">center</property>
                       </object>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
