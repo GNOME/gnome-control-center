@@ -1338,6 +1338,12 @@ list_edges_for_output (GnomeRROutputInfo *output, GArray *edges)
 
   gnome_rr_output_info_get_geometry (output, &x, &y, &w, &h);
 
+  if (!gnome_rr_output_info_is_active (output))
+    {
+      h = gnome_rr_output_info_get_preferred_height (output);
+      w = gnome_rr_output_info_get_preferred_width (output);
+    }
+
   apply_rotation_to_geometry (output, &w, &h);
 
   /* Top, Bottom, Left, Right */
@@ -1537,6 +1543,12 @@ static void
 get_output_rect (GnomeRROutputInfo *output, GdkRectangle *rect)
 {
   gnome_rr_output_info_get_geometry (output, &rect->x, &rect->y, &rect->width, &rect->height);
+
+  if (!gnome_rr_output_info_is_active (output))
+    {
+      rect->width = gnome_rr_output_info_get_preferred_width (output);
+      rect->height = gnome_rr_output_info_get_preferred_height (output);
+    }
 
   apply_rotation_to_geometry (output, &rect->width, &rect->height);
 }
