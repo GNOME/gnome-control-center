@@ -64,8 +64,10 @@
                     <property name="yalign">0</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes"></property>
+                    <property name="width-chars">35</property>
+                    <property name="max-width-chars">35</property>
+                    <property name="height-request">50</property>
                     <property name="wrap">True</property>
-                    <property name="hexpand">True</property>
                     <property name="wrap_mode">word-char</property>
                     <style>
                       <class name="dim-label"/>
@@ -86,7 +88,7 @@
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-username</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -115,7 +117,7 @@
                     <property name="label" translatable="yes">_Full Name</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-name</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -149,7 +151,7 @@
                     <property name="label" translatable="yes">Account _Type</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-account-type</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -224,7 +226,7 @@
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-password</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -255,114 +257,105 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkGrid" id="grid2">
+                  <object class="GtkLevelBar" id="local-strength-indicator">
                     <property name="visible">True</property>
-                    <property name="hexpand">True</property>
-                    <property name="column_spacing">6</property>
-                    <child>
-                      <object class="GtkLabel" id="label3">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
-                        <property name="label" translatable="yes">_Confirm Password</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">local-verify</property>
-                        <property name="margin_left">25</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="local-verify">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="visibility">False</property>
-                        <property name="invisible_char">●</property>
-                        <property name="invisible_char_set">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="activates_default">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="local-hint">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="yalign">0</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes"></property>
-                        <property name="wrap">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="wrap_mode">word-char</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                        <attributes>
-                          <attribute name="scale" value="0.83"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
-                      </packing>
-                    </child>
+                    <property name="mode">discrete</property>
+                    <property name="max-value">4</property>
+                    <offsets>
+                      <offset name="low" value="1"/>
+                      <offset name="high" value="3"/>
+                    </offsets>
                   </object>
                   <packing>
-                    <property name="left_attach">0</property>
+                    <property name="left_attach">1</property>
                     <property name="top_attach">7</property>
-                    <property name="width">2</property>
+                    <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="box17">
+                  <object class="GtkLabel" id="local-hint">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkLabel" id="local-strength">
-                        <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes"></property>
-                        <attributes>
-                          <attribute name="scale" value="0.83"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLevelBar" id="local-strength-indicator">
-                        <property name="visible">True</property>
-                        <property name="mode">discrete</property>
-                        <property name="max-value">4</property>
-                        <offsets>
-                          <offset name="low" value="1"/>
-                          <offset name="high" value="3"/>
-                        </offsets>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="can_focus">False</property>
+                    <property name="yalign">0</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes"></property>
+                    <property name="width-chars">35</property>
+                    <property name="max-width-chars">35</property>
+                    <property name="height-request">50</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap_mode">word-char</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="0.83"/>
+                    </attributes>
                   </object>
                   <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">6</property>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">8</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">_Verify</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">local-verify</property>
+                    <property name="margin_left">12</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">9</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="local-verify">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="visibility">False</property>
+                    <property name="invisible_char">●</property>
+                    <property name="invisible_char_set">True</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">9</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="local-verify-hint">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="yalign">0</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes"></property>
+                    <property name="width-chars">35</property>
+                    <property name="max-width-chars">35</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap_mode">word-char</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="0.83"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">10</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -384,6 +377,7 @@
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
                     <property name="margin_bottom">12</property>
+                    <property name="max_width_chars">55</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -391,7 +385,7 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
-                    <property name="width">3</property>
+                    <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -403,7 +397,7 @@
                     <property name="label" translatable="yes">_Domain</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise-domain</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -420,10 +414,10 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">_Login Name</property>
+                    <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise-login</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -440,10 +434,10 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Login _Password</property>
+                    <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise-password</property>
-                    <property name="margin_left">25</property>
+                    <property name="margin_left">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -469,7 +463,7 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">4</property>
-                    <property name="width">3</property>
+                    <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -488,33 +482,6 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="box18">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkAlignment" id="alignment1">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkSpinner" id="enterprise-spinner">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">start</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
                     <property name="top_attach">1</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
@@ -573,6 +540,7 @@
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
                     <property name="margin_bottom">12</property>
+                    <property name="max_width_chars">55</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -580,7 +548,7 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
-                    <property name="width">3</property>
+                    <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -598,7 +566,7 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">3</property>
+                    <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -619,7 +587,7 @@ enterprise login accounts.</property>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
-                    <property name="width">3</property>
+                    <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -732,7 +700,7 @@ type their domain password here.</property>
               <object class="GtkGrid" id="grid1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">25</property>
+                <property name="margin_left">12</property>
                 <property name="hexpand">True</property>
                 <property name="row_spacing">6</property>
                 <property name="column_spacing">12</property>
@@ -796,6 +764,7 @@ type their domain password here.</property>
                     <property name="hexpand">True</property>
                     <property name="invisible_char">●</property>
                     <property name="invisible_char_set">True</property>
+                    <property name="activates_default">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -883,12 +852,6 @@ type their domain password here.</property>
       <widget name="enterprise-domain"/>
       <widget name="enterprise-login"/>
       <widget name="enterprise-password"/>
-    </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
-    <widgets>
-      <widget name="box18"/>
-      <widget name="box17"/>
     </widgets>
   </object>
 </interface>

@@ -71,7 +71,6 @@ update_password_strength (UmPasswordDialog *um)
         gint strength_level;
         const gchar *hint;
         const gchar *long_hint;
-        const gchar *strength_hint;
 
         if (um->user == NULL) {
                 return 0;
