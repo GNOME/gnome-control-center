@@ -93,7 +93,7 @@ um_photo_dialog_crop (UmPhotoDialog *um,
         dialog = gtk_dialog_new_with_buttons ("",
                                               GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
                                               0,
-                                              GTK_STOCK_CANCEL,
+                                              _("_Cancel"),
                                               GTK_RESPONSE_REJECT,
                                               _("Select"),
                                               GTK_RESPONSE_ACCEPT,
@@ -197,9 +197,9 @@ update_preview (GtkFileChooser               *chooser,
                         g_object_unref (pixbuf);
                 }
                 else {
-                        gtk_image_set_from_stock (GTK_IMAGE (preview),
-                                                  GTK_STOCK_DIALOG_QUESTION,
-                                                  GTK_ICON_SIZE_DIALOG);
+                        gtk_image_set_from_icon_name (GTK_IMAGE (preview),
+                                                      "dialog-question",
+                                                      GTK_ICON_SIZE_DIALOG);
                 }
 
                 g_free (uri);
@@ -218,8 +218,8 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
         chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
                                                GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
                                                GTK_FILE_CHOOSER_ACTION_OPEN,
-                                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                               GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                               _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                               _("_Open"), GTK_RESPONSE_ACCEPT,
                                                NULL);
 
         gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);

@@ -284,9 +284,9 @@ set_entry_validation_error (GtkEntry    *entry,
                             const gchar *text)
 {
         g_object_set (entry, "caps-lock-warning", FALSE, NULL);
-        gtk_entry_set_icon_from_stock (entry,
-                                       GTK_ENTRY_ICON_SECONDARY,
-                                       GTK_STOCK_CAPS_LOCK_WARNING);
+        gtk_entry_set_icon_from_icon_name (entry,
+                                           GTK_ENTRY_ICON_SECONDARY,
+                                           "dialog-warning-symbolic");
         gtk_entry_set_icon_activatable (entry,
                                         GTK_ENTRY_ICON_SECONDARY,
                                         TRUE);
