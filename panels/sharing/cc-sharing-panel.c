@@ -113,7 +113,7 @@ cc_sharing_panel_constructed (GObject *object)
 
   /* add the master switch */
   cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                   priv->master_switch);
+                                   gtk_widget_get_parent (priv->master_switch));
 }
 
 static void
@@ -957,6 +957,7 @@ static void
 cc_sharing_panel_init (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv = PANEL_PRIVATE (self);
+  GtkWidget *box;
   GError *err = NULL;
   gchar *objects[] = {
       "sharing-panel",
@@ -1013,8 +1014,12 @@ cc_sharing_panel_init (CcSharingPanel *self)
                                 NULL, NULL);
 
   /* create the master switch */
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+
   priv->master_switch = gtk_switch_new ();
-  gtk_widget_show (priv->master_switch);
+  gtk_widget_set_valign (priv->master_switch, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), priv->master_switch, FALSE, FALSE, 4);
+  gtk_widget_show_all (box);
 
   /* start the panel in the disabled state */
   gtk_switch_set_active (GTK_SWITCH (priv->master_switch), FALSE);
