@@ -1199,7 +1199,7 @@ switch_hotspot_changed_cb (GtkSwitch *sw,
                                          GTK_BUTTONS_NONE,
                                          _("Stop hotspot and disconnect any users?"));
         gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                _("_Cancel"), GTK_RESPONSE_CANCEL,
                                 _("_Stop Hotspot"), GTK_RESPONSE_OK,
                                 NULL);
         g_signal_connect (dialog, "response",
@@ -1405,7 +1405,7 @@ forget_selected (GtkButton *forget, NetDeviceWifi *device_wifi)
                                        _("Network details for the selected networks, including passwords and any custom configuration will be lost."));
 
         gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                _("_Cancel"), GTK_RESPONSE_CANCEL,
                                 _("_Forget"), GTK_RESPONSE_OK,
                                 NULL);
         g_signal_connect (dialog, "response",
@@ -1716,7 +1716,7 @@ open_history (NetDeviceWifi *device_wifi)
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 400);
 
-        button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+        button = gtk_button_new_with_mnemonic (_("_Close"));
         gtk_widget_set_can_default (button, TRUE);
         gtk_widget_show (button);
         gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, 0);
