@@ -352,7 +352,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), BRANDED_PAGE);
 
-  gtk_dialog_add_button (GTK_DIALOG (add_account), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+  gtk_dialog_add_button (GTK_DIALOG (add_account), _("_Cancel"), GTK_RESPONSE_CANCEL);
   gtk_dialog_set_default_response (GTK_DIALOG (add_account), GTK_RESPONSE_CANCEL);
 }
 

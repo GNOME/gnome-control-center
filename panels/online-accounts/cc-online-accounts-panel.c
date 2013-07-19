@@ -482,7 +482,7 @@ show_page_account (CcGoaPanel  *panel,
       gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_HORIZONTAL);
       gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_SMALL_TOOLBAR);
+      image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_SMALL_TOOLBAR);
       gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
       gtk_container_add (GTK_CONTAINER (grid), image);
 
