@@ -628,8 +628,8 @@ show_confirm_dialog (CcBluetoothPanel *self,
 		      _("If you remove the device, you will have to set it up again before next use."),
 		      NULL);
 
-	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_ACCEPT);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
