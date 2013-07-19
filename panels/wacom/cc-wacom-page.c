@@ -981,7 +981,7 @@ display_mapping_button_clicked_cb (GtkButton   *button,
 	priv->dialog = gtk_dialog_new_with_buttons (_("Display Mapping"),
 						    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))),
 						    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						    GTK_STOCK_CLOSE,
+						    _("_Close"),
 						    GTK_RESPONSE_ACCEPT,
 						    NULL);
 	priv->mapping = cc_wacom_mapping_panel_new ();
