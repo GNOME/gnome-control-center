@@ -488,7 +488,7 @@ construct_widget (PpPPDOptionWidget *widget)
 
       priv->image = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_MENU);
       if (!priv->image)
-        priv->image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_MENU);
+        priv->image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
       gtk_box_pack_start (GTK_BOX (widget), priv->image, FALSE, FALSE, 0);
       gtk_widget_set_no_show_all (GTK_WIDGET (priv->image), TRUE);
 
