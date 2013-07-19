@@ -709,7 +709,7 @@ up_client_changed (UpClient     *client,
                 "power-supply", TRUE,
                 "is-present", TRUE,
                 NULL);
-  for (i = 0; i < devices->len; i++)
+  for (i = 0; devices != NULL && i < devices->len; i++)
     {
       UpDevice *device = (UpDevice*) g_ptr_array_index (devices, i);
       g_object_get (device,
@@ -776,7 +776,7 @@ up_client_changed (UpClient     *client,
   if (!on_ups && n_batteries > 1)
     set_primary (self, composite);
 
-  for (i = 0; i < devices->len; i++)
+  for (i = 0; devices != NULL && i < devices->len; i++)
     {
       UpDevice *device = (UpDevice*) g_ptr_array_index (devices, i);
       g_object_get (device, "kind", &kind, NULL);
@@ -802,7 +802,7 @@ up_client_changed (UpClient     *client,
         }
     }
 
-  g_ptr_array_unref (devices);
+  g_clear_pointer (&devices, g_ptr_array_unref);
   g_object_unref (composite);
 }
 
@@ -1014,7 +1014,7 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   devices = up_client_get_devices (self->priv->up_client);
   g_debug ("got %d devices from upower\n", devices->len);
 
-  for (i = 0; i < devices->len; i++)
+  for (i = 0; devices != NULL && i < devices->len; i++)
     {
       device = g_ptr_array_index (devices, i);
       g_object_get (device, "kind", &kind, NULL);
@@ -1024,7 +1024,7 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
           break;
         }
     }
-  g_ptr_array_unref (devices);
+  g_clear_pointer (&devices, g_ptr_array_unref);
 
 #ifdef TEST_NO_BATTERIES
   g_print ("forcing no batteries\n");
