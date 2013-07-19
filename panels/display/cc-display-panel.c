@@ -38,6 +38,7 @@
 #include <gdesktop-enums.h>
 
 #include "cc-rr-labeler.h"
+#include <libupower-glib/upower.h>
 
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
@@ -97,6 +98,9 @@ struct _CcDisplayPanelPrivate
 
   /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
   GDBusProxy *proxy;
+
+  UpClient *up_client;
+  gboolean lid_is_closed;
 };
 
 typedef struct
@@ -151,6 +155,10 @@ cc_display_panel_set_property (GObject      *object,
 static void
 cc_display_panel_dispose (GObject *object)
 {
+  CcDisplayPanelPrivate *priv = CC_DISPLAY_PANEL (object)->priv;
+
+  g_clear_object (&priv->up_client);
+
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }
 
@@ -693,7 +701,20 @@ rebuild_on_off_radios (CcDisplayPanel *self)
 
   if (!gnome_rr_config_get_clone (self->priv->current_configuration) && self->priv->current_output)
     {
-      if (count_active_outputs (self) > 1 || !gnome_rr_output_info_is_active (self->priv->current_output))
+      gboolean display_closed = FALSE;
+
+      if (self->priv->lid_is_closed)
+        {
+          GnomeRROutput *output;
+
+          output = gnome_rr_screen_get_output_by_name (self->priv->screen,
+                                                       gnome_rr_output_info_get_name (self->priv->current_output));
+
+          display_closed = gnome_rr_output_is_builtin_display (output);
+        }
+
+      if ((count_active_outputs (self) > 1 || !gnome_rr_output_info_is_active (self->priv->current_output))
+          && !display_closed)
         sensitive = TRUE;
       else
         sensitive = FALSE;
@@ -2599,6 +2620,23 @@ cc_display_panel_init (CcDisplayPanel *self)
   g_resources_register (cc_display_get_resource ());
 }
 
+static void
+cc_display_panel_up_client_changed (UpClient       *client,
+                                    CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = self->priv;
+  gboolean lid_is_closed;
+
+  lid_is_closed = up_client_get_lid_is_closed (client);
+
+  if (lid_is_closed != priv->lid_is_closed)
+    {
+      priv->lid_is_closed = lid_is_closed;
+
+      rebuild_on_off_radios (self);
+    }
+}
+
 static GObject *
 cc_display_panel_constructor (GType                  gtype,
                               guint                  n_properties,
@@ -2702,6 +2740,22 @@ cc_display_panel_constructor (GType                  gtype,
 
   gtk_widget_show (self->priv->panel);
   gtk_container_add (GTK_CONTAINER (self), self->priv->panel);
+
+  self->priv->up_client = up_client_new ();
+  if (up_client_get_lid_is_present (self->priv->up_client))
+    {
+      /* Connect to the "changed" signal to track changes to "lid-is-closed"
+       * property. Connecting to "notify::lid-is-closed" would be preferable,
+       * but currently doesn't work as expected:
+       * https://bugs.freedesktop.org/show_bug.cgi?id=43001
+       */
+
+      g_signal_connect (self->priv->up_client, "changed",
+                        G_CALLBACK (cc_display_panel_up_client_changed), self);
+      cc_display_panel_up_client_changed (self->priv->up_client, self);
+    }
+  else
+    g_clear_object (&self->priv->up_client);
 
   return obj;
 }
