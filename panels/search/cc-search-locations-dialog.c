@@ -679,8 +679,8 @@ add_button_clicked (GtkWidget *widget,
   file_chooser = gtk_file_chooser_dialog_new (_("Select Location"),
                                               GTK_WINDOW (gtk_widget_get_toplevel (widget)),
                                               GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OK, GTK_RESPONSE_OK,
+                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                              _("_OK"), GTK_RESPONSE_OK,
                                               NULL);
   gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
   g_signal_connect (file_chooser, "response",

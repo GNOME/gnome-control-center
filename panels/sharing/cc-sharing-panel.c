@@ -422,8 +422,8 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
   dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
                                         GTK_WINDOW (gtk_widget_get_toplevel (button)),
                                         GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                        GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                        _("_Open"), GTK_RESPONSE_ACCEPT,
                                         NULL);
   gtk_dialog_run (GTK_DIALOG (dialog));
 
