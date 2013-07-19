@@ -440,7 +440,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
                                   "gicon", 0,
                                   NULL);
 
-  gtk_dialog_add_button (GTK_DIALOG (chooser), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+  gtk_dialog_add_button (GTK_DIALOG (chooser), _("_Cancel"), GTK_RESPONSE_CANCEL);
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("Select"), GTK_RESPONSE_OK);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_OK, FALSE);
