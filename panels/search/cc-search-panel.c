@@ -612,7 +612,8 @@ cc_search_panel_constructed (GObject *object)
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   widget = gtk_switch_new ();
-  gtk_container_add (GTK_CONTAINER (box), widget);
+  gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
 
   g_settings_bind (self->priv->search_settings, "disable-external",
                    widget, "active",
