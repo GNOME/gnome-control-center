@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-12 08:22+0000\n"
-"PO-Revision-Date: 2013-07-05 01:20+0100\n"
+"POT-Creation-Date: 2013-07-19 16:17+0000\n"
+"PO-Revision-Date: 2013-07-19 17:33+0100\n"
 "Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.7\n"
 
 # Wechselndes Hintergrundbild
 #. This refers to a slideshow background
@@ -106,6 +106,25 @@ msgstr ""
 "Sie können Bilder zu Ihrem %s-Ordner hinzufügen und diese werden hier "
 "auftauchen"
 
+#: ../panels/background/cc-background-chooser-dialog.c:443
+#: ../panels/bluetooth/cc-bluetooth-panel.c:631
+#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/network/connection-editor/vpn-helpers.c:245
+#: ../panels/network/connection-editor/vpn-helpers.c:374
+#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1408
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/search/cc-search-locations-dialog.c:682
+#: ../panels/sharing/cc-sharing-panel.c:425
+#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-photo-dialog.c:96
+#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-user-panel.c:508
+msgid "_Cancel"
+msgstr "Abbre_chen"
+
 #: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
@@ -175,7 +194,7 @@ msgstr "Seite 2"
 msgid "Paired"
 msgstr "Gekoppelt"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:850
 msgid "Type"
 msgstr "Typ"
 
@@ -192,7 +211,6 @@ msgid "Mouse & Touchpad Settings"
 msgstr "Einstellungen für Maus und Touchpad"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
-#: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Klangeinstellungen"
 
@@ -246,6 +264,11 @@ msgid ""
 msgstr ""
 "Falls Sie das Gerät entfernen, müssen Sie es vor der nächsten Benutzung "
 "erneut konfigurieren."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:632
+#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+msgid "_Remove"
+msgstr "Entfe_rnen"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth"
@@ -464,6 +487,11 @@ msgstr ""
 #: ../panels/color/cc-color-panel.c:964
 msgid "Save Profile"
 msgstr "Profil speichern"
+
+#: ../panels/color/cc-color-panel.c:968
+#: ../panels/network/connection-editor/vpn-helpers.c:375
+msgid "_Save"
+msgstr "_Speichern"
 
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:1328
@@ -726,7 +754,7 @@ msgstr ""
 "\">Microsoft Windows</a> eingesetzt wird."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+#: ../panels/user-accounts/um-fingerprint-dialog.c:742
 msgid "Summary"
 msgstr "Zusammenfassung"
 
@@ -1090,22 +1118,22 @@ msgstr ""
 "Um die Einstellungen für Zeit und Datum zu ändern, müssen Sie sich "
 "legitimieren."
 
-#: ../panels/display/cc-display-panel.c:483
+#: ../panels/display/cc-display-panel.c:491
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/display/cc-display-panel.c:484
+#: ../panels/display/cc-display-panel.c:492
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Gegen den Uhrzeigersinn"
 
-#: ../panels/display/cc-display-panel.c:485
+#: ../panels/display/cc-display-panel.c:493
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "Im Uhrzeigersinn"
 
-#: ../panels/display/cc-display-panel.c:486
+#: ../panels/display/cc-display-panel.c:494
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 Grad"
@@ -1123,21 +1151,21 @@ msgstr "180 Grad"
 #. * Here, "Mirrored" is being used as an adjective.  For example,
 #. * the Spanish translation could be "Pantallas en Espejo".
 #.
-#: ../panels/display/cc-display-panel.c:625
+#: ../panels/display/cc-display-panel.c:633
 #: ../panels/display/cc-rr-labeler.c:418
 msgid "Mirrored Displays"
 msgstr "Gespiegelte Bildschirme"
 
-#: ../panels/display/cc-display-panel.c:649
+#: ../panels/display/cc-display-panel.c:657
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "Bildschirm"
 
-#: ../panels/display/cc-display-panel.c:1669
+#: ../panels/display/cc-display-panel.c:1702
 msgid "Drag to change primary display."
 msgstr "Ziehen Sie, um den primären Bildschirm zu ändern."
 
-#: ../panels/display/cc-display-panel.c:1727
+#: ../panels/display/cc-display-panel.c:1760
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -1146,30 +1174,30 @@ msgstr ""
 "ihn, um ihn neu zu platzieren."
 
 # Vermutlich strftime
-#: ../panels/display/cc-display-panel.c:2115
+#: ../panels/display/cc-display-panel.c:2157
 msgid "%a %R"
 msgstr "%a %R"
 
 # Vermutlich strftime
-#: ../panels/display/cc-display-panel.c:2117
+#: ../panels/display/cc-display-panel.c:2159
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../panels/display/cc-display-panel.c:2279
-#: ../panels/display/cc-display-panel.c:2331
+#: ../panels/display/cc-display-panel.c:2321
+#: ../panels/display/cc-display-panel.c:2373
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "Konfiguration konnte nicht angewendet werden: %s"
 
-#: ../panels/display/cc-display-panel.c:2359
+#: ../panels/display/cc-display-panel.c:2401
 msgid "Could not save the monitor configuration"
 msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 
-#: ../panels/display/cc-display-panel.c:2419
+#: ../panels/display/cc-display-panel.c:2461
 msgid "Could not detect displays"
 msgstr "Anzeigen konnten nicht erkannt werden"
 
-#: ../panels/display/cc-display-panel.c:2614
+#: ../panels/display/cc-display-panel.c:2673
 msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
 
@@ -1512,7 +1540,7 @@ msgstr "Auswerfen"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "Texteingabe"
 
@@ -1972,11 +2000,11 @@ msgstr "Einfacher Klick, sekundäre Taste"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:364
+#: ../panels/network/cc-network-panel.c:347
 msgid "Air_plane Mode"
 msgstr "_Flugzeugmodus"
 
-#: ../panels/network/cc-network-panel.c:927
+#: ../panels/network/cc-network-panel.c:913
 msgid "Network proxy"
 msgstr "Netzwerk-Proxy"
 
@@ -1984,14 +2012,14 @@ msgstr "Netzwerk-Proxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/cc-network-panel.c:1092 ../panels/network/net-vpn.c:285
 #: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1241
+#: ../panels/network/cc-network-panel.c:1227
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Die Netzwerkdienste des Systems sind mit dieser Version nicht kompatibel."
@@ -2526,6 +2554,13 @@ msgstr ""
 msgid "Select file to import"
 msgstr "Wählren Sie die Datei zum Importieren"
 
+#: ../panels/network/connection-editor/vpn-helpers.c:246
+#: ../panels/printers/cc-printers-panel.c:1947
+#: ../panels/sharing/cc-sharing-panel.c:426
+#: ../panels/user-accounts/um-photo-dialog.c:222
+msgid "_Open"
+msgstr "Ö_ffnen"
+
 #: ../panels/network/connection-editor/vpn-helpers.c:294
 #, c-format
 msgid "A file named \"%s\" already exists."
@@ -2654,7 +2689,7 @@ msgstr "Kabelgebunden"
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
+#: ../panels/network/network-vpn.ui.h:8
 msgid "Options…"
 msgstr "Optionen …"
 
@@ -2717,6 +2752,12 @@ msgstr ""
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Chronik"
+
+#: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:10 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/wacom/cc-wacom-page.c:984
+msgid "_Close"
+msgstr "S_chließen"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: ../panels/network/net-device-wifi.c:1727
@@ -2875,7 +2916,6 @@ msgid "_Password"
 msgstr "_Passwort"
 
 #: ../panels/network/network-wifi.ui.h:18
-#: ../panels/universal-access/uap.ui.h:8
 msgid "None"
 msgstr "Keine"
 
@@ -3572,6 +3612,9 @@ msgstr "Details im Sperrbildschirm zeigen"
 #: ../panels/power/cc-power-panel.c:1625 ../panels/power/cc-power-panel.c:1632
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
 msgid "On"
 msgstr "An"
 
@@ -3579,6 +3622,10 @@ msgstr "An"
 #: ../panels/power/cc-power-panel.c:1619 ../panels/power/cc-power-panel.c:1630
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
+#: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Aus"
 
@@ -3658,10 +3705,6 @@ msgstr "Sind Sie sicher, dass Sie dieses Konto löschen wollen?"
 #: ../panels/online-accounts/cc-online-accounts-panel.c:825
 msgid "This will not remove the account on the server."
 msgstr "Dadurch wird Ihr Konto nicht vom Server entfernt."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
-msgid "_Remove"
-msgstr "Entfe_rnen"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:1
 msgid "Online Accounts"
@@ -4032,10 +4075,6 @@ msgstr "12 Minuten"
 msgid "Automatic Suspend"
 msgstr "Automatisch in Bereitschaft gehen"
 
-#: ../panels/power/power.ui.h:21 ../panels/privacy/privacy.ui.h:10
-msgid "_Close"
-msgstr "S_chließen"
-
 #: ../panels/power/power.ui.h:22
 msgid "_Plugged In"
 msgstr "Wenn _angeschlossen"
@@ -4292,11 +4331,6 @@ msgstr "Druckauftrag abbrechen"
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
 msgstr "Einen neuen Drucker hinzufügen"
-
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:501
-msgid "_Cancel"
-msgstr "Abbre_chen"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
 msgid "Search for network printers or filter result"
@@ -4991,6 +5025,10 @@ msgstr "Weitere"
 msgid "Select Location"
 msgstr "Ort wählen"
 
+#: ../panels/search/cc-search-locations-dialog.c:683
+msgid "_OK"
+msgstr "_OK"
+
 #: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "Keine Anwendungen gefunden"
@@ -5438,11 +5476,6 @@ msgstr "Subwoofer"
 msgid "Custom"
 msgstr "Benutzerdefiniert"
 
-#: ../panels/universal-access/cc-ua-panel.c:281
-#: ../panels/universal-access/cc-ua-panel.c:287
-msgid "No shortcut set"
-msgstr "Kein Tastenkürzel zugewiesen"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Sehen, Hören, Tippen, Zeigen und Klicken erleichtern"
@@ -5457,309 +5490,257 @@ msgstr ""
 "Bildschirmleser;Text;Schrift;Größe;AccessX;Klebrige Tasten;Springende Tasten;"
 "Tastaturmaus;"
 
-# Mausempfindlichkeit
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:35
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "Niedrig"
+msgid "Show Status When _Inactive"
+msgstr "Status bei _Inaktivität anzeigen"
 
 #: ../panels/universal-access/uap.ui.h:2
-msgctxt "universal access, contrast"
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:36
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "Hoch"
-
-#: ../panels/universal-access/uap.ui.h:4
-msgctxt "universal access, contrast"
-msgid "High/Inverse"
-msgstr "Hoch, invertiert"
-
-#: ../panels/universal-access/uap.ui.h:5
-msgid "On screen keyboard"
-msgstr "Bildschirmtastatur"
-
-#: ../panels/universal-access/uap.ui.h:6
-msgid "GOK"
-msgstr "GOK"
-
-#: ../panels/universal-access/uap.ui.h:7
-msgid "OnBoard"
-msgstr "AufBildschirm"
-
-#: ../panels/universal-access/uap.ui.h:10
-#, no-c-format
-msgid "75%"
-msgstr "75%"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgctxt "universal access, text size"
-msgid "Small"
-msgstr "Klein"
-
-#: ../panels/universal-access/uap.ui.h:13
-#, no-c-format
-msgid "100%"
-msgstr "100%"
-
-#: ../panels/universal-access/uap.ui.h:14
-msgctxt "universal access, text size"
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/universal-access/uap.ui.h:16
-#, no-c-format
-msgid "125%"
-msgstr "125%"
-
-#: ../panels/universal-access/uap.ui.h:17
-msgctxt "universal access, text size"
-msgid "Large"
-msgstr "Groß"
-
-#: ../panels/universal-access/uap.ui.h:19
-#, no-c-format
-msgid "150%"
-msgstr "150%"
-
-#: ../panels/universal-access/uap.ui.h:20
-msgctxt "universal access, text size"
-msgid "Larger"
-msgstr "Größer"
-
-#: ../panels/universal-access/uap.ui.h:21
-msgid "High Contrast"
-msgstr "Hoher Kontrast"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Beep on Caps and Num Lock"
-msgstr ""
-"Signalton ausgeben, wenn Feststelltaste und Nummerntaste gedrückt werden"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Screen Reader"
-msgstr "Bildschirmleser"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Turn on or off:"
-msgstr "An- oder abschalten:"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgctxt "universal access, zoom"
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Zoom in:"
-msgstr "Ansicht vergrößern:"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Zoom out:"
-msgstr "Ansicht verkleinern:"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Large Text"
-msgstr "Großer Text"
-
-#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "Sehen"
 
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Visual Alerts"
-msgstr "Visuelle Alarme"
+#: ../panels/universal-access/uap.ui.h:3
+msgid "_High Contrast"
+msgstr "_Hoher Kontrast"
 
-#: ../panels/universal-access/uap.ui.h:32
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "Eine visuelle Anzeige auslösen, wenn ein Warnklang abgespielt wird"
+#: ../panels/universal-access/uap.ui.h:4
+msgid "_Large Text"
+msgstr "_Großer Text"
 
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Flash the window title"
-msgstr "Fensterleiste blinken"
+#: ../panels/universal-access/uap.ui.h:5
+msgid "_Zoom"
+msgstr "Ver_größerung"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Flash the entire screen"
-msgstr "Ganzen Bildschirm blinken"
+#: ../panels/universal-access/uap.ui.h:7
+msgid "Screen _Reader"
+msgstr "Bildschirmle_ser"
 
-# Das sagte mir der Google Übersetzer...
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Closed Captioning"
-msgstr "Untertitelung"
+#: ../panels/universal-access/uap.ui.h:8
+msgid "_Sound Keys"
+msgstr "L_autstärkeregelung"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Display a textual description of speech and sounds"
-msgstr "Eine Textbeschreibung von Sprache und Klängen anzeigen"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "_Test flash"
-msgstr "Blinken _testen"
-
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:9
 msgid "Hearing"
 msgstr "Gehör"
 
-#: ../panels/universal-access/uap.ui.h:40
-msgid "On Screen Keyboard"
-msgstr "Bildschirmtastatur"
+#: ../panels/universal-access/uap.ui.h:10
+msgid "_Visual Alerts"
+msgstr "_Visuelle Alarme"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Sticky Keys"
-msgstr "Klebrige Tasten"
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Screen _Keyboard"
+msgstr "Bildschirm_tastatur"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:13
+msgid "_Typing Assist (AccessX)"
+msgstr "_Tippassistent (AccessX)"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Pointing and Clicking"
+msgstr "Zeigen und Klicken"
+
+#: ../panels/universal-access/uap.ui.h:15
+msgid "_Mouse Keys"
+msgstr "Tastatur_maus"
+
+#: ../panels/universal-access/uap.ui.h:16
+msgid "_Click Assist"
+msgstr "_Klickassistent"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgid "Screen Reader"
+msgstr "Bildschirmleser"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr ""
+"Der Bildschirmleser liest den angezeigten Text wenn Sie den Fokus "
+"verschieben."
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Screen Reader"
+msgstr "Bildschirmle_ser"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Sound Keys"
+msgstr "Lautstärkeregelung"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Beep when Num Lock or Caps Lock are turned on."
+msgstr ""
+"Beim Einschalten des Ziffernblocks oder der Feststelltaste einen Signalton "
+"ausgeben."
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Visual Alerts"
+msgstr "Visuelle Alarme"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "Eine visuelle Anzeige auslösen, wenn ein Warnklang abgespielt wird."
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "_Test flash"
+msgstr "Blinken _testen"
+
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Flash the _window title"
+msgstr "Fensterleiste _blinken"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Flash the entire _screen"
+msgstr "Ganzen _Bildschirm blinken"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Typing Assist"
+msgstr "Tippassistent"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "_Sticky Keys"
+msgstr "_Klebrige Tasten"
+
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Erkennt eine Abfolge von Zusatztasten als Tastenkombination"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Disable if two keys are pressed together"
 msgstr "_Deaktivieren, wenn zwei Tasten zusammen gedrückt werden"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Beep when a _modifer key is pressed"
 msgstr "Signalton ausgeben, wenn eine Zusatztaste ge_drückt wird"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "Slow Keys"
-msgstr "Tastenverzögerung"
+#: ../panels/universal-access/uap.ui.h:32
+msgid "S_low Keys"
+msgstr "Tastenver_zögerung"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Setzt eine Verzögerung zwischen dem Drücken und Akzeptieren einer Taste"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:34
 msgid "A_cceptance delay:"
 msgstr "Verzögerung vor _Annahme:"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:35
+msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Kurz"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Slow keys typing delay"
 msgstr "Wert für Tastenverzögerung"
 
-#: ../panels/universal-access/uap.ui.h:50
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:37
+msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Lang"
 
-#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Beep when a key is"
-msgstr "Signalton ausgeben, wenn eine Taste:"
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Beep when a key is pr_essed"
+msgstr "Signalton ausgeben, wenn eine Zusatztaste ge_drückt wird"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:54
-msgid "pressed"
-msgstr "gedrückt"
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Beep when a key is _accepted"
+msgstr "Signalton ausgeben, wenn eine Taste _angenommen wird"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
-msgid "accepted"
-msgstr "akzeptiert"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
-msgid "rejected"
-msgstr "abgewiesen"
-
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Bounce Keys"
-msgstr "Springende Tasten"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Ignores fast duplicate keypresses"
-msgstr "Ignoriert schnelle doppelte Tastenanschläge"
-
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Acc_eptance delay:"
-msgstr "Verzög_erung vor _Annahme:"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Bounce keys typing delay"
-msgstr "Verzögerung für springende Tasten"
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Beep when a key is _rejected"
 msgstr "Signalton ausgeben, wenn eine Taste abgewiesen wi_rd"
 
-#: ../panels/universal-access/uap.ui.h:64
-msgid "Enable by Keyboard"
-msgstr "Per Tastatur aktivieren"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "_Bounce Keys"
+msgstr "_Springende Tasten"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Ignores fast duplicate keypresses"
+msgstr "Ignoriert schnelle doppelte Tastenanschläge"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgctxt "bounce keys delay"
+msgid "Short"
+msgstr "Kurz"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Bounce keys typing delay"
+msgstr "Verzögerung für springende Tasten"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgctxt "bounce keys delay"
+msgid "Long"
+msgstr "Lang"
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "_Enable by Keyboard"
+msgstr "Per _Tastatur aktivieren"
+
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Barrierefreiheitsfunktionen mit der Tastatur ein- bzw. ausschalten"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Mouse Keys"
-msgstr "Tastaturmaus"
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Click Assist"
+msgstr "Klickassistent"
 
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Control the pointer using the keypad"
-msgstr "Mauszeiger per Nummernblock steuern"
+#: ../panels/universal-access/uap.ui.h:49
+msgid "_Simulated Secondary Click"
+msgstr "_Simulierter Kontextklick"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Video Mouse"
-msgstr "Video-Maus"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Control the pointer using the video camera."
-msgstr "Den Zeiger mit der Videokamera steuern."
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Simulated Secondary Click"
-msgstr "Simulierter Kontextklick"
-
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Kontextklick durch Gedrückthalten der primären Maustaste auslösen"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:51
+msgctxt "secondary click"
+msgid "Short"
+msgstr "Kurz"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Secondary click delay"
 msgstr "Verzögerung für Kontextklick"
 
-# CHECK
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Hover Click"
-msgstr "Überfahren-Klick"
+#: ../panels/universal-access/uap.ui.h:53
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "Lang"
 
-#: ../panels/universal-access/uap.ui.h:75
+# CHECK
+#: ../panels/universal-access/uap.ui.h:54
+msgid "_Hover Click"
+msgstr "Sch_webe-Klick"
+
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Trigger a click when the pointer hovers"
 msgstr "Klick ausführen, wenn sich der Mauszeiger nicht mehr bewegt"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:56
 msgid "D_elay:"
 msgstr "_Verzögerung:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:57
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "Kurz"
+
+#: ../panels/universal-access/uap.ui.h:58
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "Lang"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Motion _threshold:"
 msgstr "_Schwellenwert der Bewegung:"
 
-#: ../panels/universal-access/uap.ui.h:78
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:60
+msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Klein"
 
-#: ../panels/universal-access/uap.ui.h:79
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:61
+msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Groß"
-
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Mouse Settings"
-msgstr "Maus-Einstellungen"
-
-#: ../panels/universal-access/uap.ui.h:81
-msgid "Pointing and Clicking"
-msgstr "Zeigen und Klicken"
 
 #: ../panels/universal-access/zoom-options.c:357
 msgctxt "Distance"
@@ -5924,6 +5905,17 @@ msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Hoch"
 
+# Mausempfindlichkeit
+#: ../panels/universal-access/zoom-options.ui.h:35
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Niedrig"
+
+#: ../panels/universal-access/zoom-options.ui.h:36
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "Hoch"
+
 #: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Farbeffekte:"
@@ -6041,7 +6033,7 @@ msgid "Right little finger"
 msgstr "Rechter kleiner Finger"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:700
+#: ../panels/user-accounts/um-fingerprint-dialog.c:699
 msgid "Enable Fingerprint Login"
 msgstr "Anmeldung mit Fingerabdruck freischalten"
 
@@ -6083,18 +6075,6 @@ msgstr ""
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
 msgid "Login History"
 msgstr "Anmeldechronik"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
-msgid "Previous Week"
-msgstr "Vorherige Woche"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
-msgid "Next Week"
-msgstr "Nächste Woche"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:5
-msgid "Next week"
-msgstr "Nächste Woche"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid "C_onfirm New Password"
@@ -6458,7 +6438,7 @@ msgstr "Sollen die registrierten Fingerabdrücke gelöscht werden?"
 msgid "_Delete Fingerprints"
 msgstr "Fingerabdrücke _löschen"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:279
+#: ../panels/user-accounts/um-fingerprint-dialog.c:278
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6466,15 +6446,15 @@ msgstr ""
 "Wollen Sie Ihre registrierten Fingerabdrücke löschen und so eine Anmeldung "
 "per Fingerabdruck verhindern?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:455
+#: ../panels/user-accounts/um-fingerprint-dialog.c:454
 msgid "Done!"
 msgstr "Erledigt!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:516
-#: ../panels/user-accounts/um-fingerprint-dialog.c:558
+#: ../panels/user-accounts/um-fingerprint-dialog.c:515
+#: ../panels/user-accounts/um-fingerprint-dialog.c:557
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Auf Gerät »%s« konnte nicht zugegriffen werden"
@@ -6482,16 +6462,16 @@ msgstr "Auf Gerät »%s« konnte nicht zugegriffen werden"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:599
+#: ../panels/user-accounts/um-fingerprint-dialog.c:598
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Fingerabtastung konnte auf dem Gerät »%s« nicht gestartet werden"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:650
+#: ../panels/user-accounts/um-fingerprint-dialog.c:649
 msgid "Could not access any fingerprint readers"
 msgstr "Es konnte auf kein Lesegerät für Fingerabdrücke zugegriffen werden"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:651
+#: ../panels/user-accounts/um-fingerprint-dialog.c:650
 msgid "Please contact your system administrator for help."
 msgstr "Bitte kontaktieren Sie Ihren Systemadministrator für Hilfe."
 
@@ -6500,7 +6480,7 @@ msgstr "Bitte kontaktieren Sie Ihren Systemadministrator für Hilfe."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:734
+#: ../panels/user-accounts/um-fingerprint-dialog.c:733
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6509,11 +6489,11 @@ msgstr ""
 "Zur Freischaltung der Anmeldung mit Fingerabdruck müssen Sie einen "
 "Fingerabdruck mit dem Gerät »%s« hinterlegen."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:741
+#: ../panels/user-accounts/um-fingerprint-dialog.c:740
 msgid "Selecting finger"
 msgstr "Finger wird ausgewählt"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:742
+#: ../panels/user-accounts/um-fingerprint-dialog.c:741
 msgid "Enrolling fingerprints"
 msgstr "Fingerabdrücke werden registriert"
 
@@ -6586,24 +6566,24 @@ msgstr "Ungültiges Passwort, bitte versuchen Sie es erneut"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Es konnte keine Verbindung mit %s-Domäne hergestellt werden: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:189
+#: ../panels/user-accounts/um-user-panel.c:193
 msgid "Other Accounts"
 msgstr "Weitere Konten"
 
-#: ../panels/user-accounts/um-user-panel.c:405
+#: ../panels/user-accounts/um-user-panel.c:412
 msgid "Failed to delete user"
 msgstr "Benutzer konnte nicht gelöscht werden"
 
-#: ../panels/user-accounts/um-user-panel.c:470
+#: ../panels/user-accounts/um-user-panel.c:477
 msgid "You cannot delete your own account."
 msgstr "Sie können Ihr eigenes Konto nicht löschen."
 
-#: ../panels/user-accounts/um-user-panel.c:479
+#: ../panels/user-accounts/um-user-panel.c:486
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s ist immer noch angemeldet"
 
-#: ../panels/user-accounts/um-user-panel.c:483
+#: ../panels/user-accounts/um-user-panel.c:490
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6611,12 +6591,12 @@ msgstr ""
 "Das Löschen von Benutzern, während sie angemeldet sind, kann das System in "
 "einen inkonsistenten Zustand versetzen."
 
-#: ../panels/user-accounts/um-user-panel.c:492
+#: ../panels/user-accounts/um-user-panel.c:499
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Wollen Sie die Dateien von %s behalten?"
 
-#: ../panels/user-accounts/um-user-panel.c:496
+#: ../panels/user-accounts/um-user-panel.c:503
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6624,44 +6604,44 @@ msgstr ""
 "Es ist möglich, den persönlichen Ordner, die Mail-Warteschlange und die "
 "temporären Dateien zu behalten, wenn ein Benutzerkonto gelöscht wird."
 
-#: ../panels/user-accounts/um-user-panel.c:499
+#: ../panels/user-accounts/um-user-panel.c:506
 msgid "_Delete Files"
 msgstr "_Dateien löschen"
 
-#: ../panels/user-accounts/um-user-panel.c:500
+#: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Keep Files"
 msgstr "Dateien _behalten"
 
-#: ../panels/user-accounts/um-user-panel.c:552
+#: ../panels/user-accounts/um-user-panel.c:559
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto ist deaktiviert"
 
-#: ../panels/user-accounts/um-user-panel.c:560
+#: ../panels/user-accounts/um-user-panel.c:567
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bei der nächsten Anmeldung festlegen"
 
-#: ../panels/user-accounts/um-user-panel.c:563
+#: ../panels/user-accounts/um-user-panel.c:570
 msgctxt "Password mode"
 msgid "None"
 msgstr "Keine"
 
-#: ../panels/user-accounts/um-user-panel.c:612
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Logged in"
 msgstr "Angemeldet"
 
-#: ../panels/user-accounts/um-user-panel.c:987
+#: ../panels/user-accounts/um-user-panel.c:994
 msgid "Failed to contact the accounts service"
 msgstr "Kontendienst konnte nicht kontaktiert werden"
 
-#: ../panels/user-accounts/um-user-panel.c:989
+#: ../panels/user-accounts/um-user-panel.c:996
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Bitte stellen Sie sicher, dass der Kontendienst korrekt installiert und "
 "aktiviert ist."
 
-#: ../panels/user-accounts/um-user-panel.c:1030
+#: ../panels/user-accounts/um-user-panel.c:1037
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6669,12 +6649,12 @@ msgstr ""
 "Um Änderungen vorzunehmen,\n"
 "klicken Sie zuerst auf das Symbol *"
 
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1075
 msgid "Create a user account"
 msgstr "Ein Benutzerkonto erstellen"
 
-#: ../panels/user-accounts/um-user-panel.c:1079
-#: ../panels/user-accounts/um-user-panel.c:1368
+#: ../panels/user-accounts/um-user-panel.c:1086
+#: ../panels/user-accounts/um-user-panel.c:1375
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6682,12 +6662,12 @@ msgstr ""
 "Um ein Benutzerkonto anzulegen,\n"
 "klicken Sie zuerst auf das Symbol *"
 
-#: ../panels/user-accounts/um-user-panel.c:1089
+#: ../panels/user-accounts/um-user-panel.c:1096
 msgid "Delete the selected user account"
 msgstr "Das gewählte Benutzerkonto löschen"
 
-#: ../panels/user-accounts/um-user-panel.c:1101
-#: ../panels/user-accounts/um-user-panel.c:1373
+#: ../panels/user-accounts/um-user-panel.c:1108
+#: ../panels/user-accounts/um-user-panel.c:1380
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6695,7 +6675,7 @@ msgstr ""
 "Um das gewählte Benutzerkonto zu löschen,\n"
 "klicken Sie zuerst auf das Symbol *"
 
-#: ../panels/user-accounts/um-user-panel.c:1283
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "My Account"
 msgstr "Mein Konto"
 
@@ -6781,30 +6761,30 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Bildschirmhilfe zeigen"
 
-#: ../panels/wacom/cc-wacom-page.c:674
+#: ../panels/wacom/cc-wacom-page.c:675
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Nach oben"
 
-#: ../panels/wacom/cc-wacom-page.c:674
+#: ../panels/wacom/cc-wacom-page.c:675
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Nach unten"
 
-#: ../panels/wacom/cc-wacom-page.c:715
+#: ../panels/wacom/cc-wacom-page.c:716
 msgid "Switch Modes"
 msgstr "Modus wechseln"
 
-#: ../panels/wacom/cc-wacom-page.c:805
+#: ../panels/wacom/cc-wacom-page.c:813
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Knopf"
 
-#: ../panels/wacom/cc-wacom-page.c:863
+#: ../panels/wacom/cc-wacom-page.c:871
 msgid "Action"
 msgstr "Aktion"
 
-#: ../panels/wacom/cc-wacom-page.c:973
+#: ../panels/wacom/cc-wacom-page.c:981
 msgid "Display Mapping"
 msgstr "Zuordnung anzeigen"
 
@@ -7104,7 +7084,7 @@ msgctxt "category"
 msgid "System"
 msgstr "System"
 
-#: ../shell/cc-window.c:1429
+#: ../shell/cc-window.c:1434
 msgid "All Settings"
 msgstr "Alle Einstellungen"
 
@@ -7112,499 +7092,56 @@ msgstr "Alle Einstellungen"
 msgid "Preferences;Settings;"
 msgstr "Einstellungen;"
 
-#~ msgid "C_ontent sticks to fingers"
-#~ msgstr "Inhalt _klebt an den Fingern"
+#~ msgid "No shortcut set"
+#~ msgstr "Kein Tastenkürzel zugewiesen"
 
-#~ msgid "Choose password at next login"
-#~ msgstr "Bei der nächsten Anmeldung Passwort wählen"
+#~ msgctxt "universal access, contrast"
+#~ msgid "Normal"
+#~ msgstr "Normal"
 
-#~ msgid "Log in without a password"
-#~ msgstr "Anmeldung ohne Passwort"
+#~ msgctxt "universal access, contrast"
+#~ msgid "High/Inverse"
+#~ msgstr "Hoch, invertiert"
 
-#~ msgid "Disable this account"
-#~ msgstr "Dieses Konto deaktivieren"
+#~ msgid "On screen keyboard"
+#~ msgstr "Bildschirmtastatur"
 
-#~ msgid "Enable this account"
-#~ msgstr "Dieses Konto aktivieren"
+#~ msgid "OnBoard"
+#~ msgstr "AufBildschirm"
 
-#~ msgid "C_onfirm password"
-#~ msgstr "P_asswort bestätigen"
+#~ msgid "75%"
+#~ msgstr "75%"
 
-#~ msgid "Generate a password"
-#~ msgstr "Ein Passwort erzeugen"
+#~ msgid "100%"
+#~ msgstr "100%"
 
-#~ msgid "_Action"
-#~ msgstr "_Aktion"
+#~ msgctxt "universal access, text size"
+#~ msgid "Normal"
+#~ msgstr "Normal"
 
-#~ msgid "Changing password for"
-#~ msgstr "Passwort wird geändert für"
+#~ msgid "125%"
+#~ msgstr "125%"
 
-#~ msgid "_Show password"
-#~ msgstr "Pass_wort zeigen"
+#~ msgid "150%"
+#~ msgstr "150%"
 
-#~ msgid "How to choose a strong password"
-#~ msgstr "Erzeugen eines starken Passworts"
+#~ msgctxt "universal access, text size"
+#~ msgid "Larger"
+#~ msgstr "Größer"
 
-#~ msgid "_Generate a password"
-#~ msgstr "Ein Passwort _erzeugen"
-
-#~ msgid "You need to enter a new password"
-#~ msgstr "Sie müssen ein neues Passwort eingeben"
-
-#~ msgid "The new password is not strong enough"
-#~ msgstr "Das neue Passwort ist zu kurz"
-
-#~ msgid "You need to confirm the password"
-#~ msgstr "Sie müssen das Passwort bestätigen"
-
-#~ msgid "You need to enter your current password"
-#~ msgstr "Sie müssen Ihr aktuelles Passwort eingeben"
-
-#~ msgid "The current password is not correct"
-#~ msgstr "Das aktuelle Passwort ist nicht korrekt"
-
-#~ msgctxt "Password strength"
-#~ msgid "Too short"
-#~ msgstr "Zu kurz"
-
-#~ msgctxt "Password strength"
-#~ msgid "Weak"
-#~ msgstr "Schwach"
-
-#~ msgctxt "Password strength"
-#~ msgid "Fair"
-#~ msgstr "Ausreichend"
-
-#~ msgctxt "Password strength"
-#~ msgid "Good"
-#~ msgstr "Gut"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strong"
-#~ msgstr "Stark"
-
-#~ msgid "Add account"
-#~ msgstr "Konto hinzufügen"
-
-#~ msgid "_Local Account"
-#~ msgstr "_Lokales Konto"
-
-#~ msgid "Tip: Enterprise domain or realm name"
-#~ msgstr "Tipp: Unternehmens-Domäne oder Realm-Name"
-
-#~ msgid "C_ontinue"
-#~ msgstr "_Fortsetzen"
-
-#~ msgctxt "Password strength"
-#~ msgid "Not good enough"
-#~ msgstr "Nicht gut genug"
-
-#~ msgid "Left Shift"
-#~ msgstr "Linke Umschalttaste"
-
-#~ msgid "Left Alt"
-#~ msgstr "Linke Alt-Taste"
-
-#~ msgid "Left Ctrl"
-#~ msgstr "Linke Strg-Taste"
-
-#~ msgid "Right Shift"
-#~ msgstr "Rechte Umschalttaste"
-
-#~ msgid "Right Alt"
-#~ msgstr "Rechte Alt-Taste"
-
-#~ msgid "Right Ctrl"
-#~ msgstr "Rechte Strg-Taste"
-
-#~ msgid "Left Alt+Shift"
-#~ msgstr "Linke Alt-Taste+Umschalttaste"
-
-#~ msgid "Right Alt+Shift"
-#~ msgstr "Rechte Alt-Taste+Umschalttaste"
-
-#~ msgid "Left Ctrl+Shift"
-#~ msgstr "Linke Strg-Taste+Umschalttaste"
-
-#~ msgid "Right Ctrl+Shift"
-#~ msgstr "Rechte Strg-Taste+Umschalttaste"
-
-#~ msgid "Left+Right Shift"
-#~ msgstr "Links+Rechte Umschalttaste"
-
-#~ msgid "Left+Right Ctrl"
-#~ msgstr "Links+Rechte Strg-Taste"
-
-#~ msgid "Alt+Shift"
-#~ msgstr "Alt+Umschalttaste"
-
-#~ msgid "Ctrl+Shift"
-#~ msgstr "Strg+Umschalttaste"
-
-#~ msgid "Alt+Ctrl"
-#~ msgstr "Alt+Strg"
-
-#~ msgid "Caps"
-#~ msgstr "Feststelltaste"
-
-#~ msgid "Shift+Caps"
-#~ msgstr "Umschalttaste+Feststelltaste"
-
-#~ msgid "Alt+Caps"
-#~ msgstr "Alt+Feststelltaste"
-
-#~ msgid "Ctrl+Caps"
-#~ msgstr "Strg+Feststelltaste"
-
-#~ msgid "Export"
-#~ msgstr "Exportieren"
-
-#~ msgctxt "mouse, speed"
-#~ msgid "Slow"
-#~ msgstr "Langsam"
-
-#~ msgctxt "mouse, speed"
-#~ msgid "Fast"
-#~ msgstr "Schnell"
-
-#~ msgid "_Options…"
-#~ msgstr "_Optionen …"
-
-#~ msgid "blablabla"
-#~ msgstr "blablabla"
-
-#~ msgid ""
-#~ "Address\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
+#~ msgid "Beep on Caps and Num Lock"
 #~ msgstr ""
-#~ "Adressen-\n"
-#~ "Abschnitt\n"
-#~ "gehört\n"
-#~ "hierhin"
+#~ "Signalton ausgeben, wenn Feststelltaste und Nummerntaste gedrückt werden"
 
-#~ msgid ""
-#~ "DNS\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "DNS-\n"
-#~ "Abschnitt\n"
-#~ "gehört\n"
-#~ "hierhin"
+#~ msgid "Turn on or off:"
+#~ msgstr "An- oder abschalten:"
 
-#~ msgid ""
-#~ "Routes\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "Routen-\n"
-#~ "Abschnitt\n"
-#~ "gehört\n"
-#~ "hierhin"
+#~ msgctxt "universal access, zoom"
+#~ msgid "Zoom"
+#~ msgstr "Zoom"
 
-#~ msgid "00:24:16:31:8G:7A"
-#~ msgstr "00:24:16:31:8G:7A"
+#~ msgid "Zoom in:"
+#~ msgstr "Ansicht vergrößern:"
 
-#~ msgctxt "Input source"
-#~ msgid "None"
-#~ msgstr "Keine"
-
-#~ msgid "Expired credentials. Please log in again."
-#~ msgstr ""
-#~ "Anmeldeinformationen sind abgelaufen. Bitte melden Sie sich erneut an."
-
-#~ msgid "_Log In"
-#~ msgstr "Anme_lden"
-
-#~ msgid "Change the background"
-#~ msgstr "Den Hintergrund ändern"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "Bluetooth-Einstellungen bearbeiten"
-
-#~ msgctxt "Power"
-#~ msgid "Bluetooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Color management settings"
-#~ msgstr "Einstellungen der Farbverwaltung"
-
-#~ msgid "British English"
-#~ msgstr "Britisches Englisch"
-
-#~ msgid "Spanish"
-#~ msgstr "Spanisch"
-
-#~ msgid "Chinese (simplified)"
-#~ msgstr "Vereinfachtes Chinesisch"
-
-#~ msgid "Select a region"
-#~ msgstr "Region auswählen"
-
-#~ msgid "Select a language"
-#~ msgstr "Sprache auswählen"
-
-#~ msgid "_Select"
-#~ msgstr "Aus_wählen"
-
-#~ msgid "Date and Time preferences panel"
-#~ msgstr "Einstellungen für Datum und Zeit"
-
-#~ msgid "System Information"
-#~ msgstr "Systeminformationen"
-
-#~ msgid "Change keyboard settings"
-#~ msgstr "Tastatureinstellungen ändern"
-
-#~ msgid "Layout Settings"
-#~ msgstr "Belegungseinstellungen"
-
-#~ msgid "Set your mouse and touchpad preferences"
-#~ msgstr "Einstellungen für Maus und Touchpad festlegen"
-
-#~ msgid "Network settings"
-#~ msgstr "Netzwerkeinstellungen"
-
-#~ msgid "Carrier/link changed"
-#~ msgstr "Trägersignal/Verbindung geändert"
-
-#~ msgid "Manage notifications"
-#~ msgstr "Benachrichtigungen verwalten"
-
-#~ msgid "Manage online accounts"
-#~ msgstr "Online-Konten verwalten"
-
-#~ msgid "_Mark As Inactive After"
-#~ msgstr "Als inaktiv _markieren nach"
-
-#~ msgid "Power management settings"
-#~ msgstr "Einstellungen der Energieverwaltung"
-
-#~ msgid "Change printer settings"
-#~ msgstr "Druckereinstellungen ändern"
-
-#~ msgid "%s Options"
-#~ msgstr "%s-Optionen"
-
-#~ msgid "Manufacturers"
-#~ msgstr "Hersteller"
-
-#~ msgid "Privacy settings"
-#~ msgstr "Privatsphäre"
-
-#~ msgid "Don't retain history"
-#~ msgstr "Chronik nicht behalten"
-
-#~ msgid "Change your region and language settings"
-#~ msgstr "Einstellungen für Region und Sprache ändern"
-
-#~ msgid "Select an input source"
-#~ msgstr "Wählen Sie eine Eingabequelle"
-
-#~ msgid ""
-#~ "The login screen, system accounts and new user accounts use the system-"
-#~ "wide Region and Language settings."
-#~ msgstr ""
-#~ "Der Anmeldebildschirm, die Systemkonten und neue Benutzerkonten verwenden "
-#~ "die Regions- und Spracheinstellungen des Systems."
-
-#~ msgid ""
-#~ "The login screen, system accounts and new user accounts use the system-"
-#~ "wide Region and Language settings. You may change the system settings to "
-#~ "match yours."
-#~ msgstr ""
-#~ "Der Anmeldebildschirm, die Systemkonten und neue Benutzerkonten verwenden "
-#~ "die Regions- und Spracheinstellungen des Systems. Sie können die "
-#~ "Systemeinstellungen an Ihre Erfordernisse anpassen."
-
-#~ msgid "Copy Settings"
-#~ msgstr "Einstellungen kopieren"
-
-#~ msgid "Copy Settings…"
-#~ msgstr "Einstellungen kopieren …"
-
-#~ msgid "Region and Language"
-#~ msgstr "Region und Sprache"
-
-#~ msgid "Select a display language"
-#~ msgstr "Anzeigesprache auswählen"
-
-#~ msgid "Add Language"
-#~ msgstr "Sprache hinzufügen"
-
-#~ msgid "Select a region (change will be applied the next time you log in)"
-#~ msgstr ""
-#~ "Wählen Sie eine Region (Änderungen werden mit der nächsten Anmeldung "
-#~ "wirksam)"
-
-#~ msgid "Add Region"
-#~ msgstr "Region hinzufügen"
-
-#~ msgid "Remove Region"
-#~ msgstr "Region entfernen"
-
-#~ msgid "Currency"
-#~ msgstr "Währung"
-
-#~ msgid "Examples"
-#~ msgstr "Beispiele"
-
-#~ msgid "Select keyboards or other input sources"
-#~ msgstr "Wählen Sie eine Tastatur oder eine andere Eingabequelle"
-
-#~ msgid "Remove Input Source"
-#~ msgstr "Eine Eingabequelle hinzufügen"
-
-#~ msgid "Move Input Source Up"
-#~ msgstr "Eine Eingabequelle nach oben bewegen"
-
-#~ msgid "Show Keyboard Layout"
-#~ msgstr "Die Tastaturbelegung anzeigen"
-
-#~ msgid "Ctrl+Alt+Space"
-#~ msgstr "Strg+Alt+Leertaste"
-
-#~ msgid "Shortcut Settings"
-#~ msgstr "Tastenkürzel-Einstellungen"
-
-#~ msgid "Display language:"
-#~ msgstr "Anzeigesprache:"
-
-#~ msgid "Input source:"
-#~ msgstr "Eingabequelle:"
-
-#~ msgid "Format:"
-#~ msgstr "Format:"
-
-#~ msgid "Your settings"
-#~ msgstr "Ihre Einstellungen"
-
-#~ msgid "System settings"
-#~ msgstr "Systemeinstellungen"
-
-#~ msgid "Search settings"
-#~ msgstr "Einstellungen durchsuchen"
-
-#~ msgid "Universal Access Preferences"
-#~ msgstr "Allgemeine Einstellungen für Barrierefreiheit"
-
-#~ msgid "_Hint"
-#~ msgstr "_Hinweis"
-
-#~ msgid ""
-#~ "This hint may be displayed at the login screen.  It will be visible to "
-#~ "all users of this system.  Do <b>not</b> include the password here."
-#~ msgstr ""
-#~ "Dieser Hinweis kann im Anmeldefenster angezeigt werden. Er ist für alle "
-#~ "Benutzer des Systems sichtbar.  Bitte lassen Sie hier <b>nicht</b> das "
-#~ "Passwort anzeigen."
-
-#~ msgid "Fair"
-#~ msgstr "Ausreichend"
-
-#~ msgid "Set your Wacom tablet preferences"
-#~ msgstr "Einstellungen für Wacom-Tablets festlegen"
-
-#~ msgid "Control Center"
-#~ msgstr "Kontrollzentrum"
-
-#~ msgid "Browse Files..."
-#~ msgstr "Dateien durchsuchen …"
-
-#~ msgid "Create virtual device"
-#~ msgstr "Ein virtuelles Gerät erstellen"
-
-#~ msgid "Available Profiles for Displays"
-#~ msgstr "Verfügbare Profile für Anzeigen"
-
-#~ msgid "Available Profiles for Scanners"
-#~ msgstr "Verfügbare Profile für Scanner"
-
-#~ msgid "Available Profiles for Printers"
-#~ msgstr "Verfügbare Profile für Drucker"
-
-#~ msgid "Available Profiles for Cameras"
-#~ msgstr "Verfügbare Profile für Kameras"
-
-#~ msgid "Available Profiles for Webcams"
-#~ msgstr "Verfügbare Profile für Webcams"
-
-#~ msgid "%i year"
-#~ msgid_plural "%i years"
-#~ msgstr[0] "%i Jahr"
-#~ msgstr[1] "%i Jahre"
-
-#~ msgid "%i month"
-#~ msgid_plural "%i months"
-#~ msgstr[0] "%i Monat"
-#~ msgstr[1] "%i Monate"
-
-#~ msgid "%i week"
-#~ msgid_plural "%i weeks"
-#~ msgstr[0] "%i Woche"
-#~ msgstr[1] "%i Wochen"
-
-#~ msgid "Less than 1 week"
-#~ msgstr "Weniger als 1 Woche"
-
-#~ msgid "This device is not color managed."
-#~ msgstr "Das Gerät steht nicht unter Farbverwaltung."
-
-#~ msgid "This device is using manufacturing calibrated data."
-#~ msgstr "Das Gerät verwendet herstellerseitig kalibrierte Daten."
-
-#~ msgid ""
-#~ "This device does not have a profile suitable for whole-screen color "
-#~ "correction."
-#~ msgstr ""
-#~ "Das Profil des Geräts ist für eine auf den gesamten Bildschirm bezogene "
-#~ "Farbkorrektur ungeeignet."
-
-#~ msgid "Not specified"
-#~ msgstr "Nicht angegeben"
-
-#~ msgid "No devices supporting color management detected"
-#~ msgstr "Es wurden keine Geräte gefunden, die Farbverwaltung unterstützen"
-
-#~ msgid "Add device"
-#~ msgstr "Gerät hinzufügen"
-
-#~ msgid "Add a virtual device"
-#~ msgstr "Ein virtuelles Gerät hinzufügen"
-
-#~ msgid "Remove a device"
-#~ msgstr "Ein Gerät entfernen"
-
-#~ msgid "English"
-#~ msgstr "Englisch"
-
-#~ msgid "German"
-#~ msgstr "Deutsch"
-
-#~ msgid "French"
-#~ msgstr "Französisch"
-
-#~ msgid "Russian"
-#~ msgstr "Russisch"
-
-#~ msgid "Arabic"
-#~ msgstr "Arabisch"
-
-#~ msgid "Unspecified"
-#~ msgstr "Nicht angegeben"
-
-#~ msgid "%d x %d (%s)"
-#~ msgstr "%d x %d (%s)"
-
-#~ msgid "%d x %d"
-#~ msgstr "%d × %d"
-
-#~ msgid "VESA: %s"
-#~ msgstr "VESA: %s"
-
-#~ msgid "Unknown model"
-#~ msgstr "Unbekanntes Modell"
+#~ msgid "Zoom out:"
+#~ msgstr "Ansicht verkleinern:"
