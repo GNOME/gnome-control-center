@@ -71,6 +71,7 @@ gsd_should_ignore_unix_mount (GUnixMountEntry *mount)
                 "proc",
                 "procfs",
                 "ptyfs",
+                "rootfs",
                 "rpc_pipefs",
                 "selinuxfs",
                 "smbfs",
