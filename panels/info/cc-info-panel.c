@@ -627,6 +627,11 @@ get_primary_disc_info (CcInfoPanel *self)
   GList        *p;
 
   points = g_unix_mount_points_get (NULL);
+
+  /* If we do not have /etc/fstab around, try /etc/mtab */
+  if (points == NULL)
+    points = g_unix_mounts_get (NULL);
+
   for (p = points; p != NULL; p = p->next)
     {
       GUnixMountEntry *mount = p->data;
