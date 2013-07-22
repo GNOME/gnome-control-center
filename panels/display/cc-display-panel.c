@@ -710,7 +710,7 @@ rebuild_on_off_radios (CcDisplayPanel *self)
           output = gnome_rr_screen_get_output_by_name (self->priv->screen,
                                                        gnome_rr_output_info_get_name (self->priv->current_output));
 
-          display_closed = gnome_rr_output_is_builtin_display (output);
+          display_closed = gnome_rr_output_is_laptop (output);
         }
 
       if ((count_active_outputs (self) > 1 || !gnome_rr_output_info_is_active (self->priv->current_output))
