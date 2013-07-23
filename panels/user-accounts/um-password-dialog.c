@@ -36,7 +36,7 @@
 #include "run-passwd.h"
 #include "pw-utils.h"
 
-#define PASSWORD_CHECK_TIMEOUT 500
+#define PASSWORD_CHECK_TIMEOUT 1000
 
 struct _UmPasswordDialog {
         GtkWidget *dialog;
@@ -57,7 +57,6 @@ struct _UmPasswordDialog {
         GtkWidget *old_password_label;
         GtkWidget *old_password_entry;
         GtkWidget *old_password_checkmark;
-        GtkWidget *old_password_spinner;
         gboolean   old_password_ok;
         gint       old_password_entry_timeout_id;
 
@@ -348,26 +347,10 @@ password_entry_focus_out (GtkWidget        *entry,
 }
 
 static void
-begin_action (UmPasswordDialog *um)
-{
-        gtk_widget_show (um->old_password_spinner);
-        gtk_spinner_start (GTK_SPINNER (um->old_password_spinner));
-}
-
-static void
-finish_action (UmPasswordDialog *um)
-{
-        gtk_widget_hide (um->old_password_spinner);
-        gtk_spinner_stop (GTK_SPINNER (um->old_password_spinner));
-}
-
-static void
 auth_cb (PasswdHandler    *handler,
          GError           *error,
          UmPasswordDialog *um)
 {
-        finish_action (um);
-
         if (error) {
                 um->old_password_ok = FALSE;
                 set_entry_validation_error (GTK_ENTRY (um->old_password_entry),
@@ -389,7 +372,6 @@ old_password_entry_timeout (UmPasswordDialog *um)
 
         text = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
         if (strlen (text) > 0 && !um->old_password_ok) {
-                begin_action (um);
                 passwd_authenticate (um->passwd_handler, text, (PasswdCallback)auth_cb, um);
         }
 
@@ -503,7 +485,6 @@ um_password_dialog_new (void)
                           G_CALLBACK (old_password_entry_changed), um);
         um->old_password_entry = widget;
         um->old_password_label = (GtkWidget *) gtk_builder_get_object (builder, "old-password-label");
-        um->old_password_spinner = (GtkWidget *) gtk_builder_get_object (builder, "old-password-spinner");
         um->old_password_checkmark = (GtkWidget *) gtk_builder_get_object (builder, "old-password-checkmark");
         um->old_password_entry_timeout_id = 0;
 
@@ -569,7 +550,6 @@ um_password_dialog_set_user (UmPasswordDialog *um,
                 gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->old_password_entry), "");
                 gtk_widget_hide (um->old_password_checkmark);
-                gtk_widget_hide (um->old_password_spinner);
 
                 if (act_user_get_uid (um->user) == getuid ()) {
                         mode_change (um, ACT_USER_PASSWORD_MODE_REGULAR);
