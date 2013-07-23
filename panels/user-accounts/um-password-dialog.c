@@ -47,9 +47,9 @@ struct _UmPasswordDialog {
         GtkWidget *verify_entry;
         gint       password_entry_timeout_id;
         GtkWidget *strength_indicator;
-        GtkWidget *strength_indicator_label;
         GtkWidget *ok_button;
         GtkWidget *password_hint;
+        GtkWidget *verify_hint;
 
         ActUser *user;
         ActUserPasswordMode password_mode;
@@ -84,14 +84,7 @@ update_password_strength (UmPasswordDialog *um)
         pw_strength (password, old_password, username,
                      &hint, &long_hint, &strength_level);
 
-        if (strlen (password) == 0) {
-                strength_hint = "";
-        } else {
-                strength_hint = hint;
-        }
-
         gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
-        gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), strength_hint);
         gtk_label_set_label (GTK_LABEL (um->password_hint), long_hint);
 
         if (strength_level > 0) {
@@ -258,7 +251,6 @@ mode_change (UmPasswordDialog *um,
         gtk_widget_set_sensitive (um->password_entry, active);
         gtk_widget_set_sensitive (um->verify_entry, active);
         gtk_widget_set_sensitive (um->old_password_entry, active);
-        gtk_widget_set_sensitive (um->strength_indicator_label, active);
         gtk_widget_set_sensitive (um->password_hint, active);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->action_now_radio), active);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->action_login_radio), !active);
@@ -290,10 +282,11 @@ update_password_match (UmPasswordDialog *um)
 
         if (strlen (password) > 0 && strlen (verify) > 0) {
                 if (strcmp (password, verify) != 0) {
-                        gtk_label_set_label (GTK_LABEL (um->password_hint),
+                        gtk_label_set_label (GTK_LABEL (um->verify_hint),
                                              _("The passwords do not match."));
                 }
                 else {
+                        gtk_label_set_label (GTK_LABEL (um->verify_hint), "");
                         set_entry_validation_checkmark (GTK_ENTRY (um->verify_entry));
                 }
         }
@@ -412,18 +405,6 @@ old_password_entry_changed (GtkEntry         *entry,
                                                            um);
 }
 
-static void
-hint_allocate (GtkWidget        *label,
-               GtkAllocation    *allocation,
-               UmPasswordDialog *um)
-{
-        gint height;
-
-        /* Allocate enought space for hint and don't change */
-        height = gtk_widget_get_allocated_height (um->strength_indicator_label);
-        gtk_widget_set_size_request (label, allocation->width, height * 3);
-}
-
 UmPasswordDialog *
 um_password_dialog_new (void)
 {
@@ -431,7 +412,6 @@ um_password_dialog_new (void)
         GError *error;
         UmPasswordDialog *um;
         GtkWidget *widget;
-        gint len;
 
         builder = gtk_builder_new ();
 
@@ -493,16 +473,13 @@ um_password_dialog_new (void)
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (password_entry_timeout), um);
         um->verify_entry = widget;
 
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
-        len = pw_strength_hint_get_width_chars ();
-        gtk_label_set_width_chars (GTK_LABEL (widget), len);
-        um->strength_indicator_label = widget;
-
         um->strength_indicator = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator");
 
         widget = (GtkWidget *)gtk_builder_get_object (builder, "password-hint");
-        g_signal_connect (widget, "size-allocate", G_CALLBACK (hint_allocate), um);
         um->password_hint = widget;
+
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "verify-hint");
+        um->verify_hint = widget;
 
         g_object_unref (builder);
 
