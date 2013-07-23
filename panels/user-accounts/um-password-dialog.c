@@ -516,7 +516,7 @@ um_password_dialog_new (void)
         um->password_entry_timeout_id = 0;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
-        len = pw_strenght_hint_get_width_chars ();
+        len = pw_strength_hint_get_width_chars ();
         gtk_label_set_width_chars (GTK_LABEL (widget), len);
         um->strength_indicator_label = widget;
 

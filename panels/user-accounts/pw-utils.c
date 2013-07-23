@@ -162,7 +162,7 @@ pw_strength (const gchar  *password,
 }
 
 int
-pw_strenght_hint_get_width_chars ()
+pw_strength_hint_get_width_chars (void)
 {
         gint len;
 

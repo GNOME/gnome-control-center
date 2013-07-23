@@ -1582,7 +1582,7 @@ um_account_dialog_show (UmAccountDialog     *self,
         gtk_widget_grab_focus (self->local_name);
 
         /* Allocate enought width for strength hint */
-        len = pw_strenght_hint_get_width_chars ();
+        len = pw_strength_hint_get_width_chars ();
         gtk_label_set_width_chars (GTK_LABEL (self->local_strength), len);
 
         /* Allocate enought space for password and username hints and do not change */
