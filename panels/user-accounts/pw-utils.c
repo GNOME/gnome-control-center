@@ -115,8 +115,9 @@ pw_error_hint (gint error)
         case PWQ_ERROR_MIN_LENGTH:
                 return C_("Password hint", "Try to add more letters, numbers and symbols.");
         case PWQ_ERROR_EMPTY_PASSWORD:
-        default:
                 return C_("Password hint", "Mix uppercase and lowercase and use a number or two.");
+        default:
+                return C_("Password hint", "Good password! Adding more letters, numbers and punctuation will make it stronger.");
         }
 }
 

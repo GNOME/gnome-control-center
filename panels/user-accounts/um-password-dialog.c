@@ -36,7 +36,7 @@
 #include "run-passwd.h"
 #include "pw-utils.h"
 
-#define PASSWORD_CHECK_TIMEOUT 1000
+#define PASSWORD_CHECK_TIMEOUT 600
 
 struct _UmPasswordDialog {
         GtkWidget *dialog;
@@ -56,7 +56,6 @@ struct _UmPasswordDialog {
 
         GtkWidget *old_password_label;
         GtkWidget *old_password_entry;
-        GtkWidget *old_password_checkmark;
         gboolean   old_password_ok;
         gint       old_password_entry_timeout_id;
 
@@ -99,6 +98,12 @@ update_password_strength (UmPasswordDialog *um)
         verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
         if (strlen (verify) == 0) {
                 gtk_widget_set_sensitive (um->verify_entry, strength_level > 0);
+        }
+
+        if (strength_level > 0) {
+                set_entry_validation_checkmark (GTK_ENTRY (um->password_entry));
+        } else  {
+                clear_entry_validation_error (GTK_ENTRY (um->password_entry));
         }
 
         return strength_level;
@@ -293,11 +298,9 @@ update_password_match (UmPasswordDialog *um)
                 if (strcmp (password, verify) != 0) {
                         gtk_label_set_label (GTK_LABEL (um->password_hint),
                                              _("The passwords do not match."));
-                        set_entry_validation_error (GTK_ENTRY (um->verify_entry),
-                                                    _("Passwords do not match"));
                 }
                 else {
-                        clear_entry_validation_error (GTK_ENTRY (um->verify_entry));
+                        set_entry_validation_checkmark (GTK_ENTRY (um->verify_entry));
                 }
         }
 }
@@ -325,6 +328,8 @@ password_entry_changed (GtkEntry         *entry,
         }
 
         clear_entry_validation_error (GTK_ENTRY (entry));
+        clear_entry_validation_error (GTK_ENTRY (um->verify_entry));
+        gtk_widget_set_sensitive (um->ok_button, FALSE);
 
         um->password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
                                                      (GSourceFunc) password_entry_timeout,
@@ -353,13 +358,10 @@ auth_cb (PasswdHandler    *handler,
 {
         if (error) {
                 um->old_password_ok = FALSE;
-                set_entry_validation_error (GTK_ENTRY (um->old_password_entry),
-                                            _("Wrong password"));
         }
         else {
                 um->old_password_ok = TRUE;
-                clear_entry_validation_error (GTK_ENTRY (um->old_password_entry));
-                gtk_widget_show (um->old_password_checkmark);
+                set_entry_validation_checkmark (GTK_ENTRY (um->old_password_entry));
         }
 
         update_sensitivity (um);
@@ -369,6 +371,8 @@ static gboolean
 old_password_entry_timeout (UmPasswordDialog *um)
 {
         const char *text;
+
+        update_sensitivity (um);
 
         text = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
         if (strlen (text) > 0 && !um->old_password_ok) {
@@ -405,11 +409,10 @@ old_password_entry_changed (GtkEntry         *entry,
                 um->old_password_entry_timeout_id = 0;
         }
 
-        gtk_widget_hide (um->old_password_checkmark);
         clear_entry_validation_error (GTK_ENTRY (entry));
-        um->old_password_ok = FALSE;
-        update_sensitivity (um);
+        gtk_widget_set_sensitive (um->ok_button, FALSE);
 
+        um->old_password_ok = FALSE;
         um->old_password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
                                                            (GSourceFunc) old_password_entry_timeout,
                                                            um);
@@ -485,8 +488,6 @@ um_password_dialog_new (void)
                           G_CALLBACK (old_password_entry_changed), um);
         um->old_password_entry = widget;
         um->old_password_label = (GtkWidget *) gtk_builder_get_object (builder, "old-password-label");
-        um->old_password_checkmark = (GtkWidget *) gtk_builder_get_object (builder, "old-password-checkmark");
-        um->old_password_entry_timeout_id = 0;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "verify-entry");
         g_signal_connect (widget, "notify::text",
@@ -494,7 +495,6 @@ um_password_dialog_new (void)
         g_signal_connect_after (widget, "focus-out-event",
                                 G_CALLBACK (password_entry_focus_out), um);
         um->verify_entry = widget;
-        um->password_entry_timeout_id = 0;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
         len = pw_strength_hint_get_width_chars ();
@@ -549,7 +549,6 @@ um_password_dialog_set_user (UmPasswordDialog *um,
                 gtk_entry_set_text (GTK_ENTRY (um->password_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->old_password_entry), "");
-                gtk_widget_hide (um->old_password_checkmark);
 
                 if (act_user_get_uid (um->user) == getuid ()) {
                         mode_change (um, ACT_USER_PASSWORD_MODE_REGULAR);
