@@ -397,13 +397,19 @@ on_name_changed (GtkEditable *editable,
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GtkTreeModel *model;
         const char *name;
+        GtkWidget *entry;
 
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username));
         gtk_list_store_clear (GTK_LIST_STORE (model));
 
         name = gtk_entry_get_text (GTK_ENTRY (editable));
-        generate_username_choices (name, GTK_LIST_STORE (model));
-        gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username), 0);
+        if (strlen (name) == 0) {
+                entry = gtk_bin_get_child (GTK_BIN (self->local_username));
+                gtk_entry_set_text (GTK_ENTRY (entry), "");
+        } else {
+                generate_username_choices (name, GTK_LIST_STORE (model));
+                gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username), 0);
+        }
 
         dialog_validate (self);
 }
