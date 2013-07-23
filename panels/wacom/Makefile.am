@@ -20,6 +20,10 @@ libwacom_properties_la_SOURCES =	\
 	$(BUILT_SOURCES)		\
 	cc-wacom-panel.c		\
 	cc-wacom-panel.h		\
+	gsd-wacom-key-shortcut-button.c \
+	gsd-wacom-key-shortcut-button.h \
+	cc-wacom-button-row.c		\
+	cc-wacom-button-row.h		\
 	cc-wacom-page.c			\
 	cc-wacom-page.h			\
 	cc-wacom-stylus-page.c		\
@@ -41,6 +45,10 @@ noinst_PROGRAMS = test-wacom
 test_wacom_SOURCES =			\
 	$(BUILT_SOURCES)		\
 	test-wacom.c			\
+	cc-wacom-button-row.c		\
+	cc-wacom-button-row.h		\
+	gsd-wacom-key-shortcut-button.c \
+	gsd-wacom-key-shortcut-button.h \
 	cc-wacom-page.c			\
 	cc-wacom-page.h			\
 	cc-wacom-stylus-page.c		\
