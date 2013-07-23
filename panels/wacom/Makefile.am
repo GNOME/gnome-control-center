@@ -71,7 +71,7 @@ desktop_in_files = gnome-wacom-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 WACOMDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/wacom/
-WACOMFILES=gsd-wacom-device.c gsd-wacom-device.h
+WACOMFILES=gsd-wacom-device.c gsd-wacom-device.h gsd-wacom-key-shortcut-button.c gsd-wacom-key-shortcut-button.h
 COMMONDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/common/
 COMMONFILES=gsd-input-helper.c gsd-input-helper.h
 update-from-gsd:
