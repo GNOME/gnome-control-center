@@ -359,15 +359,12 @@ bluetooth_state_changed (CcSharingPanel *self)
     gtk_widget_show (WID ("bluetooth-sharing-button"));
 }
 
-#endif
-
 static void
 cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
   GSettings *settings;
 
-#ifdef HAVE_BLUETOOTH
   priv->bluetooth_killswitch = bluetooth_killswitch_new ();
 
   /* get the initial state */
@@ -375,8 +372,6 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
 
   g_signal_connect_swapped (priv->bluetooth_killswitch, "state-changed",
                             G_CALLBACK (bluetooth_state_changed), self);
-#endif
-
 
   cc_sharing_panel_bind_switch_to_label (self,
                                          WID ("share-public-folder-switch"),
@@ -409,6 +404,7 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
                                 bluetooth_set_accept_files, NULL, NULL);
 
 }
+#endif
 
 static void
 cc_sharing_panel_add_folder (GtkWidget      *button,
@@ -1029,9 +1025,11 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
 
   /* bluetooth */
+#ifdef HAVE_BLUETOOTH
   if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
     cc_sharing_panel_setup_bluetooth_sharing_dialog (self);
   else
+#endif /* HAVE_BLUETOOTH */
     gtk_widget_hide (WID ("bluetooth-sharing-button"));
 
   /* media sharing */
