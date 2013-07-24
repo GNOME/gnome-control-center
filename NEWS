@@ -1,4 +1,57 @@
 =============
+Version 3.8.4
+=============
+
+- Go back to overview when setting panel to NULL
+- Ensure a search is in progress before activating a panel
+- Ensure the current language has a display name in the model
+- Translation updates
+
+Display:
+- Prevent a crash if the screen being dragged is removed
+- Fix floating screens and subsequent errors
+- Use the preferred width and height when moving inactive displays
+- Prevent the built-in display being turned on if the lid is closed
+
+Info:
+- Show disk info even if there's no /etc/fstab file
+
+Mouse:
+- Show enable trackpad slider button even if mouse is not present
+
+Power:
+- Don't resize panel items when the battery status has changed
+- Fix crash with no batteries
+
+Printers:
+- Don't authenticate automatically found SMB servers
+
+Privacy:
+- Fix default "Retain history" value
+
+Region and Language:
+- Make sure not to display an empty input sources list
+
+Sharing:
+- Hide the vino password by default
+- Limit screen sharing password to 8 bytes
+- Mark sharing button labels as translatable
+- Avoid conflicts with the sensitivity of the remote control options
+
+Sound:
+- Don't show applications playing event sounds
+
+User Accounts:
+- Check the password mode in password authenticate callback
+- Set the password mode to regular mode when user changes his password
+- Don't crash when changing language in the region panel
+- Don't delete the only administrator account
+- Fix empty login history window
+- Use Enter key on password dialog
+- Do not display system accounts
+- Correctly selects the newly-created user
+
+=============
 Version 3.8.3
 =============
 
