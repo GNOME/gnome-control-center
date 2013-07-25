@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-23 12:09+0000\n"
-"PO-Revision-Date: 2013-07-24 10:20+0200\n"
+"POT-Creation-Date: 2013-07-24 18:10+0000\n"
+"PO-Revision-Date: 2013-07-25 12:28+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -110,7 +110,7 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:682
-#: ../panels/sharing/cc-sharing-panel.c:425
+#: ../panels/sharing/cc-sharing-panel.c:421
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
 #: ../panels/user-accounts/um-photo-dialog.c:96
 #: ../panels/user-accounts/um-photo-dialog.c:221
@@ -187,7 +187,7 @@ msgstr "página 2"
 msgid "Paired"
 msgstr "Emparejado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:850
+#: ../panels/bluetooth/bluetooth.ui.h:7
 msgid "Type"
 msgstr "Tipo"
 
@@ -1778,7 +1778,6 @@ msgid "Remove Shortcut"
 msgstr "Quitar atajo"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
-#: ../panels/wacom/button-mapping.ui.h:3
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1851,7 +1850,6 @@ msgstr ""
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-#| msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "trackpad;puntero;pulsar;pulsación;doble;botón;trackball;desplazamiento;"
@@ -2534,7 +2532,7 @@ msgstr "Seleccione el archivo que importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1947
-#: ../panels/sharing/cc-sharing-panel.c:426
+#: ../panels/sharing/cc-sharing-panel.c:422
 #: ../panels/user-accounts/um-photo-dialog.c:222
 msgid "_Open"
 msgstr "_Abrir"
@@ -2729,7 +2727,7 @@ msgstr "Histórico"
 
 #: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
 #: ../panels/privacy/privacy.ui.h:10 ../panels/sound/gvc-mixer-dialog.c:1596
-#: ../panels/wacom/cc-wacom-page.c:984
+#: ../panels/wacom/cc-wacom-page.c:446
 msgid "_Close"
 msgstr "_Cerrar"
 
@@ -5042,11 +5040,11 @@ msgctxt "service is disabled"
 msgid "Off"
 msgstr "Apagado"
 
-#: ../panels/sharing/cc-sharing-panel.c:422
+#: ../panels/sharing/cc-sharing-panel.c:418
 msgid "Choose a Folder"
 msgstr "Elija una carpeta"
 
-#: ../panels/sharing/cc-sharing-panel.c:706
+#: ../panels/sharing/cc-sharing-panel.c:702
 msgid "Copy"
 msgstr "Copiar"
 
@@ -6657,6 +6655,17 @@ msgstr "Mapear botones"
 msgid "Map buttons to functions"
 msgstr "Mapear botones a funciones"
 
+#: ../panels/wacom/button-mapping.ui.h:3
+#| msgid ""
+#| "To edit a shortcut, click the row and hold down the new keys or press "
+#| "Backspace to clear."
+msgid ""
+"To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard "
+"shortcut button and hold down the new keys or press Backspace to clear."
+msgstr ""
+"Para editar un atajo, elija la acción «Enviar pulsación de teclas», pulse las "
+"teclas que forman el atajo del teclado, o pulse Retroceso para eliminarla."
+
 #: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
@@ -6668,6 +6677,36 @@ msgstr ""
 #: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
+
+#: ../panels/wacom/cc-wacom-button-row.c:439
+msgctxt "Wacom tablet button"
+msgid "Up"
+msgstr "Arriba"
+
+#: ../panels/wacom/cc-wacom-button-row.c:440
+msgctxt "Wacom tablet button"
+msgid "Down"
+msgstr "Abajo"
+
+#: ../panels/wacom/cc-wacom-button-row.h:55
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "Ninguna"
+
+#: ../panels/wacom/cc-wacom-button-row.h:56
+msgctxt "Wacom action-type"
+msgid "Send Keystroke"
+msgstr "Enviar pulsación de tecla"
+
+#: ../panels/wacom/cc-wacom-button-row.h:57
+msgctxt "Wacom action-type"
+msgid "Switch Monitor"
+msgstr "Cambiar monitor"
+
+#: ../panels/wacom/cc-wacom-button-row.h:58
+msgctxt "Wacom action-type"
+msgid "Show On-Screen Help"
+msgstr "Mostrar la ayuda en pantalla"
 
 #: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
@@ -6688,52 +6727,13 @@ msgstr "Mapear una única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
-msgctxt "Wacom action-type"
-msgid "None"
-msgstr "Ninguna"
+#: ../panels/wacom/cc-wacom-page.c:443
+msgid "Display Mapping"
+msgstr "Mostrar mapeo"
 
-#: ../panels/wacom/cc-wacom-page.c:124
-msgctxt "Wacom action-type"
-msgid "Send Keystroke"
-msgstr "Enviar pulsación de tecla"
-
-#: ../panels/wacom/cc-wacom-page.c:125
-msgctxt "Wacom action-type"
-msgid "Switch Monitor"
-msgstr "Cambiar monitor"
-
-#: ../panels/wacom/cc-wacom-page.c:126
-msgctxt "Wacom action-type"
-msgid "Show On-Screen Help"
-msgstr "Mostrar la ayuda en pantalla"
-
-#: ../panels/wacom/cc-wacom-page.c:675
-msgctxt "Wacom tablet button"
-msgid "Up"
-msgstr "Arriba"
-
-#: ../panels/wacom/cc-wacom-page.c:675
-msgctxt "Wacom tablet button"
-msgid "Down"
-msgstr "Abajo"
-
-#: ../panels/wacom/cc-wacom-page.c:716
-msgid "Switch Modes"
-msgstr "Cambiar modos"
-
-#: ../panels/wacom/cc-wacom-page.c:813
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Botón"
-
-#: ../panels/wacom/cc-wacom-page.c:871
-msgid "Action"
-msgstr "Acción"
-
-#: ../panels/wacom/cc-wacom-page.c:981
-msgid "Display Mapping"
-msgstr "Mostrar mapeo"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
@@ -6883,6 +6883,11 @@ msgstr "Botón superior nº %d"
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior nº %d"
+
+#: ../panels/wacom/gsd-wacom-key-shortcut-button.c:264
+#| msgid "New shortcut..."
+msgid "New shortcut…"
+msgstr "Atajo nuevo..."
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
@@ -7034,6 +7039,12 @@ msgstr "Todas las configuraciones"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Switch Modes"
+#~ msgstr "Cambiar modos"
+
+#~ msgid "Action"
+#~ msgstr "Acción"
 
 #~ msgid "No shortcut set"
 #~ msgstr "No existe ningún atajo configurado"
@@ -8319,9 +8330,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Toggle screen reader"
 #~ msgstr "Conmutar el lector de pantalla"
-
-#~ msgid "New shortcut..."
-#~ msgstr "Combinación nueva..."
 
 #~ msgid "Accelerator key"
 #~ msgstr "Tecla de la combinación"
