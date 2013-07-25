@@ -38,6 +38,7 @@ struct _GoaPanelAddAccountDialogPrivate
   GtkListBox *branded_list_box;
   GtkListBox *contacts_list_box;
   GtkListBox *mail_list_box;
+  GtkListBox *chat_list_box;
   GtkListBox *ticketing_list_box;
   GError *error;
   GoaClient *client;
@@ -46,6 +47,7 @@ struct _GoaPanelAddAccountDialogPrivate
   GtkListStore *list_store;
   GtkWidget *contacts_grid;
   GtkWidget *mail_grid;
+  GtkWidget *chat_grid;
   GtkWidget *ticketing_grid;
   GtkWidget *stack;
   gboolean add_other;
@@ -345,6 +347,12 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
                                       _("Contacts"));
 
   add_account_dialog_create_group_ui (add_account,
+                                      &priv->chat_list_box,
+                                      &priv->chat_grid,
+                                      grid,
+                                      _("Chat"));
+
+  add_account_dialog_create_group_ui (add_account,
                                       &priv->ticketing_list_box,
                                       &priv->ticketing_grid,
                                       grid,
@@ -438,6 +446,10 @@ goa_panel_add_account_dialog_add_provider (GoaPanelAddAccountDialog *add_account
     case GOA_PROVIDER_GROUP_MAIL:
       group_grid = priv->mail_grid;
       list_box = priv->mail_list_box;
+      break;
+    case GOA_PROVIDER_GROUP_CHAT:
+      group_grid = priv->chat_grid;
+      list_box = priv->chat_list_box;
       break;
     case GOA_PROVIDER_GROUP_TICKETING:
       group_grid = priv->ticketing_grid;
