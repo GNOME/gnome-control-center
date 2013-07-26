@@ -29,11 +29,13 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
+#ifdef GDK_WINDOWING_X11
 #include <X11/Xproto.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
+#endif
 
 #include "cc-rr-labeler.h"
 
@@ -46,7 +48,10 @@ struct _CcRRLabelerPrivate {
 	GtkWidget **windows;
 
 	GdkScreen  *screen;
+	gboolean    has_event_filter;
+#ifdef GDK_WINDOWING_X11
 	Atom        workarea_atom;
+#endif
 };
 
 enum {
@@ -60,6 +65,7 @@ G_DEFINE_TYPE (CcRRLabeler, cc_rr_labeler, G_TYPE_OBJECT);
 static void cc_rr_labeler_finalize (GObject *object);
 static void setup_from_config (CcRRLabeler *labeler);
 
+#ifdef GDK_WINDOWING_X11
 static GdkFilterReturn
 screen_xevent_filter (GdkXEvent      *xevent,
 		      GdkEvent       *event,
@@ -80,6 +86,7 @@ screen_xevent_filter (GdkXEvent      *xevent,
 
 	return GDK_FILTER_CONTINUE;
 }
+#endif
 
 static void
 cc_rr_labeler_init (CcRRLabeler *labeler)
@@ -88,15 +95,21 @@ cc_rr_labeler_init (CcRRLabeler *labeler)
 
 	labeler->priv = G_TYPE_INSTANCE_GET_PRIVATE (labeler, GNOME_TYPE_RR_LABELER, CcRRLabelerPrivate);
 
-	labeler->priv->workarea_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-						    "_NET_WORKAREA",
-						    True);
-
 	labeler->priv->screen = gdk_screen_get_default ();
-	/* code is not really designed to handle multiple screens so *shrug* */
-	gdkwindow = gdk_screen_get_root_window (labeler->priv->screen);
-	gdk_window_add_filter (gdkwindow, (GdkFilterFunc) screen_xevent_filter, labeler);
-	gdk_window_set_events (gdkwindow, gdk_window_get_events (gdkwindow) | GDK_PROPERTY_CHANGE_MASK);
+#ifdef GDK_WINDOWING_X11
+	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ())) {
+		labeler->priv->workarea_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+							    "_NET_WORKAREA",
+							    True);
+
+		/* code is not really designed to handle multiple screens so *shrug* */
+		gdkwindow = gdk_screen_get_root_window (labeler->priv->screen);
+		gdk_window_add_filter (gdkwindow, (GdkFilterFunc) screen_xevent_filter, labeler);
+		gdk_window_set_events (gdkwindow, gdk_window_get_events (gdkwindow) | GDK_PROPERTY_CHANGE_MASK);
+
+		labeler->priv->has_event_filter = TRUE;
+	}
+#endif
 }
 
 static void
@@ -152,8 +165,10 @@ cc_rr_labeler_finalize (GObject *object)
 
 	labeler = CC_RR_LABELER (object);
 
-	gdkwindow = gdk_screen_get_root_window (labeler->priv->screen);
-	gdk_window_remove_filter (gdkwindow, (GdkFilterFunc) screen_xevent_filter, labeler);
+	if (labeler->priv->has_event_filter) {
+		gdkwindow = gdk_screen_get_root_window (labeler->priv->screen);
+		gdk_window_remove_filter (gdkwindow, (GdkFilterFunc) screen_xevent_filter, labeler);
+	}
 
 	if (labeler->priv->config != NULL) {
 		g_object_unref (labeler->priv->config);
