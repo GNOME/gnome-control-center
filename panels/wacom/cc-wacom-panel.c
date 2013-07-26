@@ -46,6 +46,10 @@ struct _CcWacomPanelPrivate
 	GdkDeviceManager *manager;
 	guint             device_added_id;
 	guint             device_removed_id;
+
+	/* DBus */
+	GCancellable  *cancellable;
+	GDBusProxy    *proxy;
 };
 
 typedef struct {
@@ -214,6 +218,9 @@ cc_wacom_panel_dispose (GObject *object)
 		g_hash_table_destroy (priv->devices);
 		priv->devices = NULL;
 	}
+
+	g_clear_object (&priv->cancellable);
+	g_clear_object (&priv->proxy);
 
 	if (priv->pages)
 	{
@@ -415,6 +422,28 @@ cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
 }
 
 static void
+got_wacom_proxy_cb (GObject      *source_object,
+		    GAsyncResult *res,
+		    gpointer      data)
+{
+	GError              *error = NULL;
+	CcWacomPanel        *self;
+	CcWacomPanelPrivate *priv;
+
+	self = CC_WACOM_PANEL (data);
+	priv = self->priv;
+	priv->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
+	g_clear_object (&priv->cancellable);
+
+	if (priv->proxy == NULL) {
+		g_printerr ("Error creating proxy: %s\n", error->message);
+		g_error_free (error);
+		return;
+	}
+}
+
+static void
 enbiggen_label (GtkLabel *label)
 {
 	const char *str;
@@ -456,6 +485,18 @@ cc_wacom_panel_init (CcWacomPanel *self)
 		return;
 	}
 
+	priv->cancellable = g_cancellable_new ();
+
+	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+				  G_DBUS_PROXY_FLAGS_NONE,
+				  NULL,
+				  "org.gnome.SettingsDaemon",
+				  "/org/gnome/SettingsDaemon/Wacom",
+				  "org.gnome.SettingsDaemon.Wacom",
+				  priv->cancellable,
+				  got_wacom_proxy_cb,
+				  self);
+
 	/* Notebook */
 	notebook = GTK_NOTEBOOK (gtk_notebook_new ());
 	priv->notebook = GTK_WIDGET (notebook);
@@ -496,4 +537,12 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	g_list_free (devices);
 
 	update_current_page (self);
+}
+
+GDBusProxy *
+cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self)
+{
+	g_return_val_if_fail (CC_IS_WACOM_PANEL (self), NULL);
+
+	return self->priv->proxy;
 }

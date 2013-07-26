@@ -16,6 +16,14 @@ cc_wacom_panel_switch_to_panel (CcWacomPanel *self, const char *panel)
 	g_message ("Should launch %s preferences here", panel);
 }
 
+GDBusProxy *
+cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self)
+{
+	g_message ("Should get the g-s-d wacom dbus proxy here");
+
+	return NULL;
+}
+
 static void
 add_page (GList *devices,
 	  GtkWidget *notebook)

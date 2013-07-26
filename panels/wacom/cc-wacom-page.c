@@ -77,6 +77,8 @@ struct _CcWacomPagePrivate
 	/* Display mapping */
 	GtkWidget      *mapping;
 	GtkWidget      *dialog;
+
+	GCancellable   *cancellable;
 };
 
 /* Button combo box storage columns */
@@ -375,13 +377,12 @@ button_mapping_dialog_closed (GtkDialog   *dialog,
 }
 
 static void
-map_buttons_button_clicked_cb (GtkButton   *button,
-			       CcWacomPage *page)
+show_button_mapping_dialog (CcWacomPage *page)
 {
-	GError *error = NULL;
-	GtkWidget *dialog;
+	GtkWidget          *toplevel;
+	GError             *error = NULL;
+	GtkWidget          *dialog;
 	CcWacomPagePrivate *priv;
-	GtkWidget *toplevel;
 
 	priv = page->priv;
 
@@ -412,6 +413,84 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 
 	priv->button_map = dialog;
 	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &priv->button_map);
+}
+
+static void
+set_osd_visibility_cb (GObject      *source_object,
+		       GAsyncResult *res,
+		       gpointer      data)
+{
+	GError      *error = NULL;
+	GVariant    *result;
+	CcWacomPage *page;
+
+	page = CC_WACOM_PAGE (data);
+
+	result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+
+	if (result == NULL) {
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_printerr ("Error setting OSD's visibility: %s\n", error->message);
+			g_error_free (error);
+			show_button_mapping_dialog (page);
+		} else {
+			g_error_free (error);
+			return;
+		}
+	}
+}
+
+static void
+set_osd_visibility (CcWacomPage *page,
+		    guint32      device_id)
+{
+	CcWacomPagePrivate *priv;
+	GDBusProxy         *proxy;
+
+	priv = page->priv;
+	proxy = cc_wacom_panel_get_gsd_wacom_bus_proxy (priv->panel);
+
+	if (proxy == NULL) {
+		show_button_mapping_dialog (page);
+		return;
+	}
+
+	g_dbus_proxy_call (proxy,
+			   "SetOSDVisibility",
+			   g_variant_new ("(ubb)", device_id, TRUE, TRUE),
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   priv->cancellable,
+			   set_osd_visibility_cb,
+			   page);
+}
+
+static void
+map_buttons_button_clicked_cb (GtkButton   *button,
+			       CcWacomPage *page)
+{
+	CcWacomPagePrivate *priv;
+	GdkDevice *gdk_device = NULL;
+	guint32 device_id;
+        const gchar *layout_path;
+
+	priv = page->priv;
+
+	g_object_get (priv->pad, "gdk-device", &gdk_device, NULL);
+
+	g_return_if_fail (gdk_device != NULL);
+
+	g_object_get (gdk_device, "device-id", &device_id, NULL);
+
+	/* Check if the OSD should be shown instead of the button mapping dialod */
+        layout_path = gsd_wacom_device_get_layout_path (page->priv->pad);
+        if (layout_path && g_file_test (layout_path, G_FILE_TEST_EXISTS)) {
+		set_osd_visibility (page, device_id);
+		return;
+	}
+
+	g_message ("Couldn't find a layout for '%s'. Launching the button mapping dialog.", gsd_wacom_device_get_name (priv->pad));
+	show_button_mapping_dialog (page);
 }
 
 static void
@@ -597,6 +676,11 @@ cc_wacom_page_dispose (GObject *object)
 {
 	CcWacomPagePrivate *priv = CC_WACOM_PAGE (object)->priv;
 
+	if (priv->cancellable) {
+		g_cancellable_cancel (priv->cancellable);
+		g_clear_object (&priv->cancellable);
+	}
+
 	if (priv->area) {
 		calib_area_free (priv->area);
 		priv->area = NULL;
@@ -699,6 +783,8 @@ cc_wacom_page_init (CcWacomPage *self)
         gtk_widget_set_halign (priv->nav, GTK_ALIGN_END);
         gtk_widget_set_margin_left (priv->nav, 10);
 	gtk_grid_attach (GTK_GRID (box), priv->nav, 1, 0, 1, 1);
+
+	priv->cancellable = g_cancellable_new ();
 }
 
 static void

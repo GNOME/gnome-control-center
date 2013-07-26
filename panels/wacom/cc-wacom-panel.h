@@ -70,6 +70,11 @@ GType cc_wacom_panel_get_type (void) G_GNUC_CONST;
 void  cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
 				      const char   *panel);
 
+void  cc_wacom_panel_set_osd_visibility (CcWacomPanel *self,
+                                         guint32        device_id);
+
+GDBusProxy * cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self);
+
 G_END_DECLS
 
 #endif /* _CC_WACOM_PANEL_H */
