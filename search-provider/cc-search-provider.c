@@ -187,7 +187,7 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
   GVariantBuilder builder;
   GAppInfo *app;
   const char *id;
-  char *name, *description, *escaped_description, *icon_string;
+  char *name, *description, *escaped_description;
   GIcon *icon;
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("aa{sv}"));
@@ -204,7 +204,6 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
                           COL_DESCRIPTION, &description,
                           -1);
       id = g_app_info_get_id (app);
-      icon_string = g_icon_to_string (icon);
       escaped_description = g_markup_escape_text (description, -1);
 
       g_variant_builder_open (&builder, G_VARIANT_TYPE ("a{sv}"));
@@ -213,7 +212,7 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
       g_variant_builder_add (&builder, "{sv}",
                              "name", g_variant_new_string (name));
       g_variant_builder_add (&builder, "{sv}",
-                             "gicon", g_variant_new_string (icon_string));
+                             "icon", g_icon_serialize (icon));
       g_variant_builder_add (&builder, "{sv}",
                              "description", g_variant_new_string (escaped_description));
       g_variant_builder_close (&builder);
@@ -221,7 +220,6 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
       g_free (name);
       g_free (description);
       g_free (escaped_description);
-      g_free (icon_string);
       g_object_unref (app);
       g_object_unref (icon);
     }
