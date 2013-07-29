@@ -191,15 +191,30 @@ complete_dialog (UmAccountDialog *self,
 }
 
 static void
+user_loaded_cb (ActUser         *user,
+                GParamSpec      *pspec,
+                UmAccountDialog *self)
+{
+  const gchar *password;
+
+  finish_action (self);
+
+  /* Set a password for the user */
+  password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
+  act_user_set_password_mode (user, self->local_password_mode);
+  if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
+        act_user_set_password (user, password, "");
+
+  complete_dialog (self, user);
+}
+
+static void
 create_user_done (ActUserManager  *manager,
                   GAsyncResult    *res,
                   UmAccountDialog *self)
 {
         ActUser *user;
         GError *error;
-        const gchar *password;
-
-        finish_action (self);
 
         /* Note that user is returned without an extra reference */
 
@@ -207,6 +222,7 @@ create_user_done (ActUserManager  *manager,
         user = act_user_manager_create_user_finish (manager, res, &error);
 
         if (user == NULL) {
+                finish_action (self);
                 g_debug ("Failed to create user: %s", error->message);
                 if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
                        show_error_dialog (self, _("Failed to add account"), error);
@@ -215,14 +231,11 @@ create_user_done (ActUserManager  *manager,
         } else {
                 g_debug ("Created user: %s", act_user_get_user_name (user));
 
-                /* Set a password for the user */
-                password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
-                act_user_set_password_mode (user, self->local_password_mode);
-                if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
-                        act_user_set_password (user, password, "");
-                }
-
-                complete_dialog (self, user);
+                /* Check if the returned object is fully loaded before returning it */
+                if (act_user_is_loaded (user))
+                        user_loaded_cb (user, NULL, self);
+                else
+                        g_signal_connect (user, "notify::is-loaded", G_CALLBACK (user_loaded_cb), self);
         }
 }
 
