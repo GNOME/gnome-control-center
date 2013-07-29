@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 Intel, Inc
+ * Copyright (C) 2013 Kalev Lember <kalevlember@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -269,6 +270,15 @@ update_time (CcDateTimePanel *self)
   label = g_date_time_format (priv->date, "%M");
   gtk_label_set_text (GTK_LABEL (W("minutes_label")), label);
   g_free (label);
+
+  /* Update the time on the listbow row */
+  if (use_ampm)
+    label = g_date_time_format (priv->date, "%e %B %Y, %l:%M %p");
+  else
+    label = g_date_time_format (priv->date, "%e %B %Y, %R");
+
+  gtk_label_set_text (GTK_LABEL (W ("datetime_label")), label);
+  g_free (label);
 }
 
 static void
@@ -447,6 +457,8 @@ update_timezone (CcDateTimePanel *self)
   gchar **split;
   GtkTreeIter iter;
   GtkTreeModel *model;
+  TzInfo *tz_info;
+  char *label;
 
   /* tz.c updates the local timezone, which means the spin buttons can be
    * updated with the current time of the new location */
@@ -503,6 +515,16 @@ update_timezone (CcDateTimePanel *self)
   while (gtk_tree_model_iter_next (model, &iter));
 
   g_strfreev (split);
+
+  /* Update the timezone on the listbow row */
+  tz_info = tz_info_from_location (self->priv->current_location);
+  label = g_strdup_printf ("%s (%s)",
+                           tz_info->tzname_normal,
+                           self->priv->current_location->zone);
+  tz_info_free (tz_info);
+
+  gtk_label_set_text (GTK_LABEL (W ("timezone_label")), label);
+  g_free (label);
 }
 
 static void
@@ -685,8 +707,7 @@ update_widget_state_for_ntp (CcDateTimePanel *panel,
   /* need to check polkit before revealing to user */
   allowed = (! priv->permission || g_permission_get_allowed (priv->permission));
 
-  gtk_widget_set_sensitive (W("table1"), !using_ntp && allowed);
-  gtk_widget_set_sensitive (W("table2"), !using_ntp && allowed);
+  gtk_widget_set_sensitive (W("datetime-button"), !using_ntp && allowed);
 }
 
 static void
@@ -796,10 +817,16 @@ on_permission_changed (GPermission *permission,
   using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
 
   /* All the widgets but the lock button and the 24h setting */
-  gtk_widget_set_sensitive (W("map-vbox"), allowed);
-  gtk_widget_set_sensitive (W("hbox2"), allowed);
-  gtk_widget_set_sensitive (W("alignment2"), allowed);
+  gtk_widget_set_sensitive (W("auto-datetime-row"), allowed);
+  gtk_widget_set_sensitive (W("timezone-button"), allowed);
   update_widget_state_for_ntp (data, using_ntp);
+
+  /* Hide the subdialogs if we no longer have permissions */
+  if (!allowed)
+    {
+      gtk_widget_hide (GTK_WIDGET (W ("datetime-dialog")));
+      gtk_widget_hide (GTK_WIDGET (W ("timezone-dialog")));
+    }
 }
 
 static void
@@ -936,11 +963,114 @@ reorder_date_widget (DateEndianess           endianess,
 }
 
 static void
+update_header (GtkListBoxRow *row,
+               GtkListBoxRow *before,
+               gpointer       user_data)
+{
+  GtkWidget *current;
+
+  if (before == NULL)
+    return;
+
+  current = gtk_list_box_row_get_header (row);
+  if (current == NULL)
+    {
+      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (current);
+      gtk_list_box_row_set_header (row, current);
+    }
+}
+
+static void
+run_dialog (CcDateTimePanel *self,
+            const gchar     *dialog_name)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *dialog, *parent;
+
+  dialog = W (dialog_name);
+
+  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
+  gtk_dialog_run (GTK_DIALOG (dialog));
+}
+
+static void
+list_box_row_activated (GtkListBox      *listbox,
+                        GtkListBoxRow   *row,
+                        CcDateTimePanel *self)
+
+{
+  gchar *widget_name, *found;
+
+  widget_name = g_strdup (gtk_buildable_get_name (GTK_BUILDABLE (row)));
+
+  if (!widget_name)
+    return;
+
+  gtk_list_box_select_row (listbox, NULL);
+
+  /* replace "button" with "dialog" */
+  found = g_strrstr (widget_name, "button");
+
+  if (!found)
+    goto out;
+
+  memcpy (found, "dialog", 6);
+
+  run_dialog (self, widget_name);
+
+out:
+  g_free (widget_name);
+}
+
+static void
+setup_main_listview (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *listbox;
+
+  listbox = W ("listbox");
+  gtk_list_box_set_header_func (GTK_LIST_BOX (listbox), update_header, NULL, NULL);
+  g_signal_connect (listbox, "row-activated",
+                    G_CALLBACK (list_box_row_activated), self);
+}
+
+static void
+setup_timezone_dialog (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *button;
+  GtkWidget *dialog;
+
+  button = W ("timezone-close-button");
+  dialog = W ("timezone-dialog");
+  g_signal_connect_swapped (button, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+}
+
+static void
+setup_datetime_dialog (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *button;
+  GtkWidget *dialog;
+
+  button = W ("datetime-close-button");
+  dialog = W ("datetime-dialog");
+  g_signal_connect_swapped (button, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
-  gchar *objects[] = { "datetime-panel", "region-liststore", "city-liststore",
-      "month-liststore", "city-modelfilter", "city-modelsort", NULL };
   char *buttons[] = { "hour_up_button", "hour_down_button", "min_up_button",
           "min_down_button", "ampm_up_button", "ampm_down_button" };
   GtkWidget *widget;
@@ -971,9 +1101,9 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   }
 
   priv->builder = gtk_builder_new ();
-  ret = gtk_builder_add_objects_from_resource (priv->builder,
-                                               "/org/gnome/control-center/datetime/datetime.ui",
-                                               objects, &err);
+  ret = gtk_builder_add_from_resource (priv->builder,
+                                       "/org/gnome/control-center/datetime/datetime.ui",
+                                       &err);
 
   if (ret == 0)
     {
@@ -982,6 +1112,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
         g_error_free (err);
       return;
     }
+
+  setup_timezone_dialog (self);
+  setup_datetime_dialog (self);
+  setup_main_listview (self);
 
   /* set up network time button */
   if (priv->dtm != NULL)
@@ -1057,10 +1191,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
      priv->ampm_available = TRUE;
     }
 
-  gtk_container_add (GTK_CONTAINER (self),
-                     GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                         "datetime-panel")));
-
+  widget = W ("vbox_datetime");
+  gtk_widget_reparent (widget, GTK_WIDGET (self));
 
   /* setup the time itself */
   priv->clock_tracker = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
