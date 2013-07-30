@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.9.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-04 11:00+0200\n"
-"PO-Revision-Date: 2013-07-04 11:08+0200\n"
+"POT-Creation-Date: 2013-07-30 19:40+0200\n"
+"PO-Revision-Date: 2013-07-30 19:46+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -86,6 +86,25 @@ msgstr "Fant ingen bilder"
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Du kan legge til bilder i din %s-mappe så vil de vises her"
 
+#: ../panels/background/cc-background-chooser-dialog.c:443
+#: ../panels/bluetooth/cc-bluetooth-panel.c:631
+#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/network/connection-editor/vpn-helpers.c:245
+#: ../panels/network/connection-editor/vpn-helpers.c:374
+#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1408
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/search/cc-search-locations-dialog.c:682
+#: ../panels/sharing/cc-sharing-panel.c:421
+#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-photo-dialog.c:96
+#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-user-panel.c:508
+msgid "_Cancel"
+msgstr "A_vbryt"
+
 #: ../panels/background/cc-background-chooser-dialog.c:444
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
@@ -155,7 +174,7 @@ msgstr "side 2"
 msgid "Paired"
 msgstr "Koblet"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
+#: ../panels/bluetooth/bluetooth.ui.h:7
 msgid "Type"
 msgstr "Type:"
 
@@ -172,7 +191,6 @@ msgid "Mouse & Touchpad Settings"
 msgstr "Innstillinger for mus og pekeplate"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
-#: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Innstillinger for lyd"
 
@@ -226,6 +244,11 @@ msgid ""
 msgstr ""
 "Hvis du fjerner enheten vil du måtte sette den opp på nytt før du bruker den "
 "igjen."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:632
+#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+msgid "_Remove"
+msgstr "Fje_rn"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth"
@@ -438,6 +461,11 @@ msgstr "Skriv URLen inn i nettleseren for å laste ned og installere profilen."
 msgid "Save Profile"
 msgstr "Lagre profil"
 
+#: ../panels/color/cc-color-panel.c:968
+#: ../panels/network/connection-editor/vpn-helpers.c:375
+msgid "_Save"
+msgstr "_Lagre"
+
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:1328
 msgid "Create a color profile for the selected device"
@@ -546,7 +574,7 @@ msgstr "Kalibrering av skjerm"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1407
+#: ../panels/user-accounts/um-account-dialog.c:1420
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -642,7 +670,9 @@ msgstr ""
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
-msgstr "Du kan alternativt bruke lysstyrkenivået som brukes med en av de andre profilene for denne enheten."
+msgstr ""
+"Du kan alternativt bruke lysstyrkenivået som brukes med en av de andre "
+"profilene for denne enheten."
 
 #: ../panels/color/color.ui.h:17
 msgid "Display Brightness"
@@ -652,7 +682,9 @@ msgstr "Lysstyrke for skjerm"
 msgid ""
 "You can use a color profile on different computers, or even create profiles "
 "for different lighting conditions."
-msgstr "Du kan bruke en fargeprofil på forskjellige datamaskiner, eller til og med lage profiler for forskjellige lysforhold."
+msgstr ""
+"Du kan bruke en fargeprofil på forskjellige datamaskiner, eller til og med "
+"lage profiler for forskjellige lysforhold."
 
 #: ../panels/color/color.ui.h:19
 msgid "Profile Name:"
@@ -687,10 +719,13 @@ msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
 "\">Microsoft Windows</a> systems useful."
-msgstr "Instruksjonene om hvordan profilen skal brukes på <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> og <a href=\"windows\">Microsoft Windows> systemer kan være nyttig."
+msgstr ""
+"Instruksjonene om hvordan profilen skal brukes på <a href=\"linux\">GNU/"
+"Linux</a>, <a href=\"osx\">Apple OS X</a> og <a href=\"windows\">Microsoft "
+"Windows> systemer kan være nyttig."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+#: ../panels/user-accounts/um-fingerprint-dialog.c:742
 msgid "Summary"
 msgstr "Sammendrag"
 
@@ -918,7 +953,7 @@ msgid "Language"
 msgstr "Språk"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/mouse/cc-mouse-panel.c:117 ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:119 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "Fer_dig"
 
@@ -1048,22 +1083,22 @@ msgstr "Endre innstillinger for systemets klokke og dato"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Du må autentisere deg for å endre innstillinger for tid og dato."
 
-#: ../panels/display/cc-display-panel.c:483
+#: ../panels/display/cc-display-panel.c:491
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/display/cc-display-panel.c:484
+#: ../panels/display/cc-display-panel.c:492
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Mot klokken"
 
-#: ../panels/display/cc-display-panel.c:485
+#: ../panels/display/cc-display-panel.c:493
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "Med klokken"
 
-#: ../panels/display/cc-display-panel.c:486
+#: ../panels/display/cc-display-panel.c:494
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 grader"
@@ -1080,21 +1115,21 @@ msgstr "180 grader"
 #. * Here, "Mirrored" is being used as an adjective.  For example,
 #. * the Spanish translation could be "Pantallas en Espejo".
 #.
-#: ../panels/display/cc-display-panel.c:625
+#: ../panels/display/cc-display-panel.c:633
 #: ../panels/display/cc-rr-labeler.c:418
 msgid "Mirrored Displays"
 msgstr "Speilede skjermer"
 
-#: ../panels/display/cc-display-panel.c:649
+#: ../panels/display/cc-display-panel.c:657
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "Skjerm"
 
-#: ../panels/display/cc-display-panel.c:1669
+#: ../panels/display/cc-display-panel.c:1702
 msgid "Drag to change primary display."
 msgstr "Dra for å bytte primær skjerm."
 
-#: ../panels/display/cc-display-panel.c:1727
+#: ../panels/display/cc-display-panel.c:1760
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -1102,29 +1137,29 @@ msgstr ""
 "Velg en skjerm for å endre egenskaper for denne. Dra den rundt for å bytte "
 "plassering."
 
-#: ../panels/display/cc-display-panel.c:2115
+#: ../panels/display/cc-display-panel.c:2157
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2117
+#: ../panels/display/cc-display-panel.c:2159
 msgid "%a %l:%M %p"
 msgstr "%a %H.%M"
 
-#: ../panels/display/cc-display-panel.c:2279
-#: ../panels/display/cc-display-panel.c:2331
+#: ../panels/display/cc-display-panel.c:2321
+#: ../panels/display/cc-display-panel.c:2373
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "Klarte ikke å ta konfigurasjonen i bruk: %s"
 
-#: ../panels/display/cc-display-panel.c:2359
+#: ../panels/display/cc-display-panel.c:2401
 msgid "Could not save the monitor configuration"
 msgstr "Kunne ikke lagre skjermkonfigurasjon"
 
-#: ../panels/display/cc-display-panel.c:2419
+#: ../panels/display/cc-display-panel.c:2461
 msgid "Could not detect displays"
 msgstr "Kunne ikke søke etter skjermer"
 
-#: ../panels/display/cc-display-panel.c:2614
+#: ../panels/display/cc-display-panel.c:2673
 msgid "Could not get screen information"
 msgstr "Fant ikke informasjon om skjermen"
 
@@ -1177,39 +1212,39 @@ msgstr "%s %d-bit"
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1209
+#: ../panels/info/cc-info-panel.c:1214
 msgid "Ask what to do"
 msgstr "Spør hvs som skal gjøres"
 
-#: ../panels/info/cc-info-panel.c:1213
+#: ../panels/info/cc-info-panel.c:1218
 msgid "Do nothing"
 msgstr "Ikke gjør noe"
 
-#: ../panels/info/cc-info-panel.c:1217
+#: ../panels/info/cc-info-panel.c:1222
 msgid "Open folder"
 msgstr "Åpne mappe"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:1313
 msgid "Other Media"
 msgstr "Annet medie"
 
-#: ../panels/info/cc-info-panel.c:1339
+#: ../panels/info/cc-info-panel.c:1344
 msgid "Select an application for audio CDs"
 msgstr "Velg et program for lyd-CDer"
 
-#: ../panels/info/cc-info-panel.c:1340
+#: ../panels/info/cc-info-panel.c:1345
 msgid "Select an application for video DVDs"
 msgstr "Velg et program for video-DVDer"
 
-#: ../panels/info/cc-info-panel.c:1341
+#: ../panels/info/cc-info-panel.c:1346
 msgid "Select an application to run when a music player is connected"
 msgstr "Velg et program som skal kjøres når en musikkavspiller kobles til"
 
-#: ../panels/info/cc-info-panel.c:1342
+#: ../panels/info/cc-info-panel.c:1347
 msgid "Select an application to run when a camera is connected"
 msgstr "Velg et program som skal kjøres når et kamera kobles til"
 
-#: ../panels/info/cc-info-panel.c:1343
+#: ../panels/info/cc-info-panel.c:1348
 msgid "Select an application for software CDs"
 msgstr "Velg et program for programvare-CDer"
 
@@ -1218,89 +1253,89 @@ msgstr "Velg et program for programvare-CDer"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1355
+#: ../panels/info/cc-info-panel.c:1360
 msgid "audio DVD"
 msgstr "Lyd-DVD"
 
-#: ../panels/info/cc-info-panel.c:1356
+#: ../panels/info/cc-info-panel.c:1361
 msgid "blank Blu-ray disc"
 msgstr "Tom Blu-ray-plate"
 
-#: ../panels/info/cc-info-panel.c:1357
+#: ../panels/info/cc-info-panel.c:1362
 msgid "blank CD disc"
 msgstr "Tom CD-plate"
 
-#: ../panels/info/cc-info-panel.c:1358
+#: ../panels/info/cc-info-panel.c:1363
 msgid "blank DVD disc"
 msgstr "Tom DVD-plate"
 
-#: ../panels/info/cc-info-panel.c:1359
+#: ../panels/info/cc-info-panel.c:1364
 msgid "blank HD DVD disc"
 msgstr "tom HD-DVD plate"
 
-#: ../panels/info/cc-info-panel.c:1360
+#: ../panels/info/cc-info-panel.c:1365
 msgid "Blu-ray video disc"
 msgstr "Blu-ray videoplate"
 
-#: ../panels/info/cc-info-panel.c:1361
+#: ../panels/info/cc-info-panel.c:1366
 msgid "e-book reader"
 msgstr "E-bokleser"
 
-#: ../panels/info/cc-info-panel.c:1362
+#: ../panels/info/cc-info-panel.c:1367
 msgid "HD DVD video disc"
 msgstr "HD-DVD-videoplate"
 
-#: ../panels/info/cc-info-panel.c:1363
+#: ../panels/info/cc-info-panel.c:1368
 msgid "Picture CD"
 msgstr "Bilde-CD"
 
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1369
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1370
 msgid "Video CD"
 msgstr "Video-CD"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1371
 msgid "Windows software"
 msgstr "Windows programvare"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1372
 msgid "Software"
 msgstr "Programvare"
 
-#: ../panels/info/cc-info-panel.c:1490
+#: ../panels/info/cc-info-panel.c:1495
 #: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "Seksjon"
 
-#: ../panels/info/cc-info-panel.c:1499 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1504 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Oversikt"
 
-#: ../panels/info/cc-info-panel.c:1505 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Forvalgte programmer"
 
-#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Avtagbare medier"
 
-#: ../panels/info/cc-info-panel.c:1535
+#: ../panels/info/cc-info-panel.c:1540
 #, c-format
 msgid "Version %s"
 msgstr "Versjon %s"
 
-#: ../panels/info/cc-info-panel.c:1585
+#: ../panels/info/cc-info-panel.c:1590
 msgid "Install Updates"
 msgstr "Installer oppdateringer"
 
-#: ../panels/info/cc-info-panel.c:1589
+#: ../panels/info/cc-info-panel.c:1594
 msgid "System Up-To-Date"
 msgstr "Systemet er oppdatert"
 
-#: ../panels/info/cc-info-panel.c:1593
+#: ../panels/info/cc-info-panel.c:1598
 msgid "Checking for Updates"
 msgstr "Ser etter oppdateringer"
 
@@ -1466,7 +1501,7 @@ msgstr "Utløs"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "Skriving"
 
@@ -1715,7 +1750,6 @@ msgid "Remove Shortcut"
 msgstr "Fjern snarvei"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
-#: ../panels/wacom/button-mapping.ui.h:3
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1772,7 +1806,7 @@ msgstr "_Omfordel"
 msgid "Test Your _Settings"
 msgstr "Test dine inn_stillinger"
 
-#: ../panels/mouse/cc-mouse-panel.c:114
+#: ../panels/mouse/cc-mouse-panel.c:116
 msgid "Test Your Settings"
 msgstr "Test dine innstillinger"
 
@@ -1789,8 +1823,8 @@ msgstr ""
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;"
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
+msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;Rull;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Mouse Preferences"
@@ -1916,11 +1950,11 @@ msgstr "Enkeltklikk, sekundærknapp"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:364
+#: ../panels/network/cc-network-panel.c:347
 msgid "Air_plane Mode"
 msgstr "_Flymodus"
 
-#: ../panels/network/cc-network-panel.c:927
+#: ../panels/network/cc-network-panel.c:914
 msgid "Network proxy"
 msgstr "Nettverksproxy"
 
@@ -1928,14 +1962,14 @@ msgstr "Nettverksproxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/cc-network-panel.c:1093 ../panels/network/net-vpn.c:285
 #: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1241
+#: ../panels/network/cc-network-panel.c:1228
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Nettverkstjenesten for dette systemet er ikke kompatibelt med denne "
@@ -2384,7 +2418,7 @@ msgstr "Ny profil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:509
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1408
+#: ../panels/user-accounts/um-account-dialog.c:1421
 msgid "_Add"
 msgstr "_Legg til"
 
@@ -2469,6 +2503,13 @@ msgstr ""
 #: ../panels/network/connection-editor/vpn-helpers.c:242
 msgid "Select file to import"
 msgstr "Velg fil som skal importeres"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:246
+#: ../panels/printers/cc-printers-panel.c:1947
+#: ../panels/sharing/cc-sharing-panel.c:422
+#: ../panels/user-accounts/um-photo-dialog.c:222
+msgid "_Open"
+msgstr "_Åpne"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
 #, c-format
@@ -2595,7 +2636,7 @@ msgstr "Kablet"
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
+#: ../panels/network/network-vpn.ui.h:8
 msgid "Options…"
 msgstr "Alternativer …"
 
@@ -2657,6 +2698,12 @@ msgstr ""
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Historikk"
+
+#: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:10 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/wacom/cc-wacom-page.c:525
+msgid "_Close"
+msgstr "_Lukk"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: ../panels/network/net-device-wifi.c:1727
@@ -2815,7 +2862,6 @@ msgid "_Password"
 msgstr "_Passord"
 
 #: ../panels/network/network-wifi.ui.h:18
-#: ../panels/universal-access/uap.ui.h:8
 msgid "None"
 msgstr "Ingen"
 
@@ -2867,7 +2913,9 @@ msgstr "maskinvare"
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
-msgstr "Nullstill innstillingene for denne tilkoblingen til utgangsverdiene, men husk den som en foretrukket tilkobling."
+msgstr ""
+"Nullstill innstillingene for denne tilkoblingen til utgangsverdiene, men "
+"husk den som en foretrukket tilkobling."
 
 #: ../panels/network/network-wifi.ui.h:42
 msgid ""
@@ -3228,7 +3276,10 @@ msgid ""
 "Not using a Certificate Authority (CA) certificate can result in connections "
 "to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
 "Authority certificate?"
-msgstr "Hvis du ikke bruker et sertifikat fra en sertifikatmyndighet (CA) kan du risikere å koble til usikre trådløse nettverk. Vil du velge et sertifikat fra en sertifikatmyndighet?"
+msgstr ""
+"Hvis du ikke bruker et sertifikat fra en sertifikatmyndighet (CA) kan du "
+"risikere å koble til usikre trådløse nettverk. Vil du velge et sertifikat "
+"fra en sertifikatmyndighet?"
 
 #: ../panels/network/wireless-security/eap-method.c:281
 msgid "Ignore"
@@ -3360,7 +3411,9 @@ msgid ""
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
-"Valgt privat nøkkel ser ikke ut til å være beskyttet av et passord. Dette kan medføre at påloggingsinformasjonen kan kompromitteres. Vennligst velg en passordbeskyttet privat nøkkel.\n"
+"Valgt privat nøkkel ser ikke ut til å være beskyttet av et passord. Dette "
+"kan medføre at påloggingsinformasjonen kan kompromitteres. Vennligst velg en "
+"passordbeskyttet privat nøkkel.\n"
 "\n"
 "Du kan passordbeskytte din private nøkkel med openssl."
 
@@ -3503,6 +3556,9 @@ msgstr "Vis detaljer ved låsing av skjerm"
 #: ../panels/power/cc-power-panel.c:1625 ../panels/power/cc-power-panel.c:1632
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
 msgid "On"
 msgstr "På"
 
@@ -3510,6 +3566,10 @@ msgstr "På"
 #: ../panels/power/cc-power-panel.c:1619 ../panels/power/cc-power-panel.c:1630
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
+#: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Av"
 
@@ -3588,10 +3648,6 @@ msgstr "Er du sikker på at du vil fjerne kontoen?"
 #: ../panels/online-accounts/cc-online-accounts-panel.c:825
 msgid "This will not remove the account on the server."
 msgstr "Dette vil ikke fjerne kontoen på tjeneren."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
-msgid "_Remove"
-msgstr "Fje_rn"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:1
 msgid "Online Accounts"
@@ -3956,10 +4012,6 @@ msgstr "12 minutter"
 msgid "Automatic Suspend"
 msgstr "Automatisk hvilemodus"
 
-#: ../panels/power/power.ui.h:21 ../panels/privacy/privacy.ui.h:10
-msgid "_Close"
-msgstr "_Lukk"
-
 #: ../panels/power/power.ui.h:22
 msgid "_Plugged In"
 msgstr "Når den er _koblet til strøm"
@@ -4216,11 +4268,6 @@ msgstr "Avbryt utskriftsjobb"
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
 msgstr "Legg til ny skriver"
-
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:501
-msgid "_Cancel"
-msgstr "A_vbryt"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
 msgid "Search for network printers or filter result"
@@ -4910,6 +4957,10 @@ msgstr "Annet"
 msgid "Select Location"
 msgstr "Velg lokasjon"
 
+#: ../panels/search/cc-search-locations-dialog.c:683
+msgid "_OK"
+msgstr "_OK"
+
 #: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "Ingen programmer funnet"
@@ -4955,11 +5006,11 @@ msgctxt "service is disabled"
 msgid "Off"
 msgstr "Av"
 
-#: ../panels/sharing/cc-sharing-panel.c:422
+#: ../panels/sharing/cc-sharing-panel.c:418
 msgid "Choose a Folder"
 msgstr "Velg en mappe"
 
-#: ../panels/sharing/cc-sharing-panel.c:706
+#: ../panels/sharing/cc-sharing-panel.c:702
 msgid "Copy"
 msgstr "Kopier"
 
@@ -5345,11 +5396,6 @@ msgstr "Basselement"
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: ../panels/universal-access/cc-ua-panel.c:281
-#: ../panels/universal-access/cc-ua-panel.c:287
-msgid "No shortcut set"
-msgstr "Ingen snarvei satt"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Gjør det lettere å se, høre, skrive og peke og klikke"
@@ -5364,303 +5410,250 @@ msgstr ""
 "størrelse;AccessX;Klebrige taster;Trege taster;Sprettetaster;Mustaster;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:35
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "Lav"
+msgid "Show Status When _Inactive"
+msgstr "Vis status når _inaktiv"
 
 #: ../panels/universal-access/uap.ui.h:2
-msgctxt "universal access, contrast"
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:36
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "Høy"
-
-#: ../panels/universal-access/uap.ui.h:4
-msgctxt "universal access, contrast"
-msgid "High/Inverse"
-msgstr "Høy/omvendt"
-
-#: ../panels/universal-access/uap.ui.h:5
-msgid "On screen keyboard"
-msgstr "Tastatur på skjermen"
-
-#: ../panels/universal-access/uap.ui.h:6
-msgid "GOK"
-msgstr "GOK"
-
-#: ../panels/universal-access/uap.ui.h:7
-msgid "OnBoard"
-msgstr "OnBoard"
-
-#: ../panels/universal-access/uap.ui.h:10
-#, no-c-format
-msgid "75%"
-msgstr "75%"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgctxt "universal access, text size"
-msgid "Small"
-msgstr "Liten"
-
-#: ../panels/universal-access/uap.ui.h:13
-#, no-c-format
-msgid "100%"
-msgstr "100%"
-
-#: ../panels/universal-access/uap.ui.h:14
-msgctxt "universal access, text size"
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/universal-access/uap.ui.h:16
-#, no-c-format
-msgid "125%"
-msgstr "125%"
-
-#: ../panels/universal-access/uap.ui.h:17
-msgctxt "universal access, text size"
-msgid "Large"
-msgstr "Stor"
-
-#: ../panels/universal-access/uap.ui.h:19
-#, no-c-format
-msgid "150%"
-msgstr "150%"
-
-#: ../panels/universal-access/uap.ui.h:20
-msgctxt "universal access, text size"
-msgid "Larger"
-msgstr "Større"
-
-#: ../panels/universal-access/uap.ui.h:21
-msgid "High Contrast"
-msgstr "Høy kontrast"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Beep on Caps and Num Lock"
-msgstr "Pip når Caps og Num Lock er aktiv"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Screen Reader"
-msgstr "Skjermleser"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Turn on or off:"
-msgstr "Slå på eller av:"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgctxt "universal access, zoom"
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Zoom in:"
-msgstr "Zoom inn:"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Zoom out:"
-msgstr "Zoom ut:"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Large Text"
-msgstr "Stor tekst"
-
-#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "Syn"
 
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Visual Alerts"
-msgstr "Synlige varsel"
+#: ../panels/universal-access/uap.ui.h:3
+msgid "_High Contrast"
+msgstr "_Høy kontrast"
 
-#: ../panels/universal-access/uap.ui.h:32
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "Bruk en visuell indikasjon når en varsellyd spilles av"
+#: ../panels/universal-access/uap.ui.h:4
+msgid "_Large Text"
+msgstr "_Stor tekst"
 
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Flash the window title"
-msgstr "La tittelfeltet i vinduet blinke"
+#: ../panels/universal-access/uap.ui.h:5
+msgid "_Zoom"
+msgstr "_Zoom"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Flash the entire screen"
-msgstr "La hele skjermen blinke"
+#: ../panels/universal-access/uap.ui.h:7
+msgid "Screen _Reader"
+msgstr "Skjermlese_r"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Closed Captioning"
-msgstr "Lukket bildetekst"
+#: ../panels/universal-access/uap.ui.h:8
+msgid "_Sound Keys"
+msgstr "_Lydtaster"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Display a textual description of speech and sounds"
-msgstr "Vis en tekstlig beskrivelse av tale og lyder"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "_Test flash"
-msgstr "_Test blinking"
-
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:9
 msgid "Hearing"
 msgstr "Hørsel"
 
-#: ../panels/universal-access/uap.ui.h:40
-msgid "On Screen Keyboard"
-msgstr "Tastatur på skjermen"
+#: ../panels/universal-access/uap.ui.h:10
+msgid "_Visual Alerts"
+msgstr "_Synlige varsel"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Sticky Keys"
-msgstr "Klebrige taster"
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Screen _Keyboard"
+msgstr "Tastatur på s_kjermen"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:13
+msgid "_Typing Assist (AccessX)"
+msgstr "_Skriveassistent (AccessX)"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Pointing and Clicking"
+msgstr "Pek og klikk"
+
+#: ../panels/universal-access/uap.ui.h:15
+msgid "_Mouse Keys"
+msgstr "_Mustaster"
+
+#: ../panels/universal-access/uap.ui.h:16
+msgid "_Click Assist"
+msgstr "_Klikkassistent"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgid "Screen Reader"
+msgstr "Skjermleser"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr "Skjermleser leser tekst som vises mens du flytter fokus."
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Screen Reader"
+msgstr "_Skjermleser"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Sound Keys"
+msgstr "Lydtaster"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Beep when Num Lock or Caps Lock are turned on."
+msgstr "Pip når Num Lock eller Caps Lock slås på."
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Visual Alerts"
+msgstr "Synlige varsel"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "Bruk en visuell indikasjon når en varsellyd spilles av."
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "_Test flash"
+msgstr "_Test blinking"
+
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Flash the _window title"
+msgstr "La tittelfeltet i _vinduet blinke"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Flash the entire _screen"
+msgstr "La hele _skjermen blinke"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Typing Assist"
+msgstr "Skriveassistent"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "_Sticky Keys"
+msgstr "Klebrige ta_ster"
+
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Behandler en sekvens med endringstaster som en tastekombinasjon"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Disable if two keys are pressed together"
 msgstr "_Slå av hvis to taster trykkes ned samtidig"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Beep when a _modifer key is pressed"
 msgstr "Pip når e_ndringstast er trykket ned"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "Slow Keys"
-msgstr "Trege taster"
+#: ../panels/universal-access/uap.ui.h:32
+msgid "S_low Keys"
+msgstr "T_rege taster"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Setter inn en pause fra en tast trykkes ned til den godtas"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:34
 msgid "A_cceptance delay:"
 msgstr "_Pause før aksept:"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:35
+msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Kort"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Slow keys typing delay"
 msgstr "Pause for tasting med trege taster"
 
-#: ../panels/universal-access/uap.ui.h:50
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:37
+msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Lang"
 
-#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Beep when a key is"
-msgstr "Pip når en tast"
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Beep when a key is pr_essed"
+msgstr "Pip når en tast trykkes n_ed"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:54
-msgid "pressed"
-msgstr "trykket"
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Beep when a key is _accepted"
+msgstr "Pip når en tast godt_as"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
-msgid "accepted"
-msgstr "godtatt"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
-msgid "rejected"
-msgstr "avvist"
-
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Bounce Keys"
-msgstr "Sprettetaster"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Ignores fast duplicate keypresses"
-msgstr "Ignorer raskt dupliserte tastaturtrykk"
-
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Acc_eptance delay:"
-msgstr "Paus_e før aksept:"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Bounce keys typing delay"
-msgstr "Pause for tasting med sprettetaster"
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Beep when a key is _rejected"
 msgstr "Pip nå_r en tast avvises"
 
-#: ../panels/universal-access/uap.ui.h:64
-msgid "Enable by Keyboard"
-msgstr "Slå på via tastatur"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "_Bounce Keys"
+msgstr "S_prettetaster"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Ignores fast duplicate keypresses"
+msgstr "Ignorer raskt dupliserte tastaturtrykk"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgctxt "bounce keys delay"
+msgid "Short"
+msgstr "Kort"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Bounce keys typing delay"
+msgstr "Pause for tasting med sprettetaster"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgctxt "bounce keys delay"
+msgid "Long"
+msgstr "Lang"
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "_Enable by Keyboard"
+msgstr "Slå _på via tastatur"
+
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Slå på funksjoner for tilgjengelighet fra tastaturet"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Mouse Keys"
-msgstr "Mustaster"
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Click Assist"
+msgstr "Klikkassistent"
 
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Control the pointer using the keypad"
-msgstr "Kontroller peker med det numeriske tastaturet"
+#: ../panels/universal-access/uap.ui.h:49
+msgid "_Simulated Secondary Click"
+msgstr "_Simulert andreklikk"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Video Mouse"
-msgstr "Videomus"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Control the pointer using the video camera."
-msgstr "Kontroller pekeren med videokamera."
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Simulated Secondary Click"
-msgstr "Simulert andreklikk"
-
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Utløs sekundærklikk ved å holde nede primærknappen"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:51
+msgctxt "secondary click"
+msgid "Short"
+msgstr "Kort"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Secondary click delay"
 msgstr "Pause for sekundært klikk"
 
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Hover Click"
-msgstr "Dwell-klikk"
+#: ../panels/universal-access/uap.ui.h:53
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "Lang"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:54
+msgid "_Hover Click"
+msgstr "_Henge-klikk"
+
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Trigger a click when the pointer hovers"
 msgstr "Initier klikk når pekeren henger over et punkt"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:56
 msgid "D_elay:"
 msgstr "Paus_e:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:57
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "Kort"
+
+#: ../panels/universal-access/uap.ui.h:58
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "Lang"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Motion _threshold:"
 msgstr "_Terskel for bevegelse:"
 
-#: ../panels/universal-access/uap.ui.h:78
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:60
+msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Liten"
 
-#: ../panels/universal-access/uap.ui.h:79
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:61
+msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Stor"
-
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Mouse Settings"
-msgstr "Innstillinger for mus"
-
-#: ../panels/universal-access/uap.ui.h:81
-msgid "Pointing and Clicking"
-msgstr "Pek og klikk"
 
 #: ../panels/universal-access/zoom-options.c:357
 msgctxt "Distance"
@@ -5824,6 +5817,16 @@ msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Høy"
 
+#: ../panels/universal-access/zoom-options.ui.h:35
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Lav"
+
+#: ../panels/universal-access/zoom-options.ui.h:36
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "Høy"
+
 #: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Fargeeffekter:"
@@ -5941,7 +5944,7 @@ msgid "Right little finger"
 msgstr "Høyre lillefinger"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:700
+#: ../panels/user-accounts/um-fingerprint-dialog.c:699
 msgid "Enable Fingerprint Login"
 msgstr "Slå på innlogging med fingeravtrykk"
 
@@ -5981,18 +5984,6 @@ msgstr "Login;Navn;Fingeravtrykk;Avatar;Logo;Ansikt;Passord;"
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
 msgid "Login History"
 msgstr "Historikk for innlogging"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
-msgid "Previous Week"
-msgstr "Forrige uke"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
-msgid "Next Week"
-msgstr "Neste uke"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:5
-msgid "Next week"
-msgstr "Neste uke"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid "C_onfirm New Password"
@@ -6084,124 +6075,126 @@ msgstr "Håndter brukerkontoer"
 msgid "Authentication is required to change user data"
 msgstr "Autentisering kreves for å endre brukerdata"
 
-#: ../panels/user-accounts/pw-utils.c:81
+#: ../panels/user-accounts/pw-utils.c:82
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one."
 msgstr "Det nye passordet må være forskjellig fra det gamle."
 
-#: ../panels/user-accounts/pw-utils.c:83
+#: ../panels/user-accounts/pw-utils.c:84
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers."
 msgstr "Prøv å endre noen bokstaver og tall."
 
-#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+#: ../panels/user-accounts/pw-utils.c:86 ../panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
 msgstr "Prøv å endre passord enda litt mer."
 
-#: ../panels/user-accounts/pw-utils.c:87
+#: ../panels/user-accounts/pw-utils.c:88
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger."
 msgstr "Et passord uten brukernavnet vil være sterkere."
 
-#: ../panels/user-accounts/pw-utils.c:89
+#: ../panels/user-accounts/pw-utils.c:90
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password."
 msgstr "Prøv å unngå å bruke navnet ditt i passordet."
 
-#: ../panels/user-accounts/pw-utils.c:91
+#: ../panels/user-accounts/pw-utils.c:92
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password."
 msgstr "Prøv å unngå noen av ordene som brukes i passordet."
 
-#: ../panels/user-accounts/pw-utils.c:95
+#: ../panels/user-accounts/pw-utils.c:96
 msgctxt "Password hint"
 msgid "Try to avoid common words."
 msgstr "Prøv å unngå vanlige ord."
 
-#: ../panels/user-accounts/pw-utils.c:97
+#: ../panels/user-accounts/pw-utils.c:98
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words."
 msgstr "Prøv å unngå å endre rekkefølge på eksisterende ord."
 
-#: ../panels/user-accounts/pw-utils.c:99
+#: ../panels/user-accounts/pw-utils.c:100
 msgctxt "Password hint"
 msgid "Try to use more numbers."
 msgstr "Prøv å bruke flere tall."
 
-#: ../panels/user-accounts/pw-utils.c:101
+#: ../panels/user-accounts/pw-utils.c:102
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters."
 msgstr "Prøv å bruke flere store bokstaver."
 
-#: ../panels/user-accounts/pw-utils.c:103
+#: ../panels/user-accounts/pw-utils.c:104
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters."
 msgstr "Prøv å bruke flere små bokstaver."
 
-#: ../panels/user-accounts/pw-utils.c:105
+#: ../panels/user-accounts/pw-utils.c:106
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation."
 msgstr "Prøv å bruke flere spesialtegn, som tegnsetting."
 
-#: ../panels/user-accounts/pw-utils.c:107
+#: ../panels/user-accounts/pw-utils.c:108
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation."
 msgstr "Prøv å bruke en blanding av bokstaver, tall og tegnsetting."
 
-#: ../panels/user-accounts/pw-utils.c:109
+#: ../panels/user-accounts/pw-utils.c:110
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character."
 msgstr "Prøv å unngå å gjenta samme tegn."
 
-#: ../panels/user-accounts/pw-utils.c:111
+#: ../panels/user-accounts/pw-utils.c:112
 msgctxt "Password hint"
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
-msgstr "Prøv å unngå å gjenta samme type tegn. Du må blande bokstaver, tall og tegnsettingstegn."
+msgstr ""
+"Prøv å unngå å gjenta samme type tegn. Du må blande bokstaver, tall og "
+"tegnsettingstegn."
 
-#: ../panels/user-accounts/pw-utils.c:113
+#: ../panels/user-accounts/pw-utils.c:114
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Prøv å unngå sekvenser som 1234 eller abcs."
 
-#: ../panels/user-accounts/pw-utils.c:115
+#: ../panels/user-accounts/pw-utils.c:116
 msgctxt "Password hint"
-msgid "Try to add more characters."
-msgstr "Prøv å legge til flere tegn."
+msgid "Try to add more letters, numbers and symbols."
+msgstr "Prøv å legge til flere bokstaver, tall og symboler."
 
-#: ../panels/user-accounts/pw-utils.c:118
+#: ../panels/user-accounts/pw-utils.c:119
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
 msgstr "Bland store og små bokstaver, og bruk et tall eller to."
 
-#: ../panels/user-accounts/pw-utils.c:140
-#: ../panels/user-accounts/pw-utils.c:170
+#: ../panels/user-accounts/pw-utils.c:141
+#: ../panels/user-accounts/pw-utils.c:171
 msgctxt "Password strength"
 msgid "Strength: Weak"
 msgstr "Styrke: Svak"
 
-#: ../panels/user-accounts/pw-utils.c:144
-#: ../panels/user-accounts/pw-utils.c:171
+#: ../panels/user-accounts/pw-utils.c:145
+#: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
 msgid "Strength: Low"
 msgstr "Styrke: Lav"
 
-#: ../panels/user-accounts/pw-utils.c:147
-#: ../panels/user-accounts/pw-utils.c:172
+#: ../panels/user-accounts/pw-utils.c:148
+#: ../panels/user-accounts/pw-utils.c:173
 msgctxt "Password strength"
 msgid "Strength: Medium"
 msgstr "Styrke: Middels"
 
-#: ../panels/user-accounts/pw-utils.c:150
-#: ../panels/user-accounts/pw-utils.c:173
+#: ../panels/user-accounts/pw-utils.c:151
+#: ../panels/user-accounts/pw-utils.c:174
 msgctxt "Password strength"
 msgid "Strength: Good"
 msgstr "Styrke: God"
 
-#: ../panels/user-accounts/pw-utils.c:153
-#: ../panels/user-accounts/pw-utils.c:174
+#: ../panels/user-accounts/pw-utils.c:154
+#: ../panels/user-accounts/pw-utils.c:175
 msgctxt "Password strength"
 msgid "Strength: High"
 msgstr "Styrke: Høy"
@@ -6255,37 +6248,37 @@ msgstr "Det nye passordet inneholder ikke nok spesielle tegn"
 msgid "Unknown error"
 msgstr "Ukjent feil"
 
-#: ../panels/user-accounts/um-account-dialog.c:212
+#: ../panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "Klarte ikke å legge til en konto"
 
-#: ../panels/user-accounts/um-account-dialog.c:317
+#: ../panels/user-accounts/um-account-dialog.c:330
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "Dette vil brukes til å navngi hjemmemappen din og kan ikke endres."
 
-#: ../panels/user-accounts/um-account-dialog.c:407
+#: ../panels/user-accounts/um-account-dialog.c:420
 msgid "Passwords do not match."
 msgstr "Passordene er ikke like."
 
-#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-account-dialog.c:421
 #: ../panels/user-accounts/um-password-dialog.c:298
 msgid "Passwords do not match"
 msgstr "Passordene er ikke like"
 
-#: ../panels/user-accounts/um-account-dialog.c:661
-#: ../panels/user-accounts/um-account-dialog.c:707
+#: ../panels/user-accounts/um-account-dialog.c:674
+#: ../panels/user-accounts/um-account-dialog.c:720
 msgid "Failed to register account"
 msgstr "Klarte ikke å registrere konto"
 
-#: ../panels/user-accounts/um-account-dialog.c:845
+#: ../panels/user-accounts/um-account-dialog.c:858
 msgid "No supported way to authenticate with this domain"
 msgstr "Ingen støttet måte å autentisere med dette domenet"
 
-#: ../panels/user-accounts/um-account-dialog.c:904
+#: ../panels/user-accounts/um-account-dialog.c:917
 msgid "Failed to join domain"
 msgstr "Klarte ikke å bli med i domenet"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:978
 msgid ""
 "Login not recognized.\n"
 "Please try again."
@@ -6293,7 +6286,7 @@ msgstr ""
 "Pålogging ikke gjenkjent.\n"
 "Vennligst prøv igjen."
 
-#: ../panels/user-accounts/um-account-dialog.c:973
+#: ../panels/user-accounts/um-account-dialog.c:986
 msgid ""
 "Invalid password.\n"
 "Please try again."
@@ -6301,20 +6294,20 @@ msgstr ""
 "Ugyldig passord.\n"
 "Vennligst prøv igjen."
 
-#: ../panels/user-accounts/um-account-dialog.c:982
+#: ../panels/user-accounts/um-account-dialog.c:995
 msgid "Failed to log into domain"
 msgstr "Klarte ikke å logge inn i domenet"
 
-#: ../panels/user-accounts/um-account-dialog.c:1040
+#: ../panels/user-accounts/um-account-dialog.c:1053
 msgid "Domain not found."
 msgstr "Domenet ble ikke funnet."
 
-#: ../panels/user-accounts/um-account-dialog.c:1383
+#: ../panels/user-accounts/um-account-dialog.c:1396
 msgid "Add User"
 msgstr "Legg til bruker"
 
 #. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1396
+#: ../panels/user-accounts/um-account-dialog.c:1409
 msgid "_Enterprise Login"
 msgstr "Innlogging for b_edrifter"
 
@@ -6344,7 +6337,7 @@ msgstr "Slett registrerte fingeravtrykk?"
 msgid "_Delete Fingerprints"
 msgstr "_Slett fingeravtrykk"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:279
+#: ../panels/user-accounts/um-fingerprint-dialog.c:278
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6352,15 +6345,15 @@ msgstr ""
 "Vil du slette dine registrerte fingeravtrykk slik at innlogging med "
 "fingeravtrykk slås av?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:455
+#: ../panels/user-accounts/um-fingerprint-dialog.c:454
 msgid "Done!"
 msgstr "Ferdig"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:516
-#: ../panels/user-accounts/um-fingerprint-dialog.c:558
+#: ../panels/user-accounts/um-fingerprint-dialog.c:515
+#: ../panels/user-accounts/um-fingerprint-dialog.c:557
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Kunne ikke aksessere enheten «%s»"
@@ -6368,16 +6361,16 @@ msgstr "Kunne ikke aksessere enheten «%s»"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:599
+#: ../panels/user-accounts/um-fingerprint-dialog.c:598
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Kunne ikke starte innlesing av data på enhet «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:650
+#: ../panels/user-accounts/um-fingerprint-dialog.c:649
 msgid "Could not access any fingerprint readers"
 msgstr "Kunne ikke aksessere fingeravtrykkleser"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:651
+#: ../panels/user-accounts/um-fingerprint-dialog.c:650
 msgid "Please contact your system administrator for help."
 msgstr "Kontakt din systemadministrator for hjelp."
 
@@ -6386,7 +6379,7 @@ msgstr "Kontakt din systemadministrator for hjelp."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:734
+#: ../panels/user-accounts/um-fingerprint-dialog.c:733
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6395,11 +6388,11 @@ msgstr ""
 "Du må lagre ett av dine fingeravtrykk med enheten «%s» for å slå på "
 "innlogging med fingeravtrykk."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:741
+#: ../panels/user-accounts/um-fingerprint-dialog.c:740
 msgid "Selecting finger"
 msgstr "Velger finger"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:742
+#: ../panels/user-accounts/um-fingerprint-dialog.c:741
 msgid "Enrolling fingerprints"
 msgstr "Registrerer fingeravtrykk"
 
@@ -6472,24 +6465,24 @@ msgstr "Ugyldig passord. Vennligst prøv igjen"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Kunne ikke koble til domenet %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:189
+#: ../panels/user-accounts/um-user-panel.c:193
 msgid "Other Accounts"
 msgstr "Andre kontoer"
 
-#: ../panels/user-accounts/um-user-panel.c:405
+#: ../panels/user-accounts/um-user-panel.c:412
 msgid "Failed to delete user"
 msgstr "Klarte ikke å slette bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:470
+#: ../panels/user-accounts/um-user-panel.c:477
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: ../panels/user-accounts/um-user-panel.c:479
+#: ../panels/user-accounts/um-user-panel.c:486
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s er fremdeles logget inn"
 
-#: ../panels/user-accounts/um-user-panel.c:483
+#: ../panels/user-accounts/um-user-panel.c:490
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6497,12 +6490,12 @@ msgstr ""
 "Hvis du sletter en innlogget bruker kan systemet ende opp i en inkonsistent "
 "tilstand."
 
-#: ../panels/user-accounts/um-user-panel.c:492
+#: ../panels/user-accounts/um-user-panel.c:499
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Vil du beholde filene til %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:496
+#: ../panels/user-accounts/um-user-panel.c:503
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6510,42 +6503,42 @@ msgstr ""
 "Det er mulig å beholde hjemmekatalogen, e-postkøen og midlertidige filer når "
 "du sletter en brukerkonto."
 
-#: ../panels/user-accounts/um-user-panel.c:499
+#: ../panels/user-accounts/um-user-panel.c:506
 msgid "_Delete Files"
 msgstr "_Slett filer"
 
-#: ../panels/user-accounts/um-user-panel.c:500
+#: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Keep Files"
 msgstr "_Behold filer"
 
-#: ../panels/user-accounts/um-user-panel.c:552
+#: ../panels/user-accounts/um-user-panel.c:559
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktivert"
 
-#: ../panels/user-accounts/um-user-panel.c:560
+#: ../panels/user-accounts/um-user-panel.c:567
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Settes ved neste innlogging"
 
-#: ../panels/user-accounts/um-user-panel.c:563
+#: ../panels/user-accounts/um-user-panel.c:570
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/user-accounts/um-user-panel.c:612
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Logged in"
 msgstr "Logget inn"
 
-#: ../panels/user-accounts/um-user-panel.c:987
+#: ../panels/user-accounts/um-user-panel.c:994
 msgid "Failed to contact the accounts service"
 msgstr "Klarte ikke å kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:989
+#: ../panels/user-accounts/um-user-panel.c:996
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
-#: ../panels/user-accounts/um-user-panel.c:1030
+#: ../panels/user-accounts/um-user-panel.c:1037
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6553,12 +6546,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å gjøre endringer"
 
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1075
 msgid "Create a user account"
 msgstr "Lag en ny brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1079
-#: ../panels/user-accounts/um-user-panel.c:1368
+#: ../panels/user-accounts/um-user-panel.c:1086
+#: ../panels/user-accounts/um-user-panel.c:1375
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6566,12 +6559,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å lage en brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1089
+#: ../panels/user-accounts/um-user-panel.c:1096
 msgid "Delete the selected user account"
 msgstr "Slett valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1101
-#: ../panels/user-accounts/um-user-panel.c:1373
+#: ../panels/user-accounts/um-user-panel.c:1108
+#: ../panels/user-accounts/um-user-panel.c:1380
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6579,7 +6572,7 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å slette valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1283
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "My Account"
 msgstr "Min konto"
 
@@ -6613,6 +6606,15 @@ msgstr "Tilegne knapper"
 msgid "Map buttons to functions"
 msgstr "Koble knapper til funksjoner"
 
+#: ../panels/wacom/button-mapping.ui.h:3
+#, fuzzy
+msgid ""
+"To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard "
+"shortcut button and hold down the new keys or press Backspace to clear."
+msgstr ""
+"Klikk på tilhørende rad og skriv inn en ny tastekombinasjon for å redigere "
+"en snarveitast, eller trykk slettetast for å fjerne den."
+
 #: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
@@ -6624,6 +6626,36 @@ msgstr ""
 #: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Feil klikk oppdaget. Starter på nytt …"
+
+#: ../panels/wacom/cc-wacom-button-row.c:443
+msgctxt "Wacom tablet button"
+msgid "Up"
+msgstr "Opp"
+
+#: ../panels/wacom/cc-wacom-button-row.c:444
+msgctxt "Wacom tablet button"
+msgid "Down"
+msgstr "Ned"
+
+#: ../panels/wacom/cc-wacom-button-row.h:55
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "Ingen"
+
+#: ../panels/wacom/cc-wacom-button-row.h:56
+msgctxt "Wacom action-type"
+msgid "Send Keystroke"
+msgstr "Send tastetrykk"
+
+#: ../panels/wacom/cc-wacom-button-row.h:57
+msgctxt "Wacom action-type"
+msgid "Switch Monitor"
+msgstr "Bytt monitor"
+
+#: ../panels/wacom/cc-wacom-button-row.h:58
+msgctxt "Wacom action-type"
+msgid "Show On-Screen Help"
+msgstr "Vis hjelp på skjermen"
 
 #: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
@@ -6644,52 +6676,13 @@ msgstr "Tilegne til en enkelt skjerm"
 msgid "%d of %d"
 msgstr "%d av %d"
 
-#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
-msgctxt "Wacom action-type"
-msgid "None"
-msgstr "Ingen"
+#: ../panels/wacom/cc-wacom-page.c:522
+msgid "Display Mapping"
+msgstr "Vis kobling"
 
-#: ../panels/wacom/cc-wacom-page.c:124
-msgctxt "Wacom action-type"
-msgid "Send Keystroke"
-msgstr "Send tastetrykk"
-
-#: ../panels/wacom/cc-wacom-page.c:125
-msgctxt "Wacom action-type"
-msgid "Switch Monitor"
-msgstr "Bytt monitor"
-
-#: ../panels/wacom/cc-wacom-page.c:126
-msgctxt "Wacom action-type"
-msgid "Show On-Screen Help"
-msgstr "Vis hjelp på skjermen"
-
-#: ../panels/wacom/cc-wacom-page.c:674
-msgctxt "Wacom tablet button"
-msgid "Up"
-msgstr "Opp"
-
-#: ../panels/wacom/cc-wacom-page.c:674
-msgctxt "Wacom tablet button"
-msgid "Down"
-msgstr "Ned"
-
-#: ../panels/wacom/cc-wacom-page.c:715
-msgid "Switch Modes"
-msgstr "Bytt modus"
-
-#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Knapp"
-
-#: ../panels/wacom/cc-wacom-page.c:863
-msgid "Action"
-msgstr "Handling"
-
-#: ../panels/wacom/cc-wacom-page.c:973
-msgid "Display Mapping"
-msgstr "Vis kobling"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
@@ -6840,6 +6833,10 @@ msgstr "Øverste knapp #%d"
 msgid "Bottom Button #%d"
 msgstr "Nederste knapp #%d"
 
+#: ../panels/wacom/gsd-wacom-key-shortcut-button.c:264
+msgid "New shortcut…"
+msgstr "Ny snarvei …"
+
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
 msgstr "Ingen handling"
@@ -6983,7 +6980,7 @@ msgctxt "category"
 msgid "System"
 msgstr "System"
 
-#: ../shell/cc-window.c:1429
+#: ../shell/cc-window.c:1434
 msgid "All Settings"
 msgstr "Alle innstillinger"
 
