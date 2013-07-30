@@ -1145,7 +1145,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   g_signal_connect (priv->list, "row-activated", G_CALLBACK (row_activated), chooser);
   g_signal_connect (priv->list, "row-selected", G_CALLBACK (row_selected), chooser);
 
-  g_signal_connect_swapped (priv->filter_entry, "changed", G_CALLBACK (filter_changed), chooser);
+  g_signal_connect_swapped (priv->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser);
 
   get_locale_infos (chooser);
 #ifdef HAVE_IBUS

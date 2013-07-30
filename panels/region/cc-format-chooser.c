@@ -543,7 +543,7 @@ cc_format_chooser_new (GtkWidget *parent)
 
         add_all_regions (GTK_DIALOG (chooser));
 
-        g_signal_connect_swapped (priv->filter_entry, "changed",
+        g_signal_connect_swapped (priv->filter_entry, "search-changed",
                                   G_CALLBACK (filter_changed), chooser);
 
         g_signal_connect (priv->list, "row-activated",
