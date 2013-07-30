@@ -1442,7 +1442,7 @@ create_header (CcWindow *self)
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->search_entry);
   gtk_entry_set_width_chars (GTK_ENTRY (priv->search_entry), 30);
   gtk_entry_set_invisible_char (GTK_ENTRY (priv->search_entry), 9679);
-  g_signal_connect (priv->search_entry, "changed", G_CALLBACK (search_entry_changed_cb), self);
+  g_signal_connect (priv->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
   g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
 
   priv->lock_button = gtk_lock_button_new (NULL);
