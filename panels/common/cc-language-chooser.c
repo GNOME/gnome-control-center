@@ -444,7 +444,7 @@ cc_language_chooser_new (GtkWidget *parent)
                                       update_header_func, NULL, NULL);
         add_all_languages (GTK_DIALOG (chooser));
 
-        g_signal_connect_swapped (priv->filter_entry, "changed",
+        g_signal_connect_swapped (priv->filter_entry, "search-changed",
                                   G_CALLBACK (filter_changed), chooser);
 
         g_signal_connect (priv->language_list, "row-activated",
