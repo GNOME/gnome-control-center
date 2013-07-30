@@ -120,6 +120,10 @@ cc_wacom_button_row_update_shortcut (CcWacomButtonRow *row,
 
           g_strfreev (strv);
         }
+      else
+        {
+          shortcut = NULL;
+        }
     }
   else
     shortcut = g_settings_get_string (button->settings, CUSTOM_ACTION_KEY);
