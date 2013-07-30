@@ -1,4 +1,65 @@
 =============
+Version 3.9.5
+=============
+
+- Use GtkListBox instead of EggListBox
+- Port away from deprecated GtkStock
+- Fix the look of lock buttons and header switches
+- Universal Access panel redesign
+
+Shell:
+- Ensure we cannot activate a panel if the search is off
+
+Display:
+- Prevent a crash when the screen being dragged gets removed
+- Fix "floating screens"
+- Use the preferred width and height when moving inactive displays
+- Prevent the built-in display from being turned on when the lid is closed
+
+Info:
+- show disk info even if there's no /etc/fstab file
+
+Mouse:
+- Use a dialogue window for the mouse test
+- Show the "enable trackpad" slider button even if the mouse isn't present
+  when the trackpad is currently disabled
+
+Network:
+- Use gnome-settings-daemon interface for switching on/off Airplane Mode
+
+Sharing:
+- Hide the vino password by default
+- Limit the sharing password to 8 bytes
+- Avoid conflicts with the sensitivity of the "remote control" options
+- Hide Bluetooth bits if Bluetooth is disabled
+
+Power:
+- Adapt to new brightness interface in gnome-settings-daemon
+- Fix primary battery section getting resized when the label changed
+- Fix crash when no batteries are available
+
+Privacy:
+- Fix default "Retain history" value
+
+Region:
+- Ensure the current language's name gets translated
+
+Sound:
+- Don't show applications playing event sounds
+
+User Accounts:
+- Don't count inactive users as administrators
+- Make the Enter key work on the password dialogue
+- More work not to show system accounts
+- Correctly select the newly created user
+
+Wacom:
+- Update OLED labels for hard-coded actions too
+- Redesign button assignment dialogue
+- Try to use the OSD to assign buttons if a layout is available
+  for the device in question
+
+=============
 Version 3.9.3
 =============
 
