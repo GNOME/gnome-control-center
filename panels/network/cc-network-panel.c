@@ -348,8 +348,9 @@ cc_network_panel_constructed (GObject *object)
         gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
         gtk_widget_set_visible (label, TRUE);
         widget = gtk_switch_new ();
+        gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
         gtk_widget_show_all (box);
         panel->priv->rfkill_switch = GTK_SWITCH (widget);
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
