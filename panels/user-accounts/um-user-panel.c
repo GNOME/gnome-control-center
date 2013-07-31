@@ -26,12 +26,17 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <locale.h>
 
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
 #include <act/act.h>
+#include <libgd/gd-notification.h>
+
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-languages.h>
 
 #ifdef HAVE_CHEESE
 #include <gst/gst.h>
@@ -63,6 +68,7 @@ CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
 struct _CcUserPanelPrivate {
         ActUserManager *um;
         GtkBuilder *builder;
+        GtkWidget *notification;
 
         GtkWidget *main_box;
         GPermission *permission;
@@ -846,6 +852,65 @@ language_response (GtkDialog         *dialog,
 }
 
 static void
+restart_now (CcUserPanelPrivate *d)
+{
+        GDBusConnection *bus;
+
+        gd_notification_dismiss (GD_NOTIFICATION (d->notification));
+
+        bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+        g_dbus_connection_call (bus,
+                                "org.gnome.SessionManager",
+                                "/org/gnome/SessionManager",
+                                "org.gnome.SessionManager",
+                                "Logout",
+                                g_variant_new ("(u)", 0),
+                                NULL, 0, G_MAXINT,
+                                NULL, NULL, NULL);
+        g_object_unref (bus);
+}
+
+static void
+show_restart_notification (CcUserPanelPrivate *d, gchar *locale)
+{
+        GtkWidget *box;
+        GtkWidget *label;
+        GtkWidget *button;
+        gchar *current_locale;
+
+        if (d->notification)
+                return;
+
+        if (locale) {
+                current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
+                setlocale (LC_MESSAGES, locale);
+        }
+
+        d->notification = gd_notification_new ();
+        g_object_add_weak_pointer (G_OBJECT (d->notification), (gpointer *)&d->notification);
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 24);
+        gtk_widget_set_margin_start (box, 12);
+        gtk_widget_set_margin_end (box, 12);
+        gtk_widget_set_margin_top (box, 6);
+        gtk_widget_set_margin_bottom (box, 6);
+        label = gtk_label_new (_("Your session needs to be restarted for changes to take effect"));
+        button = gtk_button_new_with_label (_("Restart Now"));
+        g_signal_connect_swapped (button, "clicked", G_CALLBACK (restart_now), d);
+        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+        gtk_widget_show_all (box);
+
+        gtk_container_add (GTK_CONTAINER (d->notification), box);
+        gtk_overlay_add_overlay (GTK_OVERLAY (get_widget (d, "overlay")), d->notification);
+        gtk_widget_show (d->notification);
+
+        if (locale) {
+                setlocale (LC_MESSAGES, current_locale);
+                g_free (current_locale);
+        }
+}
+
+static void
 language_changed (UmEditableCombo    *combo,
                   CcUserPanelPrivate *d)
 {
@@ -853,11 +918,13 @@ language_changed (UmEditableCombo    *combo,
         GtkTreeIter iter;
         gchar *lang;
         ActUser *user;
+        gboolean self_selected;
 
         if (!um_editable_combo_get_active_iter (combo, &iter))
                  return;
 
         user = get_selected_user (d);
+        self_selected = act_user_get_uid (user) == geteuid ();
 
         model = um_editable_combo_get_model (combo);
 
@@ -865,6 +932,9 @@ language_changed (UmEditableCombo    *combo,
         if (lang) {
                 if (g_strcmp0 (lang, act_user_get_language (user)) != 0) {
                         act_user_set_language (user, lang);
+
+                        if (self_selected)
+                                show_restart_notification (d, lang);
                 }
                 g_free (lang);
                 goto out;
@@ -1432,7 +1502,7 @@ cc_user_panel_init (CcUserPanel *self)
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
-        gtk_container_add (GTK_CONTAINER (self), d->main_box);
+        gtk_container_add (GTK_CONTAINER (self), get_widget (d, "overlay"));
         d->history_dialog = um_history_dialog_new ();
         setup_main_window (d);
 

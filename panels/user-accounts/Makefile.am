@@ -12,6 +12,7 @@ AM_CPPFLAGS =						\
 	-DHAVE_LIBPWQUALITY				\
 	-I$(srcdir)/../common/				\
 	-I$(srcdir)/../../shell/			\
+	-I$(top_srcdir)/libgd/				\
 	$(PANEL_CFLAGS)					\
 	$(USER_ACCOUNTS_PANEL_CFLAGS)
 
@@ -63,7 +64,8 @@ libuser_accounts_la_LIBADD = 		\
 	$(builddir)/../common/liblanguage.la	\
 	-lpwquality			\
 	-lcrypt				\
-	-lm
+	-lm				\
+	$(top_builddir)/libgd/libgd.la
 
 if BUILD_CHEESE
 libuser_accounts_la_LIBADD += $(CHEESE_LIBS)

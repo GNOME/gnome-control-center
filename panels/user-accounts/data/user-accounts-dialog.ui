@@ -33,6 +33,9 @@
       <column type="gchararray"/>
     </columns>
   </object>
+      <object class="GtkOverlay" id="overlay">
+        <property name="visible">True</property>
+        <child>
           <object class="GtkVBox" id="accounts-vbox">
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
@@ -509,6 +512,8 @@
               </object>
             </child>
           </object>
+        </child>
+      </object>
   <object class="GtkSizeGroup" id="user-icon-sizegroup">
     <property name="mode">both</property>
     <widgets>
