@@ -112,6 +112,8 @@ static gboolean cc_window_set_active_panel_from_id (CcShell      *shell,
                                                     const gchar **argv,
                                                     GError      **err);
 
+static gint get_monitor_height (CcWindow *self);
+
 static const gchar *
 get_icon_name_from_g_icon (GIcon *gicon)
 {
@@ -895,12 +897,24 @@ stack_page_notify_cb (GdStack     *stack,
 
   if (g_strcmp0 (id, OVERVIEW_PAGE) == 0 || g_strcmp0 (id, SEARCH_PAGE) == 0)
     {
+      gint header_height, maximum_height;
+
       gtk_widget_hide (priv->previous_button);
       gtk_widget_show (priv->search_entry);
       gtk_widget_hide (priv->lock_button);
 
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
                                                  FIXED_WIDTH, NULL, &nat_height);
+      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->header),
+                                                 FIXED_WIDTH, NULL, &header_height);
+
+      /* find the maximum height by using the monitor height minus an allowance
+       * for title bar, etc. */
+      maximum_height = get_monitor_height (self) - 100;
+
+      if (maximum_height > 0 && nat_height + header_height > maximum_height)
+        nat_height = maximum_height - header_height;
+
       gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window),
                                                   priv->small_screen == SMALL_SCREEN_TRUE ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
     }
