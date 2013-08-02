@@ -648,6 +648,8 @@ get_autologin_possible (ActUser *user)
         return !(locked || set_password_at_login);
 }
 
+static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
+
 static void
 show_user (ActUser *user, CcUserPanelPrivate *d)
 {
@@ -738,9 +740,10 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         widget = get_widget (d, "last-login-history-button");
         gtk_widget_set_visible (widget, show);
         gtk_widget_set_sensitive (widget, enable);
-}
 
-static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
+        if (d->permission != NULL)
+                on_permission_changed (d->permission, NULL, d);
+}
 
 static void
 selected_user_changed (GtkTreeSelection *selection, CcUserPanelPrivate *d)
@@ -752,8 +755,6 @@ selected_user_changed (GtkTreeSelection *selection, CcUserPanelPrivate *d)
         if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 gtk_tree_model_get (model, &iter, USER_COL, &user, -1);
                 show_user (user, d);
-                if (d->permission != NULL)
-                        on_permission_changed (d->permission, NULL, d);
                 gtk_widget_set_sensitive (get_widget (d, "main-user-vbox"), TRUE);
                 g_object_unref (user);
         } else {
