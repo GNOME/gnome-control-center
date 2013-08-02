@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-30 14:00+0000\n"
-"PO-Revision-Date: 2013-07-30 22:30-0000\n"
+"POT-Creation-Date: 2013-08-02 15:38+0000\n"
+"PO-Revision-Date: 2013-08-03 00:36+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "Language: tg\n"
@@ -951,13 +951,13 @@ msgstr "Хитой"
 msgid "Other…"
 msgstr "Дигар…"
 
-#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/common/cc-language-chooser.c:123
 #: ../panels/region/cc-format-chooser.c:268
 #: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "Бештар…"
 
-#: ../panels/common/cc-language-chooser.c:141
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Ягон забон ёфт нашудааст"
 
@@ -3572,7 +3572,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Намоиш додани тафсилот дар экрани қулф"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1625 ../panels/power/cc-power-panel.c:1632
+#: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1745
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3582,7 +3582,7 @@ msgid "On"
 msgstr "Фаъол"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1619 ../panels/power/cc-power-panel.c:1630
+#: ../panels/power/cc-power-panel.c:1732 ../panels/power/cc-power-panel.c:1743
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3706,18 +3706,18 @@ msgstr ""
 "Иловакунии ҳисоб ба барномаҳо иҷозат медиҳад, ки онҳо тавонанд ба ҳуҷҷатҳо, "
 "почта, тамосҳо, тақвимҳо, чат ва файлҳои дигар дастрасӣ пайдо кунанд."
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:188
 msgid "Unknown time"
 msgstr "Вақти номаълум"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:194
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i дақиқа"
 msgstr[1] "%i дақиқа"
 
-#: ../panels/power/cc-power-panel.c:201
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3726,227 +3726,232 @@ msgstr[1] "%i соат"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:209
+#: ../panels/power/cc-power-panel.c:214
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:215
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "соат"
 msgstr[1] "соат"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:216
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "дақиқа"
 msgstr[1] "дақиқа"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:230
+#: ../panels/power/cc-power-panel.c:235
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s то анҷоми пуркунии батарея"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:237
+#: ../panels/power/cc-power-panel.c:242
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Диққат: %s боқимонда"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s remaining"
 msgstr "%s боқимонда"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:247 ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:252 ../panels/power/cc-power-panel.c:280
 msgid "Fully charged"
 msgstr "Комилан пур аст"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
 msgid "Empty"
 msgstr "Холӣ кардан"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:266
+#: ../panels/power/cc-power-panel.c:271
 msgid "Charging"
 msgstr "Пуркунии барқ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:271
+#: ../panels/power/cc-power-panel.c:276
 msgid "Discharging"
 msgstr "Тамомшавии барқ"
 
-#: ../panels/power/cc-power-panel.c:323
+#: ../panels/power/cc-power-panel.c:328
 #, c-format
 msgid "Estimated battery capacity: %s"
 msgstr "Қобилияти тахминии батарея: %s"
 
-#: ../panels/power/cc-power-panel.c:406
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Асосӣ"
 
-#: ../panels/power/cc-power-panel.c:408
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Иловагӣ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:504
 msgid "Wireless mouse"
 msgstr "Муши бесим"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:503
+#: ../panels/power/cc-power-panel.c:508
 msgid "Wireless keyboard"
 msgstr "Клавиатураи бесим"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:507
+#: ../panels/power/cc-power-panel.c:512
 msgid "Uninterruptible power supply"
 msgstr "Таъминоти қатънашавандаи барқ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:512
+#: ../panels/power/cc-power-panel.c:517
 msgid "Personal digital assistant"
 msgstr "Ёрдамчии рақамии шахсӣ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:516
+#: ../panels/power/cc-power-panel.c:521
 msgid "Cellphone"
 msgstr "Телефони мобилӣ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:520
+#: ../panels/power/cc-power-panel.c:525
 msgid "Media player"
 msgstr "Плеери мултимедиа"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:524
+#: ../panels/power/cc-power-panel.c:529
 msgid "Tablet"
 msgstr "Планшет"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:528
+#: ../panels/power/cc-power-panel.c:533
 msgid "Computer"
 msgstr "Компютер"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:532 ../panels/power/cc-power-panel.c:742
-#: ../panels/power/cc-power-panel.c:1930
+#: ../panels/power/cc-power-panel.c:537 ../panels/power/cc-power-panel.c:747
+#: ../panels/power/cc-power-panel.c:2043
 msgid "Battery"
 msgstr "Батарея"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:541
+#: ../panels/power/cc-power-panel.c:546
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Пуркунии барқ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:548
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Диққат"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:553
+#: ../panels/power/cc-power-panel.c:558
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Паст"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:558
+#: ../panels/power/cc-power-panel.c:563
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Хуб"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:563
+#: ../panels/power/cc-power-panel.c:568
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Комилан пур аст"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:567
+#: ../panels/power/cc-power-panel.c:572
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Холӣ"
 
-#: ../panels/power/cc-power-panel.c:740
+#: ../panels/power/cc-power-panel.c:745
 msgid "Batteries"
 msgstr "Батареяҳо"
 
-#: ../panels/power/cc-power-panel.c:1046
+#: ../panels/power/cc-power-panel.c:1138
 msgid "When _idle"
 msgstr "Вақте ки беҳаракат аст"
 
-#: ../panels/power/cc-power-panel.c:1375
+#: ../panels/power/cc-power-panel.c:1507
 msgid "Power Saving"
 msgstr "Захиракунии барқ"
 
-#: ../panels/power/cc-power-panel.c:1406
+#: ../panels/power/cc-power-panel.c:1535
 msgid "_Screen brightness"
 msgstr "_Равшании экран"
 
-#: ../panels/power/cc-power-panel.c:1438
+#: ../panels/power/cc-power-panel.c:1541
+#| msgid "_Screen brightness"
+msgid "_Keyboard brightness"
+msgstr "_Дурахшонии экран"
+
+#: ../panels/power/cc-power-panel.c:1551
 msgid "_Dim screen when inactive"
 msgstr "_Камнур кардани экран дар ҳолати ғайрифаъол"
 
-#: ../panels/power/cc-power-panel.c:1463
+#: ../panels/power/cc-power-panel.c:1576
 msgid "_Blank screen"
 msgstr "_Экрани холӣ"
 
-#: ../panels/power/cc-power-panel.c:1500
+#: ../panels/power/cc-power-panel.c:1613
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1505
+#: ../panels/power/cc-power-panel.c:1618
 msgid "Turns off wireless devices"
 msgstr "Хомӯш кардани дастгоҳҳои бесим"
 
-#: ../panels/power/cc-power-panel.c:1530
+#: ../panels/power/cc-power-panel.c:1643
 msgid "_Mobile broadband"
 msgstr "_Паҳннавори мобилӣ"
 
-#: ../panels/power/cc-power-panel.c:1535
+#: ../panels/power/cc-power-panel.c:1648
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Дастгоҳҳои паҳннавори мобилиро (3G, 4G, WiMax, ва ғайра) хомӯш мекунад"
 
-#: ../panels/power/cc-power-panel.c:1570
+#: ../panels/power/cc-power-panel.c:1683
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1621
+#: ../panels/power/cc-power-panel.c:1734
 msgid "When on battery power"
 msgstr "Вақте ки аз батарея кор мекунад"
 
-#: ../panels/power/cc-power-panel.c:1623
+#: ../panels/power/cc-power-panel.c:1736
 msgid "When plugged in"
 msgstr "Вақте ки аз манбаъ барқ кор мекунад"
 
-#: ../panels/power/cc-power-panel.c:1750
+#: ../panels/power/cc-power-panel.c:1863
 msgid "Suspend & Power Off"
 msgstr "Таваққуф ва анҷоми кор"
 
-#: ../panels/power/cc-power-panel.c:1783
+#: ../panels/power/cc-power-panel.c:1896
 msgid "_Automatic suspend"
 msgstr "_Таваққуфи худкор"
 
-#: ../panels/power/cc-power-panel.c:1807
+#: ../panels/power/cc-power-panel.c:1920
 msgid "When battery power is _critical"
 msgstr "_Вақте ки барқи батарея қариб ба анҷом расид"
 
-#: ../panels/power/cc-power-panel.c:1840
+#: ../panels/power/cc-power-panel.c:1953
 msgid "Power Off"
 msgstr "Анҷоми кор"
 
-#: ../panels/power/cc-power-panel.c:1982
+#: ../panels/power/cc-power-panel.c:2095
 msgid "Devices"
 msgstr "Дастгоҳҳо"
 
@@ -6204,8 +6209,6 @@ msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Мунтазамии рақамҳоро монанди 1234 ё abcd истифода набаред."
 
 #: ../panels/user-accounts/pw-utils.c:116
-#| msgctxt "Password hint"
-#| msgid "Try to use a mixture of letters, numbers and punctuation."
 msgctxt "Password hint"
 msgid "Try to add more letters, numbers and symbols."
 msgstr ""
@@ -6681,12 +6684,12 @@ msgstr ""
 msgid "Mis-click detected, restarting..."
 msgstr "Зеркунии нодуруст ташхис карда шуд, бозоғозӣ шуда истодааст..."
 
-#: ../panels/wacom/cc-wacom-button-row.c:439
+#: ../panels/wacom/cc-wacom-button-row.c:443
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Ба боло"
 
-#: ../panels/wacom/cc-wacom-button-row.c:440
+#: ../panels/wacom/cc-wacom-button-row.c:444
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Ба поён"
@@ -7019,22 +7022,22 @@ msgid "Settings"
 msgstr "Танзимот"
 
 #. Add categories
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:860
 msgctxt "category"
 msgid "Personal"
 msgstr "Шахсӣ"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:861
 msgctxt "category"
 msgid "Hardware"
 msgstr "Сахтафзор"
 
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:862
 msgctxt "category"
 msgid "System"
 msgstr "Система"
 
-#: ../shell/cc-window.c:1434
+#: ../shell/cc-window.c:1451
 msgid "All Settings"
 msgstr "Ҳамаи танзимот"
 
