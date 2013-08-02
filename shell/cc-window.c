@@ -1258,6 +1258,9 @@ get_monitor_height (CcWindow *self)
   GdkScreen *screen;
   GdkRectangle rect;
 
+  if (self->priv->monitor_num < 0)
+    return 0;
+
   /* We cannot use workarea here, as this wouldn't
    * be updated when we read it after a monitors-changed signal */
   screen = gtk_widget_get_screen (GTK_WIDGET (self));
