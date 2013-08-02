@@ -183,11 +183,13 @@ change_clock_settings (GObject         *gobject,
 {
   CcDateTimePanelPrivate *priv = panel->priv;
   GDesktopClockFormat value;
+  const char *active_id;
 
   g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
                                    panel);
 
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (W ("24h_button"))))
+  active_id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (W ("format_combobox")));
+  if (!g_strcmp0 (active_id, "24h"))
     value = G_DESKTOP_CLOCK_FORMAT_24H;
   else
     value = G_DESKTOP_CLOCK_FORMAT_12H;
@@ -207,26 +209,24 @@ clock_settings_changed_cb (GSettings       *settings,
                            CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
-  GtkWidget *button24h;
-  GtkWidget *button12h;
+  GtkWidget *format_combo;
   GDesktopClockFormat value;
 
   value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
   priv->clock_format = value;
 
-  button24h = W ("24h_button");
-  button12h = W ("12h_button");
+  format_combo = W ("format_combobox");
 
-  g_signal_handlers_block_by_func (button24h, change_clock_settings, panel);
+  g_signal_handlers_block_by_func (format_combo, change_clock_settings, panel);
 
   if (value == G_DESKTOP_CLOCK_FORMAT_24H)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button24h), TRUE);
+    gtk_combo_box_set_active_id (GTK_COMBO_BOX (format_combo), "24h");
   else
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button12h), TRUE);
+    gtk_combo_box_set_active_id (GTK_COMBO_BOX (format_combo), "12h");
 
   update_time (panel);
 
-  g_signal_handlers_unblock_by_func (button24h, change_clock_settings, panel);
+  g_signal_handlers_unblock_by_func (format_combo, change_clock_settings, panel);
 }
 
 static void
@@ -1179,15 +1179,12 @@ cc_date_time_panel_init (CcDateTimePanel *self)
    * offer the 24 hr clock as the only option */
   if (ampm == NULL || ampm[0] == '\0')
     {
-      gtk_widget_set_visible (W("ampm_up_button"), FALSE);
-      gtk_widget_set_visible (W("ampm_label"), FALSE);
-      gtk_widget_set_visible (W("ampm_down_button"), FALSE);
-      gtk_widget_set_visible (W("24h_box"), FALSE);
+      gtk_widget_set_visible (W("timeformat-frame"), FALSE);
       priv->ampm_available = FALSE;
     }
   else
     {
-     priv->ampm_available = TRUE;
+      priv->ampm_available = TRUE;
     }
 
   widget = W ("vbox_datetime");
@@ -1201,7 +1198,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
                     G_CALLBACK (clock_settings_changed_cb), self);
 
-  g_signal_connect (W("24h_button"), "notify::active",
+  g_signal_connect (W("format_combobox"), "notify::active-id",
                     G_CALLBACK (change_clock_settings), self);
 
   update_time (self);

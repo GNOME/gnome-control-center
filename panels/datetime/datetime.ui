@@ -432,54 +432,6 @@
                 <property name="position">1</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkBox" id="24h_box">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkRadioButton" id="24h_button">
-                    <property name="label" translatable="yes">24-hour</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="xalign">0</property>
-                    <property name="active">True</property>
-                    <property name="draw_indicator">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkRadioButton" id="12h_button">
-                    <property name="label" translatable="yes">AM/PM</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="xalign">0</property>
-                    <property name="active">True</property>
-                    <property name="draw_indicator">True</property>
-                    <property name="group">24h_button</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="pack_type">end</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -660,6 +612,7 @@
         <property name="margin_top">24</property>
         <property name="margin_bottom">24</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">24</property>
         <child>
           <object class="GtkFrame" id="frame">
             <property name="visible">True</property>
@@ -925,12 +878,83 @@
             <property name="position">0</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkFrame" id="timeformat-frame">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkListBox" id="listbox1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="selection_mode">none</property>
+                <child>
+                  <object class="GtkListBoxRow" id="timeformat-row">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkBox" id="box1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">50</property>
+                        <child>
+                          <object class="GtkLabel" id="format_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">20</property>
+                            <property name="margin_right">20</property>
+                            <property name="margin_top">6</property>
+                            <property name="margin_bottom">6</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Time _Format</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">format_combobox</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="format_combobox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">center</property>
+                            <property name="margin_left">20</property>
+                            <property name="margin_right">20</property>
+                            <items>
+                              <item id="24h" translatable="yes">24-hour</item>
+                              <item id="12h" translatable="yes">AM / PM</item>
+                            </items>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>
   <object class="GtkSizeGroup" id="row_sizegroup">
     <property name="mode">vertical</property>
     <widgets>
+      <widget name="box1"/>
       <widget name="box2"/>
       <widget name="box3"/>
       <widget name="box4"/>
