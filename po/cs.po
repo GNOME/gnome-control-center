@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-24 18:10+0000\n"
-"PO-Revision-Date: 2013-07-24 22:45+0200\n"
+"POT-Creation-Date: 2013-08-02 19:43+0000\n"
+"PO-Revision-Date: 2013-08-03 12:21+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -594,7 +594,7 @@ msgstr "Kalibrace displeje"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1407
+#: ../panels/user-accounts/um-account-dialog.c:1420
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -959,13 +959,13 @@ msgstr "Čína"
 msgid "Other…"
 msgstr "Ostatní…"
 
-#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/common/cc-language-chooser.c:123
 #: ../panels/region/cc-format-chooser.c:268
 #: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "Více…"
 
-#: ../panels/common/cc-language-chooser.c:141
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Žádné jazyky nenalezeny"
 
@@ -1976,7 +1976,7 @@ msgstr "Kliknutí, vedlejší tlačítko"
 msgid "Air_plane Mode"
 msgstr "Režim „_Letadlo“"
 
-#: ../panels/network/cc-network-panel.c:913
+#: ../panels/network/cc-network-panel.c:914
 msgid "Network proxy"
 msgstr "Proxy sítě"
 
@@ -1984,14 +1984,14 @@ msgstr "Proxy sítě"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1092 ../panels/network/net-vpn.c:285
+#: ../panels/network/cc-network-panel.c:1093 ../panels/network/net-vpn.c:285
 #: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1227
+#: ../panels/network/cc-network-panel.c:1228
 msgid "The system network services are not compatible with this version."
 msgstr "Systémová služba sítě není kompatibilní s touto verzí."
 
@@ -2443,7 +2443,7 @@ msgstr "Nový profil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:509
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1408
+#: ../panels/user-accounts/um-account-dialog.c:1421
 msgid "_Add"
 msgstr "Přid_at"
 
@@ -2728,7 +2728,7 @@ msgstr "Historie"
 
 #: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
 #: ../panels/privacy/privacy.ui.h:10 ../panels/sound/gvc-mixer-dialog.c:1596
-#: ../panels/wacom/cc-wacom-page.c:446
+#: ../panels/wacom/cc-wacom-page.c:525
 msgid "_Close"
 msgstr "_Zavřít"
 
@@ -3580,7 +3580,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Zobrazovat na uzamčené obrazovce podrobnosti"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1625 ../panels/power/cc-power-panel.c:1632
+#: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1745
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3590,7 +3590,7 @@ msgid "On"
 msgstr "Zapnuto"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1619 ../panels/power/cc-power-panel.c:1630
+#: ../panels/power/cc-power-panel.c:1732 ../panels/power/cc-power-panel.c:1743
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:144
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3712,11 +3712,11 @@ msgstr ""
 "Přidání účtu umožní aplikacím přistupovat k jeho dokumentům, poště, "
 "kontaktům, kalendáři, diskuzím a dalším."
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:188
 msgid "Unknown time"
 msgstr "Neznámý čas"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:194
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -3724,7 +3724,7 @@ msgstr[0] "%i minuta"
 msgstr[1] "%i minuty"
 msgstr[2] "%i minut"
 
-#: ../panels/power/cc-power-panel.c:201
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3734,19 +3734,19 @@ msgstr[2] "%i hodin"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:209
+#: ../panels/power/cc-power-panel.c:214
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:215
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodin"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:216
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuta"
@@ -3754,209 +3754,213 @@ msgstr[1] "minuty"
 msgstr[2] "minut"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:230
+#: ../panels/power/cc-power-panel.c:235
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s do plného nabití"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:237
+#: ../panels/power/cc-power-panel.c:242
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Pozor, zbývá %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s remaining"
 msgstr "Zbývá %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:247 ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:252 ../panels/power/cc-power-panel.c:280
 msgid "Fully charged"
 msgstr "Plně nabito"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
 msgid "Empty"
 msgstr "Vybitá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:266
+#: ../panels/power/cc-power-panel.c:271
 msgid "Charging"
 msgstr "Nabíjí se"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:271
+#: ../panels/power/cc-power-panel.c:276
 msgid "Discharging"
 msgstr "Vybíjí se"
 
-#: ../panels/power/cc-power-panel.c:323
+#: ../panels/power/cc-power-panel.c:328
 #, c-format
 msgid "Estimated battery capacity: %s"
 msgstr "Odhadovaná kapacita baterie: %s"
 
-#: ../panels/power/cc-power-panel.c:406
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Hlavní"
 
-#: ../panels/power/cc-power-panel.c:408
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Přídavná"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:504
 msgid "Wireless mouse"
 msgstr "Bezdrátová myš"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:503
+#: ../panels/power/cc-power-panel.c:508
 msgid "Wireless keyboard"
 msgstr "Bezdrátová klávesnice"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:507
+#: ../panels/power/cc-power-panel.c:512
 msgid "Uninterruptible power supply"
 msgstr "Záložní zdroj napájení"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:512
+#: ../panels/power/cc-power-panel.c:517
 msgid "Personal digital assistant"
 msgstr "Osobní digitální asistent (PDA)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:516
+#: ../panels/power/cc-power-panel.c:521
 msgid "Cellphone"
 msgstr "Mobilní telefon"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:520
+#: ../panels/power/cc-power-panel.c:525
 msgid "Media player"
 msgstr "Multimediální přehrávač"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:524
+#: ../panels/power/cc-power-panel.c:529
 msgid "Tablet"
 msgstr "Tablet"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:528
+#: ../panels/power/cc-power-panel.c:533
 msgid "Computer"
 msgstr "Počítač"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:532 ../panels/power/cc-power-panel.c:742
-#: ../panels/power/cc-power-panel.c:1930
+#: ../panels/power/cc-power-panel.c:537 ../panels/power/cc-power-panel.c:747
+#: ../panels/power/cc-power-panel.c:2069
 msgid "Battery"
 msgstr "Baterie"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:541
+#: ../panels/power/cc-power-panel.c:546
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Nabíjí se"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:548
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Pozor"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:553
+#: ../panels/power/cc-power-panel.c:558
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Nízká"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:558
+#: ../panels/power/cc-power-panel.c:563
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Dobrá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:563
+#: ../panels/power/cc-power-panel.c:568
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Plně nabitá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:567
+#: ../panels/power/cc-power-panel.c:572
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vybitá"
 
-#: ../panels/power/cc-power-panel.c:740
+#: ../panels/power/cc-power-panel.c:745
 msgid "Batteries"
 msgstr "Baterie"
 
-#: ../panels/power/cc-power-panel.c:1046
+#: ../panels/power/cc-power-panel.c:1138
 msgid "When _idle"
 msgstr "Při _nečinnosti"
 
-#: ../panels/power/cc-power-panel.c:1375
+#: ../panels/power/cc-power-panel.c:1507
 msgid "Power Saving"
 msgstr "Šetření energií"
 
-#: ../panels/power/cc-power-panel.c:1406
+#: ../panels/power/cc-power-panel.c:1535
 msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
-#: ../panels/power/cc-power-panel.c:1438
+#: ../panels/power/cc-power-panel.c:1541
+msgid "_Keyboard brightness"
+msgstr "_Jas klávesnice"
+
+#: ../panels/power/cc-power-panel.c:1551
 msgid "_Dim screen when inactive"
 msgstr "_Ztlumit jas obrazovky při neaktivitě"
 
-#: ../panels/power/cc-power-panel.c:1463
+#: ../panels/power/cc-power-panel.c:1576
 msgid "_Blank screen"
 msgstr "_Vypnout obrazovku"
 
-#: ../panels/power/cc-power-panel.c:1500
+#: ../panels/power/cc-power-panel.c:1613
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1505
+#: ../panels/power/cc-power-panel.c:1618
 msgid "Turns off wireless devices"
 msgstr "Vypne bezdrátová zařízení"
 
-#: ../panels/power/cc-power-panel.c:1530
+#: ../panels/power/cc-power-panel.c:1643
 msgid "_Mobile broadband"
 msgstr "_Mobilní připojení"
 
-#: ../panels/power/cc-power-panel.c:1535
+#: ../panels/power/cc-power-panel.c:1648
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Vypne mobilní širokopásmová zařízení (3G, 4G, WiMax atd.)"
 
-#: ../panels/power/cc-power-panel.c:1570
+#: ../panels/power/cc-power-panel.c:1683
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1621
+#: ../panels/power/cc-power-panel.c:1734
 msgid "When on battery power"
 msgstr "Při napájení z baterie"
 
-#: ../panels/power/cc-power-panel.c:1623
+#: ../panels/power/cc-power-panel.c:1736
 msgid "When plugged in"
 msgstr "Při napájení ze sítě"
 
-#: ../panels/power/cc-power-panel.c:1750
+#: ../panels/power/cc-power-panel.c:1865
 msgid "Suspend & Power Off"
 msgstr "Uspávání a vypínání"
 
-#: ../panels/power/cc-power-panel.c:1783
+#: ../panels/power/cc-power-panel.c:1898
 msgid "_Automatic suspend"
 msgstr "_Automaticky uspat"
 
-#: ../panels/power/cc-power-panel.c:1807
+#: ../panels/power/cc-power-panel.c:1922
 msgid "When battery power is _critical"
 msgstr "Když je napájení z baterie kriti_cky nízké"
 
-#: ../panels/power/cc-power-panel.c:1840
+#: ../panels/power/cc-power-panel.c:1979
 msgid "Power Off"
 msgstr "Vypnout"
 
-#: ../panels/power/cc-power-panel.c:1982
+#: ../panels/power/cc-power-panel.c:2121
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -6121,77 +6125,77 @@ msgstr "Správa uživatelských účtů"
 msgid "Authentication is required to change user data"
 msgstr "Ke změně uživatelských dat je požadováno ověření"
 
-#: ../panels/user-accounts/pw-utils.c:81
+#: ../panels/user-accounts/pw-utils.c:82
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one."
 msgstr "Nové heslo se musí lišit od toho starého"
 
-#: ../panels/user-accounts/pw-utils.c:83
+#: ../panels/user-accounts/pw-utils.c:84
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers."
 msgstr "Zkuste změnit některá písmena a číslice."
 
-#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+#: ../panels/user-accounts/pw-utils.c:86 ../panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
 msgstr "Zkuste změnit heslo trochu víc."
 
-#: ../panels/user-accounts/pw-utils.c:87
+#: ../panels/user-accounts/pw-utils.c:88
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger."
 msgstr "Heslo bez vašeho uživatelského jména by bylo silnější."
 
-#: ../panels/user-accounts/pw-utils.c:89
+#: ../panels/user-accounts/pw-utils.c:90
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password."
 msgstr "Zkuste se vyhnout použití svého jména v heslu."
 
-#: ../panels/user-accounts/pw-utils.c:91
+#: ../panels/user-accounts/pw-utils.c:92
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password."
 msgstr "Zkuste se vyhnout použití některých slov v hesle."
 
-#: ../panels/user-accounts/pw-utils.c:95
+#: ../panels/user-accounts/pw-utils.c:96
 msgctxt "Password hint"
 msgid "Try to avoid common words."
 msgstr "Zkuste se vyhnout běžným slovům."
 
-#: ../panels/user-accounts/pw-utils.c:97
+#: ../panels/user-accounts/pw-utils.c:98
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words."
 msgstr "Zkuste se vyhnout změně pořadí stávajících slov."
 
-#: ../panels/user-accounts/pw-utils.c:99
+#: ../panels/user-accounts/pw-utils.c:100
 msgctxt "Password hint"
 msgid "Try to use more numbers."
 msgstr "Zkuste použít víc číslic."
 
-#: ../panels/user-accounts/pw-utils.c:101
+#: ../panels/user-accounts/pw-utils.c:102
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters."
 msgstr "Zkuste použít víc velkých písmen."
 
-#: ../panels/user-accounts/pw-utils.c:103
+#: ../panels/user-accounts/pw-utils.c:104
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters."
 msgstr "Zkuste použít víc malých písmen."
 
-#: ../panels/user-accounts/pw-utils.c:105
+#: ../panels/user-accounts/pw-utils.c:106
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation."
 msgstr "Zkuste použít více speciálních znaků, jako jsou interpunkční znaménka."
 
-#: ../panels/user-accounts/pw-utils.c:107
+#: ../panels/user-accounts/pw-utils.c:108
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation."
 msgstr "Zkuste použít směs písmen, číslic a interpunkčních znamének."
 
-#: ../panels/user-accounts/pw-utils.c:109
+#: ../panels/user-accounts/pw-utils.c:110
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character."
 msgstr "Zkuste se vyhnout opakování stejného znaku."
 
-#: ../panels/user-accounts/pw-utils.c:111
+#: ../panels/user-accounts/pw-utils.c:112
 msgctxt "Password hint"
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
@@ -6200,47 +6204,47 @@ msgstr ""
 "Zkuste se vyhnout opakování stejného typu znaků: měli byste kombinovat "
 "písmena, čísla a interpunkční znaménka."
 
-#: ../panels/user-accounts/pw-utils.c:113
+#: ../panels/user-accounts/pw-utils.c:114
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Zkuste se vyhnout sekvencím, jako je 1234 nebo abcd."
 
-#: ../panels/user-accounts/pw-utils.c:115
+#: ../panels/user-accounts/pw-utils.c:116
 msgctxt "Password hint"
-msgid "Try to add more characters."
-msgstr "Zkuste přidat víc znaků."
+msgid "Try to add more letters, numbers and symbols."
+msgstr "Zkuste přidat další písmena, číslice a symboly."
 
-#: ../panels/user-accounts/pw-utils.c:118
+#: ../panels/user-accounts/pw-utils.c:119
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
 msgstr "Zkombinujte velká a malá písmena a použijte jednu dvě číslice."
 
-#: ../panels/user-accounts/pw-utils.c:140
-#: ../panels/user-accounts/pw-utils.c:170
+#: ../panels/user-accounts/pw-utils.c:141
+#: ../panels/user-accounts/pw-utils.c:171
 msgctxt "Password strength"
 msgid "Strength: Weak"
 msgstr "Síla: slabé"
 
-#: ../panels/user-accounts/pw-utils.c:144
-#: ../panels/user-accounts/pw-utils.c:171
+#: ../panels/user-accounts/pw-utils.c:145
+#: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
 msgid "Strength: Low"
 msgstr "Síla: nic moc"
 
-#: ../panels/user-accounts/pw-utils.c:147
-#: ../panels/user-accounts/pw-utils.c:172
+#: ../panels/user-accounts/pw-utils.c:148
+#: ../panels/user-accounts/pw-utils.c:173
 msgctxt "Password strength"
 msgid "Strength: Medium"
 msgstr "Síla: průměrné"
 
-#: ../panels/user-accounts/pw-utils.c:150
-#: ../panels/user-accounts/pw-utils.c:173
+#: ../panels/user-accounts/pw-utils.c:151
+#: ../panels/user-accounts/pw-utils.c:174
 msgctxt "Password strength"
 msgid "Strength: Good"
 msgstr "Síla: dobré"
 
-#: ../panels/user-accounts/pw-utils.c:153
-#: ../panels/user-accounts/pw-utils.c:174
+#: ../panels/user-accounts/pw-utils.c:154
+#: ../panels/user-accounts/pw-utils.c:175
 msgctxt "Password strength"
 msgid "Strength: High"
 msgstr "Síla: silné"
@@ -6294,39 +6298,39 @@ msgstr "Nové heslo neobsahuje dostatek různorodých znaků"
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
-#: ../panels/user-accounts/um-account-dialog.c:212
+#: ../panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "Přidání účtu selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:317
+#: ../panels/user-accounts/um-account-dialog.c:330
 msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Bude použito k pojmenování vaší domovské složky a nemůže být dodatečně "
 "změněno."
 
-#: ../panels/user-accounts/um-account-dialog.c:407
+#: ../panels/user-accounts/um-account-dialog.c:420
 msgid "Passwords do not match."
 msgstr "Hesla si neodpovídají."
 
-#: ../panels/user-accounts/um-account-dialog.c:408
+#: ../panels/user-accounts/um-account-dialog.c:421
 #: ../panels/user-accounts/um-password-dialog.c:298
 msgid "Passwords do not match"
 msgstr "Hesla si neodpovídají"
 
-#: ../panels/user-accounts/um-account-dialog.c:661
-#: ../panels/user-accounts/um-account-dialog.c:707
+#: ../panels/user-accounts/um-account-dialog.c:674
+#: ../panels/user-accounts/um-account-dialog.c:720
 msgid "Failed to register account"
 msgstr "Registrace účtu selhala"
 
-#: ../panels/user-accounts/um-account-dialog.c:845
+#: ../panels/user-accounts/um-account-dialog.c:858
 msgid "No supported way to authenticate with this domain"
 msgstr "Ověření s touto doménou není podporováno"
 
-#: ../panels/user-accounts/um-account-dialog.c:904
+#: ../panels/user-accounts/um-account-dialog.c:917
 msgid "Failed to join domain"
 msgstr "Připojení k doméně selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:978
 msgid ""
 "Login not recognized.\n"
 "Please try again."
@@ -6334,7 +6338,7 @@ msgstr ""
 "Přihlášení nebylo rozpoznáno.\n"
 "Zkuste to prosím znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:973
+#: ../panels/user-accounts/um-account-dialog.c:986
 msgid ""
 "Invalid password.\n"
 "Please try again."
@@ -6342,20 +6346,20 @@ msgstr ""
 "Heslo je neplatné.\n"
 "Zkuste to, prosím, znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:982
+#: ../panels/user-accounts/um-account-dialog.c:995
 msgid "Failed to log into domain"
 msgstr "Přihlášení do domény selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:1040
+#: ../panels/user-accounts/um-account-dialog.c:1053
 msgid "Domain not found."
 msgstr "Doména nebyla nalezena."
 
-#: ../panels/user-accounts/um-account-dialog.c:1383
+#: ../panels/user-accounts/um-account-dialog.c:1396
 msgid "Add User"
 msgstr "Přidání uživatele"
 
 #. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1396
+#: ../panels/user-accounts/um-account-dialog.c:1409
 msgid "_Enterprise Login"
 msgstr "_Přihlášení do domény"
 
@@ -6579,17 +6583,17 @@ msgstr "Žádné"
 msgid "Logged in"
 msgstr "Přihlášený"
 
-#: ../panels/user-accounts/um-user-panel.c:994
+#: ../panels/user-accounts/um-user-panel.c:995
 msgid "Failed to contact the accounts service"
 msgstr "Selhalo kontaktování účtovací služby"
 
-#: ../panels/user-accounts/um-user-panel.c:996
+#: ../panels/user-accounts/um-user-panel.c:997
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Zkontrolujte prosím, že je účtovací služba AccountService nainstalovaná a "
 "zapnutá."
 
-#: ../panels/user-accounts/um-user-panel.c:1037
+#: ../panels/user-accounts/um-user-panel.c:1038
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6597,12 +6601,12 @@ msgstr ""
 "Abyste mohli provést změny,\n"
 "klikněte nejprve na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Create a user account"
 msgstr "Vytvořit uživatelský účet"
 
-#: ../panels/user-accounts/um-user-panel.c:1086
-#: ../panels/user-accounts/um-user-panel.c:1375
+#: ../panels/user-accounts/um-user-panel.c:1087
+#: ../panels/user-accounts/um-user-panel.c:1376
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6610,12 +6614,12 @@ msgstr ""
 "Pro vytvoření uživatelského účtu\n"
 "nejprve klikněte na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1097
 msgid "Delete the selected user account"
 msgstr "Odstranit vybraný uživatelský účet"
 
-#: ../panels/user-accounts/um-user-panel.c:1108
-#: ../panels/user-accounts/um-user-panel.c:1380
+#: ../panels/user-accounts/um-user-panel.c:1109
+#: ../panels/user-accounts/um-user-panel.c:1381
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6623,7 +6627,7 @@ msgstr ""
 "Pro odstranění uživatelského účtu\n"
 "nejprve klikněte na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1290
+#: ../panels/user-accounts/um-user-panel.c:1291
 msgid "My Account"
 msgstr "Můj účet"
 
@@ -6678,12 +6682,12 @@ msgstr ""
 msgid "Mis-click detected, restarting..."
 msgstr "Zjištěno chybějící kliknutí, začíná se znovu…"
 
-#: ../panels/wacom/cc-wacom-button-row.c:439
+#: ../panels/wacom/cc-wacom-button-row.c:443
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Nahoru"
 
-#: ../panels/wacom/cc-wacom-button-row.c:440
+#: ../panels/wacom/cc-wacom-button-row.c:444
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Dolů"
@@ -6727,7 +6731,7 @@ msgstr "Mapovat na jedinou obrazovku"
 msgid "%d of %d"
 msgstr "%d z %d"
 
-#: ../panels/wacom/cc-wacom-page.c:443
+#: ../panels/wacom/cc-wacom-page.c:522
 msgid "Display Mapping"
 msgstr "Mapování zobrazení"
 
@@ -7014,22 +7018,22 @@ msgid "Settings"
 msgstr "Nastavení"
 
 #. Add categories
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:860
 msgctxt "category"
 msgid "Personal"
 msgstr "Osobní"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:861
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:862
 msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1434
+#: ../shell/cc-window.c:1451
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
