@@ -83,6 +83,8 @@ struct _CcDateTimePanelPrivate
   GSettings *settings;
   GDesktopClockFormat clock_format;
   gboolean ampm_available;
+  GtkWidget *am_label;
+  GtkWidget *pm_label;
 
   GnomeWallClock *clock_tracker;
 
@@ -93,6 +95,8 @@ struct _CcDateTimePanelPrivate
 };
 
 static void update_time (CcDateTimePanel *self);
+static void change_time (CcDateTimePanel *self);
+
 
 static void
 cc_date_time_panel_get_property (GObject    *object,
@@ -229,47 +233,93 @@ clock_settings_changed_cb (GSettings       *settings,
   g_signal_handlers_unblock_by_func (format_combo, change_clock_settings, panel);
 }
 
+static gboolean
+am_pm_button_clicked (GtkWidget *button,
+                      CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *stack;
+  GtkWidget *visible_child;
+
+  stack = W ("am_pm_stack");
+
+  visible_child = gtk_stack_get_visible_child (GTK_STACK (stack));
+  if (visible_child == priv->am_label)
+    gtk_stack_set_visible_child (GTK_STACK (stack), priv->pm_label);
+  else
+    gtk_stack_set_visible_child (GTK_STACK (stack), priv->am_label);
+
+  change_time (self);
+
+  return TRUE;
+}
+
+/* Update the widgets based on the system time */
 static void
 update_time (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *h_spinbutton;
+  GtkWidget *m_spinbutton;
+  GtkWidget *am_pm_button;
   char *label;
-  char *am_pm_widgets[] = {"ampm_up_button", "ampm_down_button", "ampm_label" };
-  guint i;
+  gint hour;
+  gint minute;
   gboolean use_ampm;
+
+  h_spinbutton = W("h_spinbutton");
+  m_spinbutton = W("m_spinbutton");
+  am_pm_button = W("am_pm_button");
+
+  g_signal_handlers_block_by_func (h_spinbutton, change_time, self);
+  g_signal_handlers_block_by_func (m_spinbutton, change_time, self);
+  g_signal_handlers_block_by_func (am_pm_button, am_pm_button_clicked, self);
 
   if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
     use_ampm = TRUE;
   else
     use_ampm = FALSE;
 
+  hour = g_date_time_get_hour (priv->date);
+  minute = g_date_time_get_minute (priv->date);
+
   if (!use_ampm)
     {
-      /* Update the hours label */
-      label = g_date_time_format (priv->date, "%H");
-      gtk_label_set_text (GTK_LABEL (W("hours_label")), label);
-      g_free (label);
+      /* Update the hours spinbutton */
+      gtk_spin_button_set_range (GTK_SPIN_BUTTON (h_spinbutton), 0, 23);
+      gtk_spin_button_set_value (GTK_SPIN_BUTTON (h_spinbutton), hour);
     }
   else
     {
-      /* Update the hours label */
-      label = g_date_time_format (priv->date, "%I");
-      gtk_label_set_text (GTK_LABEL (W("hours_label")), label);
-      g_free (label);
+      GtkWidget *am_pm_stack;
+      gboolean is_pm_time;
 
-      /* Set AM/PM */
-      label = g_date_time_format (priv->date, "%p");
-      gtk_label_set_text (GTK_LABEL (W("ampm_label")), label);
-      g_free (label);
+      is_pm_time = (hour >= 12);
+
+      /* Update the AM/PM button */
+      am_pm_stack = W ("am_pm_stack");
+      if (is_pm_time)
+        gtk_stack_set_visible_child (GTK_STACK (am_pm_stack), priv->pm_label);
+      else
+        gtk_stack_set_visible_child (GTK_STACK (am_pm_stack), priv->am_label);
+
+      /* Update the hours spinbutton */
+      if (is_pm_time)
+        hour -= 12;
+      if (hour == 0)
+        hour = 12;
+      gtk_spin_button_set_value (GTK_SPIN_BUTTON (h_spinbutton), hour);
+      gtk_spin_button_set_range (GTK_SPIN_BUTTON (h_spinbutton), 1, 12);
     }
 
-  for (i = 0; i < G_N_ELEMENTS (am_pm_widgets); i++)
-    gtk_widget_set_visible (W(am_pm_widgets[i]), use_ampm);
+  gtk_widget_set_visible (am_pm_button, use_ampm);
 
-  /* Update the minutes label */
-  label = g_date_time_format (priv->date, "%M");
-  gtk_label_set_text (GTK_LABEL (W("minutes_label")), label);
-  g_free (label);
+  /* Update the minutes spinbutton */
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (m_spinbutton), minute);
+
+  g_signal_handlers_unblock_by_func (h_spinbutton, change_time, self);
+  g_signal_handlers_unblock_by_func (m_spinbutton, change_time, self);
+  g_signal_handlers_unblock_by_func (am_pm_button, am_pm_button_clicked, self);
 
   /* Update the time on the listbow row */
   if (use_ampm)
@@ -756,40 +806,41 @@ on_clock_changed (GnomeWallClock  *clock,
 }
 
 static void
-change_time (GtkButton       *button,
-             CcDateTimePanel *panel)
+change_time (CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
-  const gchar *widget_name;
-  gint direction;
+  guint h, m;
   GDateTime *old_date;
 
   old_date = priv->date;
 
-  widget_name = gtk_buildable_get_name (GTK_BUILDABLE (button));
+  h = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("h_spinbutton")));
+  m = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("m_spinbutton")));
 
-  if (strstr (widget_name, "up"))
-    direction = 1;
-  else
-    direction = -1;
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+    {
+      gboolean is_pm_time;
+      GtkWidget *am_pm_stack;
+      GtkWidget *visible_child;
 
-  if (widget_name[0] == 'h')
-    {
-      priv->date = g_date_time_add_hours (old_date, direction);
-    }
-  else if (widget_name[0] == 'm')
-    {
-      priv->date = g_date_time_add_minutes (old_date, direction);
-    }
-  else
-    {
-      int hour;
-      hour = g_date_time_get_hour (old_date);
-      if (hour >= 12)
-        priv->date = g_date_time_add_hours (old_date, -12);
+      am_pm_stack = W ("am_pm_stack");
+      visible_child = gtk_stack_get_visible_child (GTK_STACK (am_pm_stack));
+      if (visible_child == priv->pm_label)
+        is_pm_time = TRUE;
       else
-        priv->date = g_date_time_add_hours (old_date, 12);
+        is_pm_time = FALSE;
+
+      if (h == 12)
+        h = 0;
+      if (is_pm_time)
+        h += 12;
     }
+
+  priv->date = g_date_time_new_local (g_date_time_get_year (old_date),
+                                      g_date_time_get_month (old_date),
+                                      g_date_time_get_day_of_month (old_date),
+                                      h, m,
+                                      g_date_time_get_second (old_date));
   g_date_time_unref (old_date);
 
   update_time (panel);
@@ -929,40 +980,6 @@ on_timedated_properties_changed (GDBusProxy       *proxy,
 }
 
 static void
-reorder_date_widget (DateEndianess           endianess,
-		     CcDateTimePanelPrivate *priv)
-{
-  GtkWidget *month, *day, *year;
-  GtkBox *box;
-
-  if (endianess == DATE_ENDIANESS_MIDDLE)
-    return;
-
-  month = W ("month-combobox");
-  day = W ("day-spinbutton");
-  year = W("year-spinbutton");
-
-  box = GTK_BOX (W("table1"));
-
-  switch (endianess) {
-  case DATE_ENDIANESS_LITTLE:
-    gtk_box_reorder_child (box, month, 0);
-    gtk_box_reorder_child (box, day, 0);
-    gtk_box_reorder_child (box, year, -1);
-    break;
-  case DATE_ENDIANESS_BIG:
-    gtk_box_reorder_child (box, month, 0);
-    gtk_box_reorder_child (box, year, 0);
-    gtk_box_reorder_child (box, day, -1);
-    break;
-  case DATE_ENDIANESS_MIDDLE:
-    /* Let's please GCC */
-    g_assert_not_reached ();
-    break;
-  }
-}
-
-static void
 update_header (GtkListBoxRow *row,
                GtkListBoxRow *before,
                gpointer       user_data)
@@ -1037,6 +1054,50 @@ setup_main_listview (CcDateTimePanel *self)
                     G_CALLBACK (list_box_row_activated), self);
 }
 
+static gboolean
+format_minutes_combobox (GtkSpinButton *spin,
+                         gpointer       data)
+{
+  GtkAdjustment *adjustment;
+  char *text;
+  int value;
+
+  adjustment = gtk_spin_button_get_adjustment (spin);
+  value = (int)gtk_adjustment_get_value (adjustment);
+  text = g_strdup_printf ("%02d", value);
+  gtk_entry_set_text (GTK_ENTRY (spin), text);
+  g_free (text);
+
+  return TRUE;
+}
+
+static gboolean
+format_hours_combobox (GtkSpinButton   *spin,
+                       CcDateTimePanel *panel)
+{
+  CcDateTimePanelPrivate *priv = panel->priv;
+  GtkAdjustment *adjustment;
+  char *text;
+  int hour;
+  gboolean use_ampm;
+
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+    use_ampm = TRUE;
+  else
+    use_ampm = FALSE;
+
+  adjustment = gtk_spin_button_get_adjustment (spin);
+  hour = (int)gtk_adjustment_get_value (adjustment);
+  if (use_ampm)
+    text = g_strdup_printf ("%d", hour);
+  else
+    text = g_strdup_printf ("%02d", hour);
+  gtk_entry_set_text (GTK_ENTRY (spin), text);
+  g_free (text);
+
+  return TRUE;
+}
+
 static void
 setup_timezone_dialog (CcDateTimePanel *self)
 {
@@ -1052,12 +1113,95 @@ setup_timezone_dialog (CcDateTimePanel *self)
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
 
+static char *
+format_am_label ()
+{
+  GDateTime *date;
+  char *text;
+
+  /* Construct a time at midnight, and use it to get localized AM identifier */
+  date = g_date_time_new_utc (1, 1, 1, 0, 0, 0);
+  text = g_date_time_format (date, "%p");
+  g_date_time_unref (date);
+
+  return text;
+}
+
+static char *
+format_pm_label ()
+{
+  GDateTime *date;
+  char *text;
+
+  /* Construct a time at noon, and use it to get localized PM identifier */
+  date = g_date_time_new_utc (1, 1, 1, 12, 0, 0);
+  text = g_date_time_format (date, "%p");
+  g_date_time_unref (date);
+
+  return text;
+}
+
+static void
+setup_am_pm_button (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkCssProvider *provider;
+  GtkStyleContext *context;
+  GtkWidget *am_pm_button;
+  GtkWidget *stack;
+  char *text;
+
+  text = format_am_label ();
+  priv->am_label = gtk_label_new (text);
+  g_free (text);
+
+  text = format_pm_label ();
+  priv->pm_label = gtk_label_new (text);
+  g_free (text);
+
+  stack = W ("am_pm_stack");
+  gtk_container_add (GTK_CONTAINER (stack), priv->am_label);
+  gtk_container_add (GTK_CONTAINER (stack), priv->pm_label);
+  gtk_widget_show_all (stack);
+
+  am_pm_button = W ("am_pm_button");
+  g_signal_connect (am_pm_button, "clicked",
+                    G_CALLBACK (am_pm_button_clicked), self);
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
+                                   ".gnome-control-center-ampm-toggle-button {\n"
+                                   "    font-size: 18px;\n"
+                                   "}", -1, NULL);
+  context = gtk_widget_get_style_context (am_pm_button);
+  gtk_style_context_add_provider (context,
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
+}
+
 static void
 setup_datetime_dialog (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
+  GtkCssProvider *provider;
+  GtkStyleContext *context;
   GtkWidget *button;
   GtkWidget *dialog;
+
+  setup_am_pm_button (self);
+
+  /* Big time buttons */
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
+                                   ".gnome-control-center-datetime-setup-time {\n"
+                                   "    font-size: 32px;\n"
+                                   "}", -1, NULL);
+  context = gtk_widget_get_style_context (GTK_WIDGET (W ("time_grid")));
+  gtk_style_context_add_provider (context,
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
 
   button = W ("datetime-close-button");
   dialog = W ("datetime-dialog");
@@ -1065,23 +1209,36 @@ setup_datetime_dialog (CcDateTimePanel *self)
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  g_signal_connect (W ("h_spinbutton"), "output",
+                    G_CALLBACK (format_hours_combobox), self);
+  g_signal_connect (W ("m_spinbutton"), "output",
+                    G_CALLBACK (format_minutes_combobox), self);
+
+  gtk_spin_button_set_increments (GTK_SPIN_BUTTON (W ("h_spinbutton")), 1, 0);
+  gtk_spin_button_set_increments (GTK_SPIN_BUTTON (W ("m_spinbutton")), 1, 0);
+
+  gtk_spin_button_set_range (GTK_SPIN_BUTTON (W ("h_spinbutton")), 0, 23);
+  gtk_spin_button_set_range (GTK_SPIN_BUTTON (W ("m_spinbutton")), 0, 59);
+
+  g_signal_connect_swapped (W ("h_spinbutton"), "value-changed",
+                            G_CALLBACK (change_time), self);
+  g_signal_connect_swapped (W ("m_spinbutton"), "value-changed",
+                            G_CALLBACK (change_time), self);
 }
 
 static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
-  char *buttons[] = { "hour_up_button", "hour_down_button", "min_up_button",
-          "min_down_button", "ampm_up_button", "ampm_down_button" };
   GtkWidget *widget;
   GtkAdjustment *adjustment;
   GError *error;
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
   const char *ampm;
-  guint i, num_days;
+  guint num_days;
   int ret;
-  DateEndianess endianess;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
   g_resources_register (cc_datetime_get_resource ());
@@ -1125,21 +1282,12 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
 
-  /* set up time editing widgets */
-  for (i = 0; i < G_N_ELEMENTS (buttons); i++)
-    {
-      g_signal_connect (W(buttons[i]), "clicked",
-                        G_CALLBACK (change_time), self);
-    }
-
   /* set up date editing widgets */
   priv->date = g_date_time_new_now_local ();
-  endianess = date_endian_get_default (FALSE);
-  reorder_date_widget (endianess, priv);
 
   /* Force the direction for the time, so that the time
    * is presented correctly for RTL languages */
-  gtk_widget_set_direction (W("table2"), GTK_TEXT_DIR_LTR);
+  gtk_widget_set_direction (W("time_grid"), GTK_TEXT_DIR_LTR);
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
                             g_date_time_get_month (priv->date) - 1);

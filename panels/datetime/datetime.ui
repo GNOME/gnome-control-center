@@ -21,17 +21,6 @@
   <object class="GtkTreeModelSort" id="city-modelsort">
     <property name="model">city-modelfilter</property>
   </object>
-  <object class="GtkListStore" id="day-liststore">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">22</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="month-liststore">
     <columns>
       <!-- column-name gchararray1 -->
@@ -117,250 +106,217 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="time-box">
+          <object class="GtkBox" id="time-box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">6</property>
+            <property name="margin_right">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">6</property>
+            <property name="spacing">24</property>
             <child>
-              <object class="GtkAlignment" id="alignment2">
+              <object class="GtkGrid" id="time_grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xscale">0</property>
+                <property name="halign">start</property>
+                <property name="margin_left">12</property>
+                <property name="margin_right">12</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">12</property>
+                <property name="hexpand">True</property>
+                <property name="column_spacing">6</property>
+                <style>
+                  <class name="gnome-control-center-datetime-setup-time"/>
+                </style>
                 <child>
-                  <object class="GtkTable" id="table2">
+                  <object class="GtkSpinButton" id="h_spinbutton">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="n_rows">3</property>
-                    <property name="n_columns">4</property>
-                    <property name="column_spacing">12</property>
-                    <property name="row_spacing">6</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label2">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes" comments="Translator: this is the separator between hours and minutes, like in HH:MM">:</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2.5"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="hours_label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label">16</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2.5"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="minutes_label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label">45</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2.5"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="hour_up_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">none</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="hour_up_accessible">
-                            <property name="accessible-description" translatable="yes">Set the time one hour ahead.</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkArrow" id="arrow1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="arrow_type">up</property>
-                          </object>
-                        </child>
+                    <property name="invisible_char">●</property>
+                    <property name="width_chars">2</property>
+                    <property name="xalign">0.5</property>
+                    <property name="input_purpose">digits</property>
+                    <property name="orientation">vertical</property>
+                    <property name="numeric">True</property>
+                    <property name="wrap">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="hour-accessible">
+                        <property name="accessible-description" translatable="yes">Hour</property>
                       </object>
                     </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes" comments="Translator: this is the separator between hours and minutes, like in HH∶MM">∶</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="m_spinbutton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="invisible_char">●</property>
+                    <property name="width_chars">2</property>
+                    <property name="xalign">0.5</property>
+                    <property name="input_purpose">digits</property>
+                    <property name="orientation">vertical</property>
+                    <property name="numeric">True</property>
+                    <property name="wrap">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="minute-accessible">
+                        <property name="accessible-description" translatable="yes">Minute</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkAlignment" id="am_pm_alignment">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xscale">0</property>
+                    <property name="yscale">0</property>
+                    <property name="left_padding">6</property>
+                    <property name="right_padding">6</property>
                     <child>
-                      <object class="GtkButton" id="hour_down_button">
+                      <object class="GtkButton" id="am_pm_button">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="relief">none</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="hour_down_accessible">
-                            <property name="accessible-description" translatable="yes">Set the time one hour back.</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkArrow" id="arrow2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="arrow_type">down</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="min_up_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">none</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="min_up_accessible">
-                            <property name="accessible-description" translatable="yes">Set the time one minute ahead.</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkArrow" id="arrow4">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="arrow_type">up</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="min_down_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">none</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="min_down_accessible">
-                            <property name="accessible-description" translatable="yes">Set the time one minute back.</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkArrow" id="arrow3">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="arrow_type">down</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="ampm_label">
-                        <property name="can_focus">False</property>
-                        <property name="label">AM</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2.5"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="left_attach">3</property>
-                        <property name="right_attach">4</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="ampm_up_button">
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">none</property>
+                        <style>
+                          <class name="gnome-control-center-ampm-toggle-button"/>
+                        </style>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="ampm_up_accessible">
                             <property name="accessible-description" translatable="yes">Switch between AM and PM.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkArrow" id="arrow5">
+                          <object class="GtkStack" id="am_pm_stack">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="arrow_type">up</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="left_attach">3</property>
-                        <property name="right_attach">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="ampm_down_button">
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">none</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="ampm_down_accessible">
-                            <property name="accessible-description" translatable="yes">Switch between AM and PM.</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkArrow" id="arrow6">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="arrow_type">down</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">3</property>
-                        <property name="right_attach">4</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                      </packing>
                     </child>
                   </object>
+                  <packing>
+                    <property name="left_attach">3</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="padding">12</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="table1">
+              <object class="GtkGrid" id="grid1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">12</property>
+                <property name="valign">center</property>
+                <property name="row_spacing">9</property>
+                <property name="column_spacing">6</property>
+                <property name="row_homogeneous">True</property>
+                <child>
+                  <object class="GtkLabel" id="day_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Day</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="month_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="is_focus">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Month</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="year_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Year</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="day-spinbutton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="invisible_char">•</property>
+                    <property name="width_chars">3</property>
+                    <property name="numeric">True</property>
+                    <property name="wrap">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="day-accessible">
+                        <property name="accessible-description" translatable="yes">Day</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
                 <child>
                   <object class="GtkComboBox" id="month-combobox">
                     <property name="visible">True</property>
@@ -379,29 +335,10 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSpinButton" id="day-spinbutton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="invisible_char">•</property>
-                    <property name="width_chars">3</property>
-                    <property name="numeric">True</property>
-                    <property name="wrap">True</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="day-accessible">
-                        <property name="accessible-description" translatable="yes">Day</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -419,16 +356,16 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="padding">12</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -960,16 +897,5 @@
       <widget name="box4"/>
       <widget name="box5"/>
     </widgets>
-  </object>
-  <object class="GtkListStore" id="year-liststore">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">2010</col>
-      </row>
-    </data>
   </object>
 </interface>
