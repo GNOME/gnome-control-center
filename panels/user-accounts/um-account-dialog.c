@@ -33,6 +33,7 @@
 #include "pw-utils.h"
 
 #define PASSWORD_CHECK_TIMEOUT 600
+#define DOMAIN_DEFAULT_HINT _("Should match the web address of your account provider.")
 
 typedef enum {
         UM_LOCAL,
@@ -100,6 +101,7 @@ struct _UmAccountDialog {
         UmRealmObject *selected_realm;
         gboolean enterprise_check_credentials;
         GtkWidget *enterprise_hint;
+        GtkWidget *enterprise_domain_hint;
         gint       enterprise_domain_timeout_id;
 
         /* Join credential dialog */
@@ -993,14 +995,14 @@ on_realm_login (GObject *source,
         /* A problem with the user's login name or password */
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
                 g_debug ("Problem with the user's login: %s", error->message);
-                message = _("Login not recognized.\nPlease try again.");
+                message = _("That login name didn't work.\nPlease try again.");
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login));
 
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Problem with the user's password: %s", error->message);
-                message = _("Invalid password.\nPlease try again.");
+                message = _("That login password didn't work.\nPlease try again.");
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password));
@@ -1057,7 +1059,7 @@ on_realm_discover_input (GObject *source,
                         enterprise_check_login (self);
                 }
                 set_entry_validation_checkmark (GTK_ENTRY (self->enterprise_domain_entry));
-                gtk_label_set_text (GTK_LABEL (self->enterprise_hint), "");
+                gtk_label_set_text (GTK_LABEL (self->enterprise_domain_hint), DOMAIN_DEFAULT_HINT);
                 g_list_free_full (realms, g_object_unref);
 
         /* The domain is likely invalid*/
@@ -1066,11 +1068,11 @@ on_realm_discover_input (GObject *source,
                 g_dbus_error_strip_remote_error (error);
 
                 if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC)) {
-                        message = g_strdup(_("Domain not found."));
+                        message = g_strdup(_("Unable find the domain. Maybe you misspelled it?"));
                 } else {
                         message = g_strdup_printf ("%s.", error->message);
                 }
-                gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
+                gtk_label_set_text (GTK_LABEL (self->enterprise_domain_hint), message);
 
                 g_free (message);
                 g_error_free (error);
@@ -1096,6 +1098,7 @@ enterprise_check_domain (UmAccountDialog *self)
 
         domain = gtk_entry_get_text (self->enterprise_domain_entry);
         if (strlen (domain) == 0) {
+                gtk_label_set_text (GTK_LABEL (self->enterprise_domain_hint), DOMAIN_DEFAULT_HINT);
                 return;
         }
 
@@ -1216,6 +1219,7 @@ enterprise_domain_timeout (UmAccountDialog *self)
         if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
                 gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain), &iter, 1, &self->selected_realm, -1);
                 set_entry_validation_checkmark (GTK_ENTRY (self->enterprise_domain_entry));
+                gtk_label_set_text (GTK_LABEL (self->enterprise_domain_hint), DOMAIN_DEFAULT_HINT);
         }
         else {
                 enterprise_check_domain (self);
@@ -1240,7 +1244,6 @@ on_domain_changed (GtkComboBox *widget,
         self->enterprise_domain_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) enterprise_domain_timeout, self);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
-        gtk_label_set_text (GTK_LABEL (self->enterprise_hint), "");
         dialog_validate (self);
 }
 
@@ -1285,6 +1288,7 @@ enterprise_init (UmAccountDialog *self,
         self->enterprise_check_credentials = FALSE;
 
         self->enterprise_hint = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-hint");
+        self->enterprise_domain_hint = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-domain-hint");
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-domain");
         g_signal_connect (widget, "changed", G_CALLBACK (on_domain_changed), self);
@@ -1293,6 +1297,7 @@ enterprise_init (UmAccountDialog *self,
         gtk_combo_box_set_model (self->enterprise_domain,
                                  GTK_TREE_MODEL (self->enterprise_realms));
         self->enterprise_domain_entry = GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget)));
+        enterprise_check_domain (self);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-login");
         g_signal_connect (widget, "changed", G_CALLBACK (on_entry_changed), self);

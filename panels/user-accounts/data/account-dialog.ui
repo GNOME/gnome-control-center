@@ -424,7 +424,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">2</property>
+                    <property name="top_attach">3</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -444,7 +444,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">3</property>
+                    <property name="top_attach">4</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -453,17 +453,25 @@
                   <object class="GtkLabel" id="enterprise-hint">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="yalign">1</property>
-                    <property name="vexpand">True</property>
+                    <property name="yalign">0</property>
+                    <property name="xalign">0</property>
                     <property name="label" translatable="yes"></property>
+                    <property name="width-chars">35</property>
+                    <property name="max-width-chars">35</property>
+                    <property name="height-request">50</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
-                    <property name="justify">center</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="0.83"/>
+                    </attributes>
                   </object>
                   <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">4</property>
-                    <property name="width">2</property>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">5</property>
+                    <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -488,6 +496,33 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkLabel" id="enterprise-domain-hint">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="yalign">0</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes"></property>
+                    <property name="width-chars">35</property>
+                    <property name="max-width-chars">35</property>
+                    <property name="height-request">50</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap_mode">word-char</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="0.83"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+
+                <child>
                   <object class="GtkEntry" id="enterprise-login">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -498,7 +533,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">2</property>
+                    <property name="top_attach">3</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -515,7 +550,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">3</property>
+                    <property name="top_attach">4</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
