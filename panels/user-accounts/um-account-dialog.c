@@ -282,6 +282,8 @@ update_password_strength (UmAccountDialog *self)
 
         if (strength_level > 0) {
                 set_entry_validation_checkmark (GTK_ENTRY (self->local_password));
+        } else if (strlen (password) == 0) {
+                set_entry_generation_icon (GTK_ENTRY (self->local_password));
         } else {
                 clear_entry_validation_error (GTK_ENTRY (self->local_password));
         }
@@ -452,6 +454,23 @@ update_password_match (UmAccountDialog *self)
         }
 }
 
+static void
+on_generate (GtkEntry             *entry,
+             GtkEntryIconPosition  pos,
+             GdkEventButton       *event,
+             UmAccountDialog      *self)
+{
+        gchar *pwd;
+
+        pwd = pw_generate ();
+
+        gtk_entry_set_text (GTK_ENTRY (self->local_password), pwd);
+        gtk_entry_set_text (GTK_ENTRY (self->local_verify), pwd);
+        gtk_entry_set_visibility (GTK_ENTRY (self->local_password), TRUE);
+
+        g_free (pwd);
+}
+
 static gboolean
 local_password_timeout (UmAccountDialog *self)
 {
@@ -484,6 +503,7 @@ on_password_changed (GtkEntry *entry,
                    gpointer user_data)
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        const char *password;
 
         if (self->local_password_timeout_id != 0) {
                 g_source_remove (self->local_password_timeout_id);
@@ -493,6 +513,11 @@ on_password_changed (GtkEntry *entry,
         clear_entry_validation_error (GTK_ENTRY (entry));
         clear_entry_validation_error (GTK_ENTRY (self->local_verify));
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+
+        password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
+        if (strlen (password) == 0) {
+                gtk_entry_set_visibility (GTK_ENTRY (self->local_password), FALSE);
+        }
 
         self->local_password_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_password_timeout, self);
 }
@@ -552,6 +577,7 @@ local_init (UmAccountDialog *self,
         g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
         g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
         self->local_password = widget;
+        g_signal_connect (widget, "icon-press", G_CALLBACK (on_generate), self);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-verify");
         gtk_widget_set_sensitive (widget, FALSE);
