@@ -40,6 +40,7 @@ void     setup_tooltip_with_embedded_icon (GtkWidget   *widget,
 gboolean show_tooltip_now                 (GtkWidget   *widget,
                                            GdkEvent    *event);
 
+void     set_entry_generation_icon        (GtkEntry    *entry);
 void     set_entry_validation_checkmark   (GtkEntry    *entry);
 void     set_entry_validation_error       (GtkEntry    *entry,
                                            const gchar *text);

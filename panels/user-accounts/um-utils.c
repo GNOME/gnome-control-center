@@ -301,6 +301,14 @@ set_entry_validation_error (GtkEntry    *entry,
 }
 
 void
+set_entry_generation_icon (GtkEntry *entry)
+{
+        g_object_set (entry, "caps-lock-warning", FALSE, NULL);
+        gtk_entry_set_icon_from_icon_name (entry, GTK_ENTRY_ICON_SECONDARY, "system-run-symbolic");
+        gtk_entry_set_icon_activatable (entry, GTK_ENTRY_ICON_SECONDARY, TRUE);
+}
+
+void
 set_entry_validation_checkmark (GtkEntry *entry)
 {
         g_object_set (entry, "caps-lock-warning", FALSE, NULL);
