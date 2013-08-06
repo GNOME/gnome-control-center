@@ -24,7 +24,6 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
-//#include <arpa/inet.h>
 #include <netinet/ether.h>
 
 #include <nm-client.h>
