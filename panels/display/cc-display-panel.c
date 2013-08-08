@@ -96,9 +96,6 @@ struct _CcDisplayPanelPrivate
   gboolean        ignore_gui_changes;
   gboolean        dragging_top_bar;
 
-  /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
-  GDBusProxy *proxy;
-
   UpClient *up_client;
   gboolean lid_is_closed;
 };
@@ -117,7 +114,6 @@ static gboolean output_overlaps (GnomeRROutputInfo *output, GnomeRRConfig *confi
 static void select_current_output_from_dialog_position (CcDisplayPanel *self);
 static void monitor_switch_active_cb (GObject *object, GParamSpec *pspec, gpointer data);
 static void get_geometry (GnomeRROutputInfo *output, int *w, int *h);
-static void apply_configuration_returned_cb (GObject *proxy, GAsyncResult *res, gpointer data);
 static gboolean get_clone_size (GnomeRRScreen *screen, int *width, int *height);
 static gboolean output_info_supports_mode (CcDisplayPanel *self, GnomeRROutputInfo *info, int width, int height);
 static char *make_resolution_string (int width, int height);
@@ -2302,128 +2298,33 @@ check_required_virtual_size (CcDisplayPanel *self)
 }
 
 static void
-begin_version2_apply_configuration (CcDisplayPanel *self, GdkWindow *parent_window, guint32 timestamp)
+sanitize_configuration (CcDisplayPanel *self)
 {
-  XID parent_window_xid;
-  GError *error = NULL;
-
-  parent_window_xid = GDK_WINDOW_XID (parent_window);
-
-  self->priv->proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                     G_DBUS_PROXY_FLAGS_NONE,
-                                                     NULL,
-                                                     "org.gnome.SettingsDaemon",
-                                                     "/org/gnome/SettingsDaemon/XRANDR",
-                                                     "org.gnome.SettingsDaemon.XRANDR_2",
-                                                     NULL,
-                                                     &error);
-  if (self->priv->proxy == NULL) {
-    error_message (self, _("Failed to apply configuration: %s"), error->message);
-    g_error_free (error);
-    return;
-  }
-
-  g_dbus_proxy_call (self->priv->proxy,
-                     "ApplyConfiguration",
-                     g_variant_new ("(xx)", (gint64) parent_window_xid, (gint64) timestamp),
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1,
-                     NULL,
-                     apply_configuration_returned_cb,
-                     self);
-}
-
-static void
-ensure_current_configuration_is_saved (void)
-{
-  GnomeRRScreen *rr_screen;
-  GnomeRRConfig *rr_config;
-
-  /* Normally, gnome_rr_config_save() creates a backup file based on the
-   * old monitors.xml.  However, if *that* file didn't exist, there is
-   * nothing from which to create a backup.  So, here we'll save the
-   * current/unchanged configuration and then let our caller call
-   * gnome_rr_config_save() again with the new/changed configuration, so
-   * that there *will* be a backup file in the end.
-   */
-
-  rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), NULL); /* NULL-GError */
-  if (!rr_screen)
-    return;
-
-  rr_config = gnome_rr_config_new_current (rr_screen, NULL);
-  gnome_rr_config_ensure_primary (rr_config);
-  gnome_rr_config_save (rr_config, NULL); /* NULL-GError */
-
-  g_object_unref (rr_config);
-  g_object_unref (rr_screen);
-}
-
-static void
-apply_configuration_returned_cb (GObject          *proxy,
-                                 GAsyncResult     *res,
-                                 gpointer          data)
-{
-  CcDisplayPanel *self = data;
-  GVariant *result;
-  GError *error = NULL;
-
-  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, &error);
-  if (error)
-    error_message (self, _("Failed to apply configuration: %s"), error->message);
-  g_clear_error (&error);  
-  if (result)
-    g_variant_unref (result);
-
-  g_object_unref (self->priv->proxy);
-  self->priv->proxy = NULL;
-
-  gtk_widget_set_sensitive (self->priv->panel, TRUE);
-}
-
-static gboolean
-sanitize_and_save_configuration (CcDisplayPanel *self)
-{
-  GError *error;
-
   gnome_rr_config_sanitize (self->priv->current_configuration);
   gnome_rr_config_ensure_primary (self->priv->current_configuration);
 
   check_required_virtual_size (self);
 
   foo_scroll_area_invalidate (FOO_SCROLL_AREA (self->priv->area));
-
-  ensure_current_configuration_is_saved ();
-
-  error = NULL;
-  if (!gnome_rr_config_save (self->priv->current_configuration, &error))
-    {
-      error_message (self, _("Could not save the monitor configuration"), error->message);
-      g_error_free (error);
-      return FALSE;
-    }
-
-  return TRUE;
 }
 
 static void
 apply (CcDisplayPanel *self)
 {
-  GdkWindow *window;
+  GError *error;
+  gboolean ok;
 
   self->priv->apply_button_clicked_timestamp = gtk_get_current_event_time ();
 
-  if (!sanitize_and_save_configuration (self))
-    return;
+  sanitize_configuration (self);
 
-  g_assert (self->priv->proxy == NULL);
+  error = NULL;
+  ok = gnome_rr_config_apply_persistent (self->priv->current_configuration,
+                                         self->priv->screen, &error);
 
-  gtk_widget_set_sensitive (self->priv->panel, FALSE);
-
-  window = gtk_widget_get_window (gtk_widget_get_toplevel (self->priv->panel));
-
-  begin_version2_apply_configuration (self, window,
-                                      self->priv->apply_button_clicked_timestamp);
+  if (!ok)
+      error_message (self, _("Failed to apply configuration"), error->message);
+  g_clear_error (&error);  
 }
 
 #if 0
