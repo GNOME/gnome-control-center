@@ -523,35 +523,26 @@ find_output_by_edid (GnomeRRScreen *rr_screen, const gchar *vendor, const gchar 
 	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
 
 	for (i = 0; rr_outputs[i] != NULL; i++) {
-		gchar *o_vendor_s;
-		gchar *o_product_s;
-		int o_product;
-		gchar *o_serial_s;
-		int o_serial;
+		gchar *o_vendor;
+		gchar *o_product;
+		gchar *o_serial;
 		gboolean match;
 
-		if (!gnome_rr_output_is_connected (rr_outputs[i]))
-			continue;
-
-		if (!gnome_rr_output_get_ids_from_edid (rr_outputs[i],
-						        &o_vendor_s,
-						        &o_product,
-						        &o_serial))
-			continue;
-
-		o_product_s = g_strdup_printf ("%d", o_product);
-		o_serial_s  = g_strdup_printf ("%d", o_serial);
+		gnome_rr_output_get_ids_from_edid (rr_outputs[i],
+						   &o_vendor,
+						   &o_product,
+						   &o_serial);
 
 		g_debug ("Checking for match between '%s','%s','%s' and '%s','%s','%s'", \
-		         vendor, product, serial, o_vendor_s, o_product_s, o_serial_s);
+		         vendor, product, serial, o_vendor, o_product, o_serial);
 
-		match = (vendor  == NULL || g_strcmp0 (vendor,  o_vendor_s)  == 0) && \
-		        (product == NULL || g_strcmp0 (product, o_product_s) == 0) && \
-		        (serial  == NULL || g_strcmp0 (serial,  o_serial_s)  == 0);
+		match = (vendor  == NULL || g_strcmp0 (vendor,  o_vendor)  == 0) && \
+		        (product == NULL || g_strcmp0 (product, o_product) == 0) && \
+		        (serial  == NULL || g_strcmp0 (serial,  o_serial)  == 0);
 
-		g_free (o_vendor_s);
-		g_free (o_product_s);
-		g_free (o_serial_s);
+		g_free (o_vendor);
+		g_free (o_product);
+		g_free (o_serial);
 
 		if (match) {
 			retval = rr_outputs[i];
@@ -575,9 +566,6 @@ find_builtin_output (GnomeRRScreen *rr_screen)
 
 	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
 	for (i = 0; rr_outputs[i] != NULL; i++) {
-		if (!gnome_rr_output_is_connected (rr_outputs[i]))
-			continue;
-
 		if (gnome_rr_output_is_builtin_display(rr_outputs[i])) {
 			retval = rr_outputs[i];
 			break;
@@ -701,8 +689,7 @@ set_display_by_output (GsdWacomDevice  *device,
 	GVariant    *c_array;
 	GVariant    *n_array;
 	gsize        nvalues;
-	gchar       *o_vendor_s, *o_product_s, *o_serial_s;
-	int          o_product, o_serial;
+	gchar       *o_vendor, *o_product, *o_serial;
 	const gchar *values[3];
 
 	tablet  = gsd_wacom_device_get_settings (device);
@@ -713,28 +700,26 @@ set_display_by_output (GsdWacomDevice  *device,
 		return;
 	}
 
-	if (rr_output == NULL ||
-	    !gnome_rr_output_get_ids_from_edid (rr_output,
-					        &o_vendor_s,
-					        &o_product,
-					        &o_serial)) {
-		o_vendor_s  = g_strdup ("");
-		o_product_s = g_strdup ("");
-		o_serial_s  = g_strdup ("");
+	if (rr_output == NULL) {
+	  o_vendor  = g_strdup ("");
+	  o_product = g_strdup ("");
+	  o_serial = g_strdup ("");
 	} else {
-		o_product_s = g_strdup_printf ("%d", o_product);
-		o_serial_s  = g_strdup_printf ("%d", o_serial);
+	  gnome_rr_output_get_ids_from_edid (rr_output,
+					     &o_vendor,
+					     &o_product,
+					     &o_serial);
 	}
 
-	values[0] = o_vendor_s;
-	values[1] = o_product_s;
-	values[2] = o_serial_s;
+	values[0] = o_vendor;
+	values[1] = o_product;
+	values[2] = o_serial;
 	n_array = g_variant_new_strv ((const gchar * const *) &values, 3);
 	g_settings_set_value (tablet, "display", n_array);
 
-	g_free (o_vendor_s);
-	g_free (o_product_s);
-	g_free (o_serial_s);
+	g_free (o_vendor);
+	g_free (o_product);
+	g_free (o_serial);
 }
 
 static GsdWacomRotation
