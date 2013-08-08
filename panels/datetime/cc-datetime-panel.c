@@ -124,48 +124,19 @@ cc_date_time_panel_dispose (GObject *object)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
 
-  if (priv->clock_tracker != NULL)
-    {
-      g_object_unref (priv->clock_tracker);
-      priv->clock_tracker = NULL;
-    }
-
-  if (priv->builder)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
-
-  if (priv->settings)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
-
-  if (priv->date)
-    {
-      g_date_time_unref (priv->date);
-      priv->date = NULL;
-    }
-
   if (priv->cancellable)
     {
       g_cancellable_cancel (priv->cancellable);
-      g_object_unref (priv->cancellable);
-      priv->cancellable = NULL;
+      g_clear_object (&priv->cancellable);
     }
 
-  if (priv->dtm)
-    {
-      g_object_unref (priv->dtm);
-      priv->dtm = NULL;
-    }
+  g_clear_object (&priv->builder);
+  g_clear_object (&priv->clock_tracker);
+  g_clear_object (&priv->dtm);
+  g_clear_object (&priv->permission);
+  g_clear_object (&priv->settings);
 
-  if (priv->permission)
-    {
-      g_object_unref (priv->permission);
-      priv->permission = NULL;
-    }
+  g_clear_pointer (&priv->date, g_date_time_unref);
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
