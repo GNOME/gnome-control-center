@@ -791,10 +791,12 @@ get_smart_date (GDateTime *date)
         }
         else {
                 if (g_date_time_get_year (date) == g_date_time_get_year (today)) {
-                        label = g_date_time_format (date, "%b %e");
+                        /* Translators: This is a date format string in the style of "Feb 24". */
+                        label = g_date_time_format (date, _("%b %e"));
                 }
                 else {
-                        label = g_date_time_format (date, "%b %e, %Y");
+                        /* Translators: This is a date format string in the style of "Feb 24, 2013". */
+                        label = g_date_time_format (date, _("%b %e, %Y"));
                 }
         }
 

@@ -92,15 +92,23 @@ show_week_label (UmHistoryDialog *um)
         }
         else {
                 date = g_date_time_add_days (um->week, 6);
-                from = g_date_time_format (um->week, "%b %e");
+                /* Translators: This is a date format string in the style of "Feb 18",
+                   shown as the first day of a week on login history dialog. */
+                from = g_date_time_format (um->week, C_("login history week label","%b %e"));
                 if (g_date_time_get_year (um->week) == g_date_time_get_year (um->current_week)) {
-                        to = g_date_time_format (date, "%b %e");
+                        /* Translators: This is a date format string in the style of "Feb 24",
+                           shown as the last day of a week on login history dialog. */
+                        to = g_date_time_format (date, C_("login history week label","%b %e"));
                 }
                 else {
-                        to = g_date_time_format (date, "%b %e, %Y");
+                        /* Translators: This is a date format string in the style of "Feb 24, 2013",
+                           shown as the last day of a week on login history dialog. */
+                        to = g_date_time_format (date, C_("login history week label","%b %e, %Y"));
                 }
 
-                label = g_strconcat (from, " - ", to, NULL);
+                /* Translators: This indicates a week label on a login history.
+                   The first %s is the first day of a week, and the second %s the last day. */
+                label = g_strdup_printf(C_("login history week label", "%s - %s"), from, to);
 
                 g_date_time_unref (date);
                 g_free (from);
@@ -182,8 +190,12 @@ add_record (GtkWidget *grid, GDateTime *datetime, gchar *record_string, gint lin
         GtkWidget *label;
 
         date = get_smart_date (datetime);
-        time = g_date_time_format (datetime, "%k:%M");
-        str = g_strconcat (date, ", ", time, NULL);
+        /* Translators: This is a time format string in the style of "22:58".
+           It indicates a login time which follows a date. */
+        time = g_date_time_format (datetime, C_("login date-time", "%k:%M"));
+        /* Translators: This indicates a login date-time.
+           The first %s is a date, and the second %s a time. */
+        str = g_strdup_printf(C_("login date-time", "%s, %s"), date, time);
         label = gtk_label_new (str);
         gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_grid_attach (GTK_GRID (grid), label, 1, line, 1, 1);
@@ -245,13 +257,13 @@ show_week (UmHistoryDialog *um)
 
                 if (history.logout_time > 0 && history.logout_time < to) {
                         datetime = g_date_time_new_from_unix_local (history.logout_time);
-                        add_record (grid, datetime, "Session Ended", line);
+                        add_record (grid, datetime, _("Session Ended"), line);
                         line++;
                 }
 
                 if (history.login_time >= from) {
                         datetime = g_date_time_new_from_unix_local (history.login_time);
-                        add_record (grid, datetime, "Session Started", line);
+                        add_record (grid, datetime, _("Session Started"), line);
                         line++;
                 }
         }
