@@ -28,11 +28,15 @@ engine_get_display_name (IBusEngineDesc *engine_desc)
         const gchar *name;
         const gchar *language_code;
         const gchar *language;
+        const gchar *textdomain;
         gchar *display_name;
 
         name = ibus_engine_desc_get_longname (engine_desc);
         language_code = ibus_engine_desc_get_language (engine_desc);
         language = ibus_get_language_name (language_code);
+        textdomain = ibus_engine_desc_get_textdomain (engine_desc);
+        if (*textdomain != '\0' && *name != '\0')
+                name = g_dgettext (textdomain, name);
         display_name = g_strdup_printf ("%s (%s)", language, name);
 
         return display_name;
