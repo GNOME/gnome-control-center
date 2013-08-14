@@ -70,7 +70,6 @@ struct _UmAccountDialog {
         GPermission *permission;
         GtkSpinner *spinner;
         UmAccountMode mode;
-        GtkWidget *mode_areas[NUM_MODES];
 
         /* Local user account widgets */
         GtkWidget *local_username;
@@ -1353,11 +1352,6 @@ mode_init (UmAccountDialog *self,
            GtkBuilder *builder)
 {
         GtkWidget *widget;
-
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-area");
-        self->mode_areas[UM_LOCAL] = widget;
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-area");
-        self->mode_areas[UM_ENTERPRISE] = widget;
 
         widget = self->enterprise_button;
         g_signal_connect (widget, "toggled", G_CALLBACK (on_enterprise_toggle), self);
