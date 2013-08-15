@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-13 12:16+0000\n"
-"PO-Revision-Date: 2013-08-14 13:51+0500\n"
+"POT-Creation-Date: 2013-08-15 01:01+0000\n"
+"PO-Revision-Date: 2013-08-15 11:53+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "Language: tg\n"
@@ -585,7 +585,7 @@ msgstr "Санҷиши дисплей"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1416
+#: ../panels/user-accounts/um-account-dialog.c:1433
 msgid "Cancel"
 msgstr "Бекор кардан"
 
@@ -1590,6 +1590,10 @@ msgstr "Нусха бардоштани сурати равзана ба ҳоф�
 msgid "Copy a screenshot of an area to clipboard"
 msgstr "Нусха бардоштани сурати ноҳия ба ҳофизаи муваққатӣ"
 
+#: ../panels/keyboard/01-screenshot.xml.in.h:11
+msgid "Record a short screencast"
+msgstr "Сабт кардани видеои экрании кӯтоҳ"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "System"
 msgstr "Система"
@@ -2437,7 +2441,7 @@ msgstr "Профили нав"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:509
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1417
+#: ../panels/user-accounts/um-account-dialog.c:1434
 msgid "_Add"
 msgstr "_Илова кардан"
 
@@ -5919,27 +5923,43 @@ msgid "_Confirm Password"
 msgstr "_Тасдиқ кардани парол"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:11
+msgid ""
+"Enterprise login allows an existing centrally managed user account to be "
+"used on this device."
+msgstr ""
+"Вуруди Enterprise иҷозат медиҳад, ки тавонед ҳисоби корбари идорашавандаи "
+"марказии мавҷудбударо дар ин дастгоҳ истифода баред."
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Domain"
 msgstr "_Домен"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
+#: ../panels/user-accounts/data/account-dialog.ui.h:13
 msgid "_Login Name"
 msgstr "_Номи вурудӣ"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:13
+#: ../panels/user-accounts/data/account-dialog.ui.h:14
 msgid "Login _Password"
 msgstr "_Пароли вуруд"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid ""
+"Go online to add\n"
+"enterprise login accounts."
+msgstr ""
+"Барои илова кардани ҳисобҳои\n"
+"Enterprise ба онлайн гузаред."
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
 msgid "_Enroll"
 msgstr "_Илова кардан"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:16
+#: ../panels/user-accounts/data/account-dialog.ui.h:19
 msgid "Domain Administrator Login"
 msgstr "Воридшавии маъмури домен"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:17
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5949,11 +5969,11 @@ msgstr ""
 "ба домен дохил шуда бошад. Лутфан, аз маъмури шабакаи худ пурсед, ки\n"
 "пароли домени худро дар ин ҷо ворид намояд."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:20
+#: ../panels/user-accounts/data/account-dialog.ui.h:23
 msgid "Administrator _Name"
 msgstr "Номи _маъмур"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:21
+#: ../panels/user-accounts/data/account-dialog.ui.h:24
 msgid "Administrator Password"
 msgstr "Пароли маъмур"
 
@@ -6312,7 +6332,7 @@ msgid "Passwords do not match."
 msgstr "Паролҳо мувофиқат намекунанд."
 
 #: ../panels/user-accounts/um-account-dialog.c:421
-#: ../panels/user-accounts/um-password-dialog.c:298
+#: ../panels/user-accounts/um-password-dialog.c:297
 msgid "Passwords do not match"
 msgstr "Паролҳо мувофиқат намекунанд"
 
@@ -6354,12 +6374,12 @@ msgstr "Ворид шудан ба домен қатъ шуд"
 msgid "Domain not found."
 msgstr "Домен ёфт нашуд."
 
-#: ../panels/user-accounts/um-account-dialog.c:1392
+#: ../panels/user-accounts/um-account-dialog.c:1409
 msgid "Add User"
 msgstr "Илова кардани корбар"
 
 #. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1405
+#: ../panels/user-accounts/um-account-dialog.c:1422
 msgid "_Enterprise Login"
 msgstr "_Воридшавии корӣ"
 
@@ -6509,23 +6529,23 @@ msgstr "Ҷаласа хотима ёфт"
 msgid "Session Started"
 msgstr "Ҷаласа оғоз ёфт"
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#: ../panels/user-accounts/um-password-dialog.c:153
 msgid "Please choose another password."
 msgstr "Лутфан, пароли дигареро интихоб кунед."
 
-#: ../panels/user-accounts/um-password-dialog.c:163
+#: ../panels/user-accounts/um-password-dialog.c:162
 msgid "Please type your current password again."
 msgstr "Лутфан, пароли ҷории худро ворид кунед."
 
-#: ../panels/user-accounts/um-password-dialog.c:169
+#: ../panels/user-accounts/um-password-dialog.c:168
 msgid "Password could not be changed"
 msgstr "Парол тағйир дода намешавад"
 
-#: ../panels/user-accounts/um-password-dialog.c:296
+#: ../panels/user-accounts/um-password-dialog.c:295
 msgid "The passwords do not match."
 msgstr "Паролҳо мувофиқат намекунанд."
 
-#: ../panels/user-accounts/um-password-dialog.c:374
+#: ../panels/user-accounts/um-password-dialog.c:357
 msgid "Wrong password"
 msgstr "Пароли нодуруст"
 
