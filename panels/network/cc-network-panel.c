@@ -289,12 +289,8 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
 }
 
 static void
-on_property_change (GDBusProxy *proxy,
-                    GVariant   *changed_properties,
-                    GVariant   *invalidated_properties,
-                    gpointer    user_data)
+sync_airplane_mode_switch (CcNetworkPanel *panel)
 {
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
         GVariant *result;
         gboolean enabled;
 
@@ -310,7 +306,15 @@ on_property_change (GDBusProxy *proxy,
 						 cc_network_panel_notify_enable_active_cb,
 						 panel);
 	}
+}
 
+static void
+on_property_change (GDBusProxy *proxy,
+                    GVariant   *changed_properties,
+                    GVariant   *invalidated_properties,
+                    gpointer    user_data)
+{
+        sync_airplane_mode_switch (CC_NETWORK_PANEL (user_data));
 }
 
 static void
@@ -328,6 +332,7 @@ got_rfkill_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
 
         g_signal_connect (panel->priv->rfkill_proxy, "g-properties-changed",
                           G_CALLBACK (on_property_change), panel);
+        sync_airplane_mode_switch (panel);
 }
 
 static void
