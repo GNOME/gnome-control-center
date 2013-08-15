@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <act/act.h>
-#include <resolv.h>
 
 #include "um-account-dialog.h"
 #include "um-realm-manager.h"
@@ -1306,10 +1305,6 @@ enterprise_init (UmAccountDialog *self,
         widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-password");
         g_signal_connect (widget, "changed", G_CALLBACK (on_entry_changed), self);
         self->enterprise_password = GTK_ENTRY (widget);
-
-        /* Initialize enterprise domain from DHCP. */
-        res_init ();
-        gtk_entry_set_text (self->enterprise_domain_entry, _res.defdname);
 
         /* Initially we hide the 'Enterprise Login' stuff */
         widget = self->enterprise_button;
