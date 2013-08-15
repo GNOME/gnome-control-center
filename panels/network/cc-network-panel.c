@@ -294,8 +294,14 @@ sync_airplane_mode_switch (CcNetworkPanel *panel)
         GVariant *result;
         gboolean enabled;
 
-        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "AirplaneMode");
+        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "HasAirplaneMode");
+        enabled = g_variant_get_boolean (result);
 
+        gtk_widget_set_visible (GTK_WIDGET (panel->priv->rfkill_switch), enabled);
+        if (!enabled)
+                return;
+
+        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "AirplaneMode");
         enabled = g_variant_get_boolean (result);
 	if (enabled != gtk_switch_get_active (panel->priv->rfkill_switch)) {
 		g_signal_handlers_block_by_func (panel->priv->rfkill_switch,
