@@ -179,6 +179,7 @@ add_account_dialog_create_provider_ui (GoaPanelAddAccountDialog *add_account,
                                        GtkListBox *list_box)
 {
   GIcon *icon;
+  GList *children;
   GtkWidget *row;
   GtkWidget *row_grid;
   GtkWidget *image;
@@ -203,6 +204,21 @@ add_account_dialog_create_provider_ui (GoaPanelAddAccountDialog *add_account,
       g_object_set_data_full (G_OBJECT (row), "provider", g_object_ref (provider), g_object_unref);
       icon = goa_provider_get_provider_icon (provider, NULL);
       name = goa_provider_get_provider_name (provider, NULL);
+    }
+
+  children = gtk_container_get_children (GTK_CONTAINER (list_box));
+  if (children != NULL)
+    {
+      /* FIXME: Ideally we want the list boxes to use as much space as
+       * it's available to try to show all the content, but GtkScrolledView
+       * ignores its child's natural size,
+       * see https://bugzilla.gnome.org/show_bug.cgi?id=660654
+       * For now we just make list boxes with multiple children expand as
+       * the result is quite similar. */
+      GtkWidget *sw;
+      sw = gtk_widget_get_parent (GTK_WIDGET (list_box));
+      gtk_widget_set_vexpand (sw, TRUE);
+      g_list_free (children);
     }
 
   gtk_container_add (GTK_CONTAINER (list_box), row);
