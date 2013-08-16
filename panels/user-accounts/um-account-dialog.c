@@ -551,11 +551,13 @@ local_init (UmAccountDialog *self,
         g_signal_connect (widget, "changed",
                           G_CALLBACK (on_username_changed), self);
         g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_username_focus_out), self);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
         self->local_username = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-name");
         g_signal_connect (widget, "changed", G_CALLBACK (on_name_changed), self);
         g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_name_focus_out), self);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
         self->local_name = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-username-hint");
@@ -574,12 +576,14 @@ local_init (UmAccountDialog *self,
         gtk_widget_set_sensitive (widget, FALSE);
         g_signal_connect (widget, "notify::text", G_CALLBACK (on_password_changed), self);
         g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
         self->local_password = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-verify");
         gtk_widget_set_sensitive (widget, FALSE);
         g_signal_connect (widget, "notify::text", G_CALLBACK (on_password_changed), self);
         g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
         self->local_verify = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-strength");

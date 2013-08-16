@@ -472,6 +472,7 @@ um_password_dialog_new (void)
                           G_CALLBACK (password_entry_changed), um);
         g_signal_connect_after (widget, "focus-out-event",
                                 G_CALLBACK (password_entry_focus_out), um);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (password_entry_timeout), um);
         gtk_entry_set_visibility (GTK_ENTRY (widget), FALSE);
         um->password_entry = widget;
 
@@ -480,6 +481,7 @@ um_password_dialog_new (void)
                                 G_CALLBACK (old_password_entry_focus_out), um);
         g_signal_connect (widget, "notify::text",
                           G_CALLBACK (old_password_entry_changed), um);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (password_entry_timeout), um);
         um->old_password_entry = widget;
         um->old_password_label = (GtkWidget *) gtk_builder_get_object (builder, "old-password-label");
 
@@ -488,6 +490,7 @@ um_password_dialog_new (void)
                           G_CALLBACK (password_entry_changed), um);
         g_signal_connect_after (widget, "focus-out-event",
                                 G_CALLBACK (password_entry_focus_out), um);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (password_entry_timeout), um);
         um->verify_entry = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
