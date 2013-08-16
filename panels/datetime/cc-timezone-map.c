@@ -63,6 +63,8 @@ struct _CcTimezoneMapPrivate
 
   TzDB *tzdb;
   TzLocation *location;
+
+  gchar *bubble_text;
 };
 
 enum
@@ -154,6 +156,7 @@ cc_timezone_map_dispose (GObject *object)
   g_clear_object (&priv->orig_color_map);
   g_clear_object (&priv->background);
   g_clear_object (&priv->pin);
+  g_clear_pointer (&priv->bubble_text, g_free);
 
   if (priv->color_map)
     {
@@ -313,6 +316,77 @@ convert_latitude_to_y (gdouble latitude, gdouble map_height)
   return y;
 }
 
+static void
+draw_text_bubble (cairo_t *cr,
+                  GtkWidget *widget,
+                  gdouble pointx,
+                  gdouble pointy)
+{
+  static const double corner_radius = 9.0;
+  static const double margin_top = 12.0;
+  static const double margin_bottom = 12.0;
+  static const double margin_left = 24.0;
+  static const double margin_right = 24.0;
+
+  CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
+  GtkAllocation alloc;
+  PangoLayout *layout;
+  PangoRectangle text_rect;
+  double x;
+  double y;
+  double width;
+  double height;
+
+  if (!priv->bubble_text)
+    return;
+
+  gtk_widget_get_allocation (widget, &alloc);
+  layout = gtk_widget_create_pango_layout (widget, NULL);
+
+  /* Layout the text */
+  pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+  pango_layout_set_spacing (layout, 3);
+  pango_layout_set_markup (layout, priv->bubble_text, -1);
+
+  pango_layout_get_pixel_extents (layout, NULL, &text_rect);
+
+  /* Calculate the bubble size based on the text layout size */
+  width = text_rect.width + margin_left + margin_right;
+  height = text_rect.height + margin_top + margin_bottom;
+
+  if (pointx < alloc.width / 2)
+    x = pointx + 25;
+  else
+    x = pointx - width - 25;
+
+  y = pointy - height / 2;
+
+  /* Make sure it fits in the visible area */
+  x = CLAMP (x, 0, alloc.width - width);
+  y = CLAMP (y, 0, alloc.height - height);
+
+  cairo_save (cr);
+  cairo_translate (cr, x, y);
+
+  /* Draw the bubble */
+  cairo_new_sub_path (cr);
+  cairo_arc (cr, width - corner_radius, corner_radius, corner_radius, radians (-90), radians (0));
+  cairo_arc (cr, width - corner_radius, height - corner_radius, corner_radius, radians (0), radians (90));
+  cairo_arc (cr, corner_radius, height - corner_radius, corner_radius, radians (90), radians (180));
+  cairo_arc (cr, corner_radius, corner_radius, corner_radius, radians (180), radians (270));
+  cairo_close_path (cr);
+
+  cairo_set_source_rgba (cr, 0.2, 0.2, 0.2, 0.7);
+  cairo_fill (cr);
+
+  /* And finally draw the text */
+  cairo_set_source_rgb (cr, 1, 1, 1);
+  cairo_move_to (cr, margin_left, margin_top);
+  pango_cairo_show_layout (cr, layout);
+
+  g_object_unref (layout);
+  cairo_restore (cr);
+}
 
 static gboolean
 cc_timezone_map_draw (GtkWidget *widget,
@@ -372,6 +446,8 @@ cc_timezone_map_draw (GtkWidget *widget,
 
       pointx = CLAMP (floor (pointx), 0, alloc.width);
       pointy = CLAMP (floor (pointy), 0, alloc.height);
+
+      draw_text_bubble (cr, widget, pointx, pointy);
 
       if (priv->pin)
         {
@@ -646,6 +722,18 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
   g_free (real_tz);
 
   return ret;
+}
+
+void
+cc_timezone_map_set_bubble_text (CcTimezoneMap *map,
+                                 const gchar   *text)
+{
+  CcTimezoneMapPrivate *priv = TIMEZONE_MAP_PRIVATE (map);
+
+  g_free (priv->bubble_text);
+  priv->bubble_text = g_strdup (text);
+
+  gtk_widget_queue_draw (GTK_WIDGET (map));
 }
 
 TzLocation *

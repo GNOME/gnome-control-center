@@ -72,6 +72,8 @@ CcTimezoneMap *cc_timezone_map_new (void);
 
 gboolean cc_timezone_map_set_timezone (CcTimezoneMap *map,
                                        const gchar   *timezone);
+void cc_timezone_map_set_bubble_text (CcTimezoneMap *map,
+                                      const gchar   *text);
 TzLocation * cc_timezone_map_get_location (CcTimezoneMap *map);
 
 G_END_DECLS
