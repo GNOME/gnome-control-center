@@ -542,6 +542,28 @@ device_off_toggled (GtkSwitch         *sw,
 }
 
 static void
+connection_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceEthernet *device)
+{
+        NMClient *client;
+        NMDevice *nm_device;
+        NMConnection *connection;
+
+        client = net_object_get_client (NET_OBJECT (device));
+        nm_device = net_device_get_nm_device (NET_DEVICE (device));
+
+        if (!NM_IS_DEVICE_ETHERNET (nm_device) ||
+            !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (nm_device)))
+                return;
+
+        connection = NM_CONNECTION (g_object_get_data (G_OBJECT (gtk_bin_get_child (GTK_BIN (row))), "connection"));
+
+        nm_client_activate_connection (client,
+                                       connection,
+                                       nm_device,
+                                       NULL, NULL, NULL);
+}
+
+static void
 device_ethernet_constructed (GObject *object)
 {
         NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
@@ -560,6 +582,8 @@ device_ethernet_constructed (GObject *object)
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (swin), list);
+        g_signal_connect (list, "row-activated",
+                          G_CALLBACK (connection_activated), device);
         gtk_widget_show (list);
 
         device->details = GTK_WIDGET (gtk_builder_get_object (NET_DEVICE_ETHERNET (object)->builder, "details"));
