@@ -71,7 +71,6 @@ update_password_strength (UmPasswordDialog *um)
         gint strength_level;
         const gchar *hint;
         const gchar *long_hint;
-        const gchar *verify;
         const gchar *strength_hint;
 
         if (um->user == NULL) {
@@ -94,11 +93,6 @@ update_password_strength (UmPasswordDialog *um)
         gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
         gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), strength_hint);
         gtk_label_set_label (GTK_LABEL (um->password_hint), long_hint);
-
-        verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
-        if (strlen (verify) == 0) {
-                gtk_widget_set_sensitive (um->verify_entry, strength_level > 0);
-        }
 
         if (strength_level > 0) {
                 set_entry_validation_checkmark (GTK_ENTRY (um->password_entry));

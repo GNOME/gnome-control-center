@@ -276,7 +276,6 @@ update_password_strength (UmAccountDialog *self)
         const gchar *username;
         const gchar *hint;
         const gchar *long_hint;
-        const gchar *verify;
         const gchar *strength_hint;
         gint strength_level;
 
@@ -294,11 +293,6 @@ update_password_strength (UmAccountDialog *self)
         gtk_label_set_label (GTK_LABEL (self->local_strength), strength_hint);
         gtk_label_set_label (GTK_LABEL (self->local_hint), long_hint);
         gtk_level_bar_set_value (GTK_LEVEL_BAR (self->local_strength_indicator), strength_level);
-
-        verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
-        if (strlen (verify) == 0) {
-                gtk_widget_set_sensitive (self->local_verify, strength_level > 0);
-        }
 
         if (strength_level > 0) {
                 set_entry_validation_checkmark (GTK_ENTRY (self->local_password));
