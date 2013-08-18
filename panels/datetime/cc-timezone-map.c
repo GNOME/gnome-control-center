@@ -388,8 +388,8 @@ cc_timezone_map_draw (GtkWidget *widget,
       pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
       pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
 
-      if (pointy > alloc.height)
-        pointy = alloc.height;
+      pointx = CLAMP (floor (pointx), 0, alloc.width);
+      pointy = CLAMP (floor (pointy), 0, alloc.height);
 
       if (pin)
         {
