@@ -33,7 +33,7 @@ G_DEFINE_TYPE (CcTimezoneMap, cc_timezone_map, GTK_TYPE_WIDGET)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_TIMEZONE_MAP, CcTimezoneMapPrivate))
 
 #define PIN_HOT_POINT_X 8
-#define PIN_HOT_POINT_Y 14
+#define PIN_HOT_POINT_Y 15
 
 #define DATETIME_RESOURCE_PATH "/org/gnome/control-center/datetime"
 
