@@ -58,7 +58,7 @@ G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
 
 #define MOUSE_BACK_BUTTON 8
 
-#define DEFAULT_WINDOW_TITLE N_("Settings")
+#define DEFAULT_WINDOW_TITLE N_("All Settings")
 #define DEFAULT_WINDOW_ICON_NAME "preferences-desktop"
 
 #define SEARCH_PAGE "_search"
@@ -239,7 +239,7 @@ shell_show_overview_page (CcWindow *self)
 
   /* reset window title and icon */
   gtk_window_set_role (GTK_WINDOW (self), NULL);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), NULL);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), _(DEFAULT_WINDOW_TITLE));
   gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
   gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
 
@@ -1430,27 +1430,23 @@ static void
 create_header (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
-  GtkWidget *button;
-  GtkWidget *button_image;
   AtkObject *accessible;
   gboolean rtl;
 
   rtl = (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL);
 
   priv->header = gtk_header_bar_new ();
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->header), TRUE);
 
-  priv->previous_button = button = gtk_button_new ();
-  button_image = gtk_image_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" : "go-previous-symbolic",
-                                               GTK_ICON_SIZE_MENU);
-  gtk_button_set_image (GTK_BUTTON (button), button_image);
-  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-  gtk_style_context_add_class (gtk_widget_get_style_context (button),
-                               "image-button");
-  gtk_widget_set_no_show_all (button, TRUE);
-  accessible = gtk_widget_get_accessible (button);
+  priv->previous_button = gtk_button_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" :
+                                                               "go-previous-symbolic",
+                                                         GTK_ICON_SIZE_MENU);
+  gtk_widget_set_valign (priv->previous_button, GTK_ALIGN_CENTER);
+  gtk_widget_set_no_show_all (priv->previous_button, TRUE);
+  accessible = gtk_widget_get_accessible (priv->previous_button);
   atk_object_set_name (accessible, _("All Settings"));
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (priv->header), button);
-  g_signal_connect (button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
+  gtk_header_bar_pack_start (GTK_HEADER_BAR (priv->header), priv->previous_button);
+  g_signal_connect (priv->previous_button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
@@ -1465,7 +1461,7 @@ create_header (CcWindow *self)
   priv->lock_button = gtk_lock_button_new (NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (priv->lock_button),
                                "text-button");
-  gtk_widget_set_no_show_all (button, TRUE);
+  gtk_widget_set_no_show_all (priv->lock_button, TRUE);
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
 }
 
@@ -1480,7 +1476,9 @@ create_window (CcWindow *self)
   gtk_container_add (GTK_CONTAINER (self), box);
 
   create_header (self);
-  gtk_box_pack_start (GTK_BOX (box), priv->header, FALSE, FALSE, 0);
+  gtk_window_set_titlebar (GTK_WINDOW (self), priv->header);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), _(DEFAULT_WINDOW_TITLE));
+  gtk_widget_show_all (priv->header);
 
   priv->stack = gtk_stack_new ();
   gtk_stack_set_homogeneous (GTK_STACK (priv->stack), TRUE);
@@ -1537,9 +1535,8 @@ cc_window_new (GtkApplication *application)
 
   return g_object_new (CC_TYPE_WINDOW,
                        "application", application,
-                       "hide-titlebar-when-maximized", TRUE,
                        "resizable", TRUE,
-                       "title", _(DEFAULT_WINDOW_TITLE),
+                       "title", _("Settings"),
                        "icon-name", DEFAULT_WINDOW_ICON_NAME,
                        "window-position", GTK_WIN_POS_CENTER,
                        NULL);
