@@ -79,6 +79,8 @@ struct _CcWindowPrivate
   GtkWidget  *search_scrolled;
   GtkWidget  *previous_button;
   GtkWidget  *top_right_box;
+  GtkWidget  *search_button;
+  GtkWidget  *search_bar;
   GtkWidget  *search_entry;
   GtkWidget  *lock_button;
   GtkWidget  *current_panel_box;
@@ -233,7 +235,8 @@ shell_show_overview_page (CcWindow *self)
   g_free (priv->filter_string);
   priv->filter_string = g_strdup ("");
   gtk_entry_set_text (GTK_ENTRY (priv->search_entry), "");
-  gtk_widget_grab_focus (priv->search_entry);
+  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->priv->search_bar)))
+    gtk_widget_grab_focus (priv->search_entry);
 
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button), NULL);
 
@@ -260,6 +263,7 @@ cc_window_set_search_item (CcWindow   *center,
                            const char *search)
 {
   shell_show_overview_page (center);
+  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (center->priv->search_bar), TRUE);
   gtk_entry_set_text (GTK_ENTRY (center->priv->search_entry), search);
   gtk_editable_set_position (GTK_EDITABLE (center->priv->search_entry), -1);
 }
@@ -656,6 +660,7 @@ search_entry_key_press_event_cb (GtkEntry        *entry,
 
   if (event->keyval == GDK_KEY_Escape)
     {
+      gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (priv->search_bar), FALSE);
       gtk_entry_set_text (entry, "");
       return TRUE;
     }
@@ -899,7 +904,8 @@ stack_page_notify_cb (GtkStack     *stack,
       gint header_height, maximum_height;
 
       gtk_widget_hide (priv->previous_button);
-      gtk_widget_show (priv->search_entry);
+      gtk_widget_show (priv->search_button);
+      gtk_widget_show (priv->search_bar);
       gtk_widget_hide (priv->lock_button);
 
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
@@ -920,7 +926,8 @@ stack_page_notify_cb (GtkStack     *stack,
   else
     {
       gtk_widget_show (priv->previous_button);
-      gtk_widget_hide (priv->search_entry);
+      gtk_widget_hide (priv->search_button);
+      gtk_widget_hide (priv->search_bar);
       /* set the scrolled window small so that it doesn't force
          the window to be larger than this panel */
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self),
@@ -1217,11 +1224,10 @@ window_key_press_event (GtkWidget   *win,
           case GDK_KEY_S:
           case GDK_KEY_f:
           case GDK_KEY_F:
-            if (gtk_widget_get_visible (self->priv->search_entry))
-              {
-                gtk_widget_grab_focus (self->priv->search_entry);
-                retval = TRUE;
-              }
+            retval = !gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->priv->search_bar));
+            gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->priv->search_bar), retval);
+            if (retval)
+              gtk_widget_grab_focus (self->priv->search_entry);
             break;
           case GDK_KEY_Q:
           case GDK_KEY_q:
@@ -1430,6 +1436,7 @@ static void
 create_header (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
+  GtkWidget *image;
   AtkObject *accessible;
   gboolean rtl;
 
@@ -1438,6 +1445,7 @@ create_header (CcWindow *self)
   priv->header = gtk_header_bar_new ();
   gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->header), TRUE);
 
+  /* previous button */
   priv->previous_button = gtk_button_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" :
                                                                "go-previous-symbolic",
                                                          GTK_ICON_SIZE_MENU);
@@ -1451,12 +1459,14 @@ create_header (CcWindow *self)
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
 
-  priv->search_entry = gtk_search_entry_new ();
-  gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->search_entry);
-  gtk_entry_set_width_chars (GTK_ENTRY (priv->search_entry), 30);
-  gtk_entry_set_invisible_char (GTK_ENTRY (priv->search_entry), 9679);
-  g_signal_connect (priv->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
-  g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
+  /* toggle search button */
+  priv->search_button = gtk_toggle_button_new ();
+  image = gtk_image_new_from_icon_name ("edit-find-symbolic", GTK_ICON_SIZE_MENU);
+  gtk_button_set_image (GTK_BUTTON (priv->search_button), image);
+  gtk_widget_set_valign (priv->search_button, GTK_ALIGN_CENTER);
+  gtk_style_context_add_class (gtk_widget_get_style_context (priv->search_button),
+                               "image-button");  
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->search_button);
 
   priv->lock_button = gtk_lock_button_new (NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (priv->lock_button),
@@ -1479,6 +1489,20 @@ create_window (CcWindow *self)
   gtk_window_set_titlebar (GTK_WINDOW (self), priv->header);
   gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), _(DEFAULT_WINDOW_TITLE));
   gtk_widget_show_all (priv->header);
+
+  /* search bar */
+  priv->search_bar = gtk_search_bar_new ();
+  priv->search_entry = gtk_search_entry_new ();
+  gtk_entry_set_width_chars (GTK_ENTRY (priv->search_entry), 30);
+  gtk_entry_set_invisible_char (GTK_ENTRY (priv->search_entry), 9679);
+  g_signal_connect (priv->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
+  g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
+  gtk_container_add (GTK_CONTAINER (priv->search_bar), priv->search_entry);
+  gtk_container_add (GTK_CONTAINER (box), priv->search_bar);
+
+  g_object_bind_property (priv->search_button, "active",
+                          priv->search_bar, "search-mode-enabled",
+                          G_BINDING_BIDIRECTIONAL);
 
   priv->stack = gtk_stack_new ();
   gtk_stack_set_homogeneous (GTK_STACK (priv->stack), TRUE);
