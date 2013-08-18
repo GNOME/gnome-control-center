@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <libintl.h>
 
+#include <glib/gi18n.h>
 #include <libgnome-desktop/gnome-languages.h>
 #include <libgnome-desktop/gnome-wall-clock.h>
 #include <polkit/polkit.h>
@@ -316,9 +317,15 @@ update_time (CcDateTimePanel *self)
 
   /* Update the time on the listbow row */
   if (use_ampm)
-    label = g_date_time_format (priv->date, "%e %B %Y, %l:%M %p");
+    {
+      /* Translators: This is the full date and time format used in 12-hour mode. */
+      label = g_date_time_format (priv->date, _("%e %B %Y, %l:%M %p"));
+    }
   else
-    label = g_date_time_format (priv->date, "%e %B %Y, %R");
+    {
+      /* Translators: This is the full date and time format used in 24-hour mode. */
+      label = g_date_time_format (priv->date, _("%e %B %Y, %R"));
+    }
 
   gtk_label_set_text (GTK_LABEL (W ("datetime_label")), label);
   g_free (label);
@@ -531,12 +538,20 @@ update_timezone (CcDateTimePanel *self)
   gtk_label_set_text (GTK_LABEL (W ("timezone_label")), label);
   g_free (label);
 
-  utc_label = g_date_time_format (priv->date, "UTC%z");
+  /* Translators: UTC here means the Coordinated Universal Time.
+   * %z will be replaced by the offset from UTC e.g. UTC+0200 */
+  utc_label = g_date_time_format (priv->date, _("UTC%z"));
 
   if (use_ampm)
-    time_label = g_date_time_format (priv->date, "%l:%M %p");
+    {
+      /* Translators: This is the time format used in 12-hour mode. */
+      time_label = g_date_time_format (priv->date, _("%l:%M %p"));
+    }
   else
-    time_label = g_date_time_format (priv->date, "%R");
+    {
+      /* Translators: This is the time format used in 24-hour mode. */
+      time_label = g_date_time_format (priv->date, _("%R"));
+    }
 
   /* Update the text bubble in the timezone map */
   bubble_text = g_strdup_printf ("<b>%s (%s)</b>\n"
