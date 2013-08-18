@@ -3,23 +3,14 @@
   <!-- interface-requires gtk+ 3.10 -->
   <object class="GtkListStore" id="city-liststore">
     <columns>
-      <!-- column-name city -->
-      <column type="gchararray"/>
-      <!-- column-name region -->
-      <column type="gchararray"/>
-      <!-- column-name city-translated -->
-      <column type="gchararray"/>
-      <!-- column-name region-translated -->
+      <!-- column-name city-human-readable -->
       <column type="gchararray"/>
       <!-- column-name zone -->
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkTreeModelFilter" id="city-modelfilter">
-    <property name="child_model">city-liststore</property>
-  </object>
   <object class="GtkTreeModelSort" id="city-modelsort">
-    <property name="model">city-modelfilter</property>
+    <property name="model">city-liststore</property>
   </object>
   <object class="GtkListStore" id="month-liststore">
     <columns>
@@ -379,14 +370,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkListStore" id="region-liststore">
-    <columns>
-      <!-- column-name region -->
-      <column type="gchararray"/>
-      <!-- column-name region-translated -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkDialog" id="timezone-dialog">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Time Zone</property>
@@ -398,108 +381,34 @@
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
-          <object class="GtkVBox" id="map-vbox">
+          <object class="GtkBox" id="map-box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">6</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">5</property>
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">5</property>
+            <property name="homogeneous">True</property>
             <child>
-              <object class="GtkAspectFrame" id="aspectmap">
+              <object class="GtkSearchEntry" id="timezone-searchentry">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">none</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkHBox" id="hbox1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">12</property>
-                <child>
-                  <object class="GtkLabel" id="label1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_Region:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">region_combobox</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBox" id="region_combobox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">region-liststore</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
-                      <attributes>
-                        <attribute name="text">1</attribute>
-                      </attributes>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label4">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_City:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">city_combobox</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBox" id="city_combobox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">city-modelsort</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext2"/>
-                      <attributes>
-                        <attribute name="text">2</attribute>
-                      </attributes>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="width_chars">40</property>
+                <property name="primary_icon_name">edit-find-symbolic</property>
+                <property name="primary_icon_activatable">False</property>
+                <property name="primary_icon_sensitive">False</property>
+                <property name="placeholder_text" translatable="yes">Search for a city</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="pack_type">end</property>
                 <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -532,6 +441,25 @@
             <property name="fill">True</property>
             <property name="pack_type">end</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFrame" id="aspectmap">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">5</property>
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">5</property>
+            <property name="label_xalign">0</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>

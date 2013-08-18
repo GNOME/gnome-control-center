@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <libintl.h>
 
+#include <libgnome-desktop/gnome-languages.h>
 #include <libgnome-desktop/gnome-wall-clock.h>
 #include <polkit/polkit.h>
 
@@ -49,18 +50,9 @@ CC_PANEL_REGISTER (CcDateTimePanel, cc_date_time_panel)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DATE_TIME_PANEL, CcDateTimePanelPrivate))
 
 enum {
-  CITY_COL_CITY,
-  CITY_COL_REGION,
-  CITY_COL_CITY_TRANSLATED,
-  CITY_COL_REGION_TRANSLATED,
+  CITY_COL_CITY_HUMAN_READABLE,
   CITY_COL_ZONE,
   CITY_NUM_COLS
-};
-
-enum {
-  REGION_COL_REGION,
-  REGION_COL_REGION_TRANSLATED,
-  REGION_NUM_COLS
 };
 
 #define W(x) (GtkWidget*) gtk_builder_get_object (priv->builder, x)
@@ -75,7 +67,6 @@ struct _CcDateTimePanelPrivate
 
   TzLocation *current_location;
 
-  GtkTreeModel *locations;
   GtkTreeModelFilter *city_filter;
 
   GDateTime *date;
@@ -463,120 +454,75 @@ change_date (CcDateTimePanel *self)
   queue_set_datetime (self);
 }
 
-static void
-region_changed_cb (GtkComboBox     *box,
-                   CcDateTimePanel *self)
-{
-  GtkTreeModelFilter *modelfilter;
-
-  modelfilter = GTK_TREE_MODEL_FILTER (gtk_builder_get_object (self->priv->builder, "city-modelfilter"));
-
-  gtk_tree_model_filter_refilter (modelfilter);
-}
-
-static void
-city_changed_cb (GtkComboBox     *box,
+static gboolean
+city_changed_cb (GtkEntryCompletion *entry_completion,
+                 GtkTreeModel       *model,
+                 GtkTreeIter        *iter,
                  CcDateTimePanel *self)
 {
-  static gboolean inside = FALSE;
-  GtkTreeIter iter;
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *entry;
   gchar *zone;
 
-  /* prevent re-entry from location changed callback */
-  if (inside)
-    return;
+  gtk_tree_model_get (model, iter,
+                      CITY_COL_ZONE, &zone, -1);
+  cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), zone);
+  g_free (zone);
 
-  inside = TRUE;
+  entry = gtk_entry_completion_get_entry (GTK_ENTRY_COMPLETION (entry_completion));
+  gtk_entry_set_text (GTK_ENTRY (entry), "");
 
-  if (gtk_combo_box_get_active_iter (box, &iter))
-    {
-      gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
-                          CITY_COL_ZONE, &zone, -1);
+  gtk_widget_grab_focus (W ("timezone-close-button"));
 
-      cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), zone);
+  return TRUE;
+}
 
-      g_free (zone);
-    }
+static char *
+translated_city_name (TzLocation *loc)
+{
+  char *country;
+  char *name;
+  char *zone_translated;
+  char **split_translated;
+  gint length;
 
-  inside = FALSE;
+  /* Load the translation for it */
+  zone_translated = g_strdup (dgettext (GETTEXT_PACKAGE_TIMEZONES, loc->zone));
+  g_strdelimit (zone_translated, "_", ' ');
+  split_translated = g_regex_split_simple ("[\\x{2044}\\x{2215}\\x{29f8}\\x{ff0f}/]",
+                                           zone_translated,
+                                           0, 0);
+  g_free (zone_translated);
+
+  length = g_strv_length (split_translated);
+
+  country = gnome_get_country_from_code (loc->country, NULL);
+  name = g_strdup_printf ("%s, %s",
+                          split_translated[length-1],
+                          country);
+  g_free (country);
+  g_strfreev (split_translated);
+
+  return name;
 }
 
 static void
 update_timezone (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  GtkWidget *widget;
-  gchar **split;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  TzInfo *tz_info;
+  char *city_country;
   char *label;
 
-  /* tz.c updates the local timezone, which means the spin buttons can be
-   * updated with the current time of the new location */
-
-  split = g_strsplit (priv->current_location->zone, "/", 2);
-
-  /* remove underscores */
-  g_strdelimit (split[1], "_", ' ');
-
-  /* update region combo */
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-                                                 "region_combobox");
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-  gtk_tree_model_get_iter_first (model, &iter);
-
-  do
-    {
-      gchar *string;
-
-      gtk_tree_model_get (model, &iter, CITY_COL_CITY, &string, -1);
-
-      if (!g_strcmp0 (string, split[0]))
-        {
-          g_free (string);
-          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &iter);
-          break;
-        }
-      g_free (string);
-    }
-  while (gtk_tree_model_iter_next (model, &iter));
-
-
-  /* update city combo */
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-                                                 "city_combobox");
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-  gtk_tree_model_filter_refilter ((GtkTreeModelFilter *) gtk_builder_get_object (priv->builder, "city-modelfilter"));
-  gtk_tree_model_get_iter_first (model, &iter);
-
-  do
-    {
-      gchar *string;
-
-      gtk_tree_model_get (model, &iter, CITY_COL_CITY, &string, -1);
-
-      if (!g_strcmp0 (string, split[1]))
-        {
-          g_free (string);
-          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &iter);
-          break;
-        }
-      g_free (string);
-    }
-  while (gtk_tree_model_iter_next (model, &iter));
-
-  g_strfreev (split);
+  city_country = translated_city_name (priv->current_location);
 
   /* Update the timezone on the listbow row */
-  tz_info = tz_info_from_location (self->priv->current_location);
   label = g_strdup_printf ("%s (%s)",
-                           tz_info->tzname_normal,
-                           self->priv->current_location->zone);
-  tz_info_free (tz_info);
-
+                           g_date_time_get_timezone_abbreviation (self->priv->date),
+                           city_country);
   gtk_label_set_text (GTK_LABEL (W ("timezone_label")), label);
   g_free (label);
+
+  g_free (city_country);
 }
 
 static void
@@ -585,24 +531,12 @@ location_changed_cb (CcTimezoneMap   *map,
                      CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  GtkWidget *region_combo, *city_combo;
 
   g_debug ("location changed to %s/%s", location->country, location->zone);
 
-  self->priv->current_location = location;
-
-  /* Update the combo boxes */
-  region_combo = W("region_combobox");
-  city_combo = W("city_combobox");
-
-  g_signal_handlers_block_by_func (region_combo, region_changed_cb, self);
-  g_signal_handlers_block_by_func (city_combo, city_changed_cb, self);
+  priv->current_location = location;
 
   update_timezone (self);
-
-  g_signal_handlers_unblock_by_func (region_combo, region_changed_cb, self);
-  g_signal_handlers_unblock_by_func (city_combo, city_changed_cb, self);
-
   queue_set_timezone (self);
 }
 
@@ -626,127 +560,28 @@ get_initial_timezone (CcDateTimePanel *self)
   update_timezone (self);
 }
 
-/* load region and city tree models */
-struct get_region_data
-{
-  GtkListStore *region_store;
-  GtkListStore *city_store;
-  GHashTable *table;
-};
-
-/* Slash look-alikes that might be used in translations */
-#define TRANSLATION_SPLIT                                                        \
-        "\342\201\204"        /* FRACTION SLASH */                               \
-        "\342\210\225"        /* DIVISION SLASH */                               \
-        "\342\247\270"        /* BIG SOLIDUS */                                  \
-        "\357\274\217"        /* FULLWIDTH SOLIDUS */                            \
-        "/"
-
 static void
-get_regions (TzLocation             *loc,
-             struct get_region_data *data)
+load_cities (TzLocation   *loc,
+             GtkListStore *city_store)
 {
-  gchar *zone;
-  gchar **split;
-  gchar **split_translated;
-  gchar *translated_city;
+  char *human_readable;
 
-  zone = g_strdup (loc->zone);
-  g_strdelimit (zone, "_", ' ');
-  split = g_strsplit (zone, "/", 2);
-  g_free (zone);
-
-  /* Load the translation for it */
-  zone = g_strdup (dgettext (GETTEXT_PACKAGE_TIMEZONES, loc->zone));
-  g_strdelimit (zone, "_", ' ');
-  split_translated = g_regex_split_simple ("[\\x{2044}\\x{2215}\\x{29f8}\\x{ff0f}/]", zone, 0, 0);
-  g_free (zone);
-
-  if (!g_hash_table_lookup_extended (data->table, split[0], NULL, NULL))
-    {
-      g_hash_table_insert (data->table, g_strdup (split[0]),
-                           GINT_TO_POINTER (1));
-      gtk_list_store_insert_with_values (data->region_store, NULL, 0,
-                                         REGION_COL_REGION, split[0],
-                                         REGION_COL_REGION_TRANSLATED, split_translated[0], -1);
-    }
-
-  /* g_regex_split_simple() splits too much for us, and would break
-   * America/Argentina/Buenos_Aires into 3 strings, so rejoin the city part */
-  translated_city = g_strjoinv ("/", split_translated + 1);
-
-  gtk_list_store_insert_with_values (data->city_store, NULL, 0,
-                                     CITY_COL_CITY, split[1],
-                                     CITY_COL_CITY_TRANSLATED, translated_city,
-                                     CITY_COL_REGION, split[0],
-                                     CITY_COL_REGION_TRANSLATED, split_translated[0],
+  human_readable = translated_city_name (loc);
+  gtk_list_store_insert_with_values (city_store, NULL, 0,
+                                     CITY_COL_CITY_HUMAN_READABLE, human_readable,
                                      CITY_COL_ZONE, loc->zone,
                                      -1);
-
-  g_free (translated_city);
-  g_strfreev (split);
-  g_strfreev (split_translated);
+  g_free (human_readable);
 }
-
-static gboolean
-city_model_filter_func (GtkTreeModel *model,
-                        GtkTreeIter  *iter,
-                        GtkComboBox  *combo)
-{
-  GtkTreeModel *combo_model;
-  GtkTreeIter combo_iter;
-  gchar *active_region = NULL;
-  gchar *city_region = NULL;
-  gboolean result;
-
-  if (gtk_combo_box_get_active_iter (combo, &combo_iter) == FALSE)
-    return FALSE;
-
-  combo_model = gtk_combo_box_get_model (combo);
-  gtk_tree_model_get (combo_model, &combo_iter,
-                      CITY_COL_CITY, &active_region, -1);
-
-  gtk_tree_model_get (model, iter,
-                      CITY_COL_REGION, &city_region, -1);
-
-  if (g_strcmp0 (active_region, city_region) == 0)
-    result = TRUE;
-  else
-    result = FALSE;
-
-  g_free (city_region);
-
-  g_free (active_region);
-
-  return result;
-}
-
 
 static void
-load_regions_model (GtkListStore *regions, GtkListStore *cities)
+load_regions_model (GtkListStore *cities)
 {
-  struct get_region_data data;
   TzDB *db;
-  GHashTable *table;
-
 
   db = tz_load_db ();
-  table = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-
-  data.table = table;
-  data.region_store = regions;
-  data.city_store = cities;
-
-  g_ptr_array_foreach (db->locations, (GFunc) get_regions, &data);
-
-  g_hash_table_destroy (table);
-
+  g_ptr_array_foreach (db->locations, (GFunc) load_cities, cities);
   tz_db_free (db);
-
-  /* sort the models */
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (regions),
-                                        REGION_COL_REGION_TRANSLATED,
-                                        GTK_SORT_ASCENDING);
 }
 
 static void
@@ -931,20 +766,8 @@ on_ntp_changed (CcDateTimePanel *self)
 static void
 on_timezone_changed (CcDateTimePanel *self)
 {
-  CcDateTimePanelPrivate *priv = self->priv;
-  GtkWidget *region_combo, *city_combo;
-
-  region_combo = W("region_combobox");
-  city_combo = W("city_combobox");
-
-  g_signal_handlers_block_by_func (region_combo, region_changed_cb, self);
-  g_signal_handlers_block_by_func (city_combo, city_changed_cb, self);
   g_signal_handlers_block_by_func (self->priv->map, location_changed_cb, self);
-
   get_initial_timezone (self);
-
-  g_signal_handlers_unblock_by_func (region_combo, region_changed_cb, self);
-  g_signal_handlers_unblock_by_func (city_combo, city_changed_cb, self);
   g_signal_handlers_unblock_by_func (self->priv->map, location_changed_cb, self);
 }
 
@@ -1115,8 +938,11 @@ static void
 setup_timezone_dialog (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
+  GtkEntryCompletion *completion;
+  GtkTreeModel *completion_model;
   GtkWidget *button;
   GtkWidget *dialog;
+  GtkWidget *entry;
 
   /* set up timezone map */
   priv->map = (GtkWidget *) cc_timezone_map_new ();
@@ -1126,10 +952,23 @@ setup_timezone_dialog (CcDateTimePanel *self)
 
   button = W ("timezone-close-button");
   dialog = W ("timezone-dialog");
+  entry = W ("timezone-searchentry");
+
   g_signal_connect_swapped (button, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  /* Create the completion object */
+  completion = gtk_entry_completion_new ();
+  gtk_entry_set_completion (GTK_ENTRY (entry), completion);
+  g_object_unref (completion);
+
+  completion_model = GTK_TREE_MODEL (gtk_builder_get_object (priv->builder,
+                                                             "city-modelsort"));
+  gtk_entry_completion_set_model (completion, completion_model);
+
+  gtk_entry_completion_set_text_column (completion, CITY_COL_CITY_HUMAN_READABLE);
 }
 
 static char *
@@ -1284,7 +1123,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   CcDateTimePanelPrivate *priv;
   GtkWidget *widget;
   GError *error;
-  GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
   const char *ampm;
   int ret;
@@ -1365,37 +1203,21 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   update_time (self);
 
-  priv->locations = (GtkTreeModel*) gtk_builder_get_object (priv->builder,
-                                                            "region-liststore");
-
-  load_regions_model (GTK_LIST_STORE (priv->locations),
-                      GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+  load_regions_model (GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                               "city-liststore")));
 
-  city_modelfilter = GTK_TREE_MODEL_FILTER (gtk_builder_get_object (priv->builder, "city-modelfilter"));
-
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
-                                                "region_combobox");
   city_modelsort = GTK_TREE_MODEL_SORT (gtk_builder_get_object (priv->builder, "city-modelsort"));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (city_modelsort), CITY_COL_CITY_TRANSLATED,
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (city_modelsort), CITY_COL_CITY_HUMAN_READABLE,
                                         GTK_SORT_ASCENDING);
-
-  gtk_tree_model_filter_set_visible_func (city_modelfilter,
-                                          (GtkTreeModelFilterVisibleFunc) city_model_filter_func,
-                                          widget,
-                                          NULL);
 
   /* After the initial setup, so we can be sure that
    * the model is filled up */
   get_initial_timezone (self);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->priv->builder,
-                                                "region_combobox");
-  g_signal_connect (widget, "changed", G_CALLBACK (region_changed_cb), self);
-
-  widget = (GtkWidget*) gtk_builder_get_object (self->priv->builder,
-                                                "city_combobox");
-  g_signal_connect (widget, "changed", G_CALLBACK (city_changed_cb), self);
+                                                "timezone-searchentry");
+  g_signal_connect (gtk_entry_get_completion (GTK_ENTRY (widget)),
+                    "match-selected", G_CALLBACK (city_changed_cb), self);
 
   g_signal_connect (self->priv->map, "location-changed",
                     G_CALLBACK (location_changed_cb), self);
