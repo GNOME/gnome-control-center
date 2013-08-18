@@ -150,23 +150,12 @@ cc_timezone_map_dispose (GObject *object)
 
   g_clear_object (&priv->orig_background);
   g_clear_object (&priv->orig_background_dim);
-
-  if (priv->orig_color_map)
-    {
-      g_object_unref (priv->orig_color_map);
-      priv->orig_color_map = NULL;
-    }
-
-  if (priv->background)
-    {
-      g_object_unref (priv->background);
-      priv->background = NULL;
-    }
+  g_clear_object (&priv->orig_color_map);
+  g_clear_object (&priv->background);
 
   if (priv->color_map)
     {
-      g_object_unref (priv->color_map);
-      priv->color_map = NULL;
+      g_clear_object (&priv->color_map);
 
       priv->visible_map_pixels = NULL;
       priv->visible_map_rowstride = 0;
