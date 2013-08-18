@@ -54,6 +54,7 @@ struct _CcTimezoneMapPrivate
 
   GdkPixbuf *background;
   GdkPixbuf *color_map;
+  GdkPixbuf *pin;
 
   guchar *visible_map_pixels;
   gint visible_map_rowstride;
@@ -152,6 +153,7 @@ cc_timezone_map_dispose (GObject *object)
   g_clear_object (&priv->orig_background_dim);
   g_clear_object (&priv->orig_color_map);
   g_clear_object (&priv->background);
+  g_clear_object (&priv->pin);
 
   if (priv->color_map)
     {
@@ -317,7 +319,7 @@ cc_timezone_map_draw (GtkWidget *widget,
                       cairo_t   *cr)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
-  GdkPixbuf *hilight, *orig_hilight, *pin;
+  GdkPixbuf *hilight, *orig_hilight;
   GtkAllocation alloc;
   gchar *file;
   GError *err = NULL;
@@ -363,15 +365,6 @@ cc_timezone_map_draw (GtkWidget *widget,
       g_object_unref (orig_hilight);
     }
 
-  /* load pin icon */
-  pin = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/pin.png", &err);
-
-  if (err)
-    {
-      g_warning ("Could not load pin icon: %s", err->message);
-      g_clear_error (&err);
-    }
-
   if (priv->location)
     {
       pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
@@ -380,16 +373,13 @@ cc_timezone_map_draw (GtkWidget *widget,
       pointx = CLAMP (floor (pointx), 0, alloc.width);
       pointy = CLAMP (floor (pointy), 0, alloc.height);
 
-      if (pin)
+      if (priv->pin)
         {
-          gdk_cairo_set_source_pixbuf (cr, pin, pointx - PIN_HOT_POINT_X, pointy - PIN_HOT_POINT_Y);
+          gdk_cairo_set_source_pixbuf (cr, priv->pin,
+                                       pointx - PIN_HOT_POINT_X,
+                                       pointy - PIN_HOT_POINT_Y);
           cairo_paint (cr);
         }
-    }
-
-  if (pin)
-    {
-      g_object_unref (pin);
     }
 
   return TRUE;
@@ -599,6 +589,15 @@ cc_timezone_map_init (CcTimezoneMap *self)
   if (!priv->orig_color_map)
     {
       g_warning ("Could not load background image: %s",
+                 (err) ? err->message : "Unknown error");
+      g_clear_error (&err);
+    }
+
+  priv->pin = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/pin.png",
+                                            &err);
+  if (!priv->pin)
+    {
+      g_warning ("Could not load pin icon: %s",
                  (err) ? err->message : "Unknown error");
       g_clear_error (&err);
     }
