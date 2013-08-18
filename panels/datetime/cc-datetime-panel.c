@@ -510,8 +510,17 @@ static void
 update_timezone (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
+  char *bubble_text;
   char *city_country;
   char *label;
+  char *time_label;
+  char *utc_label;
+  gboolean use_ampm;
+
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+    use_ampm = TRUE;
+  else
+    use_ampm = FALSE;
 
   city_country = translated_city_name (priv->current_location);
 
@@ -522,7 +531,27 @@ update_timezone (CcDateTimePanel *self)
   gtk_label_set_text (GTK_LABEL (W ("timezone_label")), label);
   g_free (label);
 
+  utc_label = g_date_time_format (priv->date, "UTC%z");
+
+  if (use_ampm)
+    time_label = g_date_time_format (priv->date, "%l:%M %p");
+  else
+    time_label = g_date_time_format (priv->date, "%R");
+
+  /* Update the text bubble in the timezone map */
+  bubble_text = g_strdup_printf ("<b>%s (%s)</b>\n"
+                                 "<small>%s</small>\n"
+                                 "<b>%s</b>",
+                                 g_date_time_get_timezone_abbreviation (self->priv->date),
+                                 utc_label,
+                                 city_country,
+                                 time_label);
+  cc_timezone_map_set_bubble_text (CC_TIMEZONE_MAP (priv->map), bubble_text);
+
+  g_free (bubble_text);
   g_free (city_country);
+  g_free (time_label);
+  g_free (utc_label);
 }
 
 static void
@@ -531,10 +560,20 @@ location_changed_cb (CcTimezoneMap   *map,
                      CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
+  GDateTime *old_date;
+  GTimeZone *timezone;
 
   g_debug ("location changed to %s/%s", location->country, location->zone);
 
   priv->current_location = location;
+
+  old_date = priv->date;
+
+  timezone = g_time_zone_new (location->zone);
+  priv->date = g_date_time_to_timezone (old_date, timezone);
+  g_time_zone_unref (timezone);
+
+  g_date_time_unref (old_date);
 
   update_timezone (self);
   queue_set_timezone (self);
@@ -640,6 +679,7 @@ on_clock_changed (GnomeWallClock  *clock,
   g_date_time_unref (priv->date);
   priv->date = g_date_time_new_now_local ();
   update_time (panel);
+  update_timezone (panel);
 }
 
 static void
