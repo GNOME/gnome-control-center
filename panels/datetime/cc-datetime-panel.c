@@ -1014,11 +1014,21 @@ run_dialog (CcDateTimePanel *self,
 }
 
 static void
+toggle_switch (GtkWidget *sw)
+{
+  gboolean active;
+
+  active = gtk_switch_get_active (GTK_SWITCH (sw));
+  gtk_switch_set_active (GTK_SWITCH (sw), !active);
+}
+
+static void
 list_box_row_activated (GtkListBox      *listbox,
                         GtkListBoxRow   *row,
                         CcDateTimePanel *self)
 
 {
+  CcDateTimePanelPrivate *priv = self->priv;
   gchar *widget_name, *found;
 
   widget_name = g_strdup (gtk_buildable_get_name (GTK_BUILDABLE (row)));
@@ -1028,17 +1038,18 @@ list_box_row_activated (GtkListBox      *listbox,
 
   gtk_list_box_select_row (listbox, NULL);
 
-  /* replace "button" with "dialog" */
-  found = g_strrstr (widget_name, "button");
+  if (!g_strcmp0 (widget_name, "auto-datetime-row"))
+    {
+      toggle_switch (W ("network_time_switch"));
+    }
+  else if ((found = g_strrstr (widget_name, "button")))
+    {
+      /* replace "button" with "dialog" */
+      memcpy (found, "dialog", 6);
 
-  if (!found)
-    goto out;
+      run_dialog (self, widget_name);
+    }
 
-  memcpy (found, "dialog", 6);
-
-  run_dialog (self, widget_name);
-
-out:
   g_free (widget_name);
 }
 
