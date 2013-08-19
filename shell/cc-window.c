@@ -1207,9 +1207,9 @@ window_key_press_event (GtkWidget   *win,
   gboolean is_rtl;
 
   if (event->state == 0)
-    return FALSE;
+    return GDK_EVENT_PROPAGATE;
 
-  retval = FALSE;
+  retval = GDK_EVENT_PROPAGATE;
   state = event->state;
   keymap = gdk_keymap_get_default ();
   gdk_keymap_add_virtual_modifiers (keymap, &state);
@@ -1232,13 +1232,13 @@ window_key_press_event (GtkWidget   *win,
           case GDK_KEY_Q:
           case GDK_KEY_q:
             gtk_widget_destroy (GTK_WIDGET (self));
-            retval = TRUE;
+            retval = GDK_EVENT_STOP;
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
             if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
               shell_show_overview_page (self);
-            retval = TRUE;
+            retval = GDK_EVENT_STOP;
             break;
         }
     }
@@ -1246,14 +1246,14 @@ window_key_press_event (GtkWidget   *win,
     {
       if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
         shell_show_overview_page (self);
-      retval = TRUE;
+      retval = GDK_EVENT_STOP;
     }
   else if ((!is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Left) ||
            (is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Right) ||
            event->keyval == GDK_KEY_Back)
     {
       previous_button_clicked_cb (NULL, self);
-      retval = TRUE;
+      retval = GDK_EVENT_STOP;
     }
   return retval;
 }
