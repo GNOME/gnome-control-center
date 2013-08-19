@@ -256,8 +256,6 @@ on_screenshot_finished (GObject *source,
   cairo_surface_t *surface;
   cairo_t *cr;
   GVariant *result;
-  int width;
-  int height;
 
   error = NULL;
   result = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source),
@@ -288,10 +286,8 @@ on_screenshot_finished (GObject *source,
       goto out;
     }
 
-  width = gdk_pixbuf_get_width (pixbuf);
-  height = gdk_pixbuf_get_height (pixbuf);
   surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                        width, height);
+                                        data->monitor_rect.width, data->monitor_rect.height);
   cr = cairo_create (surface);
   gdk_cairo_set_source_pixbuf (cr, pixbuf, data->capture_rect.x, data->capture_rect.y);
   cairo_paint (cr);
