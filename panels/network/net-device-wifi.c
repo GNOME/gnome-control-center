@@ -805,7 +805,7 @@ get_hostname (void)
 
         error = NULL;
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-        if (error != NULL) {
+        if (bus == NULL) {
                 g_warning ("Failed to get system bus connection: %s", error->message);
                 g_error_free (error);
 
@@ -826,7 +826,7 @@ get_hostname (void)
                                            &error);
         g_object_unref (bus);
 
-        if (error != NULL) {
+        if (res == NULL) {
                 g_warning ("Getting pretty hostname failed: %s", error->message);
                 g_error_free (error);
         }
