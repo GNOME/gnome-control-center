@@ -30,48 +30,18 @@
                 <property name="receives_default">True</property>
                 <property name="valign">center</property>
                 <child>
-                  <object class="GtkBox" id="box1">
+                  <object class="GtkDrawingArea" id="background-desktop-drawingarea">
+                    <property name="width_request">417</property>
+                    <property name="height_request">250</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="valign">center</property>
+                    <property name="margin_left">6</property>
+                    <property name="margin_right">6</property>
+                    <property name="margin_top">6</property>
+                    <property name="margin_bottom">6</property>
                     <property name="hexpand">True</property>
-                    <property name="spacing">18</property>
-                    <child>
-                      <object class="GtkDrawingArea" id="background-desktop-drawingarea">
-                        <property name="width_request">417</property>
-                        <property name="height_request">250</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="margin_left">6</property>
-                        <property name="margin_right">6</property>
-                        <property name="margin_top">6</property>
-                        <property name="margin_bottom">6</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkDrawingArea" id="background-lock-drawingarea">
-                        <property name="can_focus">False</property>
-                        <property name="no_show_all">True</property>
-                        <property name="valign">center</property>
-                        <property name="margin_left">6</property>
-                        <property name="margin_right">6</property>
-                        <property name="margin_top">6</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="vexpand">True</property>
                   </object>
                 </child>
               </object>
@@ -107,11 +77,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="slide-label">
+                  <object class="GtkLabel" id="strut">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
+                    <property name="label"> </property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -120,10 +89,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="strut">
+                  <object class="GtkLabel" id="slide-label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label"> </property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -200,8 +170,6 @@
   <object class="GtkSizeGroup" id="sizegroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="sources-combobox"/>
-      <widget name="heading-hbox"/>
       <widget name="slide-label"/>
       <widget name="strut"/>
     </widgets>
