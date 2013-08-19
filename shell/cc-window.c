@@ -1497,7 +1497,6 @@ create_window (CcWindow *self)
   priv->search_bar = gtk_search_bar_new ();
   priv->search_entry = gtk_search_entry_new ();
   gtk_entry_set_width_chars (GTK_ENTRY (priv->search_entry), 30);
-  gtk_entry_set_invisible_char (GTK_ENTRY (priv->search_entry), 9679);
   g_signal_connect (priv->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
   g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
   gtk_container_add (GTK_CONTAINER (priv->search_bar), priv->search_entry);
