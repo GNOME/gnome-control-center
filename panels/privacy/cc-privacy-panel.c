@@ -96,33 +96,6 @@ get_on_off_label (GSettings *settings,
   return w;
 }
 
-static gboolean
-visible_label_mapping_get (GValue   *value,
-                           GVariant *variant,
-                           gpointer  user_data)
-{
-  g_value_set_string (value, g_variant_get_boolean (variant) ? _("Hidden") : _("Visible"));
-
-  return TRUE;
-}
-
-static GtkWidget *
-get_visible_label (GSettings *settings,
-                   const gchar *key)
-{
-  GtkWidget *w;
-
-  w = gtk_label_new ("");
-  g_settings_bind_with_mapping (settings, key,
-                                w, "label",
-                                G_SETTINGS_BIND_GET,
-                                visible_label_mapping_get,
-                                NULL,
-                                NULL,
-                                NULL);
-  return w;
-}
-
 typedef struct
 {
   GtkWidget *label;
@@ -300,68 +273,6 @@ add_screen_lock (CcPrivacyPanel *self)
   g_settings_bind (self->priv->notification_settings, "show-in-lock-screen",
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
-}
-
-static void
-stealth_mode_changed (GSettings   *settings,
-                      const gchar *key,
-                      gpointer     data)
-{
-  CcPrivacyPanel *self = data;
-  gboolean stealth_mode;
-  GtkWidget *w;
-
-  stealth_mode = g_settings_get_boolean (settings, "hide-identity");
-
-  if (stealth_mode)
-    {
-      g_settings_set_boolean (self->priv->lock_settings, "show-full-name-in-top-bar", FALSE);
-      g_settings_set_boolean (self->priv->privacy_settings, "show-full-name-in-top-bar", FALSE);
-    }
-
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar"));
-  gtk_widget_set_sensitive (w, !stealth_mode);
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen"));
-  gtk_widget_set_sensitive (w, !stealth_mode);
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar_label"));
-  gtk_widget_set_sensitive (w, !stealth_mode);
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen_label"));
-  gtk_widget_set_sensitive (w, !stealth_mode);
-}
-
-static void
-add_name_visibility (CcPrivacyPanel *self)
-{
-  GtkWidget *w;
-  GtkWidget *dialog;
-
-  w = get_visible_label (self->priv->privacy_settings, "hide-identity");
-  add_row (self, _("Name & Visibility"), "name_dialog", w);
-
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "name_done"));
-  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "name_dialog"));
-  g_signal_connect_swapped (w, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
-  g_signal_connect (dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "stealth_mode"));
-  g_settings_bind (self->priv->privacy_settings, "hide-identity",
-                   w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar"));
-  g_settings_bind (self->priv->privacy_settings, "show-full-name-in-top-bar",
-                   w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen"));
-  g_settings_bind (self->priv->lock_settings, "show-full-name-in-top-bar",
-                   w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  g_signal_connect (self->priv->privacy_settings, "changed::hide-identity",
-                    G_CALLBACK (stealth_mode_changed), self);
 }
 
 static void
@@ -713,7 +624,6 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->notification_settings = g_settings_new ("org.gnome.desktop.notifications");
 
   add_screen_lock (self);
-  add_name_visibility (self);
   add_usage_history (self);
   add_trash_temp (self);
 
