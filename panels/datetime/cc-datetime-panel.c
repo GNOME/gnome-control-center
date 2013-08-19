@@ -1075,14 +1075,13 @@ cc_date_time_panel_init (CcDateTimePanel *self)
           "min_down_button", "ampm_up_button", "ampm_down_button" };
   GtkWidget *widget;
   GtkAdjustment *adjustment;
-  GError *err = NULL;
+  GError *error;
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
   const char *ampm;
   guint i, num_days;
   int ret;
   DateEndianess endianess;
-  GError *error;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
   g_resources_register (cc_datetime_get_resource ());
@@ -1097,19 +1096,19 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                                 &error);
   if (priv->dtm == NULL) {
         g_warning ("could not get proxy for DateTimeMechanism: %s", error->message);
-        g_error_free (error);
+        g_clear_error (&error);
   }
 
   priv->builder = gtk_builder_new ();
   ret = gtk_builder_add_from_resource (priv->builder,
                                        "/org/gnome/control-center/datetime/datetime.ui",
-                                       &err);
+                                       &error);
 
   if (ret == 0)
     {
-      g_warning ("Could not load ui: %s", err ? err->message : "No reason");
-      if (err)
-        g_error_free (err);
+      g_warning ("Could not load ui: %s", error ? error->message : "No reason");
+      if (error)
+        g_error_free (error);
       return;
     }
 
