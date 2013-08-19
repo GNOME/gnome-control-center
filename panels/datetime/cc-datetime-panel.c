@@ -1105,6 +1105,12 @@ setup_timezone_dialog (CcDateTimePanel *self)
   GtkWidget *button;
   GtkWidget *dialog;
 
+  /* set up timezone map */
+  priv->map = (GtkWidget *) cc_timezone_map_new ();
+  gtk_widget_show (priv->map);
+  gtk_container_add (GTK_CONTAINER (gtk_builder_get_object (priv->builder, "aspectmap")),
+                     priv->map);
+
   button = W ("timezone-close-button");
   dialog = W ("timezone-dialog");
   g_signal_connect_swapped (button, "clicked",
@@ -1184,10 +1190,12 @@ static void
 setup_datetime_dialog (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
+  GtkAdjustment *adjustment;
   GtkCssProvider *provider;
   GtkStyleContext *context;
   GtkWidget *button;
   GtkWidget *dialog;
+  guint num_days;
 
   setup_am_pm_button (self);
 
@@ -1210,6 +1218,36 @@ setup_datetime_dialog (CcDateTimePanel *self)
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
+  /* Force the direction for the time, so that the time
+   * is presented correctly for RTL languages */
+  gtk_widget_set_direction (W ("time_grid"), GTK_TEXT_DIR_LTR);
+
+  /* Month */
+  gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
+                            g_date_time_get_month (priv->date) - 1);
+  g_signal_connect (G_OBJECT (W("month-combobox")), "changed",
+                    G_CALLBACK (month_year_changed), self);
+
+  /* Day */
+  num_days = g_date_get_days_in_month (g_date_time_get_month (priv->date),
+                                       g_date_time_get_year (priv->date));
+  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_day_of_month (priv->date), 1,
+                                                    num_days + 1, 1, 10, 1);
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("day-spinbutton")),
+                                  adjustment);
+  g_signal_connect (G_OBJECT (W ("day-spinbutton")), "value-changed",
+                    G_CALLBACK (day_changed), self);
+
+  /* Year */
+  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (priv->date),
+                                                    G_MINDOUBLE, G_MAXDOUBLE, 1,
+                                                    10, 1);
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("year-spinbutton")),
+                                  adjustment);
+  g_signal_connect (G_OBJECT (W ("year-spinbutton")), "value-changed",
+                    G_CALLBACK (month_year_changed), self);
+
+  /* Hours and minutes */
   g_signal_connect (W ("h_spinbutton"), "output",
                     G_CALLBACK (format_hours_combobox), self);
   g_signal_connect (W ("m_spinbutton"), "output",
@@ -1232,12 +1270,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
   GtkWidget *widget;
-  GtkAdjustment *adjustment;
   GError *error;
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
   const char *ampm;
-  guint num_days;
   int ret;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
@@ -1269,6 +1305,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       return;
     }
 
+  priv->date = g_date_time_new_now_local ();
+
   setup_timezone_dialog (self);
   setup_datetime_dialog (self);
   setup_main_listview (self);
@@ -1281,43 +1319,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
-
-  /* set up date editing widgets */
-  priv->date = g_date_time_new_now_local ();
-
-  /* Force the direction for the time, so that the time
-   * is presented correctly for RTL languages */
-  gtk_widget_set_direction (W("time_grid"), GTK_TEXT_DIR_LTR);
-
-  gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
-                            g_date_time_get_month (priv->date) - 1);
-  g_signal_connect (G_OBJECT (W("month-combobox")), "changed",
-                    G_CALLBACK (month_year_changed), self);
-
-  num_days = g_date_get_days_in_month (g_date_time_get_month (priv->date),
-                                       g_date_time_get_year (priv->date));
-  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_day_of_month (priv->date), 1,
-                                                    num_days + 1, 1, 10, 1);
-  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("day-spinbutton")),
-                                  adjustment);
-  g_signal_connect (G_OBJECT (W("day-spinbutton")), "value-changed",
-                    G_CALLBACK (day_changed), self);
-
-  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (priv->date),
-                                                    G_MINDOUBLE, G_MAXDOUBLE, 1,
-                                                    10, 1);
-  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("year-spinbutton")),
-                                  adjustment);
-  g_signal_connect (G_OBJECT (W("year-spinbutton")), "value-changed",
-                    G_CALLBACK (month_year_changed), self);
-
-  /* set up timezone map */
-  priv->map = widget = (GtkWidget *) cc_timezone_map_new ();
-  gtk_widget_show (widget);
-
-  gtk_container_add (GTK_CONTAINER (gtk_builder_get_object (priv->builder,
-                                                            "aspectmap")),
-                     widget);
 
   /* Clock settings */
   priv->settings = g_settings_new (CLOCK_SCHEMA);
