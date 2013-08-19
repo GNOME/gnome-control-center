@@ -1206,6 +1206,9 @@ window_key_press_event (GtkWidget   *win,
   GdkModifierType state;
   gboolean is_rtl;
 
+  if (gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->priv->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
+    return GDK_EVENT_STOP;
+
   if (event->state == 0)
     return GDK_EVENT_PROPAGATE;
 
