@@ -1542,6 +1542,7 @@ create_window (CcWindow *self)
                     G_CALLBACK (stack_page_notify_cb), self);
 
   gtk_widget_show_all (box);
+  gtk_window_set_focus (GTK_WINDOW (self), priv->search_button);
 }
 
 static void
