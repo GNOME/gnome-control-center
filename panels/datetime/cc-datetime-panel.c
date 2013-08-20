@@ -174,6 +174,8 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 
   panel_class->get_permission = cc_date_time_panel_get_permission;
   panel_class->get_help_uri   = cc_date_time_panel_get_help_uri;
+
+  bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 }
 
 static void clock_settings_changed_cb (GSettings       *settings,
