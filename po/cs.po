@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-19 17:52+0000\n"
-"PO-Revision-Date: 2013-08-19 23:43+0200\n"
+"POT-Creation-Date: 2013-08-20 00:35+0000\n"
+"PO-Revision-Date: 2013-08-20 09:01+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -35,37 +35,46 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 "X-Project-Style: gnome\n"
 
+#: ../panels/background/background.ui.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Pozadí"
+
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:2
+#: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
 msgstr "Měnit v průběhu dne"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
+msgid "Lock Screen"
+msgstr "Uzamknutá obrazovka"
+
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Tile"
 msgstr "Dlaždice"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "Zvětšit"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Center"
 msgstr "Na střed"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Scale"
 msgstr "Přizpůsobit"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Fill"
 msgstr "Vyplnit"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Span"
 msgstr "Rozšířit"
@@ -108,8 +117,8 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1202
-#: ../panels/network/net-device-wifi.c:1408
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -144,13 +153,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Bez pozadí pracovní plochy"
 
-#: ../panels/background/cc-background-panel.c:460
+#: ../panels/background/cc-background-panel.c:497
 msgid "Current background"
 msgstr "Aktuální pozadí"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Pozadí"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -1027,65 +1032,82 @@ msgid "December"
 msgstr "prosinec"
 
 #: ../panels/datetime/datetime.ui.h:13
-msgid "_Region:"
-msgstr "O_blast:"
-
-#: ../panels/datetime/datetime.ui.h:14
-msgid "_City:"
-msgstr "_Město:"
-
-#: ../panels/datetime/datetime.ui.h:15
-msgid "_Network Time"
-msgstr "_Síťový čas"
-
-#. Translator: this is the separator between hours and minutes, like in HH:MM
-#: ../panels/datetime/datetime.ui.h:17
-msgid ":"
-msgstr ":"
-
-#: ../panels/datetime/datetime.ui.h:18
-msgid "Set the time one hour ahead."
-msgstr "Posunout čas o hodinu vpřed."
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Set the time one hour back."
-msgstr "Posunout čas o hodinu zpět."
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Set the time one minute ahead."
-msgstr "Posunout čas o minutu vpřed."
-
-#: ../panels/datetime/datetime.ui.h:21
-msgid "Set the time one minute back."
-msgstr "Posunout čas o minutu zpět."
-
-#: ../panels/datetime/datetime.ui.h:22
-msgid "Switch between AM and PM."
-msgstr "Přepnout mezi dopolednem a odpolednem."
-
-#: ../panels/datetime/datetime.ui.h:23
-msgid "Month"
-msgstr "Měsíc"
-
-#: ../panels/datetime/datetime.ui.h:24
-msgid "Day"
-msgstr "Den"
-
-#: ../panels/datetime/datetime.ui.h:25
-msgid "Year"
-msgstr "Rok"
-
-#: ../panels/datetime/datetime.ui.h:26
-msgid "24-hour"
-msgstr "24hodinový"
-
-#: ../panels/datetime/datetime.ui.h:27
-msgid "AM/PM"
-msgstr "12hodinový"
-
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date & Time"
 msgstr "Datum a čas"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "Hour"
+msgstr "Hodina"
+
+#. Translator: this is the separator between hours and minutes, like in HH∶MM
+#: ../panels/datetime/datetime.ui.h:16
+msgid "∶"
+msgstr "∶"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "Minute"
+msgstr "Minuta"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Switch between AM and PM."
+msgstr "Přepnout mezi dopolednem a odpolednem."
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Day"
+msgstr "Den"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Month"
+msgstr "Měsíc"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Year"
+msgstr "Rok"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Time Zone"
+msgstr "Časové pásmo"
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "_Region:"
+msgstr "O_blast:"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "_City:"
+msgstr "_Město:"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Automatic _Date & Time"
+msgstr "_Datum a čas automaticky"
+
+#: ../panels/datetime/datetime.ui.h:26
+msgid "Requires internet access"
+msgstr "Vyžaduje přístup k Internetu"
+
+#: ../panels/datetime/datetime.ui.h:27
+msgid "Automatic Time _Zone"
+msgstr "Časové pás_mo automaticky"
+
+#: ../panels/datetime/datetime.ui.h:28
+msgid "Date & _Time"
+msgstr "Da_tum a čas"
+
+#: ../panels/datetime/datetime.ui.h:29
+msgid "Time _Zone"
+msgstr "Časové pás_mo"
+
+#: ../panels/datetime/datetime.ui.h:30
+msgid "Time _Format"
+msgstr "_Formát času"
+
+#: ../panels/datetime/datetime.ui.h:31
+msgid "24-hour"
+msgstr "24hodinový"
+
+#: ../panels/datetime/datetime.ui.h:32
+msgid "AM / PM"
+msgstr "dop./odp."
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
@@ -2023,35 +2045,35 @@ msgstr "automaticky"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:383
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:226
-#: ../panels/network/net-device-wifi.c:388
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
 #: ../panels/network/network-wifi.ui.h:17
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:229
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:235
+#: ../panels/network/net-device-wifi.c:234
 msgid "Enterprise"
 msgstr "Firemní"
 
 # Zabezpečení
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:240
-#: ../panels/network/net-device-wifi.c:373
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Žádné"
@@ -2073,7 +2095,7 @@ msgstr "včera"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:125
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2084,40 +2106,40 @@ msgstr[2] "před %i dny"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:53
-#: ../panels/network/net-device-wifi.c:535
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 # Síla signálu
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Žádná"
 
 # Síla signálu
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slabá"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Dostačující"
 
 # Síla signálu
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobrá"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Výborná"
@@ -2480,7 +2502,7 @@ msgid "_Reset"
 msgstr "_Resetovat"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1409
+#: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Zapomenout"
@@ -2617,17 +2639,17 @@ msgid "Bridge slaves"
 msgstr "Podřízená zařízení v mostu"
 
 #: ../panels/network/net-device-ethernet.c:111
-#: ../panels/network/net-device-wifi.c:463
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "nikdy"
 
 #: ../panels/network/net-device-ethernet.c:121
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "dnes"
 
 #: ../panels/network/net-device-ethernet.c:123
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "včera"
 
@@ -2655,7 +2677,7 @@ msgid "Wired"
 msgstr "Drátová"
 
 #: ../panels/network/net-device-ethernet.c:355
-#: ../panels/network/net-device-wifi.c:1550
+#: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2673,7 +2695,7 @@ msgid "Add new connection"
 msgstr "Přidat nové připojení"
 
 # Příliš neformální?
-#: ../panels/network/net-device-wifi.c:1118
+#: ../panels/network/net-device-wifi.c:1117
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2681,13 +2703,13 @@ msgstr ""
 "Používáte-li k přístupu na Internet připojení jiné než bezdrátové, můžete "
 "nastavit bezdrátový přístupový bod pro sdílení připojení s ostatními."
 
-#: ../panels/network/net-device-wifi.c:1122
+#: ../panels/network/net-device-wifi.c:1121
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Zapnutím bezdrátového přístupového bodu bude připojení k <b>%s</b> ztraceno."
 
-#: ../panels/network/net-device-wifi.c:1126
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2695,23 +2717,23 @@ msgstr ""
 "Není možné se k Internetu připojovat prostřednictvím bezdrátového připojení "
 "zatímco je aktivní režim přístupového bodu."
 
-#: ../panels/network/net-device-wifi.c:1200
+#: ../panels/network/net-device-wifi.c:1199
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Zastavit přístupový bod a odpojit případné uživatele?"
 
-#: ../panels/network/net-device-wifi.c:1203
+#: ../panels/network/net-device-wifi.c:1202
 msgid "_Stop Hotspot"
 msgstr "Za_stavit přístupový bod"
 
-#: ../panels/network/net-device-wifi.c:1275
+#: ../panels/network/net-device-wifi.c:1274
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systémová zásada zakazuje použití jako přístupový bod"
 
-#: ../panels/network/net-device-wifi.c:1278
+#: ../panels/network/net-device-wifi.c:1277
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Bezdrátové zařízení nepodporuje režim přístupového bodu"
 
-#: ../panels/network/net-device-wifi.c:1405
+#: ../panels/network/net-device-wifi.c:1404
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2719,19 +2741,19 @@ msgstr ""
 "Informace o síti pro vybrané sítě, včetně hesel a vlastního nastavení, budou "
 "ztraceny."
 
-#: ../panels/network/net-device-wifi.c:1715
+#: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Historie"
 
-#: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
 #: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
 #: ../panels/wacom/cc-wacom-page.c:525
 msgid "_Close"
 msgstr "_Zavřít"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1727
+#: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Zapomenout"
@@ -7055,7 +7077,7 @@ msgstr "Nápověda"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1455
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1458
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
@@ -7075,7 +7097,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1563 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1565 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Nastavení"
 
