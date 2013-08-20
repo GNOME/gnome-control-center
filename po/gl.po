@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-02 12:43+0200\n"
-"PO-Revision-Date: 2013-08-02 12:46+0200\n"
+"POT-Creation-Date: 2013-08-21 00:57+0200\n"
+"PO-Revision-Date: 2013-08-21 01:09+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -29,37 +29,46 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
+#: ../panels/background/background.ui.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Fondo"
+
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:2
+#: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
 msgstr "Cambia ao longo do día"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
+msgid "Lock Screen"
+msgstr "Bloquear pantalla"
+
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Tile"
 msgstr "Mosaico"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "Ampliación"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Center"
 msgstr "Centrar"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Scale"
 msgstr "Escalar"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Fill"
 msgstr "Encher"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Span"
 msgstr "Expandir"
@@ -100,13 +109,16 @@ msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
 #: ../panels/background/cc-background-chooser-dialog.c:443
 #: ../panels/bluetooth/cc-bluetooth-panel.c:631
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/display/cc-display-panel.c:1348
+#: ../panels/display/cc-display-panel.c:1746
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1202
-#: ../panels/network/net-device-wifi.c:1408
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
 #: ../panels/search/cc-search-locations-dialog.c:682
 #: ../panels/sharing/cc-sharing-panel.c:421
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
@@ -138,13 +150,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sen fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:460
+#: ../panels/background/cc-background-panel.c:497
 msgid "Current background"
 msgstr "Fondo actual"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Fondo"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -589,7 +597,7 @@ msgstr "Calibración de pantalla"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1420
+#: ../panels/user-accounts/um-account-dialog.c:1470
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -955,13 +963,13 @@ msgstr "China"
 msgid "Other…"
 msgstr "Outro…"
 
-#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/common/cc-language-chooser.c:123
 #: ../panels/region/cc-format-chooser.c:268
 #: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "Máis…"
 
-#: ../panels/common/cc-language-chooser.c:141
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Non se atoparon idiomas"
 
@@ -974,114 +982,153 @@ msgstr "Idioma"
 msgid "_Done"
 msgstr "_Feito"
 
+#. Translators: This is the full date and time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:322
+msgid "%e %B %Y, %l:%M %p"
+msgstr "%e %B %Y, %l:%M %p"
+
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:327
+msgid "%e %B %Y, %R"
+msgstr "%e %B %Y, %R"
+
+#. Translators: UTC here means the Coordinated Universal Time.
+#. * %z will be replaced by the offset from UTC e.g. UTC+0200
+#: ../panels/datetime/cc-datetime-panel.c:543
+msgid "UTC%z"
+msgstr "UTC%z"
+
+#. Translators: This is the time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:548
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#. Translators: This is the time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:553
+msgid "%R"
+msgstr "%R"
+
 #: ../panels/datetime/datetime.ui.h:1
-msgid "_Region:"
-msgstr "_Rexión:"
-
-#: ../panels/datetime/datetime.ui.h:2
-msgid "_City:"
-msgstr "_Cidade:"
-
-#: ../panels/datetime/datetime.ui.h:3
-msgid "_Network Time"
-msgstr "_Hora de rede"
-
-#. Translator: this is the separator between hours and minutes, like in HH:MM
-#: ../panels/datetime/datetime.ui.h:5
-msgid ":"
-msgstr ":"
-
-#: ../panels/datetime/datetime.ui.h:6
-msgid "Set the time one hour ahead."
-msgstr "Axustar a hora unha hora cara adiante."
-
-#: ../panels/datetime/datetime.ui.h:7
-msgid "Set the time one hour back."
-msgstr "Axustar a hora unha hora cara atrás."
-
-#: ../panels/datetime/datetime.ui.h:8
-msgid "Set the time one minute ahead."
-msgstr "Axustar a hora un minuto cara adiante."
-
-#: ../panels/datetime/datetime.ui.h:9
-msgid "Set the time one minute back."
-msgstr "Axustar a hora un minuto cara atrás."
-
-#: ../panels/datetime/datetime.ui.h:10
-msgid "Switch between AM and PM."
-msgstr "Alternar entre AM e PM."
-
-#: ../panels/datetime/datetime.ui.h:11
-msgid "Month"
-msgstr "Mes"
-
-#: ../panels/datetime/datetime.ui.h:12
-msgid "Day"
-msgstr "Día"
-
-#: ../panels/datetime/datetime.ui.h:13
-msgid "Year"
-msgstr "Ano"
-
-#: ../panels/datetime/datetime.ui.h:14
-msgid "24-hour"
-msgstr "24 horas"
-
-#: ../panels/datetime/datetime.ui.h:15
-msgid "AM/PM"
-msgstr "AM/PM"
-
-#: ../panels/datetime/datetime.ui.h:16
 msgid "January"
 msgstr "Xaneiro"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:2
 msgid "February"
 msgstr "Febreiro"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:3
 msgid "March"
 msgstr "Marzo"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:4
 msgid "April"
 msgstr "Abril"
 
-#: ../panels/datetime/datetime.ui.h:20
+#: ../panels/datetime/datetime.ui.h:5
 msgid "May"
 msgstr "Maio"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:6
 msgid "June"
 msgstr "Xuño"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:7
 msgid "July"
 msgstr "Xullo"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:8
 msgid "August"
 msgstr "Agosto"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:9
 msgid "September"
 msgstr "Setembro"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:10
 msgid "October"
 msgstr "Outubro"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:11
 msgid "November"
 msgstr "Novembro"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:12
 msgid "December"
 msgstr "Decembro"
 
+#: ../panels/datetime/datetime.ui.h:13
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date & Time"
 msgstr "Data e hora"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "Hour"
+msgstr "Hora"
+
+#. Translator: this is the separator between hours and minutes, like in HH∶MM
+#: ../panels/datetime/datetime.ui.h:16
+msgid "∶"
+msgstr ":"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "Minute"
+msgstr "Minuto"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Switch between AM and PM."
+msgstr "Alternar entre AM e PM."
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Day"
+msgstr "Día"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Month"
+msgstr "Mes"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Year"
+msgstr "Ano"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Time Zone"
+msgstr "Fuso horario"
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "Search for a city"
+msgstr "Buscar unha cidade"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "Automatic _Date & Time"
+msgstr "_Data e hora automática"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Requires internet access"
+msgstr "Require conexión a Internet"
+
+#: ../panels/datetime/datetime.ui.h:26
+msgid "Automatic Time _Zone"
+msgstr "Fuso _horario automático"
+
+#: ../panels/datetime/datetime.ui.h:27
+msgid "Date & _Time"
+msgstr "Data e _hora"
+
+#: ../panels/datetime/datetime.ui.h:28
+msgid "Time _Zone"
+msgstr "_Fuso horario"
+
+#: ../panels/datetime/datetime.ui.h:29
+msgid "Time _Format"
+msgstr "_Formato de hora"
+
+#: ../panels/datetime/datetime.ui.h:30
+msgid "24-hour"
+msgstr "24 horas"
+
+#: ../panels/datetime/datetime.ui.h:31
+msgid "AM / PM"
+msgstr "AM / PM"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
@@ -1100,106 +1147,137 @@ msgstr "Cambiar as preferencias da data e hora do sistema"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Para cambiar as preferencias de data e hora debe autenticarse."
 
-#: ../panels/display/cc-display-panel.c:491
-msgctxt "display panel, rotation"
-msgid "Normal"
-msgstr "Normal"
+#: ../panels/display/cc-display-panel.c:421
+msgid "Lid Closed"
+msgstr "Tapa pechada"
 
-#: ../panels/display/cc-display-panel.c:492
-msgctxt "display panel, rotation"
-msgid "Counterclockwise"
-msgstr "Antihorario"
+#. translators: "Mirrored" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:424
+msgid "Mirrored"
+msgstr "Espellada"
 
-#: ../panels/display/cc-display-panel.c:493
-msgctxt "display panel, rotation"
-msgid "Clockwise"
-msgstr "Horario"
-
-#: ../panels/display/cc-display-panel.c:494
-msgctxt "display panel, rotation"
-msgid "180 Degrees"
-msgstr "180 graos"
-
-#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
-#. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external projector.  Here, "Mirrored" is being
-#. * used as an adjective.  For example, the Spanish translation could be
-#. * "Pantallas en Espejo".
-#.
-#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
-#. Translators:  this is the feature where what you see on your
-#. * laptop's screen is the same as your external projector.
-#. * Here, "Mirrored" is being used as an adjective.  For example,
-#. * the Spanish translation could be "Pantallas en Espejo".
-#.
-#: ../panels/display/cc-display-panel.c:633
-#: ../panels/display/cc-rr-labeler.c:418
-msgid "Mirrored Displays"
-msgstr "Espellar pantallas"
-
-#: ../panels/display/cc-display-panel.c:657
+#: ../panels/display/cc-display-panel.c:426
+#: ../panels/display/cc-display-panel.c:1877
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Monitor"
-msgstr "Monitor"
+msgid "Primary"
+msgstr "Primaria"
 
-#: ../panels/display/cc-display-panel.c:1702
-msgid "Drag to change primary display."
-msgstr "Arrastrar para cambiar a pantalla principal."
+#: ../panels/display/cc-display-panel.c:428
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
+#: ../panels/universal-access/uap.ui.h:6
+msgid "Off"
+msgstr "Desactivado"
 
-#: ../panels/display/cc-display-panel.c:1760
-msgid ""
-"Select a monitor to change its properties; drag it to rearrange its "
-"placement."
-msgstr ""
-"Seleccione un monitor para cambiar as súas propiedades, ao arrastralo "
-"reubícao."
+#: ../panels/display/cc-display-panel.c:431
+msgid "Secondary"
+msgstr "Secundaria"
 
-#: ../panels/display/cc-display-panel.c:2157
-msgid "%a %R"
-msgstr "%a %R"
+#: ../panels/display/cc-display-panel.c:1345
+msgid "Arrange Combined Displays"
+msgstr "Ordenar pantallas combinadas"
 
-#: ../panels/display/cc-display-panel.c:2159
-msgid "%a %l:%M %p"
-msgstr "%a %l:%M %p"
+#: ../panels/display/cc-display-panel.c:1349
+#: ../panels/display/cc-display-panel.c:1747
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+msgid "_Apply"
+msgstr "_Aplicar"
 
-#: ../panels/display/cc-display-panel.c:2321
-#: ../panels/display/cc-display-panel.c:2373
-#, c-format
-msgid "Failed to apply configuration: %s"
-msgstr "Produciuse un erro ao aplicar a configuración: %s"
+#: ../panels/display/cc-display-panel.c:1369
+msgid "Drag displays to rearrange them"
+msgstr "Arrastre as pantallas para reordenalas"
 
-#: ../panels/display/cc-display-panel.c:2401
-msgid "Could not save the monitor configuration"
-msgstr "Non foi posíbel gardar a configuración do monitor"
+#. size
+#: ../panels/display/cc-display-panel.c:1811
+msgid "Size"
+msgstr "Tamaño"
 
-#: ../panels/display/cc-display-panel.c:2461
-msgid "Could not detect displays"
-msgstr "Non foi posíbel detectar as pantallas"
+#. aspect ratio
+#: ../panels/display/cc-display-panel.c:1826
+#: ../panels/display/display-capplet.ui.h:12
+msgid "Aspect Ratio"
+msgstr "Proporción de aspecto"
 
-#: ../panels/display/cc-display-panel.c:2673
+#: ../panels/display/cc-display-panel.c:1847
+#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "Resolución"
+
+#: ../panels/display/cc-display-panel.c:1878
+#: ../panels/display/display-capplet.ui.h:2
+msgid "Show the top bar and Activities Overview on this display"
+msgstr "Mostrar a barra superior e a Vista de actividades nesta pantalla"
+
+#: ../panels/display/cc-display-panel.c:1884
+msgid "Secondary Display"
+msgstr "Pantalla secundaria"
+
+#: ../panels/display/cc-display-panel.c:1885
+msgid "Join this display with another to create an extra workspace"
+msgstr "Unir esta pantalla con outra para crear un espazo de traballo adicional"
+
+#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/display/display-capplet.ui.h:3
+msgid "Presentation"
+msgstr "Presentación"
+
+#: ../panels/display/cc-display-panel.c:1893
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Show slideshows and media only"
+msgstr "Mostrar só as presentacións e o multimedia"
+
+#. translators: "Mirror" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:1898
+#: ../panels/display/display-capplet.ui.h:5
+msgid "Mirror"
+msgstr "Espello"
+
+#: ../panels/display/cc-display-panel.c:1899
+msgid "Show your existing view on both displays"
+msgstr "Mostra a súa vista existente nas dúas pantallas"
+
+#: ../panels/display/cc-display-panel.c:2092
 msgid "Could not get screen information"
 msgstr "Non foi posíbel obter a información da pantalla"
 
-#: ../panels/display/display-capplet.ui.h:2
-msgid "_Resolution"
-msgstr "_Resolución"
-
-#: ../panels/display/display-capplet.ui.h:3
-msgid "R_otation"
-msgstr "R_otación"
-
-#. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:5
-msgid "_Mirror displays"
-msgstr "_Espellar pantallas"
+#: ../panels/display/cc-display-panel.c:2123
+msgid "_Arrange Combined Displays"
+msgstr "_Ordenar pantallas combinadas"
 
 #: ../panels/display/display-capplet.ui.h:6
-msgid "Note: may limit resolution options"
-msgstr "Nota: pode limitar as opcións de resolución"
+msgid "Show your primary display on this screen also"
+msgstr "Mostrar a súa pantalla primaria neste monitor tamén"
 
 #: ../panels/display/display-capplet.ui.h:7
-msgid "_Detect Displays"
-msgstr "_Detectar pantallas"
+msgid "Combine"
+msgstr "Combinar"
+
+#: ../panels/display/display-capplet.ui.h:8
+msgid "Join with the primary display to create an extra space"
+msgstr "Unir coa pantalla primaria para crear un espazo adicional"
+
+#: ../panels/display/display-capplet.ui.h:9
+msgid "Turn Off"
+msgstr "Apagar"
+
+#: ../panels/display/display-capplet.ui.h:10
+msgid "Don't use the display"
+msgstr "Non usar esta pantalla"
+
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/printers/printers.ui.h:12
+msgid "Model"
+msgstr "Modelo"
+
+#: ../panels/display/display-capplet.ui.h:14
+msgid "Refresh Rate"
+msgstr "Taxa de refresco"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Displays"
@@ -1593,6 +1671,10 @@ msgstr "Copiar unha captura de pantalla dunha xanela ao portapapeis"
 msgid "Copy a screenshot of an area to clipboard"
 msgstr "Copiar unha captura de pantalla dunha área ao portapapeis"
 
+#: ../panels/keyboard/01-screenshot.xml.in.h:11
+msgid "Record a short screencast"
+msgstr "Facer unha gravación da pantalla"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "System"
 msgstr "Sistema"
@@ -1969,11 +2051,11 @@ msgstr "Un clic, botón secundario"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
-#: ../panels/network/cc-network-panel.c:914
+#: ../panels/network/cc-network-panel.c:925
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
@@ -1981,14 +2063,14 @@ msgstr "Proxy da rede"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1093 ../panels/network/net-vpn.c:285
+#: ../panels/network/cc-network-panel.c:1104 ../panels/network/net-vpn.c:285
 #: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1228
+#: ../panels/network/cc-network-panel.c:1239
 msgid "The system network services are not compatible with this version."
 msgstr "Os servizos de rede do sistema non son compatíbeis con esta versión."
 
@@ -2022,34 +2104,34 @@ msgstr "automático"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:383
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:226
-#: ../panels/network/net-device-wifi.c:388
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
 #: ../panels/network/network-wifi.ui.h:17
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:229
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:235
+#: ../panels/network/net-device-wifi.c:234
 msgid "Enterprise"
 msgstr "Empresarial"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:240
-#: ../panels/network/net-device-wifi.c:373
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ningunha"
@@ -2060,18 +2142,18 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:787
+#: ../panels/user-accounts/um-utils.c:803
 msgid "Today"
 msgstr "Hoxe"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:790
+#: ../panels/user-accounts/um-utils.c:806
 msgid "Yesterday"
 msgstr "Mañá"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:125
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2081,37 +2163,37 @@ msgstr[1] "Hai %i días"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:53
-#: ../panels/network/net-device-wifi.c:535
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ningunha"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Débil"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Aceptábel"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Boa"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
@@ -2245,10 +2327,6 @@ msgstr "WPA & WPA2 Persoal"
 #: ../panels/network/connection-editor/ce-page-security.c:337
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Empresarial"
-
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
-msgid "_Apply"
-msgstr "_Aplicar"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
@@ -2435,7 +2513,7 @@ msgstr "Novo perfil"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:509
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1421
+#: ../panels/user-accounts/um-account-dialog.c:1471
 msgid "_Add"
 msgstr "_Engadir"
 
@@ -2474,7 +2552,7 @@ msgid "_Reset"
 msgstr "_Restabelecer"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1409
+#: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Esquecer"
@@ -2611,17 +2689,17 @@ msgid "Bridge slaves"
 msgstr "Escravos Bridge"
 
 #: ../panels/network/net-device-ethernet.c:111
-#: ../panels/network/net-device-wifi.c:463
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "nunca"
 
 #: ../panels/network/net-device-ethernet.c:121
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "hoxe"
 
 #: ../panels/network/net-device-ethernet.c:123
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "onte"
 
@@ -2649,7 +2727,7 @@ msgid "Wired"
 msgstr "Con fíos"
 
 #: ../panels/network/net-device-ethernet.c:355
-#: ../panels/network/net-device-wifi.c:1550
+#: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2666,7 +2744,7 @@ msgstr "Perfil %d"
 msgid "Add new connection"
 msgstr "Engadir nova conexión"
 
-#: ../panels/network/net-device-wifi.c:1118
+#: ../panels/network/net-device-wifi.c:1117
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2674,12 +2752,12 @@ msgstr ""
 "Se ten unha conexión a Internet aparte da sen fíos, pode configurar un punto "
 "de acceso sen fíos para compartir a súa conexión a Internet con outros."
 
-#: ../panels/network/net-device-wifi.c:1122
+#: ../panels/network/net-device-wifi.c:1121
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Cambiar ao «hotspot» sen fíos desconectaralle de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1126
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2687,23 +2765,23 @@ msgstr ""
 "Non é posíbel acceder á internet usando a conexión sen fíos mentres o "
 "«hotspot» está activado."
 
-#: ../panels/network/net-device-wifi.c:1200
+#: ../panels/network/net-device-wifi.c:1199
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
 
-#: ../panels/network/net-device-wifi.c:1203
+#: ../panels/network/net-device-wifi.c:1202
 msgid "_Stop Hotspot"
 msgstr "_Deter «hotspot»"
 
-#: ../panels/network/net-device-wifi.c:1275
+#: ../panels/network/net-device-wifi.c:1274
 msgid "System policy prohibits use as a Hotspot"
 msgstr "A normativa do sistema prohibe o uso un «Hotspot»"
 
-#: ../panels/network/net-device-wifi.c:1278
+#: ../panels/network/net-device-wifi.c:1277
 msgid "Wireless device does not support Hotspot mode"
 msgstr "O dispositivo Wireless non é compatíbel co modo «Hotspot»"
 
-#: ../panels/network/net-device-wifi.c:1405
+#: ../panels/network/net-device-wifi.c:1404
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2711,19 +2789,19 @@ msgstr ""
 "Perderase a información das redes seleccionadas, incluíndo os contrasinals e "
 "calquera configuración personalizada."
 
-#: ../panels/network/net-device-wifi.c:1715
+#: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Historial"
 
-#: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
-#: ../panels/privacy/privacy.ui.h:10 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
 #: ../panels/wacom/cc-wacom-page.c:525
 msgid "_Close"
 msgstr "_Pechar"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1727
+#: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Esquecer"
@@ -3570,25 +3648,14 @@ msgid "Show Details in Lock Screen"
 msgstr "Mostrar detalles na pantalla de bloqueo"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1745
+#: ../panels/power/cc-power-panel.c:1751 ../panels/power/cc-power-panel.c:1758
 #: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/privacy/cc-privacy-panel.c:117
 #: ../panels/universal-access/cc-ua-panel.c:253
 #: ../panels/universal-access/cc-ua-panel.c:573
 #: ../panels/universal-access/cc-ua-panel.c:699
 msgid "On"
 msgstr "Activado"
-
-#: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1732 ../panels/power/cc-power-panel.c:1743
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
-#: ../panels/universal-access/cc-ua-panel.c:253
-#: ../panels/universal-access/cc-ua-panel.c:573
-#: ../panels/universal-access/cc-ua-panel.c:699
-#: ../panels/universal-access/uap.ui.h:6
-msgid "Off"
-msgstr "Desactivado"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3834,7 +3901,7 @@ msgstr "Computador"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:537 ../panels/power/cc-power-panel.c:747
-#: ../panels/power/cc-power-panel.c:2043
+#: ../panels/power/cc-power-panel.c:2082
 msgid "Battery"
 msgstr "Batería"
 
@@ -3878,75 +3945,75 @@ msgstr "Baleir"
 msgid "Batteries"
 msgstr "Baterías"
 
-#: ../panels/power/cc-power-panel.c:1138
+#: ../panels/power/cc-power-panel.c:1151
 msgid "When _idle"
 msgstr "Ao estar _inactivo"
 
-#: ../panels/power/cc-power-panel.c:1507
+#: ../panels/power/cc-power-panel.c:1520
 msgid "Power Saving"
 msgstr "Aforro de enerxí­a"
 
-#: ../panels/power/cc-power-panel.c:1535
+#: ../panels/power/cc-power-panel.c:1548
 msgid "_Screen brightness"
 msgstr "Brillo da pantall_a"
 
-#: ../panels/power/cc-power-panel.c:1541
+#: ../panels/power/cc-power-panel.c:1554
 msgid "_Keyboard brightness"
 msgstr "Brillo do _teclado"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1564
 msgid "_Dim screen when inactive"
 msgstr "_Escurecer a pantalla se está inactivo"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1589
 msgid "_Blank screen"
 msgstr "Pantalla en _branco"
 
-#: ../panels/power/cc-power-panel.c:1613
+#: ../panels/power/cc-power-panel.c:1626
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
-#: ../panels/power/cc-power-panel.c:1618
+#: ../panels/power/cc-power-panel.c:1631
 msgid "Turns off wireless devices"
 msgstr "Desactiva os dispositivos sen fíos"
 
-#: ../panels/power/cc-power-panel.c:1643
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Mobile broadband"
 msgstr "Banda larga _móbil"
 
-#: ../panels/power/cc-power-panel.c:1648
+#: ../panels/power/cc-power-panel.c:1661
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Desactiva os dispositivos de banda larga móbil (3G, 4G, WiMax, etc.)"
 
-#: ../panels/power/cc-power-panel.c:1683
+#: ../panels/power/cc-power-panel.c:1696
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1734
+#: ../panels/power/cc-power-panel.c:1747
 msgid "When on battery power"
 msgstr "Ao usar enerxía da batería"
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1749
 msgid "When plugged in"
 msgstr "Ao estar enchufado"
 
-#: ../panels/power/cc-power-panel.c:1863
+#: ../panels/power/cc-power-panel.c:1878
 msgid "Suspend & Power Off"
 msgstr "Suspender e apagar"
 
-#: ../panels/power/cc-power-panel.c:1896
+#: ../panels/power/cc-power-panel.c:1911
 msgid "_Automatic suspend"
 msgstr "Suspensión _automática"
 
-#: ../panels/power/cc-power-panel.c:1920
+#: ../panels/power/cc-power-panel.c:1935
 msgid "When battery power is _critical"
 msgstr "Cando a enerxía da batería é _crítica"
 
-#: ../panels/power/cc-power-panel.c:1953
+#: ../panels/power/cc-power-panel.c:1992
 msgid "Power Off"
 msgstr "Apagar"
 
-#: ../panels/power/cc-power-panel.c:2095
+#: ../panels/power/cc-power-panel.c:2134
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -4429,10 +4496,6 @@ msgstr "Fonte do papel"
 msgid "Output Tray"
 msgstr "Bandexa de saída"
 
-#: ../panels/printers/pp-options-dialog.c:86
-msgid "Resolution"
-msgstr "Resolución"
-
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "GhostScript pre-filtering"
 msgstr "Prefiltrado GhostScript"
@@ -4586,10 +4649,6 @@ msgstr "Traballos"
 msgid "Show _Jobs"
 msgstr "Mostrar _traballos"
 
-#: ../panels/printers/printers.ui.h:12
-msgid "Model"
-msgstr "Modelo"
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "etiqueta"
@@ -4626,27 +4685,39 @@ msgstr ""
 "O servizo do sistema de impresión\n"
 "semella que non está dispoñíbel."
 
-#: ../panels/privacy/cc-privacy-panel.c:104
-msgid "Hidden"
-msgstr "Oculto"
-
-#: ../panels/privacy/cc-privacy-panel.c:104
-msgid "Visible"
-msgstr "Visibilidade"
-
-#: ../panels/privacy/cc-privacy-panel.c:272 ../panels/privacy/privacy.ui.h:31
+#: ../panels/privacy/cc-privacy-panel.c:245 ../panels/privacy/privacy.ui.h:26
 msgid "Screen Lock"
 msgstr "Bloqueo de pantalla"
 
-#: ../panels/privacy/cc-privacy-panel.c:339 ../panels/privacy/privacy.ui.h:9
-msgid "Name & Visibility"
-msgstr "Nome e visibilidade"
-
-#: ../panels/privacy/cc-privacy-panel.c:447 ../panels/privacy/privacy.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:358 ../panels/privacy/privacy.ui.h:20
 msgid "Usage & History"
 msgstr "Uso e historial"
 
-#: ../panels/privacy/cc-privacy-panel.c:577 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:486
+msgid "Empty all items from Trash?"
+msgstr "Desexa baleirar todos os elementos do lixo?"
+
+#: ../panels/privacy/cc-privacy-panel.c:487
+msgid "All items in the Trash will be permanently deleted."
+msgstr "Pérdese permanentemente todos os elementos do lixo."
+
+#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:32
+msgid "_Empty Trash"
+msgstr "_Baleirar o lixo"
+
+#: ../panels/privacy/cc-privacy-panel.c:511
+msgid "Delete all the temporary files?"
+msgstr "Desexa eliminar todos os ficheiros temporais?"
+
+#: ../panels/privacy/cc-privacy-panel.c:512
+msgid "All the temporary files will be permanently deleted."
+msgstr "Todos os ficheiros temporais eliminaranse de forma permanente."
+
+#: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
+msgid "_Purge Temporary Files"
+msgstr "_Eliminar os ficheiros temporais"
+
+#: ../panels/privacy/cc-privacy-panel.c:535 ../panels/privacy/privacy.ui.h:31
 msgid "Purge Trash & Temporary Files"
 msgstr "Limpar o lixo e ficheiros temporais"
 
@@ -4675,67 +4746,51 @@ msgstr "A pantalla apágase"
 msgid "30 seconds"
 msgstr "30 segundos"
 
-#: ../panels/privacy/privacy.ui.h:11
-msgid "Control how you appear on the screen and the network."
-msgstr "Controla como aparece vostede na pantalla e na rede."
-
-#: ../panels/privacy/privacy.ui.h:12
-msgid "Display _full name in top bar"
-msgstr "Mostrar o _nome completo na barra superior"
-
-#: ../panels/privacy/privacy.ui.h:13
-msgid "Display full name in _lock screen"
-msgstr "Mostrar o nome completo na _pantalla de bloqueo"
-
-#: ../panels/privacy/privacy.ui.h:14
-msgid "_Stealth Mode"
-msgstr "_Modo roubo"
-
-#: ../panels/privacy/privacy.ui.h:15
+#: ../panels/privacy/privacy.ui.h:9
 msgid "Immediately"
 msgstr "Inmediatamente"
 
-#: ../panels/privacy/privacy.ui.h:16
+#: ../panels/privacy/privacy.ui.h:10
 msgid "1 day"
 msgstr "1 día"
 
-#: ../panels/privacy/privacy.ui.h:17
+#: ../panels/privacy/privacy.ui.h:11
 msgid "2 days"
 msgstr "2 días"
 
-#: ../panels/privacy/privacy.ui.h:18
+#: ../panels/privacy/privacy.ui.h:12
 msgid "3 days"
 msgstr "3 días"
 
-#: ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/privacy.ui.h:13
 msgid "4 days"
 msgstr "4 días"
 
-#: ../panels/privacy/privacy.ui.h:20
+#: ../panels/privacy/privacy.ui.h:14
 msgid "5 days"
 msgstr "5 días"
 
-#: ../panels/privacy/privacy.ui.h:21
+#: ../panels/privacy/privacy.ui.h:15
 msgid "6 days"
 msgstr "6 días"
 
-#: ../panels/privacy/privacy.ui.h:22
+#: ../panels/privacy/privacy.ui.h:16
 msgid "7 days"
 msgstr "7 días"
 
-#: ../panels/privacy/privacy.ui.h:23
+#: ../panels/privacy/privacy.ui.h:17
 msgid "14 days"
 msgstr "14 días"
 
-#: ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/privacy.ui.h:18
 msgid "30 days"
 msgstr "30 días"
 
-#: ../panels/privacy/privacy.ui.h:25
+#: ../panels/privacy/privacy.ui.h:19
 msgid "Forever"
 msgstr "Para sempre"
 
-#: ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/privacy.ui.h:21
 msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
@@ -4743,43 +4798,35 @@ msgstr ""
 "Lembrar o historial fai as cousas máis doadas de atopar de novo. Estes "
 "elementos nunca se comparten pola rede."
 
-#: ../panels/privacy/privacy.ui.h:28
+#: ../panels/privacy/privacy.ui.h:22
 msgid "Cl_ear Recent History"
 msgstr "_Limpar o historial de recentes"
 
-#: ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/privacy.ui.h:24
 msgid "_Recently Used"
 msgstr "Usados _recentemente"
 
-#: ../panels/privacy/privacy.ui.h:30
+#: ../panels/privacy/privacy.ui.h:25
 msgid "Retain _History"
 msgstr "Manter _historial"
 
-#: ../panels/privacy/privacy.ui.h:32
+#: ../panels/privacy/privacy.ui.h:27
 msgid "The Screen Lock protects your privacy when you are away."
 msgstr "A pantalla de bloqueo protexe a súa privacidade cando se ausenta."
 
-#: ../panels/privacy/privacy.ui.h:33
+#: ../panels/privacy/privacy.ui.h:28
 msgid "Automatic Screen _Lock"
 msgstr "_Bloqueo de pantalla automático"
 
-#: ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/privacy.ui.h:29
 msgid "Lock screen _after blank for"
 msgstr "Bloquear a pantalla _despois de"
 
-#: ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/privacy.ui.h:30
 msgid "Show _Notifications"
 msgstr "Mostrar _notificacións"
 
-#: ../panels/privacy/privacy.ui.h:37
-msgid "_Empty Trash"
-msgstr "_Baleirar o lixo"
-
-#: ../panels/privacy/privacy.ui.h:38
-msgid "_Purge Temporary Files"
-msgstr "_Eliminar os ficheiros temporais"
-
-#: ../panels/privacy/privacy.ui.h:39
+#: ../panels/privacy/privacy.ui.h:34
 msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
@@ -4787,15 +4834,15 @@ msgstr ""
 "A limpeza do lixo e ficheiros temporais automaticamente axúdalle a manter o "
 "seu computador libre de información sensíbel."
 
-#: ../panels/privacy/privacy.ui.h:40
+#: ../panels/privacy/privacy.ui.h:35
 msgid "Automatically empty _Trash"
 msgstr "Limpar o _lixo automaticamente"
 
-#: ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/privacy.ui.h:36
 msgid "Automatically purge Temporary _Files"
 msgstr "Limpar os _ficheiros temporais automaticamente"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:37
 msgid "Purge _After"
 msgstr "Limpar _despois de"
 
@@ -5441,8 +5488,8 @@ msgstr ""
 "de teclas;Teclas do rato;"
 
 #: ../panels/universal-access/uap.ui.h:1
-msgid "Show Status When _Inactive"
-msgstr "Mostrar o estado ao estar _inactivo"
+msgid "_Always Show Universal Access Menu"
+msgstr "Mostrar _sempre o menú de Acceso Universal"
 
 #: ../panels/universal-access/uap.ui.h:2
 msgid "Seeing"
@@ -5902,31 +5949,39 @@ msgid "Set a password now"
 msgstr "Estabelecer un contrasinal agora"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
-msgid "_Confirm Password"
-msgstr "_Confirmar contrasinal"
+msgid "_Verify"
+msgstr "_Verificar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:11
+msgid ""
+"Enterprise login allows an existing centrally managed user account to be "
+"used on this device."
+msgstr ""
+"O inicio de sesión corporativo permítelle xestionar unha conta de usuario "
+"xestionada de forma centralizada para usala neste dispositivo."
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Domain"
 msgstr "_Dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "_Login Name"
-msgstr "Nome de _usuario"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "Login _Password"
-msgstr "_Contrasinal de inicio de sesión"
+msgid ""
+"Go online to add\n"
+"enterprise login accounts."
+msgstr ""
+"Conéctese para engadir contas\n"
+"de inicio de sesión corporativo."
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "_Enroll"
 msgstr "_Unirse"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:16
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Inicio de sesión do administrador do dominio"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:17
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5936,11 +5991,11 @@ msgstr ""
 "formar parte dun dominio. Pida ao administrador do seu sistema \n"
 "que escriba aquí o contrasinal do dominio."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:20
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator _Name"
 msgstr "_Nome do administrador"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:21
+#: ../panels/user-accounts/data/account-dialog.ui.h:22
 msgid "Administrator Password"
 msgstr "Contrasinal do administrador"
 
@@ -6019,8 +6074,8 @@ msgid "Login History"
 msgstr "Historial de inicio de sesión"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "C_onfirm New Password"
-msgstr "_Confirmar novo contrasinal"
+msgid "_Verify New Password"
+msgstr "_Verificar novo contrasinal"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "_New Password"
@@ -6199,37 +6254,46 @@ msgctxt "Password hint"
 msgid "Try to add more letters, numbers and symbols."
 msgstr "Tente engadir máis letras, números e símbolos."
 
-#: ../panels/user-accounts/pw-utils.c:119
+#: ../panels/user-accounts/pw-utils.c:118
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
 msgstr "Misture letras en maiúsculas e minúsculas, e use un número ou dous."
 
-#: ../panels/user-accounts/pw-utils.c:141
-#: ../panels/user-accounts/pw-utils.c:171
+#: ../panels/user-accounts/pw-utils.c:120
+msgctxt "Password hint"
+msgid ""
+"Good password! Adding more letters, numbers and punctuation will make it "
+"stronger."
+msgstr ""
+"Bo contrasinal! Se engade máis letras, números e signos de puntuación farao "
+"máis forte."
+
+#: ../panels/user-accounts/pw-utils.c:142
+#: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
 msgid "Strength: Weak"
 msgstr "Forza: Débil"
 
-#: ../panels/user-accounts/pw-utils.c:145
-#: ../panels/user-accounts/pw-utils.c:172
+#: ../panels/user-accounts/pw-utils.c:146
+#: ../panels/user-accounts/pw-utils.c:173
 msgctxt "Password strength"
 msgid "Strength: Low"
 msgstr "Forza: Baixa"
 
-#: ../panels/user-accounts/pw-utils.c:148
-#: ../panels/user-accounts/pw-utils.c:173
+#: ../panels/user-accounts/pw-utils.c:149
+#: ../panels/user-accounts/pw-utils.c:174
 msgctxt "Password strength"
 msgid "Strength: Medium"
 msgstr "Forza: Media"
 
-#: ../panels/user-accounts/pw-utils.c:151
-#: ../panels/user-accounts/pw-utils.c:174
+#: ../panels/user-accounts/pw-utils.c:152
+#: ../panels/user-accounts/pw-utils.c:175
 msgctxt "Password strength"
 msgid "Strength: Good"
 msgstr "Forza: Boa"
 
-#: ../panels/user-accounts/pw-utils.c:154
-#: ../panels/user-accounts/pw-utils.c:175
+#: ../panels/user-accounts/pw-utils.c:155
+#: ../panels/user-accounts/pw-utils.c:176
 msgctxt "Password strength"
 msgid "Strength: High"
 msgstr "Forza: Alta"
@@ -6283,66 +6347,65 @@ msgstr "O novo contrasinal non contén suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:35
+msgid "Should match the web address of your account provider."
+msgstr "Debería coincidir co enderezo web do seu fornecedor de conta."
+
+#: ../panels/user-accounts/um-account-dialog.c:222
 msgid "Failed to add account"
 msgstr "Produciuse un erro ao engadir a conta"
 
-#: ../panels/user-accounts/um-account-dialog.c:330
+#: ../panels/user-accounts/um-account-dialog.c:316
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "Usarase como nome para o seu cartafol persoal e non pode cambiarse."
 
-#: ../panels/user-accounts/um-account-dialog.c:420
+#: ../panels/user-accounts/um-account-dialog.c:449
 msgid "Passwords do not match."
 msgstr "Os contrasinais non coinciden."
 
-#: ../panels/user-accounts/um-account-dialog.c:421
-#: ../panels/user-accounts/um-password-dialog.c:298
-msgid "Passwords do not match"
-msgstr "Os contrasinais non coinciden"
-
-#: ../panels/user-accounts/um-account-dialog.c:674
-#: ../panels/user-accounts/um-account-dialog.c:720
+#: ../panels/user-accounts/um-account-dialog.c:719
+#: ../panels/user-accounts/um-account-dialog.c:765
 msgid "Failed to register account"
 msgstr "Produciuse un erro ao rexistrar a conta"
 
-#: ../panels/user-accounts/um-account-dialog.c:858
+#: ../panels/user-accounts/um-account-dialog.c:903
 msgid "No supported way to authenticate with this domain"
 msgstr "Non hai unha maneira admitida de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:917
+#: ../panels/user-accounts/um-account-dialog.c:962
 msgid "Failed to join domain"
 msgstr "Produciuse un erro ao unirse ao dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:978
+#: ../panels/user-accounts/um-account-dialog.c:1023
 msgid ""
-"Login not recognized.\n"
+"That login name didn't work.\n"
 "Please try again."
 msgstr ""
-"Inicio de sesión non recoñecido.\n"
+"Ese nome de inicio de sesión non funcionou.\n"
 "Ténteo de novo."
 
-#: ../panels/user-accounts/um-account-dialog.c:986
+#: ../panels/user-accounts/um-account-dialog.c:1030
 msgid ""
-"Invalid password.\n"
+"That login password didn't work.\n"
 "Please try again."
 msgstr ""
-"Contrasinal incorrecto.\n"
-"Ténteo de novo"
+"Ese contrasinal de inicio de sesión non funcionou.\n"
+"Ténteo de novo."
 
-#: ../panels/user-accounts/um-account-dialog.c:995
+#: ../panels/user-accounts/um-account-dialog.c:1038
 msgid "Failed to log into domain"
 msgstr "Produciuse un erro ao iniciar sesión no dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:1053
-msgid "Domain not found."
-msgstr "Dominio non atopado."
+#: ../panels/user-accounts/um-account-dialog.c:1096
+msgid "Unable find the domain. Maybe you misspelled it?"
+msgstr "Non foi posíbel atopar o dominio. Pode ser que o escribira mal?"
 
-#: ../panels/user-accounts/um-account-dialog.c:1396
+#: ../panels/user-accounts/um-account-dialog.c:1446
 msgid "Add User"
 msgstr "Engadir usuario"
 
 #. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1409
+#: ../panels/user-accounts/um-account-dialog.c:1459
 msgid "_Enterprise Login"
 msgstr "Inicio de s_esión corporativo"
 
@@ -6441,25 +6504,71 @@ msgstr "Esta semana"
 msgid "Last Week"
 msgstr "Última semana"
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#. Translators: This is a date format string in the style of "Feb 18",
+#. shown as the first day of a week on login history dialog.
+#. Translators: This is a date format string in the style of "Feb 24",
+#. shown as the last day of a week on login history dialog.
+#: ../panels/user-accounts/um-history-dialog.c:97
+#: ../panels/user-accounts/um-history-dialog.c:101
+msgctxt "login history week label"
+msgid "%b %e"
+msgstr "%e de %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013",
+#. shown as the last day of a week on login history dialog.
+#: ../panels/user-accounts/um-history-dialog.c:106
+msgctxt "login history week label"
+msgid "%b %e, %Y"
+msgstr "%e de %b de %Y"
+
+#. Translators: This indicates a week label on a login history.
+#. The first %s is the first day of a week, and the second %s the last day.
+#: ../panels/user-accounts/um-history-dialog.c:111
+#, c-format
+msgctxt "login history week label"
+msgid "%s - %s"
+msgstr "%s - %s"
+
+#. Translators: This is a time format string in the style of "22:58".
+#. It indicates a login time which follows a date.
+#: ../panels/user-accounts/um-history-dialog.c:195
+#: ../panels/user-accounts/um-user-panel.c:626
+msgctxt "login date-time"
+msgid "%k:%M"
+msgstr "%k:%M"
+
+#. Translators: This indicates a login date-time.
+#. The first %s is a date, and the second %s a time.
+#: ../panels/user-accounts/um-history-dialog.c:198
+#: ../panels/user-accounts/um-user-panel.c:630
+#, c-format
+msgctxt "login date-time"
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#: ../panels/user-accounts/um-history-dialog.c:260
+msgid "Session Ended"
+msgstr "Sesión rematada"
+
+#: ../panels/user-accounts/um-history-dialog.c:266
+msgid "Session Started"
+msgstr "Sesión iniciada"
+
+#: ../panels/user-accounts/um-password-dialog.c:146
 msgid "Please choose another password."
 msgstr "Seleccione outro contrasinal."
 
-#: ../panels/user-accounts/um-password-dialog.c:163
+#: ../panels/user-accounts/um-password-dialog.c:155
 msgid "Please type your current password again."
 msgstr "Escriba o seu contrasinal actual de novo."
 
-#: ../panels/user-accounts/um-password-dialog.c:169
+#: ../panels/user-accounts/um-password-dialog.c:161
 msgid "Password could not be changed"
 msgstr "Non foi posíbel cambiar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:296
+#: ../panels/user-accounts/um-password-dialog.c:287
 msgid "The passwords do not match."
 msgstr "Os contrasinais non coinciden."
-
-#: ../panels/user-accounts/um-password-dialog.c:374
-msgid "Wrong password"
-msgstr "Contrasinal incorrecto"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6567,15 +6676,15 @@ msgstr "Ningún"
 msgid "Logged in"
 msgstr "Conectado"
 
-#: ../panels/user-accounts/um-user-panel.c:994
+#: ../panels/user-accounts/um-user-panel.c:999
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un erro ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:996
+#: ../panels/user-accounts/um-user-panel.c:1001
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:1037
+#: ../panels/user-accounts/um-user-panel.c:1042
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6583,12 +6692,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/user-accounts/um-user-panel.c:1080
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1086
-#: ../panels/user-accounts/um-user-panel.c:1375
+#: ../panels/user-accounts/um-user-panel.c:1091
+#: ../panels/user-accounts/um-user-panel.c:1380
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6596,12 +6705,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1101
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1108
-#: ../panels/user-accounts/um-user-panel.c:1380
+#: ../panels/user-accounts/um-user-panel.c:1113
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6609,31 +6718,41 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1290
+#: ../panels/user-accounts/um-user-panel.c:1295
 msgid "My Account"
 msgstr "A miña conta"
 
-#: ../panels/user-accounts/um-utils.c:535
+#: ../panels/user-accounts/um-utils.c:551
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Xa existe un usuario co nome de usuario «%s»"
 
-#: ../panels/user-accounts/um-utils.c:539
+#: ../panels/user-accounts/um-utils.c:555
 #, c-format
 msgid "The username is too long"
 msgstr "O nome de usuario é demasiado longo"
 
-#: ../panels/user-accounts/um-utils.c:542
+#: ../panels/user-accounts/um-utils.c:558
 msgid "The username cannot start with a '-'"
 msgstr "O nome de usuario non pode comezar con «-»"
 
-#: ../panels/user-accounts/um-utils.c:545
+#: ../panels/user-accounts/um-utils.c:561
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
 msgstr ""
 "O nome de usuario debe estar formado por letras en maiúsculas e minúsculas "
 "desde o «a» ao «z», díxitos, e calquera dos caracteres «.», «-» e «_»"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/user-accounts/um-utils.c:811
+msgid "%b %e"
+msgstr "%e de %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/user-accounts/um-utils.c:815
+msgid "%b %e, %Y"
+msgstr "%e de %b de %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6786,86 +6905,86 @@ msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1078
+#: ../panels/wacom/gsd-wacom-device.c:1063
 msgid "Left Ring"
 msgstr "Anel esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1089
+#: ../panels/wacom/gsd-wacom-device.c:1074
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo de anel esquerdo #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1109
+#: ../panels/wacom/gsd-wacom-device.c:1094
 msgid "Right Ring"
 msgstr "Anel dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1120
+#: ../panels/wacom/gsd-wacom-device.c:1105
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo de anel dereito #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1162
+#: ../panels/wacom/gsd-wacom-device.c:1147
 msgid "Left Touchstrip"
 msgstr "Banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1173
+#: ../panels/wacom/gsd-wacom-device.c:1158
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de banda táctil esquerda nº %d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1193
+#: ../panels/wacom/gsd-wacom-device.c:1178
 msgid "Right Touchstrip"
 msgstr "Banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1204
+#: ../panels/wacom/gsd-wacom-device.c:1189
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de banda táctil dereita nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1230
+#: ../panels/wacom/gsd-wacom-device.c:1215
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1217
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1235
+#: ../panels/wacom/gsd-wacom-device.c:1220
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1237
+#: ../panels/wacom/gsd-wacom-device.c:1222
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1242
+#: ../panels/wacom/gsd-wacom-device.c:1227
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo conmutador #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1351
+#: ../panels/wacom/gsd-wacom-device.c:1336
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1354
+#: ../panels/wacom/gsd-wacom-device.c:1339
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1357
+#: ../panels/wacom/gsd-wacom-device.c:1342
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1360
+#: ../panels/wacom/gsd-wacom-device.c:1345
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior #%d"
@@ -6997,33 +7116,165 @@ msgstr "Axuda"
 msgid "Quit"
 msgstr "Saír"
 
-#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
-msgid "Settings"
-msgstr "Preferencias"
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1466
+msgid "All Settings"
+msgstr "Todas as preferencias"
 
 #. Add categories
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:865
 msgctxt "category"
 msgid "Personal"
 msgstr "Persoal"
 
-#: ../shell/cc-window.c:861
+#: ../shell/cc-window.c:866
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:862
+#: ../shell/cc-window.c:867
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1448
-msgid "All Settings"
-msgstr "Todas as preferencias"
+#: ../shell/cc-window.c:1573 ../shell/gnome-control-center.desktop.in.in.h:1
+msgid "Settings"
+msgstr "Preferencias"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "_Region:"
+#~ msgstr "_Rexión:"
+
+#~ msgid "_City:"
+#~ msgstr "_Cidade:"
+
+#~ msgid "_Network Time"
+#~ msgstr "_Hora de rede"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Set the time one hour ahead."
+#~ msgstr "Axustar a hora unha hora cara adiante."
+
+#~ msgid "Set the time one hour back."
+#~ msgstr "Axustar a hora unha hora cara atrás."
+
+#~ msgid "Set the time one minute ahead."
+#~ msgstr "Axustar a hora un minuto cara adiante."
+
+#~ msgid "Set the time one minute back."
+#~ msgstr "Axustar a hora un minuto cara atrás."
+
+#~ msgid "AM/PM"
+#~ msgstr "AM/PM"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Counterclockwise"
+#~ msgstr "Antihorario"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Clockwise"
+#~ msgstr "Horario"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "180 Degrees"
+#~ msgstr "180 graos"
+
+#~ msgid "Monitor"
+#~ msgstr "Monitor"
+
+#~ msgid "Drag to change primary display."
+#~ msgstr "Arrastrar para cambiar a pantalla principal."
+
+#~ msgid ""
+#~ "Select a monitor to change its properties; drag it to rearrange its "
+#~ "placement."
+#~ msgstr ""
+#~ "Seleccione un monitor para cambiar as súas propiedades, ao arrastralo "
+#~ "reubícao."
+
+#~ msgid "%a %R"
+#~ msgstr "%a %R"
+
+#~ msgid "Failed to apply configuration: %s"
+#~ msgstr "Produciuse un erro ao aplicar a configuración: %s"
+
+#~ msgid "Could not save the monitor configuration"
+#~ msgstr "Non foi posíbel gardar a configuración do monitor"
+
+#~ msgid "_Resolution"
+#~ msgstr "_Resolución"
+
+#~ msgid "R_otation"
+#~ msgstr "R_otación"
+
+#~ msgid "_Mirror displays"
+#~ msgstr "_Espellar pantallas"
+
+#~ msgid "Note: may limit resolution options"
+#~ msgstr "Nota: pode limitar as opcións de resolución"
+
+#~ msgid "_Detect Displays"
+#~ msgstr "_Detectar pantallas"
+
+#~ msgid "Hidden"
+#~ msgstr "Oculto"
+
+#~ msgid "Visible"
+#~ msgstr "Visibilidade"
+
+#~ msgid "Name & Visibility"
+#~ msgstr "Nome e visibilidade"
+
+#~ msgid "Control how you appear on the screen and the network."
+#~ msgstr "Controla como aparece vostede na pantalla e na rede."
+
+#~ msgid "Display _full name in top bar"
+#~ msgstr "Mostrar o _nome completo na barra superior"
+
+#~ msgid "Display full name in _lock screen"
+#~ msgstr "Mostrar o nome completo na _pantalla de bloqueo"
+
+#~ msgid "_Stealth Mode"
+#~ msgstr "_Modo roubo"
+
+#~ msgid "Show Status When _Inactive"
+#~ msgstr "Mostrar o estado ao estar _inactivo"
+
+#~ msgid "_Confirm Password"
+#~ msgstr "_Confirmar contrasinal"
+
+#~ msgid "_Login Name"
+#~ msgstr "Nome de _usuario"
+
+#~ msgid "Login _Password"
+#~ msgstr "_Contrasinal de inicio de sesión"
+
+#~ msgid "C_onfirm New Password"
+#~ msgstr "_Confirmar novo contrasinal"
+
+#~ msgid "Passwords do not match"
+#~ msgstr "Os contrasinais non coinciden"
+
+#~ msgid ""
+#~ "Login not recognized.\n"
+#~ "Please try again."
+#~ msgstr ""
+#~ "Inicio de sesión non recoñecido.\n"
+#~ "Ténteo de novo."
+
+#~ msgid "Domain not found."
+#~ msgstr "Dominio non atopado."
+
+#~ msgid "Wrong password"
+#~ msgstr "Contrasinal incorrecto"
 
 #~ msgctxt "Password hint"
 #~ msgid "Try to add more characters."
