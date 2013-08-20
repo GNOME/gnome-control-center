@@ -450,10 +450,46 @@ set_purge_after_value_for_combo (GtkComboBox    *combo_box,
   gtk_combo_box_set_active (combo_box, i - 1);
 }
 
+static gboolean
+run_warning (GtkWindow *parent, char *prompt, char *text, char *button_title)
+{
+  GtkWidget *dialog;
+  int result;
+  dialog = gtk_message_dialog_new (parent,
+                                   0,
+                                   GTK_MESSAGE_WARNING,
+                                   GTK_BUTTONS_NONE,
+                                   NULL);
+  g_object_set (dialog,
+                "text", prompt,
+                "secondary-text", text,
+                NULL);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), button_title, GTK_RESPONSE_OK);
+
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), FALSE);
+
+  result = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  return result == GTK_RESPONSE_OK;
+}
+
 static void
 empty_trash (CcPrivacyPanel *self)
 {
   GDBusConnection *bus;
+  gboolean result;
+  GtkWidget *dialog;
+
+  dialog = WID ("trash_dialog");
+  result = run_warning (GTK_WINDOW (dialog), _("Empty all items from Trash?"),
+                        _("All items in the Trash will be permanently deleted."),
+                        _("_Empty Trash"));
+
+  if (!result)
+    return; 
+
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
                           "org.gnome.SettingsDaemon",
@@ -468,6 +504,17 @@ static void
 purge_temp (CcPrivacyPanel *self)
 {
   GDBusConnection *bus;
+  gboolean result;
+  GtkWidget *dialog;
+
+  dialog = WID ("trash_dialog");
+  result = run_warning (GTK_WINDOW (dialog), _("Delete all the temporary files?"),
+                        _("All the temporary files will be permanently deleted."),
+                        _("_Purge Temporary Files"));
+
+  if (!result)
+    return; 
+
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
                           "org.gnome.SettingsDaemon",
