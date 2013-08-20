@@ -1205,12 +1205,9 @@ window_key_press_event (GtkWidget   *win,
   gboolean retval;
   GdkModifierType state;
   gboolean is_rtl;
-
-  if (gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->priv->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
-    return GDK_EVENT_STOP;
-
-  if (event->state == 0)
-    return GDK_EVENT_PROPAGATE;
+  gboolean overview;
+  gboolean search;
+  const gchar *id;
 
   retval = GDK_EVENT_PROPAGATE;
   state = event->state;
@@ -1218,6 +1215,14 @@ window_key_press_event (GtkWidget   *win,
   gdk_keymap_add_virtual_modifiers (keymap, &state);
   state = state & gtk_accelerator_get_default_mod_mask ();
   is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
+
+  id = gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack));
+  overview = g_str_equal (id, OVERVIEW_PAGE);
+  search = g_str_equal (id, SEARCH_PAGE);
+
+  if ((overview || search) &&
+      gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->priv->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
+    return GDK_EVENT_STOP;
 
   if (state == GDK_CONTROL_MASK)
     {
@@ -1227,10 +1232,13 @@ window_key_press_event (GtkWidget   *win,
           case GDK_KEY_S:
           case GDK_KEY_f:
           case GDK_KEY_F:
+            if (!overview && !search)
+              break;
             retval = !gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->priv->search_bar));
             gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->priv->search_bar), retval);
             if (retval)
               gtk_widget_grab_focus (self->priv->search_entry);
+            retval = GDK_EVENT_STOP;
             break;
           case GDK_KEY_Q:
           case GDK_KEY_q:
@@ -1239,7 +1247,7 @@ window_key_press_event (GtkWidget   *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
+            if (!overview)
               shell_show_overview_page (self);
             retval = GDK_EVENT_STOP;
             break;
@@ -1247,7 +1255,7 @@ window_key_press_event (GtkWidget   *win,
     }
   else if (state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up)
     {
-      if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack)), OVERVIEW_PAGE) != 0)
+      if (!overview)
         shell_show_overview_page (self);
       retval = GDK_EVENT_STOP;
     }
