@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-19 17:52+0000\n"
-"PO-Revision-Date: 2013-08-19 23:46+0500\n"
+"POT-Creation-Date: 2013-08-20 13:51+0000\n"
+"PO-Revision-Date: 2013-08-20 19:23+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "Language: tg\n"
@@ -20,37 +20,47 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: ../panels/background/background.ui.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Пасзамина"
+
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:2
+#: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
 msgstr "Тағйироти рӯз"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
+#| msgid "Lock screen"
+msgid "Lock Screen"
+msgstr "Экрани қулф"
+
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Tile"
 msgstr "Сафолпӯш"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "Танзими андоза"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Center"
 msgstr "Ба марказ кӯчонидан"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Scale"
 msgstr "Миқиёсбандӣ"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Fill"
 msgstr "Пуркунӣ"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Span"
 msgstr "Ваҷаб"
@@ -95,11 +105,12 @@ msgstr ""
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1202
-#: ../panels/network/net-device-wifi.c:1408
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
 #: ../panels/search/cc-search-locations-dialog.c:682
 #: ../panels/sharing/cc-sharing-panel.c:421
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
@@ -131,13 +142,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Бе пасзаминаи мизи корӣ"
 
-#: ../panels/background/cc-background-panel.c:460
+#: ../panels/background/cc-background-panel.c:497
 msgid "Current background"
 msgstr "Пасзаминаи ҷорӣ"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Пасзамина"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -970,6 +977,34 @@ msgstr "Забон"
 msgid "_Done"
 msgstr "_Тайёр"
 
+#. Translators: This is the full date and time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:322
+#| msgid "%a %l:%M %p"
+msgid "%e %B %Y, %l:%M %p"
+msgstr "%e %B %Y, %l:%M %p"
+
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:327
+msgid "%e %B %Y, %R"
+msgstr "%e %B %Y, %R"
+
+#. Translators: UTC here means the Coordinated Universal Time.
+#. * %z will be replaced by the offset from UTC e.g. UTC+0200
+#: ../panels/datetime/cc-datetime-panel.c:543
+msgid "UTC%z"
+msgstr "UTC%z"
+
+#. Translators: This is the time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:548
+#| msgid "%a %l:%M %p"
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#. Translators: This is the time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:553
+msgid "%R"
+msgstr "%R"
+
 #: ../panels/datetime/datetime.ui.h:1
 msgid "January"
 msgstr "Январ"
@@ -1019,65 +1054,88 @@ msgid "December"
 msgstr "Декабр"
 
 #: ../panels/datetime/datetime.ui.h:13
-msgid "_Region:"
-msgstr "_Минтақа:"
-
-#: ../panels/datetime/datetime.ui.h:14
-msgid "_City:"
-msgstr "_Шаҳр:"
-
-#: ../panels/datetime/datetime.ui.h:15
-msgid "_Network Time"
-msgstr "_Вақти шабака"
-
-#. Translator: this is the separator between hours and minutes, like in HH:MM
-#: ../panels/datetime/datetime.ui.h:17
-msgid ":"
-msgstr ":"
-
-#: ../panels/datetime/datetime.ui.h:18
-msgid "Set the time one hour ahead."
-msgstr "Соатро ба як соат пеш гузаронед."
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Set the time one hour back."
-msgstr "Соатро ба як соат қафо гузаронед."
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Set the time one minute ahead."
-msgstr "Соатро ба як дақиқа пеш гузаронед."
-
-#: ../panels/datetime/datetime.ui.h:21
-msgid "Set the time one minute back."
-msgstr "Соатро ба як дақиқа қафо гузаронед."
-
-#: ../panels/datetime/datetime.ui.h:22
-msgid "Switch between AM and PM."
-msgstr "Табдил додан дар байни AM ва PM."
-
-#: ../panels/datetime/datetime.ui.h:23
-msgid "Month"
-msgstr "Моҳ"
-
-#: ../panels/datetime/datetime.ui.h:24
-msgid "Day"
-msgstr "Рӯз"
-
-#: ../panels/datetime/datetime.ui.h:25
-msgid "Year"
-msgstr "Сол"
-
-#: ../panels/datetime/datetime.ui.h:26
-msgid "24-hour"
-msgstr "24-соат"
-
-#: ../panels/datetime/datetime.ui.h:27
-msgid "AM/PM"
-msgstr "AM/PM"
-
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date & Time"
 msgstr "Сана ва Вақт"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "Hour"
+msgstr "Соат"
+
+#. Translator: this is the separator between hours and minutes, like in HH∶MM
+#: ../panels/datetime/datetime.ui.h:16
+msgid "∶"
+msgstr "∶"
+
+#: ../panels/datetime/datetime.ui.h:17
+#| msgid "minute"
+#| msgid_plural "minutes"
+msgid "Minute"
+msgstr "Дақиқа"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Switch between AM and PM."
+msgstr "Табдил додан дар байни AM ва PM."
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Day"
+msgstr "Рӯз"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Month"
+msgstr "Моҳ"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Year"
+msgstr "Сол"
+
+#: ../panels/datetime/datetime.ui.h:22
+#| msgid "Time"
+msgid "Time Zone"
+msgstr "Минтақаи вақт"
+
+#: ../panels/datetime/datetime.ui.h:23
+#| msgid "Search for the string"
+msgid "Search for a city"
+msgstr "Ҷустуҷӯи шаҳр"
+
+#: ../panels/datetime/datetime.ui.h:24
+#| msgid "Date & Time"
+msgid "Automatic _Date & Time"
+msgstr "_Сана ва вақти худкор"
+
+#: ../panels/datetime/datetime.ui.h:25
+#| msgid "Requires Internet connection"
+msgid "Requires internet access"
+msgstr "Дастрасии интернет лозим аст"
+
+#: ../panels/datetime/datetime.ui.h:26
+#| msgid "Automatic _Connect"
+msgid "Automatic Time _Zone"
+msgstr "_Минтақаи вақти худкор"
+
+#: ../panels/datetime/datetime.ui.h:27
+#| msgid "Date & Time"
+msgid "Date & _Time"
+msgstr "Сана ва _вақт"
+
+#: ../panels/datetime/datetime.ui.h:28
+#| msgid "Firewall _Zone"
+msgid "Time _Zone"
+msgstr "Минтақаи _вақт"
+
+#: ../panels/datetime/datetime.ui.h:29
+#| msgid "Formats"
+msgid "Time _Format"
+msgstr "Формати _вақт"
+
+#: ../panels/datetime/datetime.ui.h:30
+msgid "24-hour"
+msgstr "24-соат"
+
+#: ../panels/datetime/datetime.ui.h:31
+msgid "AM / PM"
+msgstr "AM / PM"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
@@ -1159,7 +1217,6 @@ msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
 #: ../panels/display/cc-display-panel.c:2326
-#| msgid "Failed to apply configuration: %s"
 msgid "Failed to apply configuration"
 msgstr "Татбиқи танзимот қатъ шудааст"
 
@@ -2023,34 +2080,34 @@ msgstr "худкор"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:383
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:226
-#: ../panels/network/net-device-wifi.c:388
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
 #: ../panels/network/network-wifi.ui.h:17
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:229
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:235
+#: ../panels/network/net-device-wifi.c:234
 msgid "Enterprise"
 msgstr "Корхонавӣ"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:240
-#: ../panels/network/net-device-wifi.c:373
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ҳеҷ"
@@ -2072,7 +2129,7 @@ msgstr "Дирӯз"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:125
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2082,37 +2139,37 @@ msgstr[1] "%i рӯз пеш"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:53
-#: ../panels/network/net-device-wifi.c:535
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d МБ/с"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ҳеҷ"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Паст"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Хуб"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Хуб"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Аъло"
@@ -2475,7 +2532,7 @@ msgid "_Reset"
 msgstr "_Бозсозӣ"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1409
+#: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Фаромӯш кардан"
@@ -2611,17 +2668,17 @@ msgid "Bridge slaves"
 msgstr "Кӯпруки фармонбар"
 
 #: ../panels/network/net-device-ethernet.c:111
-#: ../panels/network/net-device-wifi.c:463
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "ҳеҷ гоҳ"
 
 #: ../panels/network/net-device-ethernet.c:121
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "имрӯз"
 
 #: ../panels/network/net-device-ethernet.c:123
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "дирӯз"
 
@@ -2649,7 +2706,7 @@ msgid "Wired"
 msgstr "Симӣ"
 
 #: ../panels/network/net-device-ethernet.c:355
-#: ../panels/network/net-device-wifi.c:1550
+#: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2666,7 +2723,7 @@ msgstr "Профили %d"
 msgid "Add new connection"
 msgstr "Илова кардани пайвасти нав"
 
-#: ../panels/network/net-device-wifi.c:1118
+#: ../panels/network/net-device-wifi.c:1117
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2674,13 +2731,13 @@ msgstr ""
 "Агар пайвасти Интернети шумо аз пайвасти бесим фарқ кунад, шумо метавонед "
 "хот-споти бесимро танзим кунед, то ин ки пайвастро бо дигарон мубодила кунед."
 
-#: ../panels/network/net-device-wifi.c:1122
+#: ../panels/network/net-device-wifi.c:1121
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Гузариш ба хот-споти бесим пайвасти шуморо аз <b>%s</b> қатъ мегардонад."
 
-#: ../panels/network/net-device-wifi.c:1126
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2688,23 +2745,23 @@ msgstr ""
 "Ҳангоми фаъол будани хот-спот шумо наметавонед тавассути пайвасти бесими худ "
 "ба Интернет пайваст шавед."
 
-#: ../panels/network/net-device-wifi.c:1200
+#: ../panels/network/net-device-wifi.c:1199
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Пайвасти \"ХОТ-СПОТ\" ва ҳамаи корбаронро қатъ мекунед?"
 
-#: ../panels/network/net-device-wifi.c:1203
+#: ../panels/network/net-device-wifi.c:1202
 msgid "_Stop Hotspot"
 msgstr "_Қатъ кардани \"ХОТ-СПОТ\""
 
-#: ../panels/network/net-device-wifi.c:1275
+#: ../panels/network/net-device-wifi.c:1274
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Сиёсати система истифодаи хот-спотро манъ мекунад"
 
-#: ../panels/network/net-device-wifi.c:1278
+#: ../panels/network/net-device-wifi.c:1277
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Дастгоҳи бесим ҳолати \"ХОТ-СПОТ\"-ро дастгирӣ намекунад"
 
-#: ../panels/network/net-device-wifi.c:1405
+#: ../panels/network/net-device-wifi.c:1404
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2712,19 +2769,19 @@ msgstr ""
 "Тафсилоти шабака барои шабакаҳои интихобшуда, аз он ҷумла паролҳо ва ягон "
 "конфигуратсияи фармоишӣ, гум карда мешавад."
 
-#: ../panels/network/net-device-wifi.c:1715
+#: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Таърих"
 
-#: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
 #: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
 #: ../panels/wacom/cc-wacom-page.c:525
 msgid "_Close"
 msgstr "_Пӯшидан"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1727
+#: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "__Фаромӯш кардан"
@@ -3571,7 +3628,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Намоиш додани тафсилот дар экрани қулф"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1745
+#: ../panels/power/cc-power-panel.c:1751 ../panels/power/cc-power-panel.c:1758
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:117
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3581,7 +3638,7 @@ msgid "On"
 msgstr "Фаъол"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1732 ../panels/power/cc-power-panel.c:1743
+#: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:117
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3837,7 +3894,7 @@ msgstr "Компютер"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:537 ../panels/power/cc-power-panel.c:747
-#: ../panels/power/cc-power-panel.c:2069
+#: ../panels/power/cc-power-panel.c:2082
 msgid "Battery"
 msgstr "Батарея"
 
@@ -3881,75 +3938,75 @@ msgstr "Холӣ"
 msgid "Batteries"
 msgstr "Батареяҳо"
 
-#: ../panels/power/cc-power-panel.c:1138
+#: ../panels/power/cc-power-panel.c:1151
 msgid "When _idle"
 msgstr "Вақте ки беҳаракат аст"
 
-#: ../panels/power/cc-power-panel.c:1507
+#: ../panels/power/cc-power-panel.c:1520
 msgid "Power Saving"
 msgstr "Захиракунии барқ"
 
-#: ../panels/power/cc-power-panel.c:1535
+#: ../panels/power/cc-power-panel.c:1548
 msgid "_Screen brightness"
 msgstr "_Равшании экран"
 
-#: ../panels/power/cc-power-panel.c:1541
+#: ../panels/power/cc-power-panel.c:1554
 msgid "_Keyboard brightness"
 msgstr "_Дурахшонии экран"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1564
 msgid "_Dim screen when inactive"
 msgstr "_Камнур кардани экран дар ҳолати ғайрифаъол"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1589
 msgid "_Blank screen"
 msgstr "_Экрани холӣ"
 
-#: ../panels/power/cc-power-panel.c:1613
+#: ../panels/power/cc-power-panel.c:1626
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1618
+#: ../panels/power/cc-power-panel.c:1631
 msgid "Turns off wireless devices"
 msgstr "Хомӯш кардани дастгоҳҳои бесим"
 
-#: ../panels/power/cc-power-panel.c:1643
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Mobile broadband"
 msgstr "_Паҳннавори мобилӣ"
 
-#: ../panels/power/cc-power-panel.c:1648
+#: ../panels/power/cc-power-panel.c:1661
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Дастгоҳҳои паҳннавори мобилиро (3G, 4G, WiMax, ва ғайра) хомӯш мекунад"
 
-#: ../panels/power/cc-power-panel.c:1683
+#: ../panels/power/cc-power-panel.c:1696
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1734
+#: ../panels/power/cc-power-panel.c:1747
 msgid "When on battery power"
 msgstr "Вақте ки аз батарея кор мекунад"
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1749
 msgid "When plugged in"
 msgstr "Вақте ки аз манбаъ барқ кор мекунад"
 
-#: ../panels/power/cc-power-panel.c:1865
+#: ../panels/power/cc-power-panel.c:1878
 msgid "Suspend & Power Off"
 msgstr "Таваққуф ва анҷоми кор"
 
-#: ../panels/power/cc-power-panel.c:1898
+#: ../panels/power/cc-power-panel.c:1911
 msgid "_Automatic suspend"
 msgstr "_Таваққуфи худкор"
 
-#: ../panels/power/cc-power-panel.c:1922
+#: ../panels/power/cc-power-panel.c:1935
 msgid "When battery power is _critical"
 msgstr "_Вақте ки барқи батарея қариб ба анҷом расид"
 
-#: ../panels/power/cc-power-panel.c:1979
+#: ../panels/power/cc-power-panel.c:1992
 msgid "Power Off"
 msgstr "Анҷоми кор"
 
-#: ../panels/power/cc-power-panel.c:2121
+#: ../panels/power/cc-power-panel.c:2134
 msgid "Devices"
 msgstr "Дастгоҳҳо"
 
@@ -4635,7 +4692,32 @@ msgstr "Экрани қулф"
 msgid "Usage & History"
 msgstr "Истифодабарӣ ва таърих"
 
-#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:31
+#: ../panels/privacy/cc-privacy-panel.c:486
+msgid "Empty all items from Trash?"
+msgstr "Ҳамаи объектҳои сабадро бебозгашт нест мекунед?"
+
+#: ../panels/privacy/cc-privacy-panel.c:487
+msgid "All items in the Trash will be permanently deleted."
+msgstr "Ҳамаи объектҳои сабад бебозгашт нест карда мешаванд."
+
+#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:32
+msgid "_Empty Trash"
+msgstr "_Холӣ кардани сабад"
+
+#: ../panels/privacy/cc-privacy-panel.c:511
+#| msgid "Purge Trash & Temporary Files"
+msgid "Delete all the temporary files?"
+msgstr "Ҳамаи файлҳои муваққатиро нест мекунед?"
+
+#: ../panels/privacy/cc-privacy-panel.c:512
+msgid "All the temporary files will be permanently deleted."
+msgstr "Ҳамаи файлҳои муваққатӣ бебозгашт нест карда мешаванд."
+
+#: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
+msgid "_Purge Temporary Files"
+msgstr "_Пок кардани файлҳои муваққатӣ"
+
+#: ../panels/privacy/cc-privacy-panel.c:535 ../panels/privacy/privacy.ui.h:31
 msgid "Purge Trash & Temporary Files"
 msgstr "Пок кардани сабад ва файлҳои муваққатӣ"
 
@@ -4746,14 +4828,6 @@ msgstr "Қулф кардани экран _баъд аз холӣ дар дав
 #: ../panels/privacy/privacy.ui.h:30
 msgid "Show _Notifications"
 msgstr "_Намоиш додани огоҳиҳо"
-
-#: ../panels/privacy/privacy.ui.h:32
-msgid "_Empty Trash"
-msgstr "_Холӣ кардани сабад"
-
-#: ../panels/privacy/privacy.ui.h:33
-msgid "_Purge Temporary Files"
-msgstr "_Пок кардани файлҳои муваққатӣ"
 
 #: ../panels/privacy/privacy.ui.h:34
 msgid ""
@@ -5424,8 +5498,9 @@ msgstr ""
 "ҷаҳиш;Тугмаҳои муш;"
 
 #: ../panels/universal-access/uap.ui.h:1
-msgid "Show Status When _Inactive"
-msgstr "Намоиш додани вазъият ҳангоми _ғайрифаъол будан"
+#| msgid "Universal Access"
+msgid "_Always Show Universal Access Menu"
+msgstr "_Ҳамеша намоиш додани менюи дастрасии умумӣ"
 
 #: ../panels/universal-access/uap.ui.h:2
 msgid "Seeing"
@@ -7059,7 +7134,7 @@ msgstr "Кӯмак"
 msgid "Quit"
 msgstr "Баромад"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1455
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1466
 msgid "All Settings"
 msgstr "Ҳамаи танзимот"
 
@@ -7079,13 +7154,43 @@ msgctxt "category"
 msgid "System"
 msgstr "Система"
 
-#: ../shell/cc-window.c:1563 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1573 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Танзимот"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Хусусиятҳо;Танзимот;"
+
+#~ msgid "_Region:"
+#~ msgstr "_Минтақа:"
+
+#~ msgid "_City:"
+#~ msgstr "_Шаҳр:"
+
+#~ msgid "_Network Time"
+#~ msgstr "_Вақти шабака"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Set the time one hour ahead."
+#~ msgstr "Соатро ба як соат пеш гузаронед."
+
+#~ msgid "Set the time one hour back."
+#~ msgstr "Соатро ба як соат қафо гузаронед."
+
+#~ msgid "Set the time one minute ahead."
+#~ msgstr "Соатро ба як дақиқа пеш гузаронед."
+
+#~ msgid "Set the time one minute back."
+#~ msgstr "Соатро ба як дақиқа қафо гузаронед."
+
+#~ msgid "AM/PM"
+#~ msgstr "AM/PM"
+
+#~ msgid "Show Status When _Inactive"
+#~ msgstr "Намоиш додани вазъият ҳангоми _ғайрифаъол будан"
 
 #~ msgid "Could not save the monitor configuration"
 #~ msgstr "Танзимоти монитор захира нашуд"
