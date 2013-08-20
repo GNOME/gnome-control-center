@@ -59,6 +59,4 @@ void cc_rr_labeler_show (CcRRLabeler *labeler);
 
 void cc_rr_labeler_hide (CcRRLabeler *labeler);
 
-void cc_rr_labeler_get_rgba_for_output (CcRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba_out);
-
 #endif

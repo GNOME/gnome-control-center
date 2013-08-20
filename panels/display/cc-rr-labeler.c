@@ -38,13 +38,13 @@
 #endif
 
 #include "cc-rr-labeler.h"
+#include "cc-display-panel.h"
 
 struct _CcRRLabelerPrivate {
 	GnomeRRConfig *config;
 
 	int num_outputs;
 
-	GdkRGBA *palette;
 	GtkWidget **windows;
 
 	GdkScreen  *screen;
@@ -179,8 +179,6 @@ cc_rr_labeler_finalize (GObject *object)
 		g_free (labeler->priv->windows);
 	}
 
-	g_free (labeler->priv->palette);
-
 	G_OBJECT_CLASS (cc_rr_labeler_parent_class)->finalize (object);
 }
 
@@ -194,45 +192,6 @@ count_outputs (GnomeRRConfig *config)
 		;
 
 	return i;
-}
-
-static void
-make_palette (CcRRLabeler *labeler)
-{
-	/* The idea is that we go around an hue color wheel.  We want to start
-	 * at red, go around to green/etc. and stop at blue --- because magenta
-	 * is evil.  Eeeeek, no magenta, please!
-	 *
-	 * Purple would be nice, though.  Remember that we are watered down
-	 * (i.e. low saturation), so that would be like Like berries with cream.
-	 * Mmmmm, berries.
-	 */
-	double start_hue;
-	double end_hue;
-	int i;
-
-	g_assert (labeler->priv->num_outputs > 0);
-
-	labeler->priv->palette = g_new (GdkRGBA, labeler->priv->num_outputs);
-
-	start_hue = 0.0; /* red */
-	end_hue   = 2.0/3; /* blue */
-
-	for (i = 0; i < labeler->priv->num_outputs; i++) {
-		double h, s, v;
-		double r, g, b;
-
-		h = start_hue + (end_hue - start_hue) / labeler->priv->num_outputs * i;
-		s = 1.0 / 3;
-		v = 1.0;
-
-		gtk_hsv_to_rgb (h, s, v, &r, &g, &b);
-
-		labeler->priv->palette[i].red   = r;
-		labeler->priv->palette[i].green = g;
-		labeler->priv->palette[i].blue  = b;
-		labeler->priv->palette[i].alpha  = 1.0;
-	}
 }
 
 static void
@@ -274,7 +233,9 @@ rounded_rectangle (cairo_t *cr,
 	cairo_close_path (cr);
 }
 
-#define LABEL_WINDOW_EDGE_THICKNESS 2
+#define LABEL_WINDOW_SIZE 80
+#define LABEL_WINDOW_MARGIN 14
+#define LABEL_WINDOW_EDGE_THICKNESS 1
 #define LABEL_WINDOW_PADDING 12
 /* Look for panel-corner in:
  * http://git.gnome.org/browse/gnome-shell/tree/data/theme/gnome-shell.css
@@ -285,10 +246,9 @@ static void
 label_draw_background_and_frame (GtkWidget *widget, cairo_t *cr, gboolean for_shape)
 {
 	GdkRGBA shape_color = { 0, 0, 0, 1 };
-	GdkRGBA *rgba;
+        GdkRGBA black = { 0, 0, 0, 0.75 };
 	GtkAllocation allocation;
 
-	rgba = g_object_get_data (G_OBJECT (widget), "rgba");
 	gtk_widget_get_allocation (widget, &allocation);
 
 	cairo_save (cr);
@@ -298,7 +258,7 @@ label_draw_background_and_frame (GtkWidget *widget, cairo_t *cr, gboolean for_sh
 	if (for_shape)
 		gdk_cairo_set_source_rgba (cr, &shape_color);
 	else
-		cairo_set_source_rgba (cr, 0, 0, 0, 0.5);
+		cairo_set_source_rgba (cr, 0.75, 0.75, 0.75, 0.75);
 
 	rounded_rectangle (cr,
 	                   LABEL_WINDOW_EDGE_THICKNESS / 2.0,
@@ -313,8 +273,7 @@ label_draw_background_and_frame (GtkWidget *widget, cairo_t *cr, gboolean for_sh
 	if (for_shape) {
 		gdk_cairo_set_source_rgba (cr, &shape_color);
 	} else {
-		rgba->alpha = 0.75;
-		gdk_cairo_set_source_rgba (cr, rgba);
+		gdk_cairo_set_source_rgba (cr, &black);
 	}
 
 	rounded_rectangle (cr,
@@ -362,7 +321,8 @@ position_window (CcRRLabeler  *labeler,
                                          &monitor);
 	gdk_rectangle_intersect (&monitor, &workarea, &workarea);
 
-	gtk_window_move (GTK_WINDOW (window), workarea.x, workarea.y);
+	gtk_window_move (GTK_WINDOW (window), workarea.x + LABEL_WINDOW_MARGIN,
+			 workarea.y + LABEL_WINDOW_MARGIN);
 }
 
 static void
@@ -386,16 +346,20 @@ label_window_composited_changed_cb (GtkWidget *widget, CcRRLabeler *labeler)
 }
 
 static GtkWidget *
-create_label_window (CcRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba)
+create_label_window (CcRRLabeler *labeler, GnomeRROutputInfo *output)
 {
 	GtkWidget *window;
 	GtkWidget *widget;
 	char *str;
-	const char *display_name;
-	GdkRGBA black = { 0, 0, 0, 1.0 };
-	int x, y;
+	GdkRGBA white = { 1, 1, 1, 1 };
+	int x, y, display_num;
 	GdkScreen *screen;
 	GdkVisual *visual;
+
+	display_num = cc_display_panel_get_output_id (output);
+
+	if (display_num == 0)
+	  return NULL;
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
@@ -407,13 +371,8 @@ create_label_window (CcRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *r
 	if (visual != NULL)
 		gtk_widget_set_visual (window, visual);
 
-	gtk_container_set_border_width (GTK_CONTAINER (window), LABEL_WINDOW_PADDING + LABEL_WINDOW_EDGE_THICKNESS);
-
-	/* This is semi-dangerous.  The color is part of the labeler->palette
-	 * array.  Note that in cc_rr_labeler_finalize(), we are careful to
-	 * free the palette only after we free the windows.
-	 */
-	g_object_set_data (G_OBJECT (window), "rgba", rgba);
+	gtk_widget_set_size_request (window, LABEL_WINDOW_SIZE,
+				     LABEL_WINDOW_SIZE);
 
 	g_signal_connect (window, "draw",
 			  G_CALLBACK (label_window_draw_event_cb), labeler);
@@ -422,30 +381,18 @@ create_label_window (CcRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *r
 	g_signal_connect (window, "composited-changed",
 			  G_CALLBACK (label_window_composited_changed_cb), labeler);
 
-	if (gnome_rr_config_get_clone (labeler->priv->config)) {
-		/* Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name() */
-
-		/* Translators:  this is the feature where what you see on your
-		 * laptop's screen is the same as your external projector.
-		 * Here, "Mirrored" is being used as an adjective.  For example,
-		 * the Spanish translation could be "Pantallas en Espejo".
-		 */
-		display_name = _("Mirrored Displays");
-	} else
-		display_name = gnome_rr_output_info_get_display_name (output);
-
-	str = g_strdup_printf ("<b>%s</b>", display_name);
+	str = g_strdup_printf ("<span size='xx-large' font-weight='bold'>%d</span>", display_num);
 	widget = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (widget), str);
 	g_free (str);
 
-	/* Make the label explicitly black.  We don't want it to follow the
-	 * theme's colors, since the label is always shown against a light
-	 * pastel background.  See bgo#556050
+	/* Make the label explicitly white.  We don't want it to follow the
+	 * theme's colors, since the label is always shown against a black
+         * background.  See bgo#556050
 	 */
 	gtk_widget_override_color (widget,
 				   gtk_widget_get_state_flags (widget),
-				   &black);
+				   &white);
 
 	gtk_container_add (GTK_CONTAINER (window), widget);
 
@@ -462,8 +409,6 @@ static void
 setup_from_config (CcRRLabeler *labeler)
 {
 	labeler->priv->num_outputs = count_outputs (labeler->priv->config);
-
-	make_palette (labeler);
 
 	cc_rr_labeler_show (labeler);
 }
@@ -497,7 +442,6 @@ void
 cc_rr_labeler_show (CcRRLabeler *labeler)
 {
 	int i;
-	gboolean created_window_for_clone;
 	GnomeRROutputInfo **outputs;
 
 	g_return_if_fail (GNOME_IS_RR_LABELER (labeler));
@@ -505,18 +449,16 @@ cc_rr_labeler_show (CcRRLabeler *labeler)
 	if (labeler->priv->windows != NULL)
 		return;
 
-	labeler->priv->windows = g_new (GtkWidget *, labeler->priv->num_outputs);
-
-	created_window_for_clone = FALSE;
+	if (gnome_rr_config_get_clone (labeler->priv->config))
+		return;
 
 	outputs = gnome_rr_config_get_outputs (labeler->priv->config);
 
-	for (i = 0; i < labeler->priv->num_outputs; i++) {
-		if (!created_window_for_clone && gnome_rr_output_info_is_active (outputs[i])) {
-			labeler->priv->windows[i] = create_label_window (labeler, outputs[i], labeler->priv->palette + i);
+	labeler->priv->windows = g_new (GtkWidget *, labeler->priv->num_outputs);
 
-			if (gnome_rr_config_get_clone (labeler->priv->config))
-				created_window_for_clone = TRUE;
+	for (i = 0; i < labeler->priv->num_outputs; i++) {
+		if (gnome_rr_output_info_is_active (outputs[i])) {
+			labeler->priv->windows[i] = create_label_window (labeler, outputs[i]);
 		} else
 			labeler->priv->windows[i] = NULL;
 	}
@@ -548,38 +490,4 @@ cc_rr_labeler_hide (CcRRLabeler *labeler)
 	}
 	g_free (priv->windows);
 	priv->windows = NULL;
-}
-
-/**
- * cc_rr_labeler_get_rgba_for_output:
- * @labeler: A #CcRRLabeler
- * @output: Output device (i.e. monitor) to query
- * @rgba_out: (out): Color of selected monitor.
- *
- * Get the color used for the label on a given output (monitor).
- */
-void
-cc_rr_labeler_get_rgba_for_output (CcRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba_out)
-{
-	int i;
-	GnomeRROutputInfo **outputs;
-
-	g_return_if_fail (GNOME_IS_RR_LABELER (labeler));
-	g_return_if_fail (GNOME_IS_RR_OUTPUT_INFO (output));
-	g_return_if_fail (rgba_out != NULL);
-
-	outputs = gnome_rr_config_get_outputs (labeler->priv->config);
-
-	for (i = 0; i < labeler->priv->num_outputs; i++)
-		if (outputs[i] == output) {
-			*rgba_out = labeler->priv->palette[i];
-			return;
-		}
-
-	g_warning ("trying to get the color for unknown GnomeOutputInfo %p; returning magenta!", output);
-
-	rgba_out->red   = 1.0;
-	rgba_out->green = 0;
-	rgba_out->blue  = 1.0;
-	rgba_out->alpha  = 1.0;
 }
