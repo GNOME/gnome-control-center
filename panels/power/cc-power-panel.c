@@ -926,9 +926,16 @@ sync_screen_brightness (CcPowerPanel *self)
 
   result = g_dbus_proxy_get_cached_property (self->priv->screen_proxy, "Brightness");
 
-  /* set the slider */
-  g_variant_get (result, "i", &brightness);
-  visible = brightness >= 0.0;
+  if (result)
+    {
+      /* set the slider */
+      brightness = g_variant_get_int32 (result);
+      visible = brightness >= 0.0;
+    }
+  else
+    {
+      visible = FALSE;
+    }
 
   gtk_widget_set_visible (self->priv->brightness_row, visible);
   gtk_widget_set_visible (self->priv->dim_screen_row, visible);
