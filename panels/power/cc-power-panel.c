@@ -891,10 +891,16 @@ sync_kbd_brightness (CcPowerPanel *self)
   GtkRange *range;
 
   result = g_dbus_proxy_get_cached_property (self->priv->kbd_proxy, "Brightness");
-
-  /* set the slider */
-  g_variant_get (result, "i", &brightness);
-  visible = brightness >= 0.0;
+  if (result)
+    {
+      /* set the slider */
+      brightness = g_variant_get_uint32 (result);
+      visible = brightness >= 0.0;
+    }
+  else
+    {
+      visible = FALSE;
+    }
 
   gtk_widget_set_visible (self->priv->kbd_brightness_row, visible);
 
