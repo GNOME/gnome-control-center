@@ -1716,6 +1716,7 @@ setup_login_button (CcRegionPanel *self)
         priv->login_button = gtk_toggle_button_new_with_label (_("Login Screen"));
         gtk_style_context_add_class (gtk_widget_get_style_context (priv->login_button),
                                      "text-button");
+        gtk_widget_set_valign (priv->login_button, GTK_ALIGN_CENTER);
         gtk_widget_set_visible (priv->login_button, FALSE);
         gtk_widget_set_sensitive (priv->login_button, FALSE);
         g_signal_connect_swapped (priv->login_button, "notify::active",
