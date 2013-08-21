@@ -682,11 +682,19 @@ on_model_row_inserted (GtkTreeModel *tree_model,
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void
-add_account (CcGoaPanel *panel,
-             GoaProvider *provider,
-             GVariant *preseed)
+typedef struct
 {
+  CcGoaPanel *panel;
+  GoaProvider *provider;
+  GVariant *preseed;
+} AddAccountData;
+
+static void
+get_all_providers_cb (GObject      *source,
+                      GAsyncResult *res,
+                      gpointer      user_data)
+{
+  AddAccountData *data = user_data;
   GtkWindow *parent;
   GtkWidget *dialog;
   GList *providers;
@@ -694,12 +702,15 @@ add_account (CcGoaPanel *panel,
   GoaObject *object;
   GError *error;
 
-  parent = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
+  providers = NULL;
+  if (!goa_provider_get_all_finish (&providers, res, NULL))
+    goto out;
 
-  dialog = goa_panel_add_account_dialog_new (panel->client);
+  parent = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (data->panel))));
+
+  dialog = goa_panel_add_account_dialog_new (data->panel->client);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
 
-  providers = goa_provider_get_all ();
   for (l = providers; l != NULL; l = l->next)
     {
       GoaProvider *provider;
@@ -709,7 +720,7 @@ add_account (CcGoaPanel *panel,
     }
 
   goa_panel_add_account_dialog_set_preseed_data (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog),
-                                                 provider, preseed);
+                                                 data->provider, data->preseed);
 
   gtk_widget_show_all (dialog);
   goa_panel_add_account_dialog_run (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog));
@@ -726,11 +737,11 @@ add_account (CcGoaPanel *panel,
     {
       GtkTreeIter iter;
       /* navigate to newly created object */
-      if (goa_panel_accounts_model_get_iter_for_object (panel->accounts_model,
+      if (goa_panel_accounts_model_get_iter_for_object (data->panel->accounts_model,
                                                         object,
                                                         &iter))
         {
-          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
+          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (data->panel->accounts_treeview)),
                                           &iter);
         }
       g_object_unref (object);
@@ -756,6 +767,26 @@ add_account (CcGoaPanel *panel,
     }
 
   g_list_free_full (providers, g_object_unref);
+
+out:
+  g_clear_object (&data->panel);
+  g_clear_object (&data->provider);
+  g_clear_pointer (&data->preseed, g_variant_unref);
+  g_slice_free (AddAccountData, data);
+}
+
+static void
+add_account (CcGoaPanel *panel,
+             GoaProvider *provider,
+             GVariant *preseed)
+{
+  AddAccountData *data;
+
+  data = g_slice_new0 (AddAccountData);
+  data->panel = g_object_ref_sink (panel);
+  data->provider = (provider != NULL ? g_object_ref (provider) : NULL);
+  data->preseed = (preseed != NULL ? g_variant_ref (preseed) : NULL);
+  goa_provider_get_all (get_all_providers_cb, data);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
