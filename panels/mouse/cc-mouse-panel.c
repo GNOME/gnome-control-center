@@ -100,6 +100,7 @@ cc_mouse_panel_constructed (GObject *object)
   button = gtk_button_new_with_mnemonic (_("Test Your _Settings"));
   gtk_style_context_add_class (gtk_widget_get_style_context (button),
                                "text-button");
+  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
   gtk_widget_set_visible (button, TRUE);
 
