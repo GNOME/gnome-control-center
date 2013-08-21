@@ -1482,6 +1482,7 @@ create_header (CcWindow *self)
   priv->lock_button = gtk_lock_button_new (NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (priv->lock_button),
                                "text-button");
+  gtk_widget_set_valign (priv->lock_button, GTK_ALIGN_CENTER);
   gtk_widget_set_no_show_all (priv->lock_button, TRUE);
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
 }
