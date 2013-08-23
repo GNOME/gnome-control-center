@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-20 00:35+0000\n"
-"PO-Revision-Date: 2013-08-20 09:01+0200\n"
+"POT-Creation-Date: 2013-08-22 14:28+0000\n"
+"PO-Revision-Date: 2013-08-23 07:12+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -115,13 +115,16 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: ../panels/background/cc-background-chooser-dialog.c:443
 #: ../panels/bluetooth/cc-bluetooth-panel.c:631
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/display/cc-display-panel.c:1348
+#: ../panels/display/cc-display-panel.c:1746
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1201
 #: ../panels/network/net-device-wifi.c:1407
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
 #: ../panels/search/cc-search-locations-dialog.c:682
 #: ../panels/sharing/cc-sharing-panel.c:421
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
@@ -268,7 +271,7 @@ msgstr ""
 "nastavit."
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:632
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+#: ../panels/online-accounts/cc-online-accounts-panel.c:857
 msgid "_Remove"
 msgstr "Odeb_rat"
 
@@ -979,9 +982,35 @@ msgid "Language"
 msgstr "Jazyk"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/mouse/cc-mouse-panel.c:119 ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Hotovo"
+
+#. Translators: This is the full date and time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:322
+msgid "%e %B %Y, %l:%M %p"
+msgstr "%e. %B %Y, %l:%M %p"
+
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:327
+msgid "%e %B %Y, %R"
+msgstr "%e. %B %Y, %k:%M"
+
+#. Translators: UTC here means the Coordinated Universal Time.
+#. * %z will be replaced by the offset from UTC e.g. UTC+0200
+#: ../panels/datetime/cc-datetime-panel.c:543
+msgid "UTC%z"
+msgstr "UTC%z"
+
+#. Translators: This is the time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:548
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#. Translators: This is the time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:553
+msgid "%R"
+msgstr "%k:%M"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "January"
@@ -1070,42 +1099,38 @@ msgid "Time Zone"
 msgstr "Časové pásmo"
 
 #: ../panels/datetime/datetime.ui.h:23
-msgid "_Region:"
-msgstr "O_blast:"
+msgid "Search for a city"
+msgstr "hledat město"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "_City:"
-msgstr "_Město:"
-
-#: ../panels/datetime/datetime.ui.h:25
 msgid "Automatic _Date & Time"
 msgstr "_Datum a čas automaticky"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:25
 msgid "Requires internet access"
 msgstr "Vyžaduje přístup k Internetu"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:26
 msgid "Automatic Time _Zone"
 msgstr "Časové pás_mo automaticky"
 
-#: ../panels/datetime/datetime.ui.h:28
+#: ../panels/datetime/datetime.ui.h:27
 msgid "Date & _Time"
 msgstr "Da_tum a čas"
 
-#: ../panels/datetime/datetime.ui.h:29
+#: ../panels/datetime/datetime.ui.h:28
 msgid "Time _Zone"
 msgstr "Časové pás_mo"
 
-#: ../panels/datetime/datetime.ui.h:30
+#: ../panels/datetime/datetime.ui.h:29
 msgid "Time _Format"
 msgstr "_Formát času"
 
-#: ../panels/datetime/datetime.ui.h:31
+#: ../panels/datetime/datetime.ui.h:30
 msgid "24-hour"
 msgstr "24hodinový"
 
-#: ../panels/datetime/datetime.ui.h:32
+#: ../panels/datetime/datetime.ui.h:31
 msgid "AM / PM"
 msgstr "dop./odp."
 
@@ -1126,99 +1151,137 @@ msgstr "Změnit nastavení systémového času a data"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Abyste mohli měnit nastavení času a data, musíte se autentizovat."
 
-#: ../panels/display/cc-display-panel.c:487
-msgctxt "display panel, rotation"
-msgid "Normal"
-msgstr "Běžné"
+#: ../panels/display/cc-display-panel.c:421
+msgid "Lid Closed"
+msgstr "Víko zavřeno"
 
-#: ../panels/display/cc-display-panel.c:488
-msgctxt "display panel, rotation"
-msgid "Counterclockwise"
-msgstr "Protisměru hodinových ručiček"
+#. translators: "Mirrored" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:424
+msgid "Mirrored"
+msgstr "Zrcadlený"
 
-#: ../panels/display/cc-display-panel.c:489
-msgctxt "display panel, rotation"
-msgid "Clockwise"
-msgstr "Po směru hodinových ručiček"
-
-#: ../panels/display/cc-display-panel.c:490
-msgctxt "display panel, rotation"
-msgid "180 Degrees"
-msgstr "180 stupňů"
-
-#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
-#. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external projector.  Here, "Mirrored" is being
-#. * used as an adjective.  For example, the Spanish translation could be
-#. * "Pantallas en Espejo".
-#.
-#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
-#. Translators:  this is the feature where what you see on your
-#. * laptop's screen is the same as your external projector.
-#. * Here, "Mirrored" is being used as an adjective.  For example,
-#. * the Spanish translation could be "Pantallas en Espejo".
-#.
-#: ../panels/display/cc-display-panel.c:629
-#: ../panels/display/cc-rr-labeler.c:433
-msgid "Mirrored Displays"
-msgstr "Zrcadlené displeje"
-
-#: ../panels/display/cc-display-panel.c:653
+#: ../panels/display/cc-display-panel.c:426
+#: ../panels/display/cc-display-panel.c:1877
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Monitor"
-msgstr "Monitor"
+msgid "Primary"
+msgstr "Hlavní"
 
-#: ../panels/display/cc-display-panel.c:1698
-msgid "Drag to change primary display."
-msgstr "Přetáhnutím změníte primární displej."
+#: ../panels/display/cc-display-panel.c:428
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
+#: ../panels/universal-access/uap.ui.h:6
+msgid "Off"
+msgstr "Vypnuto"
 
-#: ../panels/display/cc-display-panel.c:1756
-msgid ""
-"Select a monitor to change its properties; drag it to rearrange its "
-"placement."
-msgstr ""
-"Výběrem monitoru změníte jeho vlastnosti; umístění upravíte jeho přetažením."
+#: ../panels/display/cc-display-panel.c:431
+msgid "Secondary"
+msgstr "Vedlejší"
 
-#: ../panels/display/cc-display-panel.c:2153
-msgid "%a %R"
-msgstr "%a %R"
+#: ../panels/display/cc-display-panel.c:1345
+msgid "Arrange Combined Displays"
+msgstr "Uspořádání sloučených displejů"
 
-#: ../panels/display/cc-display-panel.c:2155
-msgid "%a %l:%M %p"
-msgstr "%a, %H:%M"
+#: ../panels/display/cc-display-panel.c:1349
+#: ../panels/display/cc-display-panel.c:1747
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+msgid "_Apply"
+msgstr "_Použít"
 
-#: ../panels/display/cc-display-panel.c:2326
-msgid "Failed to apply configuration"
-msgstr "Selhalo použití nastavení"
+#: ../panels/display/cc-display-panel.c:1369
+msgid "Drag displays to rearrange them"
+msgstr "Pořadí displejů změňte přetažením"
 
-#: ../panels/display/cc-display-panel.c:2362
-msgid "Could not detect displays"
-msgstr "Displeje nelze rozpoznat"
+#. size
+#: ../panels/display/cc-display-panel.c:1811
+msgid "Size"
+msgstr "Velikost"
 
-#: ../panels/display/cc-display-panel.c:2574
+#. aspect ratio
+#: ../panels/display/cc-display-panel.c:1826
+#: ../panels/display/display-capplet.ui.h:12
+msgid "Aspect Ratio"
+msgstr "Poměr stran"
+
+#: ../panels/display/cc-display-panel.c:1847
+#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "Rozlišení"
+
+#: ../panels/display/cc-display-panel.c:1878
+#: ../panels/display/display-capplet.ui.h:2
+msgid "Show the top bar and Activities Overview on this display"
+msgstr "Na tomto displeji zobrazovat horní lištu a přehled činností"
+
+#: ../panels/display/cc-display-panel.c:1884
+msgid "Secondary Display"
+msgstr "Vedlejší displej"
+
+#: ../panels/display/cc-display-panel.c:1885
+msgid "Join this display with another to create an extra workspace"
+msgstr "Spojit tento displej s jiným pro vytvoření dodatečné pracovní plochy"
+
+#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/display/display-capplet.ui.h:3
+msgid "Presentation"
+msgstr "Prezentace"
+
+#: ../panels/display/cc-display-panel.c:1893
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Show slideshows and media only"
+msgstr "Zobrazovat jen promítání a multimédia"
+
+#. translators: "Mirror" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:1898
+#: ../panels/display/display-capplet.ui.h:5
+msgid "Mirror"
+msgstr "Zrcadlit"
+
+#: ../panels/display/cc-display-panel.c:1899
+msgid "Show your existing view on both displays"
+msgstr "Zobrazit stávající zobrazení na obou displejích"
+
+#: ../panels/display/cc-display-panel.c:2092
 msgid "Could not get screen information"
 msgstr "Nelze získat informace o obrazovce"
 
-#: ../panels/display/display-capplet.ui.h:2
-msgid "_Resolution"
-msgstr "_Rozlišení"
-
-#: ../panels/display/display-capplet.ui.h:3
-msgid "R_otation"
-msgstr "_Otočení"
-
-#. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:5
-msgid "_Mirror displays"
-msgstr "_Zrcadlit displeje"
+#: ../panels/display/cc-display-panel.c:2123
+msgid "_Arrange Combined Displays"
+msgstr "Uspořádat sloučené displeje"
 
 #: ../panels/display/display-capplet.ui.h:6
-msgid "Note: may limit resolution options"
-msgstr "Poznámka: může omezit možnosti rozlišení"
+msgid "Show your primary display on this screen also"
+msgstr "Zobrazit váš hlavní displej i na této obrazovce"
 
 #: ../panels/display/display-capplet.ui.h:7
-msgid "_Detect Displays"
-msgstr "Rozpoznat _displeje"
+msgid "Combine"
+msgstr "Sloučit"
+
+#: ../panels/display/display-capplet.ui.h:8
+msgid "Join with the primary display to create an extra space"
+msgstr "Spojit s hlavním displejem pro vytvoření dodatečné plochy"
+
+#: ../panels/display/display-capplet.ui.h:9
+msgid "Turn Off"
+msgstr "Vypnout"
+
+#: ../panels/display/display-capplet.ui.h:10
+msgid "Don't use the display"
+msgstr "Displej nepoužívat"
+
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/printers/printers.ui.h:12
+msgid "Model"
+msgstr "Model"
+
+#: ../panels/display/display-capplet.ui.h:14
+msgid "Refresh Rate"
+msgstr "Obnovovací frekvence"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Displays"
@@ -1846,7 +1909,7 @@ msgstr "Z_měnit přiřazení"
 msgid "Test Your _Settings"
 msgstr "_Vyzkoušejte své nastavení"
 
-#: ../panels/mouse/cc-mouse-panel.c:116
+#: ../panels/mouse/cc-mouse-panel.c:117
 msgid "Test Your Settings"
 msgstr "Test vašeho nastavení"
 
@@ -2273,10 +2336,6 @@ msgstr "WPA & WPA2 Personal"
 #: ../panels/network/connection-editor/ce-page-security.c:337
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
-
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
-msgid "_Apply"
-msgstr "_Použít"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
@@ -3600,7 +3659,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Zobrazovat na uzamčené obrazovce podrobnosti"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1745
+#: ../panels/power/cc-power-panel.c:1751 ../panels/power/cc-power-panel.c:1758
 #: ../panels/privacy/cc-privacy-panel.c:77
 #: ../panels/privacy/cc-privacy-panel.c:117
 #: ../panels/universal-access/cc-ua-panel.c:253
@@ -3608,17 +3667,6 @@ msgstr "Zobrazovat na uzamčené obrazovce podrobnosti"
 #: ../panels/universal-access/cc-ua-panel.c:699
 msgid "On"
 msgstr "Zapnuto"
-
-#: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1732 ../panels/power/cc-power-panel.c:1743
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:117
-#: ../panels/universal-access/cc-ua-panel.c:253
-#: ../panels/universal-access/cc-ua-panel.c:573
-#: ../panels/universal-access/cc-ua-panel.c:699
-#: ../panels/universal-access/uap.ui.h:6
-msgid "Off"
-msgstr "Vypnuto"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3641,26 +3689,30 @@ msgstr "Zobrazovat vyskakovací proužky"
 msgid "Show in Lock Screen"
 msgstr "Zobrazovat na uzamčené obrazovce"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:197
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Další"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:300
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Přidání účtu"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:339
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "Pošta"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:345
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "Kontakty"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:351
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "Diskuze"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "Zdroje"
 
@@ -3680,19 +3732,19 @@ msgstr "Přihlaste se, chcete-li tento účet povolit."
 msgid "_Sign In"
 msgstr "_Přihlásit se"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:747
+#: ../panels/online-accounts/cc-online-accounts-panel.c:758
 msgid "Error creating account"
 msgstr "Chyba při vytváření účtu"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:787
+#: ../panels/online-accounts/cc-online-accounts-panel.c:818
 msgid "Error removing account"
 msgstr "Chyba při odebírání účtu"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:823
+#: ../panels/online-accounts/cc-online-accounts-panel.c:854
 msgid "Are you sure you want to remove the account?"
 msgstr "Opravdu chcete odebrat tento účet?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:825
+#: ../panels/online-accounts/cc-online-accounts-panel.c:856
 msgid "This will not remove the account on the server."
 msgstr "Tímto se neodstraní účet na serveru."
 
@@ -3868,7 +3920,7 @@ msgstr "Počítač"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:537 ../panels/power/cc-power-panel.c:747
-#: ../panels/power/cc-power-panel.c:2069
+#: ../panels/power/cc-power-panel.c:2082
 msgid "Battery"
 msgstr "Baterie"
 
@@ -3912,75 +3964,75 @@ msgstr "Vybitá"
 msgid "Batteries"
 msgstr "Baterie"
 
-#: ../panels/power/cc-power-panel.c:1138
+#: ../panels/power/cc-power-panel.c:1151
 msgid "When _idle"
 msgstr "Při _nečinnosti"
 
-#: ../panels/power/cc-power-panel.c:1507
+#: ../panels/power/cc-power-panel.c:1520
 msgid "Power Saving"
 msgstr "Šetření energií"
 
-#: ../panels/power/cc-power-panel.c:1535
+#: ../panels/power/cc-power-panel.c:1548
 msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
-#: ../panels/power/cc-power-panel.c:1541
+#: ../panels/power/cc-power-panel.c:1554
 msgid "_Keyboard brightness"
 msgstr "_Jas klávesnice"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1564
 msgid "_Dim screen when inactive"
 msgstr "_Ztlumit jas obrazovky při neaktivitě"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1589
 msgid "_Blank screen"
 msgstr "_Vypnout obrazovku"
 
-#: ../panels/power/cc-power-panel.c:1613
+#: ../panels/power/cc-power-panel.c:1626
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1618
+#: ../panels/power/cc-power-panel.c:1631
 msgid "Turns off wireless devices"
 msgstr "Vypne bezdrátová zařízení"
 
-#: ../panels/power/cc-power-panel.c:1643
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Mobile broadband"
 msgstr "_Mobilní připojení"
 
-#: ../panels/power/cc-power-panel.c:1648
+#: ../panels/power/cc-power-panel.c:1661
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Vypne mobilní širokopásmová zařízení (3G, 4G, WiMax atd.)"
 
-#: ../panels/power/cc-power-panel.c:1683
+#: ../panels/power/cc-power-panel.c:1696
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1734
+#: ../panels/power/cc-power-panel.c:1747
 msgid "When on battery power"
 msgstr "Při napájení z baterie"
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1749
 msgid "When plugged in"
 msgstr "Při napájení ze sítě"
 
-#: ../panels/power/cc-power-panel.c:1865
+#: ../panels/power/cc-power-panel.c:1878
 msgid "Suspend & Power Off"
 msgstr "Uspávání a vypínání"
 
-#: ../panels/power/cc-power-panel.c:1898
+#: ../panels/power/cc-power-panel.c:1911
 msgid "_Automatic suspend"
 msgstr "_Automaticky uspat"
 
-#: ../panels/power/cc-power-panel.c:1922
+#: ../panels/power/cc-power-panel.c:1935
 msgid "When battery power is _critical"
 msgstr "Když je napájení z baterie kriti_cky nízké"
 
-#: ../panels/power/cc-power-panel.c:1979
+#: ../panels/power/cc-power-panel.c:1992
 msgid "Power Off"
 msgstr "Vypnout"
 
-#: ../panels/power/cc-power-panel.c:2121
+#: ../panels/power/cc-power-panel.c:2134
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -4463,10 +4515,6 @@ msgstr "Zdroj papíru"
 msgid "Output Tray"
 msgstr "Výstupní zásobník"
 
-#: ../panels/printers/pp-options-dialog.c:86
-msgid "Resolution"
-msgstr "Rozlišení"
-
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "GhostScript pre-filtering"
 msgstr "Předfiltrování GhostScript"
@@ -4619,10 +4667,6 @@ msgstr "Úlohy"
 msgid "Show _Jobs"
 msgstr "Zobrazit ú_lohy"
 
-#: ../panels/printers/printers.ui.h:12
-msgid "Model"
-msgstr "Model"
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "popisek"
@@ -4667,7 +4711,31 @@ msgstr "Zamykání obrazovky"
 msgid "Usage & History"
 msgstr "Použití a historie"
 
-#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:31
+#: ../panels/privacy/cc-privacy-panel.c:486
+msgid "Empty all items from Trash?"
+msgstr "Vysypat všechny položky z koše?"
+
+#: ../panels/privacy/cc-privacy-panel.c:487
+msgid "All items in the Trash will be permanently deleted."
+msgstr "Všechny položky v koši budou trvale smazány."
+
+#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:32
+msgid "_Empty Trash"
+msgstr "_Vyprázdnit koš"
+
+#: ../panels/privacy/cc-privacy-panel.c:511
+msgid "Delete all the temporary files?"
+msgstr "Odstranit dočasné soubory?"
+
+#: ../panels/privacy/cc-privacy-panel.c:512
+msgid "All the temporary files will be permanently deleted."
+msgstr "Všechny dočasné soubory budou trvale smazány."
+
+#: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
+msgid "_Purge Temporary Files"
+msgstr "Odstranit dočasné soubor_y"
+
+#: ../panels/privacy/cc-privacy-panel.c:535 ../panels/privacy/privacy.ui.h:31
 msgid "Purge Trash & Temporary Files"
 msgstr "Vyčistit koš a dočasné soubory"
 
@@ -4775,14 +4843,6 @@ msgstr "Z_amknout obrazovku po ztmavnutí a po"
 #: ../panels/privacy/privacy.ui.h:30
 msgid "Show _Notifications"
 msgstr "Zobrazovat _upozornění"
-
-#: ../panels/privacy/privacy.ui.h:32
-msgid "_Empty Trash"
-msgstr "_Vyprázdnit koš"
-
-#: ../panels/privacy/privacy.ui.h:33
-msgid "_Purge Temporary Files"
-msgstr "Odstranit dočasné soubor_y"
 
 #: ../panels/privacy/privacy.ui.h:34
 msgid ""
@@ -5449,8 +5509,8 @@ msgstr ""
 "jedním prstem;pomalé klávesy;vícenásobná zmáčknutí kláves;klávesnice myší;"
 
 #: ../panels/universal-access/uap.ui.h:1
-msgid "Show Status When _Inactive"
-msgstr "Zobrazovat stav, když není akt_ivní"
+msgid "_Always Show Universal Access Menu"
+msgstr "Vždy zobr_azovat nabídku univerzálního přístupu"
 
 #: ../panels/universal-access/uap.ui.h:2
 msgid "Seeing"
@@ -7077,7 +7137,7 @@ msgstr "Nápověda"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1458
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1466
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
@@ -7097,7 +7157,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1565 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1574 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Nastavení"
 
