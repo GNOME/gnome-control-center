@@ -790,6 +790,7 @@ setup_search (CcWindow *shell)
   gd_styled_text_renderer_add_class (GD_STYLED_TEXT_RENDERER (renderer), "dim-label");
   g_object_set (renderer,
                 "xpad", 15,
+                "ellipsize", PANGO_ELLIPSIZE_END,
                 NULL);
   column = gtk_tree_view_column_new_with_attributes ("Description", renderer,
                                                      "text", COL_DESCRIPTION,
