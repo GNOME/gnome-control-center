@@ -446,8 +446,6 @@ show_page_account (CcGoaPanel  *panel,
   GtkWidget *box;
   GtkWidget *button;
   GtkWidget *grid;
-  GtkWidget *left_grid;
-  GtkWidget *right_grid;
   GtkWidget *label;
   GoaProvider *provider;
   GoaAccount *account;
@@ -513,16 +511,11 @@ show_page_account (CcGoaPanel  *panel,
       gtk_box_pack_end (GTK_BOX (panel->accounts_vbox), grid, FALSE, TRUE, 0);
     }
 
-  left_grid = gtk_grid_new ();
-  gtk_widget_set_halign (left_grid, GTK_ALIGN_END);
-  gtk_widget_set_hexpand (left_grid, TRUE);
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (left_grid), GTK_ORIENTATION_VERTICAL);
-  gtk_grid_set_row_spacing (GTK_GRID (left_grid), 0);
-
-  right_grid = gtk_grid_new ();
-  gtk_widget_set_hexpand (right_grid, TRUE);
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (right_grid), GTK_ORIENTATION_VERTICAL);
-  gtk_grid_set_row_spacing (GTK_GRID (right_grid), 0);
+  grid = gtk_grid_new ();
+  gtk_widget_set_halign (grid, GTK_ALIGN_CENTER);
+  gtk_widget_set_hexpand (grid, TRUE);
+  gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
+  gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
 
   if (provider != NULL)
     {
@@ -530,17 +523,11 @@ show_page_account (CcGoaPanel  *panel,
                                  panel->client,
                                  object,
                                  GTK_BOX (panel->accounts_vbox),
-                                 GTK_GRID (left_grid),
-                                 GTK_GRID (right_grid));
+                                 GTK_GRID (grid),
+                                 GTK_GRID (grid));
     }
 
-  grid = gtk_grid_new ();
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_HORIZONTAL);
-  gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
-  gtk_container_add (GTK_CONTAINER (grid), left_grid);
-  gtk_container_add (GTK_CONTAINER (grid), right_grid);
   gtk_box_pack_start (GTK_BOX (panel->accounts_vbox), grid, FALSE, TRUE, 0);
-
   gtk_widget_show_all (panel->accounts_vbox);
 
   g_clear_object (&provider);
