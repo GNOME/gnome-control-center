@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.9.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 14:56+0200\n"
-"PO-Revision-Date: 2013-08-22 15:17+0200\n"
+"POT-Creation-Date: 2013-08-23 19:49+0200\n"
+"PO-Revision-Date: 2013-08-23 19:49+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -104,7 +104,7 @@ msgstr "Du kan legge til bilder i din %s-mappe så vil de vises her"
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1201
 #: ../panels/network/net-device-wifi.c:1407
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:467
@@ -254,7 +254,7 @@ msgstr ""
 "igjen."
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:632
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
 msgid "_Remove"
 msgstr "Fje_rn"
 
@@ -1203,7 +1203,8 @@ msgstr "Sekundær skjerm"
 
 #: ../panels/display/cc-display-panel.c:1885
 msgid "Join this display with another to create an extra workspace"
-msgstr "Slå sammen denne skjermen med en annen for å lage et ekstra arbeidsområde"
+msgstr ""
+"Slå sammen denne skjermen med en annen for å lage et ekstra arbeidsområde"
 
 #: ../panels/display/cc-display-panel.c:1892
 #: ../panels/display/display-capplet.ui.h:3
@@ -3661,26 +3662,30 @@ msgstr "Vis oppsprettbannere"
 msgid "Show in Lock Screen"
 msgstr "Vis ved låsing av skjerm"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:197
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Annen"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:300
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Legg til konto"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:339
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "E-post"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:345
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:351
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "Lynmeldinger"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "Ressurser"
 
@@ -3688,31 +3693,31 @@ msgstr "Ressurser"
 msgid "Error logging into the account"
 msgstr "Feil ved innlogging på kontoen"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:495
 msgid "Credentials have expired."
 msgstr "Påloggingsinformasjonen er utgått."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "Sign in to enable this account."
 msgstr "Logg inn for å aktivere denne kontoen."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:506
+#: ../panels/online-accounts/cc-online-accounts-panel.c:504
 msgid "_Sign In"
 msgstr "_Logg inn"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:747
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "Error creating account"
 msgstr "Feil under oppretting av konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:787
+#: ../panels/online-accounts/cc-online-accounts-panel.c:805
 msgid "Error removing account"
 msgstr "Feil under fjerning av konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:823
+#: ../panels/online-accounts/cc-online-accounts-panel.c:841
 msgid "Are you sure you want to remove the account?"
 msgstr "Er du sikker på at du vil fjerne kontoen?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:825
+#: ../panels/online-accounts/cc-online-accounts-panel.c:843
 msgid "This will not remove the account on the server."
 msgstr "Dette vil ikke fjerne kontoen på tjeneren."
 
@@ -3728,9 +3733,8 @@ msgstr "Koble til dine kontoer på nettet og bestem hva du skal bruke dem til"
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
-msgstr ""
-"Google;Facebook;Twitter;Yahoo;Web;Nett;Lynmeldinger;Kalender;E-post;Kontakt;"
-"ownCloud;"
+"Kerberos;IMAP;SMTP;"
+msgstr "Google;Facebook;Twitter;Yahoo;Web;Nett;Lynmeldinger;Kalender;E-post;Kontakt;ownCloud;Kerberos;IMAP;SMTP;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -5927,7 +5931,9 @@ msgstr "_Verifiser"
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device."
-msgstr "Bedriftspålogging lar deg bruke en eksisterende og sentralt håndtert brukerkoknto  på denne enheten."
+msgstr ""
+"Bedriftspålogging lar deg bruke en eksisterende og sentralt håndtert "
+"brukerkoknto  på denne enheten."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Domain"
@@ -6231,7 +6237,9 @@ msgctxt "Password hint"
 msgid ""
 "Good password! Adding more letters, numbers and punctuation will make it "
 "stronger."
-msgstr "Godt passord! Passordet blir sterkere hvis du legger til flere bokstaver, tall og tegnsettingstegn."
+msgstr ""
+"Godt passord! Passordet blir sterkere hvis du legger til flere bokstaver, "
+"tall og tegnsettingstegn."
 
 #: ../panels/user-accounts/pw-utils.c:142
 #: ../panels/user-accounts/pw-utils.c:172
