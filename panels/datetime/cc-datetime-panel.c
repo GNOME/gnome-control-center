@@ -792,11 +792,8 @@ static void
 on_can_ntp_changed (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  GtkWidget *switch_widget;
-  gboolean sensitive = TRUE;
+  gboolean ntp_available = TRUE;
   GVariant *value;
-
-  switch_widget = W("network_time_switch");
 
   /* We need to access this directly so that we can default to TRUE if
    * it is not set.
@@ -805,11 +802,12 @@ on_can_ntp_changed (CcDateTimePanel *self)
   if (value)
     {
       if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
-        sensitive = g_variant_get_boolean (value);
+        ntp_available = g_variant_get_boolean (value);
       g_variant_unref (value);
     }
 
-  gtk_widget_set_sensitive (switch_widget, sensitive);
+  gtk_widget_set_visible (W ("auto-datetime-row"),
+                          ntp_available);
 }
 
 static void
