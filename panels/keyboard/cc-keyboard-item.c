@@ -136,19 +136,9 @@ settings_set_binding (GSettings  *settings,
     g_settings_set_string (settings, key, value ? value : "");
   else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
     {
-      char **str_array;
+      char **str_array = g_new0 (char *, 2);
 
-      str_array = g_variant_dup_strv (variant, NULL);
-
-      /* create a space for the new binding if empty */
-      if (*str_array == NULL)
-        {
-          g_free (str_array);
-          str_array = g_new0 (char *, 2);
-        }
-
-      /* replace the first binding */
-      g_free (*str_array);
+      /* clear any additional bindings by only setting the first one */
       *str_array = g_strdup (value);
 
       g_settings_set_strv (settings, key, (const char * const *)str_array);
