@@ -111,6 +111,9 @@ find_conflict (CcUniquenessData *data,
   if (data->orig_item && cc_keyboard_item_equal (data->orig_item, item))
     return FALSE;
 
+  if (data->new_mask != combo->mask)
+    return FALSE;
+
   if (data->new_keyval != 0)
     is_conflict = data->new_keyval == combo->keyval;
   else
@@ -128,13 +131,9 @@ compare_keys_for_uniqueness (CcKeyboardItem   *current_item,
 {
   CcKeyboardItem *reverse_item;
 
-  /* No conflict for: blanks, different modifiers or ourselves */
-  if (!current_item ||
-      data->orig_item == current_item ||
-      data->new_mask != current_item->primary_combo->mask)
-    {
-      return FALSE;
-    }
+  /* No conflict for: blanks or ourselves */
+  if (!current_item || data->orig_item == current_item)
+    return FALSE;
 
   reverse_item = cc_keyboard_item_get_reverse_item (current_item);
 
