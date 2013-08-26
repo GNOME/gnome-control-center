@@ -371,6 +371,8 @@ cc_keyboard_item_finalize (GObject *object)
   g_free (item->command);
   g_free (item->schema);
   g_free (item->key);
+  g_list_free_full (item->key_combos, g_free);
+  g_list_free_full (item->default_combos, g_free);
 
   G_OBJECT_CLASS (cc_keyboard_item_parent_class)->finalize (object);
 }
@@ -385,6 +387,52 @@ cc_keyboard_item_new (CcKeyboardItemType type)
                          NULL);
 
   return CC_KEYBOARD_ITEM (object);
+}
+
+static GList *
+variant_get_key_combos (GVariant *variant)
+{
+  GList *combos = NULL;
+  char **bindings = NULL, **str;
+
+  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
+    {
+      bindings = g_malloc0_n (2, sizeof(char *));
+      bindings[0] = g_variant_dup_string (variant, NULL);
+    }
+  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
+    {
+      bindings = g_variant_dup_strv (variant, NULL);
+    }
+
+  for (str = bindings; *str; str++)
+    {
+      CcKeyCombo *combo = g_new (CcKeyCombo, 1);
+
+      binding_from_string (*str, combo);
+      combos = g_list_prepend (combos, combo);
+    }
+  g_strfreev (bindings);
+
+  return g_list_reverse (combos);
+}
+
+static GList *
+settings_get_key_combos (GSettings  *settings,
+                         const char *key,
+                         gboolean    use_default)
+{
+  GList *key_combos;
+  GVariant *variant;
+
+  if (use_default)
+    variant = g_settings_get_default_value (settings, key);
+  else
+    variant = g_settings_get_value (settings, key);
+  key_combos = variant_get_key_combos (variant);
+  g_variant_unref (variant);
+
+  return key_combos;
 }
 
 /* wrapper around g_settings_get_str[ing|v] */
@@ -418,6 +466,9 @@ binding_changed (GSettings *settings,
 {
   char *value;
 
+  g_list_free_full (item->key_combos, g_free);
+  item->key_combos = settings_get_key_combos (item->settings, item->key, FALSE);
+
   value = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
   _set_binding (item, value, FALSE);
@@ -450,6 +501,9 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   g_settings_bind (item->settings, "command",
                    G_OBJECT (item), "command", G_SETTINGS_BIND_DEFAULT);
 
+  g_list_free_full (item->key_combos, g_free);
+  item->key_combos = settings_get_key_combos (item->settings, item->key, FALSE);
+
   g_free (item->priv->binding);
   item->priv->binding = settings_get_binding (item->settings, item->key);
   binding_from_string (item->priv->binding, item->primary_combo);
@@ -476,6 +530,12 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->priv->binding = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
   binding_from_string (item->priv->binding, item->primary_combo);
+
+  g_list_free_full (item->key_combos, g_free);
+  item->key_combos = settings_get_key_combos (item->settings, item->key, FALSE);
+
+  g_list_free_full (item->default_combos, g_free);
+  item->default_combos = settings_get_key_combos (item->settings, item->key, TRUE);
 
   signal_name = g_strdup_printf ("changed::%s", item->key);
   g_signal_connect (G_OBJECT (item->settings), signal_name,

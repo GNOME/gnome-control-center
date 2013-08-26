@@ -69,6 +69,8 @@ typedef struct
   GtkTreeModel *model;
   char *description;
   gboolean editable;
+  GList *key_combos;
+  GList *default_combos;
 
   /* GSettings path */
   char *gsettings_path;
