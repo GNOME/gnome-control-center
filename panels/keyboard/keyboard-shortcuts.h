@@ -85,19 +85,12 @@ void     fill_xkb_options_shortcuts     (GtkTreeModel *model);
 
 void     setup_keyboard_options         (GtkListStore *store);
 
-gboolean is_valid_binding               (guint           keyval,
-                                         GdkModifierType mask,
-                                         guint           keycode);
+gboolean is_valid_binding               (CcKeyCombo *combo);
 
-gboolean is_empty_binding               (guint           keyval,
-                                         GdkModifierType mask,
-                                         guint           keycode);
+gboolean is_empty_binding               (CcKeyCombo *combo);
 
-gboolean is_valid_accel                 (guint           keyval,
-                                         GdkModifierType mask);
+gboolean is_valid_accel                 (CcKeyCombo *combo);
 
 KeyList* parse_keylist_from_file        (const gchar *path);
 
-gchar*   convert_keysym_state_to_string (guint           keysym,
-                                         GdkModifierType mask,
-                                         guint           keycode);
+gchar*   convert_keysym_state_to_string (CcKeyCombo *combo);

@@ -78,29 +78,24 @@ get_binding_from_variant (GVariant *variant)
 }
 
 static gboolean
-binding_from_string (const char             *str,
-                     guint                  *accelerator_key,
-                     guint                  *keycode,
-                     GdkModifierType        *accelerator_mods)
+binding_from_string (const char *str,
+                     CcKeyCombo *combo)
 {
-  g_return_val_if_fail (accelerator_key != NULL, FALSE);
+  g_return_val_if_fail (combo != NULL, FALSE);
   guint *keycodes;
 
   if (str == NULL || strcmp (str, "disabled") == 0)
     {
-      *accelerator_key = 0;
-      *keycode = 0;
-      *accelerator_mods = 0;
+      memset (combo, 0, sizeof(CcKeyCombo));
       return TRUE;
     }
 
-  gtk_accelerator_parse_with_keycode (str, accelerator_key, &keycodes, accelerator_mods);
+  gtk_accelerator_parse_with_keycode (str, &combo->keyval, &keycodes, &combo->mask);
 
-  if (keycode != NULL)
-    *keycode = (keycodes ? keycodes[0] : 0);
+  combo->keycode = (keycodes ? keycodes[0] : 0);
   g_free (keycodes);
 
-  if (*accelerator_key == 0)
+  if (combo->keyval == 0)
     return FALSE;
   else
     return TRUE;
@@ -163,8 +158,7 @@ _set_binding (CcKeyboardItem *item,
   g_clear_pointer (&item->priv->binding, g_free);
   item->priv->binding = enabled ? g_strdup (value) : g_strdup ("");
 
-  binding_from_string (item->priv->binding, &item->keyval,
-                       &item->keycode, &item->mask);
+  binding_from_string (item->priv->binding, item->primary_combo);
 
   /*
    * Always treat the pair (item, reverse) as a unit: setting one also
@@ -174,19 +168,17 @@ _set_binding (CcKeyboardItem *item,
     {
       GdkModifierType reverse_mask;
 
-      reverse_mask = enabled ? item->mask ^ GDK_SHIFT_MASK : item->mask;
+      reverse_mask = enabled ? item->primary_combo->mask ^ GDK_SHIFT_MASK
+                             : item->primary_combo->mask;
 
       g_clear_pointer (&reverse->priv->binding, g_free);
       if (enabled)
         reverse->priv->binding = gtk_accelerator_name_with_keycode (NULL,
-                                                                    item->keyval,
-                                                                    item->keycode,
+                                                                    item->primary_combo->keyval,
+                                                                    item->primary_combo->keycode,
                                                                     reverse_mask);
 
-      binding_from_string (reverse->priv->binding,
-                           &reverse->keyval,
-                           &reverse->keycode,
-                           &reverse->mask);
+      binding_from_string (reverse->priv->binding, reverse->primary_combo);
     }
 
   if (set_backend == FALSE)
@@ -353,6 +345,7 @@ static void
 cc_keyboard_item_init (CcKeyboardItem *item)
 {
   item->priv = CC_KEYBOARD_ITEM_GET_PRIVATE (item);
+  item->primary_combo = g_new0 (CcKeyCombo, 1);
 }
 
 static void
@@ -372,6 +365,7 @@ cc_keyboard_item_finalize (GObject *object)
 
   /* Free memory */
   g_free (item->priv->binding);
+  g_free (item->primary_combo);
   g_free (item->gsettings_path);
   g_free (item->description);
   g_free (item->command);
@@ -458,8 +452,7 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
 
   g_free (item->priv->binding);
   item->priv->binding = settings_get_binding (item->settings, item->key);
-  binding_from_string (item->priv->binding, &item->keyval,
-                       &item->keycode, &item->mask);
+  binding_from_string (item->priv->binding, item->primary_combo);
   g_signal_connect (G_OBJECT (item->settings), "changed::binding",
 		    G_CALLBACK (binding_changed), item);
 
@@ -482,8 +475,7 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   g_free (item->priv->binding);
   item->priv->binding = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
-  binding_from_string (item->priv->binding, &item->keyval,
-                       &item->keycode, &item->mask);
+  binding_from_string (item->priv->binding, item->primary_combo);
 
   signal_name = g_strdup_printf ("changed::%s", item->key);
   g_signal_connect (G_OBJECT (item->settings), signal_name,

@@ -59,9 +59,7 @@ struct _CcKeyboardShortcutEditor
   GdkDevice          *grab_pointer;
   guint               grab_idle_id;
 
-  guint               custom_keycode;
-  guint               custom_keyval;
-  GdkModifierType     custom_mask;
+  CcKeyCombo         *custom_combo;
   gboolean            custom_is_modifier;
   gboolean            edited : 1;
 };
@@ -154,19 +152,20 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
   /* Only setup the binding when it was actually edited */
   if (self->edited)
     {
+      CcKeyCombo *combo = item->primary_combo;
       gchar *binding;
 
-      item->keycode = self->custom_keycode;
-      item->keyval = self->custom_keyval;
-      item->mask = self->custom_mask;
+      combo->keycode = self->custom_combo->keycode;
+      combo->keyval = self->custom_combo->keyval;
+      combo->mask = self->custom_combo->mask;
 
-      if (item->keycode == 0 && item->keyval == 0 && item->mask == 0)
+      if (combo->keycode == 0 && combo->keyval == 0 && combo->mask == 0)
         binding = g_strdup ("");
       else
         binding = gtk_accelerator_name_with_keycode (NULL,
-                                                     item->keyval,
-                                                     item->keycode,
-                                                     item->mask);
+                                                     combo->keyval,
+                                                     combo->keycode,
+                                                     combo->mask);
 
       g_object_set (G_OBJECT (item), "binding", binding, NULL);
 
@@ -194,9 +193,7 @@ clear_custom_entries (CcKeyboardShortcutEditor *self)
   gtk_label_set_label (GTK_LABEL (self->new_shortcut_conflict_label), "");
   gtk_label_set_label (GTK_LABEL (self->shortcut_conflict_label), "");
 
-  self->custom_keycode = 0;
-  self->custom_keyval = 0;
-  self->custom_mask = 0;
+  memset (self->custom_combo, 0, sizeof (CcKeyCombo));
   self->custom_is_modifier = TRUE;
   self->edited = FALSE;
 
@@ -352,11 +349,11 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   gchar *accel;
 
   is_custom = is_custom_shortcut (self);
-  accel_valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
-                is_valid_accel (self->custom_keyval, self->custom_mask) &&
+  accel_valid = is_valid_binding (self->custom_combo) &&
+                is_valid_accel (self->custom_combo) &&
                 !self->custom_is_modifier;
 
-  is_accel_empty = is_empty_binding (self->custom_keyval, self->custom_mask, self->custom_keycode);
+  is_accel_empty = is_empty_binding (self->custom_combo);
 
   if (is_accel_empty)
     accel_valid = TRUE;
@@ -400,11 +397,9 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 
   collision_item = cc_keyboard_manager_get_collision (self->manager,
                                                       self->item,
-                                                      self->custom_keyval,
-                                                      self->custom_mask,
-                                                      self->custom_keycode);
+                                                      self->custom_combo);
 
-  accel = gtk_accelerator_name (self->custom_keyval, self->custom_mask);
+  accel = gtk_accelerator_name (self->custom_combo->keyval, self->custom_combo->mask);
 
 
   /* Setup the accelerator label */
@@ -427,9 +422,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
       gchar *friendly_accelerator;
       gchar *collision_text;
 
-      friendly_accelerator = convert_keysym_state_to_string (self->custom_keyval,
-                                                             self->custom_mask,
-                                                             self->custom_keycode);
+      friendly_accelerator = convert_keysym_state_to_string (self->custom_combo);
 
       collision_text = g_strdup_printf (_("%s is already being used for <b>%s</b>. If you "
                                           "replace it, %s will be disabled"),
@@ -556,12 +549,14 @@ reset_custom_clicked_cb (CcKeyboardShortcutEditor *self)
 static void
 reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
 {
+  CcKeyCombo *combo;
   gchar *accel;
 
   /* Reset first, then update the shortcut */
   cc_keyboard_manager_reset_shortcut (self->manager, self->item);
 
-  accel = gtk_accelerator_name (self->item->keyval, self->item->mask);
+  combo = self->item->primary_combo;
+  accel = gtk_accelerator_name (combo->keyval, combo->mask);
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), accel);
 
   g_free (accel);
@@ -578,6 +573,7 @@ static void
 setup_keyboard_item (CcKeyboardShortcutEditor *self,
                      CcKeyboardItem           *item)
 {
+  CcKeyCombo *combo;
   gboolean is_custom;
   gchar *accel;
   gchar *text;
@@ -585,15 +581,16 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   if (!item)
     return;
 
+  combo = item->primary_combo;
   is_custom = item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
-  accel = gtk_accelerator_name (item->keyval, item->mask);
+  accel = gtk_accelerator_name (combo->keyval, combo->mask);
 
   /* To avoid accidentally thinking we unset the current keybinding, set the values
    * of the keyboard item that is being edited */
   self->custom_is_modifier = FALSE;
-  self->custom_keycode = item->keycode;
-  self->custom_keyval = item->keyval;
-  self->custom_mask = item->mask;
+  self->custom_combo->keycode = combo->keycode;
+  self->custom_combo->keyval = combo->keyval;
+  self->custom_combo->mask = combo->mask;
 
   /* Headerbar */
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar),
@@ -664,6 +661,7 @@ cc_keyboard_shortcut_editor_finalize (GObject *object)
   g_clear_object (&self->item);
   g_clear_object (&self->manager);
 
+  g_clear_pointer (&self->custom_combo, g_free);
   g_clear_pointer (&self->reset_item_binding, g_binding_unbind);
 
   G_OBJECT_CLASS (cc_keyboard_shortcut_editor_parent_class)->finalize (object);
@@ -770,9 +768,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
     {
       self->edited = TRUE;
       self->custom_is_modifier = FALSE;
-      self->custom_keycode = 0;
-      self->custom_keyval = 0;
-      self->custom_mask = 0;
+      memset (self->custom_combo, 0, sizeof (CcKeyCombo));
 
       gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
       gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), "");
@@ -787,12 +783,12 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
     }
 
   self->custom_is_modifier = event->is_modifier;
-  self->custom_keycode = event->hardware_keycode;
-  self->custom_keyval = keyval_lower;
-  self->custom_mask = real_mask;
+  self->custom_combo->keycode = event->hardware_keycode;
+  self->custom_combo->keyval = keyval_lower;
+  self->custom_combo->mask = real_mask;
 
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
-  self->custom_mask &= ~GDK_LOCK_MASK;
+  self->custom_combo->mask &= ~GDK_LOCK_MASK;
 
   setup_custom_shortcut (self);
 
@@ -945,6 +941,7 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
 
   self->mode = CC_SHORTCUT_EDITOR_EDIT;
   self->custom_is_modifier = TRUE;
+  self->custom_combo = g_new0 (CcKeyCombo, 1);
 
   gtk_widget_set_direction (self->custom_shortcut_accel_label, GTK_TEXT_DIR_LTR);
   gtk_widget_set_direction (self->shortcut_accel_label, GTK_TEXT_DIR_LTR);

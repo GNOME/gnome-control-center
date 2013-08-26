@@ -266,12 +266,12 @@ keyval_is_forbidden (guint keyval)
 }
 
 gboolean
-is_valid_binding (guint                  keyval,
-                  GdkModifierType        mask,
-                  guint                  keycode)
+is_valid_binding (CcKeyCombo *combo)
 {
-  if ((mask == 0 || mask == GDK_SHIFT_MASK) && keycode != 0)
+  if ((combo->mask == 0 || combo->mask == GDK_SHIFT_MASK) && combo->keycode != 0)
     {
+      guint keyval = combo->keyval;
+
       if ((keyval >= GDK_KEY_a && keyval <= GDK_KEY_z)
            || (keyval >= GDK_KEY_A && keyval <= GDK_KEY_Z)
            || (keyval >= GDK_KEY_0 && keyval <= GDK_KEY_9)
@@ -282,7 +282,7 @@ is_valid_binding (guint                  keyval,
            || (keyval >= GDK_KEY_hebrew_doublelowline && keyval <= GDK_KEY_hebrew_taf)
            || (keyval >= GDK_KEY_Thai_kokai && keyval <= GDK_KEY_Thai_lekkao)
            || (keyval >= GDK_KEY_Hangul_Kiyeog && keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
-           || (keyval == GDK_KEY_space && mask == 0)
+           || (keyval == GDK_KEY_space && combo->mask == 0)
            || keyval_is_forbidden (keyval)) {
         return FALSE;
       }
@@ -291,26 +291,23 @@ is_valid_binding (guint                  keyval,
 }
 
 gboolean
-is_empty_binding (guint                  keyval,
-                  GdkModifierType        mask,
-                  guint                  keycode)
+is_empty_binding (CcKeyCombo *combo)
 {
-  if (keyval == 0 &&
-      mask == 0 &&
-      keycode == 0)
+  if (combo->keyval == 0 &&
+      combo->mask == 0 &&
+      combo->keycode == 0)
     return TRUE;
   return FALSE;
 }
 
 gboolean
-is_valid_accel (guint           keyval,
-                GdkModifierType mask)
+is_valid_accel (CcKeyCombo *combo)
 {
   /* Unlike gtk_accelerator_valid(), we want to allow Tab when combined
    * with some modifiers (Alt+Tab and friends)
    */
-  return gtk_accelerator_valid (keyval, mask) ||
-         (keyval == GDK_KEY_Tab && mask != 0);
+  return gtk_accelerator_valid (combo->keyval, combo->mask) ||
+         (combo->keyval == GDK_KEY_Tab && combo->mask != 0);
 }
 
 gchar*
@@ -426,13 +423,11 @@ parse_keylist_from_file (const gchar *path)
  * https://git.gnome.org/browse/gtk+/tree/gtk/gtkcellrendereraccel.c#n261
  */
 gchar*
-convert_keysym_state_to_string (guint           keysym,
-                                GdkModifierType mask,
-                                guint           keycode)
+convert_keysym_state_to_string (CcKeyCombo *combo)
 {
   gchar *name;
 
-  if (keysym == 0 && keycode == 0)
+  if (combo->keyval == 0 && combo->keycode == 0)
     {
       /* This label is displayed in a treeview cell displaying
        * a disabled accelerator key combination.
@@ -441,10 +436,10 @@ convert_keysym_state_to_string (guint           keysym,
     }
   else
     {
-      name = gtk_accelerator_get_label_with_keycode (NULL, keysym, keycode, mask);
+      name = gtk_accelerator_get_label_with_keycode (NULL, combo->keyval, combo->keycode, combo->mask);
 
       if (name == NULL)
-        name = gtk_accelerator_name_with_keycode (NULL, keysym, keycode, mask);
+        name = gtk_accelerator_name_with_keycode (NULL, combo->keyval, combo->keycode, combo->mask);
     }
 
   return name;

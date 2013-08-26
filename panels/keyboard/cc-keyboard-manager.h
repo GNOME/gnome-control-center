@@ -47,9 +47,7 @@ void                 cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardMana
 
 CcKeyboardItem*      cc_keyboard_manager_get_collision           (CcKeyboardManager  *self,
                                                                   CcKeyboardItem     *item,
-                                                                  gint                keyval,
-                                                                  GdkModifierType     mask,
-                                                                  gint                keycode);
+                                                                  CcKeyCombo         *combo);
 
 void                 cc_keyboard_manager_disable_shortcut        (CcKeyboardManager  *self,
                                                                   CcKeyboardItem     *item);

@@ -105,15 +105,17 @@ static gboolean
 is_shortcut_different (CcUniquenessData *data,
                        CcKeyboardItem   *item)
 {
+  CcKeyCombo *combo = item->primary_combo;
+
   if (data->orig_item && cc_keyboard_item_equal (data->orig_item, item))
     return FALSE;
 
   if (data->new_keyval != 0)
     {
-      if (data->new_keyval != item->keyval)
+      if (data->new_keyval != combo->keyval)
         return TRUE;
     }
-  else if (item->keyval != 0 || data->new_keycode != item->keycode)
+  else if (combo->keyval != 0 || data->new_keycode != combo->keycode)
     {
       return TRUE;
     }
@@ -130,7 +132,7 @@ compare_keys_for_uniqueness (CcKeyboardItem   *current_item,
   /* No conflict for: blanks, different modifiers or ourselves */
   if (!current_item ||
       data->orig_item == current_item ||
-      data->new_mask != current_item->mask)
+      data->new_mask != current_item->primary_combo->mask)
     {
       return FALSE;
     }
@@ -909,9 +911,7 @@ cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
  * cc_keyboard_manager_get_collision:
  * @self: a #CcKeyboardManager
  * @item: (nullable): a keyboard shortcut
- * @keyval: the key value
- * @mask: a mask for the key sequence
- * @keycode: the code of the key.
+ * @combo: a #CcKeyCombo
  *
  * Retrieves the collision item for the given shortcut.
  *
@@ -920,9 +920,7 @@ cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
 CcKeyboardItem*
 cc_keyboard_manager_get_collision (CcKeyboardManager *self,
                                    CcKeyboardItem    *item,
-                                   gint               keyval,
-                                   GdkModifierType    mask,
-                                   gint               keycode)
+                                   CcKeyCombo        *combo)
 {
   CcUniquenessData data;
   BindingGroupType i;
@@ -930,12 +928,12 @@ cc_keyboard_manager_get_collision (CcKeyboardManager *self,
   g_return_val_if_fail (CC_IS_KEYBOARD_MANAGER (self), NULL);
 
   data.orig_item = item;
-  data.new_keyval = keyval;
-  data.new_mask = mask;
-  data.new_keycode = keycode;
+  data.new_keyval = combo->keyval;
+  data.new_mask = combo->mask;
+  data.new_keycode = combo->keycode;
   data.conflict_item = NULL;
 
-  if (keyval == 0 && keycode == 0)
+  if (combo->keyval == 0 && combo->keycode == 0)
     return NULL;
 
   /* Any number of shortcuts can be disabled */
@@ -995,19 +993,14 @@ cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
   /* Disables any shortcut that conflicts with the new shortcut's value */
   if (default_binding && *default_binding != '\0')
     {
-      GdkModifierType mask;
       CcKeyboardItem *collision;
+      CcKeyCombo combo;
       guint *keycodes;
-      guint keyval;
 
-      gtk_accelerator_parse_with_keycode (default_binding, &keyval, &keycodes, &mask);
+      gtk_accelerator_parse_with_keycode (default_binding, &combo.keyval, &keycodes, &combo.mask);
+      combo.keycode = keycodes ? keycodes[0] : 0;
 
-      collision = cc_keyboard_manager_get_collision (self,
-                                                     NULL,
-                                                     keyval,
-                                                     mask,
-                                                     keycodes ? keycodes[0] : 0);
-
+      collision = cc_keyboard_manager_get_collision (self, NULL, &combo);
       if (collision)
         cc_keyboard_manager_disable_shortcut (self, collision);
 

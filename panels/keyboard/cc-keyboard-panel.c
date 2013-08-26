@@ -109,18 +109,18 @@ transform_binding_to_accel (GBinding     *binding,
                             gpointer      user_data)
 {
   CcKeyboardItem *item;
+  CcKeyCombo *combo;
   gchar *accelerator;
 
   item = CC_KEYBOARD_ITEM (g_binding_get_source (binding));
+  combo = item->primary_combo;
 
   /* Embolden the label when the shortcut is modified */
   if (!cc_keyboard_item_is_value_default (item))
     {
       gchar *tmp;
 
-      tmp = convert_keysym_state_to_string (item->keyval,
-                                            item->mask,
-                                            item->keycode);
+      tmp = convert_keysym_state_to_string (combo);
 
       accelerator = g_strdup_printf ("<b>%s</b>", tmp);
 
@@ -128,9 +128,7 @@ transform_binding_to_accel (GBinding     *binding,
     }
   else
     {
-      accelerator = convert_keysym_state_to_string (item->keyval,
-                                                    item->mask,
-                                                    item->keycode);
+      accelerator = convert_keysym_state_to_string (combo);
     }
 
   g_value_take_string (to_value, accelerator);
@@ -396,17 +394,18 @@ static gboolean
 search_match_shortcut (CcKeyboardItem *item,
                        const gchar    *search)
 {
+  CcKeyCombo *combo = item->primary_combo;
   GStrv shortcut_tokens, search_tokens;
   g_autofree gchar *normalized_accel = NULL;
   g_autofree gchar *accel = NULL;
   gboolean match;
   guint i;
 
-  if (is_empty_binding (item->keyval, item->mask, item->keycode))
+  if (is_empty_binding (combo))
     return FALSE;
 
   match = TRUE;
-  accel = convert_keysym_state_to_string (item->keyval, item->mask, item->keycode);
+  accel = convert_keysym_state_to_string (combo);
   normalized_accel = cc_util_normalize_casefold_and_unaccent (accel);
 
   shortcut_tokens = g_strsplit_set (normalized_accel, SHORTCUT_DELIMITERS, -1);
