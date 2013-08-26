@@ -102,25 +102,24 @@ get_binding_from_variant (GVariant *variant)
 }
 
 static gboolean
-is_shortcut_different (CcUniquenessData *data,
-                       CcKeyboardItem   *item)
+find_conflict (CcUniquenessData *data,
+               CcKeyboardItem   *item)
 {
   CcKeyCombo *combo = item->primary_combo;
+  gboolean is_conflict = FALSE;
 
   if (data->orig_item && cc_keyboard_item_equal (data->orig_item, item))
     return FALSE;
 
   if (data->new_keyval != 0)
-    {
-      if (data->new_keyval != combo->keyval)
-        return TRUE;
-    }
-  else if (combo->keyval != 0 || data->new_keycode != combo->keycode)
-    {
-      return TRUE;
-    }
+    is_conflict = data->new_keyval == combo->keyval;
+  else
+    is_conflict = combo->keyval == 0 && data->new_keycode == combo->keycode;
 
-  return FALSE;
+  if (is_conflict)
+    data->conflict_item = item;
+
+  return is_conflict;
 }
 
 static gboolean
@@ -143,17 +142,14 @@ compare_keys_for_uniqueness (CcKeyboardItem   *current_item,
   if (reverse_item && cc_keyboard_item_is_hidden (current_item))
     return FALSE;
 
-  if (is_shortcut_different (data, current_item))
-    return FALSE;
+  if (find_conflict (data, current_item))
+    return TRUE;
 
   /* Also check for the reverse item if any */
-  if (reverse_item && is_shortcut_different (data, reverse_item))
-    return FALSE;
+  if (reverse_item && find_conflict (data, reverse_item))
+    return TRUE;
 
-  /* No tests failed and we found a conflict */
-  data->conflict_item = current_item;
-
-  return TRUE;
+  return FALSE;
 }
 
 static gboolean
