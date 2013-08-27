@@ -26,6 +26,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-rr.h>
 #include <libgnome-desktop/gnome-rr-config.h>
+#include <libgnome-desktop/gnome-bg.h>
 #include <glib/gi18n.h>
 #include <stdlib.h>
 #include <gdesktop-enums.h>
@@ -41,7 +42,7 @@ CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
-#define TOP_BAR_HEIGHT 10
+#define TOP_BAR_HEIGHT 5
 
 /* The minimum supported size for the panel, see:
  * http://live.gnome.org/Design/SystemSettings */
@@ -66,6 +67,9 @@ struct _CcDisplayPanelPrivate
   GnomeRRConfig     *current_configuration;
   CcRRLabeler       *labeler;
   GnomeRROutputInfo *current_output;
+
+  GnomeBG *background;
+  GnomeDesktopThumbnailFactory *thumbnail_factory;
 
   guint           focus_id;
   guint           screen_changed_handler_id;
@@ -132,6 +136,8 @@ cc_display_panel_dispose (GObject *object)
 
   g_clear_object (&priv->screen);
   g_clear_object (&priv->up_client);
+  g_clear_object (&priv->background);
+  g_clear_object (&priv->thumbnail_factory);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }
@@ -183,7 +189,8 @@ on_viewport_changed (FooScrollArea *scroll_area,
 }
 
 static void
-paint_output (cairo_t           *cr,
+paint_output (CcDisplayPanel    *panel,
+              cairo_t           *cr,
               GnomeRRConfig     *configuration,
               GnomeRROutputInfo *output,
               gint               num,
@@ -191,9 +198,8 @@ paint_output (cairo_t           *cr,
               gint               allocated_height)
 {
   GnomeRRRotation rotation;
-  cairo_text_extents_t extents;
+  GdkPixbuf *pixbuf;
   gint x, y, width, height;
-  gint max_extent;
   gboolean active;
 
   active = gnome_rr_output_info_is_active (output);
@@ -237,45 +243,75 @@ paint_output (cairo_t           *cr,
   cairo_rectangle (cr, x, y, width, height);
   cairo_fill (cr);
 
+  pixbuf = gnome_bg_create_thumbnail (panel->priv->background,
+                                      panel->priv->thumbnail_factory,
+                                      gdk_screen_get_default (), width, height);
+
   if (gnome_rr_output_info_get_primary (output)
       || gnome_rr_config_get_clone (configuration))
     {
-      gint top_bar_height;
-
-      top_bar_height = height / 12;
-
-      y += top_bar_height;
-      height -= top_bar_height;
+      y += TOP_BAR_HEIGHT;
+      height -= TOP_BAR_HEIGHT;
     }
 
-  cairo_set_source_rgb (cr, 0.7, 0.7, 0.7);
+  if (pixbuf)
+    gdk_cairo_set_source_pixbuf (cr, pixbuf, x + 1, y + 1);
+  else
+    cairo_set_source_rgb (cr, 0.7, 0.7, 0.7);
   cairo_rectangle (cr, x + 1, y + 1, width - 2, height - 2);
   cairo_fill (cr);
 
+  g_clear_object (&pixbuf);
+
   if (num > 0)
     {
+      PangoLayout *layout;
       gchar *number_str;
+      gdouble r = 3, r2 = r / 2.0, x1, y1, x2, y2;
+      PangoRectangle extents;
+      gdouble max_extent;
 
-      number_str = g_strdup_printf ("%d", num);
-      cairo_text_extents (cr, number_str, &extents);
+      number_str = g_strdup_printf ("<small>%d</small>", num);
+      layout = gtk_widget_create_pango_layout (GTK_WIDGET (panel), "");
+      pango_layout_set_markup (layout, number_str, -1);
+      pango_layout_get_extents (layout, NULL, &extents);
+      g_free (number_str);
 
-      cairo_set_source_rgb (cr, 0, 0, 0);
-      max_extent = MAX (extents.width, extents.height);
-      cairo_rectangle (cr, x + 5, y + 5, max_extent + 10, max_extent + 10);
+      cairo_set_source_rgba (cr, 0, 0, 0, 0.75);
+      max_extent = MAX ((extents.width - extents.x)/ PANGO_SCALE,
+                        (extents.height - extents.y) / PANGO_SCALE);
+
+      x += 5;
+      y += 5;
+      x1 = x;
+      x2 = x1 + max_extent + 1;
+      y1 = y;
+      y2 = y1 + max_extent + 1;
+      cairo_move_to    (cr, x1 + r, y1);
+      cairo_line_to    (cr, x2 - r, y1);
+      cairo_curve_to   (cr, x2 - r2, y1, x2, y1 + r2, x2, y1 + r);
+      cairo_line_to    (cr, x2, y2 - r);
+      cairo_curve_to   (cr, x2, y2 - r2, x2 - r2, y2, x2 - r, y2);
+      cairo_line_to    (cr, x1 + r, y2);
+      cairo_curve_to   (cr, x1 + r2, y2, x1, y2 - r2, x1, y2 - r);
+      cairo_line_to    (cr, x1, y1 + r);
+      cairo_curve_to   (cr, x1, y1 + r2, x1 + r2, y1, x1 + r, y1);
       cairo_fill (cr);
 
       cairo_set_source_rgb (cr, 1, 1, 1);
-      cairo_move_to (cr, x + 10, y + 10 + extents.height);
-      cairo_show_text (cr, number_str);
-
-      g_free (number_str);
+      cairo_move_to (cr,
+                     x + (max_extent / 2.0) - ((extents.width / PANGO_SCALE) / 2.0),
+                     y + (max_extent / 2.0) - ((extents.height / PANGO_SCALE) / 2.0));
+      pango_cairo_show_layout (cr, layout);
+      cairo_fill (cr);
+      g_object_unref (layout);
     }
 }
 
 static gboolean
 display_preview_draw (GtkWidget      *widget,
                       cairo_t        *cr,
-                      gpointer        data)
+                      CcDisplayPanel *panel)
 {
   GnomeRROutputInfo *output;
   GnomeRRConfig *config;
@@ -288,13 +324,14 @@ display_preview_draw (GtkWidget      *widget,
   width = gtk_widget_get_allocated_width (widget);
   height = gtk_widget_get_allocated_height (widget);
 
-  paint_output (cr, config, output, num, width, height);
+  paint_output (panel, cr, config, output, num, width, height);
 
   return TRUE;
 }
 
 static GtkWidget*
-display_preview_new (GnomeRROutputInfo *output,
+display_preview_new (CcDisplayPanel    *panel,
+                     GnomeRROutputInfo *output,
                      GnomeRRConfig     *config,
                      gint               num,
                      gint               base_height)
@@ -313,7 +350,7 @@ display_preview_new (GnomeRROutputInfo *output,
     }
 
   area = gtk_drawing_area_new ();
-  g_signal_connect (area, "draw", G_CALLBACK (display_preview_draw), NULL);
+  g_signal_connect (area, "draw", G_CALLBACK (display_preview_draw), panel);
 
   gtk_widget_set_size_request (area, base_height * (width / (gdouble) height), base_height);
 
@@ -398,7 +435,7 @@ on_screen_changed (CcDisplayPanel *panel)
           height = gnome_rr_output_info_get_preferred_height (outputs[i]);
         }
 
-      preview = display_preview_new (outputs[i], current, ++number,
+      preview = display_preview_new (panel, outputs[i], current, ++number,
                                      DISPLAY_PREVIEW_LIST_HEIGHT);
       gtk_size_group_add_widget (sizegroup, preview);
 
@@ -1219,7 +1256,7 @@ on_area_paint (FooScrollArea  *area,
     {
       int w, h;
       double scale = compute_scale (self, area);
-      double x, y;
+      gint x, y;
       int output_x, output_y;
       int total_w, total_h;
       GList *connected_outputs;
@@ -1248,7 +1285,7 @@ on_area_paint (FooScrollArea  *area,
       cairo_fill (cr);
 
       cairo_translate (cr, x, y);
-      paint_output (cr, self->priv->current_configuration, list->data,
+      paint_output (self, cr, self->priv->current_configuration, list->data,
                     cc_display_panel_get_output_id (list->data),
                     w * scale, h * scale);
 
@@ -1766,7 +1803,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
 
   /* preview */
-  preview = display_preview_new (priv->current_output,
+  preview = display_preview_new (panel, priv->current_output,
                                  priv->current_configuration,
                                  cc_display_panel_get_output_id (priv->current_output),
                                  DISPLAY_PREVIEW_SETUP_HEIGHT);
@@ -2080,10 +2117,19 @@ cc_display_panel_init (CcDisplayPanel *self)
   CcDisplayPanelPrivate *priv;
   GtkWidget *frame, *vbox;
   GError *error = NULL;
+  GSettings *settings;
 
   g_resources_register (cc_display_get_resource ());
 
   priv = self->priv = DISPLAY_PANEL_PRIVATE (self);
+
+  settings = g_settings_new ("org.gnome.desktop.background");
+  priv->background = gnome_bg_new ();
+  gnome_bg_load_from_preferences (priv->background, settings);
+  g_object_unref (settings);
+
+  priv->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+
 
   priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
   if (!priv->screen)
