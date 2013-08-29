@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-15 01:01+0000\n"
-"PO-Revision-Date: 2013-08-16 10:36+0800\n"
+"POT-Creation-Date: 2013-08-23 10:00+0000\n"
+"PO-Revision-Date: 2013-08-28 09:13+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -24,37 +24,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.4\n"
 
+#: ../panels/background/background.ui.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "背景"
+
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:2
+#: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
 msgstr "整天的變更"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
+#| msgid "Lock screen"
+msgid "Lock Screen"
+msgstr "鎖定畫面"
+
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Tile"
 msgstr "鋪排"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "縮放"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Center"
 msgstr "置中"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Scale"
 msgstr "縮放"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Fill"
 msgstr "填滿"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Span"
 msgstr "合併"
@@ -95,13 +105,16 @@ msgstr "您可以將影像加入您的%s資料夾，它們會顯示在這裡"
 #: ../panels/background/cc-background-chooser-dialog.c:443
 #: ../panels/bluetooth/cc-bluetooth-panel.c:631
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/display/cc-display-panel.c:1348
+#: ../panels/display/cc-display-panel.c:1746
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1202
-#: ../panels/network/net-device-wifi.c:1408
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
 #: ../panels/search/cc-search-locations-dialog.c:682
 #: ../panels/sharing/cc-sharing-panel.c:421
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
@@ -133,13 +146,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "無桌面背景"
 
-#: ../panels/background/cc-background-panel.c:460
+#: ../panels/background/cc-background-panel.c:497
 msgid "Current background"
 msgstr "目前的背景"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "背景"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -250,7 +259,7 @@ msgid ""
 msgstr "如果您刪除此裝置，下次使用時必須再次設定它。"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:632
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+#: ../panels/online-accounts/cc-online-accounts-panel.c:857
 msgid "_Remove"
 msgstr "移除(_R)"
 
@@ -576,7 +585,7 @@ msgstr "顯示校準"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1433
+#: ../panels/user-accounts/um-account-dialog.c:1470
 msgid "Cancel"
 msgstr "取消"
 
@@ -943,9 +952,37 @@ msgid "Language"
 msgstr "語言"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/mouse/cc-mouse-panel.c:119 ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "完成(_D)"
+
+#. Translators: This is the full date and time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:322
+#| msgid "%a %l:%M %p"
+msgid "%e %B %Y, %l:%M %p"
+msgstr "％Y %b%e日, %l:%M %p"
+
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:327
+msgid "%e %B %Y, %R"
+msgstr "％Y %b%e日，%R"
+
+#. Translators: UTC here means the Coordinated Universal Time.
+#. * %z will be replaced by the offset from UTC e.g. UTC+0200
+#: ../panels/datetime/cc-datetime-panel.c:543
+msgid "UTC%z"
+msgstr "UTC%z"
+
+#. Translators: This is the time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:548
+#| msgid "%a %l:%M %p"
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#. Translators: This is the time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:553
+msgid "%R"
+msgstr "%R"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "January"
@@ -996,65 +1033,88 @@ msgid "December"
 msgstr "十二月"
 
 #: ../panels/datetime/datetime.ui.h:13
-msgid "_Region:"
-msgstr "區域(_R)："
-
-#: ../panels/datetime/datetime.ui.h:14
-msgid "_City:"
-msgstr "城市(_C)："
-
-#: ../panels/datetime/datetime.ui.h:15
-msgid "_Network Time"
-msgstr "網路時刻(_N)"
-
-#. Translator: this is the separator between hours and minutes, like in HH:MM
-#: ../panels/datetime/datetime.ui.h:17
-msgid ":"
-msgstr ":"
-
-#: ../panels/datetime/datetime.ui.h:18
-msgid "Set the time one hour ahead."
-msgstr "將時刻延後一小時。"
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Set the time one hour back."
-msgstr "將時刻提早一小時。"
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Set the time one minute ahead."
-msgstr "將時刻延後一分鐘。"
-
-#: ../panels/datetime/datetime.ui.h:21
-msgid "Set the time one minute back."
-msgstr "將時刻提早一分鐘。"
-
-#: ../panels/datetime/datetime.ui.h:22
-msgid "Switch between AM and PM."
-msgstr "在上午與下午之間切換。"
-
-#: ../panels/datetime/datetime.ui.h:23
-msgid "Month"
-msgstr "月"
-
-#: ../panels/datetime/datetime.ui.h:24
-msgid "Day"
-msgstr "日"
-
-#: ../panels/datetime/datetime.ui.h:25
-msgid "Year"
-msgstr "年"
-
-#: ../panels/datetime/datetime.ui.h:26
-msgid "24-hour"
-msgstr "24-小時"
-
-#: ../panels/datetime/datetime.ui.h:27
-msgid "AM/PM"
-msgstr "AM/PM"
-
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date & Time"
 msgstr "日期與時刻"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "Hour"
+msgstr "時"
+
+#. Translator: this is the separator between hours and minutes, like in HH∶MM
+#: ../panels/datetime/datetime.ui.h:16
+msgid "∶"
+msgstr "∶"
+
+#: ../panels/datetime/datetime.ui.h:17
+#| msgid "minute"
+#| msgid_plural "minutes"
+msgid "Minute"
+msgstr "分"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Switch between AM and PM."
+msgstr "在上午與下午之間切換。"
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Day"
+msgstr "日"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Month"
+msgstr "月"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Year"
+msgstr "年"
+
+#: ../panels/datetime/datetime.ui.h:22
+#| msgid "Time"
+msgid "Time Zone"
+msgstr "時區"
+
+#: ../panels/datetime/datetime.ui.h:23
+#| msgid "Search for the string"
+msgid "Search for a city"
+msgstr "搜尋城市"
+
+#: ../panels/datetime/datetime.ui.h:24
+#| msgid "Date & Time"
+msgid "Automatic _Date & Time"
+msgstr "自動調整日期 & 時刻(_D)"
+
+#: ../panels/datetime/datetime.ui.h:25
+#| msgid "Requires Internet connection"
+msgid "Requires internet access"
+msgstr "需要網際網路連線"
+
+#: ../panels/datetime/datetime.ui.h:26
+#| msgid "Automatic _Connect"
+msgid "Automatic Time _Zone"
+msgstr "自動調整時區(_Z)"
+
+#: ../panels/datetime/datetime.ui.h:27
+#| msgid "Date & Time"
+msgid "Date & _Time"
+msgstr "日期 & 時刻(_T)"
+
+#: ../panels/datetime/datetime.ui.h:28
+#| msgid "Firewall _Zone"
+msgid "Time _Zone"
+msgstr "時區(_Z)"
+
+#: ../panels/datetime/datetime.ui.h:29
+#| msgid "Formats"
+msgid "Time _Format"
+msgstr "時刻格式(_F)"
+
+#: ../panels/datetime/datetime.ui.h:30
+msgid "24-hour"
+msgstr "24-小時"
+
+#: ../panels/datetime/datetime.ui.h:31
+msgid "AM / PM"
+msgstr "AM / PM"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
@@ -1073,104 +1133,147 @@ msgstr "改變系統時刻與日期設定值"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "要改變時刻或日期設定值，您需要通過驗證。"
 
-#: ../panels/display/cc-display-panel.c:491
-msgctxt "display panel, rotation"
-msgid "Normal"
-msgstr "正常"
+#: ../panels/display/cc-display-panel.c:421
+#| msgid "Close"
+msgid "Lid Closed"
+msgstr "上蓋已經關閉"
 
-#: ../panels/display/cc-display-panel.c:492
-msgctxt "display panel, rotation"
-msgid "Counterclockwise"
-msgstr "逆時針"
-
-#: ../panels/display/cc-display-panel.c:493
-msgctxt "display panel, rotation"
-msgid "Clockwise"
-msgstr "順時針"
-
-#: ../panels/display/cc-display-panel.c:494
-msgctxt "display panel, rotation"
-msgid "180 Degrees"
-msgstr "180 度"
-
-#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
-#. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external projector.  Here, "Mirrored" is being
-#. * used as an adjective.  For example, the Spanish translation could be
-#. * "Pantallas en Espejo".
-#.
-#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
-#. Translators:  this is the feature where what you see on your
-#. * laptop's screen is the same as your external projector.
-#. * Here, "Mirrored" is being used as an adjective.  For example,
-#. * the Spanish translation could be "Pantallas en Espejo".
-#.
-#: ../panels/display/cc-display-panel.c:633
-#: ../panels/display/cc-rr-labeler.c:418
-msgid "Mirrored Displays"
+#. translators: "Mirrored" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:424
+#| msgid "Mirrored Displays"
+msgid "Mirrored"
 msgstr "鏡射顯示器"
 
-#: ../panels/display/cc-display-panel.c:657
+#: ../panels/display/cc-display-panel.c:426
+#: ../panels/display/cc-display-panel.c:1877
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Monitor"
-msgstr "顯示器"
+#| msgid "Primary _button"
+msgid "Primary"
+msgstr "主要"
 
-#: ../panels/display/cc-display-panel.c:1702
-msgid "Drag to change primary display."
-msgstr "拖曳以改變主要顯示器。"
+#: ../panels/display/cc-display-panel.c:428
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:573
+#: ../panels/universal-access/cc-ua-panel.c:699
+#: ../panels/universal-access/uap.ui.h:6
+msgid "Off"
+msgstr "關閉"
 
-#: ../panels/display/cc-display-panel.c:1760
-msgid ""
-"Select a monitor to change its properties; drag it to rearrange its "
-"placement."
-msgstr "選擇一個螢幕以改變它的屬性；拖曳它則能重新排列它的位置。"
+#: ../panels/display/cc-display-panel.c:431
+#| msgid "Secondary click delay"
+msgid "Secondary"
+msgstr "次要"
 
-#: ../panels/display/cc-display-panel.c:2157
-msgid "%a %R"
-msgstr "%a %R"
+#: ../panels/display/cc-display-panel.c:1345
+#| msgid "Mirrored Displays"
+msgid "Arrange Combined Displays"
+msgstr "排列組合的顯示器"
 
-#: ../panels/display/cc-display-panel.c:2159
-msgid "%a %l:%M %p"
-msgstr "%a %l:%M %p"
+#: ../panels/display/cc-display-panel.c:1349
+#: ../panels/display/cc-display-panel.c:1747
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+msgid "_Apply"
+msgstr "套用(_A)"
 
-#: ../panels/display/cc-display-panel.c:2321
-#: ../panels/display/cc-display-panel.c:2373
-#, c-format
-msgid "Failed to apply configuration: %s"
-msgstr "無法套用組態：%s"
+#: ../panels/display/cc-display-panel.c:1369
+msgid "Drag displays to rearrange them"
+msgstr "拖拉顯示器以重新排列他們"
 
-#: ../panels/display/cc-display-panel.c:2401
-msgid "Could not save the monitor configuration"
-msgstr "無法儲存顯示器組態"
+#. size
+#: ../panels/display/cc-display-panel.c:1811
+msgid "Size"
+msgstr "尺寸"
 
-#: ../panels/display/cc-display-panel.c:2461
-msgid "Could not detect displays"
-msgstr "無法偵測顯示器"
+#. aspect ratio
+#: ../panels/display/cc-display-panel.c:1826
+#: ../panels/display/display-capplet.ui.h:12
+msgid "Aspect Ratio"
+msgstr "長寬比"
 
-#: ../panels/display/cc-display-panel.c:2673
+#: ../panels/display/cc-display-panel.c:1847
+#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "解析度"
+
+#: ../panels/display/cc-display-panel.c:1878
+#: ../panels/display/display-capplet.ui.h:2
+msgid "Show the top bar and Activities Overview on this display"
+msgstr "在這個顯示器顯示頂端列與活動概覽"
+
+#: ../panels/display/cc-display-panel.c:1884
+#| msgid "Secondary click delay"
+msgid "Secondary Display"
+msgstr "次要顯示器"
+
+#: ../panels/display/cc-display-panel.c:1885
+msgid "Join this display with another to create an extra workspace"
+msgstr "將這個顯示器與另一個顯示器結合以建立額外的工作區"
+
+#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/display/display-capplet.ui.h:3
+#| msgid "Orientation"
+msgid "Presentation"
+msgstr "展示"
+
+#: ../panels/display/cc-display-panel.c:1893
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Show slideshows and media only"
+msgstr "只顯示投影片與媒體"
+
+#. translators: "Mirror" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:1898
+#: ../panels/display/display-capplet.ui.h:5
+msgid "Mirror"
+msgstr "鏡射"
+
+#: ../panels/display/cc-display-panel.c:1899
+msgid "Show your existing view on both displays"
+msgstr "在兩個顯示器顯示您現有的檢視"
+
+#: ../panels/display/cc-display-panel.c:2092
 msgid "Could not get screen information"
 msgstr "無法取得螢幕資訊"
 
-#: ../panels/display/display-capplet.ui.h:2
-msgid "_Resolution"
-msgstr "解析度(_R)"
-
-#: ../panels/display/display-capplet.ui.h:3
-msgid "R_otation"
-msgstr "旋轉(_O)"
-
-#. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:5
-msgid "_Mirror displays"
-msgstr "鏡射顯示器(_M)"
+#: ../panels/display/cc-display-panel.c:2123
+#| msgid "Mirrored Displays"
+msgid "_Arrange Combined Displays"
+msgstr "排列組合的顯示器(_A)"
 
 #: ../panels/display/display-capplet.ui.h:6
-msgid "Note: may limit resolution options"
-msgstr "注意：可能會限制解析度選項"
+msgid "Show your primary display on this screen also"
+msgstr "也在這個螢幕顯示您的主要顯示"
 
 #: ../panels/display/display-capplet.ui.h:7
-msgid "_Detect Displays"
-msgstr "偵測顯示器(_D)"
+msgid "Combine"
+msgstr "組合"
+
+#: ../panels/display/display-capplet.ui.h:8
+msgid "Join with the primary display to create an extra space"
+msgstr "結合主要顯示器以建立額外的工作區"
+
+#: ../panels/display/display-capplet.ui.h:9
+#| msgid "_Turn On"
+msgid "Turn Off"
+msgstr "關閉"
+
+#: ../panels/display/display-capplet.ui.h:10
+#| msgid "Could not detect displays"
+msgid "Don't use the display"
+msgstr "不使用這個顯示器"
+
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/printers/printers.ui.h:12
+msgid "Model"
+msgstr "型號"
+
+#: ../panels/display/display-capplet.ui.h:14
+msgid "Refresh Rate"
+msgstr "更新率"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Displays"
@@ -1797,7 +1900,7 @@ msgstr "重新指派(_R)"
 msgid "Test Your _Settings"
 msgstr "測試您的設定值(_S)"
 
-#: ../panels/mouse/cc-mouse-panel.c:116
+#: ../panels/mouse/cc-mouse-panel.c:117
 msgid "Test Your Settings"
 msgstr "測試您的設定值"
 
@@ -1941,11 +2044,11 @@ msgstr "單擊，次要按鈕"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "飛安模式(_P)"
 
-#: ../panels/network/cc-network-panel.c:914
+#: ../panels/network/cc-network-panel.c:925
 msgid "Network proxy"
 msgstr "網路代理伺服器"
 
@@ -1953,14 +2056,14 @@ msgstr "網路代理伺服器"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1093 ../panels/network/net-vpn.c:285
+#: ../panels/network/cc-network-panel.c:1104 ../panels/network/net-vpn.c:285
 #: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1228
+#: ../panels/network/cc-network-panel.c:1239
 msgid "The system network services are not compatible with this version."
 msgstr "系統網路服務與這個版本不相容。"
 
@@ -1994,34 +2097,34 @@ msgstr "自動"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:383
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:226
-#: ../panels/network/net-device-wifi.c:388
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
 #: ../panels/network/network-wifi.ui.h:17
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:229
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:235
+#: ../panels/network/net-device-wifi.c:234
 msgid "Enterprise"
 msgstr "企業版"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:240
-#: ../panels/network/net-device-wifi.c:373
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "沒有"
@@ -2032,18 +2135,18 @@ msgid "Never"
 msgstr "永不"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:787
+#: ../panels/user-accounts/um-utils.c:803
 msgid "Today"
 msgstr "今日"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:790
+#: ../panels/user-accounts/um-utils.c:806
 msgid "Yesterday"
 msgstr "昨日"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:125
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2052,37 +2155,37 @@ msgstr[0] "%i 天以前"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:53
-#: ../panels/network/net-device-wifi.c:535
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "沒有"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "太弱"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "確定"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "良好"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "很好"
@@ -2216,10 +2319,6 @@ msgstr "WPA & WPA2 個人版"
 #: ../panels/network/connection-editor/ce-page-security.c:337
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 企業版"
-
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
-msgid "_Apply"
-msgstr "套用(_A)"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
@@ -2406,7 +2505,7 @@ msgstr "新增設定組合"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:509
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1434
+#: ../panels/user-accounts/um-account-dialog.c:1471
 msgid "_Add"
 msgstr "加入(_A)"
 
@@ -2445,7 +2544,7 @@ msgid "_Reset"
 msgstr "重設(_R)"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1409
+#: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "遺忘(_F)"
@@ -2578,17 +2677,17 @@ msgid "Bridge slaves"
 msgstr "橋接的連線"
 
 #: ../panels/network/net-device-ethernet.c:111
-#: ../panels/network/net-device-wifi.c:463
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "永不"
 
 #: ../panels/network/net-device-ethernet.c:121
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "今日"
 
 #: ../panels/network/net-device-ethernet.c:123
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "昨日"
 
@@ -2616,7 +2715,7 @@ msgid "Wired"
 msgstr "有線"
 
 #: ../panels/network/net-device-ethernet.c:355
-#: ../panels/network/net-device-wifi.c:1550
+#: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2633,7 +2732,7 @@ msgstr "設定組合 %d"
 msgid "Add new connection"
 msgstr "加入新連線"
 
-#: ../panels/network/net-device-wifi.c:1118
+#: ../panels/network/net-device-wifi.c:1117
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2641,52 +2740,52 @@ msgstr ""
 "如果您有無線網路以外的方式連線到網際網路，您可以使用它來與其他人分享您的網際"
 "網路連線。"
 
-#: ../panels/network/net-device-wifi.c:1122
+#: ../panels/network/net-device-wifi.c:1121
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "切換無線網路熱點會讓您從 <b>%s</b> 斷線。"
 
-#: ../panels/network/net-device-wifi.c:1126
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr "當熱點在使用中時是沒有辦法透過您的無線網路存取網際網路的。"
 
-#: ../panels/network/net-device-wifi.c:1200
+#: ../panels/network/net-device-wifi.c:1199
 msgid "Stop hotspot and disconnect any users?"
 msgstr "停止熱點並中斷任何使用者的連線？"
 
-#: ../panels/network/net-device-wifi.c:1203
+#: ../panels/network/net-device-wifi.c:1202
 msgid "_Stop Hotspot"
 msgstr "停止熱點(_S)"
 
-#: ../panels/network/net-device-wifi.c:1275
+#: ../panels/network/net-device-wifi.c:1274
 msgid "System policy prohibits use as a Hotspot"
 msgstr "系統原則禁止做為熱點"
 
-#: ../panels/network/net-device-wifi.c:1278
+#: ../panels/network/net-device-wifi.c:1277
 msgid "Wireless device does not support Hotspot mode"
 msgstr "無線裝置不支援熱點模式"
 
-#: ../panels/network/net-device-wifi.c:1405
+#: ../panels/network/net-device-wifi.c:1404
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr "選取網路的詳細資料包含密碼及任何自訂的組態都會消失。"
 
-#: ../panels/network/net-device-wifi.c:1715
+#: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "歷史紀錄"
 
-#: ../panels/network/net-device-wifi.c:1719 ../panels/power/power.ui.h:21
-#: ../panels/privacy/privacy.ui.h:10 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
 #: ../panels/wacom/cc-wacom-page.c:525
 msgid "_Close"
 msgstr "關閉(_C)"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1727
+#: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "遺忘(_F)"
@@ -3525,25 +3624,14 @@ msgid "Show Details in Lock Screen"
 msgstr "在鎖定畫面中顯示詳細資料"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1745
+#: ../panels/power/cc-power-panel.c:1751 ../panels/power/cc-power-panel.c:1758
 #: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/privacy/cc-privacy-panel.c:117
 #: ../panels/universal-access/cc-ua-panel.c:253
 #: ../panels/universal-access/cc-ua-panel.c:573
 #: ../panels/universal-access/cc-ua-panel.c:699
 msgid "On"
 msgstr "開啟"
-
-#: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1732 ../panels/power/cc-power-panel.c:1743
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
-#: ../panels/universal-access/cc-ua-panel.c:253
-#: ../panels/universal-access/cc-ua-panel.c:573
-#: ../panels/universal-access/cc-ua-panel.c:699
-#: ../panels/universal-access/uap.ui.h:6
-msgid "Off"
-msgstr "關閉"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3566,26 +3654,30 @@ msgstr "顯示彈出式橫幅"
 msgid "Show in Lock Screen"
 msgstr "在鎖定畫面中顯示"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:197
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "其他"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:300
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "加入帳號"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:339
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "郵件"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:345
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "連絡人"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:351
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "聊天"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "資源"
 
@@ -3605,19 +3697,19 @@ msgstr "登入以啟用這個帳號。"
 msgid "_Sign In"
 msgstr "登入(_S)"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:747
+#: ../panels/online-accounts/cc-online-accounts-panel.c:758
 msgid "Error creating account"
 msgstr "建立帳號時發生錯誤"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:787
+#: ../panels/online-accounts/cc-online-accounts-panel.c:818
 msgid "Error removing account"
 msgstr "移除帳號時發生錯誤"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:823
+#: ../panels/online-accounts/cc-online-accounts-panel.c:854
 msgid "Are you sure you want to remove the account?"
 msgstr "確定要刪除這個帳號？"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:825
+#: ../panels/online-accounts/cc-online-accounts-panel.c:856
 msgid "This will not remove the account on the server."
 msgstr "這不會移除伺服器上的帳號。"
 
@@ -3631,11 +3723,15 @@ msgstr "連接到您的線上帳號並決定要用它們來做什麼"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
+#| msgid ""
+#| "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+#| "ownCloud;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
-"網頁;線上;聊天;行事曆;郵件;連絡人;"
+"Kerberos;IMAP;SMTP;網頁;線上;聊天;行事曆;郵件;連絡人;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3785,7 +3881,7 @@ msgstr "電腦"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:537 ../panels/power/cc-power-panel.c:747
-#: ../panels/power/cc-power-panel.c:2069
+#: ../panels/power/cc-power-panel.c:2082
 msgid "Battery"
 msgstr "電池"
 
@@ -3829,75 +3925,75 @@ msgstr "沒電"
 msgid "Batteries"
 msgstr "電池"
 
-#: ../panels/power/cc-power-panel.c:1138
+#: ../panels/power/cc-power-panel.c:1151
 msgid "When _idle"
 msgstr "閒置時(_I)"
 
-#: ../panels/power/cc-power-panel.c:1507
+#: ../panels/power/cc-power-panel.c:1520
 msgid "Power Saving"
 msgstr "節省電源"
 
-#: ../panels/power/cc-power-panel.c:1535
+#: ../panels/power/cc-power-panel.c:1548
 msgid "_Screen brightness"
 msgstr "螢幕亮度(_S)"
 
-#: ../panels/power/cc-power-panel.c:1541
+#: ../panels/power/cc-power-panel.c:1554
 msgid "_Keyboard brightness"
 msgstr "鍵盤亮度(_K)"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1564
 msgid "_Dim screen when inactive"
 msgstr "當不活動後降低螢幕亮度(_D)"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1589
 msgid "_Blank screen"
 msgstr "空白螢幕(_B)"
 
-#: ../panels/power/cc-power-panel.c:1613
+#: ../panels/power/cc-power-panel.c:1626
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1618
+#: ../panels/power/cc-power-panel.c:1631
 msgid "Turns off wireless devices"
 msgstr "關閉無線裝置"
 
-#: ../panels/power/cc-power-panel.c:1643
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Mobile broadband"
 msgstr "行動寬頻(_M)"
 
-#: ../panels/power/cc-power-panel.c:1648
+#: ../panels/power/cc-power-panel.c:1661
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "關閉行動寬頻 (3G、4G、WiMax 等) 裝置"
 
-#: ../panels/power/cc-power-panel.c:1683
+#: ../panels/power/cc-power-panel.c:1696
 msgid "_Bluetooth"
 msgstr "藍牙(_B)"
 
-#: ../panels/power/cc-power-panel.c:1734
+#: ../panels/power/cc-power-panel.c:1747
 msgid "When on battery power"
 msgstr "使用電池電源時"
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1749
 msgid "When plugged in"
 msgstr "當插入電源線時"
 
-#: ../panels/power/cc-power-panel.c:1865
+#: ../panels/power/cc-power-panel.c:1878
 msgid "Suspend & Power Off"
 msgstr "暫停與關閉電源"
 
-#: ../panels/power/cc-power-panel.c:1898
+#: ../panels/power/cc-power-panel.c:1911
 msgid "_Automatic suspend"
 msgstr "自動暫停(_A)"
 
-#: ../panels/power/cc-power-panel.c:1922
+#: ../panels/power/cc-power-panel.c:1935
 msgid "When battery power is _critical"
 msgstr "當電池的電量極低時(_C)"
 
-#: ../panels/power/cc-power-panel.c:1979
+#: ../panels/power/cc-power-panel.c:1992
 msgid "Power Off"
 msgstr "關閉電源"
 
-#: ../panels/power/cc-power-panel.c:2121
+#: ../panels/power/cc-power-panel.c:2134
 msgid "Devices"
 msgstr "裝置"
 
@@ -4374,10 +4470,6 @@ msgstr "紙張來源"
 msgid "Output Tray"
 msgstr "出紙匣"
 
-#: ../panels/printers/pp-options-dialog.c:86
-msgid "Resolution"
-msgstr "解析度"
-
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript 前置過濾器"
@@ -4529,10 +4621,6 @@ msgstr "工作"
 msgid "Show _Jobs"
 msgstr "顯示工作(_J)"
 
-#: ../panels/printers/printers.ui.h:12
-msgid "Model"
-msgstr "型號"
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "標籤"
@@ -4569,27 +4657,40 @@ msgstr ""
 "抱歉！系統列印服務\n"
 "似乎無法使用。"
 
-#: ../panels/privacy/cc-privacy-panel.c:104
-msgid "Hidden"
-msgstr "隱藏"
-
-#: ../panels/privacy/cc-privacy-panel.c:104
-msgid "Visible"
-msgstr "顯示"
-
-#: ../panels/privacy/cc-privacy-panel.c:272 ../panels/privacy/privacy.ui.h:31
+#: ../panels/privacy/cc-privacy-panel.c:245 ../panels/privacy/privacy.ui.h:26
 msgid "Screen Lock"
 msgstr "螢幕鎖定"
 
-#: ../panels/privacy/cc-privacy-panel.c:339 ../panels/privacy/privacy.ui.h:9
-msgid "Name & Visibility"
-msgstr "名稱與可見度"
-
-#: ../panels/privacy/cc-privacy-panel.c:447 ../panels/privacy/privacy.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:358 ../panels/privacy/privacy.ui.h:20
 msgid "Usage & History"
 msgstr "使月與歷史紀錄"
 
-#: ../panels/privacy/cc-privacy-panel.c:577 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:486
+msgid "Empty all items from Trash?"
+msgstr "要清除回收筒中所有的項目？"
+
+#: ../panels/privacy/cc-privacy-panel.c:487
+msgid "All items in the Trash will be permanently deleted."
+msgstr "所有在回收筒中的項目會永遠刪除。"
+
+#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:32
+msgid "_Empty Trash"
+msgstr "清理回收筒(_E)"
+
+#: ../panels/privacy/cc-privacy-panel.c:511
+#| msgid "Purge Trash & Temporary Files"
+msgid "Delete all the temporary files?"
+msgstr "刪除所有暫存檔案？"
+
+#: ../panels/privacy/cc-privacy-panel.c:512
+msgid "All the temporary files will be permanently deleted."
+msgstr "所有的暫存檔案會永遠刪除。"
+
+#: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
+msgid "_Purge Temporary Files"
+msgstr "清理暫存檔案(_P)"
+
+#: ../panels/privacy/cc-privacy-panel.c:535 ../panels/privacy/privacy.ui.h:31
 msgid "Purge Trash & Temporary Files"
 msgstr "清除回收筒與暫存檔案"
 
@@ -4618,67 +4719,51 @@ msgstr "螢幕關閉"
 msgid "30 seconds"
 msgstr "30 秒"
 
-#: ../panels/privacy/privacy.ui.h:11
-msgid "Control how you appear on the screen and the network."
-msgstr "控制您在螢幕及網路上如何顯示。"
-
-#: ../panels/privacy/privacy.ui.h:12
-msgid "Display _full name in top bar"
-msgstr "在頂端列顯示全名(_F)"
-
-#: ../panels/privacy/privacy.ui.h:13
-msgid "Display full name in _lock screen"
-msgstr "在鎖定畫面中顯示全名(_L)"
-
-#: ../panels/privacy/privacy.ui.h:14
-msgid "_Stealth Mode"
-msgstr "隱密模式(_S)"
-
-#: ../panels/privacy/privacy.ui.h:15
+#: ../panels/privacy/privacy.ui.h:9
 msgid "Immediately"
 msgstr "立即"
 
-#: ../panels/privacy/privacy.ui.h:16
+#: ../panels/privacy/privacy.ui.h:10
 msgid "1 day"
 msgstr "1 天"
 
-#: ../panels/privacy/privacy.ui.h:17
+#: ../panels/privacy/privacy.ui.h:11
 msgid "2 days"
 msgstr "2 天"
 
-#: ../panels/privacy/privacy.ui.h:18
+#: ../panels/privacy/privacy.ui.h:12
 msgid "3 days"
 msgstr "3 天"
 
-#: ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/privacy.ui.h:13
 msgid "4 days"
 msgstr "4 天"
 
-#: ../panels/privacy/privacy.ui.h:20
+#: ../panels/privacy/privacy.ui.h:14
 msgid "5 days"
 msgstr "5 天"
 
-#: ../panels/privacy/privacy.ui.h:21
+#: ../panels/privacy/privacy.ui.h:15
 msgid "6 days"
 msgstr "6 天"
 
-#: ../panels/privacy/privacy.ui.h:22
+#: ../panels/privacy/privacy.ui.h:16
 msgid "7 days"
 msgstr "7 天"
 
-#: ../panels/privacy/privacy.ui.h:23
+#: ../panels/privacy/privacy.ui.h:17
 msgid "14 days"
 msgstr "14 天"
 
-#: ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/privacy.ui.h:18
 msgid "30 days"
 msgstr "30 天"
 
-#: ../panels/privacy/privacy.ui.h:25
+#: ../panels/privacy/privacy.ui.h:19
 msgid "Forever"
 msgstr "永遠"
 
-#: ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/privacy.ui.h:21
 msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
@@ -4686,57 +4771,49 @@ msgstr ""
 "記住您的歷史紀錄會讓需要再次找到某樣東西時更簡單。這些項目永遠不會透過網路分"
 "享出去。"
 
-#: ../panels/privacy/privacy.ui.h:28
+#: ../panels/privacy/privacy.ui.h:22
 msgid "Cl_ear Recent History"
 msgstr "清除最近使用紀錄(_E)"
 
-#: ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/privacy.ui.h:24
 msgid "_Recently Used"
 msgstr "最近使用的(_R)"
 
-#: ../panels/privacy/privacy.ui.h:30
+#: ../panels/privacy/privacy.ui.h:25
 msgid "Retain _History"
 msgstr "保留歷史紀錄(_H)"
 
-#: ../panels/privacy/privacy.ui.h:32
+#: ../panels/privacy/privacy.ui.h:27
 msgid "The Screen Lock protects your privacy when you are away."
 msgstr "螢幕鎖可以在您離開時保護您的隱私。"
 
-#: ../panels/privacy/privacy.ui.h:33
+#: ../panels/privacy/privacy.ui.h:28
 msgid "Automatic Screen _Lock"
 msgstr "自動鎖定螢幕(_L)"
 
-#: ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/privacy.ui.h:29
 msgid "Lock screen _after blank for"
 msgstr "螢幕空白後鎖定螢幕(_A)"
 
-#: ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/privacy.ui.h:30
 msgid "Show _Notifications"
 msgstr "顯示通知(_N)"
 
-#: ../panels/privacy/privacy.ui.h:37
-msgid "_Empty Trash"
-msgstr "清理回收筒(_E)"
-
-#: ../panels/privacy/privacy.ui.h:38
-msgid "_Purge Temporary Files"
-msgstr "清理暫存檔案(_P)"
-
-#: ../panels/privacy/privacy.ui.h:39
+#: ../panels/privacy/privacy.ui.h:34
 msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
 msgstr "自動清除回收筒和暫存檔案可以保護您的電腦減少不必要的敏感資訊。"
 
-#: ../panels/privacy/privacy.ui.h:40
+#: ../panels/privacy/privacy.ui.h:35
 msgid "Automatically empty _Trash"
 msgstr "自動清空回收筒(_T)"
 
-#: ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/privacy.ui.h:36
 msgid "Automatically purge Temporary _Files"
 msgstr "自動清除暫存檔案(_F)"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:37
 msgid "Purge _After"
 msgstr "清除於(_A)"
 
@@ -5373,8 +5450,9 @@ msgstr ""
 "幕閱讀器;文字;字型;大小;相黏鍵;遲緩鍵;彈跳鍵;滑鼠按鍵;"
 
 #: ../panels/universal-access/uap.ui.h:1
-msgid "Show Status When _Inactive"
-msgstr "當不活動後顯示狀態(_I)"
+#| msgid "Universal Access"
+msgid "_Always Show Universal Access Menu"
+msgstr "永遠顯示無障礙存取選單(_A)"
 
 #: ../panels/universal-access/uap.ui.h:2
 msgid "Seeing"
@@ -5832,8 +5910,8 @@ msgid "Set a password now"
 msgstr "立刻設定密碼"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
-msgid "_Confirm Password"
-msgstr "確認密碼(_C)"
+msgid "_Verify"
+msgstr "檢驗(_V)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid ""
@@ -5846,14 +5924,6 @@ msgid "_Domain"
 msgstr "網域(_O)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "_Login Name"
-msgstr "登入名稱(_L)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
-msgid "Login _Password"
-msgstr "登入密碼(_P)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
 msgid ""
 "Go online to add\n"
 "enterprise login accounts."
@@ -5862,15 +5932,15 @@ msgstr ""
 "企業登入帳號。"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "_Enroll"
 msgstr "登錄(_E)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "網域管理員登入"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:20
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5880,11 +5950,11 @@ msgstr ""
 "加入網域。請網路系統管理員在這裡\n"
 "輸入網域密碼。"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:23
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator _Name"
 msgstr "管理員名稱(_N)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:24
+#: ../panels/user-accounts/data/account-dialog.ui.h:22
 msgid "Administrator Password"
 msgstr "管理員密碼"
 
@@ -5963,8 +6033,9 @@ msgid "Login History"
 msgstr "登入歷史紀錄"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "C_onfirm New Password"
-msgstr "確認新密碼(_O)"
+#| msgid "_New Password"
+msgid "_Verify New Password"
+msgstr "檢驗新密碼(_V)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "_New Password"
@@ -6139,37 +6210,46 @@ msgctxt "Password hint"
 msgid "Try to add more letters, numbers and symbols."
 msgstr "試著加入更多字母、數字和標點符號。"
 
-#: ../panels/user-accounts/pw-utils.c:119
+#: ../panels/user-accounts/pw-utils.c:118
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
 msgstr "混合大寫與小寫字元並使用一到兩個數字。"
 
-#: ../panels/user-accounts/pw-utils.c:141
-#: ../panels/user-accounts/pw-utils.c:171
+#: ../panels/user-accounts/pw-utils.c:120
+#| msgctxt "Password hint"
+#| msgid "Try to use a mixture of letters, numbers and punctuation."
+msgctxt "Password hint"
+msgid ""
+"Good password! Adding more letters, numbers and punctuation will make it "
+"stronger."
+msgstr "不錯的密碼！加入更多字母、數字和標點符號會讓它更好。"
+
+#: ../panels/user-accounts/pw-utils.c:142
+#: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
 msgid "Strength: Weak"
 msgstr "強度：很弱"
 
-#: ../panels/user-accounts/pw-utils.c:145
-#: ../panels/user-accounts/pw-utils.c:172
+#: ../panels/user-accounts/pw-utils.c:146
+#: ../panels/user-accounts/pw-utils.c:173
 msgctxt "Password strength"
 msgid "Strength: Low"
 msgstr "強度：低度"
 
-#: ../panels/user-accounts/pw-utils.c:148
-#: ../panels/user-accounts/pw-utils.c:173
+#: ../panels/user-accounts/pw-utils.c:149
+#: ../panels/user-accounts/pw-utils.c:174
 msgctxt "Password strength"
 msgid "Strength: Medium"
 msgstr "強度：中度"
 
-#: ../panels/user-accounts/pw-utils.c:151
-#: ../panels/user-accounts/pw-utils.c:174
+#: ../panels/user-accounts/pw-utils.c:152
+#: ../panels/user-accounts/pw-utils.c:175
 msgctxt "Password strength"
 msgid "Strength: Good"
 msgstr "強度：良好"
 
-#: ../panels/user-accounts/pw-utils.c:154
-#: ../panels/user-accounts/pw-utils.c:175
+#: ../panels/user-accounts/pw-utils.c:155
+#: ../panels/user-accounts/pw-utils.c:176
 msgctxt "Password strength"
 msgid "Strength: High"
 msgstr "強度：高度"
@@ -6223,66 +6303,71 @@ msgstr "新的密碼並未包含足夠的不同字元"
 msgid "Unknown error"
 msgstr "不明的錯誤"
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:35
+msgid "Should match the web address of your account provider."
+msgstr "應符合您帳號提供者的網路位址。"
+
+#: ../panels/user-accounts/um-account-dialog.c:222
 msgid "Failed to add account"
 msgstr "無法加入到帳號"
 
-#: ../panels/user-accounts/um-account-dialog.c:330
+#: ../panels/user-accounts/um-account-dialog.c:316
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "這會成為您家目錄資料夾的名稱，並且不能被改變。"
 
-#: ../panels/user-accounts/um-account-dialog.c:420
+#: ../panels/user-accounts/um-account-dialog.c:449
 msgid "Passwords do not match."
 msgstr "密碼不相符。"
 
-#: ../panels/user-accounts/um-account-dialog.c:421
-#: ../panels/user-accounts/um-password-dialog.c:297
-msgid "Passwords do not match"
-msgstr "密碼不相符"
-
-#: ../panels/user-accounts/um-account-dialog.c:674
-#: ../panels/user-accounts/um-account-dialog.c:720
+#: ../panels/user-accounts/um-account-dialog.c:719
+#: ../panels/user-accounts/um-account-dialog.c:765
 msgid "Failed to register account"
 msgstr "無法註冊帳號"
 
-#: ../panels/user-accounts/um-account-dialog.c:858
+#: ../panels/user-accounts/um-account-dialog.c:903
 msgid "No supported way to authenticate with this domain"
 msgstr "沒有支援這個網域驗證的方式"
 
-#: ../panels/user-accounts/um-account-dialog.c:917
+#: ../panels/user-accounts/um-account-dialog.c:962
 msgid "Failed to join domain"
 msgstr "無法加入網域"
 
-#: ../panels/user-accounts/um-account-dialog.c:978
+#: ../panels/user-accounts/um-account-dialog.c:1023
+#| msgid ""
+#| "Invalid password.\n"
+#| "Please try again."
 msgid ""
-"Login not recognized.\n"
+"That login name didn't work.\n"
 "Please try again."
 msgstr ""
-"登入無法辨識。\n"
+"登入名稱沒有用。\n"
 "請再試一次。"
 
-#: ../panels/user-accounts/um-account-dialog.c:985
+#: ../panels/user-accounts/um-account-dialog.c:1030
+#| msgid ""
+#| "Invalid password.\n"
+#| "Please try again."
 msgid ""
-"Invalid password.\n"
+"That login password didn't work.\n"
 "Please try again."
 msgstr ""
-"密碼錯誤。\n"
+"登入密碼沒有用。\n"
 "請再試一次。"
 
-#: ../panels/user-accounts/um-account-dialog.c:993
+#: ../panels/user-accounts/um-account-dialog.c:1038
 msgid "Failed to log into domain"
 msgstr "無法登入到網域"
 
-#: ../panels/user-accounts/um-account-dialog.c:1051
-msgid "Domain not found."
-msgstr "找不到網域。"
+#: ../panels/user-accounts/um-account-dialog.c:1096
+msgid "Unable find the domain. Maybe you misspelled it?"
+msgstr "找不到網域。也許您拼錯字了？"
 
-#: ../panels/user-accounts/um-account-dialog.c:1409
+#: ../panels/user-accounts/um-account-dialog.c:1446
 msgid "Add User"
 msgstr "加入使用者"
 
 #. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1422
+#: ../panels/user-accounts/um-account-dialog.c:1459
 msgid "_Enterprise Login"
 msgstr "企業登入(_E)"
 
@@ -6425,25 +6510,21 @@ msgstr "作業階段結束"
 msgid "Session Started"
 msgstr "作業階段開始"
 
-#: ../panels/user-accounts/um-password-dialog.c:153
+#: ../panels/user-accounts/um-password-dialog.c:146
 msgid "Please choose another password."
 msgstr "請選擇其他密碼。"
 
-#: ../panels/user-accounts/um-password-dialog.c:162
+#: ../panels/user-accounts/um-password-dialog.c:155
 msgid "Please type your current password again."
 msgstr "請再次輸入您目前的密碼。"
 
-#: ../panels/user-accounts/um-password-dialog.c:168
+#: ../panels/user-accounts/um-password-dialog.c:161
 msgid "Password could not be changed"
 msgstr "密碼無法變更"
 
-#: ../panels/user-accounts/um-password-dialog.c:295
+#: ../panels/user-accounts/um-password-dialog.c:287
 msgid "The passwords do not match."
 msgstr "密碼不相符。"
-
-#: ../panels/user-accounts/um-password-dialog.c:357
-msgid "Wrong password"
-msgstr "錯誤的密碼"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6593,33 +6674,33 @@ msgstr ""
 msgid "My Account"
 msgstr "我的帳號"
 
-#: ../panels/user-accounts/um-utils.c:535
+#: ../panels/user-accounts/um-utils.c:551
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "以使用者名稱「%s」為名的使用者已經存在"
 
-#: ../panels/user-accounts/um-utils.c:539
+#: ../panels/user-accounts/um-utils.c:555
 #, c-format
 msgid "The username is too long"
 msgstr "使用者名稱太長了"
 
-#: ../panels/user-accounts/um-utils.c:542
+#: ../panels/user-accounts/um-utils.c:558
 msgid "The username cannot start with a '-'"
 msgstr "使用者名稱不能以 '-' 字母開頭"
 
-#: ../panels/user-accounts/um-utils.c:545
+#: ../panels/user-accounts/um-utils.c:561
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
 msgstr "使用者名稱必須由從 a-z 的大小寫字母、數字、 '.'、 '-' 和 '_' 字元組成"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:795
+#: ../panels/user-accounts/um-utils.c:811
 msgid "%b %e"
 msgstr "%b%e日"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:799
+#: ../panels/user-accounts/um-utils.c:815
 msgid "%b %e, %Y"
 msgstr "%Y年%b%e日"
 
@@ -6769,86 +6850,86 @@ msgid "Left-Handed Orientation"
 msgstr "左手方向"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1078
+#: ../panels/wacom/gsd-wacom-device.c:1063
 msgid "Left Ring"
 msgstr "左環"
 
-#: ../panels/wacom/gsd-wacom-device.c:1089
+#: ../panels/wacom/gsd-wacom-device.c:1074
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "左觸控環模式 #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1109
+#: ../panels/wacom/gsd-wacom-device.c:1094
 msgid "Right Ring"
 msgstr "右環"
 
-#: ../panels/wacom/gsd-wacom-device.c:1120
+#: ../panels/wacom/gsd-wacom-device.c:1105
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "右觸控環模式 #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1162
+#: ../panels/wacom/gsd-wacom-device.c:1147
 msgid "Left Touchstrip"
 msgstr "左觸控列"
 
-#: ../panels/wacom/gsd-wacom-device.c:1173
+#: ../panels/wacom/gsd-wacom-device.c:1158
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "左觸控列模式 #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1193
+#: ../panels/wacom/gsd-wacom-device.c:1178
 msgid "Right Touchstrip"
 msgstr "右觸控列"
 
-#: ../panels/wacom/gsd-wacom-device.c:1204
+#: ../panels/wacom/gsd-wacom-device.c:1189
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "右觸控列模式 #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1230
+#: ../panels/wacom/gsd-wacom-device.c:1215
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "左觸控環模式切換"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1217
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "右觸控環模式切換"
 
-#: ../panels/wacom/gsd-wacom-device.c:1235
+#: ../panels/wacom/gsd-wacom-device.c:1220
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "左觸控列模式切換"
 
-#: ../panels/wacom/gsd-wacom-device.c:1237
+#: ../panels/wacom/gsd-wacom-device.c:1222
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "右觸控列模式切換"
 
-#: ../panels/wacom/gsd-wacom-device.c:1242
+#: ../panels/wacom/gsd-wacom-device.c:1227
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "模式切換 #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1351
+#: ../panels/wacom/gsd-wacom-device.c:1336
 #, c-format
 msgid "Left Button #%d"
 msgstr "左側按鈕 #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1354
+#: ../panels/wacom/gsd-wacom-device.c:1339
 #, c-format
 msgid "Right Button #%d"
 msgstr "右側按鈕 #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1357
+#: ../panels/wacom/gsd-wacom-device.c:1342
 #, c-format
 msgid "Top Button #%d"
 msgstr "頂端按鈕 #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1360
+#: ../panels/wacom/gsd-wacom-device.c:1345
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "底部按鈕 #%d"
@@ -6979,33 +7060,163 @@ msgstr "求助"
 msgid "Quit"
 msgstr "結束"
 
-#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
-msgid "Settings"
-msgstr "設定值"
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1466
+msgid "All Settings"
+msgstr "所有設定值"
 
 #. Add categories
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:865
 msgctxt "category"
 msgid "Personal"
 msgstr "個人"
 
-#: ../shell/cc-window.c:861
+#: ../shell/cc-window.c:866
 msgctxt "category"
 msgid "Hardware"
 msgstr "硬體"
 
-#: ../shell/cc-window.c:862
+#: ../shell/cc-window.c:867
 msgctxt "category"
 msgid "System"
 msgstr "系統"
 
-#: ../shell/cc-window.c:1451
-msgid "All Settings"
-msgstr "所有設定值"
+#: ../shell/cc-window.c:1574 ../shell/gnome-control-center.desktop.in.in.h:1
+msgid "Settings"
+msgstr "設定值"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;偏好設定;設定值;"
+
+#~ msgid "_Region:"
+#~ msgstr "區域(_R)："
+
+#~ msgid "_City:"
+#~ msgstr "城市(_C)："
+
+#~ msgid "_Network Time"
+#~ msgstr "網路時刻(_N)"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Set the time one hour ahead."
+#~ msgstr "將時刻延後一小時。"
+
+#~ msgid "Set the time one hour back."
+#~ msgstr "將時刻提早一小時。"
+
+#~ msgid "Set the time one minute ahead."
+#~ msgstr "將時刻延後一分鐘。"
+
+#~ msgid "Set the time one minute back."
+#~ msgstr "將時刻提早一分鐘。"
+
+#~ msgid "AM/PM"
+#~ msgstr "AM/PM"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Normal"
+#~ msgstr "正常"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Counterclockwise"
+#~ msgstr "逆時針"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Clockwise"
+#~ msgstr "順時針"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "180 Degrees"
+#~ msgstr "180 度"
+
+#~ msgid "Monitor"
+#~ msgstr "顯示器"
+
+#~ msgid "Drag to change primary display."
+#~ msgstr "拖曳以改變主要顯示器。"
+
+#~ msgid ""
+#~ "Select a monitor to change its properties; drag it to rearrange its "
+#~ "placement."
+#~ msgstr "選擇一個螢幕以改變它的屬性；拖曳它則能重新排列它的位置。"
+
+#~ msgid "%a %R"
+#~ msgstr "%a %R"
+
+#~ msgid "Failed to apply configuration: %s"
+#~ msgstr "無法套用組態：%s"
+
+#~ msgid "Could not save the monitor configuration"
+#~ msgstr "無法儲存顯示器組態"
+
+#~ msgid "_Resolution"
+#~ msgstr "解析度(_R)"
+
+#~ msgid "R_otation"
+#~ msgstr "旋轉(_O)"
+
+#~ msgid "_Mirror displays"
+#~ msgstr "鏡射顯示器(_M)"
+
+#~ msgid "Note: may limit resolution options"
+#~ msgstr "注意：可能會限制解析度選項"
+
+#~ msgid "_Detect Displays"
+#~ msgstr "偵測顯示器(_D)"
+
+#~ msgid "Hidden"
+#~ msgstr "隱藏"
+
+#~ msgid "Visible"
+#~ msgstr "顯示"
+
+#~ msgid "Name & Visibility"
+#~ msgstr "名稱與可見度"
+
+#~ msgid "Control how you appear on the screen and the network."
+#~ msgstr "控制您在螢幕及網路上如何顯示。"
+
+#~ msgid "Display _full name in top bar"
+#~ msgstr "在頂端列顯示全名(_F)"
+
+#~ msgid "Display full name in _lock screen"
+#~ msgstr "在鎖定畫面中顯示全名(_L)"
+
+#~ msgid "_Stealth Mode"
+#~ msgstr "隱密模式(_S)"
+
+#~ msgid "Show Status When _Inactive"
+#~ msgstr "當不活動後顯示狀態(_I)"
+
+#~ msgid "_Confirm Password"
+#~ msgstr "確認密碼(_C)"
+
+#~ msgid "_Login Name"
+#~ msgstr "登入名稱(_L)"
+
+#~ msgid "Login _Password"
+#~ msgstr "登入密碼(_P)"
+
+#~ msgid "C_onfirm New Password"
+#~ msgstr "確認新密碼(_O)"
+
+#~ msgid "Passwords do not match"
+#~ msgstr "密碼不相符"
+
+#~ msgid ""
+#~ "Login not recognized.\n"
+#~ "Please try again."
+#~ msgstr ""
+#~ "登入無法辨識。\n"
+#~ "請再試一次。"
+
+#~ msgid "Domain not found."
+#~ msgstr "找不到網域。"
+
+#~ msgid "Wrong password"
+#~ msgstr "錯誤的密碼"
 
 #~ msgctxt "Password hint"
 #~ msgid "Try to add more characters."
