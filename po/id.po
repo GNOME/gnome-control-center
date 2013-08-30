@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-20 17:31+0000\n"
-"PO-Revision-Date: 2013-08-22 12:13+0700\n"
+"POT-Creation-Date: 2013-08-23 14:35+0000\n"
+"PO-Revision-Date: 2013-08-30 09:05+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -110,7 +110,7 @@ msgstr ""
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1201
 #: ../panels/network/net-device-wifi.c:1407
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:467
@@ -260,7 +260,7 @@ msgstr ""
 "sebelum dipakai."
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:632
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
 msgid "_Remove"
 msgstr "_Hapus"
 
@@ -972,7 +972,7 @@ msgid "Language"
 msgstr "Bahasa"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/mouse/cc-mouse-panel.c:119 ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "Selesa_i"
 
@@ -1900,7 +1900,7 @@ msgstr "Alih _Fungsikan"
 msgid "Test Your _Settings"
 msgstr "Uji Penga_turan Anda"
 
-#: ../panels/mouse/cc-mouse-panel.c:116
+#: ../panels/mouse/cc-mouse-panel.c:117
 msgid "Test Your Settings"
 msgstr "Uji Pengaturan Anda"
 
@@ -3671,26 +3671,30 @@ msgstr "Tampilkan Pop Up Banner"
 msgid "Show in Lock Screen"
 msgstr "Tampilkan dalam Layar Terkunci"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:197
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Lainnya"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:300
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Tambah Akun"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:339
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "Surel"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:345
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "Kontak"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:351
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "Obrolan"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "Sumber daya"
 
@@ -3698,31 +3702,31 @@ msgstr "Sumber daya"
 msgid "Error logging into the account"
 msgstr "Galat saat log masuk ke akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:495
 msgid "Credentials have expired."
 msgstr "Kredensial telah kadaluwarsa."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "Sign in to enable this account."
 msgstr "Masuk untuk mengaktifkan akun ini."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:506
+#: ../panels/online-accounts/cc-online-accounts-panel.c:504
 msgid "_Sign In"
 msgstr "_Masuk"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:747
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "Error creating account"
 msgstr "Galat saat membuat akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:787
+#: ../panels/online-accounts/cc-online-accounts-panel.c:805
 msgid "Error removing account"
 msgstr "Galat saat menghapus akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:823
+#: ../panels/online-accounts/cc-online-accounts-panel.c:841
 msgid "Are you sure you want to remove the account?"
 msgstr "Anda yakin ingin menghapus akun?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:825
+#: ../panels/online-accounts/cc-online-accounts-panel.c:843
 msgid "This will not remove the account on the server."
 msgstr "Ini tidak akan menghapus akun pada server."
 
@@ -3738,8 +3742,10 @@ msgstr "Sambung ke akun daring Anda dan tentukan mereka akan dipakai apa"
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP;"
 msgstr ""
-"Google;Facebook;Twitter;Yahoo;Web;Daring;Chat;Kalender;Surel;Kontak;ownCloud;"
+"Google;Facebook;Twitter;Yahoo;Web;Daring;Obrolan;Kalender;Surel;Kontak;"
+"ownCloud;Kerberos;IMAP;SMTP;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -7121,7 +7127,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Sistem"
 
-#: ../shell/cc-window.c:1573 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1574 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Pengaturan"
 
