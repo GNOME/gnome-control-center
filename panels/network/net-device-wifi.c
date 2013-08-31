@@ -1498,11 +1498,11 @@ make_row (GtkSizeGroup   *rows,
         }
 
         row = gtk_list_box_row_new ();
-        gtk_widget_set_margin_left (row, 12);
-        gtk_widget_set_margin_right (row, 12);
         gtk_size_group_add_widget (rows, row);
 
         row_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        gtk_widget_set_margin_left (row_box, 12);
+        gtk_widget_set_margin_right (row_box, 12);
         gtk_container_add (GTK_CONTAINER (row), row_box);
 
         widget = NULL;
