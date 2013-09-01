@@ -58,6 +58,8 @@ enum {
 
 #define W(x) (GtkWidget*) gtk_builder_get_object (priv->builder, x)
 
+#define DATETIME_PERMISSION "org.gnome.controlcenter.datetime.configure"
+
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
 
@@ -1207,6 +1209,20 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       return;
     }
 
+  /* add the lock button */
+  priv->permission = polkit_permission_new_sync (DATETIME_PERMISSION, NULL, NULL, NULL);
+  if (priv->permission != NULL)
+    {
+      g_signal_connect (priv->permission, "notify",
+                        G_CALLBACK (on_permission_changed), self);
+      on_permission_changed (priv->permission, NULL, self);
+    }
+  else
+    {
+      g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
+                 DATETIME_PERMISSION);
+    }
+
   priv->date = g_date_time_new_now_local ();
 
   setup_timezone_dialog (self);
@@ -1280,17 +1296,4 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   g_signal_connect_swapped (priv->dtm, "notify::timezone",
                             G_CALLBACK (on_timezone_changed), self);
   /* We ignore UTC <--> LocalRTC changes at the moment */
-
-  /* add the lock button */
-  priv->permission = polkit_permission_new_sync ("org.gnome.controlcenter.datetime.configure", NULL, NULL, NULL);
-  if (priv->permission == NULL)
-    {
-      g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
-                 "org.gnome.controlcenter.datetime.configure");
-      return;
-    }
-
-  g_signal_connect (priv->permission, "notify",
-                    G_CALLBACK (on_permission_changed), self);
-  on_permission_changed (priv->permission, NULL, self);
 }
