@@ -638,19 +638,6 @@ load_regions_model (GtkListStore *cities)
 }
 
 static void
-update_widget_state_for_ntp (CcDateTimePanel *panel,
-                             gboolean         using_ntp)
-{
-  CcDateTimePanelPrivate *priv = panel->priv;
-  gboolean allowed;
-
-  /* need to check polkit before revealing to user */
-  allowed = (! priv->permission || g_permission_get_allowed (priv->permission));
-
-  gtk_widget_set_sensitive (W("datetime-button"), !using_ntp && allowed);
-}
-
-static void
 day_changed (GtkWidget       *widget,
              CcDateTimePanel *panel)
 {
@@ -743,7 +730,6 @@ change_ntp (GObject         *gobject,
             GParamSpec      *pspec,
             CcDateTimePanel *self)
 {
-  update_widget_state_for_ntp (self, gtk_switch_get_active (GTK_SWITCH (gobject)));
   queue_set_ntp (self);
 }
 
@@ -755,13 +741,13 @@ on_permission_changed (GPermission *permission,
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (data)->priv;
   gboolean allowed, using_ntp;
 
-  allowed = g_permission_get_allowed (permission);
+  allowed = (priv->permission == NULL || g_permission_get_allowed (priv->permission));
   using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
 
   /* All the widgets but the lock button and the 24h setting */
   gtk_widget_set_sensitive (W("auto-datetime-row"), allowed);
+  gtk_widget_set_sensitive (W("datetime-button"), allowed && !using_ntp);
   gtk_widget_set_sensitive (W("timezone-button"), allowed);
-  update_widget_state_for_ntp (data, using_ntp);
 
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
@@ -769,22 +755,6 @@ on_permission_changed (GPermission *permission,
       gtk_widget_hide (GTK_WIDGET (W ("datetime-dialog")));
       gtk_widget_hide (GTK_WIDGET (W ("timezone-dialog")));
     }
-}
-
-static void
-update_ntp_switch_from_system (CcDateTimePanel *self)
-{
-  CcDateTimePanelPrivate *priv = self->priv;
-  gboolean using_ntp;
-  GtkWidget *switch_widget;
-
-  using_ntp = timedate1_get_ntp (self->priv->dtm);
-
-  switch_widget = W("network_time_switch");
-  g_signal_handlers_block_by_func (switch_widget, change_ntp, self);
-  gtk_switch_set_active (GTK_SWITCH (switch_widget), using_ntp);
-  update_widget_state_for_ntp (self, using_ntp);
-  g_signal_handlers_unblock_by_func (switch_widget, change_ntp, self);
 }
 
 static void
@@ -807,12 +777,6 @@ on_can_ntp_changed (CcDateTimePanel *self)
 
   gtk_widget_set_visible (W ("auto-datetime-row"),
                           ntp_available);
-}
-
-static void
-on_ntp_changed (CcDateTimePanel *self)
-{
-  update_ntp_switch_from_system (self);
 }
 
 static void
@@ -888,6 +852,36 @@ run_dialog (CcDateTimePanel *self,
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
   gtk_dialog_run (GTK_DIALOG (dialog));
+}
+
+static gboolean
+switch_to_row_transform_func (GBinding        *binding,
+                              const GValue    *source_value,
+                              GValue          *target_value,
+                              CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  gboolean active;
+  gboolean allowed;
+
+  active = g_value_get_boolean (source_value);
+  allowed = (priv->permission == NULL || g_permission_get_allowed (priv->permission));
+
+  g_value_set_boolean (target_value, !active && allowed);
+
+  return TRUE;
+}
+
+static void
+bind_switch_to_row (CcDateTimePanel *self,
+                    GtkWidget       *gtkswitch,
+                    GtkWidget       *listrow)
+{
+  g_object_bind_property_full (gtkswitch, "active",
+                               listrow, "sensitive",
+                               G_BINDING_SYNC_CREATE,
+                               (GBindingTransformFunc) switch_to_row_transform_func,
+                               NULL, self, NULL);
 }
 
 static void
@@ -1229,9 +1223,13 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   setup_datetime_dialog (self);
   setup_main_listview (self);
 
-  /* set up network time button */
-  update_ntp_switch_from_system (self);
-  on_can_ntp_changed (self);
+  /* set up network time switch */
+  bind_switch_to_row (self,
+                      W ("network_time_switch"),
+                      W ("datetime-button"));
+  g_object_bind_property (priv->dtm, "ntp",
+                          W ("network_time_switch"), "active",
+                          G_BINDING_SYNC_CREATE);
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
 
@@ -1289,8 +1287,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   /* Watch changes of timedated remote service properties */
   g_signal_connect (priv->dtm, "g-properties-changed",
                     G_CALLBACK (on_timedated_properties_changed), self);
-  g_signal_connect_swapped (priv->dtm, "notify::ntp",
-                            G_CALLBACK (on_ntp_changed), self);
   g_signal_connect_swapped (priv->dtm, "notify::can-ntp",
                             G_CALLBACK (on_can_ntp_changed), self);
   g_signal_connect_swapped (priv->dtm, "notify::timezone",
