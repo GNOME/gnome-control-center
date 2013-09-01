@@ -63,6 +63,9 @@ enum {
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
 
+#define DATETIME_SCHEMA "org.gnome.desktop.datetime"
+#define AUTO_TIMEZONE_KEY "automatic-timezone"
+
 struct _CcDateTimePanelPrivate
 {
   GtkBuilder *builder;
@@ -75,6 +78,7 @@ struct _CcDateTimePanelPrivate
   GDateTime *date;
 
   GSettings *clock_settings;
+  GSettings *datetime_settings;
   GDesktopClockFormat clock_format;
   gboolean ampm_available;
   GtkWidget *am_label;
@@ -739,15 +743,17 @@ on_permission_changed (GPermission *permission,
                        gpointer     data)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (data)->priv;
-  gboolean allowed, using_ntp;
+  gboolean allowed, auto_timezone, using_ntp;
 
   allowed = (priv->permission == NULL || g_permission_get_allowed (priv->permission));
   using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
+  auto_timezone = gtk_switch_get_active (GTK_SWITCH (W("auto_timezone_switch")));
 
   /* All the widgets but the lock button and the 24h setting */
   gtk_widget_set_sensitive (W("auto-datetime-row"), allowed);
+  gtk_widget_set_sensitive (W("auto-timezone-row"), allowed);
   gtk_widget_set_sensitive (W("datetime-button"), allowed && !using_ntp);
-  gtk_widget_set_sensitive (W("timezone-button"), allowed);
+  gtk_widget_set_sensitive (W("timezone-button"), allowed && !auto_timezone);
 
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
@@ -912,6 +918,10 @@ list_box_row_activated (GtkListBox      *listbox,
   if (!g_strcmp0 (widget_name, "auto-datetime-row"))
     {
       toggle_switch (W ("network_time_switch"));
+    }
+  else if (!g_strcmp0 (widget_name, "auto-timezone-row"))
+    {
+      toggle_switch (W ("auto_timezone_switch"));
     }
   else if ((found = g_strrstr (widget_name, "button")))
     {
@@ -1232,6 +1242,16 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                           G_BINDING_SYNC_CREATE);
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
+
+  /* Timezone settings */
+  bind_switch_to_row (self,
+                      W ("auto_timezone_switch"),
+                      W ("timezone-button"));
+
+  priv->datetime_settings = g_settings_new (DATETIME_SCHEMA);
+  g_settings_bind (priv->datetime_settings, AUTO_TIMEZONE_KEY,
+                   W ("auto_timezone_switch"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* Clock settings */
   priv->clock_settings = g_settings_new (CLOCK_SCHEMA);
