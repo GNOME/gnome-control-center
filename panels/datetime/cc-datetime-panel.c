@@ -72,7 +72,7 @@ struct _CcDateTimePanelPrivate
 
   GDateTime *date;
 
-  GSettings *settings;
+  GSettings *clock_settings;
   GDesktopClockFormat clock_format;
   gboolean ampm_available;
   GtkWidget *am_label;
@@ -131,7 +131,7 @@ cc_date_time_panel_dispose (GObject *object)
   g_clear_object (&priv->clock_tracker);
   g_clear_object (&priv->dtm);
   g_clear_object (&priv->permission);
-  g_clear_object (&priv->settings);
+  g_clear_object (&priv->clock_settings);
 
   g_clear_pointer (&priv->date, g_date_time_unref);
 
@@ -183,7 +183,7 @@ change_clock_settings (GObject         *gobject,
   GDesktopClockFormat value;
   const char *active_id;
 
-  g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
+  g_signal_handlers_block_by_func (priv->clock_settings, clock_settings_changed_cb,
                                    panel);
 
   active_id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (W ("format_combobox")));
@@ -192,12 +192,12 @@ change_clock_settings (GObject         *gobject,
   else
     value = G_DESKTOP_CLOCK_FORMAT_12H;
 
-  g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, value);
+  g_settings_set_enum (priv->clock_settings, CLOCK_FORMAT_KEY, value);
   priv->clock_format = value;
 
   update_time (panel);
 
-  g_signal_handlers_unblock_by_func (priv->settings, clock_settings_changed_cb,
+  g_signal_handlers_unblock_by_func (priv->clock_settings, clock_settings_changed_cb,
                                      panel);
 }
 
@@ -1225,7 +1225,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                     G_CALLBACK (change_ntp), self);
 
   /* Clock settings */
-  priv->settings = g_settings_new (CLOCK_SCHEMA);
+  priv->clock_settings = g_settings_new (CLOCK_SCHEMA);
 
   ampm = nl_langinfo (AM_STR);
   /* There are no AM/PM indicators for this locale, so
@@ -1247,8 +1247,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   priv->clock_tracker = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
   g_signal_connect (priv->clock_tracker, "notify::clock", G_CALLBACK (on_clock_changed), self);
 
-  clock_settings_changed_cb (priv->settings, CLOCK_FORMAT_KEY, self);
-  g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
+  clock_settings_changed_cb (priv->clock_settings, CLOCK_FORMAT_KEY, self);
+  g_signal_connect (priv->clock_settings, "changed::" CLOCK_FORMAT_KEY,
                     G_CALLBACK (clock_settings_changed_cb), self);
 
   g_signal_connect (W("format_combobox"), "notify::active-id",
