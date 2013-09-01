@@ -545,8 +545,8 @@ update_timezone (CcDateTimePanel *self)
   g_free (label);
 
   /* Translators: UTC here means the Coordinated Universal Time.
-   * %z will be replaced by the offset from UTC e.g. UTC+0200 */
-  utc_label = g_date_time_format (priv->date, _("UTC%z"));
+   * %:::z will be replaced by the offset from UTC e.g. UTC+02 */
+  utc_label = g_date_time_format (priv->date, _("UTC%:::z"));
 
   if (use_ampm)
     {
