@@ -273,18 +273,20 @@ void job_set_hold_until_async (gint          job_id,
                                GCancellable *cancellable,
                                JSHUCallback  callback,
                                gpointer      user_data);
-typedef struct{
-  gchar *device_class;
-  gchar *device_id;
-  gchar *device_info;
-  gchar *device_make_and_model;
-  gchar *device_uri;
-  gchar *device_location;
-  gchar *device_name;
-  gchar *device_ppd;
-  gchar *host_name;
-  gint   host_port;
-  gint   acquisition_method;
+typedef struct
+{
+  gboolean  is_authenticated_server;
+  gchar    *device_class;
+  gchar    *device_id;
+  gchar    *device_info;
+  gchar    *device_make_and_model;
+  gchar    *device_uri;
+  gchar    *device_location;
+  gchar    *device_name;
+  gchar    *device_ppd;
+  gchar    *host_name;
+  gint      host_port;
+  gint      acquisition_method;
 } PpPrintDevice;
 
 void        pp_print_device_free (PpPrintDevice *device);

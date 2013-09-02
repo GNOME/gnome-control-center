@@ -54,6 +54,7 @@ PpSamba       *pp_samba_new                (GtkWindow           *parent,
                                             const gchar         *hostname);
 
 void           pp_samba_get_devices_async  (PpSamba             *samba,
+                                            gboolean             auth_if_needed,
                                             GCancellable        *cancellable,
                                             GAsyncReadyCallback  callback,
                                             gpointer             user_data);

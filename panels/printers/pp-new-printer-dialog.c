@@ -1371,6 +1371,7 @@ search_address_cb (GtkEntry *entry,
                                               dialog);
 
               pp_samba_get_devices_async (samba_host,
+                                          TRUE,
                                           priv->cancellable,
                                           get_samba_host_devices_cb,
                                           dialog);
@@ -1580,7 +1581,7 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   update_spinner_state (dialog);
 
   samba = pp_samba_new (GTK_WINDOW (priv->dialog), NULL);
-  pp_samba_get_devices_async (samba, priv->cancellable, get_samba_devices_cb, dialog);
+  pp_samba_get_devices_async (samba, FALSE, priv->cancellable, get_samba_devices_cb, dialog);
 }
 
 static void

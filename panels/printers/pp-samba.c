@@ -188,6 +188,7 @@ typedef struct
   PpDevicesList *devices;
   GMainContext  *context;
   gboolean       waiting;
+  gboolean       auth_if_needed;
   GtkWindow     *parent;
   SMBAuthInfo   *auth_info;
   gboolean       hostname_set;
@@ -348,9 +349,20 @@ list_dir (SMBCCTX      *smb_context,
       dir = smbclient_opendir (smb_context, dirname);
       if (!dir && errno == EACCES)
         {
-          smbc_setFunctionAuthDataWithContext (smb_context, auth_fn);
-          dir = smbclient_opendir (smb_context, dirname);
-          smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
+          if (data->auth_if_needed)
+            {
+              smbc_setFunctionAuthDataWithContext (smb_context, auth_fn);
+              dir = smbclient_opendir (smb_context, dirname);
+              smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
+            }
+          else
+            {
+              device = g_new0 (PpPrintDevice, 1);
+              device->host_name = g_str_has_prefix (dirname, "smb://") ? g_strdup (dirname + 6) : g_strdup (dirname);
+              device->is_authenticated_server = TRUE;
+
+              data->devices->devices = g_list_append (data->devices->devices, device);
+            }
         }
 
       while (dir && (dirent = smbclient_readdir (smb_context, dir)))
@@ -464,6 +476,7 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
 
 void
 pp_samba_get_devices_async (PpSamba             *samba,
+                            gboolean             auth_if_needed,
                             GCancellable        *cancellable,
                             GAsyncReadyCallback  callback,
                             gpointer             user_data)
@@ -478,6 +491,7 @@ pp_samba_get_devices_async (PpSamba             *samba,
   data->context = g_main_context_default ();
   data->hostname_set = priv->hostname != NULL;
   data->parent = g_object_ref (priv->parent);
+  data->auth_if_needed = auth_if_needed;
 
   g_simple_async_result_set_check_cancellable (res, cancellable);
   g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) smb_data_free);
