@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-30 14:04+0000\n"
-"PO-Revision-Date: 2013-08-30 23:06+0100\n"
+"POT-Creation-Date: 2013-09-02 20:06+0000\n"
+"PO-Revision-Date: 2013-09-02 22:41+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -980,28 +980,28 @@ msgid "_Done"
 msgstr "_Končano"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "UTC%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%R"
 
@@ -1218,7 +1218,7 @@ msgstr "Drugi zaslon"
 
 #: ../panels/display/cc-display-panel.c:1922
 msgid "Join this display with another to create an extra workspace"
-msgstr ""
+msgstr "Združi zaslon z drugim za ustvarjanje dodatne delovne površine"
 
 #: ../panels/display/cc-display-panel.c:1929
 #: ../panels/display/display-capplet.ui.h:3
@@ -1238,16 +1238,15 @@ msgstr "Zrcali"
 
 #: ../panels/display/cc-display-panel.c:1936
 msgid "Show your existing view on both displays"
-msgstr ""
+msgstr "Pokaži obstoječ pogled na obeh zaslonih"
 
 #: ../panels/display/cc-display-panel.c:2138
 msgid "Could not get screen information"
 msgstr "Ni mogoče dobiti podatkov zaslona"
 
 #: ../panels/display/cc-display-panel.c:2169
-#, fuzzy
 msgid "_Arrange Combined Displays"
-msgstr "Prikaže pogovorno okno podrobnosti"
+msgstr "_Preuredi združene zaslone"
 
 #: ../panels/display/display-capplet.ui.h:6
 msgid "Show your primary display on this screen also"
@@ -1266,9 +1265,8 @@ msgid "Turn Off"
 msgstr "Izklopi"
 
 #: ../panels/display/display-capplet.ui.h:10
-#, fuzzy
 msgid "Don't use the display"
-msgstr "Zaslon X, ki naj bo uporabljen"
+msgstr "Ne uporabi zaslona"
 
 #: ../panels/display/display-capplet.ui.h:11
 #: ../panels/printers/printers.ui.h:12
@@ -1671,9 +1669,8 @@ msgid "Copy a screenshot of an area to clipboard"
 msgstr "Kopiraj zaslonsko sliko področja v odložišče"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:11
-#, fuzzy
 msgid "Record a short screencast"
-msgstr "Kratek opis stanja stika"
+msgstr "Posnemi kratek posnetek zaslona"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "System"
@@ -1925,10 +1922,10 @@ msgstr ""
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "Sledilna ploščica;Kazalnik;Klik;Udarjanje;Dvojni;Gumb;Sledilna kroglica;"
+"Drsnik;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Mouse Preferences"
@@ -2016,9 +2013,8 @@ msgstr "Dvo-_prstno drsenje"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:21
-#, fuzzy
 msgid "_Natural scrolling"
-msgstr "Nadaljuj drsenje"
+msgstr "_Naravno drsenje"
 
 #: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -2272,7 +2268,7 @@ msgstr "Ročno"
 msgid "Link-Local Only"
 msgstr "Poveži le krajevno"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:941
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -3757,13 +3753,12 @@ msgstr ""
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#, fuzzy
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Splet;Klepet;Koledar;Elektronska pošta;Stiki;"
-"Računi;ownCloud;oblak;"
+"Računi;ownCloud;oblak;IMAP;SMTP;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3986,9 +3981,8 @@ msgid "_Keyboard brightness"
 msgstr "_Svetlost tipkovnice"
 
 #: ../panels/power/cc-power-panel.c:1564
-#, fuzzy
 msgid "_Dim screen when inactive"
-msgstr "Ugasni zaslon ob nedejavnosti:"
+msgstr "_Zamegli zaslon ob nedejavnosti"
 
 #: ../panels/power/cc-power-panel.c:1589
 msgid "_Blank screen"
@@ -4007,11 +4001,10 @@ msgid "_Mobile broadband"
 msgstr "_Mobilni širokopasovni dostop"
 
 #: ../panels/power/cc-power-panel.c:1661
-#, fuzzy
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr ""
-"Izklopi naprave, ki uporabljajo širokopasovni mobilni dostop (3G, 4G, WiMax, "
-"etc.)"
+"Izklopi naprave, ki uporabljajo širokopasovni mobilni dostop (3G, 4G, "
+"WiMax, ...)"
 
 #: ../panels/power/cc-power-panel.c:1696
 msgid "_Bluetooth"
@@ -4035,9 +4028,8 @@ msgid "_Automatic suspend"
 msgstr "_Nadaljuj/Ustavi"
 
 #: ../panels/power/cc-power-panel.c:1935
-#, fuzzy
 msgid "When battery power is _critical"
-msgstr "Ko je polnost baterije _kritično nizka:"
+msgstr "Ko je polnost baterije _kritično nizka"
 
 #: ../panels/power/cc-power-panel.c:1992
 msgid "Power Off"
@@ -4397,9 +4389,9 @@ msgstr "Poišči omrežni tiskalnik ali pa filtriraj zadetke"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:6
-#, fuzzy
 msgid "Enter address of a printer or a text to filter results"
-msgstr "Poišči omrežni tiskalnik ali pa filtriraj zadetke"
+msgstr ""
+"Vpišite naslov tiskalnika ali pa besedilo za filtriranje zadetkov iskanja"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4736,7 +4728,6 @@ msgid "Empty all items from Trash?"
 msgstr "Ali naj se izbrišejo vsi predmeti iz smeti?"
 
 #: ../panels/privacy/cc-privacy-panel.c:487
-#, fuzzy
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Vsi predmeti v smeteh bodo trajno izbrisani."
 
@@ -4745,13 +4736,12 @@ msgid "_Empty Trash"
 msgstr "Izprazni _smeti"
 
 #: ../panels/privacy/cc-privacy-panel.c:511
-#, fuzzy
 msgid "Delete all the temporary files?"
-msgstr "ne izbriši začasnih datotek (za razhroščevanje)"
+msgstr "Ali naj se izbrišejo vse začasne datoteke?"
 
 #: ../panels/privacy/cc-privacy-panel.c:512
 msgid "All the temporary files will be permanently deleted."
-msgstr ""
+msgstr "Vse začasne datoteke bodo trajno izbrisane."
 
 #: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
 msgid "_Purge Temporary Files"
@@ -4961,7 +4951,7 @@ msgstr "Števila"
 
 #: ../panels/region/format-chooser.ui.h:7
 msgid "Measurement"
-msgstr "Merjenje"
+msgstr "Merski sistem"
 
 #: ../panels/region/format-chooser.ui.h:8
 msgid "Paper"
@@ -5019,7 +5009,7 @@ msgstr "Super+Preslednica"
 
 #: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
-msgstr "Te bližnjice lahko spremenite v nastavitvah tipkovnice"
+msgstr "Te bližnjice je mogoče spremeniti v nastavitvah tipkovnice"
 
 #: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
@@ -6010,6 +6000,8 @@ msgid ""
 "Go online to add\n"
 "enterprise login accounts."
 msgstr ""
+"Vzpostavite povezavo za dodajanje\n"
+"poslovnih prijavnih računov."
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
@@ -6295,13 +6287,15 @@ msgstr "Poskusite dodati več črk, številk in posebnih znakov."
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
 msgstr ""
+"Priporočeno je uporabiti male in velike črke, vmes pa dodati tudi kakšno "
+"številko."
 
 #: ../panels/user-accounts/pw-utils.c:120
 msgctxt "Password hint"
 msgid ""
 "Good password! Adding more letters, numbers and punctuation will make it "
 "stronger."
-msgstr ""
+msgstr "Dobro geslo! Več je črk, številk in drugih znakov, močnejše je geslo."
 
 #: ../panels/user-accounts/pw-utils.c:142
 #: ../panels/user-accounts/pw-utils.c:172
@@ -6416,6 +6410,8 @@ msgid ""
 "That login name didn't work.\n"
 "Please try again."
 msgstr ""
+"Prijavno ime ne deluje.\n"
+"Poskusite znova."
 
 #: ../panels/user-accounts/um-account-dialog.c:1030
 msgid ""
@@ -6431,7 +6427,7 @@ msgstr "Prijava v domeno je spodletela"
 
 #: ../panels/user-accounts/um-account-dialog.c:1096
 msgid "Unable find the domain. Maybe you misspelled it?"
-msgstr ""
+msgstr "Domene ni mogoče najti. Morda je napačno zapisana."
 
 #: ../panels/user-accounts/um-account-dialog.c:1446
 msgid "Add User"
