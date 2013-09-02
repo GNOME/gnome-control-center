@@ -99,7 +99,7 @@ pp_authentication_dialog_class_init (PpAuthenticationDialogClass *klass)
                   G_STRUCT_OFFSET (PpAuthenticationDialogClass, response),
                   NULL, NULL,
                   g_cclosure_marshal_generic,
-                  G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_STRING);
+                  G_TYPE_NONE, 3, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING);
 }
 
 static void
@@ -228,6 +228,7 @@ authentication_dialog_response_cb (GtkDialog *_dialog,
   g_signal_emit (dialog,
                  signals[RESPONSE],
                  0,
+                 response_id,
                  username,
                  password);
 

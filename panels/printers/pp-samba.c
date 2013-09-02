@@ -213,6 +213,7 @@ smb_data_free (SMBData *data)
 
 static void
 auth_cb (PpAuthenticationDialog *auth_dialog,
+         gint                    response_id,
          const gchar            *username,
          const gchar            *password,
          gpointer                user_data)

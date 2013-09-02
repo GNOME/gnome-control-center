@@ -48,6 +48,7 @@ struct _PpAuthenticationDialogClass
   GObjectClass parent_class;
 
   void (*response)      (PpAuthenticationDialog *dialog,
+                         gint                    response_id,
                          const gchar            *username,
                          const gchar            *password);
 };
