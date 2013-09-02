@@ -192,6 +192,7 @@ typedef struct
   GtkWindow     *parent;
   SMBAuthInfo   *auth_info;
   gboolean       hostname_set;
+  gboolean       cancelled;
 } SMBData;
 
 static void
@@ -235,6 +236,10 @@ auth_cb (PpAuthenticationDialog *auth_dialog,
 
   g_object_unref (auth_dialog);
 
+  if (response_id == GTK_RESPONSE_CANCEL ||
+      response_id == GTK_RESPONSE_DELETE_EVENT)
+    data->cancelled = TRUE;
+
   data->waiting = FALSE;
 }
 
@@ -274,41 +279,44 @@ auth_fn (SMBCCTX    *smb_context,
 
   data = (SMBData *) smbc_getOptionUserData (smb_context);
 
-  data->auth_info = g_new (SMBAuthInfo, 1);
-  data->auth_info->server = g_strdup (server);
-  data->auth_info->share = g_strdup (share);
-  data->auth_info->workgroup = g_strdup (workgroup);
-  data->auth_info->username = g_strdup (username);
-  data->auth_info->password = g_strdup (password);
-
-  data->waiting = TRUE;
-
-  source = g_idle_source_new ();
-  g_source_set_callback (source,
-                         get_auth_info,
-                         data,
-                         NULL);
-  g_source_attach (source, data->context);
-  g_source_unref (source);
-
-  /*
-   * smbclient needs to get authentication data
-   * from this synchronous callback so we are blocking
-   * until we get them
-   */
-  while (data->waiting)
+  if (!data->cancelled)
     {
-      g_usleep (POLL_DELAY);
+      data->auth_info = g_new (SMBAuthInfo, 1);
+      data->auth_info->server = g_strdup (server);
+      data->auth_info->share = g_strdup (share);
+      data->auth_info->workgroup = g_strdup (workgroup);
+      data->auth_info->username = g_strdup (username);
+      data->auth_info->password = g_strdup (password);
+
+      data->waiting = TRUE;
+
+      source = g_idle_source_new ();
+      g_source_set_callback (source,
+                             get_auth_info,
+                             data,
+                             NULL);
+      g_source_attach (source, data->context);
+      g_source_unref (source);
+
+      /*
+       * smbclient needs to get authentication data
+       * from this synchronous callback so we are blocking
+       * until we get them
+       */
+      while (data->waiting)
+        {
+          g_usleep (POLL_DELAY);
+        }
+
+      if (g_strcmp0 (username, data->auth_info->username) != 0)
+        g_strlcpy (username, data->auth_info->username, unmaxlen);
+
+      if (g_strcmp0 (password, data->auth_info->password) != 0)
+        g_strlcpy (password, data->auth_info->password, pwmaxlen);
+
+      smb_auth_info_free (data->auth_info);
+      data->auth_info = NULL;
     }
-
-  if (g_strcmp0 (username, data->auth_info->username) != 0)
-    g_strlcpy (username, data->auth_info->username, unmaxlen);
-
-  if (g_strcmp0 (password, data->auth_info->password) != 0)
-    g_strlcpy (password, data->auth_info->password, pwmaxlen);
-
-  smb_auth_info_free (data->auth_info);
-  data->auth_info = NULL;
 }
 
 static void
@@ -351,13 +359,28 @@ list_dir (SMBCCTX      *smb_context,
         {
           if (data->auth_if_needed)
             {
+              data->cancelled = FALSE;
               smbc_setFunctionAuthDataWithContext (smb_context, auth_fn);
               dir = smbclient_opendir (smb_context, dirname);
               smbc_setFunctionAuthDataWithContext (smb_context, anonymous_auth_fn);
+
+              if (data->cancelled)
+                {
+                  device = g_new0 (PpPrintDevice, 1);
+                  device->host_name = g_str_has_prefix (dirname, "smb://") ? g_strdup (dirname + 6) : g_strdup (dirname);
+                  device->is_authenticated_server = TRUE;
+
+                  data->devices->devices = g_list_append (data->devices->devices, device);
+
+                  if (dir)
+                    smbclient_closedir (smb_context, dir);
+                  return;
+                }
             }
           else
             {
               device = g_new0 (PpPrintDevice, 1);
+
               device->host_name = g_str_has_prefix (dirname, "smb://") ? g_strdup (dirname + 6) : g_strdup (dirname);
               device->is_authenticated_server = TRUE;
 
