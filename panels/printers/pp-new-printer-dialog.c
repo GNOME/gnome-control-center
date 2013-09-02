@@ -62,7 +62,7 @@ static void     new_printer_dialog_response_cb (GtkDialog *_dialog,
 
 enum
 {
-  DEVICE_ICON_COLUMN = 0,
+  DEVICE_GICON_COLUMN = 0,
   DEVICE_NAME_COLUMN,
   DEVICE_DISPLAY_NAME_COLUMN,
   DEVICE_N_COLUMNS
@@ -118,6 +118,9 @@ struct _PpNewPrinterDialogPrivate
 
   GtkWidget *dialog;
   GtkWindow *parent;
+
+  GIcon *local_printer_icon;
+  GIcon *remote_printer_icon;
 };
 
 #define PP_NEW_PRINTER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogPrivate))
@@ -366,6 +369,9 @@ pp_new_printer_dialog_finalize (GObject *object)
       priv->num_of_dests = 0;
       priv->dests = NULL;
     }
+
+  g_clear_object (&priv->local_printer_icon);
+  g_clear_object (&priv->remote_printer_icon);
 
   G_OBJECT_CLASS (pp_new_printer_dialog_parent_class)->finalize (object);
 }
@@ -1434,7 +1440,7 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
 
           gtk_list_store_append (store, &iter);
           gtk_list_store_set (store, &iter,
-                              DEVICE_ICON_COLUMN, device->network_device ? "printer-network" : "printer",
+                              DEVICE_GICON_COLUMN, device->network_device ? priv->remote_printer_icon : priv->local_printer_icon,
                               DEVICE_NAME_COLUMN, device->device_name,
                               DEVICE_DISPLAY_NAME_COLUMN, display_string,
                               -1);
@@ -1550,12 +1556,15 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
                     "changed", G_CALLBACK (device_selection_changed_cb), dialog);
 
+  priv->local_printer_icon = g_themed_icon_new ("printer");
+  priv->remote_printer_icon = g_themed_icon_new ("printer-network");
+
   priv->icon_renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (priv->icon_renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
   gtk_cell_renderer_set_alignment (priv->icon_renderer, 1.0, 0.5);
   gtk_cell_renderer_set_padding (priv->icon_renderer, 4, 4);
   column = gtk_tree_view_column_new_with_attributes ("Icon", priv->icon_renderer,
-                                                     "icon-name", DEVICE_ICON_COLUMN, NULL);
+                                                     "gicon", DEVICE_GICON_COLUMN, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
 
