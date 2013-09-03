@@ -621,6 +621,20 @@ t_device_copy (TDevice *device)
 }
 
 static void
+pp_devices_list_free (PpDevicesList *result)
+{
+  GList *iter;
+
+  if (result)
+    {
+      for (iter = result->devices; iter; iter = iter->next)
+        pp_print_device_free ((PpPrintDevice *) iter->data);
+      g_list_free (result->devices);
+      g_free (result);
+    }
+}
+
+static void
 update_spinner_state (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
@@ -968,7 +982,6 @@ get_snmp_devices_cb (GObject      *source_object,
   PpHost                    *host = (PpHost *) source_object;
   GError                    *error = NULL;
   PpDevicesList             *result;
-  GList                     *iter;
 
   result = pp_host_get_snmp_devices_finish (host, res, &error);
   g_object_unref (source_object);
@@ -990,10 +1003,7 @@ get_snmp_devices_cb (GObject      *source_object,
 
       actualize_devices_list (dialog);
 
-      for (iter = result->devices; iter; iter = iter->next)
-        pp_print_device_free ((PpPrintDevice *) iter->data);
-      g_list_free (result->devices);
-      g_free (result);
+      pp_devices_list_free (result);
     }
   else
     {
@@ -1023,7 +1033,6 @@ get_remote_cups_devices_cb (GObject      *source_object,
   PpHost                    *host = (PpHost *) source_object;
   GError                    *error = NULL;
   PpDevicesList             *result;
-  GList                     *iter;
 
   result = pp_host_get_remote_cups_devices_finish (host, res, &error);
   g_object_unref (source_object);
@@ -1045,10 +1054,7 @@ get_remote_cups_devices_cb (GObject      *source_object,
 
       actualize_devices_list (dialog);
 
-      for (iter = result->devices; iter; iter = iter->next)
-        pp_print_device_free ((PpPrintDevice *) iter->data);
-      g_list_free (result->devices);
-      g_free (result);
+      pp_devices_list_free (result);
     }
   else
     {
@@ -1078,7 +1084,6 @@ get_samba_host_devices_cb (GObject      *source_object,
   PpDevicesList             *result;
   PpSamba                   *samba = (PpSamba *) source_object;
   GError                    *error = NULL;
-  GList                     *iter;
 
   result = pp_samba_get_devices_finish (samba, res, &error);
   g_object_unref (source_object);
@@ -1100,10 +1105,7 @@ get_samba_host_devices_cb (GObject      *source_object,
 
       actualize_devices_list (dialog);
 
-      for (iter = result->devices; iter; iter = iter->next)
-        pp_print_device_free ((PpPrintDevice *) iter->data);
-      g_list_free (result->devices);
-      g_free (result);
+      pp_devices_list_free (result);
     }
   else
     {
@@ -1133,7 +1135,6 @@ get_samba_devices_cb (GObject      *source_object,
   PpDevicesList             *result;
   PpSamba                   *samba = (PpSamba *) source_object;
   GError                    *error = NULL;
-  GList                     *iter;
 
   result = pp_samba_get_devices_finish (samba, res, &error);
   g_object_unref (source_object);
@@ -1155,10 +1156,7 @@ get_samba_devices_cb (GObject      *source_object,
 
       actualize_devices_list (dialog);
 
-      for (iter = result->devices; iter; iter = iter->next)
-        pp_print_device_free ((PpPrintDevice *) iter->data);
-      g_list_free (result->devices);
-      g_free (result);
+      pp_devices_list_free (result);
     }
   else
     {
