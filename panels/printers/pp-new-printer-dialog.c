@@ -59,12 +59,20 @@ static void     search_address_cb (GtkEntry *entry,
 static void     new_printer_dialog_response_cb (GtkDialog *_dialog,
                                                 gint       response_id,
                                                 gpointer   user_data);
+static void     update_spinner_state (PpNewPrinterDialog *dialog);
+static void     add_devices_to_list (PpNewPrinterDialog  *dialog,
+                                     GList               *devices,
+                                     gboolean             new_device);
+static void     remove_device_from_list (PpNewPrinterDialog *dialog,
+                                         const gchar        *device_name);
+static void     pp_devices_list_free (PpDevicesList *result);
 
 enum
 {
   DEVICE_GICON_COLUMN = 0,
   DEVICE_NAME_COLUMN,
   DEVICE_DISPLAY_NAME_COLUMN,
+  SERVER_NEEDS_AUTHENTICATION_COLUMN,
   DEVICE_N_COLUMNS
 };
 
@@ -83,6 +91,7 @@ typedef struct
   gint      host_port;
   gboolean  network_device;
   gint      acquisition_method;
+  gboolean  is_authenticated_server;
   gboolean  show;
 } TDevice;
 
@@ -105,6 +114,7 @@ struct _PpNewPrinterDialogPrivate
   gboolean  remote_cups_searching;
   gboolean  snmp_searching;
   gboolean  samba_host_searching;
+  gboolean  samba_authenticated_searching;
   gboolean  samba_searching;
 
   GtkCellRenderer *text_renderer;
@@ -121,6 +131,7 @@ struct _PpNewPrinterDialogPrivate
 
   GIcon *local_printer_icon;
   GIcon *remote_printer_icon;
+  GIcon *authenticated_server_icon;
 };
 
 #define PP_NEW_PRINTER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogPrivate))
@@ -282,6 +293,142 @@ update_alignment_padding (GtkWidget     *widget,
     }
 }
 
+typedef struct
+{
+  gchar    *server_name;
+  gpointer  dialog;
+} AuthSMBData;
+
+static void
+get_authenticated_samba_devices_cb (GObject      *source_object,
+                                    GAsyncResult *res,
+                                    gpointer      user_data)
+{
+  PpNewPrinterDialogPrivate *priv;
+  PpNewPrinterDialog        *dialog;
+  PpDevicesList             *result;
+  PpPrintDevice             *device;
+  AuthSMBData               *data;
+  GtkWidget                 *widget;
+  gboolean                   cancelled = FALSE;
+  PpSamba                   *samba = (PpSamba *) source_object;
+  GError                    *error = NULL;
+  GList                     *iter;
+
+  result = pp_samba_get_devices_finish (samba, res, &error);
+  g_object_unref (source_object);
+
+  data = (AuthSMBData *) user_data;
+
+  if (result != NULL)
+    {
+      dialog = PP_NEW_PRINTER_DIALOG (data->dialog);
+      priv = dialog->priv;
+
+      priv->samba_authenticated_searching = FALSE;
+      update_spinner_state (dialog);
+
+      for (iter = result->devices; iter; iter = iter->next)
+        {
+          device = (PpPrintDevice *) iter->data;
+          if (device->is_authenticated_server)
+            {
+              cancelled = TRUE;
+              break;
+            }
+        }
+
+      if (!cancelled)
+        {
+          remove_device_from_list (dialog,
+                                   data->server_name);
+
+          if (result->devices != NULL)
+            {
+              add_devices_to_list (dialog,
+                                   result->devices,
+                                   FALSE);
+
+              device = (PpPrintDevice *) result->devices->data;
+              if (device != NULL)
+                {
+                  widget = (GtkWidget*)
+                    gtk_builder_get_object (priv->builder, "search-entry");
+                  gtk_entry_set_text (GTK_ENTRY (widget), device->device_location);
+                  search_address_cb (GTK_ENTRY (widget), dialog);
+                }
+            }
+
+          actualize_devices_list (dialog);
+        }
+
+      pp_devices_list_free (result);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          dialog = PP_NEW_PRINTER_DIALOG (data->dialog);
+          priv = dialog->priv;
+
+          g_warning ("%s", error->message);
+
+          priv->samba_authenticated_searching = FALSE;
+          update_spinner_state (dialog);
+        }
+
+      g_error_free (error);
+    }
+
+  g_free (data->server_name);
+  g_free (data);
+}
+
+static void
+authenticate_samba_server (GtkButton *button,
+                           gpointer   user_data)
+{
+  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+  GtkTreeModel              *model;
+  GtkTreeIter                iter;
+  AuthSMBData               *data;
+  GtkWidget                 *treeview;
+  PpSamba                   *samba_host;
+  gchar                     *server_name = NULL;
+
+  treeview = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "devices-treeview");
+
+  if (treeview &&
+      gtk_tree_selection_get_selected (
+        gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)), &model, &iter))
+    {
+      gtk_tree_model_get (model, &iter,
+                          DEVICE_NAME_COLUMN, &server_name,
+                          -1);
+
+      if (server_name != NULL)
+        {
+          samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
+                                     server_name);
+
+          priv->samba_authenticated_searching = TRUE;
+          update_spinner_state (dialog);
+
+          data = g_new (AuthSMBData, 1);
+          data->server_name = server_name;
+          data->dialog = dialog;
+
+          pp_samba_get_devices_async (samba_host,
+                                      TRUE,
+                                      priv->cancellable,
+                                      get_authenticated_samba_devices_cb,
+                                      data);
+        }
+    }
+}
+
 static void
 pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 {
@@ -321,6 +468,10 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
     gtk_builder_get_object (priv->builder, "search-entry");
   g_signal_connect (widget, "icon-press", G_CALLBACK (search_address_cb2), dialog);
   g_signal_connect (widget, "activate", G_CALLBACK (search_address_cb), dialog);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "authenticate-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (authenticate_samba_server), dialog);
 
   /* Set junctions */
   widget = (GtkWidget*)
@@ -372,6 +523,7 @@ pp_new_printer_dialog_finalize (GObject *object)
 
   g_clear_object (&priv->local_printer_icon);
   g_clear_object (&priv->remote_printer_icon);
+  g_clear_object (&priv->authenticated_server_icon);
 
   G_OBJECT_CLASS (pp_new_printer_dialog_parent_class)->finalize (object);
 }
@@ -386,19 +538,64 @@ device_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeIter                iter;
   GtkWidget                 *treeview = NULL;
   GtkWidget                 *widget;
+  GtkWidget                 *notebook;
+  gboolean                   authentication_needed;
+  gboolean                   selected;
 
   treeview = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "devices-treeview");
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "new-printer-add-button");
-
   if (treeview)
-    gtk_widget_set_sensitive (widget,
-      gtk_tree_selection_get_selected (
-        gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
-        &model,
-        &iter));
+    {
+      selected = gtk_tree_selection_get_selected (
+                   gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+                                                &model,
+                                                &iter);
+
+      if (selected)
+        {
+          gtk_tree_model_get (model, &iter,
+                              SERVER_NEEDS_AUTHENTICATION_COLUMN, &authentication_needed,
+                              -1);
+
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "new-printer-add-button");
+          gtk_widget_set_sensitive (widget, selected);
+
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "authenticate-button");
+          gtk_widget_set_sensitive (widget, authentication_needed);
+
+          notebook = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "notebook");
+
+          if (authentication_needed)
+            gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
+          else
+            gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
+        }
+    }
+}
+
+static void
+remove_device_from_list (PpNewPrinterDialog *dialog,
+                         const gchar        *device_name)
+{
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+  TDevice                   *device;
+  GList                     *iter;
+
+  for (iter = priv->devices; iter; iter = iter->next)
+    {
+      device = (TDevice *) iter->data;
+      if (g_strcmp0 (device->device_name, device_name) == 0)
+        {
+          priv->devices = g_list_remove_link (priv->devices, iter);
+          t_device_free (iter->data);
+          g_list_free (iter);
+          break;
+        }
+    }
 }
 
 static void
@@ -538,6 +735,17 @@ add_device_to_list (PpNewPrinterDialog *dialog,
           else
             priv->devices = g_list_append (priv->devices, store_device);
         }
+      else if (device->is_authenticated_server &&
+              device->host_name != NULL)
+        {
+          store_device = g_new0 (TDevice, 1);
+          store_device->device_name = g_strdup (device->host_name);
+          store_device->host_name = g_strdup (device->host_name);
+          store_device->is_authenticated_server = device->is_authenticated_server;
+          store_device->show = TRUE;
+
+          priv->devices = g_list_append (priv->devices, store_device);
+        }
     }
 }
 
@@ -565,7 +773,8 @@ device_in_list (gchar *device_uri,
     {
       device = (TDevice *) iter->data;
       /* GroupPhysicalDevices returns uris without port numbers */
-      if (g_str_has_prefix (device->device_uri, device_uri))
+      if (device->device_uri != NULL &&
+          g_str_has_prefix (device->device_uri, device_uri))
         return device;
     }
 
@@ -614,6 +823,7 @@ t_device_copy (TDevice *device)
       result->host_port = device->host_port;
       result->network_device = device->network_device;
       result->acquisition_method = device->acquisition_method;
+      result->is_authenticated_server = device->is_authenticated_server;
       result->show = device->show;
     }
 
@@ -644,6 +854,7 @@ update_spinner_state (PpNewPrinterDialog *dialog)
       priv->remote_cups_searching ||
       priv->snmp_searching ||
       priv->samba_host_searching ||
+      priv->samba_authenticated_searching ||
       priv->samba_searching)
     {
       spinner = (GtkWidget*)
@@ -1447,6 +1658,25 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
 
           g_free (display_string);
         }
+      else if (device->is_authenticated_server &&
+               device->host_name != NULL)
+        {
+          display_string = g_markup_printf_escaped ("<b>%s</b>\n<small><span foreground=\"#555555\">%s</span></small>",
+                                                    device->host_name,
+                                                    /* Translators: This item is a server which needs authentication to show its printers */
+                                                    _("Server requires authentication"));
+
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter,
+                              DEVICE_GICON_COLUMN, priv->authenticated_server_icon,
+                              DEVICE_NAME_COLUMN, device->host_name,
+                              DEVICE_DISPLAY_NAME_COLUMN, display_string,
+                              SERVER_NEEDS_AUTHENTICATION_COLUMN, TRUE,
+                              -1);
+          no_device = FALSE;
+
+          g_free (display_string);
+        }
     }
 
   column = gtk_tree_view_get_column (treeview, 0);
@@ -1458,6 +1688,7 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
       !priv->remote_cups_searching &&
       !priv->snmp_searching &&
       !priv->samba_host_searching &&
+      !priv->samba_authenticated_searching &&
       !priv->samba_searching)
     {
       if (priv->text_renderer)
@@ -1547,7 +1778,9 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   GtkTreeViewColumn         *column;
   GtkWidget                 *treeview;
   PpSamba                   *samba;
+  GEmblem                   *emblem;
   PpCups                    *cups;
+  GIcon                     *icon, *emblem_icon;
 
   treeview = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "devices-treeview");
@@ -1557,6 +1790,16 @@ populate_devices_list (PpNewPrinterDialog *dialog)
 
   priv->local_printer_icon = g_themed_icon_new ("printer");
   priv->remote_printer_icon = g_themed_icon_new ("printer-network");
+
+  icon = g_themed_icon_new ("network-server");
+  emblem_icon = g_themed_icon_new ("changes-prevent");
+  emblem = g_emblem_new (emblem_icon);
+
+  priv->authenticated_server_icon = g_emblemed_icon_new (icon, emblem);
+
+  g_object_unref (icon);
+  g_object_unref (emblem_icon);
+  g_object_unref (emblem);
 
   priv->icon_renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (priv->icon_renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
