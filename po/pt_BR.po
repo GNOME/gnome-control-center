@@ -31,16 +31,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-30 12:36+0000\n"
-"PO-Revision-Date: 2013-08-30 09:56-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2013-09-02 20:06+0000\n"
+"PO-Revision-Date: 2013-09-02 20:49-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
@@ -1006,29 +1006,30 @@ msgstr "Concluí_do"
 
 # Formato 12hs, não alterar para 24h
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e de %B de %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%e de %B de %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "UTC%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+#| msgid "UTC%z"
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
 
 # Formato 12hs, não alterar para 24h
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%R"
 
@@ -2300,7 +2301,7 @@ msgstr "Manual"
 msgid "Link-Local Only"
 msgstr "Link-Local somente"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:941
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
