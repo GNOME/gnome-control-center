@@ -1402,6 +1402,18 @@ gdk_window_set_cb (GObject    *object,
   g_free (str);
 }
 
+static gboolean
+window_map_event_cb (GtkWidget *widget,
+                     GdkEvent  *event,
+                     CcWindow  *self)
+{
+  /* If focus ends up in a category icon view one of the items is
+   * immediately selected which looks odd when we are starting up, so
+   * we explicitly unset the focus here. */
+  gtk_window_set_focus (GTK_WINDOW (self), NULL);
+  return GDK_EVENT_PROPAGATE;
+}
+
 static void
 create_main_page (CcWindow *self)
 {
@@ -1535,6 +1547,7 @@ create_window (CcWindow *self)
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
   g_signal_connect (self, "button-release-event",
                     G_CALLBACK (window_button_release_event), self);
+  g_signal_connect (self, "map-event", G_CALLBACK (window_map_event_cb), self);
 
   g_signal_connect (self, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
 
