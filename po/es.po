@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-02 20:06+0000\n"
-"PO-Revision-Date: 2013-09-03 16:07+0200\n"
+"POT-Creation-Date: 2013-09-03 20:11+0000\n"
+"PO-Revision-Date: 2013-09-04 17:18+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -1000,7 +1000,6 @@ msgstr "%d/%b/%Y, %H:%M"
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
 #: ../panels/datetime/cc-datetime-panel.c:549
-#| msgid "UTC%z"
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
@@ -4375,12 +4374,18 @@ msgstr "Cancelar trabajo de impresión"
 msgid "Add a New Printer"
 msgstr "Añadir una impresora nueva"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+#| msgid "Authenticate"
+msgid "A_uthenticate"
+msgstr "A_utenticar"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Buscar impresoras de red o filtrar resultados"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Enter address of a printer or a text to filter results"
 msgstr ""
 "Introducir la dirección de una impresa o un texto para filtrar los resultados"
@@ -4497,8 +4502,14 @@ msgstr "Hora"
 msgid "%s Active Jobs"
 msgstr "%s trabajos activos"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+#| msgid "_Inner authentication"
+msgid "Server requires authentication"
+msgstr "El servidor requiere autenticación"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "No se ha detectado ninguna impresora."
 
@@ -4632,7 +4643,7 @@ msgid "Driver"
 msgstr "Controlador"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -7165,7 +7176,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1575 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1576 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Configuración"
 
