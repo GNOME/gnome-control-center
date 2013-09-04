@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-31 22:29+0200\n"
-"PO-Revision-Date: 2013-08-31 22:30+0200\n"
+"POT-Creation-Date: 2013-09-04 02:00+0200\n"
+"PO-Revision-Date: 2013-09-04 02:01+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -985,28 +985,28 @@ msgid "_Done"
 msgstr "_Gotowe"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l∶%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %H∶%M"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "UTC%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%H∶%M"
 
@@ -1251,7 +1251,7 @@ msgstr "Nie można uzyskać informacji o rozdzielczości ekranu"
 
 #: ../panels/display/cc-display-panel.c:2169
 msgid "_Arrange Combined Displays"
-msgstr "Zmi_ana położenia połączonych ekranów"
+msgstr "Zmi_eń położenie połączonych ekranów"
 
 #: ../panels/display/display-capplet.ui.h:6
 msgid "Show your primary display on this screen also"
@@ -4383,12 +4383,17 @@ msgstr "Anuluj zadanie drukowania"
 msgid "Add a New Printer"
 msgstr "Dodanie nowej drukarki"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "_Uwierzytelnij"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Wyszukiwanie drukarek sieciowych lub filtrowanie wyników"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Enter address of a printer or a text to filter results"
 msgstr "Wpisanie adresu drukarki lub innego tekstu filtruje wyniki"
 
@@ -4504,8 +4509,13 @@ msgstr "Czas"
 msgid "%s Active Jobs"
 msgstr "Aktywne zadania drukarki %s"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "Serwer wymaga uwierzytelnienia"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Nie wykryto drukarek."
 
@@ -4639,7 +4649,7 @@ msgid "Driver"
 msgstr "Sterownik"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -7159,7 +7169,7 @@ msgstr "Pomoc"
 msgid "Quit"
 msgstr "Zakończ"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1467
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
 msgid "All Settings"
 msgstr "Wszystkie ustawienia"
 
@@ -7179,7 +7189,7 @@ msgctxt "category"
 msgid "System"
 msgstr "System"
 
-#: ../shell/cc-window.c:1575 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Ustawienia"
 
