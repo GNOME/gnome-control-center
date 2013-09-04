@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 11:57-0600\n"
-"PO-Revision-Date: 2013-08-29 15:16-0600\n"
+"POT-Creation-Date: 2013-09-04 09:42-0600\n"
+"PO-Revision-Date: 2013-09-04 10:37-0600\n"
 "Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "Language: ga\n"
@@ -100,8 +100,8 @@ msgstr ""
 #: ../panels/background/cc-background-chooser-dialog.c:443
 #: ../panels/bluetooth/cc-bluetooth-panel.c:631
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
-#: ../panels/display/cc-display-panel.c:1348
-#: ../panels/display/cc-display-panel.c:1746
+#: ../panels/display/cc-display-panel.c:1385
+#: ../panels/display/cc-display-panel.c:1783
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1201
@@ -155,9 +155,8 @@ msgid "Wallpaper;Screen;Desktop;"
 msgstr "Cúlbhrat;Scáileán;Deasc;"
 
 #: ../panels/bluetooth/bluetooth.ui.h:1
-#, fuzzy
 msgid "Set Up New Device"
-msgstr "Gach Comhad"
+msgstr "Socraigh Gléas Nua"
 
 #: ../panels/bluetooth/bluetooth.ui.h:2 ../panels/network/network.ui.h:9
 msgid "Remove Device"
@@ -172,14 +171,14 @@ msgstr "Ceangal"
 #: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
-msgstr ""
+msgstr "leathanach 1"
 
 #: ../panels/bluetooth/bluetooth.ui.h:5
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:5
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
-msgstr ""
+msgstr "leathanach 2"
 
 #: ../panels/bluetooth/bluetooth.ui.h:6
 msgid "Paired"
@@ -199,7 +198,7 @@ msgstr "Seoladh"
 
 #: ../panels/bluetooth/bluetooth.ui.h:9
 msgid "Mouse & Touchpad Settings"
-msgstr ""
+msgstr "Socruithe Luiche & Cheap Tadhaill"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
 msgid "Sound Settings"
@@ -247,12 +246,13 @@ msgstr "Infheictheacht “%s”"
 #: ../panels/bluetooth/cc-bluetooth-panel.c:626
 #, c-format
 msgid "Remove '%s' from the list of devices?"
-msgstr ""
+msgstr "Bain '%s' ón liosta gléasanna?"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:628
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
+"Má bhaineann tú an gléas, is gá é a shocrú arís roimh an chéad úsáid eile."
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:632
 #: ../panels/online-accounts/cc-online-accounts-panel.c:844
@@ -266,11 +266,12 @@ msgstr "Bluetooth"
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr ""
+"Cumasaigh agus díchumasaigh Bluetooth agus ceangail do chuid ghléasanna"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:360
 msgid "Place your calibration device over the square and press 'Start'"
-msgstr ""
+msgstr "Socraigh do ghléas calabraithe thar an gcearnóg agus brúigh 'Tosaigh'"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -279,6 +280,8 @@ msgstr ""
 msgid ""
 "Move your calibration device to the calibrate position and press 'Continue'"
 msgstr ""
+"Bog do ghléas calabraithe go dtí an t-ionad calabraithe agus brúigh 'Ar "
+"Aghaidh'"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -287,31 +290,31 @@ msgstr ""
 msgid ""
 "Move your calibration device to the surface position and press 'Continue'"
 msgstr ""
+"Bog do ghléas calabraithe go dtí an t-ionad dromchla agus brúigh 'Ar Aghaidh'"
 
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
 #: ../panels/color/cc-color-calibrate.c:378
 msgid "Shut the laptop lid"
-msgstr ""
+msgstr "Dún an clúdach"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
 #: ../panels/color/cc-color-calibrate.c:409
-#, fuzzy
 msgid "An internal error occurred that could not be recovered."
-msgstr "Tharla earráid chórais"
+msgstr ""
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
 #: ../panels/color/cc-color-calibrate.c:414
 msgid "Tools required for calibration are not installed."
-msgstr ""
+msgstr "Tá uirlisí de dhíth le haghaidh calabraithe nach bhfuil suiteáilte."
 
 #. TRANSLATORS: The profile failed for some reason
 #: ../panels/color/cc-color-calibrate.c:420
 msgid "The profile could not be generated."
-msgstr ""
+msgstr "Níorbh fhéidir an phróifíl a ghiniúint."
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
@@ -322,28 +325,26 @@ msgstr ""
 
 #. TRANSLATORS: the display calibration process is finished
 #: ../panels/color/cc-color-calibrate.c:466
-#, fuzzy
 msgid "Complete!"
-msgstr "Cnaipe na Luiche"
+msgstr "Críochnaithe!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
 #: ../panels/color/cc-color-calibrate.c:474
-#, fuzzy
 msgid "Calibration failed!"
-msgstr "U_RL Uathchumraíochta:"
+msgstr "Theip ar chalabrú!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
 #: ../panels/color/cc-color-calibrate.c:481
 msgid "You can remove the calibration device."
-msgstr ""
+msgstr "Is féidir leat an gléas calabraithe a bhaint."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
 #: ../panels/color/cc-color-calibrate.c:552
 msgid "Do not disturb the calibration device while in progress"
-msgstr ""
+msgstr "Ná cuir isteach ar an ngléas calabraithe nuair atá sé ar siúl"
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
@@ -389,12 +390,12 @@ msgstr "Ceamara Gréasáin %s"
 #: ../panels/color/cc-color-device.c:89
 #, c-format
 msgid "Enable color management for %s"
-msgstr ""
+msgstr "Cumasaigh bainisteoireacht dathanna do %s"
 
 #: ../panels/color/cc-color-device.c:93
 #, c-format
 msgid "Show color profiles for %s"
-msgstr ""
+msgstr "Taispeáin próifílí datha do %s"
 
 #. not calibrated
 #: ../panels/color/cc-color-device.c:322
@@ -445,28 +446,30 @@ msgstr "Scáileán"
 
 #. TRANSLATORS: this is when the upload of the profile failed
 #: ../panels/color/cc-color-panel.c:912
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to upload file: %s"
-msgstr "<b>Cumraíocht seachfhreastalaí _uathoibríoch</b>"
+msgstr "Theip ar uasluchtú comhaid: %s"
 
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
 #: ../panels/color/cc-color-panel.c:926
 msgid "The profile has been uploaded to:"
-msgstr ""
+msgstr "Uasluchtaíodh an phróifíl go:"
 
 #: ../panels/color/cc-color-panel.c:928
 msgid "Write down this URL."
-msgstr ""
+msgstr "Breac síos an URL seo."
 
 #: ../panels/color/cc-color-panel.c:929
 msgid "Restart this computer and boot your normal operating system."
-msgstr ""
+msgstr "Atosaigh an ríomhaire seo agus bútáil do ghnáthchóras oibriúcháin."
 
 #: ../panels/color/cc-color-panel.c:930
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
+"Clóscríobh an URL isteach i do bhrabhsálaí chun an phróifíl a íosluchtú agus "
+"a shuiteáil."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
 #: ../panels/color/cc-color-panel.c:964
@@ -481,7 +484,7 @@ msgstr "_Sábháil"
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:1328
 msgid "Create a color profile for the selected device"
-msgstr ""
+msgstr "Cruthaigh próifíl dathanna don ghléas roghnaithe"
 
 #. TRANSLATORS: this is when the button is insensitive
 #: ../panels/color/cc-color-panel.c:1343 ../panels/color/cc-color-panel.c:1367
@@ -503,16 +506,14 @@ msgstr ""
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:102
-#, fuzzy
 msgid "Standard Space"
-msgstr "Caighdeánach"
+msgstr "Spás Caighdeánach"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
 #: ../panels/color/cc-color-profile.c:108
-#, fuzzy
 msgid "Test Profile"
-msgstr "Gan phróifíl"
+msgstr "Próifíl Tástála"
 
 #. TRANSLATORS: automatic profiles are generated automatically
 #. * by the color management system based on manufacturing data,
@@ -529,13 +530,13 @@ msgstr "Uathoibríoch"
 #: ../panels/color/cc-color-profile.c:126
 msgctxt "Profile quality"
 msgid "Low Quality"
-msgstr ""
+msgstr "Cáilíocht Íseal"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:131
 msgctxt "Profile quality"
 msgid "Medium Quality"
-msgstr ""
+msgstr "Cáilíocht Mheánach"
 
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
@@ -543,7 +544,7 @@ msgstr ""
 #: ../panels/color/cc-color-profile.c:138
 msgctxt "Profile quality"
 msgid "High Quality"
-msgstr ""
+msgstr "Ardcháilíocht"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
@@ -576,12 +577,11 @@ msgstr ""
 
 #: ../panels/color/cc-color-profile.c:224
 msgid "This profile may no longer be accurate"
-msgstr ""
+msgstr "Is féidir nach bhfuil an phróifíl seo cruinn a thuilleadh"
 
 #: ../panels/color/color-calibrate.ui.h:1
-#, fuzzy
 msgid "Display Calibration"
-msgstr "Calabrú"
+msgstr "Calabrú Taispeána"
 
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/authentication-dialog.ui.h:2
@@ -599,7 +599,7 @@ msgstr "Tosaigh"
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
 msgid "Resume"
-msgstr ""
+msgstr "Lean"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
@@ -611,9 +611,8 @@ msgstr "Críochnaithe"
 #. 750 = 0.75 sec
 #. Text printed on screen
 #: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
-#, fuzzy
 msgid "Screen Calibration"
-msgstr "Cló _feidhmchláir:"
+msgstr "Calabrú Scáileáin"
 
 #: ../panels/color/color.ui.h:2
 msgid ""
@@ -625,40 +624,37 @@ msgstr ""
 #: ../panels/color/color.ui.h:3
 msgid ""
 "You will not be able to use your computer while calibration takes place."
-msgstr ""
+msgstr "Ní féidir leat do ríomhaire a úsáid agus an calabrú á dhéanamh."
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
 msgid "Quality"
-msgstr ""
+msgstr "Cáilíocht"
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:7
 msgid "Approximate Time"
-msgstr ""
+msgstr "Neas-am"
 
 #: ../panels/color/color.ui.h:8
-#, fuzzy
 msgid "Calibration Quality"
-msgstr "Calabrú"
+msgstr "Cáilíocht Chalabraithe"
 
 #: ../panels/color/color.ui.h:9
 msgid "Select the sensor device you want to use for calibration."
 msgstr ""
 
 #: ../panels/color/color.ui.h:10
-#, fuzzy
 msgid "Calibration Device"
-msgstr "Calabrú"
+msgstr "Gléas Calabraithe"
 
 #: ../panels/color/color.ui.h:11
 msgid "Select the type of display that is connected."
 msgstr ""
 
 #: ../panels/color/color.ui.h:12
-#, fuzzy
 msgid "Display Type"
-msgstr "Taispeáint"
+msgstr "Cineál Taispeána"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
@@ -908,6 +904,7 @@ msgstr "D75"
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
 msgstr ""
+"Calabraigh dath do ghléasanna, mar shampla taispeáintí, ceamaraí nó printéirí"
 
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
@@ -959,28 +956,28 @@ msgid "_Done"
 msgstr "_Críochnaithe"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%B %e %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%B %e %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "AUL%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+msgid "UTC%:::z"
+msgstr "AUL%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%R"
 
@@ -1052,7 +1049,7 @@ msgstr "Nóimeád"
 
 #: ../panels/datetime/datetime.ui.h:18
 msgid "Switch between AM and PM."
-msgstr ""
+msgstr "Athraigh idir AM agus PM."
 
 #: ../panels/datetime/datetime.ui.h:19
 msgid "Day"
@@ -1108,7 +1105,7 @@ msgstr "AM / PM"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
-msgstr ""
+msgstr "Athraigh an dáta agus an t-am, crios ama ina measc"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
@@ -1117,29 +1114,28 @@ msgstr "Clog;Crios Ama;Suíomh;"
 
 #: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
 msgid "Change system time and date settings"
-msgstr ""
+msgstr "Athraigh socruithe ama agus dáta an chórais"
 
 #: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
 msgid "To change time or date settings, you need to authenticate."
-msgstr ""
+msgstr "Is gá fíordeimhniú chun socruithe ama nó dáta a athrú."
 
-#: ../panels/display/cc-display-panel.c:421
-#, fuzzy
+#: ../panels/display/cc-display-panel.c:458
 msgid "Lid Closed"
-msgstr "_Dún"
+msgstr "Clúdach Dúnta"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:424
+#: ../panels/display/cc-display-panel.c:461
 msgid "Mirrored"
 msgstr "Scáthánaithe"
 
-#: ../panels/display/cc-display-panel.c:426
-#: ../panels/display/cc-display-panel.c:1877
+#: ../panels/display/cc-display-panel.c:463
+#: ../panels/display/cc-display-panel.c:1914
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Primary"
-msgstr ""
+msgstr "Príomhúil"
 
-#: ../panels/display/cc-display-panel.c:428
+#: ../panels/display/cc-display-panel.c:465
 #: ../panels/notifications/cc-notifications-panel.c:205
 #: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
 #: ../panels/privacy/cc-privacy-panel.c:77
@@ -1151,86 +1147,83 @@ msgstr ""
 msgid "Off"
 msgstr "Díchumasaithe"
 
-#: ../panels/display/cc-display-panel.c:431
-#, fuzzy
+#: ../panels/display/cc-display-panel.c:468
 msgid "Secondary"
-msgstr "Cliceáil Tánaisteach Ionsamhailte"
+msgstr "Tánaisteach"
 
-#: ../panels/display/cc-display-panel.c:1345
-#, fuzzy
+#: ../panels/display/cc-display-panel.c:1382
 msgid "Arrange Combined Displays"
-msgstr "Taispeáintí Scáthánaithe"
+msgstr "Leag Amach Taispeáintí Comhcheangailte"
 
-#: ../panels/display/cc-display-panel.c:1349
-#: ../panels/display/cc-display-panel.c:1747
+#: ../panels/display/cc-display-panel.c:1386
+#: ../panels/display/cc-display-panel.c:1784
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 msgid "_Apply"
 msgstr "Cuir i bh_Feidhm"
 
-#: ../panels/display/cc-display-panel.c:1369
+#: ../panels/display/cc-display-panel.c:1406
 msgid "Drag displays to rearrange them"
-msgstr ""
+msgstr "Tarraing taispeáintí chun iad a leagan amach"
 
 #. size
-#: ../panels/display/cc-display-panel.c:1811
+#: ../panels/display/cc-display-panel.c:1848
 msgid "Size"
 msgstr "Méid"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:1826
+#: ../panels/display/cc-display-panel.c:1863
 #: ../panels/display/display-capplet.ui.h:12
 msgid "Aspect Ratio"
 msgstr "Cóimheas Treoíochta"
 
-#: ../panels/display/cc-display-panel.c:1847
+#: ../panels/display/cc-display-panel.c:1884
 #: ../panels/display/display-capplet.ui.h:13
 #: ../panels/printers/pp-options-dialog.c:86
 msgid "Resolution"
 msgstr "Taifeach"
 
-#: ../panels/display/cc-display-panel.c:1878
+#: ../panels/display/cc-display-panel.c:1915
 #: ../panels/display/display-capplet.ui.h:2
 msgid "Show the top bar and Activities Overview on this display"
 msgstr ""
 
-#: ../panels/display/cc-display-panel.c:1884
-#, fuzzy
+#: ../panels/display/cc-display-panel.c:1921
 msgid "Secondary Display"
-msgstr "Cliceáil Tánaisteach Ionsamhailte"
+msgstr "Taispeáint Tánaisteach"
 
-#: ../panels/display/cc-display-panel.c:1885
+#: ../panels/display/cc-display-panel.c:1922
 msgid "Join this display with another to create an extra workspace"
 msgstr ""
+"Comhcheangail an taispeáint seo le ceann eile chun spás breise oibre a "
+"chruthú"
 
-#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/display/cc-display-panel.c:1929
 #: ../panels/display/display-capplet.ui.h:3
-#, fuzzy
 msgid "Presentation"
-msgstr "Gníomh an Bharra Teidil"
+msgstr "Láithreoireacht"
 
-#: ../panels/display/cc-display-panel.c:1893
+#: ../panels/display/cc-display-panel.c:1930
 #: ../panels/display/display-capplet.ui.h:4
 msgid "Show slideshows and media only"
-msgstr ""
+msgstr "Taispeáin teaspántais sleamhnán agus meáin amháin"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:1898
+#: ../panels/display/cc-display-panel.c:1935
 #: ../panels/display/display-capplet.ui.h:5
 msgid "Mirror"
 msgstr "Scáthánaigh"
 
-#: ../panels/display/cc-display-panel.c:1899
+#: ../panels/display/cc-display-panel.c:1936
 msgid "Show your existing view on both displays"
-msgstr ""
+msgstr "Taispeáin d'amharc atá ann ar an dá taispeáint"
 
-#: ../panels/display/cc-display-panel.c:2092
+#: ../panels/display/cc-display-panel.c:2138
 msgid "Could not get screen information"
 msgstr "Níorbh fhéidir eolas scáileáin a fháil"
 
-#: ../panels/display/cc-display-panel.c:2123
-#, fuzzy
+#: ../panels/display/cc-display-panel.c:2169
 msgid "_Arrange Combined Displays"
-msgstr "Taispeáintí Scáthánaithe"
+msgstr "_Leag Amach Taispeáintí Comhcheangailte"
 
 #: ../panels/display/display-capplet.ui.h:6
 msgid "Show your primary display on this screen also"
@@ -1238,7 +1231,7 @@ msgstr ""
 
 #: ../panels/display/display-capplet.ui.h:7
 msgid "Combine"
-msgstr ""
+msgstr "Comhcheangail"
 
 #: ../panels/display/display-capplet.ui.h:8
 msgid "Join with the primary display to create an extra space"
@@ -1272,7 +1265,7 @@ msgstr ""
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
-msgstr ""
+msgstr "Painéal;Teilgeoir;xrandr;Scáileán;Taifeach;Athnuaigh;"
 
 #. TRANSLATORS: AP type
 #: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
@@ -1427,7 +1420,7 @@ msgstr "Sonraí"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
 msgid "View information about your system"
-msgstr ""
+msgstr "Amharc ar eolas faoi do chóras"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
@@ -1473,7 +1466,7 @@ msgstr "Diosca"
 
 #: ../panels/info/info.ui.h:10
 msgid "Calculating…"
-msgstr ""
+msgstr "Á áireamh…"
 
 #: ../panels/info/info.ui.h:11
 msgid "Graphics"
@@ -1541,44 +1534,43 @@ msgstr "Fuaim agus Meáin"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:2
 msgid "Volume mute"
-msgstr ""
+msgstr "Airde gan fuaim"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:3
 msgid "Volume down"
-msgstr ""
+msgstr "Airde síos"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:4
 msgid "Volume up"
-msgstr ""
+msgstr "Airde suas"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:5
-#, fuzzy
 msgid "Launch media player"
-msgstr "Seinnteoir Ilmheán"
+msgstr "Luchtaigh seinnteoir meán"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:6
 msgid "Play (or play/pause)"
-msgstr ""
+msgstr "Seinn (nó seinn/sos)"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Pause playback"
-msgstr ""
+msgstr "Cuir athsheinm ar shos"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:8
 msgid "Stop playback"
-msgstr ""
+msgstr "Stad athsheinm"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:9
 msgid "Previous track"
-msgstr ""
+msgstr "An t-amhrán roimhe seo"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:10
 msgid "Next track"
-msgstr ""
+msgstr "An chéad t-amhrán eile"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:11
 msgid "Eject"
-msgstr ""
+msgstr "Díchuir"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
@@ -1587,14 +1579,12 @@ msgid "Typing"
 msgstr "Clóscríobh"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
-#, fuzzy
 msgid "Switch to next input source"
-msgstr "Roghnaigh foinse ionchuir le cur leis"
+msgstr "Athraigh go dtí an chéad fhoinse ionchuir eile"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
-#, fuzzy
 msgid "Switch to previous input source"
-msgstr "Roghnaigh foinse ionchuir le cur leis"
+msgstr "Athraigh go dtí an fhoinse ionchuir roimhe seo"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:1
 msgid "Launchers"
@@ -1602,24 +1592,23 @@ msgstr "Tosaitheoirí"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:2
 msgid "Launch help browser"
-msgstr ""
+msgstr "Luchtaigh brabhsálaí cabhrach"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3
 msgid "Launch calculator"
-msgstr ""
+msgstr "Luchtaigh áireamhán"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:4
 msgid "Launch email client"
-msgstr ""
+msgstr "Luchtaigh cliant ríomhphoist"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:5
-#, fuzzy
 msgid "Launch web browser"
-msgstr "Brabhsálaí Lín Epiphany"
+msgstr "Luchtaigh brabhsálaí gréasáin"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Home folder"
-msgstr ""
+msgstr "Fillteán baile"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:7
 msgctxt "keybinding"
@@ -1633,33 +1622,33 @@ msgstr "Gabhálacha Scáileáin"
 #. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:3
 msgid "Save a screenshot to $PICTURES"
-msgstr ""
+msgstr "Sábháil gabháil scáileáin i $PICTURES"
 
 #. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:5
 msgid "Save a screenshot of a window to $PICTURES"
-msgstr ""
+msgstr "Sábháil gabháil scáileán fuinneoige i $PICTURES"
 
 #. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:7
 msgid "Save a screenshot of an area to $PICTURES"
-msgstr ""
+msgstr "Sábháil gabháil scáileán limistéir i $PICTURES"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:8
 msgid "Copy a screenshot to clipboard"
-msgstr ""
+msgstr "Cóipeáil gabháil scáileáin go dtí an ghearrthaisce"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:9
 msgid "Copy a screenshot of a window to clipboard"
-msgstr ""
+msgstr "Cóipeáil gabháil scáileán fuinneoige go dtí an ghearrthaisce"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:10
 msgid "Copy a screenshot of an area to clipboard"
-msgstr ""
+msgstr "Cóipeáil gabháil scáileán limistéir go dtí an ghearrthaisce"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:11
 msgid "Record a short screencast"
-msgstr ""
+msgstr "Taifead físghabháil ghearr scáileáin"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "System"
@@ -1680,7 +1669,7 @@ msgstr "Rochtain Uilíoch"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
 msgid "Turn zoom on or off"
-msgstr ""
+msgstr "Cumasaigh nó díchumasaigh súmáil"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:3
 msgid "Zoom in"
@@ -1691,26 +1680,24 @@ msgid "Zoom out"
 msgstr "Súmáil amach"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:5
-#, fuzzy
 msgid "Turn screen reader on or off"
-msgstr "Léitheoir Scáileáin Linux"
+msgstr "Cumasaigh nó díchumasaigh léitheoir scáileáin"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:6
-#, fuzzy
 msgid "Turn on-screen keyboard on or off"
-msgstr "Méarchlár Scáileáin GNOME"
+msgstr "Cumasaigh nó díchumasaigh méarchlár scáileáin"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:7
 msgid "Increase text size"
-msgstr ""
+msgstr "Méadaigh clómhéid"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:8
 msgid "Decrease text size"
-msgstr ""
+msgstr "Laghaidh clómhéid"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:9
 msgid "High contrast on or off"
-msgstr ""
+msgstr "Cumasaigh nó díchumasaigh ardchodarsnacht"
 
 #. translators:
 #. * The device has been disabled
@@ -1757,7 +1744,7 @@ msgstr ""
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
-msgstr ""
+msgstr "Aicearra;Athbhrú;Caoch;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "Custom Shortcut"
@@ -1824,7 +1811,6 @@ msgid "S_peed:"
 msgstr "L_uas:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-#, fuzzy
 msgid "Cursor blink speed"
 msgstr "Luas caochadh an chúrsóra"
 
@@ -1984,9 +1970,8 @@ msgid "Fast"
 msgstr "Tapa"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#, fuzzy
 msgid "Disable while _typing"
-msgstr "Dí_chumasaigh ceap tadhaill agus ag clóscríobh"
+msgstr "Dí_chumasaigh agus ag clóscríobh"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
@@ -2201,7 +2186,7 @@ msgstr "Aitheantas"
 #: ../panels/network/connection-editor/ce-page-ip4.c:207
 #: ../panels/network/connection-editor/ce-page-ip4.c:469
 msgid "Netmask"
-msgstr ""
+msgstr "Masc Líonra"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:221
 #: ../panels/network/connection-editor/ce-page-ip4.c:482
@@ -2209,13 +2194,12 @@ msgstr ""
 #: ../panels/network/connection-editor/ce-page-ip6.c:490
 #: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
-msgstr ""
+msgstr "Geata"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:238
 #: ../panels/network/connection-editor/ce-page-ip6.c:239
-#, fuzzy
 msgid "Delete Address"
-msgstr "Seoladh"
+msgstr "Scrios Seoladh"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:292
 #: ../panels/network/connection-editor/ce-page-ip6.c:293
@@ -2237,13 +2221,12 @@ msgstr "Scrios Freastalaí DNS"
 #: ../panels/network/connection-editor/ce-page-ip6.c:504
 msgctxt "network parameters"
 msgid "Metric"
-msgstr ""
+msgstr "Méadrach"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:517
 #: ../panels/network/connection-editor/ce-page-ip6.c:525
-#, fuzzy
 msgid "Delete Route"
-msgstr "Pointeoir Réamhshocraithe"
+msgstr "Scrios Ród"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:632
 #: ../panels/network/network-wifi.ui.h:25
@@ -2261,7 +2244,7 @@ msgstr "De láimh"
 msgid "Link-Local Only"
 msgstr ""
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:941
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -2471,27 +2454,24 @@ msgstr "IPv_4"
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
 #: ../panels/network/network-wifi.ui.h:23
-#, fuzzy
 msgid "_Addresses"
-msgstr "Seoladh"
+msgstr "_Seoltaí"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:5
 #: ../panels/network/connection-editor/ip6-page.ui.h:5
-#, fuzzy
 msgid "Automatic DNS"
-msgstr "Logáil Isteach _Uathoibríoch"
+msgstr "DNS Uathoibríoch"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
 #: ../panels/network/network-wifi.ui.h:30
 msgid "Routes"
-msgstr ""
+msgstr "Róid"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:7
 #: ../panels/network/connection-editor/ip6-page.ui.h:7
-#, fuzzy
 msgid "Automatic Routes"
-msgstr "Logáil Isteach _Uathoibríoch"
+msgstr "Róid Uathoibríocha"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
@@ -2552,14 +2532,13 @@ msgstr "Cuir Ceangal Líonra Leis"
 #: ../panels/network/connection-editor/reset-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:39
 msgid "_Reset"
-msgstr ""
+msgstr "_Athshocraigh"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
 #: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
-#, fuzzy
 msgid "_Forget"
-msgstr "Líonra"
+msgstr "_Déan Dearmad"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:3
 msgid ""
@@ -2575,9 +2554,8 @@ msgstr ""
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:14
-#, fuzzy
 msgid "S_ecurity"
-msgstr "Eochracha Greamaitheacha"
+msgstr "S_lándáil"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:205
 msgid "Cannot import VPN connection"
@@ -2604,13 +2582,13 @@ msgid "_Open"
 msgstr "_Oscail"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
-#, fuzzy, c-format
+#, c-format
 msgid "A file named \"%s\" already exists."
-msgstr "Tá an suíomh ann cheana."
+msgstr "Tá comhad darb ainm \"%s\" ann cheana."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:296
 msgid "_Replace"
-msgstr ""
+msgstr "_Ionadaigh"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:298
 #, c-format
@@ -2631,7 +2609,7 @@ msgstr ""
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
 msgid "Export VPN connection..."
-msgstr ""
+msgstr "Easpórtáil ceangal VPN..."
 
 #: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
@@ -2649,9 +2627,8 @@ msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:16
-#, fuzzy
 msgid "My Home Network"
-msgstr "Líonra"
+msgstr "Mo Líonra Baile"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
@@ -2708,7 +2685,7 @@ msgstr "Seoladh IP"
 #: ../panels/network/net-device-ethernet.c:177
 #: ../panels/network/network-wifi.ui.h:10
 msgid "Last used"
-msgstr ""
+msgstr "Úsáid is déanaí"
 
 #. Translators: This is used as the title of the connection
 #. * details window for ethernet, if there is only a single
@@ -2737,7 +2714,7 @@ msgstr "Próifíl %d"
 
 #: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
-msgstr ""
+msgstr "Cuir ceangal nua leis"
 
 #: ../panels/network/net-device-wifi.c:1117
 msgid ""
@@ -2791,10 +2768,9 @@ msgstr "_Dún"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: ../panels/network/net-device-wifi.c:1726
-#, fuzzy
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
-msgstr "Líonra"
+msgstr "_Déan Dearmad"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -2824,7 +2800,7 @@ msgstr "IMEI"
 
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
-msgstr ""
+msgstr "Soláthraí"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2846,29 +2822,24 @@ msgid "_Method"
 msgstr "_Modh"
 
 #: ../panels/network/network-proxy.ui.h:5
-#, fuzzy
 msgid "_Configuration URL"
-msgstr "U_RL Uathchumraíochta:"
+msgstr "U_RL Cumraíochta:"
 
 #: ../panels/network/network-proxy.ui.h:6
-#, fuzzy
 msgid "_HTTP Proxy"
 msgstr "Seachfhreastalaí _HTTP"
 
 #: ../panels/network/network-proxy.ui.h:7
-#, fuzzy
 msgid "H_TTPS Proxy"
-msgstr "Seachfhreastalaí _HTTP"
+msgstr "Seachfhreastalaí H_TTPS"
 
 #: ../panels/network/network-proxy.ui.h:8
-#, fuzzy
 msgid "_FTP Proxy"
-msgstr "Seachfhreastalaí _FTP:"
+msgstr "Seachfhreastalaí _FTP"
 
 #: ../panels/network/network-proxy.ui.h:9
-#, fuzzy
 msgid "_Socks Host"
-msgstr "Óstach S_ocks:"
+msgstr "Óstach _Socks"
 
 #: ../panels/network/network-proxy.ui.h:10
 msgid "_Ignore Hosts"
@@ -2895,55 +2866,48 @@ msgstr ""
 
 #: ../panels/network/network-simple.ui.h:7
 msgid "Turn device off"
-msgstr ""
+msgstr "Múch gléas"
 
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
 msgstr ""
 
 #: ../panels/network/network.ui.h:2
-#, fuzzy
 msgid "C_reate…"
-msgstr "Calabraigh…"
+msgstr "C_ruthaigh…"
 
 #: ../panels/network/network.ui.h:3
-#, fuzzy
 msgid "_Interface"
-msgstr "Comhéadan"
+msgstr "_Comhéadan"
 
 #: ../panels/network/network.ui.h:8
-#, fuzzy
 msgid "Add Device"
-msgstr "Gléas"
+msgstr "Cuir Gléas Leis"
 
 #: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "Cineál VPN"
 
 #: ../panels/network/network-vpn.ui.h:4
-#, fuzzy
 msgid "Group Name"
-msgstr "Ainm Iomlán"
+msgstr "Ainm Grúpa"
 
 #: ../panels/network/network-vpn.ui.h:5
-#, fuzzy
 msgid "Group Password"
-msgstr "_Focal Faire:"
+msgstr "Focal Faire an Ghrúpa"
 
 #: ../panels/network/network-vpn.ui.h:6
 #: ../panels/printers/authentication-dialog.ui.h:4
-#, fuzzy
 msgid "Username"
-msgstr "_Ainm Úsáideora:"
+msgstr "Ainm Úsáideora"
 
 #: ../panels/network/network-vpn.ui.h:7
 msgid "Turn VPN connection off"
 msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:1
-#, fuzzy
 msgid "Automatic _Connect"
-msgstr "Logáil Isteach _Uathoibríoch"
+msgstr "_Ceangal Uathoibríoch"
 
 #: ../panels/network/network-wifi.ui.h:11
 msgid "details"
@@ -2964,9 +2928,8 @@ msgid "None"
 msgstr "Neamhní"
 
 #: ../panels/network/network-wifi.ui.h:19
-#, fuzzy
 msgid "Show P_assword"
-msgstr "_Taispeáin focal faire"
+msgstr "_Taispeáin Focal Faire"
 
 #: ../panels/network/network-wifi.ui.h:20
 msgid "Make available to other users"
@@ -2974,7 +2937,7 @@ msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
-msgstr ""
+msgstr "aitheantas"
 
 #: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
@@ -3022,12 +2985,11 @@ msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
-msgstr ""
+msgstr "athshocraigh"
 
 #: ../panels/network/network-wifi.ui.h:48
-#, fuzzy
 msgid "Hardware"
-msgstr "Seoladh"
+msgstr "Crua-Earraí"
 
 #: ../panels/network/network-wifi.ui.h:50
 #, fuzzy
@@ -3040,7 +3002,7 @@ msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ../panels/network/network-wifi.ui.h:53
 msgid "Turn Wi-Fi off"
@@ -3056,16 +3018,15 @@ msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:56
 msgid "_History"
-msgstr ""
+msgstr "_Stair"
 
 #: ../panels/network/network-wifi.ui.h:57
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:58
-#, fuzzy
 msgid "Network Name"
-msgstr "Freastalaithe Líonra"
+msgstr "Ainm Líonra"
 
 #: ../panels/network/network-wifi.ui.h:59
 #, fuzzy
@@ -3078,9 +3039,8 @@ msgid "Security type"
 msgstr "Eochracha Greamaitheacha"
 
 #: ../panels/network/network-wifi.ui.h:61
-#, fuzzy
 msgid "Security key"
-msgstr "Eochracha Greamaitheacha"
+msgstr "Eochair shlándála"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -3416,7 +3376,7 @@ msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
 msgid "Choose a PAC file..."
-msgstr ""
+msgstr "Roghnaigh comhad PAC..."
 
 #: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "PAC files (*.pac)"
@@ -3485,14 +3445,12 @@ msgid "Choose a Certificate Authority certificate..."
 msgstr ""
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
-#, fuzzy
 msgid "Version 0"
-msgstr "Leagan %s"
+msgstr "Leagan 0"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:4
-#, fuzzy
 msgid "Version 1"
-msgstr "Leagan %s"
+msgstr "Leagan 1"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:6
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
@@ -3502,7 +3460,7 @@ msgstr ""
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
-msgstr ""
+msgstr "_Leagan PEAP"
 
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:3
 msgid "As_k for this password every time"
@@ -4007,11 +3965,11 @@ msgstr "Múchann sé seo gléasanna gan sreang"
 
 #: ../panels/power/cc-power-panel.c:1656
 msgid "_Mobile broadband"
-msgstr ""
+msgstr "Leathanbhanda _móibíleach"
 
 #: ../panels/power/cc-power-panel.c:1661
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgstr ""
+msgstr "Múchann sé seo gléasanna leathanbhanda móibíligh (3G, 4G, WiMax, srl.)"
 
 #: ../panels/power/cc-power-panel.c:1696
 msgid "_Bluetooth"
@@ -4385,8 +4343,19 @@ msgstr ""
 msgid "Add a New Printer"
 msgstr "Cuir Printéir Nua Leis"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+#, fuzzy
+msgid "A_uthenticate"
+msgstr "Fíordheimhnigh"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
+msgstr ""
+
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "Enter address of a printer or a text to filter results"
 msgstr ""
 
 #: ../panels/printers/options-dialog.ui.h:1
@@ -4505,8 +4474,14 @@ msgstr "Teorainn _Ama:"
 msgid "%s Active Jobs"
 msgstr ""
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+#, fuzzy
+msgid "Server requires authentication"
+msgstr "Fíordheimhnithe!"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Níor braitheadh aon phrintéir."
 
@@ -4601,9 +4576,8 @@ msgstr ""
 #: ../panels/printers/pp-ppd-option-widget.c:77
 #: ../panels/printers/pp-ppd-option-widget.c:79
 #: ../panels/printers/pp-ppd-option-widget.c:87
-#, fuzzy
 msgid "Auto Select"
-msgstr "_Roghnaigh"
+msgstr "Uathroghnaigh"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
@@ -4647,7 +4621,7 @@ msgid "Driver"
 msgstr "Tiománaí"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -5082,12 +5056,11 @@ msgstr "Suíomhanna Cuardaigh"
 
 #: ../panels/search/search.ui.h:1
 msgid "Move Up"
-msgstr ""
+msgstr "Bog Suas"
 
 #: ../panels/search/search.ui.h:2
-#, fuzzy
 msgid "Move Down"
-msgstr "Scrollú"
+msgstr "Bog Síos"
 
 #: ../panels/search/search.ui.h:3
 msgid "Preferences"
@@ -5109,7 +5082,7 @@ msgstr "Roghnaigh Fillteán"
 
 #: ../panels/sharing/cc-sharing-panel.c:702
 msgid "Copy"
-msgstr ""
+msgstr "Cóipeáil"
 
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
@@ -5136,9 +5109,8 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr "Fíordheimhnithe!"
 
 #: ../panels/sharing/sharing.ui.h:1
-#, fuzzy
 msgid "Bluetooth Sharing"
-msgstr "Socruithe Bluetooth"
+msgstr "Comhroinnt Bluetooth"
 
 #: ../panels/sharing/sharing.ui.h:2
 msgid ""
@@ -5475,7 +5447,7 @@ msgstr "Réamhshocrú"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:586
 msgid "From theme"
-msgstr ""
+msgstr "Ó théama"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:770
 msgid "C_hoose an alert sound:"
@@ -5955,11 +5927,11 @@ msgstr "Ard"
 
 #: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
-msgstr ""
+msgstr "Maisíochtaí Datha:"
 
 #: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
-msgstr ""
+msgstr "Maisíochtaí Datha"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
@@ -6032,14 +6004,12 @@ msgid ""
 msgstr ""
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:21
-#, fuzzy
 msgid "Administrator _Name"
-msgstr "Riarthóir"
+msgstr "Ai_nm Riarthóra"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:22
-#, fuzzy
 msgid "Administrator Password"
-msgstr "Riarthóir"
+msgstr "Focal Faire Riarthóra"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Left thumb"
@@ -6145,7 +6115,7 @@ msgstr ""
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:3
 msgid "Gallery"
-msgstr ""
+msgstr "Gailearaí"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 #: ../panels/user-accounts/um-photo-dialog.c:218
@@ -6446,15 +6416,13 @@ msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr ""
 
 #: ../panels/user-accounts/um-account-dialog.c:1446
-#, fuzzy
 msgid "Add User"
-msgstr "Cuntais Úsáideora"
+msgstr "Cuir Úsáideoir Leis"
 
 #. Create enterprise toggle button.
 #: ../panels/user-accounts/um-account-dialog.c:1459
-#, fuzzy
 msgid "_Enterprise Login"
-msgstr "Logáil Isteach Méarloirg"
+msgstr "Logáil Isteach _Fiontair"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -6531,9 +6499,8 @@ msgid ""
 msgstr ""
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:740
-#, fuzzy
 msgid "Selecting finger"
-msgstr "Méar an fháinne chlé"
+msgstr "Méar á roghnú"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:741
 msgid "Enrolling fingerprints"
@@ -6619,9 +6586,8 @@ msgid "The passwords do not match."
 msgstr "Tá an focal faire ró-ghairid."
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
-#, fuzzy
 msgid "Disable image"
-msgstr "Díchumasaithe"
+msgstr "Díchumasaigh íomhá"
 
 #: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo…"
@@ -6695,14 +6661,12 @@ msgid ""
 msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:506
-#, fuzzy
 msgid "_Delete Files"
-msgstr "Gach Comhad"
+msgstr "_Scrios Comhaid"
 
 #: ../panels/user-accounts/um-user-panel.c:507
-#, fuzzy
 msgid "_Keep Files"
-msgstr "_Comhad"
+msgstr "_Coinnigh Comhaid"
 
 #: ../panels/user-accounts/um-user-panel.c:559
 msgctxt "Password mode"
@@ -6740,9 +6704,8 @@ msgstr ""
 "cliceáil an deilbhín * ar dtús"
 
 #: ../panels/user-accounts/um-user-panel.c:1080
-#, fuzzy
 msgid "Create a user account"
-msgstr "Cruthaigh cuntas nua"
+msgstr "Cruthaigh cuntas úsáideora"
 
 #: ../panels/user-accounts/um-user-panel.c:1091
 #: ../panels/user-accounts/um-user-panel.c:1380
@@ -6779,9 +6742,9 @@ msgid "A user with the username '%s' already exists"
 msgstr ""
 
 #: ../panels/user-accounts/um-utils.c:555
-#, fuzzy, c-format
+#, c-format
 msgid "The username is too long"
-msgstr "Tá an focal faire ró-ghairid."
+msgstr "Tá an t-ainm úsáideora ró-fhada"
 
 #: ../panels/user-accounts/um-utils.c:558
 msgid "The username cannot start with a '-'"
@@ -6833,12 +6796,12 @@ msgstr ""
 #: ../panels/wacom/cc-wacom-button-row.c:443
 msgctxt "Wacom tablet button"
 msgid "Up"
-msgstr ""
+msgstr "Suas"
 
 #: ../panels/wacom/cc-wacom-button-row.c:444
 msgctxt "Wacom tablet button"
 msgid "Down"
-msgstr ""
+msgstr "Síos"
 
 #: ../panels/wacom/cc-wacom-button-row.h:55
 msgctxt "Wacom action-type"
@@ -6878,7 +6841,7 @@ msgstr ""
 #: ../panels/wacom/cc-wacom-nav-button.c:89
 #, c-format
 msgid "%d of %d"
-msgstr ""
+msgstr "%d as %d"
 
 #: ../panels/wacom/cc-wacom-page.c:522
 #, fuzzy
@@ -6887,7 +6850,7 @@ msgstr "Taispeáint"
 
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
-msgstr ""
+msgstr "Cnaipe"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
@@ -7173,7 +7136,7 @@ msgstr "Cabhair"
 msgid "Quit"
 msgstr "Scoir"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1467
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
 msgid "All Settings"
 msgstr "Gach Socrú"
 
@@ -7193,7 +7156,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Córas"
 
-#: ../shell/cc-window.c:1575 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Socruithe"
 
