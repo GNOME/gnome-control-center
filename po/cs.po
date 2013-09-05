@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-23 14:35+0000\n"
-"PO-Revision-Date: 2013-08-28 09:25+0200\n"
+"POT-Creation-Date: 2013-09-03 20:11+0000\n"
+"PO-Revision-Date: 2013-09-05 12:11+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -115,8 +115,8 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: ../panels/background/cc-background-chooser-dialog.c:443
 #: ../panels/bluetooth/cc-bluetooth-panel.c:631
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
-#: ../panels/display/cc-display-panel.c:1348
-#: ../panels/display/cc-display-panel.c:1746
+#: ../panels/display/cc-display-panel.c:1385
+#: ../panels/display/cc-display-panel.c:1783
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1201
@@ -987,28 +987,28 @@ msgid "_Done"
 msgstr "_Hotovo"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e. %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %k:%M"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "UTC%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%k:%M"
 
@@ -1151,22 +1151,22 @@ msgstr "Změnit nastavení systémového času a data"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Abyste mohli měnit nastavení času a data, musíte se autentizovat."
 
-#: ../panels/display/cc-display-panel.c:421
+#: ../panels/display/cc-display-panel.c:458
 msgid "Lid Closed"
 msgstr "Víko zavřeno"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:424
+#: ../panels/display/cc-display-panel.c:461
 msgid "Mirrored"
 msgstr "Zrcadlený"
 
-#: ../panels/display/cc-display-panel.c:426
-#: ../panels/display/cc-display-panel.c:1877
+#: ../panels/display/cc-display-panel.c:463
+#: ../panels/display/cc-display-panel.c:1914
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Primary"
 msgstr "Hlavní"
 
-#: ../panels/display/cc-display-panel.c:428
+#: ../panels/display/cc-display-panel.c:465
 #: ../panels/notifications/cc-notifications-panel.c:205
 #: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
 #: ../panels/privacy/cc-privacy-panel.c:77
@@ -1178,79 +1178,79 @@ msgstr "Hlavní"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: ../panels/display/cc-display-panel.c:431
+#: ../panels/display/cc-display-panel.c:468
 msgid "Secondary"
 msgstr "Vedlejší"
 
-#: ../panels/display/cc-display-panel.c:1345
+#: ../panels/display/cc-display-panel.c:1382
 msgid "Arrange Combined Displays"
 msgstr "Uspořádání sloučených displejů"
 
-#: ../panels/display/cc-display-panel.c:1349
-#: ../panels/display/cc-display-panel.c:1747
+#: ../panels/display/cc-display-panel.c:1386
+#: ../panels/display/cc-display-panel.c:1784
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 msgid "_Apply"
 msgstr "_Použít"
 
-#: ../panels/display/cc-display-panel.c:1369
+#: ../panels/display/cc-display-panel.c:1406
 msgid "Drag displays to rearrange them"
 msgstr "Pořadí displejů změňte přetažením"
 
 #. size
-#: ../panels/display/cc-display-panel.c:1811
+#: ../panels/display/cc-display-panel.c:1848
 msgid "Size"
 msgstr "Velikost"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:1826
+#: ../panels/display/cc-display-panel.c:1863
 #: ../panels/display/display-capplet.ui.h:12
 msgid "Aspect Ratio"
 msgstr "Poměr stran"
 
-#: ../panels/display/cc-display-panel.c:1847
+#: ../panels/display/cc-display-panel.c:1884
 #: ../panels/display/display-capplet.ui.h:13
 #: ../panels/printers/pp-options-dialog.c:86
 msgid "Resolution"
 msgstr "Rozlišení"
 
-#: ../panels/display/cc-display-panel.c:1878
+#: ../panels/display/cc-display-panel.c:1915
 #: ../panels/display/display-capplet.ui.h:2
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Na tomto displeji zobrazovat horní lištu a přehled činností"
 
-#: ../panels/display/cc-display-panel.c:1884
+#: ../panels/display/cc-display-panel.c:1921
 msgid "Secondary Display"
 msgstr "Vedlejší displej"
 
-#: ../panels/display/cc-display-panel.c:1885
+#: ../panels/display/cc-display-panel.c:1922
 msgid "Join this display with another to create an extra workspace"
 msgstr "Spojit tento displej s jiným pro vytvoření dodatečné pracovní plochy"
 
-#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/display/cc-display-panel.c:1929
 #: ../panels/display/display-capplet.ui.h:3
 msgid "Presentation"
 msgstr "Prezentace"
 
-#: ../panels/display/cc-display-panel.c:1893
+#: ../panels/display/cc-display-panel.c:1930
 #: ../panels/display/display-capplet.ui.h:4
 msgid "Show slideshows and media only"
 msgstr "Zobrazovat jen promítání a multimédia"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:1898
+#: ../panels/display/cc-display-panel.c:1935
 #: ../panels/display/display-capplet.ui.h:5
 msgid "Mirror"
 msgstr "Zrcadlit"
 
-#: ../panels/display/cc-display-panel.c:1899
+#: ../panels/display/cc-display-panel.c:1936
 msgid "Show your existing view on both displays"
 msgstr "Zobrazit stávající zobrazení na obou displejích"
 
-#: ../panels/display/cc-display-panel.c:2092
+#: ../panels/display/cc-display-panel.c:2138
 msgid "Could not get screen information"
 msgstr "Nelze získat informace o obrazovce"
 
-#: ../panels/display/cc-display-panel.c:2123
+#: ../panels/display/cc-display-panel.c:2169
 msgid "_Arrange Combined Displays"
 msgstr "Uspořádat sloučené displeje"
 
@@ -2275,7 +2275,7 @@ msgstr "Ruční"
 msgid "Link-Local Only"
 msgstr "Pouze link-local"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:941
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -3762,8 +3762,8 @@ msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;"
 msgstr ""
-"Google;Facebook;Twitter;Yahoo;web;on-line;diskuze;chat;kalendář;e-mail;mail;email;pošta;"
-"kontakt;ownCloud;Kerberos;IMAP;SMTP;"
+"Google;Facebook;Twitter;Yahoo;web;on-line;diskuze;chat;kalendář;e-mail;mail;"
+"email;pošta;kontakt;ownCloud;Kerberos;IMAP;SMTP;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4379,9 +4379,19 @@ msgstr "Zrušit tiskovou úlohu"
 msgid "Add a New Printer"
 msgstr "Přidat novou tiskárnu"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "Ověřit _totožnost"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Hledat síťové tiskárny nebo filtrovat výsledek"
+
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "Enter address of a printer or a text to filter results"
+msgstr "Zadejte adresu tiskárny nebo text pro filtrování výsledků"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4495,8 +4505,13 @@ msgstr "Čas"
 msgid "%s Active Jobs"
 msgstr "Aktivní úlohy – %s"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "Server požaduje ověření totožnosti"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Nenalezeny žádné tiskárny"
 
@@ -4630,7 +4645,7 @@ msgid "Driver"
 msgstr "Ovladač"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -7138,27 +7153,27 @@ msgstr "Nápověda"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1466
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1467
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
 #. Add categories
-#: ../shell/cc-window.c:865
+#: ../shell/cc-window.c:866
 msgctxt "category"
 msgid "Personal"
 msgstr "Osobní"
 
-#: ../shell/cc-window.c:866
+#: ../shell/cc-window.c:867
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:867
+#: ../shell/cc-window.c:868
 msgctxt "category"
 msgid "System"
 msgstr "Systém"
 
-#: ../shell/cc-window.c:1574 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1576 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Nastavení"
 
