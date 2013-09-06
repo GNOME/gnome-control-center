@@ -31,9 +31,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-02 20:06+0000\n"
-"PO-Revision-Date: 2013-09-02 20:49-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2013-09-03 23:35+0000\n"
+"PO-Revision-Date: 2013-09-03 18:00-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -523,7 +523,7 @@ msgstr ""
 #. TRANSLATORS: this is when the button is insensitive
 #: ../panels/color/cc-color-panel.c:1377
 msgid "The measuring instrument does not support printer profiling."
-msgstr "O instrumento de medição não tem suporte a perfilagem de impressora."
+msgstr "O instrumento de medição não tem suporte a criação de perfis de impressora."
 
 #. TRANSLATORS: this is when the button is insensitive
 #: ../panels/color/cc-color-panel.c:1388
@@ -1018,7 +1018,6 @@ msgstr "%e de %B de %Y, %R"
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
 #: ../panels/datetime/cc-datetime-panel.c:549
-#| msgid "UTC%z"
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
@@ -4408,12 +4407,17 @@ msgstr "Cancelar trabalhos de impressão"
 msgid "Add a New Printer"
 msgstr "Adicionar uma nova impressora"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "A_utenticar"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Pesquisar por impressoras de rede ou resultado de filtro"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Enter address of a printer or a text to filter results"
 msgstr ""
 "Digite o endereço de uma impressora ou um texto para filtrar resultados"
@@ -4530,8 +4534,13 @@ msgstr "Hora"
 msgid "%s Active Jobs"
 msgstr "%s trabalhos ativos"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "O servidor requer autenticação"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Nenhuma impressora detectada."
 
@@ -4665,7 +4674,7 @@ msgid "Driver"
 msgstr "Unidade"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -7185,7 +7194,7 @@ msgstr "Ajuda"
 msgid "Quit"
 msgstr "Sair"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1467
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
 msgid "All Settings"
 msgstr "Todas as configurações"
 
@@ -7205,7 +7214,7 @@ msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1575 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Configurações"
 
