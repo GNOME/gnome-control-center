@@ -596,6 +596,7 @@ copy_finished_cb (GObject      *source_object,
       char *filename;
 
       update_preview (priv, settings, item);
+      current_background = CURRENT_BG;
 
       /* Save the source XML if there is one */
       filename = get_save_path (SAVE_PATH);
