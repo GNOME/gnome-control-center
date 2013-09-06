@@ -366,7 +366,7 @@ get_screenshot_async (CcBackgroundPanel *panel)
   if (calculate_contiguous_workarea (data)) {
     g_debug ("Capturing only a portion of the screen");
   } else {
-    g_debug ("Capturing the whole screen");
+    g_debug ("Capturing the whole monitor");
     data->whole_monitor = TRUE;
     data->capture_rect = data->monitor_rect;
   }
