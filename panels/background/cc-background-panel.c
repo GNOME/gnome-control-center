@@ -315,7 +315,9 @@ on_screenshot_finished (GObject *source,
   surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
                                         data->monitor_rect.width, data->monitor_rect.height);
   cr = cairo_create (surface);
-  gdk_cairo_set_source_pixbuf (cr, pixbuf, data->capture_rect.x, data->capture_rect.y);
+  gdk_cairo_set_source_pixbuf (cr, pixbuf,
+                               data->capture_rect.x - data->monitor_rect.x,
+                               data->capture_rect.y - data->monitor_rect.y);
   cairo_paint (cr);
   g_object_unref (pixbuf);
 
