@@ -79,12 +79,6 @@ bg_wallpapers_source_dispose (GObject *object)
 }
 
 static void
-bg_wallpapers_source_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->finalize (object);
-}
-
-static void
 bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -94,7 +88,6 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
   object_class->get_property = bg_wallpapers_source_get_property;
   object_class->set_property = bg_wallpapers_source_set_property;
   object_class->dispose = bg_wallpapers_source_dispose;
-  object_class->finalize = bg_wallpapers_source_finalize;
 }
 
 static void

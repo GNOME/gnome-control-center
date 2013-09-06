@@ -53,12 +53,6 @@ bg_flickr_source_dispose (GObject *object)
 }
 
 static void
-bg_flickr_source_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (bg_flickr_source_parent_class)->finalize (object);
-}
-
-static void
 bg_flickr_source_class_init (BgFlickrSourceClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -66,7 +60,6 @@ bg_flickr_source_class_init (BgFlickrSourceClass *klass)
   g_type_class_add_private (klass, sizeof (BgFlickrSourcePrivate));
 
   object_class->dispose = bg_flickr_source_dispose;
-  object_class->finalize = bg_flickr_source_finalize;
 }
 
 static void

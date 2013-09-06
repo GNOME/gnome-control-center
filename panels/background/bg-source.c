@@ -81,12 +81,6 @@ bg_source_dispose (GObject *object)
 }
 
 static void
-bg_source_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (bg_source_parent_class)->finalize (object);
-}
-
-static void
 bg_source_class_init (BgSourceClass *klass)
 {
   GParamSpec *pspec;
@@ -97,7 +91,6 @@ bg_source_class_init (BgSourceClass *klass)
   object_class->get_property = bg_source_get_property;
   object_class->set_property = bg_source_set_property;
   object_class->dispose = bg_source_dispose;
-  object_class->finalize = bg_source_finalize;
 
   pspec = g_param_spec_object ("liststore",
                                "Liststore",

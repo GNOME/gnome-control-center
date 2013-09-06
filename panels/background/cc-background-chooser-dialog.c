@@ -131,13 +131,6 @@ cc_background_chooser_dialog_dispose (GObject *object)
 }
 
 static void
-cc_background_chooser_dialog_finalize (GObject *object)
-{
-
-  G_OBJECT_CLASS (cc_background_chooser_dialog_parent_class)->finalize (object);
-}
-
-static void
 ensure_iconview_shown (CcBackgroundChooserDialog *chooser)
 {
   gtk_widget_hide (chooser->priv->empty_pictures_box);
@@ -456,7 +449,6 @@ cc_background_chooser_dialog_class_init (CcBackgroundChooserDialogClass *klass)
 
   object_class = G_OBJECT_CLASS (klass);
   object_class->dispose = cc_background_chooser_dialog_dispose;
-  object_class->finalize = cc_background_chooser_dialog_finalize;
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->realize = cc_background_chooser_dialog_realize;
