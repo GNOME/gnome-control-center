@@ -140,8 +140,7 @@ cc_background_item_changes_with_time (CcBackgroundItem *item)
 static void
 update_size (CcBackgroundItem *item)
 {
-	g_free (item->priv->size);
-	item->priv->size = NULL;
+	g_clear_pointer (&item->priv->size, g_free);
 
 	if (item->priv->uri == NULL) {
 		item->priv->size = g_strdup ("");
@@ -272,8 +271,7 @@ update_info (CcBackgroundItem *item,
 		info = g_object_ref (_info);
 	}
 
-        g_free (item->priv->mime_type);
-        item->priv->mime_type = NULL;
+	g_clear_pointer (&item->priv->mime_type, g_free);
 
         if (info == NULL
             || g_file_info_get_content_type (info) == NULL) {

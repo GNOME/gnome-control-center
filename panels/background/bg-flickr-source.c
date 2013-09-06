@@ -46,17 +46,8 @@ bg_flickr_source_dispose (GObject *object)
 {
   BgFlickrSourcePrivate *priv = BG_FLICKR_SOURCE (object)->priv;
 
-  if (priv->client)
-    {
-      g_object_unref (priv->client);
-      priv->client = NULL;
-    }
-
-  if (priv->service)
-    {
-      g_object_unref (priv->service);
-      priv->service = NULL;
-    }
+  g_clear_object (&priv->client);
+  g_clear_object (&priv->service);
 
   G_OBJECT_CLASS (bg_flickr_source_parent_class)->dispose (object);
 }

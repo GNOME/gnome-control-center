@@ -623,18 +623,12 @@ cc_background_xml_finalize (GObject *object)
 
         g_return_if_fail (xml->priv != NULL);
 
-	if (xml->priv->wp_hash) {
-		g_hash_table_destroy (xml->priv->wp_hash);
-		xml->priv->wp_hash = NULL;
-	}
+	g_clear_pointer (&xml->priv->wp_hash, g_hash_table_destroy);
 	if (xml->priv->item_added_id != 0) {
 		g_source_remove (xml->priv->item_added_id);
 		xml->priv->item_added_id = 0;
 	}
-	if (xml->priv->item_added_queue) {
-		g_async_queue_unref (xml->priv->item_added_queue);
-		xml->priv->item_added_queue = NULL;
-	}
+	g_clear_pointer (&xml->priv->item_added_queue, g_async_queue_unref);
 }
 
 static void

@@ -75,11 +75,7 @@ bg_source_dispose (GObject *object)
 {
   BgSourcePrivate *priv = BG_SOURCE (object)->priv;
 
-  if (priv->store)
-    {
-      g_object_unref (priv->store);
-      priv->store = NULL;
-    }
+  g_clear_object (&priv->store);
 
   G_OBJECT_CLASS (bg_source_parent_class)->dispose (object);
 }

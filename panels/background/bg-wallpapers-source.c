@@ -72,16 +72,8 @@ bg_wallpapers_source_dispose (GObject *object)
 {
   BgWallpapersSourcePrivate *priv = BG_WALLPAPERS_SOURCE (object)->priv;
 
-  if (priv->thumb_factory)
-    {
-      g_object_unref (priv->thumb_factory);
-      priv->thumb_factory = NULL;
-    }
-  if (priv->xml)
-    {
-      g_object_unref (priv->xml);
-      priv->xml = NULL;
-    }
+  g_clear_object (&priv->thumb_factory);
+  g_clear_object (&priv->xml);
 
   G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
 }

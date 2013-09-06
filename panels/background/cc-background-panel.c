@@ -101,8 +101,7 @@ cc_background_panel_dispose (GObject *object)
       /* cancel any copy operation */
       g_cancellable_cancel (priv->copy_cancellable);
 
-      g_object_unref (priv->copy_cancellable);
-      priv->copy_cancellable = NULL;
+      g_clear_object (&priv->copy_cancellable);
     }
 
   if (priv->capture_cancellable)
@@ -110,8 +109,7 @@ cc_background_panel_dispose (GObject *object)
       /* cancel screenshot operations */
       g_cancellable_cancel (priv->capture_cancellable);
 
-      g_object_unref (priv->capture_cancellable);
-      priv->capture_cancellable = NULL;
+      g_clear_object (&priv->capture_cancellable);
     }
 
   if (priv->chooser)
@@ -123,8 +121,7 @@ cc_background_panel_dispose (GObject *object)
   g_clear_object (&priv->thumb_factory);
   g_clear_object (&priv->display_screenshot);
 
-  g_free (priv->screenshot_path);
-  priv->screenshot_path = NULL;
+  g_clear_pointer (&priv->screenshot_path, g_free);
 
   g_clear_object (&priv->connection);
 
@@ -344,8 +341,7 @@ on_screenshot_finished (GObject *source,
 
   /* remove the temporary file created by the shell */
   g_unlink (panel->priv->screenshot_path);
-  g_free (priv->screenshot_path);
-  priv->screenshot_path = NULL;
+  g_clear_pointer (&priv->screenshot_path, g_free);
 
   cairo_destroy (cr);
   cairo_surface_destroy (surface);
@@ -478,8 +474,7 @@ reload_current_bg (CcBackgroundPanel *self,
   uri = g_settings_get_string (settings, WP_URI_KEY);
   if (uri && *uri == '\0')
     {
-      g_free (uri);
-      uri = NULL;
+      g_clear_pointer (&uri, g_free);
     }
   else
     {

@@ -94,15 +94,10 @@ bg_pictures_source_dispose (GObject *object)
   if (priv->cancellable)
     {
       g_cancellable_cancel (priv->cancellable);
-      g_object_unref (priv->cancellable);
-      priv->cancellable = NULL;
+      g_clear_object (&priv->cancellable);
     }
 
-  if (priv->thumb_factory)
-    {
-      g_object_unref (priv->thumb_factory);
-      priv->thumb_factory = NULL;
-    }
+  g_clear_object (&priv->thumb_factory);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->dispose (object);
 }
@@ -112,17 +107,9 @@ bg_pictures_source_finalize (GObject *object)
 {
   BgPicturesSource *bg_source = BG_PICTURES_SOURCE (object);
 
-  if (bg_source->priv->thumb_factory)
-    {
-      g_object_unref (bg_source->priv->thumb_factory);
-      bg_source->priv->thumb_factory = NULL;
-    }
+  g_clear_object (&bg_source->priv->thumb_factory);
 
-  if (bg_source->priv->known_items)
-    {
-      g_hash_table_destroy (bg_source->priv->known_items);
-      bg_source->priv->known_items = NULL;
-    }
+  g_clear_pointer (&bg_source->priv->known_items, g_hash_table_destroy);
 
   g_clear_object (&bg_source->priv->picture_dir_monitor);
   g_clear_object (&bg_source->priv->cache_dir_monitor);
