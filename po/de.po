@@ -22,23 +22,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-20 17:31+0000\n"
-"PO-Revision-Date: 2013-08-20 20:59+0100\n"
-"Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-07 15:15+0200\n"
+"PO-Revision-Date: 2013-09-07 16:30+0100\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.4\n"
 
+# Mit weichen Trennzeichen, die die Stelle einen Textumbruch vorschlagen
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
-msgstr "Hintergrund"
+msgstr "Hinter­grund"
 
 # Wechselndes Hintergrundbild
 #. This refers to a slideshow background
@@ -118,13 +118,13 @@ msgstr ""
 #: ../panels/background/cc-background-chooser-dialog.c:443
 #: ../panels/bluetooth/cc-bluetooth-panel.c:631
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
-#: ../panels/display/cc-display-panel.c:1348
-#: ../panels/display/cc-display-panel.c:1746
+#: ../panels/display/cc-display-panel.c:1385
+#: ../panels/display/cc-display-panel.c:1783
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1201
 #: ../panels/network/net-device-wifi.c:1407
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:467
@@ -274,7 +274,7 @@ msgstr ""
 "erneut konfigurieren."
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:632
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
 msgid "_Remove"
 msgstr "Entfe_rnen"
 
@@ -994,33 +994,33 @@ msgid "Language"
 msgstr "Sprache"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/mouse/cc-mouse-panel.c:119 ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Fertig"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e. %B %Y, %H:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "UTC%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%R"
 
@@ -1143,7 +1143,6 @@ msgid "24-hour"
 msgstr "24-Stunden-System"
 
 #: ../panels/datetime/datetime.ui.h:31
-#, fuzzy
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1166,23 +1165,23 @@ msgstr ""
 "Um die Einstellungen für Zeit und Datum zu ändern, müssen Sie sich "
 "legitimieren."
 
-#: ../panels/display/cc-display-panel.c:421
+#: ../panels/display/cc-display-panel.c:458
 msgid "Lid Closed"
 msgstr "Deckel geschlossen"
 
 # "mirror" ist hier ein Adjektiv
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:424
+#: ../panels/display/cc-display-panel.c:461
 msgid "Mirrored"
 msgstr "Gespiegelte Bildschirme"
 
-#: ../panels/display/cc-display-panel.c:426
-#: ../panels/display/cc-display-panel.c:1877
+#: ../panels/display/cc-display-panel.c:463
+#: ../panels/display/cc-display-panel.c:1914
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Primary"
 msgstr "Primäre Anzeige"
 
-#: ../panels/display/cc-display-panel.c:428
+#: ../panels/display/cc-display-panel.c:465
 #: ../panels/notifications/cc-notifications-panel.c:205
 #: ../panels/power/cc-power-panel.c:1745 ../panels/power/cc-power-panel.c:1756
 #: ../panels/privacy/cc-privacy-panel.c:77
@@ -1194,82 +1193,81 @@ msgstr "Primäre Anzeige"
 msgid "Off"
 msgstr "Aus"
 
-#: ../panels/display/cc-display-panel.c:431
+#: ../panels/display/cc-display-panel.c:468
 msgid "Secondary"
 msgstr "Sekundäre Anzeige"
 
-#: ../panels/display/cc-display-panel.c:1345
+#: ../panels/display/cc-display-panel.c:1382
 msgid "Arrange Combined Displays"
 msgstr "Verbundene Anzeigen anordnen"
 
-#: ../panels/display/cc-display-panel.c:1349
-#: ../panels/display/cc-display-panel.c:1747
+#: ../panels/display/cc-display-panel.c:1386
+#: ../panels/display/cc-display-panel.c:1784
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 msgid "_Apply"
 msgstr "An_wenden"
 
-#: ../panels/display/cc-display-panel.c:1369
+#: ../panels/display/cc-display-panel.c:1406
 msgid "Drag displays to rearrange them"
 msgstr "Ziehen Sie die Anzeigen um sie anzuordnen"
 
 #. size
-#: ../panels/display/cc-display-panel.c:1811
+#: ../panels/display/cc-display-panel.c:1848
 msgid "Size"
 msgstr "Größe"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:1826
+#: ../panels/display/cc-display-panel.c:1863
 #: ../panels/display/display-capplet.ui.h:12
 msgid "Aspect Ratio"
 msgstr "Anzeigeverhältnis"
 
-#: ../panels/display/cc-display-panel.c:1847
+#: ../panels/display/cc-display-panel.c:1884
 #: ../panels/display/display-capplet.ui.h:13
 #: ../panels/printers/pp-options-dialog.c:86
 msgid "Resolution"
 msgstr "Auflösung"
 
-#: ../panels/display/cc-display-panel.c:1878
+#: ../panels/display/cc-display-panel.c:1915
 #: ../panels/display/display-capplet.ui.h:2
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Die Menüleiste und Aktivitätenübersicht auf dieser Anzeigen darstellen"
 
-#: ../panels/display/cc-display-panel.c:1884
+#: ../panels/display/cc-display-panel.c:1921
 msgid "Secondary Display"
 msgstr "Zweitbildschirm"
 
-#: ../panels/display/cc-display-panel.c:1885
+#: ../panels/display/cc-display-panel.c:1922
 msgid "Join this display with another to create an extra workspace"
 msgstr ""
 "Diese Anzeige mit einer anderen verbinden, um einen zusätzliche "
 "Bildschirmoberfläche zu erhalten"
 
-#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/display/cc-display-panel.c:1929
 #: ../panels/display/display-capplet.ui.h:3
 msgid "Presentation"
 msgstr "Präsentation"
 
-#: ../panels/display/cc-display-panel.c:1893
+#: ../panels/display/cc-display-panel.c:1930
 #: ../panels/display/display-capplet.ui.h:4
-#, fuzzy
 msgid "Show slideshows and media only"
 msgstr "Nur Bildvorführungen und Medien anzeigen"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:1898
+#: ../panels/display/cc-display-panel.c:1935
 #: ../panels/display/display-capplet.ui.h:5
 msgid "Mirror"
 msgstr "Bildschirm spiegeln"
 
-#: ../panels/display/cc-display-panel.c:1899
+#: ../panels/display/cc-display-panel.c:1936
 msgid "Show your existing view on both displays"
 msgstr "Die bestehende Ansicht auf beiden Anzeigen darstellen"
 
-#: ../panels/display/cc-display-panel.c:2092
+#: ../panels/display/cc-display-panel.c:2138
 msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
 
-#: ../panels/display/cc-display-panel.c:2123
+#: ../panels/display/cc-display-panel.c:2169
 msgid "_Arrange Combined Displays"
 msgstr "Verbundene Anzeigen _anordnen"
 
@@ -1708,10 +1706,11 @@ msgstr "Abmelden"
 msgid "Lock screen"
 msgstr "Bildschirm sperren"
 
+# Mit weichen Trennzeichen, die die Stelle einen Textumbruch vorschlagen
 #: ../panels/keyboard/50-accessibility.xml.in.h:1
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
 msgid "Universal Access"
-msgstr "Barrierefreiheit"
+msgstr "Barriere­frei­heit"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
 msgid "Turn zoom on or off"
@@ -1934,7 +1933,7 @@ msgstr "_Zuweisen"
 msgid "Test Your _Settings"
 msgstr "_Testen Sie Ihre Einstellungen"
 
-#: ../panels/mouse/cc-mouse-panel.c:116
+#: ../panels/mouse/cc-mouse-panel.c:117
 msgid "Test Your Settings"
 msgstr "Testen Sie Ihre Einstellungen"
 
@@ -2300,7 +2299,7 @@ msgstr "Manuell"
 msgid "Link-Local Only"
 msgstr "Nur Link-Local"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:941
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -3655,11 +3654,12 @@ msgstr "WEP-Inde_x"
 msgid "_Type"
 msgstr "_Typ"
 
+# Mit weichen Trennzeichen, die die Stelle einen Textumbruch vorschlagen
 #. TRANSLATORS: this is the per application switch for message tray usage.
 #: ../panels/notifications/cc-edit-dialog.c:39
 msgctxt "notifications"
 msgid "Notifications"
-msgstr "Benachrichtigungen"
+msgstr "Benach–richti–gun–gen"
 
 #. TRANSLATORS: this is the setting to configure sounds associated with notifications
 #: ../panels/notifications/cc-edit-dialog.c:41
@@ -3700,7 +3700,7 @@ msgstr "An"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
-msgstr "Benachrichtigungen"
+msgstr "Benach­rich­ti­gungen"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
 msgid "Control which notifications are displayed and what they show"
@@ -3720,26 +3720,30 @@ msgstr "Einblend-Banner zeigen"
 msgid "Show in Lock Screen"
 msgstr "Im Sperrbildschirm zeigen"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:197
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Weitere"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:300
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Konto hinzufügen"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:339
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "E-Mail"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:345
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "Kontakte"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:351
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "Unterhaltung"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "Ressourcen"
 
@@ -3747,31 +3751,31 @@ msgstr "Ressourcen"
 msgid "Error logging into the account"
 msgstr "Fehler beim Anmelden am Konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:495
 msgid "Credentials have expired."
 msgstr "Die Zugangsinformationen sind abgelaufen."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "Sign in to enable this account."
 msgstr "Melden Sie sich zum Aktivieren dieses Kontos an."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:506
+#: ../panels/online-accounts/cc-online-accounts-panel.c:504
 msgid "_Sign In"
 msgstr "_Anmelden"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:747
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "Error creating account"
 msgstr "Fehler beim Erstellen des Kontos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:787
+#: ../panels/online-accounts/cc-online-accounts-panel.c:805
 msgid "Error removing account"
 msgstr "Fehler beim Entfernen des Kontos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:823
+#: ../panels/online-accounts/cc-online-accounts-panel.c:841
 msgid "Are you sure you want to remove the account?"
 msgstr "Sind Sie sicher, dass Sie dieses Konto löschen wollen?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:825
+#: ../panels/online-accounts/cc-online-accounts-panel.c:843
 msgid "This will not remove the account on the server."
 msgstr "Dadurch wird Ihr Konto nicht vom Server entfernt."
 
@@ -3789,9 +3793,10 @@ msgstr ""
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Kalender;Mail;E-Mail;Kontakte;"
-"ownCloud;"
+"ownCloud;Kerberos;IMAP;SMTP;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4405,9 +4410,21 @@ msgstr "Druckauftrag abbrechen"
 msgid "Add a New Printer"
 msgstr "Einen neuen Drucker hinzufügen"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "_Legitimieren"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Nach Netzwerkdruckern oder Filterergebnis suchen"
+
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "Enter address of a printer or a text to filter results"
+msgstr ""
+"Geben Sie die Adresse eines Druckers oder einen Text ein zum Filtern der "
+"Ergebnisse"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4521,8 +4538,13 @@ msgstr "Uhrzeit"
 msgid "%s Active Jobs"
 msgstr "%s aktive Druckaufträge"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "Server erfordert Legitimierung"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Keine Drucker erkannt."
 
@@ -4656,7 +4678,7 @@ msgid "Driver"
 msgstr "Treiber"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -4769,7 +4791,7 @@ msgstr "Papierkorb leeren und temporäre Dateien"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
-msgstr "Privatsphäre"
+msgstr "Privat­sphäre"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:2
 msgid "Protect your personal information and control what others might see"
@@ -7196,27 +7218,27 @@ msgstr "Hilfe"
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1466
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
 msgid "All Settings"
 msgstr "Alle Einstellungen"
 
 #. Add categories
-#: ../shell/cc-window.c:865
+#: ../shell/cc-window.c:866
 msgctxt "category"
 msgid "Personal"
-msgstr "Privatsphäre"
+msgstr "Privat­sphäre"
 
-#: ../shell/cc-window.c:866
+#: ../shell/cc-window.c:867
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:867
+#: ../shell/cc-window.c:868
 msgctxt "category"
 msgid "System"
 msgstr "System"
 
-#: ../shell/cc-window.c:1573 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Einstellungen"
 
