@@ -184,6 +184,8 @@ net_connection_editor_finalize (GObject *object)
 {
         NetConnectionEditor *editor = NET_CONNECTION_EDITOR (object);
 
+        if (editor->permission_id > 0 && editor->client)
+                g_signal_handler_disconnect (editor->client, editor->permission_id);
         g_clear_object (&editor->connection);
         g_clear_object (&editor->orig_connection);
         if (editor->window) {
