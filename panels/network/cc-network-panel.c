@@ -198,7 +198,7 @@ cc_network_panel_set_property (GObject      *object,
                         GPtrArray *array;
                         const gchar **args;
                         array = variant_av_to_string_array (parameters);
-                        args = array->pdata;
+                        args = (const gchar **) array->pdata;
 
                         g_debug ("Invoked with operation %s", args[0]);
 
