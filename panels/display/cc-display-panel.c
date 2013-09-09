@@ -79,6 +79,7 @@ struct _CcDisplayPanelPrivate
   GtkWidget *res_combo;
   GtkWidget *rotate_left_button;
   GtkWidget *rotate_right_button;
+  GtkWidget *apply_button;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -1063,6 +1064,78 @@ grab_weak_ref_notify (gpointer  area,
   foo_scroll_area_end_grab (area, NULL);
 }
 
+static GnomeRROutputInfo *
+find_output (GnomeRROutputInfo **outputs,
+             const gchar        *name)
+{
+  int i;
+
+  for (i = 0; outputs[i]; i++)
+    {
+      if (g_str_equal (gnome_rr_output_info_get_name (outputs[i]), name))
+        return outputs[i];
+    }
+  return NULL;
+}
+
+static void
+update_apply_button (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  gboolean config_equal;
+  GnomeRRConfig *current_configuration;
+
+  current_configuration = gnome_rr_config_new_current (priv->screen, NULL);
+
+  /* this checks if the same modes will be set on the outputs */
+  config_equal = gnome_rr_config_equal (priv->current_configuration,
+                                        current_configuration);
+
+  if (config_equal)
+    {
+      /* check if clone state has changed */
+      if (gnome_rr_config_get_clone (priv->current_configuration)
+          != gnome_rr_config_get_clone (current_configuration))
+        {
+          config_equal = FALSE;
+        }
+      else
+        {
+          GnomeRROutputInfo **new_outputs, **current_outputs;
+          int i;
+
+          /* check if primary display has changed */
+          new_outputs = gnome_rr_config_get_outputs (priv->current_configuration);
+          current_outputs = gnome_rr_config_get_outputs (current_configuration);
+
+          for (i = 0; new_outputs[i]; i++)
+            {
+              GnomeRROutputInfo *output;
+
+              output = find_output (current_outputs,
+                                    gnome_rr_output_info_get_name (new_outputs[i]));
+
+              if (!output)
+                {
+                  config_equal = FALSE;
+                  break;
+                }
+
+              if (gnome_rr_output_info_get_primary (new_outputs[i])
+                  != gnome_rr_output_info_get_primary (output))
+                {
+                  config_equal = FALSE;
+                  break;
+                }
+            }
+        }
+    }
+
+  g_object_unref (current_configuration);
+
+  gtk_widget_set_sensitive (priv->apply_button, !config_equal);
+}
+
 static void
 on_output_event (FooScrollArea *area,
                  FooScrollAreaEvent *event,
@@ -1174,6 +1247,7 @@ on_output_event (FooScrollArea *area,
 	      g_free (g_object_get_data (G_OBJECT (output), "grab-info"));
 	      g_object_set_data (G_OBJECT (output), "grab-info", NULL);
 	      g_object_weak_unref (data, grab_weak_ref_notify, area);
+              update_apply_button (self);
 
 #if 0
               g_debug ("new position: %d %d %d %d", output->x, output->y, output->width, output->height);
@@ -1377,14 +1451,19 @@ static void
 show_arrange_displays_dialog (GtkButton      *button,
                               CcDisplayPanel *panel)
 {
+  CcDisplayPanelPrivate *priv = panel->priv;
   GtkWidget *dialog, *content_area, *area, *vbox, *label;
 
-  dialog = gtk_dialog_new_with_buttons (_("Arrange Combined Displays"),
-                                        GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                        GTK_DIALOG_MODAL,
-                                        _("_Cancel"), GTK_RESPONSE_REJECT,
-                                        _("_Apply"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
+  dialog = gtk_dialog_new ();
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Arrange Combined Displays"));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
+  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"),
+                         GTK_RESPONSE_REJECT);
+  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Apply"),
+                                              GTK_RESPONSE_ACCEPT);
+  gtk_widget_set_sensitive (priv->apply_button, FALSE);
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
@@ -1420,6 +1499,7 @@ show_arrange_displays_dialog (GtkButton      *button,
       on_screen_changed (panel);
     }
 
+  priv->apply_button = NULL;
   gtk_widget_destroy (dialog);
 }
 
@@ -1633,6 +1713,7 @@ setup_listbox_row_activated (GtkListBox     *list_box,
 
   setup_resolution_combo_box (panel, modes,
                               gnome_rr_output_get_current_mode (output));
+  update_apply_button (panel);
 }
 
 static void
@@ -1670,6 +1751,7 @@ rotate_left_clicked (GtkButton      *button,
     }
 
   gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+  update_apply_button (panel);
 }
 
 static void
@@ -1693,6 +1775,7 @@ rotate_right_clicked (GtkButton      *button,
     }
 
   gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+  update_apply_button (panel);
 }
 
 static const double known_diagonals[] = {
@@ -1756,6 +1839,7 @@ res_combo_changed (GtkComboBox    *combo,
       height = gnome_rr_mode_get_height (mode);
 
       gnome_rr_output_info_set_geometry (priv->current_output, x, y, width, height);
+      update_apply_button (panel);
     }
 }
 
@@ -1777,12 +1861,17 @@ show_setup_dialog (CcDisplayPanel *panel)
                                                gnome_rr_output_info_get_name (priv->current_output));
 
 
-  dialog = gtk_dialog_new_with_buttons (gnome_rr_output_info_get_display_name (priv->current_output),
-                                        GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                        GTK_DIALOG_MODAL,
-                                        _("_Cancel"), GTK_RESPONSE_REJECT,
-                                        _("_Apply"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
+  dialog = gtk_dialog_new ();
+  gtk_window_set_title (GTK_WINDOW (dialog),
+                        gnome_rr_output_info_get_display_name (priv->current_output));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
+  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"),
+                         GTK_RESPONSE_REJECT);
+  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (dialog),
+                                              _("_Apply"), GTK_RESPONSE_ACCEPT);
+  gtk_widget_set_sensitive (priv->apply_button, FALSE);
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
@@ -2057,6 +2146,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   priv->rotate_left_button = NULL;
   priv->rotate_right_button = NULL;
   priv->res_combo = NULL;
+  priv->apply_button = NULL;
   gtk_widget_destroy (dialog);
 }
 
