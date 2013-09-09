@@ -64,7 +64,7 @@ CPPFLAGS=$savecppflags
 AC_CHECK_LIB(m, floor)
 
 # IBus support
-IBUS_REQUIRED_VERSION=1.4.99
+IBUS_REQUIRED_VERSION=1.5.2
 
 AC_ARG_ENABLE(ibus,
         AS_HELP_STRING([--disable-ibus],
