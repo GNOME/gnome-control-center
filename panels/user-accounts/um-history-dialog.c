@@ -123,13 +123,13 @@ show_week_label (UmHistoryDialog *um)
 static void
 clear_history (UmHistoryDialog *um)
 {
-        GtkWidget *grid;
+        GtkWidget *box;
         GList *list, *it;
 
-        grid = get_widget (um, "history-grid");
-        list = gtk_container_get_children (GTK_CONTAINER (grid));
+        box = get_widget (um, "history-box");
+        list = gtk_container_get_children (GTK_CONTAINER (box));
         for (it = list; it != NULL;  it = it->next) {
-                gtk_container_remove (GTK_CONTAINER (grid), GTK_WIDGET (it->data));
+                gtk_container_remove (GTK_CONTAINER (box), GTK_WIDGET (it->data));
         }
         g_list_free (list);
 }
@@ -184,10 +184,10 @@ set_sensitivity (UmHistoryDialog *um)
 }
 
 static void
-add_record (GtkWidget *grid, GDateTime *datetime, gchar *record_string, gint line)
+add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line)
 {
         gchar *date, *time, *str;
-        GtkWidget *label;
+        GtkWidget *label, *row;
 
         date = get_smart_date (datetime);
         /* Translators: This is a time format string in the style of "22:58".
@@ -196,9 +196,14 @@ add_record (GtkWidget *grid, GDateTime *datetime, gchar *record_string, gint lin
         /* Translators: This indicates a login date-time.
            The first %s is a date, and the second %s a time. */
         str = g_strdup_printf(C_("login date-time", "%s, %s"), date, time);
+
+        row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        gtk_box_set_homogeneous (GTK_BOX (row), TRUE);
+        gtk_container_set_border_width (GTK_CONTAINER (row), 6);
+
         label = gtk_label_new (str);
         gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_grid_attach (GTK_GRID (grid), label, 1, line, 1, 1);
+        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
         g_free (str);
         g_free (date);
         g_free (time);
@@ -206,7 +211,9 @@ add_record (GtkWidget *grid, GDateTime *datetime, gchar *record_string, gint lin
 
         label = gtk_label_new (record_string);
         gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_grid_attach (GTK_GRID (grid), label, 2, line, 1, 1);
+        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
+
+        gtk_list_box_insert (GTK_LIST_BOX (box), row, line);
 }
 
 static void
@@ -216,7 +223,7 @@ show_week (UmHistoryDialog *um)
         GDateTime *datetime, *temp;
         gint64 from, to;
         gint i, line;
-        GtkWidget *grid;
+        GtkWidget *box;
         UmLoginHistory history;
 
         show_week_label (um);
@@ -241,7 +248,7 @@ show_week (UmHistoryDialog *um)
         }
 
         /* Add new session records */
-        grid = get_widget (um, "history-grid");
+        box = get_widget (um, "history-box");
         line = 0;
         for (;i >= 0; i--) {
                 history = g_array_index (login_history, UmLoginHistory, i);
@@ -257,18 +264,18 @@ show_week (UmHistoryDialog *um)
 
                 if (history.logout_time > 0 && history.logout_time < to) {
                         datetime = g_date_time_new_from_unix_local (history.logout_time);
-                        add_record (grid, datetime, _("Session Ended"), line);
+                        add_record (box, datetime, _("Session Ended"), line);
                         line++;
                 }
 
                 if (history.login_time >= from) {
                         datetime = g_date_time_new_from_unix_local (history.login_time);
-                        add_record (grid, datetime, _("Session Started"), line);
+                        add_record (box, datetime, _("Session Started"), line);
                         line++;
                 }
         }
 
-        gtk_widget_show_all (grid);
+        gtk_widget_show_all (box);
 
         g_array_free (login_history, TRUE);
 }
