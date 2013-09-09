@@ -1763,7 +1763,7 @@ static void
 show_setup_dialog (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox, *content_area, *item, *box, *frame, *preview;
+  GtkWidget *dialog, *listbox = NULL, *content_area, *item, *box, *frame, *preview;
   GtkWidget *label, *rotate_box, *grid;
   gint i, width_mm, height_mm, old_width, old_height;
   GnomeRROutput *output;
