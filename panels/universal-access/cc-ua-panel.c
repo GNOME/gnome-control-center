@@ -346,11 +346,49 @@ cc_ua_panel_init_status (CcUaPanel *self)
 }
 
 static void
+toggle_switch (GtkWidget *sw)
+{
+  gboolean active;
+
+  active = gtk_switch_get_active (GTK_SWITCH (sw));
+  gtk_switch_set_active (GTK_SWITCH (sw), !active);
+}
+
+static void
 activate_row (CcUaPanel *self, GtkListBoxRow *row)
 {
+  CcUaPanelPrivate *priv = self->priv;
   GtkWidget *dialog;
   const gchar *dialog_id;
+  const gchar *widget_name;
 
+  // Check switches to toggle
+  widget_name = gtk_buildable_get_name (GTK_BUILDABLE (row));
+  if (widget_name)
+    {
+      if (!g_strcmp0 (widget_name, "row_highcontrast"))
+        {
+          toggle_switch (WID ("value_highcontrast"));
+          return;
+        }
+      if (!g_strcmp0 (widget_name, "row_large_text"))
+        {
+          toggle_switch (WID ("value_large_text"));
+          return;
+        }
+      if (!g_strcmp0 (widget_name, "row_screen_keyboard"))
+        {
+          toggle_switch (WID ("screen_keyboard_switch"));
+          return;
+        }
+      if (!g_strcmp0 (widget_name, "row_mouse_keys"))
+        {
+          toggle_switch (WID ("mouse_keys_switch"));
+          return;
+        }
+    }
+
+  // Check dialog to open
   dialog_id = (const gchar *)g_object_get_data (G_OBJECT (row), "dialog-id");
   if (g_strcmp0 (dialog_id, "zoom") == 0)
     {
