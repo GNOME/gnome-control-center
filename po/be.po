@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-31 03:14+0000\n"
+"POT-Creation-Date: 2013-09-07 22:15+0000\n"
 "PO-Revision-Date: 2012-09-21 20:04+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
@@ -976,28 +976,28 @@ msgid "_Done"
 msgstr "_Зроблена"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:322
+#: ../panels/datetime/cc-datetime-panel.c:328
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:327
+#: ../panels/datetime/cc-datetime-panel.c:333
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
-#. * %z will be replaced by the offset from UTC e.g. UTC+0200
-#: ../panels/datetime/cc-datetime-panel.c:543
-msgid "UTC%z"
-msgstr "UTC%z"
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:549
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:548
+#: ../panels/datetime/cc-datetime-panel.c:554
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:559
 msgid "%R"
 msgstr "%R"
 
@@ -2499,46 +2499,46 @@ msgstr "_Ужыць гэта злучэнне толькі для рэсурса
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:266
+#: ../panels/network/connection-editor/net-connection-editor.c:268
 msgid "Unable to open connection editor"
 msgstr "Не ўдалося адкрыць рэдактар злучэння"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:284
+#: ../panels/network/connection-editor/net-connection-editor.c:286
 msgid "New Profile"
 msgstr "Новы профіль"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:509
+#: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1471
 msgid "_Add"
 msgstr "_Дадаць"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:593
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:594
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "Bond"
 msgstr "Bond"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:595
+#: ../panels/network/connection-editor/net-connection-editor.c:597
 msgid "Bridge"
 msgstr "Мост"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:596
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:747
+#: ../panels/network/connection-editor/net-connection-editor.c:749
 msgid "Could not load VPN plugins"
 msgstr "Не ўдалося загрузіць VPN-плугіны"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:816
+#: ../panels/network/connection-editor/net-connection-editor.c:818
 msgid "Import from file…"
 msgstr "Імпартаваць з файла..."
 
-#: ../panels/network/connection-editor/net-connection-editor.c:887
+#: ../panels/network/connection-editor/net-connection-editor.c:889
 msgid "Add Network Connection"
 msgstr "Дадаць сеткавае злучэнне"
 
@@ -4363,12 +4363,17 @@ msgstr "Скасаваць заданне друку"
 msgid "Add a New Printer"
 msgstr "Даданне новага прынтара"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "Ід_энтыфікавацца"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Пошук сеткавых прынтараў ці вынікаў фільтравання"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Enter address of a printer or a text to filter results"
 msgstr "Увядзіце адрас прынтара або тэкставы фільтр для пошуку"
 
@@ -4484,8 +4489,13 @@ msgstr "Час"
 msgid "%s Active Jobs"
 msgstr "Актыўныя заданні %s"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "Сервер патрабуе ідэнтыфікацыі"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Прынтары не апазнаныя."
 
@@ -4619,7 +4629,7 @@ msgid "Driver"
 msgstr "Драйвер"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -5975,7 +5985,8 @@ msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device."
 msgstr ""
-"Карпаратыўны ўваход дазваляе выкарыстоўваць на гэтым прыстасаванні наяўны конт, якім цэнтралізавана кіруе адміністратар сеткі."
+"Карпаратыўны ўваход дазваляе выкарыстоўваць на гэтым прыстасаванні наяўны "
+"конт, якім цэнтралізавана кіруе адміністратар сеткі."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Domain"
@@ -6284,7 +6295,9 @@ msgctxt "Password hint"
 msgid ""
 "Good password! Adding more letters, numbers and punctuation will make it "
 "stronger."
-msgstr "Добры пароль! Але дадаўшы яшчэ літар, лічбаў і пунктуацыйных знакаў, вы зробіце яго яшчэ мацнейшым."
+msgstr ""
+"Добры пароль! Але дадаўшы яшчэ літар, лічбаў і пунктуацыйных знакаў, вы "
+"зробіце яго яшчэ мацнейшым."
 
 #: ../panels/user-accounts/pw-utils.c:142
 #: ../panels/user-accounts/pw-utils.c:172
@@ -7133,7 +7146,7 @@ msgstr "Дапамога"
 msgid "Quit"
 msgstr "Выйсці"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1467
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
 msgid "All Settings"
 msgstr "Усе настройкі"
 
@@ -7153,11 +7166,10 @@ msgctxt "category"
 msgid "System"
 msgstr "Сістэма"
 
-#: ../shell/cc-window.c:1575 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Настройкі"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Настройкі;"
-
