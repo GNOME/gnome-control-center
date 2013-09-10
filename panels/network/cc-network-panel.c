@@ -667,6 +667,9 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         GtkSizeGroup *size_group;
         GType device_g_type;
 
+        if (!nm_device_get_managed (device))
+                goto out;
+
         /* do we have an existing object with this id? */
         if (find_in_model_by_id (panel, nm_device_get_udi (device), NULL) != NULL)
                 goto out;
