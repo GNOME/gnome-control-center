@@ -956,9 +956,4 @@ net_device_mobile_init (NetDeviceMobile *device_mobile)
                                                      "button_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_mobile);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
-                                                     "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), device_mobile);
 }
