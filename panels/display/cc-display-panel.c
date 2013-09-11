@@ -1455,6 +1455,22 @@ apply_current_configuration (CcDisplayPanel *self)
 }
 
 static void
+dialog_toplevel_focus_changed (GtkWindow      *window,
+                               GParamSpec     *pspec,
+                               CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = self->priv;
+
+  if (priv->labeler == NULL)
+    return;
+
+  if (gtk_window_has_toplevel_focus (window))
+    cc_rr_labeler_show (priv->labeler);
+  else
+    cc_rr_labeler_hide (priv->labeler);
+}
+
+static void
 show_arrange_displays_dialog (GtkButton      *button,
                               CcDisplayPanel *panel)
 {
@@ -1463,6 +1479,8 @@ show_arrange_displays_dialog (GtkButton      *button,
   gint response;
 
   priv->dialog = gtk_dialog_new ();
+  g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
+                    G_CALLBACK (dialog_toplevel_focus_changed), panel);
   gtk_window_set_title (GTK_WINDOW (priv->dialog), _("Arrange Combined Displays"));
   gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
                                 GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
@@ -1732,20 +1750,6 @@ setup_listbox_row_activated (GtkListBox     *list_box,
 }
 
 static void
-dialog_toplevel_focus_changed (GtkWindow      *window,
-			       GParamSpec     *pspec,
-			       CcDisplayPanel *self)
-{
-  if (self->priv->labeler == NULL)
-    return;
-  if (gtk_window_has_toplevel_focus (window))
-    cc_rr_labeler_show (self->priv->labeler);
-  else
-    cc_rr_labeler_hide (self->priv->labeler);
-}
-
-
-static void
 rotate_left_clicked (GtkButton      *button,
                      CcDisplayPanel *panel)
 {
@@ -1878,6 +1882,8 @@ show_setup_dialog (CcDisplayPanel *panel)
 
 
   priv->dialog = gtk_dialog_new ();
+  g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
+                    G_CALLBACK (dialog_toplevel_focus_changed), panel);
   gtk_window_set_title (GTK_WINDOW (priv->dialog),
                         gnome_rr_output_info_get_display_name (priv->current_output));
   gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
