@@ -80,6 +80,7 @@ struct _CcDisplayPanelPrivate
   GtkWidget *rotate_left_button;
   GtkWidget *rotate_right_button;
   GtkWidget *apply_button;
+  GtkWidget *dialog;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -139,6 +140,12 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&priv->up_client);
   g_clear_object (&priv->background);
   g_clear_object (&priv->thumbnail_factory);
+
+  if (priv->dialog)
+    {
+      gtk_widget_destroy (priv->dialog);
+      priv->dialog = NULL;
+    }
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }
@@ -1452,20 +1459,21 @@ show_arrange_displays_dialog (GtkButton      *button,
                               CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *content_area, *area, *vbox, *label;
+  GtkWidget *content_area, *area, *vbox, *label;
+  gint response;
 
-  dialog = gtk_dialog_new ();
-  gtk_window_set_title (GTK_WINDOW (dialog), _("Arrange Combined Displays"));
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+  priv->dialog = gtk_dialog_new ();
+  gtk_window_set_title (GTK_WINDOW (priv->dialog), _("Arrange Combined Displays"));
+  gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
                                 GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"),
+  gtk_window_set_modal (GTK_WINDOW (priv->dialog), TRUE);
+  gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Cancel"),
                          GTK_RESPONSE_REJECT);
-  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Apply"),
+  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Apply"),
                                               GTK_RESPONSE_ACCEPT);
   gtk_widget_set_sensitive (priv->apply_button, FALSE);
 
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+  content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
 
   area = (GtkWidget *) foo_scroll_area_new ();
   g_object_set_data (G_OBJECT (area), "panel", panel);
@@ -1491,8 +1499,14 @@ show_arrange_displays_dialog (GtkButton      *button,
   gtk_widget_show_all (vbox);
   gtk_container_add (GTK_CONTAINER (content_area), vbox);
 
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+  response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
+  if (response == GTK_RESPONSE_ACCEPT)
     apply_current_configuration (panel);
+  else if (response == GTK_RESPONSE_NONE)
+    {
+      /* panel is being destroyed */
+      return;
+    }
   else
     {
       /* re-read the previous configuration */
@@ -1500,7 +1514,8 @@ show_arrange_displays_dialog (GtkButton      *button,
     }
 
   priv->apply_button = NULL;
-  gtk_widget_destroy (dialog);
+  gtk_widget_destroy (priv->dialog);
+  priv->dialog = NULL;
 }
 
 static const gchar *
@@ -1847,7 +1862,7 @@ static void
 show_setup_dialog (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GtkWidget *dialog, *listbox = NULL, *content_area, *item, *box, *frame, *preview;
+  GtkWidget *listbox = NULL, *content_area, *item, *box, *frame, *preview;
   GtkWidget *label, *rotate_box, *grid;
   gint i, width_mm, height_mm, old_width, old_height;
   GnomeRROutput *output;
@@ -1856,25 +1871,26 @@ show_setup_dialog (CcDisplayPanel *panel)
   GtkListStore *res_model;
   GtkCellRenderer *renderer;
   GnomeRRRotation rotation;
+  gint response;
 
   output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                gnome_rr_output_info_get_name (priv->current_output));
 
 
-  dialog = gtk_dialog_new ();
-  gtk_window_set_title (GTK_WINDOW (dialog),
+  priv->dialog = gtk_dialog_new ();
+  gtk_window_set_title (GTK_WINDOW (priv->dialog),
                         gnome_rr_output_info_get_display_name (priv->current_output));
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+  gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
                                 GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"),
+  gtk_window_set_modal (GTK_WINDOW (priv->dialog), TRUE);
+  gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Cancel"),
                          GTK_RESPONSE_REJECT);
-  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (dialog),
+  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (priv->dialog),
                                               _("_Apply"), GTK_RESPONSE_ACCEPT);
   gtk_widget_set_sensitive (priv->apply_button, FALSE);
-  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+  gtk_window_set_resizable (GTK_WINDOW (priv->dialog), FALSE);
 
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+  content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_set_margin_left (box, 12);
@@ -2037,14 +2053,15 @@ show_setup_dialog (CcDisplayPanel *panel)
                                   gnome_rr_output_get_current_mode (output));
     }
 
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+  content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
   gtk_container_add (GTK_CONTAINER (box), grid);
   gtk_widget_show_all (box);
 
   gnome_rr_output_info_get_geometry (priv->current_output, NULL, NULL,
                                      &old_width, &old_height);
 
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+  response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
+  if (response == GTK_RESPONSE_ACCEPT)
     {
       GnomeRROutputInfo **outputs;
       GtkListBoxRow *row;
@@ -2137,6 +2154,11 @@ show_setup_dialog (CcDisplayPanel *panel)
 
       apply_current_configuration (panel);
     }
+  else if (response == GTK_RESPONSE_NONE)
+    {
+      /* panel is being destroyed */
+      return;
+    }
   else
     {
       /* changes cancelled, so re-read the current configuration */
@@ -2147,7 +2169,8 @@ show_setup_dialog (CcDisplayPanel *panel)
   priv->rotate_right_button = NULL;
   priv->res_combo = NULL;
   priv->apply_button = NULL;
-  gtk_widget_destroy (dialog);
+  gtk_widget_destroy (priv->dialog);
+  priv->dialog = NULL;
 }
 
 static void
