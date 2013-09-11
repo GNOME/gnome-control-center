@@ -178,7 +178,7 @@ device_off_toggled (GtkSwitch *sw,
                 path = nm_connection_get_path (connection);
                 client = net_object_get_client (NET_OBJECT (device_simple));
                 acs = nm_client_get_active_connections (client);
-                for (i = 0; i < acs->len; i++) {
+                for (i = 0; acs && i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
                         if (strcmp (nm_active_connection_get_connection (a), path) == 0) {
                                 nm_client_deactivate_connection (client, a);

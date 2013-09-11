@@ -1150,7 +1150,7 @@ stop_shared_connection (NetDeviceWifi *device_wifi)
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         client = net_object_get_client (NET_OBJECT (device_wifi));
         connections = nm_client_get_active_connections (client);
-        for (i = 0; i < connections->len; i++) {
+        for (i = 0; connections && i < connections->len; i++) {
                 c = (NMActiveConnection *)connections->pdata[i];
 
                 devices = nm_active_connection_get_devices (c);
