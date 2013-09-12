@@ -357,7 +357,6 @@ toggle_switch (GtkWidget *sw)
 static void
 activate_row (CcUaPanel *self, GtkListBoxRow *row)
 {
-  CcUaPanelPrivate *priv = self->priv;
   GtkWidget *dialog;
   const gchar *dialog_id;
   const gchar *widget_name;
