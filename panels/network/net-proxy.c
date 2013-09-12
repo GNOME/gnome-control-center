@@ -285,16 +285,22 @@ set_ignore_hosts (const GValue       *value,
                   const GVariantType *expected_type,
                   gpointer            user_data)
 {
-        GVariant *result;
+        GVariantBuilder builder;
         const gchar *sv;
-        gchar **av;
+        gchar **av, **p;
 
         sv = g_value_get_string (value);
-        av = g_strsplit (sv, ",", 0);
-        result = g_variant_new_strv ((const gchar * const *)av, -1);
+        av = g_strsplit_set (sv, ", ", 0);
+
+        g_variant_builder_init (&builder, G_VARIANT_TYPE_STRING_ARRAY);
+        for (p = av; *p; ++p) {
+                if (*p[0] != '\0')
+                        g_variant_builder_add (&builder, "s", *p);
+        }
+
         g_strfreev (av);
 
-        return result;
+        return g_variant_builder_end (&builder);
 }
 
 static void
