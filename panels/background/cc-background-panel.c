@@ -123,8 +123,6 @@ cc_background_panel_dispose (GObject *object)
 
   g_clear_pointer (&priv->screenshot_path, g_free);
 
-  g_clear_object (&priv->connection);
-
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
 
