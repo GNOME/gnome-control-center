@@ -138,6 +138,7 @@ cc_date_time_panel_dispose (GObject *object)
   g_clear_object (&priv->dtm);
   g_clear_object (&priv->permission);
   g_clear_object (&priv->clock_settings);
+  g_clear_object (&priv->datetime_settings);
 
   g_clear_pointer (&priv->date, g_date_time_unref);
 
