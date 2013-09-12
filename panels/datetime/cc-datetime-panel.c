@@ -71,6 +71,9 @@ struct _CcDateTimePanelPrivate
   GtkBuilder *builder;
   GtkWidget *map;
 
+  GList *listboxes;
+  GList *listboxes_reverse;
+
   TzLocation *current_location;
 
   GtkTreeModelFilter *city_filter;
@@ -141,6 +144,9 @@ cc_date_time_panel_dispose (GObject *object)
   g_clear_object (&priv->datetime_settings);
 
   g_clear_pointer (&priv->date, g_date_time_unref);
+
+  g_clear_pointer (&priv->listboxes, g_list_free);
+  g_clear_pointer (&priv->listboxes_reverse, g_list_free);
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
@@ -827,6 +833,31 @@ on_timedated_properties_changed (GDBusProxy       *proxy,
     }
 }
 
+static gboolean
+keynav_failed (GtkWidget        *listbox,
+               GtkDirectionType  direction,
+               CcDateTimePanel  *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GList *item, *listboxes;
+
+  /* Find the listbox in the list of GtkListBoxes */
+  if (direction == GTK_DIR_DOWN)
+    listboxes = priv->listboxes;
+  else
+    listboxes = priv->listboxes_reverse;
+
+  item = g_list_find (listboxes, listbox);
+  g_assert (item);
+  if (item->next)
+    {
+      gtk_widget_child_focus (GTK_WIDGET (item->next->data), direction);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 static void
 update_header (GtkListBoxRow *row,
                GtkListBoxRow *before,
@@ -936,15 +967,20 @@ list_box_row_activated (GtkListBox      *listbox,
 }
 
 static void
-setup_main_listview (CcDateTimePanel *self)
+setup_listbox (CcDateTimePanel *self,
+               GtkWidget       *listbox)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  GtkWidget *listbox;
 
-  listbox = W ("listbox");
   gtk_list_box_set_header_func (GTK_LIST_BOX (listbox), update_header, NULL, NULL);
   g_signal_connect (listbox, "row-activated",
                     G_CALLBACK (list_box_row_activated), self);
+
+  g_signal_connect (listbox, "keynav-failed",
+                    G_CALLBACK (keynav_failed), self);
+
+  priv->listboxes = g_list_append (priv->listboxes, listbox);
+  priv->listboxes_reverse = g_list_prepend (priv->listboxes_reverse, listbox);
 }
 
 static gboolean
@@ -1232,7 +1268,9 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   setup_timezone_dialog (self);
   setup_datetime_dialog (self);
-  setup_main_listview (self);
+
+  setup_listbox (self, W ("listbox1"));
+  setup_listbox (self, W ("listbox2"));
 
   /* set up network time switch */
   bind_switch_to_row (self,
