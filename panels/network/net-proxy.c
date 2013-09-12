@@ -263,19 +263,22 @@ get_ignore_hosts (GValue   *value,
                   GVariant *variant,
                   gpointer  user_data)
 {
-        int i;
-        gsize n = 0, avlen;
-        gchar buffer[10240];
-        gchar *p = buffer;
-        const gchar **av = g_variant_get_strv (variant, &avlen);
+        GVariantIter iter;
+        const gchar *s;
+        gchar **av, **p;
+        gsize n;
 
-        if (avlen > 0) {
-                n = g_strlcpy (p, av[0], sizeof buffer);
-                for (i = 1; i < avlen; i ++)
-                        n += g_snprintf (p + n, sizeof (buffer) - n, ", %s", av[i]);
-        }
+        n = g_variant_iter_init (&iter, variant);
+        p = av = g_new0 (gchar *, n + 1);
+
+        while (g_variant_iter_next (&iter, "&s", &s))
+                if (s[0] != '\0') {
+                        *p = (gchar *) s;
+                        ++p;
+                }
+
+        g_value_take_string (value, g_strjoinv (", ", av));
         g_free (av);
-        g_value_set_string (value, buffer);
 
         return TRUE;
 }
