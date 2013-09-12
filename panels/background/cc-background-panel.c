@@ -120,8 +120,6 @@ cc_background_panel_dispose (GObject *object)
   g_free (priv->screenshot_path);
   priv->screenshot_path = NULL;
 
-  g_clear_object (&priv->connection);
-
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
 
