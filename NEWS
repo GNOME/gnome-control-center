@@ -1,3 +1,33 @@
+=============
+Version 3.8.5
+=============
+
+- Prevent the window from being taller than the height of the monitor
+
+Background:
+- Fix memory corruption when creating preview
+- Fix top bar location on dual-head
+- Fix crasher when entering/leaving the background panel
+
+Date & Time:
+- Fix timezone strings on non UTF-8 locales
+
+Network:
+- Disconnect from signal on finalize
+- Fix a possible crash with no active connections
+- Don't include spaces in proxy's ignore-hosts setting
+- Avoid using uninitialized memory when ignore-hosts is empty
+
+Sharing:
+- Don't allow empty passwords in screen sharing
+
+User Accounts:
+- Really select the newly-created user
+- Make sure not to show sensitive widgets for actions we don't have
+  permission for
+- Clear suggested user name field when user clears the full name field
+  in the add user dialog
+
 ===============
 Version 3.8.4.1
 ===============
