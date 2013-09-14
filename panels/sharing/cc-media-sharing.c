@@ -121,7 +121,8 @@ cc_media_sharing_get_preferences (gboolean   *enabled,
   file = cc_media_sharing_open_key_file ();
 
   if (enabled)
-   *enabled = g_key_file_get_boolean (file, "general", "upnp-enabled", NULL);
+   *enabled = (g_key_file_get_boolean (file, "general", "upnp-enabled", NULL) &&
+               g_key_file_get_boolean (file, "MediaExport", "enabled", NULL));
 
   if (folders)
     {
@@ -177,6 +178,7 @@ cc_media_sharing_set_preferences (gboolean   enabled,
     cc_media_sharing_disable_autostart ();
 
   g_key_file_set_boolean (file, "general", "upnp-enabled", enabled);
+  g_key_file_set_boolean (file, "MediaExport", "enabled", enabled);
 
   str_list = folders;
   length = 0;
