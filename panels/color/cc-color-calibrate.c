@@ -1038,6 +1038,7 @@ cc_color_calibrate_finalize (GObject *object)
   CcColorCalibratePrivate *priv = calibrate->priv;
 
   g_clear_pointer (&priv->window, gtk_widget_destroy);
+  g_clear_object (&priv->builder);
   g_clear_object (&priv->device);
   g_clear_object (&priv->proxy_helper);
   g_clear_object (&priv->proxy_inhibit);
