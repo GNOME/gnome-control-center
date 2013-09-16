@@ -835,9 +835,6 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	g_signal_connect (G_OBJECT (WID ("switch_discoverable")), "notify::active",
 			  G_CALLBACK (switch_discoverable_active_changed), self);
 
-	/* The known devices */
-	widget = WID ("devices_table");
-
 	context = gtk_widget_get_style_context (WID ("message_scrolledwindow"));
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
 
