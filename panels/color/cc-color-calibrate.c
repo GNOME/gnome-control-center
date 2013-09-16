@@ -50,6 +50,7 @@ struct _CcColorCalibratePrivate
   GnomeRROutput   *output;
   GnomeRRScreen   *x11_screen;
   GtkBuilder      *builder;
+  GtkWindow       *window;
   GtkWidget       *sample_widget;
   guint            gamma_size;
   CdProfileQuality quality;
@@ -1036,6 +1037,7 @@ cc_color_calibrate_finalize (GObject *object)
   CcColorCalibrate *calibrate = CC_COLOR_CALIBRATE (object);
   CcColorCalibratePrivate *priv = calibrate->priv;
 
+  g_clear_pointer (&priv->window, gtk_widget_destroy);
   g_clear_object (&priv->device);
   g_clear_object (&priv->proxy_helper);
   g_clear_object (&priv->proxy_inhibit);
@@ -1133,6 +1135,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   cc_color_calibrate_alpha_screen_changed_cb (GTK_WINDOW (window), NULL, calibrate);
   g_signal_connect (window, "screen-changed",
                     G_CALLBACK (cc_color_calibrate_alpha_screen_changed_cb), calibrate);
+  priv->window = window;
 }
 
 CcColorCalibrate *
