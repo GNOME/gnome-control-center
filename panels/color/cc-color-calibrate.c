@@ -1069,7 +1069,6 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
 
   calibrate->priv = priv = CC_COLOR_CALIBRATE_GET_PRIVATE (calibrate);
   calibrate->priv->loop = g_main_loop_new (NULL, FALSE);
-  calibrate->priv->sample_widget = cd_sample_widget_new ();
   calibrate->priv->inhibit_fd = -1;
 
   /* load UI */
