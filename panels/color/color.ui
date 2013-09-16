@@ -8,7 +8,6 @@
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
-    <property name="transient_for">dialog_prefs</property>
     <child>
       <object class="GtkBox" id="box_calib_quality">
         <property name="visible">True</property>
@@ -627,7 +626,6 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="transient_for">dialog_prefs</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox3">
         <property name="visible">True</property>
@@ -764,7 +762,6 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="transient_for">dialog_prefs</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -1002,13 +999,6 @@
       <action-widget response="0">button_virtual_add</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkWindow" id="dialog_prefs">
-    <property name="can_focus">False</property>
-    <property name="border_width">12</property>
-    <property name="title" translatable="yes">Color</property>
-    <property name="window_position">center</property>
-    <property name="icon_name">preferences-system</property>
-    <child>
       <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -1249,8 +1239,6 @@
           </packing>
         </child>
       </object>
-    </child>
-  </object>
   <object class="GtkListStore" id="liststore_assign">
     <columns>
       <!-- column-name title -->

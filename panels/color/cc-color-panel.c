@@ -2536,7 +2536,7 @@ cc_color_panel_init (CcColorPanel *prefs)
 
 
   widget = WID (priv->builder, "dialog-vbox1");
-  gtk_widget_reparent (widget, (GtkWidget *) prefs);
+  gtk_container_add (GTK_CONTAINER (prefs), widget);
   g_signal_connect (widget, "realize",
                     G_CALLBACK (gcm_prefs_window_realize_cb),
                     prefs);
