@@ -405,15 +405,6 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
 }
 
 static void
-mnemonic_activate (GtkLabel *label, gboolean cycling, CcUaPanel *self)
-{
-  GtkWidget *row;
-
-  row = gtk_widget_get_parent (GTK_WIDGET (label));
-  activate_row (self, GTK_LIST_BOX_ROW (row));
-}
-
-static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
@@ -446,9 +437,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 priv->interface_settings,
                                 NULL);
 
-  g_signal_connect (WID ("heading_large_text"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
-
   /* zoom */
 
   g_settings_bind_with_mapping (priv->application_settings, "screen-magnifier-enabled",
@@ -458,8 +446,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 NULL, NULL, NULL);
 
   g_object_set_data (G_OBJECT (WID ("row_zoom")), "dialog-id", "zoom");
-  g_signal_connect (WID ("heading_zoom"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
 
   /* screen reader */
 
@@ -480,8 +466,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect (WID ("heading_screen_reader"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
 
   /* sound keys */
 
@@ -502,8 +486,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect (WID ("heading_sound_keys"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
 }
 
 /* hearing/sound section */
@@ -593,8 +575,6 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 
   g_signal_connect (WID ("visual_alerts_test_button"),
                     "clicked", G_CALLBACK (gdk_beep), NULL);
-  g_signal_connect (WID ("heading_visual_alerts"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
 }
 
 /* typing/keyboard section */
@@ -720,8 +700,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect (WID ("heading_accessx"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
 }
 
 /* mouse/pointing & clicking section */
@@ -803,8 +781,6 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect (WID ("heading_click_assist"), "mnemonic-activate",
-                    G_CALLBACK (mnemonic_activate), self);
 }
 
 static void
