@@ -107,6 +107,8 @@ struct _CcUaPanelPrivate
 
   GList *sections;
   GList *sections_reverse;
+
+  GSList *toplevels;
 };
 
 static void
@@ -115,6 +117,8 @@ cc_ua_panel_dispose (GObject *object)
   CcUaPanelPrivate *priv = CC_UA_PANEL (object)->priv;
 
   g_clear_object (&priv->builder);
+  g_slist_free_full (priv->toplevels, gtk_widget_destroy);
+  priv->toplevels = NULL;
 
   g_clear_object (&priv->wm_settings);
   g_clear_object (&priv->a11y_settings);
@@ -460,6 +464,7 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   dialog = WID ("screen_reader_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_screen_reader")), "dialog", dialog);
   g_signal_connect_swapped (WID ("screen_reader_done"), "clicked",
@@ -480,6 +485,7 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   dialog = WID ("sound_keys_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_sound_keys")), "dialog", dialog);
   g_signal_connect_swapped (WID ("sound_keys_done"), "clicked",
@@ -565,6 +571,7 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
                     "toggled", G_CALLBACK (visual_bell_type_toggle_cb), self);
 
   dialog = WID ("visual_alerts_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_visual_alerts")), "dialog", dialog);
 
@@ -693,6 +700,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
   dialog = WID ("typing_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_accessx")), "dialog", dialog);
 
@@ -774,6 +782,7 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
   g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
   dialog = WID ("pointing_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_click_assist")), "dialog", dialog);
 
