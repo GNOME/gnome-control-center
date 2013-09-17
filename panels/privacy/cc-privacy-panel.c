@@ -38,6 +38,9 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 struct _CcPrivacyPanelPrivate
 {
   GtkBuilder *builder;
+  GtkWidget  *recent_dialog;
+  GtkWidget  *screen_lock_dialog;
+  GtkWidget  *trash_dialog;
   GtkWidget  *list_box;
 
   GSettings  *lockdown_settings;
@@ -245,7 +248,7 @@ add_screen_lock (CcPrivacyPanel *self)
   add_row (self, _("Screen Lock"), "screen_lock_dialog", w);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_done"));
-  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
+  dialog = self->priv->screen_lock_dialog;
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
@@ -358,7 +361,7 @@ add_usage_history (CcPrivacyPanel *self)
   add_row (self, _("Usage & History"), "recent_dialog", w);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_done"));
-  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_dialog"));
+  dialog = self->priv->recent_dialog;
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
@@ -535,7 +538,7 @@ add_trash_temp (CcPrivacyPanel *self)
   add_row (self, _("Purge Trash & Temporary Files"), "trash_dialog", w);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_done"));
-  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
+  dialog = self->priv->trash_dialog;
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
@@ -569,6 +572,9 @@ cc_privacy_panel_finalize (GObject *object)
 {
   CcPrivacyPanelPrivate *priv = CC_PRIVACY_PANEL (object)->priv;
 
+  g_clear_pointer (&priv->recent_dialog, gtk_widget_destroy);
+  g_clear_pointer (&priv->screen_lock_dialog, gtk_widget_destroy);
+  g_clear_pointer (&priv->trash_dialog, gtk_widget_destroy);
   g_clear_object (&priv->builder);
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
@@ -650,6 +656,10 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
       g_clear_error (&error);
       return;
     }
+
+  self->priv->recent_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_dialog"));
+  self->priv->screen_lock_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
+  self->priv->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
 
   frame = WID ("frame");
   widget = gtk_list_box_new ();
