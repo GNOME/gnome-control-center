@@ -84,7 +84,6 @@ struct _CcPowerPanelPrivate
   GtkWidget     *battery_heading;
   GtkWidget     *battery_section;
   GtkWidget     *battery_list;
-  GtkWidget     *battery_capacity;
 
   GtkWidget     *device_heading;
   GtkWidget     *device_section;
@@ -305,7 +304,6 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   GtkWidget *levelbar, *row;
   gchar *s;
   gdouble energy_full, energy_rate;
-  guint64 capacity;
 
   g_object_get (device,
                 "state", &state,
@@ -319,22 +317,6 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
     time = time_empty;
   else
     time = time_full;
-
-  if (energy_rate > 0)
-    {
-      gchar *time_string, *s;
-      capacity = 3600 * (energy_full / energy_rate);
-      time_string = get_timestring (capacity);
-      s = g_strdup_printf (_("Estimated battery capacity: %s"), time_string);
-      gtk_label_set_label (GTK_LABEL (priv->battery_capacity), s);
-      gtk_widget_show (priv->battery_capacity);
-      g_free (s);
-      g_free (time_string);
-    }
-  else
-    {
-      gtk_widget_hide (priv->battery_capacity);
-    }
 
   details = get_details_string (percentage, state, time);
 
@@ -2105,11 +2087,6 @@ add_battery_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (frame), widget);
   gtk_box_pack_start (GTK_BOX (box), frame, FALSE, TRUE, 0);
 
-  priv->battery_capacity = widget = gtk_label_new ("");
-  gtk_widget_set_margin_top (widget, 6);
-  gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
-  gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box), priv->battery_capacity, FALSE, TRUE, 0);
   gtk_widget_show_all (box);
 }
 
