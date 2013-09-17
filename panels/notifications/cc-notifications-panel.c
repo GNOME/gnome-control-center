@@ -160,7 +160,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
 
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
                                           "ccnotify-main-grid"));
-  gtk_widget_reparent (w, GTK_WIDGET (panel));
+  gtk_container_add (GTK_CONTAINER (panel), w);
   gtk_widget_show (w);
 }
 
