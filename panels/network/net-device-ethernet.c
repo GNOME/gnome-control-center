@@ -64,10 +64,7 @@ device_ethernet_add_to_notebook (NetObject    *object,
         GtkWidget *vbox;
 
         vbox = GTK_WIDGET (gtk_builder_get_object (device->builder, "vbox6"));
-        g_object_ref (vbox);
-        gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (vbox)), vbox);
         gtk_notebook_append_page (notebook, vbox, NULL);
-        g_object_unref (vbox);
         return vbox;
 }
 

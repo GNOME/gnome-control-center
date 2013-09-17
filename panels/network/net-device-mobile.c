@@ -78,7 +78,6 @@ device_mobile_proxy_add_to_notebook (NetObject *object,
                                      GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
-        GtkWindow *window;
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
 
         /* add widgets to size group */
@@ -89,15 +88,9 @@ device_mobile_proxy_add_to_notebook (NetObject *object,
                                                      "heading_network"));
         gtk_size_group_add_widget (heading_size_group, widget);
 
-        /* reparent */
-        window = GTK_WINDOW (gtk_builder_get_object (device_mobile->priv->builder,
-                                                     "window_tmp"));
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,
                                                      "vbox7"));
-        g_object_ref (widget);
-        gtk_container_remove (GTK_CONTAINER (window), widget);
         gtk_notebook_append_page (notebook, widget, NULL);
-        g_object_unref (widget);
         return widget;
 }
 

@@ -49,7 +49,6 @@ device_simple_proxy_add_to_notebook (NetObject *object,
                                      GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
-        GtkWindow *window;
         NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
 
         /* add widgets to size group */
@@ -57,15 +56,9 @@ device_simple_proxy_add_to_notebook (NetObject *object,
                                                      "heading_ipv4"));
         gtk_size_group_add_widget (heading_size_group, widget);
 
-        /* reparent */
-        window = GTK_WINDOW (gtk_builder_get_object (device_simple->priv->builder,
-                                                     "window_tmp"));
         widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "vbox6"));
-        g_object_ref (widget);
-        gtk_container_remove (GTK_CONTAINER (window), widget);
         gtk_notebook_append_page (notebook, widget, NULL);
-        g_object_unref (widget);
         return widget;
 }
 

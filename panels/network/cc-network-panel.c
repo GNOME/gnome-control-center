@@ -1457,5 +1457,5 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
-        gtk_widget_reparent (widget, (GtkWidget *) panel);
+        gtk_container_add (GTK_CONTAINER (panel), widget);
 }
