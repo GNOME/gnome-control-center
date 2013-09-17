@@ -817,7 +817,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	}
 
 	widget = WID ("grid");
-	gtk_widget_reparent (widget, GTK_WIDGET (self));
+	gtk_container_add (GTK_CONTAINER (self), widget);
 
 	/* Overall device state */
 	cc_bluetooth_panel_update_state (self);
