@@ -68,6 +68,7 @@ struct _CcPowerPanelPrivate
   GSettings     *session_settings;
   GCancellable  *cancellable;
   GtkBuilder    *builder;
+  GtkWidget     *automatic_suspend_dialog;
   UpClient      *up_client;
   GDBusProxy    *screen_proxy;
   GDBusProxy    *kbd_proxy;
@@ -137,6 +138,7 @@ cc_power_panel_dispose (GObject *object)
       g_object_unref (priv->cancellable);
       priv->cancellable = NULL;
     }
+  g_clear_pointer (&priv->automatic_suspend_dialog, gtk_widget_destroy);
   g_clear_object (&priv->builder);
   g_clear_object (&priv->screen_proxy);
   g_clear_object (&priv->kbd_proxy);
@@ -1772,7 +1774,7 @@ activate_row (CcPowerPanel *self,
 
   if (row == GTK_LIST_BOX_ROW (priv->automatic_suspend_row))
     {
-      w = WID (priv->builder, "automatic_suspend_dialog");
+      w = priv->automatic_suspend_dialog;
       toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
       gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (toplevel));
       gtk_window_set_modal (GTK_WINDOW (w), TRUE);
@@ -1983,7 +1985,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_size_group_add_widget (priv->row_sizegroup, row);
   gtk_widget_show_all (widget);
 
-  dialog = WID (priv->builder, "automatic_suspend_dialog");
+  dialog = priv->automatic_suspend_dialog;
   sw = WID (priv->builder, "automatic_suspend_close");
   g_signal_connect_swapped (sw, "clicked", G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -2179,6 +2181,8 @@ cc_power_panel_init (CcPowerPanel *self)
       g_error_free (error);
       return;
     }
+
+  priv->automatic_suspend_dialog = WID (priv->builder, "automatic_suspend_dialog");
 
   priv->cancellable = g_cancellable_new ();
 
