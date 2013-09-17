@@ -58,6 +58,8 @@ static void populate_ap_list (NetDeviceWifi *device_wifi);
 struct _NetDeviceWifiPrivate
 {
         GtkBuilder              *builder;
+        GtkWidget               *details_dialog;
+        GtkWidget               *hotspot_dialog;
         gboolean                 updating_device;
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
@@ -503,8 +505,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
-        dialog = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "details_dialog"));
+        dialog = device_wifi->priv->details_dialog;
 
         ap = g_object_get_data (G_OBJECT (dialog), "ap");
         connection = g_object_get_data (G_OBJECT (dialog), "connection");
@@ -1104,7 +1105,7 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (button));
 
-        dialog = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "hotspot-dialog"));
+        dialog = device_wifi->priv->hotspot_dialog;
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
 
         str = g_string_new (_("If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with others."));
@@ -1288,6 +1289,8 @@ net_device_wifi_finalize (GObject *object)
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
         NetDeviceWifiPrivate *priv = device_wifi->priv;
 
+        g_clear_pointer (&priv->details_dialog, gtk_widget_destroy);
+        g_clear_pointer (&priv->hotspot_dialog, gtk_widget_destroy);
         g_object_unref (priv->builder);
         g_free (priv->selected_ssid_title);
         g_free (priv->selected_connection_id);
@@ -1923,6 +1926,14 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                 g_error_free (error);
                 return;
         }
+
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "details_dialog"));
+        device_wifi->priv->details_dialog = widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "hotspot-dialog"));
+        device_wifi->priv->hotspot_dialog = widget;
 
         /* setup wifi views */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
