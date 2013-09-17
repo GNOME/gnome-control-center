@@ -691,7 +691,7 @@ cc_search_panel_init (CcSearchPanel *self)
   populate_search_providers (self);
 
   widget = WID ("search_vbox");
-  gtk_widget_reparent (widget, (GtkWidget *) self);
+  gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
 static void
