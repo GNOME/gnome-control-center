@@ -876,7 +876,7 @@ sync_kbd_brightness (CcPowerPanel *self)
   if (result)
     {
       /* set the slider */
-      brightness = g_variant_get_uint32 (result);
+      brightness = g_variant_get_int32 (result);
       visible = brightness >= 0.0;
     }
   else
