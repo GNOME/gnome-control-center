@@ -1926,5 +1926,7 @@ keyboard_shortcuts_dispose (CcPanel *panel)
 
   g_clear_object (&binding_settings);
 
+  g_clear_pointer (&custom_shortcut_dialog, gtk_widget_destroy);
+
   cc_keyboard_option_clear_all ();
 }
