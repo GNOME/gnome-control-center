@@ -329,7 +329,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
 
  out:
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder, "goa-top-widget"));
-  gtk_widget_reparent (w, GTK_WIDGET (panel));
+  gtk_container_add (GTK_CONTAINER (panel), w);
   gtk_widget_show_all (w);
 }
 
