@@ -38,7 +38,6 @@ CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
 struct _CcMousePanelPrivate
 {
-  GtkBuilder *builder;
   GtkWidget  *test_dialog;
   GtkWidget  *prefs_widget;
   GtkWidget  *test_widget;
