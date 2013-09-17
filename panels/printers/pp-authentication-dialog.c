@@ -289,7 +289,7 @@ pp_authentication_dialog_finalize (GObject *object)
   PpAuthenticationDialog        *dialog = PP_AUTHENTICATION_DIALOG (object);
   PpAuthenticationDialogPrivate *priv = dialog->priv;
 
-  gtk_widget_hide (priv->dialog);
+  g_clear_pointer (&priv->dialog, gtk_widget_destroy);
 
   g_object_unref (priv->builder);
   g_free (priv->text);
