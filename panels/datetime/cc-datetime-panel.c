@@ -1339,7 +1339,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   widget = W ("vbox_datetime");
-  gtk_widget_reparent (widget, GTK_WIDGET (self));
+  gtk_container_add (GTK_CONTAINER (self), widget);
 
   /* setup the time itself */
   priv->clock_tracker = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
