@@ -923,8 +923,7 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                                            NULL);
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-require-password-switch"),
-                                           WID ("remote-control-password-entry"),
-                                           WID ("remote-control-password-label"),
+                                           WID ("password-grid"),
                                            NULL);
 
   cc_sharing_panel_setup_label_with_hostname (self,
