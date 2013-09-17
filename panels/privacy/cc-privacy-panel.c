@@ -689,7 +689,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   update_lock_screen_sensitivity (self);
 
   widget = WID ("privacy_vbox");
-  gtk_widget_reparent (widget, (GtkWidget *) self);
+  gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
 static void
