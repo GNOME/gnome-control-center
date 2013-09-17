@@ -1568,7 +1568,7 @@ info_panel_setup_overview (CcInfoPanel  *self)
   gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
 
   widget = WID ("info_vbox");
-  gtk_widget_reparent (widget, (GtkWidget *) self);
+  gtk_container_add (GTK_CONTAINER (self), widget);
 
   refresh_update_button (self);
 }
