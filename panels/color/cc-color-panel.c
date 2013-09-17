@@ -52,6 +52,7 @@ struct _CcColorPanelPrivate
   GSettings     *settings;
   GSettings     *settings_colord;
   GtkBuilder    *builder;
+  GtkWidget     *assistant_calib;
   GtkWidget     *main_window;
   CcColorCalibrate *calibrate;
   GtkListBox    *list_box;
@@ -253,9 +254,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
 static void
 gcm_prefs_calib_cancel_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
-  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
-                                               "assistant_calib"));
-  gtk_widget_hide (widget);
+  gtk_widget_hide (prefs->priv->assistant_calib);
 }
 
 static gboolean
@@ -265,8 +264,7 @@ gcm_prefs_calib_delayed_complete_cb (gpointer user_data)
   GtkAssistant *assistant;
   GtkWidget *widget;
 
-  assistant = GTK_ASSISTANT (gtk_builder_get_object (panel->priv->builder,
-                                                     "assistant_calib"));
+  assistant = GTK_ASSISTANT (panel->priv->assistant_calib);
   widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                "box_calib_brightness"));
   gtk_assistant_set_page_complete (assistant, widget, TRUE);
@@ -317,8 +315,7 @@ gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
     }
 
   /* actually start the calibration */
-  window = GTK_WINDOW (gtk_builder_get_object (prefs->priv->builder,
-                                               "assistant_calib"));
+  window = GTK_WINDOW (prefs->priv->assistant_calib);
   ret = cc_color_calibrate_start (prefs->priv->calibrate,
                                   window,
                                   &error);
@@ -362,8 +359,7 @@ gcm_prefs_calib_temp_treeview_clicked_cb (GtkTreeSelection *selection,
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
-  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
-                                                     "assistant_calib"));
+  assistant = GTK_ASSISTANT (prefs->priv->assistant_calib);
   widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                                "box_calib_temp"));
   gtk_assistant_set_page_complete (assistant, widget, ret);
@@ -390,8 +386,7 @@ gcm_prefs_calib_kind_treeview_clicked_cb (GtkTreeSelection *selection,
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
-  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
-                                                     "assistant_calib"));
+  assistant = GTK_ASSISTANT (prefs->priv->assistant_calib);
   widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                                "box_calib_kind"));
   gtk_assistant_set_page_complete (assistant, widget, ret);
@@ -419,8 +414,7 @@ gcm_prefs_calib_quality_treeview_clicked_cb (GtkTreeSelection *selection,
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
-  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
-                                                     "assistant_calib"));
+  assistant = GTK_ASSISTANT (prefs->priv->assistant_calib);
   widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                                "box_calib_quality"));
   gtk_assistant_set_page_complete (assistant, widget, ret);
@@ -521,8 +515,7 @@ gcm_prefs_calib_sensor_treeview_clicked_cb (GtkTreeSelection *selection,
 
   /* check to see if anything is selected */
   ret = gtk_tree_selection_get_selected (selection, &model, &iter);
-  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
-                                                     "assistant_calib"));
+  assistant = GTK_ASSISTANT (prefs->priv->assistant_calib);
   widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                                "box_calib_sensor"));
   gtk_assistant_set_page_complete (assistant, widget, ret);
@@ -593,8 +586,7 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
   //FIXME?
 
   /* show ui */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "assistant_calib"));
+  widget = GTK_WIDGET (priv->assistant_calib);
   gtk_window_set_transient_for (GTK_WINDOW (widget),
                                 GTK_WINDOW (priv->main_window));
   gtk_widget_show (widget);
@@ -609,8 +601,7 @@ gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
   GtkWidget *page;
   const gchar *value;
 
-  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
-                                                     "assistant_calib"));
+  assistant = GTK_ASSISTANT (prefs->priv->assistant_calib);
   page = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                              "box_calib_title"));
   value = gtk_entry_get_text (GTK_ENTRY (widget));
@@ -2118,6 +2109,7 @@ cc_color_panel_dispose (GObject *object)
   g_clear_object (&priv->list_box_size);
   g_clear_pointer (&priv->sensors, g_ptr_array_unref);
   g_clear_pointer (&priv->list_box_filter, g_free);
+  g_clear_pointer (&priv->assistant_calib, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
 }
@@ -2362,6 +2354,7 @@ cc_color_panel_init (CcColorPanel *prefs)
   g_signal_connect (widget, "prepare",
                     G_CALLBACK (gcm_prefs_calib_prepare_cb),
                     prefs);
+  priv->assistant_calib = widget;
 
   /* setup the calibration helper ::TreeView */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
