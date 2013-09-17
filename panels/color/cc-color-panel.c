@@ -53,6 +53,7 @@ struct _CcColorPanelPrivate
   GSettings     *settings_colord;
   GtkBuilder    *builder;
   GtkWidget     *assistant_calib;
+  GtkWidget     *dialog_assign;
   GtkWidget     *main_window;
   CcColorCalibrate *calibrate;
   GtkListBox    *list_box;
@@ -213,8 +214,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* create new dialog */
-  window = GTK_WINDOW(gtk_builder_get_object (priv->builder,
-                                              "dialog_assign"));
+  window = GTK_WINDOW (priv->dialog_assign);
   /* TRANSLATORS: an ICC profile is a file containing colorspace data */
   dialog = gtk_file_chooser_dialog_new (_("Select ICC Profile File"), window,
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -1024,8 +1024,7 @@ gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
   gtk_widget_set_sensitive (widget, FALSE);
 
   /* show the dialog */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_assign"));
+  widget = GTK_WIDGET (priv->dialog_assign);
   gtk_widget_show (widget);
   gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (priv->main_window));
   if (profiles != NULL)
@@ -1194,9 +1193,7 @@ static void
 gcm_prefs_button_assign_cancel_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
   CcColorPanelPrivate *priv = prefs->priv;
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_assign"));
-  gtk_widget_hide (widget);
+  gtk_widget_hide (priv->dialog_assign);
 }
 
 static void
@@ -1211,8 +1208,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* hide window */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_assign"));
+  widget = GTK_WIDGET (priv->dialog_assign);
   gtk_widget_hide (widget);
 
   /* get the selected profile */
@@ -1486,8 +1482,7 @@ gcm_prefs_button_assign_import_cb (GtkWidget *widget,
   if (file == NULL)
     {
       g_warning ("failed to get ICC file");
-      widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                   "dialog_assign"));
+      widget = GTK_WIDGET (priv->dialog_assign);
       gtk_widget_hide (widget);
       goto out;
     }
@@ -2110,6 +2105,7 @@ cc_color_panel_dispose (GObject *object)
   g_clear_pointer (&priv->sensors, g_ptr_array_unref);
   g_clear_pointer (&priv->list_box_filter, g_free);
   g_clear_pointer (&priv->assistant_calib, gtk_widget_destroy);
+  g_clear_pointer (&priv->dialog_assign, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
 }
@@ -2321,6 +2317,8 @@ cc_color_panel_init (CcColorPanel *prefs)
                                                "dialog_assign"));
   g_signal_connect (widget, "delete-event",
                     G_CALLBACK (gcm_prefs_profile_delete_event_cb), prefs);
+  priv->dialog_assign = widget;
+
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "button_assign_cancel"));
   g_signal_connect (widget, "clicked",
