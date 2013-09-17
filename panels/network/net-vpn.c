@@ -526,6 +526,8 @@ net_vpn_finalize (GObject *object)
         g_object_unref (priv->connection);
         g_free (priv->service_type);
 
+        g_clear_object (&priv->builder);
+
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);
 }
 
