@@ -918,10 +918,6 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                                            WID ("remote-control-box"),
                                            NULL);
 
-  cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-switch"),
-                                           WID ("remote-control-grid"),
-                                           NULL);
-
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-require-password-switch"),
                                            WID ("password-grid"),
                                            NULL);
