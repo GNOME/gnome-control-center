@@ -359,7 +359,7 @@ cc_mouse_properties_init (CcMouseProperties *object)
 
 	d->changing_scroll = FALSE;
 
-	gtk_widget_reparent (WID ("prefs_widget"), GTK_WIDGET (object));
+	gtk_container_add (GTK_CONTAINER (object), WID ("prefs_widget"));
 
 	create_dialog (d);
 	setup_dialog (d);

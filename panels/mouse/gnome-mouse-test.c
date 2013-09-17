@@ -374,7 +374,7 @@ cc_mouse_test_init (CcMouseTest *object)
 	d->button_drawing_area_timeout_id = 0;
 	d->scroll_image_timeout_id = 0;
 
-	gtk_widget_reparent (WID ("test_widget"), GTK_WIDGET (object));
+	gtk_container_add (GTK_CONTAINER (object), WID ("test_widget"));
 
 	setup_dialog (d);
 }
