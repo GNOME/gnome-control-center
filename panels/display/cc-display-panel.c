@@ -19,7 +19,6 @@
  */
 
 #include "cc-display-panel.h"
-#include "cc-display-resources.h"
 
 #include <gtk/gtk.h>
 #include "scrollarea.h"
@@ -2269,8 +2268,6 @@ cc_display_panel_init (CcDisplayPanel *self)
   GtkWidget *frame, *vbox;
   GError *error = NULL;
   GSettings *settings;
-
-  g_resources_register (cc_display_get_resource ());
 
   priv = self->priv = DISPLAY_PANEL_PRIVATE (self);
 

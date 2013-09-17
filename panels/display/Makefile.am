@@ -3,12 +3,7 @@ cappletname = display
 
 noinst_LTLIBRARIES = libdisplay.la
 
-BUILT_SOURCES =			\
-	cc-display-resources.c	\
-	cc-display-resources.h
-
 libdisplay_la_SOURCES =		\
-	$(BUILT_SOURCES)	\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
 	cc-rr-labeler.c		\
@@ -17,12 +12,6 @@ libdisplay_la_SOURCES =		\
 	scrollarea.h
 
 libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
-
-resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/display.gresource.xml)
-cc-display-resources.c: display.gresource.xml $(resource_files)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_display $<
-cc-display-resources.h: display.gresource.xml $(resource_files)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_display $<
 
 # You will need a recent intltool or the patch from this bug
 # http://bugzilla.gnome.org/show_bug.cgi?id=462312
@@ -49,8 +38,7 @@ INCLUDES   = $(PANEL_CFLAGS) \
 	     $(DISPLAY_PANEL_CFLAGS) \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
-CLEANFILES = $(Desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) display.gresource.xml
+CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
 
 if MAINTAINER_MODE
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
