@@ -240,6 +240,23 @@ clock_settings_changed_cb (GSettings       *settings,
   g_signal_handlers_unblock_by_func (format_combo, change_clock_settings, panel);
 }
 
+static void
+am_pm_stack_visible_child_changed_cb (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  AtkObject *am_pm_button_accessible;
+  GtkWidget *visible_label;
+  const gchar *visible_text;
+
+  am_pm_button_accessible = gtk_widget_get_accessible (W ("am_pm_button"));
+  if (am_pm_button_accessible == NULL)
+    return;
+
+  visible_label = gtk_stack_get_visible_child (GTK_STACK (W ("am_pm_stack")));
+  visible_text = gtk_label_get_text (GTK_LABEL (visible_label));
+  atk_object_set_name (am_pm_button_accessible, visible_text);
+}
+
 static gboolean
 am_pm_button_clicked (GtkWidget *button,
                       CcDateTimePanel *self)
@@ -1114,6 +1131,9 @@ setup_am_pm_button (CcDateTimePanel *self)
   gtk_container_add (GTK_CONTAINER (stack), priv->am_label);
   gtk_container_add (GTK_CONTAINER (stack), priv->pm_label);
   gtk_widget_show_all (stack);
+  g_signal_connect_swapped (stack, "notify::visible-child",
+                            G_CALLBACK (am_pm_stack_visible_child_changed_cb), self);
+  am_pm_stack_visible_child_changed_cb (self);
 
   am_pm_button = W ("am_pm_button");
   g_signal_connect (am_pm_button, "clicked",
