@@ -199,11 +199,12 @@ setup_dialog (GtkBuilder *dialog)
 	mouse_present = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse_vbox"), mouse_present);
 
-	g_signal_connect (WID ("pointer_speed_scale"), "value-changed",
-			  G_CALLBACK (pointer_speed_scale_event), dialog);
 	g_settings_bind (mouse_settings, "motion-acceleration",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("pointer_speed_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
+
+	g_signal_connect (WID ("pointer_speed_scale"), "value-changed",
+			  G_CALLBACK (pointer_speed_scale_event), dialog);
 
 	/* Trackpad page */
 	touchpad_present = touchpad_is_present ();
