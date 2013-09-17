@@ -138,7 +138,7 @@ cc_keyboard_panel_constructor (GType                  gtype,
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
                                                  "keyboard_notebook");
 
-  gtk_widget_reparent (widget, (GtkWidget *) self);
+  gtk_container_add (GTK_CONTAINER (self), widget);
 
   return obj;
 }
