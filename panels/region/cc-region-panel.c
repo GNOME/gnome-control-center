@@ -1790,5 +1790,5 @@ cc_region_panel_init (CcRegionPanel *self)
         setup_input_section (self);
 
         priv->overlay = GTK_WIDGET (gtk_builder_get_object (priv->builder, "overlay"));
-	gtk_widget_reparent (priv->overlay, GTK_WIDGET (self));
+	gtk_container_add (GTK_CONTAINER (self), priv->overlay);
 }
