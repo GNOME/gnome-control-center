@@ -2240,10 +2240,7 @@ cc_power_panel_init (CcPowerPanel *self)
                     G_CALLBACK (on_content_size_changed), NULL);
   gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (self), box);
-  g_object_ref (widget);
-  gtk_widget_unparent (widget);
   gtk_container_add (GTK_CONTAINER (box), widget);
-  g_object_unref (widget);
 
   priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (box));
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (widget), priv->focus_adjustment);
