@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-31 22:18+0000\n"
-"PO-Revision-Date: 2013-04-13 21:01+0900\n"
+"POT-Creation-Date: 2013-09-18 03:31+0000\n"
+"PO-Revision-Date: 2013-09-18 19:44+0900\n"
 "Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -28,93 +28,132 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../panels/background/background.ui.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "背景"
+
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:2
+#: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
 msgstr "時間の経過とともに画像が変化します"
 
+#: ../panels/background/background.ui.h:4
+msgid "Lock Screen"
+msgstr "ロック画面"
+
 # FIXME
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Tile"
 msgstr "並べる"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "ズーム"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Center"
 msgstr "中央"
 
 # FIXME
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Scale"
 msgstr "サイズ調整"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Fill"
 msgstr "引き伸ばす"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Span"
 msgstr "スパン(複数に跨げる)"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:199
+#: ../panels/background/cc-background-chooser-dialog.c:293
 msgid "Select Background"
 msgstr "背景の選択"
 
-#: ../panels/background/cc-background-chooser-dialog.c:218
+#: ../panels/background/cc-background-chooser-dialog.c:312
 msgid "Wallpapers"
 msgstr "壁紙"
 
-#: ../panels/background/cc-background-chooser-dialog.c:227
+#: ../panels/background/cc-background-chooser-dialog.c:321
 msgid "Pictures"
 msgstr "画像"
 
-#: ../panels/background/cc-background-chooser-dialog.c:235
+#: ../panels/background/cc-background-chooser-dialog.c:329
 msgid "Colors"
 msgstr "色"
 
-#: ../panels/background/cc-background-chooser-dialog.c:244
+#: ../panels/background/cc-background-chooser-dialog.c:338
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#. translators: No pictures were found
+#: ../panels/background/cc-background-chooser-dialog.c:393
+msgid "No Pictures Found"
+msgstr "画像が見つかりません"
+
+#. translators: %s here is the name of the Pictures directory, the string should be translated in
+#. * the context "You can add images to your Pictures folder and they will show up here"
+#: ../panels/background/cc-background-chooser-dialog.c:408
+#, c-format
+msgid "You can add images to your %s folder and they will show up here"
+msgstr "画像を %s フォルダーに追加すると、その画像がここに表示されます。"
+
+#: ../panels/background/cc-background-chooser-dialog.c:436
+#: ../panels/bluetooth/cc-bluetooth-panel.c:631
+#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/display/cc-display-panel.c:1488
+#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/network/connection-editor/vpn-helpers.c:245
+#: ../panels/network/connection-editor/vpn-helpers.c:374
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
+#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
+#: ../panels/search/cc-search-locations-dialog.c:682
+#: ../panels/sharing/cc-sharing-panel.c:421
+#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-photo-dialog.c:96
+#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-user-panel.c:508
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
+#: ../panels/background/cc-background-chooser-dialog.c:437
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "選択"
 
-#: ../panels/background/cc-background-item.c:150
+#: ../panels/background/cc-background-item.c:149
 msgid "multiple sizes"
 msgstr "複数のサイズ"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:154
+#: ../panels/background/cc-background-item.c:153
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:283
+#: ../panels/background/cc-background-item.c:281
 msgid "No Desktop Background"
 msgstr "デスクトップの背景ではありません"
 
-#: ../panels/background/cc-background-panel.c:453
+#: ../panels/background/cc-background-panel.c:492
 msgid "Current background"
 msgstr "現在の背景"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "背景"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -155,15 +194,15 @@ msgstr "ページ2"
 msgid "Paired"
 msgstr "ペアリング済"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:789
+#: ../panels/bluetooth/bluetooth.ui.h:7
 msgid "Type"
 msgstr "種類"
 
 #: ../panels/bluetooth/bluetooth.ui.h:8
-#: ../panels/network/connection-editor/ce-page-ip4.c:189
-#: ../panels/network/connection-editor/ce-page-ip4.c:441
-#: ../panels/network/connection-editor/ce-page-ip6.c:191
-#: ../panels/network/connection-editor/ce-page-ip6.c:445
+#: ../panels/network/connection-editor/ce-page-ip4.c:194
+#: ../panels/network/connection-editor/ce-page-ip4.c:456
+#: ../panels/network/connection-editor/ce-page-ip6.c:196
+#: ../panels/network/connection-editor/ce-page-ip6.c:460
 msgid "Address"
 msgstr "アドレス"
 
@@ -172,7 +211,6 @@ msgid "Mouse & Touchpad Settings"
 msgstr "マウスとタッチパッドの設定"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
-#: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "サウンドの設定"
 
@@ -184,45 +222,50 @@ msgstr "キーボードの設定"
 msgid "Send Files…"
 msgstr "ファイルを送信…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:357
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "はい"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/bluetooth/cc-bluetooth-panel.c:357
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "いいえ"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:469
+#: ../panels/bluetooth/cc-bluetooth-panel.c:470
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth は無効になっています"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:474
+#: ../panels/bluetooth/cc-bluetooth-panel.c:475
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth はハードウェア側のスイッチで無効にされています"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:478
+#: ../panels/bluetooth/cc-bluetooth-panel.c:479
 msgid "No Bluetooth adapters found"
 msgstr "Bluetooth のアダプターが見つかりません"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:577
+#: ../panels/bluetooth/cc-bluetooth-panel.c:578
 msgid "Visibility"
 msgstr "検出可能にする"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:581
+#: ../panels/bluetooth/cc-bluetooth-panel.c:582
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "“%s” を検出可能にする"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:625
+#: ../panels/bluetooth/cc-bluetooth-panel.c:626
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "デバイスの一覧から '%s' を削除しますか?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:627
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "デバイスを削除すると、次回利用時には再度設定が必要になります。"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:632
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+msgid "_Remove"
+msgstr "削除(_R)"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth"
@@ -235,28 +278,28 @@ msgstr "Bluetooth のオン/オフやデバイスへの接続を行います。"
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:360
 msgid "Place your calibration device over the square and press 'Start'"
-msgstr ""
+msgstr "キャリブレーション装置を四角形に合わせて 'Start' を押してください"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
 #: ../panels/color/cc-color-calibrate.c:366
 msgid "Move your calibration device to the calibrate position and press 'Continue'"
-msgstr ""
+msgstr "キャリブレーション装置を測定位置に移動して '続ける' を押してください"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
 #: ../panels/color/cc-color-calibrate.c:372
 msgid "Move your calibration device to the surface position and press 'Continue'"
-msgstr ""
+msgstr "キャリブレーション装置を表面の位置に移動して '続ける' を押してください"
 
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
 #: ../panels/color/cc-color-calibrate.c:378
 msgid "Shut the laptop lid"
-msgstr ""
+msgstr "ノート PC を閉じてください"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
@@ -268,19 +311,19 @@ msgstr "回復できないエラーが発生しました。"
 #. * installed, which should only affect insane distros
 #: ../panels/color/cc-color-calibrate.c:414
 msgid "Tools required for calibration are not installed."
-msgstr ""
+msgstr "キャリブレーションに必要なツールがインストールされていません。"
 
 #. TRANSLATORS: The profile failed for some reason
 #: ../panels/color/cc-color-calibrate.c:420
 msgid "The profile could not be generated."
-msgstr ""
+msgstr "プロファイルを生成できません。"
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
 #: ../panels/color/cc-color-calibrate.c:426
 msgid "The target whitepoint was not obtainable."
-msgstr ""
+msgstr "対象の白色点は取得できません。"
 
 #. TRANSLATORS: the display calibration process is finished
 #: ../panels/color/cc-color-calibrate.c:466
@@ -296,14 +339,14 @@ msgstr "キャリブレーションに失敗!"
 #. TRANSLATORS: The user can now remove the sensor from the screen
 #: ../panels/color/cc-color-calibrate.c:481
 msgid "You can remove the calibration device."
-msgstr ""
+msgstr "キャリブレーション装置を取り外せます。"
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
 #: ../panels/color/cc-color-calibrate.c:552
 msgid "Do not disturb the calibration device while in progress"
-msgstr ""
+msgstr "測定中はキャリブレーション装置に触らないでください"
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
@@ -364,82 +407,111 @@ msgstr "未較正"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:133
+#: ../panels/color/cc-color-panel.c:135
 msgid "Default: "
 msgstr "デフォルト: "
 
 # ref. gnome-color-manager
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:141
+#: ../panels/color/cc-color-panel.c:143
 msgid "Colorspace: "
 msgstr "色空間:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:148
+#: ../panels/color/cc-color-panel.c:150
 msgid "Test profile: "
 msgstr "テスト用プロファイル: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:216
+#: ../panels/color/cc-color-panel.c:218
 msgid "Select ICC Profile File"
 msgstr "ICC プロファイルの選択"
 
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:221
 msgid "_Import"
 msgstr "インポート(_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:230
+#: ../panels/color/cc-color-panel.c:232
 msgid "Supported ICC profiles"
 msgstr "サポートする ICC プロファイル"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:237
+#: ../panels/color/cc-color-panel.c:239
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "すべてのファイル"
 
-#: ../panels/color/cc-color-panel.c:581
+#: ../panels/color/cc-color-panel.c:586
 msgid "Screen"
 msgstr "画面"
 
+#. TRANSLATORS: this is when the upload of the profile failed
+#: ../panels/color/cc-color-panel.c:912
+#, c-format
+msgid "Failed to upload file: %s"
+msgstr "ファイルのアップロードに失敗しました: %s"
+
+#. TRANSLATORS: these are instructions on how to recover
+#. * the ICC profile on the native operating system and are
+#. * only shown when the user uses a LiveCD to calibrate
+#: ../panels/color/cc-color-panel.c:926
+msgid "The profile has been uploaded to:"
+msgstr "プロファイルがアップロードされました:"
+
+#: ../panels/color/cc-color-panel.c:928
+msgid "Write down this URL."
+msgstr "この URL をメモしてください。"
+
+#: ../panels/color/cc-color-panel.c:929
+msgid "Restart this computer and boot your normal operating system."
+msgstr "このコンピューターを再起動して通常のオペレーティングシステムを起動してください。"
+
+#: ../panels/color/cc-color-panel.c:930
+msgid "Type the URL into your browser to download and install the profile."
+msgstr "ブラウザーで URL を入力し、プロファイルをダウンロードしてインストールしてください。"
+
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:853
+#: ../panels/color/cc-color-panel.c:964
 msgid "Save Profile"
 msgstr "プロファイルの保存"
 
+#: ../panels/color/cc-color-panel.c:968
+#: ../panels/network/connection-editor/vpn-helpers.c:375
+msgid "_Save"
+msgstr "保存(_S)"
+
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1214
+#: ../panels/color/cc-color-panel.c:1328
 msgid "Create a color profile for the selected device"
 msgstr "選択したデバイスのカラープロファイルを作成"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1229 ../panels/color/cc-color-panel.c:1253
+#: ../panels/color/cc-color-panel.c:1343 ../panels/color/cc-color-panel.c:1367
 msgid "The measuring instrument is not detected. Please check it is turned on and correctly connected."
 msgstr "計測器が検出できません。電源が入っていること、正しく接続されていることを確認してください。"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1263
+#: ../panels/color/cc-color-panel.c:1377
 msgid "The measuring instrument does not support printer profiling."
 msgstr "計測器がプリンターのプロファイルをサポートしていません。"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1274
+#: ../panels/color/cc-color-panel.c:1388
 msgid "The device type is not currently supported."
 msgstr "このデバイスの種類は現在サポートされていません。"
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
-#: ../panels/color/cc-color-profile.c:101
-#, fuzzy
+#: ../panels/color/cc-color-profile.c:102
 msgid "Standard Space"
-msgstr "標準"
+msgstr "標準の色空間"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
-#: ../panels/color/cc-color-profile.c:107
+#: ../panels/color/cc-color-profile.c:108
 msgid "Test Profile"
 msgstr "テスト用プロファイル"
 
@@ -447,7 +519,7 @@ msgstr "テスト用プロファイル"
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
-#: ../panels/color/cc-color-profile.c:115
+#: ../panels/color/cc-color-profile.c:116
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "自動"
@@ -455,13 +527,13 @@ msgstr "自動"
 #. TRANSLATORS: the profile quality - low quality profiles take
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
-#: ../panels/color/cc-color-profile.c:125
+#: ../panels/color/cc-color-profile.c:126
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "低品質"
 
 #. TRANSLATORS: the profile quality
-#: ../panels/color/cc-color-profile.c:130
+#: ../panels/color/cc-color-profile.c:131
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "中品質"
@@ -469,55 +541,53 @@ msgstr "中品質"
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
-#: ../panels/color/cc-color-profile.c:137
+#: ../panels/color/cc-color-profile.c:138
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "高品質"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:154
+#: ../panels/color/cc-color-profile.c:155
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "デフォルト RGB"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:161
+#: ../panels/color/cc-color-profile.c:162
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "デフォルト CMYK"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:168
+#: ../panels/color/cc-color-profile.c:169
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "デフォルトグレー"
 
-#: ../panels/color/cc-color-profile.c:192
+#: ../panels/color/cc-color-profile.c:193
 msgid "Vendor supplied factory calibration data"
-msgstr ""
+msgstr "ベンダーが提供している工場でのキャリブレーションデータ"
 
-#: ../panels/color/cc-color-profile.c:201
+#: ../panels/color/cc-color-profile.c:202
 msgid "Full-screen display correction not possible with this profile"
-msgstr ""
+msgstr "このプロファイルでは全画面表示での補正はできません"
 
-#: ../panels/color/cc-color-profile.c:223
-#, fuzzy
+#: ../panels/color/cc-color-profile.c:224
 msgid "This profile may no longer be accurate"
-msgstr "このデバイスには、すでに正確でない可能性のある古いプロファイルがあります。"
+msgstr "このプロファイルはもう正確ではなくなっているかもしれません。"
 
 #: ../panels/color/color-calibrate.ui.h:1
-#, fuzzy
 msgid "Display Calibration"
-msgstr "キャリブレーション"
+msgstr "キャリブレーションの表示"
 
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
+#: ../panels/user-accounts/um-account-dialog.c:1470
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -536,29 +606,31 @@ msgstr "再開"
 msgid "Done"
 msgstr "完了"
 
+#. Timeout parameters
+#. 5000 = 5 sec
+#. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
 msgid "Screen Calibration"
 msgstr "画面位置調整"
 
 #: ../panels/color/color.ui.h:2
 msgid "Calibration will produce a profile that you can use to color manage your screen. The longer you spend on calibration, the better the quality of the color profile."
-msgstr ""
+msgstr "キャリブレーションは画面の色管理に利用できるプロファイルを作成します。キャリブレーションに時間をかけるほど色プロファイルの品質は向上します。"
 
 #: ../panels/color/color.ui.h:3
 msgid "You will not be able to use your computer while calibration takes place."
-msgstr ""
+msgstr "キャリブレーション処理中はコンピューターを使えなくなります。"
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
-#, fuzzy
 msgid "Quality"
-msgstr "画質"
+msgstr "品質"
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:7
 msgid "Approximate Time"
-msgstr ""
+msgstr "予測時間"
 
 #: ../panels/color/color.ui.h:8
 msgid "Calibration Quality"
@@ -570,11 +642,11 @@ msgstr "キャリブレーションに使用するセンサーデバイスを選
 
 #: ../panels/color/color.ui.h:10
 msgid "Calibration Device"
-msgstr "キャリブレーションデバイス"
+msgstr "キャリブレーション装置"
 
 #: ../panels/color/color.ui.h:11
 msgid "Select the type of display that is connected."
-msgstr ""
+msgstr "接続しているディスプレイの種類を選択してください。"
 
 #: ../panels/color/color.ui.h:12
 msgid "Display Type"
@@ -582,19 +654,19 @@ msgstr "ディスプレイの種類"
 
 #: ../panels/color/color.ui.h:13
 msgid "Select a display target white point. Most displays should be calibrated to a D65 illuminant."
-msgstr ""
+msgstr "表示対象の白色点を選択してください。ほとんどのディスプレイが D65 光源に対してキャリブレーションを行えばいいはずです。"
 
 #: ../panels/color/color.ui.h:14
 msgid "Profile Whitepoint"
-msgstr ""
+msgstr "白色点のプロファイル作成"
 
 #: ../panels/color/color.ui.h:15
 msgid "Please set the display to a brightness that is typical for you. Color management will be most accurate at this brightness level."
-msgstr ""
+msgstr "ディスプレイを標準的に使っている輝度に設定してください。色管理はこの輝度で最も正確になります。 "
 
 #: ../panels/color/color.ui.h:16
 msgid "Alternatively, you can use the brightness level used with one of the other profiles for this device."
-msgstr ""
+msgstr "他のプロファイルで使っている輝度をこのデバイス用に利用することもできます。"
 
 #: ../panels/color/color.ui.h:17
 msgid "Display Brightness"
@@ -602,7 +674,7 @@ msgstr "ディスプレイの明るさ"
 
 #: ../panels/color/color.ui.h:18
 msgid "You can use a color profile on different computers, or even create profiles for different lighting conditions."
-msgstr ""
+msgstr "異なるコンピューターの色プロファイルを利用したり、異なる照明条件のプロファイルを作成することもできます。"
 
 #: ../panels/color/color.ui.h:19
 msgid "Profile Name:"
@@ -617,168 +689,199 @@ msgid "Profile successfully created!"
 msgstr "プロファイルが正常に作成されました!"
 
 #: ../panels/color/color.ui.h:22
-msgid "Export"
-msgstr "エクスポート"
+msgid "Copy profile"
+msgstr "プロファイルの複製"
 
 #: ../panels/color/color.ui.h:23
-msgid "You may find these instructions on how to use the profile on <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows\">Microsoft Windows</a> systems useful."
-msgstr ""
+msgid "Requires writable media"
+msgstr "書き込み可能メディアが必要です"
 
 #: ../panels/color/color.ui.h:24
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+msgid "Upload profile"
+msgstr "プロファイルのアップロード"
+
+#: ../panels/color/color.ui.h:25
+msgid "Requires Internet connection"
+msgstr "インターネット接続が必要です"
+
+#: ../panels/color/color.ui.h:26
+msgid "You may find these instructions on how to use the profile on <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows\">Microsoft Windows</a> systems useful."
+msgstr "<a href=\"linux\">GNU/Linux</a> や <a href=\"osx\">Apple OS X</a>、<a href=\"windows\">Microsoft Windows</a> システムでのプロファイルの利用方法が役立つかもしません。"
+
+#: ../panels/color/color.ui.h:27
+#: ../panels/user-accounts/um-fingerprint-dialog.c:742
 msgid "Summary"
 msgstr "概要"
 
-#: ../panels/color/color.ui.h:25
+#: ../panels/color/color.ui.h:28
 msgid "Import File…"
 msgstr "ファイルを読み込む…"
 
-#: ../panels/color/color.ui.h:26
+#: ../panels/color/color.ui.h:29
 msgid "Problems detected. The profile may not work correctly. <a href=\"\">Show details.</a>"
-msgstr "問題を検出。プロファイルは正しく動作しない可能性があります。<a href=\"\">詳細を表示する。</a>"
+msgstr "問題が検出されました。プロファイルは正しく動作しない可能性があります。<a href=\"\">詳細を表示する。</a>"
 
-#: ../panels/color/color.ui.h:27
+#: ../panels/color/color.ui.h:30
 msgid "Device type:"
 msgstr "デバイスの種類:"
 
-#: ../panels/color/color.ui.h:28
+#: ../panels/color/color.ui.h:31
 msgid "Manufacturer:"
 msgstr "製造元:"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:32
 msgid "Model:"
 msgstr "モデル:"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:33
 msgid "Image files can be dragged on this window to auto-complete the above fields."
 msgstr "画像ファイルをこのウィンドウにドラッグすることで、上のフィールドを自動補完できます。"
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:34
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 msgid "Color"
 msgstr "色"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:35
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr "カラーマネージメントを行うには、各デバイスの最新のカラープロファイルが必要になります。"
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:36
 msgid "Learn more"
 msgstr "もっと詳しく"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:37
 msgid "Learn more about color management"
 msgstr "カラーマネージメントについてもっと詳しく知る"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:38
 msgid "Set for all users"
 msgstr "全ユーザー用に設定"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:39
 msgid "Set this profile for all users on this computer"
 msgstr "コンピューターのすべてのユーザーでプロファイルを利用"
 
-#: ../panels/color/color.ui.h:37
+#: ../panels/color/color.ui.h:40
 msgid "Enable"
 msgstr "有効にする"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:41
 msgid "Add profile"
 msgstr "プロファイルの追加"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:42
 #: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Calibrate…"
 msgstr "キャリブレート…"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:43
 msgid "Calibrate the device"
 msgstr "デバイスのキャリブレート"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:44
 msgid "Remove profile"
 msgstr "プロファイルの削除"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:45
 msgid "View details"
 msgstr "詳細を表示"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:46
 msgid "Unable to detect any devices that can be color managed"
 msgstr "カラーマネジメント対象のデバイスを検出できません"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:47
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:48
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:49
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:50
 msgid "Projector"
 msgstr "プロジェクター"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:51
 msgid "Plasma"
 msgstr "プラズマ"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:52
+msgid "LCD (CCFL backlight)"
+msgstr "LCD (CCFL バックライト)"
+
+#: ../panels/color/color.ui.h:53
+msgid "LCD (RGB LED backlight)"
+msgstr "LCD (RGB LED バックライト)"
+
+#: ../panels/color/color.ui.h:54
+msgid "LCD (white LED backlight)"
+msgstr "LCD (白色 LED バックライト)"
+
+#: ../panels/color/color.ui.h:55
+msgid "Wide gamut LCD (CCFL backlight)"
+msgstr "広色域 LCD (CCFL バックライト)"
+
+#: ../panels/color/color.ui.h:56
+msgid "Wide gamut LCD (RGB LED backlight)"
+msgstr "広色域 LCD (RGB LED backlight)"
+
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "高"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:58
 msgid "40 minutes"
 msgstr "40 分"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "中"
 
-#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 分"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:61
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "低"
 
-#: ../panels/color/color.ui.h:54 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:62 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 分"
 
-#: ../panels/color/color.ui.h:55
-#, fuzzy
+#: ../panels/color/color.ui.h:63
 msgid "Native to display"
-msgstr "表示するパネル"
+msgstr "ディスプレイ本来の設定"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:64
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (印刷および出版)"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:65
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:66
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (写真とグラフィック)"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:67
 msgid "D75"
 msgstr "D75"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
 msgid "Calibrate the color of your devices, such as displays, cameras or printers"
-msgstr ""
+msgstr "ディスプレイやカメラ、プリンター等のデバイスのキャリブレート"
 
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
@@ -786,249 +889,192 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Profile;Calibrate;Printer;Display;色;ICC;プロファイル;キャリブレーション;プリンター;ディスプレイ;"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:677
+#: ../panels/common/cc-common-language.c:685
 msgid "United States"
 msgstr "US"
 
-#: ../panels/common/cc-common-language.c:678
+#: ../panels/common/cc-common-language.c:686
 msgid "Germany"
 msgstr "ドイツ"
 
-#: ../panels/common/cc-common-language.c:679
+#: ../panels/common/cc-common-language.c:687
 msgid "France"
 msgstr "フランス"
 
-#: ../panels/common/cc-common-language.c:680
+#: ../panels/common/cc-common-language.c:688
 msgid "Spain"
 msgstr "スペイン"
 
-#: ../panels/common/cc-common-language.c:681
+#: ../panels/common/cc-common-language.c:689
 msgid "China"
 msgstr "中国"
 
-#: ../panels/common/cc-common-language.c:747
+#: ../panels/common/cc-common-language.c:759
 msgid "Other…"
 msgstr "その他…"
 
-#: ../panels/common/cc-language-chooser.c:176
-#: ../panels/region/cc-format-chooser.c:266
+#: ../panels/common/cc-language-chooser.c:123
+#: ../panels/region/cc-format-chooser.c:268
 #: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "さらに…"
 
-#: ../panels/common/cc-language-chooser.c:193
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "言語が見つかりません"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/common/cc-util.c:28 ../panels/keyboard/cc-keyboard-option.c:276
-#: ../panels/keyboard/cc-keyboard-option.c:408
-#: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "無効"
-
-#: ../panels/common/cc-util.c:29
-msgid "Left Shift"
-msgstr "左Shift"
-
-#: ../panels/common/cc-util.c:30
-msgid "Left Alt"
-msgstr "左Alt"
-
-#: ../panels/common/cc-util.c:31
-msgid "Left Ctrl"
-msgstr "左Ctrl"
-
-#: ../panels/common/cc-util.c:32
-msgid "Right Shift"
-msgstr "右Shift"
-
-#: ../panels/common/cc-util.c:33
-msgid "Right Alt"
-msgstr "右Alt"
-
-#: ../panels/common/cc-util.c:34
-msgid "Right Ctrl"
-msgstr "右Ctrl"
-
-#: ../panels/common/cc-util.c:35
-msgid "Left Alt+Shift"
-msgstr "左Alt+左Shift"
-
-#: ../panels/common/cc-util.c:36
-msgid "Right Alt+Shift"
-msgstr "右Alt+右Shift"
-
-#: ../panels/common/cc-util.c:37
-msgid "Left Ctrl+Shift"
-msgstr "左Ctrl+左Shift"
-
-#: ../panels/common/cc-util.c:38
-msgid "Right Ctrl+Shift"
-msgstr "右Ctrl+右Shift"
-
-#: ../panels/common/cc-util.c:39
-msgid "Left+Right Shift"
-msgstr "左Shift+右Shift"
-
-#: ../panels/common/cc-util.c:40 ../panels/region/input-options.ui.h:11
-msgid "Left+Right Alt"
-msgstr "左Alt+右Alt"
-
-#: ../panels/common/cc-util.c:41
-msgid "Left+Right Ctrl"
-msgstr "左Ctrl+右Ctrl"
-
-#: ../panels/common/cc-util.c:42
-msgid "Alt+Shift"
-msgstr "Alt+Shift"
-
-#: ../panels/common/cc-util.c:43
-msgid "Ctrl+Shift"
-msgstr "Ctrl+Shift"
-
-#: ../panels/common/cc-util.c:44
-msgid "Alt+Ctrl"
-msgstr "Alt+Ctrl"
-
-#: ../panels/common/cc-util.c:45
-msgid "Caps"
-msgstr "Caps"
-
-#: ../panels/common/cc-util.c:46
-msgid "Shift+Caps"
-msgstr "Shift+Caps"
-
-#: ../panels/common/cc-util.c:47
-msgid "Alt+Caps"
-msgstr "Alt+Caps"
-
-#: ../panels/common/cc-util.c:48
-msgid "Ctrl+Caps"
-msgstr "Ctrl+Caps"
 
 #: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
 msgid "Language"
 msgstr "言語"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "完了(_D)"
 
+#. Translators: This is the full date and time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:352
+msgid "%e %B %Y, %l:%M %p"
+msgstr "%Y年%B%d日 %p%I:%M"
+
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:357
+msgid "%e %B %Y, %R"
+msgstr "%Y年%B%d日 %R"
+
+#. Translators: UTC here means the Coordinated Universal Time.
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:573
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
+
+#. Translators: This is the time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:578
+msgid "%l:%M %p"
+msgstr "%p%I:%M"
+
+#. Translators: This is the time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:583
+msgid "%R"
+msgstr "%R"
+
 #: ../panels/datetime/datetime.ui.h:1
-msgid "_Region:"
-msgstr "地域(_R):"
-
-#: ../panels/datetime/datetime.ui.h:2
-msgid "_City:"
-msgstr "都市(_C):"
-
-#: ../panels/datetime/datetime.ui.h:3
-msgid "_Network Time"
-msgstr "ネットワーク時刻(_N)"
-
-#. Translator: this is the separator between hours and minutes, like in HH:MM
-#: ../panels/datetime/datetime.ui.h:5
-msgid ":"
-msgstr ":"
-
-#: ../panels/datetime/datetime.ui.h:6
-msgid "Set the time one hour ahead."
-msgstr "時計を 1 時間進める。"
-
-#: ../panels/datetime/datetime.ui.h:7
-msgid "Set the time one hour back."
-msgstr "時計を 1 時間戻す。"
-
-#: ../panels/datetime/datetime.ui.h:8
-msgid "Set the time one minute ahead."
-msgstr "時計を 1 分進める。"
-
-#: ../panels/datetime/datetime.ui.h:9
-msgid "Set the time one minute back."
-msgstr "時計を 1 分戻す。"
-
-#: ../panels/datetime/datetime.ui.h:10
-msgid "Switch between AM and PM."
-msgstr "午前と午後を切り替える。"
-
-#: ../panels/datetime/datetime.ui.h:11
-msgid "Month"
-msgstr "月"
-
-#: ../panels/datetime/datetime.ui.h:12
-msgid "Day"
-msgstr "日"
-
-#: ../panels/datetime/datetime.ui.h:13
-msgid "Year"
-msgstr "年"
-
-#: ../panels/datetime/datetime.ui.h:14
-msgid "24-hour"
-msgstr "24時制表示"
-
-#: ../panels/datetime/datetime.ui.h:15
-msgid "AM/PM"
-msgstr "午前/午後"
-
-#: ../panels/datetime/datetime.ui.h:16
 msgid "January"
 msgstr "1月"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:2
 msgid "February"
 msgstr "2月"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:3
 msgid "March"
 msgstr "3月"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:4
 msgid "April"
 msgstr "4月"
 
-#: ../panels/datetime/datetime.ui.h:20
+#: ../panels/datetime/datetime.ui.h:5
 msgid "May"
 msgstr "5月"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:6
 msgid "June"
 msgstr "6月"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:7
 msgid "July"
 msgstr "7月"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:8
 msgid "August"
 msgstr "8月"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:9
 msgid "September"
 msgstr "9月"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:10
 msgid "October"
 msgstr "10月"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:11
 msgid "November"
 msgstr "11月"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:12
 msgid "December"
 msgstr "12月"
 
+#: ../panels/datetime/datetime.ui.h:13
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date & Time"
 msgstr "日付と時刻"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "Hour"
+msgstr "時"
+
+#. Translator: this is the separator between hours and minutes, like in HH∶MM
+#: ../panels/datetime/datetime.ui.h:16
+msgid "∶"
+msgstr "∶"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "Minute"
+msgstr "分"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Day"
+msgstr "日"
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Month"
+msgstr "月"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Year"
+msgstr "年"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Time Zone"
+msgstr "タイムゾーン"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Search for a city"
+msgstr "都市を検索する"
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "Automatic _Date & Time"
+msgstr "自動日時設定(_D)"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "Requires internet access"
+msgstr "インターネットアクセスが必要です"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Automatic Time _Zone"
+msgstr "自動タイムゾーン設定(_Z)"
+
+#: ../panels/datetime/datetime.ui.h:26
+msgid "Date & _Time"
+msgstr "日付と時刻(_T)"
+
+#: ../panels/datetime/datetime.ui.h:27
+msgid "Time _Zone"
+msgstr "タイムゾーン(_Z)"
+
+#: ../panels/datetime/datetime.ui.h:28
+msgid "Time _Format"
+msgstr "日時書式(_F)"
+
+#: ../panels/datetime/datetime.ui.h:29
+msgid "24-hour"
+msgstr "24時制"
+
+#: ../panels/datetime/datetime.ui.h:30
+msgid "AM / PM"
+msgstr "午前/午後"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
@@ -1047,102 +1093,137 @@ msgstr "システムの時刻と日付の設定を変更"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "時刻と日付の設定を変更するには、認証が必要です。"
 
-#: ../panels/display/cc-display-panel.c:483
-msgctxt "display panel, rotation"
-msgid "Normal"
-msgstr "標準"
+#: ../panels/display/cc-display-panel.c:466
+msgid "Lid Closed"
+msgstr "蓋が閉じています"
 
-#: ../panels/display/cc-display-panel.c:484
-msgctxt "display panel, rotation"
-msgid "Counterclockwise"
-msgstr "反時計回り"
+#. translators: "Mirrored" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:469
+msgid "Mirrored"
+msgstr "ミラー済み"
 
-#: ../panels/display/cc-display-panel.c:485
-msgctxt "display panel, rotation"
-msgid "Clockwise"
-msgstr "時計回り"
-
-#: ../panels/display/cc-display-panel.c:486
-msgctxt "display panel, rotation"
-msgid "180 Degrees"
-msgstr "180度"
-
-#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
-#. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external projector.  Here, "Mirrored" is being
-#. * used as an adjective.  For example, the Spanish translation could be
-#. * "Pantallas en Espejo".
-#.
-#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
-#. Translators:  this is the feature where what you see on your
-#. * laptop's screen is the same as your external projector.
-#. * Here, "Mirrored" is being used as an adjective.  For example,
-#. * the Spanish translation could be "Pantallas en Espejo".
-#.
-#: ../panels/display/cc-display-panel.c:625
-#: ../panels/display/cc-rr-labeler.c:418
-msgid "Mirrored Displays"
-msgstr "ミラーされたディスプレイ"
-
-#: ../panels/display/cc-display-panel.c:649
+#: ../panels/display/cc-display-panel.c:471
+#: ../panels/display/cc-display-panel.c:2025
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Monitor"
-msgstr "モニター"
+msgid "Primary"
+msgstr "プライマリ"
 
-#: ../panels/display/cc-display-panel.c:1669
-msgid "Drag to change primary display."
-msgstr "第 1 ディスプレイを変更するにはドラッグしてください。"
+#: ../panels/display/cc-display-panel.c:473
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1727 ../panels/power/cc-power-panel.c:1738
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:610
+#: ../panels/universal-access/cc-ua-panel.c:736
+#: ../panels/universal-access/uap.ui.h:6
+msgid "Off"
+msgstr "オフ"
 
-#: ../panels/display/cc-display-panel.c:1727
-msgid "Select a monitor to change its properties; drag it to rearrange its placement."
-msgstr "設定を変更するモニターを選んでください。ドラッグして位置を調整してください。"
+#: ../panels/display/cc-display-panel.c:476
+msgid "Secondary"
+msgstr "セカンダリ"
 
-#: ../panels/display/cc-display-panel.c:2115
-msgid "%a %R"
-msgstr "%a %R"
+#: ../panels/display/cc-display-panel.c:1484
+msgid "Arrange Combined Displays"
+msgstr "ディスプレイの配置の調整"
 
-#: ../panels/display/cc-display-panel.c:2117
-msgid "%a %l:%M %p"
-msgstr "%p%l:%M (%a)"
+#: ../panels/display/cc-display-panel.c:1490
+#: ../panels/display/cc-display-panel.c:1895
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+msgid "_Apply"
+msgstr "適用(_A)"
 
-#: ../panels/display/cc-display-panel.c:2279
-#: ../panels/display/cc-display-panel.c:2331
-#, c-format
-msgid "Failed to apply configuration: %s"
-msgstr "設定の適用に失敗しました: %s"
+#: ../panels/display/cc-display-panel.c:1511
+msgid "Drag displays to rearrange them"
+msgstr "ディスプレイをドラッグして位置を調整してください"
 
-#: ../panels/display/cc-display-panel.c:2359
-msgid "Could not save the monitor configuration"
-msgstr "モニターの設定を保存できませんでした"
+#. size
+#: ../panels/display/cc-display-panel.c:1959
+msgid "Size"
+msgstr "サイズ"
 
-#: ../panels/display/cc-display-panel.c:2419
-msgid "Could not detect displays"
-msgstr "ディスプレイを検出できませんでした"
+#. aspect ratio
+#: ../panels/display/cc-display-panel.c:1974
+#: ../panels/display/display-capplet.ui.h:12
+msgid "Aspect Ratio"
+msgstr "アスペクト比"
 
-#: ../panels/display/cc-display-panel.c:2614
+#: ../panels/display/cc-display-panel.c:1995
+#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "解像度"
+
+#: ../panels/display/cc-display-panel.c:2026
+#: ../panels/display/display-capplet.ui.h:2
+msgid "Show the top bar and Activities Overview on this display"
+msgstr "トップバーとアクティビティ画面をこのディスプレイに表示する"
+
+#: ../panels/display/cc-display-panel.c:2032
+msgid "Secondary Display"
+msgstr "セカンダリディスプレイ"
+
+#: ../panels/display/cc-display-panel.c:2033
+msgid "Join this display with another to create an extra workspace"
+msgstr "このディスプレイをつなげて拡張ワークスペースとして使用する"
+
+#: ../panels/display/cc-display-panel.c:2040
+#: ../panels/display/display-capplet.ui.h:3
+msgid "Presentation"
+msgstr "プレゼンテーション"
+
+#: ../panels/display/cc-display-panel.c:2041
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Show slideshows and media only"
+msgstr "スライドショーやメディアだけを表示する"
+
+#. translators: "Mirror" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:2046
+#: ../panels/display/display-capplet.ui.h:5
+msgid "Mirror"
+msgstr "ミラー"
+
+#: ../panels/display/cc-display-panel.c:2047
+msgid "Show your existing view on both displays"
+msgstr "既存の画面をすべてのディスプレイに表示する"
+
+#: ../panels/display/cc-display-panel.c:2257
 msgid "Could not get screen information"
 msgstr "スクリーンの情報を取得できませんでした"
 
-#: ../panels/display/display-capplet.ui.h:2
-msgid "_Resolution"
-msgstr "解像度(_R)"
-
-#: ../panels/display/display-capplet.ui.h:3
-msgid "R_otation"
-msgstr "回転(_O)"
-
-#. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:5
-msgid "_Mirror displays"
-msgstr "複数のディスプレイをミラーする(_M)"
+#: ../panels/display/cc-display-panel.c:2288
+msgid "_Arrange Combined Displays"
+msgstr "ディスプレイの配置を調整(_A)"
 
 #: ../panels/display/display-capplet.ui.h:6
-msgid "Note: may limit resolution options"
-msgstr "注意: 解像度の選択を制限することがあります"
+msgid "Show your primary display on this screen also"
+msgstr "プライマリディスプレイと同じものをこの画面にも表示する"
 
 #: ../panels/display/display-capplet.ui.h:7
-msgid "_Detect Displays"
-msgstr "ディスプレイの検出(_D)"
+msgid "Combine"
+msgstr "連結"
+
+#: ../panels/display/display-capplet.ui.h:8
+msgid "Join with the primary display to create an extra space"
+msgstr "プライマリディスプレイにつなげて拡張スペースとして使用する"
+
+#: ../panels/display/display-capplet.ui.h:9
+msgid "Turn Off"
+msgstr "オフにする"
+
+#: ../panels/display/display-capplet.ui.h:10
+msgid "Don't use the display"
+msgstr "このディスプレイを使用しない"
+
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/printers/printers.ui.h:12
+msgid "Model"
+msgstr "型式"
+
+#: ../panels/display/display-capplet.ui.h:14
+msgid "Refresh Rate"
+msgstr "リフレッシュレート"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Displays"
@@ -1158,53 +1239,53 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Projector;xrandr;Screen;Resolution;Refresh;パネル;プロジェクター;画面;解像度;リフレッシュ;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "不明"
 
-#: ../panels/info/cc-info-panel.c:541
+#: ../panels/info/cc-info-panel.c:532
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d ビット"
 
-#: ../panels/info/cc-info-panel.c:543
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%d-bit"
 msgstr "%d ビット"
 
-#: ../panels/info/cc-info-panel.c:1218
+#: ../panels/info/cc-info-panel.c:1214
 msgid "Ask what to do"
 msgstr "どうするか確認する"
 
-#: ../panels/info/cc-info-panel.c:1222
+#: ../panels/info/cc-info-panel.c:1218
 msgid "Do nothing"
 msgstr "なにもしない"
 
-#: ../panels/info/cc-info-panel.c:1226
+#: ../panels/info/cc-info-panel.c:1222
 msgid "Open folder"
 msgstr "フォルダーを開く"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1313
 msgid "Other Media"
 msgstr "他のメディア"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1344
 msgid "Select an application for audio CDs"
 msgstr "オーディオCD用のアプリケーションを選択"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1345
 msgid "Select an application for video DVDs"
 msgstr "ビデオDVD用のアプリケーションを選択"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1346
 msgid "Select an application to run when a music player is connected"
 msgstr "ミュージックプレイヤーが接続された時に実行するアプリケーションを選択"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1347
 msgid "Select an application to run when a camera is connected"
 msgstr "カメラが接続された時に起動するアプリケーションを選択"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1348
 msgid "Select an application for software CDs"
 msgstr "ソフトウェアの CD を開くアプリケーションを選択してください"
 
@@ -1213,89 +1294,89 @@ msgstr "ソフトウェアの CD を開くアプリケーションを選択し�
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1360
 msgid "audio DVD"
 msgstr "オーディオ DVD"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1361
 msgid "blank Blu-ray disc"
 msgstr "空のブルーレイディスク"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1362
 msgid "blank CD disc"
 msgstr "空の CD"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1363
 msgid "blank DVD disc"
 msgstr "空の DVD"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1364
 msgid "blank HD DVD disc"
 msgstr "空の HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1365
 msgid "Blu-ray video disc"
 msgstr "ブルーレイビデオディスク"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1366
 msgid "e-book reader"
 msgstr "電子書籍リーダー"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1367
 msgid "HD DVD video disc"
 msgstr "HD DVD ビデオディスク"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1368
 msgid "Picture CD"
 msgstr "ピクチャーCD"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1369
 msgid "Super Video CD"
 msgstr "スーパービデオCD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1370
 msgid "Video CD"
 msgstr "ビデオCD"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1371
 msgid "Windows software"
 msgstr "Windows ソフトウェア"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1372
 msgid "Software"
 msgstr "ソフトウェア"
 
-#: ../panels/info/cc-info-panel.c:1499
-#: ../panels/keyboard/keyboard-shortcuts.c:1697
+#: ../panels/info/cc-info-panel.c:1495
+#: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "セクション"
 
-#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1504 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "概要"
 
-#: ../panels/info/cc-info-panel.c:1514 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "既定のアプリケーション"
 
-#: ../panels/info/cc-info-panel.c:1519 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "リムーバブルメディア"
 
-#: ../panels/info/cc-info-panel.c:1544
+#: ../panels/info/cc-info-panel.c:1540
 #, c-format
 msgid "Version %s"
 msgstr "バージョン %s"
 
-#: ../panels/info/cc-info-panel.c:1594
+#: ../panels/info/cc-info-panel.c:1590
 msgid "Install Updates"
 msgstr "更新をインストール"
 
-#: ../panels/info/cc-info-panel.c:1598
+#: ../panels/info/cc-info-panel.c:1594
 msgid "System Up-To-Date"
 msgstr "システムは更新済み"
 
-#: ../panels/info/cc-info-panel.c:1602
+#: ../panels/info/cc-info-panel.c:1598
 msgid "Checking for Updates"
 msgstr "更新を確認中"
 
@@ -1457,7 +1538,7 @@ msgstr "取り出し"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "タイピング"
 
@@ -1529,6 +1610,10 @@ msgstr "ウィンドウのスクリーンショットをクリップボードに
 msgid "Copy a screenshot of an area to clipboard"
 msgstr "選択領域のスクリーンショットをクリップボードにコピーする"
 
+#: ../panels/keyboard/01-screenshot.xml.in.h:11
+msgid "Record a short screencast"
+msgstr "スクリーンキャストを撮る"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "System"
 msgstr "システム"
@@ -1578,15 +1663,35 @@ msgstr "文字サイズを縮小"
 msgid "High contrast on or off"
 msgstr "ハイコントラストのオン/オフを切り替える"
 
-#: ../panels/keyboard/cc-keyboard-option.c:362
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "無効"
+
+#. Translators: This key is also known as 'third level
+#. * chooser'. AltGr is often used for this purpose. See
+#. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:349
 msgid "Alternative Characters Key"
 msgstr "代替文字キー"
 
-#: ../panels/keyboard/cc-keyboard-option.c:367
+#. Translators: The Compose key is used to initiate key
+#. * sequences that are combined to form a single character.
+#. * See http://en.wikipedia.org/wiki/Compose_key
+#.
+#: ../panels/keyboard/cc-keyboard-option.c:358
 msgid "Compose Key"
 msgstr "Compose キー"
 
-#: ../panels/keyboard/cc-keyboard-option.c:371
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Modifiers-only switch to next source"
 msgstr "次の入力ソースへ切り替える (修飾キーのみ)"
 
@@ -1686,7 +1791,6 @@ msgid "Remove Shortcut"
 msgstr "ショートカットの削除"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
-#: ../panels/wacom/button-mapping.ui.h:3
 msgid "To edit a shortcut, click the row and hold down the new keys or press Backspace to clear."
 msgstr "ショートカットを編集するには、対応する行をクリックし、新しいキーの組み合わせを押すか、[BS] キーで取り消してください。"
 
@@ -1703,7 +1807,7 @@ msgstr "独自のショートカット"
 msgid "<Unknown Action>"
 msgstr "<不明な操作>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1301
+#: ../panels/keyboard/keyboard-shortcuts.c:1300
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
@@ -1712,7 +1816,7 @@ msgstr ""
 "このキーでは入力できないので \"%s\" というショートカットキーは利用できません。\n"
 "[Ctrl] や [Alt] や [Shift] といった修飾キーを併用するようにしてください。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1333
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1721,18 +1825,24 @@ msgstr ""
 "\"%s\" というショートカットはすでに登録済みです:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1338
+#: ../panels/keyboard/keyboard-shortcuts.c:1337
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "ショートカットを \"%s\" に変更すると、\"%s\" というショートカットが無効になります。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1344
+#: ../panels/keyboard/keyboard-shortcuts.c:1343
 msgid "_Reassign"
 msgstr "割り当てる(_R)"
 
-#: ../panels/mouse/cc-mouse-panel.c:123
+# Button Label
+#: ../panels/mouse/cc-mouse-panel.c:100
 msgid "Test Your _Settings"
 msgstr "設定を確認する(_S)"
+
+# Dialog Title
+#: ../panels/mouse/cc-mouse-panel.c:117
+msgid "Test Your Settings"
+msgstr "設定の確認"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1744,8 +1854,8 @@ msgstr "マウスやタッチパッドの感度の変更、利き手の選択を
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;トラックパッド;ポインター;クリック;タップ;ダブル;ボタン;トラックボール;"
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
+msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;トラックパッド;ポインター;クリック;タップ;ダブル;ボタン;トラックボール;スクロール;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Mouse Preferences"
@@ -1756,7 +1866,7 @@ msgid "General"
 msgstr "全般"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgctxt "mouse, speed"
+msgctxt "double click, speed"
 msgid "Slow"
 msgstr "遅い"
 
@@ -1765,7 +1875,7 @@ msgid "Double-click timeout"
 msgstr "ダブルクリックと認識される最長クリック間隔"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgctxt "mouse, speed"
+msgctxt "double click, speed"
 msgid "Fast"
 msgstr "速い"
 
@@ -1796,75 +1906,101 @@ msgid "_Pointer speed"
 msgstr "ポインターの速度(_P)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
+msgctxt "mouse pointer, speed"
+msgid "Slow"
+msgstr "遅い"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgctxt "mouse pointer, speed"
+msgid "Fast"
+msgstr "速い"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "タッチパッド"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+msgctxt "touchpad pointer, speed"
+msgid "Slow"
+msgstr "遅い"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+msgctxt "touchpad pointer, speed"
+msgid "Fast"
+msgstr "速い"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Disable while _typing"
 msgstr "タイプ中は無効にする(_T)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Tap to _click"
 msgstr "タップでクリックする(_C)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Two _finger scroll"
 msgstr "二指でのスクロール(_F)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "C_ontent sticks to fingers"
-msgstr "指を動かす方向にコンテンツが移動 (ナチュラル)(_O)"
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+msgid "_Natural scrolling"
+msgstr "ナチュラルスクロール(_N)"
 
-#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.c:132
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "クリック、ダブルクリック、スクロールを試してください"
 
-#: ../panels/mouse/gnome-mouse-test.c:139
+#: ../panels/mouse/gnome-mouse-test.c:137
 msgid "Five clicks, GEGL time!"
 msgstr "クリック 5 回、GEGLタイム"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Double click, primary button"
 msgstr "ダブルクリック、主ボタン"
 
-#: ../panels/mouse/gnome-mouse-test.c:144
+#: ../panels/mouse/gnome-mouse-test.c:142
 msgid "Single click, primary button"
 msgstr "シングルクリック、主ボタン"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Double click, middle button"
 msgstr "ダブルクリック、中央ボタン"
 
-#: ../panels/mouse/gnome-mouse-test.c:147
+#: ../panels/mouse/gnome-mouse-test.c:145
 msgid "Single click, middle button"
 msgstr "シングルクリック、中央ボタン"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Double click, secondary button"
 msgstr "ダブルクリック、副ボタン"
 
-#: ../panels/mouse/gnome-mouse-test.c:150
+#: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr "シングルクリック、副ボタン"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:347
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "機内モード(_P)"
 
-#: ../panels/network/cc-network-panel.c:912
+#: ../panels/network/cc-network-panel.c:928
 msgid "Network proxy"
 msgstr "ネットワークプロキシ"
 
-#: ../panels/network/cc-network-panel.c:1091 ../panels/network/net-vpn.c:280
+#. Translators: this is the title of the connection details
+#. * window for vpn connections, it is also used to display
+#. * vpn connections in the device list.
+#.
+#: ../panels/network/cc-network-panel.c:1107 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1225
+#: ../panels/network/cc-network-panel.c:1242
 msgid "The system network services are not compatible with this version."
 msgstr "システムのネットワークサービスはこのバージョンと互換性がありません。"
 
@@ -1892,40 +2028,40 @@ msgstr "内部認証(_A)"
 msgid "Security"
 msgstr "セキュリティ"
 
-#: ../panels/network/connection-editor/ce-page.c:502
+#: ../panels/network/connection-editor/ce-page.c:507
 msgid "automatic"
 msgstr "自動"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:224
-#: ../panels/network/net-device-wifi.c:385
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:228
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
 #: ../panels/network/network-wifi.ui.h:17
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:232
+#: ../panels/network/net-device-wifi.c:229
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:237
+#: ../panels/network/net-device-wifi.c:234
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:242
-#: ../panels/network/net-device-wifi.c:375
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "なし"
@@ -1936,18 +2072,18 @@ msgid "Never"
 msgstr "しない"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:770
+#: ../panels/user-accounts/um-utils.c:803
 msgid "Today"
 msgstr "今日"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:773
+#: ../panels/user-accounts/um-utils.c:806
 msgid "Yesterday"
 msgstr "昨日"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
-#: ../panels/network/net-device-ethernet.c:126
-#: ../panels/network/net-device-wifi.c:479
+#: ../panels/network/net-device-ethernet.c:125
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1955,121 +2091,121 @@ msgstr[0] "%i 日前"
 
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
-#: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:537
+#: ../panels/network/net-device-ethernet.c:53
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "なし"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "弱い"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "OK"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "良い"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:574
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "非常に良い"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:200
-#: ../panels/network/connection-editor/ce-page-vpn.c:172
-#: ../panels/network/connection-editor/ce-page-wifi.c:243
+#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:255
 #: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "Identity"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:202
-#: ../panels/network/connection-editor/ce-page-ip4.c:454
+#: ../panels/network/connection-editor/ce-page-ip4.c:207
+#: ../panels/network/connection-editor/ce-page-ip4.c:469
 msgid "Netmask"
 msgstr "ネットマスク"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:216
-#: ../panels/network/connection-editor/ce-page-ip4.c:467
-#: ../panels/network/connection-editor/ce-page-ip6.c:217
-#: ../panels/network/connection-editor/ce-page-ip6.c:475
+#: ../panels/network/connection-editor/ce-page-ip4.c:221
+#: ../panels/network/connection-editor/ce-page-ip4.c:482
+#: ../panels/network/connection-editor/ce-page-ip6.c:222
+#: ../panels/network/connection-editor/ce-page-ip6.c:490
 #: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
 msgstr "ゲートウェイ"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:233
-#: ../panels/network/connection-editor/ce-page-ip6.c:234
+#: ../panels/network/connection-editor/ce-page-ip4.c:238
+#: ../panels/network/connection-editor/ce-page-ip6.c:239
 msgid "Delete Address"
 msgstr "アドレスを削除"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:285
-#: ../panels/network/connection-editor/ce-page-ip6.c:286
+#: ../panels/network/connection-editor/ce-page-ip4.c:292
+#: ../panels/network/connection-editor/ce-page-ip6.c:293
 msgid "Add"
 msgstr "追加"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:350
-#: ../panels/network/connection-editor/ce-page-ip6.c:354
+#: ../panels/network/connection-editor/ce-page-ip4.c:360
+#: ../panels/network/connection-editor/ce-page-ip6.c:364
 msgid "Server"
 msgstr "サーバー"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:367
-#: ../panels/network/connection-editor/ce-page-ip6.c:371
+#: ../panels/network/connection-editor/ce-page-ip4.c:377
+#: ../panels/network/connection-editor/ce-page-ip6.c:381
 msgid "Delete DNS Server"
 msgstr "DNS サーバーを削除"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:481
-#: ../panels/network/connection-editor/ce-page-ip6.c:489
+#: ../panels/network/connection-editor/ce-page-ip4.c:496
+#: ../panels/network/connection-editor/ce-page-ip6.c:504
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "メトリック"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:502
-#: ../panels/network/connection-editor/ce-page-ip6.c:510
+#: ../panels/network/connection-editor/ce-page-ip4.c:517
+#: ../panels/network/connection-editor/ce-page-ip6.c:525
 msgid "Delete Route"
 msgstr "ルートを削除"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:616
+#: ../panels/network/connection-editor/ce-page-ip4.c:632
 #: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "自動 (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:620
-#: ../panels/network/connection-editor/ce-page-ip6.c:622
+#: ../panels/network/connection-editor/ce-page-ip4.c:636
+#: ../panels/network/connection-editor/ce-page-ip6.c:638
 #: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "手動"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:624
-#: ../panels/network/connection-editor/ce-page-ip6.c:626
+#: ../panels/network/connection-editor/ce-page-ip4.c:640
+#: ../panels/network/connection-editor/ce-page-ip6.c:642
 msgid "Link-Local Only"
 msgstr "リンクローカルのみ"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:925
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:204
-#: ../panels/network/connection-editor/ce-page-ip6.c:458
+#: ../panels/network/connection-editor/ce-page-ip6.c:209
+#: ../panels/network/connection-editor/ce-page-ip6.c:473
 msgid "Prefix"
 msgstr "プレフィックス"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:614
+#: ../panels/network/connection-editor/ce-page-ip6.c:630
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
@@ -2077,11 +2213,11 @@ msgstr "プレフィックス"
 msgid "Automatic"
 msgstr "自動"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:618
+#: ../panels/network/connection-editor/ce-page-ip6.c:634
 msgid "Automatic, DHCP only"
 msgstr "自動、DHCP のみ"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:886
+#: ../panels/network/connection-editor/ce-page-ip6.c:902
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2121,10 +2257,6 @@ msgstr "WPA & WPA2 Personal"
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
-msgid "_Apply"
-msgstr "適用(_A)"
-
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
 msgid "Signal Strength"
@@ -2136,15 +2268,15 @@ msgid "Link speed"
 msgstr "リンクの速度"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
-#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/net-device-ethernet.c:158
 #: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "IPv4 アドレス"
 
 #: ../panels/network/connection-editor/details-page.ui.h:5
-#: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/net-device-ethernet.c:164
+#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/net-device-ethernet.c:163
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
@@ -2152,14 +2284,14 @@ msgid "IPv6 Address"
 msgstr "IPv6 アドレス"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
-#: ../panels/network/net-device-ethernet.c:167
+#: ../panels/network/net-device-ethernet.c:166
 #: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "ハードウェアアドレス"
 
 #: ../panels/network/connection-editor/details-page.ui.h:7
-#: ../panels/network/net-device-ethernet.c:171
+#: ../panels/network/net-device-ethernet.c:170
 #: ../panels/network/network-mobile.ui.h:5
 #: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
@@ -2169,7 +2301,7 @@ msgstr "デフォルトルート"
 #: ../panels/network/connection-editor/details-page.ui.h:8
 #: ../panels/network/connection-editor/ip4-page.ui.h:3
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
-#: ../panels/network/net-device-ethernet.c:173
+#: ../panels/network/net-device-ethernet.c:172
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
@@ -2233,17 +2365,34 @@ msgid "_Cloned Address"
 msgstr "クローンしたアドレス(_C)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Connect _automatically"
-msgstr "自動接続する(_A) "
+msgid "bytes"
+msgstr "バイト"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "Make available to other _users"
 msgstr "他のユーザーにも利用可能にする(_U)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-msgid "bytes"
-msgstr "バイト"
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "自動接続する(_A)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "ファイアウォールゾーン(_Z)"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "デフォルト"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr "ゾーンは接続の信頼レベルを定義します"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:22
@@ -2287,42 +2436,42 @@ msgstr "IPv6(_6)"
 msgid "Unable to open connection editor"
 msgstr "接続エディターを起動できません"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:283
+#: ../panels/network/connection-editor/net-connection-editor.c:286
 msgid "New Profile"
 msgstr "新規プロファイル"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:505
+#: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1068
+#: ../panels/user-accounts/um-account-dialog.c:1471
 msgid "_Add"
 msgstr "追加(_A)"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:587
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:588
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "Bond"
 msgstr "Bond"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:589
+#: ../panels/network/connection-editor/net-connection-editor.c:597
 msgid "Bridge"
 msgstr "Bridge"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:590
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:740
+#: ../panels/network/connection-editor/net-connection-editor.c:749
 msgid "Could not load VPN plugins"
 msgstr "VPN プラグインを読み込めませんでした"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:804
+#: ../panels/network/connection-editor/net-connection-editor.c:818
 msgid "Import from file…"
 msgstr "ファイルからインポート…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:871
+#: ../panels/network/connection-editor/net-connection-editor.c:889
 msgid "Add Network Connection"
 msgstr "新規の接続を追加"
 
@@ -2332,7 +2481,7 @@ msgid "_Reset"
 msgstr "リセット(_R)"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1411
+#: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "破棄(_F)"
@@ -2369,6 +2518,13 @@ msgstr ""
 msgid "Select file to import"
 msgstr "インポートするファイルを選択する"
 
+#: ../panels/network/connection-editor/vpn-helpers.c:246
+#: ../panels/printers/cc-printers-panel.c:1947
+#: ../panels/sharing/cc-sharing-panel.c:422
+#: ../panels/user-accounts/um-photo-dialog.c:222
+msgid "_Open"
+msgstr "開く(_O)"
+
 #: ../panels/network/connection-editor/vpn-helpers.c:294
 #, c-format
 msgid "A file named \"%s\" already exists."
@@ -2402,7 +2558,7 @@ msgstr ""
 msgid "Export VPN connection..."
 msgstr "VPN 接続をエクスポートする..."
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(エラー: VPN 接続エディターを読み込めません)"
 
@@ -2421,7 +2577,7 @@ msgstr "BSSID(_B)"
 msgid "My Home Network"
 msgstr "マイホームネットワーク"
 
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
 msgid "Make available to _other users"
 msgstr "他のユーザーも利用可能(_O)"
 
@@ -2436,8 +2592,8 @@ msgstr "ネットワークへの接続方法を設定します。"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-msgstr "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;ネットワーク;インターネット;無線;ワイヤレス;有線;プロキシー;プロクシー;ブロードバンド;モデム;ブルートゥース;"
+msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;vlan;bridge;bond;"
+msgstr "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;vlan;bridge;bond;ネットワーク;インターネット;無線;ワイヤレス;有線;プロキシー;プロクシー;ブロードバンド;モデム;ブルートゥース;ブリッジ;ボンディング;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -2447,89 +2603,108 @@ msgstr "Bond のスレーブ"
 msgid "Bridge slaves"
 msgstr "ブリッジのスレーブ"
 
-#: ../panels/network/net-device-ethernet.c:112
-#: ../panels/network/net-device-wifi.c:465
+#: ../panels/network/net-device-ethernet.c:111
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "未接続"
 
-#: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-ethernet.c:121
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "今日"
 
-#: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-ethernet.c:123
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "昨日"
 
-#: ../panels/network/net-device-ethernet.c:162
+#: ../panels/network/net-device-ethernet.c:161
 #: ../panels/network/network-mobile.ui.h:3
 #: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP アドレス"
 
-#: ../panels/network/net-device-ethernet.c:178
+#: ../panels/network/net-device-ethernet.c:177
 #: ../panels/network/network-wifi.ui.h:10
 msgid "Last used"
 msgstr "最後の利用"
 
-#: ../panels/network/net-device-ethernet.c:337
+#. Translators: This is used as the title of the connection
+#. * details window for ethernet, if there is only a single
+#. * profile. It is also used to display ethernet in the
+#. * device list.
+#.
+#: ../panels/network/net-device-ethernet.c:287
+#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "有線"
+
+#: ../panels/network/net-device-ethernet.c:355
 #: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
-#: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:8
+#: ../panels/network/network-vpn.ui.h:8
 msgid "Options…"
 msgstr "オプション…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:492
 #, c-format
 msgid "Profile %d"
 msgstr "プロファイル %d"
 
-#: ../panels/network/net-device-mobile.c:241
+#: ../panels/network/net-device-mobile.c:239
 msgid "Add new connection"
 msgstr "新規の接続を追加"
 
-#: ../panels/network/net-device-wifi.c:1120
+#: ../panels/network/net-device-wifi.c:1117
 msgid "If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with others."
 msgstr "ワイヤレス以外のインターネット接続がある場合には、 ワイヤレスホットスポットを設定し、他の人とインターネット接続を共有することができます。"
 
-#: ../panels/network/net-device-wifi.c:1124
+#: ../panels/network/net-device-wifi.c:1121
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "ワイヤレスホットスポットをオンにすると <b>%s</b> の接続が切断されます。"
 
-#: ../panels/network/net-device-wifi.c:1128
+#: ../panels/network/net-device-wifi.c:1125
 msgid "It is not possible to access the Internet through your wireless while the hotspot is active."
 msgstr "ホットスポットがアクティブな場合、ワイヤレスによるインターネット接続はできません。"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1199
 msgid "Stop hotspot and disconnect any users?"
 msgstr "アクセスポイントを停止し、ユーザーを切断しますか?"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1202
 msgid "_Stop Hotspot"
 msgstr "停止(_S)"
 
-#: ../panels/network/net-device-wifi.c:1277
+#: ../panels/network/net-device-wifi.c:1274
 msgid "System policy prohibits use as a Hotspot"
 msgstr "システムのポリシーによりホットスポットとしての利用は禁止されています"
 
-#: ../panels/network/net-device-wifi.c:1280
+#: ../panels/network/net-device-wifi.c:1277
 msgid "Wireless device does not support Hotspot mode"
 msgstr "ワイヤレスデバイスがホットスポットモードに対応していません"
 
-#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/network/net-device-wifi.c:1404
 msgid "Network details for the selected networks, including passwords and any custom configuration will be lost."
 msgstr "パスワードや独自の設定など、 選択したネットワークの詳細は失われます。"
 
-#: ../panels/network/net-device-wifi.c:1712
+#: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "履歴"
 
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/wacom/cc-wacom-page.c:525
+msgid "_Close"
+msgstr "閉じる(_C)"
+
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1724
+#: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "破棄(_F)"
@@ -2547,14 +2722,9 @@ msgstr "設定ファイルの URL が指定されていない場合 Web Proxy Au
 msgid "This is not recommended for untrusted public networks."
 msgstr "信頼できない公衆ネットワークでは推奨されません。"
 
-#: ../panels/network/net-proxy.c:408
+#: ../panels/network/net-proxy.c:417
 msgid "Proxy"
 msgstr "プロキシ"
-
-#: ../panels/network/network-ethernet.ui.h:1
-#: ../panels/network/network-simple.ui.h:1
-msgid "Wired"
-msgstr "有線"
 
 #: ../panels/network/network-ethernet.ui.h:2
 msgid "_Add Profile…"
@@ -2567,11 +2737,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "プロバイダー"
-
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-msgid "_Options…"
-msgstr "オプション(_O)…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -2686,13 +2851,12 @@ msgstr "詳細"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Password"
 msgstr "パスワード(_P)"
 
 #: ../panels/network/network-wifi.ui.h:18
-#: ../panels/universal-access/uap.ui.h:8
 msgid "None"
 msgstr "何もしない"
 
@@ -2706,7 +2870,7 @@ msgstr "他のユーザーに利用可能にする"
 
 #: ../panels/network/network-wifi.ui.h:21
 msgid "identity"
-msgstr ""
+msgstr "識別情報"
 
 #: ../panels/network/network-wifi.ui.h:26
 msgid "Automatic (DHCP) addresses only"
@@ -2746,7 +2910,7 @@ msgstr "この接続の設定をデフォルトにリセットしますが、推
 
 #: ../panels/network/network-wifi.ui.h:42
 msgid "Remove all details relating to this network and do not try to automatically connect to it."
-msgstr "このネットワークに関する詳細はすべて削除しますあ、自動的に接続しないようにします。"
+msgstr "このネットワークに関する詳細はすべて削除して、自動的に接続しないようにします。"
 
 #: ../panels/network/network-wifi.ui.h:43
 msgid "reset"
@@ -3171,7 +3335,7 @@ msgstr "両方"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Username"
 msgstr "ユーザー名(_U)"
 
@@ -3365,19 +3529,15 @@ msgctxt "notifications"
 msgid "Show Details in Lock Screen"
 msgstr "ロック画面で詳細を表示する"
 
-#: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1637 ../panels/power/cc-power-panel.c:1644
-#: ../panels/privacy/cc-privacy-panel.c:78
-#: ../panels/privacy/cc-privacy-panel.c:145
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1733 ../panels/power/cc-power-panel.c:1740
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:610
+#: ../panels/universal-access/cc-ua-panel.c:736
 msgid "On"
 msgstr "オン"
-
-#: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1631 ../panels/power/cc-power-panel.c:1642
-#: ../panels/privacy/cc-privacy-panel.c:78
-#: ../panels/privacy/cc-privacy-panel.c:145
-msgid "Off"
-msgstr "オフ"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3400,65 +3560,64 @@ msgstr "ポップアップバナーを表示する"
 msgid "Show in Lock Screen"
 msgstr "ロック画面で表示する"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
-#: ../panels/region/cc-input-chooser.c:1073
-#: ../panels/search/cc-search-locations-dialog.c:480
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
+msgctxt "Online Account"
 msgid "Other"
 msgstr "その他"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "アカウントの追加"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:330
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "メール"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:336
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "連絡先"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:342
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "チャット"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "リソース"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:358
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Error logging into the account"
 msgstr "アカウントのログインに失敗"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:430
+#: ../panels/online-accounts/cc-online-accounts-panel.c:495
 msgid "Credentials have expired."
 msgstr "認証情報の有効期限が切れました。"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:434
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "Sign in to enable this account."
 msgstr "アカウントを有効にするにはサインインしてください"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:439
+#: ../panels/online-accounts/cc-online-accounts-panel.c:504
 msgid "_Sign In"
 msgstr "サインイン(_S)"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:684
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "Error creating account"
 msgstr "アカウント作成に失敗"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:726
+#: ../panels/online-accounts/cc-online-accounts-panel.c:805
 msgid "Error removing account"
 msgstr "アカウント削除に失敗"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:762
+#: ../panels/online-accounts/cc-online-accounts-panel.c:841
 msgid "Are you sure you want to remove the account?"
 msgstr "本当にアカウントを削除しますか?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:764
+#: ../panels/online-accounts/cc-online-accounts-panel.c:843
 msgid "This will not remove the account on the server."
 msgstr "サービス提供元のアカウントは削除されません。"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:765
-msgid "_Remove"
-msgstr "削除(_R)"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:1
 msgid "Online Accounts"
@@ -3470,8 +3629,8 @@ msgstr "オンラインアカウントへの接続や利用方法を設定しま
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
-msgstr "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ウェブ;オンライン;チャット;カレンダー;メール;連絡先;"
+msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;"
+msgstr "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;グーグル;フェイスブック;ツイッター;ヤフー;ウェブ;オンライン;チャット;カレンダー;メール;連絡先;Flickr;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3489,17 +3648,17 @@ msgstr "オンラインアカウントの追加"
 msgid "Adding an account allows your applications to access it for documents, mail, contacts, calendar, chat and more."
 msgstr "アカウントを追加すると、お使いのアプリケーションがそのアカウントのドキュメントやメール、連絡先、カレンダー、チャットなどにアクセスできるようになります。"
 
-#: ../panels/power/cc-power-panel.c:184
+#: ../panels/power/cc-power-panel.c:187
 msgid "Unknown time"
 msgstr "不明"
 
-#: ../panels/power/cc-power-panel.c:190
+#: ../panels/power/cc-power-panel.c:193
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分"
 
-#: ../panels/power/cc-power-panel.c:202
+#: ../panels/power/cc-power-panel.c:205
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3507,225 +3666,224 @@ msgstr[0] "%i 時間"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:213
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:214
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "時間"
 
-#: ../panels/power/cc-power-panel.c:212
+#: ../panels/power/cc-power-panel.c:215
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:231
+#: ../panels/power/cc-power-panel.c:234
 #, c-format
 msgid "%s until fully charged"
 msgstr "フル充電まで %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:238
+#: ../panels/power/cc-power-panel.c:241
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "注意: 残り %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:243
+#: ../panels/power/cc-power-panel.c:246
 #, c-format
 msgid "%s remaining"
 msgstr "残り %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:248 ../panels/power/cc-power-panel.c:276
+#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
 msgid "Fully charged"
 msgstr "フル充電"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:252 ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:255 ../panels/power/cc-power-panel.c:283
 msgid "Empty"
 msgstr "空"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:267
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging"
 msgstr "充電中"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:272
+#: ../panels/power/cc-power-panel.c:275
 msgid "Discharging"
 msgstr "放電中"
 
-#: ../panels/power/cc-power-panel.c:324
-#, c-format
-msgid "Estimated battery capacity: %s"
-msgstr "推計バッテリー残り時間: %s"
-
-#: ../panels/power/cc-power-panel.c:404
+#: ../panels/power/cc-power-panel.c:393
 msgctxt "Battery name"
 msgid "Main"
 msgstr "主"
 
-#: ../panels/power/cc-power-panel.c:406
+#: ../panels/power/cc-power-panel.c:395
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "予備"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:486
 msgid "Wireless mouse"
 msgstr "ワイヤレスマウス"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:490
 msgid "Wireless keyboard"
 msgstr "ワイヤレスキーボード"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:501
+#: ../panels/power/cc-power-panel.c:494
 msgid "Uninterruptible power supply"
 msgstr "無停電電源装置"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:506
+#: ../panels/power/cc-power-panel.c:499
 msgid "Personal digital assistant"
 msgstr "携帯情報端末"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:510
+#: ../panels/power/cc-power-panel.c:503
 msgid "Cellphone"
 msgstr "携帯電話"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:514
+#: ../panels/power/cc-power-panel.c:507
 msgid "Media player"
 msgstr "音楽プレイヤー"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:511
 msgid "Tablet"
 msgstr "タブレット"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:515
 msgid "Computer"
 msgstr "コンピューター"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:526 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:1938
+#: ../panels/power/cc-power-panel.c:519 ../panels/power/cc-power-panel.c:729
+#: ../panels/power/cc-power-panel.c:2064
 msgid "Battery"
 msgstr "バッテリー"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:535
+#: ../panels/power/cc-power-panel.c:528
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "充電中"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:535
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "注意"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:540
 msgctxt "Battery power"
 msgid "Low"
 msgstr "少ない"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:545
 msgctxt "Battery power"
 msgid "Good"
 msgstr "充分"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:550
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "フル充電"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:554
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "空"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:727
 msgid "Batteries"
 msgstr "バッテリー"
 
-#: ../panels/power/cc-power-panel.c:1074
+#: ../panels/power/cc-power-panel.c:1133
 msgid "When _idle"
 msgstr "アイドル時(_I)"
 
-#: ../panels/power/cc-power-panel.c:1401
+#: ../panels/power/cc-power-panel.c:1502
 msgid "Power Saving"
 msgstr "省電力"
 
-#: ../panels/power/cc-power-panel.c:1430
-msgid "_Screen Brightness"
+#: ../panels/power/cc-power-panel.c:1530
+msgid "_Screen brightness"
 msgstr "画面の明るさ(_S)"
 
-#: ../panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen when Inactive"
+#: ../panels/power/cc-power-panel.c:1536
+msgid "_Keyboard brightness"
+msgstr "キーボードの明るさ(_K)"
+
+#: ../panels/power/cc-power-panel.c:1546
+msgid "_Dim screen when inactive"
 msgstr "操作していないときに画面を暗くする(_D)"
 
-#: ../panels/power/cc-power-panel.c:1481
-msgid "_Blank Screen"
+#: ../panels/power/cc-power-panel.c:1571
+msgid "_Blank screen"
 msgstr "ブランクスクリーン(_B)"
 
-#: ../panels/power/cc-power-panel.c:1516
+#: ../panels/power/cc-power-panel.c:1608
 msgid "_Wi-Fi"
 msgstr "Wi-Fi(_W)"
 
-#: ../panels/power/cc-power-panel.c:1521
+#: ../panels/power/cc-power-panel.c:1613
 msgid "Turns off wireless devices"
-msgstr "ワイヤレスデバイスをオフにする"
+msgstr "ワイヤレスデバイスのオン/オフを切り替える"
 
-#: ../panels/power/cc-power-panel.c:1544
-msgid "_Mobile Broadband"
+#: ../panels/power/cc-power-panel.c:1638
+msgid "_Mobile broadband"
 msgstr "モバイルブロードバンド(_M)"
 
-#: ../panels/power/cc-power-panel.c:1549
-msgid "Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "モバイルブロードバンド (3G、4G、WiMax など) デバイスをオフにする"
+#: ../panels/power/cc-power-panel.c:1643
+msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
+msgstr "モバイルブロードバンド (3G、4G、WiMax など) デバイスのオン/オフを切り替える"
 
-#: ../panels/power/cc-power-panel.c:1582
+#: ../panels/power/cc-power-panel.c:1678
 msgid "_Bluetooth"
 msgstr "Bluetooth(_B)"
 
-#: ../panels/power/cc-power-panel.c:1633
+#: ../panels/power/cc-power-panel.c:1729
 msgid "When on battery power"
 msgstr "バッテリー動作時"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1731
 msgid "When plugged in"
 msgstr "電源接続時"
 
-#: ../panels/power/cc-power-panel.c:1762
+#: ../panels/power/cc-power-panel.c:1860
 msgid "Suspend & Power Off"
 msgstr "サスペンドと電源オフ"
 
-#: ../panels/power/cc-power-panel.c:1793
-msgid "_Automatic Suspend"
+#: ../panels/power/cc-power-panel.c:1893
+msgid "_Automatic suspend"
 msgstr "自動サスペンド(_A)"
 
-#: ../panels/power/cc-power-panel.c:1815
-msgid "When Battery Power is _Critical"
+#: ../panels/power/cc-power-panel.c:1917
+msgid "When battery power is _critical"
 msgstr "バッテリーがひどく低下したときの動作(_C)"
 
-#: ../panels/power/cc-power-panel.c:1848
+#: ../panels/power/cc-power-panel.c:1974
 msgid "Power Off"
 msgstr "電源オフ"
 
-#: ../panels/power/cc-power-panel.c:1990
+#: ../panels/power/cc-power-panel.c:2111
 msgid "Devices"
 msgstr "デバイス"
 
@@ -3810,10 +3968,6 @@ msgstr "12 分"
 msgid "Automatic Suspend"
 msgstr "自動サスペンド"
 
-#: ../panels/power/power.ui.h:21 ../panels/privacy/privacy.ui.h:10
-msgid "_Close"
-msgstr "閉じる(_C)"
-
 #: ../panels/power/power.ui.h:22
 msgid "_Plugged In"
 msgstr "電源接続時(_P)"
@@ -3831,7 +3985,8 @@ msgid "Authenticate"
 msgstr "認証"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "パスワード"
 
@@ -3976,49 +4131,49 @@ msgid "No printers available"
 msgstr "利用できるプリンターがありません"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1432
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u 個がアクティブ"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1773
+#: ../panels/printers/cc-printers-panel.c:1776
 msgid "Failed to add new printer."
 msgstr "新しいプリンターを追加できませんでした。"
 
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1943
 msgid "Select PPD File"
 msgstr "PPDファイルの選択"
 
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1952
 msgid "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 msgstr "PostScript Printer Description ファイル(*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2254
+#: ../panels/printers/cc-printers-panel.c:2257
 msgid "No suitable driver found"
 msgstr "適切なドライバーが見つかりませんでした"
 
-#: ../panels/printers/cc-printers-panel.c:2323
+#: ../panels/printers/cc-printers-panel.c:2326
 msgid "Searching for preferred drivers…"
 msgstr "推奨ドライバーの検索中…"
 
-#: ../panels/printers/cc-printers-panel.c:2338
+#: ../panels/printers/cc-printers-panel.c:2341
 msgid "Select from database…"
 msgstr "データベースから選択…"
 
-#: ../panels/printers/cc-printers-panel.c:2347
+#: ../panels/printers/cc-printers-panel.c:2350
 msgid "Provide PPD File…"
 msgstr "PPDファイルを指定…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2498
-#: ../panels/printers/cc-printers-panel.c:2521
+#: ../panels/printers/cc-printers-panel.c:2501
+#: ../panels/printers/cc-printers-panel.c:2524
 msgid "Test page"
 msgstr "テストページ"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2929
+#: ../panels/printers/cc-printers-panel.c:2932
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui ファイルを読み込めませんでした: %s"
@@ -4063,14 +4218,19 @@ msgstr "印刷ジョブをキャンセル"
 msgid "Add a New Printer"
 msgstr "新しいプリンターの追加"
 
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:467
-msgid "_Cancel"
-msgstr "キャンセル(_C)"
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "認証(_U)"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "ネットワークプリンターの検索または結果をフィルター"
+
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "Enter address of a printer or a text to filter results"
+msgstr "プリンターのアドレスか結果をフィルタリングするテキストを入力"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4185,8 +4345,13 @@ msgstr "時刻"
 msgid "%s Active Jobs"
 msgstr "%s個のアクティブなジョブ"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "サーバーが認証を要求しています"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1465
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "プリンターを検出できません"
 
@@ -4206,73 +4371,69 @@ msgstr "給紙元"
 msgid "Output Tray"
 msgstr "出力トレイ"
 
-#: ../panels/printers/pp-options-dialog.c:86
-msgid "Resolution"
-msgstr "解像度"
-
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "GhostScript pre-filtering"
 msgstr "GhostScriptのプレフィルタリング"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: ../panels/printers/pp-options-dialog.c:533
+#: ../panels/printers/pp-options-dialog.c:532
 msgid "Pages per side"
 msgstr "片面のページ数"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: ../panels/printers/pp-options-dialog.c:545
+#: ../panels/printers/pp-options-dialog.c:544
 msgid "Two-sided"
 msgstr "両面"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: ../panels/printers/pp-options-dialog.c:557
+#: ../panels/printers/pp-options-dialog.c:556
 msgid "Orientation"
 msgstr "向き"
 
 #. Translators: "General" tab contains general printer options
-#: ../panels/printers/pp-options-dialog.c:654
+#: ../panels/printers/pp-options-dialog.c:653
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "汎用"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: ../panels/printers/pp-options-dialog.c:657
+#: ../panels/printers/pp-options-dialog.c:656
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "ページ設定"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: ../panels/printers/pp-options-dialog.c:660
+#: ../panels/printers/pp-options-dialog.c:659
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "インストール可能なオプション"
 
 #. Translators: "Job" tab contains settings for jobs
-#: ../panels/printers/pp-options-dialog.c:663
+#: ../panels/printers/pp-options-dialog.c:662
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "ジョブ"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: ../panels/printers/pp-options-dialog.c:666
+#: ../panels/printers/pp-options-dialog.c:665
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "画質"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: ../panels/printers/pp-options-dialog.c:669
+#: ../panels/printers/pp-options-dialog.c:668
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "色"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: ../panels/printers/pp-options-dialog.c:672
+#: ../panels/printers/pp-options-dialog.c:671
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "表面処理"
 
 #. Translators: "Advanced" tab contains all others settings
-#: ../panels/printers/pp-options-dialog.c:675
+#: ../panels/printers/pp-options-dialog.c:674
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "高度"
@@ -4324,7 +4485,7 @@ msgid "Driver"
 msgstr "ドライバー"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr "%s で利用可能なプリンターを表示するにはユーザー名とパスワードを入力してください。"
@@ -4360,10 +4521,6 @@ msgstr "ジョブ"
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
 msgstr "ジョブを表示(_J)"
-
-#: ../panels/printers/printers.ui.h:12
-msgid "Model"
-msgstr "型式"
 
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
@@ -4401,27 +4558,39 @@ msgstr ""
 "申し訳ありません! システムの印刷サービスは\n"
 "利用できないようです。"
 
-#: ../panels/privacy/cc-privacy-panel.c:105
-msgid "Hidden"
-msgstr "非表示"
-
-#: ../panels/privacy/cc-privacy-panel.c:105
-msgid "Visible"
-msgstr "表示する"
-
-#: ../panels/privacy/cc-privacy-panel.c:271 ../panels/privacy/privacy.ui.h:31
+#: ../panels/privacy/cc-privacy-panel.c:245 ../panels/privacy/privacy.ui.h:26
 msgid "Screen Lock"
 msgstr "画面ロック"
 
-#: ../panels/privacy/cc-privacy-panel.c:338 ../panels/privacy/privacy.ui.h:9
-msgid "Name & Visibility"
-msgstr "名前と表示方法"
-
-#: ../panels/privacy/cc-privacy-panel.c:446 ../panels/privacy/privacy.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:358 ../panels/privacy/privacy.ui.h:20
 msgid "Usage & History"
 msgstr "使用と履歴"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:486
+msgid "Empty all items from Trash?"
+msgstr "ゴミ箱からすべてのアイテムを削除してもよろしいですか?"
+
+#: ../panels/privacy/cc-privacy-panel.c:487
+msgid "All items in the Trash will be permanently deleted."
+msgstr "ここでアイテムを削除すると元に戻すことはできません。"
+
+#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:32
+msgid "_Empty Trash"
+msgstr "ゴミ箱を空にする(_E)"
+
+#: ../panels/privacy/cc-privacy-panel.c:511
+msgid "Delete all the temporary files?"
+msgstr "一時ファイルをすべて削除しますか?"
+
+#: ../panels/privacy/cc-privacy-panel.c:512
+msgid "All the temporary files will be permanently deleted."
+msgstr "一時ファイルは完全に削除されます。"
+
+#: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
+msgid "_Purge Temporary Files"
+msgstr "一時ファイルを削除する(_P)"
+
+#: ../panels/privacy/cc-privacy-panel.c:535 ../panels/privacy/privacy.ui.h:31
 msgid "Purge Trash & Temporary Files"
 msgstr "ゴミ箱と一時ファイルの削除"
 
@@ -4446,139 +4615,120 @@ msgstr "画面オフのとき"
 msgid "30 seconds"
 msgstr "30 秒"
 
-#: ../panels/privacy/privacy.ui.h:11
-msgid "Control how you appear on the screen and the network."
-msgstr "画面やネットワークにあなたの情報がどう表示されるか設定します。"
-
-#: ../panels/privacy/privacy.ui.h:12
-msgid "Display _full name in top bar"
-msgstr "トップバーにフルネームを表示する(_F)"
-
-#: ../panels/privacy/privacy.ui.h:13
-msgid "Display full name in _lock screen"
-msgstr "ロック画面にフルネームを表示する(_L)"
-
-#: ../panels/privacy/privacy.ui.h:14
-msgid "_Stealth Mode"
-msgstr "ステルスモード(_S)"
-
-#: ../panels/privacy/privacy.ui.h:15
+#: ../panels/privacy/privacy.ui.h:9
 msgid "Immediately"
 msgstr "すぐに"
 
-#: ../panels/privacy/privacy.ui.h:16
+#: ../panels/privacy/privacy.ui.h:10
 msgid "1 day"
 msgstr "1 日"
 
-#: ../panels/privacy/privacy.ui.h:17
+#: ../panels/privacy/privacy.ui.h:11
 msgid "2 days"
 msgstr "2 日"
 
-#: ../panels/privacy/privacy.ui.h:18
+#: ../panels/privacy/privacy.ui.h:12
 msgid "3 days"
 msgstr "3 日"
 
-#: ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/privacy.ui.h:13
 msgid "4 days"
 msgstr "4 日"
 
-#: ../panels/privacy/privacy.ui.h:20
+#: ../panels/privacy/privacy.ui.h:14
 msgid "5 days"
 msgstr "5 日"
 
-#: ../panels/privacy/privacy.ui.h:21
+#: ../panels/privacy/privacy.ui.h:15
 msgid "6 days"
 msgstr "6 日"
 
-#: ../panels/privacy/privacy.ui.h:22
+#: ../panels/privacy/privacy.ui.h:16
 msgid "7 days"
 msgstr "7 日"
 
-#: ../panels/privacy/privacy.ui.h:23
+#: ../panels/privacy/privacy.ui.h:17
 msgid "14 days"
 msgstr "14 日"
 
-#: ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/privacy.ui.h:18
 msgid "30 days"
 msgstr "30 日"
 
-#: ../panels/privacy/privacy.ui.h:25
+#: ../panels/privacy/privacy.ui.h:19
 msgid "Forever"
 msgstr "無期限"
 
-#: ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/privacy.ui.h:21
 msgid "Remembering your history makes things easier to find again. These items are never shared over the network."
 msgstr "履歴を記憶しておくと、以前の作業を探し出すのが簡単になります。これらの項目はネットワークを越えて共有されることはありません。"
 
-#: ../panels/privacy/privacy.ui.h:28
+#: ../panels/privacy/privacy.ui.h:22
 msgid "Cl_ear Recent History"
 msgstr "履歴をクリアする(_E)"
 
-#: ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/privacy.ui.h:24
 msgid "_Recently Used"
 msgstr "最近使用したファイル(_R)"
 
-#: ../panels/privacy/privacy.ui.h:30
+#: ../panels/privacy/privacy.ui.h:25
 msgid "Retain _History"
 msgstr "記憶する期間(_H)"
 
-#: ../panels/privacy/privacy.ui.h:32
+#: ../panels/privacy/privacy.ui.h:27
 msgid "The Screen Lock protects your privacy when you are away."
 msgstr "画面をロックして離席中もプライバシーを保護します。"
 
-#: ../panels/privacy/privacy.ui.h:33
+#: ../panels/privacy/privacy.ui.h:28
 msgid "Automatic Screen _Lock"
 msgstr "自動画面ロック(_L)"
 
-#: ../panels/privacy/privacy.ui.h:34
-msgid "Lock Screen _After Blank For"
+#: ../panels/privacy/privacy.ui.h:29
+msgid "Lock screen _after blank for"
 msgstr "画面オフ後にロックするまでの時間(_A)"
 
-#: ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/privacy.ui.h:30
 msgid "Show _Notifications"
 msgstr "ロック画面に通知を表示する(_N)"
 
-#: ../panels/privacy/privacy.ui.h:37
-msgid "_Empty Trash"
-msgstr "ゴミ箱を空にする(_E)"
-
-#: ../panels/privacy/privacy.ui.h:38
-msgid "_Purge Temporary Files"
-msgstr "一時ファイルを削除する(_P)"
-
-#: ../panels/privacy/privacy.ui.h:39
+#: ../panels/privacy/privacy.ui.h:34
 msgid "Automatically purge the Trash and temporary files to help keep your computer free of unnecessary sensitive information."
 msgstr "ゴミ箱や一時ファイルを自動的に削除することで、不要になった機密情報が残ったままにならないようにします。"
 
-#: ../panels/privacy/privacy.ui.h:40
-msgid "Automatically Empty _Trash"
+#: ../panels/privacy/privacy.ui.h:35
+msgid "Automatically empty _Trash"
 msgstr "ゴミ箱を自動で空にする(_T)"
 
-#: ../panels/privacy/privacy.ui.h:41
-msgid "Automatically Purge Temporary _Files"
+#: ../panels/privacy/privacy.ui.h:36
+msgid "Automatically purge Temporary _Files"
 msgstr "一時ファイルを自動で削除する(_F)"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:37
 msgid "Purge _After"
 msgstr "次の時間経過後に削除する(_A)"
 
-#: ../panels/region/cc-format-chooser.c:122
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "ヤード・ポンド法"
 
-#: ../panels/region/cc-format-chooser.c:124
+#: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "メートル法"
 
-#: ../panels/region/cc-format-chooser.c:283
+#: ../panels/region/cc-format-chooser.c:285
 msgid "No regions found"
 msgstr "地域が見つかりません"
 
 #: ../panels/region/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "入力ソースが見つかりません"
+
+#: ../panels/region/cc-input-chooser.c:1070
+msgctxt "Input Source"
+msgid "Other"
+msgstr "その他"
 
 #: ../panels/region/cc-region-panel.c:239
 msgid "Your session needs to be restarted for changes to take effect"
@@ -4588,24 +4738,24 @@ msgstr "変更内容を反映させるにはログインしなおす必要があ
 msgid "Restart Now"
 msgstr "ログアウト"
 
-#: ../panels/region/cc-region-panel.c:550
+#: ../panels/region/cc-region-panel.c:569
 msgctxt "Language"
 msgid "None"
 msgstr "なし"
 
-#: ../panels/region/cc-region-panel.c:1040
-msgid "Sorry"
-msgstr "申し訳ありません"
-
-#: ../panels/region/cc-region-panel.c:1042
-msgid "Input methods can't be used on the login screen"
-msgstr "インプットメソッドはログイン画面で使用できません"
-
-#: ../panels/region/cc-region-panel.c:1491
+#: ../panels/region/cc-region-panel.c:853
 msgid "No input source selected"
 msgstr "入力ソースが選択されていません"
 
-#: ../panels/region/cc-region-panel.c:1652
+#: ../panels/region/cc-region-panel.c:1084
+msgid "Sorry"
+msgstr "申し訳ありません"
+
+#: ../panels/region/cc-region-panel.c:1086
+msgid "Input methods can't be used on the login screen"
+msgstr "インプットメソッドはログイン画面で使用できません"
+
+#: ../panels/region/cc-region-panel.c:1716
 msgid "Login Screen"
 msgstr "ログイン画面"
 
@@ -4695,6 +4845,10 @@ msgstr "キーボード設定でショートカットを変更できます"
 msgid "Alternative switch to next source"
 msgstr "次のソースへ切り替える (代替)"
 
+#: ../panels/region/input-options.ui.h:11
+msgid "Left+Right Alt"
+msgstr "左Alt+右Alt"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "英語 (UK)"
@@ -4711,23 +4865,34 @@ msgstr "オプション"
 msgid "Login settings are used by all users when logging into the system"
 msgstr "ログイン画面の設定はすべてのユーザーがログイン時に使用します"
 
-#: ../panels/search/cc-search-locations-dialog.c:276
+#: ../panels/search/cc-search-locations-dialog.c:275
 msgid "Home"
 msgstr "ホーム"
 
-#: ../panels/search/cc-search-locations-dialog.c:476
+#: ../panels/search/cc-search-locations-dialog.c:477
+msgctxt "Search Location"
 msgid "Places"
 msgstr "場所"
 
-#: ../panels/search/cc-search-locations-dialog.c:478
+#: ../panels/search/cc-search-locations-dialog.c:479
+msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: ../panels/search/cc-search-locations-dialog.c:676
+#: ../panels/search/cc-search-locations-dialog.c:481
+msgctxt "Search Location"
+msgid "Other"
+msgstr "その他"
+
+#: ../panels/search/cc-search-locations-dialog.c:679
 msgid "Select Location"
 msgstr "場所の選択"
 
-#: ../panels/search/cc-search-panel.c:193
+#: ../panels/search/cc-search-locations-dialog.c:683
+msgid "_OK"
+msgstr "OK(_O)"
+
+#: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "アプリケーションが見つかりません"
 
@@ -4760,21 +4925,21 @@ msgstr "下へ"
 msgid "Preferences"
 msgstr "設定"
 
-#: ../panels/sharing/cc-sharing-panel.c:259
+#: ../panels/sharing/cc-sharing-panel.c:274
 msgctxt "service is enabled"
 msgid "On"
 msgstr "オン"
 
-#: ../panels/sharing/cc-sharing-panel.c:261
+#: ../panels/sharing/cc-sharing-panel.c:276
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "オフ"
 
-#: ../panels/sharing/cc-sharing-panel.c:407
+#: ../panels/sharing/cc-sharing-panel.c:418
 msgid "Choose a Folder"
 msgstr "フォルダーの選択"
 
-#: ../panels/sharing/cc-sharing-panel.c:585
+#: ../panels/sharing/cc-sharing-panel.c:702
 msgid "Copy"
 msgstr "コピー"
 
@@ -4809,7 +4974,7 @@ msgstr "Bluetooth 共有を利用して、他の Bluetooth デバイスとファ
 
 #: ../panels/sharing/sharing.ui.h:3
 msgid "Share Public Folder"
-msgstr "公開をフォルダーを共有する"
+msgstr "公開フォルダーを共有する"
 
 #: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
@@ -4828,59 +4993,63 @@ msgid "Computer Name"
 msgstr "コンピューター名"
 
 #: ../panels/sharing/sharing.ui.h:8
-msgid "Remote Login"
-msgstr "リモートログイン"
+msgid "Personal File Sharing"
+msgstr "パーソナルファイル共有"
 
 #: ../panels/sharing/sharing.ui.h:9
-msgid "Some services are disabled because of no network access."
-msgstr "ネットワークに接続していないため無効となっているサービスがあります。"
+msgid "Screen Sharing"
+msgstr "画面共有"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "メディア共有"
 
 #: ../panels/sharing/sharing.ui.h:11
+msgid "Remote Login"
+msgstr "リモートログイン"
+
+#: ../panels/sharing/sharing.ui.h:12
+msgid "Some services are disabled because of no network access."
+msgstr "ネットワークに接続していないため無効となっているサービスがあります。"
+
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "現在のネットワーク上の他ユーザーと音楽、写真、ビデオを共有します。"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:14
 msgid "Share Media On This Network"
 msgstr "このネットワーク上のメディアコンテンツを共有する"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Shared Folders"
 msgstr "共有するフォルダー"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:16
 msgid "column"
 msgstr "列"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Add Folder"
 msgstr "フォルダーの追加"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Remove Folder"
 msgstr "フォルダーの削除"
 
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Personal File Sharing"
-msgstr "パーソナルファイル共有"
-
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 #, no-c-format
 msgid "Personal File Sharing allows you to share your Public folder with others on your current network using: <a href=\"dav://%s\">dav://%s</a>"
 msgstr "パーソナルファイル共有を利用して、現在のネットワークの他ユーザーが次の URI に接続し、あなたの公開フォルダーを共有できるようにします: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Share Public Folder On This Network"
 msgstr "このネットワークの公開フォルダーを共有する"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Require Password"
 msgstr "パスワードを要求する"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:25
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -4888,10 +5057,6 @@ msgid ""
 msgstr ""
 "リモートユーザーによる Secure Shell コマンドを使用した接続を許可します:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
-
-#: ../panels/sharing/sharing.ui.h:26
-msgid "Screen Sharing"
-msgstr "画面共有"
 
 #: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
@@ -5003,8 +5168,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "非増幅"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:261
+#: ../panels/sound/gvc-mixer-dialog.c:527
 msgid "_Profile:"
 msgstr "プロファイル(_P):"
 
@@ -5028,73 +5193,73 @@ msgstr[0] "%u 入力"
 msgid "System Sounds"
 msgstr "システムのサウンド"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:263
 msgid "_Test Speakers"
 msgstr "スピーカーのテスト(_T)"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:432
 msgid "Peak detect"
 msgstr "ピークの検出"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1508
+#: ../panels/sound/gvc-mixer-dialog.c:1510
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "名前"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1527
+#: ../panels/sound/gvc-mixer-dialog.c:1529
 msgid "Device"
 msgstr "デバイス"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1590
+#: ../panels/sound/gvc-mixer-dialog.c:1592
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s のスピーカーテスト"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1644
+#: ../panels/sound/gvc-mixer-dialog.c:1649
 msgid "_Output volume:"
 msgstr "出力の音量(_O):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1658
+#: ../panels/sound/gvc-mixer-dialog.c:1663
 msgid "Output"
 msgstr "出力"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1668
 msgid "C_hoose a device for sound output:"
 msgstr "サウンド出力デバイスの選択(_H):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1693
 msgid "Settings for the selected device:"
 msgstr "選択したデバイスの設定:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1699
+#: ../panels/sound/gvc-mixer-dialog.c:1704
 msgid "Input"
 msgstr "入力"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1706
+#: ../panels/sound/gvc-mixer-dialog.c:1711
 msgid "_Input volume:"
 msgstr "入力の音量(_I):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1729
+#: ../panels/sound/gvc-mixer-dialog.c:1734
 msgid "Input level:"
 msgstr "入力レベル:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1757
+#: ../panels/sound/gvc-mixer-dialog.c:1762
 msgid "C_hoose a device for sound input:"
 msgstr "サウンド入力デバイスの選択(_H):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1789
 msgid "Sound Effects"
 msgstr "音響効果"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
+#: ../panels/sound/gvc-mixer-dialog.c:1796
 msgid "_Alert volume:"
 msgstr "警告音の音量(_A):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
+#: ../panels/sound/gvc-mixer-dialog.c:1809
 msgid "Applications"
 msgstr "アプリケーション"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1813
 msgid "No application is currently playing or recording audio."
 msgstr "音声の再生または録音を実行しているアプリケーションはありません。"
 
@@ -5143,11 +5308,6 @@ msgstr "サブウーファー"
 msgid "Custom"
 msgstr "その他"
 
-#: ../panels/universal-access/cc-ua-panel.c:281
-#: ../panels/universal-access/cc-ua-panel.c:287
-msgid "No shortcut set"
-msgstr "ショートカット未設定"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "見る、聞く、タイピング、クリック操作など、コンピューターを簡単に使えるようにします"
@@ -5158,304 +5318,256 @@ msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;s
 msgstr "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;キーボード;マウス;アクセシビリティ;コントラスト;ズーム;拡大鏡;スクリーンリーダー;テキスト;文字;フォント;サイズ;大きさ;固定キー;スローキー;バウンスキー;マウスキー;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:35
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "低い"
+msgid "_Always Show Universal Access Menu"
+msgstr "ユニバーサルアクセスメニューを常に表示する(_A)"
 
 #: ../panels/universal-access/uap.ui.h:2
-msgctxt "universal access, contrast"
-msgid "Normal"
-msgstr "標準"
-
-#: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:36
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "高い"
-
-#: ../panels/universal-access/uap.ui.h:4
-msgctxt "universal access, contrast"
-msgid "High/Inverse"
-msgstr "高い/反転"
-
-#: ../panels/universal-access/uap.ui.h:5
-msgid "On screen keyboard"
-msgstr "オンスクリーンキーボード"
-
-#: ../panels/universal-access/uap.ui.h:6
-msgid "GOK"
-msgstr "GOK"
-
-#: ../panels/universal-access/uap.ui.h:7
-msgid "OnBoard"
-msgstr "OnBoard"
-
-#: ../panels/universal-access/uap.ui.h:10
-#, no-c-format
-msgid "75%"
-msgstr "75%"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgctxt "universal access, text size"
-msgid "Small"
-msgstr "小"
-
-#: ../panels/universal-access/uap.ui.h:13
-#, no-c-format
-msgid "100%"
-msgstr "100%"
-
-#: ../panels/universal-access/uap.ui.h:14
-msgctxt "universal access, text size"
-msgid "Normal"
-msgstr "中"
-
-#: ../panels/universal-access/uap.ui.h:16
-#, no-c-format
-msgid "125%"
-msgstr "125%"
-
-#: ../panels/universal-access/uap.ui.h:17
-msgctxt "universal access, text size"
-msgid "Large"
-msgstr "大"
-
-#: ../panels/universal-access/uap.ui.h:19
-#, no-c-format
-msgid "150%"
-msgstr "150%"
-
-#: ../panels/universal-access/uap.ui.h:20
-msgctxt "universal access, text size"
-msgid "Larger"
-msgstr "特大"
-
-#: ../panels/universal-access/uap.ui.h:21
-msgid "High Contrast"
-msgstr "ハイコントラスト"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Beep on Caps and Num Lock"
-msgstr "Caps Lock と Num Lock を切り替えるとビープ音を鳴らす"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Screen Reader"
-msgstr "スクリーンリーダー"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Turn on or off:"
-msgstr "オン/オフ の切り替え:"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgctxt "universal access, zoom"
-msgid "Zoom"
-msgstr "ズーム"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Zoom in:"
-msgstr "ズームイン:"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Zoom out:"
-msgstr "ズームアウト:"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Large Text"
-msgstr "大きな文字"
-
-#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "見る"
 
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Visual Alerts"
-msgstr "視覚警告"
+#: ../panels/universal-access/uap.ui.h:3
+msgid "_High Contrast"
+msgstr "ハイコントラスト(_H)"
 
-#: ../panels/universal-access/uap.ui.h:32
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "警告音が鳴った場合に視覚的に警告を表示する"
+#: ../panels/universal-access/uap.ui.h:4
+msgid "_Large Text"
+msgstr "大きな文字(_L)"
 
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Flash the window title"
-msgstr "ウィンドウのタイトルバーをひらめかせる"
+#: ../panels/universal-access/uap.ui.h:5
+msgid "_Zoom"
+msgstr "ズーム(_Z)"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Flash the entire screen"
-msgstr "画面全体をひらめかせる"
+#: ../panels/universal-access/uap.ui.h:7
+msgid "Screen _Reader"
+msgstr "スクリーンリーダー(_R)"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Closed Captioning"
-msgstr "クローズドキャプション"
+#: ../panels/universal-access/uap.ui.h:8
+msgid "_Sound Keys"
+msgstr "切り替えキー(_S)"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Display a textual description of speech and sounds"
-msgstr "音声に関する説明を文章で表示する"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "_Test flash"
-msgstr "動作確認(_T)"
-
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:9
 msgid "Hearing"
 msgstr "聞く"
 
-#: ../panels/universal-access/uap.ui.h:40
-msgid "On Screen Keyboard"
-msgstr "オンスクリーンキーボード"
+#: ../panels/universal-access/uap.ui.h:10
+msgid "_Visual Alerts"
+msgstr "視覚警告(_V)"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Sticky Keys"
-msgstr "固定キー"
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Screen _Keyboard"
+msgstr "スクリーンキーボード(_K)"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:13
+msgid "_Typing Assist (AccessX)"
+msgstr "タイピング支援 [AccessX](_T)"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Pointing and Clicking"
+msgstr "ポインター操作とクリック"
+
+#: ../panels/universal-access/uap.ui.h:15
+msgid "_Mouse Keys"
+msgstr "マウスキー(_M)"
+
+#: ../panels/universal-access/uap.ui.h:16
+msgid "_Click Assist"
+msgstr "クリック支援(_C)"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgid "Screen Reader"
+msgstr "スクリーンリーダー"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr "スクリーンリーダーを有効にすると、フォーカスのある画面のテキストを音声で読み上げます。"
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Screen Reader"
+msgstr "スクリーンリーダー(_S)"
+
+# 直訳するなら「サウンドキー」のようになるが、この直訳ではユーザーに意味を誤解されるおそれがある。
+# Windows では、これに相当する機能は「Toggle Keys」と呼ばれており[1]、その日本語訳は「切り替えキー」である[2]。
+# 「切り替えキー」もわかりやすいとは言いづらいが、Windows側の機能を知っているユーザーには類推できること、またWeb検索などで機能を特定しやすいこと、「サウンドキー」よりかは幾分ましであること、などを考慮し「切り替えキー」を採用する。
+# [1] http://windows.microsoft.com/en-us/Windows7/Make-the-keyboard-easier-to-use
+# [2] http://windows.microsoft.com/ja-JP/Windows7/Make-the-keyboard-easier-to-use
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Sound Keys"
+msgstr "切り替えキー"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Beep when Num Lock or Caps Lock are turned on."
+msgstr "Caps Lock と Num Lock を切り替えるとビープ音を鳴らします。"
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Visual Alerts"
+msgstr "視覚警告"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "警告音が鳴った場合に視覚的に警告を表示します。"
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "_Test flash"
+msgstr "動作確認(_T)"
+
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Flash the _window title"
+msgstr "ウィンドウのタイトルバーをひらめかせる(_W)"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Flash the entire _screen"
+msgstr "画面全体をひらめかせる(_S)"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Typing Assist"
+msgstr "タイピング支援"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "_Sticky Keys"
+msgstr "固定キー(_S)"
+
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Treats a sequence of modifier keys as a key combination"
-msgstr "修飾キーに続いてキーを押下したらそのキーと修飾キーを同時に押下したものと扱う"
+msgstr "修飾キーに続いてキーを押したらそのキーと修飾キーを同時に押したものと扱う"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Disable if two keys are pressed together"
 msgstr "同時に 2 つのキーを押したら無効にする(_D)"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Beep when a _modifer key is pressed"
 msgstr "修飾キーを押したらビープ音を鳴らす(_M)"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "Slow Keys"
-msgstr "スローキー"
+#: ../panels/universal-access/uap.ui.h:32
+msgid "S_low Keys"
+msgstr "スローキー(_L)"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "キーを押下してから入力と認識されるまでに一定の間隔を設定する"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:34
 msgid "A_cceptance delay:"
 msgstr "認識するまでの間隔(_C):"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:35
+msgctxt "slow keys delay"
 msgid "Short"
 msgstr "短い"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Slow keys typing delay"
 msgstr "スローキーの入力間隔"
 
-#: ../panels/universal-access/uap.ui.h:50
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:37
+msgctxt "slow keys delay"
 msgid "Long"
 msgstr "長い"
 
-#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Beep when a key is"
-msgstr "キーが次のときビープ音を鳴らす: "
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Beep when a key is pr_essed"
+msgstr "キーが押されたらビープ音を鳴らす(_E)"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:54
-msgid "pressed"
-msgstr "押された"
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Beep when a key is _accepted"
+msgstr "キー入力が受け付けられたらビープ音を鳴らす(_A)"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
-msgid "accepted"
-msgstr "認識された"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
-msgid "rejected"
-msgstr "拒否された"
-
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Bounce Keys"
-msgstr "バウンスキー"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Ignores fast duplicate keypresses"
-msgstr "同じキーを繰り返し押した場合は無視する"
-
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Acc_eptance delay:"
-msgstr "認識するまでの間隔(_E):"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Bounce keys typing delay"
-msgstr "バウンスキーの入力間隔"
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Beep when a key is _rejected"
 msgstr "キー入力が拒否されたらビープ音を鳴らす(_R)"
 
-#: ../panels/universal-access/uap.ui.h:64
-msgid "Enable by Keyboard"
-msgstr "キーボードによる有効化"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "_Bounce Keys"
+msgstr "バウンスキー(_B)"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Ignores fast duplicate keypresses"
+msgstr "同じキーを繰り返し押した場合は無視する"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgctxt "bounce keys delay"
+msgid "Short"
+msgstr "短い"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Bounce keys typing delay"
+msgstr "バウンスキーの入力間隔"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgctxt "bounce keys delay"
+msgid "Long"
+msgstr "長い"
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "_Enable by Keyboard"
+msgstr "キーボードから有効化できるようにする(_E)"
+
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "アクセシビリティ機能のオン/オフをキーボードで切り替える"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Mouse Keys"
-msgstr "マウスキー"
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Click Assist"
+msgstr "クリック支援"
 
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Control the pointer using the keypad"
-msgstr "キーパッドでポインターを制御する"
+#: ../panels/universal-access/uap.ui.h:49
+msgid "_Simulated Secondary Click"
+msgstr "副ボタンのクリックの代替(_S)"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Video Mouse"
-msgstr "ビデオマウス"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Control the pointer using the video camera."
-msgstr "ビデオカメラでポインターを制御する。"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Simulated Secondary Click"
-msgstr "副ボタンのクリックの代替"
-
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "主ボタンを押したままにすると副ボタンのクリックとみなす"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:51
+msgctxt "secondary click"
+msgid "Short"
+msgstr "短い"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Secondary click delay"
 msgstr "副ボタンのクリックの間隔"
 
-# See also ja.po of mousetweak
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Hover Click"
-msgstr "ホバークリック"
+#: ../panels/universal-access/uap.ui.h:53
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "長い"
 
-#: ../panels/universal-access/uap.ui.h:75
+# See also ja.po of mousetweak
+#: ../panels/universal-access/uap.ui.h:54
+msgid "_Hover Click"
+msgstr "ホバークリック(_H)"
+
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Trigger a click when the pointer hovers"
 msgstr "ポインターの移動を停止したらクリック動作を行う"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:56
 msgid "D_elay:"
 msgstr "認識するまでの間隔(_E):"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:57
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "短い"
+
+#: ../panels/universal-access/uap.ui.h:58
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "長い"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Motion _threshold:"
 msgstr "ジェスチャーのしきい値(_T):"
 
-#: ../panels/universal-access/uap.ui.h:78
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:60
+msgctxt "dwell click threshold"
 msgid "Small"
-msgstr "小さい"
+msgstr "小"
 
-#: ../panels/universal-access/uap.ui.h:79
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:61
+msgctxt "dwell click threshold"
 msgid "Large"
-msgstr "大きい"
-
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Mouse Settings"
-msgstr "マウスの設定"
-
-#: ../panels/universal-access/uap.ui.h:81
-msgid "Pointing and Clicking"
-msgstr "ポインター操作とクリック"
+msgstr "大"
 
 #: ../panels/universal-access/zoom-options.c:357
 msgctxt "Distance"
@@ -5622,6 +5734,16 @@ msgctxt "universal access, brightness"
 msgid "High"
 msgstr "明るい"
 
+#: ../panels/universal-access/zoom-options.ui.h:35
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "低い"
+
+#: ../panels/universal-access/zoom-options.ui.h:36
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "高い"
+
 #: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "色の設定:"
@@ -5644,48 +5766,55 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "管理者"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Add account"
-msgstr "アカウントの追加"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "_Local Account"
-msgstr "ローカルのアカウント(_L)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Enterprise Login"
-msgstr "エンタープライズのログイン(_E)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name"
+msgid "_Full Name"
 msgstr "フルネーム(_F)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "アカウントの種類(_T)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+msgid "Allow user to set a password when they next login"
+msgstr "次回ログイン時にユーザー自身でパスワードを設定させる"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+msgid "Set a password now"
+msgstr "いまパスワードを設定する"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+msgid "_Verify"
+msgstr "確認(_V)"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
+msgid "Enterprise login allows an existing centrally managed user account to be used on this device."
+msgstr "エンタープライズログインでは、中央管理された既存のユーザーアカウントをこのデバイスで使用できます。"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Domain"
 msgstr "ドメイン(_D)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
-msgid "_Login Name"
-msgstr "ログイン名(_L)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "Tip: Enterprise domain or realm name"
-msgstr "ヒント: エンタープライズドメイン名またはレルム名"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "C_ontinue"
-msgstr "続ける(_O)"
+msgid ""
+"Go online to add\n"
+"enterprise login accounts."
+msgstr ""
+"オンラインになって\n"
+"エンタープライズログインアカウントを追加する。"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
+msgid "_Enroll"
+msgstr "登録(_E)"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "ドメイン管理者のログイン"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5695,11 +5824,11 @@ msgstr ""
 "ドメインに登録する必要があります。ネットワーク管理者にドメインの\n"
 "パスワード入力を行ってもらってください。"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator _Name"
 msgstr "管理者名(_N)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:22
 msgid "Administrator Password"
 msgstr "管理者のパスワード"
 
@@ -5736,7 +5865,7 @@ msgid "Right little finger"
 msgstr "右の小指"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:700
+#: ../panels/user-accounts/um-fingerprint-dialog.c:699
 msgid "Enable Fingerprint Login"
 msgstr "指紋認証を有効にする"
 
@@ -5773,71 +5902,19 @@ msgstr "Login;Name;Fingerprint;Avatar;Logo;Face;Password;ログイン;名前;指
 msgid "Login History"
 msgstr "ログイン履歴"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
-msgid "Previous Week"
-msgstr "前の週へ"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
-msgid "Next Week"
-msgstr "次の週へ"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:5
-msgid "Next week"
-msgstr "次の週へ"
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "Set a password now"
-msgstr "いまパスワードを設定する"
+msgid "_Verify New Password"
+msgstr "新しいパスワードの確認(_V)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-msgid "Choose password at next login"
-msgstr "次回のログインでパスワードを選択する"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "Log in without a password"
-msgstr "パスワードなしでログインする"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
-msgid "Disable this account"
-msgstr "アカウントを無効にする"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Enable this account"
-msgstr "アカウントを有効にする"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "C_onfirm password"
-msgstr "パスワードの確認(_O)"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "_New password"
+msgid "_New Password"
 msgstr "新しいパスワード(_N)"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Generate a password"
-msgstr "パスワードの生成"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
-msgid "Current _password"
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "Current _Password"
 msgstr "現在のパスワード(_P)"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "_Action"
-msgstr "アクション(_A)"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Changing password for"
-msgstr "パスワードの変更"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
-msgid "_Show password"
-msgstr "パスワードを表示(_S)"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
-msgid "How to choose a strong password"
-msgstr "強力なパスワードの選び方"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Ch_ange"
 msgstr "変更(_A)"
 
@@ -5914,40 +5991,130 @@ msgstr "ユーザーアカウントの管理"
 msgid "Authentication is required to change user data"
 msgstr "ユーザーのデータを変更するには認証が必要になります"
 
-#: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:597
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "短すぎる"
+#: ../panels/user-accounts/pw-utils.c:82
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr "新しいパスワードは、現在のパスワードとは異なるものを指定する必要があります。"
 
-#: ../panels/user-accounts/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "不十分"
+#: ../panels/user-accounts/pw-utils.c:84
+msgctxt "Password hint"
+msgid "Try changing some letters and numbers."
+msgstr "いくつかの文字や数字を変更してください。"
+
+#: ../panels/user-accounts/pw-utils.c:86 ../panels/user-accounts/pw-utils.c:94
+msgctxt "Password hint"
+msgid "Try changing the password a bit more."
+msgstr "新しいパスワードが現在のものと似すぎています。もう少し異なるものを使用してください。"
+
+#: ../panels/user-accounts/pw-utils.c:88
+msgctxt "Password hint"
+msgid "A password without your user name would be stronger."
+msgstr "パスワードからユーザー名を取り除くともっと強くなるでしょう。"
+
+#: ../panels/user-accounts/pw-utils.c:90
+msgctxt "Password hint"
+msgid "Try to avoid using your name in the password."
+msgstr "パスワード中にユーザーの氏名を使うのは避けるようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:92
+msgctxt "Password hint"
+msgid "Try to avoid some of the words included in the password."
+msgstr "パスワードにある一部の単語を使わないようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:96
+msgctxt "Password hint"
+msgid "Try to avoid common words."
+msgstr "一般的な単語は避けるようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:98
+msgctxt "Password hint"
+msgid "Try to avoid reordering existing words."
+msgstr "既存の単語の文字を並べ替えたものは使わないようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:100
+msgctxt "Password hint"
+msgid "Try to use more numbers."
+msgstr "数字をもっと使うようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:102
+msgctxt "Password hint"
+msgid "Try to use more uppercase letters."
+msgstr "大文字をもっと使うようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:104
+msgctxt "Password hint"
+msgid "Try to use more lowercase letters."
+msgstr "小文字をもっと使うようにください。"
+
+#: ../panels/user-accounts/pw-utils.c:106
+msgctxt "Password hint"
+msgid "Try to use more special characters, like punctuation."
+msgstr "記号など特殊文字をもっと使うようにしてください。"
 
 #: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:598
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "弱い"
+msgctxt "Password hint"
+msgid "Try to use a mixture of letters, numbers and punctuation."
+msgstr "アルファベット、数字、記号を混在させるようにしてください。"
 
-#: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:599
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "まあまあ"
+#: ../panels/user-accounts/pw-utils.c:110
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same character."
+msgstr "同じ文字を連続して使わないようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:112
+msgctxt "Password hint"
+msgid "Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation."
+msgstr "同じ種類の文字を繰り返しは避けるようにしてください。アルファベット、数字、記号を混ぜてください。"
 
 #: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:600
-msgctxt "Password strength"
-msgid "Good"
-msgstr "良"
+msgctxt "Password hint"
+msgid "Try to avoid sequences like 1234 or abcd."
+msgstr "1234 や abcd などの連続した並びは避けるようにしてください。"
 
-#: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:601
+#: ../panels/user-accounts/pw-utils.c:116
+msgctxt "Password hint"
+msgid "Try to add more letters, numbers and symbols."
+msgstr "文字、数字、記号をもっと追加するようにしてください。"
+
+#: ../panels/user-accounts/pw-utils.c:118
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and use a number or two."
+msgstr "大文字、小文字を混在させ、さらに数字を 1 つか 2 つは使用してください。"
+
+#: ../panels/user-accounts/pw-utils.c:120
+msgctxt "Password hint"
+msgid "Good password! Adding more letters, numbers and punctuation will make it stronger."
+msgstr "良いパスワードです! さらに文字や数字、記号を追加するともっと強くなります。"
+
+#: ../panels/user-accounts/pw-utils.c:142
+#: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
-msgid "Strong"
-msgstr "強い"
+msgid "Strength: Weak"
+msgstr "強度: 弱"
+
+#: ../panels/user-accounts/pw-utils.c:146
+#: ../panels/user-accounts/pw-utils.c:173
+msgctxt "Password strength"
+msgid "Strength: Low"
+msgstr "強度: 低"
+
+#: ../panels/user-accounts/pw-utils.c:149
+#: ../panels/user-accounts/pw-utils.c:174
+msgctxt "Password strength"
+msgid "Strength: Medium"
+msgstr "強度: 中"
+
+#: ../panels/user-accounts/pw-utils.c:152
+#: ../panels/user-accounts/pw-utils.c:175
+msgctxt "Password strength"
+msgid "Strength: Good"
+msgstr "強度: 良"
+
+#: ../panels/user-accounts/pw-utils.c:155
+#: ../panels/user-accounts/pw-utils.c:176
+msgctxt "Password strength"
+msgid "Strength: High"
+msgstr "強度: 高"
 
 #: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
@@ -5998,26 +6165,67 @@ msgstr "新しいパスワードには十分な種類の文字が含まれてい
 msgid "Unknown error"
 msgstr "原因不明のエラー"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:35
+msgid "Should match the web address of your account provider."
+msgstr "アカウント提供者のウェブアドレスと一致するはずです。"
+
+#: ../panels/user-accounts/um-account-dialog.c:222
 msgid "Failed to add account"
 msgstr "アカウントの追加に失敗しました"
 
-#: ../panels/user-accounts/um-account-dialog.c:403
-#: ../panels/user-accounts/um-account-dialog.c:444
+#: ../panels/user-accounts/um-account-dialog.c:316
+msgid "This will be used to name your home folder and can't be changed."
+msgstr "ユーザー名はホームフォルダーの名前に使用されます。これは変更できません。"
+
+#: ../panels/user-accounts/um-account-dialog.c:449
+msgid "Passwords do not match."
+msgstr "パスワードが一致しません。"
+
+#: ../panels/user-accounts/um-account-dialog.c:719
+#: ../panels/user-accounts/um-account-dialog.c:765
 msgid "Failed to register account"
 msgstr "アカウントの登録に失敗しました"
 
-#: ../panels/user-accounts/um-account-dialog.c:577
+#: ../panels/user-accounts/um-account-dialog.c:903
 msgid "No supported way to authenticate with this domain"
 msgstr "このドメインで認証を行う方法はサポートされていません"
 
-#: ../panels/user-accounts/um-account-dialog.c:631
+#: ../panels/user-accounts/um-account-dialog.c:962
 msgid "Failed to join domain"
 msgstr "ドメインの参加に失敗しました"
 
-#: ../panels/user-accounts/um-account-dialog.c:688
+#: ../panels/user-accounts/um-account-dialog.c:1023
+msgid ""
+"That login name didn't work.\n"
+"Please try again."
+msgstr ""
+"ログイン名に問題がありました。\n"
+"やり直してください。"
+
+#: ../panels/user-accounts/um-account-dialog.c:1030
+msgid ""
+"That login password didn't work.\n"
+"Please try again."
+msgstr ""
+"パスワードに問題がありました。\n"
+"やり直してください。"
+
+#: ../panels/user-accounts/um-account-dialog.c:1038
 msgid "Failed to log into domain"
 msgstr "ドメインへのログインに失敗しました"
+
+#: ../panels/user-accounts/um-account-dialog.c:1096
+msgid "Unable find the domain. Maybe you misspelled it?"
+msgstr "ドメインを見つけられません。スペルミスがないか確認してください。"
+
+#: ../panels/user-accounts/um-account-dialog.c:1446
+msgid "Add User"
+msgstr "ユーザーの追加"
+
+#. Create enterprise toggle button.
+#: ../panels/user-accounts/um-account-dialog.c:1459
+msgid "_Enterprise Login"
+msgstr "エンタープライズのログイン(_E)"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid "You are not allowed to access the device. Contact your system administrator."
@@ -6044,19 +6252,19 @@ msgstr "登録した指紋情報を削除しますか?"
 msgid "_Delete Fingerprints"
 msgstr "削除する(_D)"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:279
+#: ../panels/user-accounts/um-fingerprint-dialog.c:278
 msgid "Do you want to delete your registered fingerprints so fingerprint login is disabled?"
 msgstr "登録済みの指紋情報を削除して指紋認証を無効にしますか?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:455
+#: ../panels/user-accounts/um-fingerprint-dialog.c:454
 msgid "Done!"
 msgstr "完了です!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:516
-#: ../panels/user-accounts/um-fingerprint-dialog.c:558
+#: ../panels/user-accounts/um-fingerprint-dialog.c:515
+#: ../panels/user-accounts/um-fingerprint-dialog.c:557
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "'%s' というデバイスにアクセスできません"
@@ -6064,16 +6272,16 @@ msgstr "'%s' というデバイスにアクセスできません"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:599
+#: ../panels/user-accounts/um-fingerprint-dialog.c:598
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "'%s' で指紋を読み取れませんでした"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:650
+#: ../panels/user-accounts/um-fingerprint-dialog.c:649
 msgid "Could not access any fingerprint readers"
 msgstr "指紋リーダーにアクセスできませんでした"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:651
+#: ../panels/user-accounts/um-fingerprint-dialog.c:650
 msgid "Please contact your system administrator for help."
 msgstr "システム管理者に連絡してください。"
 
@@ -6082,16 +6290,16 @@ msgstr "システム管理者に連絡してください。"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:734
+#: ../panels/user-accounts/um-fingerprint-dialog.c:733
 #, c-format
 msgid "To enable fingerprint login, you need to save one of your fingerprints, using the '%s' device."
 msgstr "指紋認証を有効にするには、'%s' のデバイスを使って、あなたの指紋を登録する必要があります。"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:741
+#: ../panels/user-accounts/um-fingerprint-dialog.c:740
 msgid "Selecting finger"
 msgstr "指の選択"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:742
+#: ../panels/user-accounts/um-fingerprint-dialog.c:741
 msgid "Enrolling fingerprints"
 msgstr "指紋の登録"
 
@@ -6103,53 +6311,71 @@ msgstr "今週"
 msgid "Last Week"
 msgstr "先週"
 
-#: ../panels/user-accounts/um-password-dialog.c:128
-msgid "_Generate a password"
-msgstr "パスワードの生成(_G)"
+#. Translators: This is a date format string in the style of "Feb 18",
+#. shown as the first day of a week on login history dialog.
+#. Translators: This is a date format string in the style of "Feb 24",
+#. shown as the last day of a week on login history dialog.
+#: ../panels/user-accounts/um-history-dialog.c:97
+#: ../panels/user-accounts/um-history-dialog.c:101
+msgctxt "login history week label"
+msgid "%b %e"
+msgstr "%m月%d日"
 
-#: ../panels/user-accounts/um-password-dialog.c:181
+#. Translators: This is a date format string in the style of "Feb 24, 2013",
+#. shown as the last day of a week on login history dialog.
+#: ../panels/user-accounts/um-history-dialog.c:106
+msgctxt "login history week label"
+msgid "%b %e, %Y"
+msgstr "%Y年%m月%d日"
+
+#. Translators: This indicates a week label on a login history.
+#. The first %s is the first day of a week, and the second %s the last day.
+#: ../panels/user-accounts/um-history-dialog.c:111
+#, c-format
+msgctxt "login history week label"
+msgid "%s - %s"
+msgstr "%s - %s"
+
+#. Translators: This is a time format string in the style of "22:58".
+#. It indicates a login time which follows a date.
+#: ../panels/user-accounts/um-history-dialog.c:195
+#: ../panels/user-accounts/um-user-panel.c:626
+msgctxt "login date-time"
+msgid "%k:%M"
+msgstr "%H:%M"
+
+#. Translators: This indicates a login date-time.
+#. The first %s is a date, and the second %s a time.
+#: ../panels/user-accounts/um-history-dialog.c:198
+#: ../panels/user-accounts/um-user-panel.c:630
+#, c-format
+msgctxt "login date-time"
+msgid "%s, %s"
+msgstr "%s %s"
+
+#: ../panels/user-accounts/um-history-dialog.c:267
+msgid "Session Ended"
+msgstr "セッション終了"
+
+#: ../panels/user-accounts/um-history-dialog.c:273
+msgid "Session Started"
+msgstr "セッション開始"
+
+#: ../panels/user-accounts/um-password-dialog.c:146
 msgid "Please choose another password."
 msgstr "別のパスワードを選択してください。"
 
-#: ../panels/user-accounts/um-password-dialog.c:190
+#: ../panels/user-accounts/um-password-dialog.c:155
 msgid "Please type your current password again."
 msgstr "現在のパスワードを再度入力してください。"
 
-#: ../panels/user-accounts/um-password-dialog.c:196
+#: ../panels/user-accounts/um-password-dialog.c:161
 msgid "Password could not be changed"
 msgstr "パスワードが変更できません"
 
-#: ../panels/user-accounts/um-password-dialog.c:301
-msgid "You need to enter a new password"
-msgstr "新しいパスワードを入力してください"
-
-#: ../panels/user-accounts/um-password-dialog.c:304
-msgid "The new password is not strong enough"
-msgstr "新しいパスワードは強度が不十分です"
-
-#: ../panels/user-accounts/um-password-dialog.c:310
-msgid "You need to confirm the password"
-msgstr "確認のために新しいパスワードを入力してください"
-
-#: ../panels/user-accounts/um-password-dialog.c:313
-msgid "The passwords do not match"
-msgstr "パスワードが一致しません"
-
-#: ../panels/user-accounts/um-password-dialog.c:319
-msgid "You need to enter your current password"
-msgstr "現在のパスワードを入力してください"
-
-#: ../panels/user-accounts/um-password-dialog.c:322
-msgid "The current password is not correct"
-msgstr "パスワードが間違っています"
-
-#: ../panels/user-accounts/um-password-dialog.c:385
-msgid "Passwords do not match"
-msgstr "パスワードが一致しません"
-
-#: ../panels/user-accounts/um-password-dialog.c:439
-msgid "Wrong password"
-msgstr "間違ったパスワード"
+#: ../panels/user-accounts/um-password-dialog.c:287
+msgid "The passwords do not match."
+msgstr "パスワードが一致しません。"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6177,7 +6403,8 @@ msgstr "このタイプのドメインは自動で参加できません"
 msgid "No such domain or realm found"
 msgstr "そのようなドメインやレルムは見つかりませんでした"
 
-#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:814
+#: ../panels/user-accounts/um-realm-manager.c:828
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "%2$s ドメインに %1$s としてログインできません"
@@ -6186,84 +6413,88 @@ msgstr "%2$s ドメインに %1$s としてログインできません"
 msgid "Invalid password, please try again"
 msgstr "無効なパスワードです、やり直してください"
 
-#: ../panels/user-accounts/um-realm-manager.c:824
+#: ../panels/user-accounts/um-realm-manager.c:833
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%sドメインに接続できませんでした: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:376
+#: ../panels/user-accounts/um-user-panel.c:193
+msgid "Other Accounts"
+msgstr "他のアカウント"
+
+#: ../panels/user-accounts/um-user-panel.c:412
 msgid "Failed to delete user"
 msgstr "ユーザーの削除に失敗しました"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:477
 msgid "You cannot delete your own account."
 msgstr "自分自身のアカウントは削除できません。"
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:486
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s はまだログインしています"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:490
 msgid "Deleting a user while they are logged in can leave the system in an inconsistent state."
 msgstr "ログイン中のユーザーを削除すると、システムが不整合な状態になることがあります。"
 
-#: ../panels/user-accounts/um-user-panel.c:458
+#: ../panels/user-accounts/um-user-panel.c:499
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "'%s' のファイルを残しますか?"
 
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:503
 msgid "It is possible to keep the home directory, mail spool and temporary files around when deleting a user account."
 msgstr "ユーザーアカウントを削除するときに、ユーザーのホームディレクトリ、メールスプールおよび一時ファイルを残しておくことができます。"
 
-#: ../panels/user-accounts/um-user-panel.c:465
+#: ../panels/user-accounts/um-user-panel.c:506
 msgid "_Delete Files"
 msgstr "ファイルを削除(_D)"
 
-#: ../panels/user-accounts/um-user-panel.c:466
+#: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Keep Files"
 msgstr "ファイルを残す(_K)"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:559
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "無効アカウント"
 
-#: ../panels/user-accounts/um-user-panel.c:526
+#: ../panels/user-accounts/um-user-panel.c:567
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "次のログイン時に設定"
 
-#: ../panels/user-accounts/um-user-panel.c:529
+#: ../panels/user-accounts/um-user-panel.c:570
 msgctxt "Password mode"
 msgid "None"
 msgstr "なし"
 
-#: ../panels/user-accounts/um-user-panel.c:578
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Logged in"
 msgstr "ログイン中"
 
-#: ../panels/user-accounts/um-user-panel.c:942
+#: ../panels/user-accounts/um-user-panel.c:999
 msgid "Failed to contact the accounts service"
 msgstr "アカウントサービスの接続に失敗しました"
 
-#: ../panels/user-accounts/um-user-panel.c:944
+#: ../panels/user-accounts/um-user-panel.c:1001
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService がインストールされ、有効になっているか確認してください。"
 
-#: ../panels/user-accounts/um-user-panel.c:985
+#: ../panels/user-accounts/um-user-panel.c:1042
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr "変更するには、まず * アイコンをクリックしてください"
 
-#: ../panels/user-accounts/um-user-panel.c:1023
+#: ../panels/user-accounts/um-user-panel.c:1080
 msgid "Create a user account"
-msgstr "新規ユーザーアカウントの作成"
+msgstr "ユーザーアカウントを作成します"
 
-#: ../panels/user-accounts/um-user-panel.c:1034
-#: ../panels/user-accounts/um-user-panel.c:1320
+#: ../panels/user-accounts/um-user-panel.c:1091
+#: ../panels/user-accounts/um-user-panel.c:1380
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6271,12 +6502,12 @@ msgstr ""
 "ユーザーアカウントを作成するには、\n"
 "まず * アイコンをクリックしてください"
 
-#: ../panels/user-accounts/um-user-panel.c:1043
+#: ../panels/user-accounts/um-user-panel.c:1101
 msgid "Delete the selected user account"
 msgstr "選択したユーザーアカウントを削除します"
 
-#: ../panels/user-accounts/um-user-panel.c:1055
-#: ../panels/user-accounts/um-user-panel.c:1325
+#: ../panels/user-accounts/um-user-panel.c:1113
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6284,39 +6515,37 @@ msgstr ""
 "選択したユーザーアカウントを削除するには、\n"
 "まず * アイコンをクリックしてください"
 
-#: ../panels/user-accounts/um-user-panel.c:1229
+#: ../panels/user-accounts/um-user-panel.c:1295
 msgid "My Account"
 msgstr "自分のアカウント"
 
-#: ../panels/user-accounts/um-user-panel.c:1238
-msgid "Other Accounts"
-msgstr "他のアカウント"
-
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:551
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "'%s' というユーザーはすでに存在します"
 
-#: ../panels/user-accounts/um-utils.c:520
+#: ../panels/user-accounts/um-utils.c:555
 #, c-format
 msgid "The username is too long"
 msgstr "ユーザー名が長すぎます"
 
-#: ../panels/user-accounts/um-utils.c:523
+#: ../panels/user-accounts/um-utils.c:558
 msgid "The username cannot start with a '-'"
 msgstr "ユーザー名の先頭文字に '-' は使えません"
 
-#: ../panels/user-accounts/um-utils.c:526
-msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"ユーザー名は次の文字だけで構成してください。\n"
-" ➣ 英語アルファベット\n"
-" ➣ 数字\n"
-" ➣ '.'、 '-' および '_'"
+#: ../panels/user-accounts/um-utils.c:561
+msgid "The username should only consist of lower and upper case letters from a-z, digits and any of characters '.', '-' and '_'"
+msgstr "ユーザー名には次の文字だけを使用してください。a から z の大文字・小文字、数字、'.'、'-'、および '_'。"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/user-accounts/um-utils.c:811
+msgid "%b %e"
+msgstr "%m月%d日"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/user-accounts/um-utils.c:815
+msgid "%b %e, %Y"
+msgstr "%Y年%m月%d日"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6326,26 +6555,60 @@ msgstr "ボタン割り当て"
 msgid "Map buttons to functions"
 msgstr "ボタンへ機能を割り当て"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:79
+#: ../panels/wacom/button-mapping.ui.h:3
+msgid "To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard shortcut button and hold down the new keys or press Backspace to clear."
+msgstr "ショートカットを編集するには、\"キー入力の送信\"を選択し、キーボードショートカットボタンを押して、新しいキー組み合わせを入力するか、[BS] キーで取り消してください。"
+
+#: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid "Please tap the target markers as they appear on screen to calibrate the tablet."
 msgstr "タブレットの位置調整を行いますので、画面に出現するマーカーをタップしてください。"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:368
+#: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "誤クリックを検出しました。再起動します..."
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+#: ../panels/wacom/cc-wacom-button-row.c:443
+msgctxt "Wacom tablet button"
+msgid "Up"
+msgstr "上"
+
+#: ../panels/wacom/cc-wacom-button-row.c:444
+msgctxt "Wacom tablet button"
+msgid "Down"
+msgstr "下"
+
+#: ../panels/wacom/cc-wacom-button-row.h:55
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "なし"
+
+#: ../panels/wacom/cc-wacom-button-row.h:56
+msgctxt "Wacom action-type"
+msgid "Send Keystroke"
+msgstr "キー入力の送信"
+
+#: ../panels/wacom/cc-wacom-button-row.h:57
+msgctxt "Wacom action-type"
+msgid "Switch Monitor"
+msgstr "モニターの切り替え"
+
+#: ../panels/wacom/cc-wacom-button-row.h:58
+msgctxt "Wacom action-type"
+msgid "Show On-Screen Help"
+msgstr "オンスクリーンヘルプの表示"
+
+#: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
 msgstr "出力:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+#: ../panels/wacom/cc-wacom-mapping-panel.c:276
 msgid "Keep aspect ratio (letterbox):"
 msgstr "縦横比を保持 (レターボックス):"
 
 # 参考: intuos 5 のマニュアル p.57
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:298
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Map to single monitor"
 msgstr "単一画面にマッピング"
 
@@ -6354,52 +6617,13 @@ msgstr "単一画面にマッピング"
 msgid "%d of %d"
 msgstr "%d / %d"
 
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:384
-msgctxt "Wacom action-type"
-msgid "None"
-msgstr "なし"
+#: ../panels/wacom/cc-wacom-page.c:522
+msgid "Display Mapping"
+msgstr "画面のマッピング"
 
-#: ../panels/wacom/cc-wacom-page.c:119
-msgctxt "Wacom action-type"
-msgid "Send Keystroke"
-msgstr "キー入力の送信"
-
-#: ../panels/wacom/cc-wacom-page.c:120
-msgctxt "Wacom action-type"
-msgid "Switch Monitor"
-msgstr "モニターの切り替え"
-
-#: ../panels/wacom/cc-wacom-page.c:121
-msgctxt "Wacom action-type"
-msgid "Show On-Screen Help"
-msgstr "オンスクリーンヘルプの表示"
-
-#: ../panels/wacom/cc-wacom-page.c:621
-msgctxt "Wacom tablet button"
-msgid "Up"
-msgstr "上"
-
-#: ../panels/wacom/cc-wacom-page.c:621
-msgctxt "Wacom tablet button"
-msgid "Down"
-msgstr "下"
-
-#: ../panels/wacom/cc-wacom-page.c:662
-msgid "Switch Modes"
-msgstr "スイッチモード"
-
-#: ../panels/wacom/cc-wacom-page.c:752
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "ボタン"
-
-#: ../panels/wacom/cc-wacom-page.c:810
-msgid "Action"
-msgstr "操作"
-
-#: ../panels/wacom/cc-wacom-page.c:920
-msgid "Display Mapping"
-msgstr "画面のマッピング"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
@@ -6453,81 +6677,85 @@ msgid "Adjust display resolution"
 msgstr "ディスプレイの解像度を調整"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Adjust mouse settings"
+msgstr "マウス設定の調整"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Tracking Mode"
 msgstr "検出モード"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Left-Handed Orientation"
 msgstr "左手用"
 
 # この Ring は Intuos 4 や Cintiq 24HD の Touch Ring のこと。日本版ではタッチホイール。
 # libwacom のソースコードも参照のこと。
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1076
+#: ../panels/wacom/gsd-wacom-device.c:1063
 msgid "Left Ring"
 msgstr "左タッチホイール"
 
 # この Ring は Intuos 4 や Cintiq 24HD の Touch Ring のこと。日本版ではタッチホイール。
 # libwacom のソースコードも参照のこと。
-#: ../panels/wacom/gsd-wacom-device.c:1086
+#: ../panels/wacom/gsd-wacom-device.c:1074
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "左タッチホイールのモード #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1105
+#: ../panels/wacom/gsd-wacom-device.c:1094
 msgid "Right Ring"
 msgstr "右タッチホイール"
 
-#: ../panels/wacom/gsd-wacom-device.c:1115
+#: ../panels/wacom/gsd-wacom-device.c:1105
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "右タッチホイールのモード #%d"
 
 # Touch Strip はトラックパッド。Cintiq の日英のマニュアルを参照
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1156
+#: ../panels/wacom/gsd-wacom-device.c:1147
 msgid "Left Touchstrip"
 msgstr "左トラックパッド"
 
 # Touch Strip はトラックパッド。Cintiq の日英のマニュアルを参照
-#: ../panels/wacom/gsd-wacom-device.c:1166
+#: ../panels/wacom/gsd-wacom-device.c:1158
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "左トラックパッドのモード #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1185
+#: ../panels/wacom/gsd-wacom-device.c:1178
 msgid "Right Touchstrip"
 msgstr "右トラックパッド"
 
-#: ../panels/wacom/gsd-wacom-device.c:1195
+#: ../panels/wacom/gsd-wacom-device.c:1189
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "右トラックパッドのモード #%d"
 
 # Touch Ring はタッチホイール。Intuos 4 の日英のマニュアルを参照
-#: ../panels/wacom/gsd-wacom-device.c:1220
+#: ../panels/wacom/gsd-wacom-device.c:1215
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "左タッチホイールのモードスイッチ"
 
-#: ../panels/wacom/gsd-wacom-device.c:1222
+#: ../panels/wacom/gsd-wacom-device.c:1217
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "右タッチホイールのモードスイッチ"
 
-#: ../panels/wacom/gsd-wacom-device.c:1225
+#: ../panels/wacom/gsd-wacom-device.c:1220
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "左トラックパッドのモードスイッチ"
 
-#: ../panels/wacom/gsd-wacom-device.c:1227
+#: ../panels/wacom/gsd-wacom-device.c:1222
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "右トラックパッドのモードスイッチ"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1227
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "モードスイッチ #%d"
@@ -6551,6 +6779,10 @@ msgstr "上ボタン #%d"
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "下ボタン #%d"
+
+#: ../panels/wacom/gsd-wacom-key-shortcut-button.c:264
+msgid "New shortcut…"
+msgstr "新しいショートカット…"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
@@ -6620,40 +6852,40 @@ msgstr "下のサイドスイッチ"
 msgid "Tip Pressure Feel"
 msgstr "ペン先の感触"
 
-#: ../shell/cc-application.c:67
+#: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
 msgstr "冗長モードを有効にする"
 
-#: ../shell/cc-application.c:68
+#: ../shell/cc-application.c:70
 msgid "Show the overview"
 msgstr "全体を表示する"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:71
 msgid "Search for the string"
 msgstr "キーワードで検索する"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:72
 msgid "List possible panel names and exit"
 msgstr "利用可能なパネル名をリスト表示して終了する"
 
-#: ../shell/cc-application.c:71 ../shell/cc-application.c:72
-#: ../shell/cc-application.c:73
+#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
+#: ../shell/cc-application.c:75
 msgid "Show help options"
 msgstr "ヘルプのオプションを表示する"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "表示するパネル"
 
-#: ../shell/cc-application.c:74
+#: ../shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: ../shell/cc-application.c:116
+#: ../shell/cc-application.c:142
 msgid "- Settings"
 msgstr "- 設定"
 
-#: ../shell/cc-application.c:124
+#: ../shell/cc-application.c:160
 #, c-format
 msgid ""
 "%s\n"
@@ -6662,45 +6894,435 @@ msgstr ""
 "%s\n"
 "利用可能なすべてのコマンドラインオプションを表示するには '%s --help' を実行してください。\n"
 
-#: ../shell/cc-application.c:154
+#: ../shell/cc-application.c:190
 msgid "Available panels:"
 msgstr "利用可能なパネル:"
 
-#: ../shell/cc-application.c:273
+#: ../shell/cc-application.c:325
 msgid "Help"
 msgstr "ヘルプ"
 
-#: ../shell/cc-application.c:274
+#: ../shell/cc-application.c:326
 msgid "Quit"
 msgstr "終了"
 
-#: ../shell/cc-window.c:62 ../shell/gnome-control-center.desktop.in.in.h:1
-msgid "Settings"
-msgstr "設定"
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
+msgid "All Settings"
+msgstr "すべての設定"
 
 #. Add categories
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:866
 msgctxt "category"
 msgid "Personal"
 msgstr "パーソナル"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:867
 msgctxt "category"
 msgid "Hardware"
 msgstr "ハードウェア"
 
-#: ../shell/cc-window.c:860
+#: ../shell/cc-window.c:868
 msgctxt "category"
 msgid "System"
 msgstr "システム"
 
-#: ../shell/cc-window.c:1411
-msgid "All Settings"
-msgstr "すべての設定"
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
+msgid "Settings"
+msgstr "設定"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;設定;"
+
+#~ msgid "_Region:"
+#~ msgstr "地域(_R):"
+
+#~ msgid "_City:"
+#~ msgstr "都市(_C):"
+
+#~ msgid "_Network Time"
+#~ msgstr "ネットワーク時刻(_N)"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Set the time one hour ahead."
+#~ msgstr "時計を 1 時間進める。"
+
+#~ msgid "Set the time one hour back."
+#~ msgstr "時計を 1 時間戻す。"
+
+#~ msgid "Set the time one minute ahead."
+#~ msgstr "時計を 1 分進める。"
+
+#~ msgid "Set the time one minute back."
+#~ msgstr "時計を 1 分戻す。"
+
+#~ msgid "Switch between AM and PM."
+#~ msgstr "午前と午後を切り替える。"
+
+#~ msgid "AM/PM"
+#~ msgstr "午前/午後"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Normal"
+#~ msgstr "標準"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Counterclockwise"
+#~ msgstr "反時計回り"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Clockwise"
+#~ msgstr "時計回り"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "180 Degrees"
+#~ msgstr "180度"
+
+#~ msgid "Monitor"
+#~ msgstr "モニター"
+
+#~ msgid "Drag to change primary display."
+#~ msgstr "第 1 ディスプレイを変更するにはドラッグしてください。"
+
+#~ msgid "Select a monitor to change its properties; drag it to rearrange its placement."
+#~ msgstr "設定を変更するモニターを選んでください。ドラッグして位置を調整してください。"
+
+#~ msgid "%a %R"
+#~ msgstr "%a %R"
+
+#~ msgid "Failed to apply configuration: %s"
+#~ msgstr "設定の適用に失敗しました: %s"
+
+#~ msgid "Could not save the monitor configuration"
+#~ msgstr "モニターの設定を保存できませんでした"
+
+#~ msgid "_Resolution"
+#~ msgstr "解像度(_R)"
+
+#~ msgid "R_otation"
+#~ msgstr "回転(_O)"
+
+#~ msgid "_Mirror displays"
+#~ msgstr "複数のディスプレイをミラーする(_M)"
+
+#~ msgid "Note: may limit resolution options"
+#~ msgstr "注意: 解像度の選択を制限することがあります"
+
+#~ msgid "_Detect Displays"
+#~ msgstr "ディスプレイの検出(_D)"
+
+#~ msgid "Estimated battery capacity: %s"
+#~ msgstr "推計バッテリー残り時間: %s"
+
+#~ msgid "Hidden"
+#~ msgstr "非表示"
+
+#~ msgid "Visible"
+#~ msgstr "表示する"
+
+#~ msgid "Name & Visibility"
+#~ msgstr "名前と表示方法"
+
+#~ msgid "Control how you appear on the screen and the network."
+#~ msgstr "画面やネットワークにあなたの情報がどう表示されるか設定します。"
+
+#~ msgid "Display _full name in top bar"
+#~ msgstr "トップバーにフルネームを表示する(_F)"
+
+#~ msgid "Display full name in _lock screen"
+#~ msgstr "ロック画面にフルネームを表示する(_L)"
+
+#~ msgid "_Stealth Mode"
+#~ msgstr "ステルスモード(_S)"
+
+#~ msgid "Show Status When _Inactive"
+#~ msgstr "ユニバーサルアクセスアイコンを常に表示する(_I)"
+
+#~ msgid "_Confirm Password"
+#~ msgstr "パスワードの確認(_C)"
+
+#~ msgid "_Login Name"
+#~ msgstr "ログイン名(_L)"
+
+#~ msgid "Login _Password"
+#~ msgstr "ログインパスワード(_P)"
+
+#~ msgid "C_onfirm New Password"
+#~ msgstr "パスワードの確認(_O)"
+
+#~ msgid "Passwords do not match"
+#~ msgstr "パスワードが一致しません"
+
+#~ msgid "Domain not found."
+#~ msgstr "ドメインが見つかりませんでした。"
+
+#~ msgid "Wrong password"
+#~ msgstr "間違ったパスワード"
+
+#~ msgid "Export"
+#~ msgstr "エクスポート"
+
+#~ msgid "Left Shift"
+#~ msgstr "左Shift"
+
+#~ msgid "Left Alt"
+#~ msgstr "左Alt"
+
+#~ msgid "Left Ctrl"
+#~ msgstr "左Ctrl"
+
+#~ msgid "Right Shift"
+#~ msgstr "右Shift"
+
+#~ msgid "Right Alt"
+#~ msgstr "右Alt"
+
+#~ msgid "Right Ctrl"
+#~ msgstr "右Ctrl"
+
+#~ msgid "Left Alt+Shift"
+#~ msgstr "左Alt+左Shift"
+
+#~ msgid "Right Alt+Shift"
+#~ msgstr "右Alt+右Shift"
+
+#~ msgid "Left Ctrl+Shift"
+#~ msgstr "左Ctrl+左Shift"
+
+#~ msgid "Right Ctrl+Shift"
+#~ msgstr "右Ctrl+右Shift"
+
+#~ msgid "Left+Right Shift"
+#~ msgstr "左Shift+右Shift"
+
+#~ msgid "Left+Right Ctrl"
+#~ msgstr "左Ctrl+右Ctrl"
+
+#~ msgid "Alt+Shift"
+#~ msgstr "Alt+Shift"
+
+#~ msgid "Ctrl+Shift"
+#~ msgstr "Ctrl+Shift"
+
+#~ msgid "Alt+Ctrl"
+#~ msgstr "Alt+Ctrl"
+
+#~ msgid "Caps"
+#~ msgstr "Caps"
+
+#~ msgid "Shift+Caps"
+#~ msgstr "Shift+Caps"
+
+#~ msgid "Alt+Caps"
+#~ msgstr "Alt+Caps"
+
+#~ msgid "Ctrl+Caps"
+#~ msgstr "Ctrl+Caps"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Slow"
+#~ msgstr "遅い"
+
+#~ msgctxt "mouse, speed"
+#~ msgid "Fast"
+#~ msgstr "速い"
+
+#~ msgid "C_ontent sticks to fingers"
+#~ msgstr "指を動かす方向にコンテンツが移動 (ナチュラル)(_O)"
+
+#~ msgid "_Options…"
+#~ msgstr "オプション(_O)…"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Normal"
+#~ msgstr "標準"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "High/Inverse"
+#~ msgstr "高い/反転"
+
+#~ msgid "On screen keyboard"
+#~ msgstr "オンスクリーンキーボード"
+
+#~ msgid "OnBoard"
+#~ msgstr "OnBoard"
+
+#~ msgid "75%"
+#~ msgstr "75%"
+
+#~ msgid "100%"
+#~ msgstr "100%"
+
+#~ msgctxt "universal access, text size"
+#~ msgid "Normal"
+#~ msgstr "中"
+
+#~ msgid "125%"
+#~ msgstr "125%"
+
+#~ msgid "150%"
+#~ msgstr "150%"
+
+#~ msgctxt "universal access, text size"
+#~ msgid "Larger"
+#~ msgstr "特大"
+
+#~ msgid "Beep on Caps and Num Lock"
+#~ msgstr "Caps Lock と Num Lock を切り替えるとビープ音を鳴らす"
+
+#~ msgid "Turn on or off:"
+#~ msgstr "オン/オフ の切り替え:"
+
+#~ msgctxt "universal access, zoom"
+#~ msgid "Zoom"
+#~ msgstr "ズーム"
+
+#~ msgid "Zoom in:"
+#~ msgstr "ズームイン:"
+
+#~ msgid "Zoom out:"
+#~ msgstr "ズームアウト:"
+
+#~ msgid "Closed Captioning"
+#~ msgstr "クローズドキャプション"
+
+#~ msgid "Display a textual description of speech and sounds"
+#~ msgstr "音声に関する説明を文章で表示する"
+
+#~ msgid "On Screen Keyboard"
+#~ msgstr "オンスクリーンキーボード"
+
+#~ msgctxt "universal access, delay"
+#~ msgid "Short"
+#~ msgstr "短い"
+
+#~ msgctxt "universal access, delay"
+#~ msgid "Long"
+#~ msgstr "長い"
+
+#~ msgid "Beep when a key is"
+#~ msgstr "キーが次のときビープ音を鳴らす: "
+
+#~ msgid "pressed"
+#~ msgstr "押された"
+
+#~ msgid "accepted"
+#~ msgstr "認識された"
+
+#~ msgid "rejected"
+#~ msgstr "拒否された"
+
+#~ msgid "Acc_eptance delay:"
+#~ msgstr "認識するまでの間隔(_E):"
+
+#~ msgid "Control the pointer using the keypad"
+#~ msgstr "キーパッドでポインターを制御する"
+
+#~ msgid "Video Mouse"
+#~ msgstr "ビデオマウス"
+
+#~ msgid "Control the pointer using the video camera."
+#~ msgstr "ビデオカメラでポインターを制御する。"
+
+#~ msgctxt "universal access, threshold"
+#~ msgid "Small"
+#~ msgstr "小さい"
+
+#~ msgctxt "universal access, threshold"
+#~ msgid "Large"
+#~ msgstr "大きい"
+
+#~ msgid "Add account"
+#~ msgstr "アカウントの追加"
+
+#~ msgid "_Local Account"
+#~ msgstr "ローカルのアカウント(_L)"
+
+#~ msgid "Tip: Enterprise domain or realm name"
+#~ msgstr "ヒント: エンタープライズドメイン名またはレルム名"
+
+#~ msgid "C_ontinue"
+#~ msgstr "続ける(_O)"
+
+#~ msgid "Previous Week"
+#~ msgstr "前の週へ"
+
+#~ msgid "Next Week"
+#~ msgstr "次の週へ"
+
+#~ msgid "Next week"
+#~ msgstr "次の週へ"
+
+#~ msgid "Log in without a password"
+#~ msgstr "パスワードなしでログインする"
+
+#~ msgid "Disable this account"
+#~ msgstr "アカウントを無効にする"
+
+#~ msgid "Enable this account"
+#~ msgstr "アカウントを有効にする"
+
+#~ msgid "Generate a password"
+#~ msgstr "パスワードの生成"
+
+#~ msgid "_Action"
+#~ msgstr "アクション(_A)"
+
+#~ msgid "_Show password"
+#~ msgstr "パスワードを表示(_S)"
+
+#~ msgid "How to choose a strong password"
+#~ msgstr "強力なパスワードの選び方"
+
+#~ msgctxt "Password strength"
+#~ msgid "Too short"
+#~ msgstr "短すぎる"
+
+#~ msgctxt "Password strength"
+#~ msgid "Not good enough"
+#~ msgstr "不十分"
+
+#~ msgctxt "Password strength"
+#~ msgid "Weak"
+#~ msgstr "弱い"
+
+#~ msgctxt "Password strength"
+#~ msgid "Fair"
+#~ msgstr "まあまあ"
+
+#~ msgctxt "Password strength"
+#~ msgid "Good"
+#~ msgstr "良"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strong"
+#~ msgstr "強い"
+
+#~ msgid "_Generate a password"
+#~ msgstr "パスワードの生成(_G)"
+
+#~ msgid "You need to enter a new password"
+#~ msgstr "新しいパスワードを入力してください"
+
+#~ msgid "The new password is not strong enough"
+#~ msgstr "新しいパスワードは強度が不十分です"
+
+#~ msgid "You need to confirm the password"
+#~ msgstr "確認のために新しいパスワードを入力してください"
+
+#~ msgid "You need to enter your current password"
+#~ msgstr "現在のパスワードを入力してください"
+
+#~ msgid "The current password is not correct"
+#~ msgstr "パスワードが間違っています"
+
+#~ msgid "Switch Modes"
+#~ msgstr "スイッチモード"
+
+#~ msgid "Action"
+#~ msgstr "操作"
 
 #~ msgid "blablabla"
 #~ msgstr "blablabla"
@@ -6865,16 +7487,6 @@ msgstr "Preferences;Settings;設定;"
 
 #~ msgid "Unknown model"
 #~ msgstr "不明なモデル"
-
-#~ msgid "The next login will attempt to use the standard experience."
-#~ msgstr "次回ログインは標準モードの使用を試みます。"
-
-#~ msgid "The next login will use the fallback mode intended for unsupported graphics hardware."
-#~ msgstr "次回ログインは、サポート対象外のグラフィックハードウェア向けにフォールバックモードを使用します。"
-
-#~ msgctxt "Experience"
-#~ msgid "Fallback"
-#~ msgstr "フォールバック"
 
 #~ msgid "System Information"
 #~ msgstr "システム情報"
@@ -7187,15 +7799,6 @@ msgstr "Preferences;Settings;設定;"
 #~ msgid "Calibrate..."
 #~ msgstr "位置調整..."
 
-#~ msgid "- System Settings"
-#~ msgstr "- システム設定"
-
-#~ msgid "Control Center"
-#~ msgstr "コントロールセンター"
-
-#~ msgid "System Settings"
-#~ msgstr "システム設定"
-
 #~ msgid "Security Key"
 #~ msgstr "セキュリティキー"
 
@@ -7210,9 +7813,6 @@ msgstr "Preferences;Settings;設定;"
 
 #~ msgid "Getting devices..."
 #~ msgstr "デバイスの取得中..."
-
-#~ msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
-#~ msgstr "ファイアウォールデーモンが起動していません。ネットワークプリンターを検出するには、mDNS、IPP、IPP クライアント、SMB クライアントがファイアウォールで利用可能でなければなりません。"
 
 #~ msgctxt "printer type"
 #~ msgid "Local"
@@ -7260,9 +7860,6 @@ msgstr "Preferences;Settings;設定;"
 
 #~ msgid "Swap colors"
 #~ msgstr "色を交換する"
-
-#~ msgid "Secondary color"
-#~ msgstr "副色"
 
 #~ msgid "Horizontal Gradient"
 #~ msgstr "横方向のグラデーション"
@@ -7324,9 +7921,6 @@ msgstr "Preferences;Settings;設定;"
 #~ msgid "_Disabled"
 #~ msgstr "無効にする(_D)"
 
-#~ msgid "_Edge scrolling"
-#~ msgstr "エッジスクロール(_E)"
-
 #~ msgctxt "Wireless access point"
 #~ msgid "Other..."
 #~ msgstr "その他..."
@@ -7354,9 +7948,6 @@ msgstr "Preferences;Settings;設定;"
 
 #~ msgid "Printer Options"
 #~ msgstr "プリンターのオプション"
-
-#~ msgid "Add User"
-#~ msgstr "ユーザーの追加"
 
 #~ msgid "Allowed users"
 #~ msgstr "許可されたユーザー"
@@ -7443,12 +8034,6 @@ msgstr "Preferences;Settings;設定;"
 #~ msgctxt "universal access, seeing"
 #~ msgid "Zoom"
 #~ msgstr "ズーム"
-
-#~ msgid "Screen keyboard"
-#~ msgstr "スクリーンキーボード"
-
-#~ msgid "Typing Assistant"
-#~ msgstr "タイピング支援"
 
 #~ msgid "Type here to test settings"
 #~ msgstr "何か入力して設定を確認してください"
@@ -7577,26 +8162,3 @@ msgstr "Preferences;Settings;設定;"
 
 #~ msgid "Callback to be issued when property editor object data is to be freed"
 #~ msgstr "プロパティ編集でデータを解放する際に呼び出されるコールバックです"
-
-#~ msgid ""
-#~ "Couldn't find the file '%s'.\n"
-#~ "\n"
-#~ "Please make sure it exists and try again, or choose a different background picture."
-#~ msgstr ""
-#~ "ファイル '%s' が見つかりませんでした。\n"
-#~ "\n"
-#~ "そのファイルが存在しているか確認して再度実行するか、別の画像ファイルを選択してください。"
-
-#~ msgid ""
-#~ "I don't know how to open the file '%s'.\n"
-#~ "Perhaps it's a kind of picture that is not yet supported.\n"
-#~ "\n"
-#~ "Please select a different picture instead."
-#~ msgstr ""
-#~ "ファイル '%s' を開けません。\n"
-#~ "おそらくサポートしていない画像の種類のようです。\n"
-#~ "\n"
-#~ "かわりに別の画像を選択してください。"
-
-#~ msgid "Please select an image."
-#~ msgstr "画像を一つ選択してください。"
