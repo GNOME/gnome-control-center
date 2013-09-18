@@ -1429,7 +1429,7 @@ cc_user_panel_init (CcUserPanel *self)
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
-        gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
+        gtk_container_add (GTK_CONTAINER (self), d->main_box);
         d->history_dialog = um_history_dialog_new ();
         setup_main_window (d);
 
