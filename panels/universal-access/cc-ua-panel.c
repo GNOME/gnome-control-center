@@ -840,5 +840,5 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel));
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (content), priv->focus_adjustment);
 
-  gtk_widget_reparent (panel, GTK_WIDGET (self));
+  gtk_container_add (GTK_CONTAINER (self), panel);
 }
