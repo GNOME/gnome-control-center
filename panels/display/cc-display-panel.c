@@ -58,7 +58,8 @@ enum
   DISPLAY_MODE_PRIMARY,
   DISPLAY_MODE_SECONDARY,
   /* DISPLAY_MODE_PRESENTATION, */
-  DISPLAY_MODE_MIRROR
+  DISPLAY_MODE_MIRROR,
+  DISPLAY_MODE_OFF
 };
 
 struct _CcDisplayPanelPrivate
@@ -81,6 +82,7 @@ struct _CcDisplayPanelPrivate
   GtkWidget *rotate_right_button;
   GtkWidget *apply_button;
   GtkWidget *dialog;
+  GtkWidget *config_grid;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -251,9 +253,14 @@ paint_output (CcDisplayPanel    *panel,
   cairo_rectangle (cr, x, y, width, height);
   cairo_fill (cr);
 
-  pixbuf = gnome_bg_create_thumbnail (panel->priv->background,
-                                      panel->priv->thumbnail_factory,
-                                      gdk_screen_get_default (), width, height);
+  if (gnome_rr_output_info_is_active (output))
+    {
+      pixbuf = gnome_bg_create_thumbnail (panel->priv->background,
+                                          panel->priv->thumbnail_factory,
+                                          gdk_screen_get_default (), width, height);
+    }
+  else
+    pixbuf = NULL;
 
   if (gnome_rr_output_info_get_primary (output)
       || gnome_rr_config_get_clone (configuration))
@@ -265,7 +272,7 @@ paint_output (CcDisplayPanel    *panel,
   if (pixbuf)
     gdk_cairo_set_source_pixbuf (cr, pixbuf, x + 1, y + 1);
   else
-    cairo_set_source_rgb (cr, 0.7, 0.7, 0.7);
+    cairo_set_source_rgb (cr, 0.3, 0.3, 0.3);
   cairo_rectangle (cr, x + 1, y + 1, width - 2, height - 2);
   cairo_fill (cr);
 
@@ -1729,6 +1736,9 @@ setup_listbox_row_activated (GtkListBox     *list_box,
 
   output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                gnome_rr_output_info_get_name (priv->current_output));
+  gtk_widget_set_sensitive (priv->config_grid, index != DISPLAY_MODE_OFF);
+  gnome_rr_output_info_set_active (priv->current_output,
+                                   (index != DISPLAY_MODE_OFF));
 
   if (index == DISPLAY_MODE_MIRROR)
     {
@@ -1867,7 +1877,7 @@ show_setup_dialog (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkWidget *listbox = NULL, *content_area, *item, *box, *frame, *preview;
-  GtkWidget *label, *rotate_box, *grid;
+  GtkWidget *label, *rotate_box;
   gint i, width_mm, height_mm, old_width, old_height;
   GnomeRROutput *output;
   gchar *str;
@@ -1875,7 +1885,15 @@ show_setup_dialog (CcDisplayPanel *panel)
   GtkListStore *res_model;
   GtkCellRenderer *renderer;
   GnomeRRRotation rotation;
-  gint response;
+  gint response, num_active_outputs = 0;
+  GnomeRROutputInfo **outputs;
+
+  outputs = gnome_rr_config_get_outputs (priv->current_configuration);
+
+  /* count the number of active */
+  for (i = 0; outputs[i]; i++)
+    if (gnome_rr_output_info_is_active (outputs[i]))
+      num_active_outputs++;
 
   output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                gnome_rr_output_info_get_name (priv->current_output));
@@ -1906,19 +1924,19 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (content_area), box);
 
   /* configuration grid */
-  grid = gtk_grid_new ();
-  gtk_widget_set_margin_left (grid, 36);
-  gtk_widget_set_margin_right (grid, 36);
-  gtk_widget_set_margin_bottom (grid, 6);
-  gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
-  gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
+  priv->config_grid = gtk_grid_new ();
+  gtk_widget_set_margin_left (priv->config_grid, 36);
+  gtk_widget_set_margin_right (priv->config_grid, 36);
+  gtk_widget_set_margin_bottom (priv->config_grid, 6);
+  gtk_grid_set_column_spacing (GTK_GRID (priv->config_grid), 12);
+  gtk_grid_set_row_spacing (GTK_GRID (priv->config_grid), 12);
 
   /* preview */
   preview = display_preview_new (panel, priv->current_output,
                                  priv->current_configuration,
                                  cc_display_panel_get_output_id (priv->current_output),
                                  DISPLAY_PREVIEW_SETUP_HEIGHT);
-  gtk_grid_attach (GTK_GRID (grid), preview, 0, 0, 2, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), preview, 0, 0, 2, 1);
 
   /* rotation */
   rotation = gnome_rr_output_info_get_rotation (priv->current_output);
@@ -1926,7 +1944,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_widget_set_margin_bottom (rotate_box, 12);
   gtk_style_context_add_class (gtk_widget_get_style_context (rotate_box),
                                GTK_STYLE_CLASS_LINKED);
-  gtk_grid_attach (GTK_GRID (grid), rotate_box, 0, 1, 2, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), rotate_box, 0, 1, 2, 1);
   gtk_widget_set_halign (rotate_box, GTK_ALIGN_CENTER);
 
   priv->rotate_left_button = gtk_button_new ();
@@ -1959,14 +1977,14 @@ show_setup_dialog (CcDisplayPanel *panel)
   label = gtk_label_new (_("Size"));
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (grid), label, 0, 2, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 2, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
 
 
   gnome_rr_output_get_physical_size (output, &width_mm, &height_mm);
   str = make_display_size_string (width_mm, height_mm);
   label = gtk_label_new (str);
-  gtk_grid_attach (GTK_GRID (grid), label, 1, 2, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, 2, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   g_free (str);
 
@@ -1974,11 +1992,11 @@ show_setup_dialog (CcDisplayPanel *panel)
   label = gtk_label_new (_("Aspect Ratio"));
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (grid), label, 0, 3, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 3, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   label = gtk_label_new (make_aspect_string (gnome_rr_output_info_get_preferred_width (priv->current_output),
                                              gnome_rr_output_info_get_preferred_height (priv->current_output)));
-  gtk_grid_attach (GTK_GRID (grid), label, 1, 3, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, 3, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
 
   /* resolution combo box */
@@ -1995,8 +2013,8 @@ show_setup_dialog (CcDisplayPanel *panel)
   label = gtk_label_new (_("Resolution"));
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (grid), label, 0, 4, 1, 1);
-  gtk_grid_attach (GTK_GRID (grid), priv->res_combo, 1, 4, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 4, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->res_combo, 1, 4, 1, 1);
 
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   gtk_widget_set_halign (priv->res_combo, GTK_ALIGN_START);
@@ -2005,7 +2023,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   was_primary = primary = gnome_rr_output_info_get_primary (priv->current_output);
   active = gnome_rr_output_info_is_active (priv->current_output);
 
-  if (g_hash_table_size (output_ids) > 1)
+  if (num_active_outputs > 1 || !active)
     {
       frame = gtk_frame_new (NULL);
       gtk_container_add (GTK_CONTAINER (box), frame);
@@ -2049,6 +2067,14 @@ show_setup_dialog (CcDisplayPanel *panel)
       if (clone && active)
         gtk_list_box_select_row (GTK_LIST_BOX (listbox),
                                  GTK_LIST_BOX_ROW (item));
+
+      item = list_box_item (_("Turn Off"),
+                            _("Don't use this display"));
+      gtk_container_add (GTK_CONTAINER (listbox), item);
+
+      if (!active)
+        gtk_list_box_select_row (GTK_LIST_BOX (listbox),
+                                 GTK_LIST_BOX_ROW (item));
     }
   else
     {
@@ -2060,7 +2086,7 @@ show_setup_dialog (CcDisplayPanel *panel)
     }
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
-  gtk_container_add (GTK_CONTAINER (box), grid);
+  gtk_container_add (GTK_CONTAINER (box), priv->config_grid);
   gtk_widget_show_all (box);
 
   gnome_rr_output_info_get_geometry (priv->current_output, NULL, NULL,
@@ -2072,6 +2098,7 @@ show_setup_dialog (CcDisplayPanel *panel)
       GnomeRROutputInfo **outputs;
       GtkListBoxRow *row;
       GnomeRRRotation rotation;
+      gboolean active = TRUE;
 
       if (g_hash_table_size (output_ids) > 1)
         {
@@ -2107,9 +2134,14 @@ show_setup_dialog (CcDisplayPanel *panel)
               primary = FALSE;
               clone = FALSE;
               break;
+
+            case DISPLAY_MODE_OFF:
+              clone = FALSE;
+              active = FALSE;
+              break;
             }
 
-          gnome_rr_output_info_set_active (priv->current_output, TRUE);
+          gnome_rr_output_info_set_active (priv->current_output, active);
           gnome_rr_output_info_set_primary (priv->current_output, primary);
           gnome_rr_config_set_clone (priv->current_configuration, clone);
 
