@@ -741,6 +741,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
+        g_object_unref (net_device);
         g_signal_connect (device, "state-changed",
                           G_CALLBACK (state_changed_cb), panel);
 
@@ -882,6 +883,7 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
                 }
                 i++;
         }
+        g_object_unref (object);
 out:
         g_list_free (panels);
 }
@@ -1307,6 +1309,7 @@ remove_connection (GtkToolButton *button, CcNetworkPanel *panel)
 
         /* delete the object */
         net_object_delete (object);
+        g_object_unref (object);
 }
 
 static void
