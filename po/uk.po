@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 14:02+0300\n"
-"PO-Revision-Date: 2013-09-07 01:12+0300\n"
+"POT-Creation-Date: 2013-09-20 20:07+0300\n"
+"PO-Revision-Date: 2013-09-20 20:34+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
 "Language: uk\n"
@@ -22,103 +22,130 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
+#: ../panels/background/background.ui.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Тло"
+
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:2
+#: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
 msgstr "Зміни протягом дня"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
+msgid "Lock Screen"
+msgstr "Замкнути екран"
+
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Tile"
 msgstr "Черепиця"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "Масштаб"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Center"
 msgstr "Центр"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Scale"
 msgstr "Шкала"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Fill"
 msgstr "Заповнення"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Span"
 msgstr "Проміжок"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:300
+#: ../panels/background/cc-background-chooser-dialog.c:293
 msgid "Select Background"
 msgstr "Вибрати тло"
 
-#: ../panels/background/cc-background-chooser-dialog.c:319
+#: ../panels/background/cc-background-chooser-dialog.c:312
 msgid "Wallpapers"
 msgstr "Шпалери"
 
-#: ../panels/background/cc-background-chooser-dialog.c:328
+#: ../panels/background/cc-background-chooser-dialog.c:321
 msgid "Pictures"
 msgstr "Малюнки"
 
-#: ../panels/background/cc-background-chooser-dialog.c:336
+#: ../panels/background/cc-background-chooser-dialog.c:329
 msgid "Colors"
 msgstr "Кольори"
 
-#: ../panels/background/cc-background-chooser-dialog.c:345
+#: ../panels/background/cc-background-chooser-dialog.c:338
 msgid "Flickr"
 msgstr "Flickr"
 
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:400
+#: ../panels/background/cc-background-chooser-dialog.c:393
 msgid "No Pictures Found"
 msgstr "Не знайдено жодного малюнку"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:415
+#: ../panels/background/cc-background-chooser-dialog.c:408
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Можете додати зображення до вашої теки %s і вони з'являться там"
 
-#: ../panels/background/cc-background-chooser-dialog.c:444
+#: ../panels/background/cc-background-chooser-dialog.c:436
+#: ../panels/bluetooth/cc-bluetooth-panel.c:631
+#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/display/cc-display-panel.c:1488
+#: ../panels/display/cc-display-panel.c:1892
+#: ../panels/network/connection-editor/vpn-helpers.c:245
+#: ../panels/network/connection-editor/vpn-helpers.c:374
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
+#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
+#: ../panels/search/cc-search-locations-dialog.c:682
+#: ../panels/sharing/cc-sharing-panel.c:421
+#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-photo-dialog.c:96
+#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-user-panel.c:508
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+#: ../panels/background/cc-background-chooser-dialog.c:437
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "Вибрати"
 
-#: ../panels/background/cc-background-item.c:150
+#: ../panels/background/cc-background-item.c:149
 msgid "multiple sizes"
 msgstr "декілька розмірів"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:154
+#: ../panels/background/cc-background-item.c:153
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:283
+#: ../panels/background/cc-background-item.c:281
 msgid "No Desktop Background"
 msgstr "Без тла стільниці"
 
-#: ../panels/background/cc-background-panel.c:460
+#: ../panels/background/cc-background-panel.c:492
 msgid "Current background"
 msgstr "Поточне тло"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Тло"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -159,15 +186,15 @@ msgstr "сторінка 2"
 msgid "Paired"
 msgstr "Cпарований"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:842
+#: ../panels/bluetooth/bluetooth.ui.h:7
 msgid "Type"
 msgstr "Тип"
 
 #: ../panels/bluetooth/bluetooth.ui.h:8
-#: ../panels/network/connection-editor/ce-page-ip4.c:189
-#: ../panels/network/connection-editor/ce-page-ip4.c:441
-#: ../panels/network/connection-editor/ce-page-ip6.c:191
-#: ../panels/network/connection-editor/ce-page-ip6.c:445
+#: ../panels/network/connection-editor/ce-page-ip4.c:194
+#: ../panels/network/connection-editor/ce-page-ip4.c:456
+#: ../panels/network/connection-editor/ce-page-ip6.c:196
+#: ../panels/network/connection-editor/ce-page-ip6.c:460
 msgid "Address"
 msgstr "Адреса"
 
@@ -176,7 +203,6 @@ msgid "Mouse & Touchpad Settings"
 msgstr "Параметри миші та сенсорного пристрою"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
-#: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Параметри звуку"
 
@@ -188,48 +214,53 @@ msgstr "Параметри клавіатури"
 msgid "Send Files…"
 msgstr "Надіслати файли…"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:358
+#: ../panels/bluetooth/cc-bluetooth-panel.c:357
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "Так"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:358
+#: ../panels/bluetooth/cc-bluetooth-panel.c:357
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "Ні"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:472
+#: ../panels/bluetooth/cc-bluetooth-panel.c:470
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth вимкнено"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:477
+#: ../panels/bluetooth/cc-bluetooth-panel.c:475
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth вимкнено апаратно"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:481
+#: ../panels/bluetooth/cc-bluetooth-panel.c:479
 msgid "No Bluetooth adapters found"
 msgstr "Немає адаптерів Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:580
+#: ../panels/bluetooth/cc-bluetooth-panel.c:578
 msgid "Visibility"
 msgstr "Видимість"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:584
+#: ../panels/bluetooth/cc-bluetooth-panel.c:582
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Видимість «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:628
+#: ../panels/bluetooth/cc-bluetooth-panel.c:626
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Вилучити «%s» зі списку пристроїв?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:630
+#: ../panels/bluetooth/cc-bluetooth-panel.c:628
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Якщо вилучити цей пристрій, перед наступним використанням потрібно буде "
 "встановити його знову."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:632
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+msgid "_Remove"
+msgstr "_Вилучити"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth"
@@ -378,48 +409,48 @@ msgstr "Нескалібровано"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:136
+#: ../panels/color/cc-color-panel.c:135
 msgid "Default: "
 msgstr "Типовий:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:144
+#: ../panels/color/cc-color-panel.c:143
 msgid "Colorspace: "
 msgstr "Простір кольорів: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:151
+#: ../panels/color/cc-color-panel.c:150
 msgid "Test profile: "
 msgstr "Тестовий профіль: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:218
 msgid "Select ICC Profile File"
 msgstr "Виберіть файл профілю ICC"
 
-#: ../panels/color/cc-color-panel.c:222
+#: ../panels/color/cc-color-panel.c:221
 msgid "_Import"
 msgstr "_Імпортувати"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:233
+#: ../panels/color/cc-color-panel.c:232
 msgid "Supported ICC profiles"
 msgstr "Підтримувані профілі ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:240
+#: ../panels/color/cc-color-panel.c:239
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Усі файли"
 
-#: ../panels/color/cc-color-panel.c:587
+#: ../panels/color/cc-color-panel.c:586
 msgid "Screen"
 msgstr "Екран"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:913
+#: ../panels/color/cc-color-panel.c:912
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Не вдалося вивантажити файл: %s"
@@ -427,35 +458,40 @@ msgstr "Не вдалося вивантажити файл: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:927
+#: ../panels/color/cc-color-panel.c:926
 msgid "The profile has been uploaded to:"
 msgstr "Профіль вивантажено на:"
 
-#: ../panels/color/cc-color-panel.c:929
+#: ../panels/color/cc-color-panel.c:928
 msgid "Write down this URL."
 msgstr "Запишіть собі це посилання."
 
-#: ../panels/color/cc-color-panel.c:930
+#: ../panels/color/cc-color-panel.c:929
 msgid "Restart this computer and boot your normal operating system."
 msgstr ""
 "Перезапустіть цей комп'ютер і завантажте вашу звичайну операційну систему."
 
-#: ../panels/color/cc-color-panel.c:931
+#: ../panels/color/cc-color-panel.c:930
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "Введіть URL у веб-переглядач, щоб звантажити і встановити профіль."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:965
+#: ../panels/color/cc-color-panel.c:964
 msgid "Save Profile"
 msgstr "Зберегти профіль"
 
+#: ../panels/color/cc-color-panel.c:968
+#: ../panels/network/connection-editor/vpn-helpers.c:375
+msgid "_Save"
+msgstr "З_берегти"
+
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1326
+#: ../panels/color/cc-color-panel.c:1328
 msgid "Create a color profile for the selected device"
 msgstr "Створити профіль кольорів для вибраного пристрою"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1341 ../panels/color/cc-color-panel.c:1365
+#: ../panels/color/cc-color-panel.c:1343 ../panels/color/cc-color-panel.c:1367
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -464,24 +500,24 @@ msgstr ""
 "правильно з'єднано."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1375
+#: ../panels/color/cc-color-panel.c:1377
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Інструмент міри не підтримує профілювання принтерів."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1386
+#: ../panels/color/cc-color-panel.c:1388
 msgid "The device type is not currently supported."
 msgstr "Цей тип пристрою не підтримується. "
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
-#: ../panels/color/cc-color-profile.c:101
+#: ../panels/color/cc-color-profile.c:102
 msgid "Standard Space"
 msgstr "Стандартний простір"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
-#: ../panels/color/cc-color-profile.c:107
+#: ../panels/color/cc-color-profile.c:108
 msgid "Test Profile"
 msgstr "Тестовий профіль"
 
@@ -489,7 +525,7 @@ msgstr "Тестовий профіль"
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
-#: ../panels/color/cc-color-profile.c:115
+#: ../panels/color/cc-color-profile.c:116
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "Автоматично"
@@ -497,13 +533,13 @@ msgstr "Автоматично"
 #. TRANSLATORS: the profile quality - low quality profiles take
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
-#: ../panels/color/cc-color-profile.c:125
+#: ../panels/color/cc-color-profile.c:126
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "Низька якість"
 
 #. TRANSLATORS: the profile quality
-#: ../panels/color/cc-color-profile.c:130
+#: ../panels/color/cc-color-profile.c:131
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "Середня якість"
@@ -511,41 +547,41 @@ msgstr "Середня якість"
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
-#: ../panels/color/cc-color-profile.c:137
+#: ../panels/color/cc-color-profile.c:138
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Висока якість"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:154
+#: ../panels/color/cc-color-profile.c:155
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Типовий RGB"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:161
+#: ../panels/color/cc-color-profile.c:162
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Типовий CMYK"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:168
+#: ../panels/color/cc-color-profile.c:169
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Типовий сірий"
 
-#: ../panels/color/cc-color-profile.c:192
+#: ../panels/color/cc-color-profile.c:193
 msgid "Vendor supplied factory calibration data"
 msgstr "Виробник надав фабричні калібрувальні дані"
 
-#: ../panels/color/cc-color-profile.c:201
+#: ../panels/color/cc-color-profile.c:202
 msgid "Full-screen display correction not possible with this profile"
 msgstr "Повноекранний зв'язок неможливий з цим профілем"
 
-#: ../panels/color/cc-color-profile.c:223
+#: ../panels/color/cc-color-profile.c:224
 msgid "This profile may no longer be accurate"
 msgstr "Цей профіль може бути неточним"
 
@@ -557,7 +593,7 @@ msgstr "Калібрування екрана"
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1407
+#: ../panels/user-accounts/um-account-dialog.c:1470
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -708,7 +744,7 @@ msgstr ""
 "Windows</a> можуть стати в пригоді."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+#: ../panels/user-accounts/um-fingerprint-dialog.c:742
 msgid "Summary"
 msgstr "Підсумок"
 
@@ -897,37 +933,37 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Колір;ICC;Профіль;Калібрування;Принтер;Екран;"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:682
+#: ../panels/common/cc-common-language.c:685
 msgid "United States"
 msgstr "Сполучені Штати"
 
-#: ../panels/common/cc-common-language.c:683
+#: ../panels/common/cc-common-language.c:686
 msgid "Germany"
 msgstr "Німеччина"
 
-#: ../panels/common/cc-common-language.c:684
+#: ../panels/common/cc-common-language.c:687
 msgid "France"
 msgstr "Франція"
 
-#: ../panels/common/cc-common-language.c:685
+#: ../panels/common/cc-common-language.c:688
 msgid "Spain"
 msgstr "Іспанія"
 
-#: ../panels/common/cc-common-language.c:686
+#: ../panels/common/cc-common-language.c:689
 msgid "China"
 msgstr "Китай"
 
-#: ../panels/common/cc-common-language.c:752
+#: ../panels/common/cc-common-language.c:759
 msgid "Other…"
 msgstr "Інше…"
 
-#: ../panels/common/cc-language-chooser.c:121
-#: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:171
+#: ../panels/common/cc-language-chooser.c:123
+#: ../panels/region/cc-format-chooser.c:268
+#: ../panels/region/cc-input-chooser.c:172
 msgid "More…"
 msgstr "Більше…"
 
-#: ../panels/common/cc-language-chooser.c:138
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Не знайдено мов"
 
@@ -936,118 +972,153 @@ msgid "Language"
 msgstr "Мова"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Завершити"
 
+#. Translators: This is the full date and time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:352
+msgid "%e %B %Y, %l:%M %p"
+msgstr "%e %B %Y, %l:%M %p"
+
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:357
+msgid "%e %B %Y, %R"
+msgstr "%e %B %Y, %R"
+
+#. Translators: UTC here means the Coordinated Universal Time.
+#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
+#: ../panels/datetime/cc-datetime-panel.c:573
+msgid "UTC%:::z"
+msgstr "UTC%:::z"
+
+#. Translators: This is the time format used in 12-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:578
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#. Translators: This is the time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:583
+msgid "%R"
+msgstr "%R"
+
 #: ../panels/datetime/datetime.ui.h:1
-msgid "_Region:"
-msgstr "_Область:"
-
-#: ../panels/datetime/datetime.ui.h:2
-msgid "_City:"
-msgstr "_Місто:"
-
-#: ../panels/datetime/datetime.ui.h:3
-msgid "_Network Time"
-msgstr "М_ережевий час"
-
-#. Translator: this is the separator between hours and minutes, like in HH:MM
-#: ../panels/datetime/datetime.ui.h:5
-msgid ":"
-msgstr ":"
-
-#: ../panels/datetime/datetime.ui.h:6
-msgid "Set the time one hour ahead."
-msgstr "Встановити час на одну годину пізніше."
-
-#: ../panels/datetime/datetime.ui.h:7
-msgid "Set the time one hour back."
-msgstr "Встановити час на одну годину назад."
-
-#: ../panels/datetime/datetime.ui.h:8
-msgid "Set the time one minute ahead."
-msgstr "Встановити час на одну хвилину пізніше."
-
-#: ../panels/datetime/datetime.ui.h:9
-msgid "Set the time one minute back."
-msgstr "Встановити час на одну хвилину назад."
-
-#: ../panels/datetime/datetime.ui.h:10
-msgid "Switch between AM and PM."
-msgstr "Перемкнутись між ранком і вечором."
-
-#: ../panels/datetime/datetime.ui.h:11
-msgid "Month"
-msgstr "Місяць"
-
-#: ../panels/datetime/datetime.ui.h:12
-msgid "Day"
-msgstr "День"
-
-#: ../panels/datetime/datetime.ui.h:13
-msgid "Year"
-msgstr "Рік"
-
-#: ../panels/datetime/datetime.ui.h:14
-msgid "24-hour"
-msgstr "24-ох годинний"
-
-#: ../panels/datetime/datetime.ui.h:15
-msgid "AM/PM"
-msgstr "AM/PM"
-
-#: ../panels/datetime/datetime.ui.h:16
 msgid "January"
 msgstr "Січень"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:2
 msgid "February"
 msgstr "Лютий"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:3
 msgid "March"
 msgstr "Березень"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:4
 msgid "April"
 msgstr "Квітень"
 
-#: ../panels/datetime/datetime.ui.h:20
+#: ../panels/datetime/datetime.ui.h:5
 msgid "May"
 msgstr "Травень"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:6
 msgid "June"
 msgstr "Червень"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:7
 msgid "July"
 msgstr "Липень"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:8
 msgid "August"
 msgstr "Серпень"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:9
 msgid "September"
 msgstr "Вересень"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:10
 msgid "October"
 msgstr "Жовтень"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:11
 msgid "November"
 msgstr "Листопад"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:12
 msgid "December"
 msgstr "Грудень"
 
+#: ../panels/datetime/datetime.ui.h:13
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date & Time"
 msgstr "Дата й час"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "Hour"
+msgstr "Година"
+
+#. Translator: this is the separator between hours and minutes, like in HH∶MM
+#: ../panels/datetime/datetime.ui.h:16
+msgid "∶"
+msgstr "∶"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "Minute"
+msgstr "Хвилина"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Day"
+msgstr "День"
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Month"
+msgstr "Місяць"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Year"
+msgstr "Рік"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Time Zone"
+msgstr "Часовий пояс"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Search for a city"
+msgstr "Пошук за містом"
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "Automatic _Date & Time"
+msgstr "Автоматичні _дата та час"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "Requires internet access"
+msgstr "Потребує зв'язок з інтернетом"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Automatic Time _Zone"
+msgstr "Автоматичні часові _пояси"
+
+#: ../panels/datetime/datetime.ui.h:26
+msgid "Date & _Time"
+msgstr "Дата й _час"
+
+#: ../panels/datetime/datetime.ui.h:27
+msgid "Time _Zone"
+msgstr "_Часовий пояс"
+
+#: ../panels/datetime/datetime.ui.h:28
+msgid "Time _Format"
+msgstr "_Формат часу"
+
+#: ../panels/datetime/datetime.ui.h:29
+msgid "24-hour"
+msgstr "24-ох годинний"
+
+#: ../panels/datetime/datetime.ui.h:30
+msgid "AM / PM"
+msgstr "До / після полудня "
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Change the date and time, including time zone"
@@ -1066,106 +1137,137 @@ msgstr "Змінити параметри системних часу і дат�
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Щоб змінити параметри часу і дати, потрібно авторизуватись."
 
-#: ../panels/display/cc-display-panel.c:483
-msgctxt "display panel, rotation"
-msgid "Normal"
-msgstr "Звичайна"
+#: ../panels/display/cc-display-panel.c:466
+msgid "Lid Closed"
+msgstr "Ковпак закрито"
 
-#: ../panels/display/cc-display-panel.c:484
-msgctxt "display panel, rotation"
-msgid "Counterclockwise"
-msgstr "Проти годинникової стрілки"
+#. translators: "Mirrored" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:469
+msgid "Mirrored"
+msgstr "Віддзеркалення"
 
-#: ../panels/display/cc-display-panel.c:485
-msgctxt "display panel, rotation"
-msgid "Clockwise"
-msgstr "За годинниковою стрілкою"
-
-#: ../panels/display/cc-display-panel.c:486
-msgctxt "display panel, rotation"
-msgid "180 Degrees"
-msgstr "180 градусів"
-
-#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
-#. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external projector.  Here, "Mirrored" is being
-#. * used as an adjective.  For example, the Spanish translation could be
-#. * "Pantallas en Espejo".
-#.
-#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
-#. Translators:  this is the feature where what you see on your
-#. * laptop's screen is the same as your external projector.
-#. * Here, "Mirrored" is being used as an adjective.  For example,
-#. * the Spanish translation could be "Pantallas en Espejo".
-#.
-#: ../panels/display/cc-display-panel.c:625
-#: ../panels/display/cc-rr-labeler.c:418
-msgid "Mirrored Displays"
-msgstr "Дзеркальні екрани"
-
-#: ../panels/display/cc-display-panel.c:649
+#: ../panels/display/cc-display-panel.c:471
+#: ../panels/display/cc-display-panel.c:2025
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Monitor"
-msgstr "Монітор"
+msgid "Primary"
+msgstr "Основний"
 
-#: ../panels/display/cc-display-panel.c:1669
-msgid "Drag to change primary display."
-msgstr "Перетягніть для зміни головного екрана."
+#: ../panels/display/cc-display-panel.c:473
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1727 ../panels/power/cc-power-panel.c:1738
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:610
+#: ../panels/universal-access/cc-ua-panel.c:736
+#: ../panels/universal-access/uap.ui.h:6
+msgid "Off"
+msgstr "Вимкнено"
 
-#: ../panels/display/cc-display-panel.c:1727
-msgid ""
-"Select a monitor to change its properties; drag it to rearrange its "
-"placement."
-msgstr ""
-"Виберіть монітор для зміни його параметрів; перетягніть його для зміни його "
-"розташування."
+#: ../panels/display/cc-display-panel.c:476
+msgid "Secondary"
+msgstr "Вторинний"
 
-#: ../panels/display/cc-display-panel.c:2115
-msgid "%a %R"
-msgstr "%a %R"
+#: ../panels/display/cc-display-panel.c:1484
+msgid "Arrange Combined Displays"
+msgstr "Впорядкувати об'єднані екрани"
 
-#: ../panels/display/cc-display-panel.c:2117
-msgid "%a %l:%M %p"
-msgstr "%a %k:%M"
+#: ../panels/display/cc-display-panel.c:1490
+#: ../panels/display/cc-display-panel.c:1895
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+msgid "_Apply"
+msgstr "_Застосувати"
 
-#: ../panels/display/cc-display-panel.c:2279
-#: ../panels/display/cc-display-panel.c:2331
-#, c-format
-msgid "Failed to apply configuration: %s"
-msgstr "Не вдалося застосувати налаштування: %s"
+#: ../panels/display/cc-display-panel.c:1511
+msgid "Drag displays to rearrange them"
+msgstr "Перетягує екрани, щоб їх переворядкувати"
 
-#: ../panels/display/cc-display-panel.c:2359
-msgid "Could not save the monitor configuration"
-msgstr "Не вдалось зберегти налаштування монітора"
+#. size
+#: ../panels/display/cc-display-panel.c:1959
+msgid "Size"
+msgstr "Розмір"
 
-#: ../panels/display/cc-display-panel.c:2419
-msgid "Could not detect displays"
-msgstr "Не вдалось визначити екрани"
+#. aspect ratio
+#: ../panels/display/cc-display-panel.c:1974
+#: ../panels/display/display-capplet.ui.h:12
+msgid "Aspect Ratio"
+msgstr "Відношення сторін"
 
-#: ../panels/display/cc-display-panel.c:2614
+#: ../panels/display/cc-display-panel.c:1995
+#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "Роздільність"
+
+#: ../panels/display/cc-display-panel.c:2026
+#: ../panels/display/display-capplet.ui.h:2
+msgid "Show the top bar and Activities Overview on this display"
+msgstr "Показує на верхній панелі та огляді діяльності на цьому екрані"
+
+#: ../panels/display/cc-display-panel.c:2032
+msgid "Secondary Display"
+msgstr "Другий екран"
+
+#: ../panels/display/cc-display-panel.c:2033
+msgid "Join this display with another to create an extra workspace"
+msgstr "З'єднує цей екран з іншим, щоб утворити більше робочого простору"
+
+#: ../panels/display/cc-display-panel.c:2040
+#: ../panels/display/display-capplet.ui.h:3
+msgid "Presentation"
+msgstr "Презентація"
+
+#: ../panels/display/cc-display-panel.c:2041
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Show slideshows and media only"
+msgstr "Показує тільки слайди та матеріал"
+
+#. translators: "Mirror" describes when both displays show the same view
+#: ../panels/display/cc-display-panel.c:2046
+#: ../panels/display/display-capplet.ui.h:5
+msgid "Mirror"
+msgstr "Відзеркалля"
+
+#: ../panels/display/cc-display-panel.c:2047
+msgid "Show your existing view on both displays"
+msgstr "Показує однакове на двох екранах"
+
+#: ../panels/display/cc-display-panel.c:2257
 msgid "Could not get screen information"
 msgstr "Не вдалось отримати інформацію про екран"
 
-#: ../panels/display/display-capplet.ui.h:2
-msgid "_Resolution"
-msgstr "_Роздільність"
-
-#: ../panels/display/display-capplet.ui.h:3
-msgid "R_otation"
-msgstr "Орі_єнтація"
-
-#. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:5
-msgid "_Mirror displays"
-msgstr "_Дзеркальний показ"
+#: ../panels/display/cc-display-panel.c:2288
+msgid "_Arrange Combined Displays"
+msgstr "_Упорядкувати об'єднані екрани"
 
 #: ../panels/display/display-capplet.ui.h:6
-msgid "Note: may limit resolution options"
-msgstr "Примітка: можна обмежити параметри роздільності"
+msgid "Show your primary display on this screen also"
+msgstr "Показує ваш основний екран теж на цьому екрані"
 
 #: ../panels/display/display-capplet.ui.h:7
-msgid "_Detect Displays"
-msgstr "_Виявити екрани"
+msgid "Combine"
+msgstr "Об'єднати"
+
+#: ../panels/display/display-capplet.ui.h:8
+msgid "Join with the primary display to create an extra space"
+msgstr "З'єднує з основним екраном, щоб утворити більше місця"
+
+#: ../panels/display/display-capplet.ui.h:9
+msgid "Turn Off"
+msgstr "Вимкнути"
+
+#: ../panels/display/display-capplet.ui.h:10
+msgid "Don't use the display"
+msgstr "Не використовувати екран"
+
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/printers/printers.ui.h:12
+msgid "Model"
+msgstr "Модель"
+
+#: ../panels/display/display-capplet.ui.h:14
+msgid "Refresh Rate"
+msgstr "Частота оновлення"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Displays"
@@ -1195,39 +1297,39 @@ msgstr "%s %d-ох бітний"
 msgid "%d-bit"
 msgstr "%d-ох бітний"
 
-#: ../panels/info/cc-info-panel.c:1209
+#: ../panels/info/cc-info-panel.c:1214
 msgid "Ask what to do"
 msgstr "Питати, що робити"
 
-#: ../panels/info/cc-info-panel.c:1213
+#: ../panels/info/cc-info-panel.c:1218
 msgid "Do nothing"
 msgstr "Нічого не робити"
 
-#: ../panels/info/cc-info-panel.c:1217
+#: ../panels/info/cc-info-panel.c:1222
 msgid "Open folder"
 msgstr "Відкрити теку"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:1313
 msgid "Other Media"
 msgstr "Інший носій"
 
-#: ../panels/info/cc-info-panel.c:1339
+#: ../panels/info/cc-info-panel.c:1344
 msgid "Select an application for audio CDs"
 msgstr "Вибрати програму для звукових CD"
 
-#: ../panels/info/cc-info-panel.c:1340
+#: ../panels/info/cc-info-panel.c:1345
 msgid "Select an application for video DVDs"
 msgstr "Вибрати програму для відео DVD"
 
-#: ../panels/info/cc-info-panel.c:1341
+#: ../panels/info/cc-info-panel.c:1346
 msgid "Select an application to run when a music player is connected"
 msgstr "Вибрати програму для запуску, коли музичний програвач під'єднано"
 
-#: ../panels/info/cc-info-panel.c:1342
+#: ../panels/info/cc-info-panel.c:1347
 msgid "Select an application to run when a camera is connected"
 msgstr "Вибрати програму для запуску, коли камеру під'єднано"
 
-#: ../panels/info/cc-info-panel.c:1343
+#: ../panels/info/cc-info-panel.c:1348
 msgid "Select an application for software CDs"
 msgstr "Вибрати програму для програмного CD"
 
@@ -1236,89 +1338,89 @@ msgstr "Вибрати програму для програмного CD"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1355
+#: ../panels/info/cc-info-panel.c:1360
 msgid "audio DVD"
 msgstr "audio DVD"
 
-#: ../panels/info/cc-info-panel.c:1356
+#: ../panels/info/cc-info-panel.c:1361
 msgid "blank Blu-ray disc"
 msgstr "blank Blu-ray disc"
 
-#: ../panels/info/cc-info-panel.c:1357
+#: ../panels/info/cc-info-panel.c:1362
 msgid "blank CD disc"
 msgstr "blank CD disc"
 
-#: ../panels/info/cc-info-panel.c:1358
+#: ../panels/info/cc-info-panel.c:1363
 msgid "blank DVD disc"
 msgstr "blank DVD disc"
 
-#: ../panels/info/cc-info-panel.c:1359
+#: ../panels/info/cc-info-panel.c:1364
 msgid "blank HD DVD disc"
 msgstr "blank HD DVD disc"
 
-#: ../panels/info/cc-info-panel.c:1360
+#: ../panels/info/cc-info-panel.c:1365
 msgid "Blu-ray video disc"
 msgstr "Blu-ray video disc"
 
-#: ../panels/info/cc-info-panel.c:1361
+#: ../panels/info/cc-info-panel.c:1366
 msgid "e-book reader"
 msgstr "e-book reader"
 
-#: ../panels/info/cc-info-panel.c:1362
+#: ../panels/info/cc-info-panel.c:1367
 msgid "HD DVD video disc"
 msgstr "HD DVD video disc"
 
-#: ../panels/info/cc-info-panel.c:1363
+#: ../panels/info/cc-info-panel.c:1368
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1369
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1370
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1371
 msgid "Windows software"
 msgstr "Програми Windows"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1372
 msgid "Software"
 msgstr "Програми"
 
-#: ../panels/info/cc-info-panel.c:1490
+#: ../panels/info/cc-info-panel.c:1495
 #: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "Вибір"
 
-#: ../panels/info/cc-info-panel.c:1499 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1504 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Огляд"
 
-#: ../panels/info/cc-info-panel.c:1505 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Типові програми"
 
-#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Змінний носій"
 
-#: ../panels/info/cc-info-panel.c:1535
+#: ../panels/info/cc-info-panel.c:1540
 #, c-format
 msgid "Version %s"
 msgstr "Версія %s"
 
-#: ../panels/info/cc-info-panel.c:1585
+#: ../panels/info/cc-info-panel.c:1590
 msgid "Install Updates"
 msgstr "Встановити оновлення"
 
-#: ../panels/info/cc-info-panel.c:1589
+#: ../panels/info/cc-info-panel.c:1594
 msgid "System Up-To-Date"
 msgstr "Системні оновлення"
 
-#: ../panels/info/cc-info-panel.c:1593
+#: ../panels/info/cc-info-panel.c:1598
 msgid "Checking for Updates"
 msgstr "Перевіряння на оновлення"
 
@@ -1484,7 +1586,7 @@ msgstr "Витягнути"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "Набирання"
 
@@ -1555,6 +1657,10 @@ msgstr "Копіювати знімок вікна у буфер"
 #: ../panels/keyboard/01-screenshot.xml.in.h:10
 msgid "Copy a screenshot of an area to clipboard"
 msgstr "Копіювати знімок ділянки у буфер"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:11
+msgid "Record a short screencast"
+msgstr "Записати короткий відеозапис"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "System"
@@ -1734,7 +1840,6 @@ msgid "Remove Shortcut"
 msgstr "Вилучити скорочення"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
-#: ../panels/wacom/button-mapping.ui.h:3
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1785,9 +1890,13 @@ msgstr "Після перепризначення скорочення «%s» н
 msgid "_Reassign"
 msgstr "_Перепризначити"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:100
 msgid "Test Your _Settings"
 msgstr "Випробувати ваші _параметри"
+
+#: ../panels/mouse/cc-mouse-panel.c:117
+msgid "Test Your Settings"
+msgstr "Випробувати ваші параметри"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1800,8 +1909,8 @@ msgstr "Змінити чутливість вашої миші та сенсо�
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr "Сенсор;Вказівник;Клік;Стукіт;Подвійний;Кнопка;Кулька;"
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
+msgstr "Сенсор;Вказівник;Клік;Стукіт;Подвійний;Кнопка;Кулька;Прокрутити;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Mouse Preferences"
@@ -1927,11 +2036,11 @@ msgstr "Одинарний клац, вторинна кнопка"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:364
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "Режим у _літаку"
 
-#: ../panels/network/cc-network-panel.c:927
+#: ../panels/network/cc-network-panel.c:928
 msgid "Network proxy"
 msgstr "Мережева проксі"
 
@@ -1939,14 +2048,14 @@ msgstr "Мережева проксі"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1106 ../panels/network/net-vpn.c:285
+#: ../panels/network/cc-network-panel.c:1107 ../panels/network/net-vpn.c:285
 #: ../panels/network/net-vpn.c:438
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1241
+#: ../panels/network/cc-network-panel.c:1242
 msgid "The system network services are not compatible with this version."
 msgstr "Служби системної мережі несумісні з цією версією."
 
@@ -1980,34 +2089,34 @@ msgstr "автоматично"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:224
-#: ../panels/network/net-device-wifi.c:385
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:228
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
 #: ../panels/network/network-wifi.ui.h:17
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:232
+#: ../panels/network/net-device-wifi.c:229
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:237
+#: ../panels/network/net-device-wifi.c:234
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:242
-#: ../panels/network/net-device-wifi.c:375
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Немає"
@@ -2018,18 +2127,18 @@ msgid "Never"
 msgstr "Ніколи"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:787
+#: ../panels/user-accounts/um-utils.c:803
 msgid "Today"
 msgstr "Сьогодні"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:790
+#: ../panels/user-accounts/um-utils.c:806
 msgid "Yesterday"
 msgstr "Учора"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
-#: ../panels/network/net-device-ethernet.c:126
-#: ../panels/network/net-device-wifi.c:479
+#: ../panels/network/net-device-ethernet.c:125
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2039,38 +2148,38 @@ msgstr[2] "%i днів тому"
 
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
-#: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:537
+#: ../panels/network/net-device-ethernet.c:53
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Немає"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Слабке"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Добре"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Непогане"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:574
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Відмінне"
@@ -2082,78 +2191,78 @@ msgstr "Відмінне"
 msgid "Identity"
 msgstr "Засвідчення"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:202
-#: ../panels/network/connection-editor/ce-page-ip4.c:454
+#: ../panels/network/connection-editor/ce-page-ip4.c:207
+#: ../panels/network/connection-editor/ce-page-ip4.c:469
 msgid "Netmask"
 msgstr "Маска"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:216
-#: ../panels/network/connection-editor/ce-page-ip4.c:467
-#: ../panels/network/connection-editor/ce-page-ip6.c:217
-#: ../panels/network/connection-editor/ce-page-ip6.c:475
+#: ../panels/network/connection-editor/ce-page-ip4.c:221
+#: ../panels/network/connection-editor/ce-page-ip4.c:482
+#: ../panels/network/connection-editor/ce-page-ip6.c:222
+#: ../panels/network/connection-editor/ce-page-ip6.c:490
 #: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
 msgstr "Шлюз"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:233
-#: ../panels/network/connection-editor/ce-page-ip6.c:234
+#: ../panels/network/connection-editor/ce-page-ip4.c:238
+#: ../panels/network/connection-editor/ce-page-ip6.c:239
 msgid "Delete Address"
 msgstr "Вилучити адресу"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:285
-#: ../panels/network/connection-editor/ce-page-ip6.c:286
+#: ../panels/network/connection-editor/ce-page-ip4.c:292
+#: ../panels/network/connection-editor/ce-page-ip6.c:293
 msgid "Add"
 msgstr "Додати"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:350
-#: ../panels/network/connection-editor/ce-page-ip6.c:354
+#: ../panels/network/connection-editor/ce-page-ip4.c:360
+#: ../panels/network/connection-editor/ce-page-ip6.c:364
 msgid "Server"
 msgstr "Сервер"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:367
-#: ../panels/network/connection-editor/ce-page-ip6.c:371
+#: ../panels/network/connection-editor/ce-page-ip4.c:377
+#: ../panels/network/connection-editor/ce-page-ip6.c:381
 msgid "Delete DNS Server"
 msgstr "Вилучити сервер DNS"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:481
-#: ../panels/network/connection-editor/ce-page-ip6.c:489
+#: ../panels/network/connection-editor/ce-page-ip4.c:496
+#: ../panels/network/connection-editor/ce-page-ip6.c:504
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Метрика"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:502
-#: ../panels/network/connection-editor/ce-page-ip6.c:510
+#: ../panels/network/connection-editor/ce-page-ip4.c:517
+#: ../panels/network/connection-editor/ce-page-ip6.c:525
 msgid "Delete Route"
 msgstr "Вилучити маршрут"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:616
+#: ../panels/network/connection-editor/ce-page-ip4.c:632
 #: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "Автоматично (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:620
-#: ../panels/network/connection-editor/ce-page-ip6.c:622
+#: ../panels/network/connection-editor/ce-page-ip4.c:636
+#: ../panels/network/connection-editor/ce-page-ip6.c:638
 #: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "Вручну"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:624
-#: ../panels/network/connection-editor/ce-page-ip6.c:626
+#: ../panels/network/connection-editor/ce-page-ip4.c:640
+#: ../panels/network/connection-editor/ce-page-ip6.c:642
 msgid "Link-Local Only"
 msgstr "Лише місцевий"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:925
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:204
-#: ../panels/network/connection-editor/ce-page-ip6.c:458
+#: ../panels/network/connection-editor/ce-page-ip6.c:209
+#: ../panels/network/connection-editor/ce-page-ip6.c:473
 msgid "Prefix"
 msgstr "Префікс"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:614
+#: ../panels/network/connection-editor/ce-page-ip6.c:630
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
@@ -2161,11 +2270,11 @@ msgstr "Префікс"
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:618
+#: ../panels/network/connection-editor/ce-page-ip6.c:634
 msgid "Automatic, DHCP only"
 msgstr "Автоматично, лише DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:886
+#: ../panels/network/connection-editor/ce-page-ip6.c:902
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2205,10 +2314,6 @@ msgstr "Особистий WPA і WPA2"
 msgid "WPA & WPA2 Enterprise"
 msgstr "Комерційний WPA & WPA2"
 
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
-msgid "_Apply"
-msgstr "_Застосувати"
-
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
 msgid "Signal Strength"
@@ -2220,15 +2325,15 @@ msgid "Link speed"
 msgstr "Швидкість сполучення"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
-#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/net-device-ethernet.c:158
 #: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "Адреса IPv4"
 
 #: ../panels/network/connection-editor/details-page.ui.h:5
-#: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/net-device-ethernet.c:164
+#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/net-device-ethernet.c:163
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
@@ -2236,14 +2341,14 @@ msgid "IPv6 Address"
 msgstr "Адреса IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
-#: ../panels/network/net-device-ethernet.c:167
+#: ../panels/network/net-device-ethernet.c:166
 #: ../panels/network/network-simple.ui.h:2
 #: ../panels/network/network-wifi.ui.h:7
 msgid "Hardware Address"
 msgstr "Апаратна адреса"
 
 #: ../panels/network/connection-editor/details-page.ui.h:7
-#: ../panels/network/net-device-ethernet.c:171
+#: ../panels/network/net-device-ethernet.c:170
 #: ../panels/network/network-mobile.ui.h:5
 #: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:8
@@ -2253,7 +2358,7 @@ msgstr "Типовий маршрут"
 #: ../panels/network/connection-editor/details-page.ui.h:8
 #: ../panels/network/connection-editor/ip4-page.ui.h:3
 #: ../panels/network/connection-editor/ip6-page.ui.h:3
-#: ../panels/network/net-device-ethernet.c:173
+#: ../panels/network/net-device-ethernet.c:172
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
 #: ../panels/network/network-wifi.ui.h:9
@@ -2394,36 +2499,36 @@ msgstr "Створити профіль"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:511
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1408
+#: ../panels/user-accounts/um-account-dialog.c:1471
 msgid "_Add"
 msgstr "_Додати"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:593
+#: ../panels/network/connection-editor/net-connection-editor.c:595
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:594
+#: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "Bond"
 msgstr "Прив'язка"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:595
+#: ../panels/network/connection-editor/net-connection-editor.c:597
 msgid "Bridge"
 msgstr "Міст"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:596
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:746
+#: ../panels/network/connection-editor/net-connection-editor.c:749
 msgid "Could not load VPN plugins"
 msgstr "Неможливо завантажити додатки VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:810
+#: ../panels/network/connection-editor/net-connection-editor.c:818
 msgid "Import from file…"
 msgstr "Імпортувати з файла…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:877
+#: ../panels/network/connection-editor/net-connection-editor.c:889
 msgid "Add Network Connection"
 msgstr "Додати мережеве з'єднання"
 
@@ -2433,7 +2538,7 @@ msgid "_Reset"
 msgstr "_Скинути"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1411
+#: ../panels/network/net-device-wifi.c:1408
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Забути"
@@ -2479,6 +2584,13 @@ msgstr ""
 #: ../panels/network/connection-editor/vpn-helpers.c:242
 msgid "Select file to import"
 msgstr "Виберіть файл для імпортування"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:246
+#: ../panels/printers/cc-printers-panel.c:1947
+#: ../panels/sharing/cc-sharing-panel.c:422
+#: ../panels/user-accounts/um-photo-dialog.c:222
+msgid "_Open"
+msgstr "_Відкрити"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
 #, c-format
@@ -2562,29 +2674,29 @@ msgstr "Прив'язування пристроїв"
 msgid "Bridge slaves"
 msgstr "Міст для пристроїв"
 
-#: ../panels/network/net-device-ethernet.c:112
-#: ../panels/network/net-device-wifi.c:465
+#: ../panels/network/net-device-ethernet.c:111
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "ніколи"
 
-#: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:475
+#: ../panels/network/net-device-ethernet.c:121
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "сьогодні"
 
-#: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-ethernet.c:123
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "вчора"
 
-#: ../panels/network/net-device-ethernet.c:162
+#: ../panels/network/net-device-ethernet.c:161
 #: ../panels/network/network-mobile.ui.h:3
 #: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Адреса IP"
 
-#: ../panels/network/net-device-ethernet.c:178
+#: ../panels/network/net-device-ethernet.c:177
 #: ../panels/network/network-wifi.ui.h:10
 msgid "Last used"
 msgstr "Востаннє використано"
@@ -2594,22 +2706,22 @@ msgstr "Востаннє використано"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: ../panels/network/net-device-ethernet.c:288
+#: ../panels/network/net-device-ethernet.c:287
 #: ../panels/network/network-ethernet.ui.h:1
 #: ../panels/network/network-simple.ui.h:1
 msgid "Wired"
 msgstr "Дротовий"
 
-#: ../panels/network/net-device-ethernet.c:356
+#: ../panels/network/net-device-ethernet.c:355
 #: ../panels/network/net-device-wifi.c:1549
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8 ../panels/universal-access/uap.ui.h:23
+#: ../panels/network/network-vpn.ui.h:8
 msgid "Options…"
 msgstr "Параметри…"
 
-#: ../panels/network/net-device-ethernet.c:491
+#: ../panels/network/net-device-ethernet.c:492
 #, c-format
 msgid "Profile %d"
 msgstr "Профіль %d"
@@ -2618,7 +2730,7 @@ msgstr "Профіль %d"
 msgid "Add new connection"
 msgstr "Додати нове з'єднання"
 
-#: ../panels/network/net-device-wifi.c:1120
+#: ../panels/network/net-device-wifi.c:1117
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2626,12 +2738,12 @@ msgstr ""
 "Якщо у вас є з'єднання з інтернетом відмінне від бездротового, можете "
 "відкрити бездротову точку, щоб поділитись з'єднанням з іншими."
 
-#: ../panels/network/net-device-wifi.c:1124
+#: ../panels/network/net-device-wifi.c:1121
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Перемикання на бездротову гарячу точку роз'єднає вас з <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1128
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2639,23 +2751,23 @@ msgstr ""
 "Коли гарячу точку вже ввімкнено, неможливо доступитись до інтернету через "
 "бездротову мережу."
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1199
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Зупинити гарячу точку й від'єднати користувачів?"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1202
 msgid "_Stop Hotspot"
 msgstr "_Зупинити гарячу точку"
 
-#: ../panels/network/net-device-wifi.c:1277
+#: ../panels/network/net-device-wifi.c:1274
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Системна політика забороняє використовувати комп'ютер як гарячу точку"
 
-#: ../panels/network/net-device-wifi.c:1280
+#: ../panels/network/net-device-wifi.c:1277
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Бездротовий пристрій не підтримує режиму гарячої точки"
 
-#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/network/net-device-wifi.c:1404
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2663,13 +2775,19 @@ msgstr ""
 "Подробиці мережі для вибраної мережі, зокрема паролі та інші параметри буде "
 "втрачено."
 
-#: ../panels/network/net-device-wifi.c:1712
+#: ../panels/network/net-device-wifi.c:1714
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Історія"
 
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/wacom/cc-wacom-page.c:525
+msgid "_Close"
+msgstr "_Закрити"
+
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1724
+#: ../panels/network/net-device-wifi.c:1726
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Забути"
@@ -2690,7 +2808,7 @@ msgstr ""
 msgid "This is not recommended for untrusted public networks."
 msgstr "Це не рекомендовано для ненадійних прилюдних мереж."
 
-#: ../panels/network/net-proxy.c:408
+#: ../panels/network/net-proxy.c:417
 msgid "Proxy"
 msgstr "Проксі"
 
@@ -2825,7 +2943,6 @@ msgid "_Password"
 msgstr "_Пароль"
 
 #: ../panels/network/network-wifi.ui.h:18
-#: ../panels/universal-access/uap.ui.h:8
 msgid "None"
 msgstr "Немає"
 
@@ -3514,19 +3631,15 @@ msgctxt "notifications"
 msgid "Show Details in Lock Screen"
 msgstr "Показувати подробиці в заблокованому екрані"
 
-#: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1637 ../panels/power/cc-power-panel.c:1644
-#: ../panels/privacy/cc-privacy-panel.c:78
-#: ../panels/privacy/cc-privacy-panel.c:145
+#: ../panels/notifications/cc-notifications-panel.c:205
+#: ../panels/power/cc-power-panel.c:1733 ../panels/power/cc-power-panel.c:1740
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:117
+#: ../panels/universal-access/cc-ua-panel.c:253
+#: ../panels/universal-access/cc-ua-panel.c:610
+#: ../panels/universal-access/cc-ua-panel.c:736
 msgid "On"
 msgstr "Увімкнено"
-
-#: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1631 ../panels/power/cc-power-panel.c:1642
-#: ../panels/privacy/cc-privacy-panel.c:78
-#: ../panels/privacy/cc-privacy-panel.c:145
-msgid "Off"
-msgstr "Вимкнено"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3549,26 +3662,30 @@ msgstr "Показувати контекстні шапки"
 msgid "Show in Lock Screen"
 msgstr "Показувати у заблокованому екрані"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:191
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Інше"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:292
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:318
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Додати обліковий запис"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:331
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "Пошта"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:337
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "Контакти"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:343
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr "Розмова"
+
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "Ресурси"
 
@@ -3576,37 +3693,33 @@ msgstr "Ресурси"
 msgid "Error logging into the account"
 msgstr "Помилка входу в обліковий запис"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:495
 msgid "Credentials have expired."
 msgstr "Строк дії реєстраційних даних вичерпано."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "Sign in to enable this account."
 msgstr "Увійдіть, щоб увімкнути цей обліковий запис."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:506
+#: ../panels/online-accounts/cc-online-accounts-panel.c:504
 msgid "_Sign In"
 msgstr "_Увімкнути"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:747
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "Error creating account"
 msgstr "Помилка створення облікового запису"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:787
+#: ../panels/online-accounts/cc-online-accounts-panel.c:805
 msgid "Error removing account"
 msgstr "Помилка вилучення облікового запису"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:823
+#: ../panels/online-accounts/cc-online-accounts-panel.c:841
 msgid "Are you sure you want to remove the account?"
 msgstr "Вилучити обліковий запис?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:825
+#: ../panels/online-accounts/cc-online-accounts-panel.c:843
 msgid "This will not remove the account on the server."
 msgstr "Облікового запису не буде вилучено із сервера."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:826
-msgid "_Remove"
-msgstr "_Вилучити"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:1
 msgid "Online Accounts"
@@ -3622,9 +3735,10 @@ msgstr ""
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Інтернет;Мережа;Балачка;Календар;Пошта;Контакт;"
-"ownCloud;"
+"ownCloud;IMAP;SMTP;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3646,11 +3760,11 @@ msgstr ""
 "Додання облікового запису дозволить програмам доступитися до ваших "
 "документів, пошти, контактів, календарю, спілкування тощо."
 
-#: ../panels/power/cc-power-panel.c:184
+#: ../panels/power/cc-power-panel.c:187
 msgid "Unknown time"
 msgstr "Час невідомий"
 
-#: ../panels/power/cc-power-panel.c:190
+#: ../panels/power/cc-power-panel.c:193
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -3658,7 +3772,7 @@ msgstr[0] "%i хвилина"
 msgstr[1] "%i хвилини"
 msgstr[2] "%i хвилин"
 
-#: ../panels/power/cc-power-panel.c:202
+#: ../panels/power/cc-power-panel.c:205
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3668,19 +3782,19 @@ msgstr[2] "%i годин"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:213
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:214
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "година"
 msgstr[1] "години"
 msgstr[2] "годин"
 
-#: ../panels/power/cc-power-panel.c:212
+#: ../panels/power/cc-power-panel.c:215
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвилина"
@@ -3688,209 +3802,208 @@ msgstr[1] "хвилини"
 msgstr[2] "хвилин"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:231
+#: ../panels/power/cc-power-panel.c:234
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s до повного зарядження"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:238
+#: ../panels/power/cc-power-panel.c:241
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Обережно: залишилось %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:243
+#: ../panels/power/cc-power-panel.c:246
 #, c-format
 msgid "%s remaining"
 msgstr "Залишилось %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:248 ../panels/power/cc-power-panel.c:276
+#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
 msgid "Fully charged"
 msgstr "Повністю заряджено"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:252 ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:255 ../panels/power/cc-power-panel.c:283
 msgid "Empty"
 msgstr "Вичерпано"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:267
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging"
 msgstr "Заряджання"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:272
+#: ../panels/power/cc-power-panel.c:275
 msgid "Discharging"
 msgstr "Розряджається"
 
-#: ../panels/power/cc-power-panel.c:324
-#, c-format
-msgid "Estimated battery capacity: %s"
-msgstr "Наближена працездатність батареї: %s"
-
-#: ../panels/power/cc-power-panel.c:404
+#: ../panels/power/cc-power-panel.c:393
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Основна"
 
-#: ../panels/power/cc-power-panel.c:406
+#: ../panels/power/cc-power-panel.c:395
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Додаткова"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:486
 msgid "Wireless mouse"
 msgstr "Бездротова миша"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:490
 msgid "Wireless keyboard"
 msgstr "Бездротова клавіатура"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:501
+#: ../panels/power/cc-power-panel.c:494
 msgid "Uninterruptible power supply"
 msgstr "Постачання безперебійного живлення"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:506
+#: ../panels/power/cc-power-panel.c:499
 msgid "Personal digital assistant"
 msgstr "Особистий цифровий помічник"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:510
+#: ../panels/power/cc-power-panel.c:503
 msgid "Cellphone"
 msgstr "Мобільний телефон"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:514
+#: ../panels/power/cc-power-panel.c:507
 msgid "Media player"
 msgstr "Програвач"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:511
 msgid "Tablet"
 msgstr "Планшет"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:515
 msgid "Computer"
 msgstr "Комп'ютер"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:526 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:1938
+#: ../panels/power/cc-power-panel.c:519 ../panels/power/cc-power-panel.c:729
+#: ../panels/power/cc-power-panel.c:2064
 msgid "Battery"
 msgstr "Батарея"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:535
+#: ../panels/power/cc-power-panel.c:528
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Заряджання"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:535
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Застереження"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:540
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Низько"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:545
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Працездатно"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:550
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Повністю заряджено"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:554
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Вичерпано"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:727
 msgid "Batteries"
 msgstr "Батареї"
 
-#: ../panels/power/cc-power-panel.c:1074
+#: ../panels/power/cc-power-panel.c:1133
 msgid "When _idle"
 msgstr "Коли _бездіяльний"
 
-#: ../panels/power/cc-power-panel.c:1401
+#: ../panels/power/cc-power-panel.c:1502
 msgid "Power Saving"
 msgstr "Заощадження енергії"
 
-#: ../panels/power/cc-power-panel.c:1430
+#: ../panels/power/cc-power-panel.c:1530
 msgid "_Screen brightness"
 msgstr "Яскравість _екрана"
 
-#: ../panels/power/cc-power-panel.c:1458
+#: ../panels/power/cc-power-panel.c:1536
+msgid "_Keyboard brightness"
+msgstr "Підсвічування _клавіатури"
+
+#: ../panels/power/cc-power-panel.c:1546
 msgid "_Dim screen when inactive"
 msgstr "_Затемнювати екран, коли нічого не відбувається"
 
-#: ../panels/power/cc-power-panel.c:1481
+#: ../panels/power/cc-power-panel.c:1571
 msgid "_Blank screen"
 msgstr "_Порожній екран"
 
-#: ../panels/power/cc-power-panel.c:1516
+#: ../panels/power/cc-power-panel.c:1608
 msgid "_Wi-Fi"
 msgstr "Wi_-Fi"
 
-#: ../panels/power/cc-power-panel.c:1521
+#: ../panels/power/cc-power-panel.c:1613
 msgid "Turns off wireless devices"
 msgstr "Вимкнути бездротовий пристрій"
 
-#: ../panels/power/cc-power-panel.c:1544
+#: ../panels/power/cc-power-panel.c:1638
 msgid "_Mobile broadband"
 msgstr "_Мобільна широкосмугова радіомережа"
 
-#: ../panels/power/cc-power-panel.c:1549
+#: ../panels/power/cc-power-panel.c:1643
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Вимкнути пристрій широкосмугової мережі (3G, 4G, WiMax тощо)"
 
-#: ../panels/power/cc-power-panel.c:1582
+#: ../panels/power/cc-power-panel.c:1678
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1633
+#: ../panels/power/cc-power-panel.c:1729
 msgid "When on battery power"
 msgstr "Коли живлення від батареї"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1731
 msgid "When plugged in"
 msgstr "Коли під'єднано"
 
-#: ../panels/power/cc-power-panel.c:1762
+#: ../panels/power/cc-power-panel.c:1860
 msgid "Suspend & Power Off"
 msgstr "Призупинити і вимкнути"
 
-#: ../panels/power/cc-power-panel.c:1793
+#: ../panels/power/cc-power-panel.c:1893
 msgid "_Automatic suspend"
 msgstr "_Автоматично призупиняти"
 
-#: ../panels/power/cc-power-panel.c:1815
+#: ../panels/power/cc-power-panel.c:1917
 msgid "When battery power is _critical"
 msgstr "Коли заряд батареї стане _критичним"
 
-#: ../panels/power/cc-power-panel.c:1848
+#: ../panels/power/cc-power-panel.c:1974
 msgid "Power Off"
 msgstr "Вимкнути"
 
-#: ../panels/power/cc-power-panel.c:1990
+#: ../panels/power/cc-power-panel.c:2111
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -3978,10 +4091,6 @@ msgstr "12 хвилин"
 msgid "Automatic Suspend"
 msgstr "Автоматично призупиняти"
 
-#: ../panels/power/power.ui.h:21 ../panels/privacy/privacy.ui.h:10
-msgid "_Close"
-msgstr "_Закрити"
-
 #: ../panels/power/power.ui.h:22
 msgid "_Plugged In"
 msgstr "_Під'єднано"
@@ -3999,7 +4108,7 @@ msgid "Authenticate"
 msgstr "Засвідчення"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:23
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Пароль"
@@ -4238,14 +4347,19 @@ msgstr "Скасувати завдання принтера"
 msgid "Add a New Printer"
 msgstr "Додати принтер"
 
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:501
-msgid "_Cancel"
-msgstr "_Скасувати"
+#. Translators: This button opens authentication dialog for selected server.
+#: ../panels/printers/new-printer-dialog.ui.h:5
+msgid "A_uthenticate"
+msgstr "За_свідчення"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "Search for network printers or filter result"
 msgstr "Пошук мережевих принтерів або результат фільтру"
+
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "Enter address of a printer or a text to filter results"
+msgstr "Уведіть адресу принтера або текст, щоб відсіяти результати"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4359,8 +4473,13 @@ msgstr "Час"
 msgid "%s Active Jobs"
 msgstr "%s чинних завдань"
 
+#. Translators: This item is a server which needs authentication to show its printers
+#: ../panels/printers/pp-new-printer-dialog.c:1667
+msgid "Server requires authentication"
+msgstr "Сервер потребує засвідчення"
+
 #. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1468
+#: ../panels/printers/pp-new-printer-dialog.c:1704
 msgid "No printers detected."
 msgstr "Не виявлено жодного принтера."
 
@@ -4379,10 +4498,6 @@ msgstr "Джерело паперу"
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Output Tray"
 msgstr "Лоток виводу"
-
-#: ../panels/printers/pp-options-dialog.c:86
-msgid "Resolution"
-msgstr "Роздільність"
 
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "GhostScript pre-filtering"
@@ -4498,7 +4613,7 @@ msgid "Driver"
 msgstr "Драйвер"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:247
+#: ../panels/printers/pp-samba.c:254
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -4536,10 +4651,6 @@ msgstr "Завдання"
 msgid "Show _Jobs"
 msgstr "Показати _завдання"
 
-#: ../panels/printers/printers.ui.h:12
-msgid "Model"
-msgstr "Модель"
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "мітка"
@@ -4576,27 +4687,39 @@ msgstr ""
 "Вибачте! Система служба друкування,\n"
 "здається, недоступна."
 
-#: ../panels/privacy/cc-privacy-panel.c:105
-msgid "Hidden"
-msgstr "Приховано"
-
-#: ../panels/privacy/cc-privacy-panel.c:105
-msgid "Visible"
-msgstr "Видимо"
-
-#: ../panels/privacy/cc-privacy-panel.c:271 ../panels/privacy/privacy.ui.h:31
+#: ../panels/privacy/cc-privacy-panel.c:245 ../panels/privacy/privacy.ui.h:26
 msgid "Screen Lock"
 msgstr "Блокування екрана"
 
-#: ../panels/privacy/cc-privacy-panel.c:338 ../panels/privacy/privacy.ui.h:9
-msgid "Name & Visibility"
-msgstr "Назва та видимість"
-
-#: ../panels/privacy/cc-privacy-panel.c:446 ../panels/privacy/privacy.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:358 ../panels/privacy/privacy.ui.h:20
 msgid "Usage & History"
 msgstr "Використання та історія"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:486
+msgid "Empty all items from Trash?"
+msgstr "Очистити всі елементи зі смітника?"
+
+#: ../panels/privacy/cc-privacy-panel.c:487
+msgid "All items in the Trash will be permanently deleted."
+msgstr "Якщо вилучити елементи в смітнику, їх буде вилучено безповоротно."
+
+#: ../panels/privacy/cc-privacy-panel.c:488 ../panels/privacy/privacy.ui.h:32
+msgid "_Empty Trash"
+msgstr "С_порожнити смітник"
+
+#: ../panels/privacy/cc-privacy-panel.c:511
+msgid "Delete all the temporary files?"
+msgstr "Вилучити усі тимчасові файли?"
+
+#: ../panels/privacy/cc-privacy-panel.c:512
+msgid "All the temporary files will be permanently deleted."
+msgstr "Усі тимчасові файли буде безповоротно вилучено."
+
+#: ../panels/privacy/cc-privacy-panel.c:513 ../panels/privacy/privacy.ui.h:33
+msgid "_Purge Temporary Files"
+msgstr "П_очистити тимчасові файли"
+
+#: ../panels/privacy/cc-privacy-panel.c:535 ../panels/privacy/privacy.ui.h:31
 msgid "Purge Trash & Temporary Files"
 msgstr "Очистити кошик і тимчасові файли"
 
@@ -4625,67 +4748,51 @@ msgstr "Екран вимикається"
 msgid "30 seconds"
 msgstr "30 секунд"
 
-#: ../panels/privacy/privacy.ui.h:11
-msgid "Control how you appear on the screen and the network."
-msgstr "Вказує, як ви показуєтесь на екрані та в мережі."
-
-#: ../panels/privacy/privacy.ui.h:12
-msgid "Display _full name in top bar"
-msgstr "Показує _повне ім'я на верхній панелі"
-
-#: ../panels/privacy/privacy.ui.h:13
-msgid "Display full name in _lock screen"
-msgstr "Показує повне ім'я в заб_локованому екрані"
-
-#: ../panels/privacy/privacy.ui.h:14
-msgid "_Stealth Mode"
-msgstr "По_тайний режим"
-
-#: ../panels/privacy/privacy.ui.h:15
+#: ../panels/privacy/privacy.ui.h:9
 msgid "Immediately"
 msgstr "Негайно"
 
-#: ../panels/privacy/privacy.ui.h:16
+#: ../panels/privacy/privacy.ui.h:10
 msgid "1 day"
 msgstr "1 день"
 
-#: ../panels/privacy/privacy.ui.h:17
+#: ../panels/privacy/privacy.ui.h:11
 msgid "2 days"
 msgstr "2 днів"
 
-#: ../panels/privacy/privacy.ui.h:18
+#: ../panels/privacy/privacy.ui.h:12
 msgid "3 days"
 msgstr "3 днів"
 
-#: ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/privacy.ui.h:13
 msgid "4 days"
 msgstr "4 днів"
 
-#: ../panels/privacy/privacy.ui.h:20
+#: ../panels/privacy/privacy.ui.h:14
 msgid "5 days"
 msgstr "5 днів"
 
-#: ../panels/privacy/privacy.ui.h:21
+#: ../panels/privacy/privacy.ui.h:15
 msgid "6 days"
 msgstr "6 днів"
 
-#: ../panels/privacy/privacy.ui.h:22
+#: ../panels/privacy/privacy.ui.h:16
 msgid "7 days"
 msgstr "7 днів"
 
-#: ../panels/privacy/privacy.ui.h:23
+#: ../panels/privacy/privacy.ui.h:17
 msgid "14 days"
 msgstr "14 днів"
 
-#: ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/privacy.ui.h:18
 msgid "30 days"
 msgstr "30 днів"
 
-#: ../panels/privacy/privacy.ui.h:25
+#: ../panels/privacy/privacy.ui.h:19
 msgid "Forever"
 msgstr "Завжди"
 
-#: ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/privacy.ui.h:21
 msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
@@ -4693,44 +4800,36 @@ msgstr ""
 "Запам'ятовування вашої історії дозволяє легше знаходити речі знову. Ці "
 "пункти ніколи не оприлюднюються в мережі."
 
-#: ../panels/privacy/privacy.ui.h:28
+#: ../panels/privacy/privacy.ui.h:22
 msgid "Cl_ear Recent History"
 msgstr "_Очистити нещодавню історію"
 
-#: ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/privacy.ui.h:24
 msgid "_Recently Used"
 msgstr "Не_щодавно вжите"
 
-#: ../panels/privacy/privacy.ui.h:30
+#: ../panels/privacy/privacy.ui.h:25
 msgid "Retain _History"
 msgstr "Зберігати _історію"
 
-#: ../panels/privacy/privacy.ui.h:32
+#: ../panels/privacy/privacy.ui.h:27
 msgid "The Screen Lock protects your privacy when you are away."
 msgstr ""
 "Заблокований екран захищає вашу конфіденційну інформацію, коли ви відійшли."
 
-#: ../panels/privacy/privacy.ui.h:33
+#: ../panels/privacy/privacy.ui.h:28
 msgid "Automatic Screen _Lock"
 msgstr "Автоматично _блокувати екран"
 
-#: ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/privacy.ui.h:29
 msgid "Lock screen _after blank for"
 msgstr "Заблокувати екран, _коли він пустий"
 
-#: ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/privacy.ui.h:30
 msgid "Show _Notifications"
 msgstr "Показувати _сповіщення"
 
-#: ../panels/privacy/privacy.ui.h:37
-msgid "_Empty Trash"
-msgstr "С_порожнити смітник"
-
-#: ../panels/privacy/privacy.ui.h:38
-msgid "_Purge Temporary Files"
-msgstr "П_очистити тимчасові файли"
-
-#: ../panels/privacy/privacy.ui.h:39
+#: ../panels/privacy/privacy.ui.h:34
 msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
@@ -4738,67 +4837,67 @@ msgstr ""
 "Автоматично чистити смітник і тимчасові файли, щоб зберігати ваш комп'ютер "
 "чистим від непотрібної інформації."
 
-#: ../panels/privacy/privacy.ui.h:40
+#: ../panels/privacy/privacy.ui.h:35
 msgid "Automatically empty _Trash"
 msgstr "Автоматично спорожняти смі_тник"
 
-#: ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/privacy.ui.h:36
 msgid "Automatically purge Temporary _Files"
 msgstr "Автоматично чистити тимчасові _файли"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:37
 msgid "Purge _After"
 msgstr "Чистити _після"
 
-#: ../panels/region/cc-format-chooser.c:122
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Імперська"
 
-#: ../panels/region/cc-format-chooser.c:124
+#: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Метрична"
 
-#: ../panels/region/cc-format-chooser.c:283
+#: ../panels/region/cc-format-chooser.c:285
 msgid "No regions found"
 msgstr "Не знайдено жодного регіону"
 
-#: ../panels/region/cc-input-chooser.c:185
+#: ../panels/region/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Не знайдено жодного джерела введення"
 
-#: ../panels/region/cc-input-chooser.c:1088
+#: ../panels/region/cc-input-chooser.c:1070
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Інше"
 
-#: ../panels/region/cc-region-panel.c:240
+#: ../panels/region/cc-region-panel.c:239
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Щоб зміни набрали чинності, потрібно перезапустити ваш сеанс"
 
-#: ../panels/region/cc-region-panel.c:241
+#: ../panels/region/cc-region-panel.c:240
 msgid "Restart Now"
 msgstr "Перезапустити зараз"
 
-#: ../panels/region/cc-region-panel.c:566
+#: ../panels/region/cc-region-panel.c:569
 msgctxt "Language"
 msgid "None"
 msgstr "Немає"
 
-#: ../panels/region/cc-region-panel.c:1058
-msgid "Sorry"
-msgstr "Вибачте"
-
-#: ../panels/region/cc-region-panel.c:1060
-msgid "Input methods can't be used on the login screen"
-msgstr "Способи введення неможливо використовувати у вікні входу"
-
-#: ../panels/region/cc-region-panel.c:1509
+#: ../panels/region/cc-region-panel.c:853
 msgid "No input source selected"
 msgstr "Не вибрано жодного джерела введення"
 
-#: ../panels/region/cc-region-panel.c:1690
+#: ../panels/region/cc-region-panel.c:1084
+msgid "Sorry"
+msgstr "Вибачте"
+
+#: ../panels/region/cc-region-panel.c:1086
+msgid "Input methods can't be used on the login screen"
+msgstr "Способи введення неможливо використовувати у вікні входу"
+
+#: ../panels/region/cc-region-panel.c:1716
 msgid "Login Screen"
 msgstr "Вікно входу"
 
@@ -4910,30 +5009,34 @@ msgstr ""
 "Параметри входу використовуються всіма користувачами, коли вони входять у "
 "систему"
 
-#: ../panels/search/cc-search-locations-dialog.c:276
+#: ../panels/search/cc-search-locations-dialog.c:275
 msgid "Home"
 msgstr "Домівка"
 
-#: ../panels/search/cc-search-locations-dialog.c:476
+#: ../panels/search/cc-search-locations-dialog.c:477
 msgctxt "Search Location"
 msgid "Places"
 msgstr "Місця"
 
-#: ../panels/search/cc-search-locations-dialog.c:478
+#: ../panels/search/cc-search-locations-dialog.c:479
 msgctxt "Search Location"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: ../panels/search/cc-search-locations-dialog.c:480
+#: ../panels/search/cc-search-locations-dialog.c:481
 msgctxt "Search Location"
 msgid "Other"
 msgstr "Інше"
 
-#: ../panels/search/cc-search-locations-dialog.c:676
+#: ../panels/search/cc-search-locations-dialog.c:679
 msgid "Select Location"
 msgstr "Вибрати регіон"
 
-#: ../panels/search/cc-search-panel.c:182
+#: ../panels/search/cc-search-locations-dialog.c:683
+msgid "_OK"
+msgstr "_Гаразд"
+
+#: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "Не знайдено жодної програми"
 
@@ -4968,21 +5071,21 @@ msgstr "Пересунути вниз"
 msgid "Preferences"
 msgstr "Параметри"
 
-#: ../panels/sharing/cc-sharing-panel.c:268
+#: ../panels/sharing/cc-sharing-panel.c:274
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Увімкнено"
 
-#: ../panels/sharing/cc-sharing-panel.c:270
+#: ../panels/sharing/cc-sharing-panel.c:276
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: ../panels/sharing/cc-sharing-panel.c:416
+#: ../panels/sharing/cc-sharing-panel.c:418
 msgid "Choose a Folder"
 msgstr "Вибрати теку"
 
-#: ../panels/sharing/cc-sharing-panel.c:594
+#: ../panels/sharing/cc-sharing-panel.c:702
 msgid "Copy"
 msgstr "Копіювати"
 
@@ -5044,46 +5147,50 @@ msgid "Computer Name"
 msgstr "Назва комп'ютера"
 
 #: ../panels/sharing/sharing.ui.h:8
-msgid "Remote Login"
-msgstr "Віддалений вхід"
+msgid "Personal File Sharing"
+msgstr "Особисте оприлюднення файлів"
 
 #: ../panels/sharing/sharing.ui.h:9
-msgid "Some services are disabled because of no network access."
-msgstr "Деякі служби вимкнено через недоступність мережі."
+msgid "Screen Sharing"
+msgstr "Оприлюднення екрана"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Media Sharing"
 msgstr "Оприлюднення матеріалів"
 
 #: ../panels/sharing/sharing.ui.h:11
+msgid "Remote Login"
+msgstr "Віддалений вхід"
+
+#: ../panels/sharing/sharing.ui.h:12
+msgid "Some services are disabled because of no network access."
+msgstr "Деякі служби вимкнено через недоступність мережі."
+
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "Ділитись музикою, світлинами та відеозаписами з іншими в мережі."
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:14
 msgid "Share Media On This Network"
 msgstr "Оприлюднити матеріали в мережі"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Shared Folders"
 msgstr "Спільні теки"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:16
 msgid "column"
 msgstr "стовпчик"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Add Folder"
 msgstr "Додати теку"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Remove Folder"
 msgstr "Вилучити теку"
 
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Personal File Sharing"
-msgstr "Особисте оприлюднення файлів"
-
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:20
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5093,15 +5200,15 @@ msgstr ""
 "теки з іншими у вашій поточній мережі за допомогою: <a href=\"dav://%s"
 "\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Share Public Folder On This Network"
 msgstr "Оприлюднити привселюдну теку в цій мережі"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Require Password"
 msgstr "Вимагати пароль"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:25
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5109,10 +5216,6 @@ msgid ""
 msgstr ""
 "Дозволяє віддаленим користувачам під'єднатись за допомогою команди:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
-
-#: ../panels/sharing/sharing.ui.h:26
-msgid "Screen Sharing"
-msgstr "Оприлюднення екрана"
 
 #: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
@@ -5265,65 +5368,65 @@ msgstr "Ви_пробувати динаміки"
 msgid "Peak detect"
 msgstr "Виявлення піків"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1509
+#: ../panels/sound/gvc-mixer-dialog.c:1510
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Назва"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1528
+#: ../panels/sound/gvc-mixer-dialog.c:1529
 msgid "Device"
 msgstr "Пристрій"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1591
+#: ../panels/sound/gvc-mixer-dialog.c:1592
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Випробовування динаміків для %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1648
+#: ../panels/sound/gvc-mixer-dialog.c:1649
 msgid "_Output volume:"
 msgstr "В_ихідна гучність:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1662
+#: ../panels/sound/gvc-mixer-dialog.c:1663
 msgid "Output"
 msgstr "Вивід"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1667
+#: ../panels/sound/gvc-mixer-dialog.c:1668
 msgid "C_hoose a device for sound output:"
 msgstr "_Виберіть пристрій для виведення звуку:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1692
+#: ../panels/sound/gvc-mixer-dialog.c:1693
 msgid "Settings for the selected device:"
 msgstr "Налаштування вибраного пристрою:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1703
+#: ../panels/sound/gvc-mixer-dialog.c:1704
 msgid "Input"
 msgstr "Вхід"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1710
+#: ../panels/sound/gvc-mixer-dialog.c:1711
 msgid "_Input volume:"
 msgstr "В_хідна гучність:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1733
+#: ../panels/sound/gvc-mixer-dialog.c:1734
 msgid "Input level:"
 msgstr "Рівень входу:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1761
+#: ../panels/sound/gvc-mixer-dialog.c:1762
 msgid "C_hoose a device for sound input:"
 msgstr "в_иберіть пристрій для прийому звуку:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1788
+#: ../panels/sound/gvc-mixer-dialog.c:1789
 msgid "Sound Effects"
 msgstr "Звукові ефекти"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1795
+#: ../panels/sound/gvc-mixer-dialog.c:1796
 msgid "_Alert volume:"
 msgstr "Гучність _попередження:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1808
+#: ../panels/sound/gvc-mixer-dialog.c:1809
 msgid "Applications"
 msgstr "Програми"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1812
+#: ../panels/sound/gvc-mixer-dialog.c:1813
 msgid "No application is currently playing or recording audio."
 msgstr "Немає програм, котрі зараз відтворюють або записують звук."
 
@@ -5372,11 +5475,6 @@ msgstr "Низькочастотний динамік"
 msgid "Custom"
 msgstr "Свій"
 
-#: ../panels/universal-access/cc-ua-panel.c:281
-#: ../panels/universal-access/cc-ua-panel.c:287
-msgid "No shortcut set"
-msgstr "Не вказано жодного скорочення"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Полегшує читання, слухання, набирання, наведення і натискання"
@@ -5391,303 +5489,250 @@ msgstr ""
 "розмір;AccessX;Липкі клавіші;Повільні клавіші;Пружні клавіші;Кнопки миші;"
 
 #: ../panels/universal-access/uap.ui.h:1
-#: ../panels/universal-access/zoom-options.ui.h:35
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "Низька"
+msgid "_Always Show Universal Access Menu"
+msgstr "_Завжди показувати меню універсального доступу"
 
 #: ../panels/universal-access/uap.ui.h:2
-msgctxt "universal access, contrast"
-msgid "Normal"
-msgstr "Звичайний"
-
-#: ../panels/universal-access/uap.ui.h:3
-#: ../panels/universal-access/zoom-options.ui.h:36
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "Висока"
-
-#: ../panels/universal-access/uap.ui.h:4
-msgctxt "universal access, contrast"
-msgid "High/Inverse"
-msgstr "Висока/інвертувати"
-
-#: ../panels/universal-access/uap.ui.h:5
-msgid "On screen keyboard"
-msgstr "Екранна клавіатура"
-
-#: ../panels/universal-access/uap.ui.h:6
-msgid "GOK"
-msgstr "GOK"
-
-#: ../panels/universal-access/uap.ui.h:7
-msgid "OnBoard"
-msgstr "Бортова"
-
-#: ../panels/universal-access/uap.ui.h:10
-#, no-c-format
-msgid "75%"
-msgstr "75%"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgctxt "universal access, text size"
-msgid "Small"
-msgstr "Маленький"
-
-#: ../panels/universal-access/uap.ui.h:13
-#, no-c-format
-msgid "100%"
-msgstr "100%"
-
-#: ../panels/universal-access/uap.ui.h:14
-msgctxt "universal access, text size"
-msgid "Normal"
-msgstr "Звичайний"
-
-#: ../panels/universal-access/uap.ui.h:16
-#, no-c-format
-msgid "125%"
-msgstr "125%"
-
-#: ../panels/universal-access/uap.ui.h:17
-msgctxt "universal access, text size"
-msgid "Large"
-msgstr "Великий"
-
-#: ../panels/universal-access/uap.ui.h:19
-#, no-c-format
-msgid "150%"
-msgstr "150%"
-
-#: ../panels/universal-access/uap.ui.h:20
-msgctxt "universal access, text size"
-msgid "Larger"
-msgstr "Більший"
-
-#: ../panels/universal-access/uap.ui.h:21
-msgid "High Contrast"
-msgstr "Висока контрастність"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Beep on Caps and Num Lock"
-msgstr "Подавати сигнал, коли натискаєш на CapsLock та NumLock"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Screen Reader"
-msgstr "Зчитувач екрана"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Turn on or off:"
-msgstr "Увімкнути або вимкнути:"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgctxt "universal access, zoom"
-msgid "Zoom"
-msgstr "Масштаб"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Zoom in:"
-msgstr "Наблизити:"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Zoom out:"
-msgstr "Віддалити:"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Large Text"
-msgstr "Великий текст"
-
-#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "Бачення"
 
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Visual Alerts"
-msgstr "Візуальне попередження"
+#: ../panels/universal-access/uap.ui.h:3
+msgid "_High Contrast"
+msgstr "_Висока контрастність"
 
-#: ../panels/universal-access/uap.ui.h:32
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "Використовувати візуальний індикатор, коли виникає звук попередження"
+#: ../panels/universal-access/uap.ui.h:4
+msgid "_Large Text"
+msgstr "Ве_ликий текст"
 
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Flash the window title"
-msgstr "Блимання заголовку вікна"
+#: ../panels/universal-access/uap.ui.h:5
+msgid "_Zoom"
+msgstr "_Масштаб"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Flash the entire screen"
-msgstr "Блимання всього екрана"
+#: ../panels/universal-access/uap.ui.h:7
+msgid "Screen _Reader"
+msgstr "З_читувач екрана"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Closed Captioning"
-msgstr "Субтитри"
+#: ../panels/universal-access/uap.ui.h:8
+msgid "_Sound Keys"
+msgstr "Зв_укові клавіші"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Display a textual description of speech and sounds"
-msgstr "Показати текстовий опис мовлення та звуків"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "_Test flash"
-msgstr "Ви_пробувати спалах"
-
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:9
 msgid "Hearing"
 msgstr "Слухання"
 
-#: ../panels/universal-access/uap.ui.h:40
-msgid "On Screen Keyboard"
-msgstr "На екранній клавіатурі"
+#: ../panels/universal-access/uap.ui.h:10
+msgid "_Visual Alerts"
+msgstr "В_ізуальні попередження"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Sticky Keys"
-msgstr "Липкі клавіші"
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Screen _Keyboard"
+msgstr "Екранна _клавіатура"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:13
+msgid "_Typing Assist (AccessX)"
+msgstr "Асистент з _набирання (AccessX)"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Pointing and Clicking"
+msgstr "Вказування та натискання"
+
+#: ../panels/universal-access/uap.ui.h:15
+msgid "_Mouse Keys"
+msgstr "Кнопки ми_ші"
+
+#: ../panels/universal-access/uap.ui.h:16
+msgid "_Click Assist"
+msgstr "Асистент з на_тискання"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgid "Screen Reader"
+msgstr "Зчитувач екрана"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr "Зчитувач екрана читає показаний текст у міру пересування фокусу."
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Screen Reader"
+msgstr "З_читувач екрана"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Sound Keys"
+msgstr "Звукові клавіші"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Beep when Num Lock or Caps Lock are turned on."
+msgstr "Подавати гудок, коли ввімкнено Num Lock або Caps Lock."
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Visual Alerts"
+msgstr "Візуальне попередження"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "Використовувати візуальний індикатор, коли виникає звук попередження."
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "_Test flash"
+msgstr "Ви_пробувати спалах"
+
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Flash the _window title"
+msgstr "Блимання заголовку _вікна"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Flash the entire _screen"
+msgstr "Блимання всього _екрана"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Typing Assist"
+msgstr "Асистент з набирання"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "_Sticky Keys"
+msgstr "_Липкі клавіші"
+
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Обробляє послідовність клавіш-модифікаторів як комбінації"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Disable if two keys are pressed together"
 msgstr "_Вимкнено, якщо дві клавіші натиснуто одночасно"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Beep when a _modifer key is pressed"
 msgstr "Подавати сигнал, коли _модифікатор натиснуто"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "Slow Keys"
-msgstr "Повільні клавіші"
+#: ../panels/universal-access/uap.ui.h:32
+msgid "S_low Keys"
+msgstr "_Повільні клавіші"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Вказує затримку між натиском і прийняттям клавіші"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:34
 msgid "A_cceptance delay:"
 msgstr "_Допустима затримка:"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:35
+msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Коротка"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Slow keys typing delay"
 msgstr "Показувати затримку натискання клавіш"
 
-#: ../panels/universal-access/uap.ui.h:50
-msgctxt "universal access, delay"
+#: ../panels/universal-access/uap.ui.h:37
+msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Довга"
 
-#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Beep when a key is"
-msgstr "Подавати сигнал, коли клавішу"
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Beep when a key is pr_essed"
+msgstr "Подавати сигнал, коли клавішу на_тиснуто"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:54
-msgid "pressed"
-msgstr "натиснуто"
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Beep when a key is _accepted"
+msgstr "Гудок, коли клавішу при_йнято"
 
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
-msgid "accepted"
-msgstr "прийнято"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
-msgid "rejected"
-msgstr "відхилено"
-
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Bounce Keys"
-msgstr "Пружні клавіші"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Ignores fast duplicate keypresses"
-msgstr "Ігнорувати швидкі повторні натискання клавіш"
-
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Acc_eptance delay:"
-msgstr "Доп_устима затримка:"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Bounce keys typing delay"
-msgstr "Затримка натиснення пружних клавіш"
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Beep when a key is _rejected"
 msgstr "Подавати сигнал, коли клавішу в_ідпущено"
 
-#: ../panels/universal-access/uap.ui.h:64
-msgid "Enable by Keyboard"
-msgstr "Увімкнено клавіатурою"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "_Bounce Keys"
+msgstr "П_ружні клавіші"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Ignores fast duplicate keypresses"
+msgstr "Ігнорувати швидкі повторні натискання клавіш"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgctxt "bounce keys delay"
+msgid "Short"
+msgstr "Коротко"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Bounce keys typing delay"
+msgstr "Затримка натиснення пружних клавіш"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgctxt "bounce keys delay"
+msgid "Long"
+msgstr "Довго"
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "_Enable by Keyboard"
+msgstr "_Увімкнути клавіатурою"
+
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Вмикати і вимикати можливості доступності через клавіатуру"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Mouse Keys"
-msgstr "Кнопки миші"
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Click Assist"
+msgstr "Асистент з натискання"
 
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Control the pointer using the keypad"
-msgstr "Керування вказівником миші з клавіатури"
+#: ../panels/universal-access/uap.ui.h:49
+msgid "_Simulated Secondary Click"
+msgstr "_Імітація клацання другою кнопкою"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Video Mouse"
-msgstr "Відео миші"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Control the pointer using the video camera."
-msgstr "Керування вказівником з використанням відеокамери."
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Simulated Secondary Click"
-msgstr "Імітація клацання другою кнопкою"
-
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Увімкнути подвійне клацання при утриманні натисненою основної кнопки"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:51
+msgctxt "secondary click"
+msgid "Short"
+msgstr "Коротка"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Secondary click delay"
 msgstr "Затримка другого натискання"
 
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Hover Click"
-msgstr "Клацання при наведенні"
+#: ../panels/universal-access/uap.ui.h:53
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "Довга"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:54
+msgid "_Hover Click"
+msgstr "Клацання під час н_аведення"
+
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Trigger a click when the pointer hovers"
 msgstr "Увімкнути клацання при зупинці вказівника миші"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:56
 msgid "D_elay:"
 msgstr "За_тримка:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:57
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "Коротка"
+
+#: ../panels/universal-access/uap.ui.h:58
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "Довга"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Motion _threshold:"
 msgstr "_Поріг руху:"
 
-#: ../panels/universal-access/uap.ui.h:78
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:60
+msgctxt "dwell click threshold"
 msgid "Small"
-msgstr "Малий"
+msgstr "Маленький"
 
-#: ../panels/universal-access/uap.ui.h:79
-msgctxt "universal access, threshold"
+#: ../panels/universal-access/uap.ui.h:61
+msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Великий"
-
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Mouse Settings"
-msgstr "Параметри миші"
-
-#: ../panels/universal-access/uap.ui.h:81
-msgid "Pointing and Clicking"
-msgstr "Вказування та натискання"
 
 #: ../panels/universal-access/zoom-options.c:357
 msgctxt "Distance"
@@ -5851,6 +5896,16 @@ msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Високий"
 
+#: ../panels/universal-access/zoom-options.ui.h:35
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Низька"
+
+#: ../panels/universal-access/zoom-options.ui.h:36
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "Висока"
+
 #: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "Ефекти кольорів:"
@@ -5894,31 +5949,39 @@ msgid "Set a password now"
 msgstr "Вкажіть пароль зараз"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
-msgid "_Confirm Password"
-msgstr "_Підтвердити пароль"
+msgid "_Verify"
+msgstr "Пі_дтвердити"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:11
+msgid ""
+"Enterprise login allows an existing centrally managed user account to be "
+"used on this device."
+msgstr ""
+"Комерційний вхід дозволяє наявним обліковим записам централізовано "
+"використовуватись на цьому пристрою."
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "_Domain"
 msgstr "_Домен"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
-msgid "_Login Name"
-msgstr "_Користувач"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-msgid "Login _Password"
-msgstr "_Пароль входу"
+msgid ""
+"Go online to add\n"
+"enterprise login accounts."
+msgstr ""
+"Увійдіть у мережу, щоб\n"
+"додати комерційні облікові записи."
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "_Enroll"
 msgstr "З_ареєструвати"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:16
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Вхід адміністратора домену"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:17
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5928,11 +5991,11 @@ msgstr ""
 "використовувати комерційний вхід. Попрохайте вашого \n"
 "мережевого адміністратора ввести тут пароль домену."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:20
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid "Administrator _Name"
 msgstr "_Адміністратор"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:21
+#: ../panels/user-accounts/data/account-dialog.ui.h:22
 msgid "Administrator Password"
 msgstr "Пароль адміністратора"
 
@@ -5969,7 +6032,7 @@ msgid "Right little finger"
 msgstr "Мізинець палець правої руки"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:700
+#: ../panels/user-accounts/um-fingerprint-dialog.c:699
 msgid "Enable Fingerprint Login"
 msgstr "Увімкнути вхід у систему за відбитком"
 
@@ -6010,21 +6073,9 @@ msgstr "Вхід;Назва;Відбитки;Аватар;Логотип;Лиц�
 msgid "Login History"
 msgstr "Історія входжень"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:3
-msgid "Previous Week"
-msgstr "Попередній тиждень"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:4
-msgid "Next Week"
-msgstr "Наступний тиждень"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:5
-msgid "Next week"
-msgstr "Наступний тиждень"
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "C_onfirm New Password"
-msgstr "_Підтвердьте новий пароль"
+msgid "_Verify New Password"
+msgstr "_Перевірити новий пароль"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "_New Password"
@@ -6113,78 +6164,78 @@ msgstr "Організувати обліковий запис"
 msgid "Authentication is required to change user data"
 msgstr "Потрібна автентифікація, щоб змінити дані про користувача"
 
-#: ../panels/user-accounts/pw-utils.c:81
+#: ../panels/user-accounts/pw-utils.c:82
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one."
 msgstr "Новий пароль повинен бути відмінним від попереднього."
 
-#: ../panels/user-accounts/pw-utils.c:83
+#: ../panels/user-accounts/pw-utils.c:84
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers."
 msgstr "Спробуйте змінити якісь цифри або букви."
 
-#: ../panels/user-accounts/pw-utils.c:85 ../panels/user-accounts/pw-utils.c:93
+#: ../panels/user-accounts/pw-utils.c:86 ../panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
 msgstr "Спробуйте трохи переінакшити пароль."
 
-#: ../panels/user-accounts/pw-utils.c:87
+#: ../panels/user-accounts/pw-utils.c:88
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger."
 msgstr "Пароль без згадування користувача буде надійніший."
 
-#: ../panels/user-accounts/pw-utils.c:89
+#: ../panels/user-accounts/pw-utils.c:90
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password."
 msgstr "Намагайтесь уникати згадування користувача в паролі."
 
-#: ../panels/user-accounts/pw-utils.c:91
+#: ../panels/user-accounts/pw-utils.c:92
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password."
 msgstr "Намагайтесь уникати деяких слів, вказаних у паролі."
 
-#: ../panels/user-accounts/pw-utils.c:95
+#: ../panels/user-accounts/pw-utils.c:96
 msgctxt "Password hint"
 msgid "Try to avoid common words."
 msgstr "Намагайтесь уникати звичайних слів."
 
-#: ../panels/user-accounts/pw-utils.c:97
+#: ../panels/user-accounts/pw-utils.c:98
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words."
 msgstr "Намагайтесь уникати переставлення наявних слів."
 
-#: ../panels/user-accounts/pw-utils.c:99
+#: ../panels/user-accounts/pw-utils.c:100
 msgctxt "Password hint"
 msgid "Try to use more numbers."
 msgstr "Намагайтесь використовувати більше чисел."
 
-#: ../panels/user-accounts/pw-utils.c:101
+#: ../panels/user-accounts/pw-utils.c:102
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters."
 msgstr "Намагайтесь використовувати великі букви."
 
-#: ../panels/user-accounts/pw-utils.c:103
+#: ../panels/user-accounts/pw-utils.c:104
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters."
 msgstr "Намагайтесь використовувати малі букви."
 
-#: ../panels/user-accounts/pw-utils.c:105
+#: ../panels/user-accounts/pw-utils.c:106
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation."
 msgstr ""
 "Намагайтесь використовувати спеціальні символи, наприклад, розділові знаки."
 
-#: ../panels/user-accounts/pw-utils.c:107
+#: ../panels/user-accounts/pw-utils.c:108
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation."
 msgstr "Намагайтесь використовувати суміш букв, чисел і розділових знаків."
 
-#: ../panels/user-accounts/pw-utils.c:109
+#: ../panels/user-accounts/pw-utils.c:110
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character."
 msgstr "Намагайтесь уникати повторення однакових символів."
 
-#: ../panels/user-accounts/pw-utils.c:111
+#: ../panels/user-accounts/pw-utils.c:112
 msgctxt "Password hint"
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
@@ -6193,47 +6244,56 @@ msgstr ""
 "Намагайтесь уникати повторення однакового типу символів: варто змішувати "
 "букви з числами і розділові знаки."
 
-#: ../panels/user-accounts/pw-utils.c:113
+#: ../panels/user-accounts/pw-utils.c:114
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Намагайтесь уникати послідовностей, наприклад, 1234 або абвг."
 
-#: ../panels/user-accounts/pw-utils.c:115
+#: ../panels/user-accounts/pw-utils.c:116
 msgctxt "Password hint"
-msgid "Try to add more characters."
-msgstr "Намагайтесь додавати якнайбільше символів."
+msgid "Try to add more letters, numbers and symbols."
+msgstr "Намагайтесь додати якомога більше букв, чисел і символів."
 
 #: ../panels/user-accounts/pw-utils.c:118
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and use a number or two."
 msgstr "Змішуйте великі букви з малими і використайте число або навіть два."
 
-#: ../panels/user-accounts/pw-utils.c:140
-#: ../panels/user-accounts/pw-utils.c:170
+#: ../panels/user-accounts/pw-utils.c:120
+msgctxt "Password hint"
+msgid ""
+"Good password! Adding more letters, numbers and punctuation will make it "
+"stronger."
+msgstr ""
+"Хороший пароль! Додавання додаткових букв, чисел і розділових знаків зробить "
+"його надійнішим."
+
+#: ../panels/user-accounts/pw-utils.c:142
+#: ../panels/user-accounts/pw-utils.c:172
 msgctxt "Password strength"
 msgid "Strength: Weak"
 msgstr "Надійність: слабка"
 
-#: ../panels/user-accounts/pw-utils.c:144
-#: ../panels/user-accounts/pw-utils.c:171
+#: ../panels/user-accounts/pw-utils.c:146
+#: ../panels/user-accounts/pw-utils.c:173
 msgctxt "Password strength"
 msgid "Strength: Low"
 msgstr "Надійність: низька"
 
-#: ../panels/user-accounts/pw-utils.c:147
-#: ../panels/user-accounts/pw-utils.c:172
+#: ../panels/user-accounts/pw-utils.c:149
+#: ../panels/user-accounts/pw-utils.c:174
 msgctxt "Password strength"
 msgid "Strength: Medium"
 msgstr "Надійність: середня"
 
-#: ../panels/user-accounts/pw-utils.c:150
-#: ../panels/user-accounts/pw-utils.c:173
+#: ../panels/user-accounts/pw-utils.c:152
+#: ../panels/user-accounts/pw-utils.c:175
 msgctxt "Password strength"
 msgid "Strength: Good"
 msgstr "Надійність: непогана"
 
-#: ../panels/user-accounts/pw-utils.c:153
-#: ../panels/user-accounts/pw-utils.c:174
+#: ../panels/user-accounts/pw-utils.c:155
+#: ../panels/user-accounts/pw-utils.c:176
 msgctxt "Password strength"
 msgid "Strength: High"
 msgstr "Надійність: хороша"
@@ -6287,67 +6347,66 @@ msgstr "Новий пароль не містити достатньо різн�
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
-#: ../panels/user-accounts/um-account-dialog.c:212
+#: ../panels/user-accounts/um-account-dialog.c:35
+msgid "Should match the web address of your account provider."
+msgstr "Мусить збігатись з адресою вашого постачальника облікового запису."
+
+#: ../panels/user-accounts/um-account-dialog.c:222
 msgid "Failed to add account"
 msgstr "Не вдалось додати обліковий запис"
 
-#: ../panels/user-accounts/um-account-dialog.c:317
+#: ../panels/user-accounts/um-account-dialog.c:316
 msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Це буде назвою вашого домашнього каталогу, яку згодом змінити буде неможливо."
 
-#: ../panels/user-accounts/um-account-dialog.c:407
+#: ../panels/user-accounts/um-account-dialog.c:449
 msgid "Passwords do not match."
 msgstr "Паролі не збігаються."
 
-#: ../panels/user-accounts/um-account-dialog.c:408
-#: ../panels/user-accounts/um-password-dialog.c:297
-msgid "Passwords do not match"
-msgstr "Паролі не збігаються"
-
-#: ../panels/user-accounts/um-account-dialog.c:661
-#: ../panels/user-accounts/um-account-dialog.c:707
+#: ../panels/user-accounts/um-account-dialog.c:719
+#: ../panels/user-accounts/um-account-dialog.c:765
 msgid "Failed to register account"
 msgstr "Не вдалося зареєструвати обліковий запис"
 
-#: ../panels/user-accounts/um-account-dialog.c:845
+#: ../panels/user-accounts/um-account-dialog.c:903
 msgid "No supported way to authenticate with this domain"
 msgstr "Непідтримуваний спосіб автентифікації з цим доменом"
 
-#: ../panels/user-accounts/um-account-dialog.c:904
+#: ../panels/user-accounts/um-account-dialog.c:962
 msgid "Failed to join domain"
 msgstr "Не вдалось долучитись до домену"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:1023
 msgid ""
-"Login not recognized.\n"
+"That login name didn't work.\n"
 "Please try again."
 msgstr ""
-"Вхід не здійснено.\n"
-"Спробуйте ще раз."
+"Цей користувач не спрацював.\n"
+"Спробуйте ще."
 
-#: ../panels/user-accounts/um-account-dialog.c:973
+#: ../panels/user-accounts/um-account-dialog.c:1030
 msgid ""
-"Invalid password.\n"
+"That login password didn't work.\n"
 "Please try again."
 msgstr ""
-"Неправильний пароль.\n"
-"Спробуйте ще раз."
+"Цей пароль не спрацював.\n"
+"Спробуйте ще."
 
-#: ../panels/user-accounts/um-account-dialog.c:982
+#: ../panels/user-accounts/um-account-dialog.c:1038
 msgid "Failed to log into domain"
 msgstr "Не вдалось увійти до домену"
 
-#: ../panels/user-accounts/um-account-dialog.c:1040
-msgid "Domain not found."
-msgstr "Домен не знайдено."
+#: ../panels/user-accounts/um-account-dialog.c:1096
+msgid "Unable find the domain. Maybe you misspelled it?"
+msgstr "Неможливо знайти домен. Можливо, ви зробили орфографічну помилку?"
 
-#: ../panels/user-accounts/um-account-dialog.c:1383
+#: ../panels/user-accounts/um-account-dialog.c:1446
 msgid "Add User"
 msgstr "Додати користувача"
 
 #. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1396
+#: ../panels/user-accounts/um-account-dialog.c:1459
 msgid "_Enterprise Login"
 msgstr "_Комерційний вхід"
 
@@ -6379,22 +6438,22 @@ msgstr "Вилучити зареєстровані відбитки?"
 msgid "_Delete Fingerprints"
 msgstr "В_илучити відбитки"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:279
+#: ../panels/user-accounts/um-fingerprint-dialog.c:278
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Вилучити зареєстровані відбитки пальців та заборонити вхід через відбитки?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:455
+#: ../panels/user-accounts/um-fingerprint-dialog.c:454
 msgid "Done!"
 msgstr "Зроблено!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:516
-#: ../panels/user-accounts/um-fingerprint-dialog.c:558
+#: ../panels/user-accounts/um-fingerprint-dialog.c:515
+#: ../panels/user-accounts/um-fingerprint-dialog.c:557
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Не вдалось отримати доступ до пристрою «%s»"
@@ -6402,16 +6461,16 @@ msgstr "Не вдалось отримати доступ до пристрою 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:599
+#: ../panels/user-accounts/um-fingerprint-dialog.c:598
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Не вдалось почати сканування відбитків пальців на пристрої «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:650
+#: ../panels/user-accounts/um-fingerprint-dialog.c:649
 msgid "Could not access any fingerprint readers"
 msgstr "Не вдалось знайти пристрої сканування відбитків"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:651
+#: ../panels/user-accounts/um-fingerprint-dialog.c:650
 msgid "Please contact your system administrator for help."
 msgstr "Зв'яжіться з системним адміністратором за допомогою."
 
@@ -6420,7 +6479,7 @@ msgstr "Зв'яжіться з системним адміністратором
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:734
+#: ../panels/user-accounts/um-fingerprint-dialog.c:733
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6429,11 +6488,11 @@ msgstr ""
 "Щоб увімкнути вхід через відбитки пальців, треба зняти один або декілька "
 "зразків, використовуючи пристрій «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:741
+#: ../panels/user-accounts/um-fingerprint-dialog.c:740
 msgid "Selecting finger"
 msgstr "Вибирання пальця"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:742
+#: ../panels/user-accounts/um-fingerprint-dialog.c:741
 msgid "Enrolling fingerprints"
 msgstr "Зарахування відбитків"
 
@@ -6445,25 +6504,71 @@ msgstr "Цього тижня"
 msgid "Last Week"
 msgstr "Минулого тижня"
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#. Translators: This is a date format string in the style of "Feb 18",
+#. shown as the first day of a week on login history dialog.
+#. Translators: This is a date format string in the style of "Feb 24",
+#. shown as the last day of a week on login history dialog.
+#: ../panels/user-accounts/um-history-dialog.c:97
+#: ../panels/user-accounts/um-history-dialog.c:101
+msgctxt "login history week label"
+msgid "%b %e"
+msgstr "%e %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013",
+#. shown as the last day of a week on login history dialog.
+#: ../panels/user-accounts/um-history-dialog.c:106
+msgctxt "login history week label"
+msgid "%b %e, %Y"
+msgstr "%e %b, %Y"
+
+#. Translators: This indicates a week label on a login history.
+#. The first %s is the first day of a week, and the second %s the last day.
+#: ../panels/user-accounts/um-history-dialog.c:111
+#, c-format
+msgctxt "login history week label"
+msgid "%s - %s"
+msgstr "%s - %s"
+
+#. Translators: This is a time format string in the style of "22:58".
+#. It indicates a login time which follows a date.
+#: ../panels/user-accounts/um-history-dialog.c:195
+#: ../panels/user-accounts/um-user-panel.c:626
+msgctxt "login date-time"
+msgid "%k:%M"
+msgstr "%k:%M"
+
+#. Translators: This indicates a login date-time.
+#. The first %s is a date, and the second %s a time.
+#: ../panels/user-accounts/um-history-dialog.c:198
+#: ../panels/user-accounts/um-user-panel.c:630
+#, c-format
+msgctxt "login date-time"
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#: ../panels/user-accounts/um-history-dialog.c:267
+msgid "Session Ended"
+msgstr "Сеанс завершено"
+
+#: ../panels/user-accounts/um-history-dialog.c:273
+msgid "Session Started"
+msgstr "Сеанс розпочато"
+
+#: ../panels/user-accounts/um-password-dialog.c:146
 msgid "Please choose another password."
 msgstr "Будь ласка, виберіть інший пароль."
 
-#: ../panels/user-accounts/um-password-dialog.c:163
+#: ../panels/user-accounts/um-password-dialog.c:155
 msgid "Please type your current password again."
 msgstr "Будь ласка, введіть поточний пароль ще раз."
 
-#: ../panels/user-accounts/um-password-dialog.c:169
+#: ../panels/user-accounts/um-password-dialog.c:161
 msgid "Password could not be changed"
 msgstr "Пароль неможливо змінити"
 
-#: ../panels/user-accounts/um-password-dialog.c:295
+#: ../panels/user-accounts/um-password-dialog.c:287
 msgid "The passwords do not match."
 msgstr "Паролі не збігаються."
-
-#: ../panels/user-accounts/um-password-dialog.c:373
-msgid "Wrong password"
-msgstr "Неправильний пароль"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
@@ -6506,24 +6611,24 @@ msgstr "Неправильний пароль, спробуйте ще раз"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Неможливо з'єднатися із доменом %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:189
+#: ../panels/user-accounts/um-user-panel.c:193
 msgid "Other Accounts"
 msgstr "Інші облікові записи"
 
-#: ../panels/user-accounts/um-user-panel.c:405
+#: ../panels/user-accounts/um-user-panel.c:412
 msgid "Failed to delete user"
 msgstr "Помилка при вилученні користувача"
 
-#: ../panels/user-accounts/um-user-panel.c:470
+#: ../panels/user-accounts/um-user-panel.c:477
 msgid "You cannot delete your own account."
 msgstr "Неможливо вилучити власний обліковий запис."
 
-#: ../panels/user-accounts/um-user-panel.c:479
+#: ../panels/user-accounts/um-user-panel.c:486
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s досі у системі"
 
-#: ../panels/user-accounts/um-user-panel.c:483
+#: ../panels/user-accounts/um-user-panel.c:490
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6531,12 +6636,12 @@ msgstr ""
 "Вилучивши користувача, коли він у системі, змусить його покинути систему в "
 "нестійкому стані."
 
-#: ../panels/user-accounts/um-user-panel.c:492
+#: ../panels/user-accounts/um-user-panel.c:499
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Зберегти файли користувача %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:496
+#: ../panels/user-accounts/um-user-panel.c:503
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6544,42 +6649,42 @@ msgstr ""
 "Можна утримати домашній каталог, поштову скриньку та тимчасові файли, коли "
 "обліковий запис користувача буде вилучатись."
 
-#: ../panels/user-accounts/um-user-panel.c:499
+#: ../panels/user-accounts/um-user-panel.c:506
 msgid "_Delete Files"
 msgstr "В_илучити файли"
 
-#: ../panels/user-accounts/um-user-panel.c:500
+#: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Keep Files"
 msgstr "З_берегти файли"
 
-#: ../panels/user-accounts/um-user-panel.c:552
+#: ../panels/user-accounts/um-user-panel.c:559
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Обліковий запис вимкнено"
 
-#: ../panels/user-accounts/um-user-panel.c:560
+#: ../panels/user-accounts/um-user-panel.c:567
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Буде встановлено при наступному вході"
 
-#: ../panels/user-accounts/um-user-panel.c:563
+#: ../panels/user-accounts/um-user-panel.c:570
 msgctxt "Password mode"
 msgid "None"
 msgstr "Немає"
 
-#: ../panels/user-accounts/um-user-panel.c:612
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Logged in"
 msgstr "Увійшов"
 
-#: ../panels/user-accounts/um-user-panel.c:987
+#: ../panels/user-accounts/um-user-panel.c:999
 msgid "Failed to contact the accounts service"
 msgstr "Не вдалось зв'язатись зі службою облікових записів"
 
-#: ../panels/user-accounts/um-user-panel.c:989
+#: ../panels/user-accounts/um-user-panel.c:1001
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
-#: ../panels/user-accounts/um-user-panel.c:1030
+#: ../panels/user-accounts/um-user-panel.c:1042
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6587,12 +6692,12 @@ msgstr ""
 "Щоб унести зміни,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1080
 msgid "Create a user account"
 msgstr "Створити обліковий запис користувача"
 
-#: ../panels/user-accounts/um-user-panel.c:1079
-#: ../panels/user-accounts/um-user-panel.c:1368
+#: ../panels/user-accounts/um-user-panel.c:1091
+#: ../panels/user-accounts/um-user-panel.c:1380
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6600,12 +6705,12 @@ msgstr ""
 "Щоб створити обліковий запис користувача,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:1089
+#: ../panels/user-accounts/um-user-panel.c:1101
 msgid "Delete the selected user account"
 msgstr "Вилучити вибраний обліковий запис користувача"
 
-#: ../panels/user-accounts/um-user-panel.c:1101
-#: ../panels/user-accounts/um-user-panel.c:1373
+#: ../panels/user-accounts/um-user-panel.c:1113
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6613,31 +6718,41 @@ msgstr ""
 "Щоб вилучити вибраний обліковий запис користувача,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:1283
+#: ../panels/user-accounts/um-user-panel.c:1295
 msgid "My Account"
 msgstr "Мій обліковий запис"
 
-#: ../panels/user-accounts/um-utils.c:535
+#: ../panels/user-accounts/um-utils.c:551
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Користувач «%s» вже існує"
 
-#: ../panels/user-accounts/um-utils.c:539
+#: ../panels/user-accounts/um-utils.c:555
 #, c-format
 msgid "The username is too long"
 msgstr "Перейменуйте користувача на меншу кількістю літер"
 
-#: ../panels/user-accounts/um-utils.c:542
+#: ../panels/user-accounts/um-utils.c:558
 msgid "The username cannot start with a '-'"
 msgstr "Користувач не може мати на початку «-»"
 
-#: ../panels/user-accounts/um-utils.c:545
+#: ../panels/user-accounts/um-utils.c:561
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
 msgstr ""
 "Щоб найменувати користувача, потрібно використовувати великі і малі букви "
 "від a до z, числа і будь-який символ з «.», «-» і «_»"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/user-accounts/um-utils.c:811
+msgid "%b %e"
+msgstr "%e %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/user-accounts/um-utils.c:815
+msgid "%b %e, %Y"
+msgstr "%e %b, %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6646,6 +6761,15 @@ msgstr "Кнопка відбиття"
 #: ../panels/wacom/button-mapping.ui.h:2
 msgid "Map buttons to functions"
 msgstr "Кнопка відбиття для функцій"
+
+#: ../panels/wacom/button-mapping.ui.h:3
+msgid ""
+"To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard "
+"shortcut button and hold down the new keys or press Backspace to clear."
+msgstr ""
+"Щоб змінити комбінацію клавіш, виберіть дію «Надіслати натискання клавіші», "
+"натисніть кнопку скорочення й утримайте нові клавіші або натисніть "
+"Backspace, щоб очистити."
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:82
 msgid ""
@@ -6658,6 +6782,36 @@ msgstr ""
 #: ../panels/wacom/calibrator/calibrator-gui.c:86
 msgid "Mis-click detected, restarting..."
 msgstr "Промах виявлено, перезавантаження…"
+
+#: ../panels/wacom/cc-wacom-button-row.c:443
+msgctxt "Wacom tablet button"
+msgid "Up"
+msgstr "Уверх"
+
+#: ../panels/wacom/cc-wacom-button-row.c:444
+msgctxt "Wacom tablet button"
+msgid "Down"
+msgstr "Униз"
+
+#: ../panels/wacom/cc-wacom-button-row.h:55
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "Немає"
+
+#: ../panels/wacom/cc-wacom-button-row.h:56
+msgctxt "Wacom action-type"
+msgid "Send Keystroke"
+msgstr "Надіслати натискання клавіші"
+
+#: ../panels/wacom/cc-wacom-button-row.h:57
+msgctxt "Wacom action-type"
+msgid "Switch Monitor"
+msgstr "Перемкнути монітор"
+
+#: ../panels/wacom/cc-wacom-button-row.h:58
+msgctxt "Wacom action-type"
+msgid "Show On-Screen Help"
+msgstr "Показати екранну довідку"
 
 #: ../panels/wacom/cc-wacom-mapping-panel.c:264
 msgid "Output:"
@@ -6678,52 +6832,13 @@ msgstr "Відбити на одному моніторі"
 msgid "%d of %d"
 msgstr "%d з %d"
 
-#: ../panels/wacom/cc-wacom-page.c:123 ../panels/wacom/cc-wacom-page.c:433
-msgctxt "Wacom action-type"
-msgid "None"
-msgstr "Немає"
+#: ../panels/wacom/cc-wacom-page.c:522
+msgid "Display Mapping"
+msgstr "Відбиття екрана"
 
-#: ../panels/wacom/cc-wacom-page.c:124
-msgctxt "Wacom action-type"
-msgid "Send Keystroke"
-msgstr "Надіслати натискання клавіші"
-
-#: ../panels/wacom/cc-wacom-page.c:125
-msgctxt "Wacom action-type"
-msgid "Switch Monitor"
-msgstr "Перемкнути монітор"
-
-#: ../panels/wacom/cc-wacom-page.c:126
-msgctxt "Wacom action-type"
-msgid "Show On-Screen Help"
-msgstr "Показати екранну довідку"
-
-#: ../panels/wacom/cc-wacom-page.c:674
-msgctxt "Wacom tablet button"
-msgid "Up"
-msgstr "Уверх"
-
-#: ../panels/wacom/cc-wacom-page.c:674
-msgctxt "Wacom tablet button"
-msgid "Down"
-msgstr "Униз"
-
-#: ../panels/wacom/cc-wacom-page.c:715
-msgid "Switch Modes"
-msgstr "Режими перемикання"
-
-#: ../panels/wacom/cc-wacom-page.c:805
 #: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Кнопка"
-
-#: ../panels/wacom/cc-wacom-page.c:863
-msgid "Action"
-msgstr "Дія"
-
-#: ../panels/wacom/cc-wacom-page.c:973
-msgid "Display Mapping"
-msgstr "Відбиття екрана"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
@@ -6790,89 +6905,93 @@ msgid "Left-Handed Orientation"
 msgstr "Орієнтація на лівшів"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1078
+#: ../panels/wacom/gsd-wacom-device.c:1063
 msgid "Left Ring"
 msgstr "Ліве кільце"
 
-#: ../panels/wacom/gsd-wacom-device.c:1089
+#: ../panels/wacom/gsd-wacom-device.c:1074
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Режим лівого кільця #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1109
+#: ../panels/wacom/gsd-wacom-device.c:1094
 msgid "Right Ring"
 msgstr "Праве кільце"
 
-#: ../panels/wacom/gsd-wacom-device.c:1120
+#: ../panels/wacom/gsd-wacom-device.c:1105
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Режим правого кільця #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1162
+#: ../panels/wacom/gsd-wacom-device.c:1147
 msgid "Left Touchstrip"
 msgstr "Лівий Touchstrip"
 
-#: ../panels/wacom/gsd-wacom-device.c:1173
+#: ../panels/wacom/gsd-wacom-device.c:1158
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Режим лівого Touchstrip #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1193
+#: ../panels/wacom/gsd-wacom-device.c:1178
 msgid "Right Touchstrip"
 msgstr "Правий Touchstrip"
 
-#: ../panels/wacom/gsd-wacom-device.c:1204
+#: ../panels/wacom/gsd-wacom-device.c:1189
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Режим правого Touchstrip #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1230
+#: ../panels/wacom/gsd-wacom-device.c:1215
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Перемикач режиму лівого Touchring"
 
-#: ../panels/wacom/gsd-wacom-device.c:1232
+#: ../panels/wacom/gsd-wacom-device.c:1217
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Перемикач режиму правого Touchring"
 
-#: ../panels/wacom/gsd-wacom-device.c:1235
+#: ../panels/wacom/gsd-wacom-device.c:1220
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Перемикач режиму лівого Touchstrip"
 
-#: ../panels/wacom/gsd-wacom-device.c:1237
+#: ../panels/wacom/gsd-wacom-device.c:1222
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Перемикач режиму правого Touchstrip"
 
-#: ../panels/wacom/gsd-wacom-device.c:1242
+#: ../panels/wacom/gsd-wacom-device.c:1227
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Перемикач режиму #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1351
+#: ../panels/wacom/gsd-wacom-device.c:1336
 #, c-format
 msgid "Left Button #%d"
 msgstr "Ліва кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1354
+#: ../panels/wacom/gsd-wacom-device.c:1339
 #, c-format
 msgid "Right Button #%d"
 msgstr "Права кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1357
+#: ../panels/wacom/gsd-wacom-device.c:1342
 #, c-format
 msgid "Top Button #%d"
 msgstr "Верхня кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1360
+#: ../panels/wacom/gsd-wacom-device.c:1345
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Нижня кнопка #%d"
+
+#: ../panels/wacom/gsd-wacom-key-shortcut-button.c:264
+msgid "New shortcut…"
+msgstr "Створити скорочення…"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
@@ -6997,33 +7116,292 @@ msgstr "Довідка"
 msgid "Quit"
 msgstr "Вийти"
 
-#: ../shell/cc-window.c:61 ../shell/gnome-control-center.desktop.in.in.h:1
-msgid "Settings"
-msgstr "Параметри"
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1479
+msgid "All Settings"
+msgstr "Усі параметри"
 
 #. Add categories
-#: ../shell/cc-window.c:857
+#: ../shell/cc-window.c:866
 msgctxt "category"
 msgid "Personal"
 msgstr "Особисте"
 
-#: ../shell/cc-window.c:858
+#: ../shell/cc-window.c:867
 msgctxt "category"
 msgid "Hardware"
 msgstr "Обладнання"
 
-#: ../shell/cc-window.c:859
+#: ../shell/cc-window.c:868
 msgctxt "category"
 msgid "System"
 msgstr "Система"
 
-#: ../shell/cc-window.c:1424
-msgid "All Settings"
-msgstr "Усі параметри"
+#: ../shell/cc-window.c:1588 ../shell/gnome-control-center.desktop.in.in.h:1
+msgid "Settings"
+msgstr "Параметри"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Налаштування;Параметри;"
+
+#~ msgid "_Region:"
+#~ msgstr "_Область:"
+
+#~ msgid "_City:"
+#~ msgstr "_Місто:"
+
+#~ msgid "_Network Time"
+#~ msgstr "М_ережевий час"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Set the time one hour ahead."
+#~ msgstr "Встановити час на одну годину пізніше."
+
+#~ msgid "Set the time one hour back."
+#~ msgstr "Встановити час на одну годину назад."
+
+#~ msgid "Set the time one minute ahead."
+#~ msgstr "Встановити час на одну хвилину пізніше."
+
+#~ msgid "Set the time one minute back."
+#~ msgstr "Встановити час на одну хвилину назад."
+
+#~ msgid "Switch between AM and PM."
+#~ msgstr "Перемкнутись між ранком і вечором."
+
+#~ msgid "AM/PM"
+#~ msgstr "AM/PM"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Normal"
+#~ msgstr "Звичайна"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Counterclockwise"
+#~ msgstr "Проти годинникової стрілки"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "Clockwise"
+#~ msgstr "За годинниковою стрілкою"
+
+#~ msgctxt "display panel, rotation"
+#~ msgid "180 Degrees"
+#~ msgstr "180 градусів"
+
+#~ msgid "Monitor"
+#~ msgstr "Монітор"
+
+#~ msgid "Drag to change primary display."
+#~ msgstr "Перетягніть для зміни головного екрана."
+
+#~ msgid ""
+#~ "Select a monitor to change its properties; drag it to rearrange its "
+#~ "placement."
+#~ msgstr ""
+#~ "Виберіть монітор для зміни його параметрів; перетягніть його для зміни "
+#~ "його розташування."
+
+#~ msgid "%a %R"
+#~ msgstr "%a %R"
+
+#~ msgid "Failed to apply configuration: %s"
+#~ msgstr "Не вдалося застосувати налаштування: %s"
+
+#~ msgid "Could not save the monitor configuration"
+#~ msgstr "Не вдалось зберегти налаштування монітора"
+
+#~ msgid "_Resolution"
+#~ msgstr "_Роздільність"
+
+#~ msgid "R_otation"
+#~ msgstr "Орі_єнтація"
+
+#~ msgid "_Mirror displays"
+#~ msgstr "_Дзеркальний показ"
+
+#~ msgid "Note: may limit resolution options"
+#~ msgstr "Примітка: можна обмежити параметри роздільності"
+
+#~ msgid "_Detect Displays"
+#~ msgstr "_Виявити екрани"
+
+#~ msgid "Estimated battery capacity: %s"
+#~ msgstr "Наближена працездатність батареї: %s"
+
+#~ msgid "Hidden"
+#~ msgstr "Приховано"
+
+#~ msgid "Visible"
+#~ msgstr "Видимо"
+
+#~ msgid "Name & Visibility"
+#~ msgstr "Назва та видимість"
+
+#~ msgid "Control how you appear on the screen and the network."
+#~ msgstr "Вказує, як ви показуєтесь на екрані та в мережі."
+
+#~ msgid "Display _full name in top bar"
+#~ msgstr "Показує _повне ім'я на верхній панелі"
+
+#~ msgid "Display full name in _lock screen"
+#~ msgstr "Показує повне ім'я в заб_локованому екрані"
+
+#~ msgid "_Stealth Mode"
+#~ msgstr "По_тайний режим"
+
+#~ msgid "No shortcut set"
+#~ msgstr "Не вказано жодного скорочення"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Normal"
+#~ msgstr "Звичайний"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "High/Inverse"
+#~ msgstr "Висока/інвертувати"
+
+#~ msgid "On screen keyboard"
+#~ msgstr "Екранна клавіатура"
+
+#~ msgid "OnBoard"
+#~ msgstr "Бортова"
+
+#~ msgid "75%"
+#~ msgstr "75%"
+
+#~ msgid "100%"
+#~ msgstr "100%"
+
+#~ msgctxt "universal access, text size"
+#~ msgid "Normal"
+#~ msgstr "Звичайний"
+
+#~ msgid "125%"
+#~ msgstr "125%"
+
+#~ msgid "150%"
+#~ msgstr "150%"
+
+#~ msgctxt "universal access, text size"
+#~ msgid "Larger"
+#~ msgstr "Більший"
+
+#~ msgid "Beep on Caps and Num Lock"
+#~ msgstr "Подавати сигнал, коли натискаєш на CapsLock та NumLock"
+
+#~ msgid "Turn on or off:"
+#~ msgstr "Увімкнути або вимкнути:"
+
+#~ msgctxt "universal access, zoom"
+#~ msgid "Zoom"
+#~ msgstr "Масштаб"
+
+#~ msgid "Zoom in:"
+#~ msgstr "Наблизити:"
+
+#~ msgid "Zoom out:"
+#~ msgstr "Віддалити:"
+
+#~ msgid "Closed Captioning"
+#~ msgstr "Субтитри"
+
+#~ msgid "Display a textual description of speech and sounds"
+#~ msgstr "Показати текстовий опис мовлення та звуків"
+
+#~ msgid "On Screen Keyboard"
+#~ msgstr "На екранній клавіатурі"
+
+#~ msgctxt "universal access, delay"
+#~ msgid "Short"
+#~ msgstr "Коротка"
+
+#~ msgctxt "universal access, delay"
+#~ msgid "Long"
+#~ msgstr "Довга"
+
+#~ msgid "Beep when a key is"
+#~ msgstr "Подавати сигнал, коли клавішу"
+
+#~ msgid "pressed"
+#~ msgstr "натиснуто"
+
+#~ msgid "accepted"
+#~ msgstr "прийнято"
+
+#~ msgid "rejected"
+#~ msgstr "відхилено"
+
+#~ msgid "Acc_eptance delay:"
+#~ msgstr "Доп_устима затримка:"
+
+#~ msgid "Control the pointer using the keypad"
+#~ msgstr "Керування вказівником миші з клавіатури"
+
+#~ msgid "Video Mouse"
+#~ msgstr "Відео миші"
+
+#~ msgid "Control the pointer using the video camera."
+#~ msgstr "Керування вказівником з використанням відеокамери."
+
+#~ msgctxt "universal access, threshold"
+#~ msgid "Small"
+#~ msgstr "Малий"
+
+#~ msgctxt "universal access, threshold"
+#~ msgid "Large"
+#~ msgstr "Великий"
+
+#~ msgid "Mouse Settings"
+#~ msgstr "Параметри миші"
+
+#~ msgid "_Confirm Password"
+#~ msgstr "_Підтвердити пароль"
+
+#~ msgid "_Login Name"
+#~ msgstr "_Користувач"
+
+#~ msgid "Login _Password"
+#~ msgstr "_Пароль входу"
+
+#~ msgid "Previous Week"
+#~ msgstr "Попередній тиждень"
+
+#~ msgid "Next Week"
+#~ msgstr "Наступний тиждень"
+
+#~ msgid "Next week"
+#~ msgstr "Наступний тиждень"
+
+#~ msgid "C_onfirm New Password"
+#~ msgstr "_Підтвердьте новий пароль"
+
+#~ msgctxt "Password hint"
+#~ msgid "Try to add more characters."
+#~ msgstr "Намагайтесь додавати якнайбільше символів."
+
+#~ msgid "Passwords do not match"
+#~ msgstr "Паролі не збігаються"
+
+#~ msgid ""
+#~ "Login not recognized.\n"
+#~ "Please try again."
+#~ msgstr ""
+#~ "Вхід не здійснено.\n"
+#~ "Спробуйте ще раз."
+
+#~ msgid "Domain not found."
+#~ msgstr "Домен не знайдено."
+
+#~ msgid "Wrong password"
+#~ msgstr "Неправильний пароль"
+
+#~ msgid "Switch Modes"
+#~ msgstr "Режими перемикання"
+
+#~ msgid "Action"
+#~ msgstr "Дія"
 
 #~ msgid "C_ontent sticks to fingers"
 #~ msgstr " В_міст тримається пальців"
@@ -7657,9 +8035,6 @@ msgstr "Налаштування;Параметри;"
 #~ msgid "Swap colors"
 #~ msgstr "Поміняти кольори"
 
-#~ msgid "Secondary color"
-#~ msgstr "Вторинний колір"
-
 #~ msgid "Horizontal Gradient"
 #~ msgstr "Горизонтальний градієнт"
 
@@ -7882,12 +8257,6 @@ msgstr "Налаштування;Параметри;"
 #~ msgid "Zoom"
 #~ msgstr "Масштаб"
 
-#~ msgid "Screen keyboard"
-#~ msgstr "Екранна клавіатура"
-
-#~ msgid "Typing Assistant"
-#~ msgstr "Асистент з набору на клавіатурі"
-
 #~ msgid "Type here to test settings"
 #~ msgstr "Поле для випробування налаштувань:"
 
@@ -7943,9 +8312,6 @@ msgstr "Налаштування;Параметри;"
 
 #~ msgid "Toggle screen reader"
 #~ msgstr "Змінити зчитувача екрану"
-
-#~ msgid "New shortcut..."
-#~ msgstr "Нове скорочення…"
 
 #~ msgid "Accelerator key"
 #~ msgstr "Клавіша"
@@ -8426,9 +8792,6 @@ msgstr "Налаштування;Параметри;"
 #~ msgid "Shift+Ctrl+Alt+="
 #~ msgstr "Shift+Ctrl+Alt+="
 
-#~ msgid "Show Universal Access status"
-#~ msgstr "Показати ста універсального доступу"
-
 #~ msgid "Use an alternative form of text input"
 #~ msgstr "Використовувати альтернативну форму вводу тексту"
 
@@ -8457,9 +8820,6 @@ msgstr "Налаштування;Параметри;"
 
 #~ msgid "E-mail address:"
 #~ msgstr "Адреса електронної пошти:"
-
-#~ msgid "Open"
-#~ msgstr "Відкрити"
 
 #~ msgid "Restrictions:"
 #~ msgstr "Обмеження:"
