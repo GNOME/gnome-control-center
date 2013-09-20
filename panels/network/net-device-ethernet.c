@@ -605,8 +605,19 @@ static void
 device_ethernet_finalize (GObject *object)
 {
         NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
+        GSList *connections, *l;
 
         g_object_unref (device->builder);
+
+        connections = net_device_get_valid_connections (NET_DEVICE (device));
+        for (l = connections; l; l = l->next) {
+                NMConnection *connection = l->data;
+                if (g_object_get_data (G_OBJECT (connection), "removed_signal_handler")) {
+                        g_signal_handlers_disconnect_by_func (connection, connection_removed, device);
+                        g_object_set_data (G_OBJECT (connection), "removed_signal_handler", NULL);
+                }
+        }
+        g_slist_free (connections);
 
         G_OBJECT_CLASS (net_device_ethernet_parent_class)->finalize (object);
 }
