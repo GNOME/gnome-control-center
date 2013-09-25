@@ -69,6 +69,7 @@ CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 
 typedef enum {
         CHOOSE_LANGUAGE,
+        CHOOSE_REGION,
         ADD_INPUT,
         REMOVE_INPUT
 } SystemOp;
@@ -406,16 +407,36 @@ language_response (GtkDialog     *chooser,
 }
 
 static void
+set_system_region (CcRegionPanel *self,
+                   const gchar   *region)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+
+        if (g_strcmp0 (region, priv->system_region) == 0)
+                return;
+
+        g_free (priv->system_region);
+        priv->system_region = g_strdup (region);
+
+        set_localed_locale (self);
+}
+
+static void
 update_region (CcRegionPanel *self,
                const gchar   *region)
 {
 	CcRegionPanelPrivate *priv = self->priv;
 
-        if (g_strcmp0 (region, priv->region) == 0)
-                return;
-
-        g_settings_set_string (priv->locale_settings, KEY_REGION, region);
-        maybe_notify (self, LC_TIME, region);
+        if (priv->login) {
+                set_system_region (self, region);
+        } else {
+                if (g_strcmp0 (region, priv->region) == 0)
+                        return;
+                g_settings_set_string (priv->locale_settings, KEY_REGION, region);
+                if (priv->login_auto_apply)
+                        set_system_region (self, region);
+                maybe_notify (self, LC_TIME, region);
+        }
 }
 
 static void
@@ -448,6 +469,21 @@ show_language_chooser (CcRegionPanel *self,
         gtk_window_present (GTK_WINDOW (chooser));
 }
 
+static void
+show_region_chooser (CcRegionPanel *self,
+                     const gchar   *region)
+{
+        GtkWidget *toplevel;
+        GtkWidget *chooser;
+
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+        chooser = cc_format_chooser_new (toplevel);
+        cc_format_chooser_set_region (chooser, region);
+        g_signal_connect (chooser, "response",
+                          G_CALLBACK (format_response), self);
+        gtk_window_present (GTK_WINDOW (chooser));
+}
+
 static void show_input_chooser (CcRegionPanel *self);
 static void remove_selected_input (CcRegionPanel *self);
 
@@ -474,6 +510,9 @@ permission_acquired (GObject      *source,
                 case CHOOSE_LANGUAGE:
                         show_language_chooser (self, priv->system_language);
                         break;
+                case CHOOSE_REGION:
+                        show_region_chooser (self, priv->system_region);
+                        break;
                 case ADD_INPUT:
                         show_input_chooser (self);
                         break;
@@ -485,21 +524,6 @@ permission_acquired (GObject      *source,
                         break;
                 }
         }
-}
-
-static void
-show_format_chooser (CcRegionPanel *self)
-{
-	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *toplevel;
-        GtkWidget *chooser;
-
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-        chooser = cc_format_chooser_new (toplevel);
-        cc_format_chooser_set_region (chooser, priv->region);
-        g_signal_connect (chooser, "response",
-                          G_CALLBACK (format_response), self);
-        gtk_window_present (GTK_WINDOW (chooser));
 }
 
 static void
@@ -521,7 +545,17 @@ activate_language_row (CcRegionPanel *self,
                                                     self);
                 }
         } else if (row == priv->formats_row) {
-                show_format_chooser (self);
+                if (!priv->login) {
+                        show_region_chooser (self, priv->region);
+                } else if (g_permission_get_allowed (priv->permission)) {
+                        show_region_chooser (self, priv->system_region);
+                } else if (g_permission_get_can_acquire (priv->permission)) {
+                        priv->op = CHOOSE_REGION;
+                        g_permission_acquire_async (priv->permission,
+                                                    NULL,
+                                                    permission_acquired,
+                                                    self);
+                }
         }
 }
 
@@ -532,7 +566,9 @@ update_region_label (CcRegionPanel *self)
         const gchar *region;
         gchar *name;
 
-        if (priv->region == NULL || priv->region[0] == '\0')
+        if (priv->login)
+                region = priv->system_region;
+        else if (priv->region == NULL || priv->region[0] == '\0')
                 region = priv->language;
         else
                 region = priv->region;
@@ -1653,7 +1689,6 @@ login_changed (CcRegionPanel *self)
         gboolean can_acquire;
 
         priv->login = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->login_button));
-        gtk_widget_set_visible (GTK_WIDGET (priv->formats_row), !priv->login);
         gtk_widget_set_visible (priv->login_label, priv->login);
 
         can_acquire = priv->permission &&
