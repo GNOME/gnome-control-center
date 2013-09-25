@@ -61,6 +61,8 @@
 
 #define MAX_INPUT_ROWS_VISIBLE 5
 
+#define DEFAULT_LOCALE "en_US.utf-8"
+
 CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
@@ -564,16 +566,25 @@ update_region_label (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
         const gchar *region;
-        gchar *name;
+        gchar *name = NULL;
 
         if (priv->login)
                 region = priv->system_region;
-        else if (priv->region == NULL || priv->region[0] == '\0')
-                region = priv->language;
         else
                 region = priv->region;
 
-        name = gnome_get_country_from_locale (region, region);
+        /* Region setting might be empty - show the language because
+         * that's what LC_TIME and others will effectively be when the
+         * user logs in again. */
+        if (region == NULL || region[0] == '\0')
+                region = priv->language;
+
+        if (region)
+                name = gnome_get_country_from_locale (region, region);
+
+        if (!name)
+                name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
+
         gtk_label_set_label (GTK_LABEL (priv->formats_label), name);
         g_free (name);
 }
@@ -593,16 +604,19 @@ update_language_label (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         const gchar *language;
-        gchar *name;
+        gchar *name = NULL;
 
         if (priv->login)
                 language = priv->system_language;
         else
                 language = priv->language;
+
         if (language)
                 name = gnome_get_language_from_locale (language, language);
-        else
-                name = g_strdup (C_("Language", "None"));
+
+        if (!name)
+                name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
+
         gtk_label_set_label (GTK_LABEL (priv->language_label), name);
         g_free (name);
 
@@ -619,7 +633,7 @@ update_language_from_user (CcRegionPanel *self)
         if (act_user_is_loaded (priv->user))
                 language = act_user_get_language (priv->user);
         else
-                language = "en_US.utf-8";
+                language = setlocale (LC_MESSAGES, NULL);
 
         g_free (priv->language);
         priv->language = g_strdup (language);
@@ -1499,7 +1513,7 @@ on_localed_properties_changed (GDBusProxy     *proxy,
                         }
                 }
                 if (!lang) {
-                        lang = "";
+                        lang = setlocale (LC_MESSAGES, NULL);
                 }
                 if (!messages) {
                         messages = lang;
