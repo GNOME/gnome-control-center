@@ -158,8 +158,6 @@ pointer_speed_scale_event (GtkRange *scale, CcMousePropertiesPrivate *d)
 	else
 		settings = d->touchpad_settings;
 
-	g_settings_set_double (settings, "motion-acceleration", gtk_range_get_value (scale));
-
 	adjustment = gtk_range_get_adjustment (scale);
 	value = gtk_adjustment_get_upper (adjustment) - gtk_range_get_value (scale) + 1;
 	g_settings_set_int (settings, "motion-threshold", value);
