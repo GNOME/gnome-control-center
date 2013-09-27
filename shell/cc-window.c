@@ -88,6 +88,8 @@ struct _CcWindowPrivate
   char       *current_panel_id;
   GQueue     *previous_panels;
 
+  GtkSizeGroup *header_sizegroup;
+
   GPtrArray  *custom_widgets;
 
   GtkListStore *store;
@@ -950,6 +952,8 @@ _shell_embed_widget_in_header (CcShell      *shell,
   /* add to header */
   gtk_box_pack_end (GTK_BOX (priv->top_right_box), widget, FALSE, FALSE, 0);
   g_ptr_array_add (priv->custom_widgets, g_object_ref (widget));
+
+  gtk_size_group_add_widget (priv->header_sizegroup, widget);
 }
 
 /* CcShell implementation */
@@ -1143,6 +1147,7 @@ cc_window_dispose (GObject *object)
   g_clear_object (&priv->store);
   g_clear_object (&priv->search_filter);
   g_clear_object (&priv->active_panel);
+  g_clear_object (&priv->header_sizegroup);
 
   if (priv->previous_panels)
     {
@@ -1469,6 +1474,8 @@ create_header (CcWindow *self)
   priv->header = gtk_header_bar_new ();
   gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->header), TRUE);
 
+  priv->header_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
+
   /* previous button */
   priv->previous_button = gtk_button_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" :
                                                                "go-previous-symbolic",
@@ -1479,6 +1486,7 @@ create_header (CcWindow *self)
   atk_object_set_name (accessible, _("All Settings"));
   gtk_header_bar_pack_start (GTK_HEADER_BAR (priv->header), priv->previous_button);
   g_signal_connect (priv->previous_button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
+  gtk_size_group_add_widget (priv->header_sizegroup, priv->previous_button);
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
@@ -1498,6 +1506,7 @@ create_header (CcWindow *self)
   gtk_widget_set_valign (priv->lock_button, GTK_ALIGN_CENTER);
   gtk_widget_set_no_show_all (priv->lock_button, TRUE);
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
+  gtk_size_group_add_widget (priv->header_sizegroup, priv->lock_button);
 }
 
 static void
