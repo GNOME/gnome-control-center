@@ -42,7 +42,6 @@ struct _CcMousePanelPrivate
   GtkWidget  *test_dialog;
   GtkWidget  *prefs_widget;
   GtkWidget  *test_widget;
-  GtkWidget  *shell_header;
 };
 
 enum {
@@ -54,8 +53,6 @@ static void
 cc_mouse_panel_dispose (GObject *object)
 {
   CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
-
-  g_clear_object (&priv->shell_header);
 
   if (priv->test_dialog)
     {
@@ -88,26 +85,21 @@ cc_mouse_panel_constructed (GObject *object)
 {
   CcMousePanel *self = CC_MOUSE_PANEL (object);
   CcMousePanelPrivate *priv = self->priv;
-  GtkWidget *box, *button, *container, *toplevel;
+  GtkWidget *button, *container, *toplevel;
   CcShell *shell;
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->constructed (object);
 
   /* Add test area button to shell header. */
   shell = cc_panel_get_shell (CC_PANEL (self));
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
 
   button = gtk_button_new_with_mnemonic (_("Test Your _Settings"));
   gtk_style_context_add_class (gtk_widget_get_style_context (button),
                                "text-button");
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
   gtk_widget_set_visible (button, TRUE);
 
-  cc_shell_embed_widget_in_header (shell, box);
-  gtk_widget_set_visible (box, TRUE);
-
-  priv->shell_header = g_object_ref (box);
+  cc_shell_embed_widget_in_header (shell, button);
 
   g_signal_connect (GTK_BUTTON (button), "clicked",
                     G_CALLBACK (shell_test_button_clicked),
