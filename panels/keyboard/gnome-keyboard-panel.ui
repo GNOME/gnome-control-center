@@ -222,11 +222,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkTable" id="repeat_table">
+                              <object class="GtkGrid" id="repeat_grid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="n_rows">2</property>
-                                <property name="n_columns">4</property>
                                 <child>
                                   <object class="GtkLabel" id="repeat_delay_label">
                                     <property name="visible">True</property>
@@ -238,8 +236,8 @@
                                     <property name="mnemonic_widget">repeat_delay_scale</property>
                                   </object>
                                   <packing>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -253,10 +251,8 @@
                                     <property name="mnemonic_widget">repeat_speed_scale</property>
                                   </object>
                                   <packing>
+                                    <property name="left_attach">0</property>
                                     <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
                                   </packing>
                                 </child>
                                 <child>
@@ -272,9 +268,7 @@
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
+                                    <property name="top_attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -290,30 +284,27 @@
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
                                     <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkHScale" id="repeat_delay_scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="adjustment">repeat_delay_adjustment</property>
                                     <property name="draw_value">False</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">2</property>
-                                    <property name="right_attach">3</property>
-                                    <property name="y_options"></property>
+                                    <property name="top_attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
                                   <object class="GtkHScale" id="repeat_speed_scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="hexpand">True</property>
                                     <property name="adjustment">repeat_speed_adjustment</property>
                                     <property name="draw_value">False</property>
                                     <child internal-child="accessible">
@@ -324,10 +315,7 @@
                                   </object>
                                   <packing>
                                     <property name="left_attach">2</property>
-                                    <property name="right_attach">3</property>
                                     <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
-                                    <property name="y_options"></property>
                                   </packing>
                                 </child>
                                 <child>
@@ -342,9 +330,7 @@
                                   </object>
                                   <packing>
                                     <property name="left_attach">3</property>
-                                    <property name="right_attach">4</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
+                                    <property name="top_attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -359,17 +345,13 @@
                                   </object>
                                   <packing>
                                     <property name="left_attach">3</property>
-                                    <property name="right_attach">4</property>
                                     <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
                                   </packing>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -454,10 +436,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkTable" id="cursor_table">
+                              <object class="GtkGrid" id="cursor_grid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="n_columns">4</property>
                                 <child>
                                   <object class="GtkLabel" id="cursor_speed_label">
                                     <property name="visible">True</property>
@@ -469,44 +450,8 @@
                                     <property name="mnemonic_widget">cursor_blink_time_scale</property>
                                   </object>
                                   <packing>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkHScale" id="cursor_blink_time_scale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="adjustment">cursor_blink_time_adjustment</property>
-                                    <property name="draw_value">False</property>
-                                    <property name="inverted">True</property>
-                                    <child internal-child="accessible">
-                                      <object class="AtkObject" id="cursor_blink_time_scale-atkobject">
-                                        <property name="AtkObject::accessible-description" translatable="yes">Cursor blink speed</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="right_attach">3</property>
-                                    <property name="y_options"></property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="blink_fast_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes" context="keyboard, speed">Fast</property>
-                                    <attributes>
-                                      <attribute name="scale" value="0.82999999999999996"/>
-                                    </attributes>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">3</property>
-                                    <property name="right_attach">4</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -522,15 +467,47 @@
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="x_options">GTK_SHRINK</property>
-                                    <property name="y_options"></property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHScale" id="cursor_blink_time_scale">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="adjustment">cursor_blink_time_adjustment</property>
+                                    <property name="draw_value">False</property>
+                                    <property name="inverted">True</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="cursor_blink_time_scale-atkobject">
+                                        <property name="AtkObject::accessible-description" translatable="yes">Cursor blink speed</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="blink_fast_label">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes" context="keyboard, speed">Fast</property>
+                                    <attributes>
+                                      <attribute name="scale" value="0.82999999999999996"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">3</property>
+                                    <property name="top_attach">0</property>
                                   </packing>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>

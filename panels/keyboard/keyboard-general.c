@@ -83,7 +83,7 @@ keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
                    WID ("repeat_toggle"), "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (keyboard_settings, "repeat",
-                   WID ("repeat_table"), "sensitive",
+                   WID ("repeat_grid"), "sensitive",
                    G_SETTINGS_BIND_GET);
   
   g_settings_bind (keyboard_settings, "delay",
@@ -98,7 +98,7 @@ keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
                    WID ("cursor_toggle"), "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (interface_settings, "cursor-blink",
-                   WID ("cursor_table"), "sensitive",
+                   WID ("cursor_grid"), "sensitive",
                    G_SETTINGS_BIND_GET);
 
   g_settings_bind (interface_settings, "cursor-blink-time",
