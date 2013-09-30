@@ -16,16 +16,1671 @@ msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-27 14:11+0000\n"
-"PO-Revision-Date: 2013-09-28 11:31+0200\n"
-"Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
+"Last-Translator: Ryan Lortie <desrt@desrt.ca>\n"
 "Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"PO-Revision-Date: 2013-09-30 12:11-0400\n"
+
+#: ../panels/background/cc-background-chooser-dialog.c:436
+#: ../panels/bluetooth/cc-bluetooth-panel.c:640
+#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
+#: ../panels/display/cc-display-panel.c:1495
+#: ../panels/display/cc-display-panel.c:1910
+#: ../panels/network/connection-editor/vpn-helpers.c:245
+#: ../panels/network/connection-editor/vpn-helpers.c:374
+#: ../panels/network/net-device-wifi.c:1201
+#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
+#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:467
+#: ../panels/search/cc-search-locations-dialog.c:682
+#: ../panels/sharing/cc-sharing-panel.c:421
+#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-photo-dialog.c:96
+#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-user-panel.c:508
+msgid "_Cancel"
+msgstr "_Nuligi"
+
+#: ../panels/bluetooth/bluetooth.ui.h:2 ../panels/network/network.ui.h:9
+msgid "Remove Device"
+msgstr "Forigi aparaton"
+
+#: ../panels/bluetooth/bluetooth.ui.h:4
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/printers/printers.ui.h:14
+msgid "page 1"
+msgstr "paĝo 1"
+
+#: ../panels/bluetooth/bluetooth.ui.h:5
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/printers/printers.ui.h:16
+msgid "page 2"
+msgstr "paĝo 2"
+
+#: ../panels/bluetooth/bluetooth.ui.h:8
+#: ../panels/network/connection-editor/ce-page-ip4.c:194
+#: ../panels/network/connection-editor/ce-page-ip4.c:456
+#: ../panels/network/connection-editor/ce-page-ip6.c:196
+#: ../panels/network/connection-editor/ce-page-ip6.c:460
+msgid "Address"
+msgstr "Adreso"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:366
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
+msgid "Yes"
+msgstr "Jes"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:366
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
+msgid "No"
+msgstr "Ne"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:239
+#: ../panels/network/wireless-security/eap-method-fast.c:410
+msgid "All files"
+msgstr "Ĉiuj dosieroj"
+
+#: ../panels/color/cc-color-panel.c:968
+#: ../panels/network/connection-editor/vpn-helpers.c:375
+msgid "_Save"
+msgstr "Kon_servi"
+
+#: ../panels/display/cc-display-panel.c:1497
+#: ../panels/display/cc-display-panel.c:1913
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+msgid "_Apply"
+msgstr "_Apliki"
+
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
+msgid "Unknown"
+msgstr "Nekonate"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+#: ../panels/network/connection-editor/ce-page-details.c:240
+#: ../panels/network/network-wifi.ui.h:44
+msgid "Details"
+msgstr "Detaloj"
+
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:271
+#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/keyboard-shortcuts.c:1159
+#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Elŝaltite"
+
+#. TRANSLATORS: this is to disable the radio hardware in the
+#. * network panel
+#: ../panels/network/cc-network-panel.c:358
+msgid "Air_plane Mode"
+msgstr "_Aviadila reĝimo"
+
+#: ../panels/network/cc-network-panel.c:928
+msgid "Network proxy"
+msgstr "Retprokurilo"
+
+#. Translators: this is the title of the connection details
+#. * window for vpn connections, it is also used to display
+#. * vpn connections in the device list.
+#: ../panels/network/cc-network-panel.c:1107 ../panels/network/net-vpn.c:285
+#: ../panels/network/net-vpn.c:438
+#, c-format
+msgid "%s VPN"
+msgstr "%s VPN"
+
+#. TRANSLATORS: the user is running a NM that is not API compatible
+#: ../panels/network/cc-network-panel.c:1242
+msgid "The system network services are not compatible with this version."
+msgstr "La sistemaj retservoj ne kongruas kun ĉi tiu versio."
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:1
+msgid "802.1x _Security"
+msgstr "802.1x _sekureco"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:1
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
+msgid "Anony_mous identity"
+msgstr "_Sennoma idento"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:4
+msgid "Inner _authentication"
+msgstr "Ena _aŭtentigo"
+
+#: ../panels/network/connection-editor/ce-page-8021x-security.c:108
+#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/details-page.ui.h:3
+#: ../panels/network/network-wifi.ui.h:4
+msgid "Security"
+msgstr "Sekureco"
+
+#: ../panels/network/connection-editor/ce-page.c:507
+msgid "automatic"
+msgstr "aŭtomata"
+
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:52
+#: ../panels/network/net-device-wifi.c:221
+#: ../panels/network/net-device-wifi.c:382
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:56
+#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/network-wifi.ui.h:17
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:60
+#: ../panels/network/net-device-wifi.c:229
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:65
+#: ../panels/network/net-device-wifi.c:234
+msgid "Enterprise"
+msgstr "Enterpreno"
+
+#: ../panels/network/connection-editor/ce-page-details.c:70
+#: ../panels/network/net-device-wifi.c:239
+#: ../panels/network/net-device-wifi.c:372
+msgctxt "Wifi security"
+msgid "None"
+msgstr "Neniu"
+
+#: ../panels/network/connection-editor/ce-page-details.c:91
+#: ../panels/power/power.ui.h:19
+msgid "Never"
+msgstr "Neniam"
+
+#: ../panels/network/connection-editor/ce-page-details.c:102
+#: ../panels/user-accounts/um-utils.c:803
+msgid "Today"
+msgstr "Hodiaŭ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:104
+#: ../panels/user-accounts/um-utils.c:806
+msgid "Yesterday"
+msgstr "Hieraŭ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:106
+#: ../panels/network/net-device-ethernet.c:125
+#: ../panels/network/net-device-wifi.c:476
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "Antaŭ %i tago"
+msgstr[1] "Antaŭ %i tagoj"
+
+#. Translators: network device speed
+#: ../panels/network/connection-editor/ce-page-details.c:155
+#: ../panels/network/net-device-ethernet.c:53
+#: ../panels/network/net-device-wifi.c:534
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
+
+#: ../panels/network/connection-editor/ce-page-details.c:181
+#: ../panels/network/net-device-wifi.c:563
+msgctxt "Signal strength"
+msgid "None"
+msgstr "Nenia"
+
+#: ../panels/network/connection-editor/ce-page-details.c:183
+#: ../panels/network/net-device-wifi.c:565
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Malforta"
+
+#: ../panels/network/connection-editor/ce-page-details.c:185
+#: ../panels/network/net-device-wifi.c:567
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "Sufiĉa"
+
+#: ../panels/network/connection-editor/ce-page-details.c:187
+#: ../panels/network/net-device-wifi.c:569
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Bona"
+
+#: ../panels/network/connection-editor/ce-page-details.c:189
+#: ../panels/network/net-device-wifi.c:571
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Bonega"
+
+#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-wifi.c:255
+#: ../panels/network/network-wifi.ui.h:45
+msgid "Identity"
+msgstr "Idento"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:207
+#: ../panels/network/connection-editor/ce-page-ip4.c:469
+msgid "Netmask"
+msgstr "Retmasko"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:221
+#: ../panels/network/connection-editor/ce-page-ip4.c:482
+#: ../panels/network/connection-editor/ce-page-ip6.c:222
+#: ../panels/network/connection-editor/ce-page-ip6.c:490
+#: ../panels/network/network-vpn.ui.h:3
+msgid "Gateway"
+msgstr "Kluzo"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:238
+#: ../panels/network/connection-editor/ce-page-ip6.c:239
+msgid "Delete Address"
+msgstr "Forigi adreson"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:292
+#: ../panels/network/connection-editor/ce-page-ip6.c:293
+msgid "Add"
+msgstr "Aldoni"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:360
+#: ../panels/network/connection-editor/ce-page-ip6.c:364
+msgid "Server"
+msgstr "Servilo"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:377
+#: ../panels/network/connection-editor/ce-page-ip6.c:381
+msgid "Delete DNS Server"
+msgstr "Forigi nomservilon"
+
+#. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
+#: ../panels/network/connection-editor/ce-page-ip4.c:496
+#: ../panels/network/connection-editor/ce-page-ip6.c:504
+msgctxt "network parameters"
+msgid "Metric"
+msgstr "Metriko"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:517
+#: ../panels/network/connection-editor/ce-page-ip6.c:525
+msgid "Delete Route"
+msgstr "Forigi kurson"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:632
+#: ../panels/network/network-wifi.ui.h:25
+msgid "Automatic (DHCP)"
+msgstr "Aŭtomata (DHCP)"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:636
+#: ../panels/network/connection-editor/ce-page-ip6.c:638
+#: ../panels/network/network-wifi.ui.h:24
+msgid "Manual"
+msgstr "Permane"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:640
+#: ../panels/network/connection-editor/ce-page-ip6.c:642
+msgid "Link-Local Only"
+msgstr "Nur \"Ligi-Loke\""
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
+#: ../panels/network/network-wifi.ui.h:46
+msgid "IPv4"
+msgstr "IPv4"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:209
+#: ../panels/network/connection-editor/ce-page-ip6.c:473
+msgid "Prefix"
+msgstr "Prefikso"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:630
+#: ../panels/network/connection-editor/ethernet-page.ui.h:1
+#: ../panels/network/connection-editor/ip4-page.ui.h:4
+#: ../panels/network/connection-editor/ip6-page.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+msgid "Automatic"
+msgstr "Aŭtomate"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:634
+msgid "Automatic, DHCP only"
+msgstr "Aŭtomate, nur DHCP"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:902
+#: ../panels/network/network-wifi.ui.h:47
+msgid "IPv6"
+msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:91
+#: ../panels/network/network-wifi.ui.h:49
+msgid "Reset"
+msgstr "Reagordi"
+
+#: ../panels/network/connection-editor/ce-page-security.c:250
+msgctxt "Wi-Fi/Ethernet security"
+msgid "None"
+msgstr "Neniu"
+
+#: ../panels/network/connection-editor/ce-page-security.c:273
+msgid "WEP 40/128-bit Key (Hex or ASCII)"
+msgstr "WEP 40/128-bita ŝlosilo (Deksesuma aŭ ASCII)"
+
+#: ../panels/network/connection-editor/ce-page-security.c:283
+msgid "WEP 128-bit Passphrase"
+msgstr "128-bita WEP-pasfrazo"
+
+#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/wireless-security/wireless-security.c:409
+msgid "LEAP"
+msgstr "LEAP"
+
+#: ../panels/network/connection-editor/ce-page-security.c:309
+msgid "Dynamic WEP (802.1x)"
+msgstr "Dinamika WEP (802.1x)"
+
+#: ../panels/network/connection-editor/ce-page-security.c:323
+msgid "WPA & WPA2 Personal"
+msgstr "WPA kaj WPA2 por personoj"
+
+#: ../panels/network/connection-editor/ce-page-security.c:337
+msgid "WPA & WPA2 Enterprise"
+msgstr "WPA kaj WPA2 por enterprenoj"
+
+#: ../panels/network/connection-editor/details-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:2
+msgid "Signal Strength"
+msgstr "Signala forteco"
+
+#: ../panels/network/connection-editor/details-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:3
+msgid "Link speed"
+msgstr "Ligita rapido"
+
+#: ../panels/network/connection-editor/details-page.ui.h:4
+#: ../panels/network/net-device-ethernet.c:158
+#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
+msgid "IPv4 Address"
+msgstr "IPv4-adreso"
+
+#: ../panels/network/connection-editor/details-page.ui.h:5
+#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/net-device-ethernet.c:163
+#: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
+msgid "IPv6 Address"
+msgstr "IPv6-adreso"
+
+#: ../panels/network/connection-editor/details-page.ui.h:6
+#: ../panels/network/net-device-ethernet.c:166
+#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-wifi.ui.h:7
+msgid "Hardware Address"
+msgstr "Aparatara adreso"
+
+#: ../panels/network/connection-editor/details-page.ui.h:7
+#: ../panels/network/net-device-ethernet.c:170
+#: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-wifi.ui.h:8
+msgid "Default Route"
+msgstr "Defaŭlta kurso"
+
+#: ../panels/network/connection-editor/details-page.ui.h:8
+#: ../panels/network/connection-editor/ip4-page.ui.h:3
+#: ../panels/network/connection-editor/ip6-page.ui.h:3
+#: ../panels/network/net-device-ethernet.c:172
+#: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-simple.ui.h:6
+#: ../panels/network/network-wifi.ui.h:9
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/connection-editor/details-page.ui.h:9
+msgid "Last Used"
+msgstr "Laste uzita"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:2
+msgid "Twisted Pair (TP)"
+msgstr "Tordita Paro (TP)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:3
+msgid "Attachment Unit Interface (AUI)"
+msgstr "Attachment Unit Interface (AUI)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:4
+msgid "BNC"
+msgstr "BNC"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:5
+msgid "Media Independent Interface (MII)"
+msgstr "Media Independent Interface (MII)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:6
+msgid "10 Mb/s"
+msgstr "10 Mb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:7
+msgid "100 Mb/s"
+msgstr "100 Mb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:8
+msgid "1 Gb/s"
+msgstr "1 Gb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:9
+msgid "10 Gb/s"
+msgstr "10 Gb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:10
+#: ../panels/network/connection-editor/vpn-page.ui.h:1
+msgid "_Name"
+msgstr "_Nomo"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:11
+#: ../panels/network/connection-editor/wifi-page.ui.h:4
+#: ../panels/network/network-wifi.ui.h:36
+msgid "_MAC Address"
+msgstr "_MAC-adreso"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:12
+msgid "M_TU"
+msgstr "M_TU"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:13
+#: ../panels/network/connection-editor/wifi-page.ui.h:5
+msgid "_Cloned Address"
+msgstr "_Klonita adreso"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:14
+msgid "bytes"
+msgstr "bajtoj"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:15
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
+msgid "Make available to other _users"
+msgstr "Disponebligi kun aliaj _uzantoj"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:16
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Connect _automatically"
+msgstr "Konekti _aŭtomate"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+#: ../panels/network/connection-editor/wifi-page.ui.h:8
+msgid "Firewall _Zone"
+msgstr "Fajroŝirmila zono"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:48
+#: ../panels/network/connection-editor/firewall-helpers.c:112
+msgctxt "Firewall zone"
+msgid "Default"
+msgstr "Defaŭlta"
+
+#: ../panels/network/connection-editor/firewall-helpers.c:49
+msgid "The zone defines the trust level of the connection"
+msgstr "La zono definas la fidindecan nivelon de la konekto"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:22
+msgid "IPv_4"
+msgstr "IPv_4"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:2
+#: ../panels/network/connection-editor/ip6-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:23
+msgid "_Addresses"
+msgstr "_Adresoj"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:5
+#: ../panels/network/connection-editor/ip6-page.ui.h:5
+msgid "Automatic DNS"
+msgstr "Aŭtomata DNS"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:6
+#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#: ../panels/network/network-wifi.ui.h:30
+msgid "Routes"
+msgstr "Kursoj"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:7
+#: ../panels/network/connection-editor/ip6-page.ui.h:7
+msgid "Automatic Routes"
+msgstr "Aŭtomataj kursoj"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:8
+#: ../panels/network/connection-editor/ip6-page.ui.h:8
+#: ../panels/network/network-wifi.ui.h:32
+msgid "Use this connection _only for resources on its network"
+msgstr "Uzi ĉi konekton _nur por risurcoj rekte sur la sama reto"
+
+#: ../panels/network/connection-editor/ip6-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:34
+msgid "IPv_6"
+msgstr "IPv_6"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:268
+msgid "Unable to open connection editor"
+msgstr "Ne eblas malfermi konekta redaktilo"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:286
+msgid "New Profile"
+msgstr "Nova profilo"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:511
+#: ../panels/printers/new-printer-dialog.ui.h:3
+#: ../panels/user-accounts/um-account-dialog.c:1471
+msgid "_Add"
+msgstr "_Aldoni"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:595
+#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
+msgid "VPN"
+msgstr "VPN"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:596
+msgid "Bond"
+msgstr "Bindo"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:597
+msgid "Bridge"
+msgstr "Ponto"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:598
+msgid "VLAN"
+msgstr "VLAN"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:749
+msgid "Could not load VPN plugins"
+msgstr "Ne eblas ŝargi VPN-an etendojn"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:818
+msgid "Import from file…"
+msgstr "Importi de dosiero…"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:889
+msgid "Add Network Connection"
+msgstr "Aldoni retan konekton"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:39
+msgid "_Reset"
+msgstr "_Vakigi agordojn"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:2
+#: ../panels/network/net-device-wifi.c:1408
+#: ../panels/network/network-wifi.ui.h:40
+msgid "_Forget"
+msgstr "_Forgesi"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:3
+msgid ""
+"Reset the settings for this network, including passwords, but remember it as "
+"a preferred network"
+msgstr ""
+"Vakigi la agordojn por ĉi reto, inkludante pasvortojn, sed memori ĝin kiel "
+"preferita reto"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:4
+msgid ""
+"Remove all details relating to this network and do not try to automatically "
+"connect"
+msgstr "_Forigi ĉiujn detalojn de ĉi reto kaj ne klopodi aŭtomate konekti"
+
+#: ../panels/network/connection-editor/security-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:14
+msgid "S_ecurity"
+msgstr "S_ekureco"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:205
+msgid "Cannot import VPN connection"
+msgstr "Ne eblas enporti VPN-konekton"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:207
+#, c-format
+msgid ""
+"The file '%s' could not be read or does not contain recognized VPN "
+"connection information\n"
+"\n"
+"Error: %s."
+msgstr ""
+"La dosiero '%s' ne estis legebla aŭ ne entenas rekonitajn VPN-konektajn "
+"informojn\n"
+"\n"
+"Eraro: %s"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:242
+msgid "Select file to import"
+msgstr "Elekti enportendan dosieron"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:246
+#: ../panels/printers/cc-printers-panel.c:1947
+#: ../panels/sharing/cc-sharing-panel.c:422
+#: ../panels/user-accounts/um-photo-dialog.c:222
+msgid "_Open"
+msgstr "_Malfermi"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:294
+#, c-format
+msgid "A file named \"%s\" already exists."
+msgstr "Dosiero nomita «%s» jam ekzistas."
+
+#: ../panels/network/connection-editor/vpn-helpers.c:296
+msgid "_Replace"
+msgstr "_Anstataŭigi"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:298
+#, c-format
+msgid "Do you want to replace %s with the VPN connection you are saving?"
+msgstr "Ĉu vi volas anstataŭigi %s per la VPN-konekto vi estas konservanta?"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:334
+msgid "Cannot export VPN connection"
+msgstr "Ne eblas elporti VPN-konekton"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:336
+#, c-format
+msgid ""
+"The VPN connection '%s' could not be exported to %s.\n"
+"\n"
+"Error: %s."
+msgstr ""
+"La VPN-konekto «%s» ne povas esti elportita al %s.\n"
+"\n"
+"Eraro: %s."
+
+#: ../panels/network/connection-editor/vpn-helpers.c:371
+msgid "Export VPN connection..."
+msgstr "Elporti VPN-konekton..."
+
+#: ../panels/network/connection-editor/vpn-page.ui.h:4
+msgid "(Error: unable to load VPN connection editor)"
+msgstr "(Eraro: ne eblas ŝargi VPN-an konekton redaktilo)"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:12
+msgid "_SSID"
+msgstr "_SSID"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:13
+msgid "_BSSID"
+msgstr "_BSSID"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:3
+#: ../panels/network/network-wifi.ui.h:16
+msgid "My Home Network"
+msgstr "Mia hejma reto"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
+msgid "Make available to _other users"
+msgstr "Disponebligi por _aliaj uzantoj"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/network/network-mobile.ui.h:7
+msgid "Network"
+msgstr "Reto"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Control how you connect to the Internet"
+msgstr "Regi kiel vi konektas al la interreto."
+
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid ""
+"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
+"vlan;bridge;bond;"
+msgstr "Reto;Sendrata;Wi-Fi;ŬiFi;Wifi;Prokurilo;Modemo;Bludento;VPR;"
+
+#: ../panels/network/net-device-bond.c:77
+msgid "Bond slaves"
+msgstr "Bindaj sklavoj"
+
+#: ../panels/network/net-device-bridge.c:77
+msgid "Bridge slaves"
+msgstr "Pontaj sklavoj"
+
+#: ../panels/network/net-device-ethernet.c:111
+#: ../panels/network/net-device-wifi.c:462
+msgid "never"
+msgstr "neniam"
+
+#: ../panels/network/net-device-ethernet.c:121
+#: ../panels/network/net-device-wifi.c:472
+msgid "today"
+msgstr "hodiaŭ"
+
+#: ../panels/network/net-device-ethernet.c:123
+#: ../panels/network/net-device-wifi.c:474
+msgid "yesterday"
+msgstr "hieraŭ"
+
+#: ../panels/network/net-device-ethernet.c:161
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
+#: ../panels/printers/printers.ui.h:13
+msgid "IP Address"
+msgstr "IP-Adreso"
+
+#: ../panels/network/net-device-ethernet.c:177
+#: ../panels/network/network-wifi.ui.h:10
+msgid "Last used"
+msgstr "Laste uzita"
+
+#. Translators: This is used as the title of the connection
+#. * details window for ethernet, if there is only a single
+#. * profile. It is also used to display ethernet in the
+#. * device list.
+#: ../panels/network/net-device-ethernet.c:287
+#: ../panels/network/network-ethernet.ui.h:1
+#: ../panels/network/network-simple.ui.h:1
+msgid "Wired"
+msgstr "Drate"
+
+#: ../panels/network/net-device-ethernet.c:355
+#: ../panels/network/net-device-wifi.c:1549
+#: ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-simple.ui.h:8
+#: ../panels/network/network-vpn.ui.h:8
+msgid "Options…"
+msgstr "Agordoj…"
+
+#: ../panels/network/net-device-ethernet.c:492
+#, c-format
+msgid "Profile %d"
+msgstr "Profilo %d"
+
+#: ../panels/network/net-device-mobile.c:239
+msgid "Add new connection"
+msgstr "Aldoni novan konekton"
+
+#: ../panels/network/net-device-wifi.c:1117
+msgid ""
+"If you have a connection to the Internet other than wireless, you can set up "
+"a wireless hotspot to share the connection with others."
+msgstr ""
+"Se vi havas konekton al la interreto (krom Wi-Fi), vi povas agordi sendratan "
+"retkaptejon por kunhavi la konekton kun aliaj."
+
+#: ../panels/network/net-device-wifi.c:1121
+#, c-format
+msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+msgstr "Se vi aktivigi la sendratan retkaptejon, vi malkonektos de <b>%s</b>."
+
+#: ../panels/network/net-device-wifi.c:1125
+msgid ""
+"It is not possible to access the Internet through your wireless while the "
+"hotspot is active."
+msgstr ""
+"Ne eblas atingi interreton tra via sendrata aparato dum la retkaptejo "
+"aktivigas."
+
+#: ../panels/network/net-device-wifi.c:1199
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Haltigi retkaptejon kaj malkonektiĝi ĉiujn uzantojn?"
+
+#: ../panels/network/net-device-wifi.c:1202
+msgid "_Stop Hotspot"
+msgstr "Halti_gi retkaptejon"
+
+#: ../panels/network/net-device-wifi.c:1274
+msgid "System policy prohibits use as a Hotspot"
+msgstr "Sistema politiko malebligas uzon kiel retkaptejo"
+
+#: ../panels/network/net-device-wifi.c:1277
+msgid "Wireless device does not support Hotspot mode"
+msgstr "Sendrata aparato ne subtenas retkapteja reĝimo"
+
+#: ../panels/network/net-device-wifi.c:1404
+msgid ""
+"Network details for the selected networks, including passwords and any "
+"custom configuration will be lost."
+msgstr ""
+"Retaj detaloj por la elektitaj retoj, inkludante pasvortojn kaj iuj ajn "
+"propraj agordoj perdiĝos."
+
+#: ../panels/network/net-device-wifi.c:1714
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "History"
+msgstr "Historio"
+
+#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
+#: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/wacom/cc-wacom-page.c:525
+msgid "_Close"
+msgstr "_Fermi"
+
+#. translators: This is the label for the "Forget wireless network"
+#. functionality
+#: ../panels/network/net-device-wifi.c:1726
+msgctxt "Wi-Fi Network"
+msgid "_Forget"
+msgstr "_Forgesi"
+
+#. TRANSLATORS: this is when the use leaves the PAC textbox blank
+#: ../panels/network/net-proxy.c:67
+msgid ""
+"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
+msgstr ""
+"Aŭtomata malkovro de retaj prokuriloj estas uzata kiam agord-URL ne estas "
+"provizita."
+
+#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
+#. * network, then anyone else on that network can tell your
+#. * machine that it should proxy all of your web traffic
+#. * through them.
+#: ../panels/network/net-proxy.c:75
+msgid "This is not recommended for untrusted public networks."
+msgstr "Tio ne estas rekomendita por nefidindaj publikaj retoj."
+
+#: ../panels/network/net-proxy.c:417
+msgid "Proxy"
+msgstr "Prokurilo"
+
+#: ../panels/network/network-ethernet.ui.h:2
+msgid "_Add Profile…"
+msgstr "_Aldoni profilon…"
+
+#: ../panels/network/network-mobile.ui.h:1
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ../panels/network/network-mobile.ui.h:2
+msgid "Provider"
+msgstr "Provizanto"
+
+#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
+msgctxt "proxy method"
+msgid "None"
+msgstr "Neniu"
+
+#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:6
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Permane"
+
+#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:7
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Aŭtomate"
+
+#: ../panels/network/network-proxy.ui.h:4
+msgid "_Method"
+msgstr "_Metodo"
+
+#: ../panels/network/network-proxy.ui.h:5
+msgid "_Configuration URL"
+msgstr "_Agordaradreso"
+
+#: ../panels/network/network-proxy.ui.h:6
+msgid "_HTTP Proxy"
+msgstr "_HTTP-prokurilo"
+
+#: ../panels/network/network-proxy.ui.h:7
+msgid "H_TTPS Proxy"
+msgstr "H_TTPS-prokurilo"
+
+#: ../panels/network/network-proxy.ui.h:8
+msgid "_FTP Proxy"
+msgstr "_FTP-prokurilo"
+
+#: ../panels/network/network-proxy.ui.h:9
+msgid "_Socks Host"
+msgstr "_SOCKS-Gastigilo"
+
+#: ../panels/network/network-proxy.ui.h:10
+msgid "_Ignore Hosts"
+msgstr "_Ne uzi por"
+
+#: ../panels/network/network-proxy.ui.h:11
+msgid "HTTP proxy port"
+msgstr "pordo de _HTTP-prokurilo"
+
+#: ../panels/network/network-proxy.ui.h:12
+msgid "HTTPS proxy port"
+msgstr "pordo de H_TTPS-prokurilo"
+
+#: ../panels/network/network-proxy.ui.h:13
+msgid "FTP proxy port"
+msgstr "pordo de _FTP-prokurilo"
+
+#: ../panels/network/network-proxy.ui.h:14
+msgid "Socks proxy port"
+msgstr "pordo de SOCKS-prokurilo"
+
+#: ../panels/network/network-simple.ui.h:7
+msgid "Turn device off"
+msgstr "Elŝalti aparaton"
+
+#: ../panels/network/network.ui.h:1
+msgid "Select the interface to use for the new service"
+msgstr "Elektu la uzendan interfacon por la nova servo"
+
+#: ../panels/network/network.ui.h:2
+msgid "C_reate…"
+msgstr "_Krei…"
+
+#: ../panels/network/network.ui.h:3
+msgid "_Interface"
+msgstr "_Interfaco"
+
+#: ../panels/network/network.ui.h:8
+msgid "Add Device"
+msgstr "Aldoni aparaton"
+
+#: ../panels/network/network-vpn.ui.h:2
+msgid "VPN Type"
+msgstr "VPN-tipo"
+
+#: ../panels/network/network-vpn.ui.h:4
+msgid "Group Name"
+msgstr "Grupnomo"
+
+#: ../panels/network/network-vpn.ui.h:5
+msgid "Group Password"
+msgstr "Gruppasvorto"
+
+#: ../panels/network/network-vpn.ui.h:6
+#: ../panels/printers/authentication-dialog.ui.h:4
+msgid "Username"
+msgstr "Uzantonomo"
+
+#: ../panels/network/network-vpn.ui.h:7
+msgid "Turn VPN connection off"
+msgstr "Malaktivigi VPN-an konekton"
+
+#: ../panels/network/network-wifi.ui.h:1
+msgid "Automatic _Connect"
+msgstr "_Aŭtomate konekti"
+
+#: ../panels/network/network-wifi.ui.h:11
+msgid "details"
+msgstr "detaloj"
+
+#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:2
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:2
+#: ../panels/network/wireless-security/ws-leap.ui.h:2
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "_Password"
+msgstr "_Pasvorto"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "None"
+msgstr "Neniu"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Show P_assword"
+msgstr "_Montri pasvorton"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Make available to other users"
+msgstr "Disponebligi por aliaj uzantoj"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "identity"
+msgstr "idento"
+
+#: ../panels/network/network-wifi.ui.h:26
+msgid "Automatic (DHCP) addresses only"
+msgstr "Nur aŭtomataj adresoj (DHCP)"
+
+#: ../panels/network/network-wifi.ui.h:27
+msgid "Link-local only"
+msgstr "Loka reto nur"
+
+#: ../panels/network/network-wifi.ui.h:28
+msgid "Shared with other computers"
+msgstr "Kunhavita kun aliaj komputiloj"
+
+#: ../panels/network/network-wifi.ui.h:31
+msgid "_Ignore automatically obtained routes"
+msgstr "Malatenti aŭtomate ricevitajn kursojn"
+
+#: ../panels/network/network-wifi.ui.h:33
+msgid "ipv4"
+msgstr "ipv4"
+
+#: ../panels/network/network-wifi.ui.h:35
+msgid "ipv6"
+msgstr "ipv6"
+
+#: ../panels/network/network-wifi.ui.h:37
+msgid "_Cloned MAC Address"
+msgstr "_Klonita MAC-adreso"
+
+#: ../panels/network/network-wifi.ui.h:38
+msgid "hardware"
+msgstr "aparataro"
+
+#: ../panels/network/network-wifi.ui.h:41
+msgid ""
+"Reset the settings for this connection to their defaults, but remember as a "
+"preferred connection."
+msgstr ""
+"Vakigi la agordojn por ĉi konekton al defaŭlto, sed memori ĝin kiel "
+"preferita reto"
+
+#: ../panels/network/network-wifi.ui.h:42
+msgid ""
+"Remove all details relating to this network and do not try to automatically "
+"connect to it."
+msgstr ""
+"_Forigi ĉiujn detalojn de ĉi reto kaj ne klopodi aŭtomate konekti denove."
+
+#: ../panels/network/network-wifi.ui.h:43
+msgid "reset"
+msgstr "reagordi"
+
+#: ../panels/network/network-wifi.ui.h:48
+msgid "Hardware"
+msgstr "Aparataro"
+
+#: ../panels/network/network-wifi.ui.h:50
+msgid "Wi-Fi Hotspot"
+msgstr "Retkaptejo"
+
+#: ../panels/network/network-wifi.ui.h:51
+msgid "_Turn On"
+msgstr "_Enŝalti"
+
+#: ../panels/network/network-wifi.ui.h:52
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../panels/network/network-wifi.ui.h:53
+msgid "Turn Wi-Fi off"
+msgstr "Elŝalti na Wi-Fi"
+
+#: ../panels/network/network-wifi.ui.h:54
+msgid "_Use as Hotspot…"
+msgstr "_Uzi kiel retkaptejo…"
+
+#: ../panels/network/network-wifi.ui.h:55
+msgid "_Connect to Hidden Network…"
+msgstr "Konekti al kaŝita reto…"
+
+#: ../panels/network/network-wifi.ui.h:56
+msgid "_History"
+msgstr "_Historio"
+
+#: ../panels/network/network-wifi.ui.h:57
+msgid "Switch off to connect to a Wi-Fi network"
+msgstr "Malaktivigi por konekti al sendrata reto"
+
+#: ../panels/network/network-wifi.ui.h:58
+msgid "Network Name"
+msgstr "Retnomo"
+
+#: ../panels/network/network-wifi.ui.h:59
+msgid "Connected Devices"
+msgstr "Konektitaj aparatoj"
+
+#: ../panels/network/network-wifi.ui.h:60
+msgid "Security type"
+msgstr "Sekureca speco"
+
+#: ../panels/network/network-wifi.ui.h:61
+msgid "Security key"
+msgstr "Sekureca ŝlosilo"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:131
+msgid "Ad-hoc"
+msgstr "Provizore"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:135
+msgid "Infrastructure"
+msgstr "Infrastrukturo"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:151 ../panels/network/panel-common.c:205
+msgid "Status unknown"
+msgstr "Nekonata stato"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:155
+msgid "Unmanaged"
+msgstr "Nemastrumite"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:159
+msgid "Unavailable"
+msgstr "Nedisponeble"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:169 ../panels/network/panel-common.c:211
+msgid "Connecting"
+msgstr "Konektante"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:173 ../panels/network/panel-common.c:215
+msgid "Authentication required"
+msgstr "Aŭtentokontrolo estas bezonata"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
+msgid "Connected"
+msgstr "Konektite"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:181
+msgid "Disconnecting"
+msgstr "Malkontaktante"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:185 ../panels/network/panel-common.c:223
+msgid "Connection failed"
+msgstr "Konekto fiaskis"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:189 ../panels/network/panel-common.c:231
+msgid "Status unknown (missing)"
+msgstr "Nekonata stato (mankanta)"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:227
+msgid "Not connected"
+msgstr "Ne konekite"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:252
+msgid "Configuration failed"
+msgstr "Agordo malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:256
+msgid "IP configuration failed"
+msgstr "Adresa agordo malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:260
+msgid "IP configuration expired"
+msgstr "Adresa agordo senvalidiĝis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:264
+msgid "Secrets were required, but not provided"
+msgstr "Sekretoj estis bezonitaj, sed ne provizitaj"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:268
+msgid "802.1x supplicant disconnected"
+msgstr "802.1x provizanto malkonektitas"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:272
+msgid "802.1x supplicant configuration failed"
+msgstr "Agordo de 802.1x provizanto malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:276
+msgid "802.1x supplicant failed"
+msgstr "802.1x provizanto malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:280
+msgid "802.1x supplicant took too long to authenticate"
+msgstr "802.1x provizanto estis tro malrapida por aŭtentigi"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:284
+msgid "PPP service failed to start"
+msgstr "la PPP-servo malsukcesis starti"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:288
+msgid "PPP service disconnected"
+msgstr "la PPP-servo malkonektis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:292
+msgid "PPP failed"
+msgstr "PPP malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:296
+msgid "DHCP client failed to start"
+msgstr "la DHCP-servo malsukcesis starti"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:300
+msgid "DHCP client error"
+msgstr "Eraro de la DHCP-kliento"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:304
+msgid "DHCP client failed"
+msgstr "DHCP-kliento malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:308
+msgid "Shared connection service failed to start"
+msgstr "Kunhavita koneta servo malsukcesis starti"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:312
+msgid "Shared connection service failed"
+msgstr "Kunhavita koneta servo malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:316
+msgid "AutoIP service failed to start"
+msgstr "la AutoIP-servo malsukcesis starti"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:320
+msgid "AutoIP service error"
+msgstr "AutoIP-serva eraro"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:324
+msgid "AutoIP service failed"
+msgstr "la AutoIP-servo malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:328
+msgid "Line busy"
+msgstr "Lineo okupita"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:332
+msgid "No dial tone"
+msgstr "Neniu voktono"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:336
+msgid "No carrier could be established"
+msgstr "Datumportilo ne povis establiti"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:340
+msgid "Dialing request timed out"
+msgstr "Numeruma peto eltempiĝis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:344
+msgid "Dialing attempt failed"
+msgstr "Numeruma peto malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:348
+msgid "Modem initialization failed"
+msgstr "Modema pravalorizo malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:352
+msgid "Failed to select the specified APN"
+msgstr "Malsukcesis elekti specifitan APN-on"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:356
+msgid "Not searching for networks"
+msgstr "Ne serĉanta por retoj"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:360
+msgid "Network registration denied"
+msgstr "Reta registriĝo neis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:364
+msgid "Network registration timed out"
+msgstr "Reta registriĝo eltempiĝis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:368
+msgid "Failed to register with the requested network"
+msgstr "Registriĝo por la petita reto malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:372
+msgid "PIN check failed"
+msgstr "PIN-kontrolo malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:376
+msgid "Firmware for the device may be missing"
+msgstr "Firma programaro por la aparato eble mankas."
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:380
+msgid "Connection disappeared"
+msgstr "Konekto malaperis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:384
+msgid "Existing connection was assumed"
+msgstr "Ekzistanta konekto supozintis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:388
+msgid "Modem not found"
+msgstr "Modemo ne trovita"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:392
+msgid "Bluetooth connection failed"
+msgstr "Bludenta konekto malsukcesis"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:396
+msgid "SIM Card not inserted"
+msgstr "SIM-karto ne enmetita"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:400
+msgid "SIM Pin required"
+msgstr "SIM-karto PIN bezonita"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:404
+msgid "SIM Puk required"
+msgstr "SIM-karto PUK bezonita"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:408
+msgid "SIM wrong"
+msgstr "SIM-karto malĝusta"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:412
+msgid "InfiniBand device does not support connected mode"
+msgstr "InfiniBand aparato ne subtenas konektitan reĝimon"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:416
+msgid "Connection dependency failed"
+msgstr "Konekta dependeco malsukcesis"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:440
+msgid "Firmware missing"
+msgstr "Mikroprogramaro mankas"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:444 ../panels/network/panel-common.c:447
+msgid "Cable unplugged"
+msgstr "Kablo ne konektita"
+
+#: ../panels/network/wireless-security/eap-method.c:275
+msgid "No Certificate Authority certificate chosen"
+msgstr "Neniu atestilo de Atestilaŭtoritato (CA) elektita"
+
+#: ../panels/network/wireless-security/eap-method.c:276
+msgid ""
+"Not using a Certificate Authority (CA) certificate can result in connections "
+"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
+"Authority certificate?"
+msgstr ""
+"Se vi ne uzas atestilaŭtoritatan (CA) atestilon tiam vi povas konekti al "
+"nesekuraj, friponaj sendrataj retoj.  Ĉu vi volas elekti atestilaŭtoritatan "
+"atestilon?"
+
+#: ../panels/network/wireless-security/eap-method.c:281
+msgid "Ignore"
+msgstr "Ignori"
+
+#: ../panels/network/wireless-security/eap-method.c:285
+msgid "Choose CA Certificate"
+msgstr "Elekti CA-atestilon"
+
+#: ../panels/network/wireless-security/eap-method.c:645
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
+msgstr "Privataj ŝlosiloj de specoj DER, PEM aŭ PKCS#12 (*.der, *.pem, *.p12)"
+
+#: ../panels/network/wireless-security/eap-method.c:648
+msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+msgstr "DER- aŭ PEM-atestiloj (*.der, *.pem, *.crt, *.cer)"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:261
+#: ../panels/network/wireless-security/eap-method-peap.c:280
+msgid "GTC"
+msgstr "GTC"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:277
+#: ../panels/network/wireless-security/eap-method-peap.c:246
+#: ../panels/network/wireless-security/eap-method-ttls.c:263
+msgid "MSCHAPv2"
+msgstr "MSCHAPv2"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:399
+msgid "Choose a PAC file..."
+msgstr "Elekti PAC-dosieron..."
+
+#: ../panels/network/wireless-security/eap-method-fast.c:406
+msgid "PAC files (*.pac)"
+msgstr "PAC-dosieroj (*.pac)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
+msgid "PAC _file"
+msgstr "PAC-_dosiero"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+msgid "_Inner authentication"
+msgstr "_Ena aŭtentigo"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+msgid "PAC pro_visioning"
+msgstr "PAC-_inicado"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
+#: ../panels/printers/authentication-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+msgid "Anonymous"
+msgstr "Sennoma"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
+msgid "Authenticated"
+msgstr "Aŭtentokontrolata"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+msgid "Both"
+msgstr "Ambaŭ"
+
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:1
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:1
+#: ../panels/network/wireless-security/ws-leap.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+msgid "_Username"
+msgstr "_Uzantonomo"
+
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:3
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:4
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:6
+#: ../panels/network/wireless-security/ws-leap.ui.h:3
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
+msgid "Sho_w password"
+msgstr "_Montri pasvorton"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:263
+#: ../panels/network/wireless-security/wireless-security.c:385
+msgid "MD5"
+msgstr "MD5"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:350
+#: ../panels/network/wireless-security/eap-method-tls.c:434
+#: ../panels/network/wireless-security/eap-method-ttls.c:350
+msgid "Choose a Certificate Authority certificate..."
+msgstr "Elekti atestilon de Atestilaŭtoritato (CA)..."
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
+msgid "Version 0"
+msgstr "Versio 0"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+msgid "Version 1"
+msgstr "Versio 1"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:3
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
+msgid "C_A certificate"
+msgstr "C_A-atestilo"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
+msgid "PEAP _version"
+msgstr "PEAP-_versiono"
+
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:3
+msgid "As_k for this password every time"
+msgstr "Ĉiam _postuli la pasvorton"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:260
+msgid "Unencrypted private keys are insecure"
+msgstr "Neĉifritaj privataj ŝlosiloj estas nesekuraj"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:263
+msgid ""
+"The selected private key does not appear to be protected by a password.  "
+"This could allow your security credentials to be compromised.  Please select "
+"a password-protected private key.\n"
+"\n"
+"(You can password-protect your private key with openssl)"
+msgstr ""
+"Ŝajne la elektita privata ŝlosilo ne estas protektata per pasvorto. Tio "
+"povas kaŭzi la forlikon de viaj sekurecinformoj. Bonvolu elekti pasvort-"
+"protektitan privatan ŝlosilon.\n"
+"\n"
+"(Vi povas pasvort-protekti vian privatan ŝlosilon per openssl)"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:428
+msgid "Choose your personal certificate..."
+msgstr "Elekti vian personan atestilon..."
+
+#: ../panels/network/wireless-security/eap-method-tls.c:440
+msgid "Choose your private key..."
+msgstr "Elekti vian privatan ŝlosilon..."
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:1
+msgid "I_dentity"
+msgstr "I_dento"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:2
+msgid "_User certificate"
+msgstr "_Uzantula atestilo"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:4
+msgid "Private _key"
+msgstr "Privata ŝ_losilo"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:5
+msgid "_Private key password"
+msgstr "_Privata ŝlosila pasvorto"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:230
+msgid "PAP"
+msgstr "PAP"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:247
+msgid "MSCHAP"
+msgstr "MSCHAP"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:280
+msgid "CHAP"
+msgstr "CHAP"
+
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
+msgid "Don't _warn me again"
+msgstr "Ne _averti min denove"
+
+#: ../panels/network/wireless-security/wireless-security.c:397
+msgid "TLS"
+msgstr "TLS"
+
+#: ../panels/network/wireless-security/wireless-security.c:421
+msgid "FAST"
+msgstr "FAST"
+
+#: ../panels/network/wireless-security/wireless-security.c:432
+msgid "Tunneled TLS"
+msgstr "Tunelita TLS"
+
+#: ../panels/network/wireless-security/wireless-security.c:443
+msgid "Protected EAP (PEAP)"
+msgstr "Protektita EAP (PEAP)"
+
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
+msgid "Au_thentication"
+msgstr "_Aŭtentigo"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:1
+msgid "1 (Default)"
+msgstr "1 (defaŭlte)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:2
+msgid "2"
+msgstr "2"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
+msgid "3"
+msgstr "3"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
+msgid "Open System"
+msgstr "Malferma sistemo"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+msgid "Shared Key"
+msgstr "Kunhavigita ŝlosilo"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
+msgid "_Key"
+msgstr "Ŝ_losilo"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
+msgid "Sho_w key"
+msgstr "_Montri ŝlosilon"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
+msgid "WEP inde_x"
+msgstr "WEP-a inde_kso"
+
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
+msgid "_Type"
+msgstr "_Speco"
 
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
@@ -104,28 +1759,6 @@ msgstr "Neniuj bildoj trovita"
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Vi povas aldoni bildojn al via %s dosierujo tiam ili montros ĉi tie"
 
-#: ../panels/background/cc-background-chooser-dialog.c:436
-#: ../panels/bluetooth/cc-bluetooth-panel.c:640
-#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:967
-#: ../panels/display/cc-display-panel.c:1495
-#: ../panels/display/cc-display-panel.c:1910
-#: ../panels/network/connection-editor/vpn-helpers.c:245
-#: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1201
-#: ../panels/network/net-device-wifi.c:1407
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
-#: ../panels/printers/cc-printers-panel.c:1946
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:467
-#: ../panels/search/cc-search-locations-dialog.c:682
-#: ../panels/sharing/cc-sharing-panel.c:421
-#: ../panels/user-accounts/um-fingerprint-dialog.c:269
-#: ../panels/user-accounts/um-photo-dialog.c:96
-#: ../panels/user-accounts/um-photo-dialog.c:221
-#: ../panels/user-accounts/um-user-panel.c:508
-msgid "_Cancel"
-msgstr "_Nuligi"
-
 #: ../panels/background/cc-background-chooser-dialog.c:437
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
@@ -165,27 +1798,9 @@ msgstr "Ekranfono;Ekrano;Labortablo;"
 msgid "Set Up New Device"
 msgstr "Agordi novan aparaton"
 
-#: ../panels/bluetooth/bluetooth.ui.h:2 ../panels/network/network.ui.h:9
-msgid "Remove Device"
-msgstr "Forigi aparaton"
-
 #: ../panels/bluetooth/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "Konekto"
-
-#: ../panels/bluetooth/bluetooth.ui.h:4
-#: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:2
-#: ../panels/printers/printers.ui.h:14
-msgid "page 1"
-msgstr "paĝo 1"
-
-#: ../panels/bluetooth/bluetooth.ui.h:5
-#: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:5
-#: ../panels/printers/printers.ui.h:16
-msgid "page 2"
-msgstr "paĝo 2"
 
 #: ../panels/bluetooth/bluetooth.ui.h:6
 msgid "Paired"
@@ -194,14 +1809,6 @@ msgstr "Parigite"
 #: ../panels/bluetooth/bluetooth.ui.h:7
 msgid "Type"
 msgstr "Tipo"
-
-#: ../panels/bluetooth/bluetooth.ui.h:8
-#: ../panels/network/connection-editor/ce-page-ip4.c:194
-#: ../panels/network/connection-editor/ce-page-ip4.c:456
-#: ../panels/network/connection-editor/ce-page-ip6.c:196
-#: ../panels/network/connection-editor/ce-page-ip6.c:460
-msgid "Address"
-msgstr "Adreso"
 
 #: ../panels/bluetooth/bluetooth.ui.h:9
 #, fuzzy
@@ -219,16 +1826,6 @@ msgstr "Klavaragordoj"
 #: ../panels/bluetooth/bluetooth.ui.h:12
 msgid "Send Files…"
 msgstr "Sendi doierojn…"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:366
-#: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
-msgid "Yes"
-msgstr "Jes"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:366
-#: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
-msgid "No"
-msgstr "Ne"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:479
 msgid "Bluetooth is disabled"
@@ -445,12 +2042,6 @@ msgstr "E_nporti"
 msgid "Supported ICC profiles"
 msgstr "Subtenataj ICC-profiloj"
 
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
-#: ../panels/network/wireless-security/eap-method-fast.c:410
-msgid "All files"
-msgstr "Ĉiuj dosieroj"
-
 #: ../panels/color/cc-color-panel.c:586
 msgid "Screen"
 msgstr "Ekrano"
@@ -485,11 +2076,6 @@ msgstr ""
 #, fuzzy
 msgid "Save Profile"
 msgstr "Forigi profilon"
-
-#: ../panels/color/cc-color-panel.c:968
-#: ../panels/network/connection-editor/vpn-helpers.c:375
-msgid "_Save"
-msgstr "Kon_servi"
 
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:1328
@@ -988,7 +2574,7 @@ msgid "Language"
 msgstr "Lingvo"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/mouse/cc-mouse-panel.c:120 ../panels/region/format-chooser.ui.h:2
+#: ../panels/mouse/cc-mouse-panel.c:112 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Finite"
 
@@ -1193,12 +2779,6 @@ msgstr "Duaranga koloro"
 msgid "Arrange Combined Displays"
 msgstr "Speguli ekranojn"
 
-#: ../panels/display/cc-display-panel.c:1497
-#: ../panels/display/cc-display-panel.c:1913
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
-msgid "_Apply"
-msgstr "_Apliki"
-
 #: ../panels/display/cc-display-panel.c:1518
 msgid "Drag displays to rearrange them"
 msgstr ""
@@ -1313,11 +2893,6 @@ msgstr "Elekti kiel uzi konektitajn ekranojn kaj projekciilojn"
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panelo;Projekciilo;xrandr;Ekrano;Distingivo;Aktualigi;"
-
-#. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:450 ../panels/network/panel-common.c:127
-msgid "Unknown"
-msgstr "Nekonate"
 
 #: ../panels/info/cc-info-panel.c:532
 #, fuzzy, c-format
@@ -1458,12 +3033,6 @@ msgstr "Ĝisdata sistemo"
 #: ../panels/info/cc-info-panel.c:1598
 msgid "Checking for Updates"
 msgstr "Regi pri ĝisdatigoj"
-
-#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
-#: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:44
-msgid "Details"
-msgstr "Detaloj"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
 msgid "View information about your system"
@@ -1753,18 +3322,6 @@ msgstr "Malpligrandigi la tekston"
 msgid "High contrast on or off"
 msgstr ""
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:271
-#: ../panels/keyboard/cc-keyboard-option.c:390
-#: ../panels/keyboard/keyboard-shortcuts.c:1159
-#: ../panels/network/network-wifi.ui.h:29
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Elŝaltite"
-
 #. Translators: This key is also known as 'third level
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
@@ -1939,12 +3496,12 @@ msgstr ""
 msgid "_Reassign"
 msgstr "_Reatribui"
 
-#: ../panels/mouse/cc-mouse-panel.c:100
+#: ../panels/mouse/cc-mouse-panel.c:96
 #, fuzzy
 msgid "Test Your _Settings"
 msgstr "Viaj agordoj"
 
-#: ../panels/mouse/cc-mouse-panel.c:117
+#: ../panels/mouse/cc-mouse-panel.c:109
 #, fuzzy
 msgid "Test Your Settings"
 msgstr "Viaj agordoj"
@@ -2102,1612 +3659,6 @@ msgstr "Tempolimo de du_obla klako"
 #: ../panels/mouse/gnome-mouse-test.c:148
 msgid "Single click, secondary button"
 msgstr ""
-
-#. TRANSLATORS: this is to disable the radio hardware in the
-#. * network panel
-#: ../panels/network/cc-network-panel.c:358
-#, fuzzy
-msgid "Air_plane Mode"
-msgstr "Aeroplana reĝimo"
-
-#: ../panels/network/cc-network-panel.c:928
-msgid "Network proxy"
-msgstr "Retprokurilo"
-
-#. Translators: this is the title of the connection details
-#. * window for vpn connections, it is also used to display
-#. * vpn connections in the device list.
-#.
-#: ../panels/network/cc-network-panel.c:1107 ../panels/network/net-vpn.c:285
-#: ../panels/network/net-vpn.c:438
-#, c-format
-msgid "%s VPN"
-msgstr "%s VPN"
-
-#. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1242
-msgid "The system network services are not compatible with this version."
-msgstr "La sistemaj retservoj ne kongruas kun ĉi tiu versio."
-
-#: ../panels/network/connection-editor/8021x-security-page.ui.h:1
-#, fuzzy
-msgid "802.1x _Security"
-msgstr "Sekureco"
-
-#: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:1
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
-msgid "Anony_mous identity"
-msgstr ""
-
-#: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:4
-#, fuzzy
-msgid "Inner _authentication"
-msgstr "<b>_Uzi aŭtentigon</b>"
-
-#: ../panels/network/connection-editor/ce-page-8021x-security.c:108
-#: ../panels/network/connection-editor/ce-page-security.c:455
-#: ../panels/network/connection-editor/details-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:4
-msgid "Security"
-msgstr "Sekureco"
-
-#: ../panels/network/connection-editor/ce-page.c:507
-msgid "automatic"
-msgstr "aŭtomate"
-
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:221
-#: ../panels/network/net-device-wifi.c:382
-msgid "WEP"
-msgstr "WEP"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:225
-#: ../panels/network/net-device-wifi.c:387
-#: ../panels/network/network-wifi.ui.h:17
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:229
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:234
-msgid "Enterprise"
-msgstr "Enterpreno"
-
-#: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:239
-#: ../panels/network/net-device-wifi.c:372
-#, fuzzy
-msgctxt "Wifi security"
-msgid "None"
-msgstr "Neniu"
-
-#: ../panels/network/connection-editor/ce-page-details.c:91
-#: ../panels/power/power.ui.h:19
-msgid "Never"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:803
-msgid "Today"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:806
-msgid "Yesterday"
-msgstr "Hieraŭ"
-
-#: ../panels/network/connection-editor/ce-page-details.c:106
-#: ../panels/network/net-device-ethernet.c:125
-#: ../panels/network/net-device-wifi.c:476
-#, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Translators: network device speed
-#: ../panels/network/connection-editor/ce-page-details.c:155
-#: ../panels/network/net-device-ethernet.c:53
-#: ../panels/network/net-device-wifi.c:534
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/s"
-
-#: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:563
-#, fuzzy
-msgctxt "Signal strength"
-msgid "None"
-msgstr "Neniu"
-
-#: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:565
-#, fuzzy
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "Lame"
-
-#: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:567
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:569
-#, fuzzy
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "Bone"
-
-#: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:571
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ethernet.c:213
-#: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:255
-#: ../panels/network/network-wifi.ui.h:45
-msgid "Identity"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:207
-#: ../panels/network/connection-editor/ce-page-ip4.c:469
-msgid "Netmask"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:221
-#: ../panels/network/connection-editor/ce-page-ip4.c:482
-#: ../panels/network/connection-editor/ce-page-ip6.c:222
-#: ../panels/network/connection-editor/ce-page-ip6.c:490
-#: ../panels/network/network-vpn.ui.h:3
-msgid "Gateway"
-msgstr "Kluzo"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:238
-#: ../panels/network/connection-editor/ce-page-ip6.c:239
-msgid "Delete Address"
-msgstr "Forigi adreson"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:292
-#: ../panels/network/connection-editor/ce-page-ip6.c:293
-msgid "Add"
-msgstr "Aldoni"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:360
-#: ../panels/network/connection-editor/ce-page-ip6.c:364
-msgid "Server"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:377
-#: ../panels/network/connection-editor/ce-page-ip6.c:381
-#, fuzzy
-msgid "Delete DNS Server"
-msgstr "Forigi aparaton"
-
-#. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:496
-#: ../panels/network/connection-editor/ce-page-ip6.c:504
-#, fuzzy
-msgctxt "network parameters"
-msgid "Metric"
-msgstr "Metra"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:517
-#: ../panels/network/connection-editor/ce-page-ip6.c:525
-#, fuzzy
-msgid "Delete Route"
-msgstr "Defaŭlta kurso"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:632
-#: ../panels/network/network-wifi.ui.h:25
-#, fuzzy
-msgid "Automatic (DHCP)"
-msgstr "Aŭtomate"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:636
-#: ../panels/network/connection-editor/ce-page-ip6.c:638
-#: ../panels/network/network-wifi.ui.h:24
-msgid "Manual"
-msgstr "Permane"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:640
-#: ../panels/network/connection-editor/ce-page-ip6.c:642
-msgid "Link-Local Only"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:942
-#: ../panels/network/network-wifi.ui.h:46
-msgid "IPv4"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:209
-#: ../panels/network/connection-editor/ce-page-ip6.c:473
-msgid "Prefix"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:630
-#: ../panels/network/connection-editor/ethernet-page.ui.h:1
-#: ../panels/network/connection-editor/ip4-page.ui.h:4
-#: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-msgid "Automatic"
-msgstr "Aŭtomate"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:634
-#, fuzzy
-msgid "Automatic, DHCP only"
-msgstr "_Aŭtomata ensaluto"
-
-#: ../panels/network/connection-editor/ce-page-ip6.c:902
-#: ../panels/network/network-wifi.ui.h:47
-msgid "IPv6"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:49
-msgid "Reset"
-msgstr "Reagordi"
-
-#: ../panels/network/connection-editor/ce-page-security.c:250
-#, fuzzy
-msgctxt "Wi-Fi/Ethernet security"
-msgid "None"
-msgstr "Neniu"
-
-#: ../panels/network/connection-editor/ce-page-security.c:273
-msgid "WEP 40/128-bit Key (Hex or ASCII)"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-security.c:283
-msgid "WEP 128-bit Passphrase"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-security.c:296
-#: ../panels/network/wireless-security/wireless-security.c:409
-msgid "LEAP"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-security.c:309
-msgid "Dynamic WEP (802.1x)"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-security.c:323
-msgid "WPA & WPA2 Personal"
-msgstr ""
-
-#: ../panels/network/connection-editor/ce-page-security.c:337
-#, fuzzy
-msgid "WPA & WPA2 Enterprise"
-msgstr "Enterpreno"
-
-#: ../panels/network/connection-editor/details-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:2
-msgid "Signal Strength"
-msgstr ""
-
-#: ../panels/network/connection-editor/details-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:3
-#, fuzzy
-msgid "Link speed"
-msgstr "Rapido de kursora pulsado"
-
-#: ../panels/network/connection-editor/details-page.ui.h:4
-#: ../panels/network/net-device-ethernet.c:158
-#: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
-msgid "IPv4 Address"
-msgstr "IPv4-adreso"
-
-#: ../panels/network/connection-editor/details-page.ui.h:5
-#: ../panels/network/net-device-ethernet.c:159
-#: ../panels/network/net-device-ethernet.c:163
-#: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
-msgid "IPv6 Address"
-msgstr "IPv6-adreso"
-
-#: ../panels/network/connection-editor/details-page.ui.h:6
-#: ../panels/network/net-device-ethernet.c:166
-#: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:7
-msgid "Hardware Address"
-msgstr "Aparatara adreso"
-
-#: ../panels/network/connection-editor/details-page.ui.h:7
-#: ../panels/network/net-device-ethernet.c:170
-#: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-msgid "Default Route"
-msgstr "Defaŭlta kurso"
-
-#: ../panels/network/connection-editor/details-page.ui.h:8
-#: ../panels/network/connection-editor/ip4-page.ui.h:3
-#: ../panels/network/connection-editor/ip6-page.ui.h:3
-#: ../panels/network/net-device-ethernet.c:172
-#: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-msgid "DNS"
-msgstr "DNS"
-
-#: ../panels/network/connection-editor/details-page.ui.h:9
-msgid "Last Used"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:2
-msgid "Twisted Pair (TP)"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:3
-msgid "Attachment Unit Interface (AUI)"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:4
-msgid "BNC"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:5
-msgid "Media Independent Interface (MII)"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:6
-msgid "10 Mb/s"
-msgstr "10 Mb/s"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:7
-msgid "100 Mb/s"
-msgstr "100 Mb/s"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:8
-msgid "1 Gb/s"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:9
-msgid "10 Gb/s"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:10
-#: ../panels/network/connection-editor/vpn-page.ui.h:1
-msgid "_Name"
-msgstr "_Nomo"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:11
-#: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:36
-#, fuzzy
-msgid "_MAC Address"
-msgstr "_Adreso:"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:12
-msgid "M_TU"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:13
-#: ../panels/network/connection-editor/wifi-page.ui.h:5
-#, fuzzy
-msgid "_Cloned Address"
-msgstr "_Adreso:"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:14
-#, fuzzy
-msgid "bytes"
-msgstr "%u bajto"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
-msgid "Make available to other _users"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:16
-#: ../panels/network/connection-editor/wifi-page.ui.h:7
-msgid "Connect _automatically"
-msgstr ""
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:17
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-#: ../panels/network/connection-editor/wifi-page.ui.h:8
-msgid "Firewall _Zone"
-msgstr ""
-
-#: ../panels/network/connection-editor/firewall-helpers.c:48
-#: ../panels/network/connection-editor/firewall-helpers.c:112
-#, fuzzy
-msgctxt "Firewall zone"
-msgid "Default"
-msgstr "Defaŭlto"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:49
-msgid "The zone defines the trust level of the connection"
-msgstr ""
-
-#: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:22
-msgid "IPv_4"
-msgstr ""
-
-#: ../panels/network/connection-editor/ip4-page.ui.h:2
-#: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:23
-#, fuzzy
-msgid "_Addresses"
-msgstr "_Adreso:"
-
-#: ../panels/network/connection-editor/ip4-page.ui.h:5
-#: ../panels/network/connection-editor/ip6-page.ui.h:5
-#, fuzzy
-msgid "Automatic DNS"
-msgstr "Aŭtomate"
-
-#: ../panels/network/connection-editor/ip4-page.ui.h:6
-#: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:30
-msgid "Routes"
-msgstr ""
-
-#: ../panels/network/connection-editor/ip4-page.ui.h:7
-#: ../panels/network/connection-editor/ip6-page.ui.h:7
-#, fuzzy
-msgid "Automatic Routes"
-msgstr "Aŭtomate"
-
-#: ../panels/network/connection-editor/ip4-page.ui.h:8
-#: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:32
-msgid "Use this connection _only for resources on its network"
-msgstr ""
-
-#: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:34
-msgid "IPv_6"
-msgstr ""
-
-#: ../panels/network/connection-editor/net-connection-editor.c:268
-#, fuzzy
-msgid "Unable to open connection editor"
-msgstr "Ne eblas malfermi adresaron"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:286
-#, fuzzy
-msgid "New Profile"
-msgstr "Neniu profilo:"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:511
-#: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1471
-msgid "_Add"
-msgstr "_Aldoni"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:595
-#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
-msgid "VPN"
-msgstr "VPN"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:596
-msgid "Bond"
-msgstr ""
-
-#: ../panels/network/connection-editor/net-connection-editor.c:597
-msgid "Bridge"
-msgstr ""
-
-#: ../panels/network/connection-editor/net-connection-editor.c:598
-msgid "VLAN"
-msgstr ""
-
-#: ../panels/network/connection-editor/net-connection-editor.c:749
-#, fuzzy
-msgid "Could not load VPN plugins"
-msgstr "Ne eblas ŝargi uzantointerfacon: %s"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:818
-#, fuzzy
-msgid "Import from file…"
-msgstr "Alia profilo..."
-
-#: ../panels/network/connection-editor/net-connection-editor.c:889
-#, fuzzy
-msgid "Add Network Connection"
-msgstr "Retagordoj"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:39
-msgid "_Reset"
-msgstr "_Reagordi"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1408
-#: ../panels/network/network-wifi.ui.h:40
-msgid "_Forget"
-msgstr "_Forgesi"
-
-#: ../panels/network/connection-editor/reset-page.ui.h:3
-msgid ""
-"Reset the settings for this network, including passwords, but remember it as "
-"a preferred network"
-msgstr ""
-
-#: ../panels/network/connection-editor/reset-page.ui.h:4
-msgid ""
-"Remove all details relating to this network and do not try to automatically "
-"connect"
-msgstr ""
-
-#: ../panels/network/connection-editor/security-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:14
-msgid "S_ecurity"
-msgstr "S_ekureco"
-
-#: ../panels/network/connection-editor/vpn-helpers.c:205
-msgid "Cannot import VPN connection"
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:207
-#, c-format
-msgid ""
-"The file '%s' could not be read or does not contain recognized VPN "
-"connection information\n"
-"\n"
-"Error: %s."
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:242
-#, fuzzy
-msgid "Select file to import"
-msgstr "Elekti vian foton"
-
-#: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1947
-#: ../panels/sharing/cc-sharing-panel.c:422
-#: ../panels/user-accounts/um-photo-dialog.c:222
-msgid "_Open"
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:294
-#, fuzzy, c-format
-msgid "A file named \"%s\" already exists."
-msgstr "Uzanto kun la nomo '%s' jam ekzistas."
-
-#: ../panels/network/connection-editor/vpn-helpers.c:296
-msgid "_Replace"
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:298
-#, c-format
-msgid "Do you want to replace %s with the VPN connection you are saving?"
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:334
-msgid "Cannot export VPN connection"
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:336
-#, c-format
-msgid ""
-"The VPN connection '%s' could not be exported to %s.\n"
-"\n"
-"Error: %s."
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-helpers.c:371
-msgid "Export VPN connection..."
-msgstr ""
-
-#: ../panels/network/connection-editor/vpn-page.ui.h:4
-msgid "(Error: unable to load VPN connection editor)"
-msgstr ""
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:12
-msgid "_SSID"
-msgstr ""
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_BSSID"
-msgstr ""
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:16
-msgid "My Home Network"
-msgstr "Mia hejma reto reto"
-
-#: ../panels/network/connection-editor/wifi-page.ui.h:6
-msgid "Make available to _other users"
-msgstr ""
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#: ../panels/network/network-mobile.ui.h:7
-msgid "Network"
-msgstr "Reto"
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-msgid "Control how you connect to the Internet"
-msgstr "Regi kiel vi konektas al la interreto."
-
-#. Translators: those are keywords for the network control-center panel
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid ""
-"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"vlan;bridge;bond;"
-msgstr "Reto;Sendrata;Wi-Fi;ŬiFi;Wifi;Prokurilo;Modemo;Bludento;VPR;"
-
-#: ../panels/network/net-device-bond.c:77
-msgid "Bond slaves"
-msgstr ""
-
-#: ../panels/network/net-device-bridge.c:77
-msgid "Bridge slaves"
-msgstr ""
-
-#: ../panels/network/net-device-ethernet.c:111
-#: ../panels/network/net-device-wifi.c:462
-msgid "never"
-msgstr ""
-
-#: ../panels/network/net-device-ethernet.c:121
-#: ../panels/network/net-device-wifi.c:472
-msgid "today"
-msgstr ""
-
-#: ../panels/network/net-device-ethernet.c:123
-#: ../panels/network/net-device-wifi.c:474
-msgid "yesterday"
-msgstr ""
-
-#: ../panels/network/net-device-ethernet.c:161
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
-#: ../panels/printers/printers.ui.h:13
-msgid "IP Address"
-msgstr "IP-Adreso"
-
-#: ../panels/network/net-device-ethernet.c:177
-#: ../panels/network/network-wifi.ui.h:10
-#, fuzzy
-msgid "Last used"
-msgstr "Paŭzigite"
-
-#. Translators: This is used as the title of the connection
-#. * details window for ethernet, if there is only a single
-#. * profile. It is also used to display ethernet in the
-#. * device list.
-#.
-#: ../panels/network/net-device-ethernet.c:287
-#: ../panels/network/network-ethernet.ui.h:1
-#: ../panels/network/network-simple.ui.h:1
-msgid "Wired"
-msgstr "Drate"
-
-#: ../panels/network/net-device-ethernet.c:355
-#: ../panels/network/net-device-wifi.c:1549
-#: ../panels/network/network-ethernet.ui.h:3
-#: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8
-msgid "Options…"
-msgstr "Opcioj..."
-
-#: ../panels/network/net-device-ethernet.c:492
-#, c-format
-msgid "Profile %d"
-msgstr "Profilo %d"
-
-#: ../panels/network/net-device-mobile.c:239
-#, fuzzy
-msgid "Add new connection"
-msgstr "Konekto"
-
-#: ../panels/network/net-device-wifi.c:1117
-msgid ""
-"If you have a connection to the Internet other than wireless, you can set up "
-"a wireless hotspot to share the connection with others."
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1121
-#, c-format
-msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1125
-msgid ""
-"It is not possible to access the Internet through your wireless while the "
-"hotspot is active."
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1199
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Haltigi retkaptejon kaj malkonektiĝi ĉiujn uzantojn?"
-
-#: ../panels/network/net-device-wifi.c:1202
-msgid "_Stop Hotspot"
-msgstr "Halti_gi retkaptejon"
-
-#: ../panels/network/net-device-wifi.c:1274
-msgid "System policy prohibits use as a Hotspot"
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1277
-msgid "Wireless device does not support Hotspot mode"
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1404
-msgid ""
-"Network details for the selected networks, including passwords and any "
-"custom configuration will be lost."
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1714
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
-msgid "History"
-msgstr ""
-
-#: ../panels/network/net-device-wifi.c:1718 ../panels/power/power.ui.h:21
-#: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
-#: ../panels/wacom/cc-wacom-page.c:525
-msgid "_Close"
-msgstr "_Fermi"
-
-#. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1726
-#, fuzzy
-msgctxt "Wi-Fi Network"
-msgid "_Forget"
-msgstr "Forgesi"
-
-#. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/net-proxy.c:67
-msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
-msgstr ""
-"Aŭtomata malkovro de retaj prokuriloj estas uzata kiam agord-URL ne estas "
-"provizita."
-
-#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
-#. * network, then anyone else on that network can tell your
-#. * machine that it should proxy all of your web traffic
-#. * through them.
-#: ../panels/network/net-proxy.c:75
-msgid "This is not recommended for untrusted public networks."
-msgstr "Tio ne estas rekomendita por nefidindaj publikaj retoj."
-
-#: ../panels/network/net-proxy.c:417
-msgid "Proxy"
-msgstr "Prokurilo"
-
-#: ../panels/network/network-ethernet.ui.h:2
-msgid "_Add Profile…"
-msgstr "_Aldoni profilon..."
-
-#: ../panels/network/network-mobile.ui.h:1
-msgid "IMEI"
-msgstr "IMEI"
-
-#: ../panels/network/network-mobile.ui.h:2
-msgid "Provider"
-msgstr "Provizanto"
-
-#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
-msgctxt "proxy method"
-msgid "None"
-msgstr "Neniu"
-
-#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:6
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "Permane"
-
-#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:7
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "Aŭtomate"
-
-#: ../panels/network/network-proxy.ui.h:4
-msgid "_Method"
-msgstr "_Metodo"
-
-#: ../panels/network/network-proxy.ui.h:5
-msgid "_Configuration URL"
-msgstr "_Agordaradreso"
-
-#: ../panels/network/network-proxy.ui.h:6
-msgid "_HTTP Proxy"
-msgstr "_HTTP-prokurilo"
-
-#: ../panels/network/network-proxy.ui.h:7
-msgid "H_TTPS Proxy"
-msgstr "H_TTPS-prokurilo"
-
-#: ../panels/network/network-proxy.ui.h:8
-msgid "_FTP Proxy"
-msgstr "_FTP-prokurilo"
-
-#: ../panels/network/network-proxy.ui.h:9
-msgid "_Socks Host"
-msgstr "_SOCKS-Gastigilo"
-
-#: ../panels/network/network-proxy.ui.h:10
-msgid "_Ignore Hosts"
-msgstr ""
-
-#: ../panels/network/network-proxy.ui.h:11
-#, fuzzy
-msgid "HTTP proxy port"
-msgstr "_HTTP-prokurilo"
-
-#: ../panels/network/network-proxy.ui.h:12
-#, fuzzy
-msgid "HTTPS proxy port"
-msgstr "H_TTPS-prokurilo"
-
-#: ../panels/network/network-proxy.ui.h:13
-#, fuzzy
-msgid "FTP proxy port"
-msgstr "_FTP-prokurilo"
-
-#: ../panels/network/network-proxy.ui.h:14
-#, fuzzy
-msgid "Socks proxy port"
-msgstr "SOCKS-pordo"
-
-#: ../panels/network/network-simple.ui.h:7
-#, fuzzy
-msgid "Turn device off"
-msgstr "Elŝalti aparaton"
-
-#: ../panels/network/network.ui.h:1
-msgid "Select the interface to use for the new service"
-msgstr "Elektu la uzendan interfacon por la nova servo"
-
-#: ../panels/network/network.ui.h:2
-msgid "C_reate…"
-msgstr "K_rei…"
-
-#: ../panels/network/network.ui.h:3
-msgid "_Interface"
-msgstr "_Interfaco"
-
-#: ../panels/network/network.ui.h:8
-msgid "Add Device"
-msgstr "Aldoni aparaton"
-
-#: ../panels/network/network-vpn.ui.h:2
-msgid "VPN Type"
-msgstr "VPN-tipo"
-
-#: ../panels/network/network-vpn.ui.h:4
-msgid "Group Name"
-msgstr "Grupnomo"
-
-#: ../panels/network/network-vpn.ui.h:5
-msgid "Group Password"
-msgstr "Gruppasvorto"
-
-#: ../panels/network/network-vpn.ui.h:6
-#: ../panels/printers/authentication-dialog.ui.h:4
-msgid "Username"
-msgstr "Uzantonomo"
-
-#: ../panels/network/network-vpn.ui.h:7
-#, fuzzy
-msgid "Turn VPN connection off"
-msgstr "En- aŭ elŝalti:"
-
-#: ../panels/network/network-wifi.ui.h:1
-#, fuzzy
-msgid "Automatic _Connect"
-msgstr "_Aŭtomata ensaluto"
-
-#: ../panels/network/network-wifi.ui.h:11
-msgid "details"
-msgstr "detaloj"
-
-#: ../panels/network/network-wifi.ui.h:15
-#: ../panels/network/wireless-security/eap-method-leap.ui.h:2
-#: ../panels/network/wireless-security/eap-method-simple.ui.h:2
-#: ../panels/network/wireless-security/ws-leap.ui.h:2
-#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-msgid "_Password"
-msgstr "_Pasvorto"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "None"
-msgstr "Neniu"
-
-#: ../panels/network/network-wifi.ui.h:19
-#, fuzzy
-msgid "Show P_assword"
-msgstr "_Montri pasvorton"
-
-#: ../panels/network/network-wifi.ui.h:20
-#, fuzzy
-msgid "Make available to other users"
-msgstr "Fiaskis krei uzanton"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "identity"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:26
-msgid "Automatic (DHCP) addresses only"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:27
-msgid "Link-local only"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:28
-msgid "Shared with other computers"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:31
-#, fuzzy
-msgid "_Ignore automatically obtained routes"
-msgstr "Ne povas forigi aŭtomate aldonitan profilon"
-
-#: ../panels/network/network-wifi.ui.h:33
-msgid "ipv4"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:35
-msgid "ipv6"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:37
-msgid "_Cloned MAC Address"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:38
-msgid "hardware"
-msgstr "aparataro"
-
-#: ../panels/network/network-wifi.ui.h:41
-msgid ""
-"Reset the settings for this connection to their defaults, but remember as a "
-"preferred connection."
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:42
-msgid ""
-"Remove all details relating to this network and do not try to automatically "
-"connect to it."
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:43
-msgid "reset"
-msgstr "reagordi"
-
-#: ../panels/network/network-wifi.ui.h:48
-msgid "Hardware"
-msgstr "Aparataro"
-
-#: ../panels/network/network-wifi.ui.h:50
-#, fuzzy
-msgid "Wi-Fi Hotspot"
-msgstr "Retkaptejo"
-
-#: ../panels/network/network-wifi.ui.h:51
-msgid "_Turn On"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:52
-msgid "Wi-Fi"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:53
-#, fuzzy
-msgid "Turn Wi-Fi off"
-msgstr "En- aŭ elŝalti:"
-
-#: ../panels/network/network-wifi.ui.h:54
-#, fuzzy
-msgid "_Use as Hotspot…"
-msgstr "_Uzi kiel retkaptejo..."
-
-#: ../panels/network/network-wifi.ui.h:55
-msgid "_Connect to Hidden Network…"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:56
-msgid "_History"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:57
-msgid "Switch off to connect to a Wi-Fi network"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:58
-msgid "Network Name"
-msgstr "Retnomo"
-
-#: ../panels/network/network-wifi.ui.h:59
-#, fuzzy
-msgid "Connected Devices"
-msgstr "Konektite"
-
-#: ../panels/network/network-wifi.ui.h:60
-#, fuzzy
-msgid "Security type"
-msgstr "Sekurec-ŝlosilo"
-
-#: ../panels/network/network-wifi.ui.h:61
-#, fuzzy
-msgid "Security key"
-msgstr "Sekurec-ŝlosilo"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:131
-msgid "Ad-hoc"
-msgstr "Provizore"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:135
-msgid "Infrastructure"
-msgstr "Infrastrukturo"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:151 ../panels/network/panel-common.c:205
-msgid "Status unknown"
-msgstr "Nekonata stato"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:155
-msgid "Unmanaged"
-msgstr "Nemastrumite"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:159
-msgid "Unavailable"
-msgstr "Nedisponeble"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:169 ../panels/network/panel-common.c:211
-msgid "Connecting"
-msgstr "Konektante"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:173 ../panels/network/panel-common.c:215
-msgid "Authentication required"
-msgstr "Aŭtentokontrolo estas bezonata"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
-msgid "Connected"
-msgstr "Konektite"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
-msgid "Disconnecting"
-msgstr "Malkontaktante"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:185 ../panels/network/panel-common.c:223
-msgid "Connection failed"
-msgstr "Konekto fiaskis"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:189 ../panels/network/panel-common.c:231
-msgid "Status unknown (missing)"
-msgstr "Nekonata stato (mankanta)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:227
-msgid "Not connected"
-msgstr "Ne konekite"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:252
-#, fuzzy
-msgid "Configuration failed"
-msgstr "Konekto fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:256
-#, fuzzy
-msgid "IP configuration failed"
-msgstr "Prokurila agordo"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:260
-#, fuzzy
-msgid "IP configuration expired"
-msgstr "Prokurila agordo"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:264
-msgid "Secrets were required, but not provided"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:268
-msgid "802.1x supplicant disconnected"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:272
-msgid "802.1x supplicant configuration failed"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:276
-msgid "802.1x supplicant failed"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:280
-msgid "802.1x supplicant took too long to authenticate"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:284
-msgid "PPP service failed to start"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:288
-#, fuzzy
-msgid "PPP service disconnected"
-msgstr "Malkonektite"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:292
-msgid "PPP failed"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:296
-msgid "DHCP client failed to start"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:300
-msgid "DHCP client error"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:304
-#, fuzzy
-msgid "DHCP client failed"
-msgstr "Konekto fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:308
-msgid "Shared connection service failed to start"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:312
-#, fuzzy
-msgid "Shared connection service failed"
-msgstr "Konekto fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:316
-msgid "AutoIP service failed to start"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:320
-msgid "AutoIP service error"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:324
-#, fuzzy
-msgid "AutoIP service failed"
-msgstr "Aŭtentokontrolo fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:328
-msgid "Line busy"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:332
-msgid "No dial tone"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:336
-msgid "No carrier could be established"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:340
-msgid "Dialing request timed out"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:344
-msgid "Dialing attempt failed"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:348
-#, fuzzy
-msgid "Modem initialization failed"
-msgstr "Aŭtentokontrolo fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:352
-#, fuzzy
-msgid "Failed to select the specified APN"
-msgstr "Fiaskis forigi uzanton"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:356
-msgid "Not searching for networks"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:360
-#, fuzzy
-msgid "Network registration denied"
-msgstr "Retagordoj"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:364
-msgid "Network registration timed out"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:368
-msgid "Failed to register with the requested network"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:372
-msgid "PIN check failed"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:376
-msgid "Firmware for the device may be missing"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:380
-#, fuzzy
-msgid "Connection disappeared"
-msgstr "Konekto fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:384
-msgid "Existing connection was assumed"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:388
-#, fuzzy
-msgid "Modem not found"
-msgstr "klavo ne trovita [%s]\n"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:392
-msgid "Bluetooth connection failed"
-msgstr "Bludenta konekto fiaskis"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:396
-msgid "SIM Card not inserted"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:400
-msgid "SIM Pin required"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:404
-msgid "SIM Puk required"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:408
-#, fuzzy
-msgid "SIM wrong"
-msgstr "Forte"
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:412
-msgid "InfiniBand device does not support connected mode"
-msgstr ""
-
-#. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:416
-#, fuzzy
-msgid "Connection dependency failed"
-msgstr "Konekto fiaskis"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:440
-msgid "Firmware missing"
-msgstr "Mikroprogramaro mankas"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:444 ../panels/network/panel-common.c:447
-msgid "Cable unplugged"
-msgstr "Kablo ne konektita"
-
-#: ../panels/network/wireless-security/eap-method.c:275
-msgid "No Certificate Authority certificate chosen"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method.c:276
-msgid ""
-"Not using a Certificate Authority (CA) certificate can result in connections "
-"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
-"Authority certificate?"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method.c:281
-msgid "Ignore"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method.c:285
-msgid "Choose CA Certificate"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method.c:645
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method.c:648
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.c:261
-#: ../panels/network/wireless-security/eap-method-peap.c:280
-msgid "GTC"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.c:277
-#: ../panels/network/wireless-security/eap-method-peap.c:246
-#: ../panels/network/wireless-security/eap-method-ttls.c:263
-msgid "MSCHAPv2"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.c:399
-msgid "Choose a PAC file..."
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.c:406
-msgid "PAC files (*.pac)"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
-#, fuzzy
-msgid "PAC _file"
-msgstr "Ĉiuj dosieroj"
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#, fuzzy
-msgid "_Inner authentication"
-msgstr "<b>_Uzi aŭtentigon</b>"
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
-msgid "PAC pro_visioning"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
-#: ../panels/printers/authentication-dialog.ui.h:1
-msgid " "
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
-msgid "Anonymous"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#, fuzzy
-msgid "Authenticated"
-msgstr "_Aŭtentigi"
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
-msgid "Both"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-leap.ui.h:1
-#: ../panels/network/wireless-security/eap-method-simple.ui.h:1
-#: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "_Username"
-msgstr "_Uzantonomo"
-
-#: ../panels/network/wireless-security/eap-method-leap.ui.h:3
-#: ../panels/network/wireless-security/eap-method-simple.ui.h:4
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:6
-#: ../panels/network/wireless-security/ws-leap.ui.h:3
-#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
-msgid "Sho_w password"
-msgstr "_Montri pasvorton"
-
-#: ../panels/network/wireless-security/eap-method-peap.c:263
-#: ../panels/network/wireless-security/wireless-security.c:385
-msgid "MD5"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-peap.c:350
-#: ../panels/network/wireless-security/eap-method-tls.c:434
-#: ../panels/network/wireless-security/eap-method-ttls.c:350
-msgid "Choose a Certificate Authority certificate..."
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
-msgid "Version 0"
-msgstr "Versio 0"
-
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
-msgid "Version 1"
-msgstr "Versio 1"
-
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:3
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
-#, fuzzy
-msgid "C_A certificate"
-msgstr "_Aŭtentigi"
-
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
-msgid "PEAP _version"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-simple.ui.h:3
-msgid "As_k for this password every time"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.c:260
-msgid "Unencrypted private keys are insecure"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.c:263
-msgid ""
-"The selected private key does not appear to be protected by a password.  "
-"This could allow your security credentials to be compromised.  Please select "
-"a password-protected private key.\n"
-"\n"
-"(You can password-protect your private key with openssl)"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.c:428
-#, fuzzy
-msgid "Choose your personal certificate..."
-msgstr "Agordi viajn personajn informojn"
-
-#: ../panels/network/wireless-security/eap-method-tls.c:440
-msgid "Choose your private key..."
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:1
-msgid "I_dentity"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:2
-msgid "_User certificate"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-msgid "Private _key"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:5
-#, fuzzy
-msgid "_Private key password"
-msgstr "_Nova pasvorto"
-
-#: ../panels/network/wireless-security/eap-method-ttls.c:230
-#, fuzzy
-msgid "PAP"
-msgstr "WPA"
-
-#: ../panels/network/wireless-security/eap-method-ttls.c:247
-msgid "MSCHAP"
-msgstr ""
-
-#: ../panels/network/wireless-security/eap-method-ttls.c:280
-msgid "CHAP"
-msgstr ""
-
-#: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
-msgid "Don't _warn me again"
-msgstr ""
-
-#: ../panels/network/wireless-security/wireless-security.c:397
-msgid "TLS"
-msgstr ""
-
-#: ../panels/network/wireless-security/wireless-security.c:421
-msgid "FAST"
-msgstr ""
-
-#: ../panels/network/wireless-security/wireless-security.c:432
-msgid "Tunneled TLS"
-msgstr ""
-
-#: ../panels/network/wireless-security/wireless-security.c:443
-msgid "Protected EAP (PEAP)"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
-#, fuzzy
-msgid "Au_thentication"
-msgstr "_Aŭtentigi"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:1
-#, fuzzy
-msgid "1 (Default)"
-msgstr "Defaŭlto"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:2
-msgid "2"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
-msgid "3"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-#, fuzzy
-msgid "Open System"
-msgstr "Dosiersistemo"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
-msgid "Shared Key"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
-msgid "_Key"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
-msgid "Sho_w key"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
-msgid "WEP inde_x"
-msgstr ""
-
-#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
-#, fuzzy
-msgid "_Type"
-msgstr "_Tipo:"
 
 #. TRANSLATORS: this is the per application switch for message tray usage.
 #: ../panels/notifications/cc-edit-dialog.c:39
