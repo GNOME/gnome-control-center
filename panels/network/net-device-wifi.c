@@ -1437,6 +1437,18 @@ check_toggled (GtkToggleButton *check, GtkWidget *forget)
 }
 
 static void
+update_forget (GtkWidget *forget,
+               gpointer   row)
+{
+        GList *rows;
+
+        rows = g_object_steal_data (G_OBJECT (forget), "rows");
+        rows = g_list_remove (rows, row);
+        g_object_set_data_full (G_OBJECT (forget), "rows", rows, (GDestroyNotify)g_list_free);
+        gtk_widget_set_sensitive (forget, rows != NULL);
+}
+
+static void
 make_row (GtkSizeGroup   *rows,
           GtkSizeGroup   *icons,
           GtkWidget      *forget,
@@ -1513,6 +1525,8 @@ make_row (GtkSizeGroup   *rows,
                 gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
                 gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
                 gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+                g_signal_connect_object (row, "destroy",
+                                         G_CALLBACK (update_forget), forget, G_CONNECT_SWAPPED);
         }
         if (check_out)
                 *check_out = widget;
