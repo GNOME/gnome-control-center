@@ -1415,7 +1415,7 @@ check_toggled (GtkToggleButton *check, GtkWidget *forget)
         GtkWidget *row;
         GList *rows;
 
-        row = gtk_widget_get_parent (GTK_WIDGET (check));
+        row = gtk_widget_get_ancestor (GTK_WIDGET (check), GTK_TYPE_LIST_BOX_ROW);
         active = gtk_toggle_button_get_active (check);
         rows = g_object_steal_data (G_OBJECT (forget), "rows");
 
