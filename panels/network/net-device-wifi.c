@@ -1593,8 +1593,11 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_show_all (row);
 
         g_object_set_data (G_OBJECT (row), "ap", ap);
-        g_object_set_data (G_OBJECT (row), "connection", connection);
-
+        if (connection) {
+                g_object_set_data (G_OBJECT (row), "connection", connection);
+                g_signal_connect_object (connection, "removed",
+                                         G_CALLBACK (gtk_widget_destroy), row, G_CONNECT_SWAPPED);
+        }
         g_object_set_data (G_OBJECT (row), "timestamp", GUINT_TO_POINTER (timestamp));
         g_object_set_data (G_OBJECT (row), "active", GUINT_TO_POINTER (active));
         g_object_set_data (G_OBJECT (row), "strength", GUINT_TO_POINTER (strength));
