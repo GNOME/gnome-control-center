@@ -70,7 +70,6 @@ struct _BgWallpapersSourceClass
 GType bg_wallpapers_source_get_type (void) G_GNUC_CONST;
 
 BgWallpapersSource *bg_wallpapers_source_new (void);
-GtkListStore       *bg_wallpapers_source_get_liststore (BgWallpapersSource *source);
 
 G_END_DECLS
 
