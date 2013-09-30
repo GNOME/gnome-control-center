@@ -1377,7 +1377,7 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
 
         gtk_widget_destroy (GTK_WIDGET (dialog));
 
-        if (response == GTK_RESPONSE_CANCEL)
+        if (response != GTK_RESPONSE_OK)
                 return;
 
         device_wifi = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (forget), "net"));
