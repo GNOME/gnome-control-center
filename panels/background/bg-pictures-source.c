@@ -412,8 +412,7 @@ dir_enum_async_ready (GObject      *source,
 
   if (err)
     {
-      if (!g_error_matches (err, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) &&
-          !g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      if (!g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Could not fill pictures source: %s", err->message);
       g_error_free (err);
       return;
@@ -611,6 +610,8 @@ bg_pictures_source_init (BgPicturesSource *self)
 					     NULL);
 
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  g_mkdir_with_parents (pictures_path, 0700);
+
   dir = g_file_new_for_path (pictures_path);
   g_file_enumerate_children_async (dir,
 				   ATTRIBUTES,
@@ -632,6 +633,8 @@ bg_pictures_source_init (BgPicturesSource *self)
   g_object_unref (dir);
 
   cache_path = bg_pictures_source_get_cache_path ();
+  g_mkdir_with_parents (cache_path, 0700);
+
   dir = g_file_new_for_path (cache_path);
   g_file_enumerate_children_async (dir,
 				   ATTRIBUTES,
