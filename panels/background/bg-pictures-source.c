@@ -201,6 +201,7 @@ picture_scaled (GObject *source_object,
 
 
   g_object_unref (pixbuf);
+  g_object_unref (item);
 }
 
 static void

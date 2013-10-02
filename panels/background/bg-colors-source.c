@@ -105,6 +105,7 @@ bg_colors_source_init (BgColorsSource *self)
                                          -1);
 
       g_object_unref (pixbuf);
+      g_object_unref (item);
     }
 
   g_object_unref (thumb_factory);
