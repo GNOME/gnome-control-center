@@ -428,6 +428,7 @@ dir_enum_async_ready (GObject      *source,
                                       priv->cancellable,
                                       file_info_async_ready,
                                       user_data);
+  g_object_unref (enumerator);
 }
 
 char *
