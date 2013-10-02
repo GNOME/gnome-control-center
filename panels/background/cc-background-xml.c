@@ -39,6 +39,7 @@ struct CcBackgroundXmlPrivate
   GHashTable  *wp_hash;
   GAsyncQueue *item_added_queue;
   guint        item_added_id;
+  GSList      *monitors; /* GSList of GFileMonitor */
 };
 
 #define CC_BACKGROUND_XML_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_BACKGROUND_XML, CcBackgroundXmlPrivate))
@@ -371,6 +372,8 @@ cc_background_xml_add_monitor (GFile      *directory,
   g_signal_connect (monitor, "changed",
                     G_CALLBACK (gnome_wp_file_changed),
                     data);
+
+  data->priv->monitors = g_slist_prepend (data->priv->monitors, monitor);
 }
 
 static void
@@ -630,6 +633,9 @@ cc_background_xml_finalize (GObject *object)
 		g_hash_table_destroy (xml->priv->wp_hash);
 		xml->priv->wp_hash = NULL;
 	}
+
+        g_slist_free_full (xml->priv->monitors, g_object_unref);
+
 	if (xml->priv->item_added_id != 0) {
 		g_source_remove (xml->priv->item_added_id);
 		xml->priv->item_added_id = 0;
