@@ -253,6 +253,7 @@ update_display_preview (CcBackgroundPanel *panel,
                                    pixbuf,
                                    0, 0);
       cairo_paint (cr);
+      g_object_unref (pixbuf);
     }
 
   cairo_destroy (cr);
