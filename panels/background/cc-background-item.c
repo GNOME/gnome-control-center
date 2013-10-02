@@ -796,6 +796,9 @@ cc_background_item_finalize (GObject *object)
         g_free (item->priv->secondary_color);
         g_free (item->priv->mime_type);
         g_free (item->priv->size);
+        g_free (item->priv->source_url);
+        g_free (item->priv->source_xml);
+        g_free (item->priv->mime_type);
 
         if (item->priv->bg != NULL)
                 g_object_unref (item->priv->bg);
