@@ -102,9 +102,6 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
       gtk_widget_set_size_request (GTK_WIDGET (chooser), (gint) (0.5 * width), (gint) (0.9 * height));
     }
 
-  gtk_icon_view_set_model (GTK_ICON_VIEW (chooser->priv->icon_view),
-                           GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (chooser->priv->wallpapers_source))));
-
   GTK_WIDGET_CLASS (cc_background_chooser_dialog_parent_class)->realize (widget);
 }
 
@@ -441,6 +438,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_OK, FALSE);
 
+  on_view_toggled (GTK_TOGGLE_BUTTON (button1), chooser);
   gtk_widget_show_all (vbox);
 }
 
