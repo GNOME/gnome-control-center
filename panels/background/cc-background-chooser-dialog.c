@@ -125,6 +125,9 @@ cc_background_chooser_dialog_dispose (GObject *object)
   g_clear_object (&priv->pictures_source);
   g_clear_object (&priv->colors_source);
   g_clear_object (&priv->wallpapers_source);
+#ifdef HAVE_LIBSOCIALWEB
+  g_clear_object (&priv->flickr_source);
+#endif
   g_clear_object (&priv->thumb_factory);
 
   G_OBJECT_CLASS (cc_background_chooser_dialog_parent_class)->dispose (object);
