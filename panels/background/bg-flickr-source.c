@@ -102,6 +102,7 @@ _view_items_added_cb (SwClientItemView *item_view,
                                          1, item,
                                          -1);
       g_object_unref (pixbuf);
+      g_object_unref (item);
     }
 }
 
