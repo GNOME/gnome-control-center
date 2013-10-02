@@ -15,20 +15,18 @@ INCLUDES =						\
 	-DGNOME_DESKTOP_USE_UNSTABLE_API		\
 	$(NULL)
 
-noinst_LTLIBRARIES = libbackground.la
-
 BUILT_SOURCES = 			\
 	cc-background-resources.c 	\
 	cc-background-resources.h 	\
 	gdesktop-enums-types.c		\
 	gdesktop-enums-types.h
 
-libbackground_la_SOURCES =		\
+noinst_LTLIBRARIES = libbackground.la libbackground-chooser.la
+
+libbackground_chooser_la_SOURCES =	\
 	$(BUILT_SOURCES)		\
 	cc-background-chooser-dialog.c	\
 	cc-background-chooser-dialog.h	\
-	cc-background-panel.c		\
-	cc-background-panel.h		\
 	cc-background-item.c		\
 	cc-background-item.h		\
 	cc-background-xml.c		\
@@ -42,14 +40,22 @@ libbackground_la_SOURCES =		\
 	bg-colors-source.c		\
 	bg-colors-source.h
 
+libbackground_la_SOURCES =		\
+	cc-background-panel.c		\
+	cc-background-panel.h
 
-libbackground_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
+libbackground_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS) libbackground-chooser.la
 
 if WITH_LIBSOCIALWEB
 libbackground_la_SOURCES += bg-flickr-source.c bg-flickr-source.h
 INCLUDES += $(SOCIALWEB_CFLAGS)
 libbackground_la_LIBADD += $(SOCIALWEB_LIBS)
 endif
+
+noinst_PROGRAMS = test-chooser-dialog
+test_chooser_dialog_SOURCES = test-chooser-dialog.c
+test_chooser_dialog_LDADD = libbackground-chooser.la
+test_chooser_dialog_LDFLAGS = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/background.gresource.xml)
 cc-background-resources.c: background.gresource.xml $(resource_files)
