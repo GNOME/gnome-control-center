@@ -6,7 +6,14 @@ on_dialog_response (GtkDialog *dialog,
 		    int        response_id,
 		    gpointer   user_data)
 {
-	g_message ("response: %d", response_id);
+	g_debug ("response: %d", response_id);
+	if (response_id == GTK_RESPONSE_OK) {
+		CcBackgroundItem *item;
+
+		item = cc_background_chooser_dialog_get_item (CC_BACKGROUND_CHOOSER_DIALOG (dialog));
+		cc_background_item_dump (item);
+		g_object_unref (item);
+	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 	gtk_main_quit ();
 }
@@ -14,6 +21,8 @@ on_dialog_response (GtkDialog *dialog,
 int main (int argc, char **argv)
 {
 	GtkWidget *dialog;
+
+	g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
 	gtk_init (&argc, &argv);
 
