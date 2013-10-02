@@ -414,6 +414,9 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
   GtkWidget *dialog;
   GtkListStore *store;
   gchar *folder;
+  GtkTreeIter iter;
+  gboolean valid;
+  gboolean matching;
 
   dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
                                         GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -430,7 +433,21 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
 
   folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
 
-  if (folder && !g_str_equal (folder, ""))
+  for (valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+       valid;
+       valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter))
+    {
+      gchar *string;
+
+      gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &string, -1);
+      matching = (g_strcmp0 (string, folder) != 0);
+      g_free (string);
+
+      if (matching)
+        break;
+    }
+
+  if (!matching && folder && !g_str_equal (folder, ""))
     gtk_list_store_insert_with_values (store, NULL, -1, 0, folder, -1);
 
   g_free (folder);
