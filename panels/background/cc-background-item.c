@@ -894,9 +894,9 @@ cc_background_item_dump (CcBackgroundItem *item)
 	g_debug ("flags:\t\t\t%s", flags->str);
 	g_string_free (flags, TRUE);
 	if (priv->primary_color)
-		g_debug ("pcolor:\t\t%s", priv->primary_color);
+		g_debug ("pcolor:\t\t\t%s", priv->primary_color);
 	if (priv->secondary_color)
-		g_debug ("scolor:\t\t%s", priv->secondary_color);
+		g_debug ("scolor:\t\t\t%s", priv->secondary_color);
 	g_debug ("placement:\t\t%s", enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE, priv->placement));
 	g_debug ("shading:\t\t%s", enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING, priv->shading));
 	if (priv->source_url)
