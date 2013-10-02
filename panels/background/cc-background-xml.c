@@ -291,6 +291,7 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	        g_object_unref (item);
 	        continue;
 	      }
+	    g_object_unref (file);
 	  }
       }
 
@@ -298,6 +299,7 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
        * need to use proper code here */
       uri = g_filename_to_uri (filename, NULL, NULL);
       id = g_strdup_printf ("%s#%s", uri, cname);
+      g_free (cname);
       g_free (uri);
 
       /* Make sure we don't already have this one and that filename exists */
