@@ -67,7 +67,6 @@ struct _CcBackgroundChooserDialogPrivate
 #endif
 
   GnomeDesktopThumbnailFactory *thumb_factory;
-  gint current_source;
 
   GCancellable *copy_cancellable;
 
