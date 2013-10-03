@@ -41,6 +41,9 @@ CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_SHARING_PANEL, CcSharingPanelPrivate))
 
 
+static void cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self, GtkWidget *label);
+
+
 static GtkWidget *
 _gtk_builder_get_widget (GtkBuilder  *builder,
                          const gchar *name)
@@ -200,6 +203,14 @@ cc_sharing_panel_run_dialog (CcSharingPanel *self,
   GtkWidget *dialog, *parent;
 
   dialog = WID (dialog_name);
+
+  /* ensure labels with the hostname are updated if the hostname has changed */
+  cc_sharing_panel_setup_label_with_hostname (self,
+                                              WID ("screen-sharing-label"));
+  cc_sharing_panel_setup_label_with_hostname (self, WID ("remote-login-label"));
+  cc_sharing_panel_setup_label_with_hostname (self,
+                                              WID ("personal-file-sharing-label"));
+
 
   parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
 
@@ -603,12 +614,21 @@ cc_sharing_panel_setup_label (GtkLabel    *label,
                               const gchar *hostname)
 {
   gchar *text;
+  const gchar *format;
 
-  hostname = g_strdup (hostname);
+  format = g_object_get_data (G_OBJECT (label), "format-label");
+  if (!format)
+    {
+      format = gtk_label_get_label (label);
 
-  text = g_strdup_printf (gtk_label_get_label (GTK_LABEL (label)), hostname, hostname);
+      /* save the original format string so that it can be used again later */
+      g_object_set_data_full (G_OBJECT (label), "format-label",
+                              g_strdup (format), g_free);
+    }
 
-  gtk_label_set_label (GTK_LABEL (label), text);
+  text = g_strdup_printf (format, hostname, hostname);
+
+  gtk_label_set_label (label, text);
 
   g_free (text);
 }
