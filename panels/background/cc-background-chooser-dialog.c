@@ -300,6 +300,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
   gtk_grid_set_column_spacing (GTK_GRID (grid), 0);
   gtk_container_add (GTK_CONTAINER (vbox), grid);
+  gtk_widget_set_size_request (grid, 860, 550);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_set_homogeneous (GTK_BOX (hbox), TRUE);
@@ -350,10 +351,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_widget_set_hexpand (priv->sw_content, TRUE);
   gtk_widget_set_vexpand (priv->sw_content, TRUE);
   gtk_container_add (GTK_CONTAINER (grid), priv->sw_content);
-  g_object_set (priv->sw_content,
-                "width-request", 860,
-                "height-request", 550,
-                NULL);
 
   priv->empty_pictures_box = gtk_grid_new ();
   gtk_widget_set_no_show_all (priv->empty_pictures_box, TRUE);
@@ -363,10 +360,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   context = gtk_widget_get_style_context (priv->empty_pictures_box);
   gtk_style_context_add_class (context, "dim-label");
   gtk_container_add (GTK_CONTAINER (grid), priv->empty_pictures_box);
-  g_object_set (priv->empty_pictures_box,
-                "width-request", 860,
-                "height-request", 550,
-                NULL);
   img = gtk_image_new_from_icon_name ("emblem-photos-symbolic", GTK_ICON_SIZE_DIALOG);
   gtk_image_set_pixel_size (GTK_IMAGE (img), 64);
   gtk_widget_set_halign (img, GTK_ALIGN_END);
