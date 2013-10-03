@@ -27,6 +27,7 @@ int main (int argc, char **argv)
 	gtk_init (&argc, &argv);
 
 	dialog = cc_background_chooser_dialog_new ();
+	gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (on_dialog_response), NULL);
 	gtk_widget_show_all (dialog);
