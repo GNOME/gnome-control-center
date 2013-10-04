@@ -51,6 +51,8 @@ add_click (struct Calib *c,
            int           x,
            int           y)
 {
+    g_debug ("Trying to add click (%d, %d)", x, y);
+
     /* Double-click detection */
     if (c->threshold_doubleclick > 0 && c->num_clicks > 0)
     {
@@ -60,6 +62,7 @@ add_click (struct Calib *c,
             if (abs(x - c->clicked_x[i]) <= c->threshold_doubleclick &&
                 abs(y - c->clicked_y[i]) <= c->threshold_doubleclick)
             {
+                g_debug ("Detected double-click, ignoring");
                 return FALSE;
             }
             i--;
@@ -105,11 +108,13 @@ add_click (struct Calib *c,
 
         if (misclick)
         {
+            g_debug ("Detected misclick, resetting");
             reset(c);
             return FALSE;
         }
     }
 
+    g_debug ("Click (%d, %d) added", x, y);
     c->clicked_x[c->num_clicks] = x;
     c->clicked_y[c->num_clicks] = y;
     c->num_clicks++;
