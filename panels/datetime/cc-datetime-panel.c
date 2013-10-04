@@ -89,6 +89,7 @@ struct _CcDateTimePanelPrivate
   gboolean ampm_available;
   GtkWidget *am_label;
   GtkWidget *pm_label;
+  GtkWidget *am_pm_stack;
 
   GnomeWallClock *clock_tracker;
 
@@ -258,7 +259,7 @@ am_pm_stack_visible_child_changed_cb (CcDateTimePanel *self)
   if (am_pm_button_accessible == NULL)
     return;
 
-  visible_label = gtk_stack_get_visible_child (GTK_STACK (W ("am_pm_stack")));
+  visible_label = gtk_stack_get_visible_child (GTK_STACK (priv->am_pm_stack));
   visible_text = gtk_label_get_text (GTK_LABEL (visible_label));
   atk_object_set_name (am_pm_button_accessible, visible_text);
 }
@@ -268,16 +269,13 @@ am_pm_button_clicked (GtkWidget *button,
                       CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  GtkWidget *stack;
   GtkWidget *visible_child;
 
-  stack = W ("am_pm_stack");
-
-  visible_child = gtk_stack_get_visible_child (GTK_STACK (stack));
+  visible_child = gtk_stack_get_visible_child (GTK_STACK (priv->am_pm_stack));
   if (visible_child == priv->am_label)
-    gtk_stack_set_visible_child (GTK_STACK (stack), priv->pm_label);
+    gtk_stack_set_visible_child (GTK_STACK (priv->am_pm_stack), priv->pm_label);
   else
-    gtk_stack_set_visible_child (GTK_STACK (stack), priv->am_label);
+    gtk_stack_set_visible_child (GTK_STACK (priv->am_pm_stack), priv->am_label);
 
   change_time (self);
 
@@ -321,17 +319,15 @@ update_time (CcDateTimePanel *self)
     }
   else
     {
-      GtkWidget *am_pm_stack;
       gboolean is_pm_time;
 
       is_pm_time = (hour >= 12);
 
       /* Update the AM/PM button */
-      am_pm_stack = W ("am_pm_stack");
       if (is_pm_time)
-        gtk_stack_set_visible_child (GTK_STACK (am_pm_stack), priv->pm_label);
+        gtk_stack_set_visible_child (GTK_STACK (priv->am_pm_stack), priv->pm_label);
       else
-        gtk_stack_set_visible_child (GTK_STACK (am_pm_stack), priv->am_label);
+        gtk_stack_set_visible_child (GTK_STACK (priv->am_pm_stack), priv->am_label);
 
       /* Update the hours spinbutton */
       if (is_pm_time)
@@ -732,11 +728,9 @@ change_time (CcDateTimePanel *panel)
   if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
     {
       gboolean is_pm_time;
-      GtkWidget *am_pm_stack;
       GtkWidget *visible_child;
 
-      am_pm_stack = W ("am_pm_stack");
-      visible_child = gtk_stack_get_visible_child (GTK_STACK (am_pm_stack));
+      visible_child = gtk_stack_get_visible_child (GTK_STACK (priv->am_pm_stack));
       if (visible_child == priv->pm_label)
         is_pm_time = TRUE;
       else
@@ -1124,7 +1118,6 @@ setup_am_pm_button (CcDateTimePanel *self)
   GtkCssProvider *provider;
   GtkStyleContext *context;
   GtkWidget *am_pm_button;
-  GtkWidget *stack;
   char *text;
 
   text = format_am_label ();
@@ -1135,11 +1128,11 @@ setup_am_pm_button (CcDateTimePanel *self)
   priv->pm_label = gtk_label_new (text);
   g_free (text);
 
-  stack = W ("am_pm_stack");
-  gtk_container_add (GTK_CONTAINER (stack), priv->am_label);
-  gtk_container_add (GTK_CONTAINER (stack), priv->pm_label);
-  gtk_widget_show_all (stack);
-  g_signal_connect_swapped (stack, "notify::visible-child",
+  priv->am_pm_stack = W ("am_pm_stack");
+  gtk_container_add (GTK_CONTAINER (priv->am_pm_stack), priv->am_label);
+  gtk_container_add (GTK_CONTAINER (priv->am_pm_stack), priv->pm_label);
+  gtk_widget_show_all (priv->am_pm_stack);
+  g_signal_connect_swapped (priv->am_pm_stack, "notify::visible-child",
                             G_CALLBACK (am_pm_stack_visible_child_changed_cb), self);
   am_pm_stack_visible_child_changed_cb (self);
 
