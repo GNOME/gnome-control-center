@@ -311,13 +311,16 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
       }
 
       g_object_set (G_OBJECT (item), "flags", flags, NULL);
-      g_hash_table_insert (xml->priv->wp_hash, id, item);
-      /* Don't free ID, we added it to the hash table */
+      g_hash_table_insert (xml->priv->wp_hash,
+                           g_strdup (id),
+                           g_object_ref (item));
       if (in_thread)
         emit_added_in_idle (xml, g_object_ref (item));
       else
         g_signal_emit (G_OBJECT (xml), signals[ADDED], 0, item);
+
       g_object_unref (item);
+      g_free (id);
       retval = TRUE;
     }
   }
