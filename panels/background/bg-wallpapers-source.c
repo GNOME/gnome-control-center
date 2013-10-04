@@ -128,7 +128,7 @@ load_wallpapers (gchar              *key,
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,
-                      1, g_object_ref (item),
+                      1, item,
                       2, cc_background_item_get_name (item),
                       -1);
 
