@@ -71,9 +71,6 @@ struct _CcDateTimePanelPrivate
   GtkBuilder *builder;
   GtkWidget *map;
 
-  GtkWidget *datetime_dialog;
-  GtkWidget *timezone_dialog;
-
   GList *listboxes;
   GList *listboxes_reverse;
 
@@ -159,9 +156,6 @@ cc_date_time_panel_dispose (GObject *object)
 
   g_clear_pointer (&priv->listboxes, g_list_free);
   g_clear_pointer (&priv->listboxes_reverse, g_list_free);
-
-  g_clear_pointer (&priv->datetime_dialog, gtk_widget_destroy);
-  g_clear_pointer (&priv->timezone_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
@@ -790,8 +784,8 @@ on_permission_changed (GPermission *permission,
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
     {
-      gtk_widget_hide (priv->datetime_dialog);
-      gtk_widget_hide (priv->timezone_dialog);
+      gtk_widget_hide (GTK_WIDGET (W ("datetime-dialog")));
+      gtk_widget_hide (GTK_WIDGET (W ("timezone-dialog")));
     }
 }
 
@@ -1052,7 +1046,7 @@ format_hours_combobox (GtkSpinButton   *spin,
   return TRUE;
 }
 
-static GtkWidget *
+static void
 setup_timezone_dialog (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
@@ -1087,8 +1081,6 @@ setup_timezone_dialog (CcDateTimePanel *self)
   gtk_entry_completion_set_model (completion, completion_model);
 
   gtk_entry_completion_set_text_column (completion, CITY_COL_CITY_HUMAN_READABLE);
-
-  return dialog;
 }
 
 static char *
@@ -1162,7 +1154,7 @@ setup_am_pm_button (CcDateTimePanel *self)
   g_object_unref (provider);
 }
 
-static GtkWidget *
+static void
 setup_datetime_dialog (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
@@ -1239,8 +1231,6 @@ setup_datetime_dialog (CcDateTimePanel *self)
                             G_CALLBACK (change_time), self);
   g_signal_connect_swapped (W ("m_spinbutton"), "value-changed",
                             G_CALLBACK (change_time), self);
-
-  return dialog;
 }
 
 static void
@@ -1299,8 +1289,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   priv->date = g_date_time_new_now_local ();
 
-  priv->timezone_dialog = setup_timezone_dialog (self);
-  priv->datetime_dialog = setup_datetime_dialog (self);
+  setup_timezone_dialog (self);
+  setup_datetime_dialog (self);
 
   setup_listbox (self, W ("listbox1"));
   setup_listbox (self, W ("listbox2"));
