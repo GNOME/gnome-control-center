@@ -387,6 +387,7 @@ on_screen_changed (CcDisplayPanel *panel)
   gint i, num_active_outputs = 0, num_connected_outputs = 0, number = 0;
   gboolean clone, combined = FALSE;
   GtkSizeGroup *sizegroup;
+  GList *sorted_outputs = NULL, *l;
 
   gnome_rr_screen_refresh (priv->screen, NULL);
 
@@ -410,6 +411,18 @@ on_screen_changed (CcDisplayPanel *panel)
   /* count the number of active and connected outputs */
   for (i = 0; outputs[i]; i++)
     {
+      GnomeRROutput *output;
+
+      output = gnome_rr_screen_get_output_by_name (priv->screen,
+                                                   gnome_rr_output_info_get_name (outputs[i]));
+
+      /* ensure the built in display is first in the list */
+      if (gnome_rr_output_is_builtin_display (output))
+        sorted_outputs = g_list_prepend (sorted_outputs, outputs[i]);
+      else
+        sorted_outputs = g_list_append (sorted_outputs, outputs[i]);
+
+
       if (gnome_rr_output_info_is_active (outputs[i]))
         num_active_outputs++;
       num_connected_outputs++;
@@ -417,54 +430,54 @@ on_screen_changed (CcDisplayPanel *panel)
 
   sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-  for (i = 0; outputs[i]; i++)
+  for (l = sorted_outputs; l; l = g_list_next (l))
     {
       GtkWidget *row, *item, *preview, *label;
       gboolean primary, active;
       gint x, y, width, height;
       const gchar *status;
       gboolean display_closed = FALSE;
+      GnomeRROutput *output;
+      GnomeRROutputInfo *output_info;
+
+      output_info = l->data;
+
+      output = gnome_rr_screen_get_output_by_name (priv->screen,
+                                                   gnome_rr_output_info_get_name (output_info));
 
       if (priv->lid_is_closed)
-        {
-          GnomeRROutput *output;
-
-          output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                                       gnome_rr_output_info_get_name (outputs[i]));
-
-          display_closed = gnome_rr_output_is_builtin_display (output);
-        }
+        display_closed = gnome_rr_output_is_builtin_display (output);
 
       row = gtk_list_box_row_new ();
       item = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
       gtk_container_set_border_width (GTK_CONTAINER (item), 12);
 
-      active = gnome_rr_output_info_is_active (outputs[i]);
+      active = gnome_rr_output_info_is_active (output_info);
 
-      gnome_rr_output_info_get_geometry (outputs[i], &x, &y, &width, &height);
+      gnome_rr_output_info_get_geometry (output_info, &x, &y, &width, &height);
 
       if (!active)
         {
-          width = gnome_rr_output_info_get_preferred_width (outputs[i]);
-          height = gnome_rr_output_info_get_preferred_height (outputs[i]);
+          width = gnome_rr_output_info_get_preferred_width (output_info);
+          height = gnome_rr_output_info_get_preferred_height (output_info);
         }
 
-      preview = display_preview_new (panel, outputs[i], current, ++number,
+      preview = display_preview_new (panel, output_info, current, ++number,
                                      DISPLAY_PREVIEW_LIST_HEIGHT);
       gtk_size_group_add_widget (sizegroup, preview);
 
       if (display_closed)
         gtk_widget_set_sensitive (row, FALSE);
 
-      g_hash_table_insert (output_ids, outputs[i], GINT_TO_POINTER (number));
+      g_hash_table_insert (output_ids, output_info, GINT_TO_POINTER (number));
 
       gtk_container_add (GTK_CONTAINER (item), preview);
 
-      label = gtk_label_new (gnome_rr_output_info_get_display_name (outputs[i]));
+      label = gtk_label_new (gnome_rr_output_info_get_display_name (output_info));
       gtk_container_add (GTK_CONTAINER (item), label);
 
-      primary = gnome_rr_output_info_get_primary (outputs[i]);
-      active = gnome_rr_output_info_is_active (outputs[i]);
+      primary = gnome_rr_output_info_get_primary (output_info);
+      active = gnome_rr_output_info_is_active (output_info);
 
       if (num_connected_outputs > 1)
         {
@@ -489,11 +502,13 @@ on_screen_changed (CcDisplayPanel *panel)
           gtk_container_add (GTK_CONTAINER (item), label);
         }
 
-      g_object_set_data (G_OBJECT (row), "gnome-rr-output", outputs[i]);
+      g_object_set_data (G_OBJECT (row), "gnome-rr-output", output_info);
       gtk_container_add (GTK_CONTAINER (row), item);
       gtk_container_add (GTK_CONTAINER (priv->displays_listbox), row);
       gtk_widget_show_all (row);
     }
+
+  g_list_free (sorted_outputs);
 
   if (combined)
     gtk_widget_show (priv->arrange_button);
