@@ -90,6 +90,7 @@ struct _CcDateTimePanelPrivate
   GtkWidget *am_label;
   GtkWidget *pm_label;
   GtkWidget *am_pm_stack;
+  gulong am_pm_visiblity_changed_id;
 
   GnomeWallClock *clock_tracker;
 
@@ -138,6 +139,13 @@ cc_date_time_panel_dispose (GObject *object)
     {
       g_cancellable_cancel (priv->cancellable);
       g_clear_object (&priv->cancellable);
+    }
+
+  if (priv->am_pm_visiblity_changed_id != 0)
+    {
+      g_signal_handler_disconnect (priv->am_pm_stack,
+                                   priv->am_pm_visiblity_changed_id);
+      priv->am_pm_visiblity_changed_id = 0;
     }
 
   g_clear_object (&priv->builder);
@@ -1132,8 +1140,10 @@ setup_am_pm_button (CcDateTimePanel *self)
   gtk_container_add (GTK_CONTAINER (priv->am_pm_stack), priv->am_label);
   gtk_container_add (GTK_CONTAINER (priv->am_pm_stack), priv->pm_label);
   gtk_widget_show_all (priv->am_pm_stack);
-  g_signal_connect_swapped (priv->am_pm_stack, "notify::visible-child",
-                            G_CALLBACK (am_pm_stack_visible_child_changed_cb), self);
+  priv->am_pm_visiblity_changed_id = g_signal_connect_swapped (priv->am_pm_stack,
+                                                               "notify::visible-child",
+                                                               G_CALLBACK (am_pm_stack_visible_child_changed_cb),
+                                                               self);
   am_pm_stack_visible_child_changed_cb (self);
 
   am_pm_button = W ("am_pm_button");
