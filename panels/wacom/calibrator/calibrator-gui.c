@@ -304,10 +304,10 @@ on_button_press_event(ClutterActor       *actor,
   /* Check matching device ID if a device ID was provided */
   if (area->device_id > -1)
     {
-      GdkDevice *device;
+      ClutterInputDevice *device;
 
-      device = gdk_event_get_source_device ((GdkEvent *) event);
-      if (device != NULL && gdk_x11_device_get_id (device) != area->device_id)
+      device =  ((ClutterButtonEvent *) event)->device;
+      if (device != NULL && clutter_input_device_get_device_id (device) != area->device_id)
         return FALSE;
     }
 
