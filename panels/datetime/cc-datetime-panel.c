@@ -73,6 +73,7 @@ struct _CcDateTimePanelPrivate
 
   GList *listboxes;
   GList *listboxes_reverse;
+  GList *toplevels;
 
   TzLocation *current_location;
 
@@ -143,6 +144,12 @@ cc_date_time_panel_dispose (GObject *object)
       g_signal_handler_disconnect (priv->am_pm_stack,
                                    priv->am_pm_visiblity_changed_id);
       priv->am_pm_visiblity_changed_id = 0;
+    }
+
+  if (priv->toplevels)
+    {
+      g_list_free_full (priv->toplevels, (GDestroyNotify) gtk_widget_destroy);
+      priv->toplevels = NULL;
     }
 
   g_clear_object (&priv->builder);
@@ -1288,6 +1295,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   priv->date = g_date_time_new_now_local ();
+
+  /* Top level windows from GtkBuilder that need to be destroyed explicitly */
+  priv->toplevels = g_list_append (priv->toplevels, W ("datetime-dialog"));
+  priv->toplevels = g_list_append (priv->toplevels, W ("timezone-dialog"));
 
   setup_timezone_dialog (self);
   setup_datetime_dialog (self);
