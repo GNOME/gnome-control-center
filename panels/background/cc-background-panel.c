@@ -399,7 +399,7 @@ get_screenshot_async (CcBackgroundPanel *panel)
            data->capture_rect.width, data->capture_rect.height, data->capture_rect.x, data->capture_rect.y);
 
   path = g_build_filename (g_get_user_cache_dir (), "gnome-control-center", NULL);
-  g_mkdir_with_parents (path, 0700);
+  g_mkdir_with_parents (path, USER_DIR_MODE);
 
   tmpname = g_strdup_printf ("scr-%d.png", g_random_int ());
   g_free (panel->priv->screenshot_path);
@@ -538,7 +538,7 @@ create_save_dir (void)
 			   "gnome-control-center",
 			   "backgrounds",
 			   NULL);
-  if (g_mkdir_with_parents (path, 0755) < 0)
+  if (g_mkdir_with_parents (path, USER_DIR_MODE) < 0)
     {
       g_warning ("Failed to create directory '%s'", path);
       g_free (path);
@@ -635,7 +635,7 @@ set_background (CcBackgroundPanel *panel,
       GdkPixbuf *pixbuf;
 
       cache_path = bg_pictures_source_get_cache_path ();
-      if (g_mkdir_with_parents (cache_path, 0755) < 0)
+      if (g_mkdir_with_parents (cache_path, USER_DIR_MODE) < 0)
         {
           g_warning ("Failed to create directory '%s'", cache_path);
           g_free (cache_path);

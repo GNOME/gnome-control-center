@@ -284,7 +284,7 @@ create_custom_theme (const char *parent)
 
         /* Create the custom directory */
         path = custom_theme_dir_path (NULL);
-        g_mkdir_with_parents (path, 0755);
+        g_mkdir_with_parents (path, USER_DIR_MODE);
         g_free (path);
 
         /* Set the data for index.theme */

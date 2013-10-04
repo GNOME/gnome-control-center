@@ -27,6 +27,8 @@ GETTEXT_PACKAGE=gnome-control-center-2.0
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 
+AC_DEFINE(USER_DIR_MODE, 0700, [Permissions for creating the user's config, cache and data directories])
+
 GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
 

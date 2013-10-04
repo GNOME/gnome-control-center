@@ -20,6 +20,8 @@
  *
  */
 
+#include <config.h>
+
 #include "bg-pictures-source.h"
 
 #include "cc-background-item.h"
@@ -610,7 +612,7 @@ bg_pictures_source_init (BgPicturesSource *self)
 					     NULL);
 
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
-  g_mkdir_with_parents (pictures_path, 0700);
+  g_mkdir_with_parents (pictures_path, USER_DIR_MODE);
 
   dir = g_file_new_for_path (pictures_path);
   g_file_enumerate_children_async (dir,
@@ -633,7 +635,7 @@ bg_pictures_source_init (BgPicturesSource *self)
   g_object_unref (dir);
 
   cache_path = bg_pictures_source_get_cache_path ();
-  g_mkdir_with_parents (cache_path, 0700);
+  g_mkdir_with_parents (cache_path, USER_DIR_MODE);
 
   dir = g_file_new_for_path (cache_path);
   g_file_enumerate_children_async (dir,
