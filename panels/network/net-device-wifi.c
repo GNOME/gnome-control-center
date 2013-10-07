@@ -630,21 +630,27 @@ connect_to_hidden_network (NetDeviceWifi *device_wifi)
 }
 
 static void
+connection_add_or_activate_cb (NMActiveConnection *connection,
+                               GError *error,
+                               NetDeviceWifi *device_wifi)
+{
+        if (connection == NULL) {
+                /* failed to activate */
+                g_debug ("Failed to add and/or activate connection '%d': %s",
+                         error->code,
+                         error->message);
+                nm_device_wifi_refresh_ui (device_wifi);
+        }
+}
+
+static void
 connection_add_activate_cb (NMClient *client,
                             NMActiveConnection *connection,
                             const char *path,
                             GError *error,
                             gpointer user_data)
 {
-        NetDeviceWifi *device_wifi = user_data;
-
-        if (connection == NULL) {
-                /* failed to activate */
-                g_debug ("Failed to add and activate connection '%d': %s",
-                         error->code,
-                         error->message);
-                nm_device_wifi_refresh_ui (device_wifi);
-        }
+        connection_add_or_activate_cb (connection, error, user_data);
 }
 
 static void
@@ -653,15 +659,7 @@ connection_activate_cb (NMClient *client,
                         GError *error,
                         gpointer user_data)
 {
-        NetDeviceWifi *device_wifi = user_data;
-
-        if (connection == NULL) {
-                /* failed to activate */
-                g_debug ("Failed to activate connection '%d': %s",
-                         error->code,
-                         error->message);
-                nm_device_wifi_refresh_ui (device_wifi);
-        }
+        connection_add_or_activate_cb (connection, error, user_data);
 }
 
 static gboolean
