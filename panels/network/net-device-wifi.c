@@ -1900,10 +1900,10 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
         edit = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "edit"));
 
         if (ap != NULL) {
-                gtk_widget_hide (edit);
                 gtk_widget_show (spinner);
                 gtk_spinner_start (GTK_SPINNER (spinner));
                 if (connection != NULL) {
+                        gtk_widget_hide (edit);
                         client = net_object_get_client (NET_OBJECT (device_wifi));
                         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
                         nm_client_activate_connection (client,
