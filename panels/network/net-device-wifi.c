@@ -757,19 +757,20 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                                                        connection_add_activate_cb, device_wifi);
         } else {
                 CcNetworkPanel *panel;
-                GPtrArray *array;
+                GVariantBuilder *builder;
+                GVariant *parameters;
 
                 g_debug ("no existing connection found for %s, creating", ssid_target);
-                array = g_ptr_array_new ();
-                g_ptr_array_add (array, "connect-8021x-wifi");
-                g_ptr_array_add (array, (gpointer) nm_object_get_path (NM_OBJECT (device)));
-                g_ptr_array_add (array, (gpointer) ap_object_path);
-                g_ptr_array_add (array, NULL);
+                builder = g_variant_builder_new (G_VARIANT_TYPE ("av"));
+                g_variant_builder_add (builder, "v", g_variant_new_string ("connect-8021x-wifi"));
+                g_variant_builder_add (builder, "v", g_variant_new_string (nm_object_get_path (NM_OBJECT (device))));
+                g_variant_builder_add (builder, "v", g_variant_new_string (ap_object_path));
+                parameters = g_variant_new ("av", builder);
 
                 panel = net_object_get_panel (NET_OBJECT (device_wifi));
-                g_object_set (G_OBJECT (panel), "argv", array->pdata, NULL);
+                g_object_set (G_OBJECT (panel), "parameters", parameters, NULL);
 
-                g_ptr_array_free (array, FALSE);
+                g_variant_builder_unref (builder);
         }
 out:
         return;
