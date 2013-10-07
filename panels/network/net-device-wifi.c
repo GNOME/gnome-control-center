@@ -1560,7 +1560,7 @@ make_row (GtkSizeGroup   *rows,
                 atk_object_set_name (gtk_widget_get_accessible (widget), _("Options…"));
                 gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
                 gtk_size_group_add_widget (spinner_button_group, widget);
-                g_object_set_data (G_OBJECT (row_box), "edit", widget);
+                g_object_set_data (G_OBJECT (row), "edit", widget);
         }
         if (edit_out)
                 *edit_out = widget;
@@ -1575,7 +1575,7 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
         gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
         gtk_size_group_add_widget (spinner_button_group, widget);
-        g_object_set_data (G_OBJECT (row_box), "spinner", widget);
+        g_object_set_data (G_OBJECT (row), "spinner", widget);
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
