@@ -1901,8 +1901,6 @@ ap_activated (EggListBox *list, GtkWidget *row, NetDeviceWifi *device_wifi)
         edit = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "edit"));
 
         if (ap != NULL) {
-                gtk_widget_show (spinner);
-                gtk_spinner_start (GTK_SPINNER (spinner));
                 if (connection != NULL) {
                         gtk_widget_hide (edit);
                         client = net_object_get_client (NET_OBJECT (device_wifi));
@@ -1915,6 +1913,10 @@ ap_activated (EggListBox *list, GtkWidget *row, NetDeviceWifi *device_wifi)
                         const GByteArray *ssid;
                         gchar *ssid_text;
                         const gchar *object_path;
+
+                        gtk_widget_show (spinner);
+                        gtk_spinner_start (GTK_SPINNER (spinner));
+
                         ssid = nm_access_point_get_ssid (ap);
                         ssid_text = g_markup_escape_text (nm_utils_escape_ssid (ssid->data, ssid->len), -1);
                         object_path = nm_object_get_path (NM_OBJECT (ap));
