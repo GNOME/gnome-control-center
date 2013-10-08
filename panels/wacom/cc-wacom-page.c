@@ -192,6 +192,13 @@ finish_calibration (CalibArea *area,
 				 display_width,
 				 display_height,
 				 cal, 4, priv->wacom_settings);
+	} else {
+		/* Reset the old values */
+		GVariant *old_calibration;
+
+		old_calibration = g_object_get_data (G_OBJECT (page), "old-calibration");
+		g_settings_set_value (page->priv->wacom_settings, "area", old_calibration);
+		g_object_set_data (G_OBJECT (page), "old-calibration", NULL);
 	}
 
 	calib_area_free (area);
@@ -201,6 +208,7 @@ finish_calibration (CalibArea *area,
 
 static gboolean
 run_calibration (CcWacomPage *page,
+		 GVariant    *old_calibration,
 		 gint        *cal,
 		 gint         monitor)
 {
@@ -233,6 +241,11 @@ run_calibration (CcWacomPage *page,
 				     THRESHOLD_MISCLICK,
 				     THRESHOLD_DOUBLECLICK);
 
+	g_object_set_data_full (G_OBJECT (page),
+				"old-calibration",
+				old_calibration,
+				(GDestroyNotify) g_variant_unref);
+
 	return FALSE;
 }
 
@@ -240,11 +253,13 @@ static void
 calibrate (CcWacomPage *page)
 {
 	CcWacomPagePrivate *priv;
-	int i, calibration[4];
-	GVariant *variant;
-	int *current;
+	int i, *calibration;
+	GVariant *old_calibration, **tmp, *array;
 	gsize ncal;
 	gint monitor;
+#ifdef FAKE_AREA
+	GdkScreen *screen;
+#endif
 
 	priv = page->priv;
 
@@ -257,49 +272,39 @@ calibrate (CcWacomPage *page)
 		return;
 	}
 
-	variant = g_settings_get_value (page->priv->wacom_settings, "area");
-	current = (int *) g_variant_get_fixed_array (variant, &ncal, sizeof (gint32));
+	old_calibration = g_settings_get_value (page->priv->wacom_settings, "area");
+	g_variant_get_fixed_array (old_calibration, &ncal, sizeof (gint32));
 
 	if (ncal != 4) {
 		g_warning("Device calibration property has wrong length. Got %"G_GSIZE_FORMAT" items; expected %d.\n", ncal, 4);
-		g_free (current);
 		return;
 	}
 
-	for (i = 0; i < 4; i++)
-		calibration[i] = current[i];
-
-	if (calibration[0] == -1 &&
-	    calibration[1] == -1 &&
-	    calibration[2] == -1 &&
-	    calibration[3] == -1) {
-		gint *device_cal;
-
 #ifdef FAKE_AREA
-		GdkScreen *screen;
-		screen = gdk_screen_get_default ();
+	/* Prepare the monitor attachment */
+	screen = gdk_screen_get_default ();
 
-		device_cal = g_new0 (int, 4);
-		device_cal[0] = 0;
-		device_cal[1] = gdk_screen_get_width (screen);
-		device_cal[2] = 0;
-		device_cal[3] = gdk_screen_get_height (screen);
+	calibration = g_new0 (int, 4);
+	calibration[0] = 0;
+	calibration[1] = gdk_screen_get_width (screen);
+	calibration[2] = 0;
+	calibration[3] = gdk_screen_get_height (screen);
 #else
-		device_cal = gsd_wacom_device_get_area (page->priv->stylus);
-
-		if (device_cal == NULL) {
-			g_warning ("Failed to get device's area. "
-				   "Not running calibration.");
-			return;
-		}
+	calibration = gsd_wacom_device_get_default_area (priv->stylus);
 #endif /* FAKE_AREA */
 
-		for (i = 0; i < 4; i++)
-			calibration[i] = device_cal[i];
-		g_free (device_cal);
-	}
+	/* Reset the current values, to avoid old calibrations
+	 * from interfering with the calibration */
+	tmp = g_malloc (ncal * sizeof (GVariant*));
+	for (i = 0; i < ncal; i++)
+		tmp[i] = g_variant_new_int32 (calibration[i]);
+	g_free (calibration);
 
-	run_calibration (page, calibration, monitor);
+	array = g_variant_new_array (G_VARIANT_TYPE_INT32, tmp, 4);
+	g_settings_set_value (page->priv->wacom_settings, "area", array);
+	g_free (tmp);
+
+	run_calibration (page, old_calibration, calibration, monitor);
 	gtk_widget_set_sensitive (WID ("button-calibrate"), FALSE);
 }
 
