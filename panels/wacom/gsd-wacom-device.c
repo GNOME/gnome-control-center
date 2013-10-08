@@ -1861,7 +1861,7 @@ gsd_wacom_device_get_device_type (GsdWacomDevice *device)
 	return device->priv->type;
 }
 
-gint *
+gint32 *
 gsd_wacom_device_get_area (GsdWacomDevice *device)
 {
 	int i, id;
@@ -1904,8 +1904,8 @@ gsd_wacom_device_get_area (GsdWacomDevice *device)
 }
 
 static gboolean
-fill_old_axis (int    device_id,
-	       gint  *items)
+fill_old_axis (int     device_id,
+	       gint32 *items)
 {
 	int ndevices, i;
 	XDeviceInfoPtr list, slist;
@@ -1953,18 +1953,18 @@ fill_old_axis (int    device_id,
 	return retval;
 }
 
-gint *
+gint32 *
 gsd_wacom_device_get_default_area (GsdWacomDevice *device)
 {
 	int id;
-	gint *device_area;
+	gint32 *device_area;
 	gboolean ret;
 
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
 	g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
 
-	device_area = g_new0 (int, 4);
+	device_area = g_new0 (gint32, 4);
 	ret = fill_old_axis (id, device_area);
 	if (!ret) {
 		g_free (device_area);
