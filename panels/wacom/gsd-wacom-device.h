@@ -172,8 +172,8 @@ GsdWacomStylus * gsd_wacom_device_get_stylus_for_type (GsdWacomDevice     *devic
 						       GsdWacomStylusType  type);
 
 GsdWacomDeviceType gsd_wacom_device_get_device_type (GsdWacomDevice *device);
-gint32         * gsd_wacom_device_get_area          (GsdWacomDevice *device);
-gint32         * gsd_wacom_device_get_default_area  (GsdWacomDevice *device);
+gint           * gsd_wacom_device_get_area          (GsdWacomDevice *device);
+gint           * gsd_wacom_device_get_default_area  (GsdWacomDevice *device);
 const char     * gsd_wacom_device_type_to_string    (GsdWacomDeviceType type);
 GList          * gsd_wacom_device_get_buttons       (GsdWacomDevice *device);
 GsdWacomTabletButton *gsd_wacom_device_get_button   (GsdWacomDevice   *device,
