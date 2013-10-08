@@ -298,13 +298,13 @@ calibrate (CcWacomPage *page)
 	tmp = g_malloc (ncal * sizeof (GVariant*));
 	for (i = 0; i < ncal; i++)
 		tmp[i] = g_variant_new_int32 (calibration[i]);
-	g_free (calibration);
 
 	array = g_variant_new_array (G_VARIANT_TYPE_INT32, tmp, 4);
 	g_settings_set_value (page->priv->wacom_settings, "area", array);
 	g_free (tmp);
 
 	run_calibration (page, old_calibration, calibration, monitor);
+	g_free (calibration);
 	gtk_widget_set_sensitive (WID ("button-calibrate"), FALSE);
 }
 
