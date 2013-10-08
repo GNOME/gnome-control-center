@@ -512,11 +512,6 @@ set_up_stage (CalibArea *calib_area, ClutterActor *stage)
                     G_CALLBACK (on_allocation_changed),
                     calib_area);
 
-  calib_area->calibrator.geometry.x = clutter_actor_get_x (stage);
-  calib_area->calibrator.geometry.y = clutter_actor_get_y (stage);
-  calib_area->calibrator.geometry.width = clutter_actor_get_width (stage);
-  calib_area->calibrator.geometry.height = clutter_actor_get_height (stage);
-
   clutter_color_from_string (&color, "#000");
   color.alpha = WINDOW_OPACITY * 255;
   clutter_actor_set_background_color (stage, &color);
@@ -722,6 +717,8 @@ calib_area_new (GdkScreen      *screen,
   gtk_window_set_default_size (GTK_WINDOW (calib_area->window),
                                rect.width,
                                rect.height);
+
+  calib_area->calibrator.geometry = rect;
 
   set_up_stage (calib_area, stage);
 
