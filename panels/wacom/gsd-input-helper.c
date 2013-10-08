@@ -504,6 +504,7 @@ run_custom_command (GdkDevice              *device,
         int exit_status;
         gboolean rc;
         int id;
+        char *out;
 
         settings = g_settings_new (INPUT_DEVICES_SCHEMA);
         cmd = g_settings_get_string (settings, KEY_HOTPLUG_COMMAND);
@@ -524,6 +525,10 @@ run_custom_command (GdkDevice              *device,
         argv[4] = g_strdup_printf ("%d", id);
         argv[5] = (char*) gdk_device_get_name (device);
         argv[6] = NULL;
+
+        out = g_strjoinv (" ", argv);
+        g_debug ("About to launch command: %s", out);
+        g_free (out);
 
         rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
                            NULL, NULL, NULL, NULL, &exit_status, NULL);

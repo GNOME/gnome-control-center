@@ -583,12 +583,14 @@ find_output_by_heuristic (GnomeRRScreen *rr_screen, GsdWacomDevice *device)
 {
 	GnomeRROutput *rr_output;
 
+	if (gsd_wacom_device_is_isd (device))
+		return find_builtin_output (rr_screen);
+
 	/* TODO: This heuristic will fail for non-Wacom display
 	 * tablets and may give the wrong result if multiple Wacom
 	 * display tablets are connected.
 	 */
 	rr_output = find_output_by_edid (rr_screen, "WAC", NULL, NULL);
-
 	if (!rr_output)
 		rr_output = find_builtin_output (rr_screen);
 
@@ -703,7 +705,7 @@ set_display_by_output (GsdWacomDevice  *device,
 	if (rr_output == NULL) {
 	  o_vendor  = g_strdup ("");
 	  o_product = g_strdup ("");
-	  o_serial = g_strdup ("");
+	  o_serial  = g_strdup ("");
 	} else {
 	  gnome_rr_output_get_ids_from_edid (rr_output,
 					     &o_vendor,
@@ -1271,8 +1273,7 @@ gsd_wacom_device_add_buttons_dir (WacomDevice      *wacom_device,
 
 		name = g_strdup_printf (button_str, button_num++);
 		id = g_strdup_printf ("%s%c", button_str_id, i);
-		if (libwacom_get_button_flag (wacom_device, i) & WACOM_BUTTON_OLED)
-			has_oled = TRUE;
+		has_oled = (libwacom_get_button_flag (wacom_device, i) & WACOM_BUTTON_OLED) != 0;
 		l = g_list_append (l, gsd_wacom_tablet_button_new (name,
 		                                                   id,
 		                                                   settings_path,
@@ -1900,6 +1901,77 @@ gsd_wacom_device_get_area (GsdWacomDevice *device)
 
 	XFree (data);
 	XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+
+	return device_area;
+}
+
+static gboolean
+fill_old_axis (int     device_id,
+	       gint  **items)
+{
+	int ndevices, i;
+	XDeviceInfoPtr list, slist;
+	gboolean retval = FALSE;
+
+	slist = list = (XDeviceInfoPtr) XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &ndevices);
+
+	for (i = 0; i < ndevices; i++, list++) {
+		XAnyClassPtr any = (XAnyClassPtr) (list->inputclassinfo);
+		int j;
+
+		/* Core pointer and keyboard */
+		if (list->use == IsXKeyboard || list->use == IsXPointer)
+			continue;
+
+		if (list->id != device_id)
+			continue;
+
+		for (j = 0; j < list->num_classes; j++) {
+			if (any->class == ValuatorClass) {
+				XValuatorInfoPtr V = (XValuatorInfoPtr) any;
+				XAxisInfoPtr ax = (XAxisInfoPtr) V->axes;
+
+				if (V->mode == Absolute && V->num_axes >= 2) {
+					*items[0] = ax[0].min_value;
+					*items[1] = ax[0].max_value;
+					*items[2] = ax[1].min_value;
+					*items[3] = ax[1].max_value;
+					g_debug ("Found factory values for device calibration");
+					retval = TRUE;
+					break;
+				}
+			}
+
+			/*
+			 * Increment 'any' to point to the next item in the linked
+			 * list.  The length is in bytes, so 'any' must be cast to
+			 * a character pointer before being incremented.
+			 */
+			any = (XAnyClassPtr) ((char *) any + any->length);
+		}
+	}
+	XFreeDeviceList(slist);
+
+	return retval;
+}
+
+gint *
+gsd_wacom_device_get_default_area (GsdWacomDevice *device)
+{
+	int id;
+	gint *device_area;
+	gboolean ret;
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
+
+	g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
+
+	device_area = g_new0 (int, 4);
+	ret = fill_old_axis (id, &device_area);
+	if (!ret) {
+		g_free (device_area);
+		return NULL;
+	}
 
 	return device_area;
 }
