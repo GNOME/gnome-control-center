@@ -306,9 +306,17 @@ on_button_press_event(ClutterActor       *actor,
     {
       ClutterInputDevice *device;
 
-      device =  ((ClutterButtonEvent *) event)->device;
-      if (device != NULL && clutter_input_device_get_device_id (device) != area->device_id)
+      device = clutter_event_get_source_device ((ClutterEvent *) event);
+      if (device != NULL && clutter_input_device_get_device_id (device) != area->device_id) {
+        char *name;
+
+        g_object_get (G_OBJECT (device), "name", &name, NULL);
+        g_debug ("Ignoring input from device %s (%d)",
+                 name,
+                 clutter_input_device_get_device_id (device));
+        g_free (name);
         return FALSE;
+      }
     }
 
   /* Handle click */
