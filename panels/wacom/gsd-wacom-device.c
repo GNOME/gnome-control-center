@@ -583,14 +583,12 @@ find_output_by_heuristic (GnomeRRScreen *rr_screen, GsdWacomDevice *device)
 {
 	GnomeRROutput *rr_output;
 
-	if (gsd_wacom_device_is_isd (device))
-		return find_builtin_output (rr_screen);
-
 	/* TODO: This heuristic will fail for non-Wacom display
 	 * tablets and may give the wrong result if multiple Wacom
 	 * display tablets are connected.
 	 */
 	rr_output = find_output_by_edid (rr_screen, "WAC", NULL, NULL);
+
 	if (!rr_output)
 		rr_output = find_builtin_output (rr_screen);
 
@@ -1906,8 +1904,8 @@ gsd_wacom_device_get_area (GsdWacomDevice *device)
 }
 
 static gboolean
-fill_old_axis (int     device_id,
-	       gint  **items)
+fill_old_axis (int    device_id,
+	       gint  *items)
 {
 	int ndevices, i;
 	XDeviceInfoPtr list, slist;
@@ -1931,11 +1929,11 @@ fill_old_axis (int     device_id,
 				XValuatorInfoPtr V = (XValuatorInfoPtr) any;
 				XAxisInfoPtr ax = (XAxisInfoPtr) V->axes;
 
-				if (V->mode == Absolute && V->num_axes >= 2) {
-					*items[0] = ax[0].min_value;
-					*items[1] = ax[0].max_value;
-					*items[2] = ax[1].min_value;
-					*items[3] = ax[1].max_value;
+				if (V->num_axes >= 2) {
+					items[0] = ax[0].min_value;
+					items[1] = ax[0].max_value;
+					items[2] = ax[1].min_value;
+					items[3] = ax[1].max_value;
 					g_debug ("Found factory values for device calibration");
 					retval = TRUE;
 					break;
@@ -1967,7 +1965,7 @@ gsd_wacom_device_get_default_area (GsdWacomDevice *device)
 	g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
 
 	device_area = g_new0 (int, 4);
-	ret = fill_old_axis (id, &device_area);
+	ret = fill_old_axis (id, device_area);
 	if (!ret) {
 		g_free (device_area);
 		return NULL;
