@@ -459,6 +459,43 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   gtk_widget_set_visible (priv->battery_section, TRUE);
 }
 
+static const char *
+kind_to_description (UpDeviceKind kind)
+{
+  switch (kind)
+    {
+      case UP_DEVICE_KIND_MOUSE:
+        /* TRANSLATORS: secondary battery */
+        return N_("Wireless mouse");
+      case UP_DEVICE_KIND_KEYBOARD:
+        /* TRANSLATORS: secondary battery */
+        return N_("Wireless keyboard");
+      case UP_DEVICE_KIND_UPS:
+        /* TRANSLATORS: secondary battery */
+        return N_("Uninterruptible power supply");
+      case UP_DEVICE_KIND_PDA:
+        /* TRANSLATORS: secondary battery */
+        return N_("Personal digital assistant");
+      case UP_DEVICE_KIND_PHONE:
+        /* TRANSLATORS: secondary battery */
+        return N_("Cellphone");
+      case UP_DEVICE_KIND_MEDIA_PLAYER:
+        /* TRANSLATORS: secondary battery */
+        return N_("Media player");
+      case UP_DEVICE_KIND_TABLET:
+        /* TRANSLATORS: secondary battery */
+        return N_("Tablet");
+      case UP_DEVICE_KIND_COMPUTER:
+        /* TRANSLATORS: secondary battery */
+        return N_("Computer");
+      default:
+        /* TRANSLATORS: secondary battery, misc */
+        return N_("Battery");
+    }
+
+  g_assert_not_reached ();
+}
+
 static void
 add_device (CcPowerPanel *panel, UpDevice *device)
 {
@@ -472,55 +509,27 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   GString *status;
   GString *description;
   gdouble percentage;
+  gchar *name;
   gchar *s;
   gboolean show_caution = FALSE;
 
+  name = NULL;
   g_object_get (device,
                 "kind", &kind,
                 "percentage", &percentage,
                 "state", &state,
+                "model", &name,
                 NULL);
 
-  switch (kind)
-    {
-      case UP_DEVICE_KIND_MOUSE:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Wireless mouse"));
-        break;
-      case UP_DEVICE_KIND_KEYBOARD:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Wireless keyboard"));
-        break;
-      case UP_DEVICE_KIND_UPS:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Uninterruptible power supply"));
-        show_caution = TRUE;
-        break;
-      case UP_DEVICE_KIND_PDA:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Personal digital assistant"));
-        break;
-      case UP_DEVICE_KIND_PHONE:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Cellphone"));
-        break;
-      case UP_DEVICE_KIND_MEDIA_PLAYER:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Media player"));
-        break;
-      case UP_DEVICE_KIND_TABLET:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Tablet"));
-        break;
-      case UP_DEVICE_KIND_COMPUTER:
-        /* TRANSLATORS: secondary battery */
-        description = g_string_new (_("Computer"));
-        break;
-      default:
-        /* TRANSLATORS: secondary battery, misc */
-        description = g_string_new (_("Battery"));
-        break;
-    }
+  if (kind == UP_DEVICE_KIND_UPS)
+    show_caution = TRUE;
+
+  if (name == NULL || *name == '\0')
+    description = g_string_new (_(kind_to_description (kind)));
+  else
+    description = g_string_new (name);
+
+  g_free (name);
 
   switch (state)
     {
