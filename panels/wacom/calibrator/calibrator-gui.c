@@ -74,7 +74,7 @@ struct CalibArea
 #define WINDOW_OPACITY          0.9
 
 /* Timeout parameters */
-#define MAX_TIME                15000 /* 5000 = 5 sec */
+#define MAX_TIME                15000 /* 15000 = 15 sec */
 #define END_TIME                750   /*  750 = 0.75 sec */
 
 /* Text printed on screen */
