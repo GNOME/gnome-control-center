@@ -779,7 +779,7 @@ on_permission_changed (GPermission *permission,
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (data)->priv;
   gboolean allowed, auto_timezone, using_ntp;
 
-  allowed = (priv->permission == NULL || g_permission_get_allowed (priv->permission));
+  allowed = (priv->permission != NULL && g_permission_get_allowed (priv->permission));
   using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
   auto_timezone = gtk_switch_get_active (GTK_SWITCH (W("auto_timezone_switch")));
 
@@ -896,7 +896,7 @@ switch_to_row_transform_func (GBinding        *binding,
   gboolean allowed;
 
   active = g_value_get_boolean (source_value);
-  allowed = (priv->permission == NULL || g_permission_get_allowed (priv->permission));
+  allowed = (priv->permission != NULL && g_permission_get_allowed (priv->permission));
 
   g_value_set_boolean (target_value, !active && allowed);
 
