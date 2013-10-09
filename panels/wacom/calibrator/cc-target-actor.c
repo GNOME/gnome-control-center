@@ -24,6 +24,7 @@
 #define CC_TARGET_ACTOR_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TARGET_ACTOR_TYPE, CcTargetActorPrivate))
 
 #define CROSS_LINES                    47
+#define TARGET_DIMENSION               (CROSS_LINES * 2)
 #define CROSS_CIRCLE                   7
 #define CROSS_CIRCLE2                  27
 #define TARGET_SHOW_ANIMATION_DURATION 500
@@ -185,8 +186,10 @@ cc_target_actor_class_init (CcTargetActorClass *klass)
   g_type_class_add_private (klass, sizeof (CcTargetActorPrivate));
 }
 
+
+/* Move the _center_ of the target to be at (x,y) */
 void
-cc_target_actor_move (CcTargetActor *self, gdouble x, gdouble y)
+cc_target_actor_move_center (CcTargetActor *self, gdouble x, gdouble y)
 {
   g_return_if_fail (CC_IS_TARGET_ACTOR (self));
 
@@ -195,8 +198,9 @@ cc_target_actor_move (CcTargetActor *self, gdouble x, gdouble y)
   gboolean target_visible;
 
   priv = CC_TARGET_ACTOR_GET_PRIVATE (self);
-  priv->pos_x = x;
-  priv->pos_y = y;
+
+  priv->pos_x = x - (TARGET_DIMENSION / 2);
+  priv->pos_y = y - (TARGET_DIMENSION / 2);
 
   g_object_get (self, "visible", &target_visible, NULL);
 
@@ -216,7 +220,7 @@ cc_target_actor_move (CcTargetActor *self, gdouble x, gdouble y)
     {
       clutter_actor_show (CLUTTER_ACTOR (self));
 
-      clutter_actor_set_position (CLUTTER_ACTOR (self), x, y);
+      clutter_actor_set_position (CLUTTER_ACTOR (self), priv->pos_x, priv->pos_y);
 
       show_target (self);
     }

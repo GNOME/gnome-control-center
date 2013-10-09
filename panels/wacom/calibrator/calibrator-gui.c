@@ -131,9 +131,9 @@ resize_display(CalibArea *calib_area)
     {
       gint i = calib_area->calibrator.num_clicks;
       set_display_size(calib_area, width, height);
-      cc_target_actor_move (CC_TARGET_ACTOR (calib_area->target),
-                            calib_area->X[i],
-                            calib_area->Y[i]);
+      cc_target_actor_move_center (CC_TARGET_ACTOR (calib_area->target),
+                                   calib_area->X[i],
+                                   calib_area->Y[i]);
     }
 }
 
@@ -346,10 +346,9 @@ on_button_press_event(ClutterActor       *actor,
       return FALSE;
     }
 
-  cc_target_actor_move (CC_TARGET_ACTOR (area->target),
-                        area->X[num_clicks],
-                        area->Y[num_clicks]);
-
+  cc_target_actor_move_center (CC_TARGET_ACTOR (area->target),
+                               area->X[num_clicks],
+                               area->Y[num_clicks]);
 
   return FALSE;
 }

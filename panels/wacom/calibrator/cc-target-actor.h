@@ -50,11 +50,11 @@ struct _CcTargetActorClass
   ClutterActorClass parent_class;
 };
 
-ClutterActor * cc_target_actor_new      (void);
-void           cc_target_actor_move     (CcTargetActor *target,
-                                         gdouble        x,
-                                         gdouble        y);
+ClutterActor * cc_target_actor_new         (void);
+void           cc_target_actor_move_center (CcTargetActor *target,
+                                            gdouble        x,
+                                            gdouble        y);
 
-GType          cc_target_actor_get_type (void);
+GType          cc_target_actor_get_type    (void);
 
 #endif /* __CC_TARGET_ACTOR_H__ */
