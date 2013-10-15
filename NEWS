@@ -1,4 +1,51 @@
 ==============
+Version 3.10.1
+==============
+
+Background:
+- Fix several memory leaks
+- Some code cleanups
+- Be robust against missing directories, and warn otherwise
+- Use a consistent set of permissions when creating directories
+
+Display:
+- Always label the built in display as "1"
+
+Mouse:
+- Do not reset mouse speed when unset
+
+Network:
+- Fix a few crashes and memory leaks
+- Some code cleanups
+- Just dismiss forget dialog if response is not OK
+- Update forget button sensitivity when rows are destroyed
+- Use the command line parameters property for 8021x
+- Only start the spinner when we can stop it
+
+Power:
+- Use device models as names
+
+Sharing:
+- Allow screen sharing approving without remote control enabled
+- Ensure the hostname in labels is updated
+- Prevent duplicate folders being selected for media sharing
+- When enabling DLNA, also make sure to enable the MediaExport plugin
+
+Shell:
+- Align the buttons in the headerbar
+
+Universal Access:
+- Fix a crash
+
+Wacom:
+- Align the stylus section with the tablet section
+- Fix device filtering in calibration UI
+- Fix use after free causing random values in the calibration data
+- Fix incorrect default window information
+- Fix ~100 pixel offset when calibrating
+- Reset the calibration before starting a new one
+
+==============
 Version 3.10.0
 ==============
 
