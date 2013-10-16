@@ -40,6 +40,8 @@ libbackground_chooser_la_SOURCES =	\
 	bg-colors-source.c		\
 	bg-colors-source.h
 
+libbackground_chooser_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
+
 libbackground_la_SOURCES =		\
 	cc-background-panel.c		\
 	cc-background-panel.h
