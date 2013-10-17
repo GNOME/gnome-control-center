@@ -825,6 +825,7 @@ up_client_device_removed (UpClient     *client,
 
       if (g_strcmp0 (object_path, up_device_get_object_path (device)) == 0)
         {
+          g_object_unref (device);
           g_ptr_array_remove_index (priv->devices, i);
           break;
         }
