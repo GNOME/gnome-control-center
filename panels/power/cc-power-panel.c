@@ -70,6 +70,7 @@ struct _CcPowerPanelPrivate
   GtkBuilder    *builder;
   GtkWidget     *automatic_suspend_dialog;
   UpClient      *up_client;
+  GPtrArray     *devices;
   GDBusProxy    *screen_proxy;
   GDBusProxy    *kbd_proxy;
   gboolean       has_batteries;
@@ -142,6 +143,11 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&priv->builder);
   g_clear_object (&priv->screen_proxy);
   g_clear_object (&priv->kbd_proxy);
+  if (priv->devices)
+    {
+      g_ptr_array_foreach (priv->devices, (GFunc) g_object_unref, NULL);
+      g_clear_pointer (&priv->devices, g_ptr_array_unref);
+    }
   g_clear_object (&priv->up_client);
 #ifdef HAVE_BLUETOOTH
   g_clear_object (&priv->bt_client);
@@ -624,7 +630,6 @@ up_client_changed (UpClient     *client,
                    CcPowerPanel *self)
 {
   CcPowerPanelPrivate *priv = self->priv;
-  GPtrArray *devices;
   GList *children, *l;
   gint i;
   UpDeviceKind kind;
@@ -658,8 +663,6 @@ up_client_changed (UpClient     *client,
   g_list_free (children);
   gtk_widget_hide (priv->device_section);
 
-  devices = up_client_get_devices (client);
-
 #ifdef TEST_FAKE_DEVICES
   {
     static gboolean fake_devices_added = FALSE;
@@ -675,7 +678,7 @@ up_client_changed (UpClient     *client,
                       "state", UP_DEVICE_STATE_DISCHARGING,
                       "time-to-empty", 287,
                       NULL);
-        g_ptr_array_add (devices, device);
+        g_ptr_array_add (priv->devices, device);
         device = up_device_new ();
         g_object_set (device,
                       "kind", UP_DEVICE_KIND_KEYBOARD,
@@ -683,7 +686,7 @@ up_client_changed (UpClient     *client,
                       "state", UP_DEVICE_STATE_DISCHARGING,
                       "time-to-empty", 250,
                       NULL);
-        g_ptr_array_add (devices, device);
+        g_ptr_array_add (priv->devices, device);
         device = up_device_new ();
         g_object_set (device,
                       "kind", UP_DEVICE_KIND_BATTERY,
@@ -694,7 +697,7 @@ up_client_changed (UpClient     *client,
                       "energy-rate", 15.0,
                       "time-to-empty", 400,
                       NULL);
-        g_ptr_array_add (devices, device);
+        g_ptr_array_add (priv->devices, device);
       }
   }
 #endif
@@ -709,9 +712,9 @@ up_client_changed (UpClient     *client,
                 "power-supply", TRUE,
                 "is-present", TRUE,
                 NULL);
-  for (i = 0; devices != NULL && i < devices->len; i++)
+  for (i = 0; priv->devices != NULL && i < priv->devices->len; i++)
     {
-      UpDevice *device = (UpDevice*) g_ptr_array_index (devices, i);
+      UpDevice *device = (UpDevice*) g_ptr_array_index (priv->devices, i);
       g_object_get (device,
                     "kind", &kind,
                     "state", &state,
@@ -776,9 +779,9 @@ up_client_changed (UpClient     *client,
   if (!on_ups && n_batteries > 1)
     set_primary (self, composite);
 
-  for (i = 0; devices != NULL && i < devices->len; i++)
+  for (i = 0; priv->devices != NULL && i < priv->devices->len; i++)
     {
-      UpDevice *device = (UpDevice*) g_ptr_array_index (devices, i);
+      UpDevice *device = (UpDevice*) g_ptr_array_index (priv->devices, i);
       g_object_get (device, "kind", &kind, NULL);
       if (kind == UP_DEVICE_KIND_LINE_POWER)
         {
@@ -802,8 +805,45 @@ up_client_changed (UpClient     *client,
         }
     }
 
-  g_clear_pointer (&devices, g_ptr_array_unref);
   g_object_unref (composite);
+}
+
+static void
+up_client_device_removed (UpClient     *client,
+                          const char   *object_path,
+                          CcPowerPanel *self)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+  guint i;
+
+  if (priv->devices == NULL)
+    return;
+
+  for (i = 0; i < priv->devices->len; i++)
+    {
+      UpDevice *device = g_ptr_array_index (priv->devices, i);
+
+      if (g_strcmp0 (object_path, up_device_get_object_path (device)) == 0)
+        {
+          g_ptr_array_remove_index (priv->devices, i);
+          break;
+        }
+    }
+
+  up_client_changed (self->priv->up_client, NULL, self);
+}
+
+static void
+up_client_device_added (UpClient     *client,
+                        UpDevice     *device,
+                        CcPowerPanel *self)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+
+  g_ptr_array_add (priv->devices, g_object_ref (device));
+  g_signal_connect (G_OBJECT (device), "notify",
+                    G_CALLBACK (up_client_changed), self);
+  up_client_changed (priv->up_client, NULL, self);
 }
 
 static void
@@ -2163,6 +2203,7 @@ cc_power_panel_init (CcPowerPanel *self)
   GError     *error;
   GtkWidget  *widget;
   GtkWidget  *box;
+  guint       i;
 
   priv = self->priv = POWER_PANEL_PRIVATE (self);
   g_resources_register (cc_power_get_resource ());
@@ -2226,9 +2267,15 @@ cc_power_panel_init (CcPowerPanel *self)
   update_automatic_suspend_label (self);
 
   /* populate batteries */
-  g_signal_connect (priv->up_client, "device-added", G_CALLBACK (up_client_changed), self);
-  g_signal_connect (priv->up_client, "device-changed", G_CALLBACK (up_client_changed), self);
-  g_signal_connect (priv->up_client, "device-removed", G_CALLBACK (up_client_changed), self);
+  g_signal_connect (priv->up_client, "device-added", G_CALLBACK (up_client_device_added), self);
+  g_signal_connect (priv->up_client, "device-removed", G_CALLBACK (up_client_device_removed), self);
+
+  priv->devices = up_client_get_devices (priv->up_client);
+  for (i = 0; priv->devices != NULL && i < priv->devices->len; i++) {
+    UpDevice *device = g_ptr_array_index (priv->devices, i);
+    g_signal_connect (G_OBJECT (device), "notify",
+                      G_CALLBACK (up_client_changed), self);
+  }
   up_client_changed (priv->up_client, NULL, self);
 
   widget = WID (priv->builder, "vbox_power");
