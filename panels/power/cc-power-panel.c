@@ -1095,21 +1095,10 @@ static void
 set_ac_battery_ui_mode (CcPowerPanel *self)
 {
   gboolean has_batteries = FALSE;
-  gboolean ret;
-  GError *error = NULL;
   GPtrArray *devices;
   guint i;
   UpDevice *device;
   UpDeviceKind kind;
-
-  /* this is sync, but it's cached in the daemon and so quick */
-  ret = up_client_enumerate_devices_sync (self->priv->up_client, NULL, &error);
-  if (!ret)
-    {
-      g_warning ("failed to get device list: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
 
   devices = up_client_get_devices (self->priv->up_client);
   g_debug ("got %d devices from upower\n", devices->len);
@@ -1131,7 +1120,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   has_batteries = FALSE;
 #endif
 
-out:
   self->priv->has_batteries = has_batteries;
 
   gtk_widget_set_visible (self->priv->critical_battery_row, has_batteries);
