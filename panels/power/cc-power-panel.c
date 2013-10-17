@@ -382,6 +382,7 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   GtkWidget *widget;
   gchar *s;
   gchar *native_path;
+  gchar *icon_name;
   const gchar *name;
 
   g_object_get (device,
@@ -389,6 +390,7 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
                 "state", &state,
                 "percentage", &percentage,
                 "native-path", &native_path,
+                "icon-name", &icon_name,
                 NULL);
 
   if (native_path && strstr (native_path, "BAT0"))
@@ -412,10 +414,9 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   gtk_box_pack_start (GTK_BOX (box), box2, FALSE, TRUE, 0);
 
 #if 1
-  if (state == UP_DEVICE_STATE_DISCHARGING ||
-      state == UP_DEVICE_STATE_CHARGING)
+  if (icon_name != NULL && *icon_name != '\0')
     {
-      widget = gtk_image_new_from_icon_name ("battery-good-charging-symbolic", GTK_ICON_SIZE_BUTTON);
+      widget = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON);
       gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
       gtk_widget_set_halign (widget, GTK_ALIGN_END);
       gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
@@ -455,6 +456,7 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   gtk_widget_show_all (row);
 
   g_free (native_path);
+  g_free (icon_name);
 
   gtk_widget_set_visible (priv->battery_section, TRUE);
 }
