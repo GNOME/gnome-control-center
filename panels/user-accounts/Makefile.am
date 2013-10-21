@@ -55,6 +55,8 @@ libuser_accounts_la_SOURCES =		\
 	um-realm-manager.h		\
 	um-history-dialog.h		\
 	um-history-dialog.c		\
+	online-avatars.c		\
+	online-avatars.h		\
 	$(BUILT_SOURCES)
 
 libuser_accounts_la_LIBADD = 		\
@@ -82,7 +84,7 @@ um-resources.c: user-accounts.gresource.xml $(resource_files)
 um-resources.h: user-accounts.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name um $<
 
-noinst_PROGRAMS = frob-account-dialog
+noinst_PROGRAMS = frob-account-dialog test-online-avatars
 
 frob_account_dialog_SOURCES = \
 	frob-account-dialog.c \
@@ -101,6 +103,17 @@ frob_account_dialog_LDADD = \
 
 frob_account_dialog_CFLAGS = \
 	$(AM_CFLAGS)
+
+test_online_avatars_SOURCES = \
+	test-online-avatars.c \
+	online-avatars.c \
+	online-avatars.h
+
+test_online_avatars_LDADD = \
+	$(libuser_accounts_la_LIBADD)
+
+test_online_avatars_CFLAGS = \
+	$(AM_CPPFLAGS)
 
 polkitdir = $(datadir)/polkit-1/actions
 polkit_in_files = org.gnome.controlcenter.user-accounts.policy.in
