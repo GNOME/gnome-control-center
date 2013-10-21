@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.10 -->
+  <template class="UmAvatarPicker" parent="GtkDialog">
+    <property name="title" translatable="yes">Account Picture</property>
+    <property name="default-width">600</property>
+    <property name="default-height">500</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="content_box">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">10</property>
+        <child>
+          <object class="GtkStackSwitcher" id="tabs">
+            <property name="visible">True</property>
+            <property name="stack">stack</property>
+            <property name="halign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+            <property name="vexpand">True</property>
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkScrolledWindow" id="page_avatars">
+                <property name="visible">True</property>
+                <property name="vexpand">True</property>
+                <property name="shadow-type">etched-in</property>
+                <child>
+                  <object class="GtkBox" id="avatars_box">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkFlowBox" id="avatars_online">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparator" id="avatars_separator">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFlowBox" id="avatars_stock">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="name">avatars</property>
+                <property name="title" translatable="yes">Avatars</property>
+              </packing>
+            </child>
+
+            <!--
+            <child>
+              <object class="GtkBox" id="pictures_page">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="name">pictures</property>
+                <property name="title" translatable="yes">Pictures</property>
+              </packing>
+            </child>
+            -->
+          </object>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkBox" id="button_box">
+            <property name="visible">True</property>
+            <property name="halign">end</property>
+            <child>
+              <object class="GtkButton" id="cancel_button">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Cancel</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="select_button">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Select</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="accept">select_button</action-widget>
+      <action-widget response="cancel">cancel_button</action-widget>
+    </action-widgets>
+  </template>
+</interface>
