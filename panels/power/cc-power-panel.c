@@ -674,28 +674,37 @@ up_client_changed (UpClient     *client,
         device = up_device_new ();
         g_object_set (device,
                       "kind", UP_DEVICE_KIND_MOUSE,
+                      "native-path", "dummy:native-path1",
+                      "model", "My mouse",
                       "percentage", 71.0,
                       "state", UP_DEVICE_STATE_DISCHARGING,
                       "time-to-empty", 287,
+                      "icon-name", "battery-full-symbolic",
                       NULL);
         g_ptr_array_add (priv->devices, device);
         device = up_device_new ();
         g_object_set (device,
                       "kind", UP_DEVICE_KIND_KEYBOARD,
-                      "percentage", 69.0,
+                      "native-path", "dummy:native-path2",
+                      "model", "My keyboard",
+                      "percentage", 59.0,
                       "state", UP_DEVICE_STATE_DISCHARGING,
                       "time-to-empty", 250,
+                      "icon-name", "battery-good-symbolic",
                       NULL);
         g_ptr_array_add (priv->devices, device);
         device = up_device_new ();
         g_object_set (device,
                       "kind", UP_DEVICE_KIND_BATTERY,
+                      "native-path", "dummy:native-path3",
+                      "model", "Battery from some factory",
                       "percentage", 100.0,
                       "state", UP_DEVICE_STATE_FULLY_CHARGED,
                       "energy", 55.0,
                       "energy-full", 55.0,
                       "energy-rate", 15.0,
                       "time-to-empty", 400,
+                      "icon-name", "battery-full-charged-symbolic",
                       NULL);
         g_ptr_array_add (priv->devices, device);
       }
