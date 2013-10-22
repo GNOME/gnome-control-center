@@ -5,6 +5,7 @@ INCLUDES = 						\
 	$(INFO_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DDATADIR="\"$(datadir)\""			\
+	-DBINDIR="\"$(bindir)\""			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libinfo.la
