@@ -1731,18 +1731,37 @@ on_pk_signal (GDBusProxy *proxy,
     }
 }
 
+static gboolean
+does_gnome_software_exist (void)
+{
+  return g_file_test (BINDIR "/gnome-software", G_FILE_TEST_EXISTS);
+}
+
 static void
 on_updates_button_clicked (GtkWidget   *widget,
                            CcInfoPanel *self)
 {
-  GError *error;
-  error = NULL;
-  g_spawn_command_line_async ("gpk-update-viewer", &error);
-  if (error != NULL)
+  GError *error = NULL;
+  gboolean ret;
+  gchar **argv;
+
+  argv = g_new0 (gchar *, 3);
+  if (does_gnome_software_exist ())
     {
-      g_warning ("unable to launch Software Updates: %s", error->message);
+      argv[0] = g_build_filename (BINDIR, "gnome-software", NULL);
+      argv[1] = g_strdup_printf ("--mode=updates");
+    }
+  else
+    {
+      argv[0] = g_build_filename (BINDIR, "gpk-update-viewer", NULL);
+    }
+  ret = g_spawn_async (NULL, argv, NULL, 0, NULL, NULL, NULL, &error);
+  if (!ret)
+    {
+      g_warning ("Failed to spawn %s: %s", argv[0], error->message);
       g_error_free (error);
     }
+  g_strfreev (argv);
 }
 
 static gboolean
