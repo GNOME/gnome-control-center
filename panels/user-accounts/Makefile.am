@@ -42,8 +42,6 @@ libuser_accounts_la_SOURCES =		\
 	um-password-dialog.c		\
 	pw-utils.h			\
 	pw-utils.c			\
-	um-photo-dialog.h		\
-	um-photo-dialog.c		\
 	um-crop-area.h			\
 	um-crop-area.c			\
 	um-fingerprint-dialog.h		\

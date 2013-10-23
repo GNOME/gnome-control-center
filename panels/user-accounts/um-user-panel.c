@@ -46,7 +46,7 @@
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
 #include "um-password-dialog.h"
-#include "um-photo-dialog.h"
+#include "um-avatar-picker.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
 #include "um-resources.h"
@@ -70,7 +70,6 @@ struct _CcUserPanelPrivate {
         GtkWidget *language_chooser;
 
         UmPasswordDialog *password_dialog;
-        UmPhotoDialog *photo_dialog;
         UmHistoryDialog *history_dialog;
 
         gint other_accounts;
@@ -675,8 +674,6 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         image = get_widget (d, "user-icon-image2");
         gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
         g_object_unref (pixbuf);
-
-        um_photo_dialog_set_user (d->photo_dialog, user);
 
         widget = get_widget (d, "full-name-entry");
         cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), act_user_get_real_name (user));
@@ -1395,12 +1392,35 @@ setup_main_window (CcUserPanelPrivate *d)
 }
 
 static void
+pick_avatar (GtkWidget   *button,
+             CcUserPanel *self)
+{
+        CcUserPanelPrivate *d = self->priv;
+        GtkWidget *picker;
+        int response;
+
+        picker = um_avatar_picker_new ();
+        gtk_window_set_transient_for (GTK_WINDOW (picker), GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
+        response = gtk_dialog_run (GTK_DIALOG (picker));
+
+        if (response == GTK_RESPONSE_ACCEPT) {
+                GdkPixbuf *pixbuf;
+                ActUser *user;
+
+                user = get_selected_user (d);
+                pixbuf = um_avatar_picker_get_avatar (UM_AVATAR_PICKER (picker));
+                set_user_icon_data (user, pixbuf);
+        }
+
+        gtk_widget_destroy (picker);
+}
+
+static void
 cc_user_panel_init (CcUserPanel *self)
 {
         CcUserPanelPrivate *d;
         GError *error;
         volatile GType type G_GNUC_UNUSED;
-        GtkWidget *button;
         GtkStyleContext *context;
 
         d = self->priv = UM_USER_PANEL_PRIVATE (self);
@@ -1426,12 +1446,13 @@ cc_user_panel_init (CcUserPanel *self)
         }
 
         d->password_dialog = um_password_dialog_new ();
-        button = get_widget (d, "user-icon-button");
-        d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_container_add (GTK_CONTAINER (self), d->main_box);
         d->history_dialog = um_history_dialog_new ();
         setup_main_window (d);
+
+        g_signal_connect (get_widget (d, "user-icon-button"), "clicked",
+                          G_CALLBACK (pick_avatar), self);
 
         context = gtk_widget_get_style_context (get_widget (d, "list-scrolledwindow"));
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
@@ -1455,10 +1476,6 @@ cc_user_panel_dispose (GObject *object)
         if (priv->password_dialog) {
                 um_password_dialog_free (priv->password_dialog);
                 priv->password_dialog = NULL;
-        }
-        if (priv->photo_dialog) {
-                um_photo_dialog_free (priv->photo_dialog);
-                priv->photo_dialog = NULL;
         }
         if (priv->history_dialog) {
                 um_history_dialog_free (priv->history_dialog);
