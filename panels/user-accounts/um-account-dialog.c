@@ -542,8 +542,10 @@ local_init (UmAccountDialog *self,
         g_signal_connect (widget, "changed",
                           G_CALLBACK (on_username_changed), self);
         g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_username_focus_out), self);
-        g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
         self->local_username = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-username-entry");
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (dialog_validate), self);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-name");
         g_signal_connect (widget, "changed", G_CALLBACK (on_name_changed), self);
