@@ -102,6 +102,7 @@ struct _UmAccountDialog {
         GtkWidget *enterprise_hint;
         GtkWidget *enterprise_domain_hint;
         gint       enterprise_domain_timeout_id;
+        gboolean   enterprise_domain_chosen;
 
         /* Join credential dialog */
         GtkDialog *join_dialog;
@@ -671,6 +672,11 @@ enterprise_add_realm (UmAccountDialog *self,
                             0, realm_name,
                             1, realm,
                             -1);
+
+        /* Prefill domain entry by the existing one */
+        if (!self->enterprise_domain_chosen && um_realm_is_configured (realm)) {
+                gtk_entry_set_text (self->enterprise_domain_entry, realm_name);
+        }
 
         g_debug ("added realm to drop down: %s %s", realm_name,
                  g_dbus_object_get_object_path (G_DBUS_OBJECT (realm)));
@@ -1264,6 +1270,7 @@ on_domain_changed (GtkComboBox *widget,
         self->enterprise_domain_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) enterprise_domain_timeout, self);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
+        self->enterprise_domain_chosen = TRUE;
         dialog_validate (self);
 }
 
