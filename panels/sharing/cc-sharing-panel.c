@@ -384,25 +384,11 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
   g_signal_connect_swapped (priv->bluetooth_killswitch, "state-changed",
                             G_CALLBACK (bluetooth_state_changed), self);
 
-  cc_sharing_panel_bind_switch_to_label (self,
-                                         WID ("share-public-folder-switch"),
-                                         WID ("bluetooth-sharing-status-label"));
-
-  cc_sharing_panel_bind_switch_to_widgets (WID ("share-public-folder-switch"),
-                                           WID ("only-share-trusted-devices-box"),
-                                           NULL);
-
   cc_sharing_panel_bind_switch_to_widgets (WID ("save-received-files-to-downloads-switch"),
                                            WID ("receive-files-grid"),
                                            NULL);
 
   settings = g_settings_new (FILE_SHARING_SCHEMA_ID);
-  g_settings_bind (settings, "bluetooth-enabled",
-                   WID ("share-public-folder-switch"), "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (settings, "bluetooth-require-pairing",
-                   WID ("only-share-trusted-devices-switch"), "active",
-                   G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (settings, "bluetooth-obexpush-enabled",
                    WID ("save-received-files-to-downloads-switch"), "active",
                    G_SETTINGS_BIND_DEFAULT);
