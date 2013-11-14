@@ -433,6 +433,10 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
                                                    "shared-folders-liststore");
 
   folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
+  if (!folder || g_str_equal (folder, ""))
+    goto bail;
+
+  g_debug ("Trying to add %s", folder);
 
   for (valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
        valid;
@@ -445,14 +449,17 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
       g_free (string);
 
       if (matching)
-        break;
+        {
+          g_debug ("Found a duplicate for %s", folder);
+          break;
+        }
     }
 
-  if (!matching && folder && !g_str_equal (folder, ""))
+  if (!matching)
     gtk_list_store_insert_with_values (store, NULL, -1, 0, folder, -1);
 
+bail:
   g_free (folder);
-
   gtk_widget_destroy (dialog);
 }
 
