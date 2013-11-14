@@ -625,9 +625,22 @@ up_client_changed (UpClient     *client,
   GList *children, *l;
   gint i;
   UpDeviceKind kind;
+  UpDeviceState state;
   guint n_batteries;
   gboolean on_ups;
   UpDevice *composite;
+  gdouble percentage = 0.0;
+  gdouble energy = 0.0;
+  gdouble energy_full = 0.0;
+  gdouble energy_rate = 0.0;
+  gdouble energy_total = 0.0;
+  gdouble energy_full_total = 0.0;
+  gdouble energy_rate_total = 0.0;
+  gint64 time_to_empty = 0;
+  gint64 time_to_full = 0;
+  gboolean is_charging = FALSE;
+  gboolean is_discharging = FALSE;
+  gboolean is_fully_charged = TRUE;
   gchar *s;
 
   children = gtk_container_get_children (GTK_CONTAINER (priv->battery_list));
@@ -692,21 +705,38 @@ up_client_changed (UpClient     *client,
 
   on_ups = FALSE;
   n_batteries = 0;
-  composite = up_client_get_display_device (priv->up_client);
-  g_object_get (composite, "kind", &kind, NULL);
-  if (kind == UP_DEVICE_KIND_UPS)
+  composite = up_device_new ();
+  g_object_set (composite,
+                "kind", UP_DEVICE_KIND_BATTERY,
+                "is-rechargeable", TRUE,
+                "native-path", "dummy:composite_battery",
+                "power-supply", TRUE,
+                "is-present", TRUE,
+                NULL);
+  for (i = 0; priv->devices != NULL && i < priv->devices->len; i++)
     {
-      on_ups = TRUE;
-    }
-  else
-    {
-      /* Count the batteries */
-      for (i = 0; priv->devices != NULL && i < priv->devices->len; i++)
+      UpDevice *device = (UpDevice*) g_ptr_array_index (priv->devices, i);
+      g_object_get (device,
+                    "kind", &kind,
+                    "state", &state,
+                    "energy", &energy,
+                    "energy-full", &energy_full,
+                    "energy-rate", &energy_rate,
+                    NULL);
+      if (kind == UP_DEVICE_KIND_UPS && state == UP_DEVICE_STATE_DISCHARGING)
+        on_ups = TRUE;
+      if (kind == UP_DEVICE_KIND_BATTERY)
         {
-          UpDevice *device = (UpDevice*) g_ptr_array_index (priv->devices, i);
-          g_object_get (device, "kind", &kind, NULL);
-          if (kind == UP_DEVICE_KIND_BATTERY)
-            n_batteries++;
+          if (state == UP_DEVICE_STATE_CHARGING)
+            is_charging = TRUE;
+          if (state == UP_DEVICE_STATE_DISCHARGING)
+            is_discharging = TRUE;
+          if (state != UP_DEVICE_STATE_FULLY_CHARGED)
+            is_fully_charged = FALSE;
+          energy_total += energy;
+          energy_full_total += energy_full;
+          energy_rate_total += energy_rate;
+          n_batteries++;
         }
     }
 
@@ -716,6 +746,36 @@ up_client_changed (UpClient     *client,
     s = g_strdup_printf ("<b>%s</b>", _("Battery"));
   gtk_label_set_label (GTK_LABEL (priv->battery_heading), s);
   g_free (s);
+
+  if (energy_full_total > 0.0)
+    percentage = 100.0 * energy_total / energy_full_total;
+
+  if (is_charging)
+    state = UP_DEVICE_STATE_CHARGING;
+  else if (is_discharging)
+    state = UP_DEVICE_STATE_DISCHARGING;
+  else if (is_fully_charged)
+    state = UP_DEVICE_STATE_FULLY_CHARGED;
+  else
+    state = UP_DEVICE_STATE_UNKNOWN;
+
+  if (energy_rate_total > 0)
+    {
+      if (state == UP_DEVICE_STATE_DISCHARGING)
+        time_to_empty = 3600 * (energy_total / energy_rate_total);
+      else if (state == UP_DEVICE_STATE_CHARGING)
+        time_to_full = 3600 * ((energy_full_total - energy_total) / energy_rate_total);
+    }
+
+  g_object_set (composite,
+                "energy", energy_total,
+                "energy-full", energy_full_total,
+                "energy-rate", energy_rate_total,
+                "time-to-empty", time_to_empty,
+                "time-to-full", time_to_full,
+                "percentage", percentage,
+                "state", state,
+                NULL);
 
   if (!on_ups && n_batteries > 1)
     set_primary (self, composite);
