@@ -138,7 +138,7 @@ picture_scaled (GObject *source_object,
                 gpointer user_data)
 {
   BgPicturesSource *bg_source;
-  CcBackgroundItem *item = NULL;
+  CcBackgroundItem *item;
   GError *error = NULL;
   GdkPixbuf *pixbuf = NULL;
   const char *software;
@@ -189,7 +189,6 @@ picture_scaled (GObject *source_object,
 
  out:
   g_clear_object (&pixbuf);
-  g_clear_object (&item);
 }
 
 static void
@@ -214,7 +213,6 @@ picture_opened_for_read (GObject *source_object,
         }
 
       g_error_free (error);
-      g_object_unref (item);
       return;
     }
 
@@ -223,7 +221,7 @@ picture_opened_for_read (GObject *source_object,
    */
   bg_source = BG_PICTURES_SOURCE (user_data);
 
-  g_object_set_data (G_OBJECT (stream), "item", item);
+  g_object_set_data_full (G_OBJECT (stream), "item", g_object_ref (item), g_object_unref);
   gdk_pixbuf_new_from_stream_at_scale_async (G_INPUT_STREAM (stream),
                                              THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT,
                                              TRUE,
@@ -249,24 +247,24 @@ add_single_file (BgPicturesSource *bg_source,
 		 const char       *source_uri)
 {
   const gchar *content_type;
-  CcBackgroundItem *item;
-  char *uri;
+  CcBackgroundItem *item = NULL;
+  char *uri = NULL;
+  gboolean retval = FALSE;
   guint64 mtime;
 
   /* find png and jpeg files */
   content_type = g_file_info_get_content_type (info);
 
   if (!content_type)
-    return FALSE;
+    goto out;
   if (!in_content_types (content_type))
-    return FALSE;
+    goto out;
 
   /* create a new CcBackgroundItem */
   uri = g_file_get_uri (file);
   mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
   item = cc_background_item_new (uri);
-  g_free (uri);
   g_object_set (G_OBJECT (item),
 		"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
 		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
@@ -276,13 +274,19 @@ add_single_file (BgPicturesSource *bg_source,
   if (source_uri != NULL)
     g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
 
-  g_object_set_data (G_OBJECT (file), "item", item);
+  g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
 
   g_file_read_async (file, G_PRIORITY_DEFAULT,
                      bg_source->priv->cancellable,
                      picture_opened_for_read, bg_source);
   g_object_unref (file);
-  return TRUE;
+
+  retval = TRUE;
+
+ out:
+  g_clear_object (&item);
+  g_free (uri);
+  return retval;
 }
 
 gboolean
