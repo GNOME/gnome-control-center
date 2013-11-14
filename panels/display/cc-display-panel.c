@@ -2326,7 +2326,6 @@ mapped_cb (CcDisplayPanel *panel)
 
 static void
 cc_display_panel_up_client_changed (UpClient       *client,
-                                    GParamSpec     *pspec,
                                     CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv = self->priv;
@@ -2418,9 +2417,9 @@ cc_display_panel_init (CcDisplayPanel *self)
        * https://bugs.freedesktop.org/show_bug.cgi?id=43001
        */
 
-      g_signal_connect (self->priv->up_client, "notify::lid-is-closed",
+      g_signal_connect (self->priv->up_client, "changed",
                         G_CALLBACK (cc_display_panel_up_client_changed), self);
-      cc_display_panel_up_client_changed (self->priv->up_client, NULL, self);
+      cc_display_panel_up_client_changed (self->priv->up_client, self);
     }
   else
     g_clear_object (&self->priv->up_client);
