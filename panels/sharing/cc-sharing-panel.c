@@ -100,7 +100,7 @@ cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
       gtk_switch_set_active (GTK_SWITCH (WID ("share-public-folder-on-network-switch")),
                              FALSE);
       gtk_switch_set_active (GTK_SWITCH (WID ("share-media-switch")), FALSE);
-      gtk_switch_set_active (GTK_SWITCH (WID ("share-public-folder-switch")),
+      gtk_switch_set_active (GTK_SWITCH (WID ("save-received-files-to-downloads-switch")),
                              FALSE);
     }
 
