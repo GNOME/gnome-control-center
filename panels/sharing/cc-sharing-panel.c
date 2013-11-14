@@ -384,6 +384,10 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
   g_signal_connect_swapped (priv->bluetooth_killswitch, "state-changed",
                             G_CALLBACK (bluetooth_state_changed), self);
 
+  cc_sharing_panel_bind_switch_to_label (self,
+                                         WID ("save-received-files-to-downloads-switch"),
+                                         WID ("bluetooth-sharing-status-label"));
+
   cc_sharing_panel_bind_switch_to_widgets (WID ("save-received-files-to-downloads-switch"),
                                            WID ("receive-files-grid"),
                                            NULL);
