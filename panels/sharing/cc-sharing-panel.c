@@ -417,7 +417,7 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
   gchar *folder;
   GtkTreeIter iter;
   gboolean valid;
-  gboolean matching;
+  gboolean matching = FALSE;
 
   dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
                                         GTK_WINDOW (gtk_widget_get_toplevel (button)),
