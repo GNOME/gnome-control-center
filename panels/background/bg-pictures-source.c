@@ -138,9 +138,9 @@ picture_scaled (GObject *source_object,
                 gpointer user_data)
 {
   BgPicturesSource *bg_source;
-  CcBackgroundItem *item;
+  CcBackgroundItem *item = NULL;
   GError *error = NULL;
-  GdkPixbuf *pixbuf;
+  GdkPixbuf *pixbuf = NULL;
   const char *software;
   const char *uri;
   GtkTreeIter iter;
@@ -153,7 +153,7 @@ picture_scaled (GObject *source_object,
         g_warning ("Failed to load image: %s", error->message);
 
       g_error_free (error);
-      return;
+      goto out;
     }
 
   /* since we were not cancelled, we can now cast user_data
@@ -171,9 +171,7 @@ picture_scaled (GObject *source_object,
     {
       g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot",
                cc_background_item_get_uri (item));
-      g_object_unref (pixbuf);
-      g_object_unref (item);
-      return;
+      goto out;
     }
 
   cc_background_item_load (item, NULL);
@@ -189,8 +187,9 @@ picture_scaled (GObject *source_object,
                        GINT_TO_POINTER (TRUE));
 
 
-  g_object_unref (pixbuf);
-  g_object_unref (item);
+ out:
+  g_clear_object (&pixbuf);
+  g_clear_object (&item);
 }
 
 static void
