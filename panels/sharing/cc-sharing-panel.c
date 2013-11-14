@@ -445,7 +445,7 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
       gchar *string;
 
       gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &string, -1);
-      matching = (g_strcmp0 (string, folder) != 0);
+      matching = (g_strcmp0 (string, folder) == 0);
       g_free (string);
 
       if (matching)
