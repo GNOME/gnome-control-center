@@ -348,7 +348,7 @@ bluetooth_set_accept_files (const GValue       *value,
   if (g_value_get_boolean (value))
     return g_variant_new_string ("bonded");
   else
-    return g_variant_new_string ("always");
+    return g_variant_new_string ("ask");
 }
 
 #ifdef HAVE_BLUETOOTH
