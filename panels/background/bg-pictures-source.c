@@ -279,12 +279,12 @@ add_single_file (BgPicturesSource *bg_source,
   g_file_read_async (file, G_PRIORITY_DEFAULT,
                      bg_source->priv->cancellable,
                      picture_opened_for_read, bg_source);
-  g_object_unref (file);
 
   retval = TRUE;
 
  out:
   g_clear_object (&item);
+  g_object_unref (file);
   g_free (uri);
   return retval;
 }
