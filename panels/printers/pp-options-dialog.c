@@ -352,10 +352,10 @@ ipp_option_add (IPPAttribute *attr_supported,
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
       gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
-      gtk_widget_set_margin_left (label, 10);
+      gtk_widget_set_margin_start (label, 10);
       gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
 
-      gtk_widget_set_margin_left (widget, 20);
+      gtk_widget_set_margin_start (widget, 20);
       gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
     }
 
@@ -383,10 +383,10 @@ ppd_option_add (ppd_option_t  option,
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
       gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
-      gtk_widget_set_margin_left (label, 10);
+      gtk_widget_set_margin_start (label, 10);
       gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
 
-      gtk_widget_set_margin_left (widget, 20);
+      gtk_widget_set_margin_start (widget, 20);
       gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
     }
 
