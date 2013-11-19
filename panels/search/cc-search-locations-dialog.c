@@ -518,9 +518,9 @@ place_header_func (GtkListBoxRow *row,
       w = gtk_label_new (NULL);
       g_object_set (w,
                     "margin-top", 6,
-                    "margin-right", 10,
+                    "margin-end", 10,
                     "margin-bottom", 6,
-                    "margin-left", 10,
+                    "margin-start", 10,
                     NULL);
       gtk_label_set_markup (GTK_LABEL (w), text);
       gtk_widget_set_halign (w, GTK_ALIGN_START);
@@ -579,7 +579,7 @@ create_row_for_place (Place *place)
   row = gtk_list_box_row_new ();
   child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_container_add (GTK_CONTAINER (row), child);
-  g_object_set (row, "margin-left", 16, "margin-right", 16, NULL);
+  g_object_set (row, "margin-start", 16, "margin-end", 16, NULL);
   g_object_set_data_full (G_OBJECT (row), "place", place, (GDestroyNotify) place_free);
 
   place->cancellable = g_cancellable_new ();
