@@ -157,16 +157,16 @@ add_row (CcPrivacyPanel *self,
 
   w = gtk_label_new (label);
   gtk_misc_set_alignment (GTK_MISC (w), 0.0f, 0.5f);
-  gtk_widget_set_margin_left (w, 20);
-  gtk_widget_set_margin_right (w, 20);
+  gtk_widget_set_margin_start (w, 20);
+  gtk_widget_set_margin_end (w, 20);
   gtk_widget_set_margin_top (w, 12);
   gtk_widget_set_margin_bottom (w, 12);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (w, TRUE);
   gtk_box_pack_start (GTK_BOX (box), w, TRUE, TRUE, 0);
-  gtk_widget_set_margin_left (status, 20);
-  gtk_widget_set_margin_right (status, 20);
+  gtk_widget_set_margin_start (status, 20);
+  gtk_widget_set_margin_end (status, 20);
   gtk_widget_set_halign (status, GTK_ALIGN_END);
   gtk_widget_set_valign (status, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
