@@ -58,8 +58,8 @@ padded_label_new (char *text, gboolean narrow)
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
         gtk_widget_set_margin_top (widget, 10);
         gtk_widget_set_margin_bottom (widget, 10);
-        gtk_widget_set_margin_left (widget, narrow ? 10 : 80);
-        gtk_widget_set_margin_right (widget, narrow ? 10 : 80);
+        gtk_widget_set_margin_start (widget, narrow ? 10 : 80);
+        gtk_widget_set_margin_end (widget, narrow ? 10 : 80);
         gtk_box_pack_start (GTK_BOX (widget), gtk_label_new (text), FALSE, FALSE, 0);
 
         return widget;
