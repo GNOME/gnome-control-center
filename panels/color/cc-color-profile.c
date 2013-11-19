@@ -237,7 +237,7 @@ cc_color_profile_refresh (CcColorProfile *color_profile)
 
   /* show the image if the profile is default */
   gtk_widget_set_visible (priv->widget_image, priv->is_default);
-  gtk_widget_set_margin_left (priv->widget_description,
+  gtk_widget_set_margin_start (priv->widget_description,
                               priv->is_default ? 0 : IMAGE_WIDGET_PADDING * 4);
 
   /* set the title */
@@ -461,8 +461,8 @@ cc_color_profile_init (CcColorProfile *color_profile)
 
   /* default tick */
   priv->widget_image = gtk_image_new_from_icon_name ("object-select-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_widget_set_margin_left (priv->widget_image, IMAGE_WIDGET_PADDING);
-  gtk_widget_set_margin_right (priv->widget_image, IMAGE_WIDGET_PADDING);
+  gtk_widget_set_margin_start (priv->widget_image, IMAGE_WIDGET_PADDING);
+  gtk_widget_set_margin_end (priv->widget_image, IMAGE_WIDGET_PADDING);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_image, FALSE, FALSE, 0);
 
   /* description */
@@ -475,8 +475,8 @@ cc_color_profile_init (CcColorProfile *color_profile)
 
   /* profile warnings/info */
   priv->widget_info = gtk_image_new_from_icon_name ("dialog-information-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_widget_set_margin_left (priv->widget_info, IMAGE_WIDGET_PADDING);
-  gtk_widget_set_margin_right (priv->widget_info, IMAGE_WIDGET_PADDING);
+  gtk_widget_set_margin_start (priv->widget_info, IMAGE_WIDGET_PADDING);
+  gtk_widget_set_margin_end (priv->widget_info, IMAGE_WIDGET_PADDING);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_info, FALSE, FALSE, 0);
 
   /* refresh */

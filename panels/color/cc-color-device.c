@@ -292,7 +292,7 @@ cc_color_device_init (CcColorDevice *color_device)
   /* description */
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
   priv->widget_description = gtk_label_new ("");
-  gtk_widget_set_margin_left (priv->widget_description, 12);
+  gtk_widget_set_margin_start (priv->widget_description, 12);
   gtk_widget_set_margin_top (priv->widget_description, 6);
   gtk_widget_set_margin_bottom (priv->widget_description, 6);
   gtk_misc_set_alignment (GTK_MISC (priv->widget_description), 0.0f, 0.5f);
@@ -315,14 +315,14 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_widget_set_visible (priv->widget_arrow, TRUE);
   gtk_widget_set_margin_top (priv->widget_button, 3);
   gtk_widget_set_margin_bottom (priv->widget_button, 3);
-  gtk_widget_set_margin_right (priv->widget_button, 9);
+  gtk_widget_set_margin_end (priv->widget_button, 9);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_button, FALSE, FALSE, 0);
 
   /* not calibrated */
   priv->widget_nocalib = gtk_label_new (_("Not calibrated"));
   context = gtk_widget_get_style_context (priv->widget_nocalib);
   gtk_style_context_add_class (context, "dim-label");
-  gtk_widget_set_margin_right (priv->widget_nocalib, 18);
+  gtk_widget_set_margin_end (priv->widget_nocalib, 18);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_nocalib, FALSE, FALSE, 0);
 
   /* refresh */
