@@ -311,8 +311,8 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_box_pack_start (GTK_BOX (row), box, FALSE, TRUE, 0);
         widget = gtk_label_new (nm_connection_get_id (connection));
-        gtk_widget_set_margin_left (widget, 12);
-        gtk_widget_set_margin_right (widget, 12);
+        gtk_widget_set_margin_start (widget, 12);
+        gtk_widget_set_margin_end (widget, 12);
         gtk_widget_set_margin_top (widget, 12);
         gtk_widget_set_margin_bottom (widget, 12);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
@@ -341,8 +341,8 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         gtk_widget_show (image);
         widget = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
-        gtk_widget_set_margin_left (widget, 12);
-        gtk_widget_set_margin_right (widget, 12);
+        gtk_widget_set_margin_start (widget, 12);
+        gtk_widget_set_margin_end (widget, 12);
         gtk_widget_set_margin_top (widget, 12);
         gtk_widget_set_margin_bottom (widget, 12);
         gtk_widget_show (widget);

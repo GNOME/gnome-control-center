@@ -1508,8 +1508,8 @@ make_row (GtkSizeGroup   *rows,
         gtk_size_group_add_widget (rows, row);
 
         row_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-        gtk_widget_set_margin_left (row_box, 12);
-        gtk_widget_set_margin_right (row_box, 12);
+        gtk_widget_set_margin_start (row_box, 12);
+        gtk_widget_set_margin_end (row_box, 12);
         gtk_container_add (GTK_CONTAINER (row), row_box);
 
         widget = NULL;
@@ -1748,8 +1748,8 @@ open_history (NetDeviceWifi *device_wifi)
         gtk_widget_show (swin);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swin), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (swin), GTK_SHADOW_IN);
-        gtk_widget_set_margin_left (swin, 50);
-        gtk_widget_set_margin_right (swin, 50);
+        gtk_widget_set_margin_start (swin, 50);
+        gtk_widget_set_margin_end (swin, 50);
         gtk_widget_set_margin_top (swin, 12);
         gtk_widget_set_margin_bottom (swin, 12);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), swin, TRUE, TRUE, 0);

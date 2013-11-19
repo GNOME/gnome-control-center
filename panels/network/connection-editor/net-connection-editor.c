@@ -779,8 +779,8 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
                 row = gtk_list_box_row_new ();
 
                 row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-                gtk_widget_set_margin_left (row_box, 12);
-                gtk_widget_set_margin_right (row_box, 12);
+                gtk_widget_set_margin_start (row_box, 12);
+                gtk_widget_set_margin_end (row_box, 12);
                 gtk_widget_set_margin_top (row_box, 12);
                 gtk_widget_set_margin_bottom (row_box, 12);
 
@@ -810,8 +810,8 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
         row = gtk_list_box_row_new ();
 
         row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-        gtk_widget_set_margin_left (row_box, 12);
-        gtk_widget_set_margin_right (row_box, 12);
+        gtk_widget_set_margin_start (row_box, 12);
+        gtk_widget_set_margin_end (row_box, 12);
         gtk_widget_set_margin_top (row_box, 12);
         gtk_widget_set_margin_bottom (row_box, 12);
 
@@ -870,8 +870,8 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
                 row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
                 label = gtk_label_new (_(connection_types[i].name));
                 gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-                gtk_widget_set_margin_left (label, 12);
-                gtk_widget_set_margin_right (label, 12);
+                gtk_widget_set_margin_start (label, 12);
+                gtk_widget_set_margin_end (label, 12);
                 gtk_widget_set_margin_top (label, 12);
                 gtk_widget_set_margin_bottom (label, 12);
                 gtk_box_pack_start (GTK_BOX (row_box), label, FALSE, TRUE, 0);

@@ -201,8 +201,8 @@ add_address_row (CEPageIP6   *page,
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 1, 1, 1);
 
@@ -214,8 +214,8 @@ add_address_row (CEPageIP6   *page,
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "prefix", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), network);
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 2, 1, 1);
 
@@ -227,8 +227,8 @@ add_address_row (CEPageIP6   *page,
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway);
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 3, 1, 1);
 
@@ -242,8 +242,8 @@ add_address_row (CEPageIP6   *page,
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
         gtk_grid_set_row_spacing (GTK_GRID (row_grid), 10);
-        gtk_widget_set_margin_left (row_grid, 10);
-        gtk_widget_set_margin_right (row_grid, 10);
+        gtk_widget_set_margin_start (row_grid, 10);
+        gtk_widget_set_margin_end (row_grid, 10);
         gtk_widget_set_margin_top (row_grid, 10);
         gtk_widget_set_margin_bottom (row_grid, 10);
         gtk_widget_set_halign (row_grid, GTK_ALIGN_FILL);
@@ -369,8 +369,8 @@ add_dns_row (CEPageIP6   *page,
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_box_pack_start (GTK_BOX (row_box), widget, TRUE, TRUE, 0);
 
@@ -383,8 +383,8 @@ add_dns_row (CEPageIP6   *page,
         gtk_box_pack_start (GTK_BOX (row_box), delete_button, FALSE, FALSE, 0);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        gtk_widget_set_margin_left (row_box, 10);
-        gtk_widget_set_margin_right (row_box, 10);
+        gtk_widget_set_margin_start (row_box, 10);
+        gtk_widget_set_margin_end (row_box, 10);
         gtk_widget_set_margin_top (row_box, 10);
         gtk_widget_set_margin_bottom (row_box, 10);
         gtk_widget_set_halign (row_box, GTK_ALIGN_FILL);
@@ -465,8 +465,8 @@ add_route_row (CEPageIP6   *page,
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 1, 1, 1);
 
@@ -482,8 +482,8 @@ add_route_row (CEPageIP6   *page,
                 gtk_entry_set_text (GTK_ENTRY (widget), s);
                 g_free (s);
         }
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 2, 1, 1);
 
@@ -495,8 +495,8 @@ add_route_row (CEPageIP6   *page,
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway);
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 3, 1, 1);
 
@@ -513,8 +513,8 @@ add_route_row (CEPageIP6   *page,
                 gtk_entry_set_text (GTK_ENTRY (widget), s);
                 g_free (s);
         }
-        gtk_widget_set_margin_left (widget, 10);
-        gtk_widget_set_margin_right (widget, 10);
+        gtk_widget_set_margin_start (widget, 10);
+        gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 4, 1, 1);
 
@@ -530,8 +530,8 @@ add_route_row (CEPageIP6   *page,
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
         gtk_grid_set_row_spacing (GTK_GRID (row_grid), 10);
-        gtk_widget_set_margin_left (row_grid, 10);
-        gtk_widget_set_margin_right (row_grid, 10);
+        gtk_widget_set_margin_start (row_grid, 10);
+        gtk_widget_set_margin_end (row_grid, 10);
         gtk_widget_set_margin_top (row_grid, 10);
         gtk_widget_set_margin_bottom (row_grid, 10);
         gtk_widget_set_halign (row_grid, GTK_ALIGN_FILL);
