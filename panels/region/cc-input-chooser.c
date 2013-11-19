@@ -106,8 +106,8 @@ locale_info_free (gpointer data)
 static void
 set_row_widget_margins (GtkWidget *widget)
 {
-  gtk_widget_set_margin_left (widget, 20);
-  gtk_widget_set_margin_right (widget, 20);
+  gtk_widget_set_margin_start (widget, 20);
+  gtk_widget_set_margin_end (widget, 20);
   gtk_widget_set_margin_top (widget, 6);
   gtk_widget_set_margin_bottom (widget, 6);
 }

@@ -235,8 +235,8 @@ show_restart_notification (CcRegionPanel *self,
         g_object_add_weak_pointer (G_OBJECT (priv->notification),
                                    (gpointer *)&priv->notification);
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 24);
-        gtk_widget_set_margin_left (box, 12);
-        gtk_widget_set_margin_right (box, 12);
+        gtk_widget_set_margin_start (box, 12);
+        gtk_widget_set_margin_end (box, 12);
         gtk_widget_set_margin_top (box, 6);
         gtk_widget_set_margin_bottom (box, 6);
         label = gtk_label_new (_("Your session needs to be restarted for changes to take effect"));
@@ -865,16 +865,16 @@ add_input_row (CcRegionPanel   *self,
         gtk_container_add (GTK_CONTAINER (row), box);
         label = gtk_label_new (name);
         gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-        gtk_widget_set_margin_left (label, 20);
-        gtk_widget_set_margin_right (label, 20);
+        gtk_widget_set_margin_start (label, 20);
+        gtk_widget_set_margin_end (label, 20);
         gtk_widget_set_margin_top (label, 6);
         gtk_widget_set_margin_bottom (label, 6);
         gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
         if (strcmp (type, INPUT_SOURCE_TYPE_IBUS) == 0) {
                 image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_BUTTON);
-                gtk_widget_set_margin_left (image, 20);
-                gtk_widget_set_margin_right (image, 20);
+                gtk_widget_set_margin_start (image, 20);
+                gtk_widget_set_margin_end (image, 20);
                 gtk_widget_set_margin_top (image, 6);
                 gtk_widget_set_margin_bottom (image, 6);
                 gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
