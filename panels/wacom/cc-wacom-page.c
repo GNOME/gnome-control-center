@@ -790,7 +790,7 @@ cc_wacom_page_init (CcWacomPage *self)
 
 	priv->nav = cc_wacom_nav_button_new ();
         gtk_widget_set_halign (priv->nav, GTK_ALIGN_END);
-        gtk_widget_set_margin_left (priv->nav, 10);
+        gtk_widget_set_margin_start (priv->nav, 10);
 	gtk_grid_attach (GTK_GRID (box), priv->nav, 1, 0, 1, 1);
 
 	priv->cancellable = g_cancellable_new ();

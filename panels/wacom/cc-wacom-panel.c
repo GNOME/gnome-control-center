@@ -506,8 +506,8 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	gtk_container_set_border_width (GTK_CONTAINER (notebook), 0);
 	g_object_set (G_OBJECT (notebook),
 		      "margin-top", 6,
-		      "margin-right", 30,
-		      "margin-left", 30,
+		      "margin-end", 30,
+		      "margin-start", 30,
 		      "margin-bottom", 30,
 		      NULL);
 
