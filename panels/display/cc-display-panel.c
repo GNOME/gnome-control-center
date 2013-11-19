@@ -1518,8 +1518,8 @@ show_arrange_displays_dialog (GtkButton      *button,
   g_object_set_data (G_OBJECT (area), "panel", panel);
 
   foo_scroll_area_set_min_size (FOO_SCROLL_AREA (area), 520, 290);
-  gtk_widget_set_margin_right (area, 12);
-  gtk_widget_set_margin_left (area, 12);
+  gtk_widget_set_margin_end (area, 12);
+  gtk_widget_set_margin_start (area, 12);
   gtk_widget_set_size_request (area, 520, 290);
   g_signal_connect (area, "paint",
                     G_CALLBACK (on_area_paint), panel);
@@ -1931,16 +1931,16 @@ show_setup_dialog (CcDisplayPanel *panel)
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_margin_left (box, 12);
-  gtk_widget_set_margin_right (box, 12);
+  gtk_widget_set_margin_start (box, 12);
+  gtk_widget_set_margin_end (box, 12);
   gtk_widget_set_margin_top (box, 6);
   gtk_widget_set_margin_bottom (box, 12);
   gtk_container_add (GTK_CONTAINER (content_area), box);
 
   /* configuration grid */
   priv->config_grid = gtk_grid_new ();
-  gtk_widget_set_margin_left (priv->config_grid, 36);
-  gtk_widget_set_margin_right (priv->config_grid, 36);
+  gtk_widget_set_margin_start (priv->config_grid, 36);
+  gtk_widget_set_margin_end (priv->config_grid, 36);
   gtk_widget_set_margin_bottom (priv->config_grid, 6);
   gtk_grid_set_column_spacing (GTK_GRID (priv->config_grid), 12);
   gtk_grid_set_row_spacing (GTK_GRID (priv->config_grid), 12);
@@ -2313,8 +2313,8 @@ cc_display_panel_init (CcDisplayPanel *self)
   gtk_container_add (GTK_CONTAINER (self), vbox);
 
   frame = gtk_frame_new (NULL);
-  gtk_widget_set_margin_left (vbox, 134);
-  gtk_widget_set_margin_right (vbox, 134);
+  gtk_widget_set_margin_start (vbox, 134);
+  gtk_widget_set_margin_end (vbox, 134);
   gtk_widget_set_margin_top (vbox, 22);
   gtk_widget_set_margin_bottom (vbox, 22);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
