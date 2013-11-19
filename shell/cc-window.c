@@ -1435,8 +1435,8 @@ create_main_page (CcWindow *self)
   priv->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_margin_top (priv->main_vbox, 8);
   gtk_widget_set_margin_bottom (priv->main_vbox, 8);
-  gtk_widget_set_margin_left (priv->main_vbox, 12);
-  gtk_widget_set_margin_right (priv->main_vbox, 12);
+  gtk_widget_set_margin_start (priv->main_vbox, 12);
+  gtk_widget_set_margin_end (priv->main_vbox, 12);
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (priv->main_vbox),
                                        gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (priv->scrolled_window)));
   gtk_container_add (GTK_CONTAINER (priv->scrolled_window), priv->main_vbox);
