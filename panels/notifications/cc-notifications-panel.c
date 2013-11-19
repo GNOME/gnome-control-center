@@ -230,7 +230,7 @@ add_application (CcNotificationsPanel *panel,
   gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
-  gtk_widget_set_margin_left (w, 12);
+  gtk_widget_set_margin_start (w, 12);
   gtk_container_add (GTK_CONTAINER (box), w);
   g_object_unref (icon);
 
@@ -246,7 +246,7 @@ add_application (CcNotificationsPanel *panel,
                                 NULL,
                                 NULL,
                                 NULL);
-  gtk_widget_set_margin_right (w, 12);
+  gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
 
