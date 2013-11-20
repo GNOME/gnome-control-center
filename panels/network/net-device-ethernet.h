@@ -51,6 +51,7 @@ struct _NetDeviceEthernet
         GtkWidget *details_button;
         GtkWidget *add_profile_button;
         gboolean   updating_device;
+        guint      remote_settings_id;
 };
 
 struct _NetDeviceEthernetClass

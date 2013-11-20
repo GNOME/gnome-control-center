@@ -572,8 +572,8 @@ device_ethernet_constructed (GObject *object)
                           G_CALLBACK (add_profile), device);
 
         settings = net_object_get_remote_settings (NET_OBJECT (object));
-        g_signal_connect (settings, "connections-read",
-                          G_CALLBACK (remote_settings_read_cb), object);
+        device->remote_settings_id = g_signal_connect (settings, "connections-read",
+                                                       G_CALLBACK (remote_settings_read_cb), object);
 }
 
 static void
@@ -581,8 +581,13 @@ device_ethernet_finalize (GObject *object)
 {
         NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
         GSList *connections, *l;
+        NMRemoteSettings *settings;
 
         g_object_unref (device->builder);
+
+        settings = net_object_get_remote_settings (NET_OBJECT (object));
+        g_signal_handler_disconnect (settings, device->remote_settings_id);
+        device->remote_settings_id = 0;
 
         connections = net_device_get_valid_connections (NET_DEVICE (device));
         for (l = connections; l; l = l->next) {

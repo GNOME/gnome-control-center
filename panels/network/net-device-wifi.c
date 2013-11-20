@@ -65,6 +65,8 @@ struct _NetDeviceWifiPrivate
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
+        guint                    wireless_status_id;
+        guint                    remote_settings_id;
 };
 
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
@@ -1262,8 +1264,8 @@ net_device_wifi_constructed (GObject *object)
         G_OBJECT_CLASS (net_device_wifi_parent_class)->constructed (object);
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
-        g_signal_connect (client, "notify::wireless-enabled",
-                          G_CALLBACK (wireless_enabled_toggled), device_wifi);
+        device_wifi->priv->wireless_status_id = g_signal_connect (client, "notify::wireless-enabled",
+                                                                  G_CALLBACK (wireless_enabled_toggled), device_wifi);
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
@@ -1283,8 +1285,8 @@ net_device_wifi_constructed (GObject *object)
                 gtk_widget_set_sensitive (widget, TRUE);
 
         remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        g_signal_connect (remote_settings, "connections-read",
-                          G_CALLBACK (remote_settings_read_cb), device_wifi);
+        device_wifi->priv->remote_settings_id = g_signal_connect (remote_settings, "connections-read",
+                                                                  G_CALLBACK (remote_settings_read_cb), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "heading_list"));
         g_object_bind_property (device_wifi, "title", widget, "label", 0);
@@ -1297,6 +1299,16 @@ net_device_wifi_finalize (GObject *object)
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
         NetDeviceWifiPrivate *priv = device_wifi->priv;
+        NMRemoteSettings *remote_settings;
+        NMClient *client;
+
+        client = net_object_get_client (NET_OBJECT (device_wifi));
+        g_signal_handler_disconnect (client, device_wifi->priv->wireless_status_id);
+        device_wifi->priv->wireless_status_id = 0;
+
+        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
+        g_signal_handler_disconnect (remote_settings, device_wifi->priv->remote_settings_id);
+        device_wifi->priv->remote_settings_id = 0;
 
         g_object_unref (priv->builder);
         g_free (priv->selected_ssid_title);
