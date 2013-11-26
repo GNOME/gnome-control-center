@@ -138,6 +138,7 @@ cc_shell_category_view_constructed (GObject *object)
   gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), COL_NAME);
   gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 100);
   cc_shell_item_view_update_cells (CC_SHELL_ITEM_VIEW (iconview));
+  gtk_icon_view_set_columns (GTK_ICON_VIEW (iconview), 6);
 
   /* create the header if required */
   if (priv->name)
