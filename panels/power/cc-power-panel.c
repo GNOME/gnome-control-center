@@ -26,16 +26,6 @@
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
 
-#ifdef HAVE_BLUETOOTH
-/* Handling is broken:
- * https://bugzilla.gnome.org/show_bug.cgi?id=691730
- * https://bugzilla.gnome.org/show_bug.cgi?id=691151
- * #include <bluetooth-client.h> */
-#undef HAVE_BLUETOOTH
-#endif
-
-
-
 #ifdef HAVE_NETWORK_MANAGER
 #include <nm-client.h>
 #endif
@@ -104,10 +94,9 @@ struct _CcPowerPanelPrivate
   GtkWidget     *critical_battery_row;
   GtkWidget     *critical_battery_combo;
 
-#ifdef HAVE_BLUETOOTH
-  BluetoothClient *bt_client;
-  GtkWidget       *bt_switch;
-#endif
+  GDBusProxy    *bt_rfkill;
+  GDBusProxy    *bt_properties;
+  GtkWidget     *bt_switch;
 
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
@@ -149,9 +138,8 @@ cc_power_panel_dispose (GObject *object)
       g_clear_pointer (&priv->devices, g_ptr_array_unref);
     }
   g_clear_object (&priv->up_client);
-#ifdef HAVE_BLUETOOTH
-  g_clear_object (&priv->bt_client);
-#endif
+  g_clear_object (&priv->bt_rfkill);
+  g_clear_object (&priv->bt_properties);
 #ifdef HAVE_NETWORK_MANAGER
   g_clear_object (&priv->nm_client);
 #endif
@@ -1144,41 +1132,18 @@ update_header_func (GtkListBoxRow  *row,
     }
 }
 
-#ifdef HAVE_BLUETOOTH
 static void
-bt_set_powered (BluetoothClient *client,
-                gboolean         powered)
+bt_set_powered (CcPowerPanel *self,
+                gboolean      powered)
 {
-  GVariant *ret;
-  const gchar *adapter_path;
-  GDBusConnection *bus;
-
-  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
-
-  ret = g_dbus_connection_call_sync (bus,
-                                    "org.bluez",
-                                    "/",
-                                    "org.bluez.Manager",
-                                    "DefaultAdapter",
-                                    NULL,
-                                    NULL,
-                                    0,
-                                    G_MAXINT,
-                                    NULL, NULL);
-  g_variant_get (ret, "(&o)", &adapter_path);
-
-  g_dbus_connection_call (bus,
-                          "org.bluez",
-                          adapter_path,
-                          "org.freedesktop.Properties",
-                          "SetProperty",
-                          g_variant_new ("(sv)", "Powered", g_variant_new_boolean (powered)),
-                          NULL,
-                          0,
-                          G_MAXINT,
-                          NULL, NULL, NULL);
-
-  g_variant_unref (ret);
+  g_dbus_proxy_call (self->priv->bt_properties,
+		     "Set",
+		     g_variant_new_parsed ("('org.gnome.SettingsDaemon.Rfkill', 'BluetoothAirplaneMode', %v)",
+					   g_variant_new_boolean (!powered)),
+		     G_DBUS_CALL_FLAGS_NONE,
+		     -1,
+		     self->priv->cancellable,
+		     NULL, NULL);
 }
 
 static void
@@ -1192,25 +1157,26 @@ bt_switch_changed (GtkSwitch    *sw,
 
   g_debug ("Setting bt power %s", powered ? "on" : "off");
 
-  bt_set_powered (panel->priv->bt_client, powered);
+  bt_set_powered (panel, powered);
 }
 
 static void
-bt_powered_state_changed (GObject      *client,
-                          GParamSpec   *pspec,
-                          CcPowerPanel *panel)
+bt_powered_state_changed (CcPowerPanel *panel)
 {
   CcPowerPanelPrivate *priv = panel->priv;
   gboolean powered;
+  GVariant *v;
 
-  g_object_get (client, "default-adapter-powered", &powered, NULL);
+  v = g_dbus_proxy_get_cached_property (priv->bt_rfkill, "BluetoothAirplaneMode");
+  powered = !g_variant_get_boolean (v);
+  g_variant_unref (v);
+
   g_debug ("bt powered state changed to %s", powered ? "on" : "off");
 
   g_signal_handlers_block_by_func (priv->bt_switch, bt_switch_changed, panel);
   gtk_switch_set_active (GTK_SWITCH (priv->bt_switch), powered);
   g_signal_handlers_unblock_by_func (priv->bt_switch, bt_switch_changed, panel);
 }
-#endif
 
 #ifdef HAVE_NETWORK_MANAGER
 static gboolean
@@ -1661,33 +1627,47 @@ add_power_saving_section (CcPowerPanel *self)
                     G_CALLBACK (wifi_switch_changed), self);
 #endif
 
-#ifdef HAVE_BLUETOOTH
-    priv->bt_client = bluetooth_client_new ();
-    row = gtk_list_box_row_new ();
-    box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
-    gtk_container_add (GTK_CONTAINER (row), box);
-    label = gtk_label_new (_("_Bluetooth"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-    gtk_widget_set_margin_start (label, 20);
-    gtk_widget_set_margin_end (label, 20);
-    gtk_widget_set_margin_top (label, 6);
-    gtk_widget_set_margin_bottom (label, 6);
-    gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+  priv->bt_rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+						   G_DBUS_PROXY_FLAGS_NONE,
+						   NULL,
+						   "org.gnome.SettingsDaemon.Rfkill",
+						   "/org/gnome/SettingsDaemon/Rfkill",
+						   "org.gnome.SettingsDaemon.Rfkill",
+						   NULL, NULL);
+  if (priv->bt_rfkill)
+    {
+      priv->bt_properties = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+							   G_DBUS_PROXY_FLAGS_NONE,
+							   NULL,
+							   "org.gnome.SettingsDaemon.Rfkill",
+							   "/org/gnome/SettingsDaemon/Rfkill",
+							   "org.freedesktop.DBus.Properties",
+							   NULL, NULL);
+      row = gtk_list_box_row_new ();
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+      gtk_container_add (GTK_CONTAINER (row), box);
+      label = gtk_label_new (_("_Bluetooth"));
+      gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+      gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+      gtk_widget_set_margin_start (label, 20);
+      gtk_widget_set_margin_end (label, 20);
+      gtk_widget_set_margin_top (label, 6);
+      gtk_widget_set_margin_bottom (label, 6);
+      gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
-    priv->bt_switch = sw = gtk_switch_new ();
-    gtk_widget_set_margin_start (sw, 20);
-    gtk_widget_set_margin_end (sw, 20);
-    gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-    gtk_container_add (GTK_CONTAINER (widget), row);
-    gtk_size_group_add_widget (priv->row_sizegroup, row);
-    g_signal_connect (G_OBJECT (priv->bt_client), "notify::default-adapter-powered",
-                      G_CALLBACK (bt_powered_state_changed), self);
-    g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
-                      G_CALLBACK (bt_switch_changed), self);
-#endif
+      priv->bt_switch = sw = gtk_switch_new ();
+      gtk_widget_set_margin_start (sw, 20);
+      gtk_widget_set_margin_end (sw, 20);
+      gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
+      gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+      gtk_container_add (GTK_CONTAINER (widget), row);
+      gtk_size_group_add_widget (priv->row_sizegroup, row);
+      g_signal_connect_swapped (G_OBJECT (priv->bt_rfkill), "g-properties-changed",
+				G_CALLBACK (bt_powered_state_changed), self);
+      g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
+			G_CALLBACK (bt_switch_changed), self);
+    }
 
   gtk_widget_show_all (widget);
 }
