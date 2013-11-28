@@ -31,10 +31,6 @@
 #include <glib/gi18n.h>
 #include <config.h>
 
-#ifdef HAVE_BLUETOOTH
-#include <bluetooth-killswitch.h>
-#endif
-
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
 #define PANEL_PRIVATE(o) \
@@ -77,9 +73,7 @@ struct _CcSharingPanelPrivate
   GCancellable *hostname_cancellable;
   GtkWidget *screen_sharing_dialog;
 
-#ifdef HAVE_BLUETOOTH
-  BluetoothKillswitch *bluetooth_killswitch;
-#endif
+  GDBusProxy *rfkill;
 };
 
 static void
@@ -124,10 +118,7 @@ cc_sharing_panel_dispose (GObject *object)
 {
   CcSharingPanelPrivate *priv = CC_SHARING_PANEL (object)->priv;
 
-#ifdef HAVE_BLUETOOTH
-  g_clear_object (&priv->bluetooth_killswitch);
-#endif
-
+  g_clear_object (&priv->rfkill);
   g_clear_object (&priv->builder);
 
   if (priv->bluetooth_sharing_dialog)
@@ -351,23 +342,41 @@ bluetooth_set_accept_files (const GValue       *value,
     return g_variant_new_string ("ask");
 }
 
-#ifdef HAVE_BLUETOOTH
+static gboolean
+get_boolean_property (GDBusProxy *proxy,
+		      const char *name)
+{
+	GVariant *v;
+	gboolean ret;
+
+	v = g_dbus_proxy_get_cached_property (proxy, name);
+	ret = g_variant_get_boolean (v);
+	g_variant_unref (v);
+
+	return ret;
+}
 
 static void
 bluetooth_state_changed (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
-  BluetoothKillswitchState killswitch_state;
+  gboolean state;
 
-  killswitch_state = BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER;
+  state = get_boolean_property (priv->rfkill, "BluetoothHasAirplaneMode");
+  if (!state)
+    {
+      gtk_widget_hide (WID ("bluetooth-sharing-button"));
+      return;
+    }
 
-  if (priv->bluetooth_killswitch)
-    killswitch_state = bluetooth_killswitch_get_state (priv->bluetooth_killswitch);
+  if (get_boolean_property (priv->rfkill, "BluetoothAirplaneMode") ||
+      get_boolean_property (priv->rfkill, "BluetoothHardwareAirplaneMode"))
+    {
+      gtk_widget_hide (WID ("bluetooth-sharing-button"));
+      return;
+    }
 
-  if (killswitch_state == BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER)
-    gtk_widget_hide (WID ("bluetooth-sharing-button"));
-  else
-    gtk_widget_show (WID ("bluetooth-sharing-button"));
+  gtk_widget_show (WID ("bluetooth-sharing-button"));
 }
 
 static void
@@ -376,12 +385,24 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
   CcSharingPanelPrivate *priv = self->priv;
   GSettings *settings;
 
-  priv->bluetooth_killswitch = bluetooth_killswitch_new ();
+  priv->rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+						G_DBUS_PROXY_FLAGS_NONE,
+						NULL,
+						"org.gnome.SettingsDaemon.Rfkill",
+						"/org/gnome/SettingsDaemon/Rfkill",
+						"org.gnome.SettingsDaemon.Rfkill",
+						NULL, NULL);
+  if (!priv->rfkill)
+    {
+      /* No rfkill, not Linux */
+      gtk_widget_hide (WID ("bluetooth-sharing-button"));
+      return;
+    }
 
   /* get the initial state */
   bluetooth_state_changed (self);
 
-  g_signal_connect_swapped (priv->bluetooth_killswitch, "state-changed",
+  g_signal_connect_swapped (priv->rfkill, "g-properties-changed",
                             G_CALLBACK (bluetooth_state_changed), self);
 
   cc_sharing_panel_bind_switch_to_label (self,
@@ -405,7 +426,6 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
                                 bluetooth_set_accept_files, NULL, NULL);
 
 }
-#endif
 
 static void
 cc_sharing_panel_add_folder (GtkWidget      *button,
@@ -1073,11 +1093,9 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
 
   /* bluetooth */
-#ifdef HAVE_BLUETOOTH
   if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
     cc_sharing_panel_setup_bluetooth_sharing_dialog (self);
   else
-#endif /* HAVE_BLUETOOTH */
     gtk_widget_hide (WID ("bluetooth-sharing-button"));
 
   /* media sharing */
