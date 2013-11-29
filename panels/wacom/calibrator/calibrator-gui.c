@@ -145,6 +145,9 @@ on_allocation_changed (ClutterActor          *actor,
                        ClutterAllocationFlags flags,
                        CalibArea             *area)
 {
+  if (!gtk_widget_is_visible (area->window))
+    return;
+
   resize_display (area);
 }
 
@@ -521,6 +524,8 @@ set_up_stage (CalibArea *calib_area, ClutterActor *stage)
   calib_area->success_image = clutter_actor_new ();
 
   clutter_stage_set_use_alpha (CLUTTER_STAGE (stage), TRUE);
+
+  clutter_actor_hide (calib_area->target);
 
   /* bind the action layer's geometry to the stage's */
   clutter_actor_add_constraint (calib_area->action_layer,
