@@ -106,6 +106,10 @@ draw_target (ClutterCairoTexture *texture,
              gint                 height,
              gpointer             data)
 {
+  cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
+  cairo_paint (cr);
+
+  cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
   cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
 
   cairo_set_line_width(cr, 1);
