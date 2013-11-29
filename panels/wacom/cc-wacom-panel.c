@@ -502,6 +502,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	priv->notebook = GTK_WIDGET (notebook);
 
 	gtk_notebook_set_show_tabs (notebook, FALSE);
+	gtk_notebook_set_show_border (notebook, FALSE);
 	gtk_widget_set_vexpand (GTK_WIDGET (notebook), TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (notebook), 0);
 	g_object_set (G_OBJECT (notebook),

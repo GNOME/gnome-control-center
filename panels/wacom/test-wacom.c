@@ -91,6 +91,7 @@ int main (int argc, char **argv)
 			  G_CALLBACK (delete_event_cb), NULL);
 	notebook = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 	gtk_widget_set_vexpand (notebook, TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (notebook), 24);
 	gtk_container_add (GTK_CONTAINER (window), notebook);
