@@ -301,6 +301,9 @@ on_button_press_event(ClutterActor       *actor,
   if (area->success)
     return FALSE;
 
+  if (event->click_count > 1)
+    return FALSE;
+
   /* Check matching device ID if a device ID was provided */
   if (area->device_id > -1)
     {
