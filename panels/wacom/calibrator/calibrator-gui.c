@@ -59,6 +59,8 @@ struct CalibArea
   ClutterActor      *helper_text_body;
   ClutterActor      *error_text;
   ClutterTransition *clock_timeline;
+  ClutterTransition *error_msg_timeline;
+  ClutterTransition *helper_msg_timeline;
   GdkPixbuf         *icon_success;
 
   FinishCallback callback;
@@ -152,6 +154,11 @@ on_delete_event (GtkWidget *widget,
                  CalibArea *area)
 {
   clutter_timeline_stop (CLUTTER_TIMELINE (area->clock_timeline));
+
+  if (area->error_msg_timeline)
+    clutter_timeline_stop (CLUTTER_TIMELINE (area->error_msg_timeline));
+  if (area->helper_msg_timeline)
+    clutter_timeline_stop (CLUTTER_TIMELINE (area->helper_msg_timeline));
 
   gtk_widget_hide (area->window);
 
@@ -267,6 +274,9 @@ show_error_message (CalibArea *area)
   clutter_actor_show (area->error_text);
   transition = get_error_message_transition (area);
   clutter_timeline_start (CLUTTER_TIMELINE (transition));
+
+  g_clear_object (&area->error_msg_timeline);
+  area->error_msg_timeline = transition;
 }
 
 static void
@@ -288,6 +298,9 @@ hide_error_message (CalibArea *area)
                     G_CALLBACK (on_error_message_transparent),
                     area);
   clutter_timeline_start (CLUTTER_TIMELINE (transition));
+
+  g_clear_object (&area->error_msg_timeline);
+  area->error_msg_timeline = transition;
 }
 
 static gboolean
@@ -413,6 +426,9 @@ show_helper_text_body (CalibArea *area)
   clutter_transition_set_from (transition, G_TYPE_FLOAT, -height);
   clutter_transition_set_to (transition, G_TYPE_FLOAT, 0.0);
   clutter_timeline_start (CLUTTER_TIMELINE (transition));
+
+  g_clear_object (&area->helper_msg_timeline);
+  area->helper_msg_timeline = transition;
 }
 
 static void
@@ -448,6 +464,9 @@ show_helper_text_title (CalibArea *area)
                     area);
 
   clutter_timeline_start (CLUTTER_TIMELINE (transition));
+
+  g_clear_object (&area->helper_msg_timeline);
+  area->helper_msg_timeline = transition;
 }
 
 static void
@@ -779,7 +798,9 @@ calib_area_free (CalibArea *area)
   g_return_if_fail (area != NULL);
 
   g_clear_object (&area->icon_success);
-
+  g_clear_object (&area->clock_timeline);
+  g_clear_object (&area->error_msg_timeline);
+  g_clear_object (&area->helper_msg_timeline);
   gtk_widget_destroy (area->window);
   g_free (area);
 }
