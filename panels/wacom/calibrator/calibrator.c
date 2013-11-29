@@ -149,11 +149,11 @@ finish (struct Calib *c,
     /* Compute min/max coordinates. */
     /* These are scaled using the values of old_axis */
     scale_x = (c->old_axis.x_max - c->old_axis.x_min)/(float)c->geometry.width;
-    axis.x_min = ((((c->clicked_x[UL] + c->clicked_x[LL]) / 2) - c->geometry.x) * scale_x) + c->old_axis.x_min;
-    axis.x_max = ((((c->clicked_x[UR] + c->clicked_x[LR]) / 2) - c->geometry.x) * scale_x) + c->old_axis.x_min;
+    axis.x_min = ((((c->clicked_x[UL] + c->clicked_x[LL]) / 2)) * scale_x) + c->old_axis.x_min;
+    axis.x_max = ((((c->clicked_x[UR] + c->clicked_x[LR]) / 2)) * scale_x) + c->old_axis.x_min;
     scale_y = (c->old_axis.y_max - c->old_axis.y_min)/(float)c->geometry.height;
-    axis.y_min = ((((c->clicked_y[UL] + c->clicked_y[UR]) / 2) - c->geometry.y) * scale_y) + c->old_axis.y_min;
-    axis.y_max = ((((c->clicked_y[LL] + c->clicked_y[LR]) / 2) - c->geometry.y) * scale_y) + c->old_axis.y_min;
+    axis.y_min = ((((c->clicked_y[UL] + c->clicked_y[UR]) / 2)) * scale_y) + c->old_axis.y_min;
+    axis.y_max = ((((c->clicked_y[LL] + c->clicked_y[LR]) / 2)) * scale_y) + c->old_axis.y_min;
 
     /* Add/subtract the offset that comes from not having the points in the
      * corners (using the same coordinate system they are currently in)
