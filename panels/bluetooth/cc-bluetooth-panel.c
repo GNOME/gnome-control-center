@@ -1,9 +1,6 @@
 /*
  *
- *  BlueZ - Bluetooth protocol stack for Linux
- *
- *  Copyright (C) 2006-2010  Bastien Nocera <hadess@hadess.net>
- *
+ *  Copyright (C) 2013  Bastien Nocera <hadess@hadess.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,14 +24,11 @@
 
 #include <glib/gi18n-lib.h>
 #include <shell/cc-shell.h>
+#include <bluetooth-settings-widget.h>
 
 #include "cc-bluetooth-panel.h"
 #include "cc-bluetooth-resources.h"
 
-#include <bluetooth-client.h>
-#include <bluetooth-utils.h>
-#include <bluetooth-killswitch.h>
-#include <bluetooth-chooser.h>
 
 CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 
@@ -42,44 +36,32 @@ CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
-#define BLUEZ_SERVICE	"org.bluez"
-#define ADAPTER_IFACE	"org.bluez.Adapter1"
-
-#define KEYBOARD_PREFS		"keyboard"
-#define MOUSE_PREFS		"mouse"
-#define SOUND_PREFS		"sound"
-#define WIZARD			"bluetooth-wizard"
+#define BLUETOOTH_DISABLED_PAGE      "disabled-page"
+#define BLUETOOTH_HW_DISABLED_PAGE   "hw-disabled-page"
+#define BLUETOOTH_NO_DEVICES_PAGE    "no-devices-page"
+#define BLUETOOTH_WORKING_PAGE       "working-page"
 
 struct CcBluetoothPanelPrivate {
 	GtkBuilder          *builder;
-	GtkWidget           *chooser;
-	char                *selected_bdaddr;
-	BluetoothClient     *client;
-	BluetoothKillswitch *killswitch;
-	gboolean             debug;
-	GHashTable          *connecting_devices;
-	GtkWidget           *kill_switch_header;
+	GtkWidget           *stack;
+	GtkWidget           *widget;
 	GCancellable        *cancellable;
+
+	/* Killswitch */
+	GtkWidget           *kill_switch_header;
+	GDBusProxy          *rfkill, *properties;
+	gboolean             airplane_mode;
+	gboolean             hardware_airplane_mode;
+	gboolean             has_airplane_mode;
 };
 
 static void cc_bluetooth_panel_finalize (GObject *object);
 static void cc_bluetooth_panel_constructed (GObject *object);
 
-static void
-launch_command (const char *command)
-{
-	GError *error = NULL;
-
-	if (!g_spawn_command_line_async(command, &error)) {
-		g_warning ("Couldn't execute command '%s': %s\n", command, error->message);
-		g_error_free (error);
-	}
-}
-
 static const char *
 cc_bluetooth_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/bluetooth";
+	return "help:gnome-help/bluetooth";
 }
 
 static void
@@ -102,146 +84,15 @@ cc_bluetooth_panel_finalize (GObject *object)
 	CcBluetoothPanel *self;
 
 	self = CC_BLUETOOTH_PANEL (object);
+
 	g_cancellable_cancel (self->priv->cancellable);
 	g_clear_object (&self->priv->cancellable);
 
-	g_clear_object (&self->priv->builder);
-	g_clear_object (&self->priv->killswitch);
-	g_clear_object (&self->priv->client);
-
-	g_clear_pointer (&self->priv->connecting_devices, g_hash_table_destroy);
-	g_clear_pointer (&self->priv->selected_bdaddr, g_free);
+	g_clear_object (&self->priv->properties);
+	g_clear_object (&self->priv->rfkill);
 	g_clear_object (&self->priv->kill_switch_header);
 
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
-}
-
-enum {
-	CONNECTING_NOTEBOOK_PAGE_SWITCH = 0,
-	CONNECTING_NOTEBOOK_PAGE_SPINNER = 1
-};
-
-static void
-set_connecting_page (CcBluetoothPanel *self,
-		     int               page)
-{
-	if (page == CONNECTING_NOTEBOOK_PAGE_SPINNER)
-		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("connecting_notebook")), page);
-	if (page == CONNECTING_NOTEBOOK_PAGE_SWITCH)
-		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
-}
-
-static void
-remove_connecting (CcBluetoothPanel *self,
-		   const char       *bdaddr)
-{
-	g_hash_table_remove (self->priv->connecting_devices, bdaddr);
-}
-
-static void
-add_connecting (CcBluetoothPanel *self,
-		const char       *bdaddr)
-{
-	g_hash_table_insert (self->priv->connecting_devices,
-			     g_strdup (bdaddr),
-			     GINT_TO_POINTER (1));
-}
-
-static gboolean
-is_connecting (CcBluetoothPanel *self,
-	       const char       *bdaddr)
-{
-	return GPOINTER_TO_INT (g_hash_table_lookup (self->priv->connecting_devices,
-						     bdaddr));
-}
-
-typedef struct {
-	char             *bdaddr;
-	CcBluetoothPanel *self;
-} ConnectData;
-
-static void
-connect_done (GObject      *source_object,
-	      GAsyncResult *res,
-	      gpointer      user_data)
-{
-	CcBluetoothPanel *self;
-	char *bdaddr;
-	gboolean success;
-	GError *error = NULL;
-	ConnectData *data = (ConnectData *) user_data;
-
-	success = bluetooth_client_connect_service_finish (BLUETOOTH_CLIENT (source_object),
-							   res, &error);
-	if (!success && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-		goto out;
-
-	self = data->self;
-
-	/* Check whether the same device is now selected, and update the UI */
-	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
-	if (g_strcmp0 (bdaddr, data->bdaddr) == 0) {
-		GtkSwitch *button;
-
-		button = GTK_SWITCH (WID ("switch_connection"));
-		/* Reset the switch if it failed */
-		if (success == FALSE)
-			gtk_switch_set_active (button, !gtk_switch_get_active (button));
-		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
-	}
-
-	remove_connecting (self, data->bdaddr);
-
-	g_free (bdaddr);
-
-out:
-	g_clear_error (&error);
-	g_free (data->bdaddr);
-	g_free (data);
-}
-
-static void
-switch_connected_active_changed (GtkSwitch        *button,
-				 GParamSpec       *spec,
-				 CcBluetoothPanel *self)
-{
-	char *proxy;
-	GValue value = { 0, };
-	ConnectData *data;
-	char *bdaddr;
-
-	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
-	if (is_connecting (self, bdaddr)) {
-		g_free (bdaddr);
-		return;
-	}
-
-	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
-							"proxy", &value) == FALSE) {
-		g_warning ("Could not get D-Bus proxy for selected device");
-		return;
-	}
-	proxy = g_strdup (g_dbus_proxy_get_object_path (g_value_get_object (&value)));
-	g_value_unset (&value);
-
-	if (proxy == NULL)
-		return;
-
-	data = g_new0 (ConnectData, 1);
-	data->bdaddr = bdaddr;
-	data->self = self;
-
-	bluetooth_client_connect_service (self->priv->client,
-					  proxy,
-					  gtk_switch_get_active (button),
-					  self->priv->cancellable,
-					  connect_done,
-					  data);
-
-	add_connecting (self, data->bdaddr);
-	set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
-	g_free (proxy);
 }
 
 static void
@@ -258,120 +109,6 @@ cc_bluetooth_panel_constructed (GObject *object)
 	gtk_widget_show_all (self->priv->kill_switch_header);
 }
 
-enum {
-	NOTEBOOK_PAGE_EMPTY = 0,
-	NOTEBOOK_PAGE_PROPS = 1
-};
-
-static void
-set_notebook_page (CcBluetoothPanel *self,
-		   int               page)
-{
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("props_notebook")), page);
-}
-
-static void
-cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
-{
-	char *bdaddr;
-	GtkSwitch *button;
-
-	button = GTK_SWITCH (WID ("switch_connection"));
-	g_signal_handlers_block_by_func (button, switch_connected_active_changed, self);
-
-	/* Hide all the buttons now, and show them again if we need to */
-	gtk_widget_hide (WID ("keyboard_box"));
-	gtk_widget_hide (WID ("sound_box"));
-	gtk_widget_hide (WID ("mouse_box"));
-	gtk_widget_hide (WID ("send_box"));
-
-	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
-
-	if (bdaddr == NULL) {
-		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
-		gtk_switch_set_active (button, FALSE);
-		gtk_widget_set_sensitive (WID ("button_delete"), FALSE);
-		set_notebook_page (self, NOTEBOOK_PAGE_EMPTY);
-	} else {
-		BluetoothType type;
-		gboolean connected;
-		GValue value = { 0 };
-
-		if (self->priv->debug)
-			bluetooth_chooser_dump_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
-
-		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
-
-		if (is_connecting (self, bdaddr)) {
-			gtk_switch_set_active (button, TRUE);
-			set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
-		} else {
-			connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (self->priv->chooser));
-			gtk_switch_set_active (button, connected);
-			set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
-		}
-
-		/* Paired */
-		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
-							    "paired", &value);
-		gtk_label_set_text (GTK_LABEL (WID ("paired_label")),
-				    g_value_get_boolean (&value) ? _("Yes") : _("No"));
-		g_value_unset (&value);
-
-		/* UUIDs */
-		if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
-								"uuids", &value)) {
-			const char **uuids;
-			guint i;
-
-			uuids = (const char **) g_value_get_boxed (&value);
-
-			gtk_widget_set_sensitive (GTK_WIDGET(button),
-						  bluetooth_client_get_connectable (uuids));
-
-			for (i = 0; uuids && uuids[i] != NULL; i++) {
-				if (g_str_equal (uuids[i], "OBEXObjectPush")) {
-					gtk_widget_show (WID ("send_box"));
-					break;
-				}
-
-			}
-
-			g_value_unset (&value);
-		}
-
-		/* Type */
-		type = bluetooth_chooser_get_selected_device_type (BLUETOOTH_CHOOSER (self->priv->chooser));
-		gtk_label_set_text (GTK_LABEL (WID ("type_label")), bluetooth_type_to_string (type));
-		switch (type) {
-		case BLUETOOTH_TYPE_KEYBOARD:
-			gtk_widget_show (WID ("keyboard_box"));
-			break;
-		case BLUETOOTH_TYPE_MOUSE:
-		case BLUETOOTH_TYPE_TABLET:
-			gtk_widget_show (WID ("mouse_box"));
-			break;
-		case BLUETOOTH_TYPE_HEADSET:
-		case BLUETOOTH_TYPE_HEADPHONES:
-		case BLUETOOTH_TYPE_OTHER_AUDIO:
-			gtk_widget_show (WID ("sound_box"));
-		default:
-			/* others? */
-			;
-		}
-
-		gtk_label_set_text (GTK_LABEL (WID ("address_label")), bdaddr);
-
-		gtk_widget_set_sensitive (WID ("button_delete"), TRUE);
-		set_notebook_page (self, NOTEBOOK_PAGE_PROPS);
-	}
-
-	g_free (self->priv->selected_bdaddr);
-	self->priv->selected_bdaddr = bdaddr;
-
-	g_signal_handlers_unblock_by_func (button, switch_connected_active_changed, self);
-}
-
 static void
 power_callback (GObject          *object,
 		GParamSpec       *spec,
@@ -381,374 +118,116 @@ power_callback (GObject          *object,
 
 	state = gtk_switch_get_active (GTK_SWITCH (WID ("switch_bluetooth")));
 	g_debug ("Power switched to %s", state ? "on" : "off");
-	bluetooth_killswitch_set_state (self->priv->killswitch,
-					state ? BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED : BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED);
-}
-
-static void
-cc_bluetooth_panel_update_treeview_message (CcBluetoothPanel *self,
-					    const char       *message)
-{
-	if (message != NULL) {
-		gtk_widget_hide (self->priv->chooser);
-		gtk_widget_show (WID ("message_scrolledwindow"));
-
-		gtk_label_set_text (GTK_LABEL (WID ("message_label")),
-				    message);
-	} else {
-		gtk_widget_hide (WID ("message_scrolledwindow"));
-		gtk_widget_show (self->priv->chooser);
-	}
+	g_dbus_proxy_call (self->priv->properties,
+			   "Set",
+			   g_variant_new_parsed ("('org.gnome.SettingsDaemon.Rfkill', 'BluetoothAirplaneMode', %v)",
+						 g_variant_new_boolean (!state)),
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   self->priv->cancellable,
+			   NULL, NULL);
 }
 
 static void
 cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 {
-	BluetoothKillswitchState state;
-	char *path;
-	gboolean powered, sensitive;
+	GObject *toggle;
+	gboolean sensitive, powered;
+	const char *page;
 
-	g_object_get (G_OBJECT (self->priv->client),
-		      "default-adapter", &path,
-		      "default-adapter-powered", &powered,
-		      NULL);
-	state = bluetooth_killswitch_get_state (self->priv->killswitch);
+	g_debug ("Updating airplane mode: has_airplane_mode %d, hardware_airplane_mode %d, airplane_mode %d",
+		 self->priv->has_airplane_mode, self->priv->hardware_airplane_mode, self->priv->airplane_mode);
 
-	g_debug ("Updating power, default adapter: %s (powered: %s), killswitch: %s",
-		 path ? path : "(none)",
-		 powered ? "on" : "off",
-		 bluetooth_killswitch_state_to_string (state));
-
-	if (path == NULL &&
-	    bluetooth_killswitch_has_killswitches (self->priv->killswitch) &&
-	    state != BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED) {
-		g_debug ("Default adapter is unpowered, but should be available");
-		sensitive = TRUE;
-		cc_bluetooth_panel_update_treeview_message (self, _("Bluetooth is disabled"));
-	} else if (path == NULL &&
-		   state == BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED) {
+	if (self->priv->has_airplane_mode == FALSE) {
+		g_debug ("No Bluetooth available");
+		sensitive = FALSE;
+		powered = FALSE;
+		page = BLUETOOTH_NO_DEVICES_PAGE;
+	} else if (self->priv->hardware_airplane_mode) {
 		g_debug ("Bluetooth is Hard blocked");
 		sensitive = FALSE;
-		cc_bluetooth_panel_update_treeview_message (self, _("Bluetooth is disabled by hardware switch"));
-	} else if (path == NULL) {
-		sensitive = FALSE;
-		g_debug ("No Bluetooth available");
-		cc_bluetooth_panel_update_treeview_message (self, _("No Bluetooth adapters found"));
-	} else {
+		powered = FALSE;
+		page = BLUETOOTH_HW_DISABLED_PAGE;
+	} else if (self->priv->airplane_mode) {
+		g_debug ("Default adapter is unpowered, but should be available");
 		sensitive = TRUE;
+		powered = FALSE;
+		page = BLUETOOTH_DISABLED_PAGE;
+	} else {
 		g_debug ("Bluetooth is available and powered");
-		cc_bluetooth_panel_update_treeview_message (self, NULL);
+		sensitive = TRUE;
+		powered = TRUE;
+		page = BLUETOOTH_WORKING_PAGE;
 	}
 
-	g_free (path);
 	gtk_widget_set_sensitive (WID ("box_power") , sensitive);
-	gtk_widget_set_sensitive (WID ("box_vis") , sensitive);
+
+	toggle = G_OBJECT (WID ("switch_bluetooth"));
+	g_signal_handlers_block_by_func (toggle, power_callback, self);
+	gtk_switch_set_active (GTK_SWITCH (toggle), powered);
+	g_signal_handlers_unblock_by_func (toggle, power_callback, self);
+
+	gtk_stack_set_visible_child_name (GTK_STACK (self->priv->stack), page);
 }
 
 static void
-switch_panel (CcBluetoothPanel *self,
-	      const char       *panel)
+airplane_mode_changed (GDBusProxy       *proxy,
+		       GVariant         *changed_properties,
+		       GStrv             invalidated_properties,
+		       CcBluetoothPanel *self)
 {
-  CcShell *shell;
-  GError *error = NULL;
+	GVariant *v;
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
-    {
-      g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
-      g_error_free (error);
-    }
-}
+	v = g_dbus_proxy_get_cached_property (self->priv->rfkill, "BluetoothAirplaneMode");
+	self->priv->airplane_mode = g_variant_get_boolean (v);
+	g_variant_unref (v);
 
-static gboolean
-keyboard_callback (GtkButton        *button,
-		   CcBluetoothPanel *self)
-{
-	switch_panel (self, KEYBOARD_PREFS);
-	return TRUE;
-}
+	v = g_dbus_proxy_get_cached_property (self->priv->rfkill, "BluetoothHardwareAirplaneMode");
+	self->priv->hardware_airplane_mode = g_variant_get_boolean (v);
+	g_variant_unref (v);
 
-static gboolean
-mouse_callback (GtkButton        *button,
-		CcBluetoothPanel *self)
-{
-	switch_panel (self, MOUSE_PREFS);
-	return TRUE;
-}
+	v = g_dbus_proxy_get_cached_property (self->priv->rfkill, "BluetoothHasAirplaneMode");
+	self->priv->has_airplane_mode = g_variant_get_boolean (v);
+	g_variant_unref (v);
 
-static gboolean
-sound_callback (GtkButton        *button,
-		CcBluetoothPanel *self)
-{
-	switch_panel (self, SOUND_PREFS);
-	return TRUE;
+	cc_bluetooth_panel_update_power (self);
 }
 
 static void
-send_callback (GtkButton        *button,
+add_stack_page (CcBluetoothPanel *self,
+		const char       *message,
+		const char       *name)
+{
+	GtkWidget *label;
+
+	label = gtk_label_new (message);
+	gtk_stack_add_named (GTK_STACK (self->priv->stack), label, name);
+	gtk_widget_show (label);
+}
+
+static void
+panel_changed (GtkWidget        *settings_widget,
+	       const char       *panel,
 	       CcBluetoothPanel *self)
 {
-	char *bdaddr, *alias;
-
-	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
-	alias = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (self->priv->chooser));
-
-	bluetooth_send_to_address (bdaddr, alias);
-
-	g_free (bdaddr);
-	g_free (alias);
-}
-
-/* Visibility/Discoverable */
-static void discoverable_changed (BluetoothClient  *client,
-				  GParamSpec       *spec,
-				  CcBluetoothPanel *self);
-
-static void
-switch_discoverable_active_changed (GtkSwitch        *button,
-				    GParamSpec       *spec,
-				    CcBluetoothPanel *self)
-{
-	g_signal_handlers_block_by_func (self->priv->client, discoverable_changed, self);
-	g_object_set (G_OBJECT (self->priv->client), "default-adapter-discoverable",
-		      gtk_switch_get_active (button), NULL);
-	g_signal_handlers_unblock_by_func (self->priv->client, discoverable_changed, self);
-}
-
-static void
-cc_bluetooth_panel_update_visibility (CcBluetoothPanel *self)
-{
-	gboolean discoverable;
-	GtkSwitch *button;
-	char *name;
-
-	button = GTK_SWITCH (WID ("switch_discoverable"));
-	g_object_get (G_OBJECT (self->priv->client), "default-adapter-discoverable", &discoverable, NULL);
-	g_signal_handlers_block_by_func (button, switch_discoverable_active_changed, self);
-	gtk_switch_set_active (button, discoverable);
-	g_signal_handlers_unblock_by_func (button, switch_discoverable_active_changed, self);
-
-	g_object_get (G_OBJECT (self->priv->client), "default-adapter-name", &name, NULL);
-	if (name == NULL) {
-		gtk_widget_set_sensitive (WID ("switch_discoverable"), FALSE);
-		gtk_widget_set_sensitive (WID ("visible_label"), FALSE);
-		gtk_label_set_text (GTK_LABEL (WID ("visible_label")), _("Visibility"));
-	} else {
-		char *label;
-
-		label = g_strdup_printf (_("Visibility of “%s”"), name);
-		g_free (name);
-		gtk_label_set_text (GTK_LABEL (WID ("visible_label")), label);
-		g_free (label);
-
-		gtk_widget_set_sensitive (WID ("switch_discoverable"), TRUE);
-		gtk_widget_set_sensitive (WID ("visible_label"), TRUE);
-	}
-}
-
-static void
-discoverable_changed (BluetoothClient  *client,
-		      GParamSpec       *spec,
-		      CcBluetoothPanel *self)
-{
-	cc_bluetooth_panel_update_visibility (self);
-}
-
-static void
-name_changed (BluetoothClient  *client,
-	      GParamSpec       *spec,
-	      CcBluetoothPanel *self)
-{
-	cc_bluetooth_panel_update_visibility (self);
-}
-
-static void
-device_selected_changed (BluetoothChooser *chooser,
-			 GParamSpec       *spec,
-			 CcBluetoothPanel *self)
-{
-	cc_bluetooth_panel_update_properties (self);
-}
-
-static gboolean
-show_confirm_dialog (CcBluetoothPanel *self,
-		     const char *name)
-{
-	GtkWidget *dialog, *parent;
-	gint response;
-
-	parent = gtk_widget_get_toplevel (GTK_WIDGET (self));
-	dialog = gtk_message_dialog_new (GTK_WINDOW (parent), GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-					 _("Remove '%s' from the list of devices?"), name);
-	g_object_set (G_OBJECT (dialog), "secondary-text",
-		      _("If you remove the device, you will have to set it up again before next use."),
-		      NULL);
-
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_ACCEPT);
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-
-	gtk_widget_destroy (dialog);
-
-	if (response == GTK_RESPONSE_ACCEPT)
-		return TRUE;
-
-	return FALSE;
-}
-
-static gboolean
-remove_selected_device (CcBluetoothPanel *self)
-{
-	GValue value = { 0, };
-	char *device, *adapter;
-	GDBusProxy *adapter_proxy;
+	CcShell *shell;
 	GError *error = NULL;
-	GVariant *ret;
 
-	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
-							"proxy", &value) == FALSE) {
-		return FALSE;
-	}
-	device = g_strdup (g_dbus_proxy_get_object_path (g_value_get_object (&value)));
-	g_value_unset (&value);
-
-	g_object_get (G_OBJECT (self->priv->client), "default-adapter", &adapter, NULL);
-	adapter_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-						       NULL,
-						       BLUEZ_SERVICE,
-						       adapter,
-						       ADAPTER_IFACE,
-						       NULL,
-						       &error);
-	g_free (adapter);
-	if (adapter_proxy == NULL) {
-		g_warning ("Failed to create a GDBusProxy for the default adapter: %s", error->message);
+	shell = cc_panel_get_shell (CC_PANEL (self));
+	if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE) {
+		g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
 		g_error_free (error);
-		g_free (device);
-		return FALSE;
 	}
-
-	ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (adapter_proxy),
-				      "RemoveDevice",
-				      g_variant_new ("(o)", device),
-				      G_DBUS_CALL_FLAGS_NONE,
-				      -1,
-				      NULL,
-				      &error);
-	if (ret == NULL) {
-		g_warning ("Failed to remove device '%s': %s", device, error->message);
-		g_error_free (error);
-	} else {
-		g_variant_unref (ret);
-	}
-
-	g_object_unref (adapter_proxy);
-	g_free (device);
-
-	return (ret != NULL);
-}
-
-/* Treeview buttons */
-static void
-delete_clicked (GtkToolButton    *button,
-		CcBluetoothPanel *self)
-{
-	char *address, *name;
-
-	address = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
-	g_assert (address);
-
-	name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (self->priv->chooser));
-
-	if (show_confirm_dialog (self, name) != FALSE)
-		remove_selected_device (self);
-
-	g_free (address);
-	g_free (name);
-}
-
-static void
-setup_clicked (GtkToolButton    *button,
-	       CcBluetoothPanel *self)
-{
-	launch_command (WIZARD);
-}
-
-/* Overall device state */
-static void
-cc_bluetooth_panel_update_state (CcBluetoothPanel *self)
-{
-	char *bdaddr;
-
-	g_object_get (G_OBJECT (self->priv->client),
-		      "default-adapter", &bdaddr,
-		      NULL);
-	gtk_widget_set_sensitive (WID ("toolbar"), (bdaddr != NULL));
-	g_free (bdaddr);
-}
-
-static void
-cc_bluetooth_panel_update_powered_state (CcBluetoothPanel *self)
-{
-	gboolean powered;
-
-	g_object_get (G_OBJECT (self->priv->client),
-		      "default-adapter-powered", &powered,
-		      NULL);
-	gtk_switch_set_active (GTK_SWITCH (WID ("switch_bluetooth")), powered);
-}
-
-static void
-default_adapter_power_changed (BluetoothClient  *client,
-			       GParamSpec       *spec,
-			       CcBluetoothPanel *self)
-{
-	g_debug ("Default adapter power changed");
-	cc_bluetooth_panel_update_powered_state (self);
-}
-
-static void
-default_adapter_changed (BluetoothClient  *client,
-			 GParamSpec       *spec,
-			 CcBluetoothPanel *self)
-{
-	g_debug ("Default adapter changed");
-	cc_bluetooth_panel_update_state (self);
-	cc_bluetooth_panel_update_power (self);
-	cc_bluetooth_panel_update_powered_state (self);
-}
-
-static void
-killswitch_changed (BluetoothKillswitch      *killswitch,
-		    BluetoothKillswitchState  state,
-		    CcBluetoothPanel         *self)
-{
-	g_debug ("Killswitch changed to state '%s' (%d)", bluetooth_killswitch_state_to_string (state) , state);
-	cc_bluetooth_panel_update_state (self);
-	cc_bluetooth_panel_update_power (self);
 }
 
 static void
 cc_bluetooth_panel_init (CcBluetoothPanel *self)
 {
-	GtkWidget *widget;
 	GError *error = NULL;
-	GtkStyleContext *context;
 
 	self->priv = BLUETOOTH_PANEL_PRIVATE (self);
+	//FIXME
 	g_resources_register (cc_bluetooth_get_resource ());
-
-	self->priv->cancellable = g_cancellable_new ();
-	self->priv->killswitch = bluetooth_killswitch_new ();
-	self->priv->client = bluetooth_client_new ();
-	self->priv->connecting_devices = g_hash_table_new_full (g_str_hash,
-								g_str_equal,
-								(GDestroyNotify) g_free,
-								NULL);
-	self->priv->debug = g_getenv ("BLUETOOTH_DEBUG") != NULL;
 
 	self->priv->builder = gtk_builder_new ();
 	gtk_builder_set_translation_domain (self->priv->builder, GETTEXT_PACKAGE);
@@ -761,79 +240,43 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 		return;
 	}
 
-	widget = WID ("grid");
-	gtk_container_add (GTK_CONTAINER (self), widget);
+	self->priv->cancellable = g_cancellable_new ();
 
-	/* Overall device state */
-	cc_bluetooth_panel_update_state (self);
-	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter",
-			  G_CALLBACK (default_adapter_changed), self);
-	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter-powered",
-			  G_CALLBACK (default_adapter_power_changed), self);
+	/* RFKill */
+	self->priv->rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+							    G_DBUS_PROXY_FLAGS_NONE,
+							    NULL,
+							    "org.gnome.SettingsDaemon.Rfkill",
+							    "/org/gnome/SettingsDaemon/Rfkill",
+							    "org.gnome.SettingsDaemon.Rfkill",
+							    NULL, NULL);
+	self->priv->properties = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+								G_DBUS_PROXY_FLAGS_NONE,
+								NULL,
+								"org.gnome.SettingsDaemon.Rfkill",
+								"/org/gnome/SettingsDaemon/Rfkill",
+								"org.freedesktop.DBus.Properties",
+								NULL, NULL);
 
-	/* The discoverable button */
-	cc_bluetooth_panel_update_visibility (self);
-	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter-discoverable",
-			  G_CALLBACK (discoverable_changed), self);
-	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter-name",
-			  G_CALLBACK (name_changed), self);
-	g_signal_connect (G_OBJECT (WID ("switch_discoverable")), "notify::active",
-			  G_CALLBACK (switch_discoverable_active_changed), self);
+	self->priv->stack = gtk_stack_new ();
+	add_stack_page (self, _("Bluetooth is disabled"), BLUETOOTH_DISABLED_PAGE);
+	add_stack_page (self, _("No Bluetooth adapters found"), BLUETOOTH_NO_DEVICES_PAGE);
+	add_stack_page (self, _("Bluetooth is disabled by hardware switch"), BLUETOOTH_HW_DISABLED_PAGE);
 
-	context = gtk_widget_get_style_context (WID ("message_scrolledwindow"));
-	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+	self->priv->widget = bluetooth_settings_widget_new ();
+	g_signal_connect (G_OBJECT (self->priv->widget), "panel-changed",
+			  G_CALLBACK (panel_changed), self);
+	gtk_stack_add_named (GTK_STACK (self->priv->stack),
+			     self->priv->widget, BLUETOOTH_WORKING_PAGE);
+	gtk_widget_show (self->priv->widget);
+	gtk_widget_show (self->priv->stack);
 
-	/* Note that this will only ever show the devices on the default
-	 * adapter, this is on purpose */
-	self->priv->chooser = bluetooth_chooser_new ();
-	gtk_box_pack_start (GTK_BOX (WID ("box_devices")), self->priv->chooser, TRUE, TRUE, 0);
-	g_object_set (self->priv->chooser,
-		      "show-searching", FALSE,
-		      "show-device-type", FALSE,
-		      "show-device-type-column", FALSE,
-		      "show-device-category", FALSE,
-		      "show-pairing", FALSE,
-		      "show-connected", FALSE,
-		      "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
-		      "no-show-all", TRUE,
-		      NULL);
+	gtk_container_add (GTK_CONTAINER (self), self->priv->stack);
 
-	/* Join treeview and buttons */
-	widget = bluetooth_chooser_get_scrolled_window (BLUETOOTH_CHOOSER (self->priv->chooser));
-	gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), 250);
-	gtk_scrolled_window_set_min_content_width (GTK_SCROLLED_WINDOW (widget), 200);
-	context = gtk_widget_get_style_context (widget);
-	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-	widget = WID ("toolbar");
-	context = gtk_widget_get_style_context (widget);
-	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+	airplane_mode_changed (NULL, NULL, NULL, self);
+	g_signal_connect (self->priv->rfkill, "g-properties-changed",
+			  G_CALLBACK (airplane_mode_changed), self);
 
-	g_signal_connect (G_OBJECT (self->priv->chooser), "notify::device-selected",
-			  G_CALLBACK (device_selected_changed), self);
-	g_signal_connect (G_OBJECT (WID ("button_delete")), "clicked",
-			  G_CALLBACK (delete_clicked), self);
-	g_signal_connect (G_OBJECT (WID ("button_setup")), "clicked",
-			  G_CALLBACK (setup_clicked), self);
-
-	/* Set the initial state of the properties */
-	cc_bluetooth_panel_update_properties (self);
-	g_signal_connect (G_OBJECT (WID ("mouse_link")), "activate-link",
-			  G_CALLBACK (mouse_callback), self);
-	g_signal_connect (G_OBJECT (WID ("keyboard_link")), "activate-link",
-			  G_CALLBACK (keyboard_callback), self);
-	g_signal_connect (G_OBJECT (WID ("sound_link")), "activate-link",
-			  G_CALLBACK (sound_callback), self);
-	g_signal_connect (G_OBJECT (WID ("send_button")), "clicked",
-			  G_CALLBACK (send_callback), self);
-	g_signal_connect (G_OBJECT (WID ("switch_connection")), "notify::active",
-			  G_CALLBACK (switch_connected_active_changed), self);
-
-	/* Set the initial state of power */
 	g_signal_connect (G_OBJECT (WID ("switch_bluetooth")), "notify::active",
 			  G_CALLBACK (power_callback), self);
-	g_signal_connect (G_OBJECT (self->priv->killswitch), "state-changed",
-			  G_CALLBACK (killswitch_changed), self);
-	cc_bluetooth_panel_update_power (self);
-
-	gtk_widget_show_all (GTK_WIDGET (self));
 }
