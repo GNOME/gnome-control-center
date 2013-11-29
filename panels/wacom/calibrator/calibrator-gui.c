@@ -479,6 +479,10 @@ on_fullscreen (GtkWindow           *window,
   if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
     return;
 
+  /* Protect against window state multiple changes*/
+  if (CLUTTER_ACTOR_IS_VISIBLE (area->action_layer))
+    return;
+
   clutter_actor_show (area->action_layer);
   clutter_actor_show (area->clock);
 
