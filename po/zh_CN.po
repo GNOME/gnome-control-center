@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-30 11:45+0000\n"
+"POT-Creation-Date: 2013-11-26 15:55+0000\n"
 "PO-Revision-Date: 2013-08-30 12:15+0800\n"
 "Last-Translator: 甘露(Lu Gan) <rhythm.gan@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -129,7 +129,7 @@ msgstr "您添加到 %s 文件夹的图片将在此显示"
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:470
 #: ../panels/search/cc-search-locations-dialog.c:682
-#: ../panels/sharing/cc-sharing-panel.c:435
+#: ../panels/sharing/cc-sharing-panel.c:425
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
 #: ../panels/user-accounts/um-photo-dialog.c:96
 #: ../panels/user-accounts/um-photo-dialog.c:221
@@ -950,24 +950,23 @@ msgstr "完成(_D)"
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:363
 msgid "%e %B %Y, %l:%M %p"
-msgstr ""
+msgstr "%Y%B，%p%l%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:368
 msgid "%e %B %Y, %R"
-msgstr ""
+msgstr "%Y%B，%R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
 #: ../panels/datetime/cc-datetime-panel.c:584
-#| msgid "UTC%z"
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:589
 msgid "%l:%M %p"
-msgstr ""
+msgstr "%p %l:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:594
@@ -1034,7 +1033,7 @@ msgstr "时"
 #. Translator: this is the separator between hours and minutes, like in HH∶MM
 #: ../panels/datetime/datetime.ui.h:16
 msgid "∶"
-msgstr "∶"
+msgstr ":"
 
 #: ../panels/datetime/datetime.ui.h:17
 msgid "Minute"
@@ -1111,7 +1110,7 @@ msgstr "修改时间或日期设置，您需要获得管理员权限。"
 
 #: ../panels/display/cc-display-panel.c:485
 msgid "Lid Closed"
-msgstr "已合上显示屏"
+msgstr "关闭盖子"
 
 #. translators: "Mirrored" describes when both displays show the same view
 #: ../panels/display/cc-display-panel.c:488
@@ -1140,9 +1139,8 @@ msgid "Secondary"
 msgstr "次"
 
 #: ../panels/display/cc-display-panel.c:1505
-#, fuzzy
 msgid "Arrange Combined Displays"
-msgstr "排列组合显示屏"
+msgstr "排列组合的显示屏"
 
 #: ../panels/display/cc-display-panel.c:1511
 #: ../panels/display/cc-display-panel.c:1927
@@ -1204,7 +1202,6 @@ msgid "Turn Off"
 msgstr "关闭"
 
 #: ../panels/display/cc-display-panel.c:2086
-#| msgid "Don't use the display"
 msgid "Don't use this display"
 msgstr "不使用该显示器"
 
@@ -1213,7 +1210,6 @@ msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
 
 #: ../panels/display/cc-display-panel.c:2333
-#, fuzzy
 msgid "_Arrange Combined Displays"
 msgstr "排列组合显示屏(_A)"
 
@@ -2524,7 +2520,7 @@ msgstr "选择要导入的文件"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1947
-#: ../panels/sharing/cc-sharing-panel.c:436
+#: ../panels/sharing/cc-sharing-panel.c:426
 #: ../panels/user-accounts/um-photo-dialog.c:222
 msgid "_Open"
 msgstr "打开(_O)"
@@ -3651,8 +3647,8 @@ msgid ""
 "Kerberos;IMAP;SMTP;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
-"谷歌;脸谱;脸书;推特;雅虎;微博;网络;在线;聊天;日历;邮件;联系人;云;Kerberos;"
-"IMAP;SMTP;"
+"Kerberos;IMAP;SMTP;谷歌;脸谱;脸书;推特;雅虎;微博;网络;在线;聊天;日历;邮件;联"
+"系人;云存储"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4014,7 +4010,7 @@ msgid "Authenticate"
 msgstr "认证"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:21
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "密码"
@@ -4254,7 +4250,6 @@ msgstr "添加新打印机"
 
 #. Translators: This button opens authentication dialog for selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:5
-#| msgid "Authenticate"
 msgid "A_uthenticate"
 msgstr "认证(_U)"
 
@@ -4264,7 +4259,6 @@ msgstr "搜索网络打印机或过滤结果"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:8
-#| msgid "Search for network printers or filter result"
 msgid "Enter address of a printer or a text to filter results"
 msgstr "输入打印机地址或文本来过滤结果"
 
@@ -4382,7 +4376,6 @@ msgstr "%s 个活动的任务"
 
 #. Translators: This item is a server which needs authentication to show its printers
 #: ../panels/printers/pp-new-printer-dialog.c:1669
-#| msgid "_Inner authentication"
 msgid "Server requires authentication"
 msgstr "服务器需要认证"
 
@@ -4619,11 +4612,11 @@ msgstr "清空回收站(_E)"
 
 #: ../panels/privacy/cc-privacy-panel.c:514
 msgid "Delete all the temporary files?"
-msgstr "删除所有临时文件？"
+msgstr "删除所有临时文件吗？"
 
 #: ../panels/privacy/cc-privacy-panel.c:515
 msgid "All the temporary files will be permanently deleted."
-msgstr "所有临时文件将被永久删除。"
+msgstr "所有临时文件将会永久删除。"
 
 #: ../panels/privacy/cc-privacy-panel.c:516 ../panels/privacy/privacy.ui.h:33
 msgid "_Purge Temporary Files"
@@ -4979,11 +4972,11 @@ msgctxt "service is disabled"
 msgid "Off"
 msgstr "关"
 
-#: ../panels/sharing/cc-sharing-panel.c:432
+#: ../panels/sharing/cc-sharing-panel.c:422
 msgid "Choose a Folder"
 msgstr "选择文件夹"
 
-#: ../panels/sharing/cc-sharing-panel.c:739
+#: ../panels/sharing/cc-sharing-panel.c:736
 msgid "Copy"
 msgstr "复制"
 
@@ -5024,70 +5017,62 @@ msgid ""
 msgstr "蓝牙共享允许您使用带有蓝牙的设备共享文件"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Share Public Folder"
-msgstr "共享公共(Public)文件夹"
-
-#: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
 msgstr "只从信任的设备接收"
 
-#: ../panels/sharing/sharing.ui.h:5
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Save Received Files to Downloads Folder"
 msgstr "将接收的文件保存到下载(Downloads)文件夹"
 
-#: ../panels/sharing/sharing.ui.h:6
-msgid "Only share with Trusted Devices"
-msgstr "只共享信任的设备"
-
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "计算机名"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Personal File Sharing"
 msgstr "个人文件共享"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:7
 msgid "Screen Sharing"
 msgstr "屏幕共享"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:8
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Remote Login"
 msgstr "远程登录"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Some services are disabled because of no network access."
 msgstr "因为没有网络，一些服务已经禁用。"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "在当前网络上共享音乐、照片和视频。"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "在网络上共享媒体"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "共享文件夹"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "列"
 
-#: ../panels/sharing/sharing.ui.h:17
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "添加文件夹"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "移除文件夹"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5096,15 +5081,15 @@ msgstr ""
 "个人网络共享允许您与当前网络中的其他人共享自己的共享文件夹，使用地址：<a "
 "href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Share Public Folder On This Network"
 msgstr "在网络上共享公共文件夹"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Require Password"
 msgstr "需要密码"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:23
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5113,26 +5098,26 @@ msgstr ""
 "允许远程用户使用安全 Shell 命令连接：\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:28
+#: ../panels/sharing/sharing.ui.h:26
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
 msgstr "允许远程用户通过 VNC 控制屏幕：<a href=\"vnc://%s\">vnc://%s</a> "
 
-#: ../panels/sharing/sharing.ui.h:29
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Remote View"
 msgstr "远程查看"
 
-#: ../panels/sharing/sharing.ui.h:30
+#: ../panels/sharing/sharing.ui.h:28
 msgid "Remote Control"
 msgstr "远程控制"
 
-#: ../panels/sharing/sharing.ui.h:31
+#: ../panels/sharing/sharing.ui.h:29
 msgid "Approve All Connections"
 msgstr "允许所有连接"
 
-#: ../panels/sharing/sharing.ui.h:32
+#: ../panels/sharing/sharing.ui.h:30
 msgid "Show Password"
 msgstr "显示密码"
 
@@ -5373,16 +5358,13 @@ msgstr "使看、听、打字、指、点更加容易"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;"
-#| "size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
-"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;键盘;辅助功能;对比"
-"度;缩放;屏幕读取器;文本;字体;大小;粘滞键;慢速键;回弹键;鼠标;"
+"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;键盘;辅助功能;对比度;缩"
+"放;屏幕读取器;文本;字体;大小;粘滞键;慢速键;回弹键;鼠标;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6985,6 +6967,12 @@ msgstr "设置"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;首选项;设置;"
+
+#~ msgid "Share Public Folder"
+#~ msgstr "共享公共(Public)文件夹"
+
+#~ msgid "Only share with Trusted Devices"
+#~ msgstr "只共享信任的设备"
 
 #~ msgid "Device type:"
 #~ msgstr "设备类型："
