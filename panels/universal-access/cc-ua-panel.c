@@ -117,7 +117,7 @@ cc_ua_panel_dispose (GObject *object)
   CcUaPanelPrivate *priv = CC_UA_PANEL (object)->priv;
 
   g_clear_object (&priv->builder);
-  g_slist_free_full (priv->toplevels, gtk_widget_destroy);
+  g_slist_free_full (priv->toplevels, (GDestroyNotify)gtk_widget_destroy);
   priv->toplevels = NULL;
 
   g_clear_object (&priv->wm_settings);
