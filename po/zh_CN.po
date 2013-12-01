@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-11-09 10:32+0000\n"
+"POT-Creation-Date: 2013-11-26 14:45+0000\n"
 "PO-Revision-Date: 2013-08-16 12:12+0800\n"
 "Last-Translator: Luo Lei <luolei@ubuntukylin.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -129,7 +129,7 @@ msgstr "您添加到 %s 文件夹的图片将在此显示"
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:470
 #: ../panels/search/cc-search-locations-dialog.c:682
-#: ../panels/sharing/cc-sharing-panel.c:435
+#: ../panels/sharing/cc-sharing-panel.c:425
 #: ../panels/user-accounts/um-fingerprint-dialog.c:269
 #: ../panels/user-accounts/um-photo-dialog.c:96
 #: ../panels/user-accounts/um-photo-dialog.c:221
@@ -949,33 +949,29 @@ msgstr "完成(_D)"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:363
-#, fuzzy
-#| msgid "%a %l:%M %p"
 msgid "%e %B %Y, %l:%M %p"
-msgstr "%A %H%M"
+msgstr "%Y%B，%p%l%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:368
 msgid "%e %B %Y, %R"
-msgstr ""
+msgstr "%Y%B，%R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
 #: ../panels/datetime/cc-datetime-panel.c:584
 msgid "UTC%:::z"
-msgstr ""
+msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:589
-#, fuzzy
-#| msgid "%a %l:%M %p"
 msgid "%l:%M %p"
-msgstr "%A %H%M"
+msgstr "%p %l:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:594
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "January"
@@ -1057,7 +1053,7 @@ msgstr "年"
 
 #: ../panels/datetime/datetime.ui.h:21
 msgid "Time Zone"
-msgstr "时间"
+msgstr "时区"
 
 #: ../panels/datetime/datetime.ui.h:22
 msgid "Search for a city"
@@ -1072,10 +1068,8 @@ msgid "Requires internet access"
 msgstr "需要互联网连接"
 
 #: ../panels/datetime/datetime.ui.h:25
-#, fuzzy
-#| msgid "Automatic _Connect"
 msgid "Automatic Time _Zone"
-msgstr "自动连接(_C)"
+msgstr "自动时区(_Z)"
 
 #: ../panels/datetime/datetime.ui.h:26
 msgid "Date & _Time"
@@ -1126,7 +1120,7 @@ msgstr "镜像显示"
 #: ../panels/display/cc-display-panel.c:490
 #: ../panels/display/cc-display-panel.c:2057
 msgid "Primary"
-msgstr "主按钮"
+msgstr "主"
 
 #: ../panels/display/cc-display-panel.c:492
 #: ../panels/notifications/cc-notifications-panel.c:205
@@ -1142,11 +1136,11 @@ msgstr "关"
 
 #: ../panels/display/cc-display-panel.c:495
 msgid "Secondary"
-msgstr "次要"
+msgstr "次"
 
 #: ../panels/display/cc-display-panel.c:1505
 msgid "Arrange Combined Displays"
-msgstr ""
+msgstr "排列组合的显示屏"
 
 #: ../panels/display/cc-display-panel.c:1511
 #: ../panels/display/cc-display-panel.c:1927
@@ -1161,7 +1155,7 @@ msgstr "拖动显示屏来重新排列它们"
 #. size
 #: ../panels/display/cc-display-panel.c:1991
 msgid "Size"
-msgstr "尺寸"
+msgstr "大小"
 
 #. aspect ratio
 #: ../panels/display/cc-display-panel.c:2006
@@ -1175,15 +1169,15 @@ msgstr "分辨率"
 
 #: ../panels/display/cc-display-panel.c:2058
 msgid "Show the top bar and Activities Overview on this display"
-msgstr "在此显示器上显示顶栏和活动概览"
+msgstr "在此显示屏上显示顶栏和活动概览"
 
 #: ../panels/display/cc-display-panel.c:2064
 msgid "Secondary Display"
-msgstr "第二显示器"
+msgstr "第二显示屏"
 
 #: ../panels/display/cc-display-panel.c:2065
 msgid "Join this display with another to create an extra workspace"
-msgstr "将该显示器与另一个合并来生成另外的工作空间"
+msgstr "将该显示屏与另一显示屏组合以扩展工作空间"
 
 # 左撇子有歧视色彩。
 #: ../panels/display/cc-display-panel.c:2072
@@ -1201,7 +1195,7 @@ msgstr "镜像"
 
 #: ../panels/display/cc-display-panel.c:2079
 msgid "Show your existing view on both displays"
-msgstr "在两块显示器上同时显示当前视图"
+msgstr "在两块显示屏上同时显示当前视图"
 
 #: ../panels/display/cc-display-panel.c:2085
 msgid "Turn Off"
@@ -1209,7 +1203,7 @@ msgstr "关闭"
 
 #: ../panels/display/cc-display-panel.c:2086
 msgid "Don't use this display"
-msgstr "不使用该显示器"
+msgstr "不使用该显示屏"
 
 #: ../panels/display/cc-display-panel.c:2301
 msgid "Could not get screen information"
@@ -1217,7 +1211,7 @@ msgstr "无法获得屏幕信息"
 
 #: ../panels/display/cc-display-panel.c:2332
 msgid "_Arrange Combined Displays"
-msgstr ""
+msgstr "排列组合的显示屏(_A)"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Displays"
@@ -2530,7 +2524,7 @@ msgstr "选择要导入的文件"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1947
-#: ../panels/sharing/cc-sharing-panel.c:436
+#: ../panels/sharing/cc-sharing-panel.c:426
 #: ../panels/user-accounts/um-photo-dialog.c:222
 msgid "_Open"
 msgstr "打开(_O)"
@@ -4020,7 +4014,7 @@ msgid "Authenticate"
 msgstr "认证"
 
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:21
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "密码"
@@ -4987,11 +4981,11 @@ msgctxt "service is disabled"
 msgid "Off"
 msgstr "关"
 
-#: ../panels/sharing/cc-sharing-panel.c:432
+#: ../panels/sharing/cc-sharing-panel.c:422
 msgid "Choose a Folder"
 msgstr "选择文件夹"
 
-#: ../panels/sharing/cc-sharing-panel.c:739
+#: ../panels/sharing/cc-sharing-panel.c:736
 msgid "Copy"
 msgstr "复制"
 
@@ -5032,70 +5026,62 @@ msgid ""
 msgstr "蓝牙共享允许您使用带有蓝牙的设备共享文件"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Share Public Folder"
-msgstr "共享公共(Public)文件夹"
-
-#: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
 msgstr "只从信任的设备接收"
 
-#: ../panels/sharing/sharing.ui.h:5
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Save Received Files to Downloads Folder"
 msgstr "将接收的文件保存到下载(Downloads)文件夹"
 
-#: ../panels/sharing/sharing.ui.h:6
-msgid "Only share with Trusted Devices"
-msgstr "只共享信任的设备"
-
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "计算机名"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Personal File Sharing"
 msgstr "个人文件共享"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:7
 msgid "Screen Sharing"
 msgstr "屏幕共享"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:8
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Remote Login"
 msgstr "远程登录"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Some services are disabled because of no network access."
 msgstr "因为没有网络，一些服务已经禁用。"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr "在当前网络上共享音乐、照片和视频。"
 
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:12
 msgid "Share Media On This Network"
 msgstr "在网络上共享媒体"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:13
 msgid "Shared Folders"
 msgstr "共享文件夹"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:14
 msgid "column"
 msgstr "列"
 
-#: ../panels/sharing/sharing.ui.h:17
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Add Folder"
 msgstr "添加文件夹"
 
-#: ../panels/sharing/sharing.ui.h:18
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Remove Folder"
 msgstr "移除文件夹"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5104,15 +5090,15 @@ msgstr ""
 "个人网络共享允许您与当前网络中的其他人共享自己的共享文件夹，使用地址：<a "
 "href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Share Public Folder On This Network"
 msgstr "在网络上共享公共文件夹"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Require Password"
 msgstr "需要密码"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:23
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5121,26 +5107,26 @@ msgstr ""
 "允许远程用户使用安全 Shell 命令连接：\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:28
+#: ../panels/sharing/sharing.ui.h:26
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
 msgstr "允许远程用户通过 VNC 控制屏幕：<a href=\"vnc://%s\">vnc://%s</a> "
 
-#: ../panels/sharing/sharing.ui.h:29
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Remote View"
 msgstr "远程查看"
 
-#: ../panels/sharing/sharing.ui.h:30
+#: ../panels/sharing/sharing.ui.h:28
 msgid "Remote Control"
 msgstr "远程控制"
 
-#: ../panels/sharing/sharing.ui.h:31
+#: ../panels/sharing/sharing.ui.h:29
 msgid "Approve All Connections"
 msgstr "允许所有连接"
 
-#: ../panels/sharing/sharing.ui.h:32
+#: ../panels/sharing/sharing.ui.h:30
 msgid "Show Password"
 msgstr "显示密码"
 
@@ -5386,12 +5372,12 @@ msgid ""
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
-"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;键盘;鼠标;辅助功能;对比"
-"度;缩放;屏幕读取器;文本;字体;大小;粘滞键;慢速键;回弹键;鼠标键;"
+"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;键盘;辅助功能;对比度;缩"
+"放;屏幕读取器;文本;字体;大小;粘滞键;慢速键;回弹键;鼠标键;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
-msgstr "总是显示通用辅助功能菜单(_A)"
+msgstr "一直显示通用辅助功能菜单(_A)"
 
 #: ../panels/universal-access/uap.ui.h:2
 msgid "Seeing"
@@ -6990,6 +6976,12 @@ msgstr "设置"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;首选项;设置;"
+
+#~ msgid "Share Public Folder"
+#~ msgstr "共享公共(Public)文件夹"
+
+#~ msgid "Only share with Trusted Devices"
+#~ msgstr "只共享信任的设备"
 
 #~ msgid "Device type:"
 #~ msgstr "设备类型："
