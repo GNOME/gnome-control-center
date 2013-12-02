@@ -190,16 +190,18 @@ cc_panel_get_preferred_height (GtkWidget *widget,
 
 static void
 cc_panel_size_allocate (GtkWidget     *widget,
-                             GtkAllocation *allocation)
+                        GtkAllocation *allocation)
 {
   GtkAllocation child_allocation;
+  GtkWidget *child;
 
   gtk_widget_set_allocation (widget, allocation);
 
   child_allocation = *allocation;
 
-  gtk_widget_size_allocate (gtk_bin_get_child (GTK_BIN (widget)),
-                            &child_allocation);
+  child = gtk_bin_get_child (GTK_BIN (widget));
+  g_assert (child);
+  gtk_widget_size_allocate (child, &child_allocation);
 }
 
 static void
