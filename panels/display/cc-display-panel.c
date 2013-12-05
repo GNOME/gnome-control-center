@@ -78,6 +78,7 @@ struct _CcDisplayPanelPrivate
   GtkWidget *arrange_button;
   GtkWidget *res_combo;
   GtkWidget *rotate_left_button;
+  GtkWidget *upside_down_button;
   GtkWidget *rotate_right_button;
   GtkWidget *apply_button;
   GtkWidget *dialog;
@@ -1779,18 +1780,44 @@ rotate_left_clicked (GtkButton      *button,
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GnomeRRRotation rotation;
+  gboolean active;
 
-  rotation = gnome_rr_output_info_get_rotation (priv->current_output);
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-  if (rotation & GNOME_RR_ROTATION_0)
+  if (active)
     {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), FALSE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), FALSE);
       rotation = GNOME_RR_ROTATION_90;
-      gtk_widget_set_sensitive (priv->rotate_left_button, FALSE);
     }
   else
     {
       rotation = GNOME_RR_ROTATION_0;
-      gtk_widget_set_sensitive (priv->rotate_right_button, TRUE);
+    }
+
+  gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+  update_apply_button (panel);
+}
+
+static void
+upside_down_clicked (GtkButton      *button,
+                     CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GnomeRRRotation rotation;
+  gboolean active;
+
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+
+  if (active)
+    {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), FALSE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), FALSE);
+      rotation = GNOME_RR_ROTATION_180;
+    }
+  else
+    {
+      rotation = GNOME_RR_ROTATION_0;
     }
 
   gnome_rr_output_info_set_rotation (priv->current_output, rotation);
@@ -1803,18 +1830,19 @@ rotate_right_clicked (GtkButton      *button,
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GnomeRRRotation rotation;
+  gboolean active;
 
-  rotation = gnome_rr_output_info_get_rotation (priv->current_output);
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-  if (rotation & GNOME_RR_ROTATION_0)
+  if (active)
     {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), FALSE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), FALSE);
       rotation = GNOME_RR_ROTATION_270;
-      gtk_widget_set_sensitive (priv->rotate_right_button, FALSE);
     }
   else
     {
       rotation = GNOME_RR_ROTATION_0;
-      gtk_widget_set_sensitive (priv->rotate_left_button, TRUE);
     }
 
   gnome_rr_output_info_set_rotation (priv->current_output, rotation);
@@ -1961,9 +1989,9 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_grid_attach (GTK_GRID (priv->config_grid), rotate_box, 0, 1, 2, 1);
   gtk_widget_set_halign (rotate_box, GTK_ALIGN_CENTER);
 
-  priv->rotate_left_button = gtk_button_new ();
+  priv->rotate_left_button = gtk_toggle_button_new ();
   if (rotation == GNOME_RR_ROTATION_90)
-    gtk_widget_set_sensitive (priv->rotate_left_button, FALSE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), TRUE);
   g_signal_connect (priv->rotate_left_button, "clicked",
                     G_CALLBACK (rotate_left_clicked), panel);
   g_signal_connect_swapped (priv->rotate_left_button, "clicked",
@@ -1974,9 +2002,22 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_widget_set_halign (priv->rotate_left_button, GTK_ALIGN_END);
   gtk_container_add (GTK_CONTAINER (rotate_box), priv->rotate_left_button);
 
-  priv->rotate_right_button = gtk_button_new ();
+  priv->upside_down_button = gtk_toggle_button_new ();
+  if (rotation == GNOME_RR_ROTATION_180)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), TRUE);
+  g_signal_connect (priv->upside_down_button, "clicked",
+                    G_CALLBACK (upside_down_clicked), panel);
+  g_signal_connect_swapped (priv->upside_down_button, "clicked",
+                            G_CALLBACK (gtk_widget_queue_draw), preview);
+  gtk_container_add (GTK_CONTAINER (priv->upside_down_button),
+                     gtk_image_new_from_icon_name ("object-flip-vertical-symbolic",
+                                                   GTK_ICON_SIZE_BUTTON));
+  gtk_widget_set_halign (priv->upside_down_button, GTK_ALIGN_FILL);
+  gtk_container_add (GTK_CONTAINER (rotate_box), priv->upside_down_button);
+
+  priv->rotate_right_button = gtk_toggle_button_new ();
   if (rotation == GNOME_RR_ROTATION_270)
-    gtk_widget_set_sensitive (priv->rotate_right_button, FALSE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), TRUE);
   g_signal_connect (priv->rotate_right_button, "clicked",
                     G_CALLBACK (rotate_right_clicked), panel);
   g_signal_connect_swapped (priv->rotate_right_button, "clicked",
