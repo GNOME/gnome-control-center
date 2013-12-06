@@ -71,22 +71,25 @@ device_ethernet_add_to_notebook (NetObject    *object,
 static void
 add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar *value)
 {
-        GtkWidget *label;
+        GtkWidget *heading_label;
+        GtkWidget *value_label;
 
-        label = gtk_label_new (heading);
-        gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
-        gtk_widget_set_halign (label, GTK_ALIGN_END);
-        gtk_widget_set_hexpand (label, TRUE);
-        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        heading_label = gtk_label_new (heading);
+        gtk_style_context_add_class (gtk_widget_get_style_context (heading_label), "dim-label");
+        gtk_widget_set_halign (heading_label, GTK_ALIGN_END);
+        gtk_widget_set_hexpand (heading_label, TRUE);
+        gtk_misc_set_alignment (GTK_MISC (heading_label), 1, 0.5);
 
-        gtk_grid_attach (GTK_GRID (details), label, 0, top, 1, 1);
+        gtk_grid_attach (GTK_GRID (details), heading_label, 0, top, 1, 1);
 
-        label = gtk_label_new (value);
-        gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_widget_set_hexpand (label, TRUE);
-        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+        value_label = gtk_label_new (value);
+        gtk_widget_set_halign (value_label, GTK_ALIGN_START);
+        gtk_widget_set_hexpand (value_label, TRUE);
+        gtk_misc_set_alignment (GTK_MISC (value_label), 0, 0.5);
 
-        gtk_grid_attach (GTK_GRID (details), label, 1, top, 1, 1);
+        gtk_label_set_mnemonic_widget(heading_label, value_label);
+
+        gtk_grid_attach (GTK_GRID (details), value_label, 1, top, 1, 1);
 }
 
 static gchar *
