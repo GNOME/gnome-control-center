@@ -468,7 +468,7 @@ net_virtual_device_add_row (NetVirtualDevice *virtual_device,
         value = gtk_label_new (NULL);
         gtk_misc_set_alignment (GTK_MISC (value), 0.0, 0.5);
         g_object_bind_property (virtual_device, property_name, value, "label", 0);
-        gtk_label_set_mnemonic_widget(label, value);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), value);
         gtk_grid_attach (grid, value, 1, top_attach, 1, 1);
         gtk_widget_show (value);
 }

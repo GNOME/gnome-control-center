@@ -87,7 +87,7 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
         gtk_widget_set_hexpand (value_label, TRUE);
         gtk_misc_set_alignment (GTK_MISC (value_label), 0, 0.5);
 
-        gtk_label_set_mnemonic_widget(heading_label, value_label);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (heading_label), value_label);
 
         gtk_grid_attach (GTK_GRID (details), value_label, 1, top, 1, 1);
 }
