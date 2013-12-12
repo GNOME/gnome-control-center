@@ -2104,7 +2104,6 @@ cc_color_panel_dispose (GObject *object)
   g_clear_object (&priv->list_box_size);
   g_clear_pointer (&priv->sensors, g_ptr_array_unref);
   g_clear_pointer (&priv->list_box_filter, g_free);
-  g_clear_pointer (&priv->assistant_calib, gtk_widget_destroy);
   g_clear_pointer (&priv->dialog_assign, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
