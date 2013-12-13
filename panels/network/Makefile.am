@@ -34,6 +34,8 @@ libnetwork_la_SOURCES =					\
 	net-device-mobile.h				\
 	net-device-bond.c				\
 	net-device-bond.h				\
+	net-device-team.c				\
+	net-device-team.h				\
 	net-device-bridge.c				\
 	net-device-bridge.h				\
 	net-virtual-device.c				\
