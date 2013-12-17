@@ -99,7 +99,7 @@ nm_device_slaves_changed (GObject    *object,
 
         slaves = nm_device_team_get_slaves (nm_device);
         if (!slaves) {
-                priv->slaves = g_strdup ("(none)");
+                priv->slaves = g_strdup (_("(none)"));
                 g_object_notify (G_OBJECT (device_team), "slaves");
                 return;
         }
