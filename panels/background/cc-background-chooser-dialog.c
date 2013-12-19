@@ -406,6 +406,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 
   priv->icon_view = gtk_icon_view_new ();
   gtk_widget_set_hexpand (priv->icon_view, TRUE);
+  gtk_icon_view_set_columns (GTK_ICON_VIEW (priv->icon_view), 3);
   gtk_container_add (GTK_CONTAINER (priv->sw_content), priv->icon_view);
   g_signal_connect (priv->icon_view, "selection-changed", G_CALLBACK (on_selection_changed), chooser);
   g_signal_connect (priv->icon_view, "item-activated", G_CALLBACK (on_item_activated), chooser);
