@@ -1123,6 +1123,9 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
 
         g_signal_connect (dialog, "response",
                           G_CALLBACK (start_hotspot_response_cb), device_wifi);
+        g_signal_connect (dialog, "delete-event",
+                        G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
         gtk_window_present (GTK_WINDOW (dialog));
         g_free (active_ssid);
 }
