@@ -428,15 +428,14 @@ children_changed (GSettings            *settings,
                   CcNotificationsPanel *panel)
 {
   int i;
-  const gchar **new_app_ids;
+  gchar **new_app_ids;
 
   g_settings_get (panel->master_settings,
                   "application-children",
-                  "^a&s", &new_app_ids);
+                  "^as", &new_app_ids);
   for (i = 0; new_app_ids[i]; i++)
     maybe_add_app_id (panel, new_app_ids[i]);
-
-  g_free (new_app_ids);
+  g_strfreev (new_app_ids);
 }
 
 static void
