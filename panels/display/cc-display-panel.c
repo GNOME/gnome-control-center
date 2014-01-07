@@ -2029,19 +2029,22 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (rotate_box), priv->rotate_right_button);
 
   /* size */
-  label = gtk_label_new (_("Size"));
-  gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                               GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 2, 1, 1);
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-
-
   gnome_rr_output_get_physical_size (output, &width_mm, &height_mm);
   str = make_display_size_string (width_mm, height_mm);
-  label = gtk_label_new (str);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, 2, 1, 1);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  g_free (str);
+
+  if (str != NULL)
+    {
+      label = gtk_label_new (_("Size"));
+      gtk_style_context_add_class (gtk_widget_get_style_context (label),
+                                   GTK_STYLE_CLASS_DIM_LABEL);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 2, 1, 1);
+      gtk_widget_set_halign (label, GTK_ALIGN_END);
+
+      label = gtk_label_new (str);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, 2, 1, 1);
+      gtk_widget_set_halign (label, GTK_ALIGN_START);
+      g_free (str);
+    }
 
   /* aspect ratio */
   label = gtk_label_new (_("Aspect Ratio"));
