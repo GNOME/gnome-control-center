@@ -1488,9 +1488,6 @@ create_header (CcWindow *self)
   g_signal_connect (priv->previous_button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
   gtk_size_group_add_widget (priv->header_sizegroup, priv->previous_button);
 
-  priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
-
   /* toggle search button */
   priv->search_button = gtk_toggle_button_new ();
   image = gtk_image_new_from_icon_name ("edit-find-symbolic", GTK_ICON_SIZE_MENU);
@@ -1499,6 +1496,9 @@ create_header (CcWindow *self)
   gtk_style_context_add_class (gtk_widget_get_style_context (priv->search_button),
                                "image-button");  
   gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->search_button);
+
+  priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
 
   priv->lock_button = gtk_lock_button_new (NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (priv->lock_button),
