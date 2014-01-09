@@ -98,10 +98,11 @@ struct _CcInfoPanelPrivate
   char          *gnome_date;
   UpdatesState   updates_state;
 
+  GCancellable  *cancellable;
+
   /* Free space */
   GList         *primary_mounts;
   guint64        total_bytes;
-  GCancellable  *cancellable;
 
   /* Media */
   GSettings     *media_settings;
@@ -472,7 +473,11 @@ cc_info_panel_finalize (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
 
-  g_clear_pointer (&priv->cancellable, g_cancellable_cancel);
+  if (priv->cancellable)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      g_clear_object (&priv->cancellable);
+    }
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
@@ -1786,17 +1791,23 @@ got_pk_proxy_cb (GObject *source_object,
 {
   GError *error = NULL;
   guint32 major, minor, micro;
+  GDBusProxy *proxy;
 
-  self->priv->pk_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
 
-  if (self->priv->pk_proxy == NULL)
+  if (proxy == NULL)
     {
-      g_warning ("Unable to get PackageKit proxy object: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Unable to get PackageKit proxy object: %s", error->message);
+          self->priv->updates_state = PK_NOT_AVAILABLE;
+          refresh_update_button (self);
+        }
       g_error_free (error);
-      self->priv->updates_state = PK_NOT_AVAILABLE;
-      refresh_update_button (self);
       return;
     }
+
+  self->priv->pk_proxy = proxy;
 
   if (!get_pk_version_property(self->priv->pk_proxy, "VersionMajor", &major) ||
       !get_pk_version_property(self->priv->pk_proxy, "VersionMinor", &minor) ||
@@ -1838,7 +1849,7 @@ info_panel_setup_updates (CcInfoPanel *self)
                             "org.freedesktop.PackageKit",
                             "/org/freedesktop/PackageKit",
                             "org.freedesktop.PackageKit",
-                            NULL,
+                            self->priv->cancellable,
                             (GAsyncReadyCallback) got_pk_proxy_cb,
                             self);
 }
