@@ -116,6 +116,9 @@ launch_panel_activated (GSimpleAction *action,
       g_error_free (error);
     }
   g_variant_unref (parameters);
+
+  /* Now present the window */
+  g_application_activate (G_APPLICATION (self));
 }
 
 static int
