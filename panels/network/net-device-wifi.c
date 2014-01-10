@@ -857,8 +857,33 @@ generate_ssid_for_hotspot (NetDeviceWifi *device_wifi)
         return ssid_array;
 }
 
-static gchar *
-generate_wep_key (NetDeviceWifi *device_wifi)
+#define WPA_PASSKEY_SIZE
+static void
+set_wpa_key (NMSettingWirelessSecurity *sws)
+{
+        /* generate a 8-chars ASCII WPA key */
+        char key[WPA_PASSKEY_SIZE + 1];
+        guint i;
+
+        for (i = 0; i < WPA_PASSKEY_SIZE; i++) {
+                gint c;
+                c = g_random_int_range (33, 126);
+                /* too many non alphanumeric characters are hard to remember for humans */
+                while (!g_ascii_isalnum (c))
+                        c = g_random_int_range (33, 126);
+
+                key[i] = (gchar) c;
+        }
+        key[WPA_PASSKEY_SIZE] = '\0';
+
+        g_object_set (sws,
+                      "key-mgmt", "wpa-psk",
+                      "psk", key,
+                      NULL);
+}
+
+static void
+set_wep_key (NMSettingWirelessSecurity *sws)
 {
         gchar key[11];
         gint i;
@@ -872,7 +897,11 @@ generate_wep_key (NetDeviceWifi *device_wifi)
         }
         key[10] = 0;
 
-        return g_strdup (key);
+        g_object_set (sws,
+                      "key-mgmt", "none",
+                      "wep-key0", key,
+                      "wep-key-type", NM_WEP_KEY_TYPE_KEY,
+                      NULL);
 }
 
 static gboolean
@@ -959,13 +988,13 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         NMSettingWirelessSecurity *sws;
         NMDevice *device;
         GByteArray *ssid_array;
-        gchar *wep_key;
         const gchar *str_mac;
         struct ether_addr *bin_mac;
         GSList *connections;
         GSList *l;
         NMClient *client;
         const char *mode;
+        NMDeviceWifiCapabilities caps;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
@@ -1007,7 +1036,8 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         sw = (NMSettingWireless *)nm_setting_wireless_new ();
 
 	/* Use real AP mode if the device supports it */
-        if (nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (device)) & NM_WIFI_DEVICE_CAP_AP)
+        caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (device));
+        if (caps & NM_WIFI_DEVICE_CAP_AP)
 		mode = NM_SETTING_WIRELESS_MODE_AP;
         else
                 mode = NM_SETTING_WIRELESS_MODE_ADHOC;
@@ -1042,13 +1072,25 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         g_byte_array_unref (ssid_array);
 
         sws = (NMSettingWirelessSecurity*) nm_setting_wireless_security_new ();
-        wep_key = generate_wep_key (device_wifi);
-        g_object_set (sws,
-                      "key-mgmt", "none",
-                      "wep-key0", wep_key,
-                      "wep-key-type", NM_WEP_KEY_TYPE_KEY,
-                      NULL);
-        g_free (wep_key);
+
+        if (mode == NM_SETTING_WIRELESS_MODE_AP) {
+                if (caps & NM_WIFI_DEVICE_CAP_RSN) {
+                        set_wpa_key (sws);
+                        nm_setting_wireless_security_add_proto (sws, "rsn");
+                        nm_setting_wireless_security_add_pairwise (sws, "ccmp");
+                        nm_setting_wireless_security_add_group (sws, "ccmp");
+                } else if (caps & NM_WIFI_DEVICE_CAP_WPA) {
+                        set_wpa_key (sws);
+                        nm_setting_wireless_security_add_proto (sws, "wpa");
+                        nm_setting_wireless_security_add_pairwise (sws, "tkip");
+                        nm_setting_wireless_security_add_group (sws, "tkip");
+                } else {
+                        set_wep_key (sws);
+                }
+        } else {
+                set_wep_key (sws);
+        }
+
         nm_connection_add_setting (c, (NMSetting *)sws);
 
         nm_client_add_and_activate_connection (client,
