@@ -478,7 +478,7 @@ delete_user (GtkButton *button, CcUserPanelPrivate *d)
                 g_signal_connect (dialog, "response",
                                   G_CALLBACK (gtk_widget_destroy), NULL);
         }
-        else if (act_user_is_logged_in (user)) {
+        else if (act_user_is_logged_in_anywhere (user)) {
                 dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                  0,
                                                  GTK_MESSAGE_INFO,
