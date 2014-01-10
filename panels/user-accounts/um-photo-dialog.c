@@ -213,6 +213,7 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
         GtkWidget *chooser;
         const gchar *folder;
         GtkWidget *preview;
+        GtkFileFilter *filter;
 
         chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
                                                GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
@@ -235,6 +236,10 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
         if (folder)
                 gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
                                                      folder);
+
+        filter = gtk_file_filter_new ();
+        gtk_file_filter_add_pixbuf_formats (filter);
+        gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
 
         g_signal_connect (chooser, "response",
                           G_CALLBACK (file_chooser_response), um);
