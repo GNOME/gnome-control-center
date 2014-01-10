@@ -171,12 +171,13 @@ update_preview (GtkFileChooser               *chooser,
 
                 file = g_file_new_for_uri (uri);
                 file_info = g_file_query_info (file,
-                                               G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                                               "standard::*",
                                                G_FILE_QUERY_INFO_NONE,
                                                NULL, NULL);
                 g_object_unref (file);
 
-                if (file_info != NULL) {
+                if (file_info != NULL &&
+                    g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY) {
                         mime_type = g_file_info_get_content_type (file_info);
                         g_object_unref (file_info);
                 }
