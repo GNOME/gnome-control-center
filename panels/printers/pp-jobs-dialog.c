@@ -119,8 +119,8 @@ update_jobs_list_cb (cups_job_t *jobs,
       gchar     *state = NULL;
 
       ts = localtime (&(dialog->jobs[i].creation_time));
-      time = g_date_time_new_local (ts->tm_year,
-                                    ts->tm_mon,
+      time = g_date_time_new_local (ts->tm_year + 1900,
+                                    ts->tm_mon + 1,
                                     ts->tm_mday,
                                     ts->tm_hour,
                                     ts->tm_min,
