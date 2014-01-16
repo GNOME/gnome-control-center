@@ -763,8 +763,12 @@ setup_search (CcWindow *shell)
   /* set up the search view */
   priv->search_view = search_view = gtk_tree_view_new ();
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (search_view), FALSE);
+  gtk_tree_view_set_enable_search (GTK_TREE_VIEW (search_view), FALSE);
   gtk_tree_view_set_model (GTK_TREE_VIEW (search_view),
                            GTK_TREE_MODEL (priv->search_filter));
+  /* This needs to happen after setting the model, otherwise
+   * the search column will be the first string column */
+  gtk_tree_view_set_search_column (GTK_TREE_VIEW (search_view), -1);
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (renderer,
