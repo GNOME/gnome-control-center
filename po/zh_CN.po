@@ -15,7 +15,7 @@
 # zhang ping <zhangping159@gmail.com>, 2010.
 # 指冷玉笙寒 (dhyang) <dhyang555@gmail.com>, 2011.
 # Lele Long <schemacs@gmail.com>, 2011.
-# Wylmer Wang <wantinghard@gmail.com>, 2011, 2012.
+# Wylmer Wang <wantinghard@gmail.com>, 2011, 2012, 2014.
 # Wind He <lofwind@gmail.com>, 2011.
 # bsfmig <bigslowfat@gmail.com>, 2012.
 # Cheng Lu <chenglu1990@gmail.com>, 2012.
@@ -27,9 +27,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-11-26 14:45+0000\n"
+"POT-Creation-Date: 2014-01-15 16:01+0000\n"
 "PO-Revision-Date: 2013-08-16 12:12+0800\n"
-"Last-Translator: Luo Lei <luolei@ubuntukylin.com>\n"
+"Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "背景"
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
 msgid "Changes throughout the day"
-msgstr "该日内所有改变"
+msgstr "在一天内按时切换"
 
 #: ../panels/background/background.ui.h:4
 msgid "Lock Screen"
@@ -115,11 +115,11 @@ msgstr "未找到图片"
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "您添加到 %s 文件夹的图片将在此显示"
 
-#: ../panels/background/cc-background-chooser-dialog.c:428
+#: ../panels/background/cc-background-chooser-dialog.c:429
 #: ../panels/bluetooth/cc-bluetooth-panel.c:640
 #: ../panels/color/cc-color-panel.c:221 ../panels/color/cc-color-panel.c:958
-#: ../panels/display/cc-display-panel.c:1509
-#: ../panels/display/cc-display-panel.c:1924
+#: ../panels/display/cc-display-panel.c:1510
+#: ../panels/display/cc-display-panel.c:1952
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1194
@@ -137,7 +137,7 @@ msgstr "您添加到 %s 文件夹的图片将在此显示"
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../panels/background/cc-background-chooser-dialog.c:429
+#: ../panels/background/cc-background-chooser-dialog.c:430
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
@@ -619,7 +619,7 @@ msgstr "完成"
 #. 15000 = 15 sec
 #. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:83
 msgid "Screen Calibration"
 msgstr "屏幕校准"
 
@@ -1108,21 +1108,21 @@ msgstr "更改系统时间和日期设置"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "修改时间或日期设置，您需要获得管理员权限。"
 
-#: ../panels/display/cc-display-panel.c:485
+#: ../panels/display/cc-display-panel.c:486
 msgid "Lid Closed"
 msgstr "关闭盖子"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:488
+#: ../panels/display/cc-display-panel.c:489
 msgid "Mirrored"
 msgstr "镜像显示"
 
-#: ../panels/display/cc-display-panel.c:490
-#: ../panels/display/cc-display-panel.c:2057
+#: ../panels/display/cc-display-panel.c:491
+#: ../panels/display/cc-display-panel.c:2101
 msgid "Primary"
 msgstr "主"
 
-#: ../panels/display/cc-display-panel.c:492
+#: ../panels/display/cc-display-panel.c:493
 #: ../panels/notifications/cc-notifications-panel.c:205
 #: ../panels/power/cc-power-panel.c:1738 ../panels/power/cc-power-panel.c:1749
 #: ../panels/privacy/cc-privacy-panel.c:80
@@ -1134,82 +1134,81 @@ msgstr "主"
 msgid "Off"
 msgstr "关"
 
-#: ../panels/display/cc-display-panel.c:495
+#: ../panels/display/cc-display-panel.c:496
 msgid "Secondary"
 msgstr "次"
 
-#: ../panels/display/cc-display-panel.c:1505
+#: ../panels/display/cc-display-panel.c:1506
 msgid "Arrange Combined Displays"
 msgstr "排列组合的显示屏"
 
-#: ../panels/display/cc-display-panel.c:1511
-#: ../panels/display/cc-display-panel.c:1927
+#: ../panels/display/cc-display-panel.c:1512
+#: ../panels/display/cc-display-panel.c:1955
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 msgid "_Apply"
 msgstr "应用(_A)"
 
-#: ../panels/display/cc-display-panel.c:1532
+#: ../panels/display/cc-display-panel.c:1533
 msgid "Drag displays to rearrange them"
 msgstr "拖动显示屏来重新排列它们"
 
-#. size
-#: ../panels/display/cc-display-panel.c:1991
+#: ../panels/display/cc-display-panel.c:2037
 msgid "Size"
 msgstr "大小"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2006
+#: ../panels/display/cc-display-panel.c:2050
 msgid "Aspect Ratio"
 msgstr "宽高比"
 
-#: ../panels/display/cc-display-panel.c:2027
+#: ../panels/display/cc-display-panel.c:2071
 #: ../panels/printers/pp-options-dialog.c:86
 msgid "Resolution"
 msgstr "分辨率"
 
-#: ../panels/display/cc-display-panel.c:2058
+#: ../panels/display/cc-display-panel.c:2102
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "在此显示屏上显示顶栏和活动概览"
 
-#: ../panels/display/cc-display-panel.c:2064
+#: ../panels/display/cc-display-panel.c:2108
 msgid "Secondary Display"
 msgstr "第二显示屏"
 
-#: ../panels/display/cc-display-panel.c:2065
+#: ../panels/display/cc-display-panel.c:2109
 msgid "Join this display with another to create an extra workspace"
 msgstr "将该显示屏与另一显示屏组合以扩展工作空间"
 
 # 左撇子有歧视色彩。
-#: ../panels/display/cc-display-panel.c:2072
+#: ../panels/display/cc-display-panel.c:2116
 msgid "Presentation"
 msgstr "演示"
 
-#: ../panels/display/cc-display-panel.c:2073
+#: ../panels/display/cc-display-panel.c:2117
 msgid "Show slideshows and media only"
 msgstr "只显示幻灯片和多媒体"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2078
+#: ../panels/display/cc-display-panel.c:2122
 msgid "Mirror"
 msgstr "镜像"
 
-#: ../panels/display/cc-display-panel.c:2079
+#: ../panels/display/cc-display-panel.c:2123
 msgid "Show your existing view on both displays"
 msgstr "在两块显示屏上同时显示当前视图"
 
-#: ../panels/display/cc-display-panel.c:2085
+#: ../panels/display/cc-display-panel.c:2129
 msgid "Turn Off"
 msgstr "关闭"
 
-#: ../panels/display/cc-display-panel.c:2086
+#: ../panels/display/cc-display-panel.c:2130
 msgid "Don't use this display"
 msgstr "不使用该显示屏"
 
-#: ../panels/display/cc-display-panel.c:2301
+#: ../panels/display/cc-display-panel.c:2345
 msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
 
-#: ../panels/display/cc-display-panel.c:2332
+#: ../panels/display/cc-display-panel.c:2376
 msgid "_Arrange Combined Displays"
 msgstr "排列组合的显示屏(_A)"
 
@@ -1229,53 +1228,53 @@ msgstr ""
 "新;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:451 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:452 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "未知"
 
-#: ../panels/info/cc-info-panel.c:534
+#: ../panels/info/cc-info-panel.c:539
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d 位"
 
-#: ../panels/info/cc-info-panel.c:536
+#: ../panels/info/cc-info-panel.c:541
 #, c-format
 msgid "%d-bit"
 msgstr "%d 位"
 
-#: ../panels/info/cc-info-panel.c:1216
+#: ../panels/info/cc-info-panel.c:1221
 msgid "Ask what to do"
 msgstr "询问如何处理"
 
-#: ../panels/info/cc-info-panel.c:1220
+#: ../panels/info/cc-info-panel.c:1225
 msgid "Do nothing"
 msgstr "不处理"
 
-#: ../panels/info/cc-info-panel.c:1224
+#: ../panels/info/cc-info-panel.c:1229
 msgid "Open folder"
 msgstr "打开文件夹"
 
-#: ../panels/info/cc-info-panel.c:1315
+#: ../panels/info/cc-info-panel.c:1320
 msgid "Other Media"
 msgstr "其他媒体"
 
-#: ../panels/info/cc-info-panel.c:1346
+#: ../panels/info/cc-info-panel.c:1351
 msgid "Select an application for audio CDs"
 msgstr "选择播放音频 CD 的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1347
+#: ../panels/info/cc-info-panel.c:1352
 msgid "Select an application for video DVDs"
 msgstr "选择播放视频 DVD 的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1353
 msgid "Select an application to run when a music player is connected"
 msgstr "选择要在连接音乐播放器后运行的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1354
 msgid "Select an application to run when a camera is connected"
 msgstr "选择要在连接相机后运行的应用程序"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1355
 msgid "Select an application for software CDs"
 msgstr "选择要在插入软件 CD 时运行的应用程序"
 
@@ -1284,90 +1283,90 @@ msgstr "选择要在插入软件 CD 时运行的应用程序"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1362
+#: ../panels/info/cc-info-panel.c:1367
 msgid "audio DVD"
 msgstr "音频 DVD"
 
-#: ../panels/info/cc-info-panel.c:1363
+#: ../panels/info/cc-info-panel.c:1368
 msgid "blank Blu-ray disc"
 msgstr "空白蓝光光盘"
 
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1369
 msgid "blank CD disc"
 msgstr "空白 CD 光盘"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1370
 msgid "blank DVD disc"
 msgstr "空白 DVD 光盘"
 
 # 空白 HD DVD 光盘
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1371
 msgid "blank HD DVD disc"
 msgstr "空白 HD DVD 光盘"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1372
 msgid "Blu-ray video disc"
 msgstr "蓝光视频光盘"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1373
 msgid "e-book reader"
 msgstr "电子书阅读器"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1374
 msgid "HD DVD video disc"
 msgstr "HD DVD 视频光盘"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1375
 msgid "Picture CD"
 msgstr "图片 CD"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1376
 msgid "Super Video CD"
 msgstr "超级 VCD"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1377
 msgid "Video CD"
 msgstr "视频 CD"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1378
 msgid "Windows software"
 msgstr "Windows 软件"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1379
 msgid "Software"
 msgstr "软件"
 
-#: ../panels/info/cc-info-panel.c:1497
+#: ../panels/info/cc-info-panel.c:1502
 #: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "节"
 
-#: ../panels/info/cc-info-panel.c:1506 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1511 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "总览"
 
-#: ../panels/info/cc-info-panel.c:1512 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1517 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "默认应用程序"
 
-#: ../panels/info/cc-info-panel.c:1517 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1522 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "可移动介质"
 
-#: ../panels/info/cc-info-panel.c:1542
+#: ../panels/info/cc-info-panel.c:1547
 #, c-format
 msgid "Version %s"
 msgstr "版本 %s"
 
-#: ../panels/info/cc-info-panel.c:1592
+#: ../panels/info/cc-info-panel.c:1597
 msgid "Install Updates"
 msgstr "安装更新"
 
-#: ../panels/info/cc-info-panel.c:1596
+#: ../panels/info/cc-info-panel.c:1601
 msgid "System Up-To-Date"
 msgstr "系统已是最新"
 
-#: ../panels/info/cc-info-panel.c:1600
+#: ../panels/info/cc-info-panel.c:1605
 msgid "Checking for Updates"
 msgstr "正在检查更新"
 
@@ -2454,23 +2453,23 @@ msgstr "VPN"
 msgid "Bond"
 msgstr "绑定"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:597
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Bridge"
 msgstr "桥接"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:599
 msgid "VLAN"
 msgstr "虚拟局域网"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:749
+#: ../panels/network/connection-editor/net-connection-editor.c:750
 msgid "Could not load VPN plugins"
 msgstr "无法装入 VPN 插件"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:818
+#: ../panels/network/connection-editor/net-connection-editor.c:819
 msgid "Import from file…"
 msgstr "从文件导入..."
 
-#: ../panels/network/connection-editor/net-connection-editor.c:889
+#: ../panels/network/connection-editor/net-connection-editor.c:890
 msgid "Add Network Connection"
 msgstr "添加网络连接"
 
@@ -2667,6 +2666,11 @@ msgstr "配置 %d"
 #: ../panels/network/net-device-mobile.c:232
 msgid "Add new connection"
 msgstr "添加新连接"
+
+#: ../panels/network/net-device-team.c:77
+#| msgid "Bridge slaves"
+msgid "Team slaves"
+msgstr "组队从机"
 
 #: ../panels/network/net-device-wifi.c:1110
 msgid ""
@@ -6606,13 +6610,13 @@ msgstr ""
 "要编辑快捷键，请选择“发送按键”动作，按下键盘快捷键，然后输入新按键组合，或按 "
 "Backspace 清除。"
 
-#: ../panels/wacom/calibrator/calibrator-gui.c:82
+#: ../panels/wacom/calibrator/calibrator-gui.c:84
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr "当标记出现在屏幕上时，请触摸它们，以校准您的平板电脑。"
 
-#: ../panels/wacom/calibrator/calibrator-gui.c:86
+#: ../panels/wacom/calibrator/calibrator-gui.c:88
 msgid "Mis-click detected, restarting..."
 msgstr "检测到误点击，正在重新开始..."
 
@@ -6924,11 +6928,11 @@ msgstr "显示面板"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[面板] [参数…]"
 
-#: ../shell/cc-application.c:142
+#: ../shell/cc-application.c:145
 msgid "- Settings"
 msgstr "- 设置"
 
-#: ../shell/cc-application.c:160
+#: ../shell/cc-application.c:163
 #, c-format
 msgid ""
 "%s\n"
@@ -6937,15 +6941,15 @@ msgstr ""
 "%s\n"
 "运行 “%s --help” 查看所有可用的命令行选项。\n"
 
-#: ../shell/cc-application.c:190
+#: ../shell/cc-application.c:193
 msgid "Available panels:"
 msgstr "可用面板"
 
-#: ../shell/cc-application.c:325
+#: ../shell/cc-application.c:328
 msgid "Help"
 msgstr "帮助"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:329
 msgid "Quit"
 msgstr "退出"
 
