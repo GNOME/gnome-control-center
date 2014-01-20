@@ -578,6 +578,10 @@ add_other_users_language (GHashTable *ht)
         g_object_unref (proxy);
 }
 
+/*
+ * Note that @lang needs to be formatted like the locale strings
+ * returned by gnome_get_all_locales().
+ */
 static void
 insert_language (GHashTable *ht,
                  const char *lang)
@@ -600,10 +604,7 @@ insert_language (GHashTable *ht,
 
         g_debug ("We have translations for %s", lang);
 
-        if (g_str_has_suffix (lang, ".utf8"))
-                key = g_strdup (lang);
-        else
-                key = g_strdup_printf ("%s.utf8", lang);
+        key = g_strdup (lang);
 
         label_own_lang = gnome_get_language_from_locale (key, key);
         label_current_lang = gnome_get_language_from_locale (key, NULL);
@@ -632,15 +633,15 @@ cc_common_language_get_initial_languages (void)
 
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-        insert_language (ht, "en_US");
-        insert_language (ht, "en_GB");
-        insert_language (ht, "de_DE");
-        insert_language (ht, "fr_FR");
-        insert_language (ht, "es_ES");
-        insert_language (ht, "zh_CN");
-        insert_language (ht, "ja_JP");
-        insert_language (ht, "ru_RU");
-        insert_language (ht, "ar_EG");
+        insert_language (ht, "en_US.UTF-8");
+        insert_language (ht, "en_GB.UTF-8");
+        insert_language (ht, "de_DE.UTF-8");
+        insert_language (ht, "fr_FR.UTF-8");
+        insert_language (ht, "es_ES.UTF-8");
+        insert_language (ht, "zh_CN.UTF-8");
+        insert_language (ht, "ja_JP.UTF-8");
+        insert_language (ht, "ru_RU.UTF-8");
+        insert_language (ht, "ar_EG.UTF-8");
 
         return ht;
 }
@@ -741,6 +742,21 @@ cc_common_language_add_user_languages (GtkTreeModel *model)
         name = cc_common_language_get_current_language ();
         display = g_hash_table_lookup (user_langs, name);
         if (!display) {
+                char *language = NULL;
+                char *country = NULL;
+                char *codeset = NULL;
+
+                gnome_parse_locale (name, &language, &country, &codeset, NULL);
+                g_free (name);
+
+                if (!codeset || !g_str_equal (codeset, "UTF-8"))
+                        g_warning ("Current user locale codeset isn't UTF-8");
+
+                name = g_strdup_printf ("%s_%s.UTF-8", language, country);
+                g_free (language);
+                g_free (country);
+                g_free (codeset);
+
                 insert_language (user_langs, name);
                 display = g_hash_table_lookup (user_langs, name);
         }

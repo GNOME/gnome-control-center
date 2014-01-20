@@ -897,7 +897,7 @@ get_ibus_locale_infos (GtkWidget *chooser)
           lang_code != NULL &&
           country_code != NULL)
         {
-          gchar *locale = g_strdup_printf ("%s_%s.utf8", lang_code, country_code);
+          gchar *locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
 
           info = g_hash_table_lookup (priv->locales, locale);
           if (info)
@@ -1023,9 +1023,9 @@ get_locale_infos (GtkWidget *chooser)
         continue;
 
       if (country_code != NULL)
-	simple_locale = g_strdup_printf ("%s_%s.utf8", lang_code, country_code);
+	simple_locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
       else
-	simple_locale = g_strdup_printf ("%s.utf8", lang_code);
+	simple_locale = g_strdup_printf ("%s.UTF-8", lang_code);
 
       if (g_hash_table_contains (priv->locales, simple_locale))
         {
