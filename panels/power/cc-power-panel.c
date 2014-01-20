@@ -314,6 +314,11 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   else
     time = time_full;
 
+  /* Sometimes the reported state is fully charged but battery is at 99%,
+     refusing to reach 100%. In these cases, just assume 100%. */
+  if (state == UP_DEVICE_STATE_FULLY_CHARGED && (100.0 - percentage <= 1.0))
+    percentage = 100.0;
+
   details = get_details_string (percentage, state, time);
 
   row = gtk_list_box_row_new ();
