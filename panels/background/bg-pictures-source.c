@@ -54,6 +54,7 @@ struct _BgPicturesSourcePrivate
 
 const char * const content_types[] = {
 	"image/png",
+	"image/jp2",
 	"image/jpeg",
 	"image/bmp",
 	"image/svg+xml",
