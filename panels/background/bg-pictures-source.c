@@ -57,6 +57,7 @@ const char * const content_types[] = {
 	"image/jpeg",
 	"image/bmp",
 	"image/svg+xml",
+	"image/x-portable-anymap",
 	NULL
 };
 
