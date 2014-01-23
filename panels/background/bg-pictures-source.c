@@ -61,6 +61,11 @@ const char * const content_types[] = {
 	NULL
 };
 
+const char * const screenshot_types[] = {
+	"image/png",
+	NULL
+};
+
 static char *bg_pictures_source_get_unique_filename (const char *uri);
 
 static void
@@ -134,6 +139,26 @@ bg_pictures_source_class_init (BgPicturesSourceClass *klass)
 }
 
 static void
+remove_placeholder (BgPicturesSource *bg_source, CcBackgroundItem *item)
+{
+  GtkListStore *store;
+  GtkTreeIter iter;
+  GtkTreePath *path;
+  GtkTreeRowReference *row_ref;
+
+  store = bg_source_get_liststore (BG_SOURCE (bg_source));
+  row_ref = g_object_get_data (G_OBJECT (item), "row-ref");
+  if (row_ref == NULL)
+    return;
+
+  path = gtk_tree_row_reference_get_path (row_ref);
+  if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
+    return;
+
+  gtk_list_store_remove (store, &iter);
+}
+
+static void
 picture_scaled (GObject *source_object,
                 GAsyncResult *res,
                 gpointer user_data)
@@ -145,13 +170,19 @@ picture_scaled (GObject *source_object,
   const char *software;
   const char *uri;
   GtkTreeIter iter;
+  GtkTreePath *path;
+  GtkTreeRowReference *row_ref;
   GtkListStore *store;
 
+  item = g_object_get_data (source_object, "item");
   pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
   if (pixbuf == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to load image: %s", error->message);
+        {
+          g_warning ("Failed to load image: %s", error->message);
+          remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
+        }
 
       g_error_free (error);
       goto out;
@@ -162,7 +193,6 @@ picture_scaled (GObject *source_object,
    */
   bg_source = BG_PICTURES_SOURCE (user_data);
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
-  item = g_object_get_data (source_object, "item");
   uri = cc_background_item_get_uri (item);
 
   /* Ignore screenshots */
@@ -177,11 +207,26 @@ picture_scaled (GObject *source_object,
 
   cc_background_item_load (item, NULL);
 
-  /* insert the item into the liststore */
-  gtk_list_store_insert_with_values (store, &iter, -1,
-                                     0, pixbuf,
-                                     1, item,
-                                     -1);
+  row_ref = g_object_get_data (G_OBJECT (item), "row-ref");
+  if (row_ref == NULL)
+    {
+      /* insert the item into the liststore if it did not exist */
+      gtk_list_store_insert_with_values (store, NULL, -1,
+                                         0, pixbuf,
+                                         1, item,
+                                         -1);
+    }
+  else
+    {
+      path = gtk_tree_row_reference_get_path (row_ref);
+      if (gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
+        {
+          /* otherwise update the thumbnail */
+          gtk_list_store_set (store, &iter,
+                              0, pixbuf,
+                              -1);
+        }
+    }
 
   g_hash_table_insert (bg_source->priv->known_items,
                        bg_pictures_source_get_unique_filename (uri),
@@ -210,6 +255,7 @@ picture_opened_for_read (GObject *source_object,
         {
           char *filename = g_file_get_path (G_FILE (source_object));
           g_warning ("Failed to load picture '%s': %s", filename, error->message);
+          remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
           g_free (filename);
         }
 
@@ -242,6 +288,16 @@ in_content_types (const char *content_type)
 }
 
 static gboolean
+in_screenshot_types (const char *content_type)
+{
+	guint i;
+	for (i = 0; screenshot_types[i]; i++)
+		if (g_str_equal (screenshot_types[i], content_type))
+			return TRUE;
+	return FALSE;
+}
+
+static gboolean
 add_single_file (BgPicturesSource *bg_source,
 		 GFile            *file,
 		 GFileInfo        *info,
@@ -249,6 +305,14 @@ add_single_file (BgPicturesSource *bg_source,
 {
   const gchar *content_type;
   CcBackgroundItem *item = NULL;
+  GError *error = NULL;
+  GdkPixbuf *pixbuf = NULL;
+  GtkIconInfo *icon_info = NULL;
+  GtkIconTheme *theme;
+  GtkListStore *store;
+  GtkTreeIter iter;
+  GtkTreePath *path = NULL;
+  GtkTreeRowReference *row_ref;
   char *uri = NULL;
   gboolean retval = FALSE;
   guint64 mtime;
@@ -275,6 +339,41 @@ add_single_file (BgPicturesSource *bg_source,
   if (source_uri != NULL)
     g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
 
+  if (in_screenshot_types (content_type))
+    goto read_file;
+
+  theme = gtk_icon_theme_get_default ();
+  icon_info = gtk_icon_theme_lookup_icon (theme,
+                                          "content-loading-symbolic",
+                                          16,
+                                          GTK_ICON_LOOKUP_FORCE_SIZE | GTK_ICON_LOOKUP_GENERIC_FALLBACK);
+  if (icon_info == NULL)
+    {
+      g_warning ("Failed to find placeholder icon");
+      goto read_file;
+    }
+
+  pixbuf = gtk_icon_info_load_icon (icon_info, &error);
+  if (pixbuf == NULL)
+    {
+      g_warning ("Failed to load placeholder icon: %s", error->message);
+      g_clear_error (&error);
+      goto read_file;
+    }
+
+  store = bg_source_get_liststore (BG_SOURCE (bg_source));
+
+  /* insert the item into the liststore */
+  gtk_list_store_insert_with_values (store, &iter, -1,
+                                     0, pixbuf,
+                                     1, item,
+                                     -1);
+
+  path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
+  row_ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
+  g_object_set_data_full (G_OBJECT (item), "row-ref", row_ref, (GDestroyNotify) gtk_tree_row_reference_free);
+
+ read_file:
   g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
 
   g_file_read_async (file, G_PRIORITY_DEFAULT,
@@ -284,6 +383,9 @@ add_single_file (BgPicturesSource *bg_source,
   retval = TRUE;
 
  out:
+  gtk_tree_path_free (path);
+  g_clear_object (&pixbuf);
+  g_clear_object (&icon_info);
   g_clear_object (&item);
   g_object_unref (file);
   g_free (uri);
