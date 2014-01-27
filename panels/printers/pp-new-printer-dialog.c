@@ -49,10 +49,6 @@
 
 static void     actualize_devices_list (PpNewPrinterDialog *dialog);
 static void     populate_devices_list (PpNewPrinterDialog *dialog);
-static void     search_address_cb2 (GtkEntry             *entry,
-                                    GtkEntryIconPosition  icon_pos,
-                                    GdkEvent             *event,
-                                    gpointer              user_data);
 static void     search_address_cb (GtkSearchEntry *entry,
                                    gpointer        user_data);
 static void     new_printer_dialog_response_cb (GtkDialog *_dialog,
@@ -467,7 +463,6 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "search-entry");
-  g_signal_connect (widget, "icon-press", G_CALLBACK (search_address_cb2), dialog);
   g_signal_connect (widget, "search-changed", G_CALLBACK (search_address_cb), dialog);
 
   widget = (GtkWidget*)
@@ -1615,15 +1610,6 @@ search_address_cb (GtkSearchEntry *entry,
   actualize_devices_list (dialog);
 
   g_free (text);
-}
-
-static void
-search_address_cb2 (GtkEntry             *entry,
-                    GtkEntryIconPosition  icon_pos,
-                    GdkEvent             *event,
-                    gpointer              user_data)
-{
-  search_address_cb (GTK_SEARCH_ENTRY (entry), user_data);
 }
 
 static void
