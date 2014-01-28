@@ -1603,14 +1603,27 @@ gsd_wacom_device_class_init (GsdWacomDeviceClass *klass)
 static void
 gsd_wacom_device_init (GsdWacomDevice *device)
 {
+        char *per_user_config;
+
         device->priv = GSD_WACOM_DEVICE_GET_PRIVATE (device);
         device->priv->type = WACOM_TYPE_INVALID;
 
+        per_user_config = g_build_filename (g_get_user_config_dir (), "gnome-settings-daemon", "no-per-machine-config", NULL);
+        if (g_file_test (per_user_config, G_FILE_TEST_EXISTS)) {
+                g_free (per_user_config);
+                goto fallback;
+        }
+        g_free (per_user_config);
+
         if (g_file_get_contents ("/etc/machine-id", &device->priv->machine_id, NULL, NULL) == FALSE)
                 if (g_file_get_contents ("/var/lib/dbus/machine-id", &device->priv->machine_id, NULL, NULL) == FALSE)
-                        device->priv->machine_id = g_strdup ("00000000000000000000000000000000");
+                        goto fallback;
 
         device->priv->machine_id = g_strstrip (device->priv->machine_id);
+        return;
+
+fallback:
+        device->priv->machine_id = g_strdup ("00000000000000000000000000000000");
 }
 
 static void
