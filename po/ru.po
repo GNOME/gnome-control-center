@@ -15,15 +15,15 @@
 # Yuri Kozlov <yuray@komyakino.ru>, 2010, 2012.
 # Dmitry Shachnev <mitya57@ubuntu.com>, 2012.
 # Yuri Myasoedov <omerta13@yandex.ru>, 2012.
-# Stas Solovey <whats_up@tut.by>, 2012, 2013.
+# Stas Solovey <whats_up@tut.by>, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-09 12:49+0000\n"
-"PO-Revision-Date: 2013-12-04 18:49+0300\n"
+"POT-Creation-Date: 2014-01-28 21:04+0000\n"
+"PO-Revision-Date: 2014-01-29 00:04+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -111,14 +111,14 @@ msgstr "Изображения не найдены"
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Можно добавить изображения в папку %s и они будут показаны здесь"
 
-#: ../panels/background/cc-background-chooser-dialog.c:428
+#: ../panels/background/cc-background-chooser-dialog.c:429
 #: ../panels/color/cc-color-panel.c:221 ../panels/color/cc-color-panel.c:958
 #: ../panels/display/cc-display-panel.c:1510
-#: ../panels/display/cc-display-panel.c:1952
+#: ../panels/display/cc-display-panel.c:1953
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1194
-#: ../panels/network/net-device-wifi.c:1402
+#: ../panels/network/net-device-wifi.c:1197
+#: ../panels/network/net-device-wifi.c:1405
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:379
 #: ../panels/printers/cc-printers-panel.c:1946
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -132,7 +132,7 @@ msgstr "Можно добавить изображения в папку %s и �
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: ../panels/background/cc-background-chooser-dialog.c:429
+#: ../panels/background/cc-background-chooser-dialog.c:430
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
@@ -527,7 +527,7 @@ msgstr "Выполнено"
 #. 15000 = 15 sec
 #. 750 = 0.75 sec
 #. Text printed on screen
-#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:81
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/calibrator-gui.c:83
 msgid "Screen Calibration"
 msgstr "Калибровка экрана"
 
@@ -872,29 +872,31 @@ msgstr "Язык"
 msgid "_Done"
 msgstr "_Выполнено"
 
+# fix даты
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:363
-msgid "%e %B %Y, %l:%M %p"
-msgstr "%e %B %Y, %l:%M %p"
-
-#. Translators: This is the full date and time format used in 24-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:368
+msgid "%e %B %Y, %l:%M %p"
+msgstr "%e %b., %Y, %l:%M %p"
+
+# fix даты
+#. Translators: This is the full date and time format used in 24-hour mode.
+#: ../panels/datetime/cc-datetime-panel.c:373
 msgid "%e %B %Y, %R"
-msgstr "%e %B %Y, %R"
+msgstr "%e %b,. %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:584
+#: ../panels/datetime/cc-datetime-panel.c:589
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:589
+#: ../panels/datetime/cc-datetime-panel.c:594
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:594
+#: ../panels/datetime/cc-datetime-panel.c:599
 msgid "%R"
 msgstr "%R"
 
@@ -1043,13 +1045,13 @@ msgid "Mirrored"
 msgstr "Дублируемый"
 
 #: ../panels/display/cc-display-panel.c:491
-#: ../panels/display/cc-display-panel.c:2098
+#: ../panels/display/cc-display-panel.c:2122
 msgid "Primary"
 msgstr "Основной"
 
 #: ../panels/display/cc-display-panel.c:493
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1698 ../panels/power/cc-power-panel.c:1709
+#: ../panels/power/cc-power-panel.c:1703 ../panels/power/cc-power-panel.c:1714
 #: ../panels/privacy/cc-privacy-panel.c:80
 #: ../panels/privacy/cc-privacy-panel.c:120
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1068,7 +1070,7 @@ msgid "Arrange Combined Displays"
 msgstr "Упорядочить сгруппированные экраны"
 
 #: ../panels/display/cc-display-panel.c:1512
-#: ../panels/display/cc-display-panel.c:1955
+#: ../panels/display/cc-display-panel.c:1956
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 msgid "_Apply"
 msgstr "_Применить"
@@ -1077,63 +1079,62 @@ msgstr "_Применить"
 msgid "Drag displays to rearrange them"
 msgstr "Перетащите экраны, чтобы изменить их порядок"
 
-#. size
-#: ../panels/display/cc-display-panel.c:2032
+#: ../panels/display/cc-display-panel.c:2058
 msgid "Size"
 msgstr "Размер"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2047
+#: ../panels/display/cc-display-panel.c:2071
 msgid "Aspect Ratio"
 msgstr "Соотношение сторон"
 
-#: ../panels/display/cc-display-panel.c:2068
+#: ../panels/display/cc-display-panel.c:2092
 #: ../panels/printers/pp-options-dialog.c:86
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: ../panels/display/cc-display-panel.c:2099
+#: ../panels/display/cc-display-panel.c:2123
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Показывать верхнюю панель и режим обзора на этом дисплее"
 
-#: ../panels/display/cc-display-panel.c:2105
+#: ../panels/display/cc-display-panel.c:2129
 msgid "Secondary Display"
 msgstr "Дополнительный экран"
 
-#: ../panels/display/cc-display-panel.c:2106
+#: ../panels/display/cc-display-panel.c:2130
 msgid "Join this display with another to create an extra workspace"
 msgstr "Объединить этот дисплей с другим для увеличения рабочего пространства"
 
-#: ../panels/display/cc-display-panel.c:2113
+#: ../panels/display/cc-display-panel.c:2137
 msgid "Presentation"
 msgstr "Презентация"
 
-#: ../panels/display/cc-display-panel.c:2114
+#: ../panels/display/cc-display-panel.c:2138
 msgid "Show slideshows and media only"
 msgstr "Показывать только слайд-шоу и мультимедиа"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2119
+#: ../panels/display/cc-display-panel.c:2143
 msgid "Mirror"
 msgstr "Зеркало"
 
-#: ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:2144
 msgid "Show your existing view on both displays"
 msgstr "Показывать текущий вид на обоих дисплеях"
 
-#: ../panels/display/cc-display-panel.c:2126
+#: ../panels/display/cc-display-panel.c:2150
 msgid "Turn Off"
 msgstr "Выключить"
 
-#: ../panels/display/cc-display-panel.c:2127
+#: ../panels/display/cc-display-panel.c:2151
 msgid "Don't use this display"
 msgstr "Не использовать этот монитор"
 
-#: ../panels/display/cc-display-panel.c:2343
+#: ../panels/display/cc-display-panel.c:2367
 msgid "Could not get screen information"
 msgstr "Не удалось получить информацию об экране"
 
-#: ../panels/display/cc-display-panel.c:2374
+#: ../panels/display/cc-display-panel.c:2398
 msgid "_Arrange Combined Displays"
 msgstr "_Расположить объединённые дисплеи"
 
@@ -1151,53 +1152,53 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Панель;Проектор;xrandr;Экран;Разрешение;Обновить;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:451 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:452 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../panels/info/cc-info-panel.c:534
+#: ../panels/info/cc-info-panel.c:539
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-бит"
 
-#: ../panels/info/cc-info-panel.c:536
+#: ../panels/info/cc-info-panel.c:541
 #, c-format
 msgid "%d-bit"
 msgstr "%d-бит"
 
-#: ../panels/info/cc-info-panel.c:1216
+#: ../panels/info/cc-info-panel.c:1221
 msgid "Ask what to do"
 msgstr "Спрашивать, что делать"
 
-#: ../panels/info/cc-info-panel.c:1220
+#: ../panels/info/cc-info-panel.c:1225
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
-#: ../panels/info/cc-info-panel.c:1224
+#: ../panels/info/cc-info-panel.c:1229
 msgid "Open folder"
 msgstr "Открыть папку"
 
-#: ../panels/info/cc-info-panel.c:1315
+#: ../panels/info/cc-info-panel.c:1320
 msgid "Other Media"
 msgstr "Другой носитель"
 
-#: ../panels/info/cc-info-panel.c:1346
+#: ../panels/info/cc-info-panel.c:1351
 msgid "Select an application for audio CDs"
 msgstr "Выберите приложение для звуковых компакт-дисков"
 
-#: ../panels/info/cc-info-panel.c:1347
+#: ../panels/info/cc-info-panel.c:1352
 msgid "Select an application for video DVDs"
 msgstr "Выберите приложения для видео DVD"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1353
 msgid "Select an application to run when a music player is connected"
 msgstr "Выберите приложение, запускаемое при подключении музыкального плеера"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1354
 msgid "Select an application to run when a camera is connected"
 msgstr "Выберите приложение, запускаемое при подключении камеры"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1355
 msgid "Select an application for software CDs"
 msgstr "Выберите приложение для компакт-дисков с программами"
 
@@ -1206,85 +1207,85 @@ msgstr "Выберите приложение для компакт-дисков
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1362
+#: ../panels/info/cc-info-panel.c:1367
 msgid "audio DVD"
 msgstr "звуковой DVD"
 
-#: ../panels/info/cc-info-panel.c:1363
+#: ../panels/info/cc-info-panel.c:1368
 msgid "blank Blu-ray disc"
 msgstr "чистый диск Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1364
+#: ../panels/info/cc-info-panel.c:1369
 msgid "blank CD disc"
 msgstr "чистый компакт-диск"
 
-#: ../panels/info/cc-info-panel.c:1365
+#: ../panels/info/cc-info-panel.c:1370
 msgid "blank DVD disc"
 msgstr "чистый диск DVD"
 
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1371
 msgid "blank HD DVD disc"
 msgstr "чистый диск HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1372
 msgid "Blu-ray video disc"
 msgstr "видеодиск Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1373
 msgid "e-book reader"
 msgstr "устройство чтения электронных книг"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1374
 msgid "HD DVD video disc"
 msgstr "видеодиск HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1375
 msgid "Picture CD"
 msgstr "диск Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1376
 msgid "Super Video CD"
 msgstr "компакт-диск Super Video"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1377
 msgid "Video CD"
 msgstr "видеодиск VCD"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1378
 msgid "Windows software"
 msgstr "приложение Windows"
 
-#: ../panels/info/cc-info-panel.c:1496
+#: ../panels/info/cc-info-panel.c:1501
 #: ../panels/keyboard/keyboard-shortcuts.c:1696
 msgid "Section"
 msgstr "Раздел"
 
-#: ../panels/info/cc-info-panel.c:1505 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1510 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Обзор"
 
-#: ../panels/info/cc-info-panel.c:1511 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1516 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Приложения по умолчанию"
 
-#: ../panels/info/cc-info-panel.c:1516 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1521 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Съёмный носитель"
 
-#: ../panels/info/cc-info-panel.c:1541
+#: ../panels/info/cc-info-panel.c:1546
 #, c-format
 msgid "Version %s"
 msgstr "Версия %s"
 
-#: ../panels/info/cc-info-panel.c:1591
+#: ../panels/info/cc-info-panel.c:1596
 msgid "Install Updates"
 msgstr "Установить обновления"
 
-#: ../panels/info/cc-info-panel.c:1595
+#: ../panels/info/cc-info-panel.c:1600
 msgid "System Up-To-Date"
 msgstr "Нет обновлений"
 
-#: ../panels/info/cc-info-panel.c:1599
+#: ../panels/info/cc-info-panel.c:1604
 msgid "Checking for Updates"
 msgstr "Проверка на наличие обновлений"
 
@@ -2397,22 +2398,26 @@ msgid "Bond"
 msgstr "Связка"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:597
+msgid "Team"
+msgstr ""
+
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Bridge"
 msgstr "Мост"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:599
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:749
+#: ../panels/network/connection-editor/net-connection-editor.c:750
 msgid "Could not load VPN plugins"
 msgstr "Не удалось загрузить модули VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:818
+#: ../panels/network/connection-editor/net-connection-editor.c:819
 msgid "Import from file…"
 msgstr "Импортировать из файла…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:889
+#: ../panels/network/connection-editor/net-connection-editor.c:890
 msgid "Add Network Connection"
 msgstr "Добавить сетевое подключение"
 
@@ -2422,7 +2427,7 @@ msgid "_Reset"
 msgstr "_Сбросить"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1403
+#: ../panels/network/net-device-wifi.c:1406
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "_Забыть"
@@ -2554,6 +2559,12 @@ msgstr ""
 msgid "Bond slaves"
 msgstr "Подчинённые в связке"
 
+#: ../panels/network/net-device-bond.c:102
+#: ../panels/network/net-device-bridge.c:102
+#: ../panels/network/net-device-team.c:102
+msgid "(none)"
+msgstr ""
+
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
 msgstr "Подчинённые моста"
@@ -2597,7 +2608,7 @@ msgid "Wired"
 msgstr "Проводное"
 
 #: ../panels/network/net-device-ethernet.c:355
-#: ../panels/network/net-device-wifi.c:1558
+#: ../panels/network/net-device-wifi.c:1561
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2613,6 +2624,12 @@ msgstr "Профиль %d"
 #: ../panels/network/net-device-mobile.c:232
 msgid "Add new connection"
 msgstr "Добавить новое подключение"
+
+#: ../panels/network/net-device-team.c:77
+#, fuzzy
+#| msgid "Bridge slaves"
+msgid "Team slaves"
+msgstr "Подчинённые моста"
 
 #: ../panels/network/net-device-wifi.c:1110
 msgid ""
@@ -2638,23 +2655,23 @@ msgstr ""
 "Доступ к Интернету по беспроводному каналу возможен только при отключённой "
 "точке доступа."
 
-#: ../panels/network/net-device-wifi.c:1192
+#: ../panels/network/net-device-wifi.c:1195
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Остановить точку доступа и отключить всех пользователей?"
 
-#: ../panels/network/net-device-wifi.c:1195
+#: ../panels/network/net-device-wifi.c:1198
 msgid "_Stop Hotspot"
 msgstr "_Остановить точку доступа"
 
-#: ../panels/network/net-device-wifi.c:1267
+#: ../panels/network/net-device-wifi.c:1270
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Использование в качестве точки доступа запрещено системной политикой"
 
-#: ../panels/network/net-device-wifi.c:1270
+#: ../panels/network/net-device-wifi.c:1273
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Беспроводное устройство не поддерживает режим точки доступа"
 
-#: ../panels/network/net-device-wifi.c:1399
+#: ../panels/network/net-device-wifi.c:1402
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2662,19 +2679,19 @@ msgstr ""
 "Сетевые данные для выделенных сетей, включая пароли и любые пользовательские "
 "настройки, будут утеряны."
 
-#: ../panels/network/net-device-wifi.c:1726
+#: ../panels/network/net-device-wifi.c:1729
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "История"
 
-#: ../panels/network/net-device-wifi.c:1730 ../panels/power/power.ui.h:21
+#: ../panels/network/net-device-wifi.c:1733 ../panels/power/power.ui.h:21
 #: ../panels/privacy/privacy.ui.h:23 ../panels/sound/gvc-mixer-dialog.c:1596
 #: ../panels/wacom/cc-wacom-page.c:534
 msgid "_Close"
 msgstr "_Закрыть"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1738
+#: ../panels/network/net-device-wifi.c:1741
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Забыть"
@@ -3520,7 +3537,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Показывать подробности в уведомлениях при заблокированном экране"
 
 #: ../panels/notifications/cc-notifications-panel.c:205
-#: ../panels/power/cc-power-panel.c:1704 ../panels/power/cc-power-panel.c:1711
+#: ../panels/power/cc-power-panel.c:1709 ../panels/power/cc-power-panel.c:1716
 #: ../panels/privacy/cc-privacy-panel.c:80
 #: ../panels/privacy/cc-privacy-panel.c:120
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3622,11 +3639,15 @@ msgid "Connect to your online accounts and decide what to use them for"
 msgstr ""
 "Подключиться к сетевым учётным записям и решить для чего их использовать"
 
-#. Translators: those are keywords for the online-accounts control-center panel
+#. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
+#, fuzzy
+#| msgid ""
+#| "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+#| "ownCloud;Kerberos;IMAP;SMTP;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
-"Kerberos;IMAP;SMTP;"
+"Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Онлайн;Чат;Календарь;Почта;Контакт;"
 "ownCloud;Kerberos;IMAP;SMTP;"
@@ -3730,173 +3751,173 @@ msgstr "Зарядка"
 msgid "Discharging"
 msgstr "Разрядка"
 
-#: ../panels/power/cc-power-panel.c:391
+#: ../panels/power/cc-power-panel.c:396
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Основная"
 
-#: ../panels/power/cc-power-panel.c:393
+#: ../panels/power/cc-power-panel.c:398
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Дополнительная"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:465
+#: ../panels/power/cc-power-panel.c:470
 msgid "Wireless mouse"
 msgstr "Беспроводная мышь"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:468
+#: ../panels/power/cc-power-panel.c:473
 msgid "Wireless keyboard"
 msgstr "Беспроводная клавиатура"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:471
+#: ../panels/power/cc-power-panel.c:476
 msgid "Uninterruptible power supply"
 msgstr "Источник бесперебойного питания"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:474
+#: ../panels/power/cc-power-panel.c:479
 msgid "Personal digital assistant"
 msgstr "КПК"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:477
+#: ../panels/power/cc-power-panel.c:482
 msgid "Cellphone"
 msgstr "Мобильный телефон"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:480
+#: ../panels/power/cc-power-panel.c:485
 msgid "Media player"
 msgstr "Медиапроигрыватель"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:483
+#: ../panels/power/cc-power-panel.c:488
 msgid "Tablet"
 msgstr "Планшет"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:486
+#: ../panels/power/cc-power-panel.c:491
 msgid "Computer"
 msgstr "Компьютер"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:489 ../panels/power/cc-power-panel.c:712
-#: ../panels/power/cc-power-panel.c:2035
+#: ../panels/power/cc-power-panel.c:494 ../panels/power/cc-power-panel.c:717
+#: ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "Батарея"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:535
+#: ../panels/power/cc-power-panel.c:540
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Зарядка"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:547
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Внимание"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:552
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Низкий"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Хороший"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:562
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Полностью заряжена"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:566
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Полностью разряжена"
 
-#: ../panels/power/cc-power-panel.c:710
+#: ../panels/power/cc-power-panel.c:715
 msgid "Batteries"
 msgstr "Батареи"
 
-#: ../panels/power/cc-power-panel.c:1112
+#: ../panels/power/cc-power-panel.c:1117
 msgid "When _idle"
 msgstr "При п_ростое"
 
-#: ../panels/power/cc-power-panel.c:1459
+#: ../panels/power/cc-power-panel.c:1464
 msgid "Power Saving"
 msgstr "Энергосбережение"
 
-#: ../panels/power/cc-power-panel.c:1487
+#: ../panels/power/cc-power-panel.c:1492
 msgid "_Screen brightness"
 msgstr "Яркость _экрана"
 
-#: ../panels/power/cc-power-panel.c:1493
+#: ../panels/power/cc-power-panel.c:1498
 msgid "_Keyboard brightness"
 msgstr "Яркость подсветки _клавиатуры"
 
-#: ../panels/power/cc-power-panel.c:1503
+#: ../panels/power/cc-power-panel.c:1508
 msgid "_Dim screen when inactive"
 msgstr "У_меньшать яркость экрана при простое"
 
-#: ../panels/power/cc-power-panel.c:1528
+#: ../panels/power/cc-power-panel.c:1533
 msgid "_Blank screen"
 msgstr "_Выключение экрана"
 
-#: ../panels/power/cc-power-panel.c:1565
+#: ../panels/power/cc-power-panel.c:1570
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1570
+#: ../panels/power/cc-power-panel.c:1575
 msgid "Turns off wireless devices"
 msgstr "Выключение беспроводных устройств"
 
-#: ../panels/power/cc-power-panel.c:1595
+#: ../panels/power/cc-power-panel.c:1600
 msgid "_Mobile broadband"
 msgstr "_Мобильное широкополосное"
 
-#: ../panels/power/cc-power-panel.c:1600
+#: ../panels/power/cc-power-panel.c:1605
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr ""
 "Выключение устройств мобильного широкополосного доступа (3G, 4G, WiMax и т."
 "д.)"
 
-#: ../panels/power/cc-power-panel.c:1649
+#: ../panels/power/cc-power-panel.c:1654
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1700
+#: ../panels/power/cc-power-panel.c:1705
 msgid "When on battery power"
 msgstr "При работе от батареи"
 
-#: ../panels/power/cc-power-panel.c:1702
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When plugged in"
 msgstr "При подключении"
 
-#: ../panels/power/cc-power-panel.c:1831
+#: ../panels/power/cc-power-panel.c:1836
 msgid "Suspend & Power Off"
 msgstr "Ждущий режим и выключение"
 
-#: ../panels/power/cc-power-panel.c:1864
+#: ../panels/power/cc-power-panel.c:1869
 msgid "_Automatic suspend"
 msgstr "_Автоматический ждущий режим"
 
-#: ../panels/power/cc-power-panel.c:1888
+#: ../panels/power/cc-power-panel.c:1893
 msgid "When battery power is _critical"
 msgstr "При _критическом заряде батареи"
 
-#: ../panels/power/cc-power-panel.c:1945
+#: ../panels/power/cc-power-panel.c:1950
 msgid "Power Off"
 msgstr "Выключить"
 
-#: ../panels/power/cc-power-panel.c:2082
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "Устройства"
 
@@ -6645,7 +6666,7 @@ msgstr ""
 "нажмите кнопку комбинации клавиш и нажмите новые клавиши или нажмите "
 "Backspace для очистки."
 
-#: ../panels/wacom/calibrator/calibrator-gui.c:82
+#: ../panels/wacom/calibrator/calibrator-gui.c:84
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -6653,7 +6674,7 @@ msgstr ""
 "Коснитесь маркеров, которые будут появляться на экране, чтобы откалибровать "
 "планшет."
 
-#: ../panels/wacom/calibrator/calibrator-gui.c:86
+#: ../panels/wacom/calibrator/calibrator-gui.c:88
 msgid "Mis-click detected, restarting..."
 msgstr "Обнаружено ложное нажатие, выполняется перезапуск…"
 
@@ -6966,11 +6987,11 @@ msgstr "Область для отображения"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 
-#: ../shell/cc-application.c:142
+#: ../shell/cc-application.c:145
 msgid "- Settings"
 msgstr "— Параметры"
 
-#: ../shell/cc-application.c:160
+#: ../shell/cc-application.c:163
 #, c-format
 msgid ""
 "%s\n"
@@ -6980,39 +7001,39 @@ msgstr ""
 "Выполните «%s --help», чтобы показать список всех доступных параметров "
 "командной строки.\n"
 
-#: ../shell/cc-application.c:190
+#: ../shell/cc-application.c:193
 msgid "Available panels:"
 msgstr "Доступные панели:"
 
-#: ../shell/cc-application.c:325
+#: ../shell/cc-application.c:328
 msgid "Help"
 msgstr "Справка"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:329
 msgid "Quit"
 msgstr "Завершить"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1486
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1490
 msgid "All Settings"
 msgstr "Все параметры"
 
 #. Add categories
-#: ../shell/cc-window.c:868
+#: ../shell/cc-window.c:872
 msgctxt "category"
 msgid "Personal"
 msgstr "Личное"
 
-#: ../shell/cc-window.c:869
+#: ../shell/cc-window.c:873
 msgctxt "category"
 msgid "Hardware"
 msgstr "Оборудование"
 
-#: ../shell/cc-window.c:870
+#: ../shell/cc-window.c:874
 msgctxt "category"
 msgid "System"
 msgstr "Система"
 
-#: ../shell/cc-window.c:1597 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1601 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Параметры"
 
