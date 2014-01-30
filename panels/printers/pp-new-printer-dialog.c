@@ -798,6 +798,7 @@ t_device_free (gpointer data)
       g_free (device->device_uri);
       g_free (device->device_id);
       g_free (device->device_ppd);
+      g_free (device->host_name);
       g_free (device);
     }
 }

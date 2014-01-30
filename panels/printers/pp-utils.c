@@ -3773,6 +3773,7 @@ pp_print_device_free (PpPrintDevice *device)
       g_free (device->device_location);
       g_free (device->device_name);
       g_free (device->device_ppd);
+      g_free (device->host_name);
       g_free (device);
     }
 }
