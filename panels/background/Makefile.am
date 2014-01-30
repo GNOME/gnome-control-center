@@ -10,6 +10,7 @@ dist_slideshowemblem_DATA = slideshow-emblem.svg
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\
 	$(BACKGROUND_PANEL_CFLAGS)			\
+	-I$(top_srcdir)/libgd				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DDATADIR="\"$(datadir)\""			\
 	-DGNOME_DESKTOP_USE_UNSTABLE_API		\
@@ -40,7 +41,7 @@ libbackground_chooser_la_SOURCES =	\
 	bg-colors-source.c		\
 	bg-colors-source.h
 
-libbackground_chooser_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
+libbackground_chooser_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS) $(top_builddir)/libgd/libgd.la
 
 libbackground_la_SOURCES =		\
 	cc-background-panel.c		\

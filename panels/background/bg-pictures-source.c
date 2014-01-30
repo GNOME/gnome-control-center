@@ -27,6 +27,7 @@
 
 #include <string.h>
 #include <gio/gio.h>
+#include <libgd/gd.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
 
@@ -166,13 +167,19 @@ picture_scaled (GObject *source_object,
   BgPicturesSource *bg_source;
   CcBackgroundItem *item;
   GError *error = NULL;
+  GdkPixbuf *framed_pixbuf = NULL;
   GdkPixbuf *pixbuf = NULL;
+  GtkBorder border;
   const char *software;
   const char *uri;
   GtkTreeIter iter;
   GtkTreePath *path;
   GtkTreeRowReference *row_ref;
   GtkListStore *store;
+  gint16 x_border;
+  gint16 y_border;
+  int height;
+  int width;
 
   item = g_object_get_data (source_object, "item");
   pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
@@ -207,12 +214,24 @@ picture_scaled (GObject *source_object,
 
   cc_background_item_load (item, NULL);
 
+  height = gdk_pixbuf_get_height (pixbuf);
+  width = gdk_pixbuf_get_width (pixbuf);
+  x_border = (gint16) (THUMBNAIL_WIDTH - width) / 2 + 2;
+  y_border = (gint16) (THUMBNAIL_HEIGHT - height) / 2 + 2;
+
+  border.left = border.right = x_border;
+  border.bottom = border.top = y_border;
+  framed_pixbuf = gd_embed_image_in_frame (pixbuf,
+                                           "resource:///org/gnome/control-center/background/thumbnail-frame.png",
+                                           &border,
+                                           &border);
+
   row_ref = g_object_get_data (G_OBJECT (item), "row-ref");
   if (row_ref == NULL)
     {
       /* insert the item into the liststore if it did not exist */
       gtk_list_store_insert_with_values (store, NULL, -1,
-                                         0, pixbuf,
+                                         0, framed_pixbuf,
                                          1, item,
                                          -1);
     }
@@ -223,7 +242,7 @@ picture_scaled (GObject *source_object,
         {
           /* otherwise update the thumbnail */
           gtk_list_store_set (store, &iter,
-                              0, pixbuf,
+                              0, framed_pixbuf,
                               -1);
         }
     }
@@ -234,6 +253,7 @@ picture_scaled (GObject *source_object,
 
 
  out:
+  g_clear_object (&framed_pixbuf);
   g_clear_object (&pixbuf);
 }
 
@@ -306,7 +326,9 @@ add_single_file (BgPicturesSource *bg_source,
   const gchar *content_type;
   CcBackgroundItem *item = NULL;
   GError *error = NULL;
+  GdkPixbuf *framed_pixbuf = NULL;
   GdkPixbuf *pixbuf = NULL;
+  GtkBorder border;
   GtkIconInfo *icon_info = NULL;
   GtkIconTheme *theme;
   GtkListStore *store;
@@ -315,7 +337,11 @@ add_single_file (BgPicturesSource *bg_source,
   GtkTreeRowReference *row_ref;
   char *uri = NULL;
   gboolean retval = FALSE;
+  gint16 x_border;
+  gint16 y_border;
   guint64 mtime;
+  int height;
+  int width;
 
   /* find png and jpeg files */
   content_type = g_file_info_get_content_type (info);
@@ -361,11 +387,23 @@ add_single_file (BgPicturesSource *bg_source,
       goto read_file;
     }
 
+  height = gdk_pixbuf_get_height (pixbuf);
+  width = gdk_pixbuf_get_width (pixbuf);
+  x_border = (gint16) (THUMBNAIL_WIDTH - width) / 2 + 2;
+  y_border = (gint16) (THUMBNAIL_HEIGHT - height) / 2 + 2;
+
+  border.left = border.right = x_border;
+  border.bottom = border.top = y_border;
+  framed_pixbuf = gd_embed_image_in_frame (pixbuf,
+                                           "resource:///org/gnome/control-center/background/thumbnail-frame.png",
+                                           &border,
+                                           &border);
+
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
 
   /* insert the item into the liststore */
   gtk_list_store_insert_with_values (store, &iter, -1,
-                                     0, pixbuf,
+                                     0, framed_pixbuf,
                                      1, item,
                                      -1);
 
@@ -384,6 +422,7 @@ add_single_file (BgPicturesSource *bg_source,
 
  out:
   gtk_tree_path_free (path);
+  g_clear_object (&framed_pixbuf);
   g_clear_object (&pixbuf);
   g_clear_object (&icon_info);
   g_clear_object (&item);
