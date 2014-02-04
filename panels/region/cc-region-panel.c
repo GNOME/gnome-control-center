@@ -174,8 +174,9 @@ cc_region_panel_constructed (GObject *object)
 
         G_OBJECT_CLASS (cc_region_panel_parent_class)->constructed (object);
 
-        cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                         priv->login_button);
+        if (priv->permission)
+                cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
+                                                 priv->login_button);
 }
 
 static const char *
@@ -1746,8 +1747,16 @@ setup_login_button (CcRegionPanel *self)
 	CcRegionPanelPrivate *priv = self->priv;
         GDBusConnection *bus;
         gboolean loaded;
+        GError *error = NULL;
 
-        priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
+        priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, &error);
+        if (priv->permission == NULL) {
+                g_warning ("Could not get 'org.freedesktop.locale1.set-locale' permission: %s",
+                           error->message);
+                g_error_free (error);
+                return;
+        }
+
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
         g_dbus_proxy_new (bus,
                           G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES,
