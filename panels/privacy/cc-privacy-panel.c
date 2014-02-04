@@ -33,6 +33,7 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 #define REMOVE_OLD_TRASH_FILES "remove-old-trash-files"
 #define REMOVE_OLD_TEMP_FILES "remove-old-temp-files"
 #define OLD_FILES_AGE "old-files-age"
+#define SEND_SOFTWARE_USAGE_STATS "send-software-usage-stats"
 
 struct _CcPrivacyPanelPrivate
 {
@@ -40,6 +41,7 @@ struct _CcPrivacyPanelPrivate
   GtkWidget  *recent_dialog;
   GtkWidget  *screen_lock_dialog;
   GtkWidget  *trash_dialog;
+  GtkWidget  *software_dialog;
   GtkWidget  *list_box;
 
   GSettings  *lockdown_settings;
@@ -567,6 +569,28 @@ add_trash_temp (CcPrivacyPanel *self)
 }
 
 static void
+add_software (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+
+  w = get_on_off_label (self->priv->privacy_settings, SEND_SOFTWARE_USAGE_STATS);
+  add_row (self, _("Software Usage"), "software_dialog", w);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_done"));
+  dialog = self->priv->software_dialog;
+  g_signal_connect_swapped (w, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_usage_switch"));
+  g_settings_bind (self->priv->privacy_settings, SEND_SOFTWARE_USAGE_STATS,
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+}
+
+static void
 cc_privacy_panel_finalize (GObject *object)
 {
   CcPrivacyPanelPrivate *priv = CC_PRIVACY_PANEL (object)->priv;
@@ -574,6 +598,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_pointer (&priv->recent_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->screen_lock_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->trash_dialog, gtk_widget_destroy);
+  g_clear_pointer (&priv->software_dialog, gtk_widget_destroy);
   g_clear_object (&priv->builder);
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
@@ -659,6 +684,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->recent_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_dialog"));
   self->priv->screen_lock_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
   self->priv->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
+  self->priv->software_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_dialog"));
 
   frame = WID ("frame");
   widget = gtk_list_box_new ();
@@ -682,6 +708,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   add_screen_lock (self);
   add_usage_history (self);
   add_trash_temp (self);
+  add_software (self);
 
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
