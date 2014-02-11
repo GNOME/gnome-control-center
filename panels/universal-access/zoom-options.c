@@ -63,10 +63,6 @@ static gchar *contrast_keys[] = {
   NULL
 };
 
-inline void set_active (GtkWidget* toggle, gboolean sense);
-inline gboolean get_active (GtkWidget* toggle);
-inline void set_sensitive (GtkWidget *widget, gboolean sense);
-
 static void set_enable_screen_part_ui (GtkWidget *widget, ZoomOptionsPrivate *priv);
 static void mouse_tracking_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
 static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
@@ -76,26 +72,6 @@ static void effects_slider_set_value (GtkRange *slider, GSettings *settings);
 static void brightness_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
 static void contrast_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
 static void effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv);
-
-/* Utilties to save on line length */
-
-inline void
-set_active (GtkWidget* toggle, gboolean sense)
-{
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), sense);
-}
-
-inline gboolean
-get_active (GtkWidget* toggle)
-{
-    return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle));
-}
-
-inline void
-set_sensitive (GtkWidget *widget, gboolean sense)
-{
-    gtk_widget_set_sensitive (widget, sense);
-}
 
 static void
 mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
@@ -118,9 +94,9 @@ init_mouse_mode_radio_group (GSList *mode_group, ZoomOptionsPrivate *priv)
 	  {
 	    name = (gchar *) gtk_buildable_get_name (GTK_BUILDABLE (mode_group->data));
 	    if (g_strcmp0 (name, mode) == 0)
-	      set_active (GTK_WIDGET (mode_group->data), TRUE);
+	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mode_group->data), TRUE);
 	    else
-	      set_active (GTK_WIDGET (mode_group->data), FALSE);
+	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mode_group->data), FALSE);
 
 	    g_signal_connect (G_OBJECT (mode_group->data), "toggled",
                           G_CALLBACK(mouse_tracking_radio_toggled_cb),
@@ -150,8 +126,8 @@ init_screen_part_section (ZoomOptionsPrivate *priv, PangoAttrList *pango_attrs)
   scale_label (GTK_BIN(priv->extend_beyond_checkbox), pango_attrs);
 
   lens_mode = g_settings_get_boolean (priv->settings, "lens-mode");
-  set_active (priv->follow_mouse_radio, lens_mode);
-  set_active (priv->screen_part_radio, !lens_mode);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->follow_mouse_radio), lens_mode);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->screen_part_radio), !lens_mode);
 
   mouse_mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (priv->centered_radio));
   init_mouse_mode_radio_group (mouse_mode_group, priv);
@@ -180,17 +156,17 @@ set_enable_screen_part_ui (GtkWidget *widget, ZoomOptionsPrivate *priv)
     /* If the "screen part" radio is not checked, then the "follow mouse" radio
      * is checked (== lens mode). Set mouse tracking back to the default.
      */
-    screen_part = get_active (priv->screen_part_radio);
+    screen_part = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->screen_part_radio));
     if (!screen_part)
       {
         g_settings_set_string (priv->settings,
                                "mouse-tracking", "proportional");
       }
 
-    set_sensitive (priv->centered_radio, screen_part);
-    set_sensitive (priv->push_radio, screen_part);
-    set_sensitive (priv->proportional_radio, screen_part);
-    set_sensitive (priv->extend_beyond_checkbox, screen_part);
+    gtk_widget_set_sensitive (priv->centered_radio, screen_part);
+    gtk_widget_set_sensitive (priv->push_radio, screen_part);
+    gtk_widget_set_sensitive (priv->proportional_radio, screen_part);
+    gtk_widget_set_sensitive (priv->extend_beyond_checkbox, screen_part);
 }
 
 static void
@@ -203,15 +179,15 @@ mouse_tracking_notify_cb (GSettings             *settings,
   tracking = g_settings_get_string (settings, key);
   if (g_strcmp0 (tracking, "proportional") == 0)
     {
-      set_active (priv->proportional_radio, TRUE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->proportional_radio), TRUE);
     }
   else if (g_strcmp0 (tracking, "centered") == 0)
     {
-      set_active (priv->centered_radio, TRUE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->centered_radio), TRUE);
     }
   else
     {
-      set_active (priv->push_radio, TRUE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->push_radio), TRUE);
     }
 }
 
