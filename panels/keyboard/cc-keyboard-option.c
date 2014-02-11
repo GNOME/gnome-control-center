@@ -85,6 +85,9 @@ static const gchar *xkb_option_lvl3_whitelist[] = {
   "lv3:lalt_switch",
   "lv3:ralt_switch",
   "lv3:caps_switch",
+  "lv3:enter_switch",
+  "lv3:bksl_switch",
+  "lv3:lsgt_switch",
   NULL
 };
 
