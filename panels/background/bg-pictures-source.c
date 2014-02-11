@@ -718,6 +718,9 @@ bg_pictures_source_init (BgPicturesSource *self)
 					     NULL);
 
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  if (pictures_path == NULL)
+    pictures_path = g_get_home_dir ();
+
   g_mkdir_with_parents (pictures_path, USER_DIR_MODE);
 
   dir = g_file_new_for_path (pictures_path);

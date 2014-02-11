@@ -269,6 +269,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   GtkStyleContext *context;
   gchar *markup, *href;
   const gchar *pictures_dir;
+  gchar *pictures_dir_basename;
 
   chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
   priv = chooser->priv;
@@ -390,9 +391,22 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+
   pictures_dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
-  href = g_markup_printf_escaped ("<a href=\"file://%s\">%s</a>", pictures_dir,
-                                  g_path_get_basename (pictures_dir));
+  if (pictures_dir == NULL)
+    {
+      pictures_dir = g_get_home_dir ();
+      /* translators: "Home" is used in place of the Pictures
+       * directory in the string below when XDG_PICTURES_DIR is
+       * undefined */
+      pictures_dir_basename = g_strdup (_("Home"));
+    }
+  else
+    pictures_dir_basename = g_path_get_basename (pictures_dir);
+
+  href = g_markup_printf_escaped ("<a href=\"file://%s\">%s</a>", pictures_dir, pictures_dir_basename);
+  g_free (pictures_dir_basename);
+
   /* translators: %s here is the name of the Pictures directory, the string should be translated in
    * the context "You can add images to your Pictures folder and they will show up here" */
   markup = g_strdup_printf (_("You can add images to your %s folder and they will show up here"), href);
