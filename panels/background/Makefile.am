@@ -48,12 +48,6 @@ libbackground_la_SOURCES =		\
 
 libbackground_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS) libbackground-chooser.la
 
-if WITH_LIBSOCIALWEB
-libbackground_chooser_la_SOURCES += bg-flickr-source.c bg-flickr-source.h
-INCLUDES += $(SOCIALWEB_CFLAGS)
-libbackground_chooser_la_LIBADD += $(SOCIALWEB_LIBS)
-endif
-
 noinst_PROGRAMS = test-chooser-dialog
 test_chooser_dialog_SOURCES = test-chooser-dialog.c
 test_chooser_dialog_LDADD = libbackground-chooser.la $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)

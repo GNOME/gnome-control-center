@@ -26,9 +26,6 @@
 #include "bg-wallpapers-source.h"
 #include "bg-pictures-source.h"
 #include "bg-colors-source.h"
-#ifdef HAVE_LIBSOCIALWEB
-#include "bg-flickr-source.h"
-#endif
 
 #include "cc-background-item.h"
 #include "cc-background-xml.h"
@@ -45,9 +42,6 @@ enum
   SOURCE_WALLPAPERS,
   SOURCE_PICTURES,
   SOURCE_COLORS,
-#ifdef HAVE_LIBSOCIALWEB
-  SOURCE_FLICKR
-#endif
 };
 
 struct _CcBackgroundChooserDialogPrivate
@@ -60,9 +54,6 @@ struct _CcBackgroundChooserDialogPrivate
   BgWallpapersSource *wallpapers_source;
   BgPicturesSource *pictures_source;
   BgColorsSource *colors_source;
-#ifdef HAVE_LIBSOCIALWEB
-  BgFlickrSource *flickr_source;
-#endif
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
@@ -119,9 +110,6 @@ cc_background_chooser_dialog_dispose (GObject *object)
   g_clear_object (&priv->pictures_source);
   g_clear_object (&priv->colors_source);
   g_clear_object (&priv->wallpapers_source);
-#ifdef HAVE_LIBSOCIALWEB
-  g_clear_object (&priv->flickr_source);
-#endif
   g_clear_object (&priv->thumb_factory);
 
   G_OBJECT_CLASS (cc_background_chooser_dialog_parent_class)->dispose (object);
@@ -278,9 +266,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   priv->wallpapers_source = bg_wallpapers_source_new ();
   priv->pictures_source = bg_pictures_source_new ();
   priv->colors_source = bg_colors_source_new ();
-#ifdef HAVE_LIBSOCIALWEB
-  priv->flickr_source = bg_flickr_source_new ();
-#endif
 
   priv->row_inserted_id = 0;
   priv->row_deleted_id = 0;
@@ -333,16 +318,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_container_add (GTK_CONTAINER (hbox), button);
   g_signal_connect (button, "toggled", G_CALLBACK (on_view_toggled), chooser);
   g_object_set_data (G_OBJECT (button), "source", priv->colors_source);
-
-#ifdef HAVE_LIBSOCIALWEB
-  button = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button1), _("Flickr"));
-  context = gtk_widget_get_style_context (button);
-  gtk_style_context_add_class (context, "raised");
-  gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
-  gtk_container_add (GTK_CONTAINER (hbox), button);
-  g_signal_connect (button, "toggled", G_CALLBACK (on_view_toggled), chooser);
-  g_object_set_data (G_OBJECT (button), "source", priv->flickr_source);
-#endif
 
   priv->sw_content = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->sw_content), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);

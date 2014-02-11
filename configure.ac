@@ -327,24 +327,6 @@ AC_SUBST(PANEL_CFLAGS)
 PANEL_LIBS=""
 AC_SUBST(PANEL_LIBS)
 
-dnl ==============================================
-dnl libsocialweb
-dnl ==============================================
-
-AC_MSG_CHECKING([Enable libsocialweb support])
-AC_ARG_WITH([libsocialweb],
-   AS_HELP_STRING([--with-libsocialweb],
-                  [enable libsocialweb support]),,
-   [with_libsocialweb=no])
-AC_MSG_RESULT([$with_libsocialweb])
-
-if test "x$with_libsocialweb" == "xyes"; then
-  PKG_CHECK_MODULES(SOCIALWEB, libsocialweb-client)
-  AC_DEFINE(HAVE_LIBSOCIALWEB, 1, [Defined if libsocialweb is available])
-fi
-AM_CONDITIONAL(WITH_LIBSOCIALWEB, test "x$with_libsocialweb" = "xyes")
-
-
 dnl =======================================
 dnl Update Mime Database
 dnl =======================================
@@ -556,11 +538,6 @@ if test "x$have_cheese" = "xyes"; then
 	AC_MSG_NOTICE([** Cheese (Users panel webcam support)])
 else
 	AC_MSG_NOTICE([   Users panel webcam support disabled])
-fi
-if test "x$with_libsocialweb" = "xyes"; then
-	AC_MSG_NOTICE([** libsocialweb (Background panel Flickr support)])
-else
-	AC_MSG_NOTICE([   Background panel Flickr support disabled])
 fi
 if test "x$have_wacom" = "xyes"; then
 	AC_MSG_NOTICE([** wacom (Wacom tablet panel)])
