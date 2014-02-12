@@ -31,9 +31,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-12 07:30+0000\n"
-"PO-Revision-Date: 2014-02-12 10:15-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2014-02-12 15:19+0000\n"
+"PO-Revision-Date: 2014-02-12 13:49-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -4289,12 +4289,17 @@ msgstr "Adicionar uma nova impressora"
 msgid "A_uthenticate"
 msgstr "A_utenticar"
 
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#. Translators: No printers were found
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "No printers detected."
+msgstr "Nenhuma impressora detectada."
+
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Search for network printers or filter result"
 msgstr "Pesquisar por impressoras de rede ou resultado de filtro"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:8
+#: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter address of a printer or a text to filter results"
 msgstr ""
 "Digite o endereço de uma impressora ou um texto para filtrar resultados"
@@ -4412,14 +4417,9 @@ msgid "%s Active Jobs"
 msgstr "%s trabalhos ativos"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1668
 msgid "Server requires authentication"
 msgstr "O servidor requer autenticação"
-
-#. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1706
-msgid "No printers detected."
-msgstr "Nenhuma impressora detectada."
 
 #: ../panels/printers/pp-options-dialog.c:81
 msgid "Two Sided"
@@ -4577,8 +4577,9 @@ msgstr "Localização"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-msgid "_Default"
-msgstr "Pa_drão"
+#| msgid "Default Route"
+msgid "_Default printer"
+msgstr "Im_pressora padrão"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
@@ -5500,7 +5501,6 @@ msgid "_Typing Assist (AccessX)"
 msgstr "Assistência de _digitação (AccessX)"
 
 #: ../panels/universal-access/uap.ui.h:14
-#| msgid "Pointing and Clicking"
 msgid "Pointing & Clicking"
 msgstr "Apontando & clicando"
 
@@ -7085,6 +7085,9 @@ msgstr "Configurações"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferências;Configurações;Ajustes;"
+
+#~ msgid "_Default"
+#~ msgstr "Pa_drão"
 
 #~ msgid "Set Up New Device"
 #~ msgstr "Configurar um novo dispositivo"
