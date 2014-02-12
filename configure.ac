@@ -198,6 +198,13 @@ if test x${have_networkmanager} = xyes; then
   AC_SUBST(NM_VPN_MODULE_DIR)
 fi
 
+# Work-around for https://bugzilla.gnome.org/show_bug.cgi?id=723769
+PKG_CHECK_MODULES(NM_UNSTABLE_CHECK, libnm-util >= 0.9.9.0, nm_unstable=yes, nm_unstable=no)
+if test x$nm_unstable = xyes; then
+  AC_DEFINE(HAVE_NM_UNSTABLE, 1, [Define to 1 if NetworkManager is available])
+fi
+AM_CONDITIONAL(HAVE_NM_UNSTABLE, [test x$nm_unstable = xyes])
+
 # Check for gnome-bluetooth
 PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.11.1,
 		  [have_bluetooth=yes], have_bluetooth=no)
