@@ -1610,14 +1610,13 @@ static void
 actualize_devices_list (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  GtkTreeViewColumn *column;
   GtkTreeSelection  *selection;
   GtkListStore      *store;
   GtkTreeView       *treeview;
   GtkTreeIter        iter;
+  GtkWidget         *widget;
   gboolean           no_device = TRUE;
   TDevice           *device;
-  gfloat             yalign;
   GList             *item;
   gchar             *display_string;
 
@@ -1681,9 +1680,8 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
         }
     }
 
-  column = gtk_tree_view_get_column (treeview, 0);
-  if (priv->text_renderer)
-    gtk_cell_renderer_get_alignment (priv->text_renderer, NULL, &yalign);
+  widget = (GtkWidget *)
+    gtk_builder_get_object (priv->builder, "stack");
 
   if (no_device &&
       !priv->cups_searching &&
@@ -1692,38 +1690,9 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
       !priv->samba_host_searching &&
       !priv->samba_authenticated_searching &&
       !priv->samba_searching)
-    {
-      if (priv->text_renderer)
-        gtk_cell_renderer_set_alignment (priv->text_renderer, 0.5, yalign);
-
-      if (column)
-        gtk_tree_view_column_set_max_width (column, 0);
-
-      gtk_widget_set_sensitive (GTK_WIDGET (treeview), FALSE);
-
-      display_string = g_markup_printf_escaped ("<b>%s</b>\n",
-      /* Translators: No printers were found */
-                                                _("No printers detected."));
-
-      gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter,
-                          DEVICE_DISPLAY_NAME_COLUMN, display_string,
-                          -1);
-
-      g_free (display_string);
-    }
+    gtk_stack_set_visible_child_name (GTK_STACK (widget), "no-printers-page");
   else
-    {
-      if (priv->text_renderer)
-        gtk_cell_renderer_set_alignment (priv->text_renderer, 0.0, yalign);
-
-      if (column)
-        {
-          gtk_tree_view_column_set_max_width (column, -1);
-          gtk_tree_view_column_set_min_width (column, 80);
-        }
-      gtk_widget_set_sensitive (GTK_WIDGET (treeview), TRUE);
-    }
+    gtk_stack_set_visible_child_name (GTK_STACK (widget), "standard-page");
 
   if (!no_device &&
       gtk_tree_model_get_iter_first ((GtkTreeModel *) store, &iter) &&
@@ -1809,6 +1778,8 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   gtk_cell_renderer_set_padding (priv->icon_renderer, 4, 4);
   column = gtk_tree_view_column_new_with_attributes ("Icon", priv->icon_renderer,
                                                      "gicon", DEVICE_GICON_COLUMN, NULL);
+  gtk_tree_view_column_set_max_width (column, -1);
+  gtk_tree_view_column_set_min_width (column, 80);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
 
