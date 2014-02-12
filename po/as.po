@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: as\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-11 07:31+0000\n"
-"PO-Revision-Date: 2014-02-11 18:04+0630\n"
+"POT-Creation-Date: 2014-02-12 15:19+0000\n"
+"PO-Revision-Date: 2014-02-12 23:32+0630\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
 "Language: as_IN\n"
@@ -32,7 +32,7 @@ msgstr "পটভূমি"
 msgid "Changes throughout the day"
 msgstr "দিনটোত কৰা পৰিবৰ্তনসমূহ"
 
-#. To translators: This is the noon, not the verb
+#. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
 msgid "Lock Screen"
 msgstr "পৰ্দা লক কৰক"
@@ -1565,8 +1565,8 @@ msgstr "উচ্চ কন্ট্ৰাস্ট অন বা অফ কৰ�
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:271
-#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/cc-keyboard-option.c:274
+#: ../panels/keyboard/cc-keyboard-option.c:393
 #: ../panels/keyboard/keyboard-shortcuts.c:1158
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1579,7 +1579,7 @@ msgstr "নিষ্ক্ৰীয়"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:349
+#: ../panels/keyboard/cc-keyboard-option.c:352
 msgid "Alternative Characters Key"
 msgstr "বৈকল্পিক আখৰসমূহ চাবি"
 
@@ -1587,11 +1587,11 @@ msgstr "বৈকল্পিক আখৰসমূহ চাবি"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:358
+#: ../panels/keyboard/cc-keyboard-option.c:361
 msgid "Compose Key"
 msgstr "কি' ৰচনা কৰক"
 
-#: ../panels/keyboard/cc-keyboard-option.c:363
+#: ../panels/keyboard/cc-keyboard-option.c:366
 msgid "Modifiers-only switch to next source"
 msgstr "পৰিবৰ্তক-কেৱল পৰৱৰ্তী উৎসলে যাওক"
 
@@ -4244,12 +4244,17 @@ msgstr "এটা নতুন প্ৰিন্টাৰ যোগ কৰক"
 msgid "A_uthenticate"
 msgstr "প্ৰমাণীত কৰক (_u)"
 
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#. Translators: No printers were found
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "No printers detected."
+msgstr "কোনো প্ৰিন্টাৰ চিনাক্ত কৰা হোৱা নাই।"
+
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Search for network printers or filter result"
 msgstr "নেটৱাৰ্ক প্ৰিন্টাৰৰ বাবে সন্ধান কৰক অথবা ফলাফল ফিল্টাৰ কৰক"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:8
+#: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter address of a printer or a text to filter results"
 msgstr "ফলাফলসমূহ ফিল্টাৰ কৰিবলৈ এটা প্ৰিন্টাৰৰ ঠিকনা অথবা এটা লিখনী সুমুৱাওক"
 
@@ -4366,14 +4371,9 @@ msgid "%s Active Jobs"
 msgstr "%s সক্ৰিয় কাৰ্য্যসমূহ"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1668
 msgid "Server requires authentication"
 msgstr "চাৰ্ভাৰৰ প্ৰমাণীকৰণৰ প্ৰয়োজন"
-
-#. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1706
-msgid "No printers detected."
-msgstr "কোনো প্ৰিন্টাৰ চিনাক্ত কৰা হোৱা নাই।"
 
 #: ../panels/printers/pp-options-dialog.c:81
 msgid "Two Sided"
@@ -4531,8 +4531,9 @@ msgstr "অবস্থান"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-msgid "_Default"
-msgstr "অবিকল্পিত (_D)"
+#| msgid "Default Route"
+msgid "_Default printer"
+msgstr "অবিকল্পিত প্ৰিন্টাৰ (_D)"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
@@ -4620,7 +4621,6 @@ msgid "Purge Trash & Temporary Files"
 msgstr "আবৰ্জনা শোধন আৰু অস্থায়ী ফাইলসমূহ"
 
 #: ../panels/privacy/cc-privacy-panel.c:578 ../panels/privacy/privacy.ui.h:38
-#| msgid "Software"
 msgid "Software Usage"
 msgstr "চফ্টৱেৰৰ ব্যৱহাৰ"
 
@@ -4760,15 +4760,13 @@ msgid ""
 "your data with third parties."
 msgstr ""
 "আপুনি কি চফ্টৱেৰ ব্যৱহাৰ কৰে তাৰ বিষয়ে তথ্য পঠালে আমাক অধিক সঠিক উপদেশ প্ৰদান "
-"কৰাত "
-"সহায় কৰে। ই লগতে আমাৰ চফ্টৱেৰ উন্নত কৰাত সহায় কৰে।\n"
+"কৰাত সহায় কৰে। ই লগতে আমাৰ চফ্টৱেৰ উন্নত কৰাত সহায় কৰে।\n"
 "\n"
 "আমি সংগ্ৰহ কৰা সকলো তথ্যক বেনামী কৰা হয়, আৰু আমি আপোনাৰ তথ্য কেতিয়াও তৃতীয় "
-"দলৰ সৈতে "
-"অংশীদাৰী নকৰো।"
+"দলৰ "
+"সৈতে অংশীদাৰী নকৰো।"
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Privacy"
 msgid "Privacy Policy"
 msgstr "গোপনীয়তা নীতি"
 
@@ -5450,7 +5448,6 @@ msgid "_Typing Assist (AccessX)"
 msgstr "টাইপিং সহায়ক (AccessX) (_T)"
 
 #: ../panels/universal-access/uap.ui.h:14
-#| msgid "Pointing and Clicking"
 msgid "Pointing & Clicking"
 msgstr "পোইন্টিং আৰু ক্লিকিং"
 
@@ -5652,27 +5649,27 @@ msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "ডাঙৰ"
 
-#: ../panels/universal-access/zoom-options.c:357
+#: ../panels/universal-access/zoom-options.c:333
 msgctxt "Distance"
 msgid "Short"
 msgstr "সৰু"
 
-#: ../panels/universal-access/zoom-options.c:358
+#: ../panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ পৰ্দা"
 
-#: ../panels/universal-access/zoom-options.c:359
+#: ../panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ পৰ্দা"
 
-#: ../panels/universal-access/zoom-options.c:360
+#: ../panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ পৰ্দা"
 
-#: ../panels/universal-access/zoom-options.c:361
+#: ../panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "Long"
 msgstr "দীঘল"
@@ -7037,6 +7034,9 @@ msgstr "সংহতিসমূহ"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "পছন্দসমূহ;সংহতিসমূহ;"
+
+#~ msgid "_Default"
+#~ msgstr "অবিকল্পিত (_D)"
 
 #~ msgid "Set Up New Device"
 #~ msgstr "নতুন ডিভাইচ সংস্থাপন কৰক"
