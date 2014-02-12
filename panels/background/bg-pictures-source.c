@@ -299,8 +299,7 @@ in_screenshot_types (const char *content_type)
 static gboolean
 add_single_file (BgPicturesSource *bg_source,
 		 GFile            *file,
-		 GFileInfo        *info,
-		 const char       *source_uri)
+		 GFileInfo        *info)
 {
   const gchar *content_type;
   CcBackgroundItem *item = NULL;
@@ -312,7 +311,9 @@ add_single_file (BgPicturesSource *bg_source,
   GtkTreeIter iter;
   GtkTreePath *path = NULL;
   GtkTreeRowReference *row_ref;
+  char *source_uri = NULL;
   char *uri = NULL;
+  gboolean is_native;
   gboolean retval = FALSE;
   guint64 mtime;
 
@@ -328,15 +329,24 @@ add_single_file (BgPicturesSource *bg_source,
   uri = g_file_get_uri (file);
   mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
+  is_native = g_file_is_native (file);
+  if (is_native)
+    source_uri = g_strdup (uri);
+  else
+    {
+      source_uri = uri;
+      uri = NULL;
+    }
+
   item = cc_background_item_new (uri);
   g_object_set (G_OBJECT (item),
 		"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
 		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
 		"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
                 "modified", mtime,
+                "needs-download", !is_native,
+                "source-url", source_uri,
 		NULL);
-  if (source_uri != NULL)
-    g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
 
   if (in_screenshot_types (content_type))
     goto read_file;
@@ -387,6 +397,7 @@ add_single_file (BgPicturesSource *bg_source,
   g_clear_object (&icon_info);
   g_clear_object (&item);
   g_object_unref (file);
+  g_free (source_uri);
   g_free (uri);
   return retval;
 }
@@ -404,7 +415,7 @@ bg_pictures_source_add (BgPicturesSource *bg_source,
   if (info == NULL)
     return FALSE;
 
-  retval = add_single_file (bg_source, file, info, uri);
+  retval = add_single_file (bg_source, file, info);
 
   return retval;
 }
@@ -499,7 +510,7 @@ file_info_async_ready (GObject      *source,
 
       file = g_file_get_child (parent, g_file_info_get_name (info));
 
-      add_single_file (bg_source, file, info, NULL);
+      add_single_file (bg_source, file, info);
     }
 
   g_list_foreach (files, (GFunc) g_object_unref, NULL);
@@ -648,7 +659,7 @@ file_info_ready (GObject      *object,
    * reduces the ref count.
    */
   g_object_ref (file);
-  add_single_file (BG_PICTURES_SOURCE (user_data), file, info, NULL);
+  add_single_file (BG_PICTURES_SOURCE (user_data), file, info);
 }
 
 static void
