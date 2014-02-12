@@ -468,7 +468,7 @@ static guint
 get_login_name_max (void)
 {
 #ifdef LOGIN_NAME_MAX
-        return LOGIN_NAME_MAX
+        return LOGIN_NAME_MAX;
 #else
         static gint length;
 
