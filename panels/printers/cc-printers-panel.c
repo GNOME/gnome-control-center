@@ -1376,7 +1376,9 @@ populate_printers_list (CcPrintersPanel *self)
 
 
   renderer = gtk_cell_renderer_text_new ();
-  g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, "width-chars", 18, NULL);
+  g_object_set (G_OBJECT (renderer),
+                "ellipsize", PANGO_ELLIPSIZE_MIDDLE,
+                "max-width-chars", 18, NULL);
   column = gtk_tree_view_column_new_with_attributes ("Printer", renderer,
                                                      "text", PRINTER_NAME_COLUMN, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, set_cell_sensitivity_func,
