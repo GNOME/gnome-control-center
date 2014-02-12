@@ -104,21 +104,19 @@ pretty_hostname_to_static (const char *pretty,
 {
 	char *result;
 	char *valid_chars;
+	char *composed;
 
 	g_return_val_if_fail (pretty != NULL, NULL);
 	g_return_val_if_fail (g_utf8_validate (pretty, -1, NULL), NULL);
 
 	g_debug ("Input: '%s'", pretty);
 
+	composed = g_utf8_normalize (pretty, -1, G_NORMALIZE_ALL_COMPOSE);
+	g_debug ("\tcomposed: '%s'", composed);
 	/* Transform the pretty hostname to ASCII */
-	result = g_convert (pretty,
-			    -1,
-			    "ASCII//TRANSLIT//IGNORE",
-			    "UTF-8",
-			    NULL,
-			    NULL,
-			    NULL);
+	result = g_str_to_ascii (composed, NULL);
 	g_debug ("\ttranslit: '%s'", result);
+	g_free (composed);
 
 	CHECK;
 
