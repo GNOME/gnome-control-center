@@ -200,8 +200,7 @@ picture_scaled (GObject *source_object,
   if (software != NULL &&
       g_str_equal (software, "gnome-screenshot"))
     {
-      g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot",
-               cc_background_item_get_uri (item));
+      g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot", uri);
       goto out;
     }
 
