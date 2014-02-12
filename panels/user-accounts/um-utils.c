@@ -23,8 +23,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <limits.h>
+#include <unistd.h>
 #include <pwd.h>
-#include <utmp.h>
 
 #include <gio/gio.h>
 #include <gio/gunixoutputstream.h>
@@ -463,8 +464,24 @@ down_arrow (GtkStyleContext *context,
         cairo_restore (cr);
 }
 
+static guint
+get_login_name_max (void)
+{
+#ifdef LOGIN_NAME_MAX
+        return LOGIN_NAME_MAX
+#else
+        static gint length;
 
-#define MAXNAMELEN  (UT_NAMESIZE - 1)
+        if (!length) {
+                length = sysconf (_SC_LOGIN_NAME_MAX);
+                g_assert_cmpint (length, >=, 0);
+        }
+
+        return length;
+#endif
+}
+
+#define MAXNAMELEN  get_login_name_max ()
 
 static gboolean
 is_username_used (const gchar *username)
