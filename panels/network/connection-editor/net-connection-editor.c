@@ -594,7 +594,9 @@ typedef struct {
 static const NetConnectionType connection_types[] = {
         { N_("VPN"), nm_setting_vpn_get_type },
         { N_("Bond"), nm_setting_bond_get_type },
+#ifdef HAVE_NM_UNSTABLE
         { "Team", nm_setting_team_get_type },
+#endif /* NM_UNSTABLE */
         { N_("Bridge"), nm_setting_bridge_get_type },
         { N_("VLAN"), nm_setting_vlan_get_type }
 };
