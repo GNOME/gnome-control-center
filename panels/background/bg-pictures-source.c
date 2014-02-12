@@ -23,10 +23,12 @@
 
 #include "bg-pictures-source.h"
 
+#include "cc-background-grilo-miner.h"
 #include "cc-background-item.h"
 
 #include <string.h>
 #include <gio/gio.h>
+#include <grilo.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
 
@@ -42,6 +44,8 @@ G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 struct _BgPicturesSourcePrivate
 {
   GCancellable *cancellable;
+
+  CcBackgroundGriloMiner *grl_miner;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
@@ -105,6 +109,7 @@ bg_pictures_source_dispose (GObject *object)
       g_clear_object (&priv->cancellable);
     }
 
+  g_clear_object (&priv->grl_miner);
   g_clear_object (&priv->thumb_factory);
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->dispose (object);
@@ -194,6 +199,8 @@ picture_scaled (GObject *source_object,
   bg_source = BG_PICTURES_SOURCE (user_data);
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
   uri = cc_background_item_get_uri (item);
+  if (uri == NULL)
+    uri = cc_background_item_get_source_url (item);
 
   /* Ignore screenshots */
   software = gdk_pixbuf_get_option (pixbuf, "tEXt::Software");
@@ -276,6 +283,47 @@ picture_opened_for_read (GObject *source_object,
   g_object_unref (stream);
 }
 
+static void
+picture_copied_for_read (GObject *source_object,
+                         GAsyncResult *res,
+                         gpointer user_data)
+{
+  BgPicturesSource *bg_source;
+  CcBackgroundItem *item;
+  GError *error = NULL;
+  GFile *thumbnail_file = G_FILE (source_object);
+  GFile *native_file;
+
+  if (!g_file_copy_finish (thumbnail_file, res, &error))
+    {
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        goto out;
+      else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS))
+        {
+          gchar *uri;
+
+          uri = g_file_get_uri (thumbnail_file);
+          g_warning ("Failed to download '%s': %s", uri, error->message);
+          g_free (uri);
+          goto out;
+        }
+    }
+
+  bg_source = BG_PICTURES_SOURCE (user_data);
+
+  native_file = g_object_get_data (G_OBJECT (thumbnail_file), "native-file");
+  item = g_object_get_data (G_OBJECT (thumbnail_file), "item");
+  g_object_set_data_full (G_OBJECT (native_file), "item", g_object_ref (item), g_object_unref);
+  g_file_read_async (native_file,
+                     G_PRIORITY_DEFAULT,
+                     bg_source->priv->cancellable,
+                     picture_opened_for_read,
+                     bg_source);
+
+ out:
+  g_clear_error (&error);
+}
+
 static gboolean
 in_content_types (const char *content_type)
 {
@@ -299,10 +347,11 @@ in_screenshot_types (const char *content_type)
 static gboolean
 add_single_file (BgPicturesSource *bg_source,
 		 GFile            *file,
-		 GFileInfo        *info)
+                 const gchar      *content_type,
+                 guint64           mtime)
 {
-  const gchar *content_type;
   CcBackgroundItem *item = NULL;
+  CcBackgroundItemFlags flags = 0;
   GError *error = NULL;
   GdkPixbuf *pixbuf = NULL;
   GtkIconInfo *icon_info = NULL;
@@ -315,11 +364,8 @@ add_single_file (BgPicturesSource *bg_source,
   char *uri = NULL;
   gboolean is_native;
   gboolean retval = FALSE;
-  guint64 mtime;
 
   /* find png and jpeg files */
-  content_type = g_file_info_get_content_type (info);
-
   if (!content_type)
     goto out;
   if (!in_content_types (content_type))
@@ -327,11 +373,13 @@ add_single_file (BgPicturesSource *bg_source,
 
   /* create a new CcBackgroundItem */
   uri = g_file_get_uri (file);
-  mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
   is_native = g_file_is_native (file);
   if (is_native)
-    source_uri = g_strdup (uri);
+    {
+      source_uri = g_strdup (uri);
+      flags |= CC_BACKGROUND_ITEM_HAS_URI;
+    }
   else
     {
       source_uri = uri;
@@ -339,8 +387,9 @@ add_single_file (BgPicturesSource *bg_source,
     }
 
   item = cc_background_item_new (uri);
+  flags |= CC_BACKGROUND_ITEM_HAS_SHADING;
   g_object_set (G_OBJECT (item),
-		"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
+		"flags", flags,
 		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
 		"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
                 "modified", mtime,
@@ -383,11 +432,63 @@ add_single_file (BgPicturesSource *bg_source,
   g_object_set_data_full (G_OBJECT (item), "row-ref", row_ref, (GDestroyNotify) gtk_tree_row_reference_free);
 
  read_file:
-  g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
+  if (is_native)
+    {
+      g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
+      g_file_read_async (file, G_PRIORITY_DEFAULT,
+                         bg_source->priv->cancellable,
+                         picture_opened_for_read, bg_source);
+    }
+  else
+    {
+      GFile *native_file;
+      GFile *thumbnail_file = NULL;
+      GrlMedia *media;
+      gchar *native_dir;
+      gchar *native_path;
 
-  g_file_read_async (file, G_PRIORITY_DEFAULT,
-                     bg_source->priv->cancellable,
-                     picture_opened_for_read, bg_source);
+      media = g_object_get_data (G_OBJECT (file), "grl-media");
+      if (media != NULL)
+        {
+          const gchar *title;
+          const gchar *thumbnail_uri;
+
+          title = grl_media_get_title (media);
+          g_object_set (G_OBJECT (item), "name", title, NULL);
+
+          thumbnail_uri = grl_media_get_thumbnail (media);
+          thumbnail_file = g_file_new_for_uri (thumbnail_uri);
+        }
+
+      native_path = gnome_desktop_thumbnail_path_for_uri (source_uri, GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
+      native_file = g_file_new_for_path (native_path);
+
+      native_dir = g_path_get_dirname (native_path);
+      g_mkdir_with_parents (native_dir, USER_DIR_MODE);
+
+      if (thumbnail_file != NULL)
+        {
+          g_object_set_data_full (G_OBJECT (thumbnail_file), "item", g_object_ref (item), g_object_unref);
+          g_object_set_data_full (G_OBJECT (thumbnail_file),
+                                  "native-file",
+                                  g_object_ref (native_file),
+                                  g_object_unref);
+          g_file_copy_async (thumbnail_file,
+                             native_file,
+                             G_FILE_COPY_ALL_METADATA,
+                             G_PRIORITY_DEFAULT,
+                             bg_source->priv->cancellable,
+                             NULL,
+                             NULL,
+                             picture_copied_for_read,
+                             bg_source);
+        }
+
+      g_clear_object (&thumbnail_file);
+      g_object_unref (native_file);
+      g_free (native_dir);
+      g_free (native_path);
+    }
 
   retval = TRUE;
 
@@ -400,6 +501,39 @@ add_single_file (BgPicturesSource *bg_source,
   g_free (source_uri);
   g_free (uri);
   return retval;
+}
+
+static gboolean
+add_single_file_from_info (BgPicturesSource *bg_source,
+                           GFile            *file,
+                           GFileInfo        *info)
+{
+  const gchar *content_type;
+  guint64 mtime;
+
+  content_type = g_file_info_get_content_type (info);
+  mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+  return add_single_file (bg_source, file, content_type, mtime);
+}
+
+static gboolean
+add_single_file_from_media (BgPicturesSource *bg_source,
+                            GFile            *file,
+                            GrlMedia         *media)
+{
+  GDateTime *mtime;
+  const gchar *content_type;
+  gint64 mtime_unix;
+
+  content_type = grl_media_get_mime (media);
+
+  /* only GRL_METADATA_KEY_CREATION_DATE is implemented in the Flickr
+   * plugin, GRL_METADATA_KEY_MODIFICATION_DATE is not
+   */
+  mtime = grl_media_get_creation_date (media);
+  mtime_unix = g_date_time_to_unix (mtime);
+
+  return add_single_file (bg_source, file, content_type, (guint64) mtime_unix);
 }
 
 gboolean
@@ -415,7 +549,7 @@ bg_pictures_source_add (BgPicturesSource *bg_source,
   if (info == NULL)
     return FALSE;
 
-  retval = add_single_file (bg_source, file, info);
+  retval = add_single_file_from_info (bg_source, file, info);
 
   return retval;
 }
@@ -510,7 +644,7 @@ file_info_async_ready (GObject      *source,
 
       file = g_file_get_child (parent, g_file_info_get_name (info));
 
-      add_single_file (bg_source, file, info);
+      add_single_file_from_info (bg_source, file, info);
     }
 
   g_list_foreach (files, (GFunc) g_object_unref, NULL);
@@ -659,7 +793,7 @@ file_info_ready (GObject      *object,
    * reduces the ref count.
    */
   g_object_ref (file);
-  add_single_file (BG_PICTURES_SOURCE (user_data), file, info);
+  add_single_file_from_info (BG_PICTURES_SOURCE (user_data), file, info);
 }
 
 static void
@@ -708,6 +842,18 @@ files_changed_cb (GFileMonitor      *monitor,
       default:
         return;
     }
+}
+
+static void
+media_found_cb (BgPicturesSource *self, GrlMedia *media)
+{
+  GFile *file = NULL;
+  const gchar *uri;
+
+  uri = grl_media_get_url (media);
+  file = g_file_new_for_uri (uri);
+  g_object_set_data_full (G_OBJECT (file), "grl-media", g_object_ref (media), g_object_unref);
+  add_single_file_from_media (self, file, media);
 }
 
 static void
@@ -774,6 +920,10 @@ bg_pictures_source_init (BgPicturesSource *self)
                       self);
 
   g_object_unref (dir);
+
+  priv->grl_miner = cc_background_grilo_miner_new ();
+  g_signal_connect_swapped (priv->grl_miner, "media-found", G_CALLBACK (media_found_cb), self);
+  cc_background_grilo_miner_start (priv->grl_miner);
 
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
