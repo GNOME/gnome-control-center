@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-10 15:08+0000\n"
-"PO-Revision-Date: 2014-02-10 16:47+0100\n"
+"POT-Creation-Date: 2014-02-13 07:30+0000\n"
+"PO-Revision-Date: 2014-02-13 12:57+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -42,7 +42,7 @@ msgstr "Fondo"
 msgid "Changes throughout the day"
 msgstr "Cambia a lo largo del día"
 
-#. To translators: This is the noon, not the verb
+#. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
 msgid "Lock Screen"
 msgstr "Bloquear la pantalla"
@@ -1580,8 +1580,8 @@ msgstr "Contraste alto activado o desactivado"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:271
-#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/cc-keyboard-option.c:274
+#: ../panels/keyboard/cc-keyboard-option.c:393
 #: ../panels/keyboard/keyboard-shortcuts.c:1158
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1594,7 +1594,7 @@ msgstr "Desactivado"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:349
+#: ../panels/keyboard/cc-keyboard-option.c:352
 msgid "Alternative Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
@@ -1602,11 +1602,11 @@ msgstr "Tecla de caracteres alternativos"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:358
+#: ../panels/keyboard/cc-keyboard-option.c:361
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: ../panels/keyboard/cc-keyboard-option.c:363
+#: ../panels/keyboard/cc-keyboard-option.c:366
 msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
@@ -2007,12 +2007,12 @@ msgid "Never"
 msgstr "Nunca"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:802
+#: ../panels/user-accounts/um-utils.c:819
 msgid "Today"
 msgstr "Hoy"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:805
+#: ../panels/user-accounts/um-utils.c:822
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -4254,12 +4254,17 @@ msgstr "Añadir una impresora nueva"
 msgid "A_uthenticate"
 msgstr "A_utenticar"
 
-#: ../panels/printers/new-printer-dialog.ui.h:6
+#. Translators: No printers were found
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "No printers detected."
+msgstr "No se ha detectado ninguna impresora."
+
+#: ../panels/printers/new-printer-dialog.ui.h:8
 msgid "Search for network printers or filter result"
 msgstr "Buscar impresoras de red o filtrar resultados"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:8
+#: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter address of a printer or a text to filter results"
 msgstr ""
 "Introducir la dirección de una impresa o un texto para filtrar los resultados"
@@ -4377,14 +4382,9 @@ msgid "%s Active Jobs"
 msgstr "%s trabajos activos"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1668
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
-
-#. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1706
-msgid "No printers detected."
-msgstr "No se ha detectado ninguna impresora."
 
 #: ../panels/printers/pp-options-dialog.c:81
 msgid "Two Sided"
@@ -4543,8 +4543,9 @@ msgstr "Ubicación"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-msgid "_Default"
-msgstr "_Predeterminada"
+#| msgid "Default Route"
+msgid "_Default printer"
+msgstr "_Impresora predeterminada"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
@@ -5460,7 +5461,6 @@ msgid "_Typing Assist (AccessX)"
 msgstr "Asistente de escri_tura (AccessX)"
 
 #: ../panels/universal-access/uap.ui.h:14
-#| msgid "Pointing and Clicking"
 msgid "Pointing & Clicking"
 msgstr "Apuntar y pulsar"
 
@@ -5665,27 +5665,27 @@ msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Grande"
 
-#: ../panels/universal-access/zoom-options.c:357
+#: ../panels/universal-access/zoom-options.c:333
 msgctxt "Distance"
 msgid "Short"
 msgstr "Corta"
 
-#: ../panels/universal-access/zoom-options.c:358
+#: ../panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ de pantalla"
 
-#: ../panels/universal-access/zoom-options.c:359
+#: ../panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ pantalla"
 
-#: ../panels/universal-access/zoom-options.c:360
+#: ../panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ de pantalla"
 
-#: ../panels/universal-access/zoom-options.c:361
+#: ../panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "Long"
 msgstr "Larga"
@@ -6622,21 +6622,21 @@ msgstr ""
 msgid "My Account"
 msgstr "Mi cuenta"
 
-#: ../panels/user-accounts/um-utils.c:550
+#: ../panels/user-accounts/um-utils.c:567
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Ya existe un nombre de usuario con el nombre «%s»"
 
-#: ../panels/user-accounts/um-utils.c:554
+#: ../panels/user-accounts/um-utils.c:571
 #, c-format
 msgid "The username is too long"
 msgstr "El nombre de usuario es demasiado largo"
 
-#: ../panels/user-accounts/um-utils.c:557
+#: ../panels/user-accounts/um-utils.c:574
 msgid "The username cannot start with a '-'"
 msgstr "El nombre de usuario no puede comenzar por «-»"
 
-#: ../panels/user-accounts/um-utils.c:560
+#: ../panels/user-accounts/um-utils.c:577
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
@@ -6645,12 +6645,12 @@ msgstr ""
 "a-z, dígitos y cualquiera de los caracteres «.», «-» y «_»"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:810
+#: ../panels/user-accounts/um-utils.c:827
 msgid "%b %e"
 msgstr "%e de %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:814
+#: ../panels/user-accounts/um-utils.c:831
 msgid "%b %e, %Y"
 msgstr "%e de %b, %Y"
 
@@ -7043,6 +7043,9 @@ msgstr "Configuración"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "_Default"
+#~ msgstr "_Predeterminada"
 
 #~ msgid "Set Up New Device"
 #~ msgstr "Configurar un dispositivo nuevo"
