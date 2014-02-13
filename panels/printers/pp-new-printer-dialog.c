@@ -47,10 +47,18 @@
 #define ippGetState(ipp) ipp->state
 #endif
 
+/*
+ * Additional delay to the default 150ms delay in GtkSearchEntry
+ * resulting in total delay of 500ms.
+ */
+#define HOST_SEARCH_DELAY (500 - 150)
+
 static void     actualize_devices_list (PpNewPrinterDialog *dialog);
 static void     populate_devices_list (PpNewPrinterDialog *dialog);
-static void     search_address_cb (GtkSearchEntry *entry,
-                                   gpointer        user_data);
+static void     search_entry_activated_cb (GtkEntry *entry,
+                                           gpointer  user_data);
+static void     search_entry_changed_cb (GtkSearchEntry *entry,
+                                         gpointer        user_data);
 static void     new_printer_dialog_response_cb (GtkDialog *_dialog,
                                                 gint       response_id,
                                                 gpointer   user_data);
@@ -129,6 +137,7 @@ struct _PpNewPrinterDialogPrivate
   PpHost  *snmp_host;
   PpHost  *remote_cups_host;
   PpSamba *samba_host;
+  guint    host_search_timeout_id;
 };
 
 #define PP_NEW_PRINTER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogPrivate))
@@ -352,7 +361,7 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
                   widget = (GtkWidget*)
                     gtk_builder_get_object (priv->builder, "search-entry");
                   gtk_entry_set_text (GTK_ENTRY (widget), device->device_location);
-                  search_address_cb (GTK_SEARCH_ENTRY (widget), dialog);
+                  search_entry_activated_cb (GTK_ENTRY (widget), dialog);
                 }
             }
 
@@ -463,7 +472,8 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "search-entry");
-  g_signal_connect (widget, "search-changed", G_CALLBACK (search_address_cb), dialog);
+  g_signal_connect (widget, "activate", G_CALLBACK (search_entry_activated_cb), dialog);
+  g_signal_connect (widget, "search-changed", G_CALLBACK (search_entry_changed_cb), dialog);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "authenticate-button");
@@ -494,6 +504,12 @@ pp_new_printer_dialog_finalize (GObject *object)
 
   priv->text_renderer = NULL;
   priv->icon_renderer = NULL;
+
+  if (priv->host_search_timeout_id != 0)
+    {
+      g_source_remove (priv->host_search_timeout_id);
+      priv->host_search_timeout_id = 0;
+    }
 
   if (priv->remote_host_cancellable)
     {
@@ -1418,15 +1434,15 @@ get_cups_devices (PpNewPrinterDialog *dialog)
 }
 
 static gboolean
-parse_uri (gchar  *uri,
-           gchar **host,
-           gint   *port)
+parse_uri (const gchar  *uri,
+           gchar       **host,
+           gint         *port)
 {
-  gchar *tmp = NULL;
-  gchar *resulting_host = NULL;
-  gchar *port_string = NULL;
-  gchar *position;
-  int    resulting_port = 631;
+  const gchar *tmp = NULL;
+  gchar       *resulting_host = NULL;
+  gchar       *port_string = NULL;
+  gchar       *position;
+  int          resulting_port = 631;
 
   if (g_strrstr (uri, "://"))
     tmp = g_strrstr (uri, "://") + 3;
@@ -1460,25 +1476,77 @@ parse_uri (gchar  *uri,
   return TRUE;
 }
 
-static void
-search_address_cb (GtkSearchEntry *entry,
-                   gpointer        user_data)
+typedef struct
 {
-  PpNewPrinterDialog        *dialog = PP_NEW_PRINTER_DIALOG (user_data);
-  PpNewPrinterDialogPrivate *priv = dialog->priv;
-  gboolean             found = FALSE;
-  gboolean             subfound;
-  TDevice             *device;
-  GList               *iter, *tmp;
-  gchar               *text;
-  gchar               *lowercase_name;
-  gchar               *lowercase_location;
-  gchar               *lowercase_text;
-  gchar              **words;
-  gint                 words_length = 0;
-  gint                 i;
+  PpNewPrinterDialog *dialog;
+  gchar              *host_name;
+  gint                host_port;
+} THostSearchData;
 
-  text = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+static void
+search_for_remote_printers_free (THostSearchData *data)
+{
+  g_free (data->host_name);
+  g_free (data);
+}
+
+static gboolean
+search_for_remote_printers (THostSearchData *data)
+{
+  PpNewPrinterDialogPrivate *priv = data->dialog->priv;
+
+  if (priv->remote_host_cancellable != NULL)
+    {
+      g_cancellable_cancel (priv->remote_host_cancellable);
+      g_clear_object (&priv->remote_host_cancellable);
+    }
+
+  priv->remote_host_cancellable = g_cancellable_new ();
+
+  priv->remote_cups_host = pp_host_new (data->host_name, data->host_port);
+  priv->snmp_host = pp_host_new (data->host_name, data->host_port);
+  priv->samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
+                                   data->host_name);
+
+  update_spinner_state (data->dialog);
+
+  pp_host_get_remote_cups_devices_async (priv->remote_cups_host,
+                                         priv->remote_host_cancellable,
+                                         get_remote_cups_devices_cb,
+                                         data->dialog);
+
+  pp_host_get_snmp_devices_async (priv->snmp_host,
+                                  priv->remote_host_cancellable,
+                                  get_snmp_devices_cb,
+                                  data->dialog);
+
+  pp_samba_get_devices_async (priv->samba_host,
+                              TRUE,
+                              priv->remote_host_cancellable,
+                              get_samba_host_devices_cb,
+                              data->dialog);
+
+  priv->host_search_timeout_id = 0;
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+search_address (const gchar        *text,
+                PpNewPrinterDialog *dialog,
+                gboolean            delay_search)
+{
+  PpNewPrinterDialogPrivate  *priv = dialog->priv;
+  gboolean                    found = FALSE;
+  gboolean                    subfound;
+  TDevice                    *device;
+  GList                      *iter, *tmp;
+  gchar                      *lowercase_name;
+  gchar                      *lowercase_location;
+  gchar                      *lowercase_text;
+  gchar                     **words;
+  gint                        words_length = 0;
+  gint                        i;
 
   lowercase_text = g_ascii_strdown (text, -1);
   words = g_strsplit_set (lowercase_text, " ", -1);
@@ -1571,45 +1639,55 @@ search_address_cb (GtkSearchEntry *entry,
 
           if (host)
             {
-              if (priv->remote_host_cancellable != NULL)
+              THostSearchData *search_data;
+
+              search_data = g_new (THostSearchData, 1);
+              search_data->host_name = host;
+              search_data->host_port = port;
+              search_data->dialog = dialog;
+
+              if (priv->host_search_timeout_id != 0)
                 {
-                  g_cancellable_cancel (priv->remote_host_cancellable);
-                  g_clear_object (&priv->remote_host_cancellable);
+                  g_source_remove (priv->host_search_timeout_id);
+                  priv->host_search_timeout_id = 0;
                 }
 
-              priv->remote_host_cancellable = g_cancellable_new ();
-
-              priv->remote_cups_host = pp_host_new (host, port);
-              priv->snmp_host = pp_host_new (host, port);
-              priv->samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
-                                               host);
-
-              update_spinner_state (dialog);
-
-              pp_host_get_remote_cups_devices_async (priv->remote_cups_host,
-                                                     priv->remote_host_cancellable,
-                                                     get_remote_cups_devices_cb,
-                                                     dialog);
-
-              pp_host_get_snmp_devices_async (priv->snmp_host,
-                                              priv->remote_host_cancellable,
-                                              get_snmp_devices_cb,
-                                              dialog);
-
-              pp_samba_get_devices_async (priv->samba_host,
-                                          TRUE,
-                                          priv->remote_host_cancellable,
-                                          get_samba_host_devices_cb,
-                                          dialog);
-
-              g_free (host);
+              if (delay_search)
+                {
+                  priv->host_search_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT,
+                                                                     HOST_SEARCH_DELAY,
+                                                                     (GSourceFunc) search_for_remote_printers,
+                                                                     search_data,
+                                                                     (GDestroyNotify) search_for_remote_printers_free);
+                }
+              else
+                {
+                  search_for_remote_printers (search_data);
+                  search_for_remote_printers_free (search_data);
+                }
             }
         }
     }
 
   actualize_devices_list (dialog);
+}
 
-  g_free (text);
+static void
+search_entry_activated_cb (GtkEntry *entry,
+                           gpointer  user_data)
+{
+  search_address (gtk_entry_get_text (entry),
+                  PP_NEW_PRINTER_DIALOG (user_data),
+                  FALSE);
+}
+
+static void
+search_entry_changed_cb (GtkSearchEntry *entry,
+                         gpointer        user_data)
+{
+  search_address (gtk_entry_get_text (GTK_ENTRY (entry)),
+                  PP_NEW_PRINTER_DIALOG (user_data),
+                  TRUE);
 }
 
 static void
