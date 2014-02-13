@@ -270,6 +270,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gchar *markup, *href;
   const gchar *pictures_dir;
   gchar *pictures_dir_basename;
+  gchar *pictures_dir_uri;
 
   chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
   priv = chooser->priv;
@@ -404,7 +405,9 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   else
     pictures_dir_basename = g_path_get_basename (pictures_dir);
 
-  href = g_markup_printf_escaped ("<a href=\"file://%s\">%s</a>", pictures_dir, pictures_dir_basename);
+  pictures_dir_uri = g_filename_to_uri (pictures_dir, NULL, NULL);
+  href = g_markup_printf_escaped ("<a href=\"%s\">%s</a>", pictures_dir_uri, pictures_dir_basename);
+  g_free (pictures_dir_uri);
   g_free (pictures_dir_basename);
 
   /* translators: %s here is the name of the Pictures directory, the string should be translated in
