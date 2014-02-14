@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-13 07:30+0000\n"
-"PO-Revision-Date: 2014-02-13 12:57+0100\n"
+"POT-Creation-Date: 2014-02-14 10:21+0000\n"
+"PO-Revision-Date: 2014-02-14 12:43+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -78,39 +78,43 @@ msgid "Span"
 msgstr "Expandir"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:290
+#: ../panels/background/cc-background-chooser-dialog.c:277
 msgid "Select Background"
 msgstr "Seleccionar fondo"
 
-#: ../panels/background/cc-background-chooser-dialog.c:310
+#: ../panels/background/cc-background-chooser-dialog.c:297
 msgid "Wallpapers"
 msgstr "Fondos de escritorio"
 
-#: ../panels/background/cc-background-chooser-dialog.c:319
+#: ../panels/background/cc-background-chooser-dialog.c:306
 msgid "Pictures"
 msgstr "Imágenes"
 
-#: ../panels/background/cc-background-chooser-dialog.c:327
+#: ../panels/background/cc-background-chooser-dialog.c:314
 msgid "Colors"
 msgstr "Colores"
 
-#: ../panels/background/cc-background-chooser-dialog.c:336
-msgid "Flickr"
-msgstr "Flickr"
-
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:383
+#: ../panels/background/cc-background-chooser-dialog.c:360
 msgid "No Pictures Found"
 msgstr "No se han encontrado imágenes"
 
+#. translators: "Home" is used in place of the Pictures
+#. * directory in the string below when XDG_PICTURES_DIR is
+#. * undefined
+#: ../panels/background/cc-background-chooser-dialog.c:378
+#: ../panels/search/cc-search-locations-dialog.c:274
+msgid "Home"
+msgstr "Domicilio"
+
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:398
+#: ../panels/background/cc-background-chooser-dialog.c:390
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 
-#: ../panels/background/cc-background-chooser-dialog.c:427
+#: ../panels/background/cc-background-chooser-dialog.c:419
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
@@ -131,7 +135,7 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../panels/background/cc-background-chooser-dialog.c:428
+#: ../panels/background/cc-background-chooser-dialog.c:420
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -1151,55 +1155,55 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:451 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../panels/info/cc-info-panel.c:538
+#: ../panels/info/cc-info-panel.c:525
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:540
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1220
+#: ../panels/info/cc-info-panel.c:1207
 msgid "Ask what to do"
 msgstr "Preguntar qué hacer"
 
-#: ../panels/info/cc-info-panel.c:1224
+#: ../panels/info/cc-info-panel.c:1211
 msgid "Do nothing"
 msgstr "No hacer nada"
 
-#: ../panels/info/cc-info-panel.c:1228
+#: ../panels/info/cc-info-panel.c:1215
 msgid "Open folder"
 msgstr "Abrir carpeta"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Other Media"
 msgstr "Otros soportes"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1337
 msgid "Select an application for audio CDs"
 msgstr "Seleccionar una aplicación para CD de sonido"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1338
 msgid "Select an application for video DVDs"
 msgstr "Seleccionar una aplicación para DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1339
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccionar una aplicación que ejecutar cuando se conecta un reproductor de "
 "música"
 
-#: ../panels/info/cc-info-panel.c:1353
+#: ../panels/info/cc-info-panel.c:1340
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccionar una aplicación que ejecutar cuando se conecta una cámara"
 
-#: ../panels/info/cc-info-panel.c:1354
+#: ../panels/info/cc-info-panel.c:1341
 msgid "Select an application for software CDs"
 msgstr "Seleccionar una aplicación para CD de software"
 
@@ -1208,87 +1212,75 @@ msgstr "Seleccionar una aplicación para CD de software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1353
 msgid "audio DVD"
 msgstr "DVD de sonido"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1354
 msgid "blank Blu-ray disc"
 msgstr "disco Blu-ray virgen"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1355
 msgid "blank CD disc"
 msgstr "CD virgen"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1356
 msgid "blank DVD disc"
 msgstr "DVD virgen"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1357
 msgid "blank HD DVD disc"
 msgstr "disco HD DVD virgen"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1358
 msgid "Blu-ray video disc"
 msgstr "Disco Blu-ray de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1359
 msgid "e-book reader"
 msgstr "lector de libros electrónicos"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1360
 msgid "HD DVD video disc"
 msgstr "Disco HD DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1361
 msgid "Picture CD"
 msgstr "CD de imágenes"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1362
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1363
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1377
+#: ../panels/info/cc-info-panel.c:1364
 msgid "Windows software"
 msgstr "Software de Windows"
 
-#: ../panels/info/cc-info-panel.c:1500
+#: ../panels/info/cc-info-panel.c:1487
 #: ../panels/keyboard/keyboard-shortcuts.c:1695
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:1509 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1496 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Visión general"
 
-#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1502 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Aplicaciones predeterminadas"
 
-#: ../panels/info/cc-info-panel.c:1520 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1507 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Soportes extraíbles"
 
-#: ../panels/info/cc-info-panel.c:1545
+#: ../panels/info/cc-info-panel.c:1532
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
-
-#: ../panels/info/cc-info-panel.c:1595
-msgid "Install Updates"
-msgstr "Instalar actualizaciones"
-
-#: ../panels/info/cc-info-panel.c:1599
-msgid "System Up-To-Date"
-msgstr "Sistema al día"
-
-#: ../panels/info/cc-info-panel.c:1603
-msgid "Checking for Updates"
-msgstr "Comprobando actualizaciones"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
@@ -1355,55 +1347,60 @@ msgstr "Gráficos"
 msgid "Virtualization"
 msgstr "Virtualización"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:13
+#| msgid "Checking for Updates"
+msgid "Check for updates"
+msgstr "Comprobar si hay actualizaciones"
+
+#: ../panels/info/info.ui.h:15
 msgid "_Web"
 msgstr "_Web"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:16
 msgid "_Mail"
 msgstr "Co_rreo"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:17
 msgid "_Calendar"
 msgstr "_Calendario"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:18
 msgid "M_usic"
 msgstr "_Música"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:19
 msgid "_Video"
 msgstr "_Vídeo"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:20
 msgid "_Photos"
 msgstr "_Fotos"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:22
 msgid "Select how media should be handled"
 msgstr "Seleccionar cómo se deben manejar los soportes"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:23
 msgid "CD _audio"
 msgstr "CD de _sonido"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:24
 msgid "_DVD video"
 msgstr "_DVD de vídeo"
 
-#: ../panels/info/info.ui.h:24
+#: ../panels/info/info.ui.h:25
 msgid "_Music player"
 msgstr "Reproductor de _música"
 
-#: ../panels/info/info.ui.h:25
+#: ../panels/info/info.ui.h:26
 msgid "_Software"
 msgstr "Soft_ware"
 
-#: ../panels/info/info.ui.h:26
+#: ../panels/info/info.ui.h:27
 msgid "_Other Media…"
 msgstr "_Otros soportes…"
 
-#: ../panels/info/info.ui.h:27
+#: ../panels/info/info.ui.h:28
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Nunca preguntar ni iniciar programas al introducir soportes"
 
@@ -4259,12 +4256,8 @@ msgstr "A_utenticar"
 msgid "No printers detected."
 msgstr "No se ha detectado ninguna impresora."
 
-#: ../panels/printers/new-printer-dialog.ui.h:8
-msgid "Search for network printers or filter result"
-msgstr "Buscar impresoras de red o filtrar resultados"
-
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:10
+#: ../panels/printers/new-printer-dialog.ui.h:9
 msgid "Enter address of a printer or a text to filter results"
 msgstr ""
 "Introducir la dirección de una impresa o un texto para filtrar los resultados"
@@ -4382,7 +4375,7 @@ msgid "%s Active Jobs"
 msgstr "%s trabajos activos"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1668
+#: ../panels/printers/pp-new-printer-dialog.c:1752
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
@@ -4543,7 +4536,6 @@ msgstr "Ubicación"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-#| msgid "Default Route"
 msgid "_Default printer"
 msgstr "_Impresora predeterminada"
 
@@ -4941,10 +4933,6 @@ msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "La configuración de inicio de sesión la usan todos los usuarios cuando "
 "inician sesión en el sistema"
-
-#: ../panels/search/cc-search-locations-dialog.c:274
-msgid "Home"
-msgstr "Domicilio"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
 msgctxt "Search Location"
@@ -7043,6 +7031,18 @@ msgstr "Configuración"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Flickr"
+#~ msgstr "Flickr"
+
+#~ msgid "Install Updates"
+#~ msgstr "Instalar actualizaciones"
+
+#~ msgid "System Up-To-Date"
+#~ msgstr "Sistema al día"
+
+#~ msgid "Search for network printers or filter result"
+#~ msgstr "Buscar impresoras de red o filtrar resultados"
 
 #~ msgid "_Default"
 #~ msgstr "_Predeterminada"
