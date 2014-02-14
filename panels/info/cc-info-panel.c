@@ -71,13 +71,6 @@ typedef struct {
   char *glx_renderer;
 } GraphicsData;
 
-typedef enum {
-	PK_NOT_AVAILABLE,
-	UPDATES_AVAILABLE,
-	UPDATES_NOT_AVAILABLE,
-	CHECKING_UPDATES
-} UpdatesState;
-
 typedef struct 
 {
   const char *content_type;
@@ -95,7 +88,6 @@ struct _CcInfoPanelPrivate
   char          *gnome_version;
   char          *gnome_distributor;
   char          *gnome_date;
-  UpdatesState   updates_state;
 
   GCancellable  *cancellable;
 
@@ -108,14 +100,11 @@ struct _CcInfoPanelPrivate
   GtkWidget     *other_application_combo;
 
   GDBusConnection     *session_bus;
-  GDBusProxy          *pk_proxy;
-  GDBusProxy          *pk_transaction_proxy;
 
   GraphicsData  *graphics_data;
 };
 
 static void get_primary_disc_info_start (CcInfoPanel *self);
-static void refresh_update_button (CcInfoPanel *self);
 
 typedef struct
 {
@@ -459,8 +448,6 @@ cc_info_panel_dispose (GObject *object)
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
 
   g_clear_object (&priv->builder);
-  g_clear_object (&priv->pk_proxy);
-  g_clear_object (&priv->pk_transaction_proxy);
   g_clear_pointer (&priv->graphics_data, graphics_data_free);
   g_clear_pointer (&priv->extra_options_dialog, gtk_widget_destroy);
 
@@ -1572,166 +1559,6 @@ info_panel_setup_overview (CcInfoPanel  *self)
 
   widget = WID ("info_vbox");
   gtk_container_add (GTK_CONTAINER (self), widget);
-
-  refresh_update_button (self);
-}
-
-static void
-refresh_update_button (CcInfoPanel  *self)
-{
-  GtkWidget *widget;
-
-  widget = WID ("updates_button");
-  if (widget == NULL)
-    return;
-
-  switch (self->priv->updates_state)
-    {
-      case PK_NOT_AVAILABLE:
-        gtk_widget_set_visible (widget, FALSE);
-        break;
-      case UPDATES_AVAILABLE:
-        gtk_widget_set_sensitive (widget, TRUE);
-        gtk_button_set_label (GTK_BUTTON (widget), _("Install Updates"));
-        break;
-      case UPDATES_NOT_AVAILABLE:
-        gtk_widget_set_sensitive (widget, FALSE);
-        gtk_button_set_label (GTK_BUTTON (widget), _("System Up-To-Date"));
-        break;
-      case CHECKING_UPDATES:
-        gtk_widget_set_sensitive (widget, FALSE);
-        gtk_button_set_label (GTK_BUTTON (widget), _("Checking for Updates"));
-        break;
-    }
-}
-
-static void
-on_pk_transaction_signal (GDBusProxy *proxy,
-                          char *sender_name,
-                          char *signal_name,
-                          GVariant *parameters,
-                          CcInfoPanel *self)
-{
-  if (g_strcmp0 (signal_name, "Package") == 0)
-    {
-      self->priv->updates_state = UPDATES_AVAILABLE;
-    }
-  else if (g_strcmp0 (signal_name, "Finished") == 0)
-    {
-      if (self->priv->updates_state == CHECKING_UPDATES)
-        self->priv->updates_state = UPDATES_NOT_AVAILABLE;
-      refresh_update_button (self);
-    }
-  else if (g_strcmp0 (signal_name, "ErrorCode") == 0)
-    {
-      self->priv->updates_state = PK_NOT_AVAILABLE;
-      refresh_update_button (self);
-    }
-  else if (g_strcmp0 (signal_name, "Destroy") == 0)
-    {
-      g_clear_object (&self->priv->pk_transaction_proxy);
-    }
-}
-
-static void
-on_pk_get_updates_ready (GObject      *source,
-                         GAsyncResult *res,
-                         CcInfoPanel  *self)
-{
-  GError     *error;
-  GVariant   *result;
-
-  error = NULL;
-  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
-  if (result == NULL)
-    {
-      g_warning ("Error getting PackageKit updates list: %s", error->message);
-      g_error_free (error);
-      return;
-    }
-}
-
-static void
-on_pk_get_tid_ready (GObject      *source,
-                     GAsyncResult *res,
-                     CcInfoPanel  *self)
-{
-  GError     *error;
-  GVariant   *result;
-  char       *tid;
-
-  error = NULL;
-  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
-  if (result == NULL)
-    {
-      if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_SERVICE_UNKNOWN) == FALSE)
-        g_warning ("Error getting PackageKit transaction ID: %s", error->message);
-      g_error_free (error);
-      return;
-    }
-
-  g_variant_get (result, "(o)", &tid);
-
-  self->priv->pk_transaction_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                                    G_DBUS_PROXY_FLAGS_NONE,
-                                                                    NULL,
-                                                                    "org.freedesktop.PackageKit",
-                                                                    tid,
-                                                                    "org.freedesktop.PackageKit.Transaction",
-                                                                    NULL,
-                                                                    NULL);
-  g_free (tid);
-  g_variant_unref (result);
-
-  if (self->priv->pk_transaction_proxy == NULL)
-    {
-      g_warning ("Unable to get PackageKit transaction proxy object");
-      return;
-    }
-
-  g_signal_connect (self->priv->pk_transaction_proxy,
-                    "g-signal",
-                    G_CALLBACK (on_pk_transaction_signal),
-                    self);
-
-  g_dbus_proxy_call (self->priv->pk_transaction_proxy,
-                     "GetUpdates",
-                     g_variant_new ("(t)", 1), /* PK_FILTER_ENUM_NONE */
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1,
-                     NULL,
-                     (GAsyncReadyCallback) on_pk_get_updates_ready,
-                     self);
-}
-
-static void
-refresh_updates (CcInfoPanel *self)
-{
-  self->priv->updates_state = CHECKING_UPDATES;
-  refresh_update_button (self);
-
-  g_assert (self->priv->pk_proxy != NULL);
-  g_dbus_proxy_call (self->priv->pk_proxy,
-                     "CreateTransaction",
-                     NULL,
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1,
-                     NULL,
-                     (GAsyncReadyCallback) on_pk_get_tid_ready,
-                     self);
-}
-
-static void
-on_pk_signal (GDBusProxy *proxy,
-              char *sender_name,
-              char *signal_name,
-              GVariant *parameters,
-              CcInfoPanel *self)
-{
-  if (g_strcmp0 (signal_name, "UpdatesChanged") == 0)
-    {
-      refresh_updates (self);
-    }
 }
 
 static gboolean
@@ -1767,92 +1594,6 @@ on_updates_button_clicked (GtkWidget   *widget,
   g_strfreev (argv);
 }
 
-static gboolean
-get_pk_version_property (GDBusProxy *pk_proxy,
-                         const char *property,
-                         guint32 *retval)
-{
-  GVariant *v;
-
-  v = g_dbus_proxy_get_cached_property (pk_proxy, property);
-  if (!v)
-    return FALSE;
-
-  g_variant_get (v, "u", retval);
-  g_variant_unref (v);
-  return TRUE;
-}
-
-static void
-got_pk_proxy_cb (GObject *source_object,
-		 GAsyncResult *res,
-		 CcInfoPanel *self)
-{
-  GError *error = NULL;
-  guint32 major, minor, micro;
-  GDBusProxy *proxy;
-
-  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-
-  if (proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_warning ("Unable to get PackageKit proxy object: %s", error->message);
-          self->priv->updates_state = PK_NOT_AVAILABLE;
-          refresh_update_button (self);
-        }
-      g_error_free (error);
-      return;
-    }
-
-  self->priv->pk_proxy = proxy;
-
-  if (!get_pk_version_property(self->priv->pk_proxy, "VersionMajor", &major) ||
-      !get_pk_version_property(self->priv->pk_proxy, "VersionMinor", &minor) ||
-      !get_pk_version_property(self->priv->pk_proxy, "VersionMicro", &micro))
-    {
-      g_warning ("Unable to get PackageKit version");
-      g_clear_object (&self->priv->pk_proxy);
-      self->priv->updates_state = PK_NOT_AVAILABLE;
-      refresh_update_button (self);
-      return;
-    }
-
-  if (major != 0 || minor != 8)
-    {
-      g_warning ("PackageKit version %u.%u.%u not supported", major, minor, micro);
-      g_clear_object (&self->priv->pk_proxy);
-      self->priv->updates_state = PK_NOT_AVAILABLE;
-      refresh_update_button (self);
-    }
-  else
-    {
-      g_signal_connect (self->priv->pk_proxy,
-                        "g-signal",
-                        G_CALLBACK (on_pk_signal),
-                        self);
-      refresh_updates (self);
-    }
-}
-
-static void
-info_panel_setup_updates (CcInfoPanel *self)
-{
-  self->priv->updates_state = CHECKING_UPDATES;
-  refresh_update_button (self);
-
-  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                            G_DBUS_PROXY_FLAGS_NONE,
-                            NULL,
-                            "org.freedesktop.PackageKit",
-                            "/org/freedesktop/PackageKit",
-                            "org.freedesktop.PackageKit",
-                            self->priv->cancellable,
-                            (GAsyncReadyCallback) got_pk_proxy_cb,
-                            self);
-}
-
 static void
 cc_info_panel_init (CcInfoPanel *self)
 {
@@ -1886,7 +1627,6 @@ cc_info_panel_init (CcInfoPanel *self)
   widget = WID ("updates_button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_updates_button_clicked), self);
 
-  info_panel_setup_updates (self);
   info_panel_setup_selector (self);
   info_panel_setup_overview (self);
   info_panel_setup_default_apps (self);
