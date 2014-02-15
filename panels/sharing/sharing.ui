@@ -1012,10 +1012,7 @@
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Remote View</property>
-                    <attributes>
-                     <attribute name="weight" value="bold"/>
-                    </attributes>
+                    <property name="label" translatable="yes">Screen Sharing</property>
                     <property name="mnemonic_widget">remote-view-switch</property>
                   </object>
                   <packing>
@@ -1041,11 +1038,8 @@
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Remote Control</property>
+                            <property name="label" translatable="yes">Allow Remote Control</property>
                             <property name="mnemonic_widget">remote-control-switch</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1076,65 +1070,7 @@
                       <object class="GtkGrid" id="remote-control-grid">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="row_spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="remote-control-require-password-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes">Require Password</property>
-                            <property name="mnemonic_widget">remote-control-require-password-switch</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="approve-all-connections-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Approve All Connections</property>
-                            <property name="use_markup">True</property>
-                            <property name="mnemonic_widget">approve-all-connections-switch</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSwitch" id="remote-control-require-password-switch">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="halign">end</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSwitch" id="approve-all-connections-switch">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="halign">end</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
+                        <property name="row_spacing">6</property>
                         <child>
                           <object class="GtkGrid" id="password-grid">
                             <property name="visible">True</property>
@@ -1146,8 +1082,8 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="hexpand">True</property>
-                                <property name="label" translatable="yes">Password</property>
+                                <property name="margin_left">12</property>
+                                <property name="label" translatable="yes">Password:</property>
                                 <property name="mnemonic_widget">remote-control-password-entry</property>
                               </object>
                               <packing>
@@ -1161,6 +1097,7 @@
                               <object class="GtkEntry" id="remote-control-password-entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
                                 <property name="visibility">False</property>
                                 <property name="invisible_char">●</property>
                                 <property name="shadow_type">none</property>
@@ -1195,8 +1132,58 @@
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
+                            <property name="top_attach">3</property>
+                            <property name="width">1</property>
+                            <property name="height">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Access Options</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
+                            <property name="width">1</property>
+                            <property name="height">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="approve-connections-radiobutton">
+                            <property name="label" translatable="yes">New connections must ask for access</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="group">require-password-radiobutton</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="height">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="require-password-radiobutton">
+                            <property name="label" translatable="yes">Require a password</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
                             <property name="top_attach">2</property>
-                            <property name="width">2</property>
+                            <property name="width">1</property>
                             <property name="height">1</property>
                           </packing>
                         </child>

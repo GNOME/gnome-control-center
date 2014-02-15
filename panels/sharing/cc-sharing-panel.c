@@ -914,17 +914,17 @@ screen_sharing_show_cb (GtkWidget *widget, CcSharingPanel *self)
 static void
 screen_sharing_hide_cb (GtkWidget *widget, CcSharingPanel *self)
 {
-  GtkSwitch   *pw_switch;
+  GtkToggleButton *ac_radio;
   GtkEntry    *pw_entry;
   const gchar *password;
   CcSharingPanelPrivate *priv = self->priv;
 
-  pw_switch = GTK_SWITCH (WID ("remote-control-require-password-switch"));
+  ac_radio = GTK_TOGGLE_BUTTON (WID ("approve-connections-radiobutton"));
   pw_entry = GTK_ENTRY (WID ("remote-control-password-entry"));
   password = gtk_entry_get_text (pw_entry);
 
   if (password == NULL || *password == '\0')
-    gtk_switch_set_active (pw_switch, FALSE);
+    gtk_toggle_button_set_active (ac_radio, TRUE);
 }
 
 #define MAX_PASSWORD_SIZE 8
@@ -972,7 +972,7 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                                            WID ("remote-control-box"),
                                            NULL);
 
-  cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-require-password-switch"),
+  cc_sharing_panel_bind_switch_to_widgets (WID ("require-password-radiobutton"),
                                            WID ("password-grid"),
                                            NULL);
 
@@ -987,10 +987,10 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
   g_settings_bind (settings, "prompt-enabled",
-                   WID ("approve-all-connections-switch"), "active",
+                   WID ("approve-connections-radiobutton"), "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind_with_mapping (settings, "authentication-methods",
-                                WID ("remote-control-require-password-switch"),
+                                WID ("require-password-radiobutton"),
                                 "active",
                                 G_SETTINGS_BIND_DEFAULT,
                                 vino_get_authtype, vino_set_authtype, NULL, NULL);
