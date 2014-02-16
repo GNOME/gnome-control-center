@@ -1838,9 +1838,25 @@ got_pk_proxy_cb (GObject *source_object,
     }
 }
 
+static gboolean
+does_prepared_update_exist (void)
+{
+  return g_file_test ("/var/lib/PackageKit/prepared-update", G_FILE_TEST_EXISTS);
+}
+
 static void
 info_panel_setup_updates (CcInfoPanel *self)
 {
+  if (does_gnome_software_exist ())
+    {
+      if (does_prepared_update_exist ())
+        self->priv->updates_state = UPDATES_AVAILABLE;
+      else
+        self->priv->updates_state = UPDATES_NOT_AVAILABLE;
+      refresh_update_button (self);
+      return;
+    }
+
   self->priv->updates_state = CHECKING_UPDATES;
   refresh_update_button (self);
 
