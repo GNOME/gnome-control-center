@@ -1959,8 +1959,6 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_widget_show_all (widget);
 
   dialog = priv->automatic_suspend_dialog;
-  sw = WID (priv->builder, "automatic_suspend_close");
-  g_signal_connect_swapped (sw, "clicked", G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   sw = WID (priv->builder, "suspend_on_battery_switch");
