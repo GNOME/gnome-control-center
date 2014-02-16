@@ -484,7 +484,6 @@ city_changed_cb (GtkEntryCompletion *entry_completion,
                  GtkTreeIter        *iter,
                  CcDateTimePanel *self)
 {
-  CcDateTimePanelPrivate *priv = self->priv;
   GtkWidget *entry;
   gchar *zone;
 
@@ -495,8 +494,6 @@ city_changed_cb (GtkEntryCompletion *entry_completion,
 
   entry = gtk_entry_completion_get_entry (GTK_ENTRY_COMPLETION (entry_completion));
   gtk_entry_set_text (GTK_ENTRY (entry), "");
-
-  gtk_widget_grab_focus (W ("timezone-close-button"));
 
   return TRUE;
 }
@@ -1035,7 +1032,6 @@ setup_timezone_dialog (CcDateTimePanel *self)
   CcDateTimePanelPrivate *priv = self->priv;
   GtkEntryCompletion *completion;
   GtkTreeModel *completion_model;
-  GtkWidget *button;
   GtkWidget *dialog;
   GtkWidget *entry;
 
@@ -1045,12 +1041,9 @@ setup_timezone_dialog (CcDateTimePanel *self)
   gtk_container_add (GTK_CONTAINER (gtk_builder_get_object (priv->builder, "aspectmap")),
                      priv->map);
 
-  button = W ("timezone-close-button");
   dialog = W ("timezone-dialog");
   entry = W ("timezone-searchentry");
 
-  g_signal_connect_swapped (button, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -1144,7 +1137,6 @@ setup_datetime_dialog (CcDateTimePanel *self)
   GtkAdjustment *adjustment;
   GtkCssProvider *provider;
   GtkStyleContext *context;
-  GtkWidget *button;
   GtkWidget *dialog;
   guint num_days;
 
@@ -1162,10 +1154,7 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (provider);
 
-  button = W ("datetime-close-button");
   dialog = W ("datetime-dialog");
-  g_signal_connect_swapped (button, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
