@@ -104,11 +104,12 @@ cc_mouse_panel_constructed (GObject *object)
                     self);
 
   toplevel = cc_shell_get_toplevel (shell);
-  priv->test_dialog = gtk_dialog_new_with_buttons (_("Test Your Settings"),
-                                                   GTK_WINDOW (toplevel),
-                                                   GTK_DIALOG_MODAL,
-                                                   _("_Done"), GTK_RESPONSE_ACCEPT, NULL);
-  gtk_window_set_resizable (GTK_WINDOW (priv->test_dialog), FALSE);
+  priv->test_dialog = g_object_new (GTK_TYPE_DIALOG, "title", _("Test Your Settings"),
+                                                     "transient-for", GTK_WINDOW (toplevel),
+                                                     "modal", TRUE,
+                                                     "use_header-bar", TRUE,
+                                                     "resizable", FALSE,
+                                                     NULL);
 
   container = gtk_dialog_get_content_area (GTK_DIALOG (priv->test_dialog));
   gtk_container_add (GTK_CONTAINER (container), priv->test_widget);
