@@ -103,6 +103,8 @@ enum {
 /* max number of devices and profiles to cause auto-expand at startup */
 #define GCM_PREFS_MAX_DEVICES_PROFILES_EXPANDED         5
 
+static void gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel);
+
 static void
 gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
                                 CdProfile *profile,
@@ -1065,7 +1067,7 @@ gcm_prefs_profile_remove_cb (GtkWidget *widget, CcColorPanel *prefs)
 static void
 gcm_prefs_make_profile_default_cb (GObject *object,
                                    GAsyncResult *res,
-                                   gpointer user_data)
+                                   CcColorPanel *prefs)
 {
   CdDevice *device = CD_DEVICE (object);
   gboolean ret = FALSE;
@@ -1080,6 +1082,10 @@ gcm_prefs_make_profile_default_cb (GObject *object,
                  cd_device_get_id (device),
                  error->message);
       g_error_free (error);
+    }
+  else
+    {
+      gcm_prefs_refresh_toolbar_buttons (prefs);
     }
 }
 
@@ -1922,10 +1928,22 @@ gcm_prefs_list_box_row_selected_cb (GtkListBox *list_box,
                                     GtkListBoxRow *row,
                                     CcColorPanel *panel)
 {
+  gcm_prefs_refresh_toolbar_buttons (panel);
+}
+
+static void
+gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel)
+{
   CdProfile *profile = NULL;
   GtkWidget *widget;
   CcColorPanelPrivate *priv = panel->priv;
-  gboolean is_device = CC_IS_COLOR_DEVICE (row);
+  GtkListBoxRow *row;
+  gboolean is_device;
+
+  /* get the selected profile */
+  row = gtk_list_box_get_selected_row (priv->list_box);
+
+  is_device = CC_IS_COLOR_DEVICE (row);
 
   /* nothing selected */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
