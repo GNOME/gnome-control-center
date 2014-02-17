@@ -594,6 +594,28 @@ handle_argv_for_device (CcNetworkPanel *panel,
         return FALSE;
 }
 
+static gboolean
+handle_argv_for_connection (CcNetworkPanel *panel,
+                            NMConnection   *connection,
+                            GtkTreeIter    *iter)
+{
+        CcNetworkPanelPrivate *priv = panel->priv;
+
+        if (priv->arg_operation == OPERATION_NULL)
+                return TRUE;
+        if (priv->arg_operation != OPERATION_SHOW_DEVICE)
+                return FALSE;
+
+        if (g_strcmp0 (nm_connection_get_path (connection), priv->arg_device) == 0) {
+                reset_command_line_args (panel);
+                select_tree_iter (panel, iter);
+                return TRUE;
+        }
+
+        return FALSE;
+}
+
+
 static void
 handle_argv (CcNetworkPanel *panel)
 {
@@ -610,15 +632,20 @@ handle_argv (CcNetworkPanel *panel)
         while (ret) {
                 GObject *object_tmp;
                 NMDevice *device;
+                NMConnection *connection;
                 gboolean done = FALSE;
 
                 gtk_tree_model_get (model, &iter,
                                     PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
                                     -1);
-                if (g_object_class_find_property (G_OBJECT_GET_CLASS (object_tmp), "nm-device") != NULL) {
+                if (NET_IS_DEVICE (object_tmp)) {
                         g_object_get (object_tmp, "nm-device", &device, NULL);
                         done = handle_argv_for_device (panel, device, &iter);
                         g_object_unref (device);
+                } else if (NET_IS_VPN (object_tmp) || NET_IS_VIRTUAL_DEVICE (object_tmp)) {
+                        g_object_get (object_tmp, "connection", &connection, NULL);
+                        done = handle_argv_for_connection (panel, connection, &iter);
+                        g_object_unref (connection);
                 }
 
                 g_object_unref (object_tmp);
