@@ -27,8 +27,6 @@ libbackground_chooser_la_SOURCES =	\
 	$(BUILT_SOURCES)		\
 	cc-background-chooser-dialog.c	\
 	cc-background-chooser-dialog.h	\
-	cc-background-grilo-miner.c	\
-	cc-background-grilo-miner.h	\
 	cc-background-item.c		\
 	cc-background-item.h		\
 	cc-background-xml.c		\
