@@ -740,7 +740,7 @@ ui_to_setting (CEPageIP4 *page)
                         goto out;
                 }
 
-                if (text_gateway && inet_pton (AF_INET, text_gateway, &tmp_gateway) <= 0) {
+                if (text_gateway && *text_gateway && inet_pton (AF_INET, text_gateway, &tmp_gateway) <= 0) {
                         goto out;
                 }
 
