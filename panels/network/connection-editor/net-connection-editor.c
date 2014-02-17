@@ -352,10 +352,10 @@ validate (NetConnectionEditor *editor)
                 if (!ce_page_validate (CE_PAGE (l->data), editor->connection, &error)) {
                         valid = FALSE;
                         if (error) {
-                                g_warning ("Invalid setting %s: %s", ce_page_get_title (CE_PAGE (l->data)), error->message);
+                                g_debug ("Invalid setting %s: %s", ce_page_get_title (CE_PAGE (l->data)), error->message);
                                 g_error_free (error);
                         } else {
-                                g_warning ("Invalid setting %s", ce_page_get_title (CE_PAGE (l->data)));
+                                g_debug ("Invalid setting %s", ce_page_get_title (CE_PAGE (l->data)));
                         }
                 }
         }
