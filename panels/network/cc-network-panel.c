@@ -1256,6 +1256,10 @@ notify_connections_read_cb (NMRemoteSettings *settings,
                 add_connection (panel, connection);
         }
         g_slist_free (list);
+
+
+        g_debug ("Calling handle_argv() after cold-plugging connections");
+        handle_argv (panel);
 }
 
 static gboolean
