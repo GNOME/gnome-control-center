@@ -726,19 +726,16 @@ ui_to_setting (CEPageIP6 *page)
                 }
 
                 if (inet_pton (AF_INET6, text_address, &tmp_addr) <= 0) {
-                        g_warning ("IPv6 address %s missing or invalid", text_address);
                         goto out;
                 }
 
                 prefix = strtoul (text_prefix, &end, 10);
                 if (!end || *end || prefix == 0 || prefix > 128) {
-                        g_warning ("IPv6 prefix %s is invalid", text_prefix);
                         goto out;
                 }
 
                 if (text_gateway && *text_gateway) {
                         if (inet_pton (AF_INET6, text_gateway, &tmp_gateway) <= 0) {
-                                g_warning ("IPv6 gateway %s is invalid", text_gateway);
                                 goto out;
                         }
                         if (!IN6_IS_ADDR_UNSPECIFIED (&tmp_gateway))
@@ -773,7 +770,6 @@ ui_to_setting (CEPageIP6 *page)
                 }
 
                 if (inet_pton (AF_INET6, text, &tmp_addr) <= 0) {
-                        g_warning ("IPv6 dns server %s invalid", text);
                         goto out;
                 }
 
@@ -810,18 +806,15 @@ ui_to_setting (CEPageIP6 *page)
                 }
 
                 if (inet_pton (AF_INET6, text_address, &dest) <= 0) {
-                        g_warning ("IPv6 route address %s invalid", text_address);
                         goto out;
                 }
 
                 prefix = strtoul (text_prefix, &end, 10);
                 if (!end || *end || prefix == 0 || prefix > 128) {
-                        g_warning ("IPv6 route prefix %s invalid", text_prefix);
                         goto out;
                 }
 
                 if (inet_pton (AF_INET6, text_gateway, &gateway) <= 0) {
-                        g_warning ("IPv6 route gateway %s invalid", text_gateway);
                         goto out;
                 }
 
@@ -830,7 +823,6 @@ ui_to_setting (CEPageIP6 *page)
                         errno = 0;
                         metric = strtoul (text_metric, NULL, 10);
                         if (errno) {
-                                g_warning ("IPv6 route metric %s invalid", text_metric);
                                 goto out;
                         }
                 }

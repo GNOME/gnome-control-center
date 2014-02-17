@@ -748,18 +748,15 @@ ui_to_setting (CEPageIP4 *page)
                 }
 
                 if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
-                        g_warning ("IPv4 address %s missing or invalid", text_address);
                         goto out;
                 }
 
 
                 if (!parse_netmask (text_netmask, &prefix)) {
-                        g_warning ("IPv4 prefix %s is invalid", text_netmask);
                         goto out;
                 }
 
                 if (text_gateway && inet_pton (AF_INET, text_gateway, &tmp_gateway) <= 0) {
-                        g_warning ("IPv4 gateway %s is invalid", text_gateway);
                         goto out;
                 }
 
@@ -798,7 +795,6 @@ ui_to_setting (CEPageIP4 *page)
                 }
 
                 if (inet_pton (AF_INET, text, &tmp_addr) <= 0) {
-                        g_warning ("IPv4 dns server %s invalid", text);
                         goto out;
                 }
 
@@ -835,18 +831,15 @@ ui_to_setting (CEPageIP4 *page)
                 }
 
                 if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
-                        g_warning ("IPv4 route address %s invalid", text_address);
                         goto out;
                 }
                 address = tmp_addr.s_addr;
 
                 if (!parse_netmask (text_netmask, &netmask)) {
-                        g_warning ("IPv4 route netmask %s invalid", text_netmask);
                         goto out;
                 }
 
                 if (inet_pton (AF_INET, text_gateway, &tmp_addr) <= 0) {
-                        g_warning ("IPv4 route gateway %s invalid", text_gateway);
                         goto out;
                 }
                 gateway = tmp_addr.s_addr;
@@ -856,7 +849,6 @@ ui_to_setting (CEPageIP4 *page)
                         errno = 0;
                         metric = strtoul (text_metric, NULL, 10);
                         if (errno) {
-                                g_warning ("IPv4 route metric %s invalid", text_metric);
                                 goto out;
                         }
                 }
