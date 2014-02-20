@@ -301,6 +301,8 @@ void        get_cups_devices_async (GCancellable *cancellable,
                                     GCDCallback   callback,
                                     gpointer      user_data);
 
+gchar      *guess_device_hostname (PpPrintDevice *device);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

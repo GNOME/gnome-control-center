@@ -637,6 +637,9 @@ add_device_to_list (PpNewPrinterDialog *dialog,
 
   if (device)
     {
+      if (device->host_name == NULL)
+        device->host_name = guess_device_hostname (device);
+
       if (device->device_id ||
           device->device_ppd ||
           (device->host_name &&

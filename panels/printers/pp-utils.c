@@ -4042,3 +4042,72 @@ job_set_hold_until_async (gint          job_id,
                           job_set_hold_until_async_dbus_cb,
                           data);
 }
+
+gchar *
+guess_device_hostname (PpPrintDevice *device)
+{
+  http_uri_status_t  status;
+  char               scheme[HTTP_MAX_URI];
+  char               username[HTTP_MAX_URI];
+  char               hostname[HTTP_MAX_URI];
+  char               resource[HTTP_MAX_URI];
+  int                port;
+  gchar             *result = NULL;
+  gchar             *hostname_begin;
+  gchar             *hostname_end = NULL;
+
+  if (device != NULL && device->device_uri != NULL)
+    {
+      if (g_str_has_prefix (device->device_uri, "socket") ||
+          g_str_has_prefix (device->device_uri, "lpd") ||
+          g_str_has_prefix (device->device_uri, "ipp") ||
+          g_str_has_prefix (device->device_uri, "smb"))
+        {
+          status = httpSeparateURI (HTTP_URI_CODING_ALL,
+                                    device->device_uri,
+                                    scheme, HTTP_MAX_URI,
+                                    username, HTTP_MAX_URI,
+                                    hostname, HTTP_MAX_URI,
+                                    &port,
+                                    resource, HTTP_MAX_URI);
+
+          if (status >= HTTP_URI_STATUS_OK &&
+              hostname[0] != '\0')
+            result = g_strdup (hostname);
+        }
+      else if ((g_str_has_prefix (device->device_uri, "dnssd") ||
+                g_str_has_prefix (device->device_uri, "mdns")) &&
+               device->device_info != NULL)
+        {
+          /*
+           * CUPS browses its printers as
+           * "PrinterName @ ComputerName" or "PrinterInfo @ ComputerName"
+           * through DNS-SD.
+           */
+          hostname_begin = g_strrstr (device->device_info, " @ ");
+          if (hostname_begin != NULL)
+            result = g_strdup (hostname_begin + 3);
+        }
+      else if (g_str_has_prefix (device->device_uri, "hp:/net/") ||
+               g_str_has_prefix (device->device_uri, "hpfax:/net/"))
+        {
+          /*
+           * HPLIP printers have URI of form hp:/net/%s?ip=%s&port=%d
+           * or hp:/net/%s?ip=%s.
+           */
+          hostname_begin = g_strrstr (device->device_uri, "ip=");
+          if (hostname_begin != NULL)
+            {
+              hostname_begin += 3;
+              hostname_end = strstr (hostname_begin, "&");
+            }
+
+          if (hostname_end != NULL)
+            result = g_strndup (hostname_begin, hostname_end - hostname_begin);
+          else
+            result = g_strdup (hostname_begin);
+        }
+    }
+
+  return result;
+}
