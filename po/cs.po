@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-08 07:54+0000\n"
-"PO-Revision-Date: 2014-02-08 10:19+0100\n"
+"POT-Creation-Date: 2014-02-21 19:28+0000\n"
+"PO-Revision-Date: 2014-02-21 23:29+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -45,74 +45,79 @@ msgstr "Pozadí"
 msgid "Changes throughout the day"
 msgstr "Měnit v průběhu dne"
 
-#: ../panels/background/background.ui.h:4
+#. To translators: This is a noun, not a verb
+#: ../panels/background/background.ui.h:5
 msgid "Lock Screen"
 msgstr "Uzamknutá obrazovka"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Tile"
 msgstr "Dlaždice"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "Zvětšit"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Center"
 msgstr "Na střed"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:9
 msgctxt "background, style"
 msgid "Scale"
 msgstr "Přizpůsobit"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:10
 msgctxt "background, style"
 msgid "Fill"
 msgstr "Vyplnit"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:11
 msgctxt "background, style"
 msgid "Span"
 msgstr "Rozšířit"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:290
+#: ../panels/background/cc-background-chooser-dialog.c:277
 msgid "Select Background"
 msgstr "Zvolit pozadí"
 
-#: ../panels/background/cc-background-chooser-dialog.c:310
+#: ../panels/background/cc-background-chooser-dialog.c:297
 msgid "Wallpapers"
 msgstr "Tapety"
 
-#: ../panels/background/cc-background-chooser-dialog.c:319
+#: ../panels/background/cc-background-chooser-dialog.c:306
 msgid "Pictures"
 msgstr "Obrázky"
 
-#: ../panels/background/cc-background-chooser-dialog.c:327
+#: ../panels/background/cc-background-chooser-dialog.c:314
 msgid "Colors"
 msgstr "Barvy"
 
-#: ../panels/background/cc-background-chooser-dialog.c:336
-msgid "Flickr"
-msgstr "Flickr"
-
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:383
+#: ../panels/background/cc-background-chooser-dialog.c:360
 msgid "No Pictures Found"
 msgstr "Nenalezen žádný obrázek"
 
+#. translators: "Home" is used in place of the Pictures
+#. * directory in the string below when XDG_PICTURES_DIR is
+#. * undefined
+#: ../panels/background/cc-background-chooser-dialog.c:378
+#: ../panels/search/cc-search-locations-dialog.c:274
+msgid "Home"
+msgstr "Domů"
+
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:398
+#: ../panels/background/cc-background-chooser-dialog.c:390
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 
-#: ../panels/background/cc-background-chooser-dialog.c:427
+#: ../panels/background/cc-background-chooser-dialog.c:419
 #: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
@@ -133,7 +138,7 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: ../panels/background/cc-background-chooser-dialog.c:428
+#: ../panels/background/cc-background-chooser-dialog.c:420
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -1147,54 +1152,54 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "panel;projektor;xrandr;obrazovka;rozlišení;občerstvit;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:451 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Není známo"
 
-#: ../panels/info/cc-info-panel.c:538
+#: ../panels/info/cc-info-panel.c:525
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %dbitová"
 
-#: ../panels/info/cc-info-panel.c:540
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%d-bit"
 msgstr "%dbitová"
 
-#: ../panels/info/cc-info-panel.c:1220
+#: ../panels/info/cc-info-panel.c:1207
 msgid "Ask what to do"
 msgstr "Zeptat se na další postup"
 
-#: ../panels/info/cc-info-panel.c:1224
+#: ../panels/info/cc-info-panel.c:1211
 msgid "Do nothing"
 msgstr "Nic nedělat"
 
-#: ../panels/info/cc-info-panel.c:1228
+#: ../panels/info/cc-info-panel.c:1215
 msgid "Open folder"
 msgstr "Otevřít složku"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Other Media"
 msgstr "Ostatní média"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1337
 msgid "Select an application for audio CDs"
 msgstr "Vyberte aplikaci pro zvuková CD"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1338
 msgid "Select an application for video DVDs"
 msgstr "Vyberte aplikaci pro DVD s videem"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1339
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Vyberte aplikaci, která má být spuštěna po připojení hudebního přehrávače"
 
-#: ../panels/info/cc-info-panel.c:1353
+#: ../panels/info/cc-info-panel.c:1340
 msgid "Select an application to run when a camera is connected"
 msgstr "Vyberte aplikaci, která má být spuštěna po připojení fotoaparátu"
 
-#: ../panels/info/cc-info-panel.c:1354
+#: ../panels/info/cc-info-panel.c:1341
 msgid "Select an application for software CDs"
 msgstr "Vyberte aplikaci pro CD se softwarem"
 
@@ -1203,87 +1208,75 @@ msgstr "Vyberte aplikaci pro CD se softwarem"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1353
 msgid "audio DVD"
 msgstr "zvukové DVD"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1354
 msgid "blank Blu-ray disc"
 msgstr "prázdný disk Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1355
 msgid "blank CD disc"
 msgstr "prázdný disk CD"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1356
 msgid "blank DVD disc"
 msgstr "prázdný disk DVD"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1357
 msgid "blank HD DVD disc"
 msgstr "prázdný disk HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1358
 msgid "Blu-ray video disc"
 msgstr "videodisk Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1359
 msgid "e-book reader"
 msgstr "čtečka elektronických knih"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1360
 msgid "HD DVD video disc"
 msgstr "videodisk HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1361
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1362
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1363
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1377
+#: ../panels/info/cc-info-panel.c:1364
 msgid "Windows software"
 msgstr "Software Windows"
 
-#: ../panels/info/cc-info-panel.c:1500
+#: ../panels/info/cc-info-panel.c:1487
 #: ../panels/keyboard/keyboard-shortcuts.c:1695
 msgid "Section"
 msgstr "Oddíl"
 
-#: ../panels/info/cc-info-panel.c:1509 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1496 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Přehled"
 
-#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1502 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Výchozí aplikace"
 
-#: ../panels/info/cc-info-panel.c:1520 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1507 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Vyměnitelná média"
 
-#: ../panels/info/cc-info-panel.c:1545
+#: ../panels/info/cc-info-panel.c:1532
 #, c-format
 msgid "Version %s"
 msgstr "Verze %s"
-
-#: ../panels/info/cc-info-panel.c:1595
-msgid "Install Updates"
-msgstr "Instalovat aktualizace"
-
-#: ../panels/info/cc-info-panel.c:1599
-msgid "System Up-To-Date"
-msgstr "Systém je aktuální"
-
-#: ../panels/info/cc-info-panel.c:1603
-msgid "Checking for Updates"
-msgstr "Kontrolují se aktualizace"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
@@ -1350,55 +1343,59 @@ msgstr "Grafika"
 msgid "Virtualization"
 msgstr "Virtualizace"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:13
+msgid "Check for updates"
+msgstr "Zkontrolovat aktualizace"
+
+#: ../panels/info/info.ui.h:15
 msgid "_Web"
 msgstr "_Web"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:16
 msgid "_Mail"
 msgstr "_Pošta"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:17
 msgid "_Calendar"
 msgstr "_Kalendář"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:18
 msgid "M_usic"
 msgstr "H_udba"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:19
 msgid "_Video"
 msgstr "_Video"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:20
 msgid "_Photos"
 msgstr "_Fotografie"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:22
 msgid "Select how media should be handled"
 msgstr "Vyberte jak budou média obsluhována"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:23
 msgid "CD _audio"
 msgstr "Zvukové _CD"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:24
 msgid "_DVD video"
 msgstr "Videodisk _DVD"
 
-#: ../panels/info/info.ui.h:24
+#: ../panels/info/info.ui.h:25
 msgid "_Music player"
 msgstr "_Hudební přehrávač"
 
-#: ../panels/info/info.ui.h:25
+#: ../panels/info/info.ui.h:26
 msgid "_Software"
 msgstr "_Software"
 
-#: ../panels/info/info.ui.h:26
+#: ../panels/info/info.ui.h:27
 msgid "_Other Media…"
 msgstr "_Ostatní média…"
 
-#: ../panels/info/info.ui.h:27
+#: ../panels/info/info.ui.h:28
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Nikdy se nedotazovat nebo spouštět programy na vloženém médiu"
 
@@ -1575,8 +1572,8 @@ msgstr "Zapnout nebo vypnout vysoký kontrast"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:271
-#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/cc-keyboard-option.c:274
+#: ../panels/keyboard/cc-keyboard-option.c:393
 #: ../panels/keyboard/keyboard-shortcuts.c:1158
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1589,7 +1586,7 @@ msgstr "Vypnuto"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:349
+#: ../panels/keyboard/cc-keyboard-option.c:352
 msgid "Alternative Characters Key"
 msgstr "Klávesa alternativních znaků"
 
@@ -1597,11 +1594,11 @@ msgstr "Klávesa alternativních znaků"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:358
+#: ../panels/keyboard/cc-keyboard-option.c:361
 msgid "Compose Key"
 msgstr "Klávesa Compose"
 
-#: ../panels/keyboard/cc-keyboard-option.c:363
+#: ../panels/keyboard/cc-keyboard-option.c:366
 msgid "Modifiers-only switch to next source"
 msgstr "Přepínač na další zdroj pouze pro modifikátory"
 
@@ -1900,7 +1897,7 @@ msgstr "Kliknutí, vedlejší tlačítko"
 msgid "Air_plane Mode"
 msgstr "Režim „_Letadlo“"
 
-#: ../panels/network/cc-network-panel.c:929
+#: ../panels/network/cc-network-panel.c:956
 msgid "Network proxy"
 msgstr "Proxy sítě"
 
@@ -1908,14 +1905,14 @@ msgstr "Proxy sítě"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1108 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1135 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1243
+#: ../panels/network/cc-network-panel.c:1274
 msgid "The system network services are not compatible with this version."
 msgstr "Systémová služba sítě není kompatibilní s touto verzí."
 
@@ -2000,12 +1997,12 @@ msgid "Never"
 msgstr "nikdy"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:802
+#: ../panels/user-accounts/um-utils.c:819
 msgid "Today"
 msgstr "dnes"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:805
+#: ../panels/user-accounts/um-utils.c:822
 msgid "Yesterday"
 msgstr "včera"
 
@@ -2135,7 +2132,7 @@ msgstr "Ruční"
 msgid "Link-Local Only"
 msgstr "Pouze link-local"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:942
+#: ../panels/network/connection-editor/ce-page-ip4.c:934
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -2157,7 +2154,7 @@ msgstr "Automatické"
 msgid "Automatic, DHCP only"
 msgstr "Automatické, pouze DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:902
+#: ../panels/network/connection-editor/ce-page-ip6.c:894
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2395,27 +2392,27 @@ msgstr "VPN"
 msgid "Bond"
 msgstr "Svazek"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:597
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Team"
 msgstr "Tým"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:600
 msgid "Bridge"
 msgstr "Most"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:599
+#: ../panels/network/connection-editor/net-connection-editor.c:601
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:750
+#: ../panels/network/connection-editor/net-connection-editor.c:752
 msgid "Could not load VPN plugins"
 msgstr "Nelze načíst zásuvné moduly VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:819
+#: ../panels/network/connection-editor/net-connection-editor.c:821
 msgid "Import from file…"
 msgstr "Importovat ze souboru…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:890
+#: ../panels/network/connection-editor/net-connection-editor.c:892
 msgid "Add Network Connection"
 msgstr "Přidat síťové připojení"
 
@@ -4257,12 +4254,13 @@ msgstr "Přidat novou tiskárnu"
 msgid "A_uthenticate"
 msgstr "Ověřit _totožnost"
 
-#: ../panels/printers/new-printer-dialog.ui.h:6
-msgid "Search for network printers or filter result"
-msgstr "Hledat síťové tiskárny nebo filtrovat výsledek"
+#. Translators: No printers were found
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "No printers detected."
+msgstr "Nenalezeny žádné tiskárny"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:8
+#: ../panels/printers/new-printer-dialog.ui.h:9
 msgid "Enter address of a printer or a text to filter results"
 msgstr "Zadejte adresu tiskárny nebo text pro filtrování výsledků"
 
@@ -4379,14 +4377,9 @@ msgid "%s Active Jobs"
 msgstr "Aktivní úlohy – %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1752
 msgid "Server requires authentication"
 msgstr "Server požaduje ověření totožnosti"
-
-#. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1706
-msgid "No printers detected."
-msgstr "Nenalezeny žádné tiskárny"
 
 #: ../panels/printers/pp-options-dialog.c:81
 msgid "Two Sided"
@@ -4544,8 +4537,8 @@ msgstr "Umístění"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-msgid "_Default"
-msgstr "_Výchozí"
+msgid "_Default printer"
+msgstr "_Výchozí tiskárna"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
@@ -4940,10 +4933,6 @@ msgstr ""
 "Nastavení přihlášení jsou používány všemi uživateli při přihlašování do "
 "systému"
 
-#: ../panels/search/cc-search-locations-dialog.c:274
-msgid "Home"
-msgstr "Domů"
-
 #: ../panels/search/cc-search-locations-dialog.c:476
 msgctxt "Search Location"
 msgid "Places"
@@ -5152,20 +5141,28 @@ msgstr ""
 "href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-msgid "Remote View"
-msgstr "Vzdálené zobrazení"
+msgid "Allow Remote Control"
+msgstr "Umožnit vzdálené ovládání"
 
 #: ../panels/sharing/sharing.ui.h:28
-msgid "Remote Control"
-msgstr "Vzdálené ovládání"
+msgid "Password:"
+msgstr "Heslo:"
 
 #: ../panels/sharing/sharing.ui.h:29
-msgid "Approve All Connections"
-msgstr "Povolit všechna připojení"
-
-#: ../panels/sharing/sharing.ui.h:30
 msgid "Show Password"
 msgstr "Zobrazit heslo"
+
+#: ../panels/sharing/sharing.ui.h:30
+msgid "Access Options"
+msgstr "Volby přístupu"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "New connections must ask for access"
+msgstr "Nové připojení se musí dotázat o svolení"
+
+#: ../panels/sharing/sharing.ui.h:32
+msgid "Require a password"
+msgstr "Vyžadovat heslo"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -5461,7 +5458,7 @@ msgid "_Typing Assist (AccessX)"
 msgstr "Pomáha_t s psaním"
 
 #: ../panels/universal-access/uap.ui.h:14
-msgid "Pointing and Clicking"
+msgid "Pointing & Clicking"
 msgstr "Ukazování a klikání"
 
 #: ../panels/universal-access/uap.ui.h:15
@@ -5664,27 +5661,27 @@ msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Vysoký"
 
-#: ../panels/universal-access/zoom-options.c:357
+#: ../panels/universal-access/zoom-options.c:333
 msgctxt "Distance"
 msgid "Short"
 msgstr "Krátká"
 
-#: ../panels/universal-access/zoom-options.c:358
+#: ../panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ obrazovky"
 
-#: ../panels/universal-access/zoom-options.c:359
+#: ../panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ obrazovky"
 
-#: ../panels/universal-access/zoom-options.c:360
+#: ../panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ obrazovky"
 
-#: ../panels/universal-access/zoom-options.c:361
+#: ../panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "Long"
 msgstr "Dlouhá"
@@ -6622,21 +6619,21 @@ msgstr ""
 msgid "My Account"
 msgstr "Můj účet"
 
-#: ../panels/user-accounts/um-utils.c:550
+#: ../panels/user-accounts/um-utils.c:567
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Uživatel s uživatelským jménem „%s“ již existuje"
 
-#: ../panels/user-accounts/um-utils.c:554
+#: ../panels/user-accounts/um-utils.c:571
 #, c-format
 msgid "The username is too long"
 msgstr "Uživatelské jméno je příliš dlouhé"
 
-#: ../panels/user-accounts/um-utils.c:557
+#: ../panels/user-accounts/um-utils.c:574
 msgid "The username cannot start with a '-'"
 msgstr "Uživatelské jméno nesmí začínat znakem „-“"
 
-#: ../panels/user-accounts/um-utils.c:560
+#: ../panels/user-accounts/um-utils.c:577
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
@@ -6645,12 +6642,12 @@ msgstr ""
 "a některého ze znaků z „.“, „-“ a „_“"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:810
+#: ../panels/user-accounts/um-utils.c:827
 msgid "%b %e"
 msgstr "%e. %B"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:814
+#: ../panels/user-accounts/um-utils.c:831
 msgid "%b %e, %Y"
 msgstr "%e. %B %Y"
 
