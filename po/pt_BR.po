@@ -31,8 +31,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-15 19:28+0000\n"
-"PO-Revision-Date: 2014-02-16 02:50-0300\n"
+"POT-Creation-Date: 2014-02-21 07:28+0000\n"
+"PO-Revision-Date: 2014-02-21 08:43-0300\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -40,7 +40,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.6.4\n"
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
@@ -1928,7 +1928,7 @@ msgstr "Clique único, botão secundário"
 msgid "Air_plane Mode"
 msgstr "Modo a_vião"
 
-#: ../panels/network/cc-network-panel.c:929
+#: ../panels/network/cc-network-panel.c:956
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
@@ -1936,14 +1936,14 @@ msgstr "Proxy da rede"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1108 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1135 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1243
+#: ../panels/network/cc-network-panel.c:1274
 msgid "The system network services are not compatible with this version."
 msgstr "Os serviços de rede do sistema não são compatíveis com esta versão."
 
@@ -2158,7 +2158,7 @@ msgstr "Manual"
 msgid "Link-Local Only"
 msgstr "Apenas conexão local"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:942
+#: ../panels/network/connection-editor/ce-page-ip4.c:934
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -2180,7 +2180,7 @@ msgstr "Automático"
 msgid "Automatic, DHCP only"
 msgstr "Automático, somente DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:902
+#: ../panels/network/connection-editor/ce-page-ip6.c:894
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2419,27 +2419,27 @@ msgid "Bond"
 msgstr "Vínculo"
 
 # Refere-se a tipo de conexão -- Enrico
-#: ../panels/network/connection-editor/net-connection-editor.c:597
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Team"
 msgstr "União"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:600
 msgid "Bridge"
 msgstr "Ponte"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:599
+#: ../panels/network/connection-editor/net-connection-editor.c:601
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:750
+#: ../panels/network/connection-editor/net-connection-editor.c:752
 msgid "Could not load VPN plugins"
 msgstr "Não foi possível carregar os plug-ins de VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:819
+#: ../panels/network/connection-editor/net-connection-editor.c:821
 msgid "Import from file…"
 msgstr "Importar de arquivo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:890
+#: ../panels/network/connection-editor/net-connection-editor.c:892
 msgid "Add Network Connection"
 msgstr "Adicionar conexão de rede"
 
@@ -5180,20 +5180,33 @@ msgstr ""
 "href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-msgid "Remote View"
-msgstr "Visão remota"
+#| msgid "Remote Control"
+msgid "Allow Remote Control"
+msgstr "Permitir acesso remoto"
 
 #: ../panels/sharing/sharing.ui.h:28
-msgid "Remote Control"
-msgstr "Controle remoto"
+#| msgid "Password"
+msgid "Password:"
+msgstr "Senha:"
 
 #: ../panels/sharing/sharing.ui.h:29
-msgid "Approve All Connections"
-msgstr "Aprovar todas as conexões"
-
-#: ../panels/sharing/sharing.ui.h:30
 msgid "Show Password"
 msgstr "Mostrar senha"
+
+#: ../panels/sharing/sharing.ui.h:30
+#| msgid "Options"
+msgid "Access Options"
+msgstr "Opções de acesso"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "New connections must ask for access"
+msgstr "Novas conexões deve solicitar acesso"
+
+# "Exigir" não encaixou tão bem na interface gráfica.
+#: ../panels/sharing/sharing.ui.h:32
+#| msgid "Require Password"
+msgid "Require a password"
+msgstr "Exige uma senha"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -7072,6 +7085,12 @@ msgstr "Configurações"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferências;Configurações;Ajustes;"
+
+#~ msgid "Remote View"
+#~ msgstr "Visão remota"
+
+#~ msgid "Approve All Connections"
+#~ msgstr "Aprovar todas as conexões"
 
 #~ msgid "Flickr"
 #~ msgstr "Flickr"
