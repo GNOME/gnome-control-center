@@ -59,7 +59,7 @@ G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
 #define MOUSE_BACK_BUTTON 8
 
 #define DEFAULT_WINDOW_TITLE N_("All Settings")
-#define DEFAULT_WINDOW_ICON_NAME "preferences-desktop"
+#define DEFAULT_WINDOW_ICON_NAME "preferences-system"
 
 #define SEARCH_PAGE "_search"
 #define OVERVIEW_PAGE "_overview"
