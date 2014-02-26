@@ -75,6 +75,7 @@ enum
   DEVICE_GICON_COLUMN = 0,
   DEVICE_NAME_COLUMN,
   DEVICE_DISPLAY_NAME_COLUMN,
+  DEVICE_DESCRIPTION_COLUMN,
   SERVER_NEEDS_AUTHENTICATION_COLUMN,
   DEVICE_N_COLUMNS
 };
@@ -1705,7 +1706,7 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
   gboolean           no_device = TRUE;
   TDevice           *device;
   GList             *item;
-  gchar             *display_string;
+  gchar             *description;
 
   treeview = (GtkTreeView *)
     gtk_builder_get_object (priv->builder, "devices-treeview");
@@ -1728,42 +1729,34 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
            device->acquisition_method == ACQUISITION_METHOD_SAMBA) &&
           device->show)
         {
+          description = NULL;
           if (device->device_location)
-            display_string = g_markup_printf_escaped ("<b>%s</b>\n<small><span foreground=\"#555555\">%s</span></small>",
-                                                      device->display_name,
-                                                      device->device_location);
-          else
-            display_string = g_markup_printf_escaped ("<b>%s</b>\n ",
-                                                      device->display_name);
+            description = g_strdup (device->device_location);
 
           gtk_list_store_append (store, &iter);
           gtk_list_store_set (store, &iter,
                               DEVICE_GICON_COLUMN, device->network_device ? priv->remote_printer_icon : priv->local_printer_icon,
                               DEVICE_NAME_COLUMN, device->device_name,
-                              DEVICE_DISPLAY_NAME_COLUMN, display_string,
+                              DEVICE_DISPLAY_NAME_COLUMN, device->display_name,
+                              DEVICE_DESCRIPTION_COLUMN, description,
                               -1);
           no_device = FALSE;
 
-          g_free (display_string);
+          g_free (description);
         }
       else if (device->is_authenticated_server &&
                device->host_name != NULL)
         {
-          display_string = g_markup_printf_escaped ("<b>%s</b>\n<small><span foreground=\"#555555\">%s</span></small>",
-                                                    device->host_name,
-                                                    /* Translators: This item is a server which needs authentication to show its printers */
-                                                    _("Server requires authentication"));
-
           gtk_list_store_append (store, &iter);
           gtk_list_store_set (store, &iter,
                               DEVICE_GICON_COLUMN, priv->authenticated_server_icon,
                               DEVICE_NAME_COLUMN, device->host_name,
-                              DEVICE_DISPLAY_NAME_COLUMN, display_string,
+                              DEVICE_DISPLAY_NAME_COLUMN, device->host_name,
+                              /* Translators: This item is a server which needs authentication to show its printers */
+                              DEVICE_DESCRIPTION_COLUMN, _("Server requires authentication"),
                               SERVER_NEEDS_AUTHENTICATION_COLUMN, TRUE,
                               -1);
           no_device = FALSE;
-
-          g_free (display_string);
         }
     }
 
@@ -1830,6 +1823,63 @@ cups_get_dests_cb (GObject      *source_object,
 }
 
 static void
+cell_data_func (GtkTreeViewColumn  *tree_column,
+                GtkCellRenderer    *cell,
+                GtkTreeModel       *tree_model,
+                GtkTreeIter        *iter,
+                gpointer            user_data)
+{
+  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+  GtkWidget                 *treeview;
+  gboolean                   selected = FALSE;
+  gchar                     *name = NULL;
+  gchar                     *description = NULL;
+  gchar                     *text;
+
+  treeview = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "devices-treeview");
+
+  if (treeview != NULL)
+    selected = gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+                                                    iter);
+
+  gtk_tree_model_get (tree_model, iter,
+                      DEVICE_DISPLAY_NAME_COLUMN, &name,
+                      DEVICE_DESCRIPTION_COLUMN, &description,
+                      -1);
+
+  if (name != NULL)
+    {
+      if (description != NULL)
+        {
+          if (selected)
+            text = g_markup_printf_escaped ("<b>%s</b>\n<small>%s</small>",
+                                            name,
+                                            description);
+          else
+            text = g_markup_printf_escaped ("<b>%s</b>\n<small><span foreground=\"#555555\">%s</span></small>",
+                                            name,
+                                            description);
+        }
+      else
+        {
+          text = g_markup_printf_escaped ("<b>%s</b>\n ",
+                                          name);
+        }
+
+      g_object_set (G_OBJECT (cell),
+                    "markup", text,
+                    NULL);
+
+      g_free (text);
+    }
+
+  g_free (name);
+  g_free (description);
+}
+
+static void
 populate_devices_list (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
@@ -1872,7 +1922,9 @@ populate_devices_list (PpNewPrinterDialog *dialog)
 
   priv->text_renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes ("Devices", priv->text_renderer,
-                                                     "markup", DEVICE_DISPLAY_NAME_COLUMN, NULL);
+                                                     NULL);
+  gtk_tree_view_column_set_cell_data_func (column, priv->text_renderer, cell_data_func,
+                                           dialog, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
   cups = pp_cups_new ();
