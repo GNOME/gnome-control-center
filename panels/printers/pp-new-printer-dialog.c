@@ -1694,6 +1694,42 @@ search_entry_changed_cb (GtkSearchEntry *entry,
                   TRUE);
 }
 
+static gchar *
+get_local_scheme_description_from_uri (gchar *device_uri)
+{
+  gchar *description = NULL;
+
+  if (device_uri != NULL)
+    {
+      if (g_str_has_prefix (device_uri, "usb") ||
+          g_str_has_prefix (device_uri, "hp:/usb/") ||
+          g_str_has_prefix (device_uri, "hpfax:/usb/"))
+        {
+          /* Translators: The found device is a printer connected via USB */
+          description = g_strdup (_("USB"));
+        }
+      else if (g_str_has_prefix (device_uri, "serial"))
+        {
+          /* Translators: The found device is a printer connected via serial port */
+          description = g_strdup (_("Serial Port"));
+        }
+      else if (g_str_has_prefix (device_uri, "parallel") ||
+               g_str_has_prefix (device_uri, "hp:/par/") ||
+               g_str_has_prefix (device_uri, "hpfax:/par/"))
+        {
+          /* Translators: The found device is a printer connected via parallel port */
+          description = g_strdup (_("Parallel Port"));
+        }
+      else if (g_str_has_prefix (device_uri, "bluetooth"))
+        {
+          /* Translators: The found device is a printer connected via Bluetooth */
+          description = g_strdup (_("Bluetooth"));
+        }
+    }
+
+  return description;
+}
+
 static void
 actualize_devices_list (PpNewPrinterDialog *dialog)
 {
@@ -1729,9 +1765,20 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
            device->acquisition_method == ACQUISITION_METHOD_SAMBA) &&
           device->show)
         {
-          description = NULL;
-          if (device->device_location)
-            description = g_strdup (device->device_location);
+          description = get_local_scheme_description_from_uri (device->device_uri);
+          if (description == NULL)
+            {
+              if (device->device_location != NULL && device->device_location[0] != '\0')
+                {
+                  /* Translators: Location of found network printer (e.g. Kitchen, Reception) */
+                  description = g_strdup_printf (_("Location: %s"), device->device_location);
+                }
+              else if (device->host_name != NULL && device->host_name[0] != '\0')
+                {
+                  /* Translators: Network address of found printer */
+                  description = g_strdup_printf (_("Address: %s"), device->host_name);
+                }
+            }
 
           gtk_list_store_append (store, &iter);
           gtk_list_store_set (store, &iter,
