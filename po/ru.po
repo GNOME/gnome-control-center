@@ -22,17 +22,17 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-15 07:32+0000\n"
-"PO-Revision-Date: 2014-02-15 20:49+0300\n"
-"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"POT-Creation-Date: 2014-02-28 10:08+0000\n"
+"PO-Revision-Date: 2014-02-25 17:40+0300\n"
+"Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.4\n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
@@ -47,7 +47,7 @@ msgstr "Меняется в течение дня"
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
 msgid "Lock Screen"
-msgstr "Заблокировать экран"
+msgstr "Экран блокировки"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -117,7 +117,7 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "Можно добавить изображения в папку %s и они будут показаны здесь"
 
 #: ../panels/background/cc-background-chooser-dialog.c:419
-#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
+#: ../panels/color/cc-color-panel.c:222 ../panels/color/cc-color-panel.c:959
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -183,7 +183,9 @@ msgstr "Адаптер Bluetooth не найден"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth отключён аппаратным переключателем"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -325,48 +327,48 @@ msgstr "Неоткалиброванный"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:136
+#: ../panels/color/cc-color-panel.c:138
 msgid "Default: "
 msgstr "По умолчанию:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:144
+#: ../panels/color/cc-color-panel.c:146
 msgid "Colorspace: "
 msgstr "Цветовое пространство: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:151
+#: ../panels/color/cc-color-panel.c:153
 msgid "Test profile: "
 msgstr "Тестовый профиль: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:218
+#: ../panels/color/cc-color-panel.c:220
 msgid "Select ICC Profile File"
 msgstr "Выберите файл профиля ICC"
 
-#: ../panels/color/cc-color-panel.c:221
+#: ../panels/color/cc-color-panel.c:223
 msgid "_Import"
 msgstr "_Импортировать"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:232
+#: ../panels/color/cc-color-panel.c:234
 msgid "Supported ICC profiles"
 msgstr "Поддерживаемые профили ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:241
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../panels/color/cc-color-panel.c:578
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Экран"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:902
+#: ../panels/color/cc-color-panel.c:904
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Не удалось загрузить файл: %s"
@@ -374,40 +376,40 @@ msgstr "Не удалось загрузить файл: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:916
+#: ../panels/color/cc-color-panel.c:918
 msgid "The profile has been uploaded to:"
 msgstr "Профиль был загружен на:"
 
-#: ../panels/color/cc-color-panel.c:918
+#: ../panels/color/cc-color-panel.c:920
 msgid "Write down this URL."
 msgstr "Запишите этот URL."
 
-#: ../panels/color/cc-color-panel.c:919
+#: ../panels/color/cc-color-panel.c:921
 msgid "Restart this computer and boot your normal operating system."
 msgstr "Перезапустите компьютер и загрузите обычную операционную систему."
 
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:922
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
 "Введите URL в адресную строку браузера, чтобы загрузить и установить профиль."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:954
+#: ../panels/color/cc-color-panel.c:956
 msgid "Save Profile"
 msgstr "Сохранить профиль"
 
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:960
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_Сохранить"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1314
+#: ../panels/color/cc-color-panel.c:1320
 msgid "Create a color profile for the selected device"
 msgstr "Создать цветовой профиль для выбранного устройства"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1329 ../panels/color/cc-color-panel.c:1353
+#: ../panels/color/cc-color-panel.c:1335 ../panels/color/cc-color-panel.c:1359
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -416,12 +418,12 @@ msgstr ""
 "подключён."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1363
+#: ../panels/color/cc-color-panel.c:1369
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Измерительный инструмент не поддерживает профилирование принтеров."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1374
+#: ../panels/color/cc-color-panel.c:1380
 msgid "The device type is not currently supported."
 msgstr "Этот тип устройств ещё не поддерживается."
 
@@ -1905,7 +1907,7 @@ msgstr "Один щелчок, вторичная кнопка"
 msgid "Air_plane Mode"
 msgstr "Режим для _авиаперелётов"
 
-#: ../panels/network/cc-network-panel.c:929
+#: ../panels/network/cc-network-panel.c:956
 msgid "Network proxy"
 msgstr "Сетевая прокси-служба"
 
@@ -1913,14 +1915,14 @@ msgstr "Сетевая прокси-служба"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1108 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1135 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1243
+#: ../panels/network/cc-network-panel.c:1274
 msgid "The system network services are not compatible with this version."
 msgstr "Системные сетевые службы несовместимы с этой версией."
 
@@ -2136,7 +2138,7 @@ msgstr "Вручную"
 msgid "Link-Local Only"
 msgstr "Только для локальной сети"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:942
+#: ../panels/network/connection-editor/ce-page-ip4.c:934
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -2158,7 +2160,7 @@ msgstr "Автоматический"
 msgid "Automatic, DHCP only"
 msgstr "Автоматический, только DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:902
+#: ../panels/network/connection-editor/ce-page-ip6.c:894
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2396,27 +2398,27 @@ msgstr "VPN"
 msgid "Bond"
 msgstr "Связка"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:597
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Team"
 msgstr ""
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:600
 msgid "Bridge"
 msgstr "Мост"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:599
+#: ../panels/network/connection-editor/net-connection-editor.c:601
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:750
+#: ../panels/network/connection-editor/net-connection-editor.c:752
 msgid "Could not load VPN plugins"
 msgstr "Не удалось загрузить модули VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:819
+#: ../panels/network/connection-editor/net-connection-editor.c:821
 msgid "Import from file…"
 msgstr "Импортировать из файла…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:890
+#: ../panels/network/connection-editor/net-connection-editor.c:892
 msgid "Add Network Connection"
 msgstr "Добавить сетевое подключение"
 
@@ -2562,7 +2564,7 @@ msgstr "Подчинённые в связке"
 #: ../panels/network/net-device-bridge.c:102
 #: ../panels/network/net-device-team.c:102
 msgid "(none)"
-msgstr ""
+msgstr "(нет)"
 
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
@@ -2625,10 +2627,8 @@ msgid "Add new connection"
 msgstr "Добавить новое подключение"
 
 #: ../panels/network/net-device-team.c:77
-#, fuzzy
-#| msgid "Bridge slaves"
 msgid "Team slaves"
-msgstr "Подчинённые моста"
+msgstr ""
 
 #: ../panels/network/net-device-wifi.c:1110
 msgid ""
@@ -4401,8 +4401,37 @@ msgstr "Время"
 msgid "%s Active Jobs"
 msgstr "Текущие задания %s"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr ""
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr ""
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr ""
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, fuzzy, c-format
+#| msgid "Location"
+msgid "Location: %s"
+msgstr "Местоположение"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, fuzzy, c-format
+#| msgid "Address"
+msgid "Address: %s"
+msgstr "Адрес"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1752
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "Сервер требует аутентификацию"
 
@@ -5167,20 +5196,34 @@ msgstr ""
 "подключившись к: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-msgid "Remote View"
-msgstr "Удалённый просмотр"
-
-#: ../panels/sharing/sharing.ui.h:28
-msgid "Remote Control"
+#, fuzzy
+#| msgid "Remote Control"
+msgid "Allow Remote Control"
 msgstr "Удалённое управление"
 
-#: ../panels/sharing/sharing.ui.h:29
-msgid "Approve All Connections"
-msgstr "Подтвердить все подключения"
+#: ../panels/sharing/sharing.ui.h:28
+msgid "Password:"
+msgstr "Пароль:"
 
-#: ../panels/sharing/sharing.ui.h:30
+#: ../panels/sharing/sharing.ui.h:29
 msgid "Show Password"
 msgstr "Показать пароль"
+
+#: ../panels/sharing/sharing.ui.h:30
+#, fuzzy
+#| msgid "Options"
+msgid "Access Options"
+msgstr "Параметры"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "New connections must ask for access"
+msgstr ""
+
+#: ../panels/sharing/sharing.ui.h:32
+#, fuzzy
+#| msgid "Require Password"
+msgid "Require a password"
+msgstr "Требовать пароль"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -7061,6 +7104,12 @@ msgstr "Параметры"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Настройки;Параметры;"
+
+#~ msgid "Remote View"
+#~ msgstr "Удалённый просмотр"
+
+#~ msgid "Approve All Connections"
+#~ msgstr "Подтвердить все подключения"
 
 #~ msgid "Flickr"
 #~ msgstr "Flickr"
