@@ -31,16 +31,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-21 07:28+0000\n"
-"PO-Revision-Date: 2014-02-21 08:43-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2014-02-28 10:08+0000\n"
+"PO-Revision-Date: 2014-02-28 09:39-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
@@ -127,7 +127,7 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui."
 
 #: ../panels/background/cc-background-chooser-dialog.c:419
-#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
+#: ../panels/color/cc-color-panel.c:222 ../panels/color/cc-color-panel.c:959
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -193,7 +193,9 @@ msgstr "Não foram encontrados adaptadores Bluetooth"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "O Bluetooth está desativado via hardware"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -340,48 +342,48 @@ msgstr "Não calibrado"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:136
+#: ../panels/color/cc-color-panel.c:138
 msgid "Default: "
 msgstr "Padrão: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:144
+#: ../panels/color/cc-color-panel.c:146
 msgid "Colorspace: "
 msgstr "Espaço de cores: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:151
+#: ../panels/color/cc-color-panel.c:153
 msgid "Test profile: "
 msgstr "Perfil de teste: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:218
+#: ../panels/color/cc-color-panel.c:220
 msgid "Select ICC Profile File"
 msgstr "Selecionar perfil ICC"
 
-#: ../panels/color/cc-color-panel.c:221
+#: ../panels/color/cc-color-panel.c:223
 msgid "_Import"
 msgstr "_Importar"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:232
+#: ../panels/color/cc-color-panel.c:234
 msgid "Supported ICC profiles"
 msgstr "Perfis ICC suportados"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:241
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Todos arquivos"
 
-#: ../panels/color/cc-color-panel.c:578
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Tela"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:902
+#: ../panels/color/cc-color-panel.c:904
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Falha ao enviar arquivo: %s"
@@ -389,39 +391,39 @@ msgstr "Falha ao enviar arquivo: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:916
+#: ../panels/color/cc-color-panel.c:918
 msgid "The profile has been uploaded to:"
 msgstr "O perfil foi enviado para:"
 
-#: ../panels/color/cc-color-panel.c:918
+#: ../panels/color/cc-color-panel.c:920
 msgid "Write down this URL."
 msgstr "Anote esta URL."
 
-#: ../panels/color/cc-color-panel.c:919
+#: ../panels/color/cc-color-panel.c:921
 msgid "Restart this computer and boot your normal operating system."
 msgstr "Reinicie este computador e inicie o seu sistema operacional normal."
 
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:922
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "Digite a URL no seu navegador para baixar e instalar o perfil."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:954
+#: ../panels/color/cc-color-panel.c:956
 msgid "Save Profile"
 msgstr "Salvar perfil"
 
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:960
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_Salvar"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1314
+#: ../panels/color/cc-color-panel.c:1320
 msgid "Create a color profile for the selected device"
 msgstr "Criar um perfil de cor para o dispositivo selecionado"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1329 ../panels/color/cc-color-panel.c:1353
+#: ../panels/color/cc-color-panel.c:1335 ../panels/color/cc-color-panel.c:1359
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -430,13 +432,13 @@ msgstr ""
 "ligado e conectado corretamente."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1363
+#: ../panels/color/cc-color-panel.c:1369
 msgid "The measuring instrument does not support printer profiling."
 msgstr ""
 "O instrumento de medição não tem suporte a criação de perfis de impressora."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1374
+#: ../panels/color/cc-color-panel.c:1380
 msgid "The device type is not currently supported."
 msgstr "Atualmente, não há suporte ao tipo de dispositivo."
 
@@ -4408,8 +4410,37 @@ msgstr "Hora"
 msgid "%s Active Jobs"
 msgstr "%s trabalhos ativos"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr "USB"
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr "Porta serial"
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr "Porta paralela"
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, c-format
+#| msgid "Location"
+msgid "Location: %s"
+msgstr "Localização: %s"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, c-format
+#| msgid "Address"
+msgid "Address: %s"
+msgstr "Endereço: %s"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1752
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "O servidor requer autenticação"
 
@@ -5180,12 +5211,10 @@ msgstr ""
 "href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-#| msgid "Remote Control"
 msgid "Allow Remote Control"
 msgstr "Permitir acesso remoto"
 
 #: ../panels/sharing/sharing.ui.h:28
-#| msgid "Password"
 msgid "Password:"
 msgstr "Senha:"
 
@@ -5194,7 +5223,6 @@ msgid "Show Password"
 msgstr "Mostrar senha"
 
 #: ../panels/sharing/sharing.ui.h:30
-#| msgid "Options"
 msgid "Access Options"
 msgstr "Opções de acesso"
 
@@ -5204,7 +5232,6 @@ msgstr "Novas conexões deve solicitar acesso"
 
 # "Exigir" não encaixou tão bem na interface gráfica.
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "Require Password"
 msgid "Require a password"
 msgstr "Exige uma senha"
 
