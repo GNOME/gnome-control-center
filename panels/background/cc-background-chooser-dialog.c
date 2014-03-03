@@ -256,6 +256,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   GtkWidget *vbox;
   GtkWidget *button1;
   GtkWidget *button;
+  GtkWidget *headerbar;
   GtkWidget *hbox;
   GtkWidget *grid;
   GtkWidget *img;
@@ -292,11 +293,13 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_grid_set_column_spacing (GTK_GRID (grid), 0);
   gtk_container_add (GTK_CONTAINER (vbox), grid);
 
+  headerbar = gtk_dialog_get_header_bar (GTK_DIALOG (chooser));
+
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_set_homogeneous (GTK_BOX (hbox), TRUE);
   gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
   gtk_widget_set_hexpand (hbox, TRUE);
-  gtk_container_add (GTK_CONTAINER (grid), hbox);
+  gtk_header_bar_set_custom_title (GTK_HEADER_BAR (headerbar), hbox);
   context = gtk_widget_get_style_context (hbox);
   gtk_style_context_add_class (context, "linked");
 
@@ -324,6 +327,8 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_container_add (GTK_CONTAINER (hbox), button);
   g_signal_connect (button, "toggled", G_CALLBACK (on_view_toggled), chooser);
   g_object_set_data (G_OBJECT (button), "source", priv->colors_source);
+
+  gtk_widget_show_all (hbox);
 
   priv->sw_content = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->sw_content), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -448,7 +453,7 @@ cc_background_chooser_dialog_class_init (CcBackgroundChooserDialogClass *klass)
 GtkWidget *
 cc_background_chooser_dialog_new (void)
 {
-  return g_object_new (CC_TYPE_BACKGROUND_CHOOSER_DIALOG, NULL);
+  return g_object_new (CC_TYPE_BACKGROUND_CHOOSER_DIALOG, "use-header-bar", TRUE, NULL);
 }
 
 CcBackgroundItem *
