@@ -71,6 +71,9 @@ ippNextAttribute (ipp_t *ipp)
 }
 #endif
 
+#if (CUPS_VERSION_MAJOR == 1) && (CUPS_VERSION_MINOR <= 6)
+#define HTTP_URI_STATUS_OK HTTP_URI_OK
+#endif
 
 gchar *
 get_tag_value (const gchar *tag_string, const gchar *tag_name)
