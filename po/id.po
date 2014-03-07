@@ -5,14 +5,14 @@
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
 # Ahmad Riza H Nst  <rizahnst@gnome.org>, 2006.
 # Dirgita <dirgitadevina@yahoo.co.id>, 2010, 2012.
-# Andika Triwidada <andika@gmail.com>, 2009, 2011, 2012, 2013.
+# Andika Triwidada <andika@gmail.com>, 2009, 2011, 2012, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-20 19:29+0000\n"
-"PO-Revision-Date: 2014-02-21 13:54+0700\n"
+"POT-Creation-Date: 2014-03-06 07:30+0000\n"
+"PO-Revision-Date: 2014-03-07 13:40+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -106,7 +106,7 @@ msgstr ""
 "Anda dapat menambahkan citra ke folder %s Anda dan mereka akan muncul di sini"
 
 #: ../panels/background/cc-background-chooser-dialog.c:419
-#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
+#: ../panels/color/cc-color-panel.c:222 ../panels/color/cc-color-panel.c:959
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -172,7 +172,9 @@ msgstr "Adaptor Bluetooth tidak ditemukan"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth dinonaktifkan oleh saklar perangkat keras"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -315,48 +317,48 @@ msgstr "Tak dikalibrasi"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:136
+#: ../panels/color/cc-color-panel.c:138
 msgid "Default: "
 msgstr "Baku: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:144
+#: ../panels/color/cc-color-panel.c:146
 msgid "Colorspace: "
 msgstr "Ruang warna: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:151
+#: ../panels/color/cc-color-panel.c:153
 msgid "Test profile: "
 msgstr "Profil uji: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:218
+#: ../panels/color/cc-color-panel.c:220
 msgid "Select ICC Profile File"
 msgstr "Pilih Berkas Profil ICC"
 
-#: ../panels/color/cc-color-panel.c:221
+#: ../panels/color/cc-color-panel.c:223
 msgid "_Import"
 msgstr "_Impor"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:232
+#: ../panels/color/cc-color-panel.c:234
 msgid "Supported ICC profiles"
 msgstr "Profil ICC yang didukung"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:241
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Semua berkas"
 
-#: ../panels/color/cc-color-panel.c:578
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Layar"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:902
+#: ../panels/color/cc-color-panel.c:904
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Gagal mengunggah berkas: %s"
@@ -364,40 +366,40 @@ msgstr "Gagal mengunggah berkas: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:916
+#: ../panels/color/cc-color-panel.c:918
 msgid "The profile has been uploaded to:"
 msgstr "Profil telah diunggah ke:"
 
-#: ../panels/color/cc-color-panel.c:918
+#: ../panels/color/cc-color-panel.c:920
 msgid "Write down this URL."
 msgstr "Catan URL ini"
 
-#: ../panels/color/cc-color-panel.c:919
+#: ../panels/color/cc-color-panel.c:921
 msgid "Restart this computer and boot your normal operating system."
 msgstr "Mulai ulang komputer ini dan boot sistem operasi normal Anda."
 
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:922
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
 "Ketikkan URL ke dalam peramban Anda untuk mengunduh dan memasang profil."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:954
+#: ../panels/color/cc-color-panel.c:956
 msgid "Save Profile"
 msgstr "Simpan profil"
 
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:960
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_Simpan"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1314
+#: ../panels/color/cc-color-panel.c:1320
 msgid "Create a color profile for the selected device"
 msgstr "Buat profil warna bagi perangkat yang dipilih"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1329 ../panels/color/cc-color-panel.c:1353
+#: ../panels/color/cc-color-panel.c:1335 ../panels/color/cc-color-panel.c:1359
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -406,12 +408,12 @@ msgstr ""
 "dari disambung dengan benar."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1363
+#: ../panels/color/cc-color-panel.c:1369
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Instrumen pengukur tak mendukung pembuatan profil pencetak."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1374
+#: ../panels/color/cc-color-panel.c:1380
 msgid "The device type is not currently supported."
 msgstr "Jenis perangkat belum didukung."
 
@@ -1331,7 +1333,6 @@ msgid "Virtualization"
 msgstr "Virtualisasi"
 
 #: ../panels/info/info.ui.h:13
-#| msgid "Checking for Updates"
 msgid "Check for updates"
 msgstr "Memeriksa pemutakhiran"
 
@@ -4348,8 +4349,35 @@ msgstr "Waktu"
 msgid "%s Active Jobs"
 msgstr "%s Tugas Aktif"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr "USB"
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr "Porta Serial"
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr "Porta Paralel"
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, c-format
+msgid "Location: %s"
+msgstr "Lokasi: %s"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, c-format
+msgid "Address: %s"
+msgstr "Alamat: %s"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1752
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "Server memerlukan otentikasi"
 
@@ -4510,7 +4538,6 @@ msgstr "Lokasi"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-#| msgid "Default Route"
 msgid "_Default printer"
 msgstr "Pencetak _baku"
 
@@ -4600,7 +4627,6 @@ msgid "Purge Trash & Temporary Files"
 msgstr "Kosongkan Tong Sampah & Berkas Temporer"
 
 #: ../panels/privacy/cc-privacy-panel.c:578 ../panels/privacy/privacy.ui.h:38
-#| msgid "_Software"
 msgid "Software Usage"
 msgstr "Pemakaian Perangkat Lunak"
 
@@ -4748,7 +4774,6 @@ msgstr ""
 "membagikan data Anda dengan pihak ketiga."
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Privacy"
 msgid "Privacy Policy"
 msgstr "Kebijakan Privasi"
 
@@ -5123,12 +5148,10 @@ msgstr ""
 "menyambung ke: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-#| msgid "Remote Control"
 msgid "Allow Remote Control"
 msgstr "Ijinkan Kendali Jarak Jauh"
 
 #: ../panels/sharing/sharing.ui.h:28
-#| msgid "Password"
 msgid "Password:"
 msgstr "Sandi:"
 
@@ -5137,7 +5160,6 @@ msgid "Show Password"
 msgstr "Tampilkan Sandi"
 
 #: ../panels/sharing/sharing.ui.h:30
-#| msgid "Options"
 msgid "Access Options"
 msgstr "Opsi Akses"
 
@@ -5146,7 +5168,6 @@ msgid "New connections must ask for access"
 msgstr "Koneksi baru mesti meminta akses"
 
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "Require Password"
 msgid "Require a password"
 msgstr "Memerlukan sandi"
 
@@ -5439,7 +5460,6 @@ msgid "_Typing Assist (AccessX)"
 msgstr "Bantuan Penge_tikan (AccessX)"
 
 #: ../panels/universal-access/uap.ui.h:14
-#| msgid "Pointing and Clicking"
 msgid "Pointing & Clicking"
 msgstr "Menunjuk & Mengklik"
 
@@ -7016,24 +7036,3 @@ msgstr "Pengaturan"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferensi;Pengaturan;"
-
-#~ msgid "Flickr"
-#~ msgstr "Flickr"
-
-#~ msgid "Install Updates"
-#~ msgstr "Pasang Pemutakhiran"
-
-#~ msgid "System Up-To-Date"
-#~ msgstr "Sistem Mutakhir"
-
-#~ msgid "Search for network printers or filter result"
-#~ msgstr "Cari pencetak jaringan atau saring hasil"
-
-#~ msgid "_Default"
-#~ msgstr "_Baku"
-
-#~ msgid "Remote View"
-#~ msgstr "Tilikan Jarak Jauh"
-
-#~ msgid "Approve All Connections"
-#~ msgstr "Setujui Semua Koneksi"
