@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-24 23:17+0000\n"
-"PO-Revision-Date: 2014-03-04 20:08+0800\n"
+"POT-Creation-Date: 2014-03-05 19:30+0000\n"
+"PO-Revision-Date: 2014-03-09 11:50+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: zh_TW\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
@@ -174,7 +174,9 @@ msgstr "找不到藍牙接配器"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "藍牙已被硬件開關停用"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "藍牙"
 
@@ -1307,7 +1309,6 @@ msgid "Virtualization"
 msgstr "虛擬化"
 
 #: ../panels/info/info.ui.h:13
-#| msgid "Checking for Updates"
 msgid "Check for updates"
 msgstr "檢查更新"
 
@@ -2565,7 +2566,6 @@ msgid "Add new connection"
 msgstr "加入新連線"
 
 #: ../panels/network/net-device-team.c:77
-#| msgid "Bridge slaves"
 msgid "Team slaves"
 msgstr "隊伍從屬"
 
@@ -3559,9 +3559,6 @@ msgstr "連接到你的網上帳號並決定要用它們來做什麼"
 
 #. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
-#| "ownCloud;Kerberos;IMAP;SMTP;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
@@ -4285,8 +4282,37 @@ msgstr "時刻"
 msgid "%s Active Jobs"
 msgstr "%s 使用中的工作"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr "USB"
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr "序列埠"
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr "串列埠"
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, c-format
+#| msgid "Location"
+msgid "Location: %s"
+msgstr "位置：%s"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, c-format
+#| msgid "Address"
+msgid "Address: %s"
+msgstr "位址：%s"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1752
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "伺服器需要核對"
 
@@ -4445,7 +4471,6 @@ msgstr "位置"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-#| msgid "Default Route"
 msgid "_Default printer"
 msgstr "預設打印機(_D)"
 
@@ -4535,7 +4560,6 @@ msgid "Purge Trash & Temporary Files"
 msgstr "清除回收筒與暫存檔案"
 
 #: ../panels/privacy/cc-privacy-panel.c:578 ../panels/privacy/privacy.ui.h:38
-#| msgid "Software"
 msgid "Software Usage"
 msgstr "軟件使用率"
 
@@ -4672,7 +4696,6 @@ msgstr ""
 "我們所收集的所有資訊都是匿名的，而且我們永遠不會將你的資料與任何第三方分享。"
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Privacy"
 msgid "Privacy Policy"
 msgstr "私隱權原則"
 
@@ -5029,12 +5052,10 @@ msgid ""
 msgstr "允許遠端使用者連線到：<a href=\"vnc://%s\">vnc://%s</a> 檢視或控制你的螢幕"
 
 #: ../panels/sharing/sharing.ui.h:27
-#| msgid "Remote Control"
 msgid "Allow Remote Control"
 msgstr "允許遙控"
 
 #: ../panels/sharing/sharing.ui.h:28
-#| msgid "Password"
 msgid "Password:"
 msgstr "密碼："
 
@@ -5043,7 +5064,6 @@ msgid "Show Password"
 msgstr "顯示密碼"
 
 #: ../panels/sharing/sharing.ui.h:30
-#| msgid "%s Options"
 msgid "Access Options"
 msgstr "存取選項"
 
@@ -5052,7 +5072,6 @@ msgid "New connections must ask for access"
 msgstr "存取新的連線必須詢問"
 
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "Require Password"
 msgid "Require a password"
 msgstr "需要密碼"
 
@@ -5341,7 +5360,6 @@ msgid "_Typing Assist (AccessX)"
 msgstr "打字助理 [AccessX](_T)"
 
 #: ../panels/universal-access/uap.ui.h:14
-#| msgid "Pointing and Clicking"
 msgid "Pointing & Clicking"
 msgstr "指向 & 點選"
 
