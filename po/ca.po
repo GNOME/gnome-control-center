@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-24 11:49+0000\n"
-"PO-Revision-Date: 2014-02-23 09:27+0100\n"
+"POT-Creation-Date: 2014-03-07 06:41+0000\n"
+"PO-Revision-Date: 2014-03-07 08:07+0100\n"
 "Last-Translator: Pau Iranzo <paugnu@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -174,7 +174,9 @@ msgstr "No s'ha trobat cap adaptador Bluetooth"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "El Bluetooth està físicament inhabilitat"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -4370,8 +4372,35 @@ msgstr "Hora"
 msgid "%s Active Jobs"
 msgstr "%s tasques actives"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr "USB"
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr "Port en sèrie"
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr "Port paral·lel"
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, c-format
+msgid "Location: %s"
+msgstr "Ubicació: %s"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, c-format
+msgid "Address: %s"
+msgstr "Adreça: %s"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1752
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
 
