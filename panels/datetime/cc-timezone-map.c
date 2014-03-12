@@ -254,7 +254,7 @@ cc_timezone_map_realize (GtkWidget *widget)
 
 
 static gdouble
-convert_longtitude_to_x (gdouble longitude, gint map_width)
+convert_longitude_to_x (gdouble longitude, gint map_width)
 {
   const gdouble xdeg_offset = -6;
   gdouble x;
@@ -414,7 +414,7 @@ cc_timezone_map_draw (GtkWidget *widget,
 
   if (priv->location)
     {
-      pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
+      pointx = convert_longitude_to_x (priv->location->longitude, alloc.width);
       pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
 
       pointx = CLAMP (floor (pointx), 0, alloc.width);
@@ -583,7 +583,7 @@ button_press_event (GtkWidget      *widget,
       gdouble pointx, pointy, dx, dy;
       TzLocation *loc = array->pdata[i];
 
-      pointx = convert_longtitude_to_x (loc->longitude, width);
+      pointx = convert_longitude_to_x (loc->longitude, width);
       pointy = convert_latitude_to_y (loc->latitude, height);
 
       dx = pointx - x;
