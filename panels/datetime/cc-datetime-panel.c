@@ -105,32 +105,6 @@ static void change_time (CcDateTimePanel *self);
 
 
 static void
-cc_date_time_panel_get_property (GObject    *object,
-                               guint       property_id,
-                               GValue     *value,
-                               GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
-cc_date_time_panel_set_property (GObject      *object,
-                               guint         property_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
 cc_date_time_panel_dispose (GObject *object)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
@@ -192,8 +166,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 
   g_type_class_add_private (klass, sizeof (CcDateTimePanelPrivate));
 
-  object_class->get_property = cc_date_time_panel_get_property;
-  object_class->set_property = cc_date_time_panel_set_property;
   object_class->dispose = cc_date_time_panel_dispose;
 
   panel_class->get_permission = cc_date_time_panel_get_permission;
