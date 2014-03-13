@@ -574,6 +574,10 @@ add_software (CcPrivacyPanel *self)
   GtkWidget *w;
   GtkWidget *dialog;
 
+  /* disable until all the points on the bug are fixed:
+   * https://bugzilla.gnome.org/show_bug.cgi?id=726234 */
+  return;
+
   w = get_on_off_label (self->priv->privacy_settings, SEND_SOFTWARE_USAGE_STATS);
   add_row (self, _("Software Usage"), "software_dialog", w);
 
