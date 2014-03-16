@@ -3,23 +3,21 @@
 # Yuri Syrota <rasta@renome.rovno.ua>, 1999.
 # Maxim Dzumanenko <dziumanenko@gmail.com>, 2002-2009
 # Wanderlust <wanderlust@ukr.net>, 2009.
-# Korostil Daniel <ted.korostiled@gmail.com>, 2011, 2012.
 # Daniel Korostil <ted.korostiled@gmail.com>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-10 07:30+0000\n"
-"PO-Revision-Date: 2014-02-10 10:37+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-16 13:13+0200\n"
+"PO-Revision-Date: 2014-03-16 13:16+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
@@ -33,7 +31,7 @@ msgstr "Тло"
 msgid "Changes throughout the day"
 msgstr "Зміни протягом дня"
 
-#. To translators: This is the noon, not the verb
+#. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
 msgid "Lock Screen"
 msgstr "Заблокований екран"
@@ -69,40 +67,44 @@ msgid "Span"
 msgstr "Проміжок"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:290
+#: ../panels/background/cc-background-chooser-dialog.c:277
 msgid "Select Background"
 msgstr "Вибрати тло"
 
-#: ../panels/background/cc-background-chooser-dialog.c:310
+#: ../panels/background/cc-background-chooser-dialog.c:297
 msgid "Wallpapers"
 msgstr "Шпалери"
 
-#: ../panels/background/cc-background-chooser-dialog.c:319
+#: ../panels/background/cc-background-chooser-dialog.c:306
 msgid "Pictures"
 msgstr "Малюнки"
 
-#: ../panels/background/cc-background-chooser-dialog.c:327
+#: ../panels/background/cc-background-chooser-dialog.c:314
 msgid "Colors"
 msgstr "Кольори"
 
-#: ../panels/background/cc-background-chooser-dialog.c:336
-msgid "Flickr"
-msgstr "Flickr"
-
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:383
+#: ../panels/background/cc-background-chooser-dialog.c:360
 msgid "No Pictures Found"
 msgstr "Не знайдено жодного малюнку"
 
+#. translators: "Home" is used in place of the Pictures
+#. * directory in the string below when XDG_PICTURES_DIR is
+#. * undefined
+#: ../panels/background/cc-background-chooser-dialog.c:378
+#: ../panels/search/cc-search-locations-dialog.c:274
+msgid "Home"
+msgstr "Домівка"
+
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:398
+#: ../panels/background/cc-background-chooser-dialog.c:390
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Можете додати зображення до вашої теки %s і вони з'являться там"
 
-#: ../panels/background/cc-background-chooser-dialog.c:427
-#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
+#: ../panels/background/cc-background-chooser-dialog.c:419
+#: ../panels/color/cc-color-panel.c:222 ../panels/color/cc-color-panel.c:959
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -122,7 +124,7 @@ msgstr "Можете додати зображення до вашої теки 
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: ../panels/background/cc-background-chooser-dialog.c:428
+#: ../panels/background/cc-background-chooser-dialog.c:420
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -168,7 +170,9 @@ msgstr "Немає адаптерів Bluetooth"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth вимкнено апаратно"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -315,48 +319,48 @@ msgstr "Нескалібровано"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:136
+#: ../panels/color/cc-color-panel.c:138
 msgid "Default: "
 msgstr "Типовий:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:144
+#: ../panels/color/cc-color-panel.c:146
 msgid "Colorspace: "
 msgstr "Простір кольорів: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:151
+#: ../panels/color/cc-color-panel.c:153
 msgid "Test profile: "
 msgstr "Тестовий профіль: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:218
+#: ../panels/color/cc-color-panel.c:220
 msgid "Select ICC Profile File"
 msgstr "Виберіть файл профілю ICC"
 
-#: ../panels/color/cc-color-panel.c:221
+#: ../panels/color/cc-color-panel.c:223
 msgid "_Import"
 msgstr "_Імпортувати"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:232
+#: ../panels/color/cc-color-panel.c:234
 msgid "Supported ICC profiles"
 msgstr "Підтримувані профілі ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:241
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Усі файли"
 
-#: ../panels/color/cc-color-panel.c:578
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Екран"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:902
+#: ../panels/color/cc-color-panel.c:904
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Не вдалося вивантажити файл: %s"
@@ -364,40 +368,40 @@ msgstr "Не вдалося вивантажити файл: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:916
+#: ../panels/color/cc-color-panel.c:918
 msgid "The profile has been uploaded to:"
 msgstr "Профіль вивантажено на:"
 
-#: ../panels/color/cc-color-panel.c:918
+#: ../panels/color/cc-color-panel.c:920
 msgid "Write down this URL."
 msgstr "Запишіть собі це посилання."
 
-#: ../panels/color/cc-color-panel.c:919
+#: ../panels/color/cc-color-panel.c:921
 msgid "Restart this computer and boot your normal operating system."
 msgstr ""
 "Перезапустіть цей комп'ютер і завантажте вашу звичайну операційну систему."
 
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:922
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "Введіть URL у веб-переглядач, щоб звантажити і встановити профіль."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:954
+#: ../panels/color/cc-color-panel.c:956
 msgid "Save Profile"
 msgstr "Зберегти профіль"
 
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:960
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "З_берегти"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1314
+#: ../panels/color/cc-color-panel.c:1320
 msgid "Create a color profile for the selected device"
 msgstr "Створити профіль кольорів для вибраного пристрою"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1329 ../panels/color/cc-color-panel.c:1353
+#: ../panels/color/cc-color-panel.c:1335 ../panels/color/cc-color-panel.c:1359
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -406,12 +410,12 @@ msgstr ""
 "правильно з'єднано."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1363
+#: ../panels/color/cc-color-panel.c:1369
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Інструмент міри не підтримує профілювання принтерів."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1374
+#: ../panels/color/cc-color-panel.c:1380
 msgid "The device type is not currently supported."
 msgstr "Цей тип пристрою не підтримується. "
 
@@ -862,28 +866,28 @@ msgid "_Done"
 msgstr "_Завершити"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:367
+#: ../panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:372
+#: ../panels/datetime/cc-datetime-panel.c:344
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:588
+#: ../panels/datetime/cc-datetime-panel.c:560
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:593
+#: ../panels/datetime/cc-datetime-panel.c:565
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:598
+#: ../panels/datetime/cc-datetime-panel.c:570
 msgid "%R"
 msgstr "%R"
 
@@ -1139,53 +1143,53 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Панель;Проектори;xrandr;Екран;Роздільність;Оновлення;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:451 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Невідома"
 
-#: ../panels/info/cc-info-panel.c:538
+#: ../panels/info/cc-info-panel.c:525
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-ох бітний"
 
-#: ../panels/info/cc-info-panel.c:540
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%d-bit"
 msgstr "%d-ох бітний"
 
-#: ../panels/info/cc-info-panel.c:1220
+#: ../panels/info/cc-info-panel.c:1207
 msgid "Ask what to do"
 msgstr "Питати, що робити"
 
-#: ../panels/info/cc-info-panel.c:1224
+#: ../panels/info/cc-info-panel.c:1211
 msgid "Do nothing"
 msgstr "Нічого не робити"
 
-#: ../panels/info/cc-info-panel.c:1228
+#: ../panels/info/cc-info-panel.c:1215
 msgid "Open folder"
 msgstr "Відкрити теку"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Other Media"
 msgstr "Інший носій"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1337
 msgid "Select an application for audio CDs"
 msgstr "Вибрати програму для звукових CD"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1338
 msgid "Select an application for video DVDs"
 msgstr "Вибрати програму для відео DVD"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1339
 msgid "Select an application to run when a music player is connected"
 msgstr "Вибрати програму для запуску, коли музичний програвач під'єднано"
 
-#: ../panels/info/cc-info-panel.c:1353
+#: ../panels/info/cc-info-panel.c:1340
 msgid "Select an application to run when a camera is connected"
 msgstr "Вибрати програму для запуску, коли камеру під'єднано"
 
-#: ../panels/info/cc-info-panel.c:1354
+#: ../panels/info/cc-info-panel.c:1341
 msgid "Select an application for software CDs"
 msgstr "Вибрати програму для програмного CD"
 
@@ -1194,87 +1198,75 @@ msgstr "Вибрати програму для програмного CD"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1366
+#: ../panels/info/cc-info-panel.c:1353
 msgid "audio DVD"
 msgstr "audio DVD"
 
-#: ../panels/info/cc-info-panel.c:1367
+#: ../panels/info/cc-info-panel.c:1354
 msgid "blank Blu-ray disc"
 msgstr "blank Blu-ray disc"
 
-#: ../panels/info/cc-info-panel.c:1368
+#: ../panels/info/cc-info-panel.c:1355
 msgid "blank CD disc"
 msgstr "blank CD disc"
 
-#: ../panels/info/cc-info-panel.c:1369
+#: ../panels/info/cc-info-panel.c:1356
 msgid "blank DVD disc"
 msgstr "blank DVD disc"
 
-#: ../panels/info/cc-info-panel.c:1370
+#: ../panels/info/cc-info-panel.c:1357
 msgid "blank HD DVD disc"
 msgstr "blank HD DVD disc"
 
-#: ../panels/info/cc-info-panel.c:1371
+#: ../panels/info/cc-info-panel.c:1358
 msgid "Blu-ray video disc"
 msgstr "Blu-ray video disc"
 
-#: ../panels/info/cc-info-panel.c:1372
+#: ../panels/info/cc-info-panel.c:1359
 msgid "e-book reader"
 msgstr "e-book reader"
 
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1360
 msgid "HD DVD video disc"
 msgstr "HD DVD video disc"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1361
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1362
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1363
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1377
+#: ../panels/info/cc-info-panel.c:1364
 msgid "Windows software"
 msgstr "Програми Windows"
 
-#: ../panels/info/cc-info-panel.c:1500
+#: ../panels/info/cc-info-panel.c:1487
 #: ../panels/keyboard/keyboard-shortcuts.c:1695
 msgid "Section"
 msgstr "Вибір"
 
-#: ../panels/info/cc-info-panel.c:1509 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1496 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Огляд"
 
-#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1502 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Типові програми"
 
-#: ../panels/info/cc-info-panel.c:1520 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1507 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Змінний носій"
 
-#: ../panels/info/cc-info-panel.c:1545
+#: ../panels/info/cc-info-panel.c:1532
 #, c-format
 msgid "Version %s"
 msgstr "Версія %s"
-
-#: ../panels/info/cc-info-panel.c:1595
-msgid "Install Updates"
-msgstr "Встановити оновлення"
-
-#: ../panels/info/cc-info-panel.c:1599
-msgid "System Up-To-Date"
-msgstr "Системні оновлення"
-
-#: ../panels/info/cc-info-panel.c:1603
-msgid "Checking for Updates"
-msgstr "Перевіряння на оновлення"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
@@ -1340,55 +1332,59 @@ msgstr "Графіка"
 msgid "Virtualization"
 msgstr "Віртуалізація"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:13
+msgid "Check for updates"
+msgstr "Перевірити на оновлення"
+
+#: ../panels/info/info.ui.h:15
 msgid "_Web"
 msgstr "_Інтернет"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:16
 msgid "_Mail"
 msgstr "_Пошта"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:17
 msgid "_Calendar"
 msgstr "_Календар"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:18
 msgid "M_usic"
 msgstr "М_узика"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:19
 msgid "_Video"
 msgstr "_Відеозаписи"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:20
 msgid "_Photos"
 msgstr "_Фотографії"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:22
 msgid "Select how media should be handled"
 msgstr "Виберіть, як варто опрацьовувати носій"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:23
 msgid "CD _audio"
 msgstr "_Аудіо CD"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:24
 msgid "_DVD video"
 msgstr "_Відео DVD"
 
-#: ../panels/info/info.ui.h:24
+#: ../panels/info/info.ui.h:25
 msgid "_Music player"
 msgstr "_Музичний програвач"
 
-#: ../panels/info/info.ui.h:25
+#: ../panels/info/info.ui.h:26
 msgid "_Software"
 msgstr "_Програми"
 
-#: ../panels/info/info.ui.h:26
+#: ../panels/info/info.ui.h:27
 msgid "_Other Media…"
 msgstr "_Інший носій…"
 
-#: ../panels/info/info.ui.h:27
+#: ../panels/info/info.ui.h:28
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Ніколи не питати про запуск програм при вставленні носія"
 
@@ -1565,8 +1561,8 @@ msgstr "Увімкнути або вимкнути високий контрас
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:271
-#: ../panels/keyboard/cc-keyboard-option.c:390
+#: ../panels/keyboard/cc-keyboard-option.c:274
+#: ../panels/keyboard/cc-keyboard-option.c:393
 #: ../panels/keyboard/keyboard-shortcuts.c:1158
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1579,7 +1575,7 @@ msgstr "Вимкнено"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:349
+#: ../panels/keyboard/cc-keyboard-option.c:352
 msgid "Alternative Characters Key"
 msgstr "Альтернативна клавіша символів"
 
@@ -1587,11 +1583,11 @@ msgstr "Альтернативна клавіша символів"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:358
+#: ../panels/keyboard/cc-keyboard-option.c:361
 msgid "Compose Key"
 msgstr "Скомпонувати клавіші"
 
-#: ../panels/keyboard/cc-keyboard-option.c:363
+#: ../panels/keyboard/cc-keyboard-option.c:366
 msgid "Modifiers-only switch to next source"
 msgstr "Тільки модифікатори перемикають наступне джерело"
 
@@ -1887,7 +1883,7 @@ msgstr "Одинарний клац, вторинна кнопка"
 msgid "Air_plane Mode"
 msgstr "Режим у _літаку"
 
-#: ../panels/network/cc-network-panel.c:929
+#: ../panels/network/cc-network-panel.c:956
 msgid "Network proxy"
 msgstr "Мережева проксі"
 
@@ -1895,14 +1891,14 @@ msgstr "Мережева проксі"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1108 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1135 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1243
+#: ../panels/network/cc-network-panel.c:1274
 msgid "The system network services are not compatible with this version."
 msgstr "Служби системної мережі несумісні з цією версією."
 
@@ -1986,12 +1982,12 @@ msgid "Never"
 msgstr "Ніколи"
 
 #: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:802
+#: ../panels/user-accounts/um-utils.c:819
 msgid "Today"
 msgstr "Сьогодні"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:805
+#: ../panels/user-accounts/um-utils.c:822
 msgid "Yesterday"
 msgstr "Учора"
 
@@ -2118,7 +2114,7 @@ msgstr "Вручну"
 msgid "Link-Local Only"
 msgstr "Лише місцевий"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:942
+#: ../panels/network/connection-editor/ce-page-ip4.c:934
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -2140,7 +2136,7 @@ msgstr "Автоматично"
 msgid "Automatic, DHCP only"
 msgstr "Автоматично, лише DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:902
+#: ../panels/network/connection-editor/ce-page-ip6.c:894
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2378,27 +2374,27 @@ msgstr "VPN"
 msgid "Bond"
 msgstr "Прив'язка"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:597
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Team"
 msgstr "Команда"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:600
 msgid "Bridge"
 msgstr "Міст"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:599
+#: ../panels/network/connection-editor/net-connection-editor.c:601
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:750
+#: ../panels/network/connection-editor/net-connection-editor.c:752
 msgid "Could not load VPN plugins"
 msgstr "Неможливо завантажити додатки VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:819
+#: ../panels/network/connection-editor/net-connection-editor.c:821
 msgid "Import from file…"
 msgstr "Імпортувати з файла…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:890
+#: ../panels/network/connection-editor/net-connection-editor.c:892
 msgid "Add Network Connection"
 msgstr "Додати мережеве з'єднання"
 
@@ -4236,12 +4232,13 @@ msgstr "Додати принтер"
 msgid "A_uthenticate"
 msgstr "За_свідчення"
 
-#: ../panels/printers/new-printer-dialog.ui.h:6
-msgid "Search for network printers or filter result"
-msgstr "Пошук мережевих принтерів або результат фільтру"
+#. Translators: No printers were found
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "No printers detected."
+msgstr "Не виявлено жодного принтера."
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: ../panels/printers/new-printer-dialog.ui.h:8
+#: ../panels/printers/new-printer-dialog.ui.h:9
 msgid "Enter address of a printer or a text to filter results"
 msgstr "Уведіть адресу принтера або текст, щоб відсіяти результати"
 
@@ -4357,15 +4354,37 @@ msgstr "Час"
 msgid "%s Active Jobs"
 msgstr "%s чинних завдань"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr "USB"
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr "Послідовний порт"
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr "Паралельний порт"
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, c-format
+msgid "Location: %s"
+msgstr "Розміщення: %s"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, c-format
+msgid "Address: %s"
+msgstr "Адреса: %s"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "Сервер потребує засвідчення"
-
-#. Translators: No printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1706
-msgid "No printers detected."
-msgstr "Не виявлено жодного принтера."
 
 #: ../panels/printers/pp-options-dialog.c:81
 msgid "Two Sided"
@@ -4523,8 +4542,8 @@ msgstr "Адреса"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-msgid "_Default"
-msgstr "_Типовий"
+msgid "_Default printer"
+msgstr "_Типовий принтер"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
@@ -4611,8 +4630,7 @@ msgstr "П_очистити тимчасові файли"
 msgid "Purge Trash & Temporary Files"
 msgstr "Очистити кошик і тимчасові файли"
 
-#: ../panels/privacy/cc-privacy-panel.c:578 ../panels/privacy/privacy.ui.h:38
-#| msgid "Software"
+#: ../panels/privacy/cc-privacy-panel.c:582 ../panels/privacy/privacy.ui.h:38
 msgid "Software Usage"
 msgstr "Використання програм"
 
@@ -4759,7 +4777,6 @@ msgstr ""
 "дані третій стороні."
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Privacy"
 msgid "Privacy Policy"
 msgstr "Правила конфіденційності"
 
@@ -4921,10 +4938,6 @@ msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Параметри входу використовуються всіма користувачами, коли вони входять у "
 "систему"
-
-#: ../panels/search/cc-search-locations-dialog.c:274
-msgid "Home"
-msgstr "Домівка"
 
 #: ../panels/search/cc-search-locations-dialog.c:476
 msgctxt "Search Location"
@@ -5132,20 +5145,28 @@ msgstr ""
 "під'єднання до: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-msgid "Remote View"
-msgstr "Віддалений перегляд"
+msgid "Allow Remote Control"
+msgstr "Дозволити віддалене керування"
 
 #: ../panels/sharing/sharing.ui.h:28
-msgid "Remote Control"
-msgstr "Віддалене керування"
+msgid "Password:"
+msgstr "Пароль:"
 
 #: ../panels/sharing/sharing.ui.h:29
-msgid "Approve All Connections"
-msgstr "Підтвердити всі під'єднання"
-
-#: ../panels/sharing/sharing.ui.h:30
 msgid "Show Password"
 msgstr "Показати пароль"
+
+#: ../panels/sharing/sharing.ui.h:30
+msgid "Access Options"
+msgstr "Параметри доступу"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "New connections must ask for access"
+msgstr "Нові з'єднання мають вимагати доступ"
+
+#: ../panels/sharing/sharing.ui.h:32
+msgid "Require a password"
+msgstr "Вимагати пароль"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -5438,7 +5459,7 @@ msgid "_Typing Assist (AccessX)"
 msgstr "Асистент з _набирання (AccessX)"
 
 #: ../panels/universal-access/uap.ui.h:14
-msgid "Pointing and Clicking"
+msgid "Pointing & Clicking"
 msgstr "Вказування та натискання"
 
 #: ../panels/universal-access/uap.ui.h:15
@@ -5639,27 +5660,27 @@ msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Великий"
 
-#: ../panels/universal-access/zoom-options.c:357
+#: ../panels/universal-access/zoom-options.c:333
 msgctxt "Distance"
 msgid "Short"
 msgstr "Короткий"
 
-#: ../panels/universal-access/zoom-options.c:358
+#: ../panels/universal-access/zoom-options.c:334
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ екрана"
 
-#: ../panels/universal-access/zoom-options.c:359
+#: ../panels/universal-access/zoom-options.c:335
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ екрана"
 
-#: ../panels/universal-access/zoom-options.c:360
+#: ../panels/universal-access/zoom-options.c:336
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ екрана"
 
-#: ../panels/universal-access/zoom-options.c:361
+#: ../panels/universal-access/zoom-options.c:337
 msgctxt "Distance"
 msgid "Long"
 msgstr "Довгий"
@@ -6596,21 +6617,21 @@ msgstr ""
 msgid "My Account"
 msgstr "Мій обліковий запис"
 
-#: ../panels/user-accounts/um-utils.c:550
+#: ../panels/user-accounts/um-utils.c:567
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Користувач «%s» вже існує"
 
-#: ../panels/user-accounts/um-utils.c:554
+#: ../panels/user-accounts/um-utils.c:571
 #, c-format
 msgid "The username is too long"
 msgstr "Перейменуйте користувача на меншу кількістю літер"
 
-#: ../panels/user-accounts/um-utils.c:557
+#: ../panels/user-accounts/um-utils.c:574
 msgid "The username cannot start with a '-'"
 msgstr "Користувач не може мати на початку «-»"
 
-#: ../panels/user-accounts/um-utils.c:560
+#: ../panels/user-accounts/um-utils.c:577
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'"
@@ -6619,12 +6640,12 @@ msgstr ""
 "від a до z, числа і будь-який символ з «.», «-» і «_»"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:810
+#: ../panels/user-accounts/um-utils.c:827
 msgid "%b %e"
 msgstr "%e %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:814
+#: ../panels/user-accounts/um-utils.c:831
 msgid "%b %e, %Y"
 msgstr "%e %b, %Y"
 
@@ -7017,6 +7038,27 @@ msgstr "Параметри"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Налаштування;Параметри;"
+
+#~ msgid "Flickr"
+#~ msgstr "Flickr"
+
+#~ msgid "Install Updates"
+#~ msgstr "Встановити оновлення"
+
+#~ msgid "System Up-To-Date"
+#~ msgstr "Системні оновлення"
+
+#~ msgid "Search for network printers or filter result"
+#~ msgstr "Пошук мережевих принтерів або результат фільтру"
+
+#~ msgid "_Default"
+#~ msgstr "_Типовий"
+
+#~ msgid "Remote View"
+#~ msgstr "Віддалений перегляд"
+
+#~ msgid "Approve All Connections"
+#~ msgstr "Підтвердити всі під'єднання"
 
 #~ msgid "Set Up New Device"
 #~ msgstr "Налаштувати новий пристрій"
@@ -7797,9 +7839,6 @@ msgstr "Налаштування;Параметри;"
 #~ msgid "Change printer settings"
 #~ msgstr "Змінити налаштування принтера"
 
-#~ msgid "%s Options"
-#~ msgstr "Параметри %s"
-
 #~ msgid "Manufacturers"
 #~ msgstr "Виробники"
 
@@ -8140,9 +8179,6 @@ msgstr "Налаштування;Параметри;"
 
 #~ msgid "affect how much power is used"
 #~ msgstr "впливає на обсяг використання живлення"
-
-#~ msgid "A_ddress:"
-#~ msgstr "_Адреса:"
 
 #~ msgid "_Search by Address"
 #~ msgstr "По_шук за адресою"
