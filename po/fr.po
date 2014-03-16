@@ -34,11 +34,11 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-13 14:27+0000\n"
-"PO-Revision-Date: 2013-12-14 22:35+0100\n"
-"Last-Translator: Milan Bouchet-Valat <nalimilan@club.fr>\n"
+"POT-Creation-Date: 2014-03-16 11:02+0000\n"
+"PO-Revision-Date: 2014-03-16 13:41+0100\n"
+"Last-Translator: Michael Scherer <misc@zarb.org>\n"
 "Language-Team: français <GNOME French Team <gnomefr@traduc.org>\n"
-"Language: \n"
+"Language: FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -896,28 +896,28 @@ msgid "_Done"
 msgstr "_Terminé"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:367
+#: ../panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:372
+#: ../panels/datetime/cc-datetime-panel.c:344
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:588
+#: ../panels/datetime/cc-datetime-panel.c:560
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:593
+#: ../panels/datetime/cc-datetime-panel.c:565
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:598
+#: ../panels/datetime/cc-datetime-panel.c:570
 msgid "%R"
 msgstr "%R"
 
@@ -1367,8 +1367,6 @@ msgid "Virtualization"
 msgstr "Virtualisation"
 
 #: ../panels/info/info.ui.h:13
-#, fuzzy
-#| msgid "Checking for Updates"
 msgid "Check for updates"
 msgstr "Recherche de mises à jour"
 
@@ -2412,15 +2410,15 @@ msgstr "VPN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:596
 msgid "Bond"
-msgstr "Lien"
+msgstr "Agrégat (lien)"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Team"
-msgstr ""
+msgstr "Agrégat (équipe)"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:600
 msgid "Bridge"
-msgstr "Pont"
+msgstr "Agrégat (pont)"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:601
 msgid "VLAN"
@@ -2575,17 +2573,17 @@ msgstr ""
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
-msgstr "Lien d'esclaves"
+msgstr "Esclaves de l’agrégat de type « Lien »"
 
 #: ../panels/network/net-device-bond.c:102
 #: ../panels/network/net-device-bridge.c:102
 #: ../panels/network/net-device-team.c:102
 msgid "(none)"
-msgstr ""
+msgstr "(rien)"
 
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
-msgstr "Pont d'esclaves"
+msgstr "Esclaves de l’agrégat de type « Pont »"
 
 #: ../panels/network/net-device-ethernet.c:111
 #: ../panels/network/net-device-wifi.c:457
@@ -2644,10 +2642,8 @@ msgid "Add new connection"
 msgstr "Ajouter une nouvelle connexion"
 
 #: ../panels/network/net-device-team.c:77
-#, fuzzy
-#| msgid "Bridge slaves"
 msgid "Team slaves"
-msgstr "Pont d'esclaves"
+msgstr "Esclaves de l’agrégat de type « Équipe »"
 
 #: ../panels/network/net-device-wifi.c:1110
 msgid ""
@@ -3638,7 +3634,7 @@ msgstr "Erreur lors de la suppression du compte"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:839
 msgid "Are you sure you want to remove the account?"
-msgstr "Êtes-vous sûr de vouloir supprimer le compte ?"
+msgstr "Êtes-vous sûr de vouloir effacer le compte ?"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:841
 msgid "This will not remove the account on the server."
@@ -3658,16 +3654,12 @@ msgstr "Connectez-vous à vos comptes en ligne et décidez de leur utilité"
 
 #. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid ""
-#| "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
-#| "ownCloud;Kerberos;IMAP;SMTP;"
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;En ligne;Discussion;Agenda;Courriel;Email;"
-"Contact;ownCloud;Kerberos;IMAP;SMTP;"
+"Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -4406,31 +4398,29 @@ msgstr "%s tâches d'impression actives"
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1709
 msgid "USB"
-msgstr ""
+msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
 #: ../panels/printers/pp-new-printer-dialog.c:1714
 msgid "Serial Port"
-msgstr ""
+msgstr "Port série"
 
 #. Translators: The found device is a printer connected via parallel port
 #: ../panels/printers/pp-new-printer-dialog.c:1721
 msgid "Parallel Port"
-msgstr ""
+msgstr "Port parallèle"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
 #: ../panels/printers/pp-new-printer-dialog.c:1774
-#, fuzzy, c-format
-#| msgid "Location"
+#, c-format
 msgid "Location: %s"
-msgstr "Emplacement"
+msgstr "Emplacement : %s"
 
 #. Translators: Network address of found printer
 #: ../panels/printers/pp-new-printer-dialog.c:1779
-#, fuzzy, c-format
-#| msgid "Address"
+#, c-format
 msgid "Address: %s"
-msgstr "Adresse"
+msgstr "Adresse : %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
 #: ../panels/printers/pp-new-printer-dialog.c:1803
@@ -4594,10 +4584,8 @@ msgstr "Emplacement"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
-#, fuzzy
-#| msgid "Default Route"
 msgid "_Default printer"
-msgstr "Route par défaut"
+msgstr "Imprimante par _défaut"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "Jobs"
@@ -4685,10 +4673,8 @@ msgid "Purge Trash & Temporary Files"
 msgstr "Vider la corbeille et les fichiers temporaires"
 
 #: ../panels/privacy/cc-privacy-panel.c:582 ../panels/privacy/privacy.ui.h:38
-#, fuzzy
-#| msgid "Software"
 msgid "Software Usage"
-msgstr "Logiciels"
+msgstr "Statistiques d'utilisation des logiciels"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -4828,16 +4814,19 @@ msgid ""
 "All the information we collect is made anonymous, and we will never share "
 "your data with third parties."
 msgstr ""
+"L'envoi d'information sur l'usage des logiciels nous aide à vous fournir des "
+"recommendations plus précises et à améliorer nos logiciels.\n"
+"\n"
+"Toutes les informations que nous récoltons sont anonymisés, et nous ne "
+"partagerons jamais vos données avec un tiers."
 
 #: ../panels/privacy/privacy.ui.h:42
-#, fuzzy
-#| msgid "Privacy"
 msgid "Privacy Policy"
-msgstr "Confidentialité"
+msgstr "Politique de confidentialité"
 
 #: ../panels/privacy/privacy.ui.h:43
 msgid "_Send software usage statistics"
-msgstr ""
+msgstr "Envoyer les _statistiques d'utilisation du logiciel"
 
 #: ../panels/region/cc-format-chooser.c:118
 msgctxt "measurement format"
@@ -5196,7 +5185,7 @@ msgid ""
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
 "Tout utilisateur distant doit se connecter à l'aide de cette commande shell "
-"sécurisée :\n"
+"sécurisée :\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/sharing.ui.h:26
@@ -5209,34 +5198,26 @@ msgstr ""
 "à : <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-#, fuzzy
-#| msgid "Remote Control"
 msgid "Allow Remote Control"
-msgstr "Contrôle à distance"
+msgstr "Autoriser le contrôle à distance"
 
 #: ../panels/sharing/sharing.ui.h:28
-#, fuzzy
-#| msgid "Password"
 msgid "Password:"
-msgstr "Mot de passe"
+msgstr "Mot de passe :"
 
 #: ../panels/sharing/sharing.ui.h:29
 msgid "Show Password"
 msgstr "Afficher le mot de passe"
 
 #: ../panels/sharing/sharing.ui.h:30
-#, fuzzy
-#| msgid "%s Options"
 msgid "Access Options"
-msgstr "Options pour %s"
+msgstr "Options d'accés "
 
 #: ../panels/sharing/sharing.ui.h:31
 msgid "New connections must ask for access"
-msgstr ""
+msgstr "Les nouvelles connexions doivent être explicitement validées."
 
 #: ../panels/sharing/sharing.ui.h:32
-#, fuzzy
-#| msgid "Require Password"
 msgid "Require a password"
 msgstr "Demander le mot de passe"
 
@@ -5478,17 +5459,13 @@ msgstr "Faciliter la vision, l'écoute, la saisie, la sélection et le clic"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;"
-#| "size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgstr ""
 "Clavier;Souris;lien;Accessibilité;Contraste;Zoom;Lecteur d'écran;texte;"
-"police;taille;Accéder à X;Touches rémanentes;Touches lentes;Rebonds de "
-"touches;Touches de la souris;"
+"police;taille;Touches rémanentes;Touches lentes;Rebonds de touches;Touches "
+"de la souris;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -5535,8 +5512,6 @@ msgid "_Typing Assist (AccessX)"
 msgstr "Assistant de _saisie (AccessX)"
 
 #: ../panels/universal-access/uap.ui.h:14
-#, fuzzy
-#| msgid "Pointing and Clicking"
 msgid "Pointing & Clicking"
 msgstr "Pointage et clic de souris"
 
