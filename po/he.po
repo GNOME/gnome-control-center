@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-16 14:53+0200\n"
-"PO-Revision-Date: 2014-02-16 15:21+0200\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
+"POT-Creation-Date: 2014-03-23 19:17+0200\n"
+"PO-Revision-Date: 2014-03-23 19:56+0200\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -105,7 +105,7 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תופענה כאן"
 
 #: ../panels/background/cc-background-chooser-dialog.c:419
-#: ../panels/color/cc-color-panel.c:220 ../panels/color/cc-color-panel.c:957
+#: ../panels/color/cc-color-panel.c:222 ../panels/color/cc-color-panel.c:959
 #: ../panels/display/cc-display-panel.c:1510
 #: ../panels/display/cc-display-panel.c:1953
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -171,7 +171,9 @@ msgstr "לא נמצאו מתאמי Bluetooth"
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "מתאם ה־Bluetooth מנוטרל באמצעות מפסק חומרה"
 
+#. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1726
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -229,7 +231,7 @@ msgstr "לא ניתן לייצר את הפרופיל."
 #. * https://en.wikipedia.org/wiki/White_point for details
 #: ../panels/color/cc-color-calibrate.c:427
 msgid "The target whitepoint was not obtainable."
-msgstr ""
+msgstr "יעד נקודת הלובן אינו בר השגה."
 
 #. TRANSLATORS: the display calibration process is finished
 #: ../panels/color/cc-color-calibrate.c:467
@@ -252,7 +254,7 @@ msgstr "ניתן להסיר את התקן הכיול."
 #. * detected early enough)
 #: ../panels/color/cc-color-calibrate.c:553
 msgid "Do not disturb the calibration device while in progress"
-msgstr ""
+msgstr "נא לא להפריע להתקן הכיול במהלך ההתקדמות"
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
@@ -312,48 +314,48 @@ msgstr "ללא כיול"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:136
+#: ../panels/color/cc-color-panel.c:138
 msgid "Default: "
 msgstr "בררת מחדל:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:144
+#: ../panels/color/cc-color-panel.c:146
 msgid "Colorspace: "
 msgstr "מרחב צבעים:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:151
+#: ../panels/color/cc-color-panel.c:153
 msgid "Test profile: "
 msgstr "פרופיל הבדיקה:"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:218
+#: ../panels/color/cc-color-panel.c:220
 msgid "Select ICC Profile File"
 msgstr "בחירת פרופיל ICC"
 
-#: ../panels/color/cc-color-panel.c:221
+#: ../panels/color/cc-color-panel.c:223
 msgid "_Import"
 msgstr "י_בוא"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:232
+#: ../panels/color/cc-color-panel.c:234
 msgid "Supported ICC profiles"
 msgstr "פרופילי ICC נתמכים"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:241
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: ../panels/color/cc-color-panel.c:578
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "מסך"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:902
+#: ../panels/color/cc-color-panel.c:904
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "העלאת הקובץ נכשלה: %s"
@@ -361,51 +363,51 @@ msgstr "העלאת הקובץ נכשלה: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:916
+#: ../panels/color/cc-color-panel.c:918
 msgid "The profile has been uploaded to:"
 msgstr "הפרופיל הועלה אל:"
 
-#: ../panels/color/cc-color-panel.c:918
+#: ../panels/color/cc-color-panel.c:920
 msgid "Write down this URL."
 msgstr "כדאי לכתוב את הכתובת הזאת."
 
-#: ../panels/color/cc-color-panel.c:919
+#: ../panels/color/cc-color-panel.c:921
 msgid "Restart this computer and boot your normal operating system."
 msgstr "יש להפעיל מחדש את המחשב ולטעון את מערכת ההפעלה הרגילה שלך."
 
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:922
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "יש להזין את כתובת האתר בדפדפן שלך להורדה ולהתקנת הפרופיל"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:954
+#: ../panels/color/cc-color-panel.c:956
 msgid "Save Profile"
 msgstr "שמירת הפרופיל"
 
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:960
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_שמירה"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1314
+#: ../panels/color/cc-color-panel.c:1320
 msgid "Create a color profile for the selected device"
 msgstr "יצירת פרופיל צבע עבור ההתקן הנבחר"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1329 ../panels/color/cc-color-panel.c:1353
+#: ../panels/color/cc-color-panel.c:1335 ../panels/color/cc-color-panel.c:1359
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr "התקן המדידה לא זוהה. נא לבדוק כי הוא פועל ומחובר כראוי."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1363
+#: ../panels/color/cc-color-panel.c:1369
 msgid "The measuring instrument does not support printer profiling."
 msgstr "התקן המדידה אינו תומך ביצירת פרופילים למדפסות."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1374
+#: ../panels/color/cc-color-panel.c:1380
 msgid "The device type is not currently supported."
 msgstr "סוג ההתקן אינו נתמך נכון לעכשיו."
 
@@ -475,11 +477,11 @@ msgstr "בררת מחדל גווני אפור"
 
 #: ../panels/color/cc-color-profile.c:193
 msgid "Vendor supplied factory calibration data"
-msgstr ""
+msgstr "נתוני כיול שסופקו על ידי היצרן"
 
 #: ../panels/color/cc-color-profile.c:202
 msgid "Full-screen display correction not possible with this profile"
-msgstr ""
+msgstr "תיקון תצוגת מסך מלא אינו אפשרי עם פרופיל זה"
 
 #: ../panels/color/cc-color-profile.c:224
 msgid "This profile may no longer be accurate"
@@ -529,7 +531,7 @@ msgstr ""
 #: ../panels/color/color.ui.h:3
 msgid ""
 "You will not be able to use your computer while calibration takes place."
-msgstr ""
+msgstr "לא יהיה ניתן להשתמש במחשב שלך בזמן הכיול."
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
@@ -576,12 +578,15 @@ msgid ""
 "Please set the display to a brightness that is typical for you. Color "
 "management will be most accurate at this brightness level."
 msgstr ""
+"נא להגדיר את התצוגה לבהירות אופיינית לך. ניהול צבע יהיה מדויק ביותר ברמת "
+"בהירות זו."
 
 #: ../panels/color/color.ui.h:16
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
 msgstr ""
+"לחלופין, ניתן להשתמש ברמת בהירות שבשימוש אחד הפרופילים האחרים למכשיר זה."
 
 #: ../panels/color/color.ui.h:17
 msgid "Display Brightness"
@@ -592,6 +597,8 @@ msgid ""
 "You can use a color profile on different computers, or even create profiles "
 "for different lighting conditions."
 msgstr ""
+"ניתן להשתמש בפרופיל צבע על מחשבים שונים, או אפילו ליצור פרופילים לתנאי תאורה "
+"שונים."
 
 #: ../panels/color/color.ui.h:19
 msgid "Profile Name:"
@@ -611,7 +618,7 @@ msgstr "העתקת פרופיל"
 
 #: ../panels/color/color.ui.h:23
 msgid "Requires writable media"
-msgstr ""
+msgstr "דרושה מדיה לכתיבה"
 
 #: ../panels/color/color.ui.h:24
 msgid "Upload profile"
@@ -715,15 +722,15 @@ msgstr "פלזמה"
 
 #: ../panels/color/color.ui.h:47
 msgid "LCD (CCFL backlight)"
-msgstr ""
+msgstr "‏LCD ‏(CCFL תאורה אחורית)"
 
 #: ../panels/color/color.ui.h:48
 msgid "LCD (RGB LED backlight)"
-msgstr ""
+msgstr "‏LCD ‏(RGB LED תאורה אחורית)"
 
 #: ../panels/color/color.ui.h:49
 msgid "LCD (white LED backlight)"
-msgstr ""
+msgstr "‏LCD (תאורת LED אחורית)"
 
 #: ../panels/color/color.ui.h:50
 msgid "Wide gamut LCD (CCFL backlight)"
@@ -840,28 +847,28 @@ msgid "_Done"
 msgstr "_סיום"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:367
+#: ../panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e ב%B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:372
+#: ../panels/datetime/cc-datetime-panel.c:344
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:588
+#: ../panels/datetime/cc-datetime-panel.c:560
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:593
+#: ../panels/datetime/cc-datetime-panel.c:565
 msgid "%l:%M %p"
 msgstr "‎%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:598
+#: ../panels/datetime/cc-datetime-panel.c:570
 msgid "%R"
 msgstr "%R"
 
@@ -1076,7 +1083,7 @@ msgstr "כיוון"
 
 #: ../panels/display/cc-display-panel.c:2138
 msgid "Show slideshows and media only"
-msgstr ""
+msgstr "הצגת מצגות ומדיה בלבד"
 
 #. translators: "Mirror" describes when both displays show the same view
 #: ../panels/display/cc-display-panel.c:2143
@@ -1855,7 +1862,7 @@ msgstr "לחיצה בודדת, לחצן משני"
 msgid "Air_plane Mode"
 msgstr "מצב _טיסה"
 
-#: ../panels/network/cc-network-panel.c:929
+#: ../panels/network/cc-network-panel.c:956
 msgid "Network proxy"
 msgstr "מתווך הרשת"
 
@@ -1863,14 +1870,14 @@ msgstr "מתווך הרשת"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1108 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1135 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1243
+#: ../panels/network/cc-network-panel.c:1274
 msgid "The system network services are not compatible with this version."
 msgstr "שירותי הרשת של המערכת אינם תואמים לגרסה זו."
 
@@ -2086,7 +2093,7 @@ msgstr "ידני"
 msgid "Link-Local Only"
 msgstr "קישור מקומי בלבד"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:942
+#: ../panels/network/connection-editor/ce-page-ip4.c:934
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
@@ -2108,7 +2115,7 @@ msgstr "אוטומטי"
 msgid "Automatic, DHCP only"
 msgstr "אוטומטי, DHCP בלבד"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:902
+#: ../panels/network/connection-editor/ce-page-ip6.c:894
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2346,27 +2353,27 @@ msgstr "VPN"
 msgid "Bond"
 msgstr "מאגד"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:597
+#: ../panels/network/connection-editor/net-connection-editor.c:598
 msgid "Team"
 msgstr "צוות"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:598
+#: ../panels/network/connection-editor/net-connection-editor.c:600
 msgid "Bridge"
 msgstr "גשר"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:599
+#: ../panels/network/connection-editor/net-connection-editor.c:601
 msgid "VLAN"
 msgstr "רשת וירטואלית"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:750
+#: ../panels/network/connection-editor/net-connection-editor.c:752
 msgid "Could not load VPN plugins"
 msgstr "לא ניתן לטעון את תוספי ה־VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:819
+#: ../panels/network/connection-editor/net-connection-editor.c:821
 msgid "Import from file…"
 msgstr "יבוא מקובץ…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:890
+#: ../panels/network/connection-editor/net-connection-editor.c:892
 msgid "Add Network Connection"
 msgstr "הוספת חיבור לרשת"
 
@@ -3183,6 +3190,8 @@ msgid ""
 "to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
 "Authority certificate?"
 msgstr ""
+"חוסר אישור של רשות אישורים (CA) יכול לגרום להתחברויות לא בטוחות, רשתות "
+"אלחוטיות מזויפות. האם ברצונך לבחור אישור של רשות אישורים?"
 
 #: ../panels/network/wireless-security/eap-method.c:281
 msgid "Ignore"
@@ -3231,7 +3240,7 @@ msgstr "אימות _פנימי"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 msgid "PAC pro_visioning"
-msgstr ""
+msgstr "ה_קצאת PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:1
@@ -4305,8 +4314,35 @@ msgstr "זמן"
 msgid "%s Active Jobs"
 msgstr "%s משימות פעילות"
 
+#. Translators: The found device is a printer connected via USB
+#: ../panels/printers/pp-new-printer-dialog.c:1709
+msgid "USB"
+msgstr "USB"
+
+#. Translators: The found device is a printer connected via serial port
+#: ../panels/printers/pp-new-printer-dialog.c:1714
+msgid "Serial Port"
+msgstr "יציאה טורית"
+
+#. Translators: The found device is a printer connected via parallel port
+#: ../panels/printers/pp-new-printer-dialog.c:1721
+msgid "Parallel Port"
+msgstr "יציאה מקבילית"
+
+#. Translators: Location of found network printer (e.g. Kitchen, Reception)
+#: ../panels/printers/pp-new-printer-dialog.c:1774
+#, c-format
+msgid "Location: %s"
+msgstr "מיקום: %s"
+
+#. Translators: Network address of found printer
+#: ../panels/printers/pp-new-printer-dialog.c:1779
+#, c-format
+msgid "Address: %s"
+msgstr "כתובת: %s"
+
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1752
+#: ../panels/printers/pp-new-printer-dialog.c:1803
 msgid "Server requires authentication"
 msgstr "אימות _פנימי"
 
@@ -4553,7 +4589,7 @@ msgstr "מחיקת קבצים _זמניים"
 msgid "Purge Trash & Temporary Files"
 msgstr "ניקוי הזבל והקבצים הזמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:578 ../panels/privacy/privacy.ui.h:38
+#: ../panels/privacy/cc-privacy-panel.c:582 ../panels/privacy/privacy.ui.h:38
 msgid "Software Usage"
 msgstr "שימוש בתכנה"
 
@@ -5060,20 +5096,28 @@ msgstr ""
 "\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:27
-msgid "Remote View"
-msgstr "תצוגה מרחוק"
+msgid "Allow Remote Control"
+msgstr "לאפשר שליטה מרחוק"
 
 #: ../panels/sharing/sharing.ui.h:28
-msgid "Remote Control"
-msgstr "שליטה מרחוק"
+msgid "Password:"
+msgstr "ססמה:"
 
 #: ../panels/sharing/sharing.ui.h:29
-msgid "Approve All Connections"
-msgstr "אישור כל החיבורים"
-
-#: ../panels/sharing/sharing.ui.h:30
 msgid "Show Password"
 msgstr "הצגת ססמה"
+
+#: ../panels/sharing/sharing.ui.h:30
+msgid "Access Options"
+msgstr "אפשרויות גישה"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "New connections must ask for access"
+msgstr "התחברויות חדשות מחייבות בקשת גישה"
+
+#: ../panels/sharing/sharing.ui.h:32
+msgid "Require a password"
+msgstr "דרושה ססמה"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -6934,6 +6978,12 @@ msgstr "הגדרות"
 msgid "Preferences;Settings;"
 msgstr "העדפות;הגדרות;"
 
+#~ msgid "Remote View"
+#~ msgstr "תצוגה מרחוק"
+
+#~ msgid "Approve All Connections"
+#~ msgstr "אישור כל החיבורים"
+
 #~ msgid "Flickr"
 #~ msgstr "Flickr"
 
@@ -7575,9 +7625,6 @@ msgstr "העדפות;הגדרות;"
 #~ msgid "Change printer settings"
 #~ msgstr "שינוי הגדרות המדפסת"
 
-#~ msgid "%s Options"
-#~ msgstr "%s אפשרויות"
-
 #~ msgid "Manufacturers"
 #~ msgstr "יצרנים"
 
@@ -8036,9 +8083,6 @@ msgstr "העדפות;הגדרות;"
 
 #~ msgid "To test your settings, try to double-click on the face."
 #~ msgstr "כדי לבדוק את ההגדרות שלך, יש ללחוץ פעמיים על הפרצוף."
-
-#~ msgid "A_ddress:"
-#~ msgstr "_כתובת:"
 
 #~ msgid "_Search by Address"
 #~ msgstr "חיפוש לפי _כתובת"
