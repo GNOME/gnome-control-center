@@ -57,21 +57,20 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
 
   shell = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
 
-  win = GTK_DIALOG (gtk_dialog_new ());
-  g_object_set (win,
-                "modal", TRUE,
-                "title", g_app_info_get_name (app),
-                "width-request", 450,
-                "transient-for", shell,
-                "resizable", FALSE,
-                NULL);
-  gtk_dialog_add_button (win, "gtk-close", GTK_RESPONSE_CLOSE);
-  gtk_dialog_set_default_response (win, GTK_RESPONSE_CLOSE);
+  win = g_object_new (GTK_TYPE_DIALOG,
+                      "modal", TRUE,
+                      "title", g_app_info_get_name (app),
+                      "width-request", 450,
+                      "transient-for", shell,
+                      "resizable", FALSE,
+                      "use-header-bar", TRUE,
+                      NULL);
 
   content_area = gtk_dialog_get_content_area (win);
   content_grid = GTK_GRID (gtk_grid_new ());
   g_object_set (content_grid,
                 "row-spacing", 10,
+                "margin-top", 12,
                 "margin-start", 15,
                 "margin-end", 5,
                 NULL);
