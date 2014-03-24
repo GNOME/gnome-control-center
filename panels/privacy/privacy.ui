@@ -121,10 +121,11 @@
   </object>
   <object class="GtkDialog" id="recent_dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
+    <property name="border_width">0</property>
     <property name="type_hint">dialog</property>
     <property name="title" translatable="yes">Usage &amp; History</property>
     <property name="resizable">False</property>
+    <property name="use_header_bar">1</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox5">
         <property name="can_focus">False</property>
@@ -146,50 +147,6 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area5">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="clear_recent_button">
-                <property name="label" translatable="yes">Cl_ear Recent History</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="secondary">True</property>
-                <property name="non-homogeneous">True</property>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="recent_done">
-                <property name="label" translatable="yes">_Close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -271,11 +228,39 @@
             <property name="position">2</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkBox" id="dialog-action_area5">
+            <property name="can_focus">False</property>
+            <property name="visible">True</property>
+            <property name="margin_start">12</property>
+            <property name="margin_bottom">12</property>
+            <child>
+              <object class="GtkButton" id="clear_recent_button">
+                <property name="label" translatable="yes">Cl_ear Recent History</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="pack_type">start</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
       </object>
     </child>
     <action-widgets>
       <action-widget response="0">clear_recent_button</action-widget>
-      <action-widget response="0">recent_done</action-widget>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="screen_lock_dialog">
@@ -284,39 +269,12 @@
     <property name="title" translatable="yes">Screen Lock</property>
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="screen_lock_done">
-                <property name="label" translatable="yes">_Close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkLabel" id="label1">
             <property name="visible">True</property>
@@ -449,85 +407,19 @@
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="-1">screen_lock_done</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkDialog" id="trash_dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
+    <property name="border_width">0</property>
     <property name="title" translatable="yes">Purge Trash &amp; Temporary Files</property>
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox4">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area4">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="empty_trash_button">
-                <property name="label" translatable="yes">_Empty Trash</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="secondary">True</property>
-                <property name="non-homogeneous">True</property>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="purge_temp_button">
-                <property name="label" translatable="yes">_Purge Temporary Files</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="secondary">True</property>
-                <property name="non-homogeneous">True</property>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="trash_done">
-                <property name="label" translatable="yes">_Close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkLabel" id="label5">
             <property name="visible">True</property>
@@ -658,12 +550,59 @@
             <property name="position">2</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkBox" id="dialog-actions-box">
+            <property name="can_focus">False</property>
+            <property name="orientation">horizontal</property>
+            <property name="visible">True</property>
+            <property name="spacing">6</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">6</property>
+            <property name="margin_bottom">12</property>
+            <child>
+              <object class="GtkButton" id="empty_trash_button">
+                <property name="label" translatable="yes">_Empty Trash</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="purge_temp_button">
+                <property name="label" translatable="yes">_Purge Temporary Files</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
       </object>
     </child>
     <action-widgets>
       <action-widget response="0">empty_trash_button</action-widget>
       <action-widget response="0">purge_temp_button</action-widget>
-      <action-widget response="0">trash_done</action-widget>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="software_dialog">
@@ -672,7 +611,7 @@
     <property name="title" translatable="yes">Software Usage</property>
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
-    <property name="use_header_bar">0</property>
+    <property name="use_header_bar">1</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox9">
         <property name="can_focus">False</property>
@@ -696,51 +635,6 @@ All the information we collect is made anonymous, and we will never share your d
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area9">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkLinkButton" id="software_policy_linkbutton">
-                <property name="label" translatable="yes">Privacy Policy</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="relief">none</property>
-                <property name="uri">https://git.gnome.org/browse/gnome-software/plain/doc/privacy-policy.html</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-                <property name="secondary">True</property>
-                <property name="non_homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="software_done">
-                <property name="label" translatable="yes">_Close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -792,11 +686,34 @@ All the information we collect is made anonymous, and we will never share your d
             <property name="position">2</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkBox" id="dialog-action_area9">
+            <property name="can_focus">False</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLinkButton" id="software_policy_linkbutton">
+                <property name="label" translatable="yes">Privacy Policy</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <property name="uri">https://git.gnome.org/browse/gnome-software/plain/doc/privacy-policy.html</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">software_done</action-widget>
-    </action-widgets>
   </object>
       <object class="GtkBox" id="privacy_vbox">
         <property name="visible">True</property>

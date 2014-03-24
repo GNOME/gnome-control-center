@@ -248,10 +248,7 @@ add_screen_lock (CcPrivacyPanel *self)
   w = get_on_off_label (self->priv->lock_settings, "lock-enabled");
   add_row (self, _("Screen Lock"), "screen_lock_dialog", w);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_done"));
   dialog = self->priv->screen_lock_dialog;
-  g_signal_connect_swapped (w, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -361,10 +358,7 @@ add_usage_history (CcPrivacyPanel *self)
   w = get_on_off_label (self->priv->privacy_settings, REMEMBER_RECENT_FILES);
   add_row (self, _("Usage & History"), "recent_dialog", w);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_done"));
   dialog = self->priv->recent_dialog;
-  g_signal_connect_swapped (w, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -538,10 +532,7 @@ add_trash_temp (CcPrivacyPanel *self)
   w = get_on_off_label2 (self->priv->privacy_settings, REMOVE_OLD_TRASH_FILES, REMOVE_OLD_TEMP_FILES);
   add_row (self, _("Purge Trash & Temporary Files"), "trash_dialog", w);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_done"));
   dialog = self->priv->trash_dialog;
-  g_signal_connect_swapped (w, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -581,10 +572,7 @@ add_software (CcPrivacyPanel *self)
   w = get_on_off_label (self->priv->privacy_settings, SEND_SOFTWARE_USAGE_STATS);
   add_row (self, _("Software Usage"), "software_dialog", w);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_done"));
   dialog = self->priv->software_dialog;
-  g_signal_connect_swapped (w, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
