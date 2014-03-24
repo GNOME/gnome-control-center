@@ -6,6 +6,7 @@
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="resizable">False</property>
+    <property name="use_header_bar">1</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="language-vbox">
         <property name="visible">True</property>
@@ -47,23 +48,7 @@
             <property name="margin-bottom">6</property>
           </object>
         </child>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="language-action-area">
-            <property name="visible">True</property>
-            <property name="orientation">horizontal</property>
-            <child>
-              <object class="GtkButton" id="ok-button">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">_Done</property>
-                <property name="use_underline" >True</property>
-              </object>
-            </child>
-          </object>
-        </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="-5">ok-button</action-widget>
-    </action-widgets>
   </object>
 </interface>
