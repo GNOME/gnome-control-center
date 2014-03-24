@@ -1589,12 +1589,13 @@ on_test_speakers_clicked (GvcComboBox *widget,
                 return;
         }
         title = g_strdup_printf (_("Speaker Testing for %s"), gvc_mixer_ui_device_get_description (output));
-        d = gtk_dialog_new_with_buttons (title,
-                                         GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (widget))),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         _("_Close"), GTK_RESPONSE_CLOSE,
-                                         NULL);
-        gtk_window_set_resizable (GTK_WINDOW (d), FALSE);
+        d = g_object_new (GTK_TYPE_DIALOG, "title", title,
+                                           "transient-for", GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (widget))),
+                                           "modal", TRUE,
+                                           "destroy-with-parent", TRUE,
+                                           "use-header-bar", TRUE,
+                                           "resizable", FALSE,
+                                           NULL);
 
         g_free (title);
         speaker_test = gvc_speaker_test_new (dialog->priv->mixer_control,
