@@ -1500,7 +1500,7 @@ show_arrange_displays_dialog (GtkButton      *button,
   GtkWidget *content_area, *area, *vbox, *label;
   gint response;
 
-  priv->dialog = gtk_dialog_new ();
+  priv->dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
   g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
                     G_CALLBACK (dialog_toplevel_focus_changed), panel);
   gtk_window_set_title (GTK_WINDOW (priv->dialog), _("Arrange Combined Displays"));
@@ -1508,7 +1508,7 @@ show_arrange_displays_dialog (GtkButton      *button,
                                 GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
   gtk_window_set_modal (GTK_WINDOW (priv->dialog), TRUE);
   gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Cancel"),
-                         GTK_RESPONSE_REJECT);
+                         GTK_RESPONSE_CANCEL);
   priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Apply"),
                                               GTK_RESPONSE_ACCEPT);
   gtk_widget_set_sensitive (priv->apply_button, FALSE);
@@ -1942,7 +1942,7 @@ show_setup_dialog (CcDisplayPanel *panel)
                                                gnome_rr_output_info_get_name (priv->current_output));
 
 
-  priv->dialog = gtk_dialog_new ();
+  priv->dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
   g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
                     G_CALLBACK (dialog_toplevel_focus_changed), panel);
   gtk_window_set_title (GTK_WINDOW (priv->dialog),
@@ -1951,7 +1951,7 @@ show_setup_dialog (CcDisplayPanel *panel)
                                 GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
   gtk_window_set_modal (GTK_WINDOW (priv->dialog), TRUE);
   gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Cancel"),
-                         GTK_RESPONSE_REJECT);
+                         GTK_RESPONSE_CANCEL);
   priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (priv->dialog),
                                               _("_Apply"), GTK_RESPONSE_ACCEPT);
   gtk_widget_set_sensitive (priv->apply_button, FALSE);
