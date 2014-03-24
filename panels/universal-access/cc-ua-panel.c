@@ -466,8 +466,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_screen_reader")), "dialog", dialog);
-  g_signal_connect_swapped (WID ("screen_reader_done"), "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -487,8 +485,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
 
   g_object_set_data (G_OBJECT (WID ("row_sound_keys")), "dialog", dialog);
-  g_signal_connect_swapped (WID ("sound_keys_done"), "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
@@ -574,8 +570,6 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 
   g_object_set_data (G_OBJECT (WID ("row_visual_alerts")), "dialog", dialog);
 
-  g_signal_connect_swapped (WID ("visual_alerts_done"), "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -703,8 +697,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   g_object_set_data (G_OBJECT (WID ("row_accessx")), "dialog", dialog);
 
-  g_signal_connect_swapped (WID ("typing_done"), "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
@@ -785,8 +777,6 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
 
   g_object_set_data (G_OBJECT (WID ("row_click_assist")), "dialog", dialog);
 
-  g_signal_connect_swapped (WID ("pointing_done"), "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }

@@ -423,13 +423,6 @@ effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv)
 }
 
 static void
-zoom_option_close_dialog_cb (GtkWidget *closer, ZoomOptionsPrivate *priv)
-{
-    if (priv->dialog != NULL)
-        gtk_widget_hide (priv->dialog);
-}
-
-static void
 zoom_options_dispose (GObject *object)
 {
   g_return_if_fail (object != NULL);
@@ -589,10 +582,6 @@ zoom_options_init (ZoomOptions *self)
   /* ... Window itself ... */
   priv->dialog = WID ("magPrefsDialog");
 
-  w = WID ("closeButton");
-  g_signal_connect (G_OBJECT (w), "clicked",
-                    G_CALLBACK (zoom_option_close_dialog_cb),
-                    priv);
   g_signal_connect (G_OBJECT (priv->dialog), "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete),
                     NULL);
