@@ -1128,7 +1128,7 @@ apologize_for_no_ibus_login (CcRegionPanel *self)
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
         dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-                                         GTK_DIALOG_MODAL,
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
                                          GTK_MESSAGE_OTHER,
                                          GTK_BUTTONS_OK,
                                          _("Sorry"));
