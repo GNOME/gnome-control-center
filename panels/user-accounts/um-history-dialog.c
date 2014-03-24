@@ -114,7 +114,7 @@ show_week_label (UmHistoryDialog *um)
                 g_free (to);
         }
 
-        gtk_label_set_label (GTK_LABEL (get_widget (um, "week-label")), label);
+        gtk_header_bar_set_subtitle (GTK_HEADER_BAR (get_widget (um, "dialog-header-bar")), label);
 
         g_free (label);
 }
@@ -364,9 +364,6 @@ um_history_dialog_new (void)
 
         um->dialog = get_widget (um, "dialog");
         g_signal_connect (um->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-        widget = get_widget (um, "close-button");
-        g_signal_connect (widget, "clicked", G_CALLBACK (close_history_dialog), um);
 
         widget = get_widget (um, "next-button");
         g_signal_connect (widget, "clicked", G_CALLBACK (show_next), um);
