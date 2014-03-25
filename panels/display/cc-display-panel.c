@@ -2174,7 +2174,6 @@ show_setup_dialog (CcDisplayPanel *panel)
   response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
   if (response == GTK_RESPONSE_ACCEPT)
     {
-      GnomeRROutputInfo **outputs;
       GtkListBoxRow *row;
       GnomeRRRotation rotation;
       gboolean active = TRUE;
@@ -2182,8 +2181,6 @@ show_setup_dialog (CcDisplayPanel *panel)
       if (g_hash_table_size (output_ids) > 1)
         {
           gint new_width, new_height;
-
-          outputs = gnome_rr_config_get_outputs (priv->current_configuration);
 
           gnome_rr_output_info_get_geometry (priv->current_output, NULL, NULL,
                                              &new_width, &new_height);
