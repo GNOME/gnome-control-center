@@ -1114,6 +1114,13 @@ update_apply_button (CcDisplayPanel *panel)
   gboolean config_equal;
   GnomeRRConfig *current_configuration;
 
+  if (!gnome_rr_config_applicable (priv->current_configuration,
+                                   priv->screen, NULL))
+    {
+      gtk_widget_set_sensitive (priv->apply_button, FALSE);
+      return;
+    }
+
   current_configuration = gnome_rr_config_new_current (priv->screen, NULL);
 
   /* this checks if the same modes will be set on the outputs */
