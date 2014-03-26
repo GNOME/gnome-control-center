@@ -91,9 +91,9 @@ um_photo_dialog_crop (UmPhotoDialog *um,
 
         dialog = gtk_dialog_new_with_buttons ("",
                                               GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
-                                              0,
+                                              GTK_DIALOG_USE_HEADER_BAR,
                                               _("_Cancel"),
-                                              GTK_RESPONSE_REJECT,
+                                              GTK_RESPONSE_CANCEL,
                                               _("Select"),
                                               GTK_RESPONSE_ACCEPT,
                                               NULL);
