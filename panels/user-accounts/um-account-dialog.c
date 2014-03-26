@@ -124,7 +124,7 @@ show_error_dialog (UmAccountDialog *self,
         GtkWidget *dialog;
 
         dialog = gtk_message_dialog_new (GTK_WINDOW (self),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_CLOSE,
                                          "%s", message);
@@ -1606,7 +1606,7 @@ um_account_dialog_class_init (UmAccountDialogClass *klass)
 UmAccountDialog *
 um_account_dialog_new (void)
 {
-        return g_object_new (UM_TYPE_ACCOUNT_DIALOG, NULL);
+        return g_object_new (UM_TYPE_ACCOUNT_DIALOG, "use-header-bar", TRUE, NULL);
 }
 
 void
