@@ -391,6 +391,7 @@ list_dir (SMBCCTX      *smb_context,
         {
           gchar *subdirname = NULL;
           gchar *subpath = NULL;
+          gchar *uri;
 
           if (dirent->smbc_type == SMBC_WORKGROUP)
             {
@@ -408,9 +409,12 @@ list_dir (SMBCCTX      *smb_context,
             {
               device = g_new0 (PpPrintDevice, 1);
 
-              device->device_uri = g_strdup_printf ("%s/%s",
-                                                    dirname,
-                                                    dirent->name);
+              uri = g_strdup_printf ("%s/%s", dirname, dirent->name);
+              device->device_uri = g_uri_escape_string (uri,
+                                                        G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
+                                                        G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS,
+                                                        FALSE);
+              g_free (uri);
 
               device->device_class = g_strdup ("network");
               device->device_info = g_strdup (dirent->comment);
