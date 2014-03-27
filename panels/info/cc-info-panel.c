@@ -823,7 +823,7 @@ set_virtualization_label (CcInfoPanel  *self,
   display_name = NULL;
   for (i = 0; i < G_N_ELEMENTS (virt_tech); i++)
     {
-      if (g_str_equal (virt_tech[i].id, virt) == 0)
+      if (g_str_equal (virt_tech[i].id, virt))
         {
           display_name = _(virt_tech[i].display);
           break;
