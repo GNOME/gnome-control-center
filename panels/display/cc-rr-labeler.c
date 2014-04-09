@@ -235,7 +235,7 @@ rounded_rectangle (cairo_t *cr,
 
 #define LABEL_WINDOW_SIZE 80
 #define LABEL_WINDOW_MARGIN 14
-#define LABEL_WINDOW_EDGE_THICKNESS 1
+#define LABEL_WINDOW_EDGE_THICKNESS 2
 #define LABEL_WINDOW_PADDING 12
 /* Look for panel-corner in:
  * http://git.gnome.org/browse/gnome-shell/tree/data/theme/gnome-shell.css
