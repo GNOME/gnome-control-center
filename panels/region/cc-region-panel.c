@@ -84,6 +84,10 @@ struct _CcRegionPanel {
         GtkRevealer     *restart_revealer;
         GtkRadioButton  *same_source;
 
+        GtkWidget *hbox_selector;
+        GtkWidget *session_language_button;
+        GtkToggleButton *login_language_button;
+
         gboolean     login;
         gboolean     login_auto_apply;
         GPermission *permission;
@@ -173,19 +177,6 @@ cc_region_panel_finalize (GObject *object)
                 gtk_widget_destroy (chooser);
 
         G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
-}
-
-static void
-cc_region_panel_constructed (GObject *object)
-{
-        CcRegionPanel *self = CC_REGION_PANEL (object);
-
-        G_OBJECT_CLASS (cc_region_panel_parent_class)->constructed (object);
-
-        if (self->permission)
-                cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                                 GTK_WIDGET (self->login_button),
-                                                 GTK_POS_RIGHT);
 }
 
 static const char *
@@ -1430,8 +1421,6 @@ localed_proxy_ready (GObject      *source,
 
         self->localed = proxy;
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->login_button), TRUE);
-
         g_signal_connect_object (self->localed, "g-properties-changed",
                                  G_CALLBACK (on_localed_properties_changed), self, G_CONNECT_SWAPPED);
         on_localed_properties_changed (self, NULL, NULL);
@@ -1442,7 +1431,7 @@ login_changed (CcRegionPanel *self)
 {
         gboolean can_acquire;
 
-        self->login = gtk_toggle_button_get_active (self->login_button);
+        self->login = gtk_toggle_button_get_active (self->login_language_button);
         gtk_widget_set_visible (GTK_WIDGET (self->login_label), self->login);
 
         can_acquire = self->permission &&
@@ -1474,7 +1463,7 @@ set_login_button_visibility (CcRegionPanel *self)
         g_object_get (self->user_manager, "has-multiple-users", &has_multiple_users, NULL);
 
         self->login_auto_apply = !has_multiple_users && g_permission_get_allowed (self->permission);
-        gtk_widget_set_visible (GTK_WIDGET (self->login_button), !self->login_auto_apply);
+        gtk_widget_set_visible (GTK_WIDGET (self->hbox_selector), !self->login_auto_apply);
 
         g_signal_handlers_disconnect_by_func (self->user_manager, set_login_button_visibility, self);
 }
@@ -1504,13 +1493,7 @@ setup_login_button (CcRegionPanel *self)
                           (GAsyncReadyCallback) localed_proxy_ready,
                           self);
 
-        self->login_button = GTK_TOGGLE_BUTTON (gtk_toggle_button_new_with_mnemonic (_("Login _Screen")));
-        gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->login_button)),
-                                     "text-button");
-        gtk_widget_set_valign (GTK_WIDGET (self->login_button), GTK_ALIGN_CENTER);
-        gtk_widget_set_visible (GTK_WIDGET (self->login_button), FALSE);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->login_button), FALSE);
-        g_signal_connect_object (self->login_button, "notify::active",
+        g_signal_connect_object (self->login_language_button, "notify::active",
                                  G_CALLBACK (login_changed), self, G_CONNECT_SWAPPED);
 
         g_object_get (self->user_manager, "is-loaded", &loaded, NULL);
@@ -1550,7 +1533,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         panel_class->get_help_uri = cc_region_panel_get_help_uri;
 
-        object_class->constructed = cc_region_panel_constructed;
         object_class->finalize = cc_region_panel_finalize;
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
@@ -1559,6 +1541,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, alt_next_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, hbox_selector);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_section_box);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, input_size_group);
@@ -1567,6 +1550,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_section_frame);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_language_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, next_source_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, no_inputs_row);
@@ -1577,6 +1561,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, same_source);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, session_language_button);
 
         gtk_widget_class_bind_template_callback (widget_class, input_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
