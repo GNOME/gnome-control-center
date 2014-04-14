@@ -72,8 +72,9 @@ GType bg_pictures_source_get_type (void) G_GNUC_CONST;
 BgPicturesSource *bg_pictures_source_new            (GtkWindow *window);
 char             *bg_pictures_source_get_cache_path (void);
 char             *bg_pictures_source_get_unique_path(const char *uri);
-gboolean          bg_pictures_source_add            (BgPicturesSource *bg_source,
-						     const char       *uri);
+gboolean          bg_pictures_source_add            (BgPicturesSource     *bg_source,
+						     const char           *uri,
+						     GtkTreeRowReference **ret_row_ref);
 gboolean          bg_pictures_source_remove         (BgPicturesSource *bg_source,
 						     const char       *uri);
 gboolean          bg_pictures_source_is_known       (BgPicturesSource *bg_source,

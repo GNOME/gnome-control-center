@@ -327,10 +327,11 @@ in_screenshot_types (const char *content_type)
 }
 
 static gboolean
-add_single_file (BgPicturesSource *bg_source,
-		 GFile            *file,
-                 const gchar      *content_type,
-                 guint64           mtime)
+add_single_file (BgPicturesSource     *bg_source,
+                 GFile                *file,
+                 const gchar          *content_type,
+                 guint64               mtime,
+                 GtkTreeRowReference **ret_row_ref)
 {
   CcBackgroundItem *item = NULL;
   CcBackgroundItemFlags flags = 0;
@@ -341,7 +342,7 @@ add_single_file (BgPicturesSource *bg_source,
   GtkListStore *store;
   GtkTreeIter iter;
   GtkTreePath *path = NULL;
-  GtkTreeRowReference *row_ref;
+  GtkTreeRowReference *row_ref = NULL;
   cairo_surface_t *surface = NULL;
   char *source_uri = NULL;
   char *uri = NULL;
@@ -479,6 +480,13 @@ add_single_file (BgPicturesSource *bg_source,
   retval = TRUE;
 
  out:
+  if (ret_row_ref)
+    {
+      if (row_ref && retval != FALSE)
+        *ret_row_ref = gtk_tree_row_reference_copy (row_ref);
+      else
+        *ret_row_ref = NULL;
+    }
   gtk_tree_path_free (path);
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
   g_clear_object (&pixbuf);
@@ -491,16 +499,17 @@ add_single_file (BgPicturesSource *bg_source,
 }
 
 static gboolean
-add_single_file_from_info (BgPicturesSource *bg_source,
-                           GFile            *file,
-                           GFileInfo        *info)
+add_single_file_from_info (BgPicturesSource     *bg_source,
+                           GFile                *file,
+                           GFileInfo            *info,
+                           GtkTreeRowReference **ret_row_ref)
 {
   const gchar *content_type;
   guint64 mtime;
 
   content_type = g_file_info_get_content_type (info);
   mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
-  return add_single_file (bg_source, file, content_type, mtime);
+  return add_single_file (bg_source, file, content_type, mtime, ret_row_ref);
 }
 
 static gboolean
@@ -520,12 +529,13 @@ add_single_file_from_media (BgPicturesSource *bg_source,
   mtime = grl_media_get_creation_date (media);
   mtime_unix = g_date_time_to_unix (mtime);
 
-  return add_single_file (bg_source, file, content_type, (guint64) mtime_unix);
+  return add_single_file (bg_source, file, content_type, (guint64) mtime_unix, NULL);
 }
 
 gboolean
-bg_pictures_source_add (BgPicturesSource *bg_source,
-			const char       *uri)
+bg_pictures_source_add (BgPicturesSource     *bg_source,
+                        const char           *uri,
+                        GtkTreeRowReference **ret_row_ref)
 {
   GFile *file;
   GFileInfo *info;
@@ -536,7 +546,7 @@ bg_pictures_source_add (BgPicturesSource *bg_source,
   if (info == NULL)
     return FALSE;
 
-  retval = add_single_file_from_info (bg_source, file, info);
+  retval = add_single_file_from_info (bg_source, file, info, ret_row_ref);
 
   return retval;
 }
@@ -631,7 +641,7 @@ file_info_async_ready (GObject      *source,
 
       file = g_file_get_child (parent, g_file_info_get_name (info));
 
-      add_single_file_from_info (bg_source, file, info);
+      add_single_file_from_info (bg_source, file, info, NULL);
     }
 
   g_list_foreach (files, (GFunc) g_object_unref, NULL);
@@ -780,7 +790,7 @@ file_info_ready (GObject      *object,
    * reduces the ref count.
    */
   g_object_ref (file);
-  add_single_file_from_info (BG_PICTURES_SOURCE (user_data), file, info);
+  add_single_file_from_info (BG_PICTURES_SOURCE (user_data), file, info, NULL);
 }
 
 static void

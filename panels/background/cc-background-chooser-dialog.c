@@ -50,10 +50,13 @@ struct _CcBackgroundChooserDialogPrivate
   GtkWidget *icon_view;
   GtkWidget *empty_pictures_box;
   GtkWidget *sw_content;
+  GtkWidget *pictures_button;
 
   BgWallpapersSource *wallpapers_source;
   BgPicturesSource *pictures_source;
   BgColorsSource *colors_source;
+
+  GtkTreeRowReference *item_to_focus;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
@@ -63,6 +66,7 @@ struct _CcBackgroundChooserDialogPrivate
 
   gulong row_inserted_id;
   gulong row_deleted_id;
+  gulong row_modified_id;
 };
 
 #define CC_CHOOSER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TYPE_BACKGROUND_CHOOSER_DIALOG, CcBackgroundChooserDialogPrivate))
@@ -118,6 +122,7 @@ cc_background_chooser_dialog_dispose (GObject *object)
       g_clear_object (&priv->copy_cancellable);
     }
 
+  g_clear_pointer (&chooser->priv->item_to_focus, gtk_tree_row_reference_free);
   g_clear_object (&priv->pictures_source);
   g_clear_object (&priv->colors_source);
   g_clear_object (&priv->wallpapers_source);
@@ -148,6 +153,38 @@ possibly_show_empty_pictures_box (GtkTreeModel              *model,
       gtk_widget_hide (chooser->priv->sw_content);
       gtk_widget_show (chooser->priv->empty_pictures_box);
     }
+}
+
+static void
+on_source_modified_cb (GtkTreeModel *tree_model,
+                       GtkTreePath  *path,
+                       GtkTreeIter  *iter,
+                       gpointer      user_data)
+{
+  GtkTreePath *to_focus_path;
+  CcBackgroundChooserDialog *chooser = user_data;
+  CcBackgroundChooserDialogPrivate *priv = chooser->priv;
+
+  if (chooser->priv->item_to_focus == NULL)
+    return;
+
+  to_focus_path = gtk_tree_row_reference_get_path (chooser->priv->item_to_focus);
+
+  if (gtk_tree_path_compare (to_focus_path, path) != 0)
+    goto out;
+
+  /* Change source */
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->pictures_button), TRUE);
+
+  /* And select the newly added item */
+  gtk_icon_view_select_path (GTK_ICON_VIEW (chooser->priv->icon_view), to_focus_path);
+  gtk_icon_view_scroll_to_path (GTK_ICON_VIEW (chooser->priv->icon_view),
+                                to_focus_path, TRUE, 1.0, 1.0);
+  g_clear_pointer (&chooser->priv->item_to_focus, gtk_tree_row_reference_free);
+
+out:
+  gtk_tree_path_free (to_focus_path);
+
 }
 
 static void
@@ -185,6 +222,10 @@ monitor_pictures_model (CcBackgroundChooserDialog *chooser)
                                                     G_CALLBACK (on_source_removed_cb),
                                                     chooser);
 
+  chooser->priv->row_modified_id = g_signal_connect (model, "row-changed",
+                                                     G_CALLBACK (on_source_modified_cb),
+                                                     chooser);
+
   possibly_show_empty_pictures_box (model, chooser);
 }
 
@@ -205,6 +246,12 @@ cancel_monitor_pictures_model (CcBackgroundChooserDialog *chooser)
     {
       g_signal_handler_disconnect (model, chooser->priv->row_deleted_id);
       chooser->priv->row_deleted_id = 0;
+    }
+
+  if (chooser->priv->row_modified_id > 0)
+    {
+      g_signal_handler_disconnect (model, chooser->priv->row_modified_id);
+      chooser->priv->row_modified_id = 0;
     }
 
   ensure_iconview_shown (chooser);
@@ -253,6 +300,48 @@ on_item_activated (GtkIconView               *icon_view,
                    CcBackgroundChooserDialog *chooser)
 {
   gtk_dialog_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
+}
+
+static void
+add_custom_wallpaper (CcBackgroundChooserDialog *chooser,
+                      const char                *uri)
+{
+  g_clear_pointer (&chooser->priv->item_to_focus, gtk_tree_row_reference_free);
+
+  monitor_pictures_model (chooser);
+  bg_pictures_source_add (chooser->priv->pictures_source, uri, &chooser->priv->item_to_focus);
+  /* and wait for the item to get added */
+}
+
+static void
+cc_background_panel_drag_uris (GtkWidget *widget,
+                               GdkDragContext *context, gint x, gint y,
+                               GtkSelectionData *data, guint info, guint time,
+                               CcBackgroundChooserDialog *chooser)
+{
+  gint i;
+  char *uri;
+  gchar **uris;
+  gboolean ret = FALSE;
+
+  uris = gtk_selection_data_get_uris (data);
+  if (!uris)
+    goto out;
+
+  for (i = 0; uris[i] != NULL; i++)
+    {
+      uri = uris[i];
+      if (!bg_pictures_source_is_known (chooser->priv->pictures_source, uri))
+        {
+          add_custom_wallpaper (chooser, uri);
+          ret = TRUE;
+        }
+    }
+
+  g_strfreev (uris);
+
+out:
+  gtk_drag_finish (context, ret, FALSE, time);
 }
 
 static void
@@ -323,6 +412,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_container_add (GTK_CONTAINER (hbox), button);
   g_signal_connect (button, "toggled", G_CALLBACK (on_view_toggled), chooser);
   g_object_set_data (G_OBJECT (button), "source", priv->pictures_source);
+  priv->pictures_button = button;
 
   button = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button1), _("Colors"));
   context = gtk_widget_get_style_context (button);
@@ -340,6 +430,12 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_widget_set_hexpand (priv->sw_content, TRUE);
   gtk_widget_set_vexpand (priv->sw_content, TRUE);
   gtk_container_add (GTK_CONTAINER (grid), priv->sw_content);
+
+  /* Add drag and drop support for bg images */
+  gtk_drag_dest_set (priv->sw_content, GTK_DEST_DEFAULT_ALL, NULL, 0, GDK_ACTION_COPY);
+  gtk_drag_dest_add_uri_targets (priv->sw_content);
+  g_signal_connect (priv->sw_content, "drag-data-received",
+                    G_CALLBACK (cc_background_panel_drag_uris), chooser);
 
   priv->empty_pictures_box = gtk_grid_new ();
   gtk_widget_set_no_show_all (priv->empty_pictures_box, TRUE);
