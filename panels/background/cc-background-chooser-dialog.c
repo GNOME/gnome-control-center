@@ -81,13 +81,20 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
   GtkWindow *parent;
 
   parent = gtk_window_get_transient_for (GTK_WINDOW (chooser));
-  if (parent != NULL)
+  g_assert (parent);
+
+  if (gtk_window_is_maximized (parent))
+    {
+      gtk_window_maximize (GTK_WINDOW (chooser));
+    }
+  else
     {
       gint width;
       gint height;
 
       gtk_window_get_size (parent, &width, &height);
       gtk_widget_set_size_request (GTK_WIDGET (chooser), (gint) (0.5 * width), (gint) (0.9 * height));
+      gtk_icon_view_set_columns (GTK_ICON_VIEW (chooser->priv->icon_view), 3);
     }
 
   GTK_WIDGET_CLASS (cc_background_chooser_dialog_parent_class)->realize (widget);
@@ -284,7 +291,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
   gtk_grid_set_column_spacing (GTK_GRID (grid), 0);
   gtk_container_add (GTK_CONTAINER (vbox), grid);
-  gtk_widget_set_size_request (grid, 860, 550);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_set_homogeneous (GTK_BOX (hbox), TRUE);
@@ -396,7 +402,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 
   priv->icon_view = gtk_icon_view_new ();
   gtk_widget_set_hexpand (priv->icon_view, TRUE);
-  gtk_icon_view_set_columns (GTK_ICON_VIEW (priv->icon_view), 3);
   gtk_container_add (GTK_CONTAINER (priv->sw_content), priv->icon_view);
   g_signal_connect (priv->icon_view, "selection-changed", G_CALLBACK (on_selection_changed), chooser);
   g_signal_connect (priv->icon_view, "item-activated", G_CALLBACK (on_item_activated), chooser);
