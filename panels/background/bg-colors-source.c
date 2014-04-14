@@ -54,6 +54,18 @@ struct {
   { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#7a634b" },
 };
 
+static char *
+get_colors_path (void)
+{
+  return g_build_filename (g_get_user_config_dir (), "gnome-control-center", "backgrounds", "colors.ini", NULL);
+}
+
+static char *
+get_colors_dir (void)
+{
+  return g_build_filename (g_get_user_config_dir (), "gnome-control-center", "backgrounds", NULL);
+}
+
 static void
 bg_colors_source_add_color (BgColorsSource               *self,
                             GnomeDesktopThumbnailFactory *thumb_factory,
@@ -123,6 +135,8 @@ bg_colors_source_constructed (GObject *object)
   GnomeDesktopThumbnailFactory *thumb_factory;
   guint i;
   GtkListStore *store;
+  GKeyFile *keyfile;
+  char *path;
 
   G_OBJECT_CLASS (bg_colors_source_parent_class)->constructed (object);
 
@@ -133,6 +147,24 @@ bg_colors_source_constructed (GObject *object)
     {
       bg_colors_source_add_color (self, thumb_factory, store, items[i].pcolor, NULL);
     }
+
+  keyfile = g_key_file_new ();
+  path = get_colors_path ();
+  if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
+    {
+      char **colors;
+
+      colors = g_key_file_get_string_list (keyfile, "Colors", "custom-colors", NULL, NULL);
+      for (i = 0; colors != NULL && colors[i] != NULL; i++)
+        {
+          bg_colors_source_add_color (self, thumb_factory, store, colors[i], NULL);
+        }
+
+      if (colors)
+        g_strfreev (colors);
+    }
+  g_key_file_unref (keyfile);
+  g_free (path);
 
   g_object_unref (thumb_factory);
 }
@@ -145,6 +177,11 @@ bg_colors_source_add (BgColorsSource       *self,
   GnomeDesktopThumbnailFactory *thumb_factory;
   GtkListStore *store;
   gchar *c;
+  char **colors;
+  gsize len;
+  GKeyFile *keyfile;
+  GError *error = NULL;
+  char *path;
 
   c = g_strdup_printf ("#%02x%02x%02x",
                        (int)(255*rgba->red),
@@ -156,8 +193,49 @@ bg_colors_source_add (BgColorsSource       *self,
 
   bg_colors_source_add_color (self, thumb_factory, store, c, ret_row_ref);
 
-  g_free (c);
   g_object_unref (thumb_factory);
+
+  /* Save to the keyfile */
+  path = get_colors_dir ();
+  g_mkdir_with_parents (path, 0700);
+  g_free (path);
+
+  path = get_colors_path ();
+  colors = NULL;
+  len = 0;
+
+  keyfile = g_key_file_new ();
+  if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
+    colors = g_key_file_get_string_list (keyfile, "Colors", "custom-colors", &len, NULL);
+
+  if (len == 0 && colors != NULL)
+    {
+      g_strfreev (colors);
+      colors = NULL;
+    }
+
+  if (colors == NULL)
+    {
+      colors = g_new0 (char *, 2);
+      colors[0] = c;
+      len = 1;
+    }
+  else
+    {
+      colors[len] = c;
+      len++;
+    }
+
+  g_key_file_set_string_list (keyfile, "Colors", "custom-colors", (const gchar * const*) colors, len);
+
+  if (!g_key_file_save_to_file (keyfile, path, &error))
+    {
+      g_warning ("Could not save custom color: %s", error->message);
+      g_error_free (error);
+    }
+
+  g_key_file_unref (keyfile);
+  g_strfreev (colors);
 
   return TRUE;
 }
