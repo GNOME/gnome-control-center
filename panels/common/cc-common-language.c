@@ -210,23 +210,10 @@ static void
 insert_language (GHashTable *ht,
                  const char *lang)
 {
-        gboolean has_translations;
         char *label_own_lang;
         char *label_current_lang;
         char *label_untranslated;
         char *key;
-
-        has_translations = gnome_language_has_translations (lang);
-        if (!has_translations) {
-                char *lang_code = g_strndup (lang, 2);
-                has_translations = gnome_language_has_translations (lang_code);
-                g_free (lang_code);
-
-                if (!has_translations)
-                        return;
-        }
-
-        g_debug ("We have translations for %s", lang);
 
         key = g_strdup (lang);
 
