@@ -382,6 +382,19 @@ get_content_loading_icon (BgSource *source)
   return surface;
 }
 
+static GFile *
+bg_pictures_source_get_cache_file (void)
+{
+  char *path;
+  GFile *file;
+
+  path = bg_pictures_source_get_cache_path ();
+  file = g_file_new_for_path (path);
+  g_free (path);
+
+  return file;
+}
+
 static gboolean
 add_single_file (BgPicturesSource     *bg_source,
                  GFile                *file,
@@ -398,8 +411,10 @@ add_single_file (BgPicturesSource     *bg_source,
   cairo_surface_t *surface = NULL;
   char *source_uri = NULL;
   char *uri = NULL;
-  gboolean is_native;
+  gboolean needs_download;
   gboolean retval = FALSE;
+  GFile *pictures_dir, *cache_dir;
+  GrlMedia *media;
 
   /* find png and jpeg files */
   if (!content_type)
@@ -410,8 +425,14 @@ add_single_file (BgPicturesSource     *bg_source,
   /* create a new CcBackgroundItem */
   uri = g_file_get_uri (file);
 
-  is_native = g_file_is_native (file);
-  if (is_native)
+  pictures_dir = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
+  cache_dir = bg_pictures_source_get_cache_file ();
+  needs_download = !g_file_has_parent (file, pictures_dir) &&
+          !g_file_has_parent (file, cache_dir);
+  g_object_unref (pictures_dir);
+  g_object_unref (cache_dir);
+
+  if (!needs_download)
     {
       source_uri = g_strdup (uri);
       flags |= CC_BACKGROUND_ITEM_HAS_URI;
@@ -429,7 +450,7 @@ add_single_file (BgPicturesSource     *bg_source,
 		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
 		"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
                 "modified", mtime,
-                "needs-download", !is_native,
+                "needs-download", needs_download,
                 "source-url", source_uri,
 		NULL);
 
@@ -449,8 +470,11 @@ add_single_file (BgPicturesSource     *bg_source,
   row_ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
   g_object_set_data_full (G_OBJECT (item), "row-ref", row_ref, (GDestroyNotify) gtk_tree_row_reference_free);
 
+
  read_file:
-  if (is_native)
+
+  media = g_object_get_data (G_OBJECT (file), "grl-media");
+  if (media == NULL)
     {
       g_object_set_data_full (G_OBJECT (file), "item", g_object_ref (item), g_object_unref);
       g_file_read_async (file, G_PRIORITY_DEFAULT,
@@ -461,22 +485,16 @@ add_single_file (BgPicturesSource     *bg_source,
     {
       GFile *native_file;
       GFile *thumbnail_file = NULL;
-      GrlMedia *media;
       gchar *native_dir;
       gchar *native_path;
+      const gchar *title;
+      const gchar *thumbnail_uri;
 
-      media = g_object_get_data (G_OBJECT (file), "grl-media");
-      if (media != NULL)
-        {
-          const gchar *title;
-          const gchar *thumbnail_uri;
+      title = grl_media_get_title (media);
+      g_object_set (G_OBJECT (item), "name", title, NULL);
 
-          title = grl_media_get_title (media);
-          g_object_set (G_OBJECT (item), "name", title, NULL);
-
-          thumbnail_uri = grl_media_get_thumbnail (media);
-          thumbnail_file = g_file_new_for_uri (thumbnail_uri);
-        }
+      thumbnail_uri = grl_media_get_thumbnail (media);
+      thumbnail_file = g_file_new_for_uri (thumbnail_uri);
 
       native_path = gnome_desktop_thumbnail_path_for_uri (source_uri, GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
       native_file = g_file_new_for_path (native_path);
@@ -484,23 +502,20 @@ add_single_file (BgPicturesSource     *bg_source,
       native_dir = g_path_get_dirname (native_path);
       g_mkdir_with_parents (native_dir, USER_DIR_MODE);
 
-      if (thumbnail_file != NULL)
-        {
-          g_object_set_data_full (G_OBJECT (thumbnail_file), "item", g_object_ref (item), g_object_unref);
-          g_object_set_data_full (G_OBJECT (thumbnail_file),
-                                  "native-file",
-                                  g_object_ref (native_file),
-                                  g_object_unref);
-          g_file_copy_async (thumbnail_file,
-                             native_file,
-                             G_FILE_COPY_ALL_METADATA,
-                             G_PRIORITY_DEFAULT,
-                             bg_source->priv->cancellable,
-                             NULL,
-                             NULL,
-                             picture_copied_for_read,
-                             bg_source);
-        }
+      g_object_set_data_full (G_OBJECT (thumbnail_file), "item", g_object_ref (item), g_object_unref);
+      g_object_set_data_full (G_OBJECT (thumbnail_file),
+                              "native-file",
+                              g_object_ref (native_file),
+                              g_object_unref);
+      g_file_copy_async (thumbnail_file,
+                         native_file,
+                         G_FILE_COPY_ALL_METADATA,
+                         G_PRIORITY_DEFAULT,
+                         bg_source->priv->cancellable,
+                         NULL,
+                         NULL,
+                         picture_copied_for_read,
+                         bg_source);
 
       g_clear_object (&thumbnail_file);
       g_object_unref (native_file);
