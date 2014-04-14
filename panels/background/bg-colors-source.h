@@ -66,6 +66,10 @@ GType bg_colors_source_get_type (void) G_GNUC_CONST;
 
 BgColorsSource *bg_colors_source_new (GtkWindow *window);
 
+gboolean bg_colors_source_add        (BgColorsSource       *self,
+                                      GdkRGBA              *rgba,
+                                      GtkTreeRowReference **ret_row_ref);
+
 G_END_DECLS
 
 #endif /* _BG_COLORS_SOURCE_H */

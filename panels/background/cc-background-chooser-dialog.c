@@ -51,6 +51,7 @@ struct _CcBackgroundChooserDialogPrivate
   GtkWidget *empty_pictures_box;
   GtkWidget *sw_content;
   GtkWidget *pictures_button;
+  GtkWidget *colors_button;
 
   BgWallpapersSource *wallpapers_source;
   BgPicturesSource *pictures_source;
@@ -74,6 +75,17 @@ struct _CcBackgroundChooserDialogPrivate
 enum
 {
   PROP_0,
+};
+
+enum
+{
+  URI_LIST,
+  COLOR
+};
+
+static const GtkTargetEntry color_targets[] =
+{
+  { "application/x-color", 0, COLOR }
 };
 
 G_DEFINE_TYPE (CcBackgroundChooserDialog, cc_background_chooser_dialog, GTK_TYPE_DIALOG)
@@ -313,16 +325,66 @@ add_custom_wallpaper (CcBackgroundChooserDialog *chooser,
   /* and wait for the item to get added */
 }
 
+static gboolean
+cc_background_panel_drag_color (CcBackgroundChooserDialog *chooser,
+                                GtkSelectionData          *data)
+{
+  gint length;
+  guint16 *dropped;
+  GdkRGBA rgba;
+  GtkTreeRowReference *row_ref;
+  GtkTreePath *to_focus_path;
+
+  length = gtk_selection_data_get_length (data);
+
+  if (length < 0)
+    return FALSE;
+
+  if (length != 8)
+    {
+      g_warning ("%s: Received invalid color data", G_STRFUNC);
+      return FALSE;
+    }
+
+  dropped = (guint16 *) gtk_selection_data_get_data (data);
+  rgba.red   = dropped[0] / 65535.;
+  rgba.green = dropped[1] / 65535.;
+  rgba.blue  = dropped[2] / 65535.;
+  rgba.alpha = dropped[3] / 65535.;
+
+  if (bg_colors_source_add (chooser->priv->colors_source, &rgba, &row_ref) == FALSE)
+    return FALSE;
+
+  /* Change source */
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (chooser->priv->colors_button), TRUE);
+
+  /* And select the newly added item */
+  to_focus_path = gtk_tree_row_reference_get_path (row_ref);
+  gtk_icon_view_select_path (GTK_ICON_VIEW (chooser->priv->icon_view), to_focus_path);
+  gtk_icon_view_scroll_to_path (GTK_ICON_VIEW (chooser->priv->icon_view),
+                                to_focus_path, TRUE, 1.0, 1.0);
+  gtk_tree_row_reference_free (row_ref);
+  gtk_tree_path_free (to_focus_path);
+
+  return TRUE;
+}
+
 static void
-cc_background_panel_drag_uris (GtkWidget *widget,
-                               GdkDragContext *context, gint x, gint y,
-                               GtkSelectionData *data, guint info, guint time,
-                               CcBackgroundChooserDialog *chooser)
+cc_background_panel_drag_items (GtkWidget *widget,
+                                GdkDragContext *context, gint x, gint y,
+                                GtkSelectionData *data, guint info, guint time,
+                                CcBackgroundChooserDialog *chooser)
 {
   gint i;
   char *uri;
   gchar **uris;
   gboolean ret = FALSE;
+
+  if (info == COLOR)
+    {
+      ret = cc_background_panel_drag_color (chooser, data);
+      goto out;
+    }
 
   uris = gtk_selection_data_get_uris (data);
   if (!uris)
@@ -363,6 +425,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   const gchar *pictures_dir;
   gchar *pictures_dir_basename;
   gchar *pictures_dir_uri;
+  GtkTargetList *target_list;
 
   chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
   priv = chooser->priv;
@@ -421,6 +484,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_container_add (GTK_CONTAINER (hbox), button);
   g_signal_connect (button, "toggled", G_CALLBACK (on_view_toggled), chooser);
   g_object_set_data (G_OBJECT (button), "source", priv->colors_source);
+  priv->colors_button = button;
 
   gtk_widget_show_all (hbox);
 
@@ -433,9 +497,13 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
 
   /* Add drag and drop support for bg images */
   gtk_drag_dest_set (priv->sw_content, GTK_DEST_DEFAULT_ALL, NULL, 0, GDK_ACTION_COPY);
-  gtk_drag_dest_add_uri_targets (priv->sw_content);
+  target_list = gtk_target_list_new (NULL, 0);
+  gtk_target_list_add_uri_targets (target_list, URI_LIST);
+  gtk_target_list_add_table (target_list, color_targets, 1);
+  gtk_drag_dest_set_target_list (priv->sw_content, target_list);
+  gtk_target_list_unref (target_list);
   g_signal_connect (priv->sw_content, "drag-data-received",
-                    G_CALLBACK (cc_background_panel_drag_uris), chooser);
+                    G_CALLBACK (cc_background_panel_drag_items), chooser);
 
   priv->empty_pictures_box = gtk_grid_new ();
   gtk_widget_set_no_show_all (priv->empty_pictures_box, TRUE);

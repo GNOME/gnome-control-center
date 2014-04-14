@@ -55,67 +55,111 @@ struct {
 };
 
 static void
+bg_colors_source_add_color (BgColorsSource               *self,
+                            GnomeDesktopThumbnailFactory *thumb_factory,
+                            GtkListStore                 *store,
+                            const char                   *color,
+                            GtkTreeRowReference         **ret_row_ref)
+{
+  CcBackgroundItemFlags flags;
+  CcBackgroundItem *item;
+  GIcon *pixbuf;
+  cairo_surface_t *surface;
+  int scale_factor;
+  int thumbnail_height, thumbnail_width;
+  GtkTreeIter iter;
+
+  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (self));
+  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (self));
+
+  item = cc_background_item_new (NULL);
+  flags = CC_BACKGROUND_ITEM_HAS_PCOLOR |
+          CC_BACKGROUND_ITEM_HAS_SCOLOR |
+          CC_BACKGROUND_ITEM_HAS_SHADING |
+          CC_BACKGROUND_ITEM_HAS_PLACEMENT |
+          CC_BACKGROUND_ITEM_HAS_URI;
+  /* It does have a URI, it's "none" */
+
+  g_object_set (G_OBJECT (item),
+                "uri", "file:///" DATADIR "/gnome-control-center/pixmaps/noise-texture-light.png",
+                "primary-color", color,
+                "secondary-color", color,
+                "shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
+                "placement", G_DESKTOP_BACKGROUND_STYLE_WALLPAPER,
+                "flags", flags,
+                NULL);
+  cc_background_item_load (item, NULL);
+
+  /* insert the item into the liststore */
+  scale_factor = bg_source_get_scale_factor (BG_SOURCE (self));
+  pixbuf = cc_background_item_get_thumbnail (item,
+                                             thumb_factory,
+                                             thumbnail_width, thumbnail_height,
+                                             scale_factor);
+  surface = gdk_cairo_surface_create_from_pixbuf (GDK_PIXBUF (pixbuf), scale_factor, NULL);
+  gtk_list_store_insert_with_values (store, &iter, 0,
+                                     0, surface,
+                                     1, item,
+                                     -1);
+
+  if (ret_row_ref)
+    {
+      GtkTreePath *path;
+
+      path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
+      *ret_row_ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
+      gtk_tree_path_free (path);
+    }
+
+  cairo_surface_destroy (surface);
+  g_object_unref (pixbuf);
+  g_object_unref (item);
+}
+
+static void
 bg_colors_source_constructed (GObject *object)
 {
   BgColorsSource *self = BG_COLORS_SOURCE (object);
   GnomeDesktopThumbnailFactory *thumb_factory;
   guint i;
   GtkListStore *store;
-  gint thumbnail_height;
-  gint thumbnail_width;
 
   G_OBJECT_CLASS (bg_colors_source_parent_class)->constructed (object);
 
   store = bg_source_get_liststore (BG_SOURCE (self));
-
   thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (self));
-  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (self));
 
   for (i = 0; i < G_N_ELEMENTS (items); i++)
     {
-      CcBackgroundItemFlags flags;
-      CcBackgroundItem *item;
-      GIcon *pixbuf;
-      cairo_surface_t *surface;
-      int scale_factor;
-
-      item = cc_background_item_new (NULL);
-      flags = CC_BACKGROUND_ITEM_HAS_PCOLOR |
-	      CC_BACKGROUND_ITEM_HAS_SCOLOR |
-	      CC_BACKGROUND_ITEM_HAS_SHADING |
-	      CC_BACKGROUND_ITEM_HAS_PLACEMENT |
-	      CC_BACKGROUND_ITEM_HAS_URI;
-      /* It does have a URI, it's "none" */
-
-      g_object_set (G_OBJECT (item),
-                    "uri", "file:///" DATADIR "/gnome-control-center/pixmaps/noise-texture-light.png",
-		    "primary-color", items[i].pcolor,
-		    "secondary-color", items[i].pcolor,
-		    "shading", items[i].type,
-		    "placement", G_DESKTOP_BACKGROUND_STYLE_WALLPAPER,
-		    "flags", flags,
-		    NULL);
-      cc_background_item_load (item, NULL);
-
-      /* insert the item into the liststore */
-      scale_factor = bg_source_get_scale_factor (BG_SOURCE (self));
-      pixbuf = cc_background_item_get_thumbnail (item,
-						 thumb_factory,
-						 thumbnail_width, thumbnail_height,
-						 scale_factor);
-      surface = gdk_cairo_surface_create_from_pixbuf (GDK_PIXBUF (pixbuf), scale_factor, NULL);
-      gtk_list_store_insert_with_values (store, NULL, 0,
-                                         0, surface,
-                                         1, item,
-                                         -1);
-
-      cairo_surface_destroy (surface);
-      g_object_unref (pixbuf);
-      g_object_unref (item);
+      bg_colors_source_add_color (self, thumb_factory, store, items[i].pcolor, NULL);
     }
 
   g_object_unref (thumb_factory);
+}
+
+gboolean
+bg_colors_source_add (BgColorsSource       *self,
+                      GdkRGBA              *rgba,
+                      GtkTreeRowReference **ret_row_ref)
+{
+  GnomeDesktopThumbnailFactory *thumb_factory;
+  GtkListStore *store;
+  gchar *c;
+
+  c = g_strdup_printf ("#%02x%02x%02x",
+                       (int)(255*rgba->red),
+                       (int)(255*rgba->green),
+                       (int)(255*rgba->blue));
+
+  thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
+  store = bg_source_get_liststore (BG_SOURCE (self));
+
+  bg_colors_source_add_color (self, thumb_factory, store, c, ret_row_ref);
+
+  g_free (c);
+  g_object_unref (thumb_factory);
+
+  return TRUE;
 }
 
 static void
