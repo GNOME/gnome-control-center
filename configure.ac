@@ -297,11 +297,9 @@ case $host_os in
                         xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
                         gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                         clutter-gtk-1.0
-                        clutter-1.0 >= $CLUTTER_REQUIRED_VERSION, [have_wacom=yes], [have_wacom=no])
-      if test x${have_wacom} = xyes; then
-        AC_DEFINE(BUILD_WACOM, 1, [Define to 1 to build the Wacom panel])
-        AC_DEFINE(HAVE_WACOM, 1, [Define to 1 is Wacom is supportted])
-      fi
+                        clutter-1.0 >= $CLUTTER_REQUIRED_VERSION)
+      AC_DEFINE(BUILD_WACOM, 1, [Define to 1 to build the Wacom panel])
+      AC_DEFINE(HAVE_WACOM, 1, [Define to 1 is Wacom is supportted])
     fi
     ;;
   *)
