@@ -34,6 +34,7 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
+#include <gdk/gdkwayland.h>
 #include <gdk/gdkx.h>
 #include <GL/gl.h>
 #include <GL/glx.h>
@@ -426,11 +427,32 @@ static GraphicsData *
 get_graphics_data (void)
 {
   GraphicsData *result;
+  GdkDisplay *display;
 
   result = g_slice_new0 (GraphicsData);
 
-  result->glx_renderer = get_graphics_data_glx_renderer ();
-  result->xorg_vesa_hardware = get_graphics_data_xorg_vesa_hardware ();
+  display = gdk_display_get_default ();
+
+#ifdef GDK_WINDOWING_X11
+  if (GDK_IS_X11_DISPLAY (display))
+    {
+      result->glx_renderer = get_graphics_data_glx_renderer ();
+      result->xorg_vesa_hardware = get_graphics_data_xorg_vesa_hardware ();
+    }
+  else
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  if (GDK_IS_WAYLAND_DISPLAY (display))
+    {
+      result->glx_renderer = _("Wayland");
+      result->xorg_vesa_hardware = NULL;
+    }
+  else
+#endif
+    {
+      result->glx_renderer = NULL;
+      result->xorg_vesa_hardware = NULL;
+    }
 
   if (result->xorg_vesa_hardware != NULL)
     result->hardware_string = result->xorg_vesa_hardware;
