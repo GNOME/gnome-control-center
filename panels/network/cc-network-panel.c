@@ -292,6 +292,7 @@ sync_airplane_mode_switch (CcNetworkPanel *panel)
 {
         GVariant *result;
         gboolean enabled;
+        gboolean hw_enabled;
 
         result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "HasAirplaneMode");
         enabled = g_variant_get_boolean (result);
@@ -302,6 +303,12 @@ sync_airplane_mode_switch (CcNetworkPanel *panel)
 
         result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "AirplaneMode");
         enabled = g_variant_get_boolean (result);
+
+        result = g_dbus_proxy_get_cached_property (panel->priv->rfkill_proxy, "HardwareAirplaneMode");
+        hw_enabled = !!g_variant_get_boolean (result);
+
+	enabled |= hw_enabled;
+
 	if (enabled != gtk_switch_get_active (panel->priv->rfkill_switch)) {
 		g_signal_handlers_block_by_func (panel->priv->rfkill_switch,
 						 cc_network_panel_notify_enable_active_cb,
@@ -311,6 +318,8 @@ sync_airplane_mode_switch (CcNetworkPanel *panel)
 						 cc_network_panel_notify_enable_active_cb,
 						 panel);
 	}
+
+	gtk_widget_set_sensitive (GTK_WIDGET (panel->priv->rfkill_switch), !hw_enabled);
 }
 
 static void
