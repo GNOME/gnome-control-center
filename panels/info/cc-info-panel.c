@@ -65,10 +65,9 @@ CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
 
 typedef struct {
-  /* Will be one of the other two below, or "Unknown" */ 
+  /* Will be the string below, or "Unknown" */
   const char *hardware_string;
 
-  char *xorg_vesa_hardware;
   char *glx_renderer;
 } GraphicsData;
 
@@ -285,7 +284,6 @@ prettify_info (const char *info)
 static void
 graphics_data_free (GraphicsData *gdata)
 {
-  g_free (gdata->xorg_vesa_hardware);
   g_free (gdata->glx_renderer);
   g_slice_free (GraphicsData, gdata);
 }
@@ -355,74 +353,6 @@ get_graphics_data_glx_renderer ()
 
   return renderer;
 }
-
-static char *
-get_graphics_data_xorg_vesa_hardware (void)
-{
-  char *display_num;
-  char *log_path;
-  char *log_contents;
-  gsize log_len;
-  GError *error = NULL;
-  GRegex *re;
-  GMatchInfo *match;
-  char *result = NULL;
-
-  {
-    const char *display;
-
-    display = g_getenv ("DISPLAY");
-    if (!display)
-      return NULL;
-
-    re = g_regex_new ("^:([0-9]+)", 0, 0, NULL);
-    g_assert (re != NULL);
-
-    g_regex_match (re, display, 0, &match);
-
-    if (!g_match_info_matches (match))
-      {
-        g_regex_unref (re);
-        g_match_info_free (match);
-        return NULL;
-      }
-
-    display_num = g_match_info_fetch (match, 1);
-
-    g_regex_unref (re);
-    re = NULL;
-    g_match_info_free (match);
-    match = NULL;
-  }
-
-  log_path = g_strdup_printf ("/var/log/Xorg.%s.log", display_num);
-  g_free (display_num);
-  log_contents = NULL;
-  g_file_get_contents (log_path, &log_contents, &log_len, &error);
-  g_free (log_path);
-  if (!log_contents)
-    return NULL;
-
-  re = g_regex_new ("VESA VBE OEM Product: (.*)$", G_REGEX_MULTILINE, 0, NULL);
-  g_assert (re != NULL);
-
-  g_regex_match (re, log_contents, 0, &match);
-  if (g_match_info_matches (match))
-    {
-      char *tmp;
-      char *pretty_tmp;
-      tmp = g_match_info_fetch (match, 1);
-      pretty_tmp = prettify_info (tmp);
-      g_free (tmp);
-      result = g_strdup_printf ("VESA: %s", pretty_tmp);
-      g_free (pretty_tmp);
-    }
-  g_free (log_contents);
-  g_match_info_free (match);
-  g_regex_unref (re);
-
-  return result;
-}
 #endif
 
 static GraphicsData *
@@ -439,28 +369,15 @@ get_graphics_data (void)
   if (GDK_IS_X11_DISPLAY (display))
     {
       result->glx_renderer = get_graphics_data_glx_renderer ();
-      result->xorg_vesa_hardware = get_graphics_data_xorg_vesa_hardware ();
+      result->hardware_string = result->glx_renderer;
     }
   else
 #endif
 #ifdef GDK_WINDOWING_WAYLAND
   if (GDK_IS_WAYLAND_DISPLAY (display))
-    {
-      result->glx_renderer = _("Wayland");
-      result->xorg_vesa_hardware = NULL;
-    }
+    result->hardware_string = _("Wayland");
   else
 #endif
-    {
-      result->glx_renderer = NULL;
-      result->xorg_vesa_hardware = NULL;
-    }
-
-  if (result->xorg_vesa_hardware != NULL)
-    result->hardware_string = result->xorg_vesa_hardware;
-  else if (result->glx_renderer != NULL)
-    result->hardware_string = result->glx_renderer;
-  else
     result->hardware_string = _("Unknown");
 
   return result;
