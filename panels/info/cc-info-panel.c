@@ -290,6 +290,7 @@ graphics_data_free (GraphicsData *gdata)
   g_slice_free (GraphicsData, gdata);
 }
 
+#ifdef GDK_WINDOWING_X11
 static char *
 get_graphics_data_glx_renderer ()
 {
@@ -422,6 +423,7 @@ get_graphics_data_xorg_vesa_hardware (void)
 
   return result;
 }
+#endif
 
 static GraphicsData *
 get_graphics_data (void)
