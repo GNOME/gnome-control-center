@@ -27,6 +27,10 @@
 #include "cc-keyboard-option.h"
 #include "wm-common.h"
 
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+
 #define BINDINGS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys"
 #define CUSTOM_KEYS_BASENAME "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 #define CUSTOM_SHORTCUTS_ID "custom"
@@ -600,6 +604,7 @@ reload_sections (CcPanel *panel)
 {
   GtkBuilder *builder;
   gchar **wm_keybindings;
+  gchar *default_wm_keybindings[] = { "Mutter", "GNOME Shell", NULL };
   GDir *dir;
   GtkTreeModel *sort_model;
   GtkTreeModel *section_model;
@@ -646,7 +651,12 @@ reload_sections (CcPanel *panel)
                                             (GDestroyNotify) free_key_array);
 
   /* Load WM keybindings */
-  wm_keybindings = wm_common_get_current_keybindings ();
+#ifdef GDK_WINDOWING_X11
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    wm_keybindings = wm_common_get_current_keybindings ();
+#endif
+  else
+    wm_keybindings = g_strdupv (default_wm_keybindings);
 
   loaded_files = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
@@ -1842,8 +1852,11 @@ void
 keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
 {
   g_object_set_data (G_OBJECT (panel), "builder", builder);
-  wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
-                                            panel);
+#ifdef GDK_WINDOWING_X11
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
+                                              panel);
+#endif
   pictures_regex = g_regex_new ("\\$PICTURES", 0, 0, NULL);
   setup_dialog (panel, builder);
   reload_sections (panel);
