@@ -45,6 +45,7 @@ struct _CcColorPanelPrivate
 {
   CdClient      *client;
   CdDevice      *current_device;
+  GPtrArray     *devices;
   GPtrArray     *sensors;
   GCancellable  *cancellable;
   GDBusProxy    *proxy;
@@ -1807,6 +1808,7 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
   gcm_prefs_add_device_profiles (prefs, device);
 
   /* watch for changes */
+  g_ptr_array_add (priv->devices, g_object_ref (device));
   g_signal_connect (device, "changed",
                     G_CALLBACK (gcm_prefs_device_changed_cb), prefs);
   gtk_list_box_invalidate_sort (priv->list_box);
@@ -1839,6 +1841,7 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *device)
   g_signal_handlers_disconnect_by_func (device,
                                         G_CALLBACK (gcm_prefs_device_changed_cb),
                                         prefs);
+  g_ptr_array_remove (priv->devices, device);
 }
 
 static void
@@ -2100,6 +2103,8 @@ static void
 cc_color_panel_dispose (GObject *object)
 {
   CcColorPanelPrivate *priv = CC_COLOR_PANEL (object)->priv;
+  CdDevice *device;
+  guint i;
 
   /* stop the EggListView from firing when it gets disposed */
   if (priv->list_box_selected_id != 0)
@@ -2107,6 +2112,20 @@ cc_color_panel_dispose (GObject *object)
       g_signal_handler_disconnect (priv->list_box,
                                    priv->list_box_selected_id);
       priv->list_box_selected_id = 0;
+    }
+
+  /* stop the devices from emitting after the ListBox has been disposed */
+  if (priv->devices != NULL)
+    {
+      for (i = 0; i < priv->devices->len; i++)
+        {
+          device = g_ptr_array_index (priv->devices, i);
+          g_signal_handlers_disconnect_by_func (device,
+                                                G_CALLBACK (gcm_prefs_device_changed_cb),
+                                                CC_COLOR_PANEL (object));
+        }
+      g_ptr_array_unref (priv->devices);
+      priv->devices = NULL;
     }
 
   if (priv->cancellable != NULL)
@@ -2252,6 +2271,7 @@ cc_color_panel_init (CcColorPanel *prefs)
     }
 
   priv->cancellable = g_cancellable_new ();
+  priv->devices = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
   /* can do native display calibration using colord-session */
   priv->calibrate = cc_color_calibrate_new ();
