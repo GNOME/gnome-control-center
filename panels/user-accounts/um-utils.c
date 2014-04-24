@@ -564,21 +564,21 @@ is_valid_username (const gchar *username, gchar **tip)
 
         if (!empty && (in_use || too_long || !valid)) {
                 if (in_use) {
-                        *tip = g_strdup_printf (_("A user with the username '%s' already exists"),
+                        *tip = g_strdup_printf (_("A user with the username '%s' already exists."),
                                                username);
                 }
                 else if (too_long) {
-                        *tip = g_strdup_printf (_("The username is too long"));
+                        *tip = g_strdup_printf (_("The username is too long."));
                 }
                 else if (username[0] == '-') {
-                        *tip = g_strdup (_("The username cannot start with a '-'"));
+                        *tip = g_strdup (_("The username cannot start with a '-'."));
                 }
                 else {
-                        *tip = g_strdup (_("The username should only consist of lower and upper case letters from a-z, digits and any of characters '.', '-' and '_'"));
+                        *tip = g_strdup (_("The username should only consist of lower and upper case letters from a-z, digits and any of characters '.', '-' and '_'."));
                 }
         }
         else {
-                *tip = NULL;
+                *tip = g_strdup (_("This will be used to name your home folder and can't be changed."));
         }
 
         return valid;

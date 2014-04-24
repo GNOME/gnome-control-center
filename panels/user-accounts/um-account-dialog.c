@@ -301,21 +301,14 @@ local_validate (UmAccountDialog *self)
         const gchar *password;
         const gchar *verify;
         gchar *tip;
-        gchar *hint;
         gint strength;
 
         name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->local_username));
         valid_login = is_valid_username (name, &tip);
 
         entry = gtk_bin_get_child (GTK_BIN (self->local_username));
-        if (tip) {
-                hint = g_strdup_printf ("%s.", tip);
-                g_free (tip);
-        } else {
-                hint = g_strdup (_("This will be used to name your home folder and can't be changed."));
-        }
-        gtk_label_set_label (GTK_LABEL (self->local_username_hint), hint);
-        g_free (hint);
+        gtk_label_set_label (GTK_LABEL (self->local_username_hint), tip);
+        g_free (tip);
 
         if (valid_login) {
                 set_entry_validation_checkmark (GTK_ENTRY (entry));
