@@ -34,10 +34,14 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
+#ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/gdkwayland.h>
+#endif
+#ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #include <GL/gl.h>
 #include <GL/glx.h>
+#endif
 
 #include "gsd-disk-space-helper.h"
 
