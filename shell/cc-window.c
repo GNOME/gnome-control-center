@@ -621,6 +621,8 @@ search_entry_changed_cb (GtkEntry *entry,
   g_strfreev (priv->filter_terms);
   priv->filter_terms = g_strsplit (priv->filter_string, " ", -1);
 
+  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (priv->store), priv->filter_terms);
+
   if (!g_strcmp0 (priv->filter_string, ""))
     {
       shell_show_overview_page (center);

@@ -113,6 +113,8 @@ handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
   casefolded_terms = get_casefolded_terms (terms);
   results = g_ptr_array_new ();
 
+  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (model), casefolded_terms);
+
   ok = gtk_tree_model_get_iter_first (model, &iter);
   while (ok)
     {
@@ -153,6 +155,8 @@ handle_get_subsearch_result_set (CcShellSearchProvider2  *skeleton,
 
   casefolded_terms = get_casefolded_terms (terms);
   results = g_ptr_array_new ();
+
+  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (model), casefolded_terms);
 
   for (i = 0; previous_results[i]; i++)
     {

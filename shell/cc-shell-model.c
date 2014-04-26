@@ -30,12 +30,225 @@
 #define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
 #define GNOME_SETTINGS_PANEL_ID_KEYWORDS "Keywords"
 
+struct _CcShellModelPrivate
+{
+  gchar **sort_terms;
+};
 
-G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
+G_DEFINE_TYPE_WITH_PRIVATE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
+
+static gint
+sort_by_name (GtkTreeModel *model,
+              GtkTreeIter  *a,
+              GtkTreeIter  *b)
+{
+  gchar *a_name = NULL;
+  gchar *b_name = NULL;
+  gint rval = 0;
+
+  gtk_tree_model_get (model, a, COL_CASEFOLDED_NAME, &a_name, -1);
+  gtk_tree_model_get (model, b, COL_CASEFOLDED_NAME, &b_name, -1);
+
+  rval = g_strcmp0 (a_name, b_name);
+
+  g_free (a_name);
+  g_free (b_name);
+
+  return rval;
+}
+
+static gint
+sort_by_name_with_terms (GtkTreeModel  *model,
+                         GtkTreeIter   *a,
+                         GtkTreeIter   *b,
+                         gchar        **terms)
+{
+  gboolean a_match, b_match;
+  gchar *a_name = NULL;
+  gchar *b_name = NULL;
+  gint rval = 0;
+  gint i;
+
+  gtk_tree_model_get (model, a, COL_CASEFOLDED_NAME, &a_name, -1);
+  gtk_tree_model_get (model, b, COL_CASEFOLDED_NAME, &b_name, -1);
+
+  for (i = 0; terms[i]; ++i)
+    {
+      a_match = strstr (a_name, terms[i]) != NULL;
+      b_match = strstr (b_name, terms[i]) != NULL;
+
+      if (a_match && !b_match)
+        {
+          rval = -1;
+          break;
+        }
+      else if (!a_match && b_match)
+        {
+          rval = 1;
+          break;
+        }
+    }
+
+  g_free (a_name);
+  g_free (b_name);
+
+  return rval;
+}
+
+static gint
+count_matches (gchar **keywords,
+               gchar **terms)
+{
+  gint i, j, c;
+
+  if (!keywords || !terms)
+    return 0;
+
+  c = 0;
+
+  for (i = 0; terms[i]; ++i)
+    for (j = 0; keywords[j]; ++j)
+      if (strstr (keywords[j], terms[i]))
+        c += 1;
+
+  return c;
+}
+
+static gint
+sort_by_keywords_with_terms (GtkTreeModel  *model,
+                             GtkTreeIter   *a,
+                             GtkTreeIter   *b,
+                             gchar        **terms)
+{
+  gint a_matches, b_matches;
+  gchar **a_keywords = NULL;
+  gchar **b_keywords = NULL;
+  gint rval = 0;
+
+  gtk_tree_model_get (model, a, COL_KEYWORDS, &a_keywords, -1);
+  gtk_tree_model_get (model, b, COL_KEYWORDS, &b_keywords, -1);
+
+  a_matches = count_matches (a_keywords, terms);
+  b_matches = count_matches (b_keywords, terms);
+
+  if (a_matches > b_matches)
+    rval = -1;
+  else if (a_matches < b_matches)
+    rval = 1;
+
+  g_strfreev (a_keywords);
+  g_strfreev (b_keywords);
+
+  return rval;
+}
+
+static gint
+sort_by_description_with_terms (GtkTreeModel  *model,
+                                GtkTreeIter   *a,
+                                GtkTreeIter   *b,
+                                gchar        **terms)
+{
+  gint a_matches, b_matches;
+  gchar *a_description = NULL;
+  gchar *b_description = NULL;
+  gchar **a_description_split = NULL;
+  gchar **b_description_split = NULL;
+  gint rval = 0;
+
+  gtk_tree_model_get (model, a, COL_DESCRIPTION, &a_description, -1);
+  gtk_tree_model_get (model, b, COL_DESCRIPTION, &b_description, -1);
+
+  if (a_description && !b_description)
+    {
+      rval = -1;
+      goto out;
+    }
+  else if (!a_description && b_description)
+    {
+      rval = 1;
+      goto out;
+    }
+  else if (!a_description && !b_description)
+    {
+      rval = 0;
+      goto out;
+    }
+
+  a_description_split = g_strsplit (a_description, " ", -1);
+  b_description_split = g_strsplit (b_description, " ", -1);
+
+  a_matches = count_matches (a_description_split, terms);
+  b_matches = count_matches (b_description_split, terms);
+
+  if (a_matches > b_matches)
+    rval = -1;
+  else if (a_matches < b_matches)
+    rval = 1;
+
+ out:
+  g_free (a_description);
+  g_free (b_description);
+  g_strfreev (a_description_split);
+  g_strfreev (b_description_split);
+
+  return rval;
+}
+
+static gint
+sort_with_terms (GtkTreeModel  *model,
+                 GtkTreeIter   *a,
+                 GtkTreeIter   *b,
+                 gchar        **terms)
+{
+  gint rval;
+
+  rval = sort_by_name_with_terms (model, a, b, terms);
+  if (rval)
+    return rval;
+
+  rval = sort_by_keywords_with_terms (model, a, b, terms);
+  if (rval)
+    return rval;
+
+  rval = sort_by_description_with_terms (model, a, b, terms);
+  if (rval)
+    return rval;
+
+  return sort_by_name (model, a, b);
+}
+
+static gint
+cc_shell_model_sort_func (GtkTreeModel *model,
+                          GtkTreeIter  *a,
+                          GtkTreeIter  *b,
+                          gpointer      data)
+{
+  CcShellModel *self = data;
+  CcShellModelPrivate *priv = self->priv;
+
+  if (!priv->sort_terms || !priv->sort_terms[0])
+    return sort_by_name (model, a, b);
+  else
+    return sort_with_terms (model, a, b, priv->sort_terms);
+}
+
+static void
+cc_shell_model_finalize (GObject *object)
+{
+  CcShellModelPrivate *priv = CC_SHELL_MODEL (object)->priv;;
+
+  g_strfreev (priv->sort_terms);
+
+  G_OBJECT_CLASS (cc_shell_model_parent_class)->finalize (object);
+}
 
 static void
 cc_shell_model_class_init (CcShellModelClass *klass)
 {
+  GObjectClass *gobject_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->finalize = cc_shell_model_finalize;
 }
 
 static void
@@ -44,10 +257,16 @@ cc_shell_model_init (CcShellModel *self)
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING,
                    G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
 
+  self->priv = cc_shell_model_get_instance_private (self);
+
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
 
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self), COL_NAME,
+  gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (self),
+                                           cc_shell_model_sort_func,
+                                           self, NULL);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self),
+                                        GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
                                         GTK_SORT_ASCENDING);
 }
 
@@ -141,4 +360,19 @@ cc_shell_model_iter_matches_search (CcShellModel *model,
   g_strfreev (keywords);
 
   return result;
+}
+
+void
+cc_shell_model_set_sort_terms (CcShellModel  *self,
+                               gchar        **terms)
+{
+  CcShellModelPrivate *priv = self->priv;
+
+  g_strfreev (priv->sort_terms);
+  priv->sort_terms = g_strdupv (terms);
+
+  /* trigger a re-sort */
+  gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (self),
+                                           cc_shell_model_sort_func,
+                                           self, NULL);
 }

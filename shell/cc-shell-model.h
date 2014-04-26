@@ -50,6 +50,7 @@ G_BEGIN_DECLS
 
 typedef struct _CcShellModel CcShellModel;
 typedef struct _CcShellModelClass CcShellModelClass;
+typedef struct _CcShellModelPrivate CcShellModelPrivate;
 
 typedef enum {
   CC_CATEGORY_PERSONAL,
@@ -76,6 +77,8 @@ enum
 struct _CcShellModel
 {
   GtkListStore parent;
+
+  CcShellModelPrivate *priv;
 };
 
 struct _CcShellModelClass
@@ -95,6 +98,9 @@ void cc_shell_model_add_item (CcShellModel   *model,
 gboolean cc_shell_model_iter_matches_search (CcShellModel *model,
                                              GtkTreeIter  *iter,
                                              const char   *term);
+
+void cc_shell_model_set_sort_terms (CcShellModel  *model,
+                                    gchar        **terms);
 
 G_END_DECLS
 
