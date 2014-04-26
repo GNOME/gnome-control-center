@@ -97,6 +97,7 @@ struct _CcWindowPrivate
   GtkTreeModel *search_filter;
   GtkWidget *search_view;
   gchar *filter_string;
+  gchar **filter_terms;
 
   CcPanel *active_panel;
 
@@ -564,14 +565,13 @@ model_filter_func (GtkTreeModel    *model,
                    GtkTreeIter     *iter,
                    CcWindowPrivate *priv)
 {
-  char **terms, **t;
+  char **t;
   gboolean matches = FALSE;
 
-  if (!priv->filter_string)
+  if (!priv->filter_string || !priv->filter_terms)
     return FALSE;
 
-  terms = g_strsplit (priv->filter_string, " ", -1);
-  for (t = terms; *t; t++)
+  for (t = priv->filter_terms; *t; t++)
     {
       matches = cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
                                                     iter,
@@ -579,7 +579,6 @@ model_filter_func (GtkTreeModel    *model,
       if (!matches)
         break;
     }
-  g_strfreev (terms);
 
   return matches;
 }
@@ -618,6 +617,9 @@ search_entry_changed_cb (GtkEntry *entry,
 
   g_free (priv->filter_string);
   priv->filter_string = str;
+
+  g_strfreev (priv->filter_terms);
+  priv->filter_terms = g_strsplit (priv->filter_string, " ", -1);
 
   if (!g_strcmp0 (priv->filter_string, ""))
     {
@@ -1168,6 +1170,7 @@ cc_window_finalize (GObject *object)
   CcWindowPrivate *priv = CC_WINDOW (object)->priv;
 
   g_free (priv->filter_string);
+  g_strfreev (priv->filter_terms);
 
   G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
