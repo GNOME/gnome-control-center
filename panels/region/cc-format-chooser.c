@@ -42,10 +42,9 @@ typedef struct {
         GtkWidget *filter_entry;
         GtkWidget *list;
         GtkWidget *scrolledwindow;
-        GtkWidget *full_date;
-        GtkWidget *medium_date;
-        GtkWidget *short_date;
+        GtkWidget *date;
         GtkWidget *time;
+        GtkWidget *date_time;
         GtkWidget *number;
         GtkWidget *measurement;
         GtkWidget *paper;
@@ -81,10 +80,9 @@ update_format_examples (GtkDialog *chooser)
         setlocale (LC_TIME, priv->region);
 
         dt = g_date_time_new_now_local ();
-        display_date (priv->full_date, dt, "%A %e %B %Y");
-        display_date (priv->medium_date, dt, "%e %b %Y");
-        display_date (priv->short_date, dt, "%x");
+        display_date (priv->date, dt, "%x");
         display_date (priv->time, dt, "%X");
+        display_date (priv->date_time, dt, "%c");
 
         setlocale (LC_TIME, locale);
         g_free (locale);
@@ -534,10 +532,9 @@ cc_format_chooser_new (GtkWidget *parent)
         priv->no_results = g_object_ref_sink (no_results_widget_new ());
         gtk_widget_show_all (priv->no_results);
 
-        priv->full_date = WID ("full-date-format");
-        priv->medium_date = WID ("medium-date-format");
-        priv->short_date = WID ("short-date-format");
+        priv->date = WID ("date-format");
         priv->time = WID ("time-format");
+        priv->date_time = WID ("date-time-format");
         priv->number = WID ("number-format");
         priv->measurement = WID ("measurement-format");
         priv->paper = WID ("paper-format");
