@@ -57,25 +57,6 @@ get_widget (UmHistoryDialog *um,
 }
 
 static void
-close_history_dialog (GtkButton       *button,
-                      UmHistoryDialog *um)
-{
-        gtk_widget_hide (um->dialog);
-
-        um_history_dialog_set_user (um, NULL);
-
-        if (um->week) {
-                g_date_time_unref (um->week);
-                um->week = NULL;
-        }
-
-        if (um->current_week) {
-                g_date_time_unref (um->current_week);
-                um->current_week = NULL;
-        }
-}
-
-static void
 show_week_label (UmHistoryDialog *um)
 {
         gchar *label, *from, *to;
