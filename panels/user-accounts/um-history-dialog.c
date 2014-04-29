@@ -305,6 +305,11 @@ um_history_dialog_show (UmHistoryDialog *um,
 {
         GDateTime *temp, *local;
 
+        if (um->week)
+                g_date_time_unref (um->week);
+        if (um->current_week)
+                g_date_time_unref (um->current_week);
+
         /* Set the first day of this week */
         local = g_date_time_new_now_local ();
         temp = g_date_time_new_local (g_date_time_get_year (local),
