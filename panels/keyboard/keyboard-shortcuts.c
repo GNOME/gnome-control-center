@@ -60,6 +60,8 @@ typedef struct
   char *description; /* description for GSettings types */
   char *gettext_package;
   char *name; /* GSettings schema path, or GSettings key name depending on type */
+  char *reverse_entry;
+  gboolean is_reversed;
 } KeyListEntry;
 
 typedef enum
@@ -225,6 +227,8 @@ append_section (GtkBuilder         *builder,
       is_new = TRUE;
     }
 
+  GHashTable *reverse_items = g_hash_table_new (g_str_hash, g_str_equal);
+
   for (i = 0; keys_list != NULL && keys_list[i].name != NULL; i++)
     {
       CcKeyboardItem *item;
@@ -244,6 +248,24 @@ append_section (GtkBuilder         *builder,
 						      keys_list[i].description,
 						      keys_list[i].schema,
 						      keys_list[i].name);
+          if (ret && keys_list[i].reverse_entry != NULL)
+            {
+              CcKeyboardItem *reverse_item;
+              reverse_item = g_hash_table_lookup (reverse_items,
+                                                  keys_list[i].reverse_entry);
+              if (reverse_item != NULL)
+                {
+                  cc_keyboard_item_add_reverse_item (item,
+                                                     reverse_item,
+                                                     keys_list[i].is_reversed);
+                }
+              else
+                {
+                  g_hash_table_insert (reverse_items,
+                                       keys_list[i].name,
+                                       item);
+                }
+            }
 	  break;
 	default:
 	  g_assert_not_reached ();
@@ -264,6 +286,8 @@ append_section (GtkBuilder         *builder,
 
       g_ptr_array_add (keys_array, item);
     }
+
+  g_hash_table_destroy (reverse_items);
 
   /* Add the keys to the hash table */
   if (is_new)
@@ -313,8 +337,9 @@ parse_start_tag (GMarkupParseContext *ctx,
                  GError             **error)
 {
   KeyList *keylist = (KeyList *) user_data;
-  KeyListEntry key;
-  const char *name, *schema, *description, *package, *context, *orig_description;
+  KeyListEntry key = { 0, };
+  const char *name, *schema, *description, *package, *context, *orig_description, *reverse_entry;
+  gboolean is_reversed;
 
   name = NULL;
   schema = NULL;
@@ -398,6 +423,8 @@ parse_start_tag (GMarkupParseContext *ctx,
   description = NULL;
   context = NULL;
   orig_description = NULL;
+  reverse_entry = NULL;
+  is_reversed = FALSE;
 
   while (*attr_names && *attr_values)
     {
@@ -416,7 +443,13 @@ parse_start_tag (GMarkupParseContext *ctx,
         } else if (g_str_equal (*attr_names, "msgctxt")) {
           if (**attr_values)
             context = *attr_values;
-	}
+	} else if (g_str_equal (*attr_names, "reverse-entry")) {
+	  if (**attr_values)
+	    reverse_entry = *attr_values;
+	} else if (g_str_equal (*attr_names, "is-reversed")) {
+	    if (g_str_equal (*attr_values, "true"))
+	      is_reversed = TRUE;
+        }
 
       ++attr_names;
       ++attr_values;
@@ -441,6 +474,8 @@ parse_start_tag (GMarkupParseContext *ctx,
   key.description = replace_pictures_folder (description);
   key.gettext_package = g_strdup (keylist->package);
   key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
+  key.reverse_entry = g_strdup (reverse_entry);
+  key.is_reversed = is_reversed;
   g_array_append_val (keylist->entries, key);
 }
 
@@ -463,7 +498,8 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
   char *buf;
   gsize buf_len;
   KeyList *keylist;
-  KeyListEntry key, *keys;
+  KeyListEntry *keys;
+  KeyListEntry key = { 0, };
   const char *title;
   int group;
   guint i;
@@ -547,6 +583,7 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
     g_free (entry->description);
     g_free (entry->gettext_package);
     g_free (entry->name);
+    g_free (entry->reverse_entry);
   }
 
   g_free (keylist);
@@ -557,7 +594,7 @@ append_sections_from_gsettings (GtkBuilder *builder)
 {
   char **custom_paths;
   GArray *entries;
-  KeyListEntry key;
+  KeyListEntry key = { 0, };
   int i;
 
   /* load custom shortcuts from GSettings */
