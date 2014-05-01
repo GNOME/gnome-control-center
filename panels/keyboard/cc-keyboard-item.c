@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2011 Red Hat, Inc.
+ * Copyright (C) 2011, 2014 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,8 @@ struct CcKeyboardItemPrivate
   int foo;
 
   /* internal */
+  CcKeyboardItem *reverse_item;
+  gboolean is_reversed;
 };
 
 enum {
@@ -469,6 +471,30 @@ cc_keyboard_item_equal (CcKeyboardItem *a,
 
 }
 
+void
+cc_keyboard_item_add_reverse_item (CcKeyboardItem *item,
+				   CcKeyboardItem *reverse_item,
+				   gboolean is_reversed)
+{
+  g_return_if_fail (item->key != NULL);
+
+  item->priv->reverse_item = reverse_item;
+  if (reverse_item->priv->reverse_item == NULL)
+    {
+      reverse_item->priv->reverse_item = item;
+      reverse_item->priv->is_reversed = !is_reversed;
+    }
+  else
+    g_warn_if_fail (reverse_item->priv->is_reversed == !!is_reversed);
+
+  item->priv->is_reversed = !!is_reversed;
+}
+
+CcKeyboardItem *
+cc_keyboard_item_get_reverse_item (CcKeyboardItem *item)
+{
+  return item->priv->reverse_item;
+}
 /*
  * vim: sw=2 ts=8 cindent noai bs=2
  */

@@ -102,6 +102,12 @@ const char * cc_keyboard_item_get_command     (CcKeyboardItem *item);
 gboolean     cc_keyboard_item_equal           (CcKeyboardItem *a,
 					       CcKeyboardItem *b);
 
+void         cc_keyboard_item_add_reverse_item (CcKeyboardItem *item,
+						CcKeyboardItem *reverse_item,
+						gboolean is_reversed);
+
+CcKeyboardItem * cc_keyboard_item_get_reverse_item (CcKeyboardItem *item);
+
 G_END_DECLS
 
 #endif /* __CC_KEYBOARD_ITEM_H */
