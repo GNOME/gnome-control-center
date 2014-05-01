@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 Intel, Inc
+ * Copyright (C) 2014 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +17,7 @@
  *
  * Authors: Thomas Wood <thomas.wood@intel.com>
  *          Rodrigo Moya <rodrigo@gnome.org>
+ *          Christophe Fergeau <cfergeau@redhat.com>
  */
 
 #include <config.h>
@@ -1231,34 +1233,13 @@ cb_check_for_uniqueness (gpointer          key,
   return FALSE;
 }
 
-static void
-accel_edited_callback (GtkCellRendererText   *cell,
-                       const char            *path_string,
-                       guint                  keyval,
-                       GdkModifierType        mask,
-                       guint                  keycode,
-                       GtkTreeView           *view)
+static CcKeyboardItem *
+search_for_conflict_item (CcKeyboardItem *item,
+                          guint           keyval,
+                          GdkModifierType mask,
+                          guint           keycode)
 {
-  GtkTreeModel *model;
-  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
-  GtkTreeIter iter;
   CcUniquenessData data;
-  CcKeyboardItem *item;
-  char *str;
-
-  model = gtk_tree_view_get_model (view);
-  gtk_tree_model_get_iter (model, &iter, path);
-  gtk_tree_path_free (path);
-  gtk_tree_model_get (model, &iter,
-                      DETAIL_KEYENTRY_COLUMN, &item,
-                      -1);
-
-  /* sanity check */
-  if (item == NULL)
-    return;
-
-  /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
-  mask &= ~GDK_LOCK_MASK;
 
   data.orig_item = item;
   data.new_keyval = keyval;
@@ -1281,7 +1262,14 @@ accel_edited_callback (GtkCellRendererText   *cell,
         }
     }
 
-  /* Check for unmodified keys */
+  return data.conflict_item;
+}
+
+static gboolean
+is_valid_binding (guint                  keyval,
+                  GdkModifierType        mask,
+                  guint                  keycode)
+{
   if ((mask == 0 || mask == GDK_SHIFT_MASK) && keycode != 0)
     {
       if ((keyval >= GDK_KEY_a && keyval <= GDK_KEY_z)
@@ -1296,71 +1284,137 @@ accel_edited_callback (GtkCellRendererText   *cell,
            || (keyval >= GDK_KEY_Hangul_Kiyeog && keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
            || (keyval == GDK_KEY_space && mask == 0)
            || keyval_is_forbidden (keyval)) {
-        GtkWidget *dialog;
-        char *name;
-
-        name = binding_name (keyval, keycode, mask, TRUE);
-
-        dialog =
-          gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
-                                  GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-                                  GTK_MESSAGE_WARNING,
-                                  GTK_BUTTONS_CANCEL,
-                                  _("The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
-                                  "Please try with a key such as Control, Alt or Shift at the same time."),
-                                  name);
-
-        g_free (name);
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (dialog);
-
-        /* set it back to its previous value. */
-        g_object_set (G_OBJECT (cell),
-                      "accel-key", item->keyval,
-                      "keycode", item->keycode,
-                      "accel-mods", item->mask,
-                      NULL);
-        return;
+        return FALSE;
       }
+    }
+  return TRUE;
+}
+
+static GtkResponseType
+show_invalid_binding_dialog (GtkTreeView           *view,
+                             guint                  keyval,
+                             GdkModifierType        mask,
+                             guint                  keycode)
+{
+  GtkWidget *dialog;
+  char *name;
+
+  name = binding_name (keyval, keycode, mask, TRUE);
+
+  dialog =
+    gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+                            GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+                            GTK_MESSAGE_WARNING,
+                            GTK_BUTTONS_CANCEL,
+                            _("The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
+                            "Please try with a key such as Control, Alt or Shift at the same time."),
+                            name);
+
+  g_free (name);
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  return GTK_RESPONSE_NONE;
+}
+
+static GtkResponseType
+show_conflict_item_dialog (GtkTreeView           *view,
+                           CcKeyboardItem        *item,
+                           CcKeyboardItem        *conflict_item,
+                           guint                  keyval,
+                           GdkModifierType        mask,
+                           guint                  keycode)
+{
+  GtkWidget *dialog;
+  char *name;
+  int response;
+
+  name = binding_name (keyval, keycode, mask, TRUE);
+
+  dialog =
+    gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+                            GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+                            GTK_MESSAGE_WARNING,
+                            GTK_BUTTONS_CANCEL,
+                            _("The shortcut \"%s\" is already used for\n\"%s\""),
+                            name, conflict_item->description);
+  g_free (name);
+
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+      _("If you reassign the shortcut to \"%s\", the \"%s\" shortcut "
+        "will be disabled."),
+      item->description,
+      conflict_item->description);
+
+  gtk_dialog_add_button (GTK_DIALOG (dialog),
+                         _("_Reassign"),
+                         GTK_RESPONSE_ACCEPT);
+
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+                                   GTK_RESPONSE_ACCEPT);
+
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  return response;
+}
+
+static void
+accel_edited_callback (GtkCellRendererText   *cell,
+                       const char            *path_string,
+                       guint                  keyval,
+                       GdkModifierType        mask,
+                       guint                  keycode,
+                       GtkTreeView           *view)
+{
+  GtkTreeModel *model;
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  GtkTreeIter iter;
+  CcKeyboardItem *item;
+  CcKeyboardItem *conflict_item;
+  char *str;
+
+  model = gtk_tree_view_get_model (view);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
+  gtk_tree_model_get (model, &iter,
+                      DETAIL_KEYENTRY_COLUMN, &item,
+                      -1);
+
+  /* sanity check */
+  if (item == NULL)
+    return;
+
+  /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
+  mask &= ~GDK_LOCK_MASK;
+
+  conflict_item = search_for_conflict_item (item, keyval, mask, keycode);
+
+  /* Check for unmodified keys */
+  if (!is_valid_binding (keyval, mask, keycode))
+    {
+      show_invalid_binding_dialog (view, keyval, mask, keycode);
+
+      /* set it back to its previous value. */
+      g_object_set (G_OBJECT (cell),
+                    "accel-key", item->keyval,
+                    "keycode", item->keycode,
+                    "accel-mods", item->mask,
+                    NULL);
+      return;
     }
 
   /* flag to see if the new accelerator was in use by something */
-  if (data.conflict_item != NULL)
+  if (conflict_item != NULL)
     {
-      GtkWidget *dialog;
-      char *name;
-      int response;
+      GtkResponseType response;
 
-      name = binding_name (keyval, keycode, mask, TRUE);
-
-      dialog =
-        gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
-                                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-                                GTK_MESSAGE_WARNING,
-                                GTK_BUTTONS_CANCEL,
-                                _("The shortcut \"%s\" is already used for\n\"%s\""),
-                                name, data.conflict_item->description);
-      g_free (name);
-
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-          _("If you reassign the shortcut to \"%s\", the \"%s\" shortcut "
-            "will be disabled."),
-          item->description,
-          data.conflict_item->description);
-
-      gtk_dialog_add_button (GTK_DIALOG (dialog),
-                             _("_Reassign"),
-                             GTK_RESPONSE_ACCEPT);
-
-      gtk_dialog_set_default_response (GTK_DIALOG (dialog),
-                                       GTK_RESPONSE_ACCEPT);
-
-      response = gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      response = show_conflict_item_dialog (view, item, conflict_item,
+                                            keyval, mask, keycode);
 
       if (response == GTK_RESPONSE_ACCEPT)
         {
-	  g_object_set (G_OBJECT (data.conflict_item), "binding", "", NULL);
+	  g_object_set (G_OBJECT (conflict_item), "binding", "", NULL);
 
           str = binding_name (keyval, keycode, mask, FALSE);
           g_object_set (G_OBJECT (item), "binding", str, NULL);
@@ -1370,11 +1424,11 @@ accel_edited_callback (GtkCellRendererText   *cell,
       else
         {
           /* set it back to its previous value. */
-        g_object_set (G_OBJECT (cell),
-                      "accel-key", item->keyval,
-                      "keycode", item->keycode,
-                      "accel-mods", item->mask,
-                      NULL);
+          g_object_set (G_OBJECT (cell),
+                        "accel-key", item->keyval,
+                        "keycode", item->keycode,
+                        "accel-mods", item->mask,
+                        NULL);
         }
 
       return;
