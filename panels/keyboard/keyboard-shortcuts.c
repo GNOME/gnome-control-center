@@ -1396,6 +1396,110 @@ show_conflict_item_dialog (GtkTreeView           *view,
   return response;
 }
 
+static GtkResponseType
+show_reverse_item_dialog (GtkTreeView           *view,
+                          CcKeyboardItem        *item,
+                          CcKeyboardItem        *reverse_item,
+                          CcKeyboardItem        *reverse_conflict_item,
+                          guint                  keyval,
+                          GdkModifierType        mask,
+                          guint                  keycode)
+{
+  GtkWidget *dialog;
+  char *name;
+  int response;
+
+  name = binding_name (keyval, keycode, mask, TRUE);
+
+  dialog =
+    gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+                            GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+                            GTK_MESSAGE_WARNING,
+                            GTK_BUTTONS_CANCEL,
+                            _("The \"%s\" shortcut has an associated \"%s\" shortcut. "
+                              "Do you want to automatically set it to \"%s\"?"),
+                            item->description, reverse_item->description, name);
+
+  if (reverse_conflict_item != NULL)
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+        _("\"%s\" is currently associated with \"%s\", this shortcut will be"
+          " disabled if you move forward."),
+        name, reverse_conflict_item->description);
+  g_free (name);
+
+  gtk_dialog_add_button (GTK_DIALOG (dialog),
+                         _("_Assign"),
+                         GTK_RESPONSE_ACCEPT);
+
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+                                   GTK_RESPONSE_ACCEPT);
+
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  return response;
+}
+
+static void
+handle_reverse_item (CcKeyboardItem        *item,
+                     CcKeyboardItem        *reverse_item,
+                     guint                  keyval,
+                     GdkModifierType        mask,
+                     guint                  keycode,
+                     GtkTreeView           *view)
+{
+  GtkResponseType response;
+  GdkModifierType reverse_mask;
+
+  reverse_mask = mask ^ GDK_SHIFT_MASK;
+
+  if (!is_valid_binding(keyval, reverse_mask, keycode))
+    return;
+
+  if ((reverse_item->keyval != keyval)
+       || (reverse_item->keycode != keycode)
+       || (reverse_item->mask != reverse_mask))
+    {
+      CcKeyboardItem *reverse_conflict_item;
+      char *binding_str;
+
+      reverse_conflict_item = search_for_conflict_item (reverse_item, keyval,
+                                                        reverse_mask,
+                                                        keycode);
+
+      response = show_reverse_item_dialog (view, item, reverse_item,
+                                           reverse_conflict_item,
+                                           keyval, reverse_mask,
+                                           keycode);
+      if (response == GTK_RESPONSE_ACCEPT)
+        {
+          binding_str = binding_name (keyval, keycode, reverse_mask, FALSE);
+          g_object_set (G_OBJECT (reverse_item), "binding", binding_str, NULL);
+          g_free (binding_str);
+
+          if (reverse_conflict_item != NULL)
+            g_object_set (G_OBJECT (reverse_conflict_item),
+                          "binding", "", NULL);
+        }
+      else
+        {
+          /* The existing reverse binding may be conflicting with the binding
+           * we are setting. Other conflicts have already been handled in
+           * accel_edited_callback()
+           */
+          CcKeyboardItem *conflict_item;
+          conflict_item = search_for_conflict_item (item, keyval,
+                                                    mask, keycode);
+          if (conflict_item != NULL)
+            {
+              g_warn_if_fail (conflict_item == reverse_item);
+              g_object_set (G_OBJECT (conflict_item),
+                            "binding", "", NULL);
+            }
+        }
+    }
+}
+
 static void
 accel_edited_callback (GtkCellRendererText   *cell,
                        const char            *path_string,
@@ -1409,6 +1513,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
   GtkTreeIter iter;
   CcKeyboardItem *item;
   CcKeyboardItem *conflict_item;
+  CcKeyboardItem *reverse_item;
   char *str;
 
   model = gtk_tree_view_get_model (view);
@@ -1441,8 +1546,10 @@ accel_edited_callback (GtkCellRendererText   *cell,
       return;
     }
 
+  reverse_item = cc_keyboard_item_get_reverse_item (item);
+
   /* flag to see if the new accelerator was in use by something */
-  if (conflict_item != NULL)
+  if ((conflict_item != NULL) && (conflict_item != reverse_item))
     {
       GtkResponseType response;
 
@@ -1457,6 +1564,8 @@ accel_edited_callback (GtkCellRendererText   *cell,
           g_object_set (G_OBJECT (item), "binding", str, NULL);
 
           g_free (str);
+          if (reverse_item == NULL)
+            return;
         }
       else
         {
@@ -1466,15 +1575,18 @@ accel_edited_callback (GtkCellRendererText   *cell,
                         "keycode", item->keycode,
                         "accel-mods", item->mask,
                         NULL);
+          return;
         }
 
-      return;
     }
 
   str = binding_name (keyval, keycode, mask, FALSE);
   g_object_set (G_OBJECT (item), "binding", str, NULL);
 
   g_free (str);
+
+  if (reverse_item != NULL)
+    handle_reverse_item (item, reverse_item, keyval, mask, keycode, view);
 }
 
 static void
