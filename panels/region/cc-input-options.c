@@ -88,8 +88,6 @@ update_shortcuts (GtkWidget *options)
         next = g_settings_get_strv (settings, "switch-input-source");
 
         previous_shortcut = g_strdup (previous[0]);
-        if (!previous_shortcut && next[0] && *next[0])
-                previous_shortcut = g_strconcat ("<Shift>", next[0], NULL);
 
         update_shortcut_label (priv->previous_source, previous_shortcut);
         update_shortcut_label (priv->next_source, next[0]);
