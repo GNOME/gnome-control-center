@@ -39,6 +39,8 @@ struct _CcSearchProvider
   GObject parent;
 
   CcShellSearchProvider2 *skeleton;
+
+  GHashTable *iter_table; /* COL_ID -> GtkTreeIter */
 };
 
 struct _CcSearchProviderClass
@@ -97,18 +99,14 @@ get_model (void)
   return GTK_TREE_MODEL (cc_search_provider_app_get_model (app));
 }
 
-static gboolean
-handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
-                               GDBusMethodInvocation   *invocation,
-                               char                   **terms,
-                               CcSearchProvider        *self)
+static gchar **
+get_results (gchar **terms)
 {
   GtkTreeModel *model = get_model ();
   GtkTreeIter iter;
   GPtrArray *results;
   gboolean ok;
-  char **casefolded_terms;
-  char **results_as_strings;
+  gchar **casefolded_terms;
 
   casefolded_terms = get_casefolded_terms (terms);
   results = g_ptr_array_new ();
@@ -120,22 +118,31 @@ handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
     {
       if (matches_all_terms (model, &iter, casefolded_terms))
         {
-          g_ptr_array_add (results,
-                           gtk_tree_model_get_string_from_iter (model,
-                                                                &iter));
+          gchar *id;
+          gtk_tree_model_get (model, &iter, COL_ID, &id, -1);
+          g_ptr_array_add (results, id);
         }
 
       ok = gtk_tree_model_iter_next (model, &iter);
     }
 
   g_ptr_array_add (results, NULL);
-  results_as_strings = (char**) g_ptr_array_free (results, FALSE);
+  g_strfreev (casefolded_terms);
+
+  return (char**) g_ptr_array_free (results, FALSE);
+}
+
+static gboolean
+handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
+                               GDBusMethodInvocation   *invocation,
+                               char                   **terms,
+                               CcSearchProvider        *self)
+{
+  gchar **results = get_results (terms);
   cc_shell_search_provider2_complete_get_initial_result_set (skeleton,
                                                              invocation,
-                                                             (const char* const*) results_as_strings);
-
-  g_strfreev (casefolded_terms);
-  g_strfreev (results_as_strings);
+                                                             (const char* const*) results);
+  g_strfreev (results);
   return TRUE;
 }
 
@@ -146,37 +153,53 @@ handle_get_subsearch_result_set (CcShellSearchProvider2  *skeleton,
                                  char                   **terms,
                                  CcSearchProvider        *self)
 {
-  GtkTreeModel *model = get_model ();
-  GtkTreeIter iter;
-  GPtrArray *results;
-  char **casefolded_terms;
-  char **results_as_strings;
-  int i;
-
-  casefolded_terms = get_casefolded_terms (terms);
-  results = g_ptr_array_new ();
-
-  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (model), casefolded_terms);
-
-  for (i = 0; previous_results[i]; i++)
-    {
-      if (gtk_tree_model_get_iter_from_string (model, &iter,
-                                               previous_results[i]) &&
-          matches_all_terms (model, &iter, casefolded_terms))
-        {
-          g_ptr_array_add (results, g_strdup (previous_results[i]));
-        }
-    }
-
-  g_ptr_array_add (results, NULL);
-  results_as_strings = (char**) g_ptr_array_free (results, FALSE);
+  /* We ignore the previous results here since the model re-sorts for
+   * the new terms. This means that we're not really doing a subsearch
+   * but, on the other hand, the results are consistent with the
+   * control center's own search. In any case, the number of elements
+   * in the model is always small enough that we don't need to worry
+   * about this taking too long.
+   */
+  gchar **results = get_results (terms);
   cc_shell_search_provider2_complete_get_subsearch_result_set (skeleton,
                                                                invocation,
-                                                               (const char* const*) results_as_strings);
-
-  g_strfreev (casefolded_terms);
-  g_strfreev (results_as_strings);
+                                                               (const char* const*) results);
+  g_strfreev (results);
   return TRUE;
+}
+
+static GtkTreeIter *
+get_iter_for_result (CcSearchProvider *self,
+                     const gchar      *result)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean ok;
+  gchar *id;
+
+  /* Caching GtkTreeIters in this way is only OK because the model is
+   * a GtkListStore which guarantees that while a row exists, the iter
+   * is persistent.
+   */
+  if (self->iter_table)
+    goto lookup;
+
+  self->iter_table = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                            g_free, (GDestroyNotify) gtk_tree_iter_free);
+
+  model = get_model ();
+  ok = gtk_tree_model_get_iter_first (model, &iter);
+  while (ok)
+    {
+      gtk_tree_model_get (model, &iter, COL_ID, &id, -1);
+
+      g_hash_table_replace (self->iter_table, id, gtk_tree_iter_copy (&iter));
+
+      ok = gtk_tree_model_iter_next (model, &iter);
+    }
+
+ lookup:
+  return g_hash_table_lookup (self->iter_table, result);
 }
 
 static gboolean
@@ -186,7 +209,7 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
                          CcSearchProvider        *self)
 {
   GtkTreeModel *model = get_model ();
-  GtkTreeIter iter;
+  GtkTreeIter *iter;
   int i;
   GVariantBuilder builder;
   GAppInfo *app;
@@ -198,10 +221,11 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
 
   for (i = 0; results[i]; i++)
     {
-      if (!gtk_tree_model_get_iter_from_string (model, &iter, results[i]))
+      iter = get_iter_for_result (self, results[i]);
+      if (!iter)
         continue;
 
-      gtk_tree_model_get (model, &iter,
+      gtk_tree_model_get (model, iter,
                           COL_APP, &app,
                           COL_NAME, &name,
                           COL_GICON, &icon,
@@ -356,6 +380,7 @@ cc_search_provider_dispose (GObject *object)
   self = CC_SEARCH_PROVIDER (object);
 
   g_clear_object (&self->skeleton);
+  g_clear_pointer (&self->iter_table, g_hash_table_destroy);
 
   G_OBJECT_CLASS (cc_search_provider_parent_class)->dispose (object);
 }
