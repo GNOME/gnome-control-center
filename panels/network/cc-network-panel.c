@@ -1224,6 +1224,12 @@ add_connection (CcNetworkPanel *panel,
         if (g_strcmp0 (type, "vpn") != 0 && iface == NULL)
                 return;
 
+#ifdef HAVE_NM_UNSTABLE
+        /* Don't add the libvirtd bridge to the UI */
+        if (g_strcmp0 (nm_setting_connection_get_interface_name (s_con), "virbr0") == 0)
+                return;
+#endif
+
         g_debug ("add %s/%s remote connection: %s",
                  type, g_type_name_from_instance ((GTypeInstance*)connection),
                  nm_connection_get_path (connection));
