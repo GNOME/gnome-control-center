@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-08 18:27+0000\n"
-"PO-Revision-Date: 2014-05-10 18:32+0200\n"
+"POT-Creation-Date: 2014-05-20 06:27+0000\n"
+"PO-Revision-Date: 2014-05-20 18:54+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -1152,8 +1152,9 @@ msgstr "Elegir cómo usar las pantallas y los proyectores conectados"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
-msgstr "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;"
+#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
+msgstr "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;Monitor;"
 
 #: ../panels/info/cc-info-panel.c:384
 msgid "Wayland"
@@ -1932,7 +1933,7 @@ msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1283
+#: ../panels/network/cc-network-panel.c:1289
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
@@ -6034,7 +6035,6 @@ msgid "Login History"
 msgstr "Histórico de inicio de sesión"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-#| msgid "Change pa_ssword"
 msgid "Change Password"
 msgstr "Cambiar contraseña"
 
@@ -6649,25 +6649,19 @@ msgstr "Mi cuenta"
 
 #: ../panels/user-accounts/um-utils.c:567
 #, c-format
-#| msgid "A user with the username '%s' already exists"
 msgid "A user with the username '%s' already exists."
 msgstr "Ya existe un nombre de usuario con el nombre «%s»."
 
 #: ../panels/user-accounts/um-utils.c:571
 #, c-format
-#| msgid "The username is too long"
 msgid "The username is too long."
 msgstr "El nombre de usuario es demasiado largo."
 
 #: ../panels/user-accounts/um-utils.c:574
-#| msgid "The username cannot start with a '-'"
 msgid "The username cannot start with a '-'."
 msgstr "El nombre de usuario no puede comenzar por «-»."
 
 #: ../panels/user-accounts/um-utils.c:577
-#| msgid ""
-#| "The username should only consist of lower and upper case letters from a-"
-#| "z, digits and any of characters '.', '-' and '_'"
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'."
@@ -7051,27 +7045,27 @@ msgstr "Ayuda"
 msgid "Quit"
 msgstr "Salir"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1490
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
 #. Add categories
-#: ../shell/cc-window.c:872
+#: ../shell/cc-window.c:876
 msgctxt "category"
 msgid "Personal"
 msgstr "Personal"
 
-#: ../shell/cc-window.c:873
+#: ../shell/cc-window.c:877
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:874
+#: ../shell/cc-window.c:878
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
 
-#: ../shell/cc-window.c:1601 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/cc-window.c:1606 ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Configuración"
 
