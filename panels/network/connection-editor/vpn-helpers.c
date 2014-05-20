@@ -75,7 +75,7 @@ vpn_get_plugins (GError **error)
 		char *path = NULL, *service = NULL;
 		char *so_path = NULL, *so_name = NULL;
 		GKeyFile *keyfile = NULL;
-		GModule *module;
+		GModule *module = NULL;
 		NMVpnPluginUiFactory factory = NULL;
 
 		if (!g_str_has_suffix (f, ".name"))
@@ -95,19 +95,24 @@ vpn_get_plugins (GError **error)
 		if (!so_path)
 			goto next;
 
-		/* Remove any path and extension components, then reconstruct path
-		 * to the SO in LIBDIR
-		 */
-		so_name = g_path_get_basename (so_path);
-		g_free (so_path);
-		so_path = g_build_filename (NM_VPN_MODULE_DIR, so_name, NULL);
-		g_free (so_name);
+		if (g_path_is_absolute (so_path))
+			module = g_module_open (so_path, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
 
-		module = g_module_open (so_path, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
 		if (!module) {
-			g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Cannot load the VPN plugin which provides the "
-			             "service '%s'.", service);
-			goto next;
+			/* Remove any path and extension components, then reconstruct path
+			 * to the SO in LIBDIR
+			 */
+			so_name = g_path_get_basename (so_path);
+			g_free (so_path);
+			so_path = g_build_filename (NM_VPN_MODULE_DIR, so_name, NULL);
+			g_free (so_name);
+
+			module = g_module_open (so_path, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
+			if (!module) {
+				g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Cannot load the VPN plugin which provides the "
+				             "service '%s'.", service);
+				goto next;
+			}
 		}
 
 		if (g_module_symbol (module, "nm_vpn_plugin_ui_factory", (gpointer) &factory)) {
