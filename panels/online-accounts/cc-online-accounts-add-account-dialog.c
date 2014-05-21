@@ -74,21 +74,10 @@ add_account_dialog_add_account (GoaPanelAddAccountDialog *add_account,
                                 GoaProvider *provider)
 {
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
-  GList *children;
-  GList *l;
-  GtkWidget *action_area;
   GtkWidget *vbox;
 
-  action_area = gtk_dialog_get_action_area (GTK_DIALOG (add_account));
   vbox = gtk_dialog_get_content_area (GTK_DIALOG (add_account));
-  children = gtk_container_get_children (GTK_CONTAINER (vbox));
-  for (l = children; l != NULL; l = l->next)
-    {
-      GtkWidget *child = l->data;
-      if (child != action_area)
-        gtk_container_remove (GTK_CONTAINER (vbox), child);
-    }
-  g_list_free (children);
+  gtk_container_foreach (GTK_CONTAINER (vbox), (GtkCallback) gtk_widget_destroy, NULL);
 
   /* This spins gtk_dialog_run() */
   priv->object = goa_provider_add_account (provider,
@@ -238,7 +227,6 @@ static void
 goa_panel_add_account_dialog_realize (GtkWidget *widget)
 {
   GoaPanelAddAccountDialog *add_account = GOA_PANEL_ADD_ACCOUNT_DIALOG (widget);
-  GtkWidget *button;
   GtkWindow *parent;
 
   parent = gtk_window_get_transient_for (GTK_WINDOW (add_account));
@@ -252,9 +240,6 @@ goa_panel_add_account_dialog_realize (GtkWidget *widget)
     }
 
   GTK_WIDGET_CLASS (goa_panel_add_account_dialog_parent_class)->realize (widget);
-
-  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (add_account), GTK_RESPONSE_CANCEL);
-  gtk_widget_grab_focus (button);
 }
 
 static void
@@ -373,9 +358,6 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
                                       _("Resources"));
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), BRANDED_PAGE);
-
-  gtk_dialog_add_button (GTK_DIALOG (add_account), _("_Cancel"), GTK_RESPONSE_CANCEL);
-  gtk_dialog_set_default_response (GTK_DIALOG (add_account), GTK_RESPONSE_CANCEL);
 }
 
 static void
@@ -406,7 +388,7 @@ goa_panel_add_account_dialog_class_init (GoaPanelAddAccountDialogClass *klass)
 GtkWidget *
 goa_panel_add_account_dialog_new (GoaClient *client)
 {
-  return g_object_new (GOA_TYPE_PANEL_ADD_ACCOUNT_DIALOG, "client", client, NULL);
+  return g_object_new (GOA_TYPE_PANEL_ADD_ACCOUNT_DIALOG, "client", client, "use-header-bar", TRUE, NULL);
 }
 
 void
