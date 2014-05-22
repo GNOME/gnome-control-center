@@ -39,6 +39,7 @@ struct _CcColorProfilePrivate
   GtkWidget   *widget_info;
   GSettings   *settings;
   guint        device_changed_id;
+  guint        profile_changed_id;
 };
 
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
@@ -340,6 +341,8 @@ cc_color_profile_finalize (GObject *object)
 
   if (priv->device_changed_id > 0)
     g_signal_handler_disconnect (priv->device, priv->device_changed_id);
+  if (priv->profile_changed_id > 0)
+    g_signal_handler_disconnect (priv->profile, priv->profile_changed_id);
 
   g_free (priv->sortable);
   g_object_unref (priv->device);
@@ -395,6 +398,9 @@ cc_color_profile_constructed (GObject *object)
   /* watch to see if the default changes */
   priv->device_changed_id =
     g_signal_connect (priv->device, "changed",
+                      G_CALLBACK (cc_color_profile_changed_cb), color_profile);
+  priv->profile_changed_id =
+    g_signal_connect (priv->profile, "changed",
                       G_CALLBACK (cc_color_profile_changed_cb), color_profile);
 
   /* sort the profiles in the list by:
