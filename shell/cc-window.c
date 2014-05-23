@@ -1476,9 +1476,6 @@ create_header (CcWindow *self)
   CcWindowPrivate *priv = self->priv;
   GtkWidget *image;
   AtkObject *accessible;
-  gboolean rtl;
-
-  rtl = (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL);
 
   priv->header = gtk_header_bar_new ();
   gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->header), TRUE);
@@ -1486,9 +1483,7 @@ create_header (CcWindow *self)
   priv->header_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
   /* previous button */
-  priv->previous_button = gtk_button_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" :
-                                                               "go-previous-symbolic",
-                                                         GTK_ICON_SIZE_MENU);
+  priv->previous_button = gtk_button_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
   gtk_widget_set_valign (priv->previous_button, GTK_ALIGN_CENTER);
   gtk_widget_set_no_show_all (priv->previous_button, TRUE);
   accessible = gtk_widget_get_accessible (priv->previous_button);
