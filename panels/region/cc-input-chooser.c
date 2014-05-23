@@ -120,9 +120,6 @@ padded_label_new (const gchar        *text,
   GtkWidget *label;
   GtkWidget *arrow;
   gdouble alignment;
-  gboolean rtl;
-
-  rtl = (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL);
 
   if (position == ROW_LABEL_POSITION_START)
     alignment = 0.0;
@@ -135,8 +132,7 @@ padded_label_new (const gchar        *text,
 
   if (direction == ROW_TRAVEL_DIRECTION_BACKWARD)
     {
-      arrow = gtk_image_new_from_icon_name (rtl ? "go-previous-rtl-symbolic" : "go-previous-symbolic",
-                                            GTK_ICON_SIZE_MENU);
+      arrow = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
       gtk_box_pack_start (GTK_BOX (widget), arrow, FALSE, TRUE, 0);
     }
 
@@ -149,8 +145,7 @@ padded_label_new (const gchar        *text,
 
   if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
     {
-      arrow = gtk_image_new_from_icon_name (rtl ? "go-next-rtl-symbolic" : "go-next-symbolic",
-                                            GTK_ICON_SIZE_MENU);
+      arrow = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
       gtk_box_pack_start (GTK_BOX (widget), arrow, FALSE, TRUE, 0);
     }
 
