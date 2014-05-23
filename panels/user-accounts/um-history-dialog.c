@@ -333,12 +333,9 @@ um_history_dialog_new (void)
         GError *error = NULL;
         UmHistoryDialog *um;
         GtkWidget *widget;
-        gboolean rtl;
 
         um = g_new0 (UmHistoryDialog, 1);
         um->builder = gtk_builder_new ();
-
-        rtl = gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL;
 
         if (!gtk_builder_add_from_resource (um->builder, "/org/gnome/control-center/user-accounts/history-dialog.ui", &error)) {
                 g_error ("%s", error->message);
@@ -359,12 +356,12 @@ um_history_dialog_new (void)
 
         widget = get_widget (um, "next-image");
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      rtl ? "go-next-rtl-symbolic" : "go-next-symbolic",
+                                      "go-next-symbolic",
                                       GTK_ICON_SIZE_MENU);
 
         widget = get_widget (um, "previous-image");
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      rtl ? "go-previous-rtl-symbolic" : "go-previous-symbolic",
+                                      "go-previous-symbolic",
                                       GTK_ICON_SIZE_MENU);
 
         return um;
