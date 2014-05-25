@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-11 18:27+0000\n"
-"PO-Revision-Date: 2014-05-11 23:39+0300\n"
+"POT-Creation-Date: 2014-05-25 18:26+0000\n"
+"PO-Revision-Date: 2014-05-25 21:47+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -123,7 +123,6 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1197
 #: ../panels/network/net-device-wifi.c:1405
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:377
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:465
@@ -431,13 +430,13 @@ msgstr "Įrenginio tipas šiuo metu nepalaikomas."
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
-#: ../panels/color/cc-color-profile.c:102
+#: ../panels/color/cc-color-profile.c:103
 msgid "Standard Space"
 msgstr "Standartinė sritis"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
-#: ../panels/color/cc-color-profile.c:108
+#: ../panels/color/cc-color-profile.c:109
 msgid "Test Profile"
 msgstr "Bandomasis profilis"
 
@@ -445,7 +444,7 @@ msgstr "Bandomasis profilis"
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
-#: ../panels/color/cc-color-profile.c:116
+#: ../panels/color/cc-color-profile.c:117
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "Automatinis"
@@ -453,13 +452,13 @@ msgstr "Automatinis"
 #. TRANSLATORS: the profile quality - low quality profiles take
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
-#: ../panels/color/cc-color-profile.c:126
+#: ../panels/color/cc-color-profile.c:127
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "Žemos kokybės"
 
 #. TRANSLATORS: the profile quality
-#: ../panels/color/cc-color-profile.c:131
+#: ../panels/color/cc-color-profile.c:132
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "Vidutinės kokybės"
@@ -467,41 +466,41 @@ msgstr "Vidutinės kokybės"
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
-#: ../panels/color/cc-color-profile.c:138
+#: ../panels/color/cc-color-profile.c:139
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Aukštos kokybės"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:155
+#: ../panels/color/cc-color-profile.c:156
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Numatytasis RŽM"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:162
+#: ../panels/color/cc-color-profile.c:163
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Numatytasis PRGJ"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: ../panels/color/cc-color-profile.c:169
+#: ../panels/color/cc-color-profile.c:170
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Numatytasis pilkas"
 
-#: ../panels/color/cc-color-profile.c:193
+#: ../panels/color/cc-color-profile.c:194
 msgid "Vendor supplied factory calibration data"
 msgstr "Tiekėjo pateikti gamykliniai kalibravimo duomenys"
 
-#: ../panels/color/cc-color-profile.c:202
+#: ../panels/color/cc-color-profile.c:203
 msgid "Full-screen display correction not possible with this profile"
 msgstr "Su šiuo profiliu negalima viso ekrano korekcija"
 
-#: ../panels/color/cc-color-profile.c:224
+#: ../panels/color/cc-color-profile.c:225
 msgid "This profile may no longer be accurate"
 msgstr "Šis profilis gali nebebūti tikslus."
 
@@ -860,7 +859,7 @@ msgstr "Kitas..."
 
 #: ../panels/common/cc-language-chooser.c:122
 #: ../panels/region/cc-format-chooser.c:266
-#: ../panels/region/cc-input-chooser.c:170
+#: ../panels/region/cc-input-chooser.c:165
 msgid "More…"
 msgstr "Daugiau…"
 
@@ -1146,8 +1145,9 @@ msgstr "Pasirinkite, kaip naudoti prijungtus monitorius ir projektorius"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
-msgstr "Skydelis;Projektorius;xrandr;Ekranas;Raiška;Atnaujinimas;"
+#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
+msgstr "Skydelis;Projektorius;xrandr;Ekranas;Raiška;Atnaujinimas;Monitorius;"
 
 #: ../panels/info/cc-info-panel.c:384
 msgid "Wayland"
@@ -1922,7 +1922,7 @@ msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1283
+#: ../panels/network/cc-network-panel.c:1289
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemos tinklo tarnybos nesuderinamos su šia versija."
 
@@ -3557,30 +3557,30 @@ msgstr "Rodyti iššokančios pranešimus"
 msgid "Show in Lock Screen"
 msgstr "Rodyti užrakinimo ekrane"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:198
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:187
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Kita"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:316
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:301
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Pridėti paskyrą"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:355
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
 msgid "Mail"
 msgstr "Paštas"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:361
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:346
 msgid "Contacts"
 msgstr "Kontaktai"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:367
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:352
 msgid "Chat"
 msgstr "Pokalbiai"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:373
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:358
 msgid "Resources"
 msgstr "Resursai"
 
@@ -4813,11 +4813,11 @@ msgstr "Metrinė"
 msgid "No regions found"
 msgstr "Nerasta regionų"
 
-#: ../panels/region/cc-input-chooser.c:184
+#: ../panels/region/cc-input-chooser.c:179
 msgid "No input sources found"
 msgstr "Nerasta įvesties šaltinių"
 
-#: ../panels/region/cc-input-chooser.c:1068
+#: ../panels/region/cc-input-chooser.c:1063
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Kita"
@@ -6027,7 +6027,6 @@ msgid "Login History"
 msgstr "Prisijungimo istorija"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-#| msgid "Show Password"
 msgid "Change Password"
 msgstr "Keisti slaptažodį"
 
@@ -6641,25 +6640,19 @@ msgstr "Mano paskyra"
 
 #: ../panels/user-accounts/um-utils.c:567
 #, c-format
-#| msgid "A user with the username '%s' already exists"
 msgid "A user with the username '%s' already exists."
 msgstr "Naudotojas vardu „%s“ jau yra."
 
 #: ../panels/user-accounts/um-utils.c:571
 #, c-format
-#| msgid "The username is too long"
 msgid "The username is too long."
 msgstr "Naudotojo vardas per ilgas."
 
 #: ../panels/user-accounts/um-utils.c:574
-#| msgid "The username cannot start with a '-'"
 msgid "The username cannot start with a '-'."
 msgstr "Naudotojo vardas negali prasidėti simboliu „-“."
 
 #: ../panels/user-accounts/um-utils.c:577
-#| msgid ""
-#| "The username should only consist of lower and upper case letters from a-"
-#| "z, digits and any of characters '.', '-' and '_'"
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'."
@@ -7047,17 +7040,17 @@ msgid "All Settings"
 msgstr "Visi nustatymai"
 
 #. Add categories
-#: ../shell/cc-window.c:872
+#: ../shell/cc-window.c:876
 msgctxt "category"
 msgid "Personal"
 msgstr "Asmeninis"
 
-#: ../shell/cc-window.c:873
+#: ../shell/cc-window.c:877
 msgctxt "category"
 msgid "Hardware"
 msgstr "Aparatinė įranga"
 
-#: ../shell/cc-window.c:874
+#: ../shell/cc-window.c:878
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
@@ -7069,4 +7062,3 @@ msgstr "Nustatymai"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nustatymai;Parinktys;"
-
