@@ -702,8 +702,12 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         lang = g_strdup (act_user_get_language (user));
         if (!lang)
                 lang = cc_common_language_get_current_language ();
-        if (cc_common_language_get_iter_for_language (model, lang, &iter))
-          um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
+
+        if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
+                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
+        } else {
+                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), NULL);
+        }
         g_free (lang);
 
         /* Fingerprint: show when self, possible, and local account */
