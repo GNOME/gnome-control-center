@@ -557,7 +557,23 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
   rotation = gnome_rr_output_info_get_rotation (output_that_changed);
 
   if (width == old_width && height == old_height && rotation == old_rotation)
-    return;
+    {
+      g_debug ("Not realigning outputs, configuration is the same for %s", gnome_rr_output_info_get_name (output_that_changed));
+      return;
+    }
+
+  g_debug ("Realigning outputs, configuration changed for %s", gnome_rr_output_info_get_name (output_that_changed));
+
+  /* Apply rotation to the geometry of the newly changed output,
+   * as well as to its old configuration */
+  apply_rotation_to_geometry (output_that_changed, &width, &height);
+  if ((old_rotation & GNOME_RR_ROTATION_90) || (old_rotation & GNOME_RR_ROTATION_270))
+    {
+      int tmp;
+      tmp = old_height;
+      old_height = old_width;
+      old_width = tmp;
+    }
 
   old_right_edge = x + old_width;
   old_bottom_edge = y + old_height;
@@ -587,6 +603,7 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
       else if (output_y + output_height == old_bottom_edge)
          output_y = y + height - output_height;
 
+      g_debug ("Setting geometry for %s: %dx%d+%d+%d", gnome_rr_output_info_get_name (outputs[i]), output_width, output_height, output_x, output_y);
       gnome_rr_output_info_set_geometry (outputs[i], output_x, output_y, output_width, output_height);
     }
 }
