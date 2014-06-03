@@ -2216,7 +2216,6 @@ show_setup_dialog (CcDisplayPanel *panel)
   if (response == GTK_RESPONSE_ACCEPT)
     {
       GtkListBoxRow *row;
-      GnomeRRRotation rotation;
       gboolean active = TRUE;
 
       if (g_hash_table_size (output_ids) > 1)
