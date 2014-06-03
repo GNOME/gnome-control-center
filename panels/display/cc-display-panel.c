@@ -521,7 +521,7 @@ on_screen_changed (CcDisplayPanel *panel)
 }
 
 static void
-realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo *output_that_changed, int old_width, int old_height)
+realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo *output_that_changed, int old_width, int old_height, GnomeRRRotation old_rotation)
 {
   /* We find the outputs that were below or to the right of the output that
    * changed, and realign them; we also do that for outputs that shared the
@@ -534,12 +534,14 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
   int dx, dy;
   int x, y, width, height;
   GnomeRROutputInfo **outputs;
+  GnomeRRRotation rotation;
 
   g_assert (self->priv->current_configuration != NULL);
 
-  gnome_rr_output_info_get_geometry (output_that_changed, &x, &y, &width, &height); 
+  gnome_rr_output_info_get_geometry (output_that_changed, &x, &y, &width, &height);
+  rotation = gnome_rr_output_info_get_rotation (output_that_changed);
 
-  if (width == old_width && height == old_height)
+  if (width == old_width && height == old_height && rotation == old_rotation)
     return;
 
   old_right_edge = x + old_width;
@@ -2267,6 +2269,8 @@ show_setup_dialog (CcDisplayPanel *panel)
                 }
             }
 
+          sanity_check_rotation (priv->current_output);
+
           /* if the display was previously in clone mode, ensure the outputs
            * are arranged correctly */
           if ((was_clone && !clone))
@@ -2275,11 +2279,13 @@ show_setup_dialog (CcDisplayPanel *panel)
           if (!clone)
             realign_outputs_after_resolution_change (panel,
                                                      priv->current_output,
-                                                     old_width, old_height);
+                                                     old_width, old_height, rotation);
         }
-
-      /* check rotation */
-      sanity_check_rotation (priv->current_output);
+      else
+        {
+          /* check rotation */
+          sanity_check_rotation (priv->current_output);
+        }
 
       apply_current_configuration (panel);
     }
