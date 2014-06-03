@@ -1922,6 +1922,21 @@ res_combo_changed (GtkComboBox    *combo,
 }
 
 static void
+sanity_check_rotation (GnomeRROutputInfo *output)
+{
+  GnomeRRRotation rotation;
+
+  rotation = gnome_rr_output_info_get_rotation (output);
+
+  /* other options such as reflection are not supported */
+  rotation &= (GNOME_RR_ROTATION_0 | GNOME_RR_ROTATION_90
+               | GNOME_RR_ROTATION_180 | GNOME_RR_ROTATION_270);
+  if (rotation == 0)
+    rotation = GNOME_RR_ROTATION_0;
+  gnome_rr_output_info_set_rotation (output, rotation);
+}
+
+static void
 show_setup_dialog (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
@@ -2264,14 +2279,7 @@ show_setup_dialog (CcDisplayPanel *panel)
         }
 
       /* check rotation */
-      rotation = gnome_rr_output_info_get_rotation (priv->current_output);
-
-      /* other options such as reflection are not supported */
-      rotation &= (GNOME_RR_ROTATION_0 | GNOME_RR_ROTATION_90
-                   | GNOME_RR_ROTATION_180 | GNOME_RR_ROTATION_270);
-      if (rotation == 0)
-        rotation = GNOME_RR_ROTATION_0;
-      gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+      sanity_check_rotation (priv->current_output);
 
       apply_current_configuration (panel);
     }
