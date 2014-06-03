@@ -521,6 +521,21 @@ on_screen_changed (CcDisplayPanel *panel)
 }
 
 static void
+apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
+{
+  GnomeRRRotation rotation;
+
+  rotation = gnome_rr_output_info_get_rotation (output);
+  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
+    {
+      int tmp;
+      tmp = *h;
+      *h = *w;
+      *w = tmp;
+    }
+}
+
+static void
 realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo *output_that_changed, int old_width, int old_height, GnomeRRRotation old_rotation)
 {
   /* We find the outputs that were below or to the right of the output that
@@ -617,21 +632,6 @@ lay_out_outputs_horizontally (CcDisplayPanel *self)
         }
     }
 
-}
-
-static void
-apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
-{
-  GnomeRRRotation rotation;
-
-  rotation = gnome_rr_output_info_get_rotation (output);
-  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
-    {
-      int tmp;
-      tmp = *h;
-      *h = *w;
-      *w = tmp;
-    }
 }
 
 static void
