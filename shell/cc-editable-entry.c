@@ -24,7 +24,7 @@
 #define EMPTY_TEXT "\xe2\x80\x94"
 
 struct _CcEditableEntryPrivate {
-        GtkNotebook *notebook;
+        GtkStack    *stack;
         GtkLabel    *label;
         GtkButton   *button;
         GtkEntry    *entry;
@@ -64,11 +64,9 @@ enum {
         LAST_SIGNAL
 };
 
-enum {
-        PAGE_LABEL,
-        PAGE_BUTTON,
-        PAGE_ENTRY
-};
+#define PAGE_LABEL "_label"
+#define PAGE_BUTTON "_button"
+#define PAGE_ENTRY "_entry"
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
@@ -117,7 +115,7 @@ cc_editable_entry_set_editable (CcEditableEntry *e,
         if (priv->editable != editable) {
                 priv->editable = editable;
 
-                gtk_notebook_set_current_page (priv->notebook, editable ? PAGE_BUTTON : PAGE_LABEL);
+                gtk_stack_set_visible_child_name (e->priv->stack, editable ? PAGE_BUTTON : PAGE_LABEL);
 
                 g_object_notify (G_OBJECT (e), "editable");
         }
@@ -501,19 +499,26 @@ cc_editable_entry_class_init (CcEditableEntryClass *class)
 static void
 start_editing (CcEditableEntry *e)
 {
-        gtk_notebook_set_current_page (e->priv->notebook, PAGE_ENTRY);
+        gtk_stack_set_visible_child_name (e->priv->stack, PAGE_ENTRY);
+        gtk_widget_grab_focus (GTK_WIDGET (e->priv->entry));
 }
 
 static void
 stop_editing (CcEditableEntry *e)
 {
+        gboolean has_focus;
+
         /* Avoid launching another "editing-done" signal
          * caused by the notebook page change */
         if (e->priv->in_stop_editing)
                 return;
 
         e->priv->in_stop_editing = TRUE;
-        gtk_notebook_set_current_page (e->priv->notebook, PAGE_BUTTON);
+        has_focus = gtk_widget_has_focus (GTK_WIDGET (e->priv->entry));
+        gtk_stack_set_visible_child_name (e->priv->stack, PAGE_BUTTON);
+        if (has_focus)
+                gtk_widget_grab_focus (GTK_WIDGET (e->priv->button));
+
         cc_editable_entry_set_text (e, gtk_entry_get_text (e->priv->entry));
         g_signal_emit (e, signals[EDITING_DONE], 0);
         e->priv->in_stop_editing = FALSE;
@@ -523,7 +528,8 @@ static void
 cancel_editing (CcEditableEntry *e)
 {
         gtk_entry_set_text (e->priv->entry, cc_editable_entry_get_text (e));
-        gtk_notebook_set_current_page (e->priv->notebook, PAGE_BUTTON);
+        gtk_stack_set_visible_child_name (e->priv->stack, PAGE_BUTTON);
+        gtk_widget_grab_focus (GTK_WIDGET (e->priv->button));
 }
 
 static void
@@ -561,22 +567,20 @@ entry_key_press (GtkWidget       *widget,
 }
 
 static void
-update_button_padding (GtkWidget       *widget,
-                       GtkAllocation   *allocation,
-                       CcEditableEntry *e)
+update_button_padding (CcEditableEntry *e)
 {
         CcEditableEntryPrivate *priv = e->priv;
-        GtkAllocation alloc;
-        gint offset;
-        gint pad;
+        GtkStyleContext *context;
+        GtkStateFlags state;
+        GtkBorder padding, border;
 
-        gtk_widget_get_allocation (gtk_widget_get_parent (widget), &alloc);
+        context = gtk_widget_get_style_context (GTK_WIDGET (priv->button));
+        state = gtk_style_context_get_state (context);
 
-        offset = allocation->x - alloc.x;
+        gtk_style_context_get_padding (context, state, &padding);
+        gtk_style_context_get_border (context, state, &border);
 
-        gtk_misc_get_padding  (GTK_MISC (priv->label), &pad, NULL);
-        if (offset != pad)
-                gtk_misc_set_padding (GTK_MISC (priv->label), offset, 0);
+        gtk_misc_set_padding (GTK_MISC (priv->label), padding.left + border.left, 0);
 }
 
 static void
@@ -593,41 +597,39 @@ cc_editable_entry_init (CcEditableEntry *e)
         priv->width_chars = -1;
         priv->max_width_chars = -1;
         priv->ellipsize = PANGO_ELLIPSIZE_NONE;
-
-        priv->notebook = (GtkNotebook*)gtk_notebook_new ();
-        gtk_notebook_set_show_tabs (priv->notebook, FALSE);
-        gtk_notebook_set_show_border (priv->notebook, FALSE);
+        priv->stack = GTK_STACK (gtk_stack_new ());
 
         /* Label */
         priv->label = (GtkLabel*)gtk_label_new (EMPTY_TEXT);
         gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->label, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         /* Button */
         priv->button = (GtkButton*)gtk_button_new_with_label (EMPTY_TEXT);
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
         gtk_button_set_alignment (priv->button, 0.0, 0.5);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->button, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), e);
 
         /* Entry */
         priv->entry = (GtkEntry*)gtk_entry_new ();
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->entry, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->entry), PAGE_ENTRY);
 
         g_signal_connect (priv->entry, "activate", G_CALLBACK (entry_activated), e);
         g_signal_connect (priv->entry, "focus-out-event", G_CALLBACK (entry_focus_out), e);
         g_signal_connect (priv->entry, "key-press-event", G_CALLBACK (entry_key_press), e);
-        g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->button)), "size-allocate", G_CALLBACK (update_button_padding), e);
 
-        gtk_container_add (GTK_CONTAINER (e), (GtkWidget*)priv->notebook);
+        update_button_padding (e);
 
-        gtk_widget_show ((GtkWidget*)priv->notebook);
+        gtk_container_add (GTK_CONTAINER (e), (GtkWidget*)priv->stack);
+
+        gtk_widget_show ((GtkWidget*)priv->stack);
         gtk_widget_show ((GtkWidget*)priv->label);
         gtk_widget_show ((GtkWidget*)priv->button);
         gtk_widget_show ((GtkWidget*)priv->entry);
 
-        gtk_notebook_set_current_page (priv->notebook, PAGE_LABEL);
+        gtk_stack_set_visible_child_name (e->priv->stack, PAGE_LABEL);
 }
 
 GtkWidget *
