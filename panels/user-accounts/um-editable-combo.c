@@ -24,7 +24,7 @@
 #define EMPTY_TEXT "\xe2\x80\x94"
 
 struct _UmEditableComboPrivate {
-        GtkNotebook *notebook;
+        GtkStack    *stack;
         GtkLabel    *label;
         GtkButton   *button;
         GtkComboBox *combo;
@@ -50,6 +50,10 @@ enum {
         LAST_SIGNAL
 };
 
+#define PAGE_LABEL "_label"
+#define PAGE_BUTTON "_button"
+#define PAGE_COMBO "_combo"
+
 static guint signals [LAST_SIGNAL] = { 0, };
 
 G_DEFINE_TYPE (UmEditableCombo, um_editable_combo, GTK_TYPE_ALIGNMENT);
@@ -65,7 +69,7 @@ um_editable_combo_set_editable (UmEditableCombo *combo,
         if (priv->editable != editable) {
                 priv->editable = editable;
 
-                gtk_notebook_set_current_page (priv->notebook, editable ? 1 : 0);
+                gtk_stack_set_visible_child_name (combo->priv->stack, editable ? PAGE_BUTTON : PAGE_LABEL);
 
                 g_object_notify (G_OBJECT (combo), "editable");
         }
@@ -291,16 +295,37 @@ um_editable_combo_class_init (UmEditableComboClass *class)
 static void
 start_editing (UmEditableCombo *combo)
 {
-        gtk_notebook_set_current_page (combo->priv->notebook, 2);
+        gtk_stack_set_visible_child_name (combo->priv->stack, PAGE_COMBO);
+        gtk_widget_grab_focus (GTK_WIDGET (combo->priv->combo));
         gtk_combo_box_popup (combo->priv->combo);
+}
+
+static gboolean
+gtk_combo_box_has_focus (GtkComboBox *combo)
+{
+        GtkWidget *widget;
+        GtkWindow *window;
+
+        window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (combo)));
+        widget = gtk_window_get_focus (window);
+        if (widget) {
+                return gtk_widget_is_ancestor (widget, GTK_WIDGET (combo));
+        }
+
+        return FALSE;
 }
 
 static void
 stop_editing (UmEditableCombo *combo)
 {
+        gboolean has_focus;
+
         um_editable_combo_set_active (combo,
                                       gtk_combo_box_get_active (combo->priv->combo));
-        gtk_notebook_set_current_page (combo->priv->notebook, 1);
+        has_focus = gtk_combo_box_has_focus (combo->priv->combo);
+        gtk_stack_set_visible_child_name (combo->priv->stack, PAGE_BUTTON);
+        if (has_focus)
+                gtk_widget_grab_focus (GTK_WIDGET (combo->priv->button));
 
         g_signal_emit (combo, signals[EDITING_DONE], 0);
 }
@@ -308,16 +333,21 @@ stop_editing (UmEditableCombo *combo)
 static void
 cancel_editing (UmEditableCombo *combo)
 {
+        gboolean has_focus;
+
         gtk_combo_box_set_active (combo->priv->combo,
                                   um_editable_combo_get_active (combo));
-        gtk_notebook_set_current_page (combo->priv->notebook, 1);
+        has_focus = gtk_combo_box_has_focus (combo->priv->combo);
+        gtk_stack_set_visible_child_name (combo->priv->stack, PAGE_BUTTON);
+        if (has_focus)
+                gtk_widget_grab_focus (GTK_WIDGET (combo->priv->button));
 }
 
 static void
 um_editable_combo_activate (UmEditableCombo *combo)
 {
         if (combo->priv->editable) {
-                gtk_notebook_set_current_page (combo->priv->notebook, 2);
+                gtk_stack_set_visible_child_name (combo->priv->stack, PAGE_COMBO);
                 gtk_widget_grab_focus (GTK_WIDGET (combo->priv->combo));
         }
 }
@@ -338,72 +368,33 @@ combo_changed (GtkWidget       *widget,
                 stop_editing (combo);
 }
 
-static gboolean
-combo_key_press (GtkWidget       *widget,
-                 GdkEventKey     *event,
-                 UmEditableCombo *combo)
-{
-        if (event->keyval == GDK_KEY_Escape) {
-                cancel_editing (combo);
-                return TRUE;
-        }
-        return FALSE;
-}
-
 static void
-focus_moved (GtkWindow       *window,
-             GtkWidget       *widget,
+popup_shown (GtkWidget       *widget,
+             GParamSpec      *pspec,
              UmEditableCombo *combo)
 {
-        if (gtk_notebook_get_current_page (combo->priv->notebook) == 2 &&
-            (!widget || !gtk_widget_is_ancestor (widget, (GtkWidget *)combo)))
-                stop_editing (combo);
+        gboolean is_shown;
+
+        g_object_get (G_OBJECT (combo->priv->combo), "popup-shown", &is_shown, NULL);
+        if (!is_shown)
+                cancel_editing (combo);
 }
 
 static void
-combo_hierarchy_changed (GtkWidget       *widget,
-                         GtkWidget       *previous_toplevel,
-                         UmEditableCombo *combo)
-{
-        UmEditableComboPrivate *priv;
-        GtkWidget *toplevel;
-
-        priv = combo->priv;
-
-        toplevel = gtk_widget_get_toplevel (widget);
-        if (priv->toplevel != toplevel) {
-                if (priv->toplevel)
-                        g_signal_handlers_disconnect_by_func (priv->toplevel,
-                                                              focus_moved, combo);
-
-                if (GTK_IS_WINDOW (toplevel))
-                        priv->toplevel = toplevel;
-                else
-                        priv->toplevel = NULL;
-
-                if (priv->toplevel)
-                        g_signal_connect (priv->toplevel, "set-focus",
-                                          G_CALLBACK (focus_moved), combo);
-        }
-}
-
-static void
-update_button_padding (GtkWidget       *widget,
-                       GtkAllocation   *allocation,
-                       UmEditableCombo *combo)
+update_button_padding (UmEditableCombo *combo)
 {
         UmEditableComboPrivate *priv = combo->priv;
-        GtkAllocation parent_allocation;
-        gint offset;
-        gint pad;
+        GtkStyleContext *context;
+        GtkStateFlags state;
+        GtkBorder padding, border;
 
-        gtk_widget_get_allocation (gtk_widget_get_parent (widget), &parent_allocation);
+        context = gtk_widget_get_style_context (GTK_WIDGET (priv->button));
+        state = gtk_style_context_get_state (context);
 
-        offset = allocation->x - parent_allocation.x;
+        gtk_style_context_get_padding (context, state, &padding);
+        gtk_style_context_get_border (context, state, &border);
 
-        gtk_misc_get_padding  (GTK_MISC (priv->label), &pad, NULL);
-        if (offset != pad)
-                gtk_misc_set_padding (GTK_MISC (priv->label), offset, 0);
+        gtk_misc_set_padding (GTK_MISC (priv->label), padding.left + border.left, 0);
 }
 
 static void
@@ -416,44 +407,37 @@ um_editable_combo_init (UmEditableCombo *combo)
 
         priv->active = -1;
         priv->text_column = -1;
-
-        priv->notebook = (GtkNotebook*)gtk_notebook_new ();
-        gtk_notebook_set_show_tabs (priv->notebook, FALSE);
-        gtk_notebook_set_show_border (priv->notebook, FALSE);
+        priv->stack = GTK_STACK (gtk_stack_new ());
 
         priv->label = (GtkLabel*)gtk_label_new ("");
         gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->label, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         priv->button = (GtkButton*)gtk_button_new_with_label ("");
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
         gtk_button_set_alignment (priv->button, 0.0, 0.5);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->button, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), combo);
 
         priv->combo = (GtkComboBox*)gtk_combo_box_new ();
         cell = gtk_cell_renderer_text_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->combo), cell, TRUE);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->combo, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->combo), PAGE_COMBO);
 
         g_signal_connect (priv->combo, "changed", G_CALLBACK (combo_changed), combo);
-        g_signal_connect (priv->combo, "key-press-event", G_CALLBACK (combo_key_press), combo);
-        g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->button)), "size-allocate", G_CALLBACK (update_button_padding), combo);
+        g_signal_connect (priv->combo, "notify::popup-shown", G_CALLBACK (popup_shown), combo);
 
+        update_button_padding (combo);
 
-        gtk_container_add (GTK_CONTAINER (combo), (GtkWidget*)priv->notebook);
+        gtk_container_add (GTK_CONTAINER (combo), GTK_WIDGET (priv->stack));
 
-        gtk_widget_show ((GtkWidget*)priv->notebook);
+        gtk_widget_show ((GtkWidget*)priv->stack);
         gtk_widget_show ((GtkWidget*)priv->label);
         gtk_widget_show ((GtkWidget*)priv->button);
         gtk_widget_show ((GtkWidget*)priv->combo);
 
-        gtk_notebook_set_current_page (priv->notebook, 0);
-
-        /* ugly hack to catch the combo box losing focus */
-        g_signal_connect (combo, "hierarchy-changed",
-                          G_CALLBACK (combo_hierarchy_changed), combo);
+        gtk_stack_set_visible_child_name (priv->stack, PAGE_LABEL);
 }
 
 GtkWidget *
