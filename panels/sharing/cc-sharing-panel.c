@@ -31,6 +31,8 @@
 #include <glib/gi18n.h>
 #include <config.h>
 
+#define MAX_ROWS_VISIBLE 5
+
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
 #define PANEL_PRIVATE(o) \
@@ -38,7 +40,8 @@ CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
 
 static void cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self, GtkWidget *label);
-
+static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
+                                                          CcSharingPanel *self);
 
 static GtkWidget *
 _gtk_builder_get_widget (GtkBuilder  *builder,
@@ -238,9 +241,43 @@ out:
 }
 
 static void
-cc_sharing_panel_main_list_box_update_header (GtkListBoxRow  *row,
-                                              GtkListBoxRow  *before,
-                                              gpointer    user_data)
+adjust_input_list_scrolling (CcSharingPanel *self)
+{
+  CcSharingPanelPrivate *priv = self->priv;
+  GtkWidget *scrolled_window;
+  GList *children;
+  guint n_rows;
+
+  scrolled_window = WID ("shared-folders-scrolledwindow");
+
+  children = gtk_container_get_children (GTK_CONTAINER (WID ("shared-folders-listbox")));
+  n_rows = g_list_length (children);
+  g_list_free (children);
+
+  if (n_rows >= MAX_ROWS_VISIBLE)
+    {
+      GtkWidget *parent;
+      gint height;
+
+      parent = gtk_widget_get_parent (scrolled_window);
+      gtk_widget_get_preferred_height (parent, NULL, &height);
+      gtk_widget_set_size_request (parent, -1, height);
+
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+    }
+  else
+    {
+      gtk_widget_set_size_request (gtk_widget_get_parent (scrolled_window), -1, -1);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                      GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+    }
+}
+
+static void
+cc_sharing_panel_list_box_update_header (GtkListBoxRow  *row,
+                                         GtkListBoxRow  *before,
+                                         gpointer    user_data)
 {
   GtkWidget *current;
 
@@ -428,19 +465,21 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
 }
 
 static void
-cc_sharing_panel_add_folder (GtkWidget      *button,
+cc_sharing_panel_add_folder (GtkListBox     *box,
+                             GtkListBoxRow  *row,
                              CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
   GtkWidget *dialog;
-  GtkListStore *store;
   gchar *folder;
-  GtkTreeIter iter;
-  gboolean valid;
   gboolean matching = FALSE;
+  GList *rows, *l;
+
+  if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))
+    return;
 
   dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
-                                        GTK_WINDOW (gtk_widget_get_toplevel (button)),
+                                        GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (box))),
                                         GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
@@ -449,8 +488,8 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
 
   gtk_widget_hide (dialog);
 
-  store = (GtkListStore *) gtk_builder_get_object (priv->builder,
-                                                   "shared-folders-liststore");
+  box = GTK_LIST_BOX (WID ("shared-folders-listbox"));
+  rows = gtk_container_get_children (GTK_CONTAINER (box));
 
   folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
   if (!folder || g_str_equal (folder, ""))
@@ -458,15 +497,12 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
 
   g_debug ("Trying to add %s", folder);
 
-  for (valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
-       valid;
-       valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter))
+  for (l = rows; l != NULL; l = l->next)
     {
-      gchar *string;
+      const char *string;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &string, -1);
+      string = g_object_get_data (G_OBJECT (l->data), "path");
       matching = (g_strcmp0 (string, folder) == 0);
-      g_free (string);
 
       if (matching)
         {
@@ -476,7 +512,15 @@ cc_sharing_panel_add_folder (GtkWidget      *button,
     }
 
   if (!matching)
-    gtk_list_store_insert_with_values (store, NULL, -1, 0, folder, -1);
+    {
+      GtkWidget *row;
+      int i;
+
+      row = cc_sharing_panel_new_media_sharing_row (folder, self);
+      i = g_list_length (rows);
+      gtk_list_box_insert (GTK_LIST_BOX (box), row, i - 1);
+    }
+  adjust_input_list_scrolling (self);
 
 bail:
   g_free (folder);
@@ -487,28 +531,11 @@ static void
 cc_sharing_panel_remove_folder (GtkButton      *button,
                                 CcSharingPanel *self)
 {
-  CcSharingPanelPrivate *priv = self->priv;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
+  GtkWidget *row;
 
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("shared-folders-treeview")));
-
-  gtk_tree_selection_get_selected (selection, &model, &iter);
-
-  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-}
-
-static void
-cc_sharing_panel_selection_changed (GtkTreeSelection *selection,
-                                    CcSharingPanel   *self)
-{
-  CcSharingPanelPrivate *priv = self->priv;
-
-  if (gtk_tree_selection_count_selected_rows (selection) > 0)
-    gtk_widget_set_sensitive (WID ("remove-button"), TRUE);
-  else
-    gtk_widget_set_sensitive (WID ("remove-button"), FALSE);
+  row = g_object_get_data (G_OBJECT (button), "row");
+  gtk_widget_destroy (row);
+  adjust_input_list_scrolling (self);
 }
 
 static void
@@ -517,26 +544,22 @@ cc_sharing_panel_media_sharing_dialog_response (GtkDialog      *dialog,
                                                 CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  gboolean valid;
   GPtrArray *folders;
+  GtkWidget *box;
+  GList *rows, *l;
 
-  model = (GtkTreeModel *) gtk_builder_get_object (priv->builder,
-                                                   "shared-folders-liststore");
-
-  valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (model), &iter);
+  box = WID ("shared-folders-listbox");
+  rows = gtk_container_get_children (GTK_CONTAINER (box));
   folders = g_ptr_array_new_with_free_func (g_free);
 
-  while (valid)
+  for (l = rows; l != NULL; l = l->next)
     {
-      gchar *folder;
+      const char *folder;
 
-      gtk_tree_model_get (model, &iter, 0, &folder, -1);
-
-      g_ptr_array_add (folders, folder);
-
-      valid = gtk_tree_model_iter_next (model, &iter);
+      folder = g_object_get_data (G_OBJECT (l->data), "path");
+      if (folder == NULL)
+        continue;
+      g_ptr_array_add (folders, g_strdup (folder));
     }
 
   g_ptr_array_add (folders, NULL);
@@ -544,8 +567,128 @@ cc_sharing_panel_media_sharing_dialog_response (GtkDialog      *dialog,
   cc_media_sharing_set_preferences (gtk_switch_get_active (GTK_SWITCH (WID ("share-media-switch"))),
                                     (gchar **) folders->pdata);
 
-
   g_ptr_array_free (folders, TRUE);
+}
+
+#define ICON_NAME_FOLDER                "folder-symbolic"
+#define ICON_NAME_FOLDER_DESKTOP        "user-desktop-symbolic"
+#define ICON_NAME_FOLDER_DOCUMENTS      "folder-documents-symbolic"
+#define ICON_NAME_FOLDER_DOWNLOAD       "folder-download-symbolic"
+#define ICON_NAME_FOLDER_MUSIC          "folder-music-symbolic"
+#define ICON_NAME_FOLDER_PICTURES       "folder-pictures-symbolic"
+#define ICON_NAME_FOLDER_PUBLIC_SHARE   "folder-publicshare-symbolic"
+#define ICON_NAME_FOLDER_TEMPLATES      "folder-templates-symbolic"
+#define ICON_NAME_FOLDER_VIDEOS         "folder-videos-symbolic"
+#define ICON_NAME_FOLDER_SAVED_SEARCH   "folder-saved-search-symbolic"
+
+static GIcon *
+special_directory_get_gicon (GUserDirectory directory)
+{
+#define ICON_CASE(x)                      \
+  case G_USER_DIRECTORY_ ## x:            \
+          return g_themed_icon_new_with_default_fallbacks (ICON_NAME_FOLDER_ ## x);
+
+  switch (directory)
+    {
+      ICON_CASE (DESKTOP);
+      ICON_CASE (DOCUMENTS);
+      ICON_CASE (DOWNLOAD);
+      ICON_CASE (MUSIC);
+      ICON_CASE (PICTURES);
+      ICON_CASE (PUBLIC_SHARE);
+      ICON_CASE (TEMPLATES);
+      ICON_CASE (VIDEOS);
+
+    default:
+      return g_themed_icon_new_with_default_fallbacks (ICON_NAME_FOLDER);
+    }
+
+#undef ICON_CASE
+}
+
+static GtkWidget *
+cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
+                                        CcSharingPanel *self)
+{
+  GtkWidget *row, *box, *w;
+  GUserDirectory dir = G_USER_N_DIRECTORIES;
+  GIcon *icon;
+  guint i;
+  char *basename, *path;
+  GFile *file;
+
+  file = g_file_new_for_commandline_arg (uri_or_path);
+  path = g_file_get_path (file);
+  g_object_unref (file);
+
+  row = gtk_list_box_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_container_add (GTK_CONTAINER (row), box);
+
+  /* Find the icon and create it */
+  for (i = 0; i < G_USER_N_DIRECTORIES; i++)
+    {
+      if (g_strcmp0 (path, g_get_user_special_dir (i)) == 0)
+        {
+          dir = i;
+          break;
+        }
+    }
+
+  icon = special_directory_get_gicon (dir);
+  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_MENU);
+  gtk_widget_set_margin_end (w, 12);
+  gtk_container_add (GTK_CONTAINER (box), w);
+  g_object_unref (icon);
+
+  /* Label */
+  basename = g_filename_display_basename (path);
+  w = gtk_label_new (basename);
+  g_free (basename);
+  gtk_container_add (GTK_CONTAINER (box), w);
+
+  /* Remove button */
+  w = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_button_set_relief (GTK_BUTTON (w), GTK_RELIEF_NONE);
+  gtk_widget_set_margin_top (w, 3);
+  gtk_widget_set_margin_bottom (w, 3);
+  gtk_widget_set_margin_end (w, 12);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
+  g_signal_connect (G_OBJECT (w), "clicked",
+                    G_CALLBACK (cc_sharing_panel_remove_folder), self);
+  g_object_set_data (G_OBJECT (w), "row", row);
+
+  g_object_set_data_full (G_OBJECT (row), "path", g_strdup (path), g_free);
+
+  gtk_widget_show_all (row);
+
+  return row;
+}
+
+static GtkWidget *
+cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
+{
+  GtkWidget *row, *box, *w;
+
+  row = gtk_list_box_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_container_add (GTK_CONTAINER (row), box);
+
+  w = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_widget_set_hexpand (w, TRUE);
+  gtk_widget_set_margin_top (w, 6);
+  gtk_widget_set_margin_bottom (w, 6);
+
+  g_object_set_data (G_OBJECT (w), "row", row);
+
+  g_object_set_data (G_OBJECT (row), "is-add", GINT_TO_POINTER (1));
+  gtk_widget_show_all (row);
+
+  return row;
 }
 
 static void
@@ -554,7 +697,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   CcSharingPanelPrivate *priv = self->priv;
   gchar **folders, **list;
   gboolean enabled;
-  GtkListStore *store;
+  GtkWidget *box;
   char *path;
 
   path = g_find_program_in_path ("rygel");
@@ -573,14 +716,6 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
                                            WID ("shared-folders-box"),
                                            NULL);
 
-  g_signal_connect (WID ("add-button"), "clicked",
-                    G_CALLBACK (cc_sharing_panel_add_folder), self);
-  g_signal_connect (WID ("remove-button"), "clicked",
-                    G_CALLBACK (cc_sharing_panel_remove_folder), self);
-
-  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("shared-folders-treeview"))),
-                    "changed", G_CALLBACK (cc_sharing_panel_selection_changed), self);
-
   g_signal_connect (WID ("media-sharing-dialog"), "response",
                     G_CALLBACK (cc_sharing_panel_media_sharing_dialog_response),
                     self);
@@ -589,14 +724,29 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 
   gtk_switch_set_active (GTK_SWITCH (WID ("share-media-switch")), enabled);
 
+  box = WID ("shared-folders-listbox");
+  gtk_list_box_set_header_func (GTK_LIST_BOX (box),
+                                cc_sharing_panel_list_box_update_header, NULL,
+                                NULL);
+
   list = folders;
-  store = (GtkListStore *) gtk_builder_get_object (priv->builder,
-                                                   "shared-folders-liststore");
   while (list && *list)
     {
-      gtk_list_store_insert_with_values (store, NULL, -1, 0, *list, -1);
+      GtkWidget *row;
+
+      row = cc_sharing_panel_new_media_sharing_row (*list, self);
+      gtk_list_box_insert (GTK_LIST_BOX (box), row, -1);
       list++;
     }
+
+  gtk_list_box_insert (GTK_LIST_BOX (box),
+                       cc_sharing_panel_new_add_media_sharing_row (self), -1);
+
+  adjust_input_list_scrolling (self);
+
+  g_signal_connect (G_OBJECT (box), "row-activated",
+                    G_CALLBACK (cc_sharing_panel_add_folder), self);
+
 
   g_strfreev (folders);
 }
@@ -1026,7 +1176,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
   gchar *objects[] = {
       "sharing-panel",
       "bluetooth-sharing-dialog",
-      "shared-folders-liststore",
       "media-sharing-dialog",
       "personal-file-sharing-dialog",
       "remote-login-dialog",
@@ -1074,7 +1223,7 @@ cc_sharing_panel_init (CcSharingPanel *self)
   gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (WID ("main-list-box")),
                                              TRUE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("main-list-box")),
-                                cc_sharing_panel_main_list_box_update_header,
+                                cc_sharing_panel_list_box_update_header,
                                 NULL, NULL);
 
   /* create the master switch */
