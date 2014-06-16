@@ -81,9 +81,13 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
   GtkWindow *parent;
 
   parent = gtk_window_get_transient_for (GTK_WINDOW (chooser));
-  g_assert (parent);
 
-  if (gtk_window_is_maximized (parent))
+  if (parent == NULL)
+    {
+      gtk_widget_set_size_request (GTK_WIDGET (chooser), -1, 550);
+      gtk_icon_view_set_columns (GTK_ICON_VIEW (chooser->priv->icon_view), 3);
+    }
+  else if (gtk_window_is_maximized (parent))
     {
       gtk_window_maximize (GTK_WINDOW (chooser));
     }
