@@ -64,7 +64,7 @@ struct _BgColorsSourceClass
 
 GType bg_colors_source_get_type (void) G_GNUC_CONST;
 
-BgColorsSource *bg_colors_source_new (void);
+BgColorsSource *bg_colors_source_new (GtkWindow *window);
 
 G_END_DECLS
 

@@ -68,7 +68,7 @@ struct _BgWallpapersSourceClass
 
 GType bg_wallpapers_source_get_type (void) G_GNUC_CONST;
 
-BgWallpapersSource *bg_wallpapers_source_new (void);
+BgWallpapersSource *bg_wallpapers_source_new (GtkWindow *window);
 
 G_END_DECLS
 

@@ -25,9 +25,6 @@
 
 G_BEGIN_DECLS
 
-#define THUMBNAIL_WIDTH 256
-#define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
-
 #define BG_TYPE_SOURCE bg_source_get_type()
 
 #define BG_SOURCE(obj) \
@@ -69,6 +66,10 @@ struct _BgSourceClass
 GType bg_source_get_type (void) G_GNUC_CONST;
 
 GtkListStore* bg_source_get_liststore (BgSource *source);
+
+gint bg_source_get_thumbnail_height (BgSource *source);
+
+gint bg_source_get_thumbnail_width (BgSource *source);
 
 G_END_DECLS
 
