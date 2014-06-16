@@ -274,9 +274,9 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
   priv = chooser->priv;
 
-  priv->wallpapers_source = bg_wallpapers_source_new ();
-  priv->pictures_source = bg_pictures_source_new ();
-  priv->colors_source = bg_colors_source_new ();
+  priv->wallpapers_source = bg_wallpapers_source_new (GTK_WINDOW (chooser));
+  priv->pictures_source = bg_pictures_source_new (GTK_WINDOW (chooser));
+  priv->colors_source = bg_colors_source_new (GTK_WINDOW (chooser));
 
   priv->row_inserted_id = 0;
   priv->row_deleted_id = 0;

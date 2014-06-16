@@ -54,15 +54,22 @@ struct {
 };
 
 static void
-bg_colors_source_init (BgColorsSource *self)
+bg_colors_source_constructed (GObject *object)
 {
+  BgColorsSource *self = BG_COLORS_SOURCE (object);
   GnomeDesktopThumbnailFactory *thumb_factory;
   guint i;
   GtkListStore *store;
+  gint thumbnail_height;
+  gint thumbnail_width;
+
+  G_OBJECT_CLASS (bg_colors_source_parent_class)->constructed (object);
 
   store = bg_source_get_liststore (BG_SOURCE (self));
 
   thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
+  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (self));
+  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (self));
 
   for (i = 0; i < G_N_ELEMENTS (items); i++)
     {
@@ -91,7 +98,7 @@ bg_colors_source_init (BgColorsSource *self)
       /* insert the item into the liststore */
       pixbuf = cc_background_item_get_thumbnail (item,
 						 thumb_factory,
-						 THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+						 thumbnail_width, thumbnail_height);
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,
@@ -104,14 +111,21 @@ bg_colors_source_init (BgColorsSource *self)
   g_object_unref (thumb_factory);
 }
 
-static void
-bg_colors_source_class_init (BgColorsSourceClass *klass)
+bg_colors_source_init (BgColorsSource *self)
 {
 }
 
-BgColorsSource *
-bg_colors_source_new (void)
+static void
+bg_colors_source_class_init (BgColorsSourceClass *klass)
 {
-  return g_object_new (BG_TYPE_COLORS_SOURCE, NULL);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->constructed = bg_colors_source_constructed;
+}
+
+BgColorsSource *
+bg_colors_source_new (GtkWindow *window)
+{
+  return g_object_new (BG_TYPE_COLORS_SOURCE, "window", window, NULL);
 }
 

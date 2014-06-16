@@ -224,6 +224,8 @@ picture_opened_for_read (GObject *source_object,
   CcBackgroundItem *item;
   GFileInputStream *stream;
   GError *error = NULL;
+  gint thumbnail_height;
+  gint thumbnail_width;
 
   item = g_object_get_data (source_object, "item");
   stream = g_file_read_finish (G_FILE (source_object), res, &error);
@@ -246,9 +248,11 @@ picture_opened_for_read (GObject *source_object,
    */
   bg_source = BG_PICTURES_SOURCE (user_data);
 
+  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (bg_source));
+  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (bg_source));
   g_object_set_data_full (G_OBJECT (stream), "item", g_object_ref (item), g_object_unref);
   gdk_pixbuf_new_from_stream_at_scale_async (G_INPUT_STREAM (stream),
-                                             THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT,
+                                             thumbnail_width, thumbnail_height,
                                              TRUE,
                                              bg_source->priv->cancellable,
                                              picture_scaled, bg_source);
@@ -914,9 +918,9 @@ bg_pictures_source_init (BgPicturesSource *self)
 }
 
 BgPicturesSource *
-bg_pictures_source_new (void)
+bg_pictures_source_new (GtkWindow *window)
 {
-  return g_object_new (BG_TYPE_PICTURES_SOURCE, NULL);
+  return g_object_new (BG_TYPE_PICTURES_SOURCE, "window", window, NULL);
 }
 
 const char * const *

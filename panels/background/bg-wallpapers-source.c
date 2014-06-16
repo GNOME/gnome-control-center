@@ -50,6 +50,8 @@ load_wallpapers (gchar              *key,
   GIcon *pixbuf;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
   gboolean deleted;
+  gint thumbnail_height;
+  gint thumbnail_width;
 
   g_object_get (G_OBJECT (item), "is-deleted", &deleted, NULL);
 
@@ -58,8 +60,10 @@ load_wallpapers (gchar              *key,
 
   gtk_list_store_append (store, &iter);
 
+  thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (source));
+  thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (source));
   pixbuf = cc_background_item_get_thumbnail (item, priv->thumb_factory,
-					     THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+					     thumbnail_width, thumbnail_height);
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,
@@ -111,6 +115,23 @@ load_default_bg (BgWallpapersSource *self)
 }
 
 static void
+bg_wallpapers_source_constructed (GObject *object)
+{
+  BgWallpapersSource *self = BG_WALLPAPERS_SOURCE (object);
+  BgWallpapersSourcePrivate *priv = self->priv;
+
+  G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->constructed (object);
+
+  g_signal_connect (G_OBJECT (priv->xml), "added",
+		    G_CALLBACK (item_added), self);
+
+  /* Try adding the default background first */
+  load_default_bg (self);
+
+  cc_background_xml_load_list_async (priv->xml, NULL, list_load_cb, self);
+}
+
+static void
 bg_wallpapers_source_dispose (GObject *object)
 {
   BgWallpapersSourcePrivate *priv = BG_WALLPAPERS_SOURCE (object)->priv;
@@ -131,13 +152,6 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
   priv->xml = cc_background_xml_new ();
-  g_signal_connect (G_OBJECT (priv->xml), "added",
-		    G_CALLBACK (item_added), self);
-
-  /* Try adding the default background first */
-  load_default_bg (self);
-
-  cc_background_xml_load_list_async (priv->xml, NULL, list_load_cb, self);
 }
 
 static void
@@ -147,12 +161,13 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
 
   g_type_class_add_private (klass, sizeof (BgWallpapersSourcePrivate));
 
+  object_class->constructed = bg_wallpapers_source_constructed;
   object_class->dispose = bg_wallpapers_source_dispose;
 }
 
 BgWallpapersSource *
-bg_wallpapers_source_new (void)
+bg_wallpapers_source_new (GtkWindow *window)
 {
-  return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, NULL);
+  return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, "window", window, NULL);
 }
 
