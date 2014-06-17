@@ -41,27 +41,6 @@ struct _BgWallpapersSourcePrivate
 
 
 static void
-bg_wallpapers_source_dispose (GObject *object)
-{
-  BgWallpapersSourcePrivate *priv = BG_WALLPAPERS_SOURCE (object)->priv;
-
-  g_clear_object (&priv->thumb_factory);
-  g_clear_object (&priv->xml);
-
-  G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
-}
-
-static void
-bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (BgWallpapersSourcePrivate));
-
-  object_class->dispose = bg_wallpapers_source_dispose;
-}
-
-static void
 load_wallpapers (gchar              *key,
                  CcBackgroundItem   *item,
                  BgWallpapersSource *source)
@@ -132,6 +111,17 @@ load_default_bg (BgWallpapersSource *self)
 }
 
 static void
+bg_wallpapers_source_dispose (GObject *object)
+{
+  BgWallpapersSourcePrivate *priv = BG_WALLPAPERS_SOURCE (object)->priv;
+
+  g_clear_object (&priv->thumb_factory);
+  g_clear_object (&priv->xml);
+
+  G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
+}
+
+static void
 bg_wallpapers_source_init (BgWallpapersSource *self)
 {
   BgWallpapersSourcePrivate *priv;
@@ -148,6 +138,16 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   load_default_bg (self);
 
   cc_background_xml_load_list_async (priv->xml, NULL, list_load_cb, self);
+}
+
+static void
+bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  g_type_class_add_private (klass, sizeof (BgWallpapersSourcePrivate));
+
+  object_class->dispose = bg_wallpapers_source_dispose;
 }
 
 BgWallpapersSource *

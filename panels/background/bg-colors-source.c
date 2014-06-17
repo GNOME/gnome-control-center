@@ -32,11 +32,6 @@ G_DEFINE_TYPE (BgColorsSource, bg_colors_source, BG_TYPE_SOURCE)
 #define COLORS_SOURCE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_COLORS_SOURCE, BgColorsSourcePrivate))
 
-static void
-bg_colors_source_class_init (BgColorsSourceClass *klass)
-{
-}
-
 struct {
   GDesktopBackgroundShading type;
   int orientation;
@@ -107,6 +102,11 @@ bg_colors_source_init (BgColorsSource *self)
     }
 
   g_object_unref (thumb_factory);
+}
+
+static void
+bg_colors_source_class_init (BgColorsSourceClass *klass)
+{
 }
 
 BgColorsSource *
