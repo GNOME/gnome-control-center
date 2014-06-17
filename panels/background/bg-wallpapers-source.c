@@ -41,32 +41,6 @@ struct _BgWallpapersSourcePrivate
 
 
 static void
-bg_wallpapers_source_get_property (GObject    *object,
-                                   guint       property_id,
-                                   GValue     *value,
-                                   GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
-bg_wallpapers_source_set_property (GObject      *object,
-                                    guint         property_id,
-                                    const GValue *value,
-                                    GParamSpec   *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
 bg_wallpapers_source_dispose (GObject *object)
 {
   BgWallpapersSourcePrivate *priv = BG_WALLPAPERS_SOURCE (object)->priv;
@@ -84,8 +58,6 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
 
   g_type_class_add_private (klass, sizeof (BgWallpapersSourcePrivate));
 
-  object_class->get_property = bg_wallpapers_source_get_property;
-  object_class->set_property = bg_wallpapers_source_set_property;
   object_class->dispose = bg_wallpapers_source_dispose;
 }
 
