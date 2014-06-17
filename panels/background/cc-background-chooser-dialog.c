@@ -278,9 +278,6 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   priv->pictures_source = bg_pictures_source_new (GTK_WINDOW (chooser));
   priv->colors_source = bg_colors_source_new (GTK_WINDOW (chooser));
 
-  priv->row_inserted_id = 0;
-  priv->row_deleted_id = 0;
-
   gtk_container_set_border_width (GTK_CONTAINER (chooser), 6);
   gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
   gtk_window_set_resizable (GTK_WINDOW (chooser), FALSE);
