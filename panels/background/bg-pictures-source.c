@@ -73,32 +73,6 @@ const char * const screenshot_types[] = {
 static char *bg_pictures_source_get_unique_filename (const char *uri);
 
 static void
-bg_pictures_source_get_property (GObject    *object,
-                                  guint       property_id,
-                                  GValue     *value,
-                                  GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
-bg_pictures_source_set_property (GObject      *object,
-                                  guint         property_id,
-                                  const GValue *value,
-                                  GParamSpec   *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
 bg_pictures_source_dispose (GObject *object)
 {
   BgPicturesSourcePrivate *priv = BG_PICTURES_SOURCE (object)->priv;
@@ -137,8 +111,6 @@ bg_pictures_source_class_init (BgPicturesSourceClass *klass)
 
   g_type_class_add_private (klass, sizeof (BgPicturesSourcePrivate));
 
-  object_class->get_property = bg_pictures_source_get_property;
-  object_class->set_property = bg_pictures_source_set_property;
   object_class->dispose = bg_pictures_source_dispose;
   object_class->finalize = bg_pictures_source_finalize;
 }
