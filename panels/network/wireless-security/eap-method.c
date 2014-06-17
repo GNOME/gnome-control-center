@@ -118,7 +118,7 @@ _get_ca_ignore_settings (const char *uuid)
 	GSettings *settings;
 	char *path = NULL;
 
-	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s", uuid);
+	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s/", uuid);
 	settings = g_settings_new_with_path ("org.gnome.nm-applet.eap", path);
 	g_free (path);
 
