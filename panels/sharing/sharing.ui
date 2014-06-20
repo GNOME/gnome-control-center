@@ -420,38 +420,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="share-public-folder-on-network-switch">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">end</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label16">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Share Public Folder On This Network</property>
-                <attributes>
-                 <attribute name="weight" value="bold"/>
-                </attributes>
-                <property name="mnemonic_widget">share-public-folder-on-network-switch</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkGrid" id="require-password-grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -533,6 +501,17 @@
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="personal-file-sharing-headerbar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="title" translatable="yes">Personal File Sharing</property>
+        <property name="show_close_button">True</property>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>
@@ -670,35 +649,6 @@
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
                     <property name="width">2</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSwitch" id="remote-view-switch">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="halign">end</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label20">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Screen Sharing</property>
-                    <property name="mnemonic_widget">remote-view-switch</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -898,6 +848,17 @@
         </child>
       </object>
     </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="screen-sharing-headerbar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="title" translatable="yes">Screen Sharing</property>
+        <property name="show_close_button">True</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
   </object>
   <object class="GtkDialog" id="media-sharing-dialog">
     <property name="can_focus">False</property>
@@ -1006,19 +967,11 @@
       </object>
     </child>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="headerbar1">
+      <object class="GtkHeaderBar" id="media-sharing-headerbar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="title">Media Sharing</property>
         <property name="show_close_button">True</property>
-        <child>
-          <object class="GtkSwitch" id="share-media-switch">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="halign">end</property>
-            <property name="valign">center</property>
-          </object>
-        </child>
         <child>
           <placeholder/>
         </child>

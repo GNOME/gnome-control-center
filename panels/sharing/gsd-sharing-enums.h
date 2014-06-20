@@ -1,5 +1,6 @@
-/*
- * Copyright (C) 2013 Intel, Inc
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+ *
+ * Copyright (C) 2014 Bastien Nocera <hadess@hadess.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,19 +13,22 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- *
- * Author: Thomas Wood <thomas.wood@intel.com>
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
 
-#ifndef __CC_MEDIA_SHARING_H__
-#define __CC_MEDIA_SHARING_H__
+#ifndef __GSD_SHARING_ENUMS_H
+#define __GSD_SHARING_ENUMS_H
 
-#include <glib.h>
+G_BEGIN_DECLS
 
-void cc_media_sharing_get_preferences (gchar ***folders);
-void cc_media_sharing_set_preferences (gchar **folders);
+typedef enum {
+       GSD_SHARING_STATUS_OFFLINE,
+       GSD_SHARING_STATUS_DISABLED_MOBILE_BROADBAND,
+       GSD_SHARING_STATUS_DISABLED_LOW_SECURITY,
+       GSD_SHARING_STATUS_AVAILABLE
+} GsdSharingStatus;
 
-#endif /* __CC_MEDIA_SHARING_H__ */
+G_END_DECLS
+
+#endif /* __GSD_SHARING_ENUMS_H */
