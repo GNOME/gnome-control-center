@@ -743,6 +743,26 @@ change_ntp (GObject         *gobject,
   queue_set_ntp (self);
 }
 
+static gboolean
+is_ntp_available (CcDateTimePanel *self)
+{
+  GVariant *value;
+  gboolean ntp_available = TRUE;
+
+  /* We need to access this directly so that we can default to TRUE if
+   * it is not set.
+   */
+  value = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (self->priv->dtm), "CanNTP");
+  if (value)
+    {
+      if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
+        ntp_available = g_variant_get_boolean (value);
+      g_variant_unref (value);
+    }
+
+  return ntp_available;
+}
+
 static void
 on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
@@ -773,22 +793,7 @@ static void
 on_can_ntp_changed (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  gboolean ntp_available = TRUE;
-  GVariant *value;
-
-  /* We need to access this directly so that we can default to TRUE if
-   * it is not set.
-   */
-  value = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (self->priv->dtm), "CanNTP");
-  if (value)
-    {
-      if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
-        ntp_available = g_variant_get_boolean (value);
-      g_variant_unref (value);
-    }
-
-  gtk_widget_set_visible (W ("auto-datetime-row"),
-                          ntp_available);
+  gtk_widget_set_visible (W ("auto-datetime-row"), is_ntp_available (self));
 }
 
 static void
@@ -1280,6 +1285,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                           G_BINDING_SYNC_CREATE);
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
+
+  gtk_widget_set_visible (W ("auto-datetime-row"), is_ntp_available (self));
 
   /* Timezone settings */
   bind_switch_to_row (self,
