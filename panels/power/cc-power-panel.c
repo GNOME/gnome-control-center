@@ -29,6 +29,7 @@
 #include <nm-client.h>
 #endif
 
+#include "shell/list-box-helper.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
 
@@ -1118,25 +1119,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
 }
 
 static void
-update_header_func (GtkListBoxRow  *row,
-                    GtkListBoxRow  *before,
-                    gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 bt_set_powered (CcPowerPanel *self,
                 gboolean      powered)
 {
@@ -1476,7 +1458,7 @@ add_power_saving_section (CcPowerPanel *self)
   g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                update_header_func,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
 
   box = gtk_frame_new (NULL);
@@ -1848,7 +1830,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                update_header_func,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
   g_signal_connect_swapped (widget, "row-activated",
                             G_CALLBACK (activate_row), self);
@@ -2050,7 +2032,7 @@ add_battery_section (CcPowerPanel *self)
   g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                update_header_func,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
@@ -2096,7 +2078,7 @@ add_device_section (CcPowerPanel *self)
   g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                update_header_func,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
