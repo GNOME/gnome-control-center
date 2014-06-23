@@ -32,6 +32,7 @@
 
 #include "panel-common.h"
 
+#include "shell/list-box-helper.h"
 #include "connection-editor/net-connection-editor.h"
 #include "connection-editor/ce-page.h"
 
@@ -450,25 +451,6 @@ remote_settings_read_cb (NMRemoteSettings  *settings,
 }
 
 static void
-update_header (GtkListBoxRow  *row,
-               GtkListBoxRow  *before,
-               gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 add_profile (GtkButton *button, NetDeviceEthernet *device)
 {
         NMRemoteSettings *settings;
@@ -580,7 +562,7 @@ device_ethernet_constructed (GObject *object)
         device->scrolled_window = swin = GTK_WIDGET (gtk_builder_get_object (device->builder, "list"));
         device->list = list = GTK_WIDGET (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (swin), list);
         g_signal_connect (list, "row-activated",
                           G_CALLBACK (connection_activated), device);

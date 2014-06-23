@@ -27,6 +27,7 @@
 #include <nm-utils.h>
 #include <nm-device-wifi.h>
 
+#include "shell/list-box-helper.h"
 #include "net-connection-editor.h"
 #include "net-connection-editor-resources.h"
 #include "ce-page-details.h"
@@ -567,25 +568,6 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         gtk_tree_path_free (path);
 }
 
-static void
-update_header (GtkListBoxRow *row,
-               GtkListBoxRow *before,
-               gpointer       user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
 typedef struct {
         const char *name;
         GType (*type_func) (void);
@@ -861,7 +843,7 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
 
         list = GTK_LIST_BOX (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (list, update_header, NULL, NULL);
+        gtk_list_box_set_header_func (list, cc_list_box_update_header_func, NULL, NULL);
         g_signal_connect (list, "row-activated",
                           G_CALLBACK (connection_type_activated), editor);
 

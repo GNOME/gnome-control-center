@@ -35,6 +35,7 @@
 #include <nm-remote-connection.h>
 #include <nm-setting-wireless.h>
 
+#include "shell/list-box-helper.h"
 #include "network-dialogs.h"
 #include "panel-common.h"
 
@@ -1621,25 +1622,6 @@ make_row (GtkSizeGroup   *rows,
         *row_out = row;
 }
 
-static void
-update_header (GtkListBoxRow  *row,
-               GtkListBoxRow  *before,
-               gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
 static gint
 history_sort (gconstpointer a, gconstpointer b, gpointer data)
 {
@@ -1760,7 +1742,7 @@ open_history (NetDeviceWifi *device_wifi)
         list = GTK_WIDGET (gtk_list_box_new ());
         gtk_widget_show (list);
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)history_sort, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (swin), list);
 
@@ -1967,7 +1949,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         list = GTK_WIDGET (gtk_list_box_new ());
         gtk_widget_show (list);
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)ap_sort, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (swin), list);
         g_signal_connect (list, "row-activated",

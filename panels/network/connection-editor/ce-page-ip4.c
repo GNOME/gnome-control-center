@@ -26,6 +26,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
+#include "shell/list-box-helper.h"
 #include "ce-page-ip4.h"
 #include <nm-utils.h>
 
@@ -88,25 +89,6 @@ switch_toggled (GObject    *object,
                 CEPage     *page)
 {
         ce_page_changed (page);
-}
-
-static void
-update_header (GtkListBoxRow *row,
-               GtkListBoxRow *before,
-               gpointer       user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
 }
 
 static void
@@ -309,7 +291,7 @@ add_address_section (CEPageIP4 *page)
         gtk_container_add (GTK_CONTAINER (widget), frame);
         page->address_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
 
@@ -412,7 +394,7 @@ add_dns_section (CEPageIP4 *page)
         gtk_container_add (GTK_CONTAINER (widget), frame);
         page->dns_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
@@ -555,7 +537,7 @@ add_routes_section (CEPageIP4 *page)
         gtk_container_add (GTK_CONTAINER (widget), frame);
         page->routes_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), update_header, NULL, NULL);
+        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_routes = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
