@@ -18,6 +18,7 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
+#include "shell/list-box-helper.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
 
@@ -607,25 +608,6 @@ cc_privacy_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-update_header_func (GtkListBoxRow  *row,
-                    GtkListBoxRow  *before,
-                    gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 activate_row (CcPrivacyPanel *self,
               GtkListBoxRow  *row)
 {
@@ -689,7 +671,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
                             G_CALLBACK (activate_row), self);
 
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                update_header_func,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
 
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
