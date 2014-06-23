@@ -41,6 +41,8 @@ gnome_control_center_SOURCES =			\
 	hostname-helper.h			\
 	cc-hostname-entry.c			\
 	cc-hostname-entry.h			\
+	list-box-helper.h			\
+	list-box-helper.c			\
 	$(MARSHAL_FILES)
 
 gnome_control_center_LDFLAGS = -export-dynamic
