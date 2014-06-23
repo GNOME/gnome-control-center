@@ -25,6 +25,7 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
 #include "cc-edit-dialog.h"
@@ -91,25 +92,6 @@ cc_notifications_panel_finalize (GObject *object)
 }
 
 static void
-update_header_func (GtkListBoxRow  *row,
-                    GtkListBoxRow  *before,
-                    gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 cc_notifications_panel_init (CcNotificationsPanel *panel)
 {
   GtkWidget *w;
@@ -146,7 +128,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   gtk_list_box_set_selection_mode (panel->list_box, GTK_SELECTION_NONE);
   gtk_list_box_set_sort_func (panel->list_box, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
   gtk_list_box_set_header_func (panel->list_box,
-                                update_header_func,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
 
   g_signal_connect (panel->list_box, "row-activated",
