@@ -26,6 +26,7 @@
 #include <gdk/gdkx.h>
 #include <libsoup/soup.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-color-calibrate.h"
 #include "cc-color-cell-renderer-text.h"
 #include "cc-color-panel.h"
@@ -2206,25 +2207,6 @@ cc_color_panel_filter_func (GtkListBoxRow *row, void *user_data)
   return ret;
 }
 
-static void
-cc_color_panel_header_func (GtkListBoxRow  *row,
-                            GtkListBoxRow  *before,
-                            gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
 static gboolean
 cc_color_panel_treeview_quality_default_cb (GtkTreeModel *model,
                                             GtkTreePath *path,
@@ -2512,7 +2494,7 @@ cc_color_panel_init (CcColorPanel *prefs)
                               prefs,
                               NULL);
   gtk_list_box_set_header_func (priv->list_box,
-                                cc_color_panel_header_func,
+                                cc_list_box_update_header_func,
                                 prefs, NULL);
   gtk_list_box_set_selection_mode (priv->list_box,
                                    GTK_SELECTION_SINGLE);
