@@ -29,6 +29,7 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-common-language.h"
 #include "cc-util.h"
 
@@ -363,24 +364,6 @@ row_activated (GtkListBox        *box,
 }
 
 static void
-update_header_func (GtkListBoxRow  *row,
-                    GtkListBoxRow  *before,
-                    gpointer    user_data)
-{
-        GtkWidget *current;
-
-        if (before == NULL)
-                return;
-
-        current = gtk_list_box_row_get_header (row);
-        if (current == NULL) {
-                current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-                gtk_widget_show (current);
-                gtk_list_box_row_set_header (row, current);
-        }
-}
-
-static void
 cc_language_chooser_private_free (gpointer data)
 {
         CcLanguageChooserPrivate *priv = data;
@@ -431,7 +414,7 @@ cc_language_chooser_new (GtkWidget *parent)
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->language_list),
                                          GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (priv->language_list),
-                                      update_header_func, NULL, NULL);
+                                      cc_list_box_update_header_func, NULL, NULL);
         add_all_languages (GTK_DIALOG (chooser));
 
         g_signal_connect_swapped (priv->filter_entry, "search-changed",
