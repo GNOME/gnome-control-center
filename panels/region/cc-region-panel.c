@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-region-panel.h"
 #include "cc-region-resources.h"
 #include "cc-language-chooser.h"
@@ -57,8 +58,6 @@
 
 #define INPUT_SOURCE_TYPE_XKB "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
-
-#define MAX_INPUT_ROWS_VISIBLE 5
 
 #define DEFAULT_LOCALE "en_US.utf-8"
 
@@ -255,25 +254,6 @@ show_restart_notification (CcRegionPanel *self,
                 setlocale (LC_MESSAGES, current_locale);
                 g_free (current_locale);
         }
-}
-
-static void
-update_header_func (GtkListBoxRow  *row,
-                    GtkListBoxRow  *before,
-                    gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
 }
 
 typedef struct {
@@ -666,7 +646,7 @@ setup_language_section (CcRegionPanel *self)
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget),
                                          GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                      update_header_func,
+                                      cc_list_box_update_header_func,
                                       NULL, NULL);
         g_signal_connect_swapped (widget, "row-activated",
                                   G_CALLBACK (activate_language_row), self);
@@ -808,28 +788,6 @@ setup_app_info_for_id (const gchar *id)
 #endif
 
 static void
-adjust_input_list_scrolling (CcRegionPanel *self)
-{
-        CcRegionPanelPrivate *priv = self->priv;
-
-        if (priv->n_input_rows >= MAX_INPUT_ROWS_VISIBLE) {
-                GtkWidget *parent;
-                gint height;
-
-                parent = gtk_widget_get_parent (priv->input_scrolledwindow);
-                gtk_widget_get_preferred_height (parent, NULL, &height);
-                gtk_widget_set_size_request (parent, -1, height);
-
-                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->input_scrolledwindow),
-                                                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-        } else {
-                gtk_widget_set_size_request (gtk_widget_get_parent (priv->input_scrolledwindow), -1, -1);
-                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->input_scrolledwindow),
-                                                GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-        }
-}
-
-static void
 remove_no_input_row (GtkContainer *list)
 {
         GList *l;
@@ -892,7 +850,7 @@ add_input_row (CcRegionPanel   *self,
         }
 
         priv->n_input_rows += 1;
-        adjust_input_list_scrolling (self);
+        cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (self->priv->input_scrolledwindow));
 
         return row;
 }
@@ -978,7 +936,7 @@ clear_input_sources (CcRegionPanel *self)
         g_list_free (list);
 
         priv->n_input_rows = 0;
-        adjust_input_list_scrolling (self);
+        cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (self->priv->input_scrolledwindow));
 }
 
 static void
@@ -1289,7 +1247,7 @@ do_remove_selected_input (CcRegionPanel *self)
         gtk_list_box_select_row (GTK_LIST_BOX (priv->input_list), GTK_LIST_BOX_ROW (sibling));
 
         priv->n_input_rows -= 1;
-        adjust_input_list_scrolling (self);
+        cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (self->priv->input_scrolledwindow));
 
         update_buttons (self);
         update_input (self);
@@ -1472,7 +1430,7 @@ setup_input_section (CcRegionPanel *self)
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (priv->input_list),
-                                      update_header_func,
+                                      cc_list_box_update_header_func,
                                       NULL, NULL);
         g_signal_connect_swapped (priv->input_list, "row-selected",
                                   G_CALLBACK (update_buttons), self);
