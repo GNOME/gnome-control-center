@@ -26,6 +26,7 @@
 #define GOA_BACKEND_API_IS_SUBJECT_TO_CHANGE
 #include <goabackend/goabackend.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-online-accounts-add-account-dialog.h"
 
 #define BRANDED_PAGE "_branded"
@@ -103,25 +104,6 @@ list_box_row_activated_cb (GoaPanelAddAccountDialog *add_account, GtkListBoxRow 
 }
 
 static void
-update_header_func (GtkListBoxRow  *row,
-                    GtkListBoxRow  *before,
-                    gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 add_account_dialog_create_group_ui (GoaPanelAddAccountDialog *add_account,
                                     GtkListBox **list_box,
                                     GtkWidget **group_grid,
@@ -155,7 +137,7 @@ add_account_dialog_create_group_ui (GoaPanelAddAccountDialog *add_account,
   *list_box = GTK_LIST_BOX (gtk_list_box_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (*list_box));
   gtk_list_box_set_selection_mode (*list_box, GTK_SELECTION_NONE);
-  gtk_list_box_set_header_func (*list_box, update_header_func, NULL, NULL);
+  gtk_list_box_set_header_func (*list_box, cc_list_box_update_header_func, NULL, NULL);
   g_signal_connect_swapped (*list_box, "row-activated",
                             G_CALLBACK (list_box_row_activated_cb), add_account);
 }
@@ -324,7 +306,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   priv->branded_list_box = GTK_LIST_BOX (gtk_list_box_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (priv->branded_list_box));
   gtk_list_box_set_selection_mode (priv->branded_list_box, GTK_SELECTION_NONE);
-  gtk_list_box_set_header_func (priv->branded_list_box, update_header_func, NULL, NULL);
+  gtk_list_box_set_header_func (priv->branded_list_box, cc_list_box_update_header_func, NULL, NULL);
   g_signal_connect_swapped (priv->branded_list_box, "row-activated",
                             G_CALLBACK (list_box_row_activated_cb), add_account);
 
