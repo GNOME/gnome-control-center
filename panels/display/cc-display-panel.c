@@ -31,6 +31,7 @@
 #include <gdesktop-enums.h>
 #include <math.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-rr-labeler.h"
 #include <libupower-glib/upower.h>
 
@@ -1676,25 +1677,6 @@ list_box_item (const gchar *title,
 }
 
 static void
-cc_display_panel_list_box_update_header (GtkListBoxRow *row,
-                                         GtkListBoxRow *before,
-                                         gpointer       user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 setup_resolution_combo_box (CcDisplayPanel  *panel,
                             GnomeRRMode    **modes,
                             GnomeRRMode     *current_mode)
@@ -2152,7 +2134,7 @@ show_setup_dialog (CcDisplayPanel *panel)
       listbox = gtk_list_box_new ();
       gtk_container_add (GTK_CONTAINER (frame), listbox);
       gtk_list_box_set_header_func (GTK_LIST_BOX (listbox),
-                                    cc_display_panel_list_box_update_header,
+                                    cc_list_box_update_header_func,
                                     NULL, NULL);
       g_signal_connect (listbox, "row-selected",
                         G_CALLBACK (setup_listbox_row_activated), panel);
@@ -2421,7 +2403,7 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   priv->displays_listbox = gtk_list_box_new ();
   gtk_list_box_set_header_func (GTK_LIST_BOX (priv->displays_listbox),
-                                cc_display_panel_list_box_update_header, NULL,
+                                cc_list_box_update_header_func, NULL,
                                 NULL);
   g_signal_connect (priv->displays_listbox, "row-activated",
                     G_CALLBACK (cc_display_panel_box_row_activated),
