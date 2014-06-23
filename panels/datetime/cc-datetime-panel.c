@@ -25,6 +25,7 @@
 
 #include <langinfo.h>
 #include <sys/time.h>
+#include "shell/list-box-helper.h"
 #include "cc-timezone-map.h"
 #include "timedated.h"
 #include "date-endian.h"
@@ -863,25 +864,6 @@ keynav_failed (GtkWidget        *listbox,
 }
 
 static void
-update_header (GtkListBoxRow *row,
-               GtkListBoxRow *before,
-               gpointer       user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 run_dialog (CcDateTimePanel *self,
             const gchar     *dialog_name)
 {
@@ -976,7 +958,7 @@ setup_listbox (CcDateTimePanel *self,
 {
   CcDateTimePanelPrivate *priv = self->priv;
 
-  gtk_list_box_set_header_func (GTK_LIST_BOX (listbox), update_header, NULL, NULL);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (listbox), cc_list_box_update_header_func, NULL, NULL);
   g_signal_connect (listbox, "row-activated",
                     G_CALLBACK (list_box_row_activated), self);
 
