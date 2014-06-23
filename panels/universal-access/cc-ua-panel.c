@@ -27,6 +27,7 @@
 #include <glib/gi18n-lib.h>
 #include <gdesktop-enums.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 
@@ -259,28 +260,9 @@ on_off_label_mapping_get (GValue   *value,
 }
 
 static void
-update_separator_func (GtkListBoxRow  *row,
-                       GtkListBoxRow  *before,
-                       gpointer        user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 add_separators (GtkListBox *list)
 {
-  gtk_list_box_set_header_func (list, update_separator_func, NULL, NULL);
+  gtk_list_box_set_header_func (list, cc_list_box_update_header_func, NULL, NULL);
 }
 
 static gboolean
