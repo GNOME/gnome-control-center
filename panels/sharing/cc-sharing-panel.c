@@ -22,6 +22,7 @@
 #include "cc-sharing-panel.h"
 #include "shell/cc-hostname-entry.h"
 
+#include "shell/list-box-helper.h"
 #include "cc-sharing-resources.h"
 #include "vino-preferences.h"
 #include "cc-remote-login.h"
@@ -33,8 +34,6 @@
 
 #include <glib/gi18n.h>
 #include <config.h>
-
-#define MAX_ROWS_VISIBLE 5
 
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
@@ -251,59 +250,6 @@ cc_sharing_panel_main_list_box_row_activated (GtkListBox     *listbox,
 
 out:
   g_free (widget_name);
-}
-
-static void
-adjust_input_list_scrolling (CcSharingPanel *self)
-{
-  CcSharingPanelPrivate *priv = self->priv;
-  GtkWidget *scrolled_window;
-  GList *children;
-  guint n_rows;
-
-  scrolled_window = WID ("shared-folders-scrolledwindow");
-
-  children = gtk_container_get_children (GTK_CONTAINER (WID ("shared-folders-listbox")));
-  n_rows = g_list_length (children);
-  g_list_free (children);
-
-  if (n_rows >= MAX_ROWS_VISIBLE)
-    {
-      GtkWidget *parent;
-      gint height;
-
-      parent = gtk_widget_get_parent (scrolled_window);
-      gtk_widget_get_preferred_height (parent, NULL, &height);
-      gtk_widget_set_size_request (parent, -1, height);
-
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    }
-  else
-    {
-      gtk_widget_set_size_request (gtk_widget_get_parent (scrolled_window), -1, -1);
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                      GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-    }
-}
-
-static void
-cc_sharing_panel_list_box_update_header (GtkListBoxRow  *row,
-                                         GtkListBoxRow  *before,
-                                         gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
 }
 
 static gboolean
@@ -581,7 +527,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
       i = g_list_length (rows);
       gtk_list_box_insert (GTK_LIST_BOX (box), row, i - 1);
     }
-  adjust_input_list_scrolling (self);
+  cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (WID ("shared-folders-scrolledwindow")));
 
 bail:
   g_free (folder);
@@ -592,11 +538,12 @@ static void
 cc_sharing_panel_remove_folder (GtkButton      *button,
                                 CcSharingPanel *self)
 {
+  CcSharingPanelPrivate *priv = self->priv;
   GtkWidget *row;
 
   row = g_object_get_data (G_OBJECT (button), "row");
   gtk_widget_destroy (row);
-  adjust_input_list_scrolling (self);
+  cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (WID ("shared-folders-scrolledwindow")));
 }
 
 static void
@@ -775,7 +722,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 
   box = WID ("shared-folders-listbox");
   gtk_list_box_set_header_func (GTK_LIST_BOX (box),
-                                cc_sharing_panel_list_box_update_header, NULL,
+                                cc_list_box_update_header_func, NULL,
                                 NULL);
 
   list = folders;
@@ -791,7 +738,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_list_box_insert (GTK_LIST_BOX (box),
                        cc_sharing_panel_new_add_media_sharing_row (self), -1);
 
-  adjust_input_list_scrolling (self);
+  cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (WID ("shared-folders-scrolledwindow")));
 
   g_signal_connect (G_OBJECT (box), "row-activated",
                     G_CALLBACK (cc_sharing_panel_add_folder), self);
@@ -1290,7 +1237,7 @@ cc_sharing_panel_init (CcSharingPanel *self)
   gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (WID ("main-list-box")),
                                              TRUE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("main-list-box")),
-                                cc_sharing_panel_list_box_update_header,
+                                cc_list_box_update_header_func,
                                 NULL, NULL);
 
   /* create the master switch */
