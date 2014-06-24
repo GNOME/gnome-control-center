@@ -40,15 +40,18 @@ cc_list_box_update_header_func (GtkListBoxRow *row,
 }
 
 void
-cc_list_box_adjust_scrolling (GtkScrolledWindow *scrolled_window)
+cc_list_box_adjust_scrolling (GtkListBox *listbox)
 {
-  GtkWidget *listbox;
   GtkWidget *parent;
+  GtkWidget *scrolled_window;
   GList *children;
   guint n_rows;
 
-  listbox = gtk_bin_get_child (GTK_BIN (scrolled_window));
-  parent = gtk_widget_get_parent (GTK_WIDGET (scrolled_window));
+  parent = g_object_get_data (G_OBJECT (listbox), "cc-scrolling-parent");
+  scrolled_window = g_object_get_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window");
+  if (!parent || !scrolled_window)
+    return;
+
   children = gtk_container_get_children (GTK_CONTAINER (listbox));
   n_rows = g_list_length (children);
   g_list_free (children);
@@ -69,4 +72,25 @@ cc_list_box_adjust_scrolling (GtkScrolledWindow *scrolled_window)
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER, GTK_POLICY_NEVER);
     }
+}
+
+void
+cc_list_box_setup_scrolling (GtkListBox *listbox)
+{
+  GtkWidget *parent;
+  GtkWidget *scrolled_window;
+
+  parent = gtk_widget_get_parent (GTK_WIDGET (listbox));
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolled_window);
+
+  g_object_ref (listbox);
+  gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (listbox));
+  gtk_container_add (GTK_CONTAINER (scrolled_window), GTK_WIDGET (listbox));
+  g_object_unref (listbox);
+
+  gtk_container_add (GTK_CONTAINER (parent), scrolled_window);
+
+  g_object_set_data (G_OBJECT (listbox), "cc-scrolling-parent", parent);
+  g_object_set_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window", scrolled_window);
 }

@@ -911,7 +911,7 @@
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Folders</property>
-                <property name="mnemonic_widget">shared-folders-scrolledwindow</property>
+                <property name="mnemonic_widget">shared-folders-listbox</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
@@ -923,29 +923,15 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="shared-folders-box">
+              <object class="GtkFrame" id="shared-folders-frame">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
+                <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="shared-folders-scrolledwindow">
+                  <object class="GtkListBox" id="shared-folders-listbox">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="shadow_type">in</property>
-                    <property name="vscrollbar-policy">never</property>
-                    <child>
-                      <object class="GtkListBox" id="shared-folders-listbox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                      </object>
-                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
               </object>
               <packing>

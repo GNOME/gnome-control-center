@@ -527,7 +527,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
       i = g_list_length (rows);
       gtk_list_box_insert (GTK_LIST_BOX (box), row, i - 1);
     }
-  cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (WID ("shared-folders-scrolledwindow")));
+  cc_list_box_adjust_scrolling (GTK_LIST_BOX (box));
 
 bail:
   g_free (folder);
@@ -543,7 +543,7 @@ cc_sharing_panel_remove_folder (GtkButton      *button,
 
   row = g_object_get_data (G_OBJECT (button), "row");
   gtk_widget_destroy (row);
-  cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (WID ("shared-folders-scrolledwindow")));
+  cc_list_box_adjust_scrolling (GTK_LIST_BOX (WID ("shared-folders-listbox")));
 }
 
 static void
@@ -724,6 +724,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_list_box_set_header_func (GTK_LIST_BOX (box),
                                 cc_list_box_update_header_func, NULL,
                                 NULL);
+  cc_list_box_setup_scrolling (GTK_LIST_BOX (box));
 
   list = folders;
   while (list && *list)
@@ -738,7 +739,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_list_box_insert (GTK_LIST_BOX (box),
                        cc_sharing_panel_new_add_media_sharing_row (self), -1);
 
-  cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (WID ("shared-folders-scrolledwindow")));
+  cc_list_box_adjust_scrolling (GTK_LIST_BOX (box));
 
   g_signal_connect (G_OBJECT (box), "row-activated",
                     G_CALLBACK (cc_sharing_panel_add_folder), self);

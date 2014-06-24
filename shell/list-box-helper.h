@@ -24,4 +24,7 @@ cc_list_box_update_header_func (GtkListBoxRow *row,
                                 gpointer user_data);
 
 void
-cc_list_box_adjust_scrolling (GtkScrolledWindow *scrolled_window);
+cc_list_box_adjust_scrolling (GtkListBox *listbox);
+
+void
+cc_list_box_setup_scrolling (GtkListBox *listbox);

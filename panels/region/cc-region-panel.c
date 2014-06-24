@@ -112,8 +112,6 @@ struct _CcRegionPanelPrivate {
         GtkWidget *remove_input;
         GtkWidget *show_config;
         GtkWidget *show_layout;
-        GtkWidget *input_scrolledwindow;
-        guint n_input_rows;
 
         GSettings *input_settings;
         GnomeXkbInfo *xkb_info;
@@ -849,8 +847,7 @@ add_input_row (CcRegionPanel   *self,
                 g_object_set_data_full (G_OBJECT (row), "app-info", g_object_ref (app_info), g_object_unref);
         }
 
-        priv->n_input_rows += 1;
-        cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (self->priv->input_scrolledwindow));
+        cc_list_box_adjust_scrolling (GTK_LIST_BOX (priv->input_list));
 
         return row;
 }
@@ -935,8 +932,7 @@ clear_input_sources (CcRegionPanel *self)
         }
         g_list_free (list);
 
-        priv->n_input_rows = 0;
-        cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (self->priv->input_scrolledwindow));
+        cc_list_box_adjust_scrolling (GTK_LIST_BOX (priv->input_list));
 }
 
 static void
@@ -1246,8 +1242,7 @@ do_remove_selected_input (CcRegionPanel *self)
         gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (selected));
         gtk_list_box_select_row (GTK_LIST_BOX (priv->input_list), GTK_LIST_BOX_ROW (sibling));
 
-        priv->n_input_rows -= 1;
-        cc_list_box_adjust_scrolling (GTK_SCROLLED_WINDOW (self->priv->input_scrolledwindow));
+        cc_list_box_adjust_scrolling (GTK_LIST_BOX (priv->input_list));
 
         update_buttons (self);
         update_input (self);
@@ -1414,7 +1409,6 @@ setup_input_section (CcRegionPanel *self)
         priv->remove_input = WID ("input_source_remove");
         priv->show_config = WID ("input_source_config");
         priv->show_layout = WID ("input_source_layout");
-        priv->input_scrolledwindow = WID ("input_scrolledwindow");
 
         g_signal_connect_swapped (priv->options_button, "clicked",
                                   G_CALLBACK (show_input_options), self);
@@ -1426,6 +1420,8 @@ setup_input_section (CcRegionPanel *self)
                                   G_CALLBACK (show_selected_settings), self);
         g_signal_connect_swapped (priv->show_layout, "clicked",
                                   G_CALLBACK (show_selected_layout), self);
+
+        cc_list_box_setup_scrolling (GTK_LIST_BOX (priv->input_list));
 
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
