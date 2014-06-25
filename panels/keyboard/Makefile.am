@@ -52,7 +52,7 @@ xml_DATA     = $(xml_in_files:.xml.in=.xml)
 pkgconfigdir = $(datadir)/pkgconfig
 pkgconfig_DATA = gnome-keybindings.pc
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 CLEANFILES = \
