@@ -12,7 +12,8 @@ $(dbus_shell_search_provider_built_sources) : Makefile.am $(srcdir)/org.gnome.Sh
 		$(srcdir)/org.gnome.ShellSearchProvider2.xml		\
 		$(NULL)
 
-INCLUDES =					\
+AM_CPPFLAGS =					\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
 	-DCC_PANEL_LOADER_NO_GTYPES		\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
@@ -36,8 +37,6 @@ gnome_control_center_search_provider_LDADD =	\
 	$(top_builddir)/panels/common/liblanguage.la	\
 	$(top_builddir)/shell/libshell.la	\
 	$(SHELL_LIBS)
-
-AM_CPPFLAGS = -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 CLEANFILES = $(BUILT_SOURCES) $(service_DATA)
 
