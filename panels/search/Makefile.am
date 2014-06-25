@@ -1,6 +1,6 @@
 cappletname = search
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(SEARCH_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
