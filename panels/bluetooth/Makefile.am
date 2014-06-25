@@ -3,7 +3,7 @@ cappletname = bluetooth
 
 noinst_LTLIBRARIES = libbluetooth.la
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(BLUETOOTH_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
