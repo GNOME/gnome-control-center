@@ -111,6 +111,7 @@ bg_colors_source_constructed (GObject *object)
   g_object_unref (thumb_factory);
 }
 
+static void
 bg_colors_source_init (BgColorsSource *self)
 {
 }
