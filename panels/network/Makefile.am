@@ -2,7 +2,7 @@ cappletname = network
 
 SUBDIRS = wireless-security connection-editor
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(NETWORK_PANEL_CFLAGS)				\
 	$(NETWORK_MANAGER_CFLAGS)			\
