@@ -1,4 +1,5 @@
-INCLUDES =					\
+AM_CPPFLAGS =					\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	$(CHEESE_CFLAGS)			\
@@ -86,8 +87,6 @@ endif
 if BUILD_BLUETOOTH
 gnome_control_center_LDADD += $(top_builddir)/panels/bluetooth/libbluetooth.la
 endif
-
-AM_CPPFLAGS = -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 # Dbus service file
 servicefiledir = $(datadir)/dbus-1/services
