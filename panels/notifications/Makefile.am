@@ -1,6 +1,6 @@
 cappletname = notifications
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(NOTIFICATIONS_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
