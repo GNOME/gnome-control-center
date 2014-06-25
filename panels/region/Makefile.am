@@ -1,7 +1,7 @@
 # This is used in PANEL_CFLAGS
 cappletname = region
 
-INCLUDES =						\
+AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(REGION_PANEL_CFLAGS)				\
 	-I$(srcdir)/../common/				\
