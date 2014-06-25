@@ -63,6 +63,7 @@ static void     cc_sharing_networks_finalize       (GObject                *obje
 static void     cc_sharing_update_networks_box     (CcSharingNetworks *self);
 
 typedef struct {
+  char *uuid;
   char *network_name;
   char *carrier_type;
 } CcSharingNetwork;
@@ -72,6 +73,7 @@ cc_sharing_network_free (gpointer data)
 {
   CcSharingNetwork *net = data;
 
+  g_free (net->uuid);
   g_free (net->network_name);
   g_free (net->carrier_type);
   g_free (net);
@@ -119,7 +121,7 @@ static void
 cc_sharing_update_networks (CcSharingNetworks *self)
 {
   GVariant *networks;
-  char *network_name, *carrier_type;
+  char *uuid, *network_name, *carrier_type;
   GVariantIter iter;
   GError *error = NULL;
 
@@ -136,10 +138,11 @@ cc_sharing_update_networks (CcSharingNetworks *self)
   }
 
   g_variant_iter_init (&iter, networks);
-  while (g_variant_iter_next (&iter, "{ss}", &network_name, &carrier_type)) {
+  while (g_variant_iter_next (&iter, "(sss)", &uuid, &network_name, &carrier_type)) {
     CcSharingNetwork *net;
 
     net = g_new0 (CcSharingNetwork, 1);
+    net->uuid = uuid;
     net->network_name = network_name;
     net->carrier_type = carrier_type;
     self->priv->networks = g_list_prepend (self->priv->networks, net);
@@ -156,14 +159,14 @@ cc_sharing_networks_remove_network (GtkWidget         *button,
   GtkWidget *row;
   GError *error = NULL;
   gboolean ret;
-  const char *network_name;
+  const char *uuid;
 
   row = g_object_get_data (G_OBJECT (button), "row");
-  network_name = g_object_get_data (G_OBJECT (row), "network-name");
+  uuid = g_object_get_data (G_OBJECT (row), "uuid");
 
   ret = gsd_sharing_call_disable_service_sync (self->priv->proxy,
 					       self->priv->service_name,
-					       network_name,
+					       uuid,
 					       NULL,
 					       &error);
   if (!ret) {
@@ -214,7 +217,8 @@ cc_sharing_networks_enable_network (GtkSwitch *widget,
 }
 
 static GtkWidget *
-cc_sharing_networks_new_row (const char        *network_name,
+cc_sharing_networks_new_row (const char        *uuid,
+			     const char        *network_name,
 			     const char        *carrier_type,
 			     CcSharingNetworks *self)
 {
@@ -254,7 +258,7 @@ cc_sharing_networks_new_row (const char        *network_name,
 		    G_CALLBACK (cc_sharing_networks_remove_network), self);
   g_object_set_data (G_OBJECT (w), "row", row);
 
-  g_object_set_data_full (G_OBJECT (row), "network-name", g_strdup (network_name), g_free);
+  g_object_set_data_full (G_OBJECT (row), "uuid", g_strdup (uuid), g_free);
 
   gtk_widget_show_all (row);
 
@@ -342,15 +346,16 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
   if (current_network != NULL &&
       !g_str_equal (current_network, "")) {
     gboolean available;
-    const char *carrier_type, *icon_name;
+    const char *carrier_type, *icon_name, *current_network_name;
 
     gtk_widget_show (self->priv->current_row);
     current_visible = TRUE;
 
     /* Network name */
     g_object_set_data_full (G_OBJECT (self->priv->current_row),
-			    "network-name", g_strdup (current_network), g_free);
-    gtk_label_set_label (GTK_LABEL (self->priv->current_label), current_network);
+			    "uuid", g_strdup (current_network), g_free);
+    current_network_name = gsd_sharing_get_current_network_name (self->priv->proxy);
+    gtk_label_set_label (GTK_LABEL (self->priv->current_label), current_network_name);
 
     /* Icon */
     carrier_type = gsd_sharing_get_carrier_type (self->priv->proxy);
@@ -376,7 +381,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     CcSharingNetwork *net = l->data;
     GtkWidget *row;
 
-    if (g_strcmp0 (net->network_name, current_network) == 0) {
+    if (g_strcmp0 (net->uuid, current_network) == 0) {
       g_signal_handlers_block_by_func (self->priv->current_switch,
 				       cc_sharing_networks_enable_network, self);
       gtk_switch_set_state (GTK_SWITCH (self->priv->current_switch), TRUE);
@@ -385,7 +390,8 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
       continue;
     }
 
-    row = cc_sharing_networks_new_row (net->network_name,
+    row = cc_sharing_networks_new_row (net->uuid,
+				       net->network_name,
 				       net->carrier_type,
 				       self);
     gtk_list_box_insert (GTK_LIST_BOX (self->priv->listbox), row, -1);

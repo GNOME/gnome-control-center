@@ -1,5 +1,6 @@
 <node name="/org/gnome/SettingsDaemon/Sharing">
   <interface name='org.gnome.SettingsDaemon.Sharing'>
+    <property name='CurrentNetworkName' type='s' access='read'/>
     <property name='CurrentNetwork' type='s' access='read'/>
     <property name='CarrierType' type='s' access='read'/>
     <property name='SharingStatus' type='u' access='read'/>
@@ -12,7 +13,7 @@
     </method>
     <method name='ListNetworks'>
       <arg name='service_name' direction='in' type='s'/>
-      <arg name='networks' direction='out' type='a{ss}'/>
+      <arg name='networks' direction='out' type='a(sss)'/>
     </method>
   </interface>
 </node>
