@@ -1,7 +1,7 @@
 # This is used in PANEL_CFLAGS
 cappletname = wacom
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(WACOM_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
@@ -25,7 +25,7 @@ libwacom_calibrator_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 libwacom_calibrator_test_la_SOURCES = $(libwacom_calibrator_la_SOURCES)
 
-libwacom_calibrator_test_la_CPPFLAGS = -DFAKE_AREA
+libwacom_calibrator_test_la_CPPFLAGS = -DFAKE_AREA $(AM_CPPFLAGS)
 libwacom_calibrator_test_la_LIBADD = $(libwacom_calibrator_la_LIBADD)
 libwacom_calibrator_test_la_LDFLAGS = $(libwacom_calibrator_la_LDFLAGS)
 
@@ -42,7 +42,7 @@ test_calibrator_SOURCES =		\
 	cc-target-actor.c		\
 	cc-target-actor.h
 
-test_calibrator_CPPFLAGS = $(INCLUDES)
+test_calibrator_CPPFLAGS = $(AM_CPPFLAGS)
 test_calibrator_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
 
 -include $(top_srcdir)/git.mk
