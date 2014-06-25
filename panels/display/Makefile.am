@@ -34,7 +34,7 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-display-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(PANEL_CFLAGS) \
+AM_CPPFLAGS   = $(PANEL_CFLAGS) \
 	     $(DISPLAY_PANEL_CFLAGS) \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
