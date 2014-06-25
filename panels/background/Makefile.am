@@ -7,7 +7,7 @@ dist_slideshowicon_DATA = slideshow-symbolic.svg
 slideshowemblemdir = $(datadir)/icons/hicolor/scalable/emblems/
 dist_slideshowemblem_DATA = slideshow-emblem.svg
 
-INCLUDES =						\
+AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(BACKGROUND_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
