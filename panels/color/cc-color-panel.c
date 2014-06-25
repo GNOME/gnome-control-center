@@ -1116,7 +1116,7 @@ gcm_prefs_device_profile_enable_cb (GtkWidget *widget, CcColorPanel *prefs)
   cd_device_make_profile_default (priv->current_device,
                                   profile,
                                   priv->cancellable,
-                                  gcm_prefs_make_profile_default_cb,
+                                  (GAsyncReadyCallback) gcm_prefs_make_profile_default_cb,
                                   prefs);
 }
 
@@ -1266,7 +1266,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   cd_device_make_profile_default (priv->current_device,
                                   profile,
                                   priv->cancellable,
-                                  gcm_prefs_make_profile_default_cb,
+                                  (GAsyncReadyCallback) gcm_prefs_make_profile_default_cb,
                                   prefs);
 out:
   if (profile != NULL)
