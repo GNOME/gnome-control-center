@@ -1,6 +1,6 @@
 cappletname = privacy
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(PRIVACY_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
