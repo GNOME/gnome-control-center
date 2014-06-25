@@ -1,7 +1,7 @@
 # This is used in PANEL_CFLAGS
 cappletname = mouse
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(MOUSE_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
@@ -34,7 +34,7 @@ test_gnome_mouse_test_SOURCES =		\
 
 noinst_PROGRAMS = test-gnome-mouse-test
 
-test_gnome_mouse_test_CPPFLAGS = $(INCLUDES)
+test_gnome_mouse_test_CPPFLAGS = $(AM_CPPFLAGS)
 test_gnome_mouse_test_LDADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/mouse.gresource.xml)
