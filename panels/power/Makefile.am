@@ -2,7 +2,7 @@ cappletname = power
 
 SUBDIRS = icons
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(POWER_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
@@ -23,12 +23,12 @@ libpower_la_SOURCES =		\
 libpower_la_LIBADD = $(PANEL_LIBS) $(POWER_PANEL_LIBS)
 
 if BUILD_BLUETOOTH
-INCLUDES += $(BLUETOOTH_CFLAGS)
+AM_CPPFLAGS += $(BLUETOOTH_CFLAGS)
 libpower_la_LIBADD += $(BLUETOOTH_LIBS)
 endif
 
 if BUILD_NETWORK
-INCLUDES += $(NETWORK_MANAGER_CFLAGS)
+AM_CPPFLAGS += $(NETWORK_MANAGER_CFLAGS)
 libpower_la_LIBADD += $(NETWORK_MANAGER_LIBS)
 endif
 
