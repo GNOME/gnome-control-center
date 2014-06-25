@@ -2,7 +2,7 @@ cappletname = online-accounts
 
 SUBDIRS = icons
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(ONLINE_ACCOUNTS_PANEL_CFLAGS)			\
 	-I$(top_srcdir)/libgd				\
