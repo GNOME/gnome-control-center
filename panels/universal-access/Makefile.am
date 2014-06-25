@@ -1,6 +1,6 @@
 cappletname = universal-access
 
-INCLUDES = 						\
+AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(UNIVERSAL_ACCESS_PANEL_CFLAGS)		\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
