@@ -44,7 +44,7 @@ cc_list_box_adjust_scrolling (GtkListBox *listbox)
 {
   GtkWidget *scrolled_window;
   GList *children;
-  guint n_rows;
+  guint n_rows, num_max_rows;
 
   scrolled_window = g_object_get_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window");
   if (!scrolled_window)
@@ -53,13 +53,15 @@ cc_list_box_adjust_scrolling (GtkListBox *listbox)
   children = gtk_container_get_children (GTK_CONTAINER (listbox));
   n_rows = g_list_length (children);
 
-  if (n_rows >= MAX_ROWS_VISIBLE)
+  num_max_rows = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (listbox), "cc-max-rows-visible"));
+
+  if (n_rows >= num_max_rows)
     {
       gint total_row_height = 0;
       GList *l;
       guint i;
 
-      for (l = children, i = 0; l != NULL && i < MAX_ROWS_VISIBLE; l = l->next, i++) {
+      for (l = children, i = 0; l != NULL && i < num_max_rows; l = l->next, i++) {
         gint row_height;
         gtk_widget_get_preferred_height (GTK_WIDGET (l->data), &row_height, NULL);
         total_row_height += row_height;
@@ -80,7 +82,8 @@ cc_list_box_adjust_scrolling (GtkListBox *listbox)
 }
 
 void
-cc_list_box_setup_scrolling (GtkListBox *listbox)
+cc_list_box_setup_scrolling (GtkListBox *listbox,
+                             guint       num_max_rows)
 {
   GtkWidget *parent;
   GtkWidget *scrolled_window;
@@ -96,5 +99,9 @@ cc_list_box_setup_scrolling (GtkListBox *listbox)
 
   gtk_container_add (GTK_CONTAINER (parent), scrolled_window);
 
+  if (num_max_rows == 0)
+    num_max_rows = MAX_ROWS_VISIBLE;
+
   g_object_set_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window", scrolled_window);
+  g_object_set_data (G_OBJECT (listbox), "cc-max-rows-visible", GUINT_TO_POINTER (num_max_rows));
 }

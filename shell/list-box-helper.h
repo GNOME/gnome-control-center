@@ -27,4 +27,5 @@ void
 cc_list_box_adjust_scrolling (GtkListBox *listbox);
 
 void
-cc_list_box_setup_scrolling (GtkListBox *listbox);
+cc_list_box_setup_scrolling (GtkListBox *listbox,
+                             guint       num_rows);
