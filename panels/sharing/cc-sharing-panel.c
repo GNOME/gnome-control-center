@@ -498,7 +498,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
   box = GTK_LIST_BOX (WID ("shared-folders-listbox"));
   rows = gtk_container_get_children (GTK_CONTAINER (box));
 
-  folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
+  folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog));
   if (!folder || g_str_equal (folder, ""))
     goto bail;
 
