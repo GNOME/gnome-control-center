@@ -26,6 +26,7 @@
 #include "cc-sharing-networks.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 #include "gsd-sharing-enums.h"
+#include "shell/list-box-helper.h"
 
 struct _CcSharingNetworksPrivate {
   GtkWidget *listbox;
@@ -95,25 +96,6 @@ cc_sharing_networks_update_status (CcSharingNetworks *self)
   if (status != self->priv->status) {
     self->priv->status = status;
     g_object_notify (G_OBJECT (self), "status");
-  }
-}
-
-static void
-cc_sharing_panel_list_box_update_header (GtkListBoxRow  *row,
-					 GtkListBoxRow  *before,
-					 gpointer    user_data)
-{
-  GtkWidget *current;
-
-  if (before == NULL)
-    return;
-
-  current = gtk_list_box_row_get_header (row);
-  if (current == NULL)
-  {
-    current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-    gtk_widget_show (current);
-    gtk_list_box_row_set_header (row, current);
   }
 }
 
@@ -426,7 +408,7 @@ cc_sharing_networks_constructed (GObject *object)
   self = CC_SHARING_NETWORKS (object);
 
   gtk_list_box_set_header_func (GTK_LIST_BOX (self->priv->listbox),
-				cc_sharing_panel_list_box_update_header, NULL,
+				cc_list_box_update_header_func, NULL,
 				NULL);
 
   self->priv->current_row = cc_sharing_networks_new_current_row (self);
