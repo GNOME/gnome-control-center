@@ -42,36 +42,34 @@ cc_list_box_update_header_func (GtkListBoxRow *row,
 void
 cc_list_box_adjust_scrolling (GtkListBox *listbox)
 {
-  GtkWidget *parent;
   GtkWidget *scrolled_window;
   GList *children;
   guint n_rows;
 
-  parent = g_object_get_data (G_OBJECT (listbox), "cc-scrolling-parent");
   scrolled_window = g_object_get_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window");
-  if (!parent || !scrolled_window)
+  if (!scrolled_window)
     return;
 
   children = gtk_container_get_children (GTK_CONTAINER (listbox));
   n_rows = g_list_length (children);
-  g_list_free (children);
 
   if (n_rows >= MAX_ROWS_VISIBLE)
     {
-      gint height;
+      gint row_height;
 
-      gtk_widget_get_preferred_height (parent, NULL, &height);
-      gtk_widget_set_size_request (parent, -1, height);
-
+      gtk_widget_get_preferred_height (GTK_WIDGET (children->data), &row_height, NULL);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (scrolled_window), row_height * MAX_ROWS_VISIBLE);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     }
   else
     {
-      gtk_widget_set_size_request (parent, -1, -1);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (scrolled_window), -1);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER, GTK_POLICY_NEVER);
     }
+
+  g_list_free (children);
 }
 
 void
@@ -91,6 +89,5 @@ cc_list_box_setup_scrolling (GtkListBox *listbox)
 
   gtk_container_add (GTK_CONTAINER (parent), scrolled_window);
 
-  g_object_set_data (G_OBJECT (listbox), "cc-scrolling-parent", parent);
   g_object_set_data (G_OBJECT (listbox), "cc-scrolling-scrolled-window", scrolled_window);
 }
