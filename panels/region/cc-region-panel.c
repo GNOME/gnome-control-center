@@ -1421,7 +1421,7 @@ setup_input_section (CcRegionPanel *self)
         g_signal_connect_swapped (priv->show_layout, "clicked",
                                   G_CALLBACK (show_selected_layout), self);
 
-        cc_list_box_setup_scrolling (GTK_LIST_BOX (priv->input_list));
+        cc_list_box_setup_scrolling (GTK_LIST_BOX (priv->input_list), 5);
 
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
