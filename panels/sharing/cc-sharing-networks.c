@@ -30,7 +30,6 @@
 
 struct _CcSharingNetworksPrivate {
   GtkWidget *listbox;
-  GtkWidget *scrolledwindow;
 
   GtkWidget *current_row;
   GtkWidget *current_label;
@@ -116,6 +115,7 @@ cc_sharing_update_networks (CcSharingNetworks *self)
 				      "SharingStatus",
 				      g_variant_new_uint32 (GSD_SHARING_STATUS_OFFLINE));
     g_error_free (error);
+    cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->priv->listbox));
     return;
   }
 
@@ -130,6 +130,7 @@ cc_sharing_update_networks (CcSharingNetworks *self)
     self->priv->networks = g_list_prepend (self->priv->networks, net);
   }
   self->priv->networks = g_list_reverse (self->priv->networks);
+  cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->priv->listbox));
 
   g_variant_unref (networks);
 }
@@ -387,6 +388,8 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
   }
 
   cc_sharing_networks_update_status (self);
+
+  cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->priv->listbox));
 }
 
 static void
@@ -410,6 +413,8 @@ cc_sharing_networks_constructed (GObject *object)
   gtk_list_box_set_header_func (GTK_LIST_BOX (self->priv->listbox),
 				cc_list_box_update_header_func, NULL,
 				NULL);
+
+  cc_list_box_setup_scrolling (GTK_LIST_BOX (self->priv->listbox));
 
   self->priv->current_row = cc_sharing_networks_new_current_row (self);
   gtk_list_box_insert (GTK_LIST_BOX (self->priv->listbox), self->priv->current_row, -1);
@@ -550,7 +555,6 @@ cc_sharing_networks_class_init (CcSharingNetworksClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/sharing/networks.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, CcSharingNetworks, scrolledwindow);
   gtk_widget_class_bind_template_child_private (widget_class, CcSharingNetworks, listbox);
 }
 

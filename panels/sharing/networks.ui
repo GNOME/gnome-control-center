@@ -17,7 +17,6 @@
         <property name="can_focus">False</property>
         <property name="xalign">0</property>
         <property name="label" translatable="yes">Networks</property>
-        <property name="mnemonic_widget">scrolledwindow</property>
         <attributes>
           <attribute name="weight" value="bold"/>
         </attributes>
@@ -29,30 +28,16 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="shared-networks-box">
+      <object class="GtkFrame" id="shared-networks-frame">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <property name="hexpand">True</property>
+        <property name="shadow_type">in</property>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow">
+          <object class="GtkListBox" id="listbox">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="vexpand">True</property>
-            <property name="shadow_type">in</property>
-            <property name="vscrollbar-policy">never</property>
-            <child>
-              <object class="GtkListBox" id="listbox">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-            </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
       </object>
       <packing>
