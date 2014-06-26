@@ -724,7 +724,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_list_box_set_header_func (GTK_LIST_BOX (box),
                                 cc_list_box_update_header_func, NULL,
                                 NULL);
-  cc_list_box_setup_scrolling (GTK_LIST_BOX (box));
+  cc_list_box_setup_scrolling (GTK_LIST_BOX (box), 3);
 
   list = folders;
   while (list && *list)

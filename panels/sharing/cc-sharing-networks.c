@@ -414,7 +414,7 @@ cc_sharing_networks_constructed (GObject *object)
 				cc_list_box_update_header_func, NULL,
 				NULL);
 
-  cc_list_box_setup_scrolling (GTK_LIST_BOX (self->priv->listbox));
+  cc_list_box_setup_scrolling (GTK_LIST_BOX (self->priv->listbox), 3);
 
   self->priv->current_row = cc_sharing_networks_new_current_row (self);
   gtk_list_box_insert (GTK_LIST_BOX (self->priv->listbox), self->priv->current_row, -1);
