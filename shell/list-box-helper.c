@@ -55,10 +55,17 @@ cc_list_box_adjust_scrolling (GtkListBox *listbox)
 
   if (n_rows >= MAX_ROWS_VISIBLE)
     {
-      gint row_height;
+      gint total_row_height = 0;
+      GList *l;
+      guint i;
 
-      gtk_widget_get_preferred_height (GTK_WIDGET (children->data), &row_height, NULL);
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (scrolled_window), row_height * MAX_ROWS_VISIBLE);
+      for (l = children, i = 0; l != NULL && i < MAX_ROWS_VISIBLE; l = l->next, i++) {
+        gint row_height;
+        gtk_widget_get_preferred_height (GTK_WIDGET (l->data), &row_height, NULL);
+        total_row_height += row_height;
+      }
+
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (scrolled_window), total_row_height);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     }
