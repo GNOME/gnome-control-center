@@ -40,6 +40,7 @@ struct CcKeyboardItemPrivate
   /* internal */
   CcKeyboardItem *reverse_item;
   gboolean is_reversed;
+  gboolean hidden;
 };
 
 enum {
@@ -494,6 +495,20 @@ CcKeyboardItem *
 cc_keyboard_item_get_reverse_item (CcKeyboardItem *item)
 {
   return item->priv->reverse_item;
+}
+
+
+void
+cc_keyboard_item_set_hidden (CcKeyboardItem *item, gboolean hidden)
+{
+  item->priv->hidden = !!hidden;
+}
+
+
+gboolean
+cc_keyboard_item_is_hidden (CcKeyboardItem *item)
+{
+  return item->priv->hidden;
 }
 /*
  * vim: sw=2 ts=8 cindent noai bs=2

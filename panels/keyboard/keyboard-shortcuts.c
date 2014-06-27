@@ -62,6 +62,7 @@ typedef struct
   char *name; /* GSettings schema path, or GSettings key name depending on type */
   char *reverse_entry;
   gboolean is_reversed;
+  gboolean hidden;
 } KeyListEntry;
 
 typedef enum
@@ -278,6 +279,7 @@ append_section (GtkBuilder         *builder,
           continue;
         }
 
+      cc_keyboard_item_set_hidden (item, keys_list[i].hidden);
       item->model = shortcut_model;
       item->group = group;
 
@@ -339,7 +341,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   KeyList *keylist = (KeyList *) user_data;
   KeyListEntry key = { 0, };
   const char *name, *schema, *description, *package, *context, *orig_description, *reverse_entry;
-  gboolean is_reversed;
+  gboolean is_reversed, hidden;
 
   name = NULL;
   schema = NULL;
@@ -425,6 +427,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   orig_description = NULL;
   reverse_entry = NULL;
   is_reversed = FALSE;
+  hidden = FALSE;
 
   while (*attr_names && *attr_values)
     {
@@ -449,7 +452,10 @@ parse_start_tag (GMarkupParseContext *ctx,
 	} else if (g_str_equal (*attr_names, "is-reversed")) {
 	    if (g_str_equal (*attr_values, "true"))
 	      is_reversed = TRUE;
-        }
+	} else if (g_str_equal (*attr_names, "hidden")) {
+	    if (g_str_equal (*attr_values, "true"))
+	      hidden = TRUE;
+	}
 
       ++attr_names;
       ++attr_values;
@@ -476,6 +482,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
   key.reverse_entry = g_strdup (reverse_entry);
   key.is_reversed = is_reversed;
+  key.hidden = hidden;
   g_array_append_val (keylist->entries, key);
 }
 
@@ -943,12 +950,15 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
           GtkTreeIter new_row;
           CcKeyboardItem *item = g_ptr_array_index (keys, i);
 
-          gtk_list_store_append (GTK_LIST_STORE (shortcut_model), &new_row);
-          gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
-                              DETAIL_DESCRIPTION_COLUMN, item->description,
-                              DETAIL_KEYENTRY_COLUMN, item,
-                              DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_KEY_ENTRY,
-                              -1);
+          if (!cc_keyboard_item_is_hidden (item))
+            {
+              gtk_list_store_append (GTK_LIST_STORE (shortcut_model), &new_row);
+              gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
+                                  DETAIL_DESCRIPTION_COLUMN, item->description,
+                                  DETAIL_KEYENTRY_COLUMN, item,
+                                  DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_KEY_ENTRY,
+                                  -1);
+            }
         }
 
       if (g_str_equal (id, "Typing"))

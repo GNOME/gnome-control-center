@@ -107,6 +107,9 @@ void         cc_keyboard_item_add_reverse_item (CcKeyboardItem *item,
 						gboolean is_reversed);
 
 CcKeyboardItem * cc_keyboard_item_get_reverse_item (CcKeyboardItem *item);
+void             cc_keyboard_item_set_hidden       (CcKeyboardItem *item,
+						    gboolean hidden);
+gboolean         cc_keyboard_item_is_hidden        (CcKeyboardItem *item);
 
 G_END_DECLS
 
