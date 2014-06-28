@@ -1214,7 +1214,7 @@ binding_name (guint                   keyval,
         gtk_accelerator_get_label_with_keycode (NULL, keyval, keycode, mask) :
         gtk_accelerator_name_with_keycode (NULL, keyval, keycode, mask);
   else
-    return g_strdup (translate ? _("Disabled") : "");
+    return g_strdup (translate ? _("Disabled") : NULL);
 }
 
 static gboolean
@@ -1489,7 +1489,7 @@ handle_reverse_item (CcKeyboardItem        *item,
 
           if (reverse_conflict_item != NULL)
             g_object_set (G_OBJECT (reverse_conflict_item),
-                          "binding", "", NULL);
+                          "binding", NULL, NULL);
         }
       else
         {
@@ -1504,7 +1504,7 @@ handle_reverse_item (CcKeyboardItem        *item,
             {
               g_warn_if_fail (conflict_item == reverse_item);
               g_object_set (G_OBJECT (conflict_item),
-                            "binding", "", NULL);
+                            "binding", NULL, NULL);
             }
         }
     }
@@ -1568,7 +1568,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
       if (response == GTK_RESPONSE_ACCEPT)
         {
-	  g_object_set (G_OBJECT (conflict_item), "binding", "", NULL);
+	  g_object_set (G_OBJECT (conflict_item), "binding", NULL, NULL);
 
           str = binding_name (keyval, keycode, mask, FALSE);
           g_object_set (G_OBJECT (item), "binding", str, NULL);
@@ -1622,7 +1622,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
     return;
 
   /* Unset the key */
-  g_object_set (G_OBJECT (item), "binding", "", NULL);
+  g_object_set (G_OBJECT (item), "binding", NULL, NULL);
 }
 
 static gchar *
