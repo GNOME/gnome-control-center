@@ -17,7 +17,7 @@
 #   - 입력기를 말하는 "input source"는 "source"라고만 써져 있어도 "입력 소스"로 번역
 #   - prefix (ipv6 관련): 프리픽스
 #   - wide gamut: 광색역
-#   - tablet: 관례에 따라 tablet PC는 "태블릿", graphic tablet은 "타블렛"
+#   - tablet: 태블릿 (tablet PC와 graphics tablet 모두)
 #
 # - 검색 키워드는 원문과 번역문을 같이 세미콜론으로 구분해 기입한다. 예를 들어:
 #
@@ -27,10 +27,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2014-02-28 19:29+0000\n"
-"PO-Revision-Date: 2014-03-15 01:56+0900\n"
+"PO-Revision-Date: 2014-06-29 13:53+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: Korean\n"
@@ -340,7 +339,7 @@ msgstr "기본값:"
 #. * profile his a standard space like AdobeRGB
 #: ../panels/color/cc-color-panel.c:146
 msgid "Colorspace: "
-msgstr "색상 영역: "
+msgstr "색 영역: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
@@ -1048,10 +1047,11 @@ msgstr "덮개 닫힘"
 msgid "Mirrored"
 msgstr "동일 화면"
 
+# 모니터 이름, Primary-Secondary
 #: ../panels/display/cc-display-panel.c:491
 #: ../panels/display/cc-display-panel.c:2122
 msgid "Primary"
-msgstr "첫번째"
+msgstr "주요"
 
 #: ../panels/display/cc-display-panel.c:493
 #: ../panels/notifications/cc-notifications-panel.c:203
@@ -1065,9 +1065,10 @@ msgstr "첫번째"
 msgid "Off"
 msgstr "끔"
 
+# 모니터 이름, Primary-Secondary
 #: ../panels/display/cc-display-panel.c:496
 msgid "Secondary"
-msgstr "두 번째"
+msgstr "보조"
 
 #: ../panels/display/cc-display-panel.c:1506
 msgid "Arrange Combined Displays"
@@ -1298,11 +1299,7 @@ msgstr "시스템의 정보를 봅니다"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
-msgstr ""
-"device;장치;system;시스템;information;정보;memory;메모리;processor;프로세서;"
-"version;버전;default;기본값;application;응용 프로그램;preferred;우선;cd;CD;"
-"dvd;DVD;audio;오디오;video;비디오;disc;디스크;removable;이동식;media;미디어;"
-"autorun;자동 실행;"
+msgstr "device;장치;system;시스템;information;정보;memory;메모리;processor;프로세서;version;버전;default;기본값;application;응용 프로그램;preferred;우선;cd;dvd;usb;audio;오디오;video;비디오;disc;디스크;removable;이동식;media;미디어;autorun;자동 실행;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
@@ -1772,9 +1769,7 @@ msgstr ""
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
-msgstr ""
-"Trackpad;트랙패드;Pointer;포인터;Click;클릭;누르기;Tab;탭;Double;더블;Button;"
-"버튼;단추;Trackball;트랙볼;Scroll;스크롤;"
+msgstr "Trackpad;트랙패드;Pointer;포인터;Click;클릭;누르기;Tap;두드리기;Double;더블;Button;버튼;단추;Trackball;트랙볼;Scroll;스크롤;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "General"
@@ -1850,7 +1845,7 @@ msgstr "키 입력 중에는 사용하지 않기(_T)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Tap to _click"
-msgstr "마우스 단추를 누르려면 패드 터치(_C)"
+msgstr "터치패드 두드리면 단추 누름으로 취급(_C)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Two _finger scroll"
@@ -1859,12 +1854,12 @@ msgstr "두 손가락 스크롤(_F)"
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "_Natural scrolling"
-msgstr "자연스럽게 스크롤(_N)"
+msgstr "스크롤 방향 뒤바꾸기(_N)"
 
 #: ../panels/mouse/gnome-mouse-test.c:130
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
-msgstr "한 번 누르기, 두 번 누르기, 스크롤을 시도"
+msgstr "한번 누르기, 두번 누르기, 스크롤을 해 보십시오"
 
 #: ../panels/mouse/gnome-mouse-test.c:135
 msgid "Five clicks, GEGL time!"
@@ -1872,27 +1867,27 @@ msgstr "다섯번 누름, 게글 타임!"
 
 #: ../panels/mouse/gnome-mouse-test.c:140
 msgid "Double click, primary button"
-msgstr "두 번 누르기, 첫번째 단추"
+msgstr "두번 누르기, 첫번째 단추"
 
 #: ../panels/mouse/gnome-mouse-test.c:140
 msgid "Single click, primary button"
-msgstr "한 번 누르기, 첫번째 단추"
+msgstr "한번 누르기, 첫번째 단추"
 
 #: ../panels/mouse/gnome-mouse-test.c:143
 msgid "Double click, middle button"
-msgstr "두 번 누르기, 가운데 단추"
+msgstr "두번 누르기, 가운데 단추"
 
 #: ../panels/mouse/gnome-mouse-test.c:143
 msgid "Single click, middle button"
-msgstr "한 번 누르기, 가운데 단추"
+msgstr "한번 누르기, 가운데 단추"
 
 #: ../panels/mouse/gnome-mouse-test.c:146
 msgid "Double click, secondary button"
-msgstr "두 번 누르기, 두번째 단추"
+msgstr "두번 누르기, 두번째 단추"
 
 #: ../panels/mouse/gnome-mouse-test.c:146
 msgid "Single click, secondary button"
-msgstr "한 번 누르기, 두번째 단추"
+msgstr "한번 누르기, 두번째 단추"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
@@ -3254,7 +3249,7 @@ msgstr "DER, PEM 또는 PKCS#12 형식 개인 키(*.der, *.pem, *.p12)"
 
 #: ../panels/network/wireless-security/eap-method.c:648
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER 또는 PEM 형식 인증서 (*.der, *.pem, *.crt, *.cer)"
+msgstr "DER 또는 PEM 형식 인증서(*.der, *.pem, *.crt, *.cer)"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:261
 #: ../panels/network/wireless-security/eap-method-peap.c:280
@@ -3273,7 +3268,7 @@ msgstr "PAC 파일 선택..."
 
 #: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "PAC files (*.pac)"
-msgstr "PAC 파일 (*.pac)"
+msgstr "PAC 파일(*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "PAC _file"
@@ -4101,7 +4096,7 @@ msgstr "준비"
 #: ../panels/printers/cc-printers-panel.c:796
 msgctxt "printer state"
 msgid "Does not accept jobs"
-msgstr "인쇄 작업을 받지 않음"
+msgstr "인쇄 작업 받지 않음"
 
 #. Translators: Printer's state (jobs are processing)
 #: ../panels/printers/cc-printers-panel.c:801
@@ -4155,8 +4150,7 @@ msgstr "PPD 파일 선택"
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
-msgstr ""
-"포스트스크립트 프린터 기술 파일 (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
+msgstr "포스트스크립트 프린터 기술 파일(*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
 #: ../panels/printers/cc-printers-panel.c:2256
 msgid "No suitable driver found"
@@ -5299,7 +5293,7 @@ msgstr "장치"
 #: ../panels/sound/gvc-mixer-dialog.c:1591
 #, c-format
 msgid "Speaker Testing for %s"
-msgstr "스피커 시험 (%s)"
+msgstr "스피커 시험(%s)"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1648
 msgid "_Output volume:"
@@ -5403,7 +5397,7 @@ msgstr "보기, 듣기, 타이핑, 누르기 편의 사항"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
-msgstr "Keyboard;키보드;Mouse;마우스;a11y;Accessibility;접근성;Contrast;대비;Zoom;확대;축소;Screen Reader;스크린 리더;화면 읽기;text;텍스트;font;size;폰트;글꼴;크기;AccessX;Sticky;Keys;고정;키;Slow;느린;Bounce;탄력;Mouse;마우스;"
+msgstr "Keyboard;키보드;Mouse;마우스;a11y;Accessibility;접근성;Contrast;대비;Zoom;확대;축소;Screen;Reader;스크린;리더;화면;읽기;text;텍스트;font;size;폰트;글꼴;크기;AccessX;Sticky;Keys;고정;키;Slow;느린;Bounce;탄력;Mouse;마우스;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6649,7 +6643,7 @@ msgstr ""
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
-msgstr "타블렛을 보정하려면 화면에 나타난 표시를 누르십시오."
+msgstr "태블릿을 보정하려면 화면에 나타난 표시를 누르십시오."
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:87
 msgid "Mis-click detected, restarting..."
@@ -6715,20 +6709,20 @@ msgstr "단추"
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Wacom Tablet"
-msgstr "와콤 타블렛"
+msgstr "와콤 태블릿"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:2
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
-msgstr "그래픽 타블렛의 단추 매핑을 설정하고 스타일러스의 민감도를 조정합니다"
+msgstr "그래픽 태블릿의 단추 매핑을 설정하고 스타일러스의 민감도를 조정합니다"
 
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr "Tablet;타블렛;Wacom;와콤;Stylus;스타일러스;Eraser;지우개;Mouse;마우스;"
+msgstr "Tablet;태블릿;Wacom;와콤;Stylus;스타일러스;Eraser;지우개;Mouse;마우스;"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
 msgid "Tablet (absolute)"
-msgstr "타블렛(절대 좌표)"
+msgstr "태블릿(절대 좌표)"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Touchpad (relative)"
@@ -6736,15 +6730,15 @@ msgstr "터치패드(상대 좌표)"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:3
 msgid "Tablet Preferences"
-msgstr "타블렛 기본 설정"
+msgstr "태블릿 기본 설정"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "No tablet detected"
-msgstr "검색된 타블렛 없음"
+msgstr "검색된 태블릿 없음"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "Please plug in or turn on your Wacom tablet"
-msgstr "와콤 타블렛을 연결하거나 켜십시오"
+msgstr "와콤 태블릿을 연결하거나 켜십시오"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Bluetooth Settings"
