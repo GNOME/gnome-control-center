@@ -157,14 +157,6 @@ _set_binding (CcKeyboardItem *item,
   settings_set_binding (item->settings, item->key, item->priv->binding);
 }
 
-const char *
-cc_keyboard_item_get_binding (CcKeyboardItem *item)
-{
-  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
-
-  return item->priv->binding;
-}
-
 static void
 _set_type (CcKeyboardItem *item,
            gint            value)

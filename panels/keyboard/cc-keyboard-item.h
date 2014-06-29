@@ -95,7 +95,6 @@ gboolean cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
 					       const char *key);
 
 const char * cc_keyboard_item_get_description (CcKeyboardItem *item);
-const char * cc_keyboard_item_get_binding     (CcKeyboardItem *item);
 const char * cc_keyboard_item_get_command     (CcKeyboardItem *item);
 
 gboolean     cc_keyboard_item_equal           (CcKeyboardItem *a,
