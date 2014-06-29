@@ -58,7 +58,6 @@ typedef struct
   CcKeyboardItemType type;
   char *schema; /* GSettings schema name, if any */
   char *description; /* description for GSettings types */
-  char *gettext_package;
   char *name; /* GSettings schema path, or GSettings key name depending on type */
   char *reverse_entry;
   gboolean is_reversed;
@@ -480,7 +479,6 @@ parse_start_tag (GMarkupParseContext *ctx,
   key.name = g_strdup (name);
   key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS;
   key.description = replace_pictures_folder (description);
-  key.gettext_package = g_strdup (keylist->package);
   key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
   key.reverse_entry = g_strdup (reverse_entry);
   key.is_reversed = is_reversed;
@@ -590,7 +588,6 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
     KeyListEntry *entry = &keys[i];
     g_free (entry->schema);
     g_free (entry->description);
-    g_free (entry->gettext_package);
     g_free (entry->name);
     g_free (entry->reverse_entry);
   }

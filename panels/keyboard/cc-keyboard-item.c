@@ -330,7 +330,6 @@ cc_keyboard_item_finalize (GObject *object)
 
   /* Free memory */
   g_free (item->priv->binding);
-  g_free (item->gettext_package);
   g_free (item->gsettings_path);
   g_free (item->description);
   g_free (item->command);

@@ -63,7 +63,6 @@ typedef struct
   BindingGroupType group;
   GtkTreeModel *model;
   char *description;
-  char *gettext_package;
   gboolean editable;
 
   /* GSettings path */
