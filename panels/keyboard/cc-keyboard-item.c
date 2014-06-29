@@ -35,7 +35,8 @@
 struct CcKeyboardItemPrivate
 {
   /* properties */
-  int foo;
+  /* common */
+  char *binding;
 
   /* internal */
   CcKeyboardItem *reverse_item;
@@ -145,14 +146,15 @@ _set_binding (CcKeyboardItem *item,
               const char     *value,
 	      gboolean        set_backend)
 {
-  g_free (item->binding);
-  item->binding = g_strdup (value);
-  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
+  g_free (item->priv->binding);
+  item->priv->binding = g_strdup (value);
+  binding_from_string (item->priv->binding, &item->keyval,
+                       &item->keycode, &item->mask);
 
   if (set_backend == FALSE)
     return;
 
-  settings_set_binding (item->settings, item->key, item->binding);
+  settings_set_binding (item->settings, item->key, item->priv->binding);
 }
 
 const char *
@@ -160,7 +162,7 @@ cc_keyboard_item_get_binding (CcKeyboardItem *item)
 {
   g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), NULL);
 
-  return item->binding;
+  return item->priv->binding;
 }
 
 static void
@@ -230,7 +232,7 @@ cc_keyboard_item_get_property (GObject    *object,
     g_value_set_string (value, self->description);
     break;
   case PROP_BINDING:
-    g_value_set_string (value, self->binding);
+    g_value_set_string (value, self->priv->binding);
     break;
   case PROP_EDITABLE:
     g_value_set_boolean (value, self->editable);
@@ -335,7 +337,7 @@ cc_keyboard_item_finalize (GObject *object)
     g_object_unref (item->settings);
 
   /* Free memory */
-  g_free (item->binding);
+  g_free (item->priv->binding);
   g_free (item->gettext_package);
   g_free (item->gsettings_path);
   g_free (item->description);
@@ -420,8 +422,9 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   g_settings_bind (item->settings, "command",
                    G_OBJECT (item), "command", G_SETTINGS_BIND_DEFAULT);
 
-  item->binding = settings_get_binding (item->settings, item->key);
-  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
+  item->priv->binding = settings_get_binding (item->settings, item->key);
+  binding_from_string (item->priv->binding, &item->keyval,
+                       &item->keycode, &item->mask);
   g_signal_connect (G_OBJECT (item->settings), "changed::binding",
 		    G_CALLBACK (binding_changed), item);
 
@@ -441,9 +444,10 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->description = g_strdup (description);
 
   item->settings = g_settings_new (item->schema);
-  item->binding = settings_get_binding (item->settings, item->key);
+  item->priv->binding = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
-  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
+  binding_from_string (item->priv->binding, &item->keyval,
+                       &item->keycode, &item->mask);
 
   signal_name = g_strdup_printf ("changed::%s", item->key);
   g_signal_connect (G_OBJECT (item->settings), signal_name,
