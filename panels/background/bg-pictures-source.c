@@ -27,6 +27,7 @@
 #include "cc-background-item.h"
 
 #include <string.h>
+#include <cairo-gobject.h>
 #include <gio/gio.h>
 #include <grilo.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
@@ -150,6 +151,8 @@ picture_scaled (GObject *source_object,
   GtkTreePath *path;
   GtkTreeRowReference *row_ref;
   GtkListStore *store;
+  cairo_surface_t *surface = NULL;
+  int scale_factor;
 
   item = g_object_get_data (source_object, "item");
   pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
@@ -183,6 +186,8 @@ picture_scaled (GObject *source_object,
       goto out;
     }
 
+  scale_factor = bg_source_get_scale_factor (BG_SOURCE (bg_source));
+  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   cc_background_item_load (item, NULL);
 
   row_ref = g_object_get_data (G_OBJECT (item), "row-ref");
@@ -190,7 +195,7 @@ picture_scaled (GObject *source_object,
     {
       /* insert the item into the liststore if it did not exist */
       gtk_list_store_insert_with_values (store, NULL, -1,
-                                         0, pixbuf,
+                                         0, surface,
                                          1, item,
                                          -1);
     }
@@ -201,7 +206,7 @@ picture_scaled (GObject *source_object,
         {
           /* otherwise update the thumbnail */
           gtk_list_store_set (store, &iter,
-                              0, pixbuf,
+                              0, surface,
                               -1);
         }
     }
@@ -212,6 +217,7 @@ picture_scaled (GObject *source_object,
 
 
  out:
+  g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
   g_clear_object (&pixbuf);
 }
 
@@ -336,10 +342,12 @@ add_single_file (BgPicturesSource *bg_source,
   GtkTreeIter iter;
   GtkTreePath *path = NULL;
   GtkTreeRowReference *row_ref;
+  cairo_surface_t *surface = NULL;
   char *source_uri = NULL;
   char *uri = NULL;
   gboolean is_native;
   gboolean retval = FALSE;
+  int scale_factor;
 
   /* find png and jpeg files */
   if (!content_type)
@@ -395,11 +403,13 @@ add_single_file (BgPicturesSource *bg_source,
       goto read_file;
     }
 
+  scale_factor = bg_source_get_scale_factor (BG_SOURCE (bg_source));
+  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
 
   /* insert the item into the liststore */
   gtk_list_store_insert_with_values (store, &iter, -1,
-                                     0, pixbuf,
+                                     0, surface,
                                      1, item,
                                      -1);
 
@@ -470,6 +480,7 @@ add_single_file (BgPicturesSource *bg_source,
 
  out:
   gtk_tree_path_free (path);
+  g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
   g_clear_object (&pixbuf);
   g_clear_object (&icon_info);
   g_clear_object (&item);

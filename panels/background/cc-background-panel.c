@@ -213,6 +213,7 @@ update_display_preview (CcBackgroundPanel *panel,
   GtkAllocation allocation;
   const gint preview_width = 309;
   const gint preview_height = 168;
+  gint scale_factor;
   GdkPixbuf *pixbuf;
   GIcon *icon;
   cairo_t *cr;
@@ -222,10 +223,12 @@ update_display_preview (CcBackgroundPanel *panel,
   if (!current_background)
     return;
 
+  scale_factor = gtk_widget_get_scale_factor (widget);
   icon = cc_background_item_get_frame_thumbnail (current_background,
                                                  priv->thumb_factory,
                                                  preview_width,
                                                  preview_height,
+                                                 scale_factor,
                                                  -2, TRUE);
   pixbuf = GDK_PIXBUF (icon);
 

@@ -67,6 +67,8 @@ GType bg_source_get_type (void) G_GNUC_CONST;
 
 GtkListStore* bg_source_get_liststore (BgSource *source);
 
+gint bg_source_get_scale_factor (BgSource *source);
+
 gint bg_source_get_thumbnail_height (BgSource *source);
 
 gint bg_source_get_thumbnail_width (BgSource *source);

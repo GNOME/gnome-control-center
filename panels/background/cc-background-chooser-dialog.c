@@ -413,18 +413,12 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   g_signal_connect (priv->icon_view, "item-activated", G_CALLBACK (on_item_activated), chooser);
 
   renderer = gtk_cell_renderer_pixbuf_new ();
-  /* set stock size to 32px so that emblems render at 16px. see:
-   * https://bugzilla.gnome.org/show_bug.cgi?id=682123#c4
-   */
-  g_object_set (renderer,
-                "stock-size", GTK_ICON_SIZE_DND,
-                NULL);
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->icon_view),
                               renderer,
                               FALSE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (priv->icon_view),
                                   renderer,
-                                  "gicon", 0,
+                                  "surface", 0,
                                   NULL);
 
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("_Cancel"), GTK_RESPONSE_CANCEL);

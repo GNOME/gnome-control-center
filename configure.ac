@@ -119,7 +119,7 @@ LIBGD_INIT([_view-common notification static])
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
 PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11 polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
-PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
+PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES cairo-gobject libxml-2.0 gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
                   goa-1.0 >= $GOA_REQUIRED_VERSION
                   grilo-0.2 >= $GRILO_REQUIRED_VERSION)

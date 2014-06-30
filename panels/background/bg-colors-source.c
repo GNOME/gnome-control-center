@@ -24,6 +24,7 @@
 
 #include "cc-background-item.h"
 
+#include <cairo-gobject.h>
 #include <glib/gi18n-lib.h>
 #include <gdesktop-enums.h>
 
@@ -76,6 +77,8 @@ bg_colors_source_constructed (GObject *object)
       CcBackgroundItemFlags flags;
       CcBackgroundItem *item;
       GIcon *pixbuf;
+      cairo_surface_t *surface;
+      int scale_factor;
 
       item = cc_background_item_new (NULL);
       flags = CC_BACKGROUND_ITEM_HAS_PCOLOR |
@@ -96,14 +99,18 @@ bg_colors_source_constructed (GObject *object)
       cc_background_item_load (item, NULL);
 
       /* insert the item into the liststore */
+      scale_factor = bg_source_get_scale_factor (BG_SOURCE (self));
       pixbuf = cc_background_item_get_thumbnail (item,
 						 thumb_factory,
-						 thumbnail_width, thumbnail_height);
+						 thumbnail_width, thumbnail_height,
+						 scale_factor);
+      surface = gdk_cairo_surface_create_from_pixbuf (GDK_PIXBUF (pixbuf), scale_factor, NULL);
       gtk_list_store_insert_with_values (store, NULL, 0,
-                                         0, pixbuf,
+                                         0, surface,
                                          1, item,
                                          -1);
 
+      cairo_surface_destroy (surface);
       g_object_unref (pixbuf);
       g_object_unref (item);
     }

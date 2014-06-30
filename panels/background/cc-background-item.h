@@ -73,11 +73,13 @@ gboolean           cc_background_item_changes_with_time   (CcBackgroundItem     
 GIcon     *        cc_background_item_get_thumbnail       (CcBackgroundItem             *item,
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
-                                                           int                           height);
+                                                           int                           height,
+                                                           int                           scale_factor);
 GIcon     *        cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
                                                            int                           height,
+                                                           int                           scale_factor,
                                                            int                           frame,
                                                            gboolean                      force_size);
 

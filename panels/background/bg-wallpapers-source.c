@@ -25,6 +25,7 @@
 #include "cc-background-item.h"
 #include "cc-background-xml.h"
 
+#include <cairo-gobject.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gio/gio.h>
 
@@ -49,7 +50,9 @@ load_wallpapers (gchar              *key,
   GtkTreeIter iter;
   GIcon *pixbuf;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
+  cairo_surface_t *surface = NULL;
   gboolean deleted;
+  gint scale_factor;
   gint thumbnail_height;
   gint thumbnail_width;
 
@@ -60,17 +63,24 @@ load_wallpapers (gchar              *key,
 
   gtk_list_store_append (store, &iter);
 
+  scale_factor = bg_source_get_scale_factor (BG_SOURCE (source));
   thumbnail_height = bg_source_get_thumbnail_height (BG_SOURCE (source));
   thumbnail_width = bg_source_get_thumbnail_width (BG_SOURCE (source));
   pixbuf = cc_background_item_get_thumbnail (item, priv->thumb_factory,
-					     thumbnail_width, thumbnail_height);
+					     thumbnail_width, thumbnail_height,
+					     scale_factor);
+  if (pixbuf == NULL)
+    goto out;
 
+  surface = gdk_cairo_surface_create_from_pixbuf (GDK_PIXBUF (pixbuf), scale_factor, NULL);
   gtk_list_store_set (store, &iter,
-                      0, pixbuf,
+                      0, surface,
                       1, item,
                       2, cc_background_item_get_name (item),
                       -1);
 
+ out:
+  g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
   if (pixbuf)
     g_object_unref (pixbuf);
 }

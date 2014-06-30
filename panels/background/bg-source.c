@@ -21,6 +21,8 @@
 #include "bg-source.h"
 #include "cc-background-item.h"
 
+#include <cairo-gobject.h>
+
 #define THUMBNAIL_WIDTH 256
 #define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
 
@@ -155,7 +157,7 @@ bg_source_init (BgSource *self)
 
   priv = self->priv = SOURCE_PRIVATE (self);
 
-  priv->store = gtk_list_store_new (3, G_TYPE_ICON, G_TYPE_OBJECT, G_TYPE_STRING);
+  priv->store = gtk_list_store_new (3, CAIRO_GOBJECT_TYPE_SURFACE, G_TYPE_OBJECT, G_TYPE_STRING);
 }
 
 GtkListStore*
@@ -164,6 +166,14 @@ bg_source_get_liststore (BgSource *source)
   g_return_val_if_fail (BG_IS_SOURCE (source), NULL);
 
   return source->priv->store;
+}
+
+gint
+bg_source_get_scale_factor (BgSource *source)
+{
+  g_return_val_if_fail (BG_IS_SOURCE (source), 1);
+
+  return gtk_widget_get_scale_factor (source->priv->window);
 }
 
 gint
