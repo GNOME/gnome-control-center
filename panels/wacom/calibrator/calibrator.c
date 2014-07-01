@@ -25,7 +25,10 @@
 
 #include "calibrator.h"
 
-#define SWAP(x,y)  do { int t; t=(x); x=(y); y=t; } while (0)
+#define SWAP(valtype,x,y)		\
+    G_STMT_START {			\
+    valtype t; t = (x); x = (y); y = t;	\
+    } G_STMT_END
 
 /* reset clicks */
 void
@@ -142,8 +145,8 @@ finish (struct Calib *c,
     swap_xy = (abs (c->clicked_x [UL] - c->clicked_x [UR]) < abs (c->clicked_y [UL] - c->clicked_y [UR]));
     if (swap_xy)
     {
-        SWAP(c->clicked_x[LL], c->clicked_x[UR]);
-        SWAP(c->clicked_y[LL], c->clicked_y[UR]);
+        SWAP(int, c->clicked_x[LL], c->clicked_x[UR]);
+        SWAP(int, c->clicked_y[LL], c->clicked_y[UR]);
     }
 
     /* Compute min/max coordinates. */
@@ -168,8 +171,8 @@ finish (struct Calib *c,
     /* If x and y has to be swapped we also have to swap the parameters */
     if (swap_xy)
     {
-        SWAP(axis.x_min, axis.y_max);
-        SWAP(axis.y_min, axis.x_max);
+        SWAP(int, axis.x_min, axis.y_max);
+        SWAP(int, axis.y_min, axis.x_max);
     }
 
     *new_axis = axis;
