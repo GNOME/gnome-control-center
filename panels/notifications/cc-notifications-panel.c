@@ -362,6 +362,7 @@ process_app_info (CcNotificationsPanel *panel,
   char *path;
   GSettings *settings;
   GSource *source;
+  guint i;
 
   app_id = app_info_get_id (app_info);
   canonical_app_id = g_strcanon (app_id,
@@ -370,6 +371,8 @@ process_app_info (CcNotificationsPanel *panel,
                                  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                  "-",
                                  '-');
+  for (i = 0; canonical_app_id[i] != '\0'; i++)
+    canonical_app_id[i] = g_ascii_tolower (canonical_app_id[i]);
 
   path = g_strconcat (APP_PREFIX, canonical_app_id, "/", NULL);
   settings = g_settings_new_with_path (APP_SCHEMA, path);
