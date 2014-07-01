@@ -274,6 +274,8 @@ maybe_add_app_id (CcNotificationsPanel *panel,
   app_info = G_APP_INFO (g_desktop_app_info_new (full_app_id));
 
   if (app_info == NULL) {
+    g_debug ("Not adding application '%s' (canonical app ID: %s)",
+             full_app_id, canonical_app_id);
     /* The application cannot be found, probably it was uninstalled */
     g_object_unref (settings);
   } else {
@@ -281,6 +283,9 @@ maybe_add_app_id (CcNotificationsPanel *panel,
     app->canonical_app_id = g_strdup (canonical_app_id);
     app->settings = settings;
     app->app_info = app_info;
+
+    g_debug ("Adding application '%s' (canonical app ID: %s)",
+             full_app_id, canonical_app_id);
 
     add_application (panel, app);
   }
