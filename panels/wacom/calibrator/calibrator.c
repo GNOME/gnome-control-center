@@ -141,20 +141,28 @@ finish (struct Calib *c,
     if (c->num_clicks != 4)
         return FALSE;
 
-    /* Should x and y be swapped? */
-    swap_xy = (abs (c->clicked_x [UL] - c->clicked_x [UR]) < abs (c->clicked_y [UL] - c->clicked_y [UR]));
+    /* Should x and y be swapped? If the device and output are wider
+     * towards different axes, swapping must be performed
+     */
+    swap_xy = (c->geometry.width > c->geometry.height) !=
+        ((c->old_axis.x_max - c->old_axis.x_min) > (c->old_axis.y_max - c->old_axis.y_min));
+
     if (swap_xy)
-    {
-        SWAP(int, c->clicked_x[LL], c->clicked_x[UR]);
-        SWAP(int, c->clicked_y[LL], c->clicked_y[UR]);
-    }
+        SWAP (int, c->geometry.width, c->geometry.height);
 
     /* Compute min/max coordinates. */
     /* These are scaled using the values of old_axis */
     scale_x = (c->old_axis.x_max - c->old_axis.x_min)/(float)c->geometry.width;
+    scale_y = (c->old_axis.y_max - c->old_axis.y_min)/(float)c->geometry.height;
+
+    /* Swap back for usage with the collected click points, which are in screen
+     * coordinates, hence possibly rotated.
+     */
+    if (swap_xy)
+        SWAP(gdouble, scale_x, scale_y);
+
     axis.x_min = ((((c->clicked_x[UL] + c->clicked_x[LL]) / 2)) * scale_x) + c->old_axis.x_min;
     axis.x_max = ((((c->clicked_x[UR] + c->clicked_x[LR]) / 2)) * scale_x) + c->old_axis.x_min;
-    scale_y = (c->old_axis.y_max - c->old_axis.y_min)/(float)c->geometry.height;
     axis.y_min = ((((c->clicked_y[UL] + c->clicked_y[UR]) / 2)) * scale_y) + c->old_axis.y_min;
     axis.y_max = ((((c->clicked_y[LL] + c->clicked_y[LR]) / 2)) * scale_y) + c->old_axis.y_min;
 
@@ -171,8 +179,8 @@ finish (struct Calib *c,
     /* If x and y has to be swapped we also have to swap the parameters */
     if (swap_xy)
     {
-        SWAP(int, axis.x_min, axis.y_max);
-        SWAP(int, axis.y_min, axis.x_max);
+        SWAP (int, axis.x_min, axis.y_min);
+        SWAP (int, axis.x_max, axis.y_max);
     }
 
     *new_axis = axis;
