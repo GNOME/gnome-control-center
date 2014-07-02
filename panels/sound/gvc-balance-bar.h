@@ -45,13 +45,13 @@ typedef struct GvcBalanceBarPrivate GvcBalanceBarPrivate;
 
 typedef struct
 {
-        GtkHBox               parent;
+        GtkBox                parent;
         GvcBalanceBarPrivate *priv;
 } GvcBalanceBar;
 
 typedef struct
 {
-        GtkHBoxClass          parent_class;
+        GtkBoxClass           parent_class;
 } GvcBalanceBarClass;
 
 GType               gvc_balance_bar_get_type            (void);

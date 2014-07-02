@@ -75,7 +75,7 @@ static gboolean on_scale_scroll_event         (GtkWidget      *widget,
 static void on_adjustment_value_changed       (GtkAdjustment *adjustment,
                                                GvcBalanceBar *bar);
 
-G_DEFINE_TYPE (GvcBalanceBar, gvc_balance_bar, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (GvcBalanceBar, gvc_balance_bar, GTK_TYPE_BOX)
 
 static GtkWidget *
 _scale_box_new (GvcBalanceBar *bar)
@@ -303,7 +303,7 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
         /* frame */
         frame = gtk_frame_new (NULL);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-        gtk_container_add (GTK_CONTAINER (bar), frame);
+        gtk_box_pack_start (GTK_BOX (bar), frame, TRUE, TRUE, 0);
 
         /* box with scale */
         bar->priv->scale_box = _scale_box_new (bar);
@@ -536,6 +536,7 @@ gvc_balance_bar_new (const GvcChannelMap *channel_map, GvcBalanceType btype)
         bar = g_object_new (GVC_TYPE_BALANCE_BAR,
                             "channel-map", channel_map,
                             "balance-type", btype,
+                            "orientation", GTK_ORIENTATION_HORIZONTAL,
                             NULL);
         return GTK_WIDGET (bar);
 }

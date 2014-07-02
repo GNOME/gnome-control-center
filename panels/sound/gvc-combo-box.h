@@ -35,13 +35,13 @@ typedef struct GvcComboBoxPrivate GvcComboBoxPrivate;
 
 typedef struct
 {
-        GtkHBox               parent;
+        GtkBox              parent;
         GvcComboBoxPrivate *priv;
 } GvcComboBox;
 
 typedef struct
 {
-        GtkHBoxClass            parent_class;
+        GtkBoxClass             parent_class;
         void (* changed)        (GvcComboBox *combobox, const char *name);
         void (* button_clicked) (GvcComboBox *combobox);
 } GvcComboBoxClass;

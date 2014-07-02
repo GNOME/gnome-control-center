@@ -98,7 +98,7 @@ static gboolean on_scale_scroll_event         (GtkWidget      *widget,
                                                GdkEventScroll *event,
                                                GvcChannelBar  *bar);
 
-G_DEFINE_TYPE (GvcChannelBar, gvc_channel_bar, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (GvcChannelBar, gvc_channel_bar, GTK_TYPE_BOX)
 
 static GtkWidget *
 _scale_box_new (GvcChannelBar *bar)
@@ -936,7 +936,7 @@ gvc_channel_bar_init (GvcChannelBar *bar)
         /* frame */
         frame = gtk_frame_new (NULL);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-        gtk_container_add (GTK_CONTAINER (bar), frame);
+        gtk_box_pack_start (GTK_BOX (bar), frame, TRUE, TRUE, 0);
         gtk_widget_show_all (frame);
 
         /* box with scale */
@@ -970,6 +970,7 @@ gvc_channel_bar_new (void)
 {
         GObject *bar;
         bar = g_object_new (GVC_TYPE_CHANNEL_BAR,
+                            "orientation", GTK_ORIENTATION_HORIZONTAL,
                             NULL);
         return GTK_WIDGET (bar);
 }

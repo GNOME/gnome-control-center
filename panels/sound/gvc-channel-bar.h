@@ -35,13 +35,13 @@ typedef struct GvcChannelBarPrivate GvcChannelBarPrivate;
 
 typedef struct
 {
-        GtkHBox               parent;
+        GtkBox                parent;
         GvcChannelBarPrivate *priv;
 } GvcChannelBar;
 
 typedef struct
 {
-        GtkHBoxClass          parent_class;
+        GtkBoxClass           parent_class;
 } GvcChannelBarClass;
 
 GType               gvc_channel_bar_get_type            (void);
