@@ -7,6 +7,44 @@
     <property name="destroy_with_parent">True</property>
     <property name="resizable">False</property>
     <property name="use_header_bar">1</property>
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar" id="format-chooser-header-bar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="show_close_button">False</property>
+        <child>
+          <object class="GtkButton" id="ok-button">
+            <property name="label" translatable="yes">_Done</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_underline">True</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="text-button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="cancel-button">
+            <property name="label" translatable="yes">_Cancel</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="use_underline">True</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="text-button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack_type">start</property>
+          </packing>
+        </child>
+      </object>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="language-vbox">
         <property name="visible">True</property>
@@ -50,5 +88,9 @@
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="-5">ok-button</action-widget>
+      <action-widget response="-6">cancel-button</action-widget>
+    </action-widgets>
   </object>
 </interface>
