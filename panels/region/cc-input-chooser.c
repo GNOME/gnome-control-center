@@ -393,6 +393,7 @@ show_input_sources_for_locale (GtkWidget   *chooser,
   gtk_list_box_set_header_func (GTK_LIST_BOX (priv->list), update_header, NULL, NULL);
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
+  gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (priv->list), FALSE);
 
   if (gtk_widget_is_visible (priv->filter_entry) &&
       !gtk_widget_is_focus (priv->filter_entry))
@@ -448,6 +449,7 @@ show_locale_rows (GtkWidget *chooser)
   gtk_list_box_set_header_func (GTK_LIST_BOX (priv->list), update_header, NULL, NULL);
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->list), GTK_SELECTION_NONE);
+  gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (priv->list), TRUE);
 
   if (gtk_widget_is_visible (priv->filter_entry) &&
       !gtk_widget_is_focus (priv->filter_entry))
@@ -627,6 +629,7 @@ show_filter_widgets (GtkWidget *chooser)
                                 update_header_filter, NULL, NULL);
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
+  gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (priv->list), FALSE);
 
   if (gtk_widget_is_visible (priv->filter_entry) &&
       !gtk_widget_is_focus (priv->filter_entry))
@@ -745,7 +748,9 @@ row_activated (GtkListBox *box,
   data = g_object_get_data (G_OBJECT (row), "name");
   if (data)
     {
-      /* It's an input source, we just want to select it */
+      gtk_dialog_response (GTK_DIALOG (chooser),
+                           gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
+                                                               priv->add_button));
       return;
     }
 
@@ -758,13 +763,21 @@ row_activated (GtkListBox *box,
 }
 
 static void
-row_selected (GtkListBox *box,
-              GtkListBoxRow *row,
-              GtkWidget  *chooser)
+selected_rows_changed (GtkListBox *box,
+                       GtkWidget  *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
+  GtkListBoxRow *row;
+  gpointer data;
 
+  row = gtk_list_box_get_selected_row (box);
   gtk_widget_set_sensitive (priv->add_button, row != NULL);
+  if (!row)
+    return;
+
+  data = g_object_get_data (G_OBJECT (row), "back");
+  if (data)
+    show_locale_rows (chooser);
 }
 
 static void
@@ -1136,7 +1149,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   gtk_list_box_set_filter_func (GTK_LIST_BOX (priv->list), list_filter, chooser, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (priv->list), (GtkListBoxSortFunc)list_sort, chooser, NULL);
   g_signal_connect (priv->list, "row-activated", G_CALLBACK (row_activated), chooser);
-  g_signal_connect (priv->list, "row-selected", G_CALLBACK (row_selected), chooser);
+  g_signal_connect (priv->list, "selected-rows-changed", G_CALLBACK (selected_rows_changed), chooser);
 
   g_signal_connect_swapped (priv->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser);
 
