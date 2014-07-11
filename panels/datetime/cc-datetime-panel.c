@@ -519,7 +519,8 @@ translated_city_name (TzLocation *loc)
   length = g_strv_length (split_translated);
 
   country = gnome_get_country_from_code (loc->country, NULL);
-  name = g_strdup_printf ("%s, %s",
+  /* Translators: "city, country" */
+  name = g_strdup_printf (C_("timezone loc", "%s, %s"),
                           split_translated[length-1],
                           country);
   g_free (country);
@@ -537,6 +538,7 @@ update_timezone (CcDateTimePanel *self)
   char *label;
   char *time_label;
   char *utc_label;
+  char *tz_desc;
   gboolean use_ampm;
 
   if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
@@ -547,7 +549,8 @@ update_timezone (CcDateTimePanel *self)
   city_country = translated_city_name (priv->current_location);
 
   /* Update the timezone on the listbow row */
-  label = g_strdup_printf ("%s (%s)",
+  /* Translators: "timezone (details)" */
+  label = g_strdup_printf (C_("timezone desc", "%s (%s)"),
                            g_date_time_get_timezone_abbreviation (self->priv->date),
                            city_country);
   gtk_label_set_text (GTK_LABEL (W ("timezone_label")), label);
@@ -569,15 +572,19 @@ update_timezone (CcDateTimePanel *self)
     }
 
   /* Update the text bubble in the timezone map */
-  bubble_text = g_strdup_printf ("<b>%s (%s)</b>\n"
+  /* Translators: "timezone (utc shift)" */
+  tz_desc = g_strdup_printf (C_("timezone map", "%s (%s)"),
+                             g_date_time_get_timezone_abbreviation (self->priv->date),
+                             utc_label);
+  bubble_text = g_strdup_printf ("<b>%s</b>\n"
                                  "<small>%s</small>\n"
                                  "<b>%s</b>",
-                                 g_date_time_get_timezone_abbreviation (self->priv->date),
-                                 utc_label,
+                                 tz_desc,
                                  city_country,
                                  time_label);
   cc_timezone_map_set_bubble_text (CC_TIMEZONE_MAP (priv->map), bubble_text);
 
+  g_free (tz_desc);
   g_free (bubble_text);
   g_free (city_country);
   g_free (time_label);
