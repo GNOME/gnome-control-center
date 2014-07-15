@@ -72,7 +72,8 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
                 "row-spacing", 10,
                 "margin-top", 12,
                 "margin-start", 15,
-                "margin-end", 5,
+                "margin-end", 15,
+                "margin-bottom", 12,
                 NULL);
   gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET (content_grid));
 
