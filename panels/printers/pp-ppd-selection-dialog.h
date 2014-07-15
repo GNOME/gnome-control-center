@@ -28,15 +28,16 @@ G_BEGIN_DECLS
 
 typedef struct _PpPPDSelectionDialog PpPPDSelectionDialog;
 
-PpPPDSelectionDialog *pp_ppd_selection_dialog_new          (GtkWindow                 *parent,
-                                                            PPDList                   *ppd_list,
-                                                            gchar                     *manufacturer,
-                                                            UserResponseCallback       user_callback,
-                                                            gpointer                   user_data);
-gchar                *pp_ppd_selection_dialog_get_ppd_name (PpPPDSelectionDialog      *dialog);
-void                  pp_ppd_selection_dialog_set_ppd_list (PpPPDSelectionDialog      *dialog,
-                                                            PPDList                   *list);
-void                  pp_ppd_selection_dialog_free         (PpPPDSelectionDialog      *dialog);
+PpPPDSelectionDialog *pp_ppd_selection_dialog_new                  (GtkWindow                 *parent,
+                                                                    PPDList                   *ppd_list,
+                                                                    gchar                     *manufacturer,
+                                                                    UserResponseCallback       user_callback,
+                                                                    gpointer                   user_data);
+gchar                *pp_ppd_selection_dialog_get_ppd_name         (PpPPDSelectionDialog      *dialog);
+gchar                *pp_ppd_selection_dialog_get_ppd_display_name (PpPPDSelectionDialog      *dialog);
+void                  pp_ppd_selection_dialog_set_ppd_list         (PpPPDSelectionDialog      *dialog,
+                                                                    PPDList                   *list);
+void                  pp_ppd_selection_dialog_free                 (PpPPDSelectionDialog      *dialog);
 
 G_END_DECLS
 

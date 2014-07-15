@@ -59,6 +59,7 @@ struct _PpPPDSelectionDialog {
   gpointer             user_data;
 
   gchar           *ppd_name;
+  gchar           *ppd_display_name;
   GtkResponseType  response;
   gchar           *manufacturer;
 
@@ -311,6 +312,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
                 {
                   gtk_tree_model_get (model, &iter,
                                       PPD_NAMES_COLUMN, &ppd_selection_dialog->ppd_name,
+                                      PPD_DISPLAY_NAMES_COLUMN, &ppd_selection_dialog->ppd_display_name,
             			  -1);
                 }
             }
@@ -430,6 +432,8 @@ pp_ppd_selection_dialog_free (PpPPDSelectionDialog *dialog)
 
   g_free (dialog->ppd_name);
 
+  g_free (dialog->ppd_display_name);
+
   g_free (dialog->manufacturer);
 
   g_free (dialog);
@@ -439,6 +443,12 @@ gchar *
 pp_ppd_selection_dialog_get_ppd_name (PpPPDSelectionDialog *dialog)
 {
   return g_strdup (dialog->ppd_name);
+}
+
+gchar *
+pp_ppd_selection_dialog_get_ppd_display_name (PpPPDSelectionDialog *dialog)
+{
+  return g_strdup (dialog->ppd_display_name);
 }
 
 void
