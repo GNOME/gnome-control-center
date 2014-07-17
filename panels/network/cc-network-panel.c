@@ -1325,7 +1325,7 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
         }
 
         /* is it too new or old */
-        if (major > 0 || major > 9 || (minor <= 8 && micro < 992)) {
+        if (major > 0 || minor > 9 || (minor <= 8 && micro < 992)) {
                 ret = FALSE;
 
                 /* do modal dialog in idle so we don't block startup */
