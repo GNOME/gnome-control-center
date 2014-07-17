@@ -119,7 +119,7 @@ pp_host_class_init (PpHostClass *klass)
     g_param_spec_int ("port",
                       "Port",
                       "The port",
-                      0, G_MAXINT32, 631,
+                      -1, G_MAXINT32, PP_HOST_UNSET_PORT,
                       G_PARAM_READWRITE));
 }
 
@@ -129,15 +129,14 @@ pp_host_init (PpHost *host)
   host->priv = G_TYPE_INSTANCE_GET_PRIVATE (host,
                                             PP_TYPE_HOST,
                                             PpHostPrivate);
+  host->priv->port = PP_HOST_UNSET_PORT;
 }
 
 PpHost *
-pp_host_new (const gchar *hostname,
-             gint         port)
+pp_host_new (const gchar *hostname)
 {
   return g_object_new (PP_TYPE_HOST,
                        "hostname", hostname,
-                       "port", port,
                        NULL);
 }
 
@@ -380,14 +379,20 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
   PpPrintDevice *device;
   http_t        *http;
   gint           num_of_devices = 0;
+  gint           port;
   gint           i;
 
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
   data->devices->devices = NULL;
 
+  if (priv->port == PP_HOST_UNSET_PORT)
+    port = PP_HOST_DEFAULT_IPP_PORT;
+  else
+    port = priv->port;
+
   /* Connect to remote CUPS server and get its devices */
-  http = httpConnect (priv->hostname, priv->port);
+  http = httpConnect (priv->hostname, port);
   if (http)
     {
       num_of_devices = cupsGetDests2 (http, &dests);
@@ -399,14 +404,14 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
               device->device_class = g_strdup ("network");
               device->device_uri = g_strdup_printf ("ipp://%s:%d/printers/%s",
                                            priv->hostname,
-                                           priv->port,
+                                           port,
                                            dests[i].name);
               device->device_name = g_strdup (dests[i].name);
               device->device_location = g_strdup (cupsGetOption ("printer-location",
                                                         dests[i].num_options,
                                                         dests[i].options));
               device->host_name = g_strdup (priv->hostname);
-              device->host_port = priv->port;
+              device->host_port = port;
               device->acquisition_method = ACQUISITION_METHOD_REMOTE_CUPS_SERVER;
               data->devices->devices = g_list_append (data->devices->devices, device);
             }

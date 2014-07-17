@@ -1263,9 +1263,9 @@ parse_uri (const gchar  *uri,
 {
   const gchar *tmp = NULL;
   gchar       *resulting_host = NULL;
-  gchar       *port_string = NULL;
   gchar       *position;
-  int          resulting_port = 631;
+
+  *port = PP_HOST_UNSET_PORT;
 
   if (g_strrstr (uri, "://"))
     tmp = g_strrstr (uri, "://") + 3;
@@ -1287,14 +1287,10 @@ parse_uri (const gchar  *uri,
   if ((position = g_strrstr (resulting_host, ":")))
     {
       *position = '\0';
-      port_string = position + 1;
+      *port = atoi (position + 1);
     }
 
-  if (port_string)
-    resulting_port = atoi (port_string);
-
   *host = resulting_host;
-  *port = resulting_port;
 
   return TRUE;
 }
@@ -1326,8 +1322,15 @@ search_for_remote_printers (THostSearchData *data)
 
   priv->remote_host_cancellable = g_cancellable_new ();
 
-  priv->remote_cups_host = pp_host_new (data->host_name, data->host_port);
-  priv->snmp_host = pp_host_new (data->host_name, data->host_port);
+  priv->remote_cups_host = pp_host_new (data->host_name);
+  priv->snmp_host = pp_host_new (data->host_name);
+
+  if (data->host_port != PP_HOST_UNSET_PORT)
+    {
+      g_object_set (priv->remote_cups_host, "port", data->host_port, NULL);
+      g_object_set (priv->snmp_host, "port", data->host_port, NULL);
+    }
+
   priv->samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
                                    data->host_name);
 
@@ -1456,7 +1459,7 @@ search_address (const gchar        *text,
       if (text && text[0] != '\0')
         {
           gchar *host = NULL;
-          gint   port = 631;
+          gint   port;
 
           parse_uri (text, &host, &port);
 

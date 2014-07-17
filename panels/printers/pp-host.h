@@ -34,6 +34,9 @@ G_BEGIN_DECLS
 #define PP_IS_HOST_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), PP_TYPE_HOST))
 #define PP_HOST_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), PP_TYPE_HOST, PpHostClass))
 
+#define PP_HOST_UNSET_PORT        -1
+#define PP_HOST_DEFAULT_IPP_PORT 631
+
 typedef struct _PpHost        PpHost;
 typedef struct _PpHostClass   PpHostClass;
 typedef struct _PpHostPrivate PpHostPrivate;
@@ -51,8 +54,7 @@ struct _PpHostClass
 
 GType          pp_host_get_type                       (void) G_GNUC_CONST;
 
-PpHost        *pp_host_new                            (const gchar          *hostname,
-                                                       gint                  port);
+PpHost        *pp_host_new                            (const gchar          *hostname);
 
 void           pp_host_get_snmp_devices_async         (PpHost               *host,
                                                        GCancellable         *cancellable,
