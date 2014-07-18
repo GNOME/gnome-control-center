@@ -183,6 +183,7 @@ picture_scaled (GObject *source_object,
       g_str_equal (software, "gnome-screenshot"))
     {
       g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot", uri);
+      remove_placeholder (BG_PICTURES_SOURCE (user_data), item);
       goto out;
     }
 
