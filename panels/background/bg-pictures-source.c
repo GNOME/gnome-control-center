@@ -326,6 +326,44 @@ in_screenshot_types (const char *content_type)
 	return FALSE;
 }
 
+static cairo_surface_t *
+get_content_loading_icon (BgSource *source)
+{
+  GtkIconTheme *theme;
+  GtkIconInfo *icon_info;
+  GdkPixbuf *pixbuf;
+  GError *error = NULL;
+  int scale_factor;
+  cairo_surface_t *surface;
+
+  theme = gtk_icon_theme_get_default ();
+  icon_info = gtk_icon_theme_lookup_icon (theme,
+                                          "content-loading-symbolic",
+                                          16,
+                                          GTK_ICON_LOOKUP_FORCE_SIZE | GTK_ICON_LOOKUP_GENERIC_FALLBACK);
+  if (icon_info == NULL)
+    {
+      g_warning ("Failed to find placeholder icon");
+      return NULL;
+    }
+
+  pixbuf = gtk_icon_info_load_icon (icon_info, &error);
+  if (pixbuf == NULL)
+    {
+      g_warning ("Failed to load placeholder icon: %s", error->message);
+      g_clear_error (&error);
+      g_clear_object (&icon_info);
+      return NULL;
+    }
+
+  scale_factor = bg_source_get_scale_factor (source);
+  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+  g_object_unref (pixbuf);
+  g_clear_object (&icon_info);
+
+  return surface;
+}
+
 static gboolean
 add_single_file (BgPicturesSource     *bg_source,
                  GFile                *file,
@@ -335,10 +373,6 @@ add_single_file (BgPicturesSource     *bg_source,
 {
   CcBackgroundItem *item = NULL;
   CcBackgroundItemFlags flags = 0;
-  GError *error = NULL;
-  GdkPixbuf *pixbuf = NULL;
-  GtkIconInfo *icon_info = NULL;
-  GtkIconTheme *theme;
   GtkListStore *store;
   GtkTreeIter iter;
   GtkTreePath *path = NULL;
@@ -348,7 +382,6 @@ add_single_file (BgPicturesSource     *bg_source,
   char *uri = NULL;
   gboolean is_native;
   gboolean retval = FALSE;
-  int scale_factor;
 
   /* find png and jpeg files */
   if (!content_type)
@@ -385,27 +418,7 @@ add_single_file (BgPicturesSource     *bg_source,
   if (in_screenshot_types (content_type))
     goto read_file;
 
-  theme = gtk_icon_theme_get_default ();
-  icon_info = gtk_icon_theme_lookup_icon (theme,
-                                          "content-loading-symbolic",
-                                          16,
-                                          GTK_ICON_LOOKUP_FORCE_SIZE | GTK_ICON_LOOKUP_GENERIC_FALLBACK);
-  if (icon_info == NULL)
-    {
-      g_warning ("Failed to find placeholder icon");
-      goto read_file;
-    }
-
-  pixbuf = gtk_icon_info_load_icon (icon_info, &error);
-  if (pixbuf == NULL)
-    {
-      g_warning ("Failed to load placeholder icon: %s", error->message);
-      g_clear_error (&error);
-      goto read_file;
-    }
-
-  scale_factor = bg_source_get_scale_factor (BG_SOURCE (bg_source));
-  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+  surface = get_content_loading_icon (BG_SOURCE (bg_source));
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
 
   /* insert the item into the liststore */
@@ -489,8 +502,6 @@ add_single_file (BgPicturesSource     *bg_source,
     }
   gtk_tree_path_free (path);
   g_clear_pointer (&surface, (GDestroyNotify) cairo_surface_destroy);
-  g_clear_object (&pixbuf);
-  g_clear_object (&icon_info);
   g_clear_object (&item);
   g_object_unref (file);
   g_free (source_uri);
