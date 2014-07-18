@@ -158,7 +158,7 @@ update_preview (GtkFileChooser               *chooser,
 {
         gchar *uri;
 
-        uri = gtk_file_chooser_get_preview_uri (chooser);
+        uri = gtk_file_chooser_get_uri (chooser);
 
         if (uri) {
                 GdkPixbuf *pixbuf = NULL;
@@ -230,8 +230,13 @@ um_photo_dialog_select_file (UmPhotoDialog *um)
         gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser), preview);
         gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser), FALSE);
         gtk_widget_show (preview);
-        g_signal_connect (chooser, "update-preview",
-                          G_CALLBACK (update_preview), um->thumb_factory);
+
+        /* Preview has to be generated after default handler of "selection-changed"
+         * signal, otherwise dialog response sensitivity is rewritten (Bug 547988).
+         * Preview also has to be generated on "selection-changed" signal to reflect
+         * all changes (Bug 660877). */
+        g_signal_connect_after (chooser, "selection-changed",
+                                G_CALLBACK (update_preview), um->thumb_factory);
 
         folder = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
         if (folder)
