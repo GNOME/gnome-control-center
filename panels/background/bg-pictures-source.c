@@ -444,7 +444,7 @@ add_single_file (BgPicturesSource     *bg_source,
     }
 
   item = cc_background_item_new (uri);
-  flags |= CC_BACKGROUND_ITEM_HAS_SHADING;
+  flags |= CC_BACKGROUND_ITEM_HAS_SHADING | CC_BACKGROUND_ITEM_HAS_PLACEMENT;
   g_object_set (G_OBJECT (item),
 		"flags", flags,
 		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
