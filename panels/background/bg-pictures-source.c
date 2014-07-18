@@ -331,10 +331,12 @@ get_content_loading_icon (BgSource *source)
 {
   GtkIconTheme *theme;
   GtkIconInfo *icon_info;
-  GdkPixbuf *pixbuf;
+  GdkPixbuf *pixbuf, *ret;
   GError *error = NULL;
   int scale_factor;
   cairo_surface_t *surface;
+  int thumbnail_height;
+  int thumbnail_width;
 
   theme = gtk_icon_theme_get_default ();
   icon_info = gtk_icon_theme_lookup_icon (theme,
@@ -356,9 +358,24 @@ get_content_loading_icon (BgSource *source)
       return NULL;
     }
 
-  scale_factor = bg_source_get_scale_factor (source);
-  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+  thumbnail_height = bg_source_get_thumbnail_height (source);
+  thumbnail_width = bg_source_get_thumbnail_width (source);
+  ret = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
+                        TRUE,
+                        8, thumbnail_width, thumbnail_height);
+  gdk_pixbuf_fill (ret, 0x00000000);
+
+  /* Put the icon in the middle */
+  gdk_pixbuf_copy_area (pixbuf, 0, 0,
+			gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf),
+			ret,
+			(thumbnail_width - gdk_pixbuf_get_width (pixbuf)) / 2,
+			(thumbnail_height - gdk_pixbuf_get_height (pixbuf)) / 2);
   g_object_unref (pixbuf);
+
+  scale_factor = bg_source_get_scale_factor (source);
+  surface = gdk_cairo_surface_create_from_pixbuf (ret, scale_factor, NULL);
+  g_object_unref (ret);
   g_clear_object (&icon_info);
 
   return surface;
