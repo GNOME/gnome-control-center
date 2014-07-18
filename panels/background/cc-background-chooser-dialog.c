@@ -172,6 +172,9 @@ monitor_pictures_model (CcBackgroundChooserDialog *chooser)
 {
   GtkTreeModel *model;
 
+  if (chooser->priv->row_inserted_id != 0)
+    return;
+
   model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (chooser->priv->pictures_source)));
 
   chooser->priv->row_inserted_id = g_signal_connect (model, "row-inserted",
