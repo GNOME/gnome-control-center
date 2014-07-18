@@ -454,7 +454,7 @@ add_single_file (BgPicturesSource     *bg_source,
                 "source-url", source_uri,
 		NULL);
 
-  if (in_screenshot_types (content_type))
+  if (!ret_row_ref && in_screenshot_types (content_type))
     goto read_file;
 
   surface = get_content_loading_icon (BG_SOURCE (bg_source));
