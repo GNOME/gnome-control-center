@@ -1708,7 +1708,8 @@ on_suspend_settings_changed (GSettings    *settings,
   CcPowerPanelPrivate *priv = self->priv;
   gint value;
 
-  if (g_strcmp0 (key, "critical-battery-action") == 0)
+  if (g_strcmp0 (key, "critical-battery-action") == 0 &&
+      priv->critical_battery_combo != NULL)
     {
       value = g_settings_get_enum (settings, "critical-battery-action");
       set_value_for_combo (GTK_COMBO_BOX (priv->critical_battery_combo), value);
@@ -1923,8 +1924,6 @@ add_automatic_suspend_section (CcPowerPanel *self)
                         G_CALLBACK (combo_enum_changed_cb), self);
 
       gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
-      g_signal_connect (priv->gsd_settings, "changed",
-                        G_CALLBACK (on_suspend_settings_changed), self);
     }
   else
     {
@@ -1942,6 +1941,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
 
   dialog = priv->automatic_suspend_dialog;
   g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+  g_signal_connect (priv->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self);
 
   sw = WID (priv->builder, "suspend_on_battery_switch");
   g_settings_bind_with_mapping (priv->gsd_settings, "sleep-inactive-battery-type",
