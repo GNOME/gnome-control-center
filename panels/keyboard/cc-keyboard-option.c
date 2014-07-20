@@ -98,6 +98,8 @@ static const gchar *xkb_option_comp_whitelist[] = {
   "compose:lctrl",
   "compose:rctrl",
   "compose:caps",
+  "compose:prsc",
+  "compose:sclk",
   NULL
 };
 
