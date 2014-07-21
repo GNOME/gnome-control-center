@@ -54,34 +54,37 @@ cc_media_sharing_get_preferences (gchar  ***folders)
   if (folders)
     {
       gsize length;
-      gchar **str_list;
+      GPtrArray *array;
+      char **str_list, **orig_list;
 
       str_list = g_key_file_get_string_list (file, "MediaExport", "uris",
                                              &length, NULL);
-
-      *folders = str_list;
+      orig_list = str_list;
+      array = g_ptr_array_new ();
 
       while (str_list && *str_list)
         {
+          const char *dir;
+
           if (g_str_equal (*str_list, "@MUSIC@"))
-            {
-              g_free (*str_list);
-              *str_list = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_MUSIC));
-            }
+            dir = g_get_user_special_dir (G_USER_DIRECTORY_MUSIC);
+	  else if (g_str_equal (*str_list, "@VIDEOS@"))
+            dir = g_get_user_special_dir (G_USER_DIRECTORY_VIDEOS);
+	  else if (g_str_equal (*str_list, "@PICTURES@"))
+            dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+	  else
+	    dir = g_strdup (*str_list);
 
-          if (g_str_equal (*str_list, "@VIDEOS@"))
-            {
-              g_free (*str_list);
-              *str_list = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_VIDEOS));
-            }
+          if (dir != NULL)
+            g_ptr_array_add (array, g_strdup (dir));
 
-          if (g_str_equal (*str_list, "@PICTURES@"))
-            {
-              g_free (*str_list);
-              *str_list = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
-            }
           str_list++;
         }
+
+      g_ptr_array_add (array, NULL);
+
+      *folders = (char **) g_ptr_array_free (array, FALSE);
+      g_strfreev (orig_list);
     }
 
   g_key_file_free (file);
