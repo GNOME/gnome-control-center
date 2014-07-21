@@ -106,19 +106,19 @@ cc_media_sharing_set_preferences (gchar    **folders)
 
   while (str_list && *str_list)
     {
-      if (g_str_equal (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_MUSIC)))
+      if (g_strcmp0 (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_MUSIC)) == 0)
         {
           g_free (*str_list);
           *str_list = g_strdup ("@MUSIC@");
         }
 
-      if (g_str_equal (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_VIDEOS)))
+      if (g_strcmp0 (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_VIDEOS)) == 0)
         {
           g_free (*str_list);
           *str_list = g_strdup ("@VIDEOS@");
         }
 
-      if (g_str_equal (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_PICTURES)))
+      if (g_strcmp0 (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_PICTURES)) == 0)
         {
           g_free (*str_list);
           *str_list = g_strdup ("@PICTURES@");
