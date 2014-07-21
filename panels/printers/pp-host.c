@@ -20,6 +20,8 @@
 
 #include "pp-host.h"
 
+#include <glib/gi18n.h>
+
 struct _PpHostPrivate
 {
   gchar *hostname;
@@ -447,4 +449,131 @@ pp_host_get_remote_cups_devices_finish (PpHost        *host,
   data->devices = NULL;
 
   return result;
+}
+
+typedef struct
+{
+  PpDevicesList *devices;
+  PpHost        *host;
+  gint           port;
+} JetDirectData;
+
+static void
+jetdirect_data_free (JetDirectData *data)
+{
+  if (data != NULL)
+    {
+      pp_devices_list_free (data->devices);
+      g_clear_object (&data->host);
+      g_free (data);
+    }
+}
+
+static void
+jetdirect_connection_test_cb (GObject      *source_object,
+                              GAsyncResult *res,
+                              gpointer      user_data)
+{
+  GSocketConnection *connection;
+  PpHostPrivate     *priv;
+  PpPrintDevice     *device;
+  JetDirectData     *data;
+  gpointer           result;
+  GError            *error = NULL;
+  GTask             *task = G_TASK (user_data);
+
+  data = g_task_get_task_data (task);
+
+  connection = g_socket_client_connect_to_host_finish (G_SOCKET_CLIENT (source_object),
+                                                       res,
+                                                       &error);
+
+  if (connection != NULL)
+    {
+      g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
+      g_object_unref (connection);
+
+      priv = data->host->priv;
+
+      device = g_new0 (PpPrintDevice, 1);
+      device->device_class = g_strdup ("network");
+      device->device_uri = g_strdup_printf ("socket://%s:%d",
+                                            priv->hostname,
+                                            data->port);
+      /* Translators: The found device is a JetDirect printer */
+      device->device_name = g_strdup (_("JetDirect Printer"));
+      device->host_name = g_strdup (priv->hostname);
+      device->host_port = data->port;
+      device->acquisition_method = ACQUISITION_METHOD_JETDIRECT;
+
+      data->devices->devices = g_list_append (data->devices->devices, device);
+    }
+
+  result = data->devices;
+  data->devices = NULL;
+  g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
+  g_object_unref (task);
+}
+
+/* Test whether given host has an AppSocket/HP JetDirect printer connected.
+   See http://en.wikipedia.org/wiki/JetDirect
+       http://www.cups.org/documentation.php/network.html */
+void
+pp_host_get_jetdirect_devices_async (PpHost              *host,
+                                     GCancellable        *cancellable,
+                                     GAsyncReadyCallback  callback,
+                                     gpointer             user_data)
+{
+  PpHostPrivate *priv = host->priv;
+  GSocketClient *client;
+  JetDirectData *data;
+  GTask         *task;
+  gchar         *address;
+  gpointer       result;
+
+  data = g_new0 (JetDirectData, 1);
+  data->host = g_object_ref (host);
+  data->devices = g_new0 (PpDevicesList, 1);
+
+  if (priv->port == PP_HOST_UNSET_PORT)
+    data->port = PP_HOST_DEFAULT_JETDIRECT_PORT;
+  else
+    data->port = priv->port;
+
+  task = g_task_new (G_OBJECT (host), cancellable, callback, user_data);
+  g_task_set_task_data (task, data, (GDestroyNotify) jetdirect_data_free);
+
+  address = g_strdup_printf ("%s:%d", priv->hostname, data->port);
+  if (address != NULL && address[0] != '/')
+    {
+      client = g_socket_client_new ();
+
+      g_socket_client_connect_to_host_async (client,
+                                             address,
+                                             data->port,
+                                             cancellable,
+                                             jetdirect_connection_test_cb,
+                                             task);
+
+      g_object_unref (client);
+    }
+  else
+    {
+      result = data->devices;
+      data->devices = NULL;
+      g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
+      g_object_unref (task);
+    }
+
+  g_free (address);
+}
+
+PpDevicesList *
+pp_host_get_jetdirect_devices_finish (PpHost        *host,
+                                      GAsyncResult  *res,
+                                      GError       **error)
+{
+  g_return_val_if_fail (g_task_is_valid (res, host), NULL);
+
+  return g_task_propagate_pointer (G_TASK (res), error);
 }
