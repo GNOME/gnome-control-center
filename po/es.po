@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-30 06:28+0000\n"
-"PO-Revision-Date: 2014-06-30 12:53+0200\n"
+"POT-Creation-Date: 2014-07-22 06:32+0000\n"
+"PO-Revision-Date: 2014-07-22 11:20+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -78,44 +78,45 @@ msgid "Span"
 msgstr "Expandir"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#: ../panels/background/cc-background-chooser-dialog.c:441
 msgid "Select Background"
 msgstr "Seleccionar fondo"
 
-#: ../panels/background/cc-background-chooser-dialog.c:307
+#: ../panels/background/cc-background-chooser-dialog.c:462
 msgid "Wallpapers"
 msgstr "Fondos de escritorio"
 
-#: ../panels/background/cc-background-chooser-dialog.c:316
+#: ../panels/background/cc-background-chooser-dialog.c:471
 msgid "Pictures"
 msgstr "Imágenes"
 
-#: ../panels/background/cc-background-chooser-dialog.c:324
+#: ../panels/background/cc-background-chooser-dialog.c:480
 msgid "Colors"
 msgstr "Colores"
 
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:372
+#: ../panels/background/cc-background-chooser-dialog.c:539
 msgid "No Pictures Found"
 msgstr "No se han encontrado imágenes"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:390
+#: ../panels/background/cc-background-chooser-dialog.c:557
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Domicilio"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:402
+#: ../panels/background/cc-background-chooser-dialog.c:569
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 
-#: ../panels/background/cc-background-chooser-dialog.c:430
+#: ../panels/background/cc-background-chooser-dialog.c:591
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -126,6 +127,7 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:466
+#: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:491
@@ -133,33 +135,33 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:267
 #: ../panels/user-accounts/um-photo-dialog.c:95
-#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-photo-dialog.c:222
 #: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../panels/background/cc-background-chooser-dialog.c:431
+#: ../panels/background/cc-background-chooser-dialog.c:592
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../panels/background/cc-background-item.c:148
+#: ../panels/background/cc-background-item.c:198
 msgid "multiple sizes"
 msgstr "tamaños múltiples"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:152
+#: ../panels/background/cc-background-item.c:202
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:280
+#: ../panels/background/cc-background-item.c:328
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:492
+#: ../panels/background/cc-background-panel.c:495
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -876,6 +878,11 @@ msgstr "No se han encontrado idiomas"
 msgid "Language"
 msgstr "Idioma"
 
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Hecho"
+
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
 msgid "%e %B %Y, %l:%M %p"
@@ -886,21 +893,48 @@ msgstr "%d/%b/%Y, %I:%M"
 msgid "%e %B %Y, %R"
 msgstr "%d/%b/%Y, %H:%M"
 
+#. Translators: "city, country"
+#: ../panels/datetime/cc-datetime-panel.c:523
+#, c-format
+#| msgctxt "login date-time"
+#| msgid "%s, %s"
+msgctxt "timezone loc"
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#. Update the timezone on the listbow row
+#. Translators: "timezone (details)"
+#: ../panels/datetime/cc-datetime-panel.c:553
+#, c-format
+#| msgid "%d x %d (%s)"
+msgctxt "timezone desc"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:558
+#: ../panels/datetime/cc-datetime-panel.c:561
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:563
+#: ../panels/datetime/cc-datetime-panel.c:566
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:568
+#: ../panels/datetime/cc-datetime-panel.c:571
 msgid "%R"
 msgstr "%R"
+
+#. Update the text bubble in the timezone map
+#. Translators: "timezone (utc shift)"
+#: ../panels/datetime/cc-datetime-panel.c:576
+#, c-format
+#| msgid "%d x %d (%s)"
+msgctxt "timezone map"
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "January"
@@ -1585,8 +1619,8 @@ msgstr "Contraste alto activado o desactivado"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:274
-#: ../panels/keyboard/cc-keyboard-option.c:393
+#: ../panels/keyboard/cc-keyboard-option.c:276
+#: ../panels/keyboard/cc-keyboard-option.c:395
 #: ../panels/keyboard/keyboard-shortcuts.c:1168
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1599,7 +1633,7 @@ msgstr "Desactivado"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:352
+#: ../panels/keyboard/cc-keyboard-option.c:354
 msgid "Alternative Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
@@ -1607,11 +1641,11 @@ msgstr "Tecla de caracteres alternativos"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:361
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: ../panels/keyboard/cc-keyboard-option.c:366
+#: ../panels/keyboard/cc-keyboard-option.c:368
 msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
@@ -2485,7 +2519,7 @@ msgstr "Seleccione el archivo que importar"
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1948
 #: ../panels/sharing/cc-sharing-panel.c:492
-#: ../panels/user-accounts/um-photo-dialog.c:222
+#: ../panels/user-accounts/um-photo-dialog.c:223
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -4825,7 +4859,7 @@ msgstr "No se han encontrado regiones"
 msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
 
-#: ../panels/region/cc-input-chooser.c:1063
+#: ../panels/region/cc-input-chooser.c:1076
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Otra"
@@ -4859,27 +4893,27 @@ msgstr "Pantalla de inicio de sesión"
 msgid "Formats"
 msgstr "Formatos"
 
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:4
 msgid "Preview"
 msgstr "Vista previa"
 
-#: ../panels/region/format-chooser.ui.h:3
+#: ../panels/region/format-chooser.ui.h:5
 msgid "Dates"
 msgstr "Fechas"
 
-#: ../panels/region/format-chooser.ui.h:4
+#: ../panels/region/format-chooser.ui.h:6
 msgid "Times"
 msgstr "Horas"
 
-#: ../panels/region/format-chooser.ui.h:5
+#: ../panels/region/format-chooser.ui.h:7
 msgid "Numbers"
 msgstr "Números"
 
-#: ../panels/region/format-chooser.ui.h:6
+#: ../panels/region/format-chooser.ui.h:8
 msgid "Measurement"
 msgstr "Medida"
 
-#: ../panels/region/format-chooser.ui.h:7
+#: ../panels/region/format-chooser.ui.h:9
 msgid "Paper"
 msgstr "Papel"
 
@@ -5036,13 +5070,11 @@ msgid "Off"
 msgstr "Apagado"
 
 #: ../panels/sharing/cc-sharing-panel.c:304
-#| msgid "Enabled"
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Activado"
 
 #: ../panels/sharing/cc-sharing-panel.c:307
-#| msgid "Active"
 msgctxt "service is active"
 msgid "Active"
 msgstr "Activo"
@@ -5084,7 +5116,6 @@ msgstr ""
 
 #. Label
 #: ../panels/sharing/cc-sharing-networks.c:299
-#| msgid "List of keyboard layouts selected for usage"
 msgid "No networks selected for sharing"
 msgstr "No se han seleccionado redes para compartir"
 
@@ -5092,7 +5123,6 @@ msgstr "No se han seleccionado redes para compartir"
 #. * vim: sw=2 ts=8 cindent noai bs=2
 #.
 #: ../panels/sharing/networks.ui.h:1
-#| msgid "Network"
 msgid "Networks"
 msgstr "Redes"
 
@@ -5197,12 +5227,10 @@ msgid "Require a password"
 msgstr "Solicitar contraseña"
 
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share Music, Photos and Videos with others on the current network."
 msgid "Share music, photos and videos over the network."
 msgstr "Compartir música, fotos y vídeos mediante la red."
 
 #: ../panels/sharing/sharing.ui.h:27
-#| msgid "Add Folder"
 msgid "Folders"
 msgstr "Carpetas"
 
@@ -6503,23 +6531,23 @@ msgstr "No se pudo cambiar la contraseña"
 msgid "The passwords do not match."
 msgstr "Las contraseñas no coinciden."
 
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "Browse for more pictures"
 msgstr "Examinar para buscar más imágenes"
 
-#: ../panels/user-accounts/um-photo-dialog.c:447
+#: ../panels/user-accounts/um-photo-dialog.c:448
 msgid "Disable image"
 msgstr "Desactivar imagen"
 
-#: ../panels/user-accounts/um-photo-dialog.c:465
+#: ../panels/user-accounts/um-photo-dialog.c:466
 msgid "Take a photo…"
 msgstr "Tomar una foto…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:483
+#: ../panels/user-accounts/um-photo-dialog.c:484
 msgid "Browse for more pictures…"
 msgstr "Examinar para buscar más imágenes…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:707
+#: ../panels/user-accounts/um-photo-dialog.c:708
 #, c-format
 msgid "Used by %s"
 msgstr "Usada por %s"
@@ -7095,9 +7123,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Share Public Folder On This Network"
 #~ msgstr "Compartir la carpeta pública en esta red"
-
-#~ msgid "_Done"
-#~ msgstr "_Hecho"
 
 #~ msgid "Immediately"
 #~ msgstr "Inmediatamente"
@@ -7999,9 +8024,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "Arabic"
 #~ msgstr "Árabe"
-
-#~ msgid "%d x %d (%s)"
-#~ msgstr "%d x %d (%s)"
 
 #~ msgid "%d x %d"
 #~ msgstr "%d x %d"
