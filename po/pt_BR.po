@@ -31,16 +31,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-07-18 06:31+0000\n"
-"PO-Revision-Date: 2014-07-18 13:19-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2014-07-24 11:19+0000\n"
+"PO-Revision-Date: 2014-07-24 09:35-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.6\n"
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
@@ -90,44 +90,45 @@ msgid "Span"
 msgstr "Expandir"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#: ../panels/background/cc-background-chooser-dialog.c:441
 msgid "Select Background"
 msgstr "Plano de fundo"
 
-#: ../panels/background/cc-background-chooser-dialog.c:307
+#: ../panels/background/cc-background-chooser-dialog.c:462
 msgid "Wallpapers"
 msgstr "Papéis de parede"
 
-#: ../panels/background/cc-background-chooser-dialog.c:316
+#: ../panels/background/cc-background-chooser-dialog.c:471
 msgid "Pictures"
 msgstr "Imagens"
 
-#: ../panels/background/cc-background-chooser-dialog.c:324
+#: ../panels/background/cc-background-chooser-dialog.c:480
 msgid "Colors"
 msgstr "Cores"
 
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:372
+#: ../panels/background/cc-background-chooser-dialog.c:539
 msgid "No Pictures Found"
 msgstr "Nenhuma imagem encontrada"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:390
+#: ../panels/background/cc-background-chooser-dialog.c:557
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Pasta pessoal"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:402
+#: ../panels/background/cc-background-chooser-dialog.c:569
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui."
 
-#: ../panels/background/cc-background-chooser-dialog.c:424
+#: ../panels/background/cc-background-chooser-dialog.c:591
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -138,6 +139,7 @@ msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui."
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:466
+#: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:491
@@ -145,12 +147,12 @@ msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui."
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:267
 #: ../panels/user-accounts/um-photo-dialog.c:95
-#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-photo-dialog.c:222
 #: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../panels/background/cc-background-chooser-dialog.c:425
+#: ../panels/background/cc-background-chooser-dialog.c:592
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -515,7 +517,7 @@ msgstr "Dados de calibração de fábrica fornecidos pelo fabricante"
 
 #: ../panels/color/cc-color-profile.c:203
 msgid "Full-screen display correction not possible with this profile"
-msgstr "Correção de tela em tela chia não é possível com este perfil"
+msgstr "Correção de tela em tela cheia não é possível com este perfil"
 
 #: ../panels/color/cc-color-profile.c:225
 msgid "This profile may no longer be accurate"
@@ -893,6 +895,11 @@ msgstr "Nenhum idioma encontrado"
 msgid "Language"
 msgstr "Idioma"
 
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "Concluí_do"
+
 # Formato 12hs, não alterar para 24h
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
@@ -907,8 +914,6 @@ msgstr "%e de %B de %Y, %R"
 #. Translators: "city, country"
 #: ../panels/datetime/cc-datetime-panel.c:523
 #, c-format
-#| msgctxt "login date-time"
-#| msgid "%s, %s"
 msgctxt "timezone loc"
 msgid "%s, %s"
 msgstr "%s, %s"
@@ -1630,8 +1635,8 @@ msgstr "Ativar ou desativar alto contraste"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:274
-#: ../panels/keyboard/cc-keyboard-option.c:393
+#: ../panels/keyboard/cc-keyboard-option.c:276
+#: ../panels/keyboard/cc-keyboard-option.c:395
 #: ../panels/keyboard/keyboard-shortcuts.c:1168
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1644,7 +1649,7 @@ msgstr "Desabilitado"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:352
+#: ../panels/keyboard/cc-keyboard-option.c:354
 msgid "Alternative Characters Key"
 msgstr "Teclas de caracteres alternativos"
 
@@ -1652,11 +1657,11 @@ msgstr "Teclas de caracteres alternativos"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:361
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Compose Key"
 msgstr "Tecla de composição"
 
-#: ../panels/keyboard/cc-keyboard-option.c:366
+#: ../panels/keyboard/cc-keyboard-option.c:368
 msgid "Modifiers-only switch to next source"
 msgstr "Modificadores alternam para próxima fonte"
 
@@ -2535,7 +2540,7 @@ msgstr "Selecione um arquivo para importar"
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1948
 #: ../panels/sharing/cc-sharing-panel.c:492
-#: ../panels/user-accounts/um-photo-dialog.c:222
+#: ../panels/user-accounts/um-photo-dialog.c:223
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -2569,8 +2574,8 @@ msgstr ""
 "Erro: %s."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
-msgid "Export VPN connection..."
-msgstr "Exportar conexão VPN..."
+msgid "Export VPN connection"
+msgstr "Exportar conexão VPN"
 
 #: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
@@ -3344,8 +3349,8 @@ msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
-msgid "Choose a PAC file..."
-msgstr "Escolha um arquivo PAC..."
+msgid "Choose a PAC file"
+msgstr "Escolha um arquivo PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "PAC files (*.pac)"
@@ -3409,8 +3414,8 @@ msgstr "MD5"
 #: ../panels/network/wireless-security/eap-method-peap.c:350
 #: ../panels/network/wireless-security/eap-method-tls.c:434
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
-msgid "Choose a Certificate Authority certificate..."
-msgstr "Escolha um certificado da autoridade certificadora..."
+msgid "Choose a Certificate Authority certificate"
+msgstr "Escolha um certificado da autoridade certificadora"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 0"
@@ -3453,12 +3458,12 @@ msgstr ""
 "(Você pode proteger com senha sua chave privada usando openssl)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:428
-msgid "Choose your personal certificate..."
-msgstr "Escolha seu certificado pessoal..."
+msgid "Choose your personal certificate"
+msgstr "Escolha seu certificado pessoal"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:440
-msgid "Choose your private key..."
-msgstr "Escolha sua chave privada..."
+msgid "Choose your private key"
+msgstr "Escolha sua chave privada"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
@@ -3953,19 +3958,19 @@ msgstr "Quando estiver usando a energia da bateria"
 msgid "When plugged in"
 msgstr "Ligado na tomada"
 
-#: ../panels/power/cc-power-panel.c:1817
+#: ../panels/power/cc-power-panel.c:1818
 msgid "Suspend & Power Off"
 msgstr "Suspender & desligar"
 
-#: ../panels/power/cc-power-panel.c:1850
+#: ../panels/power/cc-power-panel.c:1851
 msgid "_Automatic suspend"
 msgstr "Suspensão _automática"
 
-#: ../panels/power/cc-power-panel.c:1874
+#: ../panels/power/cc-power-panel.c:1875
 msgid "When battery power is _critical"
 msgstr "Quando a energia da bateria estiver _crítica"
 
-#: ../panels/power/cc-power-panel.c:1931
+#: ../panels/power/cc-power-panel.c:1930
 msgid "Power Off"
 msgstr "Desligar"
 
@@ -4886,7 +4891,7 @@ msgstr "Nenhuma região encontrada"
 msgid "No input sources found"
 msgstr "Nenhuma fonte de entrada encontrada"
 
-#: ../panels/region/cc-input-chooser.c:1063
+#: ../panels/region/cc-input-chooser.c:1076
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Outro"
@@ -4920,27 +4925,27 @@ msgstr "Tela de início de sessão"
 msgid "Formats"
 msgstr "Formatos"
 
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:4
 msgid "Preview"
 msgstr "Visualizar"
 
-#: ../panels/region/format-chooser.ui.h:3
+#: ../panels/region/format-chooser.ui.h:5
 msgid "Dates"
 msgstr "Datas"
 
-#: ../panels/region/format-chooser.ui.h:4
+#: ../panels/region/format-chooser.ui.h:6
 msgid "Times"
 msgstr "Horas"
 
-#: ../panels/region/format-chooser.ui.h:5
+#: ../panels/region/format-chooser.ui.h:7
 msgid "Numbers"
 msgstr "Números"
 
-#: ../panels/region/format-chooser.ui.h:6
+#: ../panels/region/format-chooser.ui.h:8
 msgid "Measurement"
 msgstr "Medidas"
 
-#: ../panels/region/format-chooser.ui.h:7
+#: ../panels/region/format-chooser.ui.h:9
 msgid "Paper"
 msgstr "Papel"
 
@@ -6562,23 +6567,23 @@ msgstr "A senha não pode ser alterada"
 msgid "The passwords do not match."
 msgstr "As senhas não conferem."
 
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "Browse for more pictures"
 msgstr "Procurar por mais imagens"
 
-#: ../panels/user-accounts/um-photo-dialog.c:447
+#: ../panels/user-accounts/um-photo-dialog.c:453
 msgid "Disable image"
 msgstr "Desabilitar imagem"
 
-#: ../panels/user-accounts/um-photo-dialog.c:465
+#: ../panels/user-accounts/um-photo-dialog.c:471
 msgid "Take a photo…"
 msgstr "Tirar uma foto…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:483
+#: ../panels/user-accounts/um-photo-dialog.c:489
 msgid "Browse for more pictures…"
 msgstr "Procurar por mais imagens…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:707
+#: ../panels/user-accounts/um-photo-dialog.c:713
 #, c-format
 msgid "Used by %s"
 msgstr "Usado por %s"
@@ -7159,9 +7164,6 @@ msgstr "Preferências;Configurações;Ajustes;"
 
 #~ msgid "Share Public Folder On This Network"
 #~ msgstr "Compartilhar pasta pública nesta rede"
-
-#~ msgid "_Done"
-#~ msgstr "Concluí_do"
 
 #~ msgid "Immediately"
 #~ msgstr "Imediatamente"
