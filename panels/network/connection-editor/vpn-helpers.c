@@ -368,7 +368,7 @@ vpn_export (NMConnection *connection)
 		return;
 	}
 
-	dialog = gtk_file_chooser_dialog_new (_("Export VPN connection..."),
+	dialog = gtk_file_chooser_dialog_new (_("Export VPN connection"),
 	                                      NULL,
 	                                      GTK_FILE_CHOOSER_ACTION_SAVE,
 	                                      _("_Cancel"), GTK_RESPONSE_CANCEL,

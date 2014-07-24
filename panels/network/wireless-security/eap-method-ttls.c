@@ -347,7 +347,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	g_assert (widget);
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
 	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
-	                                   _("Choose a Certificate Authority certificate..."));
+	                                   _("Choose a Certificate Authority certificate"));
 	g_signal_connect (G_OBJECT (widget), "selection-changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);

@@ -425,19 +425,19 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_identity (s_8021x));
 
 	setup_filepicker (parent->builder, "eap_tls_user_cert_button",
-	                  _("Choose your personal certificate..."),
+	                  _("Choose your personal certificate"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_scheme : nm_setting_802_1x_get_client_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_client_cert_path : nm_setting_802_1x_get_client_cert_path,
 	                  FALSE, TRUE);
 	setup_filepicker (parent->builder, "eap_tls_ca_cert_button",
-	                  _("Choose a Certificate Authority certificate..."),
+	                  _("Choose a Certificate Authority certificate"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_scheme : nm_setting_802_1x_get_ca_cert_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_ca_cert_path : nm_setting_802_1x_get_ca_cert_path,
 	                  FALSE, FALSE);
 	setup_filepicker (parent->builder, "eap_tls_private_key_button",
-	                  _("Choose your private key..."),
+	                  _("Choose your private key"),
 	                  ws_parent, parent, s_8021x,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_scheme : nm_setting_802_1x_get_private_key_scheme,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_path : nm_setting_802_1x_get_private_key_path,
