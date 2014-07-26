@@ -369,7 +369,7 @@ old_password_entry_timeout (UmPasswordDialog *um)
         update_sensitivity (um);
 
         text = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
-        if (strlen (text) > 0 && !um->old_password_ok) {
+        if (!um->old_password_ok) {
                 passwd_authenticate (um->passwd_handler, text, (PasswdCallback)auth_cb, um);
         }
 
