@@ -538,6 +538,8 @@ void
 um_password_dialog_set_user (UmPasswordDialog *um,
                              ActUser          *user)
 {
+        gboolean visible;
+
         if (um->user) {
                 g_object_unref (um->user);
                 um->user = NULL;
@@ -555,9 +557,11 @@ um_password_dialog_set_user (UmPasswordDialog *um,
                 if (act_user_get_uid (um->user) == getuid ()) {
                         mode_change (um, ACT_USER_PASSWORD_MODE_REGULAR);
                         gtk_widget_hide (um->action_radio_box);
-                        gtk_widget_show (um->old_password_label);
-                        gtk_widget_show (um->old_password_entry);
-                        um->old_password_ok = FALSE;
+
+                        visible = (act_user_get_password_mode (user) != ACT_USER_PASSWORD_MODE_NONE);
+                        gtk_widget_set_visible (um->old_password_label, visible);
+                        gtk_widget_set_visible (um->old_password_entry, visible);
+                        um->old_password_ok = !visible;
                 }
                 else {
                         mode_change (um, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
