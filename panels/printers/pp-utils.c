@@ -4164,12 +4164,32 @@ canonicalize_device_name (GList         *devices,
                           gint           num_of_dests,
                           PpPrintDevice *device)
 {
-  PpPrintDevice *item;
-  gboolean       already_present;
-  GList         *iter;
-  gchar         *name = NULL;
-  gchar         *new_name;
-  gint           name_index, j;
+  PpPrintDevice             *item;
+  gboolean                   already_present;
+  GList                     *iter;
+  gsize                      len;
+  gchar                     *name = NULL;
+  gchar                     *new_name;
+  gchar                     *lower_name;
+  gchar                     *occurrence;
+  gint                       name_index, j;
+  static const char * const  residues[] = {
+    "-foomatic",
+    "-hpijs",
+    "-hpcups",
+    "-cups",
+    "-gutenprint",
+    "-series",
+    "-label-printer",
+    "-dot-matrix",
+    "-ps3",
+    "-ps2",
+    "-br-script",
+    "-kpdl",
+    "-pcl3",
+    "-pcl",
+    "-zxs",
+    "-pxl"};
 
   if (device->device_id != NULL)
     {
@@ -4201,6 +4221,38 @@ canonicalize_device_name (GList         *devices,
 
   g_strstrip (name);
   g_strcanon (name, ALLOWED_CHARACTERS, '-');
+
+  /* Remove common strings found in driver names */
+  for (j = 0; j < G_N_ELEMENTS (residues); j++)
+    {
+      lower_name = g_ascii_strdown (name, -1);
+
+      occurrence = g_strrstr (lower_name, residues[j]);
+      if (occurrence != NULL)
+        {
+          occurrence[0] = '\0';
+          name[strlen (lower_name)] = '\0';
+        }
+
+      g_free (lower_name);
+    }
+
+  /* Remove trailing "-" */
+  len = strlen (name);
+  while (len-- && name[len] == '-')
+    name[len] = '\0';
+
+  /* Merge "--" to "-" */
+  occurrence = g_strrstr (name, "--");
+  while (occurrence != NULL)
+    {
+      shift_string_left (occurrence);
+      occurrence = g_strrstr (name, "--");
+    }
+
+  /* Remove leading "-" */
+  if (name[0] == '-')
+    shift_string_left (name);
 
   name_index = 2;
   already_present = FALSE;
