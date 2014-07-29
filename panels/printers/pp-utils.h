@@ -308,6 +308,12 @@ void        get_cups_devices_async (GCancellable *cancellable,
 
 gchar      *guess_device_hostname (PpPrintDevice *device);
 
+gchar      *canonicalize_device_name (GList         *devices,
+                                      GList         *new_devices,
+                                      cups_dest_t   *dests,
+                                      gint           num_of_dests,
+                                      PpPrintDevice *device);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

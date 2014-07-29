@@ -604,14 +604,7 @@ add_device_to_list (PpNewPrinterDialog *dialog,
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   PpPrintDevice             *store_device;
-  PpPrintDevice             *item;
-  gboolean                   already_present;
-  GList                     *iter;
-  gchar                     *name = NULL;
-  gchar                     *canonized_name = NULL;
-  gchar                     *new_name;
-  gchar                     *new_canonized_name = NULL;
-  gint                       name_index, j;
+  gchar                     *canonicalized_name = NULL;
 
   if (device)
     {
@@ -631,93 +624,16 @@ add_device_to_list (PpNewPrinterDialog *dialog,
           store_device->network_device = g_strcmp0 (device->device_class, "network") == 0;
           store_device->show = TRUE;
 
-          if (device->device_id)
-            {
-              name = get_tag_value (device->device_id, "mdl");
-              if (!name)
-                name = get_tag_value (device->device_id, "model");
-            }
-
-          if (!name &&
-              device->device_make_and_model &&
-              device->device_make_and_model[0] != '\0')
-            {
-              name = g_strdup (device->device_make_and_model);
-            }
-
-          if (!name &&
-              device->device_name &&
-              device->device_name[0] != '\0')
-            {
-              name = g_strdup (device->device_name);
-            }
-
-          if (!name &&
-              device->device_info &&
-              device->device_info[0] != '\0')
-            {
-              name = g_strdup (device->device_info);
-            }
-
-          g_strstrip (name);
-
-          name_index = 2;
-          already_present = FALSE;
-          do
-            {
-              if (already_present)
-                {
-                  new_name = g_strdup_printf ("%s %d", name, name_index);
-                  name_index++;
-                }
-              else
-                {
-                  new_name = g_strdup (name);
-                }
-
-              if (new_name)
-                {
-                  new_canonized_name = g_strcanon (g_strdup (new_name), ALLOWED_CHARACTERS, '-');
-                }
-
-              already_present = FALSE;
-              for (j = 0; j < priv->num_of_dests; j++)
-                if (g_strcmp0 (priv->dests[j].name, new_canonized_name) == 0)
-                  already_present = TRUE;
-
-              for (iter = priv->devices; iter; iter = iter->next)
-                {
-                  item = (PpPrintDevice *) iter->data;
-                  if (g_strcmp0 (item->device_name, new_canonized_name) == 0)
-                    already_present = TRUE;
-                }
-
-              for (iter = priv->new_devices; iter; iter = iter->next)
-                {
-                  item = (PpPrintDevice *) iter->data;
-                  if (g_strcmp0 (item->device_name, new_canonized_name) == 0)
-                    already_present = TRUE;
-                }
-
-              if (already_present)
-                {
-                  g_free (new_name);
-                  g_free (new_canonized_name);
-                }
-              else
-                {
-                  g_free (name);
-                  g_free (canonized_name);
-                  name = new_name;
-                  canonized_name = new_canonized_name;
-                }
-            } while (already_present);
+          canonicalized_name = canonicalize_device_name (priv->devices,
+                                                         priv->new_devices,
+                                                         priv->dests,
+                                                         priv->num_of_dests,
+                                                         store_device);
 
           g_free (store_device->display_name);
-          store_device->display_name = g_strdup (canonized_name);
+          store_device->display_name = g_strdup (canonicalized_name);
           g_free (store_device->device_name);
-          store_device->device_name = canonized_name;
-          g_free (name);
+          store_device->device_name = canonicalized_name;
 
           if (new_device)
             priv->new_devices = g_list_append (priv->new_devices, store_device);

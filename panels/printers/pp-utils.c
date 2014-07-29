@@ -4146,3 +4146,91 @@ guess_device_hostname (PpPrintDevice *device)
 
   return result;
 }
+
+gchar *
+canonicalize_device_name (GList         *devices,
+                          GList         *new_devices,
+                          cups_dest_t   *dests,
+                          gint           num_of_dests,
+                          PpPrintDevice *device)
+{
+  PpPrintDevice *item;
+  gboolean       already_present;
+  GList         *iter;
+  gchar         *name = NULL;
+  gchar         *new_name;
+  gint           name_index, j;
+
+  if (device->device_id != NULL)
+    {
+      name = get_tag_value (device->device_id, "mdl");
+      if (name == NULL)
+        name = get_tag_value (device->device_id, "model");
+    }
+
+  if (name == NULL &&
+      device->device_make_and_model != NULL &&
+      device->device_make_and_model[0] != '\0')
+    {
+      name = g_strdup (device->device_make_and_model);
+    }
+
+  if (name == NULL &&
+      device->device_original_name != NULL &&
+      device->device_original_name[0] != '\0')
+    {
+      name = g_strdup (device->device_original_name);
+    }
+
+  if (name == NULL &&
+      device->device_info != NULL &&
+      device->device_info[0] != '\0')
+    {
+      name = g_strdup (device->device_info);
+    }
+
+  g_strstrip (name);
+  g_strcanon (name, ALLOWED_CHARACTERS, '-');
+
+  name_index = 2;
+  already_present = FALSE;
+  do
+    {
+      if (already_present)
+        {
+          new_name = g_strdup_printf ("%s-%d", name, name_index);
+          name_index++;
+        }
+      else
+        {
+          new_name = g_strdup (name);
+        }
+
+      already_present = FALSE;
+      for (j = 0; j < num_of_dests; j++)
+        if (g_strcmp0 (dests[j].name, new_name) == 0)
+          already_present = TRUE;
+
+      for (iter = devices; iter; iter = iter->next)
+        {
+          item = (PpPrintDevice *) iter->data;
+          if (g_strcmp0 (item->device_original_name, new_name) == 0)
+            already_present = TRUE;
+        }
+
+      for (iter = new_devices; iter; iter = iter->next)
+        {
+          item = (PpPrintDevice *) iter->data;
+          if (g_strcmp0 (item->device_original_name, new_name) == 0)
+            already_present = TRUE;
+        }
+
+      if (already_present)
+        g_free (new_name);
+
+    } while (already_present);
+
+  g_free (name);
+
+  return new_name;
+}
