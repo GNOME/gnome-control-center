@@ -318,6 +318,8 @@ gchar      *canonicalize_device_name (GList         *devices,
                                       gint           num_of_dests,
                                       PpPrintDevice *device);
 
+void        shift_string_left (gchar *str);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

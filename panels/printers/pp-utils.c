@@ -4244,3 +4244,15 @@ canonicalize_device_name (GList         *devices,
 
   return new_name;
 }
+
+void
+shift_string_left (gchar *str)
+{
+  gchar *next;
+
+  if (str != NULL && str[0] != '\0')
+    {
+      next = g_utf8_find_next_char (str, NULL);
+      memmove (str, next, strlen (next) + 1);
+    }
+}
