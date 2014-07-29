@@ -113,6 +113,8 @@ struct _PpNewPrinterDialogPrivate
   GIcon *authenticated_server_icon;
 
   PpHost  *snmp_host;
+  PpHost  *socket_host;
+  PpHost  *lpd_host;
   PpHost  *remote_cups_host;
   PpSamba *samba_host;
   guint    host_search_timeout_id;
@@ -615,7 +617,10 @@ add_device_to_list (PpNewPrinterDialog *dialog,
           (device->host_name &&
            device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER) ||
            device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
-           device->acquisition_method == ACQUISITION_METHOD_SAMBA)
+           device->acquisition_method == ACQUISITION_METHOD_SAMBA ||
+          (device->device_uri &&
+           (device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+            device->acquisition_method == ACQUISITION_METHOD_LPD)))
         {
           store_device = pp_print_device_copy (device);
           g_free (store_device->device_original_name);
@@ -694,6 +699,8 @@ update_spinner_state (PpNewPrinterDialog *dialog)
   if (priv->cups_searching ||
       priv->remote_cups_host != NULL ||
       priv->snmp_host != NULL ||
+      priv->socket_host != NULL ||
+      priv->lpd_host != NULL ||
       priv->samba_host != NULL ||
       priv->samba_authenticated_searching ||
       priv->samba_searching)
@@ -1229,6 +1236,114 @@ get_samba_devices_cb (GObject      *source_object,
 }
 
 static void
+get_jetdirect_devices_cb (GObject      *source_object,
+                          GAsyncResult *res,
+                          gpointer      user_data)
+{
+  PpNewPrinterDialog        *dialog;
+  PpNewPrinterDialogPrivate *priv;
+  PpHost                    *host = (PpHost *) source_object;
+  GError                    *error = NULL;
+  PpDevicesList             *result;
+
+  result = pp_host_get_jetdirect_devices_finish (host, res, &error);
+  g_object_unref (source_object);
+
+  if (result != NULL)
+    {
+      dialog = PP_NEW_PRINTER_DIALOG (user_data);
+      priv = dialog->priv;
+
+      if ((gpointer) source_object == (gpointer) priv->socket_host)
+        priv->socket_host = NULL;
+
+      update_spinner_state (dialog);
+
+      if (result->devices != NULL)
+        {
+          add_devices_to_list (dialog,
+                               result->devices,
+                               FALSE);
+        }
+
+      actualize_devices_list (dialog);
+
+      pp_devices_list_free (result);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          dialog = PP_NEW_PRINTER_DIALOG (user_data);
+          priv = dialog->priv;
+
+          g_warning ("%s", error->message);
+
+          if ((gpointer) source_object == (gpointer) priv->socket_host)
+            priv->socket_host = NULL;
+
+          update_spinner_state (dialog);
+        }
+
+      g_error_free (error);
+    }
+}
+
+static void
+get_lpd_devices_cb (GObject      *source_object,
+                    GAsyncResult *res,
+                    gpointer      user_data)
+{
+  PpNewPrinterDialog        *dialog;
+  PpNewPrinterDialogPrivate *priv;
+  PpHost                    *host = (PpHost *) source_object;
+  GError                    *error = NULL;
+  PpDevicesList             *result;
+
+  result = pp_host_get_lpd_devices_finish (host, res, &error);
+  g_object_unref (source_object);
+
+  if (result != NULL)
+    {
+      dialog = PP_NEW_PRINTER_DIALOG (user_data);
+      priv = dialog->priv;
+
+      if ((gpointer) source_object == (gpointer) priv->lpd_host)
+        priv->lpd_host = NULL;
+
+      update_spinner_state (dialog);
+
+      if (result->devices != NULL)
+        {
+          add_devices_to_list (dialog,
+                               result->devices,
+                               FALSE);
+        }
+
+      actualize_devices_list (dialog);
+
+      pp_devices_list_free (result);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          dialog = PP_NEW_PRINTER_DIALOG (user_data);
+          priv = dialog->priv;
+
+          g_warning ("%s", error->message);
+
+          if ((gpointer) source_object == (gpointer) priv->lpd_host)
+            priv->lpd_host = NULL;
+
+          update_spinner_state (dialog);
+        }
+
+      g_error_free (error);
+    }
+}
+
+static void
 get_cups_devices (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
@@ -1243,6 +1358,7 @@ get_cups_devices (PpNewPrinterDialog *dialog)
 
 static gboolean
 parse_uri (const gchar  *uri,
+           gchar       **scheme,
            gchar       **host,
            gint         *port)
 {
@@ -1252,10 +1368,16 @@ parse_uri (const gchar  *uri,
 
   *port = PP_HOST_UNSET_PORT;
 
-  if (g_strrstr (uri, "://"))
-    tmp = g_strrstr (uri, "://") + 3;
+  position = g_strrstr (uri, "://");
+  if (position != NULL)
+    {
+      *scheme = g_strndup (uri, position - uri);
+      tmp = position + 3;
+    }
   else
-    tmp = uri;
+    {
+      tmp = uri;
+    }
 
   if (g_strrstr (tmp, "@"))
     tmp = g_strrstr (tmp, "@") + 1;
@@ -1267,7 +1389,9 @@ parse_uri (const gchar  *uri,
       *position = '/';
     }
   else
-    resulting_host = g_strdup (tmp);
+    {
+      resulting_host = g_strdup (tmp);
+    }
 
   if ((position = g_strrstr (resulting_host, ":")))
     {
@@ -1283,6 +1407,7 @@ parse_uri (const gchar  *uri,
 typedef struct
 {
   PpNewPrinterDialog *dialog;
+  gchar              *host_scheme;
   gchar              *host_name;
   gint                host_port;
 } THostSearchData;
@@ -1290,6 +1415,7 @@ typedef struct
 static void
 search_for_remote_printers_free (THostSearchData *data)
 {
+  g_free (data->host_scheme);
   g_free (data->host_name);
   g_free (data);
 }
@@ -1309,11 +1435,24 @@ search_for_remote_printers (THostSearchData *data)
 
   priv->remote_cups_host = pp_host_new (data->host_name);
   priv->snmp_host = pp_host_new (data->host_name);
+  priv->socket_host = pp_host_new (data->host_name);
+  priv->lpd_host = pp_host_new (data->host_name);
 
   if (data->host_port != PP_HOST_UNSET_PORT)
     {
       g_object_set (priv->remote_cups_host, "port", data->host_port, NULL);
       g_object_set (priv->snmp_host, "port", data->host_port, NULL);
+
+      /* Accept port different from the default one only if user specifies
+       * scheme (for socket and lpd printers).
+       */
+      if (data->host_scheme != NULL &&
+          g_ascii_strcasecmp (data->host_scheme, "socket") == 0)
+        g_object_set (priv->socket_host, "port", data->host_port, NULL);
+
+      if (data->host_scheme != NULL &&
+          g_ascii_strcasecmp (data->host_scheme, "lpd") == 0)
+        g_object_set (priv->lpd_host, "port", data->host_port, NULL);
     }
 
   priv->samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
@@ -1330,6 +1469,16 @@ search_for_remote_printers (THostSearchData *data)
                                   priv->remote_host_cancellable,
                                   get_snmp_devices_cb,
                                   data->dialog);
+
+  pp_host_get_jetdirect_devices_async (priv->socket_host,
+                                       priv->remote_host_cancellable,
+                                       get_jetdirect_devices_cb,
+                                       data->dialog);
+
+  pp_host_get_lpd_devices_async (priv->lpd_host,
+                                 priv->remote_host_cancellable,
+                                 get_lpd_devices_cb,
+                                 data->dialog);
 
   pp_samba_get_devices_async (priv->samba_host,
                               TRUE,
@@ -1412,6 +1561,8 @@ search_address (const gchar        *text,
 
           if (device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER ||
               device->acquisition_method == ACQUISITION_METHOD_SNMP ||
+              device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+              device->acquisition_method == ACQUISITION_METHOD_LPD ||
               device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
             {
               tmp = iter;
@@ -1430,6 +1581,8 @@ search_address (const gchar        *text,
 
           if (device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER ||
               device->acquisition_method == ACQUISITION_METHOD_SNMP ||
+              device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+              device->acquisition_method == ACQUISITION_METHOD_LPD ||
               device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
             {
               tmp = iter;
@@ -1443,16 +1596,18 @@ search_address (const gchar        *text,
 
       if (text && text[0] != '\0')
         {
+          gchar *scheme = NULL;
           gchar *host = NULL;
           gint   port;
 
-          parse_uri (text, &host, &port);
+          parse_uri (text, &scheme, &host, &port);
 
           if (host)
             {
               THostSearchData *search_data;
 
               search_data = g_new (THostSearchData, 1);
+              search_data->host_scheme = scheme;
               search_data->host_name = host;
               search_data->host_port = port;
               search_data->dialog = dialog;
@@ -1568,6 +1723,9 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
            device->device_ppd ||
            (device->host_name &&
             device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER) ||
+           (device->device_uri &&
+            (device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+             device->acquisition_method == ACQUISITION_METHOD_LPD)) ||
            device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
            device->acquisition_method == ACQUISITION_METHOD_SAMBA) &&
           device->show)
@@ -1621,6 +1779,8 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
       !priv->cups_searching &&
       priv->remote_cups_host == NULL &&
       priv->snmp_host == NULL &&
+      priv->socket_host == NULL &&
+      priv->lpd_host == NULL &&
       priv->samba_host == NULL &&
       !priv->samba_authenticated_searching &&
       !priv->samba_searching)
@@ -1838,15 +1998,41 @@ ppd_selection_cb (GtkDialog *_dialog,
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   PpNewPrinter              *new_printer;
   gchar                     *ppd_name;
+  gchar                     *ppd_display_name;
+  gchar                     *printer_name;
   guint                      window_id = 0;
 
   ppd_name = pp_ppd_selection_dialog_get_ppd_name (priv->ppd_selection_dialog);
+  ppd_display_name = pp_ppd_selection_dialog_get_ppd_display_name (priv->ppd_selection_dialog);
   pp_ppd_selection_dialog_free (priv->ppd_selection_dialog);
   priv->ppd_selection_dialog = NULL;
 
   if (ppd_name)
     {
       priv->new_device->device_ppd = ppd_name;
+
+      if ((priv->new_device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+           priv->new_device->acquisition_method == ACQUISITION_METHOD_LPD) &&
+          ppd_display_name != NULL)
+        {
+          g_free (priv->new_device->device_name);
+          g_free (priv->new_device->device_original_name);
+
+          priv->new_device->device_name = g_strdup (ppd_display_name);
+          priv->new_device->device_original_name = g_strdup (ppd_display_name);
+
+          printer_name = canonicalize_device_name (priv->devices,
+                                                   priv->new_devices,
+                                                   priv->dests,
+                                                   priv->num_of_dests,
+                                                   priv->new_device);
+
+          g_free (priv->new_device->device_name);
+          g_free (priv->new_device->device_original_name);
+
+          priv->new_device->device_name = printer_name;
+          priv->new_device->device_original_name = g_strdup (printer_name);
+        }
 
       emit_pre_response (dialog,
                          priv->new_device->device_name,
@@ -1859,7 +2045,7 @@ ppd_selection_cb (GtkDialog *_dialog,
       new_printer = pp_new_printer_new ();
       g_object_set (new_printer,
                     "name", priv->new_device->device_name,
-                    "original-name""", priv->new_device->device_original_name,
+                    "original-name", priv->new_device->device_original_name,
                     "device-uri", priv->new_device->device_uri,
                     "device-id", priv->new_device->device_id,
                     "ppd-name", priv->new_device->device_ppd,
@@ -1934,7 +2120,9 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
           guint         window_id = 0;
 
           if (device->acquisition_method == ACQUISITION_METHOD_SAMBA ||
-              device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
+              device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
+              device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+              device->acquisition_method == ACQUISITION_METHOD_LPD)
             {
               priv->new_device = pp_print_device_copy (device);
               priv->ppd_selection_dialog =
