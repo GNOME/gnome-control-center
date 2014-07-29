@@ -1414,7 +1414,8 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
   /* allow getting profile info */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                "toolbutton_profile_view"));
-  if ((s = g_find_program_in_path ("gcm-viewer")))
+  if (cd_profile_get_filename (profile) != NULL &&
+      (s = g_find_program_in_path ("gcm-viewer")) != NULL)
     {
       gtk_widget_set_sensitive (widget, TRUE);
       g_free (s);
