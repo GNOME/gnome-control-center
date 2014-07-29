@@ -282,7 +282,6 @@ append_section (GtkBuilder         *builder,
 
       cc_keyboard_item_set_hidden (item, keys_list[i].hidden);
       item->model = shortcut_model;
-      item->group = group;
 
       g_signal_connect (G_OBJECT (item), "notify",
 			G_CALLBACK (item_changed), NULL);

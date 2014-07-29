@@ -60,7 +60,6 @@ typedef struct
   guint keyval;
   guint keycode;
   GdkModifierType mask;
-  BindingGroupType group;
   GtkTreeModel *model;
   char *description;
   gboolean editable;
