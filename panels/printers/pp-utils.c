@@ -3777,8 +3777,40 @@ pp_print_device_free (PpPrintDevice *device)
       g_free (device->device_name);
       g_free (device->device_ppd);
       g_free (device->host_name);
+      g_free (device->display_name);
+      g_free (device->device_original_name);
       g_free (device);
     }
+}
+
+PpPrintDevice *
+pp_print_device_copy (PpPrintDevice *device)
+{
+  PpPrintDevice *result = NULL;
+
+  if (device)
+    {
+      result = g_new (PpPrintDevice, 1);
+
+      result->is_authenticated_server = device->is_authenticated_server;
+      result->device_class = g_strdup (device->device_class);
+      result->device_id = g_strdup (device->device_id);
+      result->device_info = g_strdup (device->device_info);
+      result->device_make_and_model = g_strdup (device->device_make_and_model);
+      result->device_uri = g_strdup (device->device_uri);
+      result->device_location = g_strdup (device->device_location);
+      result->device_name = g_strdup (device->device_name);
+      result->device_ppd = g_strdup (device->device_ppd);
+      result->host_name = g_strdup (device->host_name);
+      result->host_port = device->host_port;
+      result->acquisition_method = device->acquisition_method;
+      result->display_name = g_strdup (device->display_name);
+      result->device_original_name = g_strdup (device->device_original_name);
+      result->network_device = device->network_device;
+      result->show = device->show;
+    }
+
+  return result;
 }
 
 typedef struct

@@ -286,9 +286,14 @@ typedef struct
   gchar    *host_name;
   gint      host_port;
   gint      acquisition_method;
+  gchar    *display_name;
+  gchar    *device_original_name;
+  gboolean  network_device;
+  gboolean  show;
 } PpPrintDevice;
 
-void        pp_print_device_free (PpPrintDevice *device);
+void           pp_print_device_free (PpPrintDevice *device);
+PpPrintDevice *pp_print_device_copy (PpPrintDevice *device);
 
 const gchar *get_paper_size_from_locale (void);
 

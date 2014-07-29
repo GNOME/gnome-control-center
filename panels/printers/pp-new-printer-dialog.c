@@ -80,28 +80,6 @@ enum
   DEVICE_N_COLUMNS
 };
 
-typedef struct
-{
-  gchar    *display_name;
-  gchar    *device_name;
-  gchar    *device_original_name;
-  gchar    *device_info;
-  gchar    *device_location;
-  gchar    *device_make_and_model;
-  gchar    *device_uri;
-  gchar    *device_id;
-  gchar    *device_ppd;
-  gchar    *host_name;
-  gint      host_port;
-  gboolean  network_device;
-  gint      acquisition_method;
-  gboolean  is_authenticated_server;
-  gboolean  show;
-} TDevice;
-
-static void     t_device_free (gpointer data);
-static TDevice *t_device_copy (TDevice *device);
-
 struct _PpNewPrinterDialogPrivate
 {
   GtkBuilder *builder;
@@ -124,7 +102,7 @@ struct _PpNewPrinterDialogPrivate
 
   PpPPDSelectionDialog *ppd_selection_dialog;
 
-  TDevice *new_device;
+  PpPrintDevice *new_device;
 
   PPDList *list;
 
@@ -529,10 +507,10 @@ pp_new_printer_dialog_finalize (GObject *object)
   if (priv->builder)
     g_clear_object (&priv->builder);
 
-  g_list_free_full (priv->devices, t_device_free);
+  g_list_free_full (priv->devices, (GDestroyNotify) pp_print_device_free);
   priv->devices = NULL;
 
-  g_list_free_full (priv->new_devices, t_device_free);
+  g_list_free_full (priv->new_devices, (GDestroyNotify) pp_print_device_free);
   priv->new_devices = NULL;
 
   if (priv->num_of_dests > 0)
@@ -603,16 +581,16 @@ remove_device_from_list (PpNewPrinterDialog *dialog,
                          const gchar        *device_name)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  TDevice                   *device;
+  PpPrintDevice             *device;
   GList                     *iter;
 
   for (iter = priv->devices; iter; iter = iter->next)
     {
-      device = (TDevice *) iter->data;
+      device = (PpPrintDevice *) iter->data;
       if (g_strcmp0 (device->device_name, device_name) == 0)
         {
           priv->devices = g_list_remove_link (priv->devices, iter);
-          t_device_free (iter->data);
+          pp_print_device_free (iter->data);
           g_list_free (iter);
           break;
         }
@@ -625,16 +603,15 @@ add_device_to_list (PpNewPrinterDialog *dialog,
                     gboolean            new_device)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  gboolean  network_device;
-  gboolean  already_present;
-  TDevice  *store_device;
-  TDevice  *item;
-  GList    *iter;
-  gchar    *name = NULL;
-  gchar    *canonized_name = NULL;
-  gchar    *new_name;
-  gchar    *new_canonized_name = NULL;
-  gint      name_index, j;
+  PpPrintDevice             *store_device;
+  PpPrintDevice             *item;
+  gboolean                   already_present;
+  GList                     *iter;
+  gchar                     *name = NULL;
+  gchar                     *canonized_name = NULL;
+  gchar                     *new_name;
+  gchar                     *new_canonized_name = NULL;
+  gint                       name_index, j;
 
   if (device)
     {
@@ -648,24 +625,10 @@ add_device_to_list (PpNewPrinterDialog *dialog,
            device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
            device->acquisition_method == ACQUISITION_METHOD_SAMBA)
         {
-          network_device = FALSE;
-
-          if (device->device_class &&
-              g_strcmp0 (device->device_class, "network") == 0)
-            network_device = TRUE;
-
-          store_device = g_new0 (TDevice, 1);
+          store_device = pp_print_device_copy (device);
+          g_free (store_device->device_original_name);
           store_device->device_original_name = g_strdup (device->device_name);
-          store_device->device_info = g_strdup (device->device_info);
-          store_device->device_location = g_strdup (device->device_location);
-          store_device->device_make_and_model = g_strdup (device->device_make_and_model);
-          store_device->device_uri = g_strdup (device->device_uri);
-          store_device->device_id = g_strdup (device->device_id);
-          store_device->device_ppd = g_strdup (device->device_ppd);
-          store_device->host_name = g_strdup (device->host_name);
-          store_device->host_port = device->host_port;
-          store_device->network_device = network_device;
-          store_device->acquisition_method = device->acquisition_method;
+          store_device->network_device = g_strcmp0 (device->device_class, "network") == 0;
           store_device->show = TRUE;
 
           if (device->device_id)
@@ -724,14 +687,14 @@ add_device_to_list (PpNewPrinterDialog *dialog,
 
               for (iter = priv->devices; iter; iter = iter->next)
                 {
-                  item = (TDevice *) iter->data;
+                  item = (PpPrintDevice *) iter->data;
                   if (g_strcmp0 (item->device_name, new_canonized_name) == 0)
                     already_present = TRUE;
                 }
 
               for (iter = priv->new_devices; iter; iter = iter->next)
                 {
-                  item = (TDevice *) iter->data;
+                  item = (PpPrintDevice *) iter->data;
                   if (g_strcmp0 (item->device_name, new_canonized_name) == 0)
                     already_present = TRUE;
                 }
@@ -750,7 +713,9 @@ add_device_to_list (PpNewPrinterDialog *dialog,
                 }
             } while (already_present);
 
+          g_free (store_device->display_name);
           store_device->display_name = g_strdup (canonized_name);
+          g_free (store_device->device_name);
           store_device->device_name = canonized_name;
           g_free (name);
 
@@ -762,7 +727,7 @@ add_device_to_list (PpNewPrinterDialog *dialog,
       else if (device->is_authenticated_server &&
               device->host_name != NULL)
         {
-          store_device = g_new0 (TDevice, 1);
+          store_device = g_new0 (PpPrintDevice, 1);
           store_device->device_name = g_strdup (device->host_name);
           store_device->host_name = g_strdup (device->host_name);
           store_device->is_authenticated_server = device->is_authenticated_server;
@@ -786,16 +751,16 @@ add_devices_to_list (PpNewPrinterDialog  *dialog,
     }
 }
 
-static TDevice *
+static PpPrintDevice *
 device_in_list (gchar *device_uri,
                 GList *device_list)
 {
-  GList   *iter;
-  TDevice *device;
+  PpPrintDevice *device;
+  GList         *iter;
 
   for (iter = device_list; iter; iter = iter->next)
     {
-      device = (TDevice *) iter->data;
+      device = (PpPrintDevice *) iter->data;
       /* GroupPhysicalDevices returns uris without port numbers */
       if (device->device_uri != NULL &&
           g_str_has_prefix (device->device_uri, device_uri))
@@ -803,56 +768,6 @@ device_in_list (gchar *device_uri,
     }
 
   return NULL;
-}
-
-static void
-t_device_free (gpointer data)
-{
-  if (data)
-    {
-      TDevice *device = (TDevice *) data;
-
-      g_free (device->display_name);
-      g_free (device->device_name);
-      g_free (device->device_original_name);
-      g_free (device->device_info);
-      g_free (device->device_location);
-      g_free (device->device_make_and_model);
-      g_free (device->device_uri);
-      g_free (device->device_id);
-      g_free (device->device_ppd);
-      g_free (device->host_name);
-      g_free (device);
-    }
-}
-
-static TDevice *
-t_device_copy (TDevice *device)
-{
-  TDevice *result = NULL;
-
-  if (device)
-    {
-      result = g_new0 (TDevice, 1);
-
-      result->display_name = g_strdup (device->display_name);
-      result->device_name = g_strdup (device->device_name);
-      result->device_original_name = g_strdup (device->device_original_name);
-      result->device_info = g_strdup (device->device_info);
-      result->device_location = g_strdup (device->device_location);
-      result->device_make_and_model = g_strdup (device->device_make_and_model);
-      result->device_uri = g_strdup (device->device_uri);
-      result->device_id = g_strdup (device->device_id);
-      result->device_ppd = g_strdup (device->device_ppd);
-      result->host_name = g_strdup (device->host_name);
-      result->host_port = device->host_port;
-      result->network_device = device->network_device;
-      result->acquisition_method = device->acquisition_method;
-      result->is_authenticated_server = device->is_authenticated_server;
-      result->show = device->show;
-    }
-
-  return result;
 }
 
 static void
@@ -902,7 +817,7 @@ group_physical_devices_cb (gchar    ***device_uris,
 {
   PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  TDevice                   *device, *tmp;
+  PpPrintDevice             *device, *tmp;
   gint                       i, j;
 
   if (device_uris)
@@ -926,7 +841,7 @@ group_physical_devices_cb (gchar    ***device_uris,
                       if (tmp)
                         {
                           priv->new_devices = g_list_remove (priv->new_devices, tmp);
-                          t_device_free (tmp);
+                          pp_print_device_free (tmp);
                         }
                     }
                 }
@@ -944,7 +859,7 @@ group_physical_devices_cb (gchar    ***device_uris,
                             }
                           else
                             {
-                              t_device_free (tmp);
+                              pp_print_device_free (tmp);
                             }
                         }
                     }
@@ -1066,7 +981,7 @@ get_cups_devices_cb (GList    *devices,
   GVariantBuilder             device_hash;
   PpPrintDevice             **all_devices;
   PpPrintDevice              *pp_device;
-  TDevice                    *device;
+  PpPrintDevice              *device;
   GError                     *error = NULL;
   GList                      *iter;
   gint                        length, i;
@@ -1094,32 +1009,32 @@ get_cups_devices_cb (GList    *devices,
               all_devices = g_new0 (PpPrintDevice *, length);
 
               i = 0;
-              for (iter = priv->devices; iter; iter = iter->next)
+              for (iter = priv->devices; iter != NULL; iter = iter->next)
                 {
-                  device = (TDevice *) iter->data;
-                  if (device)
+                  device = (PpPrintDevice *) iter->data;
+                  if (device != NULL)
                     {
                       all_devices[i] = g_new0 (PpPrintDevice, 1);
                       all_devices[i]->device_id = g_strdup (device->device_id);
                       all_devices[i]->device_make_and_model = g_strdup (device->device_make_and_model);
                       all_devices[i]->device_class = device->network_device ? g_strdup ("network") : strdup ("direct");
                       all_devices[i]->device_uri = g_strdup (device->device_uri);
+                      i++;
                     }
-                  i++;
                 }
 
-              for (iter = devices; iter; iter = iter->next)
+              for (iter = devices; iter != NULL; iter = iter->next)
                 {
                   pp_device = (PpPrintDevice *) iter->data;
-                  if (pp_device)
+                  if (pp_device != NULL)
                     {
                       all_devices[i] = g_new0 (PpPrintDevice, 1);
                       all_devices[i]->device_id = g_strdup (pp_device->device_id);
                       all_devices[i]->device_make_and_model = g_strdup (pp_device->device_make_and_model);
                       all_devices[i]->device_class = g_strdup (pp_device->device_class);
                       all_devices[i]->device_uri = g_strdup (pp_device->device_uri);
+                      i++;
                     }
-                  i++;
                 }
 
               bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
@@ -1179,17 +1094,7 @@ get_cups_devices_cb (GList    *devices,
                 }
 
               for (i = 0; i < length; i++)
-                {
-                  if (all_devices[i])
-                    {
-                      g_free (all_devices[i]->device_id);
-                      g_free (all_devices[i]->device_make_and_model);
-                      g_free (all_devices[i]->device_class);
-                      g_free (all_devices[i]->device_uri);
-                      g_free (all_devices[i]);
-                    }
-                }
-
+                pp_print_device_free (all_devices[i]);
               g_free (all_devices);
             }
           else
@@ -1203,9 +1108,7 @@ get_cups_devices_cb (GList    *devices,
         }
     }
 
-  for (iter = devices; iter; iter = iter->next)
-    pp_print_device_free ((PpPrintDevice *) iter->data);
-  g_list_free (devices);
+  g_list_free_full (devices, (GDestroyNotify) pp_print_device_free);
 }
 
 static void
@@ -1541,9 +1444,9 @@ search_address (const gchar        *text,
                 gboolean            delay_search)
 {
   PpNewPrinterDialogPrivate  *priv = dialog->priv;
+  PpPrintDevice              *device;
   gboolean                    found = FALSE;
   gboolean                    subfound;
-  TDevice                    *device;
   GList                      *iter, *tmp;
   gchar                      *lowercase_name;
   gchar                      *lowercase_location;
@@ -1610,7 +1513,7 @@ search_address (const gchar        *text,
               tmp = iter;
               iter = iter->next;
               priv->devices = g_list_remove_link (priv->devices, tmp);
-              g_list_free_full (tmp, t_device_free);
+              g_list_free_full (tmp, (GDestroyNotify) pp_print_device_free);
             }
           else
             iter = iter->next;
@@ -1628,7 +1531,7 @@ search_address (const gchar        *text,
               tmp = iter;
               iter = iter->next;
               priv->new_devices = g_list_remove_link (priv->new_devices, tmp);
-              g_list_free_full (tmp, t_device_free);
+              g_list_free_full (tmp, (GDestroyNotify) pp_print_device_free);
             }
           else
             iter = iter->next;
@@ -1734,15 +1637,15 @@ static void
 actualize_devices_list (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  GtkTreeSelection  *selection;
-  GtkListStore      *store;
-  GtkTreeView       *treeview;
-  GtkTreeIter        iter;
-  GtkWidget         *widget;
-  gboolean           no_device = TRUE;
-  TDevice           *device;
-  GList             *item;
-  gchar             *description;
+  GtkTreeSelection          *selection;
+  PpPrintDevice             *device;
+  GtkListStore              *store;
+  GtkTreeView               *treeview;
+  GtkTreeIter                iter;
+  GtkWidget                 *widget;
+  gboolean                   no_device = TRUE;
+  GList                     *item;
+  gchar                     *description;
 
   treeview = (GtkTreeView *)
     gtk_builder_get_object (priv->builder, "devices-treeview");
@@ -1754,7 +1657,7 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
 
   for (item = priv->devices; item; item = item->next)
     {
-      device = (TDevice *) item->data;
+      device = (PpPrintDevice *) item->data;
 
       if (device->display_name &&
           (device->device_id ||
@@ -2072,7 +1975,7 @@ ppd_selection_cb (GtkDialog *_dialog,
                                 printer_add_async_cb,
                                 dialog);
 
-      t_device_free (priv->new_device);
+      pp_print_device_free (priv->new_device);
       priv->new_device = NULL;
     }
 }
@@ -2084,11 +1987,11 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
 {
   PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
+  PpPrintDevice             *device = NULL;
+  PpPrintDevice             *tmp;
   GtkTreeModel              *model;
   GtkTreeIter                iter;
   GtkWidget                 *treeview;
-  TDevice                   *device = NULL;
-  TDevice                   *tmp;
   GList                     *list_iter;
   gchar                     *device_name = NULL;
 
@@ -2113,7 +2016,7 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
 
       for (list_iter = priv->devices; list_iter; list_iter = list_iter->next)
         {
-          tmp = (TDevice *) list_iter->data;
+          tmp = (PpPrintDevice *) list_iter->data;
           if (tmp && g_strcmp0 (tmp->device_name, device_name) == 0)
             {
               device = tmp;
@@ -2129,7 +2032,7 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
           if (device->acquisition_method == ACQUISITION_METHOD_SAMBA ||
               device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
             {
-              priv->new_device = t_device_copy (device);
+              priv->new_device = pp_print_device_copy (device);
               priv->ppd_selection_dialog =
                 pp_ppd_selection_dialog_new (priv->parent,
                                              priv->list,
