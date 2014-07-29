@@ -295,6 +295,8 @@ typedef struct
 void           pp_print_device_free (PpPrintDevice *device);
 PpPrintDevice *pp_print_device_copy (PpPrintDevice *device);
 
+void         pp_devices_list_free (PpDevicesList *result);
+
 const gchar *get_paper_size_from_locale (void);
 
 typedef void (*GCDCallback) (GList          *devices,

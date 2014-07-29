@@ -3284,6 +3284,16 @@ printer_get_ppd_async (const gchar *printer_name,
     }
 }
 
+void
+pp_devices_list_free (PpDevicesList *result)
+{
+  if (result)
+    {
+      g_list_free_full (result->devices, (GDestroyNotify) pp_print_device_free);
+      g_free (result);
+    }
+}
+
 typedef struct
 {
   gchar        *printer_name;

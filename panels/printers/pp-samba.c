@@ -199,12 +199,7 @@ smb_data_free (SMBData *data)
 {
   if (data)
     {
-      if (data->devices)
-        {
-          g_list_free_full (data->devices->devices, (GDestroyNotify) pp_print_device_free);
-          g_free (data->devices);
-        }
-
+      pp_devices_list_free (data->devices);
       smb_auth_info_free (data->auth_info);
       g_object_unref (data->parent);
 

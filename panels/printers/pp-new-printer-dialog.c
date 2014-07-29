@@ -68,7 +68,6 @@ static void     add_devices_to_list (PpNewPrinterDialog  *dialog,
                                      gboolean             new_device);
 static void     remove_device_from_list (PpNewPrinterDialog *dialog,
                                          const gchar        *device_name);
-static void     pp_devices_list_free (PpDevicesList *result);
 
 enum
 {
@@ -684,20 +683,6 @@ device_in_list (gchar *device_uri,
     }
 
   return NULL;
-}
-
-static void
-pp_devices_list_free (PpDevicesList *result)
-{
-  GList *iter;
-
-  if (result)
-    {
-      for (iter = result->devices; iter; iter = iter->next)
-        pp_print_device_free ((PpPrintDevice *) iter->data);
-      g_list_free (result->devices);
-      g_free (result);
-    }
 }
 
 static void

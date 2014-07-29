@@ -306,22 +306,9 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
 static void
 gsd_data_free (GSDData *data)
 {
-  GList *iter;
-
   if (data)
     {
-      if (data->devices)
-        {
-          if (data->devices->devices)
-            {
-              for (iter = data->devices->devices; iter; iter = iter->next)
-                pp_print_device_free ((PpPrintDevice *) iter->data);
-              g_list_free (data->devices->devices);
-            }
-
-          g_free (data->devices);
-        }
-
+      pp_devices_list_free (data->devices);
       g_free (data);
     }
 }
