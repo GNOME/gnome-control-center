@@ -64,6 +64,7 @@ static void   um_account_dialog_response  (GtkDialog *dialog,
 
 struct _UmAccountDialog {
         GtkDialog parent;
+        GtkWidget *notebook;
         GtkWidget *container_widget;
         GSimpleAsyncResult *async;
         GCancellable *cancellable;
@@ -145,7 +146,7 @@ begin_action (UmAccountDialog *self)
         g_debug ("Beginning action, disabling dialog controls");
 
         if (self->enterprise_check_credentials) {
-                gtk_widget_set_sensitive (self->container_widget, FALSE);
+                gtk_widget_set_sensitive (self->notebook, FALSE);
         }
         gtk_widget_set_sensitive (self->enterprise_button, FALSE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
@@ -160,7 +161,7 @@ finish_action (UmAccountDialog *self)
         g_debug ("Completed domain action");
 
         if (self->enterprise_check_credentials) {
-                gtk_widget_set_sensitive (self->container_widget, TRUE);
+                gtk_widget_set_sensitive (self->notebook, TRUE);
         }
         gtk_widget_set_sensitive (self->enterprise_button, TRUE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
@@ -1379,7 +1380,7 @@ mode_change (UmAccountDialog *self,
                 mode = available ? UM_ENTERPRISE : UM_OFFLINE;
         }
 
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (self->container_widget), mode);
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (self->notebook), mode);
 
         /* The enterprise toggle state */
         active = (mode != UM_LOCAL);
@@ -1419,8 +1420,6 @@ um_account_dialog_init (UmAccountDialog *self)
         GError *error = NULL;
         GtkDialog *dialog;
         GtkWidget *content;
-        GtkWidget *actions;
-        GtkWidget *box;
 
         builder = gtk_builder_new ();
 
@@ -1433,33 +1432,18 @@ um_account_dialog_init (UmAccountDialog *self)
         }
 
         dialog = GTK_DIALOG (self);
-        actions = gtk_dialog_get_action_area (dialog);
         content = gtk_dialog_get_content_area (dialog);
         gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
         gtk_window_set_title (GTK_WINDOW (dialog), _("Add User"));
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
-        /* Rearrange the bottom of dialog, so we can have spinner on left */
-        g_object_ref (actions);
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-        gtk_container_remove (GTK_CONTAINER (content), actions);
-        gtk_box_pack_end (GTK_BOX (box), actions, FALSE, TRUE, 0);
-        gtk_box_pack_end (GTK_BOX (content), box, TRUE, TRUE, 0);
-        gtk_widget_show (box);
-        g_object_unref (actions);
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, "enterprise-button"));
+        self->enterprise_button = widget;
 
-        /* Create enterprise toggle button. */
-        self->enterprise_button = gtk_toggle_button_new_with_mnemonic (_("_Enterprise Login"));
-        gtk_container_set_border_width (GTK_CONTAINER (self->enterprise_button), 6);
-        gtk_box_pack_start (GTK_BOX (box), self->enterprise_button, FALSE, FALSE, 0);
-
-        /* Create the spinner, but don't show it yet */
-        self->spinner = GTK_SPINNER (gtk_spinner_new ());
-        widget = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
-        gtk_box_pack_end (GTK_BOX (box), widget, FALSE, FALSE, 0);
-        gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (self->spinner));
-        gtk_widget_show (widget);
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, "spinner"));
+        gtk_widget_hide (widget);
+        self->spinner = GTK_SPINNER (widget);
 
         gtk_dialog_add_button (dialog, _("Cancel"), GTK_RESPONSE_CANCEL);
         widget = gtk_dialog_add_button (dialog, _("_Add"), GTK_RESPONSE_OK);
@@ -1469,6 +1453,9 @@ um_account_dialog_init (UmAccountDialog *self)
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-dialog");
         gtk_container_add (GTK_CONTAINER (content), widget);
         self->container_widget = widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
+        self->notebook = widget;
 
         local_init (self, builder);
         enterprise_init (self, builder);
