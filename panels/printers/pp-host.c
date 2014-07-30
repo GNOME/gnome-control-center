@@ -22,6 +22,8 @@
 
 #include <glib/gi18n.h>
 
+#define BUFFER_LENGTH 1024
+
 struct _PpHostPrivate
 {
   gchar *hostname;
@@ -572,6 +574,226 @@ PpDevicesList *
 pp_host_get_jetdirect_devices_finish (PpHost        *host,
                                       GAsyncResult  *res,
                                       GError       **error)
+{
+  g_return_val_if_fail (g_task_is_valid (res, host), NULL);
+
+  return g_task_propagate_pointer (G_TASK (res), error);
+}
+
+static gboolean
+test_lpd_queue (GSocketClient *client,
+                gchar         *address,
+                gint           port,
+                GCancellable  *cancellable,
+                gchar         *queue_name)
+{
+  GSocketConnection *connection;
+  gboolean           result = FALSE;
+  GError            *error = NULL;
+
+  connection = g_socket_client_connect_to_host (client,
+                                                address,
+                                                port,
+                                                cancellable,
+                                                &error);
+
+  if (connection != NULL)
+    {
+      if (G_IS_TCP_CONNECTION (connection))
+        {
+          GOutputStream *output;
+          GInputStream  *input;
+          gssize         bytes_read, bytes_written;
+          gchar          buffer[BUFFER_LENGTH];
+          gint           length;
+
+          output = g_io_stream_get_output_stream (G_IO_STREAM (connection));
+          input = g_io_stream_get_input_stream (G_IO_STREAM (connection));
+
+          /* This LPD command is explained in RFC 1179, section 5.2 */
+          length = g_snprintf (buffer, BUFFER_LENGTH, "\2%s\n", queue_name);
+
+          bytes_written = g_output_stream_write (output,
+                                                 buffer,
+                                                 length,
+                                                 NULL,
+                                                 &error);
+
+          if (bytes_written != -1)
+            {
+              bytes_read = g_input_stream_read (input,
+                                                buffer,
+                                                BUFFER_LENGTH,
+                                                NULL,
+                                                &error);
+
+              if (bytes_read != -1)
+                {
+                  if (bytes_read > 0 && buffer[0] == 0)
+                    {
+                      /* This LPD command is explained in RFC 1179, section 6.1 */
+                      length = g_snprintf (buffer, BUFFER_LENGTH, "\1\n");
+
+                      bytes_written = g_output_stream_write (output,
+                                                             buffer,
+                                                             length,
+                                                             NULL,
+                                                             &error);
+
+                      result = TRUE;
+                    }
+                }
+              else
+                {
+                  g_clear_error (&error);
+                }
+            }
+          else
+            {
+              g_clear_error (&error);
+            }
+        }
+
+      g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
+      g_object_unref (connection);
+    }
+
+  return result;
+}
+
+static void
+_pp_host_get_lpd_devices_thread (GTask        *task,
+                                 gpointer      source_object,
+                                 gpointer      task_data,
+                                 GCancellable *cancellable)
+{
+  GSocketConnection *connection;
+  PpPrintDevice     *device;
+  PpHost            *host = (PpHost *) source_object;
+  PpHostPrivate     *priv = host->priv;
+  GSocketClient     *client;
+  PpDevicesList     *result;
+  GSDData           *data = (GSDData *) task_data;
+  GError            *error = NULL;
+  GList             *candidates = NULL;
+  GList             *iter;
+  gchar             *found_queue = NULL;
+  gchar             *candidate;
+  gchar             *address;
+  gint               port;
+  gint               i;
+
+  if (priv->port == PP_HOST_UNSET_PORT)
+    port = PP_HOST_DEFAULT_LPD_PORT;
+  else
+    port = priv->port;
+
+  address = g_strdup_printf ("%s:%d", priv->hostname, port);
+  if (address == NULL || address[0] == '/')
+    goto out;
+
+  result = data->devices;
+  data->devices = NULL;
+
+  client = g_socket_client_new ();
+
+  connection = g_socket_client_connect_to_host (client,
+                                                address,
+                                                port,
+                                                cancellable,
+                                                &error);
+
+  if (connection != NULL)
+    {
+      g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
+      g_object_unref (connection);
+
+      /* Most of this list is taken from system-config-printer */
+      candidates = g_list_append (candidates, g_strdup ("PASSTHRU"));
+      candidates = g_list_append (candidates, g_strdup ("AUTO"));
+      candidates = g_list_append (candidates, g_strdup ("BINPS"));
+      candidates = g_list_append (candidates, g_strdup ("RAW"));
+      candidates = g_list_append (candidates, g_strdup ("TEXT"));
+      candidates = g_list_append (candidates, g_strdup ("ps"));
+      candidates = g_list_append (candidates, g_strdup ("lp"));
+      candidates = g_list_append (candidates, g_strdup ("PORT1"));
+
+      for (i = 0; i < 8; i++)
+        {
+          candidates = g_list_append (candidates, g_strdup_printf ("LPT%d", i));
+          candidates = g_list_append (candidates, g_strdup_printf ("LPT%d_PASSTHRU", i));
+          candidates = g_list_append (candidates, g_strdup_printf ("COM%d", i));
+          candidates = g_list_append (candidates, g_strdup_printf ("COM%d_PASSTHRU", i));
+        }
+
+      for (i = 0; i < 50; i++)
+        candidates = g_list_append (candidates, g_strdup_printf ("pr%d", i));
+
+      for (iter = candidates; iter != NULL; iter = iter->next)
+        {
+          candidate = (gchar *) iter->data;
+
+          if (test_lpd_queue (client,
+                              address,
+                              port,
+                              cancellable,
+                              candidate))
+            {
+              found_queue = g_strdup (candidate);
+              break;
+            }
+        }
+
+      if (found_queue != NULL)
+        {
+          device = g_new0 (PpPrintDevice, 1);
+          device->device_class = g_strdup ("network");
+          device->device_uri = g_strdup_printf ("lpd://%s:%d/%s",
+                                                priv->hostname,
+                                                port,
+                                                found_queue);
+          /* Translators: The found device is a Line Printer Daemon printer */
+          device->device_name = g_strdup (_("LPD Printer"));
+          device->host_name = g_strdup (priv->hostname);
+          device->host_port = port;
+          device->acquisition_method = ACQUISITION_METHOD_LPD;
+
+          result->devices = g_list_append (result->devices, device);
+        }
+
+      g_list_free_full (candidates, g_free);
+    }
+
+  g_object_unref (client);
+
+out:
+  g_task_return_pointer (task, result, (GDestroyNotify) pp_devices_list_free);
+  g_object_unref (task);
+
+  g_free (address);
+}
+
+void
+pp_host_get_lpd_devices_async (PpHost              *host,
+                               GCancellable        *cancellable,
+                               GAsyncReadyCallback  callback,
+                               gpointer             user_data)
+{
+  GSDData *data;
+  GTask   *task;
+
+  data = g_new0 (GSDData, 1);
+  data->devices = g_new0 (PpDevicesList, 1);
+
+  task = g_task_new (G_OBJECT (host), cancellable, callback, user_data);
+  g_task_set_task_data (task, data, (GDestroyNotify) gsd_data_free);
+  g_task_run_in_thread (task, _pp_host_get_lpd_devices_thread);
+}
+
+PpDevicesList *
+pp_host_get_lpd_devices_finish (PpHost        *host,
+                                GAsyncResult  *res,
+                                GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, host), NULL);
 

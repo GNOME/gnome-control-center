@@ -37,6 +37,7 @@ G_BEGIN_DECLS
 #define PP_HOST_UNSET_PORT               -1
 #define PP_HOST_DEFAULT_IPP_PORT        631
 #define PP_HOST_DEFAULT_JETDIRECT_PORT 9100
+#define PP_HOST_DEFAULT_LPD_PORT        515
 
 typedef struct _PpHost        PpHost;
 typedef struct _PpHostClass   PpHostClass;
@@ -81,6 +82,15 @@ void           pp_host_get_jetdirect_devices_async    (PpHost               *hos
                                                        gpointer              user_data);
 
 PpDevicesList *pp_host_get_jetdirect_devices_finish   (PpHost               *host,
+                                                       GAsyncResult         *result,
+                                                       GError              **error);
+
+void           pp_host_get_lpd_devices_async          (PpHost               *host,
+                                                       GCancellable         *cancellable,
+                                                       GAsyncReadyCallback   callback,
+                                                       gpointer              user_data);
+
+PpDevicesList *pp_host_get_lpd_devices_finish         (PpHost               *host,
                                                        GAsyncResult         *result,
                                                        GError              **error);
 
