@@ -319,27 +319,28 @@ settings_button_clicked (GtkWidget *widget,
 }
 
 static GVariant *
-switch_settings_mapping_set (const GValue *value,
-                             const GVariantType *expected_type,
-                             gpointer user_data)
+switch_settings_mapping_set_generic (const GValue *value,
+                                     const GVariantType *expected_type,
+                                     GtkWidget *row,
+                                     gboolean default_enabled)
 {
-  GtkWidget *row = user_data;
   CcSearchPanel *self = g_object_get_data (G_OBJECT (row), "self");
   GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
-  gchar **disabled;
-  GPtrArray *new_disabled;
+  gchar **apps;
+  GPtrArray *new_apps;
   gint idx;
   gboolean remove, found;
   GVariant *variant;
 
-  remove = g_value_get_boolean (value);
+  remove = !!g_value_get_boolean (value) == !!default_enabled;
   found = FALSE;
-  new_disabled = g_ptr_array_new_with_free_func (g_free);
-  disabled = g_settings_get_strv (self->priv->search_settings, "disabled");
+  new_apps = g_ptr_array_new_with_free_func (g_free);
+  apps = g_settings_get_strv (self->priv->search_settings,
+                              default_enabled ? "disabled" : "enabled");
 
-  for (idx = 0; disabled[idx] != NULL; idx++)
+  for (idx = 0; apps[idx] != NULL; idx++)
     {
-      if (g_strcmp0 (disabled[idx], g_app_info_get_id (app_info)) == 0)
+      if (g_strcmp0 (apps[idx], g_app_info_get_id (app_info)) == 0)
         {
           found = TRUE;
 
@@ -347,52 +348,89 @@ switch_settings_mapping_set (const GValue *value,
             continue;
         }
 
-      g_ptr_array_add (new_disabled, g_strdup (disabled[idx]));
+      g_ptr_array_add (new_apps, g_strdup (apps[idx]));
     }
 
   if (!found && !remove)
-    g_ptr_array_add (new_disabled, g_strdup (g_app_info_get_id (app_info)));
+    g_ptr_array_add (new_apps, g_strdup (g_app_info_get_id (app_info)));
 
-  g_ptr_array_add (new_disabled, NULL);
+  g_ptr_array_add (new_apps, NULL);
 
-  variant = g_variant_new_strv ((const gchar **) new_disabled->pdata, -1);
-  g_ptr_array_unref (new_disabled);
-  g_strfreev (disabled);
+  variant = g_variant_new_strv ((const gchar **) new_apps->pdata, -1);
+  g_ptr_array_unref (new_apps);
+  g_strfreev (apps);
 
   return variant;
 }
 
-static gboolean
-switch_settings_mapping_get (GValue *value,
-                             GVariant *variant,
-                             gpointer user_data)
+static GVariant *
+switch_settings_mapping_set_default_enabled (const GValue *value,
+                                             const GVariantType *expected_type,
+                                             gpointer user_data)
 {
-  GtkWidget *row = user_data;
+  return switch_settings_mapping_set_generic (value, expected_type,
+                                              user_data, TRUE);
+}
+
+static GVariant *
+switch_settings_mapping_set_default_disabled (const GValue *value,
+                                              const GVariantType *expected_type,
+                                              gpointer user_data)
+{
+  return switch_settings_mapping_set_generic (value, expected_type,
+                                              user_data, FALSE);
+}
+
+static gboolean
+switch_settings_mapping_get_generic (GValue *value,
+                                     GVariant *variant,
+                                     GtkWidget *row,
+                                     gboolean default_enabled)
+{
   GAppInfo *app_info = g_object_get_data (G_OBJECT (row), "app-info");
-  const gchar **disabled;
+  const gchar **apps;
   gint idx;
   gboolean found;
 
   found = FALSE;
-  disabled = g_variant_get_strv (variant, NULL);
+  apps = g_variant_get_strv (variant, NULL);
 
-  for (idx = 0; disabled[idx] != NULL; idx++)
+  for (idx = 0; apps[idx] != NULL; idx++)
     {
-      if (g_strcmp0 (disabled[idx], g_app_info_get_id (app_info)) == 0)
+      if (g_strcmp0 (apps[idx], g_app_info_get_id (app_info)) == 0)
         {
           found = TRUE;
           break;
         }
     }
 
-  g_value_set_boolean (value, !found);
+  g_value_set_boolean (value, !!default_enabled != !!found);
 
   return TRUE;
 }
 
+static gboolean
+switch_settings_mapping_get_default_enabled (GValue *value,
+                                             GVariant *variant,
+                                             gpointer user_data)
+{
+  return switch_settings_mapping_get_generic (value, variant,
+                                              user_data, TRUE);
+}
+
+static gboolean
+switch_settings_mapping_get_default_disabled (GValue *value,
+                                              GVariant *variant,
+                                              gpointer user_data)
+{
+  return switch_settings_mapping_get_generic (value, variant,
+                                              user_data, FALSE);
+}
+
 static void
 search_panel_add_one_app_info (CcSearchPanel *self,
-                               GAppInfo *app_info)
+                               GAppInfo *app_info,
+                               gboolean default_enabled)
 {
   GtkWidget *row, *box, *w;
   GIcon *icon;
@@ -433,12 +471,24 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
 
-  g_settings_bind_with_mapping (self->priv->search_settings, "disabled",
-                                w, "active",
-                                G_SETTINGS_BIND_DEFAULT,
-                                switch_settings_mapping_get,
-                                switch_settings_mapping_set,
-                                row, NULL);
+  if (default_enabled)
+    {
+      g_settings_bind_with_mapping (self->priv->search_settings, "disabled",
+                                    w, "active",
+                                    G_SETTINGS_BIND_DEFAULT,
+                                    switch_settings_mapping_get_default_enabled,
+                                    switch_settings_mapping_set_default_enabled,
+                                    row, NULL);
+    }
+  else
+    {
+      g_settings_bind_with_mapping (self->priv->search_settings, "enabled",
+                                    w, "active",
+                                    G_SETTINGS_BIND_DEFAULT,
+                                    switch_settings_mapping_get_default_disabled,
+                                    switch_settings_mapping_set_default_disabled,
+                                    row, NULL);
+    }
 
   gtk_widget_show_all (row);
 }
@@ -451,6 +501,7 @@ search_panel_add_one_provider (CcSearchPanel *self,
   GKeyFile *keyfile;
   GAppInfo *app_info;
   GError *error = NULL;
+  gboolean default_disabled;
 
   path = g_file_get_path (provider);
   keyfile = g_key_file_new ();
@@ -482,7 +533,9 @@ search_panel_add_one_provider (CcSearchPanel *self,
   if (app_info == NULL)
     goto out;
 
-  search_panel_add_one_app_info (self, app_info);
+  default_disabled = g_key_file_get_boolean (keyfile, SHELL_PROVIDER_GROUP,
+                                             "DefaultDisabled", NULL);
+  search_panel_add_one_app_info (self, app_info, !default_disabled);
   g_object_unref (app_info);
 
  out:
