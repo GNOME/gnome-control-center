@@ -35,6 +35,7 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 #define REMOVE_OLD_TEMP_FILES "remove-old-temp-files"
 #define OLD_FILES_AGE "old-files-age"
 #define SEND_SOFTWARE_USAGE_STATS "send-software-usage-stats"
+#define LOCATION_ENABLED "enabled"
 
 struct _CcPrivacyPanelPrivate
 {
@@ -49,6 +50,7 @@ struct _CcPrivacyPanelPrivate
   GSettings  *lock_settings;
   GSettings  *privacy_settings;
   GSettings  *notification_settings;
+  GSettings  *location_settings;
 };
 
 static void
@@ -597,6 +599,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->lock_settings);
   g_clear_object (&priv->privacy_settings);
   g_clear_object (&priv->notification_settings);
+  g_clear_object (&priv->location_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -678,6 +681,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
   self->priv->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
   self->priv->notification_settings = g_settings_new ("org.gnome.desktop.notifications");
+  self->priv->location_settings = g_settings_new ("org.gnome.system.location");
 
   add_screen_lock (self);
   add_usage_history (self);
@@ -687,6 +691,15 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
   update_lock_screen_sensitivity (self);
+
+  widget = WID ("location_services_switch");
+  gtk_switch_set_active (GTK_SWITCH (widget),
+                         g_settings_get_boolean (self->priv->location_settings,
+                                                 LOCATION_ENABLED));
+  g_settings_bind (self->priv->location_settings,
+                   LOCATION_ENABLED,
+                   widget, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   widget = WID ("privacy_vbox");
   gtk_container_add (GTK_CONTAINER (self), widget);
