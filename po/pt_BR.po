@@ -31,9 +31,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-07-27 18:34+0000\n"
-"PO-Revision-Date: 2014-07-28 03:22-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2014-08-04 06:33+0000\n"
+"PO-Revision-Date: 2014-08-04 11:18-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -200,7 +200,7 @@ msgstr "O Bluetooth está desativado via hardware"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1726
+#: ../panels/printers/pp-new-printer-dialog.c:1688
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1842,9 +1842,7 @@ msgstr ""
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
-msgstr ""
-"Trackpad;Ponteiro;Clicar;Tap;Toque;Batida;Duplo;Botão;Trackball;Rolagem;"
-"Scroll;"
+msgstr "Trackpad;Ponteiro;Clicar;Tap;Toque;Batida;Duplo;Botão;Trackball;Rolagem;Scroll;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "General"
@@ -2611,9 +2609,6 @@ msgstr "Controle como você conecta à Internet"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;DNS;"
@@ -4350,6 +4345,16 @@ msgstr "Selecionar driver de impressora"
 msgid "Loading drivers database..."
 msgstr "Carregando banco de dados de drivers..."
 
+#. Translators: The found device is a JetDirect printer
+#: ../panels/printers/pp-host.c:506
+msgid "JetDirect Printer"
+msgstr "Impressora JetDirect"
+
+#. Translators: The found device is a Line Printer Daemon printer
+#: ../panels/printers/pp-host.c:756
+msgid "LPD Printer"
+msgstr "Impressora LPD"
+
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:66
 #: ../panels/printers/pp-ppd-option-widget.c:70
@@ -4451,34 +4456,34 @@ msgid "%s Active Jobs"
 msgstr "%s trabalhos ativos"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1709
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1714
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Serial Port"
 msgstr "Porta serial"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1721
+#: ../panels/printers/pp-new-printer-dialog.c:1683
 msgid "Parallel Port"
 msgstr "Porta paralela"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1739
 #, c-format
 msgid "Location: %s"
 msgstr "Localização: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1744
 #, c-format
 msgid "Address: %s"
 msgstr "Endereço: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1803
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Server requires authentication"
 msgstr "O servidor requer autenticação"
 
@@ -4602,17 +4607,17 @@ msgid "No pre-filtering"
 msgstr "Nenhum pré-filtro"
 
 #. Translators: Name of column showing printer manufacturers
-#: ../panels/printers/pp-ppd-selection-dialog.c:232
+#: ../panels/printers/pp-ppd-selection-dialog.c:233
 msgid "Manufacturer"
 msgstr "Fabricante"
 
 #. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:249
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "Unidade"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:253
+#: ../panels/printers/pp-samba.c:248
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -5285,9 +5290,7 @@ msgstr ""
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
-msgstr ""
-"Cartão;Microfone;Volume;Desaparecer;Balanço;Bluetooth;Fone de ouvido com "
-"microfone;Áudio;"
+msgstr "Cartão;Microfone;Volume;Desaparecer;Balanço;Bluetooth;Fone de ouvido com microfone;Áudio;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
@@ -6105,8 +6108,7 @@ msgstr "Adicionar ou remover usuários e alterar sua senha"
 #. Translators: those are keywords for the user accounts control-center panel
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr ""
-"Iniciar sessão;Sessão;Nome;Impressão digital;Avatar;Logotipo;Face;Senha;"
+msgstr "Iniciar sessão;Sessão;Nome;Impressão digital;Avatar;Logotipo;Face;Senha;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
 msgid "Login History"
