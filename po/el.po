@@ -40,8 +40,8 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-07-15 13:12+0000\n"
-"PO-Revision-Date: 2014-07-16 00:26+0200\n"
+"POT-Creation-Date: 2014-08-03 18:31+0000\n"
+"PO-Revision-Date: 2014-08-04 01:26+0200\n"
 "Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: team@lists.gnome.gr\n"
 "Language: el\n"
@@ -99,44 +99,45 @@ msgid "Span"
 msgstr "Ανάπτυγμα"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#: ../panels/background/cc-background-chooser-dialog.c:441
 msgid "Select Background"
 msgstr "Επιλογή παρασκηνίου"
 
-#: ../panels/background/cc-background-chooser-dialog.c:307
+#: ../panels/background/cc-background-chooser-dialog.c:462
 msgid "Wallpapers"
 msgstr "Ταπετσαρίες"
 
-#: ../panels/background/cc-background-chooser-dialog.c:316
+#: ../panels/background/cc-background-chooser-dialog.c:471
 msgid "Pictures"
 msgstr "Εικόνες"
 
-#: ../panels/background/cc-background-chooser-dialog.c:324
+#: ../panels/background/cc-background-chooser-dialog.c:480
 msgid "Colors"
 msgstr "Χρώματα"
 
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:372
+#: ../panels/background/cc-background-chooser-dialog.c:539
 msgid "No Pictures Found"
 msgstr "Δεν βρέθηκαν εικόνες"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:390
+#: ../panels/background/cc-background-chooser-dialog.c:557
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Αρχή"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:402
+#: ../panels/background/cc-background-chooser-dialog.c:569
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Μπορείτε να προσθέσετε εικόνες στον φάκελο %s και θα εμφανιστούν εδώ"
 
-#: ../panels/background/cc-background-chooser-dialog.c:430
+#: ../panels/background/cc-background-chooser-dialog.c:591
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -147,6 +148,7 @@ msgstr "Μπορείτε να προσθέσετε εικόνες στον φά�
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:466
+#: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:491
@@ -154,33 +156,33 @@ msgstr "Μπορείτε να προσθέσετε εικόνες στον φά�
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:267
 #: ../panels/user-accounts/um-photo-dialog.c:95
-#: ../panels/user-accounts/um-photo-dialog.c:221
+#: ../panels/user-accounts/um-photo-dialog.c:222
 #: ../panels/user-accounts/um-user-panel.c:507
 msgid "_Cancel"
 msgstr "_Ακύρωση"
 
-#: ../panels/background/cc-background-chooser-dialog.c:431
+#: ../panels/background/cc-background-chooser-dialog.c:592
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
 msgstr "Επιλογή"
 
-#: ../panels/background/cc-background-item.c:148
+#: ../panels/background/cc-background-item.c:198
 msgid "multiple sizes"
 msgstr "πολλαπλά μεγέθη"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:152
+#: ../panels/background/cc-background-item.c:202
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:280
+#: ../panels/background/cc-background-item.c:328
 msgid "No Desktop Background"
 msgstr "Επιφάνεια εργασίας χωρίς παρασκήνιο"
 
-#: ../panels/background/cc-background-panel.c:492
+#: ../panels/background/cc-background-panel.c:495
 msgid "Current background"
 msgstr "Τρέχον παρασκήνιο"
 
@@ -207,7 +209,7 @@ msgstr "Το Bluetooth είναι απενεργοποιημένο από το �
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1726
+#: ../panels/printers/pp-new-printer-dialog.c:1688
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -865,8 +867,7 @@ msgstr ""
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
-msgstr ""
-"Χρώμα;ICC;Προφίλ;Βαθμονόμηση;Εκτυπωτής;Οθόνη;Color;Profile;Calibrate;Printer;"
+msgstr "Χρώμα;ICC;Προφίλ;Βαθμονόμηση;Εκτυπωτής;Οθόνη;Color;Profile;Calibrate;Printer;"
 "Display;"
 
 #. Add some common regions
@@ -908,6 +909,11 @@ msgstr "Δε βρέθηκαν γλώσσες"
 msgid "Language"
 msgstr "Γλώσσα"
 
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "Έ_τοιμο"
+
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
 msgid "%e %B %Y, %l:%M %p"
@@ -921,8 +927,6 @@ msgstr "%e %B %Y, %R"
 #. Translators: "city, country"
 #: ../panels/datetime/cc-datetime-panel.c:523
 #, c-format
-#| msgctxt "login date-time"
-#| msgid "%s, %s"
 msgctxt "timezone loc"
 msgid "%s, %s"
 msgstr "%s, %s"
@@ -1212,8 +1216,7 @@ msgstr "Επιλογή τρόπου χρήσης συνδεδεμένων οθο
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
-msgstr ""
-"Πάνελ;Προβολέας;xrandr;Οθόνη;Ανάλυση;Ανανέωση;Παρακολούθηση;Panel;Projector;"
+msgstr "Πάνελ;Προβολέας;xrandr;Οθόνη;Ανάλυση;Ανανέωση;Παρακολούθηση;Panel;Projector;"
 "Screen;Resolution;Refresh;Monitor;"
 
 #: ../panels/info/cc-info-panel.c:384
@@ -1365,8 +1368,7 @@ msgstr "Προβολή πληροφοριών για το σύστημα σας"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
-msgstr ""
-"συσκευή;σύστημα;πληροφορίες;μνήμη;επεξεργαστής;έκδοση;προεπιλογή;εφαρμογή;"
+msgstr "συσκευή;σύστημα;πληροφορίες;μνήμη;επεξεργαστής;έκδοση;προεπιλογή;εφαρμογή;"
 "προτιμώμενη;cd;dvd;usb;ήχος;βίντεο;δίσκος;αφαιρέσιμος;μέσα;αυτόματη εκτέλεση;"
 "device;system;information;memory;processor;version;default;application;"
 "preferred;audio;video;disc;removable;media;autorun;"
@@ -1652,8 +1654,8 @@ msgstr "Εναλλαγή ενεργοποίησης υψηλής αντίθεσ�
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:274
-#: ../panels/keyboard/cc-keyboard-option.c:393
+#: ../panels/keyboard/cc-keyboard-option.c:276
+#: ../panels/keyboard/cc-keyboard-option.c:395
 #: ../panels/keyboard/keyboard-shortcuts.c:1168
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1666,7 +1668,7 @@ msgstr "Απενεργοποιήθηκε"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:352
+#: ../panels/keyboard/cc-keyboard-option.c:354
 msgid "Alternative Characters Key"
 msgstr "Εναλλακτικό πλήκτρο χαρακτήρων"
 
@@ -1674,11 +1676,11 @@ msgstr "Εναλλακτικό πλήκτρο χαρακτήρων"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:361
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Compose Key"
 msgstr "Σύνθετο πλήκτρο"
 
-#: ../panels/keyboard/cc-keyboard-option.c:366
+#: ../panels/keyboard/cc-keyboard-option.c:368
 msgid "Modifiers-only switch to next source"
 msgstr "Τροποποιητές-μετάβαση μόνο στην επόμενη πηγή"
 
@@ -1861,8 +1863,7 @@ msgstr ""
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
-msgstr ""
-"Πινακίδαεπαφής;Δείκτης;Πάτημα;Πληκτρολόγηση;Κουμπί;Ιχνοσφαίρα;κύλιση;"
+msgstr "Πινακίδα αφής;Δείκτης;Πάτημα;Πληκτρολόγηση;Κουμπί;Ιχνοσφαίρα;κύλιση;"
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
@@ -2554,7 +2555,7 @@ msgstr "Επιλογή αρχείου για εισαγωγή"
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1948
 #: ../panels/sharing/cc-sharing-panel.c:492
-#: ../panels/user-accounts/um-photo-dialog.c:222
+#: ../panels/user-accounts/um-photo-dialog.c:223
 msgid "_Open"
 msgstr "Άν_οιγμα"
 
@@ -2588,8 +2589,8 @@ msgstr ""
 "Σφάλμα: %s."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
-msgid "Export VPN connection..."
-msgstr "Εξαγωγή σύνδεσης VPN..."
+msgid "Export VPN connection"
+msgstr "Εξαγωγή σύνδεσης VPN"
 
 #: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
@@ -2627,10 +2628,9 @@ msgstr "Έλεγχος τρόπου σύνδεσης με το διαδίκτυ�
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"vlan;bridge;bond;"
-msgstr ""
-"Δίκτυο;Ασύρματο;Wi-Fi;Wifi;IP;LAN;Διαμεσολαβητής;WAN;Ευρυζωνικό;Μόντεμ;"
-"Bluetooth;vpn;vlan;γέφυρα;δεσμός;Network;Wireless;Broadband;Modem;bridge;"
+"vlan;bridge;bond;DNS;"
+msgstr "Δίκτυο;Ασύρματο;Wi-Fi;Wifi;IP;LAN;Διαμεσολαβητής;WAN;Ευρυζωνικό;Μόντεμ;"
+"Bluetooth;vpn;vlan;γέφυρα;δεσμός;DNS;Network;Wireless;Broadband;Modem;bridge;"
 "bond;"
 
 #: ../panels/network/net-device-bond.c:77
@@ -3360,8 +3360,8 @@ msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
-msgid "Choose a PAC file..."
-msgstr "Επιλογή ενός φακέλου PAC..."
+msgid "Choose a PAC file"
+msgstr "Επιλογή ενός φακέλου PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "PAC files (*.pac)"
@@ -3425,8 +3425,8 @@ msgstr "MD5"
 #: ../panels/network/wireless-security/eap-method-peap.c:350
 #: ../panels/network/wireless-security/eap-method-tls.c:434
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
-msgid "Choose a Certificate Authority certificate..."
-msgstr "Επιλέξτε ένα πιστοποιητικό αρχής πιστοποίησης..."
+msgid "Choose a Certificate Authority certificate"
+msgstr "Επιλέξτε ένα πιστοποιητικό αρχής πιστοποίησης"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 0"
@@ -3471,12 +3471,12 @@ msgstr ""
 "openssl)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:428
-msgid "Choose your personal certificate..."
-msgstr "Επιλέξτε το προσωπικό σας πιστοποιητικό..."
+msgid "Choose your personal certificate"
+msgstr "Επιλέξτε το προσωπικό σας πιστοποιητικό"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:440
-msgid "Choose your private key..."
-msgstr "Επιλέξτε το ιδιωτικό σας κλειδί..."
+msgid "Choose your private key"
+msgstr "Επιλέξτε το ιδιωτικό σας κλειδί"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
@@ -3634,8 +3634,7 @@ msgstr "Έλεγχος ποιες ειδοποιήσεις εμφανίζοντ�
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
 msgid "Notifications;Banner;Message;Tray;Popup;"
-msgstr ""
-"Ειδοποιήσεις;Τίτλοι;Μήνυμα;Δίσκος;Αναδυόμενο;Notifications;Banner;Message;"
+msgstr "Ειδοποιήσεις;Τίτλοι;Μήνυμα;Δίσκος;Αναδυόμενο;Notifications;Banner;Message;"
 "Tray;Popup;"
 
 #: ../panels/notifications/notifications.ui.h:1
@@ -3724,8 +3723,7 @@ msgstr ""
 msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
-msgstr ""
-"Google;Facebook;Twitter;Yahoo;Ιστός;Με σύνδεση;Συνομιλία;Ημερολόγιο;"
+msgstr "Google;Facebook;Twitter;Yahoo;Ιστός;Με σύνδεση;Συνομιλία;Ημερολόγιο;"
 "Αλληλογραφία;Επαφές;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;Online;"
 "Chat;Calendar;Mail;Contact;"
 
@@ -3972,19 +3970,19 @@ msgstr "Όταν τροφοδοτείται από μπαταρία"
 msgid "When plugged in"
 msgstr "Όταν είναι στην παροχή ρεύματος"
 
-#: ../panels/power/cc-power-panel.c:1817
+#: ../panels/power/cc-power-panel.c:1818
 msgid "Suspend & Power Off"
 msgstr "Αναστολή & τερματισμός"
 
-#: ../panels/power/cc-power-panel.c:1850
+#: ../panels/power/cc-power-panel.c:1851
 msgid "_Automatic suspend"
 msgstr "_Αυτόματη αναστολή"
 
-#: ../panels/power/cc-power-panel.c:1874
+#: ../panels/power/cc-power-panel.c:1875
 msgid "When battery power is _critical"
 msgstr "Όταν η ισχύς της μπαταρίας είναι _χαμηλή"
 
-#: ../panels/power/cc-power-panel.c:1931
+#: ../panels/power/cc-power-panel.c:1930
 msgid "Power Off"
 msgstr "Τερματισμός"
 
@@ -4006,8 +4004,7 @@ msgstr ""
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
-msgstr ""
-"Ρεύμα;Ύπνωση;Αναστολή;Αδρανοποίηση;Μπαταρία;Φωτεινότητα;Αμυδρό;Κενό;Οθόνη;"
+msgstr "Ισχύς;Ενέργεια;Ρεύμα;Ύπνωση;Αναστολή;Αδρανοποίηση;Μπαταρία;Φωτεινότητα;Αμυδρό;Κενό;Οθόνη;"
 "DPMS;Αδρανές;Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;"
 "Monitor;Idle;"
 
@@ -4108,12 +4105,12 @@ msgstr "Απαιτείται πιστοποίηση"
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:590
 msgid "Low on toner"
-msgstr "Τελειώνει το τόνερ"
+msgstr "Τελειώνει ο γραφίτης"
 
 #. Translators: The printer has no toner left
 #: ../panels/printers/cc-printers-panel.c:592
 msgid "Out of toner"
-msgstr "Τελείωσε το τόνερ"
+msgstr "Άδειος γραφίτης"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
@@ -4306,8 +4303,7 @@ msgstr ""
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr ""
-"Εκτυπωτής;Ουρά;Εκτύπωση;Χαρτί;Μελάνι;Τόνερ;Printer;Queue;Print;Paper;Ink;"
+msgstr "Εκτυπωτής;Ουρά;Εκτύπωση;Χαρτί;Μελάνι;Τόνερ;Γραφίτης;Printer;Queue;Print;Paper;Ink;"
 "Toner;"
 
 #. Translators: This dialog contains list of active print jobs of the selected printer
@@ -4363,6 +4359,16 @@ msgstr "Επιλέξτε τον οδηγό του εκτυπωτή"
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
 msgstr "Φόρτωση βάσης δεδομένων των οδηγών..."
+
+#. Translators: The found device is a JetDirect printer
+#: ../panels/printers/pp-host.c:506
+msgid "JetDirect Printer"
+msgstr "Εκτυπωτής JetDirect"
+
+#. Translators: The found device is a Line Printer Daemon printer
+#: ../panels/printers/pp-host.c:756
+msgid "LPD Printer"
+msgstr "Εκτυπωτής LPD"
 
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:66
@@ -4465,34 +4471,34 @@ msgid "%s Active Jobs"
 msgstr "%s ενεργές εργασίες"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1709
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1714
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Serial Port"
 msgstr "Σειριακή θύρα"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1721
+#: ../panels/printers/pp-new-printer-dialog.c:1683
 msgid "Parallel Port"
 msgstr "Παράλληλη θύρα"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1739
 #, c-format
 msgid "Location: %s"
 msgstr "Τοποθεσία: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1744
 #, c-format
 msgid "Address: %s"
 msgstr "Διεύθυνση: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1803
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Server requires authentication"
 msgstr "Ο διακομιστής απαιτεί ταυτοποίηση"
 
@@ -4616,17 +4622,17 @@ msgid "No pre-filtering"
 msgstr "Χωρίς προ-φιλτράρισμα"
 
 #. Translators: Name of column showing printer manufacturers
-#: ../panels/printers/pp-ppd-selection-dialog.c:232
+#: ../panels/printers/pp-ppd-selection-dialog.c:233
 msgid "Manufacturer"
 msgstr "Κατασκευαστής"
 
 #. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:249
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "Οδηγός"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:253
+#: ../panels/printers/pp-samba.c:248
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -4759,8 +4765,7 @@ msgstr ""
 msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;"
-msgstr ""
-"οθόνη;κλείδωμα;διάγνωση;κατάρρευση;ιδιωτικό;πρόσφατο;προσωρινό;προσωρινό;"
+msgstr "οθόνη;κλείδωμα;διάγνωση;κατάρρευση;ιδιωτικό;πρόσφατο;προσωρινό;προσωρινό;"
 "ευρετήριο;όνομα;ταυτότητα;screen;lock;diagnostics;crash;private;recent;"
 "temporary;tmp;index;name;network;identity;"
 
@@ -4910,7 +4915,7 @@ msgstr "Δε βρέθηκαν περιοχές"
 msgid "No input sources found"
 msgstr "Δεν βρέθηκαν πηγές εισόδου"
 
-#: ../panels/region/cc-input-chooser.c:1063
+#: ../panels/region/cc-input-chooser.c:1076
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Άλλο"
@@ -4944,27 +4949,27 @@ msgstr "Οθόνη σύνδεσης"
 msgid "Formats"
 msgstr "Μορφές"
 
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:4
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: ../panels/region/format-chooser.ui.h:3
+#: ../panels/region/format-chooser.ui.h:5
 msgid "Dates"
 msgstr "Ημερομηνίες"
 
-#: ../panels/region/format-chooser.ui.h:4
+#: ../panels/region/format-chooser.ui.h:6
 msgid "Times"
 msgstr "Ώρες"
 
-#: ../panels/region/format-chooser.ui.h:5
+#: ../panels/region/format-chooser.ui.h:7
 msgid "Numbers"
 msgstr "Αριθμοί"
 
-#: ../panels/region/format-chooser.ui.h:6
+#: ../panels/region/format-chooser.ui.h:8
 msgid "Measurement"
 msgstr "Μέτρηση"
 
-#: ../panels/region/format-chooser.ui.h:7
+#: ../panels/region/format-chooser.ui.h:9
 msgid "Paper"
 msgstr "Χαρτί"
 
@@ -5091,8 +5096,7 @@ msgstr ""
 #. Translators: those are keywords for the search control-center panel
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:4
 msgid "Search;Find;Index;Hide;Privacy;Results;"
-msgstr ""
-"Αναζήτηση;Εύρεση;Ευρετήριο;Απόκρυψη;Ιδιωτικότητα;Αποτελέσματα;Search;Find;"
+msgstr "Αναζήτηση;Εύρεση;Ευρετήριο;Απόκρυψη;Ιδιωτικότητα;Αποτελέσματα;Search;Find;"
 "Index;Hide;Privacy;Results;"
 
 #: ../panels/search/search-locations-dialog.ui.h:1
@@ -5153,8 +5157,7 @@ msgstr "Έλεγχος του τι θέλετε να μοιράζεστε με �
 msgid ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
 "pictures;photos;movies;server;renderer;"
-msgstr ""
-"κοινόχρηστος;κοινή χρήση;ssh;κεντρικός υπολογιστής;όνομα;απομακρυσμένο;"
+msgstr "κοινόχρηστος;κοινή χρήση;ssh;κεντρικός υπολογιστής;όνομα;απομακρυσμένο;"
 "επιφάνεια εργασίας;bluetooth;obex;μέσα;ηχητικό;βίντεο;εικόνες;φωτογραφίες;"
 "ταινίες;διακομιστής;απεικονιστής;share;sharing;ssh;host;name;remote;desktop;"
 "media;audio;video;pictures;photos;movies;server;renderer;"
@@ -5301,8 +5304,7 @@ msgstr "Αλλαγή έντασης ήχου, εισόδων, εξόδων κα�
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
-msgstr ""
-"Κάρτα;Μικρόφωνο;Ένταση;Απόσβεση;Ισορροπία;Bluetooth;Ακουστικά;Ήχος;Card;"
+msgstr "Κάρτα;Μικρόφωνο;Ένταση;Απόσβεση;Ισορροπία;Bluetooth;Ακουστικά;Ήχος;Card;"
 "Microphone;Volume;Fade;Balance;Headset;Audio;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
@@ -5534,8 +5536,7 @@ msgstr ""
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
-msgstr ""
-"Πληκτρολόγιο;Ποντίκι;a11y;Προσιτότητα;Αντίθεση;Εστίαση;Οθόνη;Αναγνώστης;"
+msgstr "Πληκτρολόγιο;Ποντίκι;a11y;Προσιτότητα;Αντίθεση;Εστίαση;Οθόνη;Αναγνώστης;"
 "κείμενο;γραμματοσειρά;μέγεθος;AccessX;Κολλημένο; Πλήκτρα;Αργά;Αναπήδηση;"
 "Ποντίκι;Keyboard;Mouse;Accessibility;Contrast;Zoom;Screen;Reader;text;font;"
 "size;Sticky;Keys;Slow;Bounce;Mouse;"
@@ -6051,7 +6052,7 @@ msgid ""
 msgstr ""
 "Για να χρησιμοποιήσετε τις εταιρικές συνδέσεις, αυτός ο υπολογιστής πρέπει "
 "να είναι\n"
-"εγγεγραμμένος στον τομέα. Παρακαλούμε ο διαχειριστής του δικτύου σας\n"
+"εγγεγραμμένος στον τομέα. Παρακαλούμε, πείτε τον διαχειριστή του δικτύου σας\n"
 "να πληκτρολογήσει εδώ τον κωδικό πρόσβασης του τομέα."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:23
@@ -6131,8 +6132,7 @@ msgstr "Προσθήκη ή αφαίρεση χρηστών και αλλαγή 
 #. Translators: those are keywords for the user accounts control-center panel
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr ""
-"Σύνδεση;Όνομα;Δακτυλικό αποτύπωμα;Avatar;Λογότυπο;Πρόσωπο;Κωδικός πρόσβασης;"
+msgstr "Σύνδεση;Όνομα;Δακτυλικό αποτύπωμα;Avatar;Λογότυπο;Πρόσωπο;Κωδικός πρόσβασης;"
 "Login;Name;Fingerprint;Logo;Face;Password;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
@@ -6609,23 +6609,23 @@ msgstr "Ο κωδικός πρόσβασής σας δεν μπορούσε να
 msgid "The passwords do not match."
 msgstr "Δεν ταιριάζουν οι κωδικοί πρόσβασης."
 
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "Browse for more pictures"
 msgstr "Περιηγηθείτε για περισσότερες φωτογραφίες"
 
-#: ../panels/user-accounts/um-photo-dialog.c:447
+#: ../panels/user-accounts/um-photo-dialog.c:453
 msgid "Disable image"
 msgstr "Απενεργοποίηση εικόνας"
 
-#: ../panels/user-accounts/um-photo-dialog.c:465
+#: ../panels/user-accounts/um-photo-dialog.c:471
 msgid "Take a photo…"
 msgstr "Λήψη φωτογραφίας…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:483
+#: ../panels/user-accounts/um-photo-dialog.c:489
 msgid "Browse for more pictures…"
 msgstr "Περιηγηθείτε για περισσότερες φωτογραφίες…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:707
+#: ../panels/user-accounts/um-photo-dialog.c:713
 #, c-format
 msgid "Used by %s"
 msgstr "Χρησιμοποιείται από %s"
@@ -7205,9 +7205,6 @@ msgstr "Προτιμήσεις;Ρυθμίσεις;Preferences;Settings;"
 
 #~ msgid "Share Public Folder On This Network"
 #~ msgstr "Διαμοιρασμός δημόσιου φακέλου σε αυτό το δίκτυο"
-
-#~ msgid "_Done"
-#~ msgstr "Έ_τοιμο"
 
 #~ msgid "Immediately"
 #~ msgstr "Αμέσως"
