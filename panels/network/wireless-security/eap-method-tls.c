@@ -63,8 +63,11 @@ validate (EAPMethod *parent)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
 	g_assert (widget);
 	identity = gtk_entry_get_text (GTK_ENTRY (widget));
-	if (!identity || !strlen (identity))
+	if (!identity || !strlen (identity)) {
+		widget_set_error (widget);
 		return FALSE;
+	}
+	widget_unset_error (widget);
 
 	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL))
 		return FALSE;
@@ -72,8 +75,11 @@ validate (EAPMethod *parent)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry"));
 	g_assert (widget);
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
-	if (!password || !strlen (password))
+	if (!password || !strlen (password)) {
+		widget_set_error (widget);
 		return FALSE;
+	}
+	widget_unset_error (widget);
 
 	if (!eap_method_validate_filepicker (parent->builder,
 	                                     "eap_tls_private_key_button",

@@ -48,4 +48,3 @@ helper_fill_secret_entry (NMConnection *connection,
 		}
 	}
 }
-

@@ -31,6 +31,7 @@
 
 #include "eap-method.h"
 #include "wireless-security.h"
+#include "helpers.h"
 
 #define I_NAME_COLUMN   0
 #define I_METHOD_COLUMN 1
@@ -69,8 +70,11 @@ validate (EAPMethod *parent)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
 	g_assert (widget);
 	file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
-	if (!provisioning && !file)
+	if (!provisioning && !file) {
+		widget_set_error (widget);
 		return FALSE;
+	}
+	widget_unset_error (widget);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	g_assert (widget);

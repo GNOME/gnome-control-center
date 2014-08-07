@@ -31,6 +31,7 @@
 
 #include "firewall-helpers.h"
 #include "ce-page-ethernet.h"
+#include "ui-helpers.h"
 
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 
@@ -167,17 +168,23 @@ validate (CEPage        *page,
         entry = gtk_bin_get_child (GTK_BIN (self->device_mac));
         if (entry) {
                 ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
-                if (invalid)
+                if (invalid) {
+                        widget_set_error (entry);
                         return FALSE;
+                }
                 if (ignore)
                         g_byte_array_free (ignore, TRUE);
+                widget_unset_error (entry);
         }
 
         ignore = ce_page_entry_to_mac (self->cloned_mac, ARPHRD_ETHER, &invalid);
-        if (invalid)
+        if (invalid) {
+                widget_set_error (GTK_WIDGET (self->cloned_mac));
                 return FALSE;
+        }
         if (ignore)
                 g_byte_array_free (ignore, TRUE);
+        widget_unset_error (GTK_WIDGET (self->cloned_mac));
 
         ui_to_setting (self);
 

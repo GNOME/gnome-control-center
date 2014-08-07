@@ -28,6 +28,7 @@
 
 #include "shell/list-box-helper.h"
 #include "ce-page-ip6.h"
+#include "ui-helpers.h"
 #include <nm-utils.h>
 
 G_DEFINE_TYPE (CEPageIP6, ce_page_ip6, CE_TYPE_PAGE)
@@ -704,25 +705,34 @@ ui_to_setting (CEPageIP6 *page)
 
                 if (!*text_address && !*text_prefix && !*text_gateway) {
                         /* ignore empty rows */
+                        widget_unset_error (GTK_WIDGET (entry));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         continue;
                 }
 
                 if (inet_pton (AF_INET6, text_address, &tmp_addr) <= 0) {
+                        widget_set_error (GTK_WIDGET (entry));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (entry));
 
                 prefix = strtoul (text_prefix, &end, 10);
                 if (!end || *end || prefix == 0 || prefix > 128) {
+                        widget_set_error (g_object_get_data (G_OBJECT (row), "prefix"));
                         goto out;
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
 
                 if (text_gateway && *text_gateway) {
                         if (inet_pton (AF_INET6, text_gateway, &tmp_gateway) <= 0) {
+                                widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
                                 goto out;
                         }
                         if (!IN6_IS_ADDR_UNSPECIFIED (&tmp_gateway))
                                 have_gateway = TRUE;
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
 
                 addr = nm_ip6_address_new ();
                 nm_ip6_address_set_address (addr, &tmp_addr);
@@ -748,12 +758,15 @@ ui_to_setting (CEPageIP6 *page)
                 text = gtk_entry_get_text (entry);
                 if (!*text) {
                         /* ignore empty rows */
+                        widget_unset_error (GTK_WIDGET (entry));
                         continue;
                 }
 
                 if (inet_pton (AF_INET6, text, &tmp_addr) <= 0) {
+                        widget_set_error (GTK_WIDGET (entry));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (entry));
 
                 nm_setting_ip6_config_add_dns (page->setting, &tmp_addr);
         }
@@ -784,30 +797,42 @@ ui_to_setting (CEPageIP6 *page)
 
                 if (!*text_address && !*text_prefix && !*text_gateway && !*text_metric) {
                         /* ignore empty rows */
+                        widget_unset_error (GTK_WIDGET (entry));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "metric"));
                         continue;
                 }
 
                 if (inet_pton (AF_INET6, text_address, &dest) <= 0) {
+                        widget_set_error (GTK_WIDGET (entry));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (entry));
 
                 prefix = strtoul (text_prefix, &end, 10);
                 if (!end || *end || prefix == 0 || prefix > 128) {
+                        widget_set_error (g_object_get_data (G_OBJECT (row), "prefix"));
                         goto out;
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
 
                 if (inet_pton (AF_INET6, text_gateway, &gateway) <= 0) {
+                        widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         goto out;
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
 
                 metric = 0;
                 if (*text_metric) {
                         errno = 0;
                         metric = strtoul (text_metric, NULL, 10);
                         if (errno) {
+                                widget_set_error (g_object_get_data (G_OBJECT (row), "metric"));
                                 goto out;
                         }
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "metric"));
 
                 route = nm_ip6_route_new ();
                 nm_ip6_route_set_dest (route, &dest);

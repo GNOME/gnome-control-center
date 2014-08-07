@@ -36,5 +36,8 @@ void helper_fill_secret_entry (NMConnection *connection,
                                GType setting_type,
                                HelperSecretFunc func);
 
+extern void widget_set_error   (GtkWidget *widget);
+extern void widget_unset_error (GtkWidget *widget);
+
 #endif  /* _HELPERS_H_ */
 

@@ -32,6 +32,7 @@
 
 #include "firewall-helpers.h"
 #include "ce-page-wifi.h"
+#include "ui-helpers.h"
 
 G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
 
@@ -194,25 +195,33 @@ validate (CEPage        *page,
 
         entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "combo_bssid")));
         ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
-        if (invalid)
+        if (invalid) {
+                widget_set_error (entry);
                 return FALSE;
+        }
         if (ignore)
                 g_byte_array_free (ignore, TRUE);
+        widget_unset_error (entry);
 
         entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "combo_mac")));
         ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
-        if (invalid)
+        if (invalid) {
+                widget_set_error (entry);
                 return FALSE;
+        }
         if (ignore)
                 g_byte_array_free (ignore, TRUE);
+        widget_unset_error (entry);
 
         entry = GTK_WIDGET (gtk_builder_get_object (page->builder, "entry_cloned_mac"));
         ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
-        if (invalid)
+        if (invalid) {
+                widget_set_error (entry);
                 return FALSE;
+        }
         if (ignore)
                 g_byte_array_free (ignore, TRUE);
-
+        widget_unset_error (entry);
 
         ui_to_setting (CE_PAGE_WIFI (page));
 

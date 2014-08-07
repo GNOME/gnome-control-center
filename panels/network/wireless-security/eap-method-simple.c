@@ -59,20 +59,28 @@ validate (EAPMethod *parent)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
-	if (!text || !strlen (text))
+	if (!text || !strlen (text)) {
+		widget_set_error (widget);
 		return FALSE;
+	}
+	widget_unset_error (widget);
 
 	/* Check if the password should always be requested */
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_password_always_ask"));
 	g_assert (widget);
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		widget_unset_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry")));
 		return TRUE;
+	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
-	if (!text || !strlen (text))
+	if (!text || !strlen (text)) {
+		widget_set_error (widget);
 		return FALSE;
+	}
+	widget_unset_error (widget);
 
 	return TRUE;
 }

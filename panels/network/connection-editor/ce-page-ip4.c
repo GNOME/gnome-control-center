@@ -28,6 +28,7 @@
 
 #include "shell/list-box-helper.h"
 #include "ce-page-ip4.h"
+#include "ui-helpers.h"
 #include <nm-utils.h>
 
 G_DEFINE_TYPE (CEPageIP4, ce_page_ip4, CE_TYPE_PAGE)
@@ -726,21 +727,29 @@ ui_to_setting (CEPageIP4 *page)
 
                 if (!*text_address && !*text_netmask && !*text_gateway) {
                         /* ignore empty rows */
+                        widget_unset_error (GTK_WIDGET (entry));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         continue;
                 }
 
                 if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
+                        widget_set_error (GTK_WIDGET (entry));
                         goto out;
                 }
-
+                widget_unset_error (GTK_WIDGET (entry));
 
                 if (!parse_netmask (text_netmask, &prefix)) {
+                        widget_set_error (g_object_get_data (G_OBJECT (row), "network"));
                         goto out;
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
 
                 if (text_gateway && *text_gateway && inet_pton (AF_INET, text_gateway, &tmp_gateway) <= 0) {
+                        widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         goto out;
                 }
+                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
 
                 addr = g_array_sized_new (FALSE, TRUE, sizeof (guint32), 3);
                 g_array_append_val (addr, tmp_addr.s_addr);
@@ -773,12 +782,15 @@ ui_to_setting (CEPageIP4 *page)
                 text = gtk_entry_get_text (entry);
                 if (!*text) {
                         /* ignore empty rows */
+                        widget_unset_error (GTK_WIDGET (entry));
                         continue;
                 }
 
                 if (inet_pton (AF_INET, text, &tmp_addr) <= 0) {
+                        widget_set_error (GTK_WIDGET (entry));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (entry));
 
                 g_array_append_val (dns_servers, tmp_addr.s_addr);
         }
@@ -813,17 +825,24 @@ ui_to_setting (CEPageIP4 *page)
                 }
 
                 if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
+                        widget_set_error (GTK_WIDGET (entry));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (entry));
+
                 address = tmp_addr.s_addr;
 
                 if (!parse_netmask (text_netmask, &netmask)) {
+                        widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
 
                 if (inet_pton (AF_INET, text_gateway, &tmp_addr) <= 0) {
+                        widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
                         goto out;
                 }
+                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
                 gateway = tmp_addr.s_addr;
 
                 metric = 0;
@@ -831,9 +850,11 @@ ui_to_setting (CEPageIP4 *page)
                         errno = 0;
                         metric = strtoul (text_metric, NULL, 10);
                         if (errno) {
+                                widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
                                 goto out;
                         }
                 }
+                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
 
                 route = g_array_sized_new (FALSE, TRUE, sizeof (guint32), 4);
                 g_array_append_val (route, address);

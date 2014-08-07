@@ -31,7 +31,9 @@ libconnection_editor_la_SOURCES = 		\
 	vpn-helpers.h				\
 	vpn-helpers.c				\
 	firewall-helpers.h			\
-	firewall-helpers.c
+	firewall-helpers.c			\
+	ui-helpers.h				\
+	ui-helpers.c
 
 libconnection_editor_la_CPPFLAGS = 		\
 	$(PANEL_CFLAGS)				\

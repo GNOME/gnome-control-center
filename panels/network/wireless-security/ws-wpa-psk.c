@@ -59,16 +59,22 @@ validate (WirelessSecurity *parent, const GByteArray *ssid)
 
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
 	len = strlen (key);
-	if ((len < 8) || (len > 64))
+	if ((len < 8) || (len > 64)) {
+		widget_set_error (entry);
 		return FALSE;
+	}
+	widget_unset_error (entry);
 
 	if (len == 64) {
 		/* Hex PSK */
 		for (i = 0; i < len; i++) {
-			if (!isxdigit (key[i]))
+			if (!isxdigit (key[i])) {
+				widget_set_error (entry);
 				return FALSE;
+			}
 		}
 	}
+	widget_unset_error (entry);
 
 	/* passphrase can be between 8 and 63 characters inclusive */
 

@@ -98,27 +98,37 @@ validate (WirelessSecurity *parent, const GByteArray *ssid)
 	g_assert (entry);
 
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
-	if (!key)
+	if (!key) {
+		widget_set_error (entry);
 		return FALSE;
+	}
 
 	if (sec->type == NM_WEP_KEY_TYPE_KEY) {
 		if ((strlen (key) == 10) || (strlen (key) == 26)) {
 			for (i = 0; i < strlen (key); i++) {
-				if (!isxdigit (key[i]))
+				if (!isxdigit (key[i])) {
+					widget_set_error (entry);
 					return FALSE;
+				}
 			}
 		} else if ((strlen (key) == 5) || (strlen (key) == 13)) {
 			for (i = 0; i < strlen (key); i++) {
-				if (!isascii (key[i]))
+				if (!isascii (key[i])) {
+					widget_set_error (entry);
 					return FALSE;
+				}
 			}
 		} else {
+			widget_set_error (entry);
 			return FALSE;
 		}
 	} else if (sec->type == NM_WEP_KEY_TYPE_PASSPHRASE) {
-		if (!strlen (key) || (strlen (key) > 64))
+		if (!strlen (key) || (strlen (key) > 64)) {
+			widget_set_error (entry);
 			return FALSE;
+		}
 	}
+	widget_unset_error (entry);
 
 	return TRUE;
 }
