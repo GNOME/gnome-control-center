@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-07-28 06:31+0000\n"
-"PO-Revision-Date: 2014-07-28 17:36+0200\n"
+"POT-Creation-Date: 2014-08-07 06:28+0000\n"
+"PO-Revision-Date: 2014-08-07 12:41+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -188,7 +188,7 @@ msgstr "El Bluetooth está físicamente desactivado"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1726
+#: ../panels/printers/pp-new-printer-dialog.c:1688
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -2586,9 +2586,6 @@ msgstr "Controlar cómo se conecta a Internet"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;DNS;"
@@ -4315,6 +4312,19 @@ msgstr "Seleccionar el controlador de la impresora"
 msgid "Loading drivers database..."
 msgstr "Cargando bases de datos de controladores…"
 
+#. Translators: The found device is a JetDirect printer
+#: ../panels/printers/pp-host.c:506
+#| msgid "Remove Printer"
+msgid "JetDirect Printer"
+msgstr "Impresora JetDirect"
+
+#. Translators: The found device is a Line Printer Daemon printer
+#: ../panels/printers/pp-host.c:756
+#| msgctxt "Device kind"
+#| msgid "Printer"
+msgid "LPD Printer"
+msgstr "Impresora LPD"
+
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:66
 #: ../panels/printers/pp-ppd-option-widget.c:70
@@ -4416,34 +4426,34 @@ msgid "%s Active Jobs"
 msgstr "%s trabajos activos"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1709
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1714
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Serial Port"
 msgstr "Puerto serie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1721
+#: ../panels/printers/pp-new-printer-dialog.c:1683
 msgid "Parallel Port"
 msgstr "Puerto paralelo"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1739
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicación: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1744
 #, c-format
 msgid "Address: %s"
 msgstr "Dirección: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1803
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
@@ -4567,17 +4577,17 @@ msgid "No pre-filtering"
 msgstr "Sin prefiltrado"
 
 #. Translators: Name of column showing printer manufacturers
-#: ../panels/printers/pp-ppd-selection-dialog.c:232
+#: ../panels/printers/pp-ppd-selection-dialog.c:233
 msgid "Manufacturer"
 msgstr "Fabricante"
 
 #. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:249
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "Controlador"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:253
+#: ../panels/printers/pp-samba.c:248
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
@@ -7995,10 +8005,6 @@ msgstr "Preferencias;Configuración;"
 
 #~ msgid "No devices supporting color management detected"
 #~ msgstr "No se ha detectado ningún dispositivo que tenga gestión de color"
-
-#~ msgctxt "Device kind"
-#~ msgid "Printer"
-#~ msgstr "Impresora"
 
 #~ msgid "Add device"
 #~ msgstr "Añadir dispositivo"
