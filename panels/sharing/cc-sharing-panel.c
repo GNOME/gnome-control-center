@@ -491,6 +491,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
                                         NULL);
+  gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
   gtk_dialog_run (GTK_DIALOG (dialog));
 
   gtk_widget_hide (dialog);
