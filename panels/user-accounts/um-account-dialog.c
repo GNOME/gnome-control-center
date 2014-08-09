@@ -337,6 +337,8 @@ local_validate (UmAccountDialog *self)
 static gboolean
 local_username_timeout (UmAccountDialog *self)
 {
+        self->local_username_timeout_id = 0;
+
         dialog_validate (self);
 
         return FALSE;
@@ -381,6 +383,8 @@ on_username_changed (GtkComboBoxText *combo,
 static gboolean
 local_name_timeout (UmAccountDialog *self)
 {
+        self->local_username_timeout_id = 0;
+
         dialog_validate (self);
 
         return FALSE;
@@ -468,6 +472,8 @@ on_generate (GtkEntry             *entry,
 static gboolean
 local_password_timeout (UmAccountDialog *self)
 {
+        self->local_password_timeout_id = 0;
+
         dialog_validate (self);
         update_password_match (self);
 
@@ -1241,6 +1247,8 @@ static gboolean
 enterprise_domain_timeout (UmAccountDialog *self)
 {
         GtkTreeIter iter;
+
+        self->enterprise_domain_timeout_id = 0;
 
         if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
                 gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain), &iter, 1, &self->selected_realm, -1);
