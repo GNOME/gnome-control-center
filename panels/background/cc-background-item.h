@@ -21,7 +21,7 @@
 #define __CC_BACKGROUND_ITEM_H
 
 #include <glib-object.h>
-
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
 #include <libgnome-desktop/gnome-bg.h>
@@ -70,12 +70,12 @@ gboolean           cc_background_item_load                (CcBackgroundItem     
 							   GFileInfo                    *info);
 gboolean           cc_background_item_changes_with_time   (CcBackgroundItem             *item);
 
-GIcon     *        cc_background_item_get_thumbnail       (CcBackgroundItem             *item,
+GdkPixbuf *        cc_background_item_get_thumbnail       (CcBackgroundItem             *item,
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
                                                            int                           height,
                                                            int                           scale_factor);
-GIcon     *        cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
+GdkPixbuf *        cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
                                                            int                           height,

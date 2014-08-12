@@ -215,7 +215,6 @@ update_display_preview (CcBackgroundPanel *panel,
   const gint preview_height = 168;
   gint scale_factor;
   GdkPixbuf *pixbuf;
-  GIcon *icon;
   cairo_t *cr;
 
   gtk_widget_get_allocation (widget, &allocation);
@@ -224,13 +223,12 @@ update_display_preview (CcBackgroundPanel *panel,
     return;
 
   scale_factor = gtk_widget_get_scale_factor (widget);
-  icon = cc_background_item_get_frame_thumbnail (current_background,
-                                                 priv->thumb_factory,
-                                                 preview_width,
-                                                 preview_height,
-                                                 scale_factor,
-                                                 -2, TRUE);
-  pixbuf = GDK_PIXBUF (icon);
+  pixbuf = cc_background_item_get_frame_thumbnail (current_background,
+                                                   priv->thumb_factory,
+                                                   preview_width,
+                                                   preview_height,
+                                                   scale_factor,
+                                                   -2, TRUE);
 
   cr = gdk_cairo_create (gtk_widget_get_window (widget));
   gdk_cairo_set_source_pixbuf (cr,

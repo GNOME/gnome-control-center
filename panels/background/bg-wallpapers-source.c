@@ -48,7 +48,7 @@ load_wallpapers (gchar              *key,
 {
   BgWallpapersSourcePrivate *priv = source->priv;
   GtkTreeIter iter;
-  GIcon *pixbuf;
+  GdkPixbuf *pixbuf;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
   cairo_surface_t *surface = NULL;
   gboolean deleted;
@@ -72,7 +72,7 @@ load_wallpapers (gchar              *key,
   if (pixbuf == NULL)
     goto out;
 
-  surface = gdk_cairo_surface_create_from_pixbuf (GDK_PIXBUF (pixbuf), scale_factor, NULL);
+  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   gtk_list_store_set (store, &iter,
                       0, surface,
                       1, item,

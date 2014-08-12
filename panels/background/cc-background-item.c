@@ -25,7 +25,6 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 #include <glib/gi18n-lib.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <libgnome-desktop/gnome-bg.h>
 #include <gdesktop-enums.h>
@@ -85,11 +84,11 @@ G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
 
 static GdkPixbuf *slideshow_emblem = NULL;
 
-static GIcon *
+static GdkPixbuf *
 get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_factor)
 {
+        GdkPixbuf *retval;
         GIcon *icon = NULL;
-        GIcon *retval;
         GtkIconInfo *icon_info = NULL;
         int eh;
         int ew;
@@ -219,7 +218,7 @@ render_at_size (GnomeBG *bg,
         return pixbuf;
 }
 
-GIcon *
+GdkPixbuf *
 cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         GnomeDesktopThumbnailFactory *thumbs,
                                         int                           width,
@@ -229,7 +228,7 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         gboolean                      force_size)
 {
         GdkPixbuf *pixbuf = NULL;
-        GIcon *icon = NULL;
+        GdkPixbuf *retval = NULL;
 
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 	g_return_val_if_fail (width > 0 && height > 0, NULL);
@@ -265,10 +264,10 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
         if (pixbuf != NULL
             && frame != -2
             && gnome_bg_changes_with_time (item->priv->bg)) {
-                icon = get_emblemed_pixbuf (item, pixbuf, scale_factor);
+                retval = get_emblemed_pixbuf (item, pixbuf, scale_factor);
                 g_object_unref (pixbuf);
         } else {
-                icon = G_ICON (pixbuf);
+                retval = pixbuf;
 	}
 
         gnome_bg_get_image_size (item->priv->bg,
@@ -280,11 +279,11 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 
         update_size (item);
 
-        return icon;
+        return retval;
 }
 
 
-GIcon *
+GdkPixbuf *
 cc_background_item_get_thumbnail (CcBackgroundItem             *item,
                                   GnomeDesktopThumbnailFactory *thumbs,
                                   int                           width,

@@ -75,7 +75,7 @@ bg_colors_source_add_color (BgColorsSource               *self,
 {
   CcBackgroundItemFlags flags;
   CcBackgroundItem *item;
-  GIcon *pixbuf;
+  GdkPixbuf *pixbuf;
   cairo_surface_t *surface;
   int scale_factor;
   int thumbnail_height, thumbnail_width;
@@ -108,7 +108,7 @@ bg_colors_source_add_color (BgColorsSource               *self,
                                              thumb_factory,
                                              thumbnail_width, thumbnail_height,
                                              scale_factor);
-  surface = gdk_cairo_surface_create_from_pixbuf (GDK_PIXBUF (pixbuf), scale_factor, NULL);
+  surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   gtk_list_store_insert_with_values (store, &iter, 0,
                                      0, surface,
                                      1, item,
