@@ -705,7 +705,11 @@ ui_to_setting (CEPageIP4 *page)
         }
 
         addresses = g_ptr_array_new_with_free_func (free_addr);
-        children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
+        if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
+                children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
+        else
+                children = NULL;
+
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
@@ -775,7 +779,12 @@ ui_to_setting (CEPageIP4 *page)
         }
 
         dns_servers = g_array_new (FALSE, FALSE, sizeof (guint));
-        children = gtk_container_get_children (GTK_CONTAINER (page->dns_list));
+        if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
+            g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
+                children = gtk_container_get_children (GTK_CONTAINER (page->dns_list));
+        else
+                children = NULL;
+
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
@@ -803,9 +812,13 @@ ui_to_setting (CEPageIP4 *page)
         }
         g_list_free (children);
 
-
         routes = g_ptr_array_new_with_free_func (free_addr);
-        children = gtk_container_get_children (GTK_CONTAINER (page->routes_list));
+        if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
+            g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
+                children = gtk_container_get_children (GTK_CONTAINER (page->routes_list));
+        else
+                children = NULL;
+
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
