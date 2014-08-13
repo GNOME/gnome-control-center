@@ -681,7 +681,11 @@ ui_to_setting (CEPageIP6 *page)
         }
 
         nm_setting_ip6_config_clear_addresses (page->setting);
-        children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
+        if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL))
+                children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
+        else
+                children = NULL;
+
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
@@ -752,7 +756,13 @@ ui_to_setting (CEPageIP6 *page)
         g_list_free (children);
 
         nm_setting_ip6_config_clear_dns (page->setting);
-        children = gtk_container_get_children (GTK_CONTAINER (page->dns_list));
+        if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_AUTO) ||
+            g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_DHCP) ||
+            g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL))
+                children = gtk_container_get_children (GTK_CONTAINER (page->dns_list));
+        else
+                children = NULL;
+
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
@@ -781,7 +791,13 @@ ui_to_setting (CEPageIP6 *page)
         g_list_free (children);
 
         nm_setting_ip6_config_clear_routes (page->setting);
-        children = gtk_container_get_children (GTK_CONTAINER (page->routes_list));
+        if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_AUTO) ||
+            g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_DHCP) ||
+            g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL))
+                children = gtk_container_get_children (GTK_CONTAINER (page->routes_list));
+        else
+                children = NULL;
+
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
