@@ -49,26 +49,29 @@ validate (WirelessSecurity *parent, const GByteArray *ssid)
 {
 	GtkWidget *entry;
 	const char *text;
+	gboolean ret = TRUE;
 
 	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text)) {
 		widget_set_error (entry);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (entry);
 	}
-	widget_unset_error (entry);
 
 	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
-	if (!text || !strlen (text)) {
+	if (!text || *text == '\0') {
 		widget_set_error (entry);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (entry);
 	}
-	widget_unset_error (entry);
 
-	return TRUE;
+	return ret;
 }
 
 static void

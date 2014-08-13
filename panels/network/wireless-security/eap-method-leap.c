@@ -52,26 +52,29 @@ validate (EAPMethod *parent)
 {
 	GtkWidget *widget;
 	const char *text;
+	gboolean ret = TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!text || !strlen (text)) {
 		widget_set_error (widget);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
 	}
-	widget_unset_error (widget);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
-	if (!text || !strlen (text)) {
+	if (!text || *text == '\0') {
 		widget_set_error (widget);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
 	}
-	widget_unset_error (widget);
 
-	return TRUE;
+	return ret;
 }
 
 static void

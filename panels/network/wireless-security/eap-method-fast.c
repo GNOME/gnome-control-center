@@ -62,7 +62,7 @@ validate (EAPMethod *parent)
 	EAPMethod *eap = NULL;
 	const char *file;
 	gboolean provisioning;
-	gboolean valid = FALSE;
+	gboolean ret = TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 	g_assert (widget);
@@ -72,9 +72,10 @@ validate (EAPMethod *parent)
 	file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!provisioning && !file) {
 		widget_set_error (widget);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
 	}
-	widget_unset_error (widget);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	g_assert (widget);
@@ -82,9 +83,14 @@ validate (EAPMethod *parent)
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
-	valid = eap_method_validate (eap);
+	if (!eap_method_validate (eap)) {
+		widget_set_error (widget);
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
+	}
 	eap_method_unref (eap);
-	return valid;
+	return ret;
 }
 
 static void

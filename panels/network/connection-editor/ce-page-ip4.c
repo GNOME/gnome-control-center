@@ -676,7 +676,6 @@ parse_netmask (const char *str, guint32 *prefix)
 static gboolean
 ui_to_setting (CEPageIP4 *page)
 {
-        gboolean valid = FALSE;
         const gchar *method;
         gboolean ignore_auto_dns;
         gboolean ignore_auto_routes;
@@ -685,6 +684,7 @@ ui_to_setting (CEPageIP4 *page)
         GArray *dns_servers = NULL;
         GPtrArray *routes = NULL;
         GList *children, *l;
+        gboolean ret = TRUE;
 
         if (!gtk_switch_get_active (page->enabled)) {
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
@@ -735,21 +735,27 @@ ui_to_setting (CEPageIP4 *page)
 
                 if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
                         widget_set_error (GTK_WIDGET (entry));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (entry));
                 }
-                widget_unset_error (GTK_WIDGET (entry));
 
                 if (!parse_netmask (text_netmask, &prefix)) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "network"));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
 
                 if (text_gateway && *text_gateway && inet_pton (AF_INET, text_gateway, &tmp_gateway) <= 0) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
+
+                if (!ret)
+                        continue;
 
                 addr = g_array_sized_new (FALSE, TRUE, sizeof (guint32), 3);
                 g_array_append_val (addr, tmp_addr.s_addr);
@@ -788,11 +794,11 @@ ui_to_setting (CEPageIP4 *page)
 
                 if (inet_pton (AF_INET, text, &tmp_addr) <= 0) {
                         widget_set_error (GTK_WIDGET (entry));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (entry));
+                        g_array_append_val (dns_servers, tmp_addr.s_addr);
                 }
-                widget_unset_error (GTK_WIDGET (entry));
-
-                g_array_append_val (dns_servers, tmp_addr.s_addr);
         }
         g_list_free (children);
 
@@ -826,24 +832,26 @@ ui_to_setting (CEPageIP4 *page)
 
                 if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
                         widget_set_error (GTK_WIDGET (entry));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (entry));
+                        address = tmp_addr.s_addr;
                 }
-                widget_unset_error (GTK_WIDGET (entry));
-
-                address = tmp_addr.s_addr;
 
                 if (!parse_netmask (text_netmask, &netmask)) {
                         widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
                 }
-                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
 
                 if (inet_pton (AF_INET, text_gateway, &tmp_addr) <= 0) {
                         widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
+                        gateway = tmp_addr.s_addr;
                 }
-                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
-                gateway = tmp_addr.s_addr;
 
                 metric = 0;
                 if (*text_metric) {
@@ -851,10 +859,16 @@ ui_to_setting (CEPageIP4 *page)
                         metric = strtoul (text_metric, NULL, 10);
                         if (errno) {
                                 widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
-                                goto out;
+                                ret = FALSE;
+                        } else {
+                                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
                         }
+                } else {
+                        widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
                 }
-                widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
+
+                if (!ret)
+                        continue;
 
                 route = g_array_sized_new (FALSE, TRUE, sizeof (guint32), 4);
                 g_array_append_val (route, address);
@@ -869,6 +883,10 @@ ui_to_setting (CEPageIP4 *page)
                 g_ptr_array_free (routes, TRUE);
                 routes = NULL;
         }
+
+        if (!ret)
+                goto out;
+
         ignore_auto_dns = !gtk_switch_get_active (page->auto_dns);
         ignore_auto_routes = !gtk_switch_get_active (page->auto_routes);
         never_default = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->never_default));
@@ -883,8 +901,6 @@ ui_to_setting (CEPageIP4 *page)
                       NM_SETTING_IP4_CONFIG_NEVER_DEFAULT, never_default,
                       NULL);
 
-        valid = TRUE;
-
 out:
         if (addresses)
                 g_ptr_array_free (addresses, TRUE);
@@ -895,7 +911,7 @@ out:
         if (routes)
                 g_ptr_array_free (routes, TRUE);
 
-        return valid;
+        return ret;
 }
 
 static gboolean

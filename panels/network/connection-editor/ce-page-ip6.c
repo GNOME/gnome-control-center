@@ -653,12 +653,12 @@ connect_ip6_page (CEPageIP6 *page)
 static gboolean
 ui_to_setting (CEPageIP6 *page)
 {
-        gboolean valid = FALSE;
         const gchar *method;
         gboolean ignore_auto_dns;
         gboolean ignore_auto_routes;
         gboolean never_default;
         GList *children, *l;
+        gboolean ret = TRUE;
 
         if (!gtk_switch_get_active (page->enabled)) {
                 method = NM_SETTING_IP6_CONFIG_METHOD_IGNORE;
@@ -713,26 +713,34 @@ ui_to_setting (CEPageIP6 *page)
 
                 if (inet_pton (AF_INET6, text_address, &tmp_addr) <= 0) {
                         widget_set_error (GTK_WIDGET (entry));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (entry));
                 }
-                widget_unset_error (GTK_WIDGET (entry));
 
                 prefix = strtoul (text_prefix, &end, 10);
                 if (!end || *end || prefix == 0 || prefix > 128) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "prefix"));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
 
                 if (text_gateway && *text_gateway) {
                         if (inet_pton (AF_INET6, text_gateway, &tmp_gateway) <= 0) {
                                 widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
-                                goto out;
+                                ret = FALSE;
+                        } else {
+                                if (!IN6_IS_ADDR_UNSPECIFIED (&tmp_gateway))
+                                        have_gateway = TRUE;
+                                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         }
-                        if (!IN6_IS_ADDR_UNSPECIFIED (&tmp_gateway))
-                                have_gateway = TRUE;
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
+
+                if (!ret)
+                        continue;
 
                 addr = nm_ip6_address_new ();
                 nm_ip6_address_set_address (addr, &tmp_addr);
@@ -764,11 +772,11 @@ ui_to_setting (CEPageIP6 *page)
 
                 if (inet_pton (AF_INET6, text, &tmp_addr) <= 0) {
                         widget_set_error (GTK_WIDGET (entry));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (entry));
+                        nm_setting_ip6_config_add_dns (page->setting, &tmp_addr);
                 }
-                widget_unset_error (GTK_WIDGET (entry));
-
-                nm_setting_ip6_config_add_dns (page->setting, &tmp_addr);
         }
         g_list_free (children);
 
@@ -806,22 +814,25 @@ ui_to_setting (CEPageIP6 *page)
 
                 if (inet_pton (AF_INET6, text_address, &dest) <= 0) {
                         widget_set_error (GTK_WIDGET (entry));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (GTK_WIDGET (entry));
                 }
-                widget_unset_error (GTK_WIDGET (entry));
 
                 prefix = strtoul (text_prefix, &end, 10);
                 if (!end || *end || prefix == 0 || prefix > 128) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "prefix"));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "prefix"));
 
                 if (inet_pton (AF_INET6, text_gateway, &gateway) <= 0) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
-                        goto out;
+                        ret = FALSE;
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
 
                 metric = 0;
                 if (*text_metric) {
@@ -829,10 +840,16 @@ ui_to_setting (CEPageIP6 *page)
                         metric = strtoul (text_metric, NULL, 10);
                         if (errno) {
                                 widget_set_error (g_object_get_data (G_OBJECT (row), "metric"));
-                                goto out;
+                                ret = FALSE;
+                        } else {
+                                widget_unset_error (g_object_get_data (G_OBJECT (row), "metric"));
                         }
+                } else {
+                        widget_unset_error (g_object_get_data (G_OBJECT (row), "metric"));
                 }
-                widget_unset_error (g_object_get_data (G_OBJECT (row), "metric"));
+
+                if (!ret)
+                        continue;
 
                 route = nm_ip6_route_new ();
                 nm_ip6_route_set_dest (route, &dest);
@@ -843,6 +860,9 @@ ui_to_setting (CEPageIP6 *page)
                 nm_ip6_route_unref (route);
         }
         g_list_free (children);
+
+        if (!ret)
+                goto out;
 
         ignore_auto_dns = !gtk_switch_get_active (page->auto_dns);
         ignore_auto_routes = !gtk_switch_get_active (page->auto_routes);
@@ -855,11 +875,9 @@ ui_to_setting (CEPageIP6 *page)
                       NM_SETTING_IP6_CONFIG_NEVER_DEFAULT, never_default,
                       NULL);
 
-        valid = TRUE;
-
 out:
 
-        return valid;
+        return ret;
 }
 
 static gboolean

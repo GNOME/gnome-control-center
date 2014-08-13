@@ -189,39 +189,45 @@ validate (CEPage        *page,
         GtkWidget *entry;
         GByteArray *ignore;
         gboolean invalid;
-        gboolean success;
         gchar *security;
         NMSettingWireless *setting;
+        gboolean ret = TRUE;
 
         entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "combo_bssid")));
         ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
         if (invalid) {
                 widget_set_error (entry);
-                return FALSE;
+                ret = FALSE;
+        } else {
+                if (ignore)
+                        g_byte_array_free (ignore, TRUE);
+                widget_unset_error (entry);
         }
-        if (ignore)
-                g_byte_array_free (ignore, TRUE);
-        widget_unset_error (entry);
 
         entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (page->builder, "combo_mac")));
         ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
         if (invalid) {
                 widget_set_error (entry);
-                return FALSE;
+                ret = FALSE;
+        } else {
+                if (ignore)
+                        g_byte_array_free (ignore, TRUE);
+                widget_unset_error (entry);
         }
-        if (ignore)
-                g_byte_array_free (ignore, TRUE);
-        widget_unset_error (entry);
 
         entry = GTK_WIDGET (gtk_builder_get_object (page->builder, "entry_cloned_mac"));
         ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
         if (invalid) {
                 widget_set_error (entry);
-                return FALSE;
+                ret = FALSE;
+        } else {
+                if (ignore)
+                        g_byte_array_free (ignore, TRUE);
+                widget_unset_error (entry);
         }
-        if (ignore)
-                g_byte_array_free (ignore, TRUE);
-        widget_unset_error (entry);
+
+        if (!ret)
+                return ret;
 
         ui_to_setting (CE_PAGE_WIFI (page));
 
@@ -229,11 +235,11 @@ validate (CEPage        *page,
         setting = CE_PAGE_WIFI (page)->setting;
         security = g_strdup (nm_setting_wireless_get_security (setting));
         g_object_set (setting, NM_SETTING_WIRELESS_SEC, NULL, NULL);
-        success = nm_setting_verify (NM_SETTING (setting), NULL, error);
+        ret = nm_setting_verify (NM_SETTING (setting), NULL, error);
         g_object_set (setting, NM_SETTING_WIRELESS_SEC, security, NULL);
         g_free (security);
 
-        return success;
+        return ret;
 }
 
 static void

@@ -59,41 +59,57 @@ validate (EAPMethod *parent)
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
 	const char *password, *identity;
+	gboolean ret = TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
 	g_assert (widget);
 	identity = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!identity || !strlen (identity)) {
 		widget_set_error (widget);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
 	}
-	widget_unset_error (widget);
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL))
-		return FALSE;
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button"));
+	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL)) {
+		widget_set_error (widget);
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
+	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry"));
 	g_assert (widget);
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!password || !strlen (password)) {
 		widget_set_error (widget);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		widget_unset_error (widget);
 	}
-	widget_unset_error (widget);
 
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button"));
 	if (!eap_method_validate_filepicker (parent->builder,
 	                                     "eap_tls_private_key_button",
 	                                     TYPE_PRIVATE_KEY,
 	                                     password,
-	                                     &format))
-		return FALSE;
-
-	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
-		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL))
-			return FALSE;
+	                                     &format)) {
+	        widget_set_error (widget);
+		ret = FALSE;
 	}
 
-	return TRUE;
+	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button"));
+		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL)) {
+			widget_set_error (widget);
+			ret = FALSE;
+		} else {
+			widget_unset_error (widget);
+		}
+	}
+
+	return ret;
 }
 
 static void

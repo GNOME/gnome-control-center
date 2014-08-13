@@ -164,27 +164,33 @@ validate (CEPage        *page,
         gboolean invalid = FALSE;
         GByteArray *ignore;
         GtkWidget *entry;
+        gboolean ret = TRUE;
 
         entry = gtk_bin_get_child (GTK_BIN (self->device_mac));
         if (entry) {
                 ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
                 if (invalid) {
                         widget_set_error (entry);
-                        return FALSE;
+                        ret = FALSE;
+                } else {
+                        if (ignore)
+                                g_byte_array_free (ignore, TRUE);
+                        widget_unset_error (entry);
                 }
-                if (ignore)
-                        g_byte_array_free (ignore, TRUE);
-                widget_unset_error (entry);
         }
 
         ignore = ce_page_entry_to_mac (self->cloned_mac, ARPHRD_ETHER, &invalid);
         if (invalid) {
                 widget_set_error (GTK_WIDGET (self->cloned_mac));
-                return FALSE;
+                ret = FALSE;
+        } else {
+                if (ignore)
+                        g_byte_array_free (ignore, TRUE);
+                widget_unset_error (GTK_WIDGET (self->cloned_mac));
         }
-        if (ignore)
-                g_byte_array_free (ignore, TRUE);
-        widget_unset_error (GTK_WIDGET (self->cloned_mac));
+
+        if (!ret)
+                return ret;
 
         ui_to_setting (self);
 
