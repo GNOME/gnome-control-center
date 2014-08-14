@@ -36,9 +36,14 @@
 typedef enum {
         UM_LOCAL,
         UM_ENTERPRISE,
-        UM_OFFLINE,
-        NUM_MODES
+        UM_OFFLINE
 } UmAccountMode;
+
+static const char * const mode_pages[] = {
+  "_local",
+  "_enterprise",
+  "_offline"
+};
 
 static void   mode_change          (UmAccountDialog *self,
                                     UmAccountMode mode);
@@ -64,7 +69,7 @@ static void   um_account_dialog_response  (GtkDialog *dialog,
 
 struct _UmAccountDialog {
         GtkDialog parent;
-        GtkWidget *notebook;
+        GtkWidget *stack;
         GtkWidget *container_widget;
         GSimpleAsyncResult *async;
         GCancellable *cancellable;
@@ -147,7 +152,7 @@ begin_action (UmAccountDialog *self)
         g_debug ("Beginning action, disabling dialog controls");
 
         if (self->enterprise_check_credentials) {
-                gtk_widget_set_sensitive (self->notebook, FALSE);
+                gtk_widget_set_sensitive (self->stack, FALSE);
         }
         gtk_widget_set_sensitive (self->enterprise_button, FALSE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
@@ -162,7 +167,7 @@ finish_action (UmAccountDialog *self)
         g_debug ("Completed domain action");
 
         if (self->enterprise_check_credentials) {
-                gtk_widget_set_sensitive (self->notebook, TRUE);
+                gtk_widget_set_sensitive (self->stack, TRUE);
         }
         gtk_widget_set_sensitive (self->enterprise_button, TRUE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
@@ -1395,7 +1400,7 @@ mode_change (UmAccountDialog *self,
                 mode = available ? UM_ENTERPRISE : UM_OFFLINE;
         }
 
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (self->notebook), mode);
+        gtk_stack_set_visible_child_name (GTK_STACK (self->stack), mode_pages[mode]);
 
         /* The enterprise toggle state */
         active = (mode != UM_LOCAL);
@@ -1469,8 +1474,8 @@ um_account_dialog_init (UmAccountDialog *self)
         gtk_container_add (GTK_CONTAINER (content), widget);
         self->container_widget = widget;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
-        self->notebook = widget;
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, "stack"));
+        self->stack = widget;
 
         local_init (self, builder);
         enterprise_init (self, builder);

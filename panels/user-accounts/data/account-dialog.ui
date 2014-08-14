@@ -32,11 +32,10 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkNotebook" id="notebook">
+          <object class="GtkStack" id="stack">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="show_tabs">False</property>
-            <property name="show_border">False</property>
+            <property name="transition-type">none</property>
             <property name="border_width">6</property>
             <property name="margin_bottom">6</property>
             <child>
@@ -367,6 +366,9 @@
                   </packing>
                 </child>
               </object>
+              <packing>
+                <property name="name">_local</property>
+              </packing>
             </child>
             <child>
               <object class="GtkGrid" id="enterprise-area">
@@ -563,7 +565,7 @@
                 </child>
               </object>
               <packing>
-                <property name="position">1</property>
+                <property name="name">_enterprise</property>
               </packing>
             </child>
             <child>
@@ -634,7 +636,7 @@ enterprise login accounts.</property>
                 </child>
               </object>
               <packing>
-                <property name="position">2</property>
+                <property name="name">_offline</property>
               </packing>
             </child>
           </object>
