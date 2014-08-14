@@ -24,7 +24,7 @@
 #define EMPTY_TEXT "\xe2\x80\x94"
 
 struct _UmEditableButtonPrivate {
-        GtkNotebook *notebook;
+        GtkStack    *stack;
         GtkLabel    *label;
         GtkButton   *button;
 
@@ -37,6 +37,9 @@ struct _UmEditableButtonPrivate {
 };
 
 #define UM_EDITABLE_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), UM_TYPE_EDITABLE_BUTTON, UmEditableButtonPrivate))
+
+#define PAGE_LABEL "_label"
+#define PAGE_BUTTON "_button"
 
 enum {
         PROP_0,
@@ -99,7 +102,7 @@ um_editable_button_set_editable (UmEditableButton *button,
         if (priv->editable != editable) {
                 priv->editable = editable;
 
-                gtk_notebook_set_current_page (priv->notebook, editable ? 1 : 0);
+                gtk_stack_set_visible_child_name (priv->stack, editable ? PAGE_BUTTON : PAGE_LABEL);
 
                 g_object_notify (G_OBJECT (button), "editable");
         }
@@ -127,6 +130,7 @@ update_fonts (UmEditableButton *button)
         }
         if (priv->weight_set) {
                 attr = pango_attr_weight_new (priv->weight);
+
                 pango_attr_list_insert (attrs, attr);
         }
 
@@ -396,29 +400,27 @@ um_editable_button_init (UmEditableButton *button)
         priv->scale = 1.0;
         priv->scale_set = FALSE;
 
-        priv->notebook = (GtkNotebook*)gtk_notebook_new ();
-        gtk_notebook_set_show_tabs (priv->notebook, FALSE);
-        gtk_notebook_set_show_border (priv->notebook, FALSE);
+        priv->stack = GTK_STACK (gtk_stack_new ());
 
         priv->label = (GtkLabel*)gtk_label_new (EMPTY_TEXT);
         gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->label, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         priv->button = (GtkButton*)gtk_button_new_with_label (EMPTY_TEXT);
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
         gtk_button_set_alignment (priv->button, 0.0, 0.5);
-        gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->button, NULL);
+        gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), button);
         g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->button)), "size-allocate", G_CALLBACK (update_button_padding), button);
 
-        gtk_container_add (GTK_CONTAINER (button), (GtkWidget*)priv->notebook);
+        gtk_container_add (GTK_CONTAINER (button), GTK_WIDGET (priv->stack));
 
-        gtk_widget_show ((GtkWidget*)priv->notebook);
+        gtk_widget_show ((GtkWidget*)priv->stack);
         gtk_widget_show ((GtkWidget*)priv->label);
         gtk_widget_show ((GtkWidget*)priv->button);
 
-        gtk_notebook_set_current_page (priv->notebook, 0);
+        gtk_stack_set_visible_child_name (priv->stack, PAGE_LABEL);
 }
 
 GtkWidget *
