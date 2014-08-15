@@ -857,7 +857,7 @@ generate_ssid_for_hotspot (NetDeviceWifi *device_wifi)
         return ssid_array;
 }
 
-#define WPA_PASSKEY_SIZE
+#define WPA_PASSKEY_SIZE 8
 static void
 set_wpa_key (NMSettingWirelessSecurity *sws)
 {
@@ -1073,7 +1073,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
 
         sws = (NMSettingWirelessSecurity*) nm_setting_wireless_security_new ();
 
-        if (mode == NM_SETTING_WIRELESS_MODE_AP) {
+        if (g_strcmp0 (mode, NM_SETTING_WIRELESS_MODE_AP) == 0) {
                 if (caps & NM_WIFI_DEVICE_CAP_RSN) {
                         set_wpa_key (sws);
                         nm_setting_wireless_security_add_proto (sws, "rsn");
