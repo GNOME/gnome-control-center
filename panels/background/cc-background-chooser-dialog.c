@@ -426,6 +426,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gchar *pictures_dir_basename;
   gchar *pictures_dir_uri;
   GtkTargetList *target_list;
+  GtkSizeGroup *size_group;
 
   chooser->priv = CC_CHOOSER_DIALOG_GET_PRIVATE (chooser);
   priv = chooser->priv;
@@ -592,6 +593,11 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_dialog_add_button (GTK_DIALOG (chooser), _("Select"), GTK_RESPONSE_OK);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_OK, FALSE);
+
+  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (chooser), GTK_RESPONSE_CANCEL);
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
+  gtk_size_group_add_widget (size_group, button);
+  gtk_size_group_add_widget (size_group, hbox);
 
   on_view_toggled (GTK_TOGGLE_BUTTON (button1), chooser);
   gtk_widget_show_all (vbox);
