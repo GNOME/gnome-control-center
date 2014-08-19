@@ -1339,7 +1339,7 @@ show_selected_layout (CcRegionPanel *self)
 
                 if (engine_desc) {
                         layout = ibus_engine_desc_get_layout (engine_desc);
-                        variant = "";
+                        variant = ibus_engine_desc_get_layout_variant (engine_desc);
                 } else {
                         g_warning ("Couldn't find IBus input source '%s'", id);
                         return;
@@ -1350,7 +1350,7 @@ show_selected_layout (CcRegionPanel *self)
                 return;
         }
 
-        if (variant[0])
+        if (variant && variant[0])
                 commandline = g_strdup_printf ("gkbd-keyboard-display -l \"%s\t%s\"",
                                                layout, variant);
         else
