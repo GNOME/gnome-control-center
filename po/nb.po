@@ -8,11 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.13.x\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-15 15:32+0000\n"
-"PO-Revision-Date: 2014-08-07 13:37+0100\n"
-"Last-Translator: Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-23 11:07+0200\n"
+"PO-Revision-Date: 2014-08-23 11:10+0200\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: Norwegian bokmål\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +114,7 @@ msgstr "Du kan legge til bilder i mappen «%s» for å vise dem her"
 #: ../panels/network/net-device-wifi.c:1448
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:466
+#: ../panels/privacy/cc-privacy-panel.c:468
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
@@ -143,8 +142,8 @@ msgstr "flere størrelser"
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
 #: ../panels/background/cc-background-item.c:201
 #, c-format
-msgid "%d × %d"
-msgstr "%d × %d"
+msgid "%d ے %d"
+msgstr "%d ے %d"
 
 #: ../panels/background/cc-background-item.c:327
 msgid "No Desktop Background"
@@ -1065,8 +1064,8 @@ msgstr "Primær"
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
 #: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
-#: ../panels/privacy/cc-privacy-panel.c:82
-#: ../panels/privacy/cc-privacy-panel.c:122
+#: ../panels/privacy/cc-privacy-panel.c:84
+#: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -1274,7 +1273,7 @@ msgid "Windows software"
 msgstr "Windows programvare"
 
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1704
+#: ../panels/keyboard/keyboard-shortcuts.c:1917
 msgid "Section"
 msgstr "Seksjon"
 
@@ -1595,7 +1594,7 @@ msgstr "Høy kontrast på eller av"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1168
+#: ../panels/keyboard/keyboard-shortcuts.c:1217
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1737,16 +1736,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:588
-#: ../panels/keyboard/keyboard-shortcuts.c:596
+#: ../panels/keyboard/keyboard-shortcuts.c:634
+#: ../panels/keyboard/keyboard-shortcuts.c:642
 msgid "Custom Shortcuts"
 msgstr "Egendefinerte snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:813
+#: ../panels/keyboard/keyboard-shortcuts.c:859
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1309
+#: ../panels/keyboard/keyboard-shortcuts.c:1356
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1757,7 +1756,7 @@ msgstr ""
 "tasten.\n"
 "Prøv en tastekombinasjon som inkluderer Control, Alt eller Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1341
+#: ../panels/keyboard/keyboard-shortcuts.c:1386
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1766,15 +1765,33 @@ msgstr ""
 "Snarvei «%s» er allerede brukt for\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1346
+#: ../panels/keyboard/keyboard-shortcuts.c:1391
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Hvis du omfordeler snarveien til «%s» fjernes snarveien til «%s»."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1352
+#: ../panels/keyboard/keyboard-shortcuts.c:1397
 msgid "_Reassign"
 msgstr "_Omfordel"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1429
+#, c-format
+msgid ""
+"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+"automatically set it to \"%s\"?"
+msgstr "Snarveien «%s» har en assosiert snarvei «%s». Vil du sette denne til «%s» automatisk?"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1435
+#, c-format
+msgid ""
+"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
+"if you move forward."
+msgstr "«%s» er assosiert med «%s», denne snarveien vil bli slått av hvis du går videre."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
+msgid "_Assign"
+msgstr "_Tildel"
 
 #: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
@@ -3546,8 +3563,8 @@ msgstr "Vis detaljer ved låsing av skjerm"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
 #: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
-#: ../panels/privacy/cc-privacy-panel.c:82
-#: ../panels/privacy/cc-privacy-panel.c:122
+#: ../panels/privacy/cc-privacy-panel.c:84
+#: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -4634,43 +4651,43 @@ msgstr ""
 "Beklager! Systemets utskriftstjeneste\n"
 "ser ikke ut til å være tilgjengelig."
 
-#: ../panels/privacy/cc-privacy-panel.c:250 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Lås skjerm"
 
-#: ../panels/privacy/cc-privacy-panel.c:360 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Bruk og historikk"
 
-#: ../panels/privacy/cc-privacy-panel.c:485
+#: ../panels/privacy/cc-privacy-panel.c:487
 msgid "Empty all items from Trash?"
 msgstr "Tøm alle oppføringer fra papirkurven?"
 
-#: ../panels/privacy/cc-privacy-panel.c:486
+#: ../panels/privacy/cc-privacy-panel.c:488
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Alle elementer i papirkurven slettes permanent."
 
-#: ../panels/privacy/cc-privacy-panel.c:487 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Tøm papirkurv"
 
-#: ../panels/privacy/cc-privacy-panel.c:510
+#: ../panels/privacy/cc-privacy-panel.c:512
 msgid "Delete all the temporary files?"
 msgstr "Slett alle midlertidige filer?"
 
-#: ../panels/privacy/cc-privacy-panel.c:511
+#: ../panels/privacy/cc-privacy-panel.c:513
 msgid "All the temporary files will be permanently deleted."
 msgstr "Alle midlertidige filer slettes permanent."
 
-#: ../panels/privacy/cc-privacy-panel.c:512 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Fjern midlertidige filer"
 
-#: ../panels/privacy/cc-privacy-panel.c:534 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Tøm papirkurv og midlertidige filer"
 
-#: ../panels/privacy/cc-privacy-panel.c:574 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Bruk av programvare"
 
@@ -4818,6 +4835,14 @@ msgstr "_Send statistikk om bruk av programvare"
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Personvernregler"
+
+#: ../panels/privacy/privacy.ui.h:42
+msgid "_Location Services"
+msgstr "_Stedstjenester"
+
+#: ../panels/privacy/privacy.ui.h:43
+msgid "Used to determine your geographical location"
+msgstr "Brukes til å bestemme din geografiske plassering"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
@@ -7069,6 +7094,3 @@ msgstr "System"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Brukervalg;Innstillinger;"
-
-#~ msgid "%d ے %d"
-#~ msgstr "%d ے %d"
