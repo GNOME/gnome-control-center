@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-16 11:45+0000\n"
-"PO-Revision-Date: 2014-08-19 19:16+0800\n"
+"POT-Creation-Date: 2014-08-23 18:31+0000\n"
+"PO-Revision-Date: 2014-08-25 14:05+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: zh_TW\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.6.5\n"
 
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
@@ -119,7 +119,7 @@ msgstr "你可以將影像加入你的%s資料夾，它們會顯示在這裏"
 #: ../panels/network/net-device-wifi.c:1448
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:466
+#: ../panels/privacy/cc-privacy-panel.c:468
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
@@ -1049,8 +1049,8 @@ msgstr "主要"
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
 #: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
-#: ../panels/privacy/cc-privacy-panel.c:82
-#: ../panels/privacy/cc-privacy-panel.c:122
+#: ../panels/privacy/cc-privacy-panel.c:84
+#: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -1257,7 +1257,7 @@ msgid "Windows software"
 msgstr "Windows 軟件"
 
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1704
+#: ../panels/keyboard/keyboard-shortcuts.c:1917
 msgid "Section"
 msgstr "節"
 
@@ -1576,7 +1576,7 @@ msgstr "高對比開或關"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1168
+#: ../panels/keyboard/keyboard-shortcuts.c:1217
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1716,16 +1716,16 @@ msgstr "要編輯捷徑鍵，點選相應的列並按下新的按鍵組合，或
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:588
-#: ../panels/keyboard/keyboard-shortcuts.c:596
+#: ../panels/keyboard/keyboard-shortcuts.c:634
+#: ../panels/keyboard/keyboard-shortcuts.c:642
 msgid "Custom Shortcuts"
 msgstr "自選捷徑鍵"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:813
+#: ../panels/keyboard/keyboard-shortcuts.c:859
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1309
+#: ../panels/keyboard/keyboard-shortcuts.c:1356
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1735,7 +1735,7 @@ msgstr ""
 "捷徑“%s”無法使用，原因是會無法按下此按鍵。\n"
 "請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1341
+#: ../panels/keyboard/keyboard-shortcuts.c:1386
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1744,15 +1744,36 @@ msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
 "“%s”"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1346
+#: ../panels/keyboard/keyboard-shortcuts.c:1391
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果你重新指派捷徑鍵為「%s」，「%s」的捷徑鍵就會停用。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1352
+#: ../panels/keyboard/keyboard-shortcuts.c:1397
 msgid "_Reassign"
 msgstr "重新指派(_R)"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1429
+#, c-format
+msgid ""
+"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+"automatically set it to \"%s\"?"
+msgstr "捷徑鍵「%s」已指派「%s」捷徑。你想要自動將它設定為「%s」嗎？"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1435
+#, c-format
+#| msgid ""
+#| "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#| "disabled."
+msgid ""
+"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
+"if you move forward."
+msgstr "「%s」目前指派為「%s」，如果你繼續這個捷徑鍵就會停用。"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
+msgid "_Assign"
+msgstr "指派(_R)"
 
 #: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
@@ -3495,8 +3516,8 @@ msgstr "在鎖定畫面中顯示詳細資料"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
 #: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
-#: ../panels/privacy/cc-privacy-panel.c:82
-#: ../panels/privacy/cc-privacy-panel.c:122
+#: ../panels/privacy/cc-privacy-panel.c:84
+#: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -4568,43 +4589,43 @@ msgstr ""
 "抱歉！系統列印服務\n"
 "似乎無法使用。"
 
-#: ../panels/privacy/cc-privacy-panel.c:250 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "螢幕鎖定"
 
-#: ../panels/privacy/cc-privacy-panel.c:360 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "使用與歷史紀錄"
 
-#: ../panels/privacy/cc-privacy-panel.c:485
+#: ../panels/privacy/cc-privacy-panel.c:487
 msgid "Empty all items from Trash?"
 msgstr "要清除回收筒中所有的項目？"
 
-#: ../panels/privacy/cc-privacy-panel.c:486
+#: ../panels/privacy/cc-privacy-panel.c:488
 msgid "All items in the Trash will be permanently deleted."
 msgstr "所有在回收筒中的項目會永遠刪除。"
 
-#: ../panels/privacy/cc-privacy-panel.c:487 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "清理回收筒(_E)"
 
-#: ../panels/privacy/cc-privacy-panel.c:510
+#: ../panels/privacy/cc-privacy-panel.c:512
 msgid "Delete all the temporary files?"
 msgstr "刪除所有暫存檔案？"
 
-#: ../panels/privacy/cc-privacy-panel.c:511
+#: ../panels/privacy/cc-privacy-panel.c:513
 msgid "All the temporary files will be permanently deleted."
 msgstr "所有的暫存檔案會永遠刪除。"
 
-#: ../panels/privacy/cc-privacy-panel.c:512 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "清理暫存檔案(_P)"
 
-#: ../panels/privacy/cc-privacy-panel.c:534 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "清除回收筒與暫存檔案"
 
-#: ../panels/privacy/cc-privacy-panel.c:574 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "軟件使用率"
 
@@ -4743,6 +4764,14 @@ msgstr "傳送軟件使用率統計(_S)"
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "私隱權原則"
+
+#: ../panels/privacy/privacy.ui.h:42
+msgid "_Location Services"
+msgstr "位置服務(_L)"
+
+#: ../panels/privacy/privacy.ui.h:43
+msgid "Used to determine your geographical location"
+msgstr "用來判斷你所在的地理位置"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
