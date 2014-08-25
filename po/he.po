@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-27 12:53+0300\n"
-"PO-Revision-Date: 2014-06-27 12:48+0300\n"
+"POT-Creation-Date: 2014-08-25 16:51+0300\n"
+"PO-Revision-Date: 2014-08-25 17:26+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -68,88 +68,90 @@ msgid "Span"
 msgstr "פרישה"
 
 #. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:286
+#: ../panels/background/cc-background-chooser-dialog.c:442
 msgid "Select Background"
 msgstr "בחירת רקע"
 
-#: ../panels/background/cc-background-chooser-dialog.c:307
+#: ../panels/background/cc-background-chooser-dialog.c:463
 msgid "Wallpapers"
 msgstr "רקעים"
 
-#: ../panels/background/cc-background-chooser-dialog.c:316
+#: ../panels/background/cc-background-chooser-dialog.c:472
 msgid "Pictures"
 msgstr "תמונות"
 
-#: ../panels/background/cc-background-chooser-dialog.c:324
+#: ../panels/background/cc-background-chooser-dialog.c:481
 msgid "Colors"
 msgstr "צבעים"
 
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:372
+#: ../panels/background/cc-background-chooser-dialog.c:540
 msgid "No Pictures Found"
 msgstr "לא נמצא תמונות"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:390
+#: ../panels/background/cc-background-chooser-dialog.c:558
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "בית"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:402
+#: ../panels/background/cc-background-chooser-dialog.c:570
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תופענה כאן"
 
-#: ../panels/background/cc-background-chooser-dialog.c:430
+#: ../panels/background/cc-background-chooser-dialog.c:592
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1198
-#: ../panels/network/net-device-wifi.c:1406
+#: ../panels/network/net-device-wifi.c:1240
+#: ../panels/network/net-device-wifi.c:1448
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:466
+#: ../panels/privacy/cc-privacy-panel.c:468
+#: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:491
-#: ../panels/user-accounts/data/account-dialog.ui.h:16
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:267
 #: ../panels/user-accounts/um-photo-dialog.c:95
-#: ../panels/user-accounts/um-photo-dialog.c:221
-#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-photo-dialog.c:222
+#: ../panels/user-accounts/um-user-panel.c:513
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: ../panels/background/cc-background-chooser-dialog.c:431
+#: ../panels/background/cc-background-chooser-dialog.c:593
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
 msgstr "בחירה"
 
-#: ../panels/background/cc-background-item.c:148
+#: ../panels/background/cc-background-item.c:197
 msgid "multiple sizes"
 msgstr "מספר גדלים"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:152
+#: ../panels/background/cc-background-item.c:201
 #, c-format
 msgid "%d ے %d"
 msgstr "%d ے %d"
 
-#: ../panels/background/cc-background-item.c:280
+#: ../panels/background/cc-background-item.c:327
 msgid "No Desktop Background"
 msgstr "אין רקע לשולחן העבודה"
 
-#: ../panels/background/cc-background-panel.c:492
+#: ../panels/background/cc-background-panel.c:493
 msgid "Current background"
 msgstr "הרקע הנוכחי"
 
@@ -176,7 +178,7 @@ msgstr "מתאם ה־Bluetooth מנוטרל באמצעות מפסק חומרה"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1726
+#: ../panels/printers/pp-new-printer-dialog.c:1688
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -349,7 +351,7 @@ msgstr "פרופילי ICC נתמכים"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: ../panels/color/cc-color-panel.c:243
-#: ../panels/network/wireless-security/eap-method-fast.c:410
+#: ../panels/network/wireless-security/eap-method-fast.c:420
 msgid "All files"
 msgstr "כל הקבצים"
 
@@ -497,7 +499,7 @@ msgstr "כיול התצוגה"
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1462
+#: ../panels/user-accounts/um-account-dialog.c:1468
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -849,6 +851,11 @@ msgstr "לא נמצאו שפות"
 msgid "Language"
 msgstr "שפה"
 
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_סיום"
+
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
 msgid "%e %B %Y, %l:%M %p"
@@ -859,21 +866,44 @@ msgstr "%e ב%B %Y, %l:%M %p"
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
+#. Translators: "city, country"
+#: ../panels/datetime/cc-datetime-panel.c:523
+#, c-format
+msgctxt "timezone loc"
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#. Update the timezone on the listbow row
+#. Translators: "timezone (details)"
+#: ../panels/datetime/cc-datetime-panel.c:553
+#, c-format
+msgctxt "timezone desc"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:558
+#: ../panels/datetime/cc-datetime-panel.c:561
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:563
+#: ../panels/datetime/cc-datetime-panel.c:566
 msgid "%l:%M %p"
 msgstr "‎%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:568
+#: ../panels/datetime/cc-datetime-panel.c:571
 msgid "%R"
 msgstr "%R"
+
+#. Update the text bubble in the timezone map
+#. Translators: "timezone (utc shift)"
+#: ../panels/datetime/cc-datetime-panel.c:576
+#, c-format
+msgctxt "timezone map"
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "January"
@@ -1027,8 +1057,8 @@ msgstr "ראשי"
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
 #: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
-#: ../panels/privacy/cc-privacy-panel.c:82
-#: ../panels/privacy/cc-privacy-panel.c:122
+#: ../panels/privacy/cc-privacy-panel.c:84
+#: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -1235,7 +1265,7 @@ msgid "Windows software"
 msgstr "תכנה של Windows"
 
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1705
+#: ../panels/keyboard/keyboard-shortcuts.c:1917
 msgid "Section"
 msgstr "אגף"
 
@@ -1554,9 +1584,9 @@ msgstr "ביטול/הפעלה של ניגודיות גבוהה"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:274
-#: ../panels/keyboard/cc-keyboard-option.c:393
-#: ../panels/keyboard/keyboard-shortcuts.c:1168
+#: ../panels/keyboard/cc-keyboard-option.c:276
+#: ../panels/keyboard/cc-keyboard-option.c:395
+#: ../panels/keyboard/keyboard-shortcuts.c:1217
 #: ../panels/network/network-wifi.ui.h:29
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1568,7 +1598,7 @@ msgstr "מנוטרל"
 #. * chooser'. AltGr is often used for this purpose. See
 #. * https://live.gnome.org/Design/SystemSettings/RegionAndLanguage
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:352
+#: ../panels/keyboard/cc-keyboard-option.c:354
 msgid "Alternative Characters Key"
 msgstr "מקש לתווים חלופיים"
 
@@ -1576,11 +1606,11 @@ msgstr "מקש לתווים חלופיים"
 #. * sequences that are combined to form a single character.
 #. * See http://en.wikipedia.org/wiki/Compose_key
 #.
-#: ../panels/keyboard/cc-keyboard-option.c:361
+#: ../panels/keyboard/cc-keyboard-option.c:363
 msgid "Compose Key"
 msgstr "מקש Compose"
 
-#: ../panels/keyboard/cc-keyboard-option.c:366
+#: ../panels/keyboard/cc-keyboard-option.c:368
 msgid "Modifiers-only switch to next source"
 msgstr "העברה באמצעות מקשי החלפה בלבד למקור הבא"
 
@@ -1605,7 +1635,7 @@ msgstr "קיצור דרך מותאם אישית"
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1463
+#: ../panels/user-accounts/um-account-dialog.c:1469
 msgid "_Add"
 msgstr "הו_ספה"
 
@@ -1698,16 +1728,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "קיצורי דרך"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:588
-#: ../panels/keyboard/keyboard-shortcuts.c:596
+#: ../panels/keyboard/keyboard-shortcuts.c:634
+#: ../panels/keyboard/keyboard-shortcuts.c:642
 msgid "Custom Shortcuts"
 msgstr "קיצורי דרך מותאמים אישית"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:813
+#: ../panels/keyboard/keyboard-shortcuts.c:859
 msgid "<Unknown Action>"
 msgstr "<פעולה לא ידועה>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1309
+#: ../panels/keyboard/keyboard-shortcuts.c:1356
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1717,7 +1747,7 @@ msgstr ""
 "לא ניתן להשתמש בקיצור הדרך „%s“ מכיוון שלא ניתן יהיה להקליד באמצעות מקש זה.\n"
 "נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1341
+#: ../panels/keyboard/keyboard-shortcuts.c:1386
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1726,15 +1756,34 @@ msgstr ""
 "קיצור הדרך „%s“ כבר משמש ל:\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1346
+#: ../panels/keyboard/keyboard-shortcuts.c:1391
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "אם קיצור הדרך יוקצה מחדש אל „%s“, קיצור הדרך „%s“ יבוטל."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1352
+#: ../panels/keyboard/keyboard-shortcuts.c:1397
 msgid "_Reassign"
 msgstr "הקצאה _מחדש"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1429
+#, c-format
+msgid ""
+"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+"automatically set it to \"%s\"?"
+msgstr ""
+"הקיצור „%s” משויך לקיצור „%s”. האם ברצונך להגדיר אותו באופן אוטומטי ל־„%s”?"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1435
+#, c-format
+msgid ""
+"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
+"if you move forward."
+msgstr "‏„%s” משויך כעת אל „%s”, קיצור זה יושבת אם אפשרות זו תיבחר."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
+msgid "_Assign"
+msgstr "ה_קצאה"
 
 #: ../panels/mouse/cc-mouse-panel.c:94
 msgid "Test Your _Settings"
@@ -2038,92 +2087,92 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "מצוין"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:213
+#: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:255
+#: ../panels/network/connection-editor/ce-page-wifi.c:270
 #: ../panels/network/network-wifi.ui.h:45
 msgid "Identity"
 msgstr "זהות"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:176
-#: ../panels/network/connection-editor/ce-page-ip4.c:438
-#: ../panels/network/connection-editor/ce-page-ip6.c:178
-#: ../panels/network/connection-editor/ce-page-ip6.c:442
+#: ../panels/network/connection-editor/ce-page-ip4.c:177
+#: ../panels/network/connection-editor/ce-page-ip4.c:439
+#: ../panels/network/connection-editor/ce-page-ip6.c:179
+#: ../panels/network/connection-editor/ce-page-ip6.c:443
 msgid "Address"
 msgstr "כתובת"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:189
-#: ../panels/network/connection-editor/ce-page-ip4.c:451
+#: ../panels/network/connection-editor/ce-page-ip4.c:190
+#: ../panels/network/connection-editor/ce-page-ip4.c:452
 msgid "Netmask"
 msgstr "מסכת רשת"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:203
-#: ../panels/network/connection-editor/ce-page-ip4.c:464
-#: ../panels/network/connection-editor/ce-page-ip6.c:204
-#: ../panels/network/connection-editor/ce-page-ip6.c:472
+#: ../panels/network/connection-editor/ce-page-ip4.c:204
+#: ../panels/network/connection-editor/ce-page-ip4.c:465
+#: ../panels/network/connection-editor/ce-page-ip6.c:205
+#: ../panels/network/connection-editor/ce-page-ip6.c:473
 #: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
 msgstr "שער גישה"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:220
-#: ../panels/network/connection-editor/ce-page-ip6.c:221
+#: ../panels/network/connection-editor/ce-page-ip4.c:221
+#: ../panels/network/connection-editor/ce-page-ip6.c:222
 msgid "Delete Address"
 msgstr "מחיקת כתובת"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:274
-#: ../panels/network/connection-editor/ce-page-ip6.c:275
+#: ../panels/network/connection-editor/ce-page-ip4.c:275
+#: ../panels/network/connection-editor/ce-page-ip6.c:276
 msgid "Add"
 msgstr "הוספה"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:342
-#: ../panels/network/connection-editor/ce-page-ip6.c:346
+#: ../panels/network/connection-editor/ce-page-ip4.c:343
+#: ../panels/network/connection-editor/ce-page-ip6.c:347
 msgid "Server"
 msgstr "שרת"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:359
-#: ../panels/network/connection-editor/ce-page-ip6.c:363
+#: ../panels/network/connection-editor/ce-page-ip4.c:360
+#: ../panels/network/connection-editor/ce-page-ip6.c:364
 msgid "Delete DNS Server"
 msgstr "מחיקת שרת DNS"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:478
-#: ../panels/network/connection-editor/ce-page-ip6.c:486
+#: ../panels/network/connection-editor/ce-page-ip4.c:479
+#: ../panels/network/connection-editor/ce-page-ip6.c:487
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "מטרית"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:499
-#: ../panels/network/connection-editor/ce-page-ip6.c:507
+#: ../panels/network/connection-editor/ce-page-ip4.c:500
+#: ../panels/network/connection-editor/ce-page-ip6.c:508
 msgid "Delete Route"
 msgstr "מחיקת נתיב"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:614
+#: ../panels/network/connection-editor/ce-page-ip4.c:615
 #: ../panels/network/network-wifi.ui.h:25
 msgid "Automatic (DHCP)"
 msgstr "אוטומטי (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:618
-#: ../panels/network/connection-editor/ce-page-ip6.c:620
+#: ../panels/network/connection-editor/ce-page-ip4.c:619
+#: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:24
 msgid "Manual"
 msgstr "ידני"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:622
-#: ../panels/network/connection-editor/ce-page-ip6.c:624
+#: ../panels/network/connection-editor/ce-page-ip4.c:623
+#: ../panels/network/connection-editor/ce-page-ip6.c:625
 msgid "Link-Local Only"
 msgstr "קישור מקומי בלבד"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:916
+#: ../panels/network/connection-editor/ce-page-ip4.c:953
 #: ../panels/network/network-wifi.ui.h:46
 msgid "IPv4"
 msgstr "IPv4"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:191
-#: ../panels/network/connection-editor/ce-page-ip6.c:455
+#: ../panels/network/connection-editor/ce-page-ip6.c:192
+#: ../panels/network/connection-editor/ce-page-ip6.c:456
 msgid "Prefix"
 msgstr "קידומת"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:612
+#: ../panels/network/connection-editor/ce-page-ip6.c:613
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
@@ -2131,11 +2180,11 @@ msgstr "קידומת"
 msgid "Automatic"
 msgstr "אוטומטי"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:616
+#: ../panels/network/connection-editor/ce-page-ip6.c:617
 msgid "Automatic, DHCP only"
 msgstr "אוטומטי, DHCP בלבד"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:876
+#: ../panels/network/connection-editor/ce-page-ip6.c:919
 #: ../panels/network/network-wifi.ui.h:47
 msgid "IPv6"
 msgstr "IPv6"
@@ -2397,7 +2446,7 @@ msgid "_Reset"
 msgstr "_איפוס"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/network/net-device-wifi.c:1449
 #: ../panels/network/network-wifi.ui.h:40
 msgid "_Forget"
 msgstr "הת_עלמות"
@@ -2442,7 +2491,7 @@ msgstr "נא לבחור קובץ לייבוא"
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1948
 #: ../panels/sharing/cc-sharing-panel.c:492
-#: ../panels/user-accounts/um-photo-dialog.c:222
+#: ../panels/user-accounts/um-photo-dialog.c:223
 msgid "_Open"
 msgstr "_פתיחה"
 
@@ -2476,8 +2525,8 @@ msgstr ""
 "שגיאה: %s."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
-msgid "Export VPN connection..."
-msgstr "יצוא חיבור VPN…"
+msgid "Export VPN connection"
+msgstr "יצוא חיבור VPN"
 
 #: ../panels/network/connection-editor/vpn-page.ui.h:4
 msgid "(Error: unable to load VPN connection editor)"
@@ -2515,10 +2564,10 @@ msgstr "שליטה באופן החיבור לאינטרנט"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"vlan;bridge;bond;"
+"vlan;bridge;bond;DNS;"
 msgstr ""
 "רשת;אלחוטי;אלחוטית;וייפיי;IP;רשת מקומית;מתווך;פרוקסי;אינטרנט;רשת רחבה;רוחב "
-"פס;מודם;בלוטות׳;"
+"פס;מודם;בלוטות׳;DNS;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -2573,7 +2622,7 @@ msgid "Wired"
 msgstr "קווי"
 
 #: ../panels/network/net-device-ethernet.c:356
-#: ../panels/network/net-device-wifi.c:1562
+#: ../panels/network/net-device-wifi.c:1604
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2594,7 +2643,7 @@ msgstr "הוספת התחברות חדשה"
 msgid "Team slaves"
 msgstr "שותפים בצוות"
 
-#: ../panels/network/net-device-wifi.c:1111
+#: ../panels/network/net-device-wifi.c:1153
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2602,51 +2651,51 @@ msgstr ""
 "אם יש לך חיבור לאינטרנט שאינו אלחוטי, ניתן להשתמש בכלי זה כדי לשתף את חיבור "
 "האינטרנט שלך עם אחרים."
 
-#: ../panels/network/net-device-wifi.c:1115
+#: ../panels/network/net-device-wifi.c:1157
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "מעבר למצב נקודה אלחוטית תנתק אותך מהרשת <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1119
+#: ../panels/network/net-device-wifi.c:1161
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr "לא ניתן לגשת לאינטרנט דרך החיבור האלחוטי בזמן שהנקודה האלחוטית פעילה."
 
-#: ../panels/network/net-device-wifi.c:1196
+#: ../panels/network/net-device-wifi.c:1238
 msgid "Stop hotspot and disconnect any users?"
 msgstr "האם לעצור את נקודת הגישה ולנתק את כל המשתמשים ?"
 
-#: ../panels/network/net-device-wifi.c:1199
+#: ../panels/network/net-device-wifi.c:1241
 msgid "_Stop Hotspot"
 msgstr "_עצירת נקודת הגישה"
 
-#: ../panels/network/net-device-wifi.c:1271
+#: ../panels/network/net-device-wifi.c:1313
 msgid "System policy prohibits use as a Hotspot"
 msgstr "מדיניות המערכת אוסרת שימוש בנקודה חמה"
 
-#: ../panels/network/net-device-wifi.c:1274
+#: ../panels/network/net-device-wifi.c:1316
 msgid "Wireless device does not support Hotspot mode"
 msgstr "התקן הרשת האלחוטית אינו תומך במצב נקודה חמה"
 
-#: ../panels/network/net-device-wifi.c:1403
+#: ../panels/network/net-device-wifi.c:1445
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr "פרטי הרשתות הנבחרות, לרבות ססמאות וכל תצורה אחרת שהותאמה אישית יאבדו."
 
-#: ../panels/network/net-device-wifi.c:1711
+#: ../panels/network/net-device-wifi.c:1753
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "היסטוריה"
 
-#: ../panels/network/net-device-wifi.c:1715
+#: ../panels/network/net-device-wifi.c:1757
 #: ../panels/wacom/cc-wacom-page.c:533
 msgid "_Close"
 msgstr "ס_גירה"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1723
+#: ../panels/network/net-device-wifi.c:1765
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "הת_עלמות"
@@ -3222,22 +3271,22 @@ msgstr "מפתחות פרטיים מסוג DER, PEM,או PKCS#12 ‏(‎*.der, *
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "אישורי DER או PEM‏ (‎*.der, *.pem, *.crt, *.cer)"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:261
+#: ../panels/network/wireless-security/eap-method-fast.c:271
 #: ../panels/network/wireless-security/eap-method-peap.c:280
 msgid "GTC"
 msgstr "GTC"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:277
+#: ../panels/network/wireless-security/eap-method-fast.c:287
 #: ../panels/network/wireless-security/eap-method-peap.c:246
 #: ../panels/network/wireless-security/eap-method-ttls.c:263
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:399
-msgid "Choose a PAC file..."
-msgstr "בחירת קובץ PAC…"
+#: ../panels/network/wireless-security/eap-method-fast.c:409
+msgid "Choose a PAC file"
+msgstr "בחירת קובץ PAC"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:406
+#: ../panels/network/wireless-security/eap-method-fast.c:416
 msgid "PAC files (*.pac)"
 msgstr "קובצי PAC‏ (‎*.pac)"
 
@@ -3297,10 +3346,10 @@ msgid "MD5"
 msgstr "MD5"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:350
-#: ../panels/network/wireless-security/eap-method-tls.c:434
+#: ../panels/network/wireless-security/eap-method-tls.c:456
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
-msgid "Choose a Certificate Authority certificate..."
-msgstr "בחירת אישור של רשות אישורים.."
+msgid "Choose a Certificate Authority certificate"
+msgstr "בחירת אישור של רשות אישורים"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 0"
@@ -3324,11 +3373,11 @@ msgstr "_גרסת PEAP"
 msgid "As_k for this password every time"
 msgstr "יש ל_בקש ססמה זו בכל פעם מחדש"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:260
+#: ../panels/network/wireless-security/eap-method-tls.c:282
 msgid "Unencrypted private keys are insecure"
 msgstr "מפתחות פרטיים בלתי מוצפנים אינם בטוחים"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:263
+#: ../panels/network/wireless-security/eap-method-tls.c:285
 msgid ""
 "The selected private key does not appear to be protected by a password.  "
 "This could allow your security credentials to be compromised.  Please select "
@@ -3341,13 +3390,13 @@ msgstr ""
 "\n"
 "(ניתן להגן על המפתח הפרטי שלך עם openssl)"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:428
-msgid "Choose your personal certificate..."
-msgstr "נא לבחור את האישור האישי שלך…"
+#: ../panels/network/wireless-security/eap-method-tls.c:450
+msgid "Choose your personal certificate"
+msgstr "נא לבחור את האישור האישי שלך"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:440
-msgid "Choose your private key..."
-msgstr "בחירת המפתח הפרטי שלך…"
+#: ../panels/network/wireless-security/eap-method-tls.c:462
+msgid "Choose your private key"
+msgstr "בחירת המפתח הפרטי שלך"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
@@ -3486,8 +3535,8 @@ msgstr "הצגת פרטים במסך הנעילה"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
 #: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
-#: ../panels/privacy/cc-privacy-panel.c:82
-#: ../panels/privacy/cc-privacy-panel.c:122
+#: ../panels/privacy/cc-privacy-panel.c:84
+#: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -3842,19 +3891,19 @@ msgstr "בעת הפעלה מהסוללה"
 msgid "When plugged in"
 msgstr "כאשר מחובר לחשמל"
 
-#: ../panels/power/cc-power-panel.c:1817
+#: ../panels/power/cc-power-panel.c:1818
 msgid "Suspend & Power Off"
 msgstr "השהיה וכיבוי"
 
-#: ../panels/power/cc-power-panel.c:1850
+#: ../panels/power/cc-power-panel.c:1851
 msgid "_Automatic suspend"
 msgstr "ה_שהיה אוטומטית"
 
-#: ../panels/power/cc-power-panel.c:1874
+#: ../panels/power/cc-power-panel.c:1875
 msgid "When battery power is _critical"
 msgstr "כאשר עצמת הסוללה _חלשה מאוד"
 
-#: ../panels/power/cc-power-panel.c:1931
+#: ../panels/power/cc-power-panel.c:1930
 msgid "Power Off"
 msgstr "כיבוי"
 
@@ -4226,6 +4275,16 @@ msgstr "בחירת מנהל התקן למדפסת"
 msgid "Loading drivers database..."
 msgstr "מסד נתוני מנהלי ההתקנים נטען…"
 
+#. Translators: The found device is a JetDirect printer
+#: ../panels/printers/pp-host.c:506
+msgid "JetDirect Printer"
+msgstr "מדפסת JetDirect"
+
+#. Translators: The found device is a Line Printer Daemon printer
+#: ../panels/printers/pp-host.c:756
+msgid "LPD Printer"
+msgstr "מדפסת LPD"
+
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:66
 #: ../panels/printers/pp-ppd-option-widget.c:70
@@ -4327,34 +4386,34 @@ msgid "%s Active Jobs"
 msgstr "%s משימות פעילות"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1709
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1714
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Serial Port"
 msgstr "יציאה טורית"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1721
+#: ../panels/printers/pp-new-printer-dialog.c:1683
 msgid "Parallel Port"
 msgstr "יציאה מקבילית"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1739
 #, c-format
 msgid "Location: %s"
 msgstr "מיקום: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1744
 #, c-format
 msgid "Address: %s"
 msgstr "כתובת: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1803
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Server requires authentication"
 msgstr "אימות _פנימי"
 
@@ -4478,17 +4537,17 @@ msgid "No pre-filtering"
 msgstr "אין סינון קדם"
 
 #. Translators: Name of column showing printer manufacturers
-#: ../panels/printers/pp-ppd-selection-dialog.c:232
+#: ../panels/printers/pp-ppd-selection-dialog.c:233
 msgid "Manufacturer"
 msgstr "יצרן"
 
 #. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:249
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "מנהל התקן"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:253
+#: ../panels/printers/pp-samba.c:248
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמינות על %s."
@@ -4565,43 +4624,43 @@ msgstr ""
 "כפי הנראה, שירותי ההדפסה של המערכת\n"
 "אינם זמינים, עמך הסליחה!"
 
-#: ../panels/privacy/cc-privacy-panel.c:250 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "נעילת מסך"
 
-#: ../panels/privacy/cc-privacy-panel.c:360 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "שימוש והיסטוריה"
 
-#: ../panels/privacy/cc-privacy-panel.c:485
+#: ../panels/privacy/cc-privacy-panel.c:487
 msgid "Empty all items from Trash?"
 msgstr "לרוקן את כל הפריטים באשפה?"
 
-#: ../panels/privacy/cc-privacy-panel.c:486
+#: ../panels/privacy/cc-privacy-panel.c:488
 msgid "All items in the Trash will be permanently deleted."
 msgstr "כל הפריטים באשפה ימחקו לצמיתות."
 
-#: ../panels/privacy/cc-privacy-panel.c:487 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_פינוי האשפה"
 
-#: ../panels/privacy/cc-privacy-panel.c:510
+#: ../panels/privacy/cc-privacy-panel.c:512
 msgid "Delete all the temporary files?"
 msgstr "למחוק את כל הקבצים הזמניים?"
 
-#: ../panels/privacy/cc-privacy-panel.c:511
+#: ../panels/privacy/cc-privacy-panel.c:513
 msgid "All the temporary files will be permanently deleted."
 msgstr "כל הקבצים הזמניים ימחקו לצמיתות."
 
-#: ../panels/privacy/cc-privacy-panel.c:512 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "מחיקת קבצים _זמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:534 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "ניקוי הזבל והקבצים הזמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:574 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "שימוש בתכנה"
 
@@ -4748,6 +4807,14 @@ msgstr "_שליחת סטטיסטיקת שימוש בתכנה"
 msgid "Privacy Policy"
 msgstr "מדיניות פרטיות"
 
+#: ../panels/privacy/privacy.ui.h:42
+msgid "_Location Services"
+msgstr "שירותי _איכון"
+
+#: ../panels/privacy/privacy.ui.h:43
+msgid "Used to determine your geographical location"
+msgstr "משמש לקביעת המיקום הגאוגרפי שלך"
+
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
 msgid "Imperial"
@@ -4766,17 +4833,19 @@ msgstr "לא נמצאו אזורים"
 msgid "No input sources found"
 msgstr "לא נמצא מקור קלט"
 
-#: ../panels/region/cc-input-chooser.c:1063
+#: ../panels/region/cc-input-chooser.c:1076
 msgctxt "Input Source"
 msgid "Other"
 msgstr "אחר"
 
 #: ../panels/region/cc-region-panel.c:239
+#: ../panels/user-accounts/um-user-panel.c:896
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
 #: ../panels/region/cc-region-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:897
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
@@ -4800,27 +4869,27 @@ msgstr "מסך כניסה"
 msgid "Formats"
 msgstr "תבניות"
 
-#: ../panels/region/format-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:4
 msgid "Preview"
 msgstr "תצוגה מקדימה"
 
-#: ../panels/region/format-chooser.ui.h:3
+#: ../panels/region/format-chooser.ui.h:5
 msgid "Dates"
 msgstr "תאריכים"
 
-#: ../panels/region/format-chooser.ui.h:4
+#: ../panels/region/format-chooser.ui.h:6
 msgid "Times"
 msgstr "זמנים"
 
-#: ../panels/region/format-chooser.ui.h:5
+#: ../panels/region/format-chooser.ui.h:7
 msgid "Numbers"
 msgstr "מספרים"
 
-#: ../panels/region/format-chooser.ui.h:6
+#: ../panels/region/format-chooser.ui.h:8
 msgid "Measurement"
 msgstr "מדידה"
 
-#: ../panels/region/format-chooser.ui.h:7
+#: ../panels/region/format-chooser.ui.h:9
 msgid "Paper"
 msgstr "נייר"
 
@@ -4984,7 +5053,7 @@ msgstr "פעיל"
 msgid "Choose a Folder"
 msgstr "נא לבחור בתיקייה"
 
-#: ../panels/sharing/cc-sharing-panel.c:915
+#: ../panels/sharing/cc-sharing-panel.c:916
 msgid "Copy"
 msgstr "העתקה"
 
@@ -5859,20 +5928,24 @@ msgstr ""
 "חשבונות התחברות ארגונית."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
-#: ../panels/user-accounts/um-account-dialog.c:1438
+msgid "_Enterprise Login"
+msgstr "_כניסה ארגונית"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
+#: ../panels/user-accounts/um-account-dialog.c:1458
 msgid "Add User"
 msgstr "הוספת משתמש"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: ../panels/user-accounts/data/account-dialog.ui.h:18
+#: ../panels/user-accounts/data/account-dialog.ui.h:19
 msgid "_Enroll"
 msgstr "ה_רשמה"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
+#: ../panels/user-accounts/data/account-dialog.ui.h:20
 msgid "Domain Administrator Login"
 msgstr "כניסת מנהל המתחם"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:20
+#: ../panels/user-accounts/data/account-dialog.ui.h:21
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -5882,11 +5955,11 @@ msgstr ""
 "במתחם. נא לבקש ממנהל הרשת להקליד את ססמת המתחם\n"
 "שלו להלן."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:23
+#: ../panels/user-accounts/data/account-dialog.ui.h:24
 msgid "Administrator _Name"
 msgstr "_שם המנהל"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:24
+#: ../panels/user-accounts/data/account-dialog.ui.h:25
 msgid "Administrator Password"
 msgstr "ססמת מנהל"
 
@@ -6209,28 +6282,28 @@ msgstr "שגיאה בלתי ידועה"
 msgid "Should match the web address of your account provider."
 msgstr "צריך להתאים את כתובת האינטרנט של ספק החשבון שלך."
 
-#: ../panels/user-accounts/um-account-dialog.c:221
+#: ../panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "הוספת החשבון נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:441
+#: ../panels/user-accounts/um-account-dialog.c:452
 msgid "Passwords do not match."
 msgstr "הססמאות אינן תואמות."
 
-#: ../panels/user-accounts/um-account-dialog.c:711
-#: ../panels/user-accounts/um-account-dialog.c:757
+#: ../panels/user-accounts/um-account-dialog.c:731
+#: ../panels/user-accounts/um-account-dialog.c:777
 msgid "Failed to register account"
 msgstr "הרשמת החשבון נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:895
+#: ../panels/user-accounts/um-account-dialog.c:915
 msgid "No supported way to authenticate with this domain"
 msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
 
-#: ../panels/user-accounts/um-account-dialog.c:954
+#: ../panels/user-accounts/um-account-dialog.c:974
 msgid "Failed to join domain"
 msgstr "ההצטרפות למתחם נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:1015
+#: ../panels/user-accounts/um-account-dialog.c:1035
 msgid ""
 "That login name didn't work.\n"
 "Please try again."
@@ -6238,7 +6311,7 @@ msgstr ""
 "ססמה שגויה.\n"
 "נא לנסות שוב."
 
-#: ../panels/user-accounts/um-account-dialog.c:1022
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login password didn't work.\n"
 "Please try again."
@@ -6246,18 +6319,13 @@ msgstr ""
 "ססמה שגויה.\n"
 "נא לנסות שוב."
 
-#: ../panels/user-accounts/um-account-dialog.c:1030
+#: ../panels/user-accounts/um-account-dialog.c:1050
 msgid "Failed to log into domain"
 msgstr "הכניסה למתחם נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:1088
+#: ../panels/user-accounts/um-account-dialog.c:1108
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "לא ניתן למצוא את המתחם. אולי שגית?"
-
-#. Create enterprise toggle button.
-#: ../panels/user-accounts/um-account-dialog.c:1451
-msgid "_Enterprise Login"
-msgstr "_כניסה ארגונית"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:137
 msgid ""
@@ -6380,7 +6448,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:625
+#: ../panels/user-accounts/um-user-panel.c:631
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6388,7 +6456,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:629
+#: ../panels/user-accounts/um-user-panel.c:635
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6418,23 +6486,23 @@ msgstr "לא ניתן להחליף את הססמה"
 msgid "The passwords do not match."
 msgstr "הססמאות אינן תואמות."
 
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "Browse for more pictures"
 msgstr "עיון אחר תמונות נוספות"
 
-#: ../panels/user-accounts/um-photo-dialog.c:447
+#: ../panels/user-accounts/um-photo-dialog.c:453
 msgid "Disable image"
 msgstr "נטרול התמונה"
 
-#: ../panels/user-accounts/um-photo-dialog.c:465
+#: ../panels/user-accounts/um-photo-dialog.c:471
 msgid "Take a photo…"
 msgstr "צילום תמונה…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:483
+#: ../panels/user-accounts/um-photo-dialog.c:489
 msgid "Browse for more pictures…"
 msgstr "עיון אחר תמונות נוספות…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:707
+#: ../panels/user-accounts/um-photo-dialog.c:713
 #, c-format
 msgid "Used by %s"
 msgstr "בשימוש על ידי %s"
@@ -6463,35 +6531,35 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל המתחם %s:‏ %s"
 
-#: ../panels/user-accounts/um-user-panel.c:192
+#: ../panels/user-accounts/um-user-panel.c:198
 msgid "Other Accounts"
 msgstr "חשבונות אחרים"
 
-#: ../panels/user-accounts/um-user-panel.c:411
+#: ../panels/user-accounts/um-user-panel.c:417
 msgid "Failed to delete user"
 msgstr "אירע כשל במחיקת משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:476
+#: ../panels/user-accounts/um-user-panel.c:482
 msgid "You cannot delete your own account."
 msgstr "אין באפשרותך למחוק את החשבון שלך."
 
-#: ../panels/user-accounts/um-user-panel.c:485
+#: ../panels/user-accounts/um-user-panel.c:491
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: ../panels/user-accounts/um-user-panel.c:489
+#: ../panels/user-accounts/um-user-panel.c:495
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: ../panels/user-accounts/um-user-panel.c:498
+#: ../panels/user-accounts/um-user-panel.c:504
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "האם ברצונך לשמור את הקבצים של %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:502
+#: ../panels/user-accounts/um-user-panel.c:508
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6499,42 +6567,42 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: ../panels/user-accounts/um-user-panel.c:505
+#: ../panels/user-accounts/um-user-panel.c:511
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:512
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:558
+#: ../panels/user-accounts/um-user-panel.c:564
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מנוטרל"
 
-#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:572
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: ../panels/user-accounts/um-user-panel.c:569
+#: ../panels/user-accounts/um-user-panel.c:575
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: ../panels/user-accounts/um-user-panel.c:618
+#: ../panels/user-accounts/um-user-panel.c:624
 msgid "Logged in"
 msgstr "נכנסת"
 
-#: ../panels/user-accounts/um-user-panel.c:1002
+#: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:1004
+#: ../panels/user-accounts/um-user-panel.c:1074
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:1045
+#: ../panels/user-accounts/um-user-panel.c:1115
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6542,12 +6610,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1083
+#: ../panels/user-accounts/um-user-panel.c:1153
 msgid "Create a user account"
 msgstr "יצירת חשבון משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:1094
-#: ../panels/user-accounts/um-user-panel.c:1383
+#: ../panels/user-accounts/um-user-panel.c:1164
+#: ../panels/user-accounts/um-user-panel.c:1453
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6555,12 +6623,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1104
+#: ../panels/user-accounts/um-user-panel.c:1174
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:1116
-#: ../panels/user-accounts/um-user-panel.c:1388
+#: ../panels/user-accounts/um-user-panel.c:1186
+#: ../panels/user-accounts/um-user-panel.c:1458
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6568,7 +6636,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1298
+#: ../panels/user-accounts/um-user-panel.c:1368
 msgid "My Account"
 msgstr "החשבון שלי"
 
@@ -7008,9 +7076,6 @@ msgstr "העדפות;הגדרות;"
 
 #~ msgid "Immediately"
 #~ msgstr "מיידית"
-
-#~ msgid "_Done"
-#~ msgstr "_סיום"
 
 #~ msgid "Remote View"
 #~ msgstr "תצוגה מרחוק"
@@ -7965,9 +8030,6 @@ msgstr "העדפות;הגדרות;"
 
 #~ msgid "Arabic"
 #~ msgstr "ערבית"
-
-#~ msgid "%d x %d (%s)"
-#~ msgstr "%d x %d (%s)"
 
 #~ msgid "%d x %d"
 #~ msgstr "%d x %d"
@@ -9229,9 +9291,6 @@ msgstr "העדפות;הגדרות;"
 
 #~ msgid "U_sername:"
 #~ msgstr "_שם משתמש:"
-
-#~ msgid "_Location name:"
-#~ msgstr "_שם מיקום:"
 
 #~ msgid "_Secure HTTP proxy:"
 #~ msgstr "מתווך HTTP מ_אובטח"
