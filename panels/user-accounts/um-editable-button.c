@@ -59,7 +59,7 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-G_DEFINE_TYPE (UmEditableButton, um_editable_button, GTK_TYPE_ALIGNMENT);
+G_DEFINE_TYPE (UmEditableButton, um_editable_button, GTK_TYPE_BIN);
 
 void
 um_editable_button_set_text (UmEditableButton *button,
@@ -370,22 +370,24 @@ button_clicked (GtkWidget        *widget,
 }
 
 static void
-update_button_padding (GtkWidget        *widget,
-                       GtkAllocation    *allocation,
-                       UmEditableButton *button)
+update_button_padding (UmEditableButton *button)
 {
         UmEditableButtonPrivate *priv = button->priv;
-        GtkAllocation parent_allocation;
+        GtkStyleContext *context;
+        GtkStateFlags state;
+        GtkBorder padding, border;
         gint offset;
-        gint pad;
 
-        gtk_widget_get_allocation (gtk_widget_get_parent (widget), &parent_allocation);
+        context = gtk_widget_get_style_context (GTK_WIDGET (priv->button));
+        state = gtk_style_context_get_state (context);
 
-        offset = allocation->x - parent_allocation.x;
+        gtk_style_context_get_padding (context, state, &padding);
+        gtk_style_context_get_border (context, state, &border);
 
-        gtk_misc_get_padding  (GTK_MISC (priv->label), &pad, NULL);
-        if (offset != pad)
-                gtk_misc_set_padding (GTK_MISC (priv->label), offset, 0);
+        offset = padding.left + border.left;
+
+        gtk_widget_set_margin_start (GTK_WIDGET (priv->label), offset);
+        gtk_widget_set_margin_end (GTK_WIDGET (priv->label), offset);
 }
 
 static void
@@ -403,16 +405,18 @@ um_editable_button_init (UmEditableButton *button)
         priv->stack = GTK_STACK (gtk_stack_new ());
 
         priv->label = (GtkLabel*)gtk_label_new (EMPTY_TEXT);
-        gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
+        gtk_widget_set_halign (GTK_WIDGET (priv->label), GTK_ALIGN_START);
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         priv->button = (GtkButton*)gtk_button_new_with_label (EMPTY_TEXT);
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
-        gtk_button_set_alignment (priv->button, 0.0, 0.5);
+        gtk_widget_set_halign (GTK_WIDGET (priv->button), GTK_ALIGN_FILL);
+        gtk_widget_set_halign (gtk_bin_get_child (GTK_BIN (priv->button)), GTK_ALIGN_START);
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), button);
-        g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->button)), "size-allocate", G_CALLBACK (update_button_padding), button);
+
+        update_button_padding (button);
 
         gtk_container_add (GTK_CONTAINER (button), GTK_WIDGET (priv->stack));
 
