@@ -18,9 +18,7 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
-gboolean set_fingerprint_label (GtkWidget *label1,
-                                GtkWidget *label2);
+gboolean set_fingerprint_label (GtkWidget *editable_button);
 void fingerprint_button_clicked (GtkWindow *parent,
-                                 GtkWidget *label1,
-                                 GtkWidget *label2,
+                                 GtkWidget *editable_button,
                                  ActUser   *user);

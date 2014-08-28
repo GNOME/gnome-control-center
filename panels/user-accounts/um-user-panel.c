@@ -664,8 +664,6 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *image;
         GtkWidget *label;
-        GtkWidget *label2;
-        GtkWidget *label3;
         GdkPixbuf *pixbuf;
         gchar *lang, *text;
         GtkWidget *widget;
@@ -717,13 +715,11 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         g_free (lang);
 
         /* Fingerprint: show when self, possible, and local account */
-        widget = get_widget (d, "account-fingerprint-notebook");
+        widget = get_widget (d, "account-fingerprint-button");
         label = get_widget (d, "account-fingerprint-label");
-        label2 = get_widget (d, "account-fingerprint-value-label");
-        label3 = get_widget (d, "account-fingerprint-button-label");
         show = (act_user_get_uid (user) == getuid() &&
                 act_user_is_local_account (user) &&
-                set_fingerprint_label (label2, label3));
+                set_fingerprint_label (widget));
         gtk_widget_set_visible (label, show);
         gtk_widget_set_visible (widget, show);
 
@@ -979,16 +975,15 @@ change_password (GtkButton *button, CcUserPanelPrivate *d)
 static void
 change_fingerprint (GtkButton *button, CcUserPanelPrivate *d)
 {
-        GtkWidget *label, *label2;
+        GtkWidget *widget;
         ActUser *user;
 
         user = get_selected_user (d);
 
         g_assert (g_strcmp0 (g_get_user_name (), act_user_get_user_name (user)) == 0);
 
-        label = get_widget (d, "account-fingerprint-value-label");
-        label2 = get_widget (d, "account-fingerprint-button-label");
-        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)), label, label2, user);
+        widget = get_widget (d, "account-fingerprint-button");
+        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)), widget, user);
 
         g_object_unref (user);
 }
@@ -1242,7 +1237,8 @@ on_permission_changed (GPermission *permission,
                 um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-password-button")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-password-button"));
 
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (get_widget (d, "account-fingerprint-notebook")), 1);
+                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-fingerprint-button")), TRUE);
+                remove_unlock_tooltip (get_widget (d, "account-fingerprint-button"));
         }
         else {
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
@@ -1254,7 +1250,8 @@ on_permission_changed (GPermission *permission,
                 um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-password-button")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-password-button"));
 
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (get_widget (d, "account-fingerprint-notebook")), 0);
+                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-fingerprint-button")), FALSE);
+                add_unlock_tooltip (get_widget (d, "account-fingerprint-button"));
         }
 
         um_password_dialog_set_user (d->password_dialog, user);
@@ -1447,7 +1444,7 @@ setup_main_window (CcUserPanelPrivate *d)
         g_signal_connect (button, "notify::active", G_CALLBACK (autologin_changed), d);
 
         button = get_widget (d, "account-fingerprint-button");
-        g_signal_connect (button, "clicked",
+        g_signal_connect (button, "start-editing",
                           G_CALLBACK (change_fingerprint), d);
 
         button = get_widget (d, "last-login-history-button");

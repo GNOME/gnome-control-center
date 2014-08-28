@@ -22,6 +22,8 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
+#include "um-editable-button.h"
+
 #include "um-fingerprint-dialog.h"
 
 #include "fingerprint-strings.h"
@@ -46,8 +48,7 @@ enum {
 };
 
 typedef struct {
-        GtkWidget *label1;
-        GtkWidget *label2;
+        GtkWidget *editable_button;
 
         GtkWidget *ass;
         GtkBuilder *dialog;
@@ -175,8 +176,7 @@ get_error_dialog (const char *title,
 }
 
 gboolean
-set_fingerprint_label (GtkWidget *label1,
-                       GtkWidget *label2)
+set_fingerprint_label (GtkWidget *editable_button)
 {
         GDBusProxy *device;
         GVariant *result;
@@ -210,12 +210,10 @@ set_fingerprint_label (GtkWidget *label1,
 
         if (fingers == NULL || g_variant_iter_n_children (fingers) == 0) {
                 is_disable = FALSE;
-                gtk_label_set_text (GTK_LABEL (label1), _("Disabled"));
-                gtk_label_set_text (GTK_LABEL (label2), _("Disabled"));
+                um_editable_button_set_text (UM_EDITABLE_BUTTON (editable_button), _("Disabled"));
         } else {
                 is_disable = TRUE;
-                gtk_label_set_text (GTK_LABEL (label1), _("Enabled"));
-                gtk_label_set_text (GTK_LABEL (label2), _("Enabled"));
+                um_editable_button_set_text (UM_EDITABLE_BUTTON (editable_button), _("Enabled"));
         }
 
         if (result != NULL)
@@ -252,8 +250,7 @@ delete_fingerprints (void)
 
 static void
 delete_fingerprints_question (GtkWindow *parent,
-                              GtkWidget *label1,
-                              GtkWidget *label2,
+                              GtkWidget *editable_button,
                               ActUser   *user)
 {
         GtkWidget *question;
@@ -281,7 +278,7 @@ delete_fingerprints_question (GtkWindow *parent,
 
         if (gtk_dialog_run (GTK_DIALOG (question)) == GTK_RESPONSE_OK) {
                 delete_fingerprints ();
-                set_fingerprint_label (label1, label2);
+                set_fingerprint_label (editable_button);
         }
 
         gtk_widget_destroy (question);
@@ -423,13 +420,8 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
-        GtkWidget *label1, *label2;
-
-        label1 = data->label1;
-        label2 = data->label2;
-
         enroll_data_destroy (data);
-        set_fingerprint_label (label1, label2);
+        set_fingerprint_label (data->editable_button);
 }
 
 static void
@@ -619,8 +611,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 
 static void
 enroll_fingerprints (GtkWindow *parent,
-                     GtkWidget *label1,
-                     GtkWidget *label2,
+                     GtkWidget *editable_button,
                      ActUser   *user)
 {
         GDBusProxy *device;
@@ -654,8 +645,7 @@ enroll_fingerprints (GtkWindow *parent,
 
         data = g_new0 (EnrollData, 1);
         data->device = device;
-        data->label1 = label1;
-        data->label2 = label2;
+        data->editable_button = editable_button;
 
         /* Get some details about the device */
         result = g_dbus_connection_call_sync (connection,
@@ -755,17 +745,16 @@ enroll_fingerprints (GtkWindow *parent,
 
 void
 fingerprint_button_clicked (GtkWindow *parent,
-                            GtkWidget *label1,
-                            GtkWidget *label2,
+                            GtkWidget *editable_button,
                             ActUser   *user)
 {
         bindtextdomain ("fprintd", GNOMELOCALEDIR);
         bind_textdomain_codeset ("fprintd", "UTF-8");
 
         if (is_disable != FALSE) {
-                delete_fingerprints_question (parent, label1, label2, user);
+                delete_fingerprints_question (parent, editable_button, user);
         } else {
-                enroll_fingerprints (parent, label1, label2, user);
+                enroll_fingerprints (parent, editable_button, user);
         }
 }
 
