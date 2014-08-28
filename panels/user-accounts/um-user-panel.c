@@ -1327,6 +1327,26 @@ match_user (GtkTreeModel *model,
 }
 
 static void
+update_padding (GtkWidget *button, GtkWidget *label)
+{
+        GtkStyleContext *context;
+        GtkStateFlags state;
+        GtkBorder padding, border;
+        gint offset;
+
+        context = gtk_widget_get_style_context (button);
+        state = gtk_style_context_get_state (context);
+
+        gtk_style_context_get_padding (context, state, &padding);
+        gtk_style_context_get_border (context, state, &border);
+
+        offset = padding.left + border.left;
+
+        gtk_widget_set_margin_start (label, offset);
+        gtk_widget_set_margin_end (label, offset);
+}
+
+static void
 setup_main_window (CcUserPanelPrivate *d)
 {
         GtkWidget *userlist;
@@ -1433,6 +1453,7 @@ setup_main_window (CcUserPanelPrivate *d)
         button = get_widget (d, "last-login-history-button");
         g_signal_connect (button, "clicked",
                           G_CALLBACK (show_history), d);
+        update_padding (button, get_widget (d, "last-login-value-label"));
 
         d->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
         if (d->permission != NULL) {
