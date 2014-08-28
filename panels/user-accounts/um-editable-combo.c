@@ -56,7 +56,7 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-G_DEFINE_TYPE (UmEditableCombo, um_editable_combo, GTK_TYPE_ALIGNMENT);
+G_DEFINE_TYPE (UmEditableCombo, um_editable_combo, GTK_TYPE_BIN);
 
 void
 um_editable_combo_set_editable (UmEditableCombo *combo,
@@ -387,6 +387,7 @@ update_button_padding (UmEditableCombo *combo)
         GtkStyleContext *context;
         GtkStateFlags state;
         GtkBorder padding, border;
+        gint offset;
 
         context = gtk_widget_get_style_context (GTK_WIDGET (priv->button));
         state = gtk_style_context_get_state (context);
@@ -394,7 +395,10 @@ update_button_padding (UmEditableCombo *combo)
         gtk_style_context_get_padding (context, state, &padding);
         gtk_style_context_get_border (context, state, &border);
 
-        gtk_misc_set_padding (GTK_MISC (priv->label), padding.left + border.left, 0);
+        offset = padding.left + border.left;
+
+        gtk_widget_set_margin_start (GTK_WIDGET (priv->label), offset);
+        gtk_widget_set_margin_end (GTK_WIDGET (priv->label), offset);
 }
 
 static void
@@ -410,13 +414,14 @@ um_editable_combo_init (UmEditableCombo *combo)
         priv->stack = GTK_STACK (gtk_stack_new ());
 
         priv->label = (GtkLabel*)gtk_label_new ("");
-        gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
+        gtk_widget_set_halign (GTK_WIDGET (priv->label), GTK_ALIGN_START);
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         priv->button = (GtkButton*)gtk_button_new_with_label ("");
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
-        gtk_button_set_alignment (priv->button, 0.0, 0.5);
+        gtk_widget_set_halign (GTK_WIDGET (priv->button), GTK_ALIGN_FILL);
+        gtk_widget_set_halign (gtk_bin_get_child (GTK_BIN (priv->button)), GTK_ALIGN_START);
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), combo);
 
