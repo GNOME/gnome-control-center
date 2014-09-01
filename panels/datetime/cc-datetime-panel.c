@@ -1174,7 +1174,7 @@ setup_datetime_dialog (CcDateTimePanel *self)
 
   /* Year */
   adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (priv->date),
-                                                    G_MINDOUBLE, G_MAXDOUBLE, 1,
+                                                    1, G_MAXDOUBLE, 1,
                                                     10, 1);
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("year-spinbutton")),
                                   adjustment);
