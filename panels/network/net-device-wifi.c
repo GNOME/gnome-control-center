@@ -1270,21 +1270,6 @@ remote_settings_read_cb (NMRemoteSettings *remote_settings,
 }
 
 static void
-switch_page_cb (GtkNotebook   *notebook,
-                GtkWidget     *page,
-                guint          page_num,
-                NetDeviceWifi *device_wifi)
-{
-        GtkWidget *widget;
-
-        if (page_num == 1) {
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_back1"));
-                gtk_widget_grab_focus (widget);
-        }
-}
-
-static void
 net_device_wifi_constructed (GObject *object)
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
@@ -2007,8 +1992,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "notebook_view"));
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
-        g_signal_connect_after (widget, "switch-page",
-                                G_CALLBACK (switch_page_cb), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "start_hotspot_button"));
