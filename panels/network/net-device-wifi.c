@@ -61,6 +61,7 @@ struct _NetDeviceWifiPrivate
         GtkBuilder              *builder;
         GtkWidget               *details_dialog;
         GtkWidget               *hotspot_dialog;
+        GtkSwitch               *hotspot_switch;
         gboolean                 updating_device;
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
@@ -935,17 +936,14 @@ static void
 show_hotspot_ui (NetDeviceWifi *device_wifi)
 {
         GtkWidget *widget;
-        GtkSwitch *sw;
 
         /* show hotspot tab */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 
         /* force switch to on as this succeeded */
-        sw = GTK_SWITCH (gtk_builder_get_object (device_wifi->priv->builder,
-                                                 "switch_hotspot_off"));
         device_wifi->priv->updating_device = TRUE;
-        gtk_switch_set_active (sw, TRUE);
+        gtk_switch_set_active (device_wifi->priv->hotspot_switch, TRUE);
         device_wifi->priv->updating_device = FALSE;
 }
 
@@ -1206,12 +1204,8 @@ stop_hotspot_response_cb (GtkWidget *dialog, gint response, NetDeviceWifi *devic
         if (response == GTK_RESPONSE_OK) {
                 stop_shared_connection (device_wifi);
         } else {
-                GtkWidget *sw;
-
-                sw = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                         "switch_hotspot_off"));
                 device_wifi->priv->updating_device = TRUE;
-                gtk_switch_set_active (GTK_SWITCH (sw), TRUE);
+                gtk_switch_set_active (device_wifi->priv->hotspot_switch, TRUE);
                 device_wifi->priv->updating_device = FALSE;
         }
         gtk_widget_destroy (dialog);
@@ -2010,6 +2004,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "switch_hotspot_off"));
+        device_wifi->priv->hotspot_switch = GTK_SWITCH (widget);
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (switch_hotspot_changed_cb), device_wifi);
 }
