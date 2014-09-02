@@ -1180,6 +1180,7 @@ stop_shared_connection (NetDeviceWifi *device_wifi)
         gint i;
         NMActiveConnection *c;
         NMClient *client;
+        gboolean found = FALSE;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         client = net_object_get_client (NET_OBJECT (device_wifi));
@@ -1190,8 +1191,17 @@ stop_shared_connection (NetDeviceWifi *device_wifi)
                 devices = nm_active_connection_get_devices (c);
                 if (devices && devices->pdata[0] == device) {
                         nm_client_deactivate_connection (client, c);
+                        found = TRUE;
                         break;
                 }
+        }
+
+        if (!found) {
+                g_warning ("Could not stop hotspot connection as no connection attached to the device could be found.");
+                device_wifi->priv->updating_device = TRUE;
+                gtk_switch_set_active (device_wifi->priv->hotspot_switch, TRUE);
+                device_wifi->priv->updating_device = FALSE;
+                return;
         }
 
         nm_device_wifi_refresh_ui (device_wifi);
