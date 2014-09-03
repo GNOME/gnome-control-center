@@ -1115,7 +1115,7 @@ setup_am_pm_button (CcDateTimePanel *self)
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
                                    ".gnome-control-center-ampm-toggle-button {\n"
-                                   "    font-size: 18px;\n"
+                                   "    font-size: 150%;\n"
                                    "}", -1, NULL);
   context = gtk_widget_get_style_context (am_pm_button);
   gtk_style_context_add_provider (context,
