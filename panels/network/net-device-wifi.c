@@ -1287,8 +1287,8 @@ net_device_wifi_constructed (GObject *object)
         G_OBJECT_CLASS (net_device_wifi_parent_class)->constructed (object);
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
-        g_signal_connect (client, "notify::wireless-enabled",
-                          G_CALLBACK (wireless_enabled_toggled), device_wifi);
+        g_signal_connect_object (client, "notify::wireless-enabled",
+                                 G_CALLBACK (wireless_enabled_toggled), device_wifi, 0);
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
