@@ -767,9 +767,9 @@ net_device_mobile_constructed (GObject *object)
         }
 
         client = net_object_get_client (NET_OBJECT (device_mobile));
-        g_signal_connect (client, "notify::wwan-enabled",
-                          G_CALLBACK (mobilebb_enabled_toggled),
-                          device_mobile);
+        g_signal_connect_object (client, "notify::wwan-enabled",
+                                 G_CALLBACK (mobilebb_enabled_toggled),
+                                 device_mobile, 0);
         nm_device_mobile_refresh_ui (device_mobile);
 }
 

@@ -323,10 +323,10 @@ net_virtual_device_constructed (GObject *object)
 
         client = net_object_get_client (NET_OBJECT (virtual_device));
 
-        g_signal_connect (client, "device-added",
-                          G_CALLBACK (device_added_cb), virtual_device);
-        g_signal_connect (client, "device-removed",
-                          G_CALLBACK (device_removed_cb), virtual_device);
+        g_signal_connect_object (client, "device-added",
+                                 G_CALLBACK (device_added_cb), virtual_device, 0);
+        g_signal_connect_object (client, "device-removed",
+                                 G_CALLBACK (device_removed_cb), virtual_device, 0);
         devices = nm_client_get_devices (client);
         if (devices) {
                 for (i = 0; i < devices->len; i++)
