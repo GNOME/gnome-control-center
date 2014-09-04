@@ -302,7 +302,7 @@ device_is_hotspot (NetDeviceWifi *device_wifi)
         NMDevice *device;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        if (nm_device_get_active_connection (nm_device) == NULL)
+        if (nm_device_get_active_connection (device) == NULL)
                 return FALSE;
 
         c = find_connection_for_device (device_wifi, device);
