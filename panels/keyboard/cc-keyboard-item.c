@@ -114,7 +114,7 @@ settings_set_binding (GSettings  *settings,
   variant = g_settings_get_value (settings, key);
 
   if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
-    g_settings_set_string (settings, key, value);
+    g_settings_set_string (settings, key, value ? value : "");
   else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
     {
       char **str_array;
