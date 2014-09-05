@@ -162,7 +162,7 @@ wm_window_event_filter (GdkXEvent *xev,
   return GDK_FILTER_CONTINUE;
 }
 
-void
+gpointer
 wm_common_register_window_manager_change (GFunc    func,
 					  gpointer data)
 {
@@ -179,6 +179,15 @@ wm_common_register_window_manager_change (GFunc    func,
 
   XSelectInput (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), GDK_ROOT_WINDOW (), PropertyChangeMask);
   XSync (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), False);
+
+  return ncb_data;
 }
 
+void
+wm_common_unregister_window_manager_change (gpointer id)
+{
+	g_return_if_fail (id != NULL);
 
+	gdk_window_remove_filter (NULL, wm_window_event_filter, id);
+	g_free (id);
+}
