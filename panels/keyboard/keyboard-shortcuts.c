@@ -95,6 +95,7 @@ static GtkWidget *custom_shortcut_command_entry = NULL;
 static GHashTable *kb_system_sections = NULL;
 static GHashTable *kb_apps_sections = NULL;
 static GHashTable *kb_user_sections = NULL;
+static gpointer wm_changed_id = NULL;
 
 static void
 free_key_array (GPtrArray *keys)
@@ -2066,8 +2067,8 @@ keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
   g_object_set_data (G_OBJECT (panel), "builder", builder);
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-    wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
-                                              panel);
+    wm_changed_id = wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
+                                                              panel);
 #endif
   pictures_regex = g_regex_new ("\\$PICTURES", 0, 0, NULL);
   setup_dialog (panel, builder);
@@ -2151,6 +2152,12 @@ keyboard_shortcuts_dispose (CcPanel *panel)
   g_clear_object (&binding_settings);
 
   g_clear_pointer (&custom_shortcut_dialog, gtk_widget_destroy);
+
+  if (wm_changed_id)
+    {
+      wm_common_unregister_window_manager_change (wm_changed_id);
+      wm_changed_id = NULL;
+    }
 
   cc_keyboard_option_clear_all ();
 }
