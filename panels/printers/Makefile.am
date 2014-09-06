@@ -15,8 +15,6 @@ BUILT_SOURCES =			\
 	cc-printers-resources.c	\
 	cc-printers-resources.h
 
-libprinters_la_CPPFLAGS = $(CUPS_CPPFLAGS)
-
 libprinters_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
 	pp-new-printer.c		\
