@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-23 11:07+0200\n"
+"POT-Creation-Date: 2014-09-06 12:11+0200\n"
 "PO-Revision-Date: 2014-08-23 11:10+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -104,14 +104,16 @@ msgstr "Du kan legge til bilder i mappen «%s» for å vise dem her"
 
 #: ../panels/background/cc-background-chooser-dialog.c:592
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
-#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1240
-#: ../panels/network/net-device-wifi.c:1448
+#: ../panels/network/net-device-wifi.c:1247
+#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:468
@@ -121,7 +123,7 @@ msgstr "Du kan legge til bilder i mappen «%s» for å vise dem her"
 #: ../panels/sharing/cc-sharing-panel.c:491
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:267
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:95
 #: ../panels/user-accounts/um-photo-dialog.c:222
 #: ../panels/user-accounts/um-user-panel.c:513
@@ -651,7 +653,7 @@ msgstr ""
 "Windows> systemer kan være nyttig."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:740
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Sammendrag"
 
@@ -659,7 +661,16 @@ msgstr "Sammendrag"
 msgid "Import File…"
 msgstr "Importer fil …"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/printers/new-printer-dialog.ui.h:3
+#: ../panels/region/input-chooser.ui.h:3
+#: ../panels/user-accounts/um-account-dialog.c:1469
+msgid "_Add"
+msgstr "_Legg til"
+
+#: ../panels/color/color.ui.h:31
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -667,140 +678,140 @@ msgstr ""
 "Fant problemer. Profilen vil kanskje ikke fungere som den skal. <a href="
 "\"\">Vis detaljer.</a>"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:32
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr "Hver enhet må ha en oppdatert fargeprofil for å bli fargestyrt."
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:33
 msgid "Learn more"
 msgstr "Lær mer"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:34
 msgid "Learn more about color management"
 msgstr "Lær mer om fargehåndtering"
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:35
 msgid "Set for all users"
 msgstr "Sett for alle brukere"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:36
 msgid "Set this profile for all users on this computer"
 msgstr "Angi denne profilen for alle brukere på denne datamaskinen"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:37
 msgid "Enable"
 msgstr "Slått på"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:38
 msgid "Add profile"
 msgstr "Legg til profil:"
 
-#: ../panels/color/color.ui.h:37
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Calibrate…"
 msgstr "Kalibrer …"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
 msgstr "Kalibrer enheten"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:41
 msgid "Remove profile"
 msgstr "Fjern profil"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:42
 msgid "View details"
 msgstr "Vis detaljer"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:43
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Kan ikke finne noen enheter som støtter fargehåndtering"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:44
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:45
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:46
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:47
 msgid "Projector"
 msgstr "Prosjektor"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:48
 msgid "Plasma"
 msgstr "Plasma"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:49
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL-baklys)"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:50
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED-baklys)"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:51
 msgid "LCD (white LED backlight)"
 msgstr "LCD (hvitt LED-baklys)"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:52
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Bred gamut LCD (CCFL-baklys)"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:53
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Bred gamut LCD (RGB LED-baklys)"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:54
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Høy"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:55
 msgid "40 minutes"
 msgstr "40 minutter"
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:56
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Middels"
 
-#: ../panels/color/color.ui.h:55 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minutter"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:58
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Lav"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 minutter"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:60
 msgid "Native to display"
 msgstr "Skjermens egen"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:61
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Utskrift og trykking)"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:62
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:63
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (fotografi og grafikk)"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:64
 msgid "D75"
 msgstr "D75"
 
@@ -1083,7 +1094,8 @@ msgstr "Organiser sammenslåtte skjermer"
 
 #: ../panels/display/cc-display-panel.c:1539
 #: ../panels/display/cc-display-panel.c:1979
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
+#: ../panels/network/connection-editor/connection-editor.ui.h:2
+#: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Bruk"
 
@@ -1273,7 +1285,7 @@ msgid "Windows software"
 msgstr "Windows programvare"
 
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1917
+#: ../panels/keyboard/keyboard-shortcuts.c:1918
 msgid "Section"
 msgstr "Seksjon"
 
@@ -1296,7 +1308,7 @@ msgstr "Versjon %s"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:44
+#: ../panels/network/network-wifi.ui.h:46
 msgid "Details"
 msgstr "Detaljer"
 
@@ -1594,11 +1606,10 @@ msgstr "Høy kontrast på eller av"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1217
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/keyboard/keyboard-shortcuts.c:1218
+#: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
-#: ../panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -1638,14 +1649,6 @@ msgstr "Snarvei;Repetisjon;Blinking;"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "Custom Shortcut"
 msgstr "Egendefinert snarvei"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
-#: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1469
-msgid "_Add"
-msgstr "_Legg til"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "_Name:"
@@ -1736,16 +1739,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:634
-#: ../panels/keyboard/keyboard-shortcuts.c:642
+#: ../panels/keyboard/keyboard-shortcuts.c:635
+#: ../panels/keyboard/keyboard-shortcuts.c:643
 msgid "Custom Shortcuts"
 msgstr "Egendefinerte snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:859
+#: ../panels/keyboard/keyboard-shortcuts.c:860
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1356
+#: ../panels/keyboard/keyboard-shortcuts.c:1357
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1756,7 +1759,7 @@ msgstr ""
 "tasten.\n"
 "Prøv en tastekombinasjon som inkluderer Control, Alt eller Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1386
+#: ../panels/keyboard/keyboard-shortcuts.c:1387
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1765,31 +1768,35 @@ msgstr ""
 "Snarvei «%s» er allerede brukt for\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1391
+#: ../panels/keyboard/keyboard-shortcuts.c:1392
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Hvis du omfordeler snarveien til «%s» fjernes snarveien til «%s»."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1397
+#: ../panels/keyboard/keyboard-shortcuts.c:1398
 msgid "_Reassign"
 msgstr "_Omfordel"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1429
+#: ../panels/keyboard/keyboard-shortcuts.c:1430
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
 "automatically set it to \"%s\"?"
-msgstr "Snarveien «%s» har en assosiert snarvei «%s». Vil du sette denne til «%s» automatisk?"
+msgstr ""
+"Snarveien «%s» har en assosiert snarvei «%s». Vil du sette denne til «%s» "
+"automatisk?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1435
+#: ../panels/keyboard/keyboard-shortcuts.c:1436
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
 "if you move forward."
-msgstr "«%s» er assosiert med «%s», denne snarveien vil bli slått av hvis du går videre."
+msgstr ""
+"«%s» er assosiert med «%s», denne snarveien vil bli slått av hvis du går "
+"videre."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
+#: ../panels/keyboard/keyboard-shortcuts.c:1442
 msgid "_Assign"
 msgstr "_Tildel"
 
@@ -1994,7 +2001,7 @@ msgstr "side 2"
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
 #: ../panels/network/connection-editor/ce-page-security.c:455
 #: ../panels/network/connection-editor/details-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
 msgstr "Sikkerhet"
 
@@ -2004,34 +2011,34 @@ msgstr "automatisk"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:217
-#: ../panels/network/net-device-wifi.c:378
+#: ../panels/network/net-device-wifi.c:218
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:221
-#: ../panels/network/net-device-wifi.c:383
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:226
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:231
 msgid "Enterprise"
 msgstr "Bedrift"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:235
-#: ../panels/network/net-device-wifi.c:368
+#: ../panels/network/net-device-wifi.c:236
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ingen"
@@ -2053,7 +2060,7 @@ msgstr "I går"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:126
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2063,37 +2070,37 @@ msgstr[1] "%i dager siden"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:529
+#: ../panels/network/net-device-wifi.c:533
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:558
+#: ../panels/network/net-device-wifi.c:562
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ingen"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:560
+#: ../panels/network/net-device-wifi.c:564
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Svak"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:566
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:568
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "God"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:570
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Utmerket"
@@ -2101,7 +2108,7 @@ msgstr "Utmerket"
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
 #: ../panels/network/connection-editor/ce-page-wifi.c:270
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identitet"
 
@@ -2158,13 +2165,13 @@ msgid "Delete Route"
 msgstr "Slett rute"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:615
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Automatisk (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Manual"
 msgstr "Manuell"
 
@@ -2174,7 +2181,7 @@ msgid "Link-Local Only"
 msgstr "Kun link-local"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:953
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2196,12 +2203,12 @@ msgid "Automatic, DHCP only"
 msgstr "Automatisk. Kun DHCP"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:919
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:51
 msgid "Reset"
 msgstr "Nullstill"
 
@@ -2236,19 +2243,19 @@ msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 bedrift"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:2
+#: ../panels/network/network-wifi.ui.h:4
 msgid "Signal Strength"
 msgstr "Signalstyrke"
 
 #: ../panels/network/connection-editor/details-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:3
+#: ../panels/network/network-wifi.ui.h:5
 msgid "Link speed"
 msgstr "Hastighet for tilkobling"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "IPv4-adresse"
 
@@ -2257,14 +2264,14 @@ msgstr "IPv4-adresse"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "IPv6-adresse"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Hardware Address"
 msgstr "Maskinvareadresse"
 
@@ -2272,7 +2279,7 @@ msgstr "Maskinvareadresse"
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
 #: ../panels/network/network-simple.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Default Route"
 msgstr "Forvalgt rute"
 
@@ -2282,7 +2289,7 @@ msgstr "Forvalgt rute"
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:11
 msgid "DNS"
 msgstr "DNS"
 
@@ -2329,7 +2336,7 @@ msgstr "_Navn"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:36
+#: ../panels/network/network-wifi.ui.h:38
 msgid "_MAC Address"
 msgstr "_MAC-adresse"
 
@@ -2373,13 +2380,13 @@ msgid "The zone defines the trust level of the connection"
 msgstr "Sonen definerer tillitsnivå for tilkoblingen"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:24
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:25
 msgid "_Addresses"
 msgstr "_Adresser"
 
@@ -2390,7 +2397,7 @@ msgstr "Automatisk DNS"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Routes"
 msgstr "Ruter"
 
@@ -2401,12 +2408,12 @@ msgstr "Automatiske ruter"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:32
+#: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
 msgstr "Bruk denne tilkoblingen _kun for ressurser på dette nettverket"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:34
+#: ../panels/network/network-wifi.ui.h:36
 msgid "IPv_6"
 msgstr "IPv_6"
 
@@ -2452,13 +2459,13 @@ msgid "Add Network Connection"
 msgstr "Legg til nettverkstilkobling"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:41
 msgid "_Reset"
 msgstr "N_ullstill"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1449
-#: ../panels/network/network-wifi.ui.h:40
+#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Glem"
 
@@ -2479,7 +2486,7 @@ msgstr ""
 "automatisk"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:16
 msgid "S_ecurity"
 msgstr "Sikk_erhet"
 
@@ -2549,17 +2556,17 @@ msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Feil: kan ikke laste redigering av VPN-forbindelse)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:14
 msgid "_SSID"
 msgstr "_SSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:15
 msgid "_BSSID"
 msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:18
 msgid "My Home Network"
 msgstr "Mitt hjemme nettverk"
 
@@ -2600,17 +2607,17 @@ msgid "Bridge slaves"
 msgstr "Lag bro mellom slaver"
 
 #: ../panels/network/net-device-ethernet.c:112
-#: ../panels/network/net-device-wifi.c:458
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "aldri"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:468
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "i dag"
 
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:470
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "i går"
 
@@ -2622,7 +2629,7 @@ msgid "IP Address"
 msgstr "IP-adresse"
 
 #: ../panels/network/net-device-ethernet.c:178
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:12
 msgid "Last used"
 msgstr "Sist brukt"
 
@@ -2638,7 +2645,7 @@ msgid "Wired"
 msgstr "Kablet"
 
 #: ../panels/network/net-device-ethernet.c:356
-#: ../panels/network/net-device-wifi.c:1604
+#: ../panels/network/net-device-wifi.c:1596
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2659,7 +2666,7 @@ msgstr "Legg til ny tilkobling"
 msgid "Team slaves"
 msgstr "La enhetene jobbe sammen"
 
-#: ../panels/network/net-device-wifi.c:1153
+#: ../panels/network/net-device-wifi.c:1154
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2667,12 +2674,12 @@ msgstr ""
 "Hvis du har en annen tilkobling til internett enn trådløs kan du sette opp "
 "et trådløst aksesspunkt for å dele tilkoblingen med andre."
 
-#: ../panels/network/net-device-wifi.c:1157
+#: ../panels/network/net-device-wifi.c:1158
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Hvis du slår på trådløst aksesspunkt, blir du koblet fra <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1161
+#: ../panels/network/net-device-wifi.c:1162
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2680,23 +2687,23 @@ msgstr ""
 "Det er ikke mulig å aksessere internett via trådløst nettverk mens trådløst "
 "aksesspunkt er aktivt."
 
-#: ../panels/network/net-device-wifi.c:1238
+#: ../panels/network/net-device-wifi.c:1245
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stopp trådløst aksesspunkt og koble fra brukere?"
 
-#: ../panels/network/net-device-wifi.c:1241
+#: ../panels/network/net-device-wifi.c:1248
 msgid "_Stop Hotspot"
 msgstr "_Stopp hotspot"
 
-#: ../panels/network/net-device-wifi.c:1313
+#: ../panels/network/net-device-wifi.c:1305
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systemets regelsett forhindrer bruk som aksesspunkt"
 
-#: ../panels/network/net-device-wifi.c:1316
+#: ../panels/network/net-device-wifi.c:1308
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Trådløs enhet støtter ikke hotspotmodus"
 
-#: ../panels/network/net-device-wifi.c:1445
+#: ../panels/network/net-device-wifi.c:1437
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2704,18 +2711,20 @@ msgstr ""
 "Nettverksdetaljer for valgte nettverk - inkludert passord og innstillinger - "
 "går tapt."
 
-#: ../panels/network/net-device-wifi.c:1753
+#: ../panels/network/net-device-wifi.c:1745
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historikk"
 
-#: ../panels/network/net-device-wifi.c:1757
+#: ../panels/network/net-device-wifi.c:1749
+#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:533
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "_Close"
 msgstr "_Lukk"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1765
+#: ../panels/network/net-device-wifi.c:1757
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Glem"
@@ -2844,15 +2853,15 @@ msgstr "Brukernavn"
 msgid "Turn VPN connection off"
 msgstr "Slå av VPN-forbindelse"
 
-#: ../panels/network/network-wifi.ui.h:1
+#: ../panels/network/network-wifi.ui.h:3
 msgid "Automatic _Connect"
 msgstr "_Koble til automatisk"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:13
 msgid "details"
 msgstr "detaljer"
 
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:17
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:2
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
@@ -2862,55 +2871,55 @@ msgstr "detaljer"
 msgid "_Password"
 msgstr "_Passord"
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
 msgstr "Vis p_assord"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Make available to other users"
 msgstr "Gjør tilgjengelig for andre brukere"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:23
 msgid "identity"
 msgstr "identitet"
 
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Automatic (DHCP) addresses only"
 msgstr "Kun automatiske adresser (DHCP)"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:29
 msgid "Link-local only"
 msgstr "Kun link-local"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Shared with other computers"
 msgstr "Delt med andre datamaskiner"
 
-#: ../panels/network/network-wifi.ui.h:31
+#: ../panels/network/network-wifi.ui.h:33
 msgid "_Ignore automatically obtained routes"
 msgstr "_Ignorer automatisk innhentede ruter"
 
-#: ../panels/network/network-wifi.ui.h:33
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:35
+#: ../panels/network/network-wifi.ui.h:37
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:37
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Cloned MAC Address"
 msgstr "_Klonet MAC-adresse"
 
-#: ../panels/network/network-wifi.ui.h:38
+#: ../panels/network/network-wifi.ui.h:40
 msgid "hardware"
 msgstr "maskinvare"
 
-#: ../panels/network/network-wifi.ui.h:41
+#: ../panels/network/network-wifi.ui.h:43
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2918,7 +2927,7 @@ msgstr ""
 "Nullstill innstillingene for denne tilkoblingen til utgangsverdiene, men "
 "husk den som en foretrukket tilkobling."
 
-#: ../panels/network/network-wifi.ui.h:42
+#: ../panels/network/network-wifi.ui.h:44
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2926,59 +2935,59 @@ msgstr ""
 "Fjern alle detaljer relatert til dette nettverket og ikke prøv å koble til "
 "det automatisk."
 
-#: ../panels/network/network-wifi.ui.h:43
+#: ../panels/network/network-wifi.ui.h:45
 msgid "reset"
 msgstr "nullstill"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi Hotspot"
 msgstr "Trådløst aksesspunkt"
 
-#: ../panels/network/network-wifi.ui.h:51
+#: ../panels/network/network-wifi.ui.h:53
 msgid "_Turn On"
 msgstr "_Slå på"
 
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:54
 msgid "Wi-Fi"
 msgstr "Trådløs"
 
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:55
 msgid "Turn Wi-Fi off"
 msgstr "Slå trådløs av"
 
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_Use as Hotspot…"
 msgstr "Br_uk som trådløst aksesspunkt …"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:57
 msgid "_Connect to Hidden Network…"
 msgstr "_Koble til skjult nettverk …"
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:58
 msgid "_History"
 msgstr "_Historikk"
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Slå av for å koble til et trådløst nettverk"
 
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Network Name"
 msgstr "Nettverksnavn"
 
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Connected Devices"
 msgstr "Tilkoblede enheter"
 
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:62
 msgid "Security type"
 msgstr "Type sikkerhet"
 
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:63
 msgid "Security key"
 msgstr "Sikkerhetsnøkkel"
 
@@ -4868,12 +4877,12 @@ msgid "Other"
 msgstr "Annen"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:896
+#: ../panels/user-accounts/um-user-panel.c:892
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Økten må startes på nytt for at endringene skal tre i kraft"
 
 #: ../panels/region/cc-region-panel.c:240
-#: ../panels/user-accounts/um-user-panel.c:897
+#: ../panels/user-accounts/um-user-panel.c:893
 msgid "Restart Now"
 msgstr "Start på nytt nå"
 
@@ -4943,43 +4952,43 @@ msgstr "Legg til en inndatakilde"
 msgid "Input Source Options"
 msgstr "Alternativer for inndatakilde"
 
-#: ../panels/region/input-options.ui.h:2
+#: ../panels/region/input-options.ui.h:3
 msgid "Use the _same source for all windows"
 msgstr "Bruk _samme kilde for alle vinduer"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:4
 msgid "Allow _different sources for each window"
 msgstr "Tillat _forskjellige kilder for hvert vindu"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:5
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:6
 msgid "Switch to previous source"
 msgstr "Bytt til forrige kilde"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:7
 msgid "Super+Shift+Space"
 msgstr "Super+Shift+Mellomrom"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:8
 msgid "Switch to next source"
 msgstr "Bytt til neste kilde"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:9
 msgid "Super+Space"
 msgstr "Super+Mellomrom"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:10
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Du kan endre disse snarveiene i innstillinger for tastatur"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:11
 msgid "Alternative switch to next source"
 msgstr "Alternativ bytt til neste kilde"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:12
 msgid "Left+Right Alt"
 msgstr "Venstre+høyre Alt"
 
@@ -6026,7 +6035,7 @@ msgid "Right little finger"
 msgstr "Høyre lillefinger"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:697
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Slå på innlogging med fingeravtrykk"
 
@@ -6358,33 +6367,32 @@ msgstr "Klarte ikke å logge inn i domenet"
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Kan ikke finne domenet. Kanskje du stavet det feil?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:137
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr "Du har ikke tilgang til enheten. Kontakt din systemadministrator."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:139
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "Enheten er allerede i bruk."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:141
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "En intern feil har oppstått."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:217
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Slått på"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:263
 msgid "Delete registered fingerprints?"
 msgstr "Slett registrerte fingeravtrykk?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:270
+#: ../panels/user-accounts/um-fingerprint-dialog.c:267
 msgid "_Delete Fingerprints"
 msgstr "_Slett fingeravtrykk"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:276
+#: ../panels/user-accounts/um-fingerprint-dialog.c:273
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6392,15 +6400,15 @@ msgstr ""
 "Vil du slette dine registrerte fingeravtrykk slik at innlogging med "
 "fingeravtrykk slås av?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:452
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Ferdig"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:513
-#: ../panels/user-accounts/um-fingerprint-dialog.c:555
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Kunne ikke aksessere enheten «%s»"
@@ -6408,16 +6416,16 @@ msgstr "Kunne ikke aksessere enheten «%s»"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:596
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Kunne ikke starte innlesing av data på enhet «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:647
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "Kunne ikke aksessere fingeravtrykkleser"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:648
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Kontakt din systemadministrator for hjelp."
 
@@ -6426,7 +6434,7 @@ msgstr "Kontakt din systemadministrator for hjelp."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6435,11 +6443,11 @@ msgstr ""
 "Du må lagre ett av dine fingeravtrykk med enheten «%s» for å slå på "
 "innlogging med fingeravtrykk."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:738
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "Velger finger"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:739
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "Registrerer fingeravtrykk"
 
@@ -6627,15 +6635,15 @@ msgstr "Ingen"
 msgid "Logged in"
 msgstr "Logget inn"
 
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1067
 msgid "Failed to contact the accounts service"
 msgstr "Klarte ikke å kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:1074
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
-#: ../panels/user-accounts/um-user-panel.c:1115
+#: ../panels/user-accounts/um-user-panel.c:1110
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6643,12 +6651,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å gjøre endringer"
 
-#: ../panels/user-accounts/um-user-panel.c:1153
+#: ../panels/user-accounts/um-user-panel.c:1148
 msgid "Create a user account"
 msgstr "Lag en ny brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1164
-#: ../panels/user-accounts/um-user-panel.c:1453
+#: ../panels/user-accounts/um-user-panel.c:1159
+#: ../panels/user-accounts/um-user-panel.c:1471
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6656,12 +6664,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å lage en brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1169
 msgid "Delete the selected user account"
 msgstr "Slett valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1186
-#: ../panels/user-accounts/um-user-panel.c:1458
+#: ../panels/user-accounts/um-user-panel.c:1181
+#: ../panels/user-accounts/um-user-panel.c:1476
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6669,7 +6677,7 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å slette valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1368
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid "My Account"
 msgstr "Min konto"
 
@@ -6713,11 +6721,11 @@ msgstr "%e. %b, %Y"
 msgid "Map Buttons"
 msgstr "Tilegne knapper"
 
-#: ../panels/wacom/button-mapping.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:3
 msgid "Map buttons to functions"
 msgstr "Koble knapper til funksjoner"
 
-#: ../panels/wacom/button-mapping.ui.h:3
+#: ../panels/wacom/button-mapping.ui.h:4
 msgid ""
 "To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear."
@@ -6796,7 +6804,7 @@ msgid "Button"
 msgstr "Knapp"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Wacom Tablet"
 msgstr "Wacom pekeplate"
 
@@ -6823,39 +6831,39 @@ msgstr "Pekeplate (relativ)"
 msgid "Tablet Preferences"
 msgstr "Brukervalg for tegnebrett"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "No tablet detected"
 msgstr "Ingen tegnebrett funnet"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Vennligst slå på eller koble til ditt Wacom tegnebrett"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Bluetooth Settings"
 msgstr "Innstillinger for Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Map to Monitor…"
 msgstr "Tilegne til skjerm …"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map Buttons…"
 msgstr "Tilegne knapper …"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Adjust display resolution"
 msgstr "Juster skjermoppløsing"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust mouse settings"
 msgstr "Juster innstillinger for mus"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Tracking Mode"
 msgstr "Sporingsmodus"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Left-Handed Orientation"
 msgstr "Venstrehendt orientering"
 
