@@ -714,6 +714,9 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         /* Don't add the libvirtd bridge to the UI */
         if (g_strrstr (udi, "/virbr0") != NULL)
                 goto out;
+        /* Don't add VPN devices either */
+        if (g_strrstr (udi, "/tun0") != NULL)
+                goto out;
 
         type = nm_device_get_device_type (device);
 
