@@ -701,18 +701,24 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         GtkNotebook *notebook;
         GtkSizeGroup *size_group;
         GType device_g_type;
+        const char *udi;
 
         if (!nm_device_get_managed (device))
                 goto out;
 
         /* do we have an existing object with this id? */
-        if (find_in_model_by_id (panel, nm_device_get_udi (device), NULL) != NULL)
+        udi = nm_device_get_udi (device);
+        if (find_in_model_by_id (panel, udi, NULL) != NULL)
+                goto out;
+
+        /* Don't add the libvirtd bridge to the UI */
+        if (g_strrstr (udi, "/virbr0") != NULL)
                 goto out;
 
         type = nm_device_get_device_type (device);
 
         g_debug ("device %s type %i path %s",
-                 nm_device_get_udi (device), type, nm_object_get_path (NM_OBJECT (device)));
+                 udi, type, nm_object_get_path (NM_OBJECT (device)));
 
         /* map the NMDeviceType to the GType */
         switch (type) {
