@@ -1422,6 +1422,15 @@ show_reverse_item_dialog (GtkTreeView           *view,
 
   name = binding_name (keyval, keycode, mask, TRUE);
 
+  /* translators:
+   * This is the text you get in a dialogue when an action has an associated
+   * "reverse" action, for example Alt+Tab going in the opposite direction to
+   * Alt+Shift+Tab.
+   *
+   * An example text would be:
+   * The "Switch to next input source" shortcut has an associated "Switch to
+   * previous input source" shortcut. Do you want to automatically set it to
+   * "Shift+Ctrl+Alt+Space"? */
   dialog =
     gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
                             GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
@@ -1431,11 +1440,16 @@ show_reverse_item_dialog (GtkTreeView           *view,
                               "Do you want to automatically set it to \"%s\"?"),
                             item->description, reverse_item->description, name);
 
-  if (reverse_conflict_item != NULL)
+  if (reverse_conflict_item != NULL) {
+    /* translators:
+     * This is the text you get in a dialogue when you try to use a shortcut
+     * that was already associated with another action, for example:
+     * "Alt+F4" is currently associated with "Close Window", ... */
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
         _("\"%s\" is currently associated with \"%s\", this shortcut will be"
           " disabled if you move forward."),
         name, reverse_conflict_item->description);
+  }
   g_free (name);
 
   gtk_dialog_add_button (GTK_DIALOG (dialog),
