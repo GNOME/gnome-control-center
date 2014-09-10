@@ -113,7 +113,7 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
       gint height;
 
       gtk_window_get_size (parent, &width, &height);
-      gtk_widget_set_size_request (GTK_WIDGET (chooser), (gint) (0.5 * width), (gint) (0.9 * height));
+      gtk_widget_set_size_request (GTK_WIDGET (chooser), -1, (gint) (0.9 * height));
       gtk_icon_view_set_columns (GTK_ICON_VIEW (chooser->priv->icon_view), 3);
     }
 
