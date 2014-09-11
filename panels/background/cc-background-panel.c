@@ -766,10 +766,8 @@ launch_chooser (CcBackgroundPanel *self,
   CcBackgroundPanelPrivate *priv = self->priv;
   GtkWidget *dialog;
 
-  dialog = cc_background_chooser_dialog_new ();
+  dialog = cc_background_chooser_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))));
   g_object_set_data (G_OBJECT (dialog), "settings", settings);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))));
   gtk_widget_show (dialog);
   g_signal_connect (dialog, "response", G_CALLBACK (on_chooser_dialog_response), self);
   priv->chooser = dialog;

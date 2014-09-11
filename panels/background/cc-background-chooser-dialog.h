@@ -49,7 +49,7 @@ struct _CcBackgroundChooserDialogClass
 };
 
 GType                  cc_background_chooser_dialog_get_type               (void) G_GNUC_CONST;
-GtkWidget *            cc_background_chooser_dialog_new                    (void);
+GtkWidget *            cc_background_chooser_dialog_new                    (GtkWindow *transient_for);
 
 CcBackgroundItem *     cc_background_chooser_dialog_get_item               (CcBackgroundChooserDialog *chooser);
 
