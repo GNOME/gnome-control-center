@@ -123,7 +123,7 @@ searched_online_source (GrlSource    *source,
   uri = grl_media_get_url (media);
   cache_path = bg_pictures_source_get_unique_path (uri);
   cache_file = g_file_new_for_path (cache_path);
-  g_object_set_data_full (G_OBJECT (cache_file), "grl-media", g_object_ref (media), g_object_unref);
+  g_object_set_data_full (G_OBJECT (cache_file), "grl-media", media, g_object_unref);
   g_file_query_info_async (cache_file,
                            G_FILE_ATTRIBUTE_STANDARD_TYPE,
                            G_FILE_QUERY_INFO_NONE,
