@@ -9,6 +9,7 @@ AM_CPPFLAGS =						\
 	$(SHARING_PANEL_CFLAGS)				\
 	$(BLUETOOTH_CFLAGS)				\
 	-DLIBEXECDIR=\"$(libexecdir)\"			\
+	-DSYSCONFDIR=\"$(sysconfdir)\"			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libsharing.la

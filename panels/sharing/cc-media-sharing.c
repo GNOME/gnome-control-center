@@ -35,9 +35,16 @@ cc_media_sharing_open_key_file (void)
 
   path = g_build_filename (g_get_user_config_dir (), "rygel.conf", NULL);
 
-  g_key_file_load_from_file (file, path,
-                             G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS,
-                             NULL);
+  if (!g_key_file_load_from_file (file, path,
+                                  G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS,
+                                  NULL))
+    {
+      g_free (path);
+      path = g_build_filename (SYSCONFDIR, "rygel.conf", NULL);
+      g_key_file_load_from_file (file, path,
+                                 G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS,
+                                 NULL);
+    }
 
   g_free (path);
 
