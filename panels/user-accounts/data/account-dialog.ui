@@ -188,12 +188,13 @@
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkRadioButton" id="local-password-login-radio">
-                        <property name="label" translatable="yes">Allow user to set a password when they next login</property>
+                        <property name="label" translatable="yes">Allow user to set a password when they next _login</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
+                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -201,13 +202,14 @@
                     </child>
                     <child>
                       <object class="GtkRadioButton" id="local-password-now-radio">
-                        <property name="label" translatable="yes">Set a password now</property>
+                        <property name="label" translatable="yes">Set a password _now</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                         <property name="group">local-password-login-radio</property>
+                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="position">1</property>
