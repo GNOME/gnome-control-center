@@ -1801,7 +1801,7 @@ setup_login_button (CcRegionPanel *self)
         g_object_unref (bus);
 
         priv->login_label = WID ("login-label");
-        priv->login_button = gtk_toggle_button_new_with_label (_("Login Screen"));
+        priv->login_button = gtk_toggle_button_new_with_mnemonic (_("Login _Screen"));
         gtk_style_context_add_class (gtk_widget_get_style_context (priv->login_button),
                                      "text-button");
         gtk_widget_set_valign (priv->login_button, GTK_ALIGN_CENTER);
