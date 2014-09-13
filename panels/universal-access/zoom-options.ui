@@ -95,7 +95,8 @@
               <object class="GtkLabel" id="label6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Zoom</property>
+                <property name="label" translatable="yes">_Zoom</property>
+                <property name="use_underline">True</property>
                 <property name="mnemonic_widget">seeing_zoom_switch</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
@@ -182,7 +183,8 @@
                             <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="ypad">2</property>
-                            <property name="label" translatable="yes">Magnification:</property>
+                            <property name="label" translatable="yes">_Magnification:</property>
+                            <property name="use_underline">True</property>
                             <property name="mnemonic_widget">magFactorSpinButton</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -245,7 +247,7 @@
                                 <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkRadioButton" id="moveableLens">
-                                    <property name="label" translatable="yes">Follow mouse cursor</property>
+                                    <property name="label" translatable="yes">_Follow mouse cursor</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -254,6 +256,7 @@
                                     <property name="xalign">0</property>
                                     <property name="active">True</property>
                                     <property name="draw_indicator">True</property>
+                                    <property name="use_underline">True</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -264,7 +267,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkRadioButton" id="screenPart">
-                                    <property name="label" translatable="yes">Screen part:</property>
+                                    <property name="label" translatable="yes">_Screen part:</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -274,6 +277,7 @@
                                     <property name="yalign">0</property>
                                     <property name="draw_indicator">True</property>
                                     <property name="group">moveableLens</property>
+                                    <property name="use_underline">True</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -325,7 +329,7 @@
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkCheckButton" id="scrollAtEdges">
-                                        <property name="label" translatable="yes">Magnifier extends outside of screen</property>
+                                        <property name="label" translatable="yes">Magnifier _extends outside of screen</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -333,6 +337,7 @@
                                         <property name="use_action_appearance">False</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
+                                        <property name="use_underline">True</property>
                                       </object>
                                       <packing>
                                         <property name="expand">True</property>
@@ -343,7 +348,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="centered">
-                                        <property name="label" translatable="yes">Keep magnifier cursor centered</property>
+                                        <property name="label" translatable="yes">_Keep magnifier cursor centered</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -352,6 +357,7 @@
                                         <property name="xalign">0</property>
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
+                                        <property name="use_underline">True</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -361,7 +367,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="push">
-                                        <property name="label" translatable="yes">Magnifier cursor pushes contents around</property>
+                                        <property name="label" translatable="yes">Magnifier cursor _pushes contents around</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -370,6 +376,7 @@
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">centered</property>
+                                        <property name="use_underline">True</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -379,7 +386,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="proportional">
-                                        <property name="label" translatable="yes">Magnifier cursor moves with contents</property>
+                                        <property name="label" translatable="yes">Magnifier cursor moves with _contents</property>
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -388,6 +395,7 @@
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">centered</property>
+                                        <property name="use_underline">True</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -479,8 +487,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Thickness:</property>
+                                    <property name="label" translatable="yes">_Thickness:</property>
                                     <property name="justify">center</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">xHairsThicknessSlider</property>
                                     <property name="width_chars">12</property>
                                     <attributes>
@@ -562,8 +571,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Length:</property>
+                                    <property name="label" translatable="yes">_Length:</property>
                                     <property name="justify">center</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">xHairsLengthSlider</property>
                                     <property name="width_chars">12</property>
                                     <accessibility>
@@ -613,7 +623,8 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes" comments="The color of the accessibility crosshair">Color:</property>
+                                    <property name="label" translatable="yes" comments="The color of the accessibility crosshair">Co_lor:</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">xHairsPicker</property>
                                     <attributes>
                                       <attribute name="scale" value="1.25"/>
@@ -676,8 +687,9 @@
                           <object class="GtkLabel" id="xhairs-section-heading">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Crosshairs:</property>
+                            <property name="label" translatable="yes">_Crosshairs:</property>
                             <property name="use_markup">True</property>
+                            <property name="use_underline">True</property>
                             <property name="mnemonic_widget">xhairsEnabledSwitch</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -726,7 +738,7 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="xHairsClipCheckbox">
-                            <property name="label" translatable="yes">Overlaps mouse cursor</property>
+                            <property name="label" translatable="yes">_Overlaps mouse cursor</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -737,6 +749,7 @@
                             <property name="use_action_appearance">False</property>
                             <property name="xalign">0</property>
                             <property name="draw_indicator">True</property>
+                            <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -811,8 +824,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">White on black:</property>
+                                    <property name="label" translatable="yes">_White on black:</property>
                                     <property name="justify">right</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">inverseEnabledSwitch</property>
                                     <accessibility>
                                       <relation type="label-for" target="inverseEnabledSwitch"/>
@@ -833,8 +847,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Brightness:</property>
+                                    <property name="label" translatable="yes">_Brightness:</property>
                                     <property name="justify">right</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">brightnessSlider</property>
                                     <property name="width_chars">12</property>
                                     <accessibility>
@@ -856,8 +871,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Contrast:</property>
+                                    <property name="label" translatable="yes">_Contrast:</property>
                                     <property name="justify">right</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">contrastSlider</property>
                                     <accessibility>
                                       <relation type="label-for" target="contrastSlider"/>
@@ -878,8 +894,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes" context="universal access, contrast" comments="The contrast scale goes from Color to None (grayscale)">Color</property>
+                                    <property name="label" translatable="yes" context="universal access, contrast" comments="The contrast scale goes from Color to None (grayscale)">Co_lor</property>
                                     <property name="justify">right</property>
+                                    <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">grayscale_slider</property>
                                     <accessibility>
                                       <relation type="label-for" target="grayscale_slider"/>
