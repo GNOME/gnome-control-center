@@ -16,7 +16,9 @@
             <property name="can_focus">False</property>
             <property name="margin_bottom">6</property>
             <property name="xalign">0</property>
-            <property name="label" translatable="yes">Computer Name</property>
+            <property name="label" translatable="yes">_Computer Name</property>
+            <property name="use_underline">True</property>
+            <property name="mnemonic_widget">hostname-entry</property>
             <accessibility>
               <relation type="label-for" target="hostname-entry"/>
             </accessibility>
@@ -69,7 +71,9 @@
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property translatable="yes" name="label">Personal File Sharing</property>
+                            <property translatable="yes" name="label">_Personal File Sharing</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">personal-file-sharing-button</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -107,7 +111,9 @@
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property translatable="yes" name="label">Screen Sharing</property>
+                            <property translatable="yes" name="label">_Screen Sharing</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">screen-sharing-button</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -145,7 +151,9 @@
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property translatable="yes" name="label">Media Sharing</property>
+                            <property translatable="yes" name="label">_Media Sharing</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">media-sharing-button</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -183,7 +191,9 @@
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Remote Login</property>
+                            <property name="label" translatable="yes">_Remote Login</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">remote-login-button</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -279,8 +289,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
-                    <property name="label" translatable="yes">Require Password</property>
+                    <property name="label" translatable="yes">_Require Password</property>
                     <property name="use_markup">True</property>
+                    <property name="use_underline">True</property>
                     <property name="mnemonic_widget">personal-file-sharing-require-password-switch</property>
                   </object>
                   <packing>
@@ -296,7 +307,8 @@
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Password</property>
+                    <property name="label" translatable="yes">_Password</property>
+                    <property name="use_underline">True</property>
                     <property name="mnemonic_widget">personal-file-sharing-password-entry</property>
                   </object>
                   <packing>
@@ -518,7 +530,8 @@
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Allow Remote Control</property>
+                            <property name="label" translatable="yes">_Allow Remote Control</property>
+                            <property name="use_underline">True</property>
                             <property name="mnemonic_widget">remote-control-switch</property>
                           </object>
                           <packing>
@@ -563,7 +576,8 @@
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="margin_left">12</property>
-                                <property name="label" translatable="yes">Password:</property>
+                                <property name="label" translatable="yes">_Password:</property>
+                                <property name="use_underline">True</property>
                                 <property name="mnemonic_widget">remote-control-password-entry</property>
                               </object>
                               <packing>
@@ -592,12 +606,13 @@
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="show-password-checkbutton">
-                                <property name="label" translatable="yes">Show Password</property>
+                                <property name="label" translatable="yes">_Show Password</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
+                                <property name="use_underline">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -636,13 +651,14 @@
                         </child>
                         <child>
                           <object class="GtkRadioButton" id="approve-connections-radiobutton">
-                            <property name="label" translatable="yes">New connections must ask for access</property>
+                            <property name="label" translatable="yes">_New connections must ask for access</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="xalign">0</property>
                             <property name="draw_indicator">True</property>
                             <property name="group">require-password-radiobutton</property>
+                            <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -653,12 +669,13 @@
                         </child>
                         <child>
                           <object class="GtkRadioButton" id="require-password-radiobutton">
-                            <property name="label" translatable="yes">Require a password</property>
+                            <property name="label" translatable="yes">_Require a password</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="xalign">0</property>
                             <property name="draw_indicator">True</property>
+                            <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
