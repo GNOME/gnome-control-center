@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-09 06:30+0000\n"
-"PO-Revision-Date: 2014-09-09 17:00+0100\n"
+"POT-Creation-Date: 2014-09-15 10:58+0000\n"
+"PO-Revision-Date: 2014-09-15 18:48+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -72,49 +72,49 @@ msgctxt "background, style"
 msgid "Span"
 msgstr "Rozprestrieť"
 
-# window title
-#. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:442
-msgid "Select Background"
-msgstr "Výber pozadia"
-
 # radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:463
+#: ../panels/background/cc-background-chooser-dialog.c:438
 msgid "Wallpapers"
 msgstr "Tapety"
 
 # radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:472
-msgid "Pictures"
-msgstr "Obrázky"
-
-# radio_button
-#: ../panels/background/cc-background-chooser-dialog.c:481
+#: ../panels/background/cc-background-chooser-dialog.c:447
 msgid "Colors"
 msgstr "Farby"
 
+# window title
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:485
+msgid "Select Background"
+msgstr "Výber pozadia"
+
+# radio_button
+#: ../panels/background/cc-background-chooser-dialog.c:514
+msgid "Pictures"
+msgstr "Obrázky"
+
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:540
+#: ../panels/background/cc-background-chooser-dialog.c:546
 msgid "No Pictures Found"
 msgstr "Nenašli sa žiadne obrázky"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:558
+#: ../panels/background/cc-background-chooser-dialog.c:564
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Domov"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:570
+#: ../panels/background/cc-background-chooser-dialog.c:576
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia tu"
 
 # GtkButton label
-#: ../panels/background/cc-background-chooser-dialog.c:592
+#: ../panels/background/cc-background-chooser-dialog.c:583
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
@@ -143,7 +143,7 @@ msgid "_Cancel"
 msgstr "_Zrušiť"
 
 # tlačidlo
-#: ../panels/background/cc-background-chooser-dialog.c:593
+#: ../panels/background/cc-background-chooser-dialog.c:584
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -985,8 +985,6 @@ msgstr "%e. %B %Y, %R"
 #. Translators: "city, country"
 #: ../panels/datetime/cc-datetime-panel.c:523
 #, c-format
-#| msgctxt "login date-time"
-#| msgid "%s, %s"
 msgctxt "timezone loc"
 msgid "%s, %s"
 msgstr "%s, %s"
@@ -1320,7 +1318,6 @@ msgstr "Volí spôsob použitia pripojených displejov a projektorov"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
-#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
 msgstr "Panel;Projektor;xrandr;Obrazovka;Rozlíšenie;Obnovovanie;Displej;"
 
@@ -1461,7 +1458,7 @@ msgstr "softvér systému Windows"
 
 # 1.,2. treeviewcolumn;
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1918
+#: ../panels/keyboard/keyboard-shortcuts.c:1932
 msgid "Section"
 msgstr "Sekcia"
 
@@ -2065,31 +2062,29 @@ msgid "_Reassign"
 msgstr "P_rideliť"
 
 # DK:https://bugzilla.gnome.org/show_bug.cgi?id=736336
-#: ../panels/keyboard/keyboard-shortcuts.c:1430
-#, fuzzy, c-format
+# PV:https://git.gnome.org/browse/gnome-control-center/commit/?id=72cd2e69e13d1c21986cf71ada4d08e5a9a2c210
+#: ../panels/keyboard/keyboard-shortcuts.c:1439
+#, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
 "automatically set it to \"%s\"?"
 msgstr ""
-"Klávesová skratka „%s“ má pridelenú klávesovú skratku „%s“. Chcete ju "
-"automaticky nastaviť na „%s“?"
+"Skratka pre akciu „%s“ je previazaná so skratkou pre akciu „%s“. Chcete "
+"automaticky prideliť klávesovú skratku „%s“?"
 
 # DK:https://bugzilla.gnome.org/show_bug.cgi?id=736336
-#: ../panels/keyboard/keyboard-shortcuts.c:1436
-#, fuzzy, c-format
-#| msgid ""
-#| "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#| "disabled."
+# PV:https://git.gnome.org/browse/gnome-control-center/commit/?id=72cd2e69e13d1c21986cf71ada4d08e5a9a2c210
+#: ../panels/keyboard/keyboard-shortcuts.c:1449
+#, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
 "if you move forward."
 msgstr ""
-"„%s“ je momentálne pridelená k „%s“. Ak budete pokračovať, bude táto skratka "
-"zakázaná."
+"Skratka „%s“ je momentálne pridelená k akcii „%s“. Ak budete pokračovať, "
+"bude táto skratka zrušená."
 
 # button
-#: ../panels/keyboard/keyboard-shortcuts.c:1442
-#| msgid "_Reassign"
+#: ../panels/keyboard/keyboard-shortcuts.c:1456
 msgid "_Assign"
 msgstr "P_rideliť"
 
@@ -2271,7 +2266,7 @@ msgstr "Kliknutie, sekundárne tlačidlo"
 msgid "Air_plane Mode"
 msgstr "Režim v _lietadle"
 
-#: ../panels/network/cc-network-panel.c:971
+#: ../panels/network/cc-network-panel.c:974
 msgid "Network proxy"
 msgstr "Sieťový sprostredkovateľ (proxy)"
 
@@ -2279,14 +2274,14 @@ msgstr "Sieťový sprostredkovateľ (proxy)"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1150 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1153 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1295
+#: ../panels/network/cc-network-panel.c:1298
 msgid "The system network services are not compatible with this version."
 msgstr "Sieťové služby systému nie sú kompatibilné s touto verziou."
 
@@ -2964,7 +2959,6 @@ msgstr ""
 
 # window title
 #: ../panels/network/connection-editor/vpn-helpers.c:371
-#| msgid "Export VPN connection..."
 msgid "Export VPN connection"
 msgstr "Exportovanie pripojenia VPN"
 
@@ -3008,9 +3002,6 @@ msgstr "Ovláda spôsob pripojenia k internetu"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;DNS;"
@@ -3834,7 +3825,6 @@ msgstr "MSCHAPv2"
 
 # DK:dialog title
 #: ../panels/network/wireless-security/eap-method-fast.c:409
-#| msgid "Choose a PAC file..."
 msgid "Choose a PAC file"
 msgstr "Výber súboru PAC"
 
@@ -3913,7 +3903,6 @@ msgstr "MD5"
 #: ../panels/network/wireless-security/eap-method-peap.c:350
 #: ../panels/network/wireless-security/eap-method-tls.c:456
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
-#| msgid "Choose a Certificate Authority certificate..."
 msgid "Choose a Certificate Authority certificate"
 msgstr "Výber certifikátu certifikačnej autority"
 
@@ -3968,13 +3957,11 @@ msgstr ""
 
 # DK:button
 #: ../panels/network/wireless-security/eap-method-tls.c:450
-#| msgid "Choose your personal certificate..."
 msgid "Choose your personal certificate"
 msgstr "Vybrať váš osobný certifikát"
 
 # DK:button
 #: ../panels/network/wireless-security/eap-method-tls.c:462
-#| msgid "Choose your private key..."
 msgid "Choose your private key"
 msgstr "Vybrať váš súkromný kľúč"
 
@@ -5005,13 +4992,11 @@ msgstr "Načítava sa databáza ovládačov…"
 
 #. Translators: The found device is a JetDirect printer
 #: ../panels/printers/pp-host.c:506
-#| msgid "Remove Printer"
 msgid "JetDirect Printer"
 msgstr "Tlačiareň s technológiou JetDirect"
 
 #. Translators: The found device is a Line Printer Daemon printer
 #: ../panels/printers/pp-host.c:756
-#| msgid "%s Printer"
 msgid "LPD Printer"
 msgstr "Tlačiareň protokolu LPD"
 
@@ -5608,7 +5593,6 @@ msgid "Privacy Policy"
 msgstr "Zabezpečenie súkromia"
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Location: %s"
 msgid "_Location Services"
 msgstr "Služby _umiestnenia"
 
@@ -5881,13 +5865,11 @@ msgid "Off"
 msgstr "Vypnuté"
 
 #: ../panels/sharing/cc-sharing-panel.c:304
-#| msgid "Enabled"
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Povolená"
 
 #: ../panels/sharing/cc-sharing-panel.c:307
-#| msgid "Active Jobs"
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktívna"
@@ -5944,7 +5926,6 @@ msgstr "Nie sú vybraté žiadne siete na sprístupnenie"
 #. * vim: sw=2 ts=8 cindent noai bs=2
 #.
 #: ../panels/sharing/networks.ui.h:1
-#| msgid "Network"
 msgid "Networks"
 msgstr "Siete"
 
@@ -6071,13 +6052,11 @@ msgstr "Vyžaduje heslo"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share Music, Photos and Videos with others on the current network."
 msgid "Share music, photos and videos over the network."
 msgstr "Sprístupniť hudbu, fotografie a videá ostatným v sieti."
 
 # GtkToolButton label
 #: ../panels/sharing/sharing.ui.h:27
-#| msgid "Add Folder"
 msgid "Folders"
 msgstr "Priečinky"
 
@@ -7079,7 +7058,6 @@ msgstr "História prihlásení"
 
 # DK:dialog title
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-#| msgid "Show Password"
 msgid "Change Password"
 msgstr "Zmena hesla"
 
@@ -7721,25 +7699,19 @@ msgstr "Môj účet"
 
 #: ../panels/user-accounts/um-utils.c:567
 #, c-format
-#| msgid "A user with the username '%s' already exists"
 msgid "A user with the username '%s' already exists."
 msgstr "Používateľ s menom „%s“ už existuje."
 
 #: ../panels/user-accounts/um-utils.c:571
 #, c-format
-#| msgid "The username is too long"
 msgid "The username is too long."
 msgstr "Používateľské meno je príliš dlhé."
 
 #: ../panels/user-accounts/um-utils.c:574
-#| msgid "The username cannot start with a '-'"
 msgid "The username cannot start with a '-'."
 msgstr "Používateľské meno nemôže začínať znakom „-“."
 
 #: ../panels/user-accounts/um-utils.c:577
-#| msgid ""
-#| "The username should only consist of lower and upper case letters from a-"
-#| "z, digits and any of characters '.', '-' and '_'"
 msgid ""
 "The username should only consist of lower and upper case letters from a-z, "
 "digits and any of characters '.', '-' and '_'."
