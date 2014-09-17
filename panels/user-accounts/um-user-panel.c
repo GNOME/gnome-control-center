@@ -107,6 +107,8 @@ enum {
         NUM_USER_LIST_COLS
 };
 
+static void show_restart_notification (CcUserPanelPrivate *d, const gchar *locale);
+
 typedef struct {
         CcUserPanel *self;
         GCancellable *cancellable;
@@ -1005,8 +1007,10 @@ account_type_changed (UmEditableCombo    *combo,
         GtkTreeModel *model;
         GtkTreeIter iter;
         gint account_type;
+        gboolean self_selected;
 
         user = get_selected_user (d);
+        self_selected = act_user_get_uid (user) == geteuid ();
 
         model = um_editable_combo_get_model (combo);
         um_editable_combo_get_active_iter (combo, &iter);
@@ -1014,6 +1018,9 @@ account_type_changed (UmEditableCombo    *combo,
 
         if (account_type != act_user_get_account_type (user)) {
                 act_user_set_account_type (user, account_type);
+
+                if (self_selected)
+                        show_restart_notification (d, NULL);
         }
 
         g_object_unref (user);
