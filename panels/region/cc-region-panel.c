@@ -231,13 +231,17 @@ show_restart_notification (CcRegionPanel *self,
         priv->notification = gd_notification_new ();
         g_object_add_weak_pointer (G_OBJECT (priv->notification),
                                    (gpointer *)&priv->notification);
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 24);
-        gtk_widget_set_margin_start (box, 12);
-        gtk_widget_set_margin_end (box, 12);
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_widget_set_margin_start (box, 6);
+        gtk_widget_set_margin_end (box, 6);
         gtk_widget_set_margin_top (box, 6);
         gtk_widget_set_margin_bottom (box, 6);
         label = gtk_label_new (_("Your session needs to be restarted for changes to take effect"));
+        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+        gtk_label_set_max_width_chars (GTK_LABEL (label), 30);
+        g_object_set (G_OBJECT (label), "xalign", 0, NULL);
         button = gtk_button_new_with_label (_("Restart Now"));
+        gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
         g_signal_connect_swapped (button, "clicked",
                                   G_CALLBACK (restart_now), self);
         gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
