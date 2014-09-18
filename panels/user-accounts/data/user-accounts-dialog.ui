@@ -264,11 +264,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox30">
+                          <object class="GtkBox" id="autologin-box">
                             <property name="visible">True</property>
+                            <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
                             <child>
                               <object class="GtkSwitch" id="autologin-switch">
                                 <property name="visible">True</property>
+                                <property name="valign">GTK_ALIGN_CENTER</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -492,13 +494,27 @@
       <widget name="user-icon-nonbutton"/>
     </widgets>
   </object>
-  <object class="GtkSizeGroup" id="label-width-sizegroup">
+  <object class="GtkSizeGroup" id="label-sizegroup">
+    <property name="mode">both</property>
     <widgets>
       <widget name="account-fingerprint-label"/>
       <widget name="language-label"/>
       <widget name="password-label"/>
       <widget name="login-options-label"/>
       <widget name="account-type-label"/>
+      <widget name="autologin-label"/>
+      <widget name="last-login-label"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="option-sizegroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="account-fingerprint-button"/>
+      <widget name="account-language-combo"/>
+      <widget name="account-password-button"/>
+      <widget name="account-type-combo"/>
+      <widget name="autologin-box"/>
+      <widget name="last-login-grid"/>
     </widgets>
   </object>
 </interface>
