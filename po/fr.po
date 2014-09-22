@@ -34,7 +34,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-24 06:32+0000\n"
+"POT-Creation-Date: 2014-09-22 06:31+0000\n"
 "PO-Revision-Date: 2014-08-24 23:30+0200\n"
 "Last-Translator: Alain Lojewski <allomervan@gmail.com>\n"
 "Language-Team: français <GNOME French Team <gnomefr@traduc.org>\n"
@@ -90,54 +90,56 @@ msgctxt "background, style"
 msgid "Span"
 msgstr "Étendu"
 
-#. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:442
-msgid "Select Background"
-msgstr "Sélection de l'arrière-plan"
-
-#: ../panels/background/cc-background-chooser-dialog.c:463
+#: ../panels/background/cc-background-chooser-dialog.c:438
 msgid "Wallpapers"
 msgstr "Papiers peints"
 
-#: ../panels/background/cc-background-chooser-dialog.c:472
-msgid "Pictures"
-msgstr "Images"
-
-#: ../panels/background/cc-background-chooser-dialog.c:481
+#: ../panels/background/cc-background-chooser-dialog.c:447
 msgid "Colors"
 msgstr "Couleurs"
 
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:485
+msgid "Select Background"
+msgstr "Sélection de l'arrière-plan"
+
+#: ../panels/background/cc-background-chooser-dialog.c:514
+msgid "Pictures"
+msgstr "Images"
+
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:540
+#: ../panels/background/cc-background-chooser-dialog.c:546
 msgid "No Pictures Found"
 msgstr "Aucune image trouvée"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:558
+#: ../panels/background/cc-background-chooser-dialog.c:564
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Dossier personnel"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:570
+#: ../panels/background/cc-background-chooser-dialog.c:576
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr ""
 "Vous pouvez ajouter des images dans votre dossier %s où elles s'afficheront"
 
-#: ../panels/background/cc-background-chooser-dialog.c:592
+#: ../panels/background/cc-background-chooser-dialog.c:583
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
-#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1240
-#: ../panels/network/net-device-wifi.c:1448
+#: ../panels/network/net-device-wifi.c:1247
+#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:468
@@ -147,14 +149,14 @@ msgstr ""
 #: ../panels/sharing/cc-sharing-panel.c:491
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:267
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:95
 #: ../panels/user-accounts/um-photo-dialog.c:222
 #: ../panels/user-accounts/um-user-panel.c:513
 msgid "_Cancel"
 msgstr "_Annuler"
 
-#: ../panels/background/cc-background-chooser-dialog.c:593
+#: ../panels/background/cc-background-chooser-dialog.c:584
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -685,7 +687,7 @@ msgstr ""
 "\"windows\">Microsoft Windows</a>."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:740
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Résumé"
 
@@ -693,7 +695,16 @@ msgstr "Résumé"
 msgid "Import File…"
 msgstr "Importer un fichier…"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/printers/new-printer-dialog.ui.h:3
+#: ../panels/region/input-chooser.ui.h:3
+#: ../panels/user-accounts/um-account-dialog.c:1469
+msgid "_Add"
+msgstr "_Ajouter"
+
+#: ../panels/color/color.ui.h:31
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -701,142 +712,142 @@ msgstr ""
 "Il y a un problème. Il se peut que le profil ne fonctionne pas correctement. "
 "<a href=\"\">Afficher les détails</a>"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:32
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Chaque périphérique a besoin d'un profil de couleur à jour pour la prise en "
 "charge des couleurs."
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:33
 msgid "Learn more"
 msgstr "Pour en savoir plus"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:34
 msgid "Learn more about color management"
 msgstr "Pour en savoir plus sur la gestion des couleurs"
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:35
 msgid "Set for all users"
 msgstr "Définir pour tous les utilisateurs"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:36
 msgid "Set this profile for all users on this computer"
 msgstr "Définir ce profil pour tous les utilisateurs de cet ordinateur"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:37
 msgid "Enable"
 msgstr "Activer"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:38
 msgid "Add profile"
 msgstr "Ajouter un profil"
 
-#: ../panels/color/color.ui.h:37
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Calibrate…"
 msgstr "Étalonner…"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
 msgstr "Étalonner le périphérique"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:41
 msgid "Remove profile"
 msgstr "Supprimer un profil"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:42
 msgid "View details"
 msgstr "Afficher les détails"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:43
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Impossible de détecter un périphérique pour gérer sa couleur"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:44
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:45
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:46
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:47
 msgid "Projector"
 msgstr "Projecteur"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:48
 msgid "Plasma"
 msgstr "Plasma"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:49
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (rétro-éclairage CCFL)"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:50
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (rétro-éclairage à LED RVB)"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:51
 msgid "LCD (white LED backlight)"
 msgstr "LCD (rétro-éclairage à LED blanches)"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:52
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD à gamut large (rétro-éclairage CCFL)"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:53
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD à large gamut (rétro-éclairage à LED RVB)"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:54
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Élevée"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:55
 msgid "40 minutes"
 msgstr "40 minutes"
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:56
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Moyenne"
 
-#: ../panels/color/color.ui.h:55 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minutes"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:58
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Basse"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 minutes"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:60
 msgid "Native to display"
 msgstr "Native à écran"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:61
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (impression et publication)"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:62
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:63
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (photos et graphismes)"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:64
 msgid "D75"
 msgstr "D75"
 
@@ -1120,7 +1131,8 @@ msgstr "Organiser les écrans associés"
 
 #: ../panels/display/cc-display-panel.c:1539
 #: ../panels/display/cc-display-panel.c:1979
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
+#: ../panels/network/connection-editor/connection-editor.ui.h:2
+#: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Appliquer"
 
@@ -1312,7 +1324,7 @@ msgid "Windows software"
 msgstr "Logiciels Windows"
 
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1917
+#: ../panels/keyboard/keyboard-shortcuts.c:1932
 msgid "Section"
 msgstr "Section"
 
@@ -1335,7 +1347,7 @@ msgstr "Version %s"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:44
+#: ../panels/network/network-wifi.ui.h:46
 msgid "Details"
 msgstr "Détails"
 
@@ -1634,11 +1646,10 @@ msgstr "Activer ou désactiver le contraste élevé"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1217
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/keyboard/keyboard-shortcuts.c:1218
+#: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
-#: ../panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Disabled"
 msgstr "Désactivé"
 
@@ -1681,14 +1692,6 @@ msgstr "Raccourci;Répétition;Clignotement;"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "Custom Shortcut"
 msgstr "Raccourci personnalisé"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
-#: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1469
-msgid "_Add"
-msgstr "_Ajouter"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "_Name:"
@@ -1779,16 +1782,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:634
-#: ../panels/keyboard/keyboard-shortcuts.c:642
+#: ../panels/keyboard/keyboard-shortcuts.c:635
+#: ../panels/keyboard/keyboard-shortcuts.c:643
 msgid "Custom Shortcuts"
 msgstr "Raccourcis personnalisés"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:859
+#: ../panels/keyboard/keyboard-shortcuts.c:860
 msgid "<Unknown Action>"
 msgstr "<Action inconnue>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1356
+#: ../panels/keyboard/keyboard-shortcuts.c:1357
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1799,7 +1802,7 @@ msgstr ""
 "touche deviendrait impossible.\n"
 "Veuillez essayer avec une touche telle que Ctrl, Alt ou Maj simultanément."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1386
+#: ../panels/keyboard/keyboard-shortcuts.c:1387
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1808,18 +1811,18 @@ msgstr ""
 "Le raccourci clavier « %s » est déjà utilisé pour \n"
 "« %s »"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1391
+#: ../panels/keyboard/keyboard-shortcuts.c:1392
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Si vous réassignez le raccourci à « %s », le raccourci « %s » sera désactivé."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1397
+#: ../panels/keyboard/keyboard-shortcuts.c:1398
 msgid "_Reassign"
 msgstr "_Réassigner"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1429
+#: ../panels/keyboard/keyboard-shortcuts.c:1439
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
@@ -1828,7 +1831,7 @@ msgstr ""
 "Le raccourci « %s » est associé à « %s ». Voulez-vous le définir "
 "automatiquement à « %s » ?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1435
+#: ../panels/keyboard/keyboard-shortcuts.c:1449
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
@@ -1837,7 +1840,7 @@ msgstr ""
 "Comme « %s » est actuellement associé à « %s », ce raccourci sera désactivé "
 "si vous continuez."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
+#: ../panels/keyboard/keyboard-shortcuts.c:1456
 msgid "_Assign"
 msgstr "_Assigner"
 
@@ -1988,7 +1991,7 @@ msgstr "Simple clic, bouton secondaire"
 msgid "Air_plane Mode"
 msgstr "Mode a_vion"
 
-#: ../panels/network/cc-network-panel.c:965
+#: ../panels/network/cc-network-panel.c:974
 msgid "Network proxy"
 msgstr "Serveur mandataire"
 
@@ -1996,14 +1999,14 @@ msgstr "Serveur mandataire"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1153 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1289
+#: ../panels/network/cc-network-panel.c:1298
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Les services réseau du système ne sont pas compatibles avec cette version."
@@ -2040,7 +2043,7 @@ msgstr "page 2"
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
 #: ../panels/network/connection-editor/ce-page-security.c:455
 #: ../panels/network/connection-editor/details-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
 msgstr "Sécurité"
 
@@ -2050,34 +2053,34 @@ msgstr "automatique"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:217
-#: ../panels/network/net-device-wifi.c:378
+#: ../panels/network/net-device-wifi.c:218
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:221
-#: ../panels/network/net-device-wifi.c:383
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:226
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:231
 msgid "Enterprise"
 msgstr "Entreprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:235
-#: ../panels/network/net-device-wifi.c:368
+#: ../panels/network/net-device-wifi.c:236
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Aucune"
@@ -2099,7 +2102,7 @@ msgstr "Hier"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:126
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2109,37 +2112,37 @@ msgstr[1] "Il y a %i jours"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:529
+#: ../panels/network/net-device-wifi.c:533
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:558
+#: ../panels/network/net-device-wifi.c:562
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Aucun"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:560
+#: ../panels/network/net-device-wifi.c:564
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Faible"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:566
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Correct"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:568
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bon"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:570
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excellent"
@@ -2147,7 +2150,7 @@ msgstr "Excellent"
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
 #: ../panels/network/connection-editor/ce-page-wifi.c:270
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identité"
 
@@ -2204,13 +2207,13 @@ msgid "Delete Route"
 msgstr "Supprimer la route"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:615
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Automatique (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Manual"
 msgstr "Manuel"
 
@@ -2220,7 +2223,7 @@ msgid "Link-Local Only"
 msgstr "Réseau local seulement"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:953
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2242,12 +2245,12 @@ msgid "Automatic, DHCP only"
 msgstr "Automatique, DHCP seulement"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:919
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:51
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -2282,19 +2285,19 @@ msgid "WPA & WPA2 Enterprise"
 msgstr "WPA et WPA2 d'entreprise"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:2
+#: ../panels/network/network-wifi.ui.h:4
 msgid "Signal Strength"
 msgstr "Force du signal"
 
 #: ../panels/network/connection-editor/details-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:3
+#: ../panels/network/network-wifi.ui.h:5
 msgid "Link speed"
 msgstr "Vitesse de la connexion"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "Adresse IPv4"
 
@@ -2303,14 +2306,14 @@ msgstr "Adresse IPv4"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "Adresse IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Hardware Address"
 msgstr "Adresse matérielle"
 
@@ -2318,7 +2321,7 @@ msgstr "Adresse matérielle"
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
 #: ../panels/network/network-simple.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Default Route"
 msgstr "Route par défaut"
 
@@ -2328,7 +2331,7 @@ msgstr "Route par défaut"
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:11
 msgid "DNS"
 msgstr "DNS"
 
@@ -2375,7 +2378,7 @@ msgstr "_Nom"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:36
+#: ../panels/network/network-wifi.ui.h:38
 msgid "_MAC Address"
 msgstr "Adresse _MAC"
 
@@ -2419,13 +2422,13 @@ msgid "The zone defines the trust level of the connection"
 msgstr "La zone définit le niveau de confiance de la connexion"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:24
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:25
 msgid "_Addresses"
 msgstr "_Adresses"
 
@@ -2436,7 +2439,7 @@ msgstr "DNS automatique"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Routes"
 msgstr "Routes"
 
@@ -2447,12 +2450,12 @@ msgstr "Routes automatiques"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:32
+#: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
 msgstr "N'utiliser cette connexion que pour les ressources sur ce réseau"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:34
+#: ../panels/network/network-wifi.ui.h:36
 msgid "IPv_6"
 msgstr "IPv_6"
 
@@ -2498,13 +2501,13 @@ msgid "Add Network Connection"
 msgstr "Ajouter une connexion réseau"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:41
 msgid "_Reset"
 msgstr "_Réinitialiser"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1449
-#: ../panels/network/network-wifi.ui.h:40
+#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Oublier"
 
@@ -2525,7 +2528,7 @@ msgstr ""
 "automatiquement"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:16
 msgid "S_ecurity"
 msgstr "Séc_urité"
 
@@ -2596,17 +2599,17 @@ msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Erreur : impossible de charger l'éditeur de connexions VPN)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:14
 msgid "_SSID"
 msgstr "_SSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:15
 msgid "_BSSID"
 msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:18
 msgid "My Home Network"
 msgstr "Mon réseau domestique"
 
@@ -2647,17 +2650,17 @@ msgid "Bridge slaves"
 msgstr "Esclaves de l’agrégat de type « Pont »"
 
 #: ../panels/network/net-device-ethernet.c:112
-#: ../panels/network/net-device-wifi.c:458
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "jamais"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:468
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "aujourd'hui"
 
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:470
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "hier"
 
@@ -2669,7 +2672,7 @@ msgid "IP Address"
 msgstr "Adresse IP"
 
 #: ../panels/network/net-device-ethernet.c:178
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:12
 msgid "Last used"
 msgstr "Dernière utilisation"
 
@@ -2685,7 +2688,7 @@ msgid "Wired"
 msgstr "Filaire"
 
 #: ../panels/network/net-device-ethernet.c:356
-#: ../panels/network/net-device-wifi.c:1604
+#: ../panels/network/net-device-wifi.c:1596
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2706,7 +2709,7 @@ msgstr "Ajouter une nouvelle connexion"
 msgid "Team slaves"
 msgstr "Esclaves de l’agrégat de type « Équipe »"
 
-#: ../panels/network/net-device-wifi.c:1153
+#: ../panels/network/net-device-wifi.c:1154
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2714,13 +2717,13 @@ msgstr ""
 "Si vous disposez d'une connexion filaire vers Internet, vous pouvez créer un "
 "point d'accès sans fil pour partager votre connexion avec les autres."
 
-#: ../panels/network/net-device-wifi.c:1157
+#: ../panels/network/net-device-wifi.c:1158
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Basculer sur le point d'accès sans fil va vous déconnecter de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1161
+#: ../panels/network/net-device-wifi.c:1162
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2728,24 +2731,24 @@ msgstr ""
 "Vous ne pouvez pas accéder à Internet par votre connexion sans fil pendant "
 "que le point d'accès est actif."
 
-#: ../panels/network/net-device-wifi.c:1238
+#: ../panels/network/net-device-wifi.c:1245
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Interrompre le point d'accès et déconnecter tous les utilisateurs ?"
 
-#: ../panels/network/net-device-wifi.c:1241
+#: ../panels/network/net-device-wifi.c:1248
 msgid "_Stop Hotspot"
 msgstr "_Interrompre le point d'accès"
 
-#: ../panels/network/net-device-wifi.c:1313
+#: ../panels/network/net-device-wifi.c:1305
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Les règles du système interdisent son utilisation comme point d'accès"
 
-#: ../panels/network/net-device-wifi.c:1316
+#: ../panels/network/net-device-wifi.c:1308
 msgid "Wireless device does not support Hotspot mode"
 msgstr ""
 "Le périphérique sans fil ne prend pas en charge le mode « point d'accès »"
 
-#: ../panels/network/net-device-wifi.c:1445
+#: ../panels/network/net-device-wifi.c:1437
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2753,18 +2756,20 @@ msgstr ""
 "Les informations des réseaux sélectionnés, y compris les mots de passe et "
 "toute configuration personnalisée seront perdus."
 
-#: ../panels/network/net-device-wifi.c:1753
+#: ../panels/network/net-device-wifi.c:1745
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historique"
 
-#: ../panels/network/net-device-wifi.c:1757
+#: ../panels/network/net-device-wifi.c:1749
+#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:533
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "_Close"
 msgstr "_Fermer"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1765
+#: ../panels/network/net-device-wifi.c:1757
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oublier"
@@ -2893,15 +2898,15 @@ msgstr "Nom d'utilisateur"
 msgid "Turn VPN connection off"
 msgstr "Fermer la connexion VPN"
 
-#: ../panels/network/network-wifi.ui.h:1
+#: ../panels/network/network-wifi.ui.h:3
 msgid "Automatic _Connect"
 msgstr "Connexion a_utomatique"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:13
 msgid "details"
 msgstr "détails"
 
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:17
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:2
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
@@ -2911,55 +2916,55 @@ msgstr "détails"
 msgid "_Password"
 msgstr "Mot de _passe"
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Aucun"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
 msgstr "Afficher le mot de p_asse"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Make available to other users"
 msgstr "Mettre à disposition des autres utilisateurs"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:23
 msgid "identity"
 msgstr "identité"
 
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Automatic (DHCP) addresses only"
 msgstr "Adresses automatiques (DHCP) seulement"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:29
 msgid "Link-local only"
 msgstr "Connexion locale uniquement"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Shared with other computers"
 msgstr "Partagée avec les autres ordinateurs"
 
-#: ../panels/network/network-wifi.ui.h:31
+#: ../panels/network/network-wifi.ui.h:33
 msgid "_Ignore automatically obtained routes"
 msgstr "_Ignorer les routes obtenues automatiquement"
 
-#: ../panels/network/network-wifi.ui.h:33
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:35
+#: ../panels/network/network-wifi.ui.h:37
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:37
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Cloned MAC Address"
 msgstr "Adresse MAC _clonée"
 
-#: ../panels/network/network-wifi.ui.h:38
+#: ../panels/network/network-wifi.ui.h:40
 msgid "hardware"
 msgstr "matériel"
 
-#: ../panels/network/network-wifi.ui.h:41
+#: ../panels/network/network-wifi.ui.h:43
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2967,7 +2972,7 @@ msgstr ""
 "Réinitialiser les paramètres de cette connexion à leurs valeurs par défaut, "
 "mais se souvenir qu'elle est une connexion préférée."
 
-#: ../panels/network/network-wifi.ui.h:42
+#: ../panels/network/network-wifi.ui.h:44
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2975,59 +2980,59 @@ msgstr ""
 "Supprimer toutes les informations relatives à ce réseau et ne pas essayer de "
 "s'y connecter automatiquement."
 
-#: ../panels/network/network-wifi.ui.h:43
+#: ../panels/network/network-wifi.ui.h:45
 msgid "reset"
 msgstr "réinitialiser"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Hardware"
 msgstr "Matériel"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi Hotspot"
 msgstr "Point d'accès Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:51
+#: ../panels/network/network-wifi.ui.h:53
 msgid "_Turn On"
 msgstr "A_llumer"
 
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:54
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:55
 msgid "Turn Wi-Fi off"
 msgstr "Éteindre le Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_Use as Hotspot…"
 msgstr "_Utiliser comme point d'accès…"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:57
 msgid "_Connect to Hidden Network…"
 msgstr "_Connexion à un réseau masqué…"
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:58
 msgid "_History"
 msgstr "_Historique"
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Éteindre pour se connecter à un réseau Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Network Name"
 msgstr "Nom du réseau"
 
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Connected Devices"
 msgstr "Périphériques connectés"
 
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:62
 msgid "Security type"
 msgstr "Type de sécurité"
 
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:63
 msgid "Security key"
 msgstr "Clé de sécurité"
 
@@ -4925,30 +4930,30 @@ msgid "Other"
 msgstr "Autre"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:896
+#: ../panels/user-accounts/um-user-panel.c:892
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Vous devez redémarrer la session pour que les changements soient effectifs"
 
-#: ../panels/region/cc-region-panel.c:240
-#: ../panels/user-accounts/um-user-panel.c:897
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:896
 msgid "Restart Now"
 msgstr "Redémarrer maintenant"
 
-#: ../panels/region/cc-region-panel.c:858
+#: ../panels/region/cc-region-panel.c:862
 msgid "No input source selected"
 msgstr "Aucune source d'entrée sélectionnée"
 
-#: ../panels/region/cc-region-panel.c:1088
+#: ../panels/region/cc-region-panel.c:1092
 msgid "Sorry"
 msgstr "Désolé"
 
-#: ../panels/region/cc-region-panel.c:1090
+#: ../panels/region/cc-region-panel.c:1094
 msgid "Input methods can't be used on the login screen"
 msgstr ""
 "Les méthodes d'entrée ne peuvent pas être utilisées sur l'écran de connexion"
 
-#: ../panels/region/cc-region-panel.c:1727
+#: ../panels/region/cc-region-panel.c:1731
 msgid "Login Screen"
 msgstr "Écran de connexion"
 
@@ -5004,43 +5009,43 @@ msgstr "Ajouter une source d'entrée"
 msgid "Input Source Options"
 msgstr "Options de la source d'entrée"
 
-#: ../panels/region/input-options.ui.h:2
+#: ../panels/region/input-options.ui.h:3
 msgid "Use the _same source for all windows"
 msgstr "Utiliser la _même source pour toutes les fenêtres"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:4
 msgid "Allow _different sources for each window"
 msgstr "Autoriser _différentes sources pour chaque fenêtre"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:5
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:6
 msgid "Switch to previous source"
 msgstr "Basculer vers la source précédente"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:7
 msgid "Super+Shift+Space"
 msgstr "Logo+Maj+Barre d'espace"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:8
 msgid "Switch to next source"
 msgstr "Basculer vers la source suivante"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:9
 msgid "Super+Space"
 msgstr "Logo+Barre d'espace"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:10
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Vous pouvez modifier ces raccourcis dans les préférences clavier"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:11
 msgid "Alternative switch to next source"
 msgstr "Basculement alternatif vers la source suivante"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:12
 msgid "Left+Right Alt"
 msgstr "Alt de droite+Alt de gauche"
 
@@ -5222,7 +5227,7 @@ msgstr "Partage de l'écran"
 
 #: ../panels/sharing/sharing.ui.h:8
 msgid "Media Sharing"
-msgstr "Partager les médias"
+msgstr "Partage de médias"
 
 #: ../panels/sharing/sharing.ui.h:9
 msgid "Remote Login"
@@ -6102,7 +6107,7 @@ msgid "Right little finger"
 msgstr "Auriculaire droit"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:697
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Activer l'identification de connexion par empreinte digitale"
 
@@ -6440,35 +6445,34 @@ msgstr "La connexion à ce domaine a échoué"
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Impossible de trouver ce domaine. Vérifiez son orthographe."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:137
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Vous n'avez pas accès au périphérique. Contactez votre administrateur "
 "système."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:139
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "Le périphérique est déjà utilisé."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:141
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "Une erreur interne est survenue."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:217
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Activé"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:263
 msgid "Delete registered fingerprints?"
 msgstr "Supprimer les empreintes enregistrées ?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:270
+#: ../panels/user-accounts/um-fingerprint-dialog.c:267
 msgid "_Delete Fingerprints"
 msgstr "_Supprimer les empreintes"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:276
+#: ../panels/user-accounts/um-fingerprint-dialog.c:273
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6476,15 +6480,15 @@ msgstr ""
 "Souhaitez-vous supprimer les empreintes digitales enregistrées et désactiver "
 "ainsi ce type de connexion ?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:452
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Terminé !"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:513
-#: ../panels/user-accounts/um-fingerprint-dialog.c:555
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Impossible d'accéder au périphérique « %s »"
@@ -6492,17 +6496,17 @@ msgstr "Impossible d'accéder au périphérique « %s »"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:596
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr ""
 "Impossible de démarrer la capture d'empreintes avec le périphérique « %s »"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:647
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "Aucun lecteur d'empreintes digitales n'est accessible"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:648
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Contactez votre administrateur système pour assistance."
 
@@ -6511,7 +6515,7 @@ msgstr "Contactez votre administrateur système pour assistance."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6520,11 +6524,11 @@ msgstr ""
 "Pour activer l'authentification par empreintes digitales, vous devez "
 "enregistrer une de vos empreintes à l'aide du périphérique « %s »."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:738
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "Sélection du doigt"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:739
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "Enregistrement des empreintes digitales"
 
@@ -6713,15 +6717,15 @@ msgstr "Aucun"
 msgid "Logged in"
 msgstr "Connecté"
 
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1071
 msgid "Failed to contact the accounts service"
 msgstr "La connexion au service des comptes a échoué"
 
-#: ../panels/user-accounts/um-user-panel.c:1074
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Veuillez vérifier que AccountService est installé et activé."
 
-#: ../panels/user-accounts/um-user-panel.c:1115
+#: ../panels/user-accounts/um-user-panel.c:1114
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6729,12 +6733,12 @@ msgstr ""
 "Pour effectuer les modifications,\n"
 "cliquez d'abord sur l'icône *"
 
-#: ../panels/user-accounts/um-user-panel.c:1153
+#: ../panels/user-accounts/um-user-panel.c:1152
 msgid "Create a user account"
 msgstr "Créer un compte utilisateur"
 
-#: ../panels/user-accounts/um-user-panel.c:1164
-#: ../panels/user-accounts/um-user-panel.c:1453
+#: ../panels/user-accounts/um-user-panel.c:1163
+#: ../panels/user-accounts/um-user-panel.c:1475
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6742,12 +6746,12 @@ msgstr ""
 "Pour créer un compte utilisateur,\n"
 "cliquez d'abord sur l'icône *"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1173
 msgid "Delete the selected user account"
 msgstr "Supprimer le compte utilisateur sélectionné"
 
-#: ../panels/user-accounts/um-user-panel.c:1186
-#: ../panels/user-accounts/um-user-panel.c:1458
+#: ../panels/user-accounts/um-user-panel.c:1185
+#: ../panels/user-accounts/um-user-panel.c:1480
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6755,7 +6759,7 @@ msgstr ""
 "Pour supprimer le compte utilisateur sélectionné,\n"
 "cliquez d'abord sur l'icône *"
 
-#: ../panels/user-accounts/um-user-panel.c:1368
+#: ../panels/user-accounts/um-user-panel.c:1389
 msgid "My Account"
 msgstr "Mon compte"
 
@@ -6801,11 +6805,11 @@ msgstr "%b %e, %Y"
 msgid "Map Buttons"
 msgstr "Associer les boutons"
 
-#: ../panels/wacom/button-mapping.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:3
 msgid "Map buttons to functions"
 msgstr "Associer les boutons aux fonctions"
 
-#: ../panels/wacom/button-mapping.ui.h:3
+#: ../panels/wacom/button-mapping.ui.h:4
 msgid ""
 "To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear."
@@ -6884,7 +6888,7 @@ msgid "Button"
 msgstr "Bouton"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Wacom Tablet"
 msgstr "Tablette Wacom"
 
@@ -6911,39 +6915,39 @@ msgstr "Pavé tactile (relatif)"
 msgid "Tablet Preferences"
 msgstr "Préférences de la tablette"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "No tablet detected"
 msgstr "Aucune tablette détectée"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Veuillez connecter ou allumer votre tablette Wacom"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Bluetooth Settings"
 msgstr "Paramètres du Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Map to Monitor…"
 msgstr "Associer à l'écran…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map Buttons…"
 msgstr "Associer les boutons…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Adjust display resolution"
 msgstr "Ajuster la définition de l'écran"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust mouse settings"
 msgstr "Ajuster les paramètres de la souris"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Tracking Mode"
 msgstr "Mode de recherche"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Left-Handed Orientation"
 msgstr "Orientation pour gaucher"
 
@@ -7182,1046 +7186,3 @@ msgstr "Système"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Préférences;Paramètres;Réglages;"
-
-#~ msgid "Immediately"
-#~ msgstr "Immédiatement"
-
-#~ msgid "Share Media On This Network"
-#~ msgstr "Partager les médias sur ce réseau"
-
-#~ msgid "Shared Folders"
-#~ msgstr "Partager les dossiers"
-
-#~ msgid "column"
-#~ msgstr "colonne"
-
-#~ msgid "Remove Folder"
-#~ msgstr "Supprimer un dossier"
-
-#~ msgid "Share Public Folder On This Network"
-#~ msgstr "Partager le Dossier public sur ce réseau"
-
-#~ msgid "Flickr"
-#~ msgstr "Flickr"
-
-#~ msgid "Install Updates"
-#~ msgstr "Installer les mises à jour"
-
-#~ msgid "System Up-To-Date"
-#~ msgstr "Système à jour"
-
-#~ msgid "Search for network printers or filter result"
-#~ msgstr "Rechercher des imprimantes réseau ou filtrer le résultat"
-
-#~ msgid "_Default"
-#~ msgstr "Par _défaut"
-
-#~ msgid "Remote View"
-#~ msgstr "Affichage distant"
-
-#~ msgid "Approve All Connections"
-#~ msgstr "Autoriser toutes les connexions"
-
-#~ msgid "Set Up New Device"
-#~ msgstr "Paramétrer le nouveau périphérique"
-
-#~ msgid "Connection"
-#~ msgstr "Connexion"
-
-#~ msgid "Paired"
-#~ msgstr "Apparié"
-
-#~ msgid "Type"
-#~ msgstr "Type"
-
-#~ msgid "Mouse & Touchpad Settings"
-#~ msgstr "Paramètres de la souris et du pavé tactile"
-
-#~ msgid "Sound Settings"
-#~ msgstr "Paramètres du son"
-
-#~ msgid "Keyboard Settings"
-#~ msgstr "Paramètres du clavier"
-
-#~ msgid "Send Files…"
-#~ msgstr "Envoyer les fichiers…"
-
-#~ msgid "Visibility"
-#~ msgstr "Visibilité"
-
-#~ msgid "Visibility of “%s”"
-#~ msgstr "Visibilité de « %s »"
-
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "Retirer « %s » de la liste des périphériques ?"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr ""
-#~ "Si vous retirez le périphérique, vous devrez le paramétrer à nouveau "
-#~ "avant la prochaine utilisation."
-
-#~ msgid "Device type:"
-#~ msgstr "Type de périphérique :"
-
-#~ msgid "Manufacturer:"
-#~ msgstr "Fabricant :"
-
-#~ msgid "Model:"
-#~ msgstr "Modèle :"
-
-#~ msgid ""
-#~ "Image files can be dragged on this window to auto-complete the above "
-#~ "fields."
-#~ msgstr ""
-#~ "Des fichiers images peuvent être glissés dans cette fenêtre pour "
-#~ "compléter automatiquement les champs ci-dessus."
-
-#~ msgid "Show your primary display on this screen also"
-#~ msgstr "Afficher votre vue principale sur cet écran aussi"
-
-#~ msgid "Combine"
-#~ msgstr "Associer"
-
-#~ msgid "Join with the primary display to create an extra space"
-#~ msgstr "Accoller avec l'écran principal pour élargir l'espace"
-
-#~ msgid "Don't use the display"
-#~ msgstr "Ne pas utiliser l'écran"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Fréquence de rafraîchissement"
-
-#~ msgid "Mouse Preferences"
-#~ msgstr "Préférences de la souris"
-
-#~ msgid "Select the interface to use for the new service"
-#~ msgstr "Sélectionner l'interface à utiliser pour le nouveau service"
-
-#~ msgid "C_reate…"
-#~ msgstr "C_réer…"
-
-#~ msgid "_Interface"
-#~ msgstr "_Interface"
-
-#~ msgctxt "Language"
-#~ msgid "None"
-#~ msgstr "Aucune"
-
-#~ msgid "Share Public Folder"
-#~ msgstr "Partager le dossier public"
-
-#~ msgid "Only share with Trusted Devices"
-#~ msgstr "Ne partager qu'avec des périphériques de confiance"
-
-#~ msgid "Changing photo for:"
-#~ msgstr "Modifier la photo de :"
-
-#~ msgid ""
-#~ "Choose a picture that will be shown at the login screen for this account."
-#~ msgstr ""
-#~ "Choisir une image à afficher sur l'écran de connexion pour ce compte."
-
-#~ msgid "Gallery"
-#~ msgstr "Collection d'images"
-
-#~ msgid "Take a photograph"
-#~ msgstr "Prendre une photo"
-
-#~ msgid "Browse"
-#~ msgstr "Rechercher"
-
-#~ msgid "Photograph"
-#~ msgstr "Photo"
-
-#~ msgid "Account Information"
-#~ msgstr "Informations du compte"
-
-#~ msgid "Switch between AM and PM."
-#~ msgstr "Basculer entre AM et PM."
-
-#~ msgid "Estimated battery capacity: %s"
-#~ msgstr "Autonomie estimée : %s"
-
-#~ msgid "Export"
-#~ msgstr "Exporter"
-
-#~ msgid "Left Shift"
-#~ msgstr "Maj de gauche"
-
-#~ msgid "Left Alt"
-#~ msgstr "Alt de gauche"
-
-#~ msgid "Left Ctrl"
-#~ msgstr "Ctrl de gauche"
-
-#~ msgid "Right Shift"
-#~ msgstr "Maj de droite"
-
-#~ msgid "Right Alt"
-#~ msgstr "Alt de droite"
-
-#~ msgid "Right Ctrl"
-#~ msgstr "Ctrl de droite"
-
-#~ msgid "Left Alt+Shift"
-#~ msgstr "Alt+Maj de gauche"
-
-#~ msgid "Right Alt+Shift"
-#~ msgstr "Alt+Maj de droite"
-
-#~ msgid "Left Ctrl+Shift"
-#~ msgstr "Ctrl+Maj de gauche"
-
-#~ msgid "Right Ctrl+Shift"
-#~ msgstr "Ctrl+Maj de droite"
-
-#~ msgid "Left+Right Shift"
-#~ msgstr "Maj de droite+Maj de gauche"
-
-#~ msgid "Left+Right Ctrl"
-#~ msgstr "Ctrl de gauche+Ctrl de droite"
-
-#~ msgid "Alt+Shift"
-#~ msgstr "Alt+Maj"
-
-#~ msgid "Ctrl+Shift"
-#~ msgstr "Ctrl+Maj"
-
-#~ msgid "Alt+Ctrl"
-#~ msgstr "Alt+Ctrl"
-
-#~ msgid "Caps"
-#~ msgstr "Verr.Maj."
-
-#~ msgid "Shift+Caps"
-#~ msgstr "Maj+Verr.Maj."
-
-#~ msgid "Alt+Caps"
-#~ msgstr "Alt+Verr.Maj."
-
-#~ msgid "Ctrl+Caps"
-#~ msgstr "Ctrl+Verr.Maj."
-
-#~ msgid "_Region:"
-#~ msgstr "_Région :"
-
-#~ msgid "_City:"
-#~ msgstr "_Ville :"
-
-#~ msgid "_Network Time"
-#~ msgstr "_Heure réseau"
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "Set the time one hour ahead."
-#~ msgstr "Avancer la date d'une heure."
-
-#~ msgid "Set the time one hour back."
-#~ msgstr "Reculer la date d'une heure."
-
-#~ msgid "Set the time one minute ahead."
-#~ msgstr "Avancer l'heure d'une minute."
-
-#~ msgid "Set the time one minute back."
-#~ msgstr "Reculer l'heure d'une minute."
-
-#~ msgid "AM/PM"
-#~ msgstr "AM/PM "
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Normal"
-#~ msgstr "Normale"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Counterclockwise"
-#~ msgstr "Sens antihoraire"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Clockwise"
-#~ msgstr "Sens horaire"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "180 Degrees"
-#~ msgstr "180 degrés"
-
-#~ msgid "Monitor"
-#~ msgstr "Écran"
-
-#~ msgid "Drag to change primary display."
-#~ msgstr "Faire glisser pour changer l'écran principal."
-
-#~ msgid ""
-#~ "Select a monitor to change its properties; drag it to rearrange its "
-#~ "placement."
-#~ msgstr ""
-#~ "Sélectionnez un écran pour modifier ses propriétés ; faites-le glisser "
-#~ "pour le déplacer."
-
-#~ msgid "%a %R"
-#~ msgstr "%a %R"
-
-#~ msgid "Could not save the monitor configuration"
-#~ msgstr "Impossible d'enregistrer la configuration de l'écran"
-
-#~ msgid "_Resolution"
-#~ msgstr "_Définition"
-
-#~ msgid "R_otation"
-#~ msgstr "R_otation"
-
-#~ msgid "_Mirror displays"
-#~ msgstr "_Même image sur tous les écrans"
-
-#~ msgid "Note: may limit resolution options"
-#~ msgstr "Note : cela peut restreindre les options de définition"
-
-#~ msgid "_Detect Displays"
-#~ msgstr "_Détecter les écrans"
-
-#~ msgctxt "mouse, speed"
-#~ msgid "Slow"
-#~ msgstr "Lente"
-
-#~ msgctxt "mouse, speed"
-#~ msgid "Fast"
-#~ msgstr "Rapide"
-
-#~ msgid "C_ontent sticks to fingers"
-#~ msgstr "Le c_ontenu colle aux doigts"
-
-#~ msgid "blablabla"
-#~ msgstr "blablabla"
-
-#~ msgid ""
-#~ "Address\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "La section\n"
-#~ "adresse\n"
-#~ "vient\n"
-#~ "ici"
-
-#~ msgid ""
-#~ "DNS\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "La section\n"
-#~ "DNS\n"
-#~ "vient\n"
-#~ "ici"
-
-#~ msgid ""
-#~ "Routes\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "La section\n"
-#~ "routes\n"
-#~ "vient\n"
-#~ "ici"
-
-#~ msgid "00:24:16:31:8G:7A"
-#~ msgstr "00:24:16:31:8G:7A"
-
-#~ msgid "Hidden"
-#~ msgstr "Masqué"
-
-#~ msgid "Visible"
-#~ msgstr "Visible"
-
-#~ msgid "Name & Visibility"
-#~ msgstr "Nom et visibilité"
-
-#~ msgid "Control how you appear on the screen and the network."
-#~ msgstr "Contrôler votre apparence à l'écran et sur le réseau."
-
-#~ msgid "Display _full name in top bar"
-#~ msgstr "Afficher le nom _complet dans la barre supérieure"
-
-#~ msgid "Display full name in _lock screen"
-#~ msgstr "Afficher le nom complet quand l'écran est _verrouillé"
-
-#~ msgid "_Stealth Mode"
-#~ msgstr "Mode _furtif"
-
-#~ msgctxt "universal access, contrast"
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgctxt "universal access, contrast"
-#~ msgid "High/Inverse"
-#~ msgstr "Élevé/inversé"
-
-#~ msgid "On screen keyboard"
-#~ msgstr "Clavier visuel"
-
-#~ msgid "OnBoard"
-#~ msgstr "OnBoard"
-
-#~ msgid "75%"
-#~ msgstr "75 %"
-
-#~ msgid "100%"
-#~ msgstr "100 %"
-
-#~ msgctxt "universal access, text size"
-#~ msgid "Normal"
-#~ msgstr "Normale"
-
-#~ msgid "125%"
-#~ msgstr "125 %"
-
-#~ msgid "150%"
-#~ msgstr "150 %"
-
-#~ msgctxt "universal access, text size"
-#~ msgid "Larger"
-#~ msgstr "Plus grand"
-
-#~ msgid "Beep on Caps and Num Lock"
-#~ msgstr "Émettre un bip quand Maj. et Verr. Num. sont enfoncés"
-
-#~ msgid "Turn on or off:"
-#~ msgstr "Activer ou désactiver :"
-
-#~ msgctxt "universal access, zoom"
-#~ msgid "Zoom"
-#~ msgstr "Zoom"
-
-#~ msgid "Zoom in:"
-#~ msgstr "Zoom avant :"
-
-#~ msgid "Zoom out:"
-#~ msgstr "Zoom arrière :"
-
-#~ msgid "Closed Captioning"
-#~ msgstr "Sous-titrage"
-
-#~ msgid "Display a textual description of speech and sounds"
-#~ msgstr "Affiche une description textuelle de la parole et des sons"
-
-#~ msgctxt "universal access, delay"
-#~ msgid "Short"
-#~ msgstr "Court"
-
-#~ msgctxt "universal access, delay"
-#~ msgid "Long"
-#~ msgstr "Long"
-
-#~ msgid "Beep when a key is"
-#~ msgstr "Émettre un bip quand une touche est"
-
-#~ msgid "pressed"
-#~ msgstr "enfoncée"
-
-#~ msgid "accepted"
-#~ msgstr "acceptée"
-
-#~ msgid "rejected"
-#~ msgstr "refusée"
-
-#~ msgid "Acc_eptance delay:"
-#~ msgstr "Délai d'acc_eptation :"
-
-#~ msgid "Control the pointer using the keypad"
-#~ msgstr "Contrôle du pointeur à l'aide du pavé numérique"
-
-#~ msgid "Video Mouse"
-#~ msgstr "Souris vidéo"
-
-#~ msgid "Control the pointer using the video camera."
-#~ msgstr "Contrôle du pointeur à l'aide de la caméra vidéo."
-
-#~ msgctxt "universal access, threshold"
-#~ msgid "Small"
-#~ msgstr "Faible"
-
-#~ msgctxt "universal access, threshold"
-#~ msgid "Large"
-#~ msgstr "Élevé"
-
-#~ msgid "Add account"
-#~ msgstr "Ajouter un compte"
-
-#~ msgid "_Local Account"
-#~ msgstr "Compte _local"
-
-#~ msgid "_Login Name"
-#~ msgstr "No_m de connexion"
-
-#~ msgid "Tip: Enterprise domain or realm name"
-#~ msgstr "Astuce : domaine d'entreprise ou nom de domaine"
-
-#~ msgid "C_ontinue"
-#~ msgstr "C_ontinuer"
-
-#~ msgid "Previous Week"
-#~ msgstr "La semaine précédente"
-
-#~ msgid "Next Week"
-#~ msgstr "La semaine suivante"
-
-#~ msgid "Next week"
-#~ msgstr "La semaine suivante"
-
-#~ msgid "Log in without a password"
-#~ msgstr "Connexion sans mot de passe"
-
-#~ msgid "Disable this account"
-#~ msgstr "Désactiver ce compte"
-
-#~ msgid "Enable this account"
-#~ msgstr "Activer ce compte"
-
-#~ msgid "C_onfirm password"
-#~ msgstr "C_onfirmer le mot de passe"
-
-#~ msgid "Generate a password"
-#~ msgstr "Générer un mot de passe"
-
-#~ msgid "_Action"
-#~ msgstr "_Action"
-
-#~ msgid "_Show password"
-#~ msgstr "Affi_cher le mot de passe"
-
-#~ msgid "How to choose a strong password"
-#~ msgstr "Comment choisir un mot de passe fort"
-
-#~ msgctxt "Password strength"
-#~ msgid "Too short"
-#~ msgstr "Trop court"
-
-#~ msgctxt "Password strength"
-#~ msgid "Not good enough"
-#~ msgstr "Insuffisant"
-
-#~ msgctxt "Password strength"
-#~ msgid "Weak"
-#~ msgstr "Faible"
-
-#~ msgctxt "Password strength"
-#~ msgid "Fair"
-#~ msgstr "Correct"
-
-#~ msgctxt "Password strength"
-#~ msgid "Good"
-#~ msgstr "Bon"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strong"
-#~ msgstr "Fort"
-
-#~ msgid "_Generate a password"
-#~ msgstr "_Générer un mot de passe"
-
-#~ msgid "You need to enter a new password"
-#~ msgstr "Vous devez saisir un nouveau mot de passe"
-
-#~ msgid "The new password is not strong enough"
-#~ msgstr "Le nouveau mot de passe est trop faible"
-
-#~ msgid "You need to confirm the password"
-#~ msgstr "Vous devez confirmer le mot de passe"
-
-#~ msgid "You need to enter your current password"
-#~ msgstr "Il est nécessaire que vous saisissiez votre mot de passe actuel"
-
-#~ msgid "The current password is not correct"
-#~ msgstr "Le mot de passe actuel est incorrect"
-
-#~ msgid "Wrong password"
-#~ msgstr "Mauvais mot de passe"
-
-#~ msgid "Switch Modes"
-#~ msgstr "Inverser les modes"
-
-#~ msgid "Action"
-#~ msgstr "Action"
-
-#~ msgid "_Options…"
-#~ msgstr "_Options…"
-
-#~ msgctxt "Input source"
-#~ msgid "None"
-#~ msgstr "Aucun"
-
-#~ msgid "Change the background"
-#~ msgstr "Modifier l'arrière-plan"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "Configurer les paramètres du Bluetooth"
-
-#~ msgid "Browse Files..."
-#~ msgstr "Rechercher des fichiers..."
-
-#~ msgctxt "Power"
-#~ msgid "Bluetooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Create virtual device"
-#~ msgstr "Créer un périphérique virtuel"
-
-#~ msgid "Available Profiles for Displays"
-#~ msgstr "Profils disponibles pour les écrans"
-
-#~ msgid "Available Profiles for Scanners"
-#~ msgstr "Profils disponibles pour les scanners"
-
-#~ msgid "Available Profiles for Printers"
-#~ msgstr "Profils disponibles pour les imprimantes"
-
-#~ msgid "Available Profiles for Cameras"
-#~ msgstr "Profils disponibles pour les appareils photo"
-
-#~ msgid "Available Profiles for Webcams"
-#~ msgstr "Profils disponibles pour les webcams"
-
-#~ msgid "%i year"
-#~ msgid_plural "%i years"
-#~ msgstr[0] "%i an"
-#~ msgstr[1] "%i ans"
-
-#~ msgid "%i month"
-#~ msgid_plural "%i months"
-#~ msgstr[0] "%i mois"
-#~ msgstr[1] "%i mois"
-
-#~ msgid "%i week"
-#~ msgid_plural "%i weeks"
-#~ msgstr[0] "%i semaine"
-#~ msgstr[1] "%i semaines"
-
-#~ msgid "Less than 1 week"
-#~ msgstr "Moins d'une semaine"
-
-#~ msgid "This device is not color managed."
-#~ msgstr "Ce périphérique n'est pas pris en charge au niveau des couleurs."
-
-#~ msgid "This device is using manufacturing calibrated data."
-#~ msgstr "Ce périphérique utilise des données étalonnées en usine."
-
-#~ msgid ""
-#~ "This device does not have a profile suitable for whole-screen color "
-#~ "correction."
-#~ msgstr ""
-#~ "Ce périphérique ne possède pas un profil approprié pour la correction des "
-#~ "couleurs de l'écran complet."
-
-#~ msgid "Not specified"
-#~ msgstr "Non spécifié"
-
-#~ msgid "No devices supporting color management detected"
-#~ msgstr "Aucun périphérique acceptant la gestion de couleur n'a été détecté"
-
-#~ msgid "Add device"
-#~ msgstr "Ajouter le périphérique"
-
-#~ msgid "Add a virtual device"
-#~ msgstr "Ajouter un périphérique virtuel"
-
-#~ msgid "Remove a device"
-#~ msgstr "Retirer un périphérique"
-
-#~ msgid "Color management settings"
-#~ msgstr "Paramètres de gestion des couleurs"
-
-#~ msgid "English"
-#~ msgstr "Anglais"
-
-#~ msgid "British English"
-#~ msgstr "Anglais britannique"
-
-#~ msgid "German"
-#~ msgstr "Allemand"
-
-#~ msgid "French"
-#~ msgstr "Français"
-
-#~ msgid "Spanish"
-#~ msgstr "Espagnol"
-
-#~ msgid "Chinese (simplified)"
-#~ msgstr "Chinois (simplifié)"
-
-#~ msgid "Russian"
-#~ msgstr "Russe"
-
-#~ msgid "Arabic"
-#~ msgstr "Arabe"
-
-#~ msgid "Unspecified"
-#~ msgstr "Indéterminé"
-
-#~ msgid "Select a language"
-#~ msgstr "Sélectionner une langue"
-
-#~ msgid "_Select"
-#~ msgstr "_Sélectionner"
-
-#~ msgid "Date and Time preferences panel"
-#~ msgstr "Volet des préférences pour la date et l'heure"
-
-#~ msgid "%d x %d"
-#~ msgstr "%d x %d"
-
-#~ msgid "VESA: %s"
-#~ msgstr "VESA : %s"
-
-#~ msgid "Unknown model"
-#~ msgstr "Modèle inconnu"
-
-#~ msgid "The next login will attempt to use the standard experience."
-#~ msgstr ""
-#~ "La configuration standard sera essayée lors de la prochaine connexion."
-
-#~ msgid ""
-#~ "The next login will use the fallback mode intended for unsupported "
-#~ "graphics hardware."
-#~ msgstr ""
-#~ "Le mode restreint, conçu pour les cartes graphiques non prises en charge, "
-#~ "sera utilisé lors de la prochaine connexion."
-
-#~ msgctxt "Experience"
-#~ msgid "Fallback"
-#~ msgstr "Restreint"
-
-#~ msgid "System Information"
-#~ msgstr "Informations système"
-
-#~ msgid "OS type"
-#~ msgstr "Type d'OS"
-
-#~ msgid "_Other Media..."
-#~ msgstr "_Autres médias..."
-
-#~ msgid "Experience"
-#~ msgstr "Expérience"
-
-#~ msgid "Forced _Fallback Mode"
-#~ msgstr "Mode _restreint forcé"
-
-#~ msgid "Change keyboard settings"
-#~ msgstr "Modifier les paramètres clavier"
-
-#~ msgid "Layout Settings"
-#~ msgstr "Paramètres d'agencement"
-
-#~ msgid "Set your mouse and touchpad preferences"
-#~ msgstr "Définir les préférences pour la souris et le pavé tactile"
-
-#~ msgid "Network settings"
-#~ msgstr "Paramètres réseau"
-
-#~ msgid "_Options..."
-#~ msgstr "_Options..."
-
-#~ msgid "C_reate..."
-#~ msgstr "C_réer..."
-
-#~ msgid "_Configure..."
-#~ msgstr "_Configuration..."
-
-#~ msgid "Wireless"
-#~ msgstr "Sans fil"
-
-#~ msgid "_Disconnect"
-#~ msgstr "Se _déconnecter"
-
-#~ msgid "_Connect"
-#~ msgstr "Se _connecter"
-
-#~ msgid "Mesh"
-#~ msgstr "Mesh"
-
-#~ msgid "Disconnected"
-#~ msgstr "Déconnecté"
-
-#~ msgid "Carrier/link changed"
-#~ msgstr "Porteuse/lien modifié"
-
-#~ msgid "Expired credentials. Please log in again."
-#~ msgstr "Données d'authentification expirées. Connectez-vous à nouveau."
-
-#~ msgid "_Log In"
-#~ msgstr "Se co_nnecter"
-
-#~ msgid "Manage online accounts"
-#~ msgstr "Gérer les comptes en ligne"
-
-#~ msgid "Caution low battery, %s remaining"
-#~ msgstr "Attention batterie faible, il reste environ %s d'utilisation"
-
-#~ msgid "Using battery power - %s remaining"
-#~ msgstr "Sur batterie - Il reste environ %s d'utilisation"
-
-#~ msgid "Using battery power"
-#~ msgstr "Sur batterie"
-
-#~ msgid "Charging - fully charged"
-#~ msgstr "En charge - complètement chargée"
-
-#~ msgid "Using UPS power - %s remaining"
-#~ msgstr "Sur onduleur - il reste environ %s d'utilisation"
-
-#~ msgid "Caution low UPS"
-#~ msgstr "Attention, onduleur faible"
-
-#~ msgid "Using UPS power"
-#~ msgstr "Sur onduleur"
-
-#~ msgid "Your secondary battery is fully charged"
-#~ msgstr "Votre batterie secondaire est complètement chargée"
-
-#~ msgid "Your secondary battery is empty"
-#~ msgstr "Votre batterie secondaire est déchargée"
-
-#~ msgctxt "Battery power"
-#~ msgid "Charging - fully charged"
-#~ msgstr "En charge - complètement chargée"
-
-#~ msgid ""
-#~ "Tip: <a href=\"screen\">screen brightness</a> affects how much power is "
-#~ "used"
-#~ msgstr ""
-#~ "Astuce : la <a href=\"screen\">luminosité de l'écran</a> influence la "
-#~ "consommation d'énergie"
-
-#~ msgid "Power management settings"
-#~ msgstr "Paramètres de gestion de l'énergie"
-
-#~ msgid "Don't suspend"
-#~ msgstr "Ne pas mettre en veille"
-
-#~ msgid "Suspend when inactive for"
-#~ msgstr "Mettre en veille si inactif depuis"
-
-#~ msgctxt "printer state"
-#~ msgid "Paused"
-#~ msgstr "En pause"
-
-#~ msgid "Change printer settings"
-#~ msgstr "Modifier les paramètres de l'imprimante"
-
-#~ msgid "Manufacturers"
-#~ msgstr "Fabricants"
-
-#~ msgid "Drivers"
-#~ msgstr "Pilotes"
-
-#~ msgid "_Show"
-#~ msgstr "_Afficher"
-
-#~ msgid "Change your region and language settings"
-#~ msgstr "Modifier les paramètres de pays et de langue"
-
-#~ msgid "Choose an input source"
-#~ msgstr "Sélectionner une source d'entrée"
-
-#~ msgid "Select an input source to add"
-#~ msgstr "Sélectionner une source d'entrée à ajouter"
-
-#~ msgid ""
-#~ "The login screen, system accounts and new user accounts use the system-"
-#~ "wide Region and Language settings."
-#~ msgstr ""
-#~ "L'écran de connexion, les comptes système et ceux des nouveaux "
-#~ "utilisateurs utilisent les paramètres de pays et de langue du système."
-
-#~ msgid ""
-#~ "The login screen, system accounts and new user accounts use the system-"
-#~ "wide Region and Language settings. You may change the system settings to "
-#~ "match yours."
-#~ msgstr ""
-#~ "L'écran de connexion, les comptes système et ceux des nouveaux "
-#~ "utilisateurs utilisent les paramètres de pays et de langue du système. "
-#~ "Vous pouvez modifier les paramètres du système pour les faire "
-#~ "correspondre aux vôtres."
-
-#~ msgid "Copy Settings"
-#~ msgstr "Copier les paramètres"
-
-#~ msgid "Copy Settings..."
-#~ msgstr "Copier les paramètres..."
-
-#~ msgid "Region and Language"
-#~ msgstr "Pays et langue"
-
-#~ msgid ""
-#~ "Select a display language (change will be applied next time you log in)"
-#~ msgstr ""
-#~ "Choisissez une langue d'affichage (la modification sera prise en compte à "
-#~ "la prochaine connexion)"
-
-#~ msgid "Add Language"
-#~ msgstr "Ajouter une langue"
-
-#~ msgid "Remove Language"
-#~ msgstr "Supprimer la langue"
-
-#~ msgid "Install languages..."
-#~ msgstr "Installer des langues..."
-
-#~ msgid "Select a region (change will be applied the next time you log in)"
-#~ msgstr ""
-#~ "Choisissez une région (la modification sera prise en compte à la "
-#~ "prochaine connexion)"
-
-#~ msgid "Add Region"
-#~ msgstr "Ajouter une région"
-
-#~ msgid "Currency"
-#~ msgstr "Monnaie"
-
-#~ msgid "Examples"
-#~ msgstr "Exemples"
-
-#~ msgid "Select keyboards or other input sources"
-#~ msgstr "Sélectionner les claviers ou les autres sources d'entrée"
-
-#~ msgid "Remove Input Source"
-#~ msgstr "Supprimer la source d'entrée"
-
-#~ msgid "Move Input Source Up"
-#~ msgstr "Déplacer la source d'entrée vers le haut"
-
-#~ msgid "Show Keyboard Layout"
-#~ msgstr "Afficher l'agencement du clavier"
-
-#~ msgid "Ctrl+Alt+Space"
-#~ msgstr "Ctrl+Alt+Barre d'espace"
-
-#~ msgid "Shortcut Settings"
-#~ msgstr "Paramètres de raccourci"
-
-#~ msgid "Display language:"
-#~ msgstr "Langue d'affichage :"
-
-#~ msgid "Input source:"
-#~ msgstr "Source d'entrée :"
-
-#~ msgid "Format:"
-#~ msgstr "Format :"
-
-#~ msgid "Your settings"
-#~ msgstr "Vos paramètres"
-
-#~ msgid "System settings"
-#~ msgstr "Paramètres système"
-
-#~ msgid "Brightness & Lock"
-#~ msgstr "Luminosité & verrouillage"
-
-#~ msgid "Screen brightness and lock settings"
-#~ msgstr "Paramètres de luminosité de l'écran et de verrouillage"
-
-#~ msgid "Brightness;Lock;Dim;Blank;Monitor;"
-#~ msgstr "Luminosité;Verrouillage;Verrouiller;Estomper;Veille;Éteindre;Écran;"
-
-#~ msgid "_Dim screen to save power"
-#~ msgstr "_Diminuer la luminosité pour économiser la batterie"
-
-#~ msgid "Don't lock when at home"
-#~ msgstr "Ne pas verrouiller chez soi"
-
-#~ msgid "Locations..."
-#~ msgstr "Emplacements..."
-
-#~ msgid "Lock"
-#~ msgstr "Verrouiller"
-
-#~ msgid "Enable debugging code"
-#~ msgstr "Activer le code de débogage"
-
-#~ msgid "Version of this application"
-#~ msgstr "Version de l'application"
-
-#~ msgid " — GNOME Volume Control Applet"
-#~ msgstr " — Applet du contrôle de volume GNOME"
-
-#~ msgid "Show desktop volume control"
-#~ msgstr "Afficher le contrôle de volume sur le bureau"
-
-#~ msgid "Sound Output Volume"
-#~ msgstr "Volume sonore en sortie"
-
-#~ msgid "Microphone Volume"
-#~ msgstr "Volume du micro"
-
-#~ msgid "Failed to start Sound Preferences: %s"
-#~ msgstr "Échec à l'ouverture des préférences pour le son : %s"
-
-#~ msgid "_Mute"
-#~ msgstr "_Muet"
-
-#~ msgid "_Sound Preferences"
-#~ msgstr "Préférences du _son"
-
-#~ msgid "Muted"
-#~ msgstr "Assourdi"
-
-#~ msgid "Universal Access Preferences"
-#~ msgstr "Préférences de l'accès universel"
-
-#~ msgid "Options..."
-#~ msgstr "Options..."
-
-#~ msgctxt "Zoom Grayscale"
-#~ msgid "Color"
-#~ msgstr "Couleur"
-
-#~ msgctxt "Zoom Grayscale"
-#~ msgid "None"
-#~ msgstr "Aucune"
-
-#~ msgid "User Accounts"
-#~ msgstr "Comptes utilisateur"
-
-#~ msgid "_Hint"
-#~ msgstr "_Indication"
-
-#~ msgid ""
-#~ "This hint may be displayed at the login screen.  It will be visible to "
-#~ "all users of this system.  Do <b>not</b> include the password here."
-#~ msgstr ""
-#~ "Cette indication est affichée sur l'écran de connexion. Elle est visible "
-#~ "à tous les utilisateurs du système. <b>Ne pas</b> y inclure le mot de "
-#~ "passe."
-
-#~ msgid "Fair"
-#~ msgstr "Correct"
-
-#~ msgid "Browse for more pictures..."
-#~ msgstr "Rechercher d'autres images..."
-
-#~ msgid "No user with the name '%s' exists."
-#~ msgstr "Il n'y a pas d'utilisateur nommé « %s »."
-
-#~ msgid "This user does not exist."
-#~ msgstr "Cet utilisateur n'existe pas."
-
-#~ msgid "Set your Wacom tablet preferences"
-#~ msgstr "Définir les préférences pour la tablette Wacom"
-
-#~ msgid "Map Buttons..."
-#~ msgstr "Associer les boutons..."
-
-#~ msgid "Calibrate..."
-#~ msgstr "Étalonner..."
-
-#~ msgid "- System Settings"
-#~ msgstr "- Paramètres système"
-
-#~ msgid "Control Center"
-#~ msgstr "Centre de contrôle"
-
-#~ msgid "System Settings"
-#~ msgstr "Paramètres système"
