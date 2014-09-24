@@ -704,8 +704,10 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         cc_common_language_add_user_languages (model);
 
         lang = g_strdup (act_user_get_language (user));
-        if (!lang)
+        if ((!lang || *lang == '\0') && act_user_get_uid (user) == getuid ()) {
                 lang = cc_common_language_get_current_language ();
+                act_user_set_language (user, lang);
+        }
 
         if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
                 um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
