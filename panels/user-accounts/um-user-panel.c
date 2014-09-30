@@ -58,6 +58,8 @@
 
 #include "cc-common-language.h"
 
+#include "um-realm-manager.h"
+
 #define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
 
 CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
@@ -67,6 +69,7 @@ CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
 
 struct _CcUserPanelPrivate {
         ActUserManager *um;
+        GCancellable  *cancellable;
         GtkBuilder *builder;
         GtkWidget *notification;
 
@@ -100,6 +103,21 @@ enum {
         SORT_KEY_COL,
         NUM_USER_LIST_COLS
 };
+
+typedef struct {
+        CcUserPanel *self;
+        GCancellable *cancellable;
+        gchar *login;
+} AsyncDeleteData;
+
+static void
+async_delete_data_free (AsyncDeleteData *data)
+{
+        g_object_unref (data->self);
+        g_object_unref (data->cancellable);
+        g_free (data->login);
+        g_slice_free (AsyncDeleteData, data);
+}
 
 static void
 show_error_dialog (CcUserPanelPrivate *d,
@@ -476,8 +494,174 @@ delete_user_response (GtkWidget         *dialog,
 }
 
 static void
-delete_user (GtkButton *button, CcUserPanelPrivate *d)
+enterprise_user_revoked (GObject *source,
+                         GAsyncResult *result,
+                         gpointer user_data)
 {
+        AsyncDeleteData *data = user_data;
+        CcUserPanelPrivate *d = data->self->priv;
+        UmRealmCommon *common = UM_REALM_COMMON (source);
+        GError *error = NULL;
+
+        if (g_cancellable_is_cancelled (data->cancellable)) {
+                async_delete_data_free (data);
+                return;
+        }
+
+        um_realm_common_call_change_login_policy_finish (common, result, &error);
+        if (error != NULL) {
+                show_error_dialog (d, _("Failed to revoke remotely managed user"), error);
+                g_error_free (error);
+        }
+
+        async_delete_data_free (data);
+}
+
+static UmRealmCommon *
+find_matching_realm (UmRealmManager *realm_manager, const gchar *login)
+{
+        UmRealmCommon *common = NULL;
+        GList *realms, *l;
+
+        realms = um_realm_manager_get_realms (realm_manager);
+        for (l = realms; l != NULL; l = g_list_next (l)) {
+                const gchar * const *permitted_logins;
+                gint i;
+
+                common = um_realm_object_get_common (l->data);
+                permitted_logins = um_realm_common_get_permitted_logins (common);
+                for (i = 0; permitted_logins[i] != NULL; i++) {
+                        if (g_strcmp0 (permitted_logins[i], login) == 0)
+                                break;
+                }
+
+                if (permitted_logins[i] != NULL)
+                        break;
+
+                g_clear_object (&common);
+        }
+        g_list_free_full (realms, g_object_unref);
+
+        return common;
+}
+
+static void
+realm_manager_found (GObject *source,
+                     GAsyncResult *result,
+                     gpointer user_data)
+{
+        AsyncDeleteData *data = user_data;
+        CcUserPanelPrivate *d = data->self->priv;
+        UmRealmCommon *common;
+        UmRealmManager *realm_manager;
+        const gchar *add[1];
+        const gchar *remove[2];
+        GVariant *options;
+        GError *error = NULL;
+
+        if (g_cancellable_is_cancelled (data->cancellable)) {
+                async_delete_data_free (data);
+                return;
+        }
+
+        realm_manager = um_realm_manager_new_finish (result, &error);
+        if (error != NULL) {
+                show_error_dialog (d, _("Failed to revoke remotely managed user"), error);
+                g_error_free (error);
+                async_delete_data_free (data);
+                return;
+        }
+
+        /* Find matching realm */
+        common = find_matching_realm (realm_manager, data->login);
+        if (common == NULL) {
+                /* The realm was probably left */
+                async_delete_data_free (data);
+                return;
+        }
+
+        /* Remove the user from permitted logins */
+        g_debug ("Denying future login for: %s", data->login);
+
+        add[0] = NULL;
+        remove[0] = data->login;
+        remove[1] = NULL;
+
+        options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
+        um_realm_common_call_change_login_policy (common, "",
+                                                  add, remove, options,
+                                                  data->cancellable,
+                                                  enterprise_user_revoked,
+                                                  data);
+
+        g_object_unref (common);
+}
+
+static void
+enterprise_user_uncached (GObject           *source,
+                          GAsyncResult      *res,
+                          gpointer           user_data)
+{
+        AsyncDeleteData *data = user_data;
+        CcUserPanelPrivate *d = data->self->priv;
+        ActUserManager *manager = ACT_USER_MANAGER (source);
+        GError *error = NULL;
+
+        if (g_cancellable_is_cancelled (data->cancellable)) {
+                async_delete_data_free (data);
+                return;
+        }
+
+        act_user_manager_uncache_user_finish (manager, res, &error);
+        if (error == NULL) {
+                /* Find realm manager */
+                um_realm_manager_new (d->cancellable, realm_manager_found, data);
+        }
+        else {
+                show_error_dialog (d, _("Failed to revoke remotely managed user"), error);
+                g_error_free (error);
+                async_delete_data_free (data);
+        }
+}
+
+static void
+delete_enterprise_user_response (GtkWidget          *dialog,
+                                 gint                response_id,
+                                 gpointer            user_data)
+{
+        CcUserPanel *self = UM_USER_PANEL (user_data);
+        CcUserPanelPrivate *d = self->priv;
+        AsyncDeleteData *data;
+        ActUser *user;
+
+        gtk_widget_destroy (dialog);
+
+        if (response_id != GTK_RESPONSE_ACCEPT) {
+                return;
+        }
+
+        user = get_selected_user (self->priv);
+
+        data = g_slice_new (AsyncDeleteData);
+        data->self = g_object_ref (self);
+        data->cancellable = g_object_ref (d->cancellable);
+        data->login = g_strdup (act_user_get_user_name (user));
+
+        g_object_unref (user);
+
+        /* Uncache the user account from the accountsservice */
+        g_debug ("Uncaching remote user: %s", data->login);
+
+        act_user_manager_uncache_user_async (d->um, data->login,
+                                             data->cancellable,
+                                             enterprise_user_uncached,
+                                             data);
+}
+
+static void
+delete_user (GtkButton *button, CcUserPanel *self)
+{
+        CcUserPanelPrivate *d = self->priv;
         ActUser *user;
         GtkWidget *dialog;
 
@@ -507,7 +691,7 @@ delete_user (GtkButton *button, CcUserPanelPrivate *d)
                 g_signal_connect (dialog, "response",
                                   G_CALLBACK (gtk_widget_destroy), NULL);
         }
-        else {
+        else if (act_user_is_local_account (user)) {
                 dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                  0,
                                                  GTK_MESSAGE_QUESTION,
@@ -528,6 +712,24 @@ delete_user (GtkButton *button, CcUserPanelPrivate *d)
 
                 g_signal_connect (dialog, "response",
                                   G_CALLBACK (delete_user_response), d);
+        }
+        else {
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
+                                                 0,
+                                                 GTK_MESSAGE_QUESTION,
+                                                 GTK_BUTTONS_NONE,
+                                                 _("Are you sure you want to revoke remotely managed %s's account?"),
+                                                 get_real_or_user_name (user));
+
+                gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                        _("_Delete"), GTK_RESPONSE_ACCEPT,
+                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                        NULL);
+
+                gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
+
+                g_signal_connect (dialog, "response",
+                                  G_CALLBACK (delete_enterprise_user_response), self);
         }
 
         g_signal_connect (dialog, "close",
@@ -1344,8 +1546,9 @@ update_padding (GtkWidget *button, GtkWidget *label)
 }
 
 static void
-setup_main_window (CcUserPanelPrivate *d)
+setup_main_window (CcUserPanel *self)
 {
+        CcUserPanelPrivate *d = self->priv;
         GtkWidget *userlist;
         GtkTreeModel *model;
         GtkListStore *store;
@@ -1423,7 +1626,7 @@ setup_main_window (CcUserPanelPrivate *d)
         g_signal_connect (button, "clicked", G_CALLBACK (add_user), d);
 
         button = get_widget (d, "remove-user-toolbutton");
-        g_signal_connect (button, "clicked", G_CALLBACK (delete_user), d);
+        g_signal_connect (button, "clicked", G_CALLBACK (delete_user), self);
 
         button = get_widget (d, "user-icon-nonbutton");
         add_unlock_tooltip (button);
@@ -1506,6 +1709,7 @@ cc_user_panel_init (CcUserPanel *self)
 
         d->builder = gtk_builder_new ();
         d->um = act_user_manager_get_default ();
+        d->cancellable = g_cancellable_new ();
 
         error = NULL;
         if (!gtk_builder_add_from_resource (d->builder,
@@ -1522,7 +1726,7 @@ cc_user_panel_init (CcUserPanel *self)
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_container_add (GTK_CONTAINER (self), get_widget (d, "overlay"));
         d->history_dialog = um_history_dialog_new ();
-        setup_main_window (d);
+        setup_main_window (self);
 
         context = gtk_widget_get_style_context (get_widget (d, "list-scrolledwindow"));
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
@@ -1534,6 +1738,9 @@ static void
 cc_user_panel_dispose (GObject *object)
 {
         CcUserPanelPrivate *priv = UM_USER_PANEL (object)->priv;
+
+        g_cancellable_cancel (priv->cancellable);
+        g_clear_object (&priv->cancellable);
 
         if (priv->um) {
                 g_signal_handlers_disconnect_by_data (priv->um, priv);
