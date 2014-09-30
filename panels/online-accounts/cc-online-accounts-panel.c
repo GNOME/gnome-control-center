@@ -577,11 +577,17 @@ on_tree_view_selection_changed (GtkTreeSelection *selection,
   if (gtk_tree_selection_get_selected (selection, NULL, &iter))
     {
       GoaObject *object;
+      gboolean is_locked;
+
       gtk_tree_model_get (GTK_TREE_MODEL (panel->accounts_model),
                           &iter,
                           GOA_PANEL_ACCOUNTS_MODEL_COLUMN_OBJECT, &object,
                           -1);
       show_page_account (panel, object);
+
+      is_locked = goa_account_get_is_locked (goa_object_peek_account (object));
+      gtk_widget_set_sensitive (panel->toolbar_remove_button, !is_locked);
+
       g_object_unref (object);
     }
   else
