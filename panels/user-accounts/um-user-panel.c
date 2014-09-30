@@ -101,6 +101,29 @@ enum {
         NUM_USER_LIST_COLS
 };
 
+static void
+show_error_dialog (CcUserPanelPrivate *d,
+                   const gchar *message,
+                   GError *error)
+{
+        GtkWidget *dialog;
+
+        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_CLOSE,
+                                         "%s", message);
+
+        if (error != NULL) {
+                g_dbus_error_strip_remote_error (error);
+                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                          "%s", error->message);
+        }
+
+        g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+        gtk_window_present (GTK_WINDOW (dialog));
+}
+
 static ActUser *
 get_selected_user (CcUserPanelPrivate *d)
 {
@@ -407,22 +430,10 @@ delete_user_done (ActUserManager    *manager,
 
         error = NULL;
         if (!act_user_manager_delete_user_finish (manager, res, &error)) {
-                if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED)) {
-                        GtkWidget *dialog;
+                if (!g_error_matches (error, ACT_USER_MANAGER_ERROR,
+                                      ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
+                        show_error_dialog (d, _("Failed to delete user"), error);
 
-                        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
-                                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                         GTK_MESSAGE_ERROR,
-                                                         GTK_BUTTONS_CLOSE,
-                                                         _("Failed to delete user"));
-
-                        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                                  "%s", error->message);
-
-                        g_signal_connect (G_OBJECT (dialog), "response",
-                                          G_CALLBACK (gtk_widget_destroy), NULL);
-                        gtk_window_present (GTK_WINDOW (dialog));
-                }
                 g_error_free (error);
         }
 }
