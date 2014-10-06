@@ -820,7 +820,7 @@ language_response (GtkDialog         *dialog,
 {
         GtkWidget *combo;
         ActUser *user;
-        gchar *lang;
+        gchar *lang = NULL;
         GtkTreeModel *model;
         GtkTreeIter iter;
 
@@ -831,6 +831,9 @@ language_response (GtkDialog         *dialog,
 
         if (response_id == GTK_RESPONSE_OK) {
                 lang = g_strdup (cc_language_chooser_get_language (GTK_WIDGET (dialog)));
+        }
+
+        if (lang != NULL) {
                 act_user_set_language (user, lang);
         }
         else {
