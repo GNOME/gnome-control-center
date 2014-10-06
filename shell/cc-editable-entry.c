@@ -70,7 +70,7 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-G_DEFINE_TYPE (CcEditableEntry, cc_editable_entry, GTK_TYPE_ALIGNMENT);
+G_DEFINE_TYPE (CcEditableEntry, cc_editable_entry, GTK_TYPE_BIN);
 
 void
 cc_editable_entry_set_text (CcEditableEntry *e,
@@ -236,6 +236,7 @@ cc_editable_entry_set_width_chars (CcEditableEntry *e,
 
         if (priv->width_chars != n_chars) {
                 label = gtk_bin_get_child (GTK_BIN (priv->button));
+
                 gtk_entry_set_width_chars (priv->entry, n_chars);
                 gtk_label_set_width_chars (priv->label, n_chars);
                 gtk_label_set_width_chars (GTK_LABEL (label), n_chars);
@@ -573,6 +574,7 @@ update_button_padding (CcEditableEntry *e)
         GtkStyleContext *context;
         GtkStateFlags state;
         GtkBorder padding, border;
+        gint margin;
 
         context = gtk_widget_get_style_context (GTK_WIDGET (priv->button));
         state = gtk_style_context_get_state (context);
@@ -580,7 +582,9 @@ update_button_padding (CcEditableEntry *e)
         gtk_style_context_get_padding (context, state, &padding);
         gtk_style_context_get_border (context, state, &border);
 
-        gtk_misc_set_padding (GTK_MISC (priv->label), padding.left + border.left, 0);
+        margin = padding.left + border.left;
+        gtk_widget_set_margin_start (GTK_WIDGET (priv->label), margin);
+        gtk_widget_set_margin_end (GTK_WIDGET (priv->label), margin);
 }
 
 static void
@@ -601,14 +605,15 @@ cc_editable_entry_init (CcEditableEntry *e)
 
         /* Label */
         priv->label = (GtkLabel*)gtk_label_new (EMPTY_TEXT);
-        gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
+        g_object_set (G_OBJECT (priv->label), "xalign", 0, NULL);
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         /* Button */
         priv->button = (GtkButton*)gtk_button_new_with_label (EMPTY_TEXT);
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
-        gtk_button_set_alignment (priv->button, 0.0, 0.5);
+        g_object_set (G_OBJECT (priv->button), "xalign", 0, NULL);
+
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), e);
 
