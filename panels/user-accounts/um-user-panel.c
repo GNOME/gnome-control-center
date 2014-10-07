@@ -922,6 +922,7 @@ language_changed (UmEditableCombo    *combo,
         GtkTreeModel *model;
         GtkTreeIter iter;
         gchar *lang;
+        const gchar *current_language;
         ActUser *user;
         gboolean self_selected;
 
@@ -929,13 +930,15 @@ language_changed (UmEditableCombo    *combo,
                  return;
 
         user = get_selected_user (d);
+        current_language = act_user_get_language (user);
         self_selected = act_user_get_uid (user) == geteuid ();
 
         model = um_editable_combo_get_model (combo);
 
         gtk_tree_model_get (model, &iter, 0, &lang, -1);
+
         if (lang) {
-                if (g_strcmp0 (lang, act_user_get_language (user)) != 0) {
+                if (g_strcmp0 (lang, current_language) != 0) {
                         act_user_set_language (user, lang);
 
                         if (self_selected)
@@ -947,19 +950,21 @@ language_changed (UmEditableCombo    *combo,
 
         if (d->language_chooser) {
 		cc_language_chooser_clear_filter (d->language_chooser);
-                gtk_window_present (GTK_WINDOW (d->language_chooser));
-                gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
-                goto out;
+                cc_language_chooser_set_language (d->language_chooser, NULL);
+        }
+        else {
+                d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
+
+                g_signal_connect (d->language_chooser, "response",
+                                  G_CALLBACK (language_response), d);
+                g_signal_connect (d->language_chooser, "delete-event",
+                                  G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+                gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)), NULL);
         }
 
-        d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
-
-        g_signal_connect (d->language_chooser, "response",
-                          G_CALLBACK (language_response), d);
-        g_signal_connect (d->language_chooser, "delete-event",
-                          G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)), NULL);
+        if (current_language && *current_language != '\0')
+                cc_language_chooser_set_language (d->language_chooser, current_language);
         gtk_window_present (GTK_WINDOW (d->language_chooser));
         gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
 
