@@ -842,8 +842,14 @@ language_response (GtkDialog         *dialog,
                         lang = cc_common_language_get_current_language ();
                 }
         }
-        cc_common_language_get_iter_for_language (model, lang, &iter);
-        um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), &iter);
+
+        if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
+                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), &iter);
+        }
+        else {
+                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), NULL);
+        }
+
         g_free (lang);
 
         gtk_widget_hide (GTK_WIDGET (dialog));
