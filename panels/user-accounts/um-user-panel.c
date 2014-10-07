@@ -838,9 +838,6 @@ language_response (GtkDialog         *dialog,
         }
         else {
                 lang = g_strdup (act_user_get_language (user));
-                if (!lang) {
-                        lang = cc_common_language_get_current_language ();
-                }
         }
 
         if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
