@@ -688,12 +688,12 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   else
     port = priv->port;
 
+  result = data->devices;
+  data->devices = NULL;
+
   address = g_strdup_printf ("%s:%d", priv->hostname, port);
   if (address == NULL || address[0] == '/')
     goto out;
-
-  result = data->devices;
-  data->devices = NULL;
 
   client = g_socket_client_new ();
 
