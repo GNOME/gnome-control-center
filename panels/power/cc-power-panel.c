@@ -1613,6 +1613,7 @@ add_power_saving_section (CcPowerPanel *self)
                     G_CALLBACK (wifi_switch_changed), self);
 #endif
 
+#ifdef HAVE_BLUETOOTH
   priv->bt_rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
 						   G_DBUS_PROXY_FLAGS_NONE,
 						   NULL,
@@ -1654,6 +1655,7 @@ add_power_saving_section (CcPowerPanel *self)
       g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
 			G_CALLBACK (bt_switch_changed), self);
     }
+#endif
 
   gtk_widget_show_all (widget);
 }
