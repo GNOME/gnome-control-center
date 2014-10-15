@@ -285,7 +285,7 @@ filter_changed (GtkDialog *chooser)
 }
 
 static void
-show_more (GtkDialog *chooser)
+show_more (GtkDialog *chooser, gboolean visible)
 {
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
         GtkWidget *widget;
@@ -298,16 +298,15 @@ show_more (GtkDialog *chooser)
         widget = priv->scrolledwindow;
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
                                         GTK_POLICY_NEVER,
-                                        GTK_POLICY_AUTOMATIC);
+                                        visible ? GTK_POLICY_AUTOMATIC : GTK_POLICY_NEVER);
 
-        gtk_widget_show (priv->filter_entry);
-        gtk_widget_grab_focus (priv->filter_entry);
+        gtk_widget_set_visible (priv->filter_entry, visible);
+        gtk_widget_grab_focus (visible ? priv->filter_entry : priv->language_list);
 
-        priv->showing_extra = TRUE;
+        priv->showing_extra = visible;
 
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->language_list));
 }
-
 static void
 set_locale_id (GtkDialog *chooser,
                const gchar       *locale_id)
@@ -356,7 +355,7 @@ row_activated (GtkListBox        *box,
                 return;
 
         if (row == priv->more_item) {
-                show_more (chooser);
+                show_more (chooser, TRUE);
                 return;
         }
         new_locale_id = g_object_get_data (G_OBJECT (row), "locale-id");
@@ -436,6 +435,7 @@ cc_language_chooser_clear_filter (GtkWidget *chooser)
         CcLanguageChooserPrivate *priv = GET_PRIVATE (chooser);
 
         gtk_entry_set_text (GTK_ENTRY (priv->filter_entry), "");
+        show_more (GTK_DIALOG (chooser), FALSE);
 }
 
 const gchar *
