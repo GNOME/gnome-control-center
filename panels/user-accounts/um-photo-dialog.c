@@ -36,7 +36,7 @@
 #endif /* HAVE_CHEESE */
 
 #include "um-photo-dialog.h"
-#include "um-crop-area.h"
+#include "cc-crop-area.h"
 #include "um-utils.h"
 
 #define ROW_SPAN 6
@@ -70,7 +70,7 @@ crop_dialog_response (GtkWidget     *dialog,
                 return;
         }
 
-        pb = um_crop_area_get_picture (UM_CROP_AREA (um->crop_area));
+        pb = cc_crop_area_get_picture (CC_CROP_AREA (um->crop_area));
         pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
 
         set_user_icon_data (um->user, pb2);
@@ -105,10 +105,10 @@ um_photo_dialog_crop (UmPhotoDialog *um,
                           G_CALLBACK (crop_dialog_response), um);
 
         /* Content */
-        um->crop_area           = um_crop_area_new ();
-        um_crop_area_set_min_size (UM_CROP_AREA (um->crop_area), 48, 48);
-        um_crop_area_set_constrain_aspect (UM_CROP_AREA (um->crop_area), TRUE);
-        um_crop_area_set_picture (UM_CROP_AREA (um->crop_area), pixbuf);
+        um->crop_area           = cc_crop_area_new ();
+        cc_crop_area_set_min_size (CC_CROP_AREA (um->crop_area), 48, 48);
+        cc_crop_area_set_constrain_aspect (CC_CROP_AREA (um->crop_area), TRUE);
+        cc_crop_area_set_picture (CC_CROP_AREA (um->crop_area), pixbuf);
         frame                   = gtk_frame_new (NULL);
         gtk_container_add (GTK_CONTAINER (frame), um->crop_area);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
