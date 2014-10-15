@@ -665,10 +665,8 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         GtkWidget *image;
         GtkWidget *label;
         GdkPixbuf *pixbuf;
-        gchar *lang, *text;
+        gchar *lang, *text, *name;
         GtkWidget *widget;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
         gboolean show, enable;
         ActUser *current;
 
@@ -699,22 +697,21 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         g_signal_handlers_unblock_by_func (widget, autologin_changed, d);
         gtk_widget_set_sensitive (widget, get_autologin_possible (user));
 
-        widget = get_widget (d, "account-language-combo");
-        model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
-        cc_common_language_add_user_languages (model);
+        widget = get_widget (d, "account-language-button");
 
+        name = NULL;
         lang = g_strdup (act_user_get_language (user));
         if ((!lang || *lang == '\0') && act_user_get_uid (user) == getuid ()) {
                 lang = cc_common_language_get_current_language ();
                 act_user_set_language (user, lang);
         }
 
-        if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
-                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
-        } else {
-                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), NULL);
+        if (lang && *lang != '\0') {
+                name = gnome_get_language_from_locale (lang, NULL);
         }
+        um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), name);
         g_free (lang);
+        g_free (name);
 
         /* Fingerprint: show when self, possible, and local account */
         widget = get_widget (d, "account-fingerprint-button");
@@ -814,48 +811,6 @@ account_type_changed (UmEditableCombo    *combo,
 }
 
 static void
-language_response (GtkDialog         *dialog,
-                   gint               response_id,
-                   CcUserPanelPrivate *d)
-{
-        GtkWidget *combo;
-        ActUser *user;
-        gchar *lang = NULL;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-
-        user = get_selected_user (d);
-
-        combo = get_widget (d, "account-language-combo");
-        model = um_editable_combo_get_model (UM_EDITABLE_COMBO (combo));
-
-        if (response_id == GTK_RESPONSE_OK) {
-                lang = g_strdup (cc_language_chooser_get_language (GTK_WIDGET (dialog)));
-        }
-
-        if (lang != NULL) {
-                act_user_set_language (user, lang);
-        }
-        else {
-                lang = g_strdup (act_user_get_language (user));
-        }
-
-        if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
-                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), &iter);
-        }
-        else {
-                um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), NULL);
-        }
-
-        g_free (lang);
-
-        gtk_widget_hide (GTK_WIDGET (dialog));
-        gtk_widget_set_sensitive (combo, TRUE);
-
-        g_object_unref (user);
-}
-
-static void
 restart_now (CcUserPanelPrivate *d)
 {
         GDBusConnection *bus;
@@ -875,7 +830,7 @@ restart_now (CcUserPanelPrivate *d)
 }
 
 static void
-show_restart_notification (CcUserPanelPrivate *d, gchar *locale)
+show_restart_notification (CcUserPanelPrivate *d, const gchar *locale)
 {
         GtkWidget *box;
         GtkWidget *label;
@@ -919,27 +874,26 @@ show_restart_notification (CcUserPanelPrivate *d, gchar *locale)
 }
 
 static void
-language_changed (UmEditableCombo    *combo,
-                  CcUserPanelPrivate *d)
+language_response (GtkDialog         *dialog,
+                   gint               response_id,
+                   CcUserPanelPrivate *d)
 {
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gchar *lang;
-        const gchar *current_language;
+        GtkWidget *button;
         ActUser *user;
+        const gchar *lang, *current_language;
+        gchar *name = NULL;
         gboolean self_selected;
 
-        if (!um_editable_combo_get_active_iter (combo, &iter))
-                 return;
+        if (response_id != GTK_RESPONSE_OK) {
+                gtk_widget_hide (GTK_WIDGET (dialog));
+                return;
+        }
 
         user = get_selected_user (d);
         current_language = act_user_get_language (user);
         self_selected = act_user_get_uid (user) == geteuid ();
 
-        model = um_editable_combo_get_model (combo);
-
-        gtk_tree_model_get (model, &iter, 0, &lang, -1);
-
+        lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
         if (lang) {
                 if (g_strcmp0 (lang, current_language) != 0) {
                         act_user_set_language (user, lang);
@@ -947,9 +901,29 @@ language_changed (UmEditableCombo    *combo,
                         if (self_selected)
                                 show_restart_notification (d, lang);
                 }
-                g_free (lang);
-                goto out;
+
+                act_user_set_language (user, lang);
+
+                button = get_widget (d, "account-language-button");
+                name = gnome_get_language_from_locale (lang, NULL);
+                um_editable_button_set_text (UM_EDITABLE_BUTTON (button), name);
+                g_free (name);
         }
+
+        g_object_unref (user);
+
+        gtk_widget_hide (GTK_WIDGET (dialog));
+}
+
+static void
+change_language (GtkButton *button,
+                 CcUserPanelPrivate *d)
+{
+        const gchar *current_language;
+        ActUser *user;
+
+        user = get_selected_user (d);
+        current_language = act_user_get_language (user);
 
         if (d->language_chooser) {
 		cc_language_chooser_clear_filter (d->language_chooser);
@@ -969,9 +943,7 @@ language_changed (UmEditableCombo    *combo,
         if (current_language && *current_language != '\0')
                 cc_language_chooser_set_language (d->language_chooser, current_language);
         gtk_window_present (GTK_WINDOW (d->language_chooser));
-        gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
 
-out:
         g_object_unref (user);
 }
 
@@ -1248,8 +1220,8 @@ on_permission_changed (GPermission *permission,
                 gtk_widget_show (get_widget (d, "user-icon-button"));
                 gtk_widget_hide (get_widget (d, "user-icon-nonbutton"));
 
-                um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), TRUE);
-                remove_unlock_tooltip (get_widget (d, "account-language-combo"));
+                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-language-button")), TRUE);
+                remove_unlock_tooltip (get_widget (d, "account-language-button"));
 
                 um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-password-button")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-password-button"));
@@ -1261,8 +1233,8 @@ on_permission_changed (GPermission *permission,
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
                 gtk_widget_show (get_widget (d, "user-icon-nonbutton"));
 
-                um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), FALSE);
-                add_unlock_tooltip (get_widget (d, "account-language-combo"));
+                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-language-button")), FALSE);
+                add_unlock_tooltip (get_widget (d, "account-language-button"));
 
                 um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-password-button")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-password-button"));
@@ -1454,8 +1426,8 @@ setup_main_window (CcUserPanelPrivate *d)
         button = get_widget (d, "account-password-button");
         g_signal_connect (button, "start-editing", G_CALLBACK (change_password), d);
 
-        button = get_widget (d, "account-language-combo");
-        g_signal_connect (button, "editing-done", G_CALLBACK (language_changed), d);
+        button = get_widget (d, "account-language-button");
+        g_signal_connect (button, "start-editing", G_CALLBACK (change_language), d);
 
         button = get_widget (d, "autologin-switch");
         g_signal_connect (button, "notify::active", G_CALLBACK (autologin_changed), d);

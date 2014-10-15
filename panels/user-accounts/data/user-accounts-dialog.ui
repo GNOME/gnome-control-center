@@ -383,7 +383,7 @@
                             <property name="xalign">1</property>
                             <property name="label" translatable="yes">_Language</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">account-language-combo</property>
+                            <property name="mnemonic_widget">account-language-button</property>
                             <style>
                               <class name="dim-label"/>
                             </style>
@@ -396,10 +396,8 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="UmEditableCombo" id="account-language-combo">
+                          <object class="UmEditableButton" id="account-language-button">
                             <property name="visible">True</property>
-                            <property name="model">language-model</property>
-                            <property name="text-column">1</property>
                             <property name="hexpand">True</property>
                           </object>
                           <packing>
@@ -510,7 +508,7 @@
     <property name="mode">both</property>
     <widgets>
       <widget name="account-fingerprint-button"/>
-      <widget name="account-language-combo"/>
+      <widget name="account-language-button"/>
       <widget name="account-password-button"/>
       <widget name="account-type-combo"/>
       <widget name="autologin-box"/>
