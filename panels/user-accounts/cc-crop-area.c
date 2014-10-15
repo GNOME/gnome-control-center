@@ -26,9 +26,9 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include "um-crop-area.h"
+#include "cc-crop-area.h"
 
-struct _UmCropAreaPrivate {
+struct _CcCropAreaPrivate {
         GdkPixbuf *browse_pixbuf;
         GdkPixbuf *pixbuf;
         GdkPixbuf *color_shifted;
@@ -44,7 +44,7 @@ struct _UmCropAreaPrivate {
         gdouble aspect;
 };
 
-G_DEFINE_TYPE (UmCropArea, um_crop_area, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (CcCropArea, cc_crop_area, GTK_TYPE_DRAWING_AREA);
 
 static inline guchar
 shift_color_byte (guchar b,
@@ -87,7 +87,7 @@ shift_colors (GdkPixbuf *pixbuf,
 }
 
 static void
-update_pixbufs (UmCropArea *area)
+update_pixbufs (CcCropArea *area)
 {
         gint width;
         gint height;
@@ -160,7 +160,7 @@ update_pixbufs (UmCropArea *area)
 }
 
 static void
-crop_to_widget (UmCropArea    *area,
+crop_to_widget (CcCropArea    *area,
                 GdkRectangle  *crop)
 {
         crop->x = area->priv->image.x + area->priv->crop.x * area->priv->scale;
@@ -183,12 +183,12 @@ typedef enum {
 } Location;
 
 static gboolean
-um_crop_area_draw (GtkWidget *widget,
+cc_crop_area_draw (GtkWidget *widget,
                    cairo_t   *cr)
 {
         GdkRectangle crop;
         gint width, height;
-        UmCropArea *uarea = UM_CROP_AREA (widget);
+        CcCropArea *uarea = CC_CROP_AREA (widget);
 
         if (uarea->priv->browse_pixbuf == NULL)
                 return FALSE;
@@ -301,7 +301,7 @@ find_location (GdkRectangle *rect,
 }
 
 static void
-update_cursor (UmCropArea *area,
+update_cursor (CcCropArea *area,
                gint           x,
                gint           y)
 {
@@ -373,10 +373,10 @@ eval_radial_line (gdouble center_x, gdouble center_y,
 }
 
 static gboolean
-um_crop_area_motion_notify_event (GtkWidget      *widget,
+cc_crop_area_motion_notify_event (GtkWidget      *widget,
                                   GdkEventMotion *event)
 {
-        UmCropArea *area = UM_CROP_AREA (widget);
+        CcCropArea *area = CC_CROP_AREA (widget);
         gint x, y;
         gint delta_x, delta_y;
         gint width, height;
@@ -634,10 +634,10 @@ um_crop_area_motion_notify_event (GtkWidget      *widget,
 }
 
 static gboolean
-um_crop_area_button_press_event (GtkWidget      *widget,
+cc_crop_area_button_press_event (GtkWidget      *widget,
                                  GdkEventButton *event)
 {
-        UmCropArea *area = UM_CROP_AREA (widget);
+        CcCropArea *area = CC_CROP_AREA (widget);
         GdkRectangle crop;
 
         if (area->priv->browse_pixbuf == NULL)
@@ -657,10 +657,10 @@ um_crop_area_button_press_event (GtkWidget      *widget,
 }
 
 static gboolean
-um_crop_area_button_release_event (GtkWidget      *widget,
+cc_crop_area_button_release_event (GtkWidget      *widget,
                                    GdkEventButton *event)
 {
-        UmCropArea *area = UM_CROP_AREA (widget);
+        CcCropArea *area = CC_CROP_AREA (widget);
         GdkRectangle crop;
 
         if (area->priv->browse_pixbuf == NULL)
@@ -680,9 +680,9 @@ um_crop_area_button_release_event (GtkWidget      *widget,
 }
 
 static void
-um_crop_area_finalize (GObject *object)
+cc_crop_area_finalize (GObject *object)
 {
-        UmCropArea *area = UM_CROP_AREA (object);
+        CcCropArea *area = CC_CROP_AREA (object);
 
         if (area->priv->browse_pixbuf) {
                 g_object_unref (area->priv->browse_pixbuf);
@@ -699,25 +699,25 @@ um_crop_area_finalize (GObject *object)
 }
 
 static void
-um_crop_area_class_init (UmCropAreaClass *klass)
+cc_crop_area_class_init (CcCropAreaClass *klass)
 {
         GObjectClass   *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->finalize = um_crop_area_finalize;
-        widget_class->draw = um_crop_area_draw;
-        widget_class->button_press_event = um_crop_area_button_press_event;
-        widget_class->button_release_event = um_crop_area_button_release_event;
-        widget_class->motion_notify_event = um_crop_area_motion_notify_event;
+        object_class->finalize = cc_crop_area_finalize;
+        widget_class->draw = cc_crop_area_draw;
+        widget_class->button_press_event = cc_crop_area_button_press_event;
+        widget_class->button_release_event = cc_crop_area_button_release_event;
+        widget_class->motion_notify_event = cc_crop_area_motion_notify_event;
 
-        g_type_class_add_private (klass, sizeof (UmCropAreaPrivate));
+        g_type_class_add_private (klass, sizeof (CcCropAreaPrivate));
 }
 
 static void
-um_crop_area_init (UmCropArea *area)
+cc_crop_area_init (CcCropArea *area)
 {
-        area->priv = (G_TYPE_INSTANCE_GET_PRIVATE ((area), UM_TYPE_CROP_AREA,
-                                                   UmCropAreaPrivate));
+        area->priv = (G_TYPE_INSTANCE_GET_PRIVATE ((area), CC_TYPE_CROP_AREA,
+                                                   CcCropAreaPrivate));
 
         gtk_widget_add_events (GTK_WIDGET (area), GDK_POINTER_MOTION_MASK |
                                GDK_BUTTON_PRESS_MASK |
@@ -735,13 +735,13 @@ um_crop_area_init (UmCropArea *area)
 }
 
 GtkWidget *
-um_crop_area_new (void)
+cc_crop_area_new (void)
 {
-        return g_object_new (UM_TYPE_CROP_AREA, NULL);
+        return g_object_new (CC_TYPE_CROP_AREA, NULL);
 }
 
 GdkPixbuf *
-um_crop_area_get_picture (UmCropArea *area)
+cc_crop_area_get_picture (CcCropArea *area)
 {
         gint width, height;
 
@@ -757,7 +757,7 @@ um_crop_area_get_picture (UmCropArea *area)
 }
 
 void
-um_crop_area_set_picture (UmCropArea *area,
+cc_crop_area_set_picture (CcCropArea *area,
                           GdkPixbuf  *pixbuf)
 {
         int width;
@@ -791,7 +791,7 @@ um_crop_area_set_picture (UmCropArea *area,
 }
 
 void
-um_crop_area_set_min_size (UmCropArea *area,
+cc_crop_area_set_min_size (CcCropArea *area,
                            gint        width,
                            gint        height)
 {
@@ -804,7 +804,7 @@ um_crop_area_set_min_size (UmCropArea *area,
 }
 
 void
-um_crop_area_set_constrain_aspect (UmCropArea *area,
+cc_crop_area_set_constrain_aspect (CcCropArea *area,
                                    gboolean    constrain)
 {
         if (constrain) {
