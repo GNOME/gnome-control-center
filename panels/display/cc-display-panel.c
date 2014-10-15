@@ -275,6 +275,37 @@ should_show_resolution (gint output_width,
   return FALSE;
 }
 
+static void
+apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
+{
+  GnomeRRRotation rotation;
+
+  rotation = gnome_rr_output_info_get_rotation (output);
+  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
+    {
+      int tmp;
+      tmp = *h;
+      *h = *w;
+      *w = tmp;
+    }
+}
+
+static void
+get_geometry (GnomeRROutputInfo *output, int *x, int *y, int *w, int *h)
+{
+  if (gnome_rr_output_info_is_active (output))
+    {
+      gnome_rr_output_info_get_geometry (output, x, y, w, h);
+    }
+  else
+    {
+      gnome_rr_output_info_get_geometry (output, x, y, NULL, NULL);
+      *h = gnome_rr_output_info_get_preferred_height (output);
+      *w = gnome_rr_output_info_get_preferred_width (output);
+    }
+
+  apply_rotation_to_geometry (output, w, h);
+}
 
 static void
 on_viewport_changed (FooScrollArea *scroll_area,
@@ -297,33 +328,12 @@ paint_output (CcDisplayPanel    *panel,
               gint               allocated_width,
               gint               allocated_height)
 {
-  GnomeRRRotation rotation;
   GdkPixbuf *pixbuf;
   gint x, y, width, height;
-  gboolean active;
 
-  active = gnome_rr_output_info_is_active (output);
-  if (active)
-    gnome_rr_output_info_get_geometry (output, NULL, NULL, &width, &height);
-  else
-    {
-      width = gnome_rr_output_info_get_preferred_width (output);
-      height = gnome_rr_output_info_get_preferred_height (output);
-    }
-
-  rotation = gnome_rr_output_info_get_rotation (output);
+  get_geometry (output, NULL, NULL, &width, &height);
 
   x = y = 0;
-
-  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
-    {
-      gint tmp;
-
-      /* swap width and height */
-      tmp = width;
-      width = height;
-      height = tmp;
-    }
 
   /* scale to fit allocation */
   if (width / (double) height < allocated_width / (double) allocated_height)
@@ -442,17 +452,9 @@ display_preview_new (CcDisplayPanel    *panel,
                      gint               base_height)
 {
   GtkWidget *area;
-  gint width, height, x, y;
-  gboolean active;
+  gint width, height;
 
-  active = gnome_rr_output_info_is_active (output);
-  if (active)
-    gnome_rr_output_info_get_geometry (output, &x, &y, &width, &height);
-  else
-    {
-      width = gnome_rr_output_info_get_preferred_width (output);
-      height = gnome_rr_output_info_get_preferred_height (output);
-    }
+  get_geometry (output, NULL, NULL, &width, &height);
 
   area = gtk_drawing_area_new ();
   g_signal_connect (area, "draw", G_CALLBACK (display_preview_draw), panel);
@@ -528,7 +530,6 @@ on_screen_changed (CcDisplayPanel *panel)
     {
       GtkWidget *row, *item, *preview, *label;
       gboolean primary, active;
-      gint x, y, width, height;
       const gchar *status;
       gboolean display_closed = FALSE;
       GnomeRROutput *output;
@@ -545,16 +546,6 @@ on_screen_changed (CcDisplayPanel *panel)
       row = gtk_list_box_row_new ();
       item = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
       gtk_container_set_border_width (GTK_CONTAINER (item), 12);
-
-      active = gnome_rr_output_info_is_active (output_info);
-
-      gnome_rr_output_info_get_geometry (output_info, &x, &y, &width, &height);
-
-      if (!active)
-        {
-          width = gnome_rr_output_info_get_preferred_width (output_info);
-          height = gnome_rr_output_info_get_preferred_height (output_info);
-        }
 
       preview = display_preview_new (panel, output_info, current, ++number,
                                      DISPLAY_PREVIEW_LIST_HEIGHT);
@@ -612,20 +603,6 @@ on_screen_changed (CcDisplayPanel *panel)
   ensure_monitor_labels (panel);
 }
 
-static void
-apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
-{
-  GnomeRRRotation rotation;
-
-  rotation = gnome_rr_output_info_get_rotation (output);
-  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
-    {
-      int tmp;
-      tmp = *h;
-      *h = *w;
-      *w = tmp;
-    }
-}
 
 static void
 realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo *output_that_changed, int old_width, int old_height, GnomeRRRotation old_rotation)
@@ -743,21 +720,7 @@ lay_out_outputs_horizontally (CcDisplayPanel *self)
 
 }
 
-static void
-get_geometry (GnomeRROutputInfo *output, int *w, int *h)
-{
-  if (gnome_rr_output_info_is_active (output))
-    {
-      gnome_rr_output_info_get_geometry (output, NULL, NULL, w, h);
-    }
-  else
-    {
-      *h = gnome_rr_output_info_get_preferred_height (output);
-      *w = gnome_rr_output_info_get_preferred_width (output);
-    }
 
-  apply_rotation_to_geometry (output, w, h);
-}
 
 #define SPACE 15
 #define MARGIN  15
@@ -786,7 +749,7 @@ list_connected_outputs (CcDisplayPanel *self, int *total_w, int *total_h)
 
 	  result = g_list_prepend (result, outputs[i]);
 
-	  get_geometry (outputs[i], &w, &h);
+	  get_geometry (outputs[i], NULL, NULL, &w, &h);
 
           *total_w += w;
           *total_h += h;
@@ -863,15 +826,7 @@ list_edges_for_output (GnomeRROutputInfo *output, GArray *edges)
 {
   int x, y, w, h;
 
-  gnome_rr_output_info_get_geometry (output, &x, &y, &w, &h);
-
-  if (!gnome_rr_output_info_is_active (output))
-    {
-      h = gnome_rr_output_info_get_preferred_height (output);
-      w = gnome_rr_output_info_get_preferred_width (output);
-    }
-
-  apply_rotation_to_geometry (output, &w, &h);
+  get_geometry (output, &x, &y, &w, &h);
 
   /* Top, Bottom, Left, Right */
   add_edge (output, x, y, x + w, y, edges);
@@ -1069,15 +1024,7 @@ output_is_aligned (GnomeRROutputInfo *output, GArray *edges)
 static void
 get_output_rect (GnomeRROutputInfo *output, GdkRectangle *rect)
 {
-  gnome_rr_output_info_get_geometry (output, &rect->x, &rect->y, &rect->width, &rect->height);
-
-  if (!gnome_rr_output_info_is_active (output))
-    {
-      rect->width = gnome_rr_output_info_get_preferred_width (output);
-      rect->height = gnome_rr_output_info_get_preferred_height (output);
-    }
-
-  apply_rotation_to_geometry (output, &rect->width, &rect->height);
+  get_geometry (output, &rect->x, &rect->y, &rect->width, &rect->height);
 }
 
 static gboolean
@@ -1467,12 +1414,11 @@ on_area_paint (FooScrollArea  *area,
       g_list_free (connected_outputs);
 
       foo_scroll_area_get_viewport (area, &viewport);
-      get_geometry (output, &w, &h);
+      get_geometry (output, &output_x, &output_y, &w, &h);
 
       viewport.height -= 2 * MARGIN;
       viewport.width -= 2 * MARGIN;
 
-      gnome_rr_output_info_get_geometry (output, &output_x, &output_y, NULL, NULL);
       x = output_x * scale + MARGIN + (viewport.width - total_w * scale) / 2.0;
       y = output_y * scale + MARGIN + (viewport.height - total_h * scale) / 2.0;
 
