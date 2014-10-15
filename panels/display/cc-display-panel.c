@@ -509,6 +509,9 @@ on_screen_changed (CcDisplayPanel *panel)
     {
       GnomeRROutput *output;
 
+      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	continue;
+
       output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                    gnome_rr_output_info_get_name (outputs[i]));
 
@@ -660,6 +663,9 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
       if (outputs[i] == output_that_changed || !gnome_rr_output_info_is_connected (outputs[i]))
         continue;
 
+      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	continue;
+
       gnome_rr_output_info_get_geometry (outputs[i], &output_x, &output_y, &output_width, &output_height);
 
       if (output_x >= old_right_edge)
@@ -743,6 +749,9 @@ list_connected_outputs (CcDisplayPanel *self, int *total_w, int *total_h)
   outputs = gnome_rr_config_get_outputs (self->priv->current_configuration);
   for (i = 0; outputs[i] != NULL; ++i)
     {
+      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	continue;
+
       if (gnome_rr_output_info_is_connected (outputs[i]))
 	{
 	  int w, h;
@@ -844,7 +853,11 @@ list_edges (GnomeRRConfig *config, GArray *edges)
   for (i = 0; outputs[i]; ++i)
     {
       if (gnome_rr_output_info_is_connected (outputs[i]))
-	list_edges_for_output (outputs[i], edges);
+	{
+	  if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	    continue;
+	  list_edges_for_output (outputs[i], edges);
+	}
     }
 }
 
@@ -1041,6 +1054,8 @@ output_overlaps (GnomeRROutputInfo *output, GnomeRRConfig *config)
   outputs = gnome_rr_config_get_outputs (config);
   for (i = 0; outputs[i]; ++i)
     {
+      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	continue;
       if (outputs[i] != output && gnome_rr_output_info_is_connected (outputs[i]))
 	{
 	  GdkRectangle other_rect;
@@ -1064,6 +1079,8 @@ gnome_rr_config_is_aligned (GnomeRRConfig *config, GArray *edges)
   outputs = gnome_rr_config_get_outputs (config);
   for (i = 0; outputs[i]; ++i)
     {
+      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	continue;
       if (gnome_rr_output_info_is_connected (outputs[i]))
 	{
 	  if (!output_is_aligned (outputs[i], edges))
@@ -1453,6 +1470,10 @@ compute_virtual_size_for_configuration (GnomeRRConfig *config, int *ret_width, i
   outputs = gnome_rr_config_get_outputs (config);
   for (i = 0; outputs[i] != NULL; i++)
     {
+
+      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
+	continue;
+
       if (gnome_rr_output_info_is_active (outputs[i]))
 	{
 	  gnome_rr_output_info_get_geometry (outputs[i], &output_x, &output_y, &output_width, &output_height);
