@@ -1429,8 +1429,8 @@ on_area_paint (FooScrollArea  *area,
       cairo_fill (cr);
 
       cairo_translate (cr, x, y);
-      paint_output (self, cr, self->priv->current_configuration, list->data,
-                    cc_display_panel_get_output_id (list->data),
+      paint_output (self, cr, self->priv->current_configuration, output,
+                    cc_display_panel_get_output_id (output),
                     w * scale, h * scale);
 
       cairo_restore (cr);
