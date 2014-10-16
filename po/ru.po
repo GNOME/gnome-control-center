@@ -23,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2014-10-15 14:29+0000\n"
-"PO-Revision-Date: 2014-08-21 02:02+0300\n"
+"PO-Revision-Date: 2014-10-17 00:24+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -2451,13 +2451,15 @@ msgstr "Создать профиль"
 msgid "VPN"
 msgstr "VPN"
 
+# см. network-manager-applet
 #: ../panels/network/connection-editor/net-connection-editor.c:578
 msgid "Bond"
-msgstr "Связка"
+msgstr "Агрегированное (Bond)"
 
+# см. network-manager-applet
 #: ../panels/network/connection-editor/net-connection-editor.c:580
 msgid "Team"
-msgstr "Объединение"
+msgstr "Агрегированное (Team)"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:582
 msgid "Bridge"
@@ -2611,11 +2613,12 @@ msgid ""
 "vlan;bridge;bond;DNS;"
 msgstr ""
 "Сеть;Беспроводная;Wi-Fi;Wifi;IP;LAN;Прокси;WAN;Широковещательное;Модем;"
-"Bluetooth;vpn;vlan;мост;bond;DNS;"
+"Bluetooth;vpn;vlan;мост;bond;агрегированное;DNS;"
 
+# см. network-manager-applet
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
-msgstr "Подчинённые в связке"
+msgstr "Слейвы агрегированного соединения (Bond)"
 
 #: ../panels/network/net-device-bond.c:102
 #: ../panels/network/net-device-bridge.c:102
@@ -2623,9 +2626,10 @@ msgstr "Подчинённые в связке"
 msgid "(none)"
 msgstr "(нет)"
 
+# см. network-manager-applet
 #: ../panels/network/net-device-bridge.c:77
 msgid "Bridge slaves"
-msgstr "Подчинённые моста"
+msgstr "Слейвы сетевого моста"
 
 #: ../panels/network/net-device-ethernet.c:112
 #: ../panels/network/net-device-wifi.c:462
@@ -2685,7 +2689,7 @@ msgstr "Добавить новое подключение"
 
 #: ../panels/network/net-device-team.c:77
 msgid "Team slaves"
-msgstr "Объединённые подчинённые"
+msgstr "Слейвы агрегированного соединения (Team)"
 
 #: ../panels/network/net-device-wifi.c:1154
 msgid ""
@@ -6530,7 +6534,6 @@ msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e %b."
 
-# fix для часов
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
 #: ../panels/user-accounts/um-history-dialog.c:86
@@ -6770,13 +6773,11 @@ msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Используется для именования вашей домашней папки и не может быть изменено."
 
-# fix для часов
 #. Translators: This is a date format string in the style of "Feb 24".
 #: ../panels/user-accounts/um-utils.c:827
 msgid "%b %e"
 msgstr "%e %b."
 
-# fix для часов
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
 #: ../panels/user-accounts/um-utils.c:831
 msgid "%b %e, %Y"
