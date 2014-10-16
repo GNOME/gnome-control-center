@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-20 07:30+0000\n"
+"POT-Creation-Date: 2014-10-15 14:29+0000\n"
 "PO-Revision-Date: 2014-08-21 02:02+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
@@ -79,53 +79,55 @@ msgctxt "background, style"
 msgid "Span"
 msgstr "Вместить"
 
-#. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:442
-msgid "Select Background"
-msgstr "Выбор фона"
-
-#: ../panels/background/cc-background-chooser-dialog.c:463
+#: ../panels/background/cc-background-chooser-dialog.c:438
 msgid "Wallpapers"
 msgstr "Обои"
 
-#: ../panels/background/cc-background-chooser-dialog.c:472
-msgid "Pictures"
-msgstr "Изображения"
-
-#: ../panels/background/cc-background-chooser-dialog.c:481
+#: ../panels/background/cc-background-chooser-dialog.c:447
 msgid "Colors"
 msgstr "Цвета"
 
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:485
+msgid "Select Background"
+msgstr "Выбор фона"
+
+#: ../panels/background/cc-background-chooser-dialog.c:514
+msgid "Pictures"
+msgstr "Изображения"
+
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:540
+#: ../panels/background/cc-background-chooser-dialog.c:546
 msgid "No Pictures Found"
 msgstr "Изображения не найдены"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:558
+#: ../panels/background/cc-background-chooser-dialog.c:564
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Домашняя папка"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:570
+#: ../panels/background/cc-background-chooser-dialog.c:576
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Можно добавить изображения в папку %s и они будут показаны здесь"
 
-#: ../panels/background/cc-background-chooser-dialog.c:592
+#: ../panels/background/cc-background-chooser-dialog.c:583
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
-#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
 #: ../panels/display/cc-display-panel.c:1976
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1240
-#: ../panels/network/net-device-wifi.c:1448
+#: ../panels/network/net-device-wifi.c:1247
+#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1947
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:468
@@ -135,14 +137,14 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/sharing/cc-sharing-panel.c:491
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:267
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:95
 #: ../panels/user-accounts/um-photo-dialog.c:222
 #: ../panels/user-accounts/um-user-panel.c:513
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: ../panels/background/cc-background-chooser-dialog.c:593
+#: ../panels/background/cc-background-chooser-dialog.c:584
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -668,7 +670,7 @@ msgstr ""
 "\"windows\">Microsoft Windows</a>."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:740
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Краткая информация"
 
@@ -676,7 +678,16 @@ msgstr "Краткая информация"
 msgid "Import File…"
 msgstr "Импортировать файл…"
 
-#: ../panels/color/color.ui.h:29
+#: ../panels/color/color.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/printers/new-printer-dialog.ui.h:3
+#: ../panels/region/input-chooser.ui.h:3
+#: ../panels/user-accounts/um-account-dialog.c:1469
+msgid "_Add"
+msgstr "_Добавить"
+
+#: ../panels/color/color.ui.h:31
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -684,145 +695,145 @@ msgstr ""
 "Обнаружены неполадки. Профиль может работать некорректно. <a href="
 "\"\">Показать подробности.</a>"
 
-#: ../panels/color/color.ui.h:30
+#: ../panels/color/color.ui.h:32
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Для управления цветом каждому устройству требуется обновление цветового "
 "профиля."
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:33
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:34
 msgid "Learn more about color management"
 msgstr "Узнать больше об управлении цветом"
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:35
 msgid "Set for all users"
 msgstr "Установить для всех пользователей"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:36
 msgid "Set this profile for all users on this computer"
 msgstr "Установить этот профиль для всех пользователей этого компьютера"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:37
 msgid "Enable"
 msgstr "Включить"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:38
 msgid "Add profile"
 msgstr "Добавить профиль"
 
-#: ../panels/color/color.ui.h:37
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Calibrate…"
 msgstr "Калибровать…"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
 msgstr "Калибровать устройство"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:41
 msgid "Remove profile"
 msgstr "Удалить профиль"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:42
 msgid "View details"
 msgstr "Подробности"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:43
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Устройства с возможностью управления цветом не обнаружены"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:44
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:45
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:46
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:47
 msgid "Projector"
 msgstr "Проектор"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:48
 msgid "Plasma"
 msgstr "Плазменная панель"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:49
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL-подсветка)"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:50
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED-подсветка)"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:51
 msgid "LCD (white LED backlight)"
 msgstr "LCD (белая LED-подсветка)"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:52
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD с расширенной цветовой палитрой (CCFL-подсветка)"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:53
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD с расширенной цветовой палитрой (RGB LED-подсветка)"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:54
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Высокое"
 
 # Выключать экран при простое после:
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:55
 msgid "40 minutes"
 msgstr "40 минут"
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:56
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Среднее"
 
 # Выключать экран при простое после:
-#: ../panels/color/color.ui.h:55 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 минут"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:58
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Низкое"
 
 # Выключать экран при простое после:
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
 msgid "15 minutes"
 msgstr "15 минут"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:60
 msgid "Native to display"
 msgstr "Нативный для экрана"
 
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:61
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Полиграфия и издательская деятельность)"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:62
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:63
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Фото и графика)"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:64
 msgid "D75"
 msgstr "D75"
 
@@ -1086,7 +1097,7 @@ msgstr "Основной"
 
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
+#: ../panels/power/cc-power-panel.c:1686 ../panels/power/cc-power-panel.c:1697
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1094,7 +1105,7 @@ msgstr "Основной"
 #: ../panels/universal-access/cc-ua-panel.c:695
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
-msgstr "Выключен"
+msgstr "Выключено"
 
 #: ../panels/display/cc-display-panel.c:497
 msgid "Secondary"
@@ -1106,7 +1117,8 @@ msgstr "Упорядочить сгруппированные экраны"
 
 #: ../panels/display/cc-display-panel.c:1539
 #: ../panels/display/cc-display-panel.c:1979
-#: ../panels/network/connection-editor/connection-editor.ui.h:1
+#: ../panels/network/connection-editor/connection-editor.ui.h:2
+#: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Применить"
 
@@ -1295,7 +1307,7 @@ msgid "Windows software"
 msgstr "приложение Windows"
 
 #: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1917
+#: ../panels/keyboard/keyboard-shortcuts.c:1932
 msgid "Section"
 msgstr "Раздел"
 
@@ -1318,7 +1330,7 @@ msgstr "Версия %s"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 #: ../panels/network/connection-editor/ce-page-details.c:240
-#: ../panels/network/network-wifi.ui.h:44
+#: ../panels/network/network-wifi.ui.h:46
 msgid "Details"
 msgstr "Подробности"
 
@@ -1618,11 +1630,10 @@ msgstr "Включить или выключить высокую контрас
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1217
-#: ../panels/network/network-wifi.ui.h:29
+#: ../panels/keyboard/keyboard-shortcuts.c:1218
+#: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
-#: ../panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Disabled"
 msgstr "Выключено"
 
@@ -1662,14 +1673,6 @@ msgstr "Комбинация;Повтор;Мигание;"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "Custom Shortcut"
 msgstr "Дополнительные комбинации клавиш"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
-#: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1469
-msgid "_Add"
-msgstr "_Добавить"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "_Name:"
@@ -1760,16 +1763,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:634
-#: ../panels/keyboard/keyboard-shortcuts.c:642
+#: ../panels/keyboard/keyboard-shortcuts.c:635
+#: ../panels/keyboard/keyboard-shortcuts.c:643
 msgid "Custom Shortcuts"
 msgstr "Дополнительные комбинации клавиш"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:859
+#: ../panels/keyboard/keyboard-shortcuts.c:860
 msgid "<Unknown Action>"
 msgstr "<Неизвестное действие>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1356
+#: ../panels/keyboard/keyboard-shortcuts.c:1357
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1780,7 +1783,7 @@ msgstr ""
 "клавиши станет невозможным.\n"
 "Попробуйте клавиши Control, Alt или Shift одновременно."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1386
+#: ../panels/keyboard/keyboard-shortcuts.c:1387
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1789,25 +1792,25 @@ msgstr ""
 "Комбинация клавиш «%s» уже используется для\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1391
+#: ../panels/keyboard/keyboard-shortcuts.c:1392
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "После переопределения комбинации на «%s», комбинация «%s» будет выключена."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1397
+#: ../panels/keyboard/keyboard-shortcuts.c:1398
 msgid "_Reassign"
 msgstr "_Переопределить"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1429
+#: ../panels/keyboard/keyboard-shortcuts.c:1439
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
 "automatically set it to \"%s\"?"
 msgstr "Комбинация «%s» используется для «%s». Переопределить её для «%s»?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1435
+#: ../panels/keyboard/keyboard-shortcuts.c:1449
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
@@ -1815,7 +1818,7 @@ msgid ""
 msgstr ""
 "Комбинация «%s» сейчас используется для «%s», эта комбинация будет выключена."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
+#: ../panels/keyboard/keyboard-shortcuts.c:1456
 msgid "_Assign"
 msgstr "_Назначить"
 
@@ -1963,11 +1966,11 @@ msgstr "Один щелчок, вторичная кнопка"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:366
+#: ../panels/network/cc-network-panel.c:369
 msgid "Air_plane Mode"
 msgstr "Режим для _авиаперелётов"
 
-#: ../panels/network/cc-network-panel.c:965
+#: ../panels/network/cc-network-panel.c:977
 msgid "Network proxy"
 msgstr "Сетевая прокси-служба"
 
@@ -1975,14 +1978,14 @@ msgstr "Сетевая прокси-служба"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1156 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1289
+#: ../panels/network/cc-network-panel.c:1301
 msgid "The system network services are not compatible with this version."
 msgstr "Системные сетевые службы несовместимы с этой версией."
 
@@ -2018,7 +2021,7 @@ msgstr "страница 2"
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
 #: ../panels/network/connection-editor/ce-page-security.c:455
 #: ../panels/network/connection-editor/details-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
 msgstr "Безопасность"
 
@@ -2028,34 +2031,34 @@ msgstr "автоматический"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:217
-#: ../panels/network/net-device-wifi.c:378
+#: ../panels/network/net-device-wifi.c:218
+#: ../panels/network/net-device-wifi.c:382
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:221
-#: ../panels/network/net-device-wifi.c:383
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:225
+#: ../panels/network/net-device-wifi.c:226
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:230
+#: ../panels/network/net-device-wifi.c:231
 msgid "Enterprise"
 msgstr "Предприятие"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:235
-#: ../panels/network/net-device-wifi.c:368
+#: ../panels/network/net-device-wifi.c:236
+#: ../panels/network/net-device-wifi.c:372
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Нет"
@@ -2077,7 +2080,7 @@ msgstr "Вчера"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:126
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:476
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2088,37 +2091,37 @@ msgstr[2] "%i дней назад"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:529
+#: ../panels/network/net-device-wifi.c:533
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:558
+#: ../panels/network/net-device-wifi.c:562
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Нет"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:560
+#: ../panels/network/net-device-wifi.c:564
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Слабый"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:566
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Средний"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:568
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Хороший"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:570
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Отличный"
@@ -2126,7 +2129,7 @@ msgstr "Отличный"
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
 #: ../panels/network/connection-editor/ce-page-wifi.c:270
-#: ../panels/network/network-wifi.ui.h:45
+#: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Идентификация"
 
@@ -2183,13 +2186,13 @@ msgid "Delete Route"
 msgstr "Удалить маршрут"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:615
-#: ../panels/network/network-wifi.ui.h:25
+#: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Автоматический (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
-#: ../panels/network/network-wifi.ui.h:24
+#: ../panels/network/network-wifi.ui.h:26
 msgid "Manual"
 msgstr "Вручную"
 
@@ -2199,7 +2202,7 @@ msgid "Link-Local Only"
 msgstr "Только для локальной сети"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:953
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
 
@@ -2221,12 +2224,12 @@ msgid "Automatic, DHCP only"
 msgstr "Автоматический, только DHCP"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:919
-#: ../panels/network/network-wifi.ui.h:47
+#: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
 
 #: ../panels/network/connection-editor/ce-page-reset.c:91
-#: ../panels/network/network-wifi.ui.h:49
+#: ../panels/network/network-wifi.ui.h:51
 msgid "Reset"
 msgstr "Сбросить"
 
@@ -2261,19 +2264,19 @@ msgid "WPA & WPA2 Enterprise"
 msgstr "Корпоративный WPA и WPA2"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:2
+#: ../panels/network/network-wifi.ui.h:4
 msgid "Signal Strength"
 msgstr "Мощность сигнала"
 
 #: ../panels/network/connection-editor/details-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:3
+#: ../panels/network/network-wifi.ui.h:5
 msgid "Link speed"
 msgstr "Скорость передачи данных"
 
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
 msgid "IPv4 Address"
 msgstr "Адрес IPv4"
 
@@ -2282,14 +2285,14 @@ msgstr "Адрес IPv4"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
 msgid "IPv6 Address"
 msgstr "Адрес IPv6"
 
 #: ../panels/network/connection-editor/details-page.ui.h:6
 #: ../panels/network/net-device-ethernet.c:167
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Hardware Address"
 msgstr "Аппаратный адрес"
 
@@ -2297,7 +2300,7 @@ msgstr "Аппаратный адрес"
 #: ../panels/network/net-device-ethernet.c:171
 #: ../panels/network/network-mobile.ui.h:5
 #: ../panels/network/network-simple.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Default Route"
 msgstr "Маршрут по умолчанию"
 
@@ -2307,7 +2310,7 @@ msgstr "Маршрут по умолчанию"
 #: ../panels/network/net-device-ethernet.c:173
 #: ../panels/network/network-mobile.ui.h:6
 #: ../panels/network/network-simple.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:11
 msgid "DNS"
 msgstr "DNS"
 
@@ -2354,7 +2357,7 @@ msgstr "_Название"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
-#: ../panels/network/network-wifi.ui.h:36
+#: ../panels/network/network-wifi.ui.h:38
 msgid "_MAC Address"
 msgstr "MAC-а_дрес"
 
@@ -2398,13 +2401,13 @@ msgid "The zone defines the trust level of the connection"
 msgstr "Зона определяет уровень доверия соединению"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:24
 msgid "IPv_4"
 msgstr "IPv_4"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:25
 msgid "_Addresses"
 msgstr "_Адреса"
 
@@ -2415,7 +2418,7 @@ msgstr "Автоматический DNS"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
-#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/network/network-wifi.ui.h:32
 msgid "Routes"
 msgstr "Маршруты"
 
@@ -2426,12 +2429,12 @@ msgstr "Автоматические маршруты"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:8
 #: ../panels/network/connection-editor/ip6-page.ui.h:8
-#: ../panels/network/network-wifi.ui.h:32
+#: ../panels/network/network-wifi.ui.h:34
 msgid "Use this connection _only for resources on its network"
 msgstr "Использовать это подключение _только для ресурсов в этой сети"
 
 #: ../panels/network/connection-editor/ip6-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:34
+#: ../panels/network/network-wifi.ui.h:36
 msgid "IPv_6"
 msgstr "IPv_6"
 
@@ -2477,13 +2480,13 @@ msgid "Add Network Connection"
 msgstr "Добавить сетевое подключение"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:39
+#: ../panels/network/network-wifi.ui.h:41
 msgid "_Reset"
 msgstr "_Сбросить"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1449
-#: ../panels/network/network-wifi.ui.h:40
+#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Забыть"
 
@@ -2504,7 +2507,7 @@ msgstr ""
 "подключаться к этой сети"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:16
 msgid "S_ecurity"
 msgstr "_Безопасность"
 
@@ -2574,17 +2577,17 @@ msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Ошибка: не удалось загрузить редактор VPN-соединений)"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:1
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:14
 msgid "_SSID"
 msgstr "_SSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:2
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:15
 msgid "_BSSID"
 msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:18
 msgid "My Home Network"
 msgstr "Моя домашняя сеть"
 
@@ -2625,17 +2628,17 @@ msgid "Bridge slaves"
 msgstr "Подчинённые моста"
 
 #: ../panels/network/net-device-ethernet.c:112
-#: ../panels/network/net-device-wifi.c:458
+#: ../panels/network/net-device-wifi.c:462
 msgid "never"
 msgstr "никогда"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:468
+#: ../panels/network/net-device-wifi.c:472
 msgid "today"
 msgstr "сегодня"
 
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:470
+#: ../panels/network/net-device-wifi.c:474
 msgid "yesterday"
 msgstr "вчера"
 
@@ -2647,7 +2650,7 @@ msgid "IP Address"
 msgstr "Адрес IP"
 
 #: ../panels/network/net-device-ethernet.c:178
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:12
 msgid "Last used"
 msgstr "Последнее использование"
 
@@ -2663,7 +2666,7 @@ msgid "Wired"
 msgstr "Проводное"
 
 #: ../panels/network/net-device-ethernet.c:356
-#: ../panels/network/net-device-wifi.c:1604
+#: ../panels/network/net-device-wifi.c:1596
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2684,7 +2687,7 @@ msgstr "Добавить новое подключение"
 msgid "Team slaves"
 msgstr "Объединённые подчинённые"
 
-#: ../panels/network/net-device-wifi.c:1153
+#: ../panels/network/net-device-wifi.c:1154
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2693,14 +2696,14 @@ msgstr ""
 "подключение к Интернету, беспроводную точку доступа можно настроить для "
 "подключения к Интернету других пользователей."
 
-#: ../panels/network/net-device-wifi.c:1157
+#: ../panels/network/net-device-wifi.c:1158
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Переключение на беспроводную точку доступа приведёт к отключению от <b>%s</"
 "b>."
 
-#: ../panels/network/net-device-wifi.c:1161
+#: ../panels/network/net-device-wifi.c:1162
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2708,23 +2711,23 @@ msgstr ""
 "Доступ к Интернету по беспроводному каналу возможен только при отключённой "
 "точке доступа."
 
-#: ../panels/network/net-device-wifi.c:1238
+#: ../panels/network/net-device-wifi.c:1245
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Остановить точку доступа и отключить всех пользователей?"
 
-#: ../panels/network/net-device-wifi.c:1241
+#: ../panels/network/net-device-wifi.c:1248
 msgid "_Stop Hotspot"
 msgstr "_Остановить точку доступа"
 
-#: ../panels/network/net-device-wifi.c:1313
+#: ../panels/network/net-device-wifi.c:1305
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Использование в качестве точки доступа запрещено системной политикой"
 
-#: ../panels/network/net-device-wifi.c:1316
+#: ../panels/network/net-device-wifi.c:1308
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Беспроводное устройство не поддерживает режим точки доступа"
 
-#: ../panels/network/net-device-wifi.c:1445
+#: ../panels/network/net-device-wifi.c:1437
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2732,18 +2735,20 @@ msgstr ""
 "Сетевые данные для выделенных сетей, включая пароли и любые пользовательские "
 "настройки, будут утеряны."
 
-#: ../panels/network/net-device-wifi.c:1753
+#: ../panels/network/net-device-wifi.c:1745
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "История"
 
-#: ../panels/network/net-device-wifi.c:1757
+#: ../panels/network/net-device-wifi.c:1749
+#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:533
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "_Close"
 msgstr "_Закрыть"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1765
+#: ../panels/network/net-device-wifi.c:1757
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Забыть"
@@ -2872,15 +2877,15 @@ msgstr "Имя пользователя"
 msgid "Turn VPN connection off"
 msgstr "Выключить VPN-соединение"
 
-#: ../panels/network/network-wifi.ui.h:1
+#: ../panels/network/network-wifi.ui.h:3
 msgid "Automatic _Connect"
 msgstr "Автоматическое _подключение"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:13
 msgid "details"
 msgstr "подробности"
 
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:17
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:2
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
@@ -2890,55 +2895,55 @@ msgstr "подробности"
 msgid "_Password"
 msgstr "_Пароль"
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Нет"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
 msgstr "Показать п_ароль"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Make available to other users"
 msgstr "Доступно для других пользователей"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:23
 msgid "identity"
 msgstr "идентичность"
 
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:28
 msgid "Automatic (DHCP) addresses only"
 msgstr "Только автоматические адреса (DHCP)"
 
-#: ../panels/network/network-wifi.ui.h:27
+#: ../panels/network/network-wifi.ui.h:29
 msgid "Link-local only"
 msgstr "Только для локальной сети"
 
-#: ../panels/network/network-wifi.ui.h:28
+#: ../panels/network/network-wifi.ui.h:30
 msgid "Shared with other computers"
 msgstr "Общий с другими компьютерами"
 
-#: ../panels/network/network-wifi.ui.h:31
+#: ../panels/network/network-wifi.ui.h:33
 msgid "_Ignore automatically obtained routes"
 msgstr "_Игнорировать автоматически полученные маршруты"
 
-#: ../panels/network/network-wifi.ui.h:33
+#: ../panels/network/network-wifi.ui.h:35
 msgid "ipv4"
 msgstr "ipv4"
 
-#: ../panels/network/network-wifi.ui.h:35
+#: ../panels/network/network-wifi.ui.h:37
 msgid "ipv6"
 msgstr "ipv6"
 
-#: ../panels/network/network-wifi.ui.h:37
+#: ../panels/network/network-wifi.ui.h:39
 msgid "_Cloned MAC Address"
 msgstr "_Клонированный MAC-адрес"
 
-#: ../panels/network/network-wifi.ui.h:38
+#: ../panels/network/network-wifi.ui.h:40
 msgid "hardware"
 msgstr "аппаратура"
 
-#: ../panels/network/network-wifi.ui.h:41
+#: ../panels/network/network-wifi.ui.h:43
 msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
@@ -2946,7 +2951,7 @@ msgstr ""
 "Сбросить параметры этого соединения в значения по умолчанию и запомнить его "
 "в качестве предпочтительного."
 
-#: ../panels/network/network-wifi.ui.h:42
+#: ../panels/network/network-wifi.ui.h:44
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
@@ -2954,59 +2959,59 @@ msgstr ""
 "Удалить все данные, относящиеся к этой сети, и не подключаться к ней "
 "автоматически."
 
-#: ../panels/network/network-wifi.ui.h:43
+#: ../panels/network/network-wifi.ui.h:45
 msgid "reset"
 msgstr "сбросить"
 
-#: ../panels/network/network-wifi.ui.h:48
+#: ../panels/network/network-wifi.ui.h:50
 msgid "Hardware"
 msgstr "Аппаратура"
 
-#: ../panels/network/network-wifi.ui.h:50
+#: ../panels/network/network-wifi.ui.h:52
 msgid "Wi-Fi Hotspot"
 msgstr "Точка доступа Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:51
+#: ../panels/network/network-wifi.ui.h:53
 msgid "_Turn On"
 msgstr "_Включить"
 
-#: ../panels/network/network-wifi.ui.h:52
+#: ../panels/network/network-wifi.ui.h:54
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:53
+#: ../panels/network/network-wifi.ui.h:55
 msgid "Turn Wi-Fi off"
 msgstr "Выключить Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:54
+#: ../panels/network/network-wifi.ui.h:56
 msgid "_Use as Hotspot…"
 msgstr "_Сделать точкой доступа…"
 
-#: ../panels/network/network-wifi.ui.h:55
+#: ../panels/network/network-wifi.ui.h:57
 msgid "_Connect to Hidden Network…"
 msgstr "_Подключиться к скрытой сети…"
 
-#: ../panels/network/network-wifi.ui.h:56
+#: ../panels/network/network-wifi.ui.h:58
 msgid "_History"
 msgstr "_История"
 
-#: ../panels/network/network-wifi.ui.h:57
+#: ../panels/network/network-wifi.ui.h:59
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Выключите, если хотите подключиться к беспроводной сети"
 
-#: ../panels/network/network-wifi.ui.h:58
+#: ../panels/network/network-wifi.ui.h:60
 msgid "Network Name"
 msgstr "Название сети"
 
-#: ../panels/network/network-wifi.ui.h:59
+#: ../panels/network/network-wifi.ui.h:61
 msgid "Connected Devices"
 msgstr "Подключённые устройства"
 
-#: ../panels/network/network-wifi.ui.h:60
+#: ../panels/network/network-wifi.ui.h:62
 msgid "Security type"
 msgstr "Тип безопасности"
 
-#: ../panels/network/network-wifi.ui.h:61
+#: ../panels/network/network-wifi.ui.h:63
 msgid "Security key"
 msgstr "Ключ безопасности"
 
@@ -3315,7 +3320,7 @@ msgstr "Игнорировать"
 
 #: ../panels/network/wireless-security/eap-method.c:285
 msgid "Choose CA Certificate"
-msgstr "Выбрать сертификат CA"
+msgstr "Выбрать сертификат ЦС"
 
 #: ../panels/network/wireless-security/eap-method.c:645
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
@@ -3589,14 +3594,14 @@ msgid "Show Details in Lock Screen"
 msgstr "Показывать подробности в уведомлениях при заблокированном экране"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1692 ../panels/power/cc-power-panel.c:1699
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
 msgid "On"
-msgstr "Включён"
+msgstr "Включено"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3851,7 +3856,7 @@ msgstr "Компьютер"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:494 ../panels/power/cc-power-panel.c:717
-#: ../panels/power/cc-power-panel.c:2019
+#: ../panels/power/cc-power-panel.c:2021
 msgid "Battery"
 msgstr "Батарея"
 
@@ -3937,35 +3942,35 @@ msgstr ""
 "Выключение устройств мобильного широкополосного доступа (3G, 4G, WiMax и т."
 "д.)"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1636
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1686
+#: ../panels/power/cc-power-panel.c:1688
 msgid "When on battery power"
 msgstr "При работе от батареи"
 
-#: ../panels/power/cc-power-panel.c:1688
+#: ../panels/power/cc-power-panel.c:1690
 msgid "When plugged in"
 msgstr "При подключении"
 
-#: ../panels/power/cc-power-panel.c:1818
+#: ../panels/power/cc-power-panel.c:1820
 msgid "Suspend & Power Off"
 msgstr "Ждущий режим и выключение"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1853
 msgid "_Automatic suspend"
 msgstr "_Автоматический ждущий режим"
 
-#: ../panels/power/cc-power-panel.c:1875
+#: ../panels/power/cc-power-panel.c:1877
 msgid "When battery power is _critical"
 msgstr "При _критическом заряде батареи"
 
-#: ../panels/power/cc-power-panel.c:1930
+#: ../panels/power/cc-power-panel.c:1932
 msgid "Power Off"
 msgstr "Выключить"
 
-#: ../panels/power/cc-power-panel.c:2066
+#: ../panels/power/cc-power-panel.c:2068
 msgid "Devices"
 msgstr "Устройства"
 
@@ -4765,6 +4770,7 @@ msgstr "Выключение экрана"
 msgid "30 seconds"
 msgstr "30 секунд"
 
+# Очищать корзину после / сохранять историю:
 #: ../panels/privacy/privacy.ui.h:9
 msgid "1 day"
 msgstr "1 дня"
@@ -4918,28 +4924,28 @@ msgid "Other"
 msgstr "Другое"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:896
+#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Необходимо перезапустить сеанс, чтобы изменения вступили в силу"
 
-#: ../panels/region/cc-region-panel.c:240
-#: ../panels/user-accounts/um-user-panel.c:897
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:904
 msgid "Restart Now"
 msgstr "Перезапустить сейчас"
 
-#: ../panels/region/cc-region-panel.c:858
+#: ../panels/region/cc-region-panel.c:862
 msgid "No input source selected"
 msgstr "Не выбран источник ввода"
 
-#: ../panels/region/cc-region-panel.c:1088
+#: ../panels/region/cc-region-panel.c:1092
 msgid "Sorry"
 msgstr "Извините"
 
-#: ../panels/region/cc-region-panel.c:1090
+#: ../panels/region/cc-region-panel.c:1094
 msgid "Input methods can't be used on the login screen"
 msgstr "Методы ввода нельзя использовать на экране входа в систему"
 
-#: ../panels/region/cc-region-panel.c:1727
+#: ../panels/region/cc-region-panel.c:1731
 msgid "Login Screen"
 msgstr "Экран входа"
 
@@ -4994,43 +5000,43 @@ msgstr "Добавить источник ввода"
 msgid "Input Source Options"
 msgstr "Параметры источников ввода"
 
-#: ../panels/region/input-options.ui.h:2
+#: ../panels/region/input-options.ui.h:3
 msgid "Use the _same source for all windows"
 msgstr "Использовать _один источник для всех окон"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:4
 msgid "Allow _different sources for each window"
 msgstr "Использовать _различные источники для каждого окна"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:5
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:6
 msgid "Switch to previous source"
 msgstr "Переключиться на предыдущий источник"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:7
 msgid "Super+Shift+Space"
 msgstr "Super+Shift+Пробел"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:8
 msgid "Switch to next source"
 msgstr "Переключиться на следующий источник"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:9
 msgid "Super+Space"
 msgstr "Super+Пробел"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:10
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Эти комбинации клавиш можно изменить в параметрах клавиатуры"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:11
 msgid "Alternative switch to next source"
 msgstr "Альтернативный переключатель источника"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:12
 msgid "Left+Right Alt"
 msgstr "Левый+Правый Alt"
 
@@ -6087,7 +6093,7 @@ msgid "Right little finger"
 msgstr "Правый мизинец"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:697
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Включить вход в систему по отпечатку"
 
@@ -6421,49 +6427,48 @@ msgstr "Не удалось войти в домен"
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Не удалось найти домен. Может быть, он написан с ошибкой?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:137
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Доступ к устройству чтения запрещён. Свяжитесь с системным администратором."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:139
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "Устройство уже используется."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:141
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "Произошла внутренняя ошибка."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:217
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Включено"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:263
 msgid "Delete registered fingerprints?"
 msgstr "Удалить зарегистрированные отпечатки?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:270
+#: ../panels/user-accounts/um-fingerprint-dialog.c:267
 msgid "_Delete Fingerprints"
 msgstr "_Удалить отпечатки"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:276
+#: ../panels/user-accounts/um-fingerprint-dialog.c:273
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Удалить зарегистрированные отпечатки пальцев и запретить доступ по отпечатку?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:452
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Выполнено!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:513
-#: ../panels/user-accounts/um-fingerprint-dialog.c:555
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Не удалось получить доступ к устройству «%s»"
@@ -6471,16 +6476,16 @@ msgstr "Не удалось получить доступ к устройств�
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:596
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Не удалось снять отпечаток с устройства «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:647
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "Не удалось получить доступ к устройствам сканирования отпечатков"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:648
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Для получения помощи свяжитесь с системным администратором."
 
@@ -6489,7 +6494,7 @@ msgstr "Для получения помощи свяжитесь с систе�
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6498,11 +6503,11 @@ msgstr ""
 "Чтобы включить вход по отпечатку пальца, необходимо снять один или несколько "
 "образцов, используя устройство «%s»."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:738
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "Выбор пальца"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:739
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "Регистрация отпечатков пальцев"
 
@@ -6514,6 +6519,7 @@ msgstr "На этой неделе"
 msgid "Last Week"
 msgstr "На прошлой неделе"
 
+# fix для часов
 #. Translators: This is a date format string in the style of "Feb 18",
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
@@ -6522,14 +6528,15 @@ msgstr "На прошлой неделе"
 #: ../panels/user-accounts/um-history-dialog.c:81
 msgctxt "login history week label"
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%e %b."
 
+# fix для часов
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
 #: ../panels/user-accounts/um-history-dialog.c:86
 msgctxt "login history week label"
 msgid "%b %e, %Y"
-msgstr "%e %b, %Y"
+msgstr "%e %b., %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
@@ -6537,7 +6544,7 @@ msgstr "%e %b, %Y"
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
-msgstr "%s - %s"
+msgstr "%s — %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
@@ -6690,15 +6697,15 @@ msgstr "Нет"
 msgid "Logged in"
 msgstr "Авторизованный"
 
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1084
 msgid "Failed to contact the accounts service"
 msgstr "Не удалось связаться со службой учётных записей"
 
-#: ../panels/user-accounts/um-user-panel.c:1074
+#: ../panels/user-accounts/um-user-panel.c:1086
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Убедитесь, что AccountService установлен и включён."
 
-#: ../panels/user-accounts/um-user-panel.c:1115
+#: ../panels/user-accounts/um-user-panel.c:1127
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6706,12 +6713,12 @@ msgstr ""
 "Чтобы изменить,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1153
+#: ../panels/user-accounts/um-user-panel.c:1165
 msgid "Create a user account"
 msgstr "Создать учётную запись пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:1164
-#: ../panels/user-accounts/um-user-panel.c:1453
+#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1488
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6719,12 +6726,12 @@ msgstr ""
 "Чтобы создать учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Delete the selected user account"
 msgstr "Удалить выбранную учётную запись пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:1186
-#: ../panels/user-accounts/um-user-panel.c:1458
+#: ../panels/user-accounts/um-user-panel.c:1198
+#: ../panels/user-accounts/um-user-panel.c:1493
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6732,7 +6739,7 @@ msgstr ""
 "Чтобы удалить выбранную учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1368
+#: ../panels/user-accounts/um-user-panel.c:1402
 msgid "My Account"
 msgstr "Моя учётная запись"
 
@@ -6763,25 +6770,27 @@ msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Используется для именования вашей домашней папки и не может быть изменено."
 
+# fix для часов
 #. Translators: This is a date format string in the style of "Feb 24".
 #: ../panels/user-accounts/um-utils.c:827
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%e %b."
 
+# fix для часов
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
 #: ../panels/user-accounts/um-utils.c:831
 msgid "%b %e, %Y"
-msgstr "%e %b, %Y"
+msgstr "%e %b., %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
 msgstr "Отображение кнопок"
 
-#: ../panels/wacom/button-mapping.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:3
 msgid "Map buttons to functions"
 msgstr "Соответствие кнопок и функций"
 
-#: ../panels/wacom/button-mapping.ui.h:3
+#: ../panels/wacom/button-mapping.ui.h:4
 msgid ""
 "To edit a shortcut, choose the \"Send Keystroke\" action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear."
@@ -6860,7 +6869,7 @@ msgid "Button"
 msgstr "Кнопка"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Wacom Tablet"
 msgstr "Планшет Wacom"
 
@@ -6887,39 +6896,39 @@ msgstr "Сенсорная панель (относительный)"
 msgid "Tablet Preferences"
 msgstr "Настройки планшета"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "No tablet detected"
 msgstr "Планшет не обнаружен"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Подключите или включите планшет Wacom"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Bluetooth Settings"
 msgstr "Параметры Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Map to Monitor…"
 msgstr "Отображение на экран…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map Buttons…"
 msgstr "Отображение кнопок…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Adjust display resolution"
 msgstr "Настроить разрешение экрана"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust mouse settings"
 msgstr "Изменить параметры мыши"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Tracking Mode"
 msgstr "Режим слежения"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Left-Handed Orientation"
 msgstr "Настроить под левую руку"
 
