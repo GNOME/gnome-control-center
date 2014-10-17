@@ -168,6 +168,15 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   panel_class->get_help_uri = cc_power_panel_get_help_uri;
 }
 
+static GtkWidget *
+no_prelight_row_new (void)
+{
+  return (GtkWidget *) g_object_new (GTK_TYPE_LIST_BOX_ROW,
+                                     "selectable", FALSE,
+                                     "activatable", FALSE,
+                                     NULL);
+}
+
 static gchar *
 get_timestring (guint64 time_secs)
 {
@@ -321,7 +330,7 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
 
   details = get_details_string (percentage, state, time);
 
-  row = gtk_list_box_row_new ();
+  row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_container_add (GTK_CONTAINER (row), box);
 
@@ -397,7 +406,7 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   else
     name = C_("Battery name", "Extra");
 
-  row = gtk_list_box_row_new ();
+  row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_add (GTK_CONTAINER (row), box);
 
@@ -573,7 +582,7 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   g_string_append (status, "</small>");
 
   /* create the new widget */
-  row = gtk_list_box_row_new ();
+  row = no_prelight_row_new ();
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_add (GTK_CONTAINER (row), hbox);
   widget = gtk_label_new ("");
@@ -1395,7 +1404,7 @@ add_brightness_row (CcPowerPanel  *self,
   CcPowerPanelPrivate *priv = self->priv;
   GtkWidget *row, *box, *label, *box2, *w, *scale;
 
-  row = gtk_list_box_row_new ();
+  row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_add (GTK_CONTAINER (row), box);
   label = gtk_label_new (text);
@@ -1482,7 +1491,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (priv->row_sizegroup, row);
 
-  priv->dim_screen_row = row = gtk_list_box_row_new ();
+  priv->dim_screen_row = row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
 
@@ -1507,7 +1516,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (priv->row_sizegroup, row);
 
-  row = gtk_list_box_row_new ();
+  row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
 
@@ -1537,7 +1546,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_size_group_add_widget (priv->row_sizegroup, row);
 
 #ifdef HAVE_NETWORK_MANAGER
-  priv->wifi_row = row = gtk_list_box_row_new ();
+  priv->wifi_row = row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
 
@@ -1567,7 +1576,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (priv->row_sizegroup, row);
 
-  priv->mobile_row = row = gtk_list_box_row_new ();
+  priv->mobile_row = row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
 
@@ -1630,7 +1639,7 @@ add_power_saving_section (CcPowerPanel *self)
 							   "/org/gnome/SettingsDaemon/Rfkill",
 							   "org.freedesktop.DBus.Properties",
 							   NULL, NULL);
-      row = gtk_list_box_row_new ();
+      row = no_prelight_row_new ();
       box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
       gtk_container_add (GTK_CONTAINER (row), box);
       label = gtk_label_new (_("_Bluetooth"));
