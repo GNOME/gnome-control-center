@@ -72,7 +72,7 @@ struct _CcMouseTestPrivate
 	gint scroll_image_timeout_id;
 };
 
-G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, GTK_TYPE_ALIGNMENT);
+G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, GTK_TYPE_BIN);
 
 /* Timeout for the double click test */
 

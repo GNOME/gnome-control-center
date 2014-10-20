@@ -58,7 +58,7 @@ struct _CcMousePropertiesPrivate
 	gboolean changing_scroll;
 };
 
-G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_ALIGNMENT);
+G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_BIN);
 
 static void
 orientation_radio_button_release_event (GtkWidget   *widget,
