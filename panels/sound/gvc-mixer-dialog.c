@@ -756,16 +756,6 @@ on_stream_is_muted_notify (GObject        *object,
 
 }
 
-static void
-save_bar_for_stream (GvcMixerDialog *dialog,
-                     GvcMixerStream *stream,
-                     GtkWidget      *bar)
-{
-        g_hash_table_insert (dialog->priv->bars,
-                             GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)),
-                             bar);
-}
-
 static GtkWidget *
 create_bar (GvcMixerDialog *dialog,
             gboolean        add_to_size_group,
@@ -991,6 +981,9 @@ bar_set_stream (GvcMixerDialog *dialog,
                                   "value-changed",
                                   G_CALLBACK (on_adjustment_value_changed),
                                   dialog);
+                g_hash_table_insert (dialog->priv->bars,
+                                     GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)),
+                                     bar);
         }
 }
 
@@ -1038,7 +1031,6 @@ add_stream (GvcMixerDialog *dialog,
                         g_signal_handlers_disconnect_by_func (old_stream, on_stream_volume_notify, dialog);
                         g_hash_table_remove (dialog->priv->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (old_stream)));
                 }
-                save_bar_for_stream (dialog, stream, bar);
                 bar_set_stream (dialog, bar, stream);
                 gtk_widget_show (bar);
         }
