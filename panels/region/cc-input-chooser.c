@@ -1022,7 +1022,11 @@ get_locale_infos (GtkWidget *chooser)
       if (!gnome_parse_locale (*locale, &lang_code, &country_code, NULL, NULL))
         continue;
 
-      simple_locale = g_strdup_printf ("%s_%s.utf8", lang_code, country_code);
+      if (country_code != NULL)
+	simple_locale = g_strdup_printf ("%s_%s.utf8", lang_code, country_code);
+      else
+	simple_locale = g_strdup_printf ("%s.utf8", lang_code);
+
       if (g_hash_table_contains (priv->locales, simple_locale))
         {
           g_free (simple_locale);
@@ -1060,10 +1064,13 @@ get_locale_infos (GtkWidget *chooser)
       add_ids_to_set (layouts_with_locale, list);
       g_list_free (list);
 
-      list = gnome_xkb_info_get_layouts_for_country (priv->xkb_info, country_code);
-      add_rows_to_table (chooser, info, list, INPUT_SOURCE_TYPE_XKB, id);
-      add_ids_to_set (layouts_with_locale, list);
-      g_list_free (list);
+      if (country_code != NULL)
+        {
+          list = gnome_xkb_info_get_layouts_for_country (priv->xkb_info, country_code);
+          add_rows_to_table (chooser, info, list, INPUT_SOURCE_TYPE_XKB, id);
+          add_ids_to_set (layouts_with_locale, list);
+          g_list_free (list);
+        }
 
       g_free (lang_code);
       g_free (country_code);
