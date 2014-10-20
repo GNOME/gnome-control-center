@@ -571,7 +571,12 @@ add_single_file_from_media (BgPicturesSource *bg_source,
    * plugin, GRL_METADATA_KEY_MODIFICATION_DATE is not
    */
   mtime = grl_media_get_creation_date (media);
-  mtime_unix = g_date_time_to_unix (mtime);
+  if (!mtime)
+    mtime = grl_media_get_modification_date (media);
+  if (mtime)
+    mtime_unix = g_date_time_to_unix (mtime);
+  else
+    mtime_unix = g_get_real_time () / G_USEC_PER_SEC;
 
   return add_single_file (bg_source, file, content_type, (guint64) mtime_unix, NULL);
 }
