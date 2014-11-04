@@ -122,15 +122,15 @@
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkStack" id="stack">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
+                    <property name="transition-type">none</property>
                     <child>
-                      <object class="GtkStack" id="stack">
+                      <object class="GtkScrolledWindow" id="scrolledwindow1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="transition-type">none</property>
+                        <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="devices-treeview">
                             <property name="visible">True</property>
@@ -141,25 +141,25 @@
                               <object class="GtkTreeSelection" id="treeview-selection"/>
                             </child>
                           </object>
-                          <packing>
-                            <property name="name">standard-page</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="no-devices-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="sensitive">False</property>
-                            <property name="label" translatable="yes" comments="Translators: No printers were found">No printers detected.</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="name">no-printers-page</property>
-                          </packing>
                         </child>
                       </object>
+                      <packing>
+                        <property name="name">standard-page</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="no-devices-label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="sensitive">False</property>
+                        <property name="label" translatable="yes" comments="Translators: No printers were found">No printers detected.</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="name">no-printers-page</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>
