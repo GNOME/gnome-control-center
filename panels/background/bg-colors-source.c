@@ -222,8 +222,21 @@ bg_colors_source_add (BgColorsSource       *self,
     }
   else
     {
-      colors[len] = c;
+      char **new_colors;
+      guint i;
+
+      new_colors = g_new0 (char *, len + 2);
+      for (i = 0; colors[i] != NULL; i++)
+        {
+          new_colors[i] = colors[i];
+          colors[i] = NULL;
+        }
+
+      new_colors[len] = c;
       len++;
+
+      g_strfreev (colors);
+      colors = new_colors;
     }
 
   g_key_file_set_string_list (keyfile, "Colors", "custom-colors", (const gchar * const*) colors, len);
