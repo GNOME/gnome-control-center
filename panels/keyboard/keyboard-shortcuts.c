@@ -92,6 +92,7 @@ static GSettings *binding_settings = NULL;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
+static GtkWidget *custom_shortcut_ok_button = NULL;
 static GHashTable *kb_system_sections = NULL;
 static GHashTable *kb_apps_sections = NULL;
 static GHashTable *kb_user_sections = NULL;
@@ -1728,6 +1729,20 @@ add_custom_shortcut (GtkTreeView  *tree_view,
 }
 
 static void
+shortcut_entry_changed (GtkEntry *entry,
+                        gpointer  user_data)
+{
+  guint16 name_length;
+  guint16 command_length;
+
+  name_length = gtk_entry_get_text_length (custom_shortcut_name_entry);
+  command_length = gtk_entry_get_text_length (custom_shortcut_command_entry);
+
+  gtk_widget_set_sensitive (custom_shortcut_ok_button,
+                            name_length > 0 && command_length > 0);
+}
+
+static void
 add_button_clicked (GtkWidget  *button,
                     GtkBuilder *builder)
 {
@@ -2051,10 +2066,15 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   /* setup the custom shortcut dialog */
   custom_shortcut_dialog = WID (builder,
                                 "custom-shortcut-dialog");
+  custom_shortcut_ok_button = WID (builder, "custom-shortcut-ok-button");
   custom_shortcut_name_entry = WID (builder,
                                     "custom-shortcut-name-entry");
+  g_signal_connect (custom_shortcut_name_entry, "changed",
+                    G_CALLBACK (shortcut_entry_changed), NULL);
   custom_shortcut_command_entry = WID (builder,
                                        "custom-shortcut-command-entry");
+  g_signal_connect (custom_shortcut_command_entry, "changed",
+                    G_CALLBACK (shortcut_entry_changed), NULL);
   g_signal_connect (WID (builder, "add-toolbutton"),
                     "clicked", G_CALLBACK (add_button_clicked), builder);
   g_signal_connect (WID (builder, "remove-toolbutton"),

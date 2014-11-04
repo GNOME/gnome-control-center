@@ -19,7 +19,7 @@
         <property name="title" translatable="yes">Custom Shortcut</property>
         <property name="show_close_button">False</property>
         <child>
-          <object class="GtkButton" id="cancelbutton1">
+          <object class="GtkButton" id="custom-shortcut-cancel-button">
             <property name="label" translatable="yes">_Cancel</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -36,7 +36,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="okbutton1">
+          <object class="GtkButton" id="custom-shortcut-ok-button">
             <property name="label" translatable="yes">_Add</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -45,6 +45,7 @@
             <property name="use_action_appearance">False</property>
             <property name="use_underline">True</property>
             <property name="valign">center</property>
+            <property name="sensitive">False</property>
             <style>
               <class name="text-button"/>
               <class name="suggested-action"/>
@@ -144,8 +145,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">cancelbutton1</action-widget>
-      <action-widget response="-5">okbutton1</action-widget>
+      <action-widget response="-6">custom-shortcut-cancel-button</action-widget>
+      <action-widget response="-5">custom-shortcut-ok-button</action-widget>
     </action-widgets>
   </object>
           <object class="GtkNotebook" id="keyboard_notebook">
