@@ -202,7 +202,8 @@
                           <object class="GtkLabel" id="login-options-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
-                            <property name="ypad">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
                             <property name="label" translatable="yes">Login Options</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -322,19 +323,14 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAlignment" id="user-icon-nonbutton">
-                                <property name="xscale">0</property>
-                                <property name="yscale">0</property>
-                                <child>
-                                  <object class="GtkImage" id="user-icon-image">
-                                    <property name="visible">True</property>
-                                    <property name="icon_name">avatar-default</property>
-                                    <property name="icon-size">6</property>
-                                    <child internal-child="accessible">
-                                      <object class="AtkObject" id="user-icon-image-a11y">
-                                        <property name="accessible-name" translatable="yes">User Icon</property>
-                                      </object>
-                                    </child>
+                              <object class="GtkImage" id="user-icon-image">
+                                <property name="visible">True</property>
+                                <property name="icon_name">avatar-default</property>
+                                <property name="icon-size">6</property>
+                                <property name="halign">end</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="user-icon-image-a11y">
+                                    <property name="accessible-name" translatable="yes">User Icon</property>
                                   </object>
                                 </child>
                               </object>
@@ -449,7 +445,6 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="xalign">1</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -489,7 +484,7 @@
     <property name="mode">both</property>
     <widgets>
       <widget name="user-icon-button"/>
-      <widget name="user-icon-nonbutton"/>
+      <widget name="user-icon-image"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="label-sizegroup">

@@ -1431,7 +1431,7 @@ on_permission_changed (GPermission *permission,
 
         if (is_authorized || self_selected) {
                 gtk_widget_show (get_widget (d, "user-icon-button"));
-                gtk_widget_hide (get_widget (d, "user-icon-nonbutton"));
+                gtk_widget_hide (get_widget (d, "user-icon-image"));
 
                 um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-language-button")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-language-button"));
@@ -1444,7 +1444,7 @@ on_permission_changed (GPermission *permission,
         }
         else {
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
-                gtk_widget_show (get_widget (d, "user-icon-nonbutton"));
+                gtk_widget_show (get_widget (d, "user-icon-image"));
 
                 um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-language-button")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-language-button"));
@@ -1628,7 +1628,7 @@ setup_main_window (CcUserPanel *self)
         button = get_widget (d, "remove-user-toolbutton");
         g_signal_connect (button, "clicked", G_CALLBACK (delete_user), self);
 
-        button = get_widget (d, "user-icon-nonbutton");
+        button = get_widget (d, "user-icon-image");
         add_unlock_tooltip (button);
 
         button = get_widget (d, "full-name-entry");
