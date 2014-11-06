@@ -126,7 +126,6 @@ more_widget_new (void)
         gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
         gtk_widget_set_margin_top (box, 10);
         gtk_widget_set_margin_bottom (box, 10);
-        gtk_misc_set_alignment (GTK_MISC (arrow), 0.5, 0.5);
         gtk_box_pack_start (GTK_BOX (box), arrow, TRUE, TRUE, 0);
 
         return GTK_LIST_BOX_ROW (row);
