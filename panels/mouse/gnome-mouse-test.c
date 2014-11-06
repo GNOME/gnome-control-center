@@ -296,7 +296,7 @@ static void
 setup_dialog (CcMouseTestPrivate *d)
 {
 	GtkAdjustment *adjustment;
-	GdkRGBA color;
+	GtkStyleProvider *provider;
 
 	g_signal_connect (WID ("button_drawing_area"), "button_press_event",
 			  G_CALLBACK (button_drawing_area_button_press_event),
@@ -309,9 +309,15 @@ setup_dialog (CcMouseTestPrivate *d)
 	gtk_adjustment_set_value (adjustment,
 				  gtk_adjustment_get_upper (adjustment));
 
-	gdk_rgba_parse (&color, "#565854");
-	gtk_widget_override_background_color (WID ("viewport"), GTK_STATE_FLAG_NORMAL, &color);
-	gtk_widget_override_background_color (WID ("button_drawing_area"), GTK_STATE_FLAG_NORMAL, &color);
+	provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #565854}", -1, NULL);
+	gtk_style_context_add_provider (gtk_widget_get_style_context (WID ("viewport")),
+					provider,
+					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	gtk_style_context_add_provider (gtk_widget_get_style_context (WID ("button_drawing_area")),
+					provider,
+					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	g_object_unref (provider);
 }
 
 static void
