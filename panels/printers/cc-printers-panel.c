@@ -2814,7 +2814,7 @@ update_label_padding (GtkWidget     *widget,
   GtkWidget              *label;
   GtkWidget              *sublabel;
   gint                    offset;
-  gint                    pad;
+  gint                    margin;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -2829,9 +2829,9 @@ update_label_padding (GtkWidget     *widget,
       label = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
 
-      gtk_misc_get_padding  (GTK_MISC (label), &pad, NULL);
-      if (offset != pad)
-        gtk_misc_set_padding (GTK_MISC (label), offset, 0);
+      margin = gtk_widget_get_margin_start (label);
+      if (offset != margin)
+        gtk_widget_set_margin_start (label, offset);
     }
 }
 

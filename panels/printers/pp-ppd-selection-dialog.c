@@ -234,7 +234,7 @@ populate_dialog (PpPPDSelectionDialog *dialog)
                                                      "text", PPD_MANUFACTURERS_DISPLAY_NAMES_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
   header = gtk_label_new (gtk_tree_view_column_get_title (column));
-  gtk_misc_set_padding (GTK_MISC (header), 10, 0);
+  gtk_widget_set_margin_start (header, 10);
   gtk_tree_view_column_set_widget (column, header);
   gtk_widget_show (header);
   gtk_tree_view_append_column (manufacturers_treeview, column);
@@ -252,7 +252,7 @@ populate_dialog (PpPPDSelectionDialog *dialog)
                                                      NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
   header = gtk_label_new (gtk_tree_view_column_get_title (column));
-  gtk_misc_set_padding (GTK_MISC (header), 10, 0);
+  gtk_widget_set_margin_start (header, 10);
   gtk_tree_view_column_set_widget (column, header);
   gtk_widget_show (header);
   gtk_tree_view_append_column (models_treeview, column);
