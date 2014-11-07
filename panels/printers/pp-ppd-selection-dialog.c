@@ -324,46 +324,6 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
                                        ppd_selection_dialog->user_data);
 }
 
-static void
-update_alignment_padding (GtkWidget     *widget,
-                          GtkAllocation *allocation,
-                          gpointer       user_data)
-{
-  PpPPDSelectionDialog *dialog = (PpPPDSelectionDialog*) user_data;
-  GtkAllocation         allocation2;
-  GtkWidget            *action_area;
-  gint                  offset_left, offset_right;
-  guint                 padding_left, padding_right,
-                        padding_top, padding_bottom;
-
-  action_area = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "dialog-action-area1");
-  gtk_widget_get_allocation (action_area, &allocation2);
-
-  offset_left = allocation2.x - allocation->x;
-  offset_right = (allocation->x + allocation->width) -
-                 (allocation2.x + allocation2.width);
-
-  gtk_alignment_get_padding  (GTK_ALIGNMENT (widget),
-                              &padding_top, &padding_bottom,
-                              &padding_left, &padding_right);
-  if (allocation->x >= 0 && allocation2.x >= 0)
-    {
-      if (offset_left > 0 && offset_left != padding_left)
-        gtk_alignment_set_padding (GTK_ALIGNMENT (widget),
-                                   padding_top, padding_bottom,
-                                   offset_left, padding_right);
-
-      gtk_alignment_get_padding  (GTK_ALIGNMENT (widget),
-                                  &padding_top, &padding_bottom,
-                                  &padding_left, &padding_right);
-      if (offset_right > 0 && offset_right != padding_right)
-        gtk_alignment_set_padding (GTK_ALIGNMENT (widget),
-                                   padding_top, padding_bottom,
-                                   padding_left, offset_right);
-    }
-}
-
 PpPPDSelectionDialog *
 pp_ppd_selection_dialog_new (GtkWindow            *parent,
                              PPDList              *ppd_list,
@@ -405,10 +365,6 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   /* connect signals */
   g_signal_connect (dialog->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
   g_signal_connect (dialog->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), dialog);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "content-alignment");
-  g_signal_connect (widget, "size-allocate", G_CALLBACK (update_alignment_padding), dialog);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "ppd-spinner");
