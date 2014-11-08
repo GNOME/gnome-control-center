@@ -395,7 +395,6 @@ create_view (CcBackgroundChooserDialog *chooser, GtkTreeModel *model)
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
   gtk_widget_set_hexpand (sw, TRUE);
   gtk_widget_set_vexpand (sw, TRUE);
 
@@ -478,15 +477,13 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   priv->pictures_source = bg_pictures_source_new (GTK_WINDOW (chooser));
   priv->colors_source = bg_colors_source_new (GTK_WINDOW (chooser));
 
-  gtk_container_set_border_width (GTK_CONTAINER (chooser), 6);
   gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
   gtk_window_set_resizable (GTK_WINDOW (chooser), FALSE);
   /* translators: This is the title of the wallpaper chooser dialog. */
   gtk_window_set_title (GTK_WINDOW (chooser), _("Select Background"));
 
   vbox = gtk_dialog_get_content_area (GTK_DIALOG (chooser));
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-  gtk_widget_set_margin_bottom (vbox, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 
   priv->stack = gtk_stack_new ();
   gtk_stack_set_homogeneous (GTK_STACK (priv->stack), TRUE);
