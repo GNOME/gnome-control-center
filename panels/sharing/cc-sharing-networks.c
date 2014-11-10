@@ -190,7 +190,11 @@ cc_sharing_networks_enable_network (GtkSwitch *widget,
     g_warning ("Failed to %s service %s: %s", state ? "enable" : "disable",
 	       self->priv->service_name, error->message);
     g_error_free (error);
+    g_signal_handlers_block_by_func (widget,
+                                     cc_sharing_networks_enable_network, self);
     gtk_switch_set_active (widget, !state);
+    g_signal_handlers_unblock_by_func (widget,
+                                       cc_sharing_networks_enable_network, self);
   }
 
   cc_sharing_update_networks (self);
