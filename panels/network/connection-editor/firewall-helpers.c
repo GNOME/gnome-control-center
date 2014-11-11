@@ -72,6 +72,7 @@ get_zones_reply (GObject      *source,
         }
         gtk_combo_box_set_active (GTK_COMBO_BOX (d->combo), idx);
 
+        g_free (d->zone);
         g_free (d);
 }
 
@@ -86,7 +87,7 @@ firewall_ui_setup (NMSettingConnection *setting,
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
 
         d = g_new0 (GetZonesReplyData, 1);
-        d->zone = nm_setting_connection_get_zone (setting);
+        d->zone = g_strdup (nm_setting_connection_get_zone (setting));
         d->combo = combo;
 
         g_dbus_connection_call (bus,
