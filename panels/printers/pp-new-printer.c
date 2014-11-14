@@ -161,7 +161,7 @@ pp_new_printer_get_property (GObject    *object,
         g_value_set_boolean (value, self->priv->is_network_device);
         break;
       case PROP_WINDOW_ID:
-        g_value_set_int (value, self->priv->window_id);
+        g_value_set_uint (value, self->priv->window_id);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -228,7 +228,7 @@ pp_new_printer_set_property (GObject      *object,
         self->priv->is_network_device = g_value_get_boolean (value);
         break;
       case PROP_WINDOW_ID:
-        self->priv->window_id = g_value_get_int (value);
+        self->priv->window_id = g_value_get_uint (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -335,11 +335,11 @@ pp_new_printer_class_init (PpNewPrinterClass *klass)
                           G_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class, PROP_WINDOW_ID,
-    g_param_spec_int ("window-id",
-                      "WindowID",
-                      "Window ID of parent window",
-                      0, G_MAXINT32, 631,
-                      G_PARAM_READWRITE));
+    g_param_spec_uint ("window-id",
+                       "WindowID",
+                       "Window ID of parent window",
+                       0, G_MAXUINT, 0,
+                       G_PARAM_READWRITE));
 }
 
 static void
