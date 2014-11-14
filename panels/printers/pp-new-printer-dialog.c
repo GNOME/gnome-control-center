@@ -2040,7 +2040,7 @@ ppd_selection_cb (GtkDialog *_dialog,
                          priv->new_device->device_make_and_model,
                          priv->new_device->network_device);
 
-      window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (priv->dialog)));
+      window_id = (guint) GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (gtk_window_get_transient_for (GTK_WINDOW (priv->dialog)))));
 
       new_printer = pp_new_printer_new ();
       g_object_set (new_printer,
@@ -2140,7 +2140,7 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
                                  device->device_make_and_model,
                                  device->network_device);
 
-              window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (_dialog)));
+              window_id = (guint) GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (gtk_window_get_transient_for (GTK_WINDOW (_dialog)))));
 
               new_printer = pp_new_printer_new ();
               g_object_set (new_printer,
