@@ -544,7 +544,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   cups_ptype_t            type = 0;
   GtkTreeIter             iter;
   GtkWidget              *widget;
-  GtkWidget              *model_button;
+  GtkWidget              *model_button_label;
   GtkWidget              *model_label;
   gboolean                is_accepting_jobs = TRUE;
   GValue                  value = G_VALUE_INIT;
@@ -856,21 +856,20 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
-      model_button = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-model-button");
+      model_button_label = GTK_WIDGET (gtk_builder_get_object (priv->builder, "printer-model-button-label"));
 
       model_label = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
 
       if (printer_model)
         {
-          gtk_button_set_label (GTK_BUTTON (model_button), printer_model);
+          gtk_label_set_text (GTK_LABEL (model_button_label), printer_model);
           gtk_label_set_text (GTK_LABEL (model_label), printer_model);
           g_free (printer_model);
         }
       else
         {
-          gtk_button_set_label (GTK_BUTTON (model_button), EMPTY_TEXT);
+          gtk_label_set_text (GTK_LABEL (model_button_label), EMPTY_TEXT);
           gtk_label_set_text (GTK_LABEL (model_label), EMPTY_TEXT);
         }
 
@@ -999,21 +998,20 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
-      model_button = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-model-button");
+      model_button_label = GTK_WIDGET (gtk_builder_get_object (priv->builder, "printer-model-button-label"));
 
       model_label = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
 
       if (printer_model)
         {
-          gtk_button_set_label (GTK_BUTTON (model_button), printer_model);
+          gtk_label_set_text (GTK_LABEL (model_button_label), printer_model);
           gtk_label_set_text (GTK_LABEL (model_label), printer_model);
           g_free (printer_model);
         }
       else
         {
-          gtk_button_set_label (GTK_BUTTON (model_button), EMPTY_TEXT);
+          gtk_label_set_text (GTK_LABEL (model_button_label), EMPTY_TEXT);
           gtk_label_set_text (GTK_LABEL (model_label), EMPTY_TEXT);
         }
 
