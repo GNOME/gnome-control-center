@@ -1332,38 +1332,15 @@ paint_background (FooScrollArea *area,
                   cairo_t       *cr)
 {
   GdkRectangle viewport;
-  GtkWidget *widget;
-  GtkStyleContext *context;
-  GdkRGBA fg, bg;
-
-  widget = GTK_WIDGET (area);
 
   foo_scroll_area_get_viewport (area, &viewport);
-  context = gtk_widget_get_style_context (widget);
-  gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
-  gtk_style_context_get_background_color (context, GTK_STATE_FLAG_NORMAL, &bg);
 
-  cairo_set_source_rgba (cr,
-                         (fg.red + bg.red) / 2,
-                         (fg.green + bg.green) / 2,
-                         (fg.blue + bg.blue) / 2,
-                         (fg.alpha + bg.alpha) / 2);
-
+  cairo_set_source_rgba (cr, 0, 0, 0, 0.4);
   cairo_rectangle (cr,
                    viewport.x, viewport.y,
                    viewport.width, viewport.height);
-
-  cairo_fill_preserve (cr);
-
   foo_scroll_area_add_input_from_fill (area, cr, on_canvas_event, NULL);
-
-  cairo_set_source_rgba (cr,
-                         0.7 * bg.red,
-                         0.7 * bg.green,
-                         0.7 * bg.blue,
-                         0.7 * bg.alpha);
-
-  cairo_stroke (cr);
+  cairo_fill (cr);
 }
 
 static void
