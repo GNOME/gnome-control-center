@@ -537,7 +537,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_container_add (GTK_CONTAINER (empty_pictures_box), labels_grid);
   label = gtk_label_new ("");
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
   markup = g_markup_printf_escaped ("<b><span size='large'>%s</span></b>",
                                     /* translators: No pictures were found */
                                     _("No Pictures Found"));
@@ -549,7 +549,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_label_set_max_width_chars (GTK_LABEL (label), 24);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
 
   pictures_dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
   if (pictures_dir == NULL)
