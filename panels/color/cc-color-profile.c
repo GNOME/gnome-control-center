@@ -475,7 +475,7 @@ cc_color_profile_init (CcColorProfile *color_profile)
   priv->widget_description = gtk_label_new ("");
   gtk_widget_set_margin_top (priv->widget_description, 9);
   gtk_widget_set_margin_bottom (priv->widget_description, 9);
-  gtk_misc_set_alignment (GTK_MISC (priv->widget_description), 0.0f, 0.5f);
+  gtk_widget_set_halign (priv->widget_description, GTK_ALIGN_START);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_description, TRUE, TRUE, 0);
   gtk_widget_show (priv->widget_description);
 

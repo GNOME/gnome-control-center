@@ -77,9 +77,9 @@ cc_color_device_refresh (CcColorDevice *color_device)
 
   gtk_widget_set_visible (priv->widget_switch, profiles->len > 0);
   gtk_widget_set_visible (priv->widget_button, profiles->len > 0);
-  gtk_arrow_set (GTK_ARROW (priv->widget_arrow),
-                 priv->expanded ? GTK_ARROW_DOWN : GTK_ARROW_RIGHT,
-                 GTK_SHADOW_OUT);
+  gtk_image_set_from_icon_name (GTK_IMAGE (priv->widget_arrow),
+                                priv->expanded ? "pan-down-symbolic" : "pan-end-symbolic",
+                                GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_visible (priv->widget_nocalib, profiles->len == 0);
   gtk_widget_set_sensitive (priv->widget_button, cd_device_get_enabled (priv->device));
   gtk_switch_set_active (GTK_SWITCH (priv->widget_switch),
@@ -295,7 +295,7 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_widget_set_margin_start (priv->widget_description, 12);
   gtk_widget_set_margin_top (priv->widget_description, 6);
   gtk_widget_set_margin_bottom (priv->widget_description, 6);
-  gtk_misc_set_alignment (GTK_MISC (priv->widget_description), 0.0f, 0.5f);
+  gtk_widget_set_halign (priv->widget_description, GTK_ALIGN_START);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_description, TRUE, TRUE, 0);
 
   /* switch */
@@ -304,7 +304,8 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_box_pack_start (GTK_BOX (box), priv->widget_switch, FALSE, FALSE, 0);
 
   /* arrow button */
-  priv->widget_arrow = gtk_arrow_new (GTK_ARROW_RIGHT, GTK_SHADOW_OUT);
+  priv->widget_arrow = gtk_image_new_from_icon_name ("pan-end-symbolic",
+                                                     GTK_ICON_SIZE_BUTTON);
   priv->widget_button = gtk_button_new ();
   g_signal_connect (priv->widget_button, "clicked",
                     G_CALLBACK (cc_color_device_clicked_expander_cb),
