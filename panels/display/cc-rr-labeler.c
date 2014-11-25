@@ -351,7 +351,6 @@ create_label_window (CcRRLabeler *labeler, GnomeRROutputInfo *output)
 	GtkWidget *window;
 	GtkWidget *widget;
 	char *str;
-	GdkRGBA white = { 1, 1, 1, 1 };
 	int x, y, display_num;
 	GdkScreen *screen;
 	GdkVisual *visual;
@@ -381,18 +380,14 @@ create_label_window (CcRRLabeler *labeler, GnomeRROutputInfo *output)
 	g_signal_connect (window, "composited-changed",
 			  G_CALLBACK (label_window_composited_changed_cb), labeler);
 
-	str = g_strdup_printf ("<span size='xx-large' font-weight='bold'>%d</span>", display_num);
-	widget = gtk_label_new (NULL);
-	gtk_label_set_markup (GTK_LABEL (widget), str);
-	g_free (str);
-
 	/* Make the label explicitly white.  We don't want it to follow the
 	 * theme's colors, since the label is always shown against a black
          * background.  See bgo#556050
 	 */
-	gtk_widget_override_color (widget,
-				   gtk_widget_get_state_flags (widget),
-				   &white);
+	str = g_strdup_printf ("<span size='xx-large' font-weight='bold' color='white'>%d</span>", display_num);
+	widget = gtk_label_new (NULL);
+	gtk_label_set_markup (GTK_LABEL (widget), str);
+	g_free (str);
 
 	gtk_container_add (GTK_CONTAINER (window), widget);
 

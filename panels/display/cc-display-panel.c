@@ -1637,15 +1637,13 @@ list_box_item (const gchar *title,
 
   label = gtk_label_new (title);
   gtk_container_add (GTK_CONTAINER (item), label);
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0);
-  gtk_widget_set_size_request (label, 230, -1);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 
   label = gtk_label_new (subtitle);
   gtk_container_add (GTK_CONTAINER (item), label);
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0);
-  gtk_widget_set_size_request (label, 230, -1);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 
   gtk_container_add (GTK_CONTAINER (row), item);

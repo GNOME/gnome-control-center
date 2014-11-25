@@ -508,7 +508,9 @@ emit_viewport_changed (FooScrollArea *scroll_area,
   if (scroll_area->priv->input_window == NULL)
     return;
 
-  gdk_window_get_pointer (scroll_area->priv->input_window, &px, &py, NULL);
+  gdk_window_get_device_position (scroll_area->priv->input_window,
+                                  gdk_device_manager_get_client_pointer (gdk_display_get_device_manager (gdk_display_get_default ())),
+                                  &px, &py, NULL);
 
 #if 0
   g_print ("procc\n");
