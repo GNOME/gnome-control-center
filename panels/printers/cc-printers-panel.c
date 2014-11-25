@@ -2830,6 +2830,12 @@ update_label_padding (GtkWidget     *widget,
       margin = gtk_widget_get_margin_start (label);
       if (offset != margin)
         gtk_widget_set_margin_start (label, offset);
+
+      label = GTK_WIDGET (gtk_builder_get_object (priv->builder, "printer-model-setting"));
+
+      margin = gtk_widget_get_margin_start (label);
+      if (offset != margin)
+        gtk_widget_set_margin_start (label, offset);
     }
 }
 
