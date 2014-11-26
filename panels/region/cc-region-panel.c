@@ -824,7 +824,7 @@ add_input_row (CcRegionPanel   *self,
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_container_add (GTK_CONTAINER (row), box);
         label = gtk_label_new (name);
-        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+        gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_widget_set_margin_start (label, 20);
         gtk_widget_set_margin_end (label, 20);
         gtk_widget_set_margin_top (label, 6);

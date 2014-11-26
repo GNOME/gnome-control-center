@@ -119,14 +119,14 @@ padded_label_new (const gchar        *text,
   GtkWidget *widget;
   GtkWidget *label;
   GtkWidget *arrow;
-  gdouble alignment;
+  GtkAlign alignment;
 
   if (position == ROW_LABEL_POSITION_START)
-    alignment = 0.0;
+    alignment = GTK_ALIGN_START;
   else if (position == ROW_LABEL_POSITION_CENTER)
-    alignment = 0.5;
+    alignment = GTK_ALIGN_CENTER;
   else
-    alignment = 1.0;
+    alignment = GTK_ALIGN_END;
 
   widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
@@ -137,7 +137,7 @@ padded_label_new (const gchar        *text,
     }
 
   label = gtk_label_new (text);
-  gtk_misc_set_alignment (GTK_MISC (label), alignment, 0.5);
+  gtk_widget_set_halign (label, alignment);
   set_row_widget_margins (label);
   gtk_box_pack_start (GTK_BOX (widget), label, TRUE, TRUE, 0);
   if (dim_label)
@@ -167,7 +167,6 @@ more_row_new (void)
   arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
   gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
   set_row_widget_margins (arrow);
-  gtk_misc_set_alignment (GTK_MISC (arrow), 0.5, 0.5);
   gtk_box_pack_start (GTK_BOX (box), arrow, TRUE, TRUE, 0);
 
   return GTK_LIST_BOX_ROW (row);
