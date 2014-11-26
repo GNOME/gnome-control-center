@@ -53,7 +53,7 @@ static void     gvc_sound_theme_chooser_class_init (GvcSoundThemeChooserClass *k
 static void     gvc_sound_theme_chooser_init       (GvcSoundThemeChooser      *sound_theme_chooser);
 static void     gvc_sound_theme_chooser_finalize   (GObject            *object);
 
-G_DEFINE_TYPE (GvcSoundThemeChooser, gvc_sound_theme_chooser, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GvcSoundThemeChooser, gvc_sound_theme_chooser, GTK_TYPE_BOX)
 
 #define KEY_SOUNDS_SCHEMA          "org.gnome.desktop.sound"
 #define EVENT_SOUNDS_KEY           "event-sounds"
@@ -758,9 +758,10 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         GtkWidget   *box;
         GtkWidget   *label;
         GtkWidget   *scrolled_window;
-        GtkWidget   *alignment;
         char        *str;
 
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (chooser),
+                                        GTK_ORIENTATION_VERTICAL);
         chooser->priv = GVC_SOUND_THEME_CHOOSER_GET_PRIVATE (chooser);
 
         chooser->priv->settings = g_settings_new (WM_SCHEMA);
@@ -774,14 +775,8 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
 
-        alignment = gtk_alignment_new (0, 0, 1, 1);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
-        gtk_container_add (GTK_CONTAINER (alignment), box);
-        gtk_box_pack_start (GTK_BOX (chooser), alignment, TRUE, TRUE, 6);
-
-        alignment = gtk_alignment_new (0, 0, 1, 1);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
-        gtk_container_add (GTK_CONTAINER (box), alignment);
+        gtk_widget_set_margin_top (box, 6);
+        gtk_box_pack_start (GTK_BOX (chooser), box, TRUE, TRUE, 6);
 
         chooser->priv->treeview = create_alert_treeview (chooser);
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), chooser->priv->treeview);
@@ -795,7 +790,8 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
                                              GTK_SHADOW_IN);
         gtk_container_add (GTK_CONTAINER (scrolled_window), chooser->priv->treeview);
-        gtk_container_add (GTK_CONTAINER (alignment), scrolled_window);
+        gtk_widget_set_margin_top (scrolled_window, 6);
+        gtk_container_add (GTK_CONTAINER (box), scrolled_window);
 
         g_signal_connect (G_OBJECT (chooser->priv->sound_settings), "changed",
                           G_CALLBACK (on_sound_settings_changed), chooser);

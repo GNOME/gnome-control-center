@@ -52,7 +52,6 @@ struct GvcChannelBarPrivate
         GtkWidget     *low_image;
         GtkWidget     *scale;
         GtkWidget     *high_image;
-        GtkWidget     *mute_box;
         GtkWidget     *mute_switch;
         GtkAdjustment *adjustment;
         GtkAdjustment *zero_adjustment;
@@ -132,7 +131,7 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_box_pack_start (GTK_BOX (ebox), priv->low_image, FALSE, FALSE, 0);
                 gtk_widget_hide (priv->low_image);
 
-                gtk_box_pack_start (GTK_BOX (ebox), priv->mute_box, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (ebox), priv->mute_switch, FALSE, FALSE, 0);
         } else {
                 bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), priv->image, FALSE, FALSE, 0);
@@ -155,7 +154,7 @@ _scale_box_new (GvcChannelBar *bar)
 
                 gtk_box_pack_start (GTK_BOX (ebox), priv->high_image, FALSE, FALSE, 0);
                 gtk_widget_show (priv->high_image);
-                gtk_box_pack_start (GTK_BOX (ebox), priv->mute_box, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (ebox), priv->mute_switch, FALSE, FALSE, 0);
         }
 
         ca_gtk_widget_disable_sounds (bar->priv->scale, FALSE);
@@ -225,13 +224,13 @@ update_layout (GvcChannelBar *bar)
 
         g_object_ref (bar->priv->image);
         g_object_ref (bar->priv->label);
-        g_object_ref (bar->priv->mute_box);
+        g_object_ref (bar->priv->mute_switch);
         g_object_ref (bar->priv->low_image);
         g_object_ref (bar->priv->high_image);
 
         gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->image);
         gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->label);
-        gtk_container_remove (GTK_CONTAINER (bar->priv->end_box), bar->priv->mute_box);
+        gtk_container_remove (GTK_CONTAINER (bar->priv->end_box), bar->priv->mute_switch);
 
         if (bar->priv->orientation == GTK_ORIENTATION_VERTICAL) {
                 gtk_container_remove (GTK_CONTAINER (bar->priv->start_box), bar->priv->low_image);
@@ -251,7 +250,7 @@ update_layout (GvcChannelBar *bar)
 
         g_object_unref (bar->priv->image);
         g_object_unref (bar->priv->label);
-        g_object_unref (bar->priv->mute_box);
+        g_object_unref (bar->priv->mute_switch);
         g_object_unref (bar->priv->low_image);
         g_object_unref (bar->priv->high_image);
 
@@ -625,15 +624,24 @@ gvc_channel_bar_set_is_amplified (GvcChannelBar *bar, gboolean amplified)
                 }
 
                 g_free (str);
-                gtk_alignment_set (GTK_ALIGNMENT (bar->priv->mute_box), 0.5, 0, 0, 0);
+
+                /* Ideally we would use baseline alignment for all
+                 * these widgets plus the scale but neither GtkScale
+                 * nor GtkSwitch support baseline alignment yet. */
+
+                gtk_widget_set_valign (bar->priv->mute_switch, GTK_ALIGN_START);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
                 gtk_misc_set_alignment (GTK_MISC (bar->priv->low_image), 0.5, 0.15);
                 gtk_misc_set_alignment (GTK_MISC (bar->priv->high_image), 0.5, 0.15);
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->label), 0, 0);
+G_GNUC_END_IGNORE_DEPRECATIONS
+                gtk_widget_set_valign (bar->priv->label, GTK_ALIGN_START);
         } else {
-                gtk_alignment_set (GTK_ALIGNMENT (bar->priv->mute_box), 0.5, 0.5, 0, 0);
+                gtk_widget_set_valign (bar->priv->mute_switch, GTK_ALIGN_CENTER);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
                 gtk_misc_set_alignment (GTK_MISC (bar->priv->low_image), 0.5, 0.5);
                 gtk_misc_set_alignment (GTK_MISC (bar->priv->high_image), 0.5, 0.5);
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->label), 0, 0.5);
+G_GNUC_END_IGNORE_DEPRECATIONS
+                gtk_widget_set_valign (bar->priv->label, GTK_ALIGN_CENTER);
         }
 }
 
@@ -914,8 +922,6 @@ gvc_channel_bar_init (GvcChannelBar *bar)
                           "notify::active",
                           G_CALLBACK (on_mute_switch_toggled),
                           bar);
-        bar->priv->mute_box = gtk_alignment_new (0.5, 0.5, 0, 0);
-        gtk_container_add (GTK_CONTAINER (bar->priv->mute_box), bar->priv->mute_switch);
 
         bar->priv->low_image = gtk_image_new_from_icon_name ("audio-volume-low-symbolic",
                                                              GTK_ICON_SIZE_MENU);
@@ -930,7 +936,7 @@ gvc_channel_bar_init (GvcChannelBar *bar)
         gtk_widget_set_no_show_all (bar->priv->image, TRUE);
 
         bar->priv->label = gtk_label_new (NULL);
-        gtk_misc_set_alignment (GTK_MISC (bar->priv->label), 0.0, 0.5);
+        gtk_widget_set_halign (bar->priv->label, GTK_ALIGN_START);
         gtk_widget_set_no_show_all (bar->priv->label, TRUE);
 
         /* frame */

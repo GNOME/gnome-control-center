@@ -297,9 +297,9 @@ gvc_balance_bar_set_balance_type (GvcBalanceBar *bar,
         default:
                 g_assert_not_reached ();
         }
-        gtk_misc_set_alignment (GTK_MISC (bar->priv->label),
-                                0.0,
-                                0.0);
+        gtk_widget_set_halign (bar->priv->label, GTK_ALIGN_START);
+        gtk_widget_set_valign (bar->priv->label, GTK_ALIGN_START);
+
         /* frame */
         frame = gtk_frame_new (NULL);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);

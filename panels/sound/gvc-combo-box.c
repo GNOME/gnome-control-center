@@ -308,9 +308,7 @@ gvc_combo_box_init (GvcComboBox *combo_box)
                                                                      G_TYPE_STRING));
 
         combo_box->priv->label = gtk_label_new (NULL);
-        gtk_misc_set_alignment (GTK_MISC (combo_box->priv->label),
-                                0.0,
-                                0.5);
+        gtk_widget_set_halign (combo_box->priv->label, GTK_ALIGN_START);
 
         /* frame */
         frame = gtk_frame_new (NULL);

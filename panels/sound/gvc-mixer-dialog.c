@@ -130,7 +130,7 @@ static void     on_test_speakers_clicked (GvcComboBox *widget,
                                           gpointer     user_data);
 
 
-G_DEFINE_TYPE (GvcMixerDialog, gvc_mixer_dialog, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GvcMixerDialog, gvc_mixer_dialog, GTK_TYPE_BOX)
 
 static void
 profile_selection_changed (GvcComboBox    *combo_box,
@@ -1391,21 +1391,11 @@ on_control_stream_removed (GvcMixerControl *control,
 static void
 _gtk_label_make_bold (GtkLabel *label)
 {
-        PangoFontDescription *font_desc;
-
-        font_desc = pango_font_description_new ();
-
-        pango_font_description_set_weight (font_desc,
-                                           PANGO_WEIGHT_BOLD);
-
-        /* This will only affect the weight of the font, the rest is
-         * from the current state of the widget, which comes from the
-         * theme or user prefs, since the font desc only has the
-         * weight flag turned on.
-         */
-        gtk_widget_modify_font (GTK_WIDGET (label), font_desc);
-
-        pango_font_description_free (font_desc);
+        gchar *str;
+        str = g_strdup_printf ("<span font-weight='bold'>%s</span>",
+                               gtk_label_get_label (label));
+        gtk_label_set_markup_with_mnemonic (label, str);
+        g_free (str);
 }
 
 static void
@@ -1612,7 +1602,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         GvcMixerDialog   *self;
         GtkWidget        *main_vbox;
         GtkWidget        *label;
-        GtkWidget        *alignment;
+        GtkWidget        *sw;
         GtkWidget        *box;
         GtkWidget        *sbox;
         GtkWidget        *ebox;
@@ -1630,11 +1620,9 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_container_set_border_width (GTK_CONTAINER (self), 12);
 
         self->priv->output_stream_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-        alignment = gtk_alignment_new (0, 0, 1, 1);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 0, 0, 0);
-        gtk_container_add (GTK_CONTAINER (alignment), self->priv->output_stream_box);
+        gtk_widget_set_margin_top (self->priv->output_stream_box, 12);
         gtk_box_pack_start (GTK_BOX (main_vbox),
-                            alignment,
+                            self->priv->output_stream_box,
                             FALSE, FALSE, 0);
         self->priv->output_bar = create_bar (self, TRUE, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->output_bar),
@@ -1664,23 +1652,20 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
         gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, TRUE, TRUE, 0);
 
-        alignment = gtk_alignment_new (0, 0, 1, 1);
-        gtk_container_add (GTK_CONTAINER (box), alignment);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
-
         self->priv->output_treeview = create_ui_device_treeview (self,
                                                                  G_CALLBACK (on_output_selection_changed));
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->output_treeview);
 
-        box = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
+        sw = gtk_scrolled_window_new (NULL, NULL);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
                                         GTK_POLICY_NEVER,
                                         GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
                                              GTK_SHADOW_IN);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->output_treeview);
-        gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 150);
-        gtk_container_add (GTK_CONTAINER (alignment), box);
+        gtk_container_add (GTK_CONTAINER (sw), self->priv->output_treeview);
+        gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (sw), 150);
+        gtk_widget_set_margin_top (sw, 6);
+        gtk_container_add (GTK_CONTAINER (box), sw);
 
         box = gtk_frame_new (_("Settings for the selected device:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
@@ -1706,11 +1691,9 @@ gvc_mixer_dialog_constructor (GType                  type,
         gvc_channel_bar_set_high_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
                                             "audio-input-microphone-high-symbolic");
         gtk_widget_set_sensitive (self->priv->input_bar, FALSE);
-        alignment = gtk_alignment_new (0, 0, 1, 1);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
-        gtk_container_add (GTK_CONTAINER (alignment), self->priv->input_bar);
+        gtk_widget_set_margin_top (self->priv->input_bar, 6);
         gtk_box_pack_start (GTK_BOX (self->priv->input_box),
-                            alignment,
+                            self->priv->input_bar,
                             FALSE, FALSE, 0);
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
@@ -1758,22 +1741,19 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
         gtk_box_pack_start (GTK_BOX (self->priv->input_box), box, TRUE, TRUE, 0);
 
-        alignment = gtk_alignment_new (0, 0, 1, 1);
-        gtk_container_add (GTK_CONTAINER (box), alignment);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
-
         self->priv->input_treeview = create_ui_device_treeview (self,
                                                                 G_CALLBACK (on_input_selection_changed));
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->input_treeview);
 
-        box = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
+        sw = gtk_scrolled_window_new (NULL, NULL);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
                                         GTK_POLICY_NEVER,
                                         GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
                                              GTK_SHADOW_IN);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->input_treeview);
-        gtk_container_add (GTK_CONTAINER (alignment), box);
+        gtk_container_add (GTK_CONTAINER (sw), self->priv->input_treeview);
+        gtk_widget_set_margin_top (sw, 6);
+        gtk_container_add (GTK_CONTAINER (box), sw);
 
         /* Effects page */
         self->priv->sound_effects_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
@@ -1920,6 +1900,8 @@ gvc_mixer_dialog_class_init (GvcMixerDialogClass *klass)
 static void
 gvc_mixer_dialog_init (GvcMixerDialog *dialog)
 {
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (dialog),
+                                        GTK_ORIENTATION_VERTICAL);
         dialog->priv = GVC_MIXER_DIALOG_GET_PRIVATE (dialog);
         dialog->priv->bars = g_hash_table_new (NULL, NULL);
         dialog->priv->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
