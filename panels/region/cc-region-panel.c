@@ -1076,31 +1076,6 @@ update_input (CcRegionPanel *self)
         }
 }
 
-static void
-apologize_for_no_ibus_login (CcRegionPanel *self)
-{
-        GtkWidget *dialog;
-        GtkWidget *toplevel;
-        GtkWidget *image;
-
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-
-        dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
-                                         GTK_MESSAGE_OTHER,
-                                         GTK_BUTTONS_OK,
-                                         _("Sorry"));
-        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                  "%s", _("Input methods can't be used on the login screen"));
-        image = gtk_image_new_from_icon_name ("face-sad-symbolic",
-                                              GTK_ICON_SIZE_DIALOG);
-        gtk_widget_show (image);
-        gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
-
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (dialog);
-}
-
 static gboolean
 input_source_already_added (CcRegionPanel *self,
                             const gchar   *id)
@@ -1124,7 +1099,6 @@ static void
 input_response (GtkWidget *chooser, gint response_id, gpointer data)
 {
 	CcRegionPanel *self = data;
-        CcRegionPanelPrivate *priv = self->priv;
         gchar *type;
         gchar *id;
         gchar *name;
@@ -1144,13 +1118,10 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
                                 type = INPUT_SOURCE_TYPE_XKB;
                         }
 
-                        if (priv->login && g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
-                                apologize_for_no_ibus_login (self);
-                        } else {
-                                add_input_row (self, type, id, name, app_info);
-                                update_buttons (self);
-                                update_input (self);
-                        }
+                        add_input_row (self, type, id, name, app_info);
+                        update_buttons (self);
+                        update_input (self);
+
                         g_free (id);
                         g_free (name);
                         g_clear_object (&app_info);
@@ -1169,6 +1140,7 @@ show_input_chooser (CcRegionPanel *self)
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
         chooser = cc_input_chooser_new (GTK_WINDOW (toplevel),
+                                        priv->login,
                                         priv->xkb_info,
 #ifdef HAVE_IBUS
                                         priv->ibus_engines

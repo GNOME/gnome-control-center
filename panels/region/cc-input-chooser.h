@@ -27,6 +27,7 @@
 G_BEGIN_DECLS
 
 GtkWidget   *cc_input_chooser_new          (GtkWindow    *parent,
+                                            gboolean      is_login,
                                             GnomeXkbInfo *xkb_info,
                                             GHashTable   *ibus_engines);
 void         cc_input_chooser_set_ibus_engines (GtkWidget *chooser,

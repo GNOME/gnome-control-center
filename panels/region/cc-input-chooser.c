@@ -67,6 +67,8 @@ typedef struct {
   gboolean showing_extra;
   guint filter_timeout_id;
   gchar **filter_words;
+
+  gboolean is_login;
 } CcInputChooserPrivate;
 
 #define GET_PRIVATE(chooser) ((CcInputChooserPrivate *) g_object_get_data (G_OBJECT (chooser), "private"))
@@ -882,7 +884,7 @@ get_ibus_locale_infos (GtkWidget *chooser)
   const gchar *engine_id;
   IBusEngineDesc *engine;
 
-  if (!priv->ibus_engines)
+  if (!priv->ibus_engines || priv->is_login)
     return;
 
   g_hash_table_iter_init (&iter, priv->ibus_engines);
@@ -1116,6 +1118,7 @@ cc_input_chooser_private_free (gpointer data)
 
 GtkWidget *
 cc_input_chooser_new (GtkWindow    *main_window,
+                      gboolean      is_login,
                       GnomeXkbInfo *xkb_info,
                       GHashTable   *ibus_engines)
 {
@@ -1138,6 +1141,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   g_object_set_data_full (G_OBJECT (chooser), "private", priv, cc_input_chooser_private_free);
   g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
 
+  priv->is_login = is_login;
   priv->xkb_info = xkb_info;
   priv->ibus_engines = ibus_engines;
 
@@ -1158,6 +1162,9 @@ cc_input_chooser_new (GtkWindow    *main_window,
   g_signal_connect (priv->list, "selected-rows-changed", G_CALLBACK (selected_rows_changed), chooser);
 
   g_signal_connect_swapped (priv->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser);
+
+  if (priv->is_login)
+    gtk_widget_show (WID ("login-label"));
 
   get_locale_infos (chooser);
 #ifdef HAVE_IBUS
