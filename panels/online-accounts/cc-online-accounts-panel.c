@@ -491,11 +491,11 @@ show_page_account (CcGoaPanel  *panel,
       gtk_container_add (GTK_CONTAINER (grid), labels_grid);
 
       label = gtk_label_new (_("Credentials have expired."));
-      gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+      gtk_widget_set_halign (label, GTK_ALIGN_START);
       gtk_container_add (GTK_CONTAINER (labels_grid), label);
 
       label = gtk_label_new (_("Sign in to enable this account."));
-      gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+      gtk_widget_set_halign (label, GTK_ALIGN_START);
       gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
       gtk_container_add (GTK_CONTAINER (labels_grid), label);
 
