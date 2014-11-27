@@ -60,7 +60,7 @@ static void     gvc_speaker_test_init       (GvcSpeakerTest      *speaker_test);
 static void     gvc_speaker_test_finalize   (GObject            *object);
 static void     update_channel_map          (GvcSpeakerTest *speaker_test);
 
-G_DEFINE_TYPE (GvcSpeakerTest, gvc_speaker_test, GTK_TYPE_TABLE)
+G_DEFINE_TYPE (GvcSpeakerTest, gvc_speaker_test, GTK_TYPE_GRID)
 
 static const int position_table[] = {
         /* Position, X, Y */
@@ -354,13 +354,9 @@ create_channel_controls (GvcSpeakerTest *speaker_test)
 
         for (i = 0; i < G_N_ELEMENTS (position_table); i += 3) {
                 speaker_test->priv->channel_controls[position_table[i]] = channel_control_new (speaker_test->priv->canberra, (pa_channel_position_t) position_table[i]);
-                gtk_table_attach (GTK_TABLE (speaker_test),
-                                  speaker_test->priv->channel_controls[position_table[i]],
-                                  position_table[i+1],
-                                  position_table[i+1]+1,
-                                  position_table[i+2],
-                                  position_table[i+2]+1,
-                                  GTK_EXPAND, GTK_EXPAND, 0, 0);
+                gtk_grid_attach (GTK_GRID (speaker_test),
+                                 speaker_test->priv->channel_controls[position_table[i]],
+                                 position_table[i+1], position_table[i+2], 1, 1);
         }
 }
 
@@ -420,17 +416,16 @@ gvc_speaker_test_init (GvcSpeakerTest *speaker_test)
         gvc_speaker_test_set_theme (speaker_test->priv->canberra);
 
         gtk_widget_set_direction (GTK_WIDGET (speaker_test), GTK_TEXT_DIR_LTR);
-        gtk_table_resize (GTK_TABLE (speaker_test), 3, 5);
         gtk_container_set_border_width (GTK_CONTAINER (speaker_test), 12);
-        gtk_table_set_homogeneous (GTK_TABLE (speaker_test), TRUE);
-        gtk_table_set_row_spacings (GTK_TABLE (speaker_test), 12);
-        gtk_table_set_col_spacings (GTK_TABLE (speaker_test), 12);
+        gtk_grid_set_row_homogeneous (GTK_GRID (speaker_test), TRUE);
+        gtk_grid_set_column_homogeneous (GTK_GRID (speaker_test), TRUE);
+        gtk_grid_set_row_spacing (GTK_GRID (speaker_test), 12);
+        gtk_grid_set_column_spacing (GTK_GRID (speaker_test), 12);
 
         create_channel_controls (speaker_test);
 
         face = gtk_image_new_from_icon_name ("face-smile", GTK_ICON_SIZE_DIALOG);
-        gtk_table_attach (GTK_TABLE (speaker_test), face,
-                          2, 3, 1, 2, GTK_EXPAND, GTK_EXPAND, 0, 0);
+        gtk_grid_attach (GTK_GRID (speaker_test), face, 2, 1, 1, 1);
         gtk_widget_show (face);
 }
 
