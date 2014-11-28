@@ -87,7 +87,6 @@ um_photo_dialog_crop (UmPhotoDialog *um,
                       GdkPixbuf     *pixbuf)
 {
         GtkWidget *dialog;
-        GtkWidget *frame;
 
         dialog = gtk_dialog_new_with_buttons ("",
                                               GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)),
@@ -109,12 +108,8 @@ um_photo_dialog_crop (UmPhotoDialog *um,
         cc_crop_area_set_min_size (CC_CROP_AREA (um->crop_area), 48, 48);
         cc_crop_area_set_constrain_aspect (CC_CROP_AREA (um->crop_area), TRUE);
         cc_crop_area_set_picture (CC_CROP_AREA (um->crop_area), pixbuf);
-        frame                   = gtk_frame_new (NULL);
-        gtk_container_add (GTK_CONTAINER (frame), um->crop_area);
-        gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
-
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-                            frame,
+                            um->crop_area,
                             TRUE, TRUE, 8);
 
         gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
