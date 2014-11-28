@@ -414,7 +414,6 @@ down_arrow (GtkStyleContext *context,
 {
         GtkStateFlags flags;
         GdkRGBA fg_color;
-        GdkRGBA outline_color;
         gdouble vertical_overshoot;
         gint diameter;
         gdouble radius;
@@ -425,7 +424,6 @@ down_arrow (GtkStyleContext *context,
         flags = gtk_style_context_get_state (context);
 
         gtk_style_context_get_color (context, flags, &fg_color);
-        gtk_style_context_get_border_color (context, flags, &outline_color);
 
         line_width = 1;
         angle = G_PI / 2;
@@ -457,8 +455,6 @@ down_arrow (GtkStyleContext *context,
         gdk_cairo_set_source_rgba (cr, &fg_color);
 
         cairo_fill_preserve (cr);
-
-        gdk_cairo_set_source_rgba (cr, &outline_color);
         cairo_stroke (cr);
 
         cairo_restore (cr);
