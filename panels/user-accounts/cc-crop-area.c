@@ -93,15 +93,21 @@ update_pixbufs (CcCropArea *area)
         gint height;
         GtkAllocation allocation;
         gdouble scale;
-        GdkRGBA color;
-        guint32 pixel;
-        gint dest_x, dest_y, dest_width, dest_height;
+        gint dest_width, dest_height;
         GtkWidget *widget;
-        GtkStyleContext *context;
 
         widget = GTK_WIDGET (area);
         gtk_widget_get_allocation (widget, &allocation);
-        context = gtk_widget_get_style_context (widget);
+
+        width = gdk_pixbuf_get_width (area->priv->browse_pixbuf);
+        height = gdk_pixbuf_get_height (area->priv->browse_pixbuf);
+
+        scale = allocation.height / (gdouble)height;
+        if (scale * width > allocation.width)
+                scale = allocation.width / (gdouble)width;
+
+        dest_width = width * scale;
+        dest_height = height * scale;
 
         if (area->priv->pixbuf == NULL ||
             gdk_pixbuf_get_width (area->priv->pixbuf) != allocation.width ||
@@ -111,31 +117,14 @@ update_pixbufs (CcCropArea *area)
                 area->priv->pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
                                                      gdk_pixbuf_get_has_alpha (area->priv->browse_pixbuf),
                                                      8,
-                                                     allocation.width, allocation.height);
-
-                gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &color);
-                pixel = (((gint)(color.red * 1.0)) << 16) |
-                        (((gint)(color.green * 1.0)) << 8) |
-                         ((gint)(color.blue * 1.0));
-                gdk_pixbuf_fill (area->priv->pixbuf, pixel);
-
-                width = gdk_pixbuf_get_width (area->priv->browse_pixbuf);
-                height = gdk_pixbuf_get_height (area->priv->browse_pixbuf);
-
-                scale = allocation.height / (gdouble)height;
-                if (scale * width > allocation.width)
-                    scale = allocation.width / (gdouble)width;
-
-                dest_width = width * scale;
-                dest_height = height * scale;
-                dest_x = (allocation.width - dest_width) / 2;
-                dest_y = (allocation.height - dest_height) / 2,
+                                                     dest_width, dest_height);
+                gdk_pixbuf_fill (area->priv->pixbuf, 0x0);
 
                 gdk_pixbuf_scale (area->priv->browse_pixbuf,
                                   area->priv->pixbuf,
-                                  dest_x, dest_y,
+                                  0, 0,
                                   dest_width, dest_height,
-                                  dest_x, dest_y,
+                                  0, 0,
                                   scale, scale,
                                   GDK_INTERP_BILINEAR);
 
@@ -161,8 +150,8 @@ update_pixbufs (CcCropArea *area)
                 }
 
                 area->priv->scale = scale;
-                area->priv->image.x = dest_x;
-                area->priv->image.y = dest_y;
+                area->priv->image.x = (allocation.width - dest_width) / 2;
+                area->priv->image.y = (allocation.height - dest_height) / 2;
                 area->priv->image.width = dest_width;
                 area->priv->image.height = dest_height;
         }
@@ -196,7 +185,7 @@ cc_crop_area_draw (GtkWidget *widget,
                    cairo_t   *cr)
 {
         GdkRectangle crop;
-        gint width, height;
+        gint width, height, ix, iy;
         CcCropArea *uarea = CC_CROP_AREA (widget);
 
         if (uarea->priv->browse_pixbuf == NULL)
@@ -208,14 +197,17 @@ cc_crop_area_draw (GtkWidget *widget,
         height = gdk_pixbuf_get_height (uarea->priv->pixbuf);
         crop_to_widget (uarea, &crop);
 
-        gdk_cairo_set_source_pixbuf (cr, uarea->priv->color_shifted, 0, 0);
-        cairo_rectangle (cr, 0, 0, width, crop.y);
-        cairo_rectangle (cr, 0, crop.y, crop.x, crop.height);
-        cairo_rectangle (cr, crop.x + crop.width, crop.y, width - crop.x - crop.width, crop.height);
-        cairo_rectangle (cr, 0, crop.y + crop.height, width, height - crop.y - crop.height);
+        ix = uarea->priv->image.x;
+        iy = uarea->priv->image.y;
+
+        gdk_cairo_set_source_pixbuf (cr, uarea->priv->color_shifted, ix, iy);
+        cairo_rectangle (cr, ix, iy, width, crop.y - iy);
+        cairo_rectangle (cr, ix, crop.y, crop.x - ix, crop.height);
+        cairo_rectangle (cr, crop.x + crop.width, crop.y, width - crop.width - (crop.x - ix), crop.height);
+        cairo_rectangle (cr, ix, crop.y + crop.height, width, height - crop.height - (crop.y - iy));
         cairo_fill (cr);
 
-        gdk_cairo_set_source_pixbuf (cr, uarea->priv->pixbuf, 0, 0);
+        gdk_cairo_set_source_pixbuf (cr, uarea->priv->pixbuf, ix, iy);
         cairo_rectangle (cr, crop.x, crop.y, crop.width, crop.height);
         cairo_fill (cr);
 
