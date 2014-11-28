@@ -681,6 +681,14 @@ cc_crop_area_button_release_event (GtkWidget      *widget,
 }
 
 static void
+cc_crop_area_set_size_request (CcCropArea *area)
+{
+        gtk_widget_set_size_request (GTK_WIDGET (area),
+                                     area->priv->base_width,
+                                     area->priv->base_height);
+}
+
+static void
 cc_crop_area_finalize (GObject *object)
 {
         CcCropArea *area = CC_CROP_AREA (object);
@@ -733,6 +741,8 @@ cc_crop_area_init (CcCropArea *area)
         area->priv->base_width = 48;
         area->priv->base_height = 48;
         area->priv->aspect = 1;
+
+        cc_crop_area_set_size_request (area);
 }
 
 GtkWidget *
@@ -798,6 +808,8 @@ cc_crop_area_set_min_size (CcCropArea *area,
 {
         area->priv->base_width = width;
         area->priv->base_height = height;
+
+        cc_crop_area_set_size_request (area);
 
         if (area->priv->aspect > 0) {
                 area->priv->aspect = area->priv->base_width / (gdouble)area->priv->base_height;
