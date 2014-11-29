@@ -161,7 +161,7 @@ activate_panel (CcWindow           *self,
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
                                   cc_panel_get_permission (CC_PANEL (priv->current_panel)));
 
-  box = gtk_alignment_new (0, 0, 1, 1);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   gtk_container_add (GTK_CONTAINER (box), priv->current_panel);
 

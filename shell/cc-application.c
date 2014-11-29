@@ -289,6 +289,7 @@ cc_application_startup (GApplication *application)
   GMenu *menu;
   GMenu *section;
   GSimpleAction *action;
+  const gchar *help_accels[] = { "F1", NULL };
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
 
@@ -333,8 +334,8 @@ cc_application_startup (GApplication *application)
   gtk_application_set_app_menu (GTK_APPLICATION (application),
                                 G_MENU_MODEL (menu));
 
-  gtk_application_add_accelerator (GTK_APPLICATION (application),
-                                   "F1", "app.help", NULL);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (application),
+                                         "app.help", help_accels);
 
   self->priv->window = cc_window_new (GTK_APPLICATION (application));
 }
