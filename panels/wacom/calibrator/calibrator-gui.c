@@ -723,7 +723,7 @@ calib_area_new (GdkScreen      *screen,
   /* No cursor */
   gtk_widget_realize (calib_area->window);
   window = gtk_widget_get_window (calib_area->window);
-  cursor = gdk_cursor_new (GDK_BLANK_CURSOR);
+  cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_BLANK_CURSOR);
   gdk_window_set_cursor (window, cursor);
   g_object_unref (cursor);
 
