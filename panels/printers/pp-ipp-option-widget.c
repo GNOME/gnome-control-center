@@ -55,7 +55,7 @@ struct PpIPPOptionWidgetPrivate
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (PpIPPOptionWidget, pp_ipp_option_widget, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (PpIPPOptionWidget, pp_ipp_option_widget, GTK_TYPE_BOX)
 
 static const struct {
   const char *keyword;
@@ -111,6 +111,8 @@ pp_ipp_option_widget_init (PpIPPOptionWidget *widget)
 {
   PpIPPOptionWidgetPrivate *priv;
 
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (widget),
+                                  GTK_ORIENTATION_HORIZONTAL);
   priv = widget->priv = PP_IPP_OPTION_WIDGET_GET_PRIVATE (widget);
 
   priv->switch_button = NULL;

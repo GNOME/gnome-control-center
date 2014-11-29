@@ -301,9 +301,6 @@ cc_application_startup (GApplication *application)
     }
 #endif /* HAVE_CHEESE || HAVE_WACOM */
 
-  /* register a symbolic icon size for use in sidebar lists */
-  gtk_icon_size_register ("cc-sidebar-list", 24, 24);
-
   action = g_simple_action_new ("help", NULL);
   g_action_map_add_action (G_ACTION_MAP (application), G_ACTION (action));
   g_signal_connect (action, "activate", G_CALLBACK (help_activated), self);

@@ -79,8 +79,6 @@ struct _CcPrintersPanelPrivate
 
   int num_jobs;
 
-  GdkRGBA background_color;
-
   GPermission *permission;
 
   GSettings *lockdown_settings;
@@ -1363,7 +1361,7 @@ populate_printers_list (CcPrintersPanel *self)
 
 
   icon_renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (icon_renderer, "stock-size", gtk_icon_size_from_name ("cc-sidebar-list"), NULL);
+  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
   gtk_cell_renderer_set_padding (icon_renderer, 4, 4);
   column = gtk_tree_view_column_new_with_attributes ("Icon", icon_renderer,
                                                      "icon-name", PRINTER_ICON_COLUMN, NULL);
@@ -1554,12 +1552,12 @@ supply_levels_draw_cb (GtkWidget *widget,
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
+  context = gtk_widget_get_style_context (widget);
+
   width = gtk_widget_get_allocated_width (widget);
   height = gtk_widget_get_allocated_height (widget);
 
-  cairo_rectangle (cr, 0.0, 0.0, width, height);
-  gdk_cairo_set_source_rgba (cr, &priv->background_color);
-  cairo_fill (cr);
+  gtk_render_background (context, cr, 0, 0, width, height);
 
   if (priv->current_dest >= 0 &&
       priv->current_dest < priv->num_dests &&
@@ -1579,7 +1577,6 @@ supply_levels_draw_cb (GtkWidget *widget,
 
       if (marker_levels && marker_colors && marker_names && marker_types)
         {
-          GdkRGBA   border_color = {0.0, 0.0, 0.0, 1.0};
           GSList   *markers = NULL;
           GSList   *tmp_list = NULL;
           GValue    int_val = G_VALUE_INIT;
@@ -1590,16 +1587,13 @@ supply_levels_draw_cb (GtkWidget *widget,
           gchar    *tmp = NULL;
           gint      border_radius = 0;
 
-          context = gtk_widget_get_style_context ((GtkWidget *)
-            gtk_builder_get_object (priv->builder, "printer-options-button"));
-          gtk_style_context_get_border_color (context, 0, &border_color);
+          gtk_style_context_save (context);
+          gtk_style_context_add_class (context, GTK_STYLE_CLASS_BUTTON);
+
           gtk_style_context_get_property (
             context, GTK_STYLE_PROPERTY_BORDER_RADIUS, 0, &int_val);
           if (G_VALUE_HOLDS_INT (&int_val))
             border_radius = g_value_get_int (&int_val);
-
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "supply-drawing-area");
 
           marker_levelsv = g_strsplit (marker_levels, ",", -1);
           marker_colorsv = g_strsplit (marker_colors, ",", -1);
@@ -1661,10 +1655,7 @@ supply_levels_draw_cb (GtkWidget *widget,
                                                     ((MarkerItem*) tmp_list->data)->name);
                 }
 
-              cairo_set_line_width (cr, 1.0);
-              gdk_cairo_set_source_rgba (cr, &border_color);
-              rounded_rectangle (cr, 1.5, 1.5, width - 3.0, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
-              cairo_stroke (cr);
+              gtk_render_frame (context, cr, 1, 1, width - 2, SUPPLY_BAR_HEIGHT - 2);
 
               for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
                 {
@@ -1674,6 +1665,8 @@ supply_levels_draw_cb (GtkWidget *widget,
                 }
               g_slist_free_full (markers, g_free);
             }
+
+          gtk_style_context_restore (context);
 
           g_strfreev (marker_levelsv);
           g_strfreev (marker_colorsv);
@@ -2244,16 +2237,18 @@ get_ppd_names_cb (PPDName     **names,
 
   if (informal)
     {
-      gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (informal), FALSE);
-
-      spinner = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (informal));
+      spinner = g_object_get_data (G_OBJECT (informal), "spinner");
       if (spinner)
-        gtk_spinner_stop (GTK_SPINNER (spinner));
+        {
+          gtk_widget_hide (spinner);
+          gtk_spinner_stop (GTK_SPINNER (spinner));
+        }
 
       if (found)
         gtk_widget_hide (informal);
       else
-        gtk_menu_item_set_label (GTK_MENU_ITEM (informal), _("No suitable driver found"));
+        gtk_label_set_text (GTK_LABEL (g_object_get_data (G_OBJECT (informal), "label")),
+                            _("No suitable driver found"));
     }
 
   gtk_widget_show_all (priv->popup_menu);
@@ -2286,6 +2281,8 @@ popup_model_menu_cb (GtkButton *button,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkWidget              *spinner;
   GtkWidget              *item;
+  GtkWidget              *label;
+  GtkWidget              *box;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -2301,34 +2298,40 @@ popup_model_menu_cb (GtkButton *button,
    * But unfortunately it is not possible to connect to "activate"
    * signal of such menu item (appended after gtk_menu_popup()).
    */
-  item = gtk_image_menu_item_new_with_label ("");
+  item = gtk_menu_item_new_with_label ("");
   g_object_set_data_full (G_OBJECT (item), "purpose",
                           g_strdup ("placeholder1"), g_free);
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
   gtk_widget_set_no_show_all (item, TRUE);
   gtk_widget_hide (item);
 
-  item = gtk_image_menu_item_new_with_label ("");
+  item = gtk_menu_item_new_with_label ("");
   g_object_set_data_full (G_OBJECT (item), "purpose",
                           g_strdup ("placeholder2"), g_free);
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
   gtk_widget_set_no_show_all (item, TRUE);
   gtk_widget_hide (item);
 
-  item = gtk_image_menu_item_new_with_label ("");
+  item = gtk_menu_item_new_with_label ("");
   g_object_set_data_full (G_OBJECT (item), "purpose",
                           g_strdup ("placeholder3"), g_free);
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
   gtk_widget_set_no_show_all (item, TRUE);
   gtk_widget_hide (item);
 
-  item = gtk_image_menu_item_new_with_label (_("Searching for preferred drivers…"));
+  label = gtk_label_new (_("Searching for preferred drivers…"));
   spinner = gtk_spinner_new ();
   gtk_spinner_start (GTK_SPINNER (spinner));
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), spinner);
-  gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (item), TRUE);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_container_add (GTK_CONTAINER (box), spinner);
+  gtk_container_add (GTK_CONTAINER (box), label);
+  item = gtk_menu_item_new ();
+  gtk_container_add (GTK_CONTAINER (item), box);
+  gtk_widget_show_all (item);
   g_object_set_data_full (G_OBJECT (item), "purpose",
                           g_strdup ("informal"), g_free);
+  g_object_set_data (G_OBJECT (item), "spinner", spinner);
+  g_object_set_data (G_OBJECT (item), "label", label);
   gtk_widget_set_sensitive (item, FALSE);
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
   gtk_widget_set_no_show_all (item, TRUE);
@@ -3032,10 +3035,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
     g_warning ("Your system does not have the cups-pk-helper's policy \
 \"org.opensuse.cupspkhelper.mechanism.all-edit\" installed. \
 Please check your installation");
-
-  gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
-                                          GTK_STATE_FLAG_NORMAL,
-                                          &priv->background_color);
 
   populate_printers_list (self);
   attach_to_cups_notifier (self);
