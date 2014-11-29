@@ -761,21 +761,17 @@ cc_search_locations_dialog_new (CcSearchPanel *self)
 gboolean
 cc_search_locations_dialog_is_available (void)
 {
-  const gchar * const *schemas;
-  const gchar *schema;
-  gint idx;
-  gboolean found = FALSE;
+  GSettingsSchemaSource *source;
+  GSettingsSchema *schema;
 
-  schemas = g_settings_list_schemas ();
-  for (idx = 0; schemas[idx] != NULL; idx++)
-    {
-      schema = schemas[idx];
-      if (g_strcmp0 (schema, TRACKER_SCHEMA) == 0)
-        {
-          found = TRUE;
-          break;
-        }
-    }
+  source = g_settings_schema_source_get_default ();
+  if (!source)
+    return FALSE;
 
-  return found;
+  schema = g_settings_schema_source_lookup (source, TRACKER_SCHEMA, TRUE);
+  if (!schema)
+    return FALSE;
+
+  g_settings_schema_unref (schema);
+  return TRUE;
 }
