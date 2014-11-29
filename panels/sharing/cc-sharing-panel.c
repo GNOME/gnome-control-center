@@ -1045,22 +1045,19 @@ static gboolean
 cc_sharing_panel_check_schema_available (CcSharingPanel *self,
                                          const gchar *schema_id)
 {
-  const gchar * const* schema_list;
+  GSettingsSchemaSource *source;
+  GSettingsSchema *schema;
 
-  if (schema_id == NULL)
+  source = g_settings_schema_source_get_default ();
+  if (!source)
     return FALSE;
 
-  schema_list = g_settings_list_schemas ();
+  schema = g_settings_schema_source_lookup (source, schema_id, TRUE);
+  if (!schema)
+    return FALSE;
 
-  while (*schema_list)
-    {
-      if (g_str_equal (*schema_list, schema_id))
-        return TRUE;
-
-      schema_list++;
-    }
-
-  return FALSE;
+  g_settings_schema_unref (schema);
+  return TRUE;
 }
 
 static void
