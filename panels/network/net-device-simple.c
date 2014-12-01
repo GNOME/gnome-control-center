@@ -282,7 +282,7 @@ net_device_simple_add_row (NetDeviceSimple *device_simple,
         grid = GTK_GRID (gtk_builder_get_object (priv->builder, "grid"));
 
         label = gtk_label_new (label_string);
-        gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+        gtk_widget_set_halign (label, GTK_ALIGN_END);
         gtk_container_add (GTK_CONTAINER (grid), label);
 
         context = gtk_widget_get_style_context (label);
@@ -294,7 +294,7 @@ net_device_simple_add_row (NetDeviceSimple *device_simple,
                                  NULL);
 
         value = gtk_label_new (NULL);
-        gtk_misc_set_alignment (GTK_MISC (value), 0.0, 0.5);
+        gtk_widget_set_halign (value, GTK_ALIGN_START);
         g_object_bind_property (device_simple, property_name, value, "label", 0);
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), value);
         gtk_grid_attach (grid, value, 1, top_attach, 1, 1);

@@ -770,13 +770,13 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
                 gtk_widget_set_margin_bottom (row_box, 12);
 
                 name_label = gtk_label_new (name);
-                gtk_misc_set_alignment (GTK_MISC (name_label), 0.0, 0.5);
+                gtk_widget_set_halign (name_label, GTK_ALIGN_START);
                 gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
 
                 desc_label = gtk_label_new (NULL);
                 gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
                 gtk_label_set_line_wrap (GTK_LABEL (desc_label), TRUE);
-                gtk_misc_set_alignment (GTK_MISC (desc_label), 0.0, 0.5);
+                gtk_widget_set_halign (desc_label, GTK_ALIGN_START);
                 context = gtk_widget_get_style_context (desc_label);
                 gtk_style_context_add_class (context, "dim-label");
                 gtk_box_pack_start (GTK_BOX (row_box), desc_label, FALSE, TRUE, 0);
@@ -801,7 +801,7 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
         gtk_widget_set_margin_bottom (row_box, 12);
 
         name_label = gtk_label_new (_("Import from file…"));
-        gtk_misc_set_alignment (GTK_MISC (name_label), 0.0, 0.5);
+        gtk_widget_set_halign (name_label, GTK_ALIGN_START);
         gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
 
         gtk_container_add (GTK_CONTAINER (row), row_box);
@@ -854,7 +854,7 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
 
                 row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
                 label = gtk_label_new (_(connection_types[i].name));
-                gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+                gtk_widget_set_halign (label, GTK_ALIGN_START);
                 gtk_widget_set_margin_start (label, 12);
                 gtk_widget_set_margin_end (label, 12);
                 gtk_widget_set_margin_top (label, 12);

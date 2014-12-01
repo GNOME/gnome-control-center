@@ -79,14 +79,12 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
         gtk_style_context_add_class (gtk_widget_get_style_context (heading_label), "dim-label");
         gtk_widget_set_halign (heading_label, GTK_ALIGN_END);
         gtk_widget_set_hexpand (heading_label, TRUE);
-        gtk_misc_set_alignment (GTK_MISC (heading_label), 1, 0.5);
 
         gtk_grid_attach (GTK_GRID (details), heading_label, 0, top, 1, 1);
 
         value_label = gtk_label_new (value);
         gtk_widget_set_halign (value_label, GTK_ALIGN_START);
         gtk_widget_set_hexpand (value_label, TRUE);
-        gtk_misc_set_alignment (GTK_MISC (value_label), 0, 0.5);
 
         gtk_label_set_mnemonic_widget (GTK_LABEL (heading_label), value_label);
 
