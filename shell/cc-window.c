@@ -604,7 +604,10 @@ search_entry_changed_cb (GtkEntry *entry,
 
   /* if the entry text was set manually (not by the user) */
   if (!g_strcmp0 (priv->filter_string, gtk_entry_get_text (entry)))
-    return;
+    {
+      cc_shell_model_set_sort_terms (CC_SHELL_MODEL (priv->store), NULL);
+      return;
+    }
 
   /* Don't re-filter for added trailing or leading spaces */
   str = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (entry));
