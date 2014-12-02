@@ -560,7 +560,7 @@ if test "x$have_wacom" = "xyes"; then
 else
 	AC_MSG_NOTICE([   Wacom panel disabled])
 fi
-if test "x$enable_ibus" == "xyes"; then
+if test "x$enable_ibus" = "xyes"; then
 	AC_MSG_NOTICE([** IBus (Region panel IBus support)])
 else
 	AC_MSG_NOTICE([   Region panel IBus support disabled])
