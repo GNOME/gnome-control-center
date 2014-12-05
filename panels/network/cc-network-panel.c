@@ -73,7 +73,6 @@ struct _CcNetworkPanelPrivate
         MMManager        *modem_manager;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
-        guint             nm_warning_idle;
         guint             refresh_idle;
 
         /* Killswitch stuff */
@@ -243,10 +242,6 @@ cc_network_panel_dispose (GObject *object)
         if (priv->refresh_idle != 0) {
                 g_source_remove (priv->refresh_idle);
                 priv->refresh_idle = 0;
-        }
-        if (priv->nm_warning_idle != 0) {
-                g_source_remove (priv->nm_warning_idle);
-                priv->nm_warning_idle = 0;
         }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -1289,50 +1284,42 @@ notify_connections_read_cb (NMRemoteSettings *settings,
         handle_argv (panel);
 }
 
-static gboolean
-display_version_warning_idle (CcNetworkPanel *panel)
-{
-        GtkWidget  *dialog;
-        GtkWidget  *image;
-        GtkWindow  *window;
-        const char *message;
-
-        /* TRANSLATORS: the user is running a NM that is not API compatible */
-        message = _("The system network services are not compatible with this version.");
-
-        window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
-        dialog = gtk_message_dialog_new (window,
-                                         GTK_DIALOG_MODAL,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_CLOSE,
-                                         "%s",
-                                         message);
-        image = gtk_image_new_from_icon_name ("computer-fail", GTK_ICON_SIZE_DIALOG);
-        gtk_widget_show (image);
-        gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
-
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (dialog);
-
-        return FALSE;
-}
-
-static gboolean
+static void
 panel_check_network_manager_version (CcNetworkPanel *panel)
 {
+        GtkWidget *box;
+        GtkWidget *label;
+        gchar *markup;
         const gchar *version;
-        gboolean ret = TRUE;
 
         /* parse running version */
         version = nm_client_get_version (panel->priv->client);
         if (version == NULL) {
-                ret = FALSE;
+                gtk_container_remove (GTK_CONTAINER (panel), gtk_bin_get_child (GTK_BIN (panel)));
 
-                /* do modal dialog in idle so we don't block startup */
-                panel->priv->nm_warning_idle = g_idle_add ((GSourceFunc)display_version_warning_idle, panel);
+                box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 20);
+                gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
+                gtk_widget_set_vexpand (box, TRUE);
+                gtk_container_add (GTK_CONTAINER (panel), box);
+
+                label = gtk_label_new (_("Oops, something has gone wrong. Please contact your software vendor."));
+                gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+                gtk_widget_set_valign (label, GTK_ALIGN_END);
+                gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+                markup = g_strdup_printf ("<small><tt>%s</tt></small>",
+                                          _("NetworkManager needs to be running."));
+                label = gtk_label_new (NULL);
+                gtk_label_set_markup (GTK_LABEL (label), markup);
+                gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+                gtk_widget_set_valign (label, GTK_ALIGN_START);
+                gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+                gtk_widget_show_all (box);
+                g_free (markup);
+        } else {
+                manager_running (panel->priv->client, NULL, panel);
         }
-
-        return ret;
 }
 
 static void
@@ -1376,17 +1363,9 @@ static void
 on_toplevel_map (GtkWidget      *widget,
                  CcNetworkPanel *panel)
 {
-        gboolean ret;
-
         /* is the user compiling against a new version, but not running
          * the daemon? */
-        ret = panel_check_network_manager_version (panel);
-        if (ret) {
-                manager_running (panel->priv->client, NULL, panel);
-        } else {
-                /* just select the proxy settings */
-                select_first_device (panel);
-        }
+        panel_check_network_manager_version (panel);
 }
 
 static void
