@@ -183,7 +183,7 @@ cc_date_time_panel_constructed (GObject *object)
 static const char *
 cc_date_time_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/clock";
+  return "help:gnome-help/shell-overview#time";
 }
 
 static void clock_settings_changed_cb (CcDateTimePanel *panel,

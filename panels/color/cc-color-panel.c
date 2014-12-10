@@ -917,17 +917,6 @@ gcm_prefs_calib_export_cb (GtkWidget *widget, CcColorPanel *prefs)
 }
 
 static void
-gcm_prefs_calib_export_link_cb (GtkLabel *widget,
-                                const gchar *url,
-                                CcColorPanel *prefs)
-{
-  gtk_show_uri_on_window (GTK_WINDOW (prefs->main_window),
-                          "help:gnome-help/color-howtoimport",
-                          GDK_CURRENT_TIME,
-                          NULL);
-}
-
-static void
 gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
   g_autoptr(GPtrArray) profiles = NULL;
@@ -1889,12 +1878,6 @@ gcm_prefs_window_realize_cb (GtkWidget *widget, CcColorPanel *prefs)
   prefs->main_window = gtk_widget_get_toplevel (widget);
 }
 
-static const char *
-cc_color_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/color";
-}
-
 static void
 cc_color_panel_get_property (GObject    *object,
                               guint       property_id,
@@ -1978,9 +1961,6 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  panel_class->get_help_uri = cc_color_panel_get_help_uri;
 
   object_class->get_property = cc_color_panel_get_property;
   object_class->set_property = cc_color_panel_set_property;
@@ -2321,8 +2301,6 @@ cc_color_panel_init (CcColorPanel *prefs)
                     G_CALLBACK (gcm_prefs_calib_export_cb), prefs);
   g_signal_connect (prefs->button_calib_upload, "clicked",
                     G_CALLBACK (gcm_prefs_calib_upload_cb), prefs);
-  g_signal_connect (prefs->label_calib_summary_message, "activate-link",
-                    G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs);
 
   g_signal_connect (prefs, "realize",
                     G_CALLBACK (gcm_prefs_window_realize_cb),

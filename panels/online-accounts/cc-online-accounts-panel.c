@@ -505,7 +505,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
 static const char *
 cc_goa_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/accounts";
+  return "help:gnome-help/net#social";
 }
 
 static void

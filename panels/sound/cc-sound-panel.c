@@ -167,7 +167,7 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
 static const char *
 cc_sound_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/media#sound";
+  return "help:gnome-help/hardware#sound";
 }
 
 static void

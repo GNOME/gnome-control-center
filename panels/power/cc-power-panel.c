@@ -164,22 +164,13 @@ cc_power_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
 
-static const char *
-cc_power_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/power";
-}
-
 static void
 cc_power_panel_class_init (CcPowerPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   object_class->dispose = cc_power_panel_dispose;
-
-  panel_class->get_help_uri = cc_power_panel_get_help_uri;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
 

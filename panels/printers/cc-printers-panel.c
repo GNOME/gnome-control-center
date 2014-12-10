@@ -312,7 +312,7 @@ cc_printers_panel_finalize (GObject *object)
 static const char *
 cc_printers_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/printing";
+  return "help:gnome-help/hardware#printers";
 }
 
 static void

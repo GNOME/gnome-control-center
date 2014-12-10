@@ -85,7 +85,7 @@ help_activated (GSimpleAction *action,
 
   window = cc_shell_get_toplevel (CC_SHELL (self->window));
   gtk_show_uri_on_window (GTK_WINDOW (window),
-                          uri ? uri : "help:gnome-help/prefs",
+                          uri ? uri : "help:gnome-help",
                           GDK_CURRENT_TIME,
                           NULL);
 }
