@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-30 14:08+0300\n"
-"PO-Revision-Date: 2014-09-30 14:08+0300\n"
+"POT-Creation-Date: 2014-12-12 11:36+0200\n"
+"PO-Revision-Date: 2014-12-12 11:36+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -146,8 +146,8 @@ msgstr "מספר גדלים"
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
 #: ../panels/background/cc-background-item.c:201
 #, c-format
-msgid "%d ے %d"
-msgstr "%d ے %d"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 #: ../panels/background/cc-background-item.c:327
 msgid "No Desktop Background"
@@ -1067,7 +1067,7 @@ msgstr "ראשי"
 
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
+#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1484,7 +1484,7 @@ msgstr "משגרים"
 msgid "Launch help browser"
 msgstr "הפעלת דפדפן העזרה"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1601
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1604
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "הגדרות"
@@ -3539,7 +3539,7 @@ msgid "Show Details in Lock Screen"
 msgstr "הצגת פרטים במסך הנעילה"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3669,11 +3669,11 @@ msgstr ""
 "הוספת חשבון מאפשרת ליישום שלך לגשת באמצעותו למסמכים, דוא״ל, אנשי קשר, יומן, "
 "תכנית הצ׳אט ועוד."
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:192
 msgid "Unknown time"
 msgstr "זמן בלתי ידוע"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:198
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -3681,7 +3681,7 @@ msgstr[0] "דקה"
 msgstr[1] "%i דקות"
 msgstr[2] "2 דקות"
 
-#: ../panels/power/cc-power-panel.c:201
+#: ../panels/power/cc-power-panel.c:210
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3691,19 +3691,19 @@ msgstr[2] "שעתיים"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:209
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:219
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
 msgstr[1] "שעות"
 msgstr[2] "שעתיים"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:220
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "דקה"
@@ -3711,208 +3711,208 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:230
+#: ../panels/power/cc-power-panel.c:239
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s עד לטעינה מלאה"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:237
+#: ../panels/power/cc-power-panel.c:246
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "אזהרה: נותרו %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:251
 #, c-format
 msgid "%s remaining"
 msgstr "נותרו %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:247 ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
 msgid "Fully charged"
 msgstr "בטעינה מלאה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
 msgid "Empty"
 msgstr "ריקה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:266
+#: ../panels/power/cc-power-panel.c:275
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:271
+#: ../panels/power/cc-power-panel.c:280
 msgid "Discharging"
 msgstr "בפריקה"
 
-#: ../panels/power/cc-power-panel.c:396
+#: ../panels/power/cc-power-panel.c:405
 msgctxt "Battery name"
 msgid "Main"
 msgstr "ראשי"
 
-#: ../panels/power/cc-power-panel.c:398
+#: ../panels/power/cc-power-panel.c:407
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "נוסף"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:470
+#: ../panels/power/cc-power-panel.c:479
 msgid "Wireless mouse"
 msgstr "עכבר אלחוטי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:473
+#: ../panels/power/cc-power-panel.c:482
 msgid "Wireless keyboard"
 msgstr "מקלדת אלחוטית"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:476
+#: ../panels/power/cc-power-panel.c:485
 msgid "Uninterruptible power supply"
 msgstr "אל־פסק"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:488
 msgid "Personal digital assistant"
 msgstr "עוזר דיגיטלי אישי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:491
 msgid "Cellphone"
 msgstr "טלפון סלולרי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:494
 msgid "Media player"
 msgstr "נגן מדיה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:497
 msgid "Tablet"
 msgstr "משטח"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:500
 msgid "Computer"
 msgstr "מחשב"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:494 ../panels/power/cc-power-panel.c:717
-#: ../panels/power/cc-power-panel.c:2019
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
+#: ../panels/power/cc-power-panel.c:2030
 msgid "Battery"
 msgstr "סוללה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:540
+#: ../panels/power/cc-power-panel.c:549
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:556
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "אזהרה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:561
 msgctxt "Battery power"
 msgid "Low"
 msgstr "נמוך"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:566
 msgctxt "Battery power"
 msgid "Good"
 msgstr "טוב"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:571
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "בטעינה מלאה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ריקה"
 
-#: ../panels/power/cc-power-panel.c:715
+#: ../panels/power/cc-power-panel.c:724
 msgid "Batteries"
 msgstr "סוללות"
 
-#: ../panels/power/cc-power-panel.c:1117
+#: ../panels/power/cc-power-panel.c:1126
 msgid "When _idle"
 msgstr "ב_חוסר פעילות"
 
-#: ../panels/power/cc-power-panel.c:1445
+#: ../panels/power/cc-power-panel.c:1454
 msgid "Power Saving"
 msgstr "חיסכון בחשמל"
 
-#: ../panels/power/cc-power-panel.c:1473
+#: ../panels/power/cc-power-panel.c:1482
 msgid "_Screen brightness"
 msgstr "בהירות המ_סך"
 
-#: ../panels/power/cc-power-panel.c:1479
+#: ../panels/power/cc-power-panel.c:1488
 msgid "_Keyboard brightness"
 msgstr "בהירות המ_סך"
 
-#: ../panels/power/cc-power-panel.c:1489
+#: ../panels/power/cc-power-panel.c:1498
 msgid "_Dim screen when inactive"
 msgstr "_עמעום המסך בחוסר פעילות"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1523
 msgid "_Blank screen"
 msgstr "ה_חשכת המסך"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1560
 msgid "_Wi-Fi"
 msgstr "רשת _אלחוטית"
 
-#: ../panels/power/cc-power-panel.c:1556
+#: ../panels/power/cc-power-panel.c:1565
 msgid "Turns off wireless devices"
 msgstr "כיבוי התקנים אלחוטיים"
 
-#: ../panels/power/cc-power-panel.c:1581
+#: ../panels/power/cc-power-panel.c:1590
 msgid "_Mobile broadband"
 msgstr "רשת ס_לולרית"
 
-#: ../panels/power/cc-power-panel.c:1586
+#: ../panels/power/cc-power-panel.c:1595
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "כיבוי התקני פס רחב נייד (3G, 4G, WiMax וכו׳)"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1645
 msgid "_Bluetooth"
 msgstr "(_ב)Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1686
+#: ../panels/power/cc-power-panel.c:1697
 msgid "When on battery power"
 msgstr "בעת הפעלה מהסוללה"
 
-#: ../panels/power/cc-power-panel.c:1688
+#: ../panels/power/cc-power-panel.c:1699
 msgid "When plugged in"
 msgstr "כאשר מחובר לחשמל"
 
-#: ../panels/power/cc-power-panel.c:1818
+#: ../panels/power/cc-power-panel.c:1829
 msgid "Suspend & Power Off"
 msgstr "השהיה וכיבוי"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1862
 msgid "_Automatic suspend"
 msgstr "ה_שהיה אוטומטית"
 
-#: ../panels/power/cc-power-panel.c:1875
+#: ../panels/power/cc-power-panel.c:1886
 msgid "When battery power is _critical"
 msgstr "כאשר עצמת הסוללה _חלשה מאוד"
 
-#: ../panels/power/cc-power-panel.c:1930
+#: ../panels/power/cc-power-panel.c:1941
 msgid "Power Off"
 msgstr "כיבוי"
 
-#: ../panels/power/cc-power-panel.c:2066
+#: ../panels/power/cc-power-panel.c:2077
 msgid "Devices"
 msgstr "התקנים"
 
@@ -4838,19 +4838,19 @@ msgstr "לא נמצאו אזורים"
 msgid "No input sources found"
 msgstr "לא נמצא מקור קלט"
 
-#: ../panels/region/cc-input-chooser.c:1076
+#: ../panels/region/cc-input-chooser.c:1083
 msgctxt "Input Source"
 msgid "Other"
 msgstr "אחר"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:894
+#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
 #: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:898
+#: ../panels/user-accounts/um-user-panel.c:904
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
@@ -4999,7 +4999,7 @@ msgstr "בחירת מיקום"
 msgid "_OK"
 msgstr "_אישור"
 
-#: ../panels/search/cc-search-panel.c:176
+#: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "לא נמצאו יישומים"
 
@@ -5088,7 +5088,7 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr "נדרש אימות כדי להפעיל או לנטרל כניסה מרחוק"
 
 #. Label
-#: ../panels/sharing/cc-sharing-networks.c:299
+#: ../panels/sharing/cc-sharing-networks.c:303
 msgid "No networks selected for sharing"
 msgstr "לא נבחרו רשתות לשיתוף"
 
@@ -5331,65 +5331,65 @@ msgstr "בדיקת ה_רמקולים"
 msgid "Peak detect"
 msgstr "זיהוי עצמה מרבית"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1509
+#: ../panels/sound/gvc-mixer-dialog.c:1501
 #: ../panels/sound/gvc-sound-theme-chooser.c:594
 msgid "Name"
 msgstr "שם"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1528
+#: ../panels/sound/gvc-mixer-dialog.c:1520
 msgid "Device"
 msgstr "התקן"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1591
+#: ../panels/sound/gvc-mixer-dialog.c:1583
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "בדיקת רמקולים עבור %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1649
+#: ../panels/sound/gvc-mixer-dialog.c:1641
 msgid "_Output volume:"
 msgstr "עצמת ה_פלט:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1655
 msgid "Output"
 msgstr "פלט"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1668
+#: ../panels/sound/gvc-mixer-dialog.c:1660
 msgid "C_hoose a device for sound output:"
 msgstr "ב_חירת התקן להשמעה:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1693
+#: ../panels/sound/gvc-mixer-dialog.c:1685
 msgid "Settings for the selected device:"
 msgstr "הגדרות עבור ההתקן הנבחר:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1704
+#: ../panels/sound/gvc-mixer-dialog.c:1696
 msgid "Input"
 msgstr "קלט"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1711
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "_Input volume:"
 msgstr "עצמת ה_קלט:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1734
+#: ../panels/sound/gvc-mixer-dialog.c:1726
 msgid "Input level:"
 msgstr "רמת הקלט:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1762
+#: ../panels/sound/gvc-mixer-dialog.c:1754
 msgid "C_hoose a device for sound input:"
 msgstr "ב_חירת התקן להקלטת שמע:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1789
+#: ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Sound Effects"
 msgstr "אפקטים קוליים"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "_Alert volume:"
 msgstr "עצמת צליל הה_תראה:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1809
+#: ../panels/sound/gvc-mixer-dialog.c:1801
 msgid "Applications"
 msgstr "יישומים"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1813
+#: ../panels/sound/gvc-mixer-dialog.c:1805
 msgid "No application is currently playing or recording audio."
 msgstr "אין יישום המנגן או מקליט שמע כעת."
 
@@ -5564,7 +5564,7 @@ msgid "_Disable if two keys are pressed together"
 msgstr "נ_טרול אם שני מקשים נלחצים ביחד"
 
 #: ../panels/universal-access/uap.ui.h:31
-msgid "Beep when a _modifer key is pressed"
+msgid "Beep when a _modifier key is pressed"
 msgstr "צפצוף בעת לחיצה על מקש ה_חלפה"
 
 #: ../panels/universal-access/uap.ui.h:32
@@ -6598,15 +6598,15 @@ msgstr "אין"
 msgid "Logged in"
 msgstr "נכנסת"
 
-#: ../panels/user-accounts/um-user-panel.c:1073
+#: ../panels/user-accounts/um-user-panel.c:1084
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/user-accounts/um-user-panel.c:1086
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:1116
+#: ../panels/user-accounts/um-user-panel.c:1127
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6614,12 +6614,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1154
+#: ../panels/user-accounts/um-user-panel.c:1165
 msgid "Create a user account"
 msgstr "יצירת חשבון משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:1165
-#: ../panels/user-accounts/um-user-panel.c:1477
+#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1488
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6627,12 +6627,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1175
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:1187
-#: ../panels/user-accounts/um-user-panel.c:1482
+#: ../panels/user-accounts/um-user-panel.c:1198
+#: ../panels/user-accounts/um-user-panel.c:1493
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6640,7 +6640,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1391
+#: ../panels/user-accounts/um-user-panel.c:1402
 msgid "My Account"
 msgstr "החשבון שלי"
 
@@ -7036,22 +7036,22 @@ msgstr "עזרה"
 msgid "Quit"
 msgstr "יציאה"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1490
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1493
 msgid "All Settings"
 msgstr "כל ההגדרות"
 
 #. Add categories
-#: ../shell/cc-window.c:876
+#: ../shell/cc-window.c:879
 msgctxt "category"
 msgid "Personal"
 msgstr "אישי"
 
-#: ../shell/cc-window.c:877
+#: ../shell/cc-window.c:880
 msgctxt "category"
 msgid "Hardware"
 msgstr "חומרה"
 
-#: ../shell/cc-window.c:878
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "System"
 msgstr "מערכת"
@@ -7060,8 +7060,8 @@ msgstr "מערכת"
 msgid "Preferences;Settings;"
 msgstr "העדפות;הגדרות;"
 
-#~ msgid "%d × %d"
-#~ msgstr "%d × %d"
+#~ msgid "%d ے %d"
+#~ msgstr "%d ے %d"
 
 #~ msgid "Share Media On This Network"
 #~ msgstr "שיתוף מדיה ברשת זו"
