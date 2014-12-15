@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-14 06:32+0000\n"
-"PO-Revision-Date: 2014-09-14 15:02+0200\n"
+"POT-Creation-Date: 2014-12-15 07:17+0000\n"
+"PO-Revision-Date: 2014-12-15 17:27+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -1087,7 +1087,7 @@ msgstr "Elsődleges"
 
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
+#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1508,7 +1508,7 @@ msgstr "Parancsikonok"
 msgid "Launch help browser"
 msgstr "Súgóböngésző indítása"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1601
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1604
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Beállítások"
@@ -1804,14 +1804,11 @@ msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
 "automatically set it to \"%s\"?"
 msgstr ""
-"A(z) „%s” gyorsbillentyű egy hozzárendelt „%s” gyorsbillentyűvel rendelkezik. "
-"Szeretné automatikusan beállítani erre: „%s”?"
+"A(z) „%s” gyorsbillentyű egy hozzárendelt „%s” gyorsbillentyűvel "
+"rendelkezik. Szeretné automatikusan beállítani erre: „%s”?"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1449
 #, c-format
-#| msgid ""
-#| "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#| "disabled."
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
 "if you move forward."
@@ -1820,7 +1817,6 @@ msgstr ""
 "letiltásra kerül, ha továbblép."
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1456
-#| msgid "_Reassign"
 msgid "_Assign"
 msgstr "_Hozzárendelés"
 
@@ -1969,11 +1965,11 @@ msgstr "Egy kattintás, másodlagos gomb"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:366
+#: ../panels/network/cc-network-panel.c:369
 msgid "Air_plane Mode"
 msgstr "_Repülő mód"
 
-#: ../panels/network/cc-network-panel.c:974
+#: ../panels/network/cc-network-panel.c:977
 msgid "Network proxy"
 msgstr "Hálózati proxy"
 
@@ -1981,14 +1977,14 @@ msgstr "Hálózati proxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1153 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1156 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1298
+#: ../panels/network/cc-network-panel.c:1301
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "A rendszer hálózati szolgáltatásai nem kompatibilisek ezzel a verzióval."
@@ -2609,9 +2605,6 @@ msgstr "Internetkapcsolatok beállítása"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;DNS;"
@@ -3599,7 +3592,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Részletek megjelenítése a zárolási képernyőn"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3729,18 +3722,18 @@ msgstr ""
 "Az itt felvett fiókok használatával alkalmazásai dokumentumokat, leveleket, "
 "névjegyeket, naptárat, csevegést és sok más szolgáltatást érhetnek el."
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:192
 msgid "Unknown time"
 msgstr "Ismeretlen idő"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:198
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i perc"
 msgstr[1] "%i perc"
 
-#: ../panels/power/cc-power-panel.c:201
+#: ../panels/power/cc-power-panel.c:210
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3749,226 +3742,226 @@ msgstr[1] "%i óra"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:209
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s, %i %s"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:219
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "óra"
 msgstr[1] "óra"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:220
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "perc"
 msgstr[1] "perc"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:230
+#: ../panels/power/cc-power-panel.c:239
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s a teljes feltöltésig"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:237
+#: ../panels/power/cc-power-panel.c:246
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Figyelem: %s van hátra"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:251
 #, c-format
 msgid "%s remaining"
 msgstr "%s van hátra"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:247 ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
 msgid "Fully charged"
 msgstr "Teljesen feltöltve"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
 msgid "Empty"
 msgstr "Lemerült"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:266
+#: ../panels/power/cc-power-panel.c:275
 msgid "Charging"
 msgstr "Töltés"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:271
+#: ../panels/power/cc-power-panel.c:280
 msgid "Discharging"
 msgstr "Kisülés"
 
-#: ../panels/power/cc-power-panel.c:396
+#: ../panels/power/cc-power-panel.c:405
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Elsődleges"
 
-#: ../panels/power/cc-power-panel.c:398
+#: ../panels/power/cc-power-panel.c:407
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:470
+#: ../panels/power/cc-power-panel.c:479
 msgid "Wireless mouse"
 msgstr "Vezeték nélküli egér"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:473
+#: ../panels/power/cc-power-panel.c:482
 msgid "Wireless keyboard"
 msgstr "Vezeték nélküli billentyűzet"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:476
+#: ../panels/power/cc-power-panel.c:485
 msgid "Uninterruptible power supply"
 msgstr "Szünetmentes tápegység (UPS)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:488
 msgid "Personal digital assistant"
 msgstr "Személyes digitális asszisztens"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:491
 msgid "Cellphone"
 msgstr "Mobiltelefon"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:494
 msgid "Media player"
 msgstr "Médialejátszó"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:497
 msgid "Tablet"
 msgstr "Táblagép"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:500
 msgid "Computer"
 msgstr "Számítógép"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:494 ../panels/power/cc-power-panel.c:717
-#: ../panels/power/cc-power-panel.c:2019
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
+#: ../panels/power/cc-power-panel.c:2030
 msgid "Battery"
 msgstr "Akkumulátor"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:540
+#: ../panels/power/cc-power-panel.c:549
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Töltés"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:556
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Figyelem"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:561
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Alacsony"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:566
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Jó"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:571
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Teljesen feltöltve"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Üres"
 
-#: ../panels/power/cc-power-panel.c:715
+#: ../panels/power/cc-power-panel.c:724
 msgid "Batteries"
 msgstr "Akkumulátorok"
 
-#: ../panels/power/cc-power-panel.c:1117
+#: ../panels/power/cc-power-panel.c:1126
 msgid "When _idle"
 msgstr "Ü_resjáratban"
 
-#: ../panels/power/cc-power-panel.c:1445
+#: ../panels/power/cc-power-panel.c:1454
 msgid "Power Saving"
 msgstr "Energiatakarékosság"
 
-#: ../panels/power/cc-power-panel.c:1473
+#: ../panels/power/cc-power-panel.c:1482
 msgid "_Screen brightness"
 msgstr "_Képernyő fényereje"
 
-#: ../panels/power/cc-power-panel.c:1479
+#: ../panels/power/cc-power-panel.c:1488
 msgid "_Keyboard brightness"
 msgstr "Billentyűzet _fényereje"
 
-#: ../panels/power/cc-power-panel.c:1489
+#: ../panels/power/cc-power-panel.c:1498
 msgid "_Dim screen when inactive"
 msgstr "Képer_nyő elhalványítása, ha inaktív"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1523
 msgid "_Blank screen"
 msgstr "Képernyő _elsötétítése"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1560
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1556
+#: ../panels/power/cc-power-panel.c:1565
 msgid "Turns off wireless devices"
 msgstr "Kikapcsolja a vezeték nélküli eszközöket"
 
-#: ../panels/power/cc-power-panel.c:1581
+#: ../panels/power/cc-power-panel.c:1590
 msgid "_Mobile broadband"
 msgstr "_Mobil széles sáv"
 
-#: ../panels/power/cc-power-panel.c:1586
+#: ../panels/power/cc-power-panel.c:1595
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Kikapcsolja a mobil széles sávú (3G, 4G, WiMax stb.) eszközöket"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1645
 msgid "_Bluetooth"
 msgstr "Bl_uetooth"
 
-#: ../panels/power/cc-power-panel.c:1686
+#: ../panels/power/cc-power-panel.c:1697
 msgid "When on battery power"
 msgstr "Akkumulátoron"
 
-#: ../panels/power/cc-power-panel.c:1688
+#: ../panels/power/cc-power-panel.c:1699
 msgid "When plugged in"
 msgstr "Ha csatlakoztatva van"
 
-#: ../panels/power/cc-power-panel.c:1818
+#: ../panels/power/cc-power-panel.c:1829
 msgid "Suspend & Power Off"
 msgstr "Felfüggesztés és kikapcsolás"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1862
 msgid "_Automatic suspend"
 msgstr "_Automatikus felfüggesztés"
 
-#: ../panels/power/cc-power-panel.c:1875
+#: ../panels/power/cc-power-panel.c:1886
 msgid "When battery power is _critical"
 msgstr "Ha az akkumulátor _kritikusan gyenge"
 
-#: ../panels/power/cc-power-panel.c:1930
+#: ../panels/power/cc-power-panel.c:1941
 msgid "Power Off"
 msgstr "Kikapcsolás"
 
-#: ../panels/power/cc-power-panel.c:2066
+#: ../panels/power/cc-power-panel.c:2077
 msgid "Devices"
 msgstr "Eszközök"
 
@@ -4342,13 +4335,11 @@ msgstr "Illesztőprogram-adatbázis betöltése…"
 
 #. Translators: The found device is a JetDirect printer
 #: ../panels/printers/pp-host.c:506
-#| msgid "Remove Printer"
 msgid "JetDirect Printer"
 msgstr "JetDirect nyomtató"
 
 #. Translators: The found device is a Line Printer Daemon printer
 #: ../panels/printers/pp-host.c:756
-#| msgid "%s Printer"
 msgid "LPD Printer"
 msgstr "LPD nyomtató"
 
@@ -4879,7 +4870,6 @@ msgid "Privacy Policy"
 msgstr "Adatvédelmi irányelv"
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Location: %s"
 msgid "_Location Services"
 msgstr "_Helyszolgáltatások"
 
@@ -4905,34 +4895,34 @@ msgstr "Nem találhatók régiók"
 msgid "No input sources found"
 msgstr "Nem találhatók bemeneti források"
 
-#: ../panels/region/cc-input-chooser.c:1076
+#: ../panels/region/cc-input-chooser.c:1083
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Egyéb"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:892
+#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "A változtatások életbe léptetéséhez lépjen ki, majd újra be"
 
-#: ../panels/region/cc-region-panel.c:240
-#: ../panels/user-accounts/um-user-panel.c:893
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:904
 msgid "Restart Now"
 msgstr "Újraindítás most"
 
-#: ../panels/region/cc-region-panel.c:858
+#: ../panels/region/cc-region-panel.c:862
 msgid "No input source selected"
 msgstr "Nincs kiválasztva bemeneti forrás"
 
-#: ../panels/region/cc-region-panel.c:1088
+#: ../panels/region/cc-region-panel.c:1092
 msgid "Sorry"
 msgstr "Elnézést"
 
-#: ../panels/region/cc-region-panel.c:1090
+#: ../panels/region/cc-region-panel.c:1094
 msgid "Input methods can't be used on the login screen"
 msgstr "Nem használhatók bemeneti módszerek a bejelentkezési képernyőn"
 
-#: ../panels/region/cc-region-panel.c:1727
+#: ../panels/region/cc-region-panel.c:1731
 msgid "Login Screen"
 msgstr "Bejelentkezési képernyő"
 
@@ -5070,7 +5060,7 @@ msgstr "Válasszon régiót"
 msgid "_OK"
 msgstr "_OK"
 
-#: ../panels/search/cc-search-panel.c:176
+#: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "Nem találhatók alkalmazások"
 
@@ -5161,7 +5151,7 @@ msgstr ""
 "Hitelesítés szükséges a távoli bejelentkezés engedélyezéséhez vagy tiltásához"
 
 #. Label
-#: ../panels/sharing/cc-sharing-networks.c:299
+#: ../panels/sharing/cc-sharing-networks.c:303
 msgid "No networks selected for sharing"
 msgstr "Nincs kiválasztott hálózat a megosztáshoz"
 
@@ -5407,65 +5397,65 @@ msgstr "Hangszórók _tesztelése"
 msgid "Peak detect"
 msgstr "Csúcsérzékelés"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1509
+#: ../panels/sound/gvc-mixer-dialog.c:1501
 #: ../panels/sound/gvc-sound-theme-chooser.c:594
 msgid "Name"
 msgstr "Név"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1528
+#: ../panels/sound/gvc-mixer-dialog.c:1520
 msgid "Device"
 msgstr "Eszköz"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1591
+#: ../panels/sound/gvc-mixer-dialog.c:1583
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Hangszóróteszt ehhez: %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1649
+#: ../panels/sound/gvc-mixer-dialog.c:1641
 msgid "_Output volume:"
 msgstr "Ki_meneti hangerő:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1655
 msgid "Output"
 msgstr "Kimenet"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1668
+#: ../panels/sound/gvc-mixer-dialog.c:1660
 msgid "C_hoose a device for sound output:"
 msgstr "Válasszon ha_ngkimeneti eszközt:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1693
+#: ../panels/sound/gvc-mixer-dialog.c:1685
 msgid "Settings for the selected device:"
 msgstr "Kiválasztott eszköz beállításai:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1704
+#: ../panels/sound/gvc-mixer-dialog.c:1696
 msgid "Input"
 msgstr "Bemenet"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1711
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "_Input volume:"
 msgstr "_Bemeneti hangerő:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1734
+#: ../panels/sound/gvc-mixer-dialog.c:1726
 msgid "Input level:"
 msgstr "Bemeneti szint:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1762
+#: ../panels/sound/gvc-mixer-dialog.c:1754
 msgid "C_hoose a device for sound input:"
 msgstr "Válasszon _hangbemeneti eszközt:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1789
+#: ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Sound Effects"
 msgstr "Hangeffektusok"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "_Alert volume:"
 msgstr "_Riasztás hangereje:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1809
+#: ../panels/sound/gvc-mixer-dialog.c:1801
 msgid "Applications"
 msgstr "Alkalmazások"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1813
+#: ../panels/sound/gvc-mixer-dialog.c:1805
 msgid "No application is currently playing or recording audio."
 msgstr "Jelenleg nincs hangot lejátszó vagy felvevő alkalmazás."
 
@@ -5642,8 +5632,9 @@ msgid "_Disable if two keys are pressed together"
 msgstr "Letiltás két billentyű egyi_dejű lenyomásakor"
 
 #: ../panels/universal-access/uap.ui.h:31
-msgid "Beep when a _modifer key is pressed"
-msgstr "Hangjelzés _módosítóbillentyű lenyomásakor"
+#| msgid "Beep when a _modifer key is pressed"
+msgid "Beep when a _modifier key is pressed"
+msgstr "Hangjelzés _módosító billentyű lenyomásakor"
 
 #: ../panels/universal-access/uap.ui.h:32
 msgid "S_low Keys"
@@ -6682,15 +6673,15 @@ msgstr "Nincs"
 msgid "Logged in"
 msgstr "Bejelentkezve"
 
-#: ../panels/user-accounts/um-user-panel.c:1067
+#: ../panels/user-accounts/um-user-panel.c:1084
 msgid "Failed to contact the accounts service"
 msgstr "A fiókszolgáltatás nem érhető el"
 
-#: ../panels/user-accounts/um-user-panel.c:1069
+#: ../panels/user-accounts/um-user-panel.c:1086
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 
-#: ../panels/user-accounts/um-user-panel.c:1110
+#: ../panels/user-accounts/um-user-panel.c:1127
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6698,12 +6689,12 @@ msgstr ""
 "A módosítások végrehajtásához\n"
 "előbb kattintson a * ikonra"
 
-#: ../panels/user-accounts/um-user-panel.c:1148
+#: ../panels/user-accounts/um-user-panel.c:1165
 msgid "Create a user account"
 msgstr "Felhasználói fiók létrehozása"
 
-#: ../panels/user-accounts/um-user-panel.c:1159
-#: ../panels/user-accounts/um-user-panel.c:1471
+#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1488
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6711,12 +6702,12 @@ msgstr ""
 "Felhasználói fiók létrehozásához\n"
 "először kattintson a * ikonra"
 
-#: ../panels/user-accounts/um-user-panel.c:1169
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Delete the selected user account"
 msgstr "Kijelölt felhasználói fiók törlése"
 
-#: ../panels/user-accounts/um-user-panel.c:1181
-#: ../panels/user-accounts/um-user-panel.c:1476
+#: ../panels/user-accounts/um-user-panel.c:1198
+#: ../panels/user-accounts/um-user-panel.c:1493
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6724,7 +6715,7 @@ msgstr ""
 "A kijelölt felhasználói fiók törléséhez\n"
 "először kattintson a * ikonra"
 
-#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1402
 msgid "My Account"
 msgstr "Saját fiók"
 
@@ -7126,22 +7117,22 @@ msgstr "Súgó"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1490
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1493
 msgid "All Settings"
 msgstr "Minden beállítás"
 
 #. Add categories
-#: ../shell/cc-window.c:876
+#: ../shell/cc-window.c:879
 msgctxt "category"
 msgid "Personal"
 msgstr "Személyes"
 
-#: ../shell/cc-window.c:877
+#: ../shell/cc-window.c:880
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardver"
 
-#: ../shell/cc-window.c:878
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "System"
 msgstr "Rendszer"
