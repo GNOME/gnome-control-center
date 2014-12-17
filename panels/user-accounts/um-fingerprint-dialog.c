@@ -420,8 +420,10 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
+        GtkWidget *editable_button = data->editable_button;
+
         enroll_data_destroy (data);
-        set_fingerprint_label (data->editable_button);
+        set_fingerprint_label (editable_button);
 }
 
 static void
