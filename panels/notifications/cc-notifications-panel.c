@@ -193,6 +193,7 @@ add_application (CcNotificationsPanel *panel,
 {
   GtkWidget *box, *w, *row;
   GIcon *icon;
+  int size;
 
   icon = g_app_info_get_icon (app->app_info);
   if (icon == NULL)
@@ -210,6 +211,8 @@ add_application (CcNotificationsPanel *panel,
   gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &size, NULL);
+  gtk_image_set_pixel_size (GTK_IMAGE (w), size);
   gtk_widget_set_margin_start (w, 12);
   gtk_container_add (GTK_CONTAINER (box), w);
   g_object_unref (icon);
