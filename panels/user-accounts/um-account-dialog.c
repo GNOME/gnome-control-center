@@ -1342,7 +1342,7 @@ enterprise_init (UmAccountDialog *self,
                                                self, NULL);
 
         monitor = g_network_monitor_get_default ();
-        g_signal_connect (monitor, "network-changed", G_CALLBACK (on_network_changed), self);
+        g_signal_connect_object (monitor, "network-changed", G_CALLBACK (on_network_changed), self, 0);
 }
 
 static void
