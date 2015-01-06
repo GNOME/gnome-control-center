@@ -35,6 +35,7 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 #define REMOVE_OLD_TEMP_FILES "remove-old-temp-files"
 #define OLD_FILES_AGE "old-files-age"
 #define SEND_SOFTWARE_USAGE_STATS "send-software-usage-stats"
+#define REPORT_TECHNICAL_PROBLEMS "report-technical-problems"
 #define LOCATION_ENABLED "enabled"
 
 struct _CcPrivacyPanelPrivate
@@ -51,7 +52,77 @@ struct _CcPrivacyPanelPrivate
   GSettings  *privacy_settings;
   GSettings  *notification_settings;
   GSettings  *location_settings;
+
+  GtkWidget  *abrt_dialog;
+  GtkWidget  *abrt_row;
+  guint       abrt_watch_id;
 };
+
+static char *
+get_os_name (void)
+{
+  char *buffer;
+  char *name;
+
+  name = NULL;
+
+  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
+    {
+       char *start, *end;
+
+       start = end = NULL;
+       if ((start = strstr (buffer, "NAME=")) != NULL)
+         {
+           start += strlen ("NAME=");
+           end = strchr (start, '\n');
+         }
+
+       if (start != NULL && end != NULL)
+         {
+           name = g_strndup (start, end - start);
+         }
+
+       g_free (buffer);
+    }
+
+  if (name == NULL)
+    name = g_strdup ("GNOME");
+
+  return name;
+}
+
+static char *
+get_privacy_policy_url (void)
+{
+  char *buffer;
+  char *name;
+
+  name = NULL;
+
+  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
+    {
+       char *start, *end;
+
+       start = end = NULL;
+       if ((start = strstr (buffer, "PRIVACY_POLICY_URL=")) != NULL)
+         {
+           start += strlen ("PRIVACY_POLICY_URL=");
+           end = strchr (start, '\n');
+         }
+
+       if (start != NULL && end != NULL)
+         {
+           name = g_strndup (start, end - start);
+         }
+
+       g_free (buffer);
+    }
+
+  if (name == NULL)
+    name = g_strdup ("http://www.gnome.org/privacy-policy");
+
+  return name;
+}
 
 static void
 update_lock_screen_sensitivity (CcPrivacyPanel *self)
@@ -103,6 +174,33 @@ get_on_off_label (GSettings *settings,
   return w;
 }
 
+static gboolean
+abrt_label_mapping_get (GValue   *value,
+                        GVariant *variant,
+                        gpointer  user_data)
+{
+  g_value_set_string (value, g_variant_get_boolean (variant) ? _("Automatic") : _("Manual"));
+
+  return TRUE;
+}
+
+static GtkWidget *
+get_abrt_label (GSettings *settings,
+                const gchar *key)
+{
+  GtkWidget *w;
+
+  w = gtk_label_new ("");
+  g_settings_bind_with_mapping (settings, key,
+                                w, "label",
+                                G_SETTINGS_BIND_GET,
+                                abrt_label_mapping_get,
+                                NULL,
+                                NULL,
+                                NULL);
+  return w;
+}
+
 typedef struct
 {
   GtkWidget *label;
@@ -144,7 +242,7 @@ get_on_off_label2 (GSettings *settings,
   return data->label;
 }
 
-static void
+static GtkWidget *
 add_row (CcPrivacyPanel *self,
          const gchar    *label,
          const gchar    *dialog_id,
@@ -176,6 +274,8 @@ add_row (CcPrivacyPanel *self,
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
 
   gtk_widget_show_all (row);
+
+  return row;
 }
 
 static void
@@ -586,14 +686,90 @@ add_software (CcPrivacyPanel *self)
 }
 
 static void
+abrt_appeared_cb (GDBusConnection *connection,
+                  const gchar     *name,
+                  const gchar     *name_owner,
+                  gpointer         user_data)
+{
+  CcPrivacyPanel *self = user_data;
+  g_debug ("ABRT appeared");
+  gtk_widget_show (self->priv->abrt_row);
+}
+
+static void
+abrt_vanished_cb (GDBusConnection *connection,
+                  const gchar     *name,
+                  gpointer         user_data)
+{
+  CcPrivacyPanel *self = user_data;
+  g_debug ("ABRT vanished");
+  gtk_widget_hide (self->priv->abrt_row);
+}
+
+static void
+add_abrt (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+  char *os_name, *url, *msg;
+
+  w = get_abrt_label (self->priv->privacy_settings, REPORT_TECHNICAL_PROBLEMS);
+  self->priv->abrt_row = add_row (self, _("Problem Reporting"), "abrt_dialog", w);
+  gtk_widget_hide (self->priv->abrt_row);
+
+  dialog = self->priv->abrt_dialog;
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "abrt_switch"));
+  g_settings_bind (self->priv->privacy_settings, REPORT_TECHNICAL_PROBLEMS,
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  os_name = get_os_name ();
+  /* translators: '%s' is the distributor's name, such as 'Fedora' */
+  msg = g_strdup_printf ("Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are scrubbed of personal data.",
+                         os_name);
+  g_free (os_name);
+  gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (self->priv->builder, "abrt_explanation_label")), msg);
+  g_free (msg);
+
+  url = get_privacy_policy_url ();
+  if (!url)
+    {
+      g_debug ("Not watching for ABRT appearing, /etc/os-release lacks a privacy policy URL");
+      return;
+    }
+  msg = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Privacy Policy"));
+  g_free (url);
+  gtk_label_set_markup (GTK_LABEL (gtk_builder_get_object (self->priv->builder, "abrt_policy_linklabel")), msg);
+  g_free (msg);
+
+  self->priv->abrt_watch_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
+                                                "org.freedesktop.problems.daemon",
+                                                G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                                abrt_appeared_cb,
+                                                abrt_vanished_cb,
+                                                self,
+                                                NULL);
+}
+
+static void
 cc_privacy_panel_finalize (GObject *object)
 {
   CcPrivacyPanelPrivate *priv = CC_PRIVACY_PANEL (object)->priv;
+
+  if (priv->abrt_watch_id > 0)
+    {
+      g_bus_unwatch_name (priv->abrt_watch_id);
+      priv->abrt_watch_id = 0;
+    }
 
   g_clear_pointer (&priv->recent_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->screen_lock_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->trash_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->software_dialog, gtk_widget_destroy);
+  g_clear_pointer (&priv->abrt_dialog, gtk_widget_destroy);
   g_clear_object (&priv->builder);
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
@@ -662,6 +838,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->screen_lock_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
   self->priv->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
   self->priv->software_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_dialog"));
+  self->priv->abrt_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "abrt_dialog"));
 
   frame = WID ("frame");
   widget = gtk_list_box_new ();
@@ -687,6 +864,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   add_usage_history (self);
   add_trash_temp (self);
   add_software (self);
+  add_abrt (self);
 
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
