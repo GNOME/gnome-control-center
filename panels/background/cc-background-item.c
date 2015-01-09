@@ -112,6 +112,12 @@ get_emblemed_pixbuf (CcBackgroundItem *item, GdkPixbuf *pixbuf, gint scale_facto
                                                                               scale_factor,
                                                                               GTK_ICON_LOOKUP_FORCE_SIZE |
                                                                               GTK_ICON_LOOKUP_USE_BUILTIN);
+                        if (icon_info == NULL) {
+                                g_warning ("Your icon theme is missing the slideshow-emblem icon, "
+                                           "please file a bug against it");
+                                goto out;
+                        }
+
                         slideshow_emblem = gtk_icon_info_load_icon (icon_info, &error);
                         if (slideshow_emblem == NULL) {
                                 g_warning ("Failed to load slideshow emblem: %s", error->message);
