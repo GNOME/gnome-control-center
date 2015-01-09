@@ -224,6 +224,9 @@ region_widget_new (const gchar *locale_id,
         GtkWidget *check;
 
         locale_name = gnome_get_country_from_locale (locale_id, locale_id);
+        if (!locale_name)
+          return NULL;
+
         locale_current_name = gnome_get_country_from_locale (locale_id, NULL);
         locale_untranslated_name = gnome_get_country_from_locale (locale_id, "C");
 
@@ -307,6 +310,9 @@ add_regions (GtkDialog   *chooser,
 
                 is_initial = (g_hash_table_lookup (initial, locale_id) != NULL);
                 widget = region_widget_new (locale_id, !is_initial);
+                if (!widget)
+                  continue;
+
                 gtk_container_add (GTK_CONTAINER (priv->list), widget);
         }
 
