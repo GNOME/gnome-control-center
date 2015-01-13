@@ -34,6 +34,7 @@
 #include <polkit/polkit.h>
 #include <act/act.h>
 #include <libgd/gd-notification.h>
+#include <cairo-gobject.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
@@ -190,7 +191,7 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkListStore *store;
         GtkTreeIter iter;
         GtkTreeIter dummy;
-        GdkPixbuf *pixbuf;
+        cairo_surface_t *surface;
         gchar *text, *title;
         GtkTreeSelection *selection;
         gint sort_key;
@@ -205,7 +206,7 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         store = GTK_LIST_STORE (model);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
-        pixbuf = render_user_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48);
+        surface = render_user_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48, 1);
         text = get_name_col_str (user);
 
         if (act_user_get_uid (user) == getuid ()) {
@@ -219,14 +220,14 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
 
         gtk_list_store_set (store, &iter,
                             USER_COL, user,
-                            FACE_COL, pixbuf,
+                            FACE_COL, surface,
                             NAME_COL, text,
                             USER_ROW_COL, TRUE,
                             TITLE_COL, NULL,
                             HEADING_ROW_COL, FALSE,
                             SORT_KEY_COL, sort_key,
                             -1);
-        g_object_unref (pixbuf);
+        cairo_surface_destroy (surface);
         g_free (text);
 
         if (sort_key == 1 &&
@@ -342,7 +343,7 @@ user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkTreeModel *model;
         GtkTreeIter iter;
         ActUser *current;
-        GdkPixbuf *pixbuf;
+        cairo_surface_t *surface;
         char *text;
 
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
@@ -353,15 +354,15 @@ user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         do {
                 gtk_tree_model_get (model, &iter, USER_COL, &current, -1);
                 if (current == user) {
-                        pixbuf = render_user_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48);
+                        surface = render_user_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48, 1);
                         text = get_name_col_str (user);
 
                         gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                             USER_COL, user,
-                                            FACE_COL, pixbuf,
+                                            FACE_COL, surface,
                                             NAME_COL, text,
                                             -1);
-                        g_object_unref (pixbuf);
+                        cairo_surface_destroy (surface);
                         g_free (text);
                         g_object_unref (current);
 
@@ -877,18 +878,18 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *image;
         GtkWidget *label;
-        GdkPixbuf *pixbuf;
+        cairo_surface_t *surface;
         gchar *lang, *text, *name;
         GtkWidget *widget;
         gboolean show, enable;
         ActUser *current;
 
-        pixbuf = render_user_icon (user, UM_ICON_STYLE_NONE, 48);
+        surface = render_user_icon (user, UM_ICON_STYLE_NONE, 48, 1);
         image = get_widget (d, "user-icon-image");
-        gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
+        gtk_image_set_from_surface (GTK_IMAGE (image), surface);
         image = get_widget (d, "user-icon-image2");
-        gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
-        g_object_unref (pixbuf);
+        gtk_image_set_from_surface (GTK_IMAGE (image), surface);
+        cairo_surface_destroy (surface);
 
         um_photo_dialog_set_user (d->photo_dialog, user);
 
@@ -1569,7 +1570,7 @@ setup_main_window (CcUserPanel *self)
         userlist = get_widget (d, "list-treeview");
         store = gtk_list_store_new (NUM_USER_LIST_COLS,
                                     ACT_TYPE_USER,
-                                    GDK_TYPE_PIXBUF,
+                                    CAIRO_GOBJECT_TYPE_SURFACE,
                                     G_TYPE_STRING,
                                     G_TYPE_BOOLEAN,
                                     G_TYPE_STRING,
@@ -1602,7 +1603,7 @@ setup_main_window (CcUserPanel *self)
         column = gtk_tree_view_column_new ();
         cell = gtk_cell_renderer_pixbuf_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), cell, FALSE);
-        gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "pixbuf", FACE_COL);
+        gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "surface", FACE_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
         cell = gtk_cell_renderer_text_new ();
         g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);

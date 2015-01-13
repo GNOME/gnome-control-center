@@ -867,7 +867,7 @@ check_user_file (const char *filename,
 }
 
 static GdkPixbuf *
-frame_pixbuf (GdkPixbuf *source)
+frame_pixbuf (GdkPixbuf *source, gint scale)
 {
         GdkPixbuf       *dest;
         cairo_t         *cr;
@@ -877,7 +877,7 @@ frame_pixbuf (GdkPixbuf *source)
         int              frame_width;
         double           radius;
 
-        frame_width = 2;
+        frame_width = 2 * scale;
 
         w = gdk_pixbuf_get_width (source) + frame_width * 2;
         h = gdk_pixbuf_get_height (source) + frame_width * 2;
@@ -908,7 +908,7 @@ frame_pixbuf (GdkPixbuf *source)
 }
 
 static GdkPixbuf *
-logged_in_pixbuf (GdkPixbuf *pixbuf)
+logged_in_pixbuf (GdkPixbuf *pixbuf, gint scale)
 {
         cairo_format_t format;
         cairo_surface_t *surface;
@@ -931,7 +931,8 @@ logged_in_pixbuf (GdkPixbuf *pixbuf)
 
         /* Draw pattern */
         cairo_rectangle (cr, 0, 0, width, height);
-        pattern = cairo_pattern_create_radial (width - 9.5, height - 10, 0, width - 8.5, height - 7.5, 7.7);
+        pattern = cairo_pattern_create_radial (width - 9.5 * scale, height - 10 * scale, 0,
+                                               width - 8.5 * scale, height - 7.5 * scale, 7.7 * scale);
         cairo_pattern_add_color_stop_rgb (pattern, 0, 0.4, 0.9, 0);
         cairo_pattern_add_color_stop_rgb (pattern, 0.7, 0.3, 0.6, 0);
         cairo_pattern_add_color_stop_rgb (pattern, 0.8, 0.4, 0.4, 0.4);
@@ -940,8 +941,8 @@ logged_in_pixbuf (GdkPixbuf *pixbuf)
         cairo_fill (cr);
 
         /* Draw border */
-        cairo_set_line_width (cr, 0.9);
-        cairo_arc (cr, width - 8.5, height - 8.5, 6, 0, 2 * G_PI);
+        cairo_set_line_width (cr, 0.9 * scale);
+        cairo_arc (cr, width - 8.5 * scale, height - 8.5 * scale, 6 * scale, 0, 2 * G_PI);
         gdk_rgba_parse (&color, "#ffffff");
         gdk_cairo_set_source_rgba (cr, &color);
         cairo_stroke (cr);
@@ -956,16 +957,18 @@ logged_in_pixbuf (GdkPixbuf *pixbuf)
 
 #define MAX_FILE_SIZE     65536
 
-GdkPixbuf *
+cairo_surface_t *
 render_user_icon (ActUser     *user,
                   UmIconStyle  style,
-                  gint         icon_size)
+                  gint         icon_size,
+                  gint         scale)
 {
         GdkPixbuf    *pixbuf;
         GdkPixbuf    *framed;
         gboolean      res;
         GError       *error;
         const gchar  *icon_file;
+        cairo_surface_t *surface = NULL;
 
         g_return_val_if_fail (ACT_IS_USER (user), NULL);
         g_return_val_if_fail (icon_size > 12, NULL);
@@ -976,8 +979,8 @@ render_user_icon (ActUser     *user,
                 res = check_user_file (icon_file, MAX_FILE_SIZE);
                 if (res) {
                         pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
-                                                                   icon_size,
-                                                                   icon_size,
+                                                                   icon_size * scale,
+                                                                   icon_size * scale,
                                                                    NULL);
                 }
                 else {
@@ -993,7 +996,7 @@ render_user_icon (ActUser     *user,
         pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 
                                            "avatar-default",
-                                           icon_size,
+                                           icon_size * scale,
                                            GTK_ICON_LOOKUP_FORCE_SIZE,
                                            &error);
         if (error) {
@@ -1004,7 +1007,7 @@ render_user_icon (ActUser     *user,
  out:
 
         if (pixbuf != NULL && (style & UM_ICON_STYLE_FRAME)) {
-                framed = frame_pixbuf (pixbuf);
+                framed = frame_pixbuf (pixbuf, scale);
                 if (framed != NULL) {
                         g_object_unref (pixbuf);
                         pixbuf = framed;
@@ -1012,14 +1015,19 @@ render_user_icon (ActUser     *user,
         }
 
         if (pixbuf != NULL && (style & UM_ICON_STYLE_STATUS) && act_user_is_logged_in (user)) {
-                framed = logged_in_pixbuf (pixbuf);
+                framed = logged_in_pixbuf (pixbuf, scale);
                 if (framed != NULL) {
                         g_object_unref (pixbuf);
                         pixbuf = framed;
                 }
         }
 
-        return pixbuf;
+        if (pixbuf != NULL) {
+                surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
+                g_object_unref (pixbuf);
+        }
+
+        return surface;
 }
 
 void
