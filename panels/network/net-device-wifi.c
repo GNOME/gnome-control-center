@@ -1493,6 +1493,8 @@ make_row (GtkSizeGroup   *rows,
         GtkWidget *row, *row_box;
         GtkWidget *widget;
         GtkWidget *box;
+        GtkWidget *button_stack;
+        GtkWidget *image;
         const gchar *title;
         gboolean active;
         gboolean in_range;
@@ -1502,7 +1504,6 @@ make_row (GtkSizeGroup   *rows,
         const GByteArray *ssid;
         const gchar *icon_name;
         guint64 timestamp;
-        GtkSizeGroup *spinner_button_group;
         NMDeviceState state;
 
         g_assert (connection || ap);
@@ -1550,6 +1551,12 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_set_margin_end (row_box, 12);
         gtk_container_add (GTK_CONTAINER (row), row_box);
 
+        button_stack = gtk_stack_new ();
+        gtk_widget_show (button_stack);
+
+        widget = gtk_label_new ("");
+        gtk_container_add (GTK_CONTAINER (button_stack), widget);
+
         widget = NULL;
         if (forget) {
                 widget = gtk_check_button_new ();
@@ -1578,40 +1585,38 @@ make_row (GtkSizeGroup   *rows,
 
         gtk_box_pack_start (GTK_BOX (row_box), gtk_label_new (""), TRUE, FALSE, 0);
 
-        spinner_button_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-        g_object_set_data_full (G_OBJECT (row), "spinner_button_group", spinner_button_group, g_object_unref);
         widget = NULL;
-        if (connection) {
-                GtkWidget *image;
-                image = gtk_image_new_from_icon_name ("emblem-system-symbolic", GTK_ICON_SIZE_MENU);
-                gtk_widget_show (image);
-                widget = gtk_button_new ();
-                gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
-                gtk_widget_set_no_show_all (widget, TRUE);
-                if (!connecting)
-                        gtk_widget_show (widget);
-                gtk_container_add (GTK_CONTAINER (widget), image);
-                gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
-                gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-                atk_object_set_name (gtk_widget_get_accessible (widget), _("Options…"));
-                gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
-                gtk_size_group_add_widget (spinner_button_group, widget);
-                g_object_set_data (G_OBJECT (row), "edit", widget);
-        }
+        image = gtk_image_new_from_icon_name ("emblem-system-symbolic", GTK_ICON_SIZE_MENU);
+        gtk_widget_show (image);
+        widget = gtk_button_new ();
+        gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
+        gtk_widget_show (widget);
+        gtk_container_add (GTK_CONTAINER (widget), image);
+        gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
+        gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
+        atk_object_set_name (gtk_widget_get_accessible (widget), _("Options…"));
+        gtk_stack_add_named (GTK_STACK (button_stack), widget, "button");
+        g_object_set_data (G_OBJECT (row), "edit", widget);
+
+        if (connection)
+                gtk_stack_set_visible_child_name (GTK_STACK (button_stack), "button");
+
+        gtk_box_pack_start (GTK_BOX (row_box), button_stack, FALSE, FALSE, 0);
+        g_object_set_data (G_OBJECT (row), "button_stack", button_stack);
+
+
         if (edit_out)
                 *edit_out = widget;
 
         widget = gtk_spinner_new ();
-        gtk_widget_set_no_show_all (widget, TRUE);
-        if (connecting) {
-                gtk_widget_show (widget);
-                gtk_spinner_start (GTK_SPINNER (widget));
-        }
+        gtk_spinner_start (GTK_SPINNER (widget));
+        gtk_widget_show (widget);
+
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
         gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-        gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
-        gtk_size_group_add_widget (spinner_button_group, widget);
-        g_object_set_data (G_OBJECT (row), "spinner", widget);
+        gtk_stack_add_named (GTK_STACK (button_stack), widget, "spinner");
+        if (connecting)
+                gtk_stack_set_visible_child_name (GTK_STACK (button_stack), "spinner");
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
@@ -1908,13 +1913,14 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
         NMAccessPoint *ap;
         NMClient *client;
         NMDevice *nm_device;
-        GtkWidget *spinner;
         GtkWidget *edit;
+        GtkWidget *stack;
 
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
         ap = NM_ACCESS_POINT (g_object_get_data (G_OBJECT (row), "ap"));
-        spinner = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "spinner"));
         edit = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "edit"));
+        stack = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "button_stack"));
+
 
         if (ap != NULL) {
                 if (connection != NULL) {
@@ -1930,8 +1936,7 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
                         gchar *ssid_text;
                         const gchar *object_path;
 
-                        gtk_widget_show (spinner);
-                        gtk_spinner_start (GTK_SPINNER (spinner));
+                        gtk_stack_set_visible_child_name (GTK_STACK (stack), "spinner");
 
                         ssid = nm_access_point_get_ssid (ap);
                         ssid_text = g_markup_escape_text (nm_utils_escape_ssid (ssid->data, ssid->len), -1);
