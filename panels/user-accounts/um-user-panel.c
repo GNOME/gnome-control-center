@@ -936,7 +936,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         gtk_widget_set_visible (widget, show);
 
         /* Autologin: show when local account */
-        widget = get_widget (d, "autologin-switch");
+        widget = get_widget (d, "autologin-box");
         label = get_widget (d, "autologin-label");
         show = act_user_is_local_account (user);
         gtk_widget_set_visible (widget, show);
