@@ -58,6 +58,8 @@ libuser_accounts_la_SOURCES =		\
 	um-history-dialog.c		\
 	um-user-image.h			\
 	um-user-image.c			\
+	um-cell-renderer-user-image.h	\
+	um-cell-renderer-user-image.c	\
 	$(BUILT_SOURCES)
 
 libuser_accounts_la_LIBADD = 		\

@@ -48,6 +48,7 @@
 #include "um-editable-button.h"
 #include "um-editable-combo.h"
 #include "um-user-image.h"
+#include "um-cell-renderer-user-image.h"
 
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
@@ -97,7 +98,6 @@ get_widget (CcUserPanelPrivate *d, const char *name)
 
 enum {
         USER_COL,
-        FACE_COL,
         NAME_COL,
         USER_ROW_COL,
         TITLE_COL,
@@ -192,7 +192,6 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkListStore *store;
         GtkTreeIter iter;
         GtkTreeIter dummy;
-        cairo_surface_t *surface;
         gchar *text, *title;
         GtkTreeSelection *selection;
         gint sort_key;
@@ -207,7 +206,6 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         store = GTK_LIST_STORE (model);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
-        surface = render_user_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48, 1);
         text = get_name_col_str (user);
 
         if (act_user_get_uid (user) == getuid ()) {
@@ -221,14 +219,12 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
 
         gtk_list_store_set (store, &iter,
                             USER_COL, user,
-                            FACE_COL, surface,
                             NAME_COL, text,
                             USER_ROW_COL, TRUE,
                             TITLE_COL, NULL,
                             HEADING_ROW_COL, FALSE,
                             SORT_KEY_COL, sort_key,
                             -1);
-        cairo_surface_destroy (surface);
         g_free (text);
 
         if (sort_key == 1 &&
@@ -344,7 +340,6 @@ user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkTreeModel *model;
         GtkTreeIter iter;
         ActUser *current;
-        cairo_surface_t *surface;
         char *text;
 
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
@@ -355,15 +350,12 @@ user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         do {
                 gtk_tree_model_get (model, &iter, USER_COL, &current, -1);
                 if (current == user) {
-                        surface = render_user_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48, 1);
                         text = get_name_col_str (user);
 
                         gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                             USER_COL, user,
-                                            FACE_COL, surface,
                                             NAME_COL, text,
                                             -1);
-                        cairo_surface_destroy (surface);
                         g_free (text);
                         g_object_unref (current);
 
@@ -1568,7 +1560,6 @@ setup_main_window (CcUserPanel *self)
         userlist = get_widget (d, "list-treeview");
         store = gtk_list_store_new (NUM_USER_LIST_COLS,
                                     ACT_TYPE_USER,
-                                    CAIRO_GOBJECT_TYPE_SURFACE,
                                     G_TYPE_STRING,
                                     G_TYPE_BOOLEAN,
                                     G_TYPE_STRING,
@@ -1599,9 +1590,9 @@ setup_main_window (CcUserPanel *self)
         d->other_iter = NULL;
 
         column = gtk_tree_view_column_new ();
-        cell = gtk_cell_renderer_pixbuf_new ();
+        cell = um_cell_renderer_user_image_new (userlist);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), cell, FALSE);
-        gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "surface", FACE_COL);
+        gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "user", USER_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
         cell = gtk_cell_renderer_text_new ();
         g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
@@ -1706,6 +1697,7 @@ cc_user_panel_init (CcUserPanel *self)
         type = cc_editable_entry_get_type ();
         type = um_editable_combo_get_type ();
         type = um_user_image_get_type ();
+        type = um_cell_renderer_user_image_get_type ();
 
         gtk_widget_set_size_request (GTK_WIDGET (self), -1, 350);
 
