@@ -47,6 +47,7 @@
 
 #include "um-editable-button.h"
 #include "um-editable-combo.h"
+#include "um-user-image.h"
 
 #include "um-account-dialog.h"
 #include "cc-language-chooser.h"
@@ -878,18 +879,15 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *image;
         GtkWidget *label;
-        cairo_surface_t *surface;
         gchar *lang, *text, *name;
         GtkWidget *widget;
         gboolean show, enable;
         ActUser *current;
 
-        surface = render_user_icon (user, UM_ICON_STYLE_NONE, 48, 1);
         image = get_widget (d, "user-icon-image");
-        gtk_image_set_from_surface (GTK_IMAGE (image), surface);
+        um_user_image_set_user (UM_USER_IMAGE (image), user);
         image = get_widget (d, "user-icon-image2");
-        gtk_image_set_from_surface (GTK_IMAGE (image), surface);
-        cairo_surface_destroy (surface);
+        um_user_image_set_user (UM_USER_IMAGE (image), user);
 
         um_photo_dialog_set_user (d->photo_dialog, user);
 
@@ -1707,6 +1705,7 @@ cc_user_panel_init (CcUserPanel *self)
         type = um_editable_button_get_type ();
         type = cc_editable_entry_get_type ();
         type = um_editable_combo_get_type ();
+        type = um_user_image_get_type ();
 
         gtk_widget_set_size_request (GTK_WIDGET (self), -1, 350);
 

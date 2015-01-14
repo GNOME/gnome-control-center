@@ -56,6 +56,8 @@ libuser_accounts_la_SOURCES =		\
 	um-realm-manager.h		\
 	um-history-dialog.h		\
 	um-history-dialog.c		\
+	um-user-image.h			\
+	um-user-image.c			\
 	$(BUILT_SOURCES)
 
 libuser_accounts_la_LIBADD = 		\
