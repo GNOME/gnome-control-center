@@ -514,7 +514,7 @@ select_app (GtkListBox           *list_box,
   Application *app;
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
-  cc_build_edit_dialog (panel, app->app_info, app->settings);
+  cc_build_edit_dialog (panel, app->app_info, app->settings, panel->master_settings);
 }
 
 static void

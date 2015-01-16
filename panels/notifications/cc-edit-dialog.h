@@ -24,7 +24,10 @@
 
 G_BEGIN_DECLS
 
-void cc_build_edit_dialog (CcNotificationsPanel *panel, GAppInfo *app, GSettings *settings);
+void cc_build_edit_dialog (CcNotificationsPanel *panel,
+                           GAppInfo             *app,
+                           GSettings            *settings,
+                           GSettings            *master_settings);
 
 G_END_DECLS
 
