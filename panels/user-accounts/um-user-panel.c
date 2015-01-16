@@ -1115,8 +1115,6 @@ language_response (GtkDialog         *dialog,
                                 show_restart_notification (d, lang);
                 }
 
-                act_user_set_language (user, lang);
-
                 button = get_widget (d, "account-language-button");
                 name = gnome_get_language_from_locale (lang, NULL);
                 um_editable_button_set_text (UM_EDITABLE_BUTTON (button), name);
