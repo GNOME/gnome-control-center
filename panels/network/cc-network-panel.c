@@ -73,7 +73,6 @@ struct _CcNetworkPanelPrivate
         MMManager        *modem_manager;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
-        guint             refresh_idle;
 
         /* Killswitch stuff */
         GDBusProxy       *rfkill_proxy;
@@ -238,11 +237,6 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&priv->remote_settings);
         g_clear_object (&priv->kill_switch_header);
         priv->rfkill_switch = NULL;
-
-        if (priv->refresh_idle != 0) {
-                g_source_remove (priv->refresh_idle);
-                priv->refresh_idle = 0;
-        }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
