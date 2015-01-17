@@ -9,15 +9,15 @@
 # Vytautas Liuolia <vytautas.liuolia@gmail.com>, 2008.
 # Mantas Kriaučiūnas <mantas@akl.lt>, 2011.
 # Algimantas Margevičius <margevicius.algimantas@gmail.com>, 2011.
-# Aurimas Černius <aurisc4@gmail.com>, 2010, 2013, 2014.
+# Aurimas Černius <aurisc4@gmail.com>, 2010, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-10 06:31+0000\n"
-"PO-Revision-Date: 2014-09-10 18:53+0300\n"
+"POT-Creation-Date: 2015-01-17 19:16+0000\n"
+"PO-Revision-Date: 2015-01-17 21:48+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -77,44 +77,44 @@ msgctxt "background, style"
 msgid "Span"
 msgstr "Apgaubti"
 
-#. translators: This is the title of the wallpaper chooser dialog.
-#: ../panels/background/cc-background-chooser-dialog.c:442
-msgid "Select Background"
-msgstr "Pasirinkti foną"
-
-#: ../panels/background/cc-background-chooser-dialog.c:463
+#: ../panels/background/cc-background-chooser-dialog.c:438
 msgid "Wallpapers"
 msgstr "Darbastalio paveikslėliai"
 
-#: ../panels/background/cc-background-chooser-dialog.c:472
-msgid "Pictures"
-msgstr "Paveikslėliai"
-
-#: ../panels/background/cc-background-chooser-dialog.c:481
+#: ../panels/background/cc-background-chooser-dialog.c:447
 msgid "Colors"
 msgstr "Spalvos"
 
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:485
+msgid "Select Background"
+msgstr "Pasirinkti foną"
+
+#: ../panels/background/cc-background-chooser-dialog.c:514
+msgid "Pictures"
+msgstr "Paveikslėliai"
+
 #. translators: No pictures were found
-#: ../panels/background/cc-background-chooser-dialog.c:540
+#: ../panels/background/cc-background-chooser-dialog.c:546
 msgid "No Pictures Found"
 msgstr "Nerasta paveikslėlių"
 
 #. translators: "Home" is used in place of the Pictures
 #. * directory in the string below when XDG_PICTURES_DIR is
 #. * undefined
-#: ../panels/background/cc-background-chooser-dialog.c:558
+#: ../panels/background/cc-background-chooser-dialog.c:564
 #: ../panels/search/cc-search-locations-dialog.c:274
 msgid "Home"
 msgstr "Namų aplankas"
 
 #. translators: %s here is the name of the Pictures directory, the string should be translated in
 #. * the context "You can add images to your Pictures folder and they will show up here"
-#: ../panels/background/cc-background-chooser-dialog.c:570
+#: ../panels/background/cc-background-chooser-dialog.c:576
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
 msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 
-#: ../panels/background/cc-background-chooser-dialog.c:592
+#: ../panels/background/cc-background-chooser-dialog.c:583
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1537
@@ -142,7 +142,7 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: ../panels/background/cc-background-chooser-dialog.c:593
+#: ../panels/background/cc-background-chooser-dialog.c:584
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/um-photo-dialog.c:97
 msgid "Select"
@@ -665,7 +665,7 @@ msgstr ""
 "Windows</a>."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:732
 msgid "Summary"
 msgstr "Santrauka"
 
@@ -1089,7 +1089,7 @@ msgstr "Pagrindinis"
 
 #: ../panels/display/cc-display-panel.c:494
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1684 ../panels/power/cc-power-panel.c:1695
+#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1507,7 +1507,7 @@ msgstr "Leistukai"
 msgid "Launch help browser"
 msgstr "Paleisti pagalbos naršyklę"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1601
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1604
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Nustatymai"
@@ -1805,9 +1805,6 @@ msgstr ""
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1449
 #, c-format
-#| msgid ""
-#| "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#| "disabled."
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
 "if you move forward."
@@ -1815,7 +1812,6 @@ msgstr ""
 "„%s“ šiuo metu yra susietas su „%s“, jei tęsite, šis trumpinys bus išjungtas."
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1456
-#| msgid "_Reassign"
 msgid "_Assign"
 msgstr "_Priskirti"
 
@@ -1965,11 +1961,11 @@ msgstr "Vienas paspaudimas, antraeilis mygtukas"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:366
+#: ../panels/network/cc-network-panel.c:369
 msgid "Air_plane Mode"
 msgstr "_Skrydžio veiksena"
 
-#: ../panels/network/cc-network-panel.c:974
+#: ../panels/network/cc-network-panel.c:977
 msgid "Network proxy"
 msgstr "Tarpinis tinklo serveris"
 
@@ -1977,14 +1973,14 @@ msgstr "Tarpinis tinklo serveris"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1153 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1156 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1298
+#: ../panels/network/cc-network-panel.c:1301
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemos tinklo tarnybos nesuderinamos su šia versija."
 
@@ -3591,7 +3587,7 @@ msgid "Show Details in Lock Screen"
 msgstr "Rodyti detales užrakinimo ekrano"
 
 #: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1690 ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
 #: ../panels/privacy/cc-privacy-panel.c:84
 #: ../panels/privacy/cc-privacy-panel.c:124
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3722,11 +3718,11 @@ msgstr ""
 "Paskyros pridėjimas leidžia jūsų programoms ją prieiti dokumentams, paštui, "
 "kontaktams, kalendoriui, pokalbiams ir kt."
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:192
 msgid "Unknown time"
 msgstr "Nežinomas laikas"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:198
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -3734,7 +3730,7 @@ msgstr[0] "%i minutė"
 msgstr[1] "%i minutės"
 msgstr[2] "%i minučių"
 
-#: ../panels/power/cc-power-panel.c:201
+#: ../panels/power/cc-power-panel.c:210
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3744,19 +3740,19 @@ msgstr[2] "%i valandų"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:209
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:219
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "valanda"
 msgstr[1] "valandos"
 msgstr[2] "valandų"
 
-#: ../panels/power/cc-power-panel.c:211
+#: ../panels/power/cc-power-panel.c:220
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutė"
@@ -3764,208 +3760,208 @@ msgstr[1] "minutės"
 msgstr[2] "minučių"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:230
+#: ../panels/power/cc-power-panel.c:239
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s iki pilno įkrovimo"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:237
+#: ../panels/power/cc-power-panel.c:246
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Įspėjame: liko %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:251
 #, c-format
 msgid "%s remaining"
 msgstr "Liko %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:247 ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
 msgid "Fully charged"
 msgstr "Pilnai įkrautas"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:251 ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
 msgid "Empty"
 msgstr "Tuščia"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:266
+#: ../panels/power/cc-power-panel.c:275
 msgid "Charging"
 msgstr "Įkraunama"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:271
+#: ../panels/power/cc-power-panel.c:280
 msgid "Discharging"
 msgstr "Įšsikrauna"
 
-#: ../panels/power/cc-power-panel.c:396
+#: ../panels/power/cc-power-panel.c:405
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Pagrindinė"
 
-#: ../panels/power/cc-power-panel.c:398
+#: ../panels/power/cc-power-panel.c:407
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Papildoma"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:470
+#: ../panels/power/cc-power-panel.c:479
 msgid "Wireless mouse"
 msgstr "Belaidė pelė"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:473
+#: ../panels/power/cc-power-panel.c:482
 msgid "Wireless keyboard"
 msgstr "Belaidė klaviatūra"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:476
+#: ../panels/power/cc-power-panel.c:485
 msgid "Uninterruptible power supply"
 msgstr "Nenutrūkstamos srovės šaltinis"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:488
 msgid "Personal digital assistant"
 msgstr "Asmeninis skaitmeninis pagalbininkas"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:491
 msgid "Cellphone"
 msgstr "Mobilusis telefonas"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:494
 msgid "Media player"
 msgstr "Daugialypės terpės grotuvas"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:497
 msgid "Tablet"
 msgstr "Planšetė"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:500
 msgid "Computer"
 msgstr "Kompiuteris"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:494 ../panels/power/cc-power-panel.c:717
-#: ../panels/power/cc-power-panel.c:2019
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
+#: ../panels/power/cc-power-panel.c:2030
 msgid "Battery"
 msgstr "Akumuliatorius"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:540
+#: ../panels/power/cc-power-panel.c:549
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Įkraunama"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:556
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Įspėjimas"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:561
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Žemas"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:566
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Geras"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:571
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Pilnai įkrautas"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tuščia"
 
-#: ../panels/power/cc-power-panel.c:715
+#: ../panels/power/cc-power-panel.c:724
 msgid "Batteries"
 msgstr "Baterijos"
 
-#: ../panels/power/cc-power-panel.c:1117
+#: ../panels/power/cc-power-panel.c:1126
 msgid "When _idle"
 msgstr "Kai la_isva"
 
-#: ../panels/power/cc-power-panel.c:1445
+#: ../panels/power/cc-power-panel.c:1454
 msgid "Power Saving"
 msgstr "Energijos taupymas"
 
-#: ../panels/power/cc-power-panel.c:1473
+#: ../panels/power/cc-power-panel.c:1482
 msgid "_Screen brightness"
 msgstr "_Ekrano ryškumas"
 
-#: ../panels/power/cc-power-panel.c:1479
+#: ../panels/power/cc-power-panel.c:1488
 msgid "_Keyboard brightness"
 msgstr "_Klaviatūros ryškumas"
 
-#: ../panels/power/cc-power-panel.c:1489
+#: ../panels/power/cc-power-panel.c:1498
 msgid "_Dim screen when inactive"
 msgstr "_Pritemdyti ekraną, kai kompiuteris nenaudojamas"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1523
 msgid "_Blank screen"
 msgstr "_Tuščias ekranas"
 
-#: ../panels/power/cc-power-panel.c:1551
+#: ../panels/power/cc-power-panel.c:1560
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1556
+#: ../panels/power/cc-power-panel.c:1565
 msgid "Turns off wireless devices"
 msgstr "Išjungia visus belaidžius įrenginius"
 
-#: ../panels/power/cc-power-panel.c:1581
+#: ../panels/power/cc-power-panel.c:1590
 msgid "_Mobile broadband"
 msgstr "_Mobilus plačiajuostis"
 
-#: ../panels/power/cc-power-panel.c:1586
+#: ../panels/power/cc-power-panel.c:1595
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Išjungia mobilius plačiajuosčius (3G, 4G, WiMax, ir kt.) įrenginius"
 
-#: ../panels/power/cc-power-panel.c:1635
+#: ../panels/power/cc-power-panel.c:1645
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1686
+#: ../panels/power/cc-power-panel.c:1697
 msgid "When on battery power"
 msgstr "Naudojant baterijos energiją"
 
-#: ../panels/power/cc-power-panel.c:1688
+#: ../panels/power/cc-power-panel.c:1699
 msgid "When plugged in"
 msgstr "Prijungus prie elektros tinklo"
 
-#: ../panels/power/cc-power-panel.c:1818
+#: ../panels/power/cc-power-panel.c:1829
 msgid "Suspend & Power Off"
 msgstr "Užmigdyti ir išjungti"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1862
 msgid "_Automatic suspend"
 msgstr "_Automatinis užmigdymas"
 
-#: ../panels/power/cc-power-panel.c:1875
+#: ../panels/power/cc-power-panel.c:1886
 msgid "When battery power is _critical"
 msgstr "Kai baterijos įkrovos lygis _kritiškai žemas"
 
-#: ../panels/power/cc-power-panel.c:1930
+#: ../panels/power/cc-power-panel.c:1941
 msgid "Power Off"
 msgstr "Išjungti"
 
-#: ../panels/power/cc-power-panel.c:2066
+#: ../panels/power/cc-power-panel.c:2077
 msgid "Devices"
 msgstr "Įrenginiai"
 
@@ -4874,7 +4870,6 @@ msgid "Privacy Policy"
 msgstr "Privatumo politika"
 
 #: ../panels/privacy/privacy.ui.h:42
-#| msgid "Location: %s"
 msgid "_Location Services"
 msgstr "_Vietos tarnybos"
 
@@ -4900,34 +4895,34 @@ msgstr "Nerasta regionų"
 msgid "No input sources found"
 msgstr "Nerasta įvesties šaltinių"
 
-#: ../panels/region/cc-input-chooser.c:1076
+#: ../panels/region/cc-input-chooser.c:1083
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Kita"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:892
+#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Pakeitimams pritaikyti reikia perleisti seansą"
 
-#: ../panels/region/cc-region-panel.c:240
-#: ../panels/user-accounts/um-user-panel.c:893
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:904
 msgid "Restart Now"
 msgstr "Perleisti dabar"
 
-#: ../panels/region/cc-region-panel.c:858
+#: ../panels/region/cc-region-panel.c:862
 msgid "No input source selected"
 msgstr "Nepasirinktas įvesties šaltinis"
 
-#: ../panels/region/cc-region-panel.c:1088
+#: ../panels/region/cc-region-panel.c:1092
 msgid "Sorry"
 msgstr "Atleiskite"
 
-#: ../panels/region/cc-region-panel.c:1090
+#: ../panels/region/cc-region-panel.c:1094
 msgid "Input methods can't be used on the login screen"
 msgstr "Įvesties metodų negalima naudoti prisijungimo ekrane"
 
-#: ../panels/region/cc-region-panel.c:1727
+#: ../panels/region/cc-region-panel.c:1731
 msgid "Login Screen"
 msgstr "Prisijungimo ekranas"
 
@@ -5064,7 +5059,7 @@ msgstr "Pasirinkite vietą"
 msgid "_OK"
 msgstr "_Gerai"
 
-#: ../panels/search/cc-search-panel.c:176
+#: ../panels/search/cc-search-panel.c:177
 msgid "No applications found"
 msgstr "Nerasta programų"
 
@@ -5155,7 +5150,7 @@ msgstr ""
 "Reikia patvirtinti tapatybę nuotoliniams prisijungimui įjungti ar išjungti"
 
 #. Label
-#: ../panels/sharing/cc-sharing-networks.c:299
+#: ../panels/sharing/cc-sharing-networks.c:303
 msgid "No networks selected for sharing"
 msgstr "Nėra pasirinktų bendrinimui tinklų"
 
@@ -5401,65 +5396,65 @@ msgstr "_Tikrinti garsiakalbius"
 msgid "Peak detect"
 msgstr "Viršūnių aptikimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1509
+#: ../panels/sound/gvc-mixer-dialog.c:1501
 #: ../panels/sound/gvc-sound-theme-chooser.c:594
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1528
+#: ../panels/sound/gvc-mixer-dialog.c:1520
 msgid "Device"
 msgstr "Įrenginys"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1591
+#: ../panels/sound/gvc-mixer-dialog.c:1583
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s garsiakalbių testavimas"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1649
+#: ../panels/sound/gvc-mixer-dialog.c:1641
 msgid "_Output volume:"
 msgstr "_Išvesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1663
+#: ../panels/sound/gvc-mixer-dialog.c:1655
 msgid "Output"
 msgstr "Išvestis"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1668
+#: ../panels/sound/gvc-mixer-dialog.c:1660
 msgid "C_hoose a device for sound output:"
 msgstr "_Pasirinkite garso išvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1693
+#: ../panels/sound/gvc-mixer-dialog.c:1685
 msgid "Settings for the selected device:"
 msgstr "Pasirinkto įrenginio nustatymai:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1704
+#: ../panels/sound/gvc-mixer-dialog.c:1696
 msgid "Input"
 msgstr "Įvestis"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1711
+#: ../panels/sound/gvc-mixer-dialog.c:1703
 msgid "_Input volume:"
 msgstr "Į_vesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1734
+#: ../panels/sound/gvc-mixer-dialog.c:1726
 msgid "Input level:"
 msgstr "Įvesties lygmuo:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1762
+#: ../panels/sound/gvc-mixer-dialog.c:1754
 msgid "C_hoose a device for sound input:"
 msgstr "_Pasirinkite garso įvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1789
+#: ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Sound Effects"
 msgstr "Garso efektai"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1788
 msgid "_Alert volume:"
 msgstr "_Įspėjimų garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1809
+#: ../panels/sound/gvc-mixer-dialog.c:1801
 msgid "Applications"
 msgstr "Programos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1813
+#: ../panels/sound/gvc-mixer-dialog.c:1805
 msgid "No application is currently playing or recording audio."
 msgstr "Jokia programa šiuo metu negroja ir neįrašinėja garso."
 
@@ -5635,7 +5630,8 @@ msgid "_Disable if two keys are pressed together"
 msgstr "Iš_jungti, jei du klavišai paspaudžiami kartu"
 
 #: ../panels/universal-access/uap.ui.h:31
-msgid "Beep when a _modifer key is pressed"
+#| msgid "Beep when a _modifer key is pressed"
+msgid "Beep when a _modifier key is pressed"
 msgstr "Pyptelėti, kai paspaustas _modifikatorius"
 
 #: ../panels/universal-access/uap.ui.h:32
@@ -6074,7 +6070,7 @@ msgid "Right little finger"
 msgstr "Dešinysis mažasis pirštas"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:687
+#: ../panels/user-accounts/um-fingerprint-dialog.c:689
 msgid "Enable Fingerprint Login"
 msgstr "Leisti prisijungti piršto antspaudu"
 
@@ -6443,15 +6439,15 @@ msgstr ""
 "Ar norite ištrinti įrašytus pirštų antspaudus, kad būtų išjungtas "
 "prisijungimas pirštų antspaudais?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:444
+#: ../panels/user-accounts/um-fingerprint-dialog.c:446
 msgid "Done!"
 msgstr "Baigta!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:505
-#: ../panels/user-accounts/um-fingerprint-dialog.c:547
+#: ../panels/user-accounts/um-fingerprint-dialog.c:507
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Nepavyko pasiekti įrenginio „%s“"
@@ -6459,16 +6455,16 @@ msgstr "Nepavyko pasiekti įrenginio „%s“"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:588
+#: ../panels/user-accounts/um-fingerprint-dialog.c:590
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Nepavyko pradėti piršto antspaudo nuskaitymo įrenginiu „%s“"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:638
+#: ../panels/user-accounts/um-fingerprint-dialog.c:640
 msgid "Could not access any fingerprint readers"
 msgstr "Nepavyko pasiekti pirštų antspaudų skaitytuvo"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:639
+#: ../panels/user-accounts/um-fingerprint-dialog.c:641
 msgid "Please contact your system administrator for help."
 msgstr "Susisiekite su sistemos administratoriumi, jei reikia pagalbos."
 
@@ -6477,7 +6473,7 @@ msgstr "Susisiekite su sistemos administratoriumi, jei reikia pagalbos."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:721
+#: ../panels/user-accounts/um-fingerprint-dialog.c:723
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6486,11 +6482,11 @@ msgstr ""
 "Jei norite prisijungti pirštų antspaudu, turite įrašyti bent vieną iš savo "
 "pirštų antspaudų įrenginiu „%s“."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:728
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Selecting finger"
 msgstr "Pasirinkite pirštą"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:729
+#: ../panels/user-accounts/um-fingerprint-dialog.c:731
 msgid "Enrolling fingerprints"
 msgstr "Įregistruojami pirštų atspaudai"
 
@@ -6677,15 +6673,15 @@ msgstr "Joks"
 msgid "Logged in"
 msgstr "Prisijunges prie"
 
-#: ../panels/user-accounts/um-user-panel.c:1067
+#: ../panels/user-accounts/um-user-panel.c:1084
 msgid "Failed to contact the accounts service"
 msgstr "Nepavyko susisiekti su paskyrų tarnyba"
 
-#: ../panels/user-accounts/um-user-panel.c:1069
+#: ../panels/user-accounts/um-user-panel.c:1086
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Įsitikinkite, kad AccountService yra įdiegta ir įjungta."
 
-#: ../panels/user-accounts/um-user-panel.c:1110
+#: ../panels/user-accounts/um-user-panel.c:1127
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6693,12 +6689,12 @@ msgstr ""
 "Pakeitimams atlikti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1148
+#: ../panels/user-accounts/um-user-panel.c:1165
 msgid "Create a user account"
 msgstr "Sukurti naują paskyrą"
 
-#: ../panels/user-accounts/um-user-panel.c:1159
-#: ../panels/user-accounts/um-user-panel.c:1471
+#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1488
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6706,12 +6702,12 @@ msgstr ""
 "Naudotojui sukurti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1169
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
-#: ../panels/user-accounts/um-user-panel.c:1181
-#: ../panels/user-accounts/um-user-panel.c:1476
+#: ../panels/user-accounts/um-user-panel.c:1198
+#: ../panels/user-accounts/um-user-panel.c:1493
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6719,7 +6715,7 @@ msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1402
 msgid "My Account"
 msgstr "Mano paskyra"
 
@@ -7120,22 +7116,22 @@ msgstr "Žinynas"
 msgid "Quit"
 msgstr "Išeiti"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1490
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1493
 msgid "All Settings"
 msgstr "Visi nustatymai"
 
 #. Add categories
-#: ../shell/cc-window.c:876
+#: ../shell/cc-window.c:879
 msgctxt "category"
 msgid "Personal"
 msgstr "Asmeninis"
 
-#: ../shell/cc-window.c:877
+#: ../shell/cc-window.c:880
 msgctxt "category"
 msgid "Hardware"
 msgstr "Aparatinė įranga"
 
-#: ../shell/cc-window.c:878
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
