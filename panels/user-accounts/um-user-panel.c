@@ -1645,7 +1645,7 @@ setup_main_window (CcUserPanel *self)
         button = get_widget (d, "last-login-history-button");
         g_signal_connect (button, "clicked",
                           G_CALLBACK (show_history), d);
-        update_padding (button, get_widget (d, "last-login-value-label"));
+        g_signal_connect (button, "style-updated", G_CALLBACK (update_padding), get_widget (d, "last-login-value-label"));
 
         d->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
         if (d->permission != NULL) {

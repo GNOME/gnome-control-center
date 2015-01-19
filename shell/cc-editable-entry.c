@@ -568,7 +568,7 @@ entry_key_press (GtkWidget       *widget,
 }
 
 static void
-update_button_padding (CcEditableEntry *e)
+update_button_padding (CcEditableEntry *e, gpointer user_data)
 {
         CcEditableEntryPrivate *priv = e->priv;
         GtkStyleContext *context;
@@ -625,7 +625,7 @@ cc_editable_entry_init (CcEditableEntry *e)
         g_signal_connect (priv->entry, "focus-out-event", G_CALLBACK (entry_focus_out), e);
         g_signal_connect (priv->entry, "key-press-event", G_CALLBACK (entry_key_press), e);
 
-        update_button_padding (e);
+        g_signal_connect (e, "style-updated", G_CALLBACK (update_button_padding), NULL);
 
         gtk_container_add (GTK_CONTAINER (e), (GtkWidget*)priv->stack);
 

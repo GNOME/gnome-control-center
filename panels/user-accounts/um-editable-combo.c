@@ -381,7 +381,7 @@ popup_shown (GtkWidget       *widget,
 }
 
 static void
-update_button_padding (UmEditableCombo *combo)
+update_button_padding (UmEditableCombo *combo, gpointer user_data)
 {
         UmEditableComboPrivate *priv = combo->priv;
         GtkStyleContext *context;
@@ -433,7 +433,7 @@ um_editable_combo_init (UmEditableCombo *combo)
         g_signal_connect (priv->combo, "changed", G_CALLBACK (combo_changed), combo);
         g_signal_connect (priv->combo, "notify::popup-shown", G_CALLBACK (popup_shown), combo);
 
-        update_button_padding (combo);
+        g_signal_connect (combo, "style-updated", G_CALLBACK (update_button_padding), NULL);
 
         gtk_container_add (GTK_CONTAINER (combo), GTK_WIDGET (priv->stack));
 

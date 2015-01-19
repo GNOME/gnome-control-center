@@ -370,7 +370,7 @@ button_clicked (GtkWidget        *widget,
 }
 
 static void
-update_button_padding (UmEditableButton *button)
+update_button_padding (UmEditableButton *button, gpointer user_data)
 {
         UmEditableButtonPrivate *priv = button->priv;
         GtkStyleContext *context;
@@ -416,7 +416,7 @@ um_editable_button_init (UmEditableButton *button)
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), button);
 
-        update_button_padding (button);
+        g_signal_connect (button, "style-updated", G_CALLBACK (update_button_padding), NULL);
 
         gtk_container_add (GTK_CONTAINER (button), GTK_WIDGET (priv->stack));
 
