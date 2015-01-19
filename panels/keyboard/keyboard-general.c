@@ -74,7 +74,7 @@ void
 keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
 {
   if (keyboard_settings == NULL)
-    keyboard_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
+    keyboard_settings = g_settings_new ("org.gnome.desktop.peripherals.keyboard");
 
   if (interface_settings == NULL)
     interface_settings = g_settings_new ("org.gnome.desktop.interface");
