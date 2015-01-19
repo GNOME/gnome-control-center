@@ -81,7 +81,6 @@ struct _CcDisplayPanelPrivate
   GtkWidget *rotate_left_button;
   GtkWidget *upside_down_button;
   GtkWidget *rotate_right_button;
-  GtkWidget *apply_button;
   GtkWidget *dialog;
   GtkWidget *config_grid;
 
@@ -1137,7 +1136,7 @@ update_apply_button (CcDisplayPanel *panel)
   if (!gnome_rr_config_applicable (priv->current_configuration,
                                    priv->screen, NULL))
     {
-      gtk_widget_set_sensitive (priv->apply_button, FALSE);
+      gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
       return;
     }
 
@@ -1189,7 +1188,7 @@ update_apply_button (CcDisplayPanel *panel)
 
   g_object_unref (current_configuration);
 
-  gtk_widget_set_sensitive (priv->apply_button, !config_equal);
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, !config_equal);
 }
 
 static void
@@ -1504,18 +1503,17 @@ show_arrange_displays_dialog (GtkButton      *button,
   GtkWidget *content_area, *area, *vbox, *label;
   gint response;
 
-  priv->dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
+  /* Title of displays dialog when multiple monitors are present. */
+  priv->dialog = gtk_dialog_new_with_buttons (_("Arrange Combined Displays"),
+                                              GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
+                                              GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
+                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                              _("_Apply"), GTK_RESPONSE_ACCEPT,
+                                              NULL);
   g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
                     G_CALLBACK (dialog_toplevel_focus_changed), panel);
-  gtk_window_set_title (GTK_WINDOW (priv->dialog), _("Arrange Combined Displays"));
-  gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
-                                GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
-  gtk_window_set_modal (GTK_WINDOW (priv->dialog), TRUE);
-  gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Cancel"),
-                         GTK_RESPONSE_CANCEL);
-  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Apply"),
-                                              GTK_RESPONSE_ACCEPT);
-  gtk_widget_set_sensitive (priv->apply_button, FALSE);
+  gtk_dialog_set_default_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT);
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
 
@@ -1557,7 +1555,6 @@ show_arrange_displays_dialog (GtkButton      *button,
       on_screen_changed (panel);
     }
 
-  priv->apply_button = NULL;
   gtk_widget_destroy (priv->dialog);
   priv->dialog = NULL;
 }
@@ -1939,20 +1936,16 @@ show_setup_dialog (CcDisplayPanel *panel)
   output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                gnome_rr_output_info_get_name (priv->current_output));
 
-
-  priv->dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
+  priv->dialog = gtk_dialog_new_with_buttons (gnome_rr_output_info_get_display_name (priv->current_output),
+                                              GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
+                                              GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
+                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                              _("_Apply"), GTK_RESPONSE_ACCEPT,
+                                              NULL);
   g_signal_connect (priv->dialog, "notify::has-toplevel-focus",
                     G_CALLBACK (dialog_toplevel_focus_changed), panel);
-  gtk_window_set_title (GTK_WINDOW (priv->dialog),
-                        gnome_rr_output_info_get_display_name (priv->current_output));
-  gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
-                                GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))));
-  gtk_window_set_modal (GTK_WINDOW (priv->dialog), TRUE);
-  gtk_dialog_add_button (GTK_DIALOG (priv->dialog), _("_Cancel"),
-                         GTK_RESPONSE_CANCEL);
-  priv->apply_button = gtk_dialog_add_button (GTK_DIALOG (priv->dialog),
-                                              _("_Apply"), GTK_RESPONSE_ACCEPT);
-  gtk_widget_set_sensitive (priv->apply_button, FALSE);
+  gtk_dialog_set_default_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT);
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
   gtk_window_set_resizable (GTK_WINDOW (priv->dialog), FALSE);
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
@@ -2276,7 +2269,6 @@ show_setup_dialog (CcDisplayPanel *panel)
   priv->rotate_left_button = NULL;
   priv->rotate_right_button = NULL;
   priv->res_combo = NULL;
-  priv->apply_button = NULL;
   gtk_widget_destroy (priv->dialog);
   priv->dialog = NULL;
 }
