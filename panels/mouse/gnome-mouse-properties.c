@@ -30,6 +30,8 @@
 #include <gnome-settings-daemon/gsd-enums.h>
 #include <math.h>
 
+#include <gdesktop-enums.h>
+
 #include "gnome-mouse-properties.h"
 #include "gsd-input-helper.h"
 
@@ -49,6 +51,7 @@ struct _CcMousePropertiesPrivate
 	GtkBuilder *builder;
 
 	GSettings *mouse_settings;
+	GSettings *gsd_mouse_settings;
 	GSettings *touchpad_settings;
 
 	GdkDeviceManager *device_manager;
@@ -92,7 +95,6 @@ scrollmethod_changed_event (GtkToggleButton *button, CcMousePropertiesPrivate *d
 		method = GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING;
 
 	g_settings_set_enum (d->touchpad_settings, "scroll-method", method);
-	g_settings_set_boolean (d->touchpad_settings, "horiz-scroll-enabled", TRUE);
 }
 
 static void
@@ -144,41 +146,56 @@ synaptics_check_capabilities (CcMousePropertiesPrivate *d)
 	XFreeDeviceList (devicelist);
 }
 
-static void
-pointer_speed_scale_event (GtkRange *scale, CcMousePropertiesPrivate *d)
+static gboolean
+get_touchpad_enabled (GSettings *settings)
 {
-	gdouble value;
-	GSettings *settings;
-	GtkAdjustment *adjustment;
+        GDesktopDeviceSendEvents send_events;
 
-	if (GTK_WIDGET (scale) == WID ("pointer_speed_scale"))
-		settings = d->mouse_settings;
-	else
-		settings = d->touchpad_settings;
+        send_events = g_settings_get_enum (settings, "send-events");
 
-	adjustment = gtk_range_get_adjustment (scale);
-	value = gtk_adjustment_get_upper (adjustment) - gtk_range_get_value (scale) + 1;
-	g_settings_set_int (settings, "motion-threshold", value);
+        return send_events == G_DESKTOP_DEVICE_SEND_EVENTS_ENABLED;
 }
 
 static gboolean
 show_touchpad_enabling_switch (GSettings *touchpad_settings)
 {
-	gboolean enabled;
-
 	if (!touchpad_is_present())
 		return FALSE;
 
 	/* Lets show the button when the mouse/touchscreen is present */
 	if (mouse_is_present() || touchscreen_is_present())
 		return TRUE;
-	
+
 	/* Lets also show when touch pad is disabled. */
-	enabled = g_settings_get_boolean (touchpad_settings,  "touchpad-enabled");
-	if (!enabled)
+	if (!get_touchpad_enabled (touchpad_settings))
 		return TRUE;
-	
+
 	return FALSE;
+}
+
+static gboolean
+touchpad_enabled_get_mapping (GValue    *value,
+                              GVariant  *variant,
+                              gpointer   user_data)
+{
+        gboolean enabled;
+
+        enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "enabled") == 0;
+        g_value_set_boolean (value, enabled);
+
+        return TRUE;
+}
+
+static GVariant *
+touchpad_enabled_set_mapping (const GValue              *value,
+                              const GVariantType        *type,
+                              gpointer                   user_data)
+{
+        gboolean enabled;
+
+        enabled = g_value_get_boolean (value);
+
+        return g_variant_new_string (enabled ? "enabled" : "disabled");
 }
 
 /* Set up the property editors in the dialog. */
@@ -199,7 +216,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 		G_CALLBACK (orientation_radio_button_release_event), NULL);
 
 	/* Double-click time */
-	g_settings_bind (d->mouse_settings, "double-click",
+	g_settings_bind (d->gsd_mouse_settings, "double-click",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("double_click_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
@@ -207,12 +224,11 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	mouse_present = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse_vbox"), mouse_present);
 
-	g_settings_bind (d->mouse_settings, "motion-acceleration",
+	gtk_scale_add_mark (GTK_SCALE (WID ("pointer_speed_scale")), 0,
+			    GTK_POS_TOP, NULL);
+	g_settings_bind (d->mouse_settings, "speed",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("pointer_speed_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
-
-	g_signal_connect (WID ("pointer_speed_scale"), "value-changed",
-			  G_CALLBACK (pointer_speed_scale_event), d);
 
 	/* Trackpad page */
 	touchpad_present = touchpad_is_present ();
@@ -220,28 +236,30 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
 				show_touchpad_enabling_switch (d->touchpad_settings));
 
-	g_settings_bind (d->touchpad_settings, "touchpad-enabled",
-			 WID ("touchpad_enabled_switch"), "active",
-			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (d->touchpad_settings, "touchpad-enabled",
-			 WID ("touchpad_options_box"), "sensitive",
-			 G_SETTINGS_BIND_GET);
+	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
+				      WID ("touchpad_enabled_switch"), "active",
+				      G_SETTINGS_BIND_DEFAULT,
+				      touchpad_enabled_get_mapping,
+				      touchpad_enabled_set_mapping,
+				      NULL, NULL);
+	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
+				      WID ("touchpad_options_box"), "sensitive",
+				      G_SETTINGS_BIND_GET,
+				      touchpad_enabled_get_mapping,
+				      touchpad_enabled_set_mapping,
+				      NULL, NULL);
 
-	g_settings_bind (d->touchpad_settings, "disable-while-typing",
-			 WID ("disable_w_typing_toggle"), "active",
-			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (d->touchpad_settings, "tap-to-click",
 			 WID ("tap_to_click_toggle"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (d->touchpad_settings, "natural-scroll",
 			 WID ("natural_scroll_toggle"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (d->touchpad_settings, "motion-acceleration",
+	gtk_scale_add_mark (GTK_SCALE (WID ("touchpad_pointer_speed_scale")), 0,
+			    GTK_POS_TOP, NULL);
+	g_settings_bind (d->touchpad_settings, "speed",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_pointer_speed_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
-
-	g_signal_connect (WID ("touchpad_pointer_speed_scale"), "value-changed",
-			  G_CALLBACK (pointer_speed_scale_event), d);
 
 	if (touchpad_present) {
 		synaptics_check_capabilities (d);
@@ -310,6 +328,7 @@ cc_mouse_properties_finalize (GObject *object)
 	CcMousePropertiesPrivate *d = CC_MOUSE_PROPERTIES (object)->priv;
 
 	g_clear_object (&d->mouse_settings);
+	g_clear_object (&d->gsd_mouse_settings);
 	g_clear_object (&d->touchpad_settings);
 	g_clear_object (&d->builder);
 
@@ -346,8 +365,9 @@ cc_mouse_properties_init (CcMouseProperties *object)
 				       "/org/gnome/control-center/mouse/gnome-mouse-properties.ui",
 				       &error);
 
-	d->mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
-	d->touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
+	d->mouse_settings = g_settings_new ("org.gnome.desktop.peripherals.mouse");
+	d->gsd_mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
+	d->touchpad_settings = g_settings_new ("org.gnome.desktop.peripherals.touchpad");
 
 	d->device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
 	d->device_added_id = g_signal_connect (d->device_manager, "device-added",
