@@ -19,6 +19,8 @@
 
 #include "config.h"
 
+#include <string.h>
+
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 
@@ -30,6 +32,11 @@
 
 #define INPUT_DEVICES_SCHEMA "org.gnome.settings-daemon.peripherals.input-devices"
 #define KEY_HOTPLUG_COMMAND  "hotplug-command"
+
+#define ABS_MT_X "Abs MT Position X"
+#define ABS_MT_Y "Abs MT Position Y"
+#define ABS_X "Abs X"
+#define ABS_Y "Abs Y"
 
 typedef gboolean (* InfoIdentifyFunc) (XDeviceInfo *device_info);
 typedef gboolean (* DeviceIdentifyFunc) (XDevice *xdevice);
@@ -116,6 +123,21 @@ supports_xinput_devices (void)
 }
 
 gboolean
+supports_xtest (void)
+{
+        gint op_code, event, error;
+        gboolean retval;
+
+        retval = XQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+				  "XTEST",
+				  &op_code,
+				  &event,
+				  &error);
+
+	return retval;
+}
+
+gboolean
 supports_xinput2_devices (int *opcode)
 {
         int major, minor;
@@ -126,18 +148,11 @@ supports_xinput2_devices (int *opcode)
         gdk_error_trap_push ();
 
         major = 2;
-        minor = 0;
+        minor = 3;
 
         if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
                 gdk_error_trap_pop_ignored ();
-                /* try for 2.2, maybe gtk has already announced 2.2 support */
-                gdk_error_trap_push ();
-                major = 2;
-                minor = 2;
-                if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
-                    gdk_error_trap_pop_ignored ();
                     return FALSE;
-                }
         }
         gdk_error_trap_pop_ignored ();
 
@@ -188,9 +203,34 @@ device_info_is_touchscreen (XDeviceInfo *device_info)
 }
 
 gboolean
+device_info_is_tablet (XDeviceInfo *device_info)
+{
+        /* Note that this doesn't match Wacom tablets */
+        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TABLET, False));
+}
+
+gboolean
 device_info_is_mouse (XDeviceInfo *device_info)
 {
         return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_MOUSE, False));
+}
+
+gboolean
+device_info_is_trackball (XDeviceInfo *device_info)
+{
+        gboolean retval;
+
+        retval = (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TRACKBALL, False));
+        if (retval == FALSE &&
+            device_info->name != NULL) {
+                char *lowercase;
+
+                lowercase = g_ascii_strdown (device_info->name, -1);
+                retval = strstr (lowercase, "trackball") != NULL;
+                g_free (lowercase);
+        }
+
+        return retval;
 }
 
 static gboolean
@@ -229,12 +269,9 @@ device_type_is_present (InfoIdentifyFunc info_func,
                         continue;
 
                 retval = (device_func) (device);
-                if (retval) {
-                        XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
+                xdevice_close (device);
+                if (retval)
                         break;
-                }
-
-                XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
         }
         XFreeDeviceList (device_info);
 
@@ -259,6 +296,13 @@ gboolean
 mouse_is_present (void)
 {
         return device_type_is_present (device_info_is_mouse,
+                                       NULL);
+}
+
+gboolean
+trackball_is_present (void)
+{
+        return device_type_is_present (device_info_is_trackball,
                                        NULL);
 }
 
@@ -456,11 +500,13 @@ run_custom_command (GdkDevice              *device,
                     CustomCommand           command)
 {
         GSettings *settings;
+        GError *error = NULL;
         char *cmd;
         char *argv[7];
         int exit_status;
         gboolean rc;
         int id;
+        char *out;
 
         settings = g_settings_new (INPUT_DEVICES_SCHEMA);
         cmd = g_settings_get_string (settings, KEY_HOTPLUG_COMMAND);
@@ -479,20 +525,33 @@ run_custom_command (GdkDevice              *device,
         argv[2] = (char *) custom_command_to_string (command);
         argv[3] = "-i";
         argv[4] = g_strdup_printf ("%d", id);
-        argv[5] = g_strdup_printf ("%s", gdk_device_get_name (device));
+        argv[5] = (char*) gdk_device_get_name (device);
         argv[6] = NULL;
 
-        rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
-                           NULL, NULL, NULL, NULL, &exit_status, NULL);
+        out = g_strjoinv (" ", argv);
+        g_debug ("About to launch command: %s", out);
+        g_free (out);
 
-        if (rc == FALSE)
-                g_warning ("Couldn't execute command '%s', verify that this is a valid command.", cmd);
+        rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
+                           NULL, NULL, NULL, NULL, &exit_status, &error);
+
+        if (rc == FALSE) {
+                g_warning ("Couldn't execute command '%s', verify that this is a valid command: %s", cmd, error->message);
+                g_clear_error (&error);
+        }
 
         g_free (argv[0]);
         g_free (argv[4]);
-        g_free (argv[5]);
 
-        return (exit_status == 0);
+        if (!g_spawn_check_exit_status (exit_status, &error)) {
+                if (g_error_matches (error, G_SPAWN_EXIT_ERROR, 1)) {
+                        g_clear_error (&error);
+                        return TRUE;
+                }
+                g_clear_error (&error);
+        }
+
+        return FALSE;
 }
 
 GList *
@@ -528,4 +587,115 @@ get_disabled_devices (GdkDeviceManager *manager)
         XFreeDeviceList (device_info);
 
         return ret;
+}
+
+const char *
+xdevice_get_wacom_tool_type (int deviceid)
+{
+        unsigned long nitems, bytes_after;
+        unsigned char *data = NULL;
+        Atom prop, realtype, tool;
+        GdkDisplay *display;
+        int realformat, rc;
+        const gchar *ret = NULL;
+
+        gdk_error_trap_push ();
+
+        display = gdk_display_get_default ();
+        prop = gdk_x11_get_xatom_by_name ("Wacom Tool Type");
+
+        rc = XIGetProperty (GDK_DISPLAY_XDISPLAY (display),
+                            deviceid, prop, 0, 1, False,
+                            XA_ATOM, &realtype, &realformat, &nitems,
+                            &bytes_after, &data);
+
+        gdk_error_trap_pop_ignored ();
+
+        if (rc != Success || nitems == 0)
+                return NULL;
+
+        if (realtype == XA_ATOM) {
+                tool = *((Atom*) data);
+                ret = gdk_x11_get_xatom_name (tool);
+        }
+
+        XFree (data);
+
+        return ret;
+}
+
+void
+xdevice_close (XDevice *xdevice)
+{
+    gdk_error_trap_push ();
+    XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+    gdk_error_trap_pop_ignored();
+}
+
+gboolean
+xdevice_get_dimensions (int    deviceid,
+                        guint *width,
+                        guint *height)
+{
+        GdkDisplay *display = gdk_display_get_default ();
+        XIDeviceInfo *info;
+        guint *value, w, h;
+        int i, n_info;
+
+        info = XIQueryDevice (GDK_DISPLAY_XDISPLAY (display), deviceid, &n_info);
+        *width = *height = w = h = 0;
+
+        if (!info)
+                return FALSE;
+
+        for (i = 0; i < info->num_classes; i++) {
+                XIValuatorClassInfo *valuator_info;
+
+                if (info->classes[i]->type != XIValuatorClass)
+                        continue;
+
+                valuator_info = (XIValuatorClassInfo *) info->classes[i];
+
+                if (valuator_info->label == gdk_x11_get_xatom_by_name_for_display (display, ABS_X) ||
+                    valuator_info->label == gdk_x11_get_xatom_by_name_for_display (display, ABS_MT_X))
+                        value = &w;
+                else if (valuator_info->label == gdk_x11_get_xatom_by_name_for_display (display, ABS_Y) ||
+                         valuator_info->label == gdk_x11_get_xatom_by_name_for_display (display, ABS_MT_Y))
+                        value = &h;
+                else
+                        continue;
+
+                *value = (valuator_info->max -  valuator_info->min) * 1000 / valuator_info->resolution;
+        }
+
+        *width = w;
+        *height = h;
+
+        XIFreeDeviceInfo (info);
+
+        return (w != 0 && h != 0);
+}
+
+gboolean
+xdevice_is_libinput (gint deviceid)
+{
+        GdkDisplay *display = gdk_display_get_default ();
+        gulong nitems, bytes_after;
+        gint rc, format;
+        guchar *data;
+        Atom type;
+
+        gdk_error_trap_push ();
+
+        /* Lookup a libinput driver specific property */
+        rc = XIGetProperty (GDK_DISPLAY_XDISPLAY (display), deviceid,
+                            gdk_x11_get_xatom_by_name ("libinput Send Events Mode Enabled"),
+                            0, 1, False, XA_INTEGER, &type, &format, &nitems, &bytes_after, &data);
+
+        if (rc == Success)
+                XFree (data);
+
+        gdk_error_trap_pop_ignored ();
+
+        return rc == Success && nitems > 0;
 }

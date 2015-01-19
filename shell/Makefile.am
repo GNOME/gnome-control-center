@@ -54,6 +54,7 @@ gnome_control_center_LDADD =						\
 	$(CHEESE_LIBS)							\
 	$(top_builddir)/libgd/libgd.la					\
 	$(top_builddir)/panels/common/liblanguage.la			\
+	$(top_builddir)/panels/common/libdevice.la			\
 	$(top_builddir)/panels/background/libbackground.la		\
 	$(top_builddir)/panels/color/libcolor.la			\
 	$(top_builddir)/panels/datetime/libdate_time.la			\

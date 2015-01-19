@@ -37,6 +37,8 @@
 
 #include "gsd-enums.h"
 #include "gsd-wacom-device.h"
+#include "gsd-device-manager.h"
+#include "gsd-device-manager-x11.h"
 
 #define GSD_WACOM_STYLUS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_STYLUS, GsdWacomStylusPrivate))
 
@@ -500,10 +502,11 @@ get_device_type (XDeviceInfo *dev)
                                  device, prop, 0, 1, False,
                                  XA_ATOM, &realtype, &realformat, &nitems,
                                  &bytes_after, &data);
-        XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 
         if (gdk_error_trap_pop () || rc != Success || realtype == None)
                 ret = WACOM_TYPE_INVALID;
+
+        xdevice_close (device);
 
         XFree (data);
 
@@ -602,12 +605,19 @@ find_output_by_display (GnomeRRScreen *rr_screen, GsdWacomDevice *device)
 	GVariant *display;
 	const gchar **edid;
 	GnomeRROutput *ret;
+	GsdDevice *gsd_device;
 
 	if (device == NULL)
 		return NULL;
 
+	gsd_device = gsd_x11_device_manager_lookup_gdk_device (GSD_X11_DEVICE_MANAGER (gsd_device_manager_get ()),
+							       device->priv->gdk_device);
+
+	if (gsd_device == NULL)
+		return NULL;
+
 	ret      = NULL;
-	tablet   = device->priv->wacom_settings;
+	tablet   = gsd_device_get_settings (gsd_device);
 	display  = g_settings_get_value (tablet, "display");
 	edid     = g_variant_get_strv (display, &n);
 
@@ -624,6 +634,7 @@ find_output_by_display (GnomeRRScreen *rr_screen, GsdWacomDevice *device)
 out:
 	g_free (edid);
 	g_variant_unref (display);
+	g_object_unref (tablet);
 
 	return ret;
 }
@@ -690,12 +701,23 @@ set_display_by_output (GsdWacomDevice  *device,
 	gsize        nvalues;
 	gchar       *o_vendor, *o_product, *o_serial;
 	const gchar *values[3];
+	GsdDevice *gsd_device;
 
-	tablet  = gsd_wacom_device_get_settings (device);
+	if (device == NULL)
+		return;
+
+	gsd_device = gsd_x11_device_manager_lookup_gdk_device (GSD_X11_DEVICE_MANAGER (gsd_device_manager_get ()),
+							       device->priv->gdk_device);
+
+	if (gsd_device == NULL)
+		return;
+
+	tablet  = gsd_device_get_settings (gsd_device);
 	c_array = g_settings_get_value (tablet, "display");
 	g_variant_get_strv (c_array, &nvalues);
 	if (nvalues != 3) {
 		g_warning ("Unable set set display property. Got %"G_GSIZE_FORMAT" items; expected %d items.\n", nvalues, 4);
+		g_object_unref (tablet);
 		return;
 	}
 
@@ -719,6 +741,7 @@ set_display_by_output (GsdWacomDevice  *device,
 	g_free (o_vendor);
 	g_free (o_product);
 	g_free (o_serial);
+	g_object_unref (tablet);
 }
 
 static GsdWacomRotation
@@ -777,34 +800,6 @@ find_output (GnomeRRScreen  *rr_screen,
 	return rr_output;
 }
 
-static void
-calculate_transformation_matrix (const GdkRectangle mapped, const GdkRectangle desktop, float matrix[NUM_ELEMS_MATRIX])
-{
-	float x_scale = (float)mapped.x / desktop.width;
-	float y_scale = (float)mapped.y / desktop.height;
-	float width_scale  = (float)mapped.width / desktop.width;
-	float height_scale = (float)mapped.height / desktop.height;
-
-	matrix[0] = width_scale;
-	matrix[1] = 0.0f;
-	matrix[2] = x_scale;
-
-	matrix[3] = 0.0f;
-	matrix[4] = height_scale;
-	matrix[5] = y_scale;
-
-	matrix[6] = 0.0f;
-	matrix[7] = 0.0f;
-	matrix[8] = 1.0f;
-
-	g_debug ("Matrix is %f,%f,%f,%f,%f,%f,%f,%f,%f.",
-	         matrix[0], matrix[1], matrix[2],
-	         matrix[3], matrix[4], matrix[5],
-	         matrix[6], matrix[7], matrix[8]);
-
-	return;
-}
-
 int
 gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 {
@@ -854,59 +849,26 @@ gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 	return gdk_screen_get_monitor_at_point (gdk_screen_get_default (), area[0], area[1]);
 }
 
-gboolean
-gsd_wacom_device_get_display_matrix (GsdWacomDevice *device, float matrix[NUM_ELEMS_MATRIX])
-{
-	int monitor;
-	GdkRectangle display;
-	GdkRectangle desktop;
-	GdkScreen *screen = gdk_screen_get_default ();
-
-	matrix[0] = 1.0f;
-	matrix[1] = 0.0f;
-	matrix[2] = 0.0f;
-	matrix[3] = 0.0f;
-	matrix[4] = 1.0f;
-	matrix[5] = 0.0f;
-	matrix[6] = 0.0f;
-	matrix[7] = 0.0f;
-	matrix[8] = 1.0f;
-
-	monitor = gsd_wacom_device_get_display_monitor (device);
-	if (monitor < 0)
-		return FALSE;
-
-	desktop.x = 0;
-	desktop.y = 0;
-	desktop.width = gdk_screen_get_width (screen);
-	desktop.height = gdk_screen_get_height (screen);
-
-	gdk_screen_get_monitor_geometry (screen, monitor, &display);
-	calculate_transformation_matrix (display, desktop, matrix);
-	return TRUE;
-}
-
 GsdWacomRotation
 gsd_wacom_device_get_display_rotation (GsdWacomDevice *device)
 {
-	GError *error = NULL;
 	GnomeRRScreen *rr_screen;
 	GnomeRROutput *rr_output;
 	GnomeRRRotation rotation = GNOME_RR_ROTATION_0;
 
-	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
-	if (rr_screen == NULL) {
-		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
-		g_error_free (error);
-		return GSD_WACOM_ROTATION_NONE;
-	}
+	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), NULL);
 
-	rr_output = find_output (rr_screen, device);
+	if (rr_screen == NULL)
+		return GSD_WACOM_ROTATION_NONE;
+
+	rr_output = find_output_by_display (rr_screen, device);
+
 	if (rr_output) {
 		GnomeRRCrtc *crtc = gnome_rr_output_get_crtc (rr_output);
 		if (crtc)
 			rotation = gnome_rr_crtc_get_current_rotation (crtc);
 	}
+
 	g_object_unref (rr_screen);
 
 	return get_rotation_wacom (rotation);
@@ -1901,7 +1863,7 @@ gsd_wacom_device_get_area (GsdWacomDevice *device)
 				 XA_INTEGER, &realtype, &realformat, &nitems,
 				 &bytes_after, &data);
 	if (gdk_error_trap_pop () || rc != Success || realtype == None || bytes_after != 0 || nitems != 4) {
-		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+		xdevice_close (xdevice);
 		return NULL;
 	}
 
@@ -1910,7 +1872,7 @@ gsd_wacom_device_get_area (GsdWacomDevice *device)
 		device_area[i] = ((long *)data)[i];
 
 	XFree (data);
-	XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+	xdevice_close (xdevice);
 
 	return device_area;
 }
