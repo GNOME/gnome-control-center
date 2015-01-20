@@ -98,7 +98,7 @@ scrollmethod_changed_event (GtkToggleButton *button, CcMousePropertiesPrivate *d
 }
 
 static void
-synaptics_check_capabilities (CcMousePropertiesPrivate *d)
+synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 {
 	int numdevices, i;
 	XDeviceInfo *devicelist;
@@ -144,6 +144,14 @@ synaptics_check_capabilities (CcMousePropertiesPrivate *d)
 		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 	}
 	XFreeDeviceList (devicelist);
+}
+
+static void
+synaptics_check_capabilities (CcMousePropertiesPrivate *d)
+{
+	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+		synaptics_check_capabilities_x11 (d);
+	/* else we unconditionally show all touchpad knobs */
 }
 
 static gboolean
