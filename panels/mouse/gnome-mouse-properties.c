@@ -34,6 +34,7 @@
 
 #include "gnome-mouse-properties.h"
 #include "gsd-input-helper.h"
+#include "gsd-device-manager.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -54,9 +55,13 @@ struct _CcMousePropertiesPrivate
 	GSettings *gsd_mouse_settings;
 	GSettings *touchpad_settings;
 
-	GdkDeviceManager *device_manager;
+	GsdDeviceManager *device_manager;
 	guint device_added_id;
 	guint device_removed_id;
+
+	gboolean have_mouse;
+	gboolean have_touchpad;
+	gboolean have_touchscreen;
 
 	gboolean changing_scroll;
 };
@@ -165,17 +170,17 @@ get_touchpad_enabled (GSettings *settings)
 }
 
 static gboolean
-show_touchpad_enabling_switch (GSettings *touchpad_settings)
+show_touchpad_enabling_switch (CcMousePropertiesPrivate *d)
 {
-	if (!touchpad_is_present())
+	if (!d->have_touchpad)
 		return FALSE;
 
 	/* Lets show the button when the mouse/touchscreen is present */
-	if (mouse_is_present() || touchscreen_is_present())
+	if (d->have_mouse || d->have_touchscreen)
 		return TRUE;
 
 	/* Lets also show when touch pad is disabled. */
-	if (!get_touchpad_enabled (touchpad_settings))
+	if (!get_touchpad_enabled (d->touchpad_settings))
 		return TRUE;
 
 	return FALSE;
@@ -211,7 +216,6 @@ static void
 setup_dialog (CcMousePropertiesPrivate *d)
 {
 	GtkRadioButton *radio;
-	gboolean        touchpad_present, mouse_present;
 
 	/* Orientation radio buttons */
 	radio = GTK_RADIO_BUTTON (WID ("left_handed_radio"));
@@ -229,8 +233,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Mouse section */
-	mouse_present = mouse_is_present ();
-	gtk_widget_set_visible (WID ("mouse_vbox"), mouse_present);
+	gtk_widget_set_visible (WID ("mouse_vbox"), d->have_mouse);
 
 	gtk_scale_add_mark (GTK_SCALE (WID ("pointer_speed_scale")), 0,
 			    GTK_POS_TOP, NULL);
@@ -239,10 +242,9 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Trackpad page */
-	touchpad_present = touchpad_is_present ();
-	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_present);
+	gtk_widget_set_visible (WID ("touchpad_vbox"), d->have_touchpad);
 	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
-				show_touchpad_enabling_switch (d->touchpad_settings));
+				show_touchpad_enabling_switch (d));
 
 	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
 				      WID ("touchpad_enabled_switch"), "active",
@@ -269,7 +271,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_pointer_speed_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	if (touchpad_present) {
+	if (d->have_touchpad) {
 		synaptics_check_capabilities (d);
 		setup_scrollmethod_radios (d);
 	}
@@ -306,27 +308,37 @@ create_dialog (CcMousePropertiesPrivate *d)
 
 /* Callback issued when a button is clicked on the dialog */
 
+static gboolean
+have_device_type (GsdDeviceManager *manager,
+		  GsdDeviceType type)
+{
+	GList *l;
+
+	l = gsd_device_manager_list_devices (manager, type);
+	g_list_free (l);
+
+	return l != NULL;
+}
+
 static void
-device_changed (GdkDeviceManager *device_manager,
-		GdkDevice *device,
+device_changed (GsdDeviceManager *device_manager,
+		GsdDevice *device,
 		CcMousePropertiesPrivate *d)
 {
-	gboolean present;
+	d->have_touchpad = have_device_type (d->device_manager, GSD_DEVICE_TYPE_TOUCHPAD);
+	gtk_widget_set_visible (WID ("touchpad_vbox"), d->have_touchpad);
 
-	present = touchpad_is_present ();
-	gtk_widget_set_visible (WID ("touchpad_vbox"), present);
-
-	if (present) {
+	if (d->have_touchpad) {
 		d->changing_scroll = TRUE;
 		synaptics_check_capabilities (d);
 		setup_scrollmethod_radios (d);
 		d->changing_scroll = FALSE;
 	}
 
-	present = mouse_is_present ();
-	gtk_widget_set_visible (WID ("mouse_vbox"), present);
+	d->have_mouse = have_device_type (d->device_manager, GSD_DEVICE_TYPE_MOUSE);
+	gtk_widget_set_visible (WID ("mouse_vbox"), d->have_mouse);
 	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
-				show_touchpad_enabling_switch (d->touchpad_settings));
+				show_touchpad_enabling_switch (d));
 }
 
 
@@ -377,11 +389,15 @@ cc_mouse_properties_init (CcMouseProperties *object)
 	d->gsd_mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
 	d->touchpad_settings = g_settings_new ("org.gnome.desktop.peripherals.touchpad");
 
-	d->device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
+	d->device_manager = gsd_device_manager_get ();
 	d->device_added_id = g_signal_connect (d->device_manager, "device-added",
 					       G_CALLBACK (device_changed), d);
 	d->device_removed_id = g_signal_connect (d->device_manager, "device-removed",
 						 G_CALLBACK (device_changed), d);
+
+	d->have_mouse = have_device_type (d->device_manager, GSD_DEVICE_TYPE_MOUSE);
+	d->have_touchpad = have_device_type (d->device_manager, GSD_DEVICE_TYPE_TOUCHPAD);
+	d->have_touchscreen = have_device_type (d->device_manager, GSD_DEVICE_TYPE_TOUCHSCREEN);
 
 	d->changing_scroll = FALSE;
 
