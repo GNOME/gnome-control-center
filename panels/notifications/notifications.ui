@@ -12,7 +12,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkGrid" id="ccnotify-main-grid">
+          <object class="GtkBox" id="ccnotify-main-box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_start">134</property>
@@ -20,61 +20,125 @@
             <property name="margin_top">22</property>
             <property name="margin_bottom">22</property>
             <property name="orientation">vertical</property>
-            <property name="row_spacing">10</property>
+            <property name="spacing">10</property>
             <child>
-              <object class="GtkLabel" id="ccnotify-label-banners">
+              <object class="GtkFrame" id="ccnotify-switchbox-frame">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Show Pop Up Banners</property>
-                <property name="mnemonic_widget">ccnotify-switch-banners</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkListBox" id="ccnotify-switch-listbox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="selection_mode">none</property>
+                    <property name="activate_on_single_click">False</property>
+                    <child>
+                      <object class="GtkListBoxRow" id="ccnotify-listboxrow-banners">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="activatable">False</property>
+                        <property name="selectable">False</property>
+                        <child>
+                          <object class="GtkBox" id="ccnotify-box-banners">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkLabel" id="ccnotify-label-banners">
+                                <property name="height_request">48</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_start">12</property>
+                                <property name="hexpand">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Show Pop Up Banners</property>
+                                <property name="mnemonic_widget">ccnotify-switch-banners</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="ccnotify-switch-banners">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <property name="margin_end">12</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow" id="ccnotify-listboxrow-screen">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="activatable">False</property>
+                        <property name="selectable">False</property>
+                        <child>
+                          <object class="GtkBox" id="ccnotify-box-screen">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkLabel" id="ccnotify-label-lock-screen">
+                                <property name="height_request">48</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_start">12</property>
+                                <property name="hexpand">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Show in Lock Screen</property>
+                                <property name="mnemonic_widget">ccnotify-switch-lock-screen</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="ccnotify-switch-lock-screen">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <property name="margin_end">12</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="label_item">
+                  <placeholder/>
+                </child>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="ccnotify-label-lock-screen">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Show in Lock Screen</property>
-                <property name="mnemonic_widget">ccnotify-switch-lock-screen</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="ccnotify-switch-banners">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="ccnotify-switch-lock-screen">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -100,10 +164,9 @@
                 </child>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>

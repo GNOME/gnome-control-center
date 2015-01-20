@@ -172,13 +172,23 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   panel->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (w));
 
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                          "ccnotify-main-grid"));
+                                          "ccnotify-main-box"));
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (w), panel->focus_adjustment);
 
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                          "ccnotify-app-listbox"));
+                                          "ccnotify-switch-listbox"));
+  panel->sections = g_list_append (panel->sections, w);
+  panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
   g_signal_connect (w, "keynav-failed", G_CALLBACK (keynav_failed), panel);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (w),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
 
+  w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
+                                          "ccnotify-app-listbox"));
+  panel->sections = g_list_append (panel->sections, w);
+  panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
+  g_signal_connect (w, "keynav-failed", G_CALLBACK (keynav_failed), panel);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (w), (GtkListBoxSortFunc)sort_apps, NULL, NULL);
   gtk_list_box_set_header_func (GTK_LIST_BOX (w),
                                 cc_list_box_update_header_func,
@@ -188,21 +198,6 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                     G_CALLBACK (select_app), panel);
 
   build_app_store (panel);
-
-  w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                          "ccnotify-switch-banners"));
-  panel->sections = g_list_append (panel->sections, w);
-  panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
-
-  w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                          "ccnotify-switch-lock-screen"));
-  panel->sections = g_list_append (panel->sections, w);
-  panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
-
-  w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
-                                          "ccnotify-app-listbox"));
-  panel->sections = g_list_append (panel->sections, w);
-  panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
 
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
                                           "ccnotify-main-scrolled-window"));
