@@ -181,8 +181,8 @@ PKG_CHECK_MODULES(DEVICES, $COMMON_MODULES)
 PKG_CHECK_MODULES(UDEV, gudev-1.0, have_udev=yes, have_udev=no)
 if test "x$have_udev" = xyes ; then
 	AC_DEFINE(HAVE_UDEV, 1, [System has udev])
-	AM_CONDITIONAL(HAVE_UDEV, [test "x$have_udev" = "xyes"])
 fi
+AM_CONDITIONAL(HAVE_UDEV, [test "x$have_udev" = "xyes"])
 
 PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
