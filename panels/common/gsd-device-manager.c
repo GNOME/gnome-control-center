@@ -26,6 +26,7 @@
 #include "gsd-device-manager-x11.h"
 #include "gsd-device-manager-udev.h"
 #include "gsd-common-enums.h"
+#include "gnome-settings-bus.h"
 
 typedef struct _GsdDevicePrivate GsdDevicePrivate;
 typedef struct _GsdDeviceManagerPrivate GsdDeviceManagerPrivate;
@@ -265,7 +266,7 @@ gsd_device_manager_get (void)
 
 	if (!manager) {
 #ifdef HAVE_WAYLAND
-		if (!GDK_IS_X11_SCREEN (screen))) {
+		if (gnome_settings_is_wayland ()) {
 			manager = g_object_new (GSD_TYPE_UDEV_DEVICE_MANAGER,
 						NULL);
 		} else
