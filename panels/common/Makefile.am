@@ -52,7 +52,8 @@ libdevice_la_SOURCES =			\
 	gsd-device-manager.c		\
 	gsd-device-manager.h		\
 	gsd-device-manager-x11.c	\
-	gsd-device-manager-x11.h
+	gsd-device-manager-x11.h	\
+	gnome-settings-bus.h
 
 libdevice_la_LIBADD =			\
 	$(DEVICES_LIBS)
