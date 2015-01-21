@@ -90,6 +90,6 @@ INPUTFILES=				\
 
 update-from-gsd:
 	FILES="$(INPUTFILES)" DIR="$(INPUTDIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
-	git commit -m "mouse: Update from gnome-settings-daemon" $(INPUTFILES)
+	git commit -m "common: Update from gnome-settings-daemon" $(INPUTFILES)
 
 -include $(top_srcdir)/git.mk
