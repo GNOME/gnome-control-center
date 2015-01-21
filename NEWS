@@ -1,4 +1,79 @@
 ==============
+Version 3.15.4
+==============
+
+Common:
+- Lots of clean ups and porting to non-deprecated GTK+ APIs
+- Reset language chooser to original state when used the 2nd time
+- Use 'UTF-8' instead of 'utf8' as locale codeset suffix improving
+  compatibility with non-GNU libc's
+- Disable SSLv3 because of POODLE
+- Unset sort terms when search entry is programatically cleared
+- Adapted to peripheral settings schemas move to
+  gsettings-desktop-schemas
+
+UI:
+- Marked several dialog suggested action buttons as such resulting in
+  the intended blue shade
+- Removed several superfluous frames
+- Fixed several spacing issues
+
+Background:
+- Fix possible crash when date isn't available
+- Fix crash when adding the second color
+- Fix crash when choosing background due to missing icon
+
+Network:
+- Also work with NM 1.0
+- Display an error instead of the panel on NM absence
+- Use a GtkStack to switch between button/spinner fixing the big
+  spinners
+
+Mouse:
+- Fixed to work on wayland sessions
+
+Notifications:
+- Force smaller icons
+- Scroll the view not just the list
+- Design improvements
+
+Power:
+- Disable hover on non-clickable rows
+
+Printers:
+- Improve scrolling in new printers list
+- Make driver installation dialog modal
+
+Privacy:
+- Fix mnemonic widget for software switch
+
+Region:
+- Don't crash for locales with no country_code
+- Fix a crash when iterating locales
+
+Search:
+- Use g_get_system_data_dirs() to discover providers
+
+Sharing:
+- Prevent an endless loop and resulting stack overflow
+- Put a real description string in the media dialog
+
+Sound:
+- Fix the main volume bars to correctly display changes in volume
+
+Universal Access:
+- Disable hover on non-clickable rows
+
+User Accounts:
+- Fix a crash when taking a photo in the avatar chooser
+- Fix enterprise accounts deleting
+- Change default size for avatar cropping
+- Don't crash when closing fingerprint dialog
+- Don't show empty row for remote users
+- Do not show notification if not needed
+- HiDpi support for user's icons
+
+==============
 Version 3.14.1
 ==============
 
