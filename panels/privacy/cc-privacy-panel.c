@@ -728,7 +728,7 @@ add_abrt (CcPrivacyPanel *self)
 
   os_name = get_os_name ();
   /* translators: '%s' is the distributor's name, such as 'Fedora' */
-  msg = g_strdup_printf ("Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are scrubbed of personal data.",
+  msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are scrubbed of personal data."),
                          os_name);
   g_free (os_name);
   gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (self->priv->builder, "abrt_explanation_label")), msg);
