@@ -28,7 +28,10 @@ cc_list_box_update_header_func (GtkListBoxRow *row,
   GtkWidget *current;
 
   if (before == NULL)
-    return;
+    {
+      gtk_list_box_row_set_header (row, NULL);
+      return;
+    }
 
   current = gtk_list_box_row_get_header (row);
   if (current == NULL)
