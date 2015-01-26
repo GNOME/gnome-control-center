@@ -6,8 +6,6 @@ noinst_LTLIBRARIES = libdisplay.la
 libdisplay_la_SOURCES =		\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
-	cc-rr-labeler.c		\
-	cc-rr-labeler.h		\
 	scrollarea.c		\
 	scrollarea.h
 

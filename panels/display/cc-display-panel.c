@@ -32,7 +32,6 @@
 #include <math.h>
 
 #include "shell/list-box-helper.h"
-#include "cc-rr-labeler.h"
 #include <libupower-glib/upower.h>
 
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
@@ -66,7 +65,6 @@ struct _CcDisplayPanelPrivate
 {
   GnomeRRScreen     *screen;
   GnomeRRConfig     *current_configuration;
-  CcRRLabeler       *labeler;
   GnomeRROutputInfo *current_output;
 
   GnomeBG *background;
@@ -86,6 +84,9 @@ struct _CcDisplayPanelPrivate
 
   UpClient *up_client;
   gboolean lid_is_closed;
+
+  GDBusProxy *shell_proxy;
+  GCancellable *shell_cancellable;
 };
 
 typedef struct
@@ -108,6 +109,80 @@ cc_display_panel_get_output_id (GnomeRROutputInfo *output)
 }
 
 static void
+monitor_labeler_show (CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = self->priv;
+  GnomeRROutputInfo **infos, **info;
+  GnomeRROutput *output;
+  GVariantBuilder builder;
+  gint number;
+
+  if (!priv->shell_proxy)
+    return;
+
+  g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
+  g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
+
+  infos = gnome_rr_config_get_outputs (priv->current_configuration);
+  for (info = infos; *info; info++)
+    {
+      number = cc_display_panel_get_output_id (*info);
+      if (number == 0)
+        continue;
+
+      output = gnome_rr_screen_get_output_by_name (priv->screen,
+                                                   gnome_rr_output_info_get_name (*info));
+      g_variant_builder_add (&builder, "{uv}",
+                             gnome_rr_output_get_id (output),
+                             g_variant_new_int32 (number));
+    }
+
+  g_variant_builder_close (&builder);
+
+  g_dbus_proxy_call (priv->shell_proxy,
+                     "ShowMonitorLabels",
+                     g_variant_builder_end (&builder),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1, NULL, NULL, NULL);
+}
+
+static void
+monitor_labeler_hide (CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = self->priv;
+
+  if (!priv->shell_proxy)
+    return;
+
+  g_dbus_proxy_call (priv->shell_proxy,
+                     "HideMonitorLabels",
+                     NULL, G_DBUS_CALL_FLAGS_NONE,
+                     -1, NULL, NULL, NULL);
+}
+
+static void
+ensure_monitor_labels (CcDisplayPanel *self)
+{
+  GList *windows, *w;
+
+  windows = gtk_window_list_toplevels ();
+
+  for (w = windows; w; w = w->next)
+    {
+      if (gtk_window_has_toplevel_focus (GTK_WINDOW (w->data)))
+        {
+          monitor_labeler_show (self);
+          break;
+        }
+    }
+
+  if (!w)
+    monitor_labeler_hide (self);
+
+  g_list_free (windows);
+}
+
+static void
 cc_display_panel_dispose (GObject *object)
 {
   CcDisplayPanelPrivate *priv = CC_DISPLAY_PANEL (object)->priv;
@@ -127,10 +202,9 @@ cc_display_panel_dispose (GObject *object)
       if (toplevel != NULL)
         g_signal_handler_disconnect (G_OBJECT (toplevel),
                                      priv->focus_id);
-      cc_rr_labeler_hide (priv->labeler);
       priv->focus_id = 0;
+      monitor_labeler_hide (CC_DISPLAY_PANEL (object));
     }
-  g_clear_object (&priv->labeler);
 
   if (priv->screen_changed_handler_id)
     {
@@ -148,6 +222,10 @@ cc_display_panel_dispose (GObject *object)
       gtk_widget_destroy (priv->dialog);
       priv->dialog = NULL;
     }
+
+  g_cancellable_cancel (priv->shell_cancellable);
+  g_clear_object (&priv->shell_cancellable);
+  g_clear_object (&priv->shell_proxy);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
 }
@@ -516,8 +594,7 @@ on_screen_changed (CcDisplayPanel *panel)
   else
     gtk_widget_hide (priv->arrange_button);
 
-  g_clear_object (&priv->labeler);
-  priv->labeler = cc_rr_labeler_new (priv->current_configuration);
+  ensure_monitor_labels (panel);
 }
 
 static void
@@ -1484,15 +1561,7 @@ dialog_toplevel_focus_changed (GtkWindow      *window,
                                GParamSpec     *pspec,
                                CcDisplayPanel *self)
 {
-  CcDisplayPanelPrivate *priv = self->priv;
-
-  if (priv->labeler == NULL)
-    return;
-
-  if (gtk_window_has_toplevel_focus (window))
-    cc_rr_labeler_show (priv->labeler);
-  else
-    cc_rr_labeler_hide (priv->labeler);
+  ensure_monitor_labels (self);
 }
 
 static void
@@ -2329,6 +2398,28 @@ cc_display_panel_up_client_changed (UpClient       *client,
 }
 
 static void
+shell_proxy_ready (GObject        *source,
+                   GAsyncResult   *res,
+                   CcDisplayPanel *self)
+{
+  GDBusProxy *proxy;
+  GError *error = NULL;
+
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (!proxy)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to contact gnome-shell: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  self->priv->shell_proxy = proxy;
+
+  ensure_monitor_labels (self);
+}
+
+static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
@@ -2412,4 +2503,17 @@ cc_display_panel_init (CcDisplayPanel *self)
     g_clear_object (&self->priv->up_client);
 
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
+
+  self->priv->shell_cancellable = g_cancellable_new ();
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
+                            G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
+                            G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                            NULL,
+                            "org.gnome.Shell",
+                            "/org/gnome/Shell",
+                            "org.gnome.Shell",
+                            self->priv->shell_cancellable,
+                            (GAsyncReadyCallback) shell_proxy_ready,
+                            self);
 }
