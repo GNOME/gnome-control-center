@@ -725,7 +725,7 @@ static struct {
 } const virt_tech[] = {
   { "kvm", "KVM" },
   { "qemu", "QEmu" },
-  { "vmware", "VMWare" },
+  { "vmware", "VMware" },
   { "microsoft", "Microsoft" },
   { "oracle", "Oracle" },
   { "xen", "Xen" },
