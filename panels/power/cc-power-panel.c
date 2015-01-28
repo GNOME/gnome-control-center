@@ -1671,6 +1671,8 @@ add_power_saving_section (CcPowerPanel *self)
 				G_CALLBACK (bt_powered_state_changed), self);
       g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
 			G_CALLBACK (bt_switch_changed), self);
+
+      bt_powered_state_changed (self);
     }
 
   gtk_widget_show_all (widget);
