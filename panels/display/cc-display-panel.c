@@ -1992,6 +1992,7 @@ show_setup_dialog (CcDisplayPanel *panel)
                                                   GNOME_RR_ROTATION_90))
         {
           priv->rotate_left_button = gtk_toggle_button_new ();
+          gtk_widget_set_tooltip_text (priv->rotate_left_button, _("Rotate counterclockwise by 90\xc2\xb0"));
           if (rotation == GNOME_RR_ROTATION_90)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), TRUE);
           g_signal_connect (priv->rotate_left_button, "clicked",
@@ -2009,6 +2010,7 @@ show_setup_dialog (CcDisplayPanel *panel)
                                                   GNOME_RR_ROTATION_180))
         {
           priv->upside_down_button = gtk_toggle_button_new ();
+          gtk_widget_set_tooltip_text (priv->upside_down_button, _("Rotate by 180\xc2\xb0"));
           if (rotation == GNOME_RR_ROTATION_180)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), TRUE);
           g_signal_connect (priv->upside_down_button, "clicked",
@@ -2026,6 +2028,7 @@ show_setup_dialog (CcDisplayPanel *panel)
                                                   GNOME_RR_ROTATION_270))
         {
           priv->rotate_right_button = gtk_toggle_button_new ();
+          gtk_widget_set_tooltip_text (priv->rotate_right_button, _("Rotate clockwise by 90\xc2\xb0"));
           if (rotation == GNOME_RR_ROTATION_270)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), TRUE);
           g_signal_connect (priv->rotate_right_button, "clicked",
