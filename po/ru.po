@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-01-19 19:26+0000\n"
-"PO-Revision-Date: 2015-01-20 01:14+0300\n"
+"POT-Creation-Date: 2015-01-29 19:27+0000\n"
+"PO-Revision-Date: 2015-01-30 01:02+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -120,8 +120,8 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1514
-#: ../panels/display/cc-display-panel.c:1951
+#: ../panels/display/cc-display-panel.c:1510
+#: ../panels/display/cc-display-panel.c:1942
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -131,7 +131,7 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1938
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:468
+#: ../panels/privacy/cc-privacy-panel.c:568
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
@@ -141,8 +141,8 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:720
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -728,7 +728,7 @@ msgid "Add profile"
 msgstr "Добавить профиль"
 
 #: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
 msgstr "Калибровать…"
 
@@ -1062,25 +1062,25 @@ msgstr "Изменить системное время и дату"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Для изменения времени или даты требуется аутентификация."
 
-#: ../panels/display/cc-display-panel.c:487
+#: ../panels/display/cc-display-panel.c:486
 msgid "Lid Closed"
 msgstr "Крышка ноутбука закрыта"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:490
+#: ../panels/display/cc-display-panel.c:489
 msgid "Mirrored"
 msgstr "Дублируемый"
 
-#: ../panels/display/cc-display-panel.c:492
-#: ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:491
+#: ../panels/display/cc-display-panel.c:2113
 msgid "Primary"
 msgstr "Основной"
 
-#: ../panels/display/cc-display-panel.c:494
-#: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
-#: ../panels/privacy/cc-privacy-panel.c:84
-#: ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/display/cc-display-panel.c:493
+#: ../panels/notifications/cc-notifications-panel.c:247
+#: ../panels/power/cc-power-panel.c:1697 ../panels/power/cc-power-panel.c:1708
+#: ../panels/privacy/cc-privacy-panel.c:155
+#: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -1088,81 +1088,82 @@ msgstr "Основной"
 msgid "Off"
 msgstr "Выключено"
 
-#: ../panels/display/cc-display-panel.c:497
+#: ../panels/display/cc-display-panel.c:496
 msgid "Secondary"
 msgstr "Дополнительный"
 
-#: ../panels/display/cc-display-panel.c:1510
+#. Title of displays dialog when multiple monitors are present.
+#: ../panels/display/cc-display-panel.c:1507
 msgid "Arrange Combined Displays"
 msgstr "Упорядочить сгруппированные экраны"
 
-#: ../panels/display/cc-display-panel.c:1516
-#: ../panels/display/cc-display-panel.c:1954
+#: ../panels/display/cc-display-panel.c:1511
+#: ../panels/display/cc-display-panel.c:1943
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Применить"
 
-#: ../panels/display/cc-display-panel.c:1537
+#: ../panels/display/cc-display-panel.c:1535
 msgid "Drag displays to rearrange them"
 msgstr "Перетащите экраны, чтобы изменить их порядок"
 
-#: ../panels/display/cc-display-panel.c:2056
+#: ../panels/display/cc-display-panel.c:2049
 msgid "Size"
 msgstr "Размер"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2069
+#: ../panels/display/cc-display-panel.c:2062
 msgid "Aspect Ratio"
 msgstr "Соотношение сторон"
 
-#: ../panels/display/cc-display-panel.c:2090
+#: ../panels/display/cc-display-panel.c:2083
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: ../panels/display/cc-display-panel.c:2121
+#: ../panels/display/cc-display-panel.c:2114
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Показывать верхнюю панель и режим обзора на этом дисплее"
 
-#: ../panels/display/cc-display-panel.c:2127
+#: ../panels/display/cc-display-panel.c:2120
 msgid "Secondary Display"
 msgstr "Дополнительный экран"
 
-#: ../panels/display/cc-display-panel.c:2128
+#: ../panels/display/cc-display-panel.c:2121
 msgid "Join this display with another to create an extra workspace"
 msgstr "Объединить этот дисплей с другим для увеличения рабочего пространства"
 
-#: ../panels/display/cc-display-panel.c:2135
+#: ../panels/display/cc-display-panel.c:2128
 msgid "Presentation"
 msgstr "Презентация"
 
-#: ../panels/display/cc-display-panel.c:2136
+#: ../panels/display/cc-display-panel.c:2129
 msgid "Show slideshows and media only"
 msgstr "Показывать только слайд-шоу и мультимедиа"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2141
+#: ../panels/display/cc-display-panel.c:2134
 msgid "Mirror"
 msgstr "Зеркало"
 
-#: ../panels/display/cc-display-panel.c:2142
+#: ../panels/display/cc-display-panel.c:2135
 msgid "Show your existing view on both displays"
 msgstr "Показывать текущий вид на обоих дисплеях"
 
-#: ../panels/display/cc-display-panel.c:2148
+#: ../panels/display/cc-display-panel.c:2141
 msgid "Turn Off"
 msgstr "Выключить"
 
-#: ../panels/display/cc-display-panel.c:2149
+#: ../panels/display/cc-display-panel.c:2142
 msgid "Don't use this display"
 msgstr "Не использовать этот монитор"
 
-#: ../panels/display/cc-display-panel.c:2358
+#: ../panels/display/cc-display-panel.c:2350
 msgid "Could not get screen information"
 msgstr "Не удалось получить информацию об экране"
 
-#: ../panels/display/cc-display-panel.c:2389
+#: ../panels/display/cc-display-panel.c:2381
 msgid "_Arrange Combined Displays"
 msgstr "_Расположить объединённые дисплеи"
 
@@ -1896,19 +1897,15 @@ msgid "Fast"
 msgstr "Быстро"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Disable while _typing"
-msgstr "_Отключать при наборе"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Tap to _click"
 msgstr "Щелчок при _касании"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Two _finger scroll"
 msgstr "Прокрутка _двумя пальцами"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "_Natural scrolling"
 msgstr "_Естественная прокрутка"
 
@@ -1947,11 +1944,11 @@ msgstr "Один щелчок, вторичная кнопка"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:369
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "Режим для _авиаперелётов"
 
-#: ../panels/network/cc-network-panel.c:977
+#: ../panels/network/cc-network-panel.c:966
 msgid "Network proxy"
 msgstr "Сетевая прокси-служба"
 
@@ -1959,16 +1956,21 @@ msgstr "Сетевая прокси-служба"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1156 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1301
-msgid "The system network services are not compatible with this version."
-msgstr "Системные сетевые службы несовместимы с этой версией."
+#: ../panels/network/cc-network-panel.c:1299
+msgid "Oops, something has gone wrong. Please contact your software vendor."
+msgstr ""
+"К сожалению, что-то пошло не так. Обратитесь к поставщику программного "
+"обеспечения."
+
+#: ../panels/network/cc-network-panel.c:1305
+msgid "NetworkManager needs to be running."
+msgstr "NetworkManager должен быть запущен."
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
 msgid "802.1x _Security"
@@ -2174,6 +2176,7 @@ msgstr "Автоматический (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Manual"
 msgstr "Вручную"
 
@@ -2197,6 +2200,7 @@ msgstr "Префикс"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Automatic"
 msgstr "Автоматический"
 
@@ -2651,7 +2655,7 @@ msgid "Wired"
 msgstr "Проводное"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1596
+#: ../panels/network/net-device-wifi.c:1597
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2720,20 +2724,20 @@ msgstr ""
 "Сетевые данные для выделенных сетей, включая пароли и любые пользовательские "
 "настройки, будут утеряны."
 
-#: ../panels/network/net-device-wifi.c:1745
+#: ../panels/network/net-device-wifi.c:1750
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "История"
 
-#: ../panels/network/net-device-wifi.c:1749
+#: ../panels/network/net-device-wifi.c:1754
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:533
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Закрыть"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1757
+#: ../panels/network/net-device-wifi.c:1762
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Забыть"
@@ -3545,48 +3549,56 @@ msgstr "_Индекс WEP"
 msgid "_Type"
 msgstr "_Тип"
 
-#. TRANSLATORS: this is the per application switch for message tray usage.
-#: ../panels/notifications/cc-edit-dialog.c:37
-msgctxt "notifications"
-msgid "Notifications"
-msgstr "Уведомления"
-
-#. TRANSLATORS: this is the setting to configure sounds associated with notifications
-#: ../panels/notifications/cc-edit-dialog.c:39
-msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Звуковые уведомления"
-
-#: ../panels/notifications/cc-edit-dialog.c:40
-msgctxt "notifications"
-msgid "Show Popup Banners"
-msgstr "Показывать всплывающие уведомления"
-
-#. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
-#: ../panels/notifications/cc-edit-dialog.c:42
-msgctxt "notifications"
-msgid "Show Details in Banners"
-msgstr "Показывать подробности в уведомлениях"
-
-#: ../panels/notifications/cc-edit-dialog.c:43
-msgctxt "notifications"
-msgid "View in Lock Screen"
-msgstr "Показывать при заблокированном экране"
-
-#: ../panels/notifications/cc-edit-dialog.c:44
-msgctxt "notifications"
-msgid "Show Details in Lock Screen"
-msgstr "Показывать подробности в уведомлениях при заблокированном экране"
-
-#: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
-#: ../panels/privacy/cc-privacy-panel.c:84
-#: ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/notifications/cc-notifications-panel.c:247
+#: ../panels/power/cc-power-panel.c:1703 ../panels/power/cc-power-panel.c:1710
+#: ../panels/privacy/cc-privacy-panel.c:155
+#: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
 msgid "On"
 msgstr "Включено"
+
+#. This is the per application switch for message tray usage.
+#: ../panels/notifications/edit-dialog.ui.h:2
+msgctxt "notifications"
+msgid "Notifications"
+msgstr "Уведомления"
+
+#. This is the setting to configure sounds associated with notifications.
+#: ../panels/notifications/edit-dialog.ui.h:4
+msgctxt "notifications"
+msgid "Sound Alerts"
+msgstr "Звуковые уведомления"
+
+#: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "Notifications"
+msgctxt "notifications"
+msgid "Notification Banners"
+msgstr "Всплывающие уведомления"
+
+#. Banners here refers to message tray notifications in the middle of the screen.
+#: ../panels/notifications/edit-dialog.ui.h:7
+#| msgctxt "notifications"
+#| msgid "Show Details in Banners"
+msgctxt "notifications"
+msgid "Show Message Content in Banners"
+msgstr "Показывать подробности в всплывающих уведомлениях"
+
+#: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Notifications"
+msgctxt "notifications"
+msgid "Lock Screen Notifications"
+msgstr "Уведомления на экране блокировки"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
+#| msgctxt "notifications"
+#| msgid "Show Details in Lock Screen"
+msgctxt "notifications"
+msgid "Show Message Content on Lock Screen"
+msgstr "Показывать подробности уведомлений на заблокированном экране"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3594,20 +3606,28 @@ msgstr "Уведомления"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
 msgid "Control which notifications are displayed and what they show"
-msgstr "Управление уведомлениями"
+msgstr "Управление отображением и содержанием уведомлений"
 
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
 msgid "Notifications;Banner;Message;Tray;Popup;"
-msgstr "Уведомления;Окно;Сообщение;Лоток;Всплывающее;"
+msgstr "Уведомления;Всплывающее;Сообщение;Лоток;Всплывающее;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Show Pop Up Banners"
-msgstr "Показывать всплывающие окна"
+#| msgid "Notifications"
+msgid "Notification Banners"
+msgstr "Всплывающее уведомление"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Show in Lock Screen"
-msgstr "Показывать при заблокированном экране"
+#| msgid "Notifications"
+msgid "Lock Screen Notifications"
+msgstr "Уведомления на экране блокировки"
+
+#. List of applications.
+#: ../panels/notifications/notifications.ui.h:4
+#: ../panels/sound/gvc-mixer-dialog.c:1781
+msgid "Applications"
+msgstr "Приложения"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
 msgctxt "Online Account"
@@ -3841,7 +3861,7 @@ msgstr "Компьютер"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
-#: ../panels/power/cc-power-panel.c:2030
+#: ../panels/power/cc-power-panel.c:2032
 msgid "Battery"
 msgstr "Батарея"
 
@@ -3931,31 +3951,31 @@ msgstr ""
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1699
 msgid "When on battery power"
 msgstr "При работе от батареи"
 
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1701
 msgid "When plugged in"
 msgstr "При подключении"
 
-#: ../panels/power/cc-power-panel.c:1829
+#: ../panels/power/cc-power-panel.c:1831
 msgid "Suspend & Power Off"
 msgstr "Ждущий режим и выключение"
 
-#: ../panels/power/cc-power-panel.c:1862
+#: ../panels/power/cc-power-panel.c:1864
 msgid "_Automatic suspend"
 msgstr "_Автоматический ждущий режим"
 
-#: ../panels/power/cc-power-panel.c:1886
+#: ../panels/power/cc-power-panel.c:1888
 msgid "When battery power is _critical"
 msgstr "При _критическом заряде батареи"
 
-#: ../panels/power/cc-power-panel.c:1941
+#: ../panels/power/cc-power-panel.c:1943
 msgid "Power Off"
 msgstr "Выключить"
 
-#: ../panels/power/cc-power-panel.c:2077
+#: ../panels/power/cc-power-panel.c:2079
 msgid "Devices"
 msgstr "Устройства"
 
@@ -4324,8 +4344,8 @@ msgstr "Принтеры не найдены."
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:9
-msgid "Enter address of a printer or a text to filter results"
-msgstr "Введите адрес принтера или текст для фильтрации результатов"
+msgid "Enter a network address or search for a printer"
+msgstr "Введите сетевой адрес или найдите принтер"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4689,45 +4709,63 @@ msgstr ""
 "Системная служба печати\n"
 "недоступна или не запущена."
 
-#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Блокировка экрана"
 
-#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Статистика и история"
 
-#: ../panels/privacy/cc-privacy-panel.c:487
+#: ../panels/privacy/cc-privacy-panel.c:587
 msgid "Empty all items from Trash?"
 msgstr "Удалить все объекты из корзины?"
 
-#: ../panels/privacy/cc-privacy-panel.c:488
+#: ../panels/privacy/cc-privacy-panel.c:588
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Все объекты корзины будут безвозвратно удалены."
 
-#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Очистить корзину"
 
-#: ../panels/privacy/cc-privacy-panel.c:512
+#: ../panels/privacy/cc-privacy-panel.c:612
 msgid "Delete all the temporary files?"
 msgstr "Удалить все временные файлы?"
 
-#: ../panels/privacy/cc-privacy-panel.c:513
+#: ../panels/privacy/cc-privacy-panel.c:613
 msgid "All the temporary files will be permanently deleted."
 msgstr "Все временные файлы будут безвозвратно удалены."
 
-#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Удалить временные файлы"
 
-#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Очистка корзины и временные файлы"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Использование ПО"
+
+#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+msgid "Problem Reporting"
+msgstr "Сообщение об ошибках"
+
+#. translators: '%s' is the distributor's name, such as 'Fedora'
+#: ../panels/privacy/cc-privacy-panel.c:731
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
+msgstr ""
+"Отправка сообщения о технических проблемах помогает нам улучшить %s. Отчеты "
+"отправляются анонимно и не содержат персональных данных."
+
+#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+msgid "Privacy Policy"
+msgstr "Политика конфиденциальности"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -4873,10 +4911,6 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_Отправлять статистику по использованию ПО"
 
-#: ../panels/privacy/privacy.ui.h:41
-msgid "Privacy Policy"
-msgstr "Политика конфиденциальности"
-
 #: ../panels/privacy/privacy.ui.h:42
 msgid "_Location Services"
 msgstr "_Сервисы местоположения"
@@ -4884,6 +4918,10 @@ msgstr "_Сервисы местоположения"
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Used to determine your geographical location"
 msgstr "Используется для определения вашего географического местоположения"
+
+#: ../panels/privacy/privacy.ui.h:45
+msgid "_Automatic Problem Reporting"
+msgstr "_Автоматическое сообщение об ошибках"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
@@ -4909,12 +4947,12 @@ msgid "Other"
 msgstr "Другое"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1059
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Необходимо перезапустить сеанс, чтобы изменения вступили в силу"
 
 #: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1063
 msgid "Restart Now"
 msgstr "Перезапустить сейчас"
 
@@ -5453,10 +5491,6 @@ msgstr "Звуковые эффекты"
 #: ../panels/sound/gvc-mixer-dialog.c:1768
 msgid "_Alert volume:"
 msgstr "Громкость _уведомлений:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1781
-msgid "Applications"
-msgstr "Приложения"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1785
 msgid "No application is currently playing or recording audio."
@@ -6532,7 +6566,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:838
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6540,7 +6574,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-user-panel.c:842
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6615,30 +6649,30 @@ msgstr "Неправильный пароль, попробуйте ещё ра�
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Не удалось подключиться к домену %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:239
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Другие учётные записи"
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Не удалось удалить пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:513
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:563
+#: ../panels/user-accounts/um-user-panel.c:615
 msgid "Failed to revoke remotely managed user"
 msgstr "Не удалось аннулировать удалённого пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:671
 msgid "You cannot delete your own account."
 msgstr "Нельзя удалить собственную учётную запись."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:680
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s всё ещё находится в системе"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:684
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6646,12 +6680,12 @@ msgstr ""
 "Удаление пользователя, с незавершённым сеансом, может привести систему в "
 "противоречивое состояние."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:693
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Хотите сохранить файлы пользователя %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:697
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6659,51 +6693,51 @@ msgstr ""
 "Можно сохранить домашнюю папку, почтовый ящик и временные файлы при удалении "
 "учётной записи пользователя."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid "_Delete Files"
 msgstr "_Удалить файлы"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:701
 msgid "_Keep Files"
 msgstr "_Сохранить файлы"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:715
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Действительно аннулировать удалённую учётную запись %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:719
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:771
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Учётная запись отключена"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:779
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Установить при следующем входе в систему"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "None"
 msgstr "Нет"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Logged in"
 msgstr "Авторизованный"
 
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:1262
 msgid "Failed to contact the accounts service"
 msgstr "Не удалось связаться со службой учётных записей"
 
-#: ../panels/user-accounts/um-user-panel.c:1273
+#: ../panels/user-accounts/um-user-panel.c:1264
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Убедитесь, что AccountService установлен и включён."
 
-#: ../panels/user-accounts/um-user-panel.c:1314
+#: ../panels/user-accounts/um-user-panel.c:1305
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6711,12 +6745,12 @@ msgstr ""
 "Чтобы изменить,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1352
+#: ../panels/user-accounts/um-user-panel.c:1343
 msgid "Create a user account"
 msgstr "Создать учётную запись пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:1363
-#: ../panels/user-accounts/um-user-panel.c:1676
+#: ../panels/user-accounts/um-user-panel.c:1354
+#: ../panels/user-accounts/um-user-panel.c:1666
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6724,12 +6758,12 @@ msgstr ""
 "Чтобы создать учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1373
+#: ../panels/user-accounts/um-user-panel.c:1364
 msgid "Delete the selected user account"
 msgstr "Удалить выбранную учётную запись пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:1385
-#: ../panels/user-accounts/um-user-panel.c:1681
+#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1671
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6737,7 +6771,7 @@ msgstr ""
 "Чтобы удалить выбранную учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1590
+#: ../panels/user-accounts/um-user-panel.c:1580
 msgid "My Account"
 msgstr "Моя учётная запись"
 
@@ -6865,7 +6899,7 @@ msgid "Button"
 msgstr "Кнопка"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Wacom Tablet"
 msgstr "Планшет Wacom"
 
@@ -6892,123 +6926,128 @@ msgstr "Сенсорная панель (относительный)"
 msgid "Tablet Preferences"
 msgstr "Настройки планшета"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#| msgid "Help"
+msgid "_Help"
+msgstr "_Справка"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "No tablet detected"
 msgstr "Планшет не обнаружен"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Подключите или включите планшет Wacom"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Bluetooth Settings"
 msgstr "Параметры Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map to Monitor…"
 msgstr "Отображение на экран…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
 msgstr "Отображение кнопок…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Настроить разрешение экрана"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Adjust mouse settings"
 msgstr "Изменить параметры мыши"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Tracking Mode"
 msgstr "Режим слежения"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
 msgid "Left-Handed Orientation"
 msgstr "Настроить под левую руку"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1062
+#: ../panels/wacom/gsd-wacom-device.c:1024
 msgid "Left Ring"
 msgstr "Кольцо слева"
 
-#: ../panels/wacom/gsd-wacom-device.c:1073
+#: ../panels/wacom/gsd-wacom-device.c:1035
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Режим левого кольца #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1093
+#: ../panels/wacom/gsd-wacom-device.c:1055
 msgid "Right Ring"
 msgstr "Кольцо справа"
 
-#: ../panels/wacom/gsd-wacom-device.c:1104
+#: ../panels/wacom/gsd-wacom-device.c:1066
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Режим правого кольца #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1146
+#: ../panels/wacom/gsd-wacom-device.c:1108
 msgid "Left Touchstrip"
 msgstr "Сенсорная полоса слева"
 
-#: ../panels/wacom/gsd-wacom-device.c:1157
+#: ../panels/wacom/gsd-wacom-device.c:1119
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Режим левой сенсорной полосы #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1177
+#: ../panels/wacom/gsd-wacom-device.c:1139
 msgid "Right Touchstrip"
 msgstr "Сенсорная полоса справа"
 
-#: ../panels/wacom/gsd-wacom-device.c:1188
+#: ../panels/wacom/gsd-wacom-device.c:1150
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Режим правой сенсорной полосы #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1214
+#: ../panels/wacom/gsd-wacom-device.c:1176
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Переключение режима левого сенсорного кольца"
 
-#: ../panels/wacom/gsd-wacom-device.c:1216
+#: ../panels/wacom/gsd-wacom-device.c:1178
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Переключение режима правого сенсорного кольца"
 
-#: ../panels/wacom/gsd-wacom-device.c:1219
+#: ../panels/wacom/gsd-wacom-device.c:1181
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Переключение режима левой сенсорной полосы"
 
-#: ../panels/wacom/gsd-wacom-device.c:1221
+#: ../panels/wacom/gsd-wacom-device.c:1183
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Переключение режима правой сенсорной полосы"
 
-#: ../panels/wacom/gsd-wacom-device.c:1226
+#: ../panels/wacom/gsd-wacom-device.c:1188
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Переключение режима #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1334
+#: ../panels/wacom/gsd-wacom-device.c:1296
 #, c-format
 msgid "Left Button #%d"
 msgstr "Левая кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1337
+#: ../panels/wacom/gsd-wacom-device.c:1299
 #, c-format
 msgid "Right Button #%d"
 msgstr "Правая кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1340
+#: ../panels/wacom/gsd-wacom-device.c:1302
 #, c-format
 msgid "Top Button #%d"
 msgstr "Верхняя кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1343
+#: ../panels/wacom/gsd-wacom-device.c:1305
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Нижняя кнопка #%d"
