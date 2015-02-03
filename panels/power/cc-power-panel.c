@@ -522,6 +522,7 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   gchar *name;
   gchar *s;
   gboolean show_caution = FALSE;
+  gboolean is_present;
 
   name = NULL;
   g_object_get (device,
@@ -529,7 +530,14 @@ add_device (CcPowerPanel *panel, UpDevice *device)
                 "percentage", &percentage,
                 "state", &state,
                 "model", &name,
+                "is-present", &is_present,
                 NULL);
+
+  if (!is_present)
+    {
+      g_free (name);
+      return;
+    }
 
   if (kind == UP_DEVICE_KIND_UPS)
     show_caution = TRUE;
