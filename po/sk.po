@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-03 14:40+0000\n"
-"PO-Revision-Date: 2015-02-03 20:19+0100\n"
+"POT-Creation-Date: 2015-02-04 19:25+0000\n"
+"PO-Revision-Date: 2015-02-04 22:07+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -1094,7 +1094,7 @@ msgstr "Hlavný"
 
 # MČ: ak displej tak vypnutý. V iných prípadoch to môže byť inak. Treba skontrolovať pre všetky výskyty, prípadne dať rozdeliť.
 # * https://bugzilla.gnome.org/show_bug.cgi?id=708580
-#: ../panels/display/cc-display-panel.c:493 ../panels/notifications/cc-notifications-panel.c:247 ../panels/power/cc-power-panel.c:1697 ../panels/power/cc-power-panel.c:1708 ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/display/cc-display-panel.c:493 ../panels/notifications/cc-notifications-panel.c:247 ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716 ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257 ../panels/universal-access/cc-ua-panel.c:572 ../panels/universal-access/cc-ua-panel.c:695 ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Vypnuté"
@@ -3737,7 +3737,7 @@ msgid "_Type"
 msgstr "_Typ"
 
 #
-#: ../panels/notifications/cc-notifications-panel.c:247 ../panels/power/cc-power-panel.c:1703 ../panels/power/cc-power-panel.c:1710 ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222 ../panels/universal-access/cc-ua-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:247 ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718 ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222 ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572 ../panels/universal-access/cc-ua-panel.c:695
 msgid "On"
 msgstr "Zapnuté"
@@ -4048,140 +4048,141 @@ msgid "Computer"
 msgstr "Počítač"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726 ../panels/power/cc-power-panel.c:2032
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734 ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "Batéria"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:549
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Nabíja sa"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:564
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Výstraha"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Nízka"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Dobrá"
 
 # Cast obrazovky:
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:571
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Úplne nabitá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vybitá"
 
-#: ../panels/power/cc-power-panel.c:724
+#: ../panels/power/cc-power-panel.c:732
 msgid "Batteries"
 msgstr "Batérie"
 
-#: ../panels/power/cc-power-panel.c:1126
+#: ../panels/power/cc-power-panel.c:1134
 msgid "When _idle"
 msgstr "Pri neč_innosti"
 
 # label
-#: ../panels/power/cc-power-panel.c:1454
+#: ../panels/power/cc-power-panel.c:1462
 msgid "Power Saving"
 msgstr "Šetrenie energie"
 
 # label
-#: ../panels/power/cc-power-panel.c:1482
+#: ../panels/power/cc-power-panel.c:1490
 msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
 # label
-#: ../panels/power/cc-power-panel.c:1488
+#: ../panels/power/cc-power-panel.c:1496
 msgid "_Keyboard brightness"
 msgstr "Jas _klávesnice"
 
 # label
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1506
 msgid "_Dim screen when inactive"
 msgstr "_Stmaviť obrazovku pri neaktivite"
 
 # PK: toto je divne, skor vypnut obrazovku
 # PM: no blank screen praveze nie je vypnutie obrazovky, balnk screen je vyplnenie obrazovky čiernou ale je stále zapnutá. Používa sa to pri starých monitoroch, ktoré zobrazujú pri ATM hlásku ze nie je signál.
 # label
-#: ../panels/power/cc-power-panel.c:1523
+#: ../panels/power/cc-power-panel.c:1531
 msgid "_Blank screen"
 msgstr "Vy_prázdniť obrazovku za"
 
 # PM: pozerám že je tam aj reťazec Turns off wireless devices ako label, nemá byť aj on na preklad?
 # PK: nie, je to label v tom dialogu hruby a potom prepinac
 # label
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1568
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1565
-msgid "Turns off wireless devices"
-msgstr "Vypne bezdrôtové zariadenia"
+#: ../panels/power/cc-power-panel.c:1573
+msgid "Wireless devices require extra power"
+msgstr "Bezdrôtové zariadenia vyžadujú mimoriadne napájanie"
 
 # label
-#: ../panels/power/cc-power-panel.c:1590
+#: ../panels/power/cc-power-panel.c:1598
 msgid "_Mobile broadband"
 msgstr "Širokopásmové _mobilné pripojenie"
 
-#: ../panels/power/cc-power-panel.c:1595
-msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "Vypne širokopásmové mobilné zariadenia (3G, 4G, WiMax, atď)"
+#: ../panels/power/cc-power-panel.c:1603
+#| msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgstr "Zariadenia širokopásmového mobilného pripojenia (3G, 4G, WiMax, atď.) vyžadujú mimoriadne napájanie"
 
 # label
-#: ../panels/power/cc-power-panel.c:1645
+#: ../panels/power/cc-power-panel.c:1653
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
 #  label
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When on battery power"
 msgstr "Pri napájaní z batérie"
 
 # PK: ked je zastrceny v zasuvke
 #  label
-#: ../panels/power/cc-power-panel.c:1701
+#: ../panels/power/cc-power-panel.c:1709
 msgid "When plugged in"
 msgstr "Pri zastrčení do zásuvky"
 
 # label
-#: ../panels/power/cc-power-panel.c:1831
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Suspend & Power Off"
 msgstr "Uspanie a vypnutie"
 
 # label
-#: ../panels/power/cc-power-panel.c:1864
+#: ../panels/power/cc-power-panel.c:1872
 msgid "_Automatic suspend"
 msgstr "_Automaticky uspať"
 
 # label
-#: ../panels/power/cc-power-panel.c:1888
+#: ../panels/power/cc-power-panel.c:1896
 msgid "When battery power is _critical"
 msgstr "Pri _kritickom vybití batérie"
 
 # label
-#: ../panels/power/cc-power-panel.c:1943
+#: ../panels/power/cc-power-panel.c:1951
 msgid "Power Off"
 msgstr "Vypnúť"
 
 # label
-#: ../panels/power/cc-power-panel.c:2079
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "Zariadenia"
 
@@ -7655,6 +7656,9 @@ msgstr "Systém"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nastavenia;Konfigurácia;"
+
+#~ msgid "Turns off wireless devices"
+#~ msgstr "Vypne bezdrôtové zariadenia"
 
 #~ msgid "United States"
 #~ msgstr "Spojené Štáty"
