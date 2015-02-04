@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-01-21 07:25+0000\n"
-"PO-Revision-Date: 2015-01-21 10:49+0100\n"
+"POT-Creation-Date: 2015-02-04 07:30+0000\n"
+"PO-Revision-Date: 2015-02-04 09:13+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -132,7 +132,7 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1938
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:468
+#: ../panels/privacy/cc-privacy-panel.c:568
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
@@ -728,7 +728,7 @@ msgid "Add profile"
 msgstr "Přidat profil"
 
 #: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
 msgstr "Kalibrovat…"
 
@@ -1067,15 +1067,15 @@ msgid "Mirrored"
 msgstr "Duplikovaný"
 
 #: ../panels/display/cc-display-panel.c:491
-#: ../panels/display/cc-display-panel.c:2113
+#: ../panels/display/cc-display-panel.c:2116
 msgid "Primary"
 msgstr "Hlavní"
 
 #: ../panels/display/cc-display-panel.c:493
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
-#: ../panels/privacy/cc-privacy-panel.c:84
-#: ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
+#: ../panels/privacy/cc-privacy-panel.c:155
+#: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -1103,62 +1103,74 @@ msgstr "_Použít"
 msgid "Drag displays to rearrange them"
 msgstr "Pořadí displejů změňte přetažením"
 
-#: ../panels/display/cc-display-panel.c:2049
+#: ../panels/display/cc-display-panel.c:1995
+msgid "Rotate counterclockwise by 90°"
+msgstr "Otočit o 90° doleva"
+
+#: ../panels/display/cc-display-panel.c:2013
+msgid "Rotate by 180°"
+msgstr "Otočit o 180°"
+
+#: ../panels/display/cc-display-panel.c:2031
+msgid "Rotate clockwise by 90°"
+msgstr "Otočit o 90° doprava"
+
+#: ../panels/display/cc-display-panel.c:2052
 msgid "Size"
 msgstr "Velikost"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2062
+#: ../panels/display/cc-display-panel.c:2065
 msgid "Aspect Ratio"
 msgstr "Poměr stran"
 
-#: ../panels/display/cc-display-panel.c:2083
+#: ../panels/display/cc-display-panel.c:2086
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Rozlišení"
 
-#: ../panels/display/cc-display-panel.c:2114
+#: ../panels/display/cc-display-panel.c:2117
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Na tomto displeji zobrazovat horní lištu a přehled činností"
 
-#: ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:2123
 msgid "Secondary Display"
 msgstr "Vedlejší"
 
-#: ../panels/display/cc-display-panel.c:2121
+#: ../panels/display/cc-display-panel.c:2124
 msgid "Join this display with another to create an extra workspace"
 msgstr "Spojit tento displej s jiným pro vytvoření rozšířené pracovní plochy"
 
-#: ../panels/display/cc-display-panel.c:2128
+#: ../panels/display/cc-display-panel.c:2131
 msgid "Presentation"
 msgstr "Prezentace"
 
-#: ../panels/display/cc-display-panel.c:2129
+#: ../panels/display/cc-display-panel.c:2132
 msgid "Show slideshows and media only"
 msgstr "Zobrazovat jen promítání a multimédia"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2134
+#: ../panels/display/cc-display-panel.c:2137
 msgid "Mirror"
 msgstr "Duplikovat"
 
-#: ../panels/display/cc-display-panel.c:2135
+#: ../panels/display/cc-display-panel.c:2138
 msgid "Show your existing view on both displays"
 msgstr "Zobrazovat stávající zobrazení na obou displejích stejně"
 
-#: ../panels/display/cc-display-panel.c:2141
+#: ../panels/display/cc-display-panel.c:2144
 msgid "Turn Off"
 msgstr "Vypnout"
 
-#: ../panels/display/cc-display-panel.c:2142
+#: ../panels/display/cc-display-panel.c:2145
 msgid "Don't use this display"
 msgstr "Tento displej nepoužívat"
 
-#: ../panels/display/cc-display-panel.c:2350
+#: ../panels/display/cc-display-panel.c:2353
 msgid "Could not get screen information"
 msgstr "Nelze získat informace o obrazovce"
 
-#: ../panels/display/cc-display-panel.c:2381
+#: ../panels/display/cc-display-panel.c:2384
 msgid "_Arrange Combined Displays"
 msgstr "Uspořádat sloučené displeje"
 
@@ -2179,6 +2191,7 @@ msgstr "Automatické (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Manual"
 msgstr "Ruční"
 
@@ -2202,6 +2215,7 @@ msgstr "Prefix"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Automatic"
 msgstr "Automatické"
 
@@ -2728,7 +2742,7 @@ msgstr "Historie"
 #: ../panels/network/net-device-wifi.c:1754
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:533
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Zavřít"
 
@@ -3547,9 +3561,9 @@ msgid "_Type"
 msgstr "_Typ"
 
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
-#: ../panels/privacy/cc-privacy-panel.c:84
-#: ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
+#: ../panels/privacy/cc-privacy-panel.c:155
+#: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -3846,120 +3860,120 @@ msgid "Computer"
 msgstr "Počítač"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
-#: ../panels/power/cc-power-panel.c:2030
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
+#: ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "Baterie"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:549
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Nabíjí se"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:564
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Pozor"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Nízká"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Dobrá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:571
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Plně nabitá"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vybitá"
 
-#: ../panels/power/cc-power-panel.c:724
+#: ../panels/power/cc-power-panel.c:732
 msgid "Batteries"
 msgstr "Baterie"
 
-#: ../panels/power/cc-power-panel.c:1126
+#: ../panels/power/cc-power-panel.c:1134
 msgid "When _idle"
 msgstr "Při _nečinnosti"
 
-#: ../panels/power/cc-power-panel.c:1454
+#: ../panels/power/cc-power-panel.c:1462
 msgid "Power Saving"
 msgstr "Šetření energií"
 
-#: ../panels/power/cc-power-panel.c:1482
+#: ../panels/power/cc-power-panel.c:1490
 msgid "_Screen brightness"
 msgstr "_Jas obrazovky"
 
-#: ../panels/power/cc-power-panel.c:1488
+#: ../panels/power/cc-power-panel.c:1496
 msgid "_Keyboard brightness"
 msgstr "_Jas klávesnice"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1506
 msgid "_Dim screen when inactive"
 msgstr "_Ztlumit jas obrazovky při neaktivitě"
 
-#: ../panels/power/cc-power-panel.c:1523
+#: ../panels/power/cc-power-panel.c:1531
 msgid "_Blank screen"
 msgstr "_Vypnout obrazovku"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1568
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1565
+#: ../panels/power/cc-power-panel.c:1573
 msgid "Turns off wireless devices"
 msgstr "Vypne bezdrátová zařízení"
 
-#: ../panels/power/cc-power-panel.c:1590
+#: ../panels/power/cc-power-panel.c:1598
 msgid "_Mobile broadband"
 msgstr "_Mobilní připojení"
 
-#: ../panels/power/cc-power-panel.c:1595
+#: ../panels/power/cc-power-panel.c:1603
 msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgstr "Vypne mobilní širokopásmová zařízení (3G, 4G, WiMax atd.)"
 
-#: ../panels/power/cc-power-panel.c:1645
+#: ../panels/power/cc-power-panel.c:1653
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When on battery power"
 msgstr "Při napájení z baterie"
 
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1709
 msgid "When plugged in"
 msgstr "Při napájení ze sítě"
 
-#: ../panels/power/cc-power-panel.c:1829
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Suspend & Power Off"
 msgstr "Uspávání a vypínání"
 
-#: ../panels/power/cc-power-panel.c:1862
+#: ../panels/power/cc-power-panel.c:1872
 msgid "_Automatic suspend"
 msgstr "_Automaticky uspat"
 
-#: ../panels/power/cc-power-panel.c:1886
+#: ../panels/power/cc-power-panel.c:1896
 msgid "When battery power is _critical"
 msgstr "Když je napájení z baterie kriti_cky nízké"
 
-#: ../panels/power/cc-power-panel.c:1941
+#: ../panels/power/cc-power-panel.c:1951
 msgid "Power Off"
 msgstr "Vypnout"
 
-#: ../panels/power/cc-power-panel.c:2077
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -4316,8 +4330,8 @@ msgstr "Nenalezeny žádné tiskárny"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:9
-msgid "Enter address of a printer or a text to filter results"
-msgstr "Zadejte adresu tiskárny nebo text pro filtrování výsledků"
+msgid "Enter a network address or search for a printer"
+msgstr "Zadejte síťovou adresu tiskárny nebo ji vyhledejte"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4681,45 +4695,63 @@ msgstr ""
 "Bohužel to vypadá, že systémová\n"
 "služba tisku není dostupná."
 
-#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Zamykání obrazovky"
 
-#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Použití a historie"
 
-#: ../panels/privacy/cc-privacy-panel.c:487
+#: ../panels/privacy/cc-privacy-panel.c:587
 msgid "Empty all items from Trash?"
 msgstr "Vysypat všechny položky z koše?"
 
-#: ../panels/privacy/cc-privacy-panel.c:488
+#: ../panels/privacy/cc-privacy-panel.c:588
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Všechny položky v koši budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Vyprázdnit koš"
 
-#: ../panels/privacy/cc-privacy-panel.c:512
+#: ../panels/privacy/cc-privacy-panel.c:612
 msgid "Delete all the temporary files?"
 msgstr "Odstranit dočasné soubory?"
 
-#: ../panels/privacy/cc-privacy-panel.c:513
+#: ../panels/privacy/cc-privacy-panel.c:613
 msgid "All the temporary files will be permanently deleted."
 msgstr "Všechny dočasné soubory budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Odstranit dočasné soubor_y"
 
-#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Vyčistit koš a dočasné soubory"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Využití softwaru"
+
+#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+msgid "Problem Reporting"
+msgstr "Hlášení problémů"
+
+#. translators: '%s' is the distributor's name, such as 'Fedora'
+#: ../panels/privacy/cc-privacy-panel.c:731
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
+msgstr ""
+"Díky odesílání hlášení o technických problémech se může %s vylepšovat. "
+"Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje."
+
+#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+msgid "Privacy Policy"
+msgstr "Zásady soukromí"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -4862,10 +4894,6 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "Po_sílat statistiky o využití softwaru"
 
-#: ../panels/privacy/privacy.ui.h:41
-msgid "Privacy Policy"
-msgstr "Zásady soukromí"
-
 #: ../panels/privacy/privacy.ui.h:42
 msgid "_Location Services"
 msgstr "S_lužby určování pozice"
@@ -4873,6 +4901,10 @@ msgstr "S_lužby určování pozice"
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Used to determine your geographical location"
 msgstr "Používá se k určení vaší zeměpisné pozice"
+
+#: ../panels/privacy/privacy.ui.h:45
+msgid "_Automatic Problem Reporting"
+msgstr "_Automatické hlášení problémů"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
@@ -5254,7 +5286,6 @@ msgid "Require a password"
 msgstr "Vyžadovat heslo"
 
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share music, photos and videos over the network."
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
@@ -6852,7 +6883,7 @@ msgid "Button"
 msgstr "Tlačítko"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Wacom Tablet"
 msgstr "Tablet Wacom"
 
@@ -6877,39 +6908,43 @@ msgstr "Jako touchpad (relativně)"
 msgid "Tablet Preferences"
 msgstr "Předvolby tabletu"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "No tablet detected"
 msgstr "Nenalezen žádný tablet"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Připojte a/nebo zapněte svůj tablet Wacom"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Bluetooth Settings"
 msgstr "Nastavení Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map to Monitor…"
 msgstr "Mapování na obrazovku…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
 msgstr "Mapování tlačítek…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Přizpůsobit rozlišení displeje"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Adjust mouse settings"
 msgstr "Přizpůsobit nastavení myši"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Tracking Mode"
 msgstr "Režim sledování stopy:"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
 msgid "Left-Handed Orientation"
 msgstr "Orientace pro leváky"
 
