@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master.is\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-01-28 08:41+0000\n"
-"PO-Revision-Date: 2015-01-29 15:12+0000\n"
+"POT-Creation-Date: 2015-02-05 07:29+0000\n"
+"PO-Revision-Date: 2015-02-05 14:54+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "Language: is\n"
@@ -1051,13 +1051,13 @@ msgid "Mirrored"
 msgstr "Speglað"
 
 #: ../panels/display/cc-display-panel.c:491
-#: ../panels/display/cc-display-panel.c:2113
+#: ../panels/display/cc-display-panel.c:2116
 msgid "Primary"
 msgstr "Aðal"
 
 #: ../panels/display/cc-display-panel.c:493
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
+#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1087,62 +1087,74 @@ msgstr "_Virkja"
 msgid "Drag displays to rearrange them"
 msgstr "Draga skjái til að stilla þeim upp"
 
-#: ../panels/display/cc-display-panel.c:2049
+#: ../panels/display/cc-display-panel.c:1995
+msgid "Rotate counterclockwise by 90°"
+msgstr ""
+
+#: ../panels/display/cc-display-panel.c:2013
+msgid "Rotate by 180°"
+msgstr ""
+
+#: ../panels/display/cc-display-panel.c:2031
+msgid "Rotate clockwise by 90°"
+msgstr ""
+
+#: ../panels/display/cc-display-panel.c:2052
 msgid "Size"
 msgstr "Stærð"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2062
+#: ../panels/display/cc-display-panel.c:2065
 msgid "Aspect Ratio"
 msgstr "Stærðarhlutföll"
 
-#: ../panels/display/cc-display-panel.c:2083
+#: ../panels/display/cc-display-panel.c:2086
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Upplausn"
 
-#: ../panels/display/cc-display-panel.c:2114
+#: ../panels/display/cc-display-panel.c:2117
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Birta toppstiku og virkniyfirlit á þessum skjá"
 
-#: ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:2123
 msgid "Secondary Display"
 msgstr "Aukaskjár"
 
-#: ../panels/display/cc-display-panel.c:2121
+#: ../panels/display/cc-display-panel.c:2124
 msgid "Join this display with another to create an extra workspace"
 msgstr "Bættu þessum skjá við annan til að búa til auka vinnusvæði"
 
-#: ../panels/display/cc-display-panel.c:2128
+#: ../panels/display/cc-display-panel.c:2131
 msgid "Presentation"
 msgstr "Kynning"
 
-#: ../panels/display/cc-display-panel.c:2129
+#: ../panels/display/cc-display-panel.c:2132
 msgid "Show slideshows and media only"
 msgstr "Sýna aðeins skyggnusýningar og gagnamiðla"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2134
+#: ../panels/display/cc-display-panel.c:2137
 msgid "Mirror"
 msgstr "Spegla"
 
-#: ../panels/display/cc-display-panel.c:2135
+#: ../panels/display/cc-display-panel.c:2138
 msgid "Show your existing view on both displays"
 msgstr "Birta núverandi sýn á báðum skjám"
 
-#: ../panels/display/cc-display-panel.c:2141
+#: ../panels/display/cc-display-panel.c:2144
 msgid "Turn Off"
 msgstr "Slökkva"
 
-#: ../panels/display/cc-display-panel.c:2142
+#: ../panels/display/cc-display-panel.c:2145
 msgid "Don't use this display"
 msgstr "Ekki nota þennan skjá"
 
-#: ../panels/display/cc-display-panel.c:2350
+#: ../panels/display/cc-display-panel.c:2353
 msgid "Could not get screen information"
 msgstr "Gat ekki fengið upplýsingar um skjái"
 
-#: ../panels/display/cc-display-panel.c:2381
+#: ../panels/display/cc-display-panel.c:2384
 msgid "_Arrange Combined Displays"
 msgstr "H_agræða samsettum skjám"
 
@@ -1937,10 +1949,12 @@ msgstr "%s VPN"
 #: ../panels/network/cc-network-panel.c:1299
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
+"Úbbs! Eitthvað hefur farið úrskeiðis núna. Hafðu samband við höfunda "
+"hugbúnaðarins."
 
 #: ../panels/network/cc-network-panel.c:1305
 msgid "NetworkManager needs to be running."
-msgstr ""
+msgstr "NetworkManager netstjórinn verður að vera í gangi."
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
 msgid "802.1x _Security"
@@ -2514,6 +2528,9 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
+"Ekki var hægt að flytja út VPN tenginguna '%s' til %s.\n"
+"\n"
+"Villa: %s."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:371
 msgid "Export VPN connection"
@@ -2557,6 +2574,9 @@ msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;DNS;"
 msgstr ""
+"Netkerfi;þráðlaust;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;breiðband;internet;mótald;Bluet"
+"ooth;vpn;"
+"vlan;bridge;bond;DNS;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -3497,7 +3517,7 @@ msgid "_Type"
 msgstr "_Tegund:"
 
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
+#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3519,8 +3539,6 @@ msgid "Sound Alerts"
 msgstr "Hljóðviðvaranir"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Notification Banners"
 msgstr "Tilkynningaborðar"
@@ -3532,8 +3550,6 @@ msgid "Show Message Content in Banners"
 msgstr ""
 
 #: ../panels/notifications/edit-dialog.ui.h:8
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Lock Screen Notifications"
 msgstr "Tilkynningar um læsingu skjás"
@@ -3557,12 +3573,10 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr ""
 
 #: ../panels/notifications/notifications.ui.h:1
-#| msgid "Notifications"
 msgid "Notification Banners"
 msgstr "Tilkynningaborðar"
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Notifications"
 msgid "Lock Screen Notifications"
 msgstr "Tilkynningar um læsingu skjás"
 
@@ -3794,120 +3808,122 @@ msgid "Computer"
 msgstr "Tölva"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
-#: ../panels/power/cc-power-panel.c:2030
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
+#: ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "Rafhlaða"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:549
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Í hleðslu"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:564
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Varúð"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Lítil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Góð"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:571
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Full hleðsla"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tóm"
 
-#: ../panels/power/cc-power-panel.c:724
+#: ../panels/power/cc-power-panel.c:732
 msgid "Batteries"
 msgstr "Rafhlöður"
 
-#: ../panels/power/cc-power-panel.c:1126
+#: ../panels/power/cc-power-panel.c:1134
 msgid "When _idle"
 msgstr "Við _iðjuleysi"
 
-#: ../panels/power/cc-power-panel.c:1454
+#: ../panels/power/cc-power-panel.c:1462
 msgid "Power Saving"
 msgstr "Orkusparnaður"
 
-#: ../panels/power/cc-power-panel.c:1482
+#: ../panels/power/cc-power-panel.c:1490
 msgid "_Screen brightness"
 msgstr "Birta _skjás"
 
-#: ../panels/power/cc-power-panel.c:1488
+#: ../panels/power/cc-power-panel.c:1496
 msgid "_Keyboard brightness"
 msgstr "Birta ly_klaborðs"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1506
 msgid "_Dim screen when inactive"
 msgstr "_Dimma skjá þegar vélin er óvirk"
 
-#: ../panels/power/cc-power-panel.c:1523
+#: ../panels/power/cc-power-panel.c:1531
 msgid "_Blank screen"
 msgstr "_Auður skrár"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1568
 msgid "_Wi-Fi"
 msgstr "Þráðlaust _Wi-Fi net"
 
-#: ../panels/power/cc-power-panel.c:1565
-msgid "Turns off wireless devices"
-msgstr "Slekkur á þráðlausum tækjum"
+#: ../panels/power/cc-power-panel.c:1573
+msgid "Wireless devices require extra power"
+msgstr "Tæki með þráðlausu neti þarfnast mikillar orku"
 
-#: ../panels/power/cc-power-panel.c:1590
+#: ../panels/power/cc-power-panel.c:1598
 msgid "_Mobile broadband"
 msgstr "_Ferðabreiðband"
 
-#: ../panels/power/cc-power-panel.c:1595
-msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "Slekkur á tækjum með ferðabreiðbandi (3G, 4G, WiMax, o.s.frv.)"
+#: ../panels/power/cc-power-panel.c:1603
+#| msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
+msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgstr ""
+"Tæki með ferðabreiðbandi (3G, 4G, WiMax, o.s.frv.) þarfnast mikillar orku"
 
-#: ../panels/power/cc-power-panel.c:1645
+#: ../panels/power/cc-power-panel.c:1653
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When on battery power"
 msgstr "Þegar notað er afl frá rafhlöðum"
 
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1709
 msgid "When plugged in"
 msgstr "Þegar vélin er í sambandi"
 
-#: ../panels/power/cc-power-panel.c:1829
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Suspend & Power Off"
 msgstr "Hætta og slökkva"
 
-#: ../panels/power/cc-power-panel.c:1862
+#: ../panels/power/cc-power-panel.c:1872
 msgid "_Automatic suspend"
 msgstr "Hætta sjálfvir_kt"
 
-#: ../panels/power/cc-power-panel.c:1886
+#: ../panels/power/cc-power-panel.c:1896
 msgid "When battery power is _critical"
 msgstr "Þe_gar ástand rafhlöðu er við hættumörk"
 
-#: ../panels/power/cc-power-panel.c:1941
+#: ../panels/power/cc-power-panel.c:1951
 msgid "Power Off"
 msgstr "Slökkva"
 
-#: ../panels/power/cc-power-panel.c:2077
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "Tæki"
 
@@ -3917,13 +3933,14 @@ msgstr "Aflstjórnun"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
 msgid "View your battery status and change power saving settings"
-msgstr ""
+msgstr "Skoða ástand rafhlöðu og sýsla með orkustillingar"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
+"orka;svæfa;bið;dvali;rafhlaða;birta;dimma;slökkva;skjár;DPMS;afl;iðjulaus;"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -4039,17 +4056,17 @@ msgstr "Lítill framköllunarvökvi"
 #. * http://en.wikipedia.org/wiki/Photographic_developer
 #: ../panels/printers/cc-printers-panel.c:596
 msgid "Out of developer"
-msgstr "Búinn með framköllunarvökvann"
+msgstr "marker supplyframköllunarvökvann"
 
 #. Translators: "marker" is one color bin of the printer
 #: ../panels/printers/cc-printers-panel.c:598
 msgid "Low on a marker supply"
-msgstr ""
+msgstr "Lítið eftir á fyllingu"
 
 #. Translators: "marker" is one color bin of the printer
 #: ../panels/printers/cc-printers-panel.c:600
 msgid "Out of a marker supply"
-msgstr ""
+msgstr "Búinn með fyllingu"
 
 #. Translators: One or more covers on the printer are open
 #: ../panels/printers/cc-printers-panel.c:602
@@ -4088,22 +4105,22 @@ msgstr "Stöðvaður"
 #. Translators: The printer marker supply waste receptacle is almost full
 #: ../panels/printers/cc-printers-panel.c:614
 msgid "Waste receptacle almost full"
-msgstr ""
+msgstr "Ruslabakki næstum fullur"
 
 #. Translators: The printer marker supply waste receptacle is full
 #: ../panels/printers/cc-printers-panel.c:616
 msgid "Waste receptacle full"
-msgstr ""
+msgstr "Ruslabakki fullur"
 
 #. Translators: Optical photo conductors are used in laser printers
 #: ../panels/printers/cc-printers-panel.c:618
 msgid "The optical photo conductor is near end of life"
-msgstr ""
+msgstr "Prentkassettan er komin að lokum líftíma síns"
 
 #. Translators: Optical photo conductors are used in laser printers
 #: ../panels/printers/cc-printers-panel.c:620
 msgid "The optical photo conductor is no longer functioning"
-msgstr ""
+msgstr "Prentkassettan virkar ekki lengur"
 
 #. Translators: Printer's state (printer is being configured right now)
 #: ../panels/printers/cc-printers-panel.c:730
@@ -4121,7 +4138,7 @@ msgstr "Tilbúinn"
 #: ../panels/printers/cc-printers-panel.c:794
 msgctxt "printer state"
 msgid "Does not accept jobs"
-msgstr ""
+msgstr "Tekur ekki við verkum"
 
 #. Translators: Printer's state (jobs are processing)
 #: ../panels/printers/cc-printers-panel.c:799
@@ -4132,17 +4149,17 @@ msgstr "Í vinnslu"
 #. Translators: Toner supply
 #: ../panels/printers/cc-printers-panel.c:919
 msgid "Toner Level"
-msgstr ""
+msgstr "Staða prentdufts"
 
 #. Translators: Ink supply
 #: ../panels/printers/cc-printers-panel.c:922
 msgid "Ink Level"
-msgstr ""
+msgstr "Staða bleks"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/cc-printers-panel.c:925
 msgid "Supply Level"
-msgstr ""
+msgstr "Staða fyllinga"
 
 #. Translators: Printer's state (printer is being installed right now)
 #: ../panels/printers/cc-printers-panel.c:943
@@ -4214,11 +4231,12 @@ msgstr "Prentarar"
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
 msgid "Add printers, view printer jobs and decide how you want to print"
 msgstr ""
+"Bættu við prenturum, skoðaðu prentverk og veldu hvernig þú vilt haga prentun"
 
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr ""
+msgstr "Prentari;prentröð;Prentun;Pappír;blek;prentduft;"
 
 #. Translators: This dialog contains list of active print jobs of the selected printer
 #: ../panels/printers/jobs-dialog.ui.h:2
@@ -4259,11 +4277,11 @@ msgstr "Engir prentarar fundust"
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:9
 msgid "Enter a network address or search for a printer"
-msgstr ""
+msgstr "Settu inn netfang eða leitaðu að prentara"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
-msgstr ""
+msgstr "Hleðsluvalkostir…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4549,6 +4567,8 @@ msgstr "Rekill"
 #, c-format
 msgid "Enter your username and password to view printers available on %s."
 msgstr ""
+"Sláðu inn notandanafn og lykilorð til að skoða þá prentara sem eru tiltækir á "
+"%s."
 
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
@@ -4561,7 +4581,7 @@ msgstr "Fjarlægja prentara"
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/printers.ui.h:4
 msgid "Supply"
-msgstr ""
+msgstr "Áfyllingar"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 #: ../panels/printers/printers.ui.h:6
@@ -4619,6 +4639,8 @@ msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
 msgstr ""
+"Því miður! Prentþjónusta kerfis\n"
+"virðist ekki vera tiltæk."
 
 #: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
@@ -4646,23 +4668,23 @@ msgstr "Eyða öllum bráðabirgðaskrám?"
 
 #: ../panels/privacy/cc-privacy-panel.c:613
 msgid "All the temporary files will be permanently deleted."
-msgstr ""
+msgstr "Öllum bráðabirgðaskrám verður endanlega eytt."
 
 #: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
-msgstr ""
+msgstr "_Eyða bráðabirgðaskrám"
 
 #: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
-msgstr ""
+msgstr "Eyða rusli og bráðabirgðaskrám"
 
 #: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
-msgstr ""
+msgstr "Hugbúnaður í notkun"
 
 #: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
 msgid "Problem Reporting"
-msgstr ""
+msgstr "Tilkynningar um vandamál"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
 #: ../panels/privacy/cc-privacy-panel.c:731
@@ -4751,11 +4773,11 @@ msgstr "_Nýlega notað"
 
 #: ../panels/privacy/privacy.ui.h:22
 msgid "Retain _History"
-msgstr ""
+msgstr "Geyma _feril"
 
 #: ../panels/privacy/privacy.ui.h:23
 msgid "Cl_ear Recent History"
-msgstr ""
+msgstr "Hr_einsa feril nýlegra skráa"
 
 #: ../panels/privacy/privacy.ui.h:25
 msgid "The Screen Lock protects your privacy when you are away."
@@ -4763,15 +4785,15 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:26
 msgid "Automatic Screen _Lock"
-msgstr ""
+msgstr "Sjálfvirk skjá_læsing"
 
 #: ../panels/privacy/privacy.ui.h:27
 msgid "Lock screen _after blank for"
-msgstr ""
+msgstr "Læs_a skjá eftir"
 
 #: ../panels/privacy/privacy.ui.h:28
 msgid "Show _Notifications"
-msgstr ""
+msgstr "_Birta tilkynningar"
 
 #: ../panels/privacy/privacy.ui.h:30
 msgid ""
@@ -4781,15 +4803,15 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:31
 msgid "Automatically empty _Trash"
-msgstr ""
+msgstr "_Tæma rusl sjálfkrafa"
 
 #: ../panels/privacy/privacy.ui.h:32
 msgid "Automatically purge Temporary _Files"
-msgstr ""
+msgstr "_Eyða bráðabirgðaskrám sjálfkrafa"
 
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
-msgstr ""
+msgstr "_Eyða eftir"
 
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
@@ -4803,7 +4825,7 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:40
 msgid "_Send software usage statistics"
-msgstr ""
+msgstr "_Senda tölfræði hugbúnaðarnotkunar"
 
 #: ../panels/privacy/privacy.ui.h:42
 msgid "_Location Services"
@@ -4815,7 +4837,7 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:45
 msgid "_Automatic Problem Reporting"
-msgstr ""
+msgstr "Tilkynn_a sjálfkrafa um vandamál"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
@@ -5076,6 +5098,7 @@ msgstr "Virkja eða afvirkja fjartengda innskráningu"
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
 msgid "Authentication is required to enable or disable remote login"
 msgstr ""
+"Þú þarft að auðkenna þig til að virkja eða afvirkja fjartengda innskráningu"
 
 #. Label
 #: ../panels/sharing/cc-sharing-networks.c:303
@@ -5101,7 +5124,7 @@ msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:3
 msgid "Only Receive From Trusted Devices"
-msgstr ""
+msgstr "Eingöngu taka á móti frá treystum tækjum"
 
 #: ../panels/sharing/sharing.ui.h:4
 msgid "Save Received Files to Downloads Folder"
@@ -5181,12 +5204,11 @@ msgid "Require a password"
 msgstr "Krefjast lykilorðs"
 
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share music, photos and videos over the network."
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
-"Deiling gagnamiðla gerir þér kleift að deila tónlist, myndum og myndskeiðum á "
-"netinu."
+"Deiling gagnamiðla gerir þér kleift að deila tónlist, myndum og myndskeiðum "
+"á netinu."
 
 #: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
@@ -6796,7 +6818,6 @@ msgid "Tablet Preferences"
 msgstr "Stillingar teiknitöflu"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-#| msgid "Help"
 msgid "_Help"
 msgstr "_Hjálp"
 
@@ -7071,6 +7092,9 @@ msgstr "Kerfi"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Kjörstillingar;Uppsetning;"
+
+#~ msgid "Turns off wireless devices"
+#~ msgstr "Slekkur á þráðlausum tækjum"
 
 #~ msgid "Disable while _typing"
 #~ msgstr "_Afvirkja snertiplatta á meðan skrifað er"
