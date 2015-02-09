@@ -71,7 +71,9 @@ typedef enum {
         CHOOSE_LANGUAGE,
         CHOOSE_REGION,
         ADD_INPUT,
-        REMOVE_INPUT
+        REMOVE_INPUT,
+        MOVE_UP_INPUT,
+        MOVE_DOWN_INPUT,
 } SystemOp;
 
 struct _CcRegionPanelPrivate {
@@ -110,6 +112,8 @@ struct _CcRegionPanelPrivate {
         GtkWidget *input_list;
         GtkWidget *add_input;
         GtkWidget *remove_input;
+        GtkWidget *move_up_input;
+        GtkWidget *move_down_input;
         GtkWidget *show_config;
         GtkWidget *show_layout;
 
@@ -470,6 +474,8 @@ show_region_chooser (CcRegionPanel *self,
 
 static void show_input_chooser (CcRegionPanel *self);
 static void remove_selected_input (CcRegionPanel *self);
+static void move_selected_input (CcRegionPanel *self,
+                                 SystemOp       op);
 
 static void
 permission_acquired (GObject      *source,
@@ -502,6 +508,10 @@ permission_acquired (GObject      *source,
                         break;
                 case REMOVE_INPUT:
                         remove_selected_input (self);
+                        break;
+                case MOVE_UP_INPUT:
+                case MOVE_DOWN_INPUT:
+                        move_selected_input (self, priv->op);
                         break;
                 default:
                         g_warning ("Unknown privileged operation: %d\n", priv->op);
@@ -986,10 +996,10 @@ update_buttons (CcRegionPanel *self)
 	CcRegionPanelPrivate *priv = self->priv;
         GtkListBoxRow *selected;
         GList *children;
-        gboolean multiple_sources;
+        guint n_rows;
 
         children = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
-        multiple_sources = g_list_next (children) != NULL;
+        n_rows = g_list_length (children);
         g_list_free (children);
 
         selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
@@ -997,6 +1007,8 @@ update_buttons (CcRegionPanel *self)
                 gtk_widget_set_visible (priv->show_config, FALSE);
                 gtk_widget_set_sensitive (priv->remove_input, FALSE);
                 gtk_widget_set_sensitive (priv->show_layout, FALSE);
+                gtk_widget_set_sensitive (priv->move_up_input, FALSE);
+                gtk_widget_set_sensitive (priv->move_down_input, FALSE);
         } else {
                 GDesktopAppInfo *app_info;
 
@@ -1004,11 +1016,13 @@ update_buttons (CcRegionPanel *self)
 
                 gtk_widget_set_visible (priv->show_config, app_info != NULL);
                 gtk_widget_set_sensitive (priv->show_layout, TRUE);
-                gtk_widget_set_sensitive (priv->remove_input, multiple_sources);
+                gtk_widget_set_sensitive (priv->remove_input, n_rows > 1);
+                gtk_widget_set_sensitive (priv->move_up_input, gtk_list_box_row_get_index (selected) > 0);
+                gtk_widget_set_sensitive (priv->move_down_input, gtk_list_box_row_get_index (selected) < n_rows - 1);
         }
 
         gtk_widget_set_visible (priv->options_button,
-                                multiple_sources && !priv->login);
+                                n_rows > 1 && !priv->login);
 }
 
 static void
@@ -1243,6 +1257,71 @@ remove_selected_input (CcRegionPanel *self)
 }
 
 static void
+do_move_selected_input (CcRegionPanel *self,
+                        SystemOp       op)
+{
+	CcRegionPanelPrivate *priv = self->priv;
+        GtkListBoxRow *selected;
+        gint idx;
+
+        g_assert (op == MOVE_UP_INPUT || op == MOVE_DOWN_INPUT);
+
+        selected = gtk_list_box_get_selected_row (GTK_LIST_BOX (priv->input_list));
+        g_assert (selected);
+
+        idx = gtk_list_box_row_get_index (selected);
+        if (op == MOVE_UP_INPUT)
+                idx -= 1;
+        else
+                idx += 1;
+
+        gtk_list_box_unselect_row (GTK_LIST_BOX (priv->input_list), selected);
+
+        g_object_ref (selected);
+        gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (selected));
+        gtk_list_box_insert (GTK_LIST_BOX (priv->input_list), GTK_WIDGET (selected), idx);
+        g_object_unref (selected);
+
+        gtk_list_box_select_row (GTK_LIST_BOX (priv->input_list), selected);
+
+        cc_list_box_adjust_scrolling (GTK_LIST_BOX (priv->input_list));
+
+        update_buttons (self);
+        update_input (self);
+}
+
+static void
+move_selected_input (CcRegionPanel *self,
+                     SystemOp       op)
+{
+	CcRegionPanelPrivate *priv = self->priv;
+
+        if (!priv->login) {
+                do_move_selected_input (self, op);
+        } else if (g_permission_get_allowed (priv->permission)) {
+                do_move_selected_input (self, op);
+        } else if (g_permission_get_can_acquire (priv->permission)) {
+                priv->op = op;
+                g_permission_acquire_async (priv->permission,
+                                            NULL,
+                                            permission_acquired,
+                                            self);
+        }
+}
+
+static void
+move_selected_input_up (CcRegionPanel *self)
+{
+        move_selected_input (self, MOVE_UP_INPUT);
+}
+
+static void
+move_selected_input_down (CcRegionPanel *self)
+{
+        move_selected_input (self, MOVE_DOWN_INPUT);
+}
+
+static void
 show_selected_settings (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
@@ -1383,6 +1462,8 @@ setup_input_section (CcRegionPanel *self)
         priv->input_list = WID ("input_list");
         priv->add_input = WID ("input_source_add");
         priv->remove_input = WID ("input_source_remove");
+        priv->move_up_input = WID ("input_source_up");
+        priv->move_down_input = WID ("input_source_down");
         priv->show_config = WID ("input_source_config");
         priv->show_layout = WID ("input_source_layout");
 
@@ -1392,6 +1473,10 @@ setup_input_section (CcRegionPanel *self)
                                   G_CALLBACK (add_input), self);
         g_signal_connect_swapped (priv->remove_input, "clicked",
                                   G_CALLBACK (remove_selected_input), self);
+        g_signal_connect_swapped (priv->move_up_input, "clicked",
+                                  G_CALLBACK (move_selected_input_up), self);
+        g_signal_connect_swapped (priv->move_down_input, "clicked",
+                                  G_CALLBACK (move_selected_input_down), self);
         g_signal_connect_swapped (priv->show_config, "clicked",
                                   G_CALLBACK (show_selected_settings), self);
         g_signal_connect_swapped (priv->show_layout, "clicked",
