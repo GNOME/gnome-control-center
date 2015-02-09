@@ -5,15 +5,15 @@
 # Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003.
 # Yuval Tanny, 2005.
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2010, 2011.
-# Yosef Or Boczko <yoseforb@gnome.org>, 2013, 2014.
+# Yosef Or Boczko <yoseforb@gnome.org>, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-26 21:13+0200\n"
-"PO-Revision-Date: 2015-01-26 21:13+0200\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"POT-Creation-Date: 2015-02-10 00:02+0200\n"
+"PO-Revision-Date: 2015-02-10 00:09+0200\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -107,8 +107,8 @@ msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תו�
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1510
-#: ../panels/display/cc-display-panel.c:1942
+#: ../panels/display/cc-display-panel.c:1579
+#: ../panels/display/cc-display-panel.c:2011
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -1031,23 +1031,23 @@ msgstr "שינוי הגדרות השעה והתאריך של המערכת"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "כדי לשנות את הגדרות השעה או התאריך עליך להזדהות."
 
-#: ../panels/display/cc-display-panel.c:486
+#: ../panels/display/cc-display-panel.c:564
 msgid "Lid Closed"
 msgstr "סגירה"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:489
+#: ../panels/display/cc-display-panel.c:567
 msgid "Mirrored"
 msgstr "שכפול צגים"
 
-#: ../panels/display/cc-display-panel.c:491
-#: ../panels/display/cc-display-panel.c:2113
+#: ../panels/display/cc-display-panel.c:569
+#: ../panels/display/cc-display-panel.c:2185
 msgid "Primary"
 msgstr "ראשי"
 
-#: ../panels/display/cc-display-panel.c:493
+#: ../panels/display/cc-display-panel.c:571
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
+#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1057,82 +1057,94 @@ msgstr "ראשי"
 msgid "Off"
 msgstr "כבוי"
 
-#: ../panels/display/cc-display-panel.c:496
+#: ../panels/display/cc-display-panel.c:574
 msgid "Secondary"
 msgstr "משני"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1507
+#: ../panels/display/cc-display-panel.c:1576
 msgid "Arrange Combined Displays"
 msgstr "סידור תצוגה משולבת"
 
-#: ../panels/display/cc-display-panel.c:1511
-#: ../panels/display/cc-display-panel.c:1943
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2012
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "ה_חלה"
 
-#: ../panels/display/cc-display-panel.c:1535
+#: ../panels/display/cc-display-panel.c:1604
 msgid "Drag displays to rearrange them"
 msgstr "יש לגרור את התצוגות כדי לסדר אותן מחדש"
 
-#: ../panels/display/cc-display-panel.c:2049
+#: ../panels/display/cc-display-panel.c:2064
+msgid "Rotate counterclockwise by 90°"
+msgstr "סיבוב נגד כיוון השעון ב־90°"
+
+#: ../panels/display/cc-display-panel.c:2082
+msgid "Rotate by 180°"
+msgstr "סיבוב ב־180°"
+
+#: ../panels/display/cc-display-panel.c:2100
+msgid "Rotate clockwise by 90°"
+msgstr "סיבוב עם כיוון השעון ב־90°"
+
+#: ../panels/display/cc-display-panel.c:2121
 msgid "Size"
 msgstr "גודל"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2062
+#: ../panels/display/cc-display-panel.c:2134
 msgid "Aspect Ratio"
 msgstr "יחס גובה"
 
-#: ../panels/display/cc-display-panel.c:2083
+#: ../panels/display/cc-display-panel.c:2155
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "הבחנה"
 
-#: ../panels/display/cc-display-panel.c:2114
+#: ../panels/display/cc-display-panel.c:2186
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "הצגת הלוח העליון וסקירת פעילויות בתצוגה זו"
 
-#: ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:2192
 msgid "Secondary Display"
 msgstr "השהיית לחיצה משנית"
 
-#: ../panels/display/cc-display-panel.c:2121
+#: ../panels/display/cc-display-panel.c:2193
 msgid "Join this display with another to create an extra workspace"
 msgstr "צירוף תצוגה זו עם אחרת ליצירת שולחן עבודה נוסף"
 
-#: ../panels/display/cc-display-panel.c:2128
+#: ../panels/display/cc-display-panel.c:2200
 msgid "Presentation"
 msgstr "כיוון"
 
-#: ../panels/display/cc-display-panel.c:2129
+#: ../panels/display/cc-display-panel.c:2201
 msgid "Show slideshows and media only"
 msgstr "הצגת מצגות ומדיה בלבד"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2134
+#: ../panels/display/cc-display-panel.c:2206
 msgid "Mirror"
 msgstr "שגיאה"
 
-#: ../panels/display/cc-display-panel.c:2135
+#: ../panels/display/cc-display-panel.c:2207
 msgid "Show your existing view on both displays"
 msgstr "הצגת התצוגה הקיימת שלך בשתי התצוגות"
 
-#: ../panels/display/cc-display-panel.c:2141
+#: ../panels/display/cc-display-panel.c:2213
 msgid "Turn Off"
 msgstr "ה_פעלה"
 
-#: ../panels/display/cc-display-panel.c:2142
+#: ../panels/display/cc-display-panel.c:2214
 msgid "Don't use this display"
 msgstr "לא ניתן להשתמש בתצוגה זו"
 
-#: ../panels/display/cc-display-panel.c:2350
+#: ../panels/display/cc-display-panel.c:2444
 msgid "Could not get screen information"
 msgstr "לא ניתן לקבל את פרטי הצג"
 
-#: ../panels/display/cc-display-panel.c:2381
+#: ../panels/display/cc-display-panel.c:2475
 msgid "_Arrange Combined Displays"
 msgstr "סידור _תצוגה משולבת"
 
@@ -3488,7 +3500,7 @@ msgid "_Type"
 msgstr "_סוג"
 
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
+#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3787,120 +3799,120 @@ msgid "Computer"
 msgstr "מחשב"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
-#: ../panels/power/cc-power-panel.c:2030
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
+#: ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "סוללה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:549
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:564
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "אזהרה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Low"
 msgstr "נמוך"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Good"
 msgstr "טוב"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:571
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "בטעינה מלאה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ריקה"
 
-#: ../panels/power/cc-power-panel.c:724
+#: ../panels/power/cc-power-panel.c:732
 msgid "Batteries"
 msgstr "סוללות"
 
-#: ../panels/power/cc-power-panel.c:1126
+#: ../panels/power/cc-power-panel.c:1134
 msgid "When _idle"
 msgstr "ב_חוסר פעילות"
 
-#: ../panels/power/cc-power-panel.c:1454
+#: ../panels/power/cc-power-panel.c:1462
 msgid "Power Saving"
 msgstr "חיסכון בחשמל"
 
-#: ../panels/power/cc-power-panel.c:1482
+#: ../panels/power/cc-power-panel.c:1490
 msgid "_Screen brightness"
 msgstr "בהירות המ_סך"
 
-#: ../panels/power/cc-power-panel.c:1488
+#: ../panels/power/cc-power-panel.c:1496
 msgid "_Keyboard brightness"
 msgstr "בהירות המ_סך"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1506
 msgid "_Dim screen when inactive"
 msgstr "_עמעום המסך בחוסר פעילות"
 
-#: ../panels/power/cc-power-panel.c:1523
+#: ../panels/power/cc-power-panel.c:1531
 msgid "_Blank screen"
 msgstr "ה_חשכת המסך"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1568
 msgid "_Wi-Fi"
 msgstr "רשת _אלחוטית"
 
-#: ../panels/power/cc-power-panel.c:1565
-msgid "Turns off wireless devices"
-msgstr "כיבוי התקנים אלחוטיים"
+#: ../panels/power/cc-power-panel.c:1573
+msgid "Wireless devices require extra power"
+msgstr "רשת אלחוטית דורשת מקור כוח נוסף"
 
-#: ../panels/power/cc-power-panel.c:1590
+#: ../panels/power/cc-power-panel.c:1598
 msgid "_Mobile broadband"
 msgstr "רשת ס_לולרית"
 
-#: ../panels/power/cc-power-panel.c:1595
-msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "כיבוי התקני פס רחב נייד (3G, 4G, WiMax וכו׳)"
+#: ../panels/power/cc-power-panel.c:1603
+msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgstr "התקני רשת סלולרית (3G, 4G, WiMax וכו׳) דורשים מקור כוח  נוסף"
 
-#: ../panels/power/cc-power-panel.c:1645
+#: ../panels/power/cc-power-panel.c:1653
 msgid "_Bluetooth"
 msgstr "(_ב)Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When on battery power"
 msgstr "בעת הפעלה מהסוללה"
 
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1709
 msgid "When plugged in"
 msgstr "כאשר מחובר לחשמל"
 
-#: ../panels/power/cc-power-panel.c:1829
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Suspend & Power Off"
 msgstr "השהיה וכיבוי"
 
-#: ../panels/power/cc-power-panel.c:1862
+#: ../panels/power/cc-power-panel.c:1872
 msgid "_Automatic suspend"
 msgstr "ה_שהיה אוטומטית"
 
-#: ../panels/power/cc-power-panel.c:1886
+#: ../panels/power/cc-power-panel.c:1896
 msgid "When battery power is _critical"
 msgstr "כאשר עצמת הסוללה _חלשה מאוד"
 
-#: ../panels/power/cc-power-panel.c:1941
+#: ../panels/power/cc-power-panel.c:1951
 msgid "Power Off"
 msgstr "כיבוי"
 
-#: ../panels/power/cc-power-panel.c:2077
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "התקנים"
 
@@ -5060,7 +5072,7 @@ msgstr "פעיל"
 msgid "Choose a Folder"
 msgstr "נא לבחור בתיקייה"
 
-#: ../panels/sharing/cc-sharing-panel.c:916
+#: ../panels/sharing/cc-sharing-panel.c:917
 msgid "Copy"
 msgstr "העתקה"
 
@@ -7078,6 +7090,9 @@ msgstr "מערכת"
 msgid "Preferences;Settings;"
 msgstr "העדפות;הגדרות;"
 
+#~ msgid "Turns off wireless devices"
+#~ msgstr "כיבוי התקנים אלחוטיים"
+
 #~ msgid "Disable while _typing"
 #~ msgstr "נטרול _בעת הקלדה"
 
@@ -7305,10 +7320,6 @@ msgstr "העדפות;הגדרות;"
 #~ msgctxt "display panel, rotation"
 #~ msgid "Normal"
 #~ msgstr "רגיל"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Counterclockwise"
-#~ msgstr "נגד כיוון השעון"
 
 #~ msgctxt "display panel, rotation"
 #~ msgid "Clockwise"
