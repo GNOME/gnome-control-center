@@ -478,7 +478,7 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
 {
   CcSharingPanelPrivate *priv = self->priv;
   GtkWidget *dialog;
-  gchar *folder;
+  gchar *folder = NULL;
   gboolean matching = FALSE;
   GList *rows, *l;
 
@@ -492,7 +492,8 @@ cc_sharing_panel_add_folder (GtkListBox     *box,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
                                         NULL);
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
-  gtk_dialog_run (GTK_DIALOG (dialog));
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_ACCEPT)
+    goto bail;
 
   gtk_widget_hide (dialog);
 
