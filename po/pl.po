@@ -8,15 +8,15 @@
 # Artur Flinta <aflinta@at.kernel.pl>, 2003-2007.
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
 # Wadim Dziedzic <wdziedzic@aviary.pl>, 2007.
-# Piotr Drąg <piotrdrag@gmail.com>, 2009-2014.
+# Piotr Drąg <piotrdrag@gmail.com>, 2009-2015.
 # Wojciech Szczęsny <wszczesny@aviary.pl>, 2013.
-# Aviary.pl <gnomepl@aviary.pl>, 2007-2014.
+# Aviary.pl <gnomepl@aviary.pl>, 2007-2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-14 12:46+0100\n"
-"PO-Revision-Date: 2014-12-14 12:47+0100\n"
+"PO-Revision-Date: 2015-02-10 19:50+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -170,7 +170,7 @@ msgstr "Zmiana obrazu tła na tapetę lub zdjęcie"
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
 msgid "Wallpaper;Screen;Desktop;"
-msgstr "Tapeta;Ekran;Pulpit;"
+msgstr "Tapeta;Ekran;Pulpit;Blokada;"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:262
 msgid "Bluetooth is disabled"
@@ -1064,7 +1064,8 @@ msgstr "Zmiana daty i czasu, w tym strefy czasowej"
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Clock;Timezone;Location;"
-msgstr "Zegar;Strefa czasowa;Położenie;"
+msgstr ""
+"Zegar;Strefa;Czasowa;Położenie;Miejsce;Lokacja;Miasto;Państwo;Kraj;NTP;"
 
 #: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
 msgid "Change system time and date settings"
@@ -1338,9 +1339,9 @@ msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
-"urządzenie;system;informacje;pamięć;procesor;wersja;domyślne;programy;"
-"aplikacje;preferowane;cd;dvd;usb;dźwięk;audio;wideo;video;płyta;dysk;"
-"wymienny;nośnik;automatyczne;uruchamianie;"
+"urządzenie;system;informacje;pamięć;procesor;grafika;karta;graficzna;wersja;"
+"domyślne;programy;aplikacje;preferowane;cd;dvd;usb;dźwięk;audio;wideo;video;"
+"płyta;dysk;wymienny;nośnik;automatyczne;uruchamianie;szczegóły;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
@@ -1663,7 +1664,7 @@ msgstr ""
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
-msgstr "Skrót;Powtarzanie;Miganie;"
+msgstr "Skrót;Skróty;Powtarzanie;Miganie;Pisanie;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "Custom Shortcut"
@@ -1843,8 +1844,8 @@ msgstr ""
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
-"Trackpad;Kursor;Wskaźnik;Kliknięcie;Puknięcie;Stuknięcie;Podwójne;Przycisk;"
-"Trackball;Touchpad;Przewijanie;"
+"Trackpad;Kursor;Wskaźnik;Wskazywanie;Kliknięcie;Puknięcie;Stuknięcie;"
+"Pacnięcie;Podwójne;Przycisk;Trackball;Touchpad;Przewijanie;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "General"
@@ -2610,8 +2611,9 @@ msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "vlan;bridge;bond;DNS;"
 msgstr ""
-"Sieć;Bezprzewodowa;Wireless;Wi-Fi;Wifi;IP;LAN;Pośrednik;Proxy;WAN;Broadband;"
-"Modem;Bluetooth;vpn;vlan;mostek;mostkowanie;bridge;łączenie;bond;DNS;"
+"Sieć;Sieci;Bezprzewodowa;Wireless;Wi-Fi;Wifi;IP;LAN;Kabel;Pośrednik;Proxy;"
+"WAN;Broadband;Modem;Bluetooth;vpn;vlan;mostek;mostkowanie;bridge;łączenie;"
+"bond;DNS;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -3616,7 +3618,9 @@ msgstr "Kontrola wyświetlania powiadomień i ich treści"
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
 msgid "Notifications;Banner;Message;Tray;Popup;"
-msgstr "Powiadomienia;Baner;Wiadomość;Komunikat;Obszar;Tacka;Wyskakujące;"
+msgstr ""
+"Powiadomienia;Notyfikacje;Baner;Banner;Wiadomość;Komunikat;Obszar;Tacka;Tray;"
+"Wyskakujące;Popup;Pop-up;"
 
 #: ../panels/notifications/notifications.ui.h:1
 msgid "Show Pop Up Banners"
@@ -3703,8 +3707,9 @@ msgid ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
-"Google;Facebook;Twitter;Yahoo;WWW;Web;Online;Komunikator;Chat;Czat;Kalendarz;"
-"Poczta;e-mail;email;Kontakt;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
+"Google;Facebook;Twitter;Yahoo;WWW;Web;Online;Sieciowe;Komunikator;Chat;Czat;"
+"Kalendarz;Poczta;e-mail;email;Kontakt;ownCloud;Kerberos;IMAP;SMTP;Pocket;"
+"ReadItLater;Flickr;Windows;Live;Microsoft;Exchange;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "No online accounts configured"
@@ -3988,9 +3993,10 @@ msgstr ""
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
-"Zasilanie;Uśpienie;Wstrzymanie;Hibernacja;Uśpij;Wyłącz;Wstrzymaj;Hibernuj;"
-"Akumulator;Bateria;Jasność;Przygaszenie;Wygaszenie;Monitor;DPMS;Bezczynność;"
-"Nieaktywność;"
+"Zasilanie;Energia;Oszczędzanie;Uśpienie;Wstrzymanie;Hibernacja;Uśpij;Wyłącz;"
+"Wstrzymaj;Hibernuj;Akumulator;Bateria;Jasność;Przygaszenie;Wygaszenie;"
+"Monitor;DPMS;Bezczynność;Nieaktywność;Wi-Fi;Wifi;Bluetooth;Bezprzewodowe;"
+"Wireless;"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -4289,7 +4295,7 @@ msgstr ""
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr "Drukarka;Kolejka;Drukowanie;Papier;Atrament;Tusz;Toner;"
+msgstr "Drukarka;Kolejka;Drukowanie;Papier;Atrament;Tusz;Toner;CUPS;IPP;"
 
 #. Translators: This dialog contains list of active print jobs of the selected printer
 #: ../panels/printers/jobs-dialog.ui.h:2
@@ -4747,8 +4753,10 @@ msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;"
 msgstr ""
-"ekran;blokada;diagnostyka;awaria;prywatność;ostatnie;tymczasowe;tmp;"
-"indeksowanie;index;nazwa;sieć;tożsamość;"
+"ekran;blokada;diagnostyka;awaria;prywatność;ostatnie;ostatnio;tymczasowe;tmp;"
+"indeksowanie;index;nazwa;sieć;tożsamość;historia;kosz;śmietnik;GPS;GNSS;"
+"GLONASS;Galileo;IRNSS;BDS;BeiDou;GeoClue;geocode;geolokalizacja;położenie;"
+"geograficzne;miejsce;lokacja;miasto;państwo;kraj;"
 
 #: ../panels/privacy/privacy.ui.h:1
 msgid "Screen Turns Off"
@@ -4977,7 +4985,7 @@ msgstr ""
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Language;Layout;Keyboard;Input;"
-msgstr "Język;Układ;Klawiatura;Wprowadzanie;Wejście;"
+msgstr "Język;Dialekt;Układ;Layout;Klawiatura;Wprowadzanie;Wejście;Pisanie;"
 
 #: ../panels/region/input-chooser.ui.h:1
 msgid "Add an Input Source"
@@ -5086,7 +5094,8 @@ msgstr ""
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:4
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr ""
-"Wyszukiwanie;Znajdź;Indeksowanie;Index;Ukryj;Ukrywanie;Prywatność;Wyniki;"
+"Wyszukiwanie;Znajdź;Szukaj;Wyszukaj;Indeksowanie;Index;Ukryj;Ukrywanie;"
+"Prywatność;Wyniki;"
 
 #: ../panels/search/search-locations-dialog.ui.h:1
 msgid "Search Locations"
@@ -5147,9 +5156,10 @@ msgid ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
 "pictures;photos;movies;server;renderer;"
 msgstr ""
-"współdzielenie;ssh;komputer;host;nazwa;zdalnie;zdalny;pulpit;desktop;"
-"bluetooth;obex;multimedia;media;dźwięk;audio;wideo;obraz;video;zdjęcia;filmy;"
-"serwer;renderer;"
+"współdzielenie;share;sharing;ssh;vnc;rfb;rdp;nx;spice;vino;vinagre;komputer;"
+"host;nazwa;zdalnie;zdalny;zdalne;pulpit;desktop;ekran;bluetooth;obex;"
+"multimedia;media;dźwięk;audio;wideo;obraz;video;zdjęcia;filmy;serwer;"
+"renderer;rygel;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5293,7 +5303,9 @@ msgstr ""
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
 msgstr ""
-"Karta;Mikrofon;Głośność;Oddalenie;Balans;Bluetooth;Headset;Słuchawki;Audio;"
+"Karta;Mikrofon;Głośność;Oddalenie;Balans;Bluetooth;Headset;Słuchawki;"
+"Głośniki;Audio;Efekty;Alarmy;Odtwarzanie;Nagrywanie;Mono;Stereo;Surround;"
+"Dookolny;PCM;S/PDIF;HDMI;DTS;Dolby;Digital;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
@@ -5525,9 +5537,11 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgstr ""
-"Klawiatura;Mysz;a11y;Dostępność;Uniwersalny;Kontrast;Przybliżanie;Czytnik;"
-"ekranowy;tekst;font;czcionka;rozmiar;AccessX;Trwałe;Klawisze;Powolne;"
-"Odbijające;Myszy;"
+"Klawiatura;Mysz;a11y;Dostępność;Uniwersalny;Kontrast;Przybliżanie;"
+"Powiększanie;Lupa;Zoom;Wzrok;Celownik;Kolory;Czytnik;ekranowy;ekranu;tekst;"
+"czcionka;font;rozmiar;duży;większy;zwiększ;powiększ;AccessX;Trwałe;Klawisze;"
+"Powolne;Odbijające;Myszy;Sygnały;Alarmy;Wizualne;Wspomaganie;Pisanie;"
+"Klikanie;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6118,8 +6132,10 @@ msgstr "Dodawanie lub usuwanie użytkowników i zmienianie hasła"
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr ""
-"Login;Logowanie;Nazwa;Odcisk palców;Odcisk linii papilarnych;Awatar;Avatar;"
-"Logo;Twarz;Hasło;"
+"Login;Logowanie;Automatyczne;Historia;Sesja;Nazwa;Odcisk;Palców;Linie;Linii;"
+"Papilarne;Papilarnych;Awatar;Avatar;Logo;Twarz;Obrazek;Hasło;Konto;Konta;"
+"Administrator;Firmowe;Centralne;Uwierzytelnianie;Authentication;Enterprise;"
+"Kerberos;KRB5;Hesiod;LDAP;NSS;NIS;Winbind;Samba;SSSD;IPA;FreeIPA;Język;"
 
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
 msgid "Login History"
@@ -6876,7 +6892,7 @@ msgstr ""
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr "Tablet;Wacom;Rysik;Stylus;Gumka;Mysz;"
+msgstr "Tablet;Wacom;Rysik;Stylus;Gumka;Mysz;Myszka;"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
 msgid "Tablet (absolute)"
