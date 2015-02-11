@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-"
 "center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-12-23 21:49+0000\n"
-"PO-Revision-Date: 2014-12-24 11:46+0700\n"
+"POT-Creation-Date: 2015-02-11 07:29+0000\n"
+"PO-Revision-Date: 2015-02-11 15:15+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -107,16 +107,16 @@ msgstr "Anda dapat menambahkan citra ke folder %s Anda dan mereka akan muncul di
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1514
-#: ../panels/display/cc-display-panel.c:1951
+#: ../panels/display/cc-display-panel.c:1579
+#: ../panels/display/cc-display-panel.c:2011
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
 #: ../panels/network/net-device-wifi.c:1247 ../panels/network/net-device-wifi.c:1440
-#: ../panels/network/network-wifi.ui.h:1 ../panels/printers/cc-printers-panel.c:1945
+#: ../panels/network/network-wifi.ui.h:1 ../panels/printers/cc-printers-panel.c:1938
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:468 ../panels/region/format-chooser.ui.h:3
+#: ../panels/privacy/cc-privacy-panel.c:568 ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:491
@@ -125,8 +125,8 @@ msgstr "Anda dapat menambahkan citra ke folder %s Anda dan mereka akan muncul di
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:720
 msgid "_Cancel"
 msgstr "Ba_tal"
 
@@ -136,18 +136,18 @@ msgstr "Ba_tal"
 msgid "Select"
 msgstr "Pilih"
 
-#: ../panels/background/cc-background-item.c:197
+#: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
 msgstr "ukuran berganda"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:201
+#: ../panels/background/cc-background-item.c:207
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:327
+#: ../panels/background/cc-background-item.c:333
 msgid "No Desktop Background"
 msgstr "Tanpa Latar Belakang Desktop"
 
@@ -698,7 +698,7 @@ msgstr "Aktifkan"
 msgid "Add profile"
 msgstr "Tambah profil"
 
-#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
 msgstr "Mengalibrasi…"
 
@@ -824,7 +824,7 @@ msgid "Other…"
 msgstr "Lainnya…"
 
 #: ../panels/common/cc-language-chooser.c:123
-#: ../panels/region/cc-format-chooser.c:267 ../panels/region/cc-input-chooser.c:165
+#: ../panels/region/cc-format-chooser.c:270 ../panels/region/cc-input-chooser.c:167
 msgid "More…"
 msgstr "Lebih banyak…"
 
@@ -1024,104 +1024,117 @@ msgstr "Ubah pengaturan waktu dan tanggal sistem"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Untuk mengubah tatanan waktu atau tanggal, Anda perlu diotentikasi."
 
-#: ../panels/display/cc-display-panel.c:487
+#: ../panels/display/cc-display-panel.c:564
 msgid "Lid Closed"
 msgstr "Lid Tertutup"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:490
+#: ../panels/display/cc-display-panel.c:567
 msgid "Mirrored"
 msgstr "Tampilan Kembar"
 
-#: ../panels/display/cc-display-panel.c:492 ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:569 ../panels/display/cc-display-panel.c:2185
 msgid "Primary"
 msgstr "Primer"
 
-#: ../panels/display/cc-display-panel.c:494
-#: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
-#: ../panels/privacy/cc-privacy-panel.c:84 ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/display/cc-display-panel.c:571
+#: ../panels/notifications/cc-notifications-panel.c:247
+#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
+#: ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695 ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Mati"
 
-#: ../panels/display/cc-display-panel.c:497
+#: ../panels/display/cc-display-panel.c:574
 msgid "Secondary"
 msgstr "Sekunder"
 
-#: ../panels/display/cc-display-panel.c:1510
+#. Title of displays dialog when multiple monitors are present.
+#: ../panels/display/cc-display-panel.c:1576
 msgid "Arrange Combined Displays"
 msgstr "Atur Tampilan Kombinasi"
 
-#: ../panels/display/cc-display-panel.c:1516
-#: ../panels/display/cc-display-panel.c:1954
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2012
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "Ter_apkan"
 
-#: ../panels/display/cc-display-panel.c:1537
+#: ../panels/display/cc-display-panel.c:1604
 msgid "Drag displays to rearrange them"
 msgstr "Seret tampilan untuk mengatur ulang mereka"
 
-#: ../panels/display/cc-display-panel.c:2056
+#: ../panels/display/cc-display-panel.c:2064
+msgid "Rotate counterclockwise by 90°"
+msgstr "Putar berlawanan arah jarum jam 90°"
+
+#: ../panels/display/cc-display-panel.c:2082
+msgid "Rotate by 180°"
+msgstr "Putar 180°"
+
+#: ../panels/display/cc-display-panel.c:2100
+msgid "Rotate clockwise by 90°"
+msgstr "Putar searah jarum jam 90°"
+
+#: ../panels/display/cc-display-panel.c:2121
 msgid "Size"
 msgstr "Ukuran"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2069
+#: ../panels/display/cc-display-panel.c:2134
 msgid "Aspect Ratio"
 msgstr "Rasio Aspek"
 
-#: ../panels/display/cc-display-panel.c:2090
+#: ../panels/display/cc-display-panel.c:2155
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Resolusi"
 
-#: ../panels/display/cc-display-panel.c:2121
+#: ../panels/display/cc-display-panel.c:2186
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Tunjukkan bilah puncak dan Ringkasan Aktivitas pada tampilan ini"
 
-#: ../panels/display/cc-display-panel.c:2127
+#: ../panels/display/cc-display-panel.c:2192
 msgid "Secondary Display"
 msgstr "Tampilan Sekunder"
 
-#: ../panels/display/cc-display-panel.c:2128
+#: ../panels/display/cc-display-panel.c:2193
 msgid "Join this display with another to create an extra workspace"
 msgstr "Gabungkan tampilan ini dengan lainnya untuk membuat ruang kerja ekstra"
 
-#: ../panels/display/cc-display-panel.c:2135
+#: ../panels/display/cc-display-panel.c:2200
 msgid "Presentation"
 msgstr "Presentasi"
 
-#: ../panels/display/cc-display-panel.c:2136
+#: ../panels/display/cc-display-panel.c:2201
 msgid "Show slideshows and media only"
 msgstr "Tampilkan hanya pertunjukan salindia dan media"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2141
+#: ../panels/display/cc-display-panel.c:2206
 msgid "Mirror"
 msgstr "Cermin"
 
-#: ../panels/display/cc-display-panel.c:2142
+#: ../panels/display/cc-display-panel.c:2207
 msgid "Show your existing view on both displays"
 msgstr "Tayangkan tilikan saat ini pada kedua tampilan"
 
-#: ../panels/display/cc-display-panel.c:2148
+#: ../panels/display/cc-display-panel.c:2213
 msgid "Turn Off"
 msgstr "Matikan"
 
-#: ../panels/display/cc-display-panel.c:2149
+#: ../panels/display/cc-display-panel.c:2214
 msgid "Don't use this display"
 msgstr "Jangan pakai tampilan ini"
 
-#: ../panels/display/cc-display-panel.c:2358
+#: ../panels/display/cc-display-panel.c:2444
 msgid "Could not get screen information"
 msgstr "Tak mendapatkan informasi layar"
 
-#: ../panels/display/cc-display-panel.c:2389
+#: ../panels/display/cc-display-panel.c:2475
 msgid "_Arrange Combined Displays"
 msgstr "_Atur Tampilan Kombinasi"
 
@@ -1138,58 +1151,58 @@ msgstr "Pilih bagaimana menggunakan monitor dan proyektor yang tersambung"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
 msgstr "Panel;Proyektor;xrandr;Layar;Resolusi;Segarkan;Monitor;"
 
-#: ../panels/info/cc-info-panel.c:384
+#: ../panels/info/cc-info-panel.c:385
 msgid "Wayland"
 msgstr "Wayland"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:387 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:388 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Unknown"
 
-#: ../panels/info/cc-info-panel.c:472
+#: ../panels/info/cc-info-panel.c:473
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:474
+#: ../panels/info/cc-info-panel.c:475
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1154
+#: ../panels/info/cc-info-panel.c:1155
 msgid "Ask what to do"
 msgstr "Tanya apa yang akan dilakukan"
 
-#: ../panels/info/cc-info-panel.c:1158
+#: ../panels/info/cc-info-panel.c:1159
 msgid "Do nothing"
 msgstr "Jangan lakukan apa pun"
 
-#: ../panels/info/cc-info-panel.c:1162
+#: ../panels/info/cc-info-panel.c:1163
 msgid "Open folder"
 msgstr "Buka folder"
 
-#: ../panels/info/cc-info-panel.c:1253
+#: ../panels/info/cc-info-panel.c:1254
 msgid "Other Media"
 msgstr "Media Lain"
 
-#: ../panels/info/cc-info-panel.c:1284
+#: ../panels/info/cc-info-panel.c:1285
 msgid "Select an application for audio CDs"
 msgstr "Pilih aplikasi bagi CD musik"
 
-#: ../panels/info/cc-info-panel.c:1285
+#: ../panels/info/cc-info-panel.c:1286
 msgid "Select an application for video DVDs"
 msgstr "Pilih aplikasi bagi DVD video"
 
-#: ../panels/info/cc-info-panel.c:1286
+#: ../panels/info/cc-info-panel.c:1287
 msgid "Select an application to run when a music player is connected"
 msgstr "Pilih aplikasi yang dijalankan ketika pemutar musik disambungkan"
 
-#: ../panels/info/cc-info-panel.c:1287
+#: ../panels/info/cc-info-panel.c:1288
 msgid "Select an application to run when a camera is connected"
 msgstr "Pilih aplikasi yang dijalankan ketika kamera disambungkan"
 
-#: ../panels/info/cc-info-panel.c:1288
+#: ../panels/info/cc-info-panel.c:1289
 msgid "Select an application for software CDs"
 msgstr "Pilih aplikasi bagi CD perangkat lunak"
 
@@ -1198,71 +1211,71 @@ msgstr "Pilih aplikasi bagi CD perangkat lunak"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1300
+#: ../panels/info/cc-info-panel.c:1301
 msgid "audio DVD"
 msgstr "DVD suara"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1302
 msgid "blank Blu-ray disc"
 msgstr "diska Blu-ray kosong"
 
-#: ../panels/info/cc-info-panel.c:1302
+#: ../panels/info/cc-info-panel.c:1303
 msgid "blank CD disc"
 msgstr "diska CD kosong"
 
-#: ../panels/info/cc-info-panel.c:1303
+#: ../panels/info/cc-info-panel.c:1304
 msgid "blank DVD disc"
 msgstr "diska DVD kosong"
 
-#: ../panels/info/cc-info-panel.c:1304
+#: ../panels/info/cc-info-panel.c:1305
 msgid "blank HD DVD disc"
 msgstr "diska HD DVD kosong"
 
-#: ../panels/info/cc-info-panel.c:1305
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Blu-ray video disc"
 msgstr "diska video Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1306
+#: ../panels/info/cc-info-panel.c:1307
 msgid "e-book reader"
 msgstr "pembaca e-book"
 
-#: ../panels/info/cc-info-panel.c:1307
+#: ../panels/info/cc-info-panel.c:1308
 msgid "HD DVD video disc"
 msgstr "diska video HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:1309
 msgid "Picture CD"
 msgstr "CD gambar"
 
-#: ../panels/info/cc-info-panel.c:1309
+#: ../panels/info/cc-info-panel.c:1310
 msgid "Super Video CD"
 msgstr "CD Super Video"
 
-#: ../panels/info/cc-info-panel.c:1310
+#: ../panels/info/cc-info-panel.c:1311
 msgid "Video CD"
 msgstr "CD video"
 
-#: ../panels/info/cc-info-panel.c:1311
+#: ../panels/info/cc-info-panel.c:1312
 msgid "Windows software"
 msgstr "Perangkat lunak Windows"
 
-#: ../panels/info/cc-info-panel.c:1434 ../panels/keyboard/keyboard-shortcuts.c:1932
+#: ../panels/info/cc-info-panel.c:1435 ../panels/keyboard/keyboard-shortcuts.c:1947
 msgid "Section"
 msgstr "Seksi"
 
-#: ../panels/info/cc-info-panel.c:1443 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1444 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Ringkasan"
 
-#: ../panels/info/cc-info-panel.c:1449 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1450 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Aplikasi Baku"
 
-#: ../panels/info/cc-info-panel.c:1454 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1455 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Media Lepasan"
 
-#: ../panels/info/cc-info-panel.c:1479
+#: ../panels/info/cc-info-panel.c:1480
 #, c-format
 msgid "Version %s"
 msgstr "Versi %s"
@@ -1567,7 +1580,7 @@ msgstr "Nyalakan atau matikan kontras tinggi"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1218
+#: ../panels/keyboard/keyboard-shortcuts.c:1219
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1699,16 +1712,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Pintas"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:635
-#: ../panels/keyboard/keyboard-shortcuts.c:643
+#: ../panels/keyboard/keyboard-shortcuts.c:636
+#: ../panels/keyboard/keyboard-shortcuts.c:644
 msgid "Custom Shortcuts"
 msgstr "Tombol Pintas Gubahan"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:860
+#: ../panels/keyboard/keyboard-shortcuts.c:861
 msgid "<Unknown Action>"
 msgstr "<Tindakan Tak Diketahui>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1357
+#: ../panels/keyboard/keyboard-shortcuts.c:1358
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using "
@@ -1720,7 +1733,7 @@ msgstr ""
 "Silakan coba dengan rangkaian tombol seperti Control, Alt atau Shift secara "
 "bersamaan."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1387
+#: ../panels/keyboard/keyboard-shortcuts.c:1388
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1729,18 +1742,18 @@ msgstr ""
 "Tombol pintas itu \"%s\" sudah digunakan untuk\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1392
+#: ../panels/keyboard/keyboard-shortcuts.c:1393
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Jika Anda memfungsikan ulang cara pintas untuk \"%s\", cara \"%s\"  ini akan "
 "dinonaktifkan."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1398
+#: ../panels/keyboard/keyboard-shortcuts.c:1399
 msgid "_Reassign"
 msgstr "Alih _Fungsikan"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1439
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to automatically "
@@ -1749,7 +1762,7 @@ msgstr ""
 "Pintasan \"%s\" punya pintasan terkait \"%s\". Apakah Anda ingin menatanya secara "
 "otomatis menjadi \"%s\"?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1449
+#: ../panels/keyboard/keyboard-shortcuts.c:1450
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled if you "
@@ -1758,7 +1771,7 @@ msgstr ""
 "\"%s\" kini diasosiasikan dengan \"%s\", pintasan ini akan dinonaktifkan bila Anda "
 "maju."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1456
+#: ../panels/keyboard/keyboard-shortcuts.c:1457
 msgid "_Assign"
 msgstr "Tug_askan"
 
@@ -1852,19 +1865,15 @@ msgid "Fast"
 msgstr "Cepat"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Disable while _typing"
-msgstr "Matikan ke_tika mengetik"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Tap to _click"
 msgstr "_Ketuk untuk mengklik"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Two _finger scroll"
 msgstr "Menggulung dua _jari"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "_Natural scrolling"
 msgstr "Pe_ngguliran alami"
 
@@ -1902,11 +1911,11 @@ msgstr "Klik tunggal, tombol sekunder"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:369
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "Mode _Pesawat Terbang"
 
-#: ../panels/network/cc-network-panel.c:977
+#: ../panels/network/cc-network-panel.c:966
 msgid "Network proxy"
 msgstr "Proxy jaringan"
 
@@ -1914,16 +1923,19 @@ msgstr "Proxy jaringan"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1156 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1301
-msgid "The system network services are not compatible with this version."
-msgstr "Layanan jaringan sistem tak kompatibel dengan versi ini."
+#: ../panels/network/cc-network-panel.c:1299
+msgid "Oops, something has gone wrong. Please contact your software vendor."
+msgstr "Ups, ada sesuatu yang salah. Harap hubungi vendor perangkat lunak Anda."
+
+#: ../panels/network/cc-network-panel.c:1305
+msgid "NetworkManager needs to be running."
+msgstr "NetworkManager perlu berjalan."
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
 msgid "802.1x _Security"
@@ -2122,7 +2134,7 @@ msgstr "Otomatis (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
-#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/network/network-wifi.ui.h:26 ../panels/privacy/cc-privacy-panel.c:182
 msgid "Manual"
 msgstr "Manual"
 
@@ -2146,6 +2158,7 @@ msgstr "Awalan"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Automatic"
 msgstr "Otomatis"
 
@@ -2317,7 +2330,7 @@ msgid "Firewall _Zone"
 msgstr "_Zona Firewall"
 
 #: ../panels/network/connection-editor/firewall-helpers.c:48
-#: ../panels/network/connection-editor/firewall-helpers.c:112
+#: ../panels/network/connection-editor/firewall-helpers.c:113
 msgctxt "Firewall zone"
 msgid "Default"
 msgstr "Baku"
@@ -2455,7 +2468,7 @@ msgid "Select file to import"
 msgstr "Pilih berkas untuk diimpor"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:1939
 #: ../panels/sharing/cc-sharing-panel.c:492
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -2585,7 +2598,7 @@ msgid "Wired"
 msgstr "Kabel"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1596 ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/net-device-wifi.c:1597 ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8 ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:8
 msgid "Options…"
@@ -2648,19 +2661,19 @@ msgstr ""
 "Rincian jaringan bagi jaringan yang dipilih, termasuk sandi dan sebarang "
 "konfigurasi gubahan akan hilang."
 
-#: ../panels/network/net-device-wifi.c:1745
+#: ../panels/network/net-device-wifi.c:1750
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Riwayat"
 
-#: ../panels/network/net-device-wifi.c:1749 ../panels/region/input-options.ui.h:2
+#: ../panels/network/net-device-wifi.c:1754 ../panels/region/input-options.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:533
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Tutup"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1757
+#: ../panels/network/net-device-wifi.c:1762
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Lupakan"
@@ -3470,47 +3483,47 @@ msgstr "Inde_ks WEP"
 msgid "_Type"
 msgstr "_Tipe"
 
-#. TRANSLATORS: this is the per application switch for message tray usage.
-#: ../panels/notifications/cc-edit-dialog.c:37
-msgctxt "notifications"
-msgid "Notifications"
-msgstr "Notifikasi"
-
-#. TRANSLATORS: this is the setting to configure sounds associated with notifications
-#: ../panels/notifications/cc-edit-dialog.c:39
-msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Peringatan Suara"
-
-#: ../panels/notifications/cc-edit-dialog.c:40
-msgctxt "notifications"
-msgid "Show Popup Banners"
-msgstr "Tampilkan Banner Popup"
-
-#. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
-#: ../panels/notifications/cc-edit-dialog.c:42
-msgctxt "notifications"
-msgid "Show Details in Banners"
-msgstr "Tampilkan Rincian dalam Banner"
-
-#: ../panels/notifications/cc-edit-dialog.c:43
-msgctxt "notifications"
-msgid "View in Lock Screen"
-msgstr "Tampilkan dalam Layar Terkunci"
-
-#: ../panels/notifications/cc-edit-dialog.c:44
-msgctxt "notifications"
-msgid "Show Details in Lock Screen"
-msgstr "Tampilkan Rincian dalam Layar Terkunci"
-
-#: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
-#: ../panels/privacy/cc-privacy-panel.c:84 ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/notifications/cc-notifications-panel.c:247
+#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
+#: ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
 msgid "On"
 msgstr "Nyala"
+
+#. This is the per application switch for message tray usage.
+#: ../panels/notifications/edit-dialog.ui.h:2
+msgctxt "notifications"
+msgid "Notifications"
+msgstr "Notifikasi"
+
+#. This is the setting to configure sounds associated with notifications.
+#: ../panels/notifications/edit-dialog.ui.h:4
+msgctxt "notifications"
+msgid "Sound Alerts"
+msgstr "Peringatan Suara"
+
+#: ../panels/notifications/edit-dialog.ui.h:5
+msgctxt "notifications"
+msgid "Notification Banners"
+msgstr "Notifikasi"
+
+#. Banners here refers to message tray notifications in the middle of the screen.
+#: ../panels/notifications/edit-dialog.ui.h:7
+msgctxt "notifications"
+msgid "Show Message Content in Banners"
+msgstr "Tampilkan Rincian dalam Banner"
+
+#: ../panels/notifications/edit-dialog.ui.h:8
+msgctxt "notifications"
+msgid "Lock Screen Notifications"
+msgstr "Notifikasi Layar Kunci"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
+msgctxt "notifications"
+msgid "Show Message Content on Lock Screen"
+msgstr "Tampilkan Isi Pesan dalam Layar Kunci"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3526,12 +3539,18 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Pemberitahuan;Banner;Pesan;Baki;Popup;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Show Pop Up Banners"
-msgstr "Tampilkan Pop Up Banner"
+msgid "Notification Banners"
+msgstr "Notifikasi"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Show in Lock Screen"
-msgstr "Tampilkan dalam Layar Terkunci"
+msgid "Lock Screen Notifications"
+msgstr "Notifikasi Layar Kunci"
+
+#. List of applications.
+#: ../panels/notifications/notifications.ui.h:4
+#: ../panels/sound/gvc-mixer-dialog.c:1781
+msgid "Applications"
+msgstr "Aplikasi"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
 msgctxt "Online Account"
@@ -3755,120 +3774,120 @@ msgid "Computer"
 msgstr "Komputer"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
-#: ../panels/power/cc-power-panel.c:2030
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
+#: ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "Baterai"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:549
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Mengisi"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:564
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Awas"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Lemah"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bagus"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:571
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Terisi penuh"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Kosong"
 
-#: ../panels/power/cc-power-panel.c:724
+#: ../panels/power/cc-power-panel.c:732
 msgid "Batteries"
 msgstr "Baterai "
 
-#: ../panels/power/cc-power-panel.c:1126
+#: ../panels/power/cc-power-panel.c:1134
 msgid "When _idle"
 msgstr "Ket_ika menganggur"
 
-#: ../panels/power/cc-power-panel.c:1454
+#: ../panels/power/cc-power-panel.c:1462
 msgid "Power Saving"
 msgstr "Penghematan Daya"
 
-#: ../panels/power/cc-power-panel.c:1482
+#: ../panels/power/cc-power-panel.c:1490
 msgid "_Screen brightness"
 msgstr "Kecerahan _layar"
 
-#: ../panels/power/cc-power-panel.c:1488
+#: ../panels/power/cc-power-panel.c:1496
 msgid "_Keyboard brightness"
 msgstr "_Kecerahan papan tik"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1506
 msgid "_Dim screen when inactive"
 msgstr "Re_dupkan layar ketika tak aktif"
 
-#: ../panels/power/cc-power-panel.c:1523
+#: ../panels/power/cc-power-panel.c:1531
 msgid "_Blank screen"
 msgstr "Kosongkan layar"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1568
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1565
-msgid "Turns off wireless devices"
-msgstr "Matikan perangkat nirkabel"
+#: ../panels/power/cc-power-panel.c:1573
+msgid "Wireless devices require extra power"
+msgstr "Perangkat nirkabel perlu daya ekstra"
 
-#: ../panels/power/cc-power-panel.c:1590
+#: ../panels/power/cc-power-panel.c:1598
 msgid "_Mobile broadband"
 msgstr "Data _seluler"
 
-#: ../panels/power/cc-power-panel.c:1595
-msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "Matikan perangkat data seluler (3G, 4G, WiMax, dsb.)"
+#: ../panels/power/cc-power-panel.c:1603
+msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgstr "Perangkat data seluler (3G, 4G, WiMax, dsb.) memerlukan daya ekstra"
 
-#: ../panels/power/cc-power-panel.c:1645
+#: ../panels/power/cc-power-panel.c:1653
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When on battery power"
 msgstr "Ketika memakai baterai"
 
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1709
 msgid "When plugged in"
 msgstr "Ketika ditancapkan"
 
-#: ../panels/power/cc-power-panel.c:1829
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Suspend & Power Off"
 msgstr "Suspensi & Matikan"
 
-#: ../panels/power/cc-power-panel.c:1862
+#: ../panels/power/cc-power-panel.c:1872
 msgid "_Automatic suspend"
 msgstr "Suspensi otom_atis"
 
-#: ../panels/power/cc-power-panel.c:1886
+#: ../panels/power/cc-power-panel.c:1896
 msgid "When battery power is _critical"
 msgstr "Ketika muatan baterai _kritis"
 
-#: ../panels/power/cc-power-panel.c:1941
+#: ../panels/power/cc-power-panel.c:1951
 msgid "Power Off"
 msgstr "Matikan"
 
-#: ../panels/power/cc-power-panel.c:2077
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -3981,187 +4000,187 @@ msgid "Authentication Required"
 msgstr "Otentikasi Diperlukan"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:588
 msgid "Low on toner"
 msgstr "Pewarna sedikit"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:592
+#: ../panels/printers/cc-printers-panel.c:590
 msgid "Out of toner"
 msgstr "Pewarna habis"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:595
+#: ../panels/printers/cc-printers-panel.c:593
 msgid "Low on developer"
 msgstr "Developer sedikit"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:596
 msgid "Out of developer"
 msgstr "Developer habis"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:598
 msgid "Low on a marker supply"
 msgstr "Asupan penanda sedikit"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:600
 msgid "Out of a marker supply"
 msgstr "Asupan penanda habis"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:602
 msgid "Open cover"
 msgstr "Buka penutup"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:604
 msgid "Open door"
 msgstr "Buka pinta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:606
 msgid "Low on paper"
 msgstr "Kertas sedikit"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:608
 msgid "Out of paper"
 msgstr "Kertas habis"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:612
+#: ../panels/printers/cc-printers-panel.c:610
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Luring"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:614
-#: ../panels/printers/cc-printers-panel.c:805
+#: ../panels/printers/cc-printers-panel.c:612
+#: ../panels/printers/cc-printers-panel.c:803
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Dihentikan"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:616
+#: ../panels/printers/cc-printers-panel.c:614
 msgid "Waste receptacle almost full"
 msgstr "Penampung sampah hampir penuh"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:618
+#: ../panels/printers/cc-printers-panel.c:616
 msgid "Waste receptacle full"
 msgstr "Penampung sampah penuh"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:620
+#: ../panels/printers/cc-printers-panel.c:618
 msgid "The optical photo conductor is near end of life"
 msgstr "Penghantar foto optik hampir mati"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:622
+#: ../panels/printers/cc-printers-panel.c:620
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Penghantar foto optik tak berfungsi lagi"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:732
+#: ../panels/printers/cc-printers-panel.c:730
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Mengkonfigurasi"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:791
+#: ../panels/printers/cc-printers-panel.c:789
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Siap"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:796
+#: ../panels/printers/cc-printers-panel.c:794
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Tak menerima pekerjaan"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:801
+#: ../panels/printers/cc-printers-panel.c:799
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Memroses"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:921
+#: ../panels/printers/cc-printers-panel.c:919
 msgid "Toner Level"
 msgstr "Aras Pewarna"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:924
+#: ../panels/printers/cc-printers-panel.c:922
 msgid "Ink Level"
 msgstr "Aras Tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:927
+#: ../panels/printers/cc-printers-panel.c:925
 msgid "Supply Level"
 msgstr "Aras Asupan"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:945
+#: ../panels/printers/cc-printers-panel.c:943
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Memasang"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1121
+#: ../panels/printers/cc-printers-panel.c:1119
 msgid "No printers available"
 msgstr "Pencetak tak tersedia"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1431
+#: ../panels/printers/cc-printers-panel.c:1429
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u aktif"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1775
+#: ../panels/printers/cc-printers-panel.c:1768
 msgid "Failed to add new printer."
 msgstr "Gagal menambah pencetak baru."
 
-#: ../panels/printers/cc-printers-panel.c:1942
+#: ../panels/printers/cc-printers-panel.c:1935
 msgid "Select PPD File"
 msgstr "Pilih Berkas PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1951
+#: ../panels/printers/cc-printers-panel.c:1944
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 msgstr ""
 "Berkas Deskripsi Pencetak PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2256
+#: ../panels/printers/cc-printers-panel.c:2251
 msgid "No suitable driver found"
 msgstr "Tak ditemukan pengandar yang cocok"
 
-#: ../panels/printers/cc-printers-panel.c:2325
+#: ../panels/printers/cc-printers-panel.c:2322
 msgid "Searching for preferred drivers…"
 msgstr "Mencari pengandar yang disukai…"
 
-#: ../panels/printers/cc-printers-panel.c:2340
+#: ../panels/printers/cc-printers-panel.c:2343
 msgid "Select from database…"
 msgstr "Pilih dari basis data…"
 
-#: ../panels/printers/cc-printers-panel.c:2349
+#: ../panels/printers/cc-printers-panel.c:2352
 msgid "Provide PPD File…"
 msgstr "Sediakan Berkas PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2500
-#: ../panels/printers/cc-printers-panel.c:2523
+#: ../panels/printers/cc-printers-panel.c:2503
+#: ../panels/printers/cc-printers-panel.c:2526
 msgid "Test page"
 msgstr "Halaman uji"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2937
+#: ../panels/printers/cc-printers-panel.c:2940
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Tak dapat memuat ui: %s"
@@ -4217,8 +4236,8 @@ msgstr "Pencetak tak terdeteksi."
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:9
-msgid "Enter address of a printer or a text to filter results"
-msgstr "Masukkan alamat suatu pencetak atau suatu teks untuk menyaring hasil"
+msgid "Enter a network address or search for a printer"
+msgstr "Masukkan suatu alamat jaringan atau cari sebuah pencetak"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4582,45 +4601,63 @@ msgstr ""
 "Maaf! Layanan pencetakan sistem\n"
 "sepertinya tak tersedia."
 
-#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Kunci Layar"
 
-#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Pemakaian & Riwayat"
 
-#: ../panels/privacy/cc-privacy-panel.c:487
+#: ../panels/privacy/cc-privacy-panel.c:587
 msgid "Empty all items from Trash?"
 msgstr "Kosongkan semua butir dari Tong Sampah?"
 
-#: ../panels/privacy/cc-privacy-panel.c:488
+#: ../panels/privacy/cc-privacy-panel.c:588
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Semua butir dalam Tong Sampah akan dihapus secara permanen."
 
-#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Kosongkan Tong Sampah"
 
-#: ../panels/privacy/cc-privacy-panel.c:512
+#: ../panels/privacy/cc-privacy-panel.c:612
 msgid "Delete all the temporary files?"
 msgstr "Hapus semua berkas temporer?"
 
-#: ../panels/privacy/cc-privacy-panel.c:513
+#: ../panels/privacy/cc-privacy-panel.c:613
 msgid "All the temporary files will be permanently deleted."
 msgstr "Semua berkas temporer akan dihapus secara permanen."
 
-#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Bersihkan Berkas Tem_porer"
 
-#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Kosongkan Tong Sampah & Berkas Temporer"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Pemakaian Perangkat Lunak"
+
+#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+msgid "Problem Reporting"
+msgstr "Pelaporan Masalah"
+
+#. translators: '%s' is the distributor's name, such as 'Fedora'
+#: ../panels/privacy/cc-privacy-panel.c:731
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
+msgstr ""
+"Mengirim laporan masalah teknis membantu kami memperbaiki %s. Laporan dikirim "
+"secara anonim dan dibersihkan dari data pribadi."
+
+#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+msgid "Privacy Policy"
+msgstr "Kebijakan Privasi"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -4763,10 +4800,6 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "Kirim _statistik penggunaan perangkat lunak"
 
-#: ../panels/privacy/privacy.ui.h:41
-msgid "Privacy Policy"
-msgstr "Kebijakan Privasi"
-
 #: ../panels/privacy/privacy.ui.h:42
 msgid "_Location Services"
 msgstr "Layanan _Lokasi"
@@ -4774,6 +4807,10 @@ msgstr "Layanan _Lokasi"
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Used to determine your geographical location"
 msgstr "Dipakai untuk menentukan lokasi geografis Anda"
+
+#: ../panels/privacy/privacy.ui.h:45
+msgid "_Automatic Problem Reporting"
+msgstr "Pelaporan Masalah Otom_atis"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
@@ -4785,26 +4822,26 @@ msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrik"
 
-#: ../panels/region/cc-format-chooser.c:283
+#: ../panels/region/cc-format-chooser.c:286
 msgid "No regions found"
 msgstr "Wilayah tak ditemukan"
 
-#: ../panels/region/cc-input-chooser.c:178
+#: ../panels/region/cc-input-chooser.c:180
 msgid "No input sources found"
 msgstr "Sumber masukan tak ditemukan"
 
-#: ../panels/region/cc-input-chooser.c:1082
+#: ../panels/region/cc-input-chooser.c:1084
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Lainnya"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1059
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Sesi Anda perlu dimulai ulang agar perubahan berefek"
 
 #: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1063
 msgid "Restart Now"
 msgstr "Restart Sekarang"
 
@@ -4812,15 +4849,7 @@ msgstr "Restart Sekarang"
 msgid "No input source selected"
 msgstr "Tak ada sumber masukan yang dipilih"
 
-#: ../panels/region/cc-region-panel.c:1092
-msgid "Sorry"
-msgstr "Maaf"
-
-#: ../panels/region/cc-region-panel.c:1094
-msgid "Input methods can't be used on the login screen"
-msgstr "Metoda masukan tak dapat dipakai pada layar log masuk"
-
-#: ../panels/region/cc-region-panel.c:1731
+#: ../panels/region/cc-region-panel.c:1703
 msgid "Login Screen"
 msgstr "Layar Log Masuk"
 
@@ -4869,6 +4898,10 @@ msgstr "Bahasa;Tata Letak;Papan Tik;Masukan;"
 #: ../panels/region/input-chooser.ui.h:1
 msgid "Add an Input Source"
 msgstr "Tambah Sumber Masukan"
+
+#: ../panels/region/input-chooser.ui.h:4
+msgid "Input methods can't be used on the login screen"
+msgstr "Metoda masukan tak dapat dipakai pada layar log masuk"
 
 #: ../panels/region/input-options.ui.h:1
 msgid "Input Source Options"
@@ -5012,7 +5045,7 @@ msgstr "Aktif"
 msgid "Choose a Folder"
 msgstr "Pilih Folder"
 
-#: ../panels/sharing/cc-sharing-panel.c:916
+#: ../panels/sharing/cc-sharing-panel.c:917
 msgid "Copy"
 msgstr "Salin"
 
@@ -5152,8 +5185,10 @@ msgid "Require a password"
 msgstr "Memerlukan sandi"
 
 #: ../panels/sharing/sharing.ui.h:26
-msgid "Share music, photos and videos over the network."
-msgstr "Berbagi musik, foto, dan video melalui jaringan."
+msgid "Media sharing allows you to share music, photos and videos over the network."
+msgstr ""
+"Berbagi media memungkinkan Anda memakai bersama musik, foto, dan video melalui "
+"jaringan."
 
 #: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
@@ -5334,10 +5369,6 @@ msgstr "Efek Suara"
 #: ../panels/sound/gvc-mixer-dialog.c:1768
 msgid "_Alert volume:"
 msgstr "Volume w_aspada:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1781
-msgid "Applications"
-msgstr "Aplikasi"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1785
 msgid "No application is currently playing or recording audio."
@@ -6397,7 +6428,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:838
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6405,7 +6436,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-user-panel.c:842
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6480,30 +6511,30 @@ msgstr "Sandi salah, harap coba lagi"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Tak bisa menyambung ke domain %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:239
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Akun Lain"
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Gagal menghapus pengguna"
 
-#: ../panels/user-accounts/um-user-panel.c:513
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:563
+#: ../panels/user-accounts/um-user-panel.c:615
 msgid "Failed to revoke remotely managed user"
 msgstr "Gagal mencabut pengguna yang dikelola jarak jauh"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:671
 msgid "You cannot delete your own account."
 msgstr "Anda tak bisa menghapus akunmu sendiri."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:680
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s masih log masuk"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:684
 msgid ""
 "Deleting a user while they are logged in can leave the system in an inconsistent "
 "state."
@@ -6511,12 +6542,12 @@ msgstr ""
 "Menghapus pengguna saat mereka log masuk dapat menjerumuskan sistem ke dalam "
 "keadaan tak konsisten."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:693
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Apakah Anda ingin mempertahankan berkas milik %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:697
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files around "
 "when deleting a user account."
@@ -6524,51 +6555,51 @@ msgstr ""
 "Dimungkinkan untuk mempertahankan direktori rumah, spool surel, dan berkas temporer "
 "ketika menghapus suatu akun pengguna."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid "_Delete Files"
 msgstr "_Hapus Berkas"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:701
 msgid "_Keep Files"
 msgstr "Biarkan Berkas"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:715
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Anda yakin ingin mencabut akun %s yang dikelola jarak jauh?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:719
 msgid "_Delete"
 msgstr "_Hapus"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:771
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Akun dimatikan"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:779
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Untuk ditata saat log masuk berikutnya"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "None"
 msgstr "Tak ada"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Logged in"
 msgstr "Log masuk"
 
-#: ../panels/user-accounts/um-user-panel.c:1269
+#: ../panels/user-accounts/um-user-panel.c:1262
 msgid "Failed to contact the accounts service"
 msgstr "Gagal menghubungi layanan akun"
 
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:1264
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
 
-#: ../panels/user-accounts/um-user-panel.c:1312
+#: ../panels/user-accounts/um-user-panel.c:1305
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6576,12 +6607,12 @@ msgstr ""
 "Untuk melakukan perubahan,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1350
+#: ../panels/user-accounts/um-user-panel.c:1343
 msgid "Create a user account"
 msgstr "Buat akun pengguna"
 
-#: ../panels/user-accounts/um-user-panel.c:1361
-#: ../panels/user-accounts/um-user-panel.c:1674
+#: ../panels/user-accounts/um-user-panel.c:1354
+#: ../panels/user-accounts/um-user-panel.c:1666
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6589,12 +6620,12 @@ msgstr ""
 "Untuk membuat akun pengguna,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1371
+#: ../panels/user-accounts/um-user-panel.c:1364
 msgid "Delete the selected user account"
 msgstr "Hapus akun pengguna yang dipilih"
 
-#: ../panels/user-accounts/um-user-panel.c:1383
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1671
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6602,7 +6633,7 @@ msgstr ""
 "Untuk menghapus akun pengguna yang dipilih,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1588
+#: ../panels/user-accounts/um-user-panel.c:1580
 msgid "My Account"
 msgstr "Akun Saya"
 
@@ -6728,7 +6759,7 @@ msgid "Button"
 msgstr "Tombol"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Wacom Tablet"
 msgstr "Tablet Wacom"
 
@@ -6753,123 +6784,127 @@ msgstr "Touchpad (relatif)"
 msgid "Tablet Preferences"
 msgstr "Preferensi Tablet"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "No tablet detected"
 msgstr "Tablet tak terdeteksi"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Silakan tancapkan atau nyalakan tablet Wacom Anda"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Bluetooth Settings"
 msgstr "Pengaturan Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map to Monitor…"
 msgstr "Petakan ke Monitor…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
 msgstr "Petakan Tombol…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Setel resolusi tampilan"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Adjust mouse settings"
 msgstr "Setel pengaturan tetikus"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Tracking Mode"
 msgstr "Mode Pelacakan"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
 msgid "Left-Handed Orientation"
 msgstr "Orientasi Kidal"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1062
+#: ../panels/wacom/gsd-wacom-device.c:1024
 msgid "Left Ring"
 msgstr "Cincin Kiri"
 
-#: ../panels/wacom/gsd-wacom-device.c:1073
+#: ../panels/wacom/gsd-wacom-device.c:1035
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Mode Ring Kiri #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1093
+#: ../panels/wacom/gsd-wacom-device.c:1055
 msgid "Right Ring"
 msgstr "Cincin Kanan"
 
-#: ../panels/wacom/gsd-wacom-device.c:1104
+#: ../panels/wacom/gsd-wacom-device.c:1066
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Mode Ring Kanan #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1146
+#: ../panels/wacom/gsd-wacom-device.c:1108
 msgid "Left Touchstrip"
 msgstr "Strip Sentuh Kiri"
 
-#: ../panels/wacom/gsd-wacom-device.c:1157
+#: ../panels/wacom/gsd-wacom-device.c:1119
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Mode Touchstrip Kiri #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1177
+#: ../panels/wacom/gsd-wacom-device.c:1139
 msgid "Right Touchstrip"
 msgstr "Strip Sentuh Kanan"
 
-#: ../panels/wacom/gsd-wacom-device.c:1188
+#: ../panels/wacom/gsd-wacom-device.c:1150
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Mode Touchstrip Kanan #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1214
+#: ../panels/wacom/gsd-wacom-device.c:1176
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Penukaran Mode Touchring Kiri"
 
-#: ../panels/wacom/gsd-wacom-device.c:1216
+#: ../panels/wacom/gsd-wacom-device.c:1178
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Penukaran Mode Touchring Kanan"
 
-#: ../panels/wacom/gsd-wacom-device.c:1219
+#: ../panels/wacom/gsd-wacom-device.c:1181
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Penukaran Mode Touchstrip Kiri"
 
-#: ../panels/wacom/gsd-wacom-device.c:1221
+#: ../panels/wacom/gsd-wacom-device.c:1183
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Penukaran Mode Touchstrip Kanan"
 
-#: ../panels/wacom/gsd-wacom-device.c:1226
+#: ../panels/wacom/gsd-wacom-device.c:1188
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Penukaran Mode #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1334
+#: ../panels/wacom/gsd-wacom-device.c:1296
 #, c-format
 msgid "Left Button #%d"
 msgstr "Tombol Kiri #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1337
+#: ../panels/wacom/gsd-wacom-device.c:1299
 #, c-format
 msgid "Right Button #%d"
 msgstr "Tombol Kanan #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1340
+#: ../panels/wacom/gsd-wacom-device.c:1302
 #, c-format
 msgid "Top Button #%d"
 msgstr "Tombol Puncak #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1343
+#: ../panels/wacom/gsd-wacom-device.c:1305
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Tombol Dasar #%d"
@@ -6992,11 +7027,11 @@ msgstr ""
 msgid "Available panels:"
 msgstr "Panel yang tersedia:"
 
-#: ../shell/cc-application.c:328
+#: ../shell/cc-application.c:326
 msgid "Help"
 msgstr "Bantuan"
 
-#: ../shell/cc-application.c:329
+#: ../shell/cc-application.c:327
 msgid "Quit"
 msgstr "Keluar"
 
