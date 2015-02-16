@@ -1735,8 +1735,8 @@ shortcut_entry_changed (GtkEntry *entry,
   guint16 name_length;
   guint16 command_length;
 
-  name_length = gtk_entry_get_text_length (custom_shortcut_name_entry);
-  command_length = gtk_entry_get_text_length (custom_shortcut_command_entry);
+  name_length = gtk_entry_get_text_length (GTK_ENTRY (custom_shortcut_name_entry));
+  command_length = gtk_entry_get_text_length (GTK_ENTRY (custom_shortcut_command_entry));
 
   gtk_widget_set_sensitive (custom_shortcut_ok_button,
                             name_length > 0 && command_length > 0);
