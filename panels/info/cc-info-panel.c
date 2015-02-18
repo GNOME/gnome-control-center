@@ -854,7 +854,7 @@ default_app_changed (GtkAppChooserButton *button,
       pattern = g_pattern_spec_new (app_data->extra_type_filter);
       mime_types = g_app_info_get_supported_types (info);
 
-      for (i = 0; mime_types[i]; i++)
+      for (i = 0; mime_types && mime_types[i]; i++)
         {
           if (!g_pattern_match_string (pattern, mime_types[i]))
             continue;
