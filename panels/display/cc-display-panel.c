@@ -1945,7 +1945,8 @@ res_combo_changed (GtkComboBox    *combo,
   GtkTreeModel *res_model;
   GtkTreeIter iter;
   GnomeRRMode *mode;
-  gint x, y, width, height;
+  gint x, y, width, height, i;
+  GnomeRROutputInfo **outputs;
 
   res_model = gtk_combo_box_get_model (combo);
 
@@ -1958,7 +1959,17 @@ res_combo_changed (GtkComboBox    *combo,
       width = gnome_rr_mode_get_width (mode);
       height = gnome_rr_mode_get_height (mode);
 
-      gnome_rr_output_info_set_geometry (priv->current_output, x, y, width, height);
+      if (gnome_rr_config_get_clone (priv->current_configuration))
+        {
+          outputs = gnome_rr_config_get_outputs (priv->current_configuration);
+          for (i = 0; outputs[i]; i++)
+            gnome_rr_output_info_set_geometry (outputs[i], x, y, width, height);
+        }
+      else
+        {
+          gnome_rr_output_info_set_geometry (priv->current_output, x, y, width, height);
+        }
+
       update_apply_button (panel);
     }
 }
