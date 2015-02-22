@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-13 00:46+0100\n"
-"PO-Revision-Date: 2015-01-13 00:47+0200\n"
+"POT-Creation-Date: 2015-02-22 02:25+0100\n"
+"PO-Revision-Date: 2015-02-22 02:32+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -114,8 +114,8 @@ msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1514
-#: ../panels/display/cc-display-panel.c:1951
+#: ../panels/display/cc-display-panel.c:1579
+#: ../panels/display/cc-display-panel.c:2011
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -125,7 +125,7 @@ msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1938
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:468
+#: ../panels/privacy/cc-privacy-panel.c:568
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
@@ -135,8 +135,8 @@ msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:720
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -146,18 +146,18 @@ msgstr "_Cancelar"
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../panels/background/cc-background-item.c:197
+#: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
 msgstr "tamaños múltiples"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:201
+#: ../panels/background/cc-background-item.c:207
 #, c-format
 msgid "%d ے %d"
 msgstr "%d ے %d"
 
-#: ../panels/background/cc-background-item.c:327
+#: ../panels/background/cc-background-item.c:333
 msgid "No Desktop Background"
 msgstr "Sen fondo de escritorio"
 
@@ -722,7 +722,7 @@ msgid "Add profile"
 msgstr "Engadir perfil"
 
 #: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
 msgstr "Calibrar…"
 
@@ -1052,25 +1052,25 @@ msgstr "Cambiar as preferencias da data e hora do sistema"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Para cambiar as preferencias de data e hora debe autenticarse."
 
-#: ../panels/display/cc-display-panel.c:487
+#: ../panels/display/cc-display-panel.c:564
 msgid "Lid Closed"
 msgstr "Tapa pechada"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:490
+#: ../panels/display/cc-display-panel.c:567
 msgid "Mirrored"
 msgstr "Espellada"
 
-#: ../panels/display/cc-display-panel.c:492
-#: ../panels/display/cc-display-panel.c:2120
+#: ../panels/display/cc-display-panel.c:569
+#: ../panels/display/cc-display-panel.c:2185
 msgid "Primary"
 msgstr "Primaria"
 
-#: ../panels/display/cc-display-panel.c:494
-#: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1695 ../panels/power/cc-power-panel.c:1706
-#: ../panels/privacy/cc-privacy-panel.c:84
-#: ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/display/cc-display-panel.c:571
+#: ../panels/notifications/cc-notifications-panel.c:247
+#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
+#: ../panels/privacy/cc-privacy-panel.c:155
+#: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
@@ -1078,82 +1078,95 @@ msgstr "Primaria"
 msgid "Off"
 msgstr "Desactivado"
 
-#: ../panels/display/cc-display-panel.c:497
+#: ../panels/display/cc-display-panel.c:574
 msgid "Secondary"
 msgstr "Secundaria"
 
-#: ../panels/display/cc-display-panel.c:1510
+#. Title of displays dialog when multiple monitors are present.
+#: ../panels/display/cc-display-panel.c:1576
 msgid "Arrange Combined Displays"
 msgstr "Ordenar pantallas combinadas"
 
-#: ../panels/display/cc-display-panel.c:1516
-#: ../panels/display/cc-display-panel.c:1954
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2012
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: ../panels/display/cc-display-panel.c:1537
+#: ../panels/display/cc-display-panel.c:1604
 msgid "Drag displays to rearrange them"
 msgstr "Arrastre as pantallas para reordenalas"
 
-#: ../panels/display/cc-display-panel.c:2056
+#: ../panels/display/cc-display-panel.c:2064
+msgid "Rotate counterclockwise by 90°"
+msgstr "Rotar ao contrario do reloxo 90°"
+
+#: ../panels/display/cc-display-panel.c:2082
+msgid "Rotate by 180°"
+msgstr "Rotar 180°"
+
+#: ../panels/display/cc-display-panel.c:2100
+msgid "Rotate clockwise by 90°"
+msgstr "Rotar no sentido do reloxo 90°"
+
+#: ../panels/display/cc-display-panel.c:2121
 msgid "Size"
 msgstr "Tamaño"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2069
+#: ../panels/display/cc-display-panel.c:2134
 msgid "Aspect Ratio"
 msgstr "Proporción de aspecto"
 
-#: ../panels/display/cc-display-panel.c:2090
+#: ../panels/display/cc-display-panel.c:2155
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Resolución"
 
-#: ../panels/display/cc-display-panel.c:2121
+#: ../panels/display/cc-display-panel.c:2186
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Mostrar a barra superior e a Vista de actividades nesta pantalla"
 
-#: ../panels/display/cc-display-panel.c:2127
+#: ../panels/display/cc-display-panel.c:2192
 msgid "Secondary Display"
 msgstr "Pantalla secundaria"
 
-#: ../panels/display/cc-display-panel.c:2128
+#: ../panels/display/cc-display-panel.c:2193
 msgid "Join this display with another to create an extra workspace"
 msgstr ""
 "Unir esta pantalla con outra para crear un espazo de traballo adicional"
 
-#: ../panels/display/cc-display-panel.c:2135
+#: ../panels/display/cc-display-panel.c:2200
 msgid "Presentation"
 msgstr "Presentación"
 
-#: ../panels/display/cc-display-panel.c:2136
+#: ../panels/display/cc-display-panel.c:2201
 msgid "Show slideshows and media only"
 msgstr "Mostrar só as presentacións e o multimedia"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2141
+#: ../panels/display/cc-display-panel.c:2206
 msgid "Mirror"
 msgstr "Espello"
 
-#: ../panels/display/cc-display-panel.c:2142
+#: ../panels/display/cc-display-panel.c:2207
 msgid "Show your existing view on both displays"
 msgstr "Mostra a súa vista existente nas dúas pantallas"
 
-#: ../panels/display/cc-display-panel.c:2148
+#: ../panels/display/cc-display-panel.c:2213
 msgid "Turn Off"
 msgstr "Apagar"
 
-#: ../panels/display/cc-display-panel.c:2149
+#: ../panels/display/cc-display-panel.c:2214
 msgid "Don't use this display"
 msgstr "Non usar este monitor"
 
-#: ../panels/display/cc-display-panel.c:2358
+#: ../panels/display/cc-display-panel.c:2444
 msgid "Could not get screen information"
 msgstr "Non foi posíbel obter a información da pantalla"
 
-#: ../panels/display/cc-display-panel.c:2389
+#: ../panels/display/cc-display-panel.c:2475
 msgid "_Arrange Combined Displays"
 msgstr "_Ordenar pantallas combinadas"
 
@@ -1170,60 +1183,60 @@ msgstr "Escolla como usar os monitores conectados e proxectores"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
 msgstr "Panel;Proxector;xrandr;Pantalla;Resolución;Refresco;Monitor;"
 
-#: ../panels/info/cc-info-panel.c:384
+#: ../panels/info/cc-info-panel.c:385
 msgid "Wayland"
 msgstr "Wayland"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:387 ../panels/network/panel-common.c:127
+#: ../panels/info/cc-info-panel.c:388 ../panels/network/panel-common.c:127
 msgid "Unknown"
 msgstr "Descoñecido"
 
-#: ../panels/info/cc-info-panel.c:472
+#: ../panels/info/cc-info-panel.c:473
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:474
+#: ../panels/info/cc-info-panel.c:475
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1154
+#: ../panels/info/cc-info-panel.c:1155
 msgid "Ask what to do"
 msgstr "Preguntar que facer"
 
-#: ../panels/info/cc-info-panel.c:1158
+#: ../panels/info/cc-info-panel.c:1159
 msgid "Do nothing"
 msgstr "Non facer nada"
 
-#: ../panels/info/cc-info-panel.c:1162
+#: ../panels/info/cc-info-panel.c:1163
 msgid "Open folder"
 msgstr "Abrir cartafol"
 
-#: ../panels/info/cc-info-panel.c:1253
+#: ../panels/info/cc-info-panel.c:1254
 msgid "Other Media"
 msgstr "Outros soportes"
 
-#: ../panels/info/cc-info-panel.c:1284
+#: ../panels/info/cc-info-panel.c:1285
 msgid "Select an application for audio CDs"
 msgstr "Seleccione un aplicativo para os CD de son"
 
-#: ../panels/info/cc-info-panel.c:1285
+#: ../panels/info/cc-info-panel.c:1286
 msgid "Select an application for video DVDs"
 msgstr "Seleccione un aplicativo para os DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1286
+#: ../panels/info/cc-info-panel.c:1287
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccione un aplicativo que executar cando se conecta un reprodutor de "
 "música"
 
-#: ../panels/info/cc-info-panel.c:1287
+#: ../panels/info/cc-info-panel.c:1288
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccione un aplicativo que executar cando se conecta unha cámara"
 
-#: ../panels/info/cc-info-panel.c:1288
+#: ../panels/info/cc-info-panel.c:1289
 msgid "Select an application for software CDs"
 msgstr "Seleccione un aplicativo para os CD de software"
 
@@ -1232,72 +1245,72 @@ msgstr "Seleccione un aplicativo para os CD de software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1300
+#: ../panels/info/cc-info-panel.c:1301
 msgid "audio DVD"
 msgstr "DVD de son"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1302
 msgid "blank Blu-ray disc"
 msgstr "disco Blu-ray virxe"
 
-#: ../panels/info/cc-info-panel.c:1302
+#: ../panels/info/cc-info-panel.c:1303
 msgid "blank CD disc"
 msgstr "CD virxe"
 
-#: ../panels/info/cc-info-panel.c:1303
+#: ../panels/info/cc-info-panel.c:1304
 msgid "blank DVD disc"
 msgstr "DVD virxe"
 
-#: ../panels/info/cc-info-panel.c:1304
+#: ../panels/info/cc-info-panel.c:1305
 msgid "blank HD DVD disc"
 msgstr "disco HD DVD virxe"
 
-#: ../panels/info/cc-info-panel.c:1305
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Blu-ray video disc"
 msgstr "Disco Blu-ray de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1306
+#: ../panels/info/cc-info-panel.c:1307
 msgid "e-book reader"
 msgstr "lector de libros electrónicos"
 
-#: ../panels/info/cc-info-panel.c:1307
+#: ../panels/info/cc-info-panel.c:1308
 msgid "HD DVD video disc"
 msgstr "Disco HD DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:1309
 msgid "Picture CD"
 msgstr "CD de imaxes"
 
-#: ../panels/info/cc-info-panel.c:1309
+#: ../panels/info/cc-info-panel.c:1310
 msgid "Super Video CD"
 msgstr "Super Vídeo CD"
 
-#: ../panels/info/cc-info-panel.c:1310
+#: ../panels/info/cc-info-panel.c:1311
 msgid "Video CD"
 msgstr "Vídeo CD"
 
-#: ../panels/info/cc-info-panel.c:1311
+#: ../panels/info/cc-info-panel.c:1312
 msgid "Windows software"
 msgstr "Software de Windows"
 
-#: ../panels/info/cc-info-panel.c:1434
-#: ../panels/keyboard/keyboard-shortcuts.c:1932
+#: ../panels/info/cc-info-panel.c:1435
+#: ../panels/keyboard/keyboard-shortcuts.c:1947
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:1443 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1444 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Visión xeral"
 
-#: ../panels/info/cc-info-panel.c:1449 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1450 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Aplicativos predeterminados"
 
-#: ../panels/info/cc-info-panel.c:1454 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1455 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Soportes extraíbeis"
 
-#: ../panels/info/cc-info-panel.c:1479
+#: ../panels/info/cc-info-panel.c:1480
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -1603,7 +1616,7 @@ msgstr "Contraste alto activado ou desactivado"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1218
+#: ../panels/keyboard/keyboard-shortcuts.c:1219
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1737,16 +1750,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Atallos de teclado"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:635
-#: ../panels/keyboard/keyboard-shortcuts.c:643
+#: ../panels/keyboard/keyboard-shortcuts.c:636
+#: ../panels/keyboard/keyboard-shortcuts.c:644
 msgid "Custom Shortcuts"
 msgstr "Personalizar os atallos"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:860
+#: ../panels/keyboard/keyboard-shortcuts.c:861
 msgid "<Unknown Action>"
 msgstr "<Acción descoñecida>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1357
+#: ../panels/keyboard/keyboard-shortcuts.c:1358
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1757,7 +1770,7 @@ msgstr ""
 "esta tecla.\n"
 "Ténteo de novo cunha tecla como Control, Alt ou Maiús ao mesmo tempo."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1387
+#: ../panels/keyboard/keyboard-shortcuts.c:1388
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1766,17 +1779,17 @@ msgstr ""
 "O atallo «%s» xa se está usando para\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1392
+#: ../panels/keyboard/keyboard-shortcuts.c:1393
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Se reasigna o atallo para «%s», desactivarase o atallo «%s»."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1398
+#: ../panels/keyboard/keyboard-shortcuts.c:1399
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1439
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
@@ -1785,7 +1798,7 @@ msgstr ""
 "O atallo «%s» ten un atallo «%s» asociado. Desexa estabelecelo a «%s» "
 "automaticamente?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1449
+#: ../panels/keyboard/keyboard-shortcuts.c:1450
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
@@ -1793,7 +1806,7 @@ msgid ""
 msgstr ""
 "«%s» está asociado actualmente con «%s», este atallo desactivarase se sigue."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1456
+#: ../panels/keyboard/keyboard-shortcuts.c:1457
 msgid "_Assign"
 msgstr "_Asignar"
 
@@ -1890,19 +1903,15 @@ msgid "Fast"
 msgstr "Rápido"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Disable while _typing"
-msgstr "Desac_tivar ao escribir"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Tap to _click"
 msgstr "Tocar para _premer"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Two _finger scroll"
 msgstr "Despra_zamento con dous dedos"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "_Natural scrolling"
 msgstr "Desprazamento _natural"
 
@@ -1941,11 +1950,11 @@ msgstr "Un clic, botón secundario"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:369
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
-#: ../panels/network/cc-network-panel.c:977
+#: ../panels/network/cc-network-panel.c:966
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
@@ -1953,16 +1962,19 @@ msgstr "Proxy da rede"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1156 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1301
-msgid "The system network services are not compatible with this version."
-msgstr "Os servizos de rede do sistema non son compatíbeis con esta versión."
+#: ../panels/network/cc-network-panel.c:1299
+msgid "Oops, something has gone wrong. Please contact your software vendor."
+msgstr "Recoiro, algo foi mal. Contacte co seu fabricante de software."
+
+#: ../panels/network/cc-network-panel.c:1305
+msgid "NetworkManager needs to be running."
+msgstr "Requírese que NetworkManager estea en execución."
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
 msgid "802.1x _Security"
@@ -2167,6 +2179,7 @@ msgstr "Automático (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Manual"
 msgstr "Manual"
 
@@ -2190,6 +2203,7 @@ msgstr "Prefixo"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:182
 msgid "Automatic"
 msgstr "Automático"
 
@@ -2365,7 +2379,7 @@ msgid "Firewall _Zone"
 msgstr "_Zona da devasa"
 
 #: ../panels/network/connection-editor/firewall-helpers.c:48
-#: ../panels/network/connection-editor/firewall-helpers.c:112
+#: ../panels/network/connection-editor/firewall-helpers.c:113
 msgctxt "Firewall zone"
 msgid "Default"
 msgstr "Predeterminada"
@@ -2640,7 +2654,7 @@ msgid "Wired"
 msgstr "Con fíos"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1596
+#: ../panels/network/net-device-wifi.c:1597
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2706,20 +2720,20 @@ msgstr ""
 "Perderase a información das redes seleccionadas, incluíndo os contrasinals e "
 "calquera configuración personalizada."
 
-#: ../panels/network/net-device-wifi.c:1745
+#: ../panels/network/net-device-wifi.c:1750
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historial"
 
-#: ../panels/network/net-device-wifi.c:1749
+#: ../panels/network/net-device-wifi.c:1754
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:533
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Pechar"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1757
+#: ../panels/network/net-device-wifi.c:1762
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Esquecer"
@@ -3532,48 +3546,48 @@ msgstr "Índic_e WEP:"
 msgid "_Type"
 msgstr "_Tipo"
 
-#. TRANSLATORS: this is the per application switch for message tray usage.
-#: ../panels/notifications/cc-edit-dialog.c:37
-msgctxt "notifications"
-msgid "Notifications"
-msgstr "Notificacións"
-
-#. TRANSLATORS: this is the setting to configure sounds associated with notifications
-#: ../panels/notifications/cc-edit-dialog.c:39
-msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Alertas de son"
-
-#: ../panels/notifications/cc-edit-dialog.c:40
-msgctxt "notifications"
-msgid "Show Popup Banners"
-msgstr "Mostrar anuncios emerxentes"
-
-#. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
-#: ../panels/notifications/cc-edit-dialog.c:42
-msgctxt "notifications"
-msgid "Show Details in Banners"
-msgstr "Mostrar detalles nos anuncios"
-
-#: ../panels/notifications/cc-edit-dialog.c:43
-msgctxt "notifications"
-msgid "View in Lock Screen"
-msgstr "Ver na pantalla de bloqueo"
-
-#: ../panels/notifications/cc-edit-dialog.c:44
-msgctxt "notifications"
-msgid "Show Details in Lock Screen"
-msgstr "Mostrar detalles na pantalla de bloqueo"
-
-#: ../panels/notifications/cc-notifications-panel.c:185
-#: ../panels/power/cc-power-panel.c:1701 ../panels/power/cc-power-panel.c:1708
-#: ../panels/privacy/cc-privacy-panel.c:84
-#: ../panels/privacy/cc-privacy-panel.c:124
+#: ../panels/notifications/cc-notifications-panel.c:247
+#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
+#: ../panels/privacy/cc-privacy-panel.c:155
+#: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
 #: ../panels/universal-access/cc-ua-panel.c:695
 msgid "On"
 msgstr "Activado"
+
+#. This is the per application switch for message tray usage.
+#: ../panels/notifications/edit-dialog.ui.h:2
+msgctxt "notifications"
+msgid "Notifications"
+msgstr "Notificacións"
+
+#. This is the setting to configure sounds associated with notifications.
+#: ../panels/notifications/edit-dialog.ui.h:4
+msgctxt "notifications"
+msgid "Sound Alerts"
+msgstr "Alertas de son"
+
+#: ../panels/notifications/edit-dialog.ui.h:5
+msgctxt "notifications"
+msgid "Notification Banners"
+msgstr "Notificacións de anuncios"
+
+#. Banners here refers to message tray notifications in the middle of the screen.
+#: ../panels/notifications/edit-dialog.ui.h:7
+msgctxt "notifications"
+msgid "Show Message Content in Banners"
+msgstr "Mostrar contido do mensaxe nos anuncios"
+
+#: ../panels/notifications/edit-dialog.ui.h:8
+msgctxt "notifications"
+msgid "Lock Screen Notifications"
+msgstr "Notificacións na pantalla de bloqueo"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
+msgctxt "notifications"
+msgid "Show Message Content on Lock Screen"
+msgstr "Mostrar contido das mensaxes na pantalla de bloqueo"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3589,12 +3603,18 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notificacións;Anuncio;Mensaxe;Bandexa;Emerxente;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Show Pop Up Banners"
-msgstr "Mostrar anuncios emerxentes"
+msgid "Notification Banners"
+msgstr "Notificacións de anuncios"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Show in Lock Screen"
-msgstr "Mostrar na pantalla de bloqueo"
+msgid "Lock Screen Notifications"
+msgstr "Notificacións na pantalla de bloqueo"
+
+#. List of applications.
+#: ../panels/notifications/notifications.ui.h:4
+#: ../panels/sound/gvc-mixer-dialog.c:1781
+msgid "Applications"
+msgstr "Aplicativos"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
 msgctxt "Online Account"
@@ -3822,120 +3842,122 @@ msgid "Computer"
 msgstr "Computador"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:726
-#: ../panels/power/cc-power-panel.c:2030
+#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
+#: ../panels/power/cc-power-panel.c:2040
 msgid "Battery"
 msgstr "Batería"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:549
+#: ../panels/power/cc-power-panel.c:557
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:564
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Precaución"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baixa"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Boa"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:571
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Cargada completamente"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Baleir"
 
-#: ../panels/power/cc-power-panel.c:724
+#: ../panels/power/cc-power-panel.c:732
 msgid "Batteries"
 msgstr "Baterías"
 
-#: ../panels/power/cc-power-panel.c:1126
+#: ../panels/power/cc-power-panel.c:1134
 msgid "When _idle"
 msgstr "Ao estar _inactivo"
 
-#: ../panels/power/cc-power-panel.c:1454
+#: ../panels/power/cc-power-panel.c:1462
 msgid "Power Saving"
 msgstr "Aforro de enerxí­a"
 
-#: ../panels/power/cc-power-panel.c:1482
+#: ../panels/power/cc-power-panel.c:1490
 msgid "_Screen brightness"
 msgstr "Brillo da pantall_a"
 
-#: ../panels/power/cc-power-panel.c:1488
+#: ../panels/power/cc-power-panel.c:1496
 msgid "_Keyboard brightness"
 msgstr "Brillo do _teclado"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1506
 msgid "_Dim screen when inactive"
 msgstr "_Escurecer a pantalla se está inactivo"
 
-#: ../panels/power/cc-power-panel.c:1523
+#: ../panels/power/cc-power-panel.c:1531
 msgid "_Blank screen"
 msgstr "Pantalla en _branco"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1568
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
-#: ../panels/power/cc-power-panel.c:1565
-msgid "Turns off wireless devices"
-msgstr "Desactiva os dispositivos sen fíos"
+#: ../panels/power/cc-power-panel.c:1573
+msgid "Wireless devices require extra power"
+msgstr "Os dispositivos sen fíos requiren enerxía adicional"
 
-#: ../panels/power/cc-power-panel.c:1590
+#: ../panels/power/cc-power-panel.c:1598
 msgid "_Mobile broadband"
 msgstr "Banda larga _móbil"
 
-#: ../panels/power/cc-power-panel.c:1595
-msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgstr "Desactiva os dispositivos de banda larga móbil (3G, 4G, WiMax, etc.)"
+#: ../panels/power/cc-power-panel.c:1603
+msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgstr ""
+"Os dispositivos de banda larga móbil (3G, 4G, WiMax, etc.) requiren enerxía "
+"adicional"
 
-#: ../panels/power/cc-power-panel.c:1645
+#: ../panels/power/cc-power-panel.c:1653
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1697
+#: ../panels/power/cc-power-panel.c:1707
 msgid "When on battery power"
 msgstr "Ao usar enerxía da batería"
 
-#: ../panels/power/cc-power-panel.c:1699
+#: ../panels/power/cc-power-panel.c:1709
 msgid "When plugged in"
 msgstr "Ao estar enchufado"
 
-#: ../panels/power/cc-power-panel.c:1829
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Suspend & Power Off"
 msgstr "Suspender e apagar"
 
-#: ../panels/power/cc-power-panel.c:1862
+#: ../panels/power/cc-power-panel.c:1872
 msgid "_Automatic suspend"
 msgstr "Suspensión _automática"
 
-#: ../panels/power/cc-power-panel.c:1886
+#: ../panels/power/cc-power-panel.c:1896
 msgid "When battery power is _critical"
 msgstr "Cando a enerxía da batería é _crítica"
 
-#: ../panels/power/cc-power-panel.c:1941
+#: ../panels/power/cc-power-panel.c:1951
 msgid "Power Off"
 msgstr "Apagar"
 
-#: ../panels/power/cc-power-panel.c:2077
+#: ../panels/power/cc-power-panel.c:2087
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -4292,9 +4314,8 @@ msgstr "Non se detectactou ningunha impresora."
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:9
-msgid "Enter address of a printer or a text to filter results"
-msgstr ""
-"Escriba o enderezo dunha impresora ou un texto para filtrar os resultados"
+msgid "Enter a network address or search for a printer"
+msgstr "Escriba un enderezo de rede ou busque unha impresora"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4659,45 +4680,63 @@ msgstr ""
 "O servizo do sistema de impresión\n"
 "semella que non está dispoñíbel."
 
-#: ../panels/privacy/cc-privacy-panel.c:252 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Bloqueo de pantalla"
 
-#: ../panels/privacy/cc-privacy-panel.c:362 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Uso e historial"
 
-#: ../panels/privacy/cc-privacy-panel.c:487
+#: ../panels/privacy/cc-privacy-panel.c:587
 msgid "Empty all items from Trash?"
 msgstr "Desexa baleirar todos os elementos do lixo?"
 
-#: ../panels/privacy/cc-privacy-panel.c:488
+#: ../panels/privacy/cc-privacy-panel.c:588
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Pérdese permanentemente todos os elementos do lixo."
 
-#: ../panels/privacy/cc-privacy-panel.c:489 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Baleirar o lixo"
 
-#: ../panels/privacy/cc-privacy-panel.c:512
+#: ../panels/privacy/cc-privacy-panel.c:612
 msgid "Delete all the temporary files?"
 msgstr "Desexa eliminar todos os ficheiros temporais?"
 
-#: ../panels/privacy/cc-privacy-panel.c:513
+#: ../panels/privacy/cc-privacy-panel.c:613
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos os ficheiros temporais eliminaranse de forma permanente."
 
-#: ../panels/privacy/cc-privacy-panel.c:514 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Eliminar os ficheiros temporais"
 
-#: ../panels/privacy/cc-privacy-panel.c:536 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Limpar o lixo e ficheiros temporais"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Uso do software"
+
+#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+msgid "Problem Reporting"
+msgstr "Informe de erros"
+
+#. translators: '%s' is the distributor's name, such as 'Fedora'
+#: ../panels/privacy/cc-privacy-panel.c:731
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
+msgstr ""
+"Ao enviar informes de problemas técnicos axudaranos a mellorar %s. Os "
+"informes envíanse de forma anónima e límpanse de datos persoais."
+
+#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+msgid "Privacy Policy"
+msgstr "Política de privacidade"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -4839,10 +4878,6 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_Enviar estatísticas de uso de software"
 
-#: ../panels/privacy/privacy.ui.h:41
-msgid "Privacy Policy"
-msgstr "Política de privacidade"
-
 #: ../panels/privacy/privacy.ui.h:42
 msgid "_Location Services"
 msgstr "Servizos de _localización"
@@ -4850,6 +4885,10 @@ msgstr "Servizos de _localización"
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Used to determine your geographical location"
 msgstr "Usado para determinar a súa localización xeográfica"
+
+#: ../panels/privacy/privacy.ui.h:45
+msgid "_Automatic Problem Reporting"
+msgstr "Informar de problemas _automaticamente"
 
 #: ../panels/region/cc-format-chooser.c:119
 msgctxt "measurement format"
@@ -4875,12 +4914,12 @@ msgid "Other"
 msgstr "Outra"
 
 #: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1059
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "A súa sesión debe reiniciarse para que se apliquen os cambios"
 
 #: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1063
 msgid "Restart Now"
 msgstr "Reiniciar agora"
 
@@ -5089,7 +5128,7 @@ msgstr "Activo"
 msgid "Choose a Folder"
 msgstr "Seleccione un cartafol"
 
-#: ../panels/sharing/cc-sharing-panel.c:916
+#: ../panels/sharing/cc-sharing-panel.c:917
 msgid "Copy"
 msgstr "Copiar"
 
@@ -5232,8 +5271,11 @@ msgid "Require a password"
 msgstr "Require un contrasinal"
 
 #: ../panels/sharing/sharing.ui.h:26
-msgid "Share music, photos and videos over the network."
-msgstr "Compartir música, fotos e vídeos pola rede."
+msgid ""
+"Media sharing allows you to share music, photos and videos over the network."
+msgstr ""
+"A compartición multimedia permítelle compartir música, fotos e vídeos pola "
+"rede."
 
 #: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
@@ -5416,10 +5458,6 @@ msgstr "Efectos de son"
 #: ../panels/sound/gvc-mixer-dialog.c:1768
 msgid "_Alert volume:"
 msgstr "Volume das _alertas:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1781
-msgid "Applications"
-msgstr "Aplicativos"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1785
 msgid "No application is currently playing or recording audio."
@@ -6491,7 +6529,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:838
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6499,7 +6537,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-user-panel.c:842
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6574,30 +6612,30 @@ msgstr "Contrasinal incorrecto, ténteo de novo"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Non foi posíbel conectarse ao dominio %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:239
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Outras contas"
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Produciuse un erro ao eliminar o usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:513
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:563
+#: ../panels/user-accounts/um-user-panel.c:615
 msgid "Failed to revoke remotely managed user"
 msgstr "Produciuse un fallo ao revocar o usuario xestionado remotamente"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:671
 msgid "You cannot delete your own account."
 msgstr "Non pode eliminar a súa propia conta."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:680
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aínda ten a sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:684
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6605,12 +6643,12 @@ msgstr ""
 "Se elimina un usuario mentres ten a sesión iniciada pode poñer deixar o "
 "sistema nun estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:693
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Desexa manter os ficheiros de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:697
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6618,51 +6656,51 @@ msgstr ""
 "É posíbel manter o cartafol persoal, a caixa de correo e os ficheiros "
 "temporais ao eliminar unha conta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid "_Delete Files"
 msgstr "_Eliminar os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:701
 msgid "_Keep Files"
 msgstr "_Manter os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:715
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Ten certeza que quere revocar a conta de %s xestionada remotamente?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:719
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:771
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Conta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:779
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar no seguinte inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ningún"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Logged in"
 msgstr "Conectado"
 
-#: ../panels/user-accounts/um-user-panel.c:1269
+#: ../panels/user-accounts/um-user-panel.c:1262
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un erro ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:1264
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:1312
+#: ../panels/user-accounts/um-user-panel.c:1305
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6670,12 +6708,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1350
+#: ../panels/user-accounts/um-user-panel.c:1343
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1361
-#: ../panels/user-accounts/um-user-panel.c:1674
+#: ../panels/user-accounts/um-user-panel.c:1354
+#: ../panels/user-accounts/um-user-panel.c:1666
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6683,12 +6721,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1371
+#: ../panels/user-accounts/um-user-panel.c:1364
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1383
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1671
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6696,7 +6734,7 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1588
+#: ../panels/user-accounts/um-user-panel.c:1580
 msgid "My Account"
 msgstr "A miña conta"
 
@@ -6823,7 +6861,7 @@ msgid "Button"
 msgstr "Botón"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Wacom Tablet"
 msgstr "Tableta Wacom"
 
@@ -6850,123 +6888,127 @@ msgstr "Área táctil (relativo)"
 msgid "Tablet Preferences"
 msgstr "Preferencias da tableta"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+msgid "_Help"
+msgstr "_Axuda"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "No tablet detected"
 msgstr "Non se detectou ningunha tableta"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Conecte ou acenda a súa tableta Wacom"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Bluetooth Settings"
 msgstr "Preferencias de Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map to Monitor…"
 msgstr "Mapa que monitorizar…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
 msgstr "Asignar botóns…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Axustar a resolución do monitor"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Adjust mouse settings"
 msgstr "Axustar as preferencias do rato"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Tracking Mode"
 msgstr "Modo de seguimento"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
 msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1062
+#: ../panels/wacom/gsd-wacom-device.c:1024
 msgid "Left Ring"
 msgstr "Anel esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1073
+#: ../panels/wacom/gsd-wacom-device.c:1035
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo de anel esquerdo #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1093
+#: ../panels/wacom/gsd-wacom-device.c:1055
 msgid "Right Ring"
 msgstr "Anel dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1104
+#: ../panels/wacom/gsd-wacom-device.c:1066
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo de anel dereito #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1146
+#: ../panels/wacom/gsd-wacom-device.c:1108
 msgid "Left Touchstrip"
 msgstr "Banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1157
+#: ../panels/wacom/gsd-wacom-device.c:1119
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de banda táctil esquerda nº %d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1177
+#: ../panels/wacom/gsd-wacom-device.c:1139
 msgid "Right Touchstrip"
 msgstr "Banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1188
+#: ../panels/wacom/gsd-wacom-device.c:1150
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de banda táctil dereita nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1214
+#: ../panels/wacom/gsd-wacom-device.c:1176
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1216
+#: ../panels/wacom/gsd-wacom-device.c:1178
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1219
+#: ../panels/wacom/gsd-wacom-device.c:1181
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1221
+#: ../panels/wacom/gsd-wacom-device.c:1183
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1226
+#: ../panels/wacom/gsd-wacom-device.c:1188
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo conmutador #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1334
+#: ../panels/wacom/gsd-wacom-device.c:1296
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1337
+#: ../panels/wacom/gsd-wacom-device.c:1299
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1340
+#: ../panels/wacom/gsd-wacom-device.c:1302
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1343
+#: ../panels/wacom/gsd-wacom-device.c:1305
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior #%d"
@@ -7121,6 +7163,34 @@ msgstr "Sistema"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
+
+#~ msgid "Disable while _typing"
+#~ msgstr "Desac_tivar ao escribir"
+
+#~ msgid "The system network services are not compatible with this version."
+#~ msgstr ""
+#~ "Os servizos de rede do sistema non son compatíbeis con esta versión."
+
+#~ msgctxt "notifications"
+#~ msgid "Show Popup Banners"
+#~ msgstr "Mostrar anuncios emerxentes"
+
+#~ msgctxt "notifications"
+#~ msgid "View in Lock Screen"
+#~ msgstr "Ver na pantalla de bloqueo"
+
+#~ msgid "Show Pop Up Banners"
+#~ msgstr "Mostrar anuncios emerxentes"
+
+#~ msgid "Show in Lock Screen"
+#~ msgstr "Mostrar na pantalla de bloqueo"
+
+#~ msgid "Turns off wireless devices"
+#~ msgstr "Desactiva os dispositivos sen fíos"
+
+#~ msgid "Enter address of a printer or a text to filter results"
+#~ msgstr ""
+#~ "Escriba o enderezo dunha impresora ou un texto para filtrar os resultados"
 
 #~ msgid "%d × %d"
 #~ msgstr "%d × %d"
@@ -7335,10 +7405,6 @@ msgstr "Preferencias;Configuración;"
 #~ msgctxt "display panel, rotation"
 #~ msgid "Normal"
 #~ msgstr "Normal"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Counterclockwise"
-#~ msgstr "Antihorario"
 
 #~ msgctxt "display panel, rotation"
 #~ msgid "Clockwise"
