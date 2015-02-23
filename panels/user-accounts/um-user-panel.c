@@ -75,6 +75,7 @@ struct _CcUserPanelPrivate {
         GCancellable  *cancellable;
         GtkBuilder *builder;
         GtkWidget *notification;
+        GSettings *login_screen_settings;
 
         GtkWidget *main_box;
         GPermission *permission;
@@ -917,11 +918,12 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         g_free (lang);
         g_free (name);
 
-        /* Fingerprint: show when self, possible, and local account */
+        /* Fingerprint: show when self, local, enabled, and possible */
         widget = get_widget (d, "account-fingerprint-button");
         label = get_widget (d, "account-fingerprint-label");
         show = (act_user_get_uid (user) == getuid() &&
                 act_user_is_local_account (user) &&
+                g_settings_get_boolean (d->login_screen_settings, "enable-fingerprint-authentication") &&
                 set_fingerprint_label (widget));
         gtk_widget_set_visible (label, show);
         gtk_widget_set_visible (widget, show);
@@ -1714,6 +1716,8 @@ cc_user_panel_init (CcUserPanel *self)
                 return;
         }
 
+        d->login_screen_settings = g_settings_new ("org.gnome.login-screen");
+
         d->password_dialog = um_password_dialog_new ();
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
@@ -1735,6 +1739,8 @@ cc_user_panel_dispose (GObject *object)
 
         g_cancellable_cancel (priv->cancellable);
         g_clear_object (&priv->cancellable);
+
+        g_clear_object (&priv->login_screen_settings);
 
         if (priv->um) {
                 g_signal_handlers_disconnect_by_data (priv->um, priv);
