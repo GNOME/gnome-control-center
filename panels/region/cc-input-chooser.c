@@ -1137,7 +1137,6 @@ cc_input_chooser_new (GtkWindow    *main_window,
   chooser = WID ("input-dialog");
   priv = g_new0 (CcInputChooserPrivate, 1);
   g_object_set_data_full (G_OBJECT (chooser), "private", priv, cc_input_chooser_private_free);
-  g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
 
   priv->xkb_info = xkb_info;
   priv->ibus_engines = ibus_engines;
@@ -1172,6 +1171,8 @@ cc_input_chooser_new (GtkWindow    *main_window,
   gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), main_window);
+
+  g_object_unref (builder);
 
   return chooser;
 }
