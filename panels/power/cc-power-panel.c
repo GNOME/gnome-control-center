@@ -2,7 +2,7 @@
  *
  * Copyright (C) 2010 Red Hat, Inc
  * Copyright (C) 2008 William Jon McCann <jmccann@redhat.com>
- * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2010,2015 Richard Hughes <richard@hughsie.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -97,6 +97,11 @@ struct _CcPowerPanelPrivate
   GtkWidget     *bt_switch;
   GtkWidget     *bt_row;
 
+  GDBusProxy    *iio_proxy;
+  guint          iio_proxy_watch_id;
+  GtkWidget     *als_switch;
+  GtkWidget     *als_row;
+
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
   GtkWidget     *wifi_switch;
@@ -139,11 +144,15 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&priv->up_client);
   g_clear_object (&priv->bt_rfkill);
   g_clear_object (&priv->bt_properties);
+  g_clear_object (&priv->iio_proxy);
 #ifdef HAVE_NETWORK_MANAGER
   g_clear_object (&priv->nm_client);
 #endif
   g_clear_pointer (&priv->boxes, g_list_free);
   g_clear_pointer (&priv->boxes_reverse, g_list_free);
+  if (priv->iio_proxy_watch_id != 0)
+    g_bus_unwatch_name (priv->iio_proxy_watch_id);
+  priv->iio_proxy_watch_id = 0;
 
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
@@ -947,6 +956,51 @@ sync_screen_brightness (CcPowerPanel *self)
 }
 
 static void
+als_switch_changed (GtkSwitch    *sw,
+                    GParamSpec   *pspec,
+                    CcPowerPanel *panel)
+{
+  gboolean enabled;
+  enabled = gtk_switch_get_active (sw);
+  g_debug ("Setting ALS enabled %s", enabled ? "on" : "off");
+  g_settings_set_boolean (panel->priv->gsd_settings, "ambient-enabled", enabled);
+}
+
+static void
+als_enabled_state_changed (CcPowerPanel *self)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+  gboolean enabled;
+  gboolean has_brightness = FALSE;
+  gboolean visible = FALSE;
+  GVariant *v;
+
+  v = g_dbus_proxy_get_cached_property (self->priv->screen_proxy, "Brightness");
+  if (v != NULL)
+    {
+      has_brightness = g_variant_get_int32 (v) >= 0.0;
+      g_variant_unref (v);
+    }
+
+  if (priv->iio_proxy != NULL)
+    {
+      v = g_dbus_proxy_get_cached_property (priv->iio_proxy, "HasAmbientLight");
+      if (v != NULL)
+        {
+          visible = g_variant_get_boolean (v);
+          g_variant_unref (v);
+        }
+    }
+
+  enabled = g_settings_get_boolean (priv->gsd_settings, "ambient-enabled");
+  g_debug ("ALS enabled: %s", enabled ? "on" : "off");
+  g_signal_handlers_block_by_func (priv->als_switch, als_switch_changed, self);
+  gtk_switch_set_active (GTK_SWITCH (priv->als_switch), enabled);
+  gtk_widget_set_visible (priv->als_row, visible && has_brightness);
+  g_signal_handlers_unblock_by_func (priv->als_switch, als_switch_changed, self);
+}
+
+static void
 on_screen_property_change (GDBusProxy *proxy,
                            GVariant   *changed_properties,
                            GVariant   *invalidated_properties,
@@ -1456,6 +1510,44 @@ add_brightness_row (CcPowerPanel  *self,
 }
 
 static void
+als_enabled_setting_changed (GSettings    *settings,
+                             const gchar  *key,
+                             CcPowerPanel *self)
+{
+  als_enabled_state_changed (self);
+}
+
+static void
+iio_proxy_appeared_cb (GDBusConnection *connection,
+                       const gchar *name,
+                       const gchar *name_owner,
+                       gpointer user_data)
+{
+  CcPowerPanel *self = CC_POWER_PANEL (user_data);
+  self->priv->iio_proxy =
+    g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                   G_DBUS_PROXY_FLAGS_NONE,
+                                   NULL,
+                                   "net.hadess.SensorProxy",
+                                   "/net/hadess/SensorProxy",
+                                   "net.hadess.SensorProxy",
+                                   NULL, NULL);
+  g_signal_connect_swapped (G_OBJECT (self->priv->iio_proxy), "g-properties-changed",
+                            G_CALLBACK (als_enabled_state_changed), self);
+  als_enabled_state_changed (self);
+}
+
+static void
+iio_proxy_vanished_cb (GDBusConnection *connection,
+                       const gchar *name,
+                       gpointer user_data)
+{
+  CcPowerPanel *self = CC_POWER_PANEL (user_data);
+  g_clear_object (&self->priv->iio_proxy);
+  als_enabled_state_changed (self);
+}
+
+static void
 add_power_saving_section (CcPowerPanel *self)
 {
   CcPowerPanelPrivate *priv = self->priv;
@@ -1510,6 +1602,39 @@ add_power_saving_section (CcPowerPanel *self)
 
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (priv->row_sizegroup, row);
+
+  /* ambient light sensor */
+  priv->iio_proxy_watch_id =
+    g_bus_watch_name (G_BUS_TYPE_SYSTEM,
+                      "net.hadess.SensorProxy",
+                      G_BUS_NAME_WATCHER_FLAGS_NONE,
+                      iio_proxy_appeared_cb,
+                      iio_proxy_vanished_cb,
+                      self, NULL);
+  g_signal_connect (priv->gsd_settings, "changed",
+                    G_CALLBACK (als_enabled_setting_changed), self);
+  priv->als_row = row = no_prelight_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_container_add (GTK_CONTAINER (row), box);
+  label = gtk_label_new (_("Automatic brightness"));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_start (label, 20);
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  priv->als_switch = sw = gtk_switch_new ();
+  gtk_widget_set_margin_start (sw, 20);
+  gtk_widget_set_margin_end (sw, 20);
+  gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  gtk_container_add (GTK_CONTAINER (widget), row);
+  gtk_size_group_add_widget (priv->row_sizegroup, row);
+  g_signal_connect (G_OBJECT (priv->als_switch), "notify::active",
+                    G_CALLBACK (als_switch_changed), self);
 
   row = add_brightness_row (self, _("_Keyboard brightness"), &priv->kbd_brightness_scale);
   priv->kbd_brightness_row = row;
