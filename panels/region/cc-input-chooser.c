@@ -93,9 +93,9 @@ locale_info_free (gpointer data)
   g_free (info->name);
   g_free (info->unaccented_name);
   g_free (info->untranslated_name);
-  g_object_unref (info->default_input_source_row);
-  g_object_unref (info->locale_row);
-  g_object_unref (info->back_row);
+  g_clear_object (&info->default_input_source_row);
+  g_clear_object (&info->locale_row);
+  g_clear_object (&info->back_row);
   g_hash_table_destroy (info->layout_rows_by_id);
   g_hash_table_destroy (info->engine_rows_by_id);
   g_free (info);
