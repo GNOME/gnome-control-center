@@ -524,6 +524,9 @@ find_matching_realm (UmRealmManager *realm_manager, const gchar *login)
                 gint i;
 
                 common = um_realm_object_get_common (l->data);
+                if (common == NULL)
+                        continue;
+
                 permitted_logins = um_realm_common_get_permitted_logins (common);
                 for (i = 0; permitted_logins[i] != NULL; i++) {
                         if (g_strcmp0 (permitted_logins[i], login) == 0)

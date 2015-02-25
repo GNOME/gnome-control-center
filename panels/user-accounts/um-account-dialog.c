@@ -655,6 +655,8 @@ enterprise_add_realm (UmAccountDialog *self,
         gchar *name;
 
         common = um_realm_object_get_common (realm);
+        g_return_if_fail (common != NULL);
+
         realm_name = um_realm_common_get_name (common);
 
         /*
@@ -793,6 +795,12 @@ enterprise_permit_user_login (UmAccountDialog *self)
         GVariant *options;
 
         common = um_realm_object_get_common (self->selected_realm);
+        if (common != NULL) {
+                g_debug ("Failed to register account: failed to get d-bus interface");
+                show_error_dialog (self, _("Failed to register account"), NULL);
+                finish_action (self);
+                return;
+        }
 
         login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login));
         g_return_if_fail (login != NULL);
