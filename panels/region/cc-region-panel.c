@@ -131,6 +131,7 @@ cc_region_panel_finalize (GObject *object)
 {
 	CcRegionPanel *self = CC_REGION_PANEL (object);
 	CcRegionPanelPrivate *priv = self->priv;
+	GtkWidget *chooser;
 
         g_cancellable_cancel (priv->cancellable);
         g_clear_object (&priv->cancellable);
@@ -163,6 +164,9 @@ cc_region_panel_finalize (GObject *object)
         g_free (priv->region);
         g_free (priv->system_language);
         g_free (priv->system_region);
+
+        chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
+        gtk_widget_destroy (chooser);
 
 	G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
@@ -1110,15 +1114,14 @@ input_source_already_added (CcRegionPanel *self,
 }
 
 static void
-input_response (GtkWidget *chooser, gint response_id, gpointer data)
+run_input_chooser (CcRegionPanel *self, GtkWidget *chooser)
 {
-	CcRegionPanel *self = data;
         gchar *type;
         gchar *id;
         gchar *name;
         GDesktopAppInfo *app_info = NULL;
 
-        if (response_id == GTK_RESPONSE_OK) {
+        if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK) {
                 if (cc_input_chooser_get_selected (chooser, &type, &id, &name) &&
                     !input_source_already_added (self, id)) {
                         if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
@@ -1141,8 +1144,7 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
                         g_clear_object (&app_info);
                 }
         }
-        gtk_widget_destroy (chooser);
-        g_object_set_data (G_OBJECT (self), "input-chooser", NULL);
+        gtk_widget_hide(chooser);
 }
 
 static void
@@ -1152,21 +1154,27 @@ show_input_chooser (CcRegionPanel *self)
         GtkWidget *chooser;
         GtkWidget *toplevel;
 
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-        chooser = cc_input_chooser_new (GTK_WINDOW (toplevel),
-                                        priv->login,
-                                        priv->xkb_info,
-#ifdef HAVE_IBUS
-                                        priv->ibus_engines
-#else
-                                        NULL
-#endif
-                );
-        g_signal_connect (chooser, "response",
-                          G_CALLBACK (input_response), self);
-        gtk_window_present (GTK_WINDOW (chooser));
+        chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
 
-        g_object_set_data (G_OBJECT (self), "input-chooser", chooser);
+        if (!chooser) {
+                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+                chooser = cc_input_chooser_new (GTK_WINDOW (toplevel),
+                                                priv->login,
+                                                priv->xkb_info,
+#ifdef HAVE_IBUS
+                                                priv->ibus_engines
+#else
+                                                NULL
+#endif
+                                                );
+                g_object_ref (chooser);
+                g_object_set_data_full (G_OBJECT (self), "input-chooser",
+                                        chooser, g_object_unref);
+        } else {
+                cc_input_chooser_reset (chooser);
+        }
+
+        run_input_chooser (self, chooser);
 }
 
 static void

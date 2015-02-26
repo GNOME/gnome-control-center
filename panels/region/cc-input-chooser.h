@@ -37,6 +37,8 @@ gboolean     cc_input_chooser_get_selected (GtkWidget    *chooser,
                                             gchar       **id,
                                             gchar       **name);
 
+void         cc_input_chooser_reset (GtkWidget *chooser);
+
 G_END_DECLS
 
 #endif /* __CC_INPUT_CHOOSER_H__ */
