@@ -394,6 +394,7 @@ show_input_sources_for_locale (GtkWidget   *chooser,
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
   gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (priv->list), FALSE);
+  gtk_list_box_unselect_all (GTK_LIST_BOX (priv->list));
 
   if (gtk_widget_is_visible (priv->filter_entry) &&
       !gtk_widget_is_focus (priv->filter_entry))
@@ -1220,4 +1221,10 @@ cc_input_chooser_get_selected (GtkWidget  *chooser,
   *name = g_strdup (n);
 
   return TRUE;
+}
+
+void
+cc_input_chooser_reset (GtkWidget *chooser)
+{
+  show_locale_rows (chooser);
 }
