@@ -218,7 +218,7 @@ show_restart_notification (CcRegionPanel *self,
         GtkWidget *box;
         GtkWidget *label;
         GtkWidget *button;
-        gchar *current_locale;
+        gchar *current_locale = NULL;
 
         if (priv->notification)
                 return;
