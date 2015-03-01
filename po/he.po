@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-24 12:25+0200\n"
-"PO-Revision-Date: 2015-02-24 12:25+0200\n"
+"POT-Creation-Date: 2015-03-02 00:53+0200\n"
+"PO-Revision-Date: 2015-03-02 00:55+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -128,8 +128,8 @@ msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תו�
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:703
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:724
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -502,7 +502,7 @@ msgstr "כיול התצוגה"
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1468
+#: ../panels/user-accounts/um-account-dialog.c:1476
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -662,7 +662,7 @@ msgstr "יבוא קובץ…"
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1469
+#: ../panels/user-accounts/um-account-dialog.c:1477
 msgid "_Add"
 msgstr "הו_ספה"
 
@@ -4679,7 +4679,9 @@ msgstr "דיווח על בעיות"
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
 "anonymously and are scrubbed of personal data."
-msgstr "שליחת דיווחים על בעיות טכניות תעזור לנו לשפר את %s. הדיווחים נשלחים בעילום שם וללא מידע אישי."
+msgstr ""
+"שליחת דיווחים על בעיות טכניות תעזור לנו לשפר את %s. הדיווחים נשלחים בעילום "
+"שם וללא מידע אישי."
 
 #: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
@@ -4859,22 +4861,22 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "אחר"
 
-#: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:1061
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:1064
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
-#: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1065
+#: ../panels/region/cc-region-panel.c:247
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
-#: ../panels/region/cc-region-panel.c:862
+#: ../panels/region/cc-region-panel.c:872
 msgid "No input source selected"
 msgstr "לא נבחר מקור קלט"
 
-#: ../panels/region/cc-region-panel.c:1703
+#: ../panels/region/cc-region-panel.c:1788
 msgid "Login Screen"
 msgstr "מסך כניסה"
 
@@ -4985,6 +4987,30 @@ msgid "Options"
 msgstr "אפשרויות"
 
 #: ../panels/region/region.ui.h:7
+msgid "Add input source"
+msgstr "הוספת מקור קלט"
+
+#: ../panels/region/region.ui.h:8
+msgid "Remove input source"
+msgstr "הסרת מקור קלט"
+
+#: ../panels/region/region.ui.h:9
+msgid "Move input source up"
+msgstr "העברת מקור הקלט מעלה"
+
+#: ../panels/region/region.ui.h:10
+msgid "Move input source down"
+msgstr "העברת מקור הקלט מטה"
+
+#: ../panels/region/region.ui.h:11
+msgid "Configure input source"
+msgstr "בחירת מקורות קלט"
+
+#: ../panels/region/region.ui.h:12
+msgid "Show input source keyboard layout"
+msgstr "הצגת מקור פריסת מקלדת"
+
+#: ../panels/region/region.ui.h:13
 msgid "Login settings are used by all users when logging into the system"
 msgstr "הגדרות כניסה נמצאות בשימוש על ידי כל המשתמשים בעת כניסה למערכת"
 
@@ -5946,7 +5972,7 @@ msgid "_Enterprise Login"
 msgstr "_כניסה ארגונית"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
-#: ../panels/user-accounts/um-account-dialog.c:1458
+#: ../panels/user-accounts/um-account-dialog.c:1466
 msgid "Add User"
 msgstr "הוספת משתמש"
 
@@ -6304,20 +6330,21 @@ msgstr "הוספת החשבון נכשלה"
 msgid "Passwords do not match."
 msgstr "הססמאות אינן תואמות."
 
-#: ../panels/user-accounts/um-account-dialog.c:731
-#: ../panels/user-accounts/um-account-dialog.c:777
+#: ../panels/user-accounts/um-account-dialog.c:733
+#: ../panels/user-accounts/um-account-dialog.c:779
+#: ../panels/user-accounts/um-account-dialog.c:800
 msgid "Failed to register account"
 msgstr "הרשמת החשבון נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:915
+#: ../panels/user-accounts/um-account-dialog.c:923
 msgid "No supported way to authenticate with this domain"
 msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
 
-#: ../panels/user-accounts/um-account-dialog.c:974
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to join domain"
 msgstr "ההצטרפות למתחם נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:1035
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid ""
 "That login name didn't work.\n"
 "Please try again."
@@ -6325,7 +6352,7 @@ msgstr ""
 "ססמה שגויה.\n"
 "נא לנסות שוב."
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1050
 msgid ""
 "That login password didn't work.\n"
 "Please try again."
@@ -6333,11 +6360,11 @@ msgstr ""
 "ססמה שגויה.\n"
 "נא לנסות שוב."
 
-#: ../panels/user-accounts/um-account-dialog.c:1050
+#: ../panels/user-accounts/um-account-dialog.c:1058
 msgid "Failed to log into domain"
 msgstr "הכניסה למתחם נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:1108
+#: ../panels/user-accounts/um-account-dialog.c:1116
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "לא ניתן למצוא את המתחם. אולי שגית?"
 
@@ -6461,7 +6488,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:839
+#: ../panels/user-accounts/um-user-panel.c:842
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6469,7 +6496,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:846
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6529,17 +6556,17 @@ msgstr "לא ניתן להצטרף אוטומטית לסוג כזה של מתח�
 msgid "No such domain or realm found"
 msgstr "לא נמצאו מתחם או תחום כאלה"
 
-#: ../panels/user-accounts/um-realm-manager.c:813
-#: ../panels/user-accounts/um-realm-manager.c:827
+#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:829
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "לא ניתן להיכנס בשם %s למתחם %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:819
+#: ../panels/user-accounts/um-realm-manager.c:821
 msgid "Invalid password, please try again"
 msgstr "הססמה שגויה, נא לנסות שוב"
 
-#: ../panels/user-accounts/um-realm-manager.c:832
+#: ../panels/user-accounts/um-realm-manager.c:834
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל המתחם %s:‏ %s"
@@ -6553,32 +6580,32 @@ msgid "Failed to delete user"
 msgstr "אירע כשל במחיקת משתמש"
 
 #: ../panels/user-accounts/um-user-panel.c:508
-#: ../panels/user-accounts/um-user-panel.c:564
-#: ../panels/user-accounts/um-user-panel.c:616
+#: ../panels/user-accounts/um-user-panel.c:567
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Failed to revoke remotely managed user"
 msgstr "אירע כשל בביטול המשתמש המנוהל מרחוק"
 
-#: ../panels/user-accounts/um-user-panel.c:672
+#: ../panels/user-accounts/um-user-panel.c:675
 msgid "You cannot delete your own account."
 msgstr "אין באפשרותך למחוק את החשבון שלך."
 
-#: ../panels/user-accounts/um-user-panel.c:681
+#: ../panels/user-accounts/um-user-panel.c:684
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:688
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: ../panels/user-accounts/um-user-panel.c:694
+#: ../panels/user-accounts/um-user-panel.c:697
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "האם ברצונך לשמור את הקבצים של %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:701
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6586,51 +6613,51 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: ../panels/user-accounts/um-user-panel.c:701
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:705
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:716
+#: ../panels/user-accounts/um-user-panel.c:719
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "האם אכן ברצונך למחוק את החשבון המנוהל מרחוק %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:720
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Delete"
 msgstr "_מחיקה"
 
-#: ../panels/user-accounts/um-user-panel.c:772
+#: ../panels/user-accounts/um-user-panel.c:775
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מנוטרל"
 
-#: ../panels/user-accounts/um-user-panel.c:780
+#: ../panels/user-accounts/um-user-panel.c:783
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: ../panels/user-accounts/um-user-panel.c:783
+#: ../panels/user-accounts/um-user-panel.c:786
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: ../panels/user-accounts/um-user-panel.c:832
+#: ../panels/user-accounts/um-user-panel.c:835
 msgid "Logged in"
 msgstr "נכנסת"
 
-#: ../panels/user-accounts/um-user-panel.c:1264
+#: ../panels/user-accounts/um-user-panel.c:1267
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:1266
+#: ../panels/user-accounts/um-user-panel.c:1269
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:1307
+#: ../panels/user-accounts/um-user-panel.c:1310
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6638,12 +6665,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1345
+#: ../panels/user-accounts/um-user-panel.c:1348
 msgid "Create a user account"
 msgstr "יצירת חשבון משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
-#: ../panels/user-accounts/um-user-panel.c:1668
+#: ../panels/user-accounts/um-user-panel.c:1359
+#: ../panels/user-accounts/um-user-panel.c:1671
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6651,12 +6678,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
-#: ../panels/user-accounts/um-user-panel.c:1673
+#: ../panels/user-accounts/um-user-panel.c:1381
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6664,7 +6691,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1582
+#: ../panels/user-accounts/um-user-panel.c:1585
 msgid "My Account"
 msgstr "החשבון שלי"
 
@@ -7862,15 +7889,6 @@ msgstr "העדפות;הגדרות;"
 #~ msgid "Select keyboards or other input sources"
 #~ msgstr "בחירת מקלדות או מקורות קלט אחרים"
 
-#~ msgid "Remove Input Source"
-#~ msgstr "הסרת מקור קלט"
-
-#~ msgid "Move Input Source Up"
-#~ msgstr "קידום מקור הקלט למעלה"
-
-#~ msgid "Show Keyboard Layout"
-#~ msgstr "הצגת פריסת המקלדת"
-
 #~ msgid "Ctrl+Alt+Space"
 #~ msgstr "Ctrl+Alt+רווח"
 
@@ -8152,9 +8170,6 @@ msgstr "העדפות;הגדרות;"
 
 #~ msgid "_Show"
 #~ msgstr "ה_צגה"
-
-#~ msgid "Choose an input source"
-#~ msgstr "נא לבחור מקור קלט"
 
 #~ msgid "Copy Settings..."
 #~ msgstr "העתקת ההגדרות..."
