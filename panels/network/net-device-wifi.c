@@ -1590,6 +1590,7 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_show (image);
         widget = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
+        gtk_style_context_add_class (gtk_widget_get_style_context (widget), "circular-button");
         gtk_widget_show (widget);
         gtk_container_add (GTK_CONTAINER (widget), image);
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
