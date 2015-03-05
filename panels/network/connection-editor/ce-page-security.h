@@ -45,6 +45,8 @@ struct _CEPageSecurity
 
         GtkComboBox *security_combo;
         GtkWidget   *security_heading;
+        GtkComboBox *firewall_combo;
+        GtkWidget   *firewall_heading;
         GtkSizeGroup *group;
         gboolean     adhoc;
 };

@@ -30,7 +30,6 @@
 
 #include <net/if_arp.h>
 
-#include "firewall-helpers.h"
 #include "ce-page-wifi.h"
 #include "ui-helpers.h"
 
@@ -130,8 +129,6 @@ connect_wifi_page (CEPageWifi *page)
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        firewall_ui_setup (sc, widget, CE_PAGE (page)->cancellable);
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 }
 
 static void
@@ -143,7 +140,6 @@ ui_to_setting (CEPageWifi *page)
         GByteArray *cloned_mac = NULL;
         GtkWidget *entry;
         const gchar *utf8_ssid;
-        NMSettingConnection *sc;
 
         entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_ssid"));
         utf8_ssid = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -159,10 +155,6 @@ ui_to_setting (CEPageWifi *page)
         device_mac = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, NULL);
         entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_cloned_mac"));
         cloned_mac = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, NULL);
-
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        firewall_ui_to_setting (sc, entry);
 
         g_object_set (page->setting,
                       NM_SETTING_WIRELESS_SSID, ssid,

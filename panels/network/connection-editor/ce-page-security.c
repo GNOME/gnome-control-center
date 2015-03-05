@@ -29,6 +29,7 @@
 
 #include "wireless-security.h"
 #include "ce-page-security.h"
+#include "firewall-helpers.h"
 
 G_DEFINE_TYPE (CEPageSecurity, ce_page_security, CE_TYPE_PAGE)
 
@@ -148,6 +149,7 @@ security_combo_changed (GtkComboBox *combo,
                         gtk_container_remove (GTK_CONTAINER (parent), sec_widget);
 
                 gtk_size_group_add_widget (page->group, page->security_heading);
+                gtk_size_group_add_widget (page->group, page->firewall_heading);
                 wireless_security_add_to_size_group (sec, page->group);
 
                 gtk_container_add (GTK_CONTAINER (vbox), sec_widget);
@@ -204,6 +206,7 @@ finish_setup (CEPageSecurity *page)
         NMConnection *connection = CE_PAGE (page)->connection;
         NMSettingWireless *sw;
         NMSettingWirelessSecurity *sws;
+        NMSettingConnection *sc;
         gboolean is_adhoc = FALSE;
         GtkListStore *sec_model;
         GtkTreeIter iter;
@@ -354,6 +357,13 @@ finish_setup (CEPageSecurity *page)
 
         page->security_combo = combo;
 
+        page->firewall_heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_zone"));
+        page->firewall_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
+
+        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        firewall_ui_setup (sc, page->firewall_combo, CE_PAGE (page)->cancellable);
+        g_signal_connect_swapped (page->firewall_combo, "changed", G_CALLBACK (ce_page_changed), page);
+
         security_combo_changed (combo, page);
         g_signal_connect (combo, "changed",
                           G_CALLBACK (security_combo_changed), page);
@@ -365,6 +375,7 @@ validate (CEPage        *page,
           GError       **error)
 {
         NMSettingWireless *sw;
+        NMSettingConnection *sc;
         WirelessSecurity *sec;
         gboolean valid = FALSE;
         const char *mode;
@@ -408,6 +419,9 @@ validate (CEPage        *page,
                 nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
                 valid = TRUE;
         }
+
+        sc = nm_connection_get_setting_connection (connection);
+        firewall_ui_to_setting (sc, CE_PAGE_SECURITY (page)->firewall_combo);
 
         return valid;
 }
