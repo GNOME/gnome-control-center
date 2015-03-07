@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-"
 "center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-24 07:28+0000\n"
-"PO-Revision-Date: 2015-02-24 21:07+0500\n"
+"POT-Creation-Date: 2015-03-07 07:30+0000\n"
+"PO-Revision-Date: 2015-03-07 20:28+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -122,8 +122,8 @@ msgstr "Сіз суреттерді %s бумасына қоса аласыз, �
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:703
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:724
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
@@ -496,7 +496,7 @@ msgstr "Экран калибрациясы"
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1468
+#: ../panels/user-accounts/um-account-dialog.c:1476
 msgid "Cancel"
 msgstr "Болдырмау"
 
@@ -655,7 +655,7 @@ msgstr "Файлды импорттау…"
 #: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3 ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1469
+#: ../panels/user-accounts/um-account-dialog.c:1477
 msgid "_Add"
 msgstr "Қ_осу"
 
@@ -2608,17 +2608,23 @@ msgid ""
 "If you have a connection to the Internet other than wireless, you can set up a "
 "wireless hotspot to share the connection with others."
 msgstr ""
+"Егер сізде сымсыз байланыстан басқа Интернетпен байланысыңыз бар болса, ол "
+"байланыспен басқа пайдаланушылармен бөлісу үшін, сымсыз қатынау нүктесін жасауға "
+"болады."
 
 #: ../panels/network/net-device-wifi.c:1158
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
+"Сымсыз қатынау нүктесін іске қосу нәтижесінде <b>%s</b> желісіне байланыс үзіледі."
 
 #: ../panels/network/net-device-wifi.c:1162
 msgid ""
 "It is not possible to access the Internet through your wireless while the hotspot "
 "is active."
 msgstr ""
+"Бұл сымсыз қатынау нүктесі белсенді болып тұрған кезде, сымсыз байланысыңыз арқылы "
+"Интернетке қатынау мүмкін емес."
 
 #: ../panels/network/net-device-wifi.c:1245
 msgid "Stop hotspot and disconnect any users?"
@@ -2641,6 +2647,8 @@ msgid ""
 "Network details for the selected networks, including passwords and any custom "
 "configuration will be lost."
 msgstr ""
+"Таңдалған желілер үшін желі ақпараты, парольдер және таңдауыңызша жасалған "
+"баптаулар жоғалатын болады."
 
 #: ../panels/network/net-device-wifi.c:1750
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
@@ -2851,6 +2859,8 @@ msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
 msgstr ""
+"Бұл байланыс үшін баптауларды бастапқы мәндеріне тастау, бірақ, байланыстың өзін "
+"таңдамалы ретінде есте сақтау."
 
 #: ../panels/network/network-wifi.ui.h:44
 msgid ""
@@ -4805,21 +4815,21 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "Басқа"
 
-#: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:1061
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:1064
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Өзгерістер іске асуы үшін сессияңызды қайта бастау керек"
 
-#: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1065
+#: ../panels/region/cc-region-panel.c:247
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Restart Now"
 msgstr "Қазір қайта қосу"
 
-#: ../panels/region/cc-region-panel.c:862
+#: ../panels/region/cc-region-panel.c:872
 msgid "No input source selected"
 msgstr "Кіріс қайнар көзді таңдалмады"
 
-#: ../panels/region/cc-region-panel.c:1703
+#: ../panels/region/cc-region-panel.c:1788
 msgid "Login Screen"
 msgstr "Жүйеге кіру экраны"
 
@@ -4929,6 +4939,30 @@ msgid "Options"
 msgstr "Опциялар"
 
 #: ../panels/region/region.ui.h:7
+msgid "Add input source"
+msgstr "Кіріс қайнар көзін қосу"
+
+#: ../panels/region/region.ui.h:8
+msgid "Remove input source"
+msgstr "Кіріс қайнар көзін өшіру"
+
+#: ../panels/region/region.ui.h:9
+msgid "Move input source up"
+msgstr "Кіріс қайнар көзін жоғары жылжыту"
+
+#: ../panels/region/region.ui.h:10
+msgid "Move input source down"
+msgstr "Кіріс қайнар көзін төмен жылжыту"
+
+#: ../panels/region/region.ui.h:11
+msgid "Configure input source"
+msgstr "Кіріс қайнар көзін баптау"
+
+#: ../panels/region/region.ui.h:12
+msgid "Show input source keyboard layout"
+msgstr "Кіріс қайнар көзінің пернетақта жаймасын көрсету"
+
+#: ../panels/region/region.ui.h:13
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Жүйеге кіру баптаулары осы жүйеге кіретін барлық пайдаланушылармен қолданылады"
@@ -5882,7 +5916,7 @@ msgid "_Enterprise Login"
 msgstr "Кәсіпорын тірк_елгісі"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
-#: ../panels/user-accounts/um-account-dialog.c:1458
+#: ../panels/user-accounts/um-account-dialog.c:1466
 msgid "Add User"
 msgstr "Пайдаланушыны қосу"
 
@@ -6232,20 +6266,21 @@ msgstr "Тіркелгіні қосу сәтсіз"
 msgid "Passwords do not match."
 msgstr "Парольдер өзара сәйкес келмейді."
 
-#: ../panels/user-accounts/um-account-dialog.c:731
-#: ../panels/user-accounts/um-account-dialog.c:777
+#: ../panels/user-accounts/um-account-dialog.c:733
+#: ../panels/user-accounts/um-account-dialog.c:779
+#: ../panels/user-accounts/um-account-dialog.c:800
 msgid "Failed to register account"
 msgstr "Тіркелгіні тіркеу сәтсіз аяқталды"
 
-#: ../panels/user-accounts/um-account-dialog.c:915
+#: ../panels/user-accounts/um-account-dialog.c:923
 msgid "No supported way to authenticate with this domain"
 msgstr "Бұл доменде аутентификациялаудың қолдауы бар тәсілдері жоқ"
 
-#: ../panels/user-accounts/um-account-dialog.c:974
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to join domain"
 msgstr "Доменде тіркелу сәтсіз"
 
-#: ../panels/user-accounts/um-account-dialog.c:1035
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid ""
 "That login name didn't work.\n"
 "Please try again."
@@ -6253,7 +6288,7 @@ msgstr ""
 "Бұл логин жасамады.\n"
 "Қайталап көріңіз."
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1050
 msgid ""
 "That login password didn't work.\n"
 "Please try again."
@@ -6261,11 +6296,11 @@ msgstr ""
 "Бұл логин паролі жасамады.\n"
 "Қайталап көріңіз."
 
-#: ../panels/user-accounts/um-account-dialog.c:1050
+#: ../panels/user-accounts/um-account-dialog.c:1058
 msgid "Failed to log into domain"
 msgstr "Доменге кіру сәтсіз"
 
-#: ../panels/user-accounts/um-account-dialog.c:1108
+#: ../panels/user-accounts/um-account-dialog.c:1116
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Доменді табу мүмкін емес. Оны дұрыс көрсеттіңіз бе?"
 
@@ -6383,7 +6418,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:839
+#: ../panels/user-accounts/um-user-panel.c:842
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6391,7 +6426,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:846
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6451,17 +6486,17 @@ msgstr "Доменнің бұл түріне автоматты түрде кі�
 msgid "No such domain or realm found"
 msgstr "Ондай домен (realm) табылмады"
 
-#: ../panels/user-accounts/um-realm-manager.c:813
-#: ../panels/user-accounts/um-realm-manager.c:827
+#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:829
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "%s ретінде %s доменіне кіру мүмкін емес"
 
-#: ../panels/user-accounts/um-realm-manager.c:819
+#: ../panels/user-accounts/um-realm-manager.c:821
 msgid "Invalid password, please try again"
 msgstr "Пароль қате, қайтадан көріңіз"
 
-#: ../panels/user-accounts/um-realm-manager.c:832
+#: ../panels/user-accounts/um-realm-manager.c:834
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%s доменіне байланысу мүмкін емес: %s"
@@ -6475,83 +6510,85 @@ msgid "Failed to delete user"
 msgstr "Пайдаланушыны өшіру сәтсіз аяқталды"
 
 #: ../panels/user-accounts/um-user-panel.c:508
-#: ../panels/user-accounts/um-user-panel.c:564
-#: ../panels/user-accounts/um-user-panel.c:616
+#: ../panels/user-accounts/um-user-panel.c:567
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Failed to revoke remotely managed user"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:672
+#: ../panels/user-accounts/um-user-panel.c:675
 msgid "You cannot delete your own account."
 msgstr "Өз тіркелгіңізді өшіре алмайсыз."
 
-#: ../panels/user-accounts/um-user-panel.c:681
+#: ../panels/user-accounts/um-user-panel.c:684
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s жүйеге кіріп тұр"
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:688
 msgid ""
 "Deleting a user while they are logged in can leave the system in an inconsistent "
 "state."
 msgstr ""
 "Жүйеге кіріп тұрған кезде пайдаланушыны өшіру жүйені екімәнді күйде қалдыруы мүмкін."
 
-#: ../panels/user-accounts/um-user-panel.c:694
+#: ../panels/user-accounts/um-user-panel.c:697
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "%s файлдарын алып қалуды қалайсыз ба?"
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:701
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files around "
 "when deleting a user account."
 msgstr ""
+"Пайдаланушы тіркелгісін өшіру кезінде оның үй бумасын, пошта кезегін және уақытша "
+"файлдарын алып қалу мүмкіндігі бар."
 
-#: ../panels/user-accounts/um-user-panel.c:701
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Delete Files"
 msgstr "Файлдарды ө_шіру"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:705
 msgid "_Keep Files"
 msgstr "Ф_айлдарды қалдыру"
 
-#: ../panels/user-accounts/um-user-panel.c:716
+#: ../panels/user-accounts/um-user-panel.c:719
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
-msgstr ""
+msgstr "Қашықтан басқарылатын %s тіркелгісін өшіруді шынымен қалайсыз ба?"
 
-#: ../panels/user-accounts/um-user-panel.c:720
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Delete"
 msgstr "Ө_шіру"
 
-#: ../panels/user-accounts/um-user-panel.c:772
+#: ../panels/user-accounts/um-user-panel.c:775
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Тіркелгі сөндірілген"
 
-#: ../panels/user-accounts/um-user-panel.c:780
+#: ../panels/user-accounts/um-user-panel.c:783
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Келесі рет кірген кезде орнатылады"
 
-#: ../panels/user-accounts/um-user-panel.c:783
+#: ../panels/user-accounts/um-user-panel.c:786
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../panels/user-accounts/um-user-panel.c:832
+#: ../panels/user-accounts/um-user-panel.c:835
 msgid "Logged in"
 msgstr "Жүйеге кіріп тұр"
 
-#: ../panels/user-accounts/um-user-panel.c:1264
+#: ../panels/user-accounts/um-user-panel.c:1267
 msgid "Failed to contact the accounts service"
 msgstr "Тіркелгілер қызметімен байланыс орнату қатесі"
 
-#: ../panels/user-accounts/um-user-panel.c:1266
+#: ../panels/user-accounts/um-user-panel.c:1269
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService орнатылған және іске қосылғанына көз жеткізіңіз."
 
-#: ../panels/user-accounts/um-user-panel.c:1307
+#: ../panels/user-accounts/um-user-panel.c:1310
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6559,12 +6596,12 @@ msgstr ""
 "Өзгерістерді жасау үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1345
+#: ../panels/user-accounts/um-user-panel.c:1348
 msgid "Create a user account"
 msgstr "Пайдаланушы тіркелгісін жасау"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
-#: ../panels/user-accounts/um-user-panel.c:1668
+#: ../panels/user-accounts/um-user-panel.c:1359
+#: ../panels/user-accounts/um-user-panel.c:1671
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6572,12 +6609,12 @@ msgstr ""
 "Пайдаланушы тіркелгісін жасау үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid "Delete the selected user account"
 msgstr "Таңдалған пайдаланушы тіркелгісін өшіру"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
-#: ../panels/user-accounts/um-user-panel.c:1673
+#: ../panels/user-accounts/um-user-panel.c:1381
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6585,7 +6622,7 @@ msgstr ""
 "Таңдалған пайдаланушы тіркелгісін өшіру үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1582
+#: ../panels/user-accounts/um-user-panel.c:1585
 msgid "My Account"
 msgstr "Менің тіркелгім"
 
@@ -6608,6 +6645,8 @@ msgid ""
 "The username should only consist of lower and upper case letters from a-z, digits "
 "and any of characters '.', '-' and '_'."
 msgstr ""
+"Пайдаланушы атында тек ағылшын әліппесінің әріптері, сандар, '.', '-' және '_' "
+"таңбаларының кез-келгені болуы мүмкін."
 
 #: ../panels/user-accounts/um-utils.c:577
 msgid "This will be used to name your home folder and can't be changed."
@@ -6645,7 +6684,7 @@ msgstr ""
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:87
 msgid "Mis-click detected, restarting..."
-msgstr ""
+msgstr "Қате шерту анықталды, қайтадан бастау..."
 
 #: ../panels/wacom/cc-wacom-button-row.c:442
 msgctxt "Wacom tablet button"
@@ -6675,7 +6714,7 @@ msgstr "Мониторды ауыстыру"
 #: ../panels/wacom/cc-wacom-button-row.h:57
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
-msgstr ""
+msgstr "Экрандағы көмекті көрсету"
 
 #: ../panels/wacom/cc-wacom-mapping-panel.c:263
 msgid "Output:"
@@ -7657,10 +7696,6 @@ msgstr "Баптаулар;Қалаулар;"
 
 #~ msgid "Examples"
 #~ msgstr "Мысалдар"
-
-#~| msgid "Keyboard Layout Options"
-#~ msgid "Show Keyboard Layout"
-#~ msgstr "Пернетақта жаймасын көрсету"
 
 #~| msgid "Shortcuts"
 #~ msgid "Shortcut Settings"
