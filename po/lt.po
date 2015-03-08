@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-23 19:28+0000\n"
-"PO-Revision-Date: 2015-02-23 22:57+0200\n"
+"POT-Creation-Date: 2015-03-08 07:31+0000\n"
+"PO-Revision-Date: 2015-03-08 19:18+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -138,8 +138,8 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:703
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:724
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
@@ -516,7 +516,7 @@ msgstr "Vaizduoklio kalibravimas"
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1468
+#: ../panels/user-accounts/um-account-dialog.c:1476
 msgid "Cancel"
 msgstr "Atsisakyti"
 
@@ -679,7 +679,7 @@ msgstr "Importuoti failą..."
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1469
+#: ../panels/user-accounts/um-account-dialog.c:1477
 msgid "_Add"
 msgstr "_Pridėti"
 
@@ -3571,30 +3571,22 @@ msgid "Sound Alerts"
 msgstr "Garso efektai"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Notification Banners"
 msgstr "Pranešimų iššokimai"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
-#| msgctxt "notifications"
-#| msgid "Show Details in Banners"
 msgctxt "notifications"
 msgid "Show Message Content in Banners"
 msgstr "Rodyti turinį pranešimų iššokimuose"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Lock Screen Notifications"
 msgstr "Pranešimai ekrano užrakte"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
-#| msgctxt "notifications"
-#| msgid "Show Details in Lock Screen"
 msgctxt "notifications"
 msgid "Show Message Content on Lock Screen"
 msgstr "Rodyti pranešimų turinį ekrano užrakte"
@@ -3613,12 +3605,10 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Pranešimai;žinutė;laiškas;dėklas;iššokantis langelis;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#| msgid "Notifications"
 msgid "Notification Banners"
 msgstr "Pranešimų iššokimai"
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Notifications"
 msgid "Lock Screen Notifications"
 msgstr "Pranešimai ekrano užrakte"
 
@@ -3941,7 +3931,6 @@ msgid "_Mobile broadband"
 msgstr "_Mobilus plačiajuostis"
 
 #: ../panels/power/cc-power-panel.c:1603
-#| msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
 msgstr ""
 "Mobiliems plačiajuosčiams (3G, 4G, WiMax, ir kt.) įrenginiams reikia daugiau "
@@ -4932,21 +4921,21 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "Kita"
 
-#: ../panels/region/cc-region-panel.c:239
-#: ../panels/user-accounts/um-user-panel.c:1061
+#: ../panels/region/cc-region-panel.c:243
+#: ../panels/user-accounts/um-user-panel.c:1064
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Pakeitimams pritaikyti reikia perleisti seansą"
 
-#: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1065
+#: ../panels/region/cc-region-panel.c:247
+#: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Restart Now"
 msgstr "Perleisti dabar"
 
-#: ../panels/region/cc-region-panel.c:862
+#: ../panels/region/cc-region-panel.c:872
 msgid "No input source selected"
 msgstr "Nepasirinktas įvesties šaltinis"
 
-#: ../panels/region/cc-region-panel.c:1703
+#: ../panels/region/cc-region-panel.c:1788
 msgid "Login Screen"
 msgstr "Prisijungimo ekranas"
 
@@ -5059,6 +5048,36 @@ msgid "Options"
 msgstr "Parinktys"
 
 #: ../panels/region/region.ui.h:7
+#| msgid "Add an Input Source"
+msgid "Add input source"
+msgstr "Pridėti įvesties šaltinį"
+
+#: ../panels/region/region.ui.h:8
+#| msgid "No input sources found"
+msgid "Remove input source"
+msgstr "Pašalinti įvesties šaltinį"
+
+#: ../panels/region/region.ui.h:9
+#| msgid "No input sources found"
+msgid "Move input source up"
+msgstr "Pakelti įvesties šaltinį"
+
+#: ../panels/region/region.ui.h:10
+#| msgid "No input sources found"
+msgid "Move input source down"
+msgstr "Neleisti įvesties šaltinį"
+
+#: ../panels/region/region.ui.h:11
+#| msgid "Switch to next input source"
+msgid "Configure input source"
+msgstr "Konfigūruoti įvesties šaltinį"
+
+#: ../panels/region/region.ui.h:12
+#| msgid "No input source selected"
+msgid "Show input source keyboard layout"
+msgstr "Rodyti įvesties šaltinio klaviatūros išdėstymą"
+
+#: ../panels/region/region.ui.h:13
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Prisijungimo nustatymai yra naudojami visų naudotojų prisijungiant prie "
@@ -5290,7 +5309,6 @@ msgid "Require a password"
 msgstr "Reikalauti slaptažodžio"
 
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share music, photos and videos over the network."
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
@@ -5658,7 +5676,6 @@ msgid "_Disable if two keys are pressed together"
 msgstr "Iš_jungti, jei du klavišai paspaudžiami kartu"
 
 #: ../panels/universal-access/uap.ui.h:31
-#| msgid "Beep when a _modifer key is pressed"
 msgid "Beep when a _modifier key is pressed"
 msgstr "Pyptelėti, kai paspaustas _modifikatorius"
 
@@ -6034,7 +6051,7 @@ msgid "_Enterprise Login"
 msgstr "_Kompanijos prisijungimas"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
-#: ../panels/user-accounts/um-account-dialog.c:1458
+#: ../panels/user-accounts/um-account-dialog.c:1466
 msgid "Add User"
 msgstr "Pridėti naudotojo paskyrą"
 
@@ -6395,20 +6412,21 @@ msgstr "Nepavyko pridėti Pasirinkite paskyros"
 msgid "Passwords do not match."
 msgstr "Slaptažodžiai nesutampa."
 
-#: ../panels/user-accounts/um-account-dialog.c:731
-#: ../panels/user-accounts/um-account-dialog.c:777
+#: ../panels/user-accounts/um-account-dialog.c:733
+#: ../panels/user-accounts/um-account-dialog.c:779
+#: ../panels/user-accounts/um-account-dialog.c:800
 msgid "Failed to register account"
 msgstr "Nepavyko priregistruoti paskyros"
 
-#: ../panels/user-accounts/um-account-dialog.c:915
+#: ../panels/user-accounts/um-account-dialog.c:923
 msgid "No supported way to authenticate with this domain"
 msgstr "Nėra palaikomo būdo patvirtinti tapatybę šiame serveryje"
 
-#: ../panels/user-accounts/um-account-dialog.c:974
+#: ../panels/user-accounts/um-account-dialog.c:982
 msgid "Failed to join domain"
 msgstr "Nepavyko prisijungti prie srities"
 
-#: ../panels/user-accounts/um-account-dialog.c:1035
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid ""
 "That login name didn't work.\n"
 "Please try again."
@@ -6416,7 +6434,7 @@ msgstr ""
 "Šis prisijungimo vardas neveikė.\n"
 "Bandykite dar kartą."
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1050
 msgid ""
 "That login password didn't work.\n"
 "Please try again."
@@ -6424,11 +6442,11 @@ msgstr ""
 "Šis prisijungimo slaptažodis neveikė.\n"
 "Bandykite dar kartą."
 
-#: ../panels/user-accounts/um-account-dialog.c:1050
+#: ../panels/user-accounts/um-account-dialog.c:1058
 msgid "Failed to log into domain"
 msgstr "Nepavyko prisijungti prie srities"
 
-#: ../panels/user-accounts/um-account-dialog.c:1108
+#: ../panels/user-accounts/um-account-dialog.c:1116
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Nepavyksta rasti domeno. Gal suklydote?"
 
@@ -6554,7 +6572,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:839
+#: ../panels/user-accounts/um-user-panel.c:842
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6562,7 +6580,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:846
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6622,17 +6640,17 @@ msgstr "Nepavyksta automatiškai prisijungti prie šio tipo domeno"
 msgid "No such domain or realm found"
 msgstr "Nėra tokios srities"
 
-#: ../panels/user-accounts/um-realm-manager.c:813
-#: ../panels/user-accounts/um-realm-manager.c:827
+#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:829
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Nepavyko prisijungti kaip %s srityje %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:819
+#: ../panels/user-accounts/um-realm-manager.c:821
 msgid "Invalid password, please try again"
 msgstr "Netinkamas slaptažodis, bandykite dar kartą"
 
-#: ../panels/user-accounts/um-realm-manager.c:832
+#: ../panels/user-accounts/um-realm-manager.c:834
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Nepavyko prisijungti prie %s srities: %s"
@@ -6646,22 +6664,21 @@ msgid "Failed to delete user"
 msgstr "Nepavyko ištrinti naudotojo"
 
 #: ../panels/user-accounts/um-user-panel.c:508
-#: ../panels/user-accounts/um-user-panel.c:564
-#: ../panels/user-accounts/um-user-panel.c:616
-#| msgid "Failed to delete user"
+#: ../panels/user-accounts/um-user-panel.c:567
+#: ../panels/user-accounts/um-user-panel.c:619
 msgid "Failed to revoke remotely managed user"
 msgstr "Nepavyko atimti teisių iš nutolusio naudotojo"
 
-#: ../panels/user-accounts/um-user-panel.c:672
+#: ../panels/user-accounts/um-user-panel.c:675
 msgid "You cannot delete your own account."
 msgstr "Jūs negalite ištrinti savo paskyros."
 
-#: ../panels/user-accounts/um-user-panel.c:681
+#: ../panels/user-accounts/um-user-panel.c:684
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s vis dar prisijungęs"
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:688
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6669,66 +6686,64 @@ msgstr ""
 "Naudotojų ištrynimas, kai jie yra prisijungę, gali palikti sistemą "
 "nekorektiškoje būsenoje."
 
-#: ../panels/user-accounts/um-user-panel.c:694
+#: ../panels/user-accounts/um-user-panel.c:697
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Ar norite palikti naudotojo %s failus?"
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:701
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 "Trinant naudotoją galima palikti namų katalogą, paštą ir laikinus failus."
 
-#: ../panels/user-accounts/um-user-panel.c:701
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Delete Files"
 msgstr "_Ištrinti failus"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:705
 msgid "_Keep Files"
 msgstr "_Palikti failus"
 
-#: ../panels/user-accounts/um-user-panel.c:716
+#: ../panels/user-accounts/um-user-panel.c:719
 #, c-format
-#| msgid "Are you sure you want to remove the account?"
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr ""
 "Ar tikrai norite atimti teises iš nuotoliniu būdu valdomos paskyros %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:720
-#| msgid "_Delete Files"
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Delete"
 msgstr "_Ištrinti"
 
-#: ../panels/user-accounts/um-user-panel.c:772
+#: ../panels/user-accounts/um-user-panel.c:775
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Paskyra išjungta"
 
-#: ../panels/user-accounts/um-user-panel.c:780
+#: ../panels/user-accounts/um-user-panel.c:783
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bus nustatyta kito prisijungimo metu"
 
-#: ../panels/user-accounts/um-user-panel.c:783
+#: ../panels/user-accounts/um-user-panel.c:786
 msgctxt "Password mode"
 msgid "None"
 msgstr "Joks"
 
-#: ../panels/user-accounts/um-user-panel.c:832
+#: ../panels/user-accounts/um-user-panel.c:835
 msgid "Logged in"
 msgstr "Prisijunges prie"
 
-#: ../panels/user-accounts/um-user-panel.c:1264
+#: ../panels/user-accounts/um-user-panel.c:1267
 msgid "Failed to contact the accounts service"
 msgstr "Nepavyko susisiekti su paskyrų tarnyba"
 
-#: ../panels/user-accounts/um-user-panel.c:1266
+#: ../panels/user-accounts/um-user-panel.c:1269
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Įsitikinkite, kad AccountService yra įdiegta ir įjungta."
 
-#: ../panels/user-accounts/um-user-panel.c:1307
+#: ../panels/user-accounts/um-user-panel.c:1310
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6736,12 +6751,12 @@ msgstr ""
 "Pakeitimams atlikti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1345
+#: ../panels/user-accounts/um-user-panel.c:1348
 msgid "Create a user account"
 msgstr "Sukurti naują paskyrą"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
-#: ../panels/user-accounts/um-user-panel.c:1668
+#: ../panels/user-accounts/um-user-panel.c:1359
+#: ../panels/user-accounts/um-user-panel.c:1671
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6749,12 +6764,12 @@ msgstr ""
 "Naudotojui sukurti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
+#: ../panels/user-accounts/um-user-panel.c:1369
 msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
-#: ../panels/user-accounts/um-user-panel.c:1673
+#: ../panels/user-accounts/um-user-panel.c:1381
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6762,7 +6777,7 @@ msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1582
+#: ../panels/user-accounts/um-user-panel.c:1585
 msgid "My Account"
 msgstr "Mano paskyra"
 
@@ -6917,7 +6932,6 @@ msgid "Tablet Preferences"
 msgstr "Piešimo planšetės nustatymai"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-#| msgid "Help"
 msgid "_Help"
 msgstr "_Žinynas"
 
