@@ -1416,6 +1416,7 @@ add_brightness_row (CcPowerPanel  *self,
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_add (GTK_CONTAINER (row), box);
   label = gtk_label_new (text);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_start (label, 20);
