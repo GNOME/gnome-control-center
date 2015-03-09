@@ -782,6 +782,7 @@ setup_search (CcWindow *shell)
                 "xpad", 15,
                 "ypad", 10,
                 "stock-size", GTK_ICON_SIZE_DIALOG,
+                "follow-state", TRUE,
                 NULL);
   column = gtk_tree_view_column_new_with_attributes ("Icon", renderer,
                                                      "gicon", COL_GICON,
