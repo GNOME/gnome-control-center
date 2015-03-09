@@ -271,10 +271,7 @@ delete_fingerprints_question (GtkWindow *parent,
 
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (question),
                                                   _("Do you want to delete your registered fingerprints so fingerprint login is disabled?"));
-        gtk_container_set_border_width (GTK_CONTAINER (question), 5);
         gtk_dialog_set_default_response (GTK_DIALOG (question), GTK_RESPONSE_OK);
-        gtk_window_set_position (GTK_WINDOW (question), GTK_WIN_POS_CENTER_ON_PARENT);
-        gtk_window_set_modal (GTK_WINDOW (question), TRUE);
 
         if (gtk_dialog_run (GTK_DIALOG (question)) == GTK_RESPONSE_OK) {
                 delete_fingerprints ();
