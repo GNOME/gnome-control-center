@@ -644,6 +644,7 @@ connect_ip6_page (CEPageIP6 *page)
         page->never_default = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "never_default_check"));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->never_default),
                                       nm_setting_ip6_config_get_never_default (page->setting));
+        g_signal_connect_swapped (page->never_default, "toggled", G_CALLBACK (ce_page_changed), page);
 
         g_signal_connect (page->method, "changed", G_CALLBACK (method_changed), page);
         if (method != IP6_METHOD_SHARED && method != IP6_METHOD_IGNORE)
