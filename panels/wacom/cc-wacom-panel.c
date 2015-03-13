@@ -54,7 +54,6 @@ struct _CcWacomPanelPrivate
 typedef struct {
 	const char *name;
 	GsdWacomDevice *stylus;
-	GsdWacomDevice *eraser;
 	GsdWacomDevice *pad;
 } Tablet;
 
@@ -298,12 +297,10 @@ update_current_page (CcWacomPanel *self)
 		case WACOM_TYPE_STYLUS:
 			tablet->stylus = device;
 			break;
-		case WACOM_TYPE_ERASER:
-			tablet->eraser = device;
-			break;
 		case WACOM_TYPE_PAD:
 			tablet->pad = device;
 			break;
+		case WACOM_TYPE_ERASER:
 		default:
 			/* Nothing */
 			;
@@ -319,8 +316,7 @@ update_current_page (CcWacomPanel *self)
 		GtkWidget *page;
 
 		tablet = l->data;
-		if (tablet->stylus == NULL ||
-		    tablet->eraser == NULL) {
+		if (tablet->stylus == NULL) {
 			page = g_hash_table_lookup (priv->pages, tablet->name);
 			if (page != NULL) {
 				remove_page (GTK_NOTEBOOK (priv->notebook), page);
@@ -330,10 +326,10 @@ update_current_page (CcWacomPanel *self)
 			}
 			continue;
 		}
-		/* this code is called once the stylus + eraser were set up, but the pad does not exist yet */
+		/* this code is called once the stylus is set up, but the pad does not exist yet */
 		page = g_hash_table_lookup (priv->pages, tablet->name);
 		if (page == NULL) {
-			page = cc_wacom_page_new (self, tablet->stylus, tablet->eraser, tablet->pad);
+			page = cc_wacom_page_new (self, tablet->stylus, tablet->pad);
 			cc_wacom_page_set_navigation (CC_WACOM_PAGE (page), GTK_NOTEBOOK (priv->notebook), TRUE);
 			gtk_widget_show (page);
 			gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), page, NULL);
@@ -341,7 +337,7 @@ update_current_page (CcWacomPanel *self)
 
 			changed = TRUE;
 		} else {
-			cc_wacom_page_update_tools (CC_WACOM_PAGE (page), tablet->stylus, tablet->eraser, tablet->pad);
+			cc_wacom_page_update_tools (CC_WACOM_PAGE (page), tablet->stylus, tablet->pad);
 		}
 	}
 	g_list_free (tablets);

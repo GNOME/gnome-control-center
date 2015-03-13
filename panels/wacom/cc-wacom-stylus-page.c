@@ -38,7 +38,7 @@ G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
 struct _CcWacomStylusPagePrivate
 {
-	GsdWacomStylus *stylus, *eraser;
+	GsdWacomStylus *stylus;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
 	GSettings      *stylus_settings, *eraser_settings;
@@ -353,9 +353,10 @@ set_icon_name (CcWacomStylusPage *page,
 
 /* Different types of layout for the stylus config */
 enum {
-	LAYOUT_NORMAL,   /* eraser, 2 buttons, tip */
-	LAYOUT_INKING,   /* tip */
-	LAYOUT_AIRBRUSH, /* eraser, 1 button, tip */
+	LAYOUT_NORMAL,                      /* eraser, 2 buttons, tip */
+	LAYOUT_INKING,                      /* tip */
+	LAYOUT_AIRBRUSH,                    /* eraser, 1 button, tip */
+	LAYOUT_GENERIC_2_BUTTONS_NO_ERASER, /* 2 buttons, tip, no eraser */
 	LAYOUT_OTHER
 };
 
@@ -417,6 +418,12 @@ update_stylus_ui (CcWacomStylusPage *page,
 		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("box-tip-feel"),
 					 "top_attach", 2, NULL);
+		break;
+	case LAYOUT_GENERIC_2_BUTTONS_NO_ERASER:
+		/* Gray out eraser until we have a proper picture */
+		gtk_widget_set_sensitive (WID ("eraser-box"), FALSE);
+		gtk_widget_set_sensitive (WID ("label-eraser-feel"), FALSE);
+		break;
 	case LAYOUT_OTHER:
 		/* We already warn about it in cc_wacom_stylus_page_new () */
 		break;
@@ -424,13 +431,13 @@ update_stylus_ui (CcWacomStylusPage *page,
 }
 
 GtkWidget *
-cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
-			  GsdWacomStylus *eraser)
+cc_wacom_stylus_page_new (GsdWacomStylus *stylus)
 {
 	CcWacomStylusPage *page;
 	CcWacomStylusPagePrivate *priv;
 	int num_buttons;
 	int layout;
+	int has_eraser;
 
 	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), NULL);
 
@@ -438,26 +445,28 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 
 	priv = page->priv;
 	priv->stylus = stylus;
-	priv->eraser = eraser;
 
 	/* Icon */
 	set_icon_name (page, "image-stylus", gsd_wacom_stylus_get_icon_name (stylus));
 
 	/* Settings */
 	priv->stylus_settings = gsd_wacom_stylus_get_settings (stylus);
-	if (eraser != NULL)
-		priv->eraser_settings = gsd_wacom_stylus_get_settings (eraser);
+	has_eraser = gsd_wacom_stylus_get_has_eraser (stylus);
+	if (has_eraser)
+		priv->eraser_settings = gsd_wacom_stylus_get_settings (stylus);
 
 	/* Stylus name */
 	gtk_label_set_text (GTK_LABEL (WID ("label-stylus")), gsd_wacom_stylus_get_name (stylus));
 
 	num_buttons = gsd_wacom_stylus_get_num_buttons (stylus);
-	if (num_buttons == 0 && eraser == NULL)
+	if (num_buttons == 0 && !has_eraser)
 		layout = LAYOUT_INKING;
-	else if (num_buttons == 2 && eraser != NULL)
+	else if (num_buttons == 2 && has_eraser)
 		layout = LAYOUT_NORMAL;
-	else if (num_buttons == 1 && eraser != NULL)
+	else if (num_buttons == 1 && has_eraser)
 		layout = LAYOUT_AIRBRUSH;
+	else if (num_buttons == 2 && !has_eraser)
+		layout = LAYOUT_GENERIC_2_BUTTONS_NO_ERASER;
 	else {
 		layout = LAYOUT_OTHER;
 		if (num_buttons == 0)
@@ -465,11 +474,12 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 		else if (num_buttons == 1)
 			remove_button (priv);
 
-		if (eraser == NULL)
-			remove_eraser (priv);
+		/* Gray out eraser if not available */
+		gtk_widget_set_sensitive (WID ("eraser-box"), has_eraser);
+		gtk_widget_set_sensitive (WID ("label-eraser-feel"), has_eraser);
 
 		g_warning ("The layout of this page is not known, %d buttons, %s eraser",
-			   num_buttons, eraser ? "with" : "without");
+			   num_buttons, has_eraser ? "with" : "without");
 	}
 
 	update_stylus_ui (page, layout);
@@ -480,7 +490,7 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
 
-	if (eraser != NULL)
+	if (has_eraser)
 		set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
 
 	g_object_set (G_OBJECT (page), "margin-top", 16, NULL);
