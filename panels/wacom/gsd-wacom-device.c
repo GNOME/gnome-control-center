@@ -1936,6 +1936,9 @@ gsd_wacom_device_get_default_area (GsdWacomDevice *device)
 
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
+	if (!device->priv->gdk_device)
+		return NULL;
+
 	g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
 
 	device_area = g_new0 (int, 4);
@@ -2223,6 +2226,30 @@ gsd_wacom_device_create_fake_intuos4 (void)
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
 					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 cursor");
+	devices = g_list_prepend (devices, device);
+
+	return devices;
+}
+
+GList *
+gsd_wacom_device_create_fake_h610pro (void)
+{
+	GsdWacomDevice *device;
+	GList *devices;
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
+					       "Huion H610 Pro",
+					       "Huion H610 Pro stylus");
+	if (!device) {
+		g_warning ("Not appending Huion H610 Pro, libwacom is not new enough");
+		return NULL;
+	}
+
+	devices = g_list_prepend (NULL, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
+					       "Huion H610 Pro",
+					       "Huion H610 Pro pad");
 	devices = g_list_prepend (devices, device);
 
 	return devices;

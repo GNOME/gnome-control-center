@@ -193,6 +193,7 @@ GList * gsd_wacom_device_create_fake_cintiq   (void);
 GList * gsd_wacom_device_create_fake_bt       (void);
 GList * gsd_wacom_device_create_fake_x201     (void);
 GList * gsd_wacom_device_create_fake_intuos4  (void);
+GList * gsd_wacom_device_create_fake_h610pro  (void);
 
 G_END_DECLS
 
