@@ -109,6 +109,9 @@ int main (int argc, char **argv)
 	devices = gsd_wacom_device_create_fake_x201 ();
 	add_page (devices, notebook);
 
+	devices = gsd_wacom_device_create_fake_h610pro ();
+	add_page (devices, notebook);
+
 	gtk_widget_show (window);
 
 	gtk_main ();
