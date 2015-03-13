@@ -420,9 +420,7 @@ update_stylus_ui (CcWacomStylusPage *page,
 					 "top_attach", 2, NULL);
 		break;
 	case LAYOUT_GENERIC_2_BUTTONS_NO_ERASER:
-		/* Gray out eraser until we have a proper picture */
-		gtk_widget_set_sensitive (WID ("eraser-box"), FALSE);
-		gtk_widget_set_sensitive (WID ("label-eraser-feel"), FALSE);
+		remove_eraser (page->priv);
 		break;
 	case LAYOUT_OTHER:
 		/* We already warn about it in cc_wacom_stylus_page_new () */
