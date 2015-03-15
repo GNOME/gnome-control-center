@@ -489,20 +489,17 @@ play_preview_for_id (GvcSoundThemeChooser *chooser,
 }
 
 static void
-on_treeview_selection_changed (GtkTreeSelection     *selection,
-                               GvcSoundThemeChooser *chooser)
+on_treeview_row_activated (GtkTreeView          *treeview,
+                           GtkTreePath          *path,
+                           GtkTreeViewColumn    *column,
+                           GvcSoundThemeChooser *chooser)
 {
         GtkTreeModel *model;
         GtkTreeIter   iter;
         char         *id;
 
-        if (chooser->priv->treeview == NULL) {
-                return;
-        }
-
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->priv->treeview));
-
-        if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
+        if (!gtk_tree_model_get_iter (model, &iter, path)) {
                 return;
         }
 
@@ -519,31 +516,6 @@ on_treeview_selection_changed (GtkTreeSelection     *selection,
         g_free (id);
 }
 
-static gboolean
-on_treeview_button_pressed (GtkTreeView          *treeview,
-                            GdkEventButton       *event,
-                            GvcSoundThemeChooser *chooser)
-{
-        GtkTreeSelection *selection;
-        GtkTreePath      *path;
-
-        selection = gtk_tree_view_get_selection (treeview);
-        if (gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (treeview),
-                                           event->x, event->y, &path, NULL, NULL, NULL) == FALSE) {
-                return FALSE;
-        }
-
-        if (gtk_tree_selection_path_is_selected (selection, path) == FALSE) {
-                gtk_tree_path_free (path);
-                return FALSE;
-        }
-        gtk_tree_path_free (path);
-
-        on_treeview_selection_changed (selection, chooser);
-
-        return FALSE;
-}
-
 static GtkWidget *
 create_alert_treeview (GvcSoundThemeChooser *chooser)
 {
@@ -555,17 +527,15 @@ create_alert_treeview (GvcSoundThemeChooser *chooser)
 
         treeview = gtk_tree_view_new ();
         gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
+        gtk_tree_view_set_activate_on_single_click (GTK_TREE_VIEW (treeview), TRUE);
+
         g_signal_connect (treeview,
-                          "button-press-event",
-                          G_CALLBACK (on_treeview_button_pressed),
+                          "row-activated",
+                          G_CALLBACK (on_treeview_row_activated),
                           chooser);
 
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
         gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
-        g_signal_connect (selection,
-                          "changed",
-                          G_CALLBACK (on_treeview_selection_changed),
-                          chooser);
 
         /* Setup the tree model, 3 columns:
          * - display name
