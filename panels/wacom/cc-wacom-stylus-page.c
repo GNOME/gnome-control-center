@@ -202,12 +202,16 @@ button_changed_cb (GtkComboBox *combo, gpointer user_data)
 			    BUTTONNUMBER_COLUMN, &mapping_b2,
 			    -1);
 
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-topbutton")), &iter))
-		return;
+	if (gsd_wacom_stylus_get_num_buttons (priv->stylus) > 1) {
+		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-topbutton")), &iter))
+			return;
 
-	gtk_tree_model_get (GTK_TREE_MODEL (liststore), &iter,
-			    BUTTONNUMBER_COLUMN, &mapping_b3,
-			    -1);
+		gtk_tree_model_get (GTK_TREE_MODEL (liststore), &iter,
+				    BUTTONNUMBER_COLUMN, &mapping_b3,
+				    -1);
+	} else {
+		mapping_b3 = 0;
+	}
 
 	map_button (priv->stylus_settings, mapping_b2, mapping_b3);
 }
