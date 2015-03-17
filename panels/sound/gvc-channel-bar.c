@@ -804,7 +804,7 @@ gvc_channel_bar_class_init (GvcChannelBarClass *klass)
                                                             "Orientation",
                                                             "The orientation of the scale",
                                                             GTK_TYPE_ORIENTATION,
-                                                            GTK_ORIENTATION_VERTICAL,
+                                                            GTK_ORIENTATION_HORIZONTAL,
                                                             G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
                                          PROP_IS_MUTED,
@@ -894,7 +894,7 @@ gvc_channel_bar_init (GvcChannelBar *bar)
         bar->priv->low_icon_name = g_strdup ("audio-volume-low-symbolic");
         bar->priv->high_icon_name = g_strdup ("audio-volume-high-symbolic");
 
-        bar->priv->orientation = GTK_ORIENTATION_VERTICAL;
+        bar->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
         bar->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0,
                                                                     0.0,
                                                                     ADJUSTMENT_MAX_NORMAL,

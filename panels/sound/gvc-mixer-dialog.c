@@ -769,8 +769,6 @@ create_bar (GvcMixerDialog *dialog,
                                                 dialog->priv->size_group,
                                                 symmetric);
         }
-        gvc_channel_bar_set_orientation (GVC_CHANNEL_BAR (bar),
-                                         GTK_ORIENTATION_HORIZONTAL);
         gvc_channel_bar_set_show_mute (GVC_CHANNEL_BAR (bar),
                                        TRUE);
         g_signal_connect (bar,
@@ -1714,8 +1712,6 @@ gvc_mixer_dialog_constructor (GType                  type,
                 gtk_size_group_add_widget (self->priv->size_group, sbox);
 
         self->priv->input_level_bar = gvc_level_bar_new ();
-        gvc_level_bar_set_orientation (GVC_LEVEL_BAR (self->priv->input_level_bar),
-                                       GTK_ORIENTATION_HORIZONTAL);
         gvc_level_bar_set_scale (GVC_LEVEL_BAR (self->priv->input_level_bar),
                                  GVC_LEVEL_SCALE_LINEAR);
         gtk_box_pack_start (GTK_BOX (box),
