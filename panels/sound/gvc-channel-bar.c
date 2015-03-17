@@ -949,6 +949,7 @@ gvc_channel_bar_init (GvcChannelBar *bar)
         bar->priv->scale_box = _scale_box_new (bar);
 
         gtk_container_add (GTK_CONTAINER (frame), bar->priv->scale_box);
+        gtk_widget_show_all (frame);
 }
 
 static void
