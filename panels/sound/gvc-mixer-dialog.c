@@ -690,8 +690,15 @@ lookup_bar_for_stream (GvcMixerDialog *dialog,
         GtkWidget *bar;
 
         bar = g_hash_table_lookup (dialog->priv->bars, GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)));
+        if (bar)
+                return bar;
 
-        return bar;
+        if (g_object_get_data (G_OBJECT (dialog->priv->output_bar), "gvc-mixer-dialog-stream") == stream)
+                return dialog->priv->output_bar;
+        if (g_object_get_data (G_OBJECT (dialog->priv->input_bar), "gvc-mixer-dialog-stream") == stream)
+                return dialog->priv->input_bar;
+
+        return NULL;
 }
 
 static void
