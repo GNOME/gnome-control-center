@@ -935,7 +935,6 @@ out:
 static void
 panel_add_proxy_device (CcNetworkPanel *panel)
 {
-        gchar *title;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetProxy *proxy;
@@ -955,8 +954,7 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         /* add proxy to device list */
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
-        title = g_strdup_printf ("%s", _("Network proxy"));
-        net_object_set_title (NET_OBJECT (proxy), title);
+        net_object_set_title (NET_OBJECT (proxy), _("Network proxy"));
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
@@ -964,7 +962,6 @@ panel_add_proxy_device (CcNetworkPanel *panel)
                             PANEL_DEVICES_COLUMN_SORT, "9",
                             PANEL_DEVICES_COLUMN_OBJECT, proxy,
                             -1);
-        g_free (title);
         g_object_unref (proxy);
 }
 
