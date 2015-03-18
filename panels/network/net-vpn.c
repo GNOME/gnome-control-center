@@ -503,9 +503,11 @@ net_vpn_finalize (GObject *object)
         NetVpnPrivate *priv = vpn->priv;
         NMClient *client = net_object_get_client (NET_OBJECT (object));
 
-        g_signal_handlers_disconnect_by_func (client,
-                                              nm_active_connections_changed,
-                                              vpn);
+        if (client) {
+                g_signal_handlers_disconnect_by_func (client,
+                                                      nm_active_connections_changed,
+                                                      vpn);
+        }
 
         if (priv->active_connection) {
                 g_signal_handlers_disconnect_by_func (priv->active_connection,
