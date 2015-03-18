@@ -625,6 +625,7 @@ connect_ip6_page (CEPageIP6 *page)
                                            METHOD_COL_NAME, _("Link-Local Only"),
                                            METHOD_COL_METHOD, IP6_METHOD_LINK_LOCAL,
                                            -1);
+        g_object_unref (G_OBJECT (store));
 
         gtk_combo_box_set_model (page->method, GTK_TREE_MODEL (store));
 
