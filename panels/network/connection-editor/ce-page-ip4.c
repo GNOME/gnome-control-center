@@ -625,6 +625,7 @@ connect_ip4_page (CEPageIP4 *page)
                                            -1);
 
         gtk_combo_box_set_model (page->method, GTK_TREE_MODEL (store));
+        g_object_unref (G_OBJECT (store));
 
         method = IP4_METHOD_AUTO;
         if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL) == 0) {
