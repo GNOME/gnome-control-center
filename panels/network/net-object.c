@@ -263,9 +263,11 @@ net_object_set_property (GObject *object_,
                         g_object_add_weak_pointer (G_OBJECT (priv->remote_settings), (gpointer *) (&priv->remote_settings));
                 break;
         case PROP_CANCELLABLE:
+                g_assert (!priv->cancellable);
                 priv->cancellable = g_value_dup_object (value);
                 break;
         case PROP_PANEL:
+                g_assert (!priv->panel);
                 priv->panel = g_value_get_pointer (value);
                 if (priv->panel)
                         g_object_add_weak_pointer (G_OBJECT (priv->panel), (gpointer *) (&priv->panel));

@@ -227,6 +227,7 @@ state_changed_cb (NMDevice *device,
 NMDevice *
 net_device_get_nm_device (NetDevice *device)
 {
+        g_return_val_if_fail (NET_IS_DEVICE (device), NULL);
         return device->priv->nm_device;
 }
 
