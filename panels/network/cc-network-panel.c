@@ -1209,6 +1209,7 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
                             PANEL_DEVICES_COLUMN_OBJECT, net_virt,
                             -1);
         g_free (title);
+        g_object_unref (net_virt);
 }
 
 static void
