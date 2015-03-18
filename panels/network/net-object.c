@@ -211,16 +211,16 @@ net_object_get_property (GObject *object_,
                 g_value_set_boolean (value, priv->removable);
                 break;
         case PROP_CLIENT:
-                g_value_set_object (value, priv->client);
+                g_value_set_pointer (value, priv->client);
                 break;
         case PROP_REMOTE_SETTINGS:
-                g_value_set_object (value, priv->remote_settings);
+                g_value_set_pointer (value, priv->remote_settings);
                 break;
         case PROP_CANCELLABLE:
                 g_value_set_object (value, priv->cancellable);
                 break;
         case PROP_PANEL:
-                g_value_set_object (value, priv->panel);
+                g_value_set_pointer (value, priv->panel);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -253,16 +253,22 @@ net_object_set_property (GObject *object_,
                 priv->removable = g_value_get_boolean (value);
                 break;
         case PROP_CLIENT:
-                priv->client = g_value_dup_object (value);
+                priv->client = g_value_get_pointer (value);
+                if (priv->client)
+                        g_object_add_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
                 break;
         case PROP_REMOTE_SETTINGS:
-                priv->remote_settings = g_value_dup_object (value);
+                priv->remote_settings = g_value_get_pointer (value);
+                if (priv->remote_settings)
+                        g_object_add_weak_pointer (G_OBJECT (priv->remote_settings), (gpointer *) (&priv->remote_settings));
                 break;
         case PROP_CANCELLABLE:
                 priv->cancellable = g_value_dup_object (value);
                 break;
         case PROP_PANEL:
-                priv->panel = g_value_dup_object (value);
+                priv->panel = g_value_get_pointer (value);
+                if (priv->panel)
+                        g_object_add_weak_pointer (G_OBJECT (priv->panel), (gpointer *) (&priv->panel));
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -278,14 +284,16 @@ net_object_finalize (GObject *object)
 
         g_free (priv->id);
         g_free (priv->title);
-        if (priv->client != NULL)
-                g_object_unref (priv->client);
-        if (priv->remote_settings != NULL)
-                g_object_unref (priv->remote_settings);
         if (priv->cancellable != NULL)
                 g_object_unref (priv->cancellable);
-        if (priv->panel != NULL)
-                g_object_unref (priv->panel);
+
+        if (priv->client)
+                g_object_remove_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
+        if (priv->remote_settings)
+                g_object_remove_weak_pointer (G_OBJECT (priv->remote_settings), (gpointer *) (&priv->remote_settings));
+        if (priv->panel)
+                g_object_remove_weak_pointer (G_OBJECT (priv->panel), (gpointer *) (&priv->panel));
+
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
 
@@ -313,14 +321,12 @@ net_object_class_init (NetObjectClass *klass)
                                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_REMOVABLE, pspec);
 
-        pspec = g_param_spec_object ("client", NULL, NULL,
-                                     NM_TYPE_CLIENT,
-                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        pspec = g_param_spec_pointer ("client", NULL, NULL,
+                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CLIENT, pspec);
 
-        pspec = g_param_spec_object ("remote-settings", NULL, NULL,
-                                     NM_TYPE_REMOTE_SETTINGS,
-                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        pspec = g_param_spec_pointer ("remote-settings", NULL, NULL,
+                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_REMOTE_SETTINGS, pspec);
 
         pspec = g_param_spec_object ("cancellable", NULL, NULL,
@@ -328,9 +334,8 @@ net_object_class_init (NetObjectClass *klass)
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CANCELLABLE, pspec);
 
-        pspec = g_param_spec_object ("panel", NULL, NULL,
-                                     CC_TYPE_NETWORK_PANEL,
-                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        pspec = g_param_spec_pointer ("panel", NULL, NULL,
+                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_PANEL, pspec);
 
         signals[SIGNAL_CHANGED] =
