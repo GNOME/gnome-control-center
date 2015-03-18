@@ -501,6 +501,8 @@ cc_network_panel_get_devices (CcNetworkPanel *panel)
                                     -1);
                 if (NET_IS_DEVICE (object))
                         g_ptr_array_add (devices, object);
+                else
+                        g_object_unref (object);
         } while (gtk_tree_model_iter_next (model, &iter));
 
         return devices;
