@@ -1153,6 +1153,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
                             -1);
         g_free (title);
+        g_object_unref (net_vpn);
 }
 
 static void
