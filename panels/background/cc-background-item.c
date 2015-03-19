@@ -204,7 +204,7 @@ update_size (CcBackgroundItem *item)
 		} else {
 			/* translators: 100 × 100px
 			 * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN */
-			item->priv->size = g_strdup_printf (_("%d \303\227 %d"),
+			item->priv->size = g_strdup_printf (_("%d × %d"),
 							    item->priv->width,
 							    item->priv->height);
 		}
