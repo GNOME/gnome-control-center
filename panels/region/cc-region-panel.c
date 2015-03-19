@@ -368,6 +368,8 @@ update_language (CcRegionPanel *self,
         }
 }
 
+static void update_region (CcRegionPanel *self, const gchar *region);
+
 static void
 language_response (CcRegionPanel     *self,
                    gint               response_id,
@@ -378,6 +380,9 @@ language_response (CcRegionPanel     *self,
         if (response_id == GTK_RESPONSE_OK) {
                 language = cc_language_chooser_get_language (chooser);
                 update_language (self, language);
+
+		/* Keep format strings consistent with the user's language */
+		update_region (self, NULL);
         }
 
         gtk_widget_destroy (GTK_WIDGET (chooser));
@@ -405,7 +410,10 @@ update_region (CcRegionPanel *self,
         } else {
                 if (g_strcmp0 (region, self->region) == 0)
                         return;
-                g_settings_set_string (self->locale_settings, KEY_REGION, region);
+		if (region == NULL || region[0] == '\0')
+			g_settings_reset (self->locale_settings, KEY_REGION);
+		else
+			g_settings_set_string (self->locale_settings, KEY_REGION, region);
                 if (self->login_auto_apply)
                         set_system_region (self, region);
                 maybe_notify (self, LC_TIME, region);
