@@ -130,7 +130,7 @@ add_account_dialog_create_group_ui (GoaPanelAddAccountDialog *add_account,
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_set_hexpand (sw, TRUE);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
   gtk_container_add (GTK_CONTAINER (*group_grid), sw);
 
@@ -183,10 +183,17 @@ add_account_dialog_create_provider_ui (GoaPanelAddAccountDialog *add_account,
        * ignores its child's natural size,
        * see https://bugzilla.gnome.org/show_bug.cgi?id=660654
        * For now we just make list boxes with multiple children expand as
-       * the result is quite similar. */
+       * the result is quite similar. For those with only one child,
+       * we turn off the scrolling. */
+
       GtkWidget *sw;
-      sw = gtk_widget_get_parent (GTK_WIDGET (list_box));
+
+      sw = gtk_widget_get_ancestor (GTK_WIDGET (list_box), GTK_TYPE_SCROLLED_WINDOW);
+      g_assert_nonnull (sw);
+
       gtk_widget_set_vexpand (sw, TRUE);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
       g_list_free (children);
     }
 
