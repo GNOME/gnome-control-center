@@ -1452,15 +1452,15 @@ add_power_saving_section (CcPowerPanel *self)
   vbox = WID (priv->builder, "vbox_power");
 
   s = g_strdup_printf ("<b>%s</b>", _("Power Saving"));
-  widget = gtk_label_new (s);
+  label = gtk_label_new (s);
   g_free (s);
-  gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
-  gtk_widget_set_margin_start (widget, 56);
-  gtk_widget_set_margin_end (widget, 56);
-  gtk_widget_set_margin_bottom (widget, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, TRUE, 0);
-  gtk_widget_show (widget);
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_widget_set_margin_start (label, 56);
+  gtk_widget_set_margin_end (label, 56);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, TRUE, 0);
+  gtk_widget_show (label);
 
   widget = gtk_list_box_new ();
   priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, widget);
@@ -1469,6 +1469,13 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
+
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
+                               ATK_RELATION_LABEL_FOR,
+                               ATK_OBJECT (gtk_widget_get_accessible (widget)));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (widget)),
+                               ATK_RELATION_LABELLED_BY,
+                               ATK_OBJECT (gtk_widget_get_accessible (label)));
 
   box = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
@@ -1829,15 +1836,15 @@ add_automatic_suspend_section (CcPowerPanel *self)
   vbox = WID (priv->builder, "vbox_power");
 
   s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Off"));
-  widget = gtk_label_new (s);
+  label = gtk_label_new (s);
   g_free (s);
-  gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
-  gtk_widget_set_margin_start (widget, 56);
-  gtk_widget_set_margin_end (widget, 50);
-  gtk_widget_set_margin_bottom (widget, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, TRUE, 0);
-  gtk_widget_show (widget);
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_widget_set_margin_start (label, 56);
+  gtk_widget_set_margin_end (label, 50);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, TRUE, 0);
+  gtk_widget_show (label);
 
   widget = gtk_list_box_new ();
   priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, widget);
@@ -1848,6 +1855,13 @@ add_automatic_suspend_section (CcPowerPanel *self)
                                 NULL, NULL);
   g_signal_connect_swapped (widget, "row-activated",
                             G_CALLBACK (activate_row), self);
+
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
+                               ATK_RELATION_LABEL_FOR,
+                               ATK_OBJECT (gtk_widget_get_accessible (widget)));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (widget)),
+                               ATK_RELATION_LABELLED_BY,
+                               ATK_OBJECT (gtk_widget_get_accessible (label)));
 
   box = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
@@ -2050,6 +2064,13 @@ add_battery_section (CcPowerPanel *self)
   gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
 
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->battery_heading)),
+                               ATK_RELATION_LABEL_FOR,
+                               ATK_OBJECT (gtk_widget_get_accessible (priv->battery_list)));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->battery_list)),
+                               ATK_RELATION_LABELLED_BY,
+                               ATK_OBJECT (gtk_widget_get_accessible (priv->battery_heading)));
+
   frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
   gtk_container_add (GTK_CONTAINER (frame), widget);
@@ -2095,6 +2116,13 @@ add_device_section (CcPowerPanel *self)
                                 NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
+
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_heading)),
+                               ATK_RELATION_LABEL_FOR,
+                               ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)),
+                               ATK_RELATION_LABELLED_BY,
+                               ATK_OBJECT (gtk_widget_get_accessible (priv->device_heading)));
 
   frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
