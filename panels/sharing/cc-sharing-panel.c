@@ -1244,6 +1244,7 @@ cc_sharing_panel_init (CcSharingPanel *self)
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   priv->master_switch = gtk_switch_new ();
+  atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (priv->master_switch)), _("Sharing"));
   gtk_widget_set_valign (priv->master_switch, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), priv->master_switch, FALSE, FALSE, 4);
   gtk_widget_show_all (box);
