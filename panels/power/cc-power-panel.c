@@ -1868,6 +1868,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
   self->priv->automatic_suspend_row = row = gtk_list_box_row_new ();
+  atk_object_set_role (ATK_OBJECT (gtk_widget_get_accessible (row)), ATK_ROLE_PUSH_BUTTON);
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
   label = gtk_label_new (_("_Automatic suspend"));
@@ -1881,6 +1882,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
 
   priv->automatic_suspend_label = sw = gtk_label_new ("");
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  gtk_label_set_selectable (GTK_LABEL (sw), TRUE);
   g_signal_connect (sw, "mnemonic-activate",
                     G_CALLBACK (automatic_suspend_activate), self);
   gtk_widget_set_halign (sw, GTK_ALIGN_END);
@@ -2063,6 +2065,13 @@ add_battery_section (CcPowerPanel *self)
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
   gtk_container_add (GTK_CONTAINER (frame), widget);
   gtk_box_pack_start (GTK_BOX (box), frame, FALSE, TRUE, 0);
+
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->battery_heading)),
+                               ATK_RELATION_LABEL_FOR,
+                               ATK_OBJECT (gtk_widget_get_accessible (frame)));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (frame)),
+                               ATK_RELATION_LABELLED_BY,
+                               ATK_OBJECT (gtk_widget_get_accessible (priv->battery_heading)));
 
   gtk_widget_show_all (box);
 }
