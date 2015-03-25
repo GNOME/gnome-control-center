@@ -76,6 +76,8 @@ struct _CcDisplayPanelPrivate
   GtkWidget *displays_listbox;
   GtkWidget *arrange_button;
   GtkWidget *res_combo;
+  GtkWidget *freq_combo;
+  GHashTable *res_freqs;
   GtkWidget *rotate_left_button;
   GtkWidget *upside_down_button;
   GtkWidget *rotate_right_button;
@@ -1656,9 +1658,10 @@ make_aspect_string (gint width,
 }
 
 static char *
-make_resolution_string (gint width,
-                        gint height)
+make_resolution_string (GnomeRRMode *mode)
 {
+  gint width = gnome_rr_mode_get_width (mode);
+  gint height = gnome_rr_mode_get_height (mode);
   const char *aspect = make_aspect_string (width, height);
 
   if (aspect != NULL)
@@ -1695,24 +1698,92 @@ list_box_item (const gchar *title,
 }
 
 static void
+setup_frequency_combo_box (CcDisplayPanel *panel,
+                           GnomeRRMode    *resolution_mode)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GnomeRROutput *current_output;
+  GnomeRRMode *current_mode;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gchar *res;
+  GSList *l;
+  guint i;
+
+  current_output = gnome_rr_screen_get_output_by_name (priv->screen,
+                                                       gnome_rr_output_info_get_name (priv->current_output));
+  current_mode = gnome_rr_output_get_current_mode (current_output);
+
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->freq_combo));
+  gtk_list_store_clear (GTK_LIST_STORE (model));
+
+  i = 0;
+  res = make_resolution_string (resolution_mode);
+  for (l = g_hash_table_lookup (priv->res_freqs, res); l != NULL; l = l->next)
+    {
+      GnomeRRMode *mode = l->data;
+      gchar *freq = g_strdup_printf ("%d Hz", gnome_rr_mode_get_freq (mode));
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &iter,
+                                         -1, 0, freq, 1, mode, -1);
+      g_free (freq);
+
+      if (mode == current_mode)
+        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->freq_combo), &iter);
+
+      i++;
+    }
+  g_free (res);
+
+  if (i < 2)
+    {
+      gtk_widget_hide (priv->freq_combo);
+      return;
+    }
+
+  gtk_widget_show (priv->freq_combo);
+  if (gtk_combo_box_get_active (GTK_COMBO_BOX (priv->freq_combo)) == -1)
+    gtk_combo_box_set_active (GTK_COMBO_BOX (priv->freq_combo), 0);
+}
+
+static void
+free_mode_list (gpointer key,
+                gpointer value,
+                gpointer data)
+{
+  g_slist_free (value);
+}
+
+static void
+clear_res_freqs (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  if (priv->res_freqs)
+    {
+      g_hash_table_foreach (priv->res_freqs, free_mode_list, NULL);
+      g_hash_table_destroy (priv->res_freqs);
+      priv->res_freqs = NULL;
+    }
+}
+
+static void
 setup_resolution_combo_box (CcDisplayPanel  *panel,
                             GnomeRRMode    **modes,
                             GnomeRRMode     *current_mode)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkTreeModel *res_model;
-  GHashTable *resolutions;
   gint i;
+
+  clear_res_freqs (panel);
+  priv->res_freqs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   res_model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->res_combo));
   gtk_list_store_clear (GTK_LIST_STORE (res_model));
 
-  resolutions = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-
   for (i = 0; modes[i] != NULL; i++)
     {
+      GSList *l;
       gchar *res;
-      gboolean present;
       gint output_width, output_height, mode_width, mode_height;
 
       if (!current_mode)
@@ -1728,15 +1799,11 @@ setup_resolution_combo_box (CcDisplayPanel  *panel,
                                    mode_height))
         continue;
 
-      res = make_resolution_string (gnome_rr_mode_get_width (modes[i]),
-                                    gnome_rr_mode_get_height (modes[i]));
-      present = GPOINTER_TO_INT (g_hash_table_lookup (resolutions, res));
-      if (!present)
+      res = make_resolution_string (modes[i]);
+
+      if ((l = g_hash_table_lookup (priv->res_freqs, res)) == NULL)
         {
           GtkTreeIter iter;
-
-          g_hash_table_insert (resolutions, g_strdup (res),
-                               GINT_TO_POINTER (TRUE));
 
           gtk_list_store_insert_with_values (GTK_LIST_STORE (res_model), &iter,
                                              -1, 0, res, 1, modes[i], -1);
@@ -1749,14 +1816,16 @@ setup_resolution_combo_box (CcDisplayPanel  *panel,
                                              &iter);
             }
         }
-      g_free (res);
+
+      l = g_slist_append (l, modes[i]);
+      g_hash_table_replace (priv->res_freqs, res, l);
     }
 
   /* ensure a resolution is selected by default */
   if (gtk_combo_box_get_active (GTK_COMBO_BOX (priv->res_combo)) == -1)
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->res_combo), 0);
 
-  g_hash_table_destroy (resolutions);
+  setup_frequency_combo_box (panel, current_mode);
 }
 
 
@@ -1915,6 +1984,29 @@ make_display_size_string (int width_mm,
 }
 
 static void
+freq_combo_changed (GtkComboBox    *combo,
+                    CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GnomeRRMode *mode;
+
+  model = gtk_combo_box_get_model (combo);
+
+  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
+    {
+      gtk_tree_model_get (GTK_TREE_MODEL (model), &iter, 1, &mode, -1);
+      if (mode)
+        {
+          gnome_rr_output_info_set_refresh_rate (priv->current_output,
+                                                 gnome_rr_mode_get_freq (mode));
+          update_apply_button (panel);
+        }
+    }
+}
+
+static void
 res_combo_changed (GtkComboBox    *combo,
                    CcDisplayPanel *panel)
 {
@@ -1948,6 +2040,8 @@ res_combo_changed (GtkComboBox    *combo,
         }
 
       update_apply_button (panel);
+
+      setup_frequency_combo_box (panel, mode);
     }
 }
 
@@ -2000,7 +2094,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   GnomeRROutput *output;
   gchar *str;
   gboolean clone, was_clone, primary, was_primary, active;
-  GtkListStore *res_model;
+  GtkListStore *res_model, *freq_model;
   GtkCellRenderer *renderer;
   GnomeRRRotation rotation;
   gboolean show_rotation;
@@ -2170,6 +2264,28 @@ show_setup_dialog (CcDisplayPanel *panel)
 
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   gtk_widget_set_halign (priv->res_combo, GTK_ALIGN_START);
+
+  /* frequency combo box */
+  freq_model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
+  priv->freq_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (freq_model));
+  g_object_unref (freq_model);
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->freq_combo), renderer, TRUE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->freq_combo), renderer, "text", 0);
+  g_signal_connect (priv->freq_combo, "changed", G_CALLBACK (freq_combo_changed),
+                    panel);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->freq_combo, 1, 5, 1, 1);
+  gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_START);
+  gtk_widget_set_no_show_all (priv->freq_combo, TRUE);
+
+  label = gtk_label_new (_("Refresh Rate"));
+  gtk_style_context_add_class (gtk_widget_get_style_context (label),
+                               GTK_STYLE_CLASS_DIM_LABEL);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 5, 1, 1);
+  gtk_widget_set_halign (label, GTK_ALIGN_END);
+  gtk_widget_set_no_show_all (label, TRUE);
+  g_object_bind_property (priv->freq_combo, "visible",
+                          label, "visible", G_BINDING_BIDIRECTIONAL);
 
   was_clone = clone = gnome_rr_config_get_clone (priv->current_configuration);
   was_primary = primary = gnome_rr_output_info_get_primary (priv->current_output);
@@ -2344,6 +2460,8 @@ show_setup_dialog (CcDisplayPanel *panel)
   priv->rotate_left_button = NULL;
   priv->rotate_right_button = NULL;
   priv->res_combo = NULL;
+  priv->freq_combo = NULL;
+  clear_res_freqs (panel);
   gtk_widget_destroy (priv->dialog);
   priv->dialog = NULL;
 }
