@@ -2258,6 +2258,7 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* can do native display calibration using colord-session */
   priv->calibrate = cc_color_calibrate_new ();
+  cc_color_calibrate_set_quality (priv->calibrate, CD_PROFILE_QUALITY_MEDIUM);
 
   /* setup defaults */
   priv->settings = g_settings_new (GCM_SETTINGS_SCHEMA);
