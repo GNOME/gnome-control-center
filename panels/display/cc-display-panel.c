@@ -2153,7 +2153,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_widget_set_halign (label, GTK_ALIGN_START);
 
   /* resolution combo box */
-  res_model = gtk_list_store_new (2, G_TYPE_STRING, GNOME_TYPE_RR_MODE);
+  res_model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
   priv->res_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (res_model));
   g_object_unref (res_model);
   renderer = gtk_cell_renderer_text_new ();
