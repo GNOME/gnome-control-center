@@ -1841,6 +1841,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
   label = gtk_label_new (_("_Automatic suspend"));
+  atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (self->priv->automatic_suspend_row)), _("Automatic suspend"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_start (label, 20);
