@@ -608,6 +608,7 @@ gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
   page = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                              "box_calib_title"));
   value = gtk_entry_get_text (GTK_ENTRY (widget));
+  cc_color_calibrate_set_title (prefs->priv->calibrate, value);
   gtk_assistant_set_page_complete (assistant, page, value[0] != '\0');
 }
 
