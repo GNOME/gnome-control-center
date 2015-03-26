@@ -468,6 +468,9 @@ on_screen_changed (CcDisplayPanel *panel)
   GtkSizeGroup *sizegroup;
   GList *sorted_outputs = NULL, *l;
 
+  if (priv->dialog)
+    gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_NONE);
+
   gnome_rr_screen_refresh (priv->screen, NULL);
 
   current = gnome_rr_config_new_current (priv->screen, NULL);
@@ -1613,12 +1616,7 @@ show_arrange_displays_dialog (GtkButton      *button,
   response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
   if (response == GTK_RESPONSE_ACCEPT)
     apply_current_configuration (panel);
-  else if (response == GTK_RESPONSE_NONE)
-    {
-      /* panel is being destroyed */
-      return;
-    }
-  else
+  else if (response != GTK_RESPONSE_NONE)
     {
       /* re-read the previous configuration */
       on_screen_changed (panel);
@@ -2339,12 +2337,7 @@ show_setup_dialog (CcDisplayPanel *panel)
 
       apply_current_configuration (panel);
     }
-  else if (response == GTK_RESPONSE_NONE)
-    {
-      /* panel is being destroyed */
-      return;
-    }
-  else
+  else if (response != GTK_RESPONSE_NONE)
     {
       /* changes cancelled, so re-read the current configuration */
       on_screen_changed (panel);
