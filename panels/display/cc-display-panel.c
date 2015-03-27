@@ -2114,8 +2114,9 @@ show_setup_dialog (CcDisplayPanel *panel)
 
   /* resolution combo box */
   res_model = gtk_list_store_new (2, G_TYPE_STRING, GNOME_TYPE_RR_MODE);
-  renderer = gtk_cell_renderer_text_new ();
   priv->res_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (res_model));
+  g_object_unref (res_model);
+  renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->res_combo), renderer, TRUE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->res_combo), renderer, "text", 0);
   g_signal_connect (priv->res_combo, "changed", G_CALLBACK (res_combo_changed),
