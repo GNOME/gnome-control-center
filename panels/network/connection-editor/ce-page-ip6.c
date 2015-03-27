@@ -642,9 +642,9 @@ connect_ip6_page (CEPageIP6 *page)
                                            METHOD_COL_NAME, _("Link-Local Only"),
                                            METHOD_COL_METHOD, IP6_METHOD_LINK_LOCAL,
                                            -1);
-        g_object_unref (G_OBJECT (store));
 
         gtk_combo_box_set_model (page->method, GTK_TREE_MODEL (store));
+        g_object_unref (G_OBJECT (store));
 
         method = IP6_METHOD_AUTO;
         if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_DHCP) == 0) {
