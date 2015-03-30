@@ -1,3 +1,5 @@
+SUBDIRS = appdata
+
 AM_CPPFLAGS =					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
 	-I$(top_srcdir)				\
