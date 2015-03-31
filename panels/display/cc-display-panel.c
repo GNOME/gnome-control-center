@@ -2312,8 +2312,6 @@ show_setup_dialog (CcDisplayPanel *panel)
                    * output is no longer primary */
 
                   gnome_rr_output_info_set_primary (outputs[i], !primary);
-                  if (!was_primary)
-                    break;
                 }
             }
 
