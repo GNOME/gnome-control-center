@@ -91,17 +91,6 @@ enum {
         NUM_COLUMNS
 };
 
-enum {
-        HW_ID_COLUMN,
-        HW_ICON_COLUMN,
-        HW_NAME_COLUMN,
-        HW_STATUS_COLUMN,
-        HW_PROFILE_COLUMN,
-        HW_PROFILE_HUMAN_COLUMN,
-        HW_SENSITIVE_COLUMN,
-        HW_NUM_COLUMNS
-};
-
 enum
 {
         PROP_0,
