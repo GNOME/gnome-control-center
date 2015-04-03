@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-13 07:31+0000\n"
-"PO-Revision-Date: 2015-03-13 17:24+0100\n"
+"POT-Creation-Date: 2015-04-02 19:12+0000\n"
+"PO-Revision-Date: 2015-04-03 10:46+0200\n"
 "Last-Translator: Hannie Dumoleyn <hannie@ubuntu-nl.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
@@ -45,10 +45,11 @@ msgstr "Achtergrond"
 msgid "Changes throughout the day"
 msgstr "Verandert de hele dag door"
 
+# Dit is een zelfstandig naamwoord!
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
 msgid "Lock Screen"
-msgstr "Scherm vergrendelen"
+msgstr "Schermvergrendeling"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -121,7 +122,7 @@ msgstr ""
 "zullen worden"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
-#: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:962
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1579
 #: ../panels/display/cc-display-panel.c:2022
@@ -381,7 +382,7 @@ msgid "Screen"
 msgstr "Scherm"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:906
+#: ../panels/color/cc-color-panel.c:907
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Bestand uploaden mislukt: %s"
@@ -389,20 +390,20 @@ msgstr "Bestand uploaden mislukt: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:921
 msgid "The profile has been uploaded to:"
 msgstr "Het profiel is geüpload naar:"
 
-#: ../panels/color/cc-color-panel.c:922
+#: ../panels/color/cc-color-panel.c:923
 msgid "Write down this URL."
 msgstr "Noteer deze URL."
 
-#: ../panels/color/cc-color-panel.c:923
+#: ../panels/color/cc-color-panel.c:924
 msgid "Restart this computer and boot your normal operating system."
 msgstr ""
 "Deze computer herstarten en opstarten met uw normale besturingssysteem."
 
-#: ../panels/color/cc-color-panel.c:924
+#: ../panels/color/cc-color-panel.c:925
 msgid "Type the URL into your browser to download and install the profile."
 msgstr ""
 "Voer de URL in in uw browser om het profiel te downloaden en te installeren."
@@ -410,22 +411,22 @@ msgstr ""
 # bij een browser is dit bladwijzers, maar hier is
 # favorieten/favoriet beter (favoriete programma's) (tino)
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:959
 msgid "Save Profile"
 msgstr "Profiel opslaan"
 
-#: ../panels/color/cc-color-panel.c:962
+#: ../panels/color/cc-color-panel.c:963
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_Opslaan"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1322
+#: ../panels/color/cc-color-panel.c:1323
 msgid "Create a color profile for the selected device"
 msgstr "Kleurprofiel maken voor het geselecteerde apparaat"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1337 ../panels/color/cc-color-panel.c:1361
+#: ../panels/color/cc-color-panel.c:1338 ../panels/color/cc-color-panel.c:1362
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -434,12 +435,12 @@ msgstr ""
 "verbonden is."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1371
+#: ../panels/color/cc-color-panel.c:1372
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Het meetinstrument ondersteunt niet het profileren van printers."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1382
+#: ../panels/color/cc-color-panel.c:1383
 msgid "The device type is not currently supported."
 msgstr "Dit type apparaat wordt niet ondersteund."
 
@@ -1116,8 +1117,6 @@ msgid "Drag displays to rearrange them"
 msgstr "Schermen slepen om ze te rangschikken"
 
 #: ../panels/display/cc-display-panel.c:2075
-#| msgctxt "display panel, rotation"
-#| msgid "Counterclockwise"
 msgid "Rotate counterclockwise by 90°"
 msgstr "90° linksom draaien"
 
@@ -1984,7 +1983,7 @@ msgstr "Enkele klik, secundaire knop"
 msgid "Air_plane Mode"
 msgstr "_Vliegtuig-modus"
 
-#: ../panels/network/cc-network-panel.c:966
+#: ../panels/network/cc-network-panel.c:967
 msgid "Network proxy"
 msgstr "Netwerkproxy"
 
@@ -1992,17 +1991,17 @@ msgstr "Netwerkproxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1299
+#: ../panels/network/cc-network-panel.c:1300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Oeps! Er ging iets mis. Neem contact op met uw softwareleverancier."
 
-#: ../panels/network/cc-network-panel.c:1305
+#: ../panels/network/cc-network-panel.c:1306
 msgid "NetworkManager needs to be running."
 msgstr "Netwerkbeheer moet draaien."
 
@@ -2165,7 +2164,7 @@ msgstr "Netmasker"
 #: ../panels/network/connection-editor/ce-page-ip4.c:465
 #: ../panels/network/connection-editor/ce-page-ip6.c:205
 #: ../panels/network/connection-editor/ce-page-ip6.c:473
-#: ../panels/network/network-vpn.ui.h:3
+#: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Gateway"
 
@@ -2218,7 +2217,7 @@ msgstr "Handmatig"
 msgid "Link-Local Only"
 msgstr "Alleen Link-Local"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:966
+#: ../panels/network/connection-editor/ce-page-ip4.c:967
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
@@ -2241,7 +2240,7 @@ msgstr "Automatisch"
 msgid "Automatic, DHCP only"
 msgstr "Automatisch, alleen DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:936
+#: ../panels/network/connection-editor/ce-page-ip6.c:937
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
@@ -2465,7 +2464,6 @@ msgid "New Profile"
 msgstr "Nieuw profiel"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:577
-#: ../panels/network/network.ui.h:1 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
@@ -2688,7 +2686,7 @@ msgstr "Bekabeld"
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8
+#: ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opties…"
 
@@ -2802,17 +2800,17 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "Provider"
 
-#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:2
+#: ../panels/network/network-proxy.ui.h:1
 msgctxt "proxy method"
 msgid "None"
 msgstr "Geen"
 
-#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:3
+#: ../panels/network/network-proxy.ui.h:2
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Handmatig"
 
-#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:4
+#: ../panels/network/network-proxy.ui.h:3
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatisch"
@@ -2865,34 +2863,34 @@ msgstr "Poort Socks-proxy"
 msgid "Turn device off"
 msgstr "Apparaat uitzetten"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:1
 msgid "Add Device"
 msgstr "Apparaat toevoegen"
 
 # bij een browser is dit bladwijzers, maar hier is
 # favorieten/favoriet beter (favoriete programma's) (tino)
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:2
 msgid "Remove Device"
 msgstr "Apparaat verwijderen"
 
-#: ../panels/network/network-vpn.ui.h:2
+#: ../panels/network/network-vpn.ui.h:1
 msgid "VPN Type"
 msgstr "VPN-type"
 
-#: ../panels/network/network-vpn.ui.h:4
+#: ../panels/network/network-vpn.ui.h:3
 msgid "Group Name"
 msgstr "Groepsnaam"
 
-#: ../panels/network/network-vpn.ui.h:5
+#: ../panels/network/network-vpn.ui.h:4
 msgid "Group Password"
 msgstr "Groepswachtwoord"
 
-#: ../panels/network/network-vpn.ui.h:6
+#: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-vpn.ui.h:6
 msgid "Turn VPN connection off"
 msgstr "VPN-verbinding uitschakelen"
 
@@ -3621,30 +3619,22 @@ msgid "Sound Alerts"
 msgstr "Geluidwaarschuwingen"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Notification Banners"
 msgstr "Notificatiebanieren"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
-#| msgctxt "notifications"
-#| msgid "Show Details in Banners"
 msgctxt "notifications"
 msgid "Show Message Content in Banners"
 msgstr "Berichtinhoud tonen in banieren"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Lock Screen Notifications"
-msgstr "Schermnotificaties vergrendelen"
+msgstr "Notificaties bij vergrendelen van scherm"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
-#| msgctxt "notifications"
-#| msgid "Show Details in Lock Screen"
 msgctxt "notifications"
 msgid "Show Message Content on Lock Screen"
 msgstr "Berichtinhoud tonen bij vergrendelen van scherm"
@@ -3661,16 +3651,14 @@ msgstr "Regelen welke notificaties weergegeven worden en wat ze tonen"
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr ""
-"Notifications;Notificaties;Banners;Banieren;Bericht;Message;Tray;Systeemvak;Po"
-"p-up;"
+"Notifications;Notificaties;Banners;Banieren;Bericht;Message;Tray;Systeemvak;"
+"Pop-up;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#| msgid "Notifications"
 msgid "Notification Banners"
 msgstr "Notificatiebanieren"
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Notifications"
 msgid "Lock Screen Notifications"
 msgstr "Notificaties bij vergrendelen van scherm"
 
@@ -3686,24 +3674,24 @@ msgid "Other"
 msgstr "Overige"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:283
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Account toevoegen"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:322
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
 msgid "Mail"
 msgstr "E-mail"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
 msgid "Contacts"
 msgstr "Contacten"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
 msgid "Chat"
 msgstr "Chatten"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
 msgid "Resources"
 msgstr "Bronnen"
 
@@ -3988,7 +3976,6 @@ msgid "_Mobile broadband"
 msgstr "_Mobiel breedband"
 
 #: ../panels/power/cc-power-panel.c:1604
-#| msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
 msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
 msgstr ""
 "Mobiele breedband-apparaten (3G, 4G, WiMax, etc.) hebben meer stroom nodig"
@@ -5129,32 +5116,26 @@ msgid "Options"
 msgstr "Opties"
 
 #: ../panels/region/region.ui.h:7
-#| msgid "Add an Input Source"
 msgid "Add input source"
 msgstr "Invoerbron toevoegen"
 
 #: ../panels/region/region.ui.h:8
-#| msgid "Remove Input Source"
 msgid "Remove input source"
 msgstr "Invoerbron verwijderen"
 
 #: ../panels/region/region.ui.h:9
-#| msgid "Move Input Source Up"
 msgid "Move input source up"
 msgstr "Invoerbron naar boven verplaatsen"
 
 #: ../panels/region/region.ui.h:10
-#| msgid "No input sources found"
 msgid "Move input source down"
 msgstr "Invoerbron naar beneden verplaatsen"
 
 #: ../panels/region/region.ui.h:11
-#| msgid "Choose an input source"
 msgid "Configure input source"
 msgstr "Invoerbron configureren"
 
 #: ../panels/region/region.ui.h:12
-#| msgid "Show Keyboard Layout"
 msgid "Show input source keyboard layout"
 msgstr "Invoerbron toetsenbordindeling tonen"
 
@@ -5389,7 +5370,6 @@ msgid "Require a password"
 msgstr "Een wachtwoord vereisen"
 
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share music, photos and videos over the network."
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
@@ -5489,8 +5469,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Onversterkt"
 
-#: ../panels/sound/gvc-combo-box.c:166 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:166 ../panels/sound/gvc-mixer-dialog.c:249
+#: ../panels/sound/gvc-mixer-dialog.c:515
 msgid "_Profile:"
 msgstr "_Profiel:"
 
@@ -5516,53 +5496,53 @@ msgstr[1] "%u inputs"
 msgid "System Sounds"
 msgstr "Systeemgeluiden"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:251
 msgid "_Test Speakers"
 msgstr "Speakers _testen"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "Piekdetectie"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1491
-#: ../panels/sound/gvc-sound-theme-chooser.c:594
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
 msgstr "Naam"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1510
+#: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
 msgstr "Apparaat"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1573
+#: ../panels/sound/gvc-mixer-dialog.c:1575
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Speakers testen voor %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1629
+#: ../panels/sound/gvc-mixer-dialog.c:1631
 msgid "_Output volume:"
 msgstr "Uit_voervolume:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1643
+#: ../panels/sound/gvc-mixer-dialog.c:1645
 msgid "Output"
 msgstr "Uitvoer"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1648
+#: ../panels/sound/gvc-mixer-dialog.c:1650
 msgid "C_hoose a device for sound output:"
 msgstr "Kies een apparaat voor geluids_weergave:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1670
+#: ../panels/sound/gvc-mixer-dialog.c:1672
 msgid "Settings for the selected device:"
 msgstr "Instellingen voor het gekozen apparaat:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1681
+#: ../panels/sound/gvc-mixer-dialog.c:1683
 msgid "Input"
 msgstr "Invoer"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1690
 msgid "_Input volume:"
 msgstr "I_nvoervolume:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1709
+#: ../panels/sound/gvc-mixer-dialog.c:1711
 msgid "Input level:"
 msgstr "Opnameniveau:"
 
@@ -5598,15 +5578,15 @@ msgstr "Geluidsvoorkeuren"
 msgid "Testing event sound"
 msgstr "Evenementgeluid testen"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:584
+#: ../panels/sound/gvc-sound-theme-chooser.c:554
 msgid "Default"
 msgstr "Standaard"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:585
+#: ../panels/sound/gvc-sound-theme-chooser.c:555
 msgid "From theme"
 msgstr "Van thema"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:770
+#: ../panels/sound/gvc-sound-theme-chooser.c:740
 msgid "C_hoose an alert sound:"
 msgstr "_Kies een evenementgeluid:"
 
@@ -6985,7 +6965,7 @@ msgstr "%d van %d"
 msgid "Display Mapping"
 msgstr "Taal voor weergave"
 
-#: ../panels/wacom/cc-wacom-stylus-page.c:372
+#: ../panels/wacom/cc-wacom-stylus-page.c:377
 msgid "Button"
 msgstr "Knop"
 
@@ -7018,7 +6998,6 @@ msgid "Tablet Preferences"
 msgstr "Tabletvoorkeuren"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-#| msgid "Help"
 msgid "_Help"
 msgstr "_Hulp"
 
@@ -7059,86 +7038,86 @@ msgid "Left-Handed Orientation"
 msgstr "Linkshandige oriëntatie"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1024
+#: ../panels/wacom/gsd-wacom-device.c:1028
 msgid "Left Ring"
 msgstr "Linker ring"
 
-#: ../panels/wacom/gsd-wacom-device.c:1035
+#: ../panels/wacom/gsd-wacom-device.c:1039
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Linker ring-modus #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1055
+#: ../panels/wacom/gsd-wacom-device.c:1059
 msgid "Right Ring"
 msgstr "Rechter ring"
 
-#: ../panels/wacom/gsd-wacom-device.c:1066
+#: ../panels/wacom/gsd-wacom-device.c:1070
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Rechter ring-modus #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1108
+#: ../panels/wacom/gsd-wacom-device.c:1112
 msgid "Left Touchstrip"
 msgstr "Linker aanraakstrook"
 
-#: ../panels/wacom/gsd-wacom-device.c:1119
+#: ../panels/wacom/gsd-wacom-device.c:1123
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Linker aanraakstrookmodus #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1139
+#: ../panels/wacom/gsd-wacom-device.c:1143
 msgid "Right Touchstrip"
 msgstr "Rechter aanraakstrook"
 
-#: ../panels/wacom/gsd-wacom-device.c:1150
+#: ../panels/wacom/gsd-wacom-device.c:1154
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Rechter aanraakstrookmodus #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1176
+#: ../panels/wacom/gsd-wacom-device.c:1180
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Schakelaar linker aanraakringmodus"
 
-#: ../panels/wacom/gsd-wacom-device.c:1178
+#: ../panels/wacom/gsd-wacom-device.c:1182
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Schakelaar rechter aanraakringmodus"
 
-#: ../panels/wacom/gsd-wacom-device.c:1181
+#: ../panels/wacom/gsd-wacom-device.c:1185
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Schakelaar linker aanraakstrookmodus"
 
-#: ../panels/wacom/gsd-wacom-device.c:1183
+#: ../panels/wacom/gsd-wacom-device.c:1187
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Schakelaar rechter aanraakstrookmodus"
 
-#: ../panels/wacom/gsd-wacom-device.c:1188
+#: ../panels/wacom/gsd-wacom-device.c:1192
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modusschakelaar #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1296
+#: ../panels/wacom/gsd-wacom-device.c:1300
 #, c-format
 msgid "Left Button #%d"
 msgstr "Linkerknop #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1299
+#: ../panels/wacom/gsd-wacom-device.c:1303
 #, c-format
 msgid "Right Button #%d"
 msgstr "Rechterknop #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1302
+#: ../panels/wacom/gsd-wacom-device.c:1306
 #, c-format
 msgid "Top Button #%d"
 msgstr "Bovenste knop #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1305
+#: ../panels/wacom/gsd-wacom-device.c:1309
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Onderste knop #%d"
@@ -7215,6 +7194,22 @@ msgstr "Onderste knop"
 #: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "Tip Pressure Feel"
 msgstr "Gedrag puntdruk"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME configuratiecentrum"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:2
+msgid "Utilities to configure the GNOME desktop"
+msgstr "Hulpmiddelen om de GNOME desktop te configureren"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:3
+msgid ""
+"The control center is GNOME's main interface for configuration of various "
+"aspects of your desktop."
+msgstr ""
+"Het configuratiecentrum is de hoofdinterface van GNOME voor verschillende "
+"aspecten van uw desktop te configureren."
 
 #: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
@@ -8348,9 +8343,6 @@ msgstr "Preferences;Settings;Voorkeuren;Instellingen;"
 
 #~ msgid "Calibrate..."
 #~ msgstr "Kalibreren…"
-
-#~ msgid "Control Center"
-#~ msgstr "Configuratiecentrum"
 
 #~ msgid "VESA: %s"
 #~ msgstr "VESA: %s"
