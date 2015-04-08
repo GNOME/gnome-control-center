@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-20 22:42+0000\n"
-"PO-Revision-Date: 2013-09-21 09:37+0300\n"
+"POT-Creation-Date: 2014-04-14 18:47+0000\n"
+"PO-Revision-Date: 2014-04-15 20:36+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "Language: et\n"
@@ -36,6 +36,7 @@ msgstr "Taust"
 msgid "Changes throughout the day"
 msgstr "Muutub pidevalt"
 
+#. To translators: This is the noon, not the verb
 msgid "Lock Screen"
 msgstr "Ekraani lukustamine"
 
@@ -164,7 +165,7 @@ msgid "Bluetooth is disabled"
 msgstr "Bluetooth on väljas"
 
 msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth raudvaraliselt poolt välja lülitatud"
+msgstr "Bluetooth on füüsilisest lülitist välja lülitatud"
 
 msgid "No Bluetooth adapters found"
 msgstr "Bluetooth seadmeid ei leitud"
@@ -467,7 +468,7 @@ msgid "Done"
 msgstr "Valmis"
 
 #. Timeout parameters
-#. 5000 = 5 sec
+#. 15000 = 15 sec
 #. 750 = 0.75 sec
 #. Text printed on screen
 msgid "Screen Calibration"
@@ -585,22 +586,6 @@ msgstr ""
 "Tuvastati probleeme. Profiilid ei pruugi õigesti töötada. <a href=\"\">Näita "
 "üksikasju.</a>"
 
-msgid "Device type:"
-msgstr "Seadme tüüp:"
-
-msgid "Manufacturer:"
-msgstr "Tootja:"
-
-msgid "Model:"
-msgstr "Mudel:"
-
-msgid ""
-"Image files can be dragged on this window to auto-complete the above fields."
-msgstr "Ülalolevate väljade täitmiseks saab siia aknasse pilte lohistada."
-
-msgid "Color"
-msgstr "Värvid"
-
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr "Iga värvihaldusega seadme jaoks on vaja värsket värviprofiili."
 
@@ -702,6 +687,9 @@ msgstr "D65 (fotograafia ja graafika)"
 
 msgid "D75"
 msgstr "D75"
+
+msgid "Color"
+msgstr "Värvid"
 
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
@@ -889,7 +877,6 @@ msgstr "_Rakenda"
 msgid "Drag displays to rearrange them"
 msgstr "Ekraanide ümberpaigutamiseks lohista."
 
-#. size
 msgid "Size"
 msgstr "Suurus"
 
@@ -933,24 +920,6 @@ msgstr "Ekraani andmeid pole võimalik hankida"
 
 msgid "_Arrange Combined Displays"
 msgstr "_Paiguta kombineeritud ekraanid"
-
-msgid "Show your primary display on this screen also"
-msgstr "Sellel ekraanil näidatakse ka sinu peamist kuva"
-
-msgid "Combine"
-msgstr "Kombineeritud"
-
-msgid "Join with the primary display to create an extra space"
-msgstr "Ühendatud peamise ekraaniga, et luua lisaruum"
-
-msgid "Don't use the display"
-msgstr "Seda ekraani ei kasutata"
-
-msgid "Model"
-msgstr "Mudel"
-
-msgid "Refresh Rate"
-msgstr "Värskendussagedus"
 
 msgid "Displays"
 msgstr "Kuvad"
@@ -1441,9 +1410,6 @@ msgstr "Hiire või puutepadja tundlikkuse ja käelisuse muutmine"
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Puutepadi;Kursor;Klõps;Topelt;Nupp;Kerimine;"
-
-msgid "Mouse Preferences"
-msgstr "Hiire-eelistused"
 
 msgid "General"
 msgstr "Üldine"
@@ -1977,6 +1943,9 @@ msgstr "Profiil %d"
 msgid "Add new connection"
 msgstr "Uue ühenduse lisamine"
 
+msgid "Team slaves"
+msgstr "Meeskonna alamad"
+
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2099,15 +2068,6 @@ msgstr "Socks proksi port"
 
 msgid "Turn device off"
 msgstr "Lülita seade välja"
-
-msgid "Select the interface to use for the new service"
-msgstr "Vali uue teenuse jaoks liides"
-
-msgid "C_reate…"
-msgstr "_Loo…"
-
-msgid "_Interface"
-msgstr "_Liides"
 
 msgid "Add Device"
 msgstr "Lisa seade"
@@ -2961,8 +2921,9 @@ msgstr ""
 msgid "Hibernate"
 msgstr "Talveuni"
 
+# "Kui aku on väga tühi: Talveuni/Lülitab välja
 msgid "Power off"
-msgstr "Võrgutoide väljas"
+msgstr "Lülitab välja"
 
 msgid "45 minutes"
 msgstr "45 minutit"
@@ -3448,6 +3409,9 @@ msgstr "Tööd"
 msgid "Show _Jobs"
 msgstr "_Tööde kuvamine"
 
+msgid "Model"
+msgstr "Mudel"
+
 msgid "label"
 msgstr "silt"
 
@@ -3813,17 +3777,11 @@ msgid ""
 msgstr ""
 "Bluetoothi jagamine võimaldab jagada faile teiste Bluetoothi seadmetega"
 
-msgid "Share Public Folder"
-msgstr "Avaliku kausta jagamine"
-
 msgid "Only Receive From Trusted Devices"
 msgstr "Ainult usaldatud seadmetelt vastuvõtmine"
 
 msgid "Save Received Files to Downloads Folder"
 msgstr "Vastuvõetud failide salvestamine allalaadimiste kausta"
-
-msgid "Only share with Trusted Devices"
-msgstr "Ainult usaldatud seadmetega jagamine"
 
 msgid "Computer Name"
 msgstr "Arvuti nimi"
@@ -4090,8 +4048,8 @@ msgid ""
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgstr ""
 "Klaviatuur;Klaver;Hiir;a11y;Hõlbustused;Ligipääsetavus;Kontrast;Suurendus;"
-"Suum;Ekraanilugeja;tekst;font;suurus;AccessX;Kleepuvad klahvid;Aeglased "
-"klahvid;Põrkeklahvid;Hiireklahvid;"
+"Suum;Ekraanilugeja;tekst;font;suurus;AccessX;Kleepuvad klahvid;Aeglased;"
+"Aeglane;Põrkeklahvid;Hiir;"
 
 msgid "_Always Show Universal Access Menu"
 msgstr "_Alati kuvatakse pärssimata juurdepääsu menüüd"
@@ -4551,31 +4509,6 @@ msgstr "Praegune _parool"
 msgid "Ch_ange"
 msgstr "_Muuda"
 
-msgid "Changing photo for:"
-msgstr "Kasutaja foto vahetamine:"
-
-msgid ""
-"Choose a picture that will be shown at the login screen for this account."
-msgstr "Vali pilt, mida kuvatakse sisselogimise aknas selle konto jaoks."
-
-msgid "Gallery"
-msgstr "Galerii"
-
-msgid "Browse for more pictures"
-msgstr "Sirvi teisi pilte"
-
-msgid "Take a photograph"
-msgstr "Pildista"
-
-msgid "Browse"
-msgstr "Lehitse"
-
-msgid "Photograph"
-msgstr "Foto"
-
-msgid "Account Information"
-msgstr "Konto andmed"
-
 msgid "Add User Account"
 msgstr "Lisa kasutajakonto"
 
@@ -4925,6 +4858,9 @@ msgstr "Parooli pole võimalik muuta"
 
 msgid "The passwords do not match."
 msgstr "Paroolid ei klapi."
+
+msgid "Browse for more pictures"
+msgstr "Sirvi teisi pilte"
 
 msgid "Disable image"
 msgstr "Keela pilt"
@@ -5370,266 +5306,56 @@ msgstr "Sätted"
 msgid "Preferences;Settings;"
 msgstr "Eelistused;Sätted;Seaded;Seadistused;"
 
-#~ msgid "Switch between AM and PM."
-#~ msgstr "Vaheta EL ja PL vahel."
+#~ msgid "Team"
+#~ msgstr "Meeskond"
 
-#~ msgid "Estimated battery capacity: %s"
-#~ msgstr "Hinnanguline aku mahutavus: %s"
+#~ msgid "(none)"
+#~ msgstr "(pole)"
 
-#~ msgid "Export"
-#~ msgstr "Eksport"
+#~ msgid "USB"
+#~ msgstr "USB"
 
-#~ msgid "Left Shift"
-#~ msgstr "Vasak Shift"
+#~ msgid "Serial Port"
+#~ msgstr "Jadaport"
 
-#~ msgid "Left Alt"
-#~ msgstr "Vasak Alt"
+#~ msgid "Parallel Port"
+#~ msgstr "Paralleelport"
 
-#~ msgid "Left Ctrl"
-#~ msgstr "Vasak Ctrl"
+#~ msgid "Location: %s"
+#~ msgstr "Asukoht: %s"
 
-#~ msgid "Right Shift"
-#~ msgstr "Parem Shift"
+#~ msgid "Address: %s"
+#~ msgstr "Aadress: %s"
 
-#~ msgid "Right Alt"
-#~ msgstr "Parem Alt"
+#~ msgid "_Default printer"
+#~ msgstr "_Vaikimisi printer"
 
-#~ msgid "Right Ctrl"
-#~ msgstr "Parem Ctrl"
-
-#~ msgid "Left Alt+Shift"
-#~ msgstr "Vasak Alt+Shift"
-
-#~ msgid "Right Alt+Shift"
-#~ msgstr "Parem Alt+Shift"
-
-#~ msgid "Left Ctrl+Shift"
-#~ msgstr "Vasak Ctrl+Shift"
-
-#~ msgid "Right Ctrl+Shift"
-#~ msgstr "Parem Ctrl+Shift"
-
-#~ msgid "Left+Right Shift"
-#~ msgstr "Vasak+parem Shift"
-
-#~ msgid "Left+Right Ctrl"
-#~ msgstr "Vasak+parem Ctrl"
-
-#~ msgid "Alt+Shift"
-#~ msgstr "Alt+Shift"
-
-#~ msgid "Ctrl+Shift"
-#~ msgstr "Ctrl+Shift"
-
-#~ msgid "Alt+Ctrl"
-#~ msgstr "Alt+Ctrl"
-
-#~ msgid "Caps"
-#~ msgstr "Caps"
-
-#~ msgid "Shift+Caps"
-#~ msgstr "Shift+Caps"
-
-#~ msgid "Alt+Caps"
-#~ msgstr "Alt+Caps"
-
-#~ msgid "Ctrl+Caps"
-#~ msgstr "Ctrl+Caps"
-
-#~ msgid "_Region:"
-#~ msgstr "Piirkond:"
-
-#~ msgid "_City:"
-#~ msgstr "_Linn:"
-
-#~ msgid "_Network Time"
-#~ msgstr "_Võrguaeg"
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "Set the time one hour ahead."
-#~ msgstr "Keera kell üks tund ette."
-
-#~ msgid "Set the time one hour back."
-#~ msgstr "Keera kell üks tund taha."
-
-#~ msgid "Set the time one minute ahead."
-#~ msgstr "Keera kell üks minut ette."
-
-#~ msgid "Set the time one minute back."
-#~ msgstr "Keera kell üks minut taha."
-
-#~ msgid "AM/PM"
-#~ msgstr "EL/PL"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Normal"
-#~ msgstr "Tavaline"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Counterclockwise"
-#~ msgstr "Vastupäeva"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "Clockwise"
-#~ msgstr "Päripäeva"
-
-#~ msgctxt "display panel, rotation"
-#~ msgid "180 Degrees"
-#~ msgstr "180 kraadi"
-
-#~ msgid "Monitor"
-#~ msgstr "Kuvar"
-
-#~ msgid "Drag to change primary display."
-#~ msgstr "Lohista peakuva muutmiseks."
+#~ msgid "Software Usage"
+#~ msgstr "Tarkvarakasutus"
 
 #~ msgid ""
-#~ "Select a monitor to change its properties; drag it to rearrange its "
-#~ "placement."
+#~ "Sending us information about which software you use helps us provide you "
+#~ "with more accurate recommendations. It also helps us to improve our "
+#~ "software.\n"
+#~ "\n"
+#~ "All the information we collect is made anonymous, and we will never share "
+#~ "your data with third parties."
 #~ msgstr ""
-#~ "Omaduste muutmiseks vali kuvar. Asukoha muutmiseks lohista see uuele "
-#~ "asukohale."
+#~ "Kui saadad meile infot tarkvara kohta, mida kasutad, on meil võimalik "
+#~ "pakkuda sulle täpsemaid soovitusi. Samuti aitab see just õiget tarkvara "
+#~ "arendada.\n"
+#~ "\n"
+#~ "Kõik meie kogutavad andmed tehakse anonüümseks ning me ei jaga sinu "
+#~ "andmeid mitte kunagi kellegi kolmandaga."
 
-#~ msgid "%a %R"
-#~ msgstr "%a %R"
+#~ msgid "Privacy Policy"
+#~ msgstr "Privaatsuse tagamine"
 
-#~ msgid "Could not save the monitor configuration"
-#~ msgstr "Kuvari sätteid pole võimalik salvestada"
+#~ msgid "_Send software usage statistics"
+#~ msgstr "_Tarkvarakasutuse statistika saatmine"
 
-#~ msgid "_Resolution"
-#~ msgstr "_Eraldusvõime"
+#~ msgid "Password:"
+#~ msgstr "Parool:"
 
-#~ msgid "R_otation"
-#~ msgstr "_Pööramine:"
-
-#~ msgid "_Mirror displays"
-#~ msgstr "Kuvad on pee_geldatud"
-
-#~ msgid "Note: may limit resolution options"
-#~ msgstr "Märkus: võib piirata eraldusvõime valikuid"
-
-#~ msgid "_Detect Displays"
-#~ msgstr "_Tuvasta kuvad"
-
-#~ msgctxt "mouse, speed"
-#~ msgid "Slow"
-#~ msgstr "Aeglane"
-
-#~ msgctxt "mouse, speed"
-#~ msgid "Fast"
-#~ msgstr "Kiire"
-
-#~ msgid "C_ontent sticks to fingers"
-#~ msgstr "_Sisu kleepub sõrmede külge"
-
-#~ msgid "blablabla"
-#~ msgstr "blablabla"
-
-#~ msgid ""
-#~ "Address\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "Aadressi\n"
-#~ "sekstioon\n"
-#~ "tuleb\n"
-#~ "siia"
-
-#~ msgid ""
-#~ "DNS\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "DNSi\n"
-#~ "sekstioon\n"
-#~ "tuleb\n"
-#~ "siia"
-
-#~ msgid ""
-#~ "Routes\n"
-#~ "section\n"
-#~ "goes\n"
-#~ "here"
-#~ msgstr ""
-#~ "Marsruutide\n"
-#~ "sekstioon\n"
-#~ "tuleb\n"
-#~ "siia"
-
-#~ msgid "00:24:16:31:8G:7A"
-#~ msgstr "00:24:16:31:8G:7A"
-
-#~ msgid "Hidden"
-#~ msgstr "Varjatud"
-
-#~ msgid "Visible"
-#~ msgstr "Nähtav"
-
-#~ msgid "Name & Visibility"
-#~ msgstr "Nimi ja nähtavus"
-
-#~ msgid "Control how you appear on the screen and the network."
-#~ msgstr "Muuda, kuidas sind kuvatakse ekraanil ja võrgus."
-
-#~ msgid "Display _full name in top bar"
-#~ msgstr "Ülemisel ribal  _kogu nime kuvamine"
-
-#~ msgid "Display full name in _lock screen"
-#~ msgstr "Lukustusekraanil _kogu nime kuvamine"
-
-#~ msgid "_Stealth Mode"
-#~ msgstr "_Varjatud režiim"
-
-#~ msgctxt "universal access, contrast"
-#~ msgid "Normal"
-#~ msgstr "Tavaline"
-
-#~ msgctxt "universal access, contrast"
-#~ msgid "High/Inverse"
-#~ msgstr "Kõrge/pööratud värvidega"
-
-#~ msgid "On screen keyboard"
-#~ msgstr "Ekraaniklaviatuur"
-
-#~ msgid "OnBoard"
-#~ msgstr "OnBoard"
-
-#~ msgid "75%"
-#~ msgstr "75%"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "universal access, text size"
-#~ msgid "Normal"
-#~ msgstr "Tavaline"
-
-#~ msgid "125%"
-#~ msgstr "125%"
-
-#~ msgid "150%"
-#~ msgstr "150%"
-
-#~ msgctxt "universal access, text size"
-#~ msgid "Larger"
-#~ msgstr "Suurem"
-
-#~ msgid "Beep on Caps and Num Lock"
-#~ msgstr "Piiksumine Caps Lock / Num Lock kasutamisel"
-
-#~ msgid "Turn on or off:"
-#~ msgstr "Lülita sisse või välja:"
-
-#~ msgctxt "universal access, zoom"
-#~ msgid "Zoom"
-#~ msgstr "Suurendus"
-
-#~ msgid "Zoom in:"
-#~ msgstr "Suurendamine:"
-
-#~ msgid "Zoom out:"
-#~ msgstr "Vähendamine:"
+#~ msgid "Access Options"
+#~ msgstr "Ligipääsu valikud"
