@@ -184,6 +184,13 @@ if test "x$have_udev" = xyes ; then
 fi
 AM_CONDITIONAL(HAVE_UDEV, [test "x$have_udev" = "xyes"])
 
+PKG_CHECK_MODULES(WAYLAND, gdk-wayland-3.0, have_wayland=yes, have_wayland=no)
+if test "x$have_wayland" = xyes ; then
+	if test "x$have_udev" != xyes ; then
+		AC_MSG_ERROR([udev is required for Wayland support])
+	fi
+fi
+
 PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib-vpn >= $NETWORK_MANAGER_REQUIRED_VERSION
