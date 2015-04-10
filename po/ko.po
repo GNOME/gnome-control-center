@@ -10,14 +10,14 @@
 #   무엇인지, UI에 어떻게 나타나는지 이해하고 번역해 주세요. 기계적인
 #   번역은 품질 저하의 지름길입니다.
 #
+# - 이 프로그램의 이름인 "Control Center"는 "제어 센터"로 번역.
 # - 용어
 #   - Airplane Mode: 비행기 모드
 #   - input source: 입력 소스 ("source"라고만 써져 있어도 "입력 소스"로 번역)
-#   - pairing (bluetooth 관련): 페어링
 #   - prefix (ipv6 관련): 프리픽스
 #   - tablet: 태블릿 (tablet PC의 경우), 디지타이저 (graphics tablet) 구분하도록 주의
 #   - VPN: 가상사설망
-#   - wide gamut: 광색역
+#   - wide gamut: 광색역 (LCD 디스플레이 종류)
 #
 # - 검색 키워드는 원문과 번역문을 같이 세미콜론으로 구분해 기입한다. 예를 들어:
 #
@@ -29,8 +29,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-04 19:30+0000\n"
-"PO-Revision-Date: 2015-03-05 10:44+0900\n"
+"POT-Creation-Date: 2015-04-09 18:43+0000\n"
+"PO-Revision-Date: 2015-04-10 12:48+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: Korean\n"
@@ -123,7 +123,7 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "그림 파일을 %s 폴더에 놓으면 여기 나타납니다"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
-#: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:962
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1579
 #: ../panels/display/cc-display-panel.c:2022
@@ -381,7 +381,7 @@ msgid "Screen"
 msgstr "화면"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:906
+#: ../panels/color/cc-color-panel.c:907
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "파일 업로드에 실패했습니다: %s"
@@ -389,39 +389,39 @@ msgstr "파일 업로드에 실패했습니다: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:921
 msgid "The profile has been uploaded to:"
 msgstr "프로파일이 다음에 업로드되어 있습니다:"
 
-#: ../panels/color/cc-color-panel.c:922
+#: ../panels/color/cc-color-panel.c:923
 msgid "Write down this URL."
 msgstr "이 URL을 적어 놓으십시오."
 
-#: ../panels/color/cc-color-panel.c:923
+#: ../panels/color/cc-color-panel.c:924
 msgid "Restart this computer and boot your normal operating system."
 msgstr "이 컴퓨터를 다시 시작해 일반 운영체제로 부팅합니다."
 
-#: ../panels/color/cc-color-panel.c:924
+#: ../panels/color/cc-color-panel.c:925
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "URL을 브라우저에 입력해 프로파일을 다운로드하고 설치합니다."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:959
 msgid "Save Profile"
 msgstr "프로파일 저장"
 
-#: ../panels/color/cc-color-panel.c:962
+#: ../panels/color/cc-color-panel.c:963
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "저장(_S)"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1322
+#: ../panels/color/cc-color-panel.c:1323
 msgid "Create a color profile for the selected device"
 msgstr "선택한 장치에 대한 색 프로파일 만들기"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1337 ../panels/color/cc-color-panel.c:1361
+#: ../panels/color/cc-color-panel.c:1338 ../panels/color/cc-color-panel.c:1362
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -430,12 +430,12 @@ msgstr ""
 "십시오."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1371
+#: ../panels/color/cc-color-panel.c:1372
 msgid "The measuring instrument does not support printer profiling."
 msgstr "이 측정 장치는 프린터 프로파일링을 지원하지 않습니다."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1382
+#: ../panels/color/cc-color-panel.c:1383
 msgid "The device type is not currently supported."
 msgstr "이 종류의 장치는 현재 지원하지 않습니다."
 
@@ -672,7 +672,7 @@ msgstr ""
 "법 안내를 읽어보면 도움이 됩니다."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:732
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Summary"
 msgstr "요약"
 
@@ -1075,7 +1075,7 @@ msgstr "주요"
 
 #: ../panels/display/cc-display-panel.c:571
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
+#: ../panels/power/cc-power-panel.c:1706 ../panels/power/cc-power-panel.c:1717
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1510,7 +1510,7 @@ msgstr "실행 아이콘"
 msgid "Launch help browser"
 msgstr "도움말 보기 실행"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1604
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "설정"
@@ -1961,7 +1961,7 @@ msgstr "한번 누르기, 두번째 단추"
 msgid "Air_plane Mode"
 msgstr "비행 모드(_P)"
 
-#: ../panels/network/cc-network-panel.c:966
+#: ../panels/network/cc-network-panel.c:967
 msgid "Network proxy"
 msgstr "네트워크 프록시"
 
@@ -1969,17 +1969,17 @@ msgstr "네트워크 프록시"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s 가상사설망"
 
-#: ../panels/network/cc-network-panel.c:1299
+#: ../panels/network/cc-network-panel.c:1300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "앗, 뭔가 잘못됐습니다. 소프트웨어 공급자에게 연락하십시오."
 
-#: ../panels/network/cc-network-panel.c:1305
+#: ../panels/network/cc-network-panel.c:1306
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager가 동작해야 합니다."
 
@@ -2141,7 +2141,7 @@ msgstr "네트마스크"
 #: ../panels/network/connection-editor/ce-page-ip4.c:465
 #: ../panels/network/connection-editor/ce-page-ip6.c:205
 #: ../panels/network/connection-editor/ce-page-ip6.c:473
-#: ../panels/network/network-vpn.ui.h:3
+#: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "게이트웨이"
 
@@ -2195,7 +2195,7 @@ msgstr "수동"
 msgid "Link-Local Only"
 msgstr "링크 로컬만"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:953
+#: ../panels/network/connection-editor/ce-page-ip4.c:967
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
@@ -2219,7 +2219,7 @@ msgstr "자동"
 msgid "Automatic, DHCP only"
 msgstr "자동, DHCP 전용"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:919
+#: ../panels/network/connection-editor/ce-page-ip6.c:937
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
@@ -2443,7 +2443,6 @@ msgid "New Profile"
 msgstr "새 프로파일"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:577
-#: ../panels/network/network.ui.h:1 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "가상사설망"
 
@@ -2665,7 +2664,7 @@ msgstr "유선"
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8
+#: ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "옵션…"
 
@@ -2772,17 +2771,17 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "공급처"
 
-#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:2
+#: ../panels/network/network-proxy.ui.h:1
 msgctxt "proxy method"
 msgid "None"
 msgstr "없음"
 
-#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:3
+#: ../panels/network/network-proxy.ui.h:2
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "수동"
 
-#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:4
+#: ../panels/network/network-proxy.ui.h:3
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "자동"
@@ -2836,32 +2835,32 @@ msgstr "SOCKS 프록시 포트"
 msgid "Turn device off"
 msgstr "장치 끄기"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:1
 msgid "Add Device"
 msgstr "장치 추가"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:2
 msgid "Remove Device"
 msgstr "장치 제거"
 
-#: ../panels/network/network-vpn.ui.h:2
+#: ../panels/network/network-vpn.ui.h:1
 msgid "VPN Type"
 msgstr "가상사설망 방식"
 
-#: ../panels/network/network-vpn.ui.h:4
+#: ../panels/network/network-vpn.ui.h:3
 msgid "Group Name"
 msgstr "그룹 이름"
 
-#: ../panels/network/network-vpn.ui.h:5
+#: ../panels/network/network-vpn.ui.h:4
 msgid "Group Password"
 msgstr "그룹 암호"
 
-#: ../panels/network/network-vpn.ui.h:6
+#: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
 msgid "Username"
 msgstr "사용자 이름"
 
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-vpn.ui.h:6
 msgid "Turn VPN connection off"
 msgstr "가상 사설망 끄기"
 
@@ -3548,7 +3547,7 @@ msgid "_Type"
 msgstr "종류(_T)"
 
 #: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
+#: ../panels/power/cc-power-panel.c:1712 ../panels/power/cc-power-panel.c:1719
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3624,24 +3623,24 @@ msgid "Other"
 msgstr "기타"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:283
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "계정 추가"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:322
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
 msgid "Mail"
 msgstr "메일"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
 msgid "Contacts"
 msgstr "연락처"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
 msgid "Chat"
 msgstr "대화"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
 msgid "Resources"
 msgstr "리소스"
 
@@ -3843,7 +3842,7 @@ msgstr "컴퓨터"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:2040
+#: ../panels/power/cc-power-panel.c:2041
 msgid "Battery"
 msgstr "배터리"
 
@@ -3891,71 +3890,72 @@ msgstr "배터리"
 msgid "When _idle"
 msgstr "입력이 없을 때(_I)"
 
-#: ../panels/power/cc-power-panel.c:1462
+#: ../panels/power/cc-power-panel.c:1463
 msgid "Power Saving"
 msgstr "절전"
 
-#: ../panels/power/cc-power-panel.c:1490
+#: ../panels/power/cc-power-panel.c:1491
 msgid "_Screen brightness"
 msgstr "화면 밝기(_S)"
 
-#: ../panels/power/cc-power-panel.c:1496
+#: ../panels/power/cc-power-panel.c:1497
 msgid "_Keyboard brightness"
 msgstr "키보드 밝기(_K)"
 
-#: ../panels/power/cc-power-panel.c:1506
+#: ../panels/power/cc-power-panel.c:1507
 msgid "_Dim screen when inactive"
 msgstr "입력이 없으면 화면 어둡게(_D)"
 
-#: ../panels/power/cc-power-panel.c:1531
+#: ../panels/power/cc-power-panel.c:1532
 msgid "_Blank screen"
 msgstr "빈 화면(_B)"
 
-#: ../panels/power/cc-power-panel.c:1568
+#: ../panels/power/cc-power-panel.c:1569
 msgid "_Wi-Fi"
 msgstr "와이파이(_W)"
 
-#: ../panels/power/cc-power-panel.c:1573
+#: ../panels/power/cc-power-panel.c:1574
 msgid "Wireless devices require extra power"
 msgstr "무선 장치를 사용하면 전기를 더 많이 씁니다"
 
-#: ../panels/power/cc-power-panel.c:1598
+#: ../panels/power/cc-power-panel.c:1599
 msgid "_Mobile broadband"
 msgstr "휴대전화 네트워크(_M)"
 
-#: ../panels/power/cc-power-panel.c:1603
+#: ../panels/power/cc-power-panel.c:1604
 msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr "휴대전화 네트워크(3G, 4G, WiMax 등) 장치를 사용하면 전기를 더 많이 씁니다"
+msgstr ""
+"휴대전화 네트워크(3G, 4G, WiMax 등) 장치를 사용하면 전기를 더 많이 씁니다"
 
-#: ../panels/power/cc-power-panel.c:1653
+#: ../panels/power/cc-power-panel.c:1654
 msgid "_Bluetooth"
 msgstr "블루투스(_B)"
 
-#: ../panels/power/cc-power-panel.c:1707
+#: ../panels/power/cc-power-panel.c:1708
 msgid "When on battery power"
 msgstr "배터리 전원 사용할 때"
 
-#: ../panels/power/cc-power-panel.c:1709
+#: ../panels/power/cc-power-panel.c:1710
 msgid "When plugged in"
 msgstr "전원이 연결되었을 때"
 
-#: ../panels/power/cc-power-panel.c:1839
+#: ../panels/power/cc-power-panel.c:1840
 msgid "Suspend & Power Off"
 msgstr "대기 모드 및 전원 끄기"
 
-#: ../panels/power/cc-power-panel.c:1872
+#: ../panels/power/cc-power-panel.c:1873
 msgid "_Automatic suspend"
 msgstr "자동 대기 모드(_A)"
 
-#: ../panels/power/cc-power-panel.c:1896
+#: ../panels/power/cc-power-panel.c:1897
 msgid "When battery power is _critical"
 msgstr "배터리 전원이 위험할 때(_C)"
 
-#: ../panels/power/cc-power-panel.c:1951
+#: ../panels/power/cc-power-panel.c:1952
 msgid "Power Off"
 msgstr "전원 끄기"
 
-#: ../panels/power/cc-power-panel.c:2087
+#: ../panels/power/cc-power-panel.c:2088
 msgid "Devices"
 msgstr "장치"
 
@@ -4723,7 +4723,9 @@ msgstr "문제점 보고"
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
 "anonymously and are scrubbed of personal data."
-msgstr "기술적인 문제점에 대한 보고서를 보내면 %s 개선에 도움이 됩니다. 보고서는 익명으로 전송되고 개인 정보는 가려집니다."
+msgstr ""
+"기술적인 문제점에 대한 보고서를 보내면 %s 개선에 도움이 됩니다. 보고서는 익명"
+"으로 전송되고 개인 정보는 가려집니다."
 
 #: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
@@ -4898,26 +4900,26 @@ msgstr "지역이 없습니다"
 msgid "No input sources found"
 msgstr "입력 소스가 없습니다"
 
-#: ../panels/region/cc-input-chooser.c:1084
+#: ../panels/region/cc-input-chooser.c:1085
 msgctxt "Input Source"
 msgid "Other"
 msgstr "기타"
 
-#: ../panels/region/cc-region-panel.c:243
+#: ../panels/region/cc-region-panel.c:247
 #: ../panels/user-accounts/um-user-panel.c:1064
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "바뀐 사항을 적용하려면 세션을 다시 시작해야 합니다."
 
-#: ../panels/region/cc-region-panel.c:247
+#: ../panels/region/cc-region-panel.c:251
 #: ../panels/user-accounts/um-user-panel.c:1068
 msgid "Restart Now"
 msgstr "지금 다시 시작"
 
-#: ../panels/region/cc-region-panel.c:872
+#: ../panels/region/cc-region-panel.c:876
 msgid "No input source selected"
 msgstr "입력 소스를 선택하지 않았습니다"
 
-#: ../panels/region/cc-region-panel.c:1788
+#: ../panels/region/cc-region-panel.c:1796
 msgid "Login Screen"
 msgstr "로그인 화면"
 
@@ -5380,8 +5382,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "증폭하지 않음"
 
-#: ../panels/sound/gvc-combo-box.c:166 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:166 ../panels/sound/gvc-mixer-dialog.c:249
+#: ../panels/sound/gvc-mixer-dialog.c:515
 msgid "_Profile:"
 msgstr "프로파일(_P):"
 
@@ -5405,53 +5407,53 @@ msgstr[0] "%u개 입력"
 msgid "System Sounds"
 msgstr "시스템 사운드"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:251
 msgid "_Test Speakers"
 msgstr "스피커 시험(_T)"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "피크 검색"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1491
-#: ../panels/sound/gvc-sound-theme-chooser.c:594
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
 msgstr "이름"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1510
+#: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
 msgstr "장치"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1573
+#: ../panels/sound/gvc-mixer-dialog.c:1575
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "스피커 시험(%s)"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1629
+#: ../panels/sound/gvc-mixer-dialog.c:1631
 msgid "_Output volume:"
 msgstr "출력 음량(_O):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1643
+#: ../panels/sound/gvc-mixer-dialog.c:1645
 msgid "Output"
 msgstr "출력"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1648
+#: ../panels/sound/gvc-mixer-dialog.c:1650
 msgid "C_hoose a device for sound output:"
 msgstr "사운드 출력 장치 선택(_H):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1670
+#: ../panels/sound/gvc-mixer-dialog.c:1672
 msgid "Settings for the selected device:"
 msgstr "선택한 장치에 대한 설정:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1681
+#: ../panels/sound/gvc-mixer-dialog.c:1683
 msgid "Input"
 msgstr "입력"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1690
 msgid "_Input volume:"
 msgstr "입력 음량(_I):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1709
+#: ../panels/sound/gvc-mixer-dialog.c:1711
 msgid "Input level:"
 msgstr "입력 레벨:"
 
@@ -5487,15 +5489,15 @@ msgstr "사운드 기본 설정"
 msgid "Testing event sound"
 msgstr "이벤트 사운드 시험중"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:584
+#: ../panels/sound/gvc-sound-theme-chooser.c:554
 msgid "Default"
 msgstr "기본값"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:585
+#: ../panels/sound/gvc-sound-theme-chooser.c:555
 msgid "From theme"
 msgstr "테마에서"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:770
+#: ../panels/sound/gvc-sound-theme-chooser.c:740
 msgid "C_hoose an alert sound:"
 msgstr "경보 사운드 선택(_H):"
 
@@ -6082,7 +6084,7 @@ msgid "Right little finger"
 msgstr "오른쪽 새끼"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:689
+#: ../panels/user-accounts/um-fingerprint-dialog.c:686
 msgid "Enable Fingerprint Login"
 msgstr "지문 로그인 사용"
 
@@ -6446,15 +6448,15 @@ msgid ""
 "disabled?"
 msgstr "등록한 지문을 삭제하고 지문 로그인을 사용하지 않습니까?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:446
+#: ../panels/user-accounts/um-fingerprint-dialog.c:443
 msgid "Done!"
 msgstr "완료!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:507
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:504
+#: ../panels/user-accounts/um-fingerprint-dialog.c:546
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "'%s' 장치에 접근할 수 없습니다"
@@ -6462,16 +6464,16 @@ msgstr "'%s' 장치에 접근할 수 없습니다"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:590
+#: ../panels/user-accounts/um-fingerprint-dialog.c:587
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "'%s' 장치의 지문 캡처를 시작할 수 없습니다"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:637
 msgid "Could not access any fingerprint readers"
 msgstr "지문 인식 장치에 접근할 수 없습니다"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:641
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Please contact your system administrator for help."
 msgstr "시스템 관리자에게 문의하십시오."
 
@@ -6480,18 +6482,18 @@ msgstr "시스템 관리자에게 문의하십시오."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:723
+#: ../panels/user-accounts/um-fingerprint-dialog.c:720
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the '%s' device."
 msgstr "지문 로그인을 사용하려면, '%s' 장치를 이용해 지문을 입력해야 합니다."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:727
 msgid "Selecting finger"
 msgstr "손가락 선택"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Enrolling fingerprints"
 msgstr "지문 등록하는 중"
 
@@ -6854,7 +6856,7 @@ msgstr "%2$d개 중 %1$d"
 msgid "Display Mapping"
 msgstr "디스플레이 매핑"
 
-#: ../panels/wacom/cc-wacom-stylus-page.c:372
+#: ../panels/wacom/cc-wacom-stylus-page.c:377
 msgid "Button"
 msgstr "단추"
 
@@ -6865,12 +6867,15 @@ msgstr "와콤 디지타이저"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:2
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
-msgstr "그래픽 디지타이저의 단추 매핑을 설정하고 스타일러스의 민감도를 조정합니다"
+msgstr ""
+"그래픽 디지타이저의 단추 매핑을 설정하고 스타일러스의 민감도를 조정합니다"
 
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr "Tablet;태블릿;디지타이저;Wacom;와콤;Stylus;스타일러스;Eraser;지우개;Mouse;마우스;"
+msgstr ""
+"Tablet;태블릿;디지타이저;Wacom;와콤;Stylus;스타일러스;Eraser;지우개;Mouse;마"
+"우스;"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
 msgid "Tablet (absolute)"
@@ -6925,86 +6930,86 @@ msgid "Left-Handed Orientation"
 msgstr "왼손잡이 방향"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1024
+#: ../panels/wacom/gsd-wacom-device.c:1028
 msgid "Left Ring"
 msgstr "왼쪽 링"
 
-#: ../panels/wacom/gsd-wacom-device.c:1035
+#: ../panels/wacom/gsd-wacom-device.c:1039
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "%d번 왼쪽 링 모드"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1055
+#: ../panels/wacom/gsd-wacom-device.c:1059
 msgid "Right Ring"
 msgstr "오른쪽 링"
 
-#: ../panels/wacom/gsd-wacom-device.c:1066
+#: ../panels/wacom/gsd-wacom-device.c:1070
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "%d번 오른쪽 링 모드"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1108
+#: ../panels/wacom/gsd-wacom-device.c:1112
 msgid "Left Touchstrip"
 msgstr "왼쪽 터치스트립"
 
-#: ../panels/wacom/gsd-wacom-device.c:1119
+#: ../panels/wacom/gsd-wacom-device.c:1123
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "%d번 왼쪽 터치스트립 모드"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1139
+#: ../panels/wacom/gsd-wacom-device.c:1143
 msgid "Right Touchstrip"
 msgstr "오른쪽 터치스트립"
 
-#: ../panels/wacom/gsd-wacom-device.c:1150
+#: ../panels/wacom/gsd-wacom-device.c:1154
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "%d번 오른쪽 터치스트립 모드"
 
-#: ../panels/wacom/gsd-wacom-device.c:1176
+#: ../panels/wacom/gsd-wacom-device.c:1180
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "왼쪽 터치링 모드 전환"
 
-#: ../panels/wacom/gsd-wacom-device.c:1178
+#: ../panels/wacom/gsd-wacom-device.c:1182
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "오른쪽 터치링 모드 전환"
 
-#: ../panels/wacom/gsd-wacom-device.c:1181
+#: ../panels/wacom/gsd-wacom-device.c:1185
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "왼쪽 터치스트립 모드 전환"
 
-#: ../panels/wacom/gsd-wacom-device.c:1183
+#: ../panels/wacom/gsd-wacom-device.c:1187
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "오른쪽 터치스트립 모드 전환"
 
-#: ../panels/wacom/gsd-wacom-device.c:1188
+#: ../panels/wacom/gsd-wacom-device.c:1192
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "%d번 모드 전환"
 
-#: ../panels/wacom/gsd-wacom-device.c:1296
+#: ../panels/wacom/gsd-wacom-device.c:1300
 #, c-format
 msgid "Left Button #%d"
 msgstr "%d번 왼쪽 단추"
 
-#: ../panels/wacom/gsd-wacom-device.c:1299
+#: ../panels/wacom/gsd-wacom-device.c:1303
 #, c-format
 msgid "Right Button #%d"
 msgstr "%d번 오른쪽 단추"
 
-#: ../panels/wacom/gsd-wacom-device.c:1302
+#: ../panels/wacom/gsd-wacom-device.c:1306
 #, c-format
 msgid "Top Button #%d"
 msgstr "%d번 위 단추"
 
-#: ../panels/wacom/gsd-wacom-device.c:1305
+#: ../panels/wacom/gsd-wacom-device.c:1309
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "%d번 아래 단추"
@@ -7081,6 +7086,20 @@ msgstr "아래 단추"
 msgid "Tip Pressure Feel"
 msgstr "팁 압력 감도"
 
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:1
+msgid "GNOME Control Center"
+msgstr "그놈 제어 센터"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:2
+msgid "Utilities to configure the GNOME desktop"
+msgstr "그놈 데스크톱 설정 프로그램"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:3
+msgid ""
+"The control center is GNOME's main interface for configuration of various "
+"aspects of your desktop."
+msgstr "제어 센터는 그놈 데스크톱의 여러가지 사항을 설정하는 주요 인터페이스입니다."
+
 # 커맨드라인 설명. 문장으로 번역
 #: ../shell/cc-application.c:69
 msgid "Enable verbose mode"
@@ -7140,22 +7159,22 @@ msgstr "도움말"
 msgid "Quit"
 msgstr "끝내기"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1493
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
 msgid "All Settings"
 msgstr "전체 설정"
 
 #. Add categories
-#: ../shell/cc-window.c:879
+#: ../shell/cc-window.c:880
 msgctxt "category"
 msgid "Personal"
 msgstr "개인"
 
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Hardware"
 msgstr "하드웨어"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "System"
 msgstr "시스템"
