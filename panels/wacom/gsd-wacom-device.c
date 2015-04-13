@@ -2107,6 +2107,12 @@ gsd_wacom_device_rotation_type_to_name (GsdWacomRotation type)
 	return "none";
 }
 
+GdkDevice *
+gsd_wacom_device_get_gdk_device (GsdWacomDevice *device)
+{
+	return device->priv->gdk_device;
+}
+
 GsdWacomDevice *
 gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 			      const char         *name,

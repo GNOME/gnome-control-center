@@ -224,7 +224,7 @@ run_calibration (CcWacomPage *page,
 	old_axis.y_max = cal[3];
 
 	priv = page->priv;
-	g_object_get (priv->stylus, "gdk-device", &gdk_device, NULL);
+	gdk_device = gsd_wacom_device_get_gdk_device (priv->stylus);
 
 	if (gdk_device != NULL)
 		g_object_get (gdk_device, "device-id", &device_id, NULL);
@@ -484,7 +484,7 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 
 	priv = page->priv;
 
-	g_object_get (priv->pad, "gdk-device", &gdk_device, NULL);
+	gdk_device = gsd_wacom_device_get_gdk_device (priv->pad);
 
 	g_return_if_fail (gdk_device != NULL);
 
