@@ -60,6 +60,7 @@ struct _CcColorPanelPrivate
   GtkListBox    *list_box;
   gchar         *list_box_filter;
   guint          list_box_selected_id;
+  guint          list_box_activated_id;
   GtkSizeGroup  *list_box_size;
   gboolean       is_live_cd;
   gboolean       model_is_changing;
@@ -2003,6 +2004,17 @@ gcm_prefs_refresh_toolbar_buttons (CcColorPanel *panel)
 }
 
 static void
+gcm_prefs_list_box_row_activated_cb (GtkListBox *list_box,
+                                     GtkListBoxRow *row,
+                                     CcColorPanel *prefs)
+{
+  if (CC_IS_COLOR_PROFILE (row))
+    {
+      gcm_prefs_device_profile_enable_cb (NULL, prefs);
+    }
+}
+
+static void
 gcm_prefs_connect_cb (GObject *object,
                       GAsyncResult *res,
                       gpointer user_data)
@@ -2115,6 +2127,11 @@ cc_color_panel_dispose (GObject *object)
       g_signal_handler_disconnect (priv->list_box,
                                    priv->list_box_selected_id);
       priv->list_box_selected_id = 0;
+
+      /* row-activated event should be connected at this point */
+      g_signal_handler_disconnect (priv->list_box,
+                                   priv->list_box_activated_id);
+      priv->list_box_activated_id = 0;
     }
 
   /* stop the devices from emitting after the ListBox has been disposed */
@@ -2501,10 +2518,15 @@ cc_color_panel_init (CcColorPanel *prefs)
                                 prefs, NULL);
   gtk_list_box_set_selection_mode (priv->list_box,
                                    GTK_SELECTION_SINGLE);
+  gtk_list_box_set_activate_on_single_click (priv->list_box, FALSE);
   priv->list_box_selected_id =
     g_signal_connect (priv->list_box, "row-selected",
                       G_CALLBACK (gcm_prefs_list_box_row_selected_cb),
                       prefs);
+  priv->list_box_activated_id =
+    g_signal_connect (priv->list_box, "row-activated",
+                    G_CALLBACK (gcm_prefs_list_box_row_activated_cb),
+                    prefs);
   priv->list_box_size = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_devices"));
