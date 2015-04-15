@@ -107,7 +107,7 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 {
 	int numdevices, i;
 	XDeviceInfo *devicelist;
-	Atom realtype, prop_capabilities, prop_scroll_methods;
+	Atom realtype, prop_capabilities, prop_scroll_methods, prop_tapping_enabled;
 	int realformat;
 	unsigned long nitems, bytes_after;
 	unsigned char *data;
@@ -115,7 +115,8 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 
 	prop_capabilities = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Capabilities", False);
 	prop_scroll_methods = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Scroll Methods Available", False);
-	if (!prop_capabilities || !prop_scroll_methods)
+	prop_tapping_enabled = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Tapping Enabled", False);
+	if (!prop_capabilities || !prop_scroll_methods || !prop_tapping_enabled)
 		return;
 
 	tap_to_click = FALSE;
@@ -160,6 +161,16 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 
 			if (data[0] && data[1])
 				two_finger_scroll = TRUE;
+
+			XFree (data);
+		}
+
+		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_tapping_enabled,
+					0, 1, False, XA_INTEGER, &realtype, &realformat, &nitems,
+					&bytes_after, &data) == Success) && (realtype != None)) {
+			/* Property data is boolean for tapping enabled. */
+
+			tap_to_click = TRUE;
 
 			XFree (data);
 		}
