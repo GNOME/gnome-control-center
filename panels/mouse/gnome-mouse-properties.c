@@ -111,10 +111,14 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 	int realformat;
 	unsigned long nitems, bytes_after;
 	unsigned char *data;
+	gboolean tap_to_click, two_finger_scroll;
 
 	prop = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Capabilities", True);
 	if (!prop)
 		return;
+
+	tap_to_click = FALSE;
+	two_finger_scroll = FALSE;
 
 	devicelist = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &numdevices);
 	for (i = 0; i < numdevices; i++) {
@@ -133,14 +137,14 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 					 &bytes_after, &data) == Success) && (realtype != None)) {
 			/* Property data is booleans for has_left, has_middle, has_right, has_double, has_triple.
 			 * Newer drivers (X.org/kerrnel) will also include has_pressure and has_width. */
-			if (!data[0]) {
-				gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), FALSE);
-			}
 
-			/* Disable two finger scrolling unless the hardware supports
-			 * double touch */
-			if (!(data[3]))
-				gtk_widget_set_sensitive (WID ("two_finger_scroll_toggle"), FALSE);
+			/* Set tap_to_click_toggle sensitive only if the device has hardware buttons */
+			if (data[0])
+				tap_to_click = TRUE;
+
+			/* Set two_finger_scroll_toggle sensitive if the hardware supports double touch */
+			if (data[3])
+				two_finger_scroll = TRUE;
 
 			XFree (data);
 		}
@@ -149,6 +153,9 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 	}
 	XFreeDeviceList (devicelist);
+
+	gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), tap_to_click);
+	gtk_widget_set_sensitive (WID ("two_finger_scroll_toggle"), two_finger_scroll);
 }
 
 static void
