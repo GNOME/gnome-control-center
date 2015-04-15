@@ -107,14 +107,15 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 {
 	int numdevices, i;
 	XDeviceInfo *devicelist;
-	Atom realtype, prop;
+	Atom realtype, prop_capabilities, prop_scroll_methods;
 	int realformat;
 	unsigned long nitems, bytes_after;
 	unsigned char *data;
 	gboolean tap_to_click, two_finger_scroll;
 
-	prop = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Capabilities", True);
-	if (!prop)
+	prop_capabilities = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Capabilities", False);
+	prop_scroll_methods = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Scroll Methods Available", False);
+	if (!prop_capabilities || !prop_scroll_methods)
 		return;
 
 	tap_to_click = FALSE;
@@ -132,8 +133,10 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 			continue;
 
 		gdk_error_trap_push ();
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop, 0, 2, False,
-					 XA_INTEGER, &realtype, &realformat, &nitems,
+
+		/* xorg-x11-drv-synaptics */
+		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_capabilities,
+					 0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
 					 &bytes_after, &data) == Success) && (realtype != None)) {
 			/* Property data is booleans for has_left, has_middle, has_right, has_double, has_triple.
 			 * Newer drivers (X.org/kerrnel) will also include has_pressure and has_width. */
@@ -148,6 +151,19 @@ synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
 
 			XFree (data);
 		}
+
+		/* xorg-x11-drv-libinput */
+		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_scroll_methods,
+					 0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
+					 &bytes_after, &data) == Success) && (realtype != None)) {
+			/* Property data is booleans for two-finger, edge, on-button scroll available. */
+
+			if (data[0] && data[1])
+				two_finger_scroll = TRUE;
+
+			XFree (data);
+		}
+
 		gdk_error_trap_pop_ignored ();
 
 		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
