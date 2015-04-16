@@ -639,6 +639,9 @@ update_widget (PpPPDOptionWidget *widget)
 {
   PpPPDOptionWidgetPrivate *priv = widget->priv;
 
+  priv->ppd_filename_set = FALSE;
+  priv->destination_set = FALSE;
+
   get_named_dest_async (priv->printer_name,
                         get_named_dest_cb,
                         widget);
