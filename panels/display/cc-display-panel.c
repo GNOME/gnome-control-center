@@ -1661,11 +1661,12 @@ make_resolution_string (GnomeRRMode *mode)
   gint width = gnome_rr_mode_get_width (mode);
   gint height = gnome_rr_mode_get_height (mode);
   const char *aspect = make_aspect_string (width, height);
+  const char *interlaced = gnome_rr_mode_get_is_interlaced (mode) ? "i" : "";
 
   if (aspect != NULL)
-    return g_strdup_printf ("%d × %d (%s)", width, height, aspect);
+    return g_strdup_printf ("%d × %d%s (%s)", width, height, interlaced, aspect);
   else
-    return g_strdup_printf ("%d × %d", width, height);
+    return g_strdup_printf ("%d × %d%s", width, height, interlaced);
 }
 
 static GtkWidget *
