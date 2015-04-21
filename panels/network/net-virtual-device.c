@@ -448,6 +448,7 @@ net_virtual_device_add_row (NetVirtualDevice *virtual_device,
 
         label = gtk_label_new (label_string);
         gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+        gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
         gtk_container_add (GTK_CONTAINER (grid), label);
 
         context = gtk_widget_get_style_context (label);
