@@ -1935,9 +1935,11 @@ add_automatic_suspend_section (CcPowerPanel *self)
 
   if (result)
     {
-      g_variant_get (result, "(s)", &s);
-      if (g_strcmp0 (s, "yes") == 0)
+      GVariant *result_variant = g_variant_get_child_value (result, 0);
+      if (g_strcmp0 (g_variant_get_string (result_variant, NULL), "yes") == 0)
         value = 1;
+
+      g_variant_unref(result_variant);
       g_variant_unref(result);
     }
 
