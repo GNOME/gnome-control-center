@@ -48,7 +48,7 @@ active_state_ready_callback (GObject      *source_object,
                              GAsyncResult *result,
                              CallbackData *callback_data)
 {
-  GVariant *active_variant, *tmp_variant;
+  GVariant *active_variant, *child_variant, *tmp_variant;
   const gchar *active_state;
   gboolean active;
   GError *error = NULL;
@@ -71,13 +71,15 @@ active_state_ready_callback (GObject      *source_object,
       return;
     }
 
-  g_variant_get (active_variant, "(v)", &tmp_variant);
+  child_variant = g_variant_get_child_value (active_variant, 0);
+  tmp_variant = g_variant_get_variant (child_variant);
   active_state = g_variant_get_string (tmp_variant, NULL);
 
   active = g_str_equal (active_state, "active");
 
-  g_variant_unref (active_variant);
   g_variant_unref (tmp_variant);
+  g_variant_unref (child_variant);
+  g_variant_unref (active_variant);
 
   /* set the switch to the correct state */
   if (callback_data->gtkswitch)
@@ -91,8 +93,8 @@ path_ready_callback (GObject      *source_object,
                      GAsyncResult *result,
                      CallbackData *callback_data)
 {
-  GVariant *path_variant;
-  gchar *object_path;
+  GVariant *path_variant, *child_variant;
+  const gchar *object_path;
   GError *error = NULL;
 
   path_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -122,7 +124,8 @@ path_ready_callback (GObject      *source_object,
       return;
     }
 
-  g_variant_get (path_variant, "(o)", &object_path);
+  child_variant = g_variant_get_child_value (path_variant, 0);
+  object_path = g_variant_get_string (child_variant, NULL);
 
   g_dbus_connection_call (G_DBUS_CONNECTION (source_object),
                           "org.freedesktop.systemd1",
@@ -139,6 +142,7 @@ path_ready_callback (GObject      *source_object,
                           (GAsyncReadyCallback) active_state_ready_callback,
                           callback_data);
 
+  g_variant_unref (child_variant);
   g_variant_unref (path_variant);
 }
 
@@ -147,7 +151,7 @@ state_ready_callback (GObject      *source_object,
                       GAsyncResult *result,
                       CallbackData *callback_data)
 {
-  GVariant *state_variant;
+  GVariant *state_variant, *child_variant;
   const gchar *state_string;
   GError *error = NULL;
 
@@ -177,7 +181,8 @@ state_ready_callback (GObject      *source_object,
       return;
     }
 
-  g_variant_get (state_variant, "(s)", &state_string);
+  child_variant = g_variant_get_child_value (state_variant, 0);
+  state_string = g_variant_get_string (child_variant, NULL);
 
   if (g_str_equal (state_string, "enabled"))
     {
@@ -210,6 +215,7 @@ state_ready_callback (GObject      *source_object,
       g_free (callback_data);
     }
 
+  g_variant_unref (child_variant);
   g_variant_unref (state_variant);
 }
 
