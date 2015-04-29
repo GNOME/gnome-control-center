@@ -136,7 +136,6 @@ set_calibration (GsdWacomDevice *device,
 {
 	GVariant    *current; /* current calibration */
 	GVariant    *array;   /* new calibration */
-	GVariant    *last_resolution;
 	GVariant   **tmp;
 	gsize        nvalues;
 	gint         i;
@@ -160,13 +159,6 @@ set_calibration (GsdWacomDevice *device,
 	g_debug ("Setting area top (%d, %d) bottom (%d, %d) (last used resolution: %d x %d)",
 		 cal[0], cal[1], cal[2], cal[3],
 		 display_width, display_height);
-
-	/* set the last-calibration-resolution */
-	last_resolution = g_variant_new ("(ii)", display_width, display_height);
-	settings = gsd_wacom_device_get_settings (device);
-	g_settings_set_value (settings,
-			      "last-calibrated-resolution",
-			      last_resolution);
 }
 
 static void
