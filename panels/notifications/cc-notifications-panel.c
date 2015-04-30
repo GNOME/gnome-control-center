@@ -193,6 +193,11 @@ add_application (CcNotificationsPanel *panel,
 {
   GtkWidget *box, *w, *row;
   GIcon *icon;
+  const gchar *app_name;
+
+  app_name = g_app_info_get_name (app->app_info);
+  if (app_name == NULL || *app_name == '\0')
+    return;
 
   icon = g_app_info_get_icon (app->app_info);
   if (icon == NULL)
@@ -214,7 +219,7 @@ add_application (CcNotificationsPanel *panel,
   gtk_container_add (GTK_CONTAINER (box), w);
   g_object_unref (icon);
 
-  w = gtk_label_new (g_app_info_get_name (app->app_info));
+  w = gtk_label_new (app_name);
   gtk_container_add (GTK_CONTAINER (box), w);
 
   w = gtk_label_new ("");
