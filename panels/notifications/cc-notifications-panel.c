@@ -216,6 +216,7 @@ add_application (CcNotificationsPanel *panel,
 
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
   gtk_widget_set_margin_start (w, 12);
+  gtk_size_group_add_widget (GTK_SIZE_GROUP (gtk_builder_get_object (panel->builder, "sizegroup1")), w);
   gtk_container_add (GTK_CONTAINER (box), w);
   g_object_unref (icon);
 
