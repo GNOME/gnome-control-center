@@ -142,6 +142,7 @@ static void
 cc_notifications_panel_init (CcNotificationsPanel *panel)
 {
   GtkWidget *w;
+  GtkWidget *label;
   GError *error = NULL;
 
   g_resources_register (cc_notifications_get_resource ());
@@ -184,8 +185,17 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
+  label = GTK_WIDGET (gtk_builder_get_object (panel->builder,
+                                              "label1"));
   w = GTK_WIDGET (gtk_builder_get_object (panel->builder,
                                           "ccnotify-app-listbox"));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
+                               ATK_RELATION_LABEL_FOR,
+                               ATK_OBJECT (gtk_widget_get_accessible (w)));
+  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (w)),
+                               ATK_RELATION_LABELLED_BY,
+                               ATK_OBJECT (gtk_widget_get_accessible (label)));
+
   panel->sections = g_list_append (panel->sections, w);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, w);
   g_signal_connect (w, "keynav-failed", G_CALLBACK (keynav_failed), panel);
