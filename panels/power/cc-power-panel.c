@@ -397,7 +397,6 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   GtkWidget *levelbar;
   GtkWidget *widget;
   gchar *s;
-  gchar *native_path;
   gchar *icon_name;
   const gchar *name;
 
@@ -405,11 +404,10 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
                 "kind", &kind,
                 "state", &state,
                 "percentage", &percentage,
-                "native-path", &native_path,
                 "icon-name", &icon_name,
                 NULL);
 
-  if (native_path && strstr (native_path, "BAT0"))
+  if (g_object_get_data (G_OBJECT (device), "is-main-battery") != NULL)
     name = C_("Battery name", "Main");
   else
     name = C_("Battery name", "Extra");
@@ -471,7 +469,6 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   gtk_size_group_add_widget (priv->row_sizegroup, row);
   gtk_widget_show_all (row);
 
-  g_free (native_path);
   g_free (icon_name);
 
   gtk_widget_set_visible (priv->battery_section, TRUE);
@@ -726,13 +723,22 @@ up_client_changed (UpClient     *client,
     }
   else
     {
+      gboolean is_extra_battery = FALSE;
+
       /* Count the batteries */
       for (i = 0; priv->devices != NULL && i < priv->devices->len; i++)
         {
           UpDevice *device = (UpDevice*) g_ptr_array_index (priv->devices, i);
           g_object_get (device, "kind", &kind, NULL);
           if (kind == UP_DEVICE_KIND_BATTERY)
-            n_batteries++;
+            {
+              n_batteries++;
+              if (is_extra_battery == FALSE)
+                {
+                  is_extra_battery = TRUE;
+                  g_object_set_data (G_OBJECT (device), "is-main-battery", GINT_TO_POINTER(TRUE));
+                }
+            }
         }
     }
 
