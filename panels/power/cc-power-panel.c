@@ -97,6 +97,7 @@ struct _CcPowerPanelPrivate
   GDBusProxy    *bt_rfkill;
   GDBusProxy    *bt_properties;
   GtkWidget     *bt_switch;
+  GtkWidget     *bt_row;
 
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
@@ -1167,14 +1168,27 @@ static void
 bt_powered_state_changed (CcPowerPanel *panel)
 {
   CcPowerPanelPrivate *priv = panel->priv;
-  gboolean powered;
+  gboolean powered, has_airplane_mode;
   GVariant *v;
+
+  v = g_dbus_proxy_get_cached_property (priv->bt_rfkill, "BluetoothHasAirplaneMode");
+  has_airplane_mode = g_variant_get_boolean (v);
+  g_variant_unref (v);
+
+  if (!has_airplane_mode)
+    {
+      g_debug ("BluetoothHasAirplaneMode is false, hiding Bluetooth power row");
+      gtk_widget_hide (priv->bt_row);
+      return;
+    }
 
   v = g_dbus_proxy_get_cached_property (priv->bt_rfkill, "BluetoothAirplaneMode");
   powered = !g_variant_get_boolean (v);
   g_variant_unref (v);
 
   g_debug ("bt powered state changed to %s", powered ? "on" : "off");
+
+  gtk_widget_show (priv->bt_row);
 
   g_signal_handlers_block_by_func (priv->bt_switch, bt_switch_changed, panel);
   gtk_switch_set_active (GTK_SWITCH (priv->bt_switch), powered);
@@ -1655,33 +1669,37 @@ add_power_saving_section (CcPowerPanel *self)
 							   "/org/gnome/SettingsDaemon/Rfkill",
 							   "org.freedesktop.DBus.Properties",
 							   NULL, NULL);
-      row = no_prelight_row_new ();
-      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
-      gtk_container_add (GTK_CONTAINER (row), box);
-      label = gtk_label_new (_("_Bluetooth"));
-      gtk_widget_set_halign (label, GTK_ALIGN_START);
-      gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-      gtk_widget_set_margin_start (label, 20);
-      gtk_widget_set_margin_end (label, 20);
-      gtk_widget_set_margin_top (label, 6);
-      gtk_widget_set_margin_bottom (label, 6);
-      gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-
-      priv->bt_switch = sw = gtk_switch_new ();
-      gtk_widget_set_margin_start (sw, 20);
-      gtk_widget_set_margin_end (sw, 20);
-      gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
-      gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
-      gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-      gtk_container_add (GTK_CONTAINER (widget), row);
-      gtk_size_group_add_widget (priv->row_sizegroup, row);
-      g_signal_connect_swapped (G_OBJECT (priv->bt_rfkill), "g-properties-changed",
-				G_CALLBACK (bt_powered_state_changed), self);
-      g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
-			G_CALLBACK (bt_switch_changed), self);
-
-      bt_powered_state_changed (self);
     }
+
+  row = no_prelight_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_container_add (GTK_CONTAINER (row), box);
+  label = gtk_label_new (_("_Bluetooth"));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_start (label, 20);
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  priv->bt_switch = sw = gtk_switch_new ();
+  gtk_widget_set_margin_start (sw, 20);
+  gtk_widget_set_margin_end (sw, 20);
+  gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  gtk_container_add (GTK_CONTAINER (widget), row);
+  gtk_size_group_add_widget (priv->row_sizegroup, row);
+  gtk_widget_show_all (box);
+  gtk_widget_set_no_show_all (row, TRUE);
+  priv->bt_row = row;
+  g_signal_connect_swapped (G_OBJECT (priv->bt_rfkill), "g-properties-changed",
+			G_CALLBACK (bt_powered_state_changed), self);
+  g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
+		G_CALLBACK (bt_switch_changed), self);
+
+  bt_powered_state_changed (self);
 #endif
 
   gtk_widget_show_all (widget);
