@@ -986,6 +986,10 @@ edit_custom_shortcut (CcKeyboardItem *item)
 
   g_settings_delay (settings);
 
+  gtk_widget_set_sensitive (custom_shortcut_name_entry,
+                            item->desc_editable);
+  gtk_widget_set_sensitive (custom_shortcut_command_entry,
+                            item->cmd_editable);
   gtk_window_present (GTK_WINDOW (custom_shortcut_dialog));
   result = gtk_dialog_run (GTK_DIALOG (custom_shortcut_dialog));
   switch (result)
