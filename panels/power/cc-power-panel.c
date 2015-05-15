@@ -92,7 +92,6 @@ struct _CcPowerPanelPrivate
   GtkWidget     *automatic_suspend_row;
   GtkWidget     *automatic_suspend_label;
   GtkWidget     *critical_battery_row;
-  GtkWidget     *critical_battery_combo;
 
   GDBusProxy    *bt_rfkill;
   GDBusProxy    *bt_properties;
@@ -1037,30 +1036,6 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
 }
 
 static void
-combo_enum_changed_cb (GtkWidget *widget, CcPowerPanel *self)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gint value;
-  gboolean ret;
-  const gchar *key = (const gchar *)g_object_get_data (G_OBJECT(widget), "_gsettings_key");
-
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-  if (!ret)
-    return;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
-
-  /* set both battery and ac keys */
-  g_settings_set_enum (self->priv->gsd_settings, key, value);
-}
-
-static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
   GtkTreeIter iter;
@@ -1752,15 +1727,6 @@ on_suspend_settings_changed (GSettings    *settings,
                              const char   *key,
                              CcPowerPanel *self)
 {
-  CcPowerPanelPrivate *priv = self->priv;
-  gint value;
-
-  if (g_strcmp0 (key, "critical-battery-action") == 0 &&
-      priv->critical_battery_combo != NULL)
-    {
-      value = g_settings_get_enum (settings, "critical-battery-action");
-      set_value_for_combo (GTK_COMBO_BOX (priv->critical_battery_combo), value);
-    }
   if (g_str_has_prefix (key, "sleep-inactive-"))
     {
       update_automatic_suspend_label (self);
@@ -1835,12 +1801,11 @@ add_automatic_suspend_section (CcPowerPanel *self)
   GtkWidget *sw, *row;
   gchar *s;
   gint value;
-  GtkTreeModel *model;
   GtkWidget *dialog;
   GtkWidget *combo;
-  GtkCellRenderer *cell;
   GVariant *result;
   GDBusConnection *connection;
+  const char *critical_battery_str;
 
   /* The default values for these settings are unfortunate for us;
    * timeout == 0, action == suspend means 'do nothing' - just
@@ -1935,14 +1900,12 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
-  value = 0;
-
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
   result = g_dbus_connection_call_sync (connection,
-                                        "org.freedesktop.login1",
-                                        "/org/freedesktop/login1",
-                                        "org.freedesktop.login1.Manager",
-                                        "CanHibernate",
+                                        "org.freedesktop.UPower",
+                                        "/org/freedesktop/UPower",
+                                        "org.freedesktop.UPower",
+                                        "GetCriticalAction",
                                         NULL,
                                         NULL,
                                         G_DBUS_CALL_FLAGS_NONE,
@@ -1953,43 +1916,38 @@ add_automatic_suspend_section (CcPowerPanel *self)
 
   if (result)
     {
-      GVariant *result_variant = g_variant_get_child_value (result, 0);
-      if (g_strcmp0 (g_variant_get_string (result_variant, NULL), "yes") == 0)
-        value = 1;
+      GVariant *result_variant;
+      const char *str;
+
+      result_variant = g_variant_get_child_value (result, 0);
+      str = g_variant_get_string (result_variant, NULL);
+
+      if (g_strcmp0 (str, "Hibernate") == 0 ||
+          g_strcmp0 (str, "HybridSleep") == 0)
+        critical_battery_str = _("Hibernate");
+      else if (g_strcmp0 (str, "PowerOff") == 0)
+        critical_battery_str = _("Power Off");
+      else
+        {
+          g_debug ("Unexpected value returned by UPower for GetCriticalAction(): %s", str);
+          critical_battery_str = _("Power Off");
+        }
 
       g_variant_unref(result_variant);
       g_variant_unref(result);
     }
-
-  if (value)
-    {
-      model = (GtkTreeModel*)gtk_builder_get_object (priv->builder, "liststore_critical");
-      priv->critical_battery_combo = sw = gtk_combo_box_new_with_model (model);
-      gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-      cell = gtk_cell_renderer_text_new ();
-      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (sw), cell, TRUE);
-      gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (sw), cell, "text", 0);
-      gtk_widget_set_margin_start (sw, 20);
-      gtk_widget_set_margin_end (sw, 20);
-      gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
-
-      g_object_set_data (G_OBJECT (sw), "_gsettings_key", "critical-battery-action");
-      value = g_settings_get_enum (priv->gsd_settings, "critical-battery-action");
-      set_value_for_combo (GTK_COMBO_BOX (sw), value);
-      g_signal_connect (sw, "changed",
-                        G_CALLBACK (combo_enum_changed_cb), self);
-
-      gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
-    }
   else
     {
-      label = gtk_label_new (_("Power Off"));
-      gtk_widget_set_margin_start (label, 20);
-      gtk_widget_set_margin_end (label, 20);
-      gtk_widget_set_margin_top (label, 6);
-      gtk_widget_set_margin_bottom (label, 6);
-      gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+      g_debug ("GetCriticalAction() call failed, is UPower correctly installed?");
+      critical_battery_str = _("Power Off");
     }
+
+  label = gtk_label_new (critical_battery_str);
+  gtk_widget_set_margin_start (label, 20);
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
 
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (priv->row_sizegroup, row);
