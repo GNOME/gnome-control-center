@@ -91,8 +91,6 @@ struct _CcPowerPanelPrivate
 
   GtkWidget     *automatic_suspend_row;
   GtkWidget     *automatic_suspend_label;
-  GtkWidget     *critical_battery_row;
-  GtkWidget     *critical_battery_combo;
 
   GDBusProxy    *bt_rfkill;
   GDBusProxy    *bt_properties;
@@ -1123,8 +1121,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
 
   self->priv->has_batteries = has_batteries;
 
-  gtk_widget_set_visible (self->priv->critical_battery_row, has_batteries);
-
   if (!has_batteries)
     {
       gtk_widget_hide (WID (self->priv->builder, "suspend_on_battery_switch"));
@@ -1753,14 +1749,7 @@ on_suspend_settings_changed (GSettings    *settings,
                              CcPowerPanel *self)
 {
   CcPowerPanelPrivate *priv = self->priv;
-  gint value;
 
-  if (g_strcmp0 (key, "critical-battery-action") == 0 &&
-      priv->critical_battery_combo != NULL)
-    {
-      value = g_settings_get_enum (settings, "critical-battery-action");
-      set_value_for_combo (GTK_COMBO_BOX (priv->critical_battery_combo), value);
-    }
   if (g_str_has_prefix (key, "sleep-inactive-"))
     {
       update_automatic_suspend_label (self);
@@ -1923,76 +1912,6 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_size_group_add_widget (priv->row_sizegroup, row);
   update_automatic_suspend_label (self);
 
-  priv->critical_battery_row = row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_container_add (GTK_CONTAINER (row), box);
-  label = gtk_label_new (_("When battery power is _critical"));
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_start (label, 20);
-  gtk_widget_set_margin_end (label, 20);
-  gtk_widget_set_margin_top (label, 6);
-  gtk_widget_set_margin_bottom (label, 6);
-  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-
-  value = 0;
-
-  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
-  result = g_dbus_connection_call_sync (connection,
-                                        "org.freedesktop.login1",
-                                        "/org/freedesktop/login1",
-                                        "org.freedesktop.login1.Manager",
-                                        "CanHibernate",
-                                        NULL,
-                                        NULL,
-                                        G_DBUS_CALL_FLAGS_NONE,
-                                        -1,
-                                        NULL,
-                                        NULL);
-  g_object_unref (connection);
-
-  if (result)
-    {
-      GVariant *result_variant = g_variant_get_child_value (result, 0);
-      if (g_strcmp0 (g_variant_get_string (result_variant, NULL), "yes") == 0)
-        value = 1;
-
-      g_variant_unref(result_variant);
-      g_variant_unref(result);
-    }
-
-  if (value)
-    {
-      model = (GtkTreeModel*)gtk_builder_get_object (priv->builder, "liststore_critical");
-      priv->critical_battery_combo = sw = gtk_combo_box_new_with_model (model);
-      gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-      cell = gtk_cell_renderer_text_new ();
-      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (sw), cell, TRUE);
-      gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (sw), cell, "text", 0);
-      gtk_widget_set_margin_start (sw, 20);
-      gtk_widget_set_margin_end (sw, 20);
-      gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
-
-      g_object_set_data (G_OBJECT (sw), "_gsettings_key", "critical-battery-action");
-      value = g_settings_get_enum (priv->gsd_settings, "critical-battery-action");
-      set_value_for_combo (GTK_COMBO_BOX (sw), value);
-      g_signal_connect (sw, "changed",
-                        G_CALLBACK (combo_enum_changed_cb), self);
-
-      gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
-    }
-  else
-    {
-      label = gtk_label_new (_("Power Off"));
-      gtk_widget_set_margin_start (label, 20);
-      gtk_widget_set_margin_end (label, 20);
-      gtk_widget_set_margin_top (label, 6);
-      gtk_widget_set_margin_bottom (label, 6);
-      gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
-    }
-
-  gtk_container_add (GTK_CONTAINER (widget), row);
-  gtk_size_group_add_widget (priv->row_sizegroup, row);
   gtk_widget_show_all (widget);
 
   dialog = priv->automatic_suspend_dialog;
