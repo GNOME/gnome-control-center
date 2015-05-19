@@ -1,4 +1,51 @@
 ==============
+Version 3.10.4
+==============
+
+- Translation updates
+
+Common:
+- Disable SSLv3 because of POODLE
+
+Color:
+- Do not crash when toggling devices and reopening the panel
+
+Date & Time:
+- Fix crash when setting year to 0
+
+Info:
+- Fix incorrect virtualisation technology being displayed
+- Check for prepared updates
+- Fix crash when using vboxvideo glx driver
+
+Keyboard:
+- Fix a crash if the WM changes (or restarts)
+
+Network:
+- Fix warning on startup
+- Fix network icon names for newer versions
+- Fix typo in NetworkManager version checking
+- Report hotspot is running only if device is active
+- Also work with NM 1.0
+- Fix possible crash when handling zone names
+
+Printers:
+- Don't fail when adding Samba printers with spaces on their name
+
+Sound:
+- Fix the main volume bars to correctly display changes in volume
+- Prevent two alerts being played at the same time under certain
+  circumstances
+- Fix a crash when switching inputs or outputs
+
+Users:
+- Fix hang on password change
+
+Wacom:
+- Fix stylus back/forward button assignments
+- Allow button mapping if the stylus has one button too
+
+==============
 Version 3.10.3
 ==============
 
