@@ -1326,9 +1326,9 @@ printer_configure_async (PpNewPrinter *new_printer)
 
   /* Set media size for printer */
   values = g_new0 (gchar *, 2);
-  values[0] = g_strdup (get_paper_size_from_locale ());
+  values[0] = g_strdup (get_page_size_from_locale ());
 
-  printer_add_option_async (priv->name, "media", values, TRUE, NULL, pao_cb, data);
+  printer_add_option_async (priv->name, "PageSize", values, FALSE, NULL, pao_cb, data);
 
   g_strfreev (values);
 

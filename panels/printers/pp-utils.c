@@ -1331,14 +1331,14 @@ printer_get_hostname (cups_ptype_t  printer_type,
   return result;
 }
 
-/* Returns default media size for current locale */
+/* Returns default page size for current locale */
 const gchar *
-get_paper_size_from_locale ()
+get_page_size_from_locale (void)
 {
   if (g_str_equal (gtk_paper_size_get_default (), GTK_PAPER_NAME_LETTER))
-    return "na-letter";
+    return "Letter";
   else
-    return "iso-a4";
+    return "A4";
 }
 
 typedef struct
