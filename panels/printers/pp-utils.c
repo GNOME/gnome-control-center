@@ -1341,64 +1341,6 @@ get_paper_size_from_locale ()
     return "iso-a4";
 }
 
-/* Set default media size according to the locale */
-void
-printer_set_default_media_size (const gchar *printer_name)
-{
-  GVariantBuilder  array_builder;
-  GDBusConnection *bus;
-  GVariant        *output;
-  GError          *error = NULL;
-
-  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (!bus)
-   {
-     g_warning ("Failed to get system bus: %s", error->message);
-     g_error_free (error);
-     return;
-   }
-
-  g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
-  g_variant_builder_add (&array_builder, "s", get_paper_size_from_locale ());
-
-  output = g_dbus_connection_call_sync (bus,
-                                        MECHANISM_BUS,
-                                        "/",
-                                        MECHANISM_BUS,
-                                        "PrinterAddOption",
-                                        g_variant_new ("(ssas)",
-                                                       printer_name,
-                                                       "media",
-                                                       &array_builder),
-                                        G_VARIANT_TYPE ("(s)"),
-                                        G_DBUS_CALL_FLAGS_NONE,
-                                        -1,
-                                        NULL,
-                                        &error);
-
-  g_object_unref (bus);
-
-  if (output)
-    {
-      const gchar *ret_error;
-
-      g_variant_get (output, "(&s)", &ret_error);
-      if (ret_error[0] != '\0')
-        g_warning ("cups-pk-helper: setting of media size for printer %s failed: %s", printer_name, ret_error);
-
-      g_variant_unref (output);
-    }
-  else
-    {
-      if (!(error->domain == G_DBUS_ERROR &&
-            (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
-             error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
-        g_warning ("%s", error->message);
-      g_error_free (error);
-    }
-}
-
-
 typedef struct
 {
   gchar        *printer_name;
