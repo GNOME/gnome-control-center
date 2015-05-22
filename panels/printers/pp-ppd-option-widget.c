@@ -524,9 +524,6 @@ update_widget_real (PpPPDOptionWidget *widget)
       if (ppd_file)
         {
           ppdMarkDefaults (ppd_file);
-          cupsMarkOptions (ppd_file,
-                           priv->destination->num_options,
-                           priv->destination->options);
 
           for (iter = ppdFirstOption(ppd_file); iter; iter = ppdNextOption(ppd_file))
             {

@@ -297,7 +297,7 @@ PpPrintDevice *pp_print_device_copy (PpPrintDevice *device);
 
 void         pp_devices_list_free (PpDevicesList *result);
 
-const gchar *get_paper_size_from_locale (void);
+const gchar *get_page_size_from_locale (void);
 
 typedef void (*GCDCallback) (GList          *devices,
                              gboolean        finished,
