@@ -51,6 +51,8 @@ struct _NetDeviceEthernet
         GtkWidget *details_button;
         GtkWidget *add_profile_button;
         gboolean   updating_device;
+
+        GHashTable *connections;
 };
 
 struct _NetDeviceEthernetClass
