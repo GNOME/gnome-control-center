@@ -64,8 +64,7 @@ static void     new_printer_dialog_response_cb (GtkDialog *_dialog,
                                                 gpointer   user_data);
 static void     update_spinner_state (PpNewPrinterDialog *dialog);
 static void     add_devices_to_list (PpNewPrinterDialog  *dialog,
-                                     GList               *devices,
-                                     gboolean             new_device);
+                                     GList               *devices);
 static void     remove_device_from_list (PpNewPrinterDialog *dialog,
                                          const gchar        *device_name);
 
@@ -84,7 +83,7 @@ struct _PpNewPrinterDialogPrivate
   GtkBuilder *builder;
 
   GList *devices;
-  GList *new_devices;
+  GList *local_cups_devices;
 
   cups_dest_t *dests;
   gint         num_of_dests;
@@ -331,9 +330,7 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
 
           if (result->devices != NULL)
             {
-              add_devices_to_list (dialog,
-                                   result->devices,
-                                   FALSE);
+              add_devices_to_list (dialog, result->devices);
 
               device = (PpPrintDevice *) result->devices->data;
               if (device != NULL)
@@ -511,8 +508,8 @@ pp_new_printer_dialog_finalize (GObject *object)
   g_list_free_full (priv->devices, (GDestroyNotify) pp_print_device_free);
   priv->devices = NULL;
 
-  g_list_free_full (priv->new_devices, (GDestroyNotify) pp_print_device_free);
-  priv->new_devices = NULL;
+  g_list_free_full (priv->local_cups_devices, (GDestroyNotify) pp_print_device_free);
+  priv->local_cups_devices = NULL;
 
   if (priv->num_of_dests > 0)
     {
@@ -599,9 +596,8 @@ remove_device_from_list (PpNewPrinterDialog *dialog,
 }
 
 static void
-add_device_to_list (PpNewPrinterDialog *dialog,
-                    PpPrintDevice      *device,
-                    gboolean            new_device)
+add_device_to_list (PpNewPrinterDialog  *dialog,
+                    PpPrintDevice       *device)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   PpPrintDevice             *store_device;
@@ -629,7 +625,7 @@ add_device_to_list (PpNewPrinterDialog *dialog,
           store_device->show = TRUE;
 
           canonicalized_name = canonicalize_device_name (priv->devices,
-                                                         priv->new_devices,
+                                                         priv->local_cups_devices,
                                                          priv->dests,
                                                          priv->num_of_dests,
                                                          store_device);
@@ -639,13 +635,13 @@ add_device_to_list (PpNewPrinterDialog *dialog,
           g_free (store_device->device_name);
           store_device->device_name = canonicalized_name;
 
-          if (new_device)
-            priv->new_devices = g_list_append (priv->new_devices, store_device);
+          if (device->acquisition_method == ACQUISITION_METHOD_DEFAULT_CUPS_SERVER)
+            priv->local_cups_devices = g_list_append (priv->local_cups_devices, store_device);
           else
             priv->devices = g_list_append (priv->devices, store_device);
         }
       else if (device->is_authenticated_server &&
-              device->host_name != NULL)
+               device->host_name != NULL)
         {
           store_device = g_new0 (PpPrintDevice, 1);
           store_device->device_name = g_strdup (device->host_name);
@@ -660,14 +656,13 @@ add_device_to_list (PpNewPrinterDialog *dialog,
 
 static void
 add_devices_to_list (PpNewPrinterDialog  *dialog,
-                     GList               *devices,
-                     gboolean             new_device)
+                     GList               *devices)
 {
   GList *iter;
 
   for (iter = devices; iter; iter = iter->next)
     {
-      add_device_to_list (dialog, (PpPrintDevice *) iter->data, new_device);
+      add_device_to_list (dialog, (PpPrintDevice *) iter->data);
     }
 }
 
@@ -725,72 +720,59 @@ group_physical_devices_cb (gchar    ***device_uris,
 {
   PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  PpPrintDevice             *device, *tmp;
+  PpPrintDevice             *device, *better_device;
+  GList                     *iter;
   gint                       i, j;
 
-  if (device_uris)
+  if (device_uris != NULL)
     {
-      for (i = 0; device_uris[i]; i++)
+      for (i = 0; device_uris[i] != NULL; i++)
         {
-          if (device_uris[i])
+          /* Is there any device in this sublist? */
+          if (device_uris[i][0] != NULL)
             {
-              for (j = 0; device_uris[i][j]; j++)
+              for (j = 0; device_uris[i][j] != NULL; j++)
                 {
                   device = device_in_list (device_uris[i][j], priv->devices);
-                  if (device)
+                  if (device != NULL)
                     break;
                 }
 
-              if (device)
+              /* Is this sublist represented in the current list of devices? */
+              if (device != NULL)
                 {
-                  for (j = 0; device_uris[i][j]; j++)
+                  /* Is there better device in the sublist? */
+                  if (j != 0)
                     {
-                      tmp = device_in_list (device_uris[i][j], priv->new_devices);
-                      if (tmp)
+                      better_device = device_in_list (device_uris[i][0], priv->local_cups_devices);
+                      iter = g_list_find (priv->devices, device);
+                      if (iter != NULL && better_device != NULL)
                         {
-                          priv->new_devices = g_list_remove (priv->new_devices, tmp);
-                          pp_print_device_free (tmp);
+                          iter->data = pp_print_device_copy (better_device);
+                          pp_print_device_free (device);
                         }
                     }
                 }
               else
                 {
-                  for (j = 0; device_uris[i][j]; j++)
+                  device = device_in_list (device_uris[i][0], priv->local_cups_devices);
+                  if (device != NULL)
                     {
-                      tmp = device_in_list (device_uris[i][j], priv->new_devices);
-                      if (tmp)
-                        {
-                          priv->new_devices = g_list_remove (priv->new_devices, tmp);
-                          if (j == 0)
-                            {
-                              priv->devices = g_list_append (priv->devices, tmp);
-                            }
-                          else
-                            {
-                              pp_print_device_free (tmp);
-                            }
-                        }
+                      priv->devices = g_list_append (priv->devices, pp_print_device_copy (device));
                     }
                 }
             }
         }
 
-      for (i = 0; device_uris[i]; i++)
-        {
-          for (j = 0; device_uris[i][j]; j++)
-            {
-              g_free (device_uris[i][j]);
-            }
-
-          g_free (device_uris[i]);
-        }
+      for (i = 0; device_uris[i] != NULL; i++)
+        g_strfreev (device_uris[i]);
 
       g_free (device_uris);
     }
   else
     {
-      priv->devices = g_list_concat (priv->devices, priv->new_devices);
-      priv->new_devices = NULL;
+      priv->devices = g_list_concat (priv->devices, priv->local_cups_devices);
+      priv->local_cups_devices = NULL;
     }
 
   actualize_devices_list (dialog);
@@ -907,11 +889,9 @@ get_cups_devices_cb (GList    *devices,
 
       if (devices)
         {
-          add_devices_to_list (dialog,
-                               devices,
-                               TRUE);
+          add_devices_to_list (dialog, devices);
 
-          length = g_list_length (priv->devices) + g_list_length (devices);
+          length = g_list_length (priv->devices) + g_list_length (priv->local_cups_devices);
           if (length > 0)
             {
               all_devices = g_new0 (PpPrintDevice *, length);
@@ -931,7 +911,7 @@ get_cups_devices_cb (GList    *devices,
                     }
                 }
 
-              for (iter = devices; iter != NULL; iter = iter->next)
+              for (iter = priv->local_cups_devices; iter != NULL; iter = iter->next)
                 {
                   pp_device = (PpPrintDevice *) iter->data;
                   if (pp_device != NULL)
@@ -1045,9 +1025,7 @@ get_snmp_devices_cb (GObject      *source_object,
 
       if (result->devices)
         {
-          add_devices_to_list (dialog,
-                               result->devices,
-                               FALSE);
+          add_devices_to_list (dialog, result->devices);
         }
 
       actualize_devices_list (dialog);
@@ -1100,9 +1078,7 @@ get_remote_cups_devices_cb (GObject      *source_object,
 
       if (result->devices)
         {
-          add_devices_to_list (dialog,
-                               result->devices,
-                               FALSE);
+          add_devices_to_list (dialog, result->devices);
         }
 
       actualize_devices_list (dialog);
@@ -1155,9 +1131,7 @@ get_samba_host_devices_cb (GObject      *source_object,
 
       if (result->devices)
         {
-          add_devices_to_list (dialog,
-                               result->devices,
-                               FALSE);
+          add_devices_to_list (dialog, result->devices);
         }
 
       actualize_devices_list (dialog);
@@ -1208,9 +1182,7 @@ get_samba_devices_cb (GObject      *source_object,
 
       if (result->devices)
         {
-          add_devices_to_list (dialog,
-                               result->devices,
-                               FALSE);
+          add_devices_to_list (dialog, result->devices);
         }
 
       actualize_devices_list (dialog);
@@ -1261,9 +1233,7 @@ get_jetdirect_devices_cb (GObject      *source_object,
 
       if (result->devices != NULL)
         {
-          add_devices_to_list (dialog,
-                               result->devices,
-                               FALSE);
+          add_devices_to_list (dialog, result->devices);
         }
 
       actualize_devices_list (dialog);
@@ -1315,9 +1285,7 @@ get_lpd_devices_cb (GObject      *source_object,
 
       if (result->devices != NULL)
         {
-          add_devices_to_list (dialog,
-                               result->devices,
-                               FALSE);
+          add_devices_to_list (dialog, result->devices);
         }
 
       actualize_devices_list (dialog);
@@ -1568,26 +1536,6 @@ search_address (const gchar        *text,
               tmp = iter;
               iter = iter->next;
               priv->devices = g_list_remove_link (priv->devices, tmp);
-              g_list_free_full (tmp, (GDestroyNotify) pp_print_device_free);
-            }
-          else
-            iter = iter->next;
-        }
-
-      iter = priv->new_devices;
-      while (iter)
-        {
-          device = iter->data;
-
-          if (device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER ||
-              device->acquisition_method == ACQUISITION_METHOD_SNMP ||
-              device->acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
-              device->acquisition_method == ACQUISITION_METHOD_LPD ||
-              device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
-            {
-              tmp = iter;
-              iter = iter->next;
-              priv->new_devices = g_list_remove_link (priv->new_devices, tmp);
               g_list_free_full (tmp, (GDestroyNotify) pp_print_device_free);
             }
           else
@@ -2022,7 +1970,7 @@ ppd_selection_cb (GtkDialog *_dialog,
           priv->new_device->device_original_name = g_strdup (ppd_display_name);
 
           printer_name = canonicalize_device_name (priv->devices,
-                                                   priv->new_devices,
+                                                   priv->local_cups_devices,
                                                    priv->dests,
                                                    priv->num_of_dests,
                                                    priv->new_device);

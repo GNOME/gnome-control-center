@@ -4159,7 +4159,7 @@ guess_device_hostname (PpPrintDevice *device)
 
 gchar *
 canonicalize_device_name (GList         *devices,
-                          GList         *new_devices,
+                          GList         *local_cups_devices,
                           cups_dest_t   *dests,
                           gint           num_of_dests,
                           PpPrintDevice *device)
@@ -4283,7 +4283,7 @@ canonicalize_device_name (GList         *devices,
             already_present = TRUE;
         }
 
-      for (iter = new_devices; iter; iter = iter->next)
+      for (iter = local_cups_devices; iter; iter = iter->next)
         {
           item = (PpPrintDevice *) iter->data;
           if (g_strcmp0 (item->device_original_name, new_name) == 0)
