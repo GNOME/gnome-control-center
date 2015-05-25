@@ -369,6 +369,7 @@ static void
 connection_removed (NMRemoteConnection *connection,
                     NetDeviceEthernet  *device)
 {
+        g_hash_table_remove (device->connections, connection);
         device_ethernet_refresh_ui (device);
 }
 
@@ -395,10 +396,10 @@ populate_ui (NetDeviceEthernet *device)
         connections = net_device_get_valid_connections (NET_DEVICE (device));
         for (l = connections; l; l = l->next) {
                 NMConnection *connection = l->data;
-                if (!g_object_get_data (G_OBJECT (connection), "removed_signal_handler")) {
-                        g_signal_connect (connection, "removed",
-                                          G_CALLBACK (connection_removed), device);
-                        g_object_set_data (G_OBJECT (connection), "removed_signal_handler", GINT_TO_POINTER (TRUE));
+                if (!g_hash_table_contains (device->connections, connection)) {
+                        g_hash_table_add (device->connections, connection);
+                        g_signal_connect_object (connection, "removed",
+                                                 G_CALLBACK (connection_removed), device, 0);
                 }
         }
         n_connections = g_slist_length (connections);
@@ -585,19 +586,9 @@ static void
 device_ethernet_finalize (GObject *object)
 {
         NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
-        GSList *connections, *l;
 
         g_object_unref (device->builder);
-
-        connections = net_device_get_valid_connections (NET_DEVICE (device));
-        for (l = connections; l; l = l->next) {
-                NMConnection *connection = l->data;
-                if (g_object_get_data (G_OBJECT (connection), "removed_signal_handler")) {
-                        g_signal_handlers_disconnect_by_func (connection, connection_removed, device);
-                        g_object_set_data (G_OBJECT (connection), "removed_signal_handler", NULL);
-                }
-        }
-        g_slist_free (connections);
+        g_hash_table_destroy (device->connections);
 
         G_OBJECT_CLASS (net_device_ethernet_parent_class)->finalize (object);
 }
@@ -637,4 +628,6 @@ net_device_ethernet_init (NetDeviceEthernet *device)
                 g_error_free (error);
                 return;
         }
+
+        device->connections = g_hash_table_new (NULL, NULL);
 }
