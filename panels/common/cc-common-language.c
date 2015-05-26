@@ -46,7 +46,7 @@ iter_for_language (GtkTreeModel *model,
         char *name;
         char *language;
 
-        gtk_tree_model_get_iter_first (model, iter);
+        g_assert (gtk_tree_model_get_iter_first (model, iter));
         do {
                 gtk_tree_model_get (model, iter, LOCALE_COL, &l, -1);
                 if (g_strcmp0 (l, lang) == 0) {
