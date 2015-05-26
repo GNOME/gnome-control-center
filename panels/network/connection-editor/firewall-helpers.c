@@ -25,7 +25,7 @@
 #include "firewall-helpers.h"
 
 typedef struct {
-        const gchar *zone;
+        gchar *zone;
         GtkWidget *combo;
 } GetZonesReplyData;
 
