@@ -429,7 +429,7 @@ categories_keynav_failed (GtkIconView      *current_view,
           sel = NULL;
           dist = 1000;
           model = gtk_icon_view_get_model (new_view);
-          gtk_tree_model_get_iter_first (model, &iter);
+          g_assert (gtk_tree_model_get_iter_first (model, &iter));
           do {
             path = gtk_tree_model_get_path (model, &iter);
             c = gtk_icon_view_get_item_column (new_view, path);
@@ -466,7 +466,7 @@ categories_keynav_failed (GtkIconView      *current_view,
           sel = NULL;
           dist = 1000;
           model = gtk_icon_view_get_model (new_view);
-          gtk_tree_model_get_iter_first (model, &iter);
+          g_assert (gtk_tree_model_get_iter_first (model, &iter));
           do {
             path = gtk_tree_model_get_path (model, &iter);
             c = gtk_icon_view_get_item_column (new_view, path);
