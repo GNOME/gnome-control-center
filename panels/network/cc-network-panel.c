@@ -471,10 +471,10 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
                 if (g_strcmp0 (net_object_get_id (object),
                                net_object_get_id (object_tmp)) == 0) {
                         g_object_unref (object_tmp);
-                        if (!gtk_list_store_remove (GTK_LIST_STORE (model), &iter))
-                                gtk_tree_model_get_iter_first (model, &iter);
-                        gtk_tree_selection_select_iter (selection, &iter);
-
+                        if (gtk_list_store_remove (GTK_LIST_STORE (model), &iter)) {
+                                if (gtk_tree_model_get_iter_first (model, &iter))
+                                        gtk_tree_selection_select_iter (selection, &iter);
+                        }
                         break;
                 }
                 g_object_unref (object_tmp);
