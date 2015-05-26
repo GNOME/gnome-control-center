@@ -764,7 +764,7 @@ reload_sections (CcPanel *panel)
           return;
 	}
     }
-  gtk_tree_model_get_iter_first (sort_model, &iter);
+  g_assert (gtk_tree_model_get_iter_first (sort_model, &iter));
   selection = gtk_tree_view_get_selection (section_treeview);
   gtk_tree_selection_select_iter (selection, &iter);
 
