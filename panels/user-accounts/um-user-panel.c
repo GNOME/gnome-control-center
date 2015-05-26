@@ -349,7 +349,7 @@ user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         model = gtk_tree_view_get_model (tv);
         selection = gtk_tree_view_get_selection (tv);
 
-        gtk_tree_model_get_iter_first (model, &iter);
+        g_assert (gtk_tree_model_get_iter_first (model, &iter));
         do {
                 gtk_tree_model_get (model, &iter, USER_COL, &current, -1);
                 if (current == user) {
@@ -409,7 +409,7 @@ select_created_user (GObject *object,
         selection = gtk_tree_view_get_selection (tv);
         user_uid = act_user_get_uid (user);
 
-        gtk_tree_model_get_iter_first (model, &iter);
+        g_assert (gtk_tree_model_get_iter_first (model, &iter));
         do {
                 gtk_tree_model_get (model, &iter, USER_COL, &current, -1);
                 if (current) {
