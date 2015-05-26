@@ -4161,6 +4161,9 @@ canonicalize_device_name (GList         *devices,
       name = g_strdup (device->device_info);
     }
 
+  if (name == NULL)
+    return NULL;
+
   g_strstrip (name);
   g_strcanon (name, ALLOWED_CHARACTERS, '-');
 
