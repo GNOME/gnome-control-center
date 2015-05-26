@@ -291,7 +291,7 @@ update_alert_model (GvcSoundThemeChooser  *chooser,
         GtkTreeIter   iter;
 
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (chooser->priv->treeview));
-        gtk_tree_model_get_iter_first (model, &iter);
+        g_assert (gtk_tree_model_get_iter_first (model, &iter));
         do {
                 char    *this_id;
 
