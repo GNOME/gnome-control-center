@@ -133,8 +133,8 @@ net_device_bridge_device_set (NetVirtualDevice *virtual_device,
 {
         NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (virtual_device);
 
-        g_signal_connect (nm_device, "notify::slaves",
-                          G_CALLBACK (nm_device_slaves_changed), device_bridge);
+        g_signal_connect_object (nm_device, "notify::slaves",
+                                 G_CALLBACK (nm_device_slaves_changed), device_bridge, 0);
         nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_bridge);
 }
 
