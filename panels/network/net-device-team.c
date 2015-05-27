@@ -133,8 +133,8 @@ net_device_team_device_set (NetVirtualDevice *virtual_device,
 {
         NetDeviceTeam *device_team = NET_DEVICE_TEAM (virtual_device);
 
-        g_signal_connect (nm_device, "notify::slaves",
-                          G_CALLBACK (nm_device_slaves_changed), device_team);
+        g_signal_connect_object (nm_device, "notify::slaves",
+                                 G_CALLBACK (nm_device_slaves_changed), device_team, 0);
         nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_team);
 }
 

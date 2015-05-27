@@ -133,8 +133,8 @@ net_device_bond_device_set (NetVirtualDevice *virtual_device,
 {
         NetDeviceBond *device_bond = NET_DEVICE_BOND (virtual_device);
 
-        g_signal_connect (nm_device, "notify::slaves",
-                          G_CALLBACK (nm_device_slaves_changed), device_bond);
+        g_signal_connect_object (nm_device, "notify::slaves",
+                                 G_CALLBACK (nm_device_slaves_changed), device_bond, 0);
         nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_bond);
 }
 
