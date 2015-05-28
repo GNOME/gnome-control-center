@@ -191,6 +191,8 @@ pp_new_printer_dialog_new (GtkWindow *parent,
 
   gtk_window_set_transient_for (GTK_WINDOW (priv->dialog), GTK_WINDOW (parent));
 
+  gtk_widget_show_all (priv->dialog);
+
   return PP_NEW_PRINTER_DIALOG (dialog);
 }
 
@@ -421,8 +423,6 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 
   /* Fill with data */
   populate_devices_list (dialog);
-
-  gtk_widget_show (priv->dialog);
 }
 
 static void
