@@ -1786,6 +1786,18 @@ cups_get_dests_cb (GObject      *source_object,
 }
 
 static void
+row_activated_cb (GtkTreeView       *tree_view,
+                  GtkTreePath       *path,
+                  GtkTreeViewColumn *column,
+                  gpointer           user_data)
+{
+  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+
+  gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_OK);
+}
+
+static void
 cell_data_func (GtkTreeViewColumn  *tree_column,
                 GtkCellRenderer    *cell,
                 GtkTreeModel       *tree_model,
@@ -1858,6 +1870,9 @@ populate_devices_list (PpNewPrinterDialog *dialog)
 
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
                     "changed", G_CALLBACK (device_selection_changed_cb), dialog);
+
+  g_signal_connect (treeview,
+                    "row-activated", G_CALLBACK (row_activated_cb), dialog);
 
   priv->local_printer_icon = g_themed_icon_new ("printer");
   priv->remote_printer_icon = g_themed_icon_new ("printer-network");
