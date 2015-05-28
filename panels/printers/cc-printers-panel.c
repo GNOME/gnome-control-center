@@ -2995,10 +2995,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   if (priv->lockdown_settings)
-    g_signal_connect (priv->lockdown_settings,
-                      "changed",
-                      G_CALLBACK (on_lockdown_settings_changed),
-                      self);
+    g_signal_connect_object (priv->lockdown_settings,
+                             "changed",
+                             G_CALLBACK (on_lockdown_settings_changed),
+                             self,
+                             G_CONNECT_AFTER);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-model-button");
@@ -3029,8 +3030,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
     "org.opensuse.cupspkhelper.mechanism.all-edit", NULL, NULL, NULL);
   if (priv->permission != NULL)
     {
-      g_signal_connect (priv->permission, "notify",
-                        G_CALLBACK (on_permission_changed), self);
+      g_signal_connect_object (priv->permission,
+                               "notify",
+                               G_CALLBACK (on_permission_changed),
+                               self,
+                               G_CONNECT_AFTER);
       on_permission_changed (priv->permission, NULL, self);
     }
   else
