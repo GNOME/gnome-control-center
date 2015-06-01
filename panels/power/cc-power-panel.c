@@ -1089,30 +1089,6 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
 }
 
 static void
-combo_enum_changed_cb (GtkWidget *widget, CcPowerPanel *self)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gint value;
-  gboolean ret;
-  const gchar *key = (const gchar *)g_object_get_data (G_OBJECT(widget), "_gsettings_key");
-
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-  if (!ret)
-    return;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
-
-  /* set both battery and ac keys */
-  g_settings_set_enum (self->priv->gsd_settings, key, value);
-}
-
-static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
   GtkTreeIter iter;
@@ -1873,8 +1849,6 @@ on_suspend_settings_changed (GSettings    *settings,
                              const char   *key,
                              CcPowerPanel *self)
 {
-  CcPowerPanelPrivate *priv = self->priv;
-
   if (g_str_has_prefix (key, "sleep-inactive-"))
     {
       update_automatic_suspend_label (self);
@@ -1949,12 +1923,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
   GtkWidget *sw, *row;
   gchar *s;
   gint value;
-  GtkTreeModel *model;
   GtkWidget *dialog;
   GtkWidget *combo;
-  GtkCellRenderer *cell;
-  GVariant *result;
-  GDBusConnection *connection;
 
   /* The default values for these settings are unfortunate for us;
    * timeout == 0, action == suspend means 'do nothing' - just
