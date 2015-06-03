@@ -172,6 +172,12 @@ sound_name (pa_channel_position_t position)
                 return "audio-channel-side-left";
         case PA_CHANNEL_POSITION_SIDE_RIGHT:
                 return "audio-channel-side-right";
+        case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
+                return "audio-channel-front-left-of-center";
+        case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
+                return "audio-channel-front-right-of-center";
+        case PA_CHANNEL_POSITION_MONO:
+                return "audio-channel-mono";
         default:
                 return NULL;
         }
@@ -199,6 +205,12 @@ icon_name (pa_channel_position_t position, gboolean playing)
                 return playing ? "audio-speaker-left-side-testing" : "audio-speaker-left-side";
         case PA_CHANNEL_POSITION_SIDE_RIGHT:
                 return playing ? "audio-speaker-right-side-testing" : "audio-speaker-right-side";
+        case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
+                return playing ? "audio-speaker-front-left-of-center-testing" : "audio-speaker-front-left-of-center";
+        case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
+                return playing ? "audio-speaker-front-right-of-center-testing" : "audio-speaker-front-right-of-center";
+        case PA_CHANNEL_POSITION_MONO:
+                return playing ? "audio-speaker-mono-testing" : "audio-speaker-mono";
         default:
                 return NULL;
         }
