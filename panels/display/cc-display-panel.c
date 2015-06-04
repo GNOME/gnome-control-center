@@ -87,6 +87,10 @@ struct _CcDisplayPanelPrivate
 
   GDBusProxy *shell_proxy;
   GCancellable *shell_cancellable;
+
+  guint       sensor_watch_id;
+  GDBusProxy *iio_sensor_proxy;
+  gboolean    has_accelerometer;
 };
 
 typedef struct
@@ -188,6 +192,14 @@ cc_display_panel_dispose (GObject *object)
   CcDisplayPanelPrivate *priv = CC_DISPLAY_PANEL (object)->priv;
   CcShell *shell;
   GtkWidget *toplevel;
+
+  if (priv->sensor_watch_id > 0)
+    {
+      g_bus_unwatch_name (priv->sensor_watch_id);
+      priv->sensor_watch_id = 0;
+    }
+
+  g_clear_object (&priv->iio_sensor_proxy);
 
   if (output_ids)
     {
@@ -1987,6 +1999,30 @@ sanity_check_rotation (GnomeRROutputInfo *output)
   gnome_rr_output_info_set_rotation (output, rotation);
 }
 
+static gboolean
+should_show_rotation (CcDisplayPanel *panel,
+                      GnomeRROutput  *output)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  gboolean supports_rotation;
+
+  supports_rotation = gnome_rr_output_info_supports_rotation (priv->current_output,
+                                                              GNOME_RR_ROTATION_90 |
+                                                              GNOME_RR_ROTATION_180 |
+                                                              GNOME_RR_ROTATION_270);
+
+  /* Doesn't support rotation at all */
+  if (!supports_rotation)
+    return FALSE;
+
+  /* We can always rotate displays that aren't builtin */
+  if (!gnome_rr_output_is_builtin_display (output))
+    return TRUE;
+
+  /* Only offer rotation if there's no accelerometer */
+  return !priv->has_accelerometer;
+}
+
 static void
 show_setup_dialog (CcDisplayPanel *panel)
 {
@@ -2051,10 +2087,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_grid_attach (GTK_GRID (priv->config_grid), preview, 0, 0, 2, 1);
 
   /* rotation */
-  show_rotation = gnome_rr_output_info_supports_rotation (priv->current_output,
-                                                          GNOME_RR_ROTATION_90 |
-                                                          GNOME_RR_ROTATION_180 |
-                                                          GNOME_RR_ROTATION_270);
+  show_rotation = should_show_rotation (panel, output);
   rotation = gnome_rr_output_info_get_rotation (priv->current_output);
 
   if (show_rotation)
@@ -2425,6 +2458,84 @@ shell_proxy_ready (GObject        *source,
 }
 
 static void
+update_has_accel (CcDisplayPanel *self)
+{
+  GVariant *v;
+
+  if (self->priv->iio_sensor_proxy == NULL)
+    {
+      g_debug ("Has no accelerometer");
+      self->priv->has_accelerometer = FALSE;
+      return;
+    }
+
+  v = g_dbus_proxy_get_cached_property (self->priv->iio_sensor_proxy, "HasAccelerometer");
+  if (v)
+    {
+      self->priv->has_accelerometer = g_variant_get_boolean (v);
+      g_variant_unref (v);
+    }
+  else
+    {
+      self->priv->has_accelerometer = FALSE;
+    }
+
+  g_debug ("Has %saccelerometer", self->priv->has_accelerometer ? "" : "no ");
+}
+
+static void
+sensor_proxy_properties_changed_cb (GDBusProxy     *proxy,
+                                    GVariant       *changed_properties,
+                                    GStrv           invalidated_properties,
+                                    CcDisplayPanel *self)
+{
+  GVariantDict dict;
+
+  g_variant_dict_init (&dict, changed_properties);
+
+  if (g_variant_dict_contains (&dict, "HasAccelerometer"))
+    update_has_accel (self);
+}
+
+static void
+sensor_proxy_appeared_cb (GDBusConnection *connection,
+                          const gchar     *name,
+                          const gchar     *name_owner,
+                          gpointer         user_data)
+{
+  CcDisplayPanel *self = user_data;
+
+  g_debug ("SensorProxy appeared");
+
+  self->priv->iio_sensor_proxy = g_dbus_proxy_new_sync (connection,
+                                                        G_DBUS_PROXY_FLAGS_NONE,
+                                                        NULL,
+                                                        "net.hadess.SensorProxy",
+                                                        "/net/hadess/SensorProxy",
+                                                        "net.hadess.SensorProxy",
+                                                        NULL,
+                                                        NULL);
+  g_return_if_fail (self->priv->iio_sensor_proxy);
+
+  g_signal_connect (self->priv->iio_sensor_proxy, "g-properties-changed",
+                    G_CALLBACK (sensor_proxy_properties_changed_cb), self);
+  update_has_accel (self);
+}
+
+static void
+sensor_proxy_vanished_cb (GDBusConnection *connection,
+                          const gchar     *name,
+                          gpointer         user_data)
+{
+  CcDisplayPanel *self = user_data;
+
+  g_debug ("SensorProxy vanished");
+
+  g_clear_object (&self->priv->iio_sensor_proxy);
+  update_has_accel (self);
+}
+
+static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
@@ -2521,4 +2632,12 @@ cc_display_panel_init (CcDisplayPanel *self)
                             self->priv->shell_cancellable,
                             (GAsyncReadyCallback) shell_proxy_ready,
                             self);
+
+  priv->sensor_watch_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
+                                            "net.hadess.SensorProxy",
+                                            G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                            sensor_proxy_appeared_cb,
+                                            sensor_proxy_vanished_cb,
+                                            self,
+                                            NULL);
 }
