@@ -94,6 +94,7 @@ date_endian_get_default (gboolean verbose)
 			return DEFAULT_ENDIANESS;
 		}
 		switch (c) {
+		case 'A':
 		case 'd':
 		case 'e':
 			if (has_item (items, ITEM_DAY) == FALSE) {
@@ -116,7 +117,6 @@ date_endian_get_default (gboolean verbose)
 				i++;
 			}
 			break;
-		case 'A':
 		case 'a':
 			/* Ignore */
 			;
