@@ -22,7 +22,8 @@
 typedef enum {
   DATE_ENDIANESS_BIG,    /* Big-endian (year, month, day), e.g. 03-04-05 */
   DATE_ENDIANESS_LITTLE, /* Little-endian (day, month, year), e.g. 05/04/03 */
-  DATE_ENDIANESS_MIDDLE  /* Middle-endian (month, day, year), e.g. 04/05/03 */
+  DATE_ENDIANESS_MIDDLE, /* Middle-endian (month, day, year), e.g. 04/05/03 */
+  DATE_ENDIANESS_YDM     /* YDM-endian (year, day, month), e.g. 03/05/04 */
 } DateEndianess;
 
 DateEndianess date_endian_get_default  (gboolean verbose);

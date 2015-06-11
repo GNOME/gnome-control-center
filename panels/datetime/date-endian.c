@@ -135,6 +135,10 @@ date_endian_get_default (gboolean verbose)
 	    items[1] == ITEM_DAY &&
 	    items[2] == ITEM_YEAR)
 		return DATE_ENDIANESS_MIDDLE;
+	if (items[0] == ITEM_YEAR &&
+	    items[1] == ITEM_DAY &&
+	    items[2] == ITEM_MONTH)
+		return DATE_ENDIANESS_YDM;
 
 	g_warning ("Could not parse format '%s'", fmt);
 
@@ -165,6 +169,8 @@ date_endian_to_string (DateEndianess endianess)
 		return "Big (YYYY-MM-DD)";
 	case DATE_ENDIANESS_MIDDLE:
 		return "Middle (MM-DD-YYYY)";
+        case DATE_ENDIANESS_YDM:
+		return "YDM (YYYY-DD-MM)";
 	default:
 		g_assert_not_reached ();
 	}
