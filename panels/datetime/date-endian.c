@@ -25,8 +25,8 @@
 
 #include "date-endian.h"
 
-/* We default to returning DATE_ENDIANESS_MIDDLE because that's
- * what 3.2 billion people use */
+/* We default to returning DATE_ENDIANESS_LITTLE because that's
+ * what 3.4 billion people use */
 #define DEFAULT_ENDIANESS DATE_ENDIANESS_LITTLE
 
 typedef enum {
