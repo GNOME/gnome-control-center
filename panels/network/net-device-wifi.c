@@ -1555,6 +1555,7 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_show (button_stack);
 
         widget = gtk_label_new ("");
+        gtk_widget_show (widget);
         gtk_container_add (GTK_CONTAINER (button_stack), widget);
 
         widget = NULL;
