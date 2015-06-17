@@ -471,7 +471,7 @@ show_helper_text_title (CalibArea *area)
   area->helper_msg_timeline = transition;
 }
 
-static void
+static gboolean
 on_fullscreen (GtkWindow           *window,
                GdkEventWindowState *event,
                CalibArea           *area)
@@ -479,11 +479,11 @@ on_fullscreen (GtkWindow           *window,
   ClutterRect rect;
 
   if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
-    return;
+    return FALSE;
 
   /* Protect against window state multiple changes*/
   if (CLUTTER_ACTOR_IS_VISIBLE (area->action_layer))
-    return;
+    return FALSE;
 
   clutter_actor_show (area->action_layer);
   clutter_actor_show (area->clock);
@@ -503,6 +503,7 @@ on_fullscreen (GtkWindow           *window,
                        - clutter_actor_get_height (area->helper_text_body));
 
   show_helper_text_title (area);
+  return FALSE;
 }
 
 static void
