@@ -45,18 +45,8 @@ struct _CcApplicationPrivate
 
 G_DEFINE_TYPE (CcApplication, cc_application, GTK_TYPE_APPLICATION)
 
-G_GNUC_NORETURN static gboolean
-option_version_cb (const gchar *option_name,
-                   const gchar *value,
-                   gpointer     data,
-                   GError     **error)
-{
-  g_print ("%s %s\n", PACKAGE, VERSION);
-  exit (0);
-}
-
 const GOptionEntry all_options[] = {
-  { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
+  { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, NULL, N_("Enable verbose mode"), NULL },
   { "overview", 'o', 0, G_OPTION_ARG_NONE, NULL, N_("Show the overview"), NULL },
   { "search", 's', 0, G_OPTION_ARG_STRING, NULL, N_("Search for the string"), "SEARCH" },
@@ -112,6 +102,12 @@ launch_panel_activated (GSimpleAction *action,
 static gint
 cc_application_handle_local_options (GApplication *application, GVariantDict *options)
 {
+  if (g_variant_dict_contains (options, "version"))
+    {
+      g_print ("%s %s\n", PACKAGE, VERSION);
+      return 0;
+    }
+
   if (g_variant_dict_contains (options, "list"))
     {
       GList *panels, *l;
