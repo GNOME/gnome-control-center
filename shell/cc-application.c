@@ -123,8 +123,6 @@ cc_application_command_line (GApplication *application,
   int argc;
   char **argv;
   int retval = 0;
-  GOptionContext *context;
-  GError *error = NULL;
 
   verbose = FALSE;
   show_overview = FALSE;
@@ -132,25 +130,11 @@ cc_application_command_line (GApplication *application,
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
 
-  context = g_option_context_new (N_("- Settings"));
-  g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
-  g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
-  g_option_context_add_group (context, gtk_get_option_group (TRUE));
-
   start_panels = NULL;
   search_str = NULL;
   show_overview = FALSE;
   verbose = FALSE;
   list_panels = FALSE;
-
-  if (g_option_context_parse (context, &argc, &argv, &error) == FALSE)
-    {
-      g_print (_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
-               error->message, argv[0]);
-      g_error_free (error);
-      g_option_context_free (context);
-      return 1;
-    }
 
   if (list_panels)
     {
@@ -224,7 +208,6 @@ cc_application_command_line (GApplication *application,
 
   show_overview = FALSE;
 
-  g_option_context_free (context);
   g_strfreev (argv);
 
   return retval;
@@ -334,6 +317,8 @@ cc_application_dispose (GObject *object)
 static void
 cc_application_init (CcApplication *self)
 {
+  g_application_add_main_option_entries (G_APPLICATION (self), all_options);
+
   self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self,
                                             CC_TYPE_APPLICATION,
                                             CcApplicationPrivate);
