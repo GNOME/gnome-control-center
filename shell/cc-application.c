@@ -55,19 +55,13 @@ option_version_cb (const gchar *option_name,
   exit (0);
 }
 
-static char **start_panels = NULL;
-static char *search_str = NULL;
-static gboolean show_overview = FALSE;
-static gboolean verbose = FALSE;
-static gboolean list_panels = FALSE;
-
 const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
-  { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("Enable verbose mode"), NULL },
-  { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
-  { "search", 's', 0, G_OPTION_ARG_STRING, &search_str, N_("Search for the string"), "SEARCH" },
-  { "list", 'l', 0, G_OPTION_ARG_NONE, &list_panels, N_("List possible panel names and exit"), NULL },
-  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
+  { "verbose", 'v', 0, G_OPTION_ARG_NONE, NULL, N_("Enable verbose mode"), NULL },
+  { "overview", 'o', 0, G_OPTION_ARG_NONE, NULL, N_("Show the overview"), NULL },
+  { "search", 's', 0, G_OPTION_ARG_STRING, NULL, N_("Search for the string"), "SEARCH" },
+  { "list", 'l', 0, G_OPTION_ARG_NONE, NULL, N_("List possible panel names and exit"), NULL },
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, NULL, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
   { NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
 };
 
@@ -122,21 +116,16 @@ cc_application_command_line (GApplication *application,
   CcApplication *self = CC_APPLICATION (application);
   int argc;
   char **argv;
+  GVariantDict *options;
   int retval = 0;
-
-  verbose = FALSE;
-  show_overview = FALSE;
-  start_panels = NULL;
+  char *search_str;
+  GStrv start_panels = NULL;
+  gboolean debug;
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
+  options = g_application_command_line_get_options_dict (command_line);
 
-  start_panels = NULL;
-  search_str = NULL;
-  show_overview = FALSE;
-  verbose = FALSE;
-  list_panels = FALSE;
-
-  if (list_panels)
+  if (g_variant_dict_contains (options, "list"))
     {
       GList *panels, *l;
 
@@ -155,19 +144,20 @@ cc_application_command_line (GApplication *application,
   cheese_gtk_init (&argc, &argv);
 #endif /* HAVE_CHEESE */
 
-  cc_shell_log_set_debug (verbose);
+  debug = g_variant_dict_contains (options, "verbose");
+  cc_shell_log_set_debug (debug);
 
   cc_window_show (self->priv->window);
 
-  if (search_str)
+  if (g_variant_dict_lookup (options, "search", "&s", &search_str))
     {
       cc_window_set_search_item (self->priv->window, search_str);
     }
-  else if (show_overview)
+  else if (g_variant_dict_contains (options, "overview"))
     {
       cc_window_set_overview_page (self->priv->window);
     }
-  else if (start_panels != NULL && start_panels[0] != NULL)
+  else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels))
     {
       const char *start_id;
       GError *err = NULL;
@@ -175,6 +165,7 @@ cc_application_command_line (GApplication *application,
       GVariantBuilder builder;
       int i;
 
+      g_return_val_if_fail (start_panels[0] != NULL, 1);
       start_id = start_panels[0];
 
       if (start_panels[1])
@@ -200,13 +191,8 @@ cc_application_command_line (GApplication *application,
         }
     }
 
-  if (start_panels != NULL)
-    {
-      g_strfreev (start_panels);
-      start_panels = NULL;
-    }
-
-  show_overview = FALSE;
+  g_free (start_panels);
+  start_panels = NULL;
 
   g_strfreev (argv);
 
