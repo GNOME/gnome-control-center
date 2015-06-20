@@ -34,10 +34,6 @@
 #include <clutter-gtk/clutter-gtk.h>
 #endif /* HAVE_CHEESE || HAVE_WACOM */
 
-#ifdef HAVE_CHEESE
-#include <cheese-gtk.h>
-#endif /* HAVE_CHEESE */
-
 struct _CcApplicationPrivate
 {
   CcWindow *window;
@@ -131,20 +127,13 @@ cc_application_command_line (GApplication *application,
                              GApplicationCommandLine *command_line)
 {
   CcApplication *self = CC_APPLICATION (application);
-  int argc;
-  char **argv;
   GVariantDict *options;
   int retval = 0;
   char *search_str;
   GStrv start_panels = NULL;
   gboolean debug;
 
-  argv = g_application_command_line_get_arguments (command_line, &argc);
   options = g_application_command_line_get_options_dict (command_line);
-
-#ifdef HAVE_CHEESE
-  cheese_gtk_init (&argc, &argv);
-#endif /* HAVE_CHEESE */
 
   debug = g_variant_dict_contains (options, "verbose");
   cc_shell_log_set_debug (debug);
@@ -195,8 +184,6 @@ cc_application_command_line (GApplication *application,
 
   g_free (start_panels);
   start_panels = NULL;
-
-  g_strfreev (argv);
 
   return retval;
 }
