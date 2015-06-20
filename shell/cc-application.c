@@ -112,6 +112,21 @@ launch_panel_activated (GSimpleAction *action,
 static gint
 cc_application_handle_local_options (GApplication *application, GVariantDict *options)
 {
+  if (g_variant_dict_contains (options, "list"))
+    {
+      GList *panels, *l;
+
+      panels = cc_panel_loader_get_panels ();
+
+      g_print ("%s\n", _("Available panels:"));
+      for (l = panels; l != NULL; l = l->next)
+        g_print ("\t%s\n", (char *) l->data);
+
+      g_list_free (panels);
+
+      return 0;
+    }
+
   return -1;
 }
 
@@ -130,21 +145,6 @@ cc_application_command_line (GApplication *application,
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
   options = g_application_command_line_get_options_dict (command_line);
-
-  if (g_variant_dict_contains (options, "list"))
-    {
-      GList *panels, *l;
-
-      panels = cc_panel_loader_get_panels ();
-
-      g_print ("%s\n", _("Available panels:"));
-      for (l = panels; l != NULL; l = l->next)
-        g_print ("\t%s\n", (char *) l->data);
-
-      g_list_free (panels);
-
-      return 0;
-    }
 
 #ifdef HAVE_CHEESE
   cheese_gtk_init (&argc, &argv);
