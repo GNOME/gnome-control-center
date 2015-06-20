@@ -59,9 +59,6 @@ static char **start_panels = NULL;
 static char *search_str = NULL;
 static gboolean show_overview = FALSE;
 static gboolean verbose = FALSE;
-static gboolean show_help = FALSE;
-static gboolean show_help_gtk = FALSE;
-static gboolean show_help_all = FALSE;
 static gboolean list_panels = FALSE;
 
 const GOptionEntry all_options[] = {
@@ -70,9 +67,6 @@ const GOptionEntry all_options[] = {
   { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
   { "search", 's', 0, G_OPTION_ARG_STRING, &search_str, N_("Search for the string"), "SEARCH" },
   { "list", 'l', 0, G_OPTION_ARG_NONE, &list_panels, N_("List possible panel names and exit"), NULL },
-  { "help", 'h', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
-  { "help-all", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_all, N_("Show help options"), NULL },
-  { "help-gtk", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_gtk, N_("Show help options"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
   { NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
 };
@@ -134,7 +128,6 @@ cc_application_command_line (GApplication *application,
 
   verbose = FALSE;
   show_overview = FALSE;
-  show_help = FALSE;
   start_panels = NULL;
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
@@ -143,15 +136,11 @@ cc_application_command_line (GApplication *application,
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
-  g_option_context_set_help_enabled (context, FALSE);
 
   start_panels = NULL;
   search_str = NULL;
   show_overview = FALSE;
   verbose = FALSE;
-  show_help = FALSE;
-  show_help_gtk = FALSE;
-  show_help_all = FALSE;
   list_panels = FALSE;
 
   if (g_option_context_parse (context, &argc, &argv, &error) == FALSE)
@@ -161,23 +150,6 @@ cc_application_command_line (GApplication *application,
       g_error_free (error);
       g_option_context_free (context);
       return 1;
-    }
-
-  if (show_help || show_help_all || show_help_gtk)
-    {
-      gchar *help;
-      GOptionGroup *group;
-
-      if (show_help || show_help_all)
-        group = NULL;
-      else
-        group = gtk_get_option_group (FALSE);
-
-      help = g_option_context_get_help (context, FALSE, group);
-      g_print ("%s", help);
-      g_free (help);
-      g_option_context_free (context);
-      return 0;
     }
 
   if (list_panels)
