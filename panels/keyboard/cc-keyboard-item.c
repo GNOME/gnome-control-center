@@ -413,6 +413,7 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   g_settings_bind (item->settings, "command",
                    G_OBJECT (item), "command", G_SETTINGS_BIND_DEFAULT);
 
+  g_free (item->priv->binding);
   item->priv->binding = settings_get_binding (item->settings, item->key);
   binding_from_string (item->priv->binding, &item->keyval,
                        &item->keycode, &item->mask);
@@ -435,6 +436,7 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->description = g_strdup (description);
 
   item->settings = g_settings_new (item->schema);
+  g_free (item->priv->binding);
   item->priv->binding = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
   binding_from_string (item->priv->binding, &item->keyval,
