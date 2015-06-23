@@ -109,6 +109,12 @@ launch_panel_activated (GSimpleAction *action,
   g_application_activate (G_APPLICATION (self));
 }
 
+static gint
+cc_application_handle_local_options (GApplication *application, GVariantDict *options)
+{
+  return -1;
+}
+
 static int
 cc_application_command_line (GApplication *application,
                              GApplicationCommandLine *command_line)
@@ -322,6 +328,7 @@ cc_application_class_init (CcApplicationClass *class)
   application_class->activate = cc_application_activate;
   application_class->startup = cc_application_startup;
   application_class->command_line = cc_application_command_line;
+  application_class->handle_local_options = cc_application_handle_local_options;
 
   g_type_class_add_private (class, sizeof (CcApplicationPrivate));
 }
