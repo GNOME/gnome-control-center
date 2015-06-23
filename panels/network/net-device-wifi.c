@@ -34,6 +34,7 @@
 #include <nm-setting-wireless-security.h>
 #include <nm-remote-connection.h>
 #include <nm-setting-wireless.h>
+#include <polkit/polkit.h>
 
 #include "shell/list-box-helper.h"
 #include "network-dialogs.h"
@@ -753,11 +754,32 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         g_debug ("no existing connection found for %s, creating", ssid_target);
 
         if (!is_8021x (device, ap_object_path)) {
+                GPermission *permission;
+                gboolean allowed_to_share = FALSE;
+                NMConnection *partial = NULL;
+
+                permission = polkit_permission_new_sync ("org.freedesktop.NetworkManager.settings.modify.system",
+                                                         NULL, NULL, NULL);
+                if (permission) {
+                        allowed_to_share = g_permission_get_allowed (permission);
+                        g_object_unref (permission);
+                }
+
+                if (!allowed_to_share) {
+                        NMSettingConnection *s_con;
+
+                        s_con = (NMSettingConnection *)nm_setting_connection_new ();
+                        nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
+                        partial = nm_connection_new ();
+                        nm_connection_add_setting (partial, NM_SETTING (s_con));
+                }
+
                 g_debug ("no existing connection found for %s, creating and activating one", ssid_target);
-                nm_client_add_and_activate_connection (client,
-                                                       NULL,
+                nm_client_add_and_activate_connection (client, partial,
                                                        device, ap_object_path,
                                                        connection_add_activate_cb, device_wifi);
+
+                g_object_unref (partial);
         } else {
                 CcNetworkPanel *panel;
                 GVariantBuilder *builder;
