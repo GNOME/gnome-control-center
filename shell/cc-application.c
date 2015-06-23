@@ -216,7 +216,7 @@ cc_application_command_line (GApplication *application,
       const char *start_id;
       GError *err = NULL;
       GVariant *parameters;
-      GVariantBuilder *builder;
+      GVariantBuilder builder;
       int i;
 
       start_id = start_panels[0];
@@ -226,10 +226,11 @@ cc_application_command_line (GApplication *application,
       else
         g_debug ("No extra argument");
 
-      builder = g_variant_builder_new (G_VARIANT_TYPE ("av"));
+      g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
+
       for (i = 1; start_panels[i] != NULL; i++)
-        g_variant_builder_add (builder, "v", g_variant_new_string (start_panels[i]));
-      parameters = g_variant_builder_end (builder);
+        g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
+      parameters = g_variant_builder_end (&builder);
       if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->priv->window), start_id, parameters, &err))
         {
           g_warning ("Could not load setting panel \"%s\": %s", start_id,
