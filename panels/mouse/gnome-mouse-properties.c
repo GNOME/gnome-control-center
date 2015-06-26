@@ -342,24 +342,12 @@ create_dialog (CcMousePropertiesPrivate *d)
 
 /* Callback issued when a button is clicked on the dialog */
 
-static gboolean
-have_device_type (GsdDeviceManager *manager,
-		  GsdDeviceType type)
-{
-	GList *l;
-
-	l = gsd_device_manager_list_devices (manager, type);
-	g_list_free (l);
-
-	return l != NULL;
-}
-
 static void
 device_changed (GsdDeviceManager *device_manager,
 		GsdDevice *device,
 		CcMousePropertiesPrivate *d)
 {
-	d->have_touchpad = have_device_type (d->device_manager, GSD_DEVICE_TYPE_TOUCHPAD);
+	d->have_touchpad = touchpad_is_present ();
 	gtk_widget_set_visible (WID ("touchpad_vbox"), d->have_touchpad);
 
 	if (d->have_touchpad) {
@@ -369,7 +357,7 @@ device_changed (GsdDeviceManager *device_manager,
 		d->changing_scroll = FALSE;
 	}
 
-	d->have_mouse = have_device_type (d->device_manager, GSD_DEVICE_TYPE_MOUSE);
+	d->have_mouse = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse_vbox"), d->have_mouse);
 	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
 				show_touchpad_enabling_switch (d));
@@ -429,9 +417,9 @@ cc_mouse_properties_init (CcMouseProperties *object)
 	d->device_removed_id = g_signal_connect (d->device_manager, "device-removed",
 						 G_CALLBACK (device_changed), d);
 
-	d->have_mouse = have_device_type (d->device_manager, GSD_DEVICE_TYPE_MOUSE);
-	d->have_touchpad = have_device_type (d->device_manager, GSD_DEVICE_TYPE_TOUCHPAD);
-	d->have_touchscreen = have_device_type (d->device_manager, GSD_DEVICE_TYPE_TOUCHSCREEN);
+	d->have_mouse = mouse_is_present ();
+	d->have_touchpad = touchpad_is_present ();
+	d->have_touchscreen = touchscreen_is_present ();
 
 	d->changing_scroll = FALSE;
 
