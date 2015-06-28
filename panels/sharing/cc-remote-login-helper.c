@@ -20,7 +20,10 @@
  */
 
 #include <gio/gio.h>
+
+#ifndef SSHD_SERVICE
 #define SSHD_SERVICE "sshd.service"
+#endif
 
 static const gchar *service_list[] = { SSHD_SERVICE, NULL };
 
