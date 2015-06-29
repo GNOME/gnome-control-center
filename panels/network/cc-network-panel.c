@@ -233,6 +233,7 @@ cc_network_panel_dispose (GObject *object)
                 g_cancellable_cancel (priv->cancellable);
 
         g_clear_object (&priv->cancellable);
+        g_clear_object (&priv->rfkill_proxy);
         g_clear_object (&priv->builder);
         g_clear_object (&priv->client);
         g_clear_object (&priv->modem_manager);
