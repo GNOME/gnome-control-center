@@ -57,6 +57,9 @@ gboolean  supports_xtest           (void);
 gboolean set_device_enabled       (int device_id,
                                    gboolean enabled);
 
+gboolean  set_touchpad_device_enabled (int device_id,
+                                       gboolean enabled);
+
 gboolean  device_is_touchpad       (XDevice                *xdevice);
 
 gboolean  device_info_is_touchpad    (XDeviceInfo         *device_info);
@@ -77,7 +80,7 @@ gboolean  device_set_property     (XDevice                *xdevice,
 gboolean  run_custom_command      (GdkDevice              *device,
                                    CustomCommand           command);
 
-GList *   get_disabled_devices     (GdkDeviceManager       *manager);
+GList *   get_disabled_touchpads     (GdkDeviceManager       *manager);
 char *    xdevice_get_device_node  (int                     deviceid);
 int       xdevice_get_last_tool_id (int                     deviceid);
 gboolean  xdevice_get_dimensions   (int                     deviceid,

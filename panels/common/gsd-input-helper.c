@@ -464,6 +464,29 @@ set_device_enabled (int device_id,
         return TRUE;
 }
 
+gboolean
+set_touchpad_device_enabled (int device_id,
+                             gboolean enabled)
+{
+        Atom prop;
+        guchar value;
+
+        prop = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Off", False);
+        if (!prop)
+                return FALSE;
+
+        gdk_error_trap_push ();
+
+        value = enabled ? 0 : 1;
+        XIChangeProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+                          device_id, prop, XA_INTEGER, 8, PropModeReplace, &value, 1);
+
+        if (gdk_error_trap_pop ())
+                return FALSE;
+
+        return TRUE;
+}
+
 static const char *
 custom_command_to_string (CustomCommand command)
 {
@@ -555,34 +578,52 @@ run_custom_command (GdkDevice              *device,
 }
 
 GList *
-get_disabled_devices (GdkDeviceManager *manager)
+get_disabled_touchpads (GdkDeviceManager *manager)
 {
+        GdkDisplay *display;
         XDeviceInfo *device_info;
-        gint n_devices;
+        gint n_devices, act_format, rc;
         guint i;
         GList *ret;
+        Atom prop, act_type;
+        unsigned long  nitems, bytes_after;
+        unsigned char *data;
 
         ret = NULL;
 
-        device_info = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &n_devices);
-        if (device_info == NULL)
+        display = gdk_display_get_default ();
+        prop = gdk_x11_get_xatom_by_name ("Synaptics Off");
+
+        gdk_error_trap_push ();
+
+        device_info = XListInputDevices (GDK_DISPLAY_XDISPLAY (display), &n_devices);
+        if (device_info == NULL) {
+                gdk_error_trap_pop_ignored ();
+
                 return ret;
+        }
 
         for (i = 0; i < n_devices; i++) {
-                GdkDevice *device;
+                rc = XIGetProperty (GDK_DISPLAY_XDISPLAY (display),
+                                    device_info[i].id, prop, 0, 1, False,
+                                    XA_INTEGER, &act_type, &act_format,
+                                    &nitems, &bytes_after, &data);
 
-                /* Ignore core devices */
-                if (device_info[i].use == IsXKeyboard ||
-                    device_info[i].use == IsXPointer)
+                if (rc != Success || act_type != XA_INTEGER ||
+                    act_format != 8 || nitems < 1)
                         continue;
 
-                /* Check whether the device is actually available */
-                device = gdk_x11_device_manager_lookup (manager, device_info[i].id);
-                if (device != NULL)
+                if (!(data[0])) {
+                        XFree (data);
                         continue;
+                }
+
+                XFree (data);
 
                 ret = g_list_prepend (ret, GINT_TO_POINTER (device_info[i].id));
         }
+
+        gdk_error_trap_pop_ignored ();
 
         XFreeDeviceList (device_info);
 
