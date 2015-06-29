@@ -109,14 +109,14 @@ add_device (GsdX11DeviceManager *manager,
 	if (!device_file)
 		return;
 
+	/* Takes ownership of device_file */
+	g_hash_table_insert (manager->gdk_devices, gdk_device, device_file);
+
 	if (!g_hash_table_lookup (manager->devices, device_file)) {
 		device = create_device (gdk_device, device_file);
 		g_hash_table_insert (manager->devices, g_strdup (device_file), device);
 		g_signal_emit_by_name (manager, "device-added", device);
 	}
-
-	/* Takes ownership of device_file */
-	g_hash_table_insert (manager->gdk_devices, gdk_device, device_file);
 }
 
 static void
@@ -136,13 +136,13 @@ remove_device (GsdX11DeviceManager *manager,
 	if (device)
 		g_object_ref (device);
 
-	g_hash_table_remove (manager->devices, device_file);
-	g_hash_table_remove (manager->gdk_devices, gdk_device);
-
 	if (device) {
 		g_signal_emit_by_name (manager, "device-removed", device);
 		g_object_unref (device);
 	}
+
+	g_hash_table_remove (manager->devices, device_file);
+	g_hash_table_remove (manager->gdk_devices, gdk_device);
 }
 
 static void
