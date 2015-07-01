@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-05-18 15:43+0000\n"
-"PO-Revision-Date: 2015-05-20 16:31+0700\n"
+"POT-Creation-Date: 2015-06-30 14:08+0000\n"
+"PO-Revision-Date: 2015-07-01 11:06+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -110,14 +110,14 @@ msgstr "คุณสามารถเพิ่มรูปภาพลงใน
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1582
-#: ../panels/display/cc-display-panel.c:2020
+#: ../panels/display/cc-display-panel.c:1540
+#: ../panels/display/cc-display-panel.c:2002
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1247
-#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/net-device-wifi.c:1269
+#: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1940
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -848,6 +848,21 @@ msgstr "ภาษา"
 msgid "_Done"
 msgstr "เ_สร็จสิ้น"
 
+#: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
+#: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
+msgid "Day"
+msgstr "วันที่"
+
+#: ../panels/datetime/big.ui.h:2 ../panels/datetime/little.ui.h:2
+#: ../panels/datetime/middle.ui.h:2 ../panels/datetime/ydm.ui.h:2
+msgid "Month"
+msgstr "เดือน"
+
+#: ../panels/datetime/big.ui.h:3 ../panels/datetime/little.ui.h:3
+#: ../panels/datetime/middle.ui.h:3 ../panels/datetime/ydm.ui.h:3
+msgid "Year"
+msgstr "ค.ศ."
+
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
 msgid "%e %B %Y, %l:%M %p"
@@ -964,54 +979,42 @@ msgid "Minute"
 msgstr "นาที"
 
 #: ../panels/datetime/datetime.ui.h:18
-msgid "Day"
-msgstr "วันที่"
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Month"
-msgstr "เดือน"
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Year"
-msgstr "ค.ศ."
-
-#: ../panels/datetime/datetime.ui.h:21
 msgid "Time Zone"
 msgstr "เขตเวลา"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Search for a city"
 msgstr "ค้นหาเมือง"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Automatic _Date & Time"
 msgstr "_วันที่ & เวลาอัตโนมัติ"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Requires internet access"
 msgstr "ต้องการการเข้าถึงอินเทอร์เน็ต"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Automatic Time _Zone"
 msgstr "เ_ขตเวลาอัตโนมัติ"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Date & _Time"
 msgstr "วันที่ & เ_วลา"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Time _Zone"
 msgstr "เ_ขตเวลา"
 
-#: ../panels/datetime/datetime.ui.h:28
+#: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
 msgstr "รู_ปแบบเวลา"
 
-#: ../panels/datetime/datetime.ui.h:29
+#: ../panels/datetime/datetime.ui.h:26
 msgid "24-hour"
 msgstr "24 ชั่วโมง"
 
-#: ../panels/datetime/datetime.ui.h:30
+#: ../panels/datetime/datetime.ui.h:27
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1032,23 +1035,23 @@ msgstr "ตั้งเวลาระบบและตั้งค่าเก
 msgid "To change time or date settings, you need to authenticate."
 msgstr "ในการตั้งเวลาหรือวันที่ คุณต้องยืนยันตัวบุคคลก่อน"
 
-#: ../panels/display/cc-display-panel.c:567
+#: ../panels/display/cc-display-panel.c:570
 msgid "Lid Closed"
 msgstr "ฝาแล็ปท็อปปิด"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:570
+#: ../panels/display/cc-display-panel.c:573
 msgid "Mirrored"
 msgstr "แสดงเหมือนกัน"
 
-#: ../panels/display/cc-display-panel.c:572
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:575
+#: ../panels/display/cc-display-panel.c:2174
 msgid "Primary"
 msgstr "จอหลัก"
 
-#: ../panels/display/cc-display-panel.c:574
+#: ../panels/display/cc-display-panel.c:577
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1727 ../panels/power/cc-power-panel.c:1738
+#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1058,94 +1061,94 @@ msgstr "จอหลัก"
 msgid "Off"
 msgstr "ปิด"
 
-#: ../panels/display/cc-display-panel.c:577
+#: ../panels/display/cc-display-panel.c:580
 msgid "Secondary"
 msgstr "จอรอง"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1579
+#: ../panels/display/cc-display-panel.c:1537
 msgid "Arrange Combined Displays"
 msgstr "จัดเรียงจอแสดงผลประกอบกัน"
 
-#: ../panels/display/cc-display-panel.c:1583
-#: ../panels/display/cc-display-panel.c:2021
+#: ../panels/display/cc-display-panel.c:1541
+#: ../panels/display/cc-display-panel.c:2003
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "เริ่มใ_ช้"
 
-#: ../panels/display/cc-display-panel.c:1607
+#: ../panels/display/cc-display-panel.c:1565
 msgid "Drag displays to rearrange them"
 msgstr "ลากจอแสดงผลเพื่อจัดเรียง"
 
-#: ../panels/display/cc-display-panel.c:2073
+#: ../panels/display/cc-display-panel.c:2052
 msgid "Rotate counterclockwise by 90°"
 msgstr "หมุนทวนเข็มนาฬิกา 90°"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2070
 msgid "Rotate by 180°"
 msgstr "หมุน 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2088
 msgid "Rotate clockwise by 90°"
 msgstr "หมุนตามเข็มนาฬิกา 90°"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2109
 msgid "Size"
 msgstr "ขนาด"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2122
 msgid "Aspect Ratio"
 msgstr "สัดส่วนจอภาพ"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2144
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "ความละเอียด"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2175
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "แสดงแถบด้านบนและภาพรวมกิจกรรมในจอแสดงผลนี้"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2181
 msgid "Secondary Display"
 msgstr "จอแสดงผลรอง"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2182
 msgid "Join this display with another to create an extra workspace"
 msgstr "เชื่อมจอแสดงผลนี้กับจออื่นเพื่อสร้างพื้นที่ทำงานเพิ่มพิเศษ"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2189
 msgid "Presentation"
 msgstr "งานนำเสนอ"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2190
 msgid "Show slideshows and media only"
 msgstr "แสดงภาพสไลด์และสื่อเท่านั้น"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2195
 msgid "Mirror"
 msgstr "แสดงเหมือนกัน"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2196
 msgid "Show your existing view on both displays"
 msgstr "แสดงหน้าจอของคุณออกทางจอแสดงผลทั้งคู่"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2202
 msgid "Turn Off"
 msgstr "ปิด"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2203
 msgid "Don't use this display"
 msgstr "ไม่ใช้จอแสดงผลนี้"
 
-#: ../panels/display/cc-display-panel.c:2449
+#: ../panels/display/cc-display-panel.c:2506
 msgid "Could not get screen information"
 msgstr "ไม่สามารถอ่านข้อมูลเกี่ยวกับหน้าจอ"
 
-#: ../panels/display/cc-display-panel.c:2480
+#: ../panels/display/cc-display-panel.c:2537
 msgid "_Arrange Combined Displays"
 msgstr "_จัดเรียงจอแสดงผลประกอบกัน"
 
@@ -1922,11 +1925,11 @@ msgstr "คลิกเดียว ปุ่มรอง"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:358
+#: ../panels/network/cc-network-panel.c:359
 msgid "Air_plane Mode"
 msgstr "โหมดเ_ครื่องบิน"
 
-#: ../panels/network/cc-network-panel.c:967
+#: ../panels/network/cc-network-panel.c:968
 msgid "Network proxy"
 msgstr "พร็อกซีเครือข่าย"
 
@@ -1934,17 +1937,17 @@ msgstr "พร็อกซีเครือข่าย"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: ../panels/network/cc-network-panel.c:1300
+#: ../panels/network/cc-network-panel.c:1301
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "มีบางอย่างไม่ถูกต้อง กรุณาติดต่อผู้จำหน่ายซอฟต์แวร์ของคุณ"
 
-#: ../panels/network/cc-network-panel.c:1306
+#: ../panels/network/cc-network-panel.c:1307
 msgid "NetworkManager needs to be running."
 msgstr "ต้องมี NetworkManager ทำงานอยู่"
 
@@ -1953,13 +1956,13 @@ msgid "802.1x _Security"
 msgstr "การรักษาความปลอดภัยของ 802.1x"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
 msgstr "หน้า 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
@@ -1967,18 +1970,18 @@ msgid "Anony_mous identity"
 msgstr "เอกลักษณ์แบบนิ_รนาม"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:5
 msgid "Inner _authentication"
 msgstr "การยืนยันตัวบุคคลชั้นใ_น"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
 msgstr "หน้า 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
-#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/ce-page-security.c:469
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -1990,34 +1993,34 @@ msgstr "อัตโนมัติ"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:383
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/net-device-wifi.c:223
+#: ../panels/network/net-device-wifi.c:388
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:226
+#: ../panels/network/net-device-wifi.c:227
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:231
+#: ../panels/network/net-device-wifi.c:232
 msgid "Enterprise"
 msgstr "เอนเทอร์ไพรส์"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:236
-#: ../panels/network/net-device-wifi.c:372
+#: ../panels/network/net-device-wifi.c:237
+#: ../panels/network/net-device-wifi.c:373
 msgctxt "Wifi security"
 msgid "None"
 msgstr "ไม่มี"
@@ -2039,7 +2042,7 @@ msgstr "เมื่อวาน"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:477
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2048,44 +2051,44 @@ msgstr[0] "%i วันก่อน"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:533
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "ไม่มี"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "อ่อน"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "พอใช้"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "ดี"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "ดีมาก"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:270
+#: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "ชื่อ"
@@ -2192,33 +2195,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "ล้างค่า"
 
-#: ../panels/network/connection-editor/ce-page-security.c:250
+#: ../panels/network/connection-editor/ce-page-security.c:253
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "ไม่ใช้"
 
-#: ../panels/network/connection-editor/ce-page-security.c:273
+#: ../panels/network/connection-editor/ce-page-security.c:276
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/กุญแจ 128 บิต (ฐานสิบหกหรือ ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:283
+#: ../panels/network/connection-editor/ce-page-security.c:286
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP วลีรหัสผ่าน 128 บิต"
 
-#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/connection-editor/ce-page-security.c:299
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:309
+#: ../panels/network/connection-editor/ce-page-security.c:312
 msgid "Dynamic WEP (802.1x)"
 msgstr "WEP แบบผันแปร (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:323
+#: ../panels/network/connection-editor/ce-page-security.c:326
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 ส่วนบุคคล"
 
-#: ../panels/network/connection-editor/ce-page-security.c:337
+#: ../panels/network/connection-editor/ce-page-security.c:340
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 เอนเทอร์ไพรส์"
 
@@ -2344,8 +2347,8 @@ msgid "Connect _automatically"
 msgstr "เชื่อมต่อโดย_อัตโนมัติ"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
-#: ../panels/network/connection-editor/wifi-page.ui.h:8
 msgid "Firewall _Zone"
 msgstr "เ_ขตไฟร์วอลล์"
 
@@ -2443,7 +2446,7 @@ msgid "_Reset"
 msgstr "_ล้างค่า"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/net-device-wifi.c:1463
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "ล_บทิ้ง"
@@ -2581,17 +2584,17 @@ msgid "Bridge slaves"
 msgstr "หน่วยลูกของบริดจ์"
 
 #: ../panels/network/net-device-ethernet.c:110
-#: ../panels/network/net-device-wifi.c:462
+#: ../panels/network/net-device-wifi.c:463
 msgid "never"
 msgstr "ยังไม่เคยใช้"
 
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:473
 msgid "today"
 msgstr "วันนี้"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:474
+#: ../panels/network/net-device-wifi.c:475
 msgid "yesterday"
 msgstr "เมื่อวาน"
 
@@ -2619,7 +2622,7 @@ msgid "Wired"
 msgstr "ใช้สาย"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1597
+#: ../panels/network/net-device-wifi.c:1621
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2640,7 +2643,7 @@ msgstr "เพิ่มช่องเชื่อมต่อ"
 msgid "Team slaves"
 msgstr "หน่วยลูกของทีม"
 
-#: ../panels/network/net-device-wifi.c:1154
+#: ../panels/network/net-device-wifi.c:1176
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2648,45 +2651,45 @@ msgstr ""
 "ถ้าคุณมีการเชื่อมต่อไปยังอินเทอร์เน็ตทางอื่นนอกเหนือจากเครือข่ายไร้สาย "
 "คุณก็สามารถตั้งค่าจุดแพร่สัญญาณไร้สายเพื่อแบ่งปันการเชื่อมต่ออินเทอร์เน็ตให้ผู้อื่นใช้ได้"
 
-#: ../panels/network/net-device-wifi.c:1158
+#: ../panels/network/net-device-wifi.c:1180
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "การเปิดใช้จุดแพร่สัญญาณไร้สายจะเป็นการตัดการเชื่อมต่อจาก <b>%s</b>"
 
-#: ../panels/network/net-device-wifi.c:1162
+#: ../panels/network/net-device-wifi.c:1184
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr "คุณจะไม่สามารถเข้าถึงอินเทอร์เน็ตผ่านเครือข่ายไร้สายได้ในระหว่างเปิดใช้จุดแพร่สัญญาณ"
 
-#: ../panels/network/net-device-wifi.c:1245
+#: ../panels/network/net-device-wifi.c:1267
 msgid "Stop hotspot and disconnect any users?"
 msgstr "จะปิดจุดแพร่สัญญาณและตัดการเชื่อมต่อกับผู้ใช้ทั้งหมดหรือไม่?"
 
-#: ../panels/network/net-device-wifi.c:1248
+#: ../panels/network/net-device-wifi.c:1270
 msgid "_Stop Hotspot"
 msgstr "ปิ_ดจุดแพร่สัญญาณ"
 
-#: ../panels/network/net-device-wifi.c:1305
+#: ../panels/network/net-device-wifi.c:1327
 msgid "System policy prohibits use as a Hotspot"
 msgstr "นโยบายของระบบห้ามใช้เป็นจุดแพร่สัญญาณ"
 
-#: ../panels/network/net-device-wifi.c:1308
+#: ../panels/network/net-device-wifi.c:1330
 msgid "Wireless device does not support Hotspot mode"
 msgstr "อุปกรณ์ไร้สายไม่รองรับโหมดจุดแพร่สัญญาณ"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1459
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr "รายละเอียดของเครือข่ายที่เลือก รวมถึงรหัสผ่านและค่าปรับแต่งใดๆ จะถูกลบทิ้ง"
 
-#: ../panels/network/net-device-wifi.c:1750
+#: ../panels/network/net-device-wifi.c:1774
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "ประวัติ"
 
-#: ../panels/network/net-device-wifi.c:1754
+#: ../panels/network/net-device-wifi.c:1778
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2694,7 +2697,7 @@ msgid "_Close"
 msgstr "ปิ_ด"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1762
+#: ../panels/network/net-device-wifi.c:1786
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_ลบทิ้ง"
@@ -3501,7 +3504,7 @@ msgid "_Type"
 msgstr "_ชนิด"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1733 ../panels/power/cc-power-panel.c:1740
+#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3670,17 +3673,17 @@ msgstr ""
 "การเพิ่มบัญชีจะช่วยให้โปรแกรมต่างๆ ของคุณสามารถเข้าถึงเอกสาร เมล ผู้ติดต่อ ปฏิทิน การสนทนา "
 "และอื่นๆ จากบัญชีนั้นๆ"
 
-#: ../panels/power/cc-power-panel.c:191
+#: ../panels/power/cc-power-panel.c:200
 msgid "Unknown time"
 msgstr "ไม่ทราบเวลา"
 
-#: ../panels/power/cc-power-panel.c:197
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i นาที"
 
-#: ../panels/power/cc-power-panel.c:209
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3688,216 +3691,220 @@ msgstr[0] "%i ชั่วโมง"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:217
+#: ../panels/power/cc-power-panel.c:226
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:227
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ชั่วโมง"
 
-#: ../panels/power/cc-power-panel.c:219
+#: ../panels/power/cc-power-panel.c:228
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "นาที"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:238
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s until fully charged"
 msgstr "อีก %s จะเต็ม"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:245
+#: ../panels/power/cc-power-panel.c:254
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "คำเตือน: อีก %s จะหมด"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:250
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%s remaining"
 msgstr "อีก %s จะหมด"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:255 ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
 msgid "Fully charged"
 msgstr "ประจุไฟเต็มแล้ว"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:259 ../panels/power/cc-power-panel.c:287
+#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
 msgid "Empty"
 msgstr "ไม่มีประจุเหลืออยู่"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging"
 msgstr "กำลังประจุไฟ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:288
 msgid "Discharging"
 msgstr "กำลังจ่ายไฟ"
 
-#: ../panels/power/cc-power-panel.c:404
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "หลัก"
 
-#: ../panels/power/cc-power-panel.c:406
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "พิเศษ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:478
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "เมาส์ไร้สาย"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:481
+#: ../panels/power/cc-power-panel.c:487
 msgid "Wireless keyboard"
 msgstr "แป้นพิมพ์ไร้สาย"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:484
+#: ../panels/power/cc-power-panel.c:490
 msgid "Uninterruptible power supply"
 msgstr "อุปกรณ์จ่ายไฟสำรอง"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:487
+#: ../panels/power/cc-power-panel.c:493
 msgid "Personal digital assistant"
 msgstr "เครื่องช่วยงานส่วนบุคคลแบบดิจิทัล"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:496
 msgid "Cellphone"
 msgstr "โทรศัพท์เคลื่อนที่"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:499
 msgid "Media player"
 msgstr "เครื่องเล่นสื่อ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:496
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "แท็บเล็ต"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:505
 msgid "Computer"
 msgstr "คอมพิวเตอร์"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:502 ../panels/power/cc-power-panel.c:733
-#: ../panels/power/cc-power-panel.c:1994
+#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
+#: ../panels/power/cc-power-panel.c:2095
 msgid "Battery"
 msgstr "แบตเตอรี่"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:562
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "กำลังประจุไฟ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:563
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "ระวัง"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:568
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Low"
 msgstr "ต่ำ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Good"
 msgstr "ดี"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:584
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "ประจุไฟเต็มแล้ว"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:582
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ไม่มีประจุเหลืออยู่"
 
-#: ../panels/power/cc-power-panel.c:731
+#: ../panels/power/cc-power-panel.c:746
 msgid "Batteries"
 msgstr "แบตเตอรี่"
 
-#: ../panels/power/cc-power-panel.c:1131
+#: ../panels/power/cc-power-panel.c:1167
 msgid "When _idle"
 msgstr "เมื่อไ_ม่ใช้งาน"
 
-#: ../panels/power/cc-power-panel.c:1473
+#: ../panels/power/cc-power-panel.c:1547
 msgid "Power Saving"
 msgstr "การประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1508
+#: ../panels/power/cc-power-panel.c:1582
 msgid "_Screen brightness"
 msgstr "ความสว่าง_หน้าจอ"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1601
+msgid "Automatic brightness"
+msgstr "ความสว่างอัตโนมัติ"
+
+#: ../panels/power/cc-power-panel.c:1621
 msgid "_Keyboard brightness"
 msgstr "ความสว่างแ_ป้นพิมพ์"
 
-#: ../panels/power/cc-power-panel.c:1524
+#: ../panels/power/cc-power-panel.c:1631
 msgid "_Dim screen when inactive"
 msgstr "_หรี่หน้าจอเมื่อไม่มีการใช้งาน"
 
-#: ../panels/power/cc-power-panel.c:1549
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Blank screen"
 msgstr "หน้าจอ_ว่าง"
 
-#: ../panels/power/cc-power-panel.c:1586
+#: ../panels/power/cc-power-panel.c:1693
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1591
+#: ../panels/power/cc-power-panel.c:1698
 msgid "Wireless devices require extra power"
 msgstr "อุปกรณ์ไร้สายต้องการพลังงานเพิ่มพิเศษ"
 
-#: ../panels/power/cc-power-panel.c:1616
+#: ../panels/power/cc-power-panel.c:1723
 msgid "_Mobile broadband"
 msgstr "บรอดแบนด์_มือถือ"
 
-#: ../panels/power/cc-power-panel.c:1621
+#: ../panels/power/cc-power-panel.c:1728
 msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
 msgstr "อุปกรณ์บรอดแบนด์มือถือ (3G, 4G, WiMax ฯลฯ) ต้องการพลังงานเพิ่มพิเศษ"
 
-#: ../panels/power/cc-power-panel.c:1673
+#: ../panels/power/cc-power-panel.c:1780
 msgid "_Bluetooth"
 msgstr "_บลูทูท"
 
-#: ../panels/power/cc-power-panel.c:1729
+#: ../panels/power/cc-power-panel.c:1836
 msgid "When on battery power"
 msgstr "เมื่อใช้ไฟจากแบตเตอรี่"
 
-#: ../panels/power/cc-power-panel.c:1731
+#: ../panels/power/cc-power-panel.c:1838
 msgid "When plugged in"
 msgstr "เมื่อเสียบปลั๊กไฟ"
 
-#: ../panels/power/cc-power-panel.c:1854
+#: ../panels/power/cc-power-panel.c:1955
 msgid "Suspend & Power Off"
 msgstr "พักเครื่อง & ปิดเครื่อง"
 
-#: ../panels/power/cc-power-panel.c:1894
+#: ../panels/power/cc-power-panel.c:1995
 msgid "_Automatic suspend"
 msgstr "พักเครื่องโดย_อัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:2048
+#: ../panels/power/cc-power-panel.c:2149
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -5422,16 +5429,16 @@ msgstr "จากชุดเสียง"
 msgid "C_hoose an alert sound:"
 msgstr "เ_ลือกเสียงแจ้งเหตุ:"
 
-#: ../panels/sound/gvc-speaker-test.c:219
+#: ../panels/sound/gvc-speaker-test.c:231
 msgid "Stop"
 msgstr "หยุด"
 
-#: ../panels/sound/gvc-speaker-test.c:219
-#: ../panels/sound/gvc-speaker-test.c:331
+#: ../panels/sound/gvc-speaker-test.c:231
+#: ../panels/sound/gvc-speaker-test.c:343
 msgid "Test"
 msgstr "ทดสอบ"
 
-#: ../panels/sound/gvc-speaker-test.c:227
+#: ../panels/sound/gvc-speaker-test.c:239
 msgid "Subwoofer"
 msgstr "ซับวูฟเฟอร์"
 
