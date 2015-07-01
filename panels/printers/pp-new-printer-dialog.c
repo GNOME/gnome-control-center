@@ -53,6 +53,8 @@
  */
 #define HOST_SEARCH_DELAY (500 - 150)
 
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (priv->builder, s))
+
 static void     actualize_devices_list (PpNewPrinterDialog *dialog);
 static void     populate_devices_list (PpNewPrinterDialog *dialog);
 static void     search_entry_activated_cb (GtkEntry *entry,
@@ -287,8 +289,7 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
               device = (PpPrintDevice *) result->devices->data;
               if (device != NULL)
                 {
-                  widget = (GtkWidget*)
-                    gtk_builder_get_object (priv->builder, "search-entry");
+                  widget = WID ("search-entry");
                   gtk_entry_set_text (GTK_ENTRY (widget), device->device_location);
                   search_entry_activated_cb (GTK_ENTRY (widget), dialog);
                 }
@@ -332,8 +333,7 @@ authenticate_samba_server (GtkButton *button,
   PpSamba                   *samba_host;
   gchar                     *server_name = NULL;
 
-  treeview = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "devices-treeview");
+  treeview = WID ("devices-treeview");
 
   if (treeview &&
       gtk_tree_selection_get_selected (
@@ -393,28 +393,24 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   priv->cancellable = g_cancellable_new ();
 
   /* Construct dialog */
-  priv->dialog = (GtkWidget*) gtk_builder_get_object (priv->builder, "dialog");
+  priv->dialog = WID ("dialog");
 
   /* Connect signals */
   g_signal_connect (priv->dialog, "response", G_CALLBACK (new_printer_dialog_response_cb), dialog);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "search-entry");
+  widget = WID ("search-entry");
   g_signal_connect (widget, "activate", G_CALLBACK (search_entry_activated_cb), dialog);
   g_signal_connect (widget, "search-changed", G_CALLBACK (search_entry_changed_cb), dialog);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "authenticate-button");
+  widget = WID ("authenticate-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (authenticate_samba_server), dialog);
 
   /* Set junctions */
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "scrolledwindow1");
+  widget = WID ("scrolledwindow1");
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "toolbar1");
+  widget = WID ("toolbar1");
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
@@ -488,9 +484,7 @@ device_selection_changed_cb (GtkTreeSelection *selection,
   gboolean                   authentication_needed;
   gboolean                   selected;
 
-  treeview = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "devices-treeview");
-
+  treeview = WID ("devices-treeview");
   if (treeview)
     {
       selected = gtk_tree_selection_get_selected (
@@ -504,16 +498,13 @@ device_selection_changed_cb (GtkTreeSelection *selection,
                               SERVER_NEEDS_AUTHENTICATION_COLUMN, &authentication_needed,
                               -1);
 
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "new-printer-add-button");
+          widget = WID ("new-printer-add-button");
           gtk_widget_set_sensitive (widget, selected);
 
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "authenticate-button");
+          widget = WID ("authenticate-button");
           gtk_widget_set_sensitive (widget, authentication_needed);
 
-          notebook = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "notebook");
+          notebook = WID ("notebook");
 
           if (authentication_needed)
             gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
@@ -649,15 +640,13 @@ update_spinner_state (PpNewPrinterDialog *dialog)
       priv->samba_authenticated_searching ||
       priv->samba_searching)
     {
-      spinner = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "spinner");
+      spinner = WID ("spinner");
       gtk_spinner_start (GTK_SPINNER (spinner));
       gtk_widget_show (spinner);
     }
   else
     {
-      spinner = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "spinner");
+      spinner = WID ("spinner");
       gtk_spinner_stop (GTK_SPINNER (spinner));
       gtk_widget_hide (spinner);
     }
@@ -1603,11 +1592,9 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
   GList                     *item;
   gchar                     *description;
 
-  treeview = (GtkTreeView *)
-    gtk_builder_get_object (priv->builder, "devices-treeview");
+  treeview = GTK_TREE_VIEW (WID ("devices-treeview"));
 
-  store = (GtkListStore *)
-    gtk_builder_get_object (priv->builder, "devices-liststore");
+  store = GTK_LIST_STORE (gtk_builder_get_object (priv->builder, "devices-liststore"));
 
   gtk_list_store_clear (store);
 
@@ -1669,8 +1656,7 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
         }
     }
 
-  widget = (GtkWidget *)
-    gtk_builder_get_object (priv->builder, "stack");
+  widget = WID ("stack");
 
   if (no_device &&
       !priv->cups_searching &&
@@ -1760,8 +1746,7 @@ cell_data_func (GtkTreeViewColumn  *tree_column,
   gchar                     *description = NULL;
   gchar                     *text;
 
-  treeview = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "devices-treeview");
+  treeview = WID ("devices-treeview");
 
   if (treeview != NULL)
     selected = gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
@@ -1813,8 +1798,7 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   PpCups                    *cups;
   GIcon                     *icon, *emblem_icon;
 
-  treeview = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "devices-treeview");
+  treeview = WID ("devices-treeview");
 
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
                     "changed", G_CALLBACK (device_selection_changed_cb), dialog);
@@ -2004,9 +1988,7 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
       g_cancellable_cancel (priv->cancellable);
       g_clear_object (&priv->cancellable);
 
-      treeview = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "devices-treeview");
-
+      treeview = WID ("devices-treeview");
       if (treeview &&
           gtk_tree_selection_get_selected (
             gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)), &model, &iter))
