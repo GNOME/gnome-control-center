@@ -57,17 +57,12 @@ gboolean  supports_xtest           (void);
 gboolean set_device_enabled       (int device_id,
                                    gboolean enabled);
 
-gboolean  set_touchpad_device_enabled (int device_id,
-                                       gboolean enabled);
+gboolean  set_synaptics_device_enabled (int device_id,
+                                        gboolean enabled);
 
-gboolean  device_is_touchpad       (XDevice                *xdevice);
+gboolean  xdevice_is_synaptics       (XDevice                *xdevice);
 
-gboolean  device_info_is_touchpad    (XDeviceInfo         *device_info);
-gboolean  device_info_is_touchscreen (XDeviceInfo         *device_info);
-gboolean  device_info_is_tablet (XDeviceInfo         *device_info);
-gboolean  device_info_is_mouse       (XDeviceInfo         *device_info);
-gboolean  device_info_is_trackball   (XDeviceInfo         *device_info);
-
+gboolean  synaptics_is_present    (void);
 gboolean  touchpad_is_present     (void);
 gboolean  touchscreen_is_present  (void);
 gboolean  mouse_is_present        (void);
@@ -80,7 +75,7 @@ gboolean  device_set_property     (XDevice                *xdevice,
 gboolean  run_custom_command      (GdkDevice              *device,
                                    CustomCommand           command);
 
-GList *   get_disabled_touchpads     (GdkDeviceManager       *manager);
+GList *   get_disabled_synaptics     (void);
 char *    xdevice_get_device_node  (int                     deviceid);
 int       xdevice_get_last_tool_id (int                     deviceid);
 gboolean  xdevice_get_dimensions   (int                     deviceid,
