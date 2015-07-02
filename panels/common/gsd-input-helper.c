@@ -29,6 +29,7 @@
 #include <X11/extensions/XInput2.h>
 
 #include "gsd-input-helper.h"
+#include "gsd-device-manager.h"
 
 #define INPUT_DEVICES_SCHEMA "org.gnome.settings-daemon.peripherals.input-devices"
 #define KEY_HOTPLUG_COMMAND  "hotplug-command"
@@ -163,7 +164,7 @@ supports_xinput2_devices (int *opcode)
 }
 
 gboolean
-device_is_touchpad (XDevice *xdevice)
+xdevice_is_synaptics (XDevice *xdevice)
 {
         Atom realtype, prop;
         int realformat;
@@ -191,59 +192,12 @@ device_is_touchpad (XDevice *xdevice)
 }
 
 gboolean
-device_info_is_touchpad (XDeviceInfo *device_info)
-{
-        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TOUCHPAD, False));
-}
-
-gboolean
-device_info_is_touchscreen (XDeviceInfo *device_info)
-{
-        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TOUCHSCREEN, False));
-}
-
-gboolean
-device_info_is_tablet (XDeviceInfo *device_info)
-{
-        /* Note that this doesn't match Wacom tablets */
-        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TABLET, False));
-}
-
-gboolean
-device_info_is_mouse (XDeviceInfo *device_info)
-{
-        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_MOUSE, False));
-}
-
-gboolean
-device_info_is_trackball (XDeviceInfo *device_info)
-{
-        gboolean retval;
-
-        retval = (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TRACKBALL, False));
-        if (retval == FALSE &&
-            device_info->name != NULL) {
-                char *lowercase;
-
-                lowercase = g_ascii_strdown (device_info->name, -1);
-                retval = strstr (lowercase, "trackball") != NULL;
-                g_free (lowercase);
-        }
-
-        return retval;
-}
-
-static gboolean
-device_type_is_present (InfoIdentifyFunc info_func,
-                        DeviceIdentifyFunc device_func)
+synaptics_is_present (void)
 {
         XDeviceInfo *device_info;
         gint n_devices;
         guint i;
         gboolean retval;
-
-        if (supports_xinput_devices () == FALSE)
-                return TRUE;
 
         retval = FALSE;
 
@@ -254,21 +208,12 @@ device_type_is_present (InfoIdentifyFunc info_func,
         for (i = 0; i < n_devices; i++) {
                 XDevice *device;
 
-                /* Check with the device info first */
-                retval = (info_func) (&device_info[i]);
-                if (retval == FALSE)
-                        continue;
-
-                /* If we only have an info func, we're done checking */
-                if (device_func == NULL)
-                        break;
-
                 gdk_error_trap_push ();
                 device = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device_info[i].id);
                 if (gdk_error_trap_pop () || (device == NULL))
                         continue;
 
-                retval = (device_func) (device);
+                retval = xdevice_is_synaptics (device);
                 xdevice_close (device);
                 if (retval)
                         break;
@@ -278,32 +223,54 @@ device_type_is_present (InfoIdentifyFunc info_func,
         return retval;
 }
 
+static gboolean
+device_type_is_present (GsdDeviceType type)
+{
+        GList *l = gsd_device_manager_list_devices (gsd_device_manager_get (),
+                                                    type);
+        g_list_free (l);
+        return l != NULL;
+}
+
 gboolean
 touchscreen_is_present (void)
 {
-        return device_type_is_present (device_info_is_touchscreen,
-                                       NULL);
+        return device_type_is_present (GSD_DEVICE_TYPE_TOUCHSCREEN);
 }
 
 gboolean
 touchpad_is_present (void)
 {
-        return device_type_is_present (device_info_is_touchpad,
-                                       device_is_touchpad);
+        return device_type_is_present (GSD_DEVICE_TYPE_TOUCHPAD);
 }
 
 gboolean
 mouse_is_present (void)
 {
-        return device_type_is_present (device_info_is_mouse,
-                                       NULL);
+        return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
 }
 
 gboolean
 trackball_is_present (void)
 {
-        return device_type_is_present (device_info_is_trackball,
-                                       NULL);
+        gboolean retval;
+        GList *l, *mice = gsd_device_manager_list_devices (gsd_device_manager_get (),
+                                                           GSD_DEVICE_TYPE_MOUSE);
+        if (mice == NULL)
+                return FALSE;
+
+        for (l = mice; l != NULL; l = l->next) {
+                gchar *lowercase;
+                const gchar *name = gsd_device_get_name (l->data);
+                if (!name)
+                        continue;
+                lowercase = g_ascii_strdown (name, -1);
+                retval = strstr (lowercase, "trackball") != NULL;
+                g_free (lowercase);
+        }
+
+        g_list_free (mice);
+        return retval;
 }
 
 char *
@@ -465,8 +432,8 @@ set_device_enabled (int device_id,
 }
 
 gboolean
-set_touchpad_device_enabled (int device_id,
-                             gboolean enabled)
+set_synaptics_device_enabled (int device_id,
+                              gboolean enabled)
 {
         Atom prop;
         guchar value;
@@ -578,7 +545,7 @@ run_custom_command (GdkDevice              *device,
 }
 
 GList *
-get_disabled_touchpads (GdkDeviceManager *manager)
+get_disabled_synaptics (void)
 {
         GdkDisplay *display;
         XDeviceInfo *device_info;
