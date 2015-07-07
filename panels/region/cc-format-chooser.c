@@ -472,6 +472,26 @@ row_activated (GtkListBox  *box,
 }
 
 static void
+activate_default (GtkWindow *window,
+                  GtkDialog *chooser)
+{
+        CcFormatChooserPrivate *priv = GET_PRIVATE (chooser);
+        GtkWidget *focus;
+        gchar *locale_id;
+
+        focus = gtk_window_get_focus (window);
+        if (!focus)
+                return;
+
+        locale_id = g_object_get_data (G_OBJECT (focus), "locale-id");
+        if (g_strcmp0 (locale_id, priv->region) == 0)
+                return;
+
+        g_signal_stop_emission_by_name (window, "activate-default");
+        gtk_widget_activate (focus);
+}
+
+static void
 cc_format_chooser_private_free (gpointer data)
 {
         CcFormatChooserPrivate *priv = data;
@@ -545,6 +565,9 @@ cc_format_chooser_new (GtkWidget *parent)
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
 
         gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (parent));
+
+        g_signal_connect (chooser, "activate-default",
+                          G_CALLBACK (activate_default), chooser);
 
         return chooser;
 }
