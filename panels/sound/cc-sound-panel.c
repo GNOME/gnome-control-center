@@ -54,10 +54,9 @@ cc_sound_panel_set_property (GObject      *object,
                 GVariant *parameters;
 
                 parameters = g_value_get_variant (value);
-                if (parameters && g_variant_n_children (parameters) > 1) {
+                if (parameters && g_variant_n_children (parameters) > 0) {
                         GVariant *v;
-                        /* Skip the first child, we don't expect any flag */
-                        g_variant_get_child (parameters, 1, "v", &v);
+                        g_variant_get_child (parameters, 0, "v", &v);
                         gvc_mixer_dialog_set_page (self->dialog, g_variant_get_string (v, NULL));
                         g_variant_unref (v);
                 }

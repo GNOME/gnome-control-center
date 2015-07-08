@@ -90,19 +90,17 @@ cc_keyboard_panel_set_property (GObject      *object,
       page = section = NULL;
       switch (g_variant_n_children (parameters))
         {
-          case 3:
-            g_variant_get_child (parameters, 2, "v", &v);
+          case 2:
+            g_variant_get_child (parameters, 1, "v", &v);
             section = g_variant_get_string (v, NULL);
             g_variant_unref (v);
             /* fall-through */
-          case 2:
-            g_variant_get_child (parameters, 1, "v", &v);
+          case 1:
+            g_variant_get_child (parameters, 0, "v", &v);
             page = g_variant_get_string (v, NULL);
             g_variant_unref (v);
             cc_keyboard_panel_set_page (panel, page, section);
             /* fall-through */
-          case 1:
-            /* No flags expected, fall-through */
           case 0:
             break;
           default:

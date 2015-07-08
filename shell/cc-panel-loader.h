@@ -30,8 +30,6 @@ G_BEGIN_DECLS
 
 void     cc_panel_loader_fill_model     (CcShellModel  *model);
 GList   *cc_panel_loader_get_panels     (void);
-void     cc_panel_loader_add_option_groups (GOptionContext  *context,
-                                            GVariantBuilder *builder);
 CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
                                          const char    *name,
                                          GVariant      *parameters);

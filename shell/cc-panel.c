@@ -280,15 +280,3 @@ cc_panel_get_help_uri (CcPanel *panel)
 
   return NULL;
 }
-
-GOptionGroup *
-cc_panel_get_option_group (GType            panel_type,
-                           GVariantBuilder *builder)
-{
-  GOptionGroup *options = NULL;
-  CcPanelClass *class = CC_PANEL_CLASS (g_type_class_ref (panel_type));
-  if (class->get_option_group != NULL)
-    options = class->get_option_group (builder);
-  g_type_class_unref (class);
-  return options;
-}

@@ -131,14 +131,11 @@ cc_application_command_line (GApplication *application,
   int retval = 0;
   GOptionContext *context;
   GError *error = NULL;
-  GVariantBuilder *flags_builder;
 
   verbose = FALSE;
   show_overview = FALSE;
   show_help = FALSE;
   start_panels = NULL;
-
-  flags_builder = g_variant_builder_new (G_VARIANT_TYPE_VARDICT);
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
 
@@ -146,7 +143,6 @@ cc_application_command_line (GApplication *application,
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
-  cc_panel_loader_add_option_groups (context, flags_builder);
   g_option_context_set_help_enabled (context, FALSE);
 
   start_panels = NULL;
@@ -231,8 +227,6 @@ cc_application_command_line (GApplication *application,
         g_debug ("No extra argument");
 
       builder = g_variant_builder_new (G_VARIANT_TYPE ("av"));
-      g_variant_builder_add (builder, "v", g_variant_builder_end (flags_builder));
-
       for (i = 1; start_panels[i] != NULL; i++)
         g_variant_builder_add (builder, "v", g_variant_new_string (start_panels[i]));
       parameters = g_variant_builder_end (builder);
