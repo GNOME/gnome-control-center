@@ -139,6 +139,7 @@ padded_label_new (const gchar        *text,
     }
 
   label = gtk_label_new (text);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
   gtk_widget_set_halign (label, alignment);
   set_row_widget_margins (label);
   gtk_box_pack_start (GTK_BOX (widget), label, TRUE, TRUE, 0);
