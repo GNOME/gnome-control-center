@@ -795,7 +795,7 @@ enterprise_permit_user_login (UmAccountDialog *self)
         GVariant *options;
 
         common = um_realm_object_get_common (self->selected_realm);
-        if (common != NULL) {
+        if (common == NULL) {
                 g_debug ("Failed to register account: failed to get d-bus interface");
                 show_error_dialog (self, _("Failed to register account"), NULL);
                 finish_action (self);
