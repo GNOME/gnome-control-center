@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master.is\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-04-24 06:49+0000\n"
-"PO-Revision-Date: 2015-04-27 15:09+0000\n"
+"POT-Creation-Date: 2015-07-16 10:10+0000\n"
+"PO-Revision-Date: 2015-07-16 13:31+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "Language: is\n"
@@ -105,14 +105,14 @@ msgstr "Þú getur bætt myndum í %s möppuna og þær munu birtast hérna"
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1582
-#: ../panels/display/cc-display-panel.c:2020
+#: ../panels/display/cc-display-panel.c:1561
+#: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1247
-#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/net-device-wifi.c:1269
+#: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1940
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -179,7 +179,7 @@ msgstr "Bluetooth hefur verið gert óvirkt með vélbúnaðar rofa"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1637
+#: ../panels/printers/pp-new-printer-dialog.c:1585
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -784,7 +784,7 @@ msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Miðlungs"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 mínútur"
@@ -794,7 +794,7 @@ msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Lítil"
 
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 mínútur"
 
@@ -836,13 +836,13 @@ msgstr "Litur;ICC;Litasnið;Litkvörðun;Prentari;Skjár;Nákvæmni;"
 msgid "Other…"
 msgstr "Annað…"
 
-#: ../panels/common/cc-language-chooser.c:123
-#: ../panels/region/cc-format-chooser.c:270
-#: ../panels/region/cc-input-chooser.c:167
+#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/region/cc-format-chooser.c:271
+#: ../panels/region/cc-input-chooser.c:168
 msgid "More…"
 msgstr "Meira…"
 
-#: ../panels/common/cc-language-chooser.c:139
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Engin tungumál fundust"
 
@@ -854,6 +854,21 @@ msgstr "Tungumál"
 #: ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Lokið"
+
+#: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
+#: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
+msgid "Day"
+msgstr "Dagur"
+
+#: ../panels/datetime/big.ui.h:2 ../panels/datetime/little.ui.h:2
+#: ../panels/datetime/middle.ui.h:2 ../panels/datetime/ydm.ui.h:2
+msgid "Month"
+msgstr "Mánuður"
+
+#: ../panels/datetime/big.ui.h:3 ../panels/datetime/little.ui.h:3
+#: ../panels/datetime/middle.ui.h:3 ../panels/datetime/ydm.ui.h:3
+msgid "Year"
+msgstr "Ár"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
@@ -971,54 +986,42 @@ msgid "Minute"
 msgstr "Mínúta"
 
 #: ../panels/datetime/datetime.ui.h:18
-msgid "Day"
-msgstr "Dagur"
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Month"
-msgstr "Mánuður"
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Year"
-msgstr "Ár"
-
-#: ../panels/datetime/datetime.ui.h:21
 msgid "Time Zone"
 msgstr "Tímabelti"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Search for a city"
 msgstr "Leita að borg"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Automatic _Date & Time"
 msgstr "Sjálfvirk _dagsetning og tími"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Requires internet access"
 msgstr "Krefst internetaðgangs"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Automatic Time _Zone"
 msgstr "Sjálfvirkt tíma_belti"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Date & _Time"
 msgstr "Dagsetning og _tími"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Time _Zone"
 msgstr "Tíma_belti"
 
-#: ../panels/datetime/datetime.ui.h:28
+#: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
 msgstr "Tí_masnið"
 
-#: ../panels/datetime/datetime.ui.h:29
+#: ../panels/datetime/datetime.ui.h:26
 msgid "24-hour"
 msgstr "24-tíma"
 
-#: ../panels/datetime/datetime.ui.h:30
+#: ../panels/datetime/datetime.ui.h:27
 msgid "AM / PM"
 msgstr "FH / EH"
 
@@ -1041,23 +1044,23 @@ msgstr ""
 "Til að breyta stillingum varðandi dagsetningu og tíma, þarft þú að auðkenna "
 "þig."
 
-#: ../panels/display/cc-display-panel.c:567
+#: ../panels/display/cc-display-panel.c:573
 msgid "Lid Closed"
 msgstr "Fartölvulok lokað"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:570
+#: ../panels/display/cc-display-panel.c:576
 msgid "Mirrored"
 msgstr "Speglað"
 
-#: ../panels/display/cc-display-panel.c:572
+#: ../panels/display/cc-display-panel.c:578
 #: ../panels/display/cc-display-panel.c:2195
 msgid "Primary"
 msgstr "Aðal"
 
-#: ../panels/display/cc-display-panel.c:574
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1713 ../panels/power/cc-power-panel.c:1724
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1067,23 +1070,23 @@ msgstr "Aðal"
 msgid "Off"
 msgstr "Nota ekki"
 
-#: ../panels/display/cc-display-panel.c:577
+#: ../panels/display/cc-display-panel.c:583
 msgid "Secondary"
 msgstr "Auka"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1579
+#: ../panels/display/cc-display-panel.c:1558
 msgid "Arrange Combined Displays"
 msgstr "Hagræða samsettum skjám"
 
-#: ../panels/display/cc-display-panel.c:1583
-#: ../panels/display/cc-display-panel.c:2021
+#: ../panels/display/cc-display-panel.c:1562
+#: ../panels/display/cc-display-panel.c:2024
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Virkja"
 
-#: ../panels/display/cc-display-panel.c:1607
+#: ../panels/display/cc-display-panel.c:1586
 msgid "Drag displays to rearrange them"
 msgstr "Draga skjái til að stilla þeim upp"
 
@@ -1150,11 +1153,11 @@ msgstr "Slökkva"
 msgid "Don't use this display"
 msgstr "Ekki nota þennan skjá"
 
-#: ../panels/display/cc-display-panel.c:2449
+#: ../panels/display/cc-display-panel.c:2525
 msgid "Could not get screen information"
 msgstr "Gat ekki fengið upplýsingar um skjái"
 
-#: ../panels/display/cc-display-panel.c:2480
+#: ../panels/display/cc-display-panel.c:2556
 msgid "_Arrange Combined Displays"
 msgstr "H_agræða samsettum skjám"
 
@@ -1736,12 +1739,12 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Flýtilyklar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:636
-#: ../panels/keyboard/keyboard-shortcuts.c:644
+#: ../panels/keyboard/keyboard-shortcuts.c:632
+#: ../panels/keyboard/keyboard-shortcuts.c:640
 msgid "Custom Shortcuts"
 msgstr "Sérsniðinn flýtilykill"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:861
+#: ../panels/keyboard/keyboard-shortcuts.c:857
 msgid "<Unknown Action>"
 msgstr "<Óþekkt aðgerð>"
 
@@ -1969,13 +1972,13 @@ msgid "802.1x _Security"
 msgstr "802.1x öry_ggi"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
 msgstr "síða 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
@@ -1983,18 +1986,18 @@ msgid "Anony_mous identity"
 msgstr "_Nafnlaust auðkenni"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:5
 msgid "Inner _authentication"
 msgstr "Innra _auðkenni"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
 msgstr "síða 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
-#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/ce-page-security.c:469
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2006,40 +2009,40 @@ msgstr "sjálfvirkt"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:383
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/net-device-wifi.c:223
+#: ../panels/network/net-device-wifi.c:388
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:226
+#: ../panels/network/net-device-wifi.c:227
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:231
+#: ../panels/network/net-device-wifi.c:232
 msgid "Enterprise"
 msgstr "Fyrirtækis"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:236
-#: ../panels/network/net-device-wifi.c:372
+#: ../panels/network/net-device-wifi.c:237
+#: ../panels/network/net-device-wifi.c:373
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ekkert"
 
 #: ../panels/network/connection-editor/ce-page-details.c:91
-#: ../panels/power/power.ui.h:19
+#: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "Aldrei"
 
@@ -2055,7 +2058,7 @@ msgstr "í gær"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:477
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2065,44 +2068,44 @@ msgstr[1] "fyrir %i dögum síðan"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:533
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/sek"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ekkert"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Veikt"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Í lagi"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Gott"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Frábært"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:270
+#: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Auðkenni"
@@ -2209,33 +2212,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Endurstilla"
 
-#: ../panels/network/connection-editor/ce-page-security.c:250
+#: ../panels/network/connection-editor/ce-page-security.c:253
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ekkert"
 
-#: ../panels/network/connection-editor/ce-page-security.c:273
+#: ../panels/network/connection-editor/ce-page-security.c:276
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-bit lykill (Hex eða ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:283
+#: ../panels/network/connection-editor/ce-page-security.c:286
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bit lykilsetning"
 
-#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/connection-editor/ce-page-security.c:299
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:309
+#: ../panels/network/connection-editor/ce-page-security.c:312
 msgid "Dynamic WEP (802.1x)"
 msgstr "Breytilegt (dynamic) WEP (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:323
+#: ../panels/network/connection-editor/ce-page-security.c:326
 msgid "WPA & WPA2 Personal"
 msgstr "WPA og WPA2 einka"
 
-#: ../panels/network/connection-editor/ce-page-security.c:337
+#: ../panels/network/connection-editor/ce-page-security.c:340
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA og WPA2 fyrirtækja"
 
@@ -2361,8 +2364,8 @@ msgid "Connect _automatically"
 msgstr "Tengjast _sjálfkrafa"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
-#: ../panels/network/connection-editor/wifi-page.ui.h:8
 msgid "Firewall _Zone"
 msgstr "Svæði í _eldvegg"
 
@@ -2460,7 +2463,7 @@ msgid "_Reset"
 msgstr "F_rumstilla"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/net-device-wifi.c:1463
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Gleyma"
@@ -2603,17 +2606,17 @@ msgid "Bridge slaves"
 msgstr "Brúaðir þrælar"
 
 #: ../panels/network/net-device-ethernet.c:110
-#: ../panels/network/net-device-wifi.c:462
+#: ../panels/network/net-device-wifi.c:463
 msgid "never"
 msgstr "aldrei"
 
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:473
 msgid "today"
 msgstr "í dag"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:474
+#: ../panels/network/net-device-wifi.c:475
 msgid "yesterday"
 msgstr "í gær"
 
@@ -2641,7 +2644,7 @@ msgid "Wired"
 msgstr "Um kapal"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1597
+#: ../panels/network/net-device-wifi.c:1621
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2649,7 +2652,7 @@ msgstr "Um kapal"
 msgid "Options…"
 msgstr "Valkostir…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:473
 #, c-format
 msgid "Profile %d"
 msgstr "Snið %d"
@@ -2662,7 +2665,7 @@ msgstr "Bæta við nýrri tengingu"
 msgid "Team slaves"
 msgstr "Hópaðir þrælar"
 
-#: ../panels/network/net-device-wifi.c:1154
+#: ../panels/network/net-device-wifi.c:1176
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2670,13 +2673,13 @@ msgstr ""
 "Ef þú ert með aðra internet-tengingu en þá þráðlausu, geturðu sett upp "
 "tengipunkt og deilt tengingunni með öðrum."
 
-#: ../panels/network/net-device-wifi.c:1158
+#: ../panels/network/net-device-wifi.c:1180
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Við það að kveikja á þráðlausa tengipunktinum muntu aftengjast frá <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1162
+#: ../panels/network/net-device-wifi.c:1184
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2684,23 +2687,23 @@ msgstr ""
 "Ekki er mögulegt að tengjast internetinu í gegnum þráðlausan búnað þinn á "
 "meðan þráðlausi tengipunkturinn er virkur."
 
-#: ../panels/network/net-device-wifi.c:1245
+#: ../panels/network/net-device-wifi.c:1267
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stöðva tengipunkt og aftengja alla notendur?"
 
-#: ../panels/network/net-device-wifi.c:1248
+#: ../panels/network/net-device-wifi.c:1270
 msgid "_Stop Hotspot"
 msgstr "_Stöðva tengipunkt"
 
-#: ../panels/network/net-device-wifi.c:1305
+#: ../panels/network/net-device-wifi.c:1327
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Kerfisheimildir heimila ekki notkun sem tengipunkts"
 
-#: ../panels/network/net-device-wifi.c:1308
+#: ../panels/network/net-device-wifi.c:1330
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Þráðlaust tæki styður ekki tengipunkts-ham (hotspot)"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1459
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2708,20 +2711,20 @@ msgstr ""
 "Upplýsingar um valin netkerfi munu tapast, þar með talið lykilorð og aðrar "
 "sérsniðnar stillingar."
 
-#: ../panels/network/net-device-wifi.c:1750
+#: ../panels/network/net-device-wifi.c:1774
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Ferill"
 
-#: ../panels/network/net-device-wifi.c:1754
+#: ../panels/network/net-device-wifi.c:1778
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:533
+#: ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Loka"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1762
+#: ../panels/network/net-device-wifi.c:1786
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Gleyma"
@@ -3534,8 +3537,8 @@ msgstr "WEP l_ykilnúmer"
 msgid "_Type"
 msgstr "_Tegund:"
 
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1719 ../panels/power/cc-power-panel.c:1726
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3705,18 +3708,18 @@ msgstr ""
 "Að bæta við aðgangi gerir forritum kleift að nálgast skjöl, póst, tengiliði, "
 "dagatal, spjall og fleira."
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:200
 msgid "Unknown time"
 msgstr "Óþekktur tími"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i mínúta"
 msgstr[1] "%i mínútur"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3725,227 +3728,229 @@ msgstr[1] "%i klukkustundir"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:226
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:219
+#: ../panels/power/cc-power-panel.c:227
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "klukkustund"
 msgstr[1] "klukkustundir"
 
-#: ../panels/power/cc-power-panel.c:220
+#: ../panels/power/cc-power-panel.c:228
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "mínúta"
 msgstr[1] "mínútur"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:239
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s þar til rafhlaðan er fullhlaðin"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:246
+#: ../panels/power/cc-power-panel.c:254
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Varúð: %s eftir"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%s remaining"
 msgstr "%s eftir"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
+#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
 msgid "Fully charged"
 msgstr "Full hleðsla"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
 msgid "Empty"
 msgstr "Tóm"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging"
 msgstr "Í hleðslu"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:288
 msgid "Discharging"
 msgstr "Afhleðst"
 
-#: ../panels/power/cc-power-panel.c:405
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Aðal"
 
-#: ../panels/power/cc-power-panel.c:407
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Auka"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "Þráðlaus mús"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:487
 msgid "Wireless keyboard"
 msgstr "Þráðlaust lyklaborð"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:490
 msgid "Uninterruptible power supply"
 msgstr "UPS varaaflgjafi"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:493
 msgid "Personal digital assistant"
 msgstr "PDA lófatölva"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:496
 msgid "Cellphone"
 msgstr "Farsími"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:494
+#: ../panels/power/cc-power-panel.c:499
 msgid "Media player"
 msgstr "Margmiðlunarspilari"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "Spjaldtölva"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:500
+#: ../panels/power/cc-power-panel.c:505
 msgid "Computer"
 msgstr "Tölva"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:2055
+#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
+#: ../panels/power/cc-power-panel.c:2096
 msgid "Battery"
 msgstr "Rafhlaða"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:562
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Í hleðslu"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:564
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Varúð"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Lítil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Góð"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:584
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Full hleðsla"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tóm"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:746
 msgid "Batteries"
 msgstr "Rafhlöður"
 
-#: ../panels/power/cc-power-panel.c:1134
+#: ../panels/power/cc-power-panel.c:1167
 msgid "When _idle"
 msgstr "Við _iðjuleysi"
 
-#: ../panels/power/cc-power-panel.c:1463
+#: ../panels/power/cc-power-panel.c:1547
 msgid "Power Saving"
 msgstr "Orkusparnaður"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1582
 msgid "_Screen brightness"
 msgstr "Birta _skjás"
 
-#: ../panels/power/cc-power-panel.c:1504
+#: ../panels/power/cc-power-panel.c:1601
+#| msgid "Automatic Routes"
+msgid "Automatic brightness"
+msgstr "Sjálfvirkt birtustig"
+
+#: ../panels/power/cc-power-panel.c:1621
 msgid "_Keyboard brightness"
 msgstr "Birta ly_klaborðs"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1631
 msgid "_Dim screen when inactive"
 msgstr "_Dimma skjá þegar vélin er óvirk"
 
-#: ../panels/power/cc-power-panel.c:1539
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Blank screen"
 msgstr "_Auður skrár"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1693
 msgid "_Wi-Fi"
 msgstr "Þráðlaust _Wi-Fi net"
 
-#: ../panels/power/cc-power-panel.c:1581
+#: ../panels/power/cc-power-panel.c:1698
 msgid "Wireless devices require extra power"
 msgstr "Tæki með þráðlausu neti þarfnast mikillar orku"
 
-#: ../panels/power/cc-power-panel.c:1606
+#: ../panels/power/cc-power-panel.c:1723
 msgid "_Mobile broadband"
 msgstr "_Ferðabreiðband"
 
-#: ../panels/power/cc-power-panel.c:1611
+#: ../panels/power/cc-power-panel.c:1728
 msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
 msgstr ""
 "Tæki með ferðabreiðbandi (3G, 4G, WiMax, o.s.frv.) þarfnast mikillar orku"
 
-#: ../panels/power/cc-power-panel.c:1661
+#: ../panels/power/cc-power-panel.c:1780
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1715
+#: ../panels/power/cc-power-panel.c:1836
 msgid "When on battery power"
 msgstr "Þegar notað er afl frá rafhlöðum"
 
-#: ../panels/power/cc-power-panel.c:1717
+#: ../panels/power/cc-power-panel.c:1838
 msgid "When plugged in"
 msgstr "Þegar vélin er í sambandi"
 
-#: ../panels/power/cc-power-panel.c:1847
+#: ../panels/power/cc-power-panel.c:1955
 msgid "Suspend & Power Off"
 msgstr "Hætta og slökkva"
 
-#: ../panels/power/cc-power-panel.c:1887
+#: ../panels/power/cc-power-panel.c:1995
 msgid "_Automatic suspend"
 msgstr "Hætta sjálfvir_kt"
 
-#: ../panels/power/cc-power-panel.c:1911
-msgid "When battery power is _critical"
-msgstr "Þe_gar ástand rafhlöðu er við hættumörk"
+#: ../panels/power/cc-power-panel.c:1996
+#| msgid "_Automatic suspend"
+msgid "Automatic suspend"
+msgstr "Hætta sjálfvirkt"
 
-#: ../panels/power/cc-power-panel.c:1966
-msgid "Power Off"
-msgstr "Slökkva"
-
-#: ../panels/power/cc-power-panel.c:2109
+#: ../panels/power/cc-power-panel.c:2150
 msgid "Devices"
 msgstr "Tæki"
 
@@ -3964,83 +3969,75 @@ msgid ""
 msgstr ""
 "orka;svæfa;bið;dvali;rafhlaða;birta;dimma;slökkva;skjár;DPMS;afl;iðjulaus;"
 
-#: ../panels/power/power.ui.h:1
-msgid "Hibernate"
-msgstr "Leggja í dvala"
-
-#: ../panels/power/power.ui.h:2
-msgid "Power off"
-msgstr "Slökkva"
-
-#: ../panels/power/power.ui.h:5
+#: ../panels/power/power.ui.h:3
 msgid "45 minutes"
 msgstr "45 mínútur"
 
-#: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
+#: ../panels/power/power.ui.h:4 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
 msgstr "1 klukkustund"
 
-#: ../panels/power/power.ui.h:7
+#: ../panels/power/power.ui.h:5
 msgid "80 minutes"
 msgstr "80 mínútur"
 
-#: ../panels/power/power.ui.h:8
+#: ../panels/power/power.ui.h:6
 msgid "90 minutes"
 msgstr "90 mínútur"
 
-#: ../panels/power/power.ui.h:9
+#: ../panels/power/power.ui.h:7
 msgid "100 minutes"
 msgstr "100 mínútur"
 
-#: ../panels/power/power.ui.h:10
+#: ../panels/power/power.ui.h:8
 msgid "2 hours"
 msgstr "2 klukkustundir"
 
-#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:3
+#: ../panels/power/power.ui.h:9 ../panels/privacy/privacy.ui.h:3
 msgid "1 minute"
 msgstr "1 mínúta"
 
-#: ../panels/power/power.ui.h:12 ../panels/privacy/privacy.ui.h:4
+#: ../panels/power/power.ui.h:10 ../panels/privacy/privacy.ui.h:4
 msgid "2 minutes"
 msgstr "2 mínútur"
 
-#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:5
+#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:5
 msgid "3 minutes"
 msgstr "3 mínútur"
 
-#: ../panels/power/power.ui.h:14
+#: ../panels/power/power.ui.h:12
 msgid "4 minutes"
 msgstr "4 mínútur"
 
-#: ../panels/power/power.ui.h:15 ../panels/privacy/privacy.ui.h:6
+#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:6
 msgid "5 minutes"
 msgstr "5 mínútur"
 
-#: ../panels/power/power.ui.h:16
+#: ../panels/power/power.ui.h:14
 msgid "8 minutes"
 msgstr "8 mínútur"
 
-#: ../panels/power/power.ui.h:17
+#: ../panels/power/power.ui.h:15
 msgid "10 minutes"
 msgstr "10 mínútur"
 
-#: ../panels/power/power.ui.h:18
+#: ../panels/power/power.ui.h:16
 msgid "12 minutes"
 msgstr "12 mínútur"
 
-#: ../panels/power/power.ui.h:20
+#: ../panels/power/power.ui.h:18
 msgid "Automatic Suspend"
 msgstr "Hætta sjálfvirkt"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:19
 msgid "_Plugged In"
 msgstr "Í sam_bandi"
 
-#: ../panels/power/power.ui.h:22
+#: ../panels/power/power.ui.h:20
 msgid "On _Battery Power"
 msgstr "Notar afl frá _rafhlöðum"
 
-#: ../panels/power/power.ui.h:23
+#: ../panels/power/power.ui.h:21
 msgid "Delay"
 msgstr "Seinkun"
 
@@ -4424,34 +4421,34 @@ msgid "%s Active Jobs"
 msgstr "%s virk verk"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1620
+#: ../panels/printers/pp-new-printer-dialog.c:1568
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1625
+#: ../panels/printers/pp-new-printer-dialog.c:1573
 msgid "Serial Port"
 msgstr "Raðtengi (serial)"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1632
+#: ../panels/printers/pp-new-printer-dialog.c:1580
 msgid "Parallel Port"
 msgstr "Hliðtengi (parallel)"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1688
+#: ../panels/printers/pp-new-printer-dialog.c:1636
 #, c-format
 msgid "Location: %s"
 msgstr "Staður: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1693
+#: ../panels/printers/pp-new-printer-dialog.c:1641
 #, c-format
 msgid "Address: %s"
 msgstr "Vistfang: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1717
+#: ../panels/printers/pp-new-printer-dialog.c:1665
 msgid "Server requires authentication"
 msgstr "Miðlari krefst auðkenningar"
 
@@ -4878,25 +4875,25 @@ msgstr "Notað til að finna út landfræðilega staðsetningu þína"
 msgid "_Automatic Problem Reporting"
 msgstr "Tilkynn_a sjálfkrafa um vandamál"
 
-#: ../panels/region/cc-format-chooser.c:119
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Breskt kerfi"
 
-#: ../panels/region/cc-format-chooser.c:121
+#: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrakerfi"
 
-#: ../panels/region/cc-format-chooser.c:286
+#: ../panels/region/cc-format-chooser.c:287
 msgid "No regions found"
 msgstr "Engin svæði fundust"
 
-#: ../panels/region/cc-input-chooser.c:180
+#: ../panels/region/cc-input-chooser.c:181
 msgid "No input sources found"
 msgstr "Engir inntaksgjafar fundust"
 
-#: ../panels/region/cc-input-chooser.c:1085
+#: ../panels/region/cc-input-chooser.c:1086
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Annað"
@@ -5503,16 +5500,16 @@ msgstr "Frá þema"
 msgid "C_hoose an alert sound:"
 msgstr "Vel_du viðvörunarhljóð:"
 
-#: ../panels/sound/gvc-speaker-test.c:219
+#: ../panels/sound/gvc-speaker-test.c:231
 msgid "Stop"
 msgstr "Stöðva"
 
-#: ../panels/sound/gvc-speaker-test.c:219
-#: ../panels/sound/gvc-speaker-test.c:331
+#: ../panels/sound/gvc-speaker-test.c:231
+#: ../panels/sound/gvc-speaker-test.c:343
 msgid "Test"
 msgstr "Prófa"
 
-#: ../panels/sound/gvc-speaker-test.c:227
+#: ../panels/sound/gvc-speaker-test.c:239
 msgid "Subwoofer"
 msgstr "Bassabox"
 
@@ -6868,7 +6865,7 @@ msgstr "Varpa á einn skjá"
 msgid "%d of %d"
 msgstr "%d af %d"
 
-#: ../panels/wacom/cc-wacom-page.c:530
+#: ../panels/wacom/cc-wacom-page.c:522
 msgid "Display Mapping"
 msgstr "Birta vörpun"
 
@@ -7115,58 +7112,44 @@ msgstr ""
 "Stjórnborðið er aðalviðmót GNOME til stillinga á hinum ýmsu þáttum "
 "skjáborðsins."
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:45
+#| msgid "Display Brightness"
+msgid "Display version number"
+msgstr "Birta útgáfunúmer"
+
+#: ../shell/cc-application.c:46
 msgid "Enable verbose mode"
 msgstr "Virkja ítarlegan ham"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:47
 msgid "Show the overview"
 msgstr "Birta yfirlit"
 
-#: ../shell/cc-application.c:71
+#: ../shell/cc-application.c:48
 msgid "Search for the string"
 msgstr "Leita að strengnum"
 
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:49
 msgid "List possible panel names and exit"
 msgstr "Birta heiti allra mögulegra spjalda og hætta"
 
-#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
-#: ../shell/cc-application.c:75
-msgid "Show help options"
-msgstr "Birta hjálparmöguleika"
-
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "Panel to display"
 msgstr "Spjald sem á að birta"
 
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[SPJALD] [BREYTA…]"
 
-#: ../shell/cc-application.c:145
-msgid "- Settings"
-msgstr "- Stillingar"
-
-#: ../shell/cc-application.c:163
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Keyrðu '%s --help' til að sjá lista með öllum mögulegum valkostum "
-"skipanalínunnar.\n"
-
-#: ../shell/cc-application.c:193
+#: ../shell/cc-application.c:113
 msgid "Available panels:"
 msgstr "Tiltæk spjöld:"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:251
 msgid "Help"
 msgstr "Hjálp"
 
-#: ../shell/cc-application.c:327
+#: ../shell/cc-application.c:252
 msgid "Quit"
 msgstr "Hætta"
 
@@ -7193,6 +7176,32 @@ msgstr "Kerfi"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Kjörstillingar;Uppsetning;"
+
+#~ msgid "When battery power is _critical"
+#~ msgstr "Þe_gar ástand rafhlöðu er við hættumörk"
+
+#~ msgid "Power Off"
+#~ msgstr "Slökkva"
+
+#~ msgid "Hibernate"
+#~ msgstr "Leggja í dvala"
+
+#~ msgid "Power off"
+#~ msgstr "Slökkva"
+
+#~ msgid "Show help options"
+#~ msgstr "Birta hjálparmöguleika"
+
+#~ msgid "- Settings"
+#~ msgstr "- Stillingar"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Keyrðu '%s --help' til að sjá lista með öllum mögulegum valkostum "
+#~ "skipanalínunnar.\n"
 
 #~ msgid "Turns off wireless devices"
 #~ msgstr "Slekkur á þráðlausum tækjum"
