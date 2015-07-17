@@ -331,6 +331,9 @@ maybe_add_app_id (CcNotificationsPanel *panel,
   GSettings *settings;
   GAppInfo *app_info;
 
+  if (*canonical_app_id == '\0')
+    return;
+
   if (g_hash_table_contains (panel->known_applications,
                              canonical_app_id))
     return;
