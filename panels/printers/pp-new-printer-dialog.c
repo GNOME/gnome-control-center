@@ -87,6 +87,8 @@ struct _PpNewPrinterDialogPrivate
   GList *devices;
   GList *local_cups_devices;
 
+  GtkTreeView *treeview;
+
   cups_dest_t *dests;
   gint         num_of_dests;
 
@@ -329,15 +331,10 @@ authenticate_samba_server (GtkButton *button,
   GtkTreeModel              *model;
   GtkTreeIter                iter;
   AuthSMBData               *data;
-  GtkWidget                 *treeview;
   PpSamba                   *samba_host;
   gchar                     *server_name = NULL;
 
-  treeview = WID ("devices-treeview");
-
-  if (treeview &&
-      gtk_tree_selection_get_selected (
-        gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)), &model, &iter))
+  if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (priv->treeview), &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
                           DEVICE_NAME_COLUMN, &server_name,
@@ -394,6 +391,8 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 
   /* Construct dialog */
   priv->dialog = WID ("dialog");
+
+  priv->treeview = GTK_TREE_VIEW (WID ("devices-treeview"));
 
   /* Connect signals */
   g_signal_connect (priv->dialog, "response", G_CALLBACK (new_printer_dialog_response_cb), dialog);
@@ -478,39 +477,33 @@ device_selection_changed_cb (GtkTreeSelection *selection,
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkTreeModel              *model;
   GtkTreeIter                iter;
-  GtkWidget                 *treeview = NULL;
   GtkWidget                 *widget;
   GtkWidget                 *notebook;
   gboolean                   authentication_needed;
   gboolean                   selected;
 
-  treeview = WID ("devices-treeview");
-  if (treeview)
+  selected = gtk_tree_selection_get_selected (gtk_tree_view_get_selection (priv->treeview),
+                                              &model,
+                                              &iter);
+
+  if (selected)
     {
-      selected = gtk_tree_selection_get_selected (
-                   gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
-                                                &model,
-                                                &iter);
+      gtk_tree_model_get (model, &iter,
+                          SERVER_NEEDS_AUTHENTICATION_COLUMN, &authentication_needed,
+                          -1);
 
-      if (selected)
-        {
-          gtk_tree_model_get (model, &iter,
-                              SERVER_NEEDS_AUTHENTICATION_COLUMN, &authentication_needed,
-                              -1);
+      widget = WID ("new-printer-add-button");
+      gtk_widget_set_sensitive (widget, selected);
 
-          widget = WID ("new-printer-add-button");
-          gtk_widget_set_sensitive (widget, selected);
+      widget = WID ("authenticate-button");
+      gtk_widget_set_sensitive (widget, authentication_needed);
 
-          widget = WID ("authenticate-button");
-          gtk_widget_set_sensitive (widget, authentication_needed);
+      notebook = WID ("notebook");
 
-          notebook = WID ("notebook");
-
-          if (authentication_needed)
-            gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
-          else
-            gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
-        }
+      if (authentication_needed)
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
+      else
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
     }
 }
 
@@ -1585,14 +1578,11 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
   GtkTreeSelection          *selection;
   PpPrintDevice             *device;
   GtkListStore              *store;
-  GtkTreeView               *treeview;
   GtkTreeIter                iter;
   GtkWidget                 *widget;
   gboolean                   no_device = TRUE;
   GList                     *item;
   gchar                     *description;
-
-  treeview = GTK_TREE_VIEW (WID ("devices-treeview"));
 
   store = GTK_LIST_STORE (gtk_builder_get_object (priv->builder, "devices-liststore"));
 
@@ -1673,7 +1663,7 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
 
   if (!no_device &&
       gtk_tree_model_get_iter_first ((GtkTreeModel *) store, &iter) &&
-      (selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))) != NULL)
+      (selection = gtk_tree_view_get_selection (priv->treeview)) != NULL)
     gtk_tree_selection_select_iter (selection, &iter);
 
   update_spinner_state (dialog);
@@ -1740,17 +1730,12 @@ cell_data_func (GtkTreeViewColumn  *tree_column,
 {
   PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
-  GtkWidget                 *treeview;
   gboolean                   selected = FALSE;
   gchar                     *name = NULL;
   gchar                     *description = NULL;
   gchar                     *text;
 
-  treeview = WID ("devices-treeview");
-
-  if (treeview != NULL)
-    selected = gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
-                                                    iter);
+  selected = gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (priv->treeview), iter);
 
   gtk_tree_model_get (tree_model, iter,
                       DEVICE_DISPLAY_NAME_COLUMN, &name,
@@ -1792,18 +1777,15 @@ populate_devices_list (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkTreeViewColumn         *column;
-  GtkWidget                 *treeview;
   PpSamba                   *samba;
   GEmblem                   *emblem;
   PpCups                    *cups;
   GIcon                     *icon, *emblem_icon;
 
-  treeview = WID ("devices-treeview");
-
-  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+  g_signal_connect (gtk_tree_view_get_selection (priv->treeview),
                     "changed", G_CALLBACK (device_selection_changed_cb), dialog);
 
-  g_signal_connect (treeview,
+  g_signal_connect (priv->treeview,
                     "row-activated", G_CALLBACK (row_activated_cb), dialog);
 
   priv->local_printer_icon = g_themed_icon_new ("printer");
@@ -1827,7 +1809,7 @@ populate_devices_list (PpNewPrinterDialog *dialog)
                                                      "gicon", DEVICE_GICON_COLUMN, NULL);
   gtk_tree_view_column_set_max_width (column, -1);
   gtk_tree_view_column_set_min_width (column, 80);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+  gtk_tree_view_append_column (priv->treeview, column);
 
 
   priv->text_renderer = gtk_cell_renderer_text_new ();
@@ -1835,7 +1817,7 @@ populate_devices_list (PpNewPrinterDialog *dialog)
                                                      NULL);
   gtk_tree_view_column_set_cell_data_func (column, priv->text_renderer, cell_data_func,
                                            dialog, NULL);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+  gtk_tree_view_append_column (priv->treeview, column);
 
   cups = pp_cups_new ();
   pp_cups_get_dests_async (cups, priv->cancellable, cups_get_dests_cb, dialog);
@@ -1977,7 +1959,6 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
   PpPrintDevice             *tmp;
   GtkTreeModel              *model;
   GtkTreeIter                iter;
-  GtkWidget                 *treeview;
   GList                     *list_iter;
   gchar                     *device_name = NULL;
 
@@ -1988,10 +1969,7 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
       g_cancellable_cancel (priv->cancellable);
       g_clear_object (&priv->cancellable);
 
-      treeview = WID ("devices-treeview");
-      if (treeview &&
-          gtk_tree_selection_get_selected (
-            gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)), &model, &iter))
+      if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (priv->treeview), &model, &iter))
         {
           gtk_tree_model_get (model, &iter,
                               DEVICE_NAME_COLUMN, &device_name,
