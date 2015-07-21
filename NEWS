@@ -1,4 +1,57 @@
 ==============
+Version 3.17.3
+==============
+
+Shell:
+- Plenty of command-line options handling fixes
+
+Date & Time:
+- Show date buttons in the order that the locale uses them
+- Further date button ordering fixes for Cechen and HK English
+- Fix incorrect sensitivity when permission is missing
+- Fix accessibility of the hour and minutes spinbuttons
+
+Display:
+- Don't show rotation for builtin display on tablets
+- Add support for tiled monitors (usually 4K monitors)
+
+Network:
+- Fix all Wi-Fi networks having gear buttons
+- Only share a new wifi connection if the user is allowed to
+- Fix possible crash when changing airplane mode
+- Fix possible crash when connections change after Network panel was closed
+
+Power:
+- Describe batteries properly when not called BAT0
+- Fix possible crash if up_client_get_devices() fails
+- Make the automatic suspend row accessible
+
+Printers:
+- Fix possible crash after closing the panel
+- Set focus of the 'New printer dialog' correctly
+- Fix focus chain of the 'New printer dialog'
+- Install selected printer when the row is activated
+- Fix setting of page size
+- Don't expand search entry
+- Show border around 'No printers detected' text
+- Don't show the same device multiple times
+
+Region & Language:
+- Fixes to the region and language lists
+
+Sharing:
+- Make it possible to override SSHD_SERVICE for Debian-based systems
+
+Sound:
+- Support more channels in speaker test
+
+User Accounts:
+- Fix enterprise user login never working
+
+Wacom:
+- Fix window decorations being visible in calibrator window
+
+==============
 Version 3.17.2
 ==============
 
