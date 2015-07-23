@@ -16,9 +16,6 @@ dist_icons256_DATA = icons/256x256/preferences-system-time.png
 iconsscalabledir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconsscalable_DATA = icons/scalable/preferences-system-time.svg
 
-tzdatadir = $(pkgdatadir)/datetime
-dist_tzdata_DATA = backward
-
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(DATETIME_PANEL_CFLAGS)			\
@@ -28,11 +25,11 @@ AM_CPPFLAGS =						\
 
 noinst_PROGRAMS = test-timezone-gfx test-endianess test-timezone
 
-test_timezone_SOURCES = test-timezone.c cc-timezone-map.h cc-timezone-map.c tz.c tz.h
+test_timezone_SOURCES = test-timezone.c cc-timezone-map.h cc-timezone-map.c tz.c tz.h cc-datetime-resources.c cc-datetime-resources.h
 test_timezone_LDADD = $(DATETIME_PANEL_LIBS)
 test_timezone_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 
-test_timezone_gfx_SOURCES = test-timezone-gfx.c tz.c tz.h
+test_timezone_gfx_SOURCES = test-timezone-gfx.c tz.c tz.h cc-datetime-resources.c cc-datetime-resources.h
 test_timezone_gfx_LDADD = $(DATETIME_PANEL_LIBS)
 test_timezone_gfx_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 

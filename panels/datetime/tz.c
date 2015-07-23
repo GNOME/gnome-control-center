@@ -30,6 +30,7 @@
 #include <math.h>
 #include <string.h>
 #include "tz.h"
+#include "cc-datetime-resources.h"
 
 
 /* Forward declarations for private functions */
@@ -426,19 +427,20 @@ sort_locations_by_country (GPtrArray *locations)
 static void
 load_backward_tz (TzDB *tz_db)
 {
-  GError *error = NULL;
-  char **lines, *contents;
+  char **lines;
+  GBytes *bytes;
+  const char *contents;
   guint i;
 
   tz_db->backward = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-  if (g_file_get_contents (GNOMECC_DATA_DIR "/datetime/backward", &contents, NULL, &error) == FALSE)
-    {
-      g_warning ("Failed to load 'backward' file: %s", error->message);
-      return;
-    }
+  bytes = g_resources_lookup_data ("/org/gnome/control-center/datetime/backward",
+                                   G_RESOURCE_LOOKUP_FLAGS_NONE, NULL);
+  contents = (const char *) g_bytes_get_data (bytes, NULL);
+
   lines = g_strsplit (contents, "\n", -1);
-  g_free (contents);
+  g_bytes_unref (bytes);
+
   for (i = 0; lines[i] != NULL; i++)
     {
       char **items;
