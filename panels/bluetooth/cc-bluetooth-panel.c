@@ -226,7 +226,6 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	GError *error = NULL;
 
 	self->priv = BLUETOOTH_PANEL_PRIVATE (self);
-	//FIXME
 	g_resources_register (cc_bluetooth_get_resource ());
 
 	self->priv->builder = gtk_builder_new ();
