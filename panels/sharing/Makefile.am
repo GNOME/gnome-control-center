@@ -7,7 +7,6 @@ dbus_built_sources = org.gnome.SettingsDaemon.Sharing.c org.gnome.SettingsDaemon
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(SHARING_PANEL_CFLAGS)				\
-	$(BLUETOOTH_CFLAGS)				\
 	-DLIBEXECDIR=\"$(libexecdir)\"			\
 	-DSYSCONFDIR=\"$(sysconfdir)\"			\
 	$(NULL)
@@ -53,7 +52,7 @@ $(dbus_built_sources) : Makefile.am org.gnome.SettingsDaemon.Sharing.xml
 	--generate-c-code org.gnome.SettingsDaemon.Sharing \
 	$(srcdir)/org.gnome.SettingsDaemon.Sharing.xml
 
-libsharing_la_LIBADD = $(PANEL_LIBS) $(SHARING_PANEL_LIBS) $(BLUETOOTH_LIBS)
+libsharing_la_LIBADD = $(PANEL_LIBS) $(SHARING_PANEL_LIBS)
 libsharing_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 libexec_PROGRAMS = cc-remote-login-helper

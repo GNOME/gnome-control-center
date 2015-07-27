@@ -76,7 +76,6 @@ struct _CcSharingPanelPrivate
   GtkWidget *personal_file_sharing_switch;
   GtkWidget *screen_sharing_switch;
 
-  GtkWidget *bluetooth_sharing_dialog;
   GtkWidget *media_sharing_dialog;
   GtkWidget *personal_file_sharing_dialog;
   GtkWidget *remote_login_dialog;
@@ -133,12 +132,6 @@ cc_sharing_panel_dispose (GObject *object)
 
   g_clear_object (&priv->rfkill);
   g_clear_object (&priv->builder);
-
-  if (priv->bluetooth_sharing_dialog)
-    {
-      gtk_widget_destroy (priv->bluetooth_sharing_dialog);
-      priv->bluetooth_sharing_dialog = NULL;
-    }
 
   if (priv->media_sharing_dialog)
     {
@@ -359,116 +352,6 @@ cc_sharing_panel_bind_switch_to_widgets (GtkWidget *gtkswitch,
     }
 
   va_end (w);
-}
-
-static gboolean
-bluetooth_get_accept_files (GValue   *value,
-                            GVariant *variant,
-                            gpointer  user_data)
-{
-  gboolean bonded;
-
-  bonded = g_str_equal (g_variant_get_string (variant, NULL), "bonded");
-
-  g_value_set_boolean (value, bonded);
-
-  return TRUE;
-}
-
-static GVariant *
-bluetooth_set_accept_files (const GValue       *value,
-                            const GVariantType *type,
-                            gpointer            user_data)
-{
-  if (g_value_get_boolean (value))
-    return g_variant_new_string ("bonded");
-  else
-    return g_variant_new_string ("ask");
-}
-
-static gboolean
-get_boolean_property (GDBusProxy *proxy,
-		      const char *name)
-{
-	GVariant *v;
-	gboolean ret;
-
-	v = g_dbus_proxy_get_cached_property (proxy, name);
-	ret = g_variant_get_boolean (v);
-	g_variant_unref (v);
-
-	return ret;
-}
-
-static void
-bluetooth_state_changed (CcSharingPanel *self)
-{
-  CcSharingPanelPrivate *priv = self->priv;
-  gboolean state;
-
-  state = get_boolean_property (priv->rfkill, "BluetoothHasAirplaneMode");
-  if (!state)
-    {
-      gtk_widget_hide (WID ("bluetooth-sharing-button"));
-      return;
-    }
-
-  if (get_boolean_property (priv->rfkill, "BluetoothAirplaneMode") ||
-      get_boolean_property (priv->rfkill, "BluetoothHardwareAirplaneMode"))
-    {
-      gtk_widget_hide (WID ("bluetooth-sharing-button"));
-      return;
-    }
-
-  gtk_widget_show (WID ("bluetooth-sharing-button"));
-}
-
-static void
-cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
-{
-  CcSharingPanelPrivate *priv = self->priv;
-  GSettings *settings;
-
-  priv->rfkill = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-						G_DBUS_PROXY_FLAGS_NONE,
-						NULL,
-						"org.gnome.SettingsDaemon.Rfkill",
-						"/org/gnome/SettingsDaemon/Rfkill",
-						"org.gnome.SettingsDaemon.Rfkill",
-						NULL, NULL);
-  if (!priv->rfkill)
-    {
-      /* No rfkill, not Linux */
-      gtk_widget_hide (WID ("bluetooth-sharing-button"));
-      return;
-    }
-
-  /* get the initial state */
-  bluetooth_state_changed (self);
-
-  g_signal_connect_swapped (priv->rfkill, "g-properties-changed",
-                            G_CALLBACK (bluetooth_state_changed), self);
-
-  cc_sharing_panel_bind_switch_to_label (self,
-                                         WID ("save-received-files-to-downloads-switch"),
-                                         WID ("bluetooth-sharing-status-label"));
-
-  cc_sharing_panel_bind_switch_to_widgets (WID ("save-received-files-to-downloads-switch"),
-                                           WID ("receive-files-grid"),
-                                           NULL);
-
-  settings = g_settings_new (FILE_SHARING_SCHEMA_ID);
-  g_settings_bind (settings, "bluetooth-obexpush-enabled",
-                   WID ("save-received-files-to-downloads-switch"), "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  g_settings_bind_with_mapping (settings, "bluetooth-accept-files",
-                                WID ("only-receive-from-trusted-devices-switch"),
-                                "active",
-                                G_SETTINGS_BIND_DEFAULT,
-                                bluetooth_get_accept_files,
-                                bluetooth_set_accept_files, NULL, NULL);
-
 }
 
 static void
@@ -1188,7 +1071,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
   GError *err = NULL;
   gchar *objects[] = {
       "sharing-panel",
-      "bluetooth-sharing-dialog",
       "media-sharing-dialog",
       "personal-file-sharing-dialog",
       "remote-login-dialog",
@@ -1216,15 +1098,12 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   priv->hostname_cancellable = g_cancellable_new ();
 
-  priv->bluetooth_sharing_dialog = WID ("bluetooth-sharing-dialog");
   priv->media_sharing_dialog = WID ("media-sharing-dialog");
   priv->personal_file_sharing_dialog = WID ("personal-file-sharing-dialog");
   priv->remote_login_dialog = WID ("remote-login-dialog");
   priv->remote_login_cancellable = g_cancellable_new ();
   priv->screen_sharing_dialog = WID ("screen-sharing-dialog");
 
-  g_signal_connect (priv->bluetooth_sharing_dialog, "response",
-                    G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (priv->media_sharing_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (priv->personal_file_sharing_dialog, "response",
@@ -1265,12 +1144,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
     g_warning ("Failed to get sharing proxy: %s", error->message);
     g_error_free (error);
   }
-
-  /* bluetooth */
-  if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
-    cc_sharing_panel_setup_bluetooth_sharing_dialog (self);
-  else
-    gtk_widget_hide (WID ("bluetooth-sharing-button"));
 
   /* media sharing */
   cc_sharing_panel_setup_media_sharing_dialog (self);
