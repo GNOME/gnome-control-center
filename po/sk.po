@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-10 14:33+0000\n"
-"PO-Revision-Date: 2015-07-10 16:55+0200\n"
+"POT-Creation-Date: 2015-07-27 06:47+0000\n"
+"PO-Revision-Date: 2015-07-27 11:28+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -169,7 +169,7 @@ msgstr "Bluetooth je zakázaný hardvérovým prepínačom"
 
 # desktop entry name
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1 ../panels/printers/pp-new-printer-dialog.c:1637
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1 ../panels/printers/pp-new-printer-dialog.c:1585
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -845,7 +845,7 @@ msgstr "Farba;Farby;ICC;Profil;Kalibrovať;Tlačiareň;Displej;"
 msgid "Other…"
 msgstr "Iný…"
 
-#: ../panels/common/cc-language-chooser.c:124 ../panels/region/cc-format-chooser.c:271 ../panels/region/cc-input-chooser.c:167
+#: ../panels/common/cc-language-chooser.c:124 ../panels/region/cc-format-chooser.c:271 ../panels/region/cc-input-chooser.c:168
 msgid "More…"
 msgstr "Viac…"
 
@@ -2108,11 +2108,11 @@ msgstr "Kliknutie, sekundárne tlačidlo"
 # label
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:359
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
 msgstr "Režim v _lietadle"
 
-#: ../panels/network/cc-network-panel.c:968
+#: ../panels/network/cc-network-panel.c:967
 msgid "Network proxy"
 msgstr "Sieťový sprostredkovateľ (proxy)"
 
@@ -2120,16 +2120,16 @@ msgstr "Sieťový sprostredkovateľ (proxy)"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278 ../panels/network/net-vpn.c:431
+#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278 ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: ../panels/network/cc-network-panel.c:1301
+#: ../panels/network/cc-network-panel.c:1300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Ale nie. Niekde nastala chyba. Prosím, kontaktuje vášho dodávateľa softvéru."
 
-#: ../panels/network/cc-network-panel.c:1307
+#: ../panels/network/cc-network-panel.c:1306
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager musí byť spustený."
 
@@ -2783,7 +2783,7 @@ msgstr "Drôtové"
 msgid "Options…"
 msgstr "Voľby…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:473
 #, c-format
 msgid "Profile %d"
 msgstr "Profil č. %d"
@@ -3155,9 +3155,9 @@ msgid "Security type"
 msgstr "Typ zabezpečenia"
 
 # GtkLabel label
-#: ../panels/network/network-wifi.ui.h:63
-msgid "Security key"
-msgstr "Bezpečnostný kľúč"
+#: ../panels/network/network-wifi.ui.h:63 ../panels/printers/authentication-dialog.ui.h:5 ../panels/sharing/sharing.ui.h:14 ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "Password"
+msgstr "Heslo"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -4320,11 +4320,6 @@ msgid "Authenticate"
 msgstr "Overeniť totožnosť"
 
 # GtkLabel label
-#: ../panels/printers/authentication-dialog.ui.h:5 ../panels/sharing/sharing.ui.h:14 ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "Password"
-msgstr "Heslo"
-
-# GtkLabel label
 #: ../panels/printers/authentication-dialog.ui.h:6
 msgid "Authentication Required"
 msgstr "Vyžaduje sa overenie totožnosti"
@@ -4708,36 +4703,36 @@ msgid "%s Active Jobs"
 msgstr "Aktívne úlohy tlačiarne %s"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1620
+#: ../panels/printers/pp-new-printer-dialog.c:1568
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1625
+#: ../panels/printers/pp-new-printer-dialog.c:1573
 msgid "Serial Port"
 msgstr "Sériový Port"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1632
+#: ../panels/printers/pp-new-printer-dialog.c:1580
 msgid "Parallel Port"
 msgstr "Paralelný port"
 
 # GtkLabel label
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1688
+#: ../panels/printers/pp-new-printer-dialog.c:1636
 #, c-format
 msgid "Location: %s"
 msgstr "Umiestnenie: %s"
 
 # GtkLabel label
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1693
+#: ../panels/printers/pp-new-printer-dialog.c:1641
 #, c-format
 msgid "Address: %s"
 msgstr "Adresa: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1717
+#: ../panels/printers/pp-new-printer-dialog.c:1665
 msgid "Server requires authentication"
 msgstr "Server vyžaduje overenie totožnosti"
 
@@ -5207,11 +5202,11 @@ msgstr "Metrické"
 msgid "No regions found"
 msgstr "Nenašli sa žiadne regióny"
 
-#: ../panels/region/cc-input-chooser.c:180
+#: ../panels/region/cc-input-chooser.c:181
 msgid "No input sources found"
 msgstr "Nenašli sa žiadne zdroje vstupu"
 
-#: ../panels/region/cc-input-chooser.c:1085
+#: ../panels/region/cc-input-chooser.c:1018
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Iný"
@@ -7597,64 +7592,51 @@ msgstr "Nástroje na konfiguráciu prostredia GNOME"
 msgid "The control center is GNOME's main interface for configuration of various aspects of your desktop."
 msgstr "Ovládacie stredisko je hlavným rozhraním prostredia GNOME na konfiguráciu rôznych vlastností vášho prostredia."
 
+# cmd line desc
+#: ../shell/cc-application.c:45
+msgid "Display version number"
+msgstr "Vypíše číslo verzie"
+
 # PM: takto to tuším máme v iných moduloch
 # cmd desc
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:46
 msgid "Enable verbose mode"
 msgstr "Povolí podrobné výpisy"
 
 # cmd desc
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:47
 msgid "Show the overview"
 msgstr "Zobrazí prehľad"
 
 # cmd desc
-#: ../shell/cc-application.c:71
+#: ../shell/cc-application.c:48
 msgid "Search for the string"
 msgstr "Vyhľadá reťazec"
 
 # cmd desc
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:49
 msgid "List possible panel names and exit"
 msgstr "Vypíše možné názvy panelov a ukončí sa"
 
 # cmd desc
-#: ../shell/cc-application.c:73 ../shell/cc-application.c:74 ../shell/cc-application.c:75
-msgid "Show help options"
-msgstr "Zobrazí voľby pomocníka"
-
-# cmd desc
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "Panel to display"
 msgstr "Panel na zobrazenie"
 
 # cmd desc
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [PARAMETER…]"
 
-#: ../shell/cc-application.c:145
-msgid "- Settings"
-msgstr "- nastavenia"
-
-#: ../shell/cc-application.c:163
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Úplný zoznam dostupných volieb zobrazíte zadaním príkazu „%s --help“.\n"
-
-#: ../shell/cc-application.c:193
+#: ../shell/cc-application.c:113
 msgid "Available panels:"
 msgstr "Dostupné panely:"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:251
 msgid "Help"
 msgstr "Pomocník"
 
-#: ../shell/cc-application.c:327
+#: ../shell/cc-application.c:252
 msgid "Quit"
 msgstr "Ukončiť"
 
@@ -7681,6 +7663,24 @@ msgstr "Systém"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Nastavenia;Konfigurácia;"
+
+# GtkLabel label
+#~ msgid "Security key"
+#~ msgstr "Bezpečnostný kľúč"
+
+# cmd desc
+#~ msgid "Show help options"
+#~ msgstr "Zobrazí voľby pomocníka"
+
+#~ msgid "- Settings"
+#~ msgstr "- nastavenia"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Úplný zoznam dostupných volieb zobrazíte zadaním príkazu „%s --help“.\n"
 
 # label
 #~ msgid "When battery power is _critical"
