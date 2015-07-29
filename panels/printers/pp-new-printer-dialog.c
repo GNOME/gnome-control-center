@@ -731,6 +731,7 @@ group_physical_devices_cb (gchar    ***device_uris,
           /* Is there any device in this sublist? */
           if (device_uris[i][0] != NULL)
             {
+              device = NULL;
               for (j = 0; device_uris[i][j] != NULL; j++)
                 {
                   device = device_in_list (device_uris[i][j], priv->devices);
