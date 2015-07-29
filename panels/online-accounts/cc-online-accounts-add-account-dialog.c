@@ -43,7 +43,6 @@ struct _GoaPanelAddAccountDialogPrivate
   GoaClient *client;
   GoaObject *object;
   GoaProvider *provider;
-  GtkListStore *list_store;
   GtkWidget *contacts_grid;
   GtkWidget *mail_grid;
   GtkWidget *chat_grid;
@@ -296,8 +295,6 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
   gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
   gtk_container_add (GTK_CONTAINER (vbox), grid);
-
-  priv->list_store = gtk_list_store_new (N_COLUMNS, GOA_TYPE_PROVIDER, G_TYPE_ICON, G_TYPE_STRING);
 
   priv->stack = gtk_stack_new ();
   gtk_stack_set_transition_type (GTK_STACK (priv->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
