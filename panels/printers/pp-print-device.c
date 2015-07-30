@@ -28,7 +28,6 @@ struct _PpPrintDevicePrivate
   gchar    *display_name;
   gchar    *device_original_name;
   gchar    *device_make_and_model;
-  gchar    *device_class;
   gchar    *device_location;
   gchar    *device_info;
   gchar    *device_uri;
@@ -49,7 +48,6 @@ enum
   PROP_DISPLAY_NAME,
   PROP_DEVICE_ORIGINAL_NAME,
   PROP_DEVICE_MAKE_AND_MODEL,
-  PROP_DEVICE_CLASS,
   PROP_DEVICE_LOCATION,
   PROP_DEVICE_INFO,
   PROP_DEVICE_URI,
@@ -74,7 +72,6 @@ pp_print_device_finalize (GObject *object)
   g_clear_pointer (&priv->display_name, g_free);
   g_clear_pointer (&priv->device_original_name, g_free);
   g_clear_pointer (&priv->device_make_and_model, g_free);
-  g_clear_pointer (&priv->device_class, g_free);
   g_clear_pointer (&priv->device_location, g_free);
   g_clear_pointer (&priv->device_info, g_free);
   g_clear_pointer (&priv->device_uri, g_free);
@@ -108,9 +105,6 @@ pp_print_device_get_property (GObject    *object,
         break;
       case PROP_DEVICE_MAKE_AND_MODEL:
         g_value_set_string (value, self->priv->device_make_and_model);
-        break;
-      case PROP_DEVICE_CLASS:
-        g_value_set_string (value, self->priv->device_class);
         break;
       case PROP_DEVICE_LOCATION:
         g_value_set_string (value, self->priv->device_location);
@@ -178,10 +172,6 @@ pp_print_device_set_property (GObject      *object,
       case PROP_DEVICE_MAKE_AND_MODEL:
         g_free (self->priv->device_make_and_model);
         self->priv->device_make_and_model = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_CLASS:
-        g_free (self->priv->device_class);
-        self->priv->device_class = g_value_dup_string (value);
         break;
       case PROP_DEVICE_LOCATION:
         g_free (self->priv->device_location);
@@ -271,14 +261,6 @@ pp_print_device_class_init (PpPrintDeviceClass *klass)
                                    g_param_spec_string ("device-make-and-model",
                                                         "Device make and model",
                                                         "Make and model of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_CLASS,
-                                   g_param_spec_string ("device-class",
-                                                        "Device class",
-                                                        "Class of the device",
                                                         NULL,
                                                         G_PARAM_READWRITE));
 
@@ -410,12 +392,6 @@ pp_print_device_get_device_make_and_model (PpPrintDevice *device)
 }
 
 gchar *
-pp_print_device_get_device_class (PpPrintDevice *device)
-{
-  return device->priv->device_class;
-}
-
-gchar *
 pp_print_device_get_device_location (PpPrintDevice *device)
 {
   return device->priv->device_location;
@@ -489,7 +465,6 @@ pp_print_device_copy (PpPrintDevice *device)
                        "display-name", pp_print_device_get_display_name (device),
                        "device-original-name", pp_print_device_get_device_original_name (device),
                        "device-make-and-model", pp_print_device_get_device_make_and_model (device),
-                       "device-class", pp_print_device_get_device_class (device),
                        "device-location", pp_print_device_get_device_location (device),
                        "device-info", pp_print_device_get_device_info (device),
                        "device-uri", pp_print_device_get_device_uri (device),

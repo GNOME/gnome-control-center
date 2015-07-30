@@ -534,7 +534,6 @@ add_device_to_list (PpNewPrinterDialog  *dialog,
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   PpPrintDevice             *store_device;
-  gboolean                   is_network_device;
   gchar                     *canonicalized_name = NULL;
   gchar                     *host_name;
   gint                       acquisistion_method;
@@ -559,12 +558,10 @@ add_device_to_list (PpNewPrinterDialog  *dialog,
            (acquisistion_method == ACQUISITION_METHOD_JETDIRECT ||
             acquisistion_method == ACQUISITION_METHOD_LPD)))
         {
-          is_network_device = g_strcmp0 (pp_print_device_get_device_class (device), "network") == 0;
-
           store_device = pp_print_device_copy (device);
           g_object_set (store_device,
                         "device-original-name", pp_print_device_get_device_name (device),
-                        "is-network-device", is_network_device,
+                        "is-network-device", pp_print_device_is_network_device (device),
                         "show", TRUE,
                         NULL);
 
@@ -818,6 +815,7 @@ get_cups_devices_cb (GList    *devices,
   PpPrintDevice             **all_devices;
   PpPrintDevice              *pp_device;
   PpPrintDevice              *device;
+  const gchar                *device_class;
   GError                     *error = NULL;
   GList                      *iter;
   gint                        length, i;
@@ -851,7 +849,7 @@ get_cups_devices_cb (GList    *devices,
                       all_devices[i] = g_object_new (PP_TYPE_PRINT_DEVICE,
                                                      "device-id", pp_print_device_get_device_id (device),
                                                      "device-make-and-model", pp_print_device_get_device_make_and_model (device),
-                                                     "device-class", pp_print_device_is_network_device (device) ? "network" : "direct",
+                                                     "is-network-device", pp_print_device_is_network_device (device),
                                                      "device-uri", pp_print_device_get_device_uri (device),
                                                      NULL);
                       i++;
@@ -866,7 +864,7 @@ get_cups_devices_cb (GList    *devices,
                       all_devices[i] = g_object_new (PP_TYPE_PRINT_DEVICE,
                                                      "device-id", pp_print_device_get_device_id (pp_device),
                                                      "device-make-and-model", pp_print_device_get_device_make_and_model (pp_device),
-                                                     "device-class", pp_print_device_get_device_class (pp_device),
+                                                     "is-network-device", pp_print_device_is_network_device (pp_device),
                                                      "device-uri", pp_print_device_get_device_uri (pp_device),
                                                      NULL);
                       i++;
@@ -896,11 +894,15 @@ get_cups_devices_cb (GList    *devices,
                                                    "device-make-and-model",
                                                    pp_print_device_get_device_make_and_model (all_devices[i]));
 
-                          if (pp_print_device_get_device_class (all_devices[i]))
-                            g_variant_builder_add (&device_hash,
-                                                   "{ss}",
-                                                   "device-class",
-                                                   pp_print_device_get_device_class (all_devices[i]));
+                          if (pp_print_device_is_network_device (all_devices[i]))
+                            device_class = "network";
+                          else
+                            device_class = "direct";
+
+                          g_variant_builder_add (&device_hash,
+                                                 "{ss}",
+                                                 "device-class",
+                                                 device_class);
 
                           g_variant_builder_add (&device_list,
                                                  "{sv}",

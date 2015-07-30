@@ -3479,6 +3479,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
     {
       const gchar *ret_error;
       GVariant    *devices_variant = NULL;
+      gboolean     is_network_device;
 
       g_variant_get (output, "(&s@a{ss})",
                      &ret_error,
@@ -3528,7 +3529,10 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                         devices[index] = pp_print_device_new ();
 
                       if (g_str_has_prefix (key, "device-class"))
-                        g_object_set (devices[index], "device-class", value, NULL);
+                        {
+                          is_network_device = g_strcmp0 (value, "network") == 0;
+                          g_object_set (devices[index], "is-network-device", is_network_device, NULL);
+                        }
                       else if (g_str_has_prefix (key, "device-id"))
                         g_object_set (devices[index], "device-id", value, NULL);
                       else if (g_str_has_prefix (key, "device-info"))

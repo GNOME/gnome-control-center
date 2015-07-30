@@ -43,7 +43,6 @@ gchar         *pp_print_device_get_device_name           (PpPrintDevice *device)
 gchar         *pp_print_device_get_display_name          (PpPrintDevice *device);
 gchar         *pp_print_device_get_device_original_name  (PpPrintDevice *device);
 gchar         *pp_print_device_get_device_make_and_model (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_class          (PpPrintDevice *device);
 gchar         *pp_print_device_get_device_location       (PpPrintDevice *device);
 gchar         *pp_print_device_get_device_info           (PpPrintDevice *device);
 gchar         *pp_print_device_get_device_uri            (PpPrintDevice *device);

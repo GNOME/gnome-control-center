@@ -422,7 +422,7 @@ list_dir (SMBCCTX      *smb_context,
 
               device = g_object_new (PP_TYPE_PRINT_DEVICE,
                                      "device-uri", device_uri,
-                                     "device-class", "network",
+                                     "is-network-device", TRUE,
                                      "device-info", dirent->comment,
                                      "device-name", device_name,
                                      "acquisition-method", data->hostname_set ? ACQUISITION_METHOD_SAMBA_HOST : ACQUISITION_METHOD_SAMBA,

@@ -241,6 +241,7 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
   PpHost         *host = (PpHost *) object;
   PpHostPrivate  *priv = host->priv;
   PpPrintDevice  *device;
+  gboolean        is_network_device;
   GSDData        *data;
   GError         *error;
   gchar         **argv;
@@ -285,9 +286,10 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
         {
           device_name = g_strdup (printer_informations[3]);
           device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+          is_network_device = g_strcmp0 (printer_informations[0], "network") == 0;
 
           device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                 "device-class", printer_informations[0],
+                                 "is-network-device", is_network_device,
                                  "device-uri", printer_informations[1],
                                  "device-make-and-model", printer_informations[2],
                                  "device-info", printer_informations[3],
@@ -407,7 +409,7 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
                                                dests[i].options);
 
               device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                     "device-class", "network",
+                                     "is-network-device", TRUE,
                                      "device-uri", device_uri,
                                      "device-name", dests[i].name,
                                      "device-location", device_location,
@@ -518,7 +520,7 @@ jetdirect_connection_test_cb (GObject      *source_object,
                                     data->port);
 
       device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                             "device-class", "network",
+                             "is-network-device", TRUE,
                              "device-uri", device_uri,
                              /* Translators: The found device is a JetDirect printer */
                              "device-name", _("JetDirect Printer"),
@@ -774,7 +776,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
                                         found_queue);
 
           device = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                 "device-class", "network",
+                                 "is-network-device", TRUE,
                                  "device-uri", device_uri,
                                  /* Translators: The found device is a Line Printer Daemon printer */
                                  "device-name", _("LPD Printer"),
