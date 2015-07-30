@@ -3231,7 +3231,7 @@ pp_devices_list_free (PpDevicesList *result)
 {
   if (result)
     {
-      g_list_free_full (result->devices, (GDestroyNotify) pp_print_device_free);
+      g_list_free_full (result->devices, (GDestroyNotify) g_object_unref);
       g_free (result);
     }
 }
@@ -3525,25 +3525,27 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                   if (index >= 0)
                     {
                       if (!devices[index])
-                        devices[index] = g_new0 (PpPrintDevice, 1);
+                        devices[index] = pp_print_device_new ();
 
                       if (g_str_has_prefix (key, "device-class"))
-                        devices[index]->device_class = g_strdup (value);
+                        g_object_set (devices[index], "device-class", value, NULL);
                       else if (g_str_has_prefix (key, "device-id"))
-                        devices[index]->device_id = g_strdup (value);
+                        g_object_set (devices[index], "device-id", value, NULL);
                       else if (g_str_has_prefix (key, "device-info"))
-                        devices[index]->device_info = g_strdup (value);
+                        g_object_set (devices[index], "device-info", value, NULL);
                       else if (g_str_has_prefix (key, "device-make-and-model"))
                         {
-                          devices[index]->device_make_and_model = g_strdup (value);
-                          devices[index]->device_name = g_strdup (value);
+                          g_object_set (devices[index],
+                                        "device-make-and-model", value,
+                                        "device-name", value,
+                                        NULL);
                         }
                       else if (g_str_has_prefix (key, "device-uri"))
-                        devices[index]->device_uri = g_strdup (value);
+                        g_object_set (devices[index], "device-uri", value, NULL);
                       else if (g_str_has_prefix (key, "device-location"))
-                        devices[index]->device_location = g_strdup (value);
+                        g_object_set (devices[index], "device-location", value, NULL);
 
-                      devices[index]->acquisition_method = ACQUISITION_METHOD_DEFAULT_CUPS_SERVER;
+                      g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
                     }
 
                   g_free (key);
@@ -3713,56 +3715,6 @@ get_cups_devices_async (GCancellable *cancellable,
                           cancellable,
                           get_cups_devices_async_dbus_cb,
                           data);
-}
-
-void
-pp_print_device_free (PpPrintDevice *device)
-{
-  if (device)
-    {
-      g_free (device->device_class);
-      g_free (device->device_id);
-      g_free (device->device_info);
-      g_free (device->device_make_and_model);
-      g_free (device->device_uri);
-      g_free (device->device_location);
-      g_free (device->device_name);
-      g_free (device->device_ppd);
-      g_free (device->host_name);
-      g_free (device->display_name);
-      g_free (device->device_original_name);
-      g_free (device);
-    }
-}
-
-PpPrintDevice *
-pp_print_device_copy (PpPrintDevice *device)
-{
-  PpPrintDevice *result = NULL;
-
-  if (device)
-    {
-      result = g_new (PpPrintDevice, 1);
-
-      result->is_authenticated_server = device->is_authenticated_server;
-      result->device_class = g_strdup (device->device_class);
-      result->device_id = g_strdup (device->device_id);
-      result->device_info = g_strdup (device->device_info);
-      result->device_make_and_model = g_strdup (device->device_make_and_model);
-      result->device_uri = g_strdup (device->device_uri);
-      result->device_location = g_strdup (device->device_location);
-      result->device_name = g_strdup (device->device_name);
-      result->device_ppd = g_strdup (device->device_ppd);
-      result->host_name = g_strdup (device->host_name);
-      result->host_port = device->host_port;
-      result->acquisition_method = device->acquisition_method;
-      result->display_name = g_strdup (device->display_name);
-      result->device_original_name = g_strdup (device->device_original_name);
-      result->network_device = device->network_device;
-      result->show = device->show;
-    }
-
-  return result;
 }
 
 typedef struct
@@ -4043,15 +3995,15 @@ guess_device_hostname (PpPrintDevice *device)
   gchar             *hostname_begin;
   gchar             *hostname_end = NULL;
 
-  if (device != NULL && device->device_uri != NULL)
+  if (device != NULL && pp_print_device_get_device_uri (device) != NULL)
     {
-      if (g_str_has_prefix (device->device_uri, "socket") ||
-          g_str_has_prefix (device->device_uri, "lpd") ||
-          g_str_has_prefix (device->device_uri, "ipp") ||
-          g_str_has_prefix (device->device_uri, "smb"))
+      if (g_str_has_prefix (pp_print_device_get_device_uri (device), "socket") ||
+          g_str_has_prefix (pp_print_device_get_device_uri (device), "lpd") ||
+          g_str_has_prefix (pp_print_device_get_device_uri (device), "ipp") ||
+          g_str_has_prefix (pp_print_device_get_device_uri (device), "smb"))
         {
           status = httpSeparateURI (HTTP_URI_CODING_ALL,
-                                    device->device_uri,
+                                    pp_print_device_get_device_uri (device),
                                     scheme, HTTP_MAX_URI,
                                     username, HTTP_MAX_URI,
                                     hostname, HTTP_MAX_URI,
@@ -4062,27 +4014,27 @@ guess_device_hostname (PpPrintDevice *device)
               hostname[0] != '\0')
             result = g_strdup (hostname);
         }
-      else if ((g_str_has_prefix (device->device_uri, "dnssd") ||
-                g_str_has_prefix (device->device_uri, "mdns")) &&
-               device->device_info != NULL)
+      else if ((g_str_has_prefix (pp_print_device_get_device_uri (device), "dnssd") ||
+                g_str_has_prefix (pp_print_device_get_device_uri (device), "mdns")) &&
+               pp_print_device_get_device_info (device) != NULL)
         {
           /*
            * CUPS browses its printers as
            * "PrinterName @ ComputerName" or "PrinterInfo @ ComputerName"
            * through DNS-SD.
            */
-          hostname_begin = g_strrstr (device->device_info, " @ ");
+          hostname_begin = g_strrstr (pp_print_device_get_device_info (device), " @ ");
           if (hostname_begin != NULL)
             result = g_strdup (hostname_begin + 3);
         }
-      else if (g_str_has_prefix (device->device_uri, "hp:/net/") ||
-               g_str_has_prefix (device->device_uri, "hpfax:/net/"))
+      else if (g_str_has_prefix (pp_print_device_get_device_uri (device), "hp:/net/") ||
+               g_str_has_prefix (pp_print_device_get_device_uri (device), "hpfax:/net/"))
         {
           /*
            * HPLIP printers have URI of form hp:/net/%s?ip=%s&port=%d
            * or hp:/net/%s?ip=%s.
            */
-          hostname_begin = g_strrstr (device->device_uri, "ip=");
+          hostname_begin = g_strrstr (pp_print_device_get_device_uri (device), "ip=");
           if (hostname_begin != NULL)
             {
               hostname_begin += 3;
@@ -4133,32 +4085,32 @@ canonicalize_device_name (GList         *devices,
     "-zxs",
     "-pxl"};
 
-  if (device->device_id != NULL)
+  if (pp_print_device_get_device_id (device) != NULL)
     {
-      name = get_tag_value (device->device_id, "mdl");
+      name = get_tag_value (pp_print_device_get_device_id (device), "mdl");
       if (name == NULL)
-        name = get_tag_value (device->device_id, "model");
+        name = get_tag_value (pp_print_device_get_device_id (device), "model");
     }
 
   if (name == NULL &&
-      device->device_make_and_model != NULL &&
-      device->device_make_and_model[0] != '\0')
+      pp_print_device_get_device_make_and_model (device) != NULL &&
+      pp_print_device_get_device_make_and_model (device)[0] != '\0')
     {
-      name = g_strdup (device->device_make_and_model);
+      name = g_strdup (pp_print_device_get_device_make_and_model (device));
     }
 
   if (name == NULL &&
-      device->device_original_name != NULL &&
-      device->device_original_name[0] != '\0')
+      pp_print_device_get_device_original_name (device) != NULL &&
+      pp_print_device_get_device_original_name (device)[0] != '\0')
     {
-      name = g_strdup (device->device_original_name);
+      name = g_strdup (pp_print_device_get_device_original_name (device));
     }
 
   if (name == NULL &&
-      device->device_info != NULL &&
-      device->device_info[0] != '\0')
+      pp_print_device_get_device_info (device) != NULL &&
+      pp_print_device_get_device_info (device)[0] != '\0')
     {
-      name = g_strdup (device->device_info);
+      name = g_strdup (pp_print_device_get_device_info (device));
     }
 
   if (name == NULL)
@@ -4221,14 +4173,14 @@ canonicalize_device_name (GList         *devices,
       for (iter = devices; iter; iter = iter->next)
         {
           item = (PpPrintDevice *) iter->data;
-          if (g_strcmp0 (item->device_original_name, new_name) == 0)
+          if (g_strcmp0 (pp_print_device_get_device_original_name (item), new_name) == 0)
             already_present = TRUE;
         }
 
       for (iter = local_cups_devices; iter; iter = iter->next)
         {
           item = (PpPrintDevice *) iter->data;
-          if (g_strcmp0 (item->device_original_name, new_name) == 0)
+          if (g_strcmp0 (pp_print_device_get_device_original_name (item), new_name) == 0)
             already_present = TRUE;
         }
 

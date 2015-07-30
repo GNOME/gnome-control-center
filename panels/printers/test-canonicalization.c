@@ -66,17 +66,19 @@ main (int argc, char **argv)
 
           for (j = 0; already_present_printers[j] != NULL; j++)
             {
-              tmp = g_new0 (PpPrintDevice, 1);
-              tmp->device_original_name = g_strdup (already_present_printers[j]);
+              tmp = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                  "device-original-name", already_present_printers[j],
+                                  NULL);
 
               devices = g_list_append (devices, tmp);
             }
 
-          device = g_new0 (PpPrintDevice, 1);
-          device->device_id = g_strdup (items[1]);
-          device->device_make_and_model = g_strdup (items[2]);
-          device->device_original_name = g_strdup (items[3]);
-          device->device_info = g_strdup (items[4]);
+          device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                 "device-id", items[1],
+                                 "device-make-and-model", items[2],
+                                 "device-original-name", items[3],
+                                 "device-info", items[4],
+                                 NULL);
 
           canonicalized_name =
             canonicalize_device_name (devices, NULL, NULL, 0, device);
@@ -93,8 +95,8 @@ main (int argc, char **argv)
             }
 
           g_free (canonicalized_name);
-          pp_print_device_free (device);
-          g_list_free_full (devices, (GDestroyNotify) pp_print_device_free);
+          g_object_unref (device);
+          g_list_free_full (devices, (GDestroyNotify) g_object_unref);
           g_strfreev (already_present_printers);
         }
       else

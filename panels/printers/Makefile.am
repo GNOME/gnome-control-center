@@ -43,6 +43,8 @@ libprinters_la_SOURCES =		\
 	pp-authentication-dialog.h	\
 	pp-samba.c			\
 	pp-samba.h			\
+	pp-print-device.c		\
+	pp-print-device.h		\
 	cc-printers-panel.c		\
 	cc-printers-panel.h
 
@@ -65,9 +67,9 @@ CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
 EXTRA_DIST = $(resource_files) printers.gresource.xml
 
 noinst_PROGRAMS = test-shift test-canonicalization
-test_shift_SOURCES = pp-utils.c pp-utils.h test-shift.c
+test_shift_SOURCES = pp-print-device.c pp-print-device.h pp-utils.c pp-utils.h test-shift.c
 test_shift_LDADD = $(PANEL_LIBS) $(PRINTERS_PANEL_LIBS) $(CUPS_LIBS)
-test_canonicalization_SOURCES = pp-utils.c pp-utils.h test-canonicalization.c
+test_canonicalization_SOURCES = pp-print-device.c pp-print-device.h pp-utils.c pp-utils.h test-canonicalization.c
 test_canonicalization_LDADD = $(PANEL_LIBS) $(PRINTERS_PANEL_LIBS) $(CUPS_LIBS)
 
 EXTRA_DIST += 				\

@@ -275,6 +275,7 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
   if (exit_status == 0 && stdout_string)
     {
       gchar **printer_informations = NULL;
+      gchar  *device_name;
       gint    length;
 
       printer_informations = line_split (stdout_string);
@@ -282,22 +283,25 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
 
       if (length >= 4)
         {
-          device = g_new0 (PpPrintDevice, 1);
+          device_name = g_strdup (printer_informations[3]);
+          device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
 
-          device->device_class = g_strdup (printer_informations[0]);
-          device->device_uri = g_strdup (printer_informations[1]);
-          device->device_make_and_model = g_strdup (printer_informations[2]);
-          device->device_info = g_strdup (printer_informations[3]);
-          device->device_name = g_strdup (printer_informations[3]);
-          device->device_name =
-            g_strcanon (device->device_name, ALLOWED_CHARACTERS, '-');
-          device->acquisition_method = ACQUISITION_METHOD_SNMP;
+          device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                 "device-class", printer_informations[0],
+                                 "device-uri", printer_informations[1],
+                                 "device-make-and-model", printer_informations[2],
+                                 "device-info", printer_informations[3],
+                                 "acquisition-method", ACQUISITION_METHOD_SNMP,
+                                 "device-name", device_name,
+                                 NULL);
+
+          g_free (device_name);
 
           if (length >= 5 && printer_informations[4][0] != '\0')
-            device->device_id = g_strdup (printer_informations[4]);
+            g_object_set (device, "device-id", printer_informations[4], NULL);
 
           if (length >= 6 && printer_informations[5][0] != '\0')
-            device->device_location = g_strdup (printer_informations[5]);
+            g_object_set (device, "device-location", printer_informations[5], NULL);
 
           data->devices->devices = g_list_append (data->devices->devices, device);
         }
@@ -368,7 +372,9 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
   PpHost        *host = (PpHost *) object;
   PpHostPrivate *priv = host->priv;
   PpPrintDevice *device;
+  const char    *device_location;
   http_t        *http;
+  gchar         *device_uri;
   gint           num_of_devices = 0;
   gint           port;
   gint           i;
@@ -391,19 +397,27 @@ _pp_host_get_remote_cups_devices_thread (GSimpleAsyncResult *res,
         {
           for (i = 0; i < num_of_devices; i++)
             {
-              device = g_new0 (PpPrintDevice, 1);
-              device->device_class = g_strdup ("network");
-              device->device_uri = g_strdup_printf ("ipp://%s:%d/printers/%s",
-                                           priv->hostname,
-                                           port,
-                                           dests[i].name);
-              device->device_name = g_strdup (dests[i].name);
-              device->device_location = g_strdup (cupsGetOption ("printer-location",
-                                                        dests[i].num_options,
-                                                        dests[i].options));
-              device->host_name = g_strdup (priv->hostname);
-              device->host_port = port;
-              device->acquisition_method = ACQUISITION_METHOD_REMOTE_CUPS_SERVER;
+              device_uri = g_strdup_printf ("ipp://%s:%d/printers/%s",
+                                            priv->hostname,
+                                            port,
+                                            dests[i].name);
+
+              device_location = cupsGetOption ("printer-location",
+                                               dests[i].num_options,
+                                               dests[i].options);
+
+              device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                     "device-class", "network",
+                                     "device-uri", device_uri,
+                                     "device-name", dests[i].name,
+                                     "device-location", device_location,
+                                     "host-name", priv->hostname,
+                                     "host-port", port,
+                                     "acquisition-method", ACQUISITION_METHOD_REMOTE_CUPS_SERVER,
+                                     NULL);
+
+              g_free (device_uri);
+
               data->devices->devices = g_list_append (data->devices->devices, device);
             }
         }
@@ -492,21 +506,28 @@ jetdirect_connection_test_cb (GObject      *source_object,
 
   if (connection != NULL)
     {
+      gchar *device_uri;
+
       g_io_stream_close (G_IO_STREAM (connection), NULL, NULL);
       g_object_unref (connection);
 
       priv = data->host->priv;
 
-      device = g_new0 (PpPrintDevice, 1);
-      device->device_class = g_strdup ("network");
-      device->device_uri = g_strdup_printf ("socket://%s:%d",
-                                            priv->hostname,
-                                            data->port);
-      /* Translators: The found device is a JetDirect printer */
-      device->device_name = g_strdup (_("JetDirect Printer"));
-      device->host_name = g_strdup (priv->hostname);
-      device->host_port = data->port;
-      device->acquisition_method = ACQUISITION_METHOD_JETDIRECT;
+      device_uri = g_strdup_printf ("socket://%s:%d",
+                                    priv->hostname,
+                                    data->port);
+
+      device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                             "device-class", "network",
+                             "device-uri", device_uri,
+                             /* Translators: The found device is a JetDirect printer */
+                             "device-name", _("JetDirect Printer"),
+                             "host-name", priv->hostname,
+                             "host-port", data->port,
+                             "acquisition-method", ACQUISITION_METHOD_JETDIRECT,
+                             NULL);
+
+      g_free (device_uri);
 
       data->devices->devices = g_list_append (data->devices->devices, device);
     }
@@ -680,6 +701,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
   gchar             *found_queue = NULL;
   gchar             *candidate;
   gchar             *address;
+  gchar             *device_uri;
   gint               port;
   gint               i;
 
@@ -746,17 +768,22 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 
       if (found_queue != NULL)
         {
-          device = g_new0 (PpPrintDevice, 1);
-          device->device_class = g_strdup ("network");
-          device->device_uri = g_strdup_printf ("lpd://%s:%d/%s",
-                                                priv->hostname,
-                                                port,
-                                                found_queue);
-          /* Translators: The found device is a Line Printer Daemon printer */
-          device->device_name = g_strdup (_("LPD Printer"));
-          device->host_name = g_strdup (priv->hostname);
-          device->host_port = port;
-          device->acquisition_method = ACQUISITION_METHOD_LPD;
+          device_uri = g_strdup_printf ("lpd://%s:%d/%s",
+                                        priv->hostname,
+                                        port,
+                                        found_queue);
+
+          device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                 "device-class", "network",
+                                 "device-uri", device_uri,
+                                 /* Translators: The found device is a Line Printer Daemon printer */
+                                 "device-name", _("LPD Printer"),
+                                 "host-name", priv->hostname,
+                                 "host-port", port,
+                                 "acquisition-method", ACQUISITION_METHOD_LPD,
+                                 NULL);
+
+          g_free (device_uri);
 
           result->devices = g_list_append (result->devices, device);
         }

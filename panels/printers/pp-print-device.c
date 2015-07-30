@@ -1,0 +1,505 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+ *
+ * Copyright 2015  Red Hat, Inc,
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ *
+ * Author: Marek Kasik <mkasik@redhat.com>
+ */
+
+#include "pp-print-device.h"
+
+G_DEFINE_TYPE (PpPrintDevice, pp_print_device, G_TYPE_OBJECT);
+
+struct _PpPrintDevicePrivate
+{
+  gchar    *device_name;
+  gchar    *display_name;
+  gchar    *device_original_name;
+  gchar    *device_make_and_model;
+  gchar    *device_class;
+  gchar    *device_location;
+  gchar    *device_info;
+  gchar    *device_uri;
+  gchar    *device_id;
+  gchar    *device_ppd;
+  gchar    *host_name;
+  gint      host_port;
+  gboolean  is_authenticated_server;
+  gint      acquisition_method;
+  gboolean  is_network_device;
+  gboolean  show;
+};
+
+enum
+{
+  PROP_0 = 0,
+  PROP_DEVICE_NAME,
+  PROP_DISPLAY_NAME,
+  PROP_DEVICE_ORIGINAL_NAME,
+  PROP_DEVICE_MAKE_AND_MODEL,
+  PROP_DEVICE_CLASS,
+  PROP_DEVICE_LOCATION,
+  PROP_DEVICE_INFO,
+  PROP_DEVICE_URI,
+  PROP_DEVICE_ID,
+  PROP_DEVICE_PPD,
+  PROP_HOST_NAME,
+  PROP_HOST_PORT,
+  PROP_IS_AUTHENTICATED_SERVER,
+  PROP_ACQUISITION_METHOD,
+  PROP_IS_NETWORK_DEVICE,
+  PROP_SHOW
+};
+
+static void
+pp_print_device_finalize (GObject *object)
+{
+  PpPrintDevicePrivate *priv;
+
+  priv = PP_PRINT_DEVICE (object)->priv;
+
+  g_clear_pointer (&priv->device_name, g_free);
+  g_clear_pointer (&priv->display_name, g_free);
+  g_clear_pointer (&priv->device_original_name, g_free);
+  g_clear_pointer (&priv->device_make_and_model, g_free);
+  g_clear_pointer (&priv->device_class, g_free);
+  g_clear_pointer (&priv->device_location, g_free);
+  g_clear_pointer (&priv->device_info, g_free);
+  g_clear_pointer (&priv->device_uri, g_free);
+  g_clear_pointer (&priv->device_id, g_free);
+  g_clear_pointer (&priv->device_ppd, g_free);
+  g_clear_pointer (&priv->host_name, g_free);
+
+  G_OBJECT_CLASS (pp_print_device_parent_class)->finalize (object);
+}
+
+static void
+pp_print_device_get_property (GObject    *object,
+                              guint       prop_id,
+                              GValue     *value,
+                              GParamSpec *param_spec)
+{
+  PpPrintDevice *self;
+
+  self = PP_PRINT_DEVICE (object);
+
+  switch (prop_id)
+    {
+      case PROP_DEVICE_NAME:
+        g_value_set_string (value, self->priv->device_name);
+        break;
+      case PROP_DISPLAY_NAME:
+        g_value_set_string (value, self->priv->display_name);
+        break;
+      case PROP_DEVICE_ORIGINAL_NAME:
+        g_value_set_string (value, self->priv->device_original_name);
+        break;
+      case PROP_DEVICE_MAKE_AND_MODEL:
+        g_value_set_string (value, self->priv->device_make_and_model);
+        break;
+      case PROP_DEVICE_CLASS:
+        g_value_set_string (value, self->priv->device_class);
+        break;
+      case PROP_DEVICE_LOCATION:
+        g_value_set_string (value, self->priv->device_location);
+        break;
+      case PROP_DEVICE_INFO:
+        g_value_set_string (value, self->priv->device_info);
+        break;
+      case PROP_DEVICE_URI:
+        g_value_set_string (value, self->priv->device_uri);
+        break;
+      case PROP_DEVICE_ID:
+        g_value_set_string (value, self->priv->device_id);
+        break;
+      case PROP_DEVICE_PPD:
+        g_value_set_string (value, self->priv->device_ppd);
+        break;
+      case PROP_HOST_NAME:
+        g_value_set_string (value, self->priv->host_name);
+        break;
+      case PROP_HOST_PORT:
+        g_value_set_int (value, self->priv->host_port);
+        break;
+      case PROP_IS_AUTHENTICATED_SERVER:
+        g_value_set_boolean (value, self->priv->is_authenticated_server);
+        break;
+      case PROP_ACQUISITION_METHOD:
+        g_value_set_int (value, self->priv->acquisition_method);
+        break;
+      case PROP_IS_NETWORK_DEVICE:
+        g_value_set_boolean (value, self->priv->is_network_device);
+        break;
+      case PROP_SHOW:
+        g_value_set_boolean (value, self->priv->show);
+        break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                           prop_id,
+                                           param_spec);
+      break;
+    }
+}
+
+static void
+pp_print_device_set_property (GObject      *object,
+                              guint         prop_id,
+                              const GValue *value,
+                              GParamSpec   *param_spec)
+{
+  PpPrintDevice *self = PP_PRINT_DEVICE (object);
+
+  switch (prop_id)
+    {
+      case PROP_DEVICE_NAME:
+        g_free (self->priv->device_name);
+        self->priv->device_name = g_value_dup_string (value);
+        break;
+      case PROP_DISPLAY_NAME:
+        g_free (self->priv->display_name);
+        self->priv->display_name = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_ORIGINAL_NAME:
+        g_free (self->priv->device_original_name);
+        self->priv->device_original_name = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_MAKE_AND_MODEL:
+        g_free (self->priv->device_make_and_model);
+        self->priv->device_make_and_model = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_CLASS:
+        g_free (self->priv->device_class);
+        self->priv->device_class = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_LOCATION:
+        g_free (self->priv->device_location);
+        self->priv->device_location = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_INFO:
+        g_free (self->priv->device_info);
+        self->priv->device_info = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_URI:
+        g_free (self->priv->device_uri);
+        self->priv->device_uri = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_ID:
+        g_free (self->priv->device_id);
+        self->priv->device_id = g_value_dup_string (value);
+        break;
+      case PROP_DEVICE_PPD:
+        g_free (self->priv->device_ppd);
+        self->priv->device_ppd = g_value_dup_string (value);
+        break;
+      case PROP_HOST_NAME:
+        g_free (self->priv->host_name);
+        self->priv->host_name = g_value_dup_string (value);
+        break;
+      case PROP_HOST_PORT:
+        self->priv->host_port = g_value_get_int (value);
+        break;
+      case PROP_IS_AUTHENTICATED_SERVER:
+        self->priv->is_authenticated_server = g_value_get_boolean (value);
+        break;
+      case PROP_ACQUISITION_METHOD:
+        self->priv->acquisition_method = g_value_get_int (value);
+        break;
+      case PROP_IS_NETWORK_DEVICE:
+        self->priv->is_network_device = g_value_get_boolean (value);
+        break;
+      case PROP_SHOW:
+        self->priv->show = g_value_get_boolean (value);
+        break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                           prop_id,
+                                           param_spec);
+        break;
+    }
+}
+
+static void
+pp_print_device_class_init (PpPrintDeviceClass *klass)
+{
+  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+
+  g_type_class_add_private (klass, sizeof (PpPrintDevicePrivate));
+
+  gobject_class->set_property = pp_print_device_set_property;
+  gobject_class->get_property = pp_print_device_get_property;
+
+  gobject_class->finalize = pp_print_device_finalize;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_NAME,
+                                   g_param_spec_string ("device-name",
+                                                        "Device name",
+                                                        "Name of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DISPLAY_NAME,
+                                   g_param_spec_string ("display-name",
+                                                        "Display name",
+                                                        "Name of the device formated for users",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_ORIGINAL_NAME,
+                                   g_param_spec_string ("device-original-name",
+                                                        "Device original name",
+                                                        "Original name of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_MAKE_AND_MODEL,
+                                   g_param_spec_string ("device-make-and-model",
+                                                        "Device make and model",
+                                                        "Make and model of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_CLASS,
+                                   g_param_spec_string ("device-class",
+                                                        "Device class",
+                                                        "Class of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_LOCATION,
+                                   g_param_spec_string ("device-location",
+                                                        "Device location",
+                                                        "Locaton of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_INFO,
+                                   g_param_spec_string ("device-info",
+                                                        "Device info",
+                                                        "Information about the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_URI,
+                                   g_param_spec_string ("device-uri",
+                                                        "Device URI",
+                                                        "URI of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_ID,
+                                   g_param_spec_string ("device-id",
+                                                        "DeviceID",
+                                                        "DeviceID of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DEVICE_PPD,
+                                   g_param_spec_string ("device-ppd",
+                                                        "Device PPD",
+                                                        "Name of the PPD of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_HOST_NAME,
+                                   g_param_spec_string ("host-name",
+                                                        "Host name",
+                                                        "Hostname of the device",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_HOST_PORT,
+                                   g_param_spec_int ("host-port",
+                                                     "Host port",
+                                                     "The port of the host",
+                                                     0, G_MAXINT32, 0,
+                                                     G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_IS_AUTHENTICATED_SERVER,
+                                   g_param_spec_boolean ("is-authenticated-server",
+                                                         "Is authenticated server",
+                                                         "Whether the device is a server which needs authentication",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ACQUISITION_METHOD,
+                                   g_param_spec_int ("acquisition-method",
+                                                     "Acquisition method",
+                                                     "Acquisition method of the device",
+                                                     0, G_MAXINT32, 0,
+                                                     G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_IS_NETWORK_DEVICE,
+                                   g_param_spec_boolean ("is-network-device",
+                                                         "Network device",
+                                                         "Whether the device is a network device",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW,
+                                   g_param_spec_boolean ("show",
+                                                         "Show",
+                                                         "Whether to show the device",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE));
+}
+
+static void
+pp_print_device_init (PpPrintDevice *printer)
+{
+  printer->priv = G_TYPE_INSTANCE_GET_PRIVATE (printer,
+                                               PP_TYPE_PRINT_DEVICE,
+                                               PpPrintDevicePrivate);
+}
+
+PpPrintDevice *
+pp_print_device_new ()
+{
+  return g_object_new (PP_TYPE_PRINT_DEVICE, NULL);
+}
+
+gchar *
+pp_print_device_get_device_name (PpPrintDevice *device)
+{
+  return device->priv->device_name;
+}
+
+gchar *
+pp_print_device_get_display_name (PpPrintDevice *device)
+{
+  return device->priv->display_name;
+}
+
+gchar *
+pp_print_device_get_device_original_name (PpPrintDevice *device)
+{
+  return device->priv->device_original_name;
+}
+
+gchar *
+pp_print_device_get_device_make_and_model (PpPrintDevice *device)
+{
+  return device->priv->device_make_and_model;
+}
+
+gchar *
+pp_print_device_get_device_class (PpPrintDevice *device)
+{
+  return device->priv->device_class;
+}
+
+gchar *
+pp_print_device_get_device_location (PpPrintDevice *device)
+{
+  return device->priv->device_location;
+}
+
+gchar *
+pp_print_device_get_device_info (PpPrintDevice *device)
+{
+  return device->priv->device_info;
+}
+
+gchar *
+pp_print_device_get_device_uri (PpPrintDevice *device)
+{
+  return device->priv->device_uri;
+}
+
+gchar *
+pp_print_device_get_device_id (PpPrintDevice *device)
+{
+  return device->priv->device_id;
+}
+
+gchar *
+pp_print_device_get_device_ppd (PpPrintDevice *device)
+{
+  return device->priv->device_ppd;
+}
+
+gchar *
+pp_print_device_get_host_name (PpPrintDevice *device)
+{
+  return device->priv->host_name;
+}
+
+gint
+pp_print_device_get_host_port (PpPrintDevice *device)
+{
+  return device->priv->host_port;
+}
+
+gboolean
+pp_print_device_is_authenticated_server (PpPrintDevice *device)
+{
+  return device->priv->is_authenticated_server;
+}
+
+gint
+pp_print_device_get_acquisition_method (PpPrintDevice *device)
+{
+  return device->priv->acquisition_method;
+}
+
+gboolean
+pp_print_device_is_network_device (PpPrintDevice *device)
+{
+  return device->priv->is_network_device;
+}
+
+gboolean
+pp_print_device_get_show (PpPrintDevice *device)
+{
+  return device->priv->show;
+}
+
+PpPrintDevice *
+pp_print_device_copy (PpPrintDevice *device)
+{
+  return g_object_new (PP_TYPE_PRINT_DEVICE,
+                       "device-name", pp_print_device_get_device_name (device),
+                       "display-name", pp_print_device_get_display_name (device),
+                       "device-original-name", pp_print_device_get_device_original_name (device),
+                       "device-make-and-model", pp_print_device_get_device_make_and_model (device),
+                       "device-class", pp_print_device_get_device_class (device),
+                       "device-location", pp_print_device_get_device_location (device),
+                       "device-info", pp_print_device_get_device_info (device),
+                       "device-uri", pp_print_device_get_device_uri (device),
+                       "device-id", pp_print_device_get_device_id (device),
+                       "device-ppd", pp_print_device_get_device_ppd (device),
+                       "host-name", pp_print_device_get_host_name (device),
+                       "host-port", pp_print_device_get_host_port (device),
+                       "is-authenticated-server", pp_print_device_is_authenticated_server (device),
+                       "acquisition-method", pp_print_device_get_acquisition_method (device),
+                       "is-network-device", pp_print_device_is_network_device (device),
+                       "show", pp_print_device_get_show (device),
+                       NULL);
+}

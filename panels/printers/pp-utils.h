@@ -23,6 +23,8 @@
 #include <gtk/gtk.h>
 #include <cups/cups.h>
 
+#include "pp-print-device.h"
+
 #define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
 
 #define MECHANISM_BUS "org.opensuse.CupsPkHelper.Mechanism"
@@ -272,28 +274,6 @@ void job_set_hold_until_async (gint          job_id,
                                GCancellable *cancellable,
                                JSHUCallback  callback,
                                gpointer      user_data);
-typedef struct
-{
-  gboolean  is_authenticated_server;
-  gchar    *device_class;
-  gchar    *device_id;
-  gchar    *device_info;
-  gchar    *device_make_and_model;
-  gchar    *device_uri;
-  gchar    *device_location;
-  gchar    *device_name;
-  gchar    *device_ppd;
-  gchar    *host_name;
-  gint      host_port;
-  gint      acquisition_method;
-  gchar    *display_name;
-  gchar    *device_original_name;
-  gboolean  network_device;
-  gboolean  show;
-} PpPrintDevice;
-
-void           pp_print_device_free (PpPrintDevice *device);
-PpPrintDevice *pp_print_device_copy (PpPrintDevice *device);
 
 void         pp_devices_list_free (PpDevicesList *result);
 

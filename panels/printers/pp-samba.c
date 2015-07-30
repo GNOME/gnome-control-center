@@ -340,6 +340,7 @@ list_dir (SMBCCTX      *smb_context,
   smbc_readdir_fn     smbclient_readdir;
   smbc_opendir_fn     smbclient_opendir;
   PpPrintDevice      *device;
+  const gchar        *host_name;
   SMBCFILE           *dir;
 
   if (!g_cancellable_is_cancelled (cancellable))
@@ -351,6 +352,11 @@ list_dir (SMBCCTX      *smb_context,
       dir = smbclient_opendir (smb_context, dirname);
       if (!dir && errno == EACCES)
         {
+          if (g_str_has_prefix (dirname, "smb://"))
+            host_name = dirname + 6;
+          else
+            host_name = dirname;
+
           if (data->auth_if_needed)
             {
               data->cancelled = FALSE;
@@ -360,9 +366,10 @@ list_dir (SMBCCTX      *smb_context,
 
               if (data->cancelled)
                 {
-                  device = g_new0 (PpPrintDevice, 1);
-                  device->host_name = g_str_has_prefix (dirname, "smb://") ? g_strdup (dirname + 6) : g_strdup (dirname);
-                  device->is_authenticated_server = TRUE;
+                  device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                         "host-name", host_name,
+                                         "is-authenticated-server", TRUE,
+                                         NULL);
 
                   data->devices->devices = g_list_append (data->devices->devices, device);
 
@@ -373,10 +380,10 @@ list_dir (SMBCCTX      *smb_context,
             }
           else
             {
-              device = g_new0 (PpPrintDevice, 1);
-
-              device->host_name = g_str_has_prefix (dirname, "smb://") ? g_strdup (dirname + 6) : g_strdup (dirname);
-              device->is_authenticated_server = TRUE;
+              device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                     "host-name", host_name,
+                                     "is-authenticated-server", TRUE,
+                                     NULL);
 
               data->devices->devices = g_list_append (data->devices->devices, device);
             }
@@ -384,6 +391,8 @@ list_dir (SMBCCTX      *smb_context,
 
       while (dir && (dirent = smbclient_readdir (smb_context, dir)))
         {
+          gchar *device_name;
+          gchar *device_uri;
           gchar *subdirname = NULL;
           gchar *subpath = NULL;
           gchar *uri;
@@ -402,26 +411,28 @@ list_dir (SMBCCTX      *smb_context,
 
           if (dirent->smbc_type == SMBC_PRINTER_SHARE)
             {
-              device = g_new0 (PpPrintDevice, 1);
-
               uri = g_strdup_printf ("%s/%s", dirname, dirent->name);
-              device->device_uri = g_uri_escape_string (uri,
-                                                        G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
-                                                        G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS,
-                                                        FALSE);
-              g_free (uri);
+              device_uri = g_uri_escape_string (uri,
+                                                G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
+                                                G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS,
+                                                FALSE);
 
-              device->device_class = g_strdup ("network");
-              device->device_info = g_strdup (dirent->comment);
-              device->device_name = g_strdup (dirent->name);
-              device->device_name =
-                g_strcanon (device->device_name, ALLOWED_CHARACTERS, '-');
-              if (data->hostname_set)
-                device->acquisition_method = ACQUISITION_METHOD_SAMBA_HOST;
-              else
-                device->acquisition_method = ACQUISITION_METHOD_SAMBA;
-              device->device_location = g_strdup (path);
-              device->host_name = g_strdup (dirname);
+              device_name = g_strdup (dirent->name);
+              device_name = g_strcanon (device_name, ALLOWED_CHARACTERS, '-');
+
+              device = g_object_new (PP_TYPE_PRINT_DEVICE,
+                                     "device-uri", device_uri,
+                                     "device-class", "network",
+                                     "device-info", dirent->comment,
+                                     "device-name", device_name,
+                                     "acquisition-method", data->hostname_set ? ACQUISITION_METHOD_SAMBA_HOST : ACQUISITION_METHOD_SAMBA,
+                                     "device-location", path,
+                                     "host-name", dirname,
+                                     NULL);
+
+              g_free (device_name);
+              g_free (device_uri);
+              g_free (uri);
 
               data->devices->devices = g_list_append (data->devices->devices, device);
             }
