@@ -229,19 +229,29 @@ add_stack_page (CcBluetoothPanel *self,
 	GtkWidget *label, *image, *box;
 	char *str;
 
-	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 24);
+	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	g_object_set (G_OBJECT (box), "margin-top", 64, "margin-bottom", 64, NULL);
 
-	image = gtk_image_new_from_icon_name ("bluetooth-active-symbolic", GTK_ICON_SIZE_DIALOG);
+	if (g_str_equal (name, BLUETOOTH_AIRPLANE_PAGE) ||
+	    g_str_equal (name, BLUETOOTH_HW_AIRPLANE_PAGE)) {
+		image = gtk_image_new_from_icon_name ("airplane-mode-symbolic",
+						      GTK_ICON_SIZE_DIALOG);
+	} else {
+		image = gtk_image_new_from_icon_name ("bluetooth-active-symbolic",
+						      GTK_ICON_SIZE_DIALOG);
+	}
 	gtk_image_set_pixel_size (GTK_IMAGE (image), 192);
 	gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-	gtk_box_pack_start (GTK_BOX (box), image, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 24);
 
 	str = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", message);
 	label = gtk_label_new ("");
 	gtk_label_set_markup (GTK_LABEL (label), str);
 	g_free (str);
-	gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+
+	label = gtk_label_new (explanation);
+	gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
 	if (g_str_equal (name, BLUETOOTH_AIRPLANE_PAGE)) {
 		GtkWidget *button, *alignment;
@@ -251,10 +261,7 @@ add_stack_page (CcBluetoothPanel *self,
 		gtk_container_add (GTK_CONTAINER (alignment), button);
 		g_signal_connect (G_OBJECT (button), "clicked",
 				  G_CALLBACK (on_airplane_mode_off_clicked), self);
-		gtk_box_pack_start (GTK_BOX (box), alignment, FALSE, FALSE, 0);
-	} else if (!g_str_equal (name, BLUETOOTH_HW_AIRPLANE_PAGE)) {
-		label = gtk_label_new (explanation);
-		gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (box), alignment, FALSE, FALSE, 24);
 	}
 
 	gtk_stack_add_named (GTK_STACK (self->priv->stack), box, name);
@@ -315,10 +322,10 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	self->priv->stack = gtk_stack_new ();
 	gtk_stack_set_homogeneous (GTK_STACK (self->priv->stack), TRUE);
-	add_stack_page (self, _("No Bluetooth Found"), _("Plug a Bluetooth Dongle to use Bluetooth"), BLUETOOTH_NO_DEVICES_PAGE);
-	add_stack_page (self, _("Bluetooth is Disabled"), _("Turn on to connect devices and receive file transfers."), BLUETOOTH_DISABLED_PAGE);
-	add_stack_page (self, _("Turn Off Airplane Mode to Enable Bluetooth"), NULL, BLUETOOTH_AIRPLANE_PAGE);
-	add_stack_page (self, _("Turn Off the Airplane Mode Switch to Enable Bluetooth"), NULL, BLUETOOTH_HW_AIRPLANE_PAGE);
+	add_stack_page (self, _("No Bluetooth Found"), _("Plug in a dongle to use Bluetooth."), BLUETOOTH_NO_DEVICES_PAGE);
+	add_stack_page (self, _("Bluetooth Turned Off"), _("Turn on to connect devices and receive file transfers."), BLUETOOTH_DISABLED_PAGE);
+	add_stack_page (self, _("Airplane Mode is on"), _("Bluetooth is disabled when airplane mode is on."), BLUETOOTH_AIRPLANE_PAGE);
+	add_stack_page (self, _("Hardware Airplane Mode is on"), _("Turn off the Airplane mode switch to enable Bluetooth."), BLUETOOTH_HW_AIRPLANE_PAGE);
 
 	self->priv->widget = bluetooth_settings_widget_new ();
 	g_signal_connect (G_OBJECT (self->priv->widget), "panel-changed",
