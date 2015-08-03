@@ -53,7 +53,6 @@ gint           pp_print_device_get_host_port             (PpPrintDevice *device)
 gboolean       pp_print_device_is_authenticated_server   (PpPrintDevice *device);
 gint           pp_print_device_get_acquisition_method    (PpPrintDevice *device);
 gboolean       pp_print_device_is_network_device         (PpPrintDevice *device);
-gboolean       pp_print_device_get_show                  (PpPrintDevice *device);
 
 G_END_DECLS
 

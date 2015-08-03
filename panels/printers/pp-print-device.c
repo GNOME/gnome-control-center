@@ -38,7 +38,6 @@ struct _PpPrintDevicePrivate
   gboolean  is_authenticated_server;
   gint      acquisition_method;
   gboolean  is_network_device;
-  gboolean  show;
 };
 
 enum
@@ -57,8 +56,7 @@ enum
   PROP_HOST_PORT,
   PROP_IS_AUTHENTICATED_SERVER,
   PROP_ACQUISITION_METHOD,
-  PROP_IS_NETWORK_DEVICE,
-  PROP_SHOW
+  PROP_IS_NETWORK_DEVICE
 };
 
 static void
@@ -136,9 +134,6 @@ pp_print_device_get_property (GObject    *object,
       case PROP_IS_NETWORK_DEVICE:
         g_value_set_boolean (value, self->priv->is_network_device);
         break;
-      case PROP_SHOW:
-        g_value_set_boolean (value, self->priv->show);
-        break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
                                            prop_id,
@@ -208,9 +203,6 @@ pp_print_device_set_property (GObject      *object,
         break;
       case PROP_IS_NETWORK_DEVICE:
         self->priv->is_network_device = g_value_get_boolean (value);
-        break;
-      case PROP_SHOW:
-        self->priv->show = g_value_get_boolean (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -343,14 +335,6 @@ pp_print_device_class_init (PpPrintDeviceClass *klass)
                                                          "Whether the device is a network device",
                                                          FALSE,
                                                          G_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_SHOW,
-                                   g_param_spec_boolean ("show",
-                                                         "Show",
-                                                         "Whether to show the device",
-                                                         FALSE,
-                                                         G_PARAM_READWRITE));
 }
 
 static void
@@ -451,12 +435,6 @@ pp_print_device_is_network_device (PpPrintDevice *device)
   return device->priv->is_network_device;
 }
 
-gboolean
-pp_print_device_get_show (PpPrintDevice *device)
-{
-  return device->priv->show;
-}
-
 PpPrintDevice *
 pp_print_device_copy (PpPrintDevice *device)
 {
@@ -475,6 +453,5 @@ pp_print_device_copy (PpPrintDevice *device)
                        "is-authenticated-server", pp_print_device_is_authenticated_server (device),
                        "acquisition-method", pp_print_device_get_acquisition_method (device),
                        "is-network-device", pp_print_device_is_network_device (device),
-                       "show", pp_print_device_get_show (device),
                        NULL);
 }
