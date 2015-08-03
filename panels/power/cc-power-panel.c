@@ -1725,7 +1725,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  w = gtk_label_new (_("Turn off mobile broadband (3G, 4G, WiMax, etc.) to save power."));
+  w = gtk_label_new (_("Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."));
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), w, TRUE, TRUE, 0);
