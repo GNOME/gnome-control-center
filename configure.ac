@@ -433,9 +433,9 @@ case $host_os in
       # Nothing
       echo "USB-related panels disabled on S390"
     else
-      if test "x$have_networkmanager" != "xyes" -o
-              "x$have_bluetooth" != "xyes" -o
-              "x$enable_cups" != "xyes" -o
+      if test "x$have_networkmanager" != "xyes" -o \
+              "x$have_bluetooth" != "xyes" -o \
+              "x$enable_cups" != "xyes" -o \
               "x$have_wacom" != "xyes"; then
         AC_MSG_ERROR([The Network, Bluetooth, Printers and Wacom panels are not optional on Linux systems])
      fi
