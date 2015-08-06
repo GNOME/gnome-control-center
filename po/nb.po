@@ -9,10 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.17.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 11:51+0200\n"
-"PO-Revision-Date: 2015-07-31 11:53+0200\n"
-"Last-Translator: Åka Sikrom <a4NOSPAMPLEASETHANKYOU alfakrøll hush dått "
-"com>\n"
+"POT-Creation-Date: 2015-08-06 11:06+0200\n"
+"PO-Revision-Date: 2015-08-06 11:08+0200\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: Norwegian bokmål\n"
 "MIME-Version: 1.0\n"
@@ -166,37 +165,45 @@ msgstr "Bytt bakgrunnsbilde"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Bakgrunn;Skjerm;Skrivebord;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:249
+#: ../panels/bluetooth/cc-bluetooth-panel.c:259
 msgid "Turn Off Airplane Mode"
 msgstr "Slå av flymodus"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:318
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
 msgid "No Bluetooth Found"
 msgstr "Fant ikke Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:318
-msgid "Plug a Bluetooth Dongle to use Bluetooth"
-msgstr "Koble til en Bluetooth-dongle for å bruke Bluetooth"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "Koble til en dongle for å bruke Bluetooth."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:319
-msgid "Bluetooth is Disabled"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Bluetooth Turned Off"
 msgstr "Bluetooth er slått av"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:319
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "Slå på for å koble til enheter og motta filer."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:320
-msgid "Turn Off Airplane Mode to Enable Bluetooth"
-msgstr "Slå av flymodus for å slå på Bluetooth"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+msgid "Airplane Mode is on"
+msgstr "Flymodus er på"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:321
-msgid "Turn Off the Airplane Mode Switch to Enable Bluetooth"
-msgstr "Slå av flymodus bryteren for å slå på Bluetooth"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "Bluetooth er slått av når flymodus er på."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Hardware Airplane Mode is on"
+msgstr "Flymodus slått på med maskinvare"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "Slå av flymodus bryteren for å slå på Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1588
+#: ../panels/printers/pp-new-printer-dialog.c:1672
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -3929,16 +3936,16 @@ msgid "_Wi-Fi"
 msgstr "_Trådløs"
 
 #: ../panels/power/cc-power-panel.c:1698
-msgid "Wireless devices require extra power"
-msgstr "Trådløse enheter krever mer strøm"
+msgid "Turn off Wi-Fi to save power."
+msgstr "Slå av Wi-Fi for å spare strøm."
 
 #: ../panels/power/cc-power-panel.c:1723
 msgid "_Mobile broadband"
 msgstr "_Mobilt bredbånd"
 
 #: ../panels/power/cc-power-panel.c:1728
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr "Mobile bredbåndsenheter (3G, 4G, WiMax, etc.) krever mer strøm"
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgstr "Slå av mobilt bredbånd (3G, 4G, LTE, etc.) for å spare strøm."
 
 #: ../panels/power/cc-power-panel.c:1780
 msgid "_Bluetooth"
@@ -4431,34 +4438,34 @@ msgid "%s Active Jobs"
 msgstr "%s aktive jobber"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1571
+#: ../panels/printers/pp-new-printer-dialog.c:1655
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1576
+#: ../panels/printers/pp-new-printer-dialog.c:1660
 msgid "Serial Port"
 msgstr "Seriellport"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1583
+#: ../panels/printers/pp-new-printer-dialog.c:1667
 msgid "Parallel Port"
 msgstr "Parallellport"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1636
+#: ../panels/printers/pp-new-printer-dialog.c:1709
 #, c-format
 msgid "Location: %s"
 msgstr "Plassering: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1641
+#: ../panels/printers/pp-new-printer-dialog.c:1714
 #, c-format
 msgid "Address: %s"
 msgstr "Adresse: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1665
+#: ../panels/printers/pp-new-printer-dialog.c:1743
 msgid "Server requires authentication"
 msgstr "Tjener krever autentisering"
 
@@ -5158,7 +5165,9 @@ msgstr "Kontroller hva du vil dele med andre"
 msgid ""
 "share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
 "movies;server;renderer;"
-msgstr "del;deling;ssh;vert;navn;ekstern;skrivebord;media;lyd;video;bilder;foto;filmer;tjener;visning;"
+msgstr ""
+"del;deling;ssh;vert;navn;ekstern;skrivebord;media;lyd;video;bilder;foto;"
+"filmer;tjener;visning;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
