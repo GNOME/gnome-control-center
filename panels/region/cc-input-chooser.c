@@ -1059,7 +1059,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   GtkBuilder *builder;
   GtkWidget *chooser;
   CcInputChooserPrivate *priv;
-  gint width;
+  gint width, height;
   GError *error = NULL;
 
   builder = gtk_builder_new ();
@@ -1105,9 +1105,9 @@ cc_input_chooser_new (GtkWindow    *main_window,
 #endif  /* HAVE_IBUS */
   show_locale_rows (chooser);
 
-  /* Try to come up with a sensible width */
-  gtk_window_get_size (main_window, &width, NULL);
-  gtk_widget_set_size_request (chooser, width * MAIN_WINDOW_WIDTH_RATIO, -1);
+  /* Try to come up with a sensible size */
+  gtk_window_get_size (main_window, &width, &height);
+  gtk_widget_set_size_request (chooser, width * MAIN_WINDOW_WIDTH_RATIO, height);
   gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), main_window);
