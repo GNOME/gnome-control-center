@@ -57,7 +57,7 @@ main (int argc, char **argv)
       items = g_strsplit (lines[i], "\t", -1);
       if (g_strv_length (items) == 6)
         {
-          PpPrintDevice  *device, *tmp;
+          PpPrintDevice  *device;
           gchar         **already_present_printers;
           gchar          *canonicalized_name;
           GList          *devices = NULL;
@@ -65,13 +65,7 @@ main (int argc, char **argv)
           already_present_printers = g_strsplit (items[0], " ", -1);
 
           for (j = 0; already_present_printers[j] != NULL; j++)
-            {
-              tmp = g_object_new (PP_TYPE_PRINT_DEVICE,
-                                  "device-original-name", already_present_printers[j],
-                                  NULL);
-
-              devices = g_list_append (devices, tmp);
-            }
+            devices = g_list_append (devices, g_strdup (already_present_printers[j]));
 
           device = g_object_new (PP_TYPE_PRINT_DEVICE,
                                  "device-id", items[1],
@@ -96,7 +90,7 @@ main (int argc, char **argv)
 
           g_free (canonicalized_name);
           g_object_unref (device);
-          g_list_free_full (devices, (GDestroyNotify) g_object_unref);
+          g_list_free_full (devices, (GDestroyNotify) g_free);
           g_strfreev (already_present_printers);
         }
       else
