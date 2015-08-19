@@ -614,11 +614,12 @@ static void
 update_language_from_user (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        const gchar *language;
+        const gchar *language = NULL;
 
         if (act_user_is_loaded (priv->user))
                 language = act_user_get_language (priv->user);
-        else
+
+        if (language == NULL || *language == '\0')
                 language = setlocale (LC_MESSAGES, NULL);
 
         g_free (priv->language);
