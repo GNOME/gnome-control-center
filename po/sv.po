@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-"
 "center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-04-10 18:40+0000\n"
-"PO-Revision-Date: 2015-04-10 23:11+0100\n"
+"POT-Creation-Date: 2015-08-15 09:28+0000\n"
+"PO-Revision-Date: 2015-08-15 14:54+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Svenska <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.8.3\n"
 
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
@@ -109,28 +109,28 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "Du kan lägga till bilder till mapp för %s så kommer de att visas här"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
-#: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:962
+#: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1579
-#: ../panels/display/cc-display-panel.c:2022
+#: ../panels/display/cc-display-panel.c:1561
+#: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1247 ../panels/network/net-device-wifi.c:1440
-#: ../panels/network/network-wifi.ui.h:1 ../panels/printers/cc-printers-panel.c:1938
+#: ../panels/network/net-device-wifi.c:1269 ../panels/network/net-device-wifi.c:1462
+#: ../panels/network/network-wifi.ui.h:1 ../panels/printers/cc-printers-panel.c:1940
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568 ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:491
+#: ../panels/sharing/cc-sharing-panel.c:374
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:706
-#: ../panels/user-accounts/um-user-panel.c:724
+#: ../panels/user-accounts/um-user-panel.c:708
+#: ../panels/user-accounts/um-user-panel.c:726
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -168,27 +168,56 @@ msgstr "Ändra din skrivbordsbakgrund till bakgrundsbild eller foto"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Skrivbordsbakgrund;Skärm;Skrivbord;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:262
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth är inaktiverat"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+msgid "Turn Off Airplane Mode"
+msgstr "Stäng av flygplansläge"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:263
-msgid "No Bluetooth adapters found"
-msgstr "Inga Bluetooth-adaptrar hittades"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "No Bluetooth Found"
+msgstr "Inget Bluetooth hittades"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:264
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth är inaktiverat med hårdvaruknapp"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "Anslut en adapter för att använda Bluetooth."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Bluetooth Turned Off"
+msgstr "Bluetooth avslaget"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Turn on to connect devices and receive file transfers."
+msgstr "Slå på för att ansluta enheter och ta emot filöverföringar."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+msgid "Airplane Mode is on"
+msgstr "Flygplansläge är på"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "Bluetooth är inaktiverat när flygplansläge är på."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Hardware Airplane Mode is on"
+msgstr "Flygplansläge i hårdvaran är på"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "Slå av växelknappen för flygplansläge för att aktivera Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1637
+#: ../panels/printers/pp-new-printer-dialog.c:1672
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Slå på samt av Bluetooth och anslut dina enheter"
+
+#. Translators: those are keywords for the bluetooth control-center panel
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:4
+msgid "share;sharing;bluetooth;obex;"
+msgstr "dela;delning;share;blåtand;bluetooth;obex;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -321,48 +350,48 @@ msgstr "Inte kalibrerad"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:140
+#: ../panels/color/cc-color-panel.c:141
 msgid "Default: "
 msgstr "Standard: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:148
+#: ../panels/color/cc-color-panel.c:149
 msgid "Colorspace: "
 msgstr "Färgrymd: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:155
+#: ../panels/color/cc-color-panel.c:156
 msgid "Test profile: "
 msgstr "Testprofil: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:222
+#: ../panels/color/cc-color-panel.c:223
 msgid "Select ICC Profile File"
 msgstr "Välj ICC-profilfil"
 
-#: ../panels/color/cc-color-panel.c:225
+#: ../panels/color/cc-color-panel.c:226
 msgid "_Import"
 msgstr "_Importera"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:236
+#: ../panels/color/cc-color-panel.c:237
 msgid "Supported ICC profiles"
 msgstr "ICC-profiler som stöds"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:243
+#: ../panels/color/cc-color-panel.c:244
 #: ../panels/network/wireless-security/eap-method-fast.c:420
 msgid "All files"
 msgstr "Alla filer"
 
-#: ../panels/color/cc-color-panel.c:582
+#: ../panels/color/cc-color-panel.c:583
 msgid "Screen"
 msgstr "Skärm"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:907
+#: ../panels/color/cc-color-panel.c:908
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Misslyckades med att skicka filen: %s"
@@ -370,39 +399,39 @@ msgstr "Misslyckades med att skicka filen: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:921
+#: ../panels/color/cc-color-panel.c:922
 msgid "The profile has been uploaded to:"
 msgstr "Profilen har skickats till:"
 
-#: ../panels/color/cc-color-panel.c:923
+#: ../panels/color/cc-color-panel.c:924
 msgid "Write down this URL."
 msgstr "Skriv ner denna URL."
 
-#: ../panels/color/cc-color-panel.c:924
+#: ../panels/color/cc-color-panel.c:925
 msgid "Restart this computer and boot your normal operating system."
 msgstr "Starta om den här datorn och läs in ditt vanliga operativsystem."
 
-#: ../panels/color/cc-color-panel.c:925
+#: ../panels/color/cc-color-panel.c:926
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "Skriv in URL:en i din webbläsare för att hämta och installera profilen."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:959
+#: ../panels/color/cc-color-panel.c:960
 msgid "Save Profile"
 msgstr "Spara profil"
 
-#: ../panels/color/cc-color-panel.c:963
+#: ../panels/color/cc-color-panel.c:964
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_Spara"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1323
+#: ../panels/color/cc-color-panel.c:1324
 msgid "Create a color profile for the selected device"
 msgstr "Skapa en färgprofil för den valda enheten"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1338 ../panels/color/cc-color-panel.c:1362
+#: ../panels/color/cc-color-panel.c:1339 ../panels/color/cc-color-panel.c:1363
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -411,12 +440,12 @@ msgstr ""
 "korrekt anslutet."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1372
+#: ../panels/color/cc-color-panel.c:1373
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Mätinstrumentet saknar stöd för skrivarprofilering."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1383
+#: ../panels/color/cc-color-panel.c:1384
 msgid "The device type is not currently supported."
 msgstr "Enhetstypen stöds för närvarande inte."
 
@@ -774,7 +803,7 @@ msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Mellan"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minuter"
@@ -784,7 +813,7 @@ msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Låg"
 
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 minuter"
 
@@ -825,12 +854,12 @@ msgstr "Färg;ICC;Profil;Kalibrera;Skrivare;Skärm;"
 msgid "Other…"
 msgstr "Övriga…"
 
-#: ../panels/common/cc-language-chooser.c:123
-#: ../panels/region/cc-format-chooser.c:270 ../panels/region/cc-input-chooser.c:167
+#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/region/cc-format-chooser.c:271 ../panels/region/cc-input-chooser.c:168
 msgid "More…"
 msgstr "Mer…"
 
-#: ../panels/common/cc-language-chooser.c:139
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Hittade inga språk"
 
@@ -841,6 +870,21 @@ msgstr "Språk"
 #: ../panels/common/language-chooser.ui.h:2 ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Färdig"
+
+#: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
+#: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
+msgid "Day"
+msgstr "Dag"
+
+#: ../panels/datetime/big.ui.h:2 ../panels/datetime/little.ui.h:2
+#: ../panels/datetime/middle.ui.h:2 ../panels/datetime/ydm.ui.h:2
+msgid "Month"
+msgstr "Månad"
+
+#: ../panels/datetime/big.ui.h:3 ../panels/datetime/little.ui.h:3
+#: ../panels/datetime/middle.ui.h:3 ../panels/datetime/ydm.ui.h:3
+msgid "Year"
+msgstr "År"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
@@ -958,54 +1002,42 @@ msgid "Minute"
 msgstr "Minut"
 
 #: ../panels/datetime/datetime.ui.h:18
-msgid "Day"
-msgstr "Dag"
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Month"
-msgstr "Månad"
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Year"
-msgstr "År"
-
-#: ../panels/datetime/datetime.ui.h:21
 msgid "Time Zone"
 msgstr "Tidszon"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Search for a city"
 msgstr "Sök efter en stad"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Automatic _Date & Time"
 msgstr "Automatisk _datum & tid"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Requires internet access"
 msgstr "Kräver internetåtkomst"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Automatic Time _Zone"
 msgstr "A_utomatisk tidszon"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Date & _Time"
 msgstr "Datum & _tid"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Time _Zone"
 msgstr "Tids_zon"
 
-#: ../panels/datetime/datetime.ui.h:28
+#: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
 msgstr "Tids_format"
 
-#: ../panels/datetime/datetime.ui.h:29
+#: ../panels/datetime/datetime.ui.h:26
 msgid "24-hour"
 msgstr "24-timmars"
 
-#: ../panels/datetime/datetime.ui.h:30
+#: ../panels/datetime/datetime.ui.h:27
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1026,22 +1058,22 @@ msgstr "Ändra systeminställningar för tid och datum"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Du måste autentisera dig för att ändra inställningar för tid eller datum."
 
-#: ../panels/display/cc-display-panel.c:564
+#: ../panels/display/cc-display-panel.c:573
 msgid "Lid Closed"
 msgstr "Lock stängt"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:567
+#: ../panels/display/cc-display-panel.c:576
 msgid "Mirrored"
 msgstr "Speglad"
 
-#: ../panels/display/cc-display-panel.c:569 ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:578 ../panels/display/cc-display-panel.c:2195
 msgid "Primary"
 msgstr "Primär"
 
-#: ../panels/display/cc-display-panel.c:571
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1713 ../panels/power/cc-power-panel.c:1724
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
 #: ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
@@ -1049,94 +1081,94 @@ msgstr "Primär"
 msgid "Off"
 msgstr "Av"
 
-#: ../panels/display/cc-display-panel.c:574
+#: ../panels/display/cc-display-panel.c:583
 msgid "Secondary"
 msgstr "Sekundär"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1576
+#: ../panels/display/cc-display-panel.c:1558
 msgid "Arrange Combined Displays"
 msgstr "Arrangera kombinerade skärmar"
 
-#: ../panels/display/cc-display-panel.c:1580
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/display/cc-display-panel.c:1562
+#: ../panels/display/cc-display-panel.c:2024
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Verkställ"
 
-#: ../panels/display/cc-display-panel.c:1604
+#: ../panels/display/cc-display-panel.c:1586
 msgid "Drag displays to rearrange them"
 msgstr "Dra skärmar för att arrangera om dem"
 
-#: ../panels/display/cc-display-panel.c:2075
+#: ../panels/display/cc-display-panel.c:2073
 msgid "Rotate counterclockwise by 90°"
 msgstr "Rotera motsols 90°"
 
-#: ../panels/display/cc-display-panel.c:2093
+#: ../panels/display/cc-display-panel.c:2091
 msgid "Rotate by 180°"
 msgstr "Rotera 180°"
 
-#: ../panels/display/cc-display-panel.c:2111
+#: ../panels/display/cc-display-panel.c:2109
 msgid "Rotate clockwise by 90°"
 msgstr "Rotera medsols 90°"
 
-#: ../panels/display/cc-display-panel.c:2132
+#: ../panels/display/cc-display-panel.c:2130
 msgid "Size"
 msgstr "Storlek"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2145
+#: ../panels/display/cc-display-panel.c:2143
 msgid "Aspect Ratio"
 msgstr "Bildförhållande"
 
-#: ../panels/display/cc-display-panel.c:2166
+#: ../panels/display/cc-display-panel.c:2165
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Upplösning"
 
-#: ../panels/display/cc-display-panel.c:2197
+#: ../panels/display/cc-display-panel.c:2196
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Visa systemraden och Aktivitetsöversikten på denna skärm"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2202
 msgid "Secondary Display"
 msgstr "Sekundär skärm"
 
-#: ../panels/display/cc-display-panel.c:2204
+#: ../panels/display/cc-display-panel.c:2203
 msgid "Join this display with another to create an extra workspace"
 msgstr "Sammanfoga denna skärm med en annan för att skapa en extra arbetsyta"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2210
 msgid "Presentation"
 msgstr "Presentation"
 
-#: ../panels/display/cc-display-panel.c:2212
+#: ../panels/display/cc-display-panel.c:2211
 msgid "Show slideshows and media only"
 msgstr "Visa endast bildspel och media"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2216
 msgid "Mirror"
 msgstr "Spegling"
 
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:2217
 msgid "Show your existing view on both displays"
 msgstr "Visa din befintliga vy på båda skärmarna"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2223
 msgid "Turn Off"
 msgstr "Stäng av"
 
-#: ../panels/display/cc-display-panel.c:2225
+#: ../panels/display/cc-display-panel.c:2224
 msgid "Don't use this display"
 msgstr "Använd inte denna skärm"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2525
 msgid "Could not get screen information"
 msgstr "Kunde inte hämta skärminformation"
 
-#: ../panels/display/cc-display-panel.c:2486
+#: ../panels/display/cc-display-panel.c:2556
 msgid "_Arrange Combined Displays"
 msgstr "_Arrangera kombinerade skärmar"
 
@@ -1714,12 +1746,12 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Genvägar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:636
-#: ../panels/keyboard/keyboard-shortcuts.c:644
+#: ../panels/keyboard/keyboard-shortcuts.c:632
+#: ../panels/keyboard/keyboard-shortcuts.c:640
 msgid "Custom Shortcuts"
 msgstr "Anpassade genvägar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:861
+#: ../panels/keyboard/keyboard-shortcuts.c:857
 msgid "<Unknown Action>"
 msgstr "<Okänd åtgärd>"
 
@@ -1942,13 +1974,13 @@ msgid "802.1x _Security"
 msgstr "802.1x-_säkerhet"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
 msgstr "sida 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
@@ -1956,18 +1988,18 @@ msgid "Anony_mous identity"
 msgstr "Anony_m identitet"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:5
 msgid "Inner _authentication"
 msgstr "Inre _autentisering"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
 msgstr "sida 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
-#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/ce-page-security.c:469
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -1979,37 +2011,37 @@ msgstr "automatisk"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:218 ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:219 ../panels/network/net-device-wifi.c:383
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:222 ../panels/network/net-device-wifi.c:387
+#: ../panels/network/net-device-wifi.c:223 ../panels/network/net-device-wifi.c:388
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:226
+#: ../panels/network/net-device-wifi.c:227
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:231
+#: ../panels/network/net-device-wifi.c:232
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:236 ../panels/network/net-device-wifi.c:372
+#: ../panels/network/net-device-wifi.c:237 ../panels/network/net-device-wifi.c:373
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ingen"
 
 #: ../panels/network/connection-editor/ce-page-details.c:91
-#: ../panels/power/power.ui.h:19
+#: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "Aldrig"
 
@@ -2025,7 +2057,7 @@ msgstr "Igår"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:477
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2034,44 +2066,44 @@ msgstr[1] "%i dagar sedan"
 
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
-#: ../panels/network/net-device-ethernet.c:54 ../panels/network/net-device-wifi.c:533
+#: ../panels/network/net-device-ethernet.c:54 ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ingen"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Svag"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bra"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Utmärkt"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:270
+#: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identitet"
@@ -2177,33 +2209,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Återställ"
 
-#: ../panels/network/connection-editor/ce-page-security.c:250
+#: ../panels/network/connection-editor/ce-page-security.c:253
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/network/connection-editor/ce-page-security.c:273
+#: ../panels/network/connection-editor/ce-page-security.c:276
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-bitars nyckel (Hex eller ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:283
+#: ../panels/network/connection-editor/ce-page-security.c:286
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bitars lösenfras"
 
-#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/connection-editor/ce-page-security.c:299
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:309
+#: ../panels/network/connection-editor/ce-page-security.c:312
 msgid "Dynamic WEP (802.1x)"
 msgstr "Dynamisk WEP (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:323
+#: ../panels/network/connection-editor/ce-page-security.c:326
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: ../panels/network/connection-editor/ce-page-security.c:337
+#: ../panels/network/connection-editor/ce-page-security.c:340
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
@@ -2325,8 +2357,8 @@ msgid "Connect _automatically"
 msgstr "Anslut _automatiskt"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
-#: ../panels/network/connection-editor/wifi-page.ui.h:8
 msgid "Firewall _Zone"
 msgstr "Brandväggs_zon"
 
@@ -2424,7 +2456,7 @@ msgid "_Reset"
 msgstr "_Återställ"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1441 ../panels/network/network-wifi.ui.h:42
+#: ../panels/network/net-device-wifi.c:1463 ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Glöm"
 
@@ -2469,8 +2501,8 @@ msgid "Select file to import"
 msgstr "Välj fil att importera"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1939
-#: ../panels/sharing/cc-sharing-panel.c:492
+#: ../panels/printers/cc-printers-panel.c:1941
+#: ../panels/sharing/cc-sharing-panel.c:375
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_Öppna"
@@ -2546,8 +2578,8 @@ msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;vlan;"
 "bridge;bond;DNS;"
 msgstr ""
-"Nätverk;Trådlöst;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Bredband;Modem;Bluetooth;vpn;vlan;"
-"brygga;bond;DNS;"
+"Nätverk;Trådlöst;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Bredband;Modem;Bluetooth;Blåtand;vpn;"
+"vlan;brygga;bond;DNS;"
 
 #: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
@@ -2563,17 +2595,17 @@ msgid "Bridge slaves"
 msgstr "Bryggslavar"
 
 #: ../panels/network/net-device-ethernet.c:110
-#: ../panels/network/net-device-wifi.c:462
+#: ../panels/network/net-device-wifi.c:463
 msgid "never"
 msgstr "aldrig"
 
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:473
 msgid "today"
 msgstr "idag"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:474
+#: ../panels/network/net-device-wifi.c:475
 msgid "yesterday"
 msgstr "igår"
 
@@ -2598,13 +2630,13 @@ msgid "Wired"
 msgstr "Trådbundet"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1597 ../panels/network/network-ethernet.ui.h:3
+#: ../panels/network/net-device-wifi.c:1621 ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8 ../panels/network/network-simple.ui.h:8
 #: ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Alternativ…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:473
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
@@ -2617,7 +2649,7 @@ msgstr "Lägg till ny anslutning"
 msgid "Team slaves"
 msgstr "Gruppslavar"
 
-#: ../panels/network/net-device-wifi.c:1154
+#: ../panels/network/net-device-wifi.c:1176
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up a "
 "wireless hotspot to share the connection with others."
@@ -2625,36 +2657,36 @@ msgstr ""
 "Om du har en annan anslutning till Internet än trådlös, så kan du sätta upp en "
 "trådlös surfzon för att dela anslutningen med andra."
 
-#: ../panels/network/net-device-wifi.c:1158
+#: ../panels/network/net-device-wifi.c:1180
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Aktivering av den trådlösa surfzonen kommer att koppla bort dig från <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1162
+#: ../panels/network/net-device-wifi.c:1184
 msgid ""
 "It is not possible to access the Internet through your wireless while the hotspot "
 "is active."
 msgstr ""
 "Det är inte möjligt att ansluta trådlöst till internet så länge surfzonen är aktiv."
 
-#: ../panels/network/net-device-wifi.c:1245
+#: ../panels/network/net-device-wifi.c:1267
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stoppa surfzonen och koppla ifrån eventuella användare?"
 
-#: ../panels/network/net-device-wifi.c:1248
+#: ../panels/network/net-device-wifi.c:1270
 msgid "_Stop Hotspot"
 msgstr "_Stoppa surfzon"
 
-#: ../panels/network/net-device-wifi.c:1305
+#: ../panels/network/net-device-wifi.c:1327
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systempolicyn tillåter ej användning som surfzon"
 
-#: ../panels/network/net-device-wifi.c:1308
+#: ../panels/network/net-device-wifi.c:1330
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Den trådlösa enheten stöder inte användning av surfzoner"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1459
 msgid ""
 "Network details for the selected networks, including passwords and any custom "
 "configuration will be lost."
@@ -2662,19 +2694,19 @@ msgstr ""
 "Nätverksdetaljer för markerade nätverk, inklusive lösenord och anpassad "
 "konfiguration kommer att gå förlorade."
 
-#: ../panels/network/net-device-wifi.c:1750
+#: ../panels/network/net-device-wifi.c:1774
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historik"
 
-#: ../panels/network/net-device-wifi.c:1754 ../panels/region/input-options.ui.h:2
-#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:533
+#: ../panels/network/net-device-wifi.c:1778 ../panels/region/input-options.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Stäng"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1762
+#: ../panels/network/net-device-wifi.c:1786
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Glöm"
@@ -2937,8 +2969,10 @@ msgid "Security type"
 msgstr "Säkerhetstyp"
 
 #: ../panels/network/network-wifi.ui.h:63
-msgid "Security key"
-msgstr "Säkerhetsnyckel"
+#: ../panels/printers/authentication-dialog.ui.h:5 ../panels/sharing/sharing.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "Password"
+msgstr "Lösenord"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -3486,8 +3520,8 @@ msgstr "WEP-inde_x"
 msgid "_Type"
 msgstr "_Typ"
 
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1719 ../panels/power/cc-power-panel.c:1726
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
 #: ../panels/privacy/cc-privacy-panel.c:155 ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:572
@@ -3582,39 +3616,39 @@ msgstr "Chatt"
 msgid "Resources"
 msgstr "Resurser"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:423
+#: ../panels/online-accounts/cc-online-accounts-panel.c:422
 msgid "Error logging into the account"
 msgstr "Fel vid inloggning med kontot"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#: ../panels/online-accounts/cc-online-accounts-panel.c:492
 msgid "Credentials have expired."
 msgstr "Autentiseringsuppgifterna har gått ut."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:496
 msgid "Sign in to enable this account."
 msgstr "Logga in för att aktivera detta konto."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:502
+#: ../panels/online-accounts/cc-online-accounts-panel.c:501
 msgid "_Sign In"
 msgstr "_Logga in"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:743
+#: ../panels/online-accounts/cc-online-accounts-panel.c:748
 msgid "Error creating account"
 msgstr "Fel vid skapande av kontot"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:803
+#: ../panels/online-accounts/cc-online-accounts-panel.c:808
 msgid "Error removing account"
 msgstr "Fel vid borttagning av kontot"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:839
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
 msgid "Are you sure you want to remove the account?"
 msgstr "Är du säker på att du vill ta bort kontot?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:841
+#: ../panels/online-accounts/cc-online-accounts-panel.c:846
 msgid "This will not remove the account on the server."
 msgstr "Detta kommer inte att ta bort kontot på servern."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:842
+#: ../panels/online-accounts/cc-online-accounts-panel.c:847
 msgid "_Remove"
 msgstr "_Ta bort"
 
@@ -3655,18 +3689,18 @@ msgstr ""
 "Att lägga till ett konto medför att dina program kan komma åt det för dokument, e-"
 "post, kontakter, kalender, chatt och mer."
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:200
 msgid "Unknown time"
 msgstr "Okänd tid"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minut"
 msgstr[1] "%i minuter"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3675,226 +3709,226 @@ msgstr[1] "%i timmar"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:226
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:219
+#: ../panels/power/cc-power-panel.c:227
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "timme"
 msgstr[1] "timmar"
 
-#: ../panels/power/cc-power-panel.c:220
+#: ../panels/power/cc-power-panel.c:228
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minuter"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:239
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s tills fullt uppladdad"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:246
+#: ../panels/power/cc-power-panel.c:254
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Varning: %s återstår"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%s remaining"
 msgstr "%s återstår"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
+#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
 msgid "Fully charged"
 msgstr "Fullt uppladdad"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
 msgid "Empty"
 msgstr "Tom"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging"
 msgstr "Laddar upp"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:288
 msgid "Discharging"
 msgstr "Laddar ur"
 
-#: ../panels/power/cc-power-panel.c:405
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Huvudsaklig"
 
-#: ../panels/power/cc-power-panel.c:407
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "Trådlös mus"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:487
 msgid "Wireless keyboard"
 msgstr "Trådlöst tangentbord"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:490
 msgid "Uninterruptible power supply"
 msgstr "Avbrottsfri kraftförsörjning (UPS)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:493
 msgid "Personal digital assistant"
 msgstr "Handdator"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:496
 msgid "Cellphone"
 msgstr "Mobiltelefon"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:494
+#: ../panels/power/cc-power-panel.c:499
 msgid "Media player"
 msgstr "Mediaspelare"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "Ritplatta"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:500
+#: ../panels/power/cc-power-panel.c:505
 msgid "Computer"
 msgstr "Dator"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:2055
+#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
+#: ../panels/power/cc-power-panel.c:2096
 msgid "Battery"
 msgstr "Batteri"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:562
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Laddar"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:564
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Varning"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Låg"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bra"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:584
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Uppladdad"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tom"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:746
 msgid "Batteries"
 msgstr "Batterier"
 
-#: ../panels/power/cc-power-panel.c:1134
+#: ../panels/power/cc-power-panel.c:1167
 msgid "When _idle"
 msgstr "När led_ig"
 
-#: ../panels/power/cc-power-panel.c:1463
+#: ../panels/power/cc-power-panel.c:1547
 msgid "Power Saving"
 msgstr "Strömspar"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1582
 msgid "_Screen brightness"
 msgstr "_Skärmljusstyrka"
 
-#: ../panels/power/cc-power-panel.c:1504
+#: ../panels/power/cc-power-panel.c:1601
+msgid "Automatic brightness"
+msgstr "Automatisk ljusstyrka"
+
+#: ../panels/power/cc-power-panel.c:1621
 msgid "_Keyboard brightness"
 msgstr "_Tangentbordljusstyrka"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1631
 msgid "_Dim screen when inactive"
 msgstr "_Dämpa skärmen när inaktiv"
 
-#: ../panels/power/cc-power-panel.c:1539
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Blank screen"
 msgstr "_Töm skärm"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1693
 msgid "_Wi-Fi"
 msgstr "Trådlöst _nätverk"
 
-#: ../panels/power/cc-power-panel.c:1581
-msgid "Wireless devices require extra power"
-msgstr "Trådlösa enheter kräver extra ström"
+#: ../panels/power/cc-power-panel.c:1698
+msgid "Turn off Wi-Fi to save power."
+msgstr "Stäng av trådlöst nätverk för att spara ström."
 
-#: ../panels/power/cc-power-panel.c:1606
+#: ../panels/power/cc-power-panel.c:1723
 msgid "_Mobile broadband"
 msgstr "_Mobilt bredband"
 
-#: ../panels/power/cc-power-panel.c:1611
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr "Mobila bredbandsenheter (3G, 4G, WiMax med mera) kräver extra ström"
+#: ../panels/power/cc-power-panel.c:1728
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgstr "Stäng av mobilt bredband (3G, 4G, LTE med mera) för att spara ström."
 
-#: ../panels/power/cc-power-panel.c:1661
+#: ../panels/power/cc-power-panel.c:1780
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1715
+#: ../panels/power/cc-power-panel.c:1836
 msgid "When on battery power"
 msgstr "När på batteriström"
 
-#: ../panels/power/cc-power-panel.c:1717
+#: ../panels/power/cc-power-panel.c:1838
 msgid "When plugged in"
 msgstr "När ansluten"
 
-#: ../panels/power/cc-power-panel.c:1847
+#: ../panels/power/cc-power-panel.c:1955
 msgid "Suspend & Power Off"
 msgstr "Vänteläge & stäng av"
 
-#: ../panels/power/cc-power-panel.c:1887
+#: ../panels/power/cc-power-panel.c:1995
 msgid "_Automatic suspend"
 msgstr "_Automatiskt vänteläge"
 
-#: ../panels/power/cc-power-panel.c:1911
-msgid "When battery power is _critical"
-msgstr "När batteriström är _kritiskt låg"
+#: ../panels/power/cc-power-panel.c:1996
+msgid "Automatic suspend"
+msgstr "Automatiskt vänteläge"
 
-#: ../panels/power/cc-power-panel.c:1966
-msgid "Power Off"
-msgstr "Stäng av"
-
-#: ../panels/power/cc-power-panel.c:2109
+#: ../panels/power/cc-power-panel.c:2150
 msgid "Devices"
 msgstr "Enheter"
 
@@ -3912,94 +3946,81 @@ msgid "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;I
 msgstr ""
 "Ström;Sova;Vänteläge;Viloläge;Batteri;Ljusstyrka;Dämpa; Blank;Skärm;DPMS;inaktiv;"
 
-#: ../panels/power/power.ui.h:1
-msgid "Hibernate"
-msgstr "Viloläge"
-
-#: ../panels/power/power.ui.h:2
-msgid "Power off"
-msgstr "Stäng av"
-
-#: ../panels/power/power.ui.h:5
+#: ../panels/power/power.ui.h:3
 msgid "45 minutes"
 msgstr "45 minuter"
 
-#: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
+#: ../panels/power/power.ui.h:4 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
 msgstr "En timme"
 
-#: ../panels/power/power.ui.h:7
+#: ../panels/power/power.ui.h:5
 msgid "80 minutes"
 msgstr "80 minuter"
 
-#: ../panels/power/power.ui.h:8
+#: ../panels/power/power.ui.h:6
 msgid "90 minutes"
 msgstr "90 minuter"
 
-#: ../panels/power/power.ui.h:9
+#: ../panels/power/power.ui.h:7
 msgid "100 minutes"
 msgstr "100 minuter"
 
-#: ../panels/power/power.ui.h:10
+#: ../panels/power/power.ui.h:8
 msgid "2 hours"
 msgstr "Två timmar"
 
-#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:3
+#: ../panels/power/power.ui.h:9 ../panels/privacy/privacy.ui.h:3
 msgid "1 minute"
 msgstr "En minut"
 
-#: ../panels/power/power.ui.h:12 ../panels/privacy/privacy.ui.h:4
+#: ../panels/power/power.ui.h:10 ../panels/privacy/privacy.ui.h:4
 msgid "2 minutes"
 msgstr "Två minuter"
 
-#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:5
+#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:5
 msgid "3 minutes"
 msgstr "Tre minuter"
 
-#: ../panels/power/power.ui.h:14
+#: ../panels/power/power.ui.h:12
 msgid "4 minutes"
 msgstr "Fyra minuter"
 
-#: ../panels/power/power.ui.h:15 ../panels/privacy/privacy.ui.h:6
+#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:6
 msgid "5 minutes"
 msgstr "Fem minuter"
 
-#: ../panels/power/power.ui.h:16
+#: ../panels/power/power.ui.h:14
 msgid "8 minutes"
 msgstr "Åtta minuter"
 
-#: ../panels/power/power.ui.h:17
+#: ../panels/power/power.ui.h:15
 msgid "10 minutes"
 msgstr "Tio minuter"
 
-#: ../panels/power/power.ui.h:18
+#: ../panels/power/power.ui.h:16
 msgid "12 minutes"
 msgstr "Tolv minuter"
 
-#: ../panels/power/power.ui.h:20
+#: ../panels/power/power.ui.h:18
 msgid "Automatic Suspend"
 msgstr "Automatiskt vänteläge"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:19
 msgid "_Plugged In"
 msgstr "_Ansluten"
 
-#: ../panels/power/power.ui.h:22
+#: ../panels/power/power.ui.h:20
 msgid "On _Battery Power"
 msgstr "På _batteriström"
 
-#: ../panels/power/power.ui.h:23
+#: ../panels/power/power.ui.h:21
 msgid "Delay"
 msgstr "Fördröjning"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Autentisera"
-
-#: ../panels/printers/authentication-dialog.ui.h:5 ../panels/sharing/sharing.ui.h:14
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "Password"
-msgstr "Lösenord"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
 msgid "Authentication Required"
@@ -4150,44 +4171,44 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktiva"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1768
+#: ../panels/printers/cc-printers-panel.c:1770
 msgid "Failed to add new printer."
 msgstr "Misslyckades med att lägga till ny skrivare."
 
-#: ../panels/printers/cc-printers-panel.c:1935
+#: ../panels/printers/cc-printers-panel.c:1937
 msgid "Select PPD File"
 msgstr "Välj PPD-fil"
 
-#: ../panels/printers/cc-printers-panel.c:1944
+#: ../panels/printers/cc-printers-panel.c:1946
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 msgstr ""
 "PostScript-skrivarbeskrivningsfiler (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2251
+#: ../panels/printers/cc-printers-panel.c:2253
 msgid "No suitable driver found"
 msgstr "Ingen lämplig drivrutin kunde hittas"
 
-#: ../panels/printers/cc-printers-panel.c:2322
+#: ../panels/printers/cc-printers-panel.c:2324
 msgid "Searching for preferred drivers…"
 msgstr "Söker efter lämpliga drivrutiner…"
 
-#: ../panels/printers/cc-printers-panel.c:2343
+#: ../panels/printers/cc-printers-panel.c:2345
 msgid "Select from database…"
 msgstr "Välj från databas…"
 
-#: ../panels/printers/cc-printers-panel.c:2352
+#: ../panels/printers/cc-printers-panel.c:2354
 msgid "Provide PPD File…"
 msgstr "Tillhandahåll PPD-fil…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2503
-#: ../panels/printers/cc-printers-panel.c:2526
+#: ../panels/printers/cc-printers-panel.c:2505
+#: ../panels/printers/cc-printers-panel.c:2528
 msgid "Test page"
 msgstr "Testsida"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2940
+#: ../panels/printers/cc-printers-panel.c:2942
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Kunde inte läsa in användargränssnittet: %s"
@@ -4258,12 +4279,12 @@ msgid "Loading drivers database..."
 msgstr "Läser in drivrutinsdatabas..."
 
 #. Translators: The found device is a JetDirect printer
-#: ../panels/printers/pp-host.c:506
+#: ../panels/printers/pp-host.c:526
 msgid "JetDirect Printer"
 msgstr "JetDirect-skrivare"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: ../panels/printers/pp-host.c:756
+#: ../panels/printers/pp-host.c:782
 msgid "LPD Printer"
 msgstr "LPD-skrivare"
 
@@ -4368,34 +4389,34 @@ msgid "%s Active Jobs"
 msgstr "%s aktiva jobb"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1620
+#: ../panels/printers/pp-new-printer-dialog.c:1655
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1625
+#: ../panels/printers/pp-new-printer-dialog.c:1660
 msgid "Serial Port"
 msgstr "Seriellport"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1632
+#: ../panels/printers/pp-new-printer-dialog.c:1667
 msgid "Parallel Port"
 msgstr "Parallellport"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1688
+#: ../panels/printers/pp-new-printer-dialog.c:1709
 #, c-format
 msgid "Location: %s"
 msgstr "Plats: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1693
+#: ../panels/printers/pp-new-printer-dialog.c:1714
 #, c-format
 msgid "Address: %s"
 msgstr "Adress: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1717
+#: ../panels/printers/pp-new-printer-dialog.c:1743
 msgid "Server requires authentication"
 msgstr "Server begär autentisering"
 
@@ -4816,36 +4837,36 @@ msgstr "Används för att fastställa din geografiska position"
 msgid "_Automatic Problem Reporting"
 msgstr "_Automatisk problemrapportering"
 
-#: ../panels/region/cc-format-chooser.c:119
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
-#: ../panels/region/cc-format-chooser.c:121
+#: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrisk"
 
-#: ../panels/region/cc-format-chooser.c:286
+#: ../panels/region/cc-format-chooser.c:287
 msgid "No regions found"
 msgstr "Inga regioner hittades"
 
-#: ../panels/region/cc-input-chooser.c:180
+#: ../panels/region/cc-input-chooser.c:181
 msgid "No input sources found"
 msgstr "Inga inmatningskällor hittades"
 
-#: ../panels/region/cc-input-chooser.c:1085
+#: ../panels/region/cc-input-chooser.c:1018
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Övriga"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1064
+#: ../panels/user-accounts/um-user-panel.c:1071
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Din session behöver startas om för att ändringar ska genomföras"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/user-accounts/um-user-panel.c:1075
 msgid "Restart Now"
 msgstr "Starta om nu"
 
@@ -5047,34 +5068,35 @@ msgstr "Flytta ned"
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../panels/sharing/cc-sharing-panel.c:272
+#: ../panels/sharing/cc-sharing-panel.c:265
 msgctxt "service is enabled"
 msgid "On"
 msgstr "På"
 
-#: ../panels/sharing/cc-sharing-panel.c:274 ../panels/sharing/cc-sharing-panel.c:301
+#: ../panels/sharing/cc-sharing-panel.c:267 ../panels/sharing/cc-sharing-panel.c:294
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Av"
 
-#: ../panels/sharing/cc-sharing-panel.c:304
+#: ../panels/sharing/cc-sharing-panel.c:297
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#: ../panels/sharing/cc-sharing-panel.c:307
+#: ../panels/sharing/cc-sharing-panel.c:300
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:371
 msgid "Choose a Folder"
 msgstr "Välj en mapp"
 
-#: ../panels/sharing/cc-sharing-panel.c:917
+#: ../panels/sharing/cc-sharing-panel.c:800
 msgid "Copy"
 msgstr "Kopiera"
 
+#: ../panels/sharing/cc-sharing-panel.c:1126
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Dela"
@@ -5086,10 +5108,10 @@ msgstr "Kontrollera vad du vill dela med andra"
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;movies;"
+"server;renderer;"
 msgstr ""
-"dela;delning;ssh;värd;namn;fjärr;skrivbord;bluetooth;obex;media;ljud;video;bilder;"
+"dela;delning;share;ssh;värd;namn;fjärr;skrivbord;media;audio;ljud;video;bilder;"
 "foton;filmer;server;renderare;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
@@ -5113,47 +5135,30 @@ msgid "Networks"
 msgstr "Nätverk"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Bluetooth Sharing"
-msgstr "Bluetooth-delning"
-
-#: ../panels/sharing/sharing.ui.h:2
-msgid ""
-"Bluetooth Sharing allows you to share files with other Bluetooth enabled devices"
-msgstr "Bluetooth-delning låter dig dela filer med andra Bluetooth-aktiverade enheter"
-
-#: ../panels/sharing/sharing.ui.h:3
-msgid "Only Receive From Trusted Devices"
-msgstr "Ta endast emot från betrodda enheter"
-
-#: ../panels/sharing/sharing.ui.h:4
-msgid "Save Received Files to Downloads Folder"
-msgstr "Spara mottagna filer till mappen för hämtningar"
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "Datornamn"
 
-#: ../panels/sharing/sharing.ui.h:6
+#: ../panels/sharing/sharing.ui.h:2
 msgid "Personal File Sharing"
 msgstr "Personlig fildelning"
 
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:3
 msgid "Screen Sharing"
 msgstr "Skärmdelning"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Media Sharing"
 msgstr "Mediadelning"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Remote Login"
 msgstr "Fjärrinloggning"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Vissa tjänster är inaktiverade på grund av ingen nätverksåtkomst."
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:8
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on your "
@@ -5162,11 +5167,11 @@ msgstr ""
 "Personlig fildelning låter dig dela din publika mapp med andra på det nätverk du "
 "använder för tillfället: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Require Password"
 msgstr "Begär lösenord"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:12
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5175,7 +5180,7 @@ msgstr ""
 "Tillåt fjärranvändare att ansluta med det säkra skalkommandot:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:15
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href=\"vnc://"
@@ -5184,36 +5189,36 @@ msgstr ""
 "Tillåt fjärranvändare att se eller kontrollera din skärm genom att ansluta till: <a "
 "href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Allow Remote Control"
 msgstr "Tillåt fjärrkontroll"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Password:"
 msgstr "Lösenord:"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Show Password"
 msgstr "Visa lösenord"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "Åtkomstalternativ"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:20
 msgid "New connections must ask for access"
 msgstr "Nya anslutningar måste fråga efter åtkomst"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require a password"
 msgstr "Begär ett lösenord"
 
-#: ../panels/sharing/sharing.ui.h:26
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Mediadelning ger dig möjligheten att dela musik, foton och filmer över nätverket."
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:23
 msgid "Folders"
 msgstr "Mappar"
 
@@ -5427,15 +5432,15 @@ msgstr "Från tema"
 msgid "C_hoose an alert sound:"
 msgstr "Välj ett lar_mljud:"
 
-#: ../panels/sound/gvc-speaker-test.c:219
+#: ../panels/sound/gvc-speaker-test.c:231
 msgid "Stop"
 msgstr "Stoppa"
 
-#: ../panels/sound/gvc-speaker-test.c:219 ../panels/sound/gvc-speaker-test.c:331
+#: ../panels/sound/gvc-speaker-test.c:231 ../panels/sound/gvc-speaker-test.c:343
 msgid "Test"
 msgstr "Testa"
 
-#: ../panels/sound/gvc-speaker-test.c:227
+#: ../panels/sound/gvc-speaker-test.c:239
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
@@ -6454,7 +6459,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:842
+#: ../panels/user-accounts/um-user-panel.c:844
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6462,7 +6467,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:846
+#: ../panels/user-accounts/um-user-panel.c:848
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6537,30 +6542,30 @@ msgstr "Ogiltigt lösenord, försök igen"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Det gick inte att ansluta till %s-domänen: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:238
+#: ../panels/user-accounts/um-user-panel.c:240
 msgid "Other Accounts"
 msgstr "Övriga konton"
 
-#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:450
 msgid "Failed to delete user"
 msgstr "Misslyckades med att ta bort användaren"
 
-#: ../panels/user-accounts/um-user-panel.c:508
-#: ../panels/user-accounts/um-user-panel.c:567
-#: ../panels/user-accounts/um-user-panel.c:619
+#: ../panels/user-accounts/um-user-panel.c:510
+#: ../panels/user-accounts/um-user-panel.c:569
+#: ../panels/user-accounts/um-user-panel.c:621
 msgid "Failed to revoke remotely managed user"
 msgstr "Misslyckades med att ta bort fjärrhanterad användare"
 
-#: ../panels/user-accounts/um-user-panel.c:675
+#: ../panels/user-accounts/um-user-panel.c:677
 msgid "You cannot delete your own account."
 msgstr "Du kan inte ta bort ditt egna konto."
 
-#: ../panels/user-accounts/um-user-panel.c:684
+#: ../panels/user-accounts/um-user-panel.c:686
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s är fortfarande inloggad"
 
-#: ../panels/user-accounts/um-user-panel.c:688
+#: ../panels/user-accounts/um-user-panel.c:690
 msgid ""
 "Deleting a user while they are logged in can leave the system in an inconsistent "
 "state."
@@ -6568,12 +6573,12 @@ msgstr ""
 "Att ta bort en användare när de är inloggade kan medföra att systemet hamnar i ett "
 "inkonsistent tillstånd."
 
-#: ../panels/user-accounts/um-user-panel.c:697
+#: ../panels/user-accounts/um-user-panel.c:699
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Vill du behålla filerna för %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:701
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files around "
 "when deleting a user account."
@@ -6581,51 +6586,51 @@ msgstr ""
 "Det är möjligt att behålla hemkatalogen, e-postkö och tillfälliga filer när ett "
 "användarkonto tas bort."
 
-#: ../panels/user-accounts/um-user-panel.c:704
+#: ../panels/user-accounts/um-user-panel.c:706
 msgid "_Delete Files"
 msgstr "_Ta bort filer"
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:707
 msgid "_Keep Files"
 msgstr "_Behåll filer"
 
-#: ../panels/user-accounts/um-user-panel.c:719
+#: ../panels/user-accounts/um-user-panel.c:721
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Är du säker på att du vill ta bort fjärrhanterade kontot för %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:723
+#: ../panels/user-accounts/um-user-panel.c:725
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: ../panels/user-accounts/um-user-panel.c:775
+#: ../panels/user-accounts/um-user-panel.c:777
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Kontot är inaktiverat"
 
-#: ../panels/user-accounts/um-user-panel.c:783
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Ska ställas in vid nästa inloggning"
 
-#: ../panels/user-accounts/um-user-panel.c:786
+#: ../panels/user-accounts/um-user-panel.c:788
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/user-accounts/um-user-panel.c:835
+#: ../panels/user-accounts/um-user-panel.c:837
 msgid "Logged in"
 msgstr "Inloggad"
 
-#: ../panels/user-accounts/um-user-panel.c:1267
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Failed to contact the accounts service"
 msgstr "Misslyckades med att kontakta kontotjänsten"
 
-#: ../panels/user-accounts/um-user-panel.c:1269
+#: ../panels/user-accounts/um-user-panel.c:1276
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Försäkra dig om att kontotjänsten är installerad och aktiverad."
 
-#: ../panels/user-accounts/um-user-panel.c:1310
+#: ../panels/user-accounts/um-user-panel.c:1317
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6633,12 +6638,12 @@ msgstr ""
 "Klicka först på *-ikonen\n"
 "för att göra ändringar"
 
-#: ../panels/user-accounts/um-user-panel.c:1348
+#: ../panels/user-accounts/um-user-panel.c:1355
 msgid "Create a user account"
 msgstr "Skapa ett användarkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1359
-#: ../panels/user-accounts/um-user-panel.c:1671
+#: ../panels/user-accounts/um-user-panel.c:1366
+#: ../panels/user-accounts/um-user-panel.c:1678
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6646,12 +6651,12 @@ msgstr ""
 "Klicka först på *-ikonen för\n"
 "att skapa ett användarkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1369
+#: ../panels/user-accounts/um-user-panel.c:1376
 msgid "Delete the selected user account"
 msgstr "Ta bort markerat användarkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1381
-#: ../panels/user-accounts/um-user-panel.c:1676
+#: ../panels/user-accounts/um-user-panel.c:1388
+#: ../panels/user-accounts/um-user-panel.c:1683
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6659,7 +6664,7 @@ msgstr ""
 "Klicka först på *-ikonen för att\n"
 "ta bort markerat användarkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1585
+#: ../panels/user-accounts/um-user-panel.c:1592
 msgid "My Account"
 msgstr "Mitt konto"
 
@@ -6713,7 +6718,7 @@ msgid ""
 "shortcut button and hold down the new keys or press Backspace to clear."
 msgstr ""
 "För att redigera en genväg, välj ”Sänd tangenttryck”-åtgärden, tryck "
-"tangentbordsgenvägen och håll nere de nya tangenterna eller tryck baksteg för att "
+"tangentbordsgenvägen och håll nere de nya tangenterna eller tryck backsteg för att "
 "rensa."
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:83
@@ -6774,7 +6779,7 @@ msgstr "Mappa till ensam skärm"
 msgid "%d of %d"
 msgstr "%d av %d"
 
-#: ../panels/wacom/cc-wacom-page.c:530
+#: ../panels/wacom/cc-wacom-page.c:522
 msgid "Display Mapping"
 msgstr "Skärmmappning"
 
@@ -7021,58 +7026,43 @@ msgstr ""
 "Kontrollpanelen är GNOME:s huvudsakliga gränssnitt för inställning av olika "
 "aspekter för ditt skrivbord."
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:45
+msgid "Display version number"
+msgstr "Visa versionsnummer"
+
+#: ../shell/cc-application.c:46
 msgid "Enable verbose mode"
 msgstr "Aktivera informativt läge"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:47
 msgid "Show the overview"
 msgstr "Visa översikten"
 
-#: ../shell/cc-application.c:71
+#: ../shell/cc-application.c:48
 msgid "Search for the string"
 msgstr "Sök efter strängen"
 
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:49
 msgid "List possible panel names and exit"
 msgstr "Lista möjliga panelnamn och avsluta"
 
-#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
-#: ../shell/cc-application.c:75
-msgid "Show help options"
-msgstr "Visa hjälpflaggor"
-
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "Panel to display"
 msgstr "Panel att visa"
 
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: ../shell/cc-application.c:145
-msgid "- Settings"
-msgstr "- Inställningar"
-
-#: ../shell/cc-application.c:163
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Kör \"%s --help\" för att se en komplett lista över tillgängliga "
-"kommandoradsflaggor.\n"
-
-#: ../shell/cc-application.c:193
+#: ../shell/cc-application.c:113
 msgid "Available panels:"
 msgstr "Tillgängliga paneler:"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:251
 msgid "Help"
 msgstr "Hjälp"
 
-#: ../shell/cc-application.c:327
+#: ../shell/cc-application.c:252
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -7099,6 +7089,52 @@ msgstr "System"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Inställningar;"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "Trådlösa enheter kräver extra ström"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth är inaktiverat"
+
+#~ msgid ""
+#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled devices"
+#~ msgstr ""
+#~ "Bluetooth-delning låter dig dela filer med andra Bluetooth-aktiverade enheter"
+
+#~ msgid "Only Receive From Trusted Devices"
+#~ msgstr "Ta endast emot från betrodda enheter"
+
+#~ msgid "Save Received Files to Downloads Folder"
+#~ msgstr "Spara mottagna filer till mappen för hämtningar"
+
+#~ msgid "Security key"
+#~ msgstr "Säkerhetsnyckel"
+
+#~ msgid "When battery power is _critical"
+#~ msgstr "När batteriström är _kritiskt låg"
+
+#~ msgid "Power Off"
+#~ msgstr "Stäng av"
+
+#~ msgid "Hibernate"
+#~ msgstr "Viloläge"
+
+#~ msgid "Power off"
+#~ msgstr "Stäng av"
+
+#~ msgid "Show help options"
+#~ msgstr "Visa hjälpflaggor"
+
+#~ msgid "- Settings"
+#~ msgstr "- Inställningar"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Kör \"%s --help\" för att se en komplett lista över tillgängliga "
+#~ "kommandoradsflaggor.\n"
 
 #~ msgid "Turns off wireless devices"
 #~ msgstr "Slå av trådlösa enheter"
