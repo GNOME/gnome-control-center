@@ -30,6 +30,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="headers_visible">False</property>
+                    <property name="width-request">200</property>
                   </object>
                 </child>
               </object>
@@ -536,19 +537,56 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButtonBox" id="hbuttonbox2">
+              <object class="GtkBox" id="hbuttonbox2">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">10</property>
+                <property name="orientation">vertical</property>
+                <property name="valign">center</property>
                 <child>
-                  <object class="GtkButton" id="printer-add-button2">
-                    <property name="label" translatable="yes" comments="Translators: This button adds new printer.">Add New Printer</property>
+                  <object class="GtkImage" id="no-printer-image">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">start</property>
+                    <property name="pixel_size">64</property>
+                    <property name="icon_name">printer-symbolic</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="no-printer-label">
+                    <property name="visible">True</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="printer-add-button2">
+                    <property name="label" translatable="yes" comments="Translators: This button adds new printer.">Add a Printer</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">center</property>
+                    <property name="relief">normal</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
