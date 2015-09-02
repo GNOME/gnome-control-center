@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master.is\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-16 10:10+0000\n"
-"PO-Revision-Date: 2015-07-16 13:31+0000\n"
+"POT-Creation-Date: 2015-09-02 06:47+0000\n"
+"PO-Revision-Date: 2015-09-02 16:35+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "Language: is\n"
@@ -120,7 +120,7 @@ msgstr "Þú getur bætt myndum í %s möppuna og þær munu birtast hérna"
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:491
+#: ../panels/sharing/cc-sharing-panel.c:374
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
@@ -165,27 +165,62 @@ msgstr "Breyttu bakgrunni skjáborðsins í veggfóður eða ljósmynd"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Bakgrunnur;Skjár;Skjáborð;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:262
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth er óvirkt"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+#| msgid "Air_plane Mode"
+msgid "Turn Off Airplane Mode"
+msgstr "Slökkva á flugvélaham"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:263
-msgid "No Bluetooth adapters found"
-msgstr "Enginn Bluetooth búnaður fannst"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#| msgid "No Bluetooth adapters found"
+msgid "No Bluetooth Found"
+msgstr "Enginn Bluetooth-búnaður fannst"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:264
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth hefur verið gert óvirkt með vélbúnaðar rofa"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "Settu inn dingul til að nota Bluetooth"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#| msgid "Bluetooth Sharing"
+msgid "Bluetooth Turned Off"
+msgstr "Bluetooth ekki í gangi"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Turn on to connect devices and receive file transfers."
+msgstr "Kveiktu á til að tengja tæki og stunda skráaskipti."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#| msgid "Air_plane Mode"
+msgid "Airplane Mode is on"
+msgstr "Flugvélahamur virkur"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#| msgid "Bluetooth is disabled by hardware switch"
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "Bluetooth er óvirkt þegar flugvélahamur er virkur."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#| msgid "Air_plane Mode"
+msgid "Hardware Airplane Mode is on"
+msgstr "Vélbúnaðarstuddur flugvélahamur er virkur"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "Slökktu á rofanum fyrir flugvélaham til að virkja Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1585
+#: ../panels/printers/pp-new-printer-dialog.c:1672
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Kveiktu og slökktu á Bluetooth og tengdu tækin þín"
+
+#. Translators: those are keywords for the bluetooth control-center panel
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:4
+msgid "share;sharing;bluetooth;obex;"
+msgstr "deila;sameign;tengja;bluetooth;obex;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -2512,7 +2547,7 @@ msgstr "Veldu skrá til að flytja inn"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1941
-#: ../panels/sharing/cc-sharing-panel.c:492
+#: ../panels/sharing/cc-sharing-panel.c:375
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_Opna"
@@ -2988,8 +3023,11 @@ msgid "Security type"
 msgstr "Tegund öryggis"
 
 #: ../panels/network/network-wifi.ui.h:63
-msgid "Security key"
-msgstr "Öryggislykill"
+#: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "Password"
+msgstr "Lykilorð"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -3892,7 +3930,6 @@ msgid "_Screen brightness"
 msgstr "Birta _skjás"
 
 #: ../panels/power/cc-power-panel.c:1601
-#| msgid "Automatic Routes"
 msgid "Automatic brightness"
 msgstr "Sjálfvirkt birtustig"
 
@@ -3913,17 +3950,17 @@ msgid "_Wi-Fi"
 msgstr "Þráðlaust _Wi-Fi net"
 
 #: ../panels/power/cc-power-panel.c:1698
-msgid "Wireless devices require extra power"
-msgstr "Tæki með þráðlausu neti þarfnast mikillar orku"
+msgid "Turn off Wi-Fi to save power."
+msgstr "Slökktu á Wi-Fi til að spara orku."
 
 #: ../panels/power/cc-power-panel.c:1723
 msgid "_Mobile broadband"
 msgstr "_Ferðabreiðband"
 
 #: ../panels/power/cc-power-panel.c:1728
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr ""
-"Tæki með ferðabreiðbandi (3G, 4G, WiMax, o.s.frv.) þarfnast mikillar orku"
+#| msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgstr "Slökktu á ferðabreiðbandi (3G, 4G, WiMax, o.s.frv.) til að spara orku."
 
 #: ../panels/power/cc-power-panel.c:1780
 msgid "_Bluetooth"
@@ -3946,7 +3983,6 @@ msgid "_Automatic suspend"
 msgstr "Hætta sjálfvir_kt"
 
 #: ../panels/power/cc-power-panel.c:1996
-#| msgid "_Automatic suspend"
 msgid "Automatic suspend"
 msgstr "Hætta sjálfvirkt"
 
@@ -4044,12 +4080,6 @@ msgstr "Seinkun"
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Auðkenna"
-
-#: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:14
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "Password"
-msgstr "Lykilorð"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
 msgid "Authentication Required"
@@ -4311,12 +4341,12 @@ msgid "Loading drivers database..."
 msgstr "Hleð inn gagnagrunni um rekla..."
 
 #. Translators: The found device is a JetDirect printer
-#: ../panels/printers/pp-host.c:506
+#: ../panels/printers/pp-host.c:526
 msgid "JetDirect Printer"
 msgstr "JetDirect prentari"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: ../panels/printers/pp-host.c:756
+#: ../panels/printers/pp-host.c:782
 msgid "LPD Printer"
 msgstr "LPD prentari"
 
@@ -4421,34 +4451,34 @@ msgid "%s Active Jobs"
 msgstr "%s virk verk"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1568
+#: ../panels/printers/pp-new-printer-dialog.c:1655
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1573
+#: ../panels/printers/pp-new-printer-dialog.c:1660
 msgid "Serial Port"
 msgstr "Raðtengi (serial)"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1580
+#: ../panels/printers/pp-new-printer-dialog.c:1667
 msgid "Parallel Port"
 msgstr "Hliðtengi (parallel)"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1636
+#: ../panels/printers/pp-new-printer-dialog.c:1709
 #, c-format
 msgid "Location: %s"
 msgstr "Staður: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1641
+#: ../panels/printers/pp-new-printer-dialog.c:1714
 #, c-format
 msgid "Address: %s"
 msgstr "Vistfang: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1665
+#: ../panels/printers/pp-new-printer-dialog.c:1743
 msgid "Server requires authentication"
 msgstr "Miðlari krefst auðkenningar"
 
@@ -4893,7 +4923,7 @@ msgstr "Engin svæði fundust"
 msgid "No input sources found"
 msgstr "Engir inntaksgjafar fundust"
 
-#: ../panels/region/cc-input-chooser.c:1086
+#: ../panels/region/cc-input-chooser.c:1018
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Annað"
@@ -4908,11 +4938,11 @@ msgstr "Endurræsa þarf setuna svo breytingarnar taki gildi"
 msgid "Restart Now"
 msgstr "Endurræsa núna"
 
-#: ../panels/region/cc-region-panel.c:876
+#: ../panels/region/cc-region-panel.c:877
 msgid "No input source selected"
 msgstr "Enginn inntaksgjafi valinn"
 
-#: ../panels/region/cc-region-panel.c:1796
+#: ../panels/region/cc-region-panel.c:1797
 msgid "Login Screen"
 msgstr "Innskráningarskjár"
 
@@ -5111,35 +5141,36 @@ msgstr "Færa niður"
 msgid "Preferences"
 msgstr "Stillingar"
 
-#: ../panels/sharing/cc-sharing-panel.c:272
+#: ../panels/sharing/cc-sharing-panel.c:265
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Kveikt"
 
-#: ../panels/sharing/cc-sharing-panel.c:274
-#: ../panels/sharing/cc-sharing-panel.c:301
+#: ../panels/sharing/cc-sharing-panel.c:267
+#: ../panels/sharing/cc-sharing-panel.c:294
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Slökkt"
 
-#: ../panels/sharing/cc-sharing-panel.c:304
+#: ../panels/sharing/cc-sharing-panel.c:297
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Virkjað"
 
-#: ../panels/sharing/cc-sharing-panel.c:307
+#: ../panels/sharing/cc-sharing-panel.c:300
 msgctxt "service is active"
 msgid "Active"
 msgstr "Virkt"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:371
 msgid "Choose a Folder"
 msgstr "Veldu möppu"
 
-#: ../panels/sharing/cc-sharing-panel.c:917
+#: ../panels/sharing/cc-sharing-panel.c:800
 msgid "Copy"
 msgstr "Afrita"
 
+#: ../panels/sharing/cc-sharing-panel.c:1126
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Deiling"
@@ -5150,12 +5181,15 @@ msgstr "Stjórnaðu hverju þú vilt deila með öðrum"
 
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
+#| msgid ""
+#| "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;"
+#| "video;pictures;photos;movies;server;renderer;"
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;"
 msgstr ""
-"sameign;deiling;ssh;hýsill;heiti;fjartengt;skjáborð;bluetooth;obex;miðill;"
-"hljóð;myndskeið;mynd;ljósmynd;kvikmynd;þjónn;miðlari;myndgerð;"
+"sameign;deiling;ssh;hýsill;heiti;fjartengt;skjáborð;hljóð;myndskeið;mynd;ljósm"
+"ynd;kvikmynd;þjónn;miðlari;myndgerð;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5179,50 +5213,30 @@ msgid "Networks"
 msgstr "Netkerfi"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Bluetooth Sharing"
-msgstr "Deiling með Bluetooth"
-
-#: ../panels/sharing/sharing.ui.h:2
-msgid ""
-"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-"devices"
-msgstr ""
-"Deiling með Bluetooth gerir þér kleift að deila skrám með öðrum Bluetooth-"
-"tækjum"
-
-#: ../panels/sharing/sharing.ui.h:3
-msgid "Only Receive From Trusted Devices"
-msgstr "Eingöngu taka á móti frá treystum tækjum"
-
-#: ../panels/sharing/sharing.ui.h:4
-msgid "Save Received Files to Downloads Folder"
-msgstr "Vista mótteknar skrár í niðurhalsmöppu"
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "Heiti tölvu"
 
-#: ../panels/sharing/sharing.ui.h:6
+#: ../panels/sharing/sharing.ui.h:2
 msgid "Personal File Sharing"
 msgstr "Deiling einkagagna"
 
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:3
 msgid "Screen Sharing"
 msgstr "Deiling á skjá"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Media Sharing"
 msgstr "Deiling gagnamiðla"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Remote Login"
 msgstr "Fjartengd innskráning"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Sumar þjónustur eru óvirkar því nettenging er óvirk."
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:8
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5231,11 +5245,11 @@ msgstr ""
 "Deiling einkagagna gerir þér kleift að deila \"Opið öllum\"-möppunni "
 "(Public) með öðrum á netinu þínu, með: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Require Password"
 msgstr "Krefjast lykilorðs"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:12
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5244,7 +5258,7 @@ msgstr ""
 "Leyfa fjartengdum notendum að tengjast með Secure Shell skipun:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:15
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5253,38 +5267,38 @@ msgstr ""
 "Leyfa fjartengdum notendum að skoða eða stjórna skjánum þínum með því að "
 "tengjast: <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Allow Remote Control"
 msgstr "Leyfa fjartengda stýringu"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Password:"
 msgstr "Lykilorð:"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Show Password"
 msgstr "Birta lykilorð"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "Valkostir við aðgengi"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:20
 msgid "New connections must ask for access"
 msgstr "Nýjar tengingar verða að biðja um aðgang"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require a password"
 msgstr "Krefjast lykilorðs"
 
-#: ../panels/sharing/sharing.ui.h:26
+#: ../panels/sharing/sharing.ui.h:22
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Deiling gagnamiðla gerir þér kleift að deila tónlist, myndum og myndskeiðum "
 "á netinu."
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:23
 msgid "Folders"
 msgstr "Möppur"
 
@@ -7113,7 +7127,6 @@ msgstr ""
 "skjáborðsins."
 
 #: ../shell/cc-application.c:45
-#| msgid "Display Brightness"
 msgid "Display version number"
 msgstr "Birta útgáfunúmer"
 
@@ -7176,6 +7189,28 @@ msgstr "Kerfi"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Kjörstillingar;Uppsetning;"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth er óvirkt"
+
+#~ msgid "Security key"
+#~ msgstr "Öryggislykill"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "Tæki með þráðlausu neti þarfnast mikillar orku"
+
+#~ msgid ""
+#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+#~ "devices"
+#~ msgstr ""
+#~ "Deiling með Bluetooth gerir þér kleift að deila skrám með öðrum Bluetooth-"
+#~ "tækjum"
+
+#~ msgid "Only Receive From Trusted Devices"
+#~ msgstr "Eingöngu taka á móti frá treystum tækjum"
+
+#~ msgid "Save Received Files to Downloads Folder"
+#~ msgstr "Vista mótteknar skrár í niðurhalsmöppu"
 
 #~ msgid "When battery power is _critical"
 #~ msgstr "Þe_gar ástand rafhlöðu er við hættumörk"
