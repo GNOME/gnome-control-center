@@ -1317,7 +1317,11 @@ parse_uri (const gchar  *uri,
       *port = atoi (position + 1);
     }
 
-  *host = resulting_host;
+  *host = g_uri_unescape_string (resulting_host,
+                                 G_URI_RESERVED_CHARS_GENERIC_DELIMITERS
+                                 G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS);
+
+  g_free (resulting_host);
 
   return TRUE;
 }
