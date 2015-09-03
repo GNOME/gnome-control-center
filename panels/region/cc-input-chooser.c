@@ -702,17 +702,14 @@ selected_rows_changed (GtkListBox *box,
                        GtkWidget  *chooser)
 {
   CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
+  gboolean sensitive = TRUE;
   GtkListBoxRow *row;
-  gpointer data;
 
   row = gtk_list_box_get_selected_row (box);
-  gtk_widget_set_sensitive (priv->add_button, row != NULL);
-  if (!row)
-    return;
+  if (!row || g_object_get_data (G_OBJECT (row), "back"))
+    sensitive = FALSE;
 
-  data = g_object_get_data (G_OBJECT (row), "back");
-  if (data)
-    show_locale_rows (chooser);
+  gtk_widget_set_sensitive (priv->add_button, sensitive);
 }
 
 static void
