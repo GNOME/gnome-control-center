@@ -928,7 +928,8 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         label = get_widget (d, "account-fingerprint-label");
         show = (act_user_get_uid (user) == getuid() &&
                 act_user_is_local_account (user) &&
-                g_settings_get_boolean (d->login_screen_settings, "enable-fingerprint-authentication") &&
+                (d->login_screen_settings &&
+                 g_settings_get_boolean (d->login_screen_settings, "enable-fingerprint-authentication")) &&
                 set_fingerprint_label (widget));
         gtk_widget_set_visible (label, show);
         gtk_widget_set_visible (widget, show);
@@ -1692,6 +1693,29 @@ setup_main_window (CcUserPanel *self)
                 g_signal_connect (d->um, "notify::is-loaded", G_CALLBACK (users_loaded), d);
 }
 
+static GSettings *
+settings_or_null (const gchar *schema)
+{
+        GSettingsSchemaSource *source = NULL;
+        gchar **non_relocatable = NULL;
+        gchar **relocatable = NULL;
+        GSettings *settings = NULL;
+
+        source = g_settings_schema_source_get_default ();
+        if (!source)
+                return NULL;
+
+        g_settings_schema_source_list_schemas (source, TRUE, &non_relocatable, &relocatable);
+
+        if (g_strv_contains ((const gchar * const *)non_relocatable, schema) ||
+            g_strv_contains ((const gchar * const *)relocatable, schema))
+                settings = g_settings_new (schema);
+
+        g_strfreev (non_relocatable);
+        g_strfreev (relocatable);
+        return settings;
+}
+
 static void
 cc_user_panel_init (CcUserPanel *self)
 {
@@ -1726,7 +1750,7 @@ cc_user_panel_init (CcUserPanel *self)
                 return;
         }
 
-        d->login_screen_settings = g_settings_new ("org.gnome.login-screen");
+        d->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         d->password_dialog = um_password_dialog_new ();
         button = get_widget (d, "user-icon-button");
