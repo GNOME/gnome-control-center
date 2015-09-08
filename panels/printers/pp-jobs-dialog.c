@@ -31,8 +31,11 @@
 
 #include <cups/cups.h>
 
+#include "shell/list-box-helper.h"
 #include "pp-jobs-dialog.h"
 #include "pp-utils.h"
+#include "pp-job.h"
+#include "pp-cups.h"
 
 #define EMPTY_TEXT "\xe2\x80\x94"
 
@@ -46,162 +49,158 @@ struct _PpJobsDialog {
   GtkWidget  *parent;
 
   GtkWidget  *dialog;
+  GListStore *store;
+  GtkListBox *listbox;
 
   UserResponseCallback user_callback;
   gpointer             user_data;
 
   gchar *printer_name;
 
-  cups_job_t *jobs;
-  gint num_jobs;
-  gint current_job_id;
-
   gint ref_count;
 };
 
-enum
+static void
+job_stop_cb (GtkButton *button,
+             PpJob     *job)
 {
-  JOB_ID_COLUMN,
-  JOB_TITLE_COLUMN,
-  JOB_STATE_COLUMN,
-  JOB_CREATION_TIME_COLUMN,
-  JOB_N_COLUMNS
-};
+  pp_job_cancel_purge_async (job, FALSE);
+}
+
+static void
+job_pause_cb (GtkButton *button,
+              PpJob     *job)
+{
+  gint job_state;
+
+  g_object_get (job, "state", &job_state, NULL);
+
+  pp_job_set_hold_until_async (job, job_state == IPP_JOB_HELD ? "no-hold" : "indefinite");
+
+  gtk_button_set_image (button,
+                        gtk_image_new_from_icon_name (job_state == IPP_JOB_HELD ?
+                                                      "media-playback-pause-symbolic" : "media-playback-start-symbolic",
+                                                      GTK_ICON_SIZE_SMALL_TOOLBAR));
+}
+
+static GtkWidget *
+create_listbox_row (gpointer item,
+                    gpointer user_data)
+{
+  PpJob     *job = (PpJob *)item;
+  GtkWidget *box;
+  GtkWidget *widget;
+  gchar     *title;
+  gchar     *state_string;
+  gint       job_state;
+
+  g_object_get (job, "title", &title, "state", &job_state, NULL);
+
+  switch (job_state)
+    {
+      case IPP_JOB_PENDING:
+        /* Translators: Job's state (job is waiting to be printed) */
+        state_string = g_strdup (C_("print job", "Pending"));
+        break;
+      case IPP_JOB_HELD:
+        /* Translators: Job's state (job is held for printing) */
+        state_string = g_strdup (C_("print job", "Paused"));
+        break;
+      case IPP_JOB_PROCESSING:
+        /* Translators: Job's state (job is currently printing) */
+        state_string = g_strdup (C_("print job", "Processing"));
+        break;
+      case IPP_JOB_STOPPED:
+        /* Translators: Job's state (job has been stopped) */
+        state_string = g_strdup (C_("print job", "Stopped"));
+        break;
+      case IPP_JOB_CANCELED:
+        /* Translators: Job's state (job has been canceled) */
+        state_string = g_strdup (C_("print job", "Canceled"));
+        break;
+      case IPP_JOB_ABORTED:
+        /* Translators: Job's state (job has aborted due to error) */
+        state_string = g_strdup (C_("print job", "Aborted"));
+        break;
+      case IPP_JOB_COMPLETED:
+        /* Translators: Job's state (job has completed successfully) */
+        state_string = g_strdup (C_("print job", "Completed"));
+        break;
+    }
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  g_object_set (box, "margin", 6, NULL);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 2);
+
+  widget = gtk_label_new (title);
+  gtk_widget_set_halign (widget, GTK_ALIGN_START);
+  gtk_box_pack_start (GTK_BOX (box), widget, TRUE, TRUE, 10);
+
+  widget = gtk_label_new (state_string);
+  gtk_widget_set_halign (widget, GTK_ALIGN_END);
+  gtk_widget_set_margin_end (widget, 64);
+  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 10);
+
+  widget = gtk_button_new_from_icon_name (job_state == IPP_JOB_HELD ? "media-playback-start-symbolic" : "media-playback-pause-symbolic",
+                                          GTK_ICON_SIZE_SMALL_TOOLBAR);
+  g_signal_connect (widget, "clicked", G_CALLBACK (job_pause_cb), item);
+  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
+
+  widget = gtk_button_new_from_icon_name ("edit-delete-symbolic",
+                                          GTK_ICON_SIZE_SMALL_TOOLBAR);
+  g_signal_connect (widget, "clicked", G_CALLBACK (job_stop_cb), item);
+  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
+
+  gtk_widget_show_all (box);
+
+  return box;
+}
 
 static void
 update_jobs_list_cb (cups_job_t *jobs,
                      gint        num_of_jobs,
                      gpointer    user_data)
 {
-  GtkTreeSelection *selection;
-  PpJobsDialog     *dialog = (PpJobsDialog *) user_data;
-  GtkListStore     *store;
-  GtkTreeView      *treeview;
-  GtkTreeIter       select_iter;
-  GtkTreeIter       iter;
-  GSettings        *settings;
-  gboolean          select_iter_set = FALSE;
-  gint              i;
-  gint              select_index = 0;
+  PpJobsDialog *dialog = user_data;
+  GtkWidget    *clear_all_button;
+  GtkStack     *stack;
+  guint         i;
 
-  treeview = (GtkTreeView*)
-    gtk_builder_get_object (dialog->builder, "job-treeview");
+  g_list_store_remove_all (dialog->store);
 
-  if (dialog->num_jobs > 0)
-    cupsFreeJobs (dialog->num_jobs, dialog->jobs);
+  stack = GTK_STACK (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "stack"));
+  clear_all_button = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "jobs-clear-all-button"));
 
-  dialog->num_jobs = num_of_jobs;
-  dialog->jobs = jobs;
-
-  store = gtk_list_store_new (JOB_N_COLUMNS,
-                              G_TYPE_INT,
-                              G_TYPE_STRING,
-                              G_TYPE_STRING,
-                              G_TYPE_STRING);
-
-  if (dialog->current_job_id >= 0)
+  if (num_of_jobs > 0)
     {
-      for (i = 0; i < dialog->num_jobs; i++)
-        {
-          select_index = i;
-          if (dialog->jobs[i].id >= dialog->current_job_id)
-            break;
-        }
+      gtk_widget_set_sensitive (clear_all_button, TRUE);
+      gtk_stack_set_visible_child_name (stack, "list-jobs-page");
+    }
+  else
+    {
+      gtk_widget_set_sensitive (clear_all_button, FALSE);
+      gtk_stack_set_visible_child_name (stack, "no-jobs-page");
     }
 
-  for (i = 0; i < dialog->num_jobs; i++)
+  for (i = 0; i < num_of_jobs; i++)
     {
-      GDesktopClockFormat  value;
-      GDateTime           *time;
-      struct tm *ts;
-      gchar     *time_string;
-      gchar     *state = NULL;
+      PpJob *job;
 
-      ts = localtime (&(dialog->jobs[i].creation_time));
-      time = g_date_time_new_local (ts->tm_year + 1900,
-                                    ts->tm_mon + 1,
-                                    ts->tm_mday,
-                                    ts->tm_hour,
-                                    ts->tm_min,
-                                    ts->tm_sec);
-
-      settings = g_settings_new (CLOCK_SCHEMA);
-      value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
-
-      if (value == G_DESKTOP_CLOCK_FORMAT_24H)
-        time_string = g_date_time_format (time, "%k:%M");
-      else
-        time_string = g_date_time_format (time, "%l:%M %p");
-
-      g_date_time_unref (time);
-
-      switch (dialog->jobs[i].state)
-        {
-          case IPP_JOB_PENDING:
-            /* Translators: Job's state (job is waiting to be printed) */
-            state = g_strdup (C_("print job", "Pending"));
-            break;
-          case IPP_JOB_HELD:
-            /* Translators: Job's state (job is held for printing) */
-            state = g_strdup (C_("print job", "Held"));
-            break;
-          case IPP_JOB_PROCESSING:
-            /* Translators: Job's state (job is currently printing) */
-            state = g_strdup (C_("print job", "Processing"));
-            break;
-          case IPP_JOB_STOPPED:
-            /* Translators: Job's state (job has been stopped) */
-            state = g_strdup (C_("print job", "Stopped"));
-            break;
-          case IPP_JOB_CANCELED:
-            /* Translators: Job's state (job has been canceled) */
-            state = g_strdup (C_("print job", "Canceled"));
-            break;
-          case IPP_JOB_ABORTED:
-            /* Translators: Job's state (job has aborted due to error) */
-            state = g_strdup (C_("print job", "Aborted"));
-            break;
-          case IPP_JOB_COMPLETED:
-            /* Translators: Job's state (job has completed successfully) */
-            state = g_strdup (C_("print job", "Completed"));
-            break;
-        }
-
-      gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter,
-                          JOB_ID_COLUMN, dialog->jobs[i].id,
-                          JOB_TITLE_COLUMN, dialog->jobs[i].title,
-                          JOB_STATE_COLUMN, state,
-                          JOB_CREATION_TIME_COLUMN, time_string,
-                          -1);
-
-      if (i == select_index)
-        {
-          select_iter = iter;
-          select_iter_set = TRUE;
-          dialog->current_job_id = dialog->jobs[i].id;
-        }
-
-      g_free (time_string);
-      g_free (state);
+      job = g_object_new (pp_job_get_type (),
+                          "id", jobs[i].id,
+                          "title", jobs[i].title,
+                          "state", jobs[i].state,
+                          NULL);
+      g_list_store_append (dialog->store, job);
     }
 
-  gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
-
-  if (select_iter_set &&
-      (selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))))
-    {
-      gtk_tree_selection_select_iter (selection, &select_iter);
-    }
-
-  g_object_unref (store);
   dialog->ref_count--;
 }
 
 static void
 update_jobs_list (PpJobsDialog *dialog)
 {
-  if (dialog->printer_name)
+  if (dialog->printer_name != NULL)
     {
       dialog->ref_count++;
       cups_get_jobs_async (dialog->printer_name,
@@ -210,162 +209,6 @@ update_jobs_list (PpJobsDialog *dialog)
                            update_jobs_list_cb,
                            dialog);
     }
-}
-
-static void
-job_selection_changed_cb (GtkTreeSelection *selection,
-                          gpointer          user_data)
-{
-  PpJobsDialog *dialog = (PpJobsDialog *) user_data;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  GtkWidget    *widget;
-  gboolean      release_button_sensitive = FALSE;
-  gboolean      hold_button_sensitive = FALSE;
-  gboolean      cancel_button_sensitive = FALSE;
-  gint          id = -1;
-  gint          i;
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-                          JOB_ID_COLUMN, &id,
-                          -1);
-    }
-  else
-    {
-      id = -1;
-    }
-
-  dialog->current_job_id = id;
-
-  if (dialog->current_job_id >= 0 &&
-      dialog->jobs != NULL)
-    {
-      for (i = 0; i < dialog->num_jobs; i++)
-        {
-          if (dialog->jobs[i].id == dialog->current_job_id)
-            {
-              ipp_jstate_t job_state = dialog->jobs[i].state;
-
-              release_button_sensitive = job_state == IPP_JOB_HELD;
-              hold_button_sensitive = job_state == IPP_JOB_PENDING;
-              cancel_button_sensitive = job_state < IPP_JOB_CANCELED;
-
-              break;
-            }
-        }
-    }
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-release-button");
-  gtk_widget_set_sensitive (widget, release_button_sensitive);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-hold-button");
-  gtk_widget_set_sensitive (widget, hold_button_sensitive);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-cancel-button");
-  gtk_widget_set_sensitive (widget, cancel_button_sensitive);
-}
-
-static void
-populate_jobs_list (PpJobsDialog *dialog)
-{
-  GtkTreeViewColumn *column;
-  GtkCellRenderer   *renderer;
-  GtkCellRenderer   *title_renderer;
-  GtkTreeView       *treeview;
-
-  treeview = (GtkTreeView*)
-    gtk_builder_get_object (dialog->builder, "job-treeview");
-
-  renderer = gtk_cell_renderer_text_new ();
-  title_renderer = gtk_cell_renderer_text_new ();
-
-  /* Translators: Name of column showing titles of print jobs */
-  column = gtk_tree_view_column_new_with_attributes (_("Job Title"), title_renderer,
-                                                     "text", JOB_TITLE_COLUMN, NULL);
-  g_object_set (G_OBJECT (title_renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-  gtk_tree_view_column_set_fixed_width (column, 180);
-  gtk_tree_view_column_set_min_width (column, 180);
-  gtk_tree_view_column_set_max_width (column, 180);
-  gtk_tree_view_append_column (treeview, column);
-
-  /* Translators: Name of column showing statuses of print jobs */
-  column = gtk_tree_view_column_new_with_attributes (_("Job State"), renderer,
-                                                     "text", JOB_STATE_COLUMN, NULL);
-  gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (treeview, column);
-
-  /* Translators: Name of column showing times of creation of print jobs */
-  column = gtk_tree_view_column_new_with_attributes (_("Time"), renderer,
-                                                     "text", JOB_CREATION_TIME_COLUMN, NULL);
-  gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (treeview, column);
-
-  g_signal_connect (gtk_tree_view_get_selection (treeview),
-                    "changed", G_CALLBACK (job_selection_changed_cb), dialog);
-
-  update_jobs_list (dialog);
-}
-
-static void
-job_process_cb_cb (gpointer user_data)
-{
-}
-
-static void
-job_process_cb (GtkButton *button,
-                gpointer   user_data)
-{
-  PpJobsDialog *dialog = (PpJobsDialog *) user_data;
-  GtkWidget    *widget;
-
-  if (dialog->current_job_id >= 0)
-    {
-      if ((GtkButton*) gtk_builder_get_object (dialog->builder,
-                                               "job-cancel-button") ==
-          button)
-        {
-          job_cancel_purge_async (dialog->current_job_id,
-                                  FALSE,
-                                  NULL,
-                                  job_process_cb_cb,
-                                  dialog);
-        }
-      else if ((GtkButton*) gtk_builder_get_object (dialog->builder,
-                                                    "job-hold-button") ==
-               button)
-        {
-          job_set_hold_until_async (dialog->current_job_id,
-                                    "indefinite",
-                                    NULL,
-                                    job_process_cb_cb,
-                                    dialog);
-        }
-      else
-        {
-          job_set_hold_until_async (dialog->current_job_id,
-                                    "no-hold",
-                                    NULL,
-                                    job_process_cb_cb,
-                                    dialog);
-        }
-  }
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-release-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-hold-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-cancel-button");
-  gtk_widget_set_sensitive (widget, FALSE);
 }
 
 static void
@@ -382,15 +225,32 @@ jobs_dialog_response_cb (GtkDialog *dialog,
                               jobs_dialog->user_data);
 }
 
+static void
+on_clear_all_button_clicked (GtkButton *button,
+                             gpointer   user_data)
+{
+  PpJobsDialog *dialog = user_data;
+  guint num_items;
+  guint i;
+
+  num_items = g_list_model_get_n_items (G_LIST_MODEL (dialog->store));
+
+  for (i = 0; i < num_items; i++)
+    {
+      PpJob *job = PP_JOB (g_list_model_get_item (G_LIST_MODEL (dialog->store), i));
+
+      pp_job_cancel_purge_async (job, FALSE);
+    }
+}
+
 PpJobsDialog *
 pp_jobs_dialog_new (GtkWindow            *parent,
                     UserResponseCallback  user_callback,
                     gpointer              user_data,
                     gchar                *printer_name)
 {
-  GtkStyleContext *context;
   PpJobsDialog    *dialog;
-  GtkWidget       *widget;
+  GtkButton       *clear_all_button;
   GError          *error = NULL;
   gchar           *objects[] = { "jobs-dialog", NULL };
   guint            builder_result;
@@ -416,43 +276,28 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   dialog->user_callback = user_callback;
   dialog->user_data = user_data;
   dialog->printer_name = g_strdup (printer_name);
-  dialog->current_job_id = -1;
   dialog->ref_count = 0;
 
   /* connect signals */
   g_signal_connect (dialog->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
   g_signal_connect (dialog->dialog, "response", G_CALLBACK (jobs_dialog_response_cb), dialog);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-cancel-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), dialog);
+  clear_all_button = GTK_BUTTON (gtk_builder_get_object (dialog->builder, "jobs-clear-all-button"));
+  g_signal_connect (clear_all_button, "clicked", G_CALLBACK (on_clear_all_button_clicked), dialog);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-hold-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), dialog);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "job-release-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), dialog);
-
-
-  /* Set junctions */
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "queue-scrolledwindow");
-  context = gtk_widget_get_style_context (widget);
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "queue-toolbar");
-  context = gtk_widget_get_style_context (widget);
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
-
-
-  title = g_strdup_printf (_("%s Active Jobs"), printer_name);
+  /* Translators: This is the printer name for which we are showing the active jobs */
+  title = g_strdup_printf (C_("Printer jobs dialog title", "%s - Active Jobs"), printer_name);
   gtk_window_set_title (GTK_WINDOW (dialog->dialog), title);
   g_free (title);
 
-  populate_jobs_list (dialog);
+  dialog->listbox = GTK_LIST_BOX (gtk_builder_get_object (dialog->builder, "jobs-listbox"));
+  gtk_list_box_set_header_func (dialog->listbox,
+                                cc_list_box_update_header_func, NULL, NULL);
+  dialog->store = g_list_store_new (pp_job_get_type ());
+  gtk_list_box_bind_model (dialog->listbox, G_LIST_MODEL (dialog->store),
+                           create_listbox_row, NULL, NULL);
+
+  update_jobs_list (dialog);
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (parent));
   gtk_window_present (GTK_WINDOW (dialog->dialog));
@@ -479,9 +324,6 @@ pp_jobs_dialog_free_idle (gpointer user_data)
 
       g_object_unref (dialog->builder);
       dialog->builder = NULL;
-
-      if (dialog->num_jobs > 0)
-        cupsFreeJobs (dialog->num_jobs, dialog->jobs);
 
       g_free (dialog->printer_name);
 
