@@ -1039,6 +1039,7 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
                     G_CALLBACK (on_screen_property_change), self);
 
   sync_screen_brightness (self);
+  als_enabled_state_changed (self);
 }
 
 static void
