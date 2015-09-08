@@ -1506,6 +1506,8 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
                        gpointer user_data)
 {
   CcPowerPanel *self = CC_POWER_PANEL (user_data);
+  GError *error = NULL;
+
   self->priv->iio_proxy =
     g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                    G_DBUS_PROXY_FLAGS_NONE,
@@ -1513,7 +1515,14 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
                                    "net.hadess.SensorProxy",
                                    "/net/hadess/SensorProxy",
                                    "net.hadess.SensorProxy",
-                                   NULL, NULL);
+                                   NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Could not create IIO sensor proxy: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
   g_signal_connect_swapped (G_OBJECT (self->priv->iio_proxy), "g-properties-changed",
                             G_CALLBACK (als_enabled_state_changed), self);
   als_enabled_state_changed (self);
