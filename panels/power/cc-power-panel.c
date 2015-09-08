@@ -981,11 +981,14 @@ als_enabled_state_changed (CcPowerPanel *self)
   gboolean visible = FALSE;
   GVariant *v;
 
-  v = g_dbus_proxy_get_cached_property (self->priv->screen_proxy, "Brightness");
-  if (v != NULL)
+  if (priv->screen_proxy != NULL)
     {
-      has_brightness = g_variant_get_int32 (v) >= 0.0;
-      g_variant_unref (v);
+      v = g_dbus_proxy_get_cached_property (priv->screen_proxy, "Brightness");
+      if (v != NULL)
+        {
+          has_brightness = g_variant_get_int32 (v) >= 0.0;
+          g_variant_unref (v);
+        }
     }
 
   if (priv->iio_proxy != NULL)
