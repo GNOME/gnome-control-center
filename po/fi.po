@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-04 07:31+0000\n"
-"PO-Revision-Date: 2015-03-04 21:05+0200\n"
+"POT-Creation-Date: 2015-09-05 06:49+0000\n"
+"PO-Revision-Date: 2015-09-05 12:59+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -122,31 +122,31 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
-#: ../panels/color/cc-color-panel.c:224 ../panels/color/cc-color-panel.c:961
+#: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1579
-#: ../panels/display/cc-display-panel.c:2022
+#: ../panels/display/cc-display-panel.c:1561
+#: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1247
-#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/net-device-wifi.c:1269
+#: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1938
+#: ../panels/printers/cc-printers-panel.c:1940
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:491
+#: ../panels/sharing/cc-sharing-panel.c:374
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:706
-#: ../panels/user-accounts/um-user-panel.c:724
+#: ../panels/user-accounts/um-user-panel.c:708
+#: ../panels/user-accounts/um-user-panel.c:726
 msgid "_Cancel"
 msgstr "_Peru"
 
@@ -184,27 +184,62 @@ msgstr "Vaihda taustakuva"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Taustakuva;Näyttö;Työpöytä;Wallpaper;Screen;Desktop;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:262
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth on pois käytöstä"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+#| msgid "Air_plane Mode"
+msgid "Turn Off Airplane Mode"
+msgstr "Poista lentokonetila käytöstä"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:263
-msgid "No Bluetooth adapters found"
-msgstr "Bluetooth-sovittimia ei löytynyt"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#| msgid "No Bluetooth adapters found"
+msgid "No Bluetooth Found"
+msgstr "Bluetoothia ei löytynyt"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:264
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth on pois käytöstä laitekytkimen asennon vuoksi"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "Liitä sovitin käyttääksesi Bluetoothia."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#| msgid "Bluetooth Sharing"
+msgid "Bluetooth Turned Off"
+msgstr "Bluetooth on pois päältä"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Turn on to connect devices and receive file transfers."
+msgstr "Kytke päälle yhdistääksesi laitteita ja vastaanottaaksesi tiedostoja."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#| msgid "Air_plane Mode"
+msgid "Airplane Mode is on"
+msgstr "Lentokonetila on päällä"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#| msgid "Bluetooth is disabled by hardware switch"
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "Bluetooth on pois käytöstä, kun lentokonetila on päällä."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#| msgid "Air_plane Mode"
+msgid "Hardware Airplane Mode is on"
+msgstr "Laitetason lentokonetila on päällä"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "Poista lentokonetila käytöstä käyttääksesi Bluetoothia."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1637
+#: ../panels/printers/pp-new-printer-dialog.c:1672
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Kytke Bluetooth päälle tai pois ja yhdistä laitteita"
+
+#. Translators: those are keywords for the bluetooth control-center panel
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:4
+msgid "share;sharing;bluetooth;obex;"
+msgstr "share;sharing;bluetooth;obex;jakaminen;jaot;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -339,48 +374,48 @@ msgstr "Ei kalibroitu"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:140
+#: ../panels/color/cc-color-panel.c:141
 msgid "Default: "
 msgstr "Oletus: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:148
+#: ../panels/color/cc-color-panel.c:149
 msgid "Colorspace: "
 msgstr "Väriavaruus: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:155
+#: ../panels/color/cc-color-panel.c:156
 msgid "Test profile: "
 msgstr "Testiprofiili:"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:222
+#: ../panels/color/cc-color-panel.c:223
 msgid "Select ICC Profile File"
 msgstr "Valitse ICC-profiilitiedosto"
 
-#: ../panels/color/cc-color-panel.c:225
+#: ../panels/color/cc-color-panel.c:226
 msgid "_Import"
 msgstr "_Tuo"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:236
+#: ../panels/color/cc-color-panel.c:237
 msgid "Supported ICC profiles"
 msgstr "Tuetut ICC-profiilit"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:243
+#: ../panels/color/cc-color-panel.c:244
 #: ../panels/network/wireless-security/eap-method-fast.c:420
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: ../panels/color/cc-color-panel.c:582
+#: ../panels/color/cc-color-panel.c:583
 msgid "Screen"
 msgstr "Näyttö"
 
 #. TRANSLATORS: this is when the upload of the profile failed
-#: ../panels/color/cc-color-panel.c:906
+#: ../panels/color/cc-color-panel.c:908
 #, c-format
 msgid "Failed to upload file: %s"
 msgstr "Tiedoston lähetys epäonnistui: %s"
@@ -388,40 +423,40 @@ msgstr "Tiedoston lähetys epäonnistui: %s"
 #. TRANSLATORS: these are instructions on how to recover
 #. * the ICC profile on the native operating system and are
 #. * only shown when the user uses a LiveCD to calibrate
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:922
 msgid "The profile has been uploaded to:"
 msgstr "Profiili on lähetetty:"
 
-#: ../panels/color/cc-color-panel.c:922
+#: ../panels/color/cc-color-panel.c:924
 msgid "Write down this URL."
 msgstr "Kirjoita ylös tämä osoite."
 
-#: ../panels/color/cc-color-panel.c:923
+#: ../panels/color/cc-color-panel.c:925
 msgid "Restart this computer and boot your normal operating system."
 msgstr ""
 "Käynnistä tietokone uudelleen ja käynnistä normaali käyttöjärjestelmäsi."
 
-#: ../panels/color/cc-color-panel.c:924
+#: ../panels/color/cc-color-panel.c:926
 msgid "Type the URL into your browser to download and install the profile."
 msgstr "Kirjoita osoite selaimen osoitekenttään, lataa ja asenna profiili."
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:958
+#: ../panels/color/cc-color-panel.c:960
 msgid "Save Profile"
 msgstr "Tallenna profiili"
 
-#: ../panels/color/cc-color-panel.c:962
+#: ../panels/color/cc-color-panel.c:964
 #: ../panels/network/connection-editor/vpn-helpers.c:375
 msgid "_Save"
 msgstr "_Tallenna"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1322
+#: ../panels/color/cc-color-panel.c:1324
 msgid "Create a color profile for the selected device"
 msgstr "Luo väriprofiili valitulle laitteelle"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1337 ../panels/color/cc-color-panel.c:1361
+#: ../panels/color/cc-color-panel.c:1339 ../panels/color/cc-color-panel.c:1363
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -430,12 +465,12 @@ msgstr ""
 "siinä on virta päällä."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1371
+#: ../panels/color/cc-color-panel.c:1373
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Mittalaite ei tue tulostimien profilointia."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1382
+#: ../panels/color/cc-color-panel.c:1384
 msgid "The device type is not currently supported."
 msgstr "Laitetyyppi ei ole tällä hetkellä tuettu."
 
@@ -670,7 +705,7 @@ msgstr ""
 "saattaa olla hyötyä."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:732
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Summary"
 msgstr "Yhteenveto"
 
@@ -800,7 +835,7 @@ msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Keskitaso"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minuuttia"
@@ -810,7 +845,7 @@ msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Matala"
 
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 minuuttia"
 
@@ -852,13 +887,13 @@ msgstr "väri;ICC;color;profiili;kalibrointi;Calibrate;Tulostin;Printer;Näyttö
 msgid "Other…"
 msgstr "Muu…"
 
-#: ../panels/common/cc-language-chooser.c:123
-#: ../panels/region/cc-format-chooser.c:270
-#: ../panels/region/cc-input-chooser.c:167
+#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/region/cc-format-chooser.c:271
+#: ../panels/region/cc-input-chooser.c:168
 msgid "More…"
 msgstr "Lisää…"
 
-#: ../panels/common/cc-language-chooser.c:139
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Kieli ei löytynyt"
 
@@ -870,6 +905,21 @@ msgstr "Kieli"
 #: ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "_Valmis"
+
+#: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
+#: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
+msgid "Day"
+msgstr "Päivä"
+
+#: ../panels/datetime/big.ui.h:2 ../panels/datetime/little.ui.h:2
+#: ../panels/datetime/middle.ui.h:2 ../panels/datetime/ydm.ui.h:2
+msgid "Month"
+msgstr "Kuukausi"
+
+#: ../panels/datetime/big.ui.h:3 ../panels/datetime/little.ui.h:3
+#: ../panels/datetime/middle.ui.h:3 ../panels/datetime/ydm.ui.h:3
+msgid "Year"
+msgstr "Vuosi"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
@@ -987,54 +1037,42 @@ msgid "Minute"
 msgstr "Minuutti"
 
 #: ../panels/datetime/datetime.ui.h:18
-msgid "Day"
-msgstr "Päivä"
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Month"
-msgstr "Kuukausi"
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Year"
-msgstr "Vuosi"
-
-#: ../panels/datetime/datetime.ui.h:21
 msgid "Time Zone"
 msgstr "Aikavyöhyke"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Search for a city"
 msgstr "Etsi kaupunkia"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Automatic _Date & Time"
 msgstr "Automaattinen _päivä ja aika"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Requires internet access"
 msgstr "Vaatii internetyhteyden"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Automatic Time _Zone"
 msgstr "Automaattinen _aikavyöhyke"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Date & _Time"
 msgstr "Päivä _ja aika"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Time _Zone"
 msgstr "Aika_vyöhyke"
 
-#: ../panels/datetime/datetime.ui.h:28
+#: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
 msgstr "Ajan _muoto"
 
-#: ../panels/datetime/datetime.ui.h:29
+#: ../panels/datetime/datetime.ui.h:26
 msgid "24-hour"
 msgstr "24 tuntia"
 
-#: ../panels/datetime/datetime.ui.h:30
+#: ../panels/datetime/datetime.ui.h:27
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1055,23 +1093,23 @@ msgstr "Muuta järjestelmän aika-asetuksia"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Muuttaaksesi ajan tai päivän asetuksia sinun tulee tunnistautua."
 
-#: ../panels/display/cc-display-panel.c:564
+#: ../panels/display/cc-display-panel.c:573
 msgid "Lid Closed"
 msgstr "Kansi suljettu"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:567
+#: ../panels/display/cc-display-panel.c:576
 msgid "Mirrored"
 msgstr "Peilattu"
 
-#: ../panels/display/cc-display-panel.c:569
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:578
+#: ../panels/display/cc-display-panel.c:2195
 msgid "Primary"
 msgstr "Ensisijainen"
 
-#: ../panels/display/cc-display-panel.c:571
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1705 ../panels/power/cc-power-panel.c:1716
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1081,94 +1119,94 @@ msgstr "Ensisijainen"
 msgid "Off"
 msgstr "Poissa"
 
-#: ../panels/display/cc-display-panel.c:574
+#: ../panels/display/cc-display-panel.c:583
 msgid "Secondary"
 msgstr "Toissijainen"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1576
+#: ../panels/display/cc-display-panel.c:1558
 msgid "Arrange Combined Displays"
 msgstr "Järjestä yhdistetyt näytöt"
 
-#: ../panels/display/cc-display-panel.c:1580
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/display/cc-display-panel.c:1562
+#: ../panels/display/cc-display-panel.c:2024
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Toteuta"
 
-#: ../panels/display/cc-display-panel.c:1604
+#: ../panels/display/cc-display-panel.c:1586
 msgid "Drag displays to rearrange them"
 msgstr "Järjestä näytöt vetämällä niitä"
 
-#: ../panels/display/cc-display-panel.c:2075
+#: ../panels/display/cc-display-panel.c:2073
 msgid "Rotate counterclockwise by 90°"
 msgstr "Käännä vastapäivään 90°"
 
-#: ../panels/display/cc-display-panel.c:2093
+#: ../panels/display/cc-display-panel.c:2091
 msgid "Rotate by 180°"
 msgstr "Käännä 180°"
 
-#: ../panels/display/cc-display-panel.c:2111
+#: ../panels/display/cc-display-panel.c:2109
 msgid "Rotate clockwise by 90°"
 msgstr "Käännä myötäpäivään 90°"
 
-#: ../panels/display/cc-display-panel.c:2132
+#: ../panels/display/cc-display-panel.c:2130
 msgid "Size"
 msgstr "Koko"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2145
+#: ../panels/display/cc-display-panel.c:2143
 msgid "Aspect Ratio"
 msgstr "Kuvasuhde"
 
-#: ../panels/display/cc-display-panel.c:2166
+#: ../panels/display/cc-display-panel.c:2165
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Tarkkuus"
 
-#: ../panels/display/cc-display-panel.c:2197
+#: ../panels/display/cc-display-panel.c:2196
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Näytä yläpalkki ja yleisnäkymä tällä näytöllä"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2202
 msgid "Secondary Display"
 msgstr "Toissijainen näyttö"
 
-#: ../panels/display/cc-display-panel.c:2204
+#: ../panels/display/cc-display-panel.c:2203
 msgid "Join this display with another to create an extra workspace"
 msgstr "Liitä tämä näyttö toiseen luodaksesi lisää työtilaa"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2210
 msgid "Presentation"
 msgstr "Esitys"
 
-#: ../panels/display/cc-display-panel.c:2212
+#: ../panels/display/cc-display-panel.c:2211
 msgid "Show slideshows and media only"
 msgstr "Näyttää vain diaesitykset ja muun median"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2216
 msgid "Mirror"
 msgstr "Peili"
 
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:2217
 msgid "Show your existing view on both displays"
 msgstr "Näytä nykyinen näkymä molemmilla näytöillä"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2223
 msgid "Turn Off"
 msgstr "Sammuta"
 
-#: ../panels/display/cc-display-panel.c:2225
+#: ../panels/display/cc-display-panel.c:2224
 msgid "Don't use this display"
 msgstr "Älä käytä tätä näyttöä"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2525
 msgid "Could not get screen information"
 msgstr "Näytön tietoja ei saatu"
 
-#: ../panels/display/cc-display-panel.c:2486
+#: ../panels/display/cc-display-panel.c:2556
 msgid "_Arrange Combined Displays"
 msgstr "_Järjestä yhdistetyt näytöt"
 
@@ -1505,7 +1543,7 @@ msgstr "Käynnistimet"
 msgid "Launch help browser"
 msgstr "Käynnistä ohjeselain"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1604
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Asetukset"
@@ -1756,12 +1794,12 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:636
-#: ../panels/keyboard/keyboard-shortcuts.c:644
+#: ../panels/keyboard/keyboard-shortcuts.c:632
+#: ../panels/keyboard/keyboard-shortcuts.c:640
 msgid "Custom Shortcuts"
 msgstr "Omat pikanäppäimet"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:861
+#: ../panels/keyboard/keyboard-shortcuts.c:857
 msgid "<Unknown Action>"
 msgstr "<Tuntematon toiminto>"
 
@@ -1963,7 +2001,7 @@ msgstr "Yksi napsautus, toissijainen painike"
 msgid "Air_plane Mode"
 msgstr "Le_ntokonetila"
 
-#: ../panels/network/cc-network-panel.c:966
+#: ../panels/network/cc-network-panel.c:967
 msgid "Network proxy"
 msgstr "Verkon välityspalvelin"
 
@@ -1971,17 +2009,17 @@ msgstr "Verkon välityspalvelin"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s - VPN"
 
-#: ../panels/network/cc-network-panel.c:1299
+#: ../panels/network/cc-network-panel.c:1300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Hups, jokin taisi mennä pieleen. Ota yhteys sovellustoimittajaan."
 
-#: ../panels/network/cc-network-panel.c:1305
+#: ../panels/network/cc-network-panel.c:1306
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManagerin tulee olla käynnissä."
 
@@ -1990,13 +2028,13 @@ msgid "802.1x _Security"
 msgstr "802.1x-suojaus"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
 msgstr "sivu 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
@@ -2004,18 +2042,18 @@ msgid "Anony_mous identity"
 msgstr "Anony_ymi identiteetti"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:5
 msgid "Inner _authentication"
 msgstr "_Sisempi tunnistautuminen"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
 msgstr "sivu 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
-#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/ce-page-security.c:469
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2027,40 +2065,40 @@ msgstr "automaattinen"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:383
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/net-device-wifi.c:223
+#: ../panels/network/net-device-wifi.c:388
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:226
+#: ../panels/network/net-device-wifi.c:227
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:231
+#: ../panels/network/net-device-wifi.c:232
 msgid "Enterprise"
 msgstr "Yritys"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:236
-#: ../panels/network/net-device-wifi.c:372
+#: ../panels/network/net-device-wifi.c:237
+#: ../panels/network/net-device-wifi.c:373
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ei mitään"
 
 #: ../panels/network/connection-editor/ce-page-details.c:91
-#: ../panels/power/power.ui.h:19
+#: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "Ei koskaan"
 
@@ -2076,7 +2114,7 @@ msgstr "Eilen"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:477
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2086,44 +2124,44 @@ msgstr[1] "%i päivää sitten"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:533
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ei mitään"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Heikko"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "OK"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Hyvä"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Erinomainen"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:270
+#: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identiteetti"
@@ -2144,7 +2182,7 @@ msgstr "Aliverkon peite"
 #: ../panels/network/connection-editor/ce-page-ip4.c:465
 #: ../panels/network/connection-editor/ce-page-ip6.c:205
 #: ../panels/network/connection-editor/ce-page-ip6.c:473
-#: ../panels/network/network-vpn.ui.h:3
+#: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Yhdyskäytävä"
 
@@ -2197,7 +2235,7 @@ msgstr "Manuaalinen"
 msgid "Link-Local Only"
 msgstr "Vain linkkiyhteys"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:953
+#: ../panels/network/connection-editor/ce-page-ip4.c:967
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
@@ -2220,7 +2258,7 @@ msgstr "Automaattinen"
 msgid "Automatic, DHCP only"
 msgstr "Automaattinen, vain DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:919
+#: ../panels/network/connection-editor/ce-page-ip6.c:937
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
@@ -2230,33 +2268,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Tyhjennä asetukset"
 
-#: ../panels/network/connection-editor/ce-page-security.c:250
+#: ../panels/network/connection-editor/ce-page-security.c:253
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../panels/network/connection-editor/ce-page-security.c:273
+#: ../panels/network/connection-editor/ce-page-security.c:276
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-bittinen avain (Hex tai ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:283
+#: ../panels/network/connection-editor/ce-page-security.c:286
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bittinen salalause"
 
-#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/connection-editor/ce-page-security.c:299
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:309
+#: ../panels/network/connection-editor/ce-page-security.c:312
 msgid "Dynamic WEP (802.1x)"
 msgstr "Dynaaminen WEP (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:323
+#: ../panels/network/connection-editor/ce-page-security.c:326
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: ../panels/network/connection-editor/ce-page-security.c:337
+#: ../panels/network/connection-editor/ce-page-security.c:340
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
@@ -2382,8 +2420,8 @@ msgid "Connect _automatically"
 msgstr "_Yhdistä automaattisesti"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
-#: ../panels/network/connection-editor/wifi-page.ui.h:8
 msgid "Firewall _Zone"
 msgstr "Palomuurin _vyöhyke"
 
@@ -2444,7 +2482,6 @@ msgid "New Profile"
 msgstr "Uusi profiili"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:577
-#: ../panels/network/network.ui.h:1 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
@@ -2482,7 +2519,7 @@ msgid "_Reset"
 msgstr "_Tyhjennä"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/net-device-wifi.c:1463
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Unohda"
@@ -2530,8 +2567,8 @@ msgid "Select file to import"
 msgstr "Valitse tuotava tiedosto"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1939
-#: ../panels/sharing/cc-sharing-panel.c:492
+#: ../panels/printers/cc-printers-panel.c:1941
+#: ../panels/sharing/cc-sharing-panel.c:375
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_Avaa"
@@ -2627,17 +2664,17 @@ msgid "Bridge slaves"
 msgstr ""
 
 #: ../panels/network/net-device-ethernet.c:110
-#: ../panels/network/net-device-wifi.c:462
+#: ../panels/network/net-device-wifi.c:463
 msgid "never"
 msgstr "ei koskaan"
 
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:473
 msgid "today"
 msgstr "tänään"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:474
+#: ../panels/network/net-device-wifi.c:475
 msgid "yesterday"
 msgstr "eilen"
 
@@ -2665,15 +2702,15 @@ msgid "Wired"
 msgstr "Kiinteä"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1597
+#: ../panels/network/net-device-wifi.c:1621
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:8
+#: ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Valinnat…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:473
 #, c-format
 msgid "Profile %d"
 msgstr "Profiili %d"
@@ -2686,7 +2723,7 @@ msgstr "Lisää uusi yhteys"
 msgid "Team slaves"
 msgstr ""
 
-#: ../panels/network/net-device-wifi.c:1154
+#: ../panels/network/net-device-wifi.c:1176
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2694,14 +2731,14 @@ msgstr ""
 "Jos käytössäsi on myös muu kuin langaton internetyhteys, voit käyttää sitä "
 "kyseisen yhteyden jakamiseen muiden käyttäjien kanssa."
 
-#: ../panels/network/net-device-wifi.c:1158
+#: ../panels/network/net-device-wifi.c:1180
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Yhteyspisteen käyttöönotto katkaisee yhteyden langattomaan verkkoon <b>%s</"
 "b>."
 
-#: ../panels/network/net-device-wifi.c:1162
+#: ../panels/network/net-device-wifi.c:1184
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2709,43 +2746,43 @@ msgstr ""
 "Yhteyspisteen ollessa käytössä langattoman internetyhteyden käyttö ei ole "
 "mahdollista."
 
-#: ../panels/network/net-device-wifi.c:1245
+#: ../panels/network/net-device-wifi.c:1267
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Suljetaanko yhteyspiste ja katkaistaanko kaikkien käyttäjien yhteydet?"
 
-#: ../panels/network/net-device-wifi.c:1248
+#: ../panels/network/net-device-wifi.c:1270
 msgid "_Stop Hotspot"
 msgstr "_Sulje yhteyspiste"
 
-#: ../panels/network/net-device-wifi.c:1305
+#: ../panels/network/net-device-wifi.c:1327
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Järjestelmäkäytännöt estävät käytön yhteyspisteenä"
 
-#: ../panels/network/net-device-wifi.c:1308
+#: ../panels/network/net-device-wifi.c:1330
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Langaton verkkolaite ei tue yhteyspisteeksi asettamista"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1459
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr ""
 "Valittujen verkkojen tiedot, kuten salasanat ja omat asetukset, häviävät."
 
-#: ../panels/network/net-device-wifi.c:1750
+#: ../panels/network/net-device-wifi.c:1774
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historia"
 
-#: ../panels/network/net-device-wifi.c:1754
+#: ../panels/network/net-device-wifi.c:1778
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:533
+#: ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Sulje"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1762
+#: ../panels/network/net-device-wifi.c:1786
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Unohda"
@@ -2780,17 +2817,17 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "Tarjoaja"
 
-#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:2
+#: ../panels/network/network-proxy.ui.h:1
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:3
+#: ../panels/network/network-proxy.ui.h:2
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Käsin"
 
-#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:4
+#: ../panels/network/network-proxy.ui.h:3
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automaattinen"
@@ -2843,32 +2880,32 @@ msgstr "Socks-välityspalvelimen portti"
 msgid "Turn device off"
 msgstr "Käännä laite pois päältä"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:1
 msgid "Add Device"
 msgstr "Lisää laite"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:2
 msgid "Remove Device"
 msgstr "Poista laite"
 
-#: ../panels/network/network-vpn.ui.h:2
+#: ../panels/network/network-vpn.ui.h:1
 msgid "VPN Type"
 msgstr "VPN-tyyppi"
 
-#: ../panels/network/network-vpn.ui.h:4
+#: ../panels/network/network-vpn.ui.h:3
 msgid "Group Name"
 msgstr "Ryhmän nimi"
 
-#: ../panels/network/network-vpn.ui.h:5
+#: ../panels/network/network-vpn.ui.h:4
 msgid "Group Password"
 msgstr "Ryhmäsalasana"
 
-#: ../panels/network/network-vpn.ui.h:6
+#: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-vpn.ui.h:6
 msgid "Turn VPN connection off"
 msgstr "Katkaise VPN-yhteys"
 
@@ -3007,8 +3044,11 @@ msgid "Security type"
 msgstr "Salauksen tyyppi"
 
 #: ../panels/network/network-wifi.ui.h:63
-msgid "Security key"
-msgstr "Salausavain"
+#: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "Password"
+msgstr "Salasana"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -3556,8 +3596,8 @@ msgstr "WEP-inde_ksi"
 msgid "_Type"
 msgstr "_Tyyppi"
 
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1711 ../panels/power/cc-power-panel.c:1718
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3579,30 +3619,22 @@ msgid "Sound Alerts"
 msgstr "Ääni-ilmoitukset"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Notification Banners"
 msgstr "Ilmoitusbannerit"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
-#| msgctxt "notifications"
-#| msgid "Show Details in Banners"
 msgctxt "notifications"
 msgid "Show Message Content in Banners"
 msgstr "Näytä viestin sisältö bannerissa"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "Lock Screen Notifications"
 msgstr "Lukitusnäytön ilmoitukset"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
-#| msgctxt "notifications"
-#| msgid "Show Details in Lock Screen"
 msgctxt "notifications"
 msgid "Show Message Content on Lock Screen"
 msgstr "Näytä viestin sisältö lukitusnäytöllä"
@@ -3622,12 +3654,10 @@ msgstr ""
 "Notifications;Banner;Message;Tray;Popup;ilmoitus;ilmoitukset;banneri;viesti;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#| msgid "Notifications"
 msgid "Notification Banners"
 msgstr "Ilmoitusbannerit"
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Notifications"
 msgid "Lock Screen Notifications"
 msgstr "Lukitusnäytön ilmoitukset"
 
@@ -3643,60 +3673,60 @@ msgid "Other"
 msgstr "Muu"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:283
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Lisää tili"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:322
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
 msgid "Mail"
 msgstr "Sähköposti"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
 msgid "Contacts"
 msgstr "Yhteystiedot"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
 msgid "Chat"
 msgstr "Keskustelu"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
 msgid "Resources"
 msgstr "Resurssit"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:423
+#: ../panels/online-accounts/cc-online-accounts-panel.c:422
 msgid "Error logging into the account"
 msgstr "Virhe kirjauduttaessa käyttäjätilille"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#: ../panels/online-accounts/cc-online-accounts-panel.c:492
 msgid "Credentials have expired."
 msgstr "Tunnukset ovat vanhentuneet."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:496
 msgid "Sign in to enable this account."
 msgstr "Kirjaudu sisään ottaaksesi tämän tilin käyttöön."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:502
+#: ../panels/online-accounts/cc-online-accounts-panel.c:501
 msgid "_Sign In"
 msgstr "_Kirjaudu sisään"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:743
+#: ../panels/online-accounts/cc-online-accounts-panel.c:748
 msgid "Error creating account"
 msgstr "Virhe tiliä luotaessa"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:803
+#: ../panels/online-accounts/cc-online-accounts-panel.c:808
 msgid "Error removing account"
 msgstr "Virhe tiliä poistaessa"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:839
+#: ../panels/online-accounts/cc-online-accounts-panel.c:844
 msgid "Are you sure you want to remove the account?"
 msgstr "Haluatko varmasti poistaa tilin?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:841
+#: ../panels/online-accounts/cc-online-accounts-panel.c:846
 msgid "This will not remove the account on the server."
 msgstr "Tämä ei poista käyttäjää palvelimelta."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:842
+#: ../panels/online-accounts/cc-online-accounts-panel.c:847
 msgid "_Remove"
 msgstr "_Poista"
 
@@ -3738,18 +3768,18 @@ msgstr ""
 "Lisäämällä tilin voit käyttää sitä asiakirjoja, sähköpostia, yhteystietoja, "
 "kalenteria, pikaviestintää ja muuta varten."
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:200
 msgid "Unknown time"
 msgstr "Tuntematon aika"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuutti"
 msgstr[1] "%i minuuttia"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3758,227 +3788,229 @@ msgstr[1] "%i tuntia"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:226
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:219
+#: ../panels/power/cc-power-panel.c:227
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "tunti"
 msgstr[1] "tuntia"
 
-#: ../panels/power/cc-power-panel.c:220
+#: ../panels/power/cc-power-panel.c:228
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuutti"
 msgstr[1] "minuuttia"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:239
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s kunnes ladattu täyteen"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:246
+#: ../panels/power/cc-power-panel.c:254
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Varoitus: %s jäljellä"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%s remaining"
 msgstr "%s jäljellä"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
+#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
 msgid "Fully charged"
 msgstr "Ladattu täyteen"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
 msgid "Empty"
 msgstr "Tyhjä"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging"
 msgstr "Latautuu"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:288
 msgid "Discharging"
 msgstr "Purkautuu"
 
-#: ../panels/power/cc-power-panel.c:405
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Pääakku"
 
-#: ../panels/power/cc-power-panel.c:407
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Lisäakku"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "Langaton hiiri"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:487
 msgid "Wireless keyboard"
 msgstr "Langaton näppäimistö"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:490
 msgid "Uninterruptible power supply"
 msgstr "Keskeytymätön virransyöttö"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:493
 msgid "Personal digital assistant"
 msgstr "Henkilökohtainen digitaalinen avustaja (PDA)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:496
 msgid "Cellphone"
 msgstr "Matkapuhelin"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:494
+#: ../panels/power/cc-power-panel.c:499
 msgid "Media player"
 msgstr "Mediasoitin"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "Piirtopöytä"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:500
+#: ../panels/power/cc-power-panel.c:505
 msgid "Computer"
 msgstr "Tietokone"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:2040
+#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
+#: ../panels/power/cc-power-panel.c:2096
 msgid "Battery"
 msgstr "Akku"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:562
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Latautuu"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:564
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Varoitus"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Matala"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Hyvä"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:584
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Täyteen ladattu"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tyhjä"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:746
 msgid "Batteries"
 msgstr "Akut"
 
-#: ../panels/power/cc-power-panel.c:1134
+#: ../panels/power/cc-power-panel.c:1167
 msgid "When _idle"
 msgstr "Kun _käyttämättä"
 
-#: ../panels/power/cc-power-panel.c:1462
+#: ../panels/power/cc-power-panel.c:1547
 msgid "Power Saving"
 msgstr "Virransäästö"
 
-#: ../panels/power/cc-power-panel.c:1490
+#: ../panels/power/cc-power-panel.c:1582
 msgid "_Screen brightness"
 msgstr "_Näytön kirkkaus"
 
-#: ../panels/power/cc-power-panel.c:1496
+#: ../panels/power/cc-power-panel.c:1601
+#| msgid "Automatic Routes"
+msgid "Automatic brightness"
+msgstr "Automaattinen kirkkaus"
+
+#: ../panels/power/cc-power-panel.c:1621
 msgid "_Keyboard brightness"
 msgstr "Näppäimistön _kirkkaus"
 
-#: ../panels/power/cc-power-panel.c:1506
+#: ../panels/power/cc-power-panel.c:1631
 msgid "_Dim screen when inactive"
 msgstr "_Himmennä näyttö koneen ollessa käyttämättä"
 
-#: ../panels/power/cc-power-panel.c:1531
+#: ../panels/power/cc-power-panel.c:1656
 msgid "_Blank screen"
 msgstr "_Tyhjä näyttö"
 
-#: ../panels/power/cc-power-panel.c:1568
+#: ../panels/power/cc-power-panel.c:1693
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
-#: ../panels/power/cc-power-panel.c:1573
-msgid "Wireless devices require extra power"
-msgstr "Langattomat laitteet tarvitsevat lisävirtaa"
+#: ../panels/power/cc-power-panel.c:1698
+msgid "Turn off Wi-Fi to save power."
+msgstr "Sammuta wifi säästääksesi virtaa."
 
-#: ../panels/power/cc-power-panel.c:1598
+#: ../panels/power/cc-power-panel.c:1723
 msgid "_Mobile broadband"
 msgstr "_Mobiililaajakaista"
 
-#: ../panels/power/cc-power-panel.c:1603
-#| msgid "Turns off mobile broadband (3G, 4G, WiMax, etc.) devices"
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr "Mobiililaajakaistalaitteet (3G, 4G, WiMax, jne.) vaativat lisävirtaa"
+#: ../panels/power/cc-power-panel.c:1728
+#| msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgstr "Sammuta mobiililaajakaista (3G, 4G, LTE jne.) säästääksesi virtaa."
 
-#: ../panels/power/cc-power-panel.c:1653
+#: ../panels/power/cc-power-panel.c:1780
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1707
+#: ../panels/power/cc-power-panel.c:1836
 msgid "When on battery power"
 msgstr "Käytettäessä akkua"
 
-#: ../panels/power/cc-power-panel.c:1709
+#: ../panels/power/cc-power-panel.c:1838
 msgid "When plugged in"
 msgstr "Käytettäessä verkkovirtaa"
 
-#: ../panels/power/cc-power-panel.c:1839
+#: ../panels/power/cc-power-panel.c:1955
 msgid "Suspend & Power Off"
 msgstr "Valmiustila ja virran katkaisu"
 
-#: ../panels/power/cc-power-panel.c:1872
+#: ../panels/power/cc-power-panel.c:1995
 msgid "_Automatic suspend"
 msgstr "_Automaattinen valmiustila"
 
-#: ../panels/power/cc-power-panel.c:1896
-msgid "When battery power is _critical"
-msgstr "Kun akkuvirtaa on e_rittäin vähän"
+#: ../panels/power/cc-power-panel.c:1996
+#| msgid "_Automatic suspend"
+msgid "Automatic suspend"
+msgstr "Automaattinen valmiustila"
 
-#: ../panels/power/cc-power-panel.c:1951
-msgid "Power Off"
-msgstr "Virta pois päältä"
-
-#: ../panels/power/cc-power-panel.c:2087
+#: ../panels/power/cc-power-panel.c:2150
 msgid "Devices"
 msgstr "Laitteet"
 
@@ -3999,95 +4031,81 @@ msgstr ""
 "virta;uni;valmiustila;lepotila;akku;kirkkaus;himmennys;tyhjä;näyttö;jouten;"
 "virransäästö;"
 
-#: ../panels/power/power.ui.h:1
-msgid "Hibernate"
-msgstr "Lepotila"
-
-#: ../panels/power/power.ui.h:2
-msgid "Power off"
-msgstr "Virta pois päältä"
-
-#: ../panels/power/power.ui.h:5
+#: ../panels/power/power.ui.h:3
 msgid "45 minutes"
 msgstr "45 minuuttia"
 
-#: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
+#: ../panels/power/power.ui.h:4 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
 msgstr "1 tunti"
 
-#: ../panels/power/power.ui.h:7
+#: ../panels/power/power.ui.h:5
 msgid "80 minutes"
 msgstr "80 minuuttia"
 
-#: ../panels/power/power.ui.h:8
+#: ../panels/power/power.ui.h:6
 msgid "90 minutes"
 msgstr "90 minuuttia"
 
-#: ../panels/power/power.ui.h:9
+#: ../panels/power/power.ui.h:7
 msgid "100 minutes"
 msgstr "100 minuuttia"
 
-#: ../panels/power/power.ui.h:10
+#: ../panels/power/power.ui.h:8
 msgid "2 hours"
 msgstr "2 tuntia"
 
-#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:3
+#: ../panels/power/power.ui.h:9 ../panels/privacy/privacy.ui.h:3
 msgid "1 minute"
 msgstr "1 minuutti"
 
-#: ../panels/power/power.ui.h:12 ../panels/privacy/privacy.ui.h:4
+#: ../panels/power/power.ui.h:10 ../panels/privacy/privacy.ui.h:4
 msgid "2 minutes"
 msgstr "2 minuuttia"
 
-#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:5
+#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:5
 msgid "3 minutes"
 msgstr "3 minuuttia"
 
-#: ../panels/power/power.ui.h:14
+#: ../panels/power/power.ui.h:12
 msgid "4 minutes"
 msgstr "4 minuuttia"
 
-#: ../panels/power/power.ui.h:15 ../panels/privacy/privacy.ui.h:6
+#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:6
 msgid "5 minutes"
 msgstr "5 minuuttia"
 
-#: ../panels/power/power.ui.h:16
+#: ../panels/power/power.ui.h:14
 msgid "8 minutes"
 msgstr "8 minuuttia"
 
-#: ../panels/power/power.ui.h:17
+#: ../panels/power/power.ui.h:15
 msgid "10 minutes"
 msgstr "10 minuuttia"
 
-#: ../panels/power/power.ui.h:18
+#: ../panels/power/power.ui.h:16
 msgid "12 minutes"
 msgstr "12 minuuttia"
 
-#: ../panels/power/power.ui.h:20
+#: ../panels/power/power.ui.h:18
 msgid "Automatic Suspend"
 msgstr "Automaattinen valmiustila"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:19
 msgid "_Plugged In"
 msgstr "Käytettäessä _verkkovirtaa"
 
-#: ../panels/power/power.ui.h:22
+#: ../panels/power/power.ui.h:20
 msgid "On _Battery Power"
 msgstr "Käytettäessä _akkua"
 
-#: ../panels/power/power.ui.h:23
+#: ../panels/power/power.ui.h:21
 msgid "Delay"
 msgstr "Viive"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Tunnistaudu"
-
-#: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:14
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "Password"
-msgstr "Salasana"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
 msgid "Authentication Required"
@@ -4238,15 +4256,15 @@ msgstr[0] "%u aktiivinen"
 msgstr[1] "%u aktiivista"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1768
+#: ../panels/printers/cc-printers-panel.c:1770
 msgid "Failed to add new printer."
 msgstr "Uuden tulostimen lisäys epäonnistui."
 
-#: ../panels/printers/cc-printers-panel.c:1935
+#: ../panels/printers/cc-printers-panel.c:1937
 msgid "Select PPD File"
 msgstr "Valitse PPD-tiedosto"
 
-#: ../panels/printers/cc-printers-panel.c:1944
+#: ../panels/printers/cc-printers-panel.c:1946
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4254,30 +4272,30 @@ msgstr ""
 "PostScript Printer Description -tiedostot (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, "
 "*.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2251
+#: ../panels/printers/cc-printers-panel.c:2253
 msgid "No suitable driver found"
 msgstr "Soveltuvaa ajuria ei löytynyt"
 
-#: ../panels/printers/cc-printers-panel.c:2322
+#: ../panels/printers/cc-printers-panel.c:2324
 msgid "Searching for preferred drivers…"
 msgstr "Etsitään ensisijaisia ajureita…"
 
-#: ../panels/printers/cc-printers-panel.c:2343
+#: ../panels/printers/cc-printers-panel.c:2345
 msgid "Select from database…"
 msgstr "Valitse tietokannasta…"
 
-#: ../panels/printers/cc-printers-panel.c:2352
+#: ../panels/printers/cc-printers-panel.c:2354
 msgid "Provide PPD File…"
 msgstr "Määritä PPD-tiedosto…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2503
-#: ../panels/printers/cc-printers-panel.c:2526
+#: ../panels/printers/cc-printers-panel.c:2505
+#: ../panels/printers/cc-printers-panel.c:2528
 msgid "Test page"
 msgstr "Testisivu"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2940
+#: ../panels/printers/cc-printers-panel.c:2942
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Käyttöliittymätiedoston lataus epäonnistui: %s"
@@ -4351,12 +4369,12 @@ msgid "Loading drivers database..."
 msgstr "Ladataan ajuritietokantaa..."
 
 #. Translators: The found device is a JetDirect printer
-#: ../panels/printers/pp-host.c:506
+#: ../panels/printers/pp-host.c:526
 msgid "JetDirect Printer"
 msgstr "JetDirect-tulostin"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: ../panels/printers/pp-host.c:756
+#: ../panels/printers/pp-host.c:782
 msgid "LPD Printer"
 msgstr "LPD-tulostin"
 
@@ -4461,34 +4479,34 @@ msgid "%s Active Jobs"
 msgstr "%s aktiivista työtä"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1620
+#: ../panels/printers/pp-new-printer-dialog.c:1655
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1625
+#: ../panels/printers/pp-new-printer-dialog.c:1660
 msgid "Serial Port"
 msgstr "Sarjaportti"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1632
+#: ../panels/printers/pp-new-printer-dialog.c:1667
 msgid "Parallel Port"
 msgstr "Rinnakkaisportti"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1688
+#: ../panels/printers/pp-new-printer-dialog.c:1709
 #, c-format
 msgid "Location: %s"
 msgstr "Sijainti: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1693
+#: ../panels/printers/pp-new-printer-dialog.c:1714
 #, c-format
 msgid "Address: %s"
 msgstr "Osoite: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1717
+#: ../panels/printers/pp-new-printer-dialog.c:1743
 msgid "Server requires authentication"
 msgstr "Palvelin vaatii tunnistautumisen"
 
@@ -4913,44 +4931,44 @@ msgstr "Käytetään maantieteellisen sijaintisi määrittämiseen"
 msgid "_Automatic Problem Reporting"
 msgstr "_Automaattiset vikailmoitukset"
 
-#: ../panels/region/cc-format-chooser.c:119
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperiaalinen"
 
-#: ../panels/region/cc-format-chooser.c:121
+#: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrinen"
 
-#: ../panels/region/cc-format-chooser.c:286
+#: ../panels/region/cc-format-chooser.c:287
 msgid "No regions found"
 msgstr "Alueita ei löytynyt"
 
-#: ../panels/region/cc-input-chooser.c:180
+#: ../panels/region/cc-input-chooser.c:181
 msgid "No input sources found"
 msgstr "Syötelähteitä ei löytynyt"
 
-#: ../panels/region/cc-input-chooser.c:1084
+#: ../panels/region/cc-input-chooser.c:1018
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Muu"
 
-#: ../panels/region/cc-region-panel.c:243
-#: ../panels/user-accounts/um-user-panel.c:1064
+#: ../panels/region/cc-region-panel.c:247
+#: ../panels/user-accounts/um-user-panel.c:1071
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Istunto täytyy käynnistää uudelleen, jotta muutokset tulevat voimaan."
 
-#: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1068
+#: ../panels/region/cc-region-panel.c:251
+#: ../panels/user-accounts/um-user-panel.c:1075
 msgid "Restart Now"
 msgstr "Käynnistä uudelleen nyt"
 
-#: ../panels/region/cc-region-panel.c:872
+#: ../panels/region/cc-region-panel.c:877
 msgid "No input source selected"
 msgstr "Syötelähdettä ei valittu"
 
-#: ../panels/region/cc-region-panel.c:1788
+#: ../panels/region/cc-region-panel.c:1797
 msgid "Login Screen"
 msgstr "Kirjautumisnäyttö"
 
@@ -5062,32 +5080,26 @@ msgid "Options"
 msgstr "Valinnat"
 
 #: ../panels/region/region.ui.h:7
-#| msgid "Add an Input Source"
 msgid "Add input source"
 msgstr "Lisää syötelähde"
 
 #: ../panels/region/region.ui.h:8
-#| msgid "No input sources found"
 msgid "Remove input source"
 msgstr "Poista syötelähde"
 
 #: ../panels/region/region.ui.h:9
-#| msgid "No input sources found"
 msgid "Move input source up"
 msgstr "Siirrä syötelähde ylös"
 
 #: ../panels/region/region.ui.h:10
-#| msgid "No input sources found"
 msgid "Move input source down"
 msgstr "Siirrä syötelähde alas"
 
 #: ../panels/region/region.ui.h:11
-#| msgid "Switch to next input source"
 msgid "Configure input source"
 msgstr "Muokkaa syötelähdettä"
 
 #: ../panels/region/region.ui.h:12
-#| msgid "No input source selected"
 msgid "Show input source keyboard layout"
 msgstr "Näytä syötelähteenä olevan näppäimistön asettelu"
 
@@ -5155,35 +5167,36 @@ msgstr "Siirrä _alas"
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../panels/sharing/cc-sharing-panel.c:272
+#: ../panels/sharing/cc-sharing-panel.c:265
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Päällä"
 
-#: ../panels/sharing/cc-sharing-panel.c:274
-#: ../panels/sharing/cc-sharing-panel.c:301
+#: ../panels/sharing/cc-sharing-panel.c:267
+#: ../panels/sharing/cc-sharing-panel.c:294
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Poissa"
 
-#: ../panels/sharing/cc-sharing-panel.c:304
+#: ../panels/sharing/cc-sharing-panel.c:297
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Käytössä"
 
-#: ../panels/sharing/cc-sharing-panel.c:307
+#: ../panels/sharing/cc-sharing-panel.c:300
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:371
 msgid "Choose a Folder"
 msgstr "Valitse kansio"
 
-#: ../panels/sharing/cc-sharing-panel.c:917
+#: ../panels/sharing/cc-sharing-panel.c:800
 msgid "Copy"
 msgstr "Kopioi"
 
+#: ../panels/sharing/cc-sharing-panel.c:1126
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Jakaminen"
@@ -5194,13 +5207,15 @@ msgstr "Valitse mitä haluat jakaa muiden kanssa"
 
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
+#| msgid ""
+#| "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;"
+#| "video;pictures;photos;movies;server;renderer;"
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;"
 msgstr ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;jako;jakaiminen;etä;työpöytä;ääni;"
-"video;kuvat;palvelin;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;jako;jakaminen;etä;työpöytä;ääni;video;kuvat;palvelin;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5223,49 +5238,30 @@ msgid "Networks"
 msgstr "Verkot"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Bluetooth Sharing"
-msgstr "Bluetooth-jakaminen"
-
-#: ../panels/sharing/sharing.ui.h:2
-msgid ""
-"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-"devices"
-msgstr ""
-"Bluetoothin avulla voit jakaa tiedostoja toisten Bluetooth-laitteiden kanssa"
-
-#: ../panels/sharing/sharing.ui.h:3
-msgid "Only Receive From Trusted Devices"
-msgstr "Vastaanota vain luotetuilta laitteilta"
-
-#: ../panels/sharing/sharing.ui.h:4
-msgid "Save Received Files to Downloads Folder"
-msgstr "Tallenna vastaanotetut tiedostot Lataukset-kansioon"
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "Tietokoneen nimi"
 
-#: ../panels/sharing/sharing.ui.h:6
+#: ../panels/sharing/sharing.ui.h:2
 msgid "Personal File Sharing"
 msgstr "Henkilökohtainen tiedostonjako"
 
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:3
 msgid "Screen Sharing"
 msgstr "Näytön jakaminen"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Media Sharing"
 msgstr "Mediajako"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Remote Login"
 msgstr "Etäkirjautuminen"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Jotkut palvelut ovat poissa käytöstä, koska verkkoyhteyttä ei ole."
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:8
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5274,11 +5270,11 @@ msgstr ""
 "Henkilökohtaisen tiedostonjaon avulla voit jakaa julkisen kansiosi verkon "
 "muiden käyttäjien kanssa käyttäen osoitetta <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Require Password"
 msgstr "Vaadi salasana"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:12
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5287,7 +5283,7 @@ msgstr ""
 "Salli etäkäyttäjien yhdistää käyttäen Secure Shell -komentoa:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:15
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5296,39 +5292,38 @@ msgstr ""
 "Salli etäkäyttäjien seurata ja hallita näyttöäsi yhdistämällä kohteeseen: <a "
 "href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Allow Remote Control"
 msgstr "Salli etäkäyttö"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Password:"
 msgstr "Salasana:"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Show Password"
 msgstr "Näytä salasana"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "Käyttövalinnat"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:20
 msgid "New connections must ask for access"
 msgstr "Uusien yhteyksien tulee kysyä lupa"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require a password"
 msgstr "Vaadi salasana"
 
-#: ../panels/sharing/sharing.ui.h:26
-#| msgid "Share music, photos and videos over the network."
+#: ../panels/sharing/sharing.ui.h:22
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Mediajakaminen mahdollistaa musiikkin, valokuvien ja videoiden jakamisen "
 "verkon kautta."
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:23
 msgid "Folders"
 msgstr "Kansiot"
 
@@ -5423,8 +5418,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Vahvistamaton"
 
-#: ../panels/sound/gvc-combo-box.c:166 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:526
+#: ../panels/sound/gvc-combo-box.c:166 ../panels/sound/gvc-mixer-dialog.c:249
+#: ../panels/sound/gvc-mixer-dialog.c:515
 msgid "_Profile:"
 msgstr "_Profiili:"
 
@@ -5450,53 +5445,53 @@ msgstr[1] "%u sisääntuloa"
 msgid "System Sounds"
 msgstr "Järjestelmän äänet"
 
-#: ../panels/sound/gvc-mixer-dialog.c:262
+#: ../panels/sound/gvc-mixer-dialog.c:251
 msgid "_Test Speakers"
 msgstr "_Testaa kaiuttimia"
 
-#: ../panels/sound/gvc-mixer-dialog.c:431
+#: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "Havaitse piikit"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1491
-#: ../panels/sound/gvc-sound-theme-chooser.c:594
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
 msgstr "Nimi"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1510
+#: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
 msgstr "Laite"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1573
+#: ../panels/sound/gvc-mixer-dialog.c:1575
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Kaiutintesti: %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1629
+#: ../panels/sound/gvc-mixer-dialog.c:1631
 msgid "_Output volume:"
 msgstr "_Toistovoimakkuus:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1643
+#: ../panels/sound/gvc-mixer-dialog.c:1645
 msgid "Output"
 msgstr "Ulostulo"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1648
+#: ../panels/sound/gvc-mixer-dialog.c:1650
 msgid "C_hoose a device for sound output:"
 msgstr "_Valitse laite äänen toistamiseksi:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1670
+#: ../panels/sound/gvc-mixer-dialog.c:1672
 msgid "Settings for the selected device:"
 msgstr "Valitun laitteen asetukset:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1681
+#: ../panels/sound/gvc-mixer-dialog.c:1683
 msgid "Input"
 msgstr "Sisääntulo"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1688
+#: ../panels/sound/gvc-mixer-dialog.c:1690
 msgid "_Input volume:"
 msgstr "_Äänitysvoimakkuus:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1709
+#: ../panels/sound/gvc-mixer-dialog.c:1711
 msgid "Input level:"
 msgstr "Äänitystaso:"
 
@@ -5532,28 +5527,28 @@ msgstr "Ääniasetukset"
 msgid "Testing event sound"
 msgstr "Kokeillaan tapahtuman ääntä"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:584
+#: ../panels/sound/gvc-sound-theme-chooser.c:554
 msgid "Default"
 msgstr "Oletus"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:585
+#: ../panels/sound/gvc-sound-theme-chooser.c:555
 msgid "From theme"
 msgstr "Teemasta"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:770
+#: ../panels/sound/gvc-sound-theme-chooser.c:740
 msgid "C_hoose an alert sound:"
 msgstr "_Valitse hälytysääni:"
 
-#: ../panels/sound/gvc-speaker-test.c:219
+#: ../panels/sound/gvc-speaker-test.c:231
 msgid "Stop"
 msgstr "Pysäytä"
 
-#: ../panels/sound/gvc-speaker-test.c:219
-#: ../panels/sound/gvc-speaker-test.c:331
+#: ../panels/sound/gvc-speaker-test.c:231
+#: ../panels/sound/gvc-speaker-test.c:343
 msgid "Test"
 msgstr "Testaa"
 
-#: ../panels/sound/gvc-speaker-test.c:227
+#: ../panels/sound/gvc-speaker-test.c:239
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
@@ -5691,7 +5686,6 @@ msgid "_Disable if two keys are pressed together"
 msgstr "_Poista käytöstä, jos kahta näppäintä painetaan samanaikaisesti"
 
 #: ../panels/universal-access/uap.ui.h:31
-#| msgid "Beep when a _modifer key is pressed"
 msgid "Beep when a _modifier key is pressed"
 msgstr "Soita äänimerkki, kun _määritenäppäintä painetaan"
 
@@ -6132,7 +6126,7 @@ msgid "Right little finger"
 msgstr "Oikea pikkurilli"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:689
+#: ../panels/user-accounts/um-fingerprint-dialog.c:686
 msgid "Enable Fingerprint Login"
 msgstr "Ota sormenjäljellä kirjautuminen käyttöön"
 
@@ -6502,15 +6496,15 @@ msgstr ""
 "Haluatko poistaa rekisteröidyt sormenjälkesi, jolloin sormenjäljillä "
 "kirjautuminen poistetaan käytöstä?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:446
+#: ../panels/user-accounts/um-fingerprint-dialog.c:443
 msgid "Done!"
 msgstr "Valmis!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:507
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:504
+#: ../panels/user-accounts/um-fingerprint-dialog.c:546
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Laitetta ”%s” ei voitu käsitellä"
@@ -6518,16 +6512,16 @@ msgstr "Laitetta ”%s” ei voitu käsitellä"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:590
+#: ../panels/user-accounts/um-fingerprint-dialog.c:587
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Sormenjäljen tunnistusta ei voitu aloitta laitteella ”%s”"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:637
 msgid "Could not access any fingerprint readers"
 msgstr "Sormenjälkilukijoita ei voitu käyttää"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:641
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Please contact your system administrator for help."
 msgstr "Kysy apua järjestelmäsi ylläpitäjältä."
 
@@ -6536,7 +6530,7 @@ msgstr "Kysy apua järjestelmäsi ylläpitäjältä."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:723
+#: ../panels/user-accounts/um-fingerprint-dialog.c:720
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6545,11 +6539,11 @@ msgstr ""
 "Jotta voit ottaa sormenjäljellä kirjautumisen käyttöön, täytyy yksi "
 "sormenjäljistä tallentaa käyttäen laitetta ”%s”."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:727
 msgid "Selecting finger"
 msgstr "Valitaan sormea"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Enrolling fingerprints"
 msgstr "Kirjataan sormenjälkiä"
 
@@ -6589,7 +6583,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:842
+#: ../panels/user-accounts/um-user-panel.c:844
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6597,7 +6591,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:846
+#: ../panels/user-accounts/um-user-panel.c:848
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6672,31 +6666,30 @@ msgstr "Virheellinen salasana, yritä uudelleen"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Toimialueeseen %s yhdistäminen epäonnistui: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:238
+#: ../panels/user-accounts/um-user-panel.c:240
 msgid "Other Accounts"
 msgstr "Muut tilit"
 
-#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:450
 msgid "Failed to delete user"
 msgstr "Käyttäjän poisto epäonnistui"
 
-#: ../panels/user-accounts/um-user-panel.c:508
-#: ../panels/user-accounts/um-user-panel.c:567
-#: ../panels/user-accounts/um-user-panel.c:619
-#| msgid "Failed to delete user"
+#: ../panels/user-accounts/um-user-panel.c:510
+#: ../panels/user-accounts/um-user-panel.c:569
+#: ../panels/user-accounts/um-user-panel.c:621
 msgid "Failed to revoke remotely managed user"
 msgstr "Etähallitun käyttäjän kumoaminen epäonnistui"
 
-#: ../panels/user-accounts/um-user-panel.c:675
+#: ../panels/user-accounts/um-user-panel.c:677
 msgid "You cannot delete your own account."
 msgstr "Et voi poistaa omaa tunnustasi."
 
-#: ../panels/user-accounts/um-user-panel.c:684
+#: ../panels/user-accounts/um-user-panel.c:686
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s on yhä sisäänkirjautuneena"
 
-#: ../panels/user-accounts/um-user-panel.c:688
+#: ../panels/user-accounts/um-user-panel.c:690
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6704,12 +6697,12 @@ msgstr ""
 "Jos käyttäjä poistetaan hänen ollessaan sisäänkirjautuneena, järjestelmässä "
 "voi ilmetä ongelmia."
 
-#: ../panels/user-accounts/um-user-panel.c:697
+#: ../panels/user-accounts/um-user-panel.c:699
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Haluatko säilyttää käyttäjän %s tiedostot?"
 
-#: ../panels/user-accounts/um-user-panel.c:701
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6717,53 +6710,51 @@ msgstr ""
 "Voit halutessasi säilyttää kotikansion, sähköpostit ja väliaikaistiedostot "
 "käyttäjätilin poiston yhteydessä."
 
-#: ../panels/user-accounts/um-user-panel.c:704
+#: ../panels/user-accounts/um-user-panel.c:706
 msgid "_Delete Files"
 msgstr "P_oista tiedostot"
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:707
 msgid "_Keep Files"
 msgstr "_Säilytä tiedostot"
 
-#: ../panels/user-accounts/um-user-panel.c:719
+#: ../panels/user-accounts/um-user-panel.c:721
 #, c-format
-#| msgid "Are you sure you want to remove the account?"
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Haluatko varmasti kumota käyttöoikeudet etähallitulta tililtä %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:723
-#| msgid "_Delete Files"
+#: ../panels/user-accounts/um-user-panel.c:725
 msgid "_Delete"
 msgstr "_Poista"
 
-#: ../panels/user-accounts/um-user-panel.c:775
+#: ../panels/user-accounts/um-user-panel.c:777
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Käyttäjätili pois käytöstä"
 
-#: ../panels/user-accounts/um-user-panel.c:783
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Asetetaan seuraavalla kirjautumiskerralla"
 
-#: ../panels/user-accounts/um-user-panel.c:786
+#: ../panels/user-accounts/um-user-panel.c:788
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../panels/user-accounts/um-user-panel.c:835
+#: ../panels/user-accounts/um-user-panel.c:837
 msgid "Logged in"
 msgstr "Sisäänkirjautuneena"
 
-#: ../panels/user-accounts/um-user-panel.c:1267
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Failed to contact the accounts service"
 msgstr "Yhteys tilipalveluun (accounts service) epäonnistui"
 
-#: ../panels/user-accounts/um-user-panel.c:1269
+#: ../panels/user-accounts/um-user-panel.c:1276
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Varmista, että AccountService on asennettu ja käytössä."
 
-#: ../panels/user-accounts/um-user-panel.c:1310
+#: ../panels/user-accounts/um-user-panel.c:1317
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6771,12 +6762,12 @@ msgstr ""
 "Tee muutoksia\n"
 "napsauttamalla ensin *-kuvaketta"
 
-#: ../panels/user-accounts/um-user-panel.c:1348
+#: ../panels/user-accounts/um-user-panel.c:1355
 msgid "Create a user account"
 msgstr "Luo käyttäjätili"
 
-#: ../panels/user-accounts/um-user-panel.c:1359
-#: ../panels/user-accounts/um-user-panel.c:1671
+#: ../panels/user-accounts/um-user-panel.c:1366
+#: ../panels/user-accounts/um-user-panel.c:1678
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6784,12 +6775,12 @@ msgstr ""
 "Luo käyttäjätili\n"
 "napsauttamalla ensin *-kuvaketta"
 
-#: ../panels/user-accounts/um-user-panel.c:1369
+#: ../panels/user-accounts/um-user-panel.c:1376
 msgid "Delete the selected user account"
 msgstr "Poista valittu käyttäjätili"
 
-#: ../panels/user-accounts/um-user-panel.c:1381
-#: ../panels/user-accounts/um-user-panel.c:1676
+#: ../panels/user-accounts/um-user-panel.c:1388
+#: ../panels/user-accounts/um-user-panel.c:1683
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6797,7 +6788,7 @@ msgstr ""
 "Poista valittu käyttäjä\n"
 "napsauttamalla ensin *-kuvaketta"
 
-#: ../panels/user-accounts/um-user-panel.c:1585
+#: ../panels/user-accounts/um-user-panel.c:1592
 msgid "My Account"
 msgstr "Oma tili"
 
@@ -6914,11 +6905,11 @@ msgstr "Kohdista näyttöön"
 msgid "%d of %d"
 msgstr "%d / %d"
 
-#: ../panels/wacom/cc-wacom-page.c:530
+#: ../panels/wacom/cc-wacom-page.c:522
 msgid "Display Mapping"
 msgstr "Kohdistus näyttöön"
 
-#: ../panels/wacom/cc-wacom-stylus-page.c:372
+#: ../panels/wacom/cc-wacom-stylus-page.c:377
 msgid "Button"
 msgstr "Painike"
 
@@ -6949,7 +6940,6 @@ msgid "Tablet Preferences"
 msgstr "Piirtopöydän asetukset"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-#| msgid "Help"
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -6990,86 +6980,86 @@ msgid "Left-Handed Orientation"
 msgstr "Vasenkätinen suunta"
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1024
+#: ../panels/wacom/gsd-wacom-device.c:1028
 msgid "Left Ring"
 msgstr "Vasen rengas"
 
-#: ../panels/wacom/gsd-wacom-device.c:1035
+#: ../panels/wacom/gsd-wacom-device.c:1039
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Vasemman renkaan tila #%d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1055
+#: ../panels/wacom/gsd-wacom-device.c:1059
 msgid "Right Ring"
 msgstr "Oikea rengas"
 
-#: ../panels/wacom/gsd-wacom-device.c:1066
+#: ../panels/wacom/gsd-wacom-device.c:1070
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Oikean renkaan tila #%d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1108
+#: ../panels/wacom/gsd-wacom-device.c:1112
 msgid "Left Touchstrip"
 msgstr "Vasen kosketusliuska"
 
-#: ../panels/wacom/gsd-wacom-device.c:1119
+#: ../panels/wacom/gsd-wacom-device.c:1123
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Vasemman kosketusliuskan tila #%d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1139
+#: ../panels/wacom/gsd-wacom-device.c:1143
 msgid "Right Touchstrip"
 msgstr "Oikea kosketusliuska"
 
-#: ../panels/wacom/gsd-wacom-device.c:1150
+#: ../panels/wacom/gsd-wacom-device.c:1154
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Oikean kosketusliuskan tila #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1176
+#: ../panels/wacom/gsd-wacom-device.c:1180
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Vasemman kosketusrenkaan tilavaihdin"
 
-#: ../panels/wacom/gsd-wacom-device.c:1178
+#: ../panels/wacom/gsd-wacom-device.c:1182
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Oikean kosketusrenkaan tilavaihdin"
 
-#: ../panels/wacom/gsd-wacom-device.c:1181
+#: ../panels/wacom/gsd-wacom-device.c:1185
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Vasemman kosketusliuskan tilavaihdin"
 
-#: ../panels/wacom/gsd-wacom-device.c:1183
+#: ../panels/wacom/gsd-wacom-device.c:1187
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Oikean kosketusliuskan tilavaihdin"
 
-#: ../panels/wacom/gsd-wacom-device.c:1188
+#: ../panels/wacom/gsd-wacom-device.c:1192
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Tilavaihdin #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1296
+#: ../panels/wacom/gsd-wacom-device.c:1300
 #, c-format
 msgid "Left Button #%d"
 msgstr "Vasen painike #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1299
+#: ../panels/wacom/gsd-wacom-device.c:1303
 #, c-format
 msgid "Right Button #%d"
 msgstr "Oikea painike #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1302
+#: ../panels/wacom/gsd-wacom-device.c:1306
 #, c-format
 msgid "Top Button #%d"
 msgstr "Yläpainike #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1305
+#: ../panels/wacom/gsd-wacom-device.c:1309
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Alapainike #%d"
@@ -7146,76 +7136,79 @@ msgstr "Alanäppäin"
 msgid "Tip Pressure Feel"
 msgstr "Kynän kärjen paineentuntu"
 
-#: ../shell/cc-application.c:69
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:1
+msgid "GNOME Control Center"
+msgstr "Gnomen asetuskeskus"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:2
+msgid "Utilities to configure the GNOME desktop"
+msgstr "Työkalut Gnome-työpöydän hallintaan"
+
+#: ../shell/appdata/gnome-control-center.appdata.xml.in.h:3
+msgid ""
+"The control center is GNOME's main interface for configuration of various "
+"aspects of your desktop."
+msgstr ""
+"Asetuskeskus on Gnomen ensisijainen käyttöliittymä työpöydän monien eri "
+"asetusten muokkaamiseen."
+
+#: ../shell/cc-application.c:45
+#| msgid "Display Brightness"
+msgid "Display version number"
+msgstr "Näytä versionumero"
+
+#: ../shell/cc-application.c:46
 msgid "Enable verbose mode"
 msgstr "Ota käyttöön lisätietoja tulostava tila"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:47
 msgid "Show the overview"
 msgstr "Näytä yleiskuva"
 
-#: ../shell/cc-application.c:71
+#: ../shell/cc-application.c:48
 msgid "Search for the string"
 msgstr "Etsi merkkijonoa"
 
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:49
 msgid "List possible panel names and exit"
 msgstr "Näytä mahdolliset paneelinimet ja lopeta"
 
-#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
-#: ../shell/cc-application.c:75
-msgid "Show help options"
-msgstr "Näytä ohjevalitsimet"
-
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "Panel to display"
 msgstr "Näytettävä paneeli"
 
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEELI] [ARGUMENTTI…]"
 
-#: ../shell/cc-application.c:145
-msgid "- Settings"
-msgstr "- Asetukset"
-
-#: ../shell/cc-application.c:163
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Suorita ”%s --help” nähdäksesi täyden luettelon komentorivivalitsimista.\n"
-
-#: ../shell/cc-application.c:193
+#: ../shell/cc-application.c:113
 msgid "Available panels:"
 msgstr "Käytettävissä olevat paneelit:"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:251
 msgid "Help"
 msgstr "Ohje"
 
-#: ../shell/cc-application.c:327
+#: ../shell/cc-application.c:252
 msgid "Quit"
 msgstr "Lopeta"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1493
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
 msgid "All Settings"
 msgstr "Kaikki asetukset"
 
 #. Add categories
-#: ../shell/cc-window.c:879
+#: ../shell/cc-window.c:880
 msgctxt "category"
 msgid "Personal"
 msgstr "Henkilökohtaiset"
 
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Hardware"
 msgstr "Laitteisto"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "System"
 msgstr "Järjestelmä"
@@ -7223,6 +7216,53 @@ msgstr "Järjestelmä"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Ominaisuudet;Asetukset;Preferences;Settings;"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth on pois käytöstä"
+
+#~ msgid "Security key"
+#~ msgstr "Salausavain"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "Langattomat laitteet tarvitsevat lisävirtaa"
+
+#~ msgid "When battery power is _critical"
+#~ msgstr "Kun akkuvirtaa on e_rittäin vähän"
+
+#~ msgid "Power Off"
+#~ msgstr "Virta pois päältä"
+
+#~ msgid "Hibernate"
+#~ msgstr "Lepotila"
+
+#~ msgid "Power off"
+#~ msgstr "Virta pois päältä"
+
+#~ msgid ""
+#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+#~ "devices"
+#~ msgstr ""
+#~ "Bluetoothin avulla voit jakaa tiedostoja toisten Bluetooth-laitteiden "
+#~ "kanssa"
+
+#~ msgid "Only Receive From Trusted Devices"
+#~ msgstr "Vastaanota vain luotetuilta laitteilta"
+
+#~ msgid "Save Received Files to Downloads Folder"
+#~ msgstr "Tallenna vastaanotetut tiedostot Lataukset-kansioon"
+
+#~ msgid "Show help options"
+#~ msgstr "Näytä ohjevalitsimet"
+
+#~ msgid "- Settings"
+#~ msgstr "- Asetukset"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Suorita ”%s --help” nähdäksesi täyden luettelon komentorivivalitsimista.\n"
 
 #~ msgid "United States"
 #~ msgstr "Yhdysvallat"
