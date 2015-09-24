@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-13 10:08+0000\n"
-"PO-Revision-Date: 2015-07-14 17:27+0200\n"
+"POT-Creation-Date: 2015-09-24 07:08+0000\n"
+"PO-Revision-Date: 2015-09-24 10:49+0200\n"
 "Last-Translator: Hannie Dumoleyn <hannie@ubuntu-nl.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
@@ -137,10 +137,9 @@ msgstr ""
 #: ../panels/printers/cc-printers-panel.c:1940
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568
-#: ../panels/region/format-chooser.ui.h:3
-#: ../panels/region/input-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:491
+#: ../panels/sharing/cc-sharing-panel.c:374
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
@@ -185,27 +184,63 @@ msgstr "Achtergrond wijzigen in een achtergrondafbeelding of foto"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Wallpaper;Screen;Desktop;Achtergrond;Scherm;Bureaublad;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:262
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth is uitgeschakeld"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+#| msgid "Air_plane Mode"
+msgid "Turn Off Airplane Mode"
+msgstr "_Vliegtuigstand uitzetten"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:263
-msgid "No Bluetooth adapters found"
-msgstr "Er zijn geen Bluetoothadapters aangetroffen"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#| msgid "No Bluetooth adapters found"
+msgid "No Bluetooth Found"
+msgstr "Bluetooth niet aangetroffen"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:264
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth is uitgeschakeld via een schakelaar"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "Sluit een dongle aan om Bluetooth te gebruiken."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#| msgid "Bluetooth Sharing"
+msgid "Bluetooth Turned Off"
+msgstr "Bluetooth uitgeschakeld"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Turn on to connect devices and receive file transfers."
+msgstr ""
+"Aanzetten om apparaten aan te sluiten en bestandsoverdrachten te ontvangen."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#| msgid "Air_plane Mode"
+msgid "Airplane Mode is on"
+msgstr "_Vliegtuigstand"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#| msgid "Bluetooth is disabled by hardware switch"
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "Bluetooth wordt uitgeschakeld als vliegtuigstand aan staat."
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#| msgid "Air_plane Mode"
+msgid "Hardware Airplane Mode is on"
+msgstr "Hardware _Vliegtuigstand staat aan"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "Vliegtuigstand uitschakelen om Bluetooth mogelijk te maken."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1585
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Bluetooth aan- en uitzetten en uw apparaten aansluiten"
+
+#. Translators: those are keywords for the bluetooth control-center panel
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:4
+msgid "share;sharing;bluetooth;obex;"
+msgstr "share;sharing;bluetooth;obex;delen;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -687,8 +722,7 @@ msgstr "Samenvatting"
 msgid "Import File…"
 msgstr "Bestand importeren…"
 
-#: ../panels/color/color.ui.h:30
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -734,8 +768,7 @@ msgstr "Inschakelen"
 msgid "Add profile"
 msgstr "Profiel toevoegen"
 
-#: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
 msgstr "Kalibreren…"
 
@@ -867,7 +900,7 @@ msgstr "Ander profiel…"
 
 #: ../panels/common/cc-language-chooser.c:124
 #: ../panels/region/cc-format-chooser.c:271
-#: ../panels/region/cc-input-chooser.c:167
+#: ../panels/region/cc-input-chooser.c:168
 msgid "More…"
 msgstr "Meer…"
 
@@ -1090,7 +1123,7 @@ msgstr "Primair"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
+#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1983,11 +2016,11 @@ msgstr "Enkele klik, secundaire knop"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:359
+#: ../panels/network/cc-network-panel.c:358
 msgid "Air_plane Mode"
-msgstr "_Vliegtuig-modus"
+msgstr "_Vliegtuigstand"
 
-#: ../panels/network/cc-network-panel.c:968
+#: ../panels/network/cc-network-panel.c:967
 msgid "Network proxy"
 msgstr "Netwerkproxy"
 
@@ -1995,17 +2028,17 @@ msgstr "Netwerkproxy"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1145 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:431
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1301
+#: ../panels/network/cc-network-panel.c:1300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Oeps! Er ging iets mis. Neem contact op met uw softwareleverancier."
 
-#: ../panels/network/cc-network-panel.c:1307
+#: ../panels/network/cc-network-panel.c:1306
 msgid "NetworkManager needs to be running."
 msgstr "Netwerkbeheer moet draaien."
 
@@ -2554,7 +2587,7 @@ msgstr "Het te importeren bestand selecteren"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1941
-#: ../panels/sharing/cc-sharing-panel.c:492
+#: ../panels/sharing/cc-sharing-panel.c:375
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_Openen"
@@ -2663,9 +2696,8 @@ msgid "yesterday"
 msgstr "gisteren"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:696
+#: ../panels/network/panel-common.c:698 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP-adres"
 
@@ -2689,12 +2721,11 @@ msgstr "Bekabeld"
 #: ../panels/network/net-device-wifi.c:1621
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opties…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:473
 #, c-format
 msgid "Profile %d"
 msgstr "Profiel %d"
@@ -3033,8 +3064,11 @@ msgid "Security type"
 msgstr "Beveiligingstype"
 
 #: ../panels/network/network-wifi.ui.h:63
-msgid "Security key"
-msgstr "Beveiligingssleutel"
+#: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "Password"
+msgstr "Wachtwoord"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -3601,7 +3635,7 @@ msgid "_Type"
 msgstr "_Type"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
+#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3899,7 +3933,7 @@ msgstr "Computer"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2096
+#: ../panels/power/cc-power-panel.c:2109
 msgid "Battery"
 msgstr "Accu"
 
@@ -3943,77 +3977,77 @@ msgstr "Leeg"
 msgid "Batteries"
 msgstr "Accu's"
 
-#: ../panels/power/cc-power-panel.c:1167
+#: ../panels/power/cc-power-panel.c:1171
 msgid "When _idle"
 msgstr "Wanneer i_nactief"
 
-#: ../panels/power/cc-power-panel.c:1547
+#: ../panels/power/cc-power-panel.c:1560
 msgid "Power Saving"
 msgstr "Energiebesparend"
 
-#: ../panels/power/cc-power-panel.c:1582
+#: ../panels/power/cc-power-panel.c:1595
 msgid "_Screen brightness"
 msgstr "Helderheid beeld_scherm"
 
-#: ../panels/power/cc-power-panel.c:1601
+#: ../panels/power/cc-power-panel.c:1614
 msgid "Automatic brightness"
 msgstr "Automatische helderheid"
 
-#: ../panels/power/cc-power-panel.c:1621
+#: ../panels/power/cc-power-panel.c:1634
 msgid "_Keyboard brightness"
 msgstr "_Helderheid toetsenbord"
 
-#: ../panels/power/cc-power-panel.c:1631
+#: ../panels/power/cc-power-panel.c:1644
 msgid "_Dim screen when inactive"
 msgstr "Scherm _dimmen wanneer inactief"
 
-#: ../panels/power/cc-power-panel.c:1656
+#: ../panels/power/cc-power-panel.c:1669
 msgid "_Blank screen"
 msgstr "_Zwart scherm"
 
-#: ../panels/power/cc-power-panel.c:1693
+#: ../panels/power/cc-power-panel.c:1706
 msgid "_Wi-Fi"
 msgstr "_WiFi"
 
-#: ../panels/power/cc-power-panel.c:1698
-msgid "Wireless devices require extra power"
-msgstr "Draadloze apparaten hebben meer stroom nodig"
+#: ../panels/power/cc-power-panel.c:1711
+msgid "Turn off Wi-Fi to save power."
+msgstr "WiFi uitschakelen om energie te sparen."
 
-#: ../panels/power/cc-power-panel.c:1723
+#: ../panels/power/cc-power-panel.c:1736
 msgid "_Mobile broadband"
 msgstr "_Mobiel breedband"
 
-#: ../panels/power/cc-power-panel.c:1728
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+#: ../panels/power/cc-power-panel.c:1741
+#| msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
-"Mobiele breedband-apparaten (3G, 4G, WiMax, etc.) hebben meer stroom nodig"
+"Mobiele breedband (3G, 4G, LTE, etc.) uitschakelen om energie te sparen."
 
-#: ../panels/power/cc-power-panel.c:1780
+#: ../panels/power/cc-power-panel.c:1793
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1836
+#: ../panels/power/cc-power-panel.c:1849
 msgid "When on battery power"
 msgstr "Wanneer op accustroom"
 
-#: ../panels/power/cc-power-panel.c:1838
+#: ../panels/power/cc-power-panel.c:1851
 msgid "When plugged in"
 msgstr "Als de kabel aangesloten is"
 
-#: ../panels/power/cc-power-panel.c:1955
+#: ../panels/power/cc-power-panel.c:1968
 msgid "Suspend & Power Off"
 msgstr "Pauzestand & Uitschakelen"
 
-#: ../panels/power/cc-power-panel.c:1995
+#: ../panels/power/cc-power-panel.c:2008
 msgid "_Automatic suspend"
 msgstr "_Automatisch in pauzestand zetten"
 
-#: ../panels/power/cc-power-panel.c:1996
-#| msgid "_Automatic suspend"
+#: ../panels/power/cc-power-panel.c:2009
 msgid "Automatic suspend"
 msgstr "Automatisch in pauzestand zetten"
 
-#: ../panels/power/cc-power-panel.c:2150
+#: ../panels/power/cc-power-panel.c:2163
 msgid "Devices"
 msgstr "Apparaten"
 
@@ -4114,12 +4148,6 @@ msgstr "Vertraging"
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Controleren"
-
-#: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:14
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "Password"
-msgstr "Wachtwoord"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
 msgid "Authentication Required"
@@ -4395,12 +4423,12 @@ msgstr "Stuurprogrammadatabase wordt geladen…"
 # bij een browser is dit bladwijzers, maar hier is
 # favorieten/favoriet beter (favoriete programma's) (tino)
 #. Translators: The found device is a JetDirect printer
-#: ../panels/printers/pp-host.c:506
+#: ../panels/printers/pp-host.c:526
 msgid "JetDirect Printer"
 msgstr "JetDirect Printer"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: ../panels/printers/pp-host.c:756
+#: ../panels/printers/pp-host.c:782
 msgid "LPD Printer"
 msgstr "LPD-printer"
 
@@ -4506,34 +4534,34 @@ msgid "%s Active Jobs"
 msgstr "%s actieve afdruktaken"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1568
+#: ../panels/printers/pp-new-printer-dialog.c:1659
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1573
+#: ../panels/printers/pp-new-printer-dialog.c:1664
 msgid "Serial Port"
 msgstr "Seriële poort"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1580
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "Parallel Port"
 msgstr "Parallelle poort"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1636
+#: ../panels/printers/pp-new-printer-dialog.c:1713
 #, c-format
 msgid "Location: %s"
 msgstr "Locatie: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1641
+#: ../panels/printers/pp-new-printer-dialog.c:1718
 #, c-format
 msgid "Address: %s"
 msgstr "Adres: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1665
+#: ../panels/printers/pp-new-printer-dialog.c:1747
 msgid "Server requires authentication"
 msgstr "Server vereist authenticatie"
 
@@ -4703,7 +4731,7 @@ msgstr "_Standaardprinter"
 msgid "Jobs"
 msgstr "Taken"
 
-#. Translators: Opens a dialog containing printer's jobs
+#. Translators: Opens a dialog containing printer
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
 msgstr "_Taken tonen"
@@ -4729,7 +4757,7 @@ msgstr "pagina 3"
 msgid "Print _Test Page"
 msgstr "_Testpagina afdrukken"
 
-#. Translators: This button opens printer's options tab
+#. Translators: This button opens printer
 #: ../panels/printers/printers.ui.h:22
 msgid "_Options"
 msgstr "_Opties"
@@ -4975,31 +5003,31 @@ msgstr "Metrisch"
 msgid "No regions found"
 msgstr "Geen regio's gevonden"
 
-#: ../panels/region/cc-input-chooser.c:180
+#: ../panels/region/cc-input-chooser.c:181
 msgid "No input sources found"
 msgstr "Er zijn geen invoerbronnen aangetroffen"
 
-#: ../panels/region/cc-input-chooser.c:1085
+#: ../panels/region/cc-input-chooser.c:1015
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Overige"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1071
+#: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Om de wijzigingen door te voeren moet de computer opnieuw gestart worden"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Restart Now"
 msgstr "Nu herstarten"
 
-#: ../panels/region/cc-region-panel.c:876
+#: ../panels/region/cc-region-panel.c:877
 msgid "No input source selected"
 msgstr "Er zijn geen invoerbronnen geselecteerd"
 
-#: ../panels/region/cc-region-panel.c:1796
+#: ../panels/region/cc-region-panel.c:1797
 msgid "Login Screen"
 msgstr "Aanmeldscherm"
 
@@ -5200,35 +5228,36 @@ msgstr "Naar beneden"
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: ../panels/sharing/cc-sharing-panel.c:272
+#: ../panels/sharing/cc-sharing-panel.c:265
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Aan"
 
-#: ../panels/sharing/cc-sharing-panel.c:274
-#: ../panels/sharing/cc-sharing-panel.c:301
+#: ../panels/sharing/cc-sharing-panel.c:267
+#: ../panels/sharing/cc-sharing-panel.c:294
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Uit"
 
-#: ../panels/sharing/cc-sharing-panel.c:304
+#: ../panels/sharing/cc-sharing-panel.c:297
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: ../panels/sharing/cc-sharing-panel.c:307
+#: ../panels/sharing/cc-sharing-panel.c:300
 msgctxt "service is active"
 msgid "Active"
 msgstr "Actief"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:371
 msgid "Choose a Folder"
 msgstr "Een map kiezen"
 
-#: ../panels/sharing/cc-sharing-panel.c:917
+#: ../panels/sharing/cc-sharing-panel.c:800
 msgid "Copy"
 msgstr "Kopiëren"
 
+#: ../panels/sharing/cc-sharing-panel.c:1126
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Delen"
@@ -5239,12 +5268,15 @@ msgstr "Regelen wat u met anderen wilt delen"
 
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
+#| msgid ""
+#| "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;"
+#| "video;pictures;photos;movies;server;renderer;"
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;"
 msgstr ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;delen;afbeeldingen;films;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;m"
+"ovies;server;renderer;delen;afbeeldingen;films;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5268,49 +5300,30 @@ msgid "Networks"
 msgstr "Netwerken"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Bluetooth Sharing"
-msgstr "Bluetooth delen"
-
-#: ../panels/sharing/sharing.ui.h:2
-msgid ""
-"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-"devices"
-msgstr ""
-"Met ‘Bluetooth delen’ kunt u bestanden delen met ander Bluetooth-apparaten"
-
-#: ../panels/sharing/sharing.ui.h:3
-msgid "Only Receive From Trusted Devices"
-msgstr "Alleen van vertrouwde apparaten ontvangen"
-
-#: ../panels/sharing/sharing.ui.h:4
-msgid "Save Received Files to Downloads Folder"
-msgstr "Ontvangen bestanden opslaan in de map Downloads"
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "Computernaam"
 
-#: ../panels/sharing/sharing.ui.h:6
+#: ../panels/sharing/sharing.ui.h:2
 msgid "Personal File Sharing"
 msgstr "Delen van persoonlijke bestanden"
 
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:3
 msgid "Screen Sharing"
 msgstr "Scherm delen"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Media Sharing"
 msgstr "Media delen"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Remote Login"
 msgstr "Aanmelden op afstand"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Sommige diensten zijn uitgeschakeld omdat er geen netwerktoegang is."
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:8
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5319,11 +5332,11 @@ msgstr ""
 "Met ‘Delen van persoonlijke bestanden’ kunt u de map ‘Openbaar’ delen met "
 "anderen op uw huidige netwerk via: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Require Password"
 msgstr "Wachtwoord vereist"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:12
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5333,7 +5346,7 @@ msgstr ""
 "opdracht:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:15
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5342,37 +5355,37 @@ msgstr ""
 "Gebruikers op afstand toestaan uw scherm te bekijken of te besturen door te "
 "verbinden met: <a href= \"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Allow Remote Control"
 msgstr "Bediening op afstand toestaan"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Password:"
 msgstr "Wachtwoord:"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Show Password"
 msgstr "Wachtwoord tonen"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "Toegangsopties"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:20
 msgid "New connections must ask for access"
 msgstr "Nieuwe verbindingen moeten toegang vragen"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require a password"
 msgstr "Een wachtwoord vereisen"
 
-#: ../panels/sharing/sharing.ui.h:26
+#: ../panels/sharing/sharing.ui.h:22
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Via Delen van media kunt u muziek, foto's en video's delen op het netwerk."
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:23
 msgid "Folders"
 msgstr "Mappen"
 
@@ -6794,16 +6807,16 @@ msgstr "Geen"
 msgid "Logged in"
 msgstr "Aangemeld"
 
-#: ../panels/user-accounts/um-user-panel.c:1274
+#: ../panels/user-accounts/um-user-panel.c:1275
 msgid "Failed to contact the accounts service"
 msgstr "Kon de accounts-service niet benaderen"
 
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:1277
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Zorg ervoor dat het de AccountService geïnstalleerd in ingeschakeld is."
 
-#: ../panels/user-accounts/um-user-panel.c:1317
+#: ../panels/user-accounts/um-user-panel.c:1318
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6811,12 +6824,12 @@ msgstr ""
 "Klik op het het *-pictogram\n"
 "om wijzigingen te maken"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
+#: ../panels/user-accounts/um-user-panel.c:1356
 msgid "Create a user account"
 msgstr "Gebruikersaccount aanmaken"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
-#: ../panels/user-accounts/um-user-panel.c:1678
+#: ../panels/user-accounts/um-user-panel.c:1367
+#: ../panels/user-accounts/um-user-panel.c:1679
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6824,12 +6837,12 @@ msgstr ""
 "Klik op het *-pictogram\n"
 "om een gebruikersaccount aan te maken"
 
-#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1377
 msgid "Delete the selected user account"
 msgstr "De geselecteerde gebruiker verwijderen"
 
-#: ../panels/user-accounts/um-user-panel.c:1388
-#: ../panels/user-accounts/um-user-panel.c:1683
+#: ../panels/user-accounts/um-user-panel.c:1389
+#: ../panels/user-accounts/um-user-panel.c:1684
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6837,7 +6850,7 @@ msgstr ""
 "Klik op het het *-pictogram om de geselecteerde\n"
 "gebruiker te verwijderen"
 
-#: ../panels/user-accounts/um-user-panel.c:1592
+#: ../panels/user-accounts/um-user-panel.c:1593
 msgid "My Account"
 msgstr "Mijn account"
 
@@ -7208,58 +7221,44 @@ msgstr ""
 "Het configuratiecentrum is de hoofdinterface van GNOME voor verschillende "
 "aspecten van uw desktop te configureren."
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:45
+#| msgid "Display Brightness"
+msgid "Display version number"
+msgstr "Versienummer weergeven"
+
+#: ../shell/cc-application.c:46
 msgid "Enable verbose mode"
 msgstr "Verbose-modus inschakelen"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:47
 msgid "Show the overview"
 msgstr "Overzicht tonen"
 
-#: ../shell/cc-application.c:71
+#: ../shell/cc-application.c:48
 msgid "Search for the string"
 msgstr "Zoeken naar de tekenreeks"
 
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:49
 msgid "List possible panel names and exit"
 msgstr "Een lijst met mogelijke paneelnamen tonen en sluiten"
 
-#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
-#: ../shell/cc-application.c:75
-msgid "Show help options"
-msgstr "Deze hulptekst tonen"
-
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "Panel to display"
 msgstr "Te tonen paneel"
 
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: ../shell/cc-application.c:145
-msgid "- Settings"
-msgstr "- Instellingen"
-
-#: ../shell/cc-application.c:163
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Gebruik ‘%s --help’ voor een volledige lijst van beschikbare opties voor de "
-"opdrachtregel.\n"
-
-#: ../shell/cc-application.c:193
+#: ../shell/cc-application.c:113
 msgid "Available panels:"
 msgstr "Beschikbare panelen:"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:251
 msgid "Help"
 msgstr "Hulp"
 
-#: ../shell/cc-application.c:327
+#: ../shell/cc-application.c:252
 msgid "Quit"
 msgstr "Afsluiten"
 
@@ -7286,6 +7285,41 @@ msgstr "Systeem"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;Voorkeuren;Instellingen;"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth is uitgeschakeld"
+
+#~ msgid "Security key"
+#~ msgstr "Beveiligingssleutel"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "Draadloze apparaten hebben meer stroom nodig"
+
+#~ msgid ""
+#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+#~ "devices"
+#~ msgstr ""
+#~ "Met ‘Bluetooth delen’ kunt u bestanden delen met ander Bluetooth-apparaten"
+
+#~ msgid "Only Receive From Trusted Devices"
+#~ msgstr "Alleen van vertrouwde apparaten ontvangen"
+
+#~ msgid "Save Received Files to Downloads Folder"
+#~ msgstr "Ontvangen bestanden opslaan in de map Downloads"
+
+#~ msgid "Show help options"
+#~ msgstr "Deze hulptekst tonen"
+
+#~ msgid "- Settings"
+#~ msgstr "- Instellingen"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Gebruik ‘%s --help’ voor een volledige lijst van beschikbare opties voor "
+#~ "de opdrachtregel.\n"
 
 #~ msgid "When battery power is _critical"
 #~ msgstr "Als de accustroom _kritiek laag is"
