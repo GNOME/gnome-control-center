@@ -147,6 +147,9 @@
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
+                    <accessibility>
+                      <relation target="input_list" type="label-for"/>
+                    </accessibility>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -184,6 +187,9 @@
                   <object class="GtkListBox" id="input_list">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <accessibility>
+                      <relation target="input_heading" type="labelled-by"/>
+                    </accessibility>
                   </object>
                 </child>
               </object>
