@@ -75,6 +75,9 @@
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
+                        <accessibility>
+                          <relation target="list_seeing" type="label-for"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -93,6 +96,9 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="selection-mode">none</property>
+                            <accessibility>
+                              <relation target="heading_seeing" type="labelled-by"/>
+                            </accessibility>
                             <child>
                               <object class="GtkListBoxRow" id="row_highcontrast">
                                 <property name="visible">True</property>
@@ -361,6 +367,9 @@
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
+                        <accessibility>
+                          <relation target="list_hearing" type="label-for"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -379,6 +388,9 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="selection-mode">none</property>
+                            <accessibility>
+                              <relation target="heading_hearing" type="labelled-by"/>
+                            </accessibility>
                             <child>
                               <object class="GtkListBoxRow" id="row_visual_alerts">
                                 <property name="visible">True</property>
@@ -462,6 +474,9 @@
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
+                        <accessibility>
+                          <relation target="list_typing" type="label-for"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -480,6 +495,9 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="selection-mode">none</property>
+                            <accessibility>
+                              <relation target="heading_typing" type="labelled-by"/>
+                            </accessibility>
                             <child>
                               <object class="GtkListBoxRow" id="row_screen_keyboard">
                                 <property name="visible">True</property>
@@ -609,6 +627,9 @@
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
+                        <accessibility>
+                          <relation target="list_pointing" type="label-for"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -627,6 +648,9 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="selection-mode">none</property>
+                            <accessibility>
+                              <relation target="heading_pointing" type="labelled-by"/>
+                            </accessibility>
                             <child>
                               <object class="GtkListBoxRow" id="row_mouse_keys">
                                 <property name="visible">True</property>
