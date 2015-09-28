@@ -366,13 +366,14 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   g_signal_connect (dialog->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
   g_signal_connect (dialog->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), dialog);
 
+  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (parent));
+
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "ppd-spinner");
   gtk_spinner_start (GTK_SPINNER (widget));
 
   populate_dialog (dialog);
 
-  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (parent));
   gtk_window_present (GTK_WINDOW (dialog->dialog));
   gtk_widget_show_all (GTK_WIDGET (dialog->dialog));
 
