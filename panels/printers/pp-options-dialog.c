@@ -508,12 +508,11 @@ populate_options_real (PpOptionsDialog *dialog)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "options-spinner");
-  gtk_widget_hide (widget);
   gtk_spinner_stop (GTK_SPINNER (widget));
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "progress-label");
-  gtk_widget_hide (widget);
+    gtk_builder_get_object (dialog->builder, "stack");
+  gtk_stack_set_visible_child_name (GTK_STACK (widget), "main-box");
 
   treeview = (GtkTreeView *)
     gtk_builder_get_object (dialog->builder, "options-categories-treeview");
@@ -777,6 +776,10 @@ populate_options (PpOptionsDialog *dialog)
       "orientation-requested-default",
       NULL};
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (dialog->builder, "stack");
+  gtk_stack_set_visible_child_name (GTK_STACK (widget), "progress-box");
+
   treeview = (GtkTreeView *)
     gtk_builder_get_object (dialog->builder, "options-categories-treeview");
 
@@ -789,12 +792,7 @@ populate_options (PpOptionsDialog *dialog)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "options-spinner");
-  gtk_widget_show (widget);
   gtk_spinner_start (GTK_SPINNER (widget));
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "progress-label");
-  gtk_widget_show (widget);
 
   printer_get_ppd_async (dialog->printer_name,
                          NULL,
