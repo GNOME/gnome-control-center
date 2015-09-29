@@ -447,31 +447,59 @@ format_response (GtkDialog *chooser,
         gtk_widget_destroy (GTK_WIDGET (chooser));
 }
 
+static const gchar *
+get_effective_language (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        if (priv->login)
+                return priv->system_language;
+        else
+                return priv->language;
+}
+
 static void
-show_language_chooser (CcRegionPanel *self,
-                       const gchar   *language)
+show_language_chooser (CcRegionPanel *self)
 {
         GtkWidget *toplevel;
         GtkWidget *chooser;
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
         chooser = cc_language_chooser_new (toplevel);
-        cc_language_chooser_set_language (chooser, language);
+        cc_language_chooser_set_language (chooser, get_effective_language (self));
         g_signal_connect (chooser, "response",
                           G_CALLBACK (language_response), self);
         gtk_window_present (GTK_WINDOW (chooser));
 }
 
+static const gchar *
+get_effective_region (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        const gchar *region;
+
+        if (priv->login)
+                region = priv->system_region;
+        else
+                region = priv->region;
+
+        /* Region setting might be empty - show the language because
+         * that's what LC_TIME and others will effectively be when the
+         * user logs in again. */
+        if (region == NULL || region[0] == '\0')
+                region = get_effective_language (self);
+
+        return region;
+}
+
 static void
-show_region_chooser (CcRegionPanel *self,
-                     const gchar   *region)
+show_region_chooser (CcRegionPanel *self)
 {
         GtkWidget *toplevel;
         GtkWidget *chooser;
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
         chooser = cc_format_chooser_new (toplevel);
-        cc_format_chooser_set_region (chooser, region);
+        cc_format_chooser_set_region (chooser, get_effective_region (self));
         g_signal_connect (chooser, "response",
                           G_CALLBACK (format_response), self);
         gtk_window_present (GTK_WINDOW (chooser));
@@ -503,10 +531,10 @@ permission_acquired (GObject      *source,
         if (allowed) {
                 switch (priv->op) {
                 case CHOOSE_LANGUAGE:
-                        show_language_chooser (self, priv->system_language);
+                        show_language_chooser (self);
                         break;
                 case CHOOSE_REGION:
-                        show_region_chooser (self, priv->system_region);
+                        show_region_chooser (self);
                         break;
                 case ADD_INPUT:
                         show_input_chooser (self);
@@ -532,10 +560,8 @@ activate_language_row (CcRegionPanel *self,
 	CcRegionPanelPrivate *priv = self->priv;
 
         if (row == priv->language_row) {
-                if (!priv->login) {
-                        show_language_chooser (self, priv->language);
-                } else if (g_permission_get_allowed (priv->permission)) {
-                        show_language_chooser (self, priv->system_language);
+                if (!priv->login || g_permission_get_allowed (priv->permission)) {
+                        show_language_chooser (self);
                 } else if (g_permission_get_can_acquire (priv->permission)) {
                         priv->op = CHOOSE_LANGUAGE;
                         g_permission_acquire_async (priv->permission,
@@ -544,10 +570,8 @@ activate_language_row (CcRegionPanel *self,
                                                     self);
                 }
         } else if (row == priv->formats_row) {
-                if (!priv->login) {
-                        show_region_chooser (self, priv->region);
-                } else if (g_permission_get_allowed (priv->permission)) {
-                        show_region_chooser (self, priv->system_region);
+                if (!priv->login || g_permission_get_allowed (priv->permission)) {
+                        show_region_chooser (self);
                 } else if (g_permission_get_can_acquire (priv->permission)) {
                         priv->op = CHOOSE_REGION;
                         g_permission_acquire_async (priv->permission,
@@ -562,19 +586,8 @@ static void
 update_region_label (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
-        const gchar *region;
+        const gchar *region = get_effective_region (self);
         gchar *name = NULL;
-
-        if (priv->login)
-                region = priv->system_region;
-        else
-                region = priv->region;
-
-        /* Region setting might be empty - show the language because
-         * that's what LC_TIME and others will effectively be when the
-         * user logs in again. */
-        if (region == NULL || region[0] == '\0')
-                region = priv->language;
 
         if (region)
                 name = gnome_get_country_from_locale (region, region);
@@ -600,13 +613,8 @@ static void
 update_language_label (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        const gchar *language;
+        const gchar *language = get_effective_language (self);
         gchar *name = NULL;
-
-        if (priv->login)
-                language = priv->system_language;
-        else
-                language = priv->language;
 
         if (language)
                 name = gnome_get_language_from_locale (language, language);
@@ -1543,9 +1551,6 @@ on_localed_properties_changed (GDBusProxy     *proxy,
                 if (!messages) {
                         messages = lang;
                 }
-                if (!time) {
-                        time = lang;
-                }
                 g_free (priv->system_language);
                 priv->system_language = g_strdup (messages);
                 g_free (priv->system_region);
@@ -1626,7 +1631,8 @@ set_localed_locale (CcRegionPanel *self)
         g_variant_builder_add (b, "s", s);
         g_free (s);
 
-        if (g_strcmp0 (priv->system_language, priv->system_region) != 0) {
+        if (priv->system_region != NULL &&
+            g_strcmp0 (priv->system_language, priv->system_region) != 0) {
                 s = g_strconcat ("LC_TIME=", priv->system_region, NULL);
                 g_variant_builder_add (b, "s", s);
                 g_free (s);
