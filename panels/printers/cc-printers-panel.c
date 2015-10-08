@@ -2047,7 +2047,7 @@ select_ppd_manually (GtkMenuItem *menuitem,
   gtk_menu_shell_cancel (GTK_MENU_SHELL (priv->popup_menu));
 
   dialog = gtk_file_chooser_dialog_new (_("Select PPD File"),
-                                        NULL,
+                                        GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
