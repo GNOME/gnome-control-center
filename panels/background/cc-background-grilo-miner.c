@@ -150,7 +150,7 @@ query_online_source (CcBackgroundGriloMiner *self, GrlSource *source)
   caps = grl_source_get_caps (source, GRL_OP_BROWSE);
   options = grl_operation_options_new (caps);
   grl_operation_options_set_count (options, REMOTE_ITEM_COUNT);
-  grl_operation_options_set_flags (options, GRL_RESOLVE_FAST_ONLY);
+  grl_operation_options_set_resolution_flags (options, GRL_RESOLVE_FAST_ONLY);
   grl_operation_options_set_type_filter (options, GRL_TYPE_FILTER_IMAGE);
 
   grl_source_search (source, NULL, keys, options, searched_online_source, g_object_ref (self));
