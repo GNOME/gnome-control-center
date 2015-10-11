@@ -106,8 +106,6 @@ cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
       OFF_IF_VISIBLE(priv->screen_sharing_switch);
 
       gtk_switch_set_active (GTK_SWITCH (WID ("remote-login-switch")), FALSE);
-      gtk_switch_set_active (GTK_SWITCH (WID ("save-received-files-to-downloads-switch")),
-                             FALSE);
     }
 
   gtk_widget_set_sensitive (WID ("main-list-box"), active);
