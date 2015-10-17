@@ -375,6 +375,7 @@ settings_get_binding (GSettings  *settings,
 
       str_array = g_variant_get_strv (variant, NULL);
       value = g_strdup (str_array[0]);
+      g_free (str_array);
     }
   g_variant_unref (variant);
 
