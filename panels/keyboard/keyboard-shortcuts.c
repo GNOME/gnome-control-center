@@ -1665,6 +1665,7 @@ find_free_settings_path ()
       else
         g_free (tmp);
     }
+  g_strfreev (used_names);
 
   return dir;
 }
