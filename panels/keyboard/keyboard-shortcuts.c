@@ -590,6 +590,7 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
     g_free (entry->name);
     g_free (entry->reverse_entry);
   }
+  g_free (keys);
 
   g_free (keylist);
 }
