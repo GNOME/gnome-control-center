@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <object class="GtkAdjustment" id="double-click-delay-adjustment">
+    <property name="lower">100</property>
+    <property name="upper">1000</property>
+    <property name="value">400</property>
+    <property name="step_increment">100</property>
+    <property name="page_increment">100</property>
+  </object>
   <!-- interface-requires gtk+ 3.0 -->
       <object class="GtkScrolledWindow" id="universal_access_panel">
         <property name="visible">True</property>
@@ -736,6 +743,57 @@
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="row_double_click_delay">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <child>
+                                  <object class="GtkBox" id="box_double_click_delay">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkLabel" id="heading_double_click_delay">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_start">20</property>
+                                        <property name="margin_end">20</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">6</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">_Double-Click Delay</property>
+                                        <property name="use_underline">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkScale" id="scale_double_click_delay">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="adjustment">double-click-delay-adjustment</property>
+                                        <property name="draw_value">False</property>
+                                        <property name="margin_start">20</property>
+                                        <property name="margin_end">20</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">6</property>
+                                        <child internal-child="accessible">
+                                          <object class="AtkObject" id="double_click_scale-atkobject">
+                                            <property name="AtkObject::accessible-description" translatable="yes">Double-Click Delay</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
                                         <property name="fill">True</property>
                                         <property name="position">1</property>
                                       </packing>

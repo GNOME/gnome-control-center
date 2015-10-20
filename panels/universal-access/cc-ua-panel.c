@@ -86,6 +86,10 @@
 #define KEY_DWELL_TIME               "dwell-time"
 #define KEY_DWELL_THRESHOLD          "dwell-threshold"
 
+/* gnome-settings-daemon settings */
+#define GSD_MOUSE_SETTINGS           "org.gnome.settings-daemon.peripherals.mouse"
+#define KEY_DOUBLE_CLICK_DELAY       "double-click"
+
 #define SCROLL_HEIGHT 490
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
@@ -100,6 +104,7 @@ struct _CcUaPanelPrivate
   GSettings *kb_settings;
   GSettings *mouse_settings;
   GSettings *application_settings;
+  GSettings *gsd_mouse_settings;
 
   ZoomOptions *zoom_options;
 
@@ -759,6 +764,12 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
 
   g_object_set_data (G_OBJECT (WID ("row_click_assist")), "dialog", dialog);
 
+  g_settings_bind (priv->gsd_mouse_settings, "double-click",
+                   gtk_range_get_adjustment (GTK_RANGE (WID ("scale_double_click_delay"))), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  gtk_scale_add_mark (GTK_SCALE (WID ("scale_double_click_delay")), 400, GTK_POS_BOTTOM, NULL);
+
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
@@ -797,6 +808,7 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->wm_settings = g_settings_new (WM_SETTINGS);
   priv->kb_settings = g_settings_new (KEYBOARD_SETTINGS);
   priv->mouse_settings = g_settings_new (MOUSE_SETTINGS);
+  priv->gsd_mouse_settings = g_settings_new (GSD_MOUSE_SETTINGS);
   priv->application_settings = g_settings_new (APPLICATION_SETTINGS);
 
   priv->builder = gtk_builder_new ();
