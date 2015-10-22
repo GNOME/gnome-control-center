@@ -35,13 +35,11 @@
 #include "gnome-mouse-properties.h"
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
+#include "cc-mouse-caps-helper.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
-#include <X11/Xatom.h>
-#include <X11/extensions/XInput.h>
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (d->builder, x)
 
@@ -80,6 +78,13 @@ setup_scrollmethod_radios (CcMousePropertiesPrivate *d)
 {
         GsdTouchpadScrollMethod method;
         gboolean active;
+        gboolean two_finger_scrolling;
+        gboolean tap_to_click;
+
+        if (synaptics_check_capabilities (&two_finger_scrolling, &tap_to_click)) {
+                gtk_widget_set_sensitive (WID ("two_finger_scroll_toggle"), two_finger_scrolling);
+                gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), tap_to_click);
+        }
 
         method = g_settings_get_enum (d->touchpad_settings, "scroll-method");
 	active = (method == GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING);
@@ -100,97 +105,6 @@ scrollmethod_changed_event (GtkToggleButton *button, CcMousePropertiesPrivate *d
 		method = GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING;
 
 	g_settings_set_enum (d->touchpad_settings, "scroll-method", method);
-}
-
-static void
-synaptics_check_capabilities_x11 (CcMousePropertiesPrivate *d)
-{
-	int numdevices, i;
-	XDeviceInfo *devicelist;
-	Atom realtype, prop_capabilities, prop_scroll_methods, prop_tapping_enabled;
-	int realformat;
-	unsigned long nitems, bytes_after;
-	unsigned char *data;
-	gboolean tap_to_click, two_finger_scroll;
-
-	prop_capabilities = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Capabilities", False);
-	prop_scroll_methods = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Scroll Methods Available", False);
-	prop_tapping_enabled = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Tapping Enabled", False);
-	if (!prop_capabilities || !prop_scroll_methods || !prop_tapping_enabled)
-		return;
-
-	tap_to_click = FALSE;
-	two_finger_scroll = FALSE;
-
-	devicelist = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &numdevices);
-	for (i = 0; i < numdevices; i++) {
-		if (devicelist[i].use != IsXExtensionPointer)
-			continue;
-
-		gdk_error_trap_push ();
-		XDevice *device = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-					       devicelist[i].id);
-		if (gdk_error_trap_pop ())
-			continue;
-
-		gdk_error_trap_push ();
-
-		/* xorg-x11-drv-synaptics */
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_capabilities,
-					 0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
-					 &bytes_after, &data) == Success) && (realtype != None)) {
-			/* Property data is booleans for has_left, has_middle, has_right, has_double, has_triple.
-			 * Newer drivers (X.org/kerrnel) will also include has_pressure and has_width. */
-
-			/* Set tap_to_click_toggle sensitive only if the device has hardware buttons */
-			if (data[0])
-				tap_to_click = TRUE;
-
-			/* Set two_finger_scroll_toggle sensitive if the hardware supports double touch */
-			if (data[3])
-				two_finger_scroll = TRUE;
-
-			XFree (data);
-		}
-
-		/* xorg-x11-drv-libinput */
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_scroll_methods,
-					 0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
-					 &bytes_after, &data) == Success) && (realtype != None)) {
-			/* Property data is booleans for two-finger, edge, on-button scroll available. */
-
-			if (data[0] && data[1])
-				two_finger_scroll = TRUE;
-
-			XFree (data);
-		}
-
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_tapping_enabled,
-					0, 1, False, XA_INTEGER, &realtype, &realformat, &nitems,
-					&bytes_after, &data) == Success) && (realtype != None)) {
-			/* Property data is boolean for tapping enabled. */
-
-			tap_to_click = TRUE;
-
-			XFree (data);
-		}
-
-		gdk_error_trap_pop_ignored ();
-
-		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
-	}
-	XFreeDeviceList (devicelist);
-
-	gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), tap_to_click);
-	gtk_widget_set_sensitive (WID ("two_finger_scroll_toggle"), two_finger_scroll);
-}
-
-static void
-synaptics_check_capabilities (CcMousePropertiesPrivate *d)
-{
-	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-		synaptics_check_capabilities_x11 (d);
-	/* else we unconditionally show all touchpad knobs */
 }
 
 static gboolean
@@ -306,7 +220,6 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	if (d->have_touchpad) {
-		synaptics_check_capabilities (d);
 		setup_scrollmethod_radios (d);
 	}
 
@@ -352,7 +265,6 @@ device_changed (GsdDeviceManager *device_manager,
 
 	if (d->have_touchpad) {
 		d->changing_scroll = TRUE;
-		synaptics_check_capabilities (d);
 		setup_scrollmethod_radios (d);
 		d->changing_scroll = FALSE;
 	}

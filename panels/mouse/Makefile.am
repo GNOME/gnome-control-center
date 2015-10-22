@@ -16,6 +16,8 @@ BUILT_SOURCES =			\
 
 libmouse_properties_la_SOURCES =	\
 	$(BUILT_SOURCES)		\
+	cc-mouse-caps-helper.c		\
+	cc-mouse-caps-helper.h		\
 	cc-mouse-panel.c		\
 	cc-mouse-panel.h		\
 	gnome-mouse-properties.c	\
