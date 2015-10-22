@@ -35,6 +35,7 @@
 #include "gnome-mouse-properties.h"
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
+#include "shell/list-box-helper.h"
 #include "cc-mouse-caps-helper.h"
 
 #include <sys/types.h>
@@ -61,50 +62,100 @@ struct _CcMousePropertiesPrivate
 	gboolean have_touchpad;
 	gboolean have_touchscreen;
 
+	gboolean left_handed;
+
 	gboolean changing_scroll;
 };
 
 G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_BIN);
 
 static void
-orientation_radio_button_release_event (GtkWidget   *widget,
-				        GdkEventButton *event)
+on_mouse_orientation_changed (GtkToggleButton *button,
+			      gpointer	       user_data)
+{
+	CcMousePropertiesPrivate *d = user_data;
+
+	if (gtk_toggle_button_get_active (button)) {
+		g_settings_set_boolean (d->mouse_settings, "left-handed", !d->left_handed);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID (d->left_handed ? "primary-button-right" : "primary-button-left")), FALSE);
+		d->left_handed = !d->left_handed;
+	}
+}
+
+static void
+orientation_button_release_event (GtkWidget   *widget,
+				  GdkEventButton *event)
 {
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 }
 
 static void
-setup_scrollmethod_radios (CcMousePropertiesPrivate *d)
+natural_scrolling_state_set (GtkSwitch *button,
+			     gboolean   state,
+			     gpointer user_data)
 {
-        GsdTouchpadScrollMethod method;
-        gboolean active;
-        gboolean two_finger_scrolling;
-        gboolean tap_to_click;
+	CcMousePropertiesPrivate *d = user_data;
 
-        if (synaptics_check_capabilities (&two_finger_scrolling, &tap_to_click)) {
-                gtk_widget_set_sensitive (WID ("two_finger_scroll_toggle"), two_finger_scrolling);
-                gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), tap_to_click);
-        }
-
-        method = g_settings_get_enum (d->touchpad_settings, "scroll-method");
-	active = (method == GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("two_finger_scroll_toggle")), active);
+	g_settings_set_boolean (d->mouse_settings, "natural-scroll", state);
+	g_settings_set_boolean (d->touchpad_settings, "natural-scroll", state);
+	gtk_switch_set_state (button, state);
 }
 
 static void
-scrollmethod_changed_event (GtkToggleButton *button, CcMousePropertiesPrivate *d)
+setup_touchpad_options (CcMousePropertiesPrivate *d)
 {
 	GsdTouchpadScrollMethod method;
+	gboolean have_two_finger_scrolling;
+	gboolean have_edge_scrolling;
+	gboolean have_tap_to_click;
+
+	synaptics_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
+
+	gtk_widget_show_all (WID ("touchpad-frame"));
+
+	if (have_two_finger_scrolling)
+		gtk_widget_show (WID ("two-finger-scrolling-row"));
+	else if (have_edge_scrolling)
+		gtk_widget_show (WID ("edge-scrolling-row"));
+	if (have_tap_to_click)
+		gtk_widget_show (WID ("tap-to-click-row"));
+
+	method = g_settings_get_enum (d->touchpad_settings, "scroll-method");
+	gtk_switch_set_active (GTK_SWITCH (WID ("two-finger-scrolling-switch")),
+			       method == GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING);
+
+	gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")),
+			       method == GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING);
+}
+
+static void
+two_finger_scrollmethod_changed_event (GtkSwitch *button,
+				       gboolean   state,
+				       gpointer   user_data)
+{
+	CcMousePropertiesPrivate *d = user_data;
 
 	if (d->changing_scroll)
 		return;
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("two_finger_scroll_toggle"))))
-		method = GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING;
-	else
-		method = GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING;
+	g_settings_set_enum (d->touchpad_settings, "scroll-method",
+			     state ? GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING : GSD_TOUCHPAD_SCROLL_METHOD_DISABLED);
+	gtk_switch_set_state (button, state);
+}
 
-	g_settings_set_enum (d->touchpad_settings, "scroll-method", method);
+static void
+edge_scrolling_changed_event (GtkSwitch *button,
+			      gboolean   state,
+			      gpointer user_data)
+{
+	CcMousePropertiesPrivate *d = user_data;
+
+	if (d->changing_scroll)
+		return;
+
+	g_settings_set_enum (d->touchpad_settings, "scroll-method",
+			     state ? GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING : GSD_TOUCHPAD_SCROLL_METHOD_DISABLED);
+	gtk_switch_set_state (button, state);
 }
 
 static gboolean
@@ -163,94 +214,79 @@ touchpad_enabled_set_mapping (const GValue              *value,
 static void
 setup_dialog (CcMousePropertiesPrivate *d)
 {
-	GtkRadioButton *radio;
+	GtkToggleButton *button;
 
-	/* Orientation radio buttons */
-	radio = GTK_RADIO_BUTTON (WID ("left_handed_radio"));
-	g_settings_bind (d->mouse_settings, "left-handed", radio, "active", G_SETTINGS_BIND_DEFAULT);
+	d->left_handed = g_settings_get_boolean (d->mouse_settings, "left-handed");
+	button = GTK_TOGGLE_BUTTON (WID (d->left_handed ? "primary-button-right" : "primary-button-left"));
+	gtk_toggle_button_set_active (button, TRUE);
+	g_signal_connect (WID ("primary-button-left"), "toggled",
+			  G_CALLBACK (on_mouse_orientation_changed), d);
+	g_signal_connect (WID ("primary-button-right"), "toggled",
+			  G_CALLBACK (on_mouse_orientation_changed), d);
 
 	/* explicitly connect to button-release so that you can change orientation with either button */
-	g_signal_connect (WID ("right_handed_radio"), "button_release_event",
-		G_CALLBACK (orientation_radio_button_release_event), NULL);
-	g_signal_connect (WID ("left_handed_radio"), "button_release_event",
-		G_CALLBACK (orientation_radio_button_release_event), NULL);
+	g_signal_connect (WID ("primary-button-right"), "button_release_event",
+		G_CALLBACK (orientation_button_release_event), NULL);
+	g_signal_connect (WID ("primary-button-left"), "button_release_event",
+		G_CALLBACK (orientation_button_release_event), NULL);
 
-	/* Double-click time */
-	g_settings_bind (d->gsd_mouse_settings, "double-click",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("double_click_scale"))), "value",
+	/* bind natural-scroll setting for mice and touchpad */
+	g_settings_bind (d->touchpad_settings, "natural-scroll",
+			 WID ("natural-scrolling-switch"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
+	g_signal_connect (WID ("natural-scrolling-switch"), "state-set",
+			  G_CALLBACK (natural_scrolling_state_set), d);
+
+	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("general-listbox")), cc_list_box_update_header_func, NULL, NULL);
 
 	/* Mouse section */
-	gtk_widget_set_visible (WID ("mouse_vbox"), d->have_mouse);
+	gtk_widget_set_visible (WID ("mouse-frame"), d->have_mouse);
 
-	gtk_scale_add_mark (GTK_SCALE (WID ("pointer_speed_scale")), 0,
+	gtk_scale_add_mark (GTK_SCALE (WID ("mouse-speed-scale")), 0,
 			    GTK_POS_TOP, NULL);
 	g_settings_bind (d->mouse_settings, "speed",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("pointer_speed_scale"))), "value",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("mouse-speed-scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	/* Trackpad page */
-	gtk_widget_set_visible (WID ("touchpad_vbox"), d->have_touchpad);
-	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
+	/* Touchpad section */
+	gtk_widget_set_visible (WID ("touchpad-frame"), d->have_touchpad);
+	gtk_widget_set_visible (WID ("touchpad-toggle-switch"),
 				show_touchpad_enabling_switch (d));
 
 	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
-				      WID ("touchpad_enabled_switch"), "active",
+				      WID ("touchpad-toggle-switch"), "active",
 				      G_SETTINGS_BIND_DEFAULT,
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
 	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
-				      WID ("touchpad_options_box"), "sensitive",
+				      WID ("touchpad-options-revealer"), "reveal-child",
 				      G_SETTINGS_BIND_GET,
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
 
-	g_settings_bind (d->touchpad_settings, "tap-to-click",
-			 WID ("tap_to_click_toggle"), "active",
-			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (d->touchpad_settings, "natural-scroll",
-			 WID ("natural_scroll_toggle"), "active",
-			 G_SETTINGS_BIND_DEFAULT);
-	gtk_scale_add_mark (GTK_SCALE (WID ("touchpad_pointer_speed_scale")), 0,
+	gtk_scale_add_mark (GTK_SCALE (WID ("touchpad-speed-scale")), 0,
 			    GTK_POS_TOP, NULL);
 	g_settings_bind (d->touchpad_settings, "speed",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_pointer_speed_scale"))), "value",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad-speed-scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+
+	g_settings_bind (d->touchpad_settings, "tap-to-click",
+			 WID ("tap-to-click-switch"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	if (d->have_touchpad) {
-		setup_scrollmethod_radios (d);
+		setup_touchpad_options (d);
 	}
 
-	g_signal_connect (WID ("two_finger_scroll_toggle"), "toggled",
-			  G_CALLBACK (scrollmethod_changed_event), d);
-}
+	g_signal_connect (WID ("two-finger-scrolling-switch"), "state-set",
+			  G_CALLBACK (two_finger_scrollmethod_changed_event), d);
 
-/* Construct the dialog */
+	g_signal_connect (WID ("edge-scrolling-switch"), "state-set",
+			  G_CALLBACK (edge_scrolling_changed_event), d);
 
-static void
-create_dialog (CcMousePropertiesPrivate *d)
-{
-	GtkSizeGroup *size_group;
-
-	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("primary_button_label"));
-	gtk_size_group_add_widget (size_group, WID ("pointer_speed_label"));
-	gtk_size_group_add_widget (size_group, WID ("double_click_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_label"));
-
-	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("pointer_speed_fast_label"));
-	gtk_size_group_add_widget (size_group, WID ("double_click_fast_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_fast_label"));
-
-	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("pointer_speed_slow_label"));
-	gtk_size_group_add_widget (size_group, WID ("double_click_slow_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_slow_label"));
-
-	gtk_widget_set_direction (WID ("primary_button_box"), GTK_TEXT_DIR_LTR);
+	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("touchpad-options-listbox")), cc_list_box_update_header_func, NULL, NULL);
 }
 
 /* Callback issued when a button is clicked on the dialog */
@@ -261,17 +297,17 @@ device_changed (GsdDeviceManager *device_manager,
 		CcMousePropertiesPrivate *d)
 {
 	d->have_touchpad = touchpad_is_present ();
-	gtk_widget_set_visible (WID ("touchpad_vbox"), d->have_touchpad);
+	gtk_widget_set_visible (WID ("touchpad-frame"), d->have_touchpad);
 
 	if (d->have_touchpad) {
 		d->changing_scroll = TRUE;
-		setup_scrollmethod_radios (d);
+		setup_touchpad_options (d);
 		d->changing_scroll = FALSE;
 	}
 
 	d->have_mouse = mouse_is_present ();
-	gtk_widget_set_visible (WID ("mouse_vbox"), d->have_mouse);
-	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), 
+	gtk_widget_set_visible (WID ("mouse-frame"), d->have_mouse);
+	gtk_widget_set_visible (WID ("touchpad-toggle-switch"),
 				show_touchpad_enabling_switch (d));
 }
 
@@ -335,9 +371,8 @@ cc_mouse_properties_init (CcMouseProperties *object)
 
 	d->changing_scroll = FALSE;
 
-	gtk_container_add (GTK_CONTAINER (object), WID ("prefs_widget"));
+	gtk_container_add (GTK_CONTAINER (object), WID ("scrolled-window"));
 
-	create_dialog (d);
 	setup_dialog (d);
 }
 

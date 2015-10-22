@@ -22,6 +22,7 @@
 
 static gboolean
 synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
+                                  gboolean *have_edge_scrolling,
                                   gboolean *have_tap_to_click)
 {
 	int numdevices, i;
@@ -38,6 +39,7 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 		return FALSE;
 
 	*have_two_finger_scrolling = FALSE;
+	*have_edge_scrolling = FALSE;
 	*have_tap_to_click = FALSE;
 
 	devicelist = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &numdevices);
@@ -68,6 +70,9 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 			if (data[3])
 				*have_two_finger_scrolling = TRUE;
 
+			/* Edge scrolling should be supported for all synaptics touchpads */
+			*have_edge_scrolling = TRUE;
+
 			XFree (data);
 		}
 
@@ -77,8 +82,11 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 					 &bytes_after, &data) == Success) && (realtype != None)) {
 			/* Property data is booleans for two-finger, edge, on-button scroll available. */
 
-			if (data[0] && data[1])
+			if (data[0])
 				*have_two_finger_scrolling = TRUE;
+
+			if (data[1])
+				*have_edge_scrolling = TRUE;
 
 			XFree (data);
 		}
@@ -103,10 +111,12 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 
 gboolean
 synaptics_check_capabilities (gboolean *have_two_finger_scrolling,
+                              gboolean *have_edge_scrolling,
                               gboolean *have_tap_to_click)
 {
 	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 		return synaptics_check_capabilities_x11 (have_two_finger_scrolling,
+							 have_edge_scrolling,
 							 have_tap_to_click);
 	/* else we unconditionally show all touchpad knobs */
 	return FALSE;

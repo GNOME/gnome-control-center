@@ -37,9 +37,7 @@ CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
 struct _CcMousePanelPrivate
 {
-  GtkWidget  *test_dialog;
-  GtkWidget  *prefs_widget;
-  GtkWidget  *test_widget;
+  GtkWidget  *stack;
 };
 
 enum {
@@ -50,14 +48,6 @@ enum {
 static void
 cc_mouse_panel_dispose (GObject *object)
 {
-  CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
-
-  if (priv->test_dialog)
-    {
-      gtk_widget_destroy (priv->test_dialog);
-      priv->test_dialog = NULL;
-    }
-
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
 
@@ -68,22 +58,20 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-shell_test_button_clicked (GtkButton *button, CcMousePanel *panel)
+shell_test_button_toggled (GtkToggleButton *button, CcMousePanel *panel)
 {
   CcMousePanelPrivate *priv = panel->priv;
+  gboolean active;
 
-  /* GTK_RESPONSE_NONE is returned if the dialog is being destroyed, so only
-   * hide the dialog if it is not being destroyed */
-  if (gtk_dialog_run (GTK_DIALOG (priv->test_dialog)) != GTK_RESPONSE_NONE)
-    gtk_widget_hide (priv->test_dialog);
+  active = gtk_toggle_button_get_active (button);
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), active ? "test_widget" : "prefs_widget");
 }
 
 static void
 cc_mouse_panel_constructed (GObject *object)
 {
   CcMousePanel *self = CC_MOUSE_PANEL (object);
-  CcMousePanelPrivate *priv = self->priv;
-  GtkWidget *button, *container, *toplevel;
+  GtkWidget *button;
   CcShell *shell;
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->constructed (object);
@@ -91,7 +79,7 @@ cc_mouse_panel_constructed (GObject *object)
   /* Add test area button to shell header. */
   shell = cc_panel_get_shell (CC_PANEL (self));
 
-  button = gtk_button_new_with_mnemonic (_("Test Your _Settings"));
+  button = gtk_toggle_button_new_with_mnemonic (_("Test Your _Settings"));
   gtk_style_context_add_class (gtk_widget_get_style_context (button),
                                "text-button");
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
@@ -99,41 +87,29 @@ cc_mouse_panel_constructed (GObject *object)
 
   cc_shell_embed_widget_in_header (shell, button);
 
-  g_signal_connect (GTK_BUTTON (button), "clicked",
-                    G_CALLBACK (shell_test_button_clicked),
+  g_signal_connect (GTK_BUTTON (button), "toggled",
+                    G_CALLBACK (shell_test_button_toggled),
                     self);
-
-  toplevel = cc_shell_get_toplevel (shell);
-  priv->test_dialog = g_object_new (GTK_TYPE_DIALOG, "title", _("Test Your Settings"),
-                                                     "transient-for", GTK_WINDOW (toplevel),
-                                                     "modal", TRUE,
-                                                     "use_header-bar", TRUE,
-                                                     "resizable", FALSE,
-                                                     NULL);
-
-  container = gtk_dialog_get_content_area (GTK_DIALOG (priv->test_dialog));
-  gtk_container_add (GTK_CONTAINER (container), priv->test_widget);
 }
 
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
   CcMousePanelPrivate *priv;
+  GtkWidget *prefs_widget, *test_widget;
 
   priv = self->priv = MOUSE_PANEL_PRIVATE (self);
   g_resources_register (cc_mouse_get_resource ());
 
-  priv->prefs_widget = cc_mouse_properties_new ();
-  priv->test_widget = cc_mouse_test_new ();
+  prefs_widget = cc_mouse_properties_new ();
+  test_widget = cc_mouse_test_new ();
 
-  gtk_widget_set_margin_start (priv->prefs_widget, 6);
-  gtk_widget_set_margin_end (priv->prefs_widget, 6);
-  gtk_widget_set_margin_top (priv->prefs_widget, 6);
-  gtk_widget_set_margin_bottom (priv->prefs_widget, 6);
+  priv->stack = gtk_stack_new ();
+  gtk_stack_add_named (GTK_STACK (priv->stack), prefs_widget, "prefs_widget");
+  gtk_stack_add_named (GTK_STACK (priv->stack), test_widget, "test_widget");
 
-  gtk_container_add (GTK_CONTAINER (self), priv->prefs_widget);
-  gtk_widget_show (priv->prefs_widget);
-  gtk_widget_show (priv->test_widget);
+  gtk_container_add (GTK_CONTAINER (self), priv->stack);
+  gtk_widget_show_all (priv->stack);
 }
 
 static void
