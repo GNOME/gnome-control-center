@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-21 11:07+0000\n"
-"PO-Revision-Date: 2015-10-21 15:02+0300\n"
+"POT-Creation-Date: 2015-10-25 08:38+0000\n"
+"PO-Revision-Date: 2015-10-25 12:32+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -133,7 +133,7 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1931
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568
 #: ../panels/region/format-chooser.ui.h:3
@@ -1849,13 +1849,9 @@ msgstr ""
 msgid "_Assign"
 msgstr "_Aseta"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
 msgstr "_Testaa asetukset"
-
-#: ../panels/mouse/cc-mouse-panel.c:107
-msgid "Test Your Settings"
-msgstr "Testaa asetukset"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1880,81 +1876,56 @@ msgid "General"
 msgstr "Yleiset"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgctxt "double click, speed"
-msgid "Slow"
-msgstr "Hidas"
+#| msgid "Primary _button"
+msgid "Primary Button"
+msgstr "Ensisijainen painike"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Double-click timeout"
-msgstr "Kaksoisnapsautuksen aikaraja"
+msgid "For mice and touchpads."
+msgstr "Hiirelle ja kosketuslevylle."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgctxt "double click, speed"
-msgid "Fast"
-msgstr "Nopea"
-
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "_Double-click"
-msgstr "_Kaksoisnapsautus"
+#| msgid "_Natural scrolling"
+msgid "Natural Scrolling"
+msgstr "Luonnollinen vieritys"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Primary _button"
-msgstr "_Ensisijainen painike"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgctxt "mouse, left button as primary"
-msgid "_Left"
-msgstr "_Vasen"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgctxt "mouse, right button as primary"
-msgid "_Right"
-msgstr "_Oikea"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Mouse"
 msgstr "Hiiri"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
-msgid "_Pointer speed"
-msgstr "O_soittimen nopeus"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#| msgid "_Mouse Keys"
+msgid "Mouse Speed"
+msgstr "Hiiren nopeus"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgctxt "mouse pointer, speed"
-msgid "Slow"
-msgstr "Hidas"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Double-click timeout"
+msgstr "Kaksoisnapsautuksen aikaraja"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
-msgctxt "mouse pointer, speed"
-msgid "Fast"
-msgstr "Nopea"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Touchpad"
 msgstr "Kosketuslevy"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "touchpad pointer, speed"
-msgid "Slow"
-msgstr "Hidas"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#| msgid "Touchpad"
+msgid "Touchpad Speed"
+msgstr "Kosketuslevyn nopeus"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgctxt "touchpad pointer, speed"
-msgid "Fast"
-msgstr "Nopea"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#| msgid "Tap to _click"
+msgid "Tap to Click"
+msgstr "Napsauta napauttamalla"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Tap to _click"
-msgstr "Na_psauta napauttamalla"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#| msgid "Two _finger scroll"
+msgid "Two Finger Scrolling"
+msgstr "Kahden sormen vieritys"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Two _finger scroll"
-msgstr "Kahden _sormen vieritys"
-
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "_Natural scrolling"
-msgstr "_Luonnollinen vieritys"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#| msgid "Scroll Right"
+msgid "Edge Scrolling"
+msgstr "Reunavieritys"
 
 #: ../panels/mouse/gnome-mouse-test.c:130
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -2561,7 +2532,7 @@ msgid "Select file to import"
 msgstr "Valitse tuotava tiedosto"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1941
+#: ../panels/printers/cc-printers-panel.c:1932
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -4233,13 +4204,8 @@ msgctxt "printer state"
 msgid "Installing"
 msgstr "Asennetaan"
 
-#. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1119
-msgid "No printers available"
-msgstr "Tulostimia ei saatavilla"
-
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1420
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4247,15 +4213,15 @@ msgstr[0] "%u aktiivinen"
 msgstr[1] "%u aktiivista"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1770
+#: ../panels/printers/cc-printers-panel.c:1761
 msgid "Failed to add new printer."
 msgstr "Uuden tulostimen lisäys epäonnistui."
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:1928
 msgid "Select PPD File"
 msgstr "Valitse PPD-tiedosto"
 
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:1937
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4263,30 +4229,35 @@ msgstr ""
 "PostScript Printer Description -tiedostot (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, "
 "*.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2253
+#: ../panels/printers/cc-printers-panel.c:2244
 msgid "No suitable driver found"
 msgstr "Soveltuvaa ajuria ei löytynyt"
 
-#: ../panels/printers/cc-printers-panel.c:2324
+#: ../panels/printers/cc-printers-panel.c:2315
 msgid "Searching for preferred drivers…"
 msgstr "Etsitään ensisijaisia ajureita…"
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2336
 msgid "Select from database…"
 msgstr "Valitse tietokannasta…"
 
-#: ../panels/printers/cc-printers-panel.c:2354
+#: ../panels/printers/cc-printers-panel.c:2345
 msgid "Provide PPD File…"
 msgstr "Määritä PPD-tiedosto…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2505
-#: ../panels/printers/cc-printers-panel.c:2528
+#: ../panels/printers/cc-printers-panel.c:2496
+#: ../panels/printers/cc-printers-panel.c:2519
 msgid "Test page"
 msgstr "Testisivu"
 
+#: ../panels/printers/cc-printers-panel.c:2632
+#| msgid "Printers"
+msgid "No printers"
+msgstr "Ei tulostimia"
+
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2942
+#: ../panels/printers/cc-printers-panel.c:2939
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Käyttöliittymätiedoston lataus epäonnistui: %s"
@@ -4698,8 +4669,9 @@ msgstr "_Valinnat"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-msgid "Add New Printer"
-msgstr "Lisää uusi tulostin"
+#| msgid "Add Printer"
+msgid "Add a Printer"
+msgstr "Lisää tulostin"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:26
@@ -5617,12 +5589,10 @@ msgid "_Click Assist"
 msgstr "N_apsautusapu"
 
 #: ../panels/universal-access/uap.ui.h:17
-#| msgid "_Double-click"
 msgid "_Double-Click Delay"
 msgstr "Kaksoisnapsautuksen _viive"
 
 #: ../panels/universal-access/uap.ui.h:18
-#| msgid "_Double-click"
 msgid "Double-Click Delay"
 msgstr "Kaksoisnapsautuksen viive"
 
@@ -7213,6 +7183,53 @@ msgstr "Järjestelmä"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Ominaisuudet;Asetukset;Preferences;Settings;"
+
+#~ msgid "Test Your Settings"
+#~ msgstr "Testaa asetukset"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Slow"
+#~ msgstr "Hidas"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Fast"
+#~ msgstr "Nopea"
+
+#~ msgid "_Double-click"
+#~ msgstr "_Kaksoisnapsautus"
+
+#~ msgctxt "mouse, left button as primary"
+#~ msgid "_Left"
+#~ msgstr "_Vasen"
+
+#~ msgctxt "mouse, right button as primary"
+#~ msgid "_Right"
+#~ msgstr "_Oikea"
+
+#~ msgid "_Pointer speed"
+#~ msgstr "O_soittimen nopeus"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Hidas"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Nopea"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Hidas"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Nopea"
+
+#~ msgid "No printers available"
+#~ msgstr "Tulostimia ei saatavilla"
+
+#~ msgid "Add New Printer"
+#~ msgstr "Lisää uusi tulostin"
 
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "Bluetooth on pois käytöstä"
