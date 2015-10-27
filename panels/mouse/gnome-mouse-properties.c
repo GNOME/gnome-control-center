@@ -101,12 +101,9 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 
 	gtk_widget_show_all (WID ("touchpad-frame"));
 
-	if (have_two_finger_scrolling)
-		gtk_widget_show (WID ("two-finger-scrolling-row"));
-	else if (have_edge_scrolling)
-		gtk_widget_show (WID ("edge-scrolling-row"));
-	if (have_tap_to_click)
-		gtk_widget_show (WID ("tap-to-click-row"));
+	gtk_widget_set_visible (WID ("two-finger-scrolling-row"), have_two_finger_scrolling);
+	gtk_widget_set_visible (WID ("edge-scrolling-row"), have_edge_scrolling && !have_two_finger_scrolling);
+	gtk_widget_set_visible (WID ("tap-to-click-row"), have_tap_to_click);
 
 	method = g_settings_get_enum (d->touchpad_settings, "scroll-method");
 	gtk_switch_set_active (GTK_SWITCH (WID ("two-finger-scrolling-switch")),
