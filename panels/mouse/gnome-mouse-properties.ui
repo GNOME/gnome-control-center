@@ -148,72 +148,6 @@
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkListBoxRow" id="natural-scrolling-row">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <child>
-                          <object class="GtkGrid" id="natural-scrolling-grid">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="row_spacing">0</property>
-                            <property name="column_spacing">16</property>
-                            <property name="margin_start">12</property>
-                            <property name="margin_end">6</property>
-                            <property name="margin_top">6</property>
-                            <property name="margin_bottom">6</property>
-                            <child>
-                              <object class="GtkLabel" id="natural-scrolling-label">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes" comments="Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible. ">Natural Scrolling</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">natural-scrolling-switch</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">1</property>
-                                <property name="height">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="natural-scrolling-description">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">For mice and touchpads.</property>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
-                                <property name="width">1</property>
-                                <property name="height">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="natural-scrolling-switch">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">1</property>
-                                <property name="height">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>
@@ -298,6 +232,55 @@
                                   </object>
                                 </child>
                               </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow" id="mouse-natural-scrolling-row">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <child>
+                          <object class="GtkGrid" id="mouse-natural-scrolling-grid">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="row_spacing">0</property>
+                            <property name="column_spacing">16</property>
+                            <property name="margin_start">12</property>
+                            <property name="margin_end">6</property>
+                            <property name="margin_top">6</property>
+                            <property name="margin_bottom">6</property>
+                            <child>
+                              <object class="GtkLabel" id="mouse-natural-scrolling-label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes" comments="Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.">Natural Scrolling</property>
+                                <property name="use_underline">True</property>
+                                <property name="mnemonic_widget">mouse-natural-scrolling-switch</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">1</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="mouse-natural-scrolling-switch">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">1</property>
+                                <property name="height">2</property>
+                              </packing>
                             </child>
                           </object>
                         </child>
@@ -420,6 +403,55 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="selection_mode">none</property>
+                            <child>
+                              <object class="GtkListBoxRow" id="touchpad-natural-scrolling-row">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <child>
+                                  <object class="GtkGrid" id="touchpad-natural-scrolling-grid">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="row_spacing">0</property>
+                                    <property name="column_spacing">16</property>
+                                    <property name="margin_start">12</property>
+                                    <property name="margin_end">6</property>
+                                    <property name="margin_top">6</property>
+                                    <property name="margin_bottom">6</property>
+                                    <child>
+                                      <object class="GtkLabel" id="touchpad-natural-scrolling-label">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes" comments="Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible. ">Natural Scrolling</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">touchpad-natural-scrolling-switch</property>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">0</property>
+                                        <property name="top_attach">0</property>
+                                        <property name="width">1</property>
+                                        <property name="height">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="touchpad-natural-scrolling-switch">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="halign">end</property>
+                                        <property name="valign">center</property>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="top_attach">0</property>
+                                        <property name="width">1</property>
+                                        <property name="height">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkListBoxRow" id="touchpad-speed-row">
                                 <property name="visible">True</property>

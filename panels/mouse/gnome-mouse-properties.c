@@ -90,18 +90,6 @@ orientation_button_release_event (GtkWidget   *widget,
 }
 
 static void
-natural_scrolling_state_set (GtkSwitch *button,
-			     gboolean   state,
-			     gpointer user_data)
-{
-	CcMousePropertiesPrivate *d = user_data;
-
-	g_settings_set_boolean (d->mouse_settings, "natural-scroll", state);
-	g_settings_set_boolean (d->touchpad_settings, "natural-scroll", state);
-	gtk_switch_set_state (button, state);
-}
-
-static void
 setup_touchpad_options (CcMousePropertiesPrivate *d)
 {
 	GsdTouchpadScrollMethod method;
@@ -230,12 +218,9 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	g_signal_connect (WID ("primary-button-left"), "button_release_event",
 		G_CALLBACK (orientation_button_release_event), NULL);
 
-	/* bind natural-scroll setting for mice and touchpad */
-	g_settings_bind (d->touchpad_settings, "natural-scroll",
-			 WID ("natural-scrolling-switch"), "active",
+	g_settings_bind (d->mouse_settings, "natural-scroll",
+			 WID ("mouse-natural-scrolling-switch"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_signal_connect (WID ("natural-scrolling-switch"), "state-set",
-			  G_CALLBACK (natural_scrolling_state_set), d);
 
 	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("general-listbox")), cc_list_box_update_header_func, NULL, NULL);
 
@@ -247,6 +232,8 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	g_settings_bind (d->mouse_settings, "speed",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("mouse-speed-scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
+
+	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("mouse-listbox")), cc_list_box_update_header_func, NULL, NULL);
 
 	/* Touchpad section */
 	gtk_widget_set_visible (WID ("touchpad-frame"), d->have_touchpad);
@@ -265,6 +252,10 @@ setup_dialog (CcMousePropertiesPrivate *d)
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
+
+	g_settings_bind (d->touchpad_settings, "natural-scroll",
+                         WID ("touchpad-natural-scrolling-switch"), "active",
+                         G_SETTINGS_BIND_DEFAULT);
 
 	gtk_scale_add_mark (GTK_SCALE (WID ("touchpad-speed-scale")), 0,
 			    GTK_POS_TOP, NULL);
