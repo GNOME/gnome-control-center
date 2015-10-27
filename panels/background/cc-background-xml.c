@@ -288,6 +288,8 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
             file = g_file_new_for_uri (uri);
 	    if (g_file_query_exists (file, NULL) == FALSE)
 	      {
+	        g_free (cname);
+	        g_object_unref (file);
 	        g_object_unref (item);
 	        continue;
 	      }
