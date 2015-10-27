@@ -768,6 +768,7 @@ bg_pictures_source_get_unique_path (const char *uri)
   g_free (filename);
   ret = g_file_get_path (file);
   g_object_unref (file);
+  g_object_unref (parent);
 
   return ret;
 }
