@@ -954,6 +954,7 @@ bg_pictures_source_init (BgPicturesSource *self)
                                    G_FILE_QUERY_INFO_NONE,
                                    G_PRIORITY_LOW, priv->cancellable,
                                    dir_enum_async_ready, self);
+  g_free (cache_path);
 
   priv->cache_dir_monitor = g_file_monitor_directory (dir,
                                                       G_FILE_MONITOR_NONE,

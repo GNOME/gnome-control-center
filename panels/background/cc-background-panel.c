@@ -289,6 +289,7 @@ on_screenshot_finished (GObject *source,
   if (result == NULL) {
     if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
       g_error_free (error);
+      g_free (data);
       return;
     }
     g_debug ("Unable to get screenshot: %s",
@@ -338,8 +339,6 @@ on_screenshot_finished (GObject *source,
                                                                  data->monitor_rect.width,
                                                                  data->monitor_rect.height);
 
-  g_free (data);
-
   /* remove the temporary file created by the shell */
   g_unlink (panel->priv->screenshot_path);
   g_clear_pointer (&priv->screenshot_path, g_free);
@@ -349,6 +348,7 @@ on_screenshot_finished (GObject *source,
 
  out:
   update_display_preview (panel, WID ("background-desktop-drawingarea"), priv->current_background);
+  g_free (data);
 }
 
 static gboolean
