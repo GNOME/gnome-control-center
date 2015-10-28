@@ -224,8 +224,6 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	/* Mouse section */
 	gtk_widget_set_visible (WID ("mouse-frame"), d->have_mouse);
 
-	gtk_scale_add_mark (GTK_SCALE (WID ("mouse-speed-scale")), 0,
-			    GTK_POS_BOTTOM, NULL);
 	g_settings_bind (d->mouse_settings, "speed",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("mouse-speed-scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
@@ -254,8 +252,6 @@ setup_dialog (CcMousePropertiesPrivate *d)
                          WID ("touchpad-natural-scrolling-switch"), "active",
                          G_SETTINGS_BIND_DEFAULT);
 
-	gtk_scale_add_mark (GTK_SCALE (WID ("touchpad-speed-scale")), 0,
-			    GTK_POS_BOTTOM, NULL);
 	g_settings_bind (d->touchpad_settings, "speed",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad-speed-scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
