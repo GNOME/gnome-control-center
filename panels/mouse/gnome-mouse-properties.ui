@@ -121,19 +121,22 @@
                                   <class name="linked"/>
                                 </style>
                                 <child>
-                                  <object class="GtkToggleButton" id="primary-button-left">
+                                  <object class="GtkRadioButton" id="primary-button-left">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="hexpand">True</property>
                                     <property name="label">Left</property>
+                                    <property name="draw-indicator">False</property>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="primary-button-right">
+                                  <object class="GtkRadioButton" id="primary-button-right">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="hexpand">True</property>
                                     <property name="label">Right</property>
+                                    <property name="draw-indicator">False</property>
+                                    <property name="group">primary-button-left</property>
                                   </object>
                                 </child>
                               </object>
