@@ -50,7 +50,7 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-mouse-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(Desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
 EXTRA_DIST = $(resource_files) mouse.gresource.xml
 
 -include $(top_srcdir)/git.mk
