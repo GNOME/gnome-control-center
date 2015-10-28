@@ -63,18 +63,13 @@ struct _CcMousePropertiesPrivate
 	gboolean have_touchscreen;
 
 	gboolean left_handed;
+	GtkGesture *left_gesture;
+	GtkGesture *right_gesture;
 
 	gboolean changing_scroll;
 };
 
 G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_BIN);
-
-static void
-orientation_button_release_event (GtkWidget   *widget,
-				  GdkEventButton *event)
-{
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-}
 
 static void
 setup_touchpad_options (CcMousePropertiesPrivate *d)
@@ -182,15 +177,28 @@ touchpad_enabled_set_mapping (const GValue              *value,
         return g_variant_new_string (enabled ? "enabled" : "disabled");
 }
 
+static void
+handle_secondary_button (CcMousePropertiesPrivate *d,
+			 GtkWidget                *button,
+			 GtkGesture               *gesture)
+{
+	gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), FALSE);
+	gtk_gesture_single_set_exclusive (GTK_GESTURE_SINGLE (gesture), TRUE);
+	gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_SECONDARY);
+	g_signal_connect_swapped (gesture, "pressed", G_CALLBACK (gtk_button_clicked), button);
+	gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture), GTK_PHASE_BUBBLE);
+
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePropertiesPrivate *d)
 {
-	GtkToggleButton *button;
+	GtkWidget *button;
 
 	d->left_handed = g_settings_get_boolean (d->mouse_settings, "left-handed");
-	button = GTK_TOGGLE_BUTTON (WID (d->left_handed ? "primary-button-right" : "primary-button-left"));
-	gtk_toggle_button_set_active (button, TRUE);
+	button = WID (d->left_handed ? "primary-button-right" : "primary-button-left");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
 	g_settings_bind (d->mouse_settings, "left-handed",
 			 WID ("primary-button-left"), "active",
@@ -199,11 +207,13 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 WID ("primary-button-right"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	/* explicitly connect to button-release so that you can change orientation with either button */
-	g_signal_connect (WID ("primary-button-right"), "button_release_event",
-		G_CALLBACK (orientation_button_release_event), NULL);
-	g_signal_connect (WID ("primary-button-left"), "button_release_event",
-		G_CALLBACK (orientation_button_release_event), NULL);
+	/* Allow changing orientation with either button */
+	button = WID ("primary-button-right");
+	d->right_gesture = gtk_gesture_multi_press_new (button);
+	handle_secondary_button (d, button, d->right_gesture);
+	button = WID ("primary-button-left");
+	d->left_gesture = gtk_gesture_multi_press_new (button);
+	handle_secondary_button (d, button, d->left_gesture);
 
 	g_settings_bind (d->mouse_settings, "natural-scroll",
 			 WID ("mouse-natural-scrolling-switch"), "active",
@@ -313,6 +323,8 @@ cc_mouse_properties_finalize (GObject *object)
 	g_clear_object (&d->gsd_mouse_settings);
 	g_clear_object (&d->touchpad_settings);
 	g_clear_object (&d->builder);
+	g_clear_object (&d->right_gesture);
+	g_clear_object (&d->left_gesture);
 
 	if (d->device_manager != NULL) {
 		g_signal_handler_disconnect (d->device_manager, d->device_added_id);
