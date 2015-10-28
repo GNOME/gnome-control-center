@@ -70,19 +70,6 @@ struct _CcMousePropertiesPrivate
 G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_BIN);
 
 static void
-on_mouse_orientation_changed (GtkToggleButton *button,
-			      gpointer	       user_data)
-{
-	CcMousePropertiesPrivate *d = user_data;
-
-	if (gtk_toggle_button_get_active (button)) {
-		g_settings_set_boolean (d->mouse_settings, "left-handed", !d->left_handed);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID (d->left_handed ? "primary-button-right" : "primary-button-left")), FALSE);
-		d->left_handed = !d->left_handed;
-	}
-}
-
-static void
 orientation_button_release_event (GtkWidget   *widget,
 				  GdkEventButton *event)
 {
@@ -204,10 +191,13 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	d->left_handed = g_settings_get_boolean (d->mouse_settings, "left-handed");
 	button = GTK_TOGGLE_BUTTON (WID (d->left_handed ? "primary-button-right" : "primary-button-left"));
 	gtk_toggle_button_set_active (button, TRUE);
-	g_signal_connect (WID ("primary-button-left"), "toggled",
-			  G_CALLBACK (on_mouse_orientation_changed), d);
-	g_signal_connect (WID ("primary-button-right"), "toggled",
-			  G_CALLBACK (on_mouse_orientation_changed), d);
+
+	g_settings_bind (d->mouse_settings, "left-handed",
+			 WID ("primary-button-left"), "active",
+			 G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+	g_settings_bind (d->mouse_settings, "left-handed",
+			 WID ("primary-button-right"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* explicitly connect to button-release so that you can change orientation with either button */
 	g_signal_connect (WID ("primary-button-right"), "button_release_event",
