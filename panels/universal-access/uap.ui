@@ -7,6 +7,20 @@
     <property name="step_increment">100</property>
     <property name="page_increment">100</property>
   </object>
+  <object class="GtkAdjustment" id="repeat_delay_adjustment">
+    <property name="lower">100</property>
+    <property name="upper">2000</property>
+    <property name="value">500</property>
+    <property name="step_increment">10</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="repeat_speed_adjustment">
+    <property name="lower">0.5</property>
+    <property name="upper">110</property>
+    <property name="value">33.3</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+  </object>
   <!-- interface-requires gtk+ 3.0 -->
       <object class="GtkScrolledWindow" id="universal_access_panel">
         <property name="visible">True</property>
@@ -541,6 +555,52 @@
                                         <property name="margin_end">20</property>
                                         <property name="margin_top">6</property>
                                         <property name="margin_bottom">6</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="row_repeat_keys">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <child>
+                                  <object class="GtkBox" id="box_repeat_keys">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkLabel" id="heading_repeat_keys">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_start">20</property>
+                                        <property name="margin_end">20</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">6</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">_Repeat Keys</property>
+                                        <property name="use_underline">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="value_repeat_keys">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_start">20</property>
+                                        <property name="margin_end">20</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">6</property>
+                                        <property name="xalign">1</property>
+                                        <property name="label" translatable="yes">Off</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1161,6 +1221,235 @@
     <property name="value">0.5</property>
     <property name="step_increment">10</property>
     <property name="page_increment">10</property>
+  </object>
+  <object class="GtkDialog" id="repeat_keys_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Repeat Keys</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar" id="repeat_keys_headerbar">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkSwitch" id="repeat_keys_switch">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="repeat-keys-vbox5">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="repeat-keys-description">
+            <property name="visible">True</property>
+            <property name="use_underline">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Key presses repeat when key is held down.</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">12</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="repeat-keys-delay-grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">12</property>
+            <property name="orientation">vertical</property>
+            <property name="row_spacing">18</property>
+            <property name="column_spacing">24</property>
+            <child>
+              <object class="GtkBox" id="repeat-keys-box6">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">start</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkBox" id="repeat-keys-box7">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="repeat-keys-delay-label">
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Delay</property>
+                        <property name="mnemonic_widget">repeat_keys_delay_scale</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHScale" id="repeat_keys_delay_scale">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="adjustment">repeat_delay_adjustment</property>
+                <property name="draw_value">False</property>
+                <property name="width-request">400</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="repeat_delay_scale-atkobject">
+                    <property name="AtkObject::accessible-description" translatable="yes">Repeat keys delay</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="repeat-keys-speed-grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">12</property>
+            <property name="orientation">vertical</property>
+            <property name="row_spacing">18</property>
+            <property name="column_spacing">24</property>
+            <child>
+              <object class="GtkBox" id="repeat-keys-speed-box7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">start</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkBox" id="repeat-keys-speed-box8">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="repeat-keys-speed-label">
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Speed</property>
+                        <property name="mnemonic_widget">repeat_keys_speed_scale</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHScale" id="repeat_keys_speed_scale">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="adjustment">repeat_speed_adjustment</property>
+                <property name="draw_value">False</property>
+                <property name="width-request">200</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="repeat_speed_scale-atkobject">
+                    <property name="AtkObject::accessible-description" translatable="yes">Repeat keys speed</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkSizeGroup" id="repeat-keys-dialog-labels-sizegroup">
+    <widgets>
+      <widget name="repeat-keys-delay-label"/>
+      <widget name="repeat-keys-speed-label"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="repeat-keys-dialog-scales-sizegroup">
+    <widgets>
+      <widget name="repeat_keys_delay_scale"/>
+      <widget name="repeat_keys_speed_scale"/>
+    </widgets>
   </object>
   <object class="GtkDialog" id="typing_dialog">
     <property name="can_focus">False</property>

@@ -78,6 +78,10 @@
 #define KEY_MOUSEKEYS_ENABLED        "mousekeys-enable"
 #define KEY_TOGGLEKEYS_ENABLED       "togglekeys-enable"
 
+/* keyboard desktop settings */
+#define KEYBOARD_DESKTOP_SETTINGS    "org.gnome.desktop.peripherals.keyboard"
+#define KEY_REPEAT_KEYS              "repeat"
+
 /* mouse settings */
 #define MOUSE_SETTINGS               "org.gnome.desktop.a11y.mouse"
 #define KEY_SECONDARY_CLICK_ENABLED  "secondary-click-enabled"
@@ -103,6 +107,7 @@ struct _CcUaPanelPrivate
   GSettings *interface_settings;
   GSettings *kb_settings;
   GSettings *mouse_settings;
+  GSettings *kb_desktop_settings;
   GSettings *application_settings;
   GSettings *gsd_mouse_settings;
 
@@ -566,6 +571,19 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 
 /* typing/keyboard section */
 static void
+on_repeat_keys_toggled (GSettings *settings, const gchar *key, CcUaPanel *self)
+{
+  gboolean on;
+
+  on = g_settings_get_boolean (settings, KEY_REPEAT_KEYS);
+
+  gtk_label_set_text (GTK_LABEL (WID ("value_repeat_keys")), on ? _("On") : _("Off"));
+
+  gtk_widget_set_sensitive (WID ("repeat-keys-delay-grid"), on);
+  gtk_widget_set_sensitive (WID ("repeat-keys-speed-grid"), on);
+}
+
+static void
 update_accessx_label (GSettings *settings, const gchar *key, CcUaPanel *self)
 {
   gboolean on;
@@ -598,6 +616,31 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   sw = WID ("screen_keyboard_switch");
   g_settings_bind (priv->application_settings, KEY_SCREEN_KEYBOARD_ENABLED,
                    sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  /* Repeat keys */
+  g_signal_connect (priv->kb_desktop_settings, "changed",
+                   G_CALLBACK (on_repeat_keys_toggled), self);
+
+  dialog = WID ("repeat_keys_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
+
+  g_object_set_data (G_OBJECT (WID ("row_repeat_keys")), "dialog", dialog);
+
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  sw = WID ("repeat_keys_switch");
+  g_settings_bind (priv->kb_desktop_settings, KEY_REPEAT_KEYS,
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  on_repeat_keys_toggled (priv->kb_desktop_settings, NULL, self);
+
+  g_settings_bind (priv->kb_desktop_settings, "delay",
+                   gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_keys_delay_scale"))), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (priv->kb_desktop_settings, "repeat-interval",
+                   gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_keys_speed_scale"))), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* accessx */
@@ -807,6 +850,7 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->a11y_settings = g_settings_new (A11Y_SETTINGS);
   priv->wm_settings = g_settings_new (WM_SETTINGS);
   priv->kb_settings = g_settings_new (KEYBOARD_SETTINGS);
+  priv->kb_desktop_settings = g_settings_new (KEYBOARD_DESKTOP_SETTINGS);
   priv->mouse_settings = g_settings_new (MOUSE_SETTINGS);
   priv->gsd_mouse_settings = g_settings_new (GSD_MOUSE_SETTINGS);
   priv->application_settings = g_settings_new (APPLICATION_SETTINGS);
