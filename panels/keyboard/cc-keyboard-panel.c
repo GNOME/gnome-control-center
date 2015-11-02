@@ -21,7 +21,6 @@
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
 
-#include "keyboard-general.h"
 #include "keyboard-shortcuts.h"
 
 CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
@@ -129,11 +128,10 @@ cc_keyboard_panel_constructor (GType                  gtype,
   self = CC_KEYBOARD_PANEL (obj);
   priv = self->priv;
 
-  keyboard_general_init (CC_PANEL (self), priv->builder);
   keyboard_shortcuts_init (CC_PANEL (self), priv->builder);
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-                                                 "keyboard_notebook");
+                                                 "shortcuts_page");
 
   gtk_container_add (GTK_CONTAINER (self), widget);
 
@@ -149,7 +147,6 @@ cc_keyboard_panel_get_help_uri (CcPanel *panel)
 static void
 cc_keyboard_panel_dispose (GObject *object)
 {
-  keyboard_general_dispose (CC_PANEL (object));
   keyboard_shortcuts_dispose (CC_PANEL (object));
 
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
