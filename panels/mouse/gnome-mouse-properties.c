@@ -242,7 +242,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
 	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
-				      WID ("touchpad-options-revealer"), "reveal-child",
+				      WID ("touchpad-options-box"), "sensitive",
 				      G_SETTINGS_BIND_GET,
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
