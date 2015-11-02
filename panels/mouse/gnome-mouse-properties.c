@@ -141,11 +141,11 @@ show_touchpad_enabling_switch (CcMousePropertiesPrivate *d)
 	if (!d->have_touchpad)
 		return FALSE;
 
-	/* Lets show the button when the mouse/touchscreen is present */
+	/* Let's show the button when a mouse or touchscreen is present */
 	if (d->have_mouse || d->have_touchscreen)
 		return TRUE;
 
-	/* Lets also show when touch pad is disabled. */
+	/* Let's also show when the touchpad is disabled. */
 	if (!get_touchpad_enabled (d->touchpad_settings))
 		return TRUE;
 
@@ -260,9 +260,8 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 WID ("tap-to-click-switch"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	if (d->have_touchpad) {
+	if (d->have_touchpad)
 		setup_touchpad_options (d);
-	}
 
 	g_signal_connect (WID ("two-finger-scrolling-switch"), "state-set",
 			  G_CALLBACK (two_finger_scrollmethod_changed_event), d);
