@@ -48,6 +48,8 @@
 #define KEY_TEXT_SCALING_FACTOR      "text-scaling-factor"
 #define KEY_GTK_THEME                "gtk-theme"
 #define KEY_ICON_THEME               "icon-theme"
+#define KEY_CURSOR_BLINKING          "cursor-blink"
+#define KEY_CURSOR_BLINKING_TIME     "cursor-blink-time"
 
 /* application settings */
 #define APPLICATION_SETTINGS         "org.gnome.desktop.a11y.applications"
@@ -584,6 +586,16 @@ on_repeat_keys_toggled (GSettings *settings, const gchar *key, CcUaPanel *self)
 }
 
 static void
+on_cursor_blinking_toggled (GSettings *settings, const gchar *key, CcUaPanel *self)
+{
+  gboolean on;
+
+  on = g_settings_get_boolean (settings, KEY_CURSOR_BLINKING);
+
+  gtk_label_set_text (GTK_LABEL (WID ("value_row_cursor_blinking")), on ? _("On") : _("Off"));
+}
+
+static void
 update_accessx_label (GSettings *settings, const gchar *key, CcUaPanel *self)
 {
   gboolean on;
@@ -642,6 +654,29 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   g_settings_bind (priv->kb_desktop_settings, "repeat-interval",
                    gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_keys_speed_scale"))), "value",
                    G_SETTINGS_BIND_DEFAULT);
+
+  /* Cursor Blinking */
+  g_signal_connect (priv->interface_settings, "changed",
+                    G_CALLBACK (on_cursor_blinking_toggled), self);
+
+  dialog = WID ("cursor_blinking_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
+
+  g_object_set_data (G_OBJECT (WID ("row_cursor_blinking")), "dialog", dialog);
+
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  sw = WID ("cursor_blinking_switch");
+  g_settings_bind (priv->interface_settings, KEY_CURSOR_BLINKING,
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  on_cursor_blinking_toggled (priv->interface_settings, NULL, self);
+
+  g_settings_bind (priv->interface_settings, KEY_CURSOR_BLINKING_TIME,
+                   gtk_range_get_adjustment (GTK_RANGE (WID ("cursor_blinking_scale"))), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+
 
   /* accessx */
   g_signal_connect (priv->kb_settings, "changed",
