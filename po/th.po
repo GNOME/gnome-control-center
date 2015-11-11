@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-27 17:49+0000\n"
-"PO-Revision-Date: 2015-07-18 13:54+0700\n"
+"POT-Creation-Date: 2015-11-04 12:20+0000\n"
+"PO-Revision-Date: 2015-11-11 14:59+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -119,13 +119,12 @@ msgstr "คุณสามารถเพิ่มรูปภาพลงใน
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1931
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568
-#: ../panels/region/format-chooser.ui.h:3
-#: ../panels/region/input-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:491
+#: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
@@ -170,27 +169,56 @@ msgstr "เปลี่ยนภาพพื้นหลังของคุณ
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "ภาพพื้นหลัง;หน้าจอ;พื้นโต๊ะ;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:262
-msgid "Bluetooth is disabled"
-msgstr "บลูทูทถูกปิดใช้งาน"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+msgid "Turn Off Airplane Mode"
+msgstr "ปิดโหมดเครื่องบิน"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:263
-msgid "No Bluetooth adapters found"
-msgstr "ไม่พบอะแดปเตอร์บลูทูท"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "No Bluetooth Found"
+msgstr "ไม่พบบลูทูท"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:264
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "บลูทูทถูกปิดใช้งานด้วยสวิตช์ฮาร์ดแวร์"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "เสียบ dongle เพื่อใช้บลูทูท"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Bluetooth Turned Off"
+msgstr "บลูทูทถูกปิดอยู่"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+msgid "Turn on to connect devices and receive file transfers."
+msgstr "เปิดเพื่อเชื่อมต่ออุปกรณ์และรับการถ่ายโอนแฟ้ม"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+msgid "Airplane Mode is on"
+msgstr "โหมดเครื่องบินเปิดอยู่"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "บลูทูทจะถูกปิดใช้งานเมื่อเปิดใช้โหมดเครื่องบิน"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Hardware Airplane Mode is on"
+msgstr "โหมดเครื่องบินแบบฮาร์ดแวร์เปิดอยู่"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "ปิดสวิตช์โหมดเครื่องบินหากต้องการเปิดใช้งานบลูทูท"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1567
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Bluetooth"
 msgstr "บลูทูท"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "เปิด-ปิดบูลทูท และเชื่อมต่ออุปกรณ์ของคุณ"
+
+#. Translators: those are keywords for the bluetooth control-center panel
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:4
+msgid "share;sharing;bluetooth;obex;"
+msgstr "แบ่งปัน;ใช้ร่วม;บลูทูท;obex;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -659,8 +687,7 @@ msgstr "สรุป"
 msgid "Import File…"
 msgstr "นำเข้าแฟ้ม…"
 
-#: ../panels/color/color.ui.h:30
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -702,8 +729,7 @@ msgstr "เปิดใช้"
 msgid "Add profile"
 msgstr "เพิ่มโพรไฟล์"
 
-#: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
 msgstr "เทียบมาตรฐาน…"
 
@@ -1051,12 +1077,14 @@ msgstr "จอหลัก"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
+#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "ปิด"
@@ -1275,7 +1303,7 @@ msgid "Windows software"
 msgstr "ซอฟต์แวร์สำหรับวินโดวส์"
 
 #: ../panels/info/cc-info-panel.c:1435
-#: ../panels/keyboard/keyboard-shortcuts.c:1947
+#: ../panels/keyboard/keyboard-shortcuts.c:1949
 msgid "Section"
 msgstr "หัวข้อ"
 
@@ -1461,7 +1489,6 @@ msgid "Eject"
 msgstr "เอาสื่อออก"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "การพิมพ์"
@@ -1596,7 +1623,7 @@ msgstr "เปิดหรือปิดการแสดงสีตัดก
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1219
+#: ../panels/keyboard/keyboard-shortcuts.c:1220
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1649,75 +1676,14 @@ msgid "C_ommand:"
 msgstr "คำ_สั่ง:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Repeat Keys"
-msgstr "การซ้ำตัวอักษร"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Key presses _repeat when key is held down"
-msgstr "ซ้ำปุ่_มเมื่อกดปุ่มค้างไว้"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
-msgid "_Delay:"
-msgstr "ร_อ:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-msgid "_Speed:"
-msgstr "ความเ_ร็ว:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-msgctxt "keyboard, delay"
-msgid "Short"
-msgstr "สั้น"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
-msgctxt "keyboard, speed"
-msgid "Slow"
-msgstr "ช้า"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-msgid "Repeat keys speed"
-msgstr "ความเร็วของการซ้ำปุ่มเมื่อกดค้าง"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-msgctxt "keyboard, delay"
-msgid "Long"
-msgstr "ยาว"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-msgctxt "keyboard, speed"
-msgid "Fast"
-msgstr "เร็ว"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
-msgid "Cursor Blinking"
-msgstr "การกะพริบของเคอร์เซอร์"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-msgid "Cursor _blinks in text fields"
-msgstr "เคอร์เซอร์_กะพริบในช่องข้อความ"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-msgid "S_peed:"
-msgstr "_ความเร็ว:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-msgid "Cursor blink speed"
-msgstr "อัตราการกะพริบของเคอร์เซอร์"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/region/region.ui.h:5
-msgid "Input Sources"
-msgstr "ช่องทางป้อนข้อความ"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "Add Shortcut"
 msgstr "เพิ่มปุ่มลัด"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 msgid "Remove Shortcut"
 msgstr "ลบปุ่มลัด"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1725,20 +1691,16 @@ msgstr ""
 "ถ้าต้องการแก้ไขปุ่มลัด คลิกที่รายการที่ต้องการแล้วกดปุ่มลัดชุดใหม่ หรือกดปุ่ม Backspace "
 "ถ้าต้องการล้างปุ่มลัด"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:24
-msgid "Shortcuts"
-msgstr "ปุ่มลัด"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:632
-#: ../panels/keyboard/keyboard-shortcuts.c:640
+#: ../panels/keyboard/keyboard-shortcuts.c:633
+#: ../panels/keyboard/keyboard-shortcuts.c:641
 msgid "Custom Shortcuts"
 msgstr "ปุ่มลัดกำหนดเอง"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:857
+#: ../panels/keyboard/keyboard-shortcuts.c:858
 msgid "<Unknown Action>"
 msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1358
+#: ../panels/keyboard/keyboard-shortcuts.c:1359
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1748,7 +1710,7 @@ msgstr ""
 "ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
 "กรุณาใช้ปุ่มอย่าง Control, Alt หรือ Shift ประกอบด้วย"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1388
+#: ../panels/keyboard/keyboard-shortcuts.c:1389
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1757,17 +1719,17 @@ msgstr ""
 "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1393
+#: ../panels/keyboard/keyboard-shortcuts.c:1394
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "ถ้าคุณกำหนดปุ่มลัดนี้ซ้ำให้เป็น \"%s\" ปุ่มลัด \"%s\" ก็จะถูกปิดไป"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1399
+#: ../panels/keyboard/keyboard-shortcuts.c:1400
 msgid "_Reassign"
 msgstr "_กำหนดซ้ำ"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
@@ -1776,24 +1738,20 @@ msgstr ""
 "ปุ่มลัด \"%s\" มีปุ่มลัด \"%s\" ที่เชื่อมโยงกันอยู่ คุณต้องการกำหนดปุ่มลัดดังกล่าวเป็น \"%s\" "
 "โดยอัตโนมัติหรือไม่?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1450
+#: ../panels/keyboard/keyboard-shortcuts.c:1451
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
 "if you move forward."
 msgstr "ขณะนี้ \"%s\" เชื่อมโยงกับ \"%s\" อยู่ ปุ่มลัดนี้จะถูกปิดถ้าคุณดำเนินการต่อไป"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1457
+#: ../panels/keyboard/keyboard-shortcuts.c:1458
 msgid "_Assign"
 msgstr "_กำหนด"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
 msgstr "_ทดสอบค่าตั้งของคุณ"
-
-#: ../panels/mouse/cc-mouse-panel.c:107
-msgid "Test Your Settings"
-msgstr "ทดสอบค่าตั้งของคุณ"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1814,81 +1772,53 @@ msgid "General"
 msgstr "ทั่วไป"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgctxt "double click, speed"
-msgid "Slow"
-msgstr "ช้า"
+msgid "Primary Button"
+msgstr "ปุ่มหลัก"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Double-click timeout"
-msgstr "ความเร็วของดับเบิลคลิก"
+msgid "Sets the order of physical buttons on mice and touchpads."
+msgstr "กำหนดลำดับของปุ่มจริงบนเมาส์และทัชแพด"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgctxt "double click, speed"
-msgid "Fast"
-msgstr "เร็ว"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "_Double-click"
-msgstr "ดับเ_บิลคลิก"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Primary _button"
-msgstr "ปุ่_มหลัก"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgctxt "mouse, left button as primary"
-msgid "_Left"
-msgstr "ซ้า_ย"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgctxt "mouse, right button as primary"
-msgid "_Right"
-msgstr "_ขวา"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Mouse"
 msgstr "เมาส์"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+msgid "Mouse Speed"
+msgstr "ความเร็วเมาส์"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+msgid "Double-click timeout"
+msgstr "ความเร็วของดับเบิลคลิก"
+
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Natural Scrolling"
+msgstr "เลื่อนหน้าจอแบบธรรมชาติ"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgid "Scrolling moves the content, not the view."
+msgstr "การเลื่อนจะเลื่อนเนื้อหา ไม่ใช่เลื่อนช่องมอง"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-msgid "_Pointer speed"
-msgstr "_ความเร็วตัวชี้"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgctxt "mouse pointer, speed"
-msgid "Slow"
-msgstr "ช้า"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
-msgctxt "mouse pointer, speed"
-msgid "Fast"
-msgstr "เร็ว"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Touchpad"
 msgstr "ทัชแพด"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+msgid "Touchpad Speed"
+msgstr "ความเร็วทัชแพด"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+msgid "Tap to Click"
+msgstr "คลิกด้วยการแตะ"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "Two Finger Scrolling"
+msgstr "เลื่อนหน้าจอด้วยสองนิ้ว"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "touchpad pointer, speed"
-msgid "Slow"
-msgstr "ช้า"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgctxt "touchpad pointer, speed"
-msgid "Fast"
-msgstr "เร็ว"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Tap to _click"
-msgstr "_คลิกด้วยการแตะ"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Two _finger scroll"
-msgstr "เลื่อนหน้าจอด้วย_สองนิ้ว"
-
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "_Natural scrolling"
-msgstr "เลื่อนหน้าจอแบบธรรม_ชาติ"
+msgid "Edge Scrolling"
+msgstr "เลื่อนหน้าจอที่ขอบ"
 
 #: ../panels/mouse/gnome-mouse-test.c:130
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -2489,8 +2419,8 @@ msgid "Select file to import"
 msgstr "เลือกแฟ้มที่จะนำเข้า"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1941
-#: ../panels/sharing/cc-sharing-panel.c:492
+#: ../panels/printers/cc-printers-panel.c:1932
+#: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_เปิด"
@@ -2599,9 +2529,8 @@ msgid "yesterday"
 msgstr "เมื่อวาน"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:696
+#: ../panels/network/panel-common.c:698 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "ที่อยู่ไอพี"
 
@@ -2625,8 +2554,7 @@ msgstr "ใช้สาย"
 #: ../panels/network/net-device-wifi.c:1621
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "ตัวเลือก…"
 
@@ -2956,7 +2884,7 @@ msgstr "ระบบรักษาความปลอดภัย"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:14
+#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "รหัสผ่าน"
@@ -3507,12 +3435,14 @@ msgid "_Type"
 msgstr "_ชนิด"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
+#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 msgid "On"
 msgstr "เปิด"
 
@@ -3576,30 +3506,30 @@ msgstr "การแจ้งเหตุการล็อคหน้าจอ
 msgid "Applications"
 msgstr "โปรแกรม"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:168
 msgctxt "Online Account"
 msgid "Other"
 msgstr "อื่นๆ"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:289
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "เพิ่มบัญชี"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:326
 msgid "Mail"
 msgstr "เมล"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:332
 msgid "Contacts"
 msgstr "ผู้ติดต่อ"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:338
 msgid "Chat"
 msgstr "สนทนา"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:344
 msgid "Resources"
 msgstr "ทรัพยากร"
 
@@ -3799,7 +3729,7 @@ msgstr "คอมพิวเตอร์"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2096
+#: ../panels/power/cc-power-panel.c:2109
 msgid "Battery"
 msgstr "แบตเตอรี่"
 
@@ -3843,75 +3773,75 @@ msgstr "ไม่มีประจุเหลืออยู่"
 msgid "Batteries"
 msgstr "แบตเตอรี่"
 
-#: ../panels/power/cc-power-panel.c:1167
+#: ../panels/power/cc-power-panel.c:1171
 msgid "When _idle"
 msgstr "เมื่อไ_ม่ใช้งาน"
 
-#: ../panels/power/cc-power-panel.c:1547
+#: ../panels/power/cc-power-panel.c:1560
 msgid "Power Saving"
 msgstr "การประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1582
+#: ../panels/power/cc-power-panel.c:1595
 msgid "_Screen brightness"
 msgstr "ความสว่าง_หน้าจอ"
 
-#: ../panels/power/cc-power-panel.c:1601
+#: ../panels/power/cc-power-panel.c:1614
 msgid "Automatic brightness"
 msgstr "ความสว่างอัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:1621
+#: ../panels/power/cc-power-panel.c:1634
 msgid "_Keyboard brightness"
 msgstr "ความสว่างแ_ป้นพิมพ์"
 
-#: ../panels/power/cc-power-panel.c:1631
+#: ../panels/power/cc-power-panel.c:1644
 msgid "_Dim screen when inactive"
 msgstr "_หรี่หน้าจอเมื่อไม่มีการใช้งาน"
 
-#: ../panels/power/cc-power-panel.c:1656
+#: ../panels/power/cc-power-panel.c:1669
 msgid "_Blank screen"
 msgstr "หน้าจอ_ว่าง"
 
-#: ../panels/power/cc-power-panel.c:1693
+#: ../panels/power/cc-power-panel.c:1706
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1698
-msgid "Wireless devices require extra power"
-msgstr "อุปกรณ์ไร้สายต้องการพลังงานเพิ่มพิเศษ"
+#: ../panels/power/cc-power-panel.c:1711
+msgid "Turn off Wi-Fi to save power."
+msgstr "ปิด Wi-Fi เพื่อประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1723
+#: ../panels/power/cc-power-panel.c:1736
 msgid "_Mobile broadband"
 msgstr "บรอดแบนด์_มือถือ"
 
-#: ../panels/power/cc-power-panel.c:1728
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr "อุปกรณ์บรอดแบนด์มือถือ (3G, 4G, WiMax ฯลฯ) ต้องการพลังงานเพิ่มพิเศษ"
+#: ../panels/power/cc-power-panel.c:1741
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgstr "ปิดอุปกรณ์บรอดแบนด์มือถือ (3G, 4G, LTE ฯลฯ) เพื่อประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1780
+#: ../panels/power/cc-power-panel.c:1793
 msgid "_Bluetooth"
 msgstr "_บลูทูท"
 
-#: ../panels/power/cc-power-panel.c:1836
+#: ../panels/power/cc-power-panel.c:1849
 msgid "When on battery power"
 msgstr "เมื่อใช้ไฟจากแบตเตอรี่"
 
-#: ../panels/power/cc-power-panel.c:1838
+#: ../panels/power/cc-power-panel.c:1851
 msgid "When plugged in"
 msgstr "เมื่อเสียบปลั๊กไฟ"
 
-#: ../panels/power/cc-power-panel.c:1955
+#: ../panels/power/cc-power-panel.c:1968
 msgid "Suspend & Power Off"
 msgstr "พักเครื่อง & ปิดเครื่อง"
 
-#: ../panels/power/cc-power-panel.c:1995
+#: ../panels/power/cc-power-panel.c:2008
 msgid "_Automatic suspend"
 msgstr "พักเครื่องโดย_อัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:1996
+#: ../panels/power/cc-power-panel.c:2009
 msgid "Automatic suspend"
 msgstr "พักเครื่องโดยอัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:2150
+#: ../panels/power/cc-power-panel.c:2163
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -3998,7 +3928,7 @@ msgstr "เมื่อเสียบ_ปลั๊กไฟ"
 msgid "On _Battery Power"
 msgstr "เมื่อใช้ไฟจากแ_บตเตอรี่"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "รอ"
 
@@ -4141,58 +4071,57 @@ msgctxt "printer state"
 msgid "Installing"
 msgstr "กำลังติดตั้ง"
 
-#. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1119
-msgid "No printers available"
-msgstr "ไม่มีเครื่องพิมพ์"
-
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1420
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "ทำงานอยู่ %u"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1770
+#: ../panels/printers/cc-printers-panel.c:1761
 msgid "Failed to add new printer."
 msgstr "เพิ่มเครื่องพิมพ์เครื่องใหม่ไม่สำเร็จ"
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:1928
 msgid "Select PPD File"
 msgstr "เลือกแฟ้ม PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:1937
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 msgstr ""
 "แฟ้มบรรยายเครื่องพิมพ์โพสต์สคริปต์ (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2253
+#: ../panels/printers/cc-printers-panel.c:2244
 msgid "No suitable driver found"
 msgstr "ไม่พบไดรเวอร์ที่เหมาะสม"
 
-#: ../panels/printers/cc-printers-panel.c:2324
+#: ../panels/printers/cc-printers-panel.c:2315
 msgid "Searching for preferred drivers…"
 msgstr "กำลังค้นหาไดรเวอร์สำหรับเครื่องพิมพ์…"
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2336
 msgid "Select from database…"
 msgstr "เลือกจากฐานข้อมูล…"
 
-#: ../panels/printers/cc-printers-panel.c:2354
+#: ../panels/printers/cc-printers-panel.c:2345
 msgid "Provide PPD File…"
 msgstr "ป้อนแฟ้ม PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2505
-#: ../panels/printers/cc-printers-panel.c:2528
+#: ../panels/printers/cc-printers-panel.c:2496
+#: ../panels/printers/cc-printers-panel.c:2519
 msgid "Test page"
 msgstr "หน้าทดสอบ"
 
+#: ../panels/printers/cc-printers-panel.c:2632
+msgid "No printers"
+msgstr "ไม่มีเครื่องพิมพ์"
+
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2942
+#: ../panels/printers/cc-printers-panel.c:2939
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "อ่านส่วนติดต่อผู้ใช้ไม่สำเร็จ: %s"
@@ -4264,12 +4193,12 @@ msgid "Loading drivers database..."
 msgstr "กำลังโหลดฐานข้อมูลไดรเวอร์..."
 
 #. Translators: The found device is a JetDirect printer
-#: ../panels/printers/pp-host.c:506
+#: ../panels/printers/pp-host.c:526
 msgid "JetDirect Printer"
 msgstr "เครื่องพิมพ์ JetDirect"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: ../panels/printers/pp-host.c:756
+#: ../panels/printers/pp-host.c:782
 msgid "LPD Printer"
 msgstr "เครื่องพิมพ์ LPD"
 
@@ -4374,34 +4303,34 @@ msgid "%s Active Jobs"
 msgstr "งานที่พิมพ์อยู่ของ %s"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1550
+#: ../panels/printers/pp-new-printer-dialog.c:1659
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1555
+#: ../panels/printers/pp-new-printer-dialog.c:1664
 msgid "Serial Port"
 msgstr "พอร์ตอนุกรม"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1562
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "Parallel Port"
 msgstr "พอร์ตขนาน"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1613
+#: ../panels/printers/pp-new-printer-dialog.c:1713
 #, c-format
 msgid "Location: %s"
 msgstr "ตำแหน่งที่ตั้ง: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1618
+#: ../panels/printers/pp-new-printer-dialog.c:1718
 #, c-format
 msgid "Address: %s"
 msgstr "ที่อยู่: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1642
+#: ../panels/printers/pp-new-printer-dialog.c:1747
 msgid "Server requires authentication"
 msgstr "เซิร์ฟเวอร์ต้องการยืนยันตัวบุคคล"
 
@@ -4567,7 +4496,7 @@ msgstr "เครื่องพิมพ์_ปริยาย"
 msgid "Jobs"
 msgstr "งานพิมพ์"
 
-#. Translators: Opens a dialog containing printer's jobs
+#. Translators: Opens a dialog containing printer
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
 msgstr "แสดง_งานพิมพ์"
@@ -4593,14 +4522,14 @@ msgstr "หน้า 3"
 msgid "Print _Test Page"
 msgstr "พิมพ์หน้า_ทดสอบ"
 
-#. Translators: This button opens printer's options tab
+#. Translators: This button opens printer
 #: ../panels/printers/printers.ui.h:22
 msgid "_Options"
 msgstr "_ตัวเลือก"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-msgid "Add New Printer"
+msgid "Add a Printer"
 msgstr "เพิ่มเครื่องพิมพ์"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
@@ -4836,26 +4765,26 @@ msgstr "ไม่พบภูมิภาค"
 msgid "No input sources found"
 msgstr "ไม่พบช่องทางป้อนข้อความ"
 
-#: ../panels/region/cc-input-chooser.c:1018
+#: ../panels/region/cc-input-chooser.c:1015
 msgctxt "Input Source"
 msgid "Other"
 msgstr "อื่นๆ"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1071
+#: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "คุณต้องตั้งต้นวาระใหม่เพื่อให้การเปลี่ยนแปลงมีผล"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Restart Now"
 msgstr "ตั้งต้นใหม่เดี๋ยวนี้"
 
-#: ../panels/region/cc-region-panel.c:876
+#: ../panels/region/cc-region-panel.c:877
 msgid "No input source selected"
 msgstr "ไม่ได้เลือกช่องทางป้อนข้อความใด"
 
-#: ../panels/region/cc-region-panel.c:1796
+#: ../panels/region/cc-region-panel.c:1797
 msgid "Login Screen"
 msgstr "หน้าจอเข้าระบบ"
 
@@ -4961,6 +4890,10 @@ msgstr "อังกฤษ (สหราชอาณาจักร)"
 msgid "United Kingdom"
 msgstr "สหราชอาณาจักร"
 
+#: ../panels/region/region.ui.h:5
+msgid "Input Sources"
+msgstr "ช่องทางป้อนข้อความ"
+
 #: ../panels/region/region.ui.h:6
 msgid "Options"
 msgstr "ตัวเลือก"
@@ -5050,36 +4983,36 @@ msgstr "เลื่อนลง"
 msgid "Preferences"
 msgstr "ปรับแต่ง"
 
-#: ../panels/sharing/cc-sharing-panel.c:272
+#: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
 msgstr "เปิด"
 
-#: ../panels/sharing/cc-sharing-panel.c:274
-#: ../panels/sharing/cc-sharing-panel.c:301
+#: ../panels/sharing/cc-sharing-panel.c:265
+#: ../panels/sharing/cc-sharing-panel.c:292
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "ปิด"
 
-#: ../panels/sharing/cc-sharing-panel.c:304
+#: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "เปิดใช้"
 
-#: ../panels/sharing/cc-sharing-panel.c:307
+#: ../panels/sharing/cc-sharing-panel.c:298
 msgctxt "service is active"
 msgid "Active"
 msgstr "ทำงานอยู่"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:369
 msgid "Choose a Folder"
 msgstr "เลือกโฟลเดอร์"
 
-#: ../panels/sharing/cc-sharing-panel.c:917
+#: ../panels/sharing/cc-sharing-panel.c:798
 msgid "Copy"
 msgstr "คัดลอก"
 
-#: ../panels/sharing/cc-sharing-panel.c:1247
+#: ../panels/sharing/cc-sharing-panel.c:1124
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "การแบ่งปัน"
@@ -5091,11 +5024,11 @@ msgstr "ควบคุมสิ่งที่คุณต้องการแ
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;"
 msgstr ""
-"แบ่งปัน;ใช้ร่วม;ssh;โฮสต์;ชื่อ;แม่ข่าย;เดสก์ท็อป;บลูทท;obex;สื่อ;เสียง;วีดิทัศน์;ภาพ;ภาพถ่าย;"
-"ภาพยนตร์;เซิร์ฟเวอร์;โปรแกรมวาดแสดง;"
+"แบ่งปัน;ใช้ร่วม;ssh;โฮสต์;ชื่อ;แม่ข่าย;เดสก์ท็อป;สื่อ;เสียง;วีดิทัศน์;ภาพ;ภาพถ่าย;ภาพยนตร์;"
+"เซิร์ฟเวอร์;โปรแกรมวาดแสดง;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5118,48 +5051,30 @@ msgid "Networks"
 msgstr "เครือข่าย"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Bluetooth Sharing"
-msgstr "การแบ่งปันบลูทูท"
-
-#: ../panels/sharing/sharing.ui.h:2
-msgid ""
-"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-"devices"
-msgstr "การแบ่งปันบลูทูทช่วยให้คุณแบ่งปันแฟ้มกับอุปกรณ์อื่นที่เปิดใช้บลูทูทได้"
-
-#: ../panels/sharing/sharing.ui.h:3
-msgid "Only Receive From Trusted Devices"
-msgstr "รับจากอุปกรณ์ที่เชื่อถือเท่านั้น"
-
-#: ../panels/sharing/sharing.ui.h:4
-msgid "Save Received Files to Downloads Folder"
-msgstr "บันทึกแฟ้มที่ได้รับลงในโฟลเดอร์ \"ดาวน์โหลด\""
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "ชื่อเครื่อง"
 
-#: ../panels/sharing/sharing.ui.h:6
+#: ../panels/sharing/sharing.ui.h:2
 msgid "Personal File Sharing"
 msgstr "การแบ่งปันแฟ้มส่วนตัว"
 
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:3
 msgid "Screen Sharing"
 msgstr "การแบ่งปันหน้าจอ"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Media Sharing"
 msgstr "การแบ่งปันสื่อ"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Remote Login"
 msgstr "การเข้าระบบผ่านเครือข่าย"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "บางบริการถูกปิดใช้เพราะเข้าถึงเครือข่ายไม่ได้"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:8
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5168,11 +5083,11 @@ msgstr ""
 "การแบ่งปันแฟ้มส่วนตัว ช่วยคุณแบ่งปันโฟลเดอร์ \"สาธารณะ\" ของคุณกับผู้อื่นในเครือข่ายปัจจุบันของคุณ "
 "โดยใช้: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Require Password"
 msgstr "ต้องใช้รหัสผ่าน"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:12
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5181,7 +5096,7 @@ msgstr ""
 "อนุญาตให้ผู้ใช้จากเครื่องอื่นเชื่อมต่อ โดยใช้คำสั่งเชลล์นิรภัย:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:15
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5190,36 +5105,36 @@ msgstr ""
 "อนุญาตให้ผู้ใช้จากเครื่องอื่นดูหรือควบคุมหน้าจอของคุณ ด้วยการเชื่อมต่อไปยัง: <a href=\"vnc://%s"
 "\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Allow Remote Control"
 msgstr "อนุญาตให้ควบคุมหน้าจอผ่านเครือข่าย"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Password:"
 msgstr "รหัสผ่าน:"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Show Password"
 msgstr "แสดงรหัสผ่าน"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "ตัวเลือกของการเข้าถึง"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:20
 msgid "New connections must ask for access"
 msgstr "การเชื่อมต่อใหม่ต้องถามเพื่อเข้าถึง"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require a password"
 msgstr "ต้องใช้รหัสผ่าน"
 
-#: ../panels/sharing/sharing.ui.h:26
+#: ../panels/sharing/sharing.ui.h:22
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr "การแบ่งปันสื่อ ช่วยคุณแบ่งปันดนตรี, ภาพถ่าย และวีดิทัศน์ผ่านทางเครือข่าย"
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:23
 msgid "Folders"
 msgstr "โฟลเดอร์"
 
@@ -5502,207 +5417,255 @@ msgid "Screen _Keyboard"
 msgstr "แ_ป้นพิมพ์บนจอ"
 
 #: ../panels/universal-access/uap.ui.h:13
+msgid "_Repeat Keys"
+msgstr "การซ้ำปุ่_มกด"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "_Cursor Blinking"
+msgstr "การกะพริบเ_คอร์เซอร์"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
 msgstr "เครื่องมือช่วย_พิมพ์ (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Pointing & Clicking"
 msgstr "การชี้และการคลิก"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:17
 msgid "_Mouse Keys"
 msgstr "บังคับเ_มาส์ด้วยแป้น"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Click Assist"
 msgstr "เครื่องมือช่วย_คลิก"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Double-Click Delay"
+msgstr "เวลาหน่วงดับเ_บิลคลิก"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Double-Click Delay"
+msgstr "เวลาหน่วงของดับเบิลคลิก"
+
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Screen Reader"
 msgstr "การอ่านหน้าจอ"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:22
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "การอ่านหน้าจอจะอ่านข้อความที่แสดงขณะที่คุณย้ายโฟกัส"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:23
 msgid "_Screen Reader"
 msgstr "การ_อ่านหน้าจอ"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Sound Keys"
 msgstr "ส่งเสียงปุ่มกด"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Beep when Num Lock or Caps Lock are turned on."
 msgstr "ส่งเสียงบี๊บเมื่อ Num Lock หรือ Caps Lock เปิด"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Visual Alerts"
 msgstr "การแจ้งเหตุด้วยภาพ"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:27
 msgid "_Test flash"
 msgstr "_ทดสอบการกะพริบ"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "ใช้การบ่งชี้ด้วยภาพเมื่อมีเสียงแจ้งเหตุ"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Flash the _window title"
 msgstr "กะพริบหัว_หน้าต่าง"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Flash the entire _screen"
 msgstr "กะพริบทั้งหน้า_จอ"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:31
+msgid "Repeat Keys"
+msgstr "การซ้ำตัวอักษร"
+
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Key presses repeat when key is held down."
+msgstr "ซ้ำปุ่มเมื่อกดปุ่มค้างไว้"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Repeat keys delay"
+msgstr "เวลาหน่วงของการซ้ำปุ่มเมื่อกดค้าง"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Speed"
+msgstr "ความเร็ว"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Repeat keys speed"
+msgstr "ความเร็วของการซ้ำปุ่มเมื่อกดค้าง"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Cursor Blinking"
+msgstr "การกะพริบของเคอร์เซอร์"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Cursor blinks in text fields."
+msgstr "เคอร์เซอร์กะพริบในช่องข้อความ"
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Cursor blinking speed"
+msgstr "อัตราการกะพริบของเคอร์เซอร์"
+
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Typing Assist"
 msgstr "สิ่งอำนวยความสะดวกในการพิมพ์"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:41
 msgid "_Sticky Keys"
 msgstr "_ค้างปุ่มกด"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "นับการกดปุ่มประกอบทีละปุ่มเสมือนการกดพร้อมกัน"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:43
 msgid "_Disable if two keys are pressed together"
 msgstr "เ_ลิกใช้ถ้ามีการกดปุ่มสองปุ่มพร้อมกัน"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Beep when a _modifier key is pressed"
 msgstr "ส่งเสียงบี๊บเมื่อกดปุ่ม_ประกอบ"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:45
 msgid "S_low Keys"
 msgstr "พิมพ์แบบ_ช้า"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "หน่วงเวลาหลังจากปุ่มถูกกดก่อนที่จะรับการกด"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "เวลาห_น่วงก่อนรับ:"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:48
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "สั้น"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "เวลาหน่วงในการพิมพ์แบบช้า"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:50
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "ยาว"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Beep when a key is pr_essed"
 msgstr "ส่งเสียงบี๊บเมื่อ_กดปุ่ม"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is _accepted"
 msgstr "ส่งเสียงบี๊บเมื่อปุ่มถูก_ยอมรับ"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Beep when a key is _rejected"
 msgstr "ส่งเสียงบี๊บเมื่อปุ่มถูก_ปฏิเสธ"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:54
 msgid "_Bounce Keys"
 msgstr "ป้องกันการกดแป้น_รัว"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Ignores fast duplicate keypresses"
 msgstr "ไม่รับการกดปุ่มรัว"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:56
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "สั้น"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Bounce keys typing delay"
 msgstr "เวลาหน่วงในการป้องกันการกดแป้นรัว"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgctxt "bounce keys delay"
-msgid "Long"
-msgstr "ยาว"
-
-#: ../panels/universal-access/uap.ui.h:46
-msgid "_Enable by Keyboard"
-msgstr "_เปิดใช้ด้วยแป้นพิมพ์"
-
-#: ../panels/universal-access/uap.ui.h:47
-msgid "Turn accessibility features on and off using the keyboard"
-msgstr "เปิด/ปิดเทคโนโลยีสิ่งอำนวยความสะดวกจากแป้นพิมพ์"
-
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Click Assist"
-msgstr "เครื่องมือช่วยคลิก"
-
-#: ../panels/universal-access/uap.ui.h:49
-msgid "_Simulated Secondary Click"
-msgstr "_จำลองคลิกที่สอง"
-
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr "สร้างคลิกที่สองโดยกดปุ่มแรกของเมาส์ค้างไว้"
-
-#: ../panels/universal-access/uap.ui.h:51
-msgctxt "secondary click"
-msgid "Short"
-msgstr "สั้น"
-
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Secondary click delay"
-msgstr "เวลาหน่วงสำหรับคลิกที่สอง"
-
-#: ../panels/universal-access/uap.ui.h:53
-msgctxt "secondary click delay"
-msgid "Long"
-msgstr "ยาว"
-
-#: ../panels/universal-access/uap.ui.h:54
-msgid "_Hover Click"
-msgstr "การคลิกด้วยการวางแ_ช่"
-
-#: ../panels/universal-access/uap.ui.h:55
-msgid "Trigger a click when the pointer hovers"
-msgstr "สร้างการคลิกเมื่อตัวชี้วางแช่"
-
-#: ../panels/universal-access/uap.ui.h:56
-msgid "D_elay:"
-msgstr "_รอ:"
-
-#: ../panels/universal-access/uap.ui.h:57
-msgctxt "dwell click delay"
-msgid "Short"
-msgstr "สั้น"
-
 #: ../panels/universal-access/uap.ui.h:58
-msgctxt "dwell click delay"
+msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "ยาว"
 
 #: ../panels/universal-access/uap.ui.h:59
+msgid "_Enable by Keyboard"
+msgstr "_เปิดใช้ด้วยแป้นพิมพ์"
+
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Turn accessibility features on and off using the keyboard"
+msgstr "เปิด/ปิดเทคโนโลยีสิ่งอำนวยความสะดวกจากแป้นพิมพ์"
+
+#: ../panels/universal-access/uap.ui.h:61
+msgid "Click Assist"
+msgstr "เครื่องมือช่วยคลิก"
+
+#: ../panels/universal-access/uap.ui.h:62
+msgid "_Simulated Secondary Click"
+msgstr "_จำลองคลิกที่สอง"
+
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "สร้างคลิกที่สองโดยกดปุ่มแรกของเมาส์ค้างไว้"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgctxt "secondary click"
+msgid "Short"
+msgstr "สั้น"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Secondary click delay"
+msgstr "เวลาหน่วงสำหรับคลิกที่สอง"
+
+#: ../panels/universal-access/uap.ui.h:66
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "ยาว"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "_Hover Click"
+msgstr "การคลิกด้วยการวางแ_ช่"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Trigger a click when the pointer hovers"
+msgstr "สร้างการคลิกเมื่อตัวชี้วางแช่"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "D_elay:"
+msgstr "_รอ:"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "สั้น"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "ยาว"
+
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Motion _threshold:"
 msgstr "ระยะเริ่_มเคลื่อน:"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "สั้น"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "ยาว"
@@ -6614,15 +6577,15 @@ msgstr "ไม่มีรหัสผ่าน"
 msgid "Logged in"
 msgstr "เข้าระบบ"
 
-#: ../panels/user-accounts/um-user-panel.c:1274
+#: ../panels/user-accounts/um-user-panel.c:1275
 msgid "Failed to contact the accounts service"
 msgstr "ติดต่อบริการบัญชีผู้ใช้ไม่สำเร็จ"
 
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:1277
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งและเปิดใช้งาน AccountService"
 
-#: ../panels/user-accounts/um-user-panel.c:1317
+#: ../panels/user-accounts/um-user-panel.c:1318
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6630,12 +6593,12 @@ msgstr ""
 "หากต้องการเปลี่ยนแปลง\n"
 "ให้คลิกที่ไอคอน * ก่อน"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
+#: ../panels/user-accounts/um-user-panel.c:1356
 msgid "Create a user account"
 msgstr "สร้างบัญชีผู้ใช้"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
-#: ../panels/user-accounts/um-user-panel.c:1678
+#: ../panels/user-accounts/um-user-panel.c:1367
+#: ../panels/user-accounts/um-user-panel.c:1679
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6643,12 +6606,12 @@ msgstr ""
 "หากต้องการสร้างบัญชีผู้ใช้\n"
 "ให้คลิกที่ไอคอน * ก่อน"
 
-#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1377
 msgid "Delete the selected user account"
 msgstr "ลบบัญชีผู้ใช้ที่เลือก"
 
-#: ../panels/user-accounts/um-user-panel.c:1388
-#: ../panels/user-accounts/um-user-panel.c:1683
+#: ../panels/user-accounts/um-user-panel.c:1389
+#: ../panels/user-accounts/um-user-panel.c:1684
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6656,7 +6619,7 @@ msgstr ""
 "หากต้องการลบบัญชีผู้ใช้ที่เลือก\n"
 "ให้คลิกที่ไอคอน * ก่อน"
 
-#: ../panels/user-accounts/um-user-panel.c:1592
+#: ../panels/user-accounts/um-user-panel.c:1593
 msgid "My Account"
 msgstr "บัญชีของฉัน"
 
@@ -7079,6 +7042,98 @@ msgstr "ระบบ"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "ปรับแต่ง;ตั้งค่า;"
+
+#~ msgid "_Delay:"
+#~ msgstr "ร_อ:"
+
+#~ msgid "_Speed:"
+#~ msgstr "ความเ_ร็ว:"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Short"
+#~ msgstr "สั้น"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Slow"
+#~ msgstr "ช้า"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Long"
+#~ msgstr "ยาว"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Fast"
+#~ msgstr "เร็ว"
+
+#~ msgid "S_peed:"
+#~ msgstr "_ความเร็ว:"
+
+#~ msgid "Shortcuts"
+#~ msgstr "ปุ่มลัด"
+
+#~ msgid "For mice and touchpads."
+#~ msgstr "สำหรับเมาส์และทัชแพด"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "บลูทูทถูกปิดใช้งาน"
+
+#~ msgid "Test Your Settings"
+#~ msgstr "ทดสอบค่าตั้งของคุณ"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Slow"
+#~ msgstr "ช้า"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Fast"
+#~ msgstr "เร็ว"
+
+#~ msgctxt "mouse, left button as primary"
+#~ msgid "_Left"
+#~ msgstr "ซ้า_ย"
+
+#~ msgctxt "mouse, right button as primary"
+#~ msgid "_Right"
+#~ msgstr "_ขวา"
+
+#~ msgid "_Pointer speed"
+#~ msgstr "_ความเร็วตัวชี้"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "ช้า"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "เร็ว"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "ช้า"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "เร็ว"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "อุปกรณ์ไร้สายต้องการพลังงานเพิ่มพิเศษ"
+
+#~ msgid "No printers available"
+#~ msgstr "ไม่มีเครื่องพิมพ์"
+
+#~ msgid "Add New Printer"
+#~ msgstr "เพิ่มเครื่องพิมพ์"
+
+#~ msgid ""
+#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+#~ "devices"
+#~ msgstr "การแบ่งปันบลูทูทช่วยให้คุณแบ่งปันแฟ้มกับอุปกรณ์อื่นที่เปิดใช้บลูทูทได้"
+
+#~ msgid "Only Receive From Trusted Devices"
+#~ msgstr "รับจากอุปกรณ์ที่เชื่อถือเท่านั้น"
+
+#~ msgid "Save Received Files to Downloads Folder"
+#~ msgstr "บันทึกแฟ้มที่ได้รับลงในโฟลเดอร์ \"ดาวน์โหลด\""
 
 #~ msgid "Security key"
 #~ msgstr "กุญแจระบบรักษาความปลอดภัย"
@@ -7758,9 +7813,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 #~ msgid "Layout Settings"
 #~ msgstr "ตั้งค่าผังแป้นพิมพ์"
 
-#~ msgid "Set your mouse and touchpad preferences"
-#~ msgstr "ปรับแต่งค่าตั้งสำหรับเมาส์และทัชแพด"
-
 #~ msgid "Network settings"
 #~ msgstr "ตั้งค่าเครือข่าย"
 
@@ -8079,9 +8131,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 #~ msgid "A_cceleration:"
 #~ msgstr "ความเร่_ง:"
 
-#~ msgid "Double-Click Timeout"
-#~ msgstr "ความเร็วของดับเบิลคลิก"
-
 #~ msgid "Drag Threshold"
 #~ msgstr "ระยะเริ่มลาก"
 
@@ -8090,9 +8139,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 
 #~ msgid "Enable _mouse clicks with touchpad"
 #~ msgstr "เปิดใช้การคลิ_กเมาส์ด้วยทัชแพด"
-
-#~ msgid "Scrolling"
-#~ msgstr "การเลื่อนหน้าจอ"
 
 #~ msgid "Sh_ow position of pointer when the Control key is pressed"
 #~ msgstr "แ_สดงตำแหน่งของตัวชี้เมื่อกดปุ่ม Control"
@@ -8133,9 +8179,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 
 #~ msgid "Disable VPN"
 #~ msgstr "ปิดใช้งาน VPN"
-
-#~ msgid "Speed"
-#~ msgstr "ความเร็ว"
 
 #~ msgid "Subnet Mask"
 #~ msgstr "แมสก์เครือข่ายย่อย"
