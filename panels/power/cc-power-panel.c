@@ -890,7 +890,8 @@ set_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
   result = g_dbus_proxy_call_finish (proxy, res, &error);
   if (result == NULL)
     {
-      g_printerr ("Error setting brightness: %s\n", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_printerr ("Error setting brightness: %s\n", error->message);
       g_error_free (error);
       return;
     }
@@ -1082,7 +1083,8 @@ got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
   priv->screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (priv->screen_proxy == NULL)
     {
-      g_printerr ("Error creating screen proxy: %s\n", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_printerr ("Error creating screen proxy: %s\n", error->message);
       g_error_free (error);
       return;
     }
@@ -1115,7 +1117,8 @@ got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   priv->kbd_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (priv->kbd_proxy == NULL)
     {
-      g_printerr ("Error creating keyboard proxy: %s\n", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_printerr ("Error creating keyboard proxy: %s\n", error->message);
       g_error_free (error);
       return;
     }
@@ -1598,7 +1601,8 @@ iio_proxy_appeared_cb (GDBusConnection *connection,
                                    NULL, &error);
   if (error != NULL)
     {
-      g_warning ("Could not create IIO sensor proxy: %s", error->message);
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Could not create IIO sensor proxy: %s", error->message);
       g_error_free (error);
       return;
     }
