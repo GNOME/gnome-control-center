@@ -64,6 +64,7 @@ struct _CcPowerPanelPrivate
   GDBusProxy    *screen_proxy;
   GDBusProxy    *kbd_proxy;
   gboolean       has_batteries;
+  char          *chassis_type;
 
   GList         *boxes;
   GList         *boxes_reverse;
@@ -124,6 +125,7 @@ cc_power_panel_dispose (GObject *object)
 {
   CcPowerPanelPrivate *priv = CC_POWER_PANEL (object)->priv;
 
+  g_clear_pointer (&priv->chassis_type, g_free);
   g_clear_object (&priv->gsd_settings);
   g_clear_object (&priv->session_settings);
   if (priv->cancellable != NULL)
@@ -183,6 +185,57 @@ no_prelight_row_new (void)
                                      "selectable", FALSE,
                                      "activatable", FALSE,
                                      NULL);
+}
+
+static char *
+get_chassis_type (GCancellable *cancellable)
+{
+  char *ret = NULL;
+  GError *error = NULL;
+  GVariant *inner;
+  GVariant *variant = NULL;
+  GDBusConnection *connection;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
+                               cancellable,
+                               &error);
+  if (!connection)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("system bus not available: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  variant = g_dbus_connection_call_sync (connection,
+                                         "org.freedesktop.hostname1",
+                                         "/org/freedesktop/hostname1",
+                                         "org.freedesktop.DBus.Properties",
+                                         "Get",
+                                         g_variant_new ("(ss)",
+                                                        "org.freedesktop.hostname1",
+                                                        "Chassis"),
+                                         NULL,
+                                         G_DBUS_CALL_FLAGS_NONE,
+                                         -1,
+                                         cancellable,
+                                         &error);
+  if (!variant)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_debug ("Failed to get property '%s': %s", "Chassis", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  g_variant_get (variant, "(v)", &inner);
+  ret = g_variant_dup_string (inner, NULL);
+  g_variant_unref (inner);
+
+out:
+  g_clear_object (&connection);
+  g_clear_pointer (&variant, g_variant_unref);
+  return ret;
 }
 
 static gchar *
@@ -1454,6 +1507,29 @@ combo_idle_delay_changed_cb (GtkWidget *widget, CcPowerPanel *self)
   g_settings_set_uint (self->priv->session_settings, "idle-delay", value);
 }
 
+static void
+combo_power_button_changed_cb (GtkWidget *widget, CcPowerPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+
+  /* set both keys */
+  g_settings_set_enum (self->priv->gsd_settings, "power-button-action", value);
+}
+
 static GtkWidget *
 add_brightness_row (CcPowerPanel  *self,
 		    const char    *text,
@@ -1934,7 +2010,30 @@ set_sleep_type (const GValue       *value,
 }
 
 static void
-add_automatic_suspend_section (CcPowerPanel *self)
+populate_power_button_model (GtkTreeModel *model)
+{
+  struct {
+    char *name;
+    GsdPowerButtonActionType value;
+  } actions[] = {
+    { N_("Suspend"), GSD_POWER_BUTTON_ACTION_SUSPEND },
+    { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
+    { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
+  };
+  guint i;
+
+  for (i = 0; i < G_N_ELEMENTS (actions); i++)
+    {
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
+                                         NULL, -1,
+                                         0, actions[i].name,
+                                         1, actions[i].value,
+                                         -1);
+    }
+}
+
+static void
+add_suspend_and_power_off_section (CcPowerPanel *self)
 {
   CcPowerPanelPrivate *priv = self->priv;
   GtkWidget *vbox;
@@ -1944,6 +2043,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gint value;
   GtkWidget *dialog;
   GtkWidget *combo;
+  GtkTreeModel *model;
+  GsdPowerButtonActionType button_value;
 
   /* The default values for these settings are unfortunate for us;
    * timeout == 0, action == suspend means 'do nothing' - just
@@ -1965,7 +2066,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
 
   vbox = WID (priv->builder, "vbox_power");
 
-  s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Off"));
+  /* Frame header */
+  s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
   label = gtk_label_new (s);
   g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
@@ -2002,6 +2104,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
+  /* Automatic suspend row */
   self->priv->automatic_suspend_row = row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
@@ -2026,8 +2129,6 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (priv->row_sizegroup, row);
   update_automatic_suspend_label (self);
-
-  gtk_widget_show_all (widget);
 
   dialog = priv->automatic_suspend_dialog;
   g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -2062,6 +2163,44 @@ add_automatic_suspend_section (CcPowerPanel *self)
                     G_CALLBACK (combo_time_changed_cb), self);
   g_object_bind_property (sw, "active", combo, "sensitive",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+
+  if (g_strcmp0 (priv->chassis_type, "vm") == 0 ||
+      g_strcmp0 (priv->chassis_type, "tablet") == 0)
+    goto out;
+
+  /* Power button row */
+  row = no_prelight_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_container_add (GTK_CONTAINER (row), box);
+
+  label = gtk_label_new (_("_When the Power Button is pressed"));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_start (label, 20);
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  combo = gtk_combo_box_text_new ();
+  gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (combo), 0);
+  model = GTK_TREE_MODEL (gtk_builder_get_object (priv->builder, "liststore_power_button"));
+  populate_power_button_model (model);
+  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
+  button_value = g_settings_get_enum (priv->gsd_settings, "power-button-action");
+  set_value_for_combo (GTK_COMBO_BOX (combo), button_value);
+  g_signal_connect (combo, "changed",
+                    G_CALLBACK (combo_power_button_changed_cb), self);
+  gtk_widget_set_margin_start (combo, 20);
+  gtk_widget_set_margin_end (combo, 20);
+  gtk_widget_set_valign (combo, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), combo, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+  gtk_container_add (GTK_CONTAINER (widget), row);
+  gtk_size_group_add_widget (priv->row_sizegroup, row);
+
+out:
+  gtk_widget_show_all (widget);
 }
 
 static gint
@@ -2263,6 +2402,8 @@ cc_power_panel_init (CcPowerPanel *self)
                             got_kbd_proxy_cb,
                             self);
 
+  priv->chassis_type = get_chassis_type (priv->cancellable);
+
   priv->up_client = up_client_new ();
 
   priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
@@ -2276,7 +2417,7 @@ cc_power_panel_init (CcPowerPanel *self)
   add_battery_section (self);
   add_device_section (self);
   add_power_saving_section (self);
-  add_automatic_suspend_section (self);
+  add_suspend_and_power_off_section (self);
 
   priv->boxes = g_list_copy (priv->boxes_reverse);
   priv->boxes = g_list_reverse (priv->boxes);
