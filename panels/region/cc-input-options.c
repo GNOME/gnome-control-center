@@ -180,5 +180,5 @@ cc_input_options_class_init (CcInputOptionsClass *klass)
 GtkWidget *
 cc_input_options_new (GtkWidget *parent)
 {
-        return g_object_new (CC_TYPE_INPUT_OPTIONS, "transient-for", parent, NULL);
+        return g_object_new (CC_TYPE_INPUT_OPTIONS, "transient-for", parent, "use-header-bar", TRUE, NULL);
 }
