@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Red Hat, Inc.
+ * Copyright (C) 2013, 2015 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -26,25 +26,20 @@
 
 #include "cc-input-options.h"
 
-typedef struct {
+struct _CcInputOptions {
+        GtkDialog parent_instance;
         GtkWidget *same_source;
         GtkWidget *per_window_source;
         GtkWidget *previous_source;
+        GtkWidget *previous_source_label;
         GtkWidget *next_source;
+        GtkWidget *next_source_label;
         GtkWidget *alt_next_source;
+        GtkWidget *alt_next_source_label;
         GSettings *settings;
-} CcInputOptionsPrivate;
+};
 
-#define GET_PRIVATE(options) ((CcInputOptionsPrivate *) g_object_get_data (G_OBJECT (options), "private"))
-
-static void
-cc_input_options_private_free (gpointer data)
-{
-        CcInputOptionsPrivate *priv = data;
-
-        g_clear_object (&priv->settings);
-        g_free (priv);
-}
+G_DEFINE_TYPE (CcInputOptions, cc_input_options, GTK_TYPE_DIALOG);
 
 static void
 update_shortcut_label (GtkWidget   *widget,
@@ -73,9 +68,8 @@ update_shortcut_label (GtkWidget   *widget,
 }
 
 static void
-update_shortcuts (GtkWidget *options)
+update_shortcuts (CcInputOptions *self)
 {
-        CcInputOptionsPrivate *priv = GET_PRIVATE (options);
         gchar **previous;
         gchar **next;
         gchar *previous_shortcut;
@@ -88,8 +82,8 @@ update_shortcuts (GtkWidget *options)
 
         previous_shortcut = g_strdup (previous[0]);
 
-        update_shortcut_label (priv->previous_source, previous_shortcut);
-        update_shortcut_label (priv->next_source, next[0]);
+        update_shortcut_label (self->previous_source, previous_shortcut);
+        update_shortcut_label (self->next_source, next[0]);
 
         g_free (previous_shortcut);
 
@@ -100,9 +94,8 @@ update_shortcuts (GtkWidget *options)
 }
 
 static void
-update_modifiers_shortcut (GtkWidget *dialog)
+update_modifiers_shortcut (CcInputOptions *self)
 {
-        CcInputOptionsPrivate *priv = GET_PRIVATE (dialog);
         gchar **options, **p;
         GSettings *settings;
         GnomeXkbInfo *xkb_info;
@@ -118,9 +111,9 @@ update_modifiers_shortcut (GtkWidget *dialog)
 
         if (p && *p) {
                 text = gnome_xkb_info_description_for_option (xkb_info, "grp", *p);
-                gtk_label_set_text (GTK_LABEL (priv->alt_next_source), text);
+                gtk_label_set_text (GTK_LABEL (self->alt_next_source), text);
         } else {
-                gtk_widget_hide (priv->alt_next_source);
+                gtk_widget_hide (self->alt_next_source);
         }
 
         g_strfreev (options);
@@ -128,57 +121,64 @@ update_modifiers_shortcut (GtkWidget *dialog)
         g_object_unref (xkb_info);
 }
 
-#define WID(name) ((GtkWidget *) gtk_builder_get_object (builder, name))
+static void
+cc_input_options_finalize (GObject *object)
+{
+        CcInputOptions *self = CC_INPUT_OPTIONS (object);
+
+        g_object_unref (self->settings);
+        G_OBJECT_CLASS (cc_input_options_parent_class)->finalize (object);
+}
+
+static void
+cc_input_options_init (CcInputOptions *self)
+{
+        gtk_widget_init_template (GTK_WIDGET (self));
+
+        g_object_bind_property (self->previous_source, "visible",
+                                self->previous_source_label, "visible",
+                                G_BINDING_DEFAULT);
+        g_object_bind_property (self->next_source, "visible",
+                                self->next_source_label, "visible",
+                                G_BINDING_DEFAULT);
+        g_object_bind_property (self->alt_next_source, "visible",
+                                self->alt_next_source_label, "visible",
+                                G_BINDING_DEFAULT);
+
+        self->settings = g_settings_new ("org.gnome.desktop.input-sources");
+        g_settings_bind (self->settings, "per-window",
+                         self->per_window_source, "active",
+                         G_SETTINGS_BIND_DEFAULT);
+        g_settings_bind (self->settings, "per-window",
+                         self->same_source, "active",
+                         G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+        update_shortcuts (self);
+        update_modifiers_shortcut (self);
+}
+
+static void
+cc_input_options_class_init (CcInputOptionsClass *klass)
+{
+        GObjectClass *object_klass = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_klass = GTK_WIDGET_CLASS (klass);
+
+        object_klass->finalize = cc_input_options_finalize;
+
+        gtk_widget_class_set_template_from_resource (widget_klass,
+                                                     "/org/gnome/control-center/region/input-options.ui");
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, same_source);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, per_window_source);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, previous_source);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, previous_source_label);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, next_source);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, next_source_label);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, alt_next_source);
+        gtk_widget_class_bind_template_child (widget_klass, CcInputOptions, alt_next_source_label);
+}
 
 GtkWidget *
 cc_input_options_new (GtkWidget *parent)
 {
-        GtkBuilder *builder;
-        GtkWidget *options;
-        CcInputOptionsPrivate *priv;
-        GError *error = NULL;
-
-        builder = gtk_builder_new ();
-        if (gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/input-options.ui", &error) == 0) {
-                g_object_unref (builder);
-                g_warning ("failed to load input options: %s", error->message);
-                g_error_free (error);
-                return NULL;
-        }
-
-        options = WID ("dialog");
-        priv = g_new0 (CcInputOptionsPrivate, 1);
-        g_object_set_data_full (G_OBJECT (options), "private", priv, cc_input_options_private_free);
-        g_object_set_data_full (G_OBJECT (options), "builder", builder, g_object_unref);
-
-        priv->same_source = WID ("same-source");
-        priv->per_window_source = WID ("per-window-source");
-        priv->previous_source = WID ("previous-source");
-        priv->next_source = WID ("next-source");
-        priv->alt_next_source = WID ("alt-next-source");
-
-        g_object_bind_property (priv->previous_source, "visible",
-                                WID ("previous-source-label"), "visible",
-                                G_BINDING_DEFAULT);
-        g_object_bind_property (priv->next_source, "visible",
-                                WID ("next-source-label"), "visible",
-                                G_BINDING_DEFAULT);
-        g_object_bind_property (priv->alt_next_source, "visible",
-                                WID ("alt-next-source-label"), "visible",
-                                G_BINDING_DEFAULT);
-
-        priv->settings = g_settings_new ("org.gnome.desktop.input-sources");
-        g_settings_bind (priv->settings, "per-window",
-                         priv->per_window_source, "active",
-                         G_SETTINGS_BIND_DEFAULT);
-        g_settings_bind (priv->settings, "per-window",
-                         priv->same_source, "active",
-                         G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-        update_shortcuts (options);
-        update_modifiers_shortcut (options);
-
-        gtk_window_set_transient_for (GTK_WINDOW (options), GTK_WINDOW (parent));
-
-        return options;
+        return g_object_new (CC_TYPE_INPUT_OPTIONS, "transient-for", parent, NULL);
 }

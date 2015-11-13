@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Red Hat, Inc
+ * Copyright (C) 2013, 2015 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -25,6 +25,9 @@
 #include <glib-object.h>
 
 G_BEGIN_DECLS
+
+#define CC_TYPE_INPUT_OPTIONS (cc_input_options_get_type ())
+G_DECLARE_FINAL_TYPE (CcInputOptions, cc_input_options, CC, INPUT_OPTIONS, GtkDialog)
 
 GtkWidget *cc_input_options_new (GtkWidget *parent);
 
