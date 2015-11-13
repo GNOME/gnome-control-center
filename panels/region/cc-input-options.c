@@ -27,7 +27,6 @@
 #include "cc-input-options.h"
 
 typedef struct {
-        GtkWidget *dialog;
         GtkWidget *same_source;
         GtkWidget *per_window_source;
         GtkWidget *previous_source;
