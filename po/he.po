@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-13 14:08+0200\n"
-"PO-Revision-Date: 2015-11-13 14:08+0200\n"
+"POT-Creation-Date: 2015-11-19 20:40+0200\n"
+"PO-Revision-Date: 2015-11-19 20:50+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -1076,7 +1076,7 @@ msgstr "ראשי"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
+#: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:269
@@ -3441,7 +3441,7 @@ msgid "_Type"
 msgstr "_סוג"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
+#: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:269
@@ -3612,11 +3612,11 @@ msgstr ""
 "הוספת חשבון מאפשרת ליישום שלך לגשת באמצעותו למסמכים, דוא״ל, אנשי קשר, יומן, "
 "תכנית הצ׳אט ועוד."
 
-#: ../panels/power/cc-power-panel.c:200
+#: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
 msgstr "זמן בלתי ידוע"
 
-#: ../panels/power/cc-power-panel.c:206
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -3624,7 +3624,7 @@ msgstr[0] "דקה"
 msgstr[1] "%i דקות"
 msgstr[2] "2 דקות"
 
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:271
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3634,19 +3634,19 @@ msgstr[2] "שעתיים"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:226
+#: ../panels/power/cc-power-panel.c:279
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:227
+#: ../panels/power/cc-power-panel.c:280
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
 msgstr[1] "שעות"
 msgstr[2] "שעתיים"
 
-#: ../panels/power/cc-power-panel.c:228
+#: ../panels/power/cc-power-panel.c:281
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "דקה"
@@ -3654,208 +3654,225 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:247
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s עד לטעינה מלאה"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:307
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "אזהרה: נותרו %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:259
+#: ../panels/power/cc-power-panel.c:312
 #, c-format
 msgid "%s remaining"
 msgstr "נותרו %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:317 ../panels/power/cc-power-panel.c:345
 msgid "Fully charged"
 msgstr "בטעינה מלאה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
+#: ../panels/power/cc-power-panel.c:321 ../panels/power/cc-power-panel.c:349
 msgid "Empty"
 msgstr "ריקה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:336
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:341
 msgid "Discharging"
 msgstr "בפריקה"
 
-#: ../panels/power/cc-power-panel.c:411
+#: ../panels/power/cc-power-panel.c:464
 msgctxt "Battery name"
 msgid "Main"
 msgstr "ראשי"
 
-#: ../panels/power/cc-power-panel.c:413
+#: ../panels/power/cc-power-panel.c:466
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "נוסף"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:484
+#: ../panels/power/cc-power-panel.c:537
 msgid "Wireless mouse"
 msgstr "עכבר אלחוטי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:487
+#: ../panels/power/cc-power-panel.c:540
 msgid "Wireless keyboard"
 msgstr "מקלדת אלחוטית"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:543
 msgid "Uninterruptible power supply"
 msgstr "אל־פסק"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:546
 msgid "Personal digital assistant"
 msgstr "עוזר דיגיטלי אישי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:496
+#: ../panels/power/cc-power-panel.c:549
 msgid "Cellphone"
 msgstr "טלפון סלולרי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:552
 msgid "Media player"
 msgstr "נגן מדיה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:555
 msgid "Tablet"
 msgstr "משטח"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:505
+#: ../panels/power/cc-power-panel.c:558
 msgid "Computer"
 msgstr "מחשב"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2109
+#: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
+#: ../panels/power/cc-power-panel.c:2252
 msgid "Battery"
 msgstr "סוללה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:615
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "אזהרה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:627
 msgctxt "Battery power"
 msgid "Low"
 msgstr "נמוך"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:632
 msgctxt "Battery power"
 msgid "Good"
 msgstr "טוב"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:637
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "בטעינה מלאה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:588
+#: ../panels/power/cc-power-panel.c:641
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ריקה"
 
-#: ../panels/power/cc-power-panel.c:746
+#: ../panels/power/cc-power-panel.c:799
 msgid "Batteries"
 msgstr "סוללות"
 
-#: ../panels/power/cc-power-panel.c:1171
+#: ../panels/power/cc-power-panel.c:1227
 msgid "When _idle"
 msgstr "ב_חוסר פעילות"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1640
 msgid "Power Saving"
 msgstr "חיסכון בחשמל"
 
-#: ../panels/power/cc-power-panel.c:1595
+#: ../panels/power/cc-power-panel.c:1675
 msgid "_Screen brightness"
 msgstr "בהירות המ_סך"
 
-#: ../panels/power/cc-power-panel.c:1614
+#: ../panels/power/cc-power-panel.c:1694
 msgid "Automatic brightness"
 msgstr "בהירות אוטומטית"
 
-#: ../panels/power/cc-power-panel.c:1634
+#: ../panels/power/cc-power-panel.c:1714
 msgid "_Keyboard brightness"
 msgstr "בהירות המ_סך"
 
-#: ../panels/power/cc-power-panel.c:1644
+#: ../panels/power/cc-power-panel.c:1724
 msgid "_Dim screen when inactive"
 msgstr "_עמעום המסך בחוסר פעילות"
 
-#: ../panels/power/cc-power-panel.c:1669
+#: ../panels/power/cc-power-panel.c:1749
 msgid "_Blank screen"
 msgstr "ה_חשכת המסך"
 
-#: ../panels/power/cc-power-panel.c:1706
+#: ../panels/power/cc-power-panel.c:1786
 msgid "_Wi-Fi"
 msgstr "רשת _אלחוטית"
 
-#: ../panels/power/cc-power-panel.c:1711
+#: ../panels/power/cc-power-panel.c:1791
 msgid "Turn off Wi-Fi to save power."
 msgstr "יש לכבות את הרשת האל־חוטי על מנת לשמור סוללה."
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1816
 msgid "_Mobile broadband"
 msgstr "רשת ס_לולרית"
 
-#: ../panels/power/cc-power-panel.c:1741
+#: ../panels/power/cc-power-panel.c:1821
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr "יש לכבות פס רחב נייד (3G, 4G, LTE וכו׳) על מנת לשמור סוללה."
 
-#: ../panels/power/cc-power-panel.c:1793
+#: ../panels/power/cc-power-panel.c:1873
 msgid "_Bluetooth"
 msgstr "(_ב)Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1849
+#: ../panels/power/cc-power-panel.c:1929
 msgid "When on battery power"
 msgstr "בעת הפעלה מהסוללה"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1931
 msgid "When plugged in"
 msgstr "כאשר מחובר לחשמל"
 
-#: ../panels/power/cc-power-panel.c:1968
-msgid "Suspend & Power Off"
-msgstr "השהיה וכיבוי"
+#: ../panels/power/cc-power-panel.c:2023
+msgid "Suspend"
+msgstr "השהיה"
 
-#: ../panels/power/cc-power-panel.c:2008
+#: ../panels/power/cc-power-panel.c:2024
+msgid "Hibernate"
+msgstr "מצב תרדמת"
+
+#: ../panels/power/cc-power-panel.c:2025
+msgid "Nothing"
+msgstr "לא לעשות דבר"
+
+#. Frame header
+#: ../panels/power/cc-power-panel.c:2074
+msgid "Suspend & Power Button"
+msgstr "השהיה וכפתור כיבוי"
+
+#: ../panels/power/cc-power-panel.c:2115
 msgid "_Automatic suspend"
 msgstr "ה_שהיה אוטומטית"
 
-#: ../panels/power/cc-power-panel.c:2009
+#: ../panels/power/cc-power-panel.c:2116
 msgid "Automatic suspend"
 msgstr "השהיה אוטומטית"
 
-#: ../panels/power/cc-power-panel.c:2163
+#: ../panels/power/cc-power-panel.c:2180
+msgid "_When the Power Button is pressed"
+msgstr "כאשר כפתור ה_כיבוי נלחץ"
+
+#: ../panels/power/cc-power-panel.c:2306
 msgid "Devices"
 msgstr "התקנים"
 
@@ -7179,9 +7196,6 @@ msgstr "העדפות;הגדרות;"
 #~ msgid "Power Off"
 #~ msgstr "כיבוי"
 
-#~ msgid "Hibernate"
-#~ msgstr "מצב תרדמת"
-
 #~ msgid "Power off"
 #~ msgstr "כיבוי"
 
@@ -8794,9 +8808,6 @@ msgstr "העדפות;הגדרות;"
 #~ msgid "Shutdown"
 #~ msgstr "כיבוי"
 
-#~ msgid "Suspend"
-#~ msgstr "השהיה"
-
 #~ msgid ""
 #~ "Only profiles that are compatible with the device will be listed above."
 #~ msgstr "רק פרופיל הנתמכים על ידי ההתקן יוצגו להלן."
@@ -8827,9 +8838,6 @@ msgstr "העדפות;הגדרות;"
 
 #~ msgid "When the _sleep button is pressed:"
 #~ msgstr "כאשר לחצן ה_שינה נלחץ:"
-
-#~ msgid "When the p_ower button is pressed:"
-#~ msgstr "כאשר לחצן ה_כיבוי נלחץ:"
 
 #~ msgid "_Turn off after:"
 #~ msgstr "_כיבוי לאחר:"
