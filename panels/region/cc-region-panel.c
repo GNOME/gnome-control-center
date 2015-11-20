@@ -166,7 +166,8 @@ cc_region_panel_finalize (GObject *object)
         g_free (priv->system_region);
 
         chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
-        gtk_widget_destroy (chooser);
+        if (chooser)
+                gtk_widget_destroy (chooser);
 
 	G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
