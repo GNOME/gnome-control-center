@@ -74,7 +74,7 @@ G_DEFINE_TYPE (CcMouseProperties, cc_mouse_properties, GTK_TYPE_BIN);
 static void
 setup_touchpad_options (CcMousePropertiesPrivate *d)
 {
-	GsdTouchpadScrollMethod method;
+	gboolean edge_scroll_enabled;
 	gboolean have_two_finger_scrolling;
 	gboolean have_edge_scrolling;
 	gboolean have_tap_to_click;
@@ -83,31 +83,11 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 
 	gtk_widget_show_all (WID ("touchpad-frame"));
 
-	gtk_widget_set_visible (WID ("two-finger-scrolling-row"), have_two_finger_scrolling);
 	gtk_widget_set_visible (WID ("edge-scrolling-row"), have_edge_scrolling && !have_two_finger_scrolling);
 	gtk_widget_set_visible (WID ("tap-to-click-row"), have_tap_to_click);
 
-	method = g_settings_get_enum (d->touchpad_settings, "scroll-method");
-	gtk_switch_set_active (GTK_SWITCH (WID ("two-finger-scrolling-switch")),
-			       method == GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING);
-
-	gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")),
-			       method == GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING);
-}
-
-static void
-two_finger_scrollmethod_changed_event (GtkSwitch *button,
-				       gboolean   state,
-				       gpointer   user_data)
-{
-	CcMousePropertiesPrivate *d = user_data;
-
-	if (d->changing_scroll)
-		return;
-
-	g_settings_set_enum (d->touchpad_settings, "scroll-method",
-			     state ? GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING : GSD_TOUCHPAD_SCROLL_METHOD_DISABLED);
-	gtk_switch_set_state (button, state);
+	edge_scroll_enabled = g_settings_get_boolean (d->touchpad_settings, "edge-scrolling-enabled");
+	gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")), edge_scroll_enabled);
 }
 
 static void
@@ -120,8 +100,7 @@ edge_scrolling_changed_event (GtkSwitch *button,
 	if (d->changing_scroll)
 		return;
 
-	g_settings_set_enum (d->touchpad_settings, "scroll-method",
-			     state ? GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING : GSD_TOUCHPAD_SCROLL_METHOD_DISABLED);
+	g_settings_set_boolean (d->touchpad_settings, "edge-scrolling-switch", state);
 	gtk_switch_set_state (button, state);
 }
 
@@ -262,9 +241,6 @@ setup_dialog (CcMousePropertiesPrivate *d)
 
 	if (d->have_touchpad)
 		setup_touchpad_options (d);
-
-	g_signal_connect (WID ("two-finger-scrolling-switch"), "state-set",
-			  G_CALLBACK (two_finger_scrollmethod_changed_event), d);
 
 	g_signal_connect (WID ("edge-scrolling-switch"), "state-set",
 			  G_CALLBACK (edge_scrolling_changed_event), d);
