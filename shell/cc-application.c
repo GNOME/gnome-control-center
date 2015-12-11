@@ -248,6 +248,7 @@ cc_application_startup (GApplication *application)
   menu = g_menu_new ();
 
   section = g_menu_new ();
+  g_menu_append (section, _("Keyboard Shortcuts"), "win.show-help-overlay");
   g_menu_append (section, _("Help"), "app.help");
   g_menu_append (section, _("Quit"), "app.quit");
 

@@ -109,10 +109,19 @@ completion_DATA = $(completion_in_files:.in=)
 completions/gnome-control-center: completions/gnome-control-center.in list-panel.sh
 	$(AM_V_GEN) mkdir -p `dirname $@` && cat $< | sed "s,@PANELS@,`$(srcdir)/list-panel.sh $(top_srcdir)`," > $@
 
+resource_files = $(shell glib-compile-resources --generate-dependencies --sourcedir=$(srcdir) gnome-control-center.gresource.xml)
+resources.c: gnome-control-center.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source $<
+
+BUILT_SOURCES = resources.c
+
 EXTRA_DIST =					\
 	gnome-control-center.desktop.in.in	\
 	$(servicefile_in_files)                 \
 	$(completion_in_files)			\
+	gnome-control-center.gresource.xml	\
+	help-overlay.ui				\
+	$(resource_files)			\
 	list-panel.sh
 
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
