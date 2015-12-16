@@ -308,7 +308,7 @@ cc_background_grilo_miner_class_init (CcBackgroundGriloMinerClass *klass)
   registry = grl_registry_get_default ();
 
   error = NULL;
-  if (!grl_registry_load_plugin_by_id (registry, "grl-flickr", &error))
+  if (!grl_registry_activate_plugin_by_id (registry, "grl-flickr", &error))
     {
       g_warning ("%s", error->message);
       g_error_free (error);
