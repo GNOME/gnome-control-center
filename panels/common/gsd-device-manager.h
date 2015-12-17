@@ -76,6 +76,8 @@ struct _GsdDeviceManagerClass
 				 GsdDevice	  *device);
 	void (* device_removed) (GsdDeviceManager *manager,
 				 GsdDevice	  *device);
+	void (* device_changed) (GsdDeviceManager *manager,
+				 GsdDevice	  *device);
 };
 
 GType		   gsd_device_get_type		      (void) G_GNUC_CONST;

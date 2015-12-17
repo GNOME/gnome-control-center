@@ -28,12 +28,6 @@ G_BEGIN_DECLS
 
 #define WACOM_SERIAL_IDS_PROP "Wacom Serial IDs"
 
-typedef enum {
-        COMMAND_DEVICE_ADDED,
-        COMMAND_DEVICE_REMOVED,
-        COMMAND_DEVICE_PRESENT
-} CustomCommand;
-
 /* Generic property setting code. Fill up the struct property with the property
  * data and pass it into device_set_property together with the device to be
  * changed.  Note: doesn't cater for non-zero offsets yet, but we don't have
@@ -50,32 +44,20 @@ typedef struct {
         } data;
 } PropertyHelper;
 
-gboolean  supports_xinput_devices  (void);
 gboolean  supports_xinput2_devices (int *opcode);
 gboolean  supports_xtest           (void);
 
 gboolean set_device_enabled       (int device_id,
                                    gboolean enabled);
 
-gboolean  set_synaptics_device_enabled (int device_id,
-                                        gboolean enabled);
-
-gboolean  xdevice_is_synaptics       (XDevice                *xdevice);
-
-gboolean  synaptics_is_present    (void);
 gboolean  touchpad_is_present     (void);
 gboolean  touchscreen_is_present  (void);
 gboolean  mouse_is_present        (void);
-gboolean  trackball_is_present    (void);
 
 gboolean  device_set_property     (XDevice                *xdevice,
                                    const char             *device_name,
                                    PropertyHelper         *property);
 
-gboolean  run_custom_command      (GdkDevice              *device,
-                                   CustomCommand           command);
-
-GList *   get_disabled_synaptics     (void);
 char *    xdevice_get_device_node  (int                     deviceid);
 int       xdevice_get_last_tool_id (int                     deviceid);
 gboolean  xdevice_get_dimensions   (int                     deviceid,
@@ -84,9 +66,6 @@ gboolean  xdevice_get_dimensions   (int                     deviceid,
 void      xdevice_close      (XDevice                *xdevice);
 
 const char * xdevice_get_wacom_tool_type (int               deviceid);
-
-gboolean  xdevice_is_libinput (gint deviceid);
-
 
 G_END_DECLS
 

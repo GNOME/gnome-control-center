@@ -55,6 +55,7 @@ enum {
 enum {
 	DEVICE_ADDED,
 	DEVICE_REMOVED,
+	DEVICE_CHANGED,
 	N_SIGNALS
 };
 
@@ -243,6 +244,15 @@ gsd_device_manager_class_init (GsdDeviceManagerClass *klass)
 			      GSD_TYPE_DEVICE_MANAGER,
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GsdDeviceManagerClass, device_removed),
+			      NULL, NULL, NULL,
+			      G_TYPE_NONE, 1,
+			      GSD_TYPE_DEVICE | G_SIGNAL_TYPE_STATIC_SCOPE);
+
+	signals[DEVICE_CHANGED] =
+		g_signal_new ("device-changed",
+			      GSD_TYPE_DEVICE_MANAGER,
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GsdDeviceManagerClass, device_changed),
 			      NULL, NULL, NULL,
 			      G_TYPE_NONE, 1,
 			      GSD_TYPE_DEVICE | G_SIGNAL_TYPE_STATIC_SCOPE);

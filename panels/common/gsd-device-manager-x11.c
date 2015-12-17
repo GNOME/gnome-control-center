@@ -112,7 +112,11 @@ add_device (GsdX11DeviceManager *manager,
 	/* Takes ownership of device_file */
 	g_hash_table_insert (manager->gdk_devices, gdk_device, device_file);
 
-	if (!g_hash_table_lookup (manager->devices, device_file)) {
+	device = g_hash_table_lookup (manager->devices, device_file);
+
+	if (device) {
+		g_signal_emit_by_name (manager, "device-changed", device);
+	} else {
 		device = create_device (gdk_device, device_file);
 		g_hash_table_insert (manager->devices, g_strdup (device_file), device);
 		g_signal_emit_by_name (manager, "device-added", device);
