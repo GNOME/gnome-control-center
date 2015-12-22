@@ -516,6 +516,8 @@ panel_set_device_widget_details (GtkBuilder *builder,
                 gtk_widget_show (heading);
                 gtk_widget_show (widget);
                 gtk_label_set_label (GTK_LABEL (widget), value);
+                gtk_label_set_max_width_chars (GTK_LABEL (widget), 50);
+                gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
         }
         return TRUE;
 }
