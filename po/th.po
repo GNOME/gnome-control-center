@@ -1,5 +1,5 @@
 # Thai gnome-control-center translation.
-# Copyright (C) 2003-2015 Free Software Foundation, Inc.
+# Copyright (C) 2003-2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 # Paisa Seeluangsawat <paisa@users.sf.net>, 2003, 2004.
 # Supakorn Siddhichai <supakorn.siddhichai@nectec.or.th>, 2004.
@@ -7,15 +7,15 @@
 # Surichat Sumrit <nook@opentle.org>, 2004.
 # Chanchai Junlouchai <taz@opentle.org>, 2004.
 # Theppitak Karoonboonyanan <thep@linux.thai.net>, 2004-2012.
-# Akom Chotiphantawanon <knight2000@gmail.com>, 2010-2011, 2013, 2015.
+# Akom Chotiphantawanon <knight2000@gmail.com>, 2010-2011, 2013, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-11-04 12:20+0000\n"
-"PO-Revision-Date: 2015-11-11 14:59+0700\n"
+"POT-Creation-Date: 2015-12-30 08:42+0000\n"
+"PO-Revision-Date: 2016-01-04 11:25+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -1077,7 +1077,7 @@ msgstr "จอหลัก"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
+#: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:269
@@ -1767,7 +1767,7 @@ msgstr "ตั้งความไวของเมาส์หรือทั
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "ทัชแพด;ตัวชี้;คลิก;แตะ;ดับเบิล;ปุ่ม;แทร็กบอล;เลื่อน;"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1 ../shell/help-overlay.ui.h:1
 msgid "General"
 msgstr "ทั่วไป"
 
@@ -1780,43 +1780,47 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "กำหนดลำดับของปุ่มจริงบนเมาส์และทัชแพด"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
+msgid "Left"
+msgstr "ซ้าย"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+msgid "Right"
+msgstr "ขวา"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Mouse"
 msgstr "เมาส์"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Mouse Speed"
 msgstr "ความเร็วเมาส์"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Double-click timeout"
 msgstr "ความเร็วของดับเบิลคลิก"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Natural Scrolling"
 msgstr "เลื่อนหน้าจอแบบธรรมชาติ"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Scrolling moves the content, not the view."
 msgstr "การเลื่อนจะเลื่อนเนื้อหา ไม่ใช่เลื่อนช่องมอง"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Touchpad"
 msgstr "ทัชแพด"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Touchpad Speed"
 msgstr "ความเร็วทัชแพด"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Tap to Click"
 msgstr "คลิกด้วยการแตะ"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-msgid "Two Finger Scrolling"
-msgstr "เลื่อนหน้าจอด้วยสองนิ้ว"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Edge Scrolling"
 msgstr "เลื่อนหน้าจอที่ขอบ"
 
@@ -2618,8 +2622,7 @@ msgid "History"
 msgstr "ประวัติ"
 
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "ปิ_ด"
@@ -3435,7 +3438,7 @@ msgid "_Type"
 msgstr "_ชนิด"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
+#: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:269
@@ -3606,17 +3609,17 @@ msgstr ""
 "การเพิ่มบัญชีจะช่วยให้โปรแกรมต่างๆ ของคุณสามารถเข้าถึงเอกสาร เมล ผู้ติดต่อ ปฏิทิน การสนทนา "
 "และอื่นๆ จากบัญชีนั้นๆ"
 
-#: ../panels/power/cc-power-panel.c:200
+#: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
 msgstr "ไม่ทราบเวลา"
 
-#: ../panels/power/cc-power-panel.c:206
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i นาที"
 
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:271
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3624,224 +3627,242 @@ msgstr[0] "%i ชั่วโมง"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:226
+#: ../panels/power/cc-power-panel.c:279
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:227
+#: ../panels/power/cc-power-panel.c:280
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ชั่วโมง"
 
-#: ../panels/power/cc-power-panel.c:228
+#: ../panels/power/cc-power-panel.c:281
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "นาที"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:247
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until fully charged"
 msgstr "อีก %s จะเต็ม"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:307
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "คำเตือน: อีก %s จะหมด"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:259
+#: ../panels/power/cc-power-panel.c:312
 #, c-format
 msgid "%s remaining"
 msgstr "อีก %s จะหมด"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:317 ../panels/power/cc-power-panel.c:345
 msgid "Fully charged"
 msgstr "ประจุไฟเต็มแล้ว"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
+#: ../panels/power/cc-power-panel.c:321 ../panels/power/cc-power-panel.c:349
 msgid "Empty"
 msgstr "ไม่มีประจุเหลืออยู่"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:336
 msgid "Charging"
 msgstr "กำลังประจุไฟ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:341
 msgid "Discharging"
 msgstr "กำลังจ่ายไฟ"
 
-#: ../panels/power/cc-power-panel.c:411
+#: ../panels/power/cc-power-panel.c:464
 msgctxt "Battery name"
 msgid "Main"
 msgstr "หลัก"
 
-#: ../panels/power/cc-power-panel.c:413
+#: ../panels/power/cc-power-panel.c:466
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "พิเศษ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:484
+#: ../panels/power/cc-power-panel.c:537
 msgid "Wireless mouse"
 msgstr "เมาส์ไร้สาย"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:487
+#: ../panels/power/cc-power-panel.c:540
 msgid "Wireless keyboard"
 msgstr "แป้นพิมพ์ไร้สาย"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:543
 msgid "Uninterruptible power supply"
 msgstr "อุปกรณ์จ่ายไฟสำรอง"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:546
 msgid "Personal digital assistant"
 msgstr "เครื่องช่วยงานส่วนบุคคลแบบดิจิทัล"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:496
+#: ../panels/power/cc-power-panel.c:549
 msgid "Cellphone"
 msgstr "โทรศัพท์เคลื่อนที่"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:552
 msgid "Media player"
 msgstr "เครื่องเล่นสื่อ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:555
 msgid "Tablet"
 msgstr "แท็บเล็ต"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:505
+#: ../panels/power/cc-power-panel.c:558
 msgid "Computer"
 msgstr "คอมพิวเตอร์"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2109
+#: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
+#: ../panels/power/cc-power-panel.c:2252
 msgid "Battery"
 msgstr "แบตเตอรี่"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:615
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "กำลังประจุไฟ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "ระวัง"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:627
 msgctxt "Battery power"
 msgid "Low"
 msgstr "ต่ำ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:632
 msgctxt "Battery power"
 msgid "Good"
 msgstr "ดี"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:637
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "ประจุไฟเต็มแล้ว"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:588
+#: ../panels/power/cc-power-panel.c:641
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ไม่มีประจุเหลืออยู่"
 
-#: ../panels/power/cc-power-panel.c:746
+#: ../panels/power/cc-power-panel.c:799
 msgid "Batteries"
 msgstr "แบตเตอรี่"
 
-#: ../panels/power/cc-power-panel.c:1171
+#: ../panels/power/cc-power-panel.c:1227
 msgid "When _idle"
 msgstr "เมื่อไ_ม่ใช้งาน"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1640
 msgid "Power Saving"
 msgstr "การประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1595
+#: ../panels/power/cc-power-panel.c:1675
 msgid "_Screen brightness"
 msgstr "ความสว่าง_หน้าจอ"
 
-#: ../panels/power/cc-power-panel.c:1614
+#: ../panels/power/cc-power-panel.c:1694
 msgid "Automatic brightness"
 msgstr "ความสว่างอัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:1634
+#: ../panels/power/cc-power-panel.c:1714
 msgid "_Keyboard brightness"
 msgstr "ความสว่างแ_ป้นพิมพ์"
 
-#: ../panels/power/cc-power-panel.c:1644
+#: ../panels/power/cc-power-panel.c:1724
 msgid "_Dim screen when inactive"
 msgstr "_หรี่หน้าจอเมื่อไม่มีการใช้งาน"
 
-#: ../panels/power/cc-power-panel.c:1669
+#: ../panels/power/cc-power-panel.c:1749
 msgid "_Blank screen"
 msgstr "หน้าจอ_ว่าง"
 
-#: ../panels/power/cc-power-panel.c:1706
+#: ../panels/power/cc-power-panel.c:1786
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1711
+#: ../panels/power/cc-power-panel.c:1791
 msgid "Turn off Wi-Fi to save power."
 msgstr "ปิด Wi-Fi เพื่อประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1816
 msgid "_Mobile broadband"
 msgstr "บรอดแบนด์_มือถือ"
 
-#: ../panels/power/cc-power-panel.c:1741
+#: ../panels/power/cc-power-panel.c:1821
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr "ปิดอุปกรณ์บรอดแบนด์มือถือ (3G, 4G, LTE ฯลฯ) เพื่อประหยัดพลังงาน"
 
-#: ../panels/power/cc-power-panel.c:1793
+#: ../panels/power/cc-power-panel.c:1873
 msgid "_Bluetooth"
 msgstr "_บลูทูท"
 
-#: ../panels/power/cc-power-panel.c:1849
+#: ../panels/power/cc-power-panel.c:1929
 msgid "When on battery power"
 msgstr "เมื่อใช้ไฟจากแบตเตอรี่"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1931
 msgid "When plugged in"
 msgstr "เมื่อเสียบปลั๊กไฟ"
 
-#: ../panels/power/cc-power-panel.c:1968
-msgid "Suspend & Power Off"
-msgstr "พักเครื่อง & ปิดเครื่อง"
+#: ../panels/power/cc-power-panel.c:2023
+msgid "Suspend"
+msgstr "พักเครื่อง"
 
-#: ../panels/power/cc-power-panel.c:2008
+#: ../panels/power/cc-power-panel.c:2024
+msgid "Hibernate"
+msgstr "จำศีลเครื่อง"
+
+# probably wrong spelling
+#: ../panels/power/cc-power-panel.c:2025
+msgid "Nothing"
+msgstr "ไม่ต้องทำอะไร"
+
+#. Frame header
+#: ../panels/power/cc-power-panel.c:2074
+msgid "Suspend & Power Button"
+msgstr "ปุ่มพัก & เปิด/ปิดเครื่อง"
+
+#: ../panels/power/cc-power-panel.c:2115
 msgid "_Automatic suspend"
 msgstr "พักเครื่องโดย_อัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:2009
+#: ../panels/power/cc-power-panel.c:2116
 msgid "Automatic suspend"
 msgstr "พักเครื่องโดยอัตโนมัติ"
 
-#: ../panels/power/cc-power-panel.c:2163
+#: ../panels/power/cc-power-panel.c:2180
+msgid "_When the Power Button is pressed"
+msgstr "เมื่อกดปุ่มเปิ_ด/ปิดเครื่อง"
+
+#: ../panels/power/cc-power-panel.c:2306
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -4770,21 +4791,21 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "อื่นๆ"
 
-#: ../panels/region/cc-region-panel.c:247
+#: ../panels/region/cc-region-panel.c:248
 #: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "คุณต้องตั้งต้นวาระใหม่เพื่อให้การเปลี่ยนแปลงมีผล"
 
-#: ../panels/region/cc-region-panel.c:251
+#: ../panels/region/cc-region-panel.c:252
 #: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Restart Now"
 msgstr "ตั้งต้นใหม่เดี๋ยวนี้"
 
-#: ../panels/region/cc-region-panel.c:877
+#: ../panels/region/cc-region-panel.c:878
 msgid "No input source selected"
 msgstr "ไม่ได้เลือกช่องทางป้อนข้อความใด"
 
-#: ../panels/region/cc-region-panel.c:1797
+#: ../panels/region/cc-region-panel.c:1798
 msgid "Login Screen"
 msgstr "หน้าจอเข้าระบบ"
 
@@ -4842,43 +4863,43 @@ msgstr "ไม่สามารถใช้วิธีป้อนข้อค
 msgid "Input Source Options"
 msgstr "ตัวเลือกของช่องทางป้อนข้อความ"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:2
 msgid "Use the _same source for all windows"
 msgstr "ใช้ช่องทางป้อนข้อความเ_ดียวกันหมดทุกหน้าต่าง"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "ใช้ช่องทางป้อนข้อความ_ต่างกันสำหรับแต่ละหน้าต่าง"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
 msgid "Keyboard Shortcuts"
 msgstr "ปุ่มลัด"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "สลับไปยังช่องทางก่อนหน้า"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:6
 msgid "Super+Shift+Space"
 msgstr "Super+Shift+Space"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:7
 msgid "Switch to next source"
 msgstr "สลับไปยังช่องทางถัดไป"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:8
 msgid "Super+Space"
 msgstr "Super+Space"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "คุณสามารถเปลี่ยนปุ่มลัดเหล่านี้ได้ในการตั้งค่าแป้นพิมพ์"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
 msgstr "ปุ่มลัดทางเลือกสำหรับสลับไปยังช่องทางถัดไป"
 
-#: ../panels/region/input-options.ui.h:12
+#: ../panels/region/input-options.ui.h:11
 msgid "Left+Right Alt"
 msgstr "Alt ซ้าย+ขวา"
 
@@ -4954,6 +4975,7 @@ msgid "No applications found"
 msgstr "ไม่พบโปรแกรม"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:1
+#: ../shell/help-overlay.ui.h:3
 msgid "Search"
 msgstr "ค้นหา"
 
@@ -7011,11 +7033,11 @@ msgstr "[แผงควบคุม] [อาร์กิวเมนต์…]"
 msgid "Available panels:"
 msgstr "แผงควบคุมที่มี"
 
-#: ../shell/cc-application.c:251
+#: ../shell/cc-application.c:252
 msgid "Help"
 msgstr "วิธีใช้"
 
-#: ../shell/cc-application.c:252
+#: ../shell/cc-application.c:253 ../shell/help-overlay.ui.h:2
 msgid "Quit"
 msgstr "ออก"
 
@@ -7042,6 +7064,21 @@ msgstr "ระบบ"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "ปรับแต่ง;ตั้งค่า;"
+
+#: ../shell/help-overlay.ui.h:4
+msgid "Panels"
+msgstr "พาเนล"
+
+#: ../shell/help-overlay.ui.h:5
+msgid "Go back to the overview"
+msgstr "ย้อนกลับไปยังภาพรวม"
+
+#: ../shell/help-overlay.ui.h:6
+msgid "Cancel search"
+msgstr "ยกเลิกการค้นหา"
+
+#~ msgid "Two Finger Scrolling"
+#~ msgstr "เลื่อนหน้าจอด้วยสองนิ้ว"
 
 #~ msgid "_Delay:"
 #~ msgstr "ร_อ:"
@@ -7156,9 +7193,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 
 #~ msgid "Power Off"
 #~ msgstr "ปิดเครื่อง"
-
-#~ msgid "Hibernate"
-#~ msgstr "จำศีลเครื่อง"
 
 #~ msgid "Power off"
 #~ msgstr "ปิดเครื่อง"
@@ -8387,9 +8421,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 #~ msgid "Shutdown"
 #~ msgstr "ปิดเครื่อง"
 
-#~ msgid "Suspend"
-#~ msgstr "พักเครื่อง"
-
 #~ msgid ""
 #~ "Only profiles that are compatible with the device will be listed above."
 #~ msgstr "จะแสดงเฉพาะโพรไฟล์ที่เข้ากันได้กับอุปกรณ์เท่านั้น"
@@ -8524,9 +8555,6 @@ msgstr "ปรับแต่ง;ตั้งค่า;"
 
 #~ msgid "Use previous window's layout in new windows"
 #~ msgstr "ใช้ผังแป้นพิมพ์ของหน้าต่างก่อนหน้าในหน้าต่างใหม่"
-
-#~ msgid "When the power button is pressed:"
-#~ msgstr "เมื่อกดปุ่มเปิด/ปิดเครื่อง:"
 
 #~ msgid "When the sleep button is pressed:"
 #~ msgstr "เมื่อกดปุ่มหลับเครื่อง:"
