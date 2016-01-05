@@ -22,6 +22,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
+#include "shell/list-box-helper.h"
 #include "cc-common-language.h"
 #include "cc-util.h"
 #include "cc-input-chooser.h"
@@ -305,30 +306,6 @@ set_fixed_size (GtkWidget *chooser)
 }
 
 static void
-update_header (GtkListBoxRow  *row,
-               GtkListBoxRow  *before,
-               gpointer    user_data)
-{
-  GtkWidget *current;
-
-  current = gtk_list_box_row_get_header (row);
-
-  if (before == NULL)
-    {
-      if (current)
-        gtk_list_box_row_set_header (row, NULL);
-      return;
-    }
-
-  if (current == NULL || !GTK_IS_SEPARATOR (current))
-    {
-      current = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (current);
-      gtk_list_box_row_set_header (row, current);
-    }
-}
-
-static void
 add_input_source_rows_for_locale (GtkWidget  *chooser,
                                   LocaleInfo *info)
 {
@@ -373,7 +350,7 @@ show_input_sources_for_locale (GtkWidget   *chooser,
 
   gtk_adjustment_set_value (priv->adjustment,
                             gtk_adjustment_get_lower (priv->adjustment));
-  gtk_list_box_set_header_func (GTK_LIST_BOX (priv->list), update_header, NULL, NULL);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (priv->list), cc_list_box_update_header_func, NULL, NULL);
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->list), GTK_SELECTION_SINGLE);
   gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (priv->list), FALSE);
@@ -430,7 +407,7 @@ show_locale_rows (GtkWidget *chooser)
 
   gtk_adjustment_set_value (priv->adjustment,
                             gtk_adjustment_get_lower (priv->adjustment));
-  gtk_list_box_set_header_func (GTK_LIST_BOX (priv->list), update_header, NULL, NULL);
+  gtk_list_box_set_header_func (GTK_LIST_BOX (priv->list), cc_list_box_update_header_func, NULL, NULL);
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->list));
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->list), GTK_SELECTION_NONE);
   gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (priv->list), TRUE);
