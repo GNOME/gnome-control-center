@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.19.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-15 19:46+0100\n"
-"PO-Revision-Date: 2015-11-15 19:55+0100\n"
+"POT-Creation-Date: 2016-01-07 22:58+0100\n"
+"PO-Revision-Date: 2016-01-07 22:58+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: Norwegian bokmål\n"
@@ -1777,7 +1777,7 @@ msgstr ""
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;Rull;"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1 ../shell/help-overlay.ui.h:1
 msgid "General"
 msgstr "Generelt"
 
@@ -1831,10 +1831,6 @@ msgid "Tap to Click"
 msgstr "Tapp for å klikke"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "Two Finger Scrolling"
-msgstr "Rulling med to fingre"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "Edge Scrolling"
 msgstr "Kantrulling"
 
@@ -2646,8 +2642,7 @@ msgid "History"
 msgstr "Historikk"
 
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Lukk"
@@ -4836,21 +4831,21 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "Annen"
 
-#: ../panels/region/cc-region-panel.c:247
+#: ../panels/region/cc-region-panel.c:248
 #: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Økten må startes på nytt for at endringene skal tre i kraft"
 
-#: ../panels/region/cc-region-panel.c:251
+#: ../panels/region/cc-region-panel.c:252
 #: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Restart Now"
 msgstr "Start på nytt nå"
 
-#: ../panels/region/cc-region-panel.c:877
+#: ../panels/region/cc-region-panel.c:878
 msgid "No input source selected"
 msgstr "Ingen inndatakilder valgt"
 
-#: ../panels/region/cc-region-panel.c:1797
+#: ../panels/region/cc-region-panel.c:1798
 msgid "Login Screen"
 msgstr "Påloggingsskjerm"
 
@@ -4908,43 +4903,43 @@ msgstr "Inndatametoder kan ikke brukes på påloggingsskjermen"
 msgid "Input Source Options"
 msgstr "Alternativer for inndatakilde"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:2
 msgid "Use the _same source for all windows"
 msgstr "Bruk _samme kilde for alle vinduer"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Tillat _forskjellige kilder for hvert vindu"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "Bytt til forrige kilde"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:6
 msgid "Super+Shift+Space"
 msgstr "Super+Shift+Mellomrom"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:7
 msgid "Switch to next source"
 msgstr "Bytt til neste kilde"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:8
 msgid "Super+Space"
 msgstr "Super+Mellomrom"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Du kan endre disse snarveiene i innstillinger for tastatur"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
 msgstr "Alternativ bytt til neste kilde"
 
-#: ../panels/region/input-options.ui.h:12
+#: ../panels/region/input-options.ui.h:11
 msgid "Left+Right Alt"
 msgstr "Venstre+høyre Alt"
 
@@ -5021,6 +5016,7 @@ msgid "No applications found"
 msgstr "Fant ingen programmer"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:1
+#: ../shell/help-overlay.ui.h:3
 msgid "Search"
 msgstr "Søk"
 
@@ -7101,11 +7097,11 @@ msgstr "[PANEL] [ARGUMENT …]"
 msgid "Available panels:"
 msgstr "Tilgjengelige paneler:"
 
-#: ../shell/cc-application.c:251
+#: ../shell/cc-application.c:252
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../shell/cc-application.c:252
+#: ../shell/cc-application.c:253 ../shell/help-overlay.ui.h:2
 msgid "Quit"
 msgstr "Avslutt"
 
@@ -7132,3 +7128,15 @@ msgstr "System"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Brukervalg;Innstillinger;"
+
+#: ../shell/help-overlay.ui.h:4
+msgid "Panels"
+msgstr "Paneler"
+
+#: ../shell/help-overlay.ui.h:5
+msgid "Go back to the overview"
+msgstr "Gå tilbake til oversikten"
+
+#: ../shell/help-overlay.ui.h:6
+msgid "Cancel search"
+msgstr "Avbryt søk"
