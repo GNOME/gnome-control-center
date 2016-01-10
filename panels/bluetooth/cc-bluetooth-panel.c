@@ -155,7 +155,8 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		sensitive = FALSE;
 		powered = FALSE;
 		page = BLUETOOTH_AIRPLANE_PAGE;
-	} else if (self->priv->bt_airplane_mode) {
+	} else if (self->priv->bt_airplane_mode ||
+		   !bluetooth_settings_widget_get_default_adapter_powered (BLUETOOTH_SETTINGS_WIDGET (self->priv->widget))) {
 		g_debug ("Default adapter is unpowered, but should be available");
 		sensitive = TRUE;
 		powered = FALSE;
