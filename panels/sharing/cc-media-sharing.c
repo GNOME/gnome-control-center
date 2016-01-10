@@ -109,6 +109,7 @@ cc_media_sharing_set_preferences (gchar    **folders)
   file = cc_media_sharing_open_key_file ();
 
   g_key_file_set_boolean (file, "general", "upnp-enabled", TRUE);
+  g_key_file_set_boolean (file, "Tracker", "enabled", FALSE);
   g_key_file_set_boolean (file, "MediaExport", "enabled", TRUE);
 
   str_list = folders;
