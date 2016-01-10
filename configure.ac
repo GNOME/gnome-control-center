@@ -221,7 +221,7 @@ fi
 AM_CONDITIONAL(HAVE_NM_UNSTABLE, [test x$nm_unstable = xyes])
 
 # Check for gnome-bluetooth
-PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.18.0,
+PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.18.2,
 		  [have_bluetooth=yes], have_bluetooth=no)
 if test "x$have_bluetooth" = xyes ; then
 	AC_DEFINE(BUILD_BLUETOOTH, 1, [Define to 1 to build the Bluetooth panel])
