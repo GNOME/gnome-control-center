@@ -47,37 +47,24 @@ pp_cups_new ()
   return g_object_new (PP_TYPE_CUPS, NULL);
 }
 
-typedef struct
-{
-  PpCupsDests *dests;
-} CGDData;
-
 static void
-_pp_cups_get_dests_thread (GSimpleAsyncResult *res,
-                           GObject            *object,
-                           GCancellable       *cancellable)
+pp_cups_dests_free (PpCupsDests *dests)
 {
-  CGDData *data;
-
-  data = g_simple_async_result_get_op_res_gpointer (res);
-
-  data->dests = g_new0 (PpCupsDests, 1);
-  data->dests->num_of_dests = cupsGetDests (&data->dests->dests);
+  cupsFreeDests (dests->num_of_dests, dests->dests);
 }
 
 static void
-cgd_data_free (CGDData *data)
+_pp_cups_get_dests_thread (GTask        *task,
+                           gpointer     *object,
+                           gpointer      task_data,
+                           GCancellable *cancellable)
 {
-  if (data)
-    {
-      if (data->dests)
-        {
-          cupsFreeDests (data->dests->num_of_dests, data->dests->dests);
-          g_free (data->dests);
-        }
+  PpCupsDests *dests;
 
-      g_free (data);
-    }
+  dests = g_new0 (PpCupsDests, 1);
+  dests->num_of_dests = cupsGetDests (&dests->dests);
+
+  g_task_return_pointer (task, dests, (GDestroyNotify) pp_cups_dests_free);
 }
 
 void
@@ -86,18 +73,11 @@ pp_cups_get_dests_async (PpCups              *cups,
                          GAsyncReadyCallback  callback,
                          gpointer             user_data)
 {
-  GSimpleAsyncResult *res;
-  CGDData            *data;
+  GTask       *task;
 
-  res = g_simple_async_result_new (G_OBJECT (cups), callback, user_data, pp_cups_get_dests_async);
-  data = g_new0 (CGDData, 1);
-  data->dests = NULL;
-
-  g_simple_async_result_set_check_cancellable (res, cancellable);
-  g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) cgd_data_free);
-  g_simple_async_result_run_in_thread (res, _pp_cups_get_dests_thread, 0, cancellable);
-
-  g_object_unref (res);
+  task = g_task_new (cups, cancellable, callback, user_data);
+  g_task_run_in_thread (task, (GTaskThreadFunc) _pp_cups_get_dests_thread);
+  g_object_unref (task);
 }
 
 PpCupsDests *
@@ -105,20 +85,7 @@ pp_cups_get_dests_finish (PpCups        *cups,
                           GAsyncResult  *res,
                           GError       **error)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
-  PpCupsDests        *result = NULL;
-  CGDData            *data;
+  g_return_val_if_fail (g_task_is_valid (res, cups), NULL);
 
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == pp_cups_get_dests_async);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    {
-      return NULL;
-    }
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-  result = data->dests;
-  data->dests = NULL;
-
-  return result;
+  return g_task_propagate_pointer (G_TASK (res), error);
 }
