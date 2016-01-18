@@ -1428,7 +1428,8 @@ gsd_wacom_device_constructor (GType                     type,
 												n_construct_properties,
 												construct_properties));
 
-	if (device->priv->gdk_device == NULL)
+	if (device->priv->gdk_device == NULL ||
+	    !GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 		return G_OBJECT (device);
 
 	device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
