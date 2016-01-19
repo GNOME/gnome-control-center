@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-15 08:40+0000\n"
-"PO-Revision-Date: 2016-01-15 12:55+0300\n"
+"POT-Creation-Date: 2016-01-19 08:43+0000\n"
+"PO-Revision-Date: 2016-01-19 22:33+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -36,9 +36,9 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../panels/background/background.ui.h:1
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Фон"
+#| msgid "Background"
+msgid "_Background"
+msgstr "_Фон"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -47,8 +47,9 @@ msgstr "Меняется в течение дня"
 
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-msgid "Lock Screen"
-msgstr "Экран блокировки"
+#| msgid "Lock Screen"
+msgid "_Lock Screen"
+msgstr "_Экран блокировки"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -119,7 +120,8 @@ msgstr "Можно добавить изображения в папку %s и �
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:29
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -137,6 +139,7 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1476
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
@@ -146,10 +149,9 @@ msgid "_Cancel"
 msgstr "_Отменить"
 
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/um-photo-dialog.c:96
-msgid "Select"
-msgstr "Выбрать"
+#| msgid "Select"
+msgid "_Select"
+msgstr "_Выбрать"
 
 #: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
@@ -169,6 +171,10 @@ msgstr "Без фона рабочего стола"
 #: ../panels/background/cc-background-panel.c:493
 msgid "Current background"
 msgstr "Текущий фон"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Фон"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -545,27 +551,24 @@ msgstr "Возможно этот профиль уже неточный"
 msgid "Display Calibration"
 msgstr "Калибровка экрана"
 
-#: ../panels/color/color-calibrate.ui.h:2
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1476
-msgid "Cancel"
-msgstr "Отменить"
-
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-msgid "Start"
-msgstr "Начать"
+#| msgid "Start"
+msgid "_Start"
+msgstr "_Начать"
 
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-msgid "Resume"
-msgstr "Продолжить"
+#| msgid "Resume"
+msgid "_Resume"
+msgstr "_Продолжить"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-msgid "Done"
-msgstr "Готово"
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Готово"
 
 #. Timeout parameters
 #. 15000 = 15 sec
@@ -705,8 +708,9 @@ msgid "Summary"
 msgstr "Краткая информация"
 
 #: ../panels/color/color.ui.h:28
-msgid "Import File…"
-msgstr "Импортировать файл…"
+#| msgid "Import File…"
+msgid "_Import File…"
+msgstr "_Импортировать файл…"
 
 #: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:512
@@ -739,36 +743,42 @@ msgid "Learn more about color management"
 msgstr "Узнать больше об управлении цветом"
 
 #: ../panels/color/color.ui.h:35
-msgid "Set for all users"
-msgstr "Установить для всех пользователей"
+#| msgid "Set for all users"
+msgid "_Set for all users"
+msgstr "_Установить для всех пользователей"
 
 #: ../panels/color/color.ui.h:36
 msgid "Set this profile for all users on this computer"
 msgstr "Установить этот профиль для всех пользователей этого компьютера"
 
 #: ../panels/color/color.ui.h:37
-msgid "Enable"
-msgstr "Включить"
+#| msgid "Enable"
+msgid "_Enable"
+msgstr "_Включить"
 
 #: ../panels/color/color.ui.h:38
-msgid "Add profile"
-msgstr "Добавить профиль"
+#| msgid "Add profile"
+msgid "_Add profile"
+msgstr "_Добавить профиль"
 
-#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "Calibrate…"
-msgstr "Калибровать…"
+#: ../panels/color/color.ui.h:39
+#| msgid "Calibrate…"
+msgid "_Calibrate…"
+msgstr "_Калибровать…"
 
 #: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
 msgstr "Калибровать устройство"
 
 #: ../panels/color/color.ui.h:41
-msgid "Remove profile"
-msgstr "Удалить профиль"
+#| msgid "Remove profile"
+msgid "_Remove profile"
+msgstr "У_далить профиль"
 
 #: ../panels/color/color.ui.h:42
-msgid "View details"
-msgstr "Подробности"
+#| msgid "View details"
+msgid "_View details"
+msgstr "П_одробности"
 
 #: ../panels/color/color.ui.h:43
 msgid "Unable to detect any devices that can be color managed"
@@ -893,14 +903,9 @@ msgstr "Ещё…"
 msgid "No languages found"
 msgstr "Ни один язык не найден"
 
-#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+#: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Язык"
-
-#: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
-msgid "_Done"
-msgstr "_Готово"
 
 #: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
 #: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
@@ -1059,8 +1064,9 @@ msgid "Date & _Time"
 msgstr "Дата и _время"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "Time _Zone"
-msgstr "Часовой _пояс"
+#| msgid "Time Zone"
+msgid "Time Z_one"
+msgstr "_Часовой пояс"
 
 #: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
@@ -1806,7 +1812,6 @@ msgid "General"
 msgstr "Общие"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#| msgid "Primary _button"
 msgid "Primary Button"
 msgstr "Основная кнопка"
 
@@ -1815,14 +1820,10 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Устанавливает порядок физических кнопок на мышке и сенсорной панели."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#| msgctxt "balance"
-#| msgid "Left"
 msgid "Left"
 msgstr "Левая"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#| msgctxt "balance"
-#| msgid "Right"
 msgid "Right"
 msgstr "Правая"
 
@@ -1831,7 +1832,6 @@ msgid "Mouse"
 msgstr "Мышь"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:7
-#| msgid "_Mouse Keys"
 msgid "Mouse Speed"
 msgstr "Скорость указателя мыши"
 
@@ -1841,12 +1841,10 @@ msgstr "Задержка двойного щелчка"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-#| msgid "_Natural scrolling"
 msgid "Natural Scrolling"
 msgstr "Естественная прокрутка"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#| msgid "This will not remove the account on the server."
 msgid "Scrolling moves the content, not the view."
 msgstr ""
 "Сенсорная панель перемещает содержимое, как на сенсором экране смартфона, по "
@@ -1857,17 +1855,14 @@ msgid "Touchpad"
 msgstr "Сенсорная панель"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#| msgid "Touchpad"
 msgid "Touchpad Speed"
 msgstr "Скорость указателя сенсорной панели"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#| msgid "Tap to _click"
 msgid "Tap to Click"
 msgstr "Нажатие касанием"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#| msgid "Scroll Right"
 msgid "Edge Scrolling"
 msgstr "Участки прокрутки по краям"
 
@@ -2223,7 +2218,7 @@ msgstr "Скорость передачи данных"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:157
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:695
 msgid "IPv4 Address"
 msgstr "Адрес IPv4"
 
@@ -2232,7 +2227,7 @@ msgstr "Адрес IPv4"
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:696
 msgid "IPv6 Address"
 msgstr "Адрес IPv6"
 
@@ -2593,8 +2588,8 @@ msgid "yesterday"
 msgstr "вчера"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:696
-#: ../panels/network/panel-common.c:698 ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:698
+#: ../panels/network/panel-common.c:700 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Адрес IP"
 
@@ -2684,11 +2679,12 @@ msgstr ""
 "настройки, будут утеряны."
 
 #: ../panels/network/net-device-wifi.c:1774
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "История"
 
 #: ../panels/network/net-device-wifi.c:1778
+#: ../panels/printers/jobs-dialog.ui.h:3
+#: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
@@ -2837,6 +2833,7 @@ msgstr "подробности"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/sharing/sharing.ui.h:11
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -2939,6 +2936,7 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Подключиться к скрытой сети…"
 
 #: ../panels/network/network-wifi.ui.h:58
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "_History"
 msgstr "_История"
 
@@ -2960,7 +2958,6 @@ msgstr "Тип безопасности"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Пароль"
@@ -3524,36 +3521,48 @@ msgstr "Включено"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
+#| msgctxt "notifications"
+#| msgid "Notifications"
 msgctxt "notifications"
-msgid "Notifications"
-msgstr "Уведомления"
+msgid "_Notifications"
+msgstr "У_ведомления"
 
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
+#| msgctxt "notifications"
+#| msgid "Sound Alerts"
 msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Звуковые уведомления"
+msgid "Sound _Alerts"
+msgstr "_Звуковые уведомления"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "Notification Banners"
 msgctxt "notifications"
-msgid "Notification Banners"
-msgstr "Всплывающие уведомления"
+msgid "Notification _Banners"
+msgstr "В_сплывающие уведомления"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
+#| msgctxt "notifications"
+#| msgid "Show Message Content in Banners"
 msgctxt "notifications"
-msgid "Show Message Content in Banners"
-msgstr "Показывать подробности в всплывающих уведомлениях"
+msgid "Show Message _Content in Banners"
+msgstr "По_казывать подробности в всплывающих уведомлениях"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Lock Screen Notifications"
 msgctxt "notifications"
-msgid "Lock Screen Notifications"
-msgstr "Уведомления на экране блокировки"
+msgid "_Lock Screen Notifications"
+msgstr "Уведомления на _экране блокировки"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
+#| msgctxt "notifications"
+#| msgid "Show Message Content on Lock Screen"
 msgctxt "notifications"
-msgid "Show Message Content on Lock Screen"
-msgstr "Показывать подробности уведомлений на заблокированном экране"
+msgid "Show Message C_ontent on Lock Screen"
+msgstr "Показывать _подробности уведомлений на заблокированном экране"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3569,12 +3578,14 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Уведомления;Всплывающее;Сообщение;Лоток;Всплывающее;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification Banners"
-msgstr "Всплывающее уведомление"
+#| msgid "Notification Banners"
+msgid "Notification _Banners"
+msgstr "Всп_лывающее уведомление"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Lock Screen Notifications"
-msgstr "Уведомления на экране блокировки"
+#| msgid "Lock Screen Notifications"
+msgid "_Lock Screen Notifications"
+msgstr "Уведомления на экране _блокировки"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
@@ -3925,13 +3936,11 @@ msgid "Hibernate"
 msgstr "Перевести в режим гибернации"
 
 #: ../panels/power/cc-power-panel.c:2025
-#| msgid "Do nothing"
 msgid "Nothing"
 msgstr "Ничего не делать"
 
 #. Frame header
 #: ../panels/power/cc-power-panel.c:2074
-#| msgid "Suspend & Power Off"
 msgid "Suspend & Power Button"
 msgstr "Режим ожидания и кнопка выключения"
 
@@ -4052,6 +4061,11 @@ msgstr "При работе от _батареи"
 #: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "Задержка"
+
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Отменить"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4241,7 +4255,6 @@ msgid "Test page"
 msgstr "Пробная страница"
 
 #: ../panels/printers/cc-printers-panel.c:2632
-#| msgid "Printers"
 msgid "No printers"
 msgstr "Принтеров нет"
 
@@ -4268,11 +4281,6 @@ msgstr "Принтер;Очередь;Печать;Бумага;Чернила;�
 #: ../panels/printers/jobs-dialog.ui.h:2
 msgid "Active Jobs"
 msgstr "Текущие задания"
-
-#: ../panels/printers/jobs-dialog.ui.h:3
-#: ../panels/printers/options-dialog.ui.h:2
-msgid "Close"
-msgstr "Закрыть"
 
 #: ../panels/printers/jobs-dialog.ui.h:4
 msgid "Resume Printing"
@@ -4312,6 +4320,11 @@ msgstr "Загрузка параметров…"
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
 msgstr "Выберите драйвер принтера"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/um-photo-dialog.c:96
+msgid "Select"
+msgstr "Выбрать"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -4649,13 +4662,12 @@ msgid "Print _Test Page"
 msgstr "Печать п_робной страницы"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
 msgid "_Options"
 msgstr "_Параметры"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-#| msgid "Add Printer"
 msgid "Add a Printer"
 msgstr "Добавить принтер"
 
@@ -4915,15 +4927,16 @@ msgstr "Необходимо перезапустить сеанс, чтобы �
 msgid "Restart Now"
 msgstr "Перезапустить сейчас"
 
-#: ../panels/region/cc-region-panel.c:878
+#: ../panels/region/cc-region-panel.c:886
 msgid "No input source selected"
 msgstr "Не выбран источник ввода"
 
-#: ../panels/region/cc-region-panel.c:1798
-msgid "Login Screen"
-msgstr "Экран входа"
+#: ../panels/region/cc-region-panel.c:1804
+#| msgid "Login Screen"
+msgid "Login _Screen"
+msgstr "_Экран входа"
 
-#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+#: ../panels/region/format-chooser.ui.h:1
 msgid "Formats"
 msgstr "Форматы"
 
@@ -5018,9 +5031,19 @@ msgstr "Альтернативный переключатель источник
 msgid "Left+Right Alt"
 msgstr "Левый+Правый Alt"
 
+#: ../panels/region/region.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Язык"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Английский (Великобритания)"
+
+#: ../panels/region/region.ui.h:3
+#| msgid "Formats"
+msgid "_Formats"
+msgstr "_Форматы"
 
 #: ../panels/region/region.ui.h:4
 msgid "United Kingdom"
@@ -5029,10 +5052,6 @@ msgstr "Великобритания"
 #: ../panels/region/region.ui.h:5
 msgid "Input Sources"
 msgstr "Источники ввода"
-
-#: ../panels/region/region.ui.h:6
-msgid "Options"
-msgstr "Параметры"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
@@ -5190,30 +5209,39 @@ msgid "Networks"
 msgstr "Сети"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Computer Name"
-msgstr "Имя компьютера"
+#| msgid "Computer Name"
+msgid "_Computer Name"
+msgstr "Имя _компьютера"
 
 #: ../panels/sharing/sharing.ui.h:2
-msgid "Personal File Sharing"
-msgstr "Общий доступ к файлам"
+#| msgid "Personal File Sharing"
+msgid "_Personal File Sharing"
+msgstr "Общий доступ к _файлам"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Screen Sharing"
-msgstr "Общий доступ к экрану"
+#| msgid "Screen Sharing"
+msgid "_Screen Sharing"
+msgstr "Общий доступ к _экрану"
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Media Sharing"
-msgstr "Общий доступ к мультимедиа"
+#| msgid "Media Sharing"
+msgid "_Media Sharing"
+msgstr "Общий доступ к _мультимедиа"
 
 #: ../panels/sharing/sharing.ui.h:5
-msgid "Remote Login"
-msgstr "Удалённая авторизация"
+#| msgid "Remote Login"
+msgid "_Remote Login"
+msgstr "_Удалённая авторизация"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Некоторые службы отключены из-за отсутствия доступа к сети."
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:7
+msgid "Personal File Sharing"
+msgstr "Общий доступ к файлам"
+
+#: ../panels/sharing/sharing.ui.h:9
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5222,11 +5250,16 @@ msgstr ""
 "Общий доступ к файлам позволяет открыть доступ к папкам для других "
 "пользователей сети с помощью: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:9
-msgid "Require Password"
-msgstr "Требовать пароль"
+#: ../panels/sharing/sharing.ui.h:10
+#| msgid "Require Password"
+msgid "_Require Password"
+msgstr "_Требовать пароль"
 
 #: ../panels/sharing/sharing.ui.h:12
+msgid "Remote Login"
+msgstr "Удалённая авторизация"
+
+#: ../panels/sharing/sharing.ui.h:14
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5235,7 +5268,11 @@ msgstr ""
 "Позволить удалённым пользователям подключаться, используя команду SSH:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
+msgid "Screen Sharing"
+msgstr "Общий доступ к экрану"
+
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5244,38 +5281,47 @@ msgstr ""
 "Разрешить удалённым пользователям просматривать и управлять вашим экраном, "
 "подключившись к: <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:16
-msgid "Allow Remote Control"
-msgstr "Разрешить удалённое управление"
-
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Password:"
-msgstr "Пароль:"
-
-#: ../panels/sharing/sharing.ui.h:18
-msgid "Show Password"
-msgstr "Показать пароль"
-
 #: ../panels/sharing/sharing.ui.h:19
+#| msgid "Allow Remote Control"
+msgid "_Allow Remote Control"
+msgstr "_Разрешить удалённое управление"
+
+#: ../panels/sharing/sharing.ui.h:20
+#| msgid "_Password"
+msgid "_Password:"
+msgstr "_Пароль:"
+
+#: ../panels/sharing/sharing.ui.h:21
+#| msgid "Show Password"
+msgid "_Show Password"
+msgstr "П_оказать пароль"
+
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Access Options"
 msgstr "Параметры доступа"
 
-#: ../panels/sharing/sharing.ui.h:20
-msgid "New connections must ask for access"
-msgstr "Новые подключения должны запрашивать доступ"
+#: ../panels/sharing/sharing.ui.h:23
+#| msgid "New connections must ask for access"
+msgid "_New connections must ask for access"
+msgstr "_Новые подключения должны запрашивать доступ"
 
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Require a password"
-msgstr "Требовать пароль"
+#: ../panels/sharing/sharing.ui.h:24
+#| msgid "Require a password"
+msgid "_Require a password"
+msgstr "_Требовать пароль"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:25
+msgid "Media Sharing"
+msgstr "Общий доступ к мультимедиа"
+
+#: ../panels/sharing/sharing.ui.h:26
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Общий доступ к мультимедиа позволяет открыть доступ к музыке, фото и видео "
 "по сети."
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
 msgstr "Папки"
 
@@ -5542,6 +5588,7 @@ msgid "_Large Text"
 msgstr "_Крупный текст"
 
 #: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Масштабирование"
 
@@ -5566,11 +5613,13 @@ msgid "Screen _Keyboard"
 msgstr "_Экранная клавиатура"
 
 #: ../panels/universal-access/uap.ui.h:13
-msgid "_Repeat Keys"
-msgstr "_Повтор клавиш"
+#| msgid "Repeat Keys"
+msgid "R_epeat Keys"
+msgstr "_Автоповтор клавиш"
 
 #: ../panels/universal-access/uap.ui.h:14
-msgid "_Cursor Blinking"
+#| msgid "Cursor Blinking"
+msgid "Cursor _Blinking"
 msgstr "_Мигание курсора"
 
 #: ../panels/universal-access/uap.ui.h:15
@@ -5641,19 +5690,17 @@ msgstr "Мигать всем _экраном"
 
 #: ../panels/universal-access/uap.ui.h:31
 msgid "Repeat Keys"
-msgstr "Автоповтор"
+msgstr "Автоповтор клавиш"
 
 #: ../panels/universal-access/uap.ui.h:32
 msgid "Key presses repeat when key is held down."
 msgstr "Повторять нажатую удерживаемую клавишу."
 
 #: ../panels/universal-access/uap.ui.h:34
-#| msgid "Repeat keys speed"
 msgid "Repeat keys delay"
 msgstr "Задержка повтора клавиш"
 
 #: ../panels/universal-access/uap.ui.h:35
-#| msgid "_Speed:"
 msgid "Speed"
 msgstr "Скорость"
 
@@ -5872,37 +5919,40 @@ msgstr "Правая половина"
 msgid "Zoom Options"
 msgstr "Параметры масштабирования"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Zoom"
-msgstr "Масштабирование"
-
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Magnification:"
-msgstr "Увеличение:"
+#| msgid "Magnification:"
+msgid "_Magnification:"
+msgstr "_Увеличение:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Follow mouse cursor"
-msgstr "Следовать за курсором мыши"
+#| msgid "Follow mouse cursor"
+msgid "_Follow mouse cursor"
+msgstr "_Следовать за курсором мыши"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Screen part:"
-msgstr "Часть экрана:"
+#| msgid "Screen part:"
+msgid "_Screen part:"
+msgstr "_Часть экрана:"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Magnifier extends outside of screen"
-msgstr "Область увеличения выходит за пределы экрана"
+#| msgid "Magnifier extends outside of screen"
+msgid "Magnifier _extends outside of screen"
+msgstr "Область увеличения выходит за пределы _экрана"
 
 #: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Keep magnifier cursor centered"
-msgstr "Курсор увеличителя находится по центру"
+#| msgid "Keep magnifier cursor centered"
+msgid "_Keep magnifier cursor centered"
+msgstr "Курсор увеличителя находится по _центру"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Magnifier cursor pushes contents around"
-msgstr "Курсор увеличения перемещается по области увеличения"
+#| msgid "Magnifier cursor pushes contents around"
+msgid "Magnifier cursor _pushes contents around"
+msgstr "Курсор увеличения перемещается по _области увеличения"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnifier cursor moves with contents"
-msgstr "Курсор увеличителя перемещается с содержимым"
+#| msgid "Magnifier cursor moves with contents"
+msgid "Magnifier cursor moves with _contents"
+msgstr "Курсор увеличителя перемещается с _содержимым"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
@@ -5913,8 +5963,9 @@ msgid "Magnifier"
 msgstr "Увеличитель"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Thickness:"
-msgstr "Толщина:"
+#| msgid "Thickness:"
+msgid "_Thickness:"
+msgstr "_Толщина:"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgctxt "universal access, thickness"
@@ -5927,43 +5978,50 @@ msgid "Thick"
 msgstr "Толще"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Length:"
-msgstr "Длина:"
+#| msgid "Length:"
+msgid "_Length:"
+msgstr "_Длина:"
 
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Color:"
-msgstr "Цвет:"
+#| msgid "Color:"
+msgid "Co_lor:"
+msgstr "_Цвет:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Crosshairs:"
-msgstr "Перекрестие:"
+#| msgid "Crosshairs:"
+msgid "_Crosshairs:"
+msgstr "_Перекрестие:"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Overlaps mouse cursor"
-msgstr "Перекрывать курсор мыши"
+#| msgid "Overlaps mouse cursor"
+msgid "_Overlaps mouse cursor"
+msgstr "П_ерекрывать курсор мыши"
 
 #: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Перекрестие"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-msgid "White on black:"
-msgstr "Белый на чёрном:"
+#| msgid "White on black:"
+msgid "_White on black:"
+msgstr "_Белый на чёрном:"
 
 #: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Brightness:"
-msgstr "Яркость:"
+#| msgid "Brightness:"
+msgid "_Brightness:"
+msgstr "_Яркость:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Contrast:"
-msgstr "Контрастность:"
+#| msgid "Contrast:"
+msgid "_Contrast:"
+msgstr "_Контрастность:"
 
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
-msgid "Color"
-msgstr "Цвет"
+msgid "Co_lor"
+msgstr "_Цвет"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
@@ -6027,14 +6085,15 @@ msgid "Account _Type"
 msgstr "_Тип учётной записи"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Allow user to set a password when they next login"
-msgstr "Разрешить пользователю установить пароль при следующем входе с систему"
+#| msgid "Allow user to set a password when they next login"
+msgid "Allow user to set a password when they next _login"
+msgstr ""
+"_Разрешить пользователю установить пароль при следующем входе с систему"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Set a password now"
-msgstr "Установите пароль сейчас"
+#| msgid "Set a password now"
+msgid "Set a password _now"
+msgstr "_Установите пароль сейчас"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Verify"
@@ -6190,6 +6249,14 @@ msgstr "_Новый пароль"
 msgid "Current _Password"
 msgstr "Текущий па_роль"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Разрешить пользователю установить пароль при следующем входе с систему"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Set a password now"
+msgstr "Установите пароль сейчас"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
 msgstr "Добавить учётную запись пользователя"
@@ -6213,10 +6280,6 @@ msgstr "_Вход по отпечатку"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "Значок пользователя"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "_Language"
-msgstr "_Язык"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Last Login"
@@ -6969,6 +7032,10 @@ msgstr "Отображение на экран…"
 msgid "Map Buttons…"
 msgstr "Отображение кнопок…"
 
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Calibrate…"
+msgstr "Калибровать…"
+
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Настроить разрешение экрана"
@@ -7229,12 +7296,37 @@ msgid "Panels"
 msgstr "Панели"
 
 #: ../shell/help-overlay.ui.h:5
-#| msgid "Show the overview"
 msgid "Go back to the overview"
 msgstr "Вернуться в режим обзора"
 
 #: ../shell/help-overlay.ui.h:6
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgid "Cancel search"
 msgstr "Отменить поиск"
+
+#~ msgid "Done"
+#~ msgstr "Готово"
+
+#~ msgid "Time _Zone"
+#~ msgstr "Часовой _пояс"
+
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#~ msgid "Options"
+#~ msgstr "Параметры"
+
+#~ msgid "Password:"
+#~ msgstr "Пароль:"
+
+#~ msgid "_Repeat Keys"
+#~ msgstr "_Повтор клавиш"
+
+#~ msgid "_Cursor Blinking"
+#~ msgstr "_Мигание курсора"
+
+#~ msgid "Zoom"
+#~ msgstr "Масштабирование"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Color"
+#~ msgstr "Цвет"
