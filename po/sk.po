@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-11 08:39+0000\n"
-"PO-Revision-Date: 2016-01-11 14:30+0100\n"
+"POT-Creation-Date: 2016-01-20 08:42+0000\n"
+"PO-Revision-Date: 2016-01-20 13:09+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -27,9 +27,8 @@ msgstr ""
 
 # desktop entry name
 #: ../panels/background/background.ui.h:1
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Pozadie"
+msgid "_Background"
+msgstr "_Pozadie"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -39,8 +38,8 @@ msgstr "Mení sa počas dňa"
 # KeyListEntry description
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-msgid "Lock Screen"
-msgstr "Uzamknutá obrazovka"
+msgid "_Lock Screen"
+msgstr "_Uzamknutá obrazovka"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -116,7 +115,8 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 # GtkButton label
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:29
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -134,6 +134,7 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1476
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
@@ -144,10 +145,8 @@ msgstr "_Zrušiť"
 
 # tlačidlo
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/um-photo-dialog.c:96
-msgid "Select"
-msgstr "Vybrať"
+msgid "_Select"
+msgstr "_Vybrať"
 
 #: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
@@ -167,6 +166,11 @@ msgstr "Bez pozadia plochy"
 #: ../panels/background/cc-background-panel.c:493
 msgid "Current background"
 msgstr "Aktuálne pozadie"
+
+# desktop entry name
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Pozadie"
 
 # desktop entry comment
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
@@ -565,30 +569,24 @@ msgid "Display Calibration"
 msgstr "Kalibrácia displeja"
 
 # GtkButton label
-#: ../panels/color/color-calibrate.ui.h:2
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1476
-msgid "Cancel"
-msgstr "Zrušiť"
-
-# GtkButton label
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-msgid "Start"
-msgstr "Začať"
+msgid "_Start"
+msgstr "_Začať"
 
 # GtkButton label
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-msgid "Resume"
-msgstr "Pokračovať"
+msgid "_Resume"
+msgstr "_Pokračovať"
 
 # GtkButton label
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-msgid "Done"
-msgstr "Dokončiť"
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Dokončiť"
 
 # GtkAssistant title
 #. Timeout parameters
@@ -751,8 +749,8 @@ msgstr "Zhrnutie"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:28
-msgid "Import File…"
-msgstr "Importovať súbor…"
+msgid "_Import File…"
+msgstr "_Importovať súbor…"
 
 #: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:512
@@ -788,8 +786,8 @@ msgstr "Zistite viac o správe farieb"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:35
-msgid "Set for all users"
-msgstr "Nastaviť pre všetkých používateľov"
+msgid "_Set for all users"
+msgstr "_Nastaviť pre všetkých používateľov"
 
 # GtkButton tooltip
 #: ../panels/color/color.ui.h:36
@@ -799,18 +797,18 @@ msgstr "Nastaví tento profil pre všetkých používateľov tohto počítača"
 # zariadenie
 # GtkButton label
 #: ../panels/color/color.ui.h:37
-msgid "Enable"
-msgstr "Povoliť"
+msgid "_Enable"
+msgstr "Povo_liť"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:38
-msgid "Add profile"
-msgstr "Pridať profil"
+msgid "_Add profile"
+msgstr "Pridať pro_fil"
 
 # GtkButton label
-#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "Calibrate…"
-msgstr "Kalibrovať…"
+#: ../panels/color/color.ui.h:39
+msgid "_Calibrate…"
+msgstr "_Kalibrovať…"
 
 # GtkButton tooltip
 #: ../panels/color/color.ui.h:40
@@ -819,13 +817,13 @@ msgstr "Kalibruje zariadenie"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:41
-msgid "Remove profile"
-msgstr "Odstrániť profil"
+msgid "_Remove profile"
+msgstr "O_dstrániť profil"
 
 # GtkButton label
 #: ../panels/color/color.ui.h:42
-msgid "View details"
-msgstr "Zobraziť podrobnosti"
+msgid "_View details"
+msgstr "Zobraz_iť podrobnosti"
 
 # GtkLabel label
 #: ../panels/color/color.ui.h:43
@@ -963,7 +961,7 @@ msgstr "Iný…"
 
 #: ../panels/common/cc-language-chooser.c:124
 #: ../panels/region/cc-format-chooser.c:271
-#: ../panels/region/cc-input-chooser.c:168
+#: ../panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Viac…"
 
@@ -972,15 +970,9 @@ msgid "No languages found"
 msgstr "Nenašli sa žiadne jazyky"
 
 # GtkDialog title; GtkLabel label
-#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+#: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Jazyk"
-
-# GtkButton label
-#: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
-msgid "_Done"
-msgstr "_Dokončiť"
 
 # GtkSpinButton AtkObject
 #: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
@@ -1161,8 +1153,8 @@ msgid "Date & _Time"
 msgstr "_Dátum a čas"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "Time _Zone"
-msgstr "Časové _pásmo"
+msgid "Time Z_one"
+msgstr "Ča_sové pásmo"
 
 # TODO lepšia alternatíva?
 # GtkDialog title; GtkLabel label
@@ -2533,7 +2525,7 @@ msgstr "Rýchlosť pripojenia"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:157
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:695
 msgid "IPv4 Address"
 msgstr "Adresa IPv4"
 
@@ -2543,7 +2535,7 @@ msgstr "Adresa IPv4"
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:696
 msgid "IPv6 Address"
 msgstr "Adresa IPv6"
 
@@ -2953,8 +2945,8 @@ msgid "yesterday"
 msgstr "včera"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:696
-#: ../panels/network/panel-common.c:698 ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:698
+#: ../panels/network/panel-common.c:700 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Adresa IP"
 
@@ -3048,12 +3040,13 @@ msgstr ""
 
 # window title;
 #: ../panels/network/net-device-wifi.c:1774
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "História"
 
 # GtkButton label
 #: ../panels/network/net-device-wifi.c:1778
+#: ../panels/printers/jobs-dialog.ui.h:3
+#: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
@@ -3234,6 +3227,7 @@ msgstr "podrobnosti"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/sharing/sharing.ui.h:11
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -3365,6 +3359,7 @@ msgstr "_Pripojiť sa k skrytej sieti…"
 
 # GtkButton label
 #: ../panels/network/network-wifi.ui.h:58
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "_History"
 msgstr "_História"
 
@@ -3391,7 +3386,6 @@ msgstr "Typ zabezpečenia"
 # GtkLabel label
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Heslo"
@@ -4022,40 +4016,40 @@ msgstr "Zapnuté"
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
-msgid "Notifications"
-msgstr "Oznámenia"
+msgid "_Notifications"
+msgstr "O_známenia"
 
 # policy_settings
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
 msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Zvukové varovania"
+msgid "Sound _Alerts"
+msgstr "Zvukové va_rovania"
 
 # policy_settings
 #: ../panels/notifications/edit-dialog.ui.h:5
 msgctxt "notifications"
-msgid "Notification Banners"
-msgstr "Oznámenia v bublinách"
+msgid "Notification _Banners"
+msgstr "Oznáme_nia v bublinách"
 
 # policy_settings
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
 msgctxt "notifications"
-msgid "Show Message Content in Banners"
-msgstr "Zobrazovať obsah správ v bublinách"
+msgid "Show Message _Content in Banners"
+msgstr "Zobrazovať obsah správ v _bublinách"
 
 # policy_settings
 #: ../panels/notifications/edit-dialog.ui.h:8
 msgctxt "notifications"
-msgid "Lock Screen Notifications"
-msgstr "Oznámenia v uzamknutej obrazovke"
+msgid "_Lock Screen Notifications"
+msgstr "O_známenia v uzamknutej obrazovke"
 
 # policy_settings
 #: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
-msgid "Show Message Content on Lock Screen"
-msgstr "Zobrazovať obsah správ v uzamknutej obrazovke"
+msgid "Show Message C_ontent on Lock Screen"
+msgstr "Zobrazovať _obsah správ v uzamknutej obrazovke"
 
 # desktop entry name
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
@@ -4074,13 +4068,13 @@ msgstr "Oznámenia;Bublina;Správa;Oblasť upozornení;Vyskakovacie;"
 
 # desktop entry name
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification Banners"
-msgstr "Oznámenia v bublinách"
+msgid "Notification _Banners"
+msgstr "Oznámenia v _bublinách"
 
 # desktop entry name
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Lock Screen Notifications"
-msgstr "Oznámenia v uzamknutej obrazovke"
+msgid "_Lock Screen Notifications"
+msgstr "Oznámenia v _uzamknutej obrazovke"
 
 # tab
 #. List of applications.
@@ -4628,6 +4622,12 @@ msgid "Delay"
 msgstr "Oddialiť o"
 
 # GtkButton label
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Zrušiť"
+
+# GtkButton label
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Overeniť totožnosť"
@@ -4855,12 +4855,6 @@ msgstr "Tlačiareň;Rad;Tlač;Papier;Atrament;Toner;"
 msgid "Active Jobs"
 msgstr "Aktívne úlohy"
 
-# GtkButton label
-#: ../panels/printers/jobs-dialog.ui.h:3
-#: ../panels/printers/options-dialog.ui.h:2
-msgid "Close"
-msgstr "Zavrieť"
-
 # GtkToolButton label
 #: ../panels/printers/jobs-dialog.ui.h:4
 msgid "Resume Printing"
@@ -4906,6 +4900,12 @@ msgstr "Načítavajú sa voľby…"
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
 msgstr "Výber ovládača pre tlačiareň"
+
+# tlačidlo
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/um-photo-dialog.c:96
+msgid "Select"
+msgstr "Vybrať"
 
 # GtkLabel label
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
@@ -5266,7 +5266,7 @@ msgid "Print _Test Page"
 msgstr "Vytlačiť _skúšobnú stranu"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
 msgid "_Options"
 msgstr "_Voľby"
 
@@ -5556,11 +5556,11 @@ msgstr "Metrické"
 msgid "No regions found"
 msgstr "Nenašli sa žiadne regióny"
 
-#: ../panels/region/cc-input-chooser.c:181
+#: ../panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
 msgstr "Nenašli sa žiadne zdroje vstupu"
 
-#: ../panels/region/cc-input-chooser.c:1015
+#: ../panels/region/cc-input-chooser.c:992
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Iný"
@@ -5577,18 +5577,18 @@ msgstr "Aby sa prejavili zmeny, musíte reštartovať vašu reláciu"
 msgid "Restart Now"
 msgstr "Reštartovať teraz"
 
-#: ../panels/region/cc-region-panel.c:878
+#: ../panels/region/cc-region-panel.c:886
 msgid "No input source selected"
 msgstr "Nebol vybraný žiadny zdroj vstupu"
 
 # toggle button
-#: ../panels/region/cc-region-panel.c:1798
-msgid "Login Screen"
-msgstr "Prihlasovacia obrazovka"
+#: ../panels/region/cc-region-panel.c:1804
+msgid "Login _Screen"
+msgstr "_Prihlasovacia obrazovka"
 
 # TODO lepšia alternatíva?
 # GtkDialog title; GtkLabel label
-#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+#: ../panels/region/format-chooser.ui.h:1
 msgid "Formats"
 msgstr "Formáty"
 
@@ -5702,10 +5702,22 @@ msgstr "Alternatívny prepínač na ďalší zdroj"
 msgid "Left+Right Alt"
 msgstr "Ľavý a pravý Alt"
 
+# GtkLabel
+#: ../panels/region/region.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Jazyk"
+
 # GtkLabel label
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Anglický (Spojené Kráľovstvo)"
+
+# TODO lepšia alternatíva?
+# GtkDialog title; GtkLabel label
+#: ../panels/region/region.ui.h:3
+msgid "_Formats"
+msgstr "_Formáty"
 
 # GtkLabel label
 #: ../panels/region/region.ui.h:4
@@ -5716,11 +5728,6 @@ msgstr "Spojené Kráľovstvo"
 #: ../panels/region/region.ui.h:5
 msgid "Input Sources"
 msgstr "Zdroje vstupu"
-
-# GtkButton label
-#: ../panels/region/region.ui.h:6
-msgid "Options"
-msgstr "Voľby"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
@@ -5898,36 +5905,41 @@ msgstr "Siete"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Computer Name"
-msgstr "Názov počítača"
+msgid "_Computer Name"
+msgstr "Názov _počítača"
 
 # GtkDialog title
 #: ../panels/sharing/sharing.ui.h:2
-msgid "Personal File Sharing"
-msgstr "Spoločné používanie osobných súborov"
+msgid "_Personal File Sharing"
+msgstr "_Spoločné používanie osobných súborov"
 
 # GtkDialog title
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Screen Sharing"
-msgstr "Sprístupnenie obrazovky"
+msgid "_Screen Sharing"
+msgstr "S_prístupnenie obrazovky"
 
 # GtkDialog title
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Media Sharing"
-msgstr "Spoločné používanie multimédií"
+msgid "_Media Sharing"
+msgstr "Spoločné používanie _multimédií"
 
 # GtkDialog title
 #: ../panels/sharing/sharing.ui.h:5
-msgid "Remote Login"
-msgstr "Vzdialené prihlásenie"
+msgid "_Remote Login"
+msgstr "V_zdialené prihlásenie"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Niektoré služby sú zakázané kvôli nedostupnosti sieťového pripojenia."
 
+# GtkDialog title
+#: ../panels/sharing/sharing.ui.h:7
+msgid "Personal File Sharing"
+msgstr "Spoločné používanie osobných súborov"
+
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:9
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5938,12 +5950,17 @@ msgstr ""
 "%s\">dav://%s</a>"
 
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:9
-msgid "Require Password"
-msgstr "Vyžadovať heslo"
+#: ../panels/sharing/sharing.ui.h:10
+msgid "_Require Password"
+msgstr "Vyžadovať _heslo"
+
+# GtkDialog title
+#: ../panels/sharing/sharing.ui.h:12
+msgid "Remote Login"
+msgstr "Vzdialené prihlásenie"
 
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:14
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5952,8 +5969,13 @@ msgstr ""
 "Umožniť vzdialeným používateľom pripojenie pomocou príkazu Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
+# GtkDialog title
+#: ../panels/sharing/sharing.ui.h:16
+msgid "Screen Sharing"
+msgstr "Sprístupnenie obrazovky"
+
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5963,36 +5985,41 @@ msgstr ""
 "pripojením k: <a href=\"vnc://%s\">vnc://%s</a>"
 
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:16
-msgid "Allow Remote Control"
-msgstr "Umožniť vzdialené ovládanie"
+#: ../panels/sharing/sharing.ui.h:19
+msgid "_Allow Remote Control"
+msgstr "_Umožniť vzdialené ovládanie"
 
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Password:"
-msgstr "Heslo:"
+#: ../panels/sharing/sharing.ui.h:20
+msgid "_Password:"
+msgstr "_Heslo:"
 
 # GtkCheckButton label
-#: ../panels/sharing/sharing.ui.h:18
-msgid "Show Password"
-msgstr "Zobraziť heslo"
+#: ../panels/sharing/sharing.ui.h:21
+msgid "_Show Password"
+msgstr "Zobraziť hes_lo"
 
 # GtkButton label
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Access Options"
 msgstr "Voľby prístupu"
 
-#: ../panels/sharing/sharing.ui.h:20
-msgid "New connections must ask for access"
-msgstr "Nové spojenia musia vyžadovať prístup"
+#: ../panels/sharing/sharing.ui.h:23
+msgid "_New connections must ask for access"
+msgstr "_Nové spojenia musia vyžadovať prístup"
 
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Require a password"
-msgstr "Vyžaduje heslo"
+#: ../panels/sharing/sharing.ui.h:24
+msgid "_Require a password"
+msgstr "Vyžadu_je heslo"
+
+# GtkDialog title
+#: ../panels/sharing/sharing.ui.h:25
+msgid "Media Sharing"
+msgstr "Spoločné používanie multimédií"
 
 # GtkLabel label
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:26
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
@@ -6000,7 +6027,7 @@ msgstr ""
 "videá cez sieť."
 
 # GtkToolButton label
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
 msgstr "Priečinky"
 
@@ -6310,6 +6337,7 @@ msgstr "_Veľký text"
 
 # GtkLabel
 #: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Lupa"
 
@@ -6342,13 +6370,13 @@ msgstr "_Klávesnica na obrazovke"
 
 # GtkLabel label
 #: ../panels/universal-access/uap.ui.h:13
-msgid "_Repeat Keys"
-msgstr "Opakovanie kláve_sov"
+msgid "R_epeat Keys"
+msgstr "O_pakovanie klávesov"
 
 # GtkLabel label
 #: ../panels/universal-access/uap.ui.h:14
-msgid "_Cursor Blinking"
-msgstr "Blikanie _kurzora"
+msgid "Cursor _Blinking"
+msgstr "_Blikanie kurzora"
 
 #: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
@@ -6702,44 +6730,39 @@ msgid "Zoom Options"
 msgstr "Nastavenia lupy"
 
 # GtkLabel
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Zoom"
-msgstr "Lupa"
-
-# GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Magnification:"
-msgstr "Zväčšenie:"
+msgid "_Magnification:"
+msgstr "_Zväčšenie:"
 
 # GtkRadioButton
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Follow mouse cursor"
-msgstr "Sledovať kurzor myši"
+msgid "_Follow mouse cursor"
+msgstr "Sledovať kurzor _myši"
 
 # GtkRadioButton
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Screen part:"
-msgstr "Časť obrazovky:"
+msgid "_Screen part:"
+msgstr "Č_asť obrazovky:"
 
 # GtkCheckButton
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Magnifier extends outside of screen"
-msgstr "Lupa zasahuje aj mimo obrazovky"
+msgid "Magnifier _extends outside of screen"
+msgstr "_Lupa zasahuje aj mimo obrazovky"
 
 # GtkRadioButton
 #: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Keep magnifier cursor centered"
-msgstr "Udržovať kurzor lupy v strede"
+msgid "_Keep magnifier cursor centered"
+msgstr "Ud_ržovať kurzor lupy v strede"
 
 # GtkRadioButton
 #: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Magnifier cursor pushes contents around"
-msgstr "Kurzor lupy posúva obsah"
+msgid "Magnifier cursor _pushes contents around"
+msgstr "Kurzor lupy po_súva obsah"
 
 # GtkRadioButton
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnifier cursor moves with contents"
-msgstr "Kurzor lupy sa posúva s obsahom"
+msgid "Magnifier cursor moves with _contents"
+msgstr "Kurzor lupy sa posúva s _obsahom"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:15
@@ -6753,8 +6776,8 @@ msgstr "Lupa"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Thickness:"
-msgstr "Hrúbka:"
+msgid "_Thickness:"
+msgstr "_Hrúbka:"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgctxt "universal access, thickness"
@@ -6768,24 +6791,24 @@ msgstr "Hrubý"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Length:"
-msgstr "Dĺžka:"
+msgid "_Length:"
+msgstr "_Dĺžka:"
 
 # GtkLabel
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Color:"
-msgstr "Farba:"
+msgid "Co_lor:"
+msgstr "Fa_rba:"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Crosshairs:"
-msgstr "Nitkový kríž:"
+msgid "_Crosshairs:"
+msgstr "_Nitkový kríž:"
 
 # GtkCheckButton
 #: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Overlaps mouse cursor"
-msgstr "Prekrývať kurzor myši"
+msgid "_Overlaps mouse cursor"
+msgstr "_Prekrývať kurzor myši"
 
 # tab
 #: ../panels/universal-access/zoom-options.ui.h:25
@@ -6794,25 +6817,24 @@ msgstr "Nitkový kríž"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:26
-msgid "White on black:"
-msgstr "Čierne na bielom:"
+msgid "_White on black:"
+msgstr "Čiern_e na bielom:"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Brightness:"
-msgstr "Jas:"
+msgid "_Brightness:"
+msgstr "_Jas:"
 
 # GtkLabel
 #: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Contrast:"
-msgstr "Kontrast:"
+msgid "_Contrast:"
+msgstr "_Kontrast:"
 
-# DK: https://bugzilla.gnome.org/show_bug.cgi?id=701343
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
-msgid "Color"
-msgstr "Farba"
+msgid "Co_lor"
+msgstr "Far_ba"
 
 # farba
 #: ../panels/universal-access/zoom-options.ui.h:31
@@ -6889,15 +6911,13 @@ msgstr "_Typ účtu:"
 
 # GtkListStore item
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Allow user to set a password when they next login"
-msgstr "Umožniť používateľovi nastaviť heslo pri najbližšom prihlásení"
+msgid "Allow user to set a password when they next _login"
+msgstr "Umožniť používateľovi nastaviť heslo pri najbližšom _prihlásení"
 
 # GtkListStore item
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Set a password now"
-msgstr "Nastaviť heslo teraz"
+msgid "Set a password _now"
+msgstr "Nastaviť heslo _teraz"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Verify"
@@ -7080,6 +7100,16 @@ msgstr "_Nové heslo"
 msgid "Current _Password"
 msgstr "Aktuálne _heslo"
 
+# GtkListStore item
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Umožniť používateľovi nastaviť heslo pri najbližšom prihlásení"
+
+# GtkListStore item
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Set a password now"
+msgstr "Nastaviť heslo teraz"
+
 # GtkToolButton label
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
@@ -7109,11 +7139,6 @@ msgstr "Prihlásenie _odtlačkom prsta"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "Ikona používateľa"
-
-# GtkLabel
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "_Language"
-msgstr "_Jazyk"
 
 # GtkLabel
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
@@ -7907,6 +7932,11 @@ msgstr "Priradiť k displeju…"
 msgid "Map Buttons…"
 msgstr "Priradiť tlačidlá…"
 
+# GtkButton label
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Calibrate…"
+msgstr "Kalibrovať…"
+
 # GtkLinkButton
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
@@ -8197,6 +8227,42 @@ msgstr "Prejdenie späť na prehľad"
 #: ../shell/help-overlay.ui.h:6
 msgid "Cancel search"
 msgstr "Zrušenie vyhľadávania"
+
+# GtkButton label
+#~ msgid "Done"
+#~ msgstr "Dokončiť"
+
+#~ msgid "Time _Zone"
+#~ msgstr "Časové _pásmo"
+
+# GtkButton label
+#~ msgid "Close"
+#~ msgstr "Zavrieť"
+
+# GtkButton label
+#~ msgid "Options"
+#~ msgstr "Voľby"
+
+# GtkLabel label
+#~ msgid "Password:"
+#~ msgstr "Heslo:"
+
+# GtkLabel label
+#~ msgid "_Repeat Keys"
+#~ msgstr "Opakovanie kláve_sov"
+
+# GtkLabel label
+#~ msgid "_Cursor Blinking"
+#~ msgstr "Blikanie _kurzora"
+
+# GtkLabel
+#~ msgid "Zoom"
+#~ msgstr "Lupa"
+
+# DK: https://bugzilla.gnome.org/show_bug.cgi?id=701343
+#~ msgctxt "universal access, contrast"
+#~ msgid "Color"
+#~ msgstr "Farba"
 
 # GtkCheckButton label
 #~ msgid "Two Finger Scrolling"
