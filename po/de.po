@@ -13,7 +13,7 @@
 # Jens Seidel <jseidel@cvs.gnome.org>, 2005.
 # Christian Kintner <ckintner@gnome-de.org>, 2007.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2009, 2011, 2012.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2010-2013, 2015, 2016.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2010-2013, 2015-2016.
 # Hendrik Knackstedt <kn.hendrik@gmail.com>, 2011.
 # Tobias Endrigkeit <tobiasendrigkeit@googlemail.com>, 2012, 2013.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2009-2013, 2013.
@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-18 17:04+0000\n"
-"PO-Revision-Date: 2016-01-18 20:15+0100\n"
+"POT-Creation-Date: 2016-01-21 14:09+0000\n"
+"PO-Revision-Date: 2016-01-21 17:44+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -2698,7 +2698,6 @@ msgid "History"
 msgstr "Chronik"
 
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -4271,22 +4270,15 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Drucker;Warteschlange;Drucken;Papier;Tinte;Toner;Tintenpatrone;"
 
-#. Translators: This dialog contains list of active print jobs of the selected printer
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: ../panels/printers/jobs-dialog.ui.h:2
-msgid "Active Jobs"
-msgstr "Aktive Druckaufträge"
+msgid "Clear All"
+msgstr "Alles leeren"
 
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-msgid "Resume Printing"
-msgstr "Drucken fortsetzen"
-
-#: ../panels/printers/jobs-dialog.ui.h:5
-msgid "Pause Printing"
-msgstr "Drucken unterbrechen"
-
-#: ../panels/printers/jobs-dialog.ui.h:6
-msgid "Cancel Print Job"
-msgstr "Druckauftrag abbrechen"
+msgid "No Active Printer Jobs"
+msgstr "Keine aktiven Druckaufträge"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
@@ -4375,66 +4367,53 @@ msgid "Reverse portrait"
 msgstr "Kopfstehendes Hochformat"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:142
+#: ../panels/printers/pp-jobs-dialog.c:103
 msgctxt "print job"
 msgid "Pending"
 msgstr "Ausstehend"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:146
+#: ../panels/printers/pp-jobs-dialog.c:107
 msgctxt "print job"
-msgid "Held"
-msgstr "Zurückgehalten"
+msgid "Paused"
+msgstr "Pausiert"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:150
+#: ../panels/printers/pp-jobs-dialog.c:111
 msgctxt "print job"
 msgid "Processing"
 msgstr "Verarbeitung läuft"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:154
+#: ../panels/printers/pp-jobs-dialog.c:115
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Angehalten"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:158
+#: ../panels/printers/pp-jobs-dialog.c:119
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Abgebrochen"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:162
+#: ../panels/printers/pp-jobs-dialog.c:123
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abgebrochen"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:166
+#: ../panels/printers/pp-jobs-dialog.c:127
 msgctxt "print job"
 msgid "Completed"
 msgstr "Abgeschlossen"
 
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:288
-msgid "Job Title"
-msgstr "Auftragsbezeichnung"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:297
-msgid "Job State"
-msgstr "Auftragsstatus"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:303
-msgid "Time"
-msgstr "Uhrzeit"
-
-#: ../panels/printers/pp-jobs-dialog.c:451
+#. Translators: This is the printer name for which we are showing the active jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-msgid "%s Active Jobs"
-msgstr "%s aktive Druckaufträge"
+msgctxt "Printer jobs dialog title"
+msgid "%s - Active Jobs"
+msgstr "%s – Aktive Druckaufträge"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1659
@@ -7297,6 +7276,31 @@ msgstr "Zurück zur Übersicht gehen"
 #: ../shell/help-overlay.ui.h:6
 msgid "Cancel search"
 msgstr "Suche abbrechen"
+
+#~ msgid "Active Jobs"
+#~ msgstr "Aktive Druckaufträge"
+
+#~ msgid "Resume Printing"
+#~ msgstr "Drucken fortsetzen"
+
+#~ msgid "Pause Printing"
+#~ msgstr "Drucken unterbrechen"
+
+#~ msgid "Cancel Print Job"
+#~ msgstr "Druckauftrag abbrechen"
+
+#~ msgctxt "print job"
+#~ msgid "Held"
+#~ msgstr "Zurückgehalten"
+
+#~ msgid "Job Title"
+#~ msgstr "Auftragsbezeichnung"
+
+#~ msgid "Job State"
+#~ msgstr "Auftragsstatus"
+
+#~ msgid "Time"
+#~ msgstr "Uhrzeit"
 
 #~ msgid "Done"
 #~ msgstr "Erledigt"
