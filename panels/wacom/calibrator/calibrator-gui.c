@@ -482,7 +482,7 @@ on_fullscreen (GtkWindow           *window,
     return FALSE;
 
   /* Protect against window state multiple changes*/
-  if (CLUTTER_ACTOR_IS_VISIBLE (area->action_layer))
+  if (clutter_actor_is_visible (area->action_layer))
     return FALSE;
 
   clutter_actor_show (area->action_layer);
