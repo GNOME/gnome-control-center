@@ -150,10 +150,8 @@ on_allocation_changed (ClutterActor          *actor,
   resize_display (area);
 }
 
-static gboolean
-on_delete_event (GtkWidget *widget,
-                 GdkEvent  *event,
-                 CalibArea *area)
+static void
+calib_area_notify_finish (CalibArea *area)
 {
   clutter_timeline_stop (CLUTTER_TIMELINE (area->clock_timeline));
 
@@ -165,15 +163,21 @@ on_delete_event (GtkWidget *widget,
   gtk_widget_hide (area->window);
 
   (*area->callback) (area, area->user_data);
+}
 
+static gboolean
+on_delete_event (GtkWidget *widget,
+                 GdkEvent  *event,
+                 CalibArea *area)
+{
+  calib_area_notify_finish (area);
   return TRUE;
 }
 
 static gboolean
 draw_success_end_wait_callback (CalibArea *area)
 {
-  on_delete_event (NULL, NULL, area);
-
+  calib_area_notify_finish (area);
   return FALSE;
 }
 
@@ -246,7 +250,7 @@ set_calibration_status (CalibArea *area)
     }
   else
     {
-      on_delete_event (NULL, NULL, area);
+      calib_area_notify_finish (area);
     }
 }
 
@@ -383,8 +387,7 @@ on_key_release_event(ClutterActor    *actor,
       return FALSE;
     }
 
-  on_delete_event (area->window, NULL, area);
-
+  calib_area_notify_finish (area);
   return FALSE;
 }
 
@@ -397,7 +400,7 @@ on_focus_out_event (GtkWidget *widget,
     return FALSE;
 
   /* If the calibrator window loses focus, simply bail out... */
-  on_delete_event (widget, NULL, area);
+  calib_area_notify_finish (area);
 
   return FALSE;
 }
