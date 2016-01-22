@@ -175,7 +175,7 @@ on_delete_event (GtkWidget *widget,
 }
 
 static gboolean
-draw_success_end_wait_callback (CalibArea *area)
+calib_area_finish_idle_cb (CalibArea *area)
 {
   calib_area_notify_finish (area);
   return FALSE;
@@ -245,12 +245,12 @@ set_calibration_status (CalibArea *area)
     {
       set_success (area);
       g_timeout_add (END_TIME,
-                     (GSourceFunc) draw_success_end_wait_callback,
+                     (GSourceFunc) calib_area_finish_idle_cb,
                      area);
     }
   else
     {
-      calib_area_notify_finish (area);
+      g_idle_add ((GSourceFunc) calib_area_finish_idle_cb, area);
     }
 }
 
@@ -376,19 +376,16 @@ on_button_press_event(ClutterActor       *actor,
 }
 
 static gboolean
-on_key_release_event(ClutterActor    *actor,
-                     ClutterKeyEvent *event,
-                     CalibArea       *area)
+on_key_release_event (GtkWidget   *widget,
+                      GdkEventKey *event,
+                      CalibArea   *area)
 {
   if (area->success ||
-      event->type != CLUTTER_KEY_RELEASE ||
-      event->keyval != CLUTTER_KEY_Escape)
-    {
-      return FALSE;
-    }
+      event->keyval != GDK_KEY_Escape)
+    return GDK_EVENT_PROPAGATE;
 
   calib_area_notify_finish (area);
-  return FALSE;
+  return GDK_EVENT_STOP;
 }
 
 static gboolean
@@ -669,10 +666,6 @@ set_up_stage (CalibArea *calib_area, ClutterActor *stage)
                     "button-press-event",
                     G_CALLBACK (on_button_press_event),
                     calib_area);
-  g_signal_connect (stage,
-                    "key-release-event",
-                    G_CALLBACK (on_key_release_event),
-                    calib_area);
 }
 
 /**
@@ -755,6 +748,10 @@ calib_area_new (GdkScreen      *screen,
 
   set_up_stage (calib_area, stage);
 
+  g_signal_connect (calib_area->window,
+                    "key-release-event",
+                    G_CALLBACK (on_key_release_event),
+                    calib_area);
   g_signal_connect (calib_area->window,
                     "delete-event",
                     G_CALLBACK (on_delete_event),
