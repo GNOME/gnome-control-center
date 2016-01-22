@@ -188,13 +188,29 @@ ce_page_vpn_class_init (CEPageVpnClass *class)
         page_class->validate = validate;
 }
 
+static void
+finish_setup (CEPageVpn *page, gpointer unused, GError *error, gpointer user_data)
+{
+        NMConnection *connection = CE_PAGE (page)->connection;
+        const char *vpn_type;
+
+        page->setting_connection = nm_connection_get_setting_connection (connection);
+        page->setting_vpn = nm_connection_get_setting_vpn (connection);
+        vpn_type = nm_setting_vpn_get_service_type (page->setting_vpn);
+
+        page->plugin = vpn_get_plugin_by_service (vpn_type);
+        if (page->plugin)
+                load_vpn_plugin (page, connection);
+
+        connect_vpn_page (page);
+}
+
 CEPage *
 ce_page_vpn_new (NMConnection     *connection,
 		 NMClient         *client,
 		 NMRemoteSettings *settings)
 {
         CEPageVpn *page;
-	const char *vpn_type;
 
         page = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
 					 connection,
@@ -206,15 +222,9 @@ ce_page_vpn_new (NMConnection     *connection,
         page->name = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_name"));
         page->box = GTK_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "page"));
 
-	page->setting_connection = nm_connection_get_setting_connection (connection);
-	page->setting_vpn = nm_connection_get_setting_vpn (connection);
-	vpn_type = nm_setting_vpn_get_service_type (page->setting_vpn);
+        g_signal_connect (page, "initialized", G_CALLBACK (finish_setup), NULL);
 
-	page->plugin = vpn_get_plugin_by_service (vpn_type);
-	if (page->plugin)
-                load_vpn_plugin (page, connection);
-
-        connect_vpn_page (page);
+        CE_PAGE (page)->security_setting = NM_SETTING_VPN_SETTING_NAME;
 
         return CE_PAGE (page);
 }
