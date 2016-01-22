@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-20 08:42+0000\n"
-"PO-Revision-Date: 2016-01-20 13:09+0100\n"
+"POT-Creation-Date: 2016-01-22 08:42+0000\n"
+"PO-Revision-Date: 2016-01-22 11:28+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -3045,7 +3045,6 @@ msgstr "História"
 
 # GtkButton label
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/printers/jobs-dialog.ui.h:3
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -4849,26 +4848,16 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Tlačiareň;Rad;Tlač;Papier;Atrament;Toner;"
 
-# GtkDialog title
-#. Translators: This dialog contains list of active print jobs of the selected printer
+# GtkButton label
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: ../panels/printers/jobs-dialog.ui.h:2
-msgid "Active Jobs"
-msgstr "Aktívne úlohy"
+msgid "Clear All"
+msgstr "Vymazať všetky"
 
-# GtkToolButton label
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-msgid "Resume Printing"
-msgstr "Pokračovať v tlači"
-
-# GtkToolButton label
-#: ../panels/printers/jobs-dialog.ui.h:5
-msgid "Pause Printing"
-msgstr "Pozastaviť tlač"
-
-# GtkToolButton label
-#: ../panels/printers/jobs-dialog.ui.h:6
-msgid "Cancel Print Job"
-msgstr "Zrušiť tlačovú úlohu"
+msgid "No Active Printer Jobs"
+msgstr "Žiadne aktívne úlohy tlačiarne"
 
 # GtkDialog title
 #: ../panels/printers/new-printer-dialog.ui.h:1
@@ -4964,68 +4953,53 @@ msgid "Reverse portrait"
 msgstr "Opačne na výšku"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:142
+#: ../panels/printers/pp-jobs-dialog.c:103
 msgctxt "print job"
 msgid "Pending"
 msgstr "Čaká"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:146
+#: ../panels/printers/pp-jobs-dialog.c:107
 msgctxt "print job"
-msgid "Held"
-msgstr "Pozdržaná"
+msgid "Paused"
+msgstr "Pozastavená"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:150
+#: ../panels/printers/pp-jobs-dialog.c:111
 msgctxt "print job"
 msgid "Processing"
 msgstr "Spracúva sa"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:154
+#: ../panels/printers/pp-jobs-dialog.c:115
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:158
+#: ../panels/printers/pp-jobs-dialog.c:119
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Zrušená"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:162
+#: ../panels/printers/pp-jobs-dialog.c:123
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Prerušená"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:166
+#: ../panels/printers/pp-jobs-dialog.c:127
 msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončená"
 
-# ze je to ulohy vyplyva z kontextu
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:288
-msgid "Job Title"
-msgstr "Názov"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:297
-msgid "Job State"
-msgstr "Stav"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:303
-msgid "Time"
-msgstr "Čas"
-
-# %s je názov tlačiarne
-#: ../panels/printers/pp-jobs-dialog.c:451
+#. Translators: This is the printer name for which we are showing the active jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-msgid "%s Active Jobs"
-msgstr "Aktívne úlohy tlačiarne %s"
+msgctxt "Printer jobs dialog title"
+msgid "%s - Active Jobs"
+msgstr "%s - Aktívne úlohy tlačiarne"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1659
@@ -8227,6 +8201,36 @@ msgstr "Prejdenie späť na prehľad"
 #: ../shell/help-overlay.ui.h:6
 msgid "Cancel search"
 msgstr "Zrušenie vyhľadávania"
+
+# GtkDialog title
+#~ msgid "Active Jobs"
+#~ msgstr "Aktívne úlohy"
+
+# GtkToolButton label
+#~ msgid "Resume Printing"
+#~ msgstr "Pokračovať v tlači"
+
+# GtkToolButton label
+#~ msgid "Pause Printing"
+#~ msgstr "Pozastaviť tlač"
+
+# GtkToolButton label
+#~ msgid "Cancel Print Job"
+#~ msgstr "Zrušiť tlačovú úlohu"
+
+#~ msgctxt "print job"
+#~ msgid "Held"
+#~ msgstr "Pozdržaná"
+
+# ze je to ulohy vyplyva z kontextu
+#~ msgid "Job Title"
+#~ msgstr "Názov"
+
+#~ msgid "Job State"
+#~ msgstr "Stav"
+
+#~ msgid "Time"
+#~ msgstr "Čas"
 
 # GtkButton label
 #~ msgid "Done"
