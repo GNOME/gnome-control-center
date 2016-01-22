@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-16 08:46+0000\n"
-"PO-Revision-Date: 2016-01-16 10:48+0200\n"
+"POT-Creation-Date: 2016-01-22 08:42+0000\n"
+"PO-Revision-Date: 2016-01-22 20:59+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -40,9 +40,9 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Taustakuva"
+#| msgid "Background"
+msgid "_Background"
+msgstr "_Taustakuva"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -51,8 +51,9 @@ msgstr "Muuttuu päivän aikana"
 
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-msgid "Lock Screen"
-msgstr "Lukitusnäyttö"
+#| msgid "Lock Screen"
+msgid "_Lock Screen"
+msgstr "L_ukitusnäyttö"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -123,7 +124,8 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:29
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -142,6 +144,7 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1476
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
@@ -151,10 +154,9 @@ msgid "_Cancel"
 msgstr "_Peru"
 
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/um-photo-dialog.c:96
-msgid "Select"
-msgstr "Valitse"
+#| msgid "Select"
+msgid "_Select"
+msgstr "_Valitse"
 
 #: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
@@ -174,6 +176,10 @@ msgstr "Ei työpöydän taustaa"
 #: ../panels/background/cc-background-panel.c:493
 msgid "Current background"
 msgstr "Nykyinen taustakuva"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Taustakuva"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -548,27 +554,24 @@ msgstr "Tämä profiili ei välttämättä ole enää tarkka"
 msgid "Display Calibration"
 msgstr "Näytön kalibrointi"
 
-#: ../panels/color/color-calibrate.ui.h:2
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1476
-msgid "Cancel"
-msgstr "Peru"
-
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-msgid "Start"
-msgstr "Käynnistä"
+#| msgid "Start"
+msgid "_Start"
+msgstr "_Käynnistä"
 
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-msgid "Resume"
-msgstr "Jatka"
+#| msgid "Resume"
+msgid "_Resume"
+msgstr "_Jatka"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-msgid "Done"
-msgstr "Valmis"
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Valmis"
 
 #. Timeout parameters
 #. 15000 = 15 sec
@@ -704,8 +707,9 @@ msgid "Summary"
 msgstr "Yhteenveto"
 
 #: ../panels/color/color.ui.h:28
-msgid "Import File…"
-msgstr "Tuo tiedosto…"
+#| msgid "Import File…"
+msgid "_Import File…"
+msgstr "_Tuo tiedosto\t…"
 
 #: ../panels/color/color.ui.h:30
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
@@ -739,37 +743,42 @@ msgid "Learn more about color management"
 msgstr "Lue lisää värienhallinnasta"
 
 #: ../panels/color/color.ui.h:35
-msgid "Set for all users"
-msgstr "Aseta kaikille käyttäjille"
+#| msgid "Set for all users"
+msgid "_Set for all users"
+msgstr "Aseta _kaikille käyttäjille"
 
 #: ../panels/color/color.ui.h:36
 msgid "Set this profile for all users on this computer"
 msgstr "Aseta tämä profiili kaikille tietokoneen käyttäjille"
 
 #: ../panels/color/color.ui.h:37
-msgid "Enable"
-msgstr "Ota käyttöön"
+#| msgid "Enable"
+msgid "_Enable"
+msgstr "K_äytä"
 
 #: ../panels/color/color.ui.h:38
-msgid "Add profile"
-msgstr "Lisää profiili"
+#| msgid "Add profile"
+msgid "_Add profile"
+msgstr "_Lisää profiili"
 
 #: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "Calibrate…"
-msgstr "Kalibroi..."
+#| msgid "Calibrate…"
+msgid "_Calibrate…"
+msgstr "_Kalibroi…"
 
 #: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
 msgstr "Kalibroi laite"
 
 #: ../panels/color/color.ui.h:41
-msgid "Remove profile"
-msgstr "Poista profiili"
+#| msgid "Remove profile"
+msgid "_Remove profile"
+msgstr "_Poista profiili"
 
 #: ../panels/color/color.ui.h:42
-msgid "View details"
-msgstr "Näytä yksityiskohdat"
+#| msgid "View details"
+msgid "_View details"
+msgstr "Näytä yk_sityiskohdat"
 
 #: ../panels/color/color.ui.h:43
 msgid "Unable to detect any devices that can be color managed"
@@ -891,14 +900,9 @@ msgstr "Lisää…"
 msgid "No languages found"
 msgstr "Kieli ei löytynyt"
 
-#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+#: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Kieli"
-
-#: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
-msgid "_Done"
-msgstr "_Valmis"
 
 #: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
 #: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
@@ -1055,8 +1059,9 @@ msgid "Date & _Time"
 msgstr "Päivä _ja aika"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "Time _Zone"
-msgstr "Aika_vyöhyke"
+#| msgid "Time Zone"
+msgid "Time Z_one"
+msgstr "Aikav_yöhyke"
 
 #: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
@@ -2673,11 +2678,11 @@ msgstr ""
 "Valittujen verkkojen tiedot, kuten salasanat ja omat asetukset, häviävät."
 
 #: ../panels/network/net-device-wifi.c:1774
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historia"
 
 #: ../panels/network/net-device-wifi.c:1778
+#: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
@@ -2824,6 +2829,7 @@ msgstr "tiedot"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/sharing/sharing.ui.h:11
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -2926,6 +2932,7 @@ msgid "_Connect to Hidden Network…"
 msgstr "Y_hdistä piilotettuun verkkoon…"
 
 #: ../panels/network/network-wifi.ui.h:58
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "_History"
 msgstr "_Historia"
 
@@ -2947,7 +2954,6 @@ msgstr "Salauksen tyyppi"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Salasana"
@@ -3512,36 +3518,48 @@ msgstr "Päällä"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
+#| msgctxt "notifications"
+#| msgid "Notifications"
 msgctxt "notifications"
-msgid "Notifications"
-msgstr "Ilmoitukset"
+msgid "_Notifications"
+msgstr "_Ilmoitukset"
 
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
+#| msgctxt "notifications"
+#| msgid "Sound Alerts"
 msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Ääni-ilmoitukset"
+msgid "Sound _Alerts"
+msgstr "_Ääni-ilmoitukset"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "Notification Banners"
 msgctxt "notifications"
-msgid "Notification Banners"
-msgstr "Ilmoitusbannerit"
+msgid "Notification _Banners"
+msgstr "Ilmoitus_bannerit"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
+#| msgctxt "notifications"
+#| msgid "Show Message Content in Banners"
 msgctxt "notifications"
-msgid "Show Message Content in Banners"
-msgstr "Näytä viestin sisältö bannerissa"
+msgid "Show Message _Content in Banners"
+msgstr "Näy_tä viestin sisältö bannerissa"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Lock Screen Notifications"
 msgctxt "notifications"
-msgid "Lock Screen Notifications"
-msgstr "Lukitusnäytön ilmoitukset"
+msgid "_Lock Screen Notifications"
+msgstr "Lukitusnäytön i_lmoitukset"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
+#| msgctxt "notifications"
+#| msgid "Show Message Content on Lock Screen"
 msgctxt "notifications"
-msgid "Show Message Content on Lock Screen"
-msgstr "Näytä viestin sisältö lukitusnäytöllä"
+msgid "Show Message C_ontent on Lock Screen"
+msgstr "Näytä viestin sisältö _lukitusnäytöllä"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3558,12 +3576,14 @@ msgstr ""
 "Notifications;Banner;Message;Tray;Popup;ilmoitus;ilmoitukset;banneri;viesti;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification Banners"
-msgstr "Ilmoitusbannerit"
+#| msgid "Notification Banners"
+msgid "Notification _Banners"
+msgstr "_Ilmoitusbannerit"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Lock Screen Notifications"
-msgstr "Lukitusnäytön ilmoitukset"
+#| msgid "Lock Screen Notifications"
+msgid "_Lock Screen Notifications"
+msgstr "_Lukitusnäytön ilmoitukset"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
@@ -4021,6 +4041,11 @@ msgstr "Käytettäessä _akkua"
 msgid "Delay"
 msgstr "Viive"
 
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Peru"
+
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Tunnistaudu"
@@ -4232,27 +4257,16 @@ msgstr ""
 "tulostin;jono;tulosta;paperi;muste;värikasetti;Printer;Queue;Print;Paper;Ink;"
 "Toner;"
 
-#. Translators: This dialog contains list of active print jobs of the selected printer
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: ../panels/printers/jobs-dialog.ui.h:2
-msgid "Active Jobs"
-msgstr "Aktiiviset työt"
+msgid "Clear All"
+msgstr "Tyhjennä kaikki"
 
-#: ../panels/printers/jobs-dialog.ui.h:3
-#: ../panels/printers/options-dialog.ui.h:2
-msgid "Close"
-msgstr "Sulje"
-
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-msgid "Resume Printing"
-msgstr "Jatka tulostusta"
-
-#: ../panels/printers/jobs-dialog.ui.h:5
-msgid "Pause Printing"
-msgstr "Keskeytä tulostus"
-
-#: ../panels/printers/jobs-dialog.ui.h:6
-msgid "Cancel Print Job"
-msgstr "Peru tulostustyö"
+#| msgid "%s Active Jobs"
+msgid "No Active Printer Jobs"
+msgstr "Ei aktiivisia tulostustöitä"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
@@ -4280,6 +4294,11 @@ msgstr "Ladataan valintoja…"
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
 msgstr "Valitse tulostinajuri"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/um-photo-dialog.c:96
+msgid "Select"
+msgstr "Valitse"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -4334,66 +4353,55 @@ msgid "Reverse portrait"
 msgstr "Käänteinen pysty"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:142
+#: ../panels/printers/pp-jobs-dialog.c:103
 msgctxt "print job"
 msgid "Pending"
 msgstr "Odottaa"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:146
+#: ../panels/printers/pp-jobs-dialog.c:107
+#| msgid "Last used"
 msgctxt "print job"
-msgid "Held"
-msgstr "Pidossa"
+msgid "Paused"
+msgstr "Keskeytetty"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:150
+#: ../panels/printers/pp-jobs-dialog.c:111
 msgctxt "print job"
 msgid "Processing"
 msgstr "Käsitellään"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:154
+#: ../panels/printers/pp-jobs-dialog.c:115
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Pysäytetty"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:158
+#: ../panels/printers/pp-jobs-dialog.c:119
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Peruttu"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:162
+#: ../panels/printers/pp-jobs-dialog.c:123
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Keskeytetynyt"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:166
+#: ../panels/printers/pp-jobs-dialog.c:127
 msgctxt "print job"
 msgid "Completed"
 msgstr "Valmis"
 
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:288
-msgid "Job Title"
-msgstr "Työn nimi"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:297
-msgid "Job State"
-msgstr "Työn tila"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:303
-msgid "Time"
-msgstr "Aika"
-
-#: ../panels/printers/pp-jobs-dialog.c:451
+#. Translators: This is the printer name for which we are showing the active jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-msgid "%s Active Jobs"
-msgstr "%s aktiivista työtä"
+#| msgid "%s Active Jobs"
+msgctxt "Printer jobs dialog title"
+msgid "%s - Active Jobs"
+msgstr "%s - Aktiiviset työt"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1659
@@ -4618,7 +4626,7 @@ msgid "Print _Test Page"
 msgstr "Tulosta _testisivu"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
 msgid "_Options"
 msgstr "_Valinnat"
 
@@ -4881,15 +4889,16 @@ msgstr "Istunto täytyy käynnistää uudelleen, jotta muutokset tulevat voimaan
 msgid "Restart Now"
 msgstr "Käynnistä uudelleen nyt"
 
-#: ../panels/region/cc-region-panel.c:878
+#: ../panels/region/cc-region-panel.c:886
 msgid "No input source selected"
 msgstr "Syötelähdettä ei valittu"
 
-#: ../panels/region/cc-region-panel.c:1798
-msgid "Login Screen"
-msgstr "Kirjautumisnäyttö"
+#: ../panels/region/cc-region-panel.c:1804
+#| msgid "Login Screen"
+msgid "Login _Screen"
+msgstr "Kirjautumisnäytt_ö"
 
-#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+#: ../panels/region/format-chooser.ui.h:1
 msgid "Formats"
 msgstr "Muotoilut"
 
@@ -4984,9 +4993,19 @@ msgstr "Vaihtoehtoinen vaihto seuraavaan lähteeseen"
 msgid "Left+Right Alt"
 msgstr "Vasen+Oikea Alt"
 
+#: ../panels/region/region.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Kieli"
+
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Englanti (Yhdistynyt kuningaskunta)"
+
+#: ../panels/region/region.ui.h:3
+#| msgid "Formats"
+msgid "_Formats"
+msgstr "_Muotoilut"
 
 #: ../panels/region/region.ui.h:4
 msgid "United Kingdom"
@@ -4995,10 +5014,6 @@ msgstr "Yhdistynyt kuningaskunta"
 #: ../panels/region/region.ui.h:5
 msgid "Input Sources"
 msgstr "Syötelähteet"
-
-#: ../panels/region/region.ui.h:6
-msgid "Options"
-msgstr "Valinnat"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
@@ -5157,30 +5172,39 @@ msgid "Networks"
 msgstr "Verkot"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Computer Name"
-msgstr "Tietokoneen nimi"
+#| msgid "Computer Name"
+msgid "_Computer Name"
+msgstr "Ti_etokoneen nimi"
 
 #: ../panels/sharing/sharing.ui.h:2
-msgid "Personal File Sharing"
-msgstr "Henkilökohtainen tiedostonjako"
+#| msgid "Personal File Sharing"
+msgid "_Personal File Sharing"
+msgstr "Henkilökohtainen _tiedostonjako"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Screen Sharing"
-msgstr "Näytön jakaminen"
+#| msgid "Screen Sharing"
+msgid "_Screen Sharing"
+msgstr "_Näytön jakaminen"
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Media Sharing"
-msgstr "Mediajako"
+#| msgid "Media Sharing"
+msgid "_Media Sharing"
+msgstr "_Mediajako"
 
 #: ../panels/sharing/sharing.ui.h:5
-msgid "Remote Login"
-msgstr "Etäkirjautuminen"
+#| msgid "Remote Login"
+msgid "_Remote Login"
+msgstr "_Etäkirjautuminen"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Jotkut palvelut ovat poissa käytöstä, koska verkkoyhteyttä ei ole."
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:7
+msgid "Personal File Sharing"
+msgstr "Henkilökohtainen tiedostonjako"
+
+#: ../panels/sharing/sharing.ui.h:9
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5189,11 +5213,16 @@ msgstr ""
 "Henkilökohtaisen tiedostonjaon avulla voit jakaa julkisen kansiosi verkon "
 "muiden käyttäjien kanssa käyttäen osoitetta <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:9
-msgid "Require Password"
-msgstr "Vaadi salasana"
+#: ../panels/sharing/sharing.ui.h:10
+#| msgid "Require Password"
+msgid "_Require Password"
+msgstr "Vaa_di salasana"
 
 #: ../panels/sharing/sharing.ui.h:12
+msgid "Remote Login"
+msgstr "Etäkirjautuminen"
+
+#: ../panels/sharing/sharing.ui.h:14
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5202,7 +5231,11 @@ msgstr ""
 "Salli etäkäyttäjien yhdistää käyttäen Secure Shell -komentoa:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
+msgid "Screen Sharing"
+msgstr "Näytön jakaminen"
+
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5211,38 +5244,47 @@ msgstr ""
 "Salli etäkäyttäjien seurata ja hallita näyttöäsi yhdistämällä kohteeseen: <a "
 "href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:16
-msgid "Allow Remote Control"
-msgstr "Salli etäkäyttö"
-
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Password:"
-msgstr "Salasana:"
-
-#: ../panels/sharing/sharing.ui.h:18
-msgid "Show Password"
-msgstr "Näytä salasana"
-
 #: ../panels/sharing/sharing.ui.h:19
+#| msgid "Allow Remote Control"
+msgid "_Allow Remote Control"
+msgstr "S_alli etäkäyttö"
+
+#: ../panels/sharing/sharing.ui.h:20
+#| msgid "_Password"
+msgid "_Password:"
+msgstr "_Salasana:"
+
+#: ../panels/sharing/sharing.ui.h:21
+#| msgid "Show Password"
+msgid "_Show Password"
+msgstr "_Näytä salasana"
+
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Access Options"
 msgstr "Käyttövalinnat"
 
-#: ../panels/sharing/sharing.ui.h:20
-msgid "New connections must ask for access"
-msgstr "Uusien yhteyksien tulee kysyä lupa"
+#: ../panels/sharing/sharing.ui.h:23
+#| msgid "New connections must ask for access"
+msgid "_New connections must ask for access"
+msgstr "Uusien yhteyksien tulee ky_syä lupa"
 
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Require a password"
-msgstr "Vaadi salasana"
+#: ../panels/sharing/sharing.ui.h:24
+#| msgid "Require a password"
+msgid "_Require a password"
+msgstr "_Vaadi salasana"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:25
+msgid "Media Sharing"
+msgstr "Mediajako"
+
+#: ../panels/sharing/sharing.ui.h:26
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Mediajakaminen mahdollistaa musiikkin, valokuvien ja videoiden jakamisen "
 "verkon kautta."
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
 msgstr "Kansiot"
 
@@ -5508,6 +5550,7 @@ msgid "_Large Text"
 msgstr "Suuri _teksti"
 
 #: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "S_uurennus"
 
@@ -5532,12 +5575,14 @@ msgid "Screen _Keyboard"
 msgstr "N_äppäimistö näytöllä"
 
 #: ../panels/universal-access/uap.ui.h:13
-msgid "_Repeat Keys"
-msgstr "Toistonäppäi_met"
+#| msgid "Repeat Keys"
+msgid "R_epeat Keys"
+msgstr "Toist_onäppäimet"
 
 #: ../panels/universal-access/uap.ui.h:14
-msgid "_Cursor Blinking"
-msgstr "K_ohdistimen vilkunta"
+#| msgid "Cursor Blinking"
+msgid "Cursor _Blinking"
+msgstr "Kohdistimen _vilkunta"
 
 #: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
@@ -5836,37 +5881,40 @@ msgstr "Oikea puoli"
 msgid "Zoom Options"
 msgstr "Suurennuksen valinnat"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Zoom"
-msgstr "Lähennys"
-
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Magnification:"
-msgstr "Suurennus:"
+#| msgid "Magnification:"
+msgid "_Magnification:"
+msgstr "_Suurennus:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Follow mouse cursor"
-msgstr "Seuraa hiiren osoitinta"
+#| msgid "Follow mouse cursor"
+msgid "_Follow mouse cursor"
+msgstr "Seuraa _hiiren osoitinta"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Screen part:"
-msgstr "Näytön osa:"
+#| msgid "Screen part:"
+msgid "_Screen part:"
+msgstr "_Näytön osa:"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Magnifier extends outside of screen"
-msgstr "Suurennuslasi ulottuu näytön ulkopuolelle"
+#| msgid "Magnifier extends outside of screen"
+msgid "Magnifier _extends outside of screen"
+msgstr "Suu_rennuslasi ulottuu näytön ulkopuolelle"
 
 #: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Keep magnifier cursor centered"
-msgstr "Pidä suurennuslasin osoitin keskitettynä"
+#| msgid "Keep magnifier cursor centered"
+msgid "_Keep magnifier cursor centered"
+msgstr "Pi_dä suurennuslasin osoitin keskitettynä"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Magnifier cursor pushes contents around"
-msgstr "Suurennuslasin osoitin työntää sisältöä"
+#| msgid "Magnifier cursor pushes contents around"
+msgid "Magnifier cursor _pushes contents around"
+msgstr "Suur_ennuslasin osoitin työntää sisältöä"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnifier cursor moves with contents"
-msgstr "Suurennuslasin osoitin siirtyy sisällön kanssa"
+#| msgid "Magnifier cursor moves with contents"
+msgid "Magnifier cursor moves with _contents"
+msgstr "Suurennuslasin osoit_in siirtyy sisällön kanssa"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
@@ -5877,8 +5925,9 @@ msgid "Magnifier"
 msgstr "Suurennuslasi"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Thickness:"
-msgstr "Paksuus:"
+#| msgid "Thickness:"
+msgid "_Thickness:"
+msgstr "_Paksuus:"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgctxt "universal access, thickness"
@@ -5891,43 +5940,50 @@ msgid "Thick"
 msgstr "Paksu"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Length:"
-msgstr "Pituus:"
+#| msgid "Length:"
+msgid "_Length:"
+msgstr "Pit_uus:"
 
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Color:"
-msgstr "Väri:"
+#| msgid "Color:"
+msgid "Co_lor:"
+msgstr "Vä_ri:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Crosshairs:"
-msgstr "Tähtäin:"
+#| msgid "Crosshairs:"
+msgid "_Crosshairs:"
+msgstr "Tähtäi_n:"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Overlaps mouse cursor"
-msgstr "Hiiren osoittimen päällä"
+#| msgid "Overlaps mouse cursor"
+msgid "_Overlaps mouse cursor"
+msgstr "Hii_ren osoittimen päällä"
 
 #: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Tähtäimet"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-msgid "White on black:"
-msgstr "Valkoista mustalla:"
+#| msgid "White on black:"
+msgid "_White on black:"
+msgstr "Valkoista _mustalla:"
 
 #: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Brightness:"
-msgstr "Kirkkaus:"
+#| msgid "Brightness:"
+msgid "_Brightness:"
+msgstr "K_irkkaus:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Contrast:"
-msgstr "Kontrasti:"
+#| msgid "Contrast:"
+msgid "_Contrast:"
+msgstr "_Kontrasti:"
 
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
-msgid "Color"
-msgstr "Väri"
+msgid "Co_lor"
+msgstr "V_äri"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
@@ -5991,14 +6047,14 @@ msgid "Account _Type"
 msgstr "Tilin _tyyppi"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Allow user to set a password when they next login"
-msgstr "Salli käyttäjän vaihtaa salasana seuraavalla kirjautumiskerralla"
+#| msgid "Allow user to set a password when they next login"
+msgid "Allow user to set a password when they next _login"
+msgstr "Salli käyttäjän vaihtaa salasana seuraavalla ki_rjautumiskerralla"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Set a password now"
-msgstr "Aseta salasana nyt"
+#| msgid "Set a password now"
+msgid "Set a password _now"
+msgstr "_Aseta salasana nyt"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Verify"
@@ -6156,6 +6212,14 @@ msgstr "_Uusi salasana"
 msgid "Current _Password"
 msgstr "_Nykyinen salasana"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Salli käyttäjän vaihtaa salasana seuraavalla kirjautumiskerralla"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Set a password now"
+msgstr "Aseta salasana nyt"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
 msgstr "Lisää käyttäjätili"
@@ -6179,10 +6243,6 @@ msgstr "_Sormenjäljellä kirjautuminen"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "Käyttäjän kuvake"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "_Language"
-msgstr "_Kieli"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Last Login"
@@ -6930,6 +6990,10 @@ msgstr "Kohdista näyttöön…"
 msgid "Map Buttons…"
 msgstr "Määritä painikkeet…"
 
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Calibrate…"
+msgstr "Kalibroi..."
+
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Säädä näytön tarkkuutta"
@@ -7194,6 +7258,59 @@ msgstr "Näytä asetusten päänäkymä"
 #: ../shell/help-overlay.ui.h:6
 msgid "Cancel search"
 msgstr "Peru haku"
+
+#~ msgid "Done"
+#~ msgstr "Valmis"
+
+#~ msgid "Time _Zone"
+#~ msgstr "Aika_vyöhyke"
+
+#~ msgid "Active Jobs"
+#~ msgstr "Aktiiviset työt"
+
+#~ msgid "Close"
+#~ msgstr "Sulje"
+
+#~ msgid "Resume Printing"
+#~ msgstr "Jatka tulostusta"
+
+#~ msgid "Pause Printing"
+#~ msgstr "Keskeytä tulostus"
+
+#~ msgid "Cancel Print Job"
+#~ msgstr "Peru tulostustyö"
+
+#~ msgctxt "print job"
+#~ msgid "Held"
+#~ msgstr "Pidossa"
+
+#~ msgid "Job Title"
+#~ msgstr "Työn nimi"
+
+#~ msgid "Job State"
+#~ msgstr "Työn tila"
+
+#~ msgid "Time"
+#~ msgstr "Aika"
+
+#~ msgid "Options"
+#~ msgstr "Valinnat"
+
+#~ msgid "Password:"
+#~ msgstr "Salasana:"
+
+#~ msgid "_Repeat Keys"
+#~ msgstr "Toistonäppäi_met"
+
+#~ msgid "_Cursor Blinking"
+#~ msgstr "K_ohdistimen vilkunta"
+
+#~ msgid "Zoom"
+#~ msgstr "Lähennys"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Color"
+#~ msgstr "Väri"
 
 #~ msgid "_Delay:"
 #~ msgstr "_Viive:"
