@@ -50,6 +50,8 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, G_TYPE_OBJECT)
 
+static void page_changed (CEPage *page, gpointer user_data);
+
 static void
 selection_changed (GtkTreeSelection *selection, NetConnectionEditor *editor)
 {
@@ -182,6 +184,10 @@ static void
 net_connection_editor_finalize (GObject *object)
 {
         NetConnectionEditor *editor = NET_CONNECTION_EDITOR (object);
+        GSList *l;
+
+        for (l = editor->pages; l != NULL; l = l->next)
+                g_signal_handlers_disconnect_by_func (l->data, page_changed, editor);
 
         if (editor->permission_id > 0 && editor->client)
                 g_signal_handler_disconnect (editor->client, editor->permission_id);
