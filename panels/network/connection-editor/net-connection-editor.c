@@ -553,7 +553,7 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                 const gchar *security_setting;
 
                 security_setting = ce_page_get_security_setting (page);
-                if (!security_setting) {
+                if (!security_setting || editor->is_new_connection) {
                         ce_page_complete_init (page, NULL, NULL, NULL);
                 } else {
                         get_secrets_for_page (editor, page, security_setting);
