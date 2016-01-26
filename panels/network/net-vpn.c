@@ -406,6 +406,7 @@ editor_done (NetConnectionEditor *editor,
 {
         g_object_unref (editor);
         net_object_refresh (NET_OBJECT (vpn));
+        g_object_unref (vpn);
 }
 
 static void
@@ -432,7 +433,7 @@ vpn_proxy_edit (NetObject *object)
         net_connection_editor_set_title (editor, title);
         g_free (title);
 
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), vpn);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), g_object_ref (vpn));
         net_connection_editor_run (editor);
 }
 
