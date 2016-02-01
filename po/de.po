@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-21 14:09+0000\n"
-"PO-Revision-Date: 2016-01-21 17:44+0100\n"
+"POT-Creation-Date: 2016-02-01 18:08+0000\n"
+"PO-Revision-Date: 2016-02-01 19:36+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -718,7 +718,7 @@ msgid "_Import File…"
 msgstr "Datei _importieren …"
 
 #: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/network/connection-editor/net-connection-editor.c:518
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1477
@@ -1821,7 +1821,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "Trackpad;Zeiger;Mauszeiger;Klick;Doppelklick;Maustaste;Trackball;Bildlauf;"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1 ../shell/help-overlay.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "General"
 msgstr "Allgemein"
 
@@ -1931,7 +1931,7 @@ msgstr "Netzwerk-Proxy"
 #. * vpn connections in the device list.
 #.
 #: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
-#: ../panels/network/net-vpn.c:431
+#: ../panels/network/net-vpn.c:432
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
@@ -2083,7 +2083,7 @@ msgid "Excellent"
 msgstr "Ausgezeichnet"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
-#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-vpn.c:220
 #: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2398,43 +2398,43 @@ msgstr "Diese Verbindung nur für Ress_ourcen in deren Netzwerk verwenden"
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:269
+#: ../panels/network/connection-editor/net-connection-editor.c:275
 msgid "Unable to open connection editor"
 msgstr "Öffnen des Verbindungseditors schlug fehl"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:287
+#: ../panels/network/connection-editor/net-connection-editor.c:293
 msgid "New Profile"
 msgstr "Neues Profil"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:577
+#: ../panels/network/connection-editor/net-connection-editor.c:583
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:578
+#: ../panels/network/connection-editor/net-connection-editor.c:584
 msgid "Bond"
 msgstr "Gebündelt"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:580
+#: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Team"
 msgstr "Bündelung"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:582
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
 msgstr "Brücke"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:734
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "VPN-Plugins konnten nicht geladen werden"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:809
 msgid "Import from file…"
 msgstr "Aus Datei importieren …"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:874
+#: ../panels/network/connection-editor/net-connection-editor.c:880
 msgid "Add Network Connection"
 msgstr "Netzwerk-Verbindung hinzufügen"
 
@@ -5087,7 +5087,6 @@ msgid "No applications found"
 msgstr "Keine Anwendungen gefunden"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:1
-#: ../shell/help-overlay.ui.h:3
 msgid "Search"
 msgstr "Suchen"
 
@@ -7237,7 +7236,7 @@ msgstr "Verfügbare Leisten:"
 msgid "Help"
 msgstr "Hilfe"
 
-#: ../shell/cc-application.c:253 ../shell/help-overlay.ui.h:2
+#: ../shell/cc-application.c:253
 msgid "Quit"
 msgstr "Beenden"
 
@@ -7265,15 +7264,33 @@ msgstr "System"
 msgid "Preferences;Settings;"
 msgstr "Einstellungen;"
 
+#: ../shell/help-overlay.ui.h:1
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Allgemein"
+
+#: ../shell/help-overlay.ui.h:2
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Beenden"
+
+#: ../shell/help-overlay.ui.h:3
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Suchen"
+
 #: ../shell/help-overlay.ui.h:4
+msgctxt "shortcut window"
 msgid "Panels"
 msgstr "Panels"
 
 #: ../shell/help-overlay.ui.h:5
+msgctxt "shortcut window"
 msgid "Go back to the overview"
 msgstr "Zurück zur Übersicht gehen"
 
 #: ../shell/help-overlay.ui.h:6
+msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Suche abbrechen"
 
