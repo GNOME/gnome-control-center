@@ -248,22 +248,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("touchpad-options-listbox")), cc_list_box_update_header_func, NULL, NULL);
 }
 
-static void
-add_scales_to_sizegroup (CcMousePropertiesPrivate *d)
-{
-  GtkSizeGroup *size_group;
-
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  gtk_size_group_add_widget (size_group, WID ("mouse-label"));
-  gtk_size_group_add_widget (size_group, WID ("touchpad-speed-label"));
-
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  gtk_size_group_add_widget (size_group, WID ("mouse-speed-scale"));
-  gtk_size_group_add_widget (size_group, WID ("touchpad-speed-scale"));
-}
-
 /* Callback issued when a button is clicked on the dialog */
-
 static void
 device_changed (GsdDeviceManager *device_manager,
 		GsdDevice *device,
@@ -348,7 +333,6 @@ cc_mouse_properties_init (CcMouseProperties *object)
 
 	gtk_container_add (GTK_CONTAINER (object), WID ("scrolled-window"));
 
-	add_scales_to_sizegroup (d);
 	setup_dialog (d);
 }
 

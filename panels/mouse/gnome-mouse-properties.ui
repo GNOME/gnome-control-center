@@ -38,7 +38,7 @@
             <property name="shadow_type">in</property>
             <property name="margin_top">12</property>
             <property name="margin_bottom">12</property>
-            <property name="label" translatable="yes">General</property>
+            <property name="label_yalign">0.45</property>
             <property name="shadow_type">none</property>
             <child type="label">
               <object class="GtkLabel" id="label1">
@@ -55,7 +55,6 @@
               <object class="GtkFrame" id="general-frame-listbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="shadow_type">in</property>
                 <property name="margin_top">6</property>
                 <property name="margin_bottom">6</property>
                 <property name="shadow_type">in</property>
@@ -170,10 +169,10 @@
           <object class="GtkFrame" id="mouse-frame">
             <property name="visible">False</property>
             <property name="can_focus">False</property>
-            <property name="shadow_type">in</property>
             <property name="margin_top">12</property>
             <property name="margin_bottom">12</property>
             <property name="shadow_type">none</property>
+            <property name="label_yalign">0.45</property>
             <child type="label">
               <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
@@ -189,7 +188,6 @@
               <object class="GtkFrame" id="mouse-frame-listbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="shadow_type">in</property>
                 <property name="margin_top">6</property>
                 <property name="margin_bottom">6</property>
                 <property name="shadow_type">in</property>
@@ -212,11 +210,13 @@
                             <property name="margin_end">6</property>
                             <property name="margin_top">8</property>
                             <property name="margin_bottom">8</property>
+                            <property name="valign">center</property>
                             <child>
                               <object class="GtkLabel" id="mouse-label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
+                                <property name="valign">end</property>
                                 <property name="label" translatable="yes">Mouse Speed</property>
                                 <property name="use_underline">True</property>
                                 <property name="mnemonic_widget">primary-button-chooser-grid</property>
@@ -234,7 +234,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">adjustment1</property>
                                 <property name="draw_value">False</property>
-                                <property name="width-request">200</property>
+                                <property name="width-request">300</property>
+                                <property name="halign">end</property>
                                 <property name="expand">True</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="mouse_speed_scale-atkobject">
@@ -267,6 +268,7 @@
                             <property name="margin_end">6</property>
                             <property name="margin_top">6</property>
                             <property name="margin_bottom">6</property>
+                            <property name="valign">center</property>
                             <child>
                               <object class="GtkLabel" id="mouse-natural-scrolling-label">
                                 <property name="visible">True</property>
@@ -332,10 +334,10 @@
           <object class="GtkFrame" id="touchpad-frame">
             <property name="visible">False</property>
             <property name="can_focus">False</property>
-            <property name="shadow_type">in</property>
             <property name="margin_top">12</property>
             <property name="margin_bottom">12</property>
             <property name="shadow_type">none</property>
+            <property name="label_yalign">0.45</property>
             <child type="label">
               <object class="GtkLabel" id="label3">
                 <property name="visible">True</property>
@@ -351,9 +353,8 @@
               <object class="GtkFrame" id="touchpad-frame-listbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="shadow_type">in</property>
                 <property name="margin_top">6</property>
-                <property name="margin_bottom">6</property>
+                <property name="margin_bottom">12</property>
                 <property name="shadow_type">in</property>
                 <child>
                   <object class="GtkBox" id="touchpad-box">
@@ -379,12 +380,14 @@
                                 <property name="margin_end">6</property>
                                 <property name="margin_top">6</property>
                                 <property name="margin_bottom">6</property>
+                                <property name="valign">center</property>
                                 <child>
                                   <object class="GtkLabel" id="touchpad-toggle-label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="hexpand">True</property>
                                     <property name="xalign">0</property>
+                                    <property name="valign">end</property>
                                     <property name="label" translatable="yes">Touchpad</property>
                                     <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">touchpad-toggle-switch</property>
@@ -432,7 +435,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="touchpad-options-box">
+                      <object class="GtkListBoxRow" id="touchpad-options-box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
@@ -454,6 +457,7 @@
                                     <property name="margin_end">6</property>
                                     <property name="margin_top">6</property>
                                     <property name="margin_bottom">6</property>
+                                    <property name="valign">center</property>
                                     <child>
                                       <object class="GtkLabel" id="touchpad-natural-scrolling-label">
                                         <property name="visible">True</property>
@@ -523,11 +527,13 @@
                                     <property name="margin_end">6</property>
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
+                                    <property name="valign">center</property>
                                     <child>
                                       <object class="GtkLabel" id="touchpad-speed-label">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
+                                        <property name="valign">end</property>
                                         <property name="label" translatable="yes">Touchpad Speed</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">touchpad-speed-scale</property>
@@ -545,8 +551,8 @@
                                         <property name="can_focus">True</property>
                                         <property name="adjustment">adjustment11</property>
                                         <property name="draw_value">False</property>
-                                        <property name="width-request">200</property>
                                         <property name="expand">True</property>
+                                        <property name="halign">end</property>
                                         <child internal-child="accessible">
                                           <object class="AtkObject" id="touchpad_speed_scale-atkobject">
                                             <property name="AtkObject::accessible-description" translatable="yes">Double-click timeout</property>
@@ -578,12 +584,14 @@
                                     <property name="margin_end">6</property>
                                     <property name="margin_top">6</property>
                                     <property name="margin_bottom">6</property>
+                                    <property name="valign">center</property>
                                     <child>
                                       <object class="GtkLabel" id="tap-to-click-label">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="hexpand">True</property>
                                         <property name="xalign">0</property>
+                                        <property name="valign">end</property>
                                         <property name="label" translatable="yes">Tap to Click</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">tap-to-click-switch</property>
@@ -628,12 +636,14 @@
                                     <property name="margin_end">6</property>
                                     <property name="margin_top">6</property>
                                     <property name="margin_bottom">6</property>
+                                    <property name="valign">center</property>
                                     <child>
                                       <object class="GtkLabel" id="edge-scrolling-label">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="hexpand">True</property>
                                         <property name="xalign">0</property>
+                                        <property name="valign">end</property>
                                         <property name="label" translatable="yes">Edge Scrolling</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">edge-scrolling-switch</property>
@@ -675,5 +685,26 @@
         </child>
       </object>
     </child>
+  </object>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">vertical</property>
+    <widgets>
+      <widget name="mouse-row"/>
+      <widget name="mouse-natural-scrolling-row"/>
+      <widget name="touchpad-toggle-row"/>
+      <widget name="touchpad-natural-scrolling-row"/>
+      <widget name="touchpad-speed-row"/>
+      <widget name="tap-to-click-row"/>
+      <widget name="edge-scrolling-row"/>
+    </widgets>
+  </object>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="mouse-speed-scale"/>
+      <widget name="touchpad-speed-scale"/>
+    </widgets>
   </object>
 </interface>
