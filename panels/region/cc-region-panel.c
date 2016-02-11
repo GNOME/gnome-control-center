@@ -731,18 +731,21 @@ fetch_ibus_engines_result (GObject       *object,
                            GAsyncResult  *result,
                            CcRegionPanel *self)
 {
-        CcRegionPanelPrivate *priv = self->priv;
+        CcRegionPanelPrivate *priv;
         GList *list, *l;
         GError *error;
 
         error = NULL;
-        list = ibus_bus_list_engines_async_finish (priv->ibus, result, &error);
-        g_clear_object (&priv->ibus_cancellable);
+        list = ibus_bus_list_engines_async_finish (IBUS_BUS (object), result, &error);
         if (!list && error) {
-                g_warning ("Couldn't finish IBus request: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Couldn't finish IBus request: %s", error->message);
                 g_error_free (error);
                 return;
         }
+
+        priv = self->priv;
+        g_clear_object (&priv->ibus_cancellable);
 
         /* Maps engine ids to engine description objects */
         priv->ibus_engines = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
