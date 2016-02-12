@@ -23,6 +23,7 @@
 
 #include <glib.h>
 
-char *cc_util_normalize_casefold_and_unaccent (const char *str);
+char * cc_util_normalize_casefold_and_unaccent (const char *str);
+char * cc_util_get_smart_date                  (GDateTime *date);
 
 #endif

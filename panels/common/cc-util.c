@@ -20,6 +20,7 @@
 #include "config.h"
 
 #include <string.h>
+#include <glib/gi18n.h>
 
 
 #include "cc-util.h"
@@ -102,4 +103,42 @@ cc_util_normalize_casefold_and_unaccent (const char *str)
   tmp[j] = '\0';
 
   return tmp;
+}
+
+char *
+cc_util_get_smart_date (GDateTime *date)
+{
+        gchar *label;
+        GDateTime *today, *local;
+        GTimeSpan span;
+
+        /* Set today date */
+        local = g_date_time_new_now_local ();
+        today = g_date_time_new_local (g_date_time_get_year (local),
+                                       g_date_time_get_month (local),
+                                       g_date_time_get_day_of_month (local),
+                                       0, 0, 0);
+
+        span = g_date_time_difference (today, date);
+        if (span <= 0) {
+                label = g_strdup (_("Today"));
+        }
+        else if (span <= G_TIME_SPAN_DAY) {
+                label = g_strdup (_("Yesterday"));
+        }
+        else {
+                if (g_date_time_get_year (date) == g_date_time_get_year (today)) {
+                        /* Translators: This is a date format string in the style of "Feb 24". */
+                        label = g_date_time_format (date, _("%b %e"));
+                }
+                else {
+                        /* Translators: This is a date format string in the style of "Feb 24, 2013". */
+                        label = g_date_time_format (date, _("%b %e, %Y"));
+                }
+        }
+
+        g_date_time_unref (local);
+        g_date_time_unref (today);
+
+        return label;
 }
