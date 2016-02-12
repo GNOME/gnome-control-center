@@ -39,10 +39,6 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
-#ifdef HAVE_CHEESE
-#include <gst/gst.h>
-#endif /* HAVE_CHEESE */
-
 #include "shell/cc-editable-entry.h"
 
 #include "um-editable-button.h"
