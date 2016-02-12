@@ -60,6 +60,7 @@
 #include "um-history-dialog.h"
 
 #include "cc-common-language.h"
+#include "cc-util.h"
 
 #include "um-realm-manager.h"
 
@@ -838,7 +839,7 @@ get_login_time_text (ActUser *user)
         }
         else if (time > 0) {
                 date_time = g_date_time_new_from_unix_local (time);
-                date_str = get_smart_date (date_time);
+                date_str = cc_util_get_smart_date (date_time);
                 /* Translators: This is a time format string in the style of "22:58".
                    It indicates a login time which follows a date. */
                 time_str = g_date_time_format (date_time, C_("login date-time", "%k:%M"));

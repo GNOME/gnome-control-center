@@ -30,6 +30,8 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
+#include "cc-util.h"
+
 #include "um-history-dialog.h"
 #include "um-utils.h"
 
@@ -169,7 +171,7 @@ add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line
         gchar *date, *time, *str;
         GtkWidget *label, *row;
 
-        date = get_smart_date (datetime);
+        date = cc_util_get_smart_date (datetime);
         /* Translators: This is a time format string in the style of "22:58".
            It indicates a login time which follows a date. */
         time = g_date_time_format (datetime, C_("login date-time", "%k:%M"));
