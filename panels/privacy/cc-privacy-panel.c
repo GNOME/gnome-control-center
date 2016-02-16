@@ -43,6 +43,7 @@ struct _CcPrivacyPanelPrivate
   GtkBuilder *builder;
   GtkWidget  *recent_dialog;
   GtkWidget  *screen_lock_dialog;
+  GtkWidget  *location_dialog;
   GtkWidget  *trash_dialog;
   GtkWidget  *software_dialog;
   GtkWidget  *list_box;
@@ -375,6 +376,25 @@ add_screen_lock (CcPrivacyPanel *self)
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "show_notifications"));
   g_settings_bind (self->priv->notification_settings, "show-in-lock-screen",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+}
+
+static void
+add_location (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+
+  w = get_on_off_label (self->priv->location_settings, LOCATION_ENABLED);
+  add_row (self, _("Location Services"), "location_dialog", w);
+
+  dialog = self->priv->location_dialog;
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "location_services_switch"));
+  g_settings_bind (self->priv->location_settings, LOCATION_ENABLED,
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 }
@@ -767,6 +787,7 @@ cc_privacy_panel_finalize (GObject *object)
 
   g_clear_pointer (&priv->recent_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->screen_lock_dialog, gtk_widget_destroy);
+  g_clear_pointer (&priv->location_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->trash_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->software_dialog, gtk_widget_destroy);
   g_clear_pointer (&priv->abrt_dialog, gtk_widget_destroy);
@@ -836,6 +857,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 
   self->priv->recent_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_dialog"));
   self->priv->screen_lock_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
+  self->priv->location_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "location_dialog"));
   self->priv->trash_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
   self->priv->software_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "software_dialog"));
   self->priv->abrt_dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "abrt_dialog"));
@@ -861,6 +883,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->location_settings = g_settings_new ("org.gnome.system.location");
 
   add_screen_lock (self);
+  add_location (self);
   add_usage_history (self);
   add_trash_temp (self);
   add_software (self);
@@ -869,15 +892,6 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
   update_lock_screen_sensitivity (self);
-
-  widget = WID ("location_services_switch");
-  gtk_switch_set_active (GTK_SWITCH (widget),
-                         g_settings_get_boolean (self->priv->location_settings,
-                                                 LOCATION_ENABLED));
-  g_settings_bind (self->priv->location_settings,
-                   LOCATION_ENABLED,
-                   widget, "active",
-                   G_SETTINGS_BIND_DEFAULT);
 
   widget = WID ("privacy_vbox");
   gtk_container_add (GTK_CONTAINER (self), widget);
