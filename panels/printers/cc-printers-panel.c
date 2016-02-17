@@ -1041,6 +1041,24 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 }
 
 static void
+set_current_page (GObject      *source_object,
+                  GAsyncResult *result,
+                  gpointer      user_data)
+{
+  GtkWidget *widget = GTK_WIDGET (user_data);
+  PpCups    *cups = PP_CUPS (source_object);
+  gboolean   success;
+
+  success = pp_cups_connection_test_finish (cups, result);
+  g_object_unref (source_object);
+
+  if (success)
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_PRINTERS_PAGE);
+  else
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_CUPS_PAGE);
+}
+
+static void
 actualize_printers_list_cb (GObject      *source_object,
                             GAsyncResult *result,
                             gpointer      user_data)
@@ -1061,7 +1079,6 @@ actualize_printers_list_cb (GObject      *source_object,
   gboolean                valid = FALSE;
   PpCups                 *cups = PP_CUPS (source_object);
   PpCupsDests            *cups_dests;
-  http_t                 *http;
   gchar                  *current_printer_name = NULL;
   gchar                  *printer_icon_name = NULL;
   gchar                  *default_icon_name = NULL;
@@ -1094,7 +1111,6 @@ actualize_printers_list_cb (GObject      *source_object,
 
   free_dests (self);
   cups_dests = pp_cups_get_dests_finish (cups, result, NULL);
-  g_object_unref (cups);
 
   priv->dests = cups_dests->dests;
   priv->num_dests = cups_dests->num_of_dests;
@@ -1115,19 +1131,14 @@ actualize_printers_list_cb (GObject      *source_object,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "notebook");
 
-      http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
-      if (http)
-        {
-          httpClose (http);
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_PRINTERS_PAGE);
-        }
-      else
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_CUPS_PAGE);
+      pp_cups_connection_test_async (g_object_ref (cups), set_current_page, widget);
 
       gtk_widget_set_sensitive (GTK_WIDGET (treeview), FALSE);
     }
   else
     gtk_widget_set_sensitive (GTK_WIDGET (treeview), TRUE);
+
+  g_object_unref (cups);
 
   for (i = 0; i < priv->num_dests; i++)
     {
