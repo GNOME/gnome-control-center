@@ -44,6 +44,7 @@ struct _CcPrivacyPanelPrivate
   GtkWidget  *recent_dialog;
   GtkWidget  *screen_lock_dialog;
   GtkWidget  *location_dialog;
+  GtkWidget  *location_label;
   GtkWidget  *trash_dialog;
   GtkWidget  *software_dialog;
   GtkWidget  *list_box;
@@ -57,6 +58,8 @@ struct _CcPrivacyPanelPrivate
   GtkWidget  *abrt_dialog;
   GtkWidget  *abrt_row;
   guint       abrt_watch_id;
+
+  GDBusProxy *gclue_manager;
 };
 
 static char *
@@ -381,22 +384,113 @@ add_screen_lock (CcPrivacyPanel *self)
 }
 
 static void
+update_location_label (CcPrivacyPanel *self)
+{
+  CcPrivacyPanelPrivate *priv = self->priv;
+  gboolean in_use = FALSE, on;
+
+  if (priv->gclue_manager != NULL)
+    {
+      GVariant *variant;
+
+      variant = g_dbus_proxy_get_cached_property (priv->gclue_manager, "InUse");
+      if (variant != NULL)
+        {
+          in_use = g_variant_get_boolean (variant);
+          g_variant_unref (variant);
+        }
+    }
+
+  if (in_use) {
+    gtk_label_set_label (GTK_LABEL (priv->location_label), _("In use"));
+
+    return;
+  }
+
+  on = g_settings_get_boolean (priv->location_settings, LOCATION_ENABLED);
+  gtk_label_set_label (GTK_LABEL (priv->location_label),
+                       on ? _("On") : _("Off"));
+}
+
+static void
+on_location_setting_changed (GSettings *settings,
+                             gchar     *key,
+                             gpointer   user_data)
+{
+  update_location_label (CC_PRIVACY_PANEL (user_data));
+}
+
+static void
+on_gclue_manager_props_changed (GDBusProxy *manager,
+                                GVariant   *changed_properties,
+                                GStrv       invalidated_properties,
+                                gpointer    user_data)
+{
+  update_location_label (CC_PRIVACY_PANEL (user_data));
+}
+
+static void
+on_gclue_manager_ready (GObject *source_object,
+                        GAsyncResult *res,
+                        gpointer user_data)
+{
+  CcPrivacyPanel *self = CC_PRIVACY_PANEL (user_data);
+  GError *error = NULL;
+
+  self->priv->gclue_manager = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (error != NULL)
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+
+      return;
+    }
+
+  g_signal_connect (self->priv->gclue_manager,
+                    "g-properties-changed",
+                    G_CALLBACK (on_gclue_manager_props_changed),
+                    self);
+
+  update_location_label (self);
+}
+
+static void
 add_location (CcPrivacyPanel *self)
 {
+  CcPrivacyPanelPrivate *priv = self->priv;
   GtkWidget *w;
   GtkWidget *dialog;
 
-  w = get_on_off_label (self->priv->location_settings, LOCATION_ENABLED);
-  add_row (self, _("Location Services"), "location_dialog", w);
+  priv->location_label = gtk_label_new ("");
+  g_signal_connect (priv->location_settings,
+                    "changed::" LOCATION_ENABLED,
+                    G_CALLBACK (on_location_setting_changed),
+                    self);
+  update_location_label (self);
 
-  dialog = self->priv->location_dialog;
+  add_row (self,
+           _("Location Services"),
+           "location_dialog",
+           priv->location_label);
+
+  dialog = priv->location_dialog;
   g_signal_connect (dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "location_services_switch"));
-  g_settings_bind (self->priv->location_settings, LOCATION_ENABLED,
+  w = GTK_WIDGET (gtk_builder_get_object (priv->builder, "location_services_switch"));
+  g_settings_bind (priv->location_settings, LOCATION_ENABLED,
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.GeoClue2",
+                            "/org/freedesktop/GeoClue2/Manager",
+                            "org.freedesktop.GeoClue2.Manager",
+                            NULL,
+                            on_gclue_manager_ready,
+                            self);
 }
 
 static void
@@ -797,6 +891,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->privacy_settings);
   g_clear_object (&priv->notification_settings);
   g_clear_object (&priv->location_settings);
+  g_clear_object (&priv->gclue_manager);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
