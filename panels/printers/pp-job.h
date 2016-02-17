@@ -36,11 +36,21 @@ struct _PpJob
   GObject parent_instance;
 };
 
-void pp_job_set_hold_until_async (PpJob        *job,
-                                  const gchar  *job_hold_until);
+void           pp_job_set_hold_until_async       (PpJob                *job,
+                                                  const gchar          *job_hold_until);
 
-void pp_job_cancel_purge_async (PpJob        *job,
-                                gboolean      job_purge);
+void           pp_job_cancel_purge_async         (PpJob                *job,
+                                                  gboolean              job_purge);
+
+void           pp_job_get_attributes_async       (PpJob                *job,
+                                                  gchar               **attributes_names,
+                                                  GCancellable         *cancellable,
+                                                  GAsyncReadyCallback   callback,
+                                                  gpointer              user_data);
+
+GVariant      *pp_job_get_attributes_finish      (PpJob                *job,
+                                                  GAsyncResult         *result,
+                                                  GError              **error);
 
 G_END_DECLS
 
