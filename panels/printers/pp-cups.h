@@ -65,6 +65,13 @@ PpCupsDests *pp_cups_get_dests_finish (PpCups               *cups,
                                        GAsyncResult         *result,
                                        GError              **error);
 
+void         pp_cups_connection_test_async (PpCups              *cups,
+                                            GAsyncReadyCallback  callback,
+                                            gpointer             user_data);
+
+gboolean     pp_cups_connection_test_finish (PpCups         *cups,
+                                             GAsyncResult   *result);
+
 G_END_DECLS
 
 #endif /* __PP_CUPS_H__ */

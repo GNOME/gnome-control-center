@@ -89,3 +89,39 @@ pp_cups_get_dests_finish (PpCups        *cups,
 
   return g_task_propagate_pointer (G_TASK (res), error);
 }
+
+static void
+connection_test_thread (GTask        *task,
+                        gpointer      source_object,
+                        gpointer      task_data,
+                        GCancellable *cancellable)
+{
+  http_t *http;
+
+  http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+  g_task_return_boolean (task, http != NULL);
+
+  httpClose (http);
+}
+
+void
+pp_cups_connection_test_async (PpCups              *cups,
+                               GAsyncReadyCallback  callback,
+                               gpointer             user_data)
+{
+  GTask *task;
+
+  task = g_task_new (cups, NULL, callback, user_data);
+  g_task_run_in_thread (task, connection_test_thread);
+
+  g_object_unref (task);
+}
+
+gboolean
+pp_cups_connection_test_finish (PpCups         *cups,
+                                GAsyncResult   *result)
+{
+  g_return_val_if_fail (g_task_is_valid (result, cups), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (result), NULL);
+}
