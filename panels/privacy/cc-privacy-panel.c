@@ -21,6 +21,7 @@
 #include "shell/list-box-helper.h"
 #include "cc-privacy-panel.h"
 #include "cc-privacy-resources.h"
+#include "cc-util.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
@@ -38,6 +39,9 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 #define REPORT_TECHNICAL_PROBLEMS "report-technical-problems"
 #define LOCATION_ENABLED "enabled"
 
+#define APP_PERMISSIONS_TABLE "gnome"
+#define APP_PERMISSIONS_ID "geolocation"
+
 struct _CcPrivacyPanelPrivate
 {
   GtkBuilder *builder;
@@ -48,6 +52,9 @@ struct _CcPrivacyPanelPrivate
   GtkWidget  *trash_dialog;
   GtkWidget  *software_dialog;
   GtkWidget  *list_box;
+  GtkWidget  *location_apps_list_box;
+  GtkWidget  *location_apps_label;
+  GtkWidget  *location_apps_frame;
 
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
@@ -62,6 +69,10 @@ struct _CcPrivacyPanelPrivate
   GCancellable *cancellable;
 
   GDBusProxy *gclue_manager;
+  GDBusProxy *perm_store;
+  GVariant *location_apps_perms;
+
+  GtkSizeGroup *location_icon_size_group;
 };
 
 static char *
@@ -417,11 +428,24 @@ update_location_label (CcPrivacyPanel *self)
 }
 
 static void
+update_location_apps_sensitivity (CcPrivacyPanel *self)
+{
+  gboolean enabled;
+
+  enabled = g_settings_get_boolean (self->priv->location_settings,
+                                    LOCATION_ENABLED);
+  gtk_widget_set_sensitive (self->priv->location_apps_frame,
+                            enabled);
+  gtk_widget_set_sensitive (self->priv->location_apps_label,
+                            enabled);
+}
+
+static void
 on_location_setting_changed (GSettings *settings,
                              gchar     *key,
                              gpointer   user_data)
 {
-  update_location_label (user_data);
+  update_location_apps_sensitivity (user_data);
 }
 
 static void
@@ -462,6 +486,285 @@ on_gclue_manager_ready (GObject *source_object,
   update_location_label (self);
 }
 
+typedef struct
+{
+  CcPrivacyPanel *self;
+  GtkWidget *widget;
+  gchar *app_id;
+  gboolean changing_state;
+  gboolean pending_state;
+} LocationAppStateData;
+
+static void
+location_app_state_data_free (LocationAppStateData *data)
+{
+    g_free (data->app_id);
+    g_slice_free (LocationAppStateData, data);
+}
+
+static void
+on_perm_store_set_done (GObject *source_object,
+                        GAsyncResult *res,
+                        gpointer user_data)
+{
+  LocationAppStateData *data;
+  GVariant *results;
+  GError *error = NULL;
+
+  results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                      res,
+                                      &error);
+  if (results == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to store permissions: %s", error->message);
+      g_error_free (error);
+
+      return;
+    }
+  g_variant_unref (results);
+
+  data = (LocationAppStateData *) user_data;
+  data->changing_state = FALSE;
+  gtk_switch_set_state (GTK_SWITCH (data->widget), data->pending_state);
+}
+
+static gboolean
+on_location_app_state_set (GtkSwitch *widget,
+                           gboolean   state,
+                           gpointer   user_data)
+{
+  LocationAppStateData *data = (LocationAppStateData *) user_data;
+  CcPrivacyPanel *self = data->self;
+  GVariant *params, *in_dict, *out_data;
+  GVariantIter iter;
+  gchar *key;
+  gchar **value;
+  GVariantBuilder builder;
+
+  if (data->changing_state)
+    return TRUE;
+
+  data->changing_state = TRUE;
+  data->pending_state = state;
+
+  in_dict = g_variant_get_child_value (self->priv->location_apps_perms, 0);
+  g_variant_iter_init (&iter, in_dict);
+  g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
+  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+    {
+      gchar *tmp = NULL;
+
+      if (g_strv_length (value) < 2)
+        /* It's OK to drop the entry if it's not in expected format */
+        continue;
+
+      if (g_strcmp0 (data->app_id, key) == 0)
+        {
+          tmp = value[0];
+          value[0] = state ? "EXACT" : "NONE";
+        }
+
+      g_variant_builder_add (&builder, "{s^as}", key, value);
+
+      if (tmp != NULL)
+        value[0] = tmp;
+    }
+  g_variant_unref (in_dict);
+
+  out_data = g_variant_get_child_value (self->priv->location_apps_perms, 1);
+  params = g_variant_new ("(sbsa{sas}v)",
+                          APP_PERMISSIONS_TABLE,
+                          TRUE,
+                          APP_PERMISSIONS_ID,
+                          &builder,
+                          out_data);
+  g_variant_unref (out_data);
+
+  g_dbus_proxy_call (self->priv->perm_store,
+                     "Set",
+                     params,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     self->priv->cancellable,
+                     on_perm_store_set_done,
+                     data);
+
+  return TRUE;
+}
+
+static void
+add_location_app (CcPrivacyPanel *self,
+                  const gchar    *app_id,
+                  gboolean        enabled,
+                  gint64          last_used)
+{
+  GDesktopAppInfo *app_info;
+  char *desktop_id;
+  GtkWidget *box, *row, *w;
+  GIcon *icon;
+  GDateTime *t;
+  char *last_used_str;
+  LocationAppStateData *data;
+
+  desktop_id = g_strdup_printf ("%s.desktop", app_id);
+  app_info = g_desktop_app_info_new (desktop_id);
+  g_free (desktop_id);
+  if (app_info == NULL)
+      return;
+
+  row = gtk_list_box_row_new ();
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_set_margin_top (box, 6);
+  gtk_widget_set_margin_bottom (box, 6);
+  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_widget_set_hexpand (box, TRUE);
+  gtk_container_add (GTK_CONTAINER (self->priv->location_apps_list_box), row);
+
+  icon = g_app_info_get_icon (G_APP_INFO (app_info));
+  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+  gtk_widget_set_margin_start (w, 12);
+  gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  gtk_size_group_add_widget (self->priv->location_icon_size_group, w);
+  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+
+  w = gtk_label_new (g_app_info_get_name (G_APP_INFO (app_info)));
+  gtk_widget_set_margin_start (w, 12);
+  gtk_widget_set_margin_end (w, 12);
+  gtk_widget_set_halign (w, GTK_ALIGN_START);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  gtk_label_set_xalign (GTK_LABEL (w), 0);
+  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+
+  t = g_date_time_new_from_unix_utc (last_used);
+  last_used_str = cc_util_get_smart_date (t);
+  w = gtk_label_new (last_used_str);
+  g_free (last_used_str);
+  gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
+  gtk_widget_set_margin_start (w, 12);
+  gtk_widget_set_margin_end (w, 12);
+  gtk_widget_set_halign (w, GTK_ALIGN_END);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), w, TRUE, TRUE, 0);
+
+  w = gtk_switch_new ();
+  gtk_switch_set_active (GTK_SWITCH (w), enabled);
+  gtk_widget_set_margin_end (w, 12);
+  gtk_widget_set_halign (w, GTK_ALIGN_END);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+
+  data = g_slice_new (LocationAppStateData);
+  data->self = self;
+  data->app_id = g_strdup (app_id);
+  data->widget = w;
+  data->changing_state = FALSE;
+  g_signal_connect_data (G_OBJECT (w),
+                         "state-set",
+                         G_CALLBACK (on_location_app_state_set),
+                         data,
+                         (GClosureNotify) location_app_state_data_free,
+                         0);
+
+  gtk_widget_show_all (row);
+}
+
+static void
+on_perm_store_lookup_done(GObject *source_object,
+                          GAsyncResult *res,
+                          gpointer user_data)
+{
+  CcPrivacyPanel *self;
+  CcPrivacyPanelPrivate *priv;
+  GVariant *permissions, *dict;
+  GVariantIter iter;
+  gchar *key;
+  gchar **value;
+  GList *children;
+  GError *error = NULL;
+
+  permissions = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                          res,
+                                          &error);
+  if (permissions == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed fetch permissions from xdg-app permission store: %s",
+                   error->message);
+      g_error_free (error);
+
+      return;
+    }
+  self = user_data;
+  priv = self->priv;
+
+  priv->location_apps_perms = permissions;
+  dict = g_variant_get_child_value (permissions, 0);
+  g_variant_iter_init (&iter, dict);
+  while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
+    {
+      gboolean enabled;
+      gint64 last_used;
+
+      if (g_strv_length (value) < 2)
+        {
+          g_debug ("Permissions for %s in incorrect format, ignoring..", key);
+          continue;
+        }
+
+      enabled = (g_strcmp0 (value[0], "NONE") != 0);
+      last_used = g_ascii_strtoll (value[1], NULL, 10);
+
+      add_location_app (self, key, enabled, last_used);
+    }
+  g_variant_unref (dict);
+
+  children = gtk_container_get_children (GTK_CONTAINER (priv->location_apps_list_box));
+  if (g_list_length (children) > 0)
+    {
+      gtk_widget_set_visible (priv->location_apps_label, TRUE);
+      gtk_widget_set_visible (priv->location_apps_frame, TRUE);
+    }
+  g_list_free (children);
+}
+
+static void
+on_perm_store_ready (GObject *source_object,
+                     GAsyncResult *res,
+                     gpointer user_data)
+{
+  CcPrivacyPanel *self;
+  GDBusProxy *proxy;
+  GVariant *params;
+  GError *error = NULL;
+
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+          g_warning ("Failed to connect to xdg-app permission store: %s",
+                     error->message);
+      g_error_free (error);
+
+      return;
+    }
+  self = user_data;
+  self->priv->perm_store = proxy;
+
+  params = g_variant_new ("(ss)",
+                          APP_PERMISSIONS_TABLE,
+                          APP_PERMISSIONS_ID);
+  g_dbus_proxy_call (self->priv->perm_store,
+                     "Lookup",
+                     params,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     self->priv->cancellable,
+                     on_perm_store_lookup_done,
+                     self);
+}
+
 static void
 add_location (CcPrivacyPanel *self)
 {
@@ -498,6 +801,16 @@ add_location (CcPrivacyPanel *self)
                             "org.freedesktop.GeoClue2.Manager",
                             priv->cancellable,
                             on_gclue_manager_ready,
+                            self);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.XdgApp",
+                            "/org/freedesktop/XdgApp/PermissionStore",
+                            "org.freedesktop.XdgApp.PermissionStore",
+                            priv->cancellable,
+                            on_perm_store_ready,
                             self);
 }
 
@@ -902,6 +1215,9 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->location_settings);
   g_clear_object (&priv->gclue_manager);
   g_clear_object (&priv->cancellable);
+  g_clear_object (&priv->perm_store);
+  g_clear_object (&priv->location_icon_size_group);
+  g_clear_pointer (&priv->location_apps_perms, g_variant_unref);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -974,6 +1290,13 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   gtk_container_add (GTK_CONTAINER (frame), widget);
   self->priv->list_box = widget;
   gtk_widget_show (widget);
+  self->priv->location_apps_list_box = WID ("location_apps_list_box");
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->priv->location_apps_list_box),
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  self->priv->location_apps_frame = WID ("location_apps_frame");
+  self->priv->location_apps_label = WID ("location_apps_label");
+  self->priv->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   g_signal_connect_swapped (widget, "row-activated",
                             G_CALLBACK (activate_row), self);
