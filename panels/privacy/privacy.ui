@@ -725,23 +725,24 @@ All the information we collect is made anonymous, and we will never share your d
       <object class="GtkBox" id="location-vbox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">12</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkLabel" id="location_description_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-            <property name="margin_top">6</property>
+            <property name="margin_top">12</property>
             <property name="margin_bottom">12</property>
             <property name="label" translatable="yes">Location services allow applications to determine your geographical position. Accuracy is increased by enabling WiFi and GPS.</property>
             <property name="wrap">True</property>
             <property name="max_width_chars">50</property>
+            <property name="xalign">0</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
 
@@ -750,8 +751,6 @@ All the information we collect is made anonymous, and we will never share your d
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="shadow_type">in</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
 
             <child>
               <object class="GtkListBox" id="location_listbox">
@@ -815,7 +814,50 @@ All the information we collect is made anonymous, and we will never share your d
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="location_apps_label">
+            <property name="visible">False</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">24</property>
+            <property name="margin_bottom">12</property>
+            <property name="halign">start</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Applications</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">2</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkFrame" id="location_apps_frame">
+            <property name="visible">False</property>
+            <property name="can_focus">False</property>
+            <property name="shadow_type">in</property>
+            <property name="margin_bottom">12</property>
+
+            <child>
+              <object class="GtkListBox" id="location_apps_list_box">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="selection_mode">none</property>
+              </object>
+            </child>
+
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
           </packing>
         </child>
 
