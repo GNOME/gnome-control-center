@@ -91,7 +91,7 @@ create_listbox_row (gpointer item,
   GtkWidget *box;
   GtkWidget *widget;
   gchar     *title;
-  gchar     *state_string;
+  gchar     *state_string = NULL;
   gint       job_state;
 
   g_object_get (job, "title", &title, "state", &job_state, NULL);
