@@ -9,13 +9,13 @@
 # Jordi Serratosa <jordis@softcatala.cat>, 2012.
 # Josep Sànchez <papapep@gmx.com>, 2013.
 # Gil Forcada <gilforcada@guifi.net>, 2013, 2014.
-# Jordi Mas <jmas@softcatala.org>, 2015
+# Jordi Mas <jmas@softcatala.org>, 2015-2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-01 11:23+0200\n"
+"POT-Creation-Date: 2016-02-27 06:45+0100\n"
 "PO-Revision-Date: 2015-04-14 19:17+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -27,9 +27,8 @@ msgstr ""
 "X-Generator: Poedit 1.6.9\n"
 
 #: ../panels/background/background.ui.h:1
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Fons"
+msgid "_Background"
+msgstr "_Fons"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -38,8 +37,8 @@ msgstr "Canvia durant el dia"
 
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-msgid "Lock Screen"
-msgstr "Bloca la pantalla"
+msgid "_Lock Screen"
+msgstr "_Pantalla de bloqueig"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -110,7 +109,8 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:29
+#: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2023
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
@@ -120,15 +120,16 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:1963
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:374
+#: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1476
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
@@ -138,10 +139,8 @@ msgid "_Cancel"
 msgstr "_Cancel·la"
 
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/um-photo-dialog.c:96
-msgid "Select"
-msgstr "Selecciona"
+msgid "_Select"
+msgstr "_Selecciona"
 
 #: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
@@ -151,8 +150,8 @@ msgstr "mides múltiples"
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
 #: ../panels/background/cc-background-item.c:207
 #, c-format
-msgid "%d ے %d"
-msgstr "%d ے %d"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 #: ../panels/background/cc-background-item.c:333
 msgid "No Desktop Background"
@@ -161,6 +160,10 @@ msgstr "Sense imatge de fons de l'escriptori"
 #: ../panels/background/cc-background-panel.c:493
 msgid "Current background"
 msgstr "Imatge de fons actual"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Fons"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
@@ -171,45 +174,46 @@ msgstr "Canvieu la imatge de fons a un fons de pantalla o fotografia"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Fons de pantalla;Pantalla;Escriptori;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+#: ../panels/bluetooth/cc-bluetooth-panel.c:264
 msgid "Turn Off Airplane Mode"
 msgstr "Desactiveu el mode d'avió"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "No Bluetooth Found"
 msgstr "No s'ha trobat el Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "Connecteu una motxilla per a usar Bluetooth."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Bluetooth Turned Off"
 msgstr "Bluetooth desactivat"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Turn on to connect devices and receive file transfers."
-msgstr "Activeu-lo per connectar dispositius i rebre transferències de fitxers."
+msgstr ""
+"Activeu-lo per connectar dispositius i rebre transferències de fitxers."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Airplane Mode is on"
 msgstr "El mode d'avió està activat"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Bluetooth is disabled when airplane mode is on."
 msgstr "El Bluetooth està inhabilitat quan el mode d'avió està activat."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Hardware Airplane Mode is on"
 msgstr "El mode d'avió del maquinari està activat"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "Desactiveu el mode d'avió per a habilitar el Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1588
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -541,27 +545,22 @@ msgstr "Aquest perfil potser ja no és precís"
 msgid "Display Calibration"
 msgstr "Calibratge de la pantalla"
 
-#: ../panels/color/color-calibrate.ui.h:2
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1476
-msgid "Cancel"
-msgstr "Cancel·la"
-
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-msgid "Start"
-msgstr "Inicia"
+msgid "_Start"
+msgstr "_Inicia"
 
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-msgid "Resume"
-msgstr "Continua"
+msgid "_Resume"
+msgstr "_Continua"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-msgid "Done"
-msgstr "Fet"
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Fet"
 
 #. Timeout parameters
 #. 15000 = 15 sec
@@ -700,12 +699,12 @@ msgid "Summary"
 msgstr "Resum"
 
 #: ../panels/color/color.ui.h:28
-msgid "Import File…"
-msgstr "Importa un fitxer…"
+msgid "_Import File…"
+msgstr "_Importa un fitxer…"
 
 #: ../panels/color/color.ui.h:30
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/network/connection-editor/net-connection-editor.c:518
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1477
@@ -735,42 +734,42 @@ msgid "Learn more about color management"
 msgstr "Apreneu més sobre la gestió del color"
 
 #: ../panels/color/color.ui.h:35
-msgid "Set for all users"
-msgstr "Estableix per a tots els usuaris"
+msgid "_Set for all users"
+msgstr "_Estableix per a tots els usuaris"
 
 #: ../panels/color/color.ui.h:36
 msgid "Set this profile for all users on this computer"
 msgstr "Estableix aquest perfil per a tots els usuaris d'aquest ordinador"
 
 #: ../panels/color/color.ui.h:37
-msgid "Enable"
-msgstr "Habilita"
+msgid "_Enable"
+msgstr "_Habilita"
 
 #: ../panels/color/color.ui.h:38
-msgid "Add profile"
-msgstr "Afegeix un perfil"
+msgid "_Add profile"
+msgstr "_Afegeix un perfil"
 
 #: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "Calibrate…"
-msgstr "Calibra…"
+msgid "_Calibrate…"
+msgstr "_Calibra…"
 
 #: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
 msgstr "Calibra el dispositiu"
 
 #: ../panels/color/color.ui.h:41
-msgid "Remove profile"
-msgstr "Suprimeix un perfil"
+msgid "_Remove profile"
+msgstr "_Suprimeix un perfil"
 
 #: ../panels/color/color.ui.h:42
-msgid "View details"
-msgstr "Mostra els detalls"
+msgid "_View details"
+msgstr "_Mostra els detalls"
 
 #: ../panels/color/color.ui.h:43
 msgid "Unable to detect any devices that can be color managed"
 msgstr ""
-"No s'ha pogut detectar cap dispositiu en el qual s'hi pugui gestionar el color"
+"No s'ha pogut detectar cap dispositiu en el qual s'hi pugui gestionar el "
+"color"
 
 #: ../panels/color/color.ui.h:44
 msgid "LCD"
@@ -881,7 +880,7 @@ msgstr "Altres…"
 
 #: ../panels/common/cc-language-chooser.c:124
 #: ../panels/region/cc-format-chooser.c:271
-#: ../panels/region/cc-input-chooser.c:168
+#: ../panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Més…"
 
@@ -889,14 +888,9 @@ msgstr "Més…"
 msgid "No languages found"
 msgstr "No s'ha trobat cap idioma"
 
-#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+#: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Idioma"
-
-#: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
-msgid "_Done"
-msgstr "_Fet"
 
 #: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
 #: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
@@ -1053,8 +1047,8 @@ msgid "Date & _Time"
 msgstr "Data i _hora"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "Time _Zone"
-msgstr "_Fus Horari"
+msgid "Time Z_one"
+msgstr "Fus h_orari"
 
 #: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
@@ -1101,12 +1095,14 @@ msgstr "Primària"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1834 ../panels/power/cc-power-panel.c:1845
+#: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Apagat"
@@ -1329,7 +1325,7 @@ msgid "Windows software"
 msgstr "Programari de Windows"
 
 #: ../panels/info/cc-info-panel.c:1435
-#: ../panels/keyboard/keyboard-shortcuts.c:1947
+#: ../panels/keyboard/keyboard-shortcuts.c:1949
 msgid "Section"
 msgstr "Secció"
 
@@ -1516,7 +1512,6 @@ msgid "Eject"
 msgstr "Expulsa"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "Escriptura"
@@ -1651,7 +1646,7 @@ msgstr "Activa o desactiva el contrast alt"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1219
+#: ../panels/keyboard/keyboard-shortcuts.c:1220
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1706,75 +1701,14 @@ msgid "C_ommand:"
 msgstr "_Ordre:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Repeat Keys"
-msgstr "Tecles de repetició"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Key presses _repeat when key is held down"
-msgstr "Es repetei_x la tecla quan es manté premuda"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
-msgid "_Delay:"
-msgstr "_Retard:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-msgid "_Speed:"
-msgstr "_Velocitat:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-msgctxt "keyboard, delay"
-msgid "Short"
-msgstr "Curt"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
-msgctxt "keyboard, speed"
-msgid "Slow"
-msgstr "Lenta"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-msgid "Repeat keys speed"
-msgstr "Velocitat de la repetició de tecles"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-msgctxt "keyboard, delay"
-msgid "Long"
-msgstr "Llarg"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-msgctxt "keyboard, speed"
-msgid "Fast"
-msgstr "Ràpida"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
-msgid "Cursor Blinking"
-msgstr "Parpelleig del cursor"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-msgid "Cursor _blinks in text fields"
-msgstr "El cursor _parpelleja en els camps de text"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-msgid "S_peed:"
-msgstr "Ve_locitat:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-msgid "Cursor blink speed"
-msgstr "Velocitat del parpelleig del cursor"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/region/region.ui.h:5
-msgid "Input Sources"
-msgstr "Fonts d'entrada"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "Add Shortcut"
 msgstr "Afegeix una drecera"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 msgid "Remove Shortcut"
 msgstr "Suprimeix una drecera"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1782,20 +1716,16 @@ msgstr ""
 "Per editar una drecera, feu clic a la fila corresponent i premeu la "
 "combinació de tecles nova, o premeu la tecla de retrocés per netejar-la."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:24
-msgid "Shortcuts"
-msgstr "Dreceres"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:632
-#: ../panels/keyboard/keyboard-shortcuts.c:640
+#: ../panels/keyboard/keyboard-shortcuts.c:633
+#: ../panels/keyboard/keyboard-shortcuts.c:641
 msgid "Custom Shortcuts"
 msgstr "Dreceres personalitzades"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:857
+#: ../panels/keyboard/keyboard-shortcuts.c:858
 msgid "<Unknown Action>"
 msgstr "<acció desconeguda>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1358
+#: ../panels/keyboard/keyboard-shortcuts.c:1359
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1807,7 +1737,7 @@ msgstr ""
 "Proveu amb una altra tecla com ara la de Control, l'Alt o de Majúscules a la "
 "vegada."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1388
+#: ../panels/keyboard/keyboard-shortcuts.c:1389
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1816,18 +1746,18 @@ msgstr ""
 "Ja s'utilitza la drecera «%s» per a\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1393
+#: ../panels/keyboard/keyboard-shortcuts.c:1394
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Si torneu a assignar la drecera a «%s», s'inhabilitarà la drecera «%s»."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1399
+#: ../panels/keyboard/keyboard-shortcuts.c:1400
 msgid "_Reassign"
 msgstr "_Torna a assignar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
@@ -1836,7 +1766,7 @@ msgstr ""
 "La drecera «%s» té la drecera «%s» associada. Voleu canviar-la "
 "automàticament a «%s»?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1450
+#: ../panels/keyboard/keyboard-shortcuts.c:1451
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
@@ -1845,17 +1775,13 @@ msgstr ""
 "La drecera «%s» ja està associada amb «%s», s'inhabilitarà aquesta drecera "
 "si continueu."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1457
+#: ../panels/keyboard/keyboard-shortcuts.c:1458
 msgid "_Assign"
 msgstr "_Assigna"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
 msgstr "_Comprova els paràmetres"
-
-#: ../panels/mouse/cc-mouse-panel.c:107
-msgid "Test Your Settings"
-msgstr "Comprova els paràmetres"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1877,82 +1803,58 @@ msgstr "Ratolí tàctil;Punter;Clic;Toc;Doble;Botó;Ratolí de bola;Desplaça;"
 msgid "General"
 msgstr "General"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgctxt "double click, speed"
-msgid "Slow"
-msgstr "Lenta"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:
+msgid "Primary Button"
+msgstr "Botó primari"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Double-click timeout"
-msgstr "Temps d'espera del doble clic"
+msgid "Sets the order of physical buttons on mice and touchpads."
+msgstr "Estableix l'ordre dels botons als ratolins i ratolins tàctils."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgctxt "double click, speed"
-msgid "Fast"
-msgstr "Ràpida"
+msgid "Left"
+msgstr "Esquerra"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "_Double-click"
-msgstr "_Doble clic"
+msgid "Right"
+msgstr "Dreta"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Primary _button"
-msgstr "_Botó primari"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgctxt "mouse, left button as primary"
-msgid "_Left"
-msgstr "_Esquerre"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgctxt "mouse, right button as primary"
-msgid "_Right"
-msgstr "_Dret"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Mouse"
 msgstr "Ratolí"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+msgid "Mouse Speed"
+msgstr "Velocitat del ratolí"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Double-click timeout"
+msgstr "Temps d'espera del doble clic"
+
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-msgid "_Pointer speed"
-msgstr "Velocitat del _punter"
+msgid "Natural Scrolling"
+msgstr "Desplaçament natural"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgctxt "mouse pointer, speed"
-msgid "Slow"
-msgstr "Lenta"
+msgid "Scrolling moves the content, not the view."
+msgstr "El desplaçament mou el contingut, no la vista."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
-msgctxt "mouse pointer, speed"
-msgid "Fast"
-msgstr "Ràpida"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Touchpad"
 msgstr "Ratolí tàctil"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "Touchpad Speed"
+msgstr "Velocitat del ratolí tàctil"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "touchpad pointer, speed"
-msgid "Slow"
-msgstr "Lenta"
+msgid "Tap to Click"
+msgstr "Fes un toc per fer un clic"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgctxt "touchpad pointer, speed"
-msgid "Fast"
-msgstr "Ràpida"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Tap to _click"
-msgstr "Fes un toc per fer un _clic"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Two _finger scroll"
-msgstr "_Desplaçament amb dos dits"
-
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "_Natural scrolling"
-msgstr "Desplaçament _natural"
+msgid "Edge Scrolling"
+msgstr "Desplaçament en la vora"
 
 #: ../panels/mouse/gnome-mouse-test.c:130
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -2002,7 +1904,7 @@ msgstr "Servidor intermediari de xarxa"
 #. * vpn connections in the device list.
 #.
 #: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
-#: ../panels/network/net-vpn.c:431
+#: ../panels/network/net-vpn.c:432
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
@@ -2153,7 +2055,7 @@ msgid "Excellent"
 msgstr "Excel·lent"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
-#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-vpn.c:220
 #: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2304,7 +2206,7 @@ msgstr "Velocitat de l'enllaç"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:157
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:695
 msgid "IPv4 Address"
 msgstr "Adreça IPv4"
 
@@ -2313,7 +2215,7 @@ msgstr "Adreça IPv4"
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:696
 msgid "IPv6 Address"
 msgstr "Adreça IPv6"
 
@@ -2466,43 +2368,43 @@ msgstr "_Utilitza aquesta connexió només per recursos en aquesta xarxa"
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:269
+#: ../panels/network/connection-editor/net-connection-editor.c:275
 msgid "Unable to open connection editor"
 msgstr "No s'ha pogut obrir l'editor de connexions"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:287
+#: ../panels/network/connection-editor/net-connection-editor.c:293
 msgid "New Profile"
 msgstr "Perfil nou"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:577
+#: ../panels/network/connection-editor/net-connection-editor.c:583
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:578
+#: ../panels/network/connection-editor/net-connection-editor.c:584
 msgid "Bond"
 msgstr "Enllaç"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:580
+#: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Team"
 msgstr "Equip"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:582
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
 msgstr "Pont"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:734
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "No s'han pogut carregar els connectors VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:809
 msgid "Import from file…"
 msgstr "Importa des d'un fitxer…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:874
+#: ../panels/network/connection-editor/net-connection-editor.c:880
 msgid "Add Network Connection"
 msgstr "Afegeix una connexió de xarxa"
 
@@ -2560,8 +2462,8 @@ msgid "Select file to import"
 msgstr "Seleccioneu el fitxer a importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1941
-#: ../panels/sharing/cc-sharing-panel.c:375
+#: ../panels/printers/cc-printers-panel.c:1964
+#: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_Obre"
@@ -2671,7 +2573,7 @@ msgstr "ahir"
 
 #: ../panels/network/net-device-ethernet.c:160
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
+#: ../panels/network/panel-common.c:698 ../panels/network/panel-common.c:700
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Adreça IP"
@@ -2760,13 +2662,12 @@ msgstr ""
 "contrasenyes i la configuració personalitzada."
 
 #: ../panels/network/net-device-wifi.c:1774
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historial"
 
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/printers/options-dialog.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Tanca"
@@ -2914,6 +2815,7 @@ msgstr "detalls"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/sharing/sharing.ui.h:11
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -3016,6 +2918,7 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Connecta't a una xarxa oculta…"
 
 #: ../panels/network/network-wifi.ui.h:58
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "_History"
 msgstr "_Historial"
 
@@ -3037,7 +2940,6 @@ msgstr "Tipus de seguretat"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Contrasenya"
@@ -3589,47 +3491,49 @@ msgid "_Type"
 msgstr "_Tipus"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1840 ../panels/power/cc-power-panel.c:1847
+#: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 msgid "On"
 msgstr "Activat"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
-msgid "Notifications"
-msgstr "Notificacions"
+msgid "_Notifications"
+msgstr "_Notificacions"
 
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
 msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Alertes de so"
+msgid "Sound _Alerts"
+msgstr "_Alertes sonores"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
 msgctxt "notifications"
-msgid "Notification Banners"
-msgstr "Bàners de notificació"
+msgid "Notification _Banners"
+msgstr "_Bàners de notificació"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
 msgctxt "notifications"
-msgid "Show Message Content in Banners"
-msgstr "Mostra el contingut del missatge en els bàners"
+msgid "Show Message _Content in Banners"
+msgstr "_Mostra el contingut del missatge en els bàners"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
 msgctxt "notifications"
-msgid "Lock Screen Notifications"
-msgstr "Notificacions a la pantalla de bloqueig"
+msgid "_Lock Screen Notifications"
+msgstr "_Notificacions a la pantalla de bloqueig"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
-msgid "Show Message Content on Lock Screen"
-msgstr "Mostra el contingut del missatge a la pantalla de bloqueig"
+msgid "Show Message C_ontent on Lock Screen"
+msgstr "_Mostra el contingut del missatge a la pantalla de bloqueig"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3645,12 +3549,12 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notificacions;Bàner;Missatge;Safata;Emergent;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification Banners"
-msgstr "Bàners de notificació"
+msgid "Notification _Banners"
+msgstr "_Bàners de notificació"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Lock Screen Notifications"
-msgstr "Notificacions a la pantalla de bloqueig"
+msgid "_Lock Screen Notifications"
+msgstr "_Notificacions a la pantalla de bloqueig"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
@@ -3658,30 +3562,30 @@ msgstr "Notificacions a la pantalla de bloqueig"
 msgid "Applications"
 msgstr "Aplicacions"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:168
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Altres"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:289
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Afegeix un compte"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:326
 msgid "Mail"
 msgstr "Correu"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:332
 msgid "Contacts"
 msgstr "Contactes"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:338
 msgid "Chat"
 msgstr "Xat"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:344
 msgid "Resources"
 msgstr "Recursos"
 
@@ -3758,18 +3662,18 @@ msgstr ""
 "Afegir un compte permet a les aplicacions accedir-hi per obtenir documents, "
 "correu, contactes, calendari, xat i més."
 
-#: ../panels/power/cc-power-panel.c:200
+#: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
 msgstr "Temps desconegut"
 
-#: ../panels/power/cc-power-panel.c:206
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minut"
 msgstr[1] "%i minuts"
 
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:271
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3778,227 +3682,244 @@ msgstr[1] "%i hores"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:226
+#: ../panels/power/cc-power-panel.c:279
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:227
+#: ../panels/power/cc-power-panel.c:280
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "hores"
 
-#: ../panels/power/cc-power-panel.c:228
+#: ../panels/power/cc-power-panel.c:281
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minuts"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:247
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until fully charged"
 msgstr "Queden %s fins que estigui carregat totalment"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:307
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Atenció: queden %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:259
+#: ../panels/power/cc-power-panel.c:312
 #, c-format
 msgid "%s remaining"
 msgstr "Queden %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:317 ../panels/power/cc-power-panel.c:345
 msgid "Fully charged"
 msgstr "Totalment carregada"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
+#: ../panels/power/cc-power-panel.c:321 ../panels/power/cc-power-panel.c:349
 msgid "Empty"
 msgstr "Buida"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:336
 msgid "Charging"
 msgstr "S'està carregant"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:341
 msgid "Discharging"
 msgstr "S'està descarregant"
 
-#: ../panels/power/cc-power-panel.c:411
+#: ../panels/power/cc-power-panel.c:464
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Principal"
 
-#: ../panels/power/cc-power-panel.c:413
+#: ../panels/power/cc-power-panel.c:466
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Addicional"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:484
+#: ../panels/power/cc-power-panel.c:537
 msgid "Wireless mouse"
 msgstr "Ratolí sense fil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:487
+#: ../panels/power/cc-power-panel.c:540
 msgid "Wireless keyboard"
 msgstr "Teclat sense fil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:543
 msgid "Uninterruptible power supply"
 msgstr "Sistema d'alimentació ininterrompuda"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:546
 msgid "Personal digital assistant"
 msgstr "Auxiliar digital personal"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:496
+#: ../panels/power/cc-power-panel.c:549
 msgid "Cellphone"
 msgstr "Telèfon mòbil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:552
 msgid "Media player"
 msgstr "Reproductor multimèdia"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:555
 msgid "Tablet"
 msgstr "Tauleta gràfica"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:505
+#: ../panels/power/cc-power-panel.c:558
 msgid "Computer"
 msgstr "Ordinador"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2096
+#: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
+#: ../panels/power/cc-power-panel.c:2252
 msgid "Battery"
 msgstr "Bateria"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:615
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "S'està carregant"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Precaució"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:627
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baixa"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:632
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bona"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:637
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Totalment carregada"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:588
+#: ../panels/power/cc-power-panel.c:641
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Buida"
 
-#: ../panels/power/cc-power-panel.c:746
+#: ../panels/power/cc-power-panel.c:799
 msgid "Batteries"
 msgstr "Bateries"
 
-#: ../panels/power/cc-power-panel.c:1167
+#: ../panels/power/cc-power-panel.c:1227
 msgid "When _idle"
 msgstr "Quan estigui _inactiu"
 
-#: ../panels/power/cc-power-panel.c:1547
+#: ../panels/power/cc-power-panel.c:1640
 msgid "Power Saving"
 msgstr "Estalvi d'energia"
 
-#: ../panels/power/cc-power-panel.c:1582
+#: ../panels/power/cc-power-panel.c:1675
 msgid "_Screen brightness"
 msgstr "Brillantor de la _pantalla"
 
-#: ../panels/power/cc-power-panel.c:1601
+#: ../panels/power/cc-power-panel.c:1694
 msgid "Automatic brightness"
 msgstr "Brillantor automàtica"
 
-#: ../panels/power/cc-power-panel.c:1621
+#: ../panels/power/cc-power-panel.c:1714
 msgid "_Keyboard brightness"
 msgstr "Brillantor del _teclat"
 
-#: ../panels/power/cc-power-panel.c:1631
+#: ../panels/power/cc-power-panel.c:1724
 msgid "_Dim screen when inactive"
 msgstr "_Atenua la pantalla quan estigui inactiva"
 
-#: ../panels/power/cc-power-panel.c:1656
+#: ../panels/power/cc-power-panel.c:1749
 msgid "_Blank screen"
 msgstr "Pantalla en _blanc"
 
-#: ../panels/power/cc-power-panel.c:1693
+#: ../panels/power/cc-power-panel.c:1786
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1698
-msgid "Wireless devices require extra power"
-msgstr "Els dispositius sense fil requereixen més energia"
+#: ../panels/power/cc-power-panel.c:1791
+msgid "Turn off Wi-Fi to save power."
+msgstr "Desactiveu la Wifi per estalviar energia."
 
-#: ../panels/power/cc-power-panel.c:1723
+#: ../panels/power/cc-power-panel.c:1816
 msgid "_Mobile broadband"
-msgstr "Banda ample _mòbil"
+msgstr "Banda ampla _mòbil"
 
-#: ../panels/power/cc-power-panel.c:1728
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
+#: ../panels/power/cc-power-panel.c:1821
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
-"Els dispositius de banda ampla (3G, 4G, WiMax, etc.) requereixen més energia"
+"Desactiveu la banda ampla mòbil (3G, 4G, WiMax, etc.) per estalviar energia."
 
-#: ../panels/power/cc-power-panel.c:1780
+#: ../panels/power/cc-power-panel.c:1873
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1836
+#: ../panels/power/cc-power-panel.c:1929
 msgid "When on battery power"
 msgstr "Quan s'utilitzi la bateria"
 
-#: ../panels/power/cc-power-panel.c:1838
+#: ../panels/power/cc-power-panel.c:1931
 msgid "When plugged in"
 msgstr "Quan estigui connectat"
 
-#: ../panels/power/cc-power-panel.c:1955
-msgid "Suspend & Power Off"
-msgstr "Atura temporalment i apaga"
+#: ../panels/power/cc-power-panel.c:2023
+msgid "Suspend"
+msgstr "Atura temporalment"
 
-#: ../panels/power/cc-power-panel.c:1995
+#: ../panels/power/cc-power-panel.c:2024
+msgid "Hibernate"
+msgstr "Hiberna"
+
+#: ../panels/power/cc-power-panel.c:2025
+msgid "Nothing"
+msgstr "Res"
+
+#. Frame header
+#: ../panels/power/cc-power-panel.c:2074
+msgid "Suspend & Power Button"
+msgstr "Botó d'atura temporalment i apaga"
+
+#: ../panels/power/cc-power-panel.c:2115
 msgid "_Automatic suspend"
 msgstr "_Atura temporalment automàticament"
 
-#: ../panels/power/cc-power-panel.c:1996
+#: ../panels/power/cc-power-panel.c:2116
 msgid "Automatic suspend"
 msgstr "Atura automàticament"
 
-#: ../panels/power/cc-power-panel.c:2150
+#: ../panels/power/cc-power-panel.c:2180
+msgid "_When the Power Button is pressed"
+msgstr "_Quan es prem el botó d'engegada"
+
+#: ../panels/power/cc-power-panel.c:2306
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -4088,9 +4009,14 @@ msgstr "_Connectat"
 msgid "On _Battery Power"
 msgstr "Utilitzant la _bateria"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "Retard"
+
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Cancel·la"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4101,143 +4027,138 @@ msgid "Authentication Required"
 msgstr "Cal autenticació"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:588
+#: ../panels/printers/cc-printers-panel.c:589
 msgid "Low on toner"
 msgstr "Tòner baix"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:591
 msgid "Out of toner"
 msgstr "Sense tòner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:593
+#: ../panels/printers/cc-printers-panel.c:594
 msgid "Low on developer"
 msgstr "Revelador baix"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:597
 msgid "Out of developer"
 msgstr "Sense revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:599
 msgid "Low on a marker supply"
 msgstr "Marcador baix"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:601
 msgid "Out of a marker supply"
 msgstr "Sense marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:603
 msgid "Open cover"
 msgstr "Tapa oberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Open door"
 msgstr "Porta oberta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:607
 msgid "Low on paper"
 msgstr "Paper baix"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:609
 msgid "Out of paper"
 msgstr "Sense paper"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:611
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Apagada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:612
-#: ../panels/printers/cc-printers-panel.c:803
+#: ../panels/printers/cc-printers-panel.c:613
+#: ../panels/printers/cc-printers-panel.c:804
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:615
 msgid "Waste receptacle almost full"
 msgstr "El receptacle de residus està quasi ple"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:616
+#: ../panels/printers/cc-printers-panel.c:617
 msgid "Waste receptacle full"
 msgstr "El receptacle de residus està ple"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:618
+#: ../panels/printers/cc-printers-panel.c:619
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor òptic fotogràfic està al final de la seva vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:620
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor òptic fotogràfic ja no funciona"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:730
+#: ../panels/printers/cc-printers-panel.c:731
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "S'està configurant"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:789
+#: ../panels/printers/cc-printers-panel.c:790
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Apunt"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:794
+#: ../panels/printers/cc-printers-panel.c:795
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No accepta tasques"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:799
+#: ../panels/printers/cc-printers-panel.c:800
 msgctxt "printer state"
 msgid "Processing"
 msgstr "S'està processant"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:920
 msgid "Toner Level"
 msgstr "Nivell del tòner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:923
 msgid "Ink Level"
 msgstr "Nivell de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:926
 msgid "Supply Level"
 msgstr "Nivell dels subministraments"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:943
+#: ../panels/printers/cc-printers-panel.c:944
 msgctxt "printer state"
 msgid "Installing"
 msgstr "S'està instal·lant"
 
-#. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1119
-msgid "No printers available"
-msgstr "No hi ha cap impressora disponible"
-
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1452
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4245,15 +4166,15 @@ msgstr[0] "%u actiu"
 msgstr[1] "%u actius"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1770
+#: ../panels/printers/cc-printers-panel.c:1793
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:1960
 msgid "Select PPD File"
 msgstr "Selecció d'un fitxer PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:1969
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4261,30 +4182,34 @@ msgstr ""
 "Fitxers de descripció d'impressora PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD."
 "gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2253
+#: ../panels/printers/cc-printers-panel.c:2276
 msgid "No suitable driver found"
 msgstr "No s'ha trobat cap controlador adequat"
 
-#: ../panels/printers/cc-printers-panel.c:2324
+#: ../panels/printers/cc-printers-panel.c:2347
 msgid "Searching for preferred drivers…"
 msgstr "S'estan cercant els controladors preferits…"
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2368
 msgid "Select from database…"
 msgstr "Seleccioneu de la base de dades…"
 
-#: ../panels/printers/cc-printers-panel.c:2354
+#: ../panels/printers/cc-printers-panel.c:2377
 msgid "Provide PPD File…"
 msgstr "Proporcioneu un fitxer PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2505
 #: ../panels/printers/cc-printers-panel.c:2528
+#: ../panels/printers/cc-printers-panel.c:2551
 msgid "Test page"
 msgstr "Pàgina de prova"
 
+#: ../panels/printers/cc-printers-panel.c:2664
+msgid "No printers"
+msgstr "Sense impressores"
+
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2942
+#: ../panels/printers/cc-printers-panel.c:3010
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
@@ -4304,27 +4229,15 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Impressora;Cua;Imprimir;Paper;Tinta;Tòner;"
 
-#. Translators: This dialog contains list of active print jobs of the selected printer
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: ../panels/printers/jobs-dialog.ui.h:2
-msgid "Active Jobs"
-msgstr "Tasques actives"
+msgid "Clear All"
+msgstr "Neteja-ho tot"
 
-#: ../panels/printers/jobs-dialog.ui.h:3
-#: ../panels/printers/options-dialog.ui.h:2
-msgid "Close"
-msgstr "Tanca"
-
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-msgid "Resume Printing"
-msgstr "Continua la impressió"
-
-#: ../panels/printers/jobs-dialog.ui.h:5
-msgid "Pause Printing"
-msgstr "Fes una pausa a la impressió"
-
-#: ../panels/printers/jobs-dialog.ui.h:6
-msgid "Cancel Print Job"
-msgstr "Cancel·la la tasca d'impressió"
+msgid "No Active Printer Jobs"
+msgstr "No hi ha tasques d'impressió actives"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
@@ -4352,6 +4265,11 @@ msgstr "S'estan carregant les opcions…"
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
 msgstr "Seleccioneu un controlador d'impressora"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/um-photo-dialog.c:96
+msgid "Select"
+msgstr "Selecciona"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -4406,96 +4324,83 @@ msgid "Reverse portrait"
 msgstr "Vertical del revés"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:142
+#: ../panels/printers/pp-jobs-dialog.c:103
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendent"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:146
+#: ../panels/printers/pp-jobs-dialog.c:107
 msgctxt "print job"
-msgid "Held"
-msgstr "Retinguda"
+msgid "Paused"
+msgstr "Pausat"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:150
+#: ../panels/printers/pp-jobs-dialog.c:111
 msgctxt "print job"
 msgid "Processing"
 msgstr "S'està processant"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:154
+#: ../panels/printers/pp-jobs-dialog.c:115
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:158
+#: ../panels/printers/pp-jobs-dialog.c:119
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancel·lada"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:162
+#: ../panels/printers/pp-jobs-dialog.c:123
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Interrompuda"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:166
+#: ../panels/printers/pp-jobs-dialog.c:127
 msgctxt "print job"
 msgid "Completed"
 msgstr "Completada"
 
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:288
-msgid "Job Title"
-msgstr "Títol de la tasca"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:297
-msgid "Job State"
-msgstr "Estat de la tasca"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:303
-msgid "Time"
-msgstr "Hora"
-
-#: ../panels/printers/pp-jobs-dialog.c:451
+#. Translators: This is the printer name for which we are showing the active jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-msgid "%s Active Jobs"
-msgstr "%s tasques actives"
+msgctxt "Printer jobs dialog title"
+msgid "%s - Active Jobs"
+msgstr "%s - tasques actives"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1571
+#: ../panels/printers/pp-new-printer-dialog.c:1659
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1576
+#: ../panels/printers/pp-new-printer-dialog.c:1664
 msgid "Serial Port"
 msgstr "Port en sèrie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1583
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "Parallel Port"
 msgstr "Port paral·lel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1636
+#: ../panels/printers/pp-new-printer-dialog.c:1713
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicació: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1641
+#: ../panels/printers/pp-new-printer-dialog.c:1718
 #, c-format
 msgid "Address: %s"
 msgstr "Adreça: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1665
+#: ../panels/printers/pp-new-printer-dialog.c:1747
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
 
@@ -4690,14 +4595,14 @@ msgid "Print _Test Page"
 msgstr "_Imprimeix una pàgina de prova"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
 msgid "_Options"
 msgstr "_Opcions"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-msgid "Add New Printer"
-msgstr "Afegeix una impressora nova"
+msgid "Add a Printer"
+msgstr "Afegeix una impressora"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:26
@@ -4933,34 +4838,34 @@ msgstr "Mètric"
 msgid "No regions found"
 msgstr "No s'han trobat regions"
 
-#: ../panels/region/cc-input-chooser.c:181
+#: ../panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
 msgstr "No s'han trobat fonts d'entrada"
 
-#: ../panels/region/cc-input-chooser.c:1018
+#: ../panels/region/cc-input-chooser.c:992
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Altres"
 
-#: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1071
+#: ../panels/region/cc-region-panel.c:248
+#: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "S'ha de tornar a iniciar la sessió perquè els canvis tinguin efecte"
 
-#: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/region/cc-region-panel.c:252
+#: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Restart Now"
 msgstr "Torna a iniciar ara"
 
-#: ../panels/region/cc-region-panel.c:876
+#: ../panels/region/cc-region-panel.c:889
 msgid "No input source selected"
 msgstr "No s'ha seleccionat cap font d'entrada"
 
-#: ../panels/region/cc-region-panel.c:1796
-msgid "Login Screen"
-msgstr "Pantalla d'entrada"
+#: ../panels/region/cc-region-panel.c:1807
+msgid "Login _Screen"
+msgstr "_Pantalla d'entrada"
 
-#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+#: ../panels/region/format-chooser.ui.h:1
 msgid "Formats"
 msgstr "Formats"
 
@@ -5016,57 +4921,66 @@ msgstr "Els mètodes d'entrada no es poden utilitzar en la pantalla d'entrada"
 msgid "Input Source Options"
 msgstr "Opcions de la font d'entrada"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:2
 msgid "Use the _same source for all windows"
 msgstr "Utilitza la _mateixa font a totes les finestres"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Permet fonts _diferents per a cada finestra"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
 msgid "Keyboard Shortcuts"
 msgstr "Dreceres de teclat"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "Commuta a la font anterior"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:6
 msgid "Super+Shift+Space"
 msgstr "Súper+Majús+Espai"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:7
 msgid "Switch to next source"
 msgstr "Commuta a la font següent"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:8
 msgid "Super+Space"
 msgstr "Súper+Espai"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Podeu canviar aquestes dreceres als paràmetres del teclat"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
 msgstr "Forma alternativa per canviar a la font següent"
 
-#: ../panels/region/input-options.ui.h:12
+#: ../panels/region/input-options.ui.h:11
 msgid "Left+Right Alt"
 msgstr "Alt dreta i esquerra"
+
+#: ../panels/region/region.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Idioma"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Anglès (Regne Unit)"
 
+#: ../panels/region/region.ui.h:3
+msgid "_Formats"
+msgstr "_Formats"
+
 #: ../panels/region/region.ui.h:4
 msgid "United Kingdom"
 msgstr "Regne Unit"
 
-#: ../panels/region/region.ui.h:6
-msgid "Options"
-msgstr "Opcions"
+#: ../panels/region/region.ui.h:5
+msgid "Input Sources"
+msgstr "Fonts d'entrada"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
@@ -5156,36 +5070,36 @@ msgstr "Mou avall"
 msgid "Preferences"
 msgstr "Preferències"
 
-#: ../panels/sharing/cc-sharing-panel.c:265
+#: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Actiu"
 
-#: ../panels/sharing/cc-sharing-panel.c:267
-#: ../panels/sharing/cc-sharing-panel.c:294
+#: ../panels/sharing/cc-sharing-panel.c:265
+#: ../panels/sharing/cc-sharing-panel.c:292
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Inactiu"
 
-#: ../panels/sharing/cc-sharing-panel.c:297
+#: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Habilitat"
 
-#: ../panels/sharing/cc-sharing-panel.c:300
+#: ../panels/sharing/cc-sharing-panel.c:298
 msgctxt "service is active"
 msgid "Active"
 msgstr "Actiu"
 
-#: ../panels/sharing/cc-sharing-panel.c:371
+#: ../panels/sharing/cc-sharing-panel.c:369
 msgid "Choose a Folder"
 msgstr "Trieu una carpeta"
 
-#: ../panels/sharing/cc-sharing-panel.c:800
+#: ../panels/sharing/cc-sharing-panel.c:798
 msgid "Copy"
 msgstr "Copia"
 
-#: ../panels/sharing/cc-sharing-panel.c:1126
+#: ../panels/sharing/cc-sharing-panel.c:1124
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Compartició"
@@ -5200,8 +5114,8 @@ msgid ""
 "share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
 "movies;server;renderer;"
 msgstr ""
-"comparteix;compartició;ssh;amfitrió;nom;remot;escriptori;"
-"multimèdia;àudio;vídeo;imatges;fotografies;pel·lícules;servidor;renderitzar;"
+"comparteix;compartició;ssh;amfitrió;nom;remot;escriptori;multimèdia;àudio;"
+"vídeo;imatges;fotografies;pel·lícules;servidor;renderitzar;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5224,30 +5138,34 @@ msgid "Networks"
 msgstr "Xarxes"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Computer Name"
-msgstr "Nom de l'ordinador"
+msgid "_Computer Name"
+msgstr "_Nom de l'ordinador"
 
 #: ../panels/sharing/sharing.ui.h:2
-msgid "Personal File Sharing"
-msgstr "Compartició de fitxers personals"
+msgid "_Personal File Sharing"
+msgstr "_Compartició de fitxers personals"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Screen Sharing"
-msgstr "Compartició de pantalla"
+msgid "_Screen Sharing"
+msgstr "_Compartició de pantalla"
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Media Sharing"
-msgstr "Compartició multimèdia"
+msgid "_Media Sharing"
+msgstr "_Compartició multimèdia"
 
 #: ../panels/sharing/sharing.ui.h:5
-msgid "Remote Login"
-msgstr "Entrada remota"
+msgid "_Remote Login"
+msgstr "_Entrada remota"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Alguns serveis estan inhabilitats perquè no hi ha accés a la xarxa."
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:7
+msgid "Personal File Sharing"
+msgstr "Compartició de fitxers personals"
+
+#: ../panels/sharing/sharing.ui.h:9
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5256,11 +5174,15 @@ msgstr ""
 "La compartició de fitxers personals us permet compartir la carpeta pública "
 "amb altres a la xarxa actual utilitzant: <a href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:9
-msgid "Require Password"
-msgstr "Cal contrasenya"
+#: ../panels/sharing/sharing.ui.h:10
+msgid "_Require Password"
+msgstr "_Demana contrasenya"
 
 #: ../panels/sharing/sharing.ui.h:12
+msgid "Remote Login"
+msgstr "Entrada remota"
+
+#: ../panels/sharing/sharing.ui.h:14
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5269,7 +5191,11 @@ msgstr ""
 "Permet a usuaris remots connectar-se utilitzant l'ordre del Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
+msgid "Screen Sharing"
+msgstr "Compartició de pantalla"
+
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5278,38 +5204,42 @@ msgstr ""
 "Permet a usuaris remots visualitzar o controlar la pantalla connectant-se a: "
 "<a href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:16
-msgid "Allow Remote Control"
-msgstr "Permet el control remot"
-
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Password:"
-msgstr "Contrasenya:"
-
-#: ../panels/sharing/sharing.ui.h:18
-msgid "Show Password"
-msgstr "Mostra la contrasenya"
-
 #: ../panels/sharing/sharing.ui.h:19
+msgid "_Allow Remote Control"
+msgstr "_Permet el control remot"
+
+#: ../panels/sharing/sharing.ui.h:20
+msgid "_Password:"
+msgstr "_Contrasenya:"
+
+#: ../panels/sharing/sharing.ui.h:21
+msgid "_Show Password"
+msgstr "_Mostra la contrasenya"
+
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Access Options"
 msgstr "Opcions d'accés"
 
-#: ../panels/sharing/sharing.ui.h:20
-msgid "New connections must ask for access"
-msgstr "Les connexions noves han de demanar accés"
+#: ../panels/sharing/sharing.ui.h:23
+msgid "_New connections must ask for access"
+msgstr "_Les connexions noves han de demanar accés"
 
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Require a password"
-msgstr "Cal contrasenya"
+#: ../panels/sharing/sharing.ui.h:24
+msgid "_Require a password"
+msgstr "_Demana una contrasenya"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:25
+msgid "Media Sharing"
+msgstr "Compartició multimèdia"
+
+#: ../panels/sharing/sharing.ui.h:26
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "La compartició multimèdia us permet compartir música, fotografies i vídeos a "
 "través de la xarxa."
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
 msgstr "Carpetes"
 
@@ -5571,6 +5501,7 @@ msgid "_Large Text"
 msgstr "Text _gran"
 
 #: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Amplia"
 
@@ -5595,210 +5526,258 @@ msgid "Screen _Keyboard"
 msgstr "_Teclat en pantalla"
 
 #: ../panels/universal-access/uap.ui.h:13
+msgid "R_epeat Keys"
+msgstr "_Repetició de tecles"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Cursor _Blinking"
+msgstr "_Parpelleig del cursor"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
 msgstr "Assistent d'escriptura (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Pointing & Clicking"
 msgstr "Apuntar i fer clic"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:17
 msgid "_Mouse Keys"
 msgstr "Tecles del _ratolí"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Click Assist"
 msgstr "Feu _clic a l'assistent"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Double-Click Delay"
+msgstr "_Retard en el doble clic"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Double-Click Delay"
+msgstr "Retard en el doble clic"
+
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Screen Reader"
 msgstr "Lector de pantalla"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:22
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr ""
 "El lector de pantalla llegeix el text visualitzat mentre moveu el focus."
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:23
 msgid "_Screen Reader"
 msgstr "Lector de _pantalla"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Sound Keys"
 msgstr "So de les tecles"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Beep when Num Lock or Caps Lock are turned on."
 msgstr "Pita quan s'activin la fixació numèrica o la de majúscules."
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Visual Alerts"
 msgstr "Alertes visuals"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:27
 msgid "_Test flash"
 msgstr "_Prova el parpelleig"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Utilitza una indicació visual quan es produeixi una alerta sonora."
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Flash the _window title"
 msgstr "Parpelleja el títol de la _finestra"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Flash the entire _screen"
 msgstr "Parpelleja la _pantalla sencera"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:31
+msgid "Repeat Keys"
+msgstr "Tecles de repetició"
+
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Key presses repeat when key is held down."
+msgstr "Es repeteix la tecla quan es manté premuda."
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Repeat keys delay"
+msgstr "Retard en la repetició de tecles"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Speed"
+msgstr "Velocitat:"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Repeat keys speed"
+msgstr "Velocitat de la repetició de tecles"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Cursor Blinking"
+msgstr "Parpelleig del cursor"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Cursor blinks in text fields."
+msgstr "El cursor parpelleja en els camps de text."
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Cursor blinking speed"
+msgstr "Velocitat del parpelleig del cursor"
+
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Typing Assist"
 msgstr "Assistent d'escriptura"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:41
 msgid "_Sticky Keys"
 msgstr "Tecles _enganxoses"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 "Tracta una seqüència de tecles modificadores com una combinació de tecles"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:43
 msgid "_Disable if two keys are pressed together"
 msgstr "_Inhabilita si es premen dues tecles alhora"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Beep when a _modifier key is pressed"
 msgstr "Fes un avís sonor quan es premi una tecla _modificadora"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:45
 msgid "S_low Keys"
 msgstr "Tecles _lentes"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Introdueix un retard entre prémer una tecla i quan aquesta és acceptada"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "Retard d'a_cceptació:"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:48
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Curt"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "Retard d'escriptura de les tecles lentes"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:50
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Llarg"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Beep when a key is pr_essed"
 msgstr "Fes un avís sonor quan es _premi una tecla"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is _accepted"
 msgstr "Fes un avís sonor quan s'_accepti una tecla"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Beep when a key is _rejected"
 msgstr "Fes un avís sonor quan es _rebutgi una tecla"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:54
 msgid "_Bounce Keys"
 msgstr "Tecles de _salt"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignora les pulsacions duplicades ràpides"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:56
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Curt"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Bounce keys typing delay"
 msgstr "Retard d'escriptura de les tecles de salt"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgctxt "bounce keys delay"
-msgid "Long"
-msgstr "Llarg"
-
-#: ../panels/universal-access/uap.ui.h:46
-msgid "_Enable by Keyboard"
-msgstr "_Habilita per teclat"
-
-#: ../panels/universal-access/uap.ui.h:47
-msgid "Turn accessibility features on and off using the keyboard"
-msgstr "Activa i desactiva les funcions d'accessibilitat utilitzant el teclat"
-
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Click Assist"
-msgstr "Feu clic a l'assistent"
-
-#: ../panels/universal-access/uap.ui.h:49
-msgid "_Simulated Secondary Click"
-msgstr "Clic secundari _simulat"
-
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr "Realitza un clic secundari en mantenir premut el botó primari"
-
-#: ../panels/universal-access/uap.ui.h:51
-msgctxt "secondary click"
-msgid "Short"
-msgstr "Curt"
-
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Secondary click delay"
-msgstr "Retard del clic secundari"
-
-#: ../panels/universal-access/uap.ui.h:53
-msgctxt "secondary click delay"
-msgid "Long"
-msgstr "Llarg"
-
-#: ../panels/universal-access/uap.ui.h:54
-msgid "_Hover Click"
-msgstr "Clic en _mantenir"
-
-#: ../panels/universal-access/uap.ui.h:55
-msgid "Trigger a click when the pointer hovers"
-msgstr "Realitza un clic quan es manté el punter"
-
-#: ../panels/universal-access/uap.ui.h:56
-msgid "D_elay:"
-msgstr "R_etard:"
-
-#: ../panels/universal-access/uap.ui.h:57
-msgctxt "dwell click delay"
-msgid "Short"
-msgstr "Curt"
-
 #: ../panels/universal-access/uap.ui.h:58
-msgctxt "dwell click delay"
+msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Llarg"
 
 #: ../panels/universal-access/uap.ui.h:59
+msgid "_Enable by Keyboard"
+msgstr "_Habilita per teclat"
+
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Turn accessibility features on and off using the keyboard"
+msgstr "Activa i desactiva les funcions d'accessibilitat utilitzant el teclat"
+
+#: ../panels/universal-access/uap.ui.h:61
+msgid "Click Assist"
+msgstr "Feu clic a l'assistent"
+
+#: ../panels/universal-access/uap.ui.h:62
+msgid "_Simulated Secondary Click"
+msgstr "Clic secundari _simulat"
+
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Realitza un clic secundari en mantenir premut el botó primari"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgctxt "secondary click"
+msgid "Short"
+msgstr "Curt"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Secondary click delay"
+msgstr "Retard del clic secundari"
+
+#: ../panels/universal-access/uap.ui.h:66
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "Llarg"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "_Hover Click"
+msgstr "Clic en _mantenir"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Trigger a click when the pointer hovers"
+msgstr "Realitza un clic quan es manté el punter"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "D_elay:"
+msgstr "R_etard:"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "Curt"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "Llarg"
+
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Motion _threshold:"
 msgstr "Llindar del _moviment:"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Petita"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Gran"
@@ -5852,37 +5831,33 @@ msgstr "Meitat dreta"
 msgid "Zoom Options"
 msgstr "Opcions d'ampliació"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Zoom"
-msgstr "Amplia"
-
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Magnification:"
-msgstr "Ampliació:"
+msgid "_Magnification:"
+msgstr "_Ampliació:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Follow mouse cursor"
-msgstr "Segueix el cursor del ratolí"
+msgid "_Follow mouse cursor"
+msgstr "_Segueix el cursor del ratolí"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Screen part:"
-msgstr "Part de la pantalla:"
+msgid "_Screen part:"
+msgstr "_Part de la pantalla:"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Magnifier extends outside of screen"
-msgstr "L'ampliador s'estén fora de la pantalla"
+msgid "Magnifier _extends outside of screen"
+msgstr "L'_ampliador s'estén fora de la pantalla"
 
 #: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Keep magnifier cursor centered"
-msgstr "Mantén el cursor de l'ampliador centrat"
+msgid "_Keep magnifier cursor centered"
+msgstr "_Mantén el cursor de l'ampliador centrat"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Magnifier cursor pushes contents around"
-msgstr "El cursor de l'ampliador empeny el contingut del voltant"
+msgid "Magnifier cursor _pushes contents around"
+msgstr "_El cursor de l'ampliador empeny el contingut del voltant"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnifier cursor moves with contents"
-msgstr "El cursor de l'ampliador es mou amb el contingut"
+msgid "Magnifier cursor moves with _contents"
+msgstr "El _cursor de l'ampliador es mou amb el contingut"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
@@ -5893,8 +5868,8 @@ msgid "Magnifier"
 msgstr "Ampliador"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Thickness:"
-msgstr "Gruix:"
+msgid "_Thickness:"
+msgstr "_Gruix:"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgctxt "universal access, thickness"
@@ -5907,43 +5882,43 @@ msgid "Thick"
 msgstr "Gruixut"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Length:"
-msgstr "Longitud:"
+msgid "_Length:"
+msgstr "_Longitud:"
 
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Color:"
-msgstr "Color:"
+msgid "Co_lor:"
+msgstr "_Color:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Crosshairs:"
-msgstr "Creus:"
+msgid "_Crosshairs:"
+msgstr "_Creus:"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Overlaps mouse cursor"
-msgstr "Sobreposa el cursor del ratolí"
+msgid "_Overlaps mouse cursor"
+msgstr "_Sobreposa el cursor del ratolí"
 
 #: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Creus"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-msgid "White on black:"
-msgstr "Blanc sobre negre:"
+msgid "_White on black:"
+msgstr "_Blanc sobre negre:"
 
 #: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Brightness:"
-msgstr "Brillantor:"
+msgid "_Brightness:"
+msgstr "_Brillantor:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Contrast:"
-msgstr "Contrast:"
+msgid "_Contrast:"
+msgstr "_Contrast:"
 
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
-msgid "Color"
-msgstr "Color"
+msgid "Co_lor"
+msgstr "Colo_r"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
@@ -6007,14 +5982,12 @@ msgid "Account _Type"
 msgstr "_Tipus de compte"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Allow user to set a password when they next login"
-msgstr "Permet a l'usuari establir la contrasenya a l'entrada següent"
+msgid "Allow user to set a password when they next _login"
+msgstr "_Permet a l'usuari establir la contrasenya a l'entrada següent"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Set a password now"
-msgstr "Estableix una contrasenya ara"
+msgid "Set a password _now"
+msgstr "_Estableix una contrasenya ara"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Verify"
@@ -6170,6 +6143,14 @@ msgstr "Contrasenya _nova"
 msgid "Current _Password"
 msgstr "Contrasenya _actual"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Permet a l'usuari establir la contrasenya a l'entrada següent"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Set a password now"
+msgstr "Estableix una contrasenya ara"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
 msgstr "Afegeix un compte d'usuari"
@@ -6193,10 +6174,6 @@ msgstr "Entrada amb _empremta dactilar"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "Icona d'usuari"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "_Language"
-msgstr "_Idioma"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Last Login"
@@ -6729,15 +6706,15 @@ msgstr "Cap"
 msgid "Logged in"
 msgstr "Connectat"
 
-#: ../panels/user-accounts/um-user-panel.c:1274
+#: ../panels/user-accounts/um-user-panel.c:1275
 msgid "Failed to contact the accounts service"
 msgstr "No s'ha pogut contactar amb el servei de comptes"
 
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:1277
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Assegureu-vos que el servei de comptes està instal·lat i habilitat."
 
-#: ../panels/user-accounts/um-user-panel.c:1317
+#: ../panels/user-accounts/um-user-panel.c:1318
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6745,12 +6722,12 @@ msgstr ""
 "Per realitzar canvis,\n"
 "primer feu clic a la icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
+#: ../panels/user-accounts/um-user-panel.c:1356
 msgid "Create a user account"
 msgstr "Crea un compte d'usuari nou"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
-#: ../panels/user-accounts/um-user-panel.c:1678
+#: ../panels/user-accounts/um-user-panel.c:1367
+#: ../panels/user-accounts/um-user-panel.c:1679
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6758,12 +6735,12 @@ msgstr ""
 "Per crear un compte d'usuari,\n"
 "primer feu clic a la icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1377
 msgid "Delete the selected user account"
 msgstr "Suprimeix el compte d'usuari seleccionat"
 
-#: ../panels/user-accounts/um-user-panel.c:1388
-#: ../panels/user-accounts/um-user-panel.c:1683
+#: ../panels/user-accounts/um-user-panel.c:1389
+#: ../panels/user-accounts/um-user-panel.c:1684
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6771,7 +6748,7 @@ msgstr ""
 "Per suprimir el compte d'usuari seleccionat,\n"
 "primer feu clic a la icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1592
+#: ../panels/user-accounts/um-user-panel.c:1593
 msgid "My Account"
 msgstr "El meu compte"
 
@@ -6949,6 +6926,10 @@ msgstr "Mapa a la pantalla…"
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
 msgstr "Mapa els botons…"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Calibrate…"
+msgstr "Calibra…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
@@ -7171,11 +7152,11 @@ msgstr "[QUADRE] [ARGUMENT…]"
 msgid "Available panels:"
 msgstr "Quadres disponibles:"
 
-#: ../shell/cc-application.c:251
+#: ../shell/cc-application.c:252
 msgid "Help"
 msgstr "Ajuda"
 
-#: ../shell/cc-application.c:252
+#: ../shell/cc-application.c:253
 msgid "Quit"
 msgstr "Surt"
 
@@ -7203,8 +7184,160 @@ msgstr "Sistema"
 msgid "Preferences;Settings;"
 msgstr "Preferències;Paràmetres;"
 
-#~ msgid "%d × %d"
-#~ msgstr "%d × %d"
+#: ../shell/help-overlay.ui.h:1
+msgctxt "shortcut window"
+msgid "General"
+msgstr "General"
+
+#: ../shell/help-overlay.ui.h:2
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Surt"
+
+#: ../shell/help-overlay.ui.h:3
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Cerca"
+
+#: ../shell/help-overlay.ui.h:4
+msgctxt "shortcut window"
+msgid "Panels"
+msgstr "Quadres"
+
+#: ../shell/help-overlay.ui.h:5
+msgctxt "shortcut window"
+msgid "Go back to the overview"
+msgstr "Torna a la visió general"
+
+#: ../shell/help-overlay.ui.h:6
+msgctxt "shortcut window"
+msgid "Cancel search"
+msgstr "Cancel·la la cerca"
+
+#~ msgid "%d ے %d"
+#~ msgstr "%d ے %d"
+
+#~ msgid "Done"
+#~ msgstr "Fet"
+
+#~ msgid "Time _Zone"
+#~ msgstr "_Fus Horari"
+
+#~ msgid "_Delay:"
+#~ msgstr "_Retard:"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Short"
+#~ msgstr "Curt"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Slow"
+#~ msgstr "Lenta"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Long"
+#~ msgstr "Llarg"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Fast"
+#~ msgstr "Ràpida"
+
+#~ msgid "S_peed:"
+#~ msgstr "Ve_locitat:"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Dreceres"
+
+#~ msgid "Test Your Settings"
+#~ msgstr "Comprova els paràmetres"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Slow"
+#~ msgstr "Lenta"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Fast"
+#~ msgstr "Ràpida"
+
+#~ msgctxt "mouse, left button as primary"
+#~ msgid "_Left"
+#~ msgstr "_Esquerre"
+
+#~ msgctxt "mouse, right button as primary"
+#~ msgid "_Right"
+#~ msgstr "_Dret"
+
+#~ msgid "_Pointer speed"
+#~ msgstr "Velocitat del _punter"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Lenta"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Ràpida"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Lenta"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Ràpida"
+
+#~ msgid "Two _finger scroll"
+#~ msgstr "_Desplaçament amb dos dits"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "Els dispositius sense fil requereixen més energia"
+
+#~ msgid "No printers available"
+#~ msgstr "No hi ha cap impressora disponible"
+
+#~ msgid "Active Jobs"
+#~ msgstr "Tasques actives"
+
+#~ msgid "Close"
+#~ msgstr "Tanca"
+
+#~ msgid "Resume Printing"
+#~ msgstr "Continua la impressió"
+
+#~ msgid "Pause Printing"
+#~ msgstr "Fes una pausa a la impressió"
+
+#~ msgid "Cancel Print Job"
+#~ msgstr "Cancel·la la tasca d'impressió"
+
+#~ msgctxt "print job"
+#~ msgid "Held"
+#~ msgstr "Retinguda"
+
+#~ msgid "Job Title"
+#~ msgstr "Títol de la tasca"
+
+#~ msgid "Job State"
+#~ msgstr "Estat de la tasca"
+
+#~ msgid "Time"
+#~ msgstr "Hora"
+
+#~ msgid "Add New Printer"
+#~ msgstr "Afegeix una impressora nova"
+
+#~ msgid "Options"
+#~ msgstr "Opcions"
+
+#~ msgid "Password:"
+#~ msgstr "Contrasenya:"
+
+#~ msgid "Zoom"
+#~ msgstr "Amplia"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Color"
+#~ msgstr "Color"
 
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "El Bluetooth està inhabilitat"
@@ -7217,9 +7350,6 @@ msgstr "Preferències;Paràmetres;"
 
 #~ msgid "Power Off"
 #~ msgstr "Apaga"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hiberna"
 
 #~ msgid "Power off"
 #~ msgstr "Apaga"
