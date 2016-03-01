@@ -226,28 +226,6 @@ get_ppd_attribute (const gchar *ppd_file_name,
   return result;
 }
 
-/* Cancels subscription of given id */
-void
-cancel_cups_subscription (gint id)
-{
-  http_t *http;
-  ipp_t  *request;
-
-  if (id >= 0 &&
-      ((http = httpConnectEncrypt (cupsServer (), ippPort (),
-                                  cupsEncryption ())) != NULL)) {
-    request = ippNewRequest (IPP_CANCEL_SUBSCRIPTION);
-    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
-                 "printer-uri", NULL, "/");
-    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                 "requesting-user-name", NULL, cupsUser ());
-    ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
-                  "notify-subscription-id", id);
-    ippDelete (cupsDoRequest (http, request, "/"));
-    httpClose (http);
-  }
-}
-
 /* Returns id of renewed subscription or new id */
 gint
 renew_cups_subscription (gint id,

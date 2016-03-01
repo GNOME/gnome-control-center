@@ -95,8 +95,6 @@ char       *get_dest_attr (const char *dest_name,
 gchar      *get_ppd_attribute (const gchar *ppd_file_name,
                                const gchar *attribute_name);
 
-void        cancel_cups_subscription (gint id);
-
 gint        renew_cups_subscription (gint id,
                                      const char * const *events,
                                      gint num_events,

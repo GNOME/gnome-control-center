@@ -125,3 +125,55 @@ pp_cups_connection_test_finish (PpCups         *cups,
 
   return g_task_propagate_boolean (G_TASK (result), NULL);
 }
+
+/* Cancels subscription of given id */
+static void
+cancel_subscription_thread (GTask        *task,
+                            gpointer      source_object,
+                            gpointer      task_data,
+                            GCancellable *cancellable)
+{
+  ipp_t *request;
+  ipp_t *response = NULL;
+  gint   id = GPOINTER_TO_INT (task_data);
+
+  if (id >= 0)
+    {
+      request = ippNewRequest (IPP_CANCEL_SUBSCRIPTION);
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                    "printer-uri", NULL, "/");
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                    "requesting-user-name", NULL, cupsUser ());
+      ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
+                     "notify-subscription-id", id);
+      response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
+    }
+
+  g_task_return_boolean (task, response != NULL && ippGetStatusCode (response) <= IPP_OK);
+
+  ippDelete (response);
+}
+
+void
+pp_cups_cancel_subscription_async (PpCups              *cups,
+                                   gint                 subscription_id,
+                                   GAsyncReadyCallback  callback,
+                                   gpointer             user_data)
+{
+  GTask *task;
+
+  task = g_task_new (cups, NULL, callback, user_data);
+  g_task_set_task_data (task, GINT_TO_POINTER (subscription_id), NULL);
+  g_task_run_in_thread (task, cancel_subscription_thread);
+
+  g_object_unref (task);
+}
+
+gboolean
+pp_cups_cancel_subscription_finish (PpCups       *cups,
+                                    GAsyncResult *result)
+{
+  g_return_val_if_fail (g_task_is_valid (result, cups), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (result), NULL);
+}

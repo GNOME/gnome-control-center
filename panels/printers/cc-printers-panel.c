@@ -458,11 +458,23 @@ attach_to_cups_notifier (gpointer data)
     }
 }
 
+ static void
+subscription_cancel_cb (GObject      *source_object,
+                        GAsyncResult *result,
+                        gpointer      user_data)
+{
+  PpCups *cups = PP_CUPS (source_object);
+
+  pp_cups_cancel_subscription_finish (cups, result);
+  g_object_unref (source_object);
+}
+
 static void
 detach_from_cups_notifier (gpointer data)
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  PpCups                 *cups;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -472,7 +484,12 @@ detach_from_cups_notifier (gpointer data)
     priv->dbus_subscription_id = 0;
   }
 
-  cancel_cups_subscription (priv->subscription_id);
+  cups = pp_cups_new ();
+  pp_cups_cancel_subscription_async (cups,
+                                     priv->subscription_id,
+                                     subscription_cancel_cb,
+                                     NULL);
+
   priv->subscription_id = 0;
 
   if (priv->subscription_renewal_id != 0) {
