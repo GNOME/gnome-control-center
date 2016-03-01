@@ -163,7 +163,8 @@ activate_panel (CcWindow           *self,
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-  gtk_container_add (GTK_CONTAINER (box), priv->current_panel);
+  gtk_box_pack_start (GTK_BOX (box), priv->current_panel,
+                      TRUE, TRUE, 0);
 
   gtk_stack_add_named (GTK_STACK (priv->stack), box, id);
 
