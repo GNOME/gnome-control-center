@@ -99,7 +99,7 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
 
   if (parent == NULL)
     {
-      gtk_widget_set_size_request (GTK_WIDGET (chooser), -1, 550);
+      gtk_window_set_default_size (GTK_WINDOW (chooser), -1, 550);
     }
   else if (gtk_window_is_maximized (parent))
     {
@@ -111,7 +111,7 @@ cc_background_chooser_dialog_realize (GtkWidget *widget)
       gint height;
 
       gtk_window_get_size (parent, &width, &height);
-      gtk_widget_set_size_request (GTK_WIDGET (chooser), -1, (gint) (0.9 * height));
+      gtk_window_set_default_size (GTK_WINDOW (chooser), -1, (gint) (0.9 * height));
     }
 
   GTK_WIDGET_CLASS (cc_background_chooser_dialog_parent_class)->realize (widget);
