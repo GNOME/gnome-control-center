@@ -95,11 +95,6 @@ char       *get_dest_attr (const char *dest_name,
 gchar      *get_ppd_attribute (const gchar *ppd_file_name,
                                const gchar *attribute_name);
 
-gint        renew_cups_subscription (gint id,
-                                     const char * const *events,
-                                     gint num_events,
-                                     gint lease_duration);
-
 void        set_local_default_printer (const gchar *printer_name);
 
 gboolean    printer_set_location (const gchar *printer_name,

@@ -80,6 +80,17 @@ void         pp_cups_cancel_subscription_async    (PpCups              *cups,
 gboolean     pp_cups_cancel_subscription_finish   (PpCups                *cups,
                                                    GAsyncResult          *result);
 
+void         pp_cups_renew_subscription_async  (PpCups                *cups,
+                                                gint                   subscription_id,
+                                                gchar                **events,
+                                                gint                   lease_duration,
+                                                GCancellable          *cancellable,
+                                                GAsyncReadyCallback    callback,
+                                                gpointer               user_data);
+
+gint         pp_cups_renew_subscription_finish (PpCups                *cups,
+                                                GAsyncResult          *result);
+
 G_END_DECLS
 
 #endif /* __PP_CUPS_H__ */

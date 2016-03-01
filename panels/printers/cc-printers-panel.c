@@ -104,6 +104,7 @@ struct _CcPrintersPanelPrivate
   PPDList      *all_ppds_list;
   GHashTable   *preferred_drivers;
   GCancellable *get_all_ppds_cancellable;
+  GCancellable *subscription_renew_cancellable;
 
   gchar    *new_printer_name;
   gchar    *new_printer_location;
@@ -185,6 +186,9 @@ cc_printers_panel_dispose (GObject *object)
       g_object_unref (priv->permission);
       priv->permission = NULL;
     }
+
+  g_cancellable_cancel (priv->subscription_renew_cancellable);
+  g_clear_object (&priv->subscription_renew_cancellable);
 
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
@@ -401,43 +405,77 @@ on_cups_notification (GDBusConnection *connection,
     }
 }
 
+static gchar *subscription_events[] = {
+  "printer-added",
+  "printer-deleted",
+  "printer-stopped",
+  "printer-state-changed",
+  "job-created",
+  "job-completed",
+  NULL};
+
+static void
+renew_subscription_cb (GObject      *source_object,
+		       GAsyncResult *result,
+		       gpointer      user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  PpCups                 *cups = PP_CUPS (source_object);
+  gint                    subscription_id;
+
+  subscription_id = pp_cups_renew_subscription_finish (cups, result);
+  g_object_unref (source_object);
+
+  if (subscription_id > 0)
+    {
+      priv = self->priv;
+
+      priv->subscription_id = subscription_id;
+    }
+}
+
 static gboolean
 renew_subscription (gpointer data)
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  static const char * const events[] = {
-          "printer-added",
-          "printer-deleted",
-          "printer-stopped",
-          "printer-state-changed",
-          "job-created",
-          "job-completed"};
+  PpCups                 *cups;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
-  priv->subscription_id = renew_cups_subscription (priv->subscription_id,
-                                                   events,
-                                                   G_N_ELEMENTS (events),
-                                                   SUBSCRIPTION_DURATION);
+  cups = pp_cups_new ();
+  pp_cups_renew_subscription_async (cups,
+                                    priv->subscription_id,
+                                    subscription_events,
+                                    SUBSCRIPTION_DURATION,
+                                    priv->subscription_renew_cancellable,
+                                    renew_subscription_cb,
+                                    data);
 
-  if (priv->subscription_id > 0)
-    return TRUE;
-  else
-    return FALSE;
+  return G_SOURCE_CONTINUE;
 }
 
 static void
-attach_to_cups_notifier (gpointer data)
+attach_to_cups_notifier_cb (GObject      *source_object,
+                            GAsyncResult *result,
+                            gpointer      user_data)
 {
   CcPrintersPanelPrivate *priv;
-  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  PpCups                 *cups = PP_CUPS (source_object);
   GError                 *error = NULL;
+  gint                    subscription_id;
 
-  priv = PRINTERS_PANEL_PRIVATE (self);
+  subscription_id = pp_cups_renew_subscription_finish (cups, result);
+  g_object_unref (source_object);
 
-  if (renew_subscription (self))
+  if (subscription_id > 0)
     {
+      priv = self->priv;
+
+      priv->subscription_id = subscription_id;
+
       priv->subscription_renewal_id =
         g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
 
@@ -473,7 +511,26 @@ attach_to_cups_notifier (gpointer data)
     }
 }
 
- static void
+static void
+attach_to_cups_notifier (gpointer data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  PpCups                 *cups;
+
+  priv = self->priv;
+
+  cups = pp_cups_new ();
+  pp_cups_renew_subscription_async (cups,
+                                    priv->subscription_id,
+                                    subscription_events,
+                                    SUBSCRIPTION_DURATION,
+                                    priv->subscription_renew_cancellable,
+                                    attach_to_cups_notifier_cb,
+                                    data);
+}
+
+static void
 subscription_cancel_cb (GObject      *source_object,
                         GAsyncResult *result,
                         gpointer      user_data)
@@ -3141,6 +3198,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
     g_warning ("Your system does not have the cups-pk-helper's policy \
 \"org.opensuse.cupspkhelper.mechanism.all-edit\" installed. \
 Please check your installation");
+
+  priv->subscription_renew_cancellable = g_cancellable_new ();
 
   populate_printers_list (self);
   attach_to_cups_notifier (self);
