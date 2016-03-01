@@ -224,7 +224,7 @@ goa_panel_add_account_dialog_realize (GtkWidget *widget)
       gint height;
 
       gtk_window_get_size (parent, &width, &height);
-      gtk_widget_set_size_request (GTK_WIDGET (add_account), (gint) (0.5 * width), (gint) (1.25 * height));
+      gtk_window_set_default_size (GTK_WINDOW (add_account), (gint) (0.5 * width), (gint) (1.25 * height));
     }
 
   GTK_WIDGET_CLASS (goa_panel_add_account_dialog_parent_class)->realize (widget);
