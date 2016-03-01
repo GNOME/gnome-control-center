@@ -853,22 +853,6 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
 }
 
 static void
-on_content_size_changed (GtkWidget *content, GtkAllocation *allocation, GtkWidget *panel)
-{
-  if (allocation->height < SCROLL_HEIGHT)
-    {
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (panel),
-                                      GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-    }
-  else
-    {
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (panel),
-                                      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (panel), SCROLL_HEIGHT);
-    }
-}
-
-static void
 cc_ua_panel_init (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv;
@@ -905,8 +889,7 @@ cc_ua_panel_init (CcUaPanel *self)
   panel = WID ("universal_access_panel");
   content = WID ("universal_access_content");
 
-  g_signal_connect (content, "size-allocate",
-                    G_CALLBACK (on_content_size_changed), panel);
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (panel), SCROLL_HEIGHT);
 
   priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel));
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (content), priv->focus_adjustment);
