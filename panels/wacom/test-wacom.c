@@ -86,7 +86,7 @@ int main (int argc, char **argv)
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
-	gtk_widget_set_size_request (window, FIXED_WIDTH, -1);
+	gtk_window_set_default_size (GTK_WINDOW (window), FIXED_WIDTH, -1);
 	g_signal_connect (G_OBJECT (window), "delete-event",
 			  G_CALLBACK (delete_event_cb), NULL);
 	notebook = gtk_notebook_new ();
