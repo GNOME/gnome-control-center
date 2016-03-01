@@ -45,7 +45,7 @@ CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
 /* The minimum supported size for the panel, see:
  * http://live.gnome.org/Design/SystemSettings */
-#define MINIMUM_WIDTH 675
+#define MINIMUM_WIDTH 740
 #define MINIMUM_HEIGHT 530
 
 
