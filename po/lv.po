@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.lv\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-co"
 "ntrol-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-04 08:41+0000\n"
-"PO-Revision-Date: 2016-02-05 17:12+0200\n"
+"POT-Creation-Date: 2016-03-03 16:59+0000\n"
+"PO-Revision-Date: 2016-03-03 21:51+0200\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -25,7 +25,6 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: ../panels/background/background.ui.h:1
-#| msgid "Background"
 msgid "_Background"
 msgstr "_Fons"
 
@@ -36,7 +35,6 @@ msgstr "Izmaiņas dienas laikā"
 
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-#| msgid "Lock Screen"
 msgid "_Lock Screen"
 msgstr "_Ekrāna vairogs"
 
@@ -120,9 +118,9 @@ msgstr "Jūs varat pievienot attēlus savā %s mapē un tie tur parādīsies"
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1931
+#: ../panels/printers/cc-printers-panel.c:1995
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:568
+#: ../panels/privacy/cc-privacy-panel.c:1003
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -132,13 +130,12 @@ msgstr "Jūs varat pievienot attēlus savā %s mapē un tie tur parādīsies"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "At_celt"
 
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#| msgid "Select"
 msgid "_Select"
 msgstr "Izvēlētie_s"
 
@@ -544,13 +541,11 @@ msgstr "Displeja kalibrācija"
 
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-#| msgid "Start"
 msgid "_Start"
 msgstr "_Sākt"
 
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-#| msgid "Resume"
 msgid "_Resume"
 msgstr "Tu_rpināt"
 
@@ -698,7 +693,6 @@ msgid "Summary"
 msgstr "Kopsavilkums"
 
 #: ../panels/color/color.ui.h:28
-#| msgid "Import File…"
 msgid "_Import File…"
 msgstr "_Importēt datni…"
 
@@ -733,7 +727,6 @@ msgid "Learn more about color management"
 msgstr "Uzziniet vairāk par krāsu pārvaldīšanu"
 
 #: ../panels/color/color.ui.h:35
-#| msgid "Set for all users"
 msgid "_Set for all users"
 msgstr "Ie_statīt visiem lietotājiem "
 
@@ -742,17 +735,14 @@ msgid "Set this profile for all users on this computer"
 msgstr "Iestatīt šo profilu visiem šī datora lietotājiem"
 
 #: ../panels/color/color.ui.h:37
-#| msgid "Enable"
 msgid "_Enable"
 msgstr "I_eslēgt"
 
 #: ../panels/color/color.ui.h:38
-#| msgid "Add profile"
 msgid "_Add profile"
 msgstr "_Pievienot profilu"
 
 #: ../panels/color/color.ui.h:39
-#| msgid "Calibrate…"
 msgid "_Calibrate…"
 msgstr "_Kalibrēt…"
 
@@ -761,12 +751,10 @@ msgid "Calibrate the device"
 msgstr "Kalibrēt ierīci"
 
 #: ../panels/color/color.ui.h:41
-#| msgid "Remove profile"
 msgid "_Remove profile"
 msgstr "_Izņemt profilu"
 
 #: ../panels/color/color.ui.h:42
-#| msgid "View details"
 msgid "_View details"
 msgstr "_Skatīt sīkāku informāciju"
 
@@ -893,6 +881,26 @@ msgstr "Vairāk…"
 #: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "Nav atrastas valodas"
+
+#: ../panels/common/cc-util.c:125
+#: ../panels/network/connection-editor/ce-page-details.c:102
+msgid "Today"
+msgstr "Šodien"
+
+#: ../panels/common/cc-util.c:129
+#: ../panels/network/connection-editor/ce-page-details.c:104
+msgid "Yesterday"
+msgstr "Vakar"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/common/cc-util.c:136
+msgid "%b %e"
+msgstr "%e. %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/common/cc-util.c:141
+msgid "%b %e, %Y"
+msgstr "%e. %b, %Y."
 
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
@@ -1053,7 +1061,6 @@ msgid "Date & _Time"
 msgstr "Da_tums un laiks"
 
 #: ../panels/datetime/datetime.ui.h:24
-#| msgid "Time Zone"
 msgid "Time Z_one"
 msgstr "Laika j_osla"
 
@@ -1103,8 +1110,8 @@ msgstr "Primārais"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -1537,7 +1544,7 @@ msgstr "Palaidēji"
 msgid "Launch help browser"
 msgstr "Palaist palīdzības pārlūku"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1606
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Iestatījumi"
@@ -1807,7 +1814,6 @@ msgid "General"
 msgstr "Vispārēji"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#| msgid "Primary _button"
 msgid "Primary Button"
 msgstr "Primārā poga"
 
@@ -1816,14 +1822,10 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Iestata fizisko pogu secību datorpelēm un skārienpaliktņiem."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#| msgctxt "balance"
-#| msgid "Left"
 msgid "Left"
 msgstr "Kreisā"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#| msgctxt "balance"
-#| msgid "Right"
 msgid "Right"
 msgstr "Labā"
 
@@ -1832,7 +1834,6 @@ msgid "Mouse"
 msgstr "Pele"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:7
-#| msgid "_Mouse Keys"
 msgid "Mouse Speed"
 msgstr "Peles ātrums"
 
@@ -1842,12 +1843,10 @@ msgstr "Dubultklikšķa noildze"
 
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-#| msgid "_Natural scrolling"
 msgid "Natural Scrolling"
 msgstr "Dabiskā ritināšana"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#| msgid "This will not remove the account on the server."
 msgid "Scrolling moves the content, not the view."
 msgstr "Ritināšana pārvieto saturu, nevis skatu."
 
@@ -1856,17 +1855,14 @@ msgid "Touchpad"
 msgstr "Skārienpaliktnis"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#| msgid "Touchpad"
 msgid "Touchpad Speed"
 msgstr "Skārienpaliktņa ātrums"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#| msgid "Tap to _click"
 msgid "Tap to Click"
 msgstr "Uzsitiens nozīmē klikšķi"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#| msgid "Scroll Right"
 msgid "Edge Scrolling"
 msgstr "Malu ritināšana"
 
@@ -2012,16 +2008,6 @@ msgstr "Nav"
 msgid "Never"
 msgstr "Nekad"
 
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:815
-msgid "Today"
-msgstr "Šodien"
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:818
-msgid "Yesterday"
-msgstr "Vakar"
-
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
@@ -2137,7 +2123,7 @@ msgstr "Automātiski (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Manual"
 msgstr "Pašrocīgi"
 
@@ -2161,7 +2147,7 @@ msgstr "Prefikss"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Automatic"
 msgstr "Automātiski"
 
@@ -2478,7 +2464,7 @@ msgid "Select file to import"
 msgstr "Izvēlieties datni, ko importēt"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1932
+#: ../panels/printers/cc-printers-panel.c:1996
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -3506,8 +3492,8 @@ msgstr "_Tips"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -3518,45 +3504,33 @@ msgstr "Ieslēgts"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
-#| msgctxt "notifications"
-#| msgid "Notifications"
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Paziņojumi"
 
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
-#| msgctxt "notifications"
-#| msgid "Sound Alerts"
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Skaņas _paziņojumi"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#| msgctxt "notifications"
-#| msgid "Notification Banners"
 msgctxt "notifications"
 msgid "Notification _Banners"
 msgstr "Paziņojumu _lentas"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
-#| msgctxt "notifications"
-#| msgid "Show Message Content in Banners"
 msgctxt "notifications"
 msgid "Show Message _Content in Banners"
 msgstr "Lentās rādīt ziņojuma _saturu"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
-#| msgctxt "notifications"
-#| msgid "Lock Screen Notifications"
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "_Ekrāna vairoga paziņojumi"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
-#| msgctxt "notifications"
-#| msgid "Show Message Content on Lock Screen"
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Ekrāna vair_ogā rādīt ziņojuma saturu"
@@ -3575,18 +3549,16 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Paziņojumi;Lentas;Ziņojums;Paplāte;Uznirstošais logs;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#| msgid "Notification Banners"
 msgid "Notification _Banners"
 msgstr "Paziņojumu _lentas"
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Lock Screen Notifications"
 msgid "_Lock Screen Notifications"
 msgstr "_Ekrāna vairoga paziņojumi"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
-#: ../panels/sound/gvc-mixer-dialog.c:1781
+#: ../panels/privacy/privacy.ui.h:45 ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Applications"
 msgstr "Lietotnes"
 
@@ -3932,13 +3904,11 @@ msgid "Hibernate"
 msgstr "Iemidzināt"
 
 #: ../panels/power/cc-power-panel.c:2025
-#| msgid "Do nothing"
 msgid "Nothing"
 msgstr "Nedarīt neko"
 
 #. Frame header
 #: ../panels/power/cc-power-panel.c:2074
-#| msgid "Suspend & Power Off"
 msgid "Suspend & Power Button"
 msgstr "Iesnaudināšanas un izslēgšanas poga"
 
@@ -4061,138 +4031,138 @@ msgid "Authentication Required"
 msgstr "Nepieciešama autentifikācija"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:588
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "Low on toner"
 msgstr "Maz tonera"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:623
 msgid "Out of toner"
 msgstr "Beidzies toneris"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:593
+#: ../panels/printers/cc-printers-panel.c:626
 msgid "Low on developer"
 msgstr "Palicis maz attīstītāja"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:629
 msgid "Out of developer"
 msgstr "Nav attīstītāja"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:631
 msgid "Low on a marker supply"
 msgstr "Palicis maz krāsas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:633
 msgid "Out of a marker supply"
 msgstr "Beigusies krāsa"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:635
 msgid "Open cover"
 msgstr "Atvērts vāks"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:637
 msgid "Open door"
 msgstr "Atvērtas durvis"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:639
 msgid "Low on paper"
 msgstr "Maz papīra"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:641
 msgid "Out of paper"
 msgstr "Beidzies papīrs"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:643
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Nesaistē"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:612
-#: ../panels/printers/cc-printers-panel.c:803
+#: ../panels/printers/cc-printers-panel.c:645
+#: ../panels/printers/cc-printers-panel.c:836
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Apturēts"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:647
 msgid "Waste receptacle almost full"
 msgstr "Atkritumu tvertne gandrīz pilna"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:616
+#: ../panels/printers/cc-printers-panel.c:649
 msgid "Waste receptacle full"
 msgstr "Atkritumu tvertne pilna"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:618
+#: ../panels/printers/cc-printers-panel.c:651
 msgid "The optical photo conductor is near end of life"
 msgstr "Optiskais gaismas vadītājs drīz būs jāmaina"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:620
+#: ../panels/printers/cc-printers-panel.c:653
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optiskais gaismas vadītājs vairs nefunkcionē"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:730
+#: ../panels/printers/cc-printers-panel.c:763
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Konfigurē"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:789
+#: ../panels/printers/cc-printers-panel.c:822
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Gatavs"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:794
+#: ../panels/printers/cc-printers-panel.c:827
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nepieņem darbus"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:799
+#: ../panels/printers/cc-printers-panel.c:832
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Apstrādā"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:952
 msgid "Toner Level"
 msgstr "Tonera līmenis"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:955
 msgid "Ink Level"
 msgstr "Tintes līmenis"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:958
 msgid "Supply Level"
 msgstr "Krājumu līmenis"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:943
+#: ../panels/printers/cc-printers-panel.c:976
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Instalē"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1420
+#: ../panels/printers/cc-printers-panel.c:1484
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4201,15 +4171,15 @@ msgstr[1] "%u aktīvi"
 msgstr[2] "%u aktīvi"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1761
+#: ../panels/printers/cc-printers-panel.c:1825
 msgid "Failed to add new printer."
 msgstr "Neizdevās pievienot jaunu printeri."
 
-#: ../panels/printers/cc-printers-panel.c:1928
+#: ../panels/printers/cc-printers-panel.c:1992
 msgid "Select PPD File"
 msgstr "Izvēlieties PPD datni"
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:2001
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4217,35 +4187,34 @@ msgstr ""
 "PostScript Printer Description datnes (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2244
+#: ../panels/printers/cc-printers-panel.c:2308
 msgid "No suitable driver found"
 msgstr "Nav atrasts piemērots draiveris"
 
-#: ../panels/printers/cc-printers-panel.c:2315
+#: ../panels/printers/cc-printers-panel.c:2379
 msgid "Searching for preferred drivers…"
 msgstr "Meklē ieteicamos draiverus…"
 
-#: ../panels/printers/cc-printers-panel.c:2336
+#: ../panels/printers/cc-printers-panel.c:2400
 msgid "Select from database…"
 msgstr "Izvēlēties no datubāzes…"
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2409
 msgid "Provide PPD File…"
 msgstr "Dot PPD datni…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2496
-#: ../panels/printers/cc-printers-panel.c:2519
+#: ../panels/printers/cc-printers-panel.c:2560
+#: ../panels/printers/cc-printers-panel.c:2583
 msgid "Test page"
 msgstr "Testa lapa"
 
-#: ../panels/printers/cc-printers-panel.c:2632
-#| msgid "Printers"
+#: ../panels/printers/cc-printers-panel.c:2696
 msgid "No printers"
 msgstr "Nav printeru"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2939
+#: ../panels/printers/cc-printers-panel.c:3042
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nevar ielādēt saskarni: %s"
@@ -4270,7 +4239,6 @@ msgstr "Attīrīt visu"
 
 #. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-#| msgid "%s Active Jobs"
 msgid "No Active Printer Jobs"
 msgstr "Nav aktīvu printera darbu"
 
@@ -4366,7 +4334,6 @@ msgstr "Gaida"
 
 #. Translators: Job's state (job is held for printing)
 #: ../panels/printers/pp-jobs-dialog.c:107
-#| msgid "Last used"
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pauzēts"
@@ -4404,7 +4371,6 @@ msgstr "Izpildīts"
 #. Translators: This is the printer name for which we are showing the active jobs
 #: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-#| msgid "%s Active Jobs"
 msgctxt "Printer jobs dialog title"
 msgid "%s - Active Jobs"
 msgstr "%s — aktīvie darbi"
@@ -4638,7 +4604,6 @@ msgstr "_Opcijas"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-#| msgid "Add Printer"
 msgid "Add a Printer"
 msgstr "Pievienot printeri"
 
@@ -4651,52 +4616,73 @@ msgstr ""
 "Diemžēl izskatās, ka sistēmas \n"
 "drukāšanas serviss nav pieejams."
 
-#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Ekrāna bloķēšana"
 
-#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:420
+msgid "In use"
+msgstr "Lietošanā"
+
+#: ../panels/privacy/cc-privacy-panel.c:425
+#| msgid "On"
+msgctxt "Location services status"
+msgid "On"
+msgstr "Ieslēgts"
+
+#: ../panels/privacy/cc-privacy-panel.c:426
+#| msgid "Off"
+msgctxt "Location services status"
+msgid "Off"
+msgstr "Izslēgts"
+
+#: ../panels/privacy/cc-privacy-panel.c:783 ../panels/privacy/privacy.ui.h:42
+#| msgid "_Location Services"
+msgid "Location Services"
+msgstr "Atrašanās vietas pakalpojumi"
+
+#: ../panels/privacy/cc-privacy-panel.c:897 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Lietojums un vēsture"
 
-#: ../panels/privacy/cc-privacy-panel.c:587
+#: ../panels/privacy/cc-privacy-panel.c:1022
 msgid "Empty all items from Trash?"
 msgstr "Iztukšot visu miskasti?"
 
-#: ../panels/privacy/cc-privacy-panel.c:588
+#: ../panels/privacy/cc-privacy-panel.c:1023
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Viss miskastes saturs tiks neatgriezeniski dzēsts."
 
-#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1024 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Iztīrīt atkritumus"
 
-#: ../panels/privacy/cc-privacy-panel.c:612
+#: ../panels/privacy/cc-privacy-panel.c:1047
 msgid "Delete all the temporary files?"
 msgstr "Dzēst visas pagaidu datnes?"
 
-#: ../panels/privacy/cc-privacy-panel.c:613
+#: ../panels/privacy/cc-privacy-panel.c:1048
 msgid "All the temporary files will be permanently deleted."
 msgstr "Visas pagaidu datnes tiks pilnībā izdzēstas."
 
-#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1049 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Izmest _pagaidu datnes"
 
-#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1071 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Iztīrīt miskasti un pagaidu datnes"
 
-#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1111 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Programmatūras izmantošana"
 
-#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+#: ../panels/privacy/cc-privacy-panel.c:1152 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Problēma ziņojot"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:731
+#: ../panels/privacy/cc-privacy-panel.c:1166
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4705,7 +4691,7 @@ msgstr ""
 "Tehnisku problēmu ziņojumu sūtīšana mums palīdz uzlabot %s. Ziņojumi tiek "
 "sūtīti anonīmi, un no tiem tiek iztīrīta visi personīgie dati."
 
-#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1178 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Privātuma politika"
 
@@ -4850,15 +4836,19 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_Sūtīt programmatūras izmantošanas statistiku"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:43
+msgid ""
+"Location services allow applications to determine your geographical "
+"position. Accuracy is increased by enabling WiFi and GPS."
+msgstr ""
+"Atrašanās vietas pakalpojumi ļauj lietotnēm noteikt jūsu ģeogrāfisko "
+"atrašanās vietu. Precizitāti var palielināt, ieslēdzot WiFi un GPS."
+
+#: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
 msgstr "Atrašanās vietas paka_lpojumi"
 
-#: ../panels/privacy/privacy.ui.h:43
-msgid "Used to determine your geographical location"
-msgstr "Izmanto, lai noteiktu jūsu ģeogrāfiskās atrašanās vietu"
-
-#: ../panels/privacy/privacy.ui.h:45
+#: ../panels/privacy/privacy.ui.h:47
 msgid "_Automatic Problem Reporting"
 msgstr "_Automātiska problēmu ziņošana"
 
@@ -4886,21 +4876,20 @@ msgid "Other"
 msgstr "Citi"
 
 #: ../panels/region/cc-region-panel.c:248
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Sesija jāpārstartē, lai izmaiņas stātos spēkā"
 
 #: ../panels/region/cc-region-panel.c:252
-#: ../panels/user-accounts/um-user-panel.c:1076
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "Pārstartēt tagad"
 
-#: ../panels/region/cc-region-panel.c:886
+#: ../panels/region/cc-region-panel.c:889
 msgid "No input source selected"
 msgstr "Nav izvēlēts ievades avots"
 
-#: ../panels/region/cc-region-panel.c:1804
-#| msgid "Login Screen"
+#: ../panels/region/cc-region-panel.c:1807
 msgid "Login _Screen"
 msgstr "Ierak_stīšanās ekrāns"
 
@@ -5010,7 +4999,6 @@ msgid "English (United Kingdom)"
 msgstr "Angļu (Lielbritānija)"
 
 #: ../panels/region/region.ui.h:3
-#| msgid "Formats"
 msgid "_Formats"
 msgstr "_Formāti"
 
@@ -5179,27 +5167,22 @@ msgid "Networks"
 msgstr "Tīkli"
 
 #: ../panels/sharing/sharing.ui.h:1
-#| msgid "Computer Name"
 msgid "_Computer Name"
 msgstr "_Datora nosaukums"
 
 #: ../panels/sharing/sharing.ui.h:2
-#| msgid "Personal File Sharing"
 msgid "_Personal File Sharing"
 msgstr "_Personiskā datņu koplietošana"
 
 #: ../panels/sharing/sharing.ui.h:3
-#| msgid "Screen Sharing"
 msgid "_Screen Sharing"
 msgstr "_Ekrāna koplietošana"
 
 #: ../panels/sharing/sharing.ui.h:4
-#| msgid "Media Sharing"
 msgid "_Media Sharing"
 msgstr "_Multimediju koplietošana"
 
 #: ../panels/sharing/sharing.ui.h:5
-#| msgid "Remote Login"
 msgid "_Remote Login"
 msgstr "Attālinātā ie_rakstīšanās"
 
@@ -5221,7 +5204,6 @@ msgstr ""
 "citiem jūsu pašreizējā tīklā, izmantojot <a href=\"dav://%s\">dav://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:10
-#| msgid "Require Password"
 msgid "_Require Password"
 msgstr "Piep_rasīt paroli"
 
@@ -5253,17 +5235,14 @@ msgstr ""
 "href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:19
-#| msgid "Allow Remote Control"
 msgid "_Allow Remote Control"
 msgstr "_Atļaut attālināto vadību"
 
 #: ../panels/sharing/sharing.ui.h:20
-#| msgid "_Password"
 msgid "_Password:"
 msgstr "_Parole:"
 
 #: ../panels/sharing/sharing.ui.h:21
-#| msgid "Show Password"
 msgid "_Show Password"
 msgstr "_Rādīt paroli"
 
@@ -5272,12 +5251,10 @@ msgid "Access Options"
 msgstr "Piekļuves opcijas"
 
 #: ../panels/sharing/sharing.ui.h:23
-#| msgid "New connections must ask for access"
 msgid "_New connections must ask for access"
 msgstr "Jau_najiem savienojumiem jālūdz piekļuve"
 
 #: ../panels/sharing/sharing.ui.h:24
-#| msgid "Require a password"
 msgid "_Require a password"
 msgstr "Piep_rasīt paroli"
 
@@ -5584,12 +5561,10 @@ msgid "Screen _Keyboard"
 msgstr "E_krāna tastatūra"
 
 #: ../panels/universal-access/uap.ui.h:13
-#| msgid "Repeat Keys"
 msgid "R_epeat Keys"
 msgstr "_Atkārtot taustiņus"
 
 #: ../panels/universal-access/uap.ui.h:14
-#| msgid "Cursor Blinking"
 msgid "Cursor _Blinking"
 msgstr "Kursora _mirgošana"
 
@@ -5610,12 +5585,10 @@ msgid "_Click Assist"
 msgstr "_Klikšķa asistēšana"
 
 #: ../panels/universal-access/uap.ui.h:19
-#| msgid "_Double-click"
 msgid "_Double-Click Delay"
 msgstr "_Dubultklikšķa aizture"
 
 #: ../panels/universal-access/uap.ui.h:20
-#| msgid "_Double-click"
 msgid "Double-Click Delay"
 msgstr "Dubultklikšķa aizture"
 
@@ -5664,17 +5637,14 @@ msgid "Repeat Keys"
 msgstr "Atkārtot taustiņus"
 
 #: ../panels/universal-access/uap.ui.h:32
-#| msgid "Key presses _repeat when key is held down"
 msgid "Key presses repeat when key is held down."
 msgstr "Kad taustiņu tur nospiestu, atkārtot taustiņa signālu"
 
 #: ../panels/universal-access/uap.ui.h:34
-#| msgid "Repeat keys speed"
 msgid "Repeat keys delay"
 msgstr "Taustiņu atkārtošanās aizture"
 
 #: ../panels/universal-access/uap.ui.h:35
-#| msgid "_Speed:"
 msgid "Speed"
 msgstr "Ātrums"
 
@@ -5687,12 +5657,10 @@ msgid "Cursor Blinking"
 msgstr "Kursora mirgošana"
 
 #: ../panels/universal-access/uap.ui.h:38
-#| msgid "Cursor _blinks in text fields"
 msgid "Cursor blinks in text fields."
 msgstr "Kursors mirgo teksta laukos."
 
 #: ../panels/universal-access/uap.ui.h:39
-#| msgid "Cursor blink speed"
 msgid "Cursor blinking speed"
 msgstr "Kursora mirgošanas ātrums"
 
@@ -5896,37 +5864,30 @@ msgid "Zoom Options"
 msgstr "Tuvināšanas opcijas"
 
 #: ../panels/universal-access/zoom-options.ui.h:8
-#| msgid "Magnification:"
 msgid "_Magnification:"
 msgstr "_Palielinājums:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-#| msgid "Follow mouse cursor"
 msgid "_Follow mouse cursor"
 msgstr "_Sekot peles kursoram"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-#| msgid "Screen part:"
 msgid "_Screen part:"
 msgstr "_Ekrāna daļa:"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-#| msgid "Magnifier extends outside of screen"
 msgid "Magnifier _extends outside of screen"
 msgstr "Palielinātājs iziet ārpus _ekrāna"
 
 #: ../panels/universal-access/zoom-options.ui.h:12
-#| msgid "Keep magnifier cursor centered"
 msgid "_Keep magnifier cursor centered"
 msgstr "Turēt palielinātāja _kursoru vidū"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
-#| msgid "Magnifier cursor pushes contents around"
 msgid "Magnifier cursor _pushes contents around"
 msgstr "_Palielinātāja kursors bīda skatlauku"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-#| msgid "Magnifier cursor moves with contents"
 msgid "Magnifier cursor moves with _contents"
 msgstr "Palielinātāja kursors pārvietojas līdz ar _saturu"
 
@@ -5939,7 +5900,6 @@ msgid "Magnifier"
 msgstr "Palielinātājs"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
-#| msgid "Thickness:"
 msgid "_Thickness:"
 msgstr "_Biezums:"
 
@@ -5954,23 +5914,19 @@ msgid "Thick"
 msgstr "Biezs"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-#| msgid "Length:"
 msgid "_Length:"
 msgstr "_Garums:"
 
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-#| msgid "Color:"
 msgid "Co_lor:"
 msgstr "_Krāsa:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-#| msgid "Crosshairs:"
 msgid "_Crosshairs:"
 msgstr "_Krustiņš:"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
-#| msgid "Overlaps mouse cursor"
 msgid "_Overlaps mouse cursor"
 msgstr "Pārklāj peles kurs_oru"
 
@@ -5979,17 +5935,14 @@ msgid "Crosshairs"
 msgstr "Krustiņš"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-#| msgid "White on black:"
 msgid "_White on black:"
 msgstr "_Balts uz melna:"
 
 #: ../panels/universal-access/zoom-options.ui.h:27
-#| msgid "Brightness:"
 msgid "_Brightness:"
 msgstr "_Gaišums:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-#| msgid "Contrast:"
 msgid "_Contrast:"
 msgstr "_Kontrasts:"
 
@@ -6061,12 +6014,10 @@ msgid "Account _Type"
 msgstr "Konta _tips"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#| msgid "Allow user to set a password when they next login"
 msgid "Allow user to set a password when they next _login"
 msgstr "Ļaut _lietotājam izvēlēties paroli nākamajā ierakstīšanās reizē"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#| msgid "Set a password now"
 msgid "Set a password _now"
 msgstr "Iestatīt paroli _tagad"
 
@@ -6588,11 +6539,11 @@ msgstr "Pirksta izvēle"
 msgid "Enrolling fingerprints"
 msgstr "Pirkstu nospiedumu ievade"
 
-#: ../panels/user-accounts/um-history-dialog.c:68
+#: ../panels/user-accounts/um-history-dialog.c:70
 msgid "This Week"
 msgstr "Šonedēļ"
 
-#: ../panels/user-accounts/um-history-dialog.c:71
+#: ../panels/user-accounts/um-history-dialog.c:73
 msgid "Last Week"
 msgstr "Pagājušajā nedēļā"
 
@@ -6600,22 +6551,22 @@ msgstr "Pagājušajā nedēļā"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:77
-#: ../panels/user-accounts/um-history-dialog.c:81
+#: ../panels/user-accounts/um-history-dialog.c:79
+#: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e. %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:86
+#: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%e. %b, %Y."
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: ../panels/user-accounts/um-history-dialog.c:91
+#: ../panels/user-accounts/um-history-dialog.c:93
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
@@ -6623,26 +6574,26 @@ msgstr "%s – %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-history-dialog.c:177
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-history-dialog.c:180
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:247
+#: ../panels/user-accounts/um-history-dialog.c:249
 msgid "Session Ended"
 msgstr "Sesija beidzās"
 
-#: ../panels/user-accounts/um-history-dialog.c:253
+#: ../panels/user-accounts/um-history-dialog.c:255
 msgid "Session Started"
 msgstr "Sesija sākās"
 
@@ -6707,30 +6658,30 @@ msgstr "Nederīga parole; lūdzu, mēģiniet vēlreiz"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Neizdevās savienoties ar domēnu %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Citi konti"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Neizdevās izdzēst lietotāju"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Neizdevās atsaukt attālināti pārvaldītu lietotāju"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Nav iespējams izdzēst savu kontu."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s vēl aizvien ir ierakstījies"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6738,12 +6689,12 @@ msgstr ""
 "Lietotāja dzēšana, kamēr tas vēl ir ierakstījies, var atstāt sistēmu "
 "nekonsekventā stāvoklī."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Vai vēlaties paturēt lietotāja %s datnes?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6751,51 +6702,51 @@ msgstr ""
 "Pēc lietotāja dzēšanas ir iespējams paturēt mājas mapi, pastu un pagaidu "
 "datnes."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Dzēst datnes"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Paturēt datnes"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Vai tiešām vēlaties atsaukt attālināti pārvaldītu %s kontu?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Dzēst"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konts ir deaktivēts"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Tiks iestatīta, nākamo reizi ierakstoties"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nekāda"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Ierakstījās kā"
 
-#: ../panels/user-accounts/um-user-panel.c:1275
+#: ../panels/user-accounts/um-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "Neizdevās sazināties ar kontu servisu"
 
-#: ../panels/user-accounts/um-user-panel.c:1277
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Lūdzu, pārbaudiet, vai AccountService ir instalēts un aktivēts."
 
-#: ../panels/user-accounts/um-user-panel.c:1318
+#: ../panels/user-accounts/um-user-panel.c:1315
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6803,12 +6754,12 @@ msgstr ""
 "Lai veiktu izmaiņas,\n"
 "vispirms klikšķiniet uz * ikonas"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
+#: ../panels/user-accounts/um-user-panel.c:1353
 msgid "Create a user account"
 msgstr "Izveidot lietotāja kontu"
 
-#: ../panels/user-accounts/um-user-panel.c:1367
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6816,12 +6767,12 @@ msgstr ""
 "Lai izveidotu lietotāja kontu,\n"
 "vispirms klikšķiniet uz * ikonas"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Delete the selected user account"
 msgstr "Dzēst izvēlēto lietotāja kontu"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1684
+#: ../panels/user-accounts/um-user-panel.c:1386
+#: ../panels/user-accounts/um-user-panel.c:1681
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6829,7 +6780,7 @@ msgstr ""
 "Lai dzēstu izvēlēto lietotāja kontu,\n"
 "vispirms klikšķiniet uz * ikonas"
 
-#: ../panels/user-accounts/um-user-panel.c:1593
+#: ../panels/user-accounts/um-user-panel.c:1590
 msgid "My Account"
 msgstr "Mans konts"
 
@@ -6858,16 +6809,6 @@ msgstr ""
 #: ../panels/user-accounts/um-utils.c:577
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "To izmantos, lai nosauktu mājas mapi un to nevar mainīt."
-
-#. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:823
-msgid "%b %e"
-msgstr "%e. %b"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:827
-msgid "%b %e, %Y"
-msgstr "%e. %b, %Y."
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -7238,22 +7179,22 @@ msgstr "Palīdzība"
 msgid "Quit"
 msgstr "Iziet"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
 msgid "All Settings"
 msgstr "Visi iestatījumi"
 
 #. Add categories
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Personisks"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Aparatūra"
 
-#: ../shell/cc-window.c:882
+#: ../shell/cc-window.c:883
 msgctxt "category"
 msgid "System"
 msgstr "Sistēma"
@@ -7263,19 +7204,16 @@ msgid "Preferences;Settings;"
 msgstr "Iestatījumi;Uzstādījumi;Konfigurācija;Preferences;Settings;"
 
 #: ../shell/help-overlay.ui.h:1
-#| msgid "General"
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Vispārēji"
 
 #: ../shell/help-overlay.ui.h:2
-#| msgid "Quit"
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Iziet"
 
 #: ../shell/help-overlay.ui.h:3
-#| msgid "Search"
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Meklēt"
@@ -7286,14 +7224,11 @@ msgid "Panels"
 msgstr "Paneļi"
 
 #: ../shell/help-overlay.ui.h:5
-#| msgid "Show the overview"
 msgctxt "shortcut window"
 msgid "Go back to the overview"
 msgstr "Iet atpakaļ uz pārskatu"
 
 #: ../shell/help-overlay.ui.h:6
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Atcelt meklēšanu"
