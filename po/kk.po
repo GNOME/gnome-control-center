@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-05 08:42+0000\n"
-"PO-Revision-Date: 2016-02-05 16:35+0500\n"
+"POT-Creation-Date: 2016-03-03 20:42+0000\n"
+"PO-Revision-Date: 2016-03-04 08:58+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -114,9 +114,9 @@ msgstr ""
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1931
+#: ../panels/printers/cc-printers-panel.c:1995
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:568
+#: ../panels/privacy/cc-privacy-panel.c:1003
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -126,8 +126,8 @@ msgstr ""
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
@@ -874,6 +874,26 @@ msgstr "Көбірек..."
 msgid "No languages found"
 msgstr "Тілдер табылмады"
 
+#: ../panels/common/cc-util.c:125
+#: ../panels/network/connection-editor/ce-page-details.c:102
+msgid "Today"
+msgstr "Бүгін"
+
+#: ../panels/common/cc-util.c:129
+#: ../panels/network/connection-editor/ce-page-details.c:104
+msgid "Yesterday"
+msgstr "Кеше"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/common/cc-util.c:136
+msgid "%b %e"
+msgstr "%e %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/common/cc-util.c:141
+msgid "%b %e, %Y"
+msgstr "%e %b, %Y"
+
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Тіл"
@@ -1082,8 +1102,8 @@ msgstr "Біріншілік"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -1512,7 +1532,7 @@ msgstr "Жөнелткіштер"
 msgid "Launch help browser"
 msgstr "Көмек шолушысын жөнелту"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1606
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Баптаулар"
@@ -1974,16 +1994,6 @@ msgstr "Жоқ"
 msgid "Never"
 msgstr "Ешқашан"
 
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:815
-msgid "Today"
-msgstr "Бүгін"
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:818
-msgid "Yesterday"
-msgstr "Кеше"
-
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
@@ -2097,7 +2107,7 @@ msgstr "Автоматты түрде (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Manual"
 msgstr "Қолмен"
 
@@ -2121,7 +2131,7 @@ msgstr "Префикс"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Automatic"
 msgstr "Автоматты түрде"
 
@@ -2437,7 +2447,7 @@ msgid "Select file to import"
 msgstr "Импорттау үшін файлды таңдаңыз"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1932
+#: ../panels/printers/cc-printers-panel.c:1996
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -3466,8 +3476,8 @@ msgstr "Тү_рі"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -3532,7 +3542,7 @@ msgstr "Б_локтау экранының хабарламалары"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
-#: ../panels/sound/gvc-mixer-dialog.c:1781
+#: ../panels/privacy/privacy.ui.h:45 ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Applications"
 msgstr "Қолданбалар"
 
@@ -3998,153 +4008,153 @@ msgid "Authentication Required"
 msgstr "Аутентификация керек"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:588
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "Low on toner"
 msgstr "Тонер аз"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:623
 msgid "Out of toner"
 msgstr "Тонер жоқ"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:593
+#: ../panels/printers/cc-printers-panel.c:626
 msgid "Low on developer"
 msgstr "Айқындауышы аз"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:629
 msgid "Out of developer"
 msgstr "Айқындауышы бітті"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:631
 msgid "Low on a marker supply"
 msgstr "Тонер бітіп жатыр"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:633
 msgid "Out of a marker supply"
 msgstr "Тонер бітті"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:635
 msgid "Open cover"
 msgstr "Қақпағы ашық"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:637
 msgid "Open door"
 msgstr "Есігі ашық"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:639
 msgid "Low on paper"
 msgstr "Қағазы аз"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:641
 msgid "Out of paper"
 msgstr "Қағаз бітті"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:643
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Желіде емес"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:612
-#: ../panels/printers/cc-printers-panel.c:803
+#: ../panels/printers/cc-printers-panel.c:645
+#: ../panels/printers/cc-printers-panel.c:836
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Тоқтатылды"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:647
 msgid "Waste receptacle almost full"
 msgstr "Қоқысты қабылдағыш толуға жақын"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:616
+#: ../panels/printers/cc-printers-panel.c:649
 msgid "Waste receptacle full"
 msgstr "Қоқысты қабылдағыш толып қалды"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:618
+#: ../panels/printers/cc-printers-panel.c:651
 msgid "The optical photo conductor is near end of life"
 msgstr "Фоторезист жақында жарамсыз болып қалады"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:620
+#: ../panels/printers/cc-printers-panel.c:653
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Фоторезист жұмыс істемейді"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:730
+#: ../panels/printers/cc-printers-panel.c:763
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Баптау"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:789
+#: ../panels/printers/cc-printers-panel.c:822
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Дайын"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:794
+#: ../panels/printers/cc-printers-panel.c:827
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Тапрсырмаларды қабылдамайды"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:799
+#: ../panels/printers/cc-printers-panel.c:832
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Өңдеуде"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:952
 msgid "Toner Level"
 msgstr "Тонер деңгейі"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:955
 msgid "Ink Level"
 msgstr "Сия деңгейі"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:958
 msgid "Supply Level"
 msgstr "Жаратылатын заттар деңгейі"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:943
+#: ../panels/printers/cc-printers-panel.c:976
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Орнатылуда"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1420
+#: ../panels/printers/cc-printers-panel.c:1484
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u белсенді"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1761
+#: ../panels/printers/cc-printers-panel.c:1825
 msgid "Failed to add new printer."
 msgstr "Жаңа принтерді қосу сәтсіз аяқталды"
 
-#: ../panels/printers/cc-printers-panel.c:1928
+#: ../panels/printers/cc-printers-panel.c:1992
 msgid "Select PPD File"
 msgstr "PPD айлын таңдаңыз"
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:2001
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4152,34 +4162,34 @@ msgstr ""
 "PostScript принтер сипаттау файлдары (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2244
+#: ../panels/printers/cc-printers-panel.c:2308
 msgid "No suitable driver found"
 msgstr "Сәйкес келетін драйвер табылмады"
 
-#: ../panels/printers/cc-printers-panel.c:2315
+#: ../panels/printers/cc-printers-panel.c:2379
 msgid "Searching for preferred drivers…"
 msgstr "Таңдаулы драйверлерді іздеу…"
 
-#: ../panels/printers/cc-printers-panel.c:2336
+#: ../panels/printers/cc-printers-panel.c:2400
 msgid "Select from database…"
 msgstr "Дерекқордан таңдау..."
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2409
 msgid "Provide PPD File…"
 msgstr "PPD файлын ұсыну..."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2496
-#: ../panels/printers/cc-printers-panel.c:2519
+#: ../panels/printers/cc-printers-panel.c:2560
+#: ../panels/printers/cc-printers-panel.c:2583
 msgid "Test page"
 msgstr "Сынау парағы"
 
-#: ../panels/printers/cc-printers-panel.c:2632
+#: ../panels/printers/cc-printers-panel.c:2696
 msgid "No printers"
 msgstr "Принтерлер жоқ"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2939
+#: ../panels/printers/cc-printers-panel.c:3042
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui жүктеу мүмкін емес: %s"
@@ -4583,52 +4593,70 @@ msgstr ""
 "Кешіріңіз! Жүйелік баспаға шығару қызметі\n"
 "қолжетерлік емес сияқты."
 
-#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Экранды блоктау"
 
-#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:420
+msgid "In use"
+msgstr "Қолдануда"
+
+#: ../panels/privacy/cc-privacy-panel.c:425
+msgctxt "Location services status"
+msgid "On"
+msgstr "Іске қосулы"
+
+#: ../panels/privacy/cc-privacy-panel.c:426
+msgctxt "Location services status"
+msgid "Off"
+msgstr "Сөндірулі"
+
+#: ../panels/privacy/cc-privacy-panel.c:783 ../panels/privacy/privacy.ui.h:42
+msgid "Location Services"
+msgstr "Орналасулар қызметі"
+
+#: ../panels/privacy/cc-privacy-panel.c:897 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Қолдану тарихы"
 
-#: ../panels/privacy/cc-privacy-panel.c:587
+#: ../panels/privacy/cc-privacy-panel.c:1022
 msgid "Empty all items from Trash?"
 msgstr "Қоқыс шелегінен барлық нәрсені өшіру керек пе?"
 
-#: ../panels/privacy/cc-privacy-panel.c:588
+#: ../panels/privacy/cc-privacy-panel.c:1023
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Қоқыс шелегінен барлық нәрселер толығымен өшіріледі."
 
-#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1024 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Қоқыс шел_егін тазарту"
 
-#: ../panels/privacy/cc-privacy-panel.c:612
+#: ../panels/privacy/cc-privacy-panel.c:1047
 msgid "Delete all the temporary files?"
 msgstr "Барлық уақытша файлдарды өшіру керек пе?"
 
-#: ../panels/privacy/cc-privacy-panel.c:613
+#: ../panels/privacy/cc-privacy-panel.c:1048
 msgid "All the temporary files will be permanently deleted."
 msgstr "Барлық уақытша файлдар толығымен өшіріледі."
 
-#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1049 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Уақытша файлдарды _тазарту"
 
-#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1071 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Қоқыс шелегін және уақытша файлдарды тазарту"
 
-#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1111 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Бағд. қамтама қолдану"
 
-#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+#: ../panels/privacy/cc-privacy-panel.c:1152 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Мәселелерді хабарлау"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:731
+#: ../panels/privacy/cc-privacy-panel.c:1166
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4638,7 +4666,7 @@ msgstr ""
 "көмектеседі. Хабарламалар анонимды түрде жіберіледі және олардан жеке "
 "деректер кетіріледі."
 
-#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1178 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Жекелік саясаты"
 
@@ -4783,15 +4811,20 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "БҚ қолдану статистикасын жі_беру"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:43
+msgid ""
+"Location services allow applications to determine your geographical "
+"position. Accuracy is increased by enabling WiFi and GPS."
+msgstr ""
+"Орналасулар қызметі қолданбаларға сіздің географиялық орналасуыңызды "
+"анықтауға мүмкіндік береді. Дәлдікті WiFi және GPS-ті іске қосу арқылы "
+"көтеруге болады."
+
+#: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
 msgstr "_Орналасулар қызметі"
 
-#: ../panels/privacy/privacy.ui.h:43
-msgid "Used to determine your geographical location"
-msgstr "Географиялық орналасуыңызды анықтау үшін қолданылады"
-
-#: ../panels/privacy/privacy.ui.h:45
+#: ../panels/privacy/privacy.ui.h:47
 msgid "_Automatic Problem Reporting"
 msgstr "Мәселелер жөнінде _автохабарлау"
 
@@ -4819,20 +4852,20 @@ msgid "Other"
 msgstr "Басқа"
 
 #: ../panels/region/cc-region-panel.c:248
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Өзгерістер іске асуы үшін сессияңызды қайта бастау керек"
 
 #: ../panels/region/cc-region-panel.c:252
-#: ../panels/user-accounts/um-user-panel.c:1076
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "Қазір қайта қосу"
 
-#: ../panels/region/cc-region-panel.c:886
+#: ../panels/region/cc-region-panel.c:889
 msgid "No input source selected"
 msgstr "Кіріс қайнар көзді таңдалмады"
 
-#: ../panels/region/cc-region-panel.c:1804
+#: ../panels/region/cc-region-panel.c:1807
 msgid "Login _Screen"
 msgstr "Жүйеге кіру _экраны"
 
@@ -6472,11 +6505,11 @@ msgstr "Саусақты таңдау"
 msgid "Enrolling fingerprints"
 msgstr "Саусақ ізін тіркеу"
 
-#: ../panels/user-accounts/um-history-dialog.c:68
+#: ../panels/user-accounts/um-history-dialog.c:70
 msgid "This Week"
 msgstr "Осы аптада"
 
-#: ../panels/user-accounts/um-history-dialog.c:71
+#: ../panels/user-accounts/um-history-dialog.c:73
 msgid "Last Week"
 msgstr "Өткен апта"
 
@@ -6484,22 +6517,22 @@ msgstr "Өткен апта"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:77
-#: ../panels/user-accounts/um-history-dialog.c:81
+#: ../panels/user-accounts/um-history-dialog.c:79
+#: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:86
+#: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%e %b, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: ../panels/user-accounts/um-history-dialog.c:91
+#: ../panels/user-accounts/um-history-dialog.c:93
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
@@ -6507,26 +6540,26 @@ msgstr "%s - %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-history-dialog.c:177
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-history-dialog.c:180
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:247
+#: ../panels/user-accounts/um-history-dialog.c:249
 msgid "Session Ended"
 msgstr "Сессия аяқталды"
 
-#: ../panels/user-accounts/um-history-dialog.c:253
+#: ../panels/user-accounts/um-history-dialog.c:255
 msgid "Session Started"
 msgstr "Сессия басталды"
 
@@ -6591,30 +6624,30 @@ msgstr "Пароль қате, қайтадан көріңіз"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%s доменіне байланысу мүмкін емес: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Басқа тіркелгілер"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Пайдаланушыны өшіру сәтсіз аяқталды"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Қашықтағы пайдаланушының күшін жою сәтсіз аяқталды"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Өз тіркелгіңізді өшіре алмайсыз."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s жүйеге кіріп тұр"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6622,12 +6655,12 @@ msgstr ""
 "Жүйеге кіріп тұрған кезде пайдаланушыны өшіру жүйені екімәнді күйде қалдыруы "
 "мүмкін."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "%s файлдарын алып қалуды қалайсыз ба?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6635,51 +6668,51 @@ msgstr ""
 "Пайдаланушы тіркелгісін өшіру кезінде оның үй бумасын, пошта кезегін және "
 "уақытша файлдарын алып қалу мүмкіндігі бар."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "Файлдарды ө_шіру"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "Ф_айлдарды қалдыру"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Қашықтан басқарылатын %s тіркелгісін өшіруді шынымен қалайсыз ба?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "Ө_шіру"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Тіркелгі сөндірілген"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Келесі рет кірген кезде орнатылады"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Жүйеге кіріп тұр"
 
-#: ../panels/user-accounts/um-user-panel.c:1275
+#: ../panels/user-accounts/um-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "Тіркелгілер қызметімен байланыс орнату қатесі"
 
-#: ../panels/user-accounts/um-user-panel.c:1277
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService орнатылған және іске қосылғанына көз жеткізіңіз."
 
-#: ../panels/user-accounts/um-user-panel.c:1318
+#: ../panels/user-accounts/um-user-panel.c:1315
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6687,12 +6720,12 @@ msgstr ""
 "Өзгерістерді жасау үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
+#: ../panels/user-accounts/um-user-panel.c:1353
 msgid "Create a user account"
 msgstr "Пайдаланушы тіркелгісін жасау"
 
-#: ../panels/user-accounts/um-user-panel.c:1367
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6700,12 +6733,12 @@ msgstr ""
 "Пайдаланушы тіркелгісін жасау үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Delete the selected user account"
 msgstr "Таңдалған пайдаланушы тіркелгісін өшіру"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1684
+#: ../panels/user-accounts/um-user-panel.c:1386
+#: ../panels/user-accounts/um-user-panel.c:1681
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6713,7 +6746,7 @@ msgstr ""
 "Таңдалған пайдаланушы тіркелгісін өшіру үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1593
+#: ../panels/user-accounts/um-user-panel.c:1590
 msgid "My Account"
 msgstr "Менің тіркелгім"
 
@@ -6744,16 +6777,6 @@ msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Бұл сіздің үй бумаңыздың аты ретінде қолданылады, және оны кейін өзгертуге "
 "болмайды."
-
-#. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:823
-msgid "%b %e"
-msgstr "%e %b"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:827
-msgid "%b %e, %Y"
-msgstr "%e %b, %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -7126,22 +7149,22 @@ msgstr "Көмек"
 msgid "Quit"
 msgstr "Шығу"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
 msgid "All Settings"
 msgstr "Барлық баптаулар"
 
 #. Add categories
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Жеке"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Құрылғылар"
 
-#: ../shell/cc-window.c:882
+#: ../shell/cc-window.c:883
 msgctxt "category"
 msgid "System"
 msgstr "Жүйелік"
@@ -7179,6 +7202,9 @@ msgstr "Шолуға оралу"
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Іздеуді тоқтату"
+
+#~ msgid "Used to determine your geographical location"
+#~ msgstr "Географиялық орналасуыңызды анықтау үшін қолданылады"
 
 #~ msgid "Done"
 #~ msgstr "Дайын"
