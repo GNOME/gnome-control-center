@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 09:47+0200\n"
-"PO-Revision-Date: 2016-03-02 09:57+0200\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
+"POT-Creation-Date: 2016-03-05 19:54+0200\n"
+"PO-Revision-Date: 2016-03-05 19:56+0200\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -116,9 +116,9 @@ msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תו�
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1963
+#: ../panels/printers/cc-printers-panel.c:1995
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:568
+#: ../panels/privacy/cc-privacy-panel.c:1003
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -128,8 +128,8 @@ msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תו�
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -862,6 +862,26 @@ msgstr "עוד…"
 msgid "No languages found"
 msgstr "לא נמצאו שפות"
 
+#: ../panels/common/cc-util.c:125
+#: ../panels/network/connection-editor/ce-page-details.c:102
+msgid "Today"
+msgstr "היום"
+
+#: ../panels/common/cc-util.c:129
+#: ../panels/network/connection-editor/ce-page-details.c:104
+msgid "Yesterday"
+msgstr "אתמול"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/common/cc-util.c:136
+msgid "%b %e"
+msgstr "%e ב%b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/common/cc-util.c:141
+msgid "%b %e, %Y"
+msgstr "%e ב%b, 2013"
+
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "שפה"
@@ -1070,8 +1090,8 @@ msgstr "ראשי"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -1954,16 +1974,6 @@ msgstr "ללא"
 msgid "Never"
 msgstr "לעולם לא"
 
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:815
-msgid "Today"
-msgstr "היום"
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:818
-msgid "Yesterday"
-msgstr "אתמול"
-
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
@@ -2079,7 +2089,7 @@ msgstr "אוטומטי (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Manual"
 msgstr "ידני"
 
@@ -2103,7 +2113,7 @@ msgstr "קידומת"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Automatic"
 msgstr "אוטומטי"
 
@@ -2415,7 +2425,7 @@ msgid "Select file to import"
 msgstr "נא לבחור קובץ לייבוא"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1964
+#: ../panels/printers/cc-printers-panel.c:1996
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -3431,8 +3441,8 @@ msgstr "_סוג"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -3497,7 +3507,7 @@ msgstr "התרעות במסך _נעילה"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
-#: ../panels/sound/gvc-mixer-dialog.c:1781
+#: ../panels/privacy/privacy.ui.h:45 ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Applications"
 msgstr "יישומים"
 
@@ -3966,138 +3976,138 @@ msgid "Authentication Required"
 msgstr "נדרש אימות"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:589
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "Low on toner"
 msgstr "הטונר כמעט נגמר"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:591
+#: ../panels/printers/cc-printers-panel.c:623
 msgid "Out of toner"
 msgstr "נגמר הטונר"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:626
 msgid "Low on developer"
 msgstr "נותר מעט נייר צילום"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:597
+#: ../panels/printers/cc-printers-panel.c:629
 msgid "Out of developer"
 msgstr "נגמר נייר הצילום"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:599
+#: ../panels/printers/cc-printers-panel.c:631
 msgid "Low on a marker supply"
 msgstr "נותרה מעט אספקת צבע"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:601
+#: ../panels/printers/cc-printers-panel.c:633
 msgid "Out of a marker supply"
 msgstr "נגמרה אספקת הצבע"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:603
+#: ../panels/printers/cc-printers-panel.c:635
 msgid "Open cover"
 msgstr "הכיסוי פתוח"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:637
 msgid "Open door"
 msgstr "הדלת פתוחה"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:607
+#: ../panels/printers/cc-printers-panel.c:639
 msgid "Low on paper"
 msgstr "נותר מעט נייר"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:609
+#: ../panels/printers/cc-printers-panel.c:641
 msgid "Out of paper"
 msgstr "נגמר הנייר"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:611
+#: ../panels/printers/cc-printers-panel.c:643
 msgctxt "printer state"
 msgid "Offline"
 msgstr "מנותקת"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:613
-#: ../panels/printers/cc-printers-panel.c:804
+#: ../panels/printers/cc-printers-panel.c:645
+#: ../panels/printers/cc-printers-panel.c:836
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:615
+#: ../panels/printers/cc-printers-panel.c:647
 msgid "Waste receptacle almost full"
 msgstr "כלי קיבול הפסולת כמעט מלא"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:617
+#: ../panels/printers/cc-printers-panel.c:649
 msgid "Waste receptacle full"
 msgstr "כלי קיבול הפסולת מלא"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:619
+#: ../panels/printers/cc-printers-panel.c:651
 msgid "The optical photo conductor is near end of life"
 msgstr "הפוטו מוליך האופטי עומד לסיים את חייו"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:621
+#: ../panels/printers/cc-printers-panel.c:653
 msgid "The optical photo conductor is no longer functioning"
 msgstr "הפוטו מוליך האופטי אינו מתפקד עוד"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:731
+#: ../panels/printers/cc-printers-panel.c:763
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "מתבצעת הגדרה"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:790
+#: ../panels/printers/cc-printers-panel.c:822
 msgctxt "printer state"
 msgid "Ready"
 msgstr "מוכנה"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:795
+#: ../panels/printers/cc-printers-panel.c:827
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "אין עבודות"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:800
+#: ../panels/printers/cc-printers-panel.c:832
 msgctxt "printer state"
 msgid "Processing"
 msgstr "מעבדת"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:920
+#: ../panels/printers/cc-printers-panel.c:952
 msgid "Toner Level"
 msgstr "רמת הטונר"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:923
+#: ../panels/printers/cc-printers-panel.c:955
 msgid "Ink Level"
 msgstr "רמת הדיו"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:926
+#: ../panels/printers/cc-printers-panel.c:958
 msgid "Supply Level"
 msgstr "רמת האספקה"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:944
+#: ../panels/printers/cc-printers-panel.c:976
 msgctxt "printer state"
 msgid "Installing"
 msgstr "מתבצעת התקנה"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1452
+#: ../panels/printers/cc-printers-panel.c:1484
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4106,49 +4116,49 @@ msgstr[1] "%u פעילות"
 msgstr[2] "2 פעילות"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1793
+#: ../panels/printers/cc-printers-panel.c:1825
 msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
-#: ../panels/printers/cc-printers-panel.c:1960
+#: ../panels/printers/cc-printers-panel.c:1992
 msgid "Select PPD File"
 msgstr "בחירת קובץ PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1969
+#: ../panels/printers/cc-printers-panel.c:2001
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 msgstr ""
 "קובצי הגדרות מדפסת של PostScript ‏(‎*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2276
+#: ../panels/printers/cc-printers-panel.c:2308
 msgid "No suitable driver found"
 msgstr "לא נמצא מנהל התקן מתאים"
 
-#: ../panels/printers/cc-printers-panel.c:2347
+#: ../panels/printers/cc-printers-panel.c:2379
 msgid "Searching for preferred drivers…"
 msgstr "מתבצע חיפוש אחר מנהלי ההתקנים המועדפים…"
 
-#: ../panels/printers/cc-printers-panel.c:2368
+#: ../panels/printers/cc-printers-panel.c:2400
 msgid "Select from database…"
 msgstr "בחירה ממסד הנתונים…"
 
-#: ../panels/printers/cc-printers-panel.c:2377
+#: ../panels/printers/cc-printers-panel.c:2409
 msgid "Provide PPD File…"
 msgstr "אספקת קובץ PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2528
-#: ../panels/printers/cc-printers-panel.c:2551
+#: ../panels/printers/cc-printers-panel.c:2560
+#: ../panels/printers/cc-printers-panel.c:2583
 msgid "Test page"
 msgstr "דף בדיקה"
 
-#: ../panels/printers/cc-printers-panel.c:2664
+#: ../panels/printers/cc-printers-panel.c:2696
 msgid "No printers"
 msgstr "אין מדפסות בנמצא"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3010
+#: ../panels/printers/cc-printers-panel.c:3042
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "לא ניתן לטעון את מנשק המשתמש: %s"
@@ -4548,52 +4558,70 @@ msgstr ""
 "כפי הנראה, שירותי ההדפסה של המערכת\n"
 "אינם זמינים, עמך הסליחה!"
 
-#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "נעילת מסך"
 
-#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:420
+msgid "In use"
+msgstr "בשימוש"
+
+#: ../panels/privacy/cc-privacy-panel.c:425
+msgctxt "Location services status"
+msgid "On"
+msgstr "פועל"
+
+#: ../panels/privacy/cc-privacy-panel.c:426
+msgctxt "Location services status"
+msgid "Off"
+msgstr "כבוי"
+
+#: ../panels/privacy/cc-privacy-panel.c:783 ../panels/privacy/privacy.ui.h:42
+msgid "Location Services"
+msgstr "שירותי איכון"
+
+#: ../panels/privacy/cc-privacy-panel.c:897 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "שימוש והיסטוריה"
 
-#: ../panels/privacy/cc-privacy-panel.c:587
+#: ../panels/privacy/cc-privacy-panel.c:1022
 msgid "Empty all items from Trash?"
 msgstr "לרוקן את כל הפריטים באשפה?"
 
-#: ../panels/privacy/cc-privacy-panel.c:588
+#: ../panels/privacy/cc-privacy-panel.c:1023
 msgid "All items in the Trash will be permanently deleted."
 msgstr "כל הפריטים באשפה ימחקו לצמיתות."
 
-#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1024 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_פינוי האשפה"
 
-#: ../panels/privacy/cc-privacy-panel.c:612
+#: ../panels/privacy/cc-privacy-panel.c:1047
 msgid "Delete all the temporary files?"
 msgstr "למחוק את כל הקבצים הזמניים?"
 
-#: ../panels/privacy/cc-privacy-panel.c:613
+#: ../panels/privacy/cc-privacy-panel.c:1048
 msgid "All the temporary files will be permanently deleted."
 msgstr "כל הקבצים הזמניים ימחקו לצמיתות."
 
-#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1049 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "מחיקת קבצים _זמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1071 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "ניקוי הזבל והקבצים הזמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1111 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "שימוש בתכנה"
 
-#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+#: ../panels/privacy/cc-privacy-panel.c:1152 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "דיווח על בעיות"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:731
+#: ../panels/privacy/cc-privacy-panel.c:1166
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4602,7 +4630,7 @@ msgstr ""
 "שליחת דיווחים על בעיות טכניות תעזור לנו לשפר את %s. הדיווחים נשלחים בעילום "
 "שם וללא מידע אישי."
 
-#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1178 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "מדיניות פרטיות"
 
@@ -4745,15 +4773,19 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_שליחת סטטיסטיקת שימוש בתכנה"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:43
+msgid ""
+"Location services allow applications to determine your geographical "
+"position. Accuracy is increased by enabling WiFi and GPS."
+msgstr "שירותי האיכון מאפשרים ליישום לזהות את המיקום הגאוגרפי שלך. \n"
+"הדיוק גדל עם הפעלת אינטרנט אלחוטי ו־GPS."
+
+
+#: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
 msgstr "שירותי _איכון"
 
-#: ../panels/privacy/privacy.ui.h:43
-msgid "Used to determine your geographical location"
-msgstr "משמש לקביעת המיקום הגאוגרפי שלך"
-
-#: ../panels/privacy/privacy.ui.h:45
+#: ../panels/privacy/privacy.ui.h:47
 msgid "_Automatic Problem Reporting"
 msgstr "דיווח בעיות _אוטומטית"
 
@@ -4781,13 +4813,13 @@ msgid "Other"
 msgstr "אחר"
 
 #: ../panels/region/cc-region-panel.c:248
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
 #: ../panels/region/cc-region-panel.c:252
-#: ../panels/user-accounts/um-user-panel.c:1076
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
@@ -6426,11 +6458,11 @@ msgstr "נבחרת אצבע"
 msgid "Enrolling fingerprints"
 msgstr "נרשמות טביעות אצבעות עבור"
 
-#: ../panels/user-accounts/um-history-dialog.c:68
+#: ../panels/user-accounts/um-history-dialog.c:70
 msgid "This Week"
 msgstr "השבוע"
 
-#: ../panels/user-accounts/um-history-dialog.c:71
+#: ../panels/user-accounts/um-history-dialog.c:73
 msgid "Last Week"
 msgstr "השבוע האחרון"
 
@@ -6438,22 +6470,22 @@ msgstr "השבוע האחרון"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:77
-#: ../panels/user-accounts/um-history-dialog.c:81
+#: ../panels/user-accounts/um-history-dialog.c:79
+#: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e ב%b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:86
+#: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%e ב%b, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: ../panels/user-accounts/um-history-dialog.c:91
+#: ../panels/user-accounts/um-history-dialog.c:93
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
@@ -6461,26 +6493,26 @@ msgstr "%s – %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-history-dialog.c:177
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-history-dialog.c:180
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:247
+#: ../panels/user-accounts/um-history-dialog.c:249
 msgid "Session Ended"
 msgstr "הפעלה הסתיימה"
 
-#: ../panels/user-accounts/um-history-dialog.c:253
+#: ../panels/user-accounts/um-history-dialog.c:255
 msgid "Session Started"
 msgstr "הפעלה התחילה"
 
@@ -6545,41 +6577,41 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל המתחם %s:‏ %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "חשבונות אחרים"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "אירע כשל במחיקת משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "אירע כשל בביטול המשתמש המנוהל מרחוק"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "אין באפשרותך למחוק את החשבון שלך."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "האם ברצונך לשמור את הקבצים של %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6587,51 +6619,51 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "האם אכן ברצונך למחוק את החשבון המנוהל מרחוק %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_מחיקה"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מנוטרל"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "נכנסת"
 
-#: ../panels/user-accounts/um-user-panel.c:1275
+#: ../panels/user-accounts/um-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:1277
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:1318
+#: ../panels/user-accounts/um-user-panel.c:1315
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6639,12 +6671,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
+#: ../panels/user-accounts/um-user-panel.c:1353
 msgid "Create a user account"
 msgstr "יצירת חשבון משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:1367
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6652,12 +6684,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1684
+#: ../panels/user-accounts/um-user-panel.c:1386
+#: ../panels/user-accounts/um-user-panel.c:1681
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6665,7 +6697,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1593
+#: ../panels/user-accounts/um-user-panel.c:1590
 msgid "My Account"
 msgstr "החשבון שלי"
 
@@ -6694,16 +6726,6 @@ msgstr ""
 #: ../panels/user-accounts/um-utils.c:577
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "שם זה ישמש לשם תיקיית הבית שלך ולא יהיה ניתן לשנותו."
-
-#. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:823
-msgid "%b %e"
-msgstr "%e ב%b"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:827
-msgid "%b %e, %Y"
-msgstr "%e ב%b, 2013"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -7124,6 +7146,9 @@ msgstr "לחזור חזרה לכל ההגדרות"
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "ביטול החיפוש"
+
+#~ msgid "Used to determine your geographical location"
+#~ msgstr "משמש לקביעת המיקום הגאוגרפי שלך"
 
 #~ msgid "Done"
 #~ msgstr "בוצע"
