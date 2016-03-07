@@ -234,14 +234,15 @@ show_week (UmHistoryDialog *um)
         line = 0;
         for (;i >= 0; i--) {
                 history = g_array_index (login_history, UmLoginHistory, i);
-                if (history.logout_time > 0 && history.logout_time < from) {
-                        break;
-                }
 
                 /* Display only x-session and tty records */
                 if (!g_str_has_prefix (history.type, ":") &&
                     !g_str_has_prefix (history.type, "tty")) {
                         continue;
+                }
+
+                if (history.logout_time > 0 && history.logout_time < from) {
+                        break;
                 }
 
                 if (history.logout_time > 0 && history.logout_time < to) {
