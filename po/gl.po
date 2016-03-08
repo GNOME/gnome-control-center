@@ -13,20 +13,21 @@
 # Fran Diéguez <frandieguez@gnome.org>, 2009, 2010, 2011, 2012.
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2011, 2012.
 # Fran Dieguez <frandieguez@gnome.org>, 2012, 2013, 2014, 2015, 2016.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 16:12+0100\n"
-"PO-Revision-Date: 2016-02-23 16:19+0200\n"
+"POT-Creation-Date: 2016-03-08 10:54+0100\n"
+"PO-Revision-Date: 2016-03-08 10:55+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: gnome-l10n-gl@gnome.org\n"
+"Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
@@ -123,9 +124,9 @@ msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1952
+#: ../panels/printers/cc-printers-panel.c:1995
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:568
+#: ../panels/privacy/cc-privacy-panel.c:1003
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -135,8 +136,8 @@ msgstr "Pode engadir máis imaxes ao seu cartafol %s para que se mostren aquí"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -885,6 +886,26 @@ msgstr "Máis…"
 msgid "No languages found"
 msgstr "Non se atoparon idiomas"
 
+#: ../panels/common/cc-util.c:125
+#: ../panels/network/connection-editor/ce-page-details.c:102
+msgid "Today"
+msgstr "Hoxe"
+
+#: ../panels/common/cc-util.c:129
+#: ../panels/network/connection-editor/ce-page-details.c:104
+msgid "Yesterday"
+msgstr "Mañá"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/common/cc-util.c:136
+msgid "%b %e"
+msgstr "%e de %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/common/cc-util.c:141
+msgid "%b %e, %Y"
+msgstr "%e de %b de %Y"
+
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Idioma"
@@ -1093,8 +1114,8 @@ msgstr "Primaria"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -1527,7 +1548,7 @@ msgstr "Iniciadores"
 msgid "Launch help browser"
 msgstr "Iniciar o visor de axuda"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1606
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Preferencias"
@@ -1987,16 +2008,6 @@ msgstr "Ningunha"
 msgid "Never"
 msgstr "Nunca"
 
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:815
-msgid "Today"
-msgstr "Hoxe"
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:818
-msgid "Yesterday"
-msgstr "Mañá"
-
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
@@ -2111,7 +2122,7 @@ msgstr "Automático (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Manual"
 msgstr "Manual"
 
@@ -2135,7 +2146,7 @@ msgstr "Prefixo"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Automatic"
 msgstr "Automático"
 
@@ -2452,7 +2463,7 @@ msgid "Select file to import"
 msgstr "Seleccione o ficheiro para importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1953
+#: ../panels/printers/cc-printers-panel.c:1996
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -3480,8 +3491,8 @@ msgstr "_Tipo"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595
@@ -3546,7 +3557,7 @@ msgstr "Notificacións na pantalla de b_loqueo"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
-#: ../panels/sound/gvc-mixer-dialog.c:1781
+#: ../panels/privacy/privacy.ui.h:45 ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Applications"
 msgstr "Aplicativos"
 
@@ -4013,138 +4024,138 @@ msgid "Authentication Required"
 msgstr "Requírese autenticación"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:589
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "Low on toner"
 msgstr "Toner baixo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:591
+#: ../panels/printers/cc-printers-panel.c:623
 msgid "Out of toner"
 msgstr "Sen tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:626
 msgid "Low on developer"
 msgstr "Nivel de revelador baixo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:597
+#: ../panels/printers/cc-printers-panel.c:629
 msgid "Out of developer"
 msgstr "Sen revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:599
+#: ../panels/printers/cc-printers-panel.c:631
 msgid "Low on a marker supply"
 msgstr "Cartucho con pouca tinta"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:601
+#: ../panels/printers/cc-printers-panel.c:633
 msgid "Out of a marker supply"
 msgstr "Cartucho esgotado"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:603
+#: ../panels/printers/cc-printers-panel.c:635
 msgid "Open cover"
 msgstr "Abrir cuberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:637
 msgid "Open door"
 msgstr "Abrir porta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:607
+#: ../panels/printers/cc-printers-panel.c:639
 msgid "Low on paper"
 msgstr "Nivel de papel baixo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:609
+#: ../panels/printers/cc-printers-panel.c:641
 msgid "Out of paper"
 msgstr "Sen papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:611
+#: ../panels/printers/cc-printers-panel.c:643
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:613
-#: ../panels/printers/cc-printers-panel.c:804
+#: ../panels/printers/cc-printers-panel.c:645
+#: ../panels/printers/cc-printers-panel.c:836
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detida"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:615
+#: ../panels/printers/cc-printers-panel.c:647
 msgid "Waste receptacle almost full"
 msgstr "O recipiente de refugallos está case cheo"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:617
+#: ../panels/printers/cc-printers-panel.c:649
 msgid "Waste receptacle full"
 msgstr "O recipiente dos refugallos está cheo"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:619
+#: ../panels/printers/cc-printers-panel.c:651
 msgid "The optical photo conductor is near end of life"
 msgstr "O condutor óptico está perto do final da súa vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:621
+#: ../panels/printers/cc-printers-panel.c:653
 msgid "The optical photo conductor is no longer functioning"
 msgstr "O condutor óptico xa non funciona"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:731
+#: ../panels/printers/cc-printers-panel.c:763
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Configurando"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:790
+#: ../panels/printers/cc-printers-panel.c:822
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Lista"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:795
+#: ../panels/printers/cc-printers-panel.c:827
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Non aceptar traballos"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:800
+#: ../panels/printers/cc-printers-panel.c:832
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:920
+#: ../panels/printers/cc-printers-panel.c:952
 msgid "Toner Level"
 msgstr "Nivel do tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:923
+#: ../panels/printers/cc-printers-panel.c:955
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:926
+#: ../panels/printers/cc-printers-panel.c:958
 msgid "Supply Level"
 msgstr "Nivel do suministro"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:944
+#: ../panels/printers/cc-printers-panel.c:976
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Instalando"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1441
+#: ../panels/printers/cc-printers-panel.c:1484
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4152,15 +4163,15 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1782
+#: ../panels/printers/cc-printers-panel.c:1825
 msgid "Failed to add new printer."
 msgstr "Produciuse un erro ao engadir unha nova impresora."
 
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1992
 msgid "Select PPD File"
 msgstr "Seleccionar ficheiro PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1958
+#: ../panels/printers/cc-printers-panel.c:2001
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4168,34 +4179,34 @@ msgstr ""
 "Ficheiros de descrición de impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *."
 "PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2265
+#: ../panels/printers/cc-printers-panel.c:2308
 msgid "No suitable driver found"
 msgstr "Non se atopou ningún controlador axeitado"
 
-#: ../panels/printers/cc-printers-panel.c:2336
+#: ../panels/printers/cc-printers-panel.c:2379
 msgid "Searching for preferred drivers…"
 msgstr "Buscando controladores prefiridos…"
 
-#: ../panels/printers/cc-printers-panel.c:2357
+#: ../panels/printers/cc-printers-panel.c:2400
 msgid "Select from database…"
 msgstr "Seleccionar da base de datos…"
 
-#: ../panels/printers/cc-printers-panel.c:2366
+#: ../panels/printers/cc-printers-panel.c:2409
 msgid "Provide PPD File…"
 msgstr "Fornecer ficheiro PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2517
-#: ../panels/printers/cc-printers-panel.c:2540
+#: ../panels/printers/cc-printers-panel.c:2560
+#: ../panels/printers/cc-printers-panel.c:2583
 msgid "Test page"
 msgstr "Páxina de proba"
 
-#: ../panels/printers/cc-printers-panel.c:2653
+#: ../panels/printers/cc-printers-panel.c:2696
 msgid "No printers"
 msgstr "Non hai impresoras"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2960
+#: ../panels/printers/cc-printers-panel.c:3042
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Non foi posíbel cargar a IU: %s"
@@ -4599,52 +4610,70 @@ msgstr ""
 "O servizo do sistema de impresión\n"
 "semella que non está dispoñíbel."
 
-#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Bloqueo de pantalla"
 
-#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:420
+msgid "In use"
+msgstr "En uso"
+
+#: ../panels/privacy/cc-privacy-panel.c:425
+msgctxt "Location services status"
+msgid "On"
+msgstr "Activado"
+
+#: ../panels/privacy/cc-privacy-panel.c:426
+msgctxt "Location services status"
+msgid "Off"
+msgstr "Desactivado"
+
+#: ../panels/privacy/cc-privacy-panel.c:783 ../panels/privacy/privacy.ui.h:42
+msgid "Location Services"
+msgstr "Servizos de localización"
+
+#: ../panels/privacy/cc-privacy-panel.c:897 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Uso e historial"
 
-#: ../panels/privacy/cc-privacy-panel.c:587
+#: ../panels/privacy/cc-privacy-panel.c:1022
 msgid "Empty all items from Trash?"
 msgstr "Desexa baleirar todos os elementos do lixo?"
 
-#: ../panels/privacy/cc-privacy-panel.c:588
+#: ../panels/privacy/cc-privacy-panel.c:1023
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Pérdese permanentemente todos os elementos do lixo."
 
-#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1024 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Baleirar o lixo"
 
-#: ../panels/privacy/cc-privacy-panel.c:612
+#: ../panels/privacy/cc-privacy-panel.c:1047
 msgid "Delete all the temporary files?"
 msgstr "Desexa eliminar todos os ficheiros temporais?"
 
-#: ../panels/privacy/cc-privacy-panel.c:613
+#: ../panels/privacy/cc-privacy-panel.c:1048
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos os ficheiros temporais eliminaranse de forma permanente."
 
-#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1049 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Eliminar os ficheiros temporais"
 
-#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1071 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Limpar o lixo e ficheiros temporais"
 
-#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1111 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Uso do software"
 
-#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+#: ../panels/privacy/cc-privacy-panel.c:1152 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Informe de erros"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:731
+#: ../panels/privacy/cc-privacy-panel.c:1166
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4653,7 +4682,7 @@ msgstr ""
 "Ao enviar informes de problemas técnicos axudaranos a mellorar %s. Os "
 "informes envíanse de forma anónima e límpanse de datos persoais."
 
-#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1178 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Política de privacidade"
 
@@ -4797,15 +4826,19 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_Enviar estatísticas de uso de software"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:43
+msgid ""
+"Location services allow applications to determine your geographical "
+"position. Accuracy is increased by enabling WiFi and GPS."
+msgstr ""
+"Os servizos de localización permítenlle aos aplicativos determinar a "
+"posición xeográfica. A precisión aumentará ao activar o WiFi ou o GPS."
+
+#: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
 msgstr "Servizos de _localización"
 
-#: ../panels/privacy/privacy.ui.h:43
-msgid "Used to determine your geographical location"
-msgstr "Usado para determinar a súa localización xeográfica"
-
-#: ../panels/privacy/privacy.ui.h:45
+#: ../panels/privacy/privacy.ui.h:47
 msgid "_Automatic Problem Reporting"
 msgstr "Informar de problemas _automaticamente"
 
@@ -4833,12 +4866,12 @@ msgid "Other"
 msgstr "Outra"
 
 #: ../panels/region/cc-region-panel.c:248
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "A súa sesión debe reiniciarse para que se apliquen os cambios"
 
 #: ../panels/region/cc-region-panel.c:252
-#: ../panels/user-accounts/um-user-panel.c:1076
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "Reiniciar agora"
 
@@ -6492,11 +6525,11 @@ msgstr "Seleccionando dedo"
 msgid "Enrolling fingerprints"
 msgstr "Rexistrando pegadas dixitais"
 
-#: ../panels/user-accounts/um-history-dialog.c:68
+#: ../panels/user-accounts/um-history-dialog.c:70
 msgid "This Week"
 msgstr "Esta semana"
 
-#: ../panels/user-accounts/um-history-dialog.c:71
+#: ../panels/user-accounts/um-history-dialog.c:73
 msgid "Last Week"
 msgstr "Última semana"
 
@@ -6504,22 +6537,22 @@ msgstr "Última semana"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:77
-#: ../panels/user-accounts/um-history-dialog.c:81
+#: ../panels/user-accounts/um-history-dialog.c:79
+#: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e de %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:86
+#: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%e de %b de %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: ../panels/user-accounts/um-history-dialog.c:91
+#: ../panels/user-accounts/um-history-dialog.c:93
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
@@ -6527,26 +6560,26 @@ msgstr "%s - %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-history-dialog.c:177
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-history-dialog.c:180
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:247
+#: ../panels/user-accounts/um-history-dialog.c:249
 msgid "Session Ended"
 msgstr "Sesión rematada"
 
-#: ../panels/user-accounts/um-history-dialog.c:253
+#: ../panels/user-accounts/um-history-dialog.c:255
 msgid "Session Started"
 msgstr "Sesión iniciada"
 
@@ -6611,30 +6644,30 @@ msgstr "Contrasinal incorrecto, ténteo de novo"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Non foi posíbel conectarse ao dominio %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Outras contas"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Produciuse un erro ao eliminar o usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Produciuse un fallo ao revocar o usuario xestionado remotamente"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Non pode eliminar a súa propia conta."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aínda ten a sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6642,12 +6675,12 @@ msgstr ""
 "Se elimina un usuario mentres ten a sesión iniciada pode poñer deixar o "
 "sistema nun estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Desexa manter os ficheiros de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6655,51 +6688,51 @@ msgstr ""
 "É posíbel manter o cartafol persoal, a caixa de correo e os ficheiros "
 "temporais ao eliminar unha conta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Eliminar os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Manter os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Ten certeza que quere revocar a conta de %s xestionada remotamente?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Conta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar no seguinte inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ningún"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Conectado"
 
-#: ../panels/user-accounts/um-user-panel.c:1275
+#: ../panels/user-accounts/um-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un erro ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:1277
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:1318
+#: ../panels/user-accounts/um-user-panel.c:1315
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6707,12 +6740,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
+#: ../panels/user-accounts/um-user-panel.c:1353
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1367
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6720,12 +6753,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1684
+#: ../panels/user-accounts/um-user-panel.c:1386
+#: ../panels/user-accounts/um-user-panel.c:1681
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6733,7 +6766,7 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1593
+#: ../panels/user-accounts/um-user-panel.c:1590
 msgid "My Account"
 msgstr "A miña conta"
 
@@ -6762,16 +6795,6 @@ msgstr ""
 #: ../panels/user-accounts/um-utils.c:577
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "Usarase como nome para o seu cartafol persoal e non pode cambiarse."
-
-#. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:823
-msgid "%b %e"
-msgstr "%e de %b"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:827
-msgid "%b %e, %Y"
-msgstr "%e de %b de %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -7144,22 +7167,22 @@ msgstr "Axuda"
 msgid "Quit"
 msgstr "Saír"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
 msgid "All Settings"
 msgstr "Todas as preferencias"
 
 #. Add categories
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Persoal"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:882
+#: ../shell/cc-window.c:883
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
@@ -7197,6 +7220,9 @@ msgstr "Mostrar a vista previa"
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Cancelar busca"
+
+#~ msgid "Used to determine your geographical location"
+#~ msgstr "Usado para determinar a súa localización xeográfica"
 
 #~ msgid "Done"
 #~ msgstr "Feito"
