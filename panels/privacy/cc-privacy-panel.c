@@ -615,15 +615,16 @@ add_location_app (CcPrivacyPanel *self,
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_set_margin_top (box, 6);
-  gtk_widget_set_margin_bottom (box, 6);
+  gtk_widget_set_margin_start (box, 12);
+  gtk_widget_set_margin_end (box, 6);
+  gtk_widget_set_margin_top (box, 12);
+  gtk_widget_set_margin_bottom (box, 12);
   gtk_container_add (GTK_CONTAINER (row), box);
   gtk_widget_set_hexpand (box, TRUE);
   gtk_container_add (GTK_CONTAINER (self->priv->location_apps_list_box), row);
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
-  gtk_widget_set_margin_start (w, 12);
   gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (self->priv->location_icon_size_group, w);
@@ -650,7 +651,6 @@ add_location_app (CcPrivacyPanel *self,
 
   w = gtk_switch_new ();
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
-  gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_halign (w, GTK_ALIGN_END);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
