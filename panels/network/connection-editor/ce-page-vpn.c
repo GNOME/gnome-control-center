@@ -121,6 +121,7 @@ connect_vpn_page (CEPageVpn *page)
 {
         const gchar *name;
         GtkWidget *widget;
+        GtkWidget *heading;
 
         name = nm_setting_connection_get_id (page->setting_connection);
         gtk_entry_set_text (page->name, name);
@@ -134,7 +135,8 @@ connect_vpn_page (CEPageVpn *page)
                           G_CALLBACK (all_user_changed), page);
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        firewall_ui_setup (page->setting_connection, widget, CE_PAGE (page)->cancellable);
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_zone"));
+        firewall_ui_setup (page->setting_connection, widget, heading, CE_PAGE (page)->cancellable);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 
 }

@@ -24,6 +24,7 @@
 
 void firewall_ui_setup      (NMSettingConnection *setting,
                              GtkWidget           *combo,
+                             GtkWidget           *label,
                              GCancellable        *cancellable);
 void firewall_ui_to_setting (NMSettingConnection *setting,
                              GtkWidget           *combo);

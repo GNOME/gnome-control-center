@@ -361,7 +361,7 @@ finish_setup (CEPageSecurity *page)
         page->firewall_combo = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
 
         sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        firewall_ui_setup (sc, page->firewall_combo, CE_PAGE (page)->cancellable);
+        firewall_ui_setup (sc, GTK_WIDGET (page->firewall_combo), page->firewall_heading, CE_PAGE (page)->cancellable);
         g_signal_connect_swapped (page->firewall_combo, "changed", G_CALLBACK (ce_page_changed), page);
 
         security_combo_changed (combo, page);
