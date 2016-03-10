@@ -27,6 +27,7 @@
 typedef struct {
         gchar *zone;
         GtkWidget *combo;
+        GtkWidget *label;
 } GetZonesReplyData;
 
 static void
@@ -50,11 +51,13 @@ get_zones_reply (GObject      *source,
 
         idx = 0;
         if (error) {
-                gtk_widget_set_sensitive (d->combo, FALSE);
+                gtk_widget_hide (d->combo);
+                gtk_widget_hide (d->label);
                 g_error_free (error);
         }
         else {
-                gtk_widget_set_sensitive (d->combo, TRUE);
+                gtk_widget_show (d->combo);
+                gtk_widget_show (d->label);
                 g_variant_get (ret, "(^a&s)", &zones);
 
                 for (i = 0; zones[i]; i++) {
@@ -79,6 +82,7 @@ get_zones_reply (GObject      *source,
 void
 firewall_ui_setup (NMSettingConnection *setting,
                    GtkWidget           *combo,
+                   GtkWidget           *label,
                    GCancellable        *cancellable)
 {
         GDBusConnection *bus;
@@ -89,6 +93,7 @@ firewall_ui_setup (NMSettingConnection *setting,
         d = g_new0 (GetZonesReplyData, 1);
         d->zone = g_strdup (nm_setting_connection_get_zone (setting));
         d->combo = combo;
+        d->label = label;
 
         g_dbus_connection_call (bus,
                                 "org.fedoraproject.FirewallD1",

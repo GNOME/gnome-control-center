@@ -68,6 +68,7 @@ connect_ethernet_page (CEPageEthernet *page)
         const GByteArray *s_mac;
         char *s_mac_str;
         GtkWidget *widget;
+        GtkWidget *heading;
         const gchar *name;
 
         name = nm_setting_connection_get_id (page->setting_connection);
@@ -118,7 +119,8 @@ connect_ethernet_page (CEPageEthernet *page)
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        firewall_ui_setup (sc, widget, CE_PAGE (page)->cancellable);
+        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_zone"));
+        firewall_ui_setup (sc, widget, heading, CE_PAGE (page)->cancellable);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 
 }
