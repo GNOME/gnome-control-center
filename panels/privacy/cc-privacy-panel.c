@@ -428,27 +428,6 @@ update_location_label (CcPrivacyPanel *self)
 }
 
 static void
-update_location_apps_sensitivity (CcPrivacyPanel *self)
-{
-  gboolean enabled;
-
-  enabled = g_settings_get_boolean (self->priv->location_settings,
-                                    LOCATION_ENABLED);
-  gtk_widget_set_sensitive (self->priv->location_apps_frame,
-                            enabled);
-  gtk_widget_set_sensitive (self->priv->location_apps_label,
-                            enabled);
-}
-
-static void
-on_location_setting_changed (GSettings *settings,
-                             gchar     *key,
-                             gpointer   user_data)
-{
-  update_location_apps_sensitivity (user_data);
-}
-
-static void
 on_gclue_manager_props_changed (GDBusProxy *manager,
                                 GVariant   *changed_properties,
                                 GStrv       invalidated_properties,
@@ -599,6 +578,7 @@ add_location_app (CcPrivacyPanel *self,
                   gboolean        enabled,
                   gint64          last_used)
 {
+  CcPrivacyPanelPrivate *priv = self->priv;
   GDesktopAppInfo *app_info;
   char *desktop_id;
   GtkWidget *box, *row, *w;
@@ -621,13 +601,13 @@ add_location_app (CcPrivacyPanel *self,
   gtk_widget_set_margin_bottom (box, 12);
   gtk_container_add (GTK_CONTAINER (row), box);
   gtk_widget_set_hexpand (box, TRUE);
-  gtk_container_add (GTK_CONTAINER (self->priv->location_apps_list_box), row);
+  gtk_container_add (GTK_CONTAINER (priv->location_apps_list_box), row);
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
   gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_size_group_add_widget (self->priv->location_icon_size_group, w);
+  gtk_size_group_add_widget (priv->location_icon_size_group, w);
   gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
 
   w = gtk_label_new (g_app_info_get_name (G_APP_INFO (app_info)));
@@ -654,6 +634,9 @@ add_location_app (CcPrivacyPanel *self,
   gtk_widget_set_halign (w, GTK_ALIGN_END);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+  g_settings_bind (priv->location_settings, LOCATION_ENABLED,
+                   w, "sensitive",
+                   G_SETTINGS_BIND_DEFAULT);
 
   data = g_slice_new (LocationAppStateData);
   data->self = self;
@@ -773,10 +756,6 @@ add_location (CcPrivacyPanel *self)
   GtkWidget *dialog;
 
   priv->location_label = gtk_label_new ("");
-  g_signal_connect (priv->location_settings,
-                    "changed::" LOCATION_ENABLED,
-                    G_CALLBACK (on_location_setting_changed),
-                    self);
   update_location_label (self);
 
   add_row (self,
