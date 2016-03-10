@@ -137,7 +137,7 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 	gboolean sensitive, powered, change_powered;
 	const char *page;
 
-	g_debug ("Updating airplane mode: has_airplane_mode %d, hardware_airplane_mode %d, BT airplane_mode %d, airplane_mode %d",
+	g_debug ("Updating airplane mode: BluetoothHasAirplaneMode %d, BluetoothHardwareAirplaneMode %d, BluetoothAirplaneMode %d, AirplaneMode %d",
 		 self->priv->has_airplane_mode, self->priv->hardware_airplane_mode, self->priv->bt_airplane_mode, self->priv->airplane_mode);
 
 	change_powered = TRUE;
