@@ -485,7 +485,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
 				  G_DBUS_PROXY_FLAGS_NONE,
 				  NULL,
-				  "org.gnome.SettingsDaemon",
+				  "org.gnome.SettingsDaemon.Wacom",
 				  "/org/gnome/SettingsDaemon/Wacom",
 				  "org.gnome.SettingsDaemon.Wacom",
 				  priv->cancellable,
