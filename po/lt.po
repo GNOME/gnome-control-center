@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-05 08:42+0000\n"
-"PO-Revision-Date: 2016-03-05 21:39+0200\n"
+"POT-Creation-Date: 2016-03-13 08:42+0000\n"
+"PO-Revision-Date: 2016-03-13 21:16+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -124,9 +124,9 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1995
+#: ../panels/printers/cc-printers-panel.c:2052
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1003
+#: ../panels/privacy/cc-privacy-panel.c:982
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -2459,7 +2459,7 @@ msgid "Select file to import"
 msgstr "Pasirinkite failą importavimui"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1996
+#: ../panels/printers/cc-printers-panel.c:2053
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -4024,138 +4024,138 @@ msgid "Authentication Required"
 msgstr "Reikia patvirtinti tapatybę"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:621
+#: ../panels/printers/cc-printers-panel.c:678
 msgid "Low on toner"
 msgstr "Baigiasi rašalas"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:623
+#: ../panels/printers/cc-printers-panel.c:680
 msgid "Out of toner"
 msgstr "Baigiasi rašalas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:626
+#: ../panels/printers/cc-printers-panel.c:683
 msgid "Low on developer"
 msgstr "Baigiasi ryškalas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:629
+#: ../panels/printers/cc-printers-panel.c:686
 msgid "Out of developer"
 msgstr "Baigėsi ryškalas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:631
+#: ../panels/printers/cc-printers-panel.c:688
 msgid "Low on a marker supply"
 msgstr "Baigiasi spalvos tiekimas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:633
+#: ../panels/printers/cc-printers-panel.c:690
 msgid "Out of a marker supply"
 msgstr "Baigėsi spalvos tiekimas"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:635
+#: ../panels/printers/cc-printers-panel.c:692
 msgid "Open cover"
 msgstr "Atvertas dangtis"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:637
+#: ../panels/printers/cc-printers-panel.c:694
 msgid "Open door"
 msgstr "Atvertos durys"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:639
+#: ../panels/printers/cc-printers-panel.c:696
 msgid "Low on paper"
 msgstr "Baigiasi popierius"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:641
+#: ../panels/printers/cc-printers-panel.c:698
 msgid "Out of paper"
 msgstr "Baigėsi popierius"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:643
+#: ../panels/printers/cc-printers-panel.c:700
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Išjungta"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:645
-#: ../panels/printers/cc-printers-panel.c:836
+#: ../panels/printers/cc-printers-panel.c:702
+#: ../panels/printers/cc-printers-panel.c:893
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Sustabdytas"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:647
+#: ../panels/printers/cc-printers-panel.c:704
 msgid "Waste receptacle almost full"
 msgstr "Atliekų konteineris beveik pilnas"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:649
+#: ../panels/printers/cc-printers-panel.c:706
 msgid "Waste receptacle full"
 msgstr "Atliekų konteineris pilnas"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:651
+#: ../panels/printers/cc-printers-panel.c:708
 msgid "The optical photo conductor is near end of life"
 msgstr "Optinio fotokonduktoriaus tarnavimo laikas baigiasi"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:653
+#: ../panels/printers/cc-printers-panel.c:710
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optinis fotokonduktorius nebeveikia"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:763
+#: ../panels/printers/cc-printers-panel.c:820
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Konfigūruojama"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:822
+#: ../panels/printers/cc-printers-panel.c:879
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pasirengęs"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:827
+#: ../panels/printers/cc-printers-panel.c:884
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nepriima darbų"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:832
+#: ../panels/printers/cc-printers-panel.c:889
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Apdorojama"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:952
+#: ../panels/printers/cc-printers-panel.c:1009
 msgid "Toner Level"
 msgstr "Dažų lygis"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:955
+#: ../panels/printers/cc-printers-panel.c:1012
 msgid "Ink Level"
 msgstr "Rašalo lygis"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:958
+#: ../panels/printers/cc-printers-panel.c:1015
 msgid "Supply Level"
 msgstr "Tiekimo lygis"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:976
+#: ../panels/printers/cc-printers-panel.c:1033
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Diegiama"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1484
+#: ../panels/printers/cc-printers-panel.c:1541
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4164,15 +4164,15 @@ msgstr[1] "%u aktyvūs"
 msgstr[2] "%u aktyvių"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1825
+#: ../panels/printers/cc-printers-panel.c:1882
 msgid "Failed to add new printer."
 msgstr "Nepavyko pridėti naujo spausdintuvo."
 
-#: ../panels/printers/cc-printers-panel.c:1992
+#: ../panels/printers/cc-printers-panel.c:2049
 msgid "Select PPD File"
 msgstr "Pasirinkite PPD failą"
 
-#: ../panels/printers/cc-printers-panel.c:2001
+#: ../panels/printers/cc-printers-panel.c:2058
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4180,34 +4180,34 @@ msgstr ""
 "PostScript spausdintuvo aprašymo failai (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2308
+#: ../panels/printers/cc-printers-panel.c:2365
 msgid "No suitable driver found"
 msgstr "Nerasta tinkama tvarkyklė"
 
-#: ../panels/printers/cc-printers-panel.c:2379
+#: ../panels/printers/cc-printers-panel.c:2436
 msgid "Searching for preferred drivers…"
 msgstr "Ieškoma pageidaujamų tvarkyklių..."
 
-#: ../panels/printers/cc-printers-panel.c:2400
+#: ../panels/printers/cc-printers-panel.c:2457
 msgid "Select from database…"
 msgstr "Pasirinkti iš duomenų bazės..."
 
-#: ../panels/printers/cc-printers-panel.c:2409
+#: ../panels/printers/cc-printers-panel.c:2466
 msgid "Provide PPD File…"
 msgstr "Pateikite PPD failą..."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2560
-#: ../panels/printers/cc-printers-panel.c:2583
+#: ../panels/printers/cc-printers-panel.c:2617
+#: ../panels/printers/cc-printers-panel.c:2640
 msgid "Test page"
 msgstr "Bandomasis puslapis"
 
-#: ../panels/printers/cc-printers-panel.c:2696
+#: ../panels/printers/cc-printers-panel.c:2753
 msgid "No printers"
 msgstr "Spausdintuvų nėra"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3042
+#: ../panels/printers/cc-printers-panel.c:3099
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepavyko įkelti sąsajos: %s"
@@ -4620,64 +4620,61 @@ msgid "In use"
 msgstr "Naudojama"
 
 #: ../panels/privacy/cc-privacy-panel.c:425
-#| msgid "On"
 msgctxt "Location services status"
 msgid "On"
 msgstr "Įjungta"
 
 #: ../panels/privacy/cc-privacy-panel.c:426
-#| msgid "Off"
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Išjungta"
 
-#: ../panels/privacy/cc-privacy-panel.c:783 ../panels/privacy/privacy.ui.h:42
-#| msgid "_Location Services"
+#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Vietos tarnybos"
 
-#: ../panels/privacy/cc-privacy-panel.c:897 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Naudojimas ir istorija"
 
-#: ../panels/privacy/cc-privacy-panel.c:1022
+#: ../panels/privacy/cc-privacy-panel.c:1001
 msgid "Empty all items from Trash?"
 msgstr "Išvalyti visus elementus iš šiukšlinės?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1023
+#: ../panels/privacy/cc-privacy-panel.c:1002
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Visi šiukšlinės elementai bus negrįžtamai ištrinti."
 
-#: ../panels/privacy/cc-privacy-panel.c:1024 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Iš_valyti šiukšlinę"
 
-#: ../panels/privacy/cc-privacy-panel.c:1047
+#: ../panels/privacy/cc-privacy-panel.c:1026
 msgid "Delete all the temporary files?"
 msgstr "Ištrinti visus laikinuosius failus?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/privacy/cc-privacy-panel.c:1027
 msgid "All the temporary files will be permanently deleted."
 msgstr "Visi laikinieji failai bus negrįžtamai ištrinti."
 
-#: ../panels/privacy/cc-privacy-panel.c:1049 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Išvalyti laikinuosius _failus"
 
-#: ../panels/privacy/cc-privacy-panel.c:1071 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Išvalyti šiukšlinę ir laikinuosius failus"
 
-#: ../panels/privacy/cc-privacy-panel.c:1111 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Programinės įrangos naudojimas"
 
-#: ../panels/privacy/cc-privacy-panel.c:1152 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Pranešimas apie problemas"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1166
+#: ../panels/privacy/cc-privacy-panel.c:1145
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4686,7 +4683,7 @@ msgstr ""
 "Pranešimų apie technines problemas siuntimas mums padeda pagerinti %s. "
 "Pranešimai yra siunčiami anonimiškai, o asmeniniai duomenys yra išdarkomi."
 
-#: ../panels/privacy/cc-privacy-panel.c:1178 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Privatumo politika"
 
@@ -4832,12 +4829,15 @@ msgid "_Send software usage statistics"
 msgstr "_Siųsti programinės įrangos naudojimo statistiką"
 
 #: ../panels/privacy/privacy.ui.h:43
+#| msgid ""
+#| "Location services allow applications to determine your geographical "
+#| "position. Accuracy is increased by enabling WiFi and GPS."
 msgid ""
-"Location services allow applications to determine your geographical "
-"position. Accuracy is increased by enabling WiFi and GPS."
+"Location services allow applications to know your location. Using Wi-Fi and "
+"mobile broadband increases accuracy."
 msgstr ""
-"Vietos tarnybos leidžia programoms nustatyti jūsų geografinę vietą. "
-"Tikslumas padidinamas įjungiant WiFi bei GPS."
+"Vietos tarnybos leidžia programoms žinoti jūsų geografinę vietą. Tikslumas "
+"padidinamas įjungiant WiFi bei mobilųjį plačiajuosti tinklą."
 
 #: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
