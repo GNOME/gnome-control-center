@@ -1697,6 +1697,42 @@ list_box_item (const gchar *title,
   return row;
 }
 
+static gboolean
+is_atsc_duplicate_freq (GnomeRRMode *mode,
+                        GnomeRRMode *next_mode)
+{
+  double freq, next_freq;
+  gboolean ret;
+
+  if (next_mode == NULL)
+    return FALSE;
+
+  freq = gnome_rr_mode_get_freq_f (mode);
+  next_freq = gnome_rr_mode_get_freq_f (next_mode);
+
+  ret = fabs (freq - (next_freq / 1000.0 * 1001.0)) < 0.01;
+
+  if (ret)
+    g_debug ("Next frequency %f is the NTSC variant of %f",
+             next_freq, freq);
+
+  return ret;
+}
+
+static int
+sort_frequencies (gconstpointer a, gconstpointer b)
+{
+  GnomeRRMode *mode_a = (GnomeRRMode *) a;
+  GnomeRRMode *mode_b = (GnomeRRMode *) b;
+
+  /* Highest to lowest */
+  if (gnome_rr_mode_get_freq_f (mode_a) > gnome_rr_mode_get_freq_f (mode_b))
+    return -1;
+  if (gnome_rr_mode_get_freq_f (mode_a) < gnome_rr_mode_get_freq_f (mode_b))
+    return 1;
+  return 0;
+}
+
 static void
 setup_frequency_combo_box (CcDisplayPanel *panel,
                            GnomeRRMode    *resolution_mode)
@@ -1707,8 +1743,9 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *res;
-  GSList *l;
+  GSList *l, *frequencies;
   guint i;
+  gboolean prev_dup;
 
   current_output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                        gnome_rr_output_info_get_name (priv->current_output));
@@ -1719,10 +1756,50 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
 
   i = 0;
   res = make_resolution_string (resolution_mode);
-  for (l = g_hash_table_lookup (priv->res_freqs, res); l != NULL; l = l->next)
+  frequencies = g_slist_copy (g_hash_table_lookup (priv->res_freqs, res));
+  g_free (res);
+  frequencies = g_slist_sort (frequencies, sort_frequencies);
+  prev_dup = FALSE;
+
+  /* Look for 59.94Hz, and if it exists, remove the 60Hz option
+   * in favour of this NTSC/ATSC frequency.
+   * 60Hz is a "PC" frequency, 59.94Hz is a holdover
+   * from NTSC:
+   * https://en.wikipedia.org/wiki/NTSC#Lines_and_refresh_rate
+   *
+   * We also want to handle this for ~30Hz and ~120Hz */
+  for (l = frequencies; l != NULL; l = l->next)
     {
       GnomeRRMode *mode = l->data;
-      gchar *freq = g_strdup_printf ("%d Hz", gnome_rr_mode_get_freq (mode));
+      GnomeRRMode *next_mode;
+      gchar *freq;
+      gboolean dup;
+
+      if (l->next != NULL)
+        next_mode = l->next->data;
+      else
+        next_mode = NULL;
+
+      dup = is_atsc_duplicate_freq (mode, next_mode);
+      if (dup && mode != current_mode)
+        {
+          prev_dup = TRUE;
+          continue;
+        }
+
+      if (prev_dup)
+        {
+          /* translators: example string is "60 Hz (NTSC)"
+           * NTSC is https://en.wikipedia.org/wiki/NTSC */
+          freq = g_strdup_printf (_("%d Hz (NTSC)"),
+                                  (int) (roundf (gnome_rr_mode_get_freq_f (mode))));
+        }
+      else
+        {
+          /* translators: example string is "60 Hz" */
+          freq = g_strdup_printf (_("%d Hz"), gnome_rr_mode_get_freq (mode));
+        }
+
       gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &iter,
                                          -1, 0, freq, 1, mode, -1);
       g_free (freq);
@@ -1730,9 +1807,11 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
       if (mode == current_mode)
         gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->freq_combo), &iter);
 
+      prev_dup = dup;
       i++;
     }
-  g_free (res);
+
+  g_slist_free (frequencies);
 
   if (i < 2)
     {
