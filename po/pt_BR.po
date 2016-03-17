@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-15 12:45+0000\n"
-"PO-Revision-Date: 2016-03-15 13:07-0300\n"
+"POT-Creation-Date: 2016-03-17 13:52+0000\n"
+"PO-Revision-Date: 2016-03-17 12:08-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -125,7 +125,7 @@ msgid "You can add images to your %s folder and they will show up here"
 msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui."
 
 #: ../panels/background/cc-background-chooser-dialog.c:580 ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963 ../panels/color/color-calibrate.ui.h:2
-#: ../panels/color/color.ui.h:30 ../panels/common/language-chooser.ui.h:3 ../panels/display/cc-display-panel.c:1561 ../panels/display/cc-display-panel.c:2023
+#: ../panels/color/color.ui.h:30 ../panels/common/language-chooser.ui.h:3 ../panels/display/cc-display-panel.c:1563 ../panels/display/cc-display-panel.c:2196
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../panels/network/connection-editor/connection-editor.ui.h:1 ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374 ../panels/network/net-device-wifi.c:1269 ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1 ../panels/printers/cc-printers-panel.c:2052 ../panels/printers/new-printer-dialog.ui.h:2 ../panels/privacy/cc-privacy-panel.c:982
@@ -1042,112 +1042,129 @@ msgstr "Alterar o horário do sistema e configurações de data"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Para modificar configurações de data ou hora você precisa se autenticar."
 
-#: ../panels/display/cc-display-panel.c:573
+#: ../panels/display/cc-display-panel.c:575
 msgid "Lid Closed"
 msgstr "Tampa fechada"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:576
+#: ../panels/display/cc-display-panel.c:578
 msgid "Mirrored"
 msgstr "Espelhadas"
 
-#: ../panels/display/cc-display-panel.c:578 ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:580 ../panels/display/cc-display-panel.c:2390
 msgid "Primary"
 msgstr "Primária"
 
-#: ../panels/display/cc-display-panel.c:580 ../panels/notifications/cc-notifications-panel.c:257 ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
+#: ../panels/display/cc-display-panel.c:582 ../panels/notifications/cc-notifications-panel.c:257 ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:172 ../panels/privacy/cc-privacy-panel.c:239 ../panels/universal-access/cc-ua-panel.c:269 ../panels/universal-access/cc-ua-panel.c:582
 #: ../panels/universal-access/cc-ua-panel.c:595 ../panels/universal-access/cc-ua-panel.c:607 ../panels/universal-access/cc-ua-panel.c:778
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Off"
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:585
 msgid "Secondary"
 msgstr "Secundária"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1558
+#: ../panels/display/cc-display-panel.c:1560
 msgid "Arrange Combined Displays"
 msgstr "Organizar telas combinadas"
 
-#: ../panels/display/cc-display-panel.c:1562 ../panels/display/cc-display-panel.c:2024 ../panels/network/connection-editor/connection-editor.ui.h:2
+#: ../panels/display/cc-display-panel.c:1564 ../panels/display/cc-display-panel.c:2197 ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: ../panels/display/cc-display-panel.c:1586
+#: ../panels/display/cc-display-panel.c:1588
 msgid "Drag displays to rearrange them"
 msgstr "Arraste as telas para organizá-las"
 
-#: ../panels/display/cc-display-panel.c:2073
+#. translators: example string is "60 Hz (NTSC)"
+#. * NTSC is https://en.wikipedia.org/wiki/NTSC
+#: ../panels/display/cc-display-panel.c:1794
+#, c-format
+msgid "%d Hz (NTSC)"
+msgstr "%d Hz (NTSC)"
+
+#. translators: example string is "60 Hz"
+#: ../panels/display/cc-display-panel.c:1800
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../panels/display/cc-display-panel.c:2246
 msgid "Rotate counterclockwise by 90°"
 msgstr "Girar em 90° no sentido anti-horário"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2264
 msgid "Rotate by 180°"
 msgstr "Girar em 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2282
 msgid "Rotate clockwise by 90°"
 msgstr "Girar em 90° no sentido horário"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2303
 msgid "Size"
 msgstr "Tamanho"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2316
 msgid "Aspect Ratio"
 msgstr "Taxa de proporção"
 
-#: ../panels/display/cc-display-panel.c:2165 ../panels/printers/pp-options-dialog.c:85
+#: ../panels/display/cc-display-panel.c:2338 ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Resolução"
 
+#: ../panels/display/cc-display-panel.c:2360
+msgid "Refresh Rate"
+msgstr "Taxa de atualização"
+
 # Geralmente o "panorama de atividades" é mencionado em maiúsculo. Seria o caso aqui?
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2391
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Mostrar a barra superior e o panorama de atividades nesta tela"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2397
 msgid "Secondary Display"
 msgstr "Tela secundária"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2398
 msgid "Join this display with another to create an extra workspace"
 msgstr "Une esta tela a outra para criar um espaço de trabalho extra"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2405
 msgid "Presentation"
 msgstr "Apresentação"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2406
 msgid "Show slideshows and media only"
 msgstr "Mostra apenas apresentações de slides e mídia"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2411
 msgid "Mirror"
 msgstr "Espelhar"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2412
 msgid "Show your existing view on both displays"
 msgstr "Mostra sua visão existente em ambas as telas"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Turn Off"
 msgstr "Desligar"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Don't use this display"
 msgstr "Não usar esta tela"
 
-#: ../panels/display/cc-display-panel.c:2525
+#: ../panels/display/cc-display-panel.c:2722
 msgid "Could not get screen information"
 msgstr "Não foi possível obter informação sobre a tela"
 
-#: ../panels/display/cc-display-panel.c:2556
+#: ../panels/display/cc-display-panel.c:2753
 msgid "_Arrange Combined Displays"
 msgstr "Organiz_ar telas combinadas"
 
@@ -7092,9 +7109,6 @@ msgstr "Cancelar pesquisa"
 
 #~ msgid "Don't use the display"
 #~ msgstr "Não usa a tela"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Taxa de atualização"
 
 #~ msgid "Mouse Preferences"
 #~ msgstr "Preferências do mouse"
