@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-16 08:42+0000\n"
-"PO-Revision-Date: 2016-03-16 18:28+0200\n"
+"POT-Creation-Date: 2016-03-17 13:52+0000\n"
+"PO-Revision-Date: 2016-03-17 21:55+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -124,8 +124,8 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1561
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/display/cc-display-panel.c:1563
+#: ../panels/display/cc-display-panel.c:2196
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -702,7 +702,6 @@ msgid "Summary"
 msgstr "Yhteenveto"
 
 #: ../panels/color/color.ui.h:28
-#| msgid "_Add profile"
 msgid "Add profile"
 msgstr "Lisää profiili"
 
@@ -1104,21 +1103,21 @@ msgstr "Muuta järjestelmän aika-asetuksia"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Muuttaaksesi ajan tai päivän asetuksia sinun tulee tunnistautua."
 
-#: ../panels/display/cc-display-panel.c:573
+#: ../panels/display/cc-display-panel.c:575
 msgid "Lid Closed"
 msgstr "Kansi suljettu"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:576
+#: ../panels/display/cc-display-panel.c:578
 msgid "Mirrored"
 msgstr "Peilattu"
 
-#: ../panels/display/cc-display-panel.c:578
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:2390
 msgid "Primary"
 msgstr "Ensisijainen"
 
-#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:582
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:172
@@ -1132,94 +1131,111 @@ msgstr "Ensisijainen"
 msgid "Off"
 msgstr "Pois"
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:585
 msgid "Secondary"
 msgstr "Toissijainen"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1558
+#: ../panels/display/cc-display-panel.c:1560
 msgid "Arrange Combined Displays"
 msgstr "Järjestä yhdistetyt näytöt"
 
-#: ../panels/display/cc-display-panel.c:1562
-#: ../panels/display/cc-display-panel.c:2024
+#: ../panels/display/cc-display-panel.c:1564
+#: ../panels/display/cc-display-panel.c:2197
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Toteuta"
 
-#: ../panels/display/cc-display-panel.c:1586
+#: ../panels/display/cc-display-panel.c:1588
 msgid "Drag displays to rearrange them"
 msgstr "Järjestä näytöt vetämällä niitä"
 
-#: ../panels/display/cc-display-panel.c:2073
+#. translators: example string is "60 Hz (NTSC)"
+#. * NTSC is https://en.wikipedia.org/wiki/NTSC
+#: ../panels/display/cc-display-panel.c:1794
+#, c-format
+msgid "%d Hz (NTSC)"
+msgstr "%d Hz (NTSC)"
+
+#. translators: example string is "60 Hz"
+#: ../panels/display/cc-display-panel.c:1800
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../panels/display/cc-display-panel.c:2246
 msgid "Rotate counterclockwise by 90°"
 msgstr "Käännä vastapäivään 90°"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2264
 msgid "Rotate by 180°"
 msgstr "Käännä 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2282
 msgid "Rotate clockwise by 90°"
 msgstr "Käännä myötäpäivään 90°"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2303
 msgid "Size"
 msgstr "Koko"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2316
 msgid "Aspect Ratio"
 msgstr "Kuvasuhde"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2338
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Tarkkuus"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2360
+msgid "Refresh Rate"
+msgstr "Päivitystaajuus"
+
+#: ../panels/display/cc-display-panel.c:2391
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Näytä yläpalkki ja yleisnäkymä tällä näytöllä"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2397
 msgid "Secondary Display"
 msgstr "Toissijainen näyttö"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2398
 msgid "Join this display with another to create an extra workspace"
 msgstr "Liitä tämä näyttö toiseen luodaksesi lisää työtilaa"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2405
 msgid "Presentation"
 msgstr "Esitys"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2406
 msgid "Show slideshows and media only"
 msgstr "Näyttää vain diaesitykset ja muun median"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2411
 msgid "Mirror"
 msgstr "Peili"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2412
 msgid "Show your existing view on both displays"
 msgstr "Näytä nykyinen näkymä molemmilla näytöillä"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Turn Off"
 msgstr "Sammuta"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Don't use this display"
 msgstr "Älä käytä tätä näyttöä"
 
-#: ../panels/display/cc-display-panel.c:2525
+#: ../panels/display/cc-display-panel.c:2722
 msgid "Could not get screen information"
 msgstr "Näytön tietoja ei saatu"
 
-#: ../panels/display/cc-display-panel.c:2556
+#: ../panels/display/cc-display-panel.c:2753
 msgid "_Arrange Combined Displays"
 msgstr "_Järjestä yhdistetyt näytöt"
 
