@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-16 20:45+0000\n"
-"PO-Revision-Date: 2016-03-17 08:36+0500\n"
+"POT-Creation-Date: 2016-03-17 20:42+0000\n"
+"PO-Revision-Date: 2016-03-18 08:59+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -105,8 +105,8 @@ msgstr ""
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1561
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/display/cc-display-panel.c:1563
+#: ../panels/display/cc-display-panel.c:2196
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -1089,21 +1089,21 @@ msgstr "Жүйелік уақыт пен күнді өзгерту"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Уақыт немесе күн баптауларын өзгерту үшін аутентификация керек."
 
-#: ../panels/display/cc-display-panel.c:573
+#: ../panels/display/cc-display-panel.c:575
 msgid "Lid Closed"
 msgstr "Қақпағы жабық"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:576
+#: ../panels/display/cc-display-panel.c:578
 msgid "Mirrored"
 msgstr "Айналы"
 
-#: ../panels/display/cc-display-panel.c:578
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:2390
 msgid "Primary"
 msgstr "Біріншілік"
 
-#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:582
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:172
@@ -1117,94 +1117,111 @@ msgstr "Біріншілік"
 msgid "Off"
 msgstr "Сөнд."
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:585
 msgid "Secondary"
 msgstr "Екіншілік"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1558
+#: ../panels/display/cc-display-panel.c:1560
 msgid "Arrange Combined Displays"
 msgstr "Топталған экрандарды реттеу"
 
-#: ../panels/display/cc-display-panel.c:1562
-#: ../panels/display/cc-display-panel.c:2024
+#: ../panels/display/cc-display-panel.c:1564
+#: ../panels/display/cc-display-panel.c:2197
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "Іске _асыру"
 
-#: ../panels/display/cc-display-panel.c:1586
+#: ../panels/display/cc-display-panel.c:1588
 msgid "Drag displays to rearrange them"
 msgstr "Экрандарды реттеу үшін оларды тартып жылжытыңыз"
 
-#: ../panels/display/cc-display-panel.c:2073
+#. translators: example string is "60 Hz (NTSC)"
+#. * NTSC is https://en.wikipedia.org/wiki/NTSC
+#: ../panels/display/cc-display-panel.c:1794
+#, c-format
+msgid "%d Hz (NTSC)"
+msgstr "%d Гц (NTSC)"
+
+#. translators: example string is "60 Hz"
+#: ../panels/display/cc-display-panel.c:1800
+#, c-format
+msgid "%d Hz"
+msgstr "%d Гц"
+
+#: ../panels/display/cc-display-panel.c:2246
 msgid "Rotate counterclockwise by 90°"
 msgstr "Сағат тілі бағытына қарсы 90°-қа бұру"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2264
 msgid "Rotate by 180°"
 msgstr "180°-қа бұру"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2282
 msgid "Rotate clockwise by 90°"
 msgstr "Сағат тілі бойымен 90°-қа бұру"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2303
 msgid "Size"
 msgstr "Өлшемі"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2316
 msgid "Aspect Ratio"
 msgstr "Жақтар арақатынасы"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2338
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Ажыратылымдығы"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2360
+msgid "Refresh Rate"
+msgstr "Жаңарту жиілігі"
+
+#: ../panels/display/cc-display-panel.c:2391
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Жоғарғы панельді және белсенділік көрінісін бұл экранда көрсету"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2397
 msgid "Secondary Display"
 msgstr "Екіншілік экран"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2398
 msgid "Join this display with another to create an extra workspace"
 msgstr "Бұл экранды көбірек жұмыс орнын жасау үшін басқа экранмен біріктіру"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2405
 msgid "Presentation"
 msgstr "Презентация"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2406
 msgid "Show slideshows and media only"
 msgstr "Тек слайдшоулар және медианы көрсету"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2411
 msgid "Mirror"
 msgstr "Айналы"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2412
 msgid "Show your existing view on both displays"
 msgstr "Бар болып тұрған көріністі екі экранда бірдей көрсету"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Turn Off"
 msgstr "Сөндіру"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Don't use this display"
 msgstr "Бұл экранды қолданбау"
 
-#: ../panels/display/cc-display-panel.c:2525
+#: ../panels/display/cc-display-panel.c:2722
 msgid "Could not get screen information"
 msgstr "Экран ақпаратын алу мүмкін емес"
 
-#: ../panels/display/cc-display-panel.c:2556
+#: ../panels/display/cc-display-panel.c:2753
 msgid "_Arrange Combined Displays"
 msgstr "Топталған экрандарды р_еттеу"
 
@@ -7481,9 +7498,6 @@ msgstr "Іздеуді тоқтату"
 #~ msgid "Don't use the display"
 #~ msgstr "Экранды қолданбау"
 
-#~ msgid "Refresh Rate"
-#~ msgstr "Жаңарту жиілігі"
-
 #~ msgid "Install Updates"
 #~ msgstr "Жаңартуларды орнату"
 
@@ -8432,9 +8446,6 @@ msgstr "Іздеуді тоқтату"
 #, fuzzy
 #~ msgid "Could not rename %s to %s: %s\n"
 #~ msgstr "%s атын жаңа %s атына ауыстыру мүмкін емес: %s\n"
-
-#~ msgid "%d Hz"
-#~ msgstr "%d Гц"
 
 #~ msgid "Monitor: %s"
 #~ msgstr "Монитор: %s"
