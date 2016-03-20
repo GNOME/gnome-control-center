@@ -6,13 +6,14 @@
 # Слободан Д. Средојевић <slobo@akrep.be>, 2006.
 # Милош Поповић <gpopac@gmail.com>, 2010, 2011.
 # Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011—2015.
+# Марко М. Костић <marko.m.kostic@gmail.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-06 19:03+0000\n"
-"PO-Revision-Date: 2016-03-06 21:25+0100\n"
+"POT-Creation-Date: 2016-03-17 13:52+0000\n"
+"PO-Revision-Date: 2016-03-19 15:11+0100\n"
 "Last-Translator: Марко М. Костић <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -103,14 +104,14 @@ msgstr "Личнo"
 #: ../panels/background/cc-background-chooser-dialog.c:573
 #, c-format
 msgid "You can add images to your %s folder and they will show up here"
-msgstr "Можете да додате слике у вашу фасциклу „%s“ и оне ће бити приказане овде"
+msgstr "Можете да додате слике у вашу фасциклу %s и оне ће бити приказане овде"
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:29
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1561
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/display/cc-display-panel.c:1563
+#: ../panels/display/cc-display-panel.c:2196
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -118,9 +119,9 @@ msgstr "Можете да додате слике у вашу фасциклу �
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1995
+#: ../panels/printers/cc-printers-panel.c:2052
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1003
+#: ../panels/privacy/cc-privacy-panel.c:982
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -205,7 +206,7 @@ msgstr "Хардверски авионски режим рада је укљу�
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
-msgstr "Искључите авионски режим рада да укључите блутут."
+msgstr "Искључите авионски режим рада бисте укључили блутут."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
@@ -250,7 +251,7 @@ msgstr ""
 #. * sample widget and shut the lid.
 #: ../panels/color/cc-color-calibrate.c:379
 msgid "Shut the laptop lid"
-msgstr "Спустите поклопац преносног рачунара"
+msgstr "Заклопите преносни рачунар"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
@@ -691,10 +692,14 @@ msgid "Summary"
 msgstr "Сажетак"
 
 #: ../panels/color/color.ui.h:28
+msgid "Add profile"
+msgstr "Додај профил"
+
+#: ../panels/color/color.ui.h:29
 msgid "_Import File…"
 msgstr "_Увези датотеку…"
 
-#: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:518
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -702,7 +707,7 @@ msgstr "_Увези датотеку…"
 msgid "_Add"
 msgstr "_Додај"
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:32
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -710,141 +715,141 @@ msgstr ""
 "Откривен је проблем. Профил не може да ради исправно. <a href=\"\">Прикажи "
 "појединости.</a>"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:33
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Сваком уређају је потребан освежени профил боје да би био управљан бојом."
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:34
 msgid "Learn more"
 msgstr "Сазнајте више"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:35
 msgid "Learn more about color management"
 msgstr "Сазнајте више о управљању бојама"
 
-#: ../panels/color/color.ui.h:35
+#: ../panels/color/color.ui.h:36
 msgid "_Set for all users"
 msgstr "Поде_си за све кориснике"
 
-#: ../panels/color/color.ui.h:36
+#: ../panels/color/color.ui.h:37
 msgid "Set this profile for all users on this computer"
 msgstr "Подесите овај профил за све кориснике на овом рачунару"
 
-#: ../panels/color/color.ui.h:37
+#: ../panels/color/color.ui.h:38
 msgid "_Enable"
 msgstr "_Омогући"
 
-#: ../panels/color/color.ui.h:38
+#: ../panels/color/color.ui.h:39
 msgid "_Add profile"
 msgstr "_Додај профил"
 
-#: ../panels/color/color.ui.h:39
+#: ../panels/color/color.ui.h:40
 msgid "_Calibrate…"
 msgstr "Ис_калибриши…"
 
-#: ../panels/color/color.ui.h:40
+#: ../panels/color/color.ui.h:41
 msgid "Calibrate the device"
 msgstr "Подесите уређај"
 
-#: ../panels/color/color.ui.h:41
+#: ../panels/color/color.ui.h:42
 msgid "_Remove profile"
 msgstr "_Уклони профил"
 
-#: ../panels/color/color.ui.h:42
+#: ../panels/color/color.ui.h:43
 msgid "_View details"
 msgstr "_Прикажи детаље"
 
-#: ../panels/color/color.ui.h:43
+#: ../panels/color/color.ui.h:44
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Не могу да откријем ни један уређај који може бити управљан бојом"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:45
 msgid "LCD"
 msgstr "ЛЦД"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:46
 msgid "LED"
 msgstr "ЛЕД"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:47
 msgid "CRT"
 msgstr "ЦРТ"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:48
 msgid "Projector"
 msgstr "Пројектор"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:49
 msgid "Plasma"
 msgstr "Плазма"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:50
 msgid "LCD (CCFL backlight)"
 msgstr "ЛЦД (ЦЦФЛ позадинско осветљење)"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:51
 msgid "LCD (RGB LED backlight)"
 msgstr "ЛЦД (РГБ ЛЕД позадинско осветљење)"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:52
 msgid "LCD (white LED backlight)"
 msgstr "ЛЦД (бело ЛЕД позадинско осветљење)"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:53
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "ЛЦД широког гамута (ЦЦФЛ позадинско осветљење)"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:54
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "ЛЦД широког гамута (РГБ ЛЕД позадинско осветљење)"
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:55
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Висок"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:56
 msgid "40 minutes"
 msgstr "40 минута"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Средњи"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
+#: ../panels/color/color.ui.h:58 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 минута"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Низак"
 
 # bug(danilo): plural-forms
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 минута"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:61
 msgid "Native to display"
 msgstr "Изворно на екран"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:62
 msgid "D50 (Printing and publishing)"
 msgstr "Д50 (Штампање и објављивање)"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:63
 msgid "D55"
 msgstr "Д55"
 
-#: ../panels/color/color.ui.h:63
+#: ../panels/color/color.ui.h:64
 msgid "D65 (Photography and graphics)"
 msgstr "Д65 (Фотографија и графика)"
 
-#: ../panels/color/color.ui.h:64
+#: ../panels/color/color.ui.h:65
 msgid "D75"
 msgstr "Д75"
 
@@ -1090,21 +1095,21 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Да измените подешавања времена и датума, морате да потврдите идентитет."
 
-#: ../panels/display/cc-display-panel.c:573
+#: ../panels/display/cc-display-panel.c:575
 msgid "Lid Closed"
 msgstr "Спуштен поклопац"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:576
+#: ../panels/display/cc-display-panel.c:578
 msgid "Mirrored"
 msgstr "Пресликано"
 
-#: ../panels/display/cc-display-panel.c:578
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:2390
 msgid "Primary"
 msgstr "Главни"
 
-#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:582
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
 #: ../panels/privacy/cc-privacy-panel.c:172
@@ -1118,94 +1123,111 @@ msgstr "Главни"
 msgid "Off"
 msgstr "Искљ."
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:585
 msgid "Secondary"
 msgstr "Споредни"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1558
+#: ../panels/display/cc-display-panel.c:1560
 msgid "Arrange Combined Displays"
 msgstr "Распоредите обједињене приказе"
 
-#: ../panels/display/cc-display-panel.c:1562
-#: ../panels/display/cc-display-panel.c:2024
+#: ../panels/display/cc-display-panel.c:1564
+#: ../panels/display/cc-display-panel.c:2197
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Примени"
 
-#: ../panels/display/cc-display-panel.c:1586
+#: ../panels/display/cc-display-panel.c:1588
 msgid "Drag displays to rearrange them"
 msgstr "Превуците приказе да их прераспоредите"
 
-#: ../panels/display/cc-display-panel.c:2073
+#. translators: example string is "60 Hz (NTSC)"
+#. * NTSC is https://en.wikipedia.org/wiki/NTSC
+#: ../panels/display/cc-display-panel.c:1794
+#, c-format
+msgid "%d Hz (NTSC)"
+msgstr "%d херца (НТСЦ)"
+
+#. translators: example string is "60 Hz"
+#: ../panels/display/cc-display-panel.c:1800
+#, c-format
+msgid "%d Hz"
+msgstr "%d херца"
+
+#: ../panels/display/cc-display-panel.c:2246
 msgid "Rotate counterclockwise by 90°"
 msgstr "Супротно смеру казаљке на сату за 90°"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2264
 msgid "Rotate by 180°"
 msgstr "Заокрени за 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2282
 msgid "Rotate clockwise by 90°"
 msgstr "У смеру казаљке на сату за 90°"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2303
 msgid "Size"
 msgstr "Величина"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2316
 msgid "Aspect Ratio"
 msgstr "Размера"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2338
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Резолуција"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2360
+msgid "Refresh Rate"
+msgstr "Стопа освежавања"
+
+#: ../panels/display/cc-display-panel.c:2391
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Прикажи горњу траку и преглед активности на овом приказу"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2397
 msgid "Secondary Display"
 msgstr "Помоћни приказ"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2398
 msgid "Join this display with another to create an extra workspace"
 msgstr "Придружите овај приказ са другим да направите додатни радни простор"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2405
 msgid "Presentation"
 msgstr "Излагање"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2406
 msgid "Show slideshows and media only"
 msgstr "Прикажите само покретне приказе и медије"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2411
 msgid "Mirror"
 msgstr "Пресликано"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2412
 msgid "Show your existing view on both displays"
 msgstr "Прикажите ваш постојећи преглед на оба приказа"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Turn Off"
 msgstr "Искључи"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Don't use this display"
 msgstr "Не користи овај приказ"
 
-#: ../panels/display/cc-display-panel.c:2525
+#: ../panels/display/cc-display-panel.c:2722
 msgid "Could not get screen information"
 msgstr "Не могу да добијем податке о екрану"
 
-#: ../panels/display/cc-display-panel.c:2556
+#: ../panels/display/cc-display-panel.c:2753
 msgid "_Arrange Combined Displays"
 msgstr "_Распореди обједињене приказе"
 
@@ -1812,7 +1834,7 @@ msgstr "Главно дугме"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Sets the order of physical buttons on mice and touchpads."
-msgstr "Подесите редослед физичких дугмића на мишу и додирним таблама."
+msgstr "Подешава редослед физичких тастера на мишевима и додирним таблицама."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Left"
@@ -2456,7 +2478,7 @@ msgid "Select file to import"
 msgstr "Изаберите датотеку за увоз"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1996
+#: ../panels/printers/cc-printers-panel.c:2053
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -4032,138 +4054,138 @@ msgid "Authentication Required"
 msgstr "Потребно је потврђивање идентитета"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:621
+#: ../panels/printers/cc-printers-panel.c:678
 msgid "Low on toner"
 msgstr "Понестаје тонера"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:623
+#: ../panels/printers/cc-printers-panel.c:680
 msgid "Out of toner"
 msgstr "Нема више тонера"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:626
+#: ../panels/printers/cc-printers-panel.c:683
 msgid "Low on developer"
 msgstr "Понестаје развијача"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:629
+#: ../panels/printers/cc-printers-panel.c:686
 msgid "Out of developer"
 msgstr "Нема више развијача"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:631
+#: ../panels/printers/cc-printers-panel.c:688
 msgid "Low on a marker supply"
 msgstr "Понестаје маркера"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:633
+#: ../panels/printers/cc-printers-panel.c:690
 msgid "Out of a marker supply"
 msgstr "Нема више мастила"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:635
+#: ../panels/printers/cc-printers-panel.c:692
 msgid "Open cover"
 msgstr "Отворен поклопац"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:637
+#: ../panels/printers/cc-printers-panel.c:694
 msgid "Open door"
 msgstr "Отворена вратанца"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:639
+#: ../panels/printers/cc-printers-panel.c:696
 msgid "Low on paper"
 msgstr "Понестаје папира"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:641
+#: ../panels/printers/cc-printers-panel.c:698
 msgid "Out of paper"
 msgstr "Нема више папира"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:643
+#: ../panels/printers/cc-printers-panel.c:700
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Искључен"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:645
-#: ../panels/printers/cc-printers-panel.c:836
+#: ../panels/printers/cc-printers-panel.c:702
+#: ../panels/printers/cc-printers-panel.c:893
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Заустављен"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:647
+#: ../panels/printers/cc-printers-panel.c:704
 msgid "Waste receptacle almost full"
 msgstr "Посуда за отпад је скоро пуна"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:649
+#: ../panels/printers/cc-printers-panel.c:706
 msgid "Waste receptacle full"
 msgstr "Посуда за отпад је пуна"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:651
+#: ../panels/printers/cc-printers-panel.c:708
 msgid "The optical photo conductor is near end of life"
 msgstr "Оптички проводник фотографија је при крају живота"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:653
+#: ../panels/printers/cc-printers-panel.c:710
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Оптички проводник фотографија више не функционише"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:763
+#: ../panels/printers/cc-printers-panel.c:820
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Подешавам"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:822
+#: ../panels/printers/cc-printers-panel.c:879
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Спреман"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:827
+#: ../panels/printers/cc-printers-panel.c:884
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Не прихвата послове"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:832
+#: ../panels/printers/cc-printers-panel.c:889
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Обрађује"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:952
+#: ../panels/printers/cc-printers-panel.c:1009
 msgid "Toner Level"
 msgstr "Ниво тонера"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:955
+#: ../panels/printers/cc-printers-panel.c:1012
 msgid "Ink Level"
 msgstr "Нивоа мастила"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:958
+#: ../panels/printers/cc-printers-panel.c:1015
 msgid "Supply Level"
 msgstr "Ниво залиха"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:976
+#: ../panels/printers/cc-printers-panel.c:1033
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Инсталирам"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1484
+#: ../panels/printers/cc-printers-panel.c:1541
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4173,15 +4195,15 @@ msgstr[2] "%u покренутих"
 msgstr[3] "Један покренут"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1825
+#: ../panels/printers/cc-printers-panel.c:1882
 msgid "Failed to add new printer."
 msgstr "Нисам успео да додам нови штампач."
 
-#: ../panels/printers/cc-printers-panel.c:1992
+#: ../panels/printers/cc-printers-panel.c:2049
 msgid "Select PPD File"
 msgstr "Изаберите ППД датотеку"
 
-#: ../panels/printers/cc-printers-panel.c:2001
+#: ../panels/printers/cc-printers-panel.c:2058
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4189,34 +4211,34 @@ msgstr ""
 "Датотеке описа Пост скрипт штампача (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, *.PPD."
 "GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2308
+#: ../panels/printers/cc-printers-panel.c:2365
 msgid "No suitable driver found"
 msgstr "Нису пронађени одговарајући управљачки програми"
 
-#: ../panels/printers/cc-printers-panel.c:2379
+#: ../panels/printers/cc-printers-panel.c:2436
 msgid "Searching for preferred drivers…"
 msgstr "Тражим подесне управљачке програме…"
 
-#: ../panels/printers/cc-printers-panel.c:2400
+#: ../panels/printers/cc-printers-panel.c:2457
 msgid "Select from database…"
 msgstr "Изабери из базе података…"
 
-#: ../panels/printers/cc-printers-panel.c:2409
+#: ../panels/printers/cc-printers-panel.c:2466
 msgid "Provide PPD File…"
 msgstr "Приложи ППД датотеку…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2560
-#: ../panels/printers/cc-printers-panel.c:2583
+#: ../panels/printers/cc-printers-panel.c:2617
+#: ../panels/printers/cc-printers-panel.c:2640
 msgid "Test page"
 msgstr "Пробна страница"
 
-#: ../panels/printers/cc-printers-panel.c:2696
+#: ../panels/printers/cc-printers-panel.c:2753
 msgid "No printers"
 msgstr "Нема штампача"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3042
+#: ../panels/printers/cc-printers-panel.c:3099
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не могу да учитам сучеље: %s"
@@ -4637,52 +4659,52 @@ msgctxt "Location services status"
 msgid "Off"
 msgstr "Искљ."
 
-#: ../panels/privacy/cc-privacy-panel.c:783 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Услуге места"
 
-#: ../panels/privacy/cc-privacy-panel.c:897 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Употреба и историјат"
 
-#: ../panels/privacy/cc-privacy-panel.c:1022
+#: ../panels/privacy/cc-privacy-panel.c:1001
 msgid "Empty all items from Trash?"
 msgstr "Да избацим све ставке из смећа?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1023
+#: ../panels/privacy/cc-privacy-panel.c:1002
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Све ставке из смећа ће бити трајно уклоњене."
 
-#: ../panels/privacy/cc-privacy-panel.c:1024 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Избаци Смеће"
 
-#: ../panels/privacy/cc-privacy-panel.c:1047
+#: ../panels/privacy/cc-privacy-panel.c:1026
 msgid "Delete all the temporary files?"
 msgstr "Да обришем све привремене датотеке?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/privacy/cc-privacy-panel.c:1027
 msgid "All the temporary files will be permanently deleted."
 msgstr "Све привремене датотеке ће бити трајно обрисане."
 
-#: ../panels/privacy/cc-privacy-panel.c:1049 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Прочисти привремене датотеке"
 
-#: ../panels/privacy/cc-privacy-panel.c:1071 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Очисти смеће и привремене датотеке"
 
-#: ../panels/privacy/cc-privacy-panel.c:1111 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Употреба софтвера"
 
-#: ../panels/privacy/cc-privacy-panel.c:1152 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Извештавање о проблему"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1166
+#: ../panels/privacy/cc-privacy-panel.c:1145
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4691,7 +4713,7 @@ msgstr ""
 "Слање извештаја о техничким проблемима нам помаже да побољшамо „%s“. "
 "Извештаји се шаљу безимено и очишћени су од личних података."
 
-#: ../panels/privacy/cc-privacy-panel.c:1178 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Политика приватности"
 
@@ -4837,11 +4859,11 @@ msgstr "_Пошаљи податке о коришћењу софтвера"
 
 #: ../panels/privacy/privacy.ui.h:43
 msgid ""
-"Location services allow applications to determine your geographical "
-"position. Accuracy is increased by enabling WiFi and GPS."
+"Location services allow applications to know your location. Using Wi-Fi and "
+"mobile broadband increases accuracy."
 msgstr ""
-"Услуге места дозвољавају програмима да утврде ваш географски положај. "
-"Тачност је повећана укључивањем бежичне картице и ГПС-а."
+"Услуге места омогућавају програмима да знају вашу локацију. Тачност је "
+"повећана укључивањем бежичне картице и мобилне широкопојасне мреже."
 
 #: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
