@@ -2,31 +2,31 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
-#
 # Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>, 2004, 2005.
 # Asier Sarasua Garmendia <asiersar@yahoo.com>, 2013.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
-# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2011, 2012, 2013, 2014, 2015.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2011, 2012, 2013, 2014, 2015, 2016.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-14 07:18+0000\n"
-"PO-Revision-Date: 2015-10-20 09:53+0200\n"
-"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
-"Language-Team: Basque <Basque <librezale@librezale.org>>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-co"
+"ntrol-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-03-23 08:56+0000\n"
+"PO-Revision-Date: 2016-03-23 21:19+0100\n"
+"Last-Translator: dooteo <dooteo@zundan.com>\n"
+"Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panels/background/background.ui.h:1
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Atzeko planoa"
+#| msgid "Background"
+msgid "_Background"
+msgstr "A_tzeko planoa"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -35,8 +35,9 @@ msgstr "Aldaketak egunean zehar"
 
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-msgid "Lock Screen"
-msgstr "Blokeatu pantaila"
+#| msgid "Lock Screen"
+msgid "_Lock Screen"
+msgstr "_Blokeatu pantaila"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -108,9 +109,10 @@ msgstr ""
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1561
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/display/cc-display-panel.c:1563
+#: ../panels/display/cc-display-panel.c:2196
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -118,28 +120,26 @@ msgstr ""
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:2052
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:568
-#: ../panels/region/format-chooser.ui.h:3
-#: ../panels/region/input-chooser.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:982
+#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1476
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_Utzi"
 
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/um-photo-dialog.c:96
-msgid "Select"
-msgstr "Hautatu"
+msgid "_Select"
+msgstr "_Hautatu"
 
 #: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
@@ -160,6 +160,10 @@ msgstr "Mahaigaineko atzeko planorik ez"
 msgid "Current background"
 msgstr "Uneko atzeko planoa"
 
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Atzeko planoa"
+
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
 msgstr "Aldatu atzeko planoko irudia horma-paper edo argazki batera"
@@ -169,39 +173,39 @@ msgstr "Aldatu atzeko planoko irudia horma-paper edo argazki batera"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Horma-papera;Pantaila;Mahaigaina;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+#: ../panels/bluetooth/cc-bluetooth-panel.c:264
 msgid "Turn Off Airplane Mode"
 msgstr "Itzali hegazkin modua"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "No Bluetooth Found"
 msgstr "Ez da Bluetooth-ik aurkitu"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "Konektatu Bluetooth gailua erabiltzeko"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Bluetooth Turned Off"
 msgstr "Bluetooth-a itzalita"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "Piztu gailuak konektatzean eta hartu fitxategien transferentziak."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Airplane Mode is on"
 msgstr "Hegazkin modua piztuta"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Bluetooth is disabled when airplane mode is on."
 msgstr "Bluetooth-a desaktibatuta dago hegazkinaren modua piztuta agoenean."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Hardware Airplane Mode is on"
 msgstr "Hardwarearen hegazkin modua piztuta"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "Itzali hegazkin modua Bluetooth-a gaitzeko."
 
@@ -538,27 +542,24 @@ msgstr "Profila hau ezingo da gehiago zehatza izan"
 msgid "Display Calibration"
 msgstr "Pantailaren kalibrazioa"
 
-#: ../panels/color/color-calibrate.ui.h:2
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1476
-msgid "Cancel"
-msgstr "Utzi"
-
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-msgid "Start"
-msgstr "Hasi"
+#| msgid "Start"
+msgid "_Start"
+msgstr "_Hasi"
 
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-msgid "Resume"
-msgstr "Jarraitu"
+#| msgid "Resume"
+msgid "_Resume"
+msgstr "_Jarraitu"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-msgid "Done"
-msgstr "Eginda"
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Eginda"
 
 #. Timeout parameters
 #. 15000 = 15 sec
@@ -698,19 +699,23 @@ msgid "Summary"
 msgstr "Laburpena"
 
 #: ../panels/color/color.ui.h:28
-msgid "Import File…"
-msgstr "Inportatu fitxategia..."
+msgid "Add profile"
+msgstr "Gehitu profila"
 
-#: ../panels/color/color.ui.h:30
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/color/color.ui.h:29
+#| msgid "Import File…"
+msgid "_Import File…"
+msgstr "_Inportatu fitxategia..."
+
+#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/network/connection-editor/net-connection-editor.c:518
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1477
 msgid "_Add"
 msgstr "_Gehitu"
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:32
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -718,142 +723,147 @@ msgstr ""
 "Arazoak aurkitu dira. Baliteke profilak ongi ez funtzionatzea. <a href="
 "\"\">Erakutsi xehetasunak.</a>"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:33
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Gailu bakoitzak koloreen profilaren eguneraketa behar du koloreak "
 "kudeatzeko. "
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:34
 msgid "Learn more"
 msgstr "Ikasi gehiago"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:35
 msgid "Learn more about color management"
 msgstr "Ikasi kolore-kudeaketari buruz gehiago"
 
-#: ../panels/color/color.ui.h:35
-msgid "Set for all users"
-msgstr "Ezarri erabiltzaile guztientzako"
-
 #: ../panels/color/color.ui.h:36
+#| msgid "Set for all users"
+msgid "_Set for all users"
+msgstr "_Ezarri erabiltzaile guztientzako"
+
+#: ../panels/color/color.ui.h:37
 msgid "Set this profile for all users on this computer"
 msgstr "Ezarri profila hau ordenagailuko erabiltzaile guztientzako"
 
-#: ../panels/color/color.ui.h:37
-msgid "Enable"
-msgstr "Gaitu"
-
 #: ../panels/color/color.ui.h:38
-msgid "Add profile"
-msgstr "Gehitu profila"
+#| msgid "Enable"
+msgid "_Enable"
+msgstr "_Gaitu"
 
 #: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "Calibrate…"
-msgstr "Kalibratu…"
+#| msgid "Add profile"
+msgid "_Add profile"
+msgstr "_Gehitu profila"
 
 #: ../panels/color/color.ui.h:40
+#| msgid "Calibrate…"
+msgid "_Calibrate…"
+msgstr "_Kalibratu…"
+
+#: ../panels/color/color.ui.h:41
 msgid "Calibrate the device"
 msgstr "Kalibratu gailua"
 
-#: ../panels/color/color.ui.h:41
-msgid "Remove profile"
-msgstr "Kendu profila"
-
 #: ../panels/color/color.ui.h:42
-msgid "View details"
-msgstr "Ikusi xehetasunak"
+#| msgid "Remove profile"
+msgid "_Remove profile"
+msgstr "Kendu _profila"
 
 #: ../panels/color/color.ui.h:43
+#| msgid "View details"
+msgid "_View details"
+msgstr "Ikusi _xehetasunak"
+
+#: ../panels/color/color.ui.h:44
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Ezin da koloreak kudea ditzakeen gailurik detektatu"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:45
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:46
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:47
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:48
 msgid "Projector"
 msgstr "Proiektagailua"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:49
 msgid "Plasma"
 msgstr "Plasma"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:50
 msgid "LCD (CCFL backlight)"
 msgstr "LCDa (atzeko CCFL argia)"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:51
 msgid "LCD (RGB LED backlight)"
 msgstr "LCDa (atzeko LED GBU argia)"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:52
 msgid "LCD (white LED backlight)"
 msgstr "LCDa (LED argi zuria)"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:53
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Kolore-gama zabaleko LCDa (atzeko CCFL argia)"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:54
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Kolore-gama zabaleko LCDa (atzeko LED GBU argia) "
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:55
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Altua"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:56
 msgid "40 minutes"
 msgstr "40 minutu"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Tartekoa"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
+#: ../panels/color/color.ui.h:58 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minutu"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baxua"
 
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 minutu"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:61
 msgid "Native to display"
 msgstr "Pantailarekiko jatorrizkoa"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:62
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (inprimazioa eta argitalpena)"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:63
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:63
+#: ../panels/color/color.ui.h:64
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (argazki eta grafikoak)"
 
-#: ../panels/color/color.ui.h:64
+#: ../panels/color/color.ui.h:65
 msgid "D75"
 msgstr "D75"
 
@@ -877,7 +887,7 @@ msgstr "Bestelakoa..."
 
 #: ../panels/common/cc-language-chooser.c:124
 #: ../panels/region/cc-format-chooser.c:271
-#: ../panels/region/cc-input-chooser.c:168
+#: ../panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Gehiago…"
 
@@ -885,14 +895,29 @@ msgstr "Gehiago…"
 msgid "No languages found"
 msgstr "Ez da hizkuntzarik aurkitu"
 
-#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+#: ../panels/common/cc-util.c:125
+#: ../panels/network/connection-editor/ce-page-details.c:102
+msgid "Today"
+msgstr "Gaur"
+
+#: ../panels/common/cc-util.c:129
+#: ../panels/network/connection-editor/ce-page-details.c:104
+msgid "Yesterday"
+msgstr "Atzo"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/common/cc-util.c:136
+msgid "%b %e"
+msgstr "%b %e"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/common/cc-util.c:141
+msgid "%b %e, %Y"
+msgstr "%b %e, %Y"
+
+#: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Hizkuntza"
-
-#: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
-msgid "_Done"
-msgstr "_Eginda"
 
 #: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
 #: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
@@ -1049,7 +1074,8 @@ msgid "Date & _Time"
 msgstr "Data eta _ordua"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "Time _Zone"
+#| msgid "Time Zone"
+msgid "Time Z_one"
 msgstr "Ordu-_zona"
 
 #: ../panels/datetime/datetime.ui.h:25
@@ -1083,121 +1109,140 @@ msgstr ""
 "Sistemako ordua eta dataren ezarpenak aldatzeko, autentifikatu egin behar "
 "zara."
 
-#: ../panels/display/cc-display-panel.c:573
+#: ../panels/display/cc-display-panel.c:575
 msgid "Lid Closed"
 msgstr "Tapa itxita"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:576
+#: ../panels/display/cc-display-panel.c:578
 msgid "Mirrored"
 msgstr "Ispilatua"
 
-#: ../panels/display/cc-display-panel.c:578
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:2390
 msgid "Primary"
 msgstr "Nagusia"
 
-#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:582
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Desaktibatuta"
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:585
 msgid "Secondary"
 msgstr "Bigarren mailakoa"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1558
+#: ../panels/display/cc-display-panel.c:1560
 msgid "Arrange Combined Displays"
 msgstr "Antolatu konbinatutako pantailak"
 
-#: ../panels/display/cc-display-panel.c:1562
-#: ../panels/display/cc-display-panel.c:2024
+#: ../panels/display/cc-display-panel.c:1564
+#: ../panels/display/cc-display-panel.c:2197
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Aplikatu"
 
-#: ../panels/display/cc-display-panel.c:1586
+#: ../panels/display/cc-display-panel.c:1588
 msgid "Drag displays to rearrange them"
 msgstr "Arrastatu pantailak antolatzeko"
 
-#: ../panels/display/cc-display-panel.c:2073
+#. translators: example string is "60 Hz (NTSC)"
+#. * NTSC is https://en.wikipedia.org/wiki/NTSC
+#: ../panels/display/cc-display-panel.c:1794
+#, c-format
+msgid "%d Hz (NTSC)"
+msgstr "%d Hz (NTSC)"
+
+#. translators: example string is "60 Hz"
+#: ../panels/display/cc-display-panel.c:1800
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../panels/display/cc-display-panel.c:2246
 msgid "Rotate counterclockwise by 90°"
 msgstr "Biratu 90° erlojuaren aurka"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2264
 msgid "Rotate by 180°"
 msgstr "Biratu 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2282
 msgid "Rotate clockwise by 90°"
 msgstr "Biratu 90° erlojuaren alde"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2303
 msgid "Size"
 msgstr "Tamaina"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2316
 msgid "Aspect Ratio"
 msgstr "Aspektu-erlazioa"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2338
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Bereizmena"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2360
+msgid "Refresh Rate"
+msgstr "Freskatu emaria"
+
+#: ../panels/display/cc-display-panel.c:2391
 msgid "Show the top bar and Activities Overview on this display"
 msgstr ""
 "Erakutsi gaineko barra eta jardueren ikuspegi orokorra pantaila honetan"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2397
 msgid "Secondary Display"
 msgstr "2. mailako pantaila"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2398
 msgid "Join this display with another to create an extra workspace"
 msgstr "Elkartu pantaila hau beste batekin laneko area handiago bat sortzeko"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2405
 msgid "Presentation"
 msgstr "Aurkezpena"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2406
 msgid "Show slideshows and media only"
 msgstr "Erakutsi diapositibak eta multimedia soilik"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2411
 msgid "Mirror"
 msgstr "Ispilua"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2412
 msgid "Show your existing view on both displays"
 msgstr "Erakutsi ikuspegi berdina bi pantailetan"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Turn Off"
 msgstr "Itzali"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Don't use this display"
 msgstr "Ez erabili pantaila hau"
 
-#: ../panels/display/cc-display-panel.c:2525
+#: ../panels/display/cc-display-panel.c:2722
 msgid "Could not get screen information"
 msgstr "Ezin izan da pantailaren informazioa eskuratu"
 
-#: ../panels/display/cc-display-panel.c:2556
+#: ../panels/display/cc-display-panel.c:2753
 msgid "_Arrange Combined Displays"
 msgstr "_Antolatu konbinatutako pantailak"
 
@@ -1324,7 +1369,7 @@ msgid "Windows software"
 msgstr "Windows-eko softwarea"
 
 #: ../panels/info/cc-info-panel.c:1435
-#: ../panels/keyboard/keyboard-shortcuts.c:1947
+#: ../panels/keyboard/keyboard-shortcuts.c:1949
 msgid "Section"
 msgstr "Sekzioa"
 
@@ -1511,7 +1556,6 @@ msgid "Eject"
 msgstr "Egotzi"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "Idazketa"
@@ -1532,7 +1576,7 @@ msgstr "Abiarazleak"
 msgid "Launch help browser"
 msgstr "Abiatu laguntza-arakatzailea"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1606
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Ezarpenak"
@@ -1646,7 +1690,7 @@ msgstr "Gaitu edo desgaitu kontraste altua"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1219
+#: ../panels/keyboard/keyboard-shortcuts.c:1220
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1700,76 +1744,14 @@ msgid "C_ommand:"
 msgstr "Ko_mandoa:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Repeat Keys"
-msgstr "Errepikatze-teklak"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Key presses _repeat when key is held down"
-msgstr ""
-"T_ekla sakatuta dagoen bitartean, tekla hori behin eta berriz errepikatzen da"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
-msgid "_Delay:"
-msgstr "_Atzerapena:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-msgid "_Speed:"
-msgstr "Abia_dura:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-msgctxt "keyboard, delay"
-msgid "Short"
-msgstr "Laburra"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
-msgctxt "keyboard, speed"
-msgid "Slow"
-msgstr "Motela"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-msgid "Repeat keys speed"
-msgstr "Tekla-errepikatzeen abiadura"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-msgctxt "keyboard, delay"
-msgid "Long"
-msgstr "Luzea"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-msgctxt "keyboard, speed"
-msgid "Fast"
-msgstr "Azkarra"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
-msgid "Cursor Blinking"
-msgstr "Kurtsore keinukaria"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-msgid "Cursor _blinks in text fields"
-msgstr "Kurtsorea _keinuka testu-eremuetan"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-msgid "S_peed:"
-msgstr "Abia_dura:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-msgid "Cursor blink speed"
-msgstr "Kurtsore-keinuaren abiadura"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/region/region.ui.h:5
-msgid "Input Sources"
-msgstr "Sarrerako iturburuak"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "Add Shortcut"
 msgstr "Gehitu lasterbidea"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 msgid "Remove Shortcut"
 msgstr "Kendu lasterbidea"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1777,20 +1759,16 @@ msgstr ""
 "Lasterbide bat editatzeko, egin klik dagokion errenkadan eta eduki sakatuta "
 "tekla berriak edo sakatu Atzera-tekla garbitzeko."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:24
-msgid "Shortcuts"
-msgstr "Lasterbideak"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:632
-#: ../panels/keyboard/keyboard-shortcuts.c:640
+#: ../panels/keyboard/keyboard-shortcuts.c:633
+#: ../panels/keyboard/keyboard-shortcuts.c:641
 msgid "Custom Shortcuts"
 msgstr "Lasterbide pertsonalizatuak"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:857
+#: ../panels/keyboard/keyboard-shortcuts.c:858
 msgid "<Unknown Action>"
 msgstr "<Ekintza ezezaguna>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1358
+#: ../panels/keyboard/keyboard-shortcuts.c:1359
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1801,7 +1779,7 @@ msgstr ""
 "erabiltzean.\n"
 "Saiatu Kontrol, Alt edo Maius bezalako tekla batekin aldi berean."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1388
+#: ../panels/keyboard/keyboard-shortcuts.c:1389
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1810,7 +1788,7 @@ msgstr ""
 "\"%s\" lasterbidea erabilita dago honetarako:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1393
+#: ../panels/keyboard/keyboard-shortcuts.c:1394
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -1818,11 +1796,11 @@ msgstr ""
 "Lasterbidea \"%s\"(r)i berriro esleitzen badiozu, \"%s\" lasterbidea "
 "desgaitu egingo da."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1399
+#: ../panels/keyboard/keyboard-shortcuts.c:1400
 msgid "_Reassign"
 msgstr "_Esleitu berriz"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
@@ -1831,7 +1809,7 @@ msgstr ""
 "'%s' lasterbideak esleitutako '%s' laster-tekla du. Nahi duzu automatikoki "
 "'%s'(e)ra ezartzea?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1450
+#: ../panels/keyboard/keyboard-shortcuts.c:1451
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
@@ -1840,17 +1818,13 @@ msgstr ""
 "Unean '%s' '%s'(r)i esleituta dago, lasterbidea desgaitu egingo da aurrera "
 "jarraitzen baduzu."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1457
+#: ../panels/keyboard/keyboard-shortcuts.c:1458
 msgid "_Assign"
 msgstr "_Esleitu"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
 msgstr "Probatu zure _ezarpenak"
-
-#: ../panels/mouse/cc-mouse-panel.c:107
-msgid "Test Your Settings"
-msgstr "Probatu zure ezarpenak"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1873,81 +1847,68 @@ msgid "General"
 msgstr "Orokorra"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgctxt "double click, speed"
-msgid "Slow"
-msgstr "Motela"
+#| msgid "Primary _button"
+msgid "Primary Button"
+msgstr "Botoi nagusia"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Double-click timeout"
-msgstr "Klik bikoitzaren denbora-muga"
+msgid "Sets the order of physical buttons on mice and touchpads."
+msgstr "Saguko eta touchpad-eko botoi fisikoen ordena ezartzen du."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgctxt "double click, speed"
-msgid "Fast"
-msgstr "Azkarra"
+#| msgctxt "balance"
+#| msgid "Left"
+msgid "Left"
+msgstr "Ezkerrean"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "_Double-click"
-msgstr "_Klik bikoitza"
+#| msgctxt "balance"
+#| msgid "Right"
+msgid "Right"
+msgstr "Eskuinean"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Primary _button"
-msgstr "Botoi _nagusia"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgctxt "mouse, left button as primary"
-msgid "_Left"
-msgstr "E_zkerreko botoia"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgctxt "mouse, right button as primary"
-msgid "_Right"
-msgstr "E_skuineko botoia"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Mouse"
 msgstr "Sagua"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#| msgid "_Mouse Keys"
+msgid "Mouse Speed"
+msgstr "Saguaren abiadura"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Double-click timeout"
+msgstr "Klik bikoitzaren denbora-muga"
+
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-msgid "_Pointer speed"
-msgstr "Erakuslearen _abiadura"
+#| msgid "_Natural scrolling"
+msgid "Natural Scrolling"
+msgstr "Korritze naturala"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgctxt "mouse pointer, speed"
-msgid "Slow"
-msgstr "Motela"
+#| msgid "This will not remove the account on the server."
+msgid "Scrolling moves the content, not the view."
+msgstr "Korritzeak edukia mugitzen du, ez ikuspegia."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
-msgctxt "mouse pointer, speed"
-msgid "Fast"
-msgstr "Azkarra"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Touchpad"
 msgstr "Touchpad-a"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#| msgid "Touchpad"
+msgid "Touchpad Speed"
+msgstr "Touchpad-aren abiadura"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "touchpad pointer, speed"
-msgid "Slow"
-msgstr "Motela"
+#| msgid "Tap to _click"
+msgid "Tap to Click"
+msgstr "Ukitu klik egiteko"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgctxt "touchpad pointer, speed"
-msgid "Fast"
-msgstr "Azkarra"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Tap to _click"
-msgstr "_Ukitu klik egiteko"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Two _finger scroll"
-msgstr "Bi _hatzeko korritzea"
-
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "_Natural scrolling"
-msgstr "_Korritze naturala"
+#| msgid "Scrolling"
+msgid "Edge Scrolling"
+msgstr "Ertzaren korritzea"
 
 #: ../panels/mouse/gnome-mouse-test.c:130
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -1997,7 +1958,7 @@ msgstr "Sareko proxy-a"
 #. * vpn connections in the device list.
 #.
 #: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
-#: ../panels/network/net-vpn.c:431
+#: ../panels/network/net-vpn.c:432
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPNa"
@@ -2091,16 +2052,6 @@ msgstr "Bat ere ez"
 msgid "Never"
 msgstr "Inoiz ere ez"
 
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:815
-msgid "Today"
-msgstr "Gaur"
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:818
-msgid "Yesterday"
-msgstr "Atzo"
-
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
@@ -2149,7 +2100,7 @@ msgid "Excellent"
 msgstr "Oso ona"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
-#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-vpn.c:220
 #: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2215,7 +2166,7 @@ msgstr "Automatikoa (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Manual"
 msgstr "Eskuz"
 
@@ -2239,7 +2190,7 @@ msgstr "Aurrizkia"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Automatic"
 msgstr "Automatikoa"
 
@@ -2300,7 +2251,7 @@ msgstr "Esteka-abiadura"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:157
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:695
 msgid "IPv4 Address"
 msgstr "IPv4 helbidea"
 
@@ -2309,7 +2260,7 @@ msgstr "IPv4 helbidea"
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:696
 msgid "IPv6 Address"
 msgstr "IPv6 helbidea"
 
@@ -2462,43 +2413,43 @@ msgstr "Erabili _konexio hau soilik bere sareko baliabideentzako"
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:269
+#: ../panels/network/connection-editor/net-connection-editor.c:275
 msgid "Unable to open connection editor"
 msgstr "Ezin da konexioaren editorea ireki"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:287
+#: ../panels/network/connection-editor/net-connection-editor.c:293
 msgid "New Profile"
 msgstr "Profil berria"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:577
+#: ../panels/network/connection-editor/net-connection-editor.c:583
 msgid "VPN"
 msgstr "VPNa"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:578
+#: ../panels/network/connection-editor/net-connection-editor.c:584
 msgid "Bond"
 msgstr "Esleitu"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:580
+#: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Team"
 msgstr "Taldea"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:582
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
 msgstr "Zubia"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "VLAN"
 msgstr "VLAN-a"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:734
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "Ezin izan dira VPN pluginak kargatu"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:809
 msgid "Import from file…"
 msgstr "Inportatu fitxategitik..."
 
-#: ../panels/network/connection-editor/net-connection-editor.c:874
+#: ../panels/network/connection-editor/net-connection-editor.c:880
 msgid "Add Network Connection"
 msgstr "Gehitu sareko konexioa"
 
@@ -2556,7 +2507,7 @@ msgid "Select file to import"
 msgstr "Hautatu fitxategia inportatzeko"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1941
+#: ../panels/printers/cc-printers-panel.c:2053
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -2667,9 +2618,8 @@ msgid "yesterday"
 msgstr "atzo"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:698
+#: ../panels/network/panel-common.c:700 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP helbidea"
 
@@ -2693,8 +2643,7 @@ msgstr "Hariduna"
 #: ../panels/network/net-device-wifi.c:1621
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Aukerak..."
 
@@ -2758,13 +2707,12 @@ msgstr ""
 "barne, galdu egingo dira."
 
 #: ../panels/network/net-device-wifi.c:1774
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Historia"
 
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/printers/options-dialog.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "It_xi"
@@ -2912,6 +2860,7 @@ msgstr "xehetasunak"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/sharing/sharing.ui.h:11
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -3014,6 +2963,7 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Konektatu ezkutuko sarera…"
 
 #: ../panels/network/network-wifi.ui.h:58
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "_History"
 msgstr "_Historia"
 
@@ -3035,7 +2985,6 @@ msgstr "Segurtasun mota"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Pasahitza"
@@ -3587,47 +3536,61 @@ msgid "_Type"
 msgstr "_Mota"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 msgid "On"
 msgstr "Aktibatuta"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
+#| msgctxt "notifications"
+#| msgid "Notifications"
 msgctxt "notifications"
-msgid "Notifications"
-msgstr "Jakinarazpenak"
+msgid "_Notifications"
+msgstr "_Jakinarazpenak"
 
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
+#| msgctxt "notifications"
+#| msgid "Sound Alerts"
 msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Soinu-abisuak"
+msgid "Sound _Alerts"
+msgstr "Soinu-a_bisuak"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "Notification Banners"
 msgctxt "notifications"
-msgid "Notification Banners"
-msgstr "Jakinarazpenaren iragarkiak"
+msgid "Notification _Banners"
+msgstr "Jakinarazpenaren _iragarkiak"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
+#| msgctxt "notifications"
+#| msgid "Show Message Content in Banners"
 msgctxt "notifications"
-msgid "Show Message Content in Banners"
-msgstr "Erakutsi mezuen edukia iragarkietan"
+msgid "Show Message _Content in Banners"
+msgstr "Erakutsi mezuen e_dukia iragarkietan"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Lock Screen Notifications"
 msgctxt "notifications"
-msgid "Lock Screen Notifications"
-msgstr "Pantaila blokeatzearen jakinarazpenak"
+msgid "_Lock Screen Notifications"
+msgstr "Pantaila b_lokeatzearen jakinarazpenak"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
+#| msgctxt "notifications"
+#| msgid "Show Message Content on Lock Screen"
 msgctxt "notifications"
-msgid "Show Message Content on Lock Screen"
-msgstr "Erakutsi mezuen edukia pantaila blokeatzean"
+msgid "Show Message C_ontent on Lock Screen"
+msgstr "Erakutsi mezuen e_dukia pantaila blokeatzean"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3644,43 +3607,45 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "jakinarazpenak;iragarkia;mezua;erretilua;laster-leihoa;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification Banners"
-msgstr "Jakinarazpenaren iragarkiak"
+#| msgid "Notification Banners"
+msgid "Notification _Banners"
+msgstr "Jakinarazpenaren _iragarkiak"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Lock Screen Notifications"
-msgstr "Pantaila blokeatzearen jakinarazpenak"
+#| msgid "Lock Screen Notifications"
+msgid "_Lock Screen Notifications"
+msgstr "Pantaila b_lokeatzearen jakinarazpenak"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
-#: ../panels/sound/gvc-mixer-dialog.c:1781
+#: ../panels/privacy/privacy.ui.h:45 ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Applications"
 msgstr "Aplikazioak"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:168
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Bestelakoa"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:289
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Gehitu kontua"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:326
 msgid "Mail"
 msgstr "Posta"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:332
 msgid "Contacts"
 msgstr "Kontaktuak"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:338
 msgid "Chat"
 msgstr "Berriketa"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:344
 msgid "Resources"
 msgstr "Baliabideak"
 
@@ -3758,18 +3723,18 @@ msgstr ""
 "Kontu bat gehituta, aplikazioek hura atzitu ahal izango dute dokumentu, "
 "posta, kontaktu, egutegi, berriketa eta abarren bila."
 
-#: ../panels/power/cc-power-panel.c:200
+#: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
 msgstr "Denbora ezezaguna"
 
-#: ../panels/power/cc-power-panel.c:206
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "minutu %i"
 msgstr[1] "%i minutu"
 
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:271
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3778,227 +3743,248 @@ msgstr[1] "%i ordu"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:226
+#: ../panels/power/cc-power-panel.c:279
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:227
+#: ../panels/power/cc-power-panel.c:280
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ordu"
 msgstr[1] "ordu"
 
-#: ../panels/power/cc-power-panel.c:228
+#: ../panels/power/cc-power-panel.c:281
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutu"
 msgstr[1] "minutu"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:247
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s erabat kargatu arte"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:307
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Kontuz: %s falta"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:259
+#: ../panels/power/cc-power-panel.c:312
 #, c-format
 msgid "%s remaining"
 msgstr "%s falta"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:317 ../panels/power/cc-power-panel.c:345
 msgid "Fully charged"
 msgstr "Erabat kargatuta"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
+#: ../panels/power/cc-power-panel.c:321 ../panels/power/cc-power-panel.c:349
 msgid "Empty"
 msgstr "Hutsa"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:336
 msgid "Charging"
 msgstr "Kargatzen"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:341
 msgid "Discharging"
 msgstr "Deskargatzen"
 
-#: ../panels/power/cc-power-panel.c:411
+#: ../panels/power/cc-power-panel.c:464
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Nagusia"
 
-#: ../panels/power/cc-power-panel.c:413
+#: ../panels/power/cc-power-panel.c:466
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Gehigarria"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:484
+#: ../panels/power/cc-power-panel.c:537
 msgid "Wireless mouse"
 msgstr "Haririk gabeko sagua"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:487
+#: ../panels/power/cc-power-panel.c:540
 msgid "Wireless keyboard"
 msgstr "Haririk gabeko teklatua"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:543
 msgid "Uninterruptible power supply"
 msgstr "Etenik gabeko energia hornidura"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:546
 msgid "Personal digital assistant"
 msgstr "Laguntzaile digital pertsonala"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:496
+#: ../panels/power/cc-power-panel.c:549
 msgid "Cellphone"
 msgstr "Telefono mugikorra"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:552
 msgid "Media player"
 msgstr "Multimedia-erreproduzitzailea"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:555
 msgid "Tablet"
 msgstr "Taula"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:505
+#: ../panels/power/cc-power-panel.c:558
 msgid "Computer"
 msgstr "Ordenagailua"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2109
+#: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
+#: ../panels/power/cc-power-panel.c:2252
 msgid "Battery"
 msgstr "Bateria"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:615
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Kargatzen"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Kontuz"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:627
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baxua"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:632
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Ona"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:637
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Erabat kargatuta"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:588
+#: ../panels/power/cc-power-panel.c:641
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Hutsa"
 
-#: ../panels/power/cc-power-panel.c:746
+#: ../panels/power/cc-power-panel.c:799
 msgid "Batteries"
 msgstr "Bateriak"
 
-#: ../panels/power/cc-power-panel.c:1171
+#: ../panels/power/cc-power-panel.c:1227
 msgid "When _idle"
 msgstr "_Inaktibo dagoenean"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1640
 msgid "Power Saving"
 msgstr "Energia aurreztea"
 
-#: ../panels/power/cc-power-panel.c:1595
+#: ../panels/power/cc-power-panel.c:1675
 msgid "_Screen brightness"
 msgstr "_Pantailaren distira"
 
-#: ../panels/power/cc-power-panel.c:1614
+#: ../panels/power/cc-power-panel.c:1694
 msgid "Automatic brightness"
 msgstr "Distira automatikoa"
 
-#: ../panels/power/cc-power-panel.c:1634
+#: ../panels/power/cc-power-panel.c:1714
 msgid "_Keyboard brightness"
 msgstr "_Teklatuaren distira"
 
-#: ../panels/power/cc-power-panel.c:1644
+#: ../panels/power/cc-power-panel.c:1724
 msgid "_Dim screen when inactive"
 msgstr "_Ilundu pantaila inaktibo dagoenean"
 
-#: ../panels/power/cc-power-panel.c:1669
+#: ../panels/power/cc-power-panel.c:1749
 msgid "_Blank screen"
 msgstr "_Belztu pantaila"
 
-#: ../panels/power/cc-power-panel.c:1706
+#: ../panels/power/cc-power-panel.c:1786
 msgid "_Wi-Fi"
 msgstr "_Wifia"
 
-#: ../panels/power/cc-power-panel.c:1711
+#: ../panels/power/cc-power-panel.c:1791
 msgid "Turn off Wi-Fi to save power."
 msgstr "Itzali haririk gabekoa energia aurrezteko."
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1816
 msgid "_Mobile broadband"
 msgstr "Bandazabal _mugikorra"
 
-#: ../panels/power/cc-power-panel.c:1741
+#: ../panels/power/cc-power-panel.c:1821
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
 "Itzali mugikorraren banda-zabala (3G, 4G, LTE, e.a.) energia aurrezteko."
 
-#: ../panels/power/cc-power-panel.c:1793
+#: ../panels/power/cc-power-panel.c:1873
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1849
+#: ../panels/power/cc-power-panel.c:1929
 msgid "When on battery power"
 msgstr "Bateriaren energiarekin"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1931
 msgid "When plugged in"
 msgstr "Entxufea konektatutakoan"
 
-#: ../panels/power/cc-power-panel.c:1968
-msgid "Suspend & Power Off"
-msgstr "Eseki eta itzali"
+#: ../panels/power/cc-power-panel.c:2023
+#| msgid "Don't suspend"
+msgid "Suspend"
+msgstr "Eseki"
 
-#: ../panels/power/cc-power-panel.c:2008
+#: ../panels/power/cc-power-panel.c:2024
+msgid "Hibernate"
+msgstr "Hibernatu"
+
+#: ../panels/power/cc-power-panel.c:2025
+#| msgid "Do nothing"
+msgid "Nothing"
+msgstr "Ezer ez"
+
+#. Frame header
+#: ../panels/power/cc-power-panel.c:2074
+#| msgid "Suspend & Power Off"
+msgid "Suspend & Power Button"
+msgstr "Esekitzeko eta itzaltzeko botoia"
+
+#: ../panels/power/cc-power-panel.c:2115
 msgid "_Automatic suspend"
 msgstr "Eseki _automatikoki"
 
-#: ../panels/power/cc-power-panel.c:2009
+#: ../panels/power/cc-power-panel.c:2116
 msgid "Automatic suspend"
 msgstr "Eseki automatikoki"
 
-#: ../panels/power/cc-power-panel.c:2163
+#: ../panels/power/cc-power-panel.c:2180
+#| msgid "When the power button is pressed:"
+msgid "_When the Power Button is pressed"
+msgstr "Itzaltzeko botoia _sakatzean"
+
+#: ../panels/power/cc-power-panel.c:2306
 msgid "Devices"
 msgstr "Gailuak"
 
@@ -4086,9 +4072,14 @@ msgstr "_Entxufea konektatutakoan"
 msgid "On _Battery Power"
 msgstr "_Bateriaren energiarekin"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "Atzerapena"
+
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Utzi"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4099,143 +4090,138 @@ msgid "Authentication Required"
 msgstr "Autentifikazioa behar da"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:588
+#: ../panels/printers/cc-printers-panel.c:678
 msgid "Low on toner"
 msgstr "Toner gutxi"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:680
 msgid "Out of toner"
 msgstr "Tonerra hutsik"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:593
+#: ../panels/printers/cc-printers-panel.c:683
 msgid "Low on developer"
 msgstr "Errebelatzaile gutxi"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:686
 msgid "Out of developer"
 msgstr "Errebelatzailea hutsik"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:688
 msgid "Low on a marker supply"
 msgstr "Markatzaile gutxi"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:690
 msgid "Out of a marker supply"
 msgstr "Markatzailerik gabe"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:692
 msgid "Open cover"
 msgstr "Estalkia irekita"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:694
 msgid "Open door"
 msgstr "Atea irekita"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:696
 msgid "Low on paper"
 msgstr "Paper gutxi"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:698
 msgid "Out of paper"
 msgstr "Paperik ez"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:700
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Deskonektatuta"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:612
-#: ../panels/printers/cc-printers-panel.c:803
+#: ../panels/printers/cc-printers-panel.c:702
+#: ../panels/printers/cc-printers-panel.c:893
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Geldituta"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:704
 msgid "Waste receptacle almost full"
 msgstr "Hondakinen ontzia ia beteta"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:616
+#: ../panels/printers/cc-printers-panel.c:706
 msgid "Waste receptacle full"
 msgstr "Hondakinen ontzia beteta"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:618
+#: ../panels/printers/cc-printers-panel.c:708
 msgid "The optical photo conductor is near end of life"
 msgstr "Argazki-eroale optikoa bere amaierara iristear dago"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:620
+#: ../panels/printers/cc-printers-panel.c:710
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Argazki-eroale optikoak ez du gehiago funtzionatuko"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:730
+#: ../panels/printers/cc-printers-panel.c:820
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Konfiguratzen"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:789
+#: ../panels/printers/cc-printers-panel.c:879
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Prest"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:794
+#: ../panels/printers/cc-printers-panel.c:884
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Ez du lanik onartzen"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:799
+#: ../panels/printers/cc-printers-panel.c:889
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Prozesatzen"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:1009
 msgid "Toner Level"
 msgstr "Tonerraren maila"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:1012
 msgid "Ink Level"
 msgstr "Tintaren maila"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:1015
 msgid "Supply Level"
 msgstr "Hornikuntzaren maila"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:943
+#: ../panels/printers/cc-printers-panel.c:1033
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Instalatzen"
 
-#. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1119
-msgid "No printers available"
-msgstr "Ez dago inprimagailurik eskuragarri"
-
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1541
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4243,15 +4229,15 @@ msgstr[0] "%u aktibo"
 msgstr[1] "%u aktibo"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1770
+#: ../panels/printers/cc-printers-panel.c:1882
 msgid "Failed to add new printer."
 msgstr "Huts egin du inprimagailu berria gehitzean."
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:2049
 msgid "Select PPD File"
 msgstr "Hautatu PPD fitxategia"
 
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:2058
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4259,30 +4245,35 @@ msgstr ""
 "PostScript Printer Description fitxategiak (*.ppd, *.PPD, *.ppd.gz, *.PPD."
 "gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2253
+#: ../panels/printers/cc-printers-panel.c:2365
 msgid "No suitable driver found"
 msgstr "Ez da kontrolatzaile egokirik aurkitu"
 
-#: ../panels/printers/cc-printers-panel.c:2324
+#: ../panels/printers/cc-printers-panel.c:2436
 msgid "Searching for preferred drivers…"
 msgstr "Kontrolatzaile hobetsiak bilatzen..."
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2457
 msgid "Select from database…"
 msgstr "Hautatu datu-basetik..."
 
-#: ../panels/printers/cc-printers-panel.c:2354
+#: ../panels/printers/cc-printers-panel.c:2466
 msgid "Provide PPD File…"
 msgstr "Eman PPD fitxategia..."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2505
-#: ../panels/printers/cc-printers-panel.c:2528
+#: ../panels/printers/cc-printers-panel.c:2617
+#: ../panels/printers/cc-printers-panel.c:2640
 msgid "Test page"
 msgstr "Probako orria"
 
+#: ../panels/printers/cc-printers-panel.c:2753
+#| msgid "Printers"
+msgid "No printers"
+msgstr "Inprimagailurik ez"
+
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2942
+#: ../panels/printers/cc-printers-panel.c:3099
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Ezin izan da interfazea kargatu: %s"
@@ -4302,27 +4293,16 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Inprimagailua;Ilara;Inprimatu;Papera;Tinta;Tonerra;"
 
-#. Translators: This dialog contains list of active print jobs of the selected printer
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: ../panels/printers/jobs-dialog.ui.h:2
-msgid "Active Jobs"
-msgstr "Lan aktiboak"
+msgid "Clear All"
+msgstr "Garbitu denak"
 
-#: ../panels/printers/jobs-dialog.ui.h:3
-#: ../panels/printers/options-dialog.ui.h:2
-msgid "Close"
-msgstr "Itxi"
-
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-msgid "Resume Printing"
-msgstr "Jarraitu inprimatzen"
-
-#: ../panels/printers/jobs-dialog.ui.h:5
-msgid "Pause Printing"
-msgstr "Pausarazi inprimatzea"
-
-#: ../panels/printers/jobs-dialog.ui.h:6
-msgid "Cancel Print Job"
-msgstr "Utzi inprimaketaren lana"
+#| msgid "%s Active Jobs"
+msgid "No Active Printer Jobs"
+msgstr "Inprimagailuaren lan aktiborik ez"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
@@ -4350,6 +4330,11 @@ msgstr "Aukerak kargatzen..."
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
 msgstr "Hautatu inprimagailuaren kontrolatzailea"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/um-photo-dialog.c:96
+msgid "Select"
+msgstr "Hautatu"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -4404,66 +4389,56 @@ msgid "Reverse portrait"
 msgstr "Alderantzizko bertikala"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:142
+#: ../panels/printers/pp-jobs-dialog.c:103
 msgctxt "print job"
 msgid "Pending"
 msgstr "Zain"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:146
+#: ../panels/printers/pp-jobs-dialog.c:107
+#| msgctxt "printer state"
+#| msgid "Paused"
 msgctxt "print job"
-msgid "Held"
-msgstr "Atxikituta"
+msgid "Paused"
+msgstr "Pausatuta"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:150
+#: ../panels/printers/pp-jobs-dialog.c:111
 msgctxt "print job"
 msgid "Processing"
 msgstr "Prozesatzen"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:154
+#: ../panels/printers/pp-jobs-dialog.c:115
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Geldituta"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:158
+#: ../panels/printers/pp-jobs-dialog.c:119
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Bertan behera utzita"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:162
+#: ../panels/printers/pp-jobs-dialog.c:123
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abortatuta"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:166
+#: ../panels/printers/pp-jobs-dialog.c:127
 msgctxt "print job"
 msgid "Completed"
 msgstr "Osatuta"
 
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:288
-msgid "Job Title"
-msgstr "Lanaren titulua"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:297
-msgid "Job State"
-msgstr "Lanaren egoera"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:303
-msgid "Time"
-msgstr "Ordua"
-
-#: ../panels/printers/pp-jobs-dialog.c:451
+#. Translators: This is the printer name for which we are showing the active jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-msgid "%s Active Jobs"
-msgstr "Lan aktiboak: %s"
+#| msgid "%s Active Jobs"
+msgctxt "Printer jobs dialog title"
+msgid "%s - Active Jobs"
+msgstr "%s - Lan aktiboak"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1659
@@ -4688,14 +4663,15 @@ msgid "Print _Test Page"
 msgstr "Inprimatu _proba-orria"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
 msgid "_Options"
 msgstr "_Aukerak"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-msgid "Add New Printer"
-msgstr "Gehitu inprimagailu berria"
+#| msgid "Add Printer"
+msgid "Add a Printer"
+msgstr "Gehitu inprimagailua"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:26
@@ -4706,52 +4682,73 @@ msgstr ""
 "Badirudi sistemako inprimatzeko\n"
 "zerbitzua ez dagoela erabilgarri."
 
-#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Pantailaren blokeoa"
 
-#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:420
+msgid "In use"
+msgstr "Erabiltzen"
+
+#: ../panels/privacy/cc-privacy-panel.c:425
+#| msgid "On"
+msgctxt "Location services status"
+msgid "On"
+msgstr "Aktibatuta"
+
+#: ../panels/privacy/cc-privacy-panel.c:426
+#| msgid "Off"
+msgctxt "Location services status"
+msgid "Off"
+msgstr "Desaktibatuta"
+
+#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
+#| msgid "_Location Services"
+msgid "Location Services"
+msgstr "Kokalekuaren zerbitzuak"
+
+#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Erabilera eta historia"
 
-#: ../panels/privacy/cc-privacy-panel.c:587
+#: ../panels/privacy/cc-privacy-panel.c:1001
 msgid "Empty all items from Trash?"
 msgstr "Hustu zakarrontziko elementu guztiak?"
 
-#: ../panels/privacy/cc-privacy-panel.c:588
+#: ../panels/privacy/cc-privacy-panel.c:1002
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Zakarrontziko elementu guztiak betirako ezabatuko dira."
 
-#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Hustu _zakarrontzia"
 
-#: ../panels/privacy/cc-privacy-panel.c:612
+#: ../panels/privacy/cc-privacy-panel.c:1026
 msgid "Delete all the temporary files?"
 msgstr "Ezabatu aldi baterako fitxategi guztiak?"
 
-#: ../panels/privacy/cc-privacy-panel.c:613
+#: ../panels/privacy/cc-privacy-panel.c:1027
 msgid "All the temporary files will be permanently deleted."
 msgstr "Aldi baterako fitxategi guztiak betirako ezabatuko dira."
 
-#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Ezabatu aldi baterako fitxategiak"
 
-#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Ezabatu Zakarrontzia eta aldi baterako fitxategiak"
 
-#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Softwarearen erabilpena"
 
-#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Arazoaren berri ematea"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:731
+#: ../panels/privacy/cc-privacy-panel.c:1145
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4761,7 +4758,7 @@ msgstr ""
 "gaituzu. Txostenak anonimo gisa bidaltzen dira eta datu pertsonaletatik "
 "garbi daude."
 
-#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Pribatutasunaren araua"
 
@@ -4907,15 +4904,20 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_Bidali softwarearen erabilpenaren estatistikak"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:43
+msgid ""
+"Location services allow applications to know your location. Using Wi-Fi and "
+"mobile broadband increases accuracy."
+msgstr ""
+"Kokalekuaren zerbitzuak aplikazioek zure kokalekua ezagutzea baimentzen du. "
+"Wi-Fi eta "
+"mugikorren banda-zabalera erabiltzeak zehaztasuna handiagotzen du."
+
+#: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
 msgstr "_Kokalekuaren zerbitzuak"
 
-#: ../panels/privacy/privacy.ui.h:43
-msgid "Used to determine your geographical location"
-msgstr "Zure kokaleku geografikoa zehazteko erabiltzen da"
-
-#: ../panels/privacy/privacy.ui.h:45
+#: ../panels/privacy/privacy.ui.h:47
 msgid "_Automatic Problem Reporting"
 msgstr "_Arazoei buruz txostena automatikoki bidali"
 
@@ -4933,34 +4935,35 @@ msgstr "Metrika"
 msgid "No regions found"
 msgstr "Ez da eskualderik aurkitu"
 
-#: ../panels/region/cc-input-chooser.c:181
+#: ../panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
 msgstr "Ez da sarrerako iturbururik aurkitu"
 
-#: ../panels/region/cc-input-chooser.c:1015
+#: ../panels/region/cc-input-chooser.c:992
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Bestelakoa"
 
-#: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/region/cc-region-panel.c:248
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Amaitu saioa aldaketek eragina izan dezaten"
 
-#: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1076
+#: ../panels/region/cc-region-panel.c:252
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "Berrabiarazi orain"
 
-#: ../panels/region/cc-region-panel.c:877
+#: ../panels/region/cc-region-panel.c:889
 msgid "No input source selected"
 msgstr "Ez da sarrerako iturbururik hautatu"
 
-#: ../panels/region/cc-region-panel.c:1797
-msgid "Login Screen"
-msgstr "Saio-hasierako pantaila"
+#: ../panels/region/cc-region-panel.c:1807
+#| msgid "Login Screen"
+msgid "Login _Screen"
+msgstr "Saio-_hasierako pantaila"
 
-#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+#: ../panels/region/format-chooser.ui.h:1
 msgid "Formats"
 msgstr "Formatuak"
 
@@ -5016,57 +5019,67 @@ msgstr "Ezin dira sarrerako metodoak erabili saio-hasierako pantailan"
 msgid "Input Source Options"
 msgstr "Sarrerako iturburuaren aukerak"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:2
 msgid "Use the _same source for all windows"
 msgstr "Erabili iturburu _berdina leiho guztietan"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Baimendu iturburu _desberdina leiho bakoitzarentzako"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
 msgid "Keyboard Shortcuts"
 msgstr "Laster-teklak"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "Aldatu aurreko iturburura"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:6
 msgid "Super+Shift+Space"
 msgstr "Super+Maius+Zuriunea"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:7
 msgid "Switch to next source"
 msgstr "Aldatu hurrengo iturburura"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:8
 msgid "Super+Space"
 msgstr "Super+Zuriunea"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Laster-tekla hauek alda ditzakezu teklatuaren ezarpenetan"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
 msgstr "Bestelako aldaketak hurrengo iturburura"
 
-#: ../panels/region/input-options.ui.h:12
+#: ../panels/region/input-options.ui.h:11
 msgid "Left+Right Alt"
 msgstr "Ezker+Eskuineko Alt"
+
+#: ../panels/region/region.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Hizkuntza"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Ingelesa (Erresuma Batua)"
 
+#: ../panels/region/region.ui.h:3
+#| msgid "Formats"
+msgid "_Formats"
+msgstr "_Formatuak"
+
 #: ../panels/region/region.ui.h:4
 msgid "United Kingdom"
 msgstr "Erresuma Batua"
 
-#: ../panels/region/region.ui.h:6
-msgid "Options"
-msgstr "Aukerak"
+#: ../panels/region/region.ui.h:5
+msgid "Input Sources"
+msgstr "Sarrerako iturburuak"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
@@ -5225,30 +5238,39 @@ msgid "Networks"
 msgstr "Sareak"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Computer Name"
-msgstr "Ordenagailuaren izena"
+#| msgid "Computer Name"
+msgid "_Computer Name"
+msgstr "Ordenagailuaren _izena"
 
 #: ../panels/sharing/sharing.ui.h:2
-msgid "Personal File Sharing"
-msgstr "Fitxategi pertsonalak partekatzea"
+#| msgid "Personal File Sharing"
+msgid "_Personal File Sharing"
+msgstr "Fitxategi _pertsonalak partekatzea"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Screen Sharing"
-msgstr "Pantaila partekatzea"
+#| msgid "Screen Sharing"
+msgid "_Screen Sharing"
+msgstr "P_antaila partekatzea"
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Media Sharing"
-msgstr "Multimedia partekatzea"
+#| msgid "Media Sharing"
+msgid "_Media Sharing"
+msgstr "_Multimedia partekatzea"
 
 #: ../panels/sharing/sharing.ui.h:5
-msgid "Remote Login"
-msgstr "Urruneko saioa"
+#| msgid "Remote Login"
+msgid "_Remote Login"
+msgstr "_Urruneko saioa"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Zerbitzu batzuk desgaituta daude ez dagoelako sarerako sarbiderik."
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:7
+msgid "Personal File Sharing"
+msgstr "Fitxategi pertsonalak partekatzea"
+
+#: ../panels/sharing/sharing.ui.h:9
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5258,11 +5280,16 @@ msgstr ""
 "dauden beste erabiltzaileekin partekatzea baimentzen dizu hau erabiliz: <a "
 "href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:9
-msgid "Require Password"
-msgstr "Eskatu pasahitza"
+#: ../panels/sharing/sharing.ui.h:10
+#| msgid "Require Password"
+msgid "_Require Password"
+msgstr "_Eskatu pasahitza"
 
 #: ../panels/sharing/sharing.ui.h:12
+msgid "Remote Login"
+msgstr "Urruneko saioa"
+
+#: ../panels/sharing/sharing.ui.h:14
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5272,7 +5299,11 @@ msgstr ""
 "erabiliz: \n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:15
+#: ../panels/sharing/sharing.ui.h:16
+msgid "Screen Sharing"
+msgstr "Pantaila partekatzea"
+
+#: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5281,36 +5312,45 @@ msgstr ""
 "Baimendu urruneko erabiltzaileei zure pantaila ikustea edo kontrolatzea hona "
 "konektatuz: <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:16
-msgid "Allow Remote Control"
-msgstr "Baimendu urruneko kontrola"
-
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Password:"
-msgstr "Pasahitza:"
-
-#: ../panels/sharing/sharing.ui.h:18
-msgid "Show Password"
-msgstr "Erakutsi pasahitza"
-
 #: ../panels/sharing/sharing.ui.h:19
+#| msgid "Allow Remote Control"
+msgid "_Allow Remote Control"
+msgstr "_Baimendu urruneko kontrola"
+
+#: ../panels/sharing/sharing.ui.h:20
+#| msgid "_Password"
+msgid "_Password:"
+msgstr "_Pasahitza:"
+
+#: ../panels/sharing/sharing.ui.h:21
+#| msgid "Show Password"
+msgid "_Show Password"
+msgstr "E_rakutsi pasahitza"
+
+#: ../panels/sharing/sharing.ui.h:22
 msgid "Access Options"
 msgstr "Sarbidetzaren aukerak"
 
-#: ../panels/sharing/sharing.ui.h:20
-msgid "New connections must ask for access"
-msgstr "Konexio berriek sarbidetza eskatu behar dute"
+#: ../panels/sharing/sharing.ui.h:23
+#| msgid "New connections must ask for access"
+msgid "_New connections must ask for access"
+msgstr "Konexio _berriek sarbidetza eskatu behar dute"
 
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Require a password"
-msgstr "Eskatu pasahitza"
+#: ../panels/sharing/sharing.ui.h:24
+#| msgid "Require a password"
+msgid "_Require a password"
+msgstr "_Eskatu pasahitza"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:25
+msgid "Media Sharing"
+msgstr "Multimedia partekatzea"
+
+#: ../panels/sharing/sharing.ui.h:26
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr "Partekatu musika, argazkiak eta bideoak sarean zehar."
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:27
 msgid "Folders"
 msgstr "Karpetak"
 
@@ -5574,6 +5614,7 @@ msgid "_Large Text"
 msgstr "Testu _handia"
 
 #: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Zooma"
 
@@ -5598,209 +5639,266 @@ msgid "Screen _Keyboard"
 msgstr "Pantailako _teklatua"
 
 #: ../panels/universal-access/uap.ui.h:13
+#| msgid "Repeat Keys"
+msgid "R_epeat Keys"
+msgstr "E_rrepikatze-teklak"
+
+#: ../panels/universal-access/uap.ui.h:14
+#| msgid "Cursor Blinking"
+msgid "Cursor _Blinking"
+msgstr "Kurtsore _keinukaria"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
 msgstr "_Idazketaren laguntzailea (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Pointing & Clicking"
 msgstr "Kokatzea eta klik egitea"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:17
 msgid "_Mouse Keys"
 msgstr "_Sagu-teklak"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Click Assist"
 msgstr "_Klik egitearen laguntzailea"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:19
+#| msgid "_Double-click"
+msgid "_Double-Click Delay"
+msgstr "_Klik bikoitzaren atzerapena"
+
+#: ../panels/universal-access/uap.ui.h:20
+#| msgid "Double-Click Timeout"
+msgid "Double-Click Delay"
+msgstr "Klik bikoitzaren atzerapena"
+
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Screen Reader"
 msgstr "Pantaila irakurlea"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:22
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr ""
 "Pantailaren irakurleak bistaratutako testua irakurtzen du fokua mugitzen "
 "duzun arabera."
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:23
 msgid "_Screen Reader"
 msgstr "Pantaila _irakurlea"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Sound Keys"
 msgstr "Teklak soinuarekin"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Beep when Num Lock or Caps Lock are turned on."
 msgstr "Jo soinua Blok. Zenb edo Blok Maius pizten direnean."
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Visual Alerts"
 msgstr "Abisu bisualak"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:27
 msgid "_Test flash"
 msgstr "_Probatu flasha"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Erabili adierazle bisuala soinuaren abisua gertatzean."
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Flash the _window title"
 msgstr "Distiratu _leihoaren titulu-barra"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Flash the entire _screen"
 msgstr "Distiratu _pantaila osoa"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:31
+msgid "Repeat Keys"
+msgstr "Errepikatze-teklak"
+
+#: ../panels/universal-access/uap.ui.h:32
+#| msgid "Key presses _repeat when key is held down"
+msgid "Key presses repeat when key is held down."
+msgstr ""
+"Tekla sakatuta dagoen bitartean, tekla hori behin eta berriz errepikatzen da."
+
+#: ../panels/universal-access/uap.ui.h:34
+#| msgid "Repeat keys speed"
+msgid "Repeat keys delay"
+msgstr "Tekla-errepikatzeen atzerapena"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Speed"
+msgstr "Abiadura"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Repeat keys speed"
+msgstr "Tekla-errepikatzeen abiadura"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Cursor Blinking"
+msgstr "Kurtsore keinukaria"
+
+#: ../panels/universal-access/uap.ui.h:38
+#| msgid "Cursor _blinks in text fields"
+msgid "Cursor blinks in text fields."
+msgstr "Kurtsorea keinuka testu-eremuetan."
+
+#: ../panels/universal-access/uap.ui.h:39
+#| msgid "Cursor blink speed"
+msgid "Cursor blinking speed"
+msgstr "Kurtsore-keinuaren abiadura"
+
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Typing Assist"
 msgstr "Idazketaren laguntzailea"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:41
 msgid "_Sticky Keys"
 msgstr "Tekla _itsaskorrak"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Tratatu tekla aldatzaileen sekuentzia bat tekla konbinazio bat bezala"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:43
 msgid "_Disable if two keys are pressed together"
 msgstr "_Desgaitu bi tekla batera sakatzen badira"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Beep when a _modifier key is pressed"
 msgstr "Jo soinua _tekla aldatzailea sakatzean"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:45
 msgid "S_low Keys"
 msgstr "Tekla _motelak"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Jarri atzerapena tekla bat sakatzen denetik onartu bitartekoa"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "_Onarpenaren atzerapena:"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:48
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Laburra"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "Tekla motelak sakatzearen atzerapena"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:50
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Luzea"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Beep when a key is pr_essed"
 msgstr "Jo soinua _tekla bat sakatzean"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is _accepted"
 msgstr "Jo soinua tekla bat _onartzean"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Beep when a key is _rejected"
 msgstr "Jo soinua tekla bat e_zesten bada"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:54
 msgid "_Bounce Keys"
 msgstr "_Errebote-teklak"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ez ikusi egin azkar sakatutako bikoiztutako teklei"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:56
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Laburra"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Bounce keys typing delay"
 msgstr "Errebote-teklak sakatzearen atzerapena"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgctxt "bounce keys delay"
-msgid "Long"
-msgstr "Luzea"
-
-#: ../panels/universal-access/uap.ui.h:46
-msgid "_Enable by Keyboard"
-msgstr "_Gaitu teklatuaren bidez"
-
-#: ../panels/universal-access/uap.ui.h:47
-msgid "Turn accessibility features on and off using the keyboard"
-msgstr "Aktibatu erabilgarritasunaren funtzionalitatea teklatutik"
-
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Click Assist"
-msgstr "Klik egitearen laguntzailea"
-
-#: ../panels/universal-access/uap.ui.h:49
-msgid "_Simulated Secondary Click"
-msgstr "_2. mailako klik simulatua"
-
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr "Abiarazi 2. mailako klik egitea botoi nagusia sakatuta edukitzean"
-
-#: ../panels/universal-access/uap.ui.h:51
-msgctxt "secondary click"
-msgid "Short"
-msgstr "Laburra"
-
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Secondary click delay"
-msgstr "2. mailako klik egitearen atzerapena"
-
-#: ../panels/universal-access/uap.ui.h:53
-msgctxt "secondary click delay"
-msgid "Long"
-msgstr "Luzea"
-
-#: ../panels/universal-access/uap.ui.h:54
-msgid "_Hover Click"
-msgstr "_Egin klik gainetik igarotzean"
-
-#: ../panels/universal-access/uap.ui.h:55
-msgid "Trigger a click when the pointer hovers"
-msgstr "Abiarazi klik-a erakuslea gainean kokatzean"
-
-#: ../panels/universal-access/uap.ui.h:56
-msgid "D_elay:"
-msgstr "_Atzerapena:"
-
-#: ../panels/universal-access/uap.ui.h:57
-msgctxt "dwell click delay"
-msgid "Short"
-msgstr "Laburra"
-
 #: ../panels/universal-access/uap.ui.h:58
-msgctxt "dwell click delay"
+msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Luzea"
 
 #: ../panels/universal-access/uap.ui.h:59
+msgid "_Enable by Keyboard"
+msgstr "_Gaitu teklatuaren bidez"
+
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Turn accessibility features on and off using the keyboard"
+msgstr "Aktibatu erabilgarritasunaren funtzionalitatea teklatutik"
+
+#: ../panels/universal-access/uap.ui.h:61
+msgid "Click Assist"
+msgstr "Klik egitearen laguntzailea"
+
+#: ../panels/universal-access/uap.ui.h:62
+msgid "_Simulated Secondary Click"
+msgstr "_2. mailako klik simulatua"
+
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Abiarazi 2. mailako klik egitea botoi nagusia sakatuta edukitzean"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgctxt "secondary click"
+msgid "Short"
+msgstr "Laburra"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Secondary click delay"
+msgstr "2. mailako klik egitearen atzerapena"
+
+#: ../panels/universal-access/uap.ui.h:66
+msgctxt "secondary click delay"
+msgid "Long"
+msgstr "Luzea"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "_Hover Click"
+msgstr "_Egin klik gainetik igarotzean"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Trigger a click when the pointer hovers"
+msgstr "Abiarazi klik-a erakuslea gainean kokatzean"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "D_elay:"
+msgstr "_Atzerapena:"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgctxt "dwell click delay"
+msgid "Short"
+msgstr "Laburra"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgctxt "dwell click delay"
+msgid "Long"
+msgstr "Luzea"
+
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Motion _threshold:"
 msgstr "_Mugimenduaren atalasea:"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Txikia"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Handia"
@@ -5854,37 +5952,40 @@ msgstr "Eskuineko erdia"
 msgid "Zoom Options"
 msgstr "Zoomaren aukerak"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Zoom"
-msgstr "Zooma"
-
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Magnification:"
-msgstr "Handitze-maila:"
+#| msgid "Magnification:"
+msgid "_Magnification:"
+msgstr "_Lupa:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Follow mouse cursor"
-msgstr "Jarraitu saguaren kurtsoreari"
+#| msgid "Follow mouse cursor"
+msgid "_Follow mouse cursor"
+msgstr "_Jarraitu saguaren kurtsoreari"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Screen part:"
-msgstr "Pantaila-zatia:"
+#| msgid "Screen part:"
+msgid "_Screen part:"
+msgstr "Pantaila-_zatia:"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Magnifier extends outside of screen"
-msgstr "Lupa pantailaren kanpoaldean zabaltzen da"
+#| msgid "Magnifier extends outside of screen"
+msgid "Magnifier _extends outside of screen"
+msgstr "Lupa pantailaren kanpoaldean _zabaltzen da"
 
 #: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Keep magnifier cursor centered"
-msgstr "Mantendu luparen kurtsorea zentratuta"
+#| msgid "Keep magnifier cursor centered"
+msgid "_Keep magnifier cursor centered"
+msgstr "_Mantendu luparen kurtsorea zentratuta"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Magnifier cursor pushes contents around"
-msgstr "Luparen kurtsorea edukia inguruan bultzatzen du"
+#| msgid "Magnifier cursor pushes contents around"
+msgid "Magnifier cursor _pushes contents around"
+msgstr "Luparen kurtsorea edukia inguruan _bultzatzen du"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnifier cursor moves with contents"
-msgstr "Luparen kurtsorea edukiarekin mugitzen da"
+#| msgid "Magnifier cursor moves with contents"
+msgid "Magnifier cursor moves with _contents"
+msgstr "Luparen kurtsorea edukiarekin _mugitzen da"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
@@ -5895,8 +5996,9 @@ msgid "Magnifier"
 msgstr "Lupa"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Thickness:"
-msgstr "Lodiera:"
+#| msgid "Thickness:"
+msgid "_Thickness:"
+msgstr "L_odiera:"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgctxt "universal access, thickness"
@@ -5909,43 +6011,50 @@ msgid "Thick"
 msgstr "Lodia"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Length:"
-msgstr "Luzera:"
+#| msgid "Length:"
+msgid "_Length:"
+msgstr "L_uzera:"
 
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Color:"
-msgstr "Kolorea:"
+#| msgid "Color:"
+msgid "Co_lor:"
+msgstr "_Kolorea:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Crosshairs:"
-msgstr "Gurutzaguneak:"
+#| msgid "Crosshairs:"
+msgid "_Crosshairs:"
+msgstr "_Gurutzaguneak:"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Overlaps mouse cursor"
-msgstr "Saguaren kurtsorea teilakatzen du"
+#| msgid "Overlaps mouse cursor"
+msgid "_Overlaps mouse cursor"
+msgstr "Saguaren kurtsorea _teilakatzen du"
 
 #: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Gurutzaguneak"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-msgid "White on black:"
-msgstr "Zuria beltzaren gainean:"
+#| msgid "White on black:"
+msgid "_White on black:"
+msgstr "_Zuria beltzaren gainean:"
 
 #: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Brightness:"
-msgstr "Distira:"
+#| msgid "Brightness:"
+msgid "_Brightness:"
+msgstr "_Distira:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Contrast:"
-msgstr "Kontrastea:"
+#| msgid "Contrast:"
+msgid "_Contrast:"
+msgstr "_Kontrastea:"
 
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
-msgid "Color"
-msgstr "Kolorea"
+msgid "Co_lor"
+msgstr "_Kolorea"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
@@ -6009,14 +6118,14 @@ msgid "Account _Type"
 msgstr "Kontu _mota"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Allow user to set a password when they next login"
-msgstr "Baimendu erabiltzaileari hurrengo saio-hasieran pasahitza ezartzea"
+#| msgid "Allow user to set a password when they next login"
+msgid "Allow user to set a password when they next _login"
+msgstr "Baimendu erabiltzaileei _hurrengo saio-hasieran pasahitza ezartzea"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Set a password now"
-msgstr "Ezarri pasahitza orain"
+#| msgid "Set a password now"
+msgid "Set a password _now"
+msgstr "Ezarri pasahitza _orain"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Verify"
@@ -6173,6 +6282,14 @@ msgstr "Pasahitz _berria"
 msgid "Current _Password"
 msgstr "Uneko _pasahitza"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Baimendu erabiltzaileari hurrengo saio-hasieran pasahitza ezartzea"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Set a password now"
+msgstr "Ezarri pasahitza orain"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
 msgstr "Gehitu erabiltzailearen kontua"
@@ -6196,10 +6313,6 @@ msgstr "_Hatz-markarekin saioa-hastea"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "Erabiltzailearen ikonoa"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "_Language"
-msgstr "_Hizkuntza"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Last Login"
@@ -6535,11 +6648,11 @@ msgstr "Hatzaren hautapena"
 msgid "Enrolling fingerprints"
 msgstr "Hatz-markak erregistratzen"
 
-#: ../panels/user-accounts/um-history-dialog.c:68
+#: ../panels/user-accounts/um-history-dialog.c:70
 msgid "This Week"
 msgstr "Aste honetan"
 
-#: ../panels/user-accounts/um-history-dialog.c:71
+#: ../panels/user-accounts/um-history-dialog.c:73
 msgid "Last Week"
 msgstr "Aurreko astea"
 
@@ -6547,22 +6660,22 @@ msgstr "Aurreko astea"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:77
-#: ../panels/user-accounts/um-history-dialog.c:81
+#: ../panels/user-accounts/um-history-dialog.c:79
+#: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%b %e"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:86
+#: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%b %e, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: ../panels/user-accounts/um-history-dialog.c:91
+#: ../panels/user-accounts/um-history-dialog.c:93
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
@@ -6570,26 +6683,26 @@ msgstr "%s - %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-history-dialog.c:177
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-history-dialog.c:180
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:247
+#: ../panels/user-accounts/um-history-dialog.c:249
 msgid "Session Ended"
 msgstr "Saioa amaituta"
 
-#: ../panels/user-accounts/um-history-dialog.c:253
+#: ../panels/user-accounts/um-history-dialog.c:255
 msgid "Session Started"
 msgstr "Saioa hasita"
 
@@ -6654,30 +6767,30 @@ msgstr "Baliogabeko pasahitza, saiatu berriro"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Ezin izan da %s domeinuarekin konektatu: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Beste kontuak"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Huts egin du erabiltzailea ezabatzean"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Huts egin du urrunetik kudeatzeko erabiltzailea errebokatzean"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Ezin duzu zeure kontua ezabatu."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s oraindik saioan sartuta dago"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6685,12 +6798,12 @@ msgstr ""
 "Erabiltzailea ezabatzen bada saioan sartuta dagoen bitartean, sistema egoera "
 "inkoherentean utz daiteke."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "%s(r)en fitxategiak mantentzea nahi dituzu?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6698,52 +6811,52 @@ msgstr ""
 "Karpeta nagusia, postaren ilara eta aldi baterako fitxategiak gordetzeko "
 "aukera dago erabiltzaile baten kontua ezabatzean."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Ezabatu fitxategiak"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Mantendu fitxategiak"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr ""
 "Ziur zaude urrunetik kudeatutako '%s'(r)en kontua errebokatzea nahi duzula?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "E_zabatu"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Kontua desgaituta"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Hurrengo saioan ezartzeko"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Saioan sartuta"
 
-#: ../panels/user-accounts/um-user-panel.c:1275
+#: ../panels/user-accounts/um-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "Huts egin du kontuaren zerbitzuarekin kontaktatzean"
 
-#: ../panels/user-accounts/um-user-panel.c:1277
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Ziurtatu zaitez kontuen zerbitzua instalatuta eta gaituta dagoela."
 
-#: ../panels/user-accounts/um-user-panel.c:1318
+#: ../panels/user-accounts/um-user-panel.c:1315
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6751,12 +6864,12 @@ msgstr ""
 "Aldaketak egiteko\n"
 "aurrenik egin klik * ikonoan"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
+#: ../panels/user-accounts/um-user-panel.c:1353
 msgid "Create a user account"
 msgstr "Sortu erabiltzailearen kontua"
 
-#: ../panels/user-accounts/um-user-panel.c:1367
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6764,12 +6877,12 @@ msgstr ""
 "Erabiltzailearen kontu bat sortzeko\n"
 "aurrenik egin klik * ikonoan"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Delete the selected user account"
 msgstr "Ezabatu hautatutako erabiltzailearen kontua"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1684
+#: ../panels/user-accounts/um-user-panel.c:1386
+#: ../panels/user-accounts/um-user-panel.c:1681
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6777,7 +6890,7 @@ msgstr ""
 "Hautatutako erabiltzailearen kontua ezabatzeko\n"
 "aurrenik egin klik * ikonoan"
 
-#: ../panels/user-accounts/um-user-panel.c:1593
+#: ../panels/user-accounts/um-user-panel.c:1590
 msgid "My Account"
 msgstr "Nire kontua"
 
@@ -6806,16 +6919,6 @@ msgstr ""
 #: ../panels/user-accounts/um-utils.c:577
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "Zure karpeta nagusia izendatzeko erabiliko da, eta ezin da aldatu."
-
-#. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:823
-msgid "%b %e"
-msgstr "%b %e"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:827
-msgid "%b %e, %Y"
-msgstr "%b %e, %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6954,6 +7057,10 @@ msgstr "Mapatu monitorera..."
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
 msgstr "Mapatu botoiak.."
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Calibrate…"
+msgstr "Kalibratu…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
@@ -7176,30 +7283,30 @@ msgstr "[PANELA] [ARGUMENTUA…]"
 msgid "Available panels:"
 msgstr "Panel erabilgarriak:"
 
-#: ../shell/cc-application.c:251
+#: ../shell/cc-application.c:252
 msgid "Help"
 msgstr "Laguntza"
 
-#: ../shell/cc-application.c:252
+#: ../shell/cc-application.c:253
 msgid "Quit"
 msgstr "Irten"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
 msgid "All Settings"
 msgstr "Ezarpen guztiak"
 
 #. Add categories
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Pertsonala"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardwarea"
 
-#: ../shell/cc-window.c:882
+#: ../shell/cc-window.c:883
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
@@ -7207,6 +7314,167 @@ msgstr "Sistema"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Hobespenak;Ezarpenak;"
+
+#: ../shell/help-overlay.ui.h:1
+#| msgid "General"
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Orokorra"
+
+#: ../shell/help-overlay.ui.h:2
+#| msgid "Quit"
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Irten"
+
+#: ../shell/help-overlay.ui.h:3
+#| msgid "Search"
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Bilatu"
+
+#: ../shell/help-overlay.ui.h:4
+msgctxt "shortcut window"
+msgid "Panels"
+msgstr "Panelak"
+
+#: ../shell/help-overlay.ui.h:5
+#| msgid "Show the overview"
+msgctxt "shortcut window"
+msgid "Go back to the overview"
+msgstr "Itzuli ikuspegi orokorrera"
+
+#: ../shell/help-overlay.ui.h:6
+#| msgctxt "print job"
+#| msgid "Canceled"
+msgctxt "shortcut window"
+msgid "Cancel search"
+msgstr "Utzi bilaketa"
+
+#~ msgid "Done"
+#~ msgstr "Eginda"
+
+#~ msgid "Time _Zone"
+#~ msgstr "Ordu-_zona"
+
+#~ msgid "_Delay:"
+#~ msgstr "_Atzerapena:"
+
+#~ msgid "_Speed:"
+#~ msgstr "Abia_dura:"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Short"
+#~ msgstr "Laburra"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Slow"
+#~ msgstr "Motela"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Long"
+#~ msgstr "Luzea"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Fast"
+#~ msgstr "Azkarra"
+
+#~ msgid "S_peed:"
+#~ msgstr "Abia_dura:"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Lasterbideak"
+
+#~ msgid "Test Your Settings"
+#~ msgstr "Probatu zure ezarpenak"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Slow"
+#~ msgstr "Motela"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Fast"
+#~ msgstr "Azkarra"
+
+#~ msgctxt "mouse, left button as primary"
+#~ msgid "_Left"
+#~ msgstr "E_zkerreko botoia"
+
+#~ msgctxt "mouse, right button as primary"
+#~ msgid "_Right"
+#~ msgstr "E_skuineko botoia"
+
+#~ msgid "_Pointer speed"
+#~ msgstr "Erakuslearen _abiadura"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Motela"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Azkarra"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Motela"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Azkarra"
+
+#~ msgid "Two _finger scroll"
+#~ msgstr "Bi _hatzeko korritzea"
+
+#~ msgid "No printers available"
+#~ msgstr "Ez dago inprimagailurik eskuragarri"
+
+#~ msgid "Active Jobs"
+#~ msgstr "Lan aktiboak"
+
+#~ msgid "Close"
+#~ msgstr "Itxi"
+
+#~ msgid "Resume Printing"
+#~ msgstr "Jarraitu inprimatzen"
+
+#~ msgid "Pause Printing"
+#~ msgstr "Pausarazi inprimatzea"
+
+#~ msgid "Cancel Print Job"
+#~ msgstr "Utzi inprimaketaren lana"
+
+#~ msgctxt "print job"
+#~ msgid "Held"
+#~ msgstr "Atxikituta"
+
+#~ msgid "Job Title"
+#~ msgstr "Lanaren titulua"
+
+#~ msgid "Job State"
+#~ msgstr "Lanaren egoera"
+
+#~ msgid "Time"
+#~ msgstr "Ordua"
+
+#~ msgid "Add New Printer"
+#~ msgstr "Gehitu inprimagailu berria"
+
+#~ msgid "Used to determine your geographical location"
+#~ msgstr "Zure kokaleku geografikoa zehazteko erabiltzen da"
+
+#~ msgid "Options"
+#~ msgstr "Aukerak"
+
+#~ msgid "Password:"
+#~ msgstr "Pasahitza:"
+
+#~ msgid "Zoom"
+#~ msgstr "Zooma"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Color"
+#~ msgstr "Kolorea"
 
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "Bluetooth-a desgaituta dago"
@@ -7222,9 +7490,6 @@ msgstr "Hobespenak;Ezarpenak;"
 
 #~ msgid "Power Off"
 #~ msgstr "Itzali"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernatu"
 
 #~ msgid "Power off"
 #~ msgstr "Itzali"
@@ -7387,9 +7652,6 @@ msgstr "Hobespenak;Ezarpenak;"
 
 #~ msgid "Don't use the display"
 #~ msgstr "Ez erabili pantaila"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Freskatu emaria"
 
 #~ msgid "Install Updates"
 #~ msgstr "Instalatu eguneraketak"
@@ -7903,9 +8165,6 @@ msgstr "Hobespenak;Ezarpenak;"
 #~ msgid "Select a language"
 #~ msgstr "Hautatu hizkuntza"
 
-#~ msgid "_Select"
-#~ msgstr "_Hautatu"
-
 #~ msgid "Date and Time preferences panel"
 #~ msgstr "Data eta orduaren hobespenen panela"
 
@@ -8242,15 +8501,8 @@ msgstr "Hobespenak;Ezarpenak;"
 #~ msgid "Charging - fully charged"
 #~ msgstr "Kargatzen - erabat kargatuta"
 
-#~ msgid "Don't suspend"
-#~ msgstr "Ez eseki"
-
 #~ msgid "Suspend when inactive for"
 #~ msgstr "Eseki inaktibo dagoenean "
-
-#~ msgctxt "printer state"
-#~ msgid "Paused"
-#~ msgstr "Pausarazita"
 
 #~ msgid "_Show"
 #~ msgstr "_Erakutsi"
@@ -8373,9 +8625,6 @@ msgstr "Hobespenak;Ezarpenak;"
 #~ msgid "A_cceleration:"
 #~ msgstr "_Azelerazioa:"
 
-#~ msgid "Double-Click Timeout"
-#~ msgstr "Klik bikoitzaren denbora-muga"
-
 #~ msgid "Drag Threshold"
 #~ msgstr "Arrastatzearen atalasea"
 
@@ -8384,9 +8633,6 @@ msgstr "Hobespenak;Ezarpenak;"
 
 #~ msgid "Enable _mouse clicks with touchpad"
 #~ msgstr "Gaitu saguaren klik egitea _'touchpad'-arekin"
-
-#~ msgid "Scrolling"
-#~ msgstr "Korritzea"
 
 #~ msgid "Sh_ow position of pointer when the Control key is pressed"
 #~ msgstr "_Erakutsi erakuslearen posizioa Kontrol tekla sakatzean"
@@ -8845,9 +9091,6 @@ msgstr "Hobespenak;Ezarpenak;"
 #~ msgid "Use default layout in new windows"
 #~ msgstr "Erabili diseinu lehenetsia leiho berrietan"
 
-#~ msgid "Speed"
-#~ msgstr "Abiadura"
-
 #~ msgid "Battery discharging"
 #~ msgstr "Bateria deskargatzen"
 
@@ -8871,9 +9114,6 @@ msgstr "Hobespenak;Ezarpenak;"
 
 #~ msgid "Shutdown"
 #~ msgstr "Itzali"
-
-#~ msgid "When the power button is pressed:"
-#~ msgstr "Itzaltzeko botoia sakatzean:"
 
 #~ msgid "When the sleep button is pressed:"
 #~ msgstr "Lo egiteko botoia sakatzean:"
