@@ -2487,6 +2487,7 @@ show_setup_dialog (CcDisplayPanel *panel)
       if (g_hash_table_size (output_ids) > 1)
         {
           gint new_width, new_height;
+          gboolean primary_chosen = FALSE;
 
           gnome_rr_output_info_get_geometry (priv->current_output, NULL, NULL,
                                              &new_width, &new_height);
@@ -2544,8 +2545,15 @@ show_setup_dialog (CcDisplayPanel *panel)
                   /* ensure no other outputs are primary if this output is now
                    * primary, or find another output to set as primary if this
                    * output is no longer primary */
-
-                  gnome_rr_output_info_set_primary (outputs[i], !primary);
+                  if (primary)
+                    {
+                      gnome_rr_output_info_set_primary (outputs[i], FALSE);
+                    }
+                  else if (!primary_chosen && gnome_rr_output_info_is_primary_tile (outputs[i]))
+                    {
+                      gnome_rr_output_info_set_primary (outputs[i], TRUE);
+                      primary_chosen = TRUE;
+                    }
                 }
             }
 
