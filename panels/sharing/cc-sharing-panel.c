@@ -788,25 +788,23 @@ copy_uri_to_clipboard (GtkMenuItem *item,
 }
 
 static void
-cc_sharing_panel_setup_label (GtkLabel    *label,
-                              const gchar *hostname)
+cc_sharing_panel_setup_label (CcSharingPanel *self,
+                              GtkWidget      *label,
+                              const gchar    *hostname)
 {
+  CcSharingPanelPrivate *priv = self->priv;
   gchar *text;
-  const gchar *format;
 
-  format = g_object_get_data (G_OBJECT (label), "format-label");
-  if (!format)
-    {
-      format = gtk_label_get_label (label);
+  if (label == WID ("personal-file-sharing-label"))
+    text = g_strdup_printf (_("Personal File Sharing allows you to share your Public folder with others on your current network using: <a href=\"dav://%s\">dav://%s</a>"), hostname, hostname);
+  else if (label == WID ("remote-login-label"))
+    text = g_strdup_printf (_("Allow remote users to connect using the Secure Shell command:\n<a href=\"ssh %s\">ssh %s</a>"), hostname, hostname);
+  else if (label == WID ("screen-sharing-label"))
+    text = g_strdup_printf (_("Allow remote users to view or control your screen by connecting to: <a href=\"vnc://%s\">vnc://%s</a>"), hostname, hostname);
+  else
+    g_assert_not_reached ();
 
-      /* save the original format string so that it can be used again later */
-      g_object_set_data_full (G_OBJECT (label), "format-label",
-                              g_strdup (format), g_free);
-    }
-
-  text = g_strdup_printf (format, hostname, hostname);
-
-  gtk_label_set_label (label, text);
+  gtk_label_set_label (GTK_LABEL (label), text);
 
   g_free (text);
 }
@@ -839,7 +837,7 @@ cc_sharing_panel_get_host_name_fqdn_done (GDBusConnection *connection,
 
           hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->priv->hostname_entry));
 
-          cc_sharing_panel_setup_label (GTK_LABEL (data->label), hostname);
+          cc_sharing_panel_setup_label (data->panel, data->label, hostname);
 
           g_free (hostname);
         }
@@ -851,7 +849,7 @@ cc_sharing_panel_get_host_name_fqdn_done (GDBusConnection *connection,
 
   g_variant_get (variant, "(&s)", &fqdn);
 
-  cc_sharing_panel_setup_label (GTK_LABEL (data->label), fqdn);
+  cc_sharing_panel_setup_label (data->panel, data->label, fqdn);
 
   g_variant_unref (variant);
   g_object_unref (connection);
@@ -878,7 +876,7 @@ cc_sharing_panel_bus_ready (GObject         *object,
 
           hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->priv->hostname_entry));
 
-          cc_sharing_panel_setup_label (GTK_LABEL (data->label), hostname);
+          cc_sharing_panel_setup_label (data->panel, data->label, hostname);
 
           g_free (hostname);
         }
