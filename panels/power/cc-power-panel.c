@@ -2030,7 +2030,7 @@ populate_power_button_model (GtkTreeModel *model)
     {
       gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
                                          NULL, -1,
-                                         0, actions[i].name,
+                                         0, _(actions[i].name),
                                          1, actions[i].value,
                                          -1);
     }
