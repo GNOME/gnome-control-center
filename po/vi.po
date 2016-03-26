@@ -1,19 +1,19 @@
 # Vietnamese Translation for GNOME Control Center.
 # Bản dịch tiếng Việt dành cho GNOME Control Center.
-# Copyright © 2015 Free Software Foundation, Inc.
+# Copyright © 2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2004,2007,2010-2013.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2009.
 # Ngô Chin <ndtrung4419@gmail.com>, 2011.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2013-2014, 2015.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2013-2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-24 19:12+0000\n"
-"PO-Revision-Date: 2015-09-25 14:19+0700\n"
+"POT-Creation-Date: 2016-03-25 20:57+0000\n"
+"PO-Revision-Date: 2016-03-26 14:30+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -24,9 +24,8 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../panels/background/background.ui.h:1
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Ảnh nền"
+msgid "_Background"
+msgstr "Ảnh _nền"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:3
@@ -35,8 +34,8 @@ msgstr "Thay đổi liên tục trong ngày"
 
 #. To translators: This is a noun, not a verb
 #: ../panels/background/background.ui.h:5
-msgid "Lock Screen"
-msgstr "Màn hình khóa"
+msgid "_Lock Screen"
+msgstr "Màn hình _khóa"
 
 #: ../panels/background/background.ui.h:6
 msgctxt "background, style"
@@ -107,9 +106,10 @@ msgstr "Bạn có thể thêm ảnh vào thư mục %s của mình và chúng s�
 
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
-#: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1561
-#: ../panels/display/cc-display-panel.c:2023
+#: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/display/cc-display-panel.c:1563
+#: ../panels/display/cc-display-panel.c:2196
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
@@ -117,27 +117,26 @@ msgstr "Bạn có thể thêm ảnh vào thư mục %s của mình và chúng s�
 #: ../panels/network/net-device-wifi.c:1269
 #: ../panels/network/net-device-wifi.c:1462
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:1940
+#: ../panels/printers/cc-printers-panel.c:2052
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:568
+#: ../panels/privacy/cc-privacy-panel.c:982
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:374
+#: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1476
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "T_hôi"
 
 #: ../panels/background/cc-background-chooser-dialog.c:581
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/um-photo-dialog.c:96
-msgid "Select"
-msgstr "Chọn"
+msgid "_Select"
+msgstr "_Chọn"
 
 #: ../panels/background/cc-background-item.c:203
 msgid "multiple sizes"
@@ -158,6 +157,10 @@ msgstr "Không có ảnh nền"
 msgid "Current background"
 msgstr "Ảnh nền hiện tại"
 
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Ảnh nền"
+
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
 msgid "Change your background image to a wallpaper or photo"
 msgstr "Thay đổi ảnh nền màn hình"
@@ -167,39 +170,39 @@ msgstr "Thay đổi ảnh nền màn hình"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Wallpaper;Ảnh;nền;Anh;nen;Screen;Màn;hình;Man;hinh;Desktop;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:259
+#: ../panels/bluetooth/cc-bluetooth-panel.c:264
 msgid "Turn Off Airplane Mode"
 msgstr "Tắt chế độ máy bay"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "No Bluetooth Found"
 msgstr "Không tìm thấy Bluetooth nào"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:325
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "Cắm khóa điện tử để dùng Bluetooth."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Bluetooth Turned Off"
 msgstr "Bluetooth bị tắt"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:326
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "Bật để kết nối các thiết bị và nhận các tập tin được truyền."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Airplane Mode is on"
 msgstr "Chế độ máy bay được bật"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:327
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
 msgid "Bluetooth is disabled when airplane mode is on."
 msgstr "Bluetooth bị tắt khi chế độ máy bay được bật."
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Hardware Airplane Mode is on"
 msgstr "Chế độ máy bay được bật"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:328
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "Tắt chế độ máy bay chuyển sang bật Bluetooth."
 
@@ -531,27 +534,22 @@ msgstr "Hồ sơ này có thể không còn chính xác"
 msgid "Display Calibration"
 msgstr "Cân chỉnh hiển thị"
 
-#: ../panels/color/color-calibrate.ui.h:2
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1476
-msgid "Cancel"
-msgstr "Thôi"
-
 #. This starts the calibration process
 #: ../panels/color/color-calibrate.ui.h:4
-msgid "Start"
-msgstr "Bắt đầu"
+msgid "_Start"
+msgstr "_Bắt đầu"
 
 #. This resumes the calibration process
 #: ../panels/color/color-calibrate.ui.h:6
-msgid "Resume"
-msgstr "Thực hiện tiếp"
+msgid "_Resume"
+msgstr "_Tiếp tục lại"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-msgid "Done"
-msgstr "Xong"
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:2
+msgid "_Done"
+msgstr "_Xong"
 
 #. Timeout parameters
 #. 15000 = 15 sec
@@ -691,18 +689,22 @@ msgid "Summary"
 msgstr "Tóm tắt"
 
 #: ../panels/color/color.ui.h:28
-msgid "Import File…"
-msgstr "Nhập tập tin…"
+msgid "Add profile"
+msgstr "Thêm hồ sơ"
 
-#: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:512
+#: ../panels/color/color.ui.h:29
+msgid "_Import File…"
+msgstr "Nhậ_p tập tin…"
+
+#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/network/connection-editor/net-connection-editor.c:518
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1477
 msgid "_Add"
 msgstr "_Thêm"
 
-#: ../panels/color/color.ui.h:31
+#: ../panels/color/color.ui.h:32
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -710,141 +712,141 @@ msgstr ""
 "Đã phát hiện thấy có trục trặc. Hồ sơ có thể hoạt động không chính xác. <a "
 "href=\"\">Hiện chi tiết.</a>"
 
-#: ../panels/color/color.ui.h:32
+#: ../panels/color/color.ui.h:33
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Mỗi thiết bị cần một bộ hồ sơ màu cập nhật để có thể được quản lý màu chính "
 "xác."
 
-#: ../panels/color/color.ui.h:33
+#: ../panels/color/color.ui.h:34
 msgid "Learn more"
 msgstr "Tìm hiểu thêm"
 
-#: ../panels/color/color.ui.h:34
+#: ../panels/color/color.ui.h:35
 msgid "Learn more about color management"
 msgstr "Tìm hiểu thêm về quản lý màu sắc"
 
-#: ../panels/color/color.ui.h:35
-msgid "Set for all users"
-msgstr "Đặt cho tất cả mọi người dùng"
-
 #: ../panels/color/color.ui.h:36
+msgid "_Set for all users"
+msgstr "Đặ_t cho tất cả mọi người dùng"
+
+#: ../panels/color/color.ui.h:37
 msgid "Set this profile for all users on this computer"
 msgstr "Đặt hồ sơ này cho tất cả người dùng trên máy"
 
-#: ../panels/color/color.ui.h:37
-msgid "Enable"
-msgstr "Bật"
-
 #: ../panels/color/color.ui.h:38
-msgid "Add profile"
-msgstr "Thêm hồ sơ"
+msgid "_Enable"
+msgstr "_Bật"
 
-#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "Calibrate…"
-msgstr "Cân chỉnh…"
+#: ../panels/color/color.ui.h:39
+msgid "_Add profile"
+msgstr "Thê_m hồ sơ"
 
 #: ../panels/color/color.ui.h:40
+msgid "_Calibrate…"
+msgstr "_Cân chỉnh…"
+
+#: ../panels/color/color.ui.h:41
 msgid "Calibrate the device"
 msgstr "Cân chỉnh thiết bị này"
 
-#: ../panels/color/color.ui.h:41
-msgid "Remove profile"
-msgstr "Xóa hồ sơ"
-
 #: ../panels/color/color.ui.h:42
-msgid "View details"
-msgstr "Hiện chi tiết"
+msgid "_Remove profile"
+msgstr "_Xóa hồ sơ"
 
 #: ../panels/color/color.ui.h:43
+msgid "_View details"
+msgstr "_Hiện chi tiết"
+
+#: ../panels/color/color.ui.h:44
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Không dò tìm thấy bất kỳ thiết bị nào có thể quản lý màu sắc"
 
-#: ../panels/color/color.ui.h:44
+#: ../panels/color/color.ui.h:45
 msgid "LCD"
 msgstr "LCD"
 
-#: ../panels/color/color.ui.h:45
+#: ../panels/color/color.ui.h:46
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:46
+#: ../panels/color/color.ui.h:47
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:47
+#: ../panels/color/color.ui.h:48
 msgid "Projector"
 msgstr "Máy chiếu"
 
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:49
 msgid "Plasma"
 msgstr "Plasma"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:50
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (đèn nền CCFL)"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:51
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (đèn nền LED RGB)"
 
-#: ../panels/color/color.ui.h:51
+#: ../panels/color/color.ui.h:52
 msgid "LCD (white LED backlight)"
 msgstr "LCD (đèn nền LED trắng)"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:53
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD gam màu rộng (đèn nền CCFL)"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:54
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD gam màu rộng (đèn nền LED RGB)"
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:55
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Cao"
 
-#: ../panels/color/color.ui.h:55
+#: ../panels/color/color.ui.h:56
 msgid "40 minutes"
 msgstr "40 phút"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Trung bình"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
+#: ../panels/color/color.ui.h:58 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 phút"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:59
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Thấp"
 
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
+#: ../panels/color/color.ui.h:60 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 phút"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:61
 msgid "Native to display"
 msgstr "Dùng màu tự nhiên"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:62
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (In ấn và xuất bản)"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:63
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:63
-msgid "D65 (Photography and graphics)"
-msgstr "D65 (Ảnh và đồ họa)"
-
 #: ../panels/color/color.ui.h:64
+msgid "D65 (Photography and graphics)"
+msgstr "D65 (Nhiếp ảnh và đồ họa)"
+
+#: ../panels/color/color.ui.h:65
 msgid "D75"
 msgstr "D75"
 
@@ -856,7 +858,8 @@ msgstr "Màu sắc"
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
 msgstr ""
-"Cân chỉnh màu sắc của thiết bị của bạn, như là bộ hiển thị, camera hay máy in"
+"Cân chỉnh màu sắc của thiết bị của bạn, như là bộ hiển thị, máy ảnh hay máy "
+"in"
 
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
@@ -871,7 +874,7 @@ msgstr "Khác…"
 
 #: ../panels/common/cc-language-chooser.c:124
 #: ../panels/region/cc-format-chooser.c:271
-#: ../panels/region/cc-input-chooser.c:168
+#: ../panels/region/cc-input-chooser.c:169
 msgid "More…"
 msgstr "Còn nữa…"
 
@@ -879,14 +882,29 @@ msgstr "Còn nữa…"
 msgid "No languages found"
 msgstr "Không tìm thấy ngôn ngữ"
 
-#: ../panels/common/language-chooser.ui.h:1 ../panels/region/region.ui.h:1
+#: ../panels/common/cc-util.c:125
+#: ../panels/network/connection-editor/ce-page-details.c:102
+msgid "Today"
+msgstr "Hôm nay"
+
+#: ../panels/common/cc-util.c:129
+#: ../panels/network/connection-editor/ce-page-details.c:104
+msgid "Yesterday"
+msgstr "Hôm qua"
+
+#. Translators: This is a date format string in the style of "Feb 24".
+#: ../panels/common/cc-util.c:136
+msgid "%b %e"
+msgstr "%e %b"
+
+#. Translators: This is a date format string in the style of "Feb 24, 2013".
+#: ../panels/common/cc-util.c:141
+msgid "%b %e, %Y"
+msgstr "%e %b, %Y"
+
+#: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
 msgstr "Ngôn ngữ"
-
-#: ../panels/common/language-chooser.ui.h:2
-#: ../panels/region/format-chooser.ui.h:2
-msgid "_Done"
-msgstr "_Xong"
 
 #: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
 #: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
@@ -1032,7 +1050,7 @@ msgstr "Ngà_y & Giờ tự động"
 
 #: ../panels/datetime/datetime.ui.h:21
 msgid "Requires internet access"
-msgstr "Cần có kết nối mạng internet"
+msgstr "Cần nối mạng internet"
 
 #: ../panels/datetime/datetime.ui.h:22
 msgid "Automatic Time _Zone"
@@ -1043,7 +1061,7 @@ msgid "Date & _Time"
 msgstr "Ngày & _Giờ"
 
 #: ../panels/datetime/datetime.ui.h:24
-msgid "Time _Zone"
+msgid "Time Z_one"
 msgstr "_Múi giờ"
 
 #: ../panels/datetime/datetime.ui.h:25
@@ -1077,120 +1095,139 @@ msgstr "Thay đổi thời gian và ngày tháng"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Bạn cần xác thực để có thể sửa đổi thời gian hoặc ngày tháng."
 
-#: ../panels/display/cc-display-panel.c:573
+#: ../panels/display/cc-display-panel.c:575
 msgid "Lid Closed"
 msgstr "Nắp đã đóng"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:576
+#: ../panels/display/cc-display-panel.c:578
 msgid "Mirrored"
 msgstr "Hiển thị giống nhau"
 
-#: ../panels/display/cc-display-panel.c:578
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:2390
 msgid "Primary"
 msgstr "Chính"
 
-#: ../panels/display/cc-display-panel.c:580
+#: ../panels/display/cc-display-panel.c:582
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/power/cc-power-panel.c:1927 ../panels/power/cc-power-panel.c:1938
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
 msgstr "Tắt"
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:585
 msgid "Secondary"
 msgstr "Phụ"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1558
+#: ../panels/display/cc-display-panel.c:1560
 msgid "Arrange Combined Displays"
 msgstr "Sắp xếp màn hình hiển thị tổ hợp"
 
-#: ../panels/display/cc-display-panel.c:1562
-#: ../panels/display/cc-display-panel.c:2024
+#: ../panels/display/cc-display-panel.c:1564
+#: ../panels/display/cc-display-panel.c:2197
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "Á_p dụng"
 
-#: ../panels/display/cc-display-panel.c:1586
+#: ../panels/display/cc-display-panel.c:1588
 msgid "Drag displays to rearrange them"
-msgstr "Kéo các phần hiển thị để sắp xếp chúng"
+msgstr "Kéo các bộ hiển thị để sắp xếp chúng"
 
-#: ../panels/display/cc-display-panel.c:2073
+#. translators: example string is "60 Hz (NTSC)"
+#. * NTSC is https://en.wikipedia.org/wiki/NTSC
+#: ../panels/display/cc-display-panel.c:1794
+#, c-format
+msgid "%d Hz (NTSC)"
+msgstr "%d Hz (NTSC)"
+
+#. translators: example string is "60 Hz"
+#: ../panels/display/cc-display-panel.c:1800
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../panels/display/cc-display-panel.c:2246
 msgid "Rotate counterclockwise by 90°"
 msgstr "Quay ngược chiều kim đồng hồ 90°"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2264
 msgid "Rotate by 180°"
 msgstr "Quay 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2282
 msgid "Rotate clockwise by 90°"
 msgstr "Quay xuôi chiều kim đồng hồ 90°"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2303
 msgid "Size"
 msgstr "Cỡ"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2316
 msgid "Aspect Ratio"
-msgstr "Tỷ lệ bề ngoài"
+msgstr "Tỷ lệ màn hình"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2338
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Độ phân giải"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2360
+msgid "Refresh Rate"
+msgstr "Tốc độ làm tươi"
+
+#: ../panels/display/cc-display-panel.c:2391
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Hiển thị thanh đỉnh và “Tổng quan Tích cực” trên màn hình hiển thị này"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2397
 msgid "Secondary Display"
 msgstr "Màn hình hiển thị thứ hai"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2398
 msgid "Join this display with another to create an extra workspace"
 msgstr "Nối hai màn hình để tạo không gian làm việc rộng hơn"
 
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2405
 msgid "Presentation"
 msgstr "Trình diễn"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2406
 msgid "Show slideshows and media only"
 msgstr "Chỉ hiển thị phần trình diễn và đa phương tiện"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2411
 msgid "Mirror"
 msgstr "Giống nhau"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2412
 msgid "Show your existing view on both displays"
 msgstr "Cả hai màn hình hiện cùng nội dung"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Turn Off"
 msgstr "_Tắt"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Don't use this display"
 msgstr "Không dùng màn hình hiển thị này"
 
-#: ../panels/display/cc-display-panel.c:2525
+#: ../panels/display/cc-display-panel.c:2722
 msgid "Could not get screen information"
 msgstr "Không thể lấy thông tin về màn hình"
 
-#: ../panels/display/cc-display-panel.c:2556
+#: ../panels/display/cc-display-panel.c:2753
 msgid "_Arrange Combined Displays"
 msgstr "_Sắp xếp màn hình hiển thị tổ hợp"
 
@@ -1318,7 +1355,7 @@ msgid "Windows software"
 msgstr "Phần mềm Windows"
 
 #: ../panels/info/cc-info-panel.c:1435
-#: ../panels/keyboard/keyboard-shortcuts.c:1947
+#: ../panels/keyboard/keyboard-shortcuts.c:1949
 msgid "Section"
 msgstr "Phần"
 
@@ -1509,7 +1546,6 @@ msgid "Eject"
 msgstr "Đẩy ra"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
 msgstr "Nhập liệu"
@@ -1530,7 +1566,7 @@ msgstr "Chạy phần mềm"
 msgid "Launch help browser"
 msgstr "Chạy trình duyệt trợ giúp"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1605
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1606
 #: ../shell/gnome-control-center.desktop.in.in.h:1
 msgid "Settings"
 msgstr "Cài đặt"
@@ -1644,7 +1680,7 @@ msgstr "Bật hoặc tắt tương phản cao"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1219
+#: ../panels/keyboard/keyboard-shortcuts.c:1220
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1697,75 +1733,14 @@ msgid "C_ommand:"
 msgstr "Lện_h:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Repeat Keys"
-msgstr "Lặp phím"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Key presses _repeat when key is held down"
-msgstr "Phím nhấn được _lặp lại khi được giữ nhấn xuống"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
-msgid "_Delay:"
-msgstr "_Khoảng trễ:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-msgid "_Speed:"
-msgstr "_Tốc độ:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-msgctxt "keyboard, delay"
-msgid "Short"
-msgstr "Ngắn"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
-msgctxt "keyboard, speed"
-msgid "Slow"
-msgstr "Chậm"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-msgid "Repeat keys speed"
-msgstr "Tốc độ lặp"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-msgctxt "keyboard, delay"
-msgid "Long"
-msgstr "Chậm"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-msgctxt "keyboard, speed"
-msgid "Fast"
-msgstr "Nhanh"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
-msgid "Cursor Blinking"
-msgstr "Chớp nháy con trỏ"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-msgid "Cursor _blinks in text fields"
-msgstr "Chớp nháy con trỏ trong trường nhập _văn bản"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-msgid "S_peed:"
-msgstr "_Tốc độ:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-msgid "Cursor blink speed"
-msgstr "Tốc độ chớp con trỏ"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/region/region.ui.h:5
-msgid "Input Sources"
-msgstr "Thiết bị nhập"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "Add Shortcut"
 msgstr "Thêm phím tắt"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 msgid "Remove Shortcut"
 msgstr "Bỏ phím tắt"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1773,20 +1748,16 @@ msgstr ""
 "Để sửa đổi phím tắt, nhấn vào hàng muốn sửa rồi ấn tổ hợp phím mới hoặc nhấn "
 "Backspace để xóa phím tắt."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:24
-msgid "Shortcuts"
-msgstr "Phím tắt"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:632
-#: ../panels/keyboard/keyboard-shortcuts.c:640
+#: ../panels/keyboard/keyboard-shortcuts.c:633
+#: ../panels/keyboard/keyboard-shortcuts.c:641
 msgid "Custom Shortcuts"
 msgstr "Phím tắt tự chọn"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:857
+#: ../panels/keyboard/keyboard-shortcuts.c:858
 msgid "<Unknown Action>"
 msgstr "<Hành động lạ>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1358
+#: ../panels/keyboard/keyboard-shortcuts.c:1359
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1796,7 +1767,7 @@ msgstr ""
 "Không thể dùng \"%s\" làm phím tắt vì sẽ không thể gõ được phím này nữa.\n"
 "Xin hãy thêm một phím bổ trợ như Ctrl, Alt, Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1388
+#: ../panels/keyboard/keyboard-shortcuts.c:1389
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1805,17 +1776,17 @@ msgstr ""
 "Phím tắt \"%s\" đã dùng cho\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1393
+#: ../panels/keyboard/keyboard-shortcuts.c:1394
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Nếu bạn gán lại phím tắt là \"%s\", \"%s\" sẽ bị tắt."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1399
+#: ../panels/keyboard/keyboard-shortcuts.c:1400
 msgid "_Reassign"
 msgstr "_Gán lại"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
@@ -1824,7 +1795,7 @@ msgstr ""
 "Tổ hợp phím tắt \"%s\" đã được gán cho \"%s\". Bạn có muốn tự động đặt nó "
 "thành \"%s\"?"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1450
+#: ../panels/keyboard/keyboard-shortcuts.c:1451
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
@@ -1833,17 +1804,13 @@ msgstr ""
 "\"%s\" hiện tại được gán cho \"%s\", phím tắt này sẽ bị tắt nếu bạn di "
 "chuyển về phía trước."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1457
+#: ../panels/keyboard/keyboard-shortcuts.c:1458
 msgid "_Assign"
 msgstr "_Gán"
 
-#: ../panels/mouse/cc-mouse-panel.c:94
+#: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
 msgstr "_Kiểm tra cài đặt của bạn"
-
-#: ../panels/mouse/cc-mouse-panel.c:107
-msgid "Test Your Settings"
-msgstr "Kiểm tra các cài đặt của bạn"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1866,81 +1833,57 @@ msgid "General"
 msgstr "Chung"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgctxt "double click, speed"
-msgid "Slow"
-msgstr "Chậm"
+msgid "Primary Button"
+msgstr "Nút chính"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Double-click timeout"
-msgstr "Thời hạn bấm đúp chuột"
+msgid "Sets the order of physical buttons on mice and touchpads."
+msgstr "Đặt thứ tự của các nút vật lý trên con chuột và touchpads."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgctxt "double click, speed"
-msgid "Fast"
-msgstr "Nhanh"
+msgid "Left"
+msgstr "Trái"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "_Double-click"
-msgstr "Nhấn đú_p:"
+msgid "Right"
+msgstr "Phải"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Primary _button"
-msgstr "_Nút chính"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgctxt "mouse, left button as primary"
-msgid "_Left"
-msgstr "Nút _trái"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgctxt "mouse, right button as primary"
-msgid "_Right"
-msgstr "Nút _phải"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Mouse"
 msgstr "Chuột"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+msgid "Mouse Speed"
+msgstr "Tốc độ chuột"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Double-click timeout"
+msgstr "Thời hạn bấm đúp chuột"
+
+#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-msgid "_Pointer speed"
-msgstr "Tốc độ _con trỏ"
+msgid "Natural Scrolling"
+msgstr "Cuộn Tự nhiên"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgctxt "mouse pointer, speed"
-msgid "Slow"
-msgstr "Chậm"
+msgid "Scrolling moves the content, not the view."
+msgstr "Cuộn di chuyển nội dung, không phải bộ trình bày."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
-msgctxt "mouse pointer, speed"
-msgid "Fast"
-msgstr "Nhanh"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Touchpad"
 msgstr "Touchpad"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "Touchpad Speed"
+msgstr "Tốc độ Touchpad"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "touchpad pointer, speed"
-msgid "Slow"
-msgstr "Chậm"
+msgid "Tap to Click"
+msgstr "Chỗ để bấm chuột"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgctxt "touchpad pointer, speed"
-msgid "Fast"
-msgstr "Nhanh"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Tap to _click"
-msgstr "Bấm để _nhấn"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Two _finger scroll"
-msgstr "Cuộn _hai ngón"
-
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "_Natural scrolling"
-msgstr "Cuộn _Tự nhiên"
+msgid "Edge Scrolling"
+msgstr "Cuộn sắc"
 
 #: ../panels/mouse/gnome-mouse-test.c:130
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
@@ -1990,7 +1933,7 @@ msgstr "Ủy nhiệm mạng"
 #. * vpn connections in the device list.
 #.
 #: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
-#: ../panels/network/net-vpn.c:431
+#: ../panels/network/net-vpn.c:432
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
@@ -2083,16 +2026,6 @@ msgstr "Không"
 msgid "Never"
 msgstr "Không bao giờ"
 
-#: ../panels/network/connection-editor/ce-page-details.c:102
-#: ../panels/user-accounts/um-utils.c:815
-msgid "Today"
-msgstr "Hôm nay"
-
-#: ../panels/network/connection-editor/ce-page-details.c:104
-#: ../panels/user-accounts/um-utils.c:818
-msgid "Yesterday"
-msgstr "Hôm qua"
-
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
 #: ../panels/network/net-device-wifi.c:477
@@ -2140,7 +2073,7 @@ msgid "Excellent"
 msgstr "Tuyệt hảo"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
-#: ../panels/network/connection-editor/ce-page-vpn.c:204
+#: ../panels/network/connection-editor/ce-page-vpn.c:220
 #: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2206,7 +2139,7 @@ msgstr "Tự động (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:619
 #: ../panels/network/connection-editor/ce-page-ip6.c:621
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Manual"
 msgstr "Thủ công"
 
@@ -2230,7 +2163,7 @@ msgstr "Tiền tố"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:182
+#: ../panels/privacy/cc-privacy-panel.c:199
 msgid "Automatic"
 msgstr "Tự động"
 
@@ -2291,7 +2224,7 @@ msgstr "Tốc độ đường truyền"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:157
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:695
 msgid "IPv4 Address"
 msgstr "Địa chỉ IPv4"
 
@@ -2300,7 +2233,7 @@ msgstr "Địa chỉ IPv4"
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:696
 msgid "IPv6 Address"
 msgstr "Địa chỉ IPv6"
 
@@ -2453,43 +2386,43 @@ msgstr "Dùng kết nối này _chỉ cho tài nguyên trên mạng này"
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:269
+#: ../panels/network/connection-editor/net-connection-editor.c:275
 msgid "Unable to open connection editor"
 msgstr "Không thể mở cửa sổ điều chỉnh kết nối"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:287
+#: ../panels/network/connection-editor/net-connection-editor.c:293
 msgid "New Profile"
 msgstr "Hồ sơ mới"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:577
+#: ../panels/network/connection-editor/net-connection-editor.c:583
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:578
+#: ../panels/network/connection-editor/net-connection-editor.c:584
 msgid "Bond"
 msgstr "Bond"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:580
+#: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Team"
-msgstr "Nhóm"
+msgstr "Team"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:582
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
-msgstr "Cầu"
+msgstr "Bridge"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/connection-editor/net-connection-editor.c:589
 msgid "VLAN"
 msgstr "VLAN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:734
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "Không thể tải phần mở rộng VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:803
+#: ../panels/network/connection-editor/net-connection-editor.c:809
 msgid "Import from file…"
 msgstr "Nhập từ tập tin…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:874
+#: ../panels/network/connection-editor/net-connection-editor.c:880
 msgid "Add Network Connection"
 msgstr "Thêm kết nối mạng"
 
@@ -2546,8 +2479,8 @@ msgid "Select file to import"
 msgstr "Chọn tập tin cần nhập"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
-#: ../panels/printers/cc-printers-panel.c:1941
-#: ../panels/sharing/cc-sharing-panel.c:375
+#: ../panels/printers/cc-printers-panel.c:2053
+#: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "_Mở"
@@ -2643,7 +2576,7 @@ msgstr "Bridge slave"
 #: ../panels/network/net-device-ethernet.c:110
 #: ../panels/network/net-device-wifi.c:463
 msgid "never"
-msgstr "không bao giờ"
+msgstr "chưa bao giờ"
 
 #: ../panels/network/net-device-ethernet.c:120
 #: ../panels/network/net-device-wifi.c:473
@@ -2656,8 +2589,8 @@ msgid "yesterday"
 msgstr "hôm qua"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:696
-#: ../panels/network/panel-common.c:698 ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:698
+#: ../panels/network/panel-common.c:700 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Địa chỉ IP"
 
@@ -2747,13 +2680,12 @@ msgstr ""
 "tùy biến khác."
 
 #: ../panels/network/net-device-wifi.c:1774
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "Lịch sử"
 
 #: ../panels/network/net-device-wifi.c:1778
-#: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
-#: ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/printers/options-dialog.ui.h:2
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "Đón_g"
@@ -2899,6 +2831,7 @@ msgstr "chi tiết"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -3001,6 +2934,7 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Nối vào mạng ẩn…"
 
 #: ../panels/network/network-wifi.ui.h:58
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "_History"
 msgstr "_Lịch sử"
 
@@ -3022,7 +2956,6 @@ msgstr "Kiểu an ninh"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:10
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "Password"
 msgstr "Mật khẩu"
@@ -3573,47 +3506,49 @@ msgid "_Type"
 msgstr "_Kiểu"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
-#: ../panels/privacy/cc-privacy-panel.c:155
-#: ../panels/privacy/cc-privacy-panel.c:222
-#: ../panels/universal-access/cc-ua-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:572
-#: ../panels/universal-access/cc-ua-panel.c:695
+#: ../panels/power/cc-power-panel.c:1933 ../panels/power/cc-power-panel.c:1940
+#: ../panels/privacy/cc-privacy-panel.c:172
+#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:582
+#: ../panels/universal-access/cc-ua-panel.c:595
+#: ../panels/universal-access/cc-ua-panel.c:607
+#: ../panels/universal-access/cc-ua-panel.c:778
 msgid "On"
 msgstr "Bật"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
-msgid "Notifications"
-msgstr "Thông báo"
+msgid "_Notifications"
+msgstr "_Thông báo"
 
 #. This is the setting to configure sounds associated with notifications.
 #: ../panels/notifications/edit-dialog.ui.h:4
 msgctxt "notifications"
-msgid "Sound Alerts"
-msgstr "Báo động âm thanh"
+msgid "Sound _Alerts"
+msgstr "Bá_o động âm thanh"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
 msgctxt "notifications"
-msgid "Notification Banners"
-msgstr "Băng cờ thông báo"
+msgid "Notification _Banners"
+msgstr "_Băng cờ thông báo"
 
 #. Banners here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:7
 msgctxt "notifications"
-msgid "Show Message Content in Banners"
-msgstr "Hiển thị nội dung lời nhắn ở khay"
+msgid "Show Message _Content in Banners"
+msgstr "Hiển thị nội dun_g lời nhắn ở băng cờ"
 
 #: ../panels/notifications/edit-dialog.ui.h:8
 msgctxt "notifications"
-msgid "Lock Screen Notifications"
-msgstr "Thông báo trên màn hình khóa"
+msgid "_Lock Screen Notifications"
+msgstr "Thông báo trên màn hình _khóa"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
-msgid "Show Message Content on Lock Screen"
-msgstr "Xem nội dung lời nhắn trên màn hình khóa"
+msgid "Show Message C_ontent on Lock Screen"
+msgstr "Hiển thị nội _dung lời nhắn trên màn hình khóa"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
 msgid "Notifications"
@@ -3631,43 +3566,43 @@ msgstr ""
 "Nổi;lên;Noi;len;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification Banners"
-msgstr "Thông báo ở khay"
+msgid "Notification _Banners"
+msgstr "Các _băng cờ thông báo"
 
 #: ../panels/notifications/notifications.ui.h:2
-msgid "Lock Screen Notifications"
-msgstr "Thông báo trên màn hình khóa"
+msgid "_Lock Screen Notifications"
+msgstr "Thông báo trên màn hình _khóa"
 
 #. List of applications.
 #: ../panels/notifications/notifications.ui.h:4
-#: ../panels/sound/gvc-mixer-dialog.c:1781
+#: ../panels/privacy/privacy.ui.h:45 ../panels/sound/gvc-mixer-dialog.c:1781
 msgid "Applications"
 msgstr "Ứng dụng"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:168
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Khác"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:289
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Thêm tài khoản"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:326
 msgid "Mail"
 msgstr "Thư điện tử"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:332
 msgid "Contacts"
 msgstr "Danh bạ"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:338
 msgid "Chat"
 msgstr "Tán gẫu"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:344
 msgid "Resources"
 msgstr "Tài nguyên"
 
@@ -3746,17 +3681,17 @@ msgstr ""
 "Thêm tài khoản cho phép ứng dụng của bạn truy cập tài liệu, thư từ, liên "
 "lạc, lịch hẹn, tán gẫu và nhiều nữa."
 
-#: ../panels/power/cc-power-panel.c:200
+#: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
 msgstr "Thời gian không rõ"
 
-#: ../panels/power/cc-power-panel.c:206
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i phút"
 
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:271
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3764,225 +3699,242 @@ msgstr[0] "%i giờ"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:226
+#: ../panels/power/cc-power-panel.c:279
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:227
+#: ../panels/power/cc-power-panel.c:280
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "giờ"
 
-#: ../panels/power/cc-power-panel.c:228
+#: ../panels/power/cc-power-panel.c:281
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "phút"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:247
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s đến khi sạc đầy"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:307
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Cảnh báo: còn %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:259
+#: ../panels/power/cc-power-panel.c:312
 #, c-format
 msgid "%s remaining"
 msgstr "còn %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:317 ../panels/power/cc-power-panel.c:345
 msgid "Fully charged"
 msgstr "Đã sạc đầy"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
+#: ../panels/power/cc-power-panel.c:321 ../panels/power/cc-power-panel.c:349
 msgid "Empty"
 msgstr "Rỗng"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:336
 msgid "Charging"
 msgstr "Đang sạc"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:341
 msgid "Discharging"
 msgstr "Đang xả"
 
-#: ../panels/power/cc-power-panel.c:411
+#: ../panels/power/cc-power-panel.c:464
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Chính"
 
-#: ../panels/power/cc-power-panel.c:413
+#: ../panels/power/cc-power-panel.c:466
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Phụ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:484
+#: ../panels/power/cc-power-panel.c:537
 msgid "Wireless mouse"
 msgstr "Chuột không dây"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:487
+#: ../panels/power/cc-power-panel.c:540
 msgid "Wireless keyboard"
 msgstr "Bàn phím không dây"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:543
 msgid "Uninterruptible power supply"
 msgstr "Nguồn không ngắt"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:546
 msgid "Personal digital assistant"
 msgstr "Trợ lý điện tử cá nhân"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:496
+#: ../panels/power/cc-power-panel.c:549
 msgid "Cellphone"
 msgstr "Điện thoại di động"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:499
+#: ../panels/power/cc-power-panel.c:552
 msgid "Media player"
 msgstr "Phát đa phương tiện"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:555
 msgid "Tablet"
 msgstr "Máy tính bảng"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:505
+#: ../panels/power/cc-power-panel.c:558
 msgid "Computer"
 msgstr "Máy tính"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
-#: ../panels/power/cc-power-panel.c:2109
+#: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
+#: ../panels/power/cc-power-panel.c:2252
 msgid "Battery"
 msgstr "Pin"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:562
+#: ../panels/power/cc-power-panel.c:615
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Đang sạc"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:622
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Coi chừng"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:627
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Thấp"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:632
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Tốt"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:637
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Đã sạc đầy"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:588
+#: ../panels/power/cc-power-panel.c:641
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Hết điện"
 
-#: ../panels/power/cc-power-panel.c:746
+#: ../panels/power/cc-power-panel.c:799
 msgid "Batteries"
 msgstr "Pin"
 
-#: ../panels/power/cc-power-panel.c:1171
+#: ../panels/power/cc-power-panel.c:1227
 msgid "When _idle"
 msgstr "Kh_i nghỉ"
 
-#: ../panels/power/cc-power-panel.c:1560
+#: ../panels/power/cc-power-panel.c:1640
 msgid "Power Saving"
 msgstr "Tiết kiệm năng lượng"
 
-#: ../panels/power/cc-power-panel.c:1595
+#: ../panels/power/cc-power-panel.c:1675
 msgid "_Screen brightness"
 msgstr "_Màn hình sáng tối đa"
 
-#: ../panels/power/cc-power-panel.c:1614
+#: ../panels/power/cc-power-panel.c:1694
 msgid "Automatic brightness"
 msgstr "Chỉnh độ sáng tự động"
 
-#: ../panels/power/cc-power-panel.c:1634
+#: ../panels/power/cc-power-panel.c:1714
 msgid "_Keyboard brightness"
 msgstr "Độ sáng _bàn phím"
 
-#: ../panels/power/cc-power-panel.c:1644
+#: ../panels/power/cc-power-panel.c:1724
 msgid "_Dim screen when inactive"
 msgstr "_Giảm sáng màn hình nếu máy không hoạt động"
 
-#: ../panels/power/cc-power-panel.c:1669
+#: ../panels/power/cc-power-panel.c:1749
 msgid "_Blank screen"
 msgstr "_Tắt màn hình"
 
-#: ../panels/power/cc-power-panel.c:1706
+#: ../panels/power/cc-power-panel.c:1786
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1711
+#: ../panels/power/cc-power-panel.c:1791
 msgid "Turn off Wi-Fi to save power."
 msgstr "Tắt Wi-Fi để tiết kiệm điện."
 
-#: ../panels/power/cc-power-panel.c:1736
+#: ../panels/power/cc-power-panel.c:1816
 msgid "_Mobile broadband"
 msgstr "Mạng _di động băng thông rộng"
 
-#: ../panels/power/cc-power-panel.c:1741
+#: ../panels/power/cc-power-panel.c:1821
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
 "Tắt thiết bị di động băng thông rộng (3G, 4G, LTE, v.v..) để tiết kiệm điện."
 
-#: ../panels/power/cc-power-panel.c:1793
+#: ../panels/power/cc-power-panel.c:1873
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1849
+#: ../panels/power/cc-power-panel.c:1929
 msgid "When on battery power"
 msgstr "Khi sử dụng nguồn pin"
 
-#: ../panels/power/cc-power-panel.c:1851
+#: ../panels/power/cc-power-panel.c:1931
 msgid "When plugged in"
 msgstr "Khi cắm dây nguồn"
 
-#: ../panels/power/cc-power-panel.c:1968
-msgid "Suspend & Power Off"
-msgstr "Tạm ngưng & Tắt máy"
+#: ../panels/power/cc-power-panel.c:2023
+msgid "Suspend"
+msgstr "Tạm ngưng"
 
-#: ../panels/power/cc-power-panel.c:2008
+#: ../panels/power/cc-power-panel.c:2024
+msgid "Hibernate"
+msgstr "Ngủ đông"
+
+#: ../panels/power/cc-power-panel.c:2025
+msgid "Nothing"
+msgstr "Không gì"
+
+#. Frame header
+#: ../panels/power/cc-power-panel.c:2074
+msgid "Suspend & Power Button"
+msgstr "Nút tạm ngưng & Tắt máy"
+
+#: ../panels/power/cc-power-panel.c:2115
 msgid "_Automatic suspend"
 msgstr "_Tự động tạm dừng"
 
-#: ../panels/power/cc-power-panel.c:2009
+#: ../panels/power/cc-power-panel.c:2116
 msgid "Automatic suspend"
 msgstr "Tự động tạm dừng"
 
-#: ../panels/power/cc-power-panel.c:2163
+#: ../panels/power/cc-power-panel.c:2180
+msgid "_When the Power Button is pressed"
+msgstr "_Khi nút bật tắt nguồn được ấn"
+
+#: ../panels/power/cc-power-panel.c:2306
 msgid "Devices"
 msgstr "Thiết bị"
 
@@ -4071,9 +4023,14 @@ msgstr "Đã _cắm"
 msgid "On _Battery Power"
 msgstr "Dùng nguồn _pin"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "Khoảng trễ"
+
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Thôi"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4084,158 +4041,153 @@ msgid "Authentication Required"
 msgstr "Cần xác thực"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:588
+#: ../panels/printers/cc-printers-panel.c:678
 msgid "Low on toner"
 msgstr "Sắp hết mực"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:680
 msgid "Out of toner"
 msgstr "Hết mực"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:593
+#: ../panels/printers/cc-printers-panel.c:683
 msgid "Low on developer"
 msgstr "Sắp hết thuốc hiện hình"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:686
 msgid "Out of developer"
 msgstr "Hết thuốc hiện hình"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:688
 msgid "Low on a marker supply"
 msgstr "Sắp hết một ống mực"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:690
 msgid "Out of a marker supply"
 msgstr "Một ống mực đã hết"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:692
 msgid "Open cover"
 msgstr "Mở nắp"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:694
 msgid "Open door"
 msgstr "Mở cửa"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:696
 msgid "Low on paper"
 msgstr "Sắp hết giấy"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:698
 msgid "Out of paper"
 msgstr "Hết giấy"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:700
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Ngoại tuyến"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:612
-#: ../panels/printers/cc-printers-panel.c:803
+#: ../panels/printers/cc-printers-panel.c:702
+#: ../panels/printers/cc-printers-panel.c:893
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Dừng"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:704
 msgid "Waste receptacle almost full"
 msgstr "Thùng chứa chất thải sắp đầy"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:616
+#: ../panels/printers/cc-printers-panel.c:706
 msgid "Waste receptacle full"
 msgstr "Thùng chứa chất thải đã đầy"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:618
+#: ../panels/printers/cc-printers-panel.c:708
 msgid "The optical photo conductor is near end of life"
 msgstr "Trống quang máy in sắp quá tuổi thọ"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:620
+#: ../panels/printers/cc-printers-panel.c:710
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Trống quang máy in không còn hoạt động được nữa"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:730
+#: ../panels/printers/cc-printers-panel.c:820
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Đang cấu hình"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:789
+#: ../panels/printers/cc-printers-panel.c:879
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Sẵn sàng"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:794
+#: ../panels/printers/cc-printers-panel.c:884
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Không chấp nhận lệnh in"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:799
+#: ../panels/printers/cc-printers-panel.c:889
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Đang xử lý"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:1009
 msgid "Toner Level"
 msgstr "Mức trống mực"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:1012
 msgid "Ink Level"
 msgstr "Mức mực"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:1015
 msgid "Supply Level"
 msgstr "Mức cung cấp"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:943
+#: ../panels/printers/cc-printers-panel.c:1033
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Đang cài đặt"
 
-#. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1119
-msgid "No printers available"
-msgstr "Không có máy in"
-
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1429
+#: ../panels/printers/cc-printers-panel.c:1541
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u đang hoạt động"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1770
+#: ../panels/printers/cc-printers-panel.c:1882
 msgid "Failed to add new printer."
 msgstr "Không thể thêm máy in mới."
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:2049
 msgid "Select PPD File"
 msgstr "Chọn tập tin PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:2058
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4243,30 +4195,34 @@ msgstr ""
 "Tập tin PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2253
+#: ../panels/printers/cc-printers-panel.c:2365
 msgid "No suitable driver found"
 msgstr "Không tìm thấy trình điều khiển phù hợp"
 
-#: ../panels/printers/cc-printers-panel.c:2324
+#: ../panels/printers/cc-printers-panel.c:2436
 msgid "Searching for preferred drivers…"
 msgstr "Đang tìm trình điều khiển phù hợp…"
 
-#: ../panels/printers/cc-printers-panel.c:2345
+#: ../panels/printers/cc-printers-panel.c:2457
 msgid "Select from database…"
 msgstr "Chọn từ cơ sở dữ liệu…"
 
-#: ../panels/printers/cc-printers-panel.c:2354
+#: ../panels/printers/cc-printers-panel.c:2466
 msgid "Provide PPD File…"
 msgstr "Cung cấp tập tin PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2505
-#: ../panels/printers/cc-printers-panel.c:2528
+#: ../panels/printers/cc-printers-panel.c:2617
+#: ../panels/printers/cc-printers-panel.c:2640
 msgid "Test page"
 msgstr "Trang in thử"
 
+#: ../panels/printers/cc-printers-panel.c:2753
+msgid "No printers"
+msgstr "Không có máy in"
+
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2942
+#: ../panels/printers/cc-printers-panel.c:3099
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Không thể tải giao diện: %s"
@@ -4285,27 +4241,15 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Printer;Máy;in;May;Queue;Print;In;Paper;Giấy;Giay;Ink;Mực;Muc;Toner;"
 
-#. Translators: This dialog contains list of active print jobs of the selected printer
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: ../panels/printers/jobs-dialog.ui.h:2
-msgid "Active Jobs"
-msgstr "Yêu cầu in hoạt động"
+msgid "Clear All"
+msgstr "Dọn sạch"
 
-#: ../panels/printers/jobs-dialog.ui.h:3
-#: ../panels/printers/options-dialog.ui.h:2
-msgid "Close"
-msgstr "Đóng"
-
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: ../panels/printers/jobs-dialog.ui.h:4
-msgid "Resume Printing"
-msgstr "Tiếp tục in"
-
-#: ../panels/printers/jobs-dialog.ui.h:5
-msgid "Pause Printing"
-msgstr "Tạm ngừng in"
-
-#: ../panels/printers/jobs-dialog.ui.h:6
-msgid "Cancel Print Job"
-msgstr "Hủy tác vụ in"
+msgid "No Active Printer Jobs"
+msgstr "Không có yêu cầu in nào tích cực"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
 msgid "Add a New Printer"
@@ -4333,6 +4277,11 @@ msgstr "Tùy chọn tải…"
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
 msgstr "Chọn trình điều khiển máy in"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/um-photo-dialog.c:96
+msgid "Select"
+msgstr "Chọn"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -4387,66 +4336,53 @@ msgid "Reverse portrait"
 msgstr "Dọc ngược"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:142
+#: ../panels/printers/pp-jobs-dialog.c:103
 msgctxt "print job"
 msgid "Pending"
 msgstr "Đang chờ"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:146
+#: ../panels/printers/pp-jobs-dialog.c:107
 msgctxt "print job"
-msgid "Held"
-msgstr "Đang giữ"
+msgid "Paused"
+msgstr "Tạm dừng"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:150
+#: ../panels/printers/pp-jobs-dialog.c:111
 msgctxt "print job"
 msgid "Processing"
 msgstr "Đang xử lý"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:154
+#: ../panels/printers/pp-jobs-dialog.c:115
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Dừng"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:158
+#: ../panels/printers/pp-jobs-dialog.c:119
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Thôi"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:162
+#: ../panels/printers/pp-jobs-dialog.c:123
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Bị bãi bỏ"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:166
+#: ../panels/printers/pp-jobs-dialog.c:127
 msgctxt "print job"
 msgid "Completed"
 msgstr "Hoàn tất"
 
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:288
-msgid "Job Title"
-msgstr "Tên yêu cầu"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:297
-msgid "Job State"
-msgstr "Tình trạng"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/pp-jobs-dialog.c:303
-msgid "Time"
-msgstr "Thời gian"
-
-#: ../panels/printers/pp-jobs-dialog.c:451
+#. Translators: This is the printer name for which we are showing the active jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-msgid "%s Active Jobs"
-msgstr "%s yêu cầu in hoạt động"
+msgctxt "Printer jobs dialog title"
+msgid "%s - Active Jobs"
+msgstr "%s - Yêu cầu in hoạt động"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1659
@@ -4670,13 +4606,13 @@ msgid "Print _Test Page"
 msgstr "_In thử"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
 msgid "_Options"
 msgstr "_Tùy chọn"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
-msgid "Add New Printer"
+msgid "Add a Printer"
 msgstr "Thêm máy in"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
@@ -4688,52 +4624,70 @@ msgstr ""
 "Rất tiếc! Dịch vụ in hệ thống\n"
 "hình như không sẵn sàng."
 
-#: ../panels/privacy/cc-privacy-panel.c:352 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Khóa màn hình"
 
-#: ../panels/privacy/cc-privacy-panel.c:462 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:420
+msgid "In use"
+msgstr "Đang dùng"
+
+#: ../panels/privacy/cc-privacy-panel.c:425
+msgctxt "Location services status"
+msgid "On"
+msgstr "Bật"
+
+#: ../panels/privacy/cc-privacy-panel.c:426
+msgctxt "Location services status"
+msgid "Off"
+msgstr "Tắt"
+
+#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
+msgid "Location Services"
+msgstr "Dịch vụ vị trí"
+
+#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Sử dụng & Lịch sử"
 
-#: ../panels/privacy/cc-privacy-panel.c:587
+#: ../panels/privacy/cc-privacy-panel.c:1001
 msgid "Empty all items from Trash?"
 msgstr "Bỏ mọi thứ trong thùng rác chứ?"
 
-#: ../panels/privacy/cc-privacy-panel.c:588
+#: ../panels/privacy/cc-privacy-panel.c:1002
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Toàn bộ nội dung chứa trong Thùng rác sẽ bị xóa vĩnh viễn."
 
-#: ../panels/privacy/cc-privacy-panel.c:589 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Đổ _rác"
 
-#: ../panels/privacy/cc-privacy-panel.c:612
+#: ../panels/privacy/cc-privacy-panel.c:1026
 msgid "Delete all the temporary files?"
 msgstr "Xóa tất cả các tập tin tạm?"
 
-#: ../panels/privacy/cc-privacy-panel.c:613
+#: ../panels/privacy/cc-privacy-panel.c:1027
 msgid "All the temporary files will be permanently deleted."
 msgstr "Toàn bộ các tập tin tạm sẽ bị xóa vĩnh viễn."
 
-#: ../panels/privacy/cc-privacy-panel.c:614 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Xóa tập tin tạm"
 
-#: ../panels/privacy/cc-privacy-panel.c:636 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Đổ rác & tập tin tạm"
 
-#: ../panels/privacy/cc-privacy-panel.c:676 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Cách dùng phần mềm"
 
-#: ../panels/privacy/cc-privacy-panel.c:717 ../panels/privacy/privacy.ui.h:44
+#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Báo cáo trục trặc"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:731
+#: ../panels/privacy/cc-privacy-panel.c:1145
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4742,7 +4696,7 @@ msgstr ""
 "Báo cáo trục trặc kỹ thuật cho chúng tôi để giúp chúng tôi nâng cao %s. Báo "
 "cáo gửi nặc danh và xóa sạch dữ liệu cá nhân."
 
-#: ../panels/privacy/cc-privacy-panel.c:743 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Chính sách riêng tư"
 
@@ -4891,15 +4845,19 @@ msgstr ""
 msgid "_Send software usage statistics"
 msgstr "_Gửi thống kê cách dùng phần mềm"
 
-#: ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/privacy.ui.h:43
+msgid ""
+"Location services allow applications to know your location. Using Wi-Fi and "
+"mobile broadband increases accuracy."
+msgstr ""
+"Dịch vụ vị trí cho phép ứng dùng biết bạn ở đâu. Dùng Wi-Fi và di động băng "
+"thông rộng để gia tăng độ chính xác."
+
+#: ../panels/privacy/privacy.ui.h:44
 msgid "_Location Services"
 msgstr "Dịch vụ _vị trí"
 
-#: ../panels/privacy/privacy.ui.h:43
-msgid "Used to determine your geographical location"
-msgstr "Dùng để nhận dạng vị trí địa lý của bạn"
-
-#: ../panels/privacy/privacy.ui.h:45
+#: ../panels/privacy/privacy.ui.h:47
 msgid "_Automatic Problem Reporting"
 msgstr "Báo cáo trục trặc _tự động"
 
@@ -4917,36 +4875,36 @@ msgstr "Hệ mét"
 msgid "No regions found"
 msgstr "Không tìm thấy lãnh thổ"
 
-#: ../panels/region/cc-input-chooser.c:181
+#: ../panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
 msgstr "Không tìm thấy nguồn nhập"
 
-#: ../panels/region/cc-input-chooser.c:1015
+#: ../panels/region/cc-input-chooser.c:992
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Khác"
 
-#: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1072
+#: ../panels/region/cc-region-panel.c:248
+#: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Phiên làm việc của bạn cần phải khởi động lại máy tính thì các thay đổi mới "
 "được áp dụng"
 
-#: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1076
+#: ../panels/region/cc-region-panel.c:252
+#: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "Khởi động lại ngay"
 
-#: ../panels/region/cc-region-panel.c:877
+#: ../panels/region/cc-region-panel.c:889
 msgid "No input source selected"
 msgstr "Chưa chọn nguồn nhập"
 
-#: ../panels/region/cc-region-panel.c:1797
-msgid "Login Screen"
-msgstr "Màn hình đăng nhập"
+#: ../panels/region/cc-region-panel.c:1807
+msgid "Login _Screen"
+msgstr "_Màn hình đăng nhập"
 
-#: ../panels/region/format-chooser.ui.h:1 ../panels/region/region.ui.h:3
+#: ../panels/region/format-chooser.ui.h:1
 msgid "Formats"
 msgstr "Định dạng"
 
@@ -5003,57 +4961,66 @@ msgstr "Các phương thức nhập liệu không thể dùng tại màn hình �
 msgid "Input Source Options"
 msgstr "Tùy chọn nguồn nhập"
 
-#: ../panels/region/input-options.ui.h:3
+#: ../panels/region/input-options.ui.h:2
 msgid "Use the _same source for all windows"
 msgstr "Sử dụng _cùng kiểu bố trí cho mọi cửa sổ"
 
-#: ../panels/region/input-options.ui.h:4
+#: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Cho phép nguồn _khác nhau cho mỗi cửa sổ"
 
-#: ../panels/region/input-options.ui.h:5
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
 msgid "Keyboard Shortcuts"
 msgstr "Phím tắt bàn phím"
 
-#: ../panels/region/input-options.ui.h:6
+#: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "Chuyển sang nguồn cũ"
 
-#: ../panels/region/input-options.ui.h:7
+#: ../panels/region/input-options.ui.h:6
 msgid "Super+Shift+Space"
 msgstr "Super+Shift+Phím_cách"
 
-#: ../panels/region/input-options.ui.h:8
+#: ../panels/region/input-options.ui.h:7
 msgid "Switch to next source"
 msgstr "Chuyển sang nguồn kế"
 
-#: ../panels/region/input-options.ui.h:9
+#: ../panels/region/input-options.ui.h:8
 msgid "Super+Space"
 msgstr "Super+Phím_cách"
 
-#: ../panels/region/input-options.ui.h:10
+#: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
 msgstr "Bạn có thể thay đổi những phím tắt trong cài đặt bàn phím"
 
-#: ../panels/region/input-options.ui.h:11
+#: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
 msgstr "Công tắt chuyển sang nguồn kế"
 
-#: ../panels/region/input-options.ui.h:12
+#: ../panels/region/input-options.ui.h:11
 msgid "Left+Right Alt"
 msgstr "Alt trái+phải"
+
+#: ../panels/region/region.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Ngôn ngữ"
 
 #: ../panels/region/region.ui.h:2
 msgid "English (United Kingdom)"
 msgstr "Tiếng Anh (Vương quốc Anh)"
 
+#: ../panels/region/region.ui.h:3
+msgid "_Formats"
+msgstr "Địn_h dạng"
+
 #: ../panels/region/region.ui.h:4
 msgid "United Kingdom"
 msgstr "Vương quốc Anh"
 
-#: ../panels/region/region.ui.h:6
-msgid "Options"
-msgstr "Tùy chọn"
+#: ../panels/region/region.ui.h:5
+msgid "Input Sources"
+msgstr "Thiết bị nhập"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
@@ -5145,36 +5112,63 @@ msgstr "Chuyển xuống"
 msgid "Preferences"
 msgstr "Tùy thích"
 
-#: ../panels/sharing/cc-sharing-panel.c:265
+#: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Bật"
 
-#: ../panels/sharing/cc-sharing-panel.c:267
-#: ../panels/sharing/cc-sharing-panel.c:294
+#: ../panels/sharing/cc-sharing-panel.c:265
+#: ../panels/sharing/cc-sharing-panel.c:292
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Tắt"
 
-#: ../panels/sharing/cc-sharing-panel.c:297
+#: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Bật"
 
-#: ../panels/sharing/cc-sharing-panel.c:300
+#: ../panels/sharing/cc-sharing-panel.c:298
 msgctxt "service is active"
 msgid "Active"
 msgstr "Hoạt động"
 
-#: ../panels/sharing/cc-sharing-panel.c:371
+#: ../panels/sharing/cc-sharing-panel.c:369
 msgid "Choose a Folder"
 msgstr "Chọn thư mục"
 
-#: ../panels/sharing/cc-sharing-panel.c:800
+#: ../panels/sharing/cc-sharing-panel.c:680
+#, c-format
+msgid ""
+"Personal File Sharing allows you to share your Public folder with others on "
+"your current network using: <a href=\"dav://%s\">dav://%s</a>"
+msgstr ""
+"Chia sẻ Tập tin cá nhân cho phép bạn chia sẻ thư mục Công với những máy khác "
+"trong mạng hiện tại sử dụng: <a href=\"dav://%s\">dav://%s</a>"
+
+#: ../panels/sharing/cc-sharing-panel.c:682
+#, c-format
+msgid ""
+"Allow remote users to connect using the Secure Shell command:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+msgstr ""
+"Cho phép người điều khiển từ xa kết nối dùng lệnh “Secure Shell” (ssh):\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+
+#: ../panels/sharing/cc-sharing-panel.c:684
+#, c-format
+msgid ""
+"Allow remote users to view or control your screen by connecting to: <a href="
+"\"vnc://%s\">vnc://%s</a>"
+msgstr ""
+"Cho phép người điều khiển từ xa có thể xem, điều khiển màn hình của bạn bằng "
+"cách kết nối đến: <a href=\"vnc://%s\">vnc://%s</a>"
+
+#: ../panels/sharing/cc-sharing-panel.c:796
 msgid "Copy"
 msgstr "Chép"
 
-#: ../panels/sharing/cc-sharing-panel.c:1126
+#: ../panels/sharing/cc-sharing-panel.c:1122
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Chia sẻ"
@@ -5215,92 +5209,81 @@ msgid "Networks"
 msgstr "Mạng"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Computer Name"
-msgstr "Tên máy tính"
+msgid "_Computer Name"
+msgstr "Tên má_y tính"
 
 #: ../panels/sharing/sharing.ui.h:2
-msgid "Personal File Sharing"
-msgstr "Chia sẻ tập tin cá nhân"
+msgid "_Personal File Sharing"
+msgstr "Chia sẻ tập tin _cá nhân"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "Screen Sharing"
-msgstr "Chia sẻ màn hình"
+msgid "_Screen Sharing"
+msgstr "Chia sẻ _màn hình"
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Media Sharing"
-msgstr "Chia sẻ phương tiện"
+msgid "_Media Sharing"
+msgstr "Chia sẻ đa _phương tiện"
 
 #: ../panels/sharing/sharing.ui.h:5
-msgid "Remote Login"
-msgstr "Đăng nhập từ xa"
+msgid "_Remote Login"
+msgstr "Đăng nhập từ _xa"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "Một số dịch vụ bị tắt bởi vì không truy cập được mạng."
 
-#: ../panels/sharing/sharing.ui.h:8
-#, no-c-format
-msgid ""
-"Personal File Sharing allows you to share your Public folder with others on "
-"your current network using: <a href=\"dav://%s\">dav://%s</a>"
-msgstr ""
-"Chia sẻ Tập tin cá nhân cho phép bạn chia sẻ thư mục Công với những máy khác "
-"trong mạng hiện tại sử dụng: <a href=\"dav://%s\">dav://%s</a>"
+#: ../panels/sharing/sharing.ui.h:7
+msgid "Personal File Sharing"
+msgstr "Chia sẻ tập tin cá nhân"
 
-#: ../panels/sharing/sharing.ui.h:9
-msgid "Require Password"
-msgstr "Cần mật khẩu"
+#: ../panels/sharing/sharing.ui.h:8
+msgid "_Require Password"
+msgstr "_Cần mật khẩu"
+
+#: ../panels/sharing/sharing.ui.h:10
+msgid "Remote Login"
+msgstr "Đăng nhập từ xa"
+
+#: ../panels/sharing/sharing.ui.h:11
+msgid "Screen Sharing"
+msgstr "Chia sẻ màn hình"
 
 #: ../panels/sharing/sharing.ui.h:12
-#, no-c-format
-msgid ""
-"Allow remote users to connect using the Secure Shell command:\n"
-"<a href=\"ssh %s\">ssh %s</a>"
-msgstr ""
-"Cho phép người điều khiển từ xa kết nối dùng lệnh “Secure Shell” (ssh):\n"
-"<a href=\"ssh %s\">ssh %s</a>"
+msgid "_Allow Remote Control"
+msgstr "_Cho phép điều khiển từ xa"
+
+#: ../panels/sharing/sharing.ui.h:13
+msgid "_Password:"
+msgstr "_Mật khẩu:"
+
+#: ../panels/sharing/sharing.ui.h:14
+msgid "_Show Password"
+msgstr "_Hiện mật khẩu"
 
 #: ../panels/sharing/sharing.ui.h:15
-#, no-c-format
-msgid ""
-"Allow remote users to view or control your screen by connecting to: <a href="
-"\"vnc://%s\">vnc://%s</a>"
-msgstr ""
-"Cho phép người điều khiển từ xa có thể xem, điều khiển màn hình của bạn bằng "
-"cách kết nối đến: <a href=\"vnc://%s\">vnc://%s</a>"
-
-#: ../panels/sharing/sharing.ui.h:16
-msgid "Allow Remote Control"
-msgstr "Cho phép điều khiển từ xa"
-
-#: ../panels/sharing/sharing.ui.h:17
-msgid "Password:"
-msgstr "Mật khẩu:"
-
-#: ../panels/sharing/sharing.ui.h:18
-msgid "Show Password"
-msgstr "Hiện mật khẩu"
-
-#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "Tùy chọn truy cập"
 
-#: ../panels/sharing/sharing.ui.h:20
-msgid "New connections must ask for access"
-msgstr "Kết nối mới phải được chấp nhận mới được phép"
+#: ../panels/sharing/sharing.ui.h:16
+msgid "_New connections must ask for access"
+msgstr "Kết nối mớ_i phải được chấp nhận mới được phép"
 
-#: ../panels/sharing/sharing.ui.h:21
-msgid "Require a password"
-msgstr "Cần mật khẩu"
+#: ../panels/sharing/sharing.ui.h:17
+msgid "_Require a password"
+msgstr "_Cần mật khẩu"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
+msgid "Media Sharing"
+msgstr "Chia sẻ phương tiện"
+
+#: ../panels/sharing/sharing.ui.h:19
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Chia sẻ đa phương tiện cho phép bạn chia sẻ nhạc, ảnh, phim với những người "
 "khác qua mạng."
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Folders"
 msgstr "Thư mục"
 
@@ -5564,6 +5547,7 @@ msgid "_Large Text"
 msgstr "Chữ _lớn"
 
 #: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Phóng"
 
@@ -5588,207 +5572,255 @@ msgid "Screen _Keyboard"
 msgstr "Bàn phím ả_o trên màn hình"
 
 #: ../panels/universal-access/uap.ui.h:13
+msgid "R_epeat Keys"
+msgstr "_Lặp phím"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Cursor _Blinking"
+msgstr "Chớp nhá_y con trỏ"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
 msgstr "_Hỗ trợ nhập liệu (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Pointing & Clicking"
 msgstr "Trỏ & Nhấn"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:17
 msgid "_Mouse Keys"
 msgstr "Phím ch_uột"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Click Assist"
 msgstr "_Hỗ trợ bấm"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:19
+msgid "_Double-Click Delay"
+msgstr "Độ trễ Nhấn đú_p"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Double-Click Delay"
+msgstr "Độ trễ Nhấn đúp"
+
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Screen Reader"
 msgstr "Bộ đọc màn hình"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:22
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "Bộ đọc màn hình đọc những chữ được hiển thị mỗi khi bạn di chuột vào."
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:23
 msgid "_Screen Reader"
 msgstr "Bộ đọc _màn hình"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Sound Keys"
 msgstr "Phím âm thanh"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Beep when Num Lock or Caps Lock are turned on."
 msgstr "Kêu bíp khi các phím Num Lock hay Caps Lock được bật."
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Visual Alerts"
 msgstr "Cảnh báo trực quan"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:27
 msgid "_Test flash"
 msgstr "Nháy _thử"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Hiện bộ chỉ thị trực quan khi có báo động âm thanh."
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Flash the _window title"
 msgstr "Tiêu đề cửa _sổ nháy"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Flash the entire _screen"
 msgstr "Nháy toàn _màn hình"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:31
+msgid "Repeat Keys"
+msgstr "Lặp phím"
+
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Key presses repeat when key is held down."
+msgstr "Phím nhấn được lặp lại khi được giữ nhấn xuống"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Repeat keys delay"
+msgstr "Độ trễ lặp phím"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Speed"
+msgstr "Tốc độ"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Repeat keys speed"
+msgstr "Tốc độ lặp"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Cursor Blinking"
+msgstr "Chớp nháy con trỏ"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Cursor blinks in text fields."
+msgstr "Chớp nháy con trỏ trong trường nhập văn bản."
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Cursor blinking speed"
+msgstr "Tốc độ chớp con trỏ"
+
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Typing Assist"
 msgstr "Hỗ trợ nhập liệu"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:41
 msgid "_Sticky Keys"
 msgstr "Phím _dính"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Xem chuỗi phím bổ trợ là tổ hợp phím"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:43
 msgid "_Disable if two keys are pressed together"
 msgstr "_Tắt nếu nhấn hai phím cùng lúc"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Beep when a _modifier key is pressed"
 msgstr "Kêu bíp khi nhấn một _phím bổ trợ"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:45
 msgid "S_low Keys"
 msgstr "Phím chậ_m"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Đặt độ trễ từ lúc nhấn phím đến lúc phím được chấp nhận"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "Độ t_rễ chấp nhận:"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:48
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Nhanh"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "Khoảng trễ nhập phím chậm"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:50
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Dài"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Beep when a key is pr_essed"
 msgstr "Kêu bíp khi n_hấn một phím"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is _accepted"
 msgstr "Kêu bíp khi một phím được chấ_p nhận"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Beep when a key is _rejected"
 msgstr "Kêu bíp khi một phím bị _từ chối"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:54
 msgid "_Bounce Keys"
 msgstr "Phím chống _lặp"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Ignores fast duplicate keypresses"
 msgstr "Bỏ qua phím nhấn lặp lại nhanh"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:56
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Nhanh"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Bounce keys typing delay"
 msgstr "Khoảng chờ nhập phím dội"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:58
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Lâu"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:59
 msgid "_Enable by Keyboard"
 msgstr "_Bật bằng bàn phím"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Bật các tính năng hỗ trợ bằng bàn phím"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Click Assist"
 msgstr "Hỗ trợ bấm"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:62
 msgid "_Simulated Secondary Click"
 msgstr "Cú nhấn thứ hai mô _phỏng"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Gây ra cú nhấn phụ bằng cách nhấn giữ nút chính"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:64
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Nhanh"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Secondary click delay"
 msgstr "Khoảng chờ nhấn lần hai"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:66
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Lâu"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:67
 msgid "_Hover Click"
 msgstr "Bấm _lửng"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Trigger a click when the pointer hovers"
 msgstr "Gây ra cú nhấn khi lướt con trỏ qua"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:69
 msgid "D_elay:"
 msgstr "T_rễ:"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:70
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Ngắn"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:71
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Dài"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Motion _threshold:"
 msgstr "Ngưỡng di chu_yển:"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Nhỏ"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Lớn"
@@ -5842,37 +5874,33 @@ msgstr "Nửa phải"
 msgid "Zoom Options"
 msgstr "Tùy chọn thu phóng"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Zoom"
-msgstr "Phóng"
-
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Magnification:"
-msgstr "Phóng to:"
+msgid "_Magnification:"
+msgstr "_Phóng đại:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Follow mouse cursor"
-msgstr "Theo con trỏ chuột"
+msgid "_Follow mouse cursor"
+msgstr "The_o con trỏ chuột"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Screen part:"
-msgstr "Phần màn hình:"
+msgid "_Screen part:"
+msgstr "Phần _màn hình:"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Magnifier extends outside of screen"
-msgstr "Kính lúp mở rộng ra ngoài màn hình"
+msgid "Magnifier _extends outside of screen"
+msgstr "Kính lúp mở _rộng ra ngoài màn hình"
 
 #: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Keep magnifier cursor centered"
-msgstr "Giữ con trỏ kính lúp ở trung tâm"
+msgid "_Keep magnifier cursor centered"
+msgstr "_Giữ con trỏ kính lúp ở trung tâm"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Magnifier cursor pushes contents around"
-msgstr "Con trỏ kính lúp đẩy nội dung ra"
+msgid "Magnifier cursor _pushes contents around"
+msgstr "Con trỏ kính lúp đẩ_y nội dung ra"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnifier cursor moves with contents"
-msgstr "Con trỏ kính lúp di chuyển nội dung"
+msgid "Magnifier cursor moves with _contents"
+msgstr "Con trỏ kính lúp di chuyển nội dun_g"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
@@ -5883,8 +5911,8 @@ msgid "Magnifier"
 msgstr "Kính lúp"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Thickness:"
-msgstr "Độ dày:"
+msgid "_Thickness:"
+msgstr "Độ _dày:"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgctxt "universal access, thickness"
@@ -5897,43 +5925,43 @@ msgid "Thick"
 msgstr "Dày"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Length:"
-msgstr "Chiều dài:"
+msgid "_Length:"
+msgstr "Chiề_u dài:"
 
 #. The color of the accessibility crosshair
 #: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Color:"
-msgstr "Màu sắc:"
+msgid "Co_lor:"
+msgstr "Mà_u :"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Crosshairs:"
-msgstr "Khung nhắm:"
+msgid "_Crosshairs:"
+msgstr "_Khung nhắm:"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Overlaps mouse cursor"
-msgstr "Đè con trỏ chuột"
+msgid "_Overlaps mouse cursor"
+msgstr "Đè _lên con trỏ chuột"
 
 #: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Crosshairs"
 msgstr "Khung nhắm"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-msgid "White on black:"
-msgstr "Trắng nền đen:"
+msgid "_White on black:"
+msgstr "T_rắng nền đen:"
 
 #: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Brightness:"
-msgstr "Độ sáng:"
+msgid "_Brightness:"
+msgstr "Độ _sáng:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Contrast:"
-msgstr "Độ tương phản:"
+msgid "_Contrast:"
+msgstr "Độ tương _phản:"
 
 #. The contrast scale goes from Color to None (grayscale)
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgctxt "universal access, contrast"
-msgid "Color"
-msgstr "Màu sắc"
+msgid "Co_lor"
+msgstr "Mà_u"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
 msgctxt "universal access, color"
@@ -5997,14 +6025,12 @@ msgid "Account _Type"
 msgstr "Kiểu _tài khoản"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Allow user to set a password when they next login"
-msgstr "Cho phép người dùng đặt mật khẩu khi họ đăng nhập lần kế tiếp"
+msgid "Allow user to set a password when they next _login"
+msgstr "Cho phép người dùng đặt mật khẩu khi họ đăng nhậ_p lần kế tiếp"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Set a password now"
-msgstr "Đặt mật khẩu mới ngay"
+msgid "Set a password _now"
+msgstr "Đặt mật khẩu mới _ngay"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Verify"
@@ -6161,6 +6187,14 @@ msgstr "Mật khẩu _mới"
 msgid "Current _Password"
 msgstr "_Mật khẩu hiện tại"
 
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Allow user to set a password when they next login"
+msgstr "Cho phép người dùng đặt mật khẩu khi họ đăng nhập lần kế tiếp"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Set a password now"
+msgstr "Đặt mật khẩu mới ngay"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
 msgstr "Thêm tài khoản người dùng"
@@ -6184,10 +6218,6 @@ msgstr "Đăng nhập bằng _vân tay"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "Biểu tượng người dùng"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "_Language"
-msgstr "_Ngôn ngữ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Last Login"
@@ -6518,11 +6548,11 @@ msgstr "Chọn ngón tay"
 msgid "Enrolling fingerprints"
 msgstr "Đang ghi dấu vân tay"
 
-#: ../panels/user-accounts/um-history-dialog.c:68
+#: ../panels/user-accounts/um-history-dialog.c:70
 msgid "This Week"
 msgstr "Tuần này"
 
-#: ../panels/user-accounts/um-history-dialog.c:71
+#: ../panels/user-accounts/um-history-dialog.c:73
 msgid "Last Week"
 msgstr "Tuần trước"
 
@@ -6530,22 +6560,22 @@ msgstr "Tuần trước"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:77
-#: ../panels/user-accounts/um-history-dialog.c:81
+#: ../panels/user-accounts/um-history-dialog.c:79
+#: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: ../panels/user-accounts/um-history-dialog.c:86
+#: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%e %b, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: ../panels/user-accounts/um-history-dialog.c:91
+#: ../panels/user-accounts/um-history-dialog.c:93
 #, c-format
 msgctxt "login history week label"
 msgid "%s - %s"
@@ -6553,26 +6583,26 @@ msgstr "%s - %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: ../panels/user-accounts/um-history-dialog.c:175
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-history-dialog.c:177
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: ../panels/user-accounts/um-history-dialog.c:178
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-history-dialog.c:180
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%2$s, %1$s"
 
-#: ../panels/user-accounts/um-history-dialog.c:247
+#: ../panels/user-accounts/um-history-dialog.c:249
 msgid "Session Ended"
 msgstr "Phiên đã chấm dứt"
 
-#: ../panels/user-accounts/um-history-dialog.c:253
+#: ../panels/user-accounts/um-history-dialog.c:255
 msgid "Session Started"
 msgstr "Phiên được bắt đầu"
 
@@ -6637,41 +6667,41 @@ msgstr "Mật khẩu không đúng, vui lòng thử lại"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Không thể kết nối miền %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:237
 msgid "Other Accounts"
 msgstr "Tài khoản khác"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Gặp lỗi khi xóa người dùng"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Gặp lỗi khi thu hồi quyền quản trị từ xa"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Không thể xóa tài khoản của chính bạn."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s vẫn đang đăng nhập"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "Xóa người dùng vẫn đang đăng nhập có thể gây bất ổn hệ thống."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Bạn có muốn giữ tập tin của %s không?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6679,51 +6709,51 @@ msgstr ""
 "Có thể giữ lại thư mục cá nhân, thư từ và tập tin tạm khi xóa tài khoản "
 "người dùng."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Xóa tập tin"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Giữ tập tin"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Bạn có chắc chắn muốn thu hồi tài khoản quản trị từ xa của %s không?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Xóa"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Tài khoản bị vô hiệu hóa"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Cần đặt vào lần đăng nhập tiếp theo"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Không có"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Đang đăng nhập"
 
-#: ../panels/user-accounts/um-user-panel.c:1275
+#: ../panels/user-accounts/um-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "Gặp lỗi khi liên lạc dịch vụ tài khoản (accountsservice)"
 
-#: ../panels/user-accounts/um-user-panel.c:1277
+#: ../panels/user-accounts/um-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Hãy kiểm tra xem AccountService có cài và được bật không."
 
-#: ../panels/user-accounts/um-user-panel.c:1318
+#: ../panels/user-accounts/um-user-panel.c:1315
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6731,12 +6761,12 @@ msgstr ""
 "Để thay đổi,\n"
 "nhấn biểu tượng * trước"
 
-#: ../panels/user-accounts/um-user-panel.c:1356
+#: ../panels/user-accounts/um-user-panel.c:1353
 msgid "Create a user account"
 msgstr "Tạo tài khoản người dùng mới"
 
-#: ../panels/user-accounts/um-user-panel.c:1367
-#: ../panels/user-accounts/um-user-panel.c:1679
+#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1676
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6744,12 +6774,12 @@ msgstr ""
 "Để tạo tài khoản người dùng,\n"
 "nhấn biểu tượng * trước"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Delete the selected user account"
 msgstr "Xóa tài khoản người dùng được chọn"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1684
+#: ../panels/user-accounts/um-user-panel.c:1386
+#: ../panels/user-accounts/um-user-panel.c:1681
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6757,7 +6787,7 @@ msgstr ""
 "Để xóa tài khoản người dùng được chọn,\n"
 "nhấn biểu tượng * trước"
 
-#: ../panels/user-accounts/um-user-panel.c:1593
+#: ../panels/user-accounts/um-user-panel.c:1590
 msgid "My Account"
 msgstr "Tài khoản của mình"
 
@@ -6788,16 +6818,6 @@ msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Cái này sẽ được dùng để đặt tên cho thư mục riêng của bạn và không thể thay "
 "đổi nó được."
-
-#. Translators: This is a date format string in the style of "Feb 24".
-#: ../panels/user-accounts/um-utils.c:823
-msgid "%b %e"
-msgstr "%e %b"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: ../panels/user-accounts/um-utils.c:827
-msgid "%b %e, %Y"
-msgstr "%e %b, %Y"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -6936,6 +6956,10 @@ msgstr "Ánh xạ sang màn hình…"
 msgid "Map Buttons…"
 msgstr "Ánh xạ nút…"
 
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Calibrate…"
+msgstr "Cân chỉnh…"
+
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
 msgstr "Điều chỉnh độ phân giải"
@@ -7017,22 +7041,22 @@ msgstr "Nút chuyển Chế độ sang Touchstrip Phải"
 msgid "Mode Switch #%d"
 msgstr "Công tắc chế độ #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1300
+#: ../panels/wacom/gsd-wacom-device.c:1238
 #, c-format
 msgid "Left Button #%d"
 msgstr "Nút trái #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1303
+#: ../panels/wacom/gsd-wacom-device.c:1241
 #, c-format
 msgid "Right Button #%d"
 msgstr "Nút phải #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1306
+#: ../panels/wacom/gsd-wacom-device.c:1244
 #, c-format
 msgid "Top Button #%d"
 msgstr "Nút cao #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1309
+#: ../panels/wacom/gsd-wacom-device.c:1247
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Nút thấp #%d"
@@ -7157,30 +7181,30 @@ msgstr "[BẢNG] [Đ.SỐ…]"
 msgid "Available panels:"
 msgstr "Bảng điều khiển hiện có:"
 
-#: ../shell/cc-application.c:251
+#: ../shell/cc-application.c:252
 msgid "Help"
 msgstr "Trợ giúp"
 
-#: ../shell/cc-application.c:252
+#: ../shell/cc-application.c:253
 msgid "Quit"
 msgstr "Thoát"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1494
+#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
 msgid "All Settings"
 msgstr "Mọi cài đặt"
 
 #. Add categories
-#: ../shell/cc-window.c:880
+#: ../shell/cc-window.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Cá nhân"
 
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Phần cứng"
 
-#: ../shell/cc-window.c:882
+#: ../shell/cc-window.c:883
 msgctxt "category"
 msgid "System"
 msgstr "Hệ thống"
@@ -7189,7 +7213,159 @@ msgstr "Hệ thống"
 msgid "Preferences;Settings;"
 msgstr ""
 "Preferences;Tùy;thích;Tuy;thich;Cấu;hình;Cau;hinh;Settings;Thiết;lập;Thiet;"
-"Cài;đặt;cai;dat;lap;Tùy;chọn;Tuy;chon;Cá;ca;nhân;nhan;hóa;hoa;"
+"lap;Cài;đặt;cai;dat;Tùy;chọn;Tuy;chon;Cá;ca;nhân;nhan;hóa;hoa;"
+
+#: ../shell/help-overlay.ui.h:1
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Chung"
+
+#: ../shell/help-overlay.ui.h:2
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Thoát"
+
+#: ../shell/help-overlay.ui.h:3
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: ../shell/help-overlay.ui.h:4
+msgctxt "shortcut window"
+msgid "Panels"
+msgstr "Bảng điều khiển"
+
+#: ../shell/help-overlay.ui.h:5
+msgctxt "shortcut window"
+msgid "Go back to the overview"
+msgstr "Trở về tổng quan"
+
+#: ../shell/help-overlay.ui.h:6
+msgctxt "shortcut window"
+msgid "Cancel search"
+msgstr "Ngưng tìm"
+
+#~ msgid "Done"
+#~ msgstr "Xong"
+
+#~ msgid "Time _Zone"
+#~ msgstr "_Múi giờ"
+
+#~ msgid "_Delay:"
+#~ msgstr "_Khoảng trễ:"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Short"
+#~ msgstr "Ngắn"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Slow"
+#~ msgstr "Chậm"
+
+#~ msgctxt "keyboard, delay"
+#~ msgid "Long"
+#~ msgstr "Chậm"
+
+#~ msgctxt "keyboard, speed"
+#~ msgid "Fast"
+#~ msgstr "Nhanh"
+
+#~ msgid "S_peed:"
+#~ msgstr "_Tốc độ:"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Phím tắt"
+
+#~ msgid "Test Your Settings"
+#~ msgstr "Kiểm tra các cài đặt của bạn"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Slow"
+#~ msgstr "Chậm"
+
+#~ msgctxt "double click, speed"
+#~ msgid "Fast"
+#~ msgstr "Nhanh"
+
+#~ msgctxt "mouse, left button as primary"
+#~ msgid "_Left"
+#~ msgstr "Nút _trái"
+
+#~ msgctxt "mouse, right button as primary"
+#~ msgid "_Right"
+#~ msgstr "Nút _phải"
+
+#~ msgid "_Pointer speed"
+#~ msgstr "Tốc độ _con trỏ"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Chậm"
+
+#~ msgctxt "mouse pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Nhanh"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Slow"
+#~ msgstr "Chậm"
+
+#~ msgctxt "touchpad pointer, speed"
+#~ msgid "Fast"
+#~ msgstr "Nhanh"
+
+#~ msgid "Two _finger scroll"
+#~ msgstr "Cuộn _hai ngón"
+
+#~ msgid "No printers available"
+#~ msgstr "Không có máy in"
+
+#~ msgid "Active Jobs"
+#~ msgstr "Yêu cầu in hoạt động"
+
+#~ msgid "Close"
+#~ msgstr "Đóng"
+
+#~ msgid "Resume Printing"
+#~ msgstr "Tiếp tục in"
+
+#~ msgid "Pause Printing"
+#~ msgstr "Tạm ngừng in"
+
+#~ msgid "Cancel Print Job"
+#~ msgstr "Hủy tác vụ in"
+
+#~ msgctxt "print job"
+#~ msgid "Held"
+#~ msgstr "Đang giữ"
+
+#~ msgid "Job Title"
+#~ msgstr "Tên yêu cầu"
+
+#~ msgid "Job State"
+#~ msgstr "Tình trạng"
+
+#~ msgid "Time"
+#~ msgstr "Thời gian"
+
+#~ msgid "Add New Printer"
+#~ msgstr "Thêm máy in"
+
+#~ msgid "Used to determine your geographical location"
+#~ msgstr "Dùng để nhận dạng vị trí địa lý của bạn"
+
+#~ msgid "Options"
+#~ msgstr "Tùy chọn"
+
+#~ msgid "Password:"
+#~ msgstr "Mật khẩu:"
+
+#~ msgid "Zoom"
+#~ msgstr "Phóng"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Color"
+#~ msgstr "Màu sắc"
 
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "Bluetooth bị tắt"
@@ -7205,9 +7381,6 @@ msgstr ""
 
 #~ msgid "Power Off"
 #~ msgstr "Tắt máy"
-
-#~ msgid "Hibernate"
-#~ msgstr "Ngủ đông"
 
 #~ msgid "Power off"
 #~ msgstr "Tắt máy"
