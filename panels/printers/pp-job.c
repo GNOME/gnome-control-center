@@ -23,6 +23,26 @@
 #include <gio/gio.h>
 #include <cups/cups.h>
 
+#if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
+#define HAVE_CUPS_1_6 1
+#endif
+
+#ifndef HAVE_CUPS_1_6
+#define ippGetBoolean(attr, element) attr->values[element].boolean
+#define ippGetCount(attr)     attr->num_values
+#define ippGetInteger(attr, element) attr->values[element].integer
+#define ippGetString(attr, element, language) attr->values[element].string.text
+#define ippGetValueTag(attr)  attr->value_tag
+static int
+ippGetRange (ipp_attribute_t *attr,
+             int element,
+             int *upper)
+{
+  *upper = attr->values[element].range.upper;
+  return (attr->values[element].range.lower);
+}
+#endif
+
 typedef struct
 {
   GObject parent;

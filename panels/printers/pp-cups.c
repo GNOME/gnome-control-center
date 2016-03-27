@@ -20,6 +20,15 @@
 
 #include "pp-cups.h"
 
+#if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
+#define HAVE_CUPS_1_6 1
+#endif
+
+#ifndef HAVE_CUPS_1_6
+#define ippGetInteger(attr, element) attr->values[element].integer
+#define ippGetStatusCode(ipp) ipp->request.status.status_code
+#endif
+
 G_DEFINE_TYPE (PpCups, pp_cups, G_TYPE_OBJECT);
 
 static void
