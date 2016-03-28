@@ -421,7 +421,7 @@ validate (CEPage        *page,
         }
 
         sc = nm_connection_get_setting_connection (connection);
-        firewall_ui_to_setting (sc, CE_PAGE_SECURITY (page)->firewall_combo);
+        firewall_ui_to_setting (sc, GTK_WIDGET (CE_PAGE_SECURITY (page)->firewall_combo));
 
         return valid;
 }
