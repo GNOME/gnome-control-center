@@ -50,6 +50,7 @@ struct _CcPasswordDialog
         GtkEntry           *old_password_entry;
         GtkEntry           *password_entry;
         GtkLabel           *password_hint_label;
+        GtkEntry           *password_reminder_entry;
         GtkLevelBar        *strength_indicator;
         GtkEntry           *verify_entry;
         GtkLabel           *verify_hint_label;
@@ -116,6 +117,12 @@ password_changed_cb (PasswdHandler    *handler,
         gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (self)), NULL);
 
         if (!error) {
+                g_autofree gchar *sanitized_reminder = NULL;
+                const gchar *reminder;
+
+                reminder = gtk_entry_get_text (GTK_ENTRY (self->password_reminder_entry));
+                sanitized_reminder = g_strstrip (g_strdup (reminder));
+                act_user_set_password_hint (self->user, sanitized_reminder);
                 gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_ACCEPT);
                 return;
         }
@@ -155,7 +162,8 @@ password_changed_cb (PasswdHandler    *handler,
 static void
 ok_button_clicked_cb (CcPasswordDialog *self)
 {
-        const gchar *password;
+        const gchar *password, *reminder;
+        g_autofree char *sanitized_reminder = NULL;
 
         password = gtk_entry_get_text (self->password_entry);
 
@@ -179,8 +187,10 @@ ok_button_clicked_cb (CcPasswordDialog *self)
                                 return;
                         }
 
+                        reminder = gtk_entry_get_text (GTK_ENTRY (self->password_reminder_entry));
+                        sanitized_reminder = g_strstrip (g_strdup (reminder));
                         act_user_set_password_mode (self->user, ACT_USER_PASSWORD_MODE_REGULAR);
-                        act_user_set_password (self->user, password, "");
+                        act_user_set_password (self->user, password, sanitized_reminder);
                         break;
 
                 case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
@@ -228,6 +238,7 @@ mode_change (CcPasswordDialog *self,
         gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), active);
         gtk_widget_set_sensitive (GTK_WIDGET (self->old_password_entry), active);
         gtk_widget_set_sensitive (GTK_WIDGET (self->password_hint_label), active);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->password_reminder_entry), active);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->action_now_radio), active);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->action_login_radio), !active);
 
@@ -467,6 +478,7 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, ok_button);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_label);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_reminder_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_hint_label);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, strength_indicator);
@@ -504,6 +516,7 @@ cc_password_dialog_new (ActUser *user)
                              NULL);
 
         self->user = g_object_ref (user);
+        gtk_entry_set_text (GTK_ENTRY (self->password_reminder_entry), "");
 
         if (act_user_get_uid (self->user) == getuid ()) {
                 gboolean visible;
@@ -514,6 +527,7 @@ cc_password_dialog_new (ActUser *user)
                 visible = (act_user_get_password_mode (user) != ACT_USER_PASSWORD_MODE_NONE);
                 gtk_widget_set_visible (GTK_WIDGET (self->old_password_label), visible);
                 gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), visible);
+                gtk_entry_set_text (GTK_ENTRY (self->password_reminder_entry), act_user_get_password_hint (user));
                 self->old_password_ok = !visible;
 
                 self->passwd_handler = passwd_init ();

@@ -75,6 +75,7 @@ struct _CcAddUserDialog {
         GtkListStore       *local_username_model;
         GtkEntry           *local_password_entry;
         GtkRadioButton     *local_password_radio;
+        GtkWidget          *local_password_reminder;
         GtkEntry           *local_username_entry;
         GtkLabel           *local_username_hint_label;
         GtkLevelBar        *local_strength_indicator;
@@ -171,18 +172,22 @@ user_loaded_cb (CcAddUserDialog *self,
                 GParamSpec      *pspec,
                 ActUser         *user)
 {
-  const gchar *password;
+        const gchar *password;
+        const gchar *reminder;
 
-  finish_action (self);
+        finish_action (self);
 
-  /* Set a password for the user */
-  password = gtk_entry_get_text (self->local_password_entry);
-  act_user_set_password_mode (user, self->local_password_mode);
-  if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
-        act_user_set_password (user, password, "");
+        password = gtk_entry_get_text (GTK_ENTRY (self->local_password_entry));
+        reminder = gtk_entry_get_text (GTK_ENTRY (self->local_password_reminder));
+        act_user_set_password_mode (user, self->local_password_mode);
 
-  self->user = g_object_ref (user);
-  gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
+        if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
+                g_autofree gchar *sanitized_reminder = g_strstrip (g_strdup (reminder));
+                act_user_set_password (user, password, sanitized_reminder);
+        }
+
+        self->user = g_object_ref (user);
+        gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
 }
 
 static void
@@ -781,6 +786,7 @@ local_password_radio_changed_cb (CcAddUserDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), active);
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_strength_indicator), active);
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_hint_label), active);
+        gtk_widget_set_sensitive (self->local_password_reminder, active);
 
         dialog_validate (self);
 }
@@ -1723,6 +1729,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_model);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_reminder);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_hint_label);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);
