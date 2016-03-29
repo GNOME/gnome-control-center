@@ -479,7 +479,7 @@ on_screen_changed (CcDisplayPanel *panel)
   GnomeRRConfig *current;
   CcDisplayPanelPrivate *priv = panel->priv;
   GnomeRROutputInfo **outputs;
-  gint i, num_active_outputs = 0, num_connected_outputs = 0, number = 0;
+  gint i, num_connected_outputs = 0, number = 0;
   gboolean clone, combined = FALSE;
   GtkSizeGroup *sizegroup;
   GList *sorted_outputs = NULL, *l;
@@ -523,9 +523,6 @@ on_screen_changed (CcDisplayPanel *panel)
       else
         sorted_outputs = g_list_append (sorted_outputs, outputs[i]);
 
-
-      if (gnome_rr_output_info_is_active (outputs[i]))
-        num_active_outputs++;
       num_connected_outputs++;
     }
 
