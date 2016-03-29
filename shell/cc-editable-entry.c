@@ -605,14 +605,14 @@ cc_editable_entry_init (CcEditableEntry *e)
 
         /* Label */
         priv->label = (GtkLabel*)gtk_label_new (EMPTY_TEXT);
-        g_object_set (G_OBJECT (priv->label), "xalign", 0, NULL);
+        g_object_set (G_OBJECT (priv->label), "xalign", 0.0, NULL);
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->label), PAGE_LABEL);
 
         /* Button */
         priv->button = (GtkButton*)gtk_button_new_with_label (EMPTY_TEXT);
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
-        g_object_set (G_OBJECT (gtk_bin_get_child (GTK_BIN (priv->button))), "xalign", 0, NULL);
+        g_object_set (G_OBJECT (gtk_bin_get_child (GTK_BIN (priv->button))), "xalign", 0.0, NULL);
 
         gtk_stack_add_named (priv->stack, GTK_WIDGET (priv->button), PAGE_BUTTON);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), e);
