@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 18:27+0100\n"
-"PO-Revision-Date: 2016-03-17 18:28+0100\n"
+"POT-Creation-Date: 2016-03-31 18:51+0200\n"
+"PO-Revision-Date: 2016-03-31 18:52+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -2273,7 +2273,7 @@ msgstr "DNS"
 
 #: ../panels/network/connection-editor/details-page.ui.h:9
 msgid "Last Used"
-msgstr "Ostatnie użycie"
+msgstr "Ostatnio użyte"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
@@ -2329,7 +2329,7 @@ msgstr "Sk_lonowany adres"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
 msgid "bytes"
-msgstr "bajtów"
+msgstr "B"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
 #: ../panels/network/connection-editor/vpn-page.ui.h:3
@@ -2409,7 +2409,7 @@ msgstr "VPN"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:584
 msgid "Bond"
-msgstr "Łączenie"
+msgstr "Łączone"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Team"
@@ -2567,7 +2567,7 @@ msgid ""
 "vlan;bridge;bond;DNS;"
 msgstr ""
 "Sieć;Sieci;Bezprzewodowa;Wireless;Wi-Fi;Wifi;IP;LAN;Kabel;Pośrednik;Proxy;"
-"WAN;Broadband;Modem;Bluetooth;vpn;vlan;mostek;mostkowanie;bridge;łączenie;"
+"WAN;Broadband;Modem;Bluetooth;vpn;vlan;mostek;mostkowanie;bridge;łączone;"
 "bond;DNS;"
 
 #: ../panels/network/net-device-bond.c:77
@@ -2608,7 +2608,7 @@ msgstr "Adres IP"
 #: ../panels/network/net-device-ethernet.c:176
 #: ../panels/network/network-wifi.ui.h:12
 msgid "Last used"
-msgstr "Ostatnio użyta"
+msgstr "Ostatnio użyte"
 
 #. Translators: This is used as the title of the connection
 #. * details window for ethernet, if there is only a single
@@ -2843,7 +2843,7 @@ msgstr "informacje"
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:2
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
-#: ../panels/sharing/sharing.ui.h:11
+#: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
@@ -3447,7 +3447,7 @@ msgstr "CHAP"
 
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
 msgid "Don't _warn me again"
-msgstr "Nie ostrzegaj pono_wnie"
+msgstr "Bez ostrzegania pono_wnie"
 
 #: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
@@ -5159,11 +5159,39 @@ msgstr "Aktywne"
 msgid "Choose a Folder"
 msgstr "Wybór katalogu"
 
-#: ../panels/sharing/cc-sharing-panel.c:798
+#: ../panels/sharing/cc-sharing-panel.c:680
+#, c-format
+msgid ""
+"Personal File Sharing allows you to share your Public folder with others on "
+"your current network using: <a href=\"dav://%s\">dav://%s</a>"
+msgstr ""
+"Współdzielenie plików osobistych umożliwia współdzielenie katalogu Publiczne "
+"z innymi użytkownikami bieżącej sieci używając: <a href=\"dav://%s\">dav://"
+"%s</a>"
+
+#: ../panels/sharing/cc-sharing-panel.c:682
+#, c-format
+msgid ""
+"Allow remote users to connect using the Secure Shell command:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+msgstr ""
+"Umożliwia zdalnym użytkownikom na łączenie się używając polecenia SSH:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+
+#: ../panels/sharing/cc-sharing-panel.c:684
+#, c-format
+msgid ""
+"Allow remote users to view or control your screen by connecting to: <a href="
+"\"vnc://%s\">vnc://%s</a>"
+msgstr ""
+"Umożliwia zdalnym użytkownikom na wyświetlanie lub kontrolowanie ekranu "
+"przez połączenie się z: <a href=\"vnc://%s\">vnc://%s</a>"
+
+#: ../panels/sharing/cc-sharing-panel.c:796
 msgid "Copy"
 msgstr "Skopiuj"
 
-#: ../panels/sharing/cc-sharing-panel.c:1124
+#: ../panels/sharing/cc-sharing-panel.c:1122
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "Współdzielenie"
@@ -5231,82 +5259,54 @@ msgstr "Niektóre usługi są wyłączone z powodu braku dostępu do sieci."
 msgid "Personal File Sharing"
 msgstr "Współdzielenie plików osobistych"
 
-#: ../panels/sharing/sharing.ui.h:9
-#, no-c-format
-msgid ""
-"Personal File Sharing allows you to share your Public folder with others on "
-"your current network using: <a href=\"dav://%s\">dav://%s</a>"
-msgstr ""
-"Współdzielenie plików osobistych umożliwia współdzielenie katalogu Publiczne "
-"z innymi użytkownikami bieżącej sieci używając: <a href=\"dav://%s\">dav://"
-"%s</a>"
-
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:8
 msgid "_Require Password"
 msgstr "Wymaganie _hasła"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:10
 msgid "Remote Login"
 msgstr "Zdalne logowanie"
 
-#: ../panels/sharing/sharing.ui.h:14
-#, no-c-format
-msgid ""
-"Allow remote users to connect using the Secure Shell command:\n"
-"<a href=\"ssh %s\">ssh %s</a>"
-msgstr ""
-"Umożliwia zdalnym użytkownikom na łączenie się używając polecenia SSH:\n"
-"<a href=\"ssh %s\">ssh %s</a>"
-
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:11
 msgid "Screen Sharing"
 msgstr "Współdzielenie ekranu"
 
-#: ../panels/sharing/sharing.ui.h:18
-#, no-c-format
-msgid ""
-"Allow remote users to view or control your screen by connecting to: <a href="
-"\"vnc://%s\">vnc://%s</a>"
-msgstr ""
-"Umożliwia zdalnym użytkownikom na wyświetlanie lub kontrolowanie ekranu "
-"przez połączenie się z: <a href=\"vnc://%s\">vnc://%s</a>"
-
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:12
 msgid "_Allow Remote Control"
 msgstr "Z_dalna kontrola"
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:13
 msgid "_Password:"
 msgstr "_Hasło:"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:14
 msgid "_Show Password"
 msgstr "_Wyświetlanie hasła"
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:15
 msgid "Access Options"
 msgstr "Opcje dostępu"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:16
 msgid "_New connections must ask for access"
 msgstr "_Nowe połączenia muszą prosić o dostęp"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:17
 msgid "_Require a password"
 msgstr "Wy_maganie hasła"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Media Sharing"
 msgstr "Współdzielenie multimediów"
 
-#: ../panels/sharing/sharing.ui.h:26
+#: ../panels/sharing/sharing.ui.h:19
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr ""
 "Współdzielenie multimediów umożliwia dzielenie się muzyką, zdjęciami i "
 "filmami przez sieć."
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:20
 msgid "Folders"
 msgstr "Katalogi"
 
@@ -7083,22 +7083,22 @@ msgstr "Przełącznik trybu prawego TouchStrip"
 msgid "Mode Switch #%d"
 msgstr "Przełącznik trybu #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1300
+#: ../panels/wacom/gsd-wacom-device.c:1238
 #, c-format
 msgid "Left Button #%d"
 msgstr "Lewy przycisk #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1303
+#: ../panels/wacom/gsd-wacom-device.c:1241
 #, c-format
 msgid "Right Button #%d"
 msgstr "Prawy przycisk #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1306
+#: ../panels/wacom/gsd-wacom-device.c:1244
 #, c-format
 msgid "Top Button #%d"
 msgstr "Górny przycisk #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1309
+#: ../panels/wacom/gsd-wacom-device.c:1247
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Dolny przycisk #%d"
