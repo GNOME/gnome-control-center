@@ -778,8 +778,8 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                 nm_client_add_and_activate_connection (client, partial,
                                                        device, ap_object_path,
                                                        connection_add_activate_cb, device_wifi);
-
-                g_object_unref (partial);
+                if (!allowed_to_share)
+                        g_object_unref (partial);
         } else {
                 CcNetworkPanel *panel;
                 GVariantBuilder *builder;
