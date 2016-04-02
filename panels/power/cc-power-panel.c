@@ -2168,6 +2168,8 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
   g_object_bind_property (sw, "active", combo, "sensitive",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
+  set_ac_battery_ui_mode (self);
+
   if (g_strcmp0 (priv->chassis_type, "vm") == 0 ||
       g_strcmp0 (priv->chassis_type, "tablet") == 0)
     goto out;
@@ -2425,8 +2427,6 @@ cc_power_panel_init (CcPowerPanel *self)
 
   priv->boxes = g_list_copy (priv->boxes_reverse);
   priv->boxes = g_list_reverse (priv->boxes);
-
-  set_ac_battery_ui_mode (self);
 
   /* populate batteries */
   g_signal_connect (priv->up_client, "device-added", G_CALLBACK (up_client_device_added), self);
