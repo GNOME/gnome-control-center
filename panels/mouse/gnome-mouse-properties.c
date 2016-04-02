@@ -210,6 +210,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("general-listbox")), cc_list_box_update_header_func, NULL, NULL);
+	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("touchpad-listbox")), cc_list_box_update_header_func, NULL, NULL);
 
 	/* Mouse section */
 	gtk_widget_set_visible (WID ("mouse-frame"), d->have_mouse);
@@ -231,7 +232,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 				      touchpad_enabled_set_mapping,
 				      NULL, NULL);
 	g_settings_bind_with_mapping (d->touchpad_settings, "send-events",
-				      WID ("touchpad-options-box"), "sensitive",
+				      WID ("touchpad-options-listbox"), "sensitive",
 				      G_SETTINGS_BIND_GET,
 				      touchpad_enabled_get_mapping,
 				      touchpad_enabled_set_mapping,
