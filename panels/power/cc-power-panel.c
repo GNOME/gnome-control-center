@@ -2427,7 +2427,6 @@ cc_power_panel_init (CcPowerPanel *self)
   priv->boxes = g_list_reverse (priv->boxes);
 
   set_ac_battery_ui_mode (self);
-  update_automatic_suspend_label (self);
 
   /* populate batteries */
   g_signal_connect (priv->up_client, "device-added", G_CALLBACK (up_client_device_added), self);
