@@ -79,6 +79,10 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 	gboolean have_edge_scrolling;
 	gboolean have_tap_to_click;
 
+	gtk_widget_set_visible (WID ("touchpad-frame"), d->have_touchpad);
+	if (!d->have_touchpad)
+		return;
+
 	cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
 
 	gtk_widget_show_all (WID ("touchpad-frame"));
@@ -87,7 +91,9 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 	gtk_widget_set_visible (WID ("tap-to-click-row"), have_tap_to_click);
 
 	edge_scroll_enabled = g_settings_get_boolean (d->touchpad_settings, "edge-scrolling-enabled");
+	d->changing_scroll = TRUE;
 	gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")), edge_scroll_enabled);
+	d->changing_scroll = FALSE;
 }
 
 static void
@@ -210,7 +216,6 @@ setup_dialog (CcMousePropertiesPrivate *d)
 	gtk_list_box_set_header_func (GTK_LIST_BOX (WID ("mouse-listbox")), cc_list_box_update_header_func, NULL, NULL);
 
 	/* Touchpad section */
-	gtk_widget_set_visible (WID ("touchpad-frame"), d->have_touchpad);
 	gtk_widget_set_visible (WID ("touchpad-toggle-switch"),
 				show_touchpad_enabling_switch (d));
 
@@ -239,8 +244,7 @@ setup_dialog (CcMousePropertiesPrivate *d)
 			 WID ("tap-to-click-switch"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	if (d->have_touchpad)
-		setup_touchpad_options (d);
+	setup_touchpad_options (d);
 
 	g_signal_connect (WID ("edge-scrolling-switch"), "state-set",
 			  G_CALLBACK (edge_scrolling_changed_event), d);
@@ -255,13 +259,8 @@ device_changed (GsdDeviceManager *device_manager,
 		CcMousePropertiesPrivate *d)
 {
 	d->have_touchpad = touchpad_is_present ();
-	gtk_widget_set_visible (WID ("touchpad-frame"), d->have_touchpad);
 
-	if (d->have_touchpad) {
-		d->changing_scroll = TRUE;
-		setup_touchpad_options (d);
-		d->changing_scroll = FALSE;
-	}
+	setup_touchpad_options (d);
 
 	d->have_mouse = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse-frame"), d->have_mouse);
