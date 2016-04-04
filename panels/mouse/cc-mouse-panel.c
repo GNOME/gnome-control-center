@@ -102,14 +102,16 @@ cc_mouse_panel_init (CcMousePanel *self)
   g_resources_register (cc_mouse_get_resource ());
 
   prefs_widget = cc_mouse_properties_new ();
+  gtk_widget_show (prefs_widget);
   test_widget = cc_mouse_test_new ();
+  gtk_widget_show (test_widget);
 
   priv->stack = gtk_stack_new ();
+  gtk_widget_show (priv->stack);
   gtk_stack_add_named (GTK_STACK (priv->stack), prefs_widget, "prefs_widget");
   gtk_stack_add_named (GTK_STACK (priv->stack), test_widget, "test_widget");
 
   gtk_container_add (GTK_CONTAINER (self), priv->stack);
-  gtk_widget_show_all (priv->stack);
 }
 
 static void
