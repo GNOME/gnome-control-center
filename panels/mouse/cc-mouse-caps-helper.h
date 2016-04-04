@@ -27,4 +27,6 @@ gboolean cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                          gboolean *have_edge_scrolling,
                                          gboolean *have_tap_to_click);
 
+gboolean cc_synaptics_check (void);
+
 #endif /* _CC_MOUSE_CAPS_HELPER_H_ */
