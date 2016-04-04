@@ -98,3 +98,46 @@ cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
 	/* else we unconditionally show all touchpad knobs */
 	return FALSE;
 }
+
+gboolean
+cc_synaptics_check (void)
+{
+        Display *display;
+        GList *devicelist, *l;
+        Atom prop, realtype;
+        int realformat;
+        unsigned long nitems, bytes_after;
+        unsigned char *data;
+        gboolean have_synaptics = FALSE;
+
+        if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+                return FALSE;
+
+        display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+        prop = XInternAtom (display, "Synaptics Capabilities", False);
+
+        gdk_error_trap_push ();
+
+        devicelist = gdk_seat_get_slaves (gdk_display_get_default_seat (gdk_display_get_default ()),
+                                          GDK_SEAT_CAPABILITY_ALL_POINTING);
+        for (l = devicelist; l != NULL; l = l->next) {
+                GdkDevice *device = l->data;
+                if (gdk_device_get_source (device) != GDK_SOURCE_TOUCHPAD)
+			continue;
+
+                if ((XIGetProperty (display, gdk_x11_device_get_id (device), prop,
+                                    0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
+                                    &bytes_after, &data) == Success) && (realtype != None)) {
+                        have_synaptics = TRUE;
+                        XFree (data);
+                }
+
+                if (have_synaptics)
+                        break;
+        }
+        g_list_free (devicelist);
+
+        gdk_error_trap_pop_ignored ();
+
+        return have_synaptics;
+}
