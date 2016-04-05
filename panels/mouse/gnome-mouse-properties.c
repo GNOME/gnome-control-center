@@ -79,7 +79,7 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 	gboolean have_edge_scrolling;
 	gboolean have_tap_to_click;
 
-	synaptics_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
+	cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
 
 	gtk_widget_show_all (WID ("touchpad-frame"));
 

@@ -21,9 +21,9 @@
 #include "cc-mouse-caps-helper.h"
 
 static gboolean
-synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
-                                  gboolean *have_edge_scrolling,
-                                  gboolean *have_tap_to_click)
+touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
+                                 gboolean *have_edge_scrolling,
+                                 gboolean *have_tap_to_click)
 {
 	int numdevices, i;
 	XDeviceInfo *devicelist;
@@ -88,14 +88,14 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 }
 
 gboolean
-synaptics_check_capabilities (gboolean *have_two_finger_scrolling,
-                              gboolean *have_edge_scrolling,
-                              gboolean *have_tap_to_click)
+cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
+                                gboolean *have_edge_scrolling,
+                                gboolean *have_tap_to_click)
 {
 	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-		return synaptics_check_capabilities_x11 (have_two_finger_scrolling,
-							 have_edge_scrolling,
-							 have_tap_to_click);
+		return touchpad_check_capabilities_x11 (have_two_finger_scrolling,
+                                                        have_edge_scrolling,
+                                                        have_tap_to_click);
 	/* else we unconditionally show all touchpad knobs */
 	return FALSE;
 }
