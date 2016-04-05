@@ -240,6 +240,18 @@ get_ap_security_string (NMAccessPoint *ap)
 }
 
 static void
+net_device_wifi_access_point_changed (NMDeviceWifi *nm_device_wifi,
+                                      NMAccessPoint *ap,
+                                      gpointer user_data)
+{
+        NetDeviceWifi *device_wifi;
+
+        device_wifi = NET_DEVICE_WIFI (user_data);
+
+        populate_ap_list (device_wifi);
+}
+
+static void
 wireless_enabled_toggled (NMClient       *client,
                           GParamSpec     *pspec,
                           NetDeviceWifi *device_wifi)
@@ -1316,6 +1328,13 @@ net_device_wifi_constructed (GObject *object)
                                  G_CALLBACK (wireless_enabled_toggled), device_wifi, 0);
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+
+        g_signal_connect_object (nm_device, "access-point-added",
+                                 G_CALLBACK (net_device_wifi_access_point_changed),
+                                 device_wifi, 0);
+        g_signal_connect_object (nm_device, "access-point-removed",
+                                 G_CALLBACK (net_device_wifi_access_point_changed),
+                                 device_wifi, 0);
 
         /* only enable the button if the user can create a hotspot */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
