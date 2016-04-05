@@ -78,6 +78,7 @@ struct _CcDisplayPanelPrivate
   GtkWidget *res_combo;
   GtkWidget *freq_combo;
   GHashTable *res_freqs;
+  GtkWidget *scaling_switch;
   GtkWidget *rotate_left_button;
   GtkWidget *upside_down_button;
   GtkWidget *rotate_right_button;
@@ -2164,12 +2165,23 @@ should_show_rotation (CcDisplayPanel *panel,
 }
 
 static void
+underscan_switch_toggled (CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  gboolean value;
+
+  value = gtk_switch_get_active (GTK_SWITCH (priv->scaling_switch));
+  gnome_rr_output_info_set_underscanning (priv->current_output, value);
+  update_apply_button (panel);
+}
+
+static void
 show_setup_dialog (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkWidget *listbox = NULL, *content_area, *item, *box, *frame, *preview;
   GtkWidget *label, *rotate_box;
-  gint i, width_mm, height_mm, old_width, old_height;
+  gint i, width_mm, height_mm, old_width, old_height, grid_pos;
   GnomeRROutput *output;
   gchar *str;
   gboolean clone, was_clone, primary, was_primary, active;
@@ -2212,6 +2224,7 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_container_add (GTK_CONTAINER (content_area), box);
 
   /* configuration grid */
+  grid_pos = 0;
   priv->config_grid = gtk_grid_new ();
   gtk_widget_set_margin_start (priv->config_grid, 36);
   gtk_widget_set_margin_end (priv->config_grid, 36);
@@ -2224,7 +2237,8 @@ show_setup_dialog (CcDisplayPanel *panel)
                                  priv->current_configuration,
                                  cc_display_panel_get_output_id (priv->current_output),
                                  DISPLAY_PREVIEW_SETUP_HEIGHT);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), preview, 0, 0, 2, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), preview, 0, grid_pos, 2, 1);
+  grid_pos++;
 
   /* rotation */
   show_rotation = should_show_rotation (panel, output);
@@ -2236,8 +2250,9 @@ show_setup_dialog (CcDisplayPanel *panel)
       gtk_widget_set_margin_bottom (rotate_box, 12);
       gtk_style_context_add_class (gtk_widget_get_style_context (rotate_box),
                                    GTK_STYLE_CLASS_LINKED);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), rotate_box, 0, 1, 2, 1);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), rotate_box, 0, grid_pos, 2, 1);
       gtk_widget_set_halign (rotate_box, GTK_ALIGN_CENTER);
+      grid_pos++;
 
       if (gnome_rr_output_info_supports_rotation (priv->current_output,
                                                   GNOME_RR_ROTATION_90))
@@ -2303,25 +2318,28 @@ show_setup_dialog (CcDisplayPanel *panel)
       label = gtk_label_new (_("Size"));
       gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                    GTK_STYLE_CLASS_DIM_LABEL);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 2, 1, 1);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
       gtk_widget_set_halign (label, GTK_ALIGN_END);
 
       label = gtk_label_new (str);
-      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, 2, 1, 1);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, grid_pos, 1, 1);
       gtk_widget_set_halign (label, GTK_ALIGN_START);
       g_free (str);
+
+      grid_pos++;
     }
 
   /* aspect ratio */
   label = gtk_label_new (_("Aspect Ratio"));
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 3, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   label = gtk_label_new (make_aspect_string (gnome_rr_output_info_get_preferred_width (priv->current_output),
                                              gnome_rr_output_info_get_preferred_height (priv->current_output)));
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, 3, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, grid_pos, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
+  grid_pos++;
 
   /* resolution combo box */
   res_model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
@@ -2338,11 +2356,34 @@ show_setup_dialog (CcDisplayPanel *panel)
   label = gtk_label_new (_("Resolution"));
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 4, 1, 1);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->res_combo, 1, 4, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->res_combo, 1, grid_pos, 1, 1);
+  grid_pos++;
 
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   gtk_widget_set_halign (priv->res_combo, GTK_ALIGN_START);
+
+  /* overscan */
+  /* if (!gnome_rr_output_is_builtin_display (output) && */
+  /*     gnome_rr_output_supports_underscanning (output)) */
+
+  {
+      priv->scaling_switch = gtk_switch_new ();
+      gtk_switch_set_active (GTK_SWITCH (priv->scaling_switch),
+                             gnome_rr_output_info_get_underscanning (priv->current_output));
+      g_signal_connect_swapped (G_OBJECT (priv->scaling_switch), "notify::active",
+                                G_CALLBACK (underscan_switch_toggled), panel);
+
+      label = gtk_label_new (_("Adjust for TV"));
+      gtk_style_context_add_class (gtk_widget_get_style_context (label),
+                                   GTK_STYLE_CLASS_DIM_LABEL);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
+      gtk_grid_attach (GTK_GRID (priv->config_grid), priv->scaling_switch, 1, grid_pos, 1, 1);
+      grid_pos++;
+
+      gtk_widget_set_halign (label, GTK_ALIGN_END);
+      gtk_widget_set_halign (priv->scaling_switch, GTK_ALIGN_START);
+    }
 
   /* frequency combo box */
   freq_model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
@@ -2353,18 +2394,19 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->freq_combo), renderer, "text", 0);
   g_signal_connect (priv->freq_combo, "changed", G_CALLBACK (freq_combo_changed),
                     panel);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->freq_combo, 1, 5, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), priv->freq_combo, 1, grid_pos, 1, 1);
   gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_START);
   gtk_widget_set_no_show_all (priv->freq_combo, TRUE);
 
   label = gtk_label_new (_("Refresh Rate"));
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, 5, 1, 1);
+  gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
   gtk_widget_set_no_show_all (label, TRUE);
   g_object_bind_property (priv->freq_combo, "visible",
                           label, "visible", G_BINDING_BIDIRECTIONAL);
+  grid_pos++;
 
   was_clone = clone = gnome_rr_config_get_clone (priv->current_configuration);
   was_primary = primary = gnome_rr_output_info_get_primary (priv->current_output);
