@@ -21,11 +21,7 @@
 #ifndef _CC_MOUSE_CAPS_HELPER_H_
 #define _CC_MOUSE_CAPS_HELPER_H_
 
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
-
-#include <X11/Xatom.h>
-#include <X11/extensions/XInput.h>
+#include <glib.h>
 
 gboolean cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                          gboolean *have_edge_scrolling,

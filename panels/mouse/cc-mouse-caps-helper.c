@@ -18,6 +18,10 @@
  * Author: Felipe Borges <feborges@redhat.com>
  */
 
+#include <gdk/gdkx.h>
+#include <X11/Xatom.h>
+#include <X11/extensions/XInput2.h>
+
 #include "cc-mouse-caps-helper.h"
 
 static gboolean
@@ -25,15 +29,16 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
                                  gboolean *have_edge_scrolling,
                                  gboolean *have_tap_to_click)
 {
-	int numdevices, i;
-	XDeviceInfo *devicelist;
+        Display *display;
+	GList *devicelist, *l;
 	Atom realtype, prop_scroll_methods, prop_tapping_enabled;
 	int realformat;
 	unsigned long nitems, bytes_after;
 	unsigned char *data;
 
-	prop_scroll_methods = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Scroll Methods Available", False);
-	prop_tapping_enabled = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Tapping Enabled", False);
+        display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+	prop_scroll_methods = XInternAtom (display, "libinput Scroll Methods Available", False);
+	prop_tapping_enabled = XInternAtom (display, "libinput Tapping Enabled", False);
 	if (!prop_scroll_methods || !prop_tapping_enabled)
 		return FALSE;
 
@@ -41,23 +46,19 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 	*have_edge_scrolling = FALSE;
 	*have_tap_to_click = FALSE;
 
-	devicelist = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &numdevices);
-	for (i = 0; i < numdevices; i++) {
-		if (devicelist[i].use != IsXExtensionPointer)
-			continue;
+        gdk_error_trap_push ();
 
-		gdk_error_trap_push ();
-		XDevice *device = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-					       devicelist[i].id);
-		if (gdk_error_trap_pop ())
+	devicelist = gdk_seat_get_slaves (gdk_display_get_default_seat (gdk_display_get_default ()),
+                                          GDK_SEAT_CAPABILITY_ALL_POINTING);
+	for (l = devicelist; l != NULL; l = l->next) {
+                GdkDevice *device = l->data;
+                if (gdk_device_get_source (device) != GDK_SOURCE_TOUCHPAD)
 			continue;
-
-		gdk_error_trap_push ();
 
 		/* xorg-x11-drv-libinput */
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_scroll_methods,
-					 0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
-					 &bytes_after, &data) == Success) && (realtype != None)) {
+		if ((XIGetProperty (display, gdk_x11_device_get_id (device), prop_scroll_methods,
+                                    0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
+                                    &bytes_after, &data) == Success) && (realtype != None)) {
 			/* Property data is booleans for two-finger, edge, on-button scroll available. */
 
 			if (data[0])
@@ -69,20 +70,18 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 			XFree (data);
 		}
 
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_tapping_enabled,
-					0, 1, False, XA_INTEGER, &realtype, &realformat, &nitems,
-					&bytes_after, &data) == Success) && (realtype != None)) {
+		if ((XIGetProperty (display, gdk_x11_device_get_id (device), prop_tapping_enabled,
+                                    0, 1, False, XA_INTEGER, &realtype, &realformat, &nitems,
+                                    &bytes_after, &data) == Success) && (realtype != None)) {
 			/* Property data is boolean for tapping enabled. */
 			*have_tap_to_click = TRUE;
 
 			XFree (data);
 		}
-
-		gdk_error_trap_pop_ignored ();
-
-		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 	}
-	XFreeDeviceList (devicelist);
+        g_list_free (devicelist);
+
+        gdk_error_trap_pop_ignored ();
 
 	return TRUE;
 }
