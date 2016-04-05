@@ -27,15 +27,14 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 {
 	int numdevices, i;
 	XDeviceInfo *devicelist;
-	Atom realtype, prop_capabilities, prop_scroll_methods, prop_tapping_enabled;
+	Atom realtype, prop_scroll_methods, prop_tapping_enabled;
 	int realformat;
 	unsigned long nitems, bytes_after;
 	unsigned char *data;
 
-	prop_capabilities = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Capabilities", False);
 	prop_scroll_methods = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Scroll Methods Available", False);
 	prop_tapping_enabled = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "libinput Tapping Enabled", False);
-	if (!prop_capabilities || !prop_scroll_methods || !prop_tapping_enabled)
+	if (!prop_scroll_methods || !prop_tapping_enabled)
 		return FALSE;
 
 	*have_two_finger_scrolling = FALSE;
@@ -54,27 +53,6 @@ synaptics_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 			continue;
 
 		gdk_error_trap_push ();
-
-		/* xorg-x11-drv-synaptics */
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_capabilities,
-					 0, 2, False, XA_INTEGER, &realtype, &realformat, &nitems,
-					 &bytes_after, &data) == Success) && (realtype != None)) {
-			/* Property data is booleans for has_left, has_middle, has_right, has_double, has_triple.
-			 * Newer drivers (X.org/kerrnel) will also include has_pressure and has_width. */
-
-			/* Set tap_to_click_toggle sensitive only if the device has hardware buttons */
-			if (data[0])
-				*have_tap_to_click = TRUE;
-
-			/* Set two_finger_scroll_toggle sensitive if the hardware supports double touch */
-			if (data[3])
-				*have_two_finger_scrolling = TRUE;
-
-			/* Edge scrolling should be supported for all synaptics touchpads */
-			*have_edge_scrolling = TRUE;
-
-			XFree (data);
-		}
 
 		/* xorg-x11-drv-libinput */
 		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop_scroll_methods,
