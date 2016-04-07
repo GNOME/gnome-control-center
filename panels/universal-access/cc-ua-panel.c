@@ -519,6 +519,14 @@ visual_bell_type_toggle_cb (GtkWidget *button,
 }
 
 static void
+test_flash (GtkButton *button,
+            gpointer   data)
+{
+  GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (button));
+  gdk_window_beep (gtk_widget_get_window (toplevel));
+}
+
+static void
 cc_ua_panel_init_hearing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
@@ -568,7 +576,7 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   g_signal_connect (WID ("visual_alerts_test_button"),
-                    "clicked", G_CALLBACK (gdk_beep), NULL);
+                    "clicked", G_CALLBACK (test_flash), NULL);
 }
 
 /* typing/keyboard section */
