@@ -471,7 +471,7 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 
         settings = net_object_get_remote_settings (NET_OBJECT (device));
         connections = nm_remote_settings_list_connections (settings);
-        id = ce_page_get_next_available_name (connections, _("Profile %d"));
+        id = ce_page_get_next_available_name (connections, NAME_FORMAT_PROFILE, NULL);
         g_slist_free (connections);
 
         g_object_set (sc,

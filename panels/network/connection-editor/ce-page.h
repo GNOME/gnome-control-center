@@ -105,7 +105,14 @@ gint         ce_get_property_default (NMSetting        *setting,
 gint         ce_spin_output_with_default (GtkSpinButton *spin,
                                           gpointer       user_data);
 
-gchar * ce_page_get_next_available_name (GSList *connections, const gchar *format);
+typedef enum {
+        NAME_FORMAT_TYPE,
+        NAME_FORMAT_PROFILE
+} NameFormat;
+
+gchar * ce_page_get_next_available_name (GSList *connections,
+                                         NameFormat format,
+                                         const gchar *type_name);
 
 
 
