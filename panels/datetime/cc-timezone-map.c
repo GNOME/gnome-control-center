@@ -372,7 +372,6 @@ cc_timezone_map_draw (GtkWidget *widget,
   GError *err = NULL;
   gdouble pointx, pointy;
   char buf[16];
-  const char *fmt;
 
   gtk_widget_get_allocation (widget, &alloc);
 
@@ -382,13 +381,19 @@ cc_timezone_map_draw (GtkWidget *widget,
 
   /* paint hilight */
   if (gtk_widget_is_sensitive (widget))
-    fmt = DATETIME_RESOURCE_PATH "/timezone_%s.png";
+    {
+      file = g_strdup_printf (DATETIME_RESOURCE_PATH "/timezone_%s.png",
+                              g_ascii_formatd (buf, sizeof (buf),
+                                               "%g", priv->selected_offset));
+    }
   else
-    fmt = DATETIME_RESOURCE_PATH "/timezone_%s_dim.png";
+    {
+      file = g_strdup_printf (DATETIME_RESOURCE_PATH "/timezone_%s_dim.png",
+                              g_ascii_formatd (buf, sizeof (buf),
+                                               "%g", priv->selected_offset));
 
-  file = g_strdup_printf (fmt,
-                          g_ascii_formatd (buf, sizeof (buf),
-                                           "%g", priv->selected_offset));
+    }
+
   orig_hilight = gdk_pixbuf_new_from_resource (file, &err);
   g_free (file);
   file = NULL;
