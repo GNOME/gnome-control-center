@@ -182,13 +182,28 @@ custom_theme_dir_is_empty (void)
         return is_empty;
 }
 
+typedef enum {
+	SOUND_TYPE_OGG,
+	SOUND_TYPE_DISABLED
+} SoundType;
+
 static void
-delete_one_file (const char *sound_name, const char *pattern)
+delete_one_file (const char *sound_name, SoundType sound_type)
 {
         GFile *file;
         char *name, *filename;
 
-        name = g_strdup_printf (pattern, sound_name);
+        switch (sound_type) {
+        case SOUND_TYPE_OGG:
+                name = g_strdup_printf ("%s.ogg", sound_name);
+                break;
+        case SOUND_TYPE_DISABLED:
+                name = g_strdup_printf ("%s.disabled", sound_name);
+                break;
+        default:
+                g_assert_not_reached ();
+        }
+
         filename = custom_theme_dir_path (name);
         g_free (name);
         file = g_file_new_for_path (filename);
@@ -202,9 +217,8 @@ delete_old_files (const char **sounds)
 {
         guint i;
 
-        for (i = 0; sounds[i] != NULL; i++) {
-                delete_one_file (sounds[i], "%s.ogg");
-        }
+        for (i = 0; sounds[i] != NULL; i++)
+                delete_one_file (sounds[i], SOUND_TYPE_OGG);
 }
 
 void
@@ -213,7 +227,7 @@ delete_disabled_files (const char **sounds)
         guint i;
 
         for (i = 0; sounds[i] != NULL; i++)
-                delete_one_file (sounds[i], "%s.disabled");
+                delete_one_file (sounds[i], SOUND_TYPE_DISABLED);
 }
 
 static void
