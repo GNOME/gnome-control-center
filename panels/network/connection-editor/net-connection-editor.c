@@ -617,16 +617,14 @@ complete_connection_for_type (NetConnectionEditor *editor, NMConnection *connect
 
         if (!nm_setting_connection_get_id (s_con)) {
                 GSList *connections;
-                gchar *id, *id_pattern;
+                gchar *id;
 
                 connections = nm_remote_settings_list_connections (editor->settings);
-                id_pattern = g_strdup_printf ("%s %%d", _(connection_type->name));
-                id = ce_page_get_next_available_name (connections, id_pattern);
+                id = ce_page_get_next_available_name (connections, NAME_FORMAT_TYPE, _(connection_type->name));
                 g_object_set (s_con,
                               NM_SETTING_CONNECTION_ID, id,
                               NULL);
                 g_free (id);
-                g_free (id_pattern);
                 g_slist_free (connections);
         }
 

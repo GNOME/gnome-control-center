@@ -516,7 +516,9 @@ ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
 }
 
 gchar *
-ce_page_get_next_available_name (GSList *connections, const gchar *format)
+ce_page_get_next_available_name (GSList *connections,
+                                 NameFormat format,
+                                 const gchar *type_name)
 {
         GSList *names = NULL, *l;
         gchar *cname = NULL;
@@ -535,7 +537,17 @@ ce_page_get_next_available_name (GSList *connections, const gchar *format)
                 gchar *temp;
                 gboolean found = FALSE;
 
-                temp = g_strdup_printf (format, i);
+                switch (format) {
+                        case NAME_FORMAT_TYPE:
+                                temp = g_strdup_printf ("%s %d", type_name, i);
+                                break;
+                        case NAME_FORMAT_PROFILE:
+                                temp = g_strdup_printf (_("Profile %d"), i);
+                                break;
+                        default:
+                                g_assert_not_reached ();
+                }
+
                 for (l = names; l; l = l->next) {
                         if (!strcmp (l->data, temp)) {
                                 found = TRUE;
