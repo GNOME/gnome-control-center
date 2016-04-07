@@ -33,6 +33,8 @@
 
 /* Translate fprintd strings */
 #define TR(s) dgettext("fprintd", s)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
 
 /* This must match the number of images on the 2nd page in the UI file */
 #define MAX_ENROLL_STAGES 5
@@ -757,3 +759,4 @@ fingerprint_button_clicked (GtkWindow *parent,
         }
 }
 
+#pragma GCC diagnostic pop
