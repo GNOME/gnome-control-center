@@ -57,10 +57,6 @@
 
 #define MEDIA_HANDLING_SCHEMA "org.gnome.desktop.media-handling"
 
-/* Session */
-#define GNOME_SESSION_MANAGER_SCHEMA        "org.gnome.desktop.session"
-#define KEY_SESSION_NAME          "session-name"
-
 #define WID(w) (GtkWidget *) gtk_builder_get_object (self->priv->builder, w)
 
 CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
@@ -102,8 +98,6 @@ struct _CcInfoPanelPrivate
   /* Media */
   GSettings     *media_settings;
   GtkWidget     *other_application_combo;
-
-  GDBusConnection     *session_bus;
 
   GraphicsData  *graphics_data;
 };
@@ -1560,10 +1554,6 @@ cc_info_panel_init (CcInfoPanel *self)
   self->priv->builder = gtk_builder_new ();
 
   self->priv->media_settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
-
-  self->priv->session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
-
-  g_assert (self->priv->session_bus);
 
   if (gtk_builder_add_from_resource (self->priv->builder,
                                      "/org/gnome/control-center/info/info.ui",
