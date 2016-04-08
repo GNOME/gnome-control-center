@@ -2434,10 +2434,6 @@ test_page_cb (GtkButton *button,
       const gchar  *const dirs[] = { "/usr/share/cups",
                                      "/usr/local/share/cups",
                                      NULL };
-      const gchar  *testprint[] = { "%s/data/testprint",
-                                    "%s/data/testprint.ps",
-                                    NULL };
-      const gchar **pattern;
       const gchar  *datadir = NULL;
       http_t       *http = NULL;
       gchar        *printer_uri = NULL;
@@ -2448,32 +2444,26 @@ test_page_cb (GtkButton *button,
 
       if ((datadir = getenv ("CUPS_DATADIR")) != NULL)
         {
-          for (pattern = testprint; *pattern != NULL; pattern++)
-            {
-              filename = g_strdup_printf (*pattern, datadir);
-              if (g_access (filename, R_OK) == 0)
-                break;
-              else
-                {
-                  g_free (filename);
-                  filename = NULL;
-                }
-            }
+          filename = g_strdup_printf ("%s/data/testprint", datadir);
+          if (g_access (filename, R_OK) != 0)
+	    {
+	      g_free (filename);
+	      filename = g_strdup_printf ("%s/data/testprint.ps", datadir);
+	      if (g_access (filename, R_OK) != 0)
+	        g_clear_pointer (&filename, g_free);
+	    }
         }
       else
         {
           for (i = 0; (datadir = dirs[i]) != NULL && filename == NULL; i++)
             {
-              for (pattern = testprint; *pattern != NULL; pattern++)
+              filename = g_strdup_printf ("%s/data/testprint", datadir);
+              if (g_access (filename, R_OK) != 0)
                 {
-                  filename = g_strdup_printf (*pattern, datadir);
-                  if (g_access (filename, R_OK) == 0)
-                    break;
-                  else
-                    {
-                      g_free (filename);
-                      filename = NULL;
-                    }
+                  g_free (filename);
+                  filename = g_strdup_printf ("%s/data/testprint.ps", datadir);
+                  if (g_access (filename, R_OK) != 0)
+                    g_clear_pointer (&filename, g_free);
                 }
             }
         }
