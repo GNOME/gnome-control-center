@@ -39,8 +39,6 @@
 #endif
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
-#include <GL/gl.h>
-#include <GL/glx.h>
 #endif
 
 #include "gsd-disk-space-helper.h"
@@ -68,7 +66,7 @@ typedef struct {
   /* Will be the string below, or "Unknown" */
   const char *hardware_string;
 
-  char *glx_renderer;
+  char *renderer;
 } GraphicsData;
 
 typedef struct 
@@ -282,79 +280,47 @@ prettify_info (const char *info)
 static void
 graphics_data_free (GraphicsData *gdata)
 {
-  g_free (gdata->glx_renderer);
+  g_free (gdata->renderer);
   g_slice_free (GraphicsData, gdata);
 }
 
-#ifdef GDK_WINDOWING_X11
 static char *
-get_graphics_data_glx_renderer ()
+get_renderer_from_session (void)
 {
-  Display *display;
-  int attributes[] = {
-    GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
-    GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
-    GLX_RENDER_TYPE, GLX_RGBA_BIT,
-    None
-  };
-  int nconfigs;
-  int major, minor;
-  Window window;
-  GLXFBConfig *config;
-  GLXWindow glxwin;
-  GLXContext context;
-  XSetWindowAttributes win_attributes;
-  XVisualInfo *visualInfo;
+  GDBusProxy *session_proxy;
+  GVariant *renderer_variant;
   char *renderer;
+  GError *error = NULL;
 
-  gdk_error_trap_push ();
+  session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 "org.gnome.SessionManager",
+                                                 "/org/gnome/SessionManager",
+                                                 "org.gnome.SessionManager",
+                                                 NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
+                 error->message);
+      g_error_free (error);
+      return NULL;
+    }
 
-  display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+  renderer_variant = g_dbus_proxy_get_cached_property (session_proxy, "Renderer");
+  g_object_unref (session_proxy);
 
-  glXQueryVersion (display, &major, &minor);
-  config = glXChooseFBConfig (display, DefaultScreen (display),
-                              attributes, &nconfigs);
-  if (config == NULL) {
-    g_warning ("Failed to get OpenGL configuration");
+  if (!renderer_variant)
+    {
+      g_warning ("Unable to retrieve org.gnome.SessionManager.Renderer property");
+      return NULL;
+    }
 
-    gdk_error_trap_pop_ignored ();
-    return NULL;
-  }
-  visualInfo = glXGetVisualFromFBConfig (display, *config);
-  win_attributes.colormap = XCreateColormap (display, DefaultRootWindow(display),
-                                        visualInfo->visual, AllocNone );
-
-  window = XCreateWindow (display, DefaultRootWindow (display),
-                                0, 0, /* x, y */
-                                1, 1, /* width, height */
-                                0,   /* border_width */
-                                visualInfo->depth, InputOutput,
-                                visualInfo->visual, CWColormap, &win_attributes);
-  glxwin = glXCreateWindow (display, *config, window, NULL);
-
-  context = glXCreateNewContext (display, *config, GLX_RGBA_TYPE,
-                                 NULL, TRUE);
-  XFree (config);
-
-  glXMakeContextCurrent (display, glxwin, glxwin, context);
-  renderer = (char *) glGetString (GL_RENDERER);
-  g_debug ("Got GL_RENDERER: '%s'", renderer);
-  renderer = renderer ? prettify_info (renderer) : NULL;
-
-  glXMakeContextCurrent (display, None, None, NULL);
-  glXDestroyContext (display, context);
-  glXDestroyWindow (display, glxwin);
-  XDestroyWindow (display, window);
-  XFree (visualInfo);
-
-  if (gdk_error_trap_pop () != Success) {
-    g_warning ("Failed to get OpenGL driver info");
-    return NULL;
-  }
+  renderer = prettify_info (g_variant_get_string (renderer_variant, NULL));
+  g_variant_unref (renderer_variant);
 
   return renderer;
 }
-#endif
 
 static GraphicsData *
 get_graphics_data (void)
@@ -369,8 +335,8 @@ get_graphics_data (void)
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (display))
     {
-      result->glx_renderer = get_graphics_data_glx_renderer ();
-      result->hardware_string = result->glx_renderer;
+      result->renderer = get_renderer_from_session ();
+      result->hardware_string = result->renderer;
     }
   else
 #endif
