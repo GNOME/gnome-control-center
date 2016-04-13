@@ -1479,7 +1479,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_container_add (GTK_CONTAINER (panel), widget);
 
         provider = gtk_css_provider_new ();
-        gtk_css_provider_load_from_data (provider, ".circular-button { border-radius: 20px; outline-radius: 20px; }", -1, NULL);
+        gtk_css_provider_load_from_data (provider, ".circular-button { border-radius: 20px; -gtk-outline-radius: 20px; }", -1, NULL);
         gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                                    GTK_STYLE_PROVIDER (provider),
                                                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
