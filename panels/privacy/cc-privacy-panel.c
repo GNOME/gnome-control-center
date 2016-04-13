@@ -71,6 +71,8 @@ struct _CcPrivacyPanelPrivate
   GDBusProxy *gclue_manager;
   GDBusProxy *perm_store;
   GVariant *location_apps_perms;
+  GVariant *location_apps_data;
+  GHashTable *location_app_switches;
 
   GtkSizeGroup *location_icon_size_group;
 };
@@ -515,7 +517,7 @@ on_location_app_state_set (GtkSwitch *widget,
 {
   LocationAppStateData *data = (LocationAppStateData *) user_data;
   CcPrivacyPanel *self = data->self;
-  GVariant *params, *in_dict, *out_data;
+  GVariant *params;
   GVariantIter iter;
   gchar *key;
   gchar **value;
@@ -527,8 +529,7 @@ on_location_app_state_set (GtkSwitch *widget,
   data->changing_state = TRUE;
   data->pending_state = state;
 
-  in_dict = g_variant_get_child_value (self->priv->location_apps_perms, 0);
-  g_variant_iter_init (&iter, in_dict);
+  g_variant_iter_init (&iter, self->priv->location_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
   while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
     {
@@ -549,16 +550,13 @@ on_location_app_state_set (GtkSwitch *widget,
       if (tmp != NULL)
         value[0] = tmp;
     }
-  g_variant_unref (in_dict);
 
-  out_data = g_variant_get_child_value (self->priv->location_apps_perms, 1);
   params = g_variant_new ("(sbsa{sas}v)",
                           APP_PERMISSIONS_TABLE,
                           TRUE,
                           APP_PERMISSIONS_ID,
                           &builder,
-                          out_data);
-  g_variant_unref (out_data);
+                          self->priv->location_apps_data);
 
   g_dbus_proxy_call (self->priv->perm_store,
                      "Set",
@@ -586,6 +584,14 @@ add_location_app (CcPrivacyPanel *self,
   GDateTime *t;
   char *last_used_str;
   LocationAppStateData *data;
+
+  w = g_hash_table_lookup (priv->location_app_switches, app_id);
+  if (w != NULL)
+    {
+      gtk_switch_set_active (GTK_SWITCH (w), enabled);
+
+      return;
+    }
 
   desktop_id = g_strdup_printf ("%s.desktop", app_id);
   app_info = g_desktop_app_info_new (desktop_id);
@@ -637,6 +643,9 @@ add_location_app (CcPrivacyPanel *self,
   g_settings_bind (priv->location_settings, LOCATION_ENABLED,
                    w, "sensitive",
                    G_SETTINGS_BIND_DEFAULT);
+  g_hash_table_insert (priv->location_app_switches,
+                       g_strdup (app_id),
+                       g_object_ref (w));
 
   data = g_slice_new (LocationAppStateData);
   data->self = self;
@@ -653,38 +662,26 @@ add_location_app (CcPrivacyPanel *self,
   gtk_widget_show_all (row);
 }
 
+/* Steals permissions and permissions_data references */
 static void
-on_perm_store_lookup_done(GObject *source_object,
-                          GAsyncResult *res,
-                          gpointer user_data)
+update_perm_store (CcPrivacyPanel *self,
+                   GVariant *permissions,
+                   GVariant *permissions_data)
 {
-  CcPrivacyPanel *self;
   CcPrivacyPanelPrivate *priv;
-  GVariant *permissions, *dict;
   GVariantIter iter;
   gchar *key;
   gchar **value;
   GList *children;
-  GError *error = NULL;
 
-  permissions = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
-                                          res,
-                                          &error);
-  if (permissions == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed fetch permissions from xdg-app permission store: %s",
-                   error->message);
-      g_error_free (error);
-
-      return;
-    }
-  self = user_data;
   priv = self->priv;
 
+  g_clear_pointer (&priv->location_apps_perms, g_variant_unref);
   priv->location_apps_perms = permissions;
-  dict = g_variant_get_child_value (permissions, 0);
-  g_variant_iter_init (&iter, dict);
+  g_clear_pointer (&priv->location_apps_data, g_variant_unref);
+  priv->location_apps_data = permissions_data;
+
+  g_variant_iter_init (&iter, permissions);
   while (g_variant_iter_loop (&iter, "{s^as}", &key, &value))
     {
       gboolean enabled;
@@ -701,7 +698,6 @@ on_perm_store_lookup_done(GObject *source_object,
 
       add_location_app (self, key, enabled, last_used);
     }
-  g_variant_unref (dict);
 
   children = gtk_container_get_children (GTK_CONTAINER (priv->location_apps_list_box));
   if (g_list_length (children) > 0)
@@ -710,6 +706,55 @@ on_perm_store_lookup_done(GObject *source_object,
       gtk_widget_set_visible (priv->location_apps_frame, TRUE);
     }
   g_list_free (children);
+}
+
+static void
+on_perm_store_signal (GDBusProxy *proxy,
+                      gchar      *sender_name,
+                      gchar      *signal_name,
+                      GVariant   *parameters,
+                      gpointer    user_data)
+{
+  GVariant *permissions, *permissions_data;
+
+  if (g_strcmp0 (signal_name, "Changed") != 0)
+    return;
+
+  permissions = g_variant_get_child_value (parameters, 4);
+  permissions_data = g_variant_get_child_value (parameters, 3);
+  update_perm_store (user_data, permissions, permissions_data);
+}
+
+static void
+on_perm_store_lookup_done(GObject *source_object,
+                          GAsyncResult *res,
+                          gpointer user_data)
+{
+  GVariant *ret, *permissions, *permissions_data;
+  GError *error = NULL;
+
+  ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                  res,
+                                  &error);
+  if (ret == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed fetch permissions from xdg-app permission store: %s",
+                   error->message);
+      g_error_free (error);
+
+      return;
+    }
+
+  permissions = g_variant_get_child_value (ret, 0);
+  permissions_data = g_variant_get_child_value (ret, 1);
+  update_perm_store (user_data, permissions, permissions_data);
+
+  g_signal_connect_object (source_object,
+                           "g-signal",
+                           G_CALLBACK (on_perm_store_signal),
+                           user_data,
+                           0);
 }
 
 static void
@@ -771,6 +816,11 @@ add_location (CcPrivacyPanel *self)
   g_settings_bind (priv->location_settings, LOCATION_ENABLED,
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  priv->location_app_switches = g_hash_table_new_full (g_str_hash,
+                                                       g_str_equal,
+                                                       g_free,
+                                                       g_object_unref);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                             G_DBUS_PROXY_FLAGS_NONE,
@@ -1197,6 +1247,8 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->perm_store);
   g_clear_object (&priv->location_icon_size_group);
   g_clear_pointer (&priv->location_apps_perms, g_variant_unref);
+  g_clear_pointer (&priv->location_apps_data, g_variant_unref);
+  g_clear_pointer (&priv->location_app_switches, g_hash_table_unref);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
