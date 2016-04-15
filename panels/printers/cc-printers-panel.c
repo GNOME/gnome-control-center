@@ -2517,6 +2517,27 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
   g_object_unref (command);
 }
 
+static gchar *
+get_testprint_filename (const gchar *datadir)
+{
+  const gchar *testprint[] = { "/data/testprint",
+                               "/data/testprint.ps",
+                               NULL };
+  gchar       *filename = NULL;
+  gint         i;
+
+  for (i = 0; testprint[i] != NULL; i++)
+    {
+      filename = g_strconcat (datadir, testprint[i], NULL);
+      if (g_access (filename, R_OK) == 0)
+        break;
+
+      g_clear_pointer (&filename, g_free);
+    }
+
+  return filename;
+}
+
 static void
 test_page_cb (GtkButton *button,
               gpointer   user_data)
@@ -2555,30 +2576,15 @@ test_page_cb (GtkButton *button,
       ipp_t        *response = NULL;
       ipp_t        *request;
 
-      if ((datadir = getenv ("CUPS_DATADIR")) != NULL)
+      datadir = getenv ("CUPS_DATADIR");
+      if (datadir != NULL)
         {
-          filename = g_strdup_printf ("%s/data/testprint", datadir);
-          if (g_access (filename, R_OK) != 0)
-	    {
-	      g_free (filename);
-	      filename = g_strdup_printf ("%s/data/testprint.ps", datadir);
-	      if (g_access (filename, R_OK) != 0)
-	        g_clear_pointer (&filename, g_free);
-	    }
+          filename = get_testprint_filename (datadir);
         }
       else
         {
-          for (i = 0; (datadir = dirs[i]) != NULL && filename == NULL; i++)
-            {
-              filename = g_strdup_printf ("%s/data/testprint", datadir);
-              if (g_access (filename, R_OK) != 0)
-                {
-                  g_free (filename);
-                  filename = g_strdup_printf ("%s/data/testprint.ps", datadir);
-                  if (g_access (filename, R_OK) != 0)
-                    g_clear_pointer (&filename, g_free);
-                }
-            }
+          for (i = 0; dirs[i] != NULL && filename == NULL; i++)
+            filename = get_testprint_filename (dirs[i]);
         }
 
       if (filename)
