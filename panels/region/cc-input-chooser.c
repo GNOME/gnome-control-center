@@ -1151,5 +1151,10 @@ cc_input_chooser_get_selected (GtkWidget  *chooser,
 void
 cc_input_chooser_reset (GtkWidget *chooser)
 {
+  CcInputChooserPrivate *priv = GET_PRIVATE (chooser);
+  priv->showing_extra = FALSE;
+  gtk_entry_set_text (GTK_ENTRY (priv->filter_entry), "");
+  gtk_widget_hide (priv->filter_entry);
+  g_clear_pointer (&priv->filter_words, g_strfreev);
   show_locale_rows (chooser);
 }
