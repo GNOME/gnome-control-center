@@ -36,6 +36,8 @@
                         ((c) >= 0x20D0 && (c) <= 0x20FF)  || \
                         ((c) >= 0xFE20 && (c) <= 0xFE2F))
 
+#define IS_SOFT_HYPHEN(c) ((c) == 0x00AD)
+
 /* Copied from tracker/src/libtracker-fts/tracker-parser-glib.c under the GPL
  * And then from gnome-shell/src/shell-util.c
  *
@@ -76,7 +78,7 @@ cc_util_normalize_casefold_and_unaccent (const char *str)
       next_utf8 = g_utf8_next_char (&tmp[i]);
       utf8_len = next_utf8 - &tmp[i];
 
-      if (IS_CDM_UCS4 ((guint32) unichar))
+      if (IS_CDM_UCS4 (unichar) || IS_SOFT_HYPHEN (unichar))
         {
           /* If the given unichar is a combining diacritical mark,
            * just update the original index, not the output one */
