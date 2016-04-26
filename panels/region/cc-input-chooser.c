@@ -1024,6 +1024,17 @@ cc_input_chooser_private_free (gpointer data)
   g_free (priv);
 }
 
+static gboolean
+reset_on_escape (GtkWidget   *widget,
+                 GdkEventKey *event,
+                 GtkWidget   *chooser)
+{
+  if (event->keyval == GDK_KEY_Escape)
+    cc_input_chooser_reset (chooser);
+
+  return FALSE;
+}
+
 GtkWidget *
 cc_input_chooser_new (GtkWindow    *main_window,
                       gboolean      is_login,
@@ -1069,6 +1080,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   g_signal_connect (priv->list, "selected-rows-changed", G_CALLBACK (selected_rows_changed), chooser);
 
   g_signal_connect_swapped (priv->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser);
+  g_signal_connect (priv->filter_entry, "key-release-event", G_CALLBACK (reset_on_escape), chooser);
 
   if (priv->is_login)
     gtk_widget_show (WID ("login-label"));
