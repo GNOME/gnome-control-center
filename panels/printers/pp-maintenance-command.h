@@ -48,21 +48,28 @@ struct _PpMaintenanceCommandClass
   GObjectClass parent_class;
 };
 
-GType   pp_maintenance_command_get_type                     (void) G_GNUC_CONST;
+GType   pp_maintenance_command_get_type                          (void) G_GNUC_CONST;
 
-PpMaintenanceCommand *pp_maintenance_command_new            (const gchar *printer_name,
-                                                             const gchar *command,
-                                                             const gchar *title);
+PpMaintenanceCommand *pp_maintenance_command_new                 (const gchar *printer_name,
+                                                                  const gchar *command,
+                                                                  const gchar *title);
 
-void                  pp_maintenance_command_execute_async  (PpMaintenanceCommand *command,
-                                                             GCancellable         *cancellable,
-                                                             GAsyncReadyCallback   callback,
-                                                             gpointer              user_data);
+void                  pp_maintenance_command_execute_async       (PpMaintenanceCommand *command,
+                                                                  GCancellable         *cancellable,
+                                                                  GAsyncReadyCallback   callback,
+                                                                  gpointer              user_data);
 
-gboolean              pp_maintenance_command_execute_finish (PpMaintenanceCommand  *command,
-                                                             GAsyncResult          *result,
-                                                             GError               **error);
+gboolean              pp_maintenance_command_execute_finish      (PpMaintenanceCommand  *command,
+                                                                  GAsyncResult          *result,
+                                                                  GError               **error);
+void                  pp_maintenance_command_is_supported_async  (PpMaintenanceCommand *command,
+                                                                  GCancellable         *cancellable,
+                                                                  GAsyncReadyCallback   callback,
+                                                                  gpointer              user_data);
 
+gboolean              pp_maintenance_command_is_supported_finish (PpMaintenanceCommand  *command,
+                                                                  GAsyncResult          *result,
+                                                                  GError               **error);
 G_END_DECLS
 
 #endif /* __PP_MAINTENANCE_COMMAND_H__ */
