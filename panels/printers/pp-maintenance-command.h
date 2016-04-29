@@ -52,6 +52,7 @@ GType   pp_maintenance_command_get_type                          (void) G_GNUC_C
 
 PpMaintenanceCommand *pp_maintenance_command_new                 (const gchar *printer_name,
                                                                   const gchar *command,
+                                                                  const gchar *parameters,
                                                                   const gchar *title);
 
 void                  pp_maintenance_command_execute_async       (PpMaintenanceCommand *command,

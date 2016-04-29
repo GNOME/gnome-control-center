@@ -39,6 +39,7 @@ struct _PpMaintenanceCommandPrivate
 {
   gchar *printer_name;
   gchar *command;
+  gchar *parameters;
   gchar *title;
 };
 
@@ -48,6 +49,7 @@ enum {
   PROP_0 = 0,
   PROP_PRINTER_NAME,
   PROP_COMMAND,
+  PROP_PARAMETERS,
   PROP_TITLE
 };
 
@@ -60,6 +62,7 @@ pp_maintenance_command_finalize (GObject *object)
 
   g_clear_pointer (&priv->printer_name, g_free);
   g_clear_pointer (&priv->command, g_free);
+  g_clear_pointer (&priv->parameters, g_free);
   g_clear_pointer (&priv->title, g_free);
 
   G_OBJECT_CLASS (pp_maintenance_command_parent_class)->finalize (object);
@@ -82,6 +85,9 @@ pp_maintenance_command_get_property (GObject    *object,
         break;
       case PROP_COMMAND:
         g_value_set_string (value, self->priv->command);
+        break;
+      case PROP_PARAMETERS:
+        g_value_set_string (value, self->priv->parameters);
         break;
       case PROP_TITLE:
         g_value_set_string (value, self->priv->title);
@@ -111,6 +117,10 @@ pp_maintenance_command_set_property (GObject      *object,
       case PROP_COMMAND:
         g_free (self->priv->command);
         self->priv->command = g_value_dup_string (value);
+        break;
+      case PROP_PARAMETERS:
+        g_free (self->priv->parameters);
+        self->priv->parameters = g_value_dup_string (value);
         break;
       case PROP_TITLE:
         g_free (self->priv->title);
@@ -149,6 +159,13 @@ pp_maintenance_command_class_init (PpMaintenanceCommandClass *klass)
                          NULL,
                          G_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class, PROP_PARAMETERS,
+    g_param_spec_string ("parameters",
+                         "Optional parameters",
+                         "Optional parameters for the maintenance command",
+                         NULL,
+                         G_PARAM_READWRITE));
+
   g_object_class_install_property (gobject_class, PROP_TITLE,
     g_param_spec_string ("title",
                          "Command title",
@@ -168,11 +185,13 @@ pp_maintenance_command_init (PpMaintenanceCommand *command)
 PpMaintenanceCommand *
 pp_maintenance_command_new (const gchar *printer_name,
                             const gchar *command,
+                            const gchar *parameters,
                             const gchar *title)
 {
   return g_object_new (PP_TYPE_MAINTENANCE_COMMAND,
                        "printer-name", printer_name,
                        "command", command,
+                       "parameters", parameters,
                        "title", title,
                        NULL);
 }
@@ -219,7 +238,10 @@ _pp_maintenance_command_execute_thread (GTask        *task,
 
           file = fdopen (fd, "w");
           fprintf (file, "#CUPS-COMMAND\n");
-          fprintf (file, "%s\n", priv->command);
+          fprintf (file, "%s", priv->command);
+          if (priv->parameters)
+            fprintf (file, " %s", priv->parameters);
+          fprintf (file, "\n");
           fclose (file);
 
           response = cupsDoFileRequest (CUPS_HTTP_DEFAULT, request, "/", file_name);
