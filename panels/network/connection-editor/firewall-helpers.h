@@ -19,7 +19,7 @@
 #ifndef _FIREWALL_HELPERS_H_
 #define _FIREWALL_HELPERS_H_
 
-#include <nm-setting-connection.h>
+#include <NetworkManager.h>
 #include <gtk/gtk.h>
 
 void firewall_ui_setup      (NMSettingConnection *setting,

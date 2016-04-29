@@ -24,8 +24,7 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <nm-client.h>
-#include <nm-remote-settings.h>
+#include <NetworkManager.h>
 
 #include "cc-network-panel.h"
 
@@ -73,7 +72,6 @@ const gchar     *net_object_get_title                   (NetObject      *object)
 void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
 NMClient        *net_object_get_client                  (NetObject      *object);
-NMRemoteSettings *net_object_get_remote_settings        (NetObject      *object);
 GCancellable    *net_object_get_cancellable             (NetObject      *object);
 CcNetworkPanel  *net_object_get_panel                   (NetObject      *object);
 void             net_object_emit_changed                (NetObject      *object);

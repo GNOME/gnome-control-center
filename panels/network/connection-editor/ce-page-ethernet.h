@@ -24,7 +24,7 @@
 
 #include <glib-object.h>
 
-#include <nm-setting-wired.h>
+#include <NetworkManager.h>
 
 #include <gtk/gtk.h>
 #include "ce-page.h"
@@ -63,8 +63,7 @@ struct _CEPageEthernetClass
 GType   ce_page_ethernet_get_type (void);
 
 CEPage *ce_page_ethernet_new      (NMConnection     *connection,
-                                   NMClient         *client,
-                                   NMRemoteSettings *settings);
+                                   NMClient         *client);
 
 G_END_DECLS
 

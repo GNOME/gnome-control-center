@@ -59,8 +59,7 @@ struct _CEPageSecurityClass
 GType   ce_page_security_get_type (void);
 
 CEPage *ce_page_security_new      (NMConnection     *connection,
-                                   NMClient         *client,
-                                   NMRemoteSettings *settings);
+                                   NMClient         *client);
 
 G_END_DECLS
 

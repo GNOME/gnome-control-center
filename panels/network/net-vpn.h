@@ -23,11 +23,9 @@
 #define __NET_VPN_H
 
 #include <glib-object.h>
+#include <NetworkManager.h>
 
-#include "NetworkManagerVPN.h"
 #include "net-object.h"
-#include "nm-connection.h"
-#include "nm-vpn-connection.h"
 
 G_BEGIN_DECLS
 

@@ -78,7 +78,6 @@ ce_page_reset_class_init (CEPageResetClass *class)
 CEPage *
 ce_page_reset_new (NMConnection        *connection,
                    NMClient            *client,
-                   NMRemoteSettings    *settings,
                    NetConnectionEditor *editor)
 {
         CEPageReset *page;
@@ -86,7 +85,6 @@ ce_page_reset_new (NMConnection        *connection,
         page = CE_PAGE_RESET (ce_page_new (CE_TYPE_PAGE_RESET,
                                            connection,
                                            client,
-                                           settings,
                                            "/org/gnome/control-center/network/reset-page.ui",
                                            _("Reset")));
         page->editor = editor;

@@ -23,9 +23,9 @@
 #define __NET_DEVICE_MOBILE_H
 
 #include <glib-object.h>
+#include <NetworkManager.h>
 
 #include "net-device.h"
-#include "nm-connection.h"
 
 G_BEGIN_DECLS
 

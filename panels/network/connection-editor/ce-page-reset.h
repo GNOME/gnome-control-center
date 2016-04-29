@@ -56,7 +56,6 @@ GType   ce_page_reset_get_type (void);
 
 CEPage *ce_page_reset_new      (NMConnection        *connection,
                                 NMClient            *client,
-                                NMRemoteSettings    *settings,
                                 NetConnectionEditor *editor);
 
 G_END_DECLS

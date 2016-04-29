@@ -23,7 +23,7 @@
 #ifndef WS_WPA_EAP_H
 #define WS_WPA_EAP_H
 
-#include <nm-connection.h>
+#include <NetworkManager.h>
 
 typedef struct _WirelessSecurityWPAEAP WirelessSecurityWPAEAP;
 

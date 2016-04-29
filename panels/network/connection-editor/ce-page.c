@@ -26,7 +26,7 @@
 #include <net/if_arp.h>
 #include <netinet/ether.h>
 
-#include <nm-utils.h>
+#include <NetworkManager.h>
 
 #include <glib/gi18n.h>
 
@@ -218,7 +218,6 @@ CEPage *
 ce_page_new (GType             type,
              NMConnection     *connection,
              NMClient         *client,
-             NMRemoteSettings *settings,
              const gchar      *ui_resource,
              const gchar      *title)
 {
@@ -230,7 +229,6 @@ ce_page_new (GType             type,
                                       NULL));
         page->title = g_strdup (title);
         page->client = client;
-        page->settings= settings;
 
         if (ui_resource) {
                 if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
@@ -258,50 +256,60 @@ emit_initialized (CEPage *page,
 {
         page->initialized = TRUE;
         g_signal_emit (page, signals[INITIALIZED], 0, error);
+        g_clear_error (&error);
 }
 
 void
 ce_page_complete_init (CEPage      *page,
                        const gchar *setting_name,
-                       GHashTable  *secrets,
+                       GVariant    *secrets,
                        GError      *error)
 {
-        GHashTable *setting_hash;
-        GError *update_error = NULL;
+	GError *update_error = NULL;
+	GVariant *setting_dict;
+	gboolean ignore_error = FALSE;
 
-        if (error
-            && !dbus_g_error_has_name (error, "org.freedesktop.NetworkManager.Settings.InvalidSetting")
-            && !dbus_g_error_has_name (error, "org.freedesktop.NetworkManager.AgentManager.NoSecrets")) {
-                emit_initialized (page, error);
-                return;
-        } else if (!setting_name || !secrets || !g_hash_table_size (secrets)) {
-                /* Success, no secrets */
-                emit_initialized (page, NULL);
-                return;
-        }
+	g_return_if_fail (page != NULL);
+	g_return_if_fail (CE_IS_PAGE (page));
 
-        setting_hash = g_hash_table_lookup (secrets, setting_name);
-        if (!setting_hash) {
-                /* Success, no secrets */
-                emit_initialized (page, NULL);
-                return;
-        }
+	if (error) {
+		ignore_error = g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND) ||
+			g_error_matches (error, NM_SECRET_AGENT_ERROR, NM_SECRET_AGENT_ERROR_NO_SECRETS);
+	}
 
-        if (nm_connection_update_secrets (page->connection,
-                                          setting_name,
-                                          secrets,
-                                          &update_error)) {
-                emit_initialized (page, NULL);
-                return;
-        }
+	/* Ignore missing settings errors */
+	if (error && !ignore_error) {
+		emit_initialized (page, error);
+		return;
+	} else if (!setting_name || !secrets || g_variant_n_children (secrets) == 0) {
+		/* Success, no secrets */
+		emit_initialized (page, NULL);
+		return;
+	}
 
-        if (!update_error) {
-                g_set_error_literal (&update_error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_UNKNOWN,
-                                     "Failed to update connection secrets due to an unknown error.");
-        }
+	g_assert (setting_name);
+	g_assert (secrets);
 
-        emit_initialized (page, update_error);
-        g_clear_error (&update_error);
+	setting_dict = g_variant_lookup_value (secrets, setting_name, NM_VARIANT_TYPE_SETTING);
+	if (!setting_dict) {
+		/* Success, no secrets */
+		emit_initialized (page, NULL);
+		return;
+	}
+	g_variant_unref (setting_dict);
+
+	/* Update the connection with the new secrets */
+	if (nm_connection_update_secrets (page->connection,
+	                                  setting_name,
+	                                  secrets,
+	                                  &update_error)) {
+		/* Success */
+		emit_initialized (page, NULL);
+		return;
+	}
+
+	g_warning ("Failed to update connection secrets due to an unknown error.");
+	emit_initialized (page, NULL);
 }
 
 gchar **
@@ -367,94 +375,60 @@ ce_page_setup_mac_combo (GtkComboBoxText  *combo,
         }
 }
 
-void
-ce_page_mac_to_entry (const GByteArray *mac,
-                      gint              type,
-                      GtkEntry         *entry)
+gchar *
+ce_page_trim_address (const gchar *addr)
 {
-        char *str_addr;
+        char *space;
 
-        g_return_if_fail (entry != NULL);
-        g_return_if_fail (GTK_IS_ENTRY (entry));
+        if (!addr || *addr == '\0')
+                return NULL;
 
-        if (!mac || !mac->len)
-                return;
-
-        if (mac->len != nm_utils_hwaddr_len (type))
-                return;
-
-        str_addr = nm_utils_hwaddr_ntoa (mac->data, type);
-        gtk_entry_set_text (entry, str_addr);
-        g_free (str_addr);
+        space = strchr (addr, ' ');
+        if (space != NULL)
+                return g_strndup (addr, space - addr);
+        return g_strdup (addr);
 }
 
-static gboolean
-utils_ether_addr_valid (const struct ether_addr *test_addr)
+gboolean
+ce_page_address_is_valid (const gchar *addr)
 {
-        guint8 invalid_addr1[ETH_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-        guint8 invalid_addr2[ETH_ALEN] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-        guint8 invalid_addr3[ETH_ALEN] = {0x44, 0x44, 0x44, 0x44, 0x44, 0x44};
-        guint8 invalid_addr4[ETH_ALEN] = {0x00, 0x30, 0xb4, 0x00, 0x00, 0x00}; /* prism54 dummy MAC */
+        guint8 invalid_addr[4][ETH_ALEN] = {
+                {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+                {0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+                {0x44, 0x44, 0x44, 0x44, 0x44, 0x44},
+                {0x00, 0x30, 0xb4, 0x00, 0x00, 0x00}, /* prism54 dummy MAC */
+        };
+        guint8 addr_bin[ETH_ALEN];
+        char *trimmed_addr;
+        guint i;
 
-        g_return_val_if_fail (test_addr != NULL, FALSE);
+        if (!addr || *addr == '\0')
+                return TRUE;
 
-        /* Compare the AP address the card has with invalid ethernet MAC addresses. */
-        if (!memcmp (test_addr->ether_addr_octet, &invalid_addr1, ETH_ALEN))
+        trimmed_addr = ce_page_trim_address (addr);
+
+        if (!nm_utils_hwaddr_valid (trimmed_addr, -1)) {
+                g_free (trimmed_addr);
+                return FALSE;
+        }
+
+        if (!nm_utils_hwaddr_aton (trimmed_addr, addr_bin, ETH_ALEN)) {
+                g_free (trimmed_addr);
+                return FALSE;
+        }
+
+        g_free (trimmed_addr);
+
+        /* Check for multicast address */
+        if ((((guint8 *) addr_bin)[0]) & 0x01)
                 return FALSE;
 
-        if (!memcmp (test_addr->ether_addr_octet, &invalid_addr2, ETH_ALEN))
-                return FALSE;
+        for (i = 0; i < G_N_ELEMENTS (invalid_addr); i++) {
+                if (nm_utils_hwaddr_matches (addr_bin, ETH_ALEN, invalid_addr[i], ETH_ALEN))
+                        return FALSE;
+        }
 
-        if (!memcmp (test_addr->ether_addr_octet, &invalid_addr3, ETH_ALEN))
-                return FALSE;
-        if (!memcmp (test_addr->ether_addr_octet, &invalid_addr4, ETH_ALEN))
-                return FALSE;
-
-        if (test_addr->ether_addr_octet[0] & 1)  /* Multicast addresses */
-                return FALSE;
-        
         return TRUE;
-}
-
-GByteArray *
-ce_page_entry_to_mac (GtkEntry *entry,
-                      gint      type,
-                      gboolean *invalid)
-{
-        const char *temp, *sp;
-        char *buf = NULL;
-        GByteArray *mac;
-
-        g_return_val_if_fail (entry != NULL, NULL);
-        g_return_val_if_fail (GTK_IS_ENTRY (entry), NULL);
-
-        if (invalid)
-                *invalid = FALSE;
-
-        temp = gtk_entry_get_text (entry);
-        if (!temp || !strlen (temp))
-                return NULL;
-
-        sp = strchr (temp, ' ');
-        if (sp)
-                temp = buf = g_strndup (temp, sp - temp);
-
-        mac = nm_utils_hwaddr_atoba (temp, type);
-        g_free (buf);
-        if (!mac) {
-                if (invalid)
-                        *invalid = TRUE;
-                return NULL;
-        }
-
-        if (type == ARPHRD_ETHER && !utils_ether_addr_valid ((struct ether_addr *)mac->data)) {
-                g_byte_array_free (mac, TRUE);
-                if (invalid)
-                        *invalid = TRUE;
-                return NULL;
-        }
-
-        return mac;
 }
 
 const gchar *
@@ -516,18 +490,20 @@ ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
 }
 
 gchar *
-ce_page_get_next_available_name (GSList *connections,
+ce_page_get_next_available_name (const GPtrArray *connections,
                                  NameFormat format,
                                  const gchar *type_name)
 {
         GSList *names = NULL, *l;
         gchar *cname = NULL;
         gint i = 0;
+        guint con_idx;
 
-        for (l = connections; l; l = l->next) {
+        for (con_idx = 0; con_idx < connections->len; con_idx++) {
+                NMConnection *connection = g_ptr_array_index (connections, con_idx);
                 const gchar *id;
 
-                id = nm_connection_get_id (NM_CONNECTION (l->data));
+                id = nm_connection_get_id (connection);
                 g_assert (id);
                 names = g_slist_append (names, (gpointer) id);
         }

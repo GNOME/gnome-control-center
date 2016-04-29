@@ -25,8 +25,7 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <nm-connection.h>
-#include <nm-setting.h>
+#include <NetworkManager.h>
 
 typedef const char * (*HelperSecretFunc)(NMSetting *);
 

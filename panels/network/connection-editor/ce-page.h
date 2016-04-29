@@ -24,9 +24,7 @@
 
 #include <glib-object.h>
 
-#include <nm-connection.h>
-#include <nm-client.h>
-#include <nm-remote-settings.h>
+#include <NetworkManager.h>
 
 #include <gtk/gtk.h>
 
@@ -54,7 +52,6 @@ struct _CEPage
 
         NMConnection *connection;
         NMClient *client;
-        NMRemoteSettings *settings;
         GCancellable *cancellable;
 };
 
@@ -80,12 +77,11 @@ void         ce_page_changed         (CEPage           *page);
 CEPage      *ce_page_new             (GType             type,
                                       NMConnection     *connection,
                                       NMClient         *client,
-                                      NMRemoteSettings *settings,
                                       const gchar      *ui_resource,
                                       const gchar      *title);
 void         ce_page_complete_init   (CEPage           *page,
                                       const gchar      *setting_name,
-                                      GHashTable       *secrets,
+                                      GVariant         *variant,
                                       GError           *error);
 
 gchar      **ce_page_get_mac_list    (NMClient         *client,
@@ -94,23 +90,19 @@ gchar      **ce_page_get_mac_list    (NMClient         *client,
 void         ce_page_setup_mac_combo (GtkComboBoxText  *combo,
                                       const gchar      *current_mac,
                                       gchar           **mac_list);
-void         ce_page_mac_to_entry    (const GByteArray *mac,
-                                      gint              type,
-                                      GtkEntry         *entry);
-GByteArray  *ce_page_entry_to_mac    (GtkEntry         *entry,
-                                      gint              type,
-                                      gboolean         *invalid);
 gint         ce_get_property_default (NMSetting        *setting,
                                       const gchar      *property_name);
 gint         ce_spin_output_with_default (GtkSpinButton *spin,
                                           gpointer       user_data);
+gboolean     ce_page_address_is_valid (const gchar *addr);
+gchar       *ce_page_trim_address (const gchar *addr);
 
 typedef enum {
         NAME_FORMAT_TYPE,
         NAME_FORMAT_PROFILE
 } NameFormat;
 
-gchar * ce_page_get_next_available_name (GSList *connections,
+gchar * ce_page_get_next_available_name (const GPtrArray *connections,
                                          NameFormat format,
                                          const gchar *type_name);
 

@@ -24,8 +24,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
-#include <nm-utils.h>
-#include <nm-connection.h>
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "ce-page-security.h"
@@ -211,7 +210,6 @@ finish_setup (CEPageSecurity *page)
         GtkListStore *sec_model;
         GtkTreeIter iter;
         const gchar *mode;
-        const gchar *security;
         guint32 dev_caps = 0;
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         int active = -1;
@@ -240,9 +238,6 @@ finish_setup (CEPageSecurity *page)
         page->adhoc = is_adhoc;
 
         sws = nm_connection_get_setting_wireless_security (connection);
-        security = nm_setting_wireless_get_security (sw);
-        if (!security || strcmp (security, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME) != 0)
-                sws = NULL;
         if (sws)
                 default_type = get_default_type_for_security (sws);
 
@@ -390,7 +385,7 @@ validate (CEPage        *page,
 
         sec = security_combo_get_active (CE_PAGE_SECURITY (page));
         if (sec) {
-                const GByteArray *ssid = nm_setting_wireless_get_ssid (sw);
+                GBytes *ssid = nm_setting_wireless_get_ssid (sw);
 
                 if (ssid) {
                         /* FIXME: get failed property and error out of wifi security objects */
@@ -398,15 +393,15 @@ validate (CEPage        *page,
                         if (valid)
                                 wireless_security_fill_connection (sec, connection);
                         else
-                                g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_UNKNOWN, "Invalid Wi-Fi security");
+                                g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Invalid Wi-Fi security");
                 } else {
-                        g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_UNKNOWN, "Missing SSID");
+                        g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_MISSING_SETTING, "Missing SSID");
                         valid = FALSE;
                 }
 
                 if (CE_PAGE_SECURITY (page)->adhoc) {
                         if (!wireless_security_adhoc_compatible (sec)) {
-                                g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_UNKNOWN, "Security not compatible with Ad-Hoc mode");
+                                g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Security not compatible with Ad-Hoc mode");
                                 valid = FALSE;
                         }
                 }
@@ -414,7 +409,6 @@ validate (CEPage        *page,
                 wireless_security_unref (sec);
         } else {
                 /* No security, unencrypted */
-                g_object_set (sw, NM_SETTING_WIRELESS_SEC, NULL, NULL);
                 nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
                 nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
                 valid = TRUE;
@@ -453,38 +447,32 @@ ce_page_security_class_init (CEPageSecurityClass *class)
 
 CEPage *
 ce_page_security_new (NMConnection      *connection,
-                      NMClient          *client,
-                      NMRemoteSettings  *settings)
+                      NMClient          *client)
 {
         CEPageSecurity *page;
-        const gchar *security;
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         NMSettingWirelessSecurity *sws;
 
         page = CE_PAGE_SECURITY (ce_page_new (CE_TYPE_PAGE_SECURITY,
                                               connection,
                                               client,
-                                              settings,
                                               "/org/gnome/control-center/network/security-page.ui",
                                               _("Security")));
 
         sws = nm_connection_get_setting_wireless_security (connection);
-        security = nm_setting_wireless_get_security (nm_connection_get_setting_wireless (connection));
-        if (!security || strcmp (security, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME) != 0)
-                sws = NULL;
         if (sws)
                 default_type = get_default_type_for_security (sws);
 
-        if (default_type == NMU_SEC_STATIC_WEP
-            || default_type == NMU_SEC_LEAP
-            || default_type == NMU_SEC_WPA_PSK
-            || default_type == NMU_SEC_WPA2_PSK) {
+        if (default_type == NMU_SEC_STATIC_WEP ||
+            default_type == NMU_SEC_LEAP ||
+            default_type == NMU_SEC_WPA_PSK ||
+            default_type == NMU_SEC_WPA2_PSK) {
                 CE_PAGE (page)->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
         }
 
-        if (default_type == NMU_SEC_DYNAMIC_WEP
-            || default_type == NMU_SEC_WPA_ENTERPRISE
-            || default_type == NMU_SEC_WPA2_ENTERPRISE) {
+        if (default_type == NMU_SEC_DYNAMIC_WEP ||
+            default_type == NMU_SEC_WPA_ENTERPRISE ||
+            default_type == NMU_SEC_WPA2_ENTERPRISE) {
                 CE_PAGE (page)->security_setting = NM_SETTING_802_1X_SETTING_NAME;
         }
 

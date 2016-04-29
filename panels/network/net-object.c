@@ -35,7 +35,6 @@ struct _NetObjectPrivate
         gboolean                         removable;
         GCancellable                    *cancellable;
         NMClient                        *client;
-        NMRemoteSettings                *remote_settings;
         CcNetworkPanel                  *panel;
 };
 
@@ -45,7 +44,6 @@ enum {
         PROP_TITLE,
         PROP_REMOVABLE,
         PROP_CLIENT,
-        PROP_REMOTE_SETTINGS,
         PROP_CANCELLABLE,
         PROP_PANEL,
         PROP_LAST
@@ -120,13 +118,6 @@ net_object_get_client (NetObject *object)
 {
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
         return object->priv->client;
-}
-
-NMRemoteSettings *
-net_object_get_remote_settings (NetObject *object)
-{
-        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
-        return object->priv->remote_settings;
 }
 
 GCancellable *
@@ -213,9 +204,6 @@ net_object_get_property (GObject *object_,
         case PROP_CLIENT:
                 g_value_set_pointer (value, priv->client);
                 break;
-        case PROP_REMOTE_SETTINGS:
-                g_value_set_pointer (value, priv->remote_settings);
-                break;
         case PROP_CANCELLABLE:
                 g_value_set_object (value, priv->cancellable);
                 break;
@@ -257,11 +245,6 @@ net_object_set_property (GObject *object_,
                 if (priv->client)
                         g_object_add_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
                 break;
-        case PROP_REMOTE_SETTINGS:
-                priv->remote_settings = g_value_get_pointer (value);
-                if (priv->remote_settings)
-                        g_object_add_weak_pointer (G_OBJECT (priv->remote_settings), (gpointer *) (&priv->remote_settings));
-                break;
         case PROP_CANCELLABLE:
                 g_assert (!priv->cancellable);
                 priv->cancellable = g_value_dup_object (value);
@@ -291,8 +274,6 @@ net_object_finalize (GObject *object)
 
         if (priv->client)
                 g_object_remove_weak_pointer (G_OBJECT (priv->client), (gpointer *) (&priv->client));
-        if (priv->remote_settings)
-                g_object_remove_weak_pointer (G_OBJECT (priv->remote_settings), (gpointer *) (&priv->remote_settings));
         if (priv->panel)
                 g_object_remove_weak_pointer (G_OBJECT (priv->panel), (gpointer *) (&priv->panel));
 
@@ -326,10 +307,6 @@ net_object_class_init (NetObjectClass *klass)
         pspec = g_param_spec_pointer ("client", NULL, NULL,
                                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CLIENT, pspec);
-
-        pspec = g_param_spec_pointer ("remote-settings", NULL, NULL,
-                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-        g_object_class_install_property (object_class, PROP_REMOTE_SETTINGS, pspec);
 
         pspec = g_param_spec_object ("cancellable", NULL, NULL,
                                      G_TYPE_CANCELLABLE,

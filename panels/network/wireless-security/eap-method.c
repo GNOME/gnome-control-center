@@ -31,11 +31,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <NetworkManager.h>
 
-#include <nm-setting-connection.h>
-#include <nm-setting-8021x.h>
 #include "eap-method.h"
-#include "nm-utils.h"
 
 GType
 eap_method_get_g_type (void)

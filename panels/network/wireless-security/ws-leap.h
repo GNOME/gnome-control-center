@@ -23,7 +23,7 @@
 #ifndef WS_LEAP_H
 #define WS_LEAP_H
 
-#include <nm-connection.h>
+#include <NetworkManager.h>
 
 typedef struct _WirelessSecurityLEAP WirelessSecurityLEAP;
 

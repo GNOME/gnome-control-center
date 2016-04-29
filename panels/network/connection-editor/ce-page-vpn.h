@@ -24,9 +24,7 @@
 
 #include <glib-object.h>
 
-#include <nm-setting-wired.h>
-#define NM_VPN_API_SUBJECT_TO_CHANGE
-#include <nm-vpn-plugin-ui-interface.h>
+#include <NetworkManager.h>
 
 #include <gtk/gtk.h>
 #include "ce-page.h"
@@ -48,13 +46,13 @@ struct _CEPageVpn
         CEPage parent;
 
         NMSettingConnection *setting_connection;
-        NMSettingVPN *setting_vpn;
+        NMSettingVpn *setting_vpn;
 
         GtkEntry *name;
         GtkBox   *box;
 
-	NMVpnPluginUiInterface *plugin;
-	NMVpnPluginUiWidgetInterface *ui;
+	NMVpnEditorPlugin *plugin;
+	NMVpnEditor *editor;
 };
 
 struct _CEPageVpnClass
@@ -65,8 +63,7 @@ struct _CEPageVpnClass
 GType   ce_page_vpn_get_type (void);
 
 CEPage *ce_page_vpn_new      (NMConnection     *connection,
-			      NMClient         *client,
-			      NMRemoteSettings *settings);
+			      NMClient         *client);
 
 G_END_DECLS
 

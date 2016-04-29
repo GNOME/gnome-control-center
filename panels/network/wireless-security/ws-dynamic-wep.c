@@ -23,7 +23,7 @@
 #include <glib/gi18n.h>
 #include <ctype.h>
 #include <string.h>
-#include <nm-setting-wireless.h>
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "eap-method.h"
@@ -44,7 +44,7 @@ destroy (WirelessSecurity *parent)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, const GByteArray *ssid)
+validate (WirelessSecurity *parent, GBytes *ssid)
 {
 	return ws_802_1x_validate (parent, "dynamic_wep_auth_combo");
 }

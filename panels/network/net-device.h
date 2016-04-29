@@ -24,8 +24,8 @@
 
 #include <glib-object.h>
 
+#include <NetworkManager.h>
 #include "net-object.h"
-#include "nm-device.h"
 
 G_BEGIN_DECLS
 

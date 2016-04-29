@@ -43,7 +43,7 @@ struct _CEPageIP6
 {
         CEPage parent;
 
-        NMSettingIP6Config *setting;
+        NMSettingIPConfig *setting;
 
         GtkSwitch      *enabled;
         GtkComboBox    *method;
@@ -63,8 +63,7 @@ struct _CEPageIP6Class
 GType   ce_page_ip6_get_type (void);
 
 CEPage *ce_page_ip6_new      (NMConnection     *connection,
-                              NMClient         *client,
-                              NMRemoteSettings *settings);
+                              NMClient         *client);
 
 G_END_DECLS
 

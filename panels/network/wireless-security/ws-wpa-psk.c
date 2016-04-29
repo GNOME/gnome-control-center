@@ -22,7 +22,7 @@
 
 #include <ctype.h>
 #include <string.h>
-#include <nm-setting-wireless.h>
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "helpers.h"
@@ -47,7 +47,7 @@ show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, const GByteArray *ssid)
+validate (WirelessSecurity *parent, GBytes *ssid)
 {
 	GtkWidget *entry;
 	const char *key;
@@ -109,8 +109,6 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	mode = nm_setting_wireless_get_mode (s_wireless);
 	if (mode && !strcmp (mode, "adhoc"))
 		is_adhoc = TRUE;
-
-	g_object_set (s_wireless, NM_SETTING_WIRELESS_SEC, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, NULL);
 
 	/* Blow away the old security setting by adding a clear one */
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();

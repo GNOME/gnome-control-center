@@ -54,8 +54,7 @@ struct _CEPageWifiClass
 GType   ce_page_wifi_get_type (void);
 
 CEPage *ce_page_wifi_new      (NMConnection     *connection,
-                               NMClient         *client,
-                               NMRemoteSettings *settings);
+                               NMClient         *client);
 
 G_END_DECLS
 

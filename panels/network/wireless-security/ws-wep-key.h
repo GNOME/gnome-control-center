@@ -23,7 +23,7 @@
 #ifndef WS_WEP_KEY_H
 #define WS_WEP_KEY_H
 
-#include <nm-setting-wireless-security.h>
+#include <NetworkManager.h>
 
 typedef struct _WirelessSecurityWEPKey WirelessSecurityWEPKey;
 

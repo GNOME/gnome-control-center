@@ -25,9 +25,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
-#include <nm-client.h>
-#include <nm-device.h>
-#include <nm-remote-connection.h>
+#include <NetworkManager.h>
 
 #include "panel-common.h"
 
@@ -143,7 +141,6 @@ device_off_toggled (GtkSwitch *sw,
                     GParamSpec *pspec,
                     NetDeviceSimple *device_simple)
 {
-        const gchar *path;
         const GPtrArray *acs;
         gboolean active;
         gint i;
@@ -160,21 +157,23 @@ device_off_toggled (GtkSwitch *sw,
                 connection = net_device_get_find_connection (NET_DEVICE (device_simple));
                 if (connection == NULL)
                         return;
-                nm_client_activate_connection (client,
-                                               connection,
-                                               net_device_get_nm_device (NET_DEVICE (device_simple)),
-                                               NULL, NULL, NULL);
+                nm_client_activate_connection_async (client,
+                                                     connection,
+                                                     net_device_get_nm_device (NET_DEVICE (device_simple)),
+                                                     NULL, NULL, NULL, NULL);
         } else {
+                const gchar *uuid;
+
                 connection = net_device_get_find_connection (NET_DEVICE (device_simple));
                 if (connection == NULL)
                         return;
-                path = nm_connection_get_path (connection);
+                uuid = nm_connection_get_uuid (connection);
                 client = net_object_get_client (NET_OBJECT (device_simple));
                 acs = nm_client_get_active_connections (client);
                 for (i = 0; acs && i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
-                        if (strcmp (nm_active_connection_get_connection (a), path) == 0) {
-                                nm_client_deactivate_connection (client, a);
+                        if (strcmp (nm_active_connection_get_uuid (a), uuid) == 0) {
+                                nm_client_deactivate_connection (client, a, NULL, NULL);
                                 break;
                         }
                 }

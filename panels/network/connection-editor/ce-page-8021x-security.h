@@ -23,7 +23,7 @@
 #ifndef __CE_PAGE_8021X_SECURITY_H
 #define __CE_PAGE_8021X_SECURITY_H
 
-#include <nm-connection.h>
+#include <NetworkManager.h>
 #include "wireless-security.h"
 
 #include <glib.h>
@@ -58,7 +58,6 @@ struct CEPage8021xSecurityClass {
 GType ce_page_8021x_security_get_type (void);
 
 CEPage *ce_page_8021x_security_new (NMConnection     *connection,
-                                    NMClient         *client,
-                                    NMRemoteSettings *settings);
+                                    NMClient         *client);
 
 #endif  /* __CE_PAGE_8021X_SECURITY_H */

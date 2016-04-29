@@ -24,7 +24,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
-#include <nm-utils.h>
+#include <NetworkManager.h>
 
 #include "ce-page-vpn.h"
 #include "vpn-helpers.h"
@@ -94,14 +94,9 @@ load_vpn_plugin (CEPageVpn *page, NMConnection *connection)
 	CEPage *parent = CE_PAGE (page);
         GtkWidget *ui_widget, *failure;
 
-	page->ui = nm_vpn_plugin_ui_interface_ui_factory (page->plugin, connection, NULL);
-	if (!page->ui) {
-                page->plugin = NULL;
-		return;
-        }
-	ui_widget = GTK_WIDGET (nm_vpn_plugin_ui_widget_interface_get_widget (page->ui));
+	ui_widget = GTK_WIDGET (nm_vpn_editor_get_widget (page->editor));
 	if (!ui_widget) {
-		g_clear_object (&page->ui);
+		g_clear_object (&page->editor);
                 page->plugin = NULL;
 		return;
 	}
@@ -113,7 +108,7 @@ load_vpn_plugin (CEPageVpn *page, NMConnection *connection)
         gtk_box_pack_start (page->box, ui_widget, TRUE, TRUE, 0);
 	gtk_widget_show_all (ui_widget);
 
-        g_signal_connect_swapped (page->ui, "changed", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (page->editor, "changed", G_CALLBACK (ce_page_changed), page);
 }
 
 static void
@@ -158,10 +153,10 @@ validate (CEPage        *page,
         if (!nm_setting_verify (NM_SETTING (self->setting_connection), NULL, error))
                 return FALSE;
 
-        if (!self->ui)
+        if (!self->editor)
                 return TRUE;
 
-	return nm_vpn_plugin_ui_widget_interface_update_connection (self->ui, connection, error);
+	return nm_vpn_editor_update_connection (self->editor, connection, error);
 }
 
 static void
@@ -174,7 +169,7 @@ dispose (GObject *object)
 {
         CEPageVpn *page = CE_PAGE_VPN (object);
 
-        g_clear_object (&page->ui);
+        g_clear_object (&page->editor);
 
         G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
 }
@@ -209,15 +204,13 @@ finish_setup (CEPageVpn *page, gpointer unused, GError *error, gpointer user_dat
 
 CEPage *
 ce_page_vpn_new (NMConnection     *connection,
-		 NMClient         *client,
-		 NMRemoteSettings *settings)
+		 NMClient         *client)
 {
         CEPageVpn *page;
 
         page = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
 					 connection,
 					 client,
-					 settings,
 					 "/org/gnome/control-center/network/vpn-page.ui",
 					 _("Identity")));
 

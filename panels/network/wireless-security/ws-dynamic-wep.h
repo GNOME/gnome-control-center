@@ -23,7 +23,7 @@
 #ifndef WS_DYNAMIC_WEP_H
 #define WS_DYNAMIC_WEP_H
 
-#include <nm-connection.h>
+#include <NetworkManager.h>
 
 typedef struct _WirelessSecurityDynamicWEP WirelessSecurityDynamicWEP;
 

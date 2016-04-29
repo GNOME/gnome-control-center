@@ -23,11 +23,10 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
-
-#include <nm-utils.h>
-#include <nm-device-ethernet.h>
-
 #include <net/if_arp.h>
+
+#include <NetworkManager.h>
+
 
 #include "firewall-helpers.h"
 #include "ce-page-ethernet.h"
@@ -65,11 +64,11 @@ connect_ethernet_page (CEPageEthernet *page)
         NMSettingConnection *sc;
         int mtu_def;
         char **mac_list;
-        const GByteArray *s_mac;
-        char *s_mac_str;
+        const char *s_mac_str;
         GtkWidget *widget;
         GtkWidget *heading;
         const gchar *name;
+        const gchar *cloned_mac;
 
         name = nm_setting_connection_get_id (page->setting_connection);
         gtk_entry_set_text (page->name, name);
@@ -77,16 +76,14 @@ connect_ethernet_page (CEPageEthernet *page)
         /* Device MAC address */
         mac_list = ce_page_get_mac_list (CE_PAGE (page)->client, NM_TYPE_DEVICE_ETHERNET,
                                          NM_DEVICE_ETHERNET_PERMANENT_HW_ADDRESS);
-        s_mac = nm_setting_wired_get_mac_address (setting);
-        s_mac_str = s_mac ? nm_utils_hwaddr_ntoa (s_mac->data, ARPHRD_ETHER) : NULL;
+        s_mac_str = nm_setting_wired_get_mac_address (setting);
         ce_page_setup_mac_combo (page->device_mac, s_mac_str, mac_list);
-        g_free (s_mac_str);
         g_strfreev (mac_list);
         g_signal_connect_swapped (page->device_mac, "changed", G_CALLBACK (ce_page_changed), page);
 
         /* Cloned MAC address */
-        ce_page_mac_to_entry (nm_setting_wired_get_cloned_mac_address (setting),
-                              ARPHRD_ETHER, page->cloned_mac);
+        cloned_mac = nm_setting_wired_get_cloned_mac_address (setting);
+        gtk_entry_set_text (GTK_ENTRY (page->cloned_mac), cloned_mac ? cloned_mac : "");
         g_signal_connect_swapped (page->cloned_mac, "changed", G_CALLBACK (ce_page_changed), page);
 
         /* MTU */
@@ -122,31 +119,29 @@ connect_ethernet_page (CEPageEthernet *page)
         heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_zone"));
         firewall_ui_setup (sc, widget, heading, CE_PAGE (page)->cancellable);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
-
 }
 
 static void
 ui_to_setting (CEPageEthernet *page)
 {
-        GByteArray *device_mac = NULL;
-        GByteArray *cloned_mac = NULL;
+        gchar *device_mac = NULL;
+        gchar *cloned_mac;
+        const gchar *text;
         GtkWidget *entry;
 
         entry = gtk_bin_get_child (GTK_BIN (page->device_mac));
-        if (entry)
-                device_mac = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, NULL);
-        cloned_mac = ce_page_entry_to_mac (page->cloned_mac, ARPHRD_ETHER, NULL);
+        if (entry) {
+                text = gtk_entry_get_text (GTK_ENTRY (entry));
+                device_mac = ce_page_trim_address (text);
+        }
+        text = gtk_entry_get_text (GTK_ENTRY (entry));
+        cloned_mac = ce_page_trim_address (text);
 
         g_object_set (page->setting_wired,
                       NM_SETTING_WIRED_MAC_ADDRESS, device_mac,
                       NM_SETTING_WIRED_CLONED_MAC_ADDRESS, cloned_mac,
                       NM_SETTING_WIRED_MTU, (guint32) gtk_spin_button_get_value_as_int (page->mtu),
                       NULL);
-
-        if (device_mac)
-                g_byte_array_free (device_mac, TRUE);
-        if (cloned_mac)
-                g_byte_array_free (cloned_mac, TRUE);
 
         g_object_set (page->setting_connection,
                       NM_SETTING_CONNECTION_ID, gtk_entry_get_text (page->name),
@@ -155,6 +150,8 @@ ui_to_setting (CEPageEthernet *page)
         entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
         firewall_ui_to_setting (page->setting_connection, entry);
 
+        g_free (cloned_mac);
+        g_free (device_mac);
 }
 
 static gboolean
@@ -163,31 +160,23 @@ validate (CEPage        *page,
           GError       **error)
 {
         CEPageEthernet *self = CE_PAGE_ETHERNET (page);
-        gboolean invalid = FALSE;
-        GByteArray *ignore;
         GtkWidget *entry;
         gboolean ret = TRUE;
 
         entry = gtk_bin_get_child (GTK_BIN (self->device_mac));
         if (entry) {
-                ignore = ce_page_entry_to_mac (GTK_ENTRY (entry), ARPHRD_ETHER, &invalid);
-                if (invalid) {
+                if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (entry)))) {
                         widget_set_error (entry);
                         ret = FALSE;
                 } else {
-                        if (ignore)
-                                g_byte_array_free (ignore, TRUE);
                         widget_unset_error (entry);
                 }
         }
 
-        ignore = ce_page_entry_to_mac (self->cloned_mac, ARPHRD_ETHER, &invalid);
-        if (invalid) {
+        if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (self->cloned_mac)))) {
                 widget_set_error (GTK_WIDGET (self->cloned_mac));
                 ret = FALSE;
         } else {
-                if (ignore)
-                        g_byte_array_free (ignore, TRUE);
                 widget_unset_error (GTK_WIDGET (self->cloned_mac));
         }
 
@@ -215,15 +204,13 @@ ce_page_ethernet_class_init (CEPageEthernetClass *class)
 
 CEPage *
 ce_page_ethernet_new (NMConnection     *connection,
-                      NMClient         *client,
-                      NMRemoteSettings *settings)
+                      NMClient         *client)
 {
         CEPageEthernet *page;
 
         page = CE_PAGE_ETHERNET (ce_page_new (CE_TYPE_PAGE_ETHERNET,
                                               connection,
                                               client,
-                                              settings,
                                               "/org/gnome/control-center/network/ethernet-page.ui",
                                               _("Identity")));
 

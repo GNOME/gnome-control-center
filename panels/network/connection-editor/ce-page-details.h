@@ -56,7 +56,6 @@ GType   ce_page_details_get_type (void);
 
 CEPage *ce_page_details_new      (NMConnection     *connection,
                                   NMClient         *client,
-                                  NMRemoteSettings *settings,
                                   NMDevice         *device,
                                   NMAccessPoint    *ap);
 

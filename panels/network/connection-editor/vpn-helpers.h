@@ -25,14 +25,11 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <nm-connection.h>
+#include <NetworkManager.h>
 
-#define NM_VPN_API_SUBJECT_TO_CHANGE
-#include <nm-vpn-plugin-ui-interface.h>
+GSList *vpn_get_plugins (void);
 
-GHashTable *vpn_get_plugins (GError **error);
-
-NMVpnPluginUiInterface *vpn_get_plugin_by_service (const char *service);
+NMVpnEditorPlugin *vpn_get_plugin_by_service (const char *service);
 
 typedef void (*VpnImportCallback) (NMConnection *connection, gpointer user_data);
 void vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data);

@@ -25,9 +25,7 @@
 #include <glib-object.h>
 
 #include <gtk/gtk.h>
-#include <nm-client.h>
-#include <nm-access-point.h>
-#include <nm-remote-settings.h>
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
@@ -48,7 +46,6 @@ struct _NetConnectionEditor
         GtkWidget        *parent_window;
         NMClient         *client;
         NMDevice         *device;
-        NMRemoteSettings *settings;
 
         NMConnection     *connection;
         NMConnection     *orig_connection;
@@ -81,8 +78,7 @@ NetConnectionEditor *net_connection_editor_new      (GtkWindow        *parent_wi
                                                      NMConnection     *connection,
                                                      NMDevice         *device,
                                                      NMAccessPoint    *ap,
-                                                     NMClient         *client,
-                                                     NMRemoteSettings *settings);
+                                                     NMClient         *client);
 void                 net_connection_editor_set_title (NetConnectionEditor  *editor,
                                                       const gchar          *title);
 void                 net_connection_editor_run      (NetConnectionEditor   *editor);

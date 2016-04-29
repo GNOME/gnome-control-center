@@ -20,26 +20,18 @@
  * Copyright 2008 - 2011 Red Hat, Inc. 
  */
 
-#include <nm-utils.h>
-#include <nm-connection.h>
-#include <nm-setting-gsm.h>
-#include <nm-setting-cdma.h>
-#include <nm-setting-serial.h>
-#include <nm-device-modem.h>
-#include <nm-device-wifi.h>
+#include <NetworkManager.h>
+#include <nma-wifi-dialog.h>
+#include <nma-mobile-wizard.h>
 
 #include "network-dialogs.h"
-#include "nm-wifi-dialog.h"
-#include "nm-mobile-wizard.h"
 
 typedef struct {
         NMClient *client;
-        NMRemoteSettings *settings;
 } WirelessDialogClosure;
 
 typedef struct {
         NMClient *client;
-        NMRemoteSettings *settings;
         NMDevice *device;
 } MobileDialogClosure;
 
@@ -49,7 +41,6 @@ wireless_dialog_closure_closure_notify (gpointer data,
 {
         WirelessDialogClosure *closure = data;
         g_object_unref (closure->client);
-        g_object_unref (closure->settings);
 
         g_slice_free (WirelessDialogClosure, data);
 }
@@ -59,7 +50,6 @@ mobile_dialog_closure_free (gpointer data)
 {
         MobileDialogClosure *closure = data;
         g_object_unref (closure->client);
-        g_object_unref (closure->settings);
         g_object_unref (closure->device);
 
         g_slice_free (MobileDialogClosure, data);
@@ -82,24 +72,29 @@ wifi_can_create_wifi_network (NMClient *client)
 }
 
 static void
-activate_existing_cb (NMClient *client,
-                      NMActiveConnection *active,
-                      GError *error,
+activate_existing_cb (GObject *source_object,
+                      GAsyncResult *res,
                       gpointer user_data)
 {
-	if (error)
+        GError *error = NULL;
+
+        if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
 		g_warning ("Failed to activate connection: (%d) %s", error->code, error->message);
+		g_error_free (error);
+	}
 }
 
 static void
-activate_new_cb (NMClient *client,
-                 NMActiveConnection *active,
-                 const char *connection_path,
-                 GError *error,
+activate_new_cb (GObject *source_object,
+                 GAsyncResult *res,
                  gpointer user_data)
 {
-	if (error)
+        GError *error = NULL;
+
+        if (!nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
 		g_warning ("Failed to add new connection: (%d) %s", error->code, error->message);
+		g_error_free (error);
+	}
 }
 
 static void
@@ -125,7 +120,8 @@ wireless_dialog_response_cb (GtkDialog *foo,
 	NMConnection *connection, *fuzzy_match = NULL;
 	NMDevice *device;
 	NMAccessPoint *ap;
-	GSList *all, *iter;
+	const GPtrArray *all;
+	guint i;
 
 	if (response != GTK_RESPONSE_OK)
 		goto done;
@@ -154,24 +150,24 @@ wireless_dialog_response_cb (GtkDialog *foo,
 	g_assert (device);
 
 	/* Find a similar connection and use that instead */
-	all = nm_remote_settings_list_connections (closure->settings);
-	for (iter = all; iter; iter = g_slist_next (iter)) {
+	all = nm_client_get_connections (closure->client);
+	for (i = 0; i < all->len; i++) {
 		if (nm_connection_compare (connection,
-		                           NM_CONNECTION (iter->data),
+		                           NM_CONNECTION (g_ptr_array_index (all, i)),
 		                           (NM_SETTING_COMPARE_FLAG_FUZZY | NM_SETTING_COMPARE_FLAG_IGNORE_ID))) {
-			fuzzy_match = NM_CONNECTION (iter->data);
+			fuzzy_match = NM_CONNECTION (g_ptr_array_index (all, i));
 			break;
 		}
 	}
-	g_slist_free (all);
 
 	if (fuzzy_match) {
-		nm_client_activate_connection (closure->client,
-		                               fuzzy_match,
-		                               device,
-		                               ap ? nm_object_get_path (NM_OBJECT (ap)) : NULL,
-		                               activate_existing_cb,
-		                               NULL);
+		nm_client_activate_connection_async (closure->client,
+		                                     fuzzy_match,
+		                                     device,
+		                                     ap ? nm_object_get_path (NM_OBJECT (ap)) : NULL,
+		                                     NULL,
+		                                     activate_existing_cb,
+		                                     NULL);
 	} else {
 		NMSetting *s_con;
 		NMSettingWireless *s_wifi;
@@ -192,12 +188,13 @@ wireless_dialog_response_cb (GtkDialog *foo,
 			g_object_set (G_OBJECT (s_con), NM_SETTING_CONNECTION_AUTOCONNECT, FALSE, NULL);
 		}
 
-		nm_client_add_and_activate_connection (closure->client,
-		                                       connection,
-		                                       device,
-		                                       ap ? nm_object_get_path (NM_OBJECT (ap)) : NULL,
-		                                       activate_new_cb,
-		                                       NULL);
+		nm_client_add_and_activate_connection_async (closure->client,
+		                                             connection,
+		                                             device,
+		                                             ap ? nm_object_get_path (NM_OBJECT (ap)) : NULL,
+		                                             NULL,
+		                                             activate_new_cb,
+		                                             NULL);
 	}
 
 	/* Balance nma_wifi_dialog_get_connection() */
@@ -211,7 +208,6 @@ done:
 static void
 show_wireless_dialog (GtkWidget        *toplevel,
 		      NMClient         *client,
-		      NMRemoteSettings *settings,
 		      GtkWidget        *dialog)
 {
         WirelessDialogClosure *closure;
@@ -226,7 +222,6 @@ show_wireless_dialog (GtkWidget        *toplevel,
 
         closure = g_slice_new (WirelessDialogClosure);
         closure->client = g_object_ref (client);
-        closure->settings = g_object_ref (settings);
         g_signal_connect_data (dialog, "response",
                                G_CALLBACK (wireless_dialog_response_cb),
                                closure, wireless_dialog_closure_closure_notify, 0);
@@ -238,29 +233,26 @@ show_wireless_dialog (GtkWidget        *toplevel,
 
 void
 cc_network_panel_create_wifi_network (GtkWidget        *toplevel,
-				      NMClient         *client,
-				      NMRemoteSettings *settings)
+				      NMClient         *client)
 {
   if (wifi_can_create_wifi_network (client)) {
-          show_wireless_dialog (toplevel, client, settings,
-                                nma_wifi_dialog_new_for_create (client, settings));
+          show_wireless_dialog (toplevel, client,
+                                nma_wifi_dialog_new_for_create (client));
   }
 }
 
 void
 cc_network_panel_connect_to_hidden_network (GtkWidget        *toplevel,
-                                            NMClient         *client,
-                                            NMRemoteSettings *settings)
+                                            NMClient         *client)
 {
         g_debug ("connect to hidden wifi");
-        show_wireless_dialog (toplevel, client, settings,
-                              nma_wifi_dialog_new_for_other (client, settings));
+        show_wireless_dialog (toplevel, client,
+                              nma_wifi_dialog_new_for_hidden (client));
 }
 
 void
 cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
                                            NMClient         *client,
-                                           NMRemoteSettings *settings,
                                            NMDevice         *device,
                                            const gchar      *arg_access_point)
 {
@@ -293,7 +285,7 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
                 return;
         }
 
-        connection = nm_connection_new ();
+        connection = nm_simple_connection_new ();
 
         /* Need a UUID for the "always ask" stuff in the Dialog of Doom */
         s_con = (NMSettingConnection *) nm_setting_connection_new ();
@@ -306,7 +298,6 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
         nm_connection_add_setting (connection, NM_SETTING (s_wifi));
         g_object_set (s_wifi,
                       NM_SETTING_WIRELESS_SSID, nm_access_point_get_ssid (ap),
-                      NM_SETTING_WIRELESS_SEC, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
                       NULL);
 
         s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
@@ -318,8 +309,8 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
         g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "mschapv2", NULL);
         nm_connection_add_setting (connection, NM_SETTING (s_8021x));
 
-        dialog = nma_wifi_dialog_new (client, settings, connection, device, ap, FALSE);
-        show_wireless_dialog (toplevel, client, settings, dialog);
+        dialog = nma_wifi_dialog_new (client, connection, device, ap, FALSE);
+        show_wireless_dialog (toplevel, client, dialog);
 }
 
 static void
@@ -335,12 +326,13 @@ connect_3g (NMConnection *connection,
 		/* Ask NM to add the new connection and activate it; NM will fill in the
 		 * missing details based on the specific object and the device.
 		 */
-		nm_client_add_and_activate_connection (closure->client,
-		                                       connection,
-                                                       closure->device,
-		                                       "/",
-		                                       activate_new_cb,
-		                                       NULL);
+		nm_client_add_and_activate_connection_async (closure->client,
+							     connection,
+							     closure->device,
+							     "/",
+							     NULL,
+							     activate_new_cb,
+							     NULL);
 	}
 
         mobile_dialog_closure_free (closure);
@@ -364,7 +356,7 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 			goto done;
 		}
 
-		connection = nm_connection_new ();
+		connection = nm_simple_connection_new ();
 
 		setting = nm_setting_cdma_new ();
 		g_object_set (setting,
@@ -426,7 +418,7 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 			goto done;
 		}
 
-		connection = nm_connection_new ();
+		connection = nm_simple_connection_new ();
 
 		setting = nm_setting_gsm_new ();
 		g_object_set (setting,
@@ -493,7 +485,6 @@ show_wizard_idle_cb (NMAMobileWizard *wizard)
 void
 cc_network_panel_connect_to_3g_network (GtkWidget        *toplevel,
                                         NMClient         *client,
-                                        NMRemoteSettings *settings,
                                         NMDevice         *device)
 {
         MobileDialogClosure *closure;
@@ -510,7 +501,6 @@ cc_network_panel_connect_to_3g_network (GtkWidget        *toplevel,
 
         closure = g_slice_new (MobileDialogClosure);
         closure->client = g_object_ref (client);
-        closure->settings = g_object_ref (settings);
         closure->device = g_object_ref (device);
 
 	caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));

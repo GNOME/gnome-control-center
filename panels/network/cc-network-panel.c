@@ -26,11 +26,7 @@
 #include "cc-network-panel.h"
 #include "cc-network-resources.h"
 
-#include "nm-remote-settings.h"
-#include "nm-client.h"
-#include "nm-device.h"
-#include "nm-device-modem.h"
-#include "nm-ui-utils.h"
+#include <NetworkManager.h>
 
 #include "net-device.h"
 #include "net-device-mobile.h"
@@ -68,7 +64,6 @@ struct _CcNetworkPanelPrivate
         GtkWidget        *treeview;
         NMClient         *client;
         MMManager        *modem_manager;
-        NMRemoteSettings *remote_settings;
         gboolean          updating_device;
 
         /* Killswitch stuff */
@@ -231,7 +226,6 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&priv->builder);
         g_clear_object (&priv->client);
         g_clear_object (&priv->modem_manager);
-        g_clear_object (&priv->remote_settings);
         g_clear_object (&priv->kill_switch_header);
         priv->rfkill_switch = NULL;
 
@@ -534,7 +528,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
         nm_devices = (NMDevice **)nmdarray->pdata;
         num_devices = ndarray->len;
 
-        titles = nma_utils_disambiguate_device_names (nm_devices, num_devices);
+        titles = nm_device_disambiguate_names (nm_devices, num_devices);
         for (i = 0; i < num_devices; i++) {
                 net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
                 g_free (titles[i]);
@@ -565,21 +559,21 @@ handle_argv_for_device (CcNetworkPanel *panel,
                 select_tree_iter (panel, iter);
 
                 if (priv->arg_operation == OPERATION_CREATE_WIFI)
-                        cc_network_panel_create_wifi_network (toplevel, priv->client, priv->remote_settings);
+                        cc_network_panel_create_wifi_network (toplevel, priv->client);
                 else
-                        cc_network_panel_connect_to_hidden_network (toplevel, priv->client, priv->remote_settings);
+                        cc_network_panel_connect_to_hidden_network (toplevel, priv->client);
 
                 reset_command_line_args (panel); /* done */
                 return TRUE;
         } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), priv->arg_device) == 0) {
                 if (priv->arg_operation == OPERATION_CONNECT_MOBILE) {
-                        cc_network_panel_connect_to_3g_network (toplevel, priv->client, priv->remote_settings, device);
+                        cc_network_panel_connect_to_3g_network (toplevel, priv->client, device);
 
                         reset_command_line_args (panel); /* done */
                         select_tree_iter (panel, iter);
                         return TRUE;
                 } else if (priv->arg_operation == OPERATION_CONNECT_8021X) {
-                        cc_network_panel_connect_to_8021x_network (toplevel, priv->client, priv->remote_settings, device, priv->arg_access_point);
+                        cc_network_panel_connect_to_8021x_network (toplevel, priv->client, device, priv->arg_access_point);
                         reset_command_line_args (panel); /* done */
                         select_tree_iter (panel, iter);
                         return TRUE;
@@ -736,7 +730,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                    "removable", FALSE,
                                    "cancellable", panel->priv->cancellable,
                                    "client", panel->priv->client,
-                                   "remote-settings", panel->priv->remote_settings,
                                    "nm-device", device,
                                    "id", nm_device_get_udi (device),
                                    NULL);
@@ -992,7 +985,7 @@ active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_d
                 for (j = 0; devices && j < devices->len; j++)
                         g_debug ("           %s", nm_device_get_udi (g_ptr_array_index (devices, j)));
                 if (NM_IS_VPN_CONNECTION (connection))
-                        g_debug ("           VPN base connection: %s", nm_active_connection_get_specific_object (connection));
+                        g_debug ("           VPN base connection: %s", nm_active_connection_get_specific_object_path (connection));
 
                 if (g_object_get_data (G_OBJECT (connection), "has-state-changed-handler") == NULL) {
                         g_signal_connect_object (connection, "notify::state",
@@ -1029,7 +1022,7 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
         /* clear all devices we added */
-        if (!nm_client_get_manager_running (client)) {
+        if (!nm_client_get_nm_running (client)) {
                 g_debug ("NM disappeared");
                 liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                                     "liststore_devices"));
@@ -1118,7 +1111,6 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                                 "id", id,
                                 "connection", connection,
                                 "client", panel->priv->client,
-                                "remote-settings", panel->priv->remote_settings,
                                 NULL);
         g_signal_connect_object (net_vpn, "removed",
                                  G_CALLBACK (object_removed_cb), panel, 0);
@@ -1158,7 +1150,7 @@ add_connection (CcNetworkPanel *panel,
         s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection,
                                                                   NM_TYPE_SETTING_CONNECTION));
         type = nm_setting_connection_get_connection_type (s_con);
-        iface = nm_connection_get_virtual_iface_name (connection);
+        iface = nm_connection_get_interface_name (connection);
         if (g_strcmp0 (type, "vpn") != 0 && iface == NULL)
                 return;
 
@@ -1174,32 +1166,11 @@ add_connection (CcNetworkPanel *panel,
 }
 
 static void
-notify_new_connection_cb (NMRemoteSettings *settings,
-                          NMRemoteConnection *connection,
-                          CcNetworkPanel *panel)
+notify_connection_added_cb (NMClient           *client,
+                            NMRemoteConnection *connection,
+                            CcNetworkPanel     *panel)
 {
         add_connection (panel, NM_CONNECTION (connection));
-}
-
-static void
-notify_connections_read_cb (NMRemoteSettings *settings,
-                            CcNetworkPanel *panel)
-{
-        GSList *list, *iter;
-        NMConnection *connection;
-
-        list = nm_remote_settings_list_connections (settings);
-        g_debug ("%p has %i remote connections",
-                 panel, g_slist_length (list));
-        for (iter = list; iter; iter = g_slist_next (iter)) {
-                connection = NM_CONNECTION (iter->data);
-                add_connection (panel, connection);
-        }
-        g_slist_free (list);
-
-
-        g_debug ("Calling handle_argv() after cold-plugging connections");
-        handle_argv (panel);
 }
 
 static void
@@ -1256,8 +1227,7 @@ add_connection_cb (GtkToolButton *button, CcNetworkPanel *panel)
 
         toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
         editor = net_connection_editor_new (toplevel, NULL, NULL, NULL,
-                                            panel->priv->client,
-                                            panel->priv->remote_settings);
+                                            panel->priv->client);
         g_signal_connect (editor, "done", G_CALLBACK (editor_done), panel);
         net_connection_editor_run (editor);
 }
@@ -1289,7 +1259,6 @@ on_toplevel_map (GtkWidget      *widget,
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
-        DBusGConnection *bus = NULL;
         GError *error = NULL;
         GtkStyleContext *context;
         GtkTreeSelection *selection;
@@ -1297,6 +1266,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkWidget *toplevel;
         GDBusConnection *system_bus;
         GtkCssProvider *provider;
+        const GPtrArray *connections;
+        guint i;
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
         g_resources_register (cc_network_get_resource ());
@@ -1336,10 +1307,10 @@ cc_network_panel_init (CcNetworkPanel *panel)
         panel_add_proxy_device (panel);
 
         /* use NetworkManager client */
-        panel->priv->client = nm_client_new ();
-        g_signal_connect (panel->priv->client, "notify::" NM_CLIENT_MANAGER_RUNNING,
+        panel->priv->client = nm_client_new (NULL, NULL);
+        g_signal_connect (panel->priv->client, "notify::nm-running" ,
                           G_CALLBACK (manager_running), panel);
-        g_signal_connect (panel->priv->client, "notify::" NM_CLIENT_ACTIVE_CONNECTIONS,
+        g_signal_connect (panel->priv->client, "notify::active-connections",
                           G_CALLBACK (active_connections_changed), panel);
         g_signal_connect (panel->priv->client, "device-added",
                           G_CALLBACK (device_added_cb), panel);
@@ -1377,17 +1348,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (remove_connection), panel);
 
         /* add remote settings such as VPN settings as virtual devices */
-        bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
-        if (bus == NULL) {
-                g_warning ("Error connecting to system D-Bus: %s",
-                           error->message);
-                g_error_free (error);
-        }
-        panel->priv->remote_settings = nm_remote_settings_new (bus);
-        g_signal_connect (panel->priv->remote_settings, NM_REMOTE_SETTINGS_CONNECTIONS_READ,
-                          G_CALLBACK (notify_connections_read_cb), panel);
-        g_signal_connect (panel->priv->remote_settings, NM_REMOTE_SETTINGS_NEW_CONNECTION,
-                          G_CALLBACK (notify_new_connection_cb), panel);
+        g_signal_connect (panel->priv->client, NM_CLIENT_CONNECTION_ADDED,
+                          G_CALLBACK (notify_connection_added_cb), panel);
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
@@ -1408,4 +1370,11 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
         g_object_unref (provider);
 
+        /* Cold-plug existing connections */
+        connections = nm_client_get_connections (panel->priv->client);
+        for (i = 0; i < connections->len; i++)
+                add_connection (panel, connections->pdata[i]);
+
+        g_debug ("Calling handle_argv() after cold-plugging connections");
+        handle_argv (panel);
 }

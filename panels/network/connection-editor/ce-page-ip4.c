@@ -23,13 +23,14 @@
 
 #include <errno.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
+#include <NetworkManager.h>
 
 #include "shell/list-box-helper.h"
 #include "ce-page-ip4.h"
 #include "ui-helpers.h"
-#include <nm-utils.h>
 
 G_DEFINE_TYPE (CEPageIP4, ce_page_ip4, CE_TYPE_PAGE)
 
@@ -298,29 +299,24 @@ add_address_section (CEPageIP4 *page)
 
         add_section_toolbar (page, widget, G_CALLBACK (add_empty_address_row));
 
-        for (i = 0; i < nm_setting_ip4_config_get_num_addresses (page->setting); i++) {
-                NMIP4Address *addr;
+        for (i = 0; i < nm_setting_ip_config_get_num_addresses (page->setting); i++) {
+                NMIPAddress *addr;
                 struct in_addr tmp_addr;
-                gchar address[INET_ADDRSTRLEN + 1];
                 gchar network[INET_ADDRSTRLEN + 1];
-                gchar gateway[INET_ADDRSTRLEN + 1];
 
-                addr = nm_setting_ip4_config_get_address (page->setting, i);
+                addr = nm_setting_ip_config_get_address (page->setting, i);
                 if (!addr)
                         continue;
 
-                tmp_addr.s_addr = nm_ip4_address_get_address (addr);
-                (void) inet_ntop (AF_INET, &tmp_addr, &address[0], sizeof (address));
-
-                tmp_addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip4_address_get_prefix (addr));
+                tmp_addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip_address_get_prefix (addr));
                 (void) inet_ntop (AF_INET, &tmp_addr, &network[0], sizeof (network));
 
-                tmp_addr.s_addr = nm_ip4_address_get_gateway (addr);
-                (void) inet_ntop (AF_INET, &tmp_addr, &gateway[0], sizeof (gateway));
-
-                add_address_row (page, address, network, gateway);
+                add_address_row (page,
+                                 nm_ip_address_get_address (addr),
+                                 network,
+                                 nm_setting_ip_config_get_gateway (page->setting));
         }
-        if (nm_setting_ip4_config_get_num_addresses (page->setting) == 0)
+        if (nm_setting_ip_config_get_num_addresses (page->setting) == 0)
                 add_empty_address_row (page);
 
         gtk_widget_show_all (widget);
@@ -399,21 +395,18 @@ add_dns_section (CEPageIP4 *page)
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
-        gtk_switch_set_active (page->auto_dns, !nm_setting_ip4_config_get_ignore_auto_dns (page->setting));
+        gtk_switch_set_active (page->auto_dns, !nm_setting_ip_config_get_ignore_auto_dns (page->setting));
         g_signal_connect (page->auto_dns, "notify::active", G_CALLBACK (switch_toggled), page);
 
         add_section_toolbar (page, widget, G_CALLBACK (add_empty_dns_row));
 
-        for (i = 0; i < nm_setting_ip4_config_get_num_dns (page->setting); i++) {
-                struct in_addr tmp_addr;
-                gchar address[INET_ADDRSTRLEN + 1];
+        for (i = 0; i < nm_setting_ip_config_get_num_dns (page->setting); i++) {
+                const char *address;
 
-                tmp_addr.s_addr = nm_setting_ip4_config_get_dns (page->setting, i);
-                (void) inet_ntop (AF_INET, &tmp_addr, &address[0], sizeof (address));
-
+                address = nm_setting_ip_config_get_dns (page->setting, i);
                 add_dns_row (page, address);
         }
-        if (nm_setting_ip4_config_get_num_dns (page->setting) == 0)
+        if (nm_setting_ip_config_get_num_dns (page->setting) == 0)
                 add_empty_dns_row (page);
 
         gtk_widget_show_all (widget);
@@ -483,7 +476,7 @@ add_route_row (CEPageIP4   *page,
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "metric", widget);
-        if (metric > 0) {
+        if (metric >= 0) {
                 gchar *s = g_strdup_printf ("%d", metric);
                 gtk_entry_set_text (GTK_ENTRY (widget), s);
                 g_free (s);
@@ -521,7 +514,7 @@ add_route_row (CEPageIP4   *page,
 static void
 add_empty_route_row (CEPageIP4 *page)
 {
-        add_route_row (page, "", "", "", 0);
+        add_route_row (page, "", "", "", -1);
 }
 
 static void
@@ -542,44 +535,33 @@ add_routes_section (CEPageIP4 *page)
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_routes = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
-        gtk_switch_set_active (page->auto_routes, !nm_setting_ip4_config_get_ignore_auto_routes (page->setting));
+        gtk_switch_set_active (page->auto_routes, !nm_setting_ip_config_get_ignore_auto_routes (page->setting));
         g_signal_connect (page->auto_routes, "notify::active", G_CALLBACK (switch_toggled), page);
 
         add_section_toolbar (page, widget, G_CALLBACK (add_empty_route_row));
 
-        for (i = 0; i < nm_setting_ip4_config_get_num_routes (page->setting); i++) {
-                NMIP4Route *route;
+        for (i = 0; i < nm_setting_ip_config_get_num_routes (page->setting); i++) {
+                NMIPRoute *route;
                 struct in_addr tmp_addr;
-                gchar address[INET_ADDRSTRLEN + 1];
                 gchar netmask[INET_ADDRSTRLEN + 1];
-                gchar gateway[INET_ADDRSTRLEN + 1];
-                gint metric;
 
-                route = nm_setting_ip4_config_get_route (page->setting, i);
+                route = nm_setting_ip_config_get_route (page->setting, i);
                 if (!route)
                         continue;
 
-                tmp_addr.s_addr = nm_ip4_route_get_dest (route);
-                (void) inet_ntop (AF_INET, &tmp_addr, &address[0], sizeof (address));
-
-                tmp_addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip4_route_get_prefix (route));
+                tmp_addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip_route_get_prefix (route));
                 (void) inet_ntop (AF_INET, &tmp_addr, &netmask[0], sizeof (netmask));
 
-                tmp_addr.s_addr = nm_ip4_route_get_next_hop (route);
-                (void) inet_ntop (AF_INET, &tmp_addr, &gateway[0], sizeof (gateway));
-                metric = nm_ip4_route_get_metric (route);
-                add_route_row (page, address, netmask, gateway, metric);
+                add_route_row (page,
+                               nm_ip_route_get_dest (route),
+                               netmask,
+                               nm_ip_route_get_next_hop (route),
+                               nm_ip_route_get_metric (route));
         }
-        if (nm_setting_ip4_config_get_num_routes (page->setting) == 0)
+        if (nm_setting_ip_config_get_num_routes (page->setting) == 0)
                 add_empty_route_row (page);
 
         gtk_widget_show_all (widget);
-}
-
-static void
-free_addr (gpointer addr)
-{
-        g_array_free ((GArray *)addr, TRUE);
 }
 
 static void
@@ -599,7 +581,7 @@ connect_ip4_page (CEPageIP4 *page)
         page->enabled = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "switch_enable"));
         g_signal_connect (page->enabled, "notify::active", G_CALLBACK (switch_toggled), page);
 
-        str_method = nm_setting_ip4_config_get_method (page->setting);
+        str_method = nm_setting_ip_config_get_method (page->setting);
         disabled = g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_DISABLED) == 0;
         gtk_switch_set_active (page->enabled, !disabled);
         g_signal_connect_swapped (page->enabled, "notify::active", G_CALLBACK (ce_page_changed), page);
@@ -640,7 +622,7 @@ connect_ip4_page (CEPageIP4 *page)
 
         page->never_default = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "never_default_check"));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (page->never_default),
-                                      nm_setting_ip4_config_get_never_default (page->setting));
+                                      nm_setting_ip_config_get_never_default (page->setting));
         g_signal_connect_swapped (page->never_default, "toggled", G_CALLBACK (ce_page_changed), page);
 
         g_signal_connect (page->method, "changed", G_CALLBACK (method_changed), page);
@@ -682,7 +664,7 @@ ui_to_setting (CEPageIP4 *page)
         gboolean ignore_auto_routes;
         gboolean never_default;
         GPtrArray *addresses = NULL;
-        GArray *dns_servers = NULL;
+        GPtrArray *dns_servers = NULL;
         GPtrArray *routes = NULL;
         GList *children, *l;
         gboolean ret = TRUE;
@@ -704,7 +686,7 @@ ui_to_setting (CEPageIP4 *page)
                 }
         }
 
-        addresses = g_ptr_array_new_with_free_func (free_addr);
+        addresses = g_ptr_array_new_with_free_func (g_object_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
                 children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
         else
@@ -716,11 +698,8 @@ ui_to_setting (CEPageIP4 *page)
                 const gchar *text_address;
                 const gchar *text_netmask;
                 const gchar *text_gateway;
-                struct in_addr tmp_addr;
-                struct in_addr tmp_gateway = { 0 };
+                NMIPAddress *addr;
                 guint32 prefix;
-                guint32 empty_val = 0;
-                GArray *addr;
 
                 entry = GTK_ENTRY (g_object_get_data (G_OBJECT (row), "address"));
                 if (!entry)
@@ -729,6 +708,8 @@ ui_to_setting (CEPageIP4 *page)
                 text_address = gtk_entry_get_text (entry);
                 text_netmask = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "network")));
                 text_gateway = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "gateway")));
+                /* FIXME handle gateway
+                 * https://bugzilla.gnome.org/show_bug.cgi?id=765969 */
 
                 if (!*text_address && !*text_netmask && !*text_gateway) {
                         /* ignore empty rows */
@@ -738,7 +719,7 @@ ui_to_setting (CEPageIP4 *page)
                         continue;
                 }
 
-                if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
+                if (!text_address || !nm_utils_ipaddr_valid (AF_INET, text_address)) {
                         widget_set_error (GTK_WIDGET (entry));
                         ret = FALSE;
                 } else {
@@ -752,7 +733,7 @@ ui_to_setting (CEPageIP4 *page)
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
                 }
 
-                if (text_gateway && *text_gateway && inet_pton (AF_INET, text_gateway, &tmp_gateway) <= 0) {
+                if (text_gateway && !nm_utils_ipaddr_valid (AF_INET, text_gateway)) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         ret = FALSE;
                 } else {
@@ -762,14 +743,9 @@ ui_to_setting (CEPageIP4 *page)
                 if (!ret)
                         continue;
 
-                addr = g_array_sized_new (FALSE, TRUE, sizeof (guint32), 3);
-                g_array_append_val (addr, tmp_addr.s_addr);
-                g_array_append_val (addr, prefix);
-                if (tmp_gateway.s_addr)
-                        g_array_append_val (addr, tmp_gateway.s_addr);
-                else
-                        g_array_append_val (addr, empty_val);
-                g_ptr_array_add (addresses, addr);
+                addr = nm_ip_address_new (AF_INET, text_address, prefix, NULL);
+                if (addr)
+                        g_ptr_array_add (addresses, addr);
         }
         g_list_free (children);
 
@@ -778,7 +754,7 @@ ui_to_setting (CEPageIP4 *page)
                 addresses = NULL;
         }
 
-        dns_servers = g_array_new (FALSE, FALSE, sizeof (guint));
+        dns_servers = g_ptr_array_new_with_free_func (g_free);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
             g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
                 children = gtk_container_get_children (GTK_CONTAINER (page->dns_list));
@@ -789,7 +765,6 @@ ui_to_setting (CEPageIP4 *page)
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
                 const gchar *text;
-                struct in_addr tmp_addr;
 
                 entry = GTK_ENTRY (g_object_get_data (G_OBJECT (row), "address"));
                 if (!entry)
@@ -802,17 +777,17 @@ ui_to_setting (CEPageIP4 *page)
                         continue;
                 }
 
-                if (inet_pton (AF_INET, text, &tmp_addr) <= 0) {
+                if (text && !nm_utils_ipaddr_valid (AF_INET, text)) {
                         widget_set_error (GTK_WIDGET (entry));
                         ret = FALSE;
                 } else {
                         widget_unset_error (GTK_WIDGET (entry));
-                        g_array_append_val (dns_servers, tmp_addr.s_addr);
+                        g_ptr_array_add (dns_servers, g_strdup (text));
                 }
         }
         g_list_free (children);
 
-        routes = g_ptr_array_new_with_free_func (free_addr);
+        routes = g_ptr_array_new_with_free_func (g_object_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
             g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
                 children = gtk_container_get_children (GTK_CONTAINER (page->routes_list));
@@ -826,9 +801,9 @@ ui_to_setting (CEPageIP4 *page)
                 const gchar *text_netmask;
                 const gchar *text_gateway;
                 const gchar *text_metric;
-                struct in_addr tmp_addr = { 0 };
-                guint32 address, netmask, gateway, metric;
-                GArray *route;
+                gint64 metric;
+                guint32 netmask;
+                NMIPRoute *route;
 
                 entry = GTK_ENTRY (g_object_get_data (G_OBJECT (row), "address"));
                 if (!entry)
@@ -844,12 +819,11 @@ ui_to_setting (CEPageIP4 *page)
                         continue;
                 }
 
-                if (inet_pton (AF_INET, text_address, &tmp_addr) <= 0) {
+                if (text_address && !nm_utils_ipaddr_valid (AF_INET, text_address)) {
                         widget_set_error (GTK_WIDGET (entry));
                         ret = FALSE;
                 } else {
                         widget_unset_error (GTK_WIDGET (entry));
-                        address = tmp_addr.s_addr;
                 }
 
                 if (!parse_netmask (text_netmask, &netmask)) {
@@ -859,19 +833,18 @@ ui_to_setting (CEPageIP4 *page)
                         widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
                 }
 
-                if (inet_pton (AF_INET, text_gateway, &tmp_addr) <= 0) {
+                if (text_gateway && !nm_utils_ipaddr_valid (AF_INET, text_gateway)) {
                         widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
                         ret = FALSE;
                 } else {
                         widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway")));
-                        gateway = tmp_addr.s_addr;
                 }
 
-                metric = 0;
+                metric = -1;
                 if (*text_metric) {
                         errno = 0;
-                        metric = strtoul (text_metric, NULL, 10);
-                        if (errno) {
+                        metric = g_ascii_strtoull (text_metric, NULL, 10);
+                        if (errno || metric < 0 || metric > G_MAXUINT32) {
                                 widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "metric")));
                                 ret = FALSE;
                         } else {
@@ -884,12 +857,9 @@ ui_to_setting (CEPageIP4 *page)
                 if (!ret)
                         continue;
 
-                route = g_array_sized_new (FALSE, TRUE, sizeof (guint32), 4);
-                g_array_append_val (route, address);
-                g_array_append_val (route, netmask);
-                g_array_append_val (route, gateway);
-                g_array_append_val (route, metric);
-                g_ptr_array_add (routes, route);
+                route = nm_ip_route_new (AF_INET, text_address, netmask, text_gateway, metric, NULL);
+                if (route)
+                        g_ptr_array_add (routes, route);
         }
         g_list_free (children);
 
@@ -906,13 +876,13 @@ ui_to_setting (CEPageIP4 *page)
         never_default = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (page->never_default));
 
         g_object_set (page->setting,
-                      NM_SETTING_IP4_CONFIG_METHOD, method,
-                      NM_SETTING_IP4_CONFIG_ADDRESSES, addresses,
-                      NM_SETTING_IP4_CONFIG_DNS, dns_servers,
-                      NM_SETTING_IP4_CONFIG_ROUTES, routes,
-                      NM_SETTING_IP4_CONFIG_IGNORE_AUTO_DNS, ignore_auto_dns,
-                      NM_SETTING_IP4_CONFIG_IGNORE_AUTO_ROUTES, ignore_auto_routes,
-                      NM_SETTING_IP4_CONFIG_NEVER_DEFAULT, never_default,
+                      NM_SETTING_IP_CONFIG_METHOD, method,
+                      NM_SETTING_IP_CONFIG_ADDRESSES, addresses,
+                      NM_SETTING_IP_CONFIG_DNS, dns_servers->pdata,
+                      NM_SETTING_IP_CONFIG_ROUTES, routes,
+                      NM_SETTING_IP_CONFIG_IGNORE_AUTO_DNS, ignore_auto_dns,
+                      NM_SETTING_IP_CONFIG_IGNORE_AUTO_ROUTES, ignore_auto_routes,
+                      NM_SETTING_IP_CONFIG_NEVER_DEFAULT, never_default,
                       NULL);
 
 out:
@@ -920,7 +890,7 @@ out:
                 g_ptr_array_free (addresses, TRUE);
 
         if (dns_servers)
-                g_array_free (dns_servers, TRUE);
+                g_ptr_array_free (dns_servers, TRUE);
 
         if (routes)
                 g_ptr_array_free (routes, TRUE);
@@ -954,21 +924,19 @@ ce_page_ip4_class_init (CEPageIP4Class *class)
 
 CEPage *
 ce_page_ip4_new (NMConnection     *connection,
-                   NMClient         *client,
-                   NMRemoteSettings *settings)
+                 NMClient         *client)
 {
         CEPageIP4 *page;
 
         page = CE_PAGE_IP4 (ce_page_new (CE_TYPE_PAGE_IP4,
                                            connection,
                                            client,
-                                           settings,
                                            "/org/gnome/control-center/network/ip4-page.ui",
                                            _("IPv4")));
 
         page->setting = nm_connection_get_setting_ip4_config (connection);
         if (!page->setting) {
-                page->setting = NM_SETTING_IP4_CONFIG (nm_setting_ip4_config_new ());
+                page->setting = NM_SETTING_IP_CONFIG (nm_setting_ip4_config_new ());
                 nm_connection_add_setting (connection, NM_SETTING (page->setting));
         }
 

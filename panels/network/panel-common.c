@@ -25,11 +25,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-
-#include <nm-device-ethernet.h>
-#include <nm-device-infiniband.h>
-#include <nm-device-modem.h>
-#include <nm-utils.h>
+#include <NetworkManager.h>
 
 #include "panel-common.h"
 
@@ -196,7 +192,7 @@ device_state_to_localized_string (NMDeviceState state)
  * panel_vpn_state_to_localized_string:
  **/
 const gchar *
-panel_vpn_state_to_localized_string (NMVPNConnectionState type)
+panel_vpn_state_to_localized_string (NMVpnConnectionState type)
 {
         const gchar *value = NULL;
         switch (type) {
@@ -245,7 +241,7 @@ device_state_reason_to_localized_string (NMDevice *device)
          * (eg, NM_DEVICE_STATE_REASON_CARRIER).
          */
 
-        nm_device_get_state_reason (device, &state_reason);
+        state_reason = nm_device_get_state_reason (device);
         switch (state_reason) {
         case NM_DEVICE_STATE_REASON_CONFIG_FAILED:
                 /* TRANSLATORS: device status reason */
@@ -407,10 +403,6 @@ device_state_reason_to_localized_string (NMDevice *device)
                 /* TRANSLATORS: device status reason */
                 value = _("SIM wrong");
                 break;
-        case NM_DEVICE_STATE_REASON_INFINIBAND_MODE:
-                /* TRANSLATORS: device status reason */
-                value = _("InfiniBand device does not support connected mode");
-                break;
         case NM_DEVICE_STATE_REASON_DEPENDENCY_FAILED:
                 /* TRANSLATORS: device status reason */
                 value = _("Connection dependency failed");
@@ -420,6 +412,7 @@ device_state_reason_to_localized_string (NMDevice *device)
                 value = "";
                 break;
         }
+
         return value;
 }
 
@@ -441,9 +434,6 @@ device_status_to_localized_string (NMDevice *nm_device,
                 } else if (NM_IS_DEVICE_ETHERNET (nm_device) &&
                            !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (nm_device))) {
                         /* TRANSLATORS: device status */
-                        state_str = _("Cable unplugged");
-                } else if (NM_IS_DEVICE_INFINIBAND (nm_device) &&
-                           !nm_device_infiniband_get_carrier (NM_DEVICE_INFINIBAND (nm_device))) {
                         state_str = _("Cable unplugged");
                 }
         }
@@ -543,94 +533,53 @@ panel_set_device_widget_header (GtkBuilder *builder,
 }
 
 gchar *
-panel_get_ip4_address_as_string (NMIP4Config *ip4_config, const char *what)
+panel_get_ip4_address_as_string (NMIPConfig *ip4_config, const char *what)
 {
-        const GSList *list;
-        struct in_addr addr;
-        gchar *str = NULL;
-        gchar tmp[INET_ADDRSTRLEN];
-        NMIP4Address *address;
-
-        /* get address */
-        list = nm_ip4_config_get_addresses (ip4_config);
-        if (list == NULL)
-                goto out;
+        const gchar *str = NULL;
 
         /* we only care about one address */
-        address = list->data;
-        if (!strcmp (what, "address"))
-                addr.s_addr = nm_ip4_address_get_address (address);
-        else if (!strcmp (what, "gateway"))
-                addr.s_addr = nm_ip4_address_get_gateway (address);
-        else if (!strcmp (what, "netmask"))
-                addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip4_address_get_prefix (address));
-        else
-                goto out;
+        if (!strcmp (what, "address")) {
+                GPtrArray *array;
+                NMIPAddress *address;
 
-        if (!inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
-                goto out;
-        if (g_strcmp0 (tmp, "0.0.0.0") == 0)
-                goto out;
-        str = g_strdup (tmp);
-out:
-        return str;
-}
-
-gchar *
-panel_get_ip4_dns_as_string (NMIP4Config *ip4_config)
-{
-        const GArray *array;
-        GString *dns;
-        struct in_addr addr;
-        gchar tmp[INET_ADDRSTRLEN];
-        int i;
-        gchar *str = NULL;
-
-        array = nm_ip4_config_get_nameservers (ip4_config);
-        if (array == NULL || array->len == 0)
-                goto out;
-
-        dns = g_string_new (NULL);
-        for (i = 0; i < array->len; i++) {
-                addr.s_addr = g_array_index (array, guint32, i);
-                if (inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
-                        g_string_append_printf (dns, "%s ", tmp);
+                array = nm_ip_config_get_addresses (ip4_config);
+                if (array->len < 1)
+                        goto out;
+                address = array->pdata[0];
+                str = nm_ip_address_get_address (address);
+        } else if (!strcmp (what, "gateway")) {
+                str = nm_ip_config_get_gateway (ip4_config);
         }
-        str = g_string_free (dns, FALSE);
+
 out:
-        return str;
+        return g_strdup (str);
 }
 
 gchar *
-panel_get_ip6_address_as_string (NMIP6Config *ip6_config)
+panel_get_ip4_dns_as_string (NMIPConfig *ip4_config)
 {
-        const GSList *list;
-        const struct in6_addr *addr;
-        gchar *str = NULL;
-        gchar tmp[INET6_ADDRSTRLEN];
-        NMIP6Address *address;
+        return g_strjoinv (" ",
+                           (char **) nm_ip_config_get_nameservers (ip4_config));
+}
 
-        /* get address */
-        list = nm_ip6_config_get_addresses (ip6_config);
-        if (list == NULL)
-                goto out;
+gchar *
+panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
+{
+        GPtrArray *array;
+        NMIPAddress *address;
 
-        /* we only care about one address */
-        address = list->data;
-        addr = nm_ip6_address_get_address (address);
-        if (addr == NULL)
-                goto out;
-        inet_ntop (AF_INET6, addr, tmp, sizeof(tmp));
-        str = g_strdup (tmp);
-out:
-        return str;
+        array = nm_ip_config_get_addresses (ip6_config);
+        if (array->len < 1)
+                return NULL;
+        address = array->pdata[0];
+        return g_strdup (nm_ip_address_get_address (address));
 }
 
 void
 panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
 {
-        NMIP4Config *ip4_config = NULL;
-        NMIP6Config *ip6_config = NULL;
+        NMIPConfig *ip4_config = NULL;
+        NMIPConfig *ip6_config = NULL;
         gboolean has_ip4;
         gboolean has_ip6;
         gchar *str_tmp;

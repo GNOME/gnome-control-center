@@ -21,7 +21,7 @@
  */
 
 #include <string.h>
-#include <nm-setting-wireless.h>
+#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "helpers.h"
@@ -45,7 +45,7 @@ show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, const GByteArray *ssid)
+validate (WirelessSecurity *parent, GBytes *ssid)
 {
 	GtkWidget *entry;
 	const char *text;
@@ -90,15 +90,9 @@ static void
 fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
 	WirelessSecurityLEAP *sec = (WirelessSecurityLEAP *) parent;
-	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wireless_sec;
 	GtkWidget *widget;
 	const char *leap_password = NULL, *leap_username = NULL;
-
-	s_wireless = nm_connection_get_setting_wireless (connection);
-	g_assert (s_wireless);
-
-	g_object_set (s_wireless, NM_SETTING_WIRELESS_SEC, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, NULL);
 
 	/* Blow away the old security setting by adding a clear one */
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();

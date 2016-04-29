@@ -25,9 +25,7 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
-
-#include <nm-connection.h>
-#include <nm-setting-8021x.h>
+#include <NetworkManager.h>
 
 typedef struct _EAPMethod EAPMethod;
 
