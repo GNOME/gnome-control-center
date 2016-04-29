@@ -43,12 +43,6 @@ libnetwork_la_SOURCES =					\
 	cc-network-panel.c				\
 	cc-network-panel.h
 
-TEAM_FILES = net-device-team.c net-device-team.h
-EXTRA_DIST = $(TEAM_FILES)
-if HAVE_NM_UNSTABLE
-libnetwork_la_SOURCES += $(TEAM_FILES)
-endif
-
 libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS) $(builddir)/connection-editor/libconnection-editor.la
 
 libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
@@ -66,6 +60,6 @@ desktop_in_files = gnome-network-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST += $(resource_files) network.gresource.xml
+EXTRA_DIST = $(resource_files) network.gresource.xml
 
 -include $(top_srcdir)/git.mk
