@@ -726,8 +726,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_WIFI:
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
-        case NM_DEVICE_TYPE_VLAN:
-                goto out;
         default:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;
                 break;
