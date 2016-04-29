@@ -37,7 +37,6 @@
 #include "net-device-wifi.h"
 #include "net-device-ethernet.h"
 #include "net-device-bond.h"
-#include "net-device-bridge.h"
 #include "net-object.h"
 #include "net-proxy.h"
 #include "net-virtual-device.h"
@@ -729,7 +728,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
         case NM_DEVICE_TYPE_BOND:
-        case NM_DEVICE_TYPE_BRIDGE:
         case NM_DEVICE_TYPE_VLAN:
                 goto out;
         default:
@@ -1179,8 +1177,6 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
         connection_type = nm_setting_connection_get_connection_type (s_con);
         if (!strcmp (connection_type, NM_SETTING_BOND_SETTING_NAME))
                 device_g_type = NET_TYPE_DEVICE_BOND;
-        else if (!strcmp (connection_type, NM_SETTING_BRIDGE_SETTING_NAME))
-                device_g_type = NET_TYPE_DEVICE_BRIDGE;
         else
                 device_g_type = NET_TYPE_VIRTUAL_DEVICE;
 

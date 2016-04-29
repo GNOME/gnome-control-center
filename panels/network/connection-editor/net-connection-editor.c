@@ -585,7 +585,6 @@ static const NetConnectionType connection_types[] = {
 #ifdef HAVE_NM_UNSTABLE
         { N_("Team"), nm_setting_team_get_type },
 #endif /* NM_UNSTABLE */
-        { N_("Bridge"), nm_setting_bridge_get_type },
         { N_("VLAN"), nm_setting_vlan_get_type }
 };
 static const NetConnectionType *vpn_connection_type = &connection_types[0];
