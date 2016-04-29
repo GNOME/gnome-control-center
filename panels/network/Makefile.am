@@ -32,8 +32,6 @@ libnetwork_la_SOURCES =					\
 	net-device-ethernet.h				\
 	net-device-mobile.c				\
 	net-device-mobile.h				\
-	net-device-bond.c				\
-	net-device-bond.h				\
 	net-virtual-device.c				\
 	net-virtual-device.h				\
 	net-vpn.c					\

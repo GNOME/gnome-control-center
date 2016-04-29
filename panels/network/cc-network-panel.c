@@ -36,7 +36,6 @@
 #include "net-device-mobile.h"
 #include "net-device-wifi.h"
 #include "net-device-ethernet.h"
-#include "net-device-bond.h"
 #include "net-object.h"
 #include "net-proxy.h"
 #include "net-virtual-device.h"
@@ -727,7 +726,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         case NM_DEVICE_TYPE_WIFI:
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
-        case NM_DEVICE_TYPE_BOND:
         case NM_DEVICE_TYPE_VLAN:
                 goto out;
         default:
@@ -1163,8 +1161,6 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
         const gchar *id;
         GtkNotebook *notebook;
         GtkSizeGroup *size_group;
-        NMSettingConnection *s_con;
-        const gchar *connection_type;
         GType device_g_type;
 
         /* does already exist */
@@ -1173,12 +1169,7 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
                 return;
 
         /* map the NMConnection to a NetDevice GType */
-        s_con = nm_connection_get_setting_connection (connection);
-        connection_type = nm_setting_connection_get_connection_type (s_con);
-        if (!strcmp (connection_type, NM_SETTING_BOND_SETTING_NAME))
-                device_g_type = NET_TYPE_DEVICE_BOND;
-        else
-                device_g_type = NET_TYPE_VIRTUAL_DEVICE;
+        device_g_type = NET_TYPE_VIRTUAL_DEVICE;
 
         /* add as a virtual object */
         net_virt = g_object_new (device_g_type,
