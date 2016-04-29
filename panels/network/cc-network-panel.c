@@ -38,7 +38,6 @@
 #include "net-device-ethernet.h"
 #include "net-object.h"
 #include "net-proxy.h"
-#include "net-virtual-device.h"
 #include "net-vpn.h"
 
 #include "panel-common.h"
@@ -643,7 +642,7 @@ handle_argv (CcNetworkPanel *panel)
                         g_object_get (object_tmp, "nm-device", &device, NULL);
                         done = handle_argv_for_device (panel, device, &iter);
                         g_object_unref (device);
-                } else if (NET_IS_VPN (object_tmp) || NET_IS_VIRTUAL_DEVICE (object_tmp)) {
+                } else if (NET_IS_VPN (object_tmp)) {
                         g_object_get (object_tmp, "connection", &connection, NULL);
                         done = handle_argv_for_connection (panel, connection, &iter);
                         g_object_unref (connection);
@@ -1112,7 +1111,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         if (find_in_model_by_id (panel, id, NULL) != NULL)
                 return;
 
-        /* add as a virtual object */
+        /* add as a VPN object */
         net_vpn = g_object_new (NET_TYPE_VPN,
                                 "panel", panel,
                                 "removable", TRUE,
@@ -1150,63 +1149,6 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 }
 
 static void
-panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
-{
-        gchar *title;
-        GtkListStore *liststore_devices;
-        GtkTreeIter iter;
-        NetVirtualDevice *net_virt;
-        const gchar *id;
-        GtkNotebook *notebook;
-        GtkSizeGroup *size_group;
-        GType device_g_type;
-
-        /* does already exist */
-        id = nm_connection_get_path (connection);
-        if (find_in_model_by_id (panel, id, NULL) != NULL)
-                return;
-
-        /* map the NMConnection to a NetDevice GType */
-        device_g_type = NET_TYPE_VIRTUAL_DEVICE;
-
-        /* add as a virtual object */
-        net_virt = g_object_new (device_g_type,
-                                 "panel", panel,
-                                 "removable", TRUE,
-                                 "id", id,
-                                 "connection", connection,
-                                 "client", panel->priv->client,
-                                 "remote-settings", panel->priv->remote_settings,
-                                 NULL);
-        g_signal_connect_object (net_virt, "removed",
-                                 G_CALLBACK (object_removed_cb), panel, 0);
-
-        /* add as a panel */
-        notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
-                                                         "notebook_types"));
-        size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
-                                                             "sizegroup1"));
-        net_object_add_to_notebook (NET_OBJECT (net_virt),
-                                    notebook,
-                                    size_group);
-
-        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
-                                            "liststore_devices"));
-        title = nma_utils_get_connection_device_name (connection);
-
-        net_object_set_title (NET_OBJECT (net_virt), title);
-        gtk_list_store_append (liststore_devices, &iter);
-        gtk_list_store_set (liststore_devices,
-                            &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "network-wired-symbolic",
-                            PANEL_DEVICES_COLUMN_SORT, "2",
-                            PANEL_DEVICES_COLUMN_OBJECT, net_virt,
-                            -1);
-        g_free (title);
-        g_object_unref (net_virt);
-}
-
-static void
 add_connection (CcNetworkPanel *panel,
                 NMConnection *connection)
 {
@@ -1227,9 +1169,7 @@ add_connection (CcNetworkPanel *panel,
         g_debug ("add %s/%s remote connection: %s",
                  type, g_type_name_from_instance ((GTypeInstance*)connection),
                  nm_connection_get_path (connection));
-        if (iface)
-                panel_add_virtual_device (panel, connection);
-        else
+        if (!iface)
                 panel_add_vpn_device (panel, connection);
 }
 
