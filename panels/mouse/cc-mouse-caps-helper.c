@@ -96,6 +96,9 @@ cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                                         have_edge_scrolling,
                                                         have_tap_to_click);
 	/* else we unconditionally show all touchpad knobs */
+        *have_two_finger_scrolling = TRUE;
+        *have_edge_scrolling = TRUE;
+        *have_tap_to_click = TRUE;
 	return FALSE;
 }
 
