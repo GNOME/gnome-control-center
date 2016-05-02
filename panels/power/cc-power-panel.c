@@ -26,7 +26,7 @@
 #include <gnome-settings-daemon/gsd-enums.h>
 
 #ifdef HAVE_NETWORK_MANAGER
-#include <nm-client.h>
+#include <NetworkManager.h>
 #endif
 
 #include "shell/list-box-helper.h"
@@ -1295,7 +1295,7 @@ has_wifi_devices (NMClient *client)
   NMDevice *device;
   gint i;
 
-  if (!nm_client_get_manager_running (client))
+  if (!nm_client_get_nm_running (client))
     return FALSE;
 
   devices = nm_client_get_devices (client);
@@ -1336,7 +1336,7 @@ has_mobile_devices (NMClient *client)
   NMDevice *device;
   gint i;
 
-  if (!nm_client_get_manager_running (client))
+  if (!nm_client_get_nm_running (client))
     return FALSE;
 
   devices = nm_client_get_devices (client);
@@ -1423,6 +1423,46 @@ nm_device_changed (NMClient     *client,
 
   gtk_widget_set_visible (priv->wifi_row, has_wifi_devices (priv->nm_client));
   gtk_widget_set_visible (priv->mobile_row, has_mobile_devices (priv->nm_client));
+}
+
+static void
+nm_client_ready_cb (GObject *source_object,
+                    GAsyncResult *res,
+                    gpointer user_data)
+{
+  CcPowerPanel *self;
+  CcPowerPanelPrivate *priv;
+  NMClient *client;
+  GError *error = NULL;
+
+  client = nm_client_new_finish (res, &error);
+  if (!client)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Failed to create NetworkManager client: %s",
+                     error->message);
+
+          self = user_data;
+          gtk_widget_set_sensitive (self->priv->wifi_row, FALSE);
+          gtk_widget_set_sensitive (self->priv->mobile_row, FALSE);
+        }
+      g_error_free (error);
+      return;
+    }
+
+  self = user_data;
+  priv = self->priv;
+  priv->nm_client = client;
+
+  g_signal_connect (priv->nm_client, "notify",
+                    G_CALLBACK (nm_client_state_changed), self);
+  g_signal_connect (priv->nm_client, "device-added",
+                    G_CALLBACK (nm_device_changed), self);
+  g_signal_connect (priv->nm_client, "device-removed",
+                    G_CALLBACK (nm_device_changed), self);
+
+  nm_device_changed (priv->nm_client, NULL, self);
 }
 
 #endif
@@ -1835,14 +1875,7 @@ add_power_saving_section (CcPowerPanel *self)
   g_signal_connect (G_OBJECT (priv->mobile_switch), "notify::active",
                     G_CALLBACK (mobile_switch_changed), self);
 
-  priv->nm_client = nm_client_new ();
-  g_signal_connect (priv->nm_client, "notify",
-                    G_CALLBACK (nm_client_state_changed), self);
-  g_signal_connect (priv->nm_client, "device-added",
-                    G_CALLBACK (nm_device_changed), self);
-  g_signal_connect (priv->nm_client, "device-removed",
-                    G_CALLBACK (nm_device_changed), self);
-  nm_device_changed (priv->nm_client, NULL, self);
+  nm_client_new_async (priv->cancellable, nm_client_ready_cb, self);
 
   g_signal_connect (G_OBJECT (priv->wifi_switch), "notify::active",
                     G_CALLBACK (wifi_switch_changed), self);
