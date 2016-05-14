@@ -665,6 +665,15 @@ generate_username_choices (const gchar  *name,
         item3 = g_string_append (item3, first_word->str);
         item4 = g_string_prepend (item4, last_word->str);
 
+        g_string_truncate (first_word, MAXNAMELEN);
+        g_string_truncate (last_word, MAXNAMELEN);
+
+        g_string_truncate (item0, MAXNAMELEN);
+        g_string_truncate (item1, MAXNAMELEN);
+        g_string_truncate (item2, MAXNAMELEN);
+        g_string_truncate (item3, MAXNAMELEN);
+        g_string_truncate (item4, MAXNAMELEN);
+
         items = g_hash_table_new (g_str_hash, g_str_equal);
 
         in_use = is_username_used (item0->str);
