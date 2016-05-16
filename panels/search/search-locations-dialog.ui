@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="locations_dialog">
+  <template class="CcSearchLocationsDialog" parent="GtkDialog">
     <property name="can_focus">False</property>
     <property name="default_height">400</property>
     <property name="default_width">400</property>
@@ -13,76 +13,125 @@
       <object class="GtkBox" id="dialog-vbox1">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="border-width">0</property>
         <child>
-          <object class="GtkBox" id="locations_main_box">
+          <object class="GtkNotebook">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="border-width">5</property>
             <child>
-              <object class="GtkScrolledWindow" id="locations_scrolledwindow">
+              <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="shadow_type">in</property>
                 <property name="vexpand">True</property>
+                <property name="border-width">35</property>
                 <child>
-                  <placeholder/>
+                  <object class="GtkListBox" id="places_list">
+                    <property name="visible">True</property>
+                    <property name="expand">True</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="tab-expand">True</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkToolbar" id="locations_toolbar">
+            <child type="tab">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_size">1</property>
-                <style>
-                  <class name="inline-toolbar"/>
-                </style>
+                <property name="label" translatable="yes">Places</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">True</property>
                 <child>
-                  <object class="GtkToolButton" id="locations_add">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_underline">True</property>
-                    <property name="icon_name">list-add-symbolic</property>
+                    <property name="vexpand">True</property>
+                    <property name="border-width">35</property>
+                    <child>
+                      <object class="GtkListBox" id="bookmarks_list">
+                        <property name="visible">True</property>
+                        <property name="expand">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolButton" id="locations_remove">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_underline">True</property>
-                    <property name="icon_name">list-remove-symbolic</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="tab-expand">True</property>
               </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Bookmarks</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkListBox" id="others_list">
+                        <property name="visible">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparator">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="locations_add">
+                        <property name="visible">True</property>
+                        <property name="halign">center</property>
+                        <property name="margin">5</property>
+                        <signal name="clicked" handler="add_button_clicked" swapped="no"/>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="icon-name">list-add-symbolic</property>
+                            <property name="icon-size">1</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparator">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="tab-expand">True</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Other</property>
+              </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

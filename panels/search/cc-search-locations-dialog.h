@@ -23,7 +23,15 @@
 
 #include "cc-search-panel.h"
 
-GtkWidget *cc_search_locations_dialog_new (CcSearchPanel *panel);
+#define CC_SEARCH_LOCATIONS_DIALOG_TYPE (cc_search_locations_dialog_get_type ())
+#define CC_SEARCH_LOCATIONS_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_SEARCH_LOCATIONS_DIALOG_TYPE, CcSearchLocationsDialog))
+
+typedef struct _CcSearchLocationsDialog      CcSearchLocationsDialog;
+typedef struct _CcSearchLocationsDialogClass CcSearchLocationsDialogClass;
+
+GType                    cc_search_locations_dialog_get_type   (void);
+
+CcSearchLocationsDialog *cc_search_locations_dialog_new        (CcSearchPanel *panel);
 
 gboolean cc_search_locations_dialog_is_available (void);
 

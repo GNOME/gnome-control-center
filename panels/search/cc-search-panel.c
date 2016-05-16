@@ -40,7 +40,7 @@ struct _CcSearchPanelPrivate
   GSettings  *search_settings;
   GHashTable *sort_order;
 
-  GtkWidget  *locations_dialog;
+  CcSearchLocationsDialog  *locations_dialog;
 };
 
 #define SHELL_PROVIDER_GROUP "Shell Search Provider"
@@ -701,7 +701,7 @@ cc_search_panel_finalize (GObject *object)
   g_hash_table_destroy (priv->sort_order);
 
   if (priv->locations_dialog)
-    gtk_widget_destroy (priv->locations_dialog);
+    gtk_widget_destroy (GTK_WIDGET (priv->locations_dialog));
 
   G_OBJECT_CLASS (cc_search_panel_parent_class)->finalize (object);
 }
