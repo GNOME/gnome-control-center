@@ -39,14 +39,6 @@
 #include "cc-panel-loader.h"
 #include "cc-util.h"
 
-static void     cc_shell_iface_init         (CcShellInterface      *iface);
-
-G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
-                         G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
-
-#define WINDOW_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WINDOW, CcWindowPrivate))
-
 /* Use a fixed width for the shell, since resizing horizontally is more awkward
  * for the user than resizing vertically
  * Both sizes are defined in https://live.gnome.org/Design/SystemSettings/ */
@@ -70,8 +62,10 @@ typedef enum {
 	SMALL_SCREEN_FALSE
 } CcSmallScreen;
 
-struct _CcWindowPrivate
+struct _CcWindow
 {
+  GtkApplicationWindow parent;
+
   GtkWidget  *stack;
   GtkWidget  *header;
   GtkWidget  *main_vbox;
@@ -104,6 +98,11 @@ struct _CcWindowPrivate
   int monitor_num;
   CcSmallScreen small_screen;
 };
+
+static void     cc_shell_iface_init         (CcShellInterface      *iface);
+
+G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
+                         G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
 
 enum
 {
@@ -147,113 +146,110 @@ activate_panel (CcWindow           *self,
                 const gchar        *name,
                 GIcon              *gicon)
 {
-  CcWindowPrivate *priv = self->priv;
   GtkWidget *box;
   const gchar *icon_name;
 
   if (!id)
     return FALSE;
 
-  priv->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
-  cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (priv->current_panel));
-  gtk_widget_show (priv->current_panel);
+  self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
+  cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
+  gtk_widget_show (self->current_panel);
 
-  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
-                                  cc_panel_get_permission (CC_PANEL (priv->current_panel)));
+  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button),
+                                  cc_panel_get_permission (CC_PANEL (self->current_panel)));
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-  gtk_box_pack_start (GTK_BOX (box), priv->current_panel,
+  gtk_box_pack_start (GTK_BOX (box), self->current_panel,
                       TRUE, TRUE, 0);
 
-  gtk_stack_add_named (GTK_STACK (priv->stack), box, id);
+  gtk_stack_add_named (GTK_STACK (self->stack), box, id);
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), id);
+  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), id);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
 
   gtk_window_set_role (GTK_WINDOW (self), id);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), name);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), name);
   gtk_window_set_default_icon_name (icon_name);
   gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
 
-  priv->current_panel_box = box;
+  self->current_panel_box = box;
 
   return TRUE;
 }
 
 static void
-_shell_remove_all_custom_widgets (CcWindowPrivate *priv)
+_shell_remove_all_custom_widgets (CcWindow *self)
 {
   GtkWidget *widget;
   guint i;
 
   /* remove from the header */
-  for (i = 0; i < priv->custom_widgets->len; i++)
+  for (i = 0; i < self->custom_widgets->len; i++)
     {
-        widget = g_ptr_array_index (priv->custom_widgets, i);
-        gtk_container_remove (GTK_CONTAINER (priv->top_right_box), widget);
+        widget = g_ptr_array_index (self->custom_widgets, i);
+        gtk_container_remove (GTK_CONTAINER (self->top_right_box), widget);
     }
-  g_ptr_array_set_size (priv->custom_widgets, 0);
+  g_ptr_array_set_size (self->custom_widgets, 0);
 }
 
 static void
 add_current_panel_to_history (CcShell    *shell,
                               const char *start_id)
 {
-  CcWindowPrivate *priv;
+  CcWindow *self;
 
   g_return_if_fail (start_id != NULL);
 
-  priv = CC_WINDOW (shell)->priv;
+  self = CC_WINDOW (shell);
 
-  if (!priv->current_panel_id ||
-      g_strcmp0 (priv->current_panel_id, start_id) == 0)
+  if (!self->current_panel_id ||
+      g_strcmp0 (self->current_panel_id, start_id) == 0)
     return;
 
-  g_queue_push_head (priv->previous_panels, g_strdup (priv->current_panel_id));
-  g_debug ("Added '%s' to the previous panels", priv->current_panel_id);
+  g_queue_push_head (self->previous_panels, g_strdup (self->current_panel_id));
+  g_debug ("Added '%s' to the previous panels", self->current_panel_id);
 }
 
 static void
 shell_show_overview_page (CcWindow *self)
 {
-  CcWindowPrivate *priv = self->priv;
+  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), OVERVIEW_PAGE);
 
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), OVERVIEW_PAGE);
-
-  if (priv->current_panel_box)
-    gtk_container_remove (GTK_CONTAINER (priv->stack), priv->current_panel_box);
-  priv->current_panel = NULL;
-  priv->current_panel_box = NULL;
-  g_clear_pointer (&priv->current_panel_id, g_free);
+  if (self->current_panel_box)
+    gtk_container_remove (GTK_CONTAINER (self->stack), self->current_panel_box);
+  self->current_panel = NULL;
+  self->current_panel_box = NULL;
+  g_clear_pointer (&self->current_panel_id, g_free);
 
   /* Clear the panel history */
-  g_queue_free_full (self->priv->previous_panels, g_free);
-  self->priv->previous_panels = g_queue_new ();
+  g_queue_free_full (self->previous_panels, g_free);
+  self->previous_panels = g_queue_new ();
 
   /* clear the search text */
-  g_free (priv->filter_string);
-  priv->filter_string = g_strdup ("");
-  gtk_entry_set_text (GTK_ENTRY (priv->search_entry), "");
-  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->priv->search_bar)))
-    gtk_widget_grab_focus (priv->search_entry);
+  g_free (self->filter_string);
+  self->filter_string = g_strdup ("");
+  gtk_entry_set_text (GTK_ENTRY (self->search_entry), "");
+  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar)))
+    gtk_widget_grab_focus (self->search_entry);
 
-  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button), NULL);
+  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button), NULL);
 
   /* reset window title and icon */
   gtk_window_set_role (GTK_WINDOW (self), NULL);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), _(DEFAULT_WINDOW_TITLE));
+  gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
   gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
   gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
 
   cc_shell_set_active_panel (CC_SHELL (self), NULL);
 
   /* clear any custom widgets */
-  _shell_remove_all_custom_widgets (priv);
+  _shell_remove_all_custom_widgets (self);
 }
 
 void
@@ -267,9 +263,9 @@ cc_window_set_search_item (CcWindow   *center,
                            const char *search)
 {
   shell_show_overview_page (center);
-  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (center->priv->search_bar), TRUE);
-  gtk_entry_set_text (GTK_ENTRY (center->priv->search_entry), search);
-  gtk_editable_set_position (GTK_EDITABLE (center->priv->search_entry), -1);
+  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (center->search_bar), TRUE);
+  gtk_entry_set_text (GTK_ENTRY (center->search_entry), search);
+  gtk_editable_set_position (GTK_EDITABLE (center->search_entry), -1);
 }
 
 static void
@@ -316,7 +312,7 @@ get_item_views (CcWindow *shell)
   GList *list, *l;
   GList *res;
 
-  list = gtk_container_get_children (GTK_CONTAINER (shell->priv->main_vbox));
+  list = gtk_container_get_children (GTK_CONTAINER (shell->main_vbox));
   res = NULL;
   for (l = list; l; l = l->next)
     {
@@ -562,17 +558,17 @@ out:
 }
 
 static gboolean
-model_filter_func (GtkTreeModel    *model,
-                   GtkTreeIter     *iter,
-                   CcWindowPrivate *priv)
+model_filter_func (GtkTreeModel *model,
+                   GtkTreeIter  *iter,
+                   CcWindow     *self)
 {
   char **t;
   gboolean matches = FALSE;
 
-  if (!priv->filter_string || !priv->filter_terms)
+  if (!self->filter_string || !self->filter_terms)
     return FALSE;
 
-  for (t = priv->filter_terms; *t; t++)
+  for (t = self->filter_terms; *t; t++)
     {
       matches = cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
                                                     iter,
@@ -598,43 +594,42 @@ category_filter_func (GtkTreeModel    *model,
 
 static void
 search_entry_changed_cb (GtkEntry *entry,
-                         CcWindow *center)
+                         CcWindow *self)
 {
-  CcWindowPrivate *priv = center->priv;
   char *str;
 
   /* if the entry text was set manually (not by the user) */
-  if (!g_strcmp0 (priv->filter_string, gtk_entry_get_text (entry)))
+  if (!g_strcmp0 (self->filter_string, gtk_entry_get_text (entry)))
     {
-      cc_shell_model_set_sort_terms (CC_SHELL_MODEL (priv->store), NULL);
+      cc_shell_model_set_sort_terms (CC_SHELL_MODEL (self->store), NULL);
       return;
     }
 
   /* Don't re-filter for added trailing or leading spaces */
   str = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (entry));
   g_strstrip (str);
-  if (!g_strcmp0 (str, priv->filter_string))
+  if (!g_strcmp0 (str, self->filter_string))
     {
       g_free (str);
       return;
     }
 
-  g_free (priv->filter_string);
-  priv->filter_string = str;
+  g_free (self->filter_string);
+  self->filter_string = str;
 
-  g_strfreev (priv->filter_terms);
-  priv->filter_terms = g_strsplit (priv->filter_string, " ", -1);
+  g_strfreev (self->filter_terms);
+  self->filter_terms = g_strsplit (self->filter_string, " ", -1);
 
-  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (priv->store), priv->filter_terms);
+  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (self->store), self->filter_terms);
 
-  if (!g_strcmp0 (priv->filter_string, ""))
+  if (!g_strcmp0 (self->filter_string, ""))
     {
-      shell_show_overview_page (center);
+      shell_show_overview_page (self);
     }
   else
     {
-      gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
-      gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), SEARCH_PAGE);
+      gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (self->search_filter));
+      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), SEARCH_PAGE);
     }
 }
 
@@ -643,17 +638,15 @@ search_entry_key_press_event_cb (GtkEntry        *entry,
                                  GdkEventKey     *event,
                                  CcWindow        *self)
 {
-  CcWindowPrivate *priv = self->priv;
-
   if (event->keyval == GDK_KEY_Return &&
-      g_strcmp0 (priv->filter_string, "") != 0)
+      g_strcmp0 (self->filter_string, "") != 0)
     {
       GtkTreePath *path;
       GtkTreeSelection *selection;
 
       path = gtk_tree_path_new_first ();
 
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->search_view));
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->search_view));
       gtk_tree_selection_select_path (selection, path);
 
       if (!gtk_tree_selection_path_is_selected (selection, path))
@@ -662,15 +655,15 @@ search_entry_key_press_event_cb (GtkEntry        *entry,
           return FALSE;
         }
 
-      gtk_tree_view_row_activated (GTK_TREE_VIEW (priv->search_view), path,
-                                   gtk_tree_view_get_column (GTK_TREE_VIEW (self->priv->search_view), 0));
+      gtk_tree_view_row_activated (GTK_TREE_VIEW (self->search_view), path,
+                                   gtk_tree_view_get_column (GTK_TREE_VIEW (self->search_view), 0));
       gtk_tree_path_free (path);
       return TRUE;
     }
 
   if (event->keyval == GDK_KEY_Escape)
     {
-      gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (priv->search_bar), FALSE);
+      gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), FALSE);
       gtk_entry_set_text (entry, "");
       return TRUE;
     }
@@ -750,30 +743,29 @@ on_search_button_press_event (GtkTreeView    *treeview,
 }
 
 static void
-setup_search (CcWindow *shell)
+setup_search (CcWindow *self)
 {
   GtkWidget *search_view;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
-  CcWindowPrivate *priv = shell->priv;
 
-  g_return_if_fail (priv->store != NULL);
+  g_return_if_fail (self->store != NULL);
 
   /* create the search filter */
-  priv->search_filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (priv->store),
+  self->search_filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (self->store),
                                                    NULL);
 
-  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->search_filter),
+  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (self->search_filter),
                                           (GtkTreeModelFilterVisibleFunc)
                                           model_filter_func,
-                                          priv, NULL);
+                                          self, NULL);
 
   /* set up the search view */
-  priv->search_view = search_view = gtk_tree_view_new ();
+  self->search_view = search_view = gtk_tree_view_new ();
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (search_view), FALSE);
   gtk_tree_view_set_enable_search (GTK_TREE_VIEW (search_view), FALSE);
   gtk_tree_view_set_model (GTK_TREE_VIEW (search_view),
-                           GTK_TREE_MODEL (priv->search_filter));
+                           GTK_TREE_MODEL (self->search_filter));
   /* This needs to happen after setting the model, otherwise
    * the search column will be the first string column */
   gtk_tree_view_set_search_column (GTK_TREE_VIEW (search_view), -1);
@@ -789,7 +781,7 @@ setup_search (CcWindow *shell)
                                                      "gicon", COL_GICON,
                                                      NULL);
   gtk_tree_view_column_set_expand (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (self->search_view), column);
 
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer,
@@ -799,7 +791,7 @@ setup_search (CcWindow *shell)
                                                      "text", COL_NAME,
                                                      NULL);
   gtk_tree_view_column_set_expand (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (self->search_view), column);
 
   renderer = gd_styled_text_renderer_new ();
   gd_styled_text_renderer_add_class (GD_STYLED_TEXT_RENDERER (renderer), "dim-label");
@@ -811,18 +803,18 @@ setup_search (CcWindow *shell)
                                                      "text", COL_DESCRIPTION,
                                                      NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (self->search_view), column);
 
-  gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
+  gtk_container_add (GTK_CONTAINER (self->search_scrolled), search_view);
 
-  g_signal_connect (priv->search_view, "row-activated",
-                    G_CALLBACK (on_search_row_activated), shell);
-  g_signal_connect (priv->search_view, "button-press-event",
-                    G_CALLBACK (on_search_button_press_event), shell);
+  g_signal_connect (self->search_view, "row-activated",
+                    G_CALLBACK (on_search_row_activated), self);
+  g_signal_connect (self->search_view, "button-press-event",
+                    G_CALLBACK (on_search_button_press_event), self);
 
-  priv->filter_string = g_strdup ("");
+  self->filter_string = g_strdup ("");
 
-  gtk_widget_show (priv->search_view);
+  gtk_widget_show (self->search_view);
 }
 
 static void
@@ -839,19 +831,19 @@ add_category_view (CcWindow        *shell,
       separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
       gtk_widget_set_margin_top (separator, 11);
       gtk_widget_set_margin_bottom (separator, 10);
-      gtk_box_pack_start (GTK_BOX (shell->priv->main_vbox), separator, FALSE, FALSE, 0);
+      gtk_box_pack_start (GTK_BOX (shell->main_vbox), separator, FALSE, FALSE, 0);
       gtk_widget_show (separator);
     }
 
   /* create new category view for this category */
-  filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (shell->priv->store),
+  filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (shell->store),
                                       NULL);
   gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
                                           (GtkTreeModelFilterVisibleFunc) category_filter_func,
                                           GINT_TO_POINTER (category), NULL);
 
   categoryview = cc_shell_category_view_new (name, filter);
-  gtk_box_pack_start (GTK_BOX (shell->priv->main_vbox), categoryview, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (shell->main_vbox), categoryview, FALSE, TRUE, 0);
 
   g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
                     "desktop-item-activated",
@@ -873,29 +865,27 @@ add_category_view (CcWindow        *shell,
 static void
 setup_model (CcWindow *shell)
 {
-  CcWindowPrivate *priv = shell->priv;
-
-  priv->store = (GtkListStore *) cc_shell_model_new ();
+ shell->store = (GtkListStore *) cc_shell_model_new ();
 
   /* Add categories */
   add_category_view (shell, CC_CATEGORY_PERSONAL, C_("category", "Personal"));
   add_category_view (shell, CC_CATEGORY_HARDWARE, C_("category", "Hardware"));
   add_category_view (shell, CC_CATEGORY_SYSTEM, C_("category", "System"));
 
-  cc_panel_loader_fill_model (CC_SHELL_MODEL (shell->priv->store));
+  cc_panel_loader_fill_model (CC_SHELL_MODEL (shell->store));
 }
 
 static void
 previous_button_clicked_cb (GtkButton *button,
                             CcWindow  *shell)
 {
-  g_debug ("Num previous panels? %d", g_queue_get_length (shell->priv->previous_panels));
-  if (g_queue_is_empty (shell->priv->previous_panels)) {
+  g_debug ("Num previous panels? %d", g_queue_get_length (shell->previous_panels));
+  if (g_queue_is_empty (shell->previous_panels)) {
     shell_show_overview_page (shell);
   } else {
     char *panel_name;
 
-    panel_name = g_queue_pop_head (shell->priv->previous_panels);
+    panel_name = g_queue_pop_head (shell->previous_panels);
     g_debug ("About to go to previous panel '%s'", panel_name);
     cc_window_set_active_panel_from_id (CC_SHELL (shell), panel_name, NULL, NULL);
     g_free (panel_name);
@@ -907,7 +897,6 @@ stack_page_notify_cb (GtkStack     *stack,
                       GParamSpec  *spec,
                       CcWindow    *self)
 {
-  CcWindowPrivate *priv = self->priv;
   int nat_height;
   const char *id;
 
@@ -919,14 +908,14 @@ stack_page_notify_cb (GtkStack     *stack,
     {
       gint header_height, maximum_height;
 
-      gtk_widget_hide (priv->previous_button);
-      gtk_widget_show (priv->search_button);
-      gtk_widget_show (priv->search_bar);
-      gtk_widget_hide (priv->lock_button);
+      gtk_widget_hide (self->previous_button);
+      gtk_widget_show (self->search_button);
+      gtk_widget_show (self->search_bar);
+      gtk_widget_hide (self->lock_button);
 
-      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
+      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->main_vbox),
                                                  FIXED_WIDTH, NULL, &nat_height);
-      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->header),
+      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->header),
                                                  FIXED_WIDTH, NULL, &header_height);
 
       /* find the maximum height by using the monitor height minus an allowance
@@ -936,19 +925,19 @@ stack_page_notify_cb (GtkStack     *stack,
       if (maximum_height > 0 && nat_height + header_height > maximum_height)
         nat_height = maximum_height - header_height;
 
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window),
-                                                  priv->small_screen == SMALL_SCREEN_TRUE ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->scrolled_window),
+                                                  self->small_screen == SMALL_SCREEN_TRUE ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
     }
   else
     {
-      gtk_widget_show (priv->previous_button);
-      gtk_widget_hide (priv->search_button);
-      gtk_widget_hide (priv->search_bar);
+      gtk_widget_show (self->previous_button);
+      gtk_widget_hide (self->search_button);
+      gtk_widget_hide (self->search_bar);
       /* set the scrolled window small so that it doesn't force
          the window to be larger than this panel */
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self),
                                                  FIXED_WIDTH, NULL, &nat_height);
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->scrolled_window), MIN_ICON_VIEW_HEIGHT);
       gtk_window_resize (GTK_WINDOW (self),
                          FIXED_WIDTH,
                          nat_height);
@@ -960,13 +949,13 @@ static void
 _shell_embed_widget_in_header (CcShell      *shell,
                                GtkWidget    *widget)
 {
-  CcWindowPrivate *priv = CC_WINDOW (shell)->priv;
+  CcWindow *self = CC_WINDOW (shell);
 
   /* add to header */
-  gtk_box_pack_end (GTK_BOX (priv->top_right_box), widget, FALSE, FALSE, 0);
-  g_ptr_array_add (priv->custom_widgets, g_object_ref (widget));
+  gtk_box_pack_end (GTK_BOX (self->top_right_box), widget, FALSE, FALSE, 0);
+  g_ptr_array_add (self->custom_widgets, g_object_ref (widget));
 
-  gtk_size_group_add_widget (priv->header_sizegroup, widget);
+  gtk_size_group_add_widget (self->header_sizegroup, widget);
 }
 
 /* CcShell implementation */
@@ -980,20 +969,20 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
   gboolean iter_valid;
   gchar *name = NULL;
   GIcon *gicon = NULL;
-  CcWindowPrivate *priv = CC_WINDOW (shell)->priv;
+  CcWindow *self = CC_WINDOW (shell);
   GtkWidget *old_panel;
 
   /* When loading the same panel again, just set its parameters */
-  if (g_strcmp0 (priv->current_panel_id, start_id) == 0)
+  if (g_strcmp0 (self->current_panel_id, start_id) == 0)
     {
-      g_object_set (G_OBJECT (priv->current_panel), "parameters", parameters, NULL);
+      g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       return TRUE;
     }
 
   /* clear any custom widgets */
-  _shell_remove_all_custom_widgets (priv);
+  _shell_remove_all_custom_widgets (self);
 
-  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->store),
+  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store),
                                               &iter);
 
   /* find the details for this item */
@@ -1001,7 +990,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
     {
       gchar *id;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+      gtk_tree_model_get (GTK_TREE_MODEL (self->store), &iter,
                           COL_NAME, &name,
                           COL_GICON, &gicon,
                           COL_ID, &id,
@@ -1024,11 +1013,11 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
           gicon = NULL;
         }
 
-      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (priv->store),
+      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store),
                                              &iter);
     }
 
-  old_panel = priv->current_panel_box;
+  old_panel = self->current_panel_box;
 
   if (!name)
     {
@@ -1043,11 +1032,11 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
   else
     {
       /* Successful activation */
-      g_free (priv->current_panel_id);
-      priv->current_panel_id = g_strdup (start_id);
+      g_free (self->current_panel_id);
+      self->current_panel_id = g_strdup (start_id);
 
       if (old_panel)
-        gtk_container_remove (GTK_CONTAINER (priv->stack), old_panel);
+        gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
     }
 
   g_free (name);
@@ -1080,12 +1069,12 @@ cc_window_get_property (GObject    *object,
                         GValue     *value,
                         GParamSpec *pspec)
 {
-  CcWindowPrivate *priv = CC_WINDOW (object)->priv;
+  CcWindow *self = CC_WINDOW (object);
 
   switch (property_id)
     {
     case PROP_ACTIVE_PANEL:
-      g_value_set_object (value, priv->active_panel);
+      g_value_set_object (value, self->active_panel);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -1099,15 +1088,15 @@ set_active_panel (CcWindow *shell,
   g_return_if_fail (CC_IS_SHELL (shell));
   g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
 
-  if (panel != shell->priv->active_panel)
+  if (panel != shell->active_panel)
     {
       /* remove the old panel */
-      g_clear_object (&shell->priv->active_panel);
+      g_clear_object (&shell->active_panel);
 
       /* set the new panel */
       if (panel)
         {
-          shell->priv->active_panel = g_object_ref (panel);
+          shell->active_panel = g_object_ref (panel);
         }
       else
         {
@@ -1138,34 +1127,34 @@ cc_window_set_property (GObject      *object,
 static void
 cc_window_dispose (GObject *object)
 {
-  CcWindowPrivate *priv = CC_WINDOW (object)->priv;
+  CcWindow *self = CC_WINDOW (object);
 
   /* Avoid receiving notifications about the pages changing
    * when destroying the children one-by-one */
-  if (priv->stack)
+  if (self->stack)
     {
-      g_signal_handlers_disconnect_by_func (priv->stack, stack_page_notify_cb, object);
-      priv->stack = NULL;
+      g_signal_handlers_disconnect_by_func (self->stack, stack_page_notify_cb, object);
+      self->stack = NULL;
     }
 
-  g_free (priv->current_panel_id);
-  priv->current_panel_id = NULL;
+  g_free (self->current_panel_id);
+  self->current_panel_id = NULL;
 
-  if (priv->custom_widgets)
+  if (self->custom_widgets)
     {
-      g_ptr_array_unref (priv->custom_widgets);
-      priv->custom_widgets = NULL;
+      g_ptr_array_unref (self->custom_widgets);
+      self->custom_widgets = NULL;
     }
 
-  g_clear_object (&priv->store);
-  g_clear_object (&priv->search_filter);
-  g_clear_object (&priv->active_panel);
-  g_clear_object (&priv->header_sizegroup);
+  g_clear_object (&self->store);
+  g_clear_object (&self->search_filter);
+  g_clear_object (&self->active_panel);
+  g_clear_object (&self->header_sizegroup);
 
-  if (priv->previous_panels)
+  if (self->previous_panels)
     {
-      g_queue_free_full (priv->previous_panels, g_free);
-      priv->previous_panels = NULL;
+      g_queue_free_full (self->previous_panels, g_free);
+      self->previous_panels = NULL;
     }
 
   G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
@@ -1174,10 +1163,10 @@ cc_window_dispose (GObject *object)
 static void
 cc_window_finalize (GObject *object)
 {
-  CcWindowPrivate *priv = CC_WINDOW (object)->priv;
+  CcWindow *self = CC_WINDOW (object);
 
-  g_free (priv->filter_string);
-  g_strfreev (priv->filter_terms);
+  g_free (self->filter_string);
+  g_strfreev (self->filter_terms);
 
   G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
@@ -1194,8 +1183,6 @@ static void
 cc_window_class_init (CcWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (CcWindowPrivate));
 
   object_class->get_property = cc_window_get_property;
   object_class->set_property = cc_window_set_property;
@@ -1236,12 +1223,12 @@ window_key_press_event (GtkWidget   *win,
   state = state & gtk_accelerator_get_default_mod_mask ();
   is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
 
-  id = gtk_stack_get_visible_child_name (GTK_STACK (self->priv->stack));
+  id = gtk_stack_get_visible_child_name (GTK_STACK (self->stack));
   overview = g_str_equal (id, OVERVIEW_PAGE);
   search = g_str_equal (id, SEARCH_PAGE);
 
   if ((overview || search) &&
-      gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->priv->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
+      gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
     return GDK_EVENT_STOP;
 
   if (state == GDK_CONTROL_MASK)
@@ -1254,10 +1241,10 @@ window_key_press_event (GtkWidget   *win,
           case GDK_KEY_F:
             if (!overview && !search)
               break;
-            retval = !gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->priv->search_bar));
-            gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->priv->search_bar), retval);
+            retval = !gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar));
+            gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), retval);
             if (retval)
-              gtk_widget_grab_focus (self->priv->search_entry);
+              gtk_widget_grab_focus (self->search_entry);
             retval = GDK_EVENT_STOP;
             break;
           case GDK_KEY_Q:
@@ -1295,13 +1282,13 @@ get_monitor_height (CcWindow *self)
   GdkScreen *screen;
   GdkRectangle rect;
 
-  if (self->priv->monitor_num < 0)
+  if (self->monitor_num < 0)
     return 0;
 
   /* We cannot use workarea here, as this wouldn't
    * be updated when we read it after a monitors-changed signal */
   screen = gtk_widget_get_screen (GTK_WIDGET (self));
-  gdk_screen_get_monitor_geometry (screen, self->priv->monitor_num, &rect);
+  gdk_screen_get_monitor_geometry (screen, self->monitor_num, &rect);
 
   return rect.height;
 }
@@ -1320,9 +1307,9 @@ update_monitor_number (CcWindow *self)
   window = gtk_widget_get_window (widget);
   screen = gtk_widget_get_screen (widget);
   monitor = gdk_screen_get_monitor_at_window (screen, window);
-  if (self->priv->monitor_num != monitor)
+  if (self->monitor_num != monitor)
     {
-      self->priv->monitor_num = monitor;
+      self->monitor_num = monitor;
       changed = TRUE;
     }
 
@@ -1349,21 +1336,21 @@ update_small_screen_settings (CcWindow *self)
     {
       gtk_window_set_resizable (GTK_WINDOW (self), TRUE);
 
-      if (self->priv->small_screen != small)
+      if (self->small_screen != small)
         gtk_window_maximize (GTK_WINDOW (self));
     }
   else
     {
-      if (self->priv->small_screen != small)
+      if (self->small_screen != small)
         gtk_window_unmaximize (GTK_WINDOW (self));
 
       gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
     }
 
-  self->priv->small_screen = small;
+  self->small_screen = small;
 
   /* And update the minimum sizes */
-  stack_page_notify_cb (GTK_STACK (self->priv->stack), NULL, self);
+  stack_page_notify_cb (GTK_STACK (self->stack), NULL, self);
 }
 
 static gboolean
@@ -1396,7 +1383,7 @@ monitors_changed_cb (GdkScreen *screen,
 {
   /* We reset small_screen_set to make sure that the
    * window gets maximised if need be, in update_small_screen_settings() */
-  self->priv->small_screen = SMALL_SCREEN_UNSET;
+  self->small_screen = SMALL_SCREEN_UNSET;
   update_small_screen_settings (self);
 }
 
@@ -1436,26 +1423,25 @@ window_map_event_cb (GtkWidget *widget,
 static void
 create_main_page (CcWindow *self)
 {
-  CcWindowPrivate *priv = self->priv;
   GtkStyleContext *context;
 
-  priv->scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  context = gtk_widget_get_style_context (priv->scrolled_window);
+  self->scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  context = gtk_widget_get_style_context (self->scrolled_window);
   gtk_style_context_add_class (context, "view");
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolled_window),
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->scrolled_window, OVERVIEW_PAGE);
+  gtk_stack_add_named (GTK_STACK (self->stack), self->scrolled_window, OVERVIEW_PAGE);
 
-  priv->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_set_margin_top (priv->main_vbox, 8);
-  gtk_widget_set_margin_bottom (priv->main_vbox, 8);
-  gtk_widget_set_margin_start (priv->main_vbox, 12);
-  gtk_widget_set_margin_end (priv->main_vbox, 12);
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (priv->main_vbox),
-                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (priv->scrolled_window)));
-  gtk_container_add (GTK_CONTAINER (priv->scrolled_window), priv->main_vbox);
+  self->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_widget_set_margin_top (self->main_vbox, 8);
+  gtk_widget_set_margin_bottom (self->main_vbox, 8);
+  gtk_widget_set_margin_start (self->main_vbox, 12);
+  gtk_widget_set_margin_end (self->main_vbox, 12);
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_vbox),
+                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self->scrolled_window)));
+  gtk_container_add (GTK_CONTAINER (self->scrolled_window), self->main_vbox);
 
-  gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
+  gtk_widget_set_size_request (self->scrolled_window, FIXED_WIDTH, -1);
 
   /* load the available settings panels */
   setup_model (self);
@@ -1464,12 +1450,10 @@ create_main_page (CcWindow *self)
 static void
 create_search_page (CcWindow *self)
 {
-  CcWindowPrivate *priv = self->priv;
-
-  priv->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->search_scrolled),
+  self->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->search_scrolled),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->search_scrolled, SEARCH_PAGE);
+  gtk_stack_add_named (GTK_STACK (self->stack), self->search_scrolled, SEARCH_PAGE);
 
   /* setup search functionality */
   setup_search (self);
@@ -1478,50 +1462,48 @@ create_search_page (CcWindow *self)
 static void
 create_header (CcWindow *self)
 {
-  CcWindowPrivate *priv = self->priv;
   GtkWidget *image;
   AtkObject *accessible;
 
-  priv->header = gtk_header_bar_new ();
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->header), TRUE);
+  self->header = gtk_header_bar_new ();
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->header), TRUE);
 
-  priv->header_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
+  self->header_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
   /* previous button */
-  priv->previous_button = gtk_button_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_widget_set_valign (priv->previous_button, GTK_ALIGN_CENTER);
-  gtk_widget_set_no_show_all (priv->previous_button, TRUE);
-  accessible = gtk_widget_get_accessible (priv->previous_button);
+  self->previous_button = gtk_button_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
+  gtk_widget_set_valign (self->previous_button, GTK_ALIGN_CENTER);
+  gtk_widget_set_no_show_all (self->previous_button, TRUE);
+  accessible = gtk_widget_get_accessible (self->previous_button);
   atk_object_set_name (accessible, _("All Settings"));
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (priv->header), priv->previous_button);
-  g_signal_connect (priv->previous_button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
-  gtk_size_group_add_widget (priv->header_sizegroup, priv->previous_button);
+  gtk_header_bar_pack_start (GTK_HEADER_BAR (self->header), self->previous_button);
+  g_signal_connect (self->previous_button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
+  gtk_size_group_add_widget (self->header_sizegroup, self->previous_button);
 
   /* toggle search button */
-  priv->search_button = gtk_toggle_button_new ();
+  self->search_button = gtk_toggle_button_new ();
   image = gtk_image_new_from_icon_name ("edit-find-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_button_set_image (GTK_BUTTON (priv->search_button), image);
-  gtk_widget_set_valign (priv->search_button, GTK_ALIGN_CENTER);
-  gtk_style_context_add_class (gtk_widget_get_style_context (priv->search_button),
-                               "image-button");  
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->search_button);
+  gtk_button_set_image (GTK_BUTTON (self->search_button), image);
+  gtk_widget_set_valign (self->search_button, GTK_ALIGN_CENTER);
+  gtk_style_context_add_class (gtk_widget_get_style_context (self->search_button),
+                               "image-button");
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (self->header), self->search_button);
 
-  priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->top_right_box);
+  self->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (self->header), self->top_right_box);
 
-  priv->lock_button = gtk_lock_button_new (NULL);
-  gtk_style_context_add_class (gtk_widget_get_style_context (priv->lock_button),
+  self->lock_button = gtk_lock_button_new (NULL);
+  gtk_style_context_add_class (gtk_widget_get_style_context (self->lock_button),
                                "text-button");
-  gtk_widget_set_valign (priv->lock_button, GTK_ALIGN_CENTER);
-  gtk_widget_set_no_show_all (priv->lock_button, TRUE);
-  gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
-  gtk_size_group_add_widget (priv->header_sizegroup, priv->lock_button);
+  gtk_widget_set_valign (self->lock_button, GTK_ALIGN_CENTER);
+  gtk_widget_set_no_show_all (self->lock_button, TRUE);
+  gtk_container_add (GTK_CONTAINER (self->top_right_box), self->lock_button);
+  gtk_size_group_add_widget (self->header_sizegroup, self->lock_button);
 }
 
 static void
 create_window (CcWindow *self)
 {
-  CcWindowPrivate *priv = self->priv;
   GtkWidget *box;
   GdkScreen *screen;
 
@@ -1529,27 +1511,27 @@ create_window (CcWindow *self)
   gtk_container_add (GTK_CONTAINER (self), box);
 
   create_header (self);
-  gtk_window_set_titlebar (GTK_WINDOW (self), priv->header);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (priv->header), _(DEFAULT_WINDOW_TITLE));
-  gtk_widget_show_all (priv->header);
+  gtk_window_set_titlebar (GTK_WINDOW (self), self->header);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
+  gtk_widget_show_all (self->header);
 
   /* search bar */
-  priv->search_bar = gtk_search_bar_new ();
-  priv->search_entry = gtk_search_entry_new ();
-  gtk_entry_set_width_chars (GTK_ENTRY (priv->search_entry), 30);
-  g_signal_connect (priv->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
-  g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
-  gtk_container_add (GTK_CONTAINER (priv->search_bar), priv->search_entry);
-  gtk_container_add (GTK_CONTAINER (box), priv->search_bar);
+  self->search_bar = gtk_search_bar_new ();
+  self->search_entry = gtk_search_entry_new ();
+  gtk_entry_set_width_chars (GTK_ENTRY (self->search_entry), 30);
+  g_signal_connect (self->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
+  g_signal_connect (self->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
+  gtk_container_add (GTK_CONTAINER (self->search_bar), self->search_entry);
+  gtk_container_add (GTK_CONTAINER (box), self->search_bar);
 
-  g_object_bind_property (priv->search_button, "active",
-                          priv->search_bar, "search-mode-enabled",
+  g_object_bind_property (self->search_button, "active",
+                          self->search_bar, "search-mode-enabled",
                           G_BINDING_BIDIRECTIONAL);
 
-  priv->stack = gtk_stack_new ();
-  gtk_stack_set_homogeneous (GTK_STACK (priv->stack), TRUE);
-  gtk_stack_set_transition_type (GTK_STACK (priv->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
-  gtk_box_pack_start (GTK_BOX (box), priv->stack, TRUE, TRUE, 0);
+  self->stack = gtk_stack_new ();
+  gtk_stack_set_homogeneous (GTK_STACK (self->stack), TRUE);
+  gtk_stack_set_transition_type (GTK_STACK (self->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
+  gtk_box_pack_start (GTK_BOX (box), self->stack, TRUE, TRUE, 0);
 
   create_main_page (self);
   create_search_page (self);
@@ -1569,7 +1551,7 @@ create_window (CcWindow *self)
 
   g_signal_connect (self, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
 
-  g_signal_connect (priv->stack, "notify::visible-child",
+  g_signal_connect (self->stack, "notify::visible-child",
                     G_CALLBACK (stack_page_notify_cb), self);
 
   gtk_widget_show_all (box);
@@ -1578,21 +1560,17 @@ create_window (CcWindow *self)
 static void
 cc_window_init (CcWindow *self)
 {
-  CcWindowPrivate *priv;
-
-  priv = self->priv = WINDOW_PRIVATE (self);
-
-  priv->monitor_num = -1;
-  self->priv->small_screen = SMALL_SCREEN_UNSET;
+  self->monitor_num = -1;
+  self->small_screen = SMALL_SCREEN_UNSET;
 
   create_window (self);
 
-  self->priv->previous_panels = g_queue_new ();
+  self->previous_panels = g_queue_new ();
 
   /* keep a list of custom widgets to unload on panel change */
-  priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
+  self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
-  stack_page_notify_cb (GTK_STACK (priv->stack), NULL, self);
+  stack_page_notify_cb (GTK_STACK (self->stack), NULL, self);
 }
 
 CcWindow *

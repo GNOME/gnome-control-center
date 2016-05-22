@@ -26,29 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WINDOW cc_window_get_type()
-#define CC_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_WINDOW, CcWindow))
-#define CC_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_WINDOW, CcWindowClass))
-#define CC_IS_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_WINDOW))
-#define CC_IS_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_WINDOW))
-#define CC_WINDOW_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_WINDOW, CcWindowClass))
+#define CC_TYPE_WINDOW (cc_window_get_type ())
 
-typedef struct _CcWindow CcWindow;
-typedef struct _CcWindowClass CcWindowClass;
-typedef struct _CcWindowPrivate CcWindowPrivate;
-
-struct _CcWindow
-{
-  GtkApplicationWindow parent;
-  CcWindowPrivate *priv;
-};
-
-struct _CcWindowClass
-{
-  GtkApplicationWindowClass parent_class;
-};
-
-GType cc_window_get_type (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (CcWindow, cc_window, CC, WINDOW, GtkApplicationWindow)
 
 CcWindow *cc_window_new (GtkApplication *application);
 
