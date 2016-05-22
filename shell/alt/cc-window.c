@@ -1431,7 +1431,14 @@ create_main_page (CcWindow *self)
   gtk_style_context_add_class (context, "view");
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_stack_add_named (GTK_STACK (self->stack), self->scrolled_window, OVERVIEW_PAGE);
+
+  gtk_box_pack_start (GTK_BOX (self->main_hbox), self->scrolled_window, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (self->main_hbox), gtk_separator_new (GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
+
+  /* FIXME: this is just a placeholder widget to avoid breaking the code */
+  gtk_stack_add_named (GTK_STACK (self->stack),
+                       gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0),
+                       OVERVIEW_PAGE);
 
   self->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_margin_top (self->main_vbox, 8);
