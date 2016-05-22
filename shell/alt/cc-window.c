@@ -39,14 +39,7 @@
 #include "cc-panel-loader.h"
 #include "cc-util.h"
 
-/* Use a fixed width for the shell, since resizing horizontally is more awkward
- * for the user than resizing vertically
- * Both sizes are defined in https://live.gnome.org/Design/SystemSettings/ */
-#define FIXED_WIDTH 740
 #define FIXED_HEIGHT 636
-#define SMALL_SCREEN_FIXED_HEIGHT 400
-
-#define MIN_ICON_VIEW_HEIGHT 300
 
 #define MOUSE_BACK_BUTTON 8
 
@@ -898,7 +891,6 @@ stack_page_notify_cb (GtkStack     *stack,
                       GParamSpec  *spec,
                       CcWindow    *self)
 {
-  int nat_height;
   const char *id;
 
   id = gtk_stack_get_visible_child_name (stack);
@@ -907,41 +899,16 @@ stack_page_notify_cb (GtkStack     *stack,
 
   if (g_strcmp0 (id, OVERVIEW_PAGE) == 0 || g_strcmp0 (id, SEARCH_PAGE) == 0)
     {
-      gint header_height, maximum_height;
-
       gtk_widget_hide (self->previous_button);
       gtk_widget_show (self->search_button);
       gtk_widget_show (self->search_bar);
       gtk_widget_hide (self->lock_button);
-
-      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->main_vbox),
-                                                 FIXED_WIDTH, NULL, &nat_height);
-      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->header),
-                                                 FIXED_WIDTH, NULL, &header_height);
-
-      /* find the maximum height by using the monitor height minus an allowance
-       * for title bar, etc. */
-      maximum_height = get_monitor_height (self) - 100;
-
-      if (maximum_height > 0 && nat_height + header_height > maximum_height)
-        nat_height = maximum_height - header_height;
-
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->scrolled_window),
-                                                  self->small_screen == SMALL_SCREEN_TRUE ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
     }
   else
     {
       gtk_widget_show (self->previous_button);
       gtk_widget_hide (self->search_button);
       gtk_widget_hide (self->search_bar);
-      /* set the scrolled window small so that it doesn't force
-         the window to be larger than this panel */
-      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self),
-                                                 FIXED_WIDTH, NULL, &nat_height);
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->scrolled_window), MIN_ICON_VIEW_HEIGHT);
-      gtk_window_resize (GTK_WINDOW (self),
-                         FIXED_WIDTH,
-                         nat_height);
     }
 }
 
@@ -1448,8 +1415,6 @@ create_main_page (CcWindow *self)
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_vbox),
                                        gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self->scrolled_window)));
   gtk_container_add (GTK_CONTAINER (self->scrolled_window), self->main_vbox);
-
-  gtk_widget_set_size_request (self->scrolled_window, FIXED_WIDTH, -1);
 
   /* load the available settings panels */
   setup_model (self);
