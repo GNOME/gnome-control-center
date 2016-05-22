@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2009, 2010 Intel, Inc.
  * Copyright (c) 2010 Red Hat, Inc.
+ * Copyright (c) 2016 Endless, Inc.
  *
  * The Control Center is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by the
@@ -53,9 +54,7 @@ struct _CcWindow
 
   GtkWidget  *stack;
   GtkWidget  *header;
-  GtkWidget  *main_hbox;
   GtkWidget  *main_vbox;
-  GtkWidget  *scrolled_window;
   GtkWidget  *search_scrolled;
   GtkWidget  *previous_button;
   GtkWidget  *top_right_box;
@@ -1017,6 +1016,39 @@ _shell_get_toplevel (CcShell *shell)
   return GTK_WIDGET (shell);
 }
 
+static void
+gdk_window_set_cb (GObject    *object,
+                   GParamSpec *pspec,
+                   CcWindow   *self)
+{
+  GdkWindow *window;
+  gchar *str;
+
+  if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    return;
+
+  window = gtk_widget_get_window (GTK_WIDGET (self));
+
+  if (!window)
+    return;
+
+  str = g_strdup_printf ("%u", (guint) GDK_WINDOW_XID (window));
+  g_setenv ("GNOME_CONTROL_CENTER_XID", str, TRUE);
+  g_free (str);
+}
+
+static gboolean
+window_map_event_cb (GtkWidget *widget,
+                     GdkEvent  *event,
+                     CcWindow  *self)
+{
+  /* If focus ends up in a category icon view one of the items is
+   * immediately selected which looks odd when we are starting up, so
+   * we explicitly unset the focus here. */
+  gtk_window_set_focus (GTK_WINDOW (self), NULL);
+  return GDK_EVENT_PROPAGATE;
+}
+
 /* GObject Implementation */
 static void
 cc_window_get_property (GObject    *object,
@@ -1104,13 +1136,6 @@ cc_window_dispose (GObject *object)
   g_clear_object (&self->store);
   g_clear_object (&self->search_filter);
   g_clear_object (&self->active_panel);
-  g_clear_object (&self->header_sizegroup);
-
-  if (self->previous_panels)
-    {
-      g_queue_free_full (self->previous_panels, g_free);
-      self->previous_panels = NULL;
-    }
 
   G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
 }
@@ -1119,6 +1144,12 @@ static void
 cc_window_finalize (GObject *object)
 {
   CcWindow *self = CC_WINDOW (object);
+
+  if (self->previous_panels)
+    {
+      g_queue_free_full (self->previous_panels, g_free);
+      self->previous_panels = NULL;
+    }
 
   g_free (self->filter_string);
   g_strfreev (self->filter_terms);
@@ -1137,6 +1168,7 @@ cc_shell_iface_init (CcShellInterface *iface)
 static void
 cc_window_class_init (CcWindowClass *klass)
 {
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->get_property = cc_window_get_property;
@@ -1145,6 +1177,26 @@ cc_window_class_init (CcWindowClass *klass)
   object_class->finalize = cc_window_finalize;
 
   g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/window.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, lock_button);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, main_vbox);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
+
+  gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
+  gtk_widget_class_bind_template_callback (widget_class, search_entry_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, search_entry_key_press_event_cb);
+  gtk_widget_class_bind_template_callback (widget_class, stack_page_notify_cb);
+  gtk_widget_class_bind_template_callback (widget_class, window_map_event_cb);
 }
 
 static gboolean
@@ -1232,85 +1284,6 @@ window_key_press_event (GtkWidget   *win,
 }
 
 static void
-application_set_cb (GObject    *object,
-                    GParamSpec *pspec,
-                    CcWindow   *self)
-{
-  /* update small screen settings now - to avoid visible resizing, we want
-   * to do it before showing the window, and GtkApplicationWindow cannot be
-   * realized unless its application property has been set */
-  if (gtk_window_get_application (GTK_WINDOW (self)))
-    {
-      gtk_widget_realize (GTK_WIDGET (self));
-    }
-}
-
-static void
-gdk_window_set_cb (GObject    *object,
-                   GParamSpec *pspec,
-                   CcWindow   *self)
-{
-  GdkWindow *window;
-  gchar *str;
-
-  if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-    return;
-
-  window = gtk_widget_get_window (GTK_WIDGET (self));
-
-  if (!window)
-    return;
-
-  str = g_strdup_printf ("%u", (guint) GDK_WINDOW_XID (window));
-  g_setenv ("GNOME_CONTROL_CENTER_XID", str, TRUE);
-  g_free (str);
-}
-
-static gboolean
-window_map_event_cb (GtkWidget *widget,
-                     GdkEvent  *event,
-                     CcWindow  *self)
-{
-  /* If focus ends up in a category icon view one of the items is
-   * immediately selected which looks odd when we are starting up, so
-   * we explicitly unset the focus here. */
-  gtk_window_set_focus (GTK_WINDOW (self), NULL);
-  return GDK_EVENT_PROPAGATE;
-}
-
-static void
-create_main_page (CcWindow *self)
-{
-  GtkStyleContext *context;
-
-  self->scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  context = gtk_widget_get_style_context (self->scrolled_window);
-  gtk_style_context_add_class (context, "view");
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->scrolled_window),
-                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-
-  gtk_box_pack_start (GTK_BOX (self->main_hbox), self->scrolled_window, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (self->main_hbox), gtk_separator_new (GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
-
-  /* FIXME: this is just a placeholder widget to avoid breaking the code */
-  gtk_stack_add_named (GTK_STACK (self->stack),
-                       gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0),
-                       OVERVIEW_PAGE);
-
-  self->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_set_margin_top (self->main_vbox, 8);
-  gtk_widget_set_margin_bottom (self->main_vbox, 8);
-  gtk_widget_set_margin_start (self->main_vbox, 12);
-  gtk_widget_set_margin_end (self->main_vbox, 12);
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_vbox),
-                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self->scrolled_window)));
-  gtk_container_add (GTK_CONTAINER (self->scrolled_window), self->main_vbox);
-
-  /* load the available settings panels */
-  setup_model (self);
-}
-
-static void
 create_search_page (CcWindow *self)
 {
   self->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
@@ -1323,106 +1296,34 @@ create_search_page (CcWindow *self)
 }
 
 static void
-create_header (CcWindow *self)
-{
-  GtkWidget *image;
-  AtkObject *accessible;
-
-  self->header = gtk_header_bar_new ();
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->header), TRUE);
-
-  self->header_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
-
-  /* previous button */
-  self->previous_button = gtk_button_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_widget_set_valign (self->previous_button, GTK_ALIGN_CENTER);
-  gtk_widget_set_no_show_all (self->previous_button, TRUE);
-  accessible = gtk_widget_get_accessible (self->previous_button);
-  atk_object_set_name (accessible, _("All Settings"));
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (self->header), self->previous_button);
-  g_signal_connect (self->previous_button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
-  gtk_size_group_add_widget (self->header_sizegroup, self->previous_button);
-
-  /* toggle search button */
-  self->search_button = gtk_toggle_button_new ();
-  image = gtk_image_new_from_icon_name ("edit-find-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_button_set_image (GTK_BUTTON (self->search_button), image);
-  gtk_widget_set_valign (self->search_button, GTK_ALIGN_CENTER);
-  gtk_style_context_add_class (gtk_widget_get_style_context (self->search_button),
-                               "image-button");
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (self->header), self->search_button);
-
-  self->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (self->header), self->top_right_box);
-
-  self->lock_button = gtk_lock_button_new (NULL);
-  gtk_style_context_add_class (gtk_widget_get_style_context (self->lock_button),
-                               "text-button");
-  gtk_widget_set_valign (self->lock_button, GTK_ALIGN_CENTER);
-  gtk_widget_set_no_show_all (self->lock_button, TRUE);
-  gtk_container_add (GTK_CONTAINER (self->top_right_box), self->lock_button);
-  gtk_size_group_add_widget (self->header_sizegroup, self->lock_button);
-}
-
-static void
 create_window (CcWindow *self)
 {
-  GtkWidget *box;
+  AtkObject *accessible;
 
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_container_add (GTK_CONTAINER (self), box);
+  /* previous button */
+  accessible = gtk_widget_get_accessible (self->previous_button);
+  atk_object_set_name (accessible, _("All Settings"));
 
-  create_header (self);
   gtk_window_set_titlebar (GTK_WINDOW (self), self->header);
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
   gtk_widget_show_all (self->header);
 
-  /* search bar */
-  self->search_bar = gtk_search_bar_new ();
-  self->search_entry = gtk_search_entry_new ();
-  gtk_entry_set_width_chars (GTK_ENTRY (self->search_entry), 30);
-  g_signal_connect (self->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self);
-  g_signal_connect (self->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
-  gtk_container_add (GTK_CONTAINER (self->search_bar), self->search_entry);
-  gtk_container_add (GTK_CONTAINER (box), self->search_bar);
-
-  g_object_bind_property (self->search_button, "active",
-                          self->search_bar, "search-mode-enabled",
-                          G_BINDING_BIDIRECTIONAL);
-
-  self->main_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_add (GTK_CONTAINER (box), self->main_hbox);
-
-  self->stack = g_object_new (GTK_TYPE_STACK,
-                              "homogeneous", TRUE,
-                              "transition-type", GTK_STACK_TRANSITION_TYPE_CROSSFADE,
-                              "expand", TRUE,
-                              NULL);
-  gtk_box_pack_end (GTK_BOX (self->main_hbox), self->stack, FALSE, FALSE, 0);
-
-  create_main_page (self);
+  setup_model (self);
   create_search_page (self);
 
   /* connect various signals */
-  g_signal_connect (self, "notify::application", G_CALLBACK (application_set_cb), self);
   g_signal_connect_after (self, "key_press_event",
                           G_CALLBACK (window_key_press_event), self);
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_RELEASE_MASK);
   g_signal_connect (self, "button-release-event",
                     G_CALLBACK (window_button_release_event), self);
-  g_signal_connect (self, "map-event", G_CALLBACK (window_map_event_cb), self);
-
-  g_signal_connect (self, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
-
-  g_signal_connect (self->stack, "notify::visible-child",
-                    G_CALLBACK (stack_page_notify_cb), self);
-
-  gtk_widget_show_all (box);
 }
 
 static void
 cc_window_init (CcWindow *self)
 {
+  gtk_widget_init_template (GTK_WIDGET (self));
+
   create_window (self);
 
   self->previous_panels = g_queue_new ();

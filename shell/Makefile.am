@@ -149,6 +149,7 @@ EXTRA_DIST =					\
 	$(completion_in_files)			\
 	gnome-control-center.gresource.xml	\
 	help-overlay.ui				\
+	window.ui				\
 	$(resource_files)			\
 	list-panel.sh
 
