@@ -54,6 +54,7 @@ struct _CcWindow
 
   GtkWidget  *stack;
   GtkWidget  *header;
+  GtkWidget  *header_box;
   GtkWidget  *main_vbox;
   GtkWidget  *search_scrolled;
   GtkWidget  *previous_button;
@@ -1181,6 +1182,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_vbox);
@@ -1304,9 +1306,9 @@ create_window (CcWindow *self)
   accessible = gtk_widget_get_accessible (self->previous_button);
   atk_object_set_name (accessible, _("All Settings"));
 
-  gtk_window_set_titlebar (GTK_WINDOW (self), self->header);
+  gtk_window_set_titlebar (GTK_WINDOW (self), self->header_box);
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
-  gtk_widget_show_all (self->header);
+  gtk_widget_show_all (self->header_box);
 
   setup_model (self);
   create_search_page (self);
