@@ -42,7 +42,6 @@
 
 #define MOUSE_BACK_BUTTON 8
 
-#define DEFAULT_WINDOW_TITLE N_("All Settings")
 #define DEFAULT_WINDOW_ICON_NAME "preferences-system"
 
 #define SEARCH_PAGE "_search"
@@ -56,6 +55,7 @@ struct _CcWindow
   GtkWidget  *header;
   GtkWidget  *header_box;
   GtkWidget  *main_vbox;
+  GtkWidget  *panel_headerbar;
   GtkWidget  *search_scrolled;
   GtkWidget  *previous_button;
   GtkWidget  *top_right_box;
@@ -155,7 +155,7 @@ activate_panel (CcWindow           *self,
   icon_name = get_icon_name_from_g_icon (gicon);
 
   gtk_window_set_role (GTK_WINDOW (self), id);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), name);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (self->panel_headerbar), name);
   gtk_window_set_default_icon_name (icon_name);
   gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
 
@@ -223,7 +223,6 @@ shell_show_overview_page (CcWindow *self)
 
   /* reset window title and icon */
   gtk_window_set_role (GTK_WINDOW (self), NULL);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
   gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
   gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
 
@@ -1186,6 +1185,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_vbox);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
@@ -1307,7 +1307,6 @@ create_window (CcWindow *self)
   atk_object_set_name (accessible, _("All Settings"));
 
   gtk_window_set_titlebar (GTK_WINDOW (self), self->header_box);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
   gtk_widget_show_all (self->header_box);
 
   setup_model (self);
