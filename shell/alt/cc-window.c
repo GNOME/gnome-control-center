@@ -39,8 +39,6 @@
 #include "cc-panel-loader.h"
 #include "cc-util.h"
 
-#define FIXED_HEIGHT 636
-
 #define MOUSE_BACK_BUTTON 8
 
 #define DEFAULT_WINDOW_TITLE N_("All Settings")
@@ -48,12 +46,6 @@
 
 #define SEARCH_PAGE "_search"
 #define OVERVIEW_PAGE "_overview"
-
-typedef enum {
-	SMALL_SCREEN_UNSET,
-	SMALL_SCREEN_TRUE,
-	SMALL_SCREEN_FALSE
-} CcSmallScreen;
 
 struct _CcWindow
 {
@@ -88,9 +80,6 @@ struct _CcWindow
   gchar **filter_terms;
 
   CcPanel *active_panel;
-
-  int monitor_num;
-  CcSmallScreen small_screen;
 };
 
 static void     cc_shell_iface_init         (CcShellInterface      *iface);
@@ -108,8 +97,6 @@ static gboolean cc_window_set_active_panel_from_id (CcShell      *shell,
                                                     const gchar  *start_id,
                                                     GVariant     *parameters,
                                                     GError      **err);
-
-static gint get_monitor_height (CcWindow *self);
 
 static const gchar *
 get_icon_name_from_g_icon (GIcon *gicon)
@@ -1244,92 +1231,6 @@ window_key_press_event (GtkWidget   *win,
   return retval;
 }
 
-static gint
-get_monitor_height (CcWindow *self)
-{
-  GdkScreen *screen;
-  GdkRectangle rect;
-
-  if (self->monitor_num < 0)
-    return 0;
-
-  /* We cannot use workarea here, as this wouldn't
-   * be updated when we read it after a monitors-changed signal */
-  screen = gtk_widget_get_screen (GTK_WIDGET (self));
-  gdk_screen_get_monitor_geometry (screen, self->monitor_num, &rect);
-
-  return rect.height;
-}
-
-static gboolean
-update_monitor_number (CcWindow *self)
-{
-  gboolean changed = FALSE;
-  GtkWidget *widget;
-  GdkScreen *screen;
-  GdkWindow *window;
-  int monitor;
-
-  widget = GTK_WIDGET (self);
-
-  window = gtk_widget_get_window (widget);
-  screen = gtk_widget_get_screen (widget);
-  monitor = gdk_screen_get_monitor_at_window (screen, window);
-  if (self->monitor_num != monitor)
-    {
-      self->monitor_num = monitor;
-      changed = TRUE;
-    }
-
-  return changed;
-}
-
-static CcSmallScreen
-is_small (CcWindow *self)
-{
-  if (get_monitor_height (self) <= FIXED_HEIGHT)
-    return SMALL_SCREEN_TRUE;
-  return SMALL_SCREEN_FALSE;
-}
-
-static void
-update_small_screen_settings (CcWindow *self)
-{
-  CcSmallScreen small;
-
-  update_monitor_number (self);
-  small = is_small (self);
-
-  if (small == SMALL_SCREEN_TRUE)
-    {
-      gtk_window_set_resizable (GTK_WINDOW (self), TRUE);
-
-      if (self->small_screen != small)
-        gtk_window_maximize (GTK_WINDOW (self));
-    }
-  else
-    {
-      if (self->small_screen != small)
-        gtk_window_unmaximize (GTK_WINDOW (self));
-
-      gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
-    }
-
-  self->small_screen = small;
-
-  /* And update the minimum sizes */
-  stack_page_notify_cb (GTK_STACK (self->stack), NULL, self);
-}
-
-static gboolean
-main_window_configure_cb (GtkWidget *widget,
-                          GdkEvent  *event,
-                          CcWindow  *self)
-{
-  update_small_screen_settings (self);
-  return FALSE;
-}
-
 static void
 application_set_cb (GObject    *object,
                     GParamSpec *pspec,
@@ -1341,18 +1242,7 @@ application_set_cb (GObject    *object,
   if (gtk_window_get_application (GTK_WINDOW (self)))
     {
       gtk_widget_realize (GTK_WIDGET (self));
-      update_small_screen_settings (self);
     }
-}
-
-static void
-monitors_changed_cb (GdkScreen *screen,
-                     CcWindow  *self)
-{
-  /* We reset small_screen_set to make sure that the
-   * window gets maximised if need be, in update_small_screen_settings() */
-  self->small_screen = SMALL_SCREEN_UNSET;
-  update_small_screen_settings (self);
 }
 
 static void
@@ -1478,7 +1368,6 @@ static void
 create_window (CcWindow *self)
 {
   GtkWidget *box;
-  GdkScreen *screen;
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_container_add (GTK_CONTAINER (self), box);
@@ -1515,10 +1404,6 @@ create_window (CcWindow *self)
   create_search_page (self);
 
   /* connect various signals */
-  screen = gtk_widget_get_screen (GTK_WIDGET (self));
-  g_signal_connect (screen, "monitors-changed", G_CALLBACK (monitors_changed_cb), self);
-
-  g_signal_connect (self, "configure-event", G_CALLBACK (main_window_configure_cb), self);
   g_signal_connect (self, "notify::application", G_CALLBACK (application_set_cb), self);
   g_signal_connect_after (self, "key_press_event",
                           G_CALLBACK (window_key_press_event), self);
@@ -1538,9 +1423,6 @@ create_window (CcWindow *self)
 static void
 cc_window_init (CcWindow *self)
 {
-  self->monitor_num = -1;
-  self->small_screen = SMALL_SCREEN_UNSET;
-
   create_window (self);
 
   self->previous_panels = g_queue_new ();
