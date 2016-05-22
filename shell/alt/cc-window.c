@@ -1539,9 +1539,11 @@ create_window (CcWindow *self)
   self->main_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_add (GTK_CONTAINER (box), self->main_hbox);
 
-  self->stack = gtk_stack_new ();
-  gtk_stack_set_homogeneous (GTK_STACK (self->stack), TRUE);
-  gtk_stack_set_transition_type (GTK_STACK (self->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
+  self->stack = g_object_new (GTK_TYPE_STACK,
+                              "homogeneous", TRUE,
+                              "transition-type", GTK_STACK_TRANSITION_TYPE_CROSSFADE,
+                              "expand", TRUE,
+                              NULL);
   gtk_box_pack_end (GTK_BOX (self->main_hbox), self->stack, FALSE, FALSE, 0);
 
   create_main_page (self);
