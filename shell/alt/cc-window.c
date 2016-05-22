@@ -68,6 +68,7 @@ struct _CcWindow
 
   GtkWidget  *stack;
   GtkWidget  *header;
+  GtkWidget  *main_hbox;
   GtkWidget  *main_vbox;
   GtkWidget  *scrolled_window;
   GtkWidget  *search_scrolled;
@@ -1528,10 +1529,13 @@ create_window (CcWindow *self)
                           self->search_bar, "search-mode-enabled",
                           G_BINDING_BIDIRECTIONAL);
 
+  self->main_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_container_add (GTK_CONTAINER (box), self->main_hbox);
+
   self->stack = gtk_stack_new ();
   gtk_stack_set_homogeneous (GTK_STACK (self->stack), TRUE);
   gtk_stack_set_transition_type (GTK_STACK (self->stack), GTK_STACK_TRANSITION_TYPE_CROSSFADE);
-  gtk_box_pack_start (GTK_BOX (box), self->stack, TRUE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX (self->main_hbox), self->stack, FALSE, FALSE, 0);
 
   create_main_page (self);
   create_search_page (self);
