@@ -50,7 +50,6 @@
 #include <libgd/gd-notification.h>
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
-#define KEY_CURRENT_INPUT_SOURCE "current"
 #define KEY_INPUT_SOURCES        "sources"
 
 #define GNOME_SYSTEM_LOCALE_DIR "org.gnome.system.locale"
@@ -1049,46 +1048,19 @@ set_input_settings (CcRegionPanel *self)
         const gchar *type;
         const gchar *id;
         GVariantBuilder builder;
-        GVariant *old_sources;
-        const gchar *old_current_type;
-        const gchar *old_current_id;
-        guint old_current;
-        guint old_n_sources;
-        guint index;
         GList *list, *l;
 
-        old_sources = g_settings_get_value (priv->input_settings, KEY_INPUT_SOURCES);
-        old_current = g_settings_get_uint (priv->input_settings, KEY_CURRENT_INPUT_SOURCE);
-        old_n_sources = g_variant_n_children (old_sources);
-
-        if (old_n_sources > 0 && old_current < old_n_sources) {
-                g_variant_get_child (old_sources, old_current,
-                                     "(&s&s)", &old_current_type, &old_current_id);
-        } else {
-                old_current_type = "";
-                old_current_id = "";
-        }
-
         g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
-        index = 0;
         list = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
         for (l = list; l; l = l->next) {
                 type = (const gchar *)g_object_get_data (G_OBJECT (l->data), "type");
                 id = (const gchar *)g_object_get_data (G_OBJECT (l->data), "id");
-                if (index != old_current &&
-                    g_str_equal (type, old_current_type) &&
-                    g_str_equal (id, old_current_id)) {
-                        g_settings_set_uint (priv->input_settings, KEY_CURRENT_INPUT_SOURCE, index);
-                }
                 g_variant_builder_add (&builder, "(ss)", type, id);
-                index += 1;
         }
         g_list_free (list);
 
         g_settings_set_value (priv->input_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
         g_settings_apply (priv->input_settings);
-
-        g_variant_unref (old_sources);
 }
 
 static void set_localed_input (CcRegionPanel *self);
