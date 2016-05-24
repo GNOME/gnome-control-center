@@ -560,8 +560,7 @@ is_valid_username (const gchar *username, gchar **tip)
 
         if (!empty && (in_use || too_long || !valid)) {
                 if (in_use) {
-                        *tip = g_strdup_printf (_("A user with the username '%s' already exists."),
-                                               username);
+                        *tip = g_strdup (_("Sorry, that user name isn't available. Please try another."));
                 }
                 else if (too_long) {
                         *tip = g_strdup_printf (_("The username is too long."));
@@ -570,7 +569,7 @@ is_valid_username (const gchar *username, gchar **tip)
                         *tip = g_strdup (_("The username cannot start with a '-'."));
                 }
                 else {
-                        *tip = g_strdup (_("The username should only consist of lower and upper case letters from a-z, digits and any of characters '.', '-' and '_'."));
+                        *tip = g_strdup (_("The username should only consist of upper and lower case letters from a-z, digits and the following characters: . - _"));
                 }
         }
         else {

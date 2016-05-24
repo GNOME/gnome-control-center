@@ -31,7 +31,7 @@
 #include "pw-utils.h"
 
 #define PASSWORD_CHECK_TIMEOUT 600
-#define DOMAIN_DEFAULT_HINT _("Should match the web address of your account provider.")
+#define DOMAIN_DEFAULT_HINT _("Should match the web address of your login provider.")
 
 typedef enum {
         UM_LOCAL,
