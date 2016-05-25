@@ -8,24 +8,6 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="account-type-model">
-    <columns>
-      <!-- column-name gchararray -->
-      <column type="gchararray"/>
-      <!-- column-name gint -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes" context="Account type">Standard</col>
-        <col id="1">0</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="Account type">Administrator</col>
-        <col id="1">1</col>
-      </row>
-    </data>
-  </object>
 
       <object class="GtkBox" id="account-dialog">
         <property name="visible">True</property>
@@ -134,15 +116,32 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="local-account-type">
+                  <object class="GtkBox" id="local-account-type">
                     <property name="visible">True</property>
-                    <property name="model">account-type-model</property>
-                    <property name="hexpand">True</property>
+                    <property name="can_focus">False</property>
+                    <style>
+                      <class name="linked"/>
+                    </style>
                     <child>
-                      <object class="GtkCellRendererText" id="account-type-cell"/>
-                      <attributes>
-                        <attribute name="text">0</attribute>
-                      </attributes>
+                      <object class="GtkRadioButton" id="account-type-standard">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">Standard</property>
+                        <property name="draw_indicator">False</property>
+                        <property name="height_request">35</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkRadioButton" id="account-type-admin">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">Administrator</property>
+                        <property name="draw_indicator">False</property>
+                        <property name="height_request">35</property>
+                        <property name="group">account-type-standard</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -964,6 +963,13 @@ type their domain password here.</property>
       <widget name="enterprise-domain"/>
       <widget name="enterprise-login"/>
       <widget name="enterprise-password"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="account-type-standard"/>
+      <widget name="account-type-admin"/>
     </widgets>
   </object>
 </interface>

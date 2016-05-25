@@ -246,16 +246,12 @@ local_create_user (UmAccountDialog *self)
         const gchar *username;
         const gchar *name;
         gint account_type;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
 
         begin_action (self);
 
         name = gtk_entry_get_text (GTK_ENTRY (self->local_name));
         username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->local_username));
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_account_type));
-        gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->local_account_type), &iter);
-        gtk_tree_model_get (model, &iter, 1, &account_type, -1);
+        account_type = (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_account_type)) ? ACT_USER_ACCOUNT_TYPE_STANDARD : ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
 
         g_debug ("Creating local user: %s", username);
 
@@ -569,7 +565,7 @@ local_init (UmAccountDialog *self,
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-username-hint");
         self->local_username_hint = widget;
 
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-account-type");
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "account-type-standard");
         self->local_account_type = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-password-now-radio");
@@ -617,7 +613,7 @@ local_prepare (UmAccountDialog *self)
         gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (self->local_username))), "");
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username));
         gtk_list_store_clear (GTK_LIST_STORE (model));
-        gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_account_type), 0);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->local_account_type), TRUE);
 }
 
 static gboolean
