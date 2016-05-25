@@ -47,6 +47,16 @@
 #define SEARCH_PAGE "_search"
 #define OVERVIEW_PAGE "_overview"
 
+typedef struct
+{
+  GtkWidget  *row;
+  GIcon      *icon;
+  gchar      *id;
+  gchar      *name;
+  gchar      *description;
+  GtkWidget  *description_label;
+} RowData;
+
 struct _CcWindow
 {
   GtkApplicationWindow parent;
@@ -54,7 +64,8 @@ struct _CcWindow
   GtkWidget  *stack;
   GtkWidget  *header;
   GtkWidget  *header_box;
-  GtkWidget  *main_vbox;
+  GtkWidget  *listbox;
+  GtkWidget  *list_scrolled;
   GtkWidget  *panel_headerbar;
   GtkWidget  *search_scrolled;
   GtkWidget  *previous_button;
@@ -118,6 +129,74 @@ get_icon_name_from_g_icon (GIcon *gicon)
     }
 
   return NULL;
+}
+
+/*
+ * RowData functions
+ */
+static void
+row_data_free (RowData *data)
+{
+  g_object_unref (data->icon);
+  g_free (data->description);
+  g_free (data->name);
+  g_free (data);
+}
+
+static RowData*
+row_data_new (const gchar *id,
+              const gchar *name,
+              const gchar *description,
+              GIcon       *icon)
+{
+  GtkWidget *label, *grid;
+  RowData *data;
+
+  data = g_new0 (RowData, 1);
+  data->row = gtk_list_box_row_new ();
+  data->id = g_strdup (id);
+  data->name = g_strdup (name);
+  data->description = g_strdup (description);
+  data->icon = g_object_ref (icon);
+
+  /* Setup the row */
+  grid = g_object_new (GTK_TYPE_GRID,
+                       "visible", TRUE,
+                       "hexpand", TRUE,
+                       "border-width", 12,
+                       "column-spacing", 6,
+                       NULL);
+
+  /* Name label */
+  label = g_object_new (GTK_TYPE_LABEL,
+                        "label", name,
+                        "visible", TRUE,
+                        "xalign", 0,
+                        "hexpand", TRUE,
+                        NULL);
+  gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 1, 1);
+
+  /* Description label */
+  label = g_object_new (GTK_TYPE_LABEL,
+                        "label", description,
+                        "visible", FALSE,
+                        "xalign", 0,
+                        "hexpand", TRUE,
+                        NULL);
+  gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
+  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+  gtk_grid_attach (GTK_GRID (grid), label, 1, 1, 1, 1);
+
+  data->description_label = label;
+
+  gtk_container_add (GTK_CONTAINER (data->row), grid);
+  gtk_widget_show (data->row);
+
+  g_object_set_data_full (G_OBJECT (data->row), "data", data, (GDestroyNotify) row_data_free);
+
+  return data;
 }
 
 static gboolean
@@ -249,292 +328,29 @@ cc_window_set_search_item (CcWindow   *center,
 }
 
 static void
-item_activated_cb (CcShellCategoryView *view,
-                   gchar               *name,
-                   gchar               *id,
-                   CcWindow            *shell)
+row_selected_cb (GtkListBox    *listbox,
+                 GtkListBoxRow *row,
+                 CcWindow      *self)
 {
-  cc_window_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
-}
+  /*
+   * When the widget is in the destruction process, it emits
+   * a ::row-selected signal with NULL row. Trying to do anything
+   * in this case will result in a segfault, so we have to
+   * check it here.
+   */
+  if (gtk_widget_in_destruction (GTK_WIDGET (self)))
+    return;
 
-static gboolean
-category_focus_out (GtkWidget     *view,
-                    GdkEventFocus *event,
-                    CcWindow      *shell)
-{
-  gtk_icon_view_unselect_all (GTK_ICON_VIEW (view));
-
-  return FALSE;
-}
-
-static gboolean
-category_focus_in (GtkWidget     *view,
-                   GdkEventFocus *event,
-                   CcWindow      *shell)
-{
-  GtkTreePath *path;
-
-  if (!gtk_icon_view_get_cursor (GTK_ICON_VIEW (view), &path, NULL))
+  if (row)
     {
-      path = gtk_tree_path_new_from_indices (0, -1);
-      gtk_icon_view_set_cursor (GTK_ICON_VIEW (view), path, NULL, FALSE);
+      RowData *data = g_object_get_data (G_OBJECT (row), "data");
+
+      cc_window_set_active_panel_from_id (CC_SHELL (self), data->id, NULL, NULL);
     }
-
-  gtk_icon_view_select_path (GTK_ICON_VIEW (view), path);
-  gtk_tree_path_free (path);
-
-  return FALSE;
-}
-
-static GList *
-get_item_views (CcWindow *shell)
-{
-  GList *list, *l;
-  GList *res;
-
-  list = gtk_container_get_children (GTK_CONTAINER (shell->main_vbox));
-  res = NULL;
-  for (l = list; l; l = l->next)
+  else
     {
-      if (!CC_IS_SHELL_CATEGORY_VIEW (l->data))
-        continue;
-      res = g_list_append (res, cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (l->data)));
+      shell_show_overview_page (self);
     }
-
-  g_list_free (list);
-
-  return res;
-}
-
-static gboolean
-is_prev_direction (GtkWidget *widget,
-                   GtkDirectionType direction)
-{
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR &&
-      direction == GTK_DIR_LEFT)
-    return TRUE;
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL &&
-      direction == GTK_DIR_RIGHT)
-    return TRUE;
-  return FALSE;
-}
-
-static gboolean
-is_next_direction (GtkWidget *widget,
-                   GtkDirectionType direction)
-{
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR &&
-      direction == GTK_DIR_RIGHT)
-    return TRUE;
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL &&
-      direction == GTK_DIR_LEFT)
-    return TRUE;
-  return FALSE;
-}
-
-static GtkTreePath *
-get_first_path (GtkIconView *view)
-{
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-
-  model = gtk_icon_view_get_model (view);
-  if (!gtk_tree_model_get_iter_first (model, &iter))
-    return NULL;
-  return gtk_tree_model_get_path (model, &iter);
-}
-
-static GtkTreePath *
-get_last_path (GtkIconView *view)
-{
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  GtkTreePath *path;
-  gboolean ret;
-
-  model = gtk_icon_view_get_model (view);
-  if (!gtk_tree_model_get_iter_first (model, &iter))
-    return NULL;
-
-  ret = TRUE;
-  path = NULL;
-
-  while (ret)
-    {
-      g_clear_pointer (&path, gtk_tree_path_free);
-      path = gtk_tree_model_get_path (model, &iter);
-      ret = gtk_tree_model_iter_next (model, &iter);
-    }
-  return path;
-}
-
-static gboolean
-categories_keynav_failed (GtkIconView      *current_view,
-                          GtkDirectionType  direction,
-                          CcWindow         *shell)
-{
-  GList *views, *v;
-  GtkIconView *new_view;
-  GtkTreePath *path;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  gint col, c, dist, d;
-  GtkTreePath *sel;
-  gboolean res;
-
-  res = FALSE;
-
-  views = get_item_views (shell);
-
-  for (v = views; v; v = v->next)
-    {
-      if (v->data == current_view)
-        break;
-    }
-
-  new_view = NULL;
-
-  if (direction == GTK_DIR_DOWN && v != NULL && v->next != NULL)
-    {
-      new_view = v->next->data;
-
-      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
-        {
-          col = gtk_icon_view_get_item_column (current_view, path);
-          gtk_tree_path_free (path);
-
-          sel = NULL;
-          dist = 1000;
-          model = gtk_icon_view_get_model (new_view);
-          g_assert (gtk_tree_model_get_iter_first (model, &iter));
-          do {
-            path = gtk_tree_model_get_path (model, &iter);
-            c = gtk_icon_view_get_item_column (new_view, path);
-            d = ABS (c - col);
-            if (d < dist)
-              {
-                if (sel)
-                  gtk_tree_path_free (sel);
-                sel = path;
-                dist = d;
-              }
-            else
-              gtk_tree_path_free (path);
-          } while (gtk_tree_model_iter_next (model, &iter));
-
-          gtk_icon_view_set_cursor (new_view, sel, NULL, FALSE);
-          gtk_tree_path_free (sel);
-        }
-
-      gtk_widget_grab_focus (GTK_WIDGET (new_view));
-
-      res = TRUE;
-    }
-
-  if (direction == GTK_DIR_UP && v != NULL && v->prev != NULL)
-    {
-      new_view = v->prev->data;
-
-      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
-        {
-          col = gtk_icon_view_get_item_column (current_view, path);
-          gtk_tree_path_free (path);
-
-          sel = NULL;
-          dist = 1000;
-          model = gtk_icon_view_get_model (new_view);
-          g_assert (gtk_tree_model_get_iter_first (model, &iter));
-          do {
-            path = gtk_tree_model_get_path (model, &iter);
-            c = gtk_icon_view_get_item_column (new_view, path);
-            d = ABS (c - col);
-            if (d <= dist)
-              {
-                if (sel)
-                  gtk_tree_path_free (sel);
-                sel = path;
-                dist = d;
-              }
-            else
-              gtk_tree_path_free (path);
-          } while (gtk_tree_model_iter_next (model, &iter));
-
-          gtk_icon_view_set_cursor (new_view, sel, NULL, FALSE);
-          gtk_tree_path_free (sel);
-        }
-
-      gtk_widget_grab_focus (GTK_WIDGET (new_view));
-
-      res = TRUE;
-    }
-
-  if (is_prev_direction (GTK_WIDGET (current_view), direction) && v != NULL)
-    {
-      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
-        {
-          if (v->prev)
-            new_view = v->prev->data;
-
-          if (gtk_tree_path_prev (path))
-            {
-              new_view = current_view;
-            }
-          else if (new_view != NULL)
-            {
-              path = get_last_path (new_view);
-            }
-          else
-            {
-              goto out;
-            }
-
-          gtk_icon_view_set_cursor (new_view, path, NULL, FALSE);
-          gtk_icon_view_select_path (new_view, path);
-          gtk_tree_path_free (path);
-          gtk_widget_grab_focus (GTK_WIDGET (new_view));
-
-          res = TRUE;
-        }
-    }
-
-  if (is_next_direction (GTK_WIDGET (current_view), direction) && v != NULL)
-    {
-      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
-        {
-          GtkTreeIter iter;
-
-          if (v->next)
-            new_view = v->next->data;
-
-          gtk_tree_path_next (path);
-          model = gtk_icon_view_get_model (current_view);
-
-          if (gtk_tree_model_get_iter (model, &iter, path))
-            {
-              new_view = current_view;
-            }
-          else if (new_view != NULL)
-            {
-              path = get_first_path (new_view);
-            }
-          else
-            {
-              goto out;
-            }
-
-          gtk_icon_view_set_cursor (new_view, path, NULL, FALSE);
-          gtk_icon_view_select_path (new_view, path);
-          gtk_tree_path_free (path);
-          gtk_widget_grab_focus (GTK_WIDGET (new_view));
-
-          res = TRUE;
-        }
-    }
-
-out:
-  g_list_free (views);
-
-  return res;
 }
 
 static gboolean
@@ -558,18 +374,6 @@ model_filter_func (GtkTreeModel *model,
     }
 
   return matches;
-}
-
-static gboolean
-category_filter_func (GtkTreeModel    *model,
-                      GtkTreeIter     *iter,
-                      CcPanelCategory  filter)
-{
-  guint category;
-
-  gtk_tree_model_get (model, iter, COL_CATEGORY, &category, -1);
-
-  return (category == filter);
 }
 
 static void
@@ -798,61 +602,44 @@ setup_search (CcWindow *self)
 }
 
 static void
-add_category_view (CcWindow        *shell,
-                   CcPanelCategory  category,
-                   const char      *name)
-{
-  GtkTreeModel *filter;
-  GtkWidget *categoryview;
-
-  if (category > 0)
-    {
-      GtkWidget *separator;
-      separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_set_margin_top (separator, 11);
-      gtk_widget_set_margin_bottom (separator, 10);
-      gtk_box_pack_start (GTK_BOX (shell->main_vbox), separator, FALSE, FALSE, 0);
-      gtk_widget_show (separator);
-    }
-
-  /* create new category view for this category */
-  filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (shell->store),
-                                      NULL);
-  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
-                                          (GtkTreeModelFilterVisibleFunc) category_filter_func,
-                                          GINT_TO_POINTER (category), NULL);
-
-  categoryview = cc_shell_category_view_new (name, filter);
-  gtk_box_pack_start (GTK_BOX (shell->main_vbox), categoryview, FALSE, TRUE, 0);
-
-  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                    "desktop-item-activated",
-                    G_CALLBACK (item_activated_cb), shell);
-
-  gtk_widget_show (categoryview);
-
-  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                    "focus-in-event",
-                    G_CALLBACK (category_focus_in), shell);
-  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                    "focus-out-event",
-                    G_CALLBACK (category_focus_out), shell);
-  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                    "keynav-failed",
-                    G_CALLBACK (categories_keynav_failed), shell);
-}
-
-static void
 setup_model (CcWindow *shell)
 {
- shell->store = (GtkListStore *) cc_shell_model_new ();
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean valid;
 
-  /* Add categories */
-  add_category_view (shell, CC_CATEGORY_PERSONAL, C_("category", "Personal"));
-  add_category_view (shell, CC_CATEGORY_HARDWARE, C_("category", "Hardware"));
-  add_category_view (shell, CC_CATEGORY_SYSTEM, C_("category", "System"));
+  shell->store = (GtkListStore *) cc_shell_model_new ();
+  model = GTK_TREE_MODEL (shell->store);
 
   cc_panel_loader_fill_model (CC_SHELL_MODEL (shell->store));
+
+  /* Create a row for each panel */
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+
+  while (valid)
+    {
+      RowData *data;
+      GIcon *icon;
+      gchar *name, *description, *id;
+
+      gtk_tree_model_get (model, &iter,
+                          COL_DESCRIPTION, &description,
+                          COL_GICON, &icon,
+                          COL_ID, &id,
+                          COL_NAME, &name,
+                          -1);
+
+      data = row_data_new (id, name, description, icon);
+
+      gtk_container_add (GTK_CONTAINER (shell->listbox), data->row);
+
+      valid = gtk_tree_model_iter_next (model, &iter);
+
+      g_clear_pointer (&description, g_free);
+      g_clear_pointer (&name, g_free);
+      g_clear_pointer (&id, g_free);
+      g_clear_object (&icon);
+    }
 }
 
 static void
@@ -1192,8 +979,8 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, lock_button);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, main_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
@@ -1204,6 +991,7 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
+  gtk_widget_class_bind_template_callback (widget_class, row_selected_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_key_press_event_cb);
   gtk_widget_class_bind_template_callback (widget_class, sidelist_size_allocate_cb);
@@ -1318,6 +1106,19 @@ create_window (CcWindow *self)
 
   gtk_window_set_titlebar (GTK_WINDOW (self), self->header_box);
   gtk_widget_show_all (self->header_box);
+
+  /*
+   * We have to create the listbox here because declaring it in window.ui
+   * and letting GtkBuilder handle it would hit the bug where the focus is
+   * not tracked.
+   */
+  self->listbox = gtk_list_box_new ();
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_SINGLE);
+
+  g_signal_connect (self->listbox, "row-selected", G_CALLBACK (row_selected_cb), self);
+
+  gtk_container_add (GTK_CONTAINER (self->list_scrolled), self->listbox);
+  gtk_widget_show (self->listbox);
 
   setup_model (self);
   create_search_page (self);
