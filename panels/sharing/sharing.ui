@@ -524,32 +524,32 @@
                       <object class="GtkBox" id="box6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="remote-control-label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">_Allow Remote Control</property>
+                            <property name="label" translatable="yes">_Allow connections to control the screen</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">remote-control-switch</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSwitch" id="remote-control-switch">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="halign">end</property>
+                            <property name="mnemonic_widget">remote-control-checkbutton</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="remote-control-checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                       </object>

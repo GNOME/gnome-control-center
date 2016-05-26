@@ -1013,7 +1013,7 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
 
   /* settings bindings */
   settings = g_settings_new (VINO_SCHEMA_ID);
-  g_settings_bind (settings, "view-only", WID ("remote-control-switch"),
+  g_settings_bind (settings, "view-only", WID ("remote-control-checkbutton"),
                    "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
   g_settings_bind (settings, "prompt-enabled",
