@@ -85,11 +85,6 @@ struct _CcWindow
 
   GtkListStore *store;
 
-  GtkTreeModel *search_filter;
-  GtkWidget *search_view;
-  gchar *filter_string;
-  gchar **filter_terms;
-
   CcPanel *active_panel;
 };
 
@@ -292,8 +287,6 @@ shell_show_overview_page (CcWindow *self)
   self->previous_panels = g_queue_new ();
 
   /* clear the search text */
-  g_free (self->filter_string);
-  self->filter_string = g_strdup ("");
   gtk_entry_set_text (GTK_ENTRY (self->search_entry), "");
   if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar)))
     gtk_widget_grab_focus (self->search_entry);
@@ -353,253 +346,70 @@ row_selected_cb (GtkListBox    *listbox,
     }
 }
 
+/*
+ * GtkListBox functions
+ */
 static gboolean
-model_filter_func (GtkTreeModel *model,
-                   GtkTreeIter  *iter,
-                   CcWindow     *self)
+filter_func (GtkListBoxRow *row,
+             gpointer       user_data)
 {
-  char **t;
-  gboolean matches = FALSE;
+  CcWindow *self;
+  RowData *data;
+  gchar *search_text, *panel_text, *panel_description;
+  const gchar *entry_text;
+  gboolean retval;
 
-  if (!self->filter_string || !self->filter_terms)
-    return FALSE;
+  self = CC_WINDOW (user_data);
+  data = g_object_get_data (G_OBJECT (row), "data");
+  entry_text = gtk_entry_get_text (GTK_ENTRY (self->search_entry));
 
-  for (t = self->filter_terms; *t; t++)
-    {
-      matches = cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
-                                                    iter,
-                                                    *t);
-      if (!matches)
-        break;
-    }
+  panel_text = cc_util_normalize_casefold_and_unaccent (data->name);
+  search_text = cc_util_normalize_casefold_and_unaccent (entry_text);
+  panel_description = cc_util_normalize_casefold_and_unaccent (data->description);
 
-  return matches;
+  g_strstrip (panel_text);
+  g_strstrip (search_text);
+  g_strstrip (panel_description);
+
+  /*
+   * The description label is only visible when the search is
+   * happening.
+   */
+  gtk_widget_set_visible (data->description_label, g_utf8_strlen (search_text, -1) > 0);
+
+  retval = g_strstr_len (panel_text, -1, search_text) != NULL ||
+           g_strstr_len (panel_description, -1, search_text) != NULL;
+
+  g_free (panel_text);
+  g_free (search_text);
+  g_free (panel_description);
+
+  return retval;
 }
 
 static void
 search_entry_changed_cb (GtkEntry *entry,
                          CcWindow *self)
 {
-  char *str;
-
-  /* if the entry text was set manually (not by the user) */
-  if (!g_strcmp0 (self->filter_string, gtk_entry_get_text (entry)))
-    {
-      cc_shell_model_set_sort_terms (CC_SHELL_MODEL (self->store), NULL);
-      return;
-    }
-
-  /* Don't re-filter for added trailing or leading spaces */
-  str = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (entry));
-  g_strstrip (str);
-  if (!g_strcmp0 (str, self->filter_string))
-    {
-      g_free (str);
-      return;
-    }
-
-  g_free (self->filter_string);
-  self->filter_string = str;
-
-  g_strfreev (self->filter_terms);
-  self->filter_terms = g_strsplit (self->filter_string, " ", -1);
-
-  cc_shell_model_set_sort_terms (CC_SHELL_MODEL (self->store), self->filter_terms);
-
-  if (!g_strcmp0 (self->filter_string, ""))
-    {
-      shell_show_overview_page (self);
-    }
-  else
-    {
-      gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (self->search_filter));
-      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), SEARCH_PAGE);
-    }
+  gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->listbox));
 }
 
-static gboolean
-search_entry_key_press_event_cb (GtkEntry        *entry,
-                                 GdkEventKey     *event,
-                                 CcWindow        *self)
+static void
+search_entry_activate_cb (GtkEntry *entry,
+                          CcWindow *self)
 {
-  if (event->keyval == GDK_KEY_Return &&
-      g_strcmp0 (self->filter_string, "") != 0)
-    {
-      GtkTreePath *path;
-      GtkTreeSelection *selection;
+  GtkListBoxRow *row;
 
-      path = gtk_tree_path_new_first ();
+  row = gtk_list_box_get_row_at_y (GTK_LIST_BOX (self->listbox), 0);
 
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->search_view));
-      gtk_tree_selection_select_path (selection, path);
-
-      if (!gtk_tree_selection_path_is_selected (selection, path))
-        {
-          gtk_tree_path_free (path);
-          return FALSE;
-        }
-
-      gtk_tree_view_row_activated (GTK_TREE_VIEW (self->search_view), path,
-                                   gtk_tree_view_get_column (GTK_TREE_VIEW (self->search_view), 0));
-      gtk_tree_path_free (path);
-      return TRUE;
-    }
-
-  if (event->keyval == GDK_KEY_Escape)
+  if (row)
     {
       gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), FALSE);
-      gtk_entry_set_text (entry, "");
-      return TRUE;
+      gtk_list_box_select_row (GTK_LIST_BOX (self->listbox), row);
+      gtk_widget_grab_focus (GTK_WIDGET (row));
     }
-
-  return FALSE;
 }
 
-static void
-on_search_row_activated (GtkTreeView       *treeview,
-                         GtkTreePath       *path,
-                         GtkTreeViewColumn *column,
-                         CcWindow          *shell)
-{
-  GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  char         *id = NULL;
-
-  selection = gtk_tree_view_get_selection (treeview);
-
-  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-    return;
-
-  gtk_tree_model_get (model, &iter,
-                      COL_ID, &id,
-                      -1);
-
-  if (id)
-    cc_window_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
-
-  gtk_tree_selection_unselect_all (selection);
-
-  g_free (id);
-}
-
-static gboolean
-on_search_button_press_event (GtkTreeView    *treeview,
-                              GdkEventButton *event,
-                              CcWindow       *shell)
-{
-  if (event->type == GDK_BUTTON_PRESS && event->button == 1)
-    {
-      GtkTreePath *path = NULL;
-      GtkTreeSelection *selection;
-      GtkTreeModel *model;
-      GtkTreeIter iter;
-
-      /* We don't check for the position being blank,
-       * it could be the dead space between columns */
-      gtk_tree_view_is_blank_at_pos (treeview,
-                                     event->x, event->y,
-                                     &path,
-                                     NULL,
-                                     NULL,
-                                     NULL);
-      if (path == NULL)
-        return FALSE;
-
-      model = gtk_tree_view_get_model (treeview);
-      if (gtk_tree_model_get_iter (model, &iter, path) == FALSE)
-        {
-          gtk_tree_path_free (path);
-          return FALSE;
-        }
-
-      selection = gtk_tree_view_get_selection (treeview);
-      gtk_tree_selection_select_iter (selection, &iter);
-
-      on_search_row_activated (treeview, NULL, NULL, shell);
-
-      gtk_tree_path_free (path);
-
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
-static void
-setup_search (CcWindow *self)
-{
-  GtkWidget *search_view;
-  GtkCellRenderer *renderer;
-  GtkTreeViewColumn *column;
-
-  g_return_if_fail (self->store != NULL);
-
-  /* create the search filter */
-  self->search_filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (self->store),
-                                                   NULL);
-
-  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (self->search_filter),
-                                          (GtkTreeModelFilterVisibleFunc)
-                                          model_filter_func,
-                                          self, NULL);
-
-  /* set up the search view */
-  self->search_view = search_view = gtk_tree_view_new ();
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (search_view), FALSE);
-  gtk_tree_view_set_enable_search (GTK_TREE_VIEW (search_view), FALSE);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (search_view),
-                           GTK_TREE_MODEL (self->search_filter));
-  /* This needs to happen after setting the model, otherwise
-   * the search column will be the first string column */
-  gtk_tree_view_set_search_column (GTK_TREE_VIEW (search_view), -1);
-
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (renderer,
-                "xpad", 15,
-                "ypad", 10,
-                "stock-size", GTK_ICON_SIZE_DIALOG,
-                "follow-state", TRUE,
-                NULL);
-  column = gtk_tree_view_column_new_with_attributes ("Icon", renderer,
-                                                     "gicon", COL_GICON,
-                                                     NULL);
-  gtk_tree_view_column_set_expand (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (self->search_view), column);
-
-  renderer = gtk_cell_renderer_text_new ();
-  g_object_set (renderer,
-                "xpad", 0,
-                NULL);
-  column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
-                                                     "text", COL_NAME,
-                                                     NULL);
-  gtk_tree_view_column_set_expand (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (self->search_view), column);
-
-  renderer = gd_styled_text_renderer_new ();
-  gd_styled_text_renderer_add_class (GD_STYLED_TEXT_RENDERER (renderer), "dim-label");
-  g_object_set (renderer,
-                "xpad", 15,
-                "ellipsize", PANGO_ELLIPSIZE_END,
-                NULL);
-  column = gtk_tree_view_column_new_with_attributes ("Description", renderer,
-                                                     "text", COL_DESCRIPTION,
-                                                     NULL);
-  gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (self->search_view), column);
-
-  gtk_container_add (GTK_CONTAINER (self->search_scrolled), search_view);
-
-  g_signal_connect (self->search_view, "row-activated",
-                    G_CALLBACK (on_search_row_activated), self);
-  g_signal_connect (self->search_view, "button-press-event",
-                    G_CALLBACK (on_search_button_press_event), self);
-
-  self->filter_string = g_strdup ("");
-
-  gtk_widget_show (self->search_view);
-}
 
 static void
 setup_model (CcWindow *shell)
@@ -930,7 +740,6 @@ cc_window_dispose (GObject *object)
     }
 
   g_clear_object (&self->store);
-  g_clear_object (&self->search_filter);
   g_clear_object (&self->active_panel);
 
   G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
@@ -946,9 +755,6 @@ cc_window_finalize (GObject *object)
       g_queue_free_full (self->previous_panels, g_free);
       self->previous_panels = NULL;
     }
-
-  g_free (self->filter_string);
-  g_strfreev (self->filter_terms);
 
   G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
@@ -992,8 +798,8 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, row_selected_cb);
+  gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, search_entry_key_press_event_cb);
   gtk_widget_class_bind_template_callback (widget_class, sidelist_size_allocate_cb);
   gtk_widget_class_bind_template_callback (widget_class, stack_page_notify_cb);
   gtk_widget_class_bind_template_callback (widget_class, window_map_event_cb);
@@ -1019,9 +825,6 @@ window_key_press_event (GtkWidget   *win,
   gboolean retval;
   GdkModifierType state;
   gboolean is_rtl;
-  gboolean overview;
-  gboolean search;
-  const gchar *id;
 
   retval = GDK_EVENT_PROPAGATE;
   state = event->state;
@@ -1030,12 +833,7 @@ window_key_press_event (GtkWidget   *win,
   state = state & gtk_accelerator_get_default_mod_mask ();
   is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
 
-  id = gtk_stack_get_visible_child_name (GTK_STACK (self->stack));
-  overview = g_str_equal (id, OVERVIEW_PAGE);
-  search = g_str_equal (id, SEARCH_PAGE);
-
-  if ((overview || search) &&
-      gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
+  if (gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
     return GDK_EVENT_STOP;
 
   if (state == GDK_CONTROL_MASK)
@@ -1046,8 +844,6 @@ window_key_press_event (GtkWidget   *win,
           case GDK_KEY_S:
           case GDK_KEY_f:
           case GDK_KEY_F:
-            if (!overview && !search)
-              break;
             retval = !gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar));
             gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), retval);
             if (retval)
@@ -1061,17 +857,9 @@ window_key_press_event (GtkWidget   *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (!overview)
-              shell_show_overview_page (self);
             retval = GDK_EVENT_STOP;
             break;
         }
-    }
-  else if (state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up)
-    {
-      if (!overview)
-        shell_show_overview_page (self);
-      retval = GDK_EVENT_STOP;
     }
   else if ((!is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Left) ||
            (is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Right) ||
@@ -1080,19 +868,8 @@ window_key_press_event (GtkWidget   *win,
       previous_button_clicked_cb (NULL, self);
       retval = GDK_EVENT_STOP;
     }
+
   return retval;
-}
-
-static void
-create_search_page (CcWindow *self)
-{
-  self->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (self->search_scrolled),
-                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_stack_add_named (GTK_STACK (self->stack), self->search_scrolled, SEARCH_PAGE);
-
-  /* setup search functionality */
-  setup_search (self);
 }
 
 static void
@@ -1113,7 +890,8 @@ create_window (CcWindow *self)
    * not tracked.
    */
   self->listbox = gtk_list_box_new ();
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_SINGLE);
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_BROWSE);
+  gtk_list_box_set_filter_func (GTK_LIST_BOX (self->listbox), filter_func, self, NULL);
 
   g_signal_connect (self->listbox, "row-selected", G_CALLBACK (row_selected_cb), self);
 
@@ -1121,7 +899,6 @@ create_window (CcWindow *self)
   gtk_widget_show (self->listbox);
 
   setup_model (self);
-  create_search_page (self);
 
   /* connect various signals */
   g_signal_connect_after (self, "key_press_event",

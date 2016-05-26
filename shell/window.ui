@@ -33,8 +33,8 @@
                     <property name="primary_icon_name">edit-find-symbolic</property>
                     <property name="primary_icon_activatable">False</property>
                     <property name="primary_icon_sensitive">False</property>
+                    <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="no" />
                     <signal name="search-changed" handler="search_entry_changed_cb" object="CcWindow" swapped="no" />
-                    <signal name="key-press-event" handler="search_entry_key_press_event_cb" object="CcWindow" swapped="no" />
                   </object>
                 </child>
               </object>
