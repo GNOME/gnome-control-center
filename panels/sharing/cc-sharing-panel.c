@@ -525,7 +525,8 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 3);
+  gtk_widget_set_margin_start (box, 6);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   /* Find the icon and create it */
@@ -576,7 +577,7 @@ cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 3);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   w = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);

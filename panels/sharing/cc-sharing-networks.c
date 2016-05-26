@@ -214,7 +214,8 @@ cc_sharing_networks_new_row (const char        *uuid,
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 3);
+  gtk_widget_set_margin_start (box, 6);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   if (g_strcmp0 (carrier_type, "802-11-wireless") == 0) {
@@ -259,7 +260,8 @@ cc_sharing_networks_new_current_row (CcSharingNetworks *self)
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 3);
+  gtk_widget_set_margin_start (box, 6);
   gtk_container_add (GTK_CONTAINER (row), box);
 
   /* Icon */
