@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-05-13 17:01+0000\n"
-"PO-Revision-Date: 2016-04-29 14:57+0100\n"
+"POT-Creation-Date: 2016-05-26 12:53+0000\n"
+"PO-Revision-Date: 2016-05-26 14:46+0100\n"
 "Last-Translator: Tiago Santos <tiagofsantos81@sapo.pt>\n"
 "Language-Team: Português <gnome_pt@yahoogroups.com>\n"
 "Language: pt\n"
@@ -124,7 +124,8 @@ msgstr "Pode adicionar imagens à sua pasta %s e estas vão aparecer aqui"
 #: ../panels/printers/cc-printers-panel.c:2052
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:982
-#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:3
+#: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
@@ -706,7 +707,8 @@ msgstr "Adicionar perfil"
 msgid "_Import File…"
 msgstr "_Importar ficheiro…"
 
-#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:518
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -1927,11 +1929,11 @@ msgstr "Clique, botão secundário"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:358
+#: ../panels/network/cc-network-panel.c:355
 msgid "Air_plane Mode"
 msgstr "Modo A_vião"
 
-#: ../panels/network/cc-network-panel.c:967
+#: ../panels/network/cc-network-panel.c:960
 msgid "Network proxy"
 msgstr "Proxy de rede"
 
@@ -1939,17 +1941,17 @@ msgstr "Proxy de rede"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1144 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1137 ../panels/network/net-vpn.c:278
 #: ../panels/network/net-vpn.c:432
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: ../panels/network/cc-network-panel.c:1300
+#: ../panels/network/cc-network-panel.c:1223
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Algo correu mal. Por favor, contacte o seu fornecedor do programa."
 
-#: ../panels/network/cc-network-panel.c:1306
+#: ../panels/network/cc-network-panel.c:1229
 msgid "NetworkManager needs to be running."
 msgstr "O gestor de redes tem de estar em execução."
 
@@ -2415,31 +2417,15 @@ msgstr "Novo perfil"
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:584
-msgid "Bond"
-msgstr "Combinar"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:586
-msgid "Team"
-msgstr "Equipa"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:588
-msgid "Bridge"
-msgstr "Ponte"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:589
-msgid "VLAN"
-msgstr "VLAN"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:738
+#: ../panels/network/connection-editor/net-connection-editor.c:732
 msgid "Could not load VPN plugins"
 msgstr "Impossível ler as extensões VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:807
+#: ../panels/network/connection-editor/net-connection-editor.c:801
 msgid "Import from file…"
 msgstr "Importar de ficheiro…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:878
+#: ../panels/network/connection-editor/net-connection-editor.c:872
 msgid "Add Network Connection"
 msgstr "Adicionar ligação de rede"
 
@@ -2570,26 +2556,15 @@ msgstr "Controlar como se liga à Internet"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:5
+#| msgid ""
+#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+#| "vpn;vlan;bridge;bond;DNS;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
-"vlan;bridge;bond;DNS;"
+"DNS;"
 msgstr ""
-"Rede;Wireless;Sem-fios;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Banda larga;"
+"Rede;Wireless;Sem-fios;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Banda;larga;"
 "Modem;Bluetooth;vpn;vlan;bridge;bond;DNS;"
-
-#: ../panels/network/net-device-bond.c:77
-msgid "Bond slaves"
-msgstr "Combinar dedicadas"
-
-#: ../panels/network/net-device-bond.c:102
-#: ../panels/network/net-device-bridge.c:102
-#: ../panels/network/net-device-team.c:102
-msgid "(none)"
-msgstr "(nenhum)"
-
-#: ../panels/network/net-device-bridge.c:77
-msgid "Bridge slaves"
-msgstr "Ponte entre dedicadas"
 
 #: ../panels/network/net-device-ethernet.c:110
 #: ../panels/network/net-device-wifi.c:475
@@ -2607,8 +2582,9 @@ msgid "yesterday"
 msgstr "ontem"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:698
-#: ../panels/network/panel-common.c:700 ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:698 ../panels/network/panel-common.c:700
+#: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Endereço IP"
 
@@ -2632,17 +2608,14 @@ msgstr "Com fios"
 #: ../panels/network/net-device-wifi.c:1640
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8
+#: ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opções…"
 
 #: ../panels/network/net-device-mobile.c:232
 msgid "Add new connection"
 msgstr "Adicionar nova ligação"
-
-#: ../panels/network/net-device-team.c:77
-msgid "Team slaves"
-msgstr "Juntar dedicadas"
 
 #: ../panels/network/net-device-wifi.c:1188
 msgid ""
@@ -4909,22 +4882,22 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "Outro"
 
-#: ../panels/region/cc-region-panel.c:248
+#: ../panels/region/cc-region-panel.c:247
 #: ../panels/user-accounts/um-user-panel.c:1069
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "A sua sessão tem de ser reiniciada para que as alterações tenham efeito"
 
-#: ../panels/region/cc-region-panel.c:252
+#: ../panels/region/cc-region-panel.c:251
 #: ../panels/user-accounts/um-user-panel.c:1073
 msgid "Restart Now"
 msgstr "Reiniciar agora"
 
-#: ../panels/region/cc-region-panel.c:889
+#: ../panels/region/cc-region-panel.c:888
 msgid "No input source selected"
 msgstr "Nenhuma fonte de introdução selecionada"
 
-#: ../panels/region/cc-region-panel.c:1807
+#: ../panels/region/cc-region-panel.c:1779
 msgid "Login _Screen"
 msgstr "Ecrã de início de _sessão"
 
@@ -6062,7 +6035,8 @@ msgstr "_Tipo de conta"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 msgid "Allow user to set a password when they next _login"
-msgstr "Permitir que o utilizador defina uma senha ao iniciar a próxima _sessão"
+msgstr ""
+"Permitir que o utilizador defina uma senha ao iniciar a próxima _sessão"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
 msgid "Set a password _now"
@@ -7286,6 +7260,30 @@ msgstr "Voltar à vista geral"
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Cancelar procura"
+
+#~ msgid "Bond"
+#~ msgstr "Combinar"
+
+#~ msgid "Team"
+#~ msgstr "Equipa"
+
+#~ msgid "Bridge"
+#~ msgstr "Ponte"
+
+#~ msgid "VLAN"
+#~ msgstr "VLAN"
+
+#~ msgid "Bond slaves"
+#~ msgstr "Combinar dedicadas"
+
+#~ msgid "(none)"
+#~ msgstr "(nenhum)"
+
+#~ msgid "Bridge slaves"
+#~ msgstr "Ponte entre dedicadas"
+
+#~ msgid "Team slaves"
+#~ msgstr "Juntar dedicadas"
 
 #~ msgid "Color"
 #~ msgstr "Cor"
