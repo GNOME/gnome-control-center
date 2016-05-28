@@ -1,4 +1,4 @@
-SUBDIRS = appdata
+SUBDIRS = appdata alt
 
 AM_CPPFLAGS =					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
@@ -7,6 +7,7 @@ AM_CPPFLAGS =					\
 	$(CHEESE_CFLAGS)			\
 	$(WACOM_PANEL_CFLAGS)			\
 	-I$(top_srcdir)/panels/common/		\
+	-I$(top_srcdir)/shell/alt		\
 	-I$(top_srcdir)/libgd
 
 all-local: check-local
@@ -19,15 +20,15 @@ libshell_la_SOURCES = \
 
 bin_PROGRAMS = gnome-control-center
 
-gnome_control_center_SOURCES =			\
+noinst_PROGRAMS = gnome-control-center-alt
+
+common_sources =				\
 	$(BUILT_SOURCES)			\
 	main.c					\
 	cc-application.c			\
 	cc-application.h			\
 	cc-shell-log.c				\
 	cc-shell-log.h				\
-	cc-window.c				\
-	cc-window.h				\
 	cc-shell-category-view.c		\
 	cc-shell-category-view.h		\
 	cc-shell-item-view.c			\
@@ -48,7 +49,16 @@ gnome_control_center_SOURCES =			\
 	list-box-helper.c			\
 	$(MARSHAL_FILES)
 
+gnome_control_center_SOURCES =			\
+	$(common_sources)			\
+	cc-window.c				\
+	cc-window.h
+
+gnome_control_center_alt_SOURCES =		\
+	$(common_sources)
+
 gnome_control_center_LDFLAGS = -export-dynamic
+gnome_control_center_alt_LDFLAGS = -export-dynamic
 
 gnome_control_center_LDADD =						\
 	libshell.la							\
@@ -91,6 +101,24 @@ if BUILD_BLUETOOTH
 gnome_control_center_LDADD += $(top_builddir)/panels/bluetooth/libbluetooth.la
 endif
 
+gnome_control_center_alt_LDADD = 					\
+	$(gnome_control_center_LDADD)					\
+	alt/libshell_alt.la
+
+# Because it is confusing and somewhat problematic to directly add and compile
+# cc-panel-loader.o by another directory (i.e. the shell search provider), we
+# have to create a library and link it there, just like libshell.la.
+noinst_LTLIBRARIES += libpanel_loader.la
+
+libpanel_loader_la_SOURCES = \
+	cc-panel-loader.c			\
+	cc-panel-loader.h
+
+libpanel_loader_la_CPPFLAGS = \
+	$(AM_CPPFLAGS)				\
+	-DCC_PANEL_LOADER_NO_GTYPES
+
+
 # Dbus service file
 servicefiledir = $(datadir)/dbus-1/services
 servicefile_in_files = org.gnome.ControlCenter.service.in
@@ -127,7 +155,7 @@ EXTRA_DIST =					\
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
-noinst_PROGRAMS = test-hostname
+noinst_PROGRAMS += test-hostname
 test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
 test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
