@@ -141,9 +141,6 @@ PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES gmodule-2.0
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(NOTIFICATIONS_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(ONLINE_ACCOUNTS_PANEL, $COMMON_MODULES goa-1.0 goa-backend-1.0 >= $GOA_REQUIRED_VERSION)
-PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.99.0
-                  libnm >= $NETWORK_MANAGER_REQUIRED_VERSION
-                  gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
 PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES
                   colord >= $COLORD_REQUIRED_VERSION
                   colord-gtk >= $COLORD_GTK_REQUIRED_VERSION
@@ -210,6 +207,16 @@ if test x${have_networkmanager} = xyes; then
   NM_VPN_MODULE_DIR=`$PKG_CONFIG --variable plugindir NetworkManager`
   AC_SUBST(NM_VPN_CONFIG_DIR)
   AC_SUBST(NM_VPN_MODULE_DIR)
+fi
+
+# Check for power panel
+if test x${have_networkmanager} = xyes; then
+  PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.99.0
+                    libnm >= $NETWORK_MANAGER_REQUIRED_VERSION
+                    gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
+else
+  PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.99.0
+                    gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
 fi
 
 # Check for gnome-bluetooth
