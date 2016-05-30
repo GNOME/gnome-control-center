@@ -671,7 +671,9 @@ cc_search_locations_dialog_new (CcSearchPanel *panel)
 {
   CcSearchLocationsDialog *self;
 
-  self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE, NULL);
+  self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE,
+                       "use-header-bar", TRUE,
+                       NULL);
 
   tracker_preferences = g_settings_new (TRACKER_SCHEMA);
   populate_list_boxes (self);
