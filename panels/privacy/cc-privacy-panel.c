@@ -835,9 +835,9 @@ add_location (CcPrivacyPanel *self)
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
                             NULL,
-                            "org.freedesktop.XdgApp",
-                            "/org/freedesktop/XdgApp/PermissionStore",
-                            "org.freedesktop.XdgApp.PermissionStore",
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            "/org/freedesktop/impl/portal/PermissionStore",
+                            "org.freedesktop.impl.portal.PermissionStore",
                             priv->cancellable,
                             on_perm_store_ready,
                             self);
