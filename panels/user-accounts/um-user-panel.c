@@ -874,7 +874,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *image;
         GtkWidget *label;
-        gchar *lang, *text, *name;
+        gchar *lang, *text, *name, *account_type_label;
         GtkWidget *widget;
         gboolean show, enable;
         ActUser *current;
@@ -890,8 +890,16 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), act_user_get_real_name (user));
         gtk_widget_set_tooltip_text (widget, act_user_get_user_name (user));
 
-        widget = get_widget (d, "account-type-combo");
-        um_editable_combo_set_active (UM_EDITABLE_COMBO (widget), act_user_get_account_type (user));
+        widget = get_widget (d, act_user_get_account_type (user) ? "account-type-admin" : "account-type-standard");
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
+        widget = get_widget (d, "account-type-static");
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR)
+          account_type_label = g_strdup (_("Administrator"));
+        else
+          account_type_label = g_strdup (_("Standard"));
+        gtk_label_set_text (GTK_LABEL (widget), account_type_label);
+        g_free (account_type_label);
 
         widget = get_widget (d, "account-password-button");
         um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), get_password_mode_text (user));
@@ -998,21 +1006,17 @@ change_name_done (GtkWidget          *entry,
 }
 
 static void
-account_type_changed (UmEditableCombo    *combo,
+account_type_changed (GtkToggleButton    *button,
                       CcUserPanelPrivate *d)
 {
         ActUser *user;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
         gint account_type;
         gboolean self_selected;
 
         user = get_selected_user (d);
         self_selected = act_user_get_uid (user) == geteuid ();
 
-        model = um_editable_combo_get_model (combo);
-        um_editable_combo_get_active_iter (combo, &iter);
-        gtk_tree_model_get (model, &iter, 1, &account_type, -1);
+        account_type = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)) ?  ACT_USER_ACCOUNT_TYPE_STANDARD : ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
 
         if (account_type != act_user_get_account_type (user)) {
                 act_user_set_account_type (user, account_type);
@@ -1390,28 +1394,28 @@ on_permission_changed (GPermission *permission,
         }
 
         if (!act_user_is_local_account (user)) {
-                um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
-                remove_unlock_tooltip (get_widget (d, "account-type-combo"));
+                gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "static");
+                remove_unlock_tooltip (get_widget (d, "account-type-stack"));
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
                 remove_unlock_tooltip (get_widget (d, "autologin-switch"));
 
         } else if (is_authorized && act_user_is_local_account (user)) {
                 if (would_demote_only_admin (user)) {
-                        um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
+                        gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "static");
                 } else {
-                        um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), TRUE);
+                        gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "buttons");
                 }
-                remove_unlock_tooltip (get_widget (d, "account-type-combo"));
+                remove_unlock_tooltip (get_widget (d, "account-type-stack"));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), get_autologin_possible (user));
                 remove_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
         else {
-                um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
+                gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "static");
                 if (would_demote_only_admin (user)) {
-                        remove_unlock_tooltip (get_widget (d, "account-type-combo"));
+                        remove_unlock_tooltip (get_widget (d, "account-type-stack"));
                 } else {
-                        add_unlock_tooltip (get_widget (d, "account-type-combo"));
+                        add_unlock_tooltip (get_widget (d, "account-type-stack"));
                 }
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
                 add_unlock_tooltip (get_widget (d, "autologin-switch"));
@@ -1636,8 +1640,8 @@ setup_main_window (CcUserPanel *self)
         button = get_widget (d, "full-name-entry");
         g_signal_connect (button, "editing-done", G_CALLBACK (change_name_done), d);
 
-        button = get_widget (d, "account-type-combo");
-        g_signal_connect (button, "editing-done", G_CALLBACK (account_type_changed), d);
+        button = get_widget (d, "account-type-standard");
+        g_signal_connect (button, "toggled", G_CALLBACK (account_type_changed), d);
 
         button = get_widget (d, "account-password-button");
         g_signal_connect (button, "start-editing", G_CALLBACK (change_password), d);
