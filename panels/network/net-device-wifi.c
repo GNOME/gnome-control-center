@@ -704,11 +704,11 @@ is_8021x (NMDevice   *device,
 
 static void
 wireless_try_to_connect (NetDeviceWifi *device_wifi,
-                         const gchar *ssid_target,
+                         GBytes *ssid,
                          const gchar *ap_object_path)
 {
-        GBytes *ssid;
-        const gchar *ssid_tmp;
+        GBytes *match_ssid;
+        const gchar *ssid_target;
         GSList *list, *l;
         NMConnection *connection_activate = NULL;
         NMDevice *device;
@@ -725,6 +725,7 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         if (device == NULL)
                 goto out;
 
+        ssid_target = nm_utils_escape_ssid ((gpointer) g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
         g_debug ("try to connect to WIFI network %s [%s]",
                  ssid_target, ap_object_path);
 
@@ -738,11 +739,10 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                 setting_wireless = nm_connection_get_setting_wireless (connection);
                 if (!NM_IS_SETTING_WIRELESS (setting_wireless))
                         continue;
-                ssid = nm_setting_wireless_get_ssid (setting_wireless);
-                if (ssid == NULL)
+                match_ssid = nm_setting_wireless_get_ssid (setting_wireless);
+                if (match_ssid == NULL)
                         continue;
-                ssid_tmp = nm_utils_escape_ssid (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-                if (g_strcmp0 (ssid_target, ssid_tmp) == 0) {
+                if (g_bytes_equal (ssid, match_ssid)) {
                         g_debug ("we found an existing connection %s to activate!",
                                  nm_connection_get_id (connection));
                         connection_activate = connection;
@@ -1598,7 +1598,7 @@ make_row (GtkSizeGroup   *rows,
         GtkWidget *box;
         GtkWidget *button_stack;
         GtkWidget *image;
-        const gchar *title;
+        gchar *title;
         gboolean active;
         gboolean in_range;
         gboolean connecting;
@@ -1624,8 +1624,6 @@ make_row (GtkSizeGroup   *rows,
                 ssid = nm_access_point_get_ssid (ap);
                 timestamp = 0;
         }
-
-        title = nm_utils_escape_ssid (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
 
         if (ap != NULL) {
                 in_range = TRUE;
@@ -1675,7 +1673,9 @@ make_row (GtkSizeGroup   *rows,
         if (check_out)
                 *check_out = widget;
 
+        title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
         widget = gtk_label_new (title);
+        g_free (title);
         gtk_widget_set_margin_top (widget, 12);
         gtk_widget_set_margin_bottom (widget, 12);
         gtk_box_pack_start (GTK_BOX (row_box), widget, FALSE, FALSE, 0);
@@ -2037,16 +2037,13 @@ ap_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceWifi *device_wifi)
                                                              connection_activate_cb, device_wifi);
                 } else {
                         GBytes *ssid;
-                        gchar *ssid_text;
                         const gchar *object_path;
 
                         gtk_stack_set_visible_child_name (GTK_STACK (stack), "spinner");
 
                         ssid = nm_access_point_get_ssid (ap);
-                        ssid_text = g_markup_escape_text (nm_utils_escape_ssid (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid)), -1);
                         object_path = nm_object_get_path (NM_OBJECT (ap));
-                        wireless_try_to_connect (device_wifi, ssid_text, object_path);
-                        g_free (ssid_text);
+                        wireless_try_to_connect (device_wifi, ssid, object_path);
                 }
         }
 }
