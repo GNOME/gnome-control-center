@@ -37,8 +37,6 @@ libwacom_properties_la_SOURCES =	\
 	cc-wacom-page.h			\
 	cc-wacom-stylus-page.c		\
 	cc-wacom-stylus-page.h		\
-	gsd-wacom-device.c		\
-	gsd-wacom-device.h		\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h		\
 	cc-wacom-mapping-panel.c	\
@@ -70,8 +68,6 @@ test_wacom_SOURCES =			\
 	cc-wacom-nav-button.h		\
 	cc-wacom-mapping-panel.c	\
 	cc-wacom-mapping-panel.h	\
-	gsd-wacom-device.c		\
-	gsd-wacom-device.h		\
 	gsd-enums.h
 
 test_wacom_CPPFLAGS = $(AM_CPPFLAGS) -DFAKE_AREA
