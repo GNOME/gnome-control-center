@@ -146,7 +146,7 @@ activate_panel (CcWindow           *self,
                 const gchar        *name,
                 GIcon              *gicon)
 {
-  GtkWidget *box;
+  GtkWidget *box, *title_widget;
   const gchar *icon_name;
 
   if (!id)
@@ -177,6 +177,9 @@ activate_panel (CcWindow           *self,
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), name);
   gtk_window_set_default_icon_name (icon_name);
   gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
+
+  title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
+  gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->header), title_widget);
 
   self->current_panel_box = box;
 
@@ -243,6 +246,7 @@ shell_show_overview_page (CcWindow *self)
   /* reset window title and icon */
   gtk_window_set_role (GTK_WINDOW (self), NULL);
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), _(DEFAULT_WINDOW_TITLE));
+  gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->header), NULL);
   gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
   gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
 
