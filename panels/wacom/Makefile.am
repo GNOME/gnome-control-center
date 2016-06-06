@@ -23,6 +23,8 @@ libwacom_properties_la_SOURCES =	\
 	cc-drawing-area.h		\
 	cc-wacom-device.c		\
 	cc-wacom-device.h		\
+	cc-wacom-tool.c			\
+	cc-wacom-tool.h			\
 	cc-wacom-panel.c		\
 	cc-wacom-panel.h		\
 	gsd-wacom-key-shortcut-button.c \
@@ -50,6 +52,8 @@ test_wacom_SOURCES =			\
 	test-wacom.c			\
 	cc-wacom-device.c		\
 	cc-wacom-device.h		\
+	cc-wacom-tool.c			\
+	cc-wacom-tool.h			\
 	cc-wacom-button-row.c		\
 	cc-wacom-button-row.h		\
 	gsd-wacom-key-shortcut-button.c \
