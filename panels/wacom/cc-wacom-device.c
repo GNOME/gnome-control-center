@@ -233,3 +233,136 @@ cc_wacom_device_get_supported_tools (CcWacomDevice *device,
 
 	return libwacom_get_supported_styli (device->wdevice, n_tools);
 }
+
+static GnomeRROutput *
+find_output_by_edid (GnomeRRScreen *rr_screen,
+		     const gchar   *vendor,
+		     const gchar   *product,
+		     const gchar   *serial)
+{
+	GnomeRROutput **rr_outputs;
+	GnomeRROutput *retval = NULL;
+	guint i;
+
+	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
+
+	for (i = 0; rr_outputs[i] != NULL; i++) {
+		gchar *o_vendor, *o_product, *o_serial;
+		gboolean match;
+
+		gnome_rr_output_get_ids_from_edid (rr_outputs[i],
+						   &o_vendor,
+						   &o_product,
+						   &o_serial);
+
+		g_debug ("Checking for match between '%s','%s','%s' and '%s','%s','%s'", \
+		         vendor, product, serial, o_vendor, o_product, o_serial);
+
+		match = (g_strcmp0 (vendor,  o_vendor)  == 0) && \
+		        (g_strcmp0 (product, o_product) == 0) && \
+		        (g_strcmp0 (serial,  o_serial)  == 0);
+
+		g_free (o_vendor);
+		g_free (o_product);
+		g_free (o_serial);
+
+		if (match) {
+			retval = rr_outputs[i];
+			break;
+		}
+	}
+
+	if (retval == NULL)
+		g_debug ("Did not find a matching output for EDID '%s,%s,%s'",
+			 vendor, product, serial);
+
+	return retval;
+}
+
+static GnomeRROutput *
+find_output (GnomeRRScreen *rr_screen,
+	     CcWacomDevice *device)
+{
+	GSettings *settings;
+	GVariant *variant;
+	const gchar **edid;
+	GnomeRROutput *ret = NULL;
+	gsize n;
+
+	settings = cc_wacom_device_get_settings (device);
+	variant = g_settings_get_value (settings, "display");
+	edid = g_variant_get_strv (variant, &n);
+
+	if (n != 3) {
+		g_critical ("Expected 'display' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
+		goto out;
+	}
+
+	if (strlen (edid[0]) == 0 || strlen (edid[1]) == 0 || strlen (edid[2]) == 0)
+		goto out;
+
+	ret = find_output_by_edid (rr_screen, edid[0], edid[1], edid[2]);
+
+out:
+	g_free (edid);
+	g_variant_unref (variant);
+	g_object_unref (settings);
+
+	return ret;
+}
+
+GnomeRROutput *
+cc_wacom_device_get_output (CcWacomDevice *device,
+			    GnomeRRScreen *rr_screen)
+{
+	GnomeRROutput *rr_output;
+	GnomeRRCrtc *crtc;
+
+        g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), NULL);
+        g_return_val_if_fail (GNOME_IS_RR_SCREEN (rr_screen), NULL);
+
+	rr_output = find_output (rr_screen, device);
+	if (rr_output == NULL) {
+		return NULL;
+	}
+
+	crtc = gnome_rr_output_get_crtc (rr_output);
+
+	if (!crtc || gnome_rr_crtc_get_current_mode (crtc) == NULL) {
+		g_debug ("Output is not active.");
+		return NULL;
+	}
+
+	return rr_output;
+}
+
+void
+cc_wacom_device_set_output (CcWacomDevice *device,
+			    GnomeRROutput *output)
+{
+	GSettings *settings;
+	gchar *vendor, *product, *serial;
+	const gchar *values[] = { "", "", "", NULL };
+
+        g_return_if_fail (CC_IS_WACOM_DEVICE (device));
+
+	vendor = product = serial = NULL;
+	settings = cc_wacom_device_get_settings (device);
+
+	if (output != NULL) {
+		gnome_rr_output_get_ids_from_edid (output,
+						   &vendor,
+						   &product,
+						   &serial);
+		values[0] = vendor;
+		values[1] = product;
+		values[2] = serial;
+	}
+
+	g_settings_set_strv (settings, "display", values);
+
+	g_free (vendor);
+	g_free (product);
+	g_free (serial);
+	g_object_unref (settings);
+}
