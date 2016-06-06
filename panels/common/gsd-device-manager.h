@@ -49,7 +49,8 @@ typedef enum {
 	GSD_DEVICE_TYPE_KEYBOARD     = 1 << 1,
 	GSD_DEVICE_TYPE_TOUCHPAD     = 1 << 2,
 	GSD_DEVICE_TYPE_TABLET	     = 1 << 3,
-	GSD_DEVICE_TYPE_TOUCHSCREEN  = 1 << 4
+	GSD_DEVICE_TYPE_TOUCHSCREEN  = 1 << 4,
+	GSD_DEVICE_TYPE_PAD          = 1 << 5
 } GsdDeviceType;
 
 struct _GsdDevice {
