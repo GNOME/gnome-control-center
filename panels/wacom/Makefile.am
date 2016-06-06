@@ -21,6 +21,8 @@ libwacom_properties_la_SOURCES =	\
 	$(BUILT_SOURCES)		\
 	cc-drawing-area.c		\
 	cc-drawing-area.h		\
+	cc-tablet-tool-map.c		\
+	cc-tablet-tool-map.h		\
 	cc-wacom-device.c		\
 	cc-wacom-device.h		\
 	cc-wacom-tool.c			\
@@ -50,6 +52,8 @@ noinst_PROGRAMS = test-wacom
 test_wacom_SOURCES =			\
 	$(BUILT_SOURCES)		\
 	test-wacom.c			\
+	cc-tablet-tool-map.c		\
+	cc-tablet-tool-map.h		\
 	cc-wacom-device.c		\
 	cc-wacom-device.h		\
 	cc-wacom-tool.c			\
