@@ -53,9 +53,19 @@ typedef struct _CcShellModelClass CcShellModelClass;
 typedef struct _CcShellModelPrivate CcShellModelPrivate;
 
 typedef enum {
-  CC_CATEGORY_PERSONAL,
+#ifdef CC_ENABLE_ALT_CATEGORIES
+  CC_CATEGORY_CONNECTIVITY,
+  CC_CATEGORY_PERSONALIZATION,
+  CC_CATEGORY_ACCOUNT,
   CC_CATEGORY_HARDWARE,
+  CC_CATEGORY_DEVICES,
+  CC_CATEGORY_DETAILS,
+#else
+  CC_CATEGORY_PERSONAL,
   CC_CATEGORY_SYSTEM,
+  CC_CATEGORY_HARDWARE,
+#endif
+
   CC_CATEGORY_LAST
 } CcPanelCategory;
 

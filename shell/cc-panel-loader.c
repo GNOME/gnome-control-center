@@ -122,22 +122,37 @@ parse_categories (GDesktopAppInfo *app)
   const char *categories;
   char **split;
   int retval;
-  int i;
 
   categories = g_desktop_app_info_get_categories (app);
   split = g_strsplit (categories, ";", -1);
 
   retval = -1;
 
-  for (i = 0; split[i]; i++)
-    {
-      if (strcmp (split[i], "HardwareSettings") == 0)
-        retval = CC_CATEGORY_HARDWARE;
-      else if (strcmp (split[i], "X-GNOME-PersonalSettings") == 0)
-        retval = CC_CATEGORY_PERSONAL;
-      else if (strcmp (split[i], "X-GNOME-SystemSettings") == 0)
-        retval = CC_CATEGORY_SYSTEM;
-    }
+#define const_strv(s) ((const gchar* const*) s)
+
+#ifdef CC_ENABLE_ALT_CATEGORIES
+  if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
+    retval = CC_CATEGORY_CONNECTIVITY;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalizationSettings"))
+    retval = CC_CATEGORY_PERSONALIZATION;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-AccountSettings"))
+    retval = CC_CATEGORY_ACCOUNT;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-DevicesSettings"))
+    retval = CC_CATEGORY_DEVICES;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-DetailsSettings"))
+    retval = CC_CATEGORY_DETAILS;
+  else if (g_strv_contains (const_strv (split), "HardwareSettings"))
+    retval = CC_CATEGORY_HARDWARE;
+#else
+  if (g_strv_contains (const_strv (split), "HardwareSettings"))
+    retval = CC_CATEGORY_HARDWARE;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalSettings"))
+    retval = CC_CATEGORY_PERSONAL;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-SystemSettings"))
+    retval = CC_CATEGORY_SYSTEM;
+#endif
+
+#undef const_strv
 
   if (retval < 0)
     {
