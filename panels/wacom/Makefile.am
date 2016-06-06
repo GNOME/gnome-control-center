@@ -19,6 +19,8 @@ BUILT_SOURCES =			\
 
 libwacom_properties_la_SOURCES =	\
 	$(BUILT_SOURCES)		\
+	cc-drawing-area.c		\
+	cc-drawing-area.h		\
 	cc-wacom-panel.c		\
 	cc-wacom-panel.h		\
 	gsd-wacom-key-shortcut-button.c \
