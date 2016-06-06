@@ -64,6 +64,12 @@ gnome_control_center_alt_SOURCES =		\
 gnome_control_center_LDFLAGS = -export-dynamic
 gnome_control_center_alt_LDFLAGS = -export-dynamic
 
+# Temporarily add the CC_ENABLE_ALT_CATEGORIES compile-time
+# flag to keep the current panels working.
+gnome_control_center_alt_CPPFLAGS = \
+	$(AM_CPPFLAGS)				\
+	-DCC_ENABLE_ALT_CATEGORIES
+
 gnome_control_center_LDADD =						\
 	libshell.la							\
 	$(SHELL_LIBS)							\
@@ -153,6 +159,7 @@ EXTRA_DIST =					\
 	$(completion_in_files)			\
 	gnome-control-center.gresource.xml	\
 	help-overlay.ui				\
+	panel-list.ui				\
 	window.ui				\
 	$(resource_files)			\
 	list-panel.sh

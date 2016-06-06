@@ -1,0 +1,67 @@
+/* cc-panel-list.c
+ *
+ * Copyright (C) 2016 Endless, Inc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Author: Georges Basile Stavracas Neto <gbsneto@gnome.org>
+ */
+
+#ifndef CC_PANEL_LIST_H
+#define CC_PANEL_LIST_H
+
+#include <glib-object.h>
+
+#include "cc-panel.h"
+#include "cc-shell-model.h"
+
+G_BEGIN_DECLS
+
+typedef enum
+{
+  CC_PANEL_LIST_MAIN,
+  CC_PANEL_LIST_DETAILS,
+  CC_PANEL_LIST_DEVICES,
+  CC_PANEL_LIST_SEARCH
+} CcPanelListView;
+
+#define CC_TYPE_PANEL_LIST (cc_panel_list_get_type())
+
+G_DECLARE_FINAL_TYPE (CcPanelList, cc_panel_list, CC, PANEL_LIST, GtkStack)
+
+GtkWidget*           cc_panel_list_new                           (void);
+
+gboolean             cc_panel_list_activate                      (CcPanelList        *self);
+
+const gchar*         cc_panel_list_get_search_query              (CcPanelList        *self);
+
+void                 cc_panel_list_set_search_query              (CcPanelList        *self,
+                                                                  const gchar        *search);
+
+CcPanelListView      cc_panel_list_get_view                      (CcPanelList        *self);
+
+void                 cc_panel_list_set_view                      (CcPanelList        *self,
+                                                                  CcPanelListView     view);
+
+void                 cc_panel_list_add_panel                     (CcPanelList        *self,
+                                                                  CcPanelCategory     category,
+                                                                  const gchar        *id,
+                                                                  const gchar        *title,
+                                                                  const gchar        *description,
+                                                                  const gchar        *icon);
+
+G_END_DECLS
+
+#endif /* CC_PANEL_LIST_H */
+

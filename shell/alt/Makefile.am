@@ -1,5 +1,6 @@
 AM_CPPFLAGS =					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
+	-DCC_ENABLE_ALT_CATEGORIES		\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	$(CHEESE_CFLAGS)			\
@@ -11,6 +12,8 @@ AM_CPPFLAGS =					\
 noinst_LTLIBRARIES = libshell_alt.la
 
 libshell_alt_la_SOURCES = 			\
+	cc-panel-list.c				\
+	cc-panel-list.h				\
 	cc-window.c				\
 	cc-window.h
 
