@@ -27,6 +27,7 @@
 #include "cc-wacom-panel.h"
 #include "cc-wacom-page.h"
 #include "cc-wacom-resources.h"
+#include "cc-drawing-area.h"
 #include "gsd-wacom-device.h"
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
@@ -40,6 +41,8 @@ struct _CcWacomPanelPrivate
 {
 	GtkBuilder       *builder;
 	GtkWidget        *notebook;
+	GtkWidget        *test_popover;
+	GtkWidget        *test_draw_area;
 	GHashTable       *devices; /* key=GdkDevice, value=GsdWacomDevice */
 	GHashTable       *pages; /* key=device name, value=GtkWidget */
 	GdkDeviceManager *manager;
@@ -229,6 +232,41 @@ cc_wacom_panel_dispose (GObject *object)
 	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->dispose (object);
 }
 
+static void
+cc_wacom_panel_constructed (GObject *object)
+{
+	CcWacomPanel *self = CC_WACOM_PANEL (object);
+	CcWacomPanelPrivate *priv = self->priv;
+	GtkWidget *button;
+	CcShell *shell;
+
+	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->constructed (object);
+
+	/* Add test area button to shell header. */
+	shell = cc_panel_get_shell (CC_PANEL (self));
+
+	button = gtk_toggle_button_new_with_mnemonic (_("Test Your _Settings"));
+	gtk_style_context_add_class (gtk_widget_get_style_context (button),
+				     "text-button");
+	gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+	gtk_widget_set_visible (button, TRUE);
+
+	cc_shell_embed_widget_in_header (shell, button);
+
+	priv->test_popover = gtk_popover_new (button);
+	gtk_container_set_border_width (GTK_CONTAINER (priv->test_popover), 6);
+
+	priv->test_draw_area = cc_drawing_area_new ();
+	gtk_widget_set_size_request (priv->test_draw_area, 400, 300);
+	gtk_container_add (GTK_CONTAINER (priv->test_popover),
+			   priv->test_draw_area);
+	gtk_widget_show (priv->test_draw_area);
+
+	g_object_bind_property (button, "active",
+				priv->test_popover, "visible",
+				G_BINDING_BIDIRECTIONAL);
+}
+
 static const char *
 cc_wacom_panel_get_help_uri (CcPanel *panel)
 {
@@ -246,6 +284,7 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 	object_class->get_property = cc_wacom_panel_get_property;
 	object_class->set_property = cc_wacom_panel_set_property;
 	object_class->dispose = cc_wacom_panel_dispose;
+	object_class->constructed = cc_wacom_panel_constructed;
 
 	panel_class->get_help_uri = cc_wacom_panel_get_help_uri;
 
