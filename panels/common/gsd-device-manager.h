@@ -20,6 +20,7 @@
 #ifndef __GSD_DEVICE_MANAGER_H__
 #define __GSD_DEVICE_MANAGER_H__
 
+#include <gdk/gdk.h>
 #include <glib-object.h>
 #include <gio/gio.h>
 
@@ -78,6 +79,11 @@ struct _GsdDeviceManagerClass
 				 GsdDevice	  *device);
 	void (* device_changed) (GsdDeviceManager *manager,
 				 GsdDevice	  *device);
+
+	GsdDevice * (* lookup_device) (GsdDeviceManager *manager,
+				       GdkDevice	*gdk_device);
+	GList	  * (*inverse_lookup) (GsdDeviceManager *manager,
+				       GsdDevice	*device);
 };
 
 GType		   gsd_device_get_type		      (void) G_GNUC_CONST;
@@ -98,12 +104,10 @@ gboolean	   gsd_device_get_dimensions  (GsdDevice  *device,
 					       guint	  *width,
 					       guint	  *height);
 
-#ifdef GDK_WINDOWING_X11
-GdkDevice **	   gsd_device_get_gdk_devices (GsdDevice *device,
-					       guint	 *n_gdk_devices);
+GList	  *	   gsd_device_get_gdk_devices (GsdDeviceManager *manager,
+					       GsdDevice	*device);
 GsdDevice *	   gsd_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
 							 GdkDevice	  *gdk_device);
-#endif
 
 G_END_DECLS
 
