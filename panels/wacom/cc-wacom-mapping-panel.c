@@ -28,7 +28,7 @@
 
 #include <string.h>
 
-#include "gsd-wacom-device.h"
+#include "cc-wacom-device.h"
 #include "cc-wacom-mapping-panel.h"
 
 G_DEFINE_TYPE (CcWacomMappingPanel, cc_wacom_mapping_panel, GTK_TYPE_BOX)
@@ -38,36 +38,25 @@ G_DEFINE_TYPE (CcWacomMappingPanel, cc_wacom_mapping_panel, GTK_TYPE_BOX)
 
 struct _CcWacomMappingPanelPrivate
 {
-	GsdWacomDevice *device;
+	CcWacomDevice  *device;
 	GtkWidget      *label;
 	GtkWidget      *combobox;
 	GtkWidget      *checkbutton;
 	GtkWidget      *aspectlabel;
 	GtkWidget      *aspectswitch;
+
+	GnomeRRScreen  *rr_screen;
 };
 
 enum {
 	MONITOR_NAME_COLUMN,
-	MONITOR_NUM_COLUMN,
+	MONITOR_PTR_COLUMN,
 	MONITOR_NUM_COLUMNS
 };
 
 static void combobox_changed_cb (GtkWidget *widget, CcWacomMappingPanel *self);
 static void checkbutton_toggled_cb (GtkWidget *widget, CcWacomMappingPanel *self);
 static void aspectswitch_toggled_cb (GtkWidget *widget, GParamSpec *pspec, CcWacomMappingPanel *self);
-
-static GnomeRROutputInfo**
-get_rr_outputs (void)
-{
-	GError *error = NULL;
-	GnomeRRScreen *rr_screen;
-	GnomeRRConfig *rr_config;
-
-	/* TODO: Check the value of 'error' */
-	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
-	rr_config = gnome_rr_config_new_current (rr_screen, &error);
-	return gnome_rr_config_get_outputs (rr_config);
-}
 
 static void
 set_combobox_sensitive (CcWacomMappingPanel *self,
@@ -90,14 +79,12 @@ static void
 update_monitor_chooser (CcWacomMappingPanel *self)
 {
 	GtkListStore *store;
-	GnomeRROutputInfo **outputs;
-	GdkRectangle geom;
+	GnomeRROutput **outputs;
 	GSettings *settings;
-	gint monitor;
-	gboolean single_mon;
+	GnomeRROutput *cur_output;
 	guint i;
 
-	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
 	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
 
 	if (self->priv->device == NULL) {
@@ -106,47 +93,43 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 		return;
 	}
 
-	settings = gsd_wacom_device_get_settings (self->priv->device);
-	monitor = gsd_wacom_device_get_display_monitor (self->priv->device);
-	single_mon = (monitor != GSD_WACOM_SET_ALL_MONITORS);
+	settings = cc_wacom_device_get_settings (self->priv->device);
+	cur_output = cc_wacom_device_get_output (self->priv->device,
+						 self->priv->rr_screen);
 
 	g_signal_handlers_block_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), single_mon);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), cur_output != NULL);
 	g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
 
 	g_signal_handlers_block_by_func (G_OBJECT (self->priv->aspectswitch), aspectswitch_toggled_cb, self);
 	gtk_switch_set_active (GTK_SWITCH(self->priv->aspectswitch), g_settings_get_boolean (settings, "keep-aspect"));
 	g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->aspectswitch), aspectswitch_toggled_cb, self);
 
-	/* FIXME: does this break screen tablets? What's the default
-	 * for unconfigured tablets? */
-	if (monitor < 0)
-		monitor = 0;
-	gdk_screen_get_monitor_geometry (gdk_screen_get_default (), monitor, &geom);
-
-	outputs = get_rr_outputs ();
-	if (outputs == NULL)
+	if (!self->priv->rr_screen) {
+		cur_output = NULL;
 		goto bail;
+	}
+
+	outputs = gnome_rr_screen_list_outputs (self->priv->rr_screen);
 
 	for (i = 0; outputs[i] != NULL; i++) {
-		GnomeRROutputInfo *output = outputs[i];
+		GnomeRROutput *output = outputs[i];
+		GnomeRRCrtc *crtc = gnome_rr_output_get_crtc (output);
 
-		if (gnome_rr_output_info_is_active (output)) {
+		/* Output is turned on? */
+		if (crtc && gnome_rr_crtc_get_current_mode (crtc) != NULL) {
 			GtkTreeIter iter;
-			gchar *name, *disp_name, *text;
-			int x, y, w, h;
-			int mon_at_point;
+			const gchar *name, *disp_name;
+			gchar *text;
 
-			name = gnome_rr_output_info_get_name (output);
-			disp_name = gnome_rr_output_info_get_display_name (output);
+			name = gnome_rr_output_get_name (output);
+			disp_name = gnome_rr_output_get_display_name (output);
 			text = g_strdup_printf ("%s (%s)", name, disp_name);
 
-			gnome_rr_output_info_get_geometry (output, &x, &y, &w, &h);
-			mon_at_point = gdk_screen_get_monitor_at_point (gdk_screen_get_default (), x, y);
 			gtk_list_store_append (store, &iter);
-			gtk_list_store_set (store, &iter, MONITOR_NAME_COLUMN, text, MONITOR_NUM_COLUMN, mon_at_point, -1);
+			gtk_list_store_set (store, &iter, MONITOR_NAME_COLUMN, text, MONITOR_PTR_COLUMN, output, -1);
 
-			if (x == geom.x && y == geom.y && w == geom.width && h == geom.height) {
+			if (i == 0 || output == cur_output) {
 				g_signal_handlers_block_by_func (G_OBJECT (self->priv->combobox), combobox_changed_cb, self);
 				gtk_combo_box_set_active_iter (GTK_COMBO_BOX(self->priv->combobox), &iter);
 				g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->combobox), combobox_changed_cb, self);
@@ -157,7 +140,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	}
 
 bail:
-	set_combobox_sensitive (self, single_mon);
+	set_combobox_sensitive (self, cur_output != NULL);
 	g_object_unref (store);
 }
 
@@ -170,7 +153,10 @@ update_ui (CcWacomMappingPanel *self)
 	} else {
 		gboolean is_screen_tablet;
 
-		is_screen_tablet = gsd_wacom_device_is_screen_tablet (self->priv->device);
+		is_screen_tablet =
+			cc_wacom_device_get_integration_flags (self->priv->device) &
+			WACOM_DEVICE_INTEGRATED_DISPLAY;
+
 		gtk_widget_set_sensitive (GTK_WIDGET(self->priv->checkbutton), !is_screen_tablet);
 		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->priv->checkbutton), FALSE);
 	}
@@ -181,7 +167,7 @@ update_ui (CcWacomMappingPanel *self)
 static void
 update_mapping (CcWacomMappingPanel *self)
 {
-	int monitor = GSD_WACOM_SET_ALL_MONITORS;
+	GnomeRROutput *output = NULL;
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton))) {
 		GtkTreeIter iter;
@@ -194,15 +180,15 @@ update_mapping (CcWacomMappingPanel *self)
 			return;
 		}
 
-		gtk_tree_model_get (model, &iter, MONITOR_NAME_COLUMN, &name, MONITOR_NUM_COLUMN, &monitor, -1);
+		gtk_tree_model_get (model, &iter, MONITOR_NAME_COLUMN, &name, MONITOR_PTR_COLUMN, &output, -1);
 	}
 
-	gsd_wacom_device_set_display (self->priv->device, monitor);
+	cc_wacom_device_set_output (self->priv->device, output);
 }
 
 void
 cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
-                                   GsdWacomDevice *device)
+                                   CcWacomDevice       *device)
 {
 	self->priv->device = device;
 	update_ui (self);
@@ -228,7 +214,7 @@ aspectswitch_toggled_cb (GtkWidget           *widget,
 {
 	GSettings *settings;
 
-	settings = gsd_wacom_device_get_settings (self->priv->device);
+	settings = cc_wacom_device_get_settings (self->priv->device);
 	g_settings_set_boolean (settings,
 				"keep-aspect",
 				gtk_switch_get_active (GTK_SWITCH (widget)));
@@ -247,8 +233,19 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	CcWacomMappingPanelPrivate *priv;
 	GtkWidget *vbox, *grid;
 	GtkCellRenderer *renderer;
+	GError *error = NULL;
 
 	priv = self->priv = WACOM_MAPPING_PANEL_PRIVATE (self);
+
+	priv->rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+
+	if (error) {
+		g_warning ("Could not get RR screen: %s", error->message);
+		g_error_free (error);
+	}
+
+	g_signal_connect_swapped (priv->rr_screen, "changed",
+				  G_CALLBACK (update_monitor_chooser), self);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 8);
 	gtk_container_add (GTK_CONTAINER (self), vbox);
@@ -338,6 +335,10 @@ cc_wacom_mapping_panel_set_property (GObject      *object,
 static void
 cc_wacom_mapping_panel_dispose (GObject *object)
 {
+	CcWacomMappingPanel *self = CC_WACOM_MAPPING_PANEL (object);
+
+	g_clear_object (&self->priv->rr_screen);
+
 	G_OBJECT_CLASS (cc_wacom_mapping_panel_parent_class)->dispose (object);
 }
 

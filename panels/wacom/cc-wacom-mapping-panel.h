@@ -22,6 +22,7 @@
 #define CC_WACOM_MAPPING_PANEL_H_
 
 #include <gtk/gtk.h>
+#include "cc-wacom-device.h"
 
 G_BEGIN_DECLS
 
@@ -69,7 +70,7 @@ GtkWidget * cc_wacom_mapping_panel_new (void);
 
 
 void cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
-                                        GsdWacomDevice *device);
+                                        CcWacomDevice       *device);
 
 G_END_DECLS
 

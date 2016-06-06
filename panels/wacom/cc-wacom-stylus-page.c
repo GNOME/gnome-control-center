@@ -25,6 +25,7 @@
 #include "cc-wacom-stylus-page.h"
 #include "cc-wacom-nav-button.h"
 #include <gtk/gtk.h>
+#include <gdesktop-enums.h>
 
 #include <string.h>
 
@@ -38,10 +39,10 @@ G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
 struct _CcWacomStylusPagePrivate
 {
-	GsdWacomStylus *stylus;
+	CcWacomTool    *stylus;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
-	GSettings      *stylus_settings, *eraser_settings;
+	GSettings      *stylus_settings;
 };
 
 /* Button combo box storage columns */
@@ -67,7 +68,7 @@ static const gint32 PRESSURE_CURVES[N_PRESSURE_CURVES][4] = {
 };
 
 static void
-set_pressurecurve (GtkRange *range, GSettings *settings)
+set_pressurecurve (GtkRange *range, GSettings *settings, const gchar *key)
 {
 	gint		slider_val = gtk_range_get_value (range);
 	GVariant	*values[4],
@@ -79,30 +80,30 @@ set_pressurecurve (GtkRange *range, GSettings *settings)
 
 	array = g_variant_new_array (G_VARIANT_TYPE_INT32, values, G_N_ELEMENTS (values));
 
-	g_settings_set_value (settings, "pressurecurve", array);
+	g_settings_set_value (settings, key, array);
 }
 
 static void
 tip_feel_value_changed_cb (GtkRange *range, gpointer user_data)
 {
-    set_pressurecurve (range, CC_WACOM_STYLUS_PAGE(user_data)->priv->stylus_settings);
+	set_pressurecurve (range, CC_WACOM_STYLUS_PAGE(user_data)->priv->stylus_settings, "pressure-curve");
 }
 
 static void
 eraser_feel_value_changed_cb (GtkRange *range, gpointer user_data)
 {
-    set_pressurecurve (range, CC_WACOM_STYLUS_PAGE(user_data)->priv->eraser_settings);
+	set_pressurecurve (range, CC_WACOM_STYLUS_PAGE(user_data)->priv->stylus_settings, "eraser-pressure-curve");
 }
 
 static void
-set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings)
+set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const gchar *key)
 {
 	GVariant	*variant;
 	const gint32	*values;
 	gsize		nvalues;
 	int		i;
 
-	variant = g_settings_get_value (settings, "pressurecurve");
+	variant = g_settings_get_value (settings, key);
 	values = g_variant_get_fixed_array (variant, &nvalues, sizeof (gint32));
 
 	if (nvalues != 4) {
@@ -119,17 +120,14 @@ set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings)
 }
 
 static void
-set_button_mapping_from_gsettings (GtkComboBox *combo, GSettings* settings, gint current_button)
+set_button_mapping_from_gsettings (GtkComboBox *combo, GSettings* settings, const gchar *key)
 {
-	GVariant	*current;
-	gsize		 nvalues;
-	const gint	*values;
+	GDesktopStylusButtonAction action;
 	GtkTreeModel	*model;
 	GtkTreeIter	 iter;
 	gboolean	 valid;
 
-	current = g_settings_get_value (settings, "buttonmapping");
-	values = g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
+	action = g_settings_get_enum (settings, key);
 	model = gtk_combo_box_get_model (combo);
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 
@@ -146,43 +144,13 @@ set_button_mapping_from_gsettings (GtkComboBox *combo, GSettings* settings, gint
 		 * special ones.
 		 */
 
-		/* 0 vs 1-indexed array/button numbers */
-		if (button == values[current_button - 1]) {
+		if (button == action) {
 			gtk_combo_box_set_active_iter (combo, &iter);
 			break;
 		}
 
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
-}
-
-static void
-map_button (GSettings *settings, int button2, int button3)
-{
-	GVariant	*current; /* current mapping */
-	GVariant	*array;   /* new mapping */
-	GVariant	**tmp;
-	gsize		 nvalues;
-	const gint	*values;
-	gint		 i;
-
-	current = g_settings_get_value (settings, "buttonmapping");
-	values = g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
-
-	tmp = g_malloc (nvalues * sizeof (GVariant*));
-	for (i = 0; i < nvalues; i++) {
-		if (i == 1) /* zero indexed array vs one-indexed buttons */
-			tmp[i] = g_variant_new_int32 (button2);
-		else if (i == 2)
-			tmp[i] = g_variant_new_int32 (button3);
-		else
-			tmp[i] = g_variant_new_int32 (values[i]);
-	}
-
-	array = g_variant_new_array (G_VARIANT_TYPE_INT32, tmp, nvalues);
-	g_settings_set_value (settings, "buttonmapping", array);
-
-	g_free (tmp);
 }
 
 static void
@@ -202,7 +170,7 @@ button_changed_cb (GtkComboBox *combo, gpointer user_data)
 			    BUTTONNUMBER_COLUMN, &mapping_b2,
 			    -1);
 
-	if (gsd_wacom_stylus_get_num_buttons (priv->stylus) > 1) {
+	if (cc_wacom_tool_get_num_buttons (priv->stylus) > 1) {
 		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-topbutton")), &iter))
 			return;
 
@@ -213,7 +181,8 @@ button_changed_cb (GtkComboBox *combo, gpointer user_data)
 		mapping_b3 = 0;
 	}
 
-	map_button (priv->stylus_settings, mapping_b2, mapping_b3);
+	g_settings_set_enum (priv->stylus_settings, "button-action", mapping_b2);
+	g_settings_set_enum (priv->stylus_settings, "secondary-button-action", mapping_b3);
 }
 
 static void
@@ -429,15 +398,15 @@ update_stylus_ui (CcWacomStylusPage *page,
 }
 
 GtkWidget *
-cc_wacom_stylus_page_new (GsdWacomStylus *stylus)
+cc_wacom_stylus_page_new (CcWacomTool *stylus)
 {
 	CcWacomStylusPage *page;
 	CcWacomStylusPagePrivate *priv;
-	int num_buttons;
+	guint num_buttons;
 	int layout;
-	int has_eraser;
+	gboolean has_eraser;
 
-	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), NULL);
+	g_return_val_if_fail (CC_IS_WACOM_TOOL (stylus), NULL);
 
 	page = g_object_new (CC_TYPE_WACOM_STYLUS_PAGE, NULL);
 
@@ -445,18 +414,16 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus)
 	priv->stylus = stylus;
 
 	/* Icon */
-	set_icon_name (page, "image-stylus", gsd_wacom_stylus_get_icon_name (stylus));
+	set_icon_name (page, "image-stylus", cc_wacom_tool_get_icon_name (stylus));
 
 	/* Settings */
-	priv->stylus_settings = gsd_wacom_stylus_get_settings (stylus);
-	has_eraser = gsd_wacom_stylus_get_has_eraser (stylus);
-	if (has_eraser)
-		priv->eraser_settings = gsd_wacom_stylus_get_settings (stylus);
+	priv->stylus_settings = cc_wacom_tool_get_settings (stylus);
+	has_eraser = cc_wacom_tool_get_has_eraser (stylus);
 
 	/* Stylus name */
-	gtk_label_set_text (GTK_LABEL (WID ("label-stylus")), gsd_wacom_stylus_get_name (stylus));
+	gtk_label_set_text (GTK_LABEL (WID ("label-stylus")), cc_wacom_tool_get_name (stylus));
 
-	num_buttons = gsd_wacom_stylus_get_num_buttons (stylus);
+	num_buttons = cc_wacom_tool_get_num_buttons (stylus);
 	if (num_buttons == 0 && !has_eraser)
 		layout = LAYOUT_INKING;
 	else if (num_buttons == 2 && has_eraser)
@@ -483,21 +450,23 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus)
 	update_stylus_ui (page, layout);
 
 	if (num_buttons == 2)
-		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
+		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")),
+						   priv->stylus_settings, "secondary-button-action");
 	if (num_buttons >= 1)
-		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
+		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")),
+						   priv->stylus_settings, "button-action");
+	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")),
+				 priv->stylus_settings, "pressure-curve");
 
 	if (has_eraser)
-		set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
-
-	g_object_set (G_OBJECT (page), "margin-top", 16, NULL);
+		set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")),
+					 priv->stylus_settings, "eraser-pressure-curve");
 
 	return GTK_WIDGET (page);
 }
 
-GsdWacomStylus *
-cc_wacom_stylus_page_get_stylus (CcWacomStylusPage *page)
+CcWacomTool *
+cc_wacom_stylus_page_get_tool (CcWacomStylusPage *page)
 {
 	return page->priv->stylus;
 }
