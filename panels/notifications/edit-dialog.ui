@@ -157,19 +157,54 @@
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
-                      <object class="GtkLabel" id="notification-banners-label">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="margin_end">15</property>
-                        <property name="label" translatable="yes" context="notifications">Notification _Banners</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">notification-banners-switch</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel" id="notification-banners-label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="xalign">0</property>
+                            <property name="margin_end">15</property>
+                            <property name="label" translatable="yes" context="notifications">Notification _Popups</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">notification-banners-switch</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="notification-banners-info">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="max-width-chars">42</property>
+                            <property name="wrap-mode">word</property>
+                            <property name="label" translatable="yes">Notifications will continue to appear in the notification list when popups are disabled.</property>
+                            <property name="wrap">True</property>
+                            <property name="lines">-1</property>
+                            <property name="xalign">0</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.83"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
+                        <property name="expand">True</property>
                         <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
@@ -185,7 +220,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -215,7 +250,7 @@
                         <property name="vexpand">True</property>
                         <property name="xalign">0</property>
                         <property name="margin_end">15</property>
-                        <property name="label" translatable="yes" context="notifications" comments="Banners here refers to message tray notifications in the middle of the screen.">Show Message _Content in Banners</property>
+                        <property name="label" translatable="yes" context="notifications" comments="Popups here refers to message tray notifications in the middle of the screen.">Show Message _Content in Popups</property>
                         <property name="use_underline">True</property>
                         <property name="mnemonic_widget">notification-banners-content-switch</property>
                       </object>
