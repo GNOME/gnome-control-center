@@ -39,12 +39,6 @@ typedef struct _GsdX11DeviceManagerClass GsdX11DeviceManagerClass;
 
 GType          gsd_x11_device_manager_get_type	        (void) G_GNUC_CONST;
 
-GdkDevice   ** gsd_x11_device_manager_get_gdk_devices   (GsdX11DeviceManager *manager,
-							 GsdDevice           *device,
-							 guint               *n_gdk_devices);
-GsdDevice    * gsd_x11_device_manager_lookup_gdk_device (GsdX11DeviceManager *manager,
-							 GdkDevice           *gdk_device);
-
 G_END_DECLS
 
 #endif /* __GSD_X11_DEVICE_MANAGER_H__ */
