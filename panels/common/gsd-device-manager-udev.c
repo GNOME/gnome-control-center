@@ -24,6 +24,7 @@
 #include <string.h>
 #include <gudev/gudev.h>
 
+#include <gdk/gdkwayland.h>
 #include "gsd-device-manager-udev.h"
 
 struct _GsdUdevDeviceManager
@@ -221,6 +222,30 @@ gsd_udev_device_manager_list_devices (GsdDeviceManager *manager,
 	return devices;
 }
 
+static GsdDevice *
+gsd_udev_device_manager_lookup_device (GsdDeviceManager *manager,
+				       GdkDevice	*gdk_device)
+{
+	const gchar *node_path;
+	GHashTableIter iter;
+	GsdDevice *device;
+
+	node_path = gdk_wayland_device_get_node_path (gdk_device);
+	if (!node_path)
+		return NULL;
+
+	g_hash_table_iter_init (&iter, GSD_UDEV_DEVICE_MANAGER (manager)->devices);
+
+	while (g_hash_table_iter_next (&iter, NULL, (gpointer *) &device)) {
+		if (g_strcmp0 (node_path,
+			       gsd_device_get_device_file (device)) == 0) {
+			return device;
+		}
+	}
+
+	return NULL;
+}
+
 static void
 gsd_udev_device_manager_class_init (GsdUdevDeviceManagerClass *klass)
 {
@@ -229,4 +254,5 @@ gsd_udev_device_manager_class_init (GsdUdevDeviceManagerClass *klass)
 
 	object_class->finalize = gsd_udev_device_manager_finalize;
 	manager_class->list_devices = gsd_udev_device_manager_list_devices;
+	manager_class->lookup_device = gsd_udev_device_manager_lookup_device;
 }
