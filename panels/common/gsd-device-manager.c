@@ -415,3 +415,19 @@ gsd_device_get_dimensions (GsdDevice *device,
 
 	return priv->width > 0 && priv->height > 0;
 }
+
+GsdDevice *
+gsd_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
+				      GdkDevice	       *gdk_device)
+{
+	GsdDeviceManagerClass *klass;
+
+	g_return_val_if_fail (GSD_IS_DEVICE_MANAGER (manager), NULL);
+	g_return_val_if_fail (GDK_IS_DEVICE (gdk_device), NULL);
+
+	klass = GSD_DEVICE_MANAGER_GET_CLASS (manager);
+	if (!klass->lookup_device)
+		return NULL;
+
+	return klass->lookup_device (manager, gdk_device);
+}
