@@ -40,6 +40,9 @@ struct _GsdX11DeviceManagerClass
 	GsdDeviceManagerClass parent_class;
 };
 
+GsdDevice  * gsd_x11_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
+						       GdkDevice	*gdk_device);
+
 G_DEFINE_TYPE (GsdX11DeviceManager, gsd_x11_device_manager, GSD_TYPE_DEVICE_MANAGER)
 
 static GsdDeviceType
@@ -215,51 +218,20 @@ gsd_x11_device_manager_class_init (GsdX11DeviceManagerClass *klass)
 	GsdDeviceManagerClass *manager_class = GSD_DEVICE_MANAGER_CLASS (klass);
 
 	manager_class->list_devices = gsd_x11_device_manager_list_devices;
-}
-
-GdkDevice **
-gsd_x11_device_manager_get_gdk_devices (GsdX11DeviceManager *manager,
-					GsdDevice	    *device,
-					guint		    *n_gdk_devices)
-{
-	const gchar *device_node;
-	GPtrArray *gdk_devices;
-	GdkDevice *gdk_device;
-	GHashTableIter iter;
-
-	if (n_gdk_devices)
-		*n_gdk_devices = 0;
-
-	g_return_val_if_fail (GSD_IS_X11_DEVICE_MANAGER (manager), NULL);
-	g_return_val_if_fail (GSD_IS_DEVICE (device), NULL);
-
-	gdk_devices = g_ptr_array_new ();
-	g_hash_table_iter_init (&iter, manager->gdk_devices);
-
-	while (g_hash_table_iter_next (&iter, (gpointer *) &gdk_device, (gpointer *) &device_node)) {
-		if (g_strcmp0 (gsd_device_get_device_file (device), device_node) == 0)
-			g_ptr_array_add (gdk_devices, gdk_device);
-	}
-
-	if (n_gdk_devices)
-		*n_gdk_devices = gdk_devices->len;
-
-	return (GdkDevice **) g_ptr_array_free (gdk_devices, FALSE);
+	manager_class->lookup_device = gsd_x11_device_manager_lookup_gdk_device;
 }
 
 GsdDevice *
-gsd_x11_device_manager_lookup_gdk_device (GsdX11DeviceManager *manager,
-					  GdkDevice	      *gdk_device)
+gsd_x11_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
+					  GdkDevice	   *gdk_device)
 {
+	GsdX11DeviceManager *manager_x11 = GSD_X11_DEVICE_MANAGER (manager);
 	const gchar *device_node;
 
-	g_return_val_if_fail (GSD_IS_X11_DEVICE_MANAGER (manager), NULL);
-	g_return_val_if_fail (GDK_IS_DEVICE (gdk_device), NULL);
-
-	device_node = g_hash_table_lookup (manager->gdk_devices, gdk_device);
+	device_node = g_hash_table_lookup (manager_x11->gdk_devices, gdk_device);
 
 	if (!device_node)
 		return NULL;
 
-	return g_hash_table_lookup (manager->devices, device_node);
+	return g_hash_table_lookup (manager_x11->devices, device_node);
 }
