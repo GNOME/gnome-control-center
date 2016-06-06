@@ -23,7 +23,7 @@
 #define _CC_WACOM_STYLUS_PAGE_H
 
 #include <gtk/gtk.h>
-#include "gsd-wacom-device.h"
+#include "cc-wacom-tool.h"
 
 G_BEGIN_DECLS
 
@@ -67,9 +67,9 @@ struct _CcWacomStylusPageClass
 
 GType cc_wacom_stylus_page_get_type (void) G_GNUC_CONST;
 
-GtkWidget * cc_wacom_stylus_page_new (GsdWacomStylus *stylus);
+GtkWidget * cc_wacom_stylus_page_new (CcWacomTool *stylus);
 
-GsdWacomStylus * cc_wacom_stylus_page_get_stylus (CcWacomStylusPage *page);
+CcWacomTool * cc_wacom_stylus_page_get_tool (CcWacomStylusPage *page);
 
 void cc_wacom_stylus_page_set_navigation (CcWacomStylusPage *page,
 					  GtkNotebook *notebook);

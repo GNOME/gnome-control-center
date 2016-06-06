@@ -24,7 +24,7 @@
 
 #include <gtk/gtk.h>
 #include "cc-wacom-panel.h"
-#include "gsd-wacom-device.h"
+#include "cc-wacom-device.h"
 
 G_BEGIN_DECLS
 
@@ -68,13 +68,13 @@ struct _CcWacomPageClass
 
 GType cc_wacom_page_get_type (void) G_GNUC_CONST;
 
-GtkWidget * cc_wacom_page_new (CcWacomPanel   *panel,
-			       GsdWacomDevice *stylus,
-			       GsdWacomDevice *pad);
+GtkWidget * cc_wacom_page_new (CcWacomPanel  *panel,
+			       CcWacomDevice *stylus,
+			       CcWacomDevice *pad);
 
-gboolean cc_wacom_page_update_tools (CcWacomPage    *page,
-				     GsdWacomDevice *stylus,
-				     GsdWacomDevice *pad);
+gboolean cc_wacom_page_update_tools (CcWacomPage   *page,
+				     CcWacomDevice *stylus,
+				     CcWacomDevice *pad);
 
 void cc_wacom_page_set_navigation (CcWacomPage *page,
 				   GtkNotebook *notebook,
