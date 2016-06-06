@@ -47,7 +47,8 @@ const gchar *udev_ids[] = {
 	"ID_INPUT_KEYBOARD",
 	"ID_INPUT_TOUCHPAD",
 	"ID_INPUT_TABLET",
-	"ID_INPUT_TOUCHSCREEN"
+	"ID_INPUT_TOUCHSCREEN",
+	"ID_INPUT_TABLET_PAD",
 };
 
 static GsdDeviceType
