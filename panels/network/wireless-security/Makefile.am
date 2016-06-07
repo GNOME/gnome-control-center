@@ -36,7 +36,9 @@ NM_APPLET_SOURCES = \
 
 libwireless_security_la_SOURCES = \
 	$(BUILT_SOURCES) \
-	$(NM_APPLET_SOURCES)
+	$(NM_APPLET_SOURCES) \
+	utils.c \
+	utils.h
 
 libwireless_security_la_CPPFLAGS = \
 	$(NETWORK_PANEL_CFLAGS) \
