@@ -1361,6 +1361,9 @@ client_connection_removed_cb (NMClient           *client,
                 const char *uuid_r;
 
                 connection = g_object_get_data (G_OBJECT (row), "connection");
+                if (!connection)
+                        continue;
+
                 uuid_r = nm_connection_get_uuid (connection);
                 if (g_strcmp0 (uuid_r, uuid) == 0) {
                         gtk_widget_destroy (row);
