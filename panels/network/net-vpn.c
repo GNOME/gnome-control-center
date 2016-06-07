@@ -68,8 +68,9 @@ connection_changed_cb (NMConnection *connection,
 }
 
 static void
-connection_removed_cb (NMConnection *connection,
-                       NetVpn *vpn)
+connection_removed_cb (NMClient     *client,
+                       NMConnection *connection,
+                       NetVpn       *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
 
