@@ -241,7 +241,7 @@ finish_setup (CEPageSecurity *page)
         if (sws)
                 default_type = get_default_type_for_security (sws);
 
-        sec_model = gtk_list_store_new (3, G_TYPE_STRING, wireless_security_get_g_type (), G_TYPE_BOOLEAN);
+        sec_model = gtk_list_store_new (3, G_TYPE_STRING, wireless_security_get_type (), G_TYPE_BOOLEAN);
 
         if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 gtk_list_store_insert_with_values (sec_model, &iter, -1,
@@ -389,11 +389,9 @@ validate (CEPage        *page,
 
                 if (ssid) {
                         /* FIXME: get failed property and error out of wifi security objects */
-                        valid = wireless_security_validate (sec, ssid);
+                        valid = wireless_security_validate (sec, error);
                         if (valid)
                                 wireless_security_fill_connection (sec, connection);
-                        else
-                                g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Invalid Wi-Fi security");
                 } else {
                         g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_MISSING_SETTING, "Missing SSID");
                         valid = FALSE;
