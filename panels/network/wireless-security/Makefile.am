@@ -56,7 +56,7 @@ wireless-security-resources.h: wireless-security.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name wireless_security $<
 
 WIRELESS_SECURITY_DIR=$(top_srcdir)/../network-manager-applet/src/wireless-security
-WIRELESS_SECURITY_FILES=$(NM_APPLET_SOURCES)
+WIRELESS_SECURITY_FILES=$(NM_APPLET_SOURCES) $(resource_files)
 update-from-nma:
 	FILES="$(WIRELESS_SECURITY_FILES)" DIR="$(WIRELESS_SECURITY_DIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
 	patch -p0 < $(srcdir)/nm-connection-editor-to-network-panel.patch ; \
