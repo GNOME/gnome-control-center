@@ -141,6 +141,8 @@ ui_to_setting (CEPageWifi *page)
         }
         entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_bssid")));
         bssid = gtk_entry_get_text (GTK_ENTRY (entry));
+        if (*bssid == '\0')
+                bssid = NULL;
         entry = gtk_bin_get_child (GTK_BIN (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac")));
         device_mac = ce_page_trim_address (gtk_entry_get_text (GTK_ENTRY (entry)));
         entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_cloned_mac"));
