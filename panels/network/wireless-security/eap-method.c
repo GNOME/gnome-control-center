@@ -241,7 +241,7 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!filename) {
 		if (item_type != TYPE_CA_CERT) {
-			widget_set_error (widget);
+			success = FALSE;
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("no file selected"));
 		}
 		goto out;
@@ -249,7 +249,6 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 
 	if (!g_file_test (filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR)) {
 		success = FALSE;
-		widget_set_error (widget);
 		goto out;
 	}
 
@@ -268,9 +267,6 @@ eap_method_validate_filepicker (GtkBuilder *builder,
 	} else
 		g_warning ("%s: invalid item type %d.", __func__, item_type);
 
-	if (!success)
-		widget_set_error (widget);
-
 	g_object_unref (setting);
 
 out:
@@ -278,8 +274,11 @@ out:
 
 	if (!success && error && !*error)
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("unspecified error validating eap-method file"));
-	else
+
+	if (success)
 		widget_unset_error (widget);
+	else
+		widget_set_error (widget);
 	return success;
 }
 

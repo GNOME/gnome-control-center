@@ -73,23 +73,22 @@ validate (EAPMethod *parent, GError **error)
 		widget_set_error (GTK_WIDGET (method->username_entry));
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP username"));
 		ret = FALSE;
-	} else {
+	} else
 		widget_unset_error (GTK_WIDGET (method->username_entry));
-	}
 
 	/* Check if the password should always be requested */
-	if (always_ask_selected (method->password_entry)) {
+	if (always_ask_selected (method->password_entry))
 		widget_unset_error (GTK_WIDGET (method->password_entry));
-	} else {
+	else {
 		text = gtk_entry_get_text (method->password_entry);
 		if (!text || !strlen (text)) {
 			widget_set_error (GTK_WIDGET (method->password_entry));
-			if (!*error)
+			if (ret) {
 				g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP password"));
-			ret = FALSE;
-		} else {
+				ret = FALSE;
+			}
+		} else
 			widget_unset_error (GTK_WIDGET (method->password_entry));
-		}
 	}
 
 	return ret;

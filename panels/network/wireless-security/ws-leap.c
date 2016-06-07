@@ -62,21 +62,20 @@ validate (WirelessSecurity *parent, GError **error)
 		widget_set_error (entry);
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing leap-username"));
 		ret = FALSE;
-	} else {
+	} else
 		widget_unset_error (entry);
-	}
 
 	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text)) {
 		widget_set_error (entry);
-		if (!*error)
+		if (ret) {
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing leap-password"));
-		ret = FALSE;
-	} else {
+			ret = FALSE;
+		}
+	} else
 		widget_unset_error (entry);
-	}
 
 	return ret;
 }

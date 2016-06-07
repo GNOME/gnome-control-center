@@ -73,15 +73,17 @@ validate (EAPMethod *parent, GError **error)
 
 	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local)) {
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
-		if (!*error)
+		if (ret) {
 			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), local->message);
+			ret = FALSE;
+		}
 		g_clear_error (&local);
-		ret = FALSE;
 	} else if (eap_method_ca_cert_required (parent->builder, "eap_tls_ca_cert_not_required_checkbox", "eap_tls_ca_cert_button")) {
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
-		if (!*error)
+		if (ret) {
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
-		ret = FALSE;
+			ret = FALSE;
+		}
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry"));
@@ -89,9 +91,10 @@ validate (EAPMethod *parent, GError **error)
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!password || !strlen (password)) {
 		widget_set_error (widget);
-		if (!*error)
+		if (ret) {
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS password: missing"));
-		ret = FALSE;
+			ret = FALSE;
+		}
 	} else {
 		widget_unset_error (widget);
 	}
@@ -102,20 +105,22 @@ validate (EAPMethod *parent, GError **error)
 	                                     password,
 	                                     &format,
 	                                     &local)) {
-		if (!*error)
+		if (ret) {
 			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS private-key: %s"), local->message);
+			ret = FALSE;
+		}
 		g_clear_error (&local);
 		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button")));
-		ret = FALSE;
 	}
 
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
 		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL, &local)) {
-			if (!*error)
+			if (ret) {
 				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS user-certificate: %s"), local->message);
+				ret = FALSE;
+			}
 			g_clear_error (&local);
 			widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button")));
-			ret = FALSE;
 		}
 	}
 

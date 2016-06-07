@@ -59,8 +59,7 @@ validate (EAPMethod *parent, GError **error)
 	EAPMethod *eap = NULL;
 	const char *file;
 	gboolean provisioning;
-	gboolean valid = FALSE;
-	gboolean ret = TRUE;
+	gboolean valid = TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 	g_assert (widget);
@@ -71,10 +70,9 @@ validate (EAPMethod *parent, GError **error)
 	if (!provisioning && !file) {
 		widget_set_error (widget);
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP-FAST PAC file"));
-		ret = FALSE;
-	} else {
+		valid = FALSE;
+	} else
 		widget_unset_error (widget);
-	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	g_assert (widget);
@@ -82,9 +80,9 @@ validate (EAPMethod *parent, GError **error)
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
-	valid = eap_method_validate (eap, *error ? NULL : error);
+	valid = eap_method_validate (eap, valid ? error : NULL) && valid;
 	eap_method_unref (eap);
-	return ret ? valid : ret;
+	return valid;
 }
 
 static void
