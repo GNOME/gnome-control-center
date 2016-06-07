@@ -61,7 +61,8 @@ update-from-nma:
 	FILES="$(WIRELESS_SECURITY_FILES)" DIR="$(WIRELESS_SECURITY_DIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
 	patch -p4 < $(srcdir)/nm-connection-editor-to-network-panel.patch ; \
 	patch -p4 < $(srcdir)/nm-connection-editor-ui-to-network-panel.patch ; \
-	git commit -m "network: Update wireless-security from network-manager-applet" $(WIRELESS_SECURITY_FILES)
+	git commit -m "network: Update wireless-security from network-manager-applet" $(NM_APPLET_SOURCES); \
+	git commit -m "network: Update wireless-security UI from network-manager-applet" $(resource_files);
 
 EXTRA_DIST = $(resource_files) wireless-security.gresource.xml nm-connection-editor-to-network-panel.patch nm-connection-editor-ui-to-network-panel.patch
 
