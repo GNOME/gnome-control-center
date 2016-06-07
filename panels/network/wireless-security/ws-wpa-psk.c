@@ -17,20 +17,26 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
+
+#include "nm-default.h"
 
 #include <ctype.h>
 #include <string.h>
-#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "helpers.h"
+#include "nma-ui-utils.h"
+#include "utils.h"
 
 #define WPA_PMK_LEN 32
 
 struct _WirelessSecurityWPAPSK {
 	WirelessSecurity parent;
+
+	gboolean editing_connection;
+	const char *password_flags_name;
 };
 
 static void
@@ -47,29 +53,30 @@ show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, GBytes *ssid)
+validate (WirelessSecurity *parent, GError **error)
 {
 	GtkWidget *entry;
 	const char *key;
-	guint32 len;
+	gsize len;
 	int i;
 
 	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
 	g_assert (entry);
 
 	key = gtk_entry_get_text (GTK_ENTRY (entry));
-	len = strlen (key);
+	len = key ? strlen (key) : 0;
 	if ((len < 8) || (len > 64)) {
 		widget_set_error (entry);
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex digits"), len);
 		return FALSE;
 	}
-	widget_unset_error (entry);
 
 	if (len == 64) {
 		/* Hex PSK */
 		for (i = 0; i < len; i++) {
 			if (!isxdigit (key[i])) {
 				widget_set_error (entry);
+				g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid wpa-psk: cannot interpret key with 64 bytes as hex"));
 				return FALSE;
 			}
 		}
@@ -96,10 +103,12 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 static void
 fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
-	GtkWidget *widget;
+	WirelessSecurityWPAPSK *wpa_psk = (WirelessSecurityWPAPSK *) parent;
+	GtkWidget *widget, *passwd_entry;
 	const char *key;
 	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wireless_sec;
+	NMSettingSecretFlags secret_flags;
 	const char *mode;
 	gboolean is_adhoc = FALSE;
 
@@ -115,8 +124,19 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
+	passwd_entry = widget;
 	key = gtk_entry_get_text (GTK_ENTRY (widget));
 	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK, key, NULL);
+
+	/* Save PSK_FLAGS to the connection */
+	secret_flags = nma_utils_menu_to_secret_flags (passwd_entry);
+	nm_setting_set_secret_flags (NM_SETTING (s_wireless_sec), NM_SETTING_WIRELESS_SECURITY_PSK,
+	                             secret_flags, NULL);
+
+	/* Update secret flags and popup when editing the connection */
+	if (wpa_psk->editing_connection)
+		nma_utils_update_password_storage (passwd_entry, secret_flags,
+		                                   NM_SETTING (s_wireless_sec), wpa_psk->password_flags_name);
 
 	wireless_security_clear_ciphers (connection);
 	if (is_adhoc) {
@@ -153,6 +173,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 {
 	WirelessSecurity *parent;
 	WirelessSecurityWPAPSK *sec;
+	NMSetting *setting = NULL;
 	GtkWidget *widget;
 
 	parent = wireless_security_init (sizeof (WirelessSecurityWPAPSK),
@@ -169,6 +190,8 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 
 	parent->adhoc_compatible = FALSE;
 	sec = (WirelessSecurityWPAPSK *) parent;
+	sec->editing_connection = secrets_only ? FALSE : TRUE;
+	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_PSK;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
 	g_assert (widget);
@@ -176,6 +199,12 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	                  (GCallback) wireless_security_changed_cb,
 	                  sec);
 	gtk_entry_set_width_chars (GTK_ENTRY (widget), 28);
+
+	/* Create password-storage popup menu for password entry under entry's secondary icon */
+	if (connection)
+		setting = (NMSetting *) nm_connection_get_setting_wireless_security (connection);
+	nma_utils_setup_password_storage (widget, 0, setting, sec->password_flags_name,
+	                                  FALSE, secrets_only);
 
 	/* Fill secrets, if any */
 	if (connection)

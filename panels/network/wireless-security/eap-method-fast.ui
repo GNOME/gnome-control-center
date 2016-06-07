@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkListStore" id="model8">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes"> </col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="model9">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Anonymous</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Authenticated</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Both</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkNotebook" id="eap_fast_notebook">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -12,14 +40,14 @@
         <property name="can_focus">False</property>
         <property name="n_rows">5</property>
         <property name="n_columns">2</property>
-        <property name="column_spacing">6</property>
+        <property name="column_spacing">12</property>
         <property name="row_spacing">6</property>
         <child>
           <object class="GtkLabel" id="eap_fast_anon_identity_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Anony_mous identity</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Anony_mous identity:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_fast_anon_identity_entry</property>
           </object>
@@ -44,8 +72,8 @@
           <object class="GtkLabel" id="eap_fast_pac_file_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">PAC _file</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">PAC _file:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_fast_pac_file_button</property>
           </object>
@@ -89,8 +117,8 @@
           <object class="GtkLabel" id="eap_fast_inner_auth_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_Inner authentication</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">_Inner authentication:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_fast_inner_auth_combo</property>
           </object>
@@ -124,11 +152,12 @@
         </child>
         <child>
           <object class="GtkCheckButton" id="eap_fast_pac_provision_checkbutton">
-            <property name="label" translatable="yes">PAC pro_visioning</property>
+            <property name="label" translatable="yes">Allow automatic PAC pro_visioning</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="use_underline">True</property>
+            <property name="draw_indicator">True</property>
           </object>
           <packing>
             <property name="top_attach">1</property>
@@ -169,33 +198,5 @@
         <property name="tab_fill">False</property>
       </packing>
     </child>
-  </object>
-  <object class="GtkListStore" id="model8">
-    <columns>
-      <!-- column-name gchararray -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes"> </col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="model9">
-    <columns>
-      <!-- column-name gchararray -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Anonymous</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Authenticated</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Both</col>
-      </row>
-    </data>
   </object>
 </interface>

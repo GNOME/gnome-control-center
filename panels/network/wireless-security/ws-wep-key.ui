@@ -46,14 +46,14 @@
         <property name="can_focus">False</property>
         <property name="n_rows">4</property>
         <property name="n_columns">2</property>
-        <property name="column_spacing">6</property>
+        <property name="column_spacing">12</property>
         <property name="row_spacing">6</property>
         <child>
           <object class="GtkLabel" id="wep_key_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_Key</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">_Key:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">wep_key_entry</property>
           </object>
@@ -66,6 +66,7 @@
           <object class="GtkEntry" id="wep_key_entry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="max_length">64</property>
             <property name="visibility">False</property>
             <property name="activates_default">True</property>
           </object>
@@ -95,7 +96,6 @@
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="use_underline">True</property>
-            <property name="xalign">0</property>
             <property name="draw_indicator">True</property>
           </object>
           <packing>
@@ -111,8 +111,8 @@
           <object class="GtkLabel" id="auth_method_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Au_thentication</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Au_thentication:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">auth_method_combo</property>
           </object>
@@ -148,8 +148,8 @@
           <object class="GtkLabel" id="key_index_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">WEP inde_x</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">WEP inde_x:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">key_index_combo</property>
           </object>

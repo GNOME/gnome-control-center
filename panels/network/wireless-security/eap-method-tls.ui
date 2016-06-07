@@ -10,9 +10,10 @@
       <object class="GtkTable" id="table8">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="valign">start</property>
         <property name="n_rows">6</property>
         <property name="n_columns">2</property>
-        <property name="column_spacing">6</property>
+        <property name="column_spacing">12</property>
         <property name="row_spacing">6</property>
         <child>
           <placeholder/>
@@ -21,8 +22,8 @@
           <object class="GtkLabel" id="eap_tls_identity_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">I_dentity</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">I_dentity:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_tls_identity_entry</property>
           </object>
@@ -47,8 +48,8 @@
           <object class="GtkLabel" id="eap_tls_user_cert_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_User certificate</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">_User certificate:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_tls_user_cert_button</property>
           </object>
@@ -63,8 +64,8 @@
           <object class="GtkLabel" id="eap_tls_ca_cert_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">C_A certificate</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">C_A certificate:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_tls_ca_cert_button</property>
           </object>
@@ -90,17 +91,35 @@
           </packing>
         </child>
         <child>
+          <object class="GtkCheckButton" id="eap_tls_ca_cert_not_required_checkbox">
+            <property name="label" translatable="yes">No CA certificate is _required</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="use_underline">True</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+            <property name="top_attach">3</property>
+            <property name="bottom_attach">4</property>
+            <property name="x_options">GTK_FILL</property>
+            <property name="y_options"/>
+          </packing>
+        </child>
+        <child>
           <object class="GtkLabel" id="eap_tls_private_key_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Private _key</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Private _key:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_tls_private_key_button</property>
           </object>
           <packing>
-            <property name="top_attach">3</property>
-            <property name="bottom_attach">4</property>
+            <property name="top_attach">4</property>
+            <property name="bottom_attach">5</property>
             <property name="x_options">GTK_FILL</property>
             <property name="y_options"/>
           </packing>
@@ -113,8 +132,8 @@
           <packing>
             <property name="left_attach">1</property>
             <property name="right_attach">2</property>
-            <property name="top_attach">3</property>
-            <property name="bottom_attach">4</property>
+            <property name="top_attach">4</property>
+            <property name="bottom_attach">5</property>
             <property name="x_options">GTK_FILL</property>
             <property name="y_options">GTK_FILL</property>
           </packing>
@@ -123,14 +142,14 @@
           <object class="GtkLabel" id="eap_tls_private_key_password_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_Private key password</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">_Private key password:</property>
             <property name="use_underline">True</property>
             <property name="mnemonic_widget">eap_tls_private_key_password_entry</property>
           </object>
           <packing>
-            <property name="top_attach">4</property>
-            <property name="bottom_attach">5</property>
+            <property name="top_attach">5</property>
+            <property name="bottom_attach">6</property>
             <property name="x_options">GTK_FILL</property>
             <property name="y_options"/>
           </packing>
@@ -145,8 +164,8 @@
           <packing>
             <property name="left_attach">1</property>
             <property name="right_attach">2</property>
-            <property name="top_attach">4</property>
-            <property name="bottom_attach">5</property>
+            <property name="top_attach">5</property>
+            <property name="bottom_attach">6</property>
             <property name="y_options"/>
           </packing>
         </child>
@@ -157,14 +176,13 @@
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="use_underline">True</property>
-            <property name="xalign">0</property>
             <property name="draw_indicator">True</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
             <property name="right_attach">2</property>
-            <property name="top_attach">5</property>
-            <property name="bottom_attach">6</property>
+            <property name="top_attach">6</property>
+            <property name="bottom_attach">7</property>
             <property name="x_options">GTK_FILL</property>
             <property name="y_options"/>
           </packing>

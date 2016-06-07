@@ -17,11 +17,19 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
 #ifndef WS_WPA_PSK_H
 #define WS_WPA_PSK_H
+
+#if defined (LIBNM_BUILD)
+#include <NetworkManager.h>
+#elif defined (LIBNM_GLIB_BUILD)
+#include <nm-connection.h>
+#else
+#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
+#endif
 
 typedef struct _WirelessSecurityWPAPSK WirelessSecurityWPAPSK;
 

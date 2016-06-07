@@ -17,25 +17,24 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "config.h"
+#include "nm-default.h"
 
-#include <glib/gi18n.h>
 #include <ctype.h>
 #include <string.h>
-
-#include <NetworkManager.h>
 
 #include "eap-method.h"
 #include "wireless-security.h"
 #include "helpers.h"
+#include "nma-ui-utils.h"
+#include "utils.h"
 
 struct _EAPMethodTLS {
 	EAPMethod parent;
 
-	gboolean new_connection;
+	gboolean editing_connection;
 };
 
 
@@ -53,11 +52,12 @@ show_toggled_cb (GtkCheckButton *button, EAPMethod *method)
 }
 
 static gboolean
-validate (EAPMethod *parent)
+validate (EAPMethod *parent, GError **error)
 {
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
 	const char *password, *identity;
+	GError *local = NULL;
 	gboolean ret = TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
@@ -65,17 +65,23 @@ validate (EAPMethod *parent)
 	identity = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!identity || !strlen (identity)) {
 		widget_set_error (widget);
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP-TLS identity"));
 		ret = FALSE;
 	} else {
 		widget_unset_error (widget);
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button"));
-	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL)) {
-		widget_set_error (widget);
+	if (!eap_method_validate_filepicker (parent->builder, "eap_tls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local)) {
+		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
+		if (!*error)
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), local->message);
+		g_clear_error (&local);
 		ret = FALSE;
-	} else {
-		widget_unset_error (widget);
+	} else if (eap_method_ca_cert_required (parent->builder, "eap_tls_ca_cert_not_required_checkbox", "eap_tls_ca_cert_button")) {
+		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button")));
+		if (!*error)
+			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
+		ret = FALSE;
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_password_entry"));
@@ -83,28 +89,33 @@ validate (EAPMethod *parent)
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!password || !strlen (password)) {
 		widget_set_error (widget);
+		if (!*error)
+			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS password: missing"));
 		ret = FALSE;
 	} else {
 		widget_unset_error (widget);
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button"));
 	if (!eap_method_validate_filepicker (parent->builder,
 	                                     "eap_tls_private_key_button",
 	                                     TYPE_PRIVATE_KEY,
 	                                     password,
-	                                     &format)) {
-	        widget_set_error (widget);
+	                                     &format,
+	                                     &local)) {
+		if (!*error)
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS private-key: %s"), local->message);
+		g_clear_error (&local);
+		widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button")));
 		ret = FALSE;
 	}
 
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button"));
-		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL)) {
-			widget_set_error (widget);
+		if (!eap_method_validate_filepicker (parent->builder, "eap_tls_user_cert_button", TYPE_CLIENT_CERT, NULL, NULL, &local)) {
+			if (!*error)
+				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS user-certificate: %s"), local->message);
+			g_clear_error (&local);
+			widget_set_error (GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_user_cert_button")));
 			ret = FALSE;
-		} else {
-			widget_unset_error (widget);
 		}
 	}
 
@@ -112,9 +123,21 @@ validate (EAPMethod *parent)
 }
 
 static void
+ca_cert_not_required_toggled (GtkWidget *ignored, gpointer user_data)
+{
+	EAPMethod *parent = user_data;
+
+	eap_method_ca_cert_not_required_toggled (parent->builder, "eap_tls_ca_cert_not_required_checkbox", "eap_tls_ca_cert_button");
+}
+
+static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
 	GtkWidget *widget;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox"));
+	g_assert (widget);
+	gtk_size_group_add_widget (group, widget);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_label"));
 	g_assert (widget);
@@ -138,16 +161,17 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection)
+fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
 {
 	EAPMethodTLS *method = (EAPMethodTLS *) parent;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	NMSetting8021x *s_8021x;
-	GtkWidget *widget;
+	NMSettingSecretFlags secret_flags;
+	GtkWidget *widget, *passwd_entry;
 	char *ca_filename, *pk_filename, *cc_filename;
 	const char *password = NULL;
 	GError *error = NULL;
-	const char *secret_flag_prop = NULL;
+	gboolean ca_cert_error = FALSE;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
@@ -166,6 +190,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	g_assert (widget);
 	password = gtk_entry_get_text (GTK_ENTRY (widget));
 	g_assert (password);
+	passwd_entry = widget;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_private_key_button"));
 	g_assert (widget);
@@ -177,22 +202,23 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 			g_warning ("Couldn't read phase2 private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
 			g_clear_error (&error);
 		}
-		secret_flag_prop = NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD_FLAGS;
 	} else {
 		if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 			g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
 			g_clear_error (&error);
 		}
-		secret_flag_prop = NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD_FLAGS;
 	}
 	g_free (pk_filename);
 
-	/* Default to agent-owned secrets for new connections */
-	if (method->new_connection) {
-		g_object_set (s_8021x,
-		              secret_flag_prop, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
-		              NM_SETTING_802_1X_SYSTEM_CA_CERTS, TRUE,
-		              NULL);
+	/* Save 802.1X password flags to the connection */
+	secret_flags = nma_utils_menu_to_secret_flags (passwd_entry);
+	nm_setting_set_secret_flags (NM_SETTING (s_8021x), parent->password_flags_name,
+	                             secret_flags, NULL);
+
+	/* Update secret flags and popup when editing the connection */
+	if (method->editing_connection) {
+		nma_utils_update_password_storage (passwd_entry, secret_flags,
+		                                   NM_SETTING (s_8021x), parent->password_flags_name);
 	}
 
 	/* TLS client certificate */
@@ -230,13 +256,17 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 		if (!nm_setting_802_1x_set_phase2_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 			g_warning ("Couldn't read phase2 CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
 			g_clear_error (&error);
+			ca_cert_error = TRUE;
 		}
 	} else {
 		if (!nm_setting_802_1x_set_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 			g_warning ("Couldn't read CA certificate '%s': %s", ca_filename, error ? error->message : "(unknown)");
 			g_clear_error (&error);
+			ca_cert_error = TRUE;
 		}
 	}
+	eap_method_ca_cert_ignore_set (parent, connection, ca_filename, ca_cert_error);
+	g_free (ca_filename);
 }
 
 static void
@@ -415,6 +445,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	EAPMethod *parent;
 	GtkWidget *widget;
 	NMSetting8021x *s_8021x = NULL;
+	gboolean ca_not_required = FALSE;
 
 	parent = eap_method_init (sizeof (EAPMethodTLS),
 	                          validate,
@@ -429,13 +460,23 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	if (!parent)
 		return NULL;
 
+	parent->password_flags_name = phase2 ?
+	                                NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD :
+	                                NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD;
 	method = (EAPMethodTLS *) parent;
-	method->new_connection = secrets_only ? FALSE : TRUE;
-
-	eap_method_nag_init (parent, "eap_tls_ca_cert_button", connection);
+	method->editing_connection = secrets_only ? FALSE : TRUE;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox"));
+	g_assert (widget);
+	g_signal_connect (G_OBJECT (widget), "toggled",
+	                  (GCallback) ca_cert_not_required_toggled,
+	                  parent);
+	g_signal_connect (G_OBJECT (widget), "toggled",
+	                  (GCallback) wireless_security_changed_cb,
+	                  ws_parent);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_entry"));
 	g_assert (widget);
@@ -464,6 +505,13 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                  phase2 ? nm_setting_802_1x_get_phase2_private_key_path : nm_setting_802_1x_get_private_key_path,
 	                  TRUE, FALSE);
 
+	if (connection && eap_method_ca_cert_ignore_get (parent, connection)) {
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button"));
+		ca_not_required = !gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+	}
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox"));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), ca_not_required);
+
 	/* Fill secrets, if any */
 	if (connection)
 		update_secrets (parent, connection);
@@ -473,6 +521,10 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);
+
+	/* Create password-storage popup menu for password entry under entry's secondary icon */
+	nma_utils_setup_password_storage (widget, 0, (NMSetting *) s_8021x, parent->password_flags_name,
+	                                  FALSE, secrets_only);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eaptls"));
 	g_assert (widget);
@@ -494,6 +546,8 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_label"));
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_button"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox"));
 		gtk_widget_hide (widget);
 	}
 

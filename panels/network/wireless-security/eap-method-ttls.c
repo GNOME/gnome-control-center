@@ -17,18 +17,17 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "config.h"
+#include "nm-default.h"
 
-#include <glib/gi18n.h>
 #include <ctype.h>
 #include <string.h>
-#include <NetworkManager.h>
 
 #include "eap-method.h"
 #include "wireless-security.h"
+#include "utils.h"
 
 #define I_NAME_COLUMN   0
 #define I_METHOD_COLUMN 1
@@ -51,16 +50,24 @@ destroy (EAPMethod *parent)
 }
 
 static gboolean
-validate (EAPMethod *parent)
+validate (EAPMethod *parent, GError **error)
 {
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	EAPMethod *eap = NULL;
 	gboolean valid = FALSE;
+	GError *local = NULL;
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL))
+	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL, &local)) {
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: %s"), local->message);
+		g_clear_error (&local);
 		return FALSE;
+	}
+	if (eap_method_ca_cert_required (parent->builder, "eap_ttls_ca_cert_not_required_checkbox", "eap_ttls_ca_cert_button")) {
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TTLS CA certificate: no certificate specified"));
+		return FALSE;
+	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
 	g_assert (widget);
@@ -69,9 +76,17 @@ validate (EAPMethod *parent)
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
-	valid = eap_method_validate (eap);
+	valid = eap_method_validate (eap, error);
 	eap_method_unref (eap);
 	return valid;
+}
+
+static void
+ca_cert_not_required_toggled (GtkWidget *ignored, gpointer user_data)
+{
+	EAPMethod *parent = user_data;
+
+	eap_method_ca_cert_not_required_toggled (parent->builder, "eap_ttls_ca_cert_not_required_checkbox", "eap_ttls_ca_cert_button");
 }
 
 static void
@@ -86,6 +101,10 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 	if (method->size_group)
 		g_object_unref (method->size_group);
 	method->size_group = g_object_ref (group);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_not_required_checkbox"));
+	g_assert (widget);
+	gtk_size_group_add_widget (group, widget);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_label"));
 	g_assert (widget);
@@ -111,7 +130,7 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection)
+fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
 {
 	NMSetting8021x *s_8021x;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
@@ -122,6 +141,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GError *error = NULL;
+	gboolean ca_cert_error = FALSE;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
@@ -140,7 +160,10 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		g_clear_error (&error);
+		ca_cert_error = TRUE;
 	}
+	eap_method_ca_cert_ignore_set (parent, connection, filename, ca_cert_error);
+	g_free (filename);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -148,7 +171,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
 
-	eap_method_fill_connection (eap, connection);
+	eap_method_fill_connection (eap, connection, flags);
 	eap_method_unref (eap);
 }
 
@@ -205,10 +228,13 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	EAPMethodSimple *em_mschap;
 	EAPMethodSimple *em_mschap_v2;
 	EAPMethodSimple *em_chap;
+	EAPMethodSimple *em_md5;
+	EAPMethodSimple *em_gtc;
 	guint32 active = 0;
 	const char *phase2_auth = NULL;
+	EAPMethodSimpleFlags simple_flags;
 
-	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_g_type ());
+	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_type ());
 
 	if (s_8021x) {
 		if (nm_setting_802_1x_get_phase2_auth (s_8021x))
@@ -217,12 +243,16 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 			phase2_auth = nm_setting_802_1x_get_phase2_autheap (s_8021x);
 	}
 
+	simple_flags = EAP_METHOD_SIMPLE_FLAG_PHASE2 | EAP_METHOD_SIMPLE_FLAG_AUTHEAP_ALLOWED;
+	if (method->is_editor)
+		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
+	if (secrets_only)
+		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
+
 	em_pap = eap_method_simple_new (method->sec_parent,
 	                                connection,
 	                                EAP_METHOD_SIMPLE_TYPE_PAP,
-	                                TRUE,
-	                                method->is_editor,
-	                                secrets_only);
+	                                simple_flags);
 	gtk_list_store_append (auth_model, &iter);
 	gtk_list_store_set (auth_model, &iter,
 	                    I_NAME_COLUMN, _("PAP"),
@@ -237,9 +267,7 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	em_mschap = eap_method_simple_new (method->sec_parent,
 	                                   connection,
 	                                   EAP_METHOD_SIMPLE_TYPE_MSCHAP,
-	                                   TRUE,
-	                                   method->is_editor,
-	                                   secrets_only);
+	                                   simple_flags);
 	gtk_list_store_append (auth_model, &iter);
 	gtk_list_store_set (auth_model, &iter,
 	                    I_NAME_COLUMN, _("MSCHAP"),
@@ -254,8 +282,7 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	em_mschap_v2 = eap_method_simple_new (method->sec_parent,
 	                                      connection,
 	                                      EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2,
-	                                      TRUE,
-	                                      method->is_editor, secrets_only);
+	                                      simple_flags);
 	gtk_list_store_append (auth_model, &iter);
 	gtk_list_store_set (auth_model, &iter,
 	                    I_NAME_COLUMN, _("MSCHAPv2"),
@@ -270,9 +297,7 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	em_chap = eap_method_simple_new (method->sec_parent,
 	                                 connection,
 	                                 EAP_METHOD_SIMPLE_TYPE_CHAP,
-	                                 TRUE,
-	                                 method->is_editor,
-	                                 secrets_only);
+	                                 simple_flags);
 	gtk_list_store_append (auth_model, &iter);
 	gtk_list_store_set (auth_model, &iter,
 	                    I_NAME_COLUMN, _("CHAP"),
@@ -283,6 +308,36 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	/* Check for defaulting to CHAP */
 	if (phase2_auth && !strcasecmp (phase2_auth, "chap"))
 		active = 3;
+
+	em_md5 = eap_method_simple_new (method->sec_parent,
+	                                connection,
+	                                EAP_METHOD_SIMPLE_TYPE_MD5,
+	                                simple_flags);
+	gtk_list_store_append (auth_model, &iter);
+	gtk_list_store_set (auth_model, &iter,
+	                    I_NAME_COLUMN, _("MD5"),
+	                    I_METHOD_COLUMN, em_md5,
+	                    -1);
+	eap_method_unref (EAP_METHOD (em_md5));
+
+	/* Check for defaulting to MD5 */
+	if (phase2_auth && !strcasecmp (phase2_auth, "md5"))
+		active = 4;
+
+	em_gtc = eap_method_simple_new (method->sec_parent,
+	                                connection,
+	                                EAP_METHOD_SIMPLE_TYPE_GTC,
+	                                simple_flags);
+	gtk_list_store_append (auth_model, &iter);
+	gtk_list_store_set (auth_model, &iter,
+	                    I_NAME_COLUMN, _("GTC"),
+	                    I_METHOD_COLUMN, em_gtc,
+	                    -1);
+	eap_method_unref (EAP_METHOD (em_gtc));
+
+	/* Check for defaulting to GTC */
+	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
+		active = 5;
 
 	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
 	g_assert (combo);
@@ -314,7 +369,7 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 {
 	EAPMethod *parent;
 	EAPMethodTTLS *method;
-	GtkWidget *widget;
+	GtkWidget *widget, *widget_ca_not_required_checkbox;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
@@ -332,14 +387,23 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	if (!parent)
 		return NULL;
 
-	eap_method_nag_init (parent, "eap_ttls_ca_cert_button", connection);
-
+	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
 	method = (EAPMethodTTLS *) parent;
 	method->sec_parent = ws_parent;
 	method->is_editor = is_editor;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_not_required_checkbox"));
+	g_assert (widget);
+	g_signal_connect (G_OBJECT (widget), "toggled",
+	                  (GCallback) ca_cert_not_required_toggled,
+	                  parent);
+	g_signal_connect (G_OBJECT (widget), "toggled",
+	                  (GCallback) wireless_security_changed_cb,
+	                  ws_parent);
+	widget_ca_not_required_checkbox = widget;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
 	g_assert (widget);
@@ -352,11 +416,14 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	filter = eap_method_default_file_chooser_filter_new (FALSE);
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
 	if (connection && s_8021x) {
+		filename = NULL;
 		if (nm_setting_802_1x_get_ca_cert_scheme (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH) {
 			filename = nm_setting_802_1x_get_ca_cert_path (s_8021x);
 			if (filename)
 				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
 		}
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget_ca_not_required_checkbox),
+		                              !filename && eap_method_ca_cert_ignore_get (parent, connection));
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_entry"));
@@ -377,6 +444,8 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_label"));
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_not_required_checkbox"));
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_label"));
 		gtk_widget_hide (widget);

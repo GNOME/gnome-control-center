@@ -17,18 +17,22 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
+#include "nm-default.h"
+
 #include <string.h>
-#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "helpers.h"
+#include "nma-ui-utils.h"
+#include "utils.h"
 
 struct _WirelessSecurityLEAP {
 	WirelessSecurity parent;
-	gboolean new_connection;
+	gboolean editing_connection;
+	const char *password_flags_name;
 };
 
 static void
@@ -45,7 +49,7 @@ show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, GBytes *ssid)
+validate (WirelessSecurity *parent, GError **error)
 {
 	GtkWidget *entry;
 	const char *text;
@@ -56,6 +60,7 @@ validate (WirelessSecurity *parent, GBytes *ssid)
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text)) {
 		widget_set_error (entry);
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing leap-username"));
 		ret = FALSE;
 	} else {
 		widget_unset_error (entry);
@@ -64,8 +69,10 @@ validate (WirelessSecurity *parent, GBytes *ssid)
 	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
-	if (!text || *text == '\0') {
+	if (!text || !strlen (text)) {
 		widget_set_error (entry);
+		if (!*error)
+			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing leap-password"));
 		ret = FALSE;
 	} else {
 		widget_unset_error (entry);
@@ -91,7 +98,8 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
 	WirelessSecurityLEAP *sec = (WirelessSecurityLEAP *) parent;
 	NMSettingWirelessSecurity *s_wireless_sec;
-	GtkWidget *widget;
+	NMSettingSecretFlags secret_flags;
+	GtkWidget *widget, *passwd_entry;
 	const char *leap_password = NULL, *leap_username = NULL;
 
 	/* Blow away the old security setting by adding a clear one */
@@ -102,6 +110,7 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	leap_username = gtk_entry_get_text (GTK_ENTRY (widget));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
+	passwd_entry = widget;
 	leap_password = gtk_entry_get_text (GTK_ENTRY (widget));
 
 	g_object_set (s_wireless_sec,
@@ -111,12 +120,15 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	              NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD, leap_password,
 	              NULL);
 
-	/* Default to agent-owned secrets for new connections */
-	if (sec->new_connection) {
-		g_object_set (s_wireless_sec,
-		              NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
-		              NULL);
-	}
+	/* Save LEAP_PASSWORD_FLAGS to the connection */
+	secret_flags = nma_utils_menu_to_secret_flags (passwd_entry);
+	nm_setting_set_secret_flags (NM_SETTING (s_wireless_sec), sec->password_flags_name,
+	                             secret_flags, NULL);
+
+	/* Update secret flags and popup when editing the connection */
+	if (sec->editing_connection)
+		nma_utils_update_password_storage (passwd_entry, secret_flags,
+		                                   NM_SETTING (s_wireless_sec), sec->password_flags_name);
 }
 
 static void
@@ -162,14 +174,21 @@ ws_leap_new (NMConnection *connection, gboolean secrets_only)
 	}
 
 	parent->adhoc_compatible = FALSE;
+	parent->hotspot_compatible = FALSE;
 	sec = (WirelessSecurityLEAP *) parent;
-	sec->new_connection = secrets_only ? FALSE : TRUE;
+	sec->editing_connection = secrets_only ? FALSE : TRUE;
+	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_LEAP_PASSWORD;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  sec);
+
+	/* Create password-storage popup menu for password entry under entry's secondary icon */
+	nma_utils_setup_password_storage (widget, 0, (NMSetting *) wsec, sec->password_flags_name,
+	                                  FALSE, secrets_only);
+
 	if (wsec)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 

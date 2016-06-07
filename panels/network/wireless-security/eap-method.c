@@ -18,32 +18,31 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2012 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "config.h"
+#include "nm-default.h"
 
-#include <glib.h>
-#include <glib/gi18n.h>
-#include <gtk/gtk.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <NetworkManager.h>
 
 #include "eap-method.h"
+#include "nm-utils.h"
+#include "utils.h"
+#include "helpers.h"
 
 GType
-eap_method_get_g_type (void)
+eap_method_get_type (void)
 {
 	static GType type_id = 0;
 
 	if (!type_id) {
 		type_id = g_boxed_type_register_static ("CcEAPMethod",
-		                                        (GBoxedCopyFunc) eap_method_ref,
-		                                        (GBoxedFreeFunc) eap_method_unref);
+							(GBoxedCopyFunc) eap_method_ref,
+							(GBoxedFreeFunc) eap_method_unref);
 	}
 
 	return type_id;
@@ -58,12 +57,17 @@ eap_method_get_widget (EAPMethod *method)
 }
 
 gboolean
-eap_method_validate (EAPMethod *method)
+eap_method_validate (EAPMethod *method, GError **error)
 {
+	gboolean result;
+
 	g_return_val_if_fail (method != NULL, FALSE);
 
 	g_assert (method->validate);
-	return (*(method->validate)) (method);
+	result = (*(method->validate)) (method, error);
+	if (!result && error && !*error)
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("undefined error in 802.1x security (wpa-eap)"));
+	return result;
 }
 
 void
@@ -77,13 +81,15 @@ eap_method_add_to_size_group (EAPMethod *method, GtkSizeGroup *group)
 }
 
 void
-eap_method_fill_connection (EAPMethod *method, NMConnection *connection)
+eap_method_fill_connection (EAPMethod *method,
+                            NMConnection *connection,
+                            NMSettingSecretFlags flags)
 {
 	g_return_if_fail (method != NULL);
 	g_return_if_fail (connection != NULL);
 
 	g_assert (method->fill_connection);
-	return (*(method->fill_connection)) (method, connection);
+	return (*(method->fill_connection)) (method, connection, flags);
 }
 
 void
@@ -94,197 +100,6 @@ eap_method_update_secrets (EAPMethod *method, NMConnection *connection)
 
 	if (method->update_secrets)
 		method->update_secrets (method, connection);
-}
-
-typedef struct {
-	EAPMethod *method;
-	NMConnection *connection;
-} NagDialogResponseInfo;
-
-static void
-nag_dialog_destroyed (gpointer data, GObject *dialog_ptr)
-{
-	NagDialogResponseInfo *info = (NagDialogResponseInfo *) data;
-
-	memset (info, '\0', sizeof (NagDialogResponseInfo));
-	g_free (info);
-}
-
-static GSettings *
-_get_ca_ignore_settings (const char *uuid)
-{
-	GSettings *settings;
-	char *path = NULL;
-
-	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s/", uuid);
-	settings = g_settings_new_with_path ("org.gnome.nm-applet.eap", path);
-	g_free (path);
-
-	return settings;
-}
-
-static void
-_set_ignore_ca_cert (const char *uuid, gboolean phase2, gboolean ignore)
-{
-	GSettings *settings;
-	const char *key;
-
-	g_return_if_fail (uuid != NULL);
-
-	settings = _get_ca_ignore_settings (uuid);
-	key = phase2 ? "ignore-phase2-ca-cert" : "ignore-ca-cert";
-	g_settings_set_boolean (settings, key, ignore);
-	g_object_unref (settings);
-}
-
-static void
-nag_dialog_response_cb (GtkDialog *nag_dialog,
-                        gint response,
-                        gpointer user_data)
-{
-	NagDialogResponseInfo *info = (NagDialogResponseInfo *) user_data;
-	EAPMethod *method = (EAPMethod *) info->method;
-	NMConnection *connection = (NMConnection *) info->connection;
-	GtkWidget *widget;
-
-	if (response == GTK_RESPONSE_NO) {
-		/* Grab the value of the "don't bother me" checkbox */
-		widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "ignore_checkbox"));
-		g_assert (widget);
-
-		method->ignore_ca_cert = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-
-		/* And save it */
-		_set_ignore_ca_cert (nm_connection_get_uuid (connection),
-		                     method->phase2,
-		                     method->ignore_ca_cert);
-	}
-
-	gtk_widget_hide (GTK_WIDGET (nag_dialog));
-}
-
-static gboolean 
-nag_dialog_delete_event_cb (GtkDialog *nag_dialog, GdkEvent *e, gpointer user_data) 
-{ 
-	// FIXME?: By emitting response signal, dismissing nag dialog with upper right "x" icon,
-	// Alt-F4, or Esc would have the same behaviour as clicking "Ignore" button.
-	//g_signal_emit_by_name (nag_dialog, "response", GTK_RESPONSE_NO, user_data);
-	return TRUE;  /* do not destroy */
-} 
-
-GtkWidget *
-eap_method_nag_user (EAPMethod *method)
-{
-	GtkWidget *widget;
-	char *filename = NULL;
-
-	g_return_val_if_fail (method != NULL, NULL);
-
-	if (!method->nag_dialog || method->ignore_ca_cert)
-		return NULL;
-
-	/* Checkbox should be unchecked each time dialog comes up */
-	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "ignore_checkbox"));
-	g_assert (widget);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
-
-	/* Nag the user if the CA Cert is blank, since it's a security risk. */
-	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, method->ca_cert_chooser));
-	g_assert (widget);
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
-	if (filename != NULL) {
-		g_free (filename);
-		return NULL;
-	}
-
-	gtk_window_present (GTK_WINDOW (method->nag_dialog));
-	return method->nag_dialog;
-}
-
-#define NAG_DIALOG_UI "/org/gnome/control-center/network/nag-user-dialog.ui"
-
-static gboolean
-_get_ignore_ca_cert (const char *uuid, gboolean phase2)
-{
-	GSettings *settings;
-	const char *key;
-	gboolean ignore = FALSE;
-
-	g_return_val_if_fail (uuid != NULL, FALSE);
-
-	settings = _get_ca_ignore_settings (uuid);
-
-	key = phase2 ? "ignore-phase2-ca-cert" : "ignore-ca-cert";
-	ignore = g_settings_get_boolean (settings, key);
-
-	g_object_unref (settings);
-	return ignore;
-}
-
-gboolean
-eap_method_nag_init (EAPMethod *method,
-                     const char *ca_cert_chooser,
-                     NMConnection *connection)
-{
-	GtkWidget *dialog, *widget;
-	NagDialogResponseInfo *info;
-	GError *error = NULL;
-	char *text;
-
-	g_return_val_if_fail (method != NULL, FALSE);
-	g_return_val_if_fail (ca_cert_chooser != NULL, FALSE);
-
-	method->nag_builder = gtk_builder_new ();
-	if (!gtk_builder_add_from_resource (method->nag_builder, NAG_DIALOG_UI, &error)) {
-		g_warning ("Couldn't load UI builder file " NAG_DIALOG_UI ": %s",
-		           error->message);
-		g_error_free (error);
-		return FALSE;
-	}
-
-	method->ca_cert_chooser = g_strdup (ca_cert_chooser);
-	if (connection) {
-		NMSettingConnection *s_con;
-		const char *uuid;
-
-		s_con = nm_connection_get_setting_connection (connection);
-		g_assert (s_con);
-		uuid = nm_setting_connection_get_uuid (s_con);
-		g_assert (uuid);
-
-		/* Figure out if the user wants to ignore missing CA cert */
-		method->ignore_ca_cert = _get_ignore_ca_cert (uuid, method->phase2);
-	}
-
-	info = g_malloc0 (sizeof (NagDialogResponseInfo));
-	info->method = method;
-	info->connection = connection;
-
-	dialog = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "nag_user_dialog"));
-	g_assert (dialog);
-	g_signal_connect (dialog, "response", G_CALLBACK (nag_dialog_response_cb), info);
-	g_signal_connect (dialog, "delete-event", G_CALLBACK (nag_dialog_delete_event_cb), info);
-	g_object_weak_ref (G_OBJECT (dialog), nag_dialog_destroyed, info);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "content_label"));
-	g_assert (widget);
-
-	text = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
-	                        _("No Certificate Authority certificate chosen"),
-	                        _("Not using a Certificate Authority (CA) certificate can result in connections to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate Authority certificate?"));
-	gtk_label_set_markup (GTK_LABEL (widget), text);
-	g_free (text);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "ignore_button"));
-	gtk_button_set_label (GTK_BUTTON (widget), _("Ignore"));
-	g_assert (widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "change_button"));
-	gtk_button_set_label (GTK_BUTTON (widget), _("Choose CA Certificate"));
-	g_assert (widget);
-
-	method->nag_dialog = dialog;
-	return TRUE;
 }
 
 void
@@ -347,7 +162,6 @@ eap_method_init (gsize obj_size,
 	method->add_to_size_group = add_to_size_group;
 	method->fill_connection = fill_connection;
 	method->update_secrets = update_secrets;
-	method->destroy = destroy;
 	method->default_field = default_field;
 	method->phase2 = phase2;
 
@@ -367,6 +181,8 @@ eap_method_init (gsize obj_size,
 		return NULL;
 	}
 	g_object_ref_sink (method->ui_widget);
+
+	method->destroy = destroy;
 
 	return method;
 }
@@ -393,11 +209,6 @@ eap_method_unref (EAPMethod *method)
 		if (method->destroy)
 			method->destroy (method);
 
-		if (method->nag_dialog)
-			gtk_widget_destroy (method->nag_dialog);
-		if (method->nag_builder)
-			g_object_unref (method->nag_builder);
-		g_free (method->ca_cert_chooser);
 		if (method->builder)
 			g_object_unref (method->builder);
 		if (method->ui_widget)
@@ -412,61 +223,67 @@ eap_method_validate_filepicker (GtkBuilder *builder,
                                 const char *name,
                                 guint32 item_type,
                                 const char *password,
-                                NMSetting8021xCKFormat *out_format)
+                                NMSetting8021xCKFormat *out_format,
+                                GError **error)
 {
 	GtkWidget *widget;
 	char *filename;
 	NMSetting8021x *setting;
-	gboolean success = FALSE;
-	GError *error = NULL;
+	gboolean success = TRUE;
 
 	if (item_type == TYPE_PRIVATE_KEY) {
-		g_return_val_if_fail (password != NULL, FALSE);
-		g_return_val_if_fail (strlen (password), FALSE);
+		if (!password || *password == '\0')
+			success = FALSE;
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, name));
 	g_assert (widget);
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
-	if (!filename)
-		return (item_type == TYPE_CA_CERT) ? TRUE : FALSE;
-
-	if (!g_file_test (filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR))
+	if (!filename) {
+		if (item_type != TYPE_CA_CERT) {
+			widget_set_error (widget);
+			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("no file selected"));
+		}
 		goto out;
+	}
+
+	if (!g_file_test (filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR)) {
+		success = FALSE;
+		widget_set_error (widget);
+		goto out;
+	}
 
 	setting = (NMSetting8021x *) nm_setting_802_1x_new ();
 
+	success = FALSE;
 	if (item_type == TYPE_PRIVATE_KEY) {
-		if (!nm_setting_802_1x_set_private_key (setting, filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, out_format, &error)) {
-			g_warning ("Error: couldn't verify private key: %d %s",
-			           error ? error->code : -1, error ? error->message : "(none)");
-			g_clear_error (&error);
-		} else
+		if (nm_setting_802_1x_set_private_key (setting, filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, out_format, error))
 			success = TRUE;
 	} else if (item_type == TYPE_CLIENT_CERT) {
-		if (!nm_setting_802_1x_set_client_cert (setting, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, out_format, &error)) {
-			g_warning ("Error: couldn't verify client certificate: %d %s",
-			           error ? error->code : -1, error ? error->message : "(none)");
-			g_clear_error (&error);
-		} else
+		if (nm_setting_802_1x_set_client_cert (setting, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, out_format, error))
 			success = TRUE;
 	} else if (item_type == TYPE_CA_CERT) {
-		if (!nm_setting_802_1x_set_ca_cert (setting, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, out_format, &error)) {
-			g_warning ("Error: couldn't verify CA certificate: %d %s",
-			           error ? error->code : -1, error ? error->message : "(none)");
-			g_clear_error (&error);
-		} else
+		if (nm_setting_802_1x_set_ca_cert (setting, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, out_format, error))
 			success = TRUE;
 	} else
 		g_warning ("%s: invalid item type %d.", __func__, item_type);
+
+	if (!success)
+		widget_set_error (widget);
 
 	g_object_unref (setting);
 
 out:
 	g_free (filename);
+
+	if (!success && error && !*error)
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("unspecified error validating eap-method file"));
+	else
+		widget_unset_error (widget);
 	return success;
 }
 
+#ifdef LIBNM_GLIB_BUILD
 static const char *
 find_tag (const char *tag, const char *buf, gsize len)
 {
@@ -594,23 +411,35 @@ out:
 	close (fd);
 	return success;
 }
+#endif
 
 static gboolean
 default_filter_privkey (const GtkFileFilterInfo *filter_info, gpointer user_data)
 {
-	const char *extensions[] = { ".der", ".pem", ".p12", NULL };
+#ifdef LIBNM_GLIB_BUILD
+	const char *extensions[] = { ".der", ".pem", ".p12", ".key", NULL };
+#endif
 	gboolean require_encrypted = !!user_data;
-	gboolean is_encrypted = TRUE;
+	gboolean is_encrypted;
 
 	if (!filter_info->filename)
 		return FALSE;
 
+#if defined (LIBNM_GLIB_BUILD)
 	if (!file_has_extension (filter_info->filename, extensions))
 		return FALSE;
 
+	is_encrypted = TRUE;
 	if (   !file_is_der_or_pem (filter_info->filename, TRUE, &is_encrypted)
 	    && !nm_utils_file_is_pkcs12 (filter_info->filename))
 		return FALSE;
+#elif defined (LIBNM_BUILD)
+	is_encrypted = FALSE;
+	if (!nm_utils_file_is_private_key (filter_info->filename, &is_encrypted))
+		return FALSE;
+#else
+#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
+#endif
 
 	return require_encrypted ? is_encrypted : TRUE;
 }
@@ -618,16 +447,25 @@ default_filter_privkey (const GtkFileFilterInfo *filter_info, gpointer user_data
 static gboolean
 default_filter_cert (const GtkFileFilterInfo *filter_info, gpointer user_data)
 {
+#ifdef LIBNM_GLIB_BUILD
 	const char *extensions[] = { ".der", ".pem", ".crt", ".cer", NULL };
+#endif
 
 	if (!filter_info->filename)
 		return FALSE;
 
+#if defined (LIBNM_GLIB_BUILD)
 	if (!file_has_extension (filter_info->filename, extensions))
 		return FALSE;
 
 	if (!file_is_der_or_pem (filter_info->filename, FALSE, NULL))
 		return FALSE;
+#elif defined (LIBNM_BUILD)
+	if (!nm_utils_file_is_certificate (filter_info->filename))
+		return FALSE;
+#else
+#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
+#endif
 
 	return TRUE;
 }
@@ -640,7 +478,7 @@ eap_method_default_file_chooser_filter_new (gboolean privkey)
 	filter = gtk_file_filter_new ();
 	if (privkey) {
 		gtk_file_filter_add_custom (filter, GTK_FILE_FILTER_FILENAME, default_filter_privkey, NULL, NULL);
-		gtk_file_filter_set_name (filter, _("DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"));
+		gtk_file_filter_set_name (filter, _("DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"));
 	} else {
 		gtk_file_filter_add_custom (filter, GTK_FILE_FILTER_FILENAME, default_filter_cert, NULL, NULL);
 		gtk_file_filter_set_name (filter, _("DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"));
@@ -654,5 +492,213 @@ eap_method_is_encrypted_private_key (const char *path)
 	GtkFileFilterInfo info = { .filename = path };
 
 	return default_filter_privkey (&info, (gpointer) TRUE);
+}
+
+/* Some methods (PEAP, TLS, TTLS) require a CA certificate. The user can choose
+ * not to provide such a certificate. This method whether the checkbox
+ * id_ca_cert_not_required_checkbutton is checked or id_ca_cert_chooser has a certificate
+ * selected.
+ */
+gboolean
+eap_method_ca_cert_required (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
+{
+	char *filename;
+	GtkWidget *widget;
+
+	g_assert (builder && id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_not_required_checkbutton));
+	g_assert (widget && GTK_IS_TOGGLE_BUTTON (widget));
+
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_chooser));
+		g_assert (widget && GTK_IS_FILE_CHOOSER (widget));
+
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+		if (!filename)
+			return TRUE;
+		g_free (filename);
+	}
+	return FALSE;
+}
+
+
+void
+eap_method_ca_cert_not_required_toggled (GtkBuilder *builder, const char *id_ca_cert_not_required_checkbutton, const char *id_ca_cert_chooser)
+{
+	char *filename, *filename_old;
+	gboolean is_not_required;
+	GtkWidget *widget;
+
+	g_assert (builder && id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_not_required_checkbutton));
+	g_assert (widget && GTK_IS_TOGGLE_BUTTON (widget));
+	is_not_required = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, id_ca_cert_chooser));
+	g_assert (widget && GTK_IS_FILE_CHOOSER (widget));
+
+	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+	filename_old = g_object_steal_data (G_OBJECT (widget), "filename-old");
+	if (is_not_required) {
+		g_free (filename_old);
+		filename_old = filename;
+		filename = NULL;
+	} else {
+		g_free (filename);
+		filename = filename_old;
+		filename_old = NULL;
+	}
+	gtk_widget_set_sensitive (widget, !is_not_required);
+	if (filename)
+		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
+	else
+		gtk_file_chooser_unselect_all (GTK_FILE_CHOOSER (widget));
+	g_free (filename);
+	g_object_set_data_full (G_OBJECT (widget), "filename-old", filename_old, g_free);
+}
+
+/* Used as both GSettings keys and GObject data tags */
+#define IGNORE_CA_CERT_TAG "ignore-ca-cert"
+#define IGNORE_PHASE2_CA_CERT_TAG "ignore-phase2-ca-cert"
+
+/**
+ * eap_method_ca_cert_ignore_set:
+ * @method: the #EAPMethod object
+ * @connection: the #NMConnection
+ * @filename: the certificate file, if any
+ * @ca_cert_error: %TRUE if an error was encountered loading the given CA
+ * certificate, %FALSE if not or if a CA certificate is not present
+ *
+ * Updates the connection's CA cert ignore value to %TRUE if the "CA certificate
+ * not required" checkbox is checked.  If @ca_cert_error is %TRUE, then the
+ * connection's CA cert ignore value will always be set to %FALSE, because it
+ * means that the user selected an invalid certificate (thus he does not want to
+ * ignore the CA cert)..
+ */
+void
+eap_method_ca_cert_ignore_set (EAPMethod *method,
+                               NMConnection *connection,
+                               const char *filename,
+                               gboolean ca_cert_error)
+{
+	NMSetting8021x *s_8021x;
+	gboolean ignore;
+
+	s_8021x = nm_connection_get_setting_802_1x (connection);
+	if (s_8021x) {
+		ignore = !ca_cert_error && filename == NULL;
+		g_object_set_data (G_OBJECT (s_8021x),
+		                   method->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG,
+		                   GUINT_TO_POINTER (ignore));
+	}
+}
+
+/**
+ * eap_method_ca_cert_ignore_get:
+ * @method: the #EAPMethod object
+ * @connection: the #NMConnection
+ *
+ * Returns: %TRUE if a missing CA certificate can be ignored, %FALSE if a CA
+ * certificate should be required for the connection to be valid.
+ */
+gboolean
+eap_method_ca_cert_ignore_get (EAPMethod *method, NMConnection *connection)
+{
+	NMSetting8021x *s_8021x;
+
+	s_8021x = nm_connection_get_setting_802_1x (connection);
+	if (s_8021x) {
+		return !!g_object_get_data (G_OBJECT (s_8021x),
+		                            method->phase2 ? IGNORE_PHASE2_CA_CERT_TAG : IGNORE_CA_CERT_TAG);
+	}
+	return FALSE;
+}
+
+static GSettings *
+_get_ca_ignore_settings (NMConnection *connection)
+{
+	GSettings *settings;
+	char *path = NULL;
+	const char *uuid;
+
+	g_return_val_if_fail (connection, NULL);
+
+	uuid = nm_connection_get_uuid (connection);
+	g_return_val_if_fail (uuid && *uuid, NULL);
+
+	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s/", uuid);
+	settings = g_settings_new_with_path ("org.gnome.nm-applet.eap", path);
+	g_free (path);
+
+	return settings;
+}
+
+/**
+ * eap_method_ca_cert_ignore_save:
+ * @connection: the connection for which to save CA cert ignore values to GSettings
+ *
+ * Reads the CA cert ignore tags from the 802.1x setting GObject data and saves
+ * then to GSettings if present, using the connection UUID as the index.
+ */
+void
+eap_method_ca_cert_ignore_save (NMConnection *connection)
+{
+	NMSetting8021x *s_8021x;
+	GSettings *settings;
+	gboolean ignore = FALSE, phase2_ignore = FALSE;
+
+	g_return_if_fail (connection);
+
+	s_8021x = nm_connection_get_setting_802_1x (connection);
+	if (s_8021x) {
+		ignore = !!g_object_get_data (G_OBJECT (s_8021x), IGNORE_CA_CERT_TAG);
+		phase2_ignore = !!g_object_get_data (G_OBJECT (s_8021x), IGNORE_PHASE2_CA_CERT_TAG);
+	}
+
+	settings = _get_ca_ignore_settings (connection);
+	if (!settings)
+		return;
+
+	g_settings_set_boolean (settings, IGNORE_CA_CERT_TAG, ignore);
+	g_settings_set_boolean (settings, IGNORE_PHASE2_CA_CERT_TAG, phase2_ignore);
+	g_object_unref (settings);
+}
+
+/**
+ * eap_method_ca_cert_ignore_load:
+ * @connection: the connection for which to load CA cert ignore values to GSettings
+ *
+ * Reads the CA cert ignore tags from the 802.1x setting GObject data and saves
+ * then to GSettings if present, using the connection UUID as the index.
+ */
+void
+eap_method_ca_cert_ignore_load (NMConnection *connection)
+{
+	GSettings *settings;
+	NMSetting8021x *s_8021x;
+	gboolean ignore, phase2_ignore;
+
+	g_return_if_fail (connection);
+
+	s_8021x = nm_connection_get_setting_802_1x (connection);
+	if (!s_8021x)
+		return;
+
+	settings = _get_ca_ignore_settings (connection);
+	if (!settings)
+		return;
+
+	ignore = g_settings_get_boolean (settings, IGNORE_CA_CERT_TAG);
+	phase2_ignore = g_settings_get_boolean (settings, IGNORE_PHASE2_CA_CERT_TAG);
+
+	g_object_set_data (G_OBJECT (s_8021x),
+	                   IGNORE_CA_CERT_TAG,
+	                   GUINT_TO_POINTER (ignore));
+	g_object_set_data (G_OBJECT (s_8021x),
+	                   IGNORE_PHASE2_CA_CERT_TAG,
+	                   GUINT_TO_POINTER (phase2_ignore));
+	g_object_unref (settings);
 }
 

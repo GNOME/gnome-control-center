@@ -17,25 +17,20 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2012 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include "config.h"
+#include "nm-default.h"
 
 #include <string.h>
-
-#include <glib.h>
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
-
-#include <NetworkManager.h>
 
 #include "wireless-security.h"
 #include "wireless-security-resources.h"
 #include "eap-method.h"
+#include "utils.h"
 
 GType
-wireless_security_get_g_type (void)
+wireless_security_get_type (void)
 {
 	static GType type_id = 0;
 
@@ -43,8 +38,8 @@ wireless_security_get_g_type (void)
 		g_resources_register (wireless_security_get_resource ());
 
 		type_id = g_boxed_type_register_static ("CcWirelessSecurity",
-		                                        (GBoxedCopyFunc) wireless_security_ref,
-		                                        (GBoxedFreeFunc) wireless_security_unref);
+							(GBoxedCopyFunc) wireless_security_ref,
+							(GBoxedFreeFunc) wireless_security_unref);
 	}
 
 	return type_id;
@@ -79,12 +74,18 @@ wireless_security_changed_cb (GtkWidget *ignored, gpointer user_data)
 }
 
 gboolean
-wireless_security_validate (WirelessSecurity *sec, GBytes *ssid)
+wireless_security_validate (WirelessSecurity *sec, GError **error)
 {
+	gboolean result;
+
 	g_return_val_if_fail (sec != NULL, FALSE);
+	g_return_val_if_fail (!error || !*error, FALSE);
 
 	g_assert (sec->validate);
-	return (*(sec->validate)) (sec, ssid);
+	result = (*(sec->validate)) (sec, error);
+	if (!result && error && !*error)
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Unknown error validating 802.1x security"));
+	return result;
 }
 
 void
@@ -139,6 +140,12 @@ wireless_security_unref (WirelessSecurity *sec)
 		if (sec->destroy)
 			sec->destroy (sec);
 
+		g_free (sec->username);
+		if (sec->password) {
+			memset (sec->password, 0, strlen (sec->password));
+			g_free (sec->password);
+		}
+
 		if (sec->builder)
 			g_object_unref (sec->builder);
 		if (sec->ui_widget)
@@ -175,7 +182,6 @@ wireless_security_init (gsize obj_size,
 	sec->add_to_size_group = add_to_size_group;
 	sec->fill_connection = fill_connection;
 	sec->update_secrets = update_secrets;
-	sec->destroy = destroy;
 	sec->default_field = default_field;
 
 	sec->builder = gtk_builder_new ();
@@ -196,19 +202,11 @@ wireless_security_init (gsize obj_size,
 	}
 	g_object_ref_sink (sec->ui_widget);
 
+	sec->destroy = destroy;
 	sec->adhoc_compatible = TRUE;
+	sec->hotspot_compatible = TRUE;
 
 	return sec;
-}
-
-GtkWidget *
-wireless_security_nag_user (WirelessSecurity *sec)
-{
-	g_return_val_if_fail (sec != NULL, NULL);
-
-	if (sec->nag_user)
-		return (*(sec->nag_user)) (sec);
-	return NULL;
 }
 
 gboolean
@@ -217,6 +215,61 @@ wireless_security_adhoc_compatible (WirelessSecurity *sec)
 	g_return_val_if_fail (sec != NULL, FALSE);
 
 	return sec->adhoc_compatible;
+}
+
+gboolean
+wireless_security_hotspot_compatible (WirelessSecurity *sec)
+{
+	g_return_val_if_fail (sec != NULL, FALSE);
+
+	return sec->hotspot_compatible;
+}
+
+void
+wireless_security_set_userpass (WirelessSecurity *sec,
+                                const char *user,
+                                const char *password,
+                                gboolean always_ask,
+                                gboolean show_password)
+{
+	g_free (sec->username);
+	sec->username = g_strdup (user);
+
+	if (sec->password) {
+		memset (sec->password, 0, strlen (sec->password));
+		g_free (sec->password);
+	}
+	sec->password = g_strdup (password);
+
+	if (always_ask != (gboolean) -1)
+		sec->always_ask = always_ask;
+	sec->show_password = show_password;
+}
+
+void
+wireless_security_set_userpass_802_1x (WirelessSecurity *sec,
+                                       NMConnection *connection)
+{
+	const char *user = NULL, *password = NULL;
+	gboolean always_ask = FALSE, show_password = FALSE;
+	NMSetting8021x  *setting;
+	NMSettingSecretFlags flags;
+
+	if (!connection)
+		goto set;
+
+	setting = nm_connection_get_setting_802_1x (connection);
+	if (!setting)
+		goto set;
+
+	user = nm_setting_802_1x_get_identity (setting);
+	password = nm_setting_802_1x_get_password (setting);
+
+	if (nm_setting_get_secret_flags (NM_SETTING (setting), NM_SETTING_802_1X_PASSWORD, &flags, NULL))
+		always_ask = !!(flags & NM_SETTING_SECRET_FLAG_NOT_SAVED);
+
+set:
+	wireless_security_set_userpass (sec, user, password, always_ask, show_password);
 }
 
 void
@@ -261,7 +314,7 @@ ws_802_1x_add_to_size_group (WirelessSecurity *sec,
 }
 
 gboolean
-ws_802_1x_validate (WirelessSecurity *sec, const char *combo_name)
+ws_802_1x_validate (WirelessSecurity *sec, const char *combo_name, GError **error)
 {
 	GtkWidget *widget;
 	GtkTreeModel *model;
@@ -276,7 +329,7 @@ ws_802_1x_validate (WirelessSecurity *sec, const char *combo_name)
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
 	g_assert (eap);
-	valid = eap_method_validate (eap);
+	valid = eap_method_validate (eap, error);
 	eap_method_unref (eap);
 	return valid;
 }
@@ -343,12 +396,14 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 	EAPMethodSimple *em_md5;
 	EAPMethodTLS *em_tls;
 	EAPMethodLEAP *em_leap;
+	EAPMethodSimple *em_pwd;
 	EAPMethodFAST *em_fast;
 	EAPMethodTTLS *em_ttls;
 	EAPMethodPEAP *em_peap;
 	const char *default_method = NULL, *ctype = NULL;
 	int active = -1, item = 0;
 	gboolean wired = FALSE;
+	EAPMethodSimpleFlags simple_flags = EAP_METHOD_SIMPLE_FLAG_NONE;
 
 	/* Grab the default EAP method out of the security object */
 	if (connection) {
@@ -367,15 +422,18 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 			default_method = nm_setting_802_1x_get_eap_method (s_8021x, 0);
 	}
 
-	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_g_type ());
+	/* initialize WirelessSecurity userpass from connection (clear if no connection) */
+	wireless_security_set_userpass_802_1x (sec, connection);
+
+	auth_model = gtk_list_store_new (2, G_TYPE_STRING, eap_method_get_type ());
+
+	if (is_editor)
+		simple_flags |= EAP_METHOD_SIMPLE_FLAG_IS_EDITOR;
+	if (secrets_only)
+		simple_flags |= EAP_METHOD_SIMPLE_FLAG_SECRETS_ONLY;
 
 	if (wired) {
-		em_md5 = eap_method_simple_new (sec,
-		                                connection,
-		                                EAP_METHOD_SIMPLE_TYPE_MD5,
-		                                FALSE,
-		                                is_editor,
-		                                secrets_only);
+		em_md5 = eap_method_simple_new (sec, connection, EAP_METHOD_SIMPLE_TYPE_MD5, simple_flags);
 		gtk_list_store_append (auth_model, &iter);
 		gtk_list_store_set (auth_model, &iter,
 			                AUTH_NAME_COLUMN, _("MD5"),
@@ -410,6 +468,17 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 			active = item;
 		item++;
 	}
+
+	em_pwd = eap_method_simple_new (sec, connection, EAP_METHOD_SIMPLE_TYPE_PWD, simple_flags);
+	gtk_list_store_append (auth_model, &iter);
+	gtk_list_store_set (auth_model, &iter,
+	                    AUTH_NAME_COLUMN, _("PWD"),
+	                    AUTH_METHOD_COLUMN, em_pwd,
+	                    -1);
+	eap_method_unref (EAP_METHOD (em_pwd));
+	if (default_method && (active < 0) && !strcmp (default_method, "pwd"))
+		active = item;
+	item++;
 
 	em_fast = eap_method_fast_new (sec, connection, is_editor, secrets_only);
 	gtk_list_store_append (auth_model, &iter);
@@ -470,9 +539,24 @@ ws_802_1x_fill_connection (WirelessSecurity *sec,
 	GtkWidget *widget;
 	NMSettingWirelessSecurity *s_wireless_sec;
 	NMSetting8021x *s_8021x;
+	NMSettingSecretFlags secret_flags = NM_SETTING_SECRET_FLAG_NONE;
 	EAPMethod *eap = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
+
+	/* Get the EAPMethod object */
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
+	g_assert (eap);
+
+	/* Get previous pasword flags, if any. Otherwise default to agent-owned secrets */
+	s_8021x = nm_connection_get_setting_802_1x (connection);
+	if (s_8021x)
+		nm_setting_get_secret_flags (NM_SETTING (s_8021x), eap->password_flags_name, &secret_flags, NULL);
+	else
+		secret_flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
 
 	/* Blow away the old wireless security setting by adding a clear one */
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
@@ -482,13 +566,7 @@ ws_802_1x_fill_connection (WirelessSecurity *sec,
 	s_8021x = (NMSetting8021x *) nm_setting_802_1x_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_8021x);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
-	g_assert (eap);
-
-	eap_method_fill_connection (eap, connection);
+	eap_method_fill_connection (eap, connection, secret_flags);
 	eap_method_unref (eap);
 }
 
@@ -520,25 +598,5 @@ ws_802_1x_update_secrets (WirelessSecurity *sec,
 			}
 		} while (gtk_tree_model_iter_next (model, &iter));
 	}
-}
-
-GtkWidget *
-ws_802_1x_nag_user (WirelessSecurity *sec,
-                    const char *combo_name)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	EAPMethod *eap = NULL;
-	GtkWidget *widget;	
-
-	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, combo_name));
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
-	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
-	g_return_val_if_fail (eap != NULL, NULL);
-
-	widget = eap_method_nag_user (eap);
-	eap_method_unref (eap);
-	return widget;
 }
 
