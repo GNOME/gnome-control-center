@@ -39,6 +39,7 @@
 #include "ce-page-8021x-security.h"
 #include "ce-page-vpn.h"
 #include "vpn-helpers.h"
+#include "eap-method.h"
 
 enum {
         DONE,
@@ -141,6 +142,8 @@ static void
 apply_edits (NetConnectionEditor *editor)
 {
         update_connection (editor);
+
+        eap_method_ca_cert_ignore_save (editor->connection);
 
         if (editor->is_new_connection) {
                 nm_client_add_connection_async (editor->client,
@@ -548,6 +551,8 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         editor->orig_connection = g_object_ref (connection);
 
         net_connection_editor_update_title (editor);
+
+        eap_method_ca_cert_ignore_load (editor->connection);
 
         sc = nm_connection_get_setting_connection (connection);
         type = nm_setting_connection_get_connection_type (sc);
