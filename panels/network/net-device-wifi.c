@@ -1340,6 +1340,37 @@ client_connection_added_cb (NMClient           *client,
 }
 
 static void
+client_connection_removed_cb (NMClient           *client,
+                              NMRemoteConnection *connection,
+                              NetDeviceWifi      *device_wifi)
+{
+        GtkWidget *swin;
+        GtkWidget *list;
+        GList *rows, *l;
+        const char *uuid;
+
+        uuid = nm_connection_get_uuid (NM_CONNECTION (connection));
+
+        swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                   "scrolledwindow_list"));
+        list = gtk_bin_get_child (GTK_BIN (gtk_bin_get_child (GTK_BIN (swin))));
+        rows = gtk_container_get_children (GTK_CONTAINER (list));
+        for (l = rows; l != NULL; l = l->next) {
+                GtkWidget *row = l->data;
+                NMConnection *connection;
+                const char *uuid_r;
+
+                connection = g_object_get_data (G_OBJECT (row), "connection");
+                uuid_r = nm_connection_get_uuid (connection);
+                if (g_strcmp0 (uuid_r, uuid) == 0) {
+                        gtk_widget_destroy (row);
+                        break;
+                }
+        }
+        g_list_free (rows);
+}
+
+static void
 net_device_wifi_constructed (GObject *object)
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
@@ -1381,6 +1412,8 @@ net_device_wifi_constructed (GObject *object)
 
         g_signal_connect (client, NM_CLIENT_CONNECTION_ADDED,
                           G_CALLBACK (client_connection_added_cb), device_wifi);
+        g_signal_connect (client, NM_CLIENT_CONNECTION_REMOVED,
+                          G_CALLBACK (client_connection_removed_cb), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "heading_list"));
         g_object_bind_property (device_wifi, "title", widget, "label", 0);
@@ -1721,11 +1754,8 @@ make_row (GtkSizeGroup   *rows,
         gtk_widget_show_all (row);
 
         g_object_set_data (G_OBJECT (row), "ap", ap);
-        if (connection) {
+        if (connection)
                 g_object_set_data (G_OBJECT (row), "connection", connection);
-                g_signal_connect_object (connection, "removed",
-                                         G_CALLBACK (gtk_widget_destroy), row, G_CONNECT_SWAPPED);
-        }
         g_object_set_data (G_OBJECT (row), "timestamp", GUINT_TO_POINTER (timestamp));
         g_object_set_data (G_OBJECT (row), "active", GUINT_TO_POINTER (active));
         g_object_set_data (G_OBJECT (row), "strength", GUINT_TO_POINTER (strength));
