@@ -1,0 +1,495 @@
+diff --git a/panels/network/wireless-security/eap-method-fast.ui b/panels/network/wireless-security/eap-method-fast.ui
+index 4b19a66..5307ddb 100644
+--- a/panels/network/wireless-security/eap-method-fast.ui
++++ b/panels/network/wireless-security/eap-method-fast.ui
+@@ -46,8 +46,8 @@
+           <object class="GtkLabel" id="eap_fast_anon_identity_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Anony_mous identity:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Anony_mous identity</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_fast_anon_identity_entry</property>
+           </object>
+@@ -72,8 +72,8 @@
+           <object class="GtkLabel" id="eap_fast_pac_file_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">PAC _file:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">PAC _file</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_fast_pac_file_button</property>
+           </object>
+@@ -117,8 +117,8 @@
+           <object class="GtkLabel" id="eap_fast_inner_auth_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Inner authentication:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Inner authentication</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_fast_inner_auth_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/eap-method-leap.ui b/panels/network/wireless-security/eap-method-leap.ui
+index 1d1f23d..d4c0625 100644
+--- a/panels/network/wireless-security/eap-method-leap.ui
++++ b/panels/network/wireless-security/eap-method-leap.ui
+@@ -22,8 +22,8 @@
+           <object class="GtkLabel" id="eap_leap_username_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Username:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Username</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_leap_username_entry</property>
+           </object>
+@@ -36,8 +36,8 @@
+           <object class="GtkLabel" id="eap_leap_password_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Password:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Password</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_leap_password_entry</property>
+           </object>
+diff --git a/panels/network/wireless-security/eap-method-peap.ui b/panels/network/wireless-security/eap-method-peap.ui
+index a97123a..2f8b8cd 100644
+--- a/panels/network/wireless-security/eap-method-peap.ui
++++ b/panels/network/wireless-security/eap-method-peap.ui
+@@ -46,8 +46,8 @@
+           <object class="GtkLabel" id="eap_peap_anon_identity_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Anony_mous identity:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Anony_mous identity</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_peap_anon_identity_entry</property>
+           </object>
+@@ -72,8 +72,8 @@
+           <object class="GtkLabel" id="eap_peap_ca_cert_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">C_A certificate:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">C_A certificate</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_peap_ca_cert_button</property>
+           </object>
+@@ -135,8 +135,8 @@
+           <object class="GtkLabel" id="eap_peap_inner_auth_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Inner authentication:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Inner authentication</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_peap_inner_auth_combo</property>
+           </object>
+@@ -172,8 +172,8 @@
+           <object class="GtkLabel" id="eap_peap_version_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">PEAP _version:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">PEAP _version</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_peap_version_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/eap-method-simple.ui b/panels/network/wireless-security/eap-method-simple.ui
+index b3318e4..7d95d28 100644
+--- a/panels/network/wireless-security/eap-method-simple.ui
++++ b/panels/network/wireless-security/eap-method-simple.ui
+@@ -22,8 +22,8 @@
+           <object class="GtkLabel" id="eap_simple_username_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Username:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Username</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_simple_username_entry</property>
+           </object>
+@@ -36,8 +36,8 @@
+           <object class="GtkLabel" id="eap_simple_password_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Password:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Password</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_simple_password_entry</property>
+           </object>
+diff --git a/panels/network/wireless-security/eap-method-tls.ui b/panels/network/wireless-security/eap-method-tls.ui
+index 5557593..3c6291b 100644
+--- a/panels/network/wireless-security/eap-method-tls.ui
++++ b/panels/network/wireless-security/eap-method-tls.ui
+@@ -22,8 +22,8 @@
+           <object class="GtkLabel" id="eap_tls_identity_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">I_dentity:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">I_dentity</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_tls_identity_entry</property>
+           </object>
+@@ -48,8 +48,8 @@
+           <object class="GtkLabel" id="eap_tls_user_cert_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_User certificate:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_User certificate</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_tls_user_cert_button</property>
+           </object>
+@@ -64,8 +64,8 @@
+           <object class="GtkLabel" id="eap_tls_ca_cert_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">C_A certificate:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">C_A certificate</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_tls_ca_cert_button</property>
+           </object>
+@@ -112,8 +112,8 @@
+           <object class="GtkLabel" id="eap_tls_private_key_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Private _key:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Private _key</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_tls_private_key_button</property>
+           </object>
+@@ -142,8 +142,8 @@
+           <object class="GtkLabel" id="eap_tls_private_key_password_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Private key password:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Private key password</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_tls_private_key_password_entry</property>
+           </object>
+diff --git a/panels/network/wireless-security/eap-method-ttls.ui b/panels/network/wireless-security/eap-method-ttls.ui
+index ce00c26..70db9ed 100644
+--- a/panels/network/wireless-security/eap-method-ttls.ui
++++ b/panels/network/wireless-security/eap-method-ttls.ui
+@@ -29,8 +29,8 @@
+           <object class="GtkLabel" id="eap_ttls_anon_identity_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Anony_mous identity:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Anony_mous identity</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_ttls_anon_identity_entry</property>
+           </object>
+@@ -55,8 +55,8 @@
+           <object class="GtkLabel" id="eap_ttls_ca_cert_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">C_A certificate:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">C_A certificate</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_ttls_ca_cert_button</property>
+           </object>
+@@ -103,8 +103,8 @@
+           <object class="GtkLabel" id="eap_ttls_inner_auth_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Inner authentication:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Inner authentication</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">eap_ttls_inner_auth_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/ws-dynamic-wep.ui b/panels/network/wireless-security/ws-dynamic-wep.ui
+index 4bd8520..cf31f12 100644
+--- a/panels/network/wireless-security/ws-dynamic-wep.ui
++++ b/panels/network/wireless-security/ws-dynamic-wep.ui
+@@ -35,8 +35,8 @@
+           <object class="GtkLabel" id="dynamic_wep_auth_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Au_thentication:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Au_thentication</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">dynamic_wep_auth_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/ws-leap.ui b/panels/network/wireless-security/ws-leap.ui
+index dc936ad..b4d9bec 100644
+--- a/panels/network/wireless-security/ws-leap.ui
++++ b/panels/network/wireless-security/ws-leap.ui
+@@ -22,8 +22,8 @@
+           <object class="GtkLabel" id="leap_username_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Username:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Username</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">leap_username_entry</property>
+           </object>
+@@ -36,8 +36,8 @@
+           <object class="GtkLabel" id="leap_password_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Password:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Password</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">leap_password_entry</property>
+           </object>
+diff --git a/panels/network/wireless-security/ws-wep-key.ui b/panels/network/wireless-security/ws-wep-key.ui
+index 62b11a5..c0e5f55 100644
+--- a/panels/network/wireless-security/ws-wep-key.ui
++++ b/panels/network/wireless-security/ws-wep-key.ui
+@@ -52,8 +52,8 @@
+           <object class="GtkLabel" id="wep_key_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Key:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Key</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">wep_key_entry</property>
+           </object>
+@@ -111,8 +111,8 @@
+           <object class="GtkLabel" id="auth_method_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Au_thentication:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Au_thentication</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">auth_method_combo</property>
+           </object>
+@@ -148,8 +148,8 @@
+           <object class="GtkLabel" id="key_index_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">WEP inde_x:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">WEP inde_x</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">key_index_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/ws-wpa-eap.ui b/panels/network/wireless-security/ws-wpa-eap.ui
+index 2da2148..942af88 100644
+--- a/panels/network/wireless-security/ws-wpa-eap.ui
++++ b/panels/network/wireless-security/ws-wpa-eap.ui
+@@ -29,8 +29,8 @@
+           <object class="GtkLabel" id="wpa_eap_auth_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">Au_thentication:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">Au_thentication</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">wpa_eap_auth_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/ws-wpa-psk.ui b/panels/network/wireless-security/ws-wpa-psk.ui
+index 4ec6909..b34720a 100644
+--- a/panels/network/wireless-security/ws-wpa-psk.ui
++++ b/panels/network/wireless-security/ws-wpa-psk.ui
+@@ -18,8 +18,8 @@
+           <object class="GtkLabel" id="wpa_psk_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Password:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Password</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">wpa_psk_entry</property>
+           </object>
+@@ -46,8 +46,8 @@
+           <object class="GtkLabel" id="wpa_psk_type_label">
+             <property name="visible">True</property>
+             <property name="can_focus">False</property>
+-            <property name="xalign">0</property>
+-            <property name="label" translatable="yes">_Type:</property>
++            <property name="xalign">1</property>
++            <property name="label" translatable="yes">_Type</property>
+             <property name="use_underline">True</property>
+             <property name="mnemonic_widget">wpa_psk_type_combo</property>
+           </object>
+diff --git a/panels/network/wireless-security/eap-method-fast.ui b/panels/network/wireless-security/eap-method-fast.ui
+index 5307ddb..36e74c3 100644
+--- a/panels/network/wireless-security/eap-method-fast.ui
++++ b/panels/network/wireless-security/eap-method-fast.ui
+@@ -40,7 +40,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">5</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="eap_fast_anon_identity_label">
+diff --git a/panels/network/wireless-security/eap-method-leap.ui b/panels/network/wireless-security/eap-method-leap.ui
+index d4c0625..c4de1dc 100644
+--- a/panels/network/wireless-security/eap-method-leap.ui
++++ b/panels/network/wireless-security/eap-method-leap.ui
+@@ -13,7 +13,7 @@
+         <property name="valign">start</property>
+         <property name="n_rows">3</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <placeholder/>
+diff --git a/panels/network/wireless-security/eap-method-peap.ui b/panels/network/wireless-security/eap-method-peap.ui
+index 2f8b8cd..d16e00a 100644
+--- a/panels/network/wireless-security/eap-method-peap.ui
++++ b/panels/network/wireless-security/eap-method-peap.ui
+@@ -40,7 +40,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">5</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="eap_peap_anon_identity_label">
+diff --git a/panels/network/wireless-security/eap-method-simple.ui b/panels/network/wireless-security/eap-method-simple.ui
+index 7d95d28..af00cb9 100644
+--- a/panels/network/wireless-security/eap-method-simple.ui
++++ b/panels/network/wireless-security/eap-method-simple.ui
+@@ -13,7 +13,7 @@
+         <property name="valign">start</property>
+         <property name="n_rows">3</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <placeholder/>
+diff --git a/panels/network/wireless-security/eap-method-tls.ui b/panels/network/wireless-security/eap-method-tls.ui
+index 3c6291b..0079715 100644
+--- a/panels/network/wireless-security/eap-method-tls.ui
++++ b/panels/network/wireless-security/eap-method-tls.ui
+@@ -13,7 +13,7 @@
+         <property name="valign">start</property>
+         <property name="n_rows">6</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <placeholder/>
+diff --git a/panels/network/wireless-security/eap-method-ttls.ui b/panels/network/wireless-security/eap-method-ttls.ui
+index 70db9ed..df942d9 100644
+--- a/panels/network/wireless-security/eap-method-ttls.ui
++++ b/panels/network/wireless-security/eap-method-ttls.ui
+@@ -23,7 +23,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">4</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="eap_ttls_anon_identity_label">
+diff --git a/panels/network/wireless-security/ws-dynamic-wep.ui b/panels/network/wireless-security/ws-dynamic-wep.ui
+index cf31f12..d6bc12b 100644
+--- a/panels/network/wireless-security/ws-dynamic-wep.ui
++++ b/panels/network/wireless-security/ws-dynamic-wep.ui
+@@ -23,7 +23,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">3</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <placeholder/>
+diff --git a/panels/network/wireless-security/ws-leap.ui b/panels/network/wireless-security/ws-leap.ui
+index b4d9bec..06cb645 100644
+--- a/panels/network/wireless-security/ws-leap.ui
++++ b/panels/network/wireless-security/ws-leap.ui
+@@ -13,7 +13,7 @@
+         <property name="valign">start</property>
+         <property name="n_rows">3</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <placeholder/>
+diff --git a/panels/network/wireless-security/ws-wep-key.ui b/panels/network/wireless-security/ws-wep-key.ui
+index c0e5f55..a4e14dc 100644
+--- a/panels/network/wireless-security/ws-wep-key.ui
++++ b/panels/network/wireless-security/ws-wep-key.ui
+@@ -46,7 +46,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">4</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="wep_key_label">
+diff --git a/panels/network/wireless-security/ws-wpa-eap.ui b/panels/network/wireless-security/ws-wpa-eap.ui
+index 942af88..5d71936 100644
+--- a/panels/network/wireless-security/ws-wpa-eap.ui
++++ b/panels/network/wireless-security/ws-wpa-eap.ui
+@@ -23,7 +23,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">2</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="wpa_eap_auth_label">
+diff --git a/panels/network/wireless-security/ws-wpa-psk.ui b/panels/network/wireless-security/ws-wpa-psk.ui
+index b34720a..3c689d3 100644
+--- a/panels/network/wireless-security/ws-wpa-psk.ui
++++ b/panels/network/wireless-security/ws-wpa-psk.ui
+@@ -12,7 +12,7 @@
+         <property name="can_focus">False</property>
+         <property name="n_rows">3</property>
+         <property name="n_columns">2</property>
+-        <property name="column_spacing">12</property>
++        <property name="column_spacing">6</property>
+         <property name="row_spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="wpa_psk_label">
