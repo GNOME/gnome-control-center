@@ -45,8 +45,6 @@
 
 #define DEFAULT_WINDOW_ICON_NAME "preferences-system"
 
-#define OVERVIEW_PAGE "_overview"
-
 struct _CcWindow
 {
   GtkApplicationWindow parent;
@@ -197,8 +195,7 @@ static void
 shell_show_overview_page (CcWindow *self)
 {
   cc_panel_list_set_view (CC_PANEL_LIST (self->panel_list), CC_PANEL_LIST_MAIN);
-
-  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), OVERVIEW_PAGE);
+  cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
 
   if (self->current_panel_box)
     gtk_container_remove (GTK_CONTAINER (self->stack), self->current_panel_box);
