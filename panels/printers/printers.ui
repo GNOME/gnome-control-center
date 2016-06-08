@@ -2,10 +2,7 @@
 <interface>
   <requires lib="gtk+" version="3.12"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkBox" id="main-vbox">
-    <property name="border_width">10</property>
-    <property name="orientation">vertical</property>
-    <property name="spacing">10</property>
+  <object class="GtkStack" id="main-vbox">
     <property name="margin-start">6</property>
     <property name="margin-end">6</property>
     <property name="margin-top">6</property>
@@ -13,7 +10,8 @@
     <child>
       <object class="GtkBox" id="hbox1">
         <property name="visible">True</property>
-        <property name="spacing">10</property>
+        <property name="spacing">20</property>
+        <property name="border_width">10</property>
         <child>
           <object class="GtkBox" id="vbox4">
             <property name="visible">True</property>
@@ -536,123 +534,6 @@
                 <property name="tab_fill">False</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkBox" id="hbuttonbox2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">10</property>
-                <property name="orientation">vertical</property>
-                <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage" id="no-printer-image">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">start</property>
-                    <property name="pixel_size">64</property>
-                    <property name="icon_name">printer-symbolic</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="no-printer-label">
-                    <property name="visible">True</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="printer-add-button2">
-                    <property name="label" translatable="yes" comments="Translators: This button adds new printer.">Add a Printer</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">center</property>
-                    <property name="relief">normal</property>
-                    <style>
-                      <class name="suggested-action"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label21">
-                <property name="visible">True</property>
-                <property name="label">No printers</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
-                <property name="tab_fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox" id="vbox7">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">20</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="no-cups-label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="yalign">1</property>
-                    <property name="label" translatable="yes" comments="Translators: The CUPS server is not running (we can not connect to it).">Sorry! The system printing service
-doesn't seem to be available.</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkImage" id="image1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">start</property>
-                    <property name="pixel_size">64</property>
-                    <property name="icon_name">computer-fail</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label9">
-                <property name="visible">True</property>
-                <property name="label">No cups</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
-                <property name="tab_fill">False</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -662,9 +543,109 @@ doesn't seem to be available.</property>
         </child>
       </object>
       <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
+        <property name="name">printers-list</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">10</property>
+        <property name="orientation">vertical</property>
+        <property name="valign">center</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="pixel_size">72</property>
+            <property name="icon_name">printer-symbolic</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">No printers</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="printer-add-button2">
+            <property name="label" translatable="yes" comments="Translators: This button adds new printer.">Add a Printer</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="relief">normal</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="name">empty-state</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">20</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="yalign">1</property>
+            <property name="label" translatable="yes" comments="Translators: The CUPS server is not running (we can not connect to it).">Sorry! The system printing service
+doesn't seem to be available.</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="pixel_size">64</property>
+            <property name="icon_name">computer-fail</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="name">no-cups-page</property>
       </packing>
     </child>
   </object>

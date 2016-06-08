@@ -732,9 +732,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       priv->dests != NULL)
     {
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "notebook");
-      if (gtk_notebook_get_current_page (GTK_NOTEBOOK (widget)) >= NOTEBOOK_NO_PRINTERS_PAGE)
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_INFO_PAGE);
+        gtk_builder_get_object (priv->builder, "main-vbox");
+      gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
 
       for (i = 0; i < priv->dests[id].num_options; i++)
         {
@@ -1035,9 +1034,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
               printer_model = g_strdup (priv->new_printer_make_and_model);
 
               widget = (GtkWidget*)
-                gtk_builder_get_object (priv->builder, "notebook");
-              if (gtk_notebook_get_current_page (GTK_NOTEBOOK (widget)) >= NOTEBOOK_NO_PRINTERS_PAGE)
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_INFO_PAGE);
+                gtk_builder_get_object (priv->builder, "main-vbox");
+              gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
             }
         }
 
@@ -1142,9 +1140,9 @@ set_current_page (GObject      *source_object,
   g_object_unref (source_object);
 
   if (success)
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_PRINTERS_PAGE);
+    gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty-state");
   else
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_CUPS_PAGE);
+    gtk_stack_set_visible_child_name (GTK_STACK (widget), "no-cups-page");
 }
 
 static void
@@ -1218,7 +1216,7 @@ actualize_printers_list_cb (GObject      *source_object,
   if (priv->num_dests == 0 && !priv->new_printer_name)
     {
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "notebook");
+        gtk_builder_get_object (priv->builder, "main-vbox");
 
       pp_cups_connection_test_async (g_object_ref (cups), set_current_page, widget);
 
@@ -2663,7 +2661,6 @@ update_sensitivity (gpointer user_data)
   gboolean                 already_present_local;
   GList                   *iter;
   gchar                   *current_printer_name = NULL;
-  gchar                   *no_printer_label;
   gint                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -2744,11 +2741,6 @@ update_sensitivity (gpointer user_data)
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button2");
   gtk_widget_set_sensitive (widget, local_server && is_authorized && !no_cups && !priv->new_printer_name);
-
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "no-printer-label");
-  no_printer_label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", _("No printers"));
-  gtk_label_set_markup (GTK_LABEL (widget), no_printer_label);
-  g_free (no_printer_label);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-remove-button");
   gtk_widget_set_sensitive (widget, already_present_local && printer_selected && !no_cups);
