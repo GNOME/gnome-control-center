@@ -573,12 +573,12 @@
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
+            <property name="margin_bottom">15</property>
             <property name="label" translatable="yes">No printers</property>
             <style>
               <class name="dim-label"/>
             </style>
             <attributes>
-              <attribute name="weight" value="bold"/>
               <attribute name="scale" value="1.2"/>
             </attributes>
           </object>
@@ -613,20 +613,26 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">20</property>
+        <property name="spacing">10</property>
         <property name="orientation">vertical</property>
+        <property name="valign">center</property>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="yalign">1</property>
             <property name="label" translatable="yes" comments="Translators: The CUPS server is not running (we can not connect to it).">Sorry! The system printing service
 doesn't seem to be available.</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <attributes>
+                <attribute name="scale" value="1.2"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -634,13 +640,16 @@ doesn't seem to be available.</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="valign">start</property>
-            <property name="pixel_size">64</property>
-            <property name="icon_name">computer-fail</property>
+            <property name="pixel_size">72</property>
+            <property name="icon_name">computer-fail-symbolic</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
           </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>
