@@ -1,6 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
- * Copyright (C) 2012, 2013 Red Hat, Inc.
+ * Copyright (C) 2012, 2013, 2016 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -398,48 +398,51 @@ goa_panel_add_account_dialog_add_provider (GoaPanelAddAccountDialog *add_account
 {
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
   GtkListBox *list_box;
-  GoaProviderGroup group;
+  GoaProviderFeatures features;
   GtkWidget *group_grid = NULL;
 
   g_return_if_fail (provider != NULL);
 
-  group = goa_provider_get_provider_group (provider);
+  features = goa_provider_get_provider_features (provider);
 
   /* The list of providers returned by GOA are sorted such that all
    * the branded providers are at the beginning of the list, followed
    * by the others. Since this is the order in which they are added,
    * we can rely on this fact, which helps to simplify the code.
    */
-  if (group != GOA_PROVIDER_GROUP_BRANDED && !priv->add_other)
+  if ((features & GOA_PROVIDER_FEATURE_BRANDED) == 0 && !priv->add_other)
     {
       add_account_dialog_create_provider_ui (add_account, NULL, priv->branded_list_box);
       priv->add_other = TRUE;
     }
 
-  switch (group)
+  if ((features & GOA_PROVIDER_FEATURE_BRANDED) != 0)
     {
-    case GOA_PROVIDER_GROUP_BRANDED:
       list_box = priv->branded_list_box;
-      break;
-    case GOA_PROVIDER_GROUP_CONTACTS:
+    }
+  else if ((features & GOA_PROVIDER_FEATURE_CONTACTS) != 0)
+    {
       group_grid = priv->contacts_grid;
       list_box = priv->contacts_list_box;
-      break;
-    case GOA_PROVIDER_GROUP_MAIL:
+    }
+  else if ((features & GOA_PROVIDER_FEATURE_MAIL) != 0)
+    {
       group_grid = priv->mail_grid;
       list_box = priv->mail_list_box;
-      break;
-    case GOA_PROVIDER_GROUP_CHAT:
+    }
+  else if ((features & GOA_PROVIDER_FEATURE_CHAT) != 0)
+    {
       group_grid = priv->chat_grid;
       list_box = priv->chat_list_box;
-      break;
-    case GOA_PROVIDER_GROUP_TICKETING:
+    }
+  else if ((features & GOA_PROVIDER_FEATURE_TICKETING) != 0)
+    {
       group_grid = priv->ticketing_grid;
       list_box = priv->ticketing_list_box;
-      break;
-    default:
+    }
+  else
+    {
       g_assert_not_reached ();
-      break;
     }
 
   add_account_dialog_create_provider_ui (add_account, provider, list_box);
