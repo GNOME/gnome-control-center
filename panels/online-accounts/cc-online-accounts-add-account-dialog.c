@@ -35,6 +35,7 @@
 struct _GoaPanelAddAccountDialogPrivate
 {
   GtkListBox *branded_list_box;
+  GtkListBox *calendar_list_box;
   GtkListBox *contacts_list_box;
   GtkListBox *mail_list_box;
   GtkListBox *chat_list_box;
@@ -43,6 +44,7 @@ struct _GoaPanelAddAccountDialogPrivate
   GoaClient *client;
   GoaObject *object;
   GoaProvider *provider;
+  GtkWidget *calendar_grid;
   GtkWidget *contacts_grid;
   GtkWidget *mail_grid;
   GtkWidget *chat_grid;
@@ -326,6 +328,12 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
                                       _("Mail"));
 
   add_account_dialog_create_group_ui (add_account,
+                                      &priv->calendar_list_box,
+                                      &priv->calendar_grid,
+                                      grid,
+                                      _("Calendar"));
+
+  add_account_dialog_create_group_ui (add_account,
                                       &priv->contacts_list_box,
                                       &priv->contacts_grid,
                                       grid,
@@ -419,6 +427,11 @@ goa_panel_add_account_dialog_add_provider (GoaPanelAddAccountDialog *add_account
   if ((features & GOA_PROVIDER_FEATURE_BRANDED) != 0)
     {
       list_box = priv->branded_list_box;
+    }
+  else if ((features & GOA_PROVIDER_FEATURE_CALENDAR) != 0)
+    {
+      group_grid = priv->calendar_grid;
+      list_box = priv->calendar_list_box;
     }
   else if ((features & GOA_PROVIDER_FEATURE_CONTACTS) != 0)
     {
