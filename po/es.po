@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-01 15:12+0000\n"
-"PO-Revision-Date: 2016-06-02 09:20+0200\n"
+"POT-Creation-Date: 2016-06-08 12:58+0000\n"
+"PO-Revision-Date: 2016-06-09 12:06+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -125,7 +125,7 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
 #: ../panels/network/net-device-wifi.c:1309
-#: ../panels/network/net-device-wifi.c:1510
+#: ../panels/network/net-device-wifi.c:1546
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2052
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -403,7 +403,7 @@ msgstr "Perfiles ICC soportados"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: ../panels/color/cc-color-panel.c:244
-#: ../panels/network/wireless-security/eap-method-fast.c:419
+#: ../panels/network/wireless-security/eap-method-fast.c:417
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -715,7 +715,7 @@ msgstr "_Importar archivo…"
 
 #: ../panels/color/color.ui.h:31
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#: ../panels/network/connection-editor/net-connection-editor.c:543
+#: ../panels/network/connection-editor/net-connection-editor.c:546
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
 #: ../panels/user-accounts/um-account-dialog.c:1473
@@ -1582,8 +1582,9 @@ msgstr "Lanzadores"
 msgid "Launch help browser"
 msgstr "Lanzar el visor de ayuda"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/cc-window.c:1606
-#: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:934
+#: ../shell/cc-window.c:1584 ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/window.ui.h:3
 msgid "Settings"
 msgstr "Configuración"
 
@@ -1955,8 +1956,8 @@ msgstr "Proxy de la red"
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: ../panels/network/cc-network-panel.c:1129 ../panels/network/net-vpn.c:282
-#: ../panels/network/net-vpn.c:439
+#: ../panels/network/cc-network-panel.c:1129 ../panels/network/net-vpn.c:283
+#: ../panels/network/net-vpn.c:440
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
@@ -1981,7 +1982,7 @@ msgstr "página 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
 #: ../panels/network/connection-editor/security-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:1
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
 msgid "Anony_mous identity"
@@ -1999,7 +2000,7 @@ msgid "page 2"
 msgstr "página 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:460
+#: ../panels/network/connection-editor/ce-page-security.c:458
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2107,7 +2108,7 @@ msgstr "Detalles"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:215
 #: ../panels/network/connection-editor/ce-page-vpn.c:215
-#: ../panels/network/connection-editor/ce-page-wifi.c:225
+#: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Identidad"
@@ -2228,7 +2229,7 @@ msgid "WEP 128-bit Passphrase"
 msgstr "Frase de paso WEP de 128 bits"
 
 #: ../panels/network/connection-editor/ce-page-security.c:294
-#: ../panels/network/wireless-security/wireless-security.c:405
+#: ../panels/network/wireless-security/wireless-security.c:463
 msgid "LEAP"
 msgstr "LEAP"
 
@@ -2419,23 +2420,23 @@ msgstr "Usar esta c_onexión sólo para los recursos en su red"
 msgid "IPv_6"
 msgstr "IPv_6"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:293
+#: ../panels/network/connection-editor/net-connection-editor.c:296
 msgid "Unable to open connection editor"
 msgstr "No se pudo abrir el editor de conexiones"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:311
+#: ../panels/network/connection-editor/net-connection-editor.c:314
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:608
+#: ../panels/network/connection-editor/net-connection-editor.c:613
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:790
+#: ../panels/network/connection-editor/net-connection-editor.c:795
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:861
+#: ../panels/network/connection-editor/net-connection-editor.c:866
 msgid "Add Network Connection"
 msgstr "Añadir conexión de red"
 
@@ -2445,7 +2446,7 @@ msgid "_Reset"
 msgstr "_Reiniciar"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1511
+#: ../panels/network/net-device-wifi.c:1547
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Olvidar"
@@ -2612,7 +2613,7 @@ msgid "Wired"
 msgstr "Cableada"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1669
+#: ../panels/network/net-device-wifi.c:1705
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8
@@ -2653,15 +2654,15 @@ msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
 msgid "_Stop Hotspot"
 msgstr "_Detener «hotspot»"
 
-#: ../panels/network/net-device-wifi.c:1374
+#: ../panels/network/net-device-wifi.c:1408
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La política del sistema prohíbe usarlo como punto de acceso"
 
-#: ../panels/network/net-device-wifi.c:1377
+#: ../panels/network/net-device-wifi.c:1411
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositivo inalámbrico no soporta el modo de punto de acceso"
 
-#: ../panels/network/net-device-wifi.c:1507
+#: ../panels/network/net-device-wifi.c:1543
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2669,11 +2670,11 @@ msgstr ""
 "Se perderán los detalles de las redes seleccionadas, incluyendo la "
 "contraseña y cualquier configuración personalizada."
 
-#: ../panels/network/net-device-wifi.c:1820
+#: ../panels/network/net-device-wifi.c:1853
 msgid "History"
 msgstr "Histórico"
 
-#: ../panels/network/net-device-wifi.c:1824
+#: ../panels/network/net-device-wifi.c:1857
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2681,7 +2682,7 @@ msgid "_Close"
 msgstr "_Cerrar"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1832
+#: ../panels/network/net-device-wifi.c:1865
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
@@ -3237,70 +3238,53 @@ msgstr "falta el «firmware»"
 msgid "Cable unplugged"
 msgstr "Cable desconectado"
 
-#: ../panels/network/wireless-security/eap-method.c:273
-msgid "No Certificate Authority certificate chosen"
-msgstr "No se ha elegido ningún certificado CA"
+#: ../panels/network/wireless-security/eap-method.c:69
+msgid "undefined error in 802.1x security (wpa-eap)"
+msgstr "error no definido en la seguridad 802.1x (wpa-eap)"
 
-#: ../panels/network/wireless-security/eap-method.c:274
-msgid ""
-"Not using a Certificate Authority (CA) certificate can result in connections "
-"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
-"Authority certificate?"
-msgstr ""
-"No usar un certificado de Certificate Authority (CA) puede dar lugar a "
-"conexiones inseguras a redes inalámbricas promiscuas. ¿Quiere elegir un "
-"certificado Certificate Authority?"
+#: ../panels/network/wireless-security/eap-method.c:245
+#| msgid "No input source selected"
+msgid "no file selected"
+msgstr "no se ha seleccionado ningún archivo"
 
-#: ../panels/network/wireless-security/eap-method.c:279
-msgid "Ignore"
-msgstr "Ignorar"
+#: ../panels/network/wireless-security/eap-method.c:276
+msgid "unspecified error validating eap-method file"
+msgstr "error no especificado al validar el archivo del método eap"
 
-#: ../panels/network/wireless-security/eap-method.c:283
-msgid "Choose CA Certificate"
-msgstr "Elija un certificado CA"
+#: ../panels/network/wireless-security/eap-method.c:480
+#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
+msgstr "Claves privadas DER, PEM, o PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
-#: ../panels/network/wireless-security/eap-method.c:643
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr "Claves privadas DER, PEM, o PKCS#12 (*.der, *.pem, *.p12)"
-
-#: ../panels/network/wireless-security/eap-method.c:646
+#: ../panels/network/wireless-security/eap-method.c:483
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "Certificados DER o PEM (*.der, *.pem, *.crt, *.cer)"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:270
-#: ../panels/network/wireless-security/eap-method-peap.c:278
+#: ../panels/network/wireless-security/eap-method-fast.c:72
+msgid "missing EAP-FAST PAC file"
+msgstr "falta el archivo PAC de EAP-FAST"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:268
+#: ../panels/network/wireless-security/eap-method-peap.c:302
+#: ../panels/network/wireless-security/eap-method-ttls.c:333
 msgid "GTC"
 msgstr "GTC"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:286
-#: ../panels/network/wireless-security/eap-method-peap.c:244
-#: ../panels/network/wireless-security/eap-method-ttls.c:261
+#: ../panels/network/wireless-security/eap-method-fast.c:283
+#: ../panels/network/wireless-security/eap-method-peap.c:272
+#: ../panels/network/wireless-security/eap-method-ttls.c:288
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:408
+#: ../panels/network/wireless-security/eap-method-fast.c:406
 msgid "Choose a PAC file"
 msgstr "Elegir un archivo PAC"
 
-#: ../panels/network/wireless-security/eap-method-fast.c:415
+#: ../panels/network/wireless-security/eap-method-fast.c:413
 msgid "PAC files (*.pac)"
 msgstr "Archivos PAC (*.pac)"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
-msgid "PAC _file"
-msgstr "Archivo _PAC"
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-msgid "_Inner authentication"
-msgstr "Autenticación i_nterna"
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
-msgid "PAC pro_visioning"
-msgstr "Pro_visión PAC "
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:1
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
@@ -3309,17 +3293,40 @@ msgstr "Pro_visión PAC "
 msgid " "
 msgstr " "
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Anonymous"
 msgstr "Anónimo"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 msgid "Authenticated"
 msgstr "Autenticado"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 msgid "Both"
 msgstr "Ambos"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+msgid "PAC _file"
+msgstr "Archivo _PAC"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:5
+msgid "_Inner authentication"
+msgstr "Autenticación i_nterna"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+#| msgid "PAC pro_visioning"
+msgid "Allow automatic PAC pro_visioning"
+msgstr "Permitir pro_visión PAC automática"
+
+#: ../panels/network/wireless-security/eap-method-leap.c:65
+msgid "missing EAP-LEAP username"
+msgstr "falta el nombre de usuario de EAP-LEAP"
+
+#: ../panels/network/wireless-security/eap-method-leap.c:74
+msgid "missing EAP-LEAP password"
+msgstr "falta la contraseña de EAP-LEAP"
 
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
@@ -3329,21 +3336,31 @@ msgid "_Username"
 msgstr "Nombre de _usuario"
 
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:3
-#: ../panels/network/wireless-security/eap-method-simple.ui.h:4
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:6
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:3
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:7
 #: ../panels/network/wireless-security/ws-leap.ui.h:3
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
 msgid "Sho_w password"
 msgstr "_Mostrar la contraseña"
 
-#: ../panels/network/wireless-security/eap-method-peap.c:261
-#: ../panels/network/wireless-security/wireless-security.c:381
+#: ../panels/network/wireless-security/eap-method-peap.c:63
+#, c-format
+msgid "invalid EAP-PEAP CA certificate: %s"
+msgstr "CA del certificado EAP-PEAP no válida: %s"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:68
+msgid "invalid EAP-PEAP CA certificate: no certificate specified"
+msgstr ""
+
+#: ../panels/network/wireless-security/eap-method-peap.c:287
+#: ../panels/network/wireless-security/eap-method-ttls.c:318
+#: ../panels/network/wireless-security/wireless-security.c:439
 msgid "MD5"
 msgstr "MD5"
 
-#: ../panels/network/wireless-security/eap-method-peap.c:348
-#: ../panels/network/wireless-security/eap-method-tls.c:455
-#: ../panels/network/wireless-security/eap-method-ttls.c:348
+#: ../panels/network/wireless-security/eap-method-peap.c:381
+#: ../panels/network/wireless-security/eap-method-tls.c:501
+#: ../panels/network/wireless-security/eap-method-ttls.c:412
 msgid "Choose a Certificate Authority certificate"
 msgstr "Elija un certificado CA"
 
@@ -3361,19 +3378,59 @@ msgstr "Versión 1"
 msgid "C_A certificate"
 msgstr "Certificado C_A"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+#, fuzzy
+#| msgid "Authentication required"
+msgid "No CA certificate is _required"
+msgstr "Se necesita autenticación"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:9
 msgid "PEAP _version"
 msgstr "Versión _PEAP"
 
-#: ../panels/network/wireless-security/eap-method-simple.ui.h:3
-msgid "As_k for this password every time"
-msgstr "_Preguntar esta contraseña cada vez"
+#: ../panels/network/wireless-security/eap-method-simple.c:74
+msgid "missing EAP username"
+msgstr "falta el nombre de usuario de EAP"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:281
+#: ../panels/network/wireless-security/eap-method-simple.c:87
+#| msgid "Wrong password"
+msgid "missing EAP password"
+msgstr "falta la contraseña EAP"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:68
+msgid "missing EAP-TLS identity"
+msgstr "falta la identidad EAP-TLS"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:77
+#, c-format
+msgid "invalid EAP-TLS CA certificate: %s"
+msgstr "CA del certificado EAP-TLS no válida: %s"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:84
+msgid "invalid EAP-TLS CA certificate: no certificate specified"
+msgstr ""
+
+#: ../panels/network/wireless-security/eap-method-tls.c:95
+msgid "invalid EAP-TLS password: missing"
+msgstr ""
+
+#: ../panels/network/wireless-security/eap-method-tls.c:109
+#, c-format
+msgid "invalid EAP-TLS private-key: %s"
+msgstr "clave privada EAP-TLS no válida: %s"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:119
+#, c-format
+msgid "invalid EAP-TLS user-certificate: %s"
+msgstr "usuario del certificado EAP-TLS no válido: %s"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:316
 msgid "Unencrypted private keys are insecure"
 msgstr "Las claves privadas sin cifrar son inseguras"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:284
+#: ../panels/network/wireless-security/eap-method-tls.c:319
 msgid ""
 "The selected private key does not appear to be protected by a password.  "
 "This could allow your security credentials to be compromised.  Please select "
@@ -3387,11 +3444,11 @@ msgstr ""
 "\n"
 "(Puede proteger su clave privada con una contraseña con openssl)"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:449
+#: ../panels/network/wireless-security/eap-method-tls.c:495
 msgid "Choose your personal certificate"
 msgstr "Elija su certificado personal"
 
-#: ../panels/network/wireless-security/eap-method-tls.c:461
+#: ../panels/network/wireless-security/eap-method-tls.c:507
 msgid "Choose your private key"
 msgstr "Elija su clave privada"
 
@@ -3403,51 +3460,56 @@ msgstr "I_dentidad"
 msgid "_User certificate"
 msgstr "Certificado del _usuario"
 
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:4
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:5
 msgid "Private _key"
 msgstr "Clave pri_vada"
 
-#: ../panels/network/wireless-security/eap-method-tls.ui.h:5
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:6
 msgid "_Private key password"
 msgstr "Contraseña de clave pri_vada"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:228
+#: ../panels/network/wireless-security/eap-method-ttls.c:63
+#, c-format
+msgid "invalid EAP-TTLS CA certificate: %s"
+msgstr "CA del certificado EAP-TTLS no válida: %s"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:68
+msgid "invalid EAP-TTLS CA certificate: no certificate specified"
+msgstr ""
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:258
 msgid "PAP"
 msgstr "PAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:245
+#: ../panels/network/wireless-security/eap-method-ttls.c:273
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:278
+#: ../panels/network/wireless-security/eap-method-ttls.c:303
 msgid "CHAP"
 msgstr "CHAP"
 
-#: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
-msgid "Don't _warn me again"
-msgstr "No a_visarme de nuevo"
+#: ../panels/network/wireless-security/wireless-security.c:87
+msgid "Unknown error validating 802.1x security"
+msgstr "Error desconocido al validar la seguridad 802.1x"
 
-#: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
-msgid "No"
-msgstr "No"
-
-#: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
-msgid "Yes"
-msgstr "Sí"
-
-#: ../panels/network/wireless-security/wireless-security.c:393
+#: ../panels/network/wireless-security/wireless-security.c:451
 msgid "TLS"
 msgstr "TLS"
 
-#: ../panels/network/wireless-security/wireless-security.c:417
+#: ../panels/network/wireless-security/wireless-security.c:475
+msgid "PWD"
+msgstr "PWD"
+
+#: ../panels/network/wireless-security/wireless-security.c:486
 msgid "FAST"
 msgstr "FAST"
 
-#: ../panels/network/wireless-security/wireless-security.c:428
+#: ../panels/network/wireless-security/wireless-security.c:497
 msgid "Tunneled TLS"
 msgstr "TLS a través de túnel"
 
-#: ../panels/network/wireless-security/wireless-security.c:439
+#: ../panels/network/wireless-security/wireless-security.c:508
 msgid "Protected EAP (PEAP)"
 msgstr "EAP protegido (PEAP)"
 
@@ -3456,6 +3518,49 @@ msgstr "EAP protegido (PEAP)"
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
 msgid "Au_thentication"
 msgstr "_Autenticación"
+
+#: ../panels/network/wireless-security/ws-leap.c:63
+msgid "missing leap-username"
+msgstr "falta el nombre de usuario leap"
+
+#: ../panels/network/wireless-security/ws-leap.c:74
+#| msgid "Wrong password"
+msgid "missing leap-password"
+msgstr "falta la contraseña leap"
+
+#: ../panels/network/wireless-security/ws-wep-key.c:107
+msgid "missing wep-key"
+msgstr "falta la clave wep"
+
+#: ../panels/network/wireless-security/ws-wep-key.c:116
+#, c-format
+msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
+msgstr ""
+"clave wep no válida: una clave de longitud %zu sólo puede contener dígitos "
+"hexadecimales"
+
+#: ../panels/network/wireless-security/ws-wep-key.c:124
+#, c-format
+msgid ""
+"invalid wep-key: key with a length of %zu must contain only ascii characters"
+msgstr ""
+
+#: ../panels/network/wireless-security/ws-wep-key.c:130
+#, c-format
+msgid ""
+"invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
+"(ascii) or 10/26 (hex)"
+msgstr ""
+"clave wep no válida: longitud de clave %zu incorrecta. La clave debe ser de "
+"5/13 (ascii) o 10/26 (hexadecimal)"
+
+#: ../panels/network/wireless-security/ws-wep-key.c:137
+msgid "invalid wep-key: passphrase must be non-empty"
+msgstr "clave wep no válida: la frase de paso no puede estar vacía"
+
+#: ../panels/network/wireless-security/ws-wep-key.c:139
+msgid "invalid wep-key: passphrase must be shorter than 64 characters"
+msgstr ""
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
 msgid "1 (Default)"
@@ -3492,6 +3597,17 @@ msgstr "_Mostrar la clave"
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:10
 msgid "WEP inde_x"
 msgstr "Ín_dice WEP"
+
+#: ../panels/network/wireless-security/ws-wpa-psk.c:70
+#, c-format
+msgid ""
+"invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
+"digits"
+msgstr ""
+
+#: ../panels/network/wireless-security/ws-wpa-psk.c:79
+msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
+msgstr ""
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type"
@@ -6017,16 +6133,12 @@ msgstr "Nombre _completo"
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 #: ../panels/user-accounts/um-user-panel.c:900
-#| msgctxt "Account type"
-#| msgid "Standard"
 msgid "Standard"
 msgstr "Estándar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 #: ../panels/user-accounts/um-user-panel.c:898
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator"
 msgstr "Administrador"
 
@@ -6064,8 +6176,6 @@ msgid "_Domain"
 msgstr "_Dominio"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#| msgctxt "printer state"
-#| msgid "Offline"
 msgid "You are Offline"
 msgstr "Está desconectado"
 
@@ -7164,6 +7274,11 @@ msgstr "Botón inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidad de presión del lápiz"
 
+#: ../shell/alt/cc-window.c:882 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1478
+msgid "All Settings"
+msgstr "Todas las configuraciones"
+
 #: ../shell/appdata/gnome-control-center.appdata.xml.in.h:1
 msgid "GNOME Control Center"
 msgstr "Centro de control de GNOME"
@@ -7220,22 +7335,18 @@ msgstr "Ayuda"
 msgid "Quit"
 msgstr "Salir"
 
-#: ../shell/cc-window.c:61 ../shell/cc-window.c:1495
-msgid "All Settings"
-msgstr "Todas las configuraciones"
-
 #. Add categories
-#: ../shell/cc-window.c:881
+#: ../shell/cc-window.c:871
 msgctxt "category"
 msgid "Personal"
 msgstr "Personal"
 
-#: ../shell/cc-window.c:882
+#: ../shell/cc-window.c:872
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:883
+#: ../shell/cc-window.c:873
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
@@ -7273,6 +7384,46 @@ msgstr "Volver a la vista general"
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Cancelar búsqueda"
+
+#: ../shell/window.ui.h:1
+#| msgid "GNOME Control Center"
+msgid "Welcome to the Control Center"
+msgstr "Bienvenido al centro de control"
+
+#: ../shell/window.ui.h:2
+msgid "Select a panel in the sidelist to see the available options"
+msgstr ""
+"Seleccione un panel en la lista lateral para ver las opciones disponibles"
+
+#~ msgid "No Certificate Authority certificate chosen"
+#~ msgstr "No se ha elegido ningún certificado CA"
+
+#~ msgid ""
+#~ "Not using a Certificate Authority (CA) certificate can result in "
+#~ "connections to insecure, rogue Wi-Fi networks.  Would you like to choose "
+#~ "a Certificate Authority certificate?"
+#~ msgstr ""
+#~ "No usar un certificado de Certificate Authority (CA) puede dar lugar a "
+#~ "conexiones inseguras a redes inalámbricas promiscuas. ¿Quiere elegir un "
+#~ "certificado Certificate Authority?"
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorar"
+
+#~ msgid "Choose CA Certificate"
+#~ msgstr "Elija un certificado CA"
+
+#~ msgid "As_k for this password every time"
+#~ msgstr "_Preguntar esta contraseña cada vez"
+
+#~ msgid "Don't _warn me again"
+#~ msgstr "No a_visarme de nuevo"
+
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "Yes"
+#~ msgstr "Sí"
 
 #~ msgid "Bond"
 #~ msgstr "Bond"
@@ -7848,9 +7999,6 @@ msgstr "Cancelar búsqueda"
 
 #~ msgid "Domain not found."
 #~ msgstr "Dominio no encontrado."
-
-#~ msgid "Wrong password"
-#~ msgstr "Contraseña errónea"
 
 #~ msgctxt "Password hint"
 #~ msgid "Try to add more characters."
