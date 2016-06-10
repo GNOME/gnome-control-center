@@ -30,6 +30,7 @@
 #include <polkit/polkit.h>
 
 #include "shell/list-box-helper.h"
+#include "shell/hostname-helper.h"
 #include "network-dialogs.h"
 #include "panel-common.h"
 
@@ -878,14 +879,6 @@ get_hostname (void)
                 g_variant_unref (res);
         }
 
-        if (str == NULL || *str == '\0') {
-                str = g_strdup (g_get_host_name ());
-        }
-
-        if (str == NULL || *str == '\0') {
-                str = g_strdup ("GNOME");
-	}
-
         return str;
 }
 
@@ -893,9 +886,12 @@ static GByteArray *
 generate_ssid_for_hotspot (NetDeviceWifi *device_wifi)
 {
         GByteArray *ssid_array;
-        gchar *ssid;
+        gchar *hostname, *ssid;
 
-        ssid = get_hostname ();
+        hostname = get_hostname ();
+        ssid = pretty_hostname_to_ssid (hostname);
+        g_free (hostname);
+
         ssid_array = ssid_to_byte_array (ssid);
         g_free (ssid);
 
