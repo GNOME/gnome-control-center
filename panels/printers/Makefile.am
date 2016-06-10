@@ -1,3 +1,5 @@
+include $(top_srcdir)/Makefile.decl
+
 cappletname = printers
 
 AM_CPPFLAGS = 						\
@@ -7,6 +9,7 @@ AM_CPPFLAGS = 						\
 	$(SMBCLIENT_CFLAGS)				\
 	-I$(top_srcdir)/shell/				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DTEST_SRCDIR=\""$(srcdir)/"\"			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libprinters.la
@@ -68,17 +71,15 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
 EXTRA_DIST = $(resource_files) printers.gresource.xml
 
-noinst_PROGRAMS = test-shift test-canonicalization
+noinst_PROGRAMS = $(TEST_PROGS)
+TEST_PROGS += test-shift test-canonicalization
 test_shift_SOURCES = pp-print-device.c pp-print-device.h pp-utils.c pp-utils.h test-shift.c
 test_shift_LDADD = $(PANEL_LIBS) $(PRINTERS_PANEL_LIBS) $(CUPS_LIBS)
 test_canonicalization_SOURCES = pp-print-device.c pp-print-device.h pp-utils.c pp-utils.h test-canonicalization.c
 test_canonicalization_LDADD = $(PANEL_LIBS) $(PRINTERS_PANEL_LIBS) $(CUPS_LIBS)
 
-EXTRA_DIST += 				\
+EXTRA_DIST +=				\
 	shift-test.txt			\
 	canonicalization-test.txt
-check-local: test-shift test-canonicalization
-	$(builddir)/test-shift $(srcdir)/shift-test.txt > /dev/null
-	$(builddir)/test-canonicalization $(srcdir)/canonicalization-test.txt > /dev/null
 
 -include $(top_srcdir)/git.mk
