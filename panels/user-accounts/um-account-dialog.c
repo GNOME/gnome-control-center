@@ -1410,17 +1410,7 @@ mode_init (UmAccountDialog *self)
 static void
 um_account_dialog_init (UmAccountDialog *self)
 {
-        GtkWidget *widget;
-        GtkDialog *dialog;
-
         gtk_widget_init_template (GTK_WIDGET (self));
-
-        dialog = GTK_DIALOG (self);
-
-        gtk_dialog_add_button (dialog, _("_Cancel"), GTK_RESPONSE_CANCEL);
-        widget = gtk_dialog_add_button (dialog, _("_Add"), GTK_RESPONSE_OK);
-        gtk_dialog_set_default_response (dialog, GTK_RESPONSE_OK);
-        gtk_widget_grab_default (widget);
 
         local_init (self);
         enterprise_init (self);
