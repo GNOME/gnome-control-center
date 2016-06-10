@@ -8,7 +8,17 @@
       <column type="gchararray"/>
     </columns>
   </object>
-
+  <template class="UmAccountDialog" parent="GtkDialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="title" translatable="yes">Add User</property>
+    <property name="icon_name">system-users</property>
+    <property name="use_header_bar">1</property>
+    <child internal-child="vbox">
       <object class="GtkBox" id="account-dialog">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -21,21 +31,21 @@
             <property name="border_width">6</property>
             <property name="margin_bottom">6</property>
             <child>
-              <object class="GtkGrid" id="local-area">
+              <object class="GtkGrid" id="local_area">
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
                 <property name="column_spacing">6</property>
                 <property name="row_spacing">6</property>
                 <property name="halign">center</property>
                 <child>
-                  <object class="GtkComboBoxText" id="local-username">
+                  <object class="GtkComboBoxText" id="local_username">
                     <property name="visible">True</property>
                     <property name="has_entry">True</property>
                     <property name="entry_text_column">0</property>
                     <property name="model">username-model</property>
                     <property name="hexpand">True</property>
                     <child internal-child="entry">
-                      <object class="GtkEntry" id="local-username-entry">
+                      <object class="GtkEntry" id="local_username_entry">
                         <property name="activates_default">True</property>
                       </object>
                     </child>
@@ -46,7 +56,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="local-username-hint">
+                  <object class="GtkLabel" id="local_username_hint">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="yalign">0</property>
@@ -75,7 +85,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">local-username</property>
+                    <property name="mnemonic_widget">local_username</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -87,7 +97,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="local-name">
+                  <object class="GtkEntry" id="local_name">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="activates_default">True</property>
@@ -104,7 +114,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Full Name</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">local-name</property>
+                    <property name="mnemonic_widget">local_name</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -123,7 +133,7 @@
                       <class name="linked"/>
                     </style>
                     <child>
-                      <object class="GtkRadioButton" id="account-type-standard">
+                      <object class="GtkRadioButton" id="account_type_standard">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
@@ -140,7 +150,7 @@
                         <property name="label" translatable="yes">Administrator</property>
                         <property name="draw_indicator">False</property>
                         <property name="height_request">35</property>
-                        <property name="group">account-type-standard</property>
+                        <property name="group">account_type_standard</property>
                       </object>
                     </child>
                   </object>
@@ -186,7 +196,7 @@
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkRadioButton" id="local-password-login-radio">
+                      <object class="GtkRadioButton" id="local_password_login_radio">
                         <property name="label" translatable="yes">Allow user to set a password when they next _login</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -201,14 +211,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRadioButton" id="local-password-now-radio">
+                      <object class="GtkRadioButton" id="local_password_radio">
                         <property name="label" translatable="yes">Set a password _now</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
-                        <property name="group">local-password-login-radio</property>
+                        <property name="group">local_password_login_radio</property>
                         <property name="use_underline">True</property>
                         <property name="margin_start">12</property>
                       </object>
@@ -231,7 +241,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">local-password</property>
+                    <property name="mnemonic_widget">local_password</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -245,7 +255,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="local-password">
+                  <object class="GtkEntry" id="local_password">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="has_tooltip">True</property>
@@ -264,7 +274,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLevelBar" id="local-strength-indicator">
+                  <object class="GtkLevelBar" id="local_strength_indicator">
                     <property name="visible">True</property>
                     <property name="mode">discrete</property>
                     <property name="max-value">4</property>
@@ -281,7 +291,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="local-hint">
+                  <object class="GtkLabel" id="local_hint">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="yalign">0</property>
@@ -313,7 +323,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Confirm</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">local-verify</property>
+                    <property name="mnemonic_widget">local_verify</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -327,7 +337,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="local-verify">
+                  <object class="GtkEntry" id="local_verify">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="visibility">False</property>
@@ -344,7 +354,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="local-verify-hint">
+                  <object class="GtkLabel" id="local_verify_hint">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="yalign">0</property>
@@ -407,7 +417,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Domain</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">enterprise-domain</property>
+                    <property name="mnemonic_widget">enterprise_domain</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -427,7 +437,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">enterprise-login</property>
+                    <property name="mnemonic_widget">enterprise_login</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -447,7 +457,7 @@
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">enterprise-password</property>
+                    <property name="mnemonic_widget">enterprise_password</property>
                     <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
@@ -487,14 +497,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="enterprise-domain">
+                  <object class="GtkComboBox" id="enterprise_domain">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="has_entry">True</property>
                     <property name="entry_text_column">0</property>
                     <child internal-child="entry">
-                      <object class="GtkEntry" id="combobox-entry">
+                      <object class="GtkEntry" id="enterprise_domain_entry">
                         <property name="can_focus">True</property>
                       </object>
                     </child>
@@ -507,7 +517,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="enterprise-domain-hint">
+                  <object class="GtkLabel" id="enterprise_domain_hint">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="yalign">0</property>
@@ -534,7 +544,7 @@
                 </child>
 
                 <child>
-                  <object class="GtkEntry" id="enterprise-login">
+                  <object class="GtkEntry" id="enterprise_login">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
@@ -551,7 +561,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="enterprise-password">
+                  <object class="GtkEntry" id="enterprise_password">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
@@ -674,7 +684,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkToggleButton" id="enterprise-button">
+              <object class="GtkToggleButton" id="enterprise_button">
                 <property name="label" translatable="yes">_Enterprise Login</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -707,6 +717,8 @@
           </packing>
         </child>
       </object>
+    </child>
+  </template>
   <object class="GtkSizeGroup" id="labels_sizegroup">
     <widgets>
       <widget name="label6"/>
@@ -721,20 +733,20 @@
   </object>
   <object class="GtkSizeGroup" id="controls_sizegroup">
     <widgets>
-      <widget name="local-username"/>
-      <widget name="local-name"/>
+      <widget name="local_username"/>
+      <widget name="local_name"/>
       <widget name="local-account-type"/>
-      <widget name="local-password"/>
-      <widget name="local-verify"/>
-      <widget name="enterprise-domain"/>
-      <widget name="enterprise-login"/>
-      <widget name="enterprise-password"/>
+      <widget name="local_password"/>
+      <widget name="local_verify"/>
+      <widget name="enterprise_domain"/>
+      <widget name="enterprise_login"/>
+      <widget name="enterprise_password"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup">
     <property name="mode">horizontal</property>
     <widgets>
-      <widget name="account-type-standard"/>
+      <widget name="account_type_standard"/>
       <widget name="account-type-admin"/>
     </widgets>
   </object>
