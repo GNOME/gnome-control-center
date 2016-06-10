@@ -70,6 +70,46 @@ test_hostname (void)
 	g_free (contents);
 }
 
+static void
+test_ssid (void)
+{
+	char *contents;
+	guint i;
+	char **lines;
+
+	if (g_file_get_contents (TEST_SRCDIR "/ssids-test.txt", &contents, NULL, NULL) == FALSE) {
+		g_warning ("Failed to load '%s'", TEST_SRCDIR "/ssids-test.txt");
+		g_test_fail ();
+		return;
+	}
+
+	lines = g_strsplit (contents, "\n", -1);
+	if (lines == NULL) {
+		g_warning ("Test file is empty");
+		g_test_fail ();
+		return;
+	}
+
+	for (i = 0; lines[i] != NULL; i++) {
+		char *ssid;
+		char **items;
+
+		if (*lines[i] == '#')
+			continue;
+		if (*lines[i] == '\0')
+			break;
+
+		items = g_strsplit (lines[i], "\t", -1);
+		ssid = pretty_hostname_to_ssid (items[0]);
+		g_assert_cmpstr (ssid, ==, items[1]);
+		g_free (ssid);
+		g_strfreev (items);
+	}
+
+	g_strfreev (lines);
+	g_free (contents);
+}
+
 int main (int argc, char **argv)
 {
 	char *locale;
@@ -90,6 +130,7 @@ int main (int argc, char **argv)
 	g_test_init (&argc, &argv, NULL);
 
 	g_test_add_func ("/shell/hostname", test_hostname);
+	g_test_add_func ("/shell/ssid", test_ssid);
 
 	return g_test_run ();
 }

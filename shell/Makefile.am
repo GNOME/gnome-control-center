@@ -5,6 +5,7 @@ SUBDIRS = appdata alt
 AM_CPPFLAGS =					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
 	-DTEST_SRCDIR=\""$(srcdir)/"\"		\
+	-DTEST_TOPSRCDIR=\""$(top_srcdir)/"\"	\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	$(CHEESE_CFLAGS)			\
@@ -164,6 +165,6 @@ noinst_PROGRAMS += test-hostname
 test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
 test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
-EXTRA_DIST += hostnames-test.txt
+EXTRA_DIST += hostnames-test.txt ssids-test.txt
 
 -include $(top_srcdir)/git.mk

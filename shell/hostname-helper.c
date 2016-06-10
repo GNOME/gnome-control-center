@@ -17,6 +17,7 @@
  */
 
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <string.h>
 
 #include "hostname-helper.h"
@@ -168,3 +169,50 @@ bail:
 	return g_strdup ("localhost");
 }
 #undef CHECK
+
+/* Max length of an SSID in bytes */
+#define SSID_MAX_LEN 32
+char *
+pretty_hostname_to_ssid (const char *pretty)
+{
+	const char *p, *prev;
+	char *ret = NULL;
+
+	if (pretty == NULL) {
+		pretty = g_get_host_name ();
+		if (g_strcmp0 (pretty, "localhost") == 0)
+			pretty = NULL;
+	}
+
+	if (pretty == NULL) {
+		/* translators: This is the default hotspot name, need to be less than 32-bytes */
+		ret = g_strdup (C_("hotspot", "Hotspot"));
+		g_assert (strlen (ret) <= 32);
+		return ret;
+	}
+
+	g_return_val_if_fail (g_utf8_validate (pretty, -1, NULL), NULL);
+
+	p = pretty;
+	prev = NULL;
+	while ((p = g_utf8_find_next_char (p, NULL)) != NULL) {
+		if (p == prev)
+			break;
+
+		if (p - pretty > 32) {
+			ret = g_strndup (pretty, prev - pretty);
+			break;
+		}
+		if (p - pretty == 32) {
+			ret = g_strndup (pretty, p - pretty);
+			break;
+		}
+
+		prev = p;
+	}
+
+	if (ret == NULL)
+		ret = g_strdup (pretty);
+
+	return ret;
+}
