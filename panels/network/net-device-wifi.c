@@ -1058,6 +1058,10 @@ start_shared_connection (NetDeviceWifi *device_wifi)
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         if (c != NULL) {
+                NMSettingWireless *sw;
+
+                sw = nm_connection_get_setting_wireless (c);
+                g_object_set (sw, "ssid", ssid, NULL);
                 g_bytes_unref (ssid);
 
                 g_debug ("activate existing hotspot connection\n");
