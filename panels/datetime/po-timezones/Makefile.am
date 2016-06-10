@@ -15,6 +15,8 @@ NLSPACKAGE = $(GETTEXT_PACKAGE)-timezones
 %.mo: %.po
 	$(AM_V_GEN) msgfmt -o $@ $<
 
+test:
+
 install: $(CATALOGS)
 	@mkdir -p $(DESTDIR)$(localedir)
 	for n in $(CATALOGS); do \

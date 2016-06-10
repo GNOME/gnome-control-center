@@ -20,13 +20,34 @@ print_endianess (const char *lang)
 		g_print ("\t\t%s\n", date_endian_to_string (endianess));
 }
 
-int main (int argc, char **argv)
+static void
+test_endianess (void)
 {
 	GDir *dir;
 	const char *name;
 
+	dir = g_dir_open ("/usr/share/i18n/locales/", 0, NULL);
+	if (dir == NULL) {
+		/* Try with /usr/share/locale/
+		 * https://bugzilla.gnome.org/show_bug.cgi?id=646780 */
+		dir = g_dir_open ("/usr/share/locale/", 0, NULL);
+		if (dir == NULL) {
+			g_assert_not_reached ();
+		}
+	}
+
+	while ((name = g_dir_read_name (dir)) != NULL)
+		print_endianess (name);
+}
+
+int main (int argc, char **argv)
+{
 	setlocale (LC_ALL, "");
 	bind_textdomain_codeset ("libc", "UTF-8");
+
+	g_test_init (&argc, &argv, NULL);
+
+	g_setenv ("G_DEBUG", "fatal_warnings", FALSE);
 
 	if (argv[1] != NULL) {
 		verbose = 1;
@@ -38,18 +59,7 @@ int main (int argc, char **argv)
 		return 0;
 	}
 
-	dir = g_dir_open ("/usr/share/i18n/locales/", 0, NULL);
-	if (dir == NULL) {
-		/* Try with /usr/share/locale/
-		 * https://bugzilla.gnome.org/show_bug.cgi?id=646780 */
-		dir = g_dir_open ("/usr/share/locale/", 0, NULL);
-		if (dir == NULL) {
-			return 1;
-		}
-	}
+	g_test_add_func ("/datetime/endianess", test_endianess);
 
-	while ((name = g_dir_read_name (dir)) != NULL)
-		print_endianess (name);
-
-	return 0;
+	return g_test_run ();
 }

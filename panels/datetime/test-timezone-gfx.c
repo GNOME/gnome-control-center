@@ -3,24 +3,13 @@
 
 #include "tz.h"
 
-int main (int argc, char **argv)
+static void
+test_timezone_gfx (gconstpointer data)
 {
+	const char *pixmap_dir = data;
 	TzDB *db;
 	GPtrArray *locs;
 	guint i;
-	char *pixmap_dir;
-	int retval = 0;
-
-        setlocale (LC_ALL, "");
-
-	if (argc == 2) {
-		pixmap_dir = g_strdup (argv[1]);
-	} else if (argc == 1) {
-		pixmap_dir = g_strdup ("data/");
-	} else {
-		g_message ("Usage: %s [PIXMAP DIRECTORY]", argv[0]);
-		return 1;
-	}
 
 	db = tz_load_db ();
 	locs = tz_get_locations (db);
@@ -42,14 +31,34 @@ int main (int argc, char **argv)
 
 		if (g_file_test (path, G_FILE_TEST_IS_REGULAR) == FALSE) {
 			g_message ("File '%s' missing for zone '%s'", filename, loc->zone);
-			retval = 1;
+			g_test_fail ();
 		}
 
 		g_free (filename);
 		g_free (path);
 	}
 	tz_db_free (db);
-	g_free (pixmap_dir);
+}
 
-	return retval;
+int main (int argc, char **argv)
+{
+	char *pixmap_dir;
+
+        setlocale (LC_ALL, "");
+	g_test_init (&argc, &argv, NULL);
+
+	g_setenv ("G_DEBUG", "fatal_warnings", FALSE);
+
+	if (argc == 2) {
+		pixmap_dir = g_strdup (argv[1]);
+	} else if (argc == 1) {
+		pixmap_dir = g_strdup ("data/");
+	} else {
+		g_message ("Usage: %s [PIXMAP DIRECTORY]", argv[0]);
+		return 1;
+	}
+
+	g_test_add_data_func ("/datetime/timezone-gfx", pixmap_dir, test_timezone_gfx);
+
+	return g_test_run ();
 }

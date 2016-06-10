@@ -1,3 +1,4 @@
+#include <locale.h>
 #include <gtk/gtk.h>
 #include "cc-timezone-map.h"
 
@@ -56,15 +57,13 @@ get_timezone_list (GList *tzs,
 	return tzs;
 }
 
-int main (int argc, char **argv)
+static void
+test_timezone (void)
 {
 	CcTimezoneMap *map;
 	TzDB *tz_db;
 	GList *tzs, *l;
 	GHashTable *ht;
-	int ret = 0;
-
-	gtk_init (&argc, &argv);
 
 	ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 	map = cc_timezone_map_new ();
@@ -83,12 +82,13 @@ int main (int argc, char **argv)
 				else
 					g_print ("Failed to locate timezone '%s' (original name: '%s')\n", clean_tz, timezone);
 				g_hash_table_insert (ht, g_strdup (clean_tz), GINT_TO_POINTER (TRUE));
+				g_test_fail ();
 			}
 			/* We don't warn for those two, we'll just fallback
 			 * in the panel code */
 			if (!g_str_equal (clean_tz, "posixrules") &&
 			    !g_str_equal (clean_tz, "Factory"))
-				ret = 1;
+				g_test_fail ();
 		}
 		g_free (timezone);
 		g_free (clean_tz);
@@ -96,6 +96,17 @@ int main (int argc, char **argv)
 	g_list_free (tzs);
 	tz_db_free (tz_db);
 	g_hash_table_destroy (ht);
+}
 
-	return ret;
+int main (int argc, char **argv)
+{
+	setlocale (LC_ALL, "");
+	gtk_init (NULL, NULL);
+	g_test_init (&argc, &argv, NULL);
+
+	g_setenv ("G_DEBUG", "fatal_warnings", FALSE);
+
+	g_test_add_func ("/datetime/timezone", test_timezone);
+
+	return g_test_run ();
 }
