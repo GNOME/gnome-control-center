@@ -1093,7 +1093,6 @@ start_shared_connection (NetDeviceWifi *device_wifi)
 
         g_object_set (sw,
                       "mode", mode,
-                      "security", "802-11-wireless-security",
                       NULL);
 
         str_mac = nm_device_wifi_get_permanent_hw_address (NM_DEVICE_WIFI (device));
