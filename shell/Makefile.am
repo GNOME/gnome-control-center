@@ -1,7 +1,10 @@
+include $(top_srcdir)/Makefile.decl
+
 SUBDIRS = appdata alt
 
 AM_CPPFLAGS =					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
+	-DTEST_SRCDIR=\""$(srcdir)/"\"		\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	$(CHEESE_CFLAGS)			\
@@ -156,12 +159,11 @@ EXTRA_DIST =					\
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
+TEST_PROGS += test-hostname
 noinst_PROGRAMS += test-hostname
 test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
 test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
 EXTRA_DIST += hostnames-test.txt
-check-local: test-hostname
-	$(builddir)/test-hostname $(srcdir)/hostnames-test.txt > /dev/null
 
 -include $(top_srcdir)/git.mk

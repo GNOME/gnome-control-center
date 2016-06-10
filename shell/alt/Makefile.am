@@ -16,4 +16,6 @@ libshell_alt_la_SOURCES = 			\
 
 libshell_alt_la_LIBADD = $(top_builddir)/libgd/libgd.la
 
+test:
+
 -include $(top_srcdir)/git.mk

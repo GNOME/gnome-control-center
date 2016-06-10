@@ -4,6 +4,8 @@ appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files =						\
 	gnome-control-center.appdata.xml.in
 
+test:
+
 EXTRA_DIST = $(appdata_in_files)
 
 CLEANFILES =							\
