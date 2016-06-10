@@ -934,9 +934,21 @@ on_join_login (GObject *source,
 }
 
 static void
-join_init (UmAccountDialog *self,
-           GtkBuilder *builder)
+join_init (UmAccountDialog *self)
 {
+        GtkBuilder *builder;
+        GError *error = NULL;
+
+        builder = gtk_builder_new ();
+
+        if (!gtk_builder_add_from_resource (builder,
+                                            "/org/gnome/control-center/user-accounts/join-dialog.ui",
+                                            &error)) {
+                g_error ("%s", error->message);
+                g_error_free (error);
+                return;
+        }
+
         self->join_dialog = GTK_DIALOG (gtk_builder_get_object (builder, "join-dialog"));
         self->join_domain = GTK_LABEL (gtk_builder_get_object (builder, "join-domain"));
         self->join_name = GTK_ENTRY (gtk_builder_get_object (builder, "join-name"));
@@ -944,6 +956,8 @@ join_init (UmAccountDialog *self,
 
         g_signal_connect (self->join_dialog, "response",
                           G_CALLBACK (on_join_response), self);
+
+        g_object_unref (builder);
 }
 
 static void
@@ -1483,7 +1497,7 @@ um_account_dialog_init (UmAccountDialog *self)
 
         local_init (self, builder);
         enterprise_init (self, builder);
-        join_init (self, builder);
+        join_init (self);
         mode_init (self, builder);
 
         g_object_unref (builder);
