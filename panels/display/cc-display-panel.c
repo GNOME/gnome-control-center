@@ -2362,10 +2362,9 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_widget_set_halign (priv->res_combo, GTK_ALIGN_START);
 
   /* overscan */
-  /* if (!gnome_rr_output_is_builtin_display (output) && */
-  /*     gnome_rr_output_supports_underscanning (output)) */
-
-  {
+  if (!gnome_rr_output_is_builtin_display (output) &&
+      gnome_rr_output_supports_underscanning (output))
+    {
       priv->scaling_switch = gtk_switch_new ();
       gtk_switch_set_active (GTK_SWITCH (priv->scaling_switch),
                              gnome_rr_output_info_get_underscanning (priv->current_output));
