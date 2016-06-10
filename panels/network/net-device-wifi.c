@@ -821,19 +821,6 @@ out:
         return;
 }
 
-static GByteArray *
-ssid_to_byte_array (const gchar *ssid)
-{
-        guint32 len;
-        GByteArray *ba;
-
-        len = strlen (ssid);
-        ba = g_byte_array_sized_new (len);
-        g_byte_array_append (ba, (guchar *)ssid, len);
-
-        return ba;
-}
-
 static gchar *
 get_hostname (void)
 {
@@ -882,20 +869,22 @@ get_hostname (void)
         return str;
 }
 
-static GByteArray *
+static GBytes *
 generate_ssid_for_hotspot (NetDeviceWifi *device_wifi)
 {
-        GByteArray *ssid_array;
+        GBytes *ssid_bytes;
         gchar *hostname, *ssid;
 
         hostname = get_hostname ();
         ssid = pretty_hostname_to_ssid (hostname);
         g_free (hostname);
 
-        ssid_array = ssid_to_byte_array (ssid);
-        g_free (ssid);
+        ssid_bytes = g_bytes_new_with_free_func (ssid,
+                                                 strlen (ssid),
+                                                 g_free,
+                                                 NULL);
 
-        return ssid_array;
+        return ssid_bytes;
 }
 
 #define WPA_PASSKEY_SIZE 8
@@ -1042,7 +1031,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         NMSettingIP4Config *sip;
         NMSettingWirelessSecurity *sws;
         NMDevice *device;
-        GByteArray *ssid_array;
+        GBytes *ssid;
         const gchar *str_mac;
         struct ether_addr *bin_mac;
         GSList *connections;
@@ -1065,8 +1054,12 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         }
         g_slist_free (connections);
 
+        ssid = generate_ssid_for_hotspot (device_wifi);
+
         client = net_object_get_client (NET_OBJECT (device_wifi));
         if (c != NULL) {
+                g_bytes_unref (ssid);
+
                 g_debug ("activate existing hotspot connection\n");
                 nm_client_activate_connection_async (client,
                                                      c,
@@ -1121,11 +1114,8 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         g_object_set (sip, "method", "shared", NULL);
         nm_connection_add_setting (c, (NMSetting *)sip);
 
-        ssid_array = generate_ssid_for_hotspot (device_wifi);
-        g_object_set (sw,
-                      "ssid", ssid_array,
-                      NULL);
-        g_byte_array_unref (ssid_array);
+        g_object_set (sw, "ssid", ssid, NULL);
+        g_bytes_unref (ssid);
 
         sws = (NMSettingWirelessSecurity*) nm_setting_wireless_security_new ();
 
