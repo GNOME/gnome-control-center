@@ -8,6 +8,21 @@
     <property name="margin-top">6</property>
     <property name="margin-bottom">6</property>
     <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkSpinner" id="loading-spinner">
+            <property name="visible">True</property>
+            <property name="active">True</property>
+            <property name="expand">True</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="name">loading-page</property>
+      </packing>
+    </child>
+    <child>
       <object class="GtkBox" id="hbox1">
         <property name="visible">True</property>
         <property name="spacing">20</property>
