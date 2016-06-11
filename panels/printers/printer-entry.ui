@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <object class="GtkPopover" id="printer-menu">
+
+    <child>
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="margin">10</property>
+
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">Printing Options</property>
+            <signal name="clicked" handler="on_show_printer_options_dialog"/>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkCheckButton" id="printer_default_checkbutton">
+            <property name="visible">True</property>
+            <property name="valign">center</property>
+            <property name="label" translatable="yes">Use Printer by Default</property>
+            <signal name="toggled" handler="set_as_default_printer"/>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">2</property>
+            <property name="width">3</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkModelButton" id="remove_printer_menuitem">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">Remove Printer</property>
+            <signal name="clicked" handler="remove_printer"/>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+
+  <template class="PpPrinterEntry" parent="GtkBox">
+    <property name="valign">center</property>
+
+    <child>
+      <object class="GtkFrame" id="content_area">
+        <property name="visible">True</property>
+        <property name="valign">start</property>
+        <style>
+          <class name="view"/>
+        </style>
+
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="row-spacing">10</property>
+            <property name="column-spacing">15</property>
+            <property name="margin_start">20</property>
+            <property name="margin_end">20</property>
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">20</property>
+            <property name="no-show-all">True</property>
+
+            <child>
+              <object class="GtkImage" id="printer_icon">
+                <property name="visible">True</property>
+                <property name="pixel-size">64</property>
+                <property name="icon_name">printer</property>
+                <property name="halign">end</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkGrid" id="printer_name_grid">
+                <property name="visible">True</property>
+                <property name="margin">10</property>
+                <property name="margin_start">0</property>
+                <property name="halign">start</property>
+                <child>
+
+                  <object class="GtkLabel" id="printer_name_label">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="halign">start</property>
+                    <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+                    <property name="max-width-chars">30</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                      <attribute name="scale" value="1.5"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="left-attach">0</property>
+                    <property name="top-attach">0</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <object class="GtkLabel" id="printer_status">
+                    <property name="visible">True</property>
+                    <property name="halign">start</property>
+                  </object>
+                  <packing>
+                    <property name="left-attach">0</property>
+                    <property name="top-attach">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="spacing">5</property>
+                <property name="orientation">horizontal</property>
+                <property name="valign">center</property>
+                <child>
+
+                  <object class="GtkButton" id="show_jobs_dialog_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <signal name="clicked" handler="show_jobs_dialog"/>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkMenuButton">
+                    <property name="visible">True</property>
+                    <property name="popover">printer-menu</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="icon_name">emblem-system-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="printer_model_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Model</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+                <property name="max-width-chars">30</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="printer_model">
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="printer_location_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Location</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+                <property name="max-width-chars">30</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="printer_location_address_label">
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="printer_inklevel_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Ink Level</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkFrame" id="supply_frame">
+                <property name="visible">True</property>
+                <property name="valign">center</property>
+                <property name="halign">start</property>
+                <property name="height_request">18</property>
+                <property name="width_request">300</property>
+                <style>
+                  <class name="background"/>
+                </style>
+
+                <child>
+                  <object class="GtkDrawingArea" id="supply_drawing_area">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+     </object>
+    </child>
+  </template>
+
+</interface>

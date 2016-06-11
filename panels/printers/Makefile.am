@@ -50,6 +50,8 @@ libprinters_la_SOURCES =		\
 	pp-samba.h			\
 	pp-print-device.c		\
 	pp-print-device.h		\
+	pp-printer-entry.c		\
+	pp-printer-entry.h		\
 	cc-printers-panel.c		\
 	cc-printers-panel.h
 
