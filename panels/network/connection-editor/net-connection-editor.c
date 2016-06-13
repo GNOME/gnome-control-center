@@ -743,13 +743,14 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
 
         /* Add the VPN types */
         for (iter = vpn_plugins; iter; iter = iter->next) {
+                NMVpnEditorPlugin *plugin = nm_vpn_plugin_info_get_editor_plugin (iter->data);
                 char *name, *desc, *desc_markup, *service_name;
                 GtkStyleContext *context;
 
-                g_object_get (iter->data,
-                              "name", &name,
-                              "desc", &desc,
-                              "service", &service_name,
+                g_object_get (plugin,
+                              NM_VPN_EDITOR_PLUGIN_NAME, &name,
+                              NM_VPN_EDITOR_PLUGIN_DESCRIPTION, &desc,
+                              NM_VPN_EDITOR_PLUGIN_SERVICE, &service_name,
                               NULL);
                 desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
 
