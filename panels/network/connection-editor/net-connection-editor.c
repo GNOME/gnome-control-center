@@ -807,29 +807,11 @@ select_vpn_type (NetConnectionEditor *editor, GtkListBox *list)
 }
 
 static void
-connection_type_activated (GtkListBox *list, GtkWidget *row, NetConnectionEditor *editor)
-{
-        const NetConnectionType *connection_type = g_object_get_data (G_OBJECT (row), "connection_type");
-        NMConnection *connection;
-
-        g_signal_handlers_disconnect_by_func (list, G_CALLBACK (connection_type_activated), editor);
-
-        if (connection_type == vpn_connection_type) {
-                select_vpn_type (editor, list);
-                return;
-        }
-
-        connection = complete_connection_for_type (editor, NULL, connection_type);
-        finish_add_connection (editor, connection);
-}
-
-static void
 net_connection_editor_add_connection (NetConnectionEditor *editor)
 {
         GtkNotebook *notebook;
         GtkContainer *frame;
         GtkListBox *list;
-        int i;
 
         notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_toplevel_notebook"));
         frame = GTK_CONTAINER (gtk_builder_get_object (editor->builder, "details_add_connection_frame"));
@@ -837,34 +819,15 @@ net_connection_editor_add_connection (NetConnectionEditor *editor)
         list = GTK_LIST_BOX (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (list, cc_list_box_update_header_func, NULL, NULL);
-        g_signal_connect (list, "row-activated",
-                          G_CALLBACK (connection_type_activated), editor);
 
-        for (i = 0; i < G_N_ELEMENTS (connection_types); i++) {
-                GtkWidget *row, *row_box, *label;
-
-                row = gtk_list_box_row_new ();
-
-                row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-                label = gtk_label_new (_(connection_types[i].name));
-                gtk_widget_set_halign (label, GTK_ALIGN_START);
-                gtk_widget_set_margin_start (label, 12);
-                gtk_widget_set_margin_end (label, 12);
-                gtk_widget_set_margin_top (label, 12);
-                gtk_widget_set_margin_bottom (label, 12);
-                gtk_box_pack_start (GTK_BOX (row_box), label, FALSE, TRUE, 0);
-
-                g_object_set_data (G_OBJECT (row), "connection_type", (gpointer) &connection_types[i]);
-                gtk_container_add (GTK_CONTAINER (row), row_box);
-                gtk_container_add (GTK_CONTAINER (list), row);
-        }
+        select_vpn_type (editor, list);
 
         gtk_widget_show_all (GTK_WIDGET (list));
         gtk_container_add (frame, GTK_WIDGET (list));
 
         gtk_notebook_set_current_page (notebook, 1);
         gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")));
-        gtk_window_set_title (GTK_WINDOW (editor->window), _("Add Network Connection"));
+        gtk_window_set_title (GTK_WINDOW (editor->window), _("Add VPN"));
 }
 
 static void
