@@ -296,9 +296,9 @@ _pp_maintenance_command_is_supported (const gchar *printer_name,
   ipp_t             *request;
   ipp_t             *response = NULL;
   gchar             *printer_uri;
-  gchar             *printer_commands = NULL;
-  gchar             *printer_commands_lowercase = NULL;
   gchar             *command_lowercase;
+  GPtrArray         *available_commands = NULL;
+  int                i;
 
   printer_uri = g_strdup_printf ("ipp://localhost/printers/%s",
                                  printer_name);
@@ -313,29 +313,41 @@ _pp_maintenance_command_is_supported (const gchar *printer_name,
     {
       if (ippGetStatusCode (response) <= IPP_OK_CONFLICT)
         {
+          int commands_count;
+
           attr = ippFindAttribute (response, "printer-commands", IPP_TAG_ZERO);
-          if (attr != NULL && ippGetCount (attr) > 0 &&
+          commands_count = attr != NULL ? ippGetCount (attr) : 0;
+          if (commands_count > 0 &&
               ippGetValueTag (attr) != IPP_TAG_NOVALUE &&
               (ippGetValueTag (attr) == IPP_TAG_KEYWORD))
             {
-              printer_commands = g_strdup (ippGetString (attr, 0, NULL));
+              available_commands = g_ptr_array_new_full (commands_count, g_free);
+              for (i = 0; i < commands_count; ++i)
+                {
+                  /* Array gains ownership of the lower-cased string */
+                  g_ptr_array_add (available_commands, g_ascii_strdown (ippGetString (attr, i, NULL), -1));
+                }
             }
         }
 
       ippDelete (response);
     }
 
-  if (printer_commands != NULL)
+  if (available_commands != NULL)
     {
       command_lowercase = g_ascii_strdown (command, -1);
-      printer_commands_lowercase = g_ascii_strdown (printer_commands, -1);
-
-      if (g_strcmp0 (printer_commands_lowercase, command_lowercase) == 0)
-        is_supported = TRUE;
+      for (i = 0; i < available_commands->len; ++i)
+        {
+          const gchar *available_command = g_ptr_array_index (available_commands, i);
+          if (g_strcmp0 (available_command, command_lowercase) == 0)
+            {
+              is_supported = TRUE;
+              break;
+            }
+        }
 
       g_free (command_lowercase);
-      g_free (printer_commands_lowercase);
-      g_free (printer_commands);
+      g_ptr_array_free (available_commands, TRUE);
     }
 
   g_free (printer_uri);
