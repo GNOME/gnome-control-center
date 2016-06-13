@@ -946,6 +946,13 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         gtk_widget_set_visible (widget, show);
         gtk_widget_set_visible (label, show);
 
+        /* Language: do not show for current user */
+        widget = get_widget (d, "account-language-button");
+        label = get_widget (d, "language-label");
+        show = act_user_get_uid (user) != getuid();
+        gtk_widget_set_visible (widget, show);
+        gtk_widget_set_visible (label, show);
+
         /* Last login: show when administrator or current user */
         widget = get_widget (d, "last-login-value-label");
         label = get_widget (d, "last-login-label");
