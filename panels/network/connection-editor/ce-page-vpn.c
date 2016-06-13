@@ -94,7 +94,13 @@ load_vpn_plugin (CEPageVpn *page, NMConnection *connection)
 	CEPage *parent = CE_PAGE (page);
         GtkWidget *ui_widget, *failure;
 
-	ui_widget = GTK_WIDGET (nm_vpn_editor_get_widget (page->editor));
+        page->editor = nm_vpn_editor_plugin_get_editor (page->plugin,
+                                                        connection,
+                                                        NULL);
+        ui_widget = NULL;
+        if (page->editor)
+                ui_widget = GTK_WIDGET (nm_vpn_editor_get_widget (page->editor));
+
 	if (!ui_widget) {
 		g_clear_object (&page->editor);
                 page->plugin = NULL;
