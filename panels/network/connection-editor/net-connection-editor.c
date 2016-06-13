@@ -604,23 +604,11 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         gtk_tree_path_free (path);
 }
 
-typedef struct {
-        const char *name;
-        GType (*type_func) (void);
-} NetConnectionType;
-
-static const NetConnectionType connection_types[] = {
-        { N_("VPN"), nm_setting_vpn_get_type },
-};
-static const NetConnectionType *vpn_connection_type = &connection_types[0];
-
 static NMConnection *
-complete_connection_for_type (NetConnectionEditor *editor, NMConnection *connection,
-                              const NetConnectionType *connection_type)
+complete_vpn_connection (NetConnectionEditor *editor, NMConnection *connection)
 {
         NMSettingConnection *s_con;
         NMSetting *s_type;
-        GType connection_gtype;
 
         if (!connection)
                 connection = nm_simple_connection_new ();
@@ -644,17 +632,16 @@ complete_connection_for_type (NetConnectionEditor *editor, NMConnection *connect
                 gchar *id;
 
                 connections = nm_client_get_connections (editor->client);
-                id = ce_page_get_next_available_name (connections, NAME_FORMAT_TYPE, _(connection_type->name));
+                id = ce_page_get_next_available_name (connections, NAME_FORMAT_TYPE, _("VPN"));
                 g_object_set (s_con,
                               NM_SETTING_CONNECTION_ID, id,
                               NULL);
                 g_free (id);
         }
 
-        connection_gtype = connection_type->type_func ();
-        s_type = nm_connection_get_setting (connection, connection_gtype);
+        s_type = nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
         if (!s_type) {
-                s_type = g_object_new (connection_gtype, NULL);
+                s_type = g_object_new (NM_TYPE_SETTING_VPN, NULL);
                 nm_connection_add_setting (connection, s_type);
         }
 
@@ -695,7 +682,7 @@ vpn_import_complete (NMConnection *connection, gpointer user_data)
                 return;
         }
 
-        complete_connection_for_type (editor, connection, vpn_connection_type);
+        complete_vpn_connection (editor, connection);
         finish_add_connection (editor, connection);
 }
 
@@ -712,7 +699,7 @@ vpn_type_activated (GtkListBox *list, GtkWidget *row, NetConnectionEditor *edito
                 return;
         }
 
-        connection = complete_connection_for_type (editor, NULL, vpn_connection_type);
+        connection = complete_vpn_connection (editor, NULL);
         s_vpn = nm_connection_get_setting_vpn (connection);
         g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_name, NULL);
 
