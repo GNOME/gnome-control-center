@@ -63,7 +63,7 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkVBox" id="vbox4">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">5</property>
@@ -149,15 +149,17 @@
       <action-widget response="-5">custom-shortcut-ok-button</action-widget>
     </action-widgets>
   </object>
-              <object class="GtkVBox" id="shortcuts_page">
+              <object class="GtkBox" id="shortcuts_page">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="border_width">5</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkVBox" id="shortcuts_vbox">
+                  <object class="GtkBox" id="shortcuts_vbox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkGrid" id="shortcuts_grid">
@@ -263,7 +265,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox1">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">5</property>
