@@ -654,10 +654,14 @@ ui_to_setting (CEPageIP6 *page)
         }
 
         nm_setting_ip_config_clear_addresses (page->setting);
-        if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL))
+        if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL)) {
                 children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
-        else
+        } else {
+                g_object_set (G_OBJECT (page->setting),
+                              NM_SETTING_IP_CONFIG_GATEWAY, NULL,
+                              NULL);
                 children = NULL;
+       }
 
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
