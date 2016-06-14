@@ -124,7 +124,7 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 		NMSetting *s_8021x;
 
 		/* FIXME: get failed property and error out of wireless security objects */
-		valid = wireless_security_validate (page->security, NULL);
+		valid = wireless_security_validate (page->security, error);
 		if (valid) {
 			NMSetting *s_con;
 
@@ -144,8 +144,7 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
 
 			g_object_unref (tmp_connection);
-		} else
-			g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Invalid 802.1x security");
+		}
 	} else {
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
 		valid = TRUE;
