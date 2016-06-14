@@ -200,14 +200,6 @@ connect_details_page (CEPageDetails *page)
 
 }
 
-static gboolean
-validate (CEPage        *page,
-          NMConnection  *connection,
-          GError       **error)
-{
-        return TRUE;
-}
-
 static void
 ce_page_details_init (CEPageDetails *page)
 {
@@ -216,9 +208,6 @@ ce_page_details_init (CEPageDetails *page)
 static void
 ce_page_details_class_init (CEPageDetailsClass *class)
 {
-        CEPageClass *page_class= CE_PAGE_CLASS (class);
-
-        page_class->validate = validate;
 }
 
 CEPage *

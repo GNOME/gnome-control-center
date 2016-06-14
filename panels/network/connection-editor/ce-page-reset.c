@@ -54,14 +54,6 @@ connect_reset_page (CEPageReset *page)
         g_signal_connect (widget, "clicked", G_CALLBACK (reset_cb), page);
 }
 
-static gboolean
-validate (CEPage        *page,
-          NMConnection  *connection,
-          GError       **error)
-{
-        return TRUE;
-}
-
 static void
 ce_page_reset_init (CEPageReset *page)
 {
@@ -70,9 +62,6 @@ ce_page_reset_init (CEPageReset *page)
 static void
 ce_page_reset_class_init (CEPageResetClass *class)
 {
-        CEPageClass *page_class= CE_PAGE_CLASS (class);
-
-        page_class->validate = validate;
 }
 
 CEPage *
