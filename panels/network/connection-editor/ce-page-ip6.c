@@ -706,6 +706,7 @@ ui_to_setting (CEPageIP6 *page)
                         ret = FALSE;
                 } else {
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
+                        have_gateway = TRUE;
                 }
 
                 if (!ret)
