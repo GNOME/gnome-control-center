@@ -50,6 +50,8 @@ typedef struct CcPanelPrivate CcPanelPrivate;
 typedef struct _CcPanel       CcPanel;
 typedef struct _CcPanelClass  CcPanelClass;
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CcPanel, g_object_unref)
+
 /* cc-shell.h requires CcPanel, so make sure it is defined first */
 #include "cc-shell.h"
 
