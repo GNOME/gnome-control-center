@@ -23,15 +23,14 @@
 
 #include "keyboard-shortcuts.h"
 
-CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
-
-#define KEYBOARD_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
-
-struct _CcKeyboardPanelPrivate
+struct _CcKeyboardPanel
 {
-  GtkBuilder *builder;
+  CcPanel             parent;
+
+  GtkBuilder         *builder;
 };
+
+CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
 
 enum {
   PROP_0,
@@ -60,7 +59,7 @@ cc_keyboard_panel_set_page (CcKeyboardPanel *panel,
     return;
   }
 
-  notebook = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "keyboard_notebook"));
+  notebook = GTK_WIDGET (gtk_builder_get_object (panel->builder, "keyboard_notebook"));
   gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), page_num);
 
   if (page_num == SHORTCUTS_PAGE &&
@@ -120,18 +119,15 @@ cc_keyboard_panel_constructor (GType                  gtype,
 {
   GObject *obj;
   CcKeyboardPanel *self;
-  CcKeyboardPanelPrivate *priv;
   GtkWidget *widget;
 
   obj = G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->constructor (gtype, n_properties, properties);
 
   self = CC_KEYBOARD_PANEL (obj);
-  priv = self->priv;
 
-  keyboard_shortcuts_init (CC_PANEL (self), priv->builder);
+  keyboard_shortcuts_init (CC_PANEL (self), self->builder);
 
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-                                                 "shortcuts_page");
+  widget = (GtkWidget *) gtk_builder_get_object (self->builder, "shortcuts_page");
 
   gtk_container_add (GTK_CONTAINER (self), widget);
 
@@ -157,8 +153,8 @@ cc_keyboard_panel_finalize (GObject *object)
 {
   CcKeyboardPanel *panel = CC_KEYBOARD_PANEL (object);
 
-  if (panel->priv->builder)
-    g_object_unref (panel->priv->builder);
+  if (panel->builder)
+    g_object_unref (panel->builder);
 
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
 }
@@ -168,8 +164,6 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (CcKeyboardPanelPrivate));
 
   panel_class->get_help_uri = cc_keyboard_panel_get_help_uri;
 
@@ -184,21 +178,19 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
-  CcKeyboardPanelPrivate *priv;
   GError *error = NULL;
 
-  priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
   g_resources_register (cc_keyboard_get_resource ());
 
-  priv->builder = gtk_builder_new ();
+  self->builder = gtk_builder_new ();
 
-  if (gtk_builder_add_from_resource (priv->builder,
+  if (gtk_builder_add_from_resource (self->builder,
                                      "/org/gnome/control-center/keyboard/gnome-keyboard-panel.ui",
                                      &error) == 0)
     {
       g_warning ("Could not load UI: %s", error->message);
       g_clear_error (&error);
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
+      g_object_unref (self->builder);
+      self->builder = NULL;
     }
 }
