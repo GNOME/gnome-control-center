@@ -399,7 +399,8 @@ validate (CEPage        *page,
 
                 if (CE_PAGE_SECURITY (page)->adhoc) {
                         if (!wireless_security_adhoc_compatible (sec)) {
-                                g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Security not compatible with Ad-Hoc mode");
+                                if (valid)
+                                        g_set_error (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_INVALID_SETTING, "Security not compatible with Ad-Hoc mode");
                                 valid = FALSE;
                         }
                 }
