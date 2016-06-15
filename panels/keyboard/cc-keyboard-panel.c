@@ -42,7 +42,8 @@ struct _CcKeyboardPanel
   CcPanel             parent;
 
   /* Treeviews */
-  GtkWidget          *section_treeview;
+  GtkListStore       *sections_store;
+  GtkTreeModel       *sections_model;
   GtkWidget          *shortcut_treeview;
 
   /* Toolbar widgets */
@@ -65,11 +66,7 @@ struct _CcKeyboardPanel
   GRegex             *pictures_regex;
 
   gpointer            wm_changed_id;
-  gchar              *section_to_set;
 };
-
-static gboolean      cc_keyboard_panel_set_section               (CcKeyboardPanel    *self,
-                                                                  const char         *section);
 
 CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
 
@@ -209,8 +206,7 @@ append_section (CcKeyboardPanel    *self,
                 BindingGroupType    group,
                 const KeyListEntry *keys_list)
 {
-  GtkTreeModel *sort_model;
-  GtkTreeModel *model, *shortcut_model;
+  GtkTreeModel *shortcut_model;
   GtkTreeIter iter;
   GHashTable *reverse_items;
   GHashTable *hash;
@@ -222,9 +218,6 @@ append_section (CcKeyboardPanel    *self,
 
   if (!hash)
     return;
-
-  sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (self->section_treeview));
-  model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 
   shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (self->shortcut_treeview));
 
@@ -309,8 +302,9 @@ append_section (CcKeyboardPanel    *self,
       g_hash_table_insert (hash, g_strdup (id), keys_array);
 
       /* Append the section to the left tree view */
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+      gtk_list_store_append (GTK_LIST_STORE (self->sections_store), &iter);
+      gtk_list_store_set (GTK_LIST_STORE (self->sections_store),
+                          &iter,
                           SECTION_DESCRIPTION_COLUMN, title,
                           SECTION_ID_COLUMN, id,
                           SECTION_GROUP_COLUMN, group,
@@ -449,11 +443,7 @@ append_sections_from_gsettings (CcKeyboardPanel *self)
 static void
 reload_sections (CcKeyboardPanel *self)
 {
-  GtkTreeSelection *selection;
   GtkTreeModel *shortcut_model;
-  GtkTreeModel *section_model;
-  GtkTreeModel *sort_model;
-  GtkTreeView *section_treeview;
   GtkTreeIter iter;
   GHashTable *loaded_files;
   GDir *dir;
@@ -462,15 +452,11 @@ reload_sections (CcKeyboardPanel *self)
   const gchar * const * data_dirs;
   guint i;
 
-  section_treeview = GTK_TREE_VIEW (self->section_treeview);
-  sort_model = gtk_tree_view_get_model (section_treeview);
-  section_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
-
   shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (self->shortcut_treeview));
   /* FIXME: get current selection and keep it after refreshing */
 
   /* Clear previous models and hash tables */
-  gtk_list_store_clear (GTK_LIST_STORE (section_model));
+  gtk_list_store_clear (GTK_LIST_STORE (self->sections_store));
   gtk_list_store_clear (GTK_LIST_STORE (shortcut_model));
 
   g_clear_pointer (&self->kb_system_sections, g_hash_table_destroy);
@@ -542,39 +528,15 @@ reload_sections (CcKeyboardPanel *self)
   g_strfreev (wm_keybindings);
 
   /* Add a separator */
-  gtk_list_store_append (GTK_LIST_STORE (section_model), &iter);
-  gtk_list_store_set (GTK_LIST_STORE (section_model), &iter,
+  gtk_list_store_append (GTK_LIST_STORE (self->sections_store), &iter);
+  gtk_list_store_set (GTK_LIST_STORE (self->sections_store),
+                      &iter,
                       SECTION_DESCRIPTION_COLUMN, NULL,
                       SECTION_GROUP_COLUMN, BINDING_GROUP_SEPARATOR,
                       -1);
 
   /* Load custom keybindings */
   append_sections_from_gsettings (self);
-
-  /* Select the first item, or the requested section, if any */
-  if (self->section_to_set != NULL)
-    {
-      if (cc_keyboard_panel_set_section (self, self->section_to_set))
-        {
-          g_clear_pointer (&self->section_to_set, g_free);
-          return;
-        }
-    }
-  g_assert (gtk_tree_model_get_iter_first (sort_model, &iter));
-  selection = gtk_tree_view_get_selection (section_treeview);
-  gtk_tree_selection_select_iter (selection, &iter);
-}
-
-static gboolean
-sections_separator_func (GtkTreeModel *model,
-                         GtkTreeIter  *iter,
-                         gpointer      data)
-{
-  BindingGroupType type;
-
-  gtk_tree_model_get (model, iter, SECTION_GROUP_COLUMN, &type, -1);
-
-  return type == BINDING_GROUP_SEPARATOR;
 }
 
 static int
@@ -610,47 +572,49 @@ section_sort_item  (GtkTreeModel *model,
 }
 
 static void
-section_selection_changed (GtkTreeSelection *selection,
-                           CcKeyboardPanel  *self)
+add_shortcuts (CcKeyboardPanel *self)
 {
-  GtkTreeModel *model;
-  GtkTreeIter iter;
+  GtkTreeModel *shortcuts;
+  GtkTreeIter sections_iter;
+  gboolean can_continue;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  shortcuts = gtk_tree_view_get_model (GTK_TREE_VIEW (self->shortcut_treeview));
+  can_continue = gtk_tree_model_get_iter_first (self->sections_model, &sections_iter);
+
+  while (can_continue)
     {
       BindingGroupType group;
-      GtkTreeModel *shortcut_model;
       GPtrArray *keys;
-      gchar *id;
+      gchar *id, *title;
       gint i;
 
-      gtk_tree_model_get (model, &iter,
+      gtk_tree_model_get (self->sections_model,
+                          &sections_iter,
+                          SECTION_DESCRIPTION_COLUMN, &title,
+                          SECTION_GROUP_COLUMN, &group,
                           SECTION_ID_COLUMN, &id,
-                          SECTION_GROUP_COLUMN, &group, -1);
+                          -1);
 
-      keys = g_hash_table_lookup (get_hash_for_group (self, group), id);
-      if (keys == NULL)
+      /* Ignore separators */
+      if (group == BINDING_GROUP_SEPARATOR)
         {
-          g_warning ("Can't find section %s in sections hash table.", id);
-          g_free (id);
-          return;
+          can_continue = gtk_tree_model_iter_next (self->sections_model, &sections_iter);
+          continue;
         }
 
-      gtk_widget_set_sensitive (self->remove_toolbutton, FALSE);
-
-      /* Fill the shortcut treeview with the keys for the selected section */
-      shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (self->shortcut_treeview));
-      gtk_list_store_clear (GTK_LIST_STORE (shortcut_model));
+      keys = g_hash_table_lookup (get_hash_for_group (self, group), id);
 
       for (i = 0; i < keys->len; i++)
         {
-          GtkTreeIter new_row;
           CcKeyboardItem *item = g_ptr_array_index (keys, i);
 
           if (!cc_keyboard_item_is_hidden (item))
             {
-              gtk_list_store_append (GTK_LIST_STORE (shortcut_model), &new_row);
-              gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
+              GtkTreeIter new_row;
+
+              gtk_list_store_append (GTK_LIST_STORE (shortcuts), &new_row);
+              gtk_list_store_set (GTK_LIST_STORE (shortcuts),
+                                  &new_row,
                                   DETAIL_DESCRIPTION_COLUMN, item->description,
                                   DETAIL_KEYENTRY_COLUMN, item,
                                   DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_KEY_ENTRY,
@@ -658,10 +622,7 @@ section_selection_changed (GtkTreeSelection *selection,
             }
         }
 
-      if (g_str_equal (id, "Typing"))
-        fill_xkb_options_shortcuts (shortcut_model);
-
-      g_free (id);
+      can_continue = gtk_tree_model_iter_next (self->sections_model, &sections_iter);
     }
 }
 
@@ -1502,41 +1463,9 @@ add_button_clicked (GtkWidget       *button,
 {
   GtkTreeView *treeview;
   GtkTreeModel *model;
-  GtkTreeModel *section_model;
-  GtkTreeIter iter;
-  gboolean found, cont;
 
   treeview = GTK_TREE_VIEW (self->shortcut_treeview);
   model = gtk_tree_view_get_model (treeview);
-
-  /* Select the Custom Shortcuts section
-   * before adding the shortcut itself */
-  section_model = gtk_tree_view_get_model (GTK_TREE_VIEW (self->section_treeview));
-  cont = gtk_tree_model_get_iter_first (section_model, &iter);
-  found = FALSE;
-
-  while (cont)
-    {
-      BindingGroupType group;
-
-      gtk_tree_model_get (section_model, &iter,
-                          SECTION_GROUP_COLUMN, &group,
-                          -1);
-
-      if (group == BINDING_GROUP_USER)
-        {
-          found = TRUE;
-          break;
-        }
-      cont = gtk_tree_model_iter_next (section_model, &iter);
-    }
-  if (found)
-    {
-      GtkTreeSelection *selection;
-
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->section_treeview));
-      gtk_tree_selection_select_iter (selection, &iter);
-    }
 
   /* And add the shortcut */
   add_custom_shortcut (self, treeview, model);
@@ -1595,7 +1524,6 @@ static void
 setup_tree_views (CcKeyboardPanel *self)
 {
   GtkTreeViewColumn *column;
-  GtkTreeModelSort *sort_model;
   GtkCellRenderer *renderer;
   GtkListStore *model;
   GtkWidget *widget;
@@ -1603,41 +1531,21 @@ setup_tree_views (CcKeyboardPanel *self)
   GList *focus_chain;
 
   /* Setup the section treeview */
-  gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (self->section_treeview),
-                                        sections_separator_func,
-                                        self,
-                                        NULL);
+  self->sections_store = gtk_list_store_new (SECTION_N_COLUMNS,
+                                             G_TYPE_STRING,
+                                             G_TYPE_STRING,
+                                             G_TYPE_INT);
+  self->sections_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (self->sections_store));
 
-  renderer = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes (_("Section"),
-                                                     renderer,
-                                                     "text", SECTION_DESCRIPTION_COLUMN,
-                                                     NULL);
-  g_object_set (renderer,
-                "width-chars", 20,
-                "ellipsize", PANGO_ELLIPSIZE_END,
-                NULL);
-
-  gtk_tree_view_append_column (GTK_TREE_VIEW (self->section_treeview), column);
-
-  model = gtk_list_store_new (SECTION_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
-  sort_model = GTK_TREE_MODEL_SORT (gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (model)));
-  gtk_tree_view_set_model (GTK_TREE_VIEW (self->section_treeview), GTK_TREE_MODEL (sort_model));
-  g_object_unref (model);
-
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (self->sections_model),
                                    SECTION_DESCRIPTION_COLUMN,
                                    section_sort_item,
                                    self,
                                    NULL);
 
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self->sections_model),
                                         SECTION_DESCRIPTION_COLUMN,
                                         GTK_SORT_ASCENDING);
-  g_object_unref (sort_model);
-
-  section_selection_changed (gtk_tree_view_get_selection (GTK_TREE_VIEW (self->section_treeview)),
-                             self);
 
   /* Setup the shortcut treeview */
   renderer = gtk_cell_renderer_text_new ();
@@ -1702,8 +1610,7 @@ setup_tree_views (CcKeyboardPanel *self)
   setup_keyboard_options (model);
 
   /* set up the focus chain */
-  focus_chain = g_list_append (NULL, self->section_treeview);
-  focus_chain = g_list_append (focus_chain, self->shortcut_treeview);
+  focus_chain = g_list_append (NULL, self->shortcut_treeview);
   focus_chain = g_list_append (focus_chain, self->shortcut_toolbar);
 
   gtk_container_set_focus_chain (GTK_CONTAINER (self), focus_chain);
@@ -1715,49 +1622,6 @@ setup_tree_views (CcKeyboardPanel *self)
 
   gtk_dialog_set_default_response (GTK_DIALOG (self->custom_shortcut_dialog), GTK_RESPONSE_OK);
   gtk_window_set_transient_for (GTK_WINDOW (self->custom_shortcut_dialog), GTK_WINDOW (widget));
-}
-
-static gboolean
-cc_keyboard_panel_set_section (CcKeyboardPanel *self,
-                               const char      *section)
-{
-  GtkTreeModel *section_model;
-  GtkTreeIter iter;
-  gboolean found, cont;
-
-  section_model = gtk_tree_view_get_model (GTK_TREE_VIEW (self->section_treeview));
-  cont = gtk_tree_model_get_iter_first (section_model, &iter);
-  found = FALSE;
-  while (cont)
-    {
-      char *id;
-
-      gtk_tree_model_get (section_model, &iter,
-                          SECTION_ID_COLUMN, &id,
-                          -1);
-
-      if (g_strcmp0 (id, section) == 0)
-        {
-          found = TRUE;
-          g_free (id);
-          break;
-        }
-      g_free (id);
-      cont = gtk_tree_model_iter_next (section_model, &iter);
-    }
-  if (found)
-    {
-      GtkTreeSelection *selection;
-
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->section_treeview));
-      gtk_tree_selection_select_iter (selection, &iter);
-    }
-  else
-    {
-      g_warning ("Could not find section '%s' to switch to.", section);
-    }
-
-  return found;
 }
 
 static void
@@ -1795,6 +1659,8 @@ cc_keyboard_panel_finalize (GObject *object)
 
   g_clear_object (&self->custom_shortcut_dialog);
   g_clear_object (&self->binding_settings);
+  g_clear_object (&self->sections_store);
+  g_clear_object (&self->sections_model);
 
   cc_keyboard_option_clear_all ();
 
@@ -1823,6 +1689,8 @@ cc_keyboard_panel_constructed (GObject *object)
 
   setup_tree_views (self);
   reload_sections (self);
+
+  add_shortcuts (self);
 }
 
 static void
@@ -1848,13 +1716,11 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, custom_shortcut_name_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, custom_shortcut_ok_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, remove_toolbutton);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, section_treeview);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, shortcut_toolbar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, shortcut_treeview);
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, section_selection_changed);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_entry_changed);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_selection_changed);
 }
