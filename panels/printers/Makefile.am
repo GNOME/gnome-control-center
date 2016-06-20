@@ -20,6 +20,8 @@ BUILT_SOURCES =			\
 
 libprinters_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
+	pp-printer.c			\
+	pp-printer.h			\
 	pp-new-printer.c		\
 	pp-new-printer.h		\
 	pp-maintenance-command.c	\

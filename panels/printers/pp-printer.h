@@ -1,0 +1,49 @@
+/*
+ * Copyright (C) 2016 Red Hat, Inc
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors: Martin Hatina <mhatina@redhat.com>
+ *          Marek Kasik <mkasik@redhat.com>
+ */
+
+#ifndef __PP_PRINTER_H__
+#define __PP_PRINTER_H__
+
+#include <glib-object.h>
+#include <gio/gio.h>
+
+G_BEGIN_DECLS
+
+#define PP_TYPE_PRINTER (pp_printer_get_type ())
+
+G_DECLARE_FINAL_TYPE (PpPrinter, pp_printer, PP, PRINTER, GObject)
+
+GType        pp_printer_get_type      (void) G_GNUC_CONST;
+
+PpPrinter   *pp_printer_new           (const gchar          *name);
+
+void         pp_printer_rename_async  (PpPrinter            *printer,
+                                       const gchar          *new_printer_name,
+                                       GCancellable         *cancellable,
+                                       GAsyncReadyCallback   callback,
+                                       gpointer              user_data);
+
+gboolean     pp_printer_rename_finish (PpPrinter            *printer,
+                                       GAsyncResult         *res,
+                                       GError              **error);
+
+G_END_DECLS
+
+#endif /* __PP_PRINTER_H__ */
