@@ -20,6 +20,7 @@
 
 #include "cc-printers-panel.h"
 #include "cc-printers-resources.h"
+#include "pp-printer.h"
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
@@ -112,6 +113,8 @@ struct _CcPrintersPanelPrivate
   gboolean  new_printer_on_network;
   gboolean  select_new_printer;
 
+  gchar    *renamed_printer_name;
+
   gpointer dummy;
 };
 
@@ -168,6 +171,8 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_pointer (&priv->new_printer_name, g_free);
   g_clear_pointer (&priv->new_printer_location, g_free);
   g_clear_pointer (&priv->new_printer_make_and_model, g_free);
+
+  g_clear_pointer (&priv->renamed_printer_name, g_free);
 
   if (priv->builder)
     {
@@ -1188,6 +1193,13 @@ actualize_printers_list_cb (GObject      *source_object,
 			  -1);
     }
 
+  if (priv->renamed_printer_name != NULL)
+    {
+      g_free (current_printer_name);
+      current_printer_name = priv->renamed_printer_name;
+      priv->renamed_printer_name = NULL;
+    }
+
   if (priv->new_printer_name &&
       priv->select_new_printer)
     {
@@ -1934,14 +1946,38 @@ printer_remove_cb (GtkToolButton *toolbutton,
 }
 
 static void
+printer_rename_cb (GObject      *source_object,
+                   GAsyncResult *res,
+                   gpointer      user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel *) user_data;
+  gboolean                 result;
+  GError                  *error = NULL;
+  gchar                   *printer_name = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  result = pp_printer_rename_finish (PP_PRINTER (source_object), res, &error);
+  if (result)
+    {
+      g_object_get (source_object, "printer-name", &printer_name, NULL);
+      priv->renamed_printer_name = printer_name;
+    }
+
+  g_object_unref (source_object);
+
+  actualize_printers_list (self);
+}
+
+static void
 printer_name_edit_cb (GtkWidget *entry,
                       gpointer   user_data)
 {
   CcPrintersPanelPrivate  *priv;
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
   const gchar             *new_name;
-  gchar                   *old_name = NULL;
-  gint                     i;
+  PpPrinter               *printer;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -1950,24 +1986,14 @@ printer_name_edit_cb (GtkWidget *entry,
   if (priv->current_dest >= 0 &&
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
-    old_name = priv->dests[priv->current_dest].name;
-
-  if (printer_rename (old_name, new_name))
     {
-      free_dests (self);
-      priv->num_dests = cupsGetDests (&priv->dests);
-      priv->dest_model_names = g_new0 (gchar *, priv->num_dests);
-      priv->ppd_file_names = g_new0 (gchar *, priv->num_dests);
-
-      for (i = 0; i < priv->num_dests; i++)
-        if (g_strcmp0 (priv->dests[i].name, new_name) == 0)
-          {
-            priv->current_dest  = i;
-            break;
-          }
+      printer = pp_printer_new (priv->dests[priv->current_dest].name);
+      pp_printer_rename_async (printer,
+                               new_name,
+                               NULL,
+                               printer_rename_cb,
+                               self);
     }
-
-  actualize_printers_list (self);
 }
 
 static void
@@ -3066,6 +3092,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->new_printer_make_and_model = NULL;
   priv->new_printer_on_network = FALSE;
   priv->select_new_printer = FALSE;
+
+  priv->renamed_printer_name = NULL;
 
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
