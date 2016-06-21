@@ -183,6 +183,10 @@ add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line
         gtk_box_set_homogeneous (GTK_BOX (row), TRUE);
         gtk_container_set_border_width (GTK_CONTAINER (row), 6);
 
+        label = gtk_label_new (record_string);
+        gtk_widget_set_halign (label, GTK_ALIGN_START);
+        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
+
         label = gtk_label_new (str);
         gtk_widget_set_halign (label, GTK_ALIGN_START);
         gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
@@ -190,10 +194,6 @@ add_record (GtkWidget *box, GDateTime *datetime, gchar *record_string, gint line
         g_free (date);
         g_free (time);
         g_date_time_unref (datetime);
-
-        label = gtk_label_new (record_string);
-        gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
 
         gtk_list_box_insert (GTK_LIST_BOX (box), row, line);
 }
