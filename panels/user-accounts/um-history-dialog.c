@@ -289,6 +289,21 @@ show_next (GtkButton       *button,
         show_week (um);
 }
 
+static void
+update_dialog_title (UmHistoryDialog *um)
+{
+        gchar *title;
+
+        /* Translators: This is the title of the "Account Activity" dialog.
+           The %s is the user real name. */
+        title = g_strdup_printf (_("%s - Account Activity"),
+                                 act_user_get_real_name (um->user));
+
+        gtk_window_set_title (GTK_WINDOW (um->dialog), title);
+
+        g_free (title);
+}
+
 void
 um_history_dialog_set_user (UmHistoryDialog *um,
                             ActUser         *user)
@@ -300,6 +315,8 @@ um_history_dialog_set_user (UmHistoryDialog *um,
         if (user) {
                 um->user = g_object_ref (user);
         }
+
+        update_dialog_title (um);
 }
 
 void
