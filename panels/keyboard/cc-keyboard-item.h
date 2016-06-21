@@ -60,6 +60,7 @@ typedef struct
   /* FIXME move to priv? */
   guint keyval;
   guint keycode;
+  BindingGroupType group;
   GdkModifierType mask;
   GtkTreeModel *model;
   char *description;

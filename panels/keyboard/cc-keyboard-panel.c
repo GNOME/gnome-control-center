@@ -285,6 +285,7 @@ append_section (CcKeyboardPanel    *self,
 
       cc_keyboard_item_set_hidden (item, keys_list[i].hidden);
       item->model = shortcut_model;
+      item->group = group;
 
       g_signal_connect (G_OBJECT (item),
                         "notify",
@@ -864,6 +865,7 @@ add_custom_shortcut (CcKeyboardPanel *self,
   g_free (settings_path);
 
   item->model = model;
+  item->group = BINDING_GROUP_USER;
 
   if (edit_custom_shortcut (self, item) && item->command && item->command[0])
     {
