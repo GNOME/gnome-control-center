@@ -649,9 +649,9 @@ cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
 }
 
 static void
-got_wacom_proxy_cb (GObject      *source_object,
-		    GAsyncResult *res,
-		    gpointer      data)
+got_osd_proxy_cb (GObject      *source_object,
+		  GAsyncResult *res,
+		  gpointer      data)
 {
 	GError              *error = NULL;
 	CcWacomPanel        *self;
@@ -736,11 +736,11 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
 				  G_DBUS_PROXY_FLAGS_NONE,
 				  NULL,
-				  "org.gnome.SettingsDaemon.Wacom",
-				  "/org/gnome/SettingsDaemon/Wacom",
-				  "org.gnome.SettingsDaemon.Wacom",
+				  "org.gnome.Shell",
+				  "/org/gnome/Shell/Wacom",
+				  "org.gnome.Shell.Wacom.PadOsd",
 				  priv->cancellable,
-				  got_wacom_proxy_cb,
+				  got_osd_proxy_cb,
 				  self);
 
 	/* Stack + Switcher */
