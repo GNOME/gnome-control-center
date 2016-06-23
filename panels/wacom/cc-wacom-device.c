@@ -366,3 +366,11 @@ cc_wacom_device_set_output (CcWacomDevice *device,
 	g_free (serial);
 	g_object_unref (settings);
 }
+
+guint
+cc_wacom_device_get_num_buttons (CcWacomDevice *device)
+{
+	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), 0);
+
+	return libwacom_get_num_buttons (device->wdevice);
+}
