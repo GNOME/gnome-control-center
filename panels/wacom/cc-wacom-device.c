@@ -374,3 +374,28 @@ cc_wacom_device_get_num_buttons (CcWacomDevice *device)
 
 	return libwacom_get_num_buttons (device->wdevice);
 }
+
+GSettings *
+cc_wacom_device_get_button_settings (CcWacomDevice *device,
+				     guint          button)
+{
+	GSettings *tablet_settings, *settings;
+	gchar *path, *button_path;
+
+	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), NULL);
+
+	if (button > cc_wacom_device_get_num_buttons (device))
+		return NULL;
+
+	tablet_settings = cc_wacom_device_get_settings (device);
+	g_object_get (tablet_settings, "path", &path, NULL);
+
+	button_path = g_strdup_printf ("%sbutton%c/", path, 'A' + button);
+	settings = g_settings_new_with_path ("org.gnome.desktop.peripherals.tablet.pad-button",
+					     button_path);
+	g_free (path);
+	g_free (button_path);
+	g_object_unref (tablet_settings);
+
+	return settings;
+}
