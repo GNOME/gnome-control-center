@@ -59,5 +59,7 @@ void            cc_wacom_device_set_output      (CcWacomDevice *wacom_device,
 
 guint           cc_wacom_device_get_num_buttons (CcWacomDevice *wacom_device);
 
+GSettings     * cc_wacom_device_get_button_settings (CcWacomDevice *device,
+						     guint          button);
 
 #endif /* __CC_WACOM_DEVICE_H__ */
