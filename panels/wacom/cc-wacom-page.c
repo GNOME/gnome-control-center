@@ -764,11 +764,6 @@ set_icon_name (CcWacomPage *page,
 	g_free (resource);
 }
 
-typedef struct {
-	GsdWacomStylus *stylus;
-	GsdWacomStylus *eraser;
-} StylusPair;
-
 static void
 remove_left_handed (CcWacomPagePrivate *priv)
 {
