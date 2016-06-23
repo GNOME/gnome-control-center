@@ -25,10 +25,8 @@
 
 G_DEFINE_TYPE (CcWacomButtonRow, cc_wacom_button_row, GTK_TYPE_LIST_BOX_ROW)
 
-#define ACTION_TYPE_KEY            "action-type"
-#define CUSTOM_ACTION_KEY          "custom-action"
-#define KEY_CUSTOM_ELEVATOR_ACTION "custom-elevator-action"
-#define OLED_LABEL                 "oled-label"
+#define ACTION_KEY            "action"
+#define KEYBINDING_KEY        "keybinding"
 
 #define WACOM_C(x) g_dpgettext2(NULL, "Wacom action-type", x)
 
@@ -39,14 +37,15 @@ enum {
 };
 
 struct _CcWacomButtonRowPrivate {
-  GsdWacomTabletButton *button;
+  guint button;
+  GSettings *settings;
   GtkDirectionType direction;
   GtkComboBox *action_combo;
   GsdWacomKeyShortcutButton *key_shortcut_button;
 };
 
 static GtkWidget *
-create_actions_combo (GsdWacomTabletButtonType type)
+create_actions_combo (void)
 {
   GtkListStore    *model;
   GtkTreeIter      iter;
@@ -58,12 +57,6 @@ create_actions_combo (GsdWacomTabletButtonType type)
 
   for (i = 0; i < G_N_ELEMENTS (action_table); i++)
     {
-      if ((type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
-           type == WACOM_TABLET_BUTTON_TYPE_RING) &&
-          action_table[i].action_type != GSD_WACOM_ACTION_TYPE_NONE &&
-          action_table[i].action_type != GSD_WACOM_ACTION_TYPE_CUSTOM)
-        continue;
-
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model, &iter,
                           ACTION_NAME_COLUMN, WACOM_C(action_table[i].action_name),
@@ -82,50 +75,19 @@ create_actions_combo (GsdWacomTabletButtonType type)
 }
 
 static void
-cc_wacom_button_row_update_shortcut (CcWacomButtonRow *row,
-                                     GsdWacomActionType action_type)
+cc_wacom_button_row_update_shortcut (CcWacomButtonRow        *row,
+                                     GDesktopPadButtonAction  action_type)
 {
   CcWacomButtonRowPrivate *priv;
-  GsdWacomTabletButton    *button;
-  GtkDirectionType         dir;
   guint                    keyval;
   GdkModifierType          mask;
   char                    *shortcut;
 
-  if (action_type != GSD_WACOM_ACTION_TYPE_CUSTOM)
+  if (action_type != G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING)
     return;
 
   priv = row->priv;
-
-  button = priv->button;
-  dir = priv->direction;
-
-  if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
-      button->type == WACOM_TABLET_BUTTON_TYPE_RING)
-    {
-      char *str;
-      char **strv;
-
-      strv = g_settings_get_strv (button->settings, KEY_CUSTOM_ELEVATOR_ACTION);
-
-      if (strv != NULL)
-        {
-          if (dir == GTK_DIR_UP)
-            str = strv[0];
-          else
-            str = strv[1];
-
-          shortcut = g_strdup (str);
-
-          g_strfreev (strv);
-        }
-      else
-        {
-          shortcut = NULL;
-        }
-    }
-  else
-    shortcut = g_settings_get_string (button->settings, CUSTOM_ACTION_KEY);
+  shortcut = g_settings_get_string (row->priv->settings, KEYBINDING_KEY);
 
   if (shortcut != NULL)
     {
@@ -140,57 +102,20 @@ cc_wacom_button_row_update_shortcut (CcWacomButtonRow *row,
     }
 }
 
-static gchar *
-get_tablet_dir_button_shortcut (GsdWacomTabletButton *button,
-                                GtkDirectionType      dir)
-{
-  char *str, **strv;
-  char *shortcut = NULL;
-
-  strv = g_settings_get_strv (button->settings, KEY_CUSTOM_ELEVATOR_ACTION);
-
-  if (strv != NULL)
-    {
-      if (dir == GTK_DIR_UP)
-        str = strv[0];
-      else
-        str = strv[1];
-
-      shortcut = g_strdup (str);
-
-      g_strfreev (strv);
-    }
-
-  return shortcut;
-}
-
 static void
-cc_wacom_button_row_update_action (CcWacomButtonRow *row,
-                                   GsdWacomActionType action_type)
+cc_wacom_button_row_update_action (CcWacomButtonRow        *row,
+                                   GDesktopPadButtonAction  action_type)
 {
   CcWacomButtonRowPrivate *priv;
   GtkTreeIter              iter;
   gboolean                 iter_valid;
-  GsdWacomActionType       current_action_type, real_action_type;
+  GDesktopPadButtonAction  current_action_type, real_action_type;
   GtkTreeModel            *model;
 
   priv = row->priv;
 
   model = gtk_combo_box_get_model (priv->action_combo);
   real_action_type = action_type;
-
-  if (priv->button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
-      priv->button->type == WACOM_TABLET_BUTTON_TYPE_RING)
-    {
-      char *shortcut;
-
-      shortcut = get_tablet_dir_button_shortcut (priv->button, priv->direction);
-
-      if (shortcut == NULL || g_strcmp0 (shortcut, "") == 0)
-        real_action_type = GSD_WACOM_ACTION_TYPE_NONE;
-
-      g_free (shortcut);
-    }
 
   for (iter_valid = gtk_tree_model_get_iter_first (model, &iter); iter_valid;
        iter_valid = gtk_tree_model_iter_next (model, &iter))
@@ -211,123 +136,38 @@ static void
 cc_wacom_button_row_update (CcWacomButtonRow *row)
 {
   CcWacomButtonRowPrivate *priv;
-  GsdWacomTabletButton *button;
-  GsdWacomActionType current_action_type;
+  GDesktopPadButtonAction current_action_type;
 
   priv = row->priv;
 
-  button = priv->button;
-
-  current_action_type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
+  current_action_type = g_settings_get_enum (priv->settings, ACTION_KEY);
 
   cc_wacom_button_row_update_shortcut (row, current_action_type);
 
   cc_wacom_button_row_update_action (row, current_action_type);
 
   gtk_widget_set_sensitive (GTK_WIDGET (row->priv->key_shortcut_button),
-                            current_action_type == GSD_WACOM_ACTION_TYPE_CUSTOM);
+                            current_action_type == G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING);
 }
 
 static void
-assign_custom_key_to_dir_button (CcWacomButtonRow *row,
-                                 gchar            *custom_key)
+change_button_action_type (CcWacomButtonRow        *row,
+                           GDesktopPadButtonAction  type)
 {
-  GsdWacomTabletButton *button;
-  GtkDirectionType            dir;
-  char *strs[3];
-  char **strv;
-
-  button = row->priv->button;
-  dir = row->priv->direction;
-
-  strs[2] = NULL;
-  strs[0] = strs[1] = "";
-  strv = g_settings_get_strv (button->settings, KEY_CUSTOM_ELEVATOR_ACTION);
-
-  if (strv != NULL)
-    {
-      if (g_strv_length (strv) >= 1)
-        strs[0] = strv[0];
-      if (g_strv_length (strv) >= 2)
-        strs[1] = strv[1];
-    }
-
-  if (dir == GTK_DIR_UP)
-    strs[0] = custom_key;
-  else
-    strs[1] = custom_key;
-
-  g_settings_set_strv (button->settings,
-                       KEY_CUSTOM_ELEVATOR_ACTION,
-                       (const gchar * const*) strs);
-
-  g_clear_pointer (&strv, g_strfreev);
-}
-
-static void
-change_button_action_type (CcWacomButtonRow   *row,
-                           GsdWacomActionType  type)
-{
-  GsdWacomTabletButton *button;
-  GsdWacomActionType    current_type;
-
-  button = row->priv->button;
-
-  if (button == NULL)
-    return;
-
-  current_type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
-
-  if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
-      button->type == WACOM_TABLET_BUTTON_TYPE_RING)
-    {
-      if (type == GSD_WACOM_ACTION_TYPE_NONE)
-        assign_custom_key_to_dir_button (row, "");
-      else if (type == GSD_WACOM_ACTION_TYPE_CUSTOM)
-        {
-          guint           keyval;
-          GdkModifierType mask;
-          char            *custom_key;
-
-          g_object_get (row->priv->key_shortcut_button,
-                        "key-value", &keyval,
-                        "key-mods", &mask,
-                        NULL);
-
-          mask &= ~GDK_LOCK_MASK;
-
-          custom_key = gtk_accelerator_name (keyval, mask);
-
-          assign_custom_key_to_dir_button (row, custom_key);
-          g_settings_set_enum (button->settings, ACTION_TYPE_KEY, type);
-
-          g_free (custom_key);
-        }
-    }
-  else if (current_type != type)
-    {
-      g_settings_set_enum (button->settings, ACTION_TYPE_KEY, type);
-    }
-
+  g_settings_set_enum (row->priv->settings, ACTION_KEY, type);
   gtk_widget_set_sensitive (GTK_WIDGET (row->priv->key_shortcut_button),
-                            type == GSD_WACOM_ACTION_TYPE_CUSTOM);
+                            type == G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING);
 }
 
 static void
 on_key_shortcut_edited (GsdWacomKeyShortcutButton *shortcut_button,
                         CcWacomButtonRow    *row)
 {
-  GsdWacomTabletButton *button;
   char *custom_key;
   guint keyval;
   GdkModifierType mask;
 
-  button = row->priv->button;
-
-  if (button == NULL)
-    return;
-
-  change_button_action_type (row, GSD_WACOM_ACTION_TYPE_CUSTOM);
+  change_button_action_type (row, G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING);
 
   g_object_get (row->priv->key_shortcut_button,
                 "key-value", &keyval,
@@ -338,13 +178,7 @@ on_key_shortcut_edited (GsdWacomKeyShortcutButton *shortcut_button,
 
   custom_key = gtk_accelerator_name (keyval, mask);
 
-  if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
-      button->type == WACOM_TABLET_BUTTON_TYPE_RING)
-    {
-      assign_custom_key_to_dir_button (row, custom_key);
-    }
-  else
-    g_settings_set_string (button->settings, CUSTOM_ACTION_KEY, custom_key);
+  g_settings_set_string (row->priv->settings, KEYBINDING_KEY, custom_key);
 
   g_free (custom_key);
 }
@@ -353,15 +187,15 @@ static void
 on_key_shortcut_cleared (GsdWacomKeyShortcutButton *key_shortcut_button,
                          CcWacomButtonRow    *row)
 {
-  change_button_action_type (row, GSD_WACOM_ACTION_TYPE_NONE);
-  cc_wacom_button_row_update_action (row, GSD_WACOM_ACTION_TYPE_NONE);
+  change_button_action_type (row, G_DESKTOP_PAD_BUTTON_ACTION_NONE);
+  cc_wacom_button_row_update_action (row, G_DESKTOP_PAD_BUTTON_ACTION_NONE);
 }
 
 static void
 on_row_action_combo_box_changed (GtkComboBox      *combo,
                                  CcWacomButtonRow *row)
 {
-  GsdWacomActionType type;
+  GDesktopPadButtonAction type;
   GtkTreeModel *model;
   GtkListBox *list_box;
   GtkTreeIter iter;
@@ -410,46 +244,32 @@ cc_wacom_button_row_init (CcWacomButtonRow *button_row)
 }
 
 GtkWidget *
-cc_wacom_button_row_new (GsdWacomTabletButton *button,
-                         GtkDirectionType      dir)
+cc_wacom_button_row_new (guint      button,
+			 GSettings *settings)
 {
   GtkWidget               *row;
   GtkWidget               *grid, *combo, *label, *shortcut_button;
   CcWacomButtonRowPrivate *priv;
-  char *dir_name = NULL;
+  char *name = NULL;
 
   row = g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL);
   priv = CC_WACOM_BUTTON_ROW (row)->priv;
 
   priv->button = button;
-  priv->direction = dir;
+  priv->settings = g_object_ref (settings);
 
   grid = gtk_grid_new ();
   gtk_widget_show (grid);
   gtk_grid_set_row_homogeneous (GTK_GRID (grid), TRUE);
   gtk_grid_set_column_homogeneous (GTK_GRID (grid), TRUE);
 
-  if (dir == GTK_DIR_UP || dir == GTK_DIR_DOWN)
-    {
-      if (button->type == WACOM_TABLET_BUTTON_TYPE_RING)
-        {
-          dir_name = g_strdup_printf ("%s (%s)",
-                                      button->name,
-                                      dir == GTK_DIR_UP ? "↺" : "↻");
-        } else {
-        dir_name = g_strdup_printf ("%s (%s)",
-                                    button->name,
-                                    dir == GTK_DIR_UP ? C_("Wacom tablet button", "Up") :
-                                    C_("Wacom tablet button", "Down"));
-      }
-    }
-
-  label = gtk_label_new (dir_name ? dir_name : button->name);
+  name = g_strdup_printf (_("Button %d"), button);
+  label = gtk_label_new (name);
   g_object_set (label, "halign", GTK_ALIGN_START, NULL);
   gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
   gtk_widget_show (label);
 
-  combo = create_actions_combo (button->type);
+  combo = create_actions_combo ();
   gtk_grid_attach (GTK_GRID (grid), combo, 1, 0, 1, 1);
   gtk_widget_show (combo);
   priv->action_combo = GTK_COMBO_BOX (combo);
@@ -475,7 +295,7 @@ cc_wacom_button_row_new (GsdWacomTabletButton *button,
 
   cc_wacom_button_row_update (CC_WACOM_BUTTON_ROW (row));
 
-  g_free (dir_name);
+  g_free (name);
 
   return row;
 }
