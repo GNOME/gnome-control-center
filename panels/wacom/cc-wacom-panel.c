@@ -32,7 +32,6 @@
 #include "cc-drawing-area.h"
 #include "cc-tablet-tool-map.h"
 #include "gsd-device-manager.h"
-#include "gsd-wacom-device.h"
 
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/gdkwayland.h>
