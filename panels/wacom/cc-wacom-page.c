@@ -462,8 +462,8 @@ set_osd_visibility (CcWacomPage *page)
 	}
 
 	g_dbus_proxy_call (proxy,
-			   "SetOSDVisibility",
-			   g_variant_new ("(obb)", device_path, TRUE, TRUE),
+			   "Show",
+			   g_variant_new ("(ob)", device_path, TRUE),
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
 			   priv->cancellable,
