@@ -132,6 +132,7 @@ get_layout_type (CcWacomDevice *device)
 	return layout;
 }
 
+#if 0
 static void
 set_calibration (GsdWacomDevice *device,
                  const gint      display_width,
@@ -166,8 +167,6 @@ set_calibration (GsdWacomDevice *device,
 		 cal[0], cal[1], cal[2], cal[3],
 		 display_width, display_height);
 }
-
-#if 0
 
 static void
 finish_calibration (CalibArea *area,
@@ -322,21 +321,21 @@ calibrate_button_clicked_cb (GtkButton   *button,
  * gnome-control-center has been used, and we load up an
  * old one, as the action type if unknown to the old g-c-c */
 static gboolean
-action_type_is_valid (GsdWacomActionType type)
+action_type_is_valid (GDesktopPadButtonAction action)
 {
-	if (type >= G_N_ELEMENTS(action_table))
+	if (action >= G_N_ELEMENTS (action_table))
 		return FALSE;
 	return TRUE;
 }
 
 static void
-create_row_from_button (GtkWidget            *list_box,
-			GsdWacomTabletButton *button,
-			GtkDirectionType      dir)
+create_row_from_button (GtkWidget *list_box,
+			guint      button,
+			GSettings *settings)
 {
 	GtkWidget *row;
 
-	row = cc_wacom_button_row_new (button, dir);
+	row = cc_wacom_button_row_new (button, settings);
 	gtk_container_add (GTK_CONTAINER (list_box), row);
 	gtk_widget_show (row);
 }
@@ -344,37 +343,26 @@ create_row_from_button (GtkWidget            *list_box,
 static void
 setup_button_mapping (CcWacomPage *page)
 {
-#if 0
-	CcWacomPagePrivate *priv;
-	GList              *list, *l;
-	GtkWidget          *list_box = NULL;
+	CcWacomPagePrivate *priv = page->priv;
+	GDesktopPadButtonAction action;
+	GtkWidget *list_box;
+	guint i, n_buttons;
+	GSettings *settings;
 
-	priv = page->priv;
 	list_box = MWID ("shortcuts_list");
-	list = gsd_wacom_device_get_buttons (priv->pad);
+	n_buttons = cc_wacom_device_get_num_buttons (priv->pad);
 
-	for (l = list; l != NULL; l = l->next) {
-		GsdWacomTabletButton *button = l->data;
-		GsdWacomActionType    action_type;
-
-		if (button->type == WACOM_TABLET_BUTTON_TYPE_HARDCODED)
+	for (i = 0; i < n_buttons; i++) {
+		settings = cc_wacom_device_get_button_settings (priv->pad, i);
+		if (!settings)
 			continue;
 
-		action_type = g_settings_get_enum (button->settings, "action-type");
-		if (!action_type_is_valid (action_type))
+		action = g_settings_get_enum (settings, "action");
+		if (!action_type_is_valid (action))
 			continue;
 
-		if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
-		    button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
-			create_row_from_button (list_box, button, GTK_DIR_UP);
-			create_row_from_button (list_box, button, GTK_DIR_DOWN);
-			continue;
-		}
-
-		create_row_from_button (list_box, button, 0);
+		create_row_from_button (list_box, i, settings);
 	}
-	g_list_free (list);
-#endif
 }
 
 static void
