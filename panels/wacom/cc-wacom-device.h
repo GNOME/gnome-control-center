@@ -37,6 +37,7 @@ WacomDeviceDatabase *
                 cc_wacom_device_database_get    (void);
 
 CcWacomDevice * cc_wacom_device_new             (GsdDevice *device);
+CcWacomDevice * cc_wacom_device_new_fake        (const gchar *name);
 
 const gchar   * cc_wacom_device_get_name        (CcWacomDevice *device);
 const gchar   * cc_wacom_device_get_icon_name   (CcWacomDevice *device);

@@ -165,6 +165,25 @@ cc_wacom_device_new (GsdDevice *device)
 			       NULL);
 }
 
+CcWacomDevice *
+cc_wacom_device_new_fake (const gchar *name)
+{
+	CcWacomDevice *device;
+	WacomDevice *wacom_device;
+
+	device = g_object_new (CC_TYPE_WACOM_DEVICE,
+			       NULL);
+
+	wacom_device = libwacom_new_from_name (cc_wacom_device_database_get(),
+					       name, NULL);
+	if (wacom_device == NULL)
+		return NULL;
+
+	device->wdevice = wacom_device;
+
+	return device;
+}
+
 const gchar *
 cc_wacom_device_get_name (CcWacomDevice *device)
 {
