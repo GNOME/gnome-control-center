@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
+  <requires lib="gtk+" version="3.20"/>
   <object class="GtkAdjustment" id="adjustment-eraser-feel">
     <property name="upper">6</property>
     <property name="step_increment">1</property>
@@ -41,295 +42,378 @@
       </row>
     </data>
   </object>
-  <object class="GtkGrid" id="stylus-grid">
+  <object class="GtkNotebook" id="stylus-notebook">
+    <property name="name">stylus-notebook</property>
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="column_spacing">10</property>
-    <property name="row_spacing">10</property>
-    <property name="hexpand">True</property>
+    <property name="can_focus">True</property>
+    <property name="show_tabs">False</property>
+    <property name="show_border">False</property>
     <child>
-      <object class="GtkLabel" id="label-stylus">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="halign">start</property>
-        <property name="valign">center</property>
-        <property name="label" translatable="yes">Stylus</property>
-        <attributes>
-          <attribute name="weight" value="bold"/>
-        </attributes>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
-        <property name="width">2</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkImage" id="image-stylus">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="halign">end</property>
-        <property name="valign">start</property>
-        <property name="pixbuf">wacom-stylus.svg</property>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkGrid" id="stylus-controls-grid">
+      <object class="GtkBox" id="no-stylus-page">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="margin_start">16</property>
-        <property name="margin_top">12</property>
-        <property name="row_spacing">6</property>
-        <property name="column_spacing">10</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0.29999999999999999</property>
+            <property name="valign">end</property>
+            <property name="vexpand">True</property>
+            <property name="pixel_size">100</property>
+            <property name="icon_name">input-tablet-symbolic</property>
+            <property name="icon_size">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="no-stylus-label1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">No stylus found</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="vexpand">True</property>
+            <property name="label" translatable="yes">Please move your stylus to the proximity of the tablet to configure it</property>
+            <property name="justify">center</property>
+            <property name="wrap">True</property>
+            <property name="width_chars">30</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="tab">
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">page 1</property>
+      </object>
+      <packing>
+        <property name="tab_fill">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkGrid" id="stylus-grid">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <property name="hexpand">True</property>
+        <property name="row_spacing">10</property>
+        <property name="column_spacing">10</property>
         <child>
-          <object class="GtkLabel" id="label-eraser-feel">
+          <object class="GtkLabel" id="label-stylus">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="halign">end</property>
+            <property name="halign">start</property>
             <property name="valign">center</property>
-            <property name="label" translatable="yes">Eraser Pressure Feel</property>
-            <property name="justify">right</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
+            <property name="label" translatable="yes">Stylus</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
           </object>
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">0</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
+            <property name="width">2</property>
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="eraser-box">
+          <object class="GtkImage" id="image-stylus">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">10</property>
+            <property name="halign">end</property>
+            <property name="valign">start</property>
+            <property name="pixbuf">wacom-stylus.svg</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="stylus-controls-grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_start">16</property>
+            <property name="margin_top">12</property>
             <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
+            <property name="row_spacing">6</property>
+            <property name="column_spacing">10</property>
             <child>
-              <object class="GtkLabel" id="label-eraser-soft">
+              <object class="GtkLabel" id="label-eraser-feel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Soft</property>
-                <attributes>
-                  <attribute name="scale" value="0.82999999999999996"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkScale" id="scale-eraser-feel">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="adjustment">adjustment-eraser-feel</property>
-                <property name="digits">0</property>
-                <property name="draw_value">False</property>
+                <property name="label" translatable="yes">Eraser Pressure Feel</property>
+                <property name="justify">right</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label-eraser-firm">
+              <object class="GtkBox" id="eraser-box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Firm</property>
-                <attributes>
-                  <attribute name="scale" value="0.82999999999999996"/>
-                </attributes>
+                <property name="hexpand">True</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkLabel" id="label-eraser-soft">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Soft</property>
+                    <attributes>
+                      <attribute name="scale" value="0.82999999999999996"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScale" id="scale-eraser-feel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                    <property name="adjustment">adjustment-eraser-feel</property>
+                    <property name="digits">0</property>
+                    <property name="draw_value">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label-eraser-firm">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Firm</property>
+                    <attributes>
+                      <attribute name="scale" value="0.82999999999999996"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
               </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label-top-button">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Top Button</property>
+                <property name="justify">right</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combo-topbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">center</property>
+                <property name="model">liststore-buttons</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label-lower-button">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Lower Button</property>
+                <property name="justify">right</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combo-bottombutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">center</property>
+                <property name="model">liststore-buttons</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label-tip-feel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Tip Pressure Feel</property>
+                <property name="justify">right</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="box-tip-feel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkLabel" id="label-tip-soft">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Soft</property>
+                    <attributes>
+                      <attribute name="scale" value="0.82999999999999996"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScale" id="scale-tip-feel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="adjustment">adjustment-tip-feel</property>
+                    <property name="digits">0</property>
+                    <property name="draw_value">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label-tip-firm">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Firm</property>
+                    <attributes>
+                      <attribute name="scale" value="0.82999999999999996"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRevealer" id="navigation-placeholder">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">end</property>
+            <property name="transition_type">crossfade</property>
+            <property name="transition_duration">100</property>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>
             <property name="left_attach">1</property>
             <property name="top_attach">0</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label-top-button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="valign">center</property>
-            <property name="label" translatable="yes">Top Button</property>
-            <property name="justify">right</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="combo-topbutton">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="valign">center</property>
-            <property name="model">liststore-buttons</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">1</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label-lower-button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="valign">center</property>
-            <property name="label" translatable="yes">Lower Button</property>
-            <property name="justify">right</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="combo-bottombutton">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="valign">center</property>
-            <property name="model">liststore-buttons</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label-tip-feel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="valign">center</property>
-            <property name="label" translatable="yes">Tip Pressure Feel</property>
-            <property name="justify">right</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">3</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="box-tip-feel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">10</property>
-            <child>
-              <object class="GtkLabel" id="label-tip-soft">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Soft</property>
-                <attributes>
-                  <attribute name="scale" value="0.82999999999999996"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkScale" id="scale-tip-feel">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="adjustment">adjustment-tip-feel</property>
-                <property name="digits">0</property>
-                <property name="draw_value">False</property>
-                <property name="hexpand">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label-tip-firm">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Firm</property>
-                <attributes>
-                  <attribute name="scale" value="0.82999999999999996"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
       </object>
       <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child type="tab">
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">page 2</property>
+      </object>
+      <packing>
+        <property name="position">1</property>
+        <property name="tab_fill">False</property>
       </packing>
     </child>
     <child>
       <placeholder/>
     </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
+    <child type="tab">
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">page 3</property>
+      </object>
+      <packing>
+        <property name="position">2</property>
+        <property name="tab_fill">False</property>
+      </packing>
     </child>
   </object>
 </interface>

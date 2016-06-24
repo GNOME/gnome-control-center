@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
+  <requires lib="gtk+" version="3.20"/>
   <object class="GtkListStore" id="liststore-tabletmode">
     <columns>
       <!-- column-name tabletmode -->
@@ -41,11 +42,11 @@
             <child>
               <object class="GtkButton" id="helpbutton1">
                 <property name="label" translatable="yes">_Help</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -57,11 +58,11 @@
             <child>
               <object class="GtkButton" id="closebutton1">
                 <property name="label" translatable="yes">_Close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -86,70 +87,91 @@
             <property name="show_tabs">False</property>
             <property name="show_border">False</property>
             <child>
-              <object class="GtkBox" id="main-box">
+              <object class="GtkGrid" id="main-box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="orientation">vertical</property>
                 <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="advice-label1">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="yalign">1</property>
-                    <property name="label" translatable="yes">No tablet detected</property>
-                    <property name="justify">center</property>
-                    <property name="use_markup">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">False</property>
+                        <property name="opacity">0.30196078431372547</property>
+                        <property name="valign">end</property>
+                        <property name="vexpand">True</property>
+                        <property name="pixel_size">100</property>
+                        <property name="icon_name">input-tablet-symbolic</property>
+                        <property name="icon_size">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="advice-label1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="vexpand">False</property>
+                        <property name="label" translatable="yes">No tablet detected</property>
+                        <property name="justify">center</property>
+                        <property name="yalign">1</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="advice-label2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="valign">start</property>
+                        <property name="vexpand">True</property>
+                        <property name="label" translatable="yes">Please plug in or turn on your Wacom tablet</property>
+                        <property name="justify">center</property>
+                        <property name="yalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">3</property>
+                    <property name="height">3</property>
                   </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="advice-label2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="vexpand">True</property>
-                    <property name="yalign">0</property>
-                    <property name="label" translatable="yes">Please plug in or turn on your Wacom tablet</property>
-                    <property name="justify">center</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <placeholder/>
                 </child>
                 <child>
                   <object class="GtkLinkButton" id="linkbutton">
                     <property name="label" translatable="yes">Bluetooth Settings</property>
+                    <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="has_tooltip">False</property>
                     <property name="halign">end</property>
                     <property name="valign">end</property>
-                    <property name="use_action_appearance">False</property>
+                    <property name="vexpand">True</property>
                     <property name="relief">none</property>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">5</property>
+                    <property name="left_attach">2</property>
+                    <property name="top_attach">2</property>
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="tab_expand">True</property>
-              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel" id="label4">
@@ -165,8 +187,8 @@
               <object class="GtkGrid" id="main-grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="column_spacing">10</property>
                 <property name="row_spacing">10</property>
+                <property name="column_spacing">10</property>
                 <child>
                   <object class="GtkLabel" id="label-tabletmodel">
                     <property name="visible">True</property>
@@ -182,21 +204,19 @@
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
                     <property name="width">2</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkImage" id="image-tablet">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">wacom-tablet.svg</property>
-                    <property name="valign">start</property>
                     <property name="halign">center</property>
+                    <property name="valign">start</property>
+                    <property name="pixbuf">wacom-tablet.svg</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
                     <property name="height">2</property>
                   </packing>
                 </child>
@@ -209,11 +229,11 @@
                     <child>
                       <object class="GtkButton" id="display-mapping-button">
                         <property name="label" translatable="yes">Map to Monitor…</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="valign">center</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -225,11 +245,11 @@
                     <child>
                       <object class="GtkButton" id="map-buttons-button">
                         <property name="label" translatable="yes">Map Buttons…</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="valign">center</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -241,10 +261,10 @@
                     <child>
                       <object class="GtkButton" id="button-calibrate">
                         <property name="label" translatable="yes">Calibrate…</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="valign">center</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -257,54 +277,46 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                 <object class="GtkLinkButton" id="display-link">
-                   <property name="label" translatable="yes">Adjust display resolution</property>
-                   <property name="visible">True</property>
-                   <property name="can_focus">True</property>
-                   <property name="receives_default">True</property>
-                   <property name="has_tooltip">False</property>
-                   <property name="use_action_appearance">False</property>
-                   <property name="relief">none</property>
-                   <property name="halign">end</property>
-                   <property name="valign">center</property>
+                  <object class="GtkLinkButton" id="display-link">
+                    <property name="label" translatable="yes">Adjust display resolution</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">start</property>
+                    <property name="relief">none</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                 <object class="GtkLinkButton" id="mouse-link">
-                   <property name="label" translatable="yes">Adjust mouse settings</property>
-                   <property name="visible">True</property>
-                   <property name="can_focus">True</property>
-                   <property name="receives_default">True</property>
-                   <property name="has_tooltip">False</property>
-                   <property name="use_action_appearance">False</property>
-                   <property name="relief">none</property>
-                   <property name="halign">end</property>
-                   <property name="valign">center</property>
+                  <object class="GtkLinkButton" id="mouse-link">
+                    <property name="label" translatable="yes">Adjust mouse settings</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">start</property>
+                    <property name="relief">none</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkGrid" id="main-controls-grid">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
                     <property name="margin_start">16</property>
+                    <property name="orientation">vertical</property>
                     <property name="row_spacing">10</property>
                     <property name="column_spacing">10</property>
                     <child>
@@ -321,8 +333,6 @@
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -335,8 +345,6 @@
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -353,47 +361,45 @@
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="switch-left-handed">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
                         <property name="valign">center</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkNotebook" id="stylus-notebook">
+                  <object class="GtkRevealer" id="navigation-placeholder">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="show_tabs">False</property>
-                    <property name="show_border">False</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">end</property>
+                    <property name="transition_type">crossfade</property>
+                    <property name="transition_duration">100</property>
+                    <child>
+                      <placeholder/>
+                    </child>
                   </object>
                   <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">5</property>
-                    <property name="width">2</property>
-                    <property name="height">1</property>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
                   </packing>
+                </child>
+                <child>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
