@@ -697,7 +697,7 @@ calib_area_new (GdkScreen      *screen,
   g_return_val_if_fail (old_axis, NULL);
   g_return_val_if_fail (callback, NULL);
 
-  g_debug ("Current calibration: %d, %d, %d, %d\n",
+  g_debug ("Current calibration: %f, %f, %f, %f\n",
            old_axis->x_min,
            old_axis->y_min,
            old_axis->x_max,
@@ -739,10 +739,6 @@ calib_area_new (GdkScreen      *screen,
   if (screen == NULL)
     screen = gdk_screen_get_default ();
   gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-  gtk_window_move (GTK_WINDOW (calib_area->window), rect.x, rect.y);
-  gtk_window_set_default_size (GTK_WINDOW (calib_area->window),
-                               rect.width,
-                               rect.height);
 
   calib_area->calibrator.geometry = rect;
 
@@ -765,7 +761,7 @@ calib_area_new (GdkScreen      *screen,
                     G_CALLBACK (on_fullscreen),
                     calib_area);
 
-  gtk_window_fullscreen (GTK_WINDOW (calib_area->window));
+  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), screen, monitor);
 
   visual = gdk_screen_get_rgba_visual (screen);
   if (visual != NULL)
@@ -790,7 +786,7 @@ calib_area_finish (CalibArea *area,
   *swap_xy  = area->swap;
 
   if (area->success)
-    g_debug ("Final calibration: %d, %d, %d, %d\n",
+    g_debug ("Final calibration: %f, %f, %f, %f\n",
              new_axis->x_min,
              new_axis->y_min,
              new_axis->x_max,

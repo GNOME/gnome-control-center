@@ -29,10 +29,10 @@
 /* struct to hold min/max info of the X and Y axis */
 typedef struct
 {
-	int x_min;
-	int x_max;
-	int y_min;
-	int y_max;
+	gdouble x_min;
+	gdouble x_max;
+	gdouble y_min;
+	gdouble y_max;
 } XYinfo;
 
 typedef struct CalibArea CalibArea;
