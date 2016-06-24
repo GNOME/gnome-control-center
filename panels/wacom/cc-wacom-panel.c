@@ -302,6 +302,10 @@ add_stylus (CcWacomPanel *self,
 	gtk_widget_show (page);
 	gtk_notebook_append_page (GTK_NOTEBOOK (priv->stylus_notebook), page, NULL);
 	g_hash_table_insert (priv->stylus_pages, tool, page);
+
+	if (gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->stylus_notebook)) == 0)
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->stylus_notebook), 1);
+
 	return TRUE;
 }
 
@@ -709,6 +713,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	GError *error = NULL;
 	char *objects[] = {
 		"main-box",
+		"no-stylus-page",
 		NULL
 	};
 
@@ -719,6 +724,10 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	gtk_builder_add_objects_from_resource (priv->builder,
                                                "/org/gnome/control-center/wacom/gnome-wacom-properties.ui",
+                                               objects,
+                                               &error);
+	gtk_builder_add_objects_from_resource (priv->builder,
+                                               "/org/gnome/control-center/wacom/wacom-stylus-page.ui",
                                                objects,
                                                &error);
 	if (error != NULL)
@@ -782,6 +791,11 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	gtk_stack_add_titled (GTK_STACK (priv->stack),
 			      priv->tablet_notebook, "tablet",
 			      _("Tablet"));
+
+	/* No styli page */
+	widget = WID ("no-stylus-page");
+	enbiggen_label (GTK_LABEL (WID ("no-stylus-label1")));
+	gtk_notebook_append_page (GTK_NOTEBOOK (priv->stylus_notebook), widget, NULL);
 
 	/* No tablets page */
 	widget = WID ("main-box");

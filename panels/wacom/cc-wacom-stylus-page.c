@@ -302,7 +302,8 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *self)
 	priv->nav = cc_wacom_nav_button_new ();
         gtk_widget_set_halign (priv->nav, GTK_ALIGN_END);
         gtk_widget_set_margin_start (priv->nav, 10);
-	gtk_grid_attach (GTK_GRID (box), priv->nav, 1, 0, 1, 1);
+	gtk_widget_show (priv->nav);
+	gtk_container_add (CWID ("navigation-placeholder"), priv->nav);
 }
 
 static void
@@ -483,5 +484,6 @@ cc_wacom_stylus_page_set_navigation (CcWacomStylusPage *page,
 
 	g_object_set (G_OBJECT (priv->nav),
 		      "notebook", notebook,
+		      "ignore-first", TRUE,
 		      NULL);
 }
