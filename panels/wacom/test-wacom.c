@@ -5,7 +5,6 @@
 #include <clutter-gtk/clutter-gtk.h>
 
 #include "cc-wacom-page.h"
-#include "gsd-wacom-device.h"
 #include "clutter/clutter.h"
 
 #define FIXED_WIDTH 675
@@ -29,7 +28,7 @@ add_page (GList *devices,
 	  GtkWidget *notebook)
 {
 	GtkWidget *widget;
-	GsdWacomDevice *stylus, *eraser, *pad;
+	CcWacomDevice *stylus, *eraser, *pad;
 	GList *l;
 
 	if (devices == NULL)
@@ -37,20 +36,7 @@ add_page (GList *devices,
 
 	stylus = eraser = pad = NULL;
 	for (l = devices; l ; l = l->next) {
-		switch (gsd_wacom_device_get_device_type (l->data)) {
-		case WACOM_TYPE_ERASER:
-			eraser = l->data;
-			break;
-		case WACOM_TYPE_STYLUS:
-			stylus = l->data;
-			break;
-		case WACOM_TYPE_PAD:
-			pad = l->data;
-			break;
-		default:
-			/* Nothing */
-			;
-		}
+		stylus = l->data;
 	}
 	g_list_free (devices);
 
@@ -68,6 +54,66 @@ delete_event_cb (GtkWidget *widget,
 	gtk_main_quit ();
 
 	return FALSE;
+}
+
+static GList *
+create_fake_cintiq (void)
+{
+	CcWacomDevice *device;
+	GList *devices;
+
+	device = cc_wacom_device_new_fake ("Wacom Cintiq 21UX2");
+	devices = g_list_prepend (NULL, device);
+
+	return devices;
+}
+
+static GList *
+create_fake_bt (void)
+{
+	CcWacomDevice *device;
+	GList *devices;
+
+	device = cc_wacom_device_new_fake ("Wacom Graphire Wireless");
+	devices = g_list_prepend (NULL, device);
+
+	return devices;
+}
+
+static GList *
+create_fake_x201 (void)
+{
+	CcWacomDevice *device;
+	GList *devices;
+
+	device = cc_wacom_device_new_fake ("Wacom Serial Tablet WACf004");
+	devices = g_list_prepend (NULL, device);
+
+	return devices;
+}
+
+static GList *
+create_fake_intuos4 (void)
+{
+	CcWacomDevice *device;
+	GList *devices;
+
+	device = cc_wacom_device_new_fake ("Wacom Intuos4 6x9");
+	devices = g_list_prepend (NULL, device);
+
+	return devices;
+}
+
+static GList *
+create_fake_h610pro (void)
+{
+	CcWacomDevice *device;
+	GList *devices;
+
+	device = cc_wacom_device_new_fake ("Huion H610 Pro");
+	devices = g_list_prepend (NULL, device);
+
+	return devices;
 }
 
 int main (int argc, char **argv)
@@ -97,19 +143,19 @@ int main (int argc, char **argv)
 	gtk_container_add (GTK_CONTAINER (window), notebook);
 	gtk_widget_show (notebook);
 
-	devices = gsd_wacom_device_create_fake_intuos4 ();
+	devices = create_fake_intuos4 ();
 	add_page (devices, notebook);
 
-	devices = gsd_wacom_device_create_fake_cintiq ();
+	devices = create_fake_cintiq ();
 	add_page (devices, notebook);
 
-	devices = gsd_wacom_device_create_fake_bt ();
+	devices = create_fake_bt ();
 	add_page (devices, notebook);
 
-	devices = gsd_wacom_device_create_fake_x201 ();
+	devices = create_fake_x201 ();
 	add_page (devices, notebook);
 
-	devices = gsd_wacom_device_create_fake_h610pro ();
+	devices = create_fake_h610pro ();
 	add_page (devices, notebook);
 
 	gtk_widget_show (window);
