@@ -72,10 +72,8 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 
 	g_assert (num_pages >= 1);
 
-	if (num_pages == 1)
-		gtk_widget_hide (GTK_WIDGET (nav));
-	else
-		gtk_widget_show (GTK_WIDGET (nav));
+	gtk_revealer_set_reveal_child (GTK_REVEALER (gtk_widget_get_parent (nav)),
+				       num_pages > 1);
 
 	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
 	if (current_page < 0)
