@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-15 12:20+0000\n"
-"PO-Revision-Date: 2016-06-16 16:28+0200\n"
+"POT-Creation-Date: 2016-06-26 09:27+0000\n"
+"PO-Revision-Date: 2016-06-27 09:18+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: de\n"
@@ -127,7 +127,7 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/network/net-device-wifi.c:1295
 #: ../panels/network/net-device-wifi.c:1532
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2052
+#: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:982
 #: ../panels/region/format-chooser.ui.h:3
@@ -2107,7 +2107,7 @@ msgid "Details"
 msgstr "Detalles"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:215
-#: ../panels/network/connection-editor/ce-page-vpn.c:215
+#: ../panels/network/connection-editor/ce-page-vpn.c:221
 #: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2428,17 +2428,18 @@ msgstr "No se pudo abrir el editor de conexiones"
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:613
+#: ../panels/network/connection-editor/net-connection-editor.c:635
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:795
+#: ../panels/network/connection-editor/net-connection-editor.c:783
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:866
-msgid "Add Network Connection"
-msgstr "Añadir conexión de red"
+#: ../panels/network/connection-editor/net-connection-editor.c:817
+#| msgid "%s VPN"
+msgid "Add VPN"
+msgstr "Añadir VPN"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:41
@@ -2494,7 +2495,7 @@ msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2053
+#: ../panels/printers/cc-printers-panel.c:2077
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -2830,7 +2831,7 @@ msgstr "detalles"
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
 #: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Contraseña"
 
@@ -2931,7 +2932,6 @@ msgid "_Connect to Hidden Network…"
 msgstr "Conectar a una red oculta…"
 
 #: ../panels/network/network-wifi.ui.h:58
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "_History"
 msgstr "_Histórico"
 
@@ -4158,138 +4158,138 @@ msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:678
+#: ../panels/printers/cc-printers-panel.c:683
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:680
+#: ../panels/printers/cc-printers-panel.c:685
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:683
+#: ../panels/printers/cc-printers-panel.c:688
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:686
+#: ../panels/printers/cc-printers-panel.c:691
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:688
+#: ../panels/printers/cc-printers-panel.c:693
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:690
+#: ../panels/printers/cc-printers-panel.c:695
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:692
+#: ../panels/printers/cc-printers-panel.c:697
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:694
+#: ../panels/printers/cc-printers-panel.c:699
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:696
+#: ../panels/printers/cc-printers-panel.c:701
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:698
+#: ../panels/printers/cc-printers-panel.c:703
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:700
+#: ../panels/printers/cc-printers-panel.c:705
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:702
-#: ../panels/printers/cc-printers-panel.c:893
+#: ../panels/printers/cc-printers-panel.c:707
+#: ../panels/printers/cc-printers-panel.c:897
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:704
+#: ../panels/printers/cc-printers-panel.c:709
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:706
+#: ../panels/printers/cc-printers-panel.c:711
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:708
+#: ../panels/printers/cc-printers-panel.c:713
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:710
+#: ../panels/printers/cc-printers-panel.c:715
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:820
+#: ../panels/printers/cc-printers-panel.c:824
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Configurando"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:879
+#: ../panels/printers/cc-printers-panel.c:883
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:884
+#: ../panels/printers/cc-printers-panel.c:888
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No aceptar trabajos"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:889
+#: ../panels/printers/cc-printers-panel.c:893
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1009
+#: ../panels/printers/cc-printers-panel.c:1013
 msgid "Toner Level"
 msgstr "Nivel de tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1012
+#: ../panels/printers/cc-printers-panel.c:1016
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1015
+#: ../panels/printers/cc-printers-panel.c:1019
 msgid "Supply Level"
 msgstr "Nivel del suministro"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1033
+#: ../panels/printers/cc-printers-panel.c:1037
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Instalando"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1541
+#: ../panels/printers/cc-printers-panel.c:1551
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4297,15 +4297,15 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1882
+#: ../panels/printers/cc-printers-panel.c:1892
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
-#: ../panels/printers/cc-printers-panel.c:2049
+#: ../panels/printers/cc-printers-panel.c:2073
 msgid "Select PPD File"
 msgstr "Seleccionar archivo PPD"
 
-#: ../panels/printers/cc-printers-panel.c:2058
+#: ../panels/printers/cc-printers-panel.c:2082
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4313,34 +4313,30 @@ msgstr ""
 "Archivos de descripción de impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *."
 "PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2365
+#: ../panels/printers/cc-printers-panel.c:2389
 msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
-#: ../panels/printers/cc-printers-panel.c:2436
+#: ../panels/printers/cc-printers-panel.c:2460
 msgid "Searching for preferred drivers…"
 msgstr "Buscando controladores preferidos…"
 
-#: ../panels/printers/cc-printers-panel.c:2457
+#: ../panels/printers/cc-printers-panel.c:2481
 msgid "Select from database…"
 msgstr "Seleccionar de la base de datos…"
 
-#: ../panels/printers/cc-printers-panel.c:2466
+#: ../panels/printers/cc-printers-panel.c:2490
 msgid "Provide PPD File…"
 msgstr "Proporcionar archivo PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2613
-#: ../panels/printers/cc-printers-panel.c:2636
+#: ../panels/printers/cc-printers-panel.c:2637
+#: ../panels/printers/cc-printers-panel.c:2660
 msgid "Test page"
 msgstr "Página de prueba"
 
-#: ../panels/printers/cc-printers-panel.c:2749
-msgid "No printers"
-msgstr "No hay impresoras"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3095
+#: ../panels/printers/cc-printers-panel.c:3115
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -4736,13 +4732,17 @@ msgstr "I_mprimir página de prueba"
 msgid "_Options"
 msgstr "_Opciones"
 
+#: ../panels/printers/printers.ui.h:23
+msgid "No printers"
+msgstr "No hay impresoras"
+
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:25
 msgid "Add a Printer"
 msgstr "Añadir una impresora"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:26
+#: ../panels/printers/printers.ui.h:27
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -5124,7 +5124,7 @@ msgid "Left+Right Alt"
 msgstr "Izquierda+Alt derecha"
 
 #: ../panels/region/region.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -5268,9 +5268,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:682
 #, c-format
-#| msgid ""
-#| "Allow remote users to connect using the Secure Shell command:\n"
-#| "<a href=\"ssh %s\">ssh %s</a>"
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
@@ -5282,9 +5279,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:684
 #, c-format
-#| msgid ""
-#| "Allow remote users to view or control your screen by connecting to: <a "
-#| "href=\"vnc://%s\">vnc://%s</a>"
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
@@ -5345,7 +5339,6 @@ msgid "_Computer Name"
 msgstr "Nombre del _equipo"
 
 #: ../panels/sharing/sharing.ui.h:2
-#| msgid "_Personal File Sharing"
 msgid "_File Sharing"
 msgstr "Compartición de _archivos"
 
@@ -5366,7 +5359,6 @@ msgid "Some services are disabled because of no network access."
 msgstr "Se han desactivado algunos servicios porque no hay acceso a la red."
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "Sharing"
 msgid "File Sharing"
 msgstr "Compartición de archivos"
 
@@ -5411,9 +5403,6 @@ msgid "Media Sharing"
 msgstr "Compartición multimedia"
 
 #: ../panels/sharing/sharing.ui.h:19
-#| msgid ""
-#| "Media sharing allows you to share music, photos and videos over the "
-#| "network."
 msgid "Share music, photos and videos over the network."
 msgstr "Compartir música, fotos y vídeos mediante la red."
 
@@ -6153,19 +6142,19 @@ msgid "_Full Name"
 msgstr "Nombre _completo"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 #: ../panels/user-accounts/um-user-panel.c:900
 msgid "Standard"
 msgstr "Estándar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 #: ../panels/user-accounts/um-user-panel.c:898
 msgid "Administrator"
 msgstr "Administrador"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "Account _Type"
 msgstr "_Tipo de cuenta"
 
@@ -6341,40 +6330,33 @@ msgid "Set a password now"
 msgstr "Establecer una contraseña ahora"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#: ../panels/user-accounts/um-account-type.c:34
-msgctxt "Account type"
-msgid "Standard"
-msgstr "Estándar"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-type.c:36
-msgctxt "Account type"
-msgid "Administrator"
-msgstr "Administrador"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Add User Account"
 msgstr "Añadir cuenta de usuario"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Remove User Account"
 msgstr "Quitar cuenta de usuario"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "A_utomatic Login"
 msgstr "_Inicio de sesión automático"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "_Fingerprint Login"
 msgstr "Inicio de sesión con _huella"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "User Icon"
 msgstr "Icono de usuario"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Last Login"
 msgstr "Último inicio de sesión"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+#| msgid "Account _type"
+msgid "_Account Activity"
+msgstr "_Actividad de la cuenta"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6615,6 +6597,16 @@ msgstr "Falló al iniciar sesión en el dominio"
 #: ../panels/user-accounts/um-account-dialog.c:1099
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "No se pudo encontrar el dominio. ¿Está bien escrito?"
+
+#: ../panels/user-accounts/um-account-type.c:34
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Estándar"
+
+#: ../panels/user-accounts/um-account-type.c:36
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Administrador"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid ""
@@ -7408,6 +7400,9 @@ msgstr "Cancelar búsqueda"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
+
+#~ msgid "Add Network Connection"
+#~ msgstr "Añadir conexión de red"
 
 #~ msgid "Personal File Sharing"
 #~ msgstr "Compartición de archivos personales"
@@ -8939,9 +8934,6 @@ msgstr "Hotspot"
 
 #~ msgid "Shortcut"
 #~ msgstr "Combinación"
-
-#~ msgid "Account _type"
-#~ msgstr "_Tipo de cuenta"
 
 #~ msgid "_Back"
 #~ msgstr "_Atrás"
