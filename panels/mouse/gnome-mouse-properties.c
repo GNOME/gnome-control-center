@@ -99,10 +99,18 @@ setup_touchpad_options (CcMousePropertiesPrivate *d)
 
 	edge_scroll_enabled = g_settings_get_boolean (d->touchpad_settings, "edge-scrolling-enabled");
 	two_finger_scroll_enabled = g_settings_get_boolean (d->touchpad_settings, "two-finger-scrolling-enabled");
-	d->changing_scroll = TRUE;
-	gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")), edge_scroll_enabled);
-	gtk_switch_set_active (GTK_SWITCH (WID ("two-finger-scrolling-switch")), two_finger_scroll_enabled);
-	d->changing_scroll = FALSE;
+	if (edge_scroll_enabled && two_finger_scroll_enabled) {
+		/* You cunning user set both, but you can only have one set in that UI */
+		d->changing_scroll = TRUE;
+		gtk_switch_set_active (GTK_SWITCH (WID ("two-finger-scrolling-switch")), two_finger_scroll_enabled);
+		d->changing_scroll = FALSE;
+		gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")), FALSE);
+	} else {
+		d->changing_scroll = TRUE;
+		gtk_switch_set_active (GTK_SWITCH (WID ("edge-scrolling-switch")), edge_scroll_enabled);
+		gtk_switch_set_active (GTK_SWITCH (WID ("two-finger-scrolling-switch")), two_finger_scroll_enabled);
+		d->changing_scroll = FALSE;
+	}
 }
 
 static void
