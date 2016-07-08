@@ -15,6 +15,8 @@ libkeyboard_la_SOURCES =   \
 	cc-keyboard-item.h		\
 	cc-keyboard-option.c		\
 	cc-keyboard-option.h		\
+	cc-keyboard-shortcut-editor.c	\
+	cc-keyboard-shortcut-editor.h	\
 	wm-common.c			\
 	wm-common.h			\
 	keyboard-shortcuts.c		\

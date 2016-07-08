@@ -31,6 +31,8 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC, KEYBOARD_PANEL, CcPanel)
 
+CcKeyboardItem*      cc_keyboard_panel_create_custom_item        (CcKeyboardPanel    *self);
+
 G_END_DECLS
 
 #endif /* _CC_KEYBOARD_PANEL_H */
