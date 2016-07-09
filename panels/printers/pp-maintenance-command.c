@@ -181,11 +181,12 @@ static gboolean _pp_maintenance_command_is_supported (const gchar *printer_name,
                                                       const gchar *command);
 
 static void
-_pp_maintenance_command_execute_thread (GSimpleAsyncResult *res,
-                                        GObject            *object,
-                                        GCancellable       *cancellable)
+_pp_maintenance_command_execute_thread (GTask        *task,
+                                        gpointer      source_object,
+                                        gpointer      task_data,
+                                        GCancellable *cancellable)
 {
-  PpMaintenanceCommand        *command = (PpMaintenanceCommand *) object;
+  PpMaintenanceCommand        *command = PP_MAINTENANCE_COMMAND (source_object);
   PpMaintenanceCommandPrivate *priv = command->priv;
   gboolean                     success = FALSE;
   GError                      *error = NULL;
@@ -245,13 +246,13 @@ _pp_maintenance_command_execute_thread (GSimpleAsyncResult *res,
 
   if (!success)
     {
-      g_simple_async_result_set_error (res,
-                                       G_IO_ERROR,
-                                       G_IO_ERROR_FAILED,
-                                       "Execution of maintenance command failed.");
+      g_task_return_new_error (task,
+                               G_IO_ERROR,
+                               G_IO_ERROR_FAILED,
+                               "Execution of maintenance command failed.");
     }
 
-  g_simple_async_result_set_op_res_gboolean (res, success);
+  g_task_return_boolean (task, success);
 }
 
 void
@@ -260,31 +261,23 @@ pp_maintenance_command_execute_async (PpMaintenanceCommand *command,
                                       GAsyncReadyCallback   callback,
                                       gpointer              user_data)
 {
-  GSimpleAsyncResult *res;
+  GTask *task;
 
-  res = g_simple_async_result_new (G_OBJECT (command), callback, user_data, pp_maintenance_command_execute_async);
+  task = g_task_new (command, cancellable, callback, user_data);
+  g_task_set_check_cancellable (task, TRUE);
+  g_task_run_in_thread (task, _pp_maintenance_command_execute_thread);
 
-  g_simple_async_result_set_check_cancellable (res, cancellable);
-  g_simple_async_result_run_in_thread (res, _pp_maintenance_command_execute_thread, 0, cancellable);
-
-  g_object_unref (res);
+  g_object_unref (task);
 }
 
 gboolean
 pp_maintenance_command_execute_finish (PpMaintenanceCommand  *command,
-                                       GAsyncResult          *res,
+                                       GAsyncResult          *result,
                                        GError               **error)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
+  g_return_val_if_fail (g_task_is_valid (result, command), FALSE);
 
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == pp_maintenance_command_execute_async);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    {
-      return FALSE;
-    }
-
-  return g_simple_async_result_get_op_res_gboolean (simple);
+  return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 static gboolean
