@@ -392,34 +392,78 @@ cc_info_panel_class_init (CcInfoPanelClass *klass)
   object_class->finalize = cc_info_panel_finalize;
 }
 
-static char *
-get_os_type (void)
+static GHashTable*
+get_os_info (void)
 {
-  int bits;
-  char *buffer;
-  char *name;
-  char *result;
+  GHashTable *hashtable;
+  gchar *buffer;
 
-  name = NULL;
+  hashtable = NULL;
 
   if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
     {
-       char *start, *end;
+      gchar **lines;
+      gint i;
 
-       start = end = NULL;
-       if ((start = strstr (buffer, "PRETTY_NAME=\"")) != NULL)
-         {
-           start += strlen ("PRETTY_NAME=\"");
-           end = strchr (start, '"');
-         }
+      lines = g_strsplit (buffer, "\n", -1);
 
-       if (start != NULL && end != NULL)
-         {
-           name = g_strndup (start, end - start);
-         }
+      for (i = 0; lines[i] != NULL; i++)
+        {
+          gchar *delimiter, *key, *value;
 
-       g_free (buffer);
+          /* Initialize the hash table if needed */
+          if (!hashtable)
+            hashtable = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+          delimiter = strstr (lines[i], "=");
+          value = NULL;
+          key = NULL;
+
+          if (delimiter != NULL)
+            {
+              gint size;
+
+              key = g_strndup (lines[i], delimiter - lines[i]);
+
+              /* Jump the '=' */
+              delimiter += strlen ("=");
+
+              /* Eventually jump the ' " ' character */
+              if (g_str_has_prefix (delimiter, "\""))
+                delimiter += strlen ("\"");
+
+              size = strlen (delimiter);
+
+              /* Don't consider the last ' " ' too */
+              if (g_str_has_suffix (delimiter, "\""))
+                size -= strlen ("\"");
+
+              value = g_strndup (delimiter, size);
+
+              g_hash_table_insert (hashtable, key, value);
+            }
+        }
+
+      g_strfreev (lines);
+      g_free (buffer);
     }
+
+  return hashtable;
+}
+
+static char *
+get_os_type (void)
+{
+  GHashTable *os_info;
+  gchar *name, *result;
+  int bits;
+
+  os_info = get_os_info ();
+
+  if (!os_info)
+    return NULL;
+
+  name = g_hash_table_lookup (os_info, "PRETTY_NAME");
 
   if (GLIB_SIZEOF_VOID_P == 8)
     bits = 64;
@@ -434,7 +478,7 @@ get_os_type (void)
   else
     result = g_strdup_printf (_("%d-bit"), bits);
 
-  g_free (name);
+  g_clear_pointer (&os_info, g_hash_table_destroy);
 
   return result;
 }
