@@ -138,7 +138,6 @@
                                   <object class="GtkRadioButton" id="account-type-standard">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Standard</property>
                                     <property name="draw_indicator">False</property>
                                   </object>
@@ -147,7 +146,6 @@
                                   <object class="GtkRadioButton" id="account-type-admin">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Administrator</property>
                                     <property name="draw_indicator">False</property>
                                     <property name="group">account-type-standard</property>
@@ -517,6 +515,13 @@
       <widget name="account-type-static"/>
       <widget name="autologin-box"/>
       <widget name="last-login-grid"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="account-type-standard"/>
+      <widget name="account-type-admin"/>
     </widgets>
   </object>
 </interface>
