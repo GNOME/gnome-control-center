@@ -324,6 +324,7 @@ um_history_dialog_show (UmHistoryDialog *um,
                         GtkWindow       *parent)
 {
         GDateTime *temp, *local;
+        gint parent_width;
 
         if (um->week)
                 g_date_time_unref (um->week);
@@ -343,6 +344,8 @@ um_history_dialog_show (UmHistoryDialog *um,
 
         show_week (um);
 
+        gtk_window_get_size (parent, &parent_width, NULL);
+        gtk_window_set_default_size (GTK_WINDOW (um->dialog), parent_width * 0.6, -1);
         gtk_window_set_transient_for (GTK_WINDOW (um->dialog), parent);
         gtk_window_present (GTK_WINDOW (um->dialog));
 }
