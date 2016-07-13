@@ -84,6 +84,62 @@ free_key_array (GPtrArray *keys)
     }
 }
 
+static gboolean
+compare_keys_for_uniqueness (CcKeyboardItem   *current_item,
+                             CcUniquenessData *data)
+{
+  CcKeyboardItem *item;
+
+  item = data->orig_item;
+
+  /* No conflict for: blanks, different modifiers or ourselves */
+  if (!current_item ||
+      item == current_item ||
+      data->new_mask != current_item->mask)
+    {
+      return FALSE;
+    }
+
+  if (item && cc_keyboard_item_equal (item, current_item))
+    goto out;
+
+  if (data->new_keyval != 0)
+    {
+      if (data->new_keyval != current_item->keyval)
+          return FALSE;
+    }
+  else if (current_item->keyval != 0 || data->new_keycode != current_item->keycode)
+    {
+      return FALSE;
+    }
+
+out:
+  data->conflict_item = current_item;
+
+  return TRUE;
+}
+
+static gboolean
+check_for_uniqueness (gpointer          key,
+                      GPtrArray        *keys_array,
+                      CcUniquenessData *data)
+{
+  guint i;
+
+  for (i = 0; i < keys_array->len; i++)
+    {
+      CcKeyboardItem *item;
+
+      item = keys_array->pdata[i];
+
+      if (compare_keys_for_uniqueness (item, data))
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+
 static GHashTable*
 get_hash_for_group (CcKeyboardManager *self,
                     BindingGroupType   group)
@@ -814,4 +870,70 @@ cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
   gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
   g_signal_emit (self, signals[SHORTCUT_REMOVED], 0, item);
+}
+
+/**
+ * cc_keyboard_manager_get_collision:
+ * @self: a #CcKeyboardManager
+ * @item: (nullable): a keyboard shortcut
+ * @keyval: the key value
+ * @mask: a mask for the key sequence
+ * @keycode: the code of the key.
+ *
+ * Retrieves the collision item for the given shortcut.
+ *
+ * Returns: (transfer none)(nullable): the collisioned shortcut
+ */
+CcKeyboardItem*
+cc_keyboard_manager_get_collision (CcKeyboardManager *self,
+                                   CcKeyboardItem    *item,
+                                   gint               keyval,
+                                   GdkModifierType    mask,
+                                   gint               keycode)
+{
+  CcUniquenessData data;
+
+  g_return_val_if_fail (CC_IS_KEYBOARD_MANAGER (self), NULL);
+
+  data.orig_item = item;
+  data.new_keyval = keyval;
+  data.new_mask = mask;
+  data.new_keycode = keycode;
+  data.conflict_item = NULL;
+
+  /* Any number of shortcuts can be disabled */
+  if (keyval != 0 || keycode != 0)
+    {
+      BindingGroupType i;
+
+      for (i = BINDING_GROUP_SYSTEM; i <= BINDING_GROUP_USER && !data.conflict_item; i++)
+        {
+          GHashTable *table;
+
+          table = get_hash_for_group (self, i);
+
+          if (!table)
+            continue;
+
+          g_hash_table_find (table, (GHRFunc) check_for_uniqueness, &data);
+        }
+    }
+
+  return data.conflict_item;
+}
+
+/**
+ * cc_keyboard_manager_disable_shortcut:
+ * @self: a #CcKeyboardManager
+ * @item: a @CcKeyboardItem
+ *
+ * Disables the given keyboard shortcut.
+ */
+void
+cc_keyboard_manager_disable_shortcut (CcKeyboardManager *self,
+                                      CcKeyboardItem    *item)
+{
+  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+
+  g_object_set (item, "binding", NULL, NULL);
 }

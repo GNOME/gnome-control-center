@@ -40,9 +40,11 @@ struct _CcKeyboardShortcutEditor
   GtkWidget          *edit_button;
   GtkWidget          *headerbar;
   GtkWidget          *name_entry;
+  GtkWidget          *new_shortcut_conflict_label;
   GtkWidget          *remove_button;
   GtkWidget          *replace_button;
   GtkWidget          *shortcut_accel_label;
+  GtkWidget          *shortcut_conflict_label;
   GtkWidget          *stack;
   GtkWidget          *top_info_label;
 
@@ -52,6 +54,8 @@ struct _CcKeyboardShortcutEditor
 
   CcKeyboardManager  *manager;
   CcKeyboardItem     *item;
+
+  CcKeyboardItem     *collision_item;
 
   /* Custom shortcuts */
   GdkDevice          *grab_pointer;
@@ -122,12 +126,16 @@ clear_custom_entries (CcKeyboardShortcutEditor *self)
   gtk_entry_set_text (GTK_ENTRY (self->command_entry), "");
 
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
+  gtk_label_set_label (GTK_LABEL (self->new_shortcut_conflict_label), "");
+  gtk_label_set_label (GTK_LABEL (self->shortcut_conflict_label), "");
 
   self->custom_keycode = 0;
   self->custom_keyval = 0;
   self->custom_mask = 0;
   self->custom_is_modifier = TRUE;
   self->edited = FALSE;
+
+  self->collision_item = NULL;
 
   g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
   g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
@@ -200,6 +208,10 @@ update_shortcut (CcKeyboardShortcutEditor *self)
   /* Setup the binding */
   apply_custom_item_fields (self, self->item);
 
+  /* Eventually disable the conflict shortcut */
+  if (self->collision_item)
+    cc_keyboard_manager_disable_shortcut (self->manager, self->collision_item);
+
   /* Cleanup whatever was set before */
   clear_custom_entries (self);
 
@@ -216,9 +228,20 @@ get_current_shortcut_label (CcKeyboardShortcutEditor *self)
 }
 
 static void
+set_collision_headerbar (CcKeyboardShortcutEditor *self,
+                         gboolean                  has_collision)
+{
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->headerbar), !has_collision);
+
+  gtk_widget_set_visible (self->cancel_button, has_collision);
+  gtk_widget_set_visible (self->replace_button, has_collision);
+}
+
+static void
 setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 {
   GtkShortcutLabel *shortcut_label;
+  CcKeyboardItem *collision_item;
   gboolean valid;
   gchar *accel;
 
@@ -240,7 +263,15 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
     return;
 
   shortcut_label = get_current_shortcut_label (self);
+
+  collision_item = cc_keyboard_manager_get_collision (self->manager,
+                                                      self->item,
+                                                      self->custom_keyval,
+                                                      self->custom_mask,
+                                                      self->custom_keycode);
+
   accel = gtk_accelerator_name (self->custom_keyval, self->custom_mask);
+
 
   /* Setup the accelerator label */
   gtk_shortcut_label_set_accelerator (shortcut_label, accel);
@@ -255,6 +286,48 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 
   release_grab (self);
 
+  /*
+   * Oops! Looks like the accelerator is already being used, so we
+   * must warn the user and let it be very clear that adding this
+   * shortcut will disable the other.
+   */
+  gtk_widget_set_visible (self->new_shortcut_conflict_label, collision_item != NULL);
+
+  if (collision_item)
+    {
+      GtkWidget *label;
+      gchar *friendly_accelerator;
+      gchar *collision_text;
+
+      friendly_accelerator = convert_keysym_state_to_string (self->custom_keyval,
+                                                             self->custom_mask,
+                                                             self->custom_keycode);
+
+      collision_text = g_strdup_printf (_("%s is already being used for <b>%s</b>. If you "
+                                          "replace it, %s will be disabled"),
+                                        friendly_accelerator,
+                                        collision_item->description,
+                                        collision_item->description);
+
+      label = is_custom_shortcut (self) ? self->new_shortcut_conflict_label : self->shortcut_conflict_label;
+
+      gtk_label_set_markup (GTK_LABEL (label), collision_text);
+
+      g_free (friendly_accelerator);
+      g_free (collision_text);
+    }
+
+  /*
+   * When there is a collision between the current shortcut and another shortcut,
+   * and we're editing an existing shortcut (rather than creating a new one), setup
+   * the headerbar to display "Cancel" and "Replace". Otherwise, make sure to set
+   * only the close button again.
+   */
+  if (self->mode == CC_SHORTCUT_EDITOR_EDIT)
+    set_collision_headerbar (self, collision_item != NULL);
+
+  self->collision_item = collision_item;
+
   g_free (accel);
 }
 
@@ -267,6 +340,10 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 
   /* Apply the custom shortcut setup at the new item */
   apply_custom_item_fields (self, item);
+
+  /* Eventually disable the conflict shortcut */
+  if (self->collision_item)
+    cc_keyboard_manager_disable_shortcut (self->manager, self->collision_item);
 
   /* Cleanup everything once we're done */
   clear_custom_entries (self);
@@ -315,6 +392,14 @@ remove_button_clicked_cb (CcKeyboardShortcutEditor *self)
   gtk_widget_hide (GTK_WIDGET (self));
 
   cc_keyboard_manager_remove_custom_shortcut (self->manager, self->item);
+}
+
+static void
+replace_button_clicked_cb (CcKeyboardShortcutEditor *self)
+{
+  update_shortcut (self);
+
+  gtk_widget_hide (GTK_WIDGET (self));
 }
 
 static void
@@ -572,9 +657,11 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, edit_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, name_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, new_shortcut_conflict_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, replace_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_accel_label);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_conflict_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, stack);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, top_info_label);
 
@@ -584,6 +671,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, edit_custom_shortcut_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, name_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
 }
 
 static void
@@ -660,12 +748,17 @@ void
 cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
                                       CcShortcutEditorMode      mode)
 {
+  gboolean is_create_mode;
+
   g_return_if_fail (CC_IS_KEYBOARD_SHORTCUT_EDITOR (self));
 
   if (self->mode == mode)
     return;
 
   self->mode = mode;
+  is_create_mode = mode == CC_SHORTCUT_EDITOR_CREATE;
+
+  gtk_widget_set_visible (self->new_shortcut_conflict_label, is_create_mode);
 
   if (mode == CC_SHORTCUT_EDITOR_CREATE)
     {

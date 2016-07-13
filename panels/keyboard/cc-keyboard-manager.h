@@ -45,6 +45,15 @@ void                 cc_keyboard_manager_add_custom_shortcut     (CcKeyboardMana
 void                 cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager  *self,
                                                                   CcKeyboardItem     *item);
 
+CcKeyboardItem*      cc_keyboard_manager_get_collision           (CcKeyboardManager  *self,
+                                                                  CcKeyboardItem     *item,
+                                                                  gint                keyval,
+                                                                  GdkModifierType     mask,
+                                                                  gint                keycode);
+
+void                 cc_keyboard_manager_disable_shortcut        (CcKeyboardManager  *self,
+                                                                  CcKeyboardItem     *item);
+
 G_END_DECLS
 
 #endif /* CC_KEYBOARD_MANAGER_H */
