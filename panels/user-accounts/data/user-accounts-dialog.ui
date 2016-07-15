@@ -73,18 +73,6 @@
                             <property name="homogeneous">True</property>
                           </packing>
                         </child>
-                        <child>
-                          <object class="GtkToolButton" id="remove-user-toolbutton">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="icon_name">list-remove-symbolic</property>
-                            <property name="label" translatable="yes">Remove User Account</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">True</property>
-                          </packing>
-                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -480,6 +468,21 @@
                     <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="remove-user-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">GTK_ALIGN_END</property>
+                    <property name="valign">GTK_ALIGN_END</property>
+                    <property name="label" translatable="yes">Remove Account</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
