@@ -475,6 +475,8 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
 
       if (old_panel)
         gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
+
+      cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
     }
 
   g_free (name);

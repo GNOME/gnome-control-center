@@ -49,6 +49,7 @@ struct _CcPanelList
 
   CcPanelListView     previous_view;
   CcPanelListView     view;
+  GHashTable         *id_to_data;
 };
 
 G_DEFINE_TYPE (CcPanelList, cc_panel_list, GTK_TYPE_STACK)
@@ -503,6 +504,7 @@ cc_panel_list_finalize (GObject *object)
   CcPanelList *self = (CcPanelList *)object;
 
   g_clear_pointer (&self->search_query, g_free);
+  g_clear_pointer (&self->id_to_data, g_hash_table_destroy);
 
   G_OBJECT_CLASS (cc_panel_list_parent_class)->finalize (object);
 }
@@ -640,6 +642,7 @@ cc_panel_list_init (CcPanelList *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->id_to_data = g_hash_table_new (g_str_hash, g_str_equal);
   self->view = CC_PANEL_LIST_MAIN;
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->main_listbox),
@@ -805,4 +808,31 @@ cc_panel_list_add_panel (CcPanelList     *self,
   /* And add to the search listbox too */
   search_data = row_data_new (category, id, title, description, icon);
   gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
+
+  g_hash_table_insert (self->id_to_data, data->id, data);
+}
+
+/**
+ * cc_panel_list_set_active_panel:
+ * @self: a #CcPanelList
+ * @id: the id of the panel to be activated
+ *
+ * Sets the current active panel.
+ */
+void
+cc_panel_list_set_active_panel (CcPanelList *self,
+                                const gchar *id)
+{
+  GtkWidget *listbox;
+  RowData *data;
+
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+
+  data = g_hash_table_lookup (self->id_to_data, id);
+  listbox = gtk_widget_get_parent (data->row);
+
+  gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
+  gtk_widget_grab_focus (data->row);
+
+  g_signal_emit_by_name (data->row, "activate");
 }
