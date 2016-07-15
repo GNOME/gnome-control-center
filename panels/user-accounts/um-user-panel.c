@@ -959,23 +959,22 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         gtk_widget_set_visible (label, show);
 
         /* Last login: show when administrator or current user */
-        widget = get_widget (d, "last-login-value-label");
-        label = get_widget (d, "last-login-label");
+        widget = get_widget (d, "last-login-button");
+        label = get_widget (d, "last-login-button-label");
 
         current = act_user_manager_get_user_by_id (d->um, getuid ());
         show = act_user_get_uid (user) == getuid () ||
                act_user_get_account_type (current) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
         if (show) {
                 text = get_login_time_text (user);
-                gtk_label_set_text (GTK_LABEL (widget), text);
+                gtk_label_set_label (GTK_LABEL (label), text);
                 g_free (text);
         }
+        label = get_widget (d, "last-login-label");
         gtk_widget_set_visible (widget, show);
         gtk_widget_set_visible (label, show);
 
         enable = act_user_get_login_history (user) != NULL;
-        widget = get_widget (d, "last-login-history-button");
-        gtk_widget_set_visible (widget, show);
         gtk_widget_set_sensitive (widget, enable);
 
         if (d->permission != NULL)
@@ -1555,26 +1554,6 @@ match_user (GtkTreeModel *model,
 }
 
 static void
-update_padding (GtkWidget *button, GtkWidget *label)
-{
-        GtkStyleContext *context;
-        GtkStateFlags state;
-        GtkBorder padding, border;
-        gint offset;
-
-        context = gtk_widget_get_style_context (button);
-        state = gtk_style_context_get_state (context);
-
-        gtk_style_context_get_padding (context, state, &padding);
-        gtk_style_context_get_border (context, state, &border);
-
-        offset = padding.left + border.left;
-
-        gtk_widget_set_margin_start (label, offset);
-        gtk_widget_set_margin_end (label, offset);
-}
-
-static void
 setup_main_window (CcUserPanel *self)
 {
         CcUserPanelPrivate *d = self->priv;
@@ -1679,10 +1658,9 @@ setup_main_window (CcUserPanel *self)
         g_signal_connect (button, "clicked",
                           G_CALLBACK (change_fingerprint), d);
 
-        button = get_widget (d, "last-login-history-button");
+        button = get_widget (d, "last-login-button");
         g_signal_connect (button, "clicked",
                           G_CALLBACK (show_history), d);
-        g_signal_connect (button, "style-updated", G_CALLBACK (update_padding), get_widget (d, "last-login-value-label"));
 
         d->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
         if (d->permission != NULL) {

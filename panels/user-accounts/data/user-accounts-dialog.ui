@@ -420,7 +420,7 @@
                             <property name="xalign">1</property>
                             <property name="label" translatable="yes">Last Login</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">last-login-value-label</property>
+                            <property name="mnemonic_widget">last-login-button</property>
                             <style>
                               <class name="dim-label"/>
                             </style>
@@ -433,37 +433,18 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkGrid" id="last-login-grid">
+                          <object class="GtkButton" id="last-login-button">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <style>
+                              <class name="text-button"/>
+                            </style>
                             <child>
-                              <object class="GtkLabel" id="last-login-value-label">
+                              <object class="GtkLabel" id="last-login-button-label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <property name="xalign">0</property>
+                                <property name="halign">GTK_ALIGN_START</property>
                               </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">1</property>
-                                <property name="height">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="last-login-history-button">
-                                <property name="label" translatable="yes">_Account Activity</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">1</property>
-                                <property name="height">1</property>
-                              </packing>
                             </child>
                           </object>
                           <packing>
@@ -534,7 +515,7 @@
       <widget name="account-type-box"/>
       <widget name="account-type-static"/>
       <widget name="autologin-box"/>
-      <widget name="last-login-grid"/>
+      <widget name="last-login-button"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup">
