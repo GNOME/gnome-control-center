@@ -50,6 +50,7 @@ enum {
   PROP_BINDING,
   PROP_EDITABLE,
   PROP_TYPE,
+  PROP_IS_VALUE_DEFAULT,
   PROP_COMMAND
 };
 
@@ -155,6 +156,8 @@ _set_binding (CcKeyboardItem *item,
     return;
 
   settings_set_binding (item->settings, item->key, item->priv->binding);
+
+  g_object_notify (G_OBJECT (item), "is-value-default");
 }
 
 static void
@@ -232,6 +235,9 @@ cc_keyboard_item_get_property (GObject    *object,
   case PROP_COMMAND:
     g_value_set_string (value, self->command);
     break;
+  case PROP_IS_VALUE_DEFAULT:
+    g_value_set_boolean (value, cc_keyboard_item_is_value_default (self));
+    break;
   default:
     G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     break;
@@ -303,6 +309,14 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
                                                         "command",
                                                         NULL,
                                                         G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+                                   PROP_IS_VALUE_DEFAULT,
+                                   g_param_spec_boolean ("is-value-default",
+                                                         "is value default",
+                                                         "is value default",
+                                                         TRUE,
+                                                         G_PARAM_READABLE));
 
   g_type_class_add_private (klass, sizeof (CcKeyboardItemPrivate));
 }
@@ -508,6 +522,74 @@ cc_keyboard_item_is_hidden (CcKeyboardItem *item)
 {
   return item->priv->hidden;
 }
+
+/**
+ * cc_keyboard_item_is_value_default:
+ * @self: a #CcKeyboardItem
+ *
+ * Retrieves whether the shortcut is the default value or not.
+ *
+ * Returns: %TRUE if the shortcut is the default value, %FALSE otherwise.
+ */
+gboolean
+cc_keyboard_item_is_value_default (CcKeyboardItem *self)
+{
+  GVariant *user_value;
+  gboolean is_value_default;
+
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (self), FALSE);
+
+  /*
+   * When the shortcut is custom, we don't treat it as modified
+   * since we don't know what would be its default value.
+   */
+  if (self->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+    return TRUE;
+
+  user_value = g_settings_get_user_value (self->settings, self->key);
+
+  is_value_default = TRUE;
+
+  if (user_value)
+    {
+      GVariant *default_value;
+      const gchar *default_binding;
+
+      default_value = g_settings_get_default_value (self->settings, self->key);
+
+      if (g_variant_is_of_type (default_value, G_VARIANT_TYPE_STRING))
+        default_binding = g_variant_get_string (default_value, NULL);
+      else if (g_variant_is_of_type (default_value, G_VARIANT_TYPE_STRING_ARRAY))
+        default_binding = g_variant_get_strv (default_value, NULL)[0];
+      else
+        default_binding = "";
+
+      is_value_default = (g_strcmp0 (default_binding, g_variant_get_string (user_value, NULL)) == 0);
+
+      g_clear_pointer (&default_value, g_variant_unref);
+    }
+
+  g_clear_pointer (&user_value, g_variant_unref);
+
+  return is_value_default;
+}
+
+/**
+ * cc_keyboard_item_reset:
+ * @self: a #CcKeyboardItem
+ *
+ * Reset the keyboard binding to the default value.
+ */
+void
+cc_keyboard_item_reset (CcKeyboardItem *self)
+{
+  g_return_if_fail (CC_IS_KEYBOARD_ITEM (self));
+
+  g_settings_reset (self->settings, self->key);
+
+  g_object_notify (G_OBJECT (self), "is-value-default");
+}
+
 /*
  * vim: sw=2 ts=8 cindent noai bs=2
  */

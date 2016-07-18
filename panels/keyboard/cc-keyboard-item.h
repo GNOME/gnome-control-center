@@ -109,6 +109,10 @@ void             cc_keyboard_item_set_hidden       (CcKeyboardItem *item,
 						    gboolean hidden);
 gboolean         cc_keyboard_item_is_hidden        (CcKeyboardItem *item);
 
+gboolean         cc_keyboard_item_is_value_default (CcKeyboardItem *self);
+
+void             cc_keyboard_item_reset            (CcKeyboardItem *self);
+
 G_END_DECLS
 
 #endif /* __CC_KEYBOARD_ITEM_H */
