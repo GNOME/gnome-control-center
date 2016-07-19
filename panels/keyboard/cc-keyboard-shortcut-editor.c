@@ -43,6 +43,7 @@ struct _CcKeyboardShortcutEditor
   GtkWidget          *new_shortcut_conflict_label;
   GtkWidget          *remove_button;
   GtkWidget          *replace_button;
+  GtkWidget          *reset_button;
   GtkWidget          *shortcut_accel_label;
   GtkWidget          *shortcut_conflict_label;
   GtkWidget          *stack;
@@ -54,6 +55,7 @@ struct _CcKeyboardShortcutEditor
 
   CcKeyboardManager  *manager;
   CcKeyboardItem     *item;
+  GBinding           *reset_item_binding;
 
   CcKeyboardItem     *collision_item;
 
@@ -403,6 +405,20 @@ replace_button_clicked_cb (CcKeyboardShortcutEditor *self)
 }
 
 static void
+reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
+{
+  gchar *accel;
+
+  /* Reset first, then update the shortcut */
+  cc_keyboard_manager_reset_shortcut (self->manager, self->item);
+
+  accel = gtk_accelerator_name (self->item->keyval, self->item->mask);
+  gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), accel);
+
+  g_free (accel);
+}
+
+static void
 setup_keyboard_item (CcKeyboardShortcutEditor *self,
                      CcKeyboardItem           *item)
 {
@@ -432,6 +448,13 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   /* Accelerator labels */
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), accel);
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), accel);
+
+  g_clear_pointer (&self->reset_item_binding, g_binding_unbind);
+  self->reset_item_binding = g_object_bind_property (item,
+                                                     "is-value-default",
+                                                     self->reset_button,
+                                                     "visible",
+                                                     G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN | G_BINDING_SYNC_CREATE);
 
   /* Setup the custom entries */
   if (is_custom)
@@ -467,6 +490,8 @@ cc_keyboard_shortcut_editor_finalize (GObject *object)
 
   g_clear_object (&self->item);
   g_clear_object (&self->manager);
+
+  g_clear_pointer (&self->reset_item_binding, g_binding_unbind);
 
   G_OBJECT_CLASS (cc_keyboard_shortcut_editor_parent_class)->finalize (object);
 }
@@ -660,6 +685,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, new_shortcut_conflict_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, replace_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, reset_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_accel_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_conflict_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, stack);
@@ -672,6 +698,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, name_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, reset_item_clicked_cb);
 }
 
 static void

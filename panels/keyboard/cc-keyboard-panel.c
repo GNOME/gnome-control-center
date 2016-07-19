@@ -61,6 +61,11 @@ enum {
   PROP_PARAMETERS
 };
 
+static const gchar* custom_css =
+"button.reset-shortcut-button {"
+"    padding: 0;"
+"}";
+
 /* RowData functions */
 static RowData *
 row_data_new (CcKeyboardItem *item,
@@ -97,11 +102,48 @@ transform_binding_to_accel (GBinding     *binding,
 
   item = CC_KEYBOARD_ITEM (g_binding_get_source (binding));
 
-  accelerator = convert_keysym_state_to_string (item->keyval, item->mask, item->keycode);
+  /* Embolden the label when the shortcut is modified */
+  if (!cc_keyboard_item_is_value_default (item))
+    {
+      gchar *tmp;
+
+      tmp = convert_keysym_state_to_string (item->keyval,
+                                            item->mask,
+                                            item->keycode);
+
+      accelerator = g_strdup_printf ("<b>%s</b>", tmp);
+
+      g_free (tmp);
+    }
+  else
+    {
+      accelerator = convert_keysym_state_to_string (item->keyval,
+                                                    item->mask,
+                                                    item->keycode);
+    }
 
   g_value_take_string (to_value, accelerator);
 
   return TRUE;
+}
+
+static void
+shortcut_modified_changed_cb (CcKeyboardItem *item,
+                              GParamSpec     *pspec,
+                              GtkWidget      *button)
+{
+  gtk_widget_set_child_visible (button, !cc_keyboard_item_is_value_default (item));
+}
+
+static void
+reset_shortcut_cb (GtkWidget      *reset_button,
+                   CcKeyboardItem *item)
+{
+  CcKeyboardPanel *self;
+
+  self = CC_KEYBOARD_PANEL (gtk_widget_get_ancestor (reset_button, CC_TYPE_KEYBOARD_PANEL));
+
+  cc_keyboard_manager_reset_shortcut (self->manager, item);
 }
 
 static void
@@ -110,11 +152,17 @@ add_item (CcKeyboardPanel *self,
           const gchar     *section_id,
           const gchar     *section_title)
 {
-  GtkWidget *row, *box, *label;
+  GtkWidget *row, *box, *label, *reset_button;
 
   /* Horizontal box */
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 6);
+  box = g_object_new (GTK_TYPE_BOX,
+                      "orientation", GTK_ORIENTATION_HORIZONTAL,
+                      "spacing", 18,
+                      "margin-start", 6,
+                      "margin-end", 6,
+                      "margin-bottom", 4,
+                      "margin-top", 4,
+                      NULL);
 
   /* Shortcut title */
   label = gtk_label_new (item->description);
@@ -134,6 +182,7 @@ add_item (CcKeyboardPanel *self,
   /* Shortcut accelerator */
   label = gtk_label_new ("");
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
   gtk_size_group_add_widget (self->accelerator_sizegroup, label);
 
@@ -148,6 +197,31 @@ add_item (CcKeyboardPanel *self,
   gtk_container_add (GTK_CONTAINER (box), label);
 
   gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+
+  /* Reset shortcut button */
+  reset_button = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_set_valign (reset_button, GTK_ALIGN_CENTER);
+
+  gtk_button_set_relief (GTK_BUTTON (reset_button), GTK_RELIEF_NONE);
+  gtk_widget_set_child_visible (reset_button, !cc_keyboard_item_is_value_default (item));
+
+  gtk_widget_set_tooltip_text (reset_button, _("Reset the shortcut to its default value"));
+
+  gtk_container_add (GTK_CONTAINER (box), reset_button);
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (reset_button), "flat");
+  gtk_style_context_add_class (gtk_widget_get_style_context (reset_button), "circular");
+  gtk_style_context_add_class (gtk_widget_get_style_context (reset_button), "reset-shortcut-button");
+
+  g_signal_connect (item,
+                    "notify::is-value-default",
+                    G_CALLBACK (shortcut_modified_changed_cb),
+                    reset_button);
+
+  g_signal_connect (reset_button,
+                    "clicked",
+                    G_CALLBACK (reset_shortcut_cb),
+                    item);
 
   /* The row */
   row = gtk_list_box_row_new ();
@@ -390,10 +464,23 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
+  GtkCssProvider *provider;
+
   g_resources_register (cc_keyboard_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  /* Custom CSS */
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, custom_css, -1, NULL);
+
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+
+  g_object_unref (provider);
+
+  /* Shortcut manager */
   self->manager = cc_keyboard_manager_new ();
 
   /* Use a sizegroup to make the accelerator labels the same width */

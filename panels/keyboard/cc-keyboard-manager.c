@@ -84,6 +84,17 @@ free_key_array (GPtrArray *keys)
     }
 }
 
+static const gchar*
+get_binding_from_variant (GVariant *variant)
+{
+  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
+    return g_variant_get_string (variant, NULL);
+  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
+    return g_variant_get_strv (variant, NULL)[0];
+
+  return NULL;
+}
+
 static gboolean
 compare_keys_for_uniqueness (CcKeyboardItem   *current_item,
                              CcUniquenessData *data)
@@ -936,4 +947,54 @@ cc_keyboard_manager_disable_shortcut (CcKeyboardManager *self,
   g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
 
   g_object_set (item, "binding", NULL, NULL);
+}
+
+/**
+ * cc_keyboard_manager_reset_shortcut:
+ * @self: a #CcKeyboardManager
+ * @item: a #CcKeyboardItem
+ *
+ * Resets the keyboard shortcut managed by @item, and eventually
+ * disables any shortcut that conflicts with the new shortcut's
+ * value.
+ */
+void
+cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
+                                    CcKeyboardItem    *item)
+{
+  GVariant *default_value;
+  const gchar *default_binding;
+
+  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+  g_return_if_fail (CC_IS_KEYBOARD_ITEM (item));
+
+  default_value = g_settings_get_default_value (item->settings, item->key);
+  default_binding = get_binding_from_variant (default_value);
+
+  /* Disables any any shortcut that conflicts with the new shortcut's value */
+  if (default_binding && *default_binding != '\0')
+    {
+      GdkModifierType mask;
+      CcKeyboardItem *collision;
+      guint *keycodes;
+      guint keyval;
+
+      gtk_accelerator_parse_with_keycode (default_binding, &keyval, &keycodes, &mask);
+
+      collision = cc_keyboard_manager_get_collision (self,
+                                                     NULL,
+                                                     keyval,
+                                                     mask,
+                                                     keycodes ? keycodes[0] : 0);
+
+      if (collision)
+        cc_keyboard_manager_disable_shortcut (self, collision);
+
+      g_free (keycodes);
+    }
+
+  /* Resets the current item */
+  cc_keyboard_item_reset (item);
+
+  g_variant_unref (default_value);
 }
