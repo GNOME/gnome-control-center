@@ -244,20 +244,6 @@ cc_keyboard_item_get_property (GObject    *object,
   }
 }
 
-static GObject *
-cc_keyboard_item_constructor (GType                  type,
-                              guint                  n_construct_properties,
-                              GObjectConstructParam *construct_properties)
-{
-  CcKeyboardItem      *keyboard_item;
-
-  keyboard_item = CC_KEYBOARD_ITEM (G_OBJECT_CLASS (cc_keyboard_item_parent_class)->constructor (type,
-                                                                                                 n_construct_properties,
-                                                                                                 construct_properties));
-
-  return G_OBJECT (keyboard_item);
-}
-
 static void
 cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
 {
@@ -265,7 +251,6 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
 
   object_class->get_property = cc_keyboard_item_get_property;
   object_class->set_property = cc_keyboard_item_set_property;
-  object_class->constructor = cc_keyboard_item_constructor;
   object_class->finalize = cc_keyboard_item_finalize;
 
   g_object_class_install_property (object_class,
