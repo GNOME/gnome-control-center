@@ -46,8 +46,6 @@ libuser_accounts_la_SOURCES =		\
 	fingerprint-strings.h		\
 	run-passwd.h			\
 	run-passwd.c			\
-	um-editable-button.h		\
-	um-editable-button.c		\
 	um-user-panel.h 		\
 	um-user-panel.c			\
 	um-realm-manager.c		\
