@@ -99,7 +99,7 @@
                         <property name="column_spacing">10</property>
                         <property name="row_spacing">10</property>
                         <child>
-                          <object class="UmEditableButton" id="account-fingerprint-button">
+                          <object class="GtkButton" id="account-fingerprint-button">
                             <property name="visible">True</property>
                             <property name="hexpand">True</property>
                           </object>
@@ -230,9 +230,18 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="UmEditableButton" id="account-password-button">
+                          <object class="GtkButton" id="account-password-button">
                             <property name="visible">True</property>
                             <property name="hexpand">True</property>
+                            <style>
+                              <class name="text-button"/>
+                            </style>
+                            <child>
+                              <object class="GtkLabel" id="account-password-button-label">
+                                <property name="visible">True</property>
+                                <property name="halign">GTK_ALIGN_START</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -387,9 +396,18 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="UmEditableButton" id="account-language-button">
+                          <object class="GtkButton" id="account-language-button">
                             <property name="visible">True</property>
                             <property name="hexpand">True</property>
+                            <style>
+                              <class name="text-button"/>
+                            </style>
+                            <child>
+                              <object class="GtkLabel" id="account-language-button-label">
+                                <property name="visible">True</property>
+                                <property name="halign">GTK_ALIGN_START</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>

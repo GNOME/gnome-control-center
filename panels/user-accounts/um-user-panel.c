@@ -41,7 +41,6 @@
 
 #include "shell/cc-editable-entry.h"
 
-#include "um-editable-button.h"
 #include "um-user-image.h"
 #include "um-cell-renderer-user-image.h"
 
@@ -904,8 +903,8 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         gtk_label_set_text (GTK_LABEL (widget), account_type_label);
         g_free (account_type_label);
 
-        widget = get_widget (d, "account-password-button");
-        um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), get_password_mode_text (user));
+        widget = get_widget (d, "account-password-button-label");
+        gtk_label_set_label (GTK_LABEL (widget), get_password_mode_text (user));
         enable = act_user_is_local_account (user);
         gtk_widget_set_sensitive (widget, enable);
 
@@ -915,7 +914,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         g_signal_handlers_unblock_by_func (widget, autologin_changed, d);
         gtk_widget_set_sensitive (widget, get_autologin_possible (user));
 
-        widget = get_widget (d, "account-language-button");
+        widget = get_widget (d, "account-language-button-label");
 
         name = NULL;
         lang = g_strdup (act_user_get_language (user));
@@ -926,8 +925,11 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 
         if (lang && *lang != '\0') {
                 name = gnome_get_language_from_locale (lang, NULL);
+        } else {
+                name = g_strdup ("—");
         }
-        um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), name);
+
+        gtk_label_set_label (GTK_LABEL (widget), name);
         g_free (lang);
         g_free (name);
 
@@ -1134,9 +1136,9 @@ language_response (GtkDialog         *dialog,
                         g_free (current_language);
                 }
 
-                button = get_widget (d, "account-language-button");
+                button = get_widget (d, "account-language-button-label");
                 name = gnome_get_language_from_locale (lang, NULL);
-                um_editable_button_set_text (UM_EDITABLE_BUTTON (button), name);
+                gtk_label_set_label (GTK_LABEL (button), name);
                 g_free (name);
         }
 
@@ -1452,26 +1454,26 @@ on_permission_changed (GPermission *permission,
                 gtk_widget_show (get_widget (d, "user-icon-button"));
                 gtk_widget_hide (get_widget (d, "user-icon-image"));
 
-                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-language-button")), TRUE);
+                gtk_widget_set_sensitive (get_widget (d, "account-language-button"), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-language-button"));
 
-                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-password-button")), TRUE);
+                gtk_widget_set_sensitive (get_widget (d, "account-password-button"), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-password-button"));
 
-                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-fingerprint-button")), TRUE);
+                gtk_widget_set_sensitive (get_widget (d, "account-fingerprint-button"), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-fingerprint-button"));
         }
         else {
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
                 gtk_widget_show (get_widget (d, "user-icon-image"));
 
-                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-language-button")), FALSE);
+                gtk_widget_set_sensitive (get_widget (d, "account-language-button"), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-language-button"));
 
-                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-password-button")), FALSE);
+                gtk_widget_set_sensitive (get_widget (d, "account-password-button"), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-password-button"));
 
-                um_editable_button_set_editable (UM_EDITABLE_BUTTON (get_widget (d, "account-fingerprint-button")), FALSE);
+                gtk_widget_set_sensitive (get_widget (d, "account-fingerprint-button"), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-fingerprint-button"));
         }
 
@@ -1656,16 +1658,16 @@ setup_main_window (CcUserPanel *self)
         g_signal_connect (button, "toggled", G_CALLBACK (account_type_changed), d);
 
         button = get_widget (d, "account-password-button");
-        g_signal_connect (button, "start-editing", G_CALLBACK (change_password), d);
+        g_signal_connect (button, "clicked", G_CALLBACK (change_password), d);
 
         button = get_widget (d, "account-language-button");
-        g_signal_connect (button, "start-editing", G_CALLBACK (change_language), d);
+        g_signal_connect (button, "clicked", G_CALLBACK (change_language), d);
 
         button = get_widget (d, "autologin-switch");
         g_signal_connect (button, "notify::active", G_CALLBACK (autologin_changed), d);
 
         button = get_widget (d, "account-fingerprint-button");
-        g_signal_connect (button, "start-editing",
+        g_signal_connect (button, "clicked",
                           G_CALLBACK (change_fingerprint), d);
 
         button = get_widget (d, "last-login-history-button");
@@ -1759,7 +1761,6 @@ cc_user_panel_init (CcUserPanel *self)
         g_resources_register (um_get_resource ());
 
         /* register types that the builder might need */
-        type = um_editable_button_get_type ();
         type = cc_editable_entry_get_type ();
         type = um_user_image_get_type ();
         type = um_cell_renderer_user_image_get_type ();
