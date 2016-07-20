@@ -889,7 +889,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         um_photo_dialog_set_user (d->photo_dialog, user);
 
         widget = get_widget (d, "full-name-entry");
-        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), act_user_get_real_name (user));
+        gtk_entry_set_text (GTK_ENTRY (widget), act_user_get_real_name (user));
         gtk_widget_set_tooltip_text (widget, act_user_get_user_name (user));
 
         widget = get_widget (d, act_user_get_account_type (user) ? "account-type-admin" : "account-type-standard");
@@ -1008,13 +1008,21 @@ change_name_done (GtkWidget          *entry,
 
         user = get_selected_user (d);
 
-        text = cc_editable_entry_get_text (CC_EDITABLE_ENTRY (entry));
+        text = gtk_entry_get_text (GTK_ENTRY (entry));
         if (g_strcmp0 (text, act_user_get_real_name (user)) != 0 &&
             is_valid_name (text)) {
                 act_user_set_real_name (user, text);
         }
 
         g_object_unref (user);
+}
+
+static void
+change_name_focus_out (GtkWidget          *entry,
+                       GdkEvent           *event,
+                       CcUserPanelPrivate *d)
+{
+        change_name_done (entry, d);
 }
 
 static void
@@ -1438,15 +1446,15 @@ on_permission_changed (GPermission *permission,
         /* The full name entry: insensitive if remote or not authorized and not self */
         widget = get_widget (d, "full-name-entry");
         if (!act_user_is_local_account (user)) {
-                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), FALSE);
+                gtk_widget_set_sensitive (widget, FALSE);
                 remove_unlock_tooltip (widget);
 
         } else if (is_authorized || self_selected) {
-                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), TRUE);
+                gtk_widget_set_sensitive (widget, TRUE);
                 remove_unlock_tooltip (widget);
 
         } else {
-                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), FALSE);
+                gtk_widget_set_sensitive (widget, FALSE);
                 add_unlock_tooltip (widget);
         }
 
@@ -1652,7 +1660,8 @@ setup_main_window (CcUserPanel *self)
         add_unlock_tooltip (button);
 
         button = get_widget (d, "full-name-entry");
-        g_signal_connect (button, "editing-done", G_CALLBACK (change_name_done), d);
+        g_signal_connect (button, "activate", G_CALLBACK (change_name_done), d);
+        g_signal_connect (button, "focus-out-event", G_CALLBACK (change_name_focus_out), d);
 
         button = get_widget (d, "account-type-standard");
         g_signal_connect (button, "toggled", G_CALLBACK (account_type_changed), d);
