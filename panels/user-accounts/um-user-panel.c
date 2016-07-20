@@ -73,6 +73,7 @@ struct _CcUserPanelPrivate {
         GtkWidget *notification;
         GSettings *login_screen_settings;
 
+        GtkWidget *headerbar_buttons;
         GtkWidget *main_box;
         GPermission *permission;
         GtkWidget *language_chooser;
@@ -92,6 +93,9 @@ get_widget (CcUserPanelPrivate *d, const char *name)
 {
         return (GtkWidget *)gtk_builder_get_object (d->builder, name);
 }
+
+#define PAGE_LOCK "_lock"
+#define PAGE_ADDUSER "_adduser"
 
 enum {
         USER_COL,
@@ -1357,6 +1361,8 @@ on_permission_changed (GPermission *permission,
         is_authorized = g_permission_get_allowed (G_PERMISSION (d->permission));
         self_selected = act_user_get_uid (user) == geteuid ();
 
+        gtk_stack_set_visible_child_name (GTK_STACK (d->headerbar_buttons), is_authorized ? PAGE_ADDUSER : PAGE_LOCK);
+
         widget = get_widget (d, "add-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized);
         if (is_authorized) {
@@ -1724,6 +1730,24 @@ settings_or_null (const gchar *schema)
 }
 
 static void
+cc_user_panel_constructed (GObject *object)
+{
+        CcUserPanelPrivate *d;
+        CcUserPanel *self = UM_USER_PANEL (object);
+        GtkWidget *button;
+        CcShell *shell;
+
+        G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
+        d = self->priv;
+
+        shell = cc_panel_get_shell (CC_PANEL (self));
+        cc_shell_embed_widget_in_header (shell, d->headerbar_buttons);
+
+        button = get_widget (d, "lock-button");
+        gtk_lock_button_set_permission (GTK_LOCK_BUTTON (button), d->permission);
+}
+
+static void
 cc_user_panel_init (CcUserPanel *self)
 {
         CcUserPanelPrivate *d;
@@ -1756,6 +1780,7 @@ cc_user_panel_init (CcUserPanel *self)
                 return;
         }
 
+        d->headerbar_buttons = get_widget (d, "headerbar-buttons");
         d->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         d->password_dialog = um_password_dialog_new ();
@@ -1821,14 +1846,6 @@ cc_user_panel_dispose (GObject *object)
         G_OBJECT_CLASS (cc_user_panel_parent_class)->dispose (object);
 }
 
-static GPermission *
-cc_user_panel_get_permission (CcPanel *panel)
-{
-        CcUserPanelPrivate *priv = UM_USER_PANEL (panel)->priv;
-
-        return priv->permission;
-}
-
 static const char *
 cc_user_panel_get_help_uri (CcPanel *panel)
 {
@@ -1842,8 +1859,8 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
         object_class->dispose = cc_user_panel_dispose;
+        object_class->constructed = cc_user_panel_constructed;
 
-        panel_class->get_permission = cc_user_panel_get_permission;
         panel_class->get_help_uri = cc_user_panel_get_help_uri;
 
         g_type_class_add_private (klass, sizeof (CcUserPanelPrivate));
