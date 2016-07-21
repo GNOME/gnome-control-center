@@ -186,6 +186,8 @@ get_name_col_str (ActUser *user)
                                         act_user_get_user_name (user));
 }
 
+static void show_user (ActUser *user, CcUserPanelPrivate *d);
+
 static void
 user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
 {
@@ -331,8 +333,6 @@ user_removed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
                 d->other_iter = NULL;
         }
 }
-
-static void show_user (ActUser *user, CcUserPanelPrivate *d);
 
 static void
 user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
@@ -876,7 +876,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *image;
         GtkWidget *label;
-        gchar *lang, *text, *name, *account_type_label;
+        gchar *lang, *text, *name;
         GtkWidget *widget;
         gboolean show, enable;
         ActUser *current;
@@ -895,13 +895,10 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         widget = get_widget (d, act_user_get_account_type (user) ? "account-type-admin" : "account-type-standard");
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 
-        widget = get_widget (d, "account-type-static");
-        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR)
-          account_type_label = g_strdup (_("Administrator"));
-        else
-          account_type_label = g_strdup (_("Standard"));
-        gtk_label_set_text (GTK_LABEL (widget), account_type_label);
-        g_free (account_type_label);
+        /* Do not show the "Account Type" option when there's a single user account. */
+        show = (d->other_accounts != 0);
+        gtk_widget_set_visible (get_widget (d, "account-type-label"), show);
+        gtk_widget_set_visible (get_widget (d, "account-type-box"), show);
 
         widget = get_widget (d, "account-password-button-label");
         gtk_label_set_label (GTK_LABEL (widget), get_password_mode_text (user));
@@ -1314,6 +1311,7 @@ users_loaded (ActUserManager     *manager,
                 g_debug ("adding user %s\n", get_real_or_user_name (user));
                 user_added (d->um, user, d);
         }
+        show_user (list->data, d);
         g_slist_free (list);
 
         g_signal_connect (d->um, "user-added", G_CALLBACK (user_added), d);
@@ -1415,28 +1413,28 @@ on_permission_changed (GPermission *permission,
         }
 
         if (!act_user_is_local_account (user)) {
-                gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "static");
-                remove_unlock_tooltip (get_widget (d, "account-type-stack"));
+                gtk_widget_set_sensitive (get_widget (d, "account-type-box"), FALSE);
+                remove_unlock_tooltip (get_widget (d, "account-type-box"));
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
                 remove_unlock_tooltip (get_widget (d, "autologin-switch"));
 
         } else if (is_authorized && act_user_is_local_account (user)) {
                 if (would_demote_only_admin (user)) {
-                        gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "static");
+                        gtk_widget_set_sensitive (get_widget (d, "account-type-box"), FALSE);
                 } else {
-                        gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "buttons");
+                        gtk_widget_set_sensitive (get_widget (d, "account-type-box"), TRUE);
                 }
-                remove_unlock_tooltip (get_widget (d, "account-type-stack"));
+                remove_unlock_tooltip (get_widget (d, "account-type-box"));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), get_autologin_possible (user));
                 remove_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
         else {
-                gtk_stack_set_visible_child_name (GTK_STACK (get_widget (d, "account-type-stack")), "static");
+                gtk_widget_set_sensitive (get_widget (d, "account-type-box"), FALSE);
                 if (would_demote_only_admin (user)) {
-                        remove_unlock_tooltip (get_widget (d, "account-type-stack"));
+                        remove_unlock_tooltip (get_widget (d, "account-type-box"));
                 } else {
-                        add_unlock_tooltip (get_widget (d, "account-type-stack"));
+                        add_unlock_tooltip (get_widget (d, "account-type-box"));
                 }
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
                 add_unlock_tooltip (get_widget (d, "autologin-switch"));

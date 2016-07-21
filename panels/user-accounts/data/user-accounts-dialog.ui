@@ -111,53 +111,29 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkStack" id="account-type-stack">
+                          <object class="GtkBox" id="account-type-box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="sensitive">False</property>
+                            <style>
+                              <class name="linked"/>
+                            </style>
                             <child>
-                              <object class="GtkBox" id="account-type-box">
+                              <object class="GtkRadioButton" id="account-type-standard">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <style>
-                                  <class name="linked"/>
-                                </style>
-                                <child>
-                                  <object class="GtkRadioButton" id="account-type-standard">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label" translatable="yes">Standard</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="hexpand">True</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="account-type-admin">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label" translatable="yes">Administrator</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">account-type-standard</property>
-                                    <property name="hexpand">True</property>
-                                  </object>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="label" translatable="yes">Standard</property>
+                                <property name="draw_indicator">False</property>
                               </object>
-                              <packing>
-                                <property name="name">buttons</property>
-                              </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="account-type-static">
+                              <object class="GtkRadioButton" id="account-type-admin">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Standard</property>
-                                <property name="use_underline">True</property>
-                                <property name="halign">start</property>
-                                <property name="margin_start">17</property>
+                                <property name="can_focus">True</property>
+                                <property name="label" translatable="yes">Administrator</property>
+                                <property name="draw_indicator">False</property>
+                                <property name="group">account-type-standard</property>
                               </object>
-                              <packing>
-                                <property name="name">static</property>
-                              </packing>
                             </child>
                           </object>
                           <packing>
@@ -513,7 +489,6 @@
       <widget name="account-language-button"/>
       <widget name="account-password-button"/>
       <widget name="account-type-box"/>
-      <widget name="account-type-static"/>
       <widget name="autologin-box"/>
       <widget name="last-login-button"/>
     </widgets>
