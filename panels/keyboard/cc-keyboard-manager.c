@@ -96,35 +96,53 @@ get_binding_from_variant (GVariant *variant)
 }
 
 static gboolean
+is_shortcut_different (CcUniquenessData *data,
+                       CcKeyboardItem   *item)
+{
+  if (data->orig_item && cc_keyboard_item_equal (data->orig_item, item))
+    return FALSE;
+
+  if (data->new_keyval != 0)
+    {
+      if (data->new_keyval != item->keyval)
+        return TRUE;
+    }
+  else if (item->keyval != 0 || data->new_keycode != item->keycode)
+    {
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
 compare_keys_for_uniqueness (CcKeyboardItem   *current_item,
                              CcUniquenessData *data)
 {
-  CcKeyboardItem *item;
-
-  item = data->orig_item;
+  CcKeyboardItem *reverse_item;
 
   /* No conflict for: blanks, different modifiers or ourselves */
   if (!current_item ||
-      item == current_item ||
+      data->orig_item == current_item ||
       data->new_mask != current_item->mask)
     {
       return FALSE;
     }
 
-  if (item && cc_keyboard_item_equal (item, current_item))
-    goto out;
+  reverse_item = cc_keyboard_item_get_reverse_item (current_item);
 
-  if (data->new_keyval != 0)
-    {
-      if (data->new_keyval != current_item->keyval)
-          return FALSE;
-    }
-  else if (current_item->keyval != 0 || data->new_keycode != current_item->keycode)
-    {
-      return FALSE;
-    }
+  /* When the current item is the reversed shortcut of a main item, simply ignore it */
+  if (reverse_item && cc_keyboard_item_is_hidden (current_item))
+    return FALSE;
 
-out:
+  if (is_shortcut_different (data, current_item))
+    return FALSE;
+
+  /* Also check for the reverse item if any */
+  if (reverse_item && is_shortcut_different (data, reverse_item))
+    return FALSE;
+
+  /* No tests failed and we found a conflict */
   data->conflict_item = current_item;
 
   return TRUE;
@@ -903,6 +921,7 @@ cc_keyboard_manager_get_collision (CcKeyboardManager *self,
                                    gint               keycode)
 {
   CcUniquenessData data;
+  BindingGroupType i;
 
   g_return_val_if_fail (CC_IS_KEYBOARD_MANAGER (self), NULL);
 
@@ -912,22 +931,20 @@ cc_keyboard_manager_get_collision (CcKeyboardManager *self,
   data.new_keycode = keycode;
   data.conflict_item = NULL;
 
+  if (keyval == 0 && keycode == 0)
+    return NULL;
+
   /* Any number of shortcuts can be disabled */
-  if (keyval != 0 || keycode != 0)
+  for (i = BINDING_GROUP_SYSTEM; i <= BINDING_GROUP_USER && !data.conflict_item; i++)
     {
-      BindingGroupType i;
+      GHashTable *table;
 
-      for (i = BINDING_GROUP_SYSTEM; i <= BINDING_GROUP_USER && !data.conflict_item; i++)
-        {
-          GHashTable *table;
+      table = get_hash_for_group (self, i);
 
-          table = get_hash_for_group (self, i);
+      if (!table)
+        continue;
 
-          if (!table)
-            continue;
-
-          g_hash_table_find (table, (GHRFunc) check_for_uniqueness, &data);
-        }
+      g_hash_table_find (table, (GHRFunc) check_for_uniqueness, &data);
     }
 
   return data.conflict_item;

@@ -147,10 +147,40 @@ _set_binding (CcKeyboardItem *item,
               const char     *value,
 	      gboolean        set_backend)
 {
-  g_free (item->priv->binding);
-  item->priv->binding = g_strdup (value);
+  CcKeyboardItem *reverse;
+  gboolean enabled;
+
+  reverse = item->priv->reverse_item;
+  enabled = value && strlen (value) > 0;
+
+  g_clear_pointer (&item->priv->binding, g_free);
+  item->priv->binding = enabled ? g_strdup (value) : g_strdup ("");
+
   binding_from_string (item->priv->binding, &item->keyval,
                        &item->keycode, &item->mask);
+
+  /*
+   * Always treat the pair (item, reverse) as a unit: setting one also
+   * disables the other, disabling one up also sets the other.
+   */
+  if (reverse)
+    {
+      GdkModifierType reverse_mask;
+
+      reverse_mask = enabled ? item->mask ^ GDK_SHIFT_MASK : item->mask;
+
+      g_clear_pointer (&reverse->priv->binding, g_free);
+      if (enabled)
+        reverse->priv->binding = gtk_accelerator_name_with_keycode (NULL,
+                                                                    item->keyval,
+                                                                    item->keycode,
+                                                                    reverse_mask);
+
+      binding_from_string (reverse->priv->binding,
+                           &reverse->keyval,
+                           &reverse->keycode,
+                           &reverse->mask);
+    }
 
   if (set_backend == FALSE)
     return;
@@ -158,6 +188,12 @@ _set_binding (CcKeyboardItem *item,
   settings_set_binding (item->settings, item->key, item->priv->binding);
 
   g_object_notify (G_OBJECT (item), "is-value-default");
+
+  if (reverse)
+    {
+      settings_set_binding (reverse->settings, reverse->key, reverse->priv->binding);
+      g_object_notify (G_OBJECT (reverse), "is-value-default");
+    }
 }
 
 static void
@@ -568,11 +604,21 @@ cc_keyboard_item_is_value_default (CcKeyboardItem *self)
 void
 cc_keyboard_item_reset (CcKeyboardItem *self)
 {
+  CcKeyboardItem *reverse;
+
   g_return_if_fail (CC_IS_KEYBOARD_ITEM (self));
 
-  g_settings_reset (self->settings, self->key);
+  reverse = self->priv->reverse_item;
 
+  g_settings_reset (self->settings, self->key);
   g_object_notify (G_OBJECT (self), "is-value-default");
+
+  /* Also reset the reverse item */
+  if (reverse)
+    {
+      g_settings_reset (reverse->settings, reverse->key);
+      g_object_notify (G_OBJECT (reverse), "is-value-default");
+    }
 }
 
 /*
