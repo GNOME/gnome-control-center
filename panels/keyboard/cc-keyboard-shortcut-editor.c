@@ -50,7 +50,7 @@ struct _CcKeyboardShortcutEditor
 
   GdkDevice          *grab_device;
 
-  CcKeyboardPanel    *panel;
+  CcKeyboardManager  *manager;
   CcKeyboardItem     *item;
 
   /* Custom shortcuts */
@@ -72,19 +72,11 @@ enum
 {
   PROP_0,
   PROP_KEYBOARD_ITEM,
-  PROP_PANEL,
+  PROP_MANAGER,
   N_PROPS
 };
 
-enum
-{
-  ADD_CUSTOM_SHORTCUT,
-  REMOVE_CUSTOM_SHORTCUT,
-  LAST_SIGNAL
-};
-
 static GParamSpec *properties [N_PROPS] = { NULL, };
-static guint signals[LAST_SIGNAL] = { 0, };
 
 static void
 apply_custom_item_fields (CcKeyboardShortcutEditor *self,
@@ -271,7 +263,7 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   CcKeyboardItem *item;
 
-  item = cc_keyboard_panel_create_custom_item (self->panel);
+  item = cc_keyboard_manager_create_custom_shortcut (self->manager);
 
   /* Apply the custom shortcut setup at the new item */
   apply_custom_item_fields (self, item);
@@ -279,7 +271,7 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
   /* Cleanup everything once we're done */
   clear_custom_entries (self);
 
-  g_signal_emit (self, signals[ADD_CUSTOM_SHORTCUT], 0, item);
+  cc_keyboard_manager_add_custom_shortcut (self->manager, item);
 
   gtk_widget_hide (GTK_WIDGET (self));
 }
@@ -322,7 +314,7 @@ remove_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   gtk_widget_hide (GTK_WIDGET (self));
 
-  g_signal_emit (self, signals[REMOVE_CUSTOM_SHORTCUT], 0, self->item);
+  cc_keyboard_manager_remove_custom_shortcut (self->manager, self->item);
 }
 
 static void
@@ -389,6 +381,7 @@ cc_keyboard_shortcut_editor_finalize (GObject *object)
   CcKeyboardShortcutEditor *self = (CcKeyboardShortcutEditor *)object;
 
   g_clear_object (&self->item);
+  g_clear_object (&self->manager);
 
   G_OBJECT_CLASS (cc_keyboard_shortcut_editor_parent_class)->finalize (object);
 }
@@ -407,8 +400,8 @@ cc_keyboard_shortcut_editor_get_property (GObject    *object,
       g_value_set_object (value, self->item);
       break;
 
-    case PROP_PANEL:
-      g_value_set_pointer (value, self->panel);
+    case PROP_MANAGER:
+      g_value_set_object (value, self->manager);
       break;
 
     default:
@@ -430,8 +423,8 @@ cc_keyboard_shortcut_editor_set_property (GObject      *object,
       cc_keyboard_shortcut_editor_set_item (self, g_value_get_object (value));
       break;
 
-    case PROP_PANEL:
-      self->panel = g_value_get_pointer (value);
+    case PROP_MANAGER:
+      g_set_object (&self->manager, g_value_get_object (value));
       break;
 
     default:
@@ -562,36 +555,11 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
    *
    * The current keyboard panel.
    */
-  properties[PROP_PANEL] = g_param_spec_pointer ("panel",
-                                                 "Keyboard panel",
-                                                 "The keyboard panel being edited",
-                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-
-  /**
-   * CcKeyboardShortcutEditor:add-custom-shortcut:
-   *
-   * Emited when the user asks to add a custom shortcut.
-   */
-  signals[ADD_CUSTOM_SHORTCUT] = g_signal_new ("add-custom-shortcut",
-                                               CC_TYPE_KEYBOARD_SHORTCUT_EDITOR,
-                                               G_SIGNAL_RUN_FIRST,
-                                               0, NULL, NULL, NULL,
-                                               G_TYPE_NONE,
-                                               1,
-                                               CC_TYPE_KEYBOARD_ITEM);
-
-  /**
-   * CcKeyboardShortcutEditor:remove-custom-shortcut:
-   *
-   * Emited when the user asks to remove a custom shortcut.
-   */
-  signals[REMOVE_CUSTOM_SHORTCUT] = g_signal_new ("remove-custom-shortcut",
-                                                  CC_TYPE_KEYBOARD_SHORTCUT_EDITOR,
-                                                  G_SIGNAL_RUN_FIRST,
-                                                  0, NULL, NULL, NULL,
-                                                  G_TYPE_NONE,
-                                                  1,
-                                                  CC_TYPE_KEYBOARD_ITEM);
+  properties[PROP_MANAGER] = g_param_spec_object ("manager",
+                                                  "Keyboard manager",
+                                                  "The keyboard manager",
+                                                  CC_TYPE_KEYBOARD_MANAGER,
+                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
@@ -635,10 +603,10 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
  * Returns: (transfer full): a newly created #CcKeyboardShortcutEditor.
  */
 GtkWidget*
-cc_keyboard_shortcut_editor_new (CcKeyboardPanel *panel)
+cc_keyboard_shortcut_editor_new (CcKeyboardManager *manager)
 {
   return g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_EDITOR,
-                       "panel", panel,
+                       "manager", manager,
                        "use-header-bar", 1,
                        NULL);
 }

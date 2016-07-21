@@ -9,6 +9,8 @@ BUILT_SOURCES =			\
 
 libkeyboard_la_SOURCES =   \
 	$(BUILT_SOURCES)		\
+	cc-keyboard-manager.c		\
+	cc-keyboard-manager.h		\
 	cc-keyboard-panel.c		\
 	cc-keyboard-panel.h		\
 	cc-keyboard-item.c		\

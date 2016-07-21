@@ -24,7 +24,7 @@
 #include <gtk/gtk.h>
 
 #include "cc-keyboard-item.h"
-#include "cc-keyboard-panel.h"
+#include "cc-keyboard-manager.h"
 
 G_BEGIN_DECLS
 
@@ -38,7 +38,7 @@ typedef enum
 
 G_DECLARE_FINAL_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, CC, KEYBOARD_SHORTCUT_EDITOR, GtkDialog)
 
-GtkWidget*           cc_keyboard_shortcut_editor_new             (CcKeyboardPanel          *panel);
+GtkWidget*           cc_keyboard_shortcut_editor_new             (CcKeyboardManager        *manager);
 
 CcKeyboardItem*      cc_keyboard_shortcut_editor_get_item        (CcKeyboardShortcutEditor *self);
 
