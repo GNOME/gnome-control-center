@@ -48,8 +48,6 @@ libuser_accounts_la_SOURCES =		\
 	run-passwd.c			\
 	um-editable-button.h		\
 	um-editable-button.c		\
-	um-editable-combo.h		\
-	um-editable-combo.c		\
 	um-user-panel.h 		\
 	um-user-panel.c			\
 	um-realm-manager.c		\

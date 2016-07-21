@@ -42,7 +42,6 @@
 #include "shell/cc-editable-entry.h"
 
 #include "um-editable-button.h"
-#include "um-editable-combo.h"
 #include "um-user-image.h"
 #include "um-cell-renderer-user-image.h"
 
@@ -1739,7 +1738,6 @@ cc_user_panel_init (CcUserPanel *self)
         /* register types that the builder might need */
         type = um_editable_button_get_type ();
         type = cc_editable_entry_get_type ();
-        type = um_editable_combo_get_type ();
         type = um_user_image_get_type ();
         type = um_cell_renderer_user_image_get_type ();
 
