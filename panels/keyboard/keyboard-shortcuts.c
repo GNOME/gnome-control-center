@@ -397,3 +397,32 @@ parse_keylist_from_file (const gchar *path)
 
   return keylist;
 }
+
+/*
+ * Stolen from GtkCellRendererAccel:
+ * https://git.gnome.org/browse/gtk+/tree/gtk/gtkcellrendereraccel.c#n261
+ */
+gchar*
+convert_keysym_state_to_string (guint           keysym,
+                                GdkModifierType mask,
+                                guint           keycode)
+{
+  gchar *name;
+
+  if (keysym == 0 && keycode == 0)
+    {
+      /* This label is displayed in a treeview cell displaying
+       * a disabled accelerator key combination.
+       */
+      name = g_strdup (_("Disabled"));
+    }
+  else
+    {
+      name = gtk_accelerator_get_label_with_keycode (NULL, keysym, keycode, mask);
+
+      if (name == NULL)
+        name = gtk_accelerator_name_with_keycode (NULL, keysym, keycode, mask);
+    }
+
+  return name;
+}
