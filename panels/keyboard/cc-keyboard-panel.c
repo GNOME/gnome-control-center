@@ -31,6 +31,8 @@
 
 #include "keyboard-shortcuts.h"
 
+#include "cc-util.h"
+
 typedef struct {
   CcKeyboardItem *item;
   gchar          *section_title;
@@ -41,7 +43,12 @@ struct _CcKeyboardPanel
 {
   CcPanel             parent;
 
-  /* Shortcut models */
+  /* Search */
+  GtkWidget          *empty_search_placeholder;
+  GtkWidget          *search_button;
+  GtkWidget          *search_entry;
+
+  /* Shortcuts */
   GtkWidget          *listbox;
   GtkListBoxRow      *add_shortcut_row;
   GtkSizeGroup       *accelerator_sizegroup;
@@ -365,6 +372,34 @@ header_function (GtkListBoxRow *row,
     }
 }
 
+static gboolean
+filter_function (GtkListBoxRow *row,
+                 gpointer       user_data)
+{
+  CcKeyboardPanel *self = user_data;
+  RowData *data;
+  gboolean retval;
+  gchar *search, *name;
+
+  if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0)
+    return TRUE;
+
+  /* When searching, the '+' row is always hidden */
+  if (row == self->add_shortcut_row)
+    return FALSE;
+
+  data = g_object_get_data (G_OBJECT (row), "data");
+  name = cc_util_normalize_casefold_and_unaccent (data->item->description);
+  search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (self->search_entry)));
+
+  retval = strstr (name, search) != NULL;
+
+  g_free (search);
+  g_free (name);
+
+  return retval;
+}
+
 static void
 shortcut_row_activated (GtkWidget       *button,
                         GtkListBoxRow   *row,
@@ -436,6 +471,8 @@ cc_keyboard_panel_constructed (GObject *object)
   /* Setup the dialog's transient parent */
   toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
   gtk_window_set_transient_for (GTK_WINDOW (self->shortcut_editor), toplevel);
+
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->search_button);
 }
 
 static void
@@ -456,7 +493,10 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/gnome-keyboard-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_shortcut_row);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
 
   gtk_widget_class_bind_template_callback (widget_class, shortcut_row_activated);
 }
@@ -514,5 +554,12 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 header_function,
                                 self,
                                 NULL);
+
+  gtk_list_box_set_filter_func (GTK_LIST_BOX (self->listbox),
+                                filter_function,
+                                self,
+                                NULL);
+
+  gtk_list_box_set_placeholder (GTK_LIST_BOX (self->listbox), self->empty_search_placeholder);
 }
 
