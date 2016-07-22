@@ -35,6 +35,9 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-keyboard-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
+itsdir = $(datadir)/gettext/its
+its_DATA = gnome-keybindings.loc gnome-keybindings.its
+
 @INTLTOOL_XML_NOMERGE_RULE@
 
 xmldir       = $(pkgdatadir)/keybindings
@@ -58,6 +61,11 @@ CLEANFILES = \
 	$(desktop_DATA) \
 	$(xml_DATA) \
 	$(BUILT_SOURCES)
-EXTRA_DIST = $(xml_in_files) gnome-keybindings.pc.in $(resource_files) keyboard.gresource.xml
+EXTRA_DIST = $(xml_in_files) \
+	gnome-keybindings.its \
+	gnome-keybindings.loc \
+	gnome-keybindings.pc.in \
+	$(resource_files) \
+	keyboard.gresource.xml
 
 -include $(top_srcdir)/git.mk
