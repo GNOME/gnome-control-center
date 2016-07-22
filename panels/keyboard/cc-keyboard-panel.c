@@ -37,6 +37,12 @@
 #define BINDINGS_SCHEMA       "org.gnome.settings-daemon.plugins.media-keys"
 #define CUSTOM_SHORTCUTS_ID   "custom"
 
+typedef struct {
+  CcKeyboardItem *item;
+  gchar          *section_title;
+  gchar          *section_id;
+} RowData;
+
 struct _CcKeyboardPanel
 {
   CcPanel             parent;
@@ -45,6 +51,9 @@ struct _CcKeyboardPanel
   GtkListStore       *sections_store;
   GtkTreeModel       *sections_model;
   GtkWidget          *shortcut_treeview;
+  GtkWidget          *listbox;
+  GtkListBoxRow      *add_shortcut_row;
+  GtkSizeGroup       *accelerator_sizegroup;
 
   /* Toolbar widgets */
   GtkWidget          *add_toolbutton;
@@ -74,6 +83,236 @@ enum {
   PROP_0,
   PROP_PARAMETERS
 };
+
+/* RowData functions */
+static RowData *
+row_data_new (CcKeyboardItem *item,
+              const gchar    *section_id,
+              const gchar    *section_title)
+{
+  RowData *data;
+
+  data = g_new0 (RowData, 1);
+  data->item = g_object_ref (item);
+  data->section_id = g_strdup (section_id);
+  data->section_title = g_strdup (section_title);
+
+  return data;
+}
+
+static void
+row_data_free (RowData *data)
+{
+  g_object_unref (data->item);
+  g_free (data->section_id);
+  g_free (data->section_title);
+  g_free (data);
+}
+
+static gboolean
+transform_binding_to_accel (GBinding     *binding,
+                            const GValue *from_value,
+                            GValue       *to_value,
+                            gpointer      user_data)
+{
+  CcKeyboardItem *item;
+  gchar *accelerator;
+
+  item = CC_KEYBOARD_ITEM (g_binding_get_source (binding));
+
+  accelerator = convert_keysym_state_to_string (item->keyval, item->mask, item->keycode);
+
+  g_value_take_string (to_value, accelerator);
+
+  return TRUE;
+}
+
+static void
+add_item (CcKeyboardPanel *self,
+          CcKeyboardItem  *item,
+          const gchar     *section_id,
+          const gchar     *section_title)
+{
+  GtkWidget *row, *box, *label;
+
+  /* Horizontal box */
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 6);
+
+  /* Shortcut title */
+  label = gtk_label_new (item->description);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+  gtk_label_set_line_wrap_mode (GTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
+  gtk_widget_set_hexpand (label, TRUE);
+
+  g_object_bind_property (item,
+                          "description",
+                          label,
+                          "label",
+                          G_BINDING_DEFAULT);
+
+  gtk_container_add (GTK_CONTAINER (box), label);
+
+  /* Shortcut accelerator */
+  label = gtk_label_new ("");
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+
+  gtk_size_group_add_widget (self->accelerator_sizegroup, label);
+
+  g_object_bind_property_full (item,
+                               "binding",
+                               label,
+                              "label",
+                               G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE,
+                               transform_binding_to_accel,
+                               NULL, NULL, NULL);
+
+  gtk_container_add (GTK_CONTAINER (box), label);
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+
+  /* The row */
+  row = gtk_list_box_row_new ();
+  gtk_container_add (GTK_CONTAINER (row), box);
+
+  gtk_widget_show_all (row);
+
+  g_object_set_data_full (G_OBJECT (row),
+                          "data",
+                          row_data_new (item, section_id, section_title),
+                          (GDestroyNotify) row_data_free);
+
+  gtk_container_add (GTK_CONTAINER (self->listbox), row);
+}
+
+static void
+remove_item (CcKeyboardPanel *self,
+             CcKeyboardItem  *item)
+{
+  GList *children, *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (self->listbox));
+
+  for (l = children; l != NULL; l = l->next)
+    {
+      RowData *row_data;
+
+      row_data = g_object_get_data (l->data, "data");
+
+      if (row_data->item == item)
+        {
+          gtk_container_remove (GTK_CONTAINER (self->listbox), l->data);
+          break;
+        }
+    }
+
+  g_list_free (children);
+}
+
+static gint
+sort_function (GtkListBoxRow *a,
+               GtkListBoxRow *b,
+               gpointer       user_data)
+{
+  CcKeyboardPanel *self;
+  RowData *a_data, *b_data;
+  gint retval;
+
+  self = user_data;
+
+  if (a == self->add_shortcut_row)
+    return 1;
+
+  if (b == self->add_shortcut_row)
+    return -1;
+
+  a_data = g_object_get_data (G_OBJECT (a), "data");
+  b_data = g_object_get_data (G_OBJECT (b), "data");
+
+  /* Put custom shortcuts below everything else */
+  if (a_data->item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+    return 1;
+  else if (b_data->item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+    return -1;
+
+  retval = g_strcmp0 (a_data->section_title, b_data->section_title);
+
+  if (retval != 0)
+    return retval;
+
+  return g_strcmp0 (a_data->item->description, b_data->item->description);
+}
+
+static void
+header_function (GtkListBoxRow *row,
+                 GtkListBoxRow *before,
+                 gpointer       user_data)
+{
+  CcKeyboardPanel *self;
+  gboolean add_header;
+  RowData *data;
+
+  self = user_data;
+  add_header = FALSE;
+
+  /* The + row always has a separator */
+  if (row == self->add_shortcut_row)
+    {
+      GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (separator);
+
+      gtk_list_box_row_set_header (row, separator);
+
+      return;
+    }
+
+  data = g_object_get_data (G_OBJECT (row), "data");
+
+  if (before)
+    {
+      RowData *before_data = g_object_get_data (G_OBJECT (before), "data");
+
+      if (before_data)
+        add_header = g_strcmp0 (before_data->section_id, data->section_id) != 0;
+    }
+  else
+    {
+      add_header = TRUE;
+    }
+
+  if (add_header)
+    {
+      GtkWidget *box, *label;
+      gchar *markup;
+
+      box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+      gtk_widget_set_margin_top (box, before ? 18 : 6);
+
+      markup = g_strdup_printf ("<b>%s</b>", _(data->section_title));
+      label = g_object_new (GTK_TYPE_LABEL,
+                            "label", markup,
+                            "use-markup", TRUE,
+                            "xalign", 0.0,
+                            "margin-start", 6,
+                            NULL);
+
+      gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+
+      gtk_container_add (GTK_CONTAINER (box), label);
+      gtk_container_add (GTK_CONTAINER (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL));
+
+      gtk_list_box_row_set_header (row, box);
+
+      gtk_widget_show_all (box);
+
+      g_free (markup);
+    }
+  else
+    {
+      gtk_list_box_row_set_header (row, NULL);
+    }
+}
 
 static GHashTable*
 get_hash_for_group (CcKeyboardPanel  *self,
@@ -445,7 +684,6 @@ static void
 reload_sections (CcKeyboardPanel *self)
 {
   GtkTreeModel *shortcut_model;
-  GtkTreeIter iter;
   GHashTable *loaded_files;
   GDir *dir;
   gchar *default_wm_keybindings[] = { "Mutter", "GNOME Shell", NULL };
@@ -527,14 +765,6 @@ reload_sections (CcKeyboardPanel *self)
 
   g_hash_table_destroy (loaded_files);
   g_strfreev (wm_keybindings);
-
-  /* Add a separator */
-  gtk_list_store_append (GTK_LIST_STORE (self->sections_store), &iter);
-  gtk_list_store_set (GTK_LIST_STORE (self->sections_store),
-                      &iter,
-                      SECTION_DESCRIPTION_COLUMN, NULL,
-                      SECTION_GROUP_COLUMN, BINDING_GROUP_SEPARATOR,
-                      -1);
 
   /* Load custom keybindings */
   append_sections_from_gsettings (self);
@@ -620,10 +850,15 @@ add_shortcuts (CcKeyboardPanel *self)
                                   DETAIL_KEYENTRY_COLUMN, item,
                                   DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_KEY_ENTRY,
                                   -1);
+
+              add_item (self, item, id, title);
             }
         }
 
       can_continue = gtk_tree_model_iter_next (self->sections_model, &sections_iter);
+
+      g_free (title);
+      g_free (id);
     }
 }
 
@@ -820,6 +1055,8 @@ remove_custom_shortcut (CcKeyboardPanel *self,
   /* not a custom shortcut */
   g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH);
 
+  remove_item (self, item);
+
   g_settings_delay (item->settings);
   g_settings_reset (item->settings, "name");
   g_settings_reset (item->settings, "command");
@@ -902,6 +1139,8 @@ add_custom_shortcut (CcKeyboardPanel *self,
       gtk_tree_view_expand_to_path (tree_view, path);
       gtk_tree_view_scroll_to_cell (tree_view, path, NULL, FALSE, 0, 0);
       gtk_tree_path_free (path);
+
+      add_item (self, item, CUSTOM_SHORTCUTS_ID, _("Custom Shortcuts"));
     }
   else
     {
@@ -1659,6 +1898,7 @@ cc_keyboard_panel_finalize (GObject *object)
   g_clear_pointer (&self->pictures_regex, g_regex_unref);
   g_clear_pointer (&self->wm_changed_id, wm_common_unregister_window_manager_change);
 
+  g_clear_object (&self->accelerator_sizegroup);
   g_clear_object (&self->custom_shortcut_dialog);
   g_clear_object (&self->binding_settings);
   g_clear_object (&self->sections_store);
@@ -1712,11 +1952,13 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/gnome-keyboard-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_shortcut_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_toolbutton);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, custom_shortcut_command_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, custom_shortcut_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, custom_shortcut_name_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, custom_shortcut_ok_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, listbox);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, remove_toolbutton);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, shortcut_toolbar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, shortcut_treeview);
@@ -1735,4 +1977,17 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->binding_settings = g_settings_new (BINDINGS_SCHEMA);
+
+  /* Use a sizegroup to make the accelerator labels the same width */
+  self->accelerator_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->listbox),
+                              sort_function,
+                              self,
+                              NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (self->listbox),
+                                header_function,
+                                self,
+                                NULL);
 }
