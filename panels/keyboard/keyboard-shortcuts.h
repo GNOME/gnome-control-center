@@ -79,6 +79,14 @@ enum
   SECTION_N_COLUMNS
 };
 
-void keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder);
-gboolean keyboard_shortcuts_set_section (CcPanel *panel, const char *section);
-void keyboard_shortcuts_dispose (CcPanel *panel);
+gchar*   find_free_settings_path        (GSettings *settings);
+
+void     fill_xkb_options_shortcuts     (GtkTreeModel *model);
+
+void     setup_keyboard_options         (GtkListStore *store);
+
+gboolean is_valid_binding               (guint           keyval,
+                                         GdkModifierType mask,
+                                         guint           keycode);
+
+KeyList* parse_keylist_from_file        (const gchar *path);

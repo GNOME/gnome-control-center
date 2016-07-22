@@ -8,10 +8,11 @@
     <property name="step_increment">200</property>
     <property name="page_increment">200</property>
   </object>
-  <object class="GtkDialog" id="custom-shortcut-dialog">
+  <object class="GtkDialog" id="custom_shortcut_dialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
+    <property name="resizable">False</property>
     <child internal-child="headerbar">
       <object class="GtkHeaderBar" id="dialog-header-bar">
         <property name="visible">True</property>
@@ -19,7 +20,7 @@
         <property name="title" translatable="yes">Custom Shortcut</property>
         <property name="show_close_button">False</property>
         <child>
-          <object class="GtkButton" id="custom-shortcut-cancel-button">
+          <object class="GtkButton" id="custom_shortcut_cancel_button">
             <property name="label" translatable="yes">_Cancel</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -36,7 +37,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="custom-shortcut-ok-button">
+          <object class="GtkButton" id="custom_shortcut_ok_button">
             <property name="label" translatable="yes">_Add</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -81,7 +82,7 @@
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">_Name:</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">custom-shortcut-name-entry</property>
+                    <property name="mnemonic_widget">custom_shortcut_name_entry</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -95,7 +96,7 @@
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">C_ommand:</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">custom-shortcut-command-entry</property>
+                    <property name="mnemonic_widget">custom_shortcut_command_entry</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -103,12 +104,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="custom-shortcut-name-entry">
+                  <object class="GtkEntry" id="custom_shortcut_name_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="invisible_char">•</property>
                     <property name="activates_default">True</property>
+                    <signal name="changed" handler="shortcut_entry_changed" object="CcKeyboardPanel" swapped="no" />
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -116,12 +118,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="custom-shortcut-command-entry">
+                  <object class="GtkEntry" id="custom_shortcut_command_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="invisible_char">•</property>
                     <property name="activates_default">True</property>
+                    <signal name="changed" handler="shortcut_entry_changed" object="CcKeyboardPanel" swapped="no" />
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -145,154 +148,152 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">custom-shortcut-cancel-button</action-widget>
-      <action-widget response="-5">custom-shortcut-ok-button</action-widget>
+      <action-widget response="-6">custom_shortcut_cancel_button</action-widget>
+      <action-widget response="-5">custom_shortcut_ok_button</action-widget>
     </action-widgets>
   </object>
-              <object class="GtkBox" id="shortcuts_page">
+  <template class="CcKeyboardPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="border_width">12</property>
+    <child>
+      <object class="GtkBox" id="shortcuts_page">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="border_width">5</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkBox" id="shortcuts_vbox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkGrid" id="shortcuts_grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="border_width">5</property>
-                <property name="spacing">12</property>
+                <property name="column_spacing">5</property>
                 <child>
-                  <object class="GtkBox" id="shortcuts_vbox">
+                  <object class="GtkScrolledWindow" id="sections_swindow">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkGrid" id="shortcuts_grid">
+                      <object class="GtkTreeView" id="section_treeview">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="column_spacing">5</property>
-                        <child>
-                          <object class="GtkScrolledWindow" id="sections_swindow">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="hscrollbar_policy">never</property>
-                            <property name="shadow_type">in</property>
-                            <child>
-                              <object class="GtkTreeView" id="section_treeview">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="headers_visible">False</property>
-                                <child internal-child="selection">
-                                  <object class="GtkTreeSelection" id="treeview-selection1"/>
-                                </child>
-                              </object>
-                            </child>
+                        <property name="can_focus">True</property>
+                        <property name="headers_visible">False</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection" id="treeview-selection1">
+                            <property name="mode">browse</property>
+                            <signal name="changed" handler="section_selection_changed" object="CcKeyboardPanel" swapped="no" />
                           </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkScrolledWindow" id="actions_swindow">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="hexpand">True</property>
-                            <property name="vexpand">True</property>
-                            <property name="hscrollbar_policy">never</property>
-                            <property name="shadow_type">in</property>
-                            <child>
-                              <object class="GtkTreeView" id="shortcut_treeview">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="headers_visible">False</property>
-                                <property name="rules_hint">True</property>
-                                <child internal-child="selection">
-                                  <object class="GtkTreeSelection" id="treeview-selection2"/>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkToolbar" id="shortcut-toolbar">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="icon_size">1</property>
-                            <property name="toolbar-style">icons</property>
-                            <style>
-                              <class name="inline-toolbar"/>
-                            </style>
-                            <child>
-                              <object class="GtkToolButton" id="add-toolbutton">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="icon_name">list-add-symbolic</property>
-                                <property name="label" translatable="yes">Add Shortcut</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkToolButton" id="remove-toolbutton">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="icon_name">list-remove-symbolic</property>
-                                <property name="label" translatable="yes">Remove Shortcut</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">1</property>
-                          </packing>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="height">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkTreeView" id="shortcut_treeview">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="headers_visible">False</property>
+                        <property name="rules_hint">True</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection" id="treeview-selection2">
+                            <signal name="changed" handler="shortcut_selection_changed" object="remove_toolbutton" swapped="no" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolbar" id="shortcut_toolbar">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_size">1</property>
+                    <property name="toolbar-style">icons</property>
+                    <style>
+                      <class name="inline-toolbar"/>
+                    </style>
+                    <child>
+                      <object class="GtkToolButton" id="add_toolbutton">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="border_width">5</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="label12">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">To edit a shortcut, click the row and hold down the new keys or press Backspace to clear.</property>
-                            <property name="justify">fill</property>
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">70</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="icon_name">list-add-symbolic</property>
+                        <property name="label" translatable="yes">Add Shortcut</property>
+                        <signal name="clicked" handler="add_button_clicked" object="CcKeyboardPanel" swapped="no" />
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="homogeneous">True</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkToolButton" id="remove_toolbutton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="icon_name">list-remove-symbolic</property>
+                        <property name="label" translatable="yes">Remove Shortcut</property>
+                        <signal name="clicked" handler="remove_button_clicked" object="CcKeyboardPanel" swapped="no" />
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="hbox1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">5</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkLabel" id="label12">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">To edit a shortcut, click the row and hold down the new keys or press Backspace to clear.</property>
+                    <property name="justify">fill</property>
+                    <property name="wrap">True</property>
+                    <property name="max_width_chars">70</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -301,5 +302,20 @@
                   </packing>
                 </child>
               </object>
-
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
 </interface>

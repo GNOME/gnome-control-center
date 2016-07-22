@@ -21,6 +21,7 @@
 #define __CC_KEYBOARD_ITEM_H
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

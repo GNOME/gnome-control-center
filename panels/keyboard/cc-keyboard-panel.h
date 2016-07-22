@@ -23,6 +23,7 @@
 #define _CC_KEYBOARD_PANEL_H
 
 #include <shell/cc-panel.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
