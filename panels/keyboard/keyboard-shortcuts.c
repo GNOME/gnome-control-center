@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 
 #include "keyboard-shortcuts.h"
-#include "cc-keyboard-item.h"
 #include "cc-keyboard-option.h"
 #include "wm-common.h"
 
@@ -37,54 +36,6 @@
 #define CUSTOM_KEYS_BASENAME "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 #define CUSTOM_SHORTCUTS_ID "custom"
 #define WID(builder, name) (GTK_WIDGET (gtk_builder_get_object (builder, name)))
-
-typedef struct {
-  /* The untranslated name, combine with ->package to translate */
-  char *name;
-  /* The group of keybindings (system or application) */
-  char *group;
-  /* The gettext package to use to translate the section title */
-  char *package;
-  /* Name of the window manager the keys would apply to */
-  char *wm_name;
-  /* The GSettings schema for the whole file, if any */
-  char *schema;
-  /* an array of KeyListEntry */
-  GArray *entries;
-} KeyList;
-
-typedef struct
-{
-  CcKeyboardItemType type;
-  char *schema; /* GSettings schema name, if any */
-  char *description; /* description for GSettings types */
-  char *name; /* GSettings schema path, or GSettings key name depending on type */
-  char *reverse_entry;
-  gboolean is_reversed;
-  gboolean hidden;
-} KeyListEntry;
-
-typedef enum
-{
-  SHORTCUT_TYPE_KEY_ENTRY,
-  SHORTCUT_TYPE_XKB_OPTION,
-} ShortcutType;
-
-enum
-{
-  DETAIL_DESCRIPTION_COLUMN,
-  DETAIL_KEYENTRY_COLUMN,
-  DETAIL_TYPE_COLUMN,
-  DETAIL_N_COLUMNS
-};
-
-enum
-{
-  SECTION_DESCRIPTION_COLUMN,
-  SECTION_ID_COLUMN,
-  SECTION_GROUP_COLUMN,
-  SECTION_N_COLUMNS
-};
 
 static GRegex *pictures_regex = NULL;
 static GSettings *binding_settings = NULL;
@@ -1232,14 +1183,6 @@ keyval_is_forbidden (guint keyval)
 
   return FALSE;
 }
-
-typedef struct {
-  CcKeyboardItem *orig_item;
-  CcKeyboardItem *conflict_item;
-  guint new_keyval;
-  GdkModifierType new_mask;
-  guint new_keycode;
-} CcUniquenessData;
 
 static gboolean
 compare_keys_for_uniqueness (CcKeyboardItem   *element,

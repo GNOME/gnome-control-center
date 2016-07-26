@@ -21,6 +21,64 @@
 #include <gtk/gtk.h>
 #include <shell/cc-panel.h>
 
+#include "cc-keyboard-item.h"
+
+typedef struct {
+  /* The untranslated name, combine with ->package to translate */
+  char *name;
+  /* The group of keybindings (system or application) */
+  char *group;
+  /* The gettext package to use to translate the section title */
+  char *package;
+  /* Name of the window manager the keys would apply to */
+  char *wm_name;
+  /* The GSettings schema for the whole file, if any */
+  char *schema;
+  /* an array of KeyListEntry */
+  GArray *entries;
+} KeyList;
+
+typedef struct
+{
+  CcKeyboardItemType type;
+  char *schema; /* GSettings schema name, if any */
+  char *description; /* description for GSettings types */
+  char *name; /* GSettings schema path, or GSettings key name depending on type */
+  char *reverse_entry;
+  gboolean is_reversed;
+  gboolean hidden;
+} KeyListEntry;
+
+typedef struct {
+  CcKeyboardItem *orig_item;
+  CcKeyboardItem *conflict_item;
+  guint new_keyval;
+  GdkModifierType new_mask;
+  guint new_keycode;
+} CcUniquenessData;
+
+typedef enum
+{
+  SHORTCUT_TYPE_KEY_ENTRY,
+  SHORTCUT_TYPE_XKB_OPTION,
+} ShortcutType;
+
+enum
+{
+  DETAIL_DESCRIPTION_COLUMN,
+  DETAIL_KEYENTRY_COLUMN,
+  DETAIL_TYPE_COLUMN,
+  DETAIL_N_COLUMNS
+};
+
+enum
+{
+  SECTION_DESCRIPTION_COLUMN,
+  SECTION_ID_COLUMN,
+  SECTION_GROUP_COLUMN,
+  SECTION_N_COLUMNS
+};
+
 void keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder);
 gboolean keyboard_shortcuts_set_section (CcPanel *panel, const char *section);
 void keyboard_shortcuts_dispose (CcPanel *panel);
