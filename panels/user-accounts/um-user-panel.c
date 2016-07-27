@@ -1790,11 +1790,6 @@ cc_user_panel_init (CcUserPanel *self)
         gtk_container_add (GTK_CONTAINER (self), get_widget (d, "overlay"));
         d->history_dialog = um_history_dialog_new ();
         setup_main_window (self);
-
-        context = gtk_widget_get_style_context (get_widget (d, "list-scrolledwindow"));
-        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-        context = gtk_widget_get_style_context (get_widget (d, "add-remove-toolbar"));
-        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 }
 
 static void
