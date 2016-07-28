@@ -1754,7 +1754,6 @@ cc_user_panel_init (CcUserPanel *self)
         GError *error;
         volatile GType type G_GNUC_UNUSED;
         GtkWidget *button;
-        GtkStyleContext *context;
 
         d = self->priv = UM_USER_PANEL_PRIVATE (self);
         g_resources_register (um_get_resource ());
