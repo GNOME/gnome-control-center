@@ -24,6 +24,11 @@
 #include "cc-keyboard-shortcut-editor.h"
 #include "keyboard-shortcuts.h"
 
+/*
+ * Workaround to stop receiving a stray Meta modifier.
+ */
+#define ALL_ACCELS_MASK (GDK_CONTROL_MASK | GDK_SHIFT_MASK | GDK_MOD1_MASK)
+
 struct _CcKeyboardShortcutEditor
 {
   GtkDialog           parent;
@@ -450,7 +455,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
   if (!editing)
     return GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->key_press_event (widget, event);
 
-  real_mask = event->state & gtk_accelerator_get_default_mod_mask ();
+  real_mask = event->state & gtk_accelerator_get_default_mod_mask () & ALL_ACCELS_MASK;
 
   /* A single Escape press cancels the editing */
   if (!event->is_modifier && real_mask == 0 && event->keyval == GDK_KEY_Escape)
