@@ -127,6 +127,8 @@ clear_custom_entries (CcKeyboardShortcutEditor *self)
   gtk_entry_set_text (GTK_ENTRY (self->name_entry), "");
   gtk_entry_set_text (GTK_ENTRY (self->command_entry), "");
 
+  gtk_widget_set_sensitive (self->add_button, FALSE);
+
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
   gtk_label_set_label (GTK_LABEL (self->new_shortcut_conflict_label), "");
   gtk_label_set_label (GTK_LABEL (self->shortcut_conflict_label), "");
