@@ -60,6 +60,17 @@ static void     cc_keyboard_item_finalize       (GObject               *object);
 
 G_DEFINE_TYPE (CcKeyboardItem, cc_keyboard_item, G_TYPE_OBJECT)
 
+static const gchar *
+get_binding_from_variant (GVariant *variant)
+{
+  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
+    return g_variant_get_string (variant, NULL);
+  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
+    return g_variant_get_strv (variant, NULL)[0];
+  else
+    return "";
+}
+
 static gboolean
 binding_from_string (const char             *str,
                      guint                  *accelerator_key,
@@ -574,18 +585,14 @@ cc_keyboard_item_is_value_default (CcKeyboardItem *self)
   if (user_value)
     {
       GVariant *default_value;
-      const gchar *default_binding;
+      const gchar *default_binding, *user_binding;
 
       default_value = g_settings_get_default_value (self->settings, self->key);
 
-      if (g_variant_is_of_type (default_value, G_VARIANT_TYPE_STRING))
-        default_binding = g_variant_get_string (default_value, NULL);
-      else if (g_variant_is_of_type (default_value, G_VARIANT_TYPE_STRING_ARRAY))
-        default_binding = g_variant_get_strv (default_value, NULL)[0];
-      else
-        default_binding = "";
+      default_binding = get_binding_from_variant (default_value);
+      user_binding = get_binding_from_variant (user_value);
 
-      is_value_default = (g_strcmp0 (default_binding, g_variant_get_string (user_value, NULL)) == 0);
+      is_value_default = (g_strcmp0 (default_binding, user_binding) == 0);
 
       g_clear_pointer (&default_value, g_variant_unref);
     }
