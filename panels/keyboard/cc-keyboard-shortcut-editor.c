@@ -441,7 +441,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   gtk_widget_hide (self->replace_button);
 
   /* Setup the top label */
-  text = g_strdup_printf (_("Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."), item->description);
+  text = g_strdup_printf (_("Enter new shortcut to change <b>%s</b>, or press Esc to cancel."), item->description);
 
   gtk_label_set_markup (GTK_LABEL (self->top_info_label), text);
 
