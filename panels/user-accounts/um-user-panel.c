@@ -39,8 +39,6 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
-#include "shell/cc-editable-entry.h"
-
 #include "um-user-image.h"
 #include "um-cell-renderer-user-image.h"
 
@@ -1746,7 +1744,6 @@ cc_user_panel_init (CcUserPanel *self)
         g_resources_register (um_get_resource ());
 
         /* register types that the builder might need */
-        type = cc_editable_entry_get_type ();
         type = um_user_image_get_type ();
         type = um_cell_renderer_user_image_get_type ();
 
