@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-01 07:36+0000\n"
-"PO-Revision-Date: 2016-07-18 10:18+0200\n"
+"POT-Creation-Date: 2016-08-02 14:48+0000\n"
+"PO-Revision-Date: 2016-08-03 13:58+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -129,7 +129,8 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:1032
-#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:3
+#: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
@@ -138,8 +139,8 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:707
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -1741,26 +1742,26 @@ msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:215
 msgid "Reset the shortcut to its default value"
-msgstr ""
+msgstr "Restablecer el valor predeterminado del atajo"
 
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
-msgstr ""
+msgstr "%s ya está en uso por <b>%s</b>.. Si lo reemplaza, %s se desactivará"
 
 #. Setup the top label
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
 #, c-format
 msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
 msgstr ""
+"Atajo de teclado para <b>%s</b>. Introduzca el atajo nuevo para cambiarlo."
 
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
-#, fuzzy
 #| msgid "Custom Shortcut"
 msgid "Add Custom Shortcut"
-msgstr "Combinación personalizada"
+msgstr "Añadir un atajo personalizado"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
@@ -1787,14 +1788,13 @@ msgstr ""
 "nuevas, o pulse Retroceso para eliminarla."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#, fuzzy
 #| msgid "Keyboard Shortcuts"
 msgid "No keyboard shortcut found"
-msgstr "Combinaciones de teclas"
+msgstr "No se ha encontrado un atajo del teclado"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Try a different search"
-msgstr ""
+msgstr "Pruebe una búsqueda diferente"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/connection-editor/ce-page-reset.c:89
@@ -1809,10 +1809,9 @@ msgid "Name"
 msgstr "Nombre"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:4
-#, fuzzy
 #| msgid "_Command:"
 msgid "Command"
-msgstr "_Comando:"
+msgstr "Comando"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:5
 msgid "Shortcut"
@@ -1820,7 +1819,7 @@ msgstr "Combinación"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
 #: ../panels/network/network-wifi.ui.h:20
@@ -1828,10 +1827,9 @@ msgid "None"
 msgstr "Ninguna"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:8
-#, fuzzy
 #| msgid "_Remove"
 msgid "Remove"
-msgstr "_Quitar"
+msgstr "Quitar"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:9
 #: ../panels/printers/authentication-dialog.ui.h:2
@@ -1846,10 +1844,9 @@ msgid "Add"
 msgstr "Añadir"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#, fuzzy
 #| msgid "_Replace"
 msgid "Replace"
-msgstr "_Reemplazar"
+msgstr "Reemplazar"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1927,7 +1924,6 @@ msgid "Tap to Click"
 msgstr "Tocar para pulsar"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#, fuzzy
 #| msgid "Two Finger Scrolling"
 msgid "Two-finger Scrolling"
 msgstr "Desplazamiento con dos dedos"
@@ -2608,8 +2604,9 @@ msgid "yesterday"
 msgstr "ayer"
 
 #: ../panels/network/net-device-ethernet.c:156
-#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:647 ../panels/network/panel-common.c:649
+#: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Dirección IP"
 
@@ -2633,7 +2630,8 @@ msgstr "Cableada"
 #: ../panels/network/net-device-wifi.c:1691
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8
+#: ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opciones…"
 
@@ -5015,12 +5013,12 @@ msgid "Other"
 msgstr "Otra"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1092
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Debe reiniciar la sesión para que se apliquen los cambios"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Reiniciar ahora"
 
@@ -6142,13 +6140,11 @@ msgstr "Nombre _completo"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Standard"
 msgstr "Estándar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Administrator"
 msgstr "Administrador"
 
@@ -6325,10 +6321,9 @@ msgid "Set a password now"
 msgstr "Establecer una contraseña ahora"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#, fuzzy
 #| msgid "Add User"
 msgid "_Add User…"
-msgstr "Añadir usuario"
+msgstr "_Añadir usuario…"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "A_utomatic Login"
@@ -6718,7 +6713,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6726,7 +6721,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:847
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6812,26 +6807,26 @@ msgstr "No se pudo conectar al dominio %s: %s"
 msgid "Other Accounts"
 msgstr "Otras cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:509
-#: ../panels/user-accounts/um-user-panel.c:568
-#: ../panels/user-accounts/um-user-panel.c:620
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Falló al revocar remotamente el usuario gestionado"
 
-#: ../panels/user-accounts/um-user-panel.c:676
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: ../panels/user-accounts/um-user-panel.c:689
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6839,12 +6834,12 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6852,52 +6847,52 @@ msgstr ""
 "Es posible mantener la carpeta personal, el «spool» del correo y los "
 "archivos temporales al eliminar una cuenta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:720
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr ""
 "¿Está seguro de que quiere revocar remotamente la cuenta gestionada de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:724
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: ../panels/user-accounts/um-user-panel.c:776
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:787
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/user-accounts/um-user-panel.c:836
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:1295
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:1297
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: ../panels/user-accounts/um-user-panel.c:1338
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6905,12 +6900,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1681
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6918,12 +6913,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1399
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1411
-#: ../panels/user-accounts/um-user-panel.c:1686
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6931,7 +6926,7 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1595
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Mi cuenta"
 
@@ -11333,8 +11328,8 @@ msgstr "Hotspot"
 #~ "This theme will not look as intended because the required GTK+ theme '%s' "
 #~ "is not installed."
 #~ msgstr ""
-#~ "Este tema no se mostrará como se pretende porque eltema GTK+ "
-#~ "necesario «%s» no está instalado."
+#~ "Este tema no se mostrará como se pretende porque eltema GTK+ necesario "
+#~ "«%s» no está instalado."
 
 #~ msgid ""
 #~ "This theme will not look as intended because the required window manager "
