@@ -80,6 +80,7 @@ gnome_control_center_LDADD =						\
 	$(top_builddir)/panels/background/libbackground.la		\
 	$(top_builddir)/panels/color/libcolor.la			\
 	$(top_builddir)/panels/datetime/libdate_time.la			\
+	$(top_builddir)/panels/default-apps/libdefault-apps.la		\
 	$(top_builddir)/panels/display/libdisplay.la			\
 	$(top_builddir)/panels/info/libinfo.la				\
 	$(top_builddir)/panels/keyboard/libkeyboard.la			\

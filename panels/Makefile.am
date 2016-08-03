@@ -3,6 +3,7 @@ SUBDIRS= \
 	background \
 	power \
 	color \
+	default-apps \
 	display \
 	mouse \
 	notifications \

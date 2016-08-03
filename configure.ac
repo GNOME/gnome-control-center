@@ -127,6 +127,8 @@ PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+PKG_CHECK_MODULES(DEFAULT_APPS_PANEL, $COMMON_MODULES libgtop-2.0
+		  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES gnome-desktop-3.0 >= 3.1.0
                   upower-glib >= 0.99.0)
 PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0
@@ -453,6 +455,8 @@ panels/bluetooth/gnome-bluetooth-panel.desktop.in
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
 panels/datetime/po-timezones/Makefile
+panels/default-apps/Makefile
+panels/default-apps/gnome-default-apps-panel.desktop.in
 panels/display/Makefile
 panels/display/gnome-display-panel.desktop.in
 panels/keyboard/Makefile

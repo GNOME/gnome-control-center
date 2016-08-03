@@ -35,6 +35,7 @@ extern GType cc_bluetooth_panel_get_type (void);
 #endif /* BUILD_BLUETOOTH */
 extern GType cc_color_panel_get_type (void);
 extern GType cc_date_time_panel_get_type (void);
+extern GType cc_default_apps_panel_get_type (void);
 extern GType cc_display_panel_get_type (void);
 extern GType cc_info_panel_get_type (void);
 extern GType cc_keyboard_panel_get_type (void);
@@ -79,6 +80,7 @@ static struct {
 #endif
   PANEL_TYPE("color",            cc_color_panel_get_type        ),
   PANEL_TYPE("datetime",         cc_date_time_panel_get_type    ),
+  PANEL_TYPE("default-apps",     cc_default_apps_panel_get_type ),
   PANEL_TYPE("display",          cc_display_panel_get_type      ),
   PANEL_TYPE("info",             cc_info_panel_get_type         ),
   PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type     ),
