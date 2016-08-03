@@ -206,7 +206,7 @@ add_item (CcKeyboardPanel *self,
   gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
 
   /* Reset shortcut button */
-  reset_button = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
+  reset_button = gtk_button_new_from_icon_name ("edit-clear-symbolic", GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_valign (reset_button, GTK_ALIGN_CENTER);
 
   gtk_button_set_relief (GTK_BUTTON (reset_button), GTK_RELIEF_NONE);
