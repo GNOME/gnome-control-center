@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-01 07:36+0000\n"
-"PO-Revision-Date: 2016-08-03 13:10+0200\n"
+"POT-Creation-Date: 2016-08-03 11:11+0000\n"
+"PO-Revision-Date: 2016-08-04 09:33+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -137,8 +137,8 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:707
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
@@ -1977,9 +1977,10 @@ msgstr "Kláves Compose"
 msgid "Modifiers-only switch to next source"
 msgstr "Prepnutie na ďalší zdroj iba pomocou modifikátorov"
 
+# tooltip
 #: ../panels/keyboard/cc-keyboard-panel.c:215
 msgid "Reset the shortcut to its default value"
-msgstr ""
+msgstr "Obnoví skratku na predvolenú hodnotu"
 
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
 #, c-format
@@ -1987,6 +1988,8 @@ msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr ""
+"Skratka %s sa už používa pre akciu <b>%s</b>. Ak ju nahradíte, akcia %s bude "
+"zakázaná"
 
 #. Setup the top label
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
@@ -2034,7 +2037,7 @@ msgstr "Nenašla sa žiadna klávesová skratka"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Try a different search"
-msgstr ""
+msgstr "Skúste vyhľadať niečo iné"
 
 # GtkListStore item; page
 #: ../panels/keyboard/shortcut-editor.ui.h:2
@@ -2059,9 +2062,10 @@ msgstr "Príkaz"
 msgid "Shortcut"
 msgstr "Skratka"
 
+# button label
 #: ../panels/keyboard/shortcut-editor.ui.h:6
 msgid "Edit"
-msgstr ""
+msgstr "Upraviť"
 
 # PK: to druhe neni v tom subore
 # PM: to druhé máš tu https://git.gnome.org/browse/gnome-control-center/tree/panels/universal-access/uap.ui?h=gnome-3-8#n77 - vyzerá to na výber programu pre klávesnicu na obrazovke asi to treba rozdeliť
@@ -2183,8 +2187,6 @@ msgstr "Kliknúť dotykom"
 
 # GtkCheckButton label
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#, fuzzy
-#| msgid "Two Finger Scrolling"
 msgid "Two-finger Scrolling"
 msgstr "Rolovať dvoma prstami"
 
@@ -2795,11 +2797,10 @@ msgstr "VPN"
 msgid "Import from file…"
 msgstr "Importovať zo súboru…"
 
+# window title
 #: ../panels/network/connection-editor/net-connection-editor.c:817
-#, fuzzy
-#| msgid "%s VPN"
 msgid "Add VPN"
-msgstr "VPN %s"
+msgstr "Pridanie VPN"
 
 # GtkButton label
 #: ../panels/network/connection-editor/reset-page.ui.h:1
@@ -3685,7 +3686,7 @@ msgstr "Kábel odpojený"
 
 #: ../panels/network/wireless-security/eap-method.c:69
 msgid "undefined error in 802.1x security (wpa-eap)"
-msgstr ""
+msgstr "nedefinovaná chyba v zabezpečení protokolu 802.1x (wpa-eap)"
 
 #: ../panels/network/wireless-security/eap-method.c:245
 msgid "no file selected"
@@ -3693,7 +3694,7 @@ msgstr "Nebol vybratý žiadny súbor"
 
 #: ../panels/network/wireless-security/eap-method.c:276
 msgid "unspecified error validating eap-method file"
-msgstr ""
+msgstr "nešpecifikovaná chyba pri overovaní súboru metódy protokolu eap"
 
 # PK: pkcs#12 je zauzivane
 # file filter
@@ -3709,7 +3710,7 @@ msgstr "Certifikáty typu DER alebo PEM (*.der, *.pem, *.crt, *.cer)"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:72
 msgid "missing EAP-FAST PAC file"
-msgstr ""
+msgstr "chýba súbor PAC protokolu EAP-FAST"
 
 # liststore item
 #: ../panels/network/wireless-security/eap-method-fast.c:268
@@ -3780,11 +3781,11 @@ msgstr "Umožniť automatické zaobstarávanie PAC"
 
 #: ../panels/network/wireless-security/eap-method-leap.c:65
 msgid "missing EAP-LEAP username"
-msgstr ""
+msgstr "chýba používateľské meno protokolu EAP-LEAP"
 
 #: ../panels/network/wireless-security/eap-method-leap.c:74
 msgid "missing EAP-LEAP password"
-msgstr ""
+msgstr "chýba heslo protokolu EAP-LEAP"
 
 # GtkLabel label
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
@@ -3806,11 +3807,11 @@ msgstr "_Zobraziť heslo"
 #: ../panels/network/wireless-security/eap-method-peap.c:63
 #, c-format
 msgid "invalid EAP-PEAP CA certificate: %s"
-msgstr ""
+msgstr "neplatný certifikát protokolu EAP-PEAP CA: %s"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:68
 msgid "invalid EAP-PEAP CA certificate: no certificate specified"
-msgstr ""
+msgstr "neplatný certifikát protokolu EAP-PEAP CA: certifikát nebol určený"
 
 # liststore (MSCHAPv2,GTC)
 #: ../panels/network/wireless-security/eap-method-peap.c:287
@@ -3859,41 +3860,39 @@ msgstr "_Verzia PEAP"
 
 #: ../panels/network/wireless-security/eap-method-simple.c:74
 msgid "missing EAP username"
-msgstr ""
+msgstr "chýba používateľské meno protokolu EAP"
 
 # DK:dialog title
 #: ../panels/network/wireless-security/eap-method-simple.c:87
-#, fuzzy
-#| msgid "Change Password"
 msgid "missing EAP password"
-msgstr "Zmena hesla"
+msgstr "chýba heslo EAP"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:68
 msgid "missing EAP-TLS identity"
-msgstr ""
+msgstr "chýba identita protokolu EAP-TLS"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:77
 #, c-format
 msgid "invalid EAP-TLS CA certificate: %s"
-msgstr ""
+msgstr "Neplatný certifikát protokolu EAP-TLS CA: %s"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:84
 msgid "invalid EAP-TLS CA certificate: no certificate specified"
-msgstr ""
+msgstr "neplatný certifikát protokolu EAP-TLS CA: certifikát nebol určený"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:95
 msgid "invalid EAP-TLS password: missing"
-msgstr ""
+msgstr "neplatné heslo protokolu EAP-TLS: chýba"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:109
 #, c-format
 msgid "invalid EAP-TLS private-key: %s"
-msgstr ""
+msgstr "neplatný súkromný kľúč protokolu EAP-TLS: %s"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:119
 #, c-format
 msgid "invalid EAP-TLS user-certificate: %s"
-msgstr ""
+msgstr "neplatný certifikát používateľa protokolu EAP-TLS: %s"
 
 # gtkdialog title
 #: ../panels/network/wireless-security/eap-method-tls.c:316
@@ -3947,11 +3946,11 @@ msgstr "_Heslo súkromného kľúča"
 #: ../panels/network/wireless-security/eap-method-ttls.c:63
 #, c-format
 msgid "invalid EAP-TTLS CA certificate: %s"
-msgstr ""
+msgstr "neplatný certifikát protokolu EAP-TTLS CA: %s"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:68
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
-msgstr ""
+msgstr "neplatný certifikát protokolu EAP-TTLS CA: certifikát nebol určený"
 
 # litstore item
 #: ../panels/network/wireless-security/eap-method-ttls.c:258
@@ -3979,7 +3978,7 @@ msgstr "TLS"
 
 #: ../panels/network/wireless-security/wireless-security.c:475
 msgid "PWD"
-msgstr ""
+msgstr "PWD"
 
 # litstore item
 #: ../panels/network/wireless-security/wireless-security.c:486
@@ -4005,26 +4004,30 @@ msgstr "_Overenie totožnosti"
 
 #: ../panels/network/wireless-security/ws-leap.c:63
 msgid "missing leap-username"
-msgstr ""
+msgstr "chýba používateľské meno protokolu leap"
 
 #: ../panels/network/wireless-security/ws-leap.c:74
 msgid "missing leap-password"
-msgstr ""
+msgstr "chýba heslo protokolu leap"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:107
 msgid "missing wep-key"
-msgstr ""
+msgstr "chýba kľúč zabezpečenia wep"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:116
 #, c-format
 msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
 msgstr ""
+"neplatný kľúč zabezpečenia wep: kľúč o dĺžke %zu musí obsahovať iba "
+"hexadecimálne čísla"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:124
 #, c-format
 msgid ""
 "invalid wep-key: key with a length of %zu must contain only ascii characters"
 msgstr ""
+"neplatný kľúč zabezpečenia wep: kľúč o dĺžke %zu musí obsahovať iba znaky v "
+"kódovaní ascii"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:130
 #, c-format
@@ -4032,14 +4035,16 @@ msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
 "(ascii) or 10/26 (hex)"
 msgstr ""
+"neplatný kľúč zabezpečenia wep: nesprávna dĺžka kľúča %zu. Kľúč musí byť o "
+"dĺžke buď 5/13 (ascii) alebo 10/26 (hexadecimálne)"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:137
 msgid "invalid wep-key: passphrase must be non-empty"
-msgstr ""
+msgstr "neplatný kľúč zabezpečenia wep: heslo nemôže byť prázdne"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:139
 msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr ""
+msgstr "neplatný kľúč zabezpečenia wep: heslo musí byť kratšie ako 64 znakov"
 
 # WEP index
 # GtkListStore item
@@ -4098,10 +4103,14 @@ msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 "digits"
 msgstr ""
+"neplatné zabezpečenie wpa-psk: neplatná dĺžka kľúča %zu. Musí byť o dĺžke "
+"[8,63] bajtov alebo 64 hexadecimálnych čísel"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.c:79
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
 msgstr ""
+"neplatné zabezpečenie wpa-psk: nedá sa interpretovať 64 bajtový kľúč ako "
+"hexadecimálny"
 
 # GtkLabel label
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
@@ -5684,13 +5693,13 @@ msgstr "Iný"
 
 # label
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1092
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Aby sa prejavili zmeny, musíte reštartovať vašu reláciu"
 
 # button
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Reštartovať teraz"
 
@@ -5985,30 +5994,25 @@ msgstr ""
 
 # GtkLabel label
 #: ../panels/sharing/cc-sharing-panel.c:682
-#, fuzzy, c-format
-#| msgid ""
-#| "Allow remote users to connect using the Secure Shell command:\n"
-#| "<a href=\"ssh %s\">ssh %s</a>"
+#, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
-"Umožniť vzdialeným používateľom pripojenie pomocou príkazu Secure Shell:\n"
+"Keď je povolené vzdialené prihlásenie, vzdialení používatelia sa môžu "
+"pripojiť pomocou príkazu Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
 # GtkLabel label
 #: ../panels/sharing/cc-sharing-panel.c:684
-#, fuzzy, c-format
-#| msgid ""
-#| "Allow remote users to view or control your screen by connecting to: <a "
-#| "href=\"vnc://%s\">vnc://%s</a>"
+#, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
 msgstr ""
-"Umožniť vzdialeným používateľom zobraziť alebo ovládať vašu obrazovku "
-"pripojením k: <a href=\"vnc://%s\">vnc://%s</a>"
+"Sprístupnenie obrazovky umožňuje vzdialeným používateľom zobraziť alebo "
+"ovládať vašu obrazovku pripojením k <a href=\"vnc://%s\">vnc://%s</a>"
 
 # menu item
 #: ../panels/sharing/cc-sharing-panel.c:796
@@ -6063,12 +6067,9 @@ msgstr ""
 msgid "_Computer Name"
 msgstr "Názov _počítača"
 
-# GtkDialog title
 #: ../panels/sharing/sharing.ui.h:2
-#, fuzzy
-#| msgid "_Personal File Sharing"
 msgid "_File Sharing"
-msgstr "_Spoločné používanie osobných súborov"
+msgstr "_Spoločné používanie súborov"
 
 # GtkDialog title
 #: ../panels/sharing/sharing.ui.h:3
@@ -6090,12 +6091,10 @@ msgstr "V_zdialené prihlásenie"
 msgid "Some services are disabled because of no network access."
 msgstr "Niektoré služby sú zakázané kvôli nedostupnosti sieťového pripojenia."
 
-# desktop entry name
+# gtkdialog title
 #: ../panels/sharing/sharing.ui.h:7
-#, fuzzy
-#| msgid "Sharing"
 msgid "File Sharing"
-msgstr "Sprístupnenie"
+msgstr "Spoločné používanie súborov"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:8
@@ -6114,7 +6113,7 @@ msgstr "Sprístupnenie obrazovky"
 
 #: ../panels/sharing/sharing.ui.h:12
 msgid "_Allow connections to control the screen"
-msgstr ""
+msgstr "_Umožniť pripojeniam ovládať obrazovku"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:13
@@ -6147,14 +6146,8 @@ msgstr "Spoločné používanie multimédií"
 
 # GtkLabel label
 #: ../panels/sharing/sharing.ui.h:19
-#, fuzzy
-#| msgid ""
-#| "Media sharing allows you to share music, photos and videos over the "
-#| "network."
 msgid "Share music, photos and videos over the network."
-msgstr ""
-"Spoločné požívanie multimédií vám umožňuje sprístupniť hudbu, fotografie a "
-"videá cez sieť."
+msgstr "Sprístupnite hudbu, fotografie a videá cez sieť."
 
 # GtkToolButton label
 #: ../panels/sharing/sharing.ui.h:20
@@ -7026,14 +7019,12 @@ msgstr "_Celé meno"
 # GtkListStore item
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Standard"
 msgstr "Štandardný"
 
 # GtkListStore item
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Administrator"
 msgstr "Správca"
 
@@ -7644,7 +7635,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7652,7 +7643,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:847
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7744,38 +7735,38 @@ msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 msgid "Other Accounts"
 msgstr "Iné účty"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Odstránenie používateľa zlyhalo"
 
-#: ../panels/user-accounts/um-user-panel.c:509
-#: ../panels/user-accounts/um-user-panel.c:568
-#: ../panels/user-accounts/um-user-panel.c:620
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Zlyhalo zrušenie na diaľku spravovaného používateľa"
 
-#: ../panels/user-accounts/um-user-panel.c:676
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Nemôžete odstrániť vlastný účet."
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "Používateľ %s je stále prihlásený"
 
-#: ../panels/user-accounts/um-user-panel.c:689
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 "Odstránenie prihláseného používateľa môže spôsobiť nestabilitu systému."
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Chcete ponechať súbory používateľa %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7784,55 +7775,55 @@ msgstr ""
 "súbory pošty a dočasné súbory."
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "O_dstrániť súbory"
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "Po_nechať súbory"
 
-#: ../panels/user-accounts/um-user-panel.c:720
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Naozaj chcete zrušiť na diaľku spravovaný účet používateľa %s?"
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:724
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "O_dstrániť"
 
-#: ../panels/user-accounts/um-user-panel.c:776
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet je zakázaný"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastaviť pri najbližšom prihlásení"
 
-#: ../panels/user-accounts/um-user-panel.c:787
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žiadne"
 
-#: ../panels/user-accounts/um-user-panel.c:836
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Prihlásený"
 
-#: ../panels/user-accounts/um-user-panel.c:1295
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Spojenie so službou účtov zlyhalo"
 
-#: ../panels/user-accounts/um-user-panel.c:1297
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Uistite sa, prosím, že je služba AccountService nainštalovaná a povolená."
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1338
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7841,13 +7832,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1378
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Vytvorí používateľský účet"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1681
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7856,13 +7847,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1399
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Odstráni vybraný používateľský účet"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1411
-#: ../panels/user-accounts/um-user-panel.c:1686
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7870,7 +7861,7 @@ msgstr ""
 "Keď chcete odstrániť používateľský účet,\n"
 "kliknite najprv na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1595
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Môj účet"
 
