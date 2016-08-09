@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-26 16:42+0300\n"
-"PO-Revision-Date: 2016-06-26 17:06+0300\n"
+"POT-Creation-Date: 2016-08-09 20:13+0300\n"
+"PO-Revision-Date: 2016-08-09 20:25+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -109,7 +109,6 @@ msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תו�
 #: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2206
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
@@ -118,14 +117,14 @@ msgstr "ניתן להוסיף תמונות לתיקייה %s שלך והן תו�
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:982
+#: ../panels/privacy/cc-privacy-panel.c:1032
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/join-dialog.ui.h:2
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/um-user-panel.c:705
@@ -675,7 +674,7 @@ msgstr ""
 "\">Microsoft Windows</a> יביאו לך תועלת."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "תקציר"
 
@@ -687,7 +686,7 @@ msgstr "הוספת פרופיל"
 msgid "_Import File…"
 msgstr "_יבוא קובץ…"
 
-#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:31
 #: ../panels/network/connection-editor/net-connection-editor.c:546
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -1096,8 +1095,8 @@ msgstr "ראשי"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/privacy/cc-privacy-panel.c:174
+#: ../panels/privacy/cc-privacy-panel.c:241
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1242,49 +1241,59 @@ msgstr "Wayland"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../panels/info/cc-info-panel.c:433
+#: ../panels/info/cc-info-panel.c:481
+#, c-format
+msgid "%s %d-bit (Build ID: %s)"
+msgstr "‏%s ‏%d סיביות (מזהה בנייה: %s)"
+
+#: ../panels/info/cc-info-panel.c:483
+#, c-format
+msgid "%d-bit (Build ID: %s)"
+msgstr "%d סיביות (מזהה בנייה: %s)"
+
+#: ../panels/info/cc-info-panel.c:491
 #, c-format
 msgid "%s %d-bit"
-msgstr "%s %d-סיביות"
+msgstr "‏%s %d סיביות"
 
-#: ../panels/info/cc-info-panel.c:435
+#: ../panels/info/cc-info-panel.c:493
 #, c-format
 msgid "%d-bit"
-msgstr "%d-סיביות"
+msgstr "%d סיביות"
 
-#: ../panels/info/cc-info-panel.c:1115
+#: ../panels/info/cc-info-panel.c:1174
 msgid "Ask what to do"
 msgstr "הצגת שאלה בנוגע להמשך"
 
-#: ../panels/info/cc-info-panel.c:1119
+#: ../panels/info/cc-info-panel.c:1178
 msgid "Do nothing"
 msgstr "לא לעשות דבר"
 
-#: ../panels/info/cc-info-panel.c:1123
+#: ../panels/info/cc-info-panel.c:1182
 msgid "Open folder"
 msgstr "פתיחת תיקייה"
 
-#: ../panels/info/cc-info-panel.c:1214
+#: ../panels/info/cc-info-panel.c:1273
 msgid "Other Media"
 msgstr "מדיה אחרת"
 
-#: ../panels/info/cc-info-panel.c:1245
+#: ../panels/info/cc-info-panel.c:1304
 msgid "Select an application for audio CDs"
 msgstr "נא לבחור יישום לתקליטורי שמע"
 
-#: ../panels/info/cc-info-panel.c:1246
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for video DVDs"
 msgstr "נא לבחור יישום לתקליטורי וידאו DVD"
 
-#: ../panels/info/cc-info-panel.c:1247
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application to run when a music player is connected"
 msgstr "נא לבחור יישום להפעלה בעת חיבור נגן מוזיקה"
 
-#: ../panels/info/cc-info-panel.c:1248
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a camera is connected"
 msgstr "נא לבחור יישום להפעלה בעת חיבור המצלמה"
 
-#: ../panels/info/cc-info-panel.c:1249
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application for software CDs"
 msgstr "נא לבחור יישום לתקליטורי תכנה"
 
@@ -1293,72 +1302,71 @@ msgstr "נא לבחור יישום לתקליטורי תכנה"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1261
+#: ../panels/info/cc-info-panel.c:1320
 msgid "audio DVD"
 msgstr "תקליטור DVD שמע"
 
-#: ../panels/info/cc-info-panel.c:1262
+#: ../panels/info/cc-info-panel.c:1321
 msgid "blank Blu-ray disc"
 msgstr "תקליטור Blu-ray ריק"
 
-#: ../panels/info/cc-info-panel.c:1263
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank CD disc"
 msgstr "תקליטור CD ריק"
 
-#: ../panels/info/cc-info-panel.c:1264
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank DVD disc"
 msgstr "תקליטור DVD ריק"
 
-#: ../panels/info/cc-info-panel.c:1265
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank HD DVD disc"
 msgstr "תקליטור HD DVD ריק"
 
-#: ../panels/info/cc-info-panel.c:1266
+#: ../panels/info/cc-info-panel.c:1325
 msgid "Blu-ray video disc"
 msgstr "תקליטור וידאו Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1326
 msgid "e-book reader"
 msgstr "מציג ספרים אלקטרוניים"
 
-#: ../panels/info/cc-info-panel.c:1268
+#: ../panels/info/cc-info-panel.c:1327
 msgid "HD DVD video disc"
 msgstr "תקליטור וידאו HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1269
+#: ../panels/info/cc-info-panel.c:1328
 msgid "Picture CD"
 msgstr "תקליטור תמונות"
 
-#: ../panels/info/cc-info-panel.c:1270
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Super Video CD"
 msgstr "סופר תקליטור וידאו (SVCD)"
 
-#: ../panels/info/cc-info-panel.c:1271
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Video CD"
 msgstr "תקליטור וידאו (VCD)"
 
-#: ../panels/info/cc-info-panel.c:1272
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Windows software"
 msgstr "תכנה של Windows"
 
-#: ../panels/info/cc-info-panel.c:1395
-#: ../panels/keyboard/keyboard-shortcuts.c:1949
+#: ../panels/info/cc-info-panel.c:1454
 msgid "Section"
 msgstr "אגף"
 
-#: ../panels/info/cc-info-panel.c:1404 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "סקירה"
 
-#: ../panels/info/cc-info-panel.c:1410 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1469 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "יישומי בררת המחדל"
 
-#: ../panels/info/cc-info-panel.c:1415 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1474 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "מדיה נתיקה"
 
-#: ../panels/info/cc-info-panel.c:1440
+#: ../panels/info/cc-info-panel.c:1499
 #, c-format
 msgid "Version %s"
 msgstr "גרסה %s"
@@ -1548,7 +1556,7 @@ msgid "Launch help browser"
 msgstr "הפעלת דפדפן העזרה"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:274
-#: ../shell/alt/cc-window.c:827 ../shell/cc-window.c:1584
+#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1584
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "הגדרות"
@@ -1657,14 +1665,24 @@ msgstr "הקטנת הטקסט"
 msgid "High contrast on or off"
 msgstr "ביטול/הפעלה של ניגודיות גבוהה"
 
+#: ../panels/keyboard/cc-keyboard-manager.c:514
+#: ../panels/keyboard/cc-keyboard-manager.c:522
+#: ../panels/keyboard/cc-keyboard-manager.c:830
+msgid "Custom Shortcuts"
+msgstr "קיצורי דרך מותאמים אישית"
+
+#. This label is displayed in a treeview cell displaying
+#. * a disabled accelerator key combination.
+#.
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1220
+#: ../panels/keyboard/keyboard-shortcuts.c:417
+#: ../panels/keyboard/shortcut-editor.ui.h:1
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:213
 msgid "Disabled"
 msgstr "מנוטרל"
 
@@ -1688,6 +1706,27 @@ msgstr "מקש Compose"
 msgid "Modifiers-only switch to next source"
 msgstr "העברה באמצעות מקשי החלפה בלבד למקור הבא"
 
+#: ../panels/keyboard/cc-keyboard-panel.c:215
+msgid "Reset the shortcut to its default value"
+msgstr "איפוס צירופי המקשים לערך ברירת המחדל"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#, c-format
+msgid ""
+"%s is already being used for <b>%s</b>. If you replace it, %s will be "
+"disabled"
+msgstr "‏%s כבר משויך אל <b>%s</b>. אם ברצונך להחליף בו, %s יושבת"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
+#, c-format
+msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+msgstr "צירופי מקשים עבור <b>%s</b>. יש להזין צירוף מקש חד לשינוי."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+msgid "Add Custom Shortcut"
+msgstr "הוספת צירוף מקשים חדש"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Key­board"
@@ -1703,26 +1742,6 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "קיצור דרך;חזרה;הבהוב;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "Custom Shortcut"
-msgstr "קיצור דרך מותאם אישית"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-msgid "_Name:"
-msgstr "_שם:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
-msgid "C_ommand:"
-msgstr "פקו_דה:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Add Shortcut"
-msgstr "הוספת קיצור דרך"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Remove Shortcut"
-msgstr "הסרת קיצור דרך"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1730,62 +1749,62 @@ msgstr ""
 "כדי לערוך מקש קיצור דרך, יש ללחוץ על השורה המתאימה ולהחזיק את צירוף המקשים "
 "החדש או ללחוץ על Backspace כדי למחוק."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:633
-#: ../panels/keyboard/keyboard-shortcuts.c:641
-msgid "Custom Shortcuts"
-msgstr "קיצורי דרך מותאמים אישית"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "No keyboard shortcut found"
+msgstr "לא נמצאו צירופי מקשים"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:858
-msgid "<Unknown Action>"
-msgstr "<פעולה לא ידועה>"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Try a different search"
+msgstr "יש לנסות חיפוש שונה"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1359
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"לא ניתן להשתמש בקיצור הדרך „%s“ מכיוון שלא ניתן יהיה להקליד באמצעות מקש זה.\n"
-"נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
+#: ../panels/keyboard/shortcut-editor.ui.h:2
+#: ../panels/network/connection-editor/ce-page-reset.c:89
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "איפוס"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1389
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"קיצור הדרך „%s“ כבר משמש ל:\n"
-"„%s“"
+#: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
+msgid "Name"
+msgstr "שם"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1394
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr "אם קיצור הדרך יוקצה מחדש אל „%s“, קיצור הדרך „%s“ יבוטל."
+#: ../panels/keyboard/shortcut-editor.ui.h:4
+msgid "Command"
+msgstr "פקודה"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1400
-msgid "_Reassign"
-msgstr "הקצאה _מחדש"
+#: ../panels/keyboard/shortcut-editor.ui.h:5
+msgid "Shortcut"
+msgstr "קיצור"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
-#, c-format
-msgid ""
-"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
-"automatically set it to \"%s\"?"
-msgstr ""
-"הקיצור „%s” משויך לקיצור „%s”. האם ברצונך להגדיר אותו באופן אוטומטי ל־„%s”?"
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+msgid "Edit"
+msgstr "עריכה"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1451
-#, c-format
-msgid ""
-"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
-"if you move forward."
-msgstr "‏„%s” משויך כעת אל „%s”, קיצור זה יושבת אם אפשרות זו תיבחר."
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/network/network-wifi.ui.h:20
+msgid "None"
+msgstr "ללא"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1458
-msgid "_Assign"
-msgstr "ה_קצאה"
+#: ../panels/keyboard/shortcut-editor.ui.h:8
+msgid "Remove"
+msgstr "הסרה"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "ביטול"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:276
+#: ../panels/network/connection-editor/ce-page-ip6.c:277
+msgid "Add"
+msgstr "הוספה"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
+msgid "Replace"
+msgstr "החלפה"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1860,6 +1879,10 @@ msgid "Tap to Click"
 msgstr "הקשה היא לחיצה"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
+msgid "Two-finger Scrolling"
+msgstr "גלילה בשתי אצבעות"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "Edge Scrolling"
 msgstr "קצה גלילה"
 
@@ -2093,11 +2116,6 @@ msgstr "שער גישה"
 msgid "Delete Address"
 msgstr "מחיקת כתובת"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:276
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
-msgid "Add"
-msgstr "הוספה"
-
 #: ../panels/network/connection-editor/ce-page-ip4.c:339
 #: ../panels/network/connection-editor/ce-page-ip6.c:334
 msgid "Server"
@@ -2128,7 +2146,7 @@ msgstr "אוטומטי (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:201
 msgid "Manual"
 msgstr "ידני"
 
@@ -2152,7 +2170,7 @@ msgstr "קידומת"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:201
 msgid "Automatic"
 msgstr "אוטומטי"
 
@@ -2164,11 +2182,6 @@ msgstr "אוטומטי, DHCP בלבד"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
-
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "איפוס"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2517,13 +2530,12 @@ msgstr "שליטה באופן החיבור לאינטרנט"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:5
-#, fuzzy
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "DNS;"
 msgstr ""
 "רשת;אלחוטי;אלחוטית;וייפיי;IP;רשת מקומית;מתווך;פרוקסי;אינטרנט;רשת רחבה;רוחב "
-"פס;מודם;בלוטות׳;DNS;"
+"פס;מודם;בלוטות׳;DNS;vpn;"
 
 #: ../panels/network/net-device-ethernet.c:106
 #: ../panels/network/net-device-wifi.c:471
@@ -2773,13 +2785,9 @@ msgstr "פרטים"
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
 #: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "_Password"
 msgstr "_ססמה"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "None"
-msgstr "ללא"
 
 #: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
@@ -3189,9 +3197,8 @@ msgid "unspecified error validating eap-method file"
 msgstr "שגיאה לא ידועה באימות קובץ eap-method"
 
 #: ../panels/network/wireless-security/eap-method.c:480
-#, fuzzy
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr "מפתחות פרטיים מסוג DER, PEM,או PKCS#12 ‏(‎*.der, *.pem, *.p12)"
+msgstr "מפתחות פרטיים מסוג DER, PEM או PKCS#12 ‏(‎*.der, *.pem, *.p12, *.key)"
 
 #: ../panels/network/wireless-security/eap-method.c:483
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
@@ -3479,7 +3486,9 @@ msgstr "מפתח wep לא תקף: מפתח באורך %zu חייב להכיל א
 msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
 "(ascii) or 10/26 (hex)"
-msgstr "מפתח wep לא תקף: אורך מפתח %zu שגוי. מפתח חייב להיות או באורך 5/13 (‏ascii) או 10/26 (הקסדצימלי)"
+msgstr ""
+"מפתח wep לא תקף: אורך מפתח %zu שגוי. מפתח חייב להיות או באורך 5/13 (‏ascii) "
+"או 10/26 (הקסדצימלי)"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:137
 msgid "invalid wep-key: passphrase must be non-empty"
@@ -3530,7 +3539,9 @@ msgstr "מ_פתח ה־WEP"
 msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 "digits"
-msgstr "‏wpa-psk לא תקף: %zu אורך מפתח לא תקף. חייב להיות [8,63] בתים או 64 ספרות הקסדצימליות"
+msgstr ""
+"‏wpa-psk לא תקף: %zu אורך מפתח לא תקף. חייב להיות [8,63] בתים או 64 ספרות "
+"הקסדצימליות"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.c:79
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
@@ -3542,8 +3553,8 @@ msgstr "_סוג"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/privacy/cc-privacy-panel.c:174
+#: ../panels/privacy/cc-privacy-panel.c:241
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3703,6 +3714,7 @@ msgid "No online accounts configured"
 msgstr "לא הוגדרו חשבונות מקוונים"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Remove Account"
 msgstr "הסרת חשבון"
 
@@ -4069,11 +4081,6 @@ msgstr "על _סוללה"
 #: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "השהיה"
-
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "ביטול"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4672,70 +4679,70 @@ msgstr ""
 "כפי הנראה, שירותי ההדפסה של המערכת\n"
 "אינם זמינים, עמך הסליחה!"
 
-#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "נעילת מסך"
 
-#: ../panels/privacy/cc-privacy-panel.c:420
+#: ../panels/privacy/cc-privacy-panel.c:422
 msgid "In use"
 msgstr "בשימוש"
 
-#: ../panels/privacy/cc-privacy-panel.c:425
+#: ../panels/privacy/cc-privacy-panel.c:427
 msgctxt "Location services status"
 msgid "On"
 msgstr "פועל"
 
-#: ../panels/privacy/cc-privacy-panel.c:426
+#: ../panels/privacy/cc-privacy-panel.c:428
 msgctxt "Location services status"
 msgid "Off"
 msgstr "כבוי"
 
-#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "שירותי איכון"
 
-#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "שימוש והיסטוריה"
 
-#: ../panels/privacy/cc-privacy-panel.c:1001
+#: ../panels/privacy/cc-privacy-panel.c:1051
 msgid "Empty all items from Trash?"
 msgstr "לרוקן את כל הפריטים באשפה?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1002
+#: ../panels/privacy/cc-privacy-panel.c:1052
 msgid "All items in the Trash will be permanently deleted."
 msgstr "כל הפריטים באשפה ימחקו לצמיתות."
 
-#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_פינוי האשפה"
 
-#: ../panels/privacy/cc-privacy-panel.c:1026
+#: ../panels/privacy/cc-privacy-panel.c:1076
 msgid "Delete all the temporary files?"
 msgstr "למחוק את כל הקבצים הזמניים?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1027
+#: ../panels/privacy/cc-privacy-panel.c:1077
 msgid "All the temporary files will be permanently deleted."
 msgstr "כל הקבצים הזמניים ימחקו לצמיתות."
 
-#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "מחיקת קבצים _זמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "ניקוי הזבל והקבצים הזמניים"
 
-#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "שימוש בתכנה"
 
-#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "דיווח על בעיות"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1145
+#: ../panels/privacy/cc-privacy-panel.c:1195
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4744,7 +4751,7 @@ msgstr ""
 "שליחת דיווחים על בעיות טכניות תעזור לנו לשפר את %s. הדיווחים נשלחים בעילום "
 "שם וללא מידע אישי."
 
-#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "מדיניות פרטיות"
 
@@ -4928,13 +4935,13 @@ msgid "Other"
 msgstr "אחר"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1080
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1084
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
@@ -5042,7 +5049,7 @@ msgid "Left+Right Alt"
 msgstr "שמאלי+Alt ימני"
 
 #: ../panels/region/region.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Language"
 msgstr "_שפה"
 
@@ -5145,6 +5152,11 @@ msgstr "הזזה למטה"
 msgid "Preferences"
 msgstr "העדפות"
 
+#. Label
+#: ../panels/sharing/cc-sharing-networks.c:303
+msgid "No networks selected for sharing"
+msgstr "לא נבחרו רשתות לשיתוף"
+
 #: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
@@ -5180,23 +5192,22 @@ msgstr ""
 "הנוכחית שלך באמצעות: <a href=\"dav://%s\">dav://%s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:682
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
-"לאפשר למשתמשים מרוחקים להתחבר באמצעות פקודת  SSH:\n"
+"כאשר התחברות מרוחקת מאופשרת, משתמשים מרוחקים יכולים להתחבר באמצעות פקודה במעטפת מאובטחת: \n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:684
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
-msgstr ""
-"לאפשר למשתמשים מרוחקים לצפות או לשלוט במסך שלך ע״י התחברות לכתובת: <a href="
-"\"vnc://%s\">vnc://%s</a>"
+msgstr "שיתוף מסך מאפשר למשתמשים מרוחקים לצפות או לשלוח במסך שלך על ידי "
+"התחברות אל <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:796
 msgid "Copy"
@@ -5224,6 +5235,10 @@ msgstr ""
 "שיתוף;מארח;שרת;שם;מרוחק;רחוק;מרחוק;שולחן עבודה;מדיה;שמע;אודיו;קול;צליל;וידאו;"
 "סרטון;סרט;תמונות;צילומים;תצלומים;עיבוד;מעבד;"
 
+#: ../panels/sharing/networks.ui.h:1
+msgid "Networks"
+msgstr "רשתות"
+
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
 msgstr "הפעלה או נטרול של כניסה מרוחקת"
@@ -5231,18 +5246,6 @@ msgstr "הפעלה או נטרול של כניסה מרוחקת"
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
 msgid "Authentication is required to enable or disable remote login"
 msgstr "נדרש אימות כדי להפעיל או לנטרל כניסה מרחוק"
-
-#. Label
-#: ../panels/sharing/cc-sharing-networks.c:303
-msgid "No networks selected for sharing"
-msgstr "לא נבחרו רשתות לשיתוף"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../panels/sharing/networks.ui.h:1
-msgid "Networks"
-msgstr "רשתות"
 
 #: ../panels/sharing/sharing.ui.h:1
 msgid "_Computer Name"
@@ -5446,11 +5449,6 @@ msgstr "בדיקת ה_רמקולים"
 #: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "זיהוי עצמה מרבית"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1493
-#: ../panels/sound/gvc-sound-theme-chooser.c:564
-msgid "Name"
-msgstr "שם"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
@@ -6049,19 +6047,17 @@ msgid "_Full Name"
 msgstr "שם מ_לא"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Standard"
 msgstr "רגיל"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:898
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Administrator"
 msgstr "מנהל"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account _Type"
 msgstr "_סוג החשבון"
 
@@ -6078,12 +6074,12 @@ msgid "_Confirm"
 msgstr "_אישור"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:14
-#, fuzzy
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
 "resources on the internet."
-msgstr "התחברות ארגונית מאפשרת ניהול חשבון משתמש מרוכז לשימוש בהתקן זה."
+msgstr "התחברות ארגונית מאפשרת ניהול חשבון משתמש מרוכז לשימוש בהתקן זה. "
+"נתן גם להשתמש בחשבון זה לגישה למשאבי חברות באינטרנט."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
 #: ../panels/user-accounts/data/join-dialog.ui.h:9
@@ -6135,7 +6131,7 @@ msgid "Right little finger"
 msgstr "זרת ימנית"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:688
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "הפעלת התחברות באמצעות טביעת אצבע"
 
@@ -6171,10 +6167,6 @@ msgstr "הוספה או הסרה של משתמשים והחלפת הססמה ש�
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "כניסה;שם;טביעת אצבע;תמונה אישית;לוגו;פרצוף;פנים;ססמה;"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
-msgid "Login History"
-msgstr "היסטוריית כניסה"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: ../panels/user-accounts/data/join-dialog.ui.h:4
@@ -6232,32 +6224,24 @@ msgid "Set a password now"
 msgstr "הגדרת ססמה כעת"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-msgid "Add User Account"
-msgstr "הוספת חשבון משתמש"
+msgid "_Add User…"
+msgstr "הו_ספת משתמש…"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Remove User Account"
-msgstr "הסרת חשבון משתמש"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "A_utomatic Login"
 msgstr "כניסה _אוטומטית"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "User Icon"
 msgstr "סמל משתמש"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Last Login"
 msgstr "כניסה _אחרונה"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
-msgid "_Account Activity"
-msgstr "הפעלת _חשבון"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6508,32 +6492,32 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "מנהל"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:140
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr "אין מורשה לגשת להתקן. צור קשר עם מנהל המערכת שלך."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:142
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "ההתקן כבר נמצא בשימוש."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:144
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "אירעה שגיאה פנימית."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "פעיל"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:265
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "Delete registered fingerprints?"
 msgstr "האם למחוק את טביעות האצבע הרשומות?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "_Delete Fingerprints"
 msgstr "_מחיקת טביעות אצבע"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:275
+#: ../panels/user-accounts/um-fingerprint-dialog.c:274
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6541,15 +6525,15 @@ msgstr ""
 "האם ברצונך למחוק את טביעות האצבעות הרשומות שלך כדי לבטל את ההתחברות באמצעות "
 "טביעת אצבע?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:445
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "בוצע!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:506
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "אין אפשרות לגשת אל התקן '%s'"
@@ -6557,16 +6541,16 @@ msgstr "אין אפשרות לגשת אל התקן '%s'"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:589
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "לא ניתן להפעיל את לכידת האצבע על ההתקן '%s'"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:639
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "לא ניתן לגשת לקוראי טביעות האצבעות"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "נא ליצור קשר עם מנהל המערכת שלך לקבלת עזרה."
 
@@ -6575,7 +6559,7 @@ msgstr "נא ליצור קשר עם מנהל המערכת שלך לקבלת עז
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:722
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6584,11 +6568,11 @@ msgstr ""
 "כדי לאפשר התחברות באמצעות טביעת אצבע, עליך לשמור את אחת מטביעות האצבעות שלך, "
 "באמצעות ההתקן '%s'."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:729
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "נבחרת אצבע"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "נרשמות טביעות אצבעות עבור"
 
@@ -6642,13 +6626,20 @@ msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:249
+#: ../panels/user-accounts/um-history-dialog.c:250
 msgid "Session Ended"
 msgstr "הפעלה הסתיימה"
 
-#: ../panels/user-accounts/um-history-dialog.c:255
+#: ../panels/user-accounts/um-history-dialog.c:256
 msgid "Session Started"
 msgstr "הפעלה התחילה"
+
+#. Translators: This is the title of the "Account Activity" dialog.
+#. The %s is the user real name.
+#: ../panels/user-accounts/um-history-dialog.c:299
+#, c-format
+msgid "%s - Account Activity"
+msgstr "‏%s – הפעלת חשבון"
 
 #: ../panels/user-accounts/um-password-dialog.c:145
 msgid "Please choose another password."
@@ -6711,7 +6702,7 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל המתחם %s:‏ %s"
 
-#: ../panels/user-accounts/um-user-panel.c:237
+#: ../panels/user-accounts/um-user-panel.c:239
 msgid "Other Accounts"
 msgstr "חשבונות אחרים"
 
@@ -6789,15 +6780,15 @@ msgstr "אין"
 msgid "Logged in"
 msgstr "נכנסת"
 
-#: ../panels/user-accounts/um-user-panel.c:1283
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:1285
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6805,12 +6796,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "יצירת חשבון משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:1375
-#: ../panels/user-accounts/um-user-panel.c:1687
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6818,12 +6809,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:1397
-#: ../panels/user-accounts/um-user-panel.c:1692
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6831,7 +6822,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1601
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "החשבון שלי"
 
@@ -6853,7 +6844,8 @@ msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
 msgstr ""
-"שם המשתמש יכול להכיל רק אותיות קטנות ורישיות מהאלפבית האנגלי, ספרות ואחד  מהתווים: . - _"
+"שם המשתמש יכול להכיל רק אותיות קטנות ורישיות מהאלפבית האנגלי, ספרות ואחד  "
+"מהתווים: . - _"
 
 #: ../panels/user-accounts/um-utils.c:576
 msgid "This will be used to name your home folder and can't be changed."
@@ -7173,7 +7165,7 @@ msgstr "הלחצן הנמוך יותר"
 msgid "Tip Pressure Feel"
 msgstr "תחושת לחץ החוד"
 
-#: ../shell/alt/cc-window.c:763 ../shell/cc-window.c:53
+#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1478
 msgid "All Settings"
 msgstr "כל ההגדרות"
@@ -7286,10 +7278,69 @@ msgstr "ביטול החיפוש"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: ../shell/hostname-helper.c:189
-#, fuzzy
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
+
+#~ msgid "_Name:"
+#~ msgstr "_שם:"
+
+#~ msgid "Add Shortcut"
+#~ msgstr "הוספת קיצור דרך"
+
+#~ msgid "Remove Shortcut"
+#~ msgstr "הסרת קיצור דרך"
+
+#~ msgid "<Unknown Action>"
+#~ msgstr "<פעולה לא ידועה>"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
+#~ "Please try with a key such as Control, Alt or Shift at the same time."
+#~ msgstr ""
+#~ "לא ניתן להשתמש בקיצור הדרך „%s“ מכיוון שלא ניתן יהיה להקליד באמצעות מקש "
+#~ "זה.\n"
+#~ "נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
+
+#~ msgid ""
+#~ "The shortcut \"%s\" is already used for\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "קיצור הדרך „%s“ כבר משמש ל:\n"
+#~ "„%s“"
+
+#~ msgid ""
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
+#~ msgstr "אם קיצור הדרך יוקצה מחדש אל „%s“, קיצור הדרך „%s“ יבוטל."
+
+#~ msgid "_Reassign"
+#~ msgstr "הקצאה _מחדש"
+
+#~ msgid ""
+#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+#~ "automatically set it to \"%s\"?"
+#~ msgstr ""
+#~ "הקיצור „%s” משויך לקיצור „%s”. האם ברצונך להגדיר אותו באופן אוטומטי ל־"
+#~ "„%s”?"
+
+#~ msgid ""
+#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
+#~ "disabled if you move forward."
+#~ msgstr "‏„%s” משויך כעת אל „%s”, קיצור זה יושבת אם אפשרות זו תיבחר."
+
+#~ msgid "_Assign"
+#~ msgstr "ה_קצאה"
+
+#~ msgid "Login History"
+#~ msgstr "היסטוריית כניסה"
+
+#~ msgid "Add User Account"
+#~ msgstr "הוספת חשבון משתמש"
+
+#~ msgid "Remove User Account"
+#~ msgstr "הסרת חשבון משתמש"
 
 #~ msgid "Color"
 #~ msgstr "צבע"
@@ -7436,9 +7487,6 @@ msgstr "Hotspot"
 #~ msgctxt "universal access, contrast"
 #~ msgid "Color"
 #~ msgstr "צבע"
-
-#~ msgid "Two Finger Scrolling"
-#~ msgstr "גלילה בשתי אצבעות"
 
 #~ msgid "_Delay:"
 #~ msgstr "ה_שהיה:"
@@ -8759,9 +8807,6 @@ msgstr "Hotspot"
 
 #~ msgid "Take a screenshot"
 #~ msgstr "צילום המסך"
-
-#~ msgid "Shortcut"
-#~ msgstr "קיצור"
 
 #~ msgid "_Right-handed"
 #~ msgstr "_ימניים"
