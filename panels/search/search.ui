@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-      <object class="GtkBox" id="search_vbox">
+  <object class="GtkScrolledWindow" id="search_vbox">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="margin-start">134</property>
@@ -9,18 +12,9 @@
         <property name="margin-top">22</property>
         <property name="margin-bottom">22</property>
         <child>
-          <object class="GtkScrolledWindow" id="scrolled_window">
+          <object class="GtkFrame" id="search_frame">
             <property name="visible">True</property>
-            <property name="shadow-type">in</property>
-            <property name="vexpand">True</property>
-            <property name="width-request">400</property>
-            <property name="height-request">350</property>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkToolbar" id="search_toolbar">
@@ -120,4 +114,6 @@
           </packing>
         </child>
       </object>
+   </child>
+ </object>
 </interface>

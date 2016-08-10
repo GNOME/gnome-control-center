@@ -749,7 +749,7 @@ cc_search_panel_init (CcSearchPanel *self)
 {
   GError    *error;
   GtkWidget *widget;
-  GtkWidget *scrolled_window;
+  GtkWidget *frame;
   guint res;
 
   self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, CC_TYPE_SEARCH_PANEL, CcSearchPanelPrivate);
@@ -770,11 +770,11 @@ cc_search_panel_init (CcSearchPanel *self)
       return;
     }
 
-  scrolled_window = WID ("scrolled_window");
+  frame = WID ("search_frame");
   widget = GTK_WIDGET (gtk_list_box_new ());
   gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
-  gtk_container_add (GTK_CONTAINER (scrolled_window), widget);
+  gtk_container_add (GTK_CONTAINER (frame), widget);
   self->priv->list_box = widget;
   gtk_widget_show (widget);
 
