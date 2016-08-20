@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-01 07:36+0000\n"
-"PO-Revision-Date: 2016-08-07 18:55+0200\n"
+"POT-Creation-Date: 2016-08-16 20:59+0000\n"
+"PO-Revision-Date: 2016-08-20 11:07+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -125,8 +125,8 @@ msgstr ""
 #: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:707
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_Anule"
 
@@ -3714,40 +3714,24 @@ msgstr "Chat"
 msgid "Resources"
 msgstr "Risorsis"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "Erôr tal jentrâ tal account"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "Lis credenziâi a son scjadudis."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Eseguìs acès par abilitâ chest account."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "_Jentre"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "Erôr tal creâ l'account"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "Erôr tal gjava l'account"
 
 # Metût plurâl par risolvi masculin/feminin
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr "Sigûrs di volê gjavâ chest account?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "In cheste maniere nol vegnarà gjavât l'account tal server."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Gjave"
 
@@ -4782,19 +4766,19 @@ msgstr "Dis_vuede scovacere"
 
 #: ../panels/privacy/cc-privacy-panel.c:1076
 msgid "Delete all the temporary files?"
-msgstr "Eliminâ ducj i file temporaniis?"
+msgstr "Eliminâ ducj i file temporanis?"
 
 #: ../panels/privacy/cc-privacy-panel.c:1077
 msgid "All the temporary files will be permanently deleted."
-msgstr "Ducj i file temporaniis a vegnaran eliminâts in maniere definitive."
+msgstr "Ducj i file temporanis a vegnaran eliminâts in maniere definitive."
 
 #: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
-msgstr "_Nete file temporaniis"
+msgstr "_Nete file temporanis"
 
 #: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
-msgstr "Nete scovacere e file temporaniis"
+msgstr "Nete scovacere e file temporanis"
 
 #: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
@@ -4927,7 +4911,7 @@ msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
 msgstr ""
-"Nete in automatic la scovacere e i file temporaniis par tegnî il computer "
+"Nete in automatic la scovacere e i file temporanis par tegnî il computer "
 "libar di informazions sensibilis no necessaris."
 
 #: ../panels/privacy/privacy.ui.h:31
@@ -4936,7 +4920,7 @@ msgstr "Disv_uede in automatic la scovacere"
 
 #: ../panels/privacy/privacy.ui.h:32
 msgid "Automatically purge Temporary _Files"
-msgstr "Nete in automatic i file _temporaniis"
+msgstr "Nete in automatic i file _temporanis"
 
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
@@ -5001,12 +4985,12 @@ msgid "Other"
 msgstr "Altri"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1092
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Al è necessari tornâ a inviâ la session par aplicâ lis modifichis"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Torne invie cumò"
 
@@ -6128,13 +6112,11 @@ msgstr "Non _complet"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Standard"
 msgstr "Normâl"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Administrator"
 msgstr "Aministradôr"
 
@@ -6698,7 +6680,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -6706,7 +6688,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:847
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6792,26 +6774,26 @@ msgstr "Impussibil tacâsi al domini %s: %s"
 msgid "Other Accounts"
 msgstr "Altris account"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Eliminazion utent falide"
 
-#: ../panels/user-accounts/um-user-panel.c:509
-#: ../panels/user-accounts/um-user-panel.c:568
-#: ../panels/user-accounts/um-user-panel.c:620
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Revoche dal utent gjestît di rimot falide"
 
-#: ../panels/user-accounts/um-user-panel.c:676
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Nol è permetût eliminâ il propri account."
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s nol à ancjemò terminât la session"
 
-#: ../panels/user-accounts/um-user-panel.c:689
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6819,64 +6801,64 @@ msgstr ""
 "Eliminâ un utent intant che la sô session e je ancjemò in cors, al pues "
 "lassâ il sisteme in stât incoerent."
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Tegnî i file di %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 "Al è pussibil tegnî la cartele home, i spool di pueste e i varis file "
-"temporaniis cuant che si elimine un account utent."
+"temporanis cuant che si elimine un account utent."
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Scancele file"
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Ten file"
 
-#: ../panels/user-accounts/um-user-panel.c:720
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Sigûrs di revocâ l'account di %s gjestît di rimot?"
 
-#: ../panels/user-accounts/um-user-panel.c:724
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Elimine"
 
-#: ../panels/user-accounts/um-user-panel.c:776
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Account disabilitât"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Di impostâ al prossim acès"
 
-#: ../panels/user-accounts/um-user-panel.c:787
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nissun"
 
-#: ../panels/user-accounts/um-user-panel.c:836
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Acès eseguît"
 
-#: ../panels/user-accounts/um-user-panel.c:1295
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Comunicazion cun servizi account falide"
 
-#: ../panels/user-accounts/um-user-panel.c:1297
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sigurâsi che AccountService al sedi instalât e abilitât."
 
-#: ../panels/user-accounts/um-user-panel.c:1338
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6884,12 +6866,12 @@ msgstr ""
 "Par aplicâ cambiaments,\n"
 "fâs prime clic su le icone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Cree un account utent"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1681
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6897,12 +6879,12 @@ msgstr ""
 "Par creâ un account utent,\n"
 "fas prime clic su le icone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1399
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Elimine l'account utent selezionât"
 
-#: ../panels/user-accounts/um-user-panel.c:1411
-#: ../panels/user-accounts/um-user-panel.c:1686
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6910,7 +6892,7 @@ msgstr ""
 "Par eliminâ l'account utent selezionât,\n"
 "fâs prime clic su le icone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1595
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Account personâl"
 
@@ -7377,6 +7359,18 @@ msgstr "Anule ricercje"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
+
+#~ msgid "Error logging into the account"
+#~ msgstr "Erôr tal jentrâ tal account"
+
+#~ msgid "Credentials have expired."
+#~ msgstr "Lis credenziâi a son scjadudis."
+
+#~ msgid "Sign in to enable this account."
+#~ msgstr "Eseguìs acès par abilitâ chest account."
+
+#~ msgid "_Sign In"
+#~ msgstr "_Jentre"
 
 #~ msgid "_Name:"
 #~ msgstr "_Non:"
