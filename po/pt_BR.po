@@ -32,8 +32,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-26 09:27+0000\n"
-"PO-Revision-Date: 2016-06-26 18:21-0200\n"
+"POT-Creation-Date: 2016-08-14 10:19+0000\n"
+"PO-Revision-Date: 2016-08-22 02:06-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -131,7 +131,6 @@ msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui"
 #: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2206
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
@@ -140,14 +139,14 @@ msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui"
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:982
+#: ../panels/privacy/cc-privacy-panel.c:1032
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/join-dialog.ui.h:2
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/um-user-panel.c:705
@@ -714,7 +713,7 @@ msgstr ""
 "<a href=\"windows\">Microsoft Windows</a>."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Resumo"
 
@@ -726,7 +725,7 @@ msgstr "Adicionar perfil"
 msgid "_Import File…"
 msgstr "_Importar arquivo…"
 
-#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:31
 #: ../panels/network/connection-editor/net-connection-editor.c:546
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -1144,11 +1143,13 @@ msgstr "Espelhadas"
 msgid "Primary"
 msgstr "Primária"
 
+# Painel "Telas", quando a tela está conectada, mas Desativada. Evitei
+# desligada, pois ela pode estar ligada sem estar sendo usada. -- Rafael
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/privacy/cc-privacy-panel.c:174
+#: ../panels/privacy/cc-privacy-panel.c:241
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1156,7 +1157,7 @@ msgstr "Primária"
 #: ../panels/universal-access/cc-ua-panel.c:786
 #: ../panels/universal-access/uap.ui.h:6
 msgid "Off"
-msgstr "Off"
+msgstr "Desativada"
 
 #: ../panels/display/cc-display-panel.c:583
 msgid "Secondary"
@@ -1294,51 +1295,61 @@ msgstr "Wayland"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: ../panels/info/cc-info-panel.c:433
+#: ../panels/info/cc-info-panel.c:481
+#, c-format
+msgid "%s %d-bit (Build ID: %s)"
+msgstr "%s %d bits (ID de compilação: %s)"
+
+#: ../panels/info/cc-info-panel.c:483
+#, c-format
+msgid "%d-bit (Build ID: %s)"
+msgstr "%d bits (ID de compilação: %s)"
+
+#: ../panels/info/cc-info-panel.c:491
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:435
+#: ../panels/info/cc-info-panel.c:493
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1115
+#: ../panels/info/cc-info-panel.c:1174
 msgid "Ask what to do"
 msgstr "Pergunte o que fazer"
 
-#: ../panels/info/cc-info-panel.c:1119
+#: ../panels/info/cc-info-panel.c:1178
 msgid "Do nothing"
 msgstr "Não fazer nada"
 
-#: ../panels/info/cc-info-panel.c:1123
+#: ../panels/info/cc-info-panel.c:1182
 msgid "Open folder"
 msgstr "Abrir pasta"
 
-#: ../panels/info/cc-info-panel.c:1214
+#: ../panels/info/cc-info-panel.c:1273
 msgid "Other Media"
 msgstr "Outra mídia"
 
-#: ../panels/info/cc-info-panel.c:1245
+#: ../panels/info/cc-info-panel.c:1304
 msgid "Select an application for audio CDs"
 msgstr "Selecione um aplicativo para CDs de áudio"
 
-#: ../panels/info/cc-info-panel.c:1246
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for video DVDs"
 msgstr "Selecione um aplicativo para DVDs de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1247
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Selecione um aplicativo para executar quando um reprodutor de música é "
 "conectado"
 
-#: ../panels/info/cc-info-panel.c:1248
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a camera is connected"
 msgstr "Selecione um aplicativo para executar quando uma câmera é conectada"
 
-#: ../panels/info/cc-info-panel.c:1249
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application for software CDs"
 msgstr "Selecione um aplicativo para CDs de software"
 
@@ -1347,72 +1358,71 @@ msgstr "Selecione um aplicativo para CDs de software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1261
+#: ../panels/info/cc-info-panel.c:1320
 msgid "audio DVD"
 msgstr "DVD de áudio"
 
-#: ../panels/info/cc-info-panel.c:1262
+#: ../panels/info/cc-info-panel.c:1321
 msgid "blank Blu-ray disc"
 msgstr "Disco Blu-ray vazio"
 
-#: ../panels/info/cc-info-panel.c:1263
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank CD disc"
 msgstr "Disco CD vazio"
 
-#: ../panels/info/cc-info-panel.c:1264
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank DVD disc"
 msgstr "Disco DVD vazio"
 
-#: ../panels/info/cc-info-panel.c:1265
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank HD DVD disc"
 msgstr "Disco HD DVD vazio"
 
-#: ../panels/info/cc-info-panel.c:1266
+#: ../panels/info/cc-info-panel.c:1325
 msgid "Blu-ray video disc"
 msgstr "Disco Blu-ray de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1326
 msgid "e-book reader"
 msgstr "Leitor de e-book"
 
-#: ../panels/info/cc-info-panel.c:1268
+#: ../panels/info/cc-info-panel.c:1327
 msgid "HD DVD video disc"
 msgstr "Disco HD DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1269
+#: ../panels/info/cc-info-panel.c:1328
 msgid "Picture CD"
 msgstr "CD de imagem"
 
-#: ../panels/info/cc-info-panel.c:1270
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1271
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Video CD"
 msgstr "CD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1272
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Windows software"
 msgstr "Software do Windows"
 
-#: ../panels/info/cc-info-panel.c:1395
-#: ../panels/keyboard/keyboard-shortcuts.c:1949
+#: ../panels/info/cc-info-panel.c:1454
 msgid "Section"
 msgstr "Seção"
 
-#: ../panels/info/cc-info-panel.c:1404 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Visão geral"
 
-#: ../panels/info/cc-info-panel.c:1410 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1469 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Aplicativos padrão"
 
-#: ../panels/info/cc-info-panel.c:1415 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1474 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Mídia removível"
 
-#: ../panels/info/cc-info-panel.c:1440
+#: ../panels/info/cc-info-panel.c:1499
 #, c-format
 msgid "Version %s"
 msgstr "Versão %s"
@@ -1602,7 +1612,7 @@ msgid "Launch help browser"
 msgstr "Lançar o navegador de ajuda"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:274
-#: ../shell/alt/cc-window.c:827 ../shell/cc-window.c:1584
+#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1584
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Configurações"
@@ -1711,14 +1721,24 @@ msgstr "Diminuir tamanho do texto"
 msgid "High contrast on or off"
 msgstr "Ativar ou desativar alto contraste"
 
+#: ../panels/keyboard/cc-keyboard-manager.c:514
+#: ../panels/keyboard/cc-keyboard-manager.c:522
+#: ../panels/keyboard/cc-keyboard-manager.c:830
+msgid "Custom Shortcuts"
+msgstr "Atalhos personalizados"
+
+#. This label is displayed in a treeview cell displaying
+#. * a disabled accelerator key combination.
+#.
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1220
+#: ../panels/keyboard/keyboard-shortcuts.c:417
+#: ../panels/keyboard/shortcut-editor.ui.h:1
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:213
 msgid "Disabled"
 msgstr "Desabilitado"
 
@@ -1742,6 +1762,30 @@ msgstr "Tecla de composição"
 msgid "Modifiers-only switch to next source"
 msgstr "Modificadores alternam para próxima fonte"
 
+#: ../panels/keyboard/cc-keyboard-panel.c:215
+msgid "Reset the shortcut to its default value"
+msgstr "Redefine o atalho para seu valor padrão"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#, c-format
+msgid ""
+"%s is already being used for <b>%s</b>. If you replace it, %s will be "
+"disabled"
+msgstr ""
+"%s está sendo usado por <b>%s</b>. Se você substituí-lo, %s será desabilitada"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
+#, c-format
+msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+msgstr ""
+"O atalho de teclado para <b>%s</b>. Digite um novo atalho para alterá-lo."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#| msgid "Custom Shortcut"
+msgid "Add Custom Shortcut"
+msgstr "Adicionar atalho personalizado"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Key­board"
@@ -1758,26 +1802,6 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Atalho;Repetir;Piscar;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "Custom Shortcut"
-msgstr "Atalho personalizado"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-msgid "_Name:"
-msgstr "_Nome:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
-msgid "C_ommand:"
-msgstr "C_omando:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Add Shortcut"
-msgstr "Adicionar atalho"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Remove Shortcut"
-msgstr "Excluir atalho"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1785,67 +1809,67 @@ msgstr ""
 "Para editar um atalho, clique na linha e mantenha pressionada as novas "
 "teclas ou pressione a tecla Backspace para limpar."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:633
-#: ../panels/keyboard/keyboard-shortcuts.c:641
-msgid "Custom Shortcuts"
-msgstr "Atalhos personalizados"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#| msgid "Keyboard Shortcuts"
+msgid "No keyboard shortcut found"
+msgstr "Nenhum atalho de teclado localizado"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:858
-msgid "<Unknown Action>"
-msgstr "<Ação desconhecida>"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Try a different search"
+msgstr "Tente uma pesquisa diferente"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1359
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"O atalho \"%s\" não pode ser usado porque se tornaria impossível digitar "
-"usando esta tecla.\n"
-"Por favor, tente usar uma tecla como Control, Alt ou Shift simultaneamente."
+#: ../panels/keyboard/shortcut-editor.ui.h:2
+#: ../panels/network/connection-editor/ce-page-reset.c:89
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Restaurar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1389
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"O atalho \"%s\" já está sendo usado por\n"
-"\"%s\""
+#: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
+msgid "Name"
+msgstr "Nome"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1394
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr ""
-"Se você reatribuir o atalho para \"%s\", o atalho \"%s\" será desativado."
+#: ../panels/keyboard/shortcut-editor.ui.h:4
+#| msgid "C_ommand:"
+msgid "Command"
+msgstr "Comando"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1400
-msgid "_Reassign"
-msgstr "_Reatribuir"
+#: ../panels/keyboard/shortcut-editor.ui.h:5
+#| msgid "Shortcuts"
+msgid "Shortcut"
+msgstr "Atalho"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
-#, c-format
-msgid ""
-"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
-"automatically set it to \"%s\"?"
-msgstr ""
-"O atalho \"%s\" possui um atalho \"%s\" associado. Você deseja defini-lo "
-"automaticamente para \"%s\"?"
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+msgid "Edit"
+msgstr "Editar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1451
-#, c-format
-msgid ""
-"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
-"if you move forward."
-msgstr ""
-"\"%s\" está atualmente associado a \"%s\", este atalho será desativado caso "
-"você prossiga."
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/network/network-wifi.ui.h:20
+msgid "None"
+msgstr "Nenhum"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1458
-msgid "_Assign"
-msgstr "A_tribuir"
+#: ../panels/keyboard/shortcut-editor.ui.h:8
+#| msgid "_Remove"
+msgid "Remove"
+msgstr "Remover"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:276
+#: ../panels/network/connection-editor/ce-page-ip6.c:277
+msgid "Add"
+msgstr "Adicionar"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
+#| msgid "_Replace"
+msgid "Replace"
+msgstr "Substituir"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1928,6 +1952,11 @@ msgid "Tap to Click"
 msgstr "Toque para clicar"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgid "Two Finger Scrolling"
+msgid "Two-finger Scrolling"
+msgstr "Rolagem com dois dedos"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "Edge Scrolling"
 msgstr "Rolagem na borda"
 
@@ -2161,11 +2190,6 @@ msgstr "Gateway"
 msgid "Delete Address"
 msgstr "Excluir endereço"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:276
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
-msgid "Add"
-msgstr "Adicionar"
-
 #: ../panels/network/connection-editor/ce-page-ip4.c:339
 #: ../panels/network/connection-editor/ce-page-ip6.c:334
 msgid "Server"
@@ -2196,7 +2220,7 @@ msgstr "Automático (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:201
 msgid "Manual"
 msgstr "Manual"
 
@@ -2220,7 +2244,7 @@ msgstr "Prefixo"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:201
 msgid "Automatic"
 msgstr "Automático"
 
@@ -2232,11 +2256,6 @@ msgstr "Automático, somente DHCP"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
-
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Restaurar"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2460,7 +2479,6 @@ msgid "Import from file…"
 msgstr "Importar de arquivo…"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:817
-#| msgid "%s VPN"
 msgid "Add VPN"
 msgstr "Adicionar VPN"
 
@@ -2856,13 +2874,9 @@ msgstr "detalhes"
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
 #: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "_Password"
 msgstr "_Senha"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "None"
-msgstr "Nenhum"
 
 #: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
@@ -3642,8 +3656,8 @@ msgstr "_Tipo"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/privacy/cc-privacy-panel.c:174
+#: ../panels/privacy/cc-privacy-panel.c:241
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3744,39 +3758,23 @@ msgstr "Bate-papo"
 msgid "Resources"
 msgstr "Recursos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "Erro ao iniciar sessão com a conta"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "As credenciais expiraram."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Autentique para habilitar esta conta."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "_Autenticar"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "Erro ao criar conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "Erro ao remover conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr "Tem certeza de que deseja remover a conta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "Isso não irá remover a conta no servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Remover"
 
@@ -3805,6 +3803,7 @@ msgid "No online accounts configured"
 msgstr "Nenhuma conta on-line configurada"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Remove Account"
 msgstr "Remover conta"
 
@@ -4170,11 +4169,6 @@ msgstr "Energia da _bateria"
 #: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "Atrasar"
-
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Cancelar"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4776,70 +4770,70 @@ msgstr ""
 "Sinto muito! O serviço de impressão do sistema\n"
 "parece não estar disponível."
 
-#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Tela de bloqueio"
 
-#: ../panels/privacy/cc-privacy-panel.c:420
+#: ../panels/privacy/cc-privacy-panel.c:422
 msgid "In use"
 msgstr "Em uso"
 
-#: ../panels/privacy/cc-privacy-panel.c:425
+#: ../panels/privacy/cc-privacy-panel.c:427
 msgctxt "Location services status"
 msgid "On"
 msgstr "Ligado"
 
-#: ../panels/privacy/cc-privacy-panel.c:426
+#: ../panels/privacy/cc-privacy-panel.c:428
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Desligado"
 
-#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Serviços de localização"
 
-#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Uso & histórico"
 
-#: ../panels/privacy/cc-privacy-panel.c:1001
+#: ../panels/privacy/cc-privacy-panel.c:1051
 msgid "Empty all items from Trash?"
 msgstr "Esvaziar todos os itens da lixeira?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1002
+#: ../panels/privacy/cc-privacy-panel.c:1052
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Todos os itens na lixeira serão permanentemente excluídos."
 
-#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Es_vaziar lixeira"
 
-#: ../panels/privacy/cc-privacy-panel.c:1026
+#: ../panels/privacy/cc-privacy-panel.c:1076
 msgid "Delete all the temporary files?"
 msgstr "Excluir todos os arquivos temporários?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1027
+#: ../panels/privacy/cc-privacy-panel.c:1077
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos os arquivos temporários serão permanentemente excluídos."
 
-#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Excluir _permanentemente arquivos temporários"
 
-#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Excluir permanentemente arquivos da lixeira e temporários"
 
-#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Utilização do software"
 
-#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Relatório de Problema"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1145
+#: ../panels/privacy/cc-privacy-panel.c:1195
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4848,7 +4842,7 @@ msgstr ""
 "Enviar relatórios de problemas técnicos nos ajuda a melhorar o %s. Os "
 "relatórios são enviados anonimamente e não contém dados pessoais."
 
-#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Política de privacidade"
 
@@ -5035,13 +5029,13 @@ msgid "Other"
 msgstr "Outro"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1080
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Sua sessão precisa ser reiniciada para que as alterações sejam efetivadas"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1084
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Reiniciar agora"
 
@@ -5151,7 +5145,7 @@ msgid "Left+Right Alt"
 msgstr "Alt da esquerda+direita"
 
 #: ../panels/region/region.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -5258,20 +5252,21 @@ msgstr "Mover para baixo"
 msgid "Preferences"
 msgstr "Preferências"
 
-# Trata-se daquele "switch" de on e off? Não sei.
-# Caso sim, tem que manter o original, "on". Senão, traduzir.
+#. Label
+#: ../panels/sharing/cc-sharing-networks.c:303
+msgid "No networks selected for sharing"
+msgstr "Sem redes selecionadas para compartilhamento"
+
 #: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
-msgstr "On"
+msgstr "Ligada"
 
-# Trata-se daquele "switch" de on e off? Não sei.
-# Caso sim, tem que manter o original, "off". Senão, traduzir.
 #: ../panels/sharing/cc-sharing-panel.c:265
 #: ../panels/sharing/cc-sharing-panel.c:292
 msgctxt "service is disabled"
 msgid "Off"
-msgstr "Off"
+msgstr "Desligada"
 
 #: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is enabled"
@@ -5343,6 +5338,10 @@ msgstr ""
 "compartilhar;compartilhamento;ssh;máquina;host;nome;remoto;desktop;área de "
 "trabalho;mídia;áudio;vídeo;imagens;fotos;filmes;servidor;renderizador;"
 
+#: ../panels/sharing/networks.ui.h:1
+msgid "Networks"
+msgstr "Redes"
+
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
 msgstr "Habilitar ou desabilitar sessão remota"
@@ -5350,18 +5349,6 @@ msgstr "Habilitar ou desabilitar sessão remota"
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
 msgid "Authentication is required to enable or disable remote login"
 msgstr "É necessário autenticação para habilitar ou desabilitar sessão remota"
-
-#. Label
-#: ../panels/sharing/cc-sharing-networks.c:303
-msgid "No networks selected for sharing"
-msgstr "Sem redes selecionadas para compartilhamento"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../panels/sharing/networks.ui.h:1
-msgid "Networks"
-msgstr "Redes"
 
 #: ../panels/sharing/sharing.ui.h:1
 msgid "_Computer Name"
@@ -5566,11 +5553,6 @@ msgstr "_Testar alto-falantes"
 #: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "Detectar pico"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1493
-#: ../panels/sound/gvc-sound-theme-chooser.c:564
-msgid "Name"
-msgstr "Nome"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
@@ -6172,19 +6154,17 @@ msgid "_Full Name"
 msgstr "Nome _completo"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Standard"
 msgstr "Padrão"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:898
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Administrator"
 msgstr "Administrador"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account _Type"
 msgstr "_Tipo de conta"
 
@@ -6260,7 +6240,7 @@ msgid "Right little finger"
 msgstr "Dedo pequeno direito"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:688
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Habilita o início de sessão por impressão digital"
 
@@ -6297,10 +6277,6 @@ msgstr "Adicionar ou remover usuários e alterar sua senha"
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr ""
 "Iniciar sessão;Sessão;Nome;Impressão digital;Avatar;Logotipo;Face;Senha;"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
-msgid "Login History"
-msgstr "Histórico de início de sessão"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: ../panels/user-accounts/data/join-dialog.ui.h:4
@@ -6358,33 +6334,25 @@ msgid "Set a password now"
 msgstr "Definir uma senha agora"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-msgid "Add User Account"
-msgstr "Adicionar conta de usuário"
+#| msgid "Add User"
+msgid "_Add User…"
+msgstr "_Adicionar usuário…"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Remove User Account"
-msgstr "Excluir conta de usuário"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "A_utomatic Login"
 msgstr "Início a_utomático de sessão"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Fingerprint Login"
 msgstr "Início de sessão por _impressão digital"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "User Icon"
 msgstr "Ícone do usuário"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Last Login"
 msgstr "Última sessão"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
-#| msgid "Account _Type"
-msgid "_Account Activity"
-msgstr "_Atividade da conta"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6635,34 +6603,34 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrador"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:140
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Você não tem permissão para acessar o dispositivo. Contate seu administrador "
 "de sistemas."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:142
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "O dispositivo já está em uso."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:144
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "Ocorreu um erro interno."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:265
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "Delete registered fingerprints?"
 msgstr "Excluir impressões digitais registradas?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "_Delete Fingerprints"
 msgstr "E_xcluir impressões digitais"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:275
+#: ../panels/user-accounts/um-fingerprint-dialog.c:274
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6670,15 +6638,15 @@ msgstr ""
 "Você tem certeza de que quer excluir suas impressões digitais registradas "
 "porque o início de sessão por impressão digital está desabilitado?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:445
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Feito!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:506
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Não foi possível acessar o dispositivo \"%s\""
@@ -6686,18 +6654,18 @@ msgstr "Não foi possível acessar o dispositivo \"%s\""
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:589
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr ""
 "Não foi possível iniciar o dispositivo de captura de impressões digitais \"%s"
 "\""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:639
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "Não foi possível acessar qualquer leitor de impressões digitais"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Por favor, contate seu administrador de sistemas para ajuda."
 
@@ -6706,7 +6674,7 @@ msgstr "Por favor, contate seu administrador de sistemas para ajuda."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:722
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6715,11 +6683,11 @@ msgstr ""
 "Para habilitar o início de sessão por impressão digital, você precisa salvar "
 "uma de suas impressões digitais, usando o dispositivo \"%s\"."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:729
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "Selecionando dedo"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "Inscrição de impressões digitais"
 
@@ -6773,13 +6741,20 @@ msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:249
+#: ../panels/user-accounts/um-history-dialog.c:250
 msgid "Session Ended"
 msgstr "Sessão finalizada"
 
-#: ../panels/user-accounts/um-history-dialog.c:255
+#: ../panels/user-accounts/um-history-dialog.c:256
 msgid "Session Started"
 msgstr "Sessão iniciada"
+
+#. Translators: This is the title of the "Account Activity" dialog.
+#. The %s is the user real name.
+#: ../panels/user-accounts/um-history-dialog.c:299
+#, c-format
+msgid "%s - Account Activity"
+msgstr "%s - Atividade da conta"
 
 #: ../panels/user-accounts/um-password-dialog.c:145
 msgid "Please choose another password."
@@ -6842,7 +6817,7 @@ msgstr "Senha inválida, por favor tente novamente"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Não foi possível conectar ao domínio %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:237
+#: ../panels/user-accounts/um-user-panel.c:239
 msgid "Other Accounts"
 msgstr "Outras contas"
 
@@ -6923,17 +6898,17 @@ msgstr "Nenhum"
 msgid "Logged in"
 msgstr "Acesso autorizado"
 
-#: ../panels/user-accounts/um-user-panel.c:1283
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Falhou ao contactar o serviço de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:1285
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Por favor, certifique-se de que o Serviço de Contas esteja instalado "
 "corretamente."
 
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6941,12 +6916,12 @@ msgstr ""
 "Para fazer alterações,\n"
 "clique no ícone * primeiro"
 
-#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Cria uma conta de usuário"
 
-#: ../panels/user-accounts/um-user-panel.c:1375
-#: ../panels/user-accounts/um-user-panel.c:1687
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6954,12 +6929,12 @@ msgstr ""
 "Para criar uma conta de usuário,\n"
 "clique primeiro no ícone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Exclui a conta de usuário selecionada"
 
-#: ../panels/user-accounts/um-user-panel.c:1397
-#: ../panels/user-accounts/um-user-panel.c:1692
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6967,7 +6942,7 @@ msgstr ""
 "Para excluir a conta de usuário selecionada,\n"
 "clique primeiro no ícone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1601
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Minha conta"
 
@@ -7318,7 +7293,7 @@ msgstr "Botão inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensação de pressão da ponta"
 
-#: ../shell/alt/cc-window.c:763 ../shell/cc-window.c:53
+#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1478
 msgid "All Settings"
 msgstr "Todas configurações"
@@ -7434,6 +7409,85 @@ msgstr "Cancelar pesquisa"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Ponto de acesso"
+
+#~ msgid "_Name:"
+#~ msgstr "_Nome:"
+
+#~ msgid "Add Shortcut"
+#~ msgstr "Adicionar atalho"
+
+#~ msgid "Remove Shortcut"
+#~ msgstr "Excluir atalho"
+
+#~ msgid "<Unknown Action>"
+#~ msgstr "<Ação desconhecida>"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
+#~ "Please try with a key such as Control, Alt or Shift at the same time."
+#~ msgstr ""
+#~ "O atalho \"%s\" não pode ser usado porque se tornaria impossível digitar "
+#~ "usando esta tecla.\n"
+#~ "Por favor, tente usar uma tecla como Control, Alt ou Shift "
+#~ "simultaneamente."
+
+#~ msgid ""
+#~ "The shortcut \"%s\" is already used for\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "O atalho \"%s\" já está sendo usado por\n"
+#~ "\"%s\""
+
+#~ msgid ""
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
+#~ msgstr ""
+#~ "Se você reatribuir o atalho para \"%s\", o atalho \"%s\" será desativado."
+
+#~ msgid "_Reassign"
+#~ msgstr "_Reatribuir"
+
+#~ msgid ""
+#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+#~ "automatically set it to \"%s\"?"
+#~ msgstr ""
+#~ "O atalho \"%s\" possui um atalho \"%s\" associado. Você deseja defini-lo "
+#~ "automaticamente para \"%s\"?"
+
+#~ msgid ""
+#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
+#~ "disabled if you move forward."
+#~ msgstr ""
+#~ "\"%s\" está atualmente associado a \"%s\", este atalho será desativado "
+#~ "caso você prossiga."
+
+#~ msgid "_Assign"
+#~ msgstr "A_tribuir"
+
+#~ msgid "Error logging into the account"
+#~ msgstr "Erro ao iniciar sessão com a conta"
+
+#~ msgid "Credentials have expired."
+#~ msgstr "As credenciais expiraram."
+
+#~ msgid "Sign in to enable this account."
+#~ msgstr "Autentique para habilitar esta conta."
+
+#~ msgid "_Sign In"
+#~ msgstr "_Autenticar"
+
+#~ msgid "Add User Account"
+#~ msgstr "Adicionar conta de usuário"
+
+#~ msgid "Remove User Account"
+#~ msgstr "Excluir conta de usuário"
+
+#~ msgid "_Account Activity"
+#~ msgstr "_Atividade da conta"
+
+#~ msgid "Login History"
+#~ msgstr "Histórico de início de sessão"
 
 #~ msgid "Add Network Connection"
 #~ msgstr "Adicionar conexão de rede"
@@ -7589,9 +7643,6 @@ msgstr "Ponto de acesso"
 #~ msgid "Color"
 #~ msgstr "Colorido"
 
-#~ msgid "Two Finger Scrolling"
-#~ msgstr "Rolagem com dois dedos"
-
 #~ msgid "_Delay:"
 #~ msgstr "Interv_alo:"
 
@@ -7613,9 +7664,6 @@ msgstr "Ponto de acesso"
 
 #~ msgid "S_peed:"
 #~ msgstr "V_elocidade:"
-
-#~ msgid "Shortcuts"
-#~ msgstr "Atalhos"
 
 #~ msgid "Test Your Settings"
 #~ msgstr "Testar suas configurações"
