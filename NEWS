@@ -1,3 +1,88 @@
+===============
+Version 3.21.90
+===============
+
+- Fix truncated panel names for larger fonts
+- Port to libnm 1.2
+- Translation updates
+
+Display:
+- Add option to enable and disable overscan compensation when
+  supported by the driver
+- Ensure only one output is set as primary
+- Separate interlaced from normal modes
+
+Info:
+- Fetch renderer information from gnome-session
+- Show OS build-id
+
+Keyboard:
+- Update to a new design
+
+Mouse:
+- Show only relevant widgets for the hardware we're able to detect
+- Detect and warn if we're running on the synaptics driver
+- Make all listbox rows unactivatable
+- Remove superfluous GtkListBoxRow
+- Allow keyboard navigation/focus to the Touchpad section switches
+- Offer a separate option for edge scrolling
+- Don't allow two-finger and edge scrolling at the same time
+
+Network:
+- Use VPN plugin paths as specified in the .name files
+- Ensure the Wifi list is updated as networks appear/disapper
+- Hide firewall zone combo when firewalld is not running
+- Remove bridge, bond, team, VLAN and virtual devices support - these
+  are most useful on non-desktop systems for which a UI like Cockpit
+  is better suited
+- Remove the first page of the "Add Connection" wizard
+- Update wireless-security UI from network-manager-applet
+- Remember "Ignore CA certificate"
+- Fix removed connections not disappearing
+- Fix hotspot silently failing with long hostname
+- Fix several crashes
+
+Online Accounts:
+- Don't use deprecated GoaProviderGroup API
+- Add a Calendar group
+- Let goa_provider_show_account create the full UI
+
+Power:
+- Translate the "When the Power Button is pressed" drop-down
+- Show "Suspend & Power Off" section only when relevant
+
+Printers:
+- Add compatibility code for older cups
+- Use a panel wide page for empty state
+- Present spinner while populating the panel
+- Rename printers asynchronously
+- Added new async API to check availability of maintenance commands
+- Check all supported CUPS commands, not just the first one
+
+Privacy:
+- React to changes in permissions store
+- Various layout and cosmetic cleanups
+
+Region:
+- Reset the input chooser on escape
+- Improve widget spacing
+
+Search:
+- Work around applications not shipping icons at all sizes
+- Introduce the new Search Locations dialog
+
+Sharing:
+- Update to a new design
+
+Universal Access:
+- Specify a window when testing visual bell
+- Correct label for "Sound Keys"
+- Allow keyboard navigation/focus to the settings switches
+
+User Accounts:
+- Update to a new design
+- Fix missing records in the history dialog
+
 ==============
 Version 3.20.0
 ==============
