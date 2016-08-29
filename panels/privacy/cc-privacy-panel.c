@@ -104,6 +104,14 @@ get_os_name (void)
        g_free (buffer);
     }
 
+  if (name && *name != '\0')
+    {
+      char *tmp;
+      tmp = g_shell_unquote (name, NULL);
+      g_free (name);
+      name = tmp;
+    }
+
   if (name == NULL)
     name = g_strdup ("GNOME");
 
@@ -135,6 +143,14 @@ get_privacy_policy_url (void)
          }
 
        g_free (buffer);
+    }
+
+  if (name && *name != '\0')
+    {
+      char *tmp;
+      tmp = g_shell_unquote (name, NULL);
+      g_free (name);
+      name = tmp;
     }
 
   if (name == NULL)
