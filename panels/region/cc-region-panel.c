@@ -1482,8 +1482,8 @@ setup_input_section (CcRegionPanel *self)
         gtk_list_box_set_header_func (GTK_LIST_BOX (priv->input_list),
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
-        g_signal_connect_swapped (priv->input_list, "row-selected",
-                                  G_CALLBACK (update_buttons), self);
+        g_signal_connect_object (priv->input_list, "row-selected",
+                                 G_CALLBACK (update_buttons), self, G_CONNECT_SWAPPED);
 
         g_signal_connect (priv->input_settings, "changed::" KEY_INPUT_SOURCES,
                           G_CALLBACK (input_sources_changed), self);
