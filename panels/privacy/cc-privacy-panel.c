@@ -122,9 +122,9 @@ static char *
 get_privacy_policy_url (void)
 {
   char *buffer;
-  char *name;
+  char *url;
 
-  name = NULL;
+  url = NULL;
 
   if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
     {
@@ -139,24 +139,24 @@ get_privacy_policy_url (void)
 
        if (start != NULL && end != NULL)
          {
-           name = g_strndup (start, end - start);
+           url = g_strndup (start, end - start);
          }
 
        g_free (buffer);
     }
 
-  if (name && *name != '\0')
+  if (url && *url != '\0')
     {
       char *tmp;
-      tmp = g_shell_unquote (name, NULL);
-      g_free (name);
-      name = tmp;
+      tmp = g_shell_unquote (url, NULL);
+      g_free (url);
+      url = tmp;
     }
 
-  if (name == NULL)
-    name = g_strdup ("http://www.gnome.org/privacy-policy");
+  if (url == NULL)
+    url = g_strdup ("http://www.gnome.org/privacy-policy");
 
-  return name;
+  return url;
 }
 
 static void
