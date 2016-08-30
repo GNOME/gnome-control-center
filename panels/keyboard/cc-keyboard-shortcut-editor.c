@@ -44,6 +44,7 @@ struct _CcKeyboardShortcutEditor
   GtkWidget          *remove_button;
   GtkWidget          *replace_button;
   GtkWidget          *reset_button;
+  GtkWidget          *set_button;
   GtkWidget          *shortcut_accel_label;
   GtkWidget          *shortcut_conflict_label;
   GtkWidget          *stack;
@@ -421,6 +422,13 @@ reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
 }
 
 static void
+set_button_clicked_cb (CcKeyboardShortcutEditor *self)
+{
+  update_shortcut (self);
+  gtk_widget_hide (GTK_WIDGET (self));
+}
+
+static void
 setup_keyboard_item (CcKeyboardShortcutEditor *self,
                      CcKeyboardItem           *item)
 {
@@ -689,6 +697,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, replace_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, reset_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, set_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_accel_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_conflict_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, stack);
@@ -702,6 +711,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, reset_item_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, set_button_clicked_cb);
 }
 
 static void
