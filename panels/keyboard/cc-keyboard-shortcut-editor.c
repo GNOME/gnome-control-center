@@ -83,6 +83,16 @@ enum
   N_PROPS
 };
 
+typedef enum
+{
+  HEADER_MODE_NONE,
+  HEADER_MODE_ADD,
+  HEADER_MODE_SET,
+  HEADER_MODE_REPLACE,
+  HEADER_MODE_CUSTOM_CANCEL,
+  HEADER_MODE_CUSTOM_EDIT
+} HeaderMode;
+
 static GParamSpec *properties [N_PROPS] = { NULL, };
 
 static void
@@ -127,8 +137,6 @@ clear_custom_entries (CcKeyboardShortcutEditor *self)
 
   gtk_entry_set_text (GTK_ENTRY (self->name_entry), "");
   gtk_entry_set_text (GTK_ENTRY (self->command_entry), "");
-
-  gtk_widget_set_sensitive (self->add_button, FALSE);
 
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
   gtk_label_set_label (GTK_LABEL (self->new_shortcut_conflict_label), "");
@@ -233,13 +241,16 @@ get_current_shortcut_label (CcKeyboardShortcutEditor *self)
 }
 
 static void
-set_collision_headerbar (CcKeyboardShortcutEditor *self,
-                         gboolean                  has_collision)
+set_header_mode (CcKeyboardShortcutEditor *self,
+                 HeaderMode                mode)
 {
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->headerbar), !has_collision);
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->headerbar), mode == HEADER_MODE_CUSTOM_EDIT);
 
-  gtk_widget_set_visible (self->cancel_button, has_collision);
-  gtk_widget_set_visible (self->replace_button, has_collision);
+  gtk_widget_set_visible (self->add_button, mode == HEADER_MODE_ADD);
+  gtk_widget_set_visible (self->cancel_button, mode != HEADER_MODE_NONE &&
+                                               mode != HEADER_MODE_CUSTOM_EDIT);
+  gtk_widget_set_visible (self->replace_button, mode == HEADER_MODE_REPLACE);
+  gtk_widget_set_visible (self->set_button, mode == HEADER_MODE_SET);
 }
 
 static void
@@ -247,23 +258,30 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 {
   GtkShortcutLabel *shortcut_label;
   CcKeyboardItem *collision_item;
+  HeaderMode mode;
+  gboolean is_custom;
   gboolean valid;
   gchar *accel;
 
+  is_custom = is_custom_shortcut (self);
   valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
           gtk_accelerator_valid (self->custom_keyval, self->custom_mask) &&
           !self->custom_is_modifier;
 
   /* Additional checks for custom shortcuts */
-  if (is_custom_shortcut (self))
+  if (is_custom)
     {
       valid = valid &&
               gtk_entry_get_text_length (GTK_ENTRY (self->name_entry)) > 0 &&
               gtk_entry_get_text_length (GTK_ENTRY (self->command_entry)) > 0;
     }
 
-  gtk_widget_set_sensitive (self->add_button, valid);
+  if (valid)
+    set_header_mode (self, HEADER_MODE_ADD);
+  else
+    set_header_mode (self, is_custom ? HEADER_MODE_CUSTOM_CANCEL : HEADER_MODE_NONE);
 
+  /* Nothing else to do if the shortcut is invalid */
   if (!valid)
     return;
 
@@ -328,8 +346,19 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
    * the headerbar to display "Cancel" and "Replace". Otherwise, make sure to set
    * only the close button again.
    */
-  if (self->mode == CC_SHORTCUT_EDITOR_EDIT)
-    set_collision_headerbar (self, collision_item != NULL);
+  if (collision_item)
+    {
+      mode = HEADER_MODE_REPLACE;
+    }
+  else
+    {
+      if (self->mode == CC_SHORTCUT_EDITOR_EDIT)
+        mode = is_custom ? HEADER_MODE_CUSTOM_EDIT : HEADER_MODE_SET;
+      else
+        mode = is_custom ? HEADER_MODE_ADD : HEADER_MODE_SET;
+    }
+
+  set_header_mode (self, mode);
 
   self->collision_item = collision_item;
 
@@ -445,7 +474,8 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   /* Headerbar */
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar),
                             is_custom ? _("Set Custom Shortcut") : _("Set Shortcut"));
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->headerbar), TRUE);
+
+  set_header_mode (self, is_custom ? HEADER_MODE_CUSTOM_EDIT : HEADER_MODE_NONE);
 
   gtk_widget_hide (self->add_button);
   gtk_widget_hide (self->cancel_button);
@@ -792,9 +822,6 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
 
   g_return_if_fail (CC_IS_KEYBOARD_SHORTCUT_EDITOR (self));
 
-  if (self->mode == mode)
-    return;
-
   self->mode = mode;
   is_create_mode = mode == CC_SHORTCUT_EDITOR_CREATE;
 
@@ -805,18 +832,9 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       /* Cleanup whatever was set before */
       clear_custom_entries (self);
 
-      /* The 'Add' button is only sensitive when the shortcut is valid */
-      gtk_widget_set_sensitive (self->add_button, FALSE);
-
-      gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->headerbar), FALSE);
+      set_header_mode (self, HEADER_MODE_CUSTOM_CANCEL);
       gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar), _("Add Custom Shortcut"));
 
       gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
-
-      gtk_widget_show (self->add_button);
-      gtk_widget_show (self->cancel_button);
-
-      gtk_widget_hide (self->remove_button);
-      gtk_widget_hide (self->replace_button);
     }
 }
