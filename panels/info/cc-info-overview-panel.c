@@ -60,6 +60,7 @@ typedef struct
   GtkWidget      *name_entry;
   GtkWidget      *memory_label;
   GtkWidget      *processor_label;
+  GtkWidget      *os_name_label;
   GtkWidget      *os_type_label;
   GtkWidget      *disk_label;
   GtkWidget      *graphics_label;
@@ -442,11 +443,11 @@ get_os_info (void)
 }
 
 static char *
-get_os_type (void)
+get_os_name (void)
 {
   GHashTable *os_info;
-  gchar *name, *version_id, *pretty_name, *result, *build_id;
-  int bits;
+  gchar *name, *version_id, *pretty_name, *build_id;
+  gchar *result = NULL;
   g_autofree gchar *name_version = NULL;
 
   os_info = get_os_info ();
@@ -466,30 +467,36 @@ get_os_type (void)
   else
     name_version = g_strdup (_("Unknown"));
 
-  if (GLIB_SIZEOF_VOID_P == 8)
-    bits = 64;
-  else
-    bits = 32;
-
   if (build_id)
     {
-      /* translators: This is the name of the OS, followed by the type
-       * of architecture and the build id, for example:
-       * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-       * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)" */
-      result = g_strdup_printf (_("%s %d-bit (Build ID: %s)"), name_version, bits, build_id);
+      /* translators: This is the name of the OS, followed by the build id, for
+       * example:
+       * "Fedora 25 (Workstation Edition) (Build ID: xyz)" or
+       * "Ubuntu 16.04 LTS (Build ID: jki)" */
+      result = g_strdup_printf (_("%s (Build ID: %s)"), name_version, build_id);
     }
   else
     {
-      /* translators: This is the name of the OS, followed by the type
-       * of architecture, for example:
-       * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit" */
-      result = g_strdup_printf (_("%s %d-bit"), name_version, bits);
+      result = g_strdup (name_version);
     }
 
   g_clear_pointer (&os_info, g_hash_table_destroy);
 
   return result;
+}
+
+static char *
+get_os_type (void)
+{
+  int bits;
+
+  if (GLIB_SIZEOF_VOID_P == 8)
+    bits = 64;
+  else
+    bits = 32;
+
+  /* translators: This is the type of architecture for the OS */
+  return g_strdup_printf (_("%d-bit"), bits);
 }
 
 static void
@@ -815,6 +822,10 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   gtk_label_set_text (GTK_LABEL (priv->os_type_label), text ? text : "");
   g_free (text);
 
+  text = get_os_name ();
+  gtk_label_set_text (GTK_LABEL (priv->os_name_label), text ? text : "");
+  g_free (text);
+
   get_primary_disc_info (self);
 
   gtk_label_set_markup (GTK_LABEL (priv->graphics_label), priv->graphics_data->hardware_string);
@@ -903,6 +914,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, name_entry);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, memory_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, processor_label);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_name_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, os_type_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, disk_label);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, graphics_label);
