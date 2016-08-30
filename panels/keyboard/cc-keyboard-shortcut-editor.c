@@ -154,6 +154,15 @@ clear_custom_entries (CcKeyboardShortcutEditor *self)
   g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
 }
 
+static void
+cancel_editing (CcKeyboardShortcutEditor *self)
+{
+  cc_keyboard_shortcut_editor_set_item (self, NULL);
+  clear_custom_entries (self);
+
+  gtk_widget_hide (GTK_WIDGET (self));
+}
+
 static gboolean
 is_custom_shortcut (CcKeyboardShortcutEditor *self)
 {
@@ -391,10 +400,7 @@ static void
 cancel_button_clicked_cb (GtkWidget                *button,
                           CcKeyboardShortcutEditor *self)
 {
-  cc_keyboard_shortcut_editor_set_item (self, NULL);
-  clear_custom_entries (self);
-
-  gtk_widget_hide (GTK_WIDGET (self));
+  cancel_editing (self);
 }
 
 static void
@@ -589,12 +595,13 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
 {
   CcKeyboardShortcutEditor *self;
   GdkModifierType real_mask;
+  gboolean is_custom;
   gboolean editing;
 
   self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
 
-  editing = !g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "custom") ||
-             gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->edit_button));
+  is_custom = is_custom_shortcut (self);
+  editing = !is_custom || gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->edit_button));
 
   if (!editing)
     return GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->key_press_event (widget, event);
@@ -608,6 +615,10 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->edit_button), FALSE);
       release_grab (self);
+
+      /* Hide the dialog when editing a standard shortcut */
+      if (!is_custom)
+        cancel_editing (self);
 
       return GDK_EVENT_STOP;
     }
