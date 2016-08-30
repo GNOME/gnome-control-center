@@ -469,11 +469,11 @@ get_os_name (void)
 
   if (build_id)
     {
-      /* translators: This is the name of the OS, followed by the build id, for
+      /* translators: This is the name of the OS, followed by the build ID, for
        * example:
-       * "Fedora 25 (Workstation Edition) (Build ID: xyz)" or
-       * "Ubuntu 16.04 LTS (Build ID: jki)" */
-      result = g_strdup_printf (_("%s (Build ID: %s)"), name_version, build_id);
+       * "Fedora 25 (Workstation Edition); Build ID: xyz" or
+       * "Ubuntu 16.04 LTS; Build ID: jki" */
+      result = g_strdup_printf (_("%s; Build ID: %s"), name_version, build_id);
     }
   else
     {
