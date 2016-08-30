@@ -445,16 +445,26 @@ static char *
 get_os_type (void)
 {
   GHashTable *os_info;
-  gchar *name, *result, *build_id;
+  gchar *name, *version_id, *pretty_name, *result, *build_id;
   int bits;
+  g_autofree gchar *name_version = NULL;
 
   os_info = get_os_info ();
 
   if (!os_info)
     return NULL;
 
-  name = g_hash_table_lookup (os_info, "PRETTY_NAME");
+  name = g_hash_table_lookup (os_info, "NAME");
+  version_id = g_hash_table_lookup (os_info, "VERSION_ID");
+  pretty_name = g_hash_table_lookup (os_info, "PRETTY_NAME");
   build_id = g_hash_table_lookup (os_info, "BUILD_ID");
+
+  if (pretty_name)
+    name_version = g_strdup (pretty_name);
+  else if (name && version_id)
+    name_version = g_strdup_printf ("%s %s", name, version_id);
+  else
+    name_version = g_strdup (_("Unknown"));
 
   if (GLIB_SIZEOF_VOID_P == 8)
     bits = 64;
@@ -463,24 +473,18 @@ get_os_type (void)
 
   if (build_id)
     {
-      if (name)
-        /* translators: This is the name of the OS, followed by the type
-         * of architecture and the build id, for example:
-         * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-         * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)" */
-        result = g_strdup_printf (_("%s %d-bit (Build ID: %s)"), name, bits, build_id);
-      else
-        result = g_strdup_printf (_("%d-bit (Build ID: %s)"), bits, build_id);
+      /* translators: This is the name of the OS, followed by the type
+       * of architecture and the build id, for example:
+       * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+       * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)" */
+      result = g_strdup_printf (_("%s %d-bit (Build ID: %s)"), name_version, bits, build_id);
     }
   else
     {
-      if (name)
-        /* translators: This is the name of the OS, followed by the type
-         * of architecture, for example:
-         * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit" */
-        result = g_strdup_printf (_("%s %d-bit"), name, bits);
-      else
-        result = g_strdup_printf (_("%d-bit"), bits);
+      /* translators: This is the name of the OS, followed by the type
+       * of architecture, for example:
+       * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit" */
+      result = g_strdup_printf (_("%s %d-bit"), name_version, bits);
     }
 
   g_clear_pointer (&os_info, g_hash_table_destroy);
