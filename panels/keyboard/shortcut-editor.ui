@@ -175,12 +175,32 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkShortcutLabel" id="custom_shortcut_accel_label">
+                  <object class="GtkStack" id="custom_shortcut_stack">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="hexpand">True</property>
-                    <property name="disabled-text" translatable="yes">None</property>
+                    <child>
+                      <object class="GtkButton" id="change_custom_shortcut_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Set Shortcut</property>
+                        <signal name="clicked" handler="change_custom_shortcut_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                      </object>
+                      <packing>
+                        <property name="name">button</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkShortcutLabel" id="custom_shortcut_accel_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="disabled-text" translatable="yes">None</property>
+                      </object>
+                      <packing>
+                        <property name="name">label</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -208,6 +228,45 @@
               <packing>
                 <property name="name">custom</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">18</property>
+                <property name="expand">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label">Enter the new shortcut</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="resource">/org/gnome/control-center/keyboard/enter-keyboard-shortcut.svg</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label">Press Esc to cancel.</property>
+                    <style>
+                      <class name="dim-label" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="name">change-shortcut</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>

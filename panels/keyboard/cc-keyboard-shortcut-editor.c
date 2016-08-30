@@ -37,6 +37,7 @@ struct _CcKeyboardShortcutEditor
   GtkWidget          *cancel_button;
   GtkWidget          *command_entry;
   GtkWidget          *custom_shortcut_accel_label;
+  GtkWidget          *custom_shortcut_stack;
   GtkWidget          *edit_button;
   GtkWidget          *headerbar;
   GtkWidget          *name_entry;
@@ -166,7 +167,7 @@ cancel_editing (CcKeyboardShortcutEditor *self)
 static gboolean
 is_custom_shortcut (CcKeyboardShortcutEditor *self)
 {
-  return g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "custom");
+  return !g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "edit");
 }
 
 static void
@@ -269,29 +270,39 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   CcKeyboardItem *collision_item;
   HeaderMode mode;
   gboolean is_custom;
-  gboolean valid;
+  gboolean valid, accel_valid;
   gchar *accel;
 
   is_custom = is_custom_shortcut (self);
-  valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
-          gtk_accelerator_valid (self->custom_keyval, self->custom_mask) &&
-          !self->custom_is_modifier;
+  accel_valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
+                gtk_accelerator_valid (self->custom_keyval, self->custom_mask) &&
+                !self->custom_is_modifier;
+  valid = accel_valid;
 
   /* Additional checks for custom shortcuts */
   if (is_custom)
     {
-      valid = valid &&
+      if (accel_valid)
+        {
+          gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
+          gtk_stack_set_visible_child_name (GTK_STACK (self->custom_shortcut_stack), "label");
+          gtk_widget_show (self->edit_button);
+        }
+
+      valid = accel_valid &&
               gtk_entry_get_text_length (GTK_ENTRY (self->name_entry)) > 0 &&
               gtk_entry_get_text_length (GTK_ENTRY (self->command_entry)) > 0;
     }
 
+  gtk_widget_set_sensitive (self->replace_button, valid);
+  gtk_widget_set_sensitive (self->add_button, valid);
   if (valid)
     set_header_mode (self, HEADER_MODE_ADD);
   else
     set_header_mode (self, is_custom ? HEADER_MODE_CUSTOM_CANCEL : HEADER_MODE_NONE);
 
   /* Nothing else to do if the shortcut is invalid */
-  if (!valid)
+  if (!accel_valid)
     return;
 
   shortcut_label = get_current_shortcut_label (self);
@@ -401,6 +412,19 @@ cancel_button_clicked_cb (GtkWidget                *button,
                           CcKeyboardShortcutEditor *self)
 {
   cancel_editing (self);
+}
+
+static void
+change_custom_shortcut_button_clicked_cb (CcKeyboardShortcutEditor *self)
+{
+  /*
+   * Setting the edit button to active performs a grab and let the
+   * shortcut editor dialog know we're actually editing a shortcut.
+   */
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->edit_button), TRUE);
+
+  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "change-shortcut");
+  set_header_mode (self, HEADER_MODE_NONE);
 }
 
 static void
@@ -616,9 +640,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->edit_button), FALSE);
       release_grab (self);
 
-      /* Hide the dialog when editing a standard shortcut */
-      if (!is_custom)
-        cancel_editing (self);
+      cancel_editing (self);
 
       return GDK_EVENT_STOP;
     }
@@ -731,6 +753,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, command_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, custom_shortcut_accel_label);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, custom_shortcut_stack);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, edit_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, name_entry);
@@ -746,6 +769,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, cancel_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, change_custom_shortcut_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, command_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, edit_custom_shortcut_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, name_entry_changed_cb);
@@ -837,6 +861,8 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
   is_create_mode = mode == CC_SHORTCUT_EDITOR_CREATE;
 
   gtk_widget_set_visible (self->new_shortcut_conflict_label, is_create_mode);
+  gtk_stack_set_visible_child_name (GTK_STACK (self->custom_shortcut_stack),
+                                    is_create_mode ? "button" : "label");
 
   if (mode == CC_SHORTCUT_EDITOR_CREATE)
     {
@@ -847,5 +873,8 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar), _("Add Custom Shortcut"));
 
       gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
+
+      gtk_widget_hide (self->remove_button);
+      gtk_widget_hide (self->edit_button);
     }
 }
