@@ -435,7 +435,8 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   accel = gtk_accelerator_name (item->keyval, item->mask);
 
   /* Headerbar */
-  gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar), item->description);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar),
+                            is_custom ? _("Set Custom Shortcut") : _("Set Shortcut"));
   gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (self->headerbar), TRUE);
 
   gtk_widget_hide (self->add_button);
