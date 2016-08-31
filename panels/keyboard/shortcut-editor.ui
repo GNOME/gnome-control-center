@@ -38,49 +38,69 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkStack" id="standard_shortcut_stack">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="spacing">18</property>
-                    <child type="center">
-                      <object class="GtkShortcutLabel" id="shortcut_accel_label">
+                    <property name="expand">True</property>
+                    <property name="transition_type">crossfade</property>
+                    <child>
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">center</property>
-                        <property name="disabled-text" translatable="yes">Disabled</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="reset_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="relief">none</property>
-                        <property name="halign">end</property>
+                        <property name="hexpand">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">18</property>
                         <child>
-                          <object class="GtkImage">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="icon-name">edit-clear-symbolic</property>
+                            <property name="spacing">18</property>
+                            <child type="center">
+                              <object class="GtkShortcutLabel" id="shortcut_accel_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="disabled-text" translatable="yes">Disabled</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="relief">none</property>
+                                <property name="halign">end</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon-name">edit-clear-symbolic</property>
+                                  </object>
+                                </child>
+                                <signal name="clicked" handler="reset_item_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                              </object>
+                              <packing>
+                                <property name="pack_type">end</property>
+                              </packing>
+                            </child>
                           </object>
                         </child>
-                        <signal name="clicked" handler="reset_item_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                        <child>
+                          <object class="GtkLabel" id="shortcut_conflict_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="wrap">True</property>
+                            <property name="wrap_mode">word-char</property>
+                            <property name="width_chars">15</property>
+                            <property name="max_width_chars">20</property>
+                            <property name="xalign">0</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
-                        <property name="pack_type">end</property>
+                        <property name="name">main</property>
                       </packing>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="shortcut_conflict_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="wrap">True</property>
-                    <property name="wrap_mode">word-char</property>
-                    <property name="width_chars">15</property>
-                    <property name="max_width_chars">20</property>
-                    <property name="xalign">0</property>
                   </object>
                 </child>
               </object>
