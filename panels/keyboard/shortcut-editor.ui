@@ -38,11 +38,37 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkShortcutLabel" id="shortcut_accel_label">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="disabled-text" translatable="yes">Disabled</property>
+                    <property name="spacing">18</property>
+                    <child type="center">
+                      <object class="GtkShortcutLabel" id="shortcut_accel_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="disabled-text" translatable="yes">Disabled</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="reset_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="relief">none</property>
+                        <property name="halign">end</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon-name">edit-clear-symbolic</property>
+                          </object>
+                        </child>
+                        <signal name="clicked" handler="reset_item_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                      </object>
+                      <packing>
+                        <property name="pack_type">end</property>
+                      </packing>
+                    </child>
                   </object>
                 </child>
                 <child>
@@ -55,16 +81,6 @@
                     <property name="width_chars">15</property>
                     <property name="max_width_chars">20</property>
                     <property name="xalign">0</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="reset_button">
-                    <property name="label" translatable="yes">Reset</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">end</property>
-                    <signal name="clicked" handler="reset_item_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                   </object>
                 </child>
               </object>
