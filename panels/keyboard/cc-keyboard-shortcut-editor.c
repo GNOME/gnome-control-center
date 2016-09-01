@@ -48,6 +48,7 @@ struct _CcKeyboardShortcutEditor
   GtkWidget          *set_button;
   GtkWidget          *shortcut_accel_label;
   GtkWidget          *shortcut_conflict_label;
+  GtkWidget          *standard_shortcut_stack;
   GtkWidget          *stack;
   GtkWidget          *top_info_label;
 
@@ -305,6 +306,10 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   if (!accel_valid)
     return;
 
+  /* Valid shortcut, show it in the standard page */
+  if (!is_custom)
+    gtk_stack_set_visible_child_name (GTK_STACK (self->standard_shortcut_stack), "main");
+
   shortcut_label = get_current_shortcut_label (self);
 
   collision_item = cc_keyboard_manager_get_collision (self->manager,
@@ -512,7 +517,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   gtk_widget_hide (self->replace_button);
 
   /* Setup the top label */
-  text = g_strdup_printf (_("Enter new shortcut to change <b>%s</b>, or press Esc to cancel."), item->description);
+  text = g_strdup_printf (_("Enter new shortcut to change <b>%s</b>."), item->description);
 
   gtk_label_set_markup (GTK_LABEL (self->top_info_label), text);
 
@@ -552,6 +557,9 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
 
   /* Show the apropriate view */
   gtk_stack_set_visible_child_name (GTK_STACK (self->stack), is_custom ? "custom" : "edit");
+
+  if (!is_custom)
+    gtk_stack_set_visible_child_name (GTK_STACK (self->standard_shortcut_stack), "change-shortcut");
 }
 
 static void
@@ -764,6 +772,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, set_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_accel_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, shortcut_conflict_label);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, standard_shortcut_stack);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, stack);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, top_info_label);
 
