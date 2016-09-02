@@ -415,7 +415,7 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   g_signal_connect (widget, "activate", G_CALLBACK (search_entry_activated_cb), dialog);
   g_signal_connect (widget, "search-changed", G_CALLBACK (search_entry_changed_cb), dialog);
 
-  widget = WID ("authenticate-button");
+  widget = WID ("unlock-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (authenticate_samba_server), dialog);
 
   /* Set junctions */
@@ -489,7 +489,7 @@ device_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeModel              *model;
   GtkTreeIter                iter;
   GtkWidget                 *widget;
-  GtkWidget                 *notebook;
+  GtkWidget                 *stack;
   gboolean                   authentication_needed;
   gboolean                   selected;
 
@@ -506,15 +506,15 @@ device_selection_changed_cb (GtkTreeSelection *selection,
       widget = WID ("new-printer-add-button");
       gtk_widget_set_sensitive (widget, selected);
 
-      widget = WID ("authenticate-button");
+      widget = WID ("unlock-button");
       gtk_widget_set_sensitive (widget, authentication_needed);
 
-      notebook = WID ("notebook");
+      stack = WID ("headerbar-topright-buttons");
 
       if (authentication_needed)
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
+        gtk_stack_set_visible_child_name (GTK_STACK (stack), "unlock-button");
       else
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
+        gtk_stack_set_visible_child_name (GTK_STACK (stack), "add-button");
     }
 }
 
