@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-16 20:59+0000\n"
-"PO-Revision-Date: 2016-08-21 12:43+0300\n"
+"POT-Creation-Date: 2016-08-30 15:17+0000\n"
+"PO-Revision-Date: 2016-09-03 02:06+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -129,12 +129,12 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -1119,8 +1119,8 @@ msgstr "Ensisijainen"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1746,12 +1746,14 @@ msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr ""
+"Pikanäppäin %s on jo asetettu toimintoon <b>%s</b>. Jos korvaat sen, "
+"poistetaan toiminto %s poistetaan käytöstä"
 
 #. Setup the top label
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
 #, c-format
 msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr ""
+msgstr "Pikanäppäin toiminnolle <b>%s</b>. Anna uusi pikanäppäin vaihtaaksesi."
 
 #: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
 msgid "Add Custom Shortcut"
@@ -1790,7 +1792,7 @@ msgid "Try a different search"
 msgstr "Yritä eri hakuehdoilla"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
+#: ../panels/network/connection-editor/ce-page-reset.c:78
 #: ../panels/network/network-wifi.ui.h:51
 msgid "Reset"
 msgstr "Tyhjennä asetukset"
@@ -2014,7 +2016,7 @@ msgid "page 2"
 msgstr "sivu 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2115,7 +2117,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Erinomainen"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Tiedot"
@@ -2182,7 +2184,7 @@ msgstr "Automaattinen (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Manuaalinen"
 
@@ -2206,7 +2208,7 @@ msgstr "Etuliite"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automaattinen"
 
@@ -2214,7 +2216,7 @@ msgstr "Automaattinen"
 msgid "Automatic, DHCP only"
 msgstr "Automaattinen, vain DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
@@ -2450,7 +2452,7 @@ msgid "_Reset"
 msgstr "_Tyhjennä"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Unohda"
@@ -2618,7 +2620,7 @@ msgid "Wired"
 msgstr "Kiinteä"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2629,7 +2631,7 @@ msgstr "Valinnat…"
 msgid "Add new connection"
 msgstr "Lisää uusi yhteys"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2637,14 +2639,14 @@ msgstr ""
 "Jos käytössäsi on myös muu kuin langaton internetyhteys, voit käyttää sitä "
 "kyseisen yhteyden jakamiseen muiden käyttäjien kanssa."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Yhteyspisteen käyttöönotto katkaisee yhteyden langattomaan verkkoon <b>%s</"
 "b>."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2652,34 +2654,34 @@ msgstr ""
 "Yhteyspisteen ollessa käytössä langattoman internetyhteyden käyttö ei ole "
 "mahdollista."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Suljetaanko yhteyspiste ja katkaistaanko kaikkien käyttäjien yhteydet?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Sulje yhteyspiste"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Järjestelmäkäytännöt estävät käytön yhteyspisteenä"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Langaton verkkolaite ei tue yhteyspisteeksi asettamista"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr ""
 "Valittujen verkkojen tiedot, kuten salasanat ja omat asetukset, häviävät."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Historia"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2687,7 +2689,7 @@ msgid "_Close"
 msgstr "_Sulje"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Unohda"
@@ -3312,7 +3314,6 @@ msgid "_Inner authentication"
 msgstr "_Sisempi tunnistautuminen"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
-#| msgid "PAC pro_visioning"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Salli automaattinen PAC-pro_visiointi"
 
@@ -3389,7 +3390,6 @@ msgid "missing EAP username"
 msgstr "puuttuva EAP-käyttäjätunnus"
 
 #: ../panels/network/wireless-security/eap-method-simple.c:87
-#| msgid "Change Password"
 msgid "missing EAP password"
 msgstr "puuttuva EAP-salasana"
 
@@ -3605,8 +3605,8 @@ msgstr "_Tyyppi"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -4719,70 +4719,70 @@ msgstr ""
 "Valitettavasti tulostuspalvelu\n"
 "ei vaikuta olevan käytettävissä."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Näytön lukitus"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "Käytössä"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Päällä"
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Pois"
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Sijaintipalvelut"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Käyttö ja historia"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Tyhjennetäänkö roskakorin koko sisältö?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Kaikki roskakorissa olevat kohteet poistetaan pysyvästi."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Tyhjennä roskakori"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Poistetaanko kaikki väliaikaiset tiedostot?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Kaikki väliaikaiset tiedostot poistetaan pysyvästi."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Tu_hoa väliaikaistiedostot"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Tuhoa väliaikaiset ja roskakorin tiedostot"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Ohjelmistojen käyttö"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Vikailmoitukset"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4791,7 +4791,7 @@ msgstr ""
 "Vikailmoitusten lähettäminen auttaa parantamaan %sa. Ilmoitukset eivät "
 "sisällä henkilökohtaisia tietoja. Ilmoitukset lähetetään anonyymisti."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Tietosuoja"
 
