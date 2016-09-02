@@ -712,7 +712,7 @@ update_dialog_state (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkTreeIter                iter;
-  GtkWidget                 *spinner;
+  GtkWidget                 *header;
   GtkWidget                 *stack;
   gboolean                   searching;
 
@@ -725,24 +725,22 @@ update_dialog_state (PpNewPrinterDialog *dialog)
               priv->samba_authenticated_searching ||
               priv->samba_searching;
 
-  spinner = WID ("spinner");
+  header = WID ("headerbar");
   stack = WID ("stack");
 
   if (searching)
     {
-      gtk_spinner_start (GTK_SPINNER (spinner));
-      gtk_widget_show (spinner);
+      gtk_header_bar_set_subtitle (GTK_HEADER_BAR (header), _("Searching for Printers"));
     }
   else
     {
-      gtk_spinner_stop (GTK_SPINNER (spinner));
-      gtk_widget_hide (spinner);
+      gtk_header_bar_set_subtitle (GTK_HEADER_BAR (header), NULL);
     }
 
   if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->store), &iter) && !searching)
     gtk_stack_set_visible_child_name (GTK_STACK (stack), "no-printers-page");
   else
-    gtk_stack_set_visible_child_name (GTK_STACK (stack), "standard-page");
+      gtk_stack_set_visible_child_name (GTK_STACK (stack), searching ? "loading-page": "standard-page");
 }
 
 static void

@@ -33,7 +33,7 @@
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <child internal-child="headerbar">
-      <object class="GtkHeaderBar">
+      <object class="GtkHeaderBar" id="headerbar">
         <property name="visible">True</property>
         <property name="show-close-button">False</property>
         <child>
@@ -103,7 +103,7 @@
             <child>
               <object class="GtkStack" id="stack">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can_focus">True</property>
                 <property name="transition-type">none</property>
                 <style>
                   <class name="view"/>
@@ -143,6 +143,7 @@
                         <property name="valign">GTK_ALIGN_START</property>
                         <property name="pixel_size">72</property>
                         <property name="icon_name">printer-symbolic</property>
+                        <property name="opacity">0.6</property>
                         <style>
                           <class name="dim-label"/>
                         </style>
@@ -159,6 +160,7 @@
                         <property name="can_focus">False</property>
                         <property name="sensitive">False</property>
                         <property name="label" translatable="yes" comments="Translators: No printers were detected">No Printers Found</property>
+                        <property name="opacity">0.6</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
@@ -167,6 +169,26 @@
                   </object>
                   <packing>
                     <property name="name">no-printers-page</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <style>
+                      <class name="view"/>
+                    </style>
+                    <child>
+                      <object class="GtkSpinner" id="spinner">
+                        <property name="visible">True</property>
+                        <property name="active">True</property>
+                        <property name="expand">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="opacity">0.6</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">loading-page</property>
                   </packing>
                 </child>
               </object>
@@ -203,25 +225,6 @@
                         <property name="can_focus">False</property>
                         <property name="border_width">4</property>
                         <child>
-                          <object class="GtkFixed" id="fixed">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <placeholder/>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="padding">10</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSearchEntry" id="search-entry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -230,36 +233,13 @@
                             <property name="truncate_multiline">True</property>
                             <property name="invisible_char_set">True</property>
                             <property name="placeholder_text" translatable="yes" comments="Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)">Enter a network address or search for a printer</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
                           </object>
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkFixed" id="fixed1">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkSpinner" id="spinner">
-                                <property name="width_request">24</property>
-                                <property name="height_request">24</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="no_show_all">True</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="padding">10</property>
-                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
