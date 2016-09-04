@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-24 15:26+0000\n"
-"PO-Revision-Date: 2016-06-26 07:37+0300\n"
+"POT-Creation-Date: 2016-08-30 15:17+0000\n"
+"PO-Revision-Date: 2016-09-04 22:07+0300\n"
 "Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -115,23 +115,22 @@ msgstr ""
 #: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
 #: ../panels/display/cc-display-panel.c:2206
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:982
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/join-dialog.ui.h:2
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/um-user-panel.c:705
@@ -693,7 +692,7 @@ msgstr ""
 "kullanacağınıza dair bu yönergeleri faydalı bulabilirsiniz."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Özet"
 
@@ -705,7 +704,7 @@ msgstr "Profil ekle"
 msgid "_Import File…"
 msgstr "Dosyayı _İçe Aktar…"
 
-#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:31
 #: ../panels/network/connection-editor/net-connection-editor.c:546
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -1119,8 +1118,8 @@ msgstr "Birincil"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1267,49 +1266,59 @@ msgstr "Wayland"
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: ../panels/info/cc-info-panel.c:433
+#: ../panels/info/cc-info-panel.c:481
+#, c-format
+msgid "%s %d-bit (Build ID: %s)"
+msgstr "%s %d-bit (İnşa Kimliği: %s)"
+
+#: ../panels/info/cc-info-panel.c:483
+#, c-format
+msgid "%d-bit (Build ID: %s)"
+msgstr "%d-bit (İnşa Kimliği: %s)"
+
+#: ../panels/info/cc-info-panel.c:491
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:435
+#: ../panels/info/cc-info-panel.c:493
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1115
+#: ../panels/info/cc-info-panel.c:1174
 msgid "Ask what to do"
 msgstr "Yapılacak şeyi sor"
 
-#: ../panels/info/cc-info-panel.c:1119
+#: ../panels/info/cc-info-panel.c:1178
 msgid "Do nothing"
 msgstr "Hiçbir şey yapma"
 
-#: ../panels/info/cc-info-panel.c:1123
+#: ../panels/info/cc-info-panel.c:1182
 msgid "Open folder"
 msgstr "Klasör aç"
 
-#: ../panels/info/cc-info-panel.c:1214
+#: ../panels/info/cc-info-panel.c:1273
 msgid "Other Media"
 msgstr "Diğer Ortamlar"
 
-#: ../panels/info/cc-info-panel.c:1245
+#: ../panels/info/cc-info-panel.c:1304
 msgid "Select an application for audio CDs"
 msgstr "Ses CD'leri için bir uygulama seçin"
 
-#: ../panels/info/cc-info-panel.c:1246
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for video DVDs"
 msgstr "Video DVD'leri için bir uygulama seçin"
 
-#: ../panels/info/cc-info-panel.c:1247
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application to run when a music player is connected"
 msgstr "Müzik çalar bağlandığında çalıştırılacak uygulamayı seçin"
 
-#: ../panels/info/cc-info-panel.c:1248
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a camera is connected"
 msgstr "Kamera bağlandığında çalıştırılacak uygulamayı seçin"
 
-#: ../panels/info/cc-info-panel.c:1249
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application for software CDs"
 msgstr "Yazılım CD'leri için bir uygulama seçin"
 
@@ -1318,72 +1327,71 @@ msgstr "Yazılım CD'leri için bir uygulama seçin"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1261
+#: ../panels/info/cc-info-panel.c:1320
 msgid "audio DVD"
 msgstr "ses DVD'si"
 
-#: ../panels/info/cc-info-panel.c:1262
+#: ../panels/info/cc-info-panel.c:1321
 msgid "blank Blu-ray disc"
 msgstr "boş Blu-ray diski"
 
-#: ../panels/info/cc-info-panel.c:1263
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank CD disc"
 msgstr "boş CD diski"
 
-#: ../panels/info/cc-info-panel.c:1264
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank DVD disc"
 msgstr "boş DVD diski"
 
-#: ../panels/info/cc-info-panel.c:1265
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank HD DVD disc"
 msgstr "boş HD DVD diski"
 
-#: ../panels/info/cc-info-panel.c:1266
+#: ../panels/info/cc-info-panel.c:1325
 msgid "Blu-ray video disc"
 msgstr "Blu-ray video diski"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1326
 msgid "e-book reader"
 msgstr "e-kitap okuyucu"
 
-#: ../panels/info/cc-info-panel.c:1268
+#: ../panels/info/cc-info-panel.c:1327
 msgid "HD DVD video disc"
 msgstr "HD DVD video diski"
 
-#: ../panels/info/cc-info-panel.c:1269
+#: ../panels/info/cc-info-panel.c:1328
 msgid "Picture CD"
 msgstr "Resim CD'si"
 
-#: ../panels/info/cc-info-panel.c:1270
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Super Video CD"
 msgstr "Süper Video CD"
 
-#: ../panels/info/cc-info-panel.c:1271
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1272
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Windows software"
 msgstr "Windows yazılımı"
 
-#: ../panels/info/cc-info-panel.c:1395
-#: ../panels/keyboard/keyboard-shortcuts.c:1949
+#: ../panels/info/cc-info-panel.c:1454
 msgid "Section"
 msgstr "Bölüm"
 
-#: ../panels/info/cc-info-panel.c:1404 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Genel Görünüm"
 
-#: ../panels/info/cc-info-panel.c:1410 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1469 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Öntanımlı Uygulamalar"
 
-#: ../panels/info/cc-info-panel.c:1415 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1474 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Çıkarılabilir Ortam"
 
-#: ../panels/info/cc-info-panel.c:1440
+#: ../panels/info/cc-info-panel.c:1499
 #, c-format
 msgid "Version %s"
 msgstr "Sürüm %s"
@@ -1573,7 +1581,7 @@ msgid "Launch help browser"
 msgstr "Yardım tarayıcısını çalıştır"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:274
-#: ../shell/alt/cc-window.c:827 ../shell/cc-window.c:1584
+#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1584
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Ayarlar"
@@ -1682,14 +1690,24 @@ msgstr "Yazıyı küçült"
 msgid "High contrast on or off"
 msgstr "Yüksek karşıtlık açık ya da kapalı"
 
+#: ../panels/keyboard/cc-keyboard-manager.c:514
+#: ../panels/keyboard/cc-keyboard-manager.c:522
+#: ../panels/keyboard/cc-keyboard-manager.c:830
+msgid "Custom Shortcuts"
+msgstr "Özel Kısayollar"
+
+#. This label is displayed in a treeview cell displaying
+#. * a disabled accelerator key combination.
+#.
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1220
+#: ../panels/keyboard/keyboard-shortcuts.c:417
+#: ../panels/keyboard/shortcut-editor.ui.h:1
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:213
 msgid "Disabled"
 msgstr "Devre dışı"
 
@@ -1713,6 +1731,30 @@ msgstr "Birleştirme Tuşu"
 msgid "Modifiers-only switch to next source"
 msgstr "Sonraki kaynağa sadece değiştirgelerle geçiş"
 
+#: ../panels/keyboard/cc-keyboard-panel.c:215
+msgid "Reset the shortcut to its default value"
+msgstr "Kısayolu öntanımlı değerine sıfırla"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#, c-format
+msgid ""
+"%s is already being used for <b>%s</b>. If you replace it, %s will be "
+"disabled"
+msgstr ""
+"%s zaten <b>%s</b> için kullanılıyor. Eğer yerine başka bir şey koyarsanız, "
+"%s devre dışı bırakılacak"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
+#, c-format
+msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+msgstr "<b>%s</b> için klavye kısayolu. Değiştirmek için yeni kısayol girin."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#| msgid "Custom Shortcut"
+msgid "Add Custom Shortcut"
+msgstr "Özel Kısayol Ekle"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Key­board"
@@ -1730,26 +1772,6 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Kısayol;Tekrar;Kırpma;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "Custom Shortcut"
-msgstr "Özel Kısayol"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-msgid "_Name:"
-msgstr "_İsim:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
-msgid "C_ommand:"
-msgstr "K_omut:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Add Shortcut"
-msgstr "Kısayol Ekle"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Remove Shortcut"
-msgstr "Kısayolu Kaldır"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1757,68 +1779,67 @@ msgstr ""
 "Bir kısayolu düzenlemek için, ilgili satıra tıklayın ve tuşlara ya da "
 "temizlemek için Backspace tuşuna basın."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:633
-#: ../panels/keyboard/keyboard-shortcuts.c:641
-msgid "Custom Shortcuts"
-msgstr "Özel Kısayollar"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#| msgid "Keyboard Shortcuts"
+msgid "No keyboard shortcut found"
+msgstr "Klavye kısayolu bulunamadı"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:858
-msgid "<Unknown Action>"
-msgstr "<Bilinmeyen Eylem>"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Try a different search"
+msgstr "Farklı bir arama deneyin"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1359
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"Kısayol tuşu \"%s\" kullanılamıyor çünkü kullanımı halinde bu tuş "
-"kullanılarak yazmak mümkün olmayacak.\n"
-"Lütfen Control, Alt ya da Shift gibi tuşlar ile aynı anda deneyin."
+#: ../panels/keyboard/shortcut-editor.ui.h:2
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Sıfırla"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1389
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"\"%s\" kısayolu zaten kullanılıyor:\n"
-"\"%s\""
+#: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
+msgid "Name"
+msgstr "İsim"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1394
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr ""
-"Eğer kısayolu \"%s\" olarak tekrar atarsanız, \"%s\" kısayolu "
-"etkinsizleştirilecek."
+#: ../panels/keyboard/shortcut-editor.ui.h:4
+#| msgid "C_ommand:"
+msgid "Command"
+msgstr "Komut"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1400
-msgid "_Reassign"
-msgstr "Tek_rar ata"
+#: ../panels/keyboard/shortcut-editor.ui.h:5
+#| msgid "Shortcuts"
+msgid "Shortcut"
+msgstr "Kısayol"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
-#, c-format
-msgid ""
-"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
-"automatically set it to \"%s\"?"
-msgstr ""
-"\"%s\" kısayoluyla ilişkili bir \"%s\" kısayolu var. Otomatik olarak \"%s\"e "
-"ayarlamak ister misiniz?"
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+msgid "Edit"
+msgstr "Düzenle"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1451
-#, c-format
-msgid ""
-"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
-"if you move forward."
-msgstr ""
-"\"%s\" şu anda \"%s\" ile ilişkilendirilmiş; eğer devam ederseniz, bu "
-"kısayol devre dışı bırakılacak."
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/network/network-wifi.ui.h:20
+msgid "None"
+msgstr "Hiçbiri"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1458
-msgid "_Assign"
-msgstr "_Ata"
+#: ../panels/keyboard/shortcut-editor.ui.h:8
+#| msgid "_Remove"
+msgid "Remove"
+msgstr "Kaldır"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "İptal"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:276
+#: ../panels/network/connection-editor/ce-page-ip6.c:277
+msgid "Add"
+msgstr "Ekle"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
+#| msgid "_Replace"
+msgid "Replace"
+msgstr "Yerine Koy"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1896,6 +1917,11 @@ msgid "Tap to Click"
 msgstr "Tıklamak için Dokun"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgid "Two Finger Scrolling"
+msgid "Two-finger Scrolling"
+msgstr "İki Parmak Kaydırma"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "Edge Scrolling"
 msgstr "Kenar Kaydırma"
 
@@ -1990,7 +2016,7 @@ msgid "page 2"
 msgstr "sayfa 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2090,7 +2116,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Mükemmel"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Ayrıntılar"
@@ -2127,11 +2153,6 @@ msgstr "Geçit"
 msgid "Delete Address"
 msgstr "Adresi Sil"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:276
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
-msgid "Add"
-msgstr "Ekle"
-
 #: ../panels/network/connection-editor/ce-page-ip4.c:339
 #: ../panels/network/connection-editor/ce-page-ip6.c:334
 msgid "Server"
@@ -2162,7 +2183,7 @@ msgstr "Otomatik (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Elle"
 
@@ -2186,7 +2207,7 @@ msgstr "Ön ek"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Otomatik"
 
@@ -2194,15 +2215,10 @@ msgstr "Otomatik"
 msgid "Automatic, DHCP only"
 msgstr "Otomatik, sadece DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
-
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Sıfırla"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2426,7 +2442,6 @@ msgid "Import from file…"
 msgstr "Dosyadan içe aktar..."
 
 #: ../panels/network/connection-editor/net-connection-editor.c:817
-#| msgid "%s VPN"
 msgid "Add VPN"
 msgstr "VPN Ekle"
 
@@ -2436,7 +2451,7 @@ msgid "_Reset"
 msgstr "Sıfı_rla"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Unut"
@@ -2601,7 +2616,7 @@ msgid "Wired"
 msgstr "Kablolu"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2612,7 +2627,7 @@ msgstr "Seçenekler..."
 msgid "Add new connection"
 msgstr "Yeni bağlantı ekle"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2620,12 +2635,12 @@ msgstr ""
 "Eğer kablosuzdan başka bir İnternet bağlantısına sahipseniz, kablosuz "
 "bağlantı noktası kurarak bağlantınızı diğerleriyle paylaşabilirsiniz."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Kablosuz Hotspot'u açmak sizi <b>%s</b> bağlantısından koparacak."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2633,23 +2648,23 @@ msgstr ""
 "Kablosuz aygıtınız Hotspot olarak etkinleştirilmiş ise İnternete erişmek "
 "mümkün olmaz."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Etkin nokta durdurulup tüm kullanıcıların bağlantısı kesilsin mi?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "Etkin Noktayı _Durdur"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistem politikası Hotspot olarak kullanmayı yasaklıyor"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Kablosuz aygıtı Hotspot kipini desteklememektedir"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2657,11 +2672,11 @@ msgstr ""
 "Seçilen ağlar için ağ detayları, parolalar ve her türlü özel yapılandırmalar "
 "kaybolacak."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Geçmiş"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2669,7 +2684,7 @@ msgid "_Close"
 msgstr "_Kapat"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Unut"
@@ -2816,13 +2831,9 @@ msgstr "ayrıntılar"
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
 #: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "_Password"
 msgstr "_Parola"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "None"
-msgstr "Hiçbiri"
 
 #: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
@@ -3596,8 +3607,8 @@ msgstr "_Tür"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3698,39 +3709,23 @@ msgstr "Sohbet"
 msgid "Resources"
 msgstr "Özkaynaklar"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "Hesaba giriş yapılırken hata oluştu"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "Kimlik bilgilerinin süresi dolmuş."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Bu hesabı etkinleştirmek için giriş yap."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "Giri_ş Yap"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "Hesap oluşturulurken hata meydana geldi"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "Hesap silinirken hata oluştu"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr "Hesabı silmek istediğinizden emin misiniz?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "Bu işlem, sunucudaki hesabı silmeyecektir."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Sil"
 
@@ -3758,6 +3753,7 @@ msgid "No online accounts configured"
 msgstr "Yapılandırılmış çevrimiçi hesap yok"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Remove Account"
 msgstr "Hesabı Kaldır"
 
@@ -4115,11 +4111,6 @@ msgstr "_Pil ile Çalışırken"
 #: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
 msgid "Delay"
 msgstr "Gecikme"
-
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "İptal"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4721,70 +4712,70 @@ msgstr ""
 "Üzgünüm! Sistemin yazdırma hizmeti\n"
 "kullanılamıyor."
 
-#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Ekran Kilidi"
 
-#: ../panels/privacy/cc-privacy-panel.c:420
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "Kullanımda"
 
-#: ../panels/privacy/cc-privacy-panel.c:425
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Açık"
 
-#: ../panels/privacy/cc-privacy-panel.c:426
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Kapalı"
 
-#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Konum Hizmetleri"
 
-#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Kullanım & Geçmiş"
 
-#: ../panels/privacy/cc-privacy-panel.c:1001
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Çöpteki tüm ögeler boşaltılsın mı?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1002
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Çöpteki tüm ögeler kalıcı olarak silinecek."
 
-#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Çöpü _Boşalt"
 
-#: ../panels/privacy/cc-privacy-panel.c:1026
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Tüm geçici dosyalar silinsin mi?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1027
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Tüm geçici dosyalar kalıcı olarak silinecek."
 
-#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Geçici Dosyaları _Sil"
 
-#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Çöpü ve geçici dosyaları temizle"
 
-#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Yazılım Kullanımı"
 
-#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Sorun Bildirimi"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1145
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4794,7 +4785,7 @@ msgstr ""
 "Bu bildirimler, anonim olarak gönderilir ve kişisel verilerden "
 "arındırılmıştır."
 
-#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Gizlilik İlkesi"
 
@@ -4981,13 +4972,13 @@ msgid "Other"
 msgstr "Diğer"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1080
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Değişikliklerin etkin olması için oturumunuzu yeniden başlatmanız gerekiyor"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1084
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Yeniden Başlat"
 
@@ -5097,7 +5088,7 @@ msgid "Left+Right Alt"
 msgstr "Sol+Sağ Alt"
 
 #: ../panels/region/region.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Language"
 msgstr "Di_l"
 
@@ -5203,6 +5194,11 @@ msgstr "Aşağı Taşı"
 msgid "Preferences"
 msgstr "Tercihler"
 
+#. Label
+#: ../panels/sharing/cc-sharing-networks.c:303
+msgid "No networks selected for sharing"
+msgstr "Paylaşımı için ağ seçilmedi"
+
 #: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
@@ -5239,9 +5235,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:682
 #, c-format
-#| msgid ""
-#| "Allow remote users to connect using the Secure Shell command:\n"
-#| "<a href=\"ssh %s\">ssh %s</a>"
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
@@ -5253,9 +5246,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:684
 #, c-format
-#| msgid ""
-#| "Allow remote users to view or control your screen by connecting to: <a "
-#| "href=\"vnc://%s\">vnc://%s</a>"
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
@@ -5289,6 +5279,10 @@ msgstr ""
 "paylaş;paylaşım;ssh;makine;host;isim;uzak;masaüstü;ortam;ses;video;görüntü;"
 "resimler;fotoğraflar;filmler;sunucu;renderer;yorumlayıcı;"
 
+#: ../panels/sharing/networks.ui.h:1
+msgid "Networks"
+msgstr "Ağlar"
+
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
 msgstr "Uzaktan bağlanmayı aç"
@@ -5298,24 +5292,11 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "Uzaktan bağlantıyı açmak veya kapamak için kimlik doğrulaması gerekiyor"
 
-#. Label
-#: ../panels/sharing/cc-sharing-networks.c:303
-msgid "No networks selected for sharing"
-msgstr "Paylaşımı için ağ seçilmedi"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../panels/sharing/networks.ui.h:1
-msgid "Networks"
-msgstr "Ağlar"
-
 #: ../panels/sharing/sharing.ui.h:1
 msgid "_Computer Name"
 msgstr "_Bilgisayar Adı"
 
 #: ../panels/sharing/sharing.ui.h:2
-#| msgid "_Personal File Sharing"
 msgid "_File Sharing"
 msgstr "Dosya _Paylaşımı"
 
@@ -5336,7 +5317,6 @@ msgid "Some services are disabled because of no network access."
 msgstr "Ağ erişimi olmadığından bazı hizmetler devredışı bırakıldı."
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "Sharing"
 msgid "File Sharing"
 msgstr "Dosya Paylaşımı"
 
@@ -5381,9 +5361,6 @@ msgid "Media Sharing"
 msgstr "Ortam Paylaşımı"
 
 #: ../panels/sharing/sharing.ui.h:19
-#| msgid ""
-#| "Media sharing allows you to share music, photos and videos over the "
-#| "network."
 msgid "Share music, photos and videos over the network."
 msgstr "Müzikleri, fotoğrafları ve videoları ağ üzerinde paylaşın."
 
@@ -5514,11 +5491,6 @@ msgstr "Hoparlörleri _Sına"
 #: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "Tepe algılama"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1493
-#: ../panels/sound/gvc-sound-theme-chooser.c:564
-msgid "Name"
-msgstr "İsim"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
@@ -6118,19 +6090,17 @@ msgid "_Full Name"
 msgstr "_Tam İsim"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Standard"
 msgstr "Standart"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:898
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Administrator"
 msgstr "Yönetici"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account _Type"
 msgstr "Hesap _Türü"
 
@@ -6206,7 +6176,7 @@ msgid "Right little finger"
 msgstr "Sağ serçe parmağı"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:688
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Parmak İzi Girişi Etkinleştir"
 
@@ -6242,10 +6212,6 @@ msgstr "Kullanıcı ekleyip kaldırın veya parolanızı değiştirin"
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "Giriş;İsim;Parmak izi;Kullanıcı simgesi;Logo;Yüz;Parola;"
-
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
-msgid "Login History"
-msgstr "Giriş Geçmişi"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: ../panels/user-accounts/data/join-dialog.ui.h:4
@@ -6303,33 +6269,25 @@ msgid "Set a password now"
 msgstr "Şimdi parola belirle"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-msgid "Add User Account"
-msgstr "Kullanıcı Hesabı Ekle"
+#| msgid "Add User"
+msgid "_Add User…"
+msgstr "Kullanıcı _Ekle…"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Remove User Account"
-msgstr "Kullanıcı Hesabını Kaldır"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "A_utomatic Login"
 msgstr "Ot_omatik Giriş"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Fingerprint Login"
 msgstr "_Parmak İziyle Giriş"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "User Icon"
 msgstr "Kullanıcı Simgesi"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Last Login"
 msgstr "Son Giriş"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
-#| msgid "Account _Type"
-msgid "_Account Activity"
-msgstr "_Hesap Etkinliği"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6581,48 +6539,48 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Yönetici"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:140
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Aygıta erişiminize izin verilmedi. Sistem yöneticinizle bağlantıya geçin."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:142
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "Aygıt zaten kullanımda."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:144
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "Dahili hata oluştu."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Etkin"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:265
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "Delete registered fingerprints?"
 msgstr "Kayıtlı parmak izleri silinsin mi?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "_Delete Fingerprints"
 msgstr "Parmak İzlerini _Sil"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:275
+#: ../panels/user-accounts/um-fingerprint-dialog.c:274
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Kayıtlı parmak izlerini silerek parmak izi girişini kapatmak ister misiniz?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:445
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Tamamlandı!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:506
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "'%s' aygıtına erişilemedi"
@@ -6630,16 +6588,16 @@ msgstr "'%s' aygıtına erişilemedi"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:589
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "'%s' aygıtı üzerinde parmak yakalama başlatılamadı"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:639
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "Hiçbir parmak izi okuyucusuna erişilemedi"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Lütfen yardım için sistem yöneticinizle bağlantıya geçin."
 
@@ -6648,7 +6606,7 @@ msgstr "Lütfen yardım için sistem yöneticinizle bağlantıya geçin."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:722
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6657,11 +6615,11 @@ msgstr ""
 "Parmak izi girişin etkinleşebilmesi için parmak izlerinizden bir tanesini "
 "'%s' aygıtını kullanarak kaydetmelisiniz."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:729
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "Parmak seçiliyor"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "Parmak izleri kaydediliyor"
 
@@ -6715,13 +6673,21 @@ msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:249
+#: ../panels/user-accounts/um-history-dialog.c:250
 msgid "Session Ended"
 msgstr "Oturum Sonlandı"
 
-#: ../panels/user-accounts/um-history-dialog.c:255
+#: ../panels/user-accounts/um-history-dialog.c:256
 msgid "Session Started"
 msgstr "Oturum Başladı"
+
+#. Translators: This is the title of the "Account Activity" dialog.
+#. The %s is the user real name.
+#: ../panels/user-accounts/um-history-dialog.c:299
+#, c-format
+#| msgid "_Account Activity"
+msgid "%s - Account Activity"
+msgstr "%s - Hesap Etkinliği"
 
 #: ../panels/user-accounts/um-password-dialog.c:145
 msgid "Please choose another password."
@@ -6784,7 +6750,7 @@ msgstr "Yanlış parola, lütfen tekrar deneyin"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%s alan adına bağlanılamadı: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:237
+#: ../panels/user-accounts/um-user-panel.c:239
 msgid "Other Accounts"
 msgstr "Diğer Hesaplar"
 
@@ -6865,15 +6831,15 @@ msgstr "Hiçbiri"
 msgid "Logged in"
 msgstr "Oturum açık"
 
-#: ../panels/user-accounts/um-user-panel.c:1283
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Hesap hizmetiyle bağlantı kurulamadı"
 
-#: ../panels/user-accounts/um-user-panel.c:1285
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Lütfen AccountService' in kurulu ve etkin olduğundan emin olun."
 
-#: ../panels/user-accounts/um-user-panel.c:1326
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6881,12 +6847,12 @@ msgstr ""
 "Değişiklik yapmak için,\n"
 "önce * simgesine tıklayın"
 
-#: ../panels/user-accounts/um-user-panel.c:1364
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Kullanıcı hesabı oluştur"
 
-#: ../panels/user-accounts/um-user-panel.c:1375
-#: ../panels/user-accounts/um-user-panel.c:1687
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6894,12 +6860,12 @@ msgstr ""
 "Kullanıcı hesabı oluşturmak için,\n"
 "önce * simgesine tıklayın"
 
-#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Seçilen kullanıcı hesabını sil"
 
-#: ../panels/user-accounts/um-user-panel.c:1397
-#: ../panels/user-accounts/um-user-panel.c:1692
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6907,7 +6873,7 @@ msgstr ""
 "Seçilen kullanıcı hesabını silmek için,\n"
 "önce * simgesine tıklayın"
 
-#: ../panels/user-accounts/um-user-panel.c:1601
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Hesabım"
 
@@ -7257,7 +7223,7 @@ msgstr "Aşağı Tuşu"
 msgid "Tip Pressure Feel"
 msgstr "Parmak Ucu Basınç Hissi"
 
-#: ../shell/alt/cc-window.c:763 ../shell/cc-window.c:53
+#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1478
 msgid "All Settings"
 msgstr "Tüm Ayarlar"
@@ -7373,6 +7339,82 @@ msgstr "Aramayı iptal et"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Etkin Nokta"
+
+#~ msgid "_Name:"
+#~ msgstr "_İsim:"
+
+#~ msgid "Add Shortcut"
+#~ msgstr "Kısayol Ekle"
+
+#~ msgid "Remove Shortcut"
+#~ msgstr "Kısayolu Kaldır"
+
+#~ msgid "<Unknown Action>"
+#~ msgstr "<Bilinmeyen Eylem>"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
+#~ "Please try with a key such as Control, Alt or Shift at the same time."
+#~ msgstr ""
+#~ "Kısayol tuşu \"%s\" kullanılamıyor çünkü kullanımı halinde bu tuş "
+#~ "kullanılarak yazmak mümkün olmayacak.\n"
+#~ "Lütfen Control, Alt ya da Shift gibi tuşlar ile aynı anda deneyin."
+
+#~ msgid ""
+#~ "The shortcut \"%s\" is already used for\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "\"%s\" kısayolu zaten kullanılıyor:\n"
+#~ "\"%s\""
+
+#~ msgid ""
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
+#~ msgstr ""
+#~ "Eğer kısayolu \"%s\" olarak tekrar atarsanız, \"%s\" kısayolu "
+#~ "etkinsizleştirilecek."
+
+#~ msgid "_Reassign"
+#~ msgstr "Tek_rar ata"
+
+#~ msgid ""
+#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+#~ "automatically set it to \"%s\"?"
+#~ msgstr ""
+#~ "\"%s\" kısayoluyla ilişkili bir \"%s\" kısayolu var. Otomatik olarak \"%s"
+#~ "\"e ayarlamak ister misiniz?"
+
+#~ msgid ""
+#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
+#~ "disabled if you move forward."
+#~ msgstr ""
+#~ "\"%s\" şu anda \"%s\" ile ilişkilendirilmiş; eğer devam ederseniz, bu "
+#~ "kısayol devre dışı bırakılacak."
+
+#~ msgid "_Assign"
+#~ msgstr "_Ata"
+
+#~ msgid "Error logging into the account"
+#~ msgstr "Hesaba giriş yapılırken hata oluştu"
+
+#~ msgid "Credentials have expired."
+#~ msgstr "Kimlik bilgilerinin süresi dolmuş."
+
+#~ msgid "Sign in to enable this account."
+#~ msgstr "Bu hesabı etkinleştirmek için giriş yap."
+
+#~ msgid "_Sign In"
+#~ msgstr "Giri_ş Yap"
+
+#~ msgid "Login History"
+#~ msgstr "Giriş Geçmişi"
+
+#~ msgid "Add User Account"
+#~ msgstr "Kullanıcı Hesabı Ekle"
+
+#~ msgid "Remove User Account"
+#~ msgstr "Kullanıcı Hesabını Kaldır"
 
 #~ msgid "Add Network Connection"
 #~ msgstr "Ağ Bağlantısı Ekle"
@@ -7532,10 +7574,6 @@ msgstr "Etkin Nokta"
 #~ msgid "Color"
 #~ msgstr "Renk"
 
-#~| msgid "Two _finger scroll"
-#~ msgid "Two Finger Scrolling"
-#~ msgstr "İki Parmak Kaydırma"
-
 #~ msgid "_Delay:"
 #~ msgstr "_Gecikme:"
 
@@ -7557,9 +7595,6 @@ msgstr "Etkin Nokta"
 
 #~ msgid "S_peed:"
 #~ msgstr "_Hız:"
-
-#~ msgid "Shortcuts"
-#~ msgstr "Kısayollar"
 
 #~ msgid "Test Your Settings"
 #~ msgstr "Ayarlarınızı Sınayın"
