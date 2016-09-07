@@ -26,14 +26,15 @@
 
 G_BEGIN_DECLS
 
+#define CC_TYPE_KEYBOARD_OPTION         (cc_keyboard_option_get_type ())
+G_DECLARE_FINAL_TYPE (CcKeyboardOption, cc_keyboard_option, CC, KEYBOARD_OPTION, GObject)
+
 enum
 {
   XKB_OPTION_DESCRIPTION_COLUMN,
   XKB_OPTION_ID_COLUMN,
   XKB_OPTION_N_COLUMNS
 };
-
-typedef struct _CcKeyboardOption CcKeyboardOption;
 
 GList *         cc_keyboard_option_get_all              (void);
 const gchar *   cc_keyboard_option_get_description      (CcKeyboardOption *self);
