@@ -99,6 +99,7 @@ struct _CcPrintersPanelPrivate
   guint            cups_status_check_id;
   guint            dbus_subscription_id;
 
+  GtkWidget    *headerbar_buttons;
   GtkWidget    *popup_menu;
   GList        *driver_change_list;
   GCancellable *get_ppd_name_cancellable;
@@ -118,6 +119,9 @@ struct _CcPrintersPanelPrivate
 
   gpointer dummy;
 };
+
+#define PAGE_LOCK "_lock"
+#define PAGE_ADDPRINTER "_addprinter"
 
 typedef struct
 {
@@ -157,6 +161,24 @@ cc_printers_panel_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
+}
+
+static void
+cc_printers_panel_constructed (GObject *object)
+{
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
+  CcPrintersPanelPrivate *priv = self->priv;
+  GtkLockButton *button;
+  CcShell *shell;
+
+  G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  cc_shell_embed_widget_in_header (shell, priv->headerbar_buttons);
+
+  button = (GtkLockButton*)
+    gtk_builder_get_object (priv->builder, "lock-button");
+  gtk_lock_button_set_permission (button, priv->permission);
 }
 
 static void
@@ -250,14 +272,6 @@ cc_printers_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->finalize (object);
 }
 
-static GPermission *
-cc_printers_panel_get_permission (CcPanel *panel)
-{
-  CcPrintersPanelPrivate *priv = CC_PRINTERS_PANEL (panel)->priv;
-
-  return priv->permission;
-}
-
 static const char *
 cc_printers_panel_get_help_uri (CcPanel *panel)
 {
@@ -274,10 +288,10 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 
   object_class->get_property = cc_printers_panel_get_property;
   object_class->set_property = cc_printers_panel_set_property;
+  object_class->constructed = cc_printers_panel_constructed;
   object_class->dispose = cc_printers_panel_dispose;
   object_class->finalize = cc_printers_panel_finalize;
 
-  panel_class->get_permission = cc_printers_panel_get_permission;
   panel_class->get_help_uri = cc_printers_panel_get_help_uri;
 }
 
@@ -2698,6 +2712,9 @@ update_sensitivity (gpointer user_data)
     priv->lockdown_settings &&
     !g_settings_get_boolean (priv->lockdown_settings, "disable-print-setup");
 
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->headerbar_buttons),
+    is_authorized ? PAGE_ADDPRINTER : PAGE_LOCK);
+
   printer_selected = priv->current_dest >= 0 &&
                      priv->current_dest < priv->num_dests &&
                      priv->dests != NULL;
@@ -3061,7 +3078,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *widget;
   PpCups                 *cups;
   GError                 *error = NULL;
-  gchar                  *objects[] = { "main-vbox", NULL };
+  gchar                  *objects[] = { "main-vbox", "headerbar-buttons", NULL };
   GtkStyleContext        *context;
   guint                   builder_result;
 
@@ -3117,6 +3134,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
       g_error_free (error);
       return;
     }
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "headerbar-buttons");
+  priv->headerbar_buttons = widget;
 
   /* add the top level widget */
   top_widget = (GtkWidget*)

@@ -2,6 +2,31 @@
 <interface>
   <requires lib="gtk+" version="3.12"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkStack" id="headerbar-buttons">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkLockButton" id="lock-button">
+        <property name="visible">True</property>
+      </object>
+      <packing>
+        <property name="name">_lock</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="printer-add-button">
+        <property name="visible">True</property>
+        <property name="sensitive">True</property>
+        <property name="use_underline">True</property>
+        <property name="label" translatable="yes">Add Printer</property>
+        <style>
+          <class name="suggested-action"/>
+        </style>
+      </object>
+      <packing>
+        <property name="name">_addprinter</property>
+      </packing>
+    </child>
+  </object>
   <object class="GtkStack" id="main-vbox">
     <property name="margin-start">6</property>
     <property name="margin-end">6</property>
@@ -61,19 +86,6 @@
                 <style>
                   <class name="inline-toolbar"/>
                 </style>
-                <child>
-                  <object class="GtkToolButton" id="printer-add-button">
-                    <property name="visible">True</property>
-                    <property name="sensitive">True</property>
-                    <property name="use_underline">True</property>
-                    <property name="icon_name">list-add-symbolic</property>
-                    <property name="label" translatable="yes">Add Printer</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
                 <child>
                   <object class="GtkToolButton" id="printer-remove-button">
                     <property name="visible">True</property>
