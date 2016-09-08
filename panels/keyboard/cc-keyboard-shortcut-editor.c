@@ -284,6 +284,8 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   accel_valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
                 gtk_accelerator_valid (self->custom_keyval, self->custom_mask) &&
                 !self->custom_is_modifier;
+  if (is_empty_binding (self->custom_keyval, self->custom_mask, self->custom_keycode))
+    accel_valid = TRUE;
   valid = accel_valid;
 
   /* Additional checks for custom shortcuts */
@@ -663,12 +665,10 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
   if (!event->is_modifier && real_mask == 0 && event->keyval == GDK_KEY_BackSpace)
     {
       self->edited = TRUE;
+      self->custom_is_modifier = FALSE;
       self->custom_keycode = 0;
       self->custom_keyval = 0;
       self->custom_mask = 0;
-
-      if (self->item)
-        apply_custom_item_fields (self, self->item);
 
       gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
       gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), "");
@@ -677,6 +677,8 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
       release_grab (self);
 
       self->edited = FALSE;
+
+      setup_custom_shortcut (self);
 
       return GDK_EVENT_STOP;
     }
