@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-30 15:17+0000\n"
-"PO-Revision-Date: 2016-09-03 02:06+0300\n"
+"POT-Creation-Date: 2016-09-08 15:12+0000\n"
+"PO-Revision-Date: 2016-09-08 20:24+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -1706,7 +1706,7 @@ msgstr "Omat pikanäppäimet"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
+#: ../panels/keyboard/keyboard-shortcuts.c:429
 #: ../panels/keyboard/shortcut-editor.ui.h:1
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1740,7 +1740,7 @@ msgstr "Vaihda seuraavaan lähteeseen"
 msgid "Reset the shortcut to its default value"
 msgstr "Palauta pikanäppäin oletusarvoon"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:362
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1749,13 +1749,24 @@ msgstr ""
 "Pikanäppäin %s on jo asetettu toimintoon <b>%s</b>. Jos korvaat sen, "
 "poistetaan toiminto %s poistetaan käytöstä"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Pikanäppäin toiminnolle <b>%s</b>. Anna uusi pikanäppäin vaihtaaksesi."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:519
+#| msgid "Custom Shortcuts"
+msgid "Set Custom Shortcut"
+msgstr "Aseta oma pikanäppäin"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:519
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+#| msgid "Shortcut"
+msgid "Set Shortcut"
+msgstr "Aseta pikanäppäin"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:528
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Anna uusi pikanäppäin vaihtaaksesi <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:928
 msgid "Add Custom Shortcut"
 msgstr "Lisää oma pikanäppäin"
 
@@ -1775,43 +1786,28 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Pikanäppäin;Toisto;Vilkkuminen;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Muokkaa pikanäppäintä napsauttamalla riviä ja paina sitten haluamasi uudet "
-"näppäimet pohjaan. Pikanäppäimen voi poistaa käytöstä painamalla "
-"askelpalautinta."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Näppäimistön pikanäppäintä ei löytynyt"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Yritä eri hakuehdoilla"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Tyhjennä asetukset"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
 msgstr "Nimi"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:4
+#: ../panels/keyboard/shortcut-editor.ui.h:3
 msgid "Command"
 msgstr "Komento"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:5
+#: ../panels/keyboard/shortcut-editor.ui.h:4
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:6
+#: ../panels/keyboard/shortcut-editor.ui.h:5
 msgid "Edit"
 msgstr "Muokkaa"
 
@@ -1839,6 +1835,11 @@ msgstr "Lisää"
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 msgid "Replace"
 msgstr "Korvaa"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:12
+#| msgid "Select"
+msgid "Set"
+msgstr "Aseta"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2220,6 +2221,11 @@ msgstr "Automaattinen, vain DHCP"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Tyhjennä asetukset"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -7346,6 +7352,18 @@ msgstr "Peru haku"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Yhteyspiste"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "Pikanäppäin toiminnolle <b>%s</b>. Anna uusi pikanäppäin vaihtaaksesi."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Muokkaa pikanäppäintä napsauttamalla riviä ja paina sitten haluamasi "
+#~ "uudet näppäimet pohjaan. Pikanäppäimen voi poistaa käytöstä painamalla "
+#~ "askelpalautinta."
 
 #~ msgid "Error logging into the account"
 #~ msgstr "Virhe kirjauduttaessa käyttäjätilille"
