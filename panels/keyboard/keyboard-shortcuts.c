@@ -290,6 +290,18 @@ is_valid_binding (guint                  keyval,
   return TRUE;
 }
 
+gboolean
+is_empty_binding (guint                  keyval,
+                  GdkModifierType        mask,
+                  guint                  keycode)
+{
+  if (keyval == 0 &&
+      mask == 0 &&
+      keycode == 0)
+    return TRUE;
+  return FALSE;
+}
+
 gchar*
 find_free_settings_path (GSettings *settings)
 {
