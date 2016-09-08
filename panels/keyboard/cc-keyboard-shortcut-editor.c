@@ -62,6 +62,7 @@ struct _CcKeyboardShortcutEditor
 
   /* Custom shortcuts */
   GdkDevice          *grab_pointer;
+  guint               grab_idle_id;
 
   guint               custom_keycode;
   guint               custom_keyval;
@@ -717,6 +718,45 @@ cc_keyboard_shortcut_editor_response (GtkDialog *dialog,
     }
 }
 
+static gboolean
+grab_idle (gpointer data)
+{
+  CcKeyboardShortcutEditor *self = data;
+
+  if (self->item && self->item->type != CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+    grab_seat (self);
+
+  self->grab_idle_id = 0;
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+cc_keyboard_shortcut_editor_show (GtkWidget *widget)
+{
+  CcKeyboardShortcutEditor *self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
+
+  /* Map before grabbing, so that the window is visible */
+  GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->show (widget);
+
+  self->grab_idle_id = g_timeout_add (100, grab_idle, self);
+}
+
+static void
+cc_keyboard_shortcut_editor_unrealize (GtkWidget *widget)
+{
+  CcKeyboardShortcutEditor *self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
+
+  if (self->grab_idle_id) {
+    g_source_remove (self->grab_idle_id);
+    self->grab_idle_id = 0;
+  }
+
+  release_grab (self);
+
+  GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->unrealize (widget);
+}
+
 static void
 cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
 {
@@ -728,6 +768,8 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   object_class->get_property = cc_keyboard_shortcut_editor_get_property;
   object_class->set_property = cc_keyboard_shortcut_editor_set_property;
 
+  widget_class->show = cc_keyboard_shortcut_editor_show;
+  widget_class->unrealize = cc_keyboard_shortcut_editor_unrealize;
   widget_class->key_press_event = cc_keyboard_shortcut_editor_key_press_event;
 
   dialog_class->close = cc_keyboard_shortcut_editor_close;
