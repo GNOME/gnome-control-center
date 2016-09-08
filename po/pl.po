@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-06 02:38+0200\n"
-"PO-Revision-Date: 2016-09-06 02:39+0200\n"
+"POT-Creation-Date: 2016-09-08 17:52+0200\n"
+"PO-Revision-Date: 2016-09-08 17:53+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -1702,7 +1702,7 @@ msgstr "Niestandardowe skróty"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
+#: ../panels/keyboard/keyboard-shortcuts.c:440
 #: ../panels/keyboard/shortcut-editor.ui.h:1
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1734,7 +1734,7 @@ msgstr "Przełączenie na następne źródło tylko dla modyfikatorów"
 msgid "Reset the shortcut to its default value"
 msgstr "Przywraca skrót do domyślnej wartości"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1742,14 +1742,22 @@ msgid ""
 msgstr ""
 "%s jest już używane dla <b>%s</b>. Po zastąpieniu %s zostanie wyłączone"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr ""
-"Skrót klawiszowy dla <b>%s</b>. Proszę wprowadzić nowy skrót, aby zmienić."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Ustawienie niestandardowego skrótu"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+msgid "Set Shortcut"
+msgstr "Ustawienie skrótu"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Proszę wprowadzić nowy skrót, aby zmienić <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:934
 msgid "Add Custom Shortcut"
 msgstr "Dodanie niestandardowego skrótu"
 
@@ -1770,42 +1778,28 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Skrót;Skróty;Powtarzanie;Miganie;Pisanie;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Aby zmodyfikować skrót, należy kliknąć wiersz i wcisnąć nowe klawisze lub "
-"nacisnąć klawisz Backspace, aby wyczyścić obecny."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Nie odnaleziono żadnych skrótów klawiszowych"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Proszę spróbować innych słów"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Przywróć"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:4
+#: ../panels/keyboard/shortcut-editor.ui.h:3
 msgid "Command"
 msgstr "Polecenie"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:5
+#: ../panels/keyboard/shortcut-editor.ui.h:4
 msgid "Shortcut"
 msgstr "Skrót"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:6
+#: ../panels/keyboard/shortcut-editor.ui.h:5
 msgid "Edit"
 msgstr "Modyfikuj"
 
@@ -1833,6 +1827,10 @@ msgstr "Dodaj"
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 msgid "Replace"
 msgstr "Zastąp"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:12
+msgid "Set"
+msgstr "Ustaw"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2215,6 +2213,11 @@ msgstr "Automatycznie, tylko DHCP"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Przywróć"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
