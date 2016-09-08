@@ -988,7 +988,7 @@ cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
   default_value = g_settings_get_default_value (item->settings, item->key);
   default_binding = get_binding_from_variant (default_value);
 
-  /* Disables any any shortcut that conflicts with the new shortcut's value */
+  /* Disables any shortcut that conflicts with the new shortcut's value */
   if (default_binding && *default_binding != '\0')
     {
       GdkModifierType mask;
