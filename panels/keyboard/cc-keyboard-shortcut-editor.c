@@ -170,22 +170,29 @@ is_custom_shortcut (CcKeyboardShortcutEditor *self)
 }
 
 static void
-grab_seat (CcKeyboardShortcutEditor *self,
-           GdkEvent                 *event)
+grab_seat (CcKeyboardShortcutEditor *self)
 {
   GdkGrabStatus status;
   GdkDevice *pointer;
   GdkDevice *device;
   GdkWindow *window;
+  GList *seats;
 
-  if (!event)
-    event = gtk_get_current_event ();
-
-  device = gdk_event_get_device (event);
   window = gtk_widget_get_window (GTK_WIDGET (self));
-
-  if (!device || !window)
+  if (!window)
     return;
+
+  seats = gdk_display_list_seats (gdk_window_get_display (window));
+  if (!seats)
+    return;
+
+  device = gdk_seat_get_keyboard (seats->data);
+  g_list_free (seats);
+
+  if (!device) {
+    g_debug ("Keyboard grab unsuccessful, no keyboard in seat");
+    return;
+  }
 
   if (gdk_device_get_source (device) == GDK_SOURCE_KEYBOARD)
     pointer = gdk_device_get_associated_device (device);
@@ -197,7 +204,7 @@ grab_seat (CcKeyboardShortcutEditor *self,
                           GDK_SEAT_CAPABILITY_KEYBOARD,
                           FALSE,
                           NULL,
-                          event,
+                          NULL,
                           NULL,
                           NULL);
 
@@ -442,7 +449,7 @@ edit_custom_shortcut_button_toggled_cb (CcKeyboardShortcutEditor *self,
                                         GtkToggleButton          *button)
 {
   if (gtk_toggle_button_get_active (button))
-    grab_seat (self, NULL);
+    grab_seat (self);
   else
     release_grab (self);
 }
