@@ -302,6 +302,17 @@ is_empty_binding (guint                  keyval,
   return FALSE;
 }
 
+gboolean
+is_valid_accel (guint           keyval,
+                GdkModifierType mask)
+{
+  /* Unlike gtk_accelerator_valid(), we want to allow Tab when combined
+   * with some modifiers (Alt+Tab and friends)
+   */
+  return gtk_accelerator_valid (keyval, mask) ||
+         (keyval == GDK_KEY_Tab && mask != 0);
+}
+
 gchar*
 find_free_settings_path (GSettings *settings)
 {

@@ -282,7 +282,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 
   is_custom = is_custom_shortcut (self);
   accel_valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
-                gtk_accelerator_valid (self->custom_keyval, self->custom_mask) &&
+                is_valid_accel (self->custom_keyval, self->custom_mask) &&
                 !self->custom_is_modifier;
   if (is_empty_binding (self->custom_keyval, self->custom_mask, self->custom_keycode))
     accel_valid = TRUE;

@@ -93,6 +93,9 @@ gboolean is_empty_binding               (guint           keyval,
                                          GdkModifierType mask,
                                          guint           keycode);
 
+gboolean is_valid_accel                 (guint           keyval,
+                                         GdkModifierType mask);
+
 KeyList* parse_keylist_from_file        (const gchar *path);
 
 gchar*   convert_keysym_state_to_string (guint           keysym,
