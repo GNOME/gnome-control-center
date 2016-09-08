@@ -54,8 +54,6 @@ struct _CcKeyboardShortcutEditor
 
   CcShortcutEditorMode mode;
 
-  GdkDevice          *grab_device;
-
   CcKeyboardManager  *manager;
   CcKeyboardItem     *item;
   GBinding           *reset_item_binding;
