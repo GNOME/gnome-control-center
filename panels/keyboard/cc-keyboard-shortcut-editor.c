@@ -632,6 +632,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
   GdkModifierType real_mask;
   gboolean is_custom;
   gboolean editing;
+  guint keyval_lower;
 
   self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
 
@@ -643,8 +644,18 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
 
   real_mask = event->state & gtk_accelerator_get_default_mod_mask ();
 
+  keyval_lower = gdk_keyval_to_lower (event->keyval);
+
+  /* Normalise <Tab> */
+  if (keyval_lower == GDK_KEY_ISO_Left_Tab)
+    keyval_lower = GDK_KEY_Tab;
+
+  /* Put shift back if it changed the case of the key, not otherwise. */
+  if (keyval_lower != event->keyval)
+    real_mask |= GDK_SHIFT_MASK;
+
   /* A single Escape press cancels the editing */
-  if (!event->is_modifier && real_mask == 0 && event->keyval == GDK_KEY_Escape)
+  if (!event->is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_Escape)
     {
       self->edited = FALSE;
 
@@ -657,7 +668,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
     }
 
   /* Backspace disables the current shortcut */
-  if (!event->is_modifier && real_mask == 0 && event->keyval == GDK_KEY_BackSpace)
+  if (!event->is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_BackSpace)
     {
       self->edited = TRUE;
       self->custom_is_modifier = FALSE;
@@ -680,7 +691,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
 
   self->custom_is_modifier = event->is_modifier;
   self->custom_keycode = event->hardware_keycode;
-  self->custom_keyval = event->keyval;
+  self->custom_keyval = keyval_lower;
   self->custom_mask = real_mask;
 
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
