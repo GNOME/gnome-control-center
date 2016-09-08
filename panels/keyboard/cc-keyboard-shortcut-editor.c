@@ -688,9 +688,6 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
   self->custom_mask &= ~GDK_LOCK_MASK;
 
-  if (!self->grab_pointer)
-    grab_seat (self, (GdkEvent*) event);
-
   setup_custom_shortcut (self);
 
   return GDK_EVENT_STOP;
