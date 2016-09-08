@@ -194,7 +194,7 @@ grab_seat (CcKeyboardShortcutEditor *self,
 
   status = gdk_seat_grab (gdk_device_get_seat (pointer),
                           window,
-                          GDK_SEAT_CAPABILITY_ALL,
+                          GDK_SEAT_CAPABILITY_KEYBOARD,
                           FALSE,
                           NULL,
                           event,
