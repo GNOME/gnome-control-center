@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 00:01+0200\n"
-"PO-Revision-Date: 2016-09-08 00:19+0200\n"
+"POT-Creation-Date: 2016-09-10 01:03+0200\n"
+"PO-Revision-Date: 2016-09-10 01:06+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -1706,8 +1706,8 @@ msgstr "Personalizar os atallos"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1738,20 +1738,30 @@ msgstr "Só modificadores cambian á seguinte orixe"
 msgid "Reset the shortcut to its default value"
 msgstr "Restabelecer o atallo ao valor predeterminado"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
-msgstr "%s xa está sendo usado para <b>%s</b>. Se o substitúe, %s desactivarase"
+msgstr ""
+"%s xa está sendo usado para <b>%s</b>. Se o substitúe, %s desactivarase"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Estabelecer atallo personalizado"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "Estabelecer atallo"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
 #, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Atallo de teclado para <b>%s</b>. Escriba un novo atallo para cambialo."
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Escriba o novo atallo para cambiar <b>%s</b>."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Engadir atallo personalizado"
 
@@ -1771,26 +1781,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Atallo;Repetir;Pestanexar;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Para editar unha tecla de atallo prema na fila correspondente e prema unha "
-"combinación de teclas nova, ou prema a tecla de «Retroceso» para limpar todo."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Non se atopou ningún atallo de teclado"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Probe unha busca diferente"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Restabelecer"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Prema Esc para cancelar."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1810,30 +1810,38 @@ msgstr "Atallo"
 msgid "Edit"
 msgstr "Editar"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ningunha"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Eliminar"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Escriba o novo atallo"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Engadir"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Substituír"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "Estabelecer"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2213,6 +2221,11 @@ msgstr "Automático, só DHCP"
 msgid "IPv6"
 msgstr "IPv6"
 
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Restabelecer"
+
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
@@ -2569,8 +2582,8 @@ msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "DNS;"
 msgstr ""
-"Rede;Sen fíos;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Banda "
-"larga;Modem;Bluetooth;vpn;DNS;"
+"Rede;Sen fíos;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Banda larga;Modem;Bluetooth;vpn;"
+"DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
 #: ../panels/network/net-device-wifi.c:471
@@ -3537,14 +3550,17 @@ msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
 "(ascii) or 10/26 (hex)"
 msgstr ""
+"chave wep non válida: lonxitude %zu da chave non válida. A chave debe ter "
+"unha lonxitude 5/13 (ascii) ou 10/26 (hexadecimal)"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:137
 msgid "invalid wep-key: passphrase must be non-empty"
-msgstr ""
+msgstr "chave wep non válida: a frase de paso non debe estar baleira"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:139
 msgid "invalid wep-key: passphrase must be shorter than 64 characters"
 msgstr ""
+"chave wep non válida: a frase de paso debe ser máis curta que 64 caracteres"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
 msgid "1 (Default)"
@@ -3588,10 +3604,14 @@ msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 "digits"
 msgstr ""
+"wpa-psk non válido: a lonxitude de chave %zu non é valida. Debe ser [8,63] "
+"bytes ou 64 dixitos hexadecimais"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.c:79
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
 msgstr ""
+"wpa-psk non válido: non se pode interpretar a chave con 64 bytes como "
+"hexadecimais"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type"
@@ -5241,13 +5261,13 @@ msgstr ""
 "usando a orde de Shell segura: <a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:684
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
 msgstr ""
-"Permitir a usuarios remotos ver ou controlar a súa pantalla conectándose a: <"
-"a href=\"vnc://%s\">vnc://%s</a>"
+"A compatición de pantalla permítelle aos usuarios remotos ver ou controlar a "
+"súa pantalla conectándose a: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:796
 msgid "Copy"
@@ -7335,6 +7355,18 @@ msgstr "Cancelar a busca"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "Atallo de teclado para <b>%s</b>. Escriba un novo atallo para cambialo."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Para editar unha tecla de atallo prema na fila correspondente e prema "
+#~ "unha combinación de teclas nova, ou prema a tecla de «Retroceso» para "
+#~ "limpar todo."
 
 #~ msgid "Color"
 #~ msgstr "Cor"
