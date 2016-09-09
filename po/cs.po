@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-14 10:19+0000\n"
-"PO-Revision-Date: 2016-08-16 22:57+0200\n"
+"POT-Creation-Date: 2016-09-09 09:50+0000\n"
+"PO-Revision-Date: 2016-09-09 16:28+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -126,12 +126,12 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -1121,8 +1121,8 @@ msgstr "Hlavní"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1708,8 +1708,8 @@ msgstr "Vlastní zkratky"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1740,7 +1740,7 @@ msgstr "Přepínač na další zdroj pouze pro modifikátory"
 msgid "Reset the shortcut to its default value"
 msgstr "Vrátit klávesovou zkratku na výchozí"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1749,13 +1749,24 @@ msgstr ""
 "%s se již používá pro <b>%s</b>. Pokud ji nahradíte, bude klávesová zkratka "
 "pro %s zakázána"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Klávesová zkratka pro <b>%s</b>. Změňte ji zadáním nové zkratky."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#| msgid "Custom Shortcuts"
+msgid "Set Custom Shortcut"
+msgstr "Nastavení vlastní klávesové zkratky"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#| msgid "Shortcut"
+msgid "Set Shortcut"
+msgstr "Nastavit zkratku"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Zadejte novou zkratku pro změnu <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:934
 msgid "Add Custom Shortcut"
 msgstr "Přidání klávesové zkratky"
 
@@ -1774,26 +1785,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "zkratka;opakovat;blikat;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Zkratku upravíte kliknutím na odpovídající řádek a podržením nových kláves, "
-"vymazání provedete klávesou Backspace."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Nebyla nalezena žádná klávesová zkratka"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Zkuste jiné hledání"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Resetovat"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Zrušíte zmáčknutím Esc."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1813,30 +1814,39 @@ msgstr "Klávesová zkratka"
 msgid "Edit"
 msgstr "Upravit"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Žádná"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Odebrat"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Zadejte novou klávesovou zkratku"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Přidat"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Nahradit"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+#| msgid "Select"
+msgid "Set"
+msgstr "Nastavit"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2013,7 +2023,7 @@ msgid "page 2"
 msgstr "strana 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2119,7 +2129,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Výborná"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Podrobnosti"
@@ -2186,7 +2196,7 @@ msgstr "Automatické (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Ruční"
 
@@ -2210,7 +2220,7 @@ msgstr "Prefix"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automatické"
 
@@ -2218,10 +2228,15 @@ msgstr "Automatické"
 msgid "Automatic, DHCP only"
 msgstr "Automatické, pouze DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Resetovat"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2454,7 +2469,7 @@ msgid "_Reset"
 msgstr "_Resetovat"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Zapomenout"
@@ -2620,7 +2635,7 @@ msgid "Wired"
 msgstr "Drátová"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2632,7 +2647,7 @@ msgid "Add new connection"
 msgstr "Přidat nové připojení"
 
 # Příliš neformální?
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2640,13 +2655,13 @@ msgstr ""
 "Používáte-li k přístupu na Internet připojení jiné než bezdrátové, můžete "
 "nastavit bezdrátový přístupový bod pro sdílení připojení s ostatními."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Zapnutím bezdrátového přístupového bodu bude připojení k <b>%s</b> ztraceno."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2654,23 +2669,23 @@ msgstr ""
 "Není možné se k Internetu připojovat prostřednictvím bezdrátového připojení "
 "zatímco je aktivní režim přístupového bodu."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Zastavit přístupový bod a odpojit případné uživatele?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "Za_stavit přístupový bod"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systémová zásada zakazuje použití jako přístupový bod"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Bezdrátové zařízení nepodporuje režim přístupového bodu"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2678,11 +2693,11 @@ msgstr ""
 "Informace o síti pro vybrané sítě, včetně hesel a vlastního nastavení, budou "
 "ztraceny."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Historie"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2690,7 +2705,7 @@ msgid "_Close"
 msgstr "_Zavřít"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Zapomenout"
@@ -3620,8 +3635,8 @@ msgstr "_Typ"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -4737,70 +4752,70 @@ msgstr ""
 "Bohužel to vypadá, že systémová\n"
 "služba tisku není dostupná."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Zamykání obrazovky"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "Používá se"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Zapnuto"
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Služby určování polohy"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Použití a historie"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Vysypat všechny položky z koše?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Všechny položky v koši budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Vyprázdnit koš"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Odstranit dočasné soubory?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Všechny dočasné soubory budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Odstranit dočasné soubor_y"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Čištění koše a dočasných souborů"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Využití softwaru"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Hlášení problémů"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4809,7 +4824,7 @@ msgstr ""
 "Díky odesílání hlášení o technických problémech se může %s vylepšovat. "
 "Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Zásady soukromí"
 
@@ -7367,3 +7382,13 @@ msgstr "Zrušit vyhledávání"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Přístupový bod"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr "Klávesová zkratka pro <b>%s</b>. Změňte ji zadáním nové zkratky."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Zkratku upravíte kliknutím na odpovídající řádek a podržením nových "
+#~ "kláves, vymazání provedete klávesou Backspace."
