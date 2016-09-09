@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-09-01 15:48+0000\n"
-"PO-Revision-Date: 2016-09-04 09:50+0500\n"
+"POT-Creation-Date: 2016-09-09 09:50+0000\n"
+"PO-Revision-Date: 2016-09-09 21:12+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -1690,8 +1690,8 @@ msgstr "Таңдауыңызша жарлықтар"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1722,7 +1722,7 @@ msgstr "Түрлендіргіш пернесі келесі кіріс көзі
 msgid "Reset the shortcut to its default value"
 msgstr "Жарлықты бастапқы мәніне тастау"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1731,14 +1731,22 @@ msgstr ""
 "%s жарлығы <b>%s</b> үшін қолданылуда болып тұр. Оны алмастырсаңыз, %s "
 "сөндірілетін болады"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr ""
-"<b>%s</b> үшін пернетақта жарлығы. Өзгерту үшін жаңа жарлықты енгізіңіз."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Таңдауыңызша жарлықты орнату"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "Жарлықты орнату"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "<b>%s</b> өзгерту үшін жаңа жарлықты енгізіңіз."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:934
 msgid "Add Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты қосу"
 
@@ -1757,26 +1765,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Жарлық;Қайталау;Жыпылықтау;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Жарлықты түзету үшін, оның жолын таңдап, жаңа пернелерді басыңыз немесе "
-"тазарту үшін Backspace басыңыз."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Пернетақта жарлықтары табылмады"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Басқа сөздерді іздеп көріңіз"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Тастау"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Бас тарту үшін Esc басыңыз."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1796,30 +1794,38 @@ msgstr "Жарлық"
 msgid "Edit"
 msgstr "Түзету"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Өшіру"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Жаңа пернетақта жарлығын енгізіңіз"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Болдырмау"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Қосу"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Алмастыру"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "Орнату"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2197,6 +2203,11 @@ msgstr "Автоматты түрде, тек DHCP"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Тастау"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -7314,6 +7325,17 @@ msgstr "Іздеуді тоқтату"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Қатынау нүктесі"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "<b>%s</b> үшін пернетақта жарлығы. Өзгерту үшін жаңа жарлықты енгізіңіз."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Жарлықты түзету үшін, оның жолын таңдап, жаңа пернелерді басыңыз немесе "
+#~ "тазарту үшін Backspace басыңыз."
 
 #~ msgid "_Name:"
 #~ msgstr "_Аты:"
