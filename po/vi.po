@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-09-06 14:57+0000\n"
-"PO-Revision-Date: 2016-09-07 14:26+0700\n"
+"POT-Creation-Date: 2016-09-08 17:29+0000\n"
+"PO-Revision-Date: 2016-09-09 07:59+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -1703,7 +1703,7 @@ msgstr "Phím tắt tự chọn"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
+#: ../panels/keyboard/keyboard-shortcuts.c:440
 #: ../panels/keyboard/shortcut-editor.ui.h:1
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
@@ -1735,20 +1735,29 @@ msgstr "Chuyển sang kiểu gõ kế chỉ dùng phím bổ trợ"
 msgid "Reset the shortcut to its default value"
 msgstr "Đặt lại các phím tắt thành giá trị mặc định của chúng"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s đang được sử dụng cho <b>%s</b>. Nếu bạn thay thế nó, %s sẽ bị tắt"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Phím tắt cho <b>%s</b>. Nhập vào phím tắt mới để thay đổi."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Đặt phím tắt tự chọn"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+msgid "Set Shortcut"
+msgstr "Đặt phím tắt"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Gõ phím tắt mới để thay đổi <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:934
 msgid "Add Custom Shortcut"
 msgstr "Thêm phím tắt tự chọn"
 
@@ -1767,42 +1776,28 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Shortcut;Phím;tắt;phim;tat;Repeat;Lặp;lap;Blink;Nháy;nhay;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Để sửa đổi phím tắt, nhấn vào hàng muốn sửa rồi ấn tổ hợp phím mới hoặc nhấn "
-"Backspace để xóa phím tắt."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Không tìm thấy phím tắt bàn phím"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Thử tìm kiếm khác"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Đặt lại"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
 msgstr "Tên"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:4
+#: ../panels/keyboard/shortcut-editor.ui.h:3
 msgid "Command"
 msgstr "Câu lệnh"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:5
+#: ../panels/keyboard/shortcut-editor.ui.h:4
 msgid "Shortcut"
 msgstr "Phím tắt"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:6
+#: ../panels/keyboard/shortcut-editor.ui.h:5
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
@@ -1830,6 +1825,10 @@ msgstr "Thêm"
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 msgid "Replace"
 msgstr "Thay thế"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:12
+msgid "Set"
+msgstr "Đặt"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2208,6 +2207,11 @@ msgstr "Tự động, chỉ DHCP"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Đặt lại"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -7348,6 +7352,16 @@ msgstr "Ngưng tìm"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Điểm truy cập"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr "Phím tắt cho <b>%s</b>. Nhập vào phím tắt mới để thay đổi."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Để sửa đổi phím tắt, nhấn vào hàng muốn sửa rồi ấn tổ hợp phím mới hoặc "
+#~ "nhấn Backspace để xóa phím tắt."
 
 #~ msgid "Color"
 #~ msgstr "Màu sắc"
