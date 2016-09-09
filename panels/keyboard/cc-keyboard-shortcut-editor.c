@@ -847,6 +847,9 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
 
   self->mode = CC_SHORTCUT_EDITOR_EDIT;
   self->custom_is_modifier = TRUE;
+
+  gtk_widget_set_direction (self->custom_shortcut_accel_label, GTK_TEXT_DIR_LTR);
+  gtk_widget_set_direction (self->shortcut_accel_label, GTK_TEXT_DIR_LTR);
 }
 
 /**
