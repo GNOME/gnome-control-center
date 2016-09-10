@@ -29,8 +29,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-30 15:17+0000\n"
-"PO-Revision-Date: 2016-09-03 20:05+0900\n"
+"POT-Creation-Date: 2016-09-09 09:50+0000\n"
+"PO-Revision-Date: 2016-09-10 00:49+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -1711,8 +1711,8 @@ msgstr "사용자 설정 바로 가기"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1743,20 +1743,30 @@ msgstr "조합 키로만 다음 입력 소스로 전환"
 msgid "Reset the shortcut to its default value"
 msgstr "바로 가기 키 기본값으로 초기화"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
-msgstr "%s은(는) <b>%s</b>용으로 사용 중입니다. 바꾸면 %s이(가) 사용 중지됩니다"
+msgstr ""
+"%s은(는) <b>%s</b>용으로 사용 중입니다. 바꾸면 %s이(가) 사용 중지됩니다"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "사용자 설정 바로 가기 설정"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "바로 가기 설정"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
 #, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "<b>%s</b>에 대한 키보드 바로 가기. 바꾸려면 새 바로 가기 키를 입력하십시오."
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "<b>%s</b> 항목을 바꾸려면 새 바로 가기를 입력하십시오."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:934
 msgid "Add Custom Shortcut"
 msgstr "사용자 설정 바로 가기 키 추가"
 
@@ -1775,26 +1785,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Shortcut;바로 가기;Repeat;반복;Blink;깜박;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"바로 가기 키를 편집하려면, 해당 줄을 누르고 새 키를 누르십시오. 지우려면 백스"
-"페이스를 누르십시오."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "키보드 바로 가기가 없습니다"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "다르게 검색해 보십시오"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "초기화"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "취소하려면 Esc를 누르십시오."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1814,30 +1814,38 @@ msgstr "바로 가기"
 msgid "Edit"
 msgstr "편집"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "없음"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "제거"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "새 바로 가기 입력"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "취소"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "추가"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "바꾸기"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "설정"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2219,6 +2227,11 @@ msgstr "자동, DHCP 전용"
 msgid "IPv6"
 msgstr "IPv6"
 
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "초기화"
+
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
@@ -2572,7 +2585,10 @@ msgstr "어떻게 인터넷에 연결할지 정합니다"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "DNS;"
-msgstr "Network;네트워크;Wireless;무선;Wi-Fi;Wifi;와이파이;IP;LAN;랜;Proxy;프록시;WAN;인터넷;Broadband;브로드밴드;Modem;모뎀;Bluetooth;블루투스;vpn;가상사설망;;DNS;네임서버;"
+msgstr ""
+"Network;네트워크;Wireless;무선;Wi-Fi;Wifi;와이파이;IP;LAN;랜;Proxy;프록시;"
+"WAN;인터넷;Broadband;브로드밴드;Modem;모뎀;Bluetooth;블루투스;vpn;가상사설"
+"망;;DNS;네임서버;"
 
 #: ../panels/network/net-device-ethernet.c:106
 #: ../panels/network/net-device-wifi.c:471
@@ -3528,7 +3544,9 @@ msgstr "잘못된 WEP 키: 길이가 %zu인 키에는 ASCII 문자만 들어 있
 msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
 "(ascii) or 10/26 (hex)"
-msgstr "잘못된 WEP 키: 잘못된 키 길이 %zu. 키 길이는 5/13 (ASCII) 또는 10/26 (16진수) 중 하나여야 합니다"
+msgstr ""
+"잘못된 WEP 키: 잘못된 키 길이 %zu. 키 길이는 5/13 (ASCII) 또는 10/26 (16진"
+"수) 중 하나여야 합니다"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:137
 msgid "invalid wep-key: passphrase must be non-empty"
@@ -3579,7 +3597,9 @@ msgstr "WEP 인덱스(_X)"
 msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 "digits"
-msgstr "잘못된 WPA-PSK: 잘못된 키 길이 %zu. [8,64] 바이트 또는 64개 16진수 숫자여야 합니다"
+msgstr ""
+"잘못된 WPA-PSK: 잘못된 키 길이 %zu. [8,64] 바이트 또는 64개 16진수 숫자여야 "
+"합니다"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.c:79
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
@@ -5218,7 +5238,8 @@ msgid ""
 "Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
-"원격 로그인을 사용하면, 원격 사용자가 다음 보안 셸 명령으로 연결할 수 있습니다:\n"
+"원격 로그인을 사용하면, 원격 사용자가 다음 보안 셸 명령으로 연결할 수 있습니"
+"다:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:684
@@ -5226,7 +5247,9 @@ msgstr ""
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
-msgstr "화면 공유를 사용하면, 원격 사용자가 <a href=\"vnc://%s\">vnc://%s</a>에 연결해 화면을 보거나 조작할 수 있습니다"
+msgstr ""
+"화면 공유를 사용하면, 원격 사용자가 <a href=\"vnc://%s\">vnc://%s</a>에 연결"
+"해 화면을 보거나 조작할 수 있습니다"
 
 #: ../panels/sharing/cc-sharing-panel.c:796
 msgid "Copy"
@@ -6097,7 +6120,9 @@ msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
 "resources on the internet."
-msgstr "기업 로그인에서는 중앙에서 관리하는 사용자 계정을 이 장치에서 사용합니다. 이 계정을 사용해서 인터넷에서 회사의 자원에 접근할 수 잇습니다."
+msgstr ""
+"기업 로그인에서는 중앙에서 관리하는 사용자 계정을 이 장치에서 사용합니다. 이 "
+"계정을 사용해서 인터넷에서 회사의 자원에 접근할 수 잇습니다."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
 #: ../panels/user-accounts/data/join-dialog.ui.h:9
@@ -6858,7 +6883,9 @@ msgstr "사용자 이름은 '-'로 시작할 수 없습니다."
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
-msgstr "사용자 이름은 a-z까지 대소문자와 숫자, 그리고 다음 문자만으로 만들어야 합니다: . - _"
+msgstr ""
+"사용자 이름은 a-z까지 대소문자와 숫자, 그리고 다음 문자만으로 만들어야 합니"
+"다: . - _"
 
 #: ../panels/user-accounts/um-utils.c:576
 msgid "This will be used to name your home folder and can't be changed."
@@ -7302,3 +7329,15 @@ msgstr "검색 취소"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "핫스팟"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "<b>%s</b>에 대한 키보드 바로 가기. 바꾸려면 새 바로 가기 키를 입력하십시"
+#~ "오."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "바로 가기 키를 편집하려면, 해당 줄을 누르고 새 키를 누르십시오. 지우려면 "
+#~ "백스페이스를 누르십시오."
