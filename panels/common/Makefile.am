@@ -10,7 +10,9 @@ AM_CPPFLAGS =						\
 
 BUILT_SOURCES =			\
 	cc-common-resources.c	\
-	cc-common-resources.h
+	cc-common-resources.h	\
+	gsd-common-enums.c	\
+	gsd-common-enums.h
 
 liblanguage_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
