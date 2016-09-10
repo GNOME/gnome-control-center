@@ -1903,14 +1903,23 @@ add_power_saving_section (CcPowerPanel *self)
   row = no_prelight_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   gtk_container_add (GTK_CONTAINER (row), box);
+
+  box2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_widget_set_margin_start (box2, 20);
+  gtk_widget_set_margin_end (box2, 20);
+  gtk_widget_set_margin_top (box2, 6);
+  gtk_widget_set_margin_bottom (box2, 6);
+  gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
+
   label = gtk_label_new (_("_Bluetooth"));
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_start (label, 20);
-  gtk_widget_set_margin_end (label, 20);
-  gtk_widget_set_margin_top (label, 6);
-  gtk_widget_set_margin_bottom (label, 6);
-  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
+
+  label = gtk_label_new (_("Turn off Bluetooth to save power."));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
+  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
   priv->bt_switch = sw = gtk_switch_new ();
   gtk_widget_set_margin_start (sw, 20);
