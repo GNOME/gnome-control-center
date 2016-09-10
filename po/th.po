@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-30 15:17+0000\n"
-"PO-Revision-Date: 2016-09-09 14:50+0700\n"
+"POT-Creation-Date: 2016-09-10 00:29+0000\n"
+"PO-Revision-Date: 2016-09-10 15:37+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -1680,8 +1680,8 @@ msgstr "ปุ่มลัดกำหนดเอง"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1712,20 +1712,29 @@ msgstr "ปุ่มสลับไปยังช่องทางถัดไ
 msgid "Reset the shortcut to its default value"
 msgstr "คืนค่าปุ่มลัดกลับเป็นค่าปริยาย"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s ถูกใช้กับ <b>%s</b> ไปแล้ว ถ้าคุณกำหนดทับ %s ก็จะถูกปิดไม่ให้ใช้งาน"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "ปุ่มลัดสำหรับ <b>%s</b> กดปุ่มลัดใหม่เพื่อเปลี่ยนแปลง"
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "ตั้งค่าปุ่มลัดที่กำหนดเอง"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "ตั้งค่าปุ่มลัด"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "กดปุ่มลัดใหม่เพื่อเปลี่ยน <b>%s</b>"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "เพิ่มปุ่มลัดกำหนดเอง"
 
@@ -1744,26 +1753,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "ปุ่มลัด;ซ้ำปุ่ม;กะพริบ;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"ถ้าต้องการแก้ไขปุ่มลัด คลิกที่รายการที่ต้องการแล้วกดปุ่มลัดชุดใหม่ หรือกดปุ่ม Backspace "
-"ถ้าต้องการล้างปุ่มลัด"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "ไม่พบปุ่มลัด"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "ลองค้นหาด้วยคำอื่น"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:78
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "ล้างค่า"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "กด Esc เพื่อยกเลิก"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1783,30 +1782,38 @@ msgstr "ปุ่มลัด"
 msgid "Edit"
 msgstr "แก้ไข"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "ไม่ใช้"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "ลบออก"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "กดปุ่มลัดอันใหม่"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "เพิ่ม"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "กำหนดทับ"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "กำหนดค่า"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2182,6 +2189,11 @@ msgstr "อัตโนมัติ ใช้ DHCP เท่านั้น"
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "ล้างค่า"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -7237,6 +7249,16 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "จุดแพร่สัญญาณ"
 
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr "ปุ่มลัดสำหรับ <b>%s</b> กดปุ่มลัดใหม่เพื่อเปลี่ยนแปลง"
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "ถ้าต้องการแก้ไขปุ่มลัด คลิกที่รายการที่ต้องการแล้วกดปุ่มลัดชุดใหม่ หรือกดปุ่ม Backspace "
+#~ "ถ้าต้องการล้างปุ่มลัด"
+
 #~ msgid "Done"
 #~ msgstr "เสร็จสิ้น"
 
@@ -8749,9 +8771,6 @@ msgstr "จุดแพร่สัญญาณ"
 
 #~ msgid "The type of accelerator."
 #~ msgstr "ชนิดของปุ่มลัด"
-
-#~ msgid "Error saving the new shortcut"
-#~ msgstr "เกิดข้อผิดพลาดขณะบันทึกปุ่มลัด"
 
 #~ msgid "Too many custom shortcuts"
 #~ msgstr "ปุ่มลัดที่กำหนดเองมีมากเกินไป"
