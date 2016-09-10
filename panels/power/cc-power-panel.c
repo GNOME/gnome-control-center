@@ -1842,7 +1842,6 @@ add_power_saving_section (CcPowerPanel *self)
                     G_CALLBACK (nm_device_changed), self);
   g_signal_connect (priv->nm_client, "device-removed",
                     G_CALLBACK (nm_device_changed), self);
-  nm_device_changed (priv->nm_client, NULL, self);
 
   g_signal_connect (G_OBJECT (priv->wifi_switch), "notify::active",
                     G_CALLBACK (wifi_switch_changed), self);
@@ -1899,6 +1898,10 @@ add_power_saving_section (CcPowerPanel *self)
 #endif
 
   gtk_widget_show_all (widget);
+
+#ifdef HAVE_NETWORK_MANAGER
+  nm_device_changed (priv->nm_client, NULL, self);
+#endif
 }
 
 static void
