@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-09 20:06+0200\n"
-"PO-Revision-Date: 2016-08-08 22:15+0200\n"
+"POT-Creation-Date: 2016-09-11 09:36+0200\n"
+"PO-Revision-Date: 2016-09-11 09:37+0200\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -120,12 +120,12 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -1123,8 +1123,8 @@ msgstr "Primària"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1712,8 +1712,8 @@ msgstr "Dreceres personalitzades"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1744,20 +1744,29 @@ msgstr "Només els modificadors commuten a la font següent"
 msgid "Reset the shortcut to its default value"
 msgstr "Reinicia la drecera al seu valor per omissió"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s ja s'utilitza per <b>%s</b>. Si la reemplaceu, %s s'inhabilitarà"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Drecera de teclat per <b>%s</b>. Introduïu la drecera nova a canviar."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Estableix la drecera personalitzada"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "Estableix la drecera"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Introduïu una drecera nova per canviar <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Afegeix drecera personalitzada"
 
@@ -1778,26 +1787,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Drecera;Repeteix;Parpelleig;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Per editar una drecera, feu clic a la fila corresponent i premeu la "
-"combinació de tecles nova, o premeu la tecla de retrocés per netejar-la."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "No s'ha trobat la tecla de drecera"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Proveu amb una cerca diferent"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Reinicia"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Premeu Esc per cancel·lar."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1817,30 +1816,38 @@ msgstr "Drecera"
 msgid "Edit"
 msgstr "Edita"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Cap"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Introduïu la drecera nova"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Afegeix"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Reemplaça"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "Estableix"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2016,7 +2023,7 @@ msgid "page 2"
 msgstr "pàgina 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2117,7 +2124,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excel·lent"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Detalls"
@@ -2184,7 +2191,7 @@ msgstr "Automàtic (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Manual"
 
@@ -2208,7 +2215,7 @@ msgstr "Prefix"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automàtic"
 
@@ -2216,10 +2223,15 @@ msgstr "Automàtic"
 msgid "Automatic, DHCP only"
 msgstr "Automàtic, només DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Reinicia"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2452,7 +2464,7 @@ msgid "_Reset"
 msgstr "_Reinicia"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Oblida"
@@ -2618,7 +2630,7 @@ msgid "Wired"
 msgstr "Amb fil"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2629,7 +2641,7 @@ msgstr "Opcions…"
 msgid "Add new connection"
 msgstr "Afegeix una connexió nova"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2637,12 +2649,12 @@ msgstr ""
 "Si teniu una connexió a Internet que no sigui la xarxa sense fil, podeu "
 "establir un punt d'accés sense fil per compartir-la amb altres."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Si activeu el punt d'accés sense fil us desconnectareu de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2650,24 +2662,24 @@ msgstr ""
 "No és possible accedir a Internet a través de la xarxa sense fil mentre el "
 "punt d'accés està actiu."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Voleu aturar el punt d'accés Wi-Fi i desconnectar els usuaris?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Atura el punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 "La política del sistema prohibeix utilitzar-lo com a punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositiu sense fil no admet el mode punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2675,11 +2687,11 @@ msgstr ""
 "Es perdran les dades de xarxa de les xarxes seleccionades, incloent les "
 "contrasenyes i la configuració personalitzada."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Historial"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2687,7 +2699,7 @@ msgid "_Close"
 msgstr "_Tanca"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oblida"
@@ -3240,7 +3252,7 @@ msgstr "Cable desconnectat"
 
 #: ../panels/network/wireless-security/eap-method.c:69
 msgid "undefined error in 802.1x security (wpa-eap)"
-msgstr ""
+msgstr "s'ha produït un error no definit en la seguretat de 802.1x (wpa-eap)"
 
 #: ../panels/network/wireless-security/eap-method.c:245
 msgid "no file selected"
@@ -3248,7 +3260,7 @@ msgstr "no s'ha seleccionat cap fitxer"
 
 #: ../panels/network/wireless-security/eap-method.c:276
 msgid "unspecified error validating eap-method file"
-msgstr ""
+msgstr "s'ha produït un error no especificat en validar el fitxer eap-method"
 
 #: ../panels/network/wireless-security/eap-method.c:480
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
@@ -3260,7 +3272,7 @@ msgstr "Certificats DER o PEM (*.der, *.pem, *.crt, *.cer)"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:72
 msgid "missing EAP-FAST PAC file"
-msgstr ""
+msgstr "falta el fitxer EAP-FAST PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:268
 #: ../panels/network/wireless-security/eap-method-peap.c:302
@@ -3343,11 +3355,11 @@ msgstr "_Mostra la contrasenya"
 #: ../panels/network/wireless-security/eap-method-peap.c:63
 #, c-format
 msgid "invalid EAP-PEAP CA certificate: %s"
-msgstr ""
+msgstr "certificat CA EAP-PEAP no vàlid: %s"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:68
 msgid "invalid EAP-PEAP CA certificate: no certificate specified"
-msgstr ""
+msgstr "certificat CA EAP-PEAP no vàlid: no s'ha especificat un certificat"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:287
 #: ../panels/network/wireless-security/eap-method-ttls.c:318
@@ -3400,11 +3412,11 @@ msgstr "falta la identitat EAP-TLS"
 #: ../panels/network/wireless-security/eap-method-tls.c:77
 #, c-format
 msgid "invalid EAP-TLS CA certificate: %s"
-msgstr ""
+msgstr "certificat CA EAP-TLS invàlid: %s"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:84
 msgid "invalid EAP-TLS CA certificate: no certificate specified"
-msgstr ""
+msgstr "certificat CA EAP-TLS invàlid: no s'ha especificat un certificat"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:95
 msgid "invalid EAP-TLS password: missing"
@@ -3465,11 +3477,11 @@ msgstr "Contrasenya de clau _privada"
 #: ../panels/network/wireless-security/eap-method-ttls.c:63
 #, c-format
 msgid "invalid EAP-TTLS CA certificate: %s"
-msgstr ""
+msgstr "certificat CA EAP-TTLS no vàlid: %s"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:68
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
-msgstr ""
+msgstr "certificat CA EAP-TTLS no vàlid: no s'ha especificat un certificat"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:258
 msgid "PAP"
@@ -3485,7 +3497,7 @@ msgstr "CHAP"
 
 #: ../panels/network/wireless-security/wireless-security.c:87
 msgid "Unknown error validating 802.1x security"
-msgstr ""
+msgstr "S'ha produït un error desconegut en validar la seguretat de 802.1x"
 
 #: ../panels/network/wireless-security/wireless-security.c:451
 msgid "TLS"
@@ -3555,7 +3567,7 @@ msgstr "clau wep invàlida: la contrasenya no pot ser buida."
 
 #: ../panels/network/wireless-security/ws-wep-key.c:139
 msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr ""
+msgstr "clau wep invàlida: la contrasenya ha tenir menys de 64 caràcters"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
 msgid "1 (Default)"
@@ -3599,10 +3611,11 @@ msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 "digits"
 msgstr ""
+"wpa-psk no vàlid: longitud de clau %zu no vàlida. Ha de tenir [8,63] bytes o 64 dígits hexadecimals"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.c:79
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr ""
+msgstr "wpa-psk no vàlid: no es pot interpretar la clau de 64 bytes com a hexadecimal"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type"
@@ -3610,8 +3623,8 @@ msgstr "_Tipus"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3712,39 +3725,23 @@ msgstr "Xat"
 msgid "Resources"
 msgstr "Recursos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "S'ha produït un error en entrar al compte"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "Han caducat les credencials."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Entreu per habilitar aquest compte."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "_Entra"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "S'ha produït un error en crear el compte"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "S'ha produït un error en suprimir el compte"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr "Segur que voleu suprimir el compte?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "No se suprimirà el compte al servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Suprimeix"
 
@@ -4740,70 +4737,70 @@ msgstr ""
 "Sembla que el servei del sistema\n"
 "d'impressió no està disponible."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Bloca la pantalla"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "En ús"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Activat"
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Apagat"
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Serveis d'ubicació"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Utilització i historial"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Voleu buidar la paperera?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "S'esborraran definitivament tots els elements de la paperera."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Buida la paperera"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Buida tots fitxers temporals?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "S'esborraran definitivament tots els fitxers temporals."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Suprimeix els fitxers _temporals"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Buida la paperera i els fitxers temporals"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Ús de programari"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Informa de problemes"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4812,7 +4809,7 @@ msgstr ""
 "Enviar informes de problemes tècnics ajuda a millorar %s. Els informes "
 "s'envien anònimament i sense dades personals."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Política de privacitat"
 
@@ -6908,7 +6905,7 @@ msgstr "El meu compte"
 
 #: ../panels/user-accounts/um-utils.c:563
 msgid "Sorry, that user name isn't available. Please try another."
-msgstr ""
+msgstr "El nom d'usuari no està disponible. Trieu un altre."
 
 #: ../panels/user-accounts/um-utils.c:566
 #, c-format
@@ -7367,6 +7364,29 @@ msgstr "Cancel·la la cerca"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Punt d'accés Wi-Fi"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "Drecera de teclat per <b>%s</b>. Introduïu la drecera nova a canviar."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Per editar una drecera, feu clic a la fila corresponent i premeu la "
+#~ "combinació de tecles nova, o premeu la tecla de retrocés per netejar-la."
+
+#~ msgid "Error logging into the account"
+#~ msgstr "S'ha produït un error en entrar al compte"
+
+#~ msgid "Credentials have expired."
+#~ msgstr "Han caducat les credencials."
+
+#~ msgid "Sign in to enable this account."
+#~ msgstr "Entreu per habilitar aquest compte."
+
+#~ msgid "_Sign In"
+#~ msgstr "_Entra"
 
 #~ msgid "_Name:"
 #~ msgstr "_Nom:"
