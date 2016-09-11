@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-16 20:59+0000\n"
-"PO-Revision-Date: 2016-08-29 22:04+0200\n"
+"POT-Creation-Date: 2016-09-10 14:47+0000\n"
+"PO-Revision-Date: 2016-09-11 08:29+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: srpski <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
@@ -114,12 +114,12 @@ msgstr "Možete da dodate slike u vašu fasciklu %s i one će biti prikazane ovd
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -159,7 +159,6 @@ msgstr "Trenutna pozadina"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
-#| msgid "Background"
 msgid "Back­ground"
 msgstr "Pozadina"
 
@@ -210,7 +209,6 @@ msgstr "Isključite avionski režim rada biste uključili blutut."
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
-#| msgid "Bluetooth"
 msgid "Blue­tooth"
 msgstr "Blutut"
 
@@ -1114,8 +1112,8 @@ msgstr "Glavni"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1239,7 +1237,6 @@ msgstr "_Rasporedi objedinjene prikaze"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-#| msgid "Displays"
 msgid "Dis­plays"
 msgstr "Ekrani"
 
@@ -1393,7 +1390,6 @@ msgstr "Izdanje %s"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
-#| msgid "Details"
 msgid "De­tails"
 msgstr "Pojedinosti"
 
@@ -1407,8 +1403,8 @@ msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
-"uređaj;sistem;informacije;memorija;procesor;izdanje;osnovno;program;omiljeno;cd"
-";dvd;usb;zvuk;snimak;disk;uklonjivi;medijum;nosač;samopokretanje;"
+"uređaj;sistem;informacije;memorija;procesor;izdanje;osnovno;program;omiljeno;"
+"cd;dvd;usb;zvuk;snimak;disk;uklonjivi;medijum;nosač;samopokretanje;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
@@ -1700,8 +1696,8 @@ msgstr "Proizvoljne prečice"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1732,27 +1728,36 @@ msgstr "Izmenjivači samo prebacuju na sledeći izvor"
 msgid "Reset the shortcut to its default value"
 msgstr "Vrati prečicu na njenu osnovnu vrednost"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "„%s“ se već koristi za <b>%s</b>. Ako zamenite, „%s“ biće isključeno"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Prečica tastature za <b>%s</b>. Unesite novu prečicu da izemnite."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#| msgid "Custom Shortcuts"
+msgid "Set Custom Shortcut"
+msgstr "Postavi proizvoljnu prečicu"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
-#| msgid "Custom Shortcut"
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#| msgid "Shortcut"
+msgid "Set Shortcut"
+msgstr "Postavi prečicu"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Unesite novu prečicu da izmenite <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Dodajte proizvoljnu prečicu"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#| msgid "Keyboard"
 msgid "Key­board"
 msgstr "Tastatura"
 
@@ -1767,27 +1772,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "prečica;ponovi;trepni;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Da izmenite prečicu, kliknite na odgovarajući red i ukucajte novu "
-"kombinaciju tastera ili pritisnite „Backspace“ da obrišete prečicu."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#| msgid "Keyboard Shortcuts"
 msgid "No keyboard shortcut found"
 msgstr "Nisam našao rečicu tastature"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Probajte drugačiju pretragu"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Ponovo postavi"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Pritisni Esc da otkažete."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1796,12 +1790,10 @@ msgid "Name"
 msgstr "Naziv"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:4
-#| msgid "C_ommand:"
 msgid "Command"
 msgstr "Naredba"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:5
-#| msgid "Shortcuts"
 msgid "Shortcut"
 msgstr "Prečica"
 
@@ -1809,32 +1801,39 @@ msgstr "Prečica"
 msgid "Edit"
 msgstr "Uredi"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ništa"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
-#| msgid "_Remove"
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Ukloni"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Unesite novu prečicu"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Dodaj"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
-#| msgid "_Replace"
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Zameni"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+#| msgid "Select"
+msgid "Set"
+msgstr "Postavi"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1842,7 +1841,6 @@ msgstr "Isprobaj _podešavanja"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-#| msgid "Mouse & Touchpad"
 msgid "Mouse & Touch­pad"
 msgstr "Miš i dodirna tabla"
 
@@ -1912,7 +1910,6 @@ msgid "Tap to Click"
 msgstr "Lupni za klik"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#| msgid "Two _finger scroll"
 msgid "Two-finger Scrolling"
 msgstr "Premicanje sa dva prsta"
 
@@ -2011,7 +2008,7 @@ msgid "page 2"
 msgstr "strana 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2114,7 +2111,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Izvrstan signal"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Pojedinosti"
@@ -2181,7 +2178,7 @@ msgstr "Samostalno (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Ručno"
 
@@ -2205,7 +2202,7 @@ msgstr "Prefiks"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Samostalno"
 
@@ -2213,10 +2210,15 @@ msgstr "Samostalno"
 msgid "Automatic, DHCP only"
 msgstr "Samostalno, samo DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Ponovo postavi"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2440,7 +2442,6 @@ msgid "Import from file…"
 msgstr "Uvezi iz datoteke…"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:817
-#| msgid "%s VPN"
 msgid "Add VPN"
 msgstr "Dodaj VPN"
 
@@ -2450,7 +2451,7 @@ msgid "_Reset"
 msgstr "_Ponovo postavi"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Zaboravi"
@@ -2562,7 +2563,6 @@ msgstr "Učini dostupno _drugim korisnicima"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-#| msgid "Network"
 msgid "Net­work"
 msgstr "Mreža"
 
@@ -2572,15 +2572,12 @@ msgstr "Upravljajte vašim povezivanjem na Internet"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;DNS;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "DNS;"
 msgstr ""
-"mreža;bežična;vaj-faj;ip;lan;posrednik;van;širokopojasna;modem;blutut;vpn;DNS"
-";"
+"mreža;bežična;vaj-faj;ip;lan;posrednik;van;širokopojasna;modem;blutut;vpn;"
+"DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
 #: ../panels/network/net-device-wifi.c:471
@@ -2620,7 +2617,7 @@ msgid "Wired"
 msgstr "Žičana"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2631,7 +2628,7 @@ msgstr "Mogućnosti…"
 msgid "Add new connection"
 msgstr "Dodajte novu vezu"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2639,12 +2636,12 @@ msgstr ""
 "Ako imate neku drugu vezu na Internet osim bežične, možete da podesite "
 "bežičnu vruću tačku da delite vezu sa drugima."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Uključivanjem bežične vruće tačke prekinućete vezu sa <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2652,23 +2649,23 @@ msgstr ""
 "Nije moguće pristupiti Internetu preko vaše bežične dok je uključena vruća "
 "tačka."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Da zaustavim vruću tačku i da isključim sve korisnike?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Zaustavi vruću tačku"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Politika sistema zabranjuje upotrebu kao vruće tačke"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Bežični uređaj ne podržava režim vruće tačke"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2676,11 +2673,11 @@ msgstr ""
 "Detalji mreže za izabrane mreže, uključujući lozinku i sva proizvoljna "
 "podešavanja će biti izgubljeni."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Istorijat"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2688,7 +2685,7 @@ msgid "_Close"
 msgstr "_Zatvori"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Zaboravi"
@@ -3244,7 +3241,6 @@ msgid "undefined error in 802.1x security (wpa-eap)"
 msgstr "neodređena greška u 802.1x bezbednosti (vpa-eap)"
 
 #: ../panels/network/wireless-security/eap-method.c:245
-#| msgid "No input source selected"
 msgid "no file selected"
 msgstr "Nije izabrana datoteka"
 
@@ -3253,7 +3249,6 @@ msgid "unspecified error validating eap-method file"
 msgstr "neodređena greška potvrđivanja datoteke eap-metoda"
 
 #: ../panels/network/wireless-security/eap-method.c:480
-#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, ili PKCS#12 lični ključevi (*.der, *.pem, *.p12, *.key)"
 
@@ -3317,7 +3312,6 @@ msgid "_Inner authentication"
 msgstr "_Unutrašnja prijava"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
-#| msgid "PAC pro_visioning"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Dozvoli automatsko PAC _snabdevanje"
 
@@ -3383,7 +3377,6 @@ msgstr "CA _uverenje"
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#| msgid "Authentication required"
 msgid "No CA certificate is _required"
 msgstr "Nije potrebno _uverenje izdavača uverenja"
 
@@ -3396,7 +3389,6 @@ msgid "missing EAP username"
 msgstr "nedostaje EAP korisničko ime"
 
 #: ../panels/network/wireless-security/eap-method-simple.c:87
-#| msgid "Wrong password"
 msgid "missing EAP password"
 msgstr "nedostaje EAP lozinka"
 
@@ -3527,7 +3519,6 @@ msgid "missing leap-username"
 msgstr "nedostaje leap korisničko ime"
 
 #: ../panels/network/wireless-security/ws-leap.c:74
-#| msgid "Wrong password"
 msgid "missing leap-password"
 msgstr "nedostaje leap lozinka"
 
@@ -3620,8 +3611,8 @@ msgstr "_Vrsta"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3665,7 +3656,6 @@ msgstr "Prikaži sadržaj p_oruke na ekranu zaključavanja"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
-#| msgid "Notifications"
 msgid "No­ti­fi­ca­tions"
 msgstr "Obaveštenja"
 
@@ -3708,7 +3698,6 @@ msgid "Mail"
 msgstr "El. pošta"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-#| msgid "_Calendar"
 msgid "Calendar"
 msgstr "Kalendar"
 
@@ -3746,7 +3735,6 @@ msgstr "_Ukloni"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
-#| msgid "Online Accounts"
 msgid "On­line Accounts"
 msgstr "Nalozi na mreži"
 
@@ -4069,8 +4057,8 @@ msgstr "Pogledajte stanje vaše baterije i izmenite podešavanja uštede napajan
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
-"napajanje;spavanje;obustava;zamrzavanje;baterija;osvetljaj;zatamnjenje;monitor;DPMS"
-";mirovanje;"
+"napajanje;spavanje;obustava;zamrzavanje;baterija;osvetljaj;zatamnjenje;monitor;"
+"DPMS;mirovanje;"
 
 # bug(danilo): plural-forms
 #: ../panels/power/power.ui.h:3
@@ -4346,7 +4334,6 @@ msgstr "Ne mogu da učitam sučelje: %s"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
-#| msgid "Printers"
 msgid "Prin­ters"
 msgstr "Štampači"
 
@@ -4753,70 +4740,70 @@ msgstr ""
 "Izgleda da nije dostupan pozadinski\n"
 "program za štampu."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Zaključavanje ekrana"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "Koristi se"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Uklj."
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Isklj."
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Usluge mesta"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Upotreba i istorijat"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Da izbacim sve stavke iz smeća?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Sve stavke iz smeća će biti trajno uklonjene."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Izbaci Smeće"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Da obrišem sve privremene datoteke?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Sve privremene datoteke će biti trajno obrisane."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Pročisti privremene datoteke"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Očisti smeće i privremene datoteke"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Upotreba softvera"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Izveštavanje o problemu"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4825,7 +4812,7 @@ msgstr ""
 "Slanje izveštaja o tehničkim problemima nam pomaže da poboljšamo „%s“. "
 "Izveštaji se šalju bezimeno i očišćeni su od ličnih podataka."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Politika privatnosti"
 
@@ -4844,8 +4831,8 @@ msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;"
 msgstr ""
-"ekran;zaključaj;dijagnoza;pad;urušavanje;lično;skorašnje;nedavno;privremen;prv;p"
-"opis;naziv;mreža;identitet;"
+"ekran;zaključaj;dijagnoza;pad;urušavanje;lično;skorašnje;nedavno;privremen;prv;"
+"popis;naziv;mreža;identitet;"
 
 #: ../panels/privacy/privacy.ui.h:1
 msgid "Screen Turns Off"
@@ -5057,7 +5044,6 @@ msgstr "Papir"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:2
-#| msgid "Region & Language"
 msgid "Re­gion & Lan­guage"
 msgstr "Region i jezik"
 
@@ -5208,20 +5194,14 @@ msgid "Search Locations"
 msgstr "Mesta pretrage"
 
 #: ../panels/search/search-locations-dialog.ui.h:2
-#| msgctxt "Search Location"
-#| msgid "Places"
 msgid "Places"
 msgstr "Mesta"
 
 #: ../panels/search/search-locations-dialog.ui.h:3
-#| msgctxt "Search Location"
-#| msgid "Bookmarks"
 msgid "Bookmarks"
 msgstr "Obeleživači"
 
 #: ../panels/search/search-locations-dialog.ui.h:4
-#| msgctxt "Online Account"
-#| msgid "Other"
 msgid "Other"
 msgstr "Drugo"
 
@@ -5278,9 +5258,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:682
 #, c-format
-#| msgid ""
-#| "Allow remote users to connect using the Secure Shell command:\n"
-#| "<a href=\"ssh %s\">ssh %s</a>"
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
@@ -5292,9 +5269,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:684
 #, c-format
-#| msgid ""
-#| "Allow remote users to view or control your screen by connecting to: <a "
-#| "href=\"vnc://%s\">vnc://%s</a>"
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
@@ -5312,7 +5286,6 @@ msgstr "Deljenje"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:2
-#| msgid "Sharing"
 msgid "Sha­ring"
 msgstr "Deljenje"
 
@@ -5326,8 +5299,9 @@ msgid ""
 "share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
 "movies;server;renderer;"
 msgstr ""
-"deli;deljenje;ssh;bezbedna školjka;domaćin;naziv;udaljeno;radna površ;blutut;obek"
-"s;medija;zvuk;audio;snimak;video;slike;fotografije;filmovi;server;iscrtavač;"
+"deli;deljenje;ssh;bezbedna školjka;domaćin;naziv;udaljeno;radna površ;blutut;"
+"obeks;medija;zvuk;audio;snimak;video;slike;fotografije;filmovi;server;"
+"iscrtavač;"
 
 #: ../panels/sharing/networks.ui.h:1
 msgid "Networks"
@@ -5348,7 +5322,6 @@ msgid "_Computer Name"
 msgstr "_Naziv računara"
 
 #: ../panels/sharing/sharing.ui.h:2
-#| msgid "_Personal File Sharing"
 msgid "_File Sharing"
 msgstr "_Deljenje datoteka"
 
@@ -5369,7 +5342,6 @@ msgid "Some services are disabled because of no network access."
 msgstr "Neke usluge su isključene jer nema pristupa na mrežu."
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "Sharing"
 msgid "File Sharing"
 msgstr "Deljenje datoteka"
 
@@ -5414,9 +5386,6 @@ msgid "Media Sharing"
 msgstr "Deljenje medija"
 
 #: ../panels/sharing/sharing.ui.h:19
-#| msgid ""
-#| "Media sharing allows you to share music, photos and videos over the "
-#| "network."
 msgid "Share music, photos and videos over the network."
 msgstr "Delite muziku, fotografije i snimke na mreži."
 
@@ -5652,7 +5621,6 @@ msgstr "Proizvoljno"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-#| msgid "Universal Access"
 msgid "Uni­ver­sal Access"
 msgstr "Univerzalni pristup"
 
@@ -5666,8 +5634,8 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgstr ""
-"tastatura;miš;a11y;pristupačnost;kontrast;zum;čitač;ekran;tekst;slova;veličin"
-"a;Iks_pristup;lepljivi;tasteri;spori;odskočni;miš;"
+"tastatura;miš;a11y;pristupačnost;kontrast;zum;čitač;ekran;tekst;slova;"
+"veličina;Iks_pristup;lepljivi;tasteri;spori;odskočni;miš;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -5759,7 +5727,6 @@ msgid "Sound Keys"
 msgstr "Tasteri zvuka"
 
 #: ../panels/universal-access/uap.ui.h:25
-#| msgid "Beep when Num Lock or Caps Lock are turned on."
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr ""
 "Zapišti kada je zaključavanje brojeva ili velikih slova uključeno ili isključeno."
@@ -6153,15 +6120,11 @@ msgstr "_Ime i prezime"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#| msgctxt "Account type"
-#| msgid "Standard"
 msgid "Standard"
 msgstr "Standardni"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator"
 msgstr "Administrator"
 
@@ -6179,15 +6142,10 @@ msgid "Set a password _now"
 msgstr "Postavi lozinku sa_da"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#| msgctxt "printer state"
-#| msgid "Configuring"
 msgid "_Confirm"
 msgstr "_Potvrdi"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:14
-#| msgid ""
-#| "Enterprise login allows an existing centrally managed user account to be "
-#| "used on this device."
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -6203,15 +6161,10 @@ msgid "_Domain"
 msgstr "_Domen"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
-#| msgctxt "printer state"
-#| msgid "Offline"
 msgid "You are Offline"
 msgstr "Van mreže ste"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
-#| msgid ""
-#| "Go online to add\n"
-#| "enterprise login accounts."
 msgid "You must be online in order to add enterprise users."
 msgstr "Morate biti na mreži da biste dodali poslovne korisnike."
 
@@ -6337,7 +6290,6 @@ msgid "Current _Password"
 msgstr "Trenutna _lozinka"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:7
-#| msgid "Allow user to set a password when they next login"
 msgid "Allow user to change their password on next login"
 msgstr "Dozvoli korisniku da izmeni lozinku prilikom sledećeg prijavljivanja"
 
@@ -6346,7 +6298,6 @@ msgid "Set a password now"
 msgstr "Postavi lozinku sada"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#| msgid "Add User"
 msgid "_Add User…"
 msgstr "_Dodaj korisnika…"
 
@@ -6464,8 +6415,6 @@ msgid "Try to add more letters, numbers and symbols."
 msgstr "Pokušajte da dodate još slova, brojeva i simbola."
 
 #: ../panels/user-accounts/pw-utils.c:117
-#| msgctxt "Password hint"
-#| msgid "Mix uppercase and lowercase and use a number or two."
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and try to use a number or two."
 msgstr ""
@@ -6559,7 +6508,6 @@ msgid "Unknown error"
 msgstr "Nepoznata greška"
 
 #: ../panels/user-accounts/um-account-dialog.c:34
-#| msgid "Should match the web address of your account provider."
 msgid "Should match the web address of your login provider."
 msgstr "Treba da podudari veb adresu vašeg dostavljača prijavljivanja."
 
@@ -6972,9 +6920,6 @@ msgid "The username cannot start with a '-'."
 msgstr "Korisničko ime ne može početi sa „-“."
 
 #: ../panels/user-accounts/um-utils.c:572
-#| msgid ""
-#| "The username should only consist of lower and upper case letters from a-"
-#| "z, digits and any of characters '.', '-' and '_'."
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7075,7 +7020,6 @@ msgstr "Dugme"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:2
-#| msgid "Wacom Tablet"
 msgid "Wa­com Tab­let"
 msgstr "Vakom tablica"
 
@@ -7419,10 +7363,19 @@ msgstr "Otkaži pretragu"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: ../shell/hostname-helper.c:189
-#| msgid "_Stop Hotspot"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Vruća tačka"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr "Prečica tastature za <b>%s</b>. Unesite novu prečicu da izemnite."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Da izmenite prečicu, kliknite na odgovarajući red i ukucajte novu "
+#~ "kombinaciju tastera ili pritisnite „Backspace“ da obrišete prečicu."
 
 #~ msgid "Color"
 #~ msgstr "Boja"
