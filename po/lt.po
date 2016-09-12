@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-07-29 17:27+0000\n"
-"PO-Revision-Date: 2016-07-31 20:25+0300\n"
+"POT-Creation-Date: 2016-09-10 14:47+0000\n"
+"PO-Revision-Date: 2016-09-12 20:54+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -120,23 +120,23 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/join-dialog.ui.h:2
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:708
-#: ../panels/user-accounts/um-user-panel.c:726
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
@@ -689,7 +689,7 @@ msgstr ""
 "Windows</a>."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Santrauka"
 
@@ -1115,8 +1115,8 @@ msgstr "Pagrindinis"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1558,7 +1558,7 @@ msgstr "Išstumti"
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Typing"
-msgstr "Spausdinimas"
+msgstr "Rašymas"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
 msgid "Switch to next input source"
@@ -1601,7 +1601,7 @@ msgstr "Namų aplankas"
 #: ../panels/keyboard/01-launchers.xml.in.h:8
 msgctxt "keybinding"
 msgid "Search"
-msgstr "Ieškoti"
+msgstr "Paieška"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:1
 msgid "Screenshots"
@@ -1699,11 +1699,11 @@ msgstr "Pasirinktiniai susiejimai"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:213
 msgid "Disabled"
 msgstr "Išjungta"
 
@@ -1731,21 +1731,31 @@ msgstr "Tik modifikatoriai perjungia į kitą šaltinį"
 msgid "Reset the shortcut to its default value"
 msgstr "Atstatyti numatytąją trumpinio vertę"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s jau naudojamas <b>%s</b>. Jei jį pakeisite, %s bus išjungtas"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr "Klaviatūros trumpinys <b>%s</b>. Įveskite naują trumpinį pakeitimui."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#| msgid "Custom Shortcuts"
+msgid "Set Custom Shortcut"
+msgstr "Nustatyti pasirinktinį susiejimą"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
-#| msgid "Custom Shortcut"
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#| msgid "Shortcut"
+msgid "Set Shortcut"
+msgstr "Nustatyti trumpinį"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Įveskite naują trumpinį <b>%s</b> pakeisti."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Pridėti pasirinktinis trumpinį"
 
@@ -1764,27 +1774,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Trumpinys;Pakartoti;Mirksėti;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Norėdami pakeisti spartųjį klavišą, spustelėkite atitinkamą eilutę ir "
-"paspauskite spartųjį klavišą arba spauskite Backspace išvalymui."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#| msgid "Keyboard Shortcuts"
 msgid "No keyboard shortcut found"
 msgstr "Nerasta klaviatūros trumpinių"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Bandykite kitą paiešką"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Atstatyti"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Spauskite Esc atsisakymui."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1793,12 +1792,10 @@ msgid "Name"
 msgstr "Pavadinimas"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:4
-#| msgid "C_ommand:"
 msgid "Command"
 msgstr "Ko_manda"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:5
-#| msgid "Shortcuts"
 msgid "Shortcut"
 msgstr "Trumpinys"
 
@@ -1806,32 +1803,39 @@ msgstr "Trumpinys"
 msgid "Edit"
 msgstr "Keisti"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Joks"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
-#| msgid "_Remove"
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Pašalinti"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Įveskite naują trumpinį"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Pridėti"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
-#| msgid "_Replace"
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Pakeisti"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+#| msgid "Select"
+msgid "Set"
+msgstr "Nustatyti"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1910,7 +1914,6 @@ msgid "Tap to Click"
 msgstr "Bakstelėti _paspaudimui"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#| msgid "Two _finger scroll"
 msgid "Two-finger Scrolling"
 msgstr "Slinktis dviem pirštais"
 
@@ -2010,7 +2013,7 @@ msgid "page 2"
 msgstr "puslapis 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2112,7 +2115,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Puikus"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Išsamiau"
@@ -2179,7 +2182,7 @@ msgstr "Automatinis (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Rankinis"
 
@@ -2203,7 +2206,7 @@ msgstr "Priešdėlis"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automatinis"
 
@@ -2211,10 +2214,15 @@ msgstr "Automatinis"
 msgid "Automatic, DHCP only"
 msgstr "A_utomatinis, tik DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Atstatyti"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2438,7 +2446,6 @@ msgid "Import from file…"
 msgstr "Importuoti iš failo…"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:817
-#| msgid "%s VPN"
 msgid "Add VPN"
 msgstr "Pridėti VPN"
 
@@ -2448,7 +2455,7 @@ msgid "_Reset"
 msgstr "_Atstatyti"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Pamiršti"
@@ -2569,9 +2576,6 @@ msgstr "Valdykite, kaip jungiatės prie interneto"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;DNS;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "DNS;"
@@ -2617,7 +2621,7 @@ msgid "Wired"
 msgstr "Laidinis"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2628,7 +2632,7 @@ msgstr "Parametrai..."
 msgid "Add new connection"
 msgstr "Pridėti naują ryšį"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2636,12 +2640,12 @@ msgstr ""
 "Jei turite kitokį interneto ryšį nei belaidis, galite nustatyti belaidį "
 "prieigos tašką ir dalintis interneto ryšiu su kitais."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Persijungimas prie belaidžio prieigos taško atjungs jus nuo <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2649,23 +2653,23 @@ msgstr ""
 "Neįmanoma pasiekti interneto per jūsų belaidį, kol prieigos taškas yra "
 "aktyvus."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stabdyti prieigos tašką ir atjungti visus naudotojus?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Stabdyti prieigos tašką"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistemos taisyklės neleidžia naudoti kaip prieigos taško"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Belaidis įrenginys nepalaiko prieigos taško veiksenos"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2673,11 +2677,11 @@ msgstr ""
 "Tinklo nustatymai pasirinktiems tinklams įskaitant slaptažodžius ir bet "
 "kokius asmeninius nustatymus bus prarasti."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Istorija"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2685,7 +2689,7 @@ msgid "_Close"
 msgstr "_Užverti"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Pamiršti"
@@ -3241,7 +3245,6 @@ msgid "undefined error in 802.1x security (wpa-eap)"
 msgstr "nežinoma klaida 802.1x saugume (wpa-eap)"
 
 #: ../panels/network/wireless-security/eap-method.c:245
-#| msgid "No input source selected"
 msgid "no file selected"
 msgstr "nepasirinktas failas"
 
@@ -3250,7 +3253,6 @@ msgid "unspecified error validating eap-method file"
 msgstr "nežinoma klaida tikrinant eap-metodo failą"
 
 #: ../panels/network/wireless-security/eap-method.c:480
-#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, arba PKCS#12 privatūs raktai (*.der, *.pem, *.p12, *.key)"
 
@@ -3314,7 +3316,6 @@ msgid "_Inner authentication"
 msgstr "_Vidinis tapatybės patvirtinimas"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
-#| msgid "PAC pro_visioning"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Leisti automatinius PAC _priskyrimus"
 
@@ -3379,7 +3380,6 @@ msgstr "L_Į liudijimas"
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#| msgid "Authentication required"
 msgid "No CA certificate is _required"
 msgstr "Ne_reikia LĮ liudijimo"
 
@@ -3392,7 +3392,6 @@ msgid "missing EAP username"
 msgstr "trūksta EAP naudotojo vardo"
 
 #: ../panels/network/wireless-security/eap-method-simple.c:87
-#| msgid "Change Password"
 msgid "missing EAP password"
 msgstr "trūksta EAP slaptažodžio"
 
@@ -3616,8 +3615,8 @@ msgstr "_Tipas"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3703,7 +3702,6 @@ msgid "Mail"
 msgstr "Paštas"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-#| msgid "_Calendar"
 msgid "Calendar"
 msgstr "Kalendorius"
 
@@ -3719,39 +3717,23 @@ msgstr "Pokalbiai"
 msgid "Resources"
 msgstr "Resursai"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "Klaida prisijungiant prie paskyros"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "Baigėsi įgaliojimai"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Prisijunkite šiai paskyrai įjungti."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "Pri_sijungti"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "Klaida kuriant paskyrą"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "Klaida šalinant paskyrą"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr "Ar tikrai norite pašalinti paskyrą?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "Tai nepašalins šios paskyros serveryje."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Pašalinti"
 
@@ -3779,7 +3761,7 @@ msgid "No online accounts configured"
 msgstr "Nėra nustatytų internetinių paskyrų"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Remove Account"
 msgstr "Pašalinti paskyrą"
 
@@ -4750,70 +4732,70 @@ msgstr ""
 "Atleiskite! Sistemos spausdinimo tarnyba\n"
 "atrodo nėra pasiekiama."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Ekrano užrakinimas"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "Naudojama"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Įjungta"
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Išjungta"
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Vietos tarnybos"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Naudojimas ir istorija"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Išvalyti visus elementus iš šiukšlinės?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Visi šiukšlinės elementai bus negrįžtamai ištrinti."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "Iš_valyti šiukšlinę"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Ištrinti visus laikinuosius failus?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Visi laikinieji failai bus negrįžtamai ištrinti."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Išvalyti laikinuosius _failus"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Išvalyti šiukšlinę ir laikinuosius failus"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Programinės įrangos naudojimas"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Pranešimas apie problemas"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4822,7 +4804,7 @@ msgstr ""
 "Pranešimų apie technines problemas siuntimas mums padeda pagerinti %s. "
 "Pranešimai yra siunčiami anonimiškai, o asmeniniai duomenys yra išdarkomi."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Privatumo politika"
 
@@ -5008,12 +4990,12 @@ msgid "Other"
 msgstr "Kita"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1083
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Pakeitimams pritaikyti reikia perleisti seansą"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1087
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Perleisti dabar"
 
@@ -5188,7 +5170,7 @@ msgstr "Nerasta programų"
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
 msgid "Search"
-msgstr "Ieškoti"
+msgstr "Paieška"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:3
 msgid ""
@@ -5205,20 +5187,14 @@ msgid "Search Locations"
 msgstr "Ieškoti vietų"
 
 #: ../panels/search/search-locations-dialog.ui.h:2
-#| msgctxt "Search Location"
-#| msgid "Places"
 msgid "Places"
 msgstr "Vietos"
 
 #: ../panels/search/search-locations-dialog.ui.h:3
-#| msgctxt "Search Location"
-#| msgid "Bookmarks"
 msgid "Bookmarks"
 msgstr "Gairės"
 
 #: ../panels/search/search-locations-dialog.ui.h:4
-#| msgctxt "Online Account"
-#| msgid "Other"
 msgid "Other"
 msgstr "Kita"
 
@@ -5275,9 +5251,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:682
 #, c-format
-#| msgid ""
-#| "Allow remote users to connect using the Secure Shell command:\n"
-#| "<a href=\"ssh %s\">ssh %s</a>"
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
 "Shell command:\n"
@@ -5289,9 +5262,6 @@ msgstr ""
 
 #: ../panels/sharing/cc-sharing-panel.c:684
 #, c-format
-#| msgid ""
-#| "Allow remote users to view or control your screen by connecting to: <a "
-#| "href=\"vnc://%s\">vnc://%s</a>"
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
@@ -5344,7 +5314,6 @@ msgid "_Computer Name"
 msgstr "_Kompiuterio pavadinimas"
 
 #: ../panels/sharing/sharing.ui.h:2
-#| msgid "_Personal File Sharing"
 msgid "_File Sharing"
 msgstr "_Dalinimasis failais"
 
@@ -5365,7 +5334,6 @@ msgid "Some services are disabled because of no network access."
 msgstr "Kai kurios tarnybos yra išjungtos, nes nėra tinklo prieigos."
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "Sharing"
 msgid "File Sharing"
 msgstr "Dalinimasis failais"
 
@@ -5410,9 +5378,6 @@ msgid "Media Sharing"
 msgstr "Dalinimasis daugialype terpe"
 
 #: ../panels/sharing/sharing.ui.h:19
-#| msgid ""
-#| "Media sharing allows you to share music, photos and videos over the "
-#| "network."
 msgid "Share music, photos and videos over the network."
 msgstr "Dalinimasis muzika, nuotraukomis ir vaizdo įrašais tinkle."
 
@@ -5715,7 +5680,7 @@ msgstr "Žymeklio mir_ksėjimas"
 
 #: ../panels/universal-access/uap.ui.h:15
 msgid "_Typing Assist (AccessX)"
-msgstr "Spausdinimo _pagalbininkas (AccessX)"
+msgstr "Rašymo _pagalbininkas (AccessX)"
 
 #: ../panels/universal-access/uap.ui.h:16
 msgid "Pointing & Clicking"
@@ -5811,7 +5776,7 @@ msgstr "Žymeklio mirksėjimo greitis"
 
 #: ../panels/universal-access/uap.ui.h:40
 msgid "Typing Assist"
-msgstr "Spausdinimo pagalbininkas"
+msgstr "Rašymo pagalbininkas"
 
 #: ../panels/universal-access/uap.ui.h:41
 msgid "_Sticky Keys"
@@ -5848,7 +5813,7 @@ msgstr "Trumpas"
 
 #: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
-msgstr "Rodyti klavišų spausdinimo delsą"
+msgstr "Rodyti klavišų rašymo delsą"
 
 #: ../panels/universal-access/uap.ui.h:50
 msgctxt "slow keys delay"
@@ -5882,7 +5847,7 @@ msgstr "Trumpas"
 
 #: ../panels/universal-access/uap.ui.h:57
 msgid "Bounce keys typing delay"
-msgstr "Pasikartojančių klavišų spausdinimo delsa"
+msgstr "Pasikartojančių klavišų rašymo delsa"
 
 #: ../panels/universal-access/uap.ui.h:58
 msgctxt "bounce keys delay"
@@ -6146,17 +6111,11 @@ msgstr "_Pilnas vardas"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:903
-#| msgctxt "Account type"
-#| msgid "Standard"
 msgid "Standard"
 msgstr "Standartinis"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:901
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator"
 msgstr "Administratorius"
 
@@ -6174,15 +6133,10 @@ msgid "Set a password _now"
 msgstr "_Nustatyti slaptažodį dabar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#| msgctxt "printer state"
-#| msgid "Configuring"
 msgid "_Confirm"
 msgstr "_Patvirtinti"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:14
-#| msgid ""
-#| "Enterprise login allows an existing centrally managed user account to be "
-#| "used on this device."
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -6198,15 +6152,10 @@ msgid "_Domain"
 msgstr "_Sritis"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:16
-#| msgctxt "printer state"
-#| msgid "Offline"
 msgid "You are Offline"
 msgstr "Esate atsijungęs"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
-#| msgid ""
-#| "Go online to add\n"
-#| "enterprise login accounts."
 msgid "You must be online in order to add enterprise users."
 msgstr "Turite būti prisijungęs prie tinklo kompanijos naudotojams pridėti."
 
@@ -6247,7 +6196,7 @@ msgid "Right little finger"
 msgstr "Dešinysis mažasis pirštas"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:688
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Leisti prisijungti piršto antspaudu"
 
@@ -6334,7 +6283,6 @@ msgid "Current _Password"
 msgstr "_Dabartinis slaptažodis"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:7
-#| msgid "Allow user to set a password when they next login"
 msgid "Allow user to change their password on next login"
 msgstr "Leisti naudotojui pakeisti slaptažodį kito prisijungimo metu"
 
@@ -6343,7 +6291,6 @@ msgid "Set a password now"
 msgstr "Nustatyti slaptažodį dabar"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#| msgid "Add User"
 msgid "_Add User…"
 msgstr "_Pridėti naudotoją…"
 
@@ -6362,11 +6309,6 @@ msgstr "Naudotojo piktograma"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Last Login"
 msgstr "Paskutinis prisijungimas"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-#| msgid "Account _Type"
-msgid "_Account Activity"
-msgstr "Paskyros _aktyvumas"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6466,8 +6408,6 @@ msgid "Try to add more letters, numbers and symbols."
 msgstr "Mėginkite naudoti daugiau raidžių, skaitmenų ir simbolių."
 
 #: ../panels/user-accounts/pw-utils.c:117
-#| msgctxt "Password hint"
-#| msgid "Mix uppercase and lowercase and use a number or two."
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and try to use a number or two."
 msgstr "Maišykite didžiąsias ir mažąsias raides bei panaudokite skaitmenų."
@@ -6561,7 +6501,6 @@ msgid "Unknown error"
 msgstr "Nežinoma klaida"
 
 #: ../panels/user-accounts/um-account-dialog.c:34
-#| msgid "Should match the web address of your account provider."
 msgid "Should match the web address of your login provider."
 msgstr "Turi atitikti jūsų paskyros teikėjo žiniatinklio adresą."
 
@@ -6621,34 +6560,34 @@ msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administratorius"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:140
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Jums neleidžiama naudotis šiuo įrenginiu. Susisiekite su sistemos "
 "administratoriumi."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:142
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "Įrenginys jau naudojamas."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:144
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "Įvyko vidinė klaida."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Išjungta"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:265
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "Delete registered fingerprints?"
 msgstr "Ar ištrinti įrašytus pirštų antspaudus?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "_Delete Fingerprints"
 msgstr "_Ištrinti pirštų antspaudus"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:275
+#: ../panels/user-accounts/um-fingerprint-dialog.c:274
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6656,15 +6595,15 @@ msgstr ""
 "Ar norite ištrinti įrašytus pirštų antspaudus, kad būtų išjungtas "
 "prisijungimas pirštų antspaudais?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:445
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Baigta!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:506
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Nepavyko pasiekti įrenginio „%s“"
@@ -6672,16 +6611,16 @@ msgstr "Nepavyko pasiekti įrenginio „%s“"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:589
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Nepavyko pradėti piršto antspaudo nuskaitymo įrenginiu „%s“"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:639
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr "Nepavyko pasiekti pirštų antspaudų skaitytuvo"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Susisiekite su sistemos administratoriumi, jei reikia pagalbos."
 
@@ -6690,7 +6629,7 @@ msgstr "Susisiekite su sistemos administratoriumi, jei reikia pagalbos."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:722
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6699,11 +6638,11 @@ msgstr ""
 "Jei norite prisijungti pirštų antspaudu, turite įrašyti bent vieną iš savo "
 "pirštų antspaudų įrenginiu „%s“."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:729
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "Pasirinkite pirštą"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "Įregistruojami pirštų atspaudai"
 
@@ -6743,7 +6682,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6751,7 +6690,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:848
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6833,30 +6772,30 @@ msgstr "Netinkamas slaptažodis, bandykite dar kartą"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Nepavyko prisijungti prie %s srities: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:240
+#: ../panels/user-accounts/um-user-panel.c:239
 msgid "Other Accounts"
 msgstr "Kitos paskyros"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Nepavyko ištrinti naudotojo"
 
-#: ../panels/user-accounts/um-user-panel.c:510
-#: ../panels/user-accounts/um-user-panel.c:569
-#: ../panels/user-accounts/um-user-panel.c:621
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Nepavyko atimti teisių iš nutolusio naudotojo"
 
-#: ../panels/user-accounts/um-user-panel.c:677
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Jūs negalite ištrinti savo paskyros."
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s vis dar prisijungęs"
 
-#: ../panels/user-accounts/um-user-panel.c:690
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6864,64 +6803,64 @@ msgstr ""
 "Naudotojų ištrynimas, kai jie yra prisijungę, gali palikti sistemą "
 "nekorektiškoje būsenoje."
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Ar norite palikti naudotojo %s failus?"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 "Trinant naudotoją galima palikti namų katalogą, paštą ir laikinus failus."
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Ištrinti failus"
 
-#: ../panels/user-accounts/um-user-panel.c:707
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "_Palikti failus"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr ""
 "Ar tikrai norite atimti teises iš nuotoliniu būdu tvarkomos paskyros %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Ištrinti"
 
-#: ../panels/user-accounts/um-user-panel.c:777
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Paskyra išjungta"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bus nustatyta kito prisijungimo metu"
 
-#: ../panels/user-accounts/um-user-panel.c:788
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Joks"
 
-#: ../panels/user-accounts/um-user-panel.c:837
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Prisijunges prie"
 
-#: ../panels/user-accounts/um-user-panel.c:1286
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Nepavyko susisiekti su paskyrų tarnyba"
 
-#: ../panels/user-accounts/um-user-panel.c:1288
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Įsitikinkite, kad AccountService yra įdiegta ir įjungta."
 
-#: ../panels/user-accounts/um-user-panel.c:1329
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6929,12 +6868,12 @@ msgstr ""
 "Pakeitimams atlikti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1369
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Sukurti naują paskyrą"
 
-#: ../panels/user-accounts/um-user-panel.c:1380
-#: ../panels/user-accounts/um-user-panel.c:1692
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6942,12 +6881,12 @@ msgstr ""
 "Naudotojui sukurti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1390
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
-#: ../panels/user-accounts/um-user-panel.c:1402
-#: ../panels/user-accounts/um-user-panel.c:1697
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6955,7 +6894,7 @@ msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
 "pirma paspauskite * piktogramą"
 
-#: ../panels/user-accounts/um-user-panel.c:1606
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Mano paskyra"
 
@@ -6973,9 +6912,6 @@ msgid "The username cannot start with a '-'."
 msgstr "Naudotojo vardas negali prasidėti simboliu „-“."
 
 #: ../panels/user-accounts/um-utils.c:572
-#| msgid ""
-#| "The username should only consist of lower and upper case letters from a-"
-#| "z, digits and any of characters '.', '-' and '_'."
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7398,7 +7334,7 @@ msgstr "Išeiti"
 #: ../shell/help-overlay.ui.h:3
 msgctxt "shortcut window"
 msgid "Search"
-msgstr "Ieškoti"
+msgstr "Paieška"
 
 #: ../shell/help-overlay.ui.h:4
 msgctxt "shortcut window"
@@ -7417,10 +7353,36 @@ msgstr "Atšaukti paiešką"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: ../shell/hostname-helper.c:189
-#| msgid "_Stop Hotspot"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Prieigos tašką"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "Klaviatūros trumpinys <b>%s</b>. Įveskite naują trumpinį pakeitimui."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Norėdami pakeisti spartųjį klavišą, spustelėkite atitinkamą eilutę ir "
+#~ "paspauskite spartųjį klavišą arba spauskite Backspace išvalymui."
+
+#~ msgid "Error logging into the account"
+#~ msgstr "Klaida prisijungiant prie paskyros"
+
+#~ msgid "Credentials have expired."
+#~ msgstr "Baigėsi įgaliojimai"
+
+#~ msgid "Sign in to enable this account."
+#~ msgstr "Prisijunkite šiai paskyrai įjungti."
+
+#~ msgid "_Sign In"
+#~ msgstr "Pri_sijungti"
+
+#~| msgid "Account _Type"
+#~ msgid "_Account Activity"
+#~ msgstr "Paskyros _aktyvumas"
 
 #~ msgid "_Name:"
 #~ msgstr "_Pavadinimas:"
