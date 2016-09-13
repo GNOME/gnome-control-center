@@ -52,7 +52,7 @@ int main (int argc, char **argv)
 	if (argc == 2) {
 		pixmap_dir = g_strdup (argv[1]);
 	} else if (argc == 1) {
-		pixmap_dir = g_strdup ("data/");
+		pixmap_dir = g_strdup (SRCDIR "/data/");
 	} else {
 		g_message ("Usage: %s [PIXMAP DIRECTORY]", argv[0]);
 		return 1;
