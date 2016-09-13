@@ -787,6 +787,13 @@ ui_to_setting (CEPageIP4 *page)
         }
         g_list_free (children);
 
+        if (dns_servers->len == 0) {
+                g_ptr_array_free (dns_servers, TRUE);
+                dns_servers = NULL;
+        } else {
+                g_ptr_array_add (dns_servers, NULL);
+        }
+
         routes = g_ptr_array_new_with_free_func (g_object_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
             g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
@@ -878,7 +885,7 @@ ui_to_setting (CEPageIP4 *page)
         g_object_set (page->setting,
                       NM_SETTING_IP_CONFIG_METHOD, method,
                       NM_SETTING_IP_CONFIG_ADDRESSES, addresses,
-                      NM_SETTING_IP_CONFIG_DNS, dns_servers->pdata,
+                      NM_SETTING_IP_CONFIG_DNS, dns_servers ? dns_servers->pdata : NULL,
                       NM_SETTING_IP_CONFIG_ROUTES, routes,
                       NM_SETTING_IP_CONFIG_IGNORE_AUTO_DNS, ignore_auto_dns,
                       NM_SETTING_IP_CONFIG_IGNORE_AUTO_ROUTES, ignore_auto_routes,
