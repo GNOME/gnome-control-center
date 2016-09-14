@@ -686,7 +686,7 @@ ui_to_setting (CEPageIP4 *page)
                 }
         }
 
-        addresses = g_ptr_array_new_with_free_func (g_object_unref);
+        addresses = g_ptr_array_new_with_free_func (nm_ip_address_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
                 children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
         else
