@@ -2242,7 +2242,6 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
       gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
       gtk_container_add (GTK_CONTAINER (widget), row);
       gtk_size_group_add_widget (priv->row_sizegroup, row);
-      update_automatic_suspend_label (self);
 
       dialog = priv->automatic_suspend_dialog;
       g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -2279,6 +2278,7 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
                               G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
       set_ac_battery_ui_mode (self);
+      update_automatic_suspend_label (self);
     }
 
   if (g_strcmp0 (priv->chassis_type, "vm") == 0 ||
