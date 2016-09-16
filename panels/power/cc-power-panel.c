@@ -1934,6 +1934,8 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show_all (widget);
 }
 
+#define NEVER 0
+
 static void
 update_automatic_suspend_label (CcPowerPanel *self)
 {
@@ -1950,24 +1952,24 @@ update_automatic_suspend_label (CcPowerPanel *self)
   battery_timeout = g_settings_get_int (priv->gsd_settings, "sleep-inactive-battery-timeout");
 
   if (ac_action == GSD_POWER_ACTION_NOTHING)
-    ac_timeout = 0;
+    ac_timeout = NEVER;
   if (battery_action == GSD_POWER_ACTION_NOTHING)
-    battery_timeout = 0;
+    battery_timeout = NEVER;
 
   if (priv->has_batteries)
     {
-      if (ac_timeout == 0 && battery_timeout == 0)
+      if (ac_timeout == NEVER && battery_timeout == NEVER)
         s = _("Off");
-      else if (ac_timeout == 0 && battery_timeout != 0)
+      else if (ac_timeout == NEVER && battery_timeout > 0)
         s = _("When on battery power");
-      else if (ac_timeout != 0 && battery_timeout == 0)
+      else if (ac_timeout > 0 && battery_timeout == NEVER)
         s = _("When plugged in");
       else
         s = _("On");
     }
   else
     {
-      if (ac_timeout == 0)
+      if (ac_timeout == NEVER)
         s = _("Off");
       else
         s = _("On");
