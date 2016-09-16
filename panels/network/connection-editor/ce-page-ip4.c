@@ -209,7 +209,7 @@ add_address_row (CEPageIP4   *page,
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
-        gtk_entry_set_text (GTK_ENTRY (widget), gateway);
+        gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "");
         gtk_widget_set_margin_start (widget, 10);
         gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
