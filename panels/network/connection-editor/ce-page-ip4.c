@@ -697,6 +697,7 @@ ui_to_setting (CEPageIP4 *page)
         GPtrArray *routes = NULL;
         GList *children, *l;
         gboolean ret = TRUE;
+        const char *default_gateway = NULL;
 
         if (!gtk_switch_get_active (page->enabled)) {
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
@@ -724,9 +725,10 @@ ui_to_setting (CEPageIP4 *page)
         for (l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
+                GtkEntry *gateway_entry;
                 const gchar *text_address;
                 const gchar *text_netmask;
-                const gchar *text_gateway;
+                const gchar *text_gateway = "";
                 NMIPAddress *addr;
                 guint32 prefix;
 
@@ -736,15 +738,15 @@ ui_to_setting (CEPageIP4 *page)
 
                 text_address = gtk_entry_get_text (entry);
                 text_netmask = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "network")));
-                text_gateway = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "gateway")));
-                /* FIXME handle gateway
-                 * https://bugzilla.gnome.org/show_bug.cgi?id=765969 */
+                gateway_entry = g_object_get_data (G_OBJECT (row), "gateway");
+                if (gtk_widget_is_visible (GTK_WIDGET (gateway_entry)))
+                        text_gateway = gtk_entry_get_text (gateway_entry);
 
                 if (!*text_address && !*text_netmask && !*text_gateway) {
                         /* ignore empty rows */
                         widget_unset_error (GTK_WIDGET (entry));
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
-                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
+                        widget_unset_error (GTK_WIDGET (gateway_entry));
                         continue;
                 }
 
@@ -762,11 +764,16 @@ ui_to_setting (CEPageIP4 *page)
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
                 }
 
-                if (text_gateway && !nm_utils_ipaddr_valid (AF_INET, text_gateway)) {
+                if (gtk_widget_is_visible (GTK_WIDGET (gateway_entry)) &&
+                    text_gateway && !nm_utils_ipaddr_valid (AF_INET, text_gateway)) {
                         widget_set_error (g_object_get_data (G_OBJECT (row), "gateway"));
                         ret = FALSE;
                 } else {
-                        widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
+                         widget_unset_error (GTK_WIDGET (gateway_entry));
+                         if (gtk_widget_is_visible (GTK_WIDGET (gateway_entry))) {
+                                 g_assert (default_gateway == NULL);
+                                 default_gateway = text_gateway;
+                         }
                 }
 
                 if (!ret)
@@ -914,6 +921,7 @@ ui_to_setting (CEPageIP4 *page)
         g_object_set (page->setting,
                       NM_SETTING_IP_CONFIG_METHOD, method,
                       NM_SETTING_IP_CONFIG_ADDRESSES, addresses,
+                      NM_SETTING_IP_CONFIG_GATEWAY, default_gateway,
                       NM_SETTING_IP_CONFIG_DNS, dns_servers ? dns_servers->pdata : NULL,
                       NM_SETTING_IP_CONFIG_ROUTES, routes,
                       NM_SETTING_IP_CONFIG_IGNORE_AUTO_DNS, ignore_auto_dns,
