@@ -120,6 +120,28 @@ update_row_sensitivity (CEPageIP4 *page, GtkWidget *list)
 }
 
 static void
+update_row_gateway_visibility (CEPageIP4 *page)
+{
+        GList *children, *l;
+        gint rows = 0;
+
+        children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
+        for (l = children; l; l = l->next) {
+                GtkWidget *row = l->data;
+                GtkWidget *label, *entry;
+
+                label = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway-label"));
+                entry = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "gateway"));
+
+                gtk_widget_set_visible (label, (rows == 0));
+                gtk_widget_set_visible (entry, (rows == 0));
+
+                rows++;
+        }
+        g_list_free (children);
+}
+
+static void
 remove_row (GtkButton *button, CEPageIP4 *page)
 {
         GtkWidget *list;
@@ -135,6 +157,8 @@ remove_row (GtkButton *button, CEPageIP4 *page)
         ce_page_changed (CE_PAGE (page));
 
         update_row_sensitivity (page, list);
+        if (list == page->address_list)
+                update_row_gateway_visibility (page);
 }
 
 static gint
@@ -205,6 +229,7 @@ add_address_row (CEPageIP4   *page,
         label = gtk_label_new (_("Gateway"));
         gtk_widget_set_halign (label, GTK_ALIGN_END);
         gtk_grid_attach (GTK_GRID (row_grid), label, 1, 3, 1, 1);
+        g_object_set_data (G_OBJECT (row), "gateway-label", label);
         widget = gtk_entry_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
@@ -214,6 +239,9 @@ add_address_row (CEPageIP4   *page,
         gtk_widget_set_margin_end (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 3, 1, 1);
+
+        gtk_widget_set_no_show_all (label, TRUE);
+        gtk_widget_set_no_show_all (widget, FALSE);
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
@@ -235,6 +263,7 @@ add_address_row (CEPageIP4   *page,
         gtk_widget_show_all (row);
         gtk_container_add (GTK_CONTAINER (page->address_list), row);
 
+        update_row_gateway_visibility (page);
         update_row_sensitivity (page, page->address_list);
 }
 
@@ -314,7 +343,7 @@ add_address_section (CEPageIP4 *page)
                 add_address_row (page,
                                  nm_ip_address_get_address (addr),
                                  network,
-                                 nm_setting_ip_config_get_gateway (page->setting));
+                                 i == 0 ? nm_setting_ip_config_get_gateway (page->setting) : "");
         }
         if (nm_setting_ip_config_get_num_addresses (page->setting) == 0)
                 add_empty_address_row (page);
