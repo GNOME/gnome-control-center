@@ -1951,9 +1951,14 @@ update_automatic_suspend_label (CcPowerPanel *self)
   ac_timeout = g_settings_get_int (priv->gsd_settings, "sleep-inactive-ac-timeout");
   battery_timeout = g_settings_get_int (priv->gsd_settings, "sleep-inactive-battery-timeout");
 
-  if (ac_action == GSD_POWER_ACTION_NOTHING)
+  if (ac_timeout < 0)
+    g_warning ("Invalid negative timeout for 'sleep-inactive-ac-timeout': %d", ac_timeout);
+  if (battery_timeout < 0)
+    g_warning ("Invalid negative timeout for 'sleep-inactive-battery-timeout': %d", battery_timeout);
+
+  if (ac_action == GSD_POWER_ACTION_NOTHING || ac_timeout < 0)
     ac_timeout = NEVER;
-  if (battery_action == GSD_POWER_ACTION_NOTHING)
+  if (battery_action == GSD_POWER_ACTION_NOTHING || battery_timeout < 0)
     battery_timeout = NEVER;
 
   if (priv->has_batteries)
