@@ -1900,6 +1900,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show_all (widget);
 
 #ifdef HAVE_NETWORK_MANAGER
+  nm_client_state_changed (priv->nm_client, NULL, self);
   nm_device_changed (priv->nm_client, NULL, self);
 #endif
 }
