@@ -1462,6 +1462,7 @@ nm_client_ready_cb (GObject *source_object,
   g_signal_connect (priv->nm_client, "device-removed",
                     G_CALLBACK (nm_device_changed), self);
 
+  nm_client_state_changed (priv->nm_client, NULL, self);
   nm_device_changed (priv->nm_client, NULL, self);
 }
 
