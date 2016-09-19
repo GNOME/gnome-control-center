@@ -27,7 +27,7 @@
 # Grawok <grawok@gmx.com>, 2012.
 # Alain Lojewski <allomervan@gmail.com>, 2011-2016.
 # Julien Hardelin <jhardlin@orange.fr>, 2013.
-# Alexandre Franke <alexandre.franke@gmail.com>, 2013.
+# Alexandre Franke <alexandre.franke@gmail.com>, 2013-2016.
 # Guillaume Bernard <translate@filorin.fr>, 2015.
 # Erwan Georget <dremor@dremor.info>, 2015.
 #
@@ -36,16 +36,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-23 16:18+0000\n"
-"PO-Revision-Date: 2016-08-31 18:41+0200\n"
-"Last-Translator: Alain Lojewski <allomervan@gmail.com>\n"
+"POT-Creation-Date: 2016-09-13 09:47+0000\n"
+"PO-Revision-Date: 2016-09-19 11:42+0200\n"
+"Last-Translator: Jean-Baptiste Holcroft <jean-baptiste@holcroft.fr>\n"
 "Language-Team: français <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -138,12 +138,12 @@ msgstr ""
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:2076
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
@@ -1143,8 +1143,8 @@ msgstr "Principal"
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1593,11 +1593,11 @@ msgstr "Saisie"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
 msgid "Switch to next input source"
-msgstr "Basculer vers la source suivante"
+msgstr "Passer à la source de saisie suivante"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
 msgid "Switch to previous input source"
-msgstr "Basculer vers la source précédente"
+msgstr "Passer à la source de saisie précédente"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:1
 msgid "Launchers"
@@ -1730,8 +1730,8 @@ msgstr "Raccourcis personnalisés"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1763,7 +1763,7 @@ msgstr ""
 msgid "Reset the shortcut to its default value"
 msgstr "Réinitialiser le raccourci à sa valeur par défaut"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1771,14 +1771,22 @@ msgid ""
 msgstr ""
 "%s est déjà utilisé pour <b>%s</b>. Si vous le remplacez, %s sera désactivé"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr ""
-"Raccourci clavier de <b>%s</b>. Saisissez-en un nouveau pour le modifier."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Définir un raccourci personnalisé"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "Définir un raccourci"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Saisissez un nouveau raccourci pour changer <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Ajouter un raccourci personnalisé"
 
@@ -1799,26 +1807,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Raccourci;Répétition;Clignotement;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Pour modifier un raccourci, cliquez sur la ligne et actionnez les nouvelles "
-"touches, ou bien pressez « Retour arrière » pour l'effacer."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Aucun raccourci clavier trouvé"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Essayez une autre recherche"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Réinitialiser"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Appuyez sur Échap. pour annuler."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1838,30 +1836,38 @@ msgstr "Raccourci"
 msgid "Edit"
 msgstr "Modifier"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Aucun"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Supprimer"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Saisir le nouveau raccourci"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:276
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Remplacer"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "Définir"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -2038,7 +2044,7 @@ msgid "page 2"
 msgstr "page 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2139,7 +2145,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excellent"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Détails"
@@ -2206,7 +2212,7 @@ msgstr "Automatique (DHCP)"
 #: ../panels/network/connection-editor/ce-page-ip4.c:601
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Manuel"
 
@@ -2215,7 +2221,7 @@ msgstr "Manuel"
 msgid "Link-Local Only"
 msgstr "Réseau local seulement"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:935
+#: ../panels/network/connection-editor/ce-page-ip4.c:942
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
@@ -2230,7 +2236,7 @@ msgstr "Préfixe"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automatique"
 
@@ -2238,10 +2244,15 @@ msgstr "Automatique"
 msgid "Automatic, DHCP only"
 msgstr "Automatique, DHCP seulement"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Réinitialiser"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2474,7 +2485,7 @@ msgid "_Reset"
 msgstr "_Réinitialiser"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Oublier"
@@ -2641,7 +2652,7 @@ msgid "Wired"
 msgstr "Filaire"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2652,7 +2663,7 @@ msgstr "Options…"
 msgid "Add new connection"
 msgstr "Ajouter une nouvelle connexion"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2660,13 +2671,13 @@ msgstr ""
 "Si vous disposez d'une connexion filaire vers Internet, vous pouvez créer un "
 "point d'accès sans fil pour partager votre connexion avec les autres."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Basculer sur le point d'accès sans fil va vous déconnecter de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2674,24 +2685,24 @@ msgstr ""
 "Vous ne pouvez pas accéder à Internet par votre connexion sans fil pendant "
 "que le point d'accès est actif."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Interrompre le point d'accès et déconnecter tous les utilisateurs ?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Interrompre le point d'accès"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Les règles du système interdisent son utilisation comme point d'accès"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr ""
 "Le périphérique sans fil ne prend pas en charge le mode « point d'accès »"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2699,11 +2710,11 @@ msgstr ""
 "Les informations des réseaux sélectionnés, y compris les mots de passe et "
 "toute configuration personnalisée seront perdus."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Historique"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2711,7 +2722,7 @@ msgid "_Close"
 msgstr "_Fermer"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oublier"
@@ -3638,8 +3649,8 @@ msgstr "_Type"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -4753,70 +4764,70 @@ msgstr ""
 "Désolé ! Le service d'impression du système\n"
 "ne semble pas être disponible."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Verrouillage de l'écran"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "En cours d'utilisation"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Activé"
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Désactivé"
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Services de localisation"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Utilisation et historique"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Vider complètement la corbeille ?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Tout le contenu de la corbeille sera définitivement supprimé."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Vider la corbeille"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Supprimer tous les fichiers temporaires ?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Tous les fichiers temporaires seront définitivement supprimés."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Purger les fichiers temporaires"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Vider la corbeille et les fichiers temporaires"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Statistiques d'utilisation des logiciels"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Signalement de problèmes"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4826,7 +4837,7 @@ msgstr ""
 "améliorer %s. Les rapports sont envoyés anonymement et sont épurés de toute "
 "donnée personnelle."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
@@ -5008,7 +5019,7 @@ msgstr "Aucune région trouvée"
 
 #: ../panels/region/cc-input-chooser.c:182
 msgid "No input sources found"
-msgstr "Aucune source d'entrée trouvée"
+msgstr "Aucune source de saisie trouvée"
 
 #: ../panels/region/cc-input-chooser.c:992
 msgctxt "Input Source"
@@ -5028,7 +5039,7 @@ msgstr "Redémarrer maintenant"
 
 #: ../panels/region/cc-region-panel.c:888
 msgid "No input source selected"
-msgstr "Aucune source d'entrée sélectionnée"
+msgstr "Aucune source de saisie sélectionnée"
 
 #: ../panels/region/cc-region-panel.c:1779
 msgid "Login _Screen"
@@ -5071,26 +5082,25 @@ msgstr "Pays & langue"
 msgid ""
 "Select your display language, formats, keyboard layouts and input sources"
 msgstr ""
-"Sélectionnez la langue, les formats, l'agencement clavier et les sources "
-"d'entrées"
+"Sélectionnez la langue, les formats, l'agencement clavier et les sources de saisie"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:5
 msgid "Language;Layout;Keyboard;Input;"
-msgstr "Langue;Disposition;Clavier;Entrée;"
+msgstr "Langue;Disposition;Clavier;Saisie;"
 
 #: ../panels/region/input-chooser.ui.h:1
 msgid "Add an Input Source"
-msgstr "Ajouter une source d'entrée"
+msgstr "Ajouter une source de saisie"
 
 #: ../panels/region/input-chooser.ui.h:4
 msgid "Input methods can't be used on the login screen"
 msgstr ""
-"Les méthodes d'entrée ne peuvent pas être utilisées sur l'écran de connexion"
+"Les méthodes de saisie ne peuvent pas être utilisées sur l'écran de connexion"
 
 #: ../panels/region/input-options.ui.h:1
 msgid "Input Source Options"
-msgstr "Options de la source d'entrée"
+msgstr "Options de la source de saisie"
 
 #: ../panels/region/input-options.ui.h:2
 msgid "Use the _same source for all windows"
@@ -5151,31 +5161,31 @@ msgstr "Grande Bretagne"
 
 #: ../panels/region/region.ui.h:5
 msgid "Input Sources"
-msgstr "Sources d'entrée"
+msgstr "Sources de saisie"
 
 #: ../panels/region/region.ui.h:7
 msgid "Add input source"
-msgstr "Ajouter la source d'entrée"
+msgstr "Ajouter la source de saisie"
 
 #: ../panels/region/region.ui.h:8
 msgid "Remove input source"
-msgstr "Supprimer la source d'entrée"
+msgstr "Retirer la source de saisie"
 
 #: ../panels/region/region.ui.h:9
 msgid "Move input source up"
-msgstr "Déplacer la source d'entrée vers le haut"
+msgstr "Monter la source de saisie"
 
 #: ../panels/region/region.ui.h:10
 msgid "Move input source down"
-msgstr "Déplacer la source d'entrée vers le bas"
+msgstr "Descendre la source de saisie"
 
 #: ../panels/region/region.ui.h:11
 msgid "Configure input source"
-msgstr "Configurer la source d'entrée"
+msgstr "Configurer la source de saisie"
 
 #: ../panels/region/region.ui.h:12
 msgid "Show input source keyboard layout"
-msgstr "Afficher la disposition de clavier de la source d'entrée"
+msgstr "Afficher la disposition de clavier de la source de saisie"
 
 #: ../panels/region/region.ui.h:13
 msgid "Login settings are used by all users when logging into the system"
@@ -5422,7 +5432,7 @@ msgstr "Son"
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Change sound levels, inputs, outputs, and alert sounds"
 msgstr ""
-"Modifier les volumes sonores, les entrées, les sorties et les alertes sonores"
+"Modifier les volumes sonores, les saisies, les sorties et les alertes sonores"
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -7404,6 +7414,17 @@ msgstr "Interrompre la recherche"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Point d'accès"
+
+#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
+#~ msgstr ""
+#~ "Raccourci clavier de <b>%s</b>. Saisissez-en un nouveau pour le modifier."
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Pour modifier un raccourci, cliquez sur la ligne et actionnez les "
+#~ "nouvelles touches, ou bien pressez « Retour arrière » pour l'effacer."
 
 #~ msgid ""
 #~ "The shortcut \"%s\" cannot be used because it will become impossible to "
