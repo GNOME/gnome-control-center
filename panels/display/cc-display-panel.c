@@ -123,12 +123,12 @@ monitor_labeler_show (CcDisplayPanel *self)
   GnomeRROutput *output;
   GVariantBuilder builder;
   gint number;
+  gboolean has_outputs;
 
   if (!priv->shell_proxy)
     return;
 
-  g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
-  g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
+  has_outputs = FALSE;
 
   infos = gnome_rr_config_get_outputs (priv->current_configuration);
   for (info = infos; *info; info++)
@@ -137,12 +137,22 @@ monitor_labeler_show (CcDisplayPanel *self)
       if (number == 0)
         continue;
 
+      if (!has_outputs)
+        {
+          g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
+          g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
+          has_outputs = TRUE;
+        }
+
       output = gnome_rr_screen_get_output_by_name (priv->screen,
                                                    gnome_rr_output_info_get_name (*info));
       g_variant_builder_add (&builder, "{uv}",
                              gnome_rr_output_get_id (output),
                              g_variant_new_int32 (number));
     }
+
+  if (!has_outputs)
+    return;
 
   g_variant_builder_close (&builder);
 
