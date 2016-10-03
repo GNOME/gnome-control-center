@@ -2465,7 +2465,7 @@ show_setup_dialog (CcDisplayPanel *panel)
                                  GTK_LIST_BOX_ROW (item));
 
       item = list_box_item (_("Turn Off"),
-                            _("Don't use this display"));
+                            _("Don’t use this display"));
       gtk_container_add (GTK_CONTAINER (listbox), item);
 
       if (!active)
