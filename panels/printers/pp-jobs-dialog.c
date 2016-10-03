@@ -286,7 +286,7 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   g_signal_connect (clear_all_button, "clicked", G_CALLBACK (on_clear_all_button_clicked), dialog);
 
   /* Translators: This is the printer name for which we are showing the active jobs */
-  title = g_strdup_printf (C_("Printer jobs dialog title", "%s - Active Jobs"), printer_name);
+  title = g_strdup_printf (C_("Printer jobs dialog title", "%s — Active Jobs"), printer_name);
   gtk_window_set_title (GTK_WINDOW (dialog->dialog), title);
   g_free (title);
 
