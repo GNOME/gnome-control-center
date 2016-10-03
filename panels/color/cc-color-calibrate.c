@@ -358,19 +358,19 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
     case CD_SESSION_INTERACTION_ATTACH_TO_SCREEN:
       show_button_start = TRUE;
       /* TRANSLATORS: The user has to attach the sensor to the screen */
-      message_transl = _("Place your calibration device over the square and press 'Start'");
+      message_transl = _("Place your calibration device over the square and press “Start”");
       break;
     case CD_SESSION_INTERACTION_MOVE_TO_CALIBRATION:
       /* TRANSLATORS: Some calibration devices need the user to move a
        * dial or switch manually. We also show a picture showing them
        * what to do... */
-      message_transl = _("Move your calibration device to the calibrate position and press 'Continue'");
+      message_transl = _("Move your calibration device to the calibrate position and press “Continue”");
       break;
     case CD_SESSION_INTERACTION_MOVE_TO_SURFACE:
       /* TRANSLATORS: Some calibration devices need the user to move a
        * dial or switch manually. We also show a picture showing them
        * what to do... */
-      message_transl = _("Move your calibration device to the surface position and press 'Continue'");
+      message_transl = _("Move your calibration device to the surface position and press “Continue”");
       break;
     case CD_SESSION_INTERACTION_SHUT_LAPTOP_LID:
       /* TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
