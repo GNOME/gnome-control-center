@@ -502,7 +502,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                         /* translators:
                          * The variable is the name of the device, for example:
                          * "Could you not access "Digital Persona U.are.U 4000/4000B" device */
-                        msg = g_strdup_printf (_("Could not access '%s' device"), data->name);
+                        msg = g_strdup_printf (_("Could not access “%s” device"), data->name);
                         d = get_error_dialog (msg, error->message, GTK_WINDOW (data->ass));
                         g_error_free (error);
                         gtk_dialog_run (GTK_DIALOG (d));
@@ -544,7 +544,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                         /* translators:
                          * The variable is the name of the device, for example:
                          * "Could you not access "Digital Persona U.are.U 4000/4000B" device */
-                        msg = g_strdup_printf (_("Could not access '%s' device"), data->name);
+                        msg = g_strdup_printf (_("Could not access “%s” device"), data->name);
                         d = get_error_dialog (msg, "net.reactivated.Fprint.Error.Internal", GTK_WINDOW (data->ass));
                         gtk_dialog_run (GTK_DIALOG (d));
                         gtk_widget_destroy (d);
@@ -585,7 +585,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                         /* translators:
                          * The variable is the name of the device, for example:
                          * "Could you not access "Digital Persona U.are.U 4000/4000B" device */
-                        msg = g_strdup_printf (_("Could not start finger capture on '%s' device"), data->name);
+                        msg = g_strdup_printf (_("Could not start finger capture on “%s” device"), data->name);
                         d = get_error_dialog (msg, error->message, GTK_WINDOW (data->ass));
                         g_error_free (error);
                         gtk_dialog_run (GTK_DIALOG (d));
@@ -718,7 +718,7 @@ enroll_fingerprints (GtkWindow *parent,
          * "To enable fingerprint login, you need to save one of your fingerprints, using the
          * 'Digital Persona U.are.U 4000/4000B' device."
          */
-        msg = g_strdup_printf (_("To enable fingerprint login, you need to save one of your fingerprints, using the '%s' device."),
+        msg = g_strdup_printf (_("To enable fingerprint login, you need to save one of your fingerprints, using the “%s” device."),
                                data->name);
         gtk_label_set_text (GTK_LABEL (WID("intro-label")), msg);
         g_free (msg);

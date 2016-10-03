@@ -1023,14 +1023,14 @@ on_realm_login (GObject *source,
         /* A problem with the user's login name or password */
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
                 g_debug ("Problem with the user's login: %s", error->message);
-                message = _("That login name didn't work.\nPlease try again.");
+                message = _("That login name didn’t work.\nPlease try again.");
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login));
 
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Problem with the user's password: %s", error->message);
-                message = _("That login password didn't work.\nPlease try again.");
+                message = _("That login password didn’t work.\nPlease try again.");
                 gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password));

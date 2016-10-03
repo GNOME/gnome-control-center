@@ -831,7 +831,7 @@ kinit_thread_func (GSimpleAsyncResult *async,
                 break;
         default:
                 g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
-                                                 _("Couldn't connect to the %s domain: %s"),
+                                                 _("Couldn’t connect to the %s domain: %s"),
                                                  login->domain, krb5_get_error_message (k5, code));
                 break;
         }

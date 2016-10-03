@@ -693,7 +693,7 @@ delete_user (GtkButton *button, CcUserPanel *self)
                                                  0,
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_NONE,
-                                                 _("Do you want to keep %s's files?"),
+                                                 _("Do you want to keep %s’s files?"),
                                                 get_real_or_user_name (user));
 
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
@@ -715,7 +715,7 @@ delete_user (GtkButton *button, CcUserPanel *self)
                                                  0,
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_NONE,
-                                                 _("Are you sure you want to revoke remotely managed %s's account?"),
+                                                 _("Are you sure you want to revoke remotely managed %s’s account?"),
                                                  get_real_or_user_name (user));
 
                 gtk_dialog_add_buttons (GTK_DIALOG (dialog),
