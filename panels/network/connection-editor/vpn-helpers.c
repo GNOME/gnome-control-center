@@ -140,7 +140,7 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		                                     GTK_BUTTONS_OK,
 		                                     _("Cannot import VPN connection"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
-		                                 _("The file '%s' could not be read or does not contain recognized VPN connection information\n\nError: %s."),
+		                                 _("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
 		                                 bname, error ? error->message : "unknown error");
 		g_free (bname);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
@@ -227,7 +227,7 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		                                         GTK_DIALOG_DESTROY_WITH_PARENT,
 		                                         GTK_MESSAGE_QUESTION,
 		                                         GTK_BUTTONS_CANCEL,
-		                                         _("A file named \"%s\" already exists."),
+		                                         _("A file named “%s” already exists."),
 		                                         bname);
 		gtk_dialog_add_buttons (GTK_DIALOG (replace_dialog), _("_Replace"), GTK_RESPONSE_OK, NULL);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (replace_dialog),
@@ -269,7 +269,7 @@ done:
 		                                     GTK_BUTTONS_OK,
 		                                     _("Cannot export VPN connection"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
-		                                 _("The VPN connection '%s' could not be exported to %s.\n\nError: %s."),
+		                                 _("The VPN connection “%s” could not be exported to %s.\n\nError: %s."),
 		                                 id ? id : "(unknown)", bname, error ? error->message : "unknown error");
 		g_free (bname);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
