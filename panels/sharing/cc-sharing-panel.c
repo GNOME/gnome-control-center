@@ -690,7 +690,7 @@ cc_sharing_panel_setup_label (CcSharingPanel *self,
   gchar *text;
 
   if (label == WID ("personal-file-sharing-label"))
-    text = g_strdup_printf (_("Personal File Sharing allows you to share your Public folder with others on your current network using: <a href=\"dav://%s\">dav://%s</a>"), hostname, hostname);
+    text = g_strdup_printf (_("File Sharing allows you to share your Public folder with others on your current network using: <a href=\"dav://%s\">dav://%s</a>"), hostname, hostname);
   else if (label == WID ("remote-login-label"))
     text = g_strdup_printf (_("When remote login is enabled, remote users can connect using the Secure Shell command:\n<a href=\"ssh %s\">ssh %s</a>"), hostname, hostname);
   else if (label == WID ("screen-sharing-label"))
