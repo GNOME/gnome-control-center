@@ -84,7 +84,7 @@ struct CalibArea
                                       "appear on screen to calibrate the tablet.")
 #define HELP_TEXT_ANIMATION_DURATION 300
 
-#define ERROR_MESSAGE                    N_("Mis-click detected, restarting...")
+#define ERROR_MESSAGE                    N_("Mis-click detected, restarting…")
 #define ERROR_MESSAGE_ANIMATION_DURATION 500
 
 #define ICON_SUCCESS    "emblem-ok-symbolic"
