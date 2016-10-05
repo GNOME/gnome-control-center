@@ -8,11 +8,11 @@
 # Andika Triwidada <andika@gmail.com>, 2009, 2011-2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center master\n"
+"Project-Id-Version: gnome-control-center gnome-3-22\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-01 07:36+0000\n"
-"PO-Revision-Date: 2016-08-08 15:19+0700\n"
+"POT-Creation-Date: 2016-09-24 10:17+0000\n"
+"PO-Revision-Date: 2016-10-06 04:15+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -113,14 +113,13 @@ msgstr ""
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1295
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2076
+#: ../panels/printers/cc-printers-panel.c:2077
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:1032
-#: ../panels/region/format-chooser.ui.h:3
-#: ../panels/region/input-chooser.ui.h:2
+#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
@@ -129,8 +128,8 @@ msgstr ""
 #: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:707
-#: ../panels/user-accounts/um-user-panel.c:725
+#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:723
 msgid "_Cancel"
 msgstr "Ba_tal"
 
@@ -1109,9 +1108,9 @@ msgstr "Primer"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1693,8 +1692,8 @@ msgstr "Tombol Pintas Gubahan"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:417
-#: ../panels/keyboard/shortcut-editor.ui.h:1
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1725,7 +1724,7 @@ msgstr "Hanya modifier bertukar ke sumber selanjutnya"
 msgid "Reset the shortcut to its default value"
 msgstr "Tata ulang pintasan ke nilai baku"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:308
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1734,14 +1733,22 @@ msgstr ""
 "%s telah dipakai untuk <b>%s</b>. Bila Anda menggantinya, %s akan "
 "dinonaktifkan"
 
-#. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:444
-#, c-format
-msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-msgstr ""
-"Pintasan papan ketik untuk <b>%s</b>. Masukkan pintasan baru untuk mengubah."
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+msgid "Set Custom Shortcut"
+msgstr "Atur Pintasan Ubahan"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:799
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+msgid "Set Shortcut"
+msgstr "Atur Pintasan"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Masukkan pintasan baru untuk mengubah <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Tambah Pintas Gubahan"
 
@@ -1760,26 +1767,16 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Pintasan;Pengulangan;Kedip;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Untuk mengedit tombol cara pintas, klik pada baris dan tahan tombol baru, "
-"atau tekan spasi mundur untuk menghapus."
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "No keyboard shortcut found"
 msgstr "Tak ditemukan tombol pintas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Try a different search"
 msgstr "Cobalah pencarian lain"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:2
-#: ../panels/network/connection-editor/ce-page-reset.c:89
-#: ../panels/network/network-wifi.ui.h:51
-msgid "Reset"
-msgstr "Reset"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Tekan Esc untuk membatalkan."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/sound/gvc-mixer-dialog.c:1493
@@ -1799,30 +1796,38 @@ msgstr "Pintasan"
 msgid "Edit"
 msgstr "Sunting"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:7
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Tak Ada"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Remove"
 msgstr "Hapus"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Masukkan pintasan baru"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Batal"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
-#: ../panels/network/connection-editor/ce-page-ip4.c:276
+#: ../panels/keyboard/shortcut-editor.ui.h:12
+#: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Tambah"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Replace"
 msgstr "Gantikan"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+msgid "Set"
+msgstr "Atur"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1997,7 +2002,7 @@ msgid "page 2"
 msgstr "halaman 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2097,7 +2102,7 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Sempurna"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
+#: ../panels/network/connection-editor/ce-page-details.c:225
 #: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
 msgid "Details"
 msgstr "Rincian"
@@ -2109,71 +2114,71 @@ msgstr "Rincian"
 msgid "Identity"
 msgstr "Identitas"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:178
-#: ../panels/network/connection-editor/ce-page-ip4.c:432
+#: ../panels/network/connection-editor/ce-page-ip4.c:202
+#: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
 msgid "Address"
 msgstr "Alamat"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:191
-#: ../panels/network/connection-editor/ce-page-ip4.c:445
+#: ../panels/network/connection-editor/ce-page-ip4.c:215
+#: ../panels/network/connection-editor/ce-page-ip4.c:474
 msgid "Netmask"
 msgstr "Netmask"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:205
-#: ../panels/network/connection-editor/ce-page-ip4.c:458
+#: ../panels/network/connection-editor/ce-page-ip4.c:229
+#: ../panels/network/connection-editor/ce-page-ip4.c:487
 #: ../panels/network/connection-editor/ce-page-ip6.c:206
 #: ../panels/network/connection-editor/ce-page-ip6.c:453
 #: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:222
+#: ../panels/network/connection-editor/ce-page-ip4.c:250
 #: ../panels/network/connection-editor/ce-page-ip6.c:223
 msgid "Delete Address"
 msgstr "Hapus Alamat"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:339
+#: ../panels/network/connection-editor/ce-page-ip4.c:368
 #: ../panels/network/connection-editor/ce-page-ip6.c:334
 msgid "Server"
 msgstr "Server"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:356
+#: ../panels/network/connection-editor/ce-page-ip4.c:385
 #: ../panels/network/connection-editor/ce-page-ip6.c:351
 msgid "Delete DNS Server"
 msgstr "Hapus Server DNS"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:472
+#: ../panels/network/connection-editor/ce-page-ip4.c:501
 #: ../panels/network/connection-editor/ce-page-ip6.c:467
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Metrik"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:493
+#: ../panels/network/connection-editor/ce-page-ip4.c:522
 #: ../panels/network/connection-editor/ce-page-ip6.c:484
 msgid "Delete Route"
 msgstr "Hapus Route"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:597
+#: ../panels/network/connection-editor/ce-page-ip4.c:626
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Otomatis (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:601
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "Manual"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:605
+#: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
 msgid "Link-Local Only"
 msgstr "Hanya Link-Lokal"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:935
+#: ../panels/network/connection-editor/ce-page-ip4.c:979
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
@@ -2188,7 +2193,7 @@ msgstr "Awalan"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:201
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Otomatis"
 
@@ -2196,10 +2201,15 @@ msgstr "Otomatis"
 msgid "Automatic, DHCP only"
 msgstr "Otomatis, hanya DHCP"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:78
+#: ../panels/network/network-wifi.ui.h:51
+msgid "Reset"
+msgstr "Reset"
 
 #: ../panels/network/connection-editor/ce-page-security.c:248
 msgctxt "Wi-Fi/Ethernet security"
@@ -2432,7 +2442,7 @@ msgid "_Reset"
 msgstr "_Reset"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1533
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Lupakan"
@@ -2479,7 +2489,7 @@ msgid "Select file to import"
 msgstr "Pilih berkas untuk diimpor"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2077
+#: ../panels/printers/cc-printers-panel.c:2078
 #: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
@@ -2577,9 +2587,8 @@ msgid "yesterday"
 msgstr "kemarin"
 
 #: ../panels/network/net-device-ethernet.c:156
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:647 ../panels/network/panel-common.c:649
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
+#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Alamat IP"
 
@@ -2600,11 +2609,10 @@ msgid "Wired"
 msgstr "Kabel"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1691
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opsi…"
 
@@ -2612,7 +2620,7 @@ msgstr "Opsi…"
 msgid "Add new connection"
 msgstr "Tambah sambungan baru"
 
-#: ../panels/network/net-device-wifi.c:1202
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2621,12 +2629,12 @@ msgstr ""
 "menggunakannya sebagai hotspot nirkabel untuk berbagi koneksi dengan yang "
 "lain."
 
-#: ../panels/network/net-device-wifi.c:1206
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Mengaktifkan hotspot nirkabel akan memutuskan Anda dari <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1210
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2634,23 +2642,23 @@ msgstr ""
 "Anda tidak dapat mengakses Internet melalui nirkabel Anda selama hotspot "
 "aktif."
 
-#: ../panels/network/net-device-wifi.c:1293
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Hentikan hotspot dan putuskan semua pengguna?"
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Stop Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1394
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Kebijakan sistem melarang pemakaian sebagai Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1529
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2658,11 +2666,11 @@ msgstr ""
 "Rincian jaringan bagi jaringan yang dipilih, termasuk sandi dan sebarang "
 "konfigurasi gubahan akan hilang."
 
-#: ../panels/network/net-device-wifi.c:1839
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "Riwayat"
 
-#: ../panels/network/net-device-wifi.c:1843
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2670,7 +2678,7 @@ msgid "_Close"
 msgstr "_Tutup"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1851
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Lupakan"
@@ -3593,9 +3601,9 @@ msgid "_Type"
 msgstr "_Tipe"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:174
-#: ../panels/privacy/cc-privacy-panel.c:241
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3697,39 +3705,23 @@ msgstr "Obrolan"
 msgid "Resources"
 msgstr "Sumber daya"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "Galat saat log masuk ke akun"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "Kredensial telah kadaluwarsa."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Masuk untuk mengaktifkan akun ini."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "_Masuk"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "Galat saat membuat akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "Galat saat menghapus akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr "Anda yakin ingin menghapus akun?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "Ini tidak akan menghapus akun pada server."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Hapus"
 
@@ -3895,7 +3887,7 @@ msgstr "Komputer"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
-#: ../panels/power/cc-power-panel.c:2358
+#: ../panels/power/cc-power-panel.c:2366
 msgid "Battery"
 msgstr "Baterai"
 
@@ -3943,88 +3935,88 @@ msgstr "Baterai "
 msgid "When _idle"
 msgstr "Ket_ika menganggur"
 
-#: ../panels/power/cc-power-panel.c:1680
+#: ../panels/power/cc-power-panel.c:1681
 msgid "Power Saving"
 msgstr "Penghematan Daya"
 
-#: ../panels/power/cc-power-panel.c:1715
+#: ../panels/power/cc-power-panel.c:1716
 msgid "_Screen brightness"
 msgstr "Kecerahan _layar"
 
-#: ../panels/power/cc-power-panel.c:1734
+#: ../panels/power/cc-power-panel.c:1735
 msgid "Automatic brightness"
 msgstr "Kecerahan otomatis"
 
-#: ../panels/power/cc-power-panel.c:1754
+#: ../panels/power/cc-power-panel.c:1755
 msgid "_Keyboard brightness"
 msgstr "_Kecerahan papan tik"
 
-#: ../panels/power/cc-power-panel.c:1764
+#: ../panels/power/cc-power-panel.c:1765
 msgid "_Dim screen when inactive"
 msgstr "Re_dupkan layar ketika tak aktif"
 
-#: ../panels/power/cc-power-panel.c:1789
+#: ../panels/power/cc-power-panel.c:1790
 msgid "_Blank screen"
 msgstr "Kosongkan layar"
 
-#: ../panels/power/cc-power-panel.c:1826
+#: ../panels/power/cc-power-panel.c:1827
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1831
+#: ../panels/power/cc-power-panel.c:1832
 msgid "Turn off Wi-Fi to save power."
 msgstr "Matikan Wi-Fi untuk menghemat daya."
 
-#: ../panels/power/cc-power-panel.c:1856
+#: ../panels/power/cc-power-panel.c:1857
 msgid "_Mobile broadband"
 msgstr "Data _seluler"
 
-#: ../panels/power/cc-power-panel.c:1861
+#: ../panels/power/cc-power-panel.c:1862
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr "Matikan data seluler (3G, 4G, LTE, dsb.) untuk menghemat daya."
 
-#: ../panels/power/cc-power-panel.c:1906
+#: ../panels/power/cc-power-panel.c:1907
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1962
+#: ../panels/power/cc-power-panel.c:1970
 msgid "When on battery power"
 msgstr "Ketika memakai baterai"
 
-#: ../panels/power/cc-power-panel.c:1964
+#: ../panels/power/cc-power-panel.c:1972
 msgid "When plugged in"
 msgstr "Ketika ditancapkan"
 
-#: ../panels/power/cc-power-panel.c:2059
+#: ../panels/power/cc-power-panel.c:2067
 msgid "Suspend"
 msgstr "Suspensi"
 
-#: ../panels/power/cc-power-panel.c:2060
+#: ../panels/power/cc-power-panel.c:2068
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: ../panels/power/cc-power-panel.c:2061
+#: ../panels/power/cc-power-panel.c:2069
 msgid "Nothing"
 msgstr "Bukan apapun"
 
 #. Frame header
-#: ../panels/power/cc-power-panel.c:2175
+#: ../panels/power/cc-power-panel.c:2183
 msgid "Suspend & Power Button"
 msgstr "Tombol Suspensi & Daya"
 
-#: ../panels/power/cc-power-panel.c:2218
+#: ../panels/power/cc-power-panel.c:2226
 msgid "_Automatic suspend"
 msgstr "Suspensi otom_atis"
 
-#: ../panels/power/cc-power-panel.c:2219
+#: ../panels/power/cc-power-panel.c:2227
 msgid "Automatic suspend"
 msgstr "Suspensi otomatis"
 
-#: ../panels/power/cc-power-panel.c:2286
+#: ../panels/power/cc-power-panel.c:2294
 msgid "_When the Power Button is pressed"
 msgstr "Ketika Tombol Po_wer ditekan"
 
-#: ../panels/power/cc-power-panel.c:2412 ../shell/alt/cc-window.c:270
+#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:270
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -4126,153 +4118,153 @@ msgid "Authentication Required"
 msgstr "Otentikasi Diperlukan"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:683
+#: ../panels/printers/cc-printers-panel.c:684
 msgid "Low on toner"
 msgstr "Pewarna sedikit"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:685
+#: ../panels/printers/cc-printers-panel.c:686
 msgid "Out of toner"
 msgstr "Pewarna habis"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:688
+#: ../panels/printers/cc-printers-panel.c:689
 msgid "Low on developer"
 msgstr "Developer sedikit"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:691
+#: ../panels/printers/cc-printers-panel.c:692
 msgid "Out of developer"
 msgstr "Developer habis"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:693
+#: ../panels/printers/cc-printers-panel.c:694
 msgid "Low on a marker supply"
 msgstr "Asupan penanda sedikit"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:695
+#: ../panels/printers/cc-printers-panel.c:696
 msgid "Out of a marker supply"
 msgstr "Asupan penanda habis"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:697
+#: ../panels/printers/cc-printers-panel.c:698
 msgid "Open cover"
 msgstr "Buka penutup"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:699
+#: ../panels/printers/cc-printers-panel.c:700
 msgid "Open door"
 msgstr "Buka pinta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:701
+#: ../panels/printers/cc-printers-panel.c:702
 msgid "Low on paper"
 msgstr "Kertas sedikit"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:703
+#: ../panels/printers/cc-printers-panel.c:704
 msgid "Out of paper"
 msgstr "Kertas habis"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:705
+#: ../panels/printers/cc-printers-panel.c:706
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Luring"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:707
-#: ../panels/printers/cc-printers-panel.c:897
+#: ../panels/printers/cc-printers-panel.c:708
+#: ../panels/printers/cc-printers-panel.c:898
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Dihentikan"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:709
+#: ../panels/printers/cc-printers-panel.c:710
 msgid "Waste receptacle almost full"
 msgstr "Penampung sampah hampir penuh"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:711
+#: ../panels/printers/cc-printers-panel.c:712
 msgid "Waste receptacle full"
 msgstr "Penampung sampah penuh"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:713
+#: ../panels/printers/cc-printers-panel.c:714
 msgid "The optical photo conductor is near end of life"
 msgstr "Penghantar foto optik hampir mati"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:715
+#: ../panels/printers/cc-printers-panel.c:716
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Penghantar foto optik tak berfungsi lagi"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:824
+#: ../panels/printers/cc-printers-panel.c:825
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Mengkonfigurasi"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:883
+#: ../panels/printers/cc-printers-panel.c:884
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Siap"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:888
+#: ../panels/printers/cc-printers-panel.c:889
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Tak menerima pekerjaan"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:893
+#: ../panels/printers/cc-printers-panel.c:894
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Memroses"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1013
+#: ../panels/printers/cc-printers-panel.c:1014
 msgid "Toner Level"
 msgstr "Aras Pewarna"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1016
+#: ../panels/printers/cc-printers-panel.c:1017
 msgid "Ink Level"
 msgstr "Aras Tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1019
+#: ../panels/printers/cc-printers-panel.c:1020
 msgid "Supply Level"
 msgstr "Aras Asupan"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1037
+#: ../panels/printers/cc-printers-panel.c:1038
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Memasang"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1551
+#: ../panels/printers/cc-printers-panel.c:1552
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u aktif"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1892
+#: ../panels/printers/cc-printers-panel.c:1893
 msgid "Failed to add new printer."
 msgstr "Gagal menambah pencetak baru."
 
-#: ../panels/printers/cc-printers-panel.c:2073
+#: ../panels/printers/cc-printers-panel.c:2074
 msgid "Select PPD File"
 msgstr "Pilih Berkas PPD"
 
-#: ../panels/printers/cc-printers-panel.c:2082
+#: ../panels/printers/cc-printers-panel.c:2083
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4280,30 +4272,30 @@ msgstr ""
 "Berkas Deskripsi Pencetak PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2389
+#: ../panels/printers/cc-printers-panel.c:2390
 msgid "No suitable driver found"
 msgstr "Tak ditemukan pengandar yang cocok"
 
-#: ../panels/printers/cc-printers-panel.c:2460
+#: ../panels/printers/cc-printers-panel.c:2461
 msgid "Searching for preferred drivers…"
 msgstr "Mencari pengandar yang disukai…"
 
-#: ../panels/printers/cc-printers-panel.c:2481
+#: ../panels/printers/cc-printers-panel.c:2482
 msgid "Select from database…"
 msgstr "Pilih dari basis data…"
 
-#: ../panels/printers/cc-printers-panel.c:2490
+#: ../panels/printers/cc-printers-panel.c:2491
 msgid "Provide PPD File…"
 msgstr "Sediakan Berkas PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2637
-#: ../panels/printers/cc-printers-panel.c:2660
+#: ../panels/printers/cc-printers-panel.c:2638
+#: ../panels/printers/cc-printers-panel.c:2661
 msgid "Test page"
 msgstr "Halaman uji"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3115
+#: ../panels/printers/cc-printers-panel.c:3116
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Tak dapat memuat ui: %s"
@@ -4717,70 +4709,70 @@ msgstr ""
 "Maaf! Layanan pencetakan sistem\n"
 "sepertinya tak tersedia."
 
-#: ../panels/privacy/cc-privacy-panel.c:371 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Kunci Layar"
 
-#: ../panels/privacy/cc-privacy-panel.c:422
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "Dipakai"
 
-#: ../panels/privacy/cc-privacy-panel.c:427
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Nyala"
 
-#: ../panels/privacy/cc-privacy-panel.c:428
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Mati"
 
-#: ../panels/privacy/cc-privacy-panel.c:807 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Layanan Lokasi"
 
-#: ../panels/privacy/cc-privacy-panel.c:926 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Pemakaian & Riwayat"
 
-#: ../panels/privacy/cc-privacy-panel.c:1051
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "Kosongkan semua butir dari Tong Sampah?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1052
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Semua butir dalam Tong Sampah akan dihapus secara permanen."
 
-#: ../panels/privacy/cc-privacy-panel.c:1053 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Kosongkan Tong Sampah"
 
-#: ../panels/privacy/cc-privacy-panel.c:1076
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "Hapus semua berkas temporer?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1077
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Semua berkas temporer akan dihapus secara permanen."
 
-#: ../panels/privacy/cc-privacy-panel.c:1078 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "Bersihkan Berkas Tem_porer"
 
-#: ../panels/privacy/cc-privacy-panel.c:1100 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Kosongkan Tong Sampah & Berkas Temporer"
 
-#: ../panels/privacy/cc-privacy-panel.c:1140 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Pemakaian Perangkat Lunak"
 
-#: ../panels/privacy/cc-privacy-panel.c:1181 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Pelaporan Masalah"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1195
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4789,7 +4781,7 @@ msgstr ""
 "Mengirim laporan masalah teknis membantu kami memperbaiki %s. Laporan "
 "dikirim secara anonim dan dibersihkan dari data pribadi."
 
-#: ../panels/privacy/cc-privacy-panel.c:1207 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Kebijakan Privasi"
 
@@ -4977,12 +4969,12 @@ msgid "Other"
 msgstr "Lainnya"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1092
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Sesi Anda perlu dimulai ulang agar perubahan berefek"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Restart Sekarang"
 
@@ -6098,13 +6090,11 @@ msgstr "Nama _Lengkap"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Standard"
 msgstr "Standar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#: ../panels/user-accounts/um-user-panel.c:900
 msgid "Administrator"
 msgstr "Administrator"
 
@@ -6669,7 +6659,7 @@ msgstr "%s - %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:841
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6677,7 +6667,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:847
+#: ../panels/user-accounts/um-user-panel.c:845
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6763,26 +6753,26 @@ msgstr "Tak bisa menyambung ke domain %s: %s"
 msgid "Other Accounts"
 msgstr "Akun Lain"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "Failed to delete user"
 msgstr "Gagal menghapus pengguna"
 
-#: ../panels/user-accounts/um-user-panel.c:509
-#: ../panels/user-accounts/um-user-panel.c:568
-#: ../panels/user-accounts/um-user-panel.c:620
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:566
+#: ../panels/user-accounts/um-user-panel.c:618
 msgid "Failed to revoke remotely managed user"
 msgstr "Gagal mencabut pengguna yang dikelola jarak jauh"
 
-#: ../panels/user-accounts/um-user-panel.c:676
+#: ../panels/user-accounts/um-user-panel.c:674
 msgid "You cannot delete your own account."
 msgstr "Anda tak bisa menghapus akunmu sendiri."
 
-#: ../panels/user-accounts/um-user-panel.c:685
+#: ../panels/user-accounts/um-user-panel.c:683
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s masih log masuk"
 
-#: ../panels/user-accounts/um-user-panel.c:689
+#: ../panels/user-accounts/um-user-panel.c:687
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6790,12 +6780,12 @@ msgstr ""
 "Menghapus pengguna saat mereka log masuk dapat menjerumuskan sistem ke dalam "
 "keadaan tak konsisten."
 
-#: ../panels/user-accounts/um-user-panel.c:698
+#: ../panels/user-accounts/um-user-panel.c:696
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Apakah Anda ingin mempertahankan berkas milik %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:700
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6803,51 +6793,51 @@ msgstr ""
 "Dimungkinkan untuk mempertahankan direktori rumah, spool surel, dan berkas "
 "temporer ketika menghapus suatu akun pengguna."
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:703
 msgid "_Delete Files"
 msgstr "_Hapus Berkas"
 
-#: ../panels/user-accounts/um-user-panel.c:706
+#: ../panels/user-accounts/um-user-panel.c:704
 msgid "_Keep Files"
 msgstr "Biarkan Berkas"
 
-#: ../panels/user-accounts/um-user-panel.c:720
+#: ../panels/user-accounts/um-user-panel.c:718
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgstr "Anda yakin ingin mencabut akun %s yang dikelola jarak jauh?"
 
-#: ../panels/user-accounts/um-user-panel.c:724
+#: ../panels/user-accounts/um-user-panel.c:722
 msgid "_Delete"
 msgstr "_Hapus"
 
-#: ../panels/user-accounts/um-user-panel.c:776
+#: ../panels/user-accounts/um-user-panel.c:774
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Akun dimatikan"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:782
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Untuk ditata saat log masuk berikutnya"
 
-#: ../panels/user-accounts/um-user-panel.c:787
+#: ../panels/user-accounts/um-user-panel.c:785
 msgctxt "Password mode"
 msgid "None"
 msgstr "Tak ada"
 
-#: ../panels/user-accounts/um-user-panel.c:836
+#: ../panels/user-accounts/um-user-panel.c:834
 msgid "Logged in"
 msgstr "Log masuk"
 
-#: ../panels/user-accounts/um-user-panel.c:1295
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Gagal menghubungi layanan akun"
 
-#: ../panels/user-accounts/um-user-panel.c:1297
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
 
-#: ../panels/user-accounts/um-user-panel.c:1338
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6855,12 +6845,12 @@ msgstr ""
 "Untuk melakukan perubahan,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Buat akun pengguna"
 
-#: ../panels/user-accounts/um-user-panel.c:1389
-#: ../panels/user-accounts/um-user-panel.c:1681
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6868,12 +6858,12 @@ msgstr ""
 "Untuk membuat akun pengguna,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1399
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Hapus akun pengguna yang dipilih"
 
-#: ../panels/user-accounts/um-user-panel.c:1411
-#: ../panels/user-accounts/um-user-panel.c:1686
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6881,7 +6871,7 @@ msgstr ""
 "Untuk menghapus akun pengguna yang dipilih,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1595
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "Akun Saya"
 
