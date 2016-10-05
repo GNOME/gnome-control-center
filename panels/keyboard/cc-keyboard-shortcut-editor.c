@@ -654,6 +654,14 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
   if (keyval_lower != event->keyval)
     real_mask |= GDK_SHIFT_MASK;
 
+  if (keyval_lower == GDK_KEY_Sys_Req &&
+      (real_mask & GDK_MOD1_MASK) != 0)
+    {
+      /* HACK: we don't want to use SysRq as a keybinding (but we do
+       * want Alt+Print), so we avoid translation from Alt+Print to SysRq */
+      keyval_lower = GDK_KEY_Print;
+    }
+
   /* A single Escape press cancels the editing */
   if (!event->is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_Escape)
     {
