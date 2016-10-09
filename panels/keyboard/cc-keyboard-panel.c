@@ -45,8 +45,10 @@ struct _CcKeyboardPanel
 
   /* Search */
   GtkWidget          *empty_search_placeholder;
+  GtkWidget          *search_bar;
   GtkWidget          *search_button;
   GtkWidget          *search_entry;
+  guint               search_bar_handler_id;
 
   /* Shortcuts */
   GtkWidget          *listbox;
@@ -451,11 +453,18 @@ static void
 cc_keyboard_panel_finalize (GObject *object)
 {
   CcKeyboardPanel *self = CC_KEYBOARD_PANEL (object);
+  GtkWidget *window;
 
   g_clear_pointer (&self->pictures_regex, g_regex_unref);
   g_clear_object (&self->accelerator_sizegroup);
 
   cc_keyboard_option_clear_all ();
+
+  if (self->search_bar_handler_id != 0)
+    {
+      window = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+      g_signal_handler_disconnect (window, self->search_bar_handler_id);
+    }
 
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
 }
@@ -473,6 +482,12 @@ cc_keyboard_panel_constructed (GObject *object)
   gtk_window_set_transient_for (GTK_WINDOW (self->shortcut_editor), toplevel);
 
   cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->search_button);
+
+  self->search_bar_handler_id =
+    g_signal_connect_swapped (toplevel,
+                              "key-press-event",
+                              G_CALLBACK (gtk_search_bar_handle_event),
+                              self->search_bar);
 }
 
 static void
@@ -495,6 +510,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, add_shortcut_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
 
