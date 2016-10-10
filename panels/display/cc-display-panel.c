@@ -1898,7 +1898,8 @@ setup_resolution_combo_box (CcDisplayPanel  *panel,
 
           /* select the current mode in the combo box */
           if (gnome_rr_mode_get_width (modes[i]) == gnome_rr_mode_get_width (current_mode)
-              && gnome_rr_mode_get_height (modes[i]) == gnome_rr_mode_get_height (current_mode))
+              && gnome_rr_mode_get_height (modes[i]) == gnome_rr_mode_get_height (current_mode)
+              && gnome_rr_mode_get_is_interlaced (modes[i]) == gnome_rr_mode_get_is_interlaced (current_mode))
             {
               gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->res_combo),
                                              &iter);
