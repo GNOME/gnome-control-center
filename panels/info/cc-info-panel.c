@@ -235,6 +235,9 @@ prettify_info (const char *info)
     { "Graphics Controller", "Graphics"},
   };
 
+  if (*info == '\0')
+    return NULL;
+
   pretty = g_markup_escape_text (info, -1);
 
   for (i = 0; i < G_N_ELEMENTS (rs); i++)
@@ -322,6 +325,27 @@ get_renderer_from_session (void)
   return renderer;
 }
 
+static char *
+get_renderer_from_helper (void)
+{
+  int status;
+  char *argv[] = { GNOME_SESSION_DIR "/gnome-session-check-accelerated", NULL };
+  char *renderer, *ret;
+
+  if (!g_spawn_sync (NULL, (char **) argv, NULL, 0, NULL, NULL, &renderer, NULL, &status, NULL))
+    return NULL;
+
+  if (!g_spawn_check_exit_status (status, NULL))
+    return NULL;
+
+  if (renderer == NULL || *renderer == '\0')
+    return NULL;
+
+  ret = prettify_info (renderer);
+  g_free (renderer);
+  return ret;
+}
+
 static GraphicsData *
 get_graphics_data (void)
 {
@@ -332,19 +356,18 @@ get_graphics_data (void)
 
   display = gdk_display_get_default ();
 
-#ifdef GDK_WINDOWING_X11
-  if (GDK_IS_X11_DISPLAY (display))
+#if defined(GDK_WINDOWING_X11) || defined(GDK_WINDOWING_WAYLAND)
+  if (GDK_IS_X11_DISPLAY (display) ||
+      GDK_IS_WAYLAND_DISPLAY (display))
     {
       result->renderer = get_renderer_from_session ();
+      if (!result->renderer)
+        result->renderer = get_renderer_from_helper ();
       result->hardware_string = result->renderer;
     }
-  else
 #endif
-#ifdef GDK_WINDOWING_WAYLAND
-  if (GDK_IS_WAYLAND_DISPLAY (display))
-    result->hardware_string = _("Wayland");
-  else
-#endif
+
+  if (!result->renderer)
     result->hardware_string = _("Unknown");
 
   return result;
