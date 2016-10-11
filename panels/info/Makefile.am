@@ -1,11 +1,12 @@
 cappletname = info
 
-AM_CPPFLAGS = 						\
-	$(PANEL_CFLAGS)					\
-	$(INFO_PANEL_CFLAGS)				\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DDATADIR="\"$(datadir)\""			\
-	-DBINDIR="\"$(bindir)\""			\
+AM_CPPFLAGS =							\
+	$(PANEL_CFLAGS)						\
+	$(INFO_PANEL_CFLAGS)					\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
+	-DDATADIR="\"$(datadir)\""				\
+	-DGNOME_SESSION_DIR="\"$(gnome_session_libexecdir)\""	\
+	-DBINDIR="\"$(bindir)\""				\
 	$(NULL)
 
 noinst_LTLIBRARIES = libinfo.la

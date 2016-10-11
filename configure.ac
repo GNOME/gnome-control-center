@@ -340,6 +340,17 @@ AC_SUBST(KRB5_LIBS)
 USER_ACCOUNTS_PANEL_CFLAGS="$USER_ACCOUNTS_PANEL_CFLAGS $KRB5_CFLAGS"
 USER_ACCOUNTS_PANEL_LIBS="$USER_ACCOUNTS_PANEL_LIBS $KRB5_LIBS"
 
+dnl Check for info panel
+AC_ARG_WITH([gnome-session-libexecdir],
+	    AS_HELP_STRING([--with-gnome-session-libexecdir=DIR], [Directory for gnome-session s libexecdir]),
+	    [],
+	    [with_gnome_session_libexecdir=${libexecdir}])
+if test x$with_gnome_session_libexecdir == xno; then
+	with_gnome_session_libexecdir=${libexecdir}
+fi
+AS_AC_EXPAND(GNOMESESSIONDIR, $with_gnome_session_libexecdir)
+AC_SUBST([gnome_session_libexecdir], [$GNOMESESSIONDIR])
+
 dnl =======================================
 dnl Panels
 dnl =======================================
@@ -589,4 +600,5 @@ if test "x$enable_ibus" = "xyes"; then
 else
 	AC_MSG_NOTICE([   Region panel IBus support disabled])
 fi
+AC_MSG_NOTICE([** gnome-session libexecdir: $GNOMESESSIONDIR])
 AC_MSG_NOTICE([End options])
