@@ -750,7 +750,7 @@ ui_to_setting (CEPageIP4 *page)
                         continue;
                 }
 
-                if (!text_address || !nm_utils_ipaddr_valid (AF_INET, text_address)) {
+                if (!nm_utils_ipaddr_valid (AF_INET, text_address)) {
                         widget_set_error (GTK_WIDGET (entry));
                         ret = FALSE;
                 } else {
