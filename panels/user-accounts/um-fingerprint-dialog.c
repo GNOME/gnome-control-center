@@ -62,9 +62,13 @@ typedef struct {
         gint state;
 } EnrollData;
 
-static void create_manager (void)
+static void
+ensure_manager (void)
 {
         GError *error = NULL;
+
+        if (manager != NULL)
+                return;
 
         connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (connection == NULL) {
@@ -183,12 +187,9 @@ set_fingerprint_label (GtkWidget *button)
         GVariantIter *fingers;
         GError *error = NULL;
 
-        if (manager == NULL) {
-                create_manager ();
-                if (manager == NULL) {
-                        return FALSE;
-                }
-        }
+        ensure_manager ();
+        if (manager == NULL)
+                return FALSE;
 
         device = get_first_device ();
         if (device == NULL)
@@ -232,11 +233,9 @@ delete_fingerprints (void)
         GDBusProxy *device;
         GVariant *result;
 
-        if (manager == NULL) {
-                create_manager ();
-                if (manager == NULL)
-                        return;
-        }
+        ensure_manager ();
+        if (manager == NULL)
+                return;
 
         device = get_first_device ();
         if (device == NULL)
@@ -614,7 +613,7 @@ enroll_fingerprints (GtkWindow *parent,
                      GtkWidget *editable_button,
                      ActUser   *user)
 {
-        GDBusProxy *device;
+        GDBusProxy *device = NULL;
         GtkBuilder *dialog;
         EnrollData *data;
         GtkWidget *ass;
@@ -622,15 +621,9 @@ enroll_fingerprints (GtkWindow *parent,
         GVariant *result;
         GError *error = NULL;
 
-        device = NULL;
-
-        if (manager == NULL) {
-                create_manager ();
-                if (manager != NULL)
-                        device = get_first_device ();
-        } else {
+        ensure_manager ();
+        if (manager != NULL)
                 device = get_first_device ();
-        }
 
         if (manager == NULL || device == NULL) {
                 GtkWidget *d;
