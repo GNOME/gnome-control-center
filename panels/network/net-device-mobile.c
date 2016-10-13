@@ -171,7 +171,22 @@ mobilebb_enabled_toggled (NMClient       *client,
         if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_MODEM)
                 return;
 
-        enabled = nm_client_wwan_get_enabled (client);
+        if (nm_client_wwan_get_enabled (client)) {
+                NMDeviceState state;
+
+                state = nm_device_get_state (device);
+                if (state == NM_DEVICE_STATE_UNKNOWN ||
+                    state == NM_DEVICE_STATE_UNMANAGED ||
+                    state == NM_DEVICE_STATE_UNAVAILABLE ||
+                    state == NM_DEVICE_STATE_DISCONNECTED ||
+                    state == NM_DEVICE_STATE_DEACTIVATING ||
+                    state == NM_DEVICE_STATE_FAILED) {
+                        enabled = FALSE;
+                } else {
+                        enabled = TRUE;
+                }
+        }
+
         sw = GTK_SWITCH (gtk_builder_get_object (device_mobile->priv->builder,
                                                  "device_off_switch"));
 
