@@ -312,6 +312,20 @@ device_changed (GsdDeviceManager *device_manager,
 				show_touchpad_enabling_switch (d));
 }
 
+static void
+on_content_size_changed (GtkWidget     *widget,
+			  GtkAllocation *allocation,
+			  gpointer       data)
+{
+	if (allocation->height < 490) {
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
+						GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+	} else {
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
+						GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+		gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), 490);
+	}
+}
 
 static void
 cc_mouse_properties_finalize (GObject *object)
@@ -380,6 +394,8 @@ cc_mouse_properties_init (CcMouseProperties *object)
 	gtk_container_add (GTK_CONTAINER (object), WID ("scrolled-window"));
 
 	setup_dialog (d);
+
+	g_signal_connect (WID ("scrolled-window"), "size-allocate", G_CALLBACK (on_content_size_changed), NULL);
 }
 
 GtkWidget *
