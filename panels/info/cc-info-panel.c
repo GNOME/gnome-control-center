@@ -63,10 +63,8 @@ CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
 
 typedef struct {
-  /* Will be the string below, or "Unknown" */
-  const char *hardware_string;
-
-  char *renderer;
+  /* Will be one or 2 GPU name strings, or "Unknown" */
+  char *hardware_string;
 } GraphicsData;
 
 typedef struct 
@@ -283,7 +281,7 @@ prettify_info (const char *info)
 static void
 graphics_data_free (GraphicsData *gdata)
 {
-  g_free (gdata->renderer);
+  g_free (gdata->hardware_string);
   g_slice_free (GraphicsData, gdata);
 }
 
@@ -326,23 +324,75 @@ get_renderer_from_session (void)
 }
 
 static char *
-get_renderer_from_helper (void)
+get_renderer_from_helper (gboolean discrete_gpu)
 {
   int status;
   char *argv[] = { GNOME_SESSION_DIR "/gnome-session-check-accelerated", NULL };
-  char *renderer, *ret;
+  char **envp = NULL;
+  char *renderer = NULL;
+  char *ret = NULL;
 
-  if (!g_spawn_sync (NULL, (char **) argv, NULL, 0, NULL, NULL, &renderer, NULL, &status, NULL))
-    return NULL;
+  if (discrete_gpu)
+    {
+      envp = g_get_environ ();
+      envp = g_environ_setenv (envp, "DRI_PRIME", "1", TRUE);
+    }
+
+  if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, NULL))
+    goto out;
 
   if (!g_spawn_check_exit_status (status, NULL))
-    return NULL;
+    goto out;
 
   if (renderer == NULL || *renderer == '\0')
-    return NULL;
+    goto out;
 
   ret = prettify_info (renderer);
+
+out:
   g_free (renderer);
+  g_strfreev (envp);
+  return ret;
+}
+
+static gboolean
+has_dual_gpu (void)
+{
+  GDBusProxy *switcheroo_proxy;
+  GVariant *dualgpu_variant;
+  gboolean ret;
+  GError *error = NULL;
+
+  switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                    G_DBUS_PROXY_FLAGS_NONE,
+                                                    NULL,
+                                                    "net.hadess.SwitcherooControl",
+                                                    "/net/hadess/SwitcherooControl",
+                                                    "net.hadess.SwitcherooControl",
+                                                    NULL, &error);
+  if (switcheroo_proxy == NULL)
+    {
+      g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
+               error->message);
+      g_error_free (error);
+      return FALSE;
+    }
+
+  dualgpu_variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "HasDualGpu");
+  g_object_unref (switcheroo_proxy);
+
+  if (!dualgpu_variant)
+    {
+      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.HasDualGpu property, the daemon is likely not running");
+      return FALSE;
+    }
+
+  ret = g_variant_get_boolean (dualgpu_variant);
+  g_variant_unref (dualgpu_variant);
+
+  if (ret)
+    g_debug ("Dual-GPU machine detected");
+
   return ret;
 }
 
@@ -360,15 +410,27 @@ get_graphics_data (void)
   if (GDK_IS_X11_DISPLAY (display) ||
       GDK_IS_WAYLAND_DISPLAY (display))
     {
-      result->renderer = get_renderer_from_session ();
-      if (!result->renderer)
-        result->renderer = get_renderer_from_helper ();
-      result->hardware_string = result->renderer;
+      char *discrete_renderer = NULL;
+      char *renderer;
+
+      renderer = get_renderer_from_session ();
+      if (!renderer)
+        renderer = get_renderer_from_helper (FALSE);
+      if (has_dual_gpu ())
+        discrete_renderer = get_renderer_from_helper (TRUE);
+      if (!discrete_renderer)
+        result->hardware_string = g_strdup (renderer);
+      else
+        result->hardware_string = g_strdup_printf ("%s / %s",
+                                                   renderer,
+                                                   discrete_renderer);
+      g_free (renderer);
+      g_free (discrete_renderer);
     }
 #endif
 
-  if (!result->renderer)
-    result->hardware_string = _("Unknown");
+  if (!result->hardware_string)
+    result->hardware_string = g_strdup (_("Unknown"));
 
   return result;
 }
