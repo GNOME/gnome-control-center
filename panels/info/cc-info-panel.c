@@ -237,6 +237,7 @@ prettify_info (const char *info)
     return NULL;
 
   pretty = g_markup_escape_text (info, -1);
+  pretty = g_strchug (g_strchomp (pretty));
 
   for (i = 0; i < G_N_ELEMENTS (rs); i++)
     {
