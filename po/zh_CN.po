@@ -29,16 +29,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-04-30 12:28+0000\n"
-"PO-Revision-Date: 2015-04-10 16:57+0800\n"
-"Last-Translator: osfans <waxaca@163.com>\n"
+"POT-Creation-Date: 2016-09-24 00:51+0000\n"
+"PO-Revision-Date: 2016-10-30 19:42+0800\n"
+"Last-Translator: liushuyu <liushuyu_011@126.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../panels/background/background.ui.h:1
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
@@ -125,22 +125,21 @@ msgstr "您添加到 %s 文件夹的图片将在此显示"
 #: ../panels/background/cc-background-chooser-dialog.c:580
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color.ui.h:29 ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1582
-#: ../panels/display/cc-display-panel.c:2020
+#: ../panels/display/cc-display-panel.c:1571
+#: ../panels/display/cc-display-panel.c:2033
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:245
 #: ../panels/network/connection-editor/vpn-helpers.c:374
-#: ../panels/network/net-device-wifi.c:1247
-#: ../panels/network/net-device-wifi.c:1440
+#: ../panels/network/net-device-wifi.c:1271
+#: ../panels/network/net-device-wifi.c:1464
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/cc-printers-panel.c:1940
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/privacy/cc-privacy-panel.c:568
-#: ../panels/region/format-chooser.ui.h:3
-#: ../panels/region/input-chooser.ui.h:2
+#: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:681
-#: ../panels/sharing/cc-sharing-panel.c:491
+#: ../panels/sharing/cc-sharing-panel.c:372
 #: ../panels/user-accounts/data/account-dialog.ui.h:17
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
@@ -185,27 +184,56 @@ msgstr "将背景图片改为一张壁纸或照片"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Wallpaper;Screen;Desktop;壁纸;墙纸;屏幕;桌面;背景;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:262
-msgid "Bluetooth is disabled"
-msgstr "蓝牙已禁用"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:263
-msgid "No Bluetooth adapters found"
-msgstr "未找到蓝牙适配器"
-
 #: ../panels/bluetooth/cc-bluetooth-panel.c:264
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "蓝牙已通过硬件开关禁用"
+msgid "Turn Off Airplane Mode"
+msgstr "关闭飞行模式"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
+msgid "No Bluetooth Found"
+msgstr "未找到蓝牙"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:330
+msgid "Plug in a dongle to use Bluetooth."
+msgstr "插入适配器来使用蓝牙。"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
+msgid "Bluetooth Turned Off"
+msgstr "蓝牙已关闭"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:331
+msgid "Turn on to connect devices and receive file transfers."
+msgstr "打开来连接设备和传输文件。"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
+msgid "Airplane Mode is on"
+msgstr "飞行模式已打开"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:332
+msgid "Bluetooth is disabled when airplane mode is on."
+msgstr "在飞行模式下蓝牙不可用。"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
+msgid "Hardware Airplane Mode is on"
+msgstr "硬件飞行模式已打开"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:333
+msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgstr "关闭飞行模式以启用蓝牙。"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:1637
+#: ../panels/printers/pp-new-printer-dialog.c:1676
 msgid "Bluetooth"
 msgstr "蓝牙"
 
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "开关蓝牙及连接您的设备"
+
+#. Translators: those are keywords for the bluetooth control-center panel
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:4
+msgid "share;sharing;bluetooth;obex;"
+msgstr "share;sharing;bluetooth;obex;共享;蓝牙;交换;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -667,10 +695,9 @@ msgstr "摘要"
 
 #: ../panels/color/color.ui.h:28
 msgid "Import File…"
-msgstr "导入文件..."
+msgstr "导入文件…"
 
-#: ../panels/color/color.ui.h:30
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:30 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 #: ../panels/network/connection-editor/net-connection-editor.c:512
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
@@ -712,10 +739,9 @@ msgstr "启用"
 msgid "Add profile"
 msgstr "添加配置"
 
-#: ../panels/color/color.ui.h:39
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/color/color.ui.h:39 ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Calibrate…"
-msgstr "校准..."
+msgstr "校准…"
 
 #: ../panels/color/color.ui.h:40
 msgid "Calibrate the device"
@@ -787,7 +813,7 @@ msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "中"
 
-#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:4
+#: ../panels/color/color.ui.h:57 ../panels/power/power.ui.h:2
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 分钟"
@@ -797,7 +823,7 @@ msgctxt "Calibration quality"
 msgid "Low"
 msgstr "低"
 
-#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:3
+#: ../panels/color/color.ui.h:59 ../panels/power/power.ui.h:1
 msgid "15 minutes"
 msgstr "15 分钟"
 
@@ -838,15 +864,15 @@ msgstr ""
 
 #: ../panels/common/cc-common-language.c:323
 msgid "Other…"
-msgstr "其他..."
+msgstr "其他…"
 
-#: ../panels/common/cc-language-chooser.c:123
-#: ../panels/region/cc-format-chooser.c:270
-#: ../panels/region/cc-input-chooser.c:167
+#: ../panels/common/cc-language-chooser.c:124
+#: ../panels/region/cc-format-chooser.c:271
+#: ../panels/region/cc-input-chooser.c:168
 msgid "More…"
-msgstr "更多..."
+msgstr "更多…"
 
-#: ../panels/common/cc-language-chooser.c:139
+#: ../panels/common/cc-language-chooser.c:140
 msgid "No languages found"
 msgstr "未找到语言"
 
@@ -858,6 +884,21 @@ msgstr "语言"
 #: ../panels/region/format-chooser.ui.h:2
 msgid "_Done"
 msgstr "完成(_D)"
+
+#: ../panels/datetime/big.ui.h:1 ../panels/datetime/little.ui.h:1
+#: ../panels/datetime/middle.ui.h:1 ../panels/datetime/ydm.ui.h:1
+msgid "Day"
+msgstr "日"
+
+#: ../panels/datetime/big.ui.h:2 ../panels/datetime/little.ui.h:2
+#: ../panels/datetime/middle.ui.h:2 ../panels/datetime/ydm.ui.h:2
+msgid "Month"
+msgstr "月"
+
+#: ../panels/datetime/big.ui.h:3 ../panels/datetime/little.ui.h:3
+#: ../panels/datetime/middle.ui.h:3 ../panels/datetime/ydm.ui.h:3
+msgid "Year"
+msgstr "年"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
@@ -975,54 +1016,42 @@ msgid "Minute"
 msgstr "分"
 
 #: ../panels/datetime/datetime.ui.h:18
-msgid "Day"
-msgstr "日"
-
-#: ../panels/datetime/datetime.ui.h:19
-msgid "Month"
-msgstr "月"
-
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Year"
-msgstr "年"
-
-#: ../panels/datetime/datetime.ui.h:21
 msgid "Time Zone"
 msgstr "时区"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Search for a city"
 msgstr "搜索城市"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Automatic _Date & Time"
 msgstr "自动设置日期和时间(_D)"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Requires internet access"
 msgstr "需要互联网连接"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Automatic Time _Zone"
 msgstr "自动设置时区(_Z)"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Date & _Time"
 msgstr "日期和时间(_T)"
 
-#: ../panels/datetime/datetime.ui.h:27
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Time _Zone"
 msgstr "时区(_Z)"
 
-#: ../panels/datetime/datetime.ui.h:28
+#: ../panels/datetime/datetime.ui.h:25
 msgid "Time _Format"
 msgstr "时间格式(_F)"
 
-#: ../panels/datetime/datetime.ui.h:29
+#: ../panels/datetime/datetime.ui.h:26
 msgid "24-hour"
 msgstr "24 小时"
 
-#: ../panels/datetime/datetime.ui.h:30
+#: ../panels/datetime/datetime.ui.h:27
 msgid "AM / PM"
 msgstr "上午/下午"
 
@@ -1043,23 +1072,23 @@ msgstr "更改系统时间和日期设置"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "修改时间或日期设置，您需要管理员权限。"
 
-#: ../panels/display/cc-display-panel.c:567
+#: ../panels/display/cc-display-panel.c:583
 msgid "Lid Closed"
 msgstr "盖已合上"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:570
+#: ../panels/display/cc-display-panel.c:586
 msgid "Mirrored"
 msgstr "镜像显示"
 
-#: ../panels/display/cc-display-panel.c:572
-#: ../panels/display/cc-display-panel.c:2195
+#: ../panels/display/cc-display-panel.c:588
+#: ../panels/display/cc-display-panel.c:2205
 msgid "Primary"
 msgstr "主"
 
-#: ../panels/display/cc-display-panel.c:574
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1713 ../panels/power/cc-power-panel.c:1724
+#: ../panels/display/cc-display-panel.c:590
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1847 ../panels/power/cc-power-panel.c:1858
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -1069,95 +1098,95 @@ msgstr "主"
 msgid "Off"
 msgstr "关"
 
-#: ../panels/display/cc-display-panel.c:577
+#: ../panels/display/cc-display-panel.c:593
 msgid "Secondary"
 msgstr "次"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1579
+#: ../panels/display/cc-display-panel.c:1568
 msgid "Arrange Combined Displays"
 msgstr "安排多个显示"
 
-#: ../panels/display/cc-display-panel.c:1583
-#: ../panels/display/cc-display-panel.c:2021
+#: ../panels/display/cc-display-panel.c:1572
+#: ../panels/display/cc-display-panel.c:2034
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "应用(_A)"
 
-#: ../panels/display/cc-display-panel.c:1607
+#: ../panels/display/cc-display-panel.c:1596
 msgid "Drag displays to rearrange them"
 msgstr "拖动显示屏来重新排列它们"
 
-#: ../panels/display/cc-display-panel.c:2073
+#: ../panels/display/cc-display-panel.c:2083
 msgid "Rotate counterclockwise by 90°"
 msgstr "逆时针旋转 90°"
 
-#: ../panels/display/cc-display-panel.c:2091
+#: ../panels/display/cc-display-panel.c:2101
 msgid "Rotate by 180°"
 msgstr "旋转 180°"
 
-#: ../panels/display/cc-display-panel.c:2109
+#: ../panels/display/cc-display-panel.c:2119
 msgid "Rotate clockwise by 90°"
 msgstr "顺时针旋转 90°"
 
-#: ../panels/display/cc-display-panel.c:2130
+#: ../panels/display/cc-display-panel.c:2140
 msgid "Size"
 msgstr "大小"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2143
+#: ../panels/display/cc-display-panel.c:2153
 msgid "Aspect Ratio"
 msgstr "宽高比"
 
-#: ../panels/display/cc-display-panel.c:2165
+#: ../panels/display/cc-display-panel.c:2175
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "分辨率"
 
-#: ../panels/display/cc-display-panel.c:2196
+#: ../panels/display/cc-display-panel.c:2206
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "在此显示器上显示顶栏和活动概览"
 
-#: ../panels/display/cc-display-panel.c:2202
+#: ../panels/display/cc-display-panel.c:2212
 msgid "Secondary Display"
 msgstr "第二显示器"
 
-#: ../panels/display/cc-display-panel.c:2203
+#: ../panels/display/cc-display-panel.c:2213
 msgid "Join this display with another to create an extra workspace"
 msgstr "将该显示器与另一显示器合并以扩展工作空间"
 
 # 左撇子有歧视色彩。
-#: ../panels/display/cc-display-panel.c:2210
+#: ../panels/display/cc-display-panel.c:2220
 msgid "Presentation"
 msgstr "演示"
 
-#: ../panels/display/cc-display-panel.c:2211
+#: ../panels/display/cc-display-panel.c:2221
 msgid "Show slideshows and media only"
 msgstr "只显示幻灯片和多媒体"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2216
+#: ../panels/display/cc-display-panel.c:2226
 msgid "Mirror"
 msgstr "镜像"
 
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:2227
 msgid "Show your existing view on both displays"
 msgstr "在两块显示器上同时显示当前视图"
 
-#: ../panels/display/cc-display-panel.c:2223
+#: ../panels/display/cc-display-panel.c:2233
 msgid "Turn Off"
 msgstr "关闭"
 
-#: ../panels/display/cc-display-panel.c:2224
+#: ../panels/display/cc-display-panel.c:2234
 msgid "Don't use this display"
 msgstr "不使用该显示器"
 
-#: ../panels/display/cc-display-panel.c:2449
+#: ../panels/display/cc-display-panel.c:2535
 msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
 
-#: ../panels/display/cc-display-panel.c:2480
+#: ../panels/display/cc-display-panel.c:2566
 msgid "_Arrange Combined Displays"
 msgstr "安排多个显示(_A)"
 
@@ -1286,7 +1315,7 @@ msgid "Windows software"
 msgstr "Windows 软件"
 
 #: ../panels/info/cc-info-panel.c:1435
-#: ../panels/keyboard/keyboard-shortcuts.c:1947
+#: ../panels/keyboard/keyboard-shortcuts.c:1949
 msgid "Section"
 msgstr "节"
 
@@ -1363,7 +1392,7 @@ msgstr "磁盘"
 
 #: ../panels/info/info.ui.h:10
 msgid "Calculating…"
-msgstr "正在计算..."
+msgstr "正在计算…"
 
 #: ../panels/info/info.ui.h:11
 msgid "Graphics"
@@ -1423,7 +1452,7 @@ msgstr "软件(_S)"
 
 #: ../panels/info/info.ui.h:27
 msgid "_Other Media…"
-msgstr "其他媒体(_O)..."
+msgstr "其他媒体(_O)…"
 
 #: ../panels/info/info.ui.h:28
 msgid "_Never prompt or start programs on media insertion"
@@ -1610,7 +1639,7 @@ msgstr "高对比度开或关"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1219
+#: ../panels/keyboard/keyboard-shortcuts.c:1220
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:213
@@ -1742,16 +1771,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "快捷键"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:636
-#: ../panels/keyboard/keyboard-shortcuts.c:644
+#: ../panels/keyboard/keyboard-shortcuts.c:633
+#: ../panels/keyboard/keyboard-shortcuts.c:641
 msgid "Custom Shortcuts"
 msgstr "自定义快捷键"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:861
+#: ../panels/keyboard/keyboard-shortcuts.c:858
 msgid "<Unknown Action>"
 msgstr "<未知动作>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1358
+#: ../panels/keyboard/keyboard-shortcuts.c:1359
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1761,7 +1790,7 @@ msgstr ""
 "%s 不能用作快捷键，否则将无法使用其进行正常输入。\n"
 "请组合 Ctrl、Alt 或 Shift 键再试一次"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1388
+#: ../panels/keyboard/keyboard-shortcuts.c:1389
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1770,31 +1799,31 @@ msgstr ""
 "快捷键 %s 已被用于\n"
 "%s"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1393
+#: ../panels/keyboard/keyboard-shortcuts.c:1394
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果您重新分配快捷键 %s，则快捷键 %s 将被禁用"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1399
+#: ../panels/keyboard/keyboard-shortcuts.c:1400
 msgid "_Reassign"
 msgstr "重新分配(_R)"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1441
 #, c-format
 msgid ""
 "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
 "automatically set it to \"%s\"?"
 msgstr "%s 已占用快捷键 %s ，您是否想将它自动设置为 %s ？"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1450
+#: ../panels/keyboard/keyboard-shortcuts.c:1451
 #, c-format
 msgid ""
 "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
 "if you move forward."
 msgstr "快捷键 %s 已被分配给 %s ，如果继续，该快捷键将被禁用。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1457
+#: ../panels/keyboard/keyboard-shortcuts.c:1458
 msgid "_Assign"
 msgstr "分配(_A)"
 
@@ -1969,13 +1998,13 @@ msgid "802.1x _Security"
 msgstr "802.1X 安全性(_S)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
 msgstr "第 1 页"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
@@ -1983,18 +2012,18 @@ msgid "Anony_mous identity"
 msgstr "匿名身份(_M)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:5
 msgid "Inner _authentication"
 msgstr "内部认证(_A)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
 msgstr "第 2 页"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
-#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/ce-page-security.c:469
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2006,40 +2035,40 @@ msgstr "自动"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:52
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:383
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:56
-#: ../panels/network/net-device-wifi.c:222
-#: ../panels/network/net-device-wifi.c:387
+#: ../panels/network/net-device-wifi.c:223
+#: ../panels/network/net-device-wifi.c:388
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:60
-#: ../panels/network/net-device-wifi.c:226
+#: ../panels/network/net-device-wifi.c:227
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:65
-#: ../panels/network/net-device-wifi.c:231
+#: ../panels/network/net-device-wifi.c:232
 msgid "Enterprise"
 msgstr "企业"
 
 #: ../panels/network/connection-editor/ce-page-details.c:70
-#: ../panels/network/net-device-wifi.c:236
-#: ../panels/network/net-device-wifi.c:372
+#: ../panels/network/net-device-wifi.c:237
+#: ../panels/network/net-device-wifi.c:373
 msgctxt "Wifi security"
 msgid "None"
 msgstr "无"
 
 #: ../panels/network/connection-editor/ce-page-details.c:91
-#: ../panels/power/power.ui.h:19
+#: ../panels/power/power.ui.h:17
 msgid "Never"
 msgstr "从不"
 
@@ -2055,7 +2084,7 @@ msgstr "昨天"
 
 #: ../panels/network/connection-editor/ce-page-details.c:106
 #: ../panels/network/net-device-ethernet.c:124
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:477
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2064,44 +2093,44 @@ msgstr[0] "%i 天前"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-wifi.c:533
+#: ../panels/network/net-device-wifi.c:534
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/秒"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:563
 msgctxt "Signal strength"
 msgid "None"
 msgstr "无"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:564
+#: ../panels/network/net-device-wifi.c:565
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "弱"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:566
+#: ../panels/network/net-device-wifi.c:567
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "一般"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:568
+#: ../panels/network/net-device-wifi.c:569
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "好"
 
 #: ../panels/network/connection-editor/ce-page-details.c:189
-#: ../panels/network/net-device-wifi.c:570
+#: ../panels/network/net-device-wifi.c:571
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "极好"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:226
 #: ../panels/network/connection-editor/ce-page-vpn.c:204
-#: ../panels/network/connection-editor/ce-page-wifi.c:270
+#: ../panels/network/connection-editor/ce-page-wifi.c:262
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "身份"
@@ -2208,33 +2237,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "重置"
 
-#: ../panels/network/connection-editor/ce-page-security.c:250
+#: ../panels/network/connection-editor/ce-page-security.c:253
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "无"
 
-#: ../panels/network/connection-editor/ce-page-security.c:273
+#: ../panels/network/connection-editor/ce-page-security.c:276
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128 位密钥(Hex 或者 ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:283
+#: ../panels/network/connection-editor/ce-page-security.c:286
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 位密码"
 
-#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/connection-editor/ce-page-security.c:299
 #: ../panels/network/wireless-security/wireless-security.c:409
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:309
+#: ../panels/network/connection-editor/ce-page-security.c:312
 msgid "Dynamic WEP (802.1x)"
 msgstr "动态 WEP (802.1X)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:323
+#: ../panels/network/connection-editor/ce-page-security.c:326
 msgid "WPA & WPA2 Personal"
 msgstr "WPA 和 WPA2 个人"
 
-#: ../panels/network/connection-editor/ce-page-security.c:337
+#: ../panels/network/connection-editor/ce-page-security.c:340
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA 和 WPA2 企业"
 
@@ -2251,7 +2280,7 @@ msgstr "连接速度"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:157
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:693
+#: ../panels/network/network-wifi.ui.h:7 ../panels/network/panel-common.c:695
 msgid "IPv4 Address"
 msgstr "IPv4 地址"
 
@@ -2260,7 +2289,7 @@ msgstr "IPv4 地址"
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:694
+#: ../panels/network/network-wifi.ui.h:8 ../panels/network/panel-common.c:696
 msgid "IPv6 Address"
 msgstr "IPv6 地址"
 
@@ -2360,8 +2389,8 @@ msgid "Connect _automatically"
 msgstr "自动连接(_A)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:17
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/network/connection-editor/vpn-page.ui.h:2
-#: ../panels/network/connection-editor/wifi-page.ui.h:8
 msgid "Firewall _Zone"
 msgstr "防火墙区域(_Z)"
 
@@ -2447,7 +2476,7 @@ msgstr "无法载入 VPN 插件"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:803
 msgid "Import from file…"
-msgstr "从文件导入..."
+msgstr "从文件导入…"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:874
 msgid "Add Network Connection"
@@ -2459,7 +2488,7 @@ msgid "_Reset"
 msgstr "重置(_R)"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/net-device-wifi.c:1465
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "忘记(_F)"
@@ -2503,7 +2532,7 @@ msgstr "选择要导入的文件"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:246
 #: ../panels/printers/cc-printers-panel.c:1941
-#: ../panels/sharing/cc-sharing-panel.c:492
+#: ../panels/sharing/cc-sharing-panel.c:373
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "打开(_O)"
@@ -2598,24 +2627,23 @@ msgid "Bridge slaves"
 msgstr "桥接从属设备"
 
 #: ../panels/network/net-device-ethernet.c:110
-#: ../panels/network/net-device-wifi.c:462
+#: ../panels/network/net-device-wifi.c:463
 msgid "never"
 msgstr "从不"
 
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:473
 msgid "today"
 msgstr "今天"
 
 #: ../panels/network/net-device-ethernet.c:122
-#: ../panels/network/net-device-wifi.c:474
+#: ../panels/network/net-device-wifi.c:475
 msgid "yesterday"
 msgstr "昨天"
 
 #: ../panels/network/net-device-ethernet.c:160
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:696 ../panels/network/panel-common.c:698
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:698
+#: ../panels/network/panel-common.c:700 ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP 地址"
 
@@ -2636,15 +2664,14 @@ msgid "Wired"
 msgstr "有线"
 
 #: ../panels/network/net-device-ethernet.c:354
-#: ../panels/network/net-device-wifi.c:1597
+#: ../panels/network/net-device-wifi.c:1623
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-simple.ui.h:8
-#: ../panels/network/network-vpn.ui.h:7
+#: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
-msgstr "选项..."
+msgstr "选项…"
 
-#: ../panels/network/net-device-ethernet.c:472
+#: ../panels/network/net-device-ethernet.c:473
 #, c-format
 msgid "Profile %d"
 msgstr "配置 %d"
@@ -2657,51 +2684,51 @@ msgstr "添加新连接"
 msgid "Team slaves"
 msgstr "绑定从属设备(Team 方式)"
 
-#: ../panels/network/net-device-wifi.c:1154
+#: ../panels/network/net-device-wifi.c:1178
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
 msgstr "如果您有除无线网络以外的方式连接到互联网，您可以将它与其他人分享。"
 
-#: ../panels/network/net-device-wifi.c:1158
+#: ../panels/network/net-device-wifi.c:1182
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "切换无线网热点会使得您从 <b>%s</b> 断开。"
 
-#: ../panels/network/net-device-wifi.c:1162
+#: ../panels/network/net-device-wifi.c:1186
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr "启用热点模式时无法通过无线网络访问互联网。"
 
-#: ../panels/network/net-device-wifi.c:1245
+#: ../panels/network/net-device-wifi.c:1269
 msgid "Stop hotspot and disconnect any users?"
 msgstr "停止热点并断开所有用户？"
 
-#: ../panels/network/net-device-wifi.c:1248
+#: ../panels/network/net-device-wifi.c:1272
 msgid "_Stop Hotspot"
 msgstr "停止热点(_S)"
 
-#: ../panels/network/net-device-wifi.c:1305
+#: ../panels/network/net-device-wifi.c:1329
 msgid "System policy prohibits use as a Hotspot"
 msgstr "系统策略禁止作为热点使用"
 
-#: ../panels/network/net-device-wifi.c:1308
+#: ../panels/network/net-device-wifi.c:1332
 msgid "Wireless device does not support Hotspot mode"
 msgstr "无线设备不支持热点模式"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1461
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr "所选网络的细节，包括密码和全部自定义设置，都将丢失。"
 
-#: ../panels/network/net-device-wifi.c:1750
+#: ../panels/network/net-device-wifi.c:1776
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "History"
 msgstr "历史"
 
-#: ../panels/network/net-device-wifi.c:1754
+#: ../panels/network/net-device-wifi.c:1780
 #: ../panels/region/input-options.ui.h:2 ../panels/wacom/button-mapping.ui.h:2
 #: ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2709,7 +2736,7 @@ msgid "_Close"
 msgstr "关闭(_C)"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1762
+#: ../panels/network/net-device-wifi.c:1788
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "忘记(_F)"
@@ -2940,11 +2967,11 @@ msgstr "关闭 Wi-Fi"
 
 #: ../panels/network/network-wifi.ui.h:56
 msgid "_Use as Hotspot…"
-msgstr "用作热点(_U)..."
+msgstr "用作热点(_U)…"
 
 #: ../panels/network/network-wifi.ui.h:57
 msgid "_Connect to Hidden Network…"
-msgstr "连接到隐藏网络(_C)..."
+msgstr "连接到隐藏网络(_C)…"
 
 #: ../panels/network/network-wifi.ui.h:58
 msgid "_History"
@@ -2967,8 +2994,11 @@ msgid "Security type"
 msgstr "安全类型"
 
 #: ../panels/network/network-wifi.ui.h:63
-msgid "Security key"
-msgstr "安全密钥"
+#: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "Password"
+msgstr "密码"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:131
@@ -3512,8 +3542,8 @@ msgstr "WEP 索引(_X)"
 msgid "_Type"
 msgstr "类型(_T)"
 
-#: ../panels/notifications/cc-notifications-panel.c:247
-#: ../panels/power/cc-power-panel.c:1719 ../panels/power/cc-power-panel.c:1726
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1853 ../panels/power/cc-power-panel.c:1860
 #: ../panels/privacy/cc-privacy-panel.c:155
 #: ../panels/privacy/cc-privacy-panel.c:222
 #: ../panels/universal-access/cc-ua-panel.c:257
@@ -3583,30 +3613,30 @@ msgstr "锁屏通知"
 msgid "Applications"
 msgstr "应用程序"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:169
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:168
 msgctxt "Online Account"
 msgid "Other"
 msgstr "其他"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:290
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:289
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "添加帐号"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:329
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:326
 msgid "Mail"
 msgstr "邮件"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:335
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:332
 msgid "Contacts"
 msgstr "联系人"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:341
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:338
 msgid "Chat"
 msgstr "聊天"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:347
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:344
 msgid "Resources"
 msgstr "资源"
 
@@ -3683,17 +3713,17 @@ msgid ""
 "contacts, calendar, chat and more."
 msgstr "添加一个帐号，让您的应用访问帐号的文档、邮件、联系人、日历、聊天等。"
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:200
 msgid "Unknown time"
 msgstr "未知时间"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:206
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分钟"
 
-#: ../panels/power/cc-power-panel.c:210
+#: ../panels/power/cc-power-panel.c:218
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -3701,224 +3731,224 @@ msgstr[0] "%i 小时"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:218
+#: ../panels/power/cc-power-panel.c:226
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:219
+#: ../panels/power/cc-power-panel.c:227
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "时"
 
-#: ../panels/power/cc-power-panel.c:220
+#: ../panels/power/cc-power-panel.c:228
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:239
+#: ../panels/power/cc-power-panel.c:247
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s 后充满"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:246
+#: ../panels/power/cc-power-panel.c:254
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "注意：剩余 %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:259
 #, c-format
 msgid "%s remaining"
 msgstr "剩余 %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:256 ../panels/power/cc-power-panel.c:284
+#: ../panels/power/cc-power-panel.c:264 ../panels/power/cc-power-panel.c:292
 msgid "Fully charged"
 msgstr "已充满"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:260 ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:268 ../panels/power/cc-power-panel.c:296
 msgid "Empty"
 msgstr "电池已空"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging"
 msgstr "正在充电"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:288
 msgid "Discharging"
 msgstr "正在放电"
 
-#: ../panels/power/cc-power-panel.c:405
+#: ../panels/power/cc-power-panel.c:411
 msgctxt "Battery name"
 msgid "Main"
 msgstr "主"
 
-#: ../panels/power/cc-power-panel.c:407
+#: ../panels/power/cc-power-panel.c:413
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "附加"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:479
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "无线鼠标"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:482
+#: ../panels/power/cc-power-panel.c:487
 msgid "Wireless keyboard"
 msgstr "无线键盘"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:490
 msgid "Uninterruptible power supply"
 msgstr "不间断电源(UPS)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:488
+#: ../panels/power/cc-power-panel.c:493
 msgid "Personal digital assistant"
 msgstr "个人数字助理(PDA)"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:491
+#: ../panels/power/cc-power-panel.c:496
 msgid "Cellphone"
 msgstr "手机"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:494
+#: ../panels/power/cc-power-panel.c:499
 msgid "Media player"
 msgstr "媒体播放器"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "手写板"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:500
+#: ../panels/power/cc-power-panel.c:505
 msgid "Computer"
 msgstr "计算机"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:503 ../panels/power/cc-power-panel.c:734
-#: ../panels/power/cc-power-panel.c:2057
+#: ../panels/power/cc-power-panel.c:508 ../panels/power/cc-power-panel.c:748
+#: ../panels/power/cc-power-panel.c:2109
 msgid "Battery"
 msgstr "电池"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:557
+#: ../panels/power/cc-power-panel.c:562
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "正在充电"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:564
+#: ../panels/power/cc-power-panel.c:569
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "警告"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:569
+#: ../panels/power/cc-power-panel.c:574
 msgctxt "Battery power"
 msgid "Low"
 msgstr "低"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Good"
 msgstr "充足"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:584
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "已充满"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "空"
 
-#: ../panels/power/cc-power-panel.c:732
+#: ../panels/power/cc-power-panel.c:746
 msgid "Batteries"
 msgstr "电池"
 
-#: ../panels/power/cc-power-panel.c:1134
+#: ../panels/power/cc-power-panel.c:1171
 msgid "When _idle"
 msgstr "闲置时(_I)"
 
-#: ../panels/power/cc-power-panel.c:1463
+#: ../panels/power/cc-power-panel.c:1560
 msgid "Power Saving"
 msgstr "省电"
 
-#: ../panels/power/cc-power-panel.c:1498
+#: ../panels/power/cc-power-panel.c:1595
 msgid "_Screen brightness"
 msgstr "屏幕亮度(_S)"
 
-#: ../panels/power/cc-power-panel.c:1504
+#: ../panels/power/cc-power-panel.c:1614
+msgid "Automatic brightness"
+msgstr "自动调节亮度"
+
+#: ../panels/power/cc-power-panel.c:1634
 msgid "_Keyboard brightness"
 msgstr "键盘亮度(_K)"
 
-#: ../panels/power/cc-power-panel.c:1514
+#: ../panels/power/cc-power-panel.c:1644
 msgid "_Dim screen when inactive"
 msgstr "无操作时屏幕变暗(_D)"
 
-#: ../panels/power/cc-power-panel.c:1539
+#: ../panels/power/cc-power-panel.c:1669
 msgid "_Blank screen"
 msgstr "空白屏幕(_B)"
 
-#: ../panels/power/cc-power-panel.c:1576
+#: ../panels/power/cc-power-panel.c:1706
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1581
-msgid "Wireless devices require extra power"
-msgstr "无线设备需要消耗更多电"
+#: ../panels/power/cc-power-panel.c:1711
+msgid "Turn off Wi-Fi to save power."
+msgstr "关闭 Wi-Fi 以节省电量。"
 
-#: ../panels/power/cc-power-panel.c:1606
+#: ../panels/power/cc-power-panel.c:1736
 msgid "_Mobile broadband"
 msgstr "移动宽带(_M)"
 
-#: ../panels/power/cc-power-panel.c:1611
-msgid "Mobile broadband (3G, 4G, WiMax, etc.) devices require extra power"
-msgstr "移动宽带(3G、4G、WiMax 等)设备需要消耗更多电量"
+#: ../panels/power/cc-power-panel.c:1741
+msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
+msgstr "关闭移动宽带(3G, 4G, LTE 等)节省电量。"
 
-#: ../panels/power/cc-power-panel.c:1661
+#: ../panels/power/cc-power-panel.c:1793
 msgid "_Bluetooth"
 msgstr "蓝牙(_B)"
 
-#: ../panels/power/cc-power-panel.c:1715
+#: ../panels/power/cc-power-panel.c:1849
 msgid "When on battery power"
 msgstr "电池供电时"
 
-#: ../panels/power/cc-power-panel.c:1717
+#: ../panels/power/cc-power-panel.c:1851
 msgid "When plugged in"
 msgstr "电源插入时"
 
-#: ../panels/power/cc-power-panel.c:1847
+#: ../panels/power/cc-power-panel.c:1968
 msgid "Suspend & Power Off"
 msgstr "挂起和关机"
 
-#: ../panels/power/cc-power-panel.c:1887
+#: ../panels/power/cc-power-panel.c:2008
 msgid "_Automatic suspend"
 msgstr "自动挂起(_A)"
 
-#: ../panels/power/cc-power-panel.c:1911
-msgid "When battery power is _critical"
-msgstr "电量严重不足时(_C)"
+#: ../panels/power/cc-power-panel.c:2009
+msgid "Automatic suspend"
+msgstr "自动挂起"
 
-#: ../panels/power/cc-power-panel.c:1968
-msgid "Power Off"
-msgstr "电源关闭"
-
-#: ../panels/power/cc-power-panel.c:2111
+#: ../panels/power/cc-power-panel.c:2163
 msgid "Devices"
 msgstr "设备"
 
@@ -3938,95 +3968,81 @@ msgstr ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 "电源;睡眠;挂起;休眠;电池;亮度;暗;空白;显示器;空闲;"
 
-#: ../panels/power/power.ui.h:1
-msgid "Hibernate"
-msgstr "休眠"
-
-#: ../panels/power/power.ui.h:2
-msgid "Power off"
-msgstr "电源关闭"
-
-#: ../panels/power/power.ui.h:5
+#: ../panels/power/power.ui.h:3
 msgid "45 minutes"
 msgstr "45 分钟"
 
-#: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
+#: ../panels/power/power.ui.h:4 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
 msgstr "1 小时"
 
-#: ../panels/power/power.ui.h:7
+#: ../panels/power/power.ui.h:5
 msgid "80 minutes"
 msgstr "80 分钟"
 
-#: ../panels/power/power.ui.h:8
+#: ../panels/power/power.ui.h:6
 msgid "90 minutes"
 msgstr "90 分钟"
 
-#: ../panels/power/power.ui.h:9
+#: ../panels/power/power.ui.h:7
 msgid "100 minutes"
 msgstr "100 分钟"
 
-#: ../panels/power/power.ui.h:10
+#: ../panels/power/power.ui.h:8
 msgid "2 hours"
 msgstr "2 小时"
 
-#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:3
+#: ../panels/power/power.ui.h:9 ../panels/privacy/privacy.ui.h:3
 msgid "1 minute"
 msgstr "1 分钟"
 
-#: ../panels/power/power.ui.h:12 ../panels/privacy/privacy.ui.h:4
+#: ../panels/power/power.ui.h:10 ../panels/privacy/privacy.ui.h:4
 msgid "2 minutes"
 msgstr "2 分钟"
 
-#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:5
+#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:5
 msgid "3 minutes"
 msgstr "3 分钟"
 
-#: ../panels/power/power.ui.h:14
+#: ../panels/power/power.ui.h:12
 msgid "4 minutes"
 msgstr "4 分钟"
 
-#: ../panels/power/power.ui.h:15 ../panels/privacy/privacy.ui.h:6
+#: ../panels/power/power.ui.h:13 ../panels/privacy/privacy.ui.h:6
 msgid "5 minutes"
 msgstr "5 分钟"
 
-#: ../panels/power/power.ui.h:16
+#: ../panels/power/power.ui.h:14
 msgid "8 minutes"
 msgstr "8 分钟"
 
-#: ../panels/power/power.ui.h:17
+#: ../panels/power/power.ui.h:15
 msgid "10 minutes"
 msgstr "10 分钟"
 
-#: ../panels/power/power.ui.h:18
+#: ../panels/power/power.ui.h:16
 msgid "12 minutes"
 msgstr "12 分钟"
 
-#: ../panels/power/power.ui.h:20
+#: ../panels/power/power.ui.h:18
 msgid "Automatic Suspend"
 msgstr "自动挂起"
 
-#: ../panels/power/power.ui.h:21
+#: ../panels/power/power.ui.h:19
 msgid "_Plugged In"
 msgstr "已插入电源(_P)"
 
-#: ../panels/power/power.ui.h:22
+#: ../panels/power/power.ui.h:20
 msgid "On _Battery Power"
 msgstr "使用电池时(_B)"
 
-#: ../panels/power/power.ui.h:23
+#: ../panels/power/power.ui.h:21
 msgid "Delay"
 msgstr "延时"
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "认证"
-
-#: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/sharing/sharing.ui.h:14
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "Password"
-msgstr "密码"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
 msgid "Authentication Required"
@@ -4197,15 +4213,15 @@ msgstr "未找到合适的驱动"
 
 #: ../panels/printers/cc-printers-panel.c:2324
 msgid "Searching for preferred drivers…"
-msgstr "正在搜索首选的驱动..."
+msgstr "正在搜索首选的驱动…"
 
 #: ../panels/printers/cc-printers-panel.c:2345
 msgid "Select from database…"
-msgstr "从数据库选择..."
+msgstr "从数据库选择…"
 
 #: ../panels/printers/cc-printers-panel.c:2354
 msgid "Provide PPD File…"
-msgstr "提供 PPD 文件..."
+msgstr "提供 PPD 文件…"
 
 #. Translators: Name of job which makes printer to print test page
 #: ../panels/printers/cc-printers-panel.c:2505
@@ -4277,7 +4293,7 @@ msgstr "输入网络地址或搜索打印机"
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
-msgstr "正在载入选项..."
+msgstr "正在载入选项…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4285,15 +4301,15 @@ msgstr "选择打印机驱动"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
-msgstr "正在载入驱动数据库..."
+msgstr "正在载入驱动数据库…"
 
 #. Translators: The found device is a JetDirect printer
-#: ../panels/printers/pp-host.c:506
+#: ../panels/printers/pp-host.c:526
 msgid "JetDirect Printer"
 msgstr "JetDirect 打印机"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: ../panels/printers/pp-host.c:756
+#: ../panels/printers/pp-host.c:782
 msgid "LPD Printer"
 msgstr "LPD 打印机"
 
@@ -4398,34 +4414,34 @@ msgid "%s Active Jobs"
 msgstr "%s 个活动的任务"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1620
+#: ../panels/printers/pp-new-printer-dialog.c:1659
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1625
+#: ../panels/printers/pp-new-printer-dialog.c:1664
 msgid "Serial Port"
 msgstr "串口"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1632
+#: ../panels/printers/pp-new-printer-dialog.c:1671
 msgid "Parallel Port"
 msgstr "并口"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1688
+#: ../panels/printers/pp-new-printer-dialog.c:1713
 #, c-format
 msgid "Location: %s"
 msgstr "位置：%s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1693
+#: ../panels/printers/pp-new-printer-dialog.c:1718
 #, c-format
 msgid "Address: %s"
 msgstr "地址：%s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1717
+#: ../panels/printers/pp-new-printer-dialog.c:1747
 msgid "Server requires authentication"
 msgstr "服务器需要认证"
 
@@ -4592,7 +4608,7 @@ msgstr "默认打印机(_D)"
 msgid "Jobs"
 msgstr "作业"
 
-#. Translators: Opens a dialog containing printer's jobs
+#. Translators: Opens a dialog containing printer
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
 msgstr "显示作业(_J)"
@@ -4607,7 +4623,7 @@ msgstr "标签"
 
 #: ../panels/printers/printers.ui.h:17
 msgid "Setting new driver…"
-msgstr "正在设置新驱动..."
+msgstr "正在设置新驱动…"
 
 #: ../panels/printers/printers.ui.h:18
 msgid "page 3"
@@ -4618,7 +4634,7 @@ msgstr "第 3 页"
 msgid "Print _Test Page"
 msgstr "打印测试页(_T)"
 
-#. Translators: This button opens printer's options tab
+#. Translators: This button opens printer
 #: ../panels/printers/printers.ui.h:22
 msgid "_Options"
 msgstr "选项(_O)"
@@ -4837,44 +4853,44 @@ msgstr "用于获得您的位置信息"
 msgid "_Automatic Problem Reporting"
 msgstr "自动报告问题(_A)"
 
-#: ../panels/region/cc-format-chooser.c:119
+#: ../panels/region/cc-format-chooser.c:120
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "英制"
 
-#: ../panels/region/cc-format-chooser.c:121
+#: ../panels/region/cc-format-chooser.c:122
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "公制"
 
-#: ../panels/region/cc-format-chooser.c:286
+#: ../panels/region/cc-format-chooser.c:287
 msgid "No regions found"
 msgstr "无可用区域"
 
-#: ../panels/region/cc-input-chooser.c:180
+#: ../panels/region/cc-input-chooser.c:181
 msgid "No input sources found"
 msgstr "无输入源"
 
-#: ../panels/region/cc-input-chooser.c:1085
+#: ../panels/region/cc-input-chooser.c:1015
 msgctxt "Input Source"
 msgid "Other"
 msgstr "其他"
 
-#: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1071
+#: ../panels/region/cc-region-panel.c:248
+#: ../panels/user-accounts/um-user-panel.c:1072
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "修改需要重启会话才能生效"
 
-#: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1075
+#: ../panels/region/cc-region-panel.c:252
+#: ../panels/user-accounts/um-user-panel.c:1076
 msgid "Restart Now"
 msgstr "现在重启"
 
-#: ../panels/region/cc-region-panel.c:876
+#: ../panels/region/cc-region-panel.c:878
 msgid "No input source selected"
 msgstr "未选择输入源"
 
-#: ../panels/region/cc-region-panel.c:1796
+#: ../panels/region/cc-region-panel.c:1798
 msgid "Login Screen"
 msgstr "登录屏幕"
 
@@ -5070,35 +5086,36 @@ msgstr "下移"
 msgid "Preferences"
 msgstr "首选项"
 
-#: ../panels/sharing/cc-sharing-panel.c:272
+#: ../panels/sharing/cc-sharing-panel.c:263
 msgctxt "service is enabled"
 msgid "On"
 msgstr "开"
 
-#: ../panels/sharing/cc-sharing-panel.c:274
-#: ../panels/sharing/cc-sharing-panel.c:301
+#: ../panels/sharing/cc-sharing-panel.c:265
+#: ../panels/sharing/cc-sharing-panel.c:292
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "关"
 
-#: ../panels/sharing/cc-sharing-panel.c:304
+#: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "已启用"
 
-#: ../panels/sharing/cc-sharing-panel.c:307
+#: ../panels/sharing/cc-sharing-panel.c:298
 msgctxt "service is active"
 msgid "Active"
 msgstr "活动"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:369
 msgid "Choose a Folder"
 msgstr "选择文件夹"
 
-#: ../panels/sharing/cc-sharing-panel.c:917
+#: ../panels/sharing/cc-sharing-panel.c:798
 msgid "Copy"
 msgstr "复制"
 
+#: ../panels/sharing/cc-sharing-panel.c:1124
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
 msgid "Sharing"
 msgstr "共享"
@@ -5110,12 +5127,12 @@ msgstr "控制您想要与其他用户共享的内容"
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:4
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;"
 msgstr ""
-"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
-"pictures;photos;movies;server;renderer;共享;主机;名称;远程;桌面;蓝牙;媒体;音"
-"频;视频;图片;照片;电影;服务器;渲染;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;共享;主机;名称;远程;桌面;媒体;音频;视频;图片;照片;电"
+"影;服务器;渲染;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -5138,48 +5155,30 @@ msgid "Networks"
 msgstr "网络"
 
 #: ../panels/sharing/sharing.ui.h:1
-msgid "Bluetooth Sharing"
-msgstr "蓝牙共享"
-
-#: ../panels/sharing/sharing.ui.h:2
-msgid ""
-"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-"devices"
-msgstr "蓝牙共享允许您使用带有蓝牙的设备共享文件"
-
-#: ../panels/sharing/sharing.ui.h:3
-msgid "Only Receive From Trusted Devices"
-msgstr "只从信任的设备接收"
-
-#: ../panels/sharing/sharing.ui.h:4
-msgid "Save Received Files to Downloads Folder"
-msgstr "将接收的文件保存到下载文件夹"
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Computer Name"
 msgstr "计算机名"
 
-#: ../panels/sharing/sharing.ui.h:6
+#: ../panels/sharing/sharing.ui.h:2
 msgid "Personal File Sharing"
 msgstr "个人文件共享"
 
-#: ../panels/sharing/sharing.ui.h:7
+#: ../panels/sharing/sharing.ui.h:3
 msgid "Screen Sharing"
 msgstr "屏幕共享"
 
-#: ../panels/sharing/sharing.ui.h:8
+#: ../panels/sharing/sharing.ui.h:4
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: ../panels/sharing/sharing.ui.h:9
+#: ../panels/sharing/sharing.ui.h:5
 msgid "Remote Login"
 msgstr "远程登录"
 
-#: ../panels/sharing/sharing.ui.h:10
+#: ../panels/sharing/sharing.ui.h:6
 msgid "Some services are disabled because of no network access."
 msgstr "因为没有网络，一些服务已经禁用。"
 
-#: ../panels/sharing/sharing.ui.h:12
+#: ../panels/sharing/sharing.ui.h:8
 #, no-c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5188,11 +5187,11 @@ msgstr ""
 "个人网络共享允许您与当前网络中的其他人共享自己的共享文件夹，使用地址：<a "
 "href=\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/sharing.ui.h:13
+#: ../panels/sharing/sharing.ui.h:9
 msgid "Require Password"
 msgstr "需要密码"
 
-#: ../panels/sharing/sharing.ui.h:16
+#: ../panels/sharing/sharing.ui.h:12
 #, no-c-format
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
@@ -5201,7 +5200,7 @@ msgstr ""
 "允许远程用户使用 SSH 命令连接：\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/sharing.ui.h:19
+#: ../panels/sharing/sharing.ui.h:15
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
@@ -5209,36 +5208,36 @@ msgid ""
 msgstr ""
 "允许远程用户通过 VNC 查看或控制屏幕：<a href=\"vnc://%s\">vnc://%s</a> "
 
-#: ../panels/sharing/sharing.ui.h:20
+#: ../panels/sharing/sharing.ui.h:16
 msgid "Allow Remote Control"
 msgstr "允许远程控制"
 
-#: ../panels/sharing/sharing.ui.h:21
+#: ../panels/sharing/sharing.ui.h:17
 msgid "Password:"
 msgstr "密码："
 
-#: ../panels/sharing/sharing.ui.h:22
+#: ../panels/sharing/sharing.ui.h:18
 msgid "Show Password"
 msgstr "显示密码"
 
-#: ../panels/sharing/sharing.ui.h:23
+#: ../panels/sharing/sharing.ui.h:19
 msgid "Access Options"
 msgstr "访问选项"
 
-#: ../panels/sharing/sharing.ui.h:24
+#: ../panels/sharing/sharing.ui.h:20
 msgid "New connections must ask for access"
 msgstr "建立新连接前必须询问"
 
-#: ../panels/sharing/sharing.ui.h:25
+#: ../panels/sharing/sharing.ui.h:21
 msgid "Require a password"
 msgstr "需要密码"
 
-#: ../panels/sharing/sharing.ui.h:26
+#: ../panels/sharing/sharing.ui.h:22
 msgid ""
 "Media sharing allows you to share music, photos and videos over the network."
 msgstr "媒体共享允许您在网络上共享音乐、照片和视频。"
 
-#: ../panels/sharing/sharing.ui.h:27
+#: ../panels/sharing/sharing.ui.h:23
 msgid "Folders"
 msgstr "文件夹"
 
@@ -5452,16 +5451,16 @@ msgstr "来自主题"
 msgid "C_hoose an alert sound:"
 msgstr "选择警告声音(_H)："
 
-#: ../panels/sound/gvc-speaker-test.c:219
+#: ../panels/sound/gvc-speaker-test.c:231
 msgid "Stop"
 msgstr "停止"
 
-#: ../panels/sound/gvc-speaker-test.c:219
-#: ../panels/sound/gvc-speaker-test.c:331
+#: ../panels/sound/gvc-speaker-test.c:231
+#: ../panels/sound/gvc-speaker-test.c:343
 msgid "Test"
 msgstr "测试"
 
-#: ../panels/sound/gvc-speaker-test.c:227
+#: ../panels/sound/gvc-speaker-test.c:239
 msgid "Subwoofer"
 msgstr "超低音"
 
@@ -6519,11 +6518,11 @@ msgstr "禁用图像"
 
 #: ../panels/user-accounts/um-photo-dialog.c:466
 msgid "Take a photo…"
-msgstr "拍张照..."
+msgstr "拍张照…"
 
 #: ../panels/user-accounts/um-photo-dialog.c:484
 msgid "Browse for more pictures…"
-msgstr "浏览更多图片..."
+msgstr "浏览更多图片…"
 
 #: ../panels/user-accounts/um-photo-dialog.c:708
 #, c-format
@@ -6630,15 +6629,15 @@ msgstr "无"
 msgid "Logged in"
 msgstr "已登录"
 
-#: ../panels/user-accounts/um-user-panel.c:1274
+#: ../panels/user-accounts/um-user-panel.c:1275
 msgid "Failed to contact the accounts service"
 msgstr "联系帐号服务失败"
 
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:1277
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "请确定帐号服务已正确安装并启用。"
 
-#: ../panels/user-accounts/um-user-panel.c:1317
+#: ../panels/user-accounts/um-user-panel.c:1318
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6646,12 +6645,12 @@ msgstr ""
 "要进行更改，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
+#: ../panels/user-accounts/um-user-panel.c:1356
 msgid "Create a user account"
 msgstr "创建用户帐号"
 
-#: ../panels/user-accounts/um-user-panel.c:1366
-#: ../panels/user-accounts/um-user-panel.c:1678
+#: ../panels/user-accounts/um-user-panel.c:1367
+#: ../panels/user-accounts/um-user-panel.c:1679
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6659,12 +6658,12 @@ msgstr ""
 "要创建用户帐号，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1376
+#: ../panels/user-accounts/um-user-panel.c:1377
 msgid "Delete the selected user account"
 msgstr "删除选中的用户帐号"
 
-#: ../panels/user-accounts/um-user-panel.c:1388
-#: ../panels/user-accounts/um-user-panel.c:1683
+#: ../panels/user-accounts/um-user-panel.c:1389
+#: ../panels/user-accounts/um-user-panel.c:1684
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6672,7 +6671,7 @@ msgstr ""
 "要删除选中的用户帐号，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1592
+#: ../panels/user-accounts/um-user-panel.c:1593
 msgid "My Account"
 msgstr "我的帐号"
 
@@ -6734,7 +6733,7 @@ msgstr "请触摸屏幕上出现的标记以校准平板电脑。"
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:87
 msgid "Mis-click detected, restarting..."
-msgstr "检测到误点击，重新开始..."
+msgstr "检测到误点击，重新开始…"
 
 #: ../panels/wacom/cc-wacom-button-row.c:442
 msgctxt "Wacom tablet button"
@@ -6778,7 +6777,7 @@ msgstr "保持长宽比(邮筒)："
 #. Whole-desktop checkbox
 #: ../panels/wacom/cc-wacom-mapping-panel.c:286
 msgid "Map to single monitor"
-msgstr "映射到单个显示器..."
+msgstr "映射到单个显示器…"
 
 #: ../panels/wacom/cc-wacom-nav-button.c:88
 #, c-format
@@ -6837,11 +6836,11 @@ msgstr "蓝牙设置"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Map to Monitor…"
-msgstr "映射到显示器..."
+msgstr "映射到显示器…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Map Buttons…"
-msgstr "映射按键..."
+msgstr "映射按键…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Adjust display resolution"
@@ -6949,7 +6948,7 @@ msgstr "底键 #%d"
 
 #: ../panels/wacom/gsd-wacom-key-shortcut-button.c:263
 msgid "New shortcut…"
-msgstr "新建快捷键..."
+msgstr "新建快捷键…"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
@@ -7033,57 +7032,43 @@ msgid ""
 "aspects of your desktop."
 msgstr "控制中心是GNOME桌面中各方面配置的主界面。"
 
-#: ../shell/cc-application.c:69
+#: ../shell/cc-application.c:45
+msgid "Display version number"
+msgstr "显示版本号"
+
+#: ../shell/cc-application.c:46
 msgid "Enable verbose mode"
 msgstr "启用详细模式"
 
-#: ../shell/cc-application.c:70
+#: ../shell/cc-application.c:47
 msgid "Show the overview"
 msgstr "显示摘要"
 
-#: ../shell/cc-application.c:71
+#: ../shell/cc-application.c:48
 msgid "Search for the string"
 msgstr "搜索字符串"
 
-#: ../shell/cc-application.c:72
+#: ../shell/cc-application.c:49
 msgid "List possible panel names and exit"
 msgstr "列出可能的面板名并退出"
 
-#: ../shell/cc-application.c:73 ../shell/cc-application.c:74
-#: ../shell/cc-application.c:75
-msgid "Show help options"
-msgstr "显示帮助选项"
-
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "Panel to display"
 msgstr "显示面板"
 
-#: ../shell/cc-application.c:76
+#: ../shell/cc-application.c:50
 msgid "[PANEL] [ARGUMENT…]"
-msgstr "[面板] [参数...]"
+msgstr "[面板] [参数…]"
 
-#: ../shell/cc-application.c:145
-msgid "- Settings"
-msgstr "- 设置"
-
-#: ../shell/cc-application.c:163
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"运行 %s --help 查看所有可用的命令行选项。\n"
-
-#: ../shell/cc-application.c:193
+#: ../shell/cc-application.c:113
 msgid "Available panels:"
 msgstr "可用面板"
 
-#: ../shell/cc-application.c:326
+#: ../shell/cc-application.c:251
 msgid "Help"
 msgstr "帮助"
 
-#: ../shell/cc-application.c:327
+#: ../shell/cc-application.c:252
 msgid "Quit"
 msgstr "退出"
 
@@ -7110,3 +7095,48 @@ msgstr "系统"
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
 msgstr "Preferences;Settings;首选项;设置;"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "蓝牙已禁用"
+
+#~ msgid "Security key"
+#~ msgstr "安全密钥"
+
+#~ msgid "Wireless devices require extra power"
+#~ msgstr "无线设备需要消耗更多电"
+
+#~ msgid "When battery power is _critical"
+#~ msgstr "电量严重不足时(_C)"
+
+#~ msgid "Power Off"
+#~ msgstr "电源关闭"
+
+#~ msgid "Hibernate"
+#~ msgstr "休眠"
+
+#~ msgid "Power off"
+#~ msgstr "电源关闭"
+
+#~ msgid ""
+#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+#~ "devices"
+#~ msgstr "蓝牙共享允许您使用带有蓝牙的设备共享文件"
+
+#~ msgid "Only Receive From Trusted Devices"
+#~ msgstr "只从信任的设备接收"
+
+#~ msgid "Save Received Files to Downloads Folder"
+#~ msgstr "将接收的文件保存到下载文件夹"
+
+#~ msgid "Show help options"
+#~ msgstr "显示帮助选项"
+
+#~ msgid "- Settings"
+#~ msgstr "- 设置"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "运行 %s --help 查看所有可用的命令行选项。\n"
