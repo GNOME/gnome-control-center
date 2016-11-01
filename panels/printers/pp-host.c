@@ -30,7 +30,7 @@ struct _PpHostPrivate
   gint   port;
 };
 
-G_DEFINE_TYPE (PpHost, pp_host, G_TYPE_OBJECT);
+G_DEFINE_TYPE_WITH_PRIVATE (PpHost, pp_host, G_TYPE_OBJECT);
 
 enum {
   PROP_0 = 0,
@@ -112,8 +112,6 @@ static void
 pp_host_class_init (PpHostClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (PpHostPrivate));
 
   gobject_class->set_property = pp_host_set_property;
   gobject_class->get_property = pp_host_get_property;

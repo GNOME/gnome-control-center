@@ -33,16 +33,13 @@
 struct _PpSambaPrivate
 {
   GtkWindow *parent;
-
-  gchar *hostname;
 };
 
-G_DEFINE_TYPE (PpSamba, pp_samba, G_TYPE_OBJECT);
+G_DEFINE_TYPE (PpSamba, pp_samba, PP_TYPE_HOST);
 
 enum
 {
   PROP_0 = 0,
-  PROP_HOSTNAME,
   PROP_PARENT,
 };
 
@@ -53,7 +50,6 @@ pp_samba_finalize (GObject *object)
 
   priv = PP_SAMBA (object)->priv;
 
-  g_free (priv->hostname);
   g_object_unref (priv->parent);
 
   G_OBJECT_CLASS (pp_samba_parent_class)->finalize (object);
@@ -69,9 +65,6 @@ pp_samba_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_HOSTNAME:
-        g_value_set_string (value, self->priv->hostname);
-        break;
       case PROP_PARENT:
         g_value_set_pointer (value, self->priv->parent);
         break;
@@ -93,10 +86,6 @@ pp_samba_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_HOSTNAME:
-        g_free (self->priv->hostname);
-        self->priv->hostname = g_value_dup_string (value);
-        break;
       case PROP_PARENT:
         if (self->priv->parent)
           g_object_unref (self->priv->parent);
@@ -120,16 +109,6 @@ pp_samba_class_init (PpSambaClass *klass)
   gobject_class->set_property = pp_samba_set_property;
   gobject_class->get_property = pp_samba_get_property;
   gobject_class->finalize = pp_samba_finalize;
-
-  /*
-   * Used for searching on specific host.
-   */
-  g_object_class_install_property (gobject_class, PROP_HOSTNAME,
-    g_param_spec_string ("hostname",
-                         "Hostname",
-                         "The hostname to search",
-                         NULL,
-                         G_PARAM_READWRITE));
 
   /*
    * Used for authentication dialog.
@@ -459,15 +438,12 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
                               GObject            *object,
                               GCancellable       *cancellable)
 {
-  PpSambaPrivate *priv;
   static GMutex   mutex;
-  PpSamba        *samba = PP_SAMBA (object);
   SMBData        *data;
   SMBCCTX        *smb_context;
   gchar          *dirname;
   gchar          *path;
-
-  priv = samba->priv;
+  gchar          *hostname = NULL;
 
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
@@ -482,10 +458,13 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
         {
           smbc_setOptionUserData (smb_context, data);
 
-          if (priv->hostname)
+          g_object_get (object, "hostname", &hostname, NULL);
+          if (hostname != NULL)
             {
-              dirname = g_strdup_printf ("smb://%s", priv->hostname);
-              path = g_strdup_printf ("//%s", priv->hostname);
+              dirname = g_strdup_printf ("smb://%s", hostname);
+              path = g_strdup_printf ("//%s", hostname);
+
+              g_free (hostname);
             }
           else
             {
@@ -516,12 +495,15 @@ pp_samba_get_devices_async (PpSamba             *samba,
   GSimpleAsyncResult *res;
   PpSambaPrivate     *priv = samba->priv;
   SMBData            *data;
+  gchar              *hostname = NULL;
+
+  g_object_get (G_OBJECT (samba), "hostname", &hostname, NULL);
 
   res = g_simple_async_result_new (G_OBJECT (samba), callback, user_data, pp_samba_get_devices_async);
   data = g_new0 (SMBData, 1);
   data->devices = NULL;
   data->context = g_main_context_default ();
-  data->hostname_set = priv->hostname != NULL;
+  data->hostname_set = hostname != NULL;
   data->parent = g_object_ref (priv->parent);
   data->auth_if_needed = auth_if_needed;
 
@@ -529,6 +511,7 @@ pp_samba_get_devices_async (PpSamba             *samba,
   g_simple_async_result_set_op_res_gpointer (res, data, (GDestroyNotify) smb_data_free);
   g_simple_async_result_run_in_thread (res, _pp_samba_get_devices_thread, 0, cancellable);
 
+  g_free (hostname);
   g_object_unref (res);
 }
 
