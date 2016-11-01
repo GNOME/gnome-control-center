@@ -38,6 +38,13 @@ enum {
   PROP_PORT,
 };
 
+enum {
+  AUTHENTICATION_REQUIRED,
+  LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
+
 static void
 pp_host_finalize (GObject *object)
 {
@@ -125,6 +132,14 @@ pp_host_class_init (PpHostClass *klass)
                       "The port",
                       -1, G_MAXINT32, PP_HOST_UNSET_PORT,
                       G_PARAM_READWRITE));
+
+  signals[AUTHENTICATION_REQUIRED] =
+    g_signal_new ("authentication-required",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (PpHostClass, authentication_required),
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 }
 
 static void

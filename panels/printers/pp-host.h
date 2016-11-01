@@ -52,6 +52,8 @@ struct _PpHost
 struct _PpHostClass
 {
   GObjectClass parent_class;
+
+  void (*authentication_required) (PpHost *host);
 };
 
 GType          pp_host_get_type                       (void) G_GNUC_CONST;
