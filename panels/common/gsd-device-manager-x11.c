@@ -21,6 +21,7 @@
 
 #include "config.h"
 
+#include <string.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 
@@ -58,6 +59,8 @@ device_get_device_type (GdkDevice *gdk_device)
 	case GDK_SOURCE_PEN:
 	case GDK_SOURCE_ERASER:
 	case GDK_SOURCE_CURSOR:
+		if (strstr (gdk_device_get_name (gdk_device), "pad"))
+			return GSD_DEVICE_TYPE_TABLET | GSD_DEVICE_TYPE_PAD;
 		return GSD_DEVICE_TYPE_TABLET;
 	case GDK_SOURCE_KEYBOARD:
 		return GSD_DEVICE_TYPE_KEYBOARD;
@@ -65,6 +68,8 @@ device_get_device_type (GdkDevice *gdk_device)
 		return GSD_DEVICE_TYPE_TOUCHSCREEN;
 	case GDK_SOURCE_TOUCHPAD:
 		return GSD_DEVICE_TYPE_TOUCHPAD;
+	case GDK_SOURCE_TABLET_PAD:
+		return GSD_DEVICE_TYPE_PAD;
 	default:
 		g_warning ("Unhandled input source %d\n", source);
 	}
