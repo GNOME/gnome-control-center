@@ -178,7 +178,7 @@ pretty_hostname_to_ssid (const char *pretty)
 	const char *p, *prev;
 	char *ret = NULL;
 
-	if (pretty == NULL) {
+	if (pretty == NULL || *pretty == '\0') {
 		pretty = g_get_host_name ();
 		if (g_strcmp0 (pretty, "localhost") == 0)
 			pretty = NULL;
