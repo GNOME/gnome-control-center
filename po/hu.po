@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-28 07:21+0000\n"
-"PO-Revision-Date: 2016-10-28 09:26+0200\n"
+"POT-Creation-Date: 2016-11-04 22:39+0000\n"
+"PO-Revision-Date: 2016-11-05 11:20+0100\n"
 "Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -1576,8 +1576,8 @@ msgstr "Parancsikonok"
 msgid "Launch help browser"
 msgstr "Súgóböngésző indítása"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:274
-#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1584
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
+#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Beállítások"
@@ -1841,7 +1841,7 @@ msgstr "Csere"
 msgid "Set"
 msgstr "Beállítás"
 
-#: ../panels/mouse/cc-mouse-panel.c:82
+#: ../panels/mouse/cc-mouse-panel.c:82 ../panels/wacom/cc-wacom-panel.c:402
 msgid "Test Your _Settings"
 msgstr "Beállítás_ok tesztelése"
 
@@ -1991,7 +1991,7 @@ msgstr "802.1x _biztonság"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:14 ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "1. oldal"
 
@@ -2011,6 +2011,7 @@ msgstr "Belső _hitelesítés"
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "2. oldal"
 
@@ -2117,7 +2118,7 @@ msgid "Excellent"
 msgstr "Kitűnő"
 
 #: ../panels/network/connection-editor/ce-page-details.c:225
-#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
+#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Részletek"
@@ -2685,7 +2686,7 @@ msgstr "Előzmények"
 
 #: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Bezárás"
@@ -3899,7 +3900,7 @@ msgid "Media player"
 msgstr "Médialejátszó"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:555
+#: ../panels/power/cc-power-panel.c:555 ../panels/wacom/cc-wacom-panel.c:793
 msgid "Tablet"
 msgstr "Táblagép"
 
@@ -4041,7 +4042,7 @@ msgstr "Automatikus felfüggesztés"
 msgid "_When the Power Button is pressed"
 msgstr "A _bekapcsológomb megnyomásakor"
 
-#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:270
+#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:273
 #: ../shell/panel-list.ui.h:1
 msgid "Devices"
 msgstr "Eszközök"
@@ -4708,6 +4709,7 @@ msgid "Setting new driver…"
 msgstr "Új illesztőprogram beállítása…"
 
 #: ../panels/printers/printers.ui.h:18
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "page 3"
 msgstr "3. oldal"
 
@@ -5591,6 +5593,7 @@ msgid "Testing event sound"
 msgstr "Eseményhang tesztelése"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:554
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "Default"
 msgstr "Alapértelmezett"
 
@@ -6961,60 +6964,60 @@ msgstr "Érintse meg a céljelölőket a képernyőn a táblagép kalibrálásá
 msgid "Mis-click detected, restarting…"
 msgstr "Félrekattintás észlelve, újraindítás…"
 
-#: ../panels/wacom/cc-wacom-button-row.c:442
-msgctxt "Wacom tablet button"
-msgid "Up"
-msgstr "Fel"
+#: ../panels/wacom/cc-wacom-button-row.c:266
+#, c-format
+msgid "Button %d"
+msgstr "%d. gomb"
 
-#: ../panels/wacom/cc-wacom-button-row.c:443
-msgctxt "Wacom tablet button"
-msgid "Down"
-msgstr "Le"
+#: ../panels/wacom/cc-wacom-button-row.h:53
+msgctxt "Wacom action-type"
+msgid "Application defined"
+msgstr "Alkalmazás által meghatározott"
 
 #: ../panels/wacom/cc-wacom-button-row.h:54
-msgctxt "Wacom action-type"
-msgid "None"
-msgstr "Nincs"
-
-#: ../panels/wacom/cc-wacom-button-row.h:55
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Billentyűleütés küldése"
 
-#: ../panels/wacom/cc-wacom-button-row.h:56
+#: ../panels/wacom/cc-wacom-button-row.h:55
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Monitorváltás"
 
-#: ../panels/wacom/cc-wacom-button-row.h:57
+#: ../panels/wacom/cc-wacom-button-row.h:56
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Súgó megjelenítése"
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:263
+#: ../panels/wacom/cc-wacom-mapping-panel.c:260
 msgid "Output:"
 msgstr "Kimenet:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+#: ../panels/wacom/cc-wacom-mapping-panel.c:272
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Méretarány megtartása („postaláda”):"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:286
+#: ../panels/wacom/cc-wacom-mapping-panel.c:283
 msgid "Map to single monitor"
 msgstr "Leképezés egyetlen monitorra"
 
-#: ../panels/wacom/cc-wacom-nav-button.c:88
+#: ../panels/wacom/cc-wacom-nav-button.c:86
 #, c-format
 msgid "%d of %d"
 msgstr "%d / %d"
 
-#: ../panels/wacom/cc-wacom-page.c:522
+#: ../panels/wacom/cc-wacom-page.c:502
 msgid "Display Mapping"
 msgstr "Leképezés megjelenítése"
 
-#: ../panels/wacom/cc-wacom-stylus-page.c:377
+#: ../panels/wacom/cc-wacom-panel.c:790
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Stylus"
+msgstr "Toll"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:347
 msgid "Button"
 msgstr "Gomb"
 
@@ -7026,8 +7029,7 @@ msgstr "Wa­com rajz­táb­la"
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:3
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Rajztáblák gombleképezéseinek beállítása és a stylus érzékenységének "
-"módosítása"
+"Rajztáblák gombleképezéseinek beállítása és a toll érzékenységének módosítása"
 
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:5
@@ -7094,165 +7096,60 @@ msgstr "Követési mód"
 msgid "Left-Handed Orientation"
 msgstr "Balkezes tájolás"
 
-#. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1028
-msgid "Left Ring"
-msgstr "Bal gyűrű"
-
-#: ../panels/wacom/gsd-wacom-device.c:1039
-#, c-format
-msgid "Left Ring Mode #%d"
-msgstr "Bal gyűrű %d. módja "
-
-#. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1059
-msgid "Right Ring"
-msgstr "Jobb gyűrű"
-
-#: ../panels/wacom/gsd-wacom-device.c:1070
-#, c-format
-msgid "Right Ring Mode #%d"
-msgstr "Jobb gyűrű %d. módja "
-
-#. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1112
-msgid "Left Touchstrip"
-msgstr "Bal érintősáv"
-
-#: ../panels/wacom/gsd-wacom-device.c:1123
-#, c-format
-msgid "Left Touchstrip Mode #%d"
-msgstr "Bal érintősáv %d. módja"
-
-#. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1143
-msgid "Right Touchstrip"
-msgstr "Jobb érintősáv"
-
-#: ../panels/wacom/gsd-wacom-device.c:1154
-#, c-format
-msgid "Right Touchstrip Mode #%d"
-msgstr "Jobb érintősáv %d. módja"
-
-#: ../panels/wacom/gsd-wacom-device.c:1180
-#, c-format
-msgid "Left Touchring Mode Switch"
-msgstr "Bal érintőgyűrű módkapcsolója"
-
-#: ../panels/wacom/gsd-wacom-device.c:1182
-#, c-format
-msgid "Right Touchring Mode Switch"
-msgstr "Jobb érintőgyűrű módkapcsolója"
-
-#: ../panels/wacom/gsd-wacom-device.c:1185
-#, c-format
-msgid "Left Touchstrip Mode Switch"
-msgstr "Bal érintősáv módkapcsolója"
-
-#: ../panels/wacom/gsd-wacom-device.c:1187
-#, c-format
-msgid "Right Touchstrip Mode Switch"
-msgstr "Jobb érintősáv módkapcsolója"
-
-#: ../panels/wacom/gsd-wacom-device.c:1192
-#, c-format
-msgid "Mode Switch #%d"
-msgstr "%d. módkapcsoló"
-
-#: ../panels/wacom/gsd-wacom-device.c:1238
-#, c-format
-msgid "Left Button #%d"
-msgstr "%d. bal gomb"
-
-#: ../panels/wacom/gsd-wacom-device.c:1241
-#, c-format
-msgid "Right Button #%d"
-msgstr "%d. jobb gomb"
-
-#: ../panels/wacom/gsd-wacom-device.c:1244
-#, c-format
-msgid "Top Button #%d"
-msgstr "%d. felső gomb"
-
-#: ../panels/wacom/gsd-wacom-device.c:1247
-#, c-format
-msgid "Bottom Button #%d"
-msgstr "%d. alsó gomb"
-
 #: ../panels/wacom/gsd-wacom-key-shortcut-button.c:263
 msgid "New shortcut…"
 msgstr "Új gyorsbillentyű…"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:1
-msgid "No Action"
-msgstr "Nincs művelet"
-
 #: ../panels/wacom/wacom-stylus-page.ui.h:2
-msgid "Left Mouse Button Click"
-msgstr "Kattintás a bal egérgombbal"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:3
 msgid "Middle Mouse Button Click"
 msgstr "Kattintás a középső egérgombbal"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:4
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
 msgid "Right Mouse Button Click"
 msgstr "Kattintás a jobb egérgombbal"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:5
-msgid "Scroll Up"
-msgstr "Görgetés felfelé"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:6
-msgid "Scroll Down"
-msgstr "Görgetés lefelé"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:7
-msgid "Scroll Left"
-msgstr "Görgetés balra"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:8
-msgid "Scroll Right"
-msgstr "Görgetés jobbra"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:9
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
 msgid "Back"
 msgstr "Vissza"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:10
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
 msgid "Forward"
 msgstr "Előre"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:11
-msgid "Stylus"
-msgstr "Toll"
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "No stylus found"
+msgstr "Nem található toll"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:12
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Please move your stylus to the proximity of the tablet to configure it"
+msgstr "Kérjük mozgassa a tollat a rajztábla közelébe, hogy beállítsa azt"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
 msgid "Eraser Pressure Feel"
 msgstr "Radír nyomásérzékenysége"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:13
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
 msgid "Soft"
 msgstr "Lágy"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:14
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
 msgid "Firm"
 msgstr "Kemény"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:15
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
 msgid "Top Button"
 msgstr "Felső gomb"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:16
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
 msgid "Lower Button"
 msgstr "Alsó gomb"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
 msgid "Tip Pressure Feel"
 msgstr "Hegy nyomásérzékenysége"
 
-#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1478
+#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1482
 msgid "All Settings"
 msgstr "Minden beállítás"
 
@@ -7313,17 +7210,17 @@ msgid "Quit"
 msgstr "Kilépés"
 
 #. Add categories
-#: ../shell/cc-window.c:871
+#: ../shell/cc-window.c:875
 msgctxt "category"
 msgid "Personal"
 msgstr "Személyes"
 
-#: ../shell/cc-window.c:872
+#: ../shell/cc-window.c:876
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardver"
 
-#: ../shell/cc-window.c:873
+#: ../shell/cc-window.c:877
 msgctxt "category"
 msgid "System"
 msgstr "Rendszer"
@@ -7371,6 +7268,87 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Nincs találat"
+
+#~ msgctxt "Wacom tablet button"
+#~ msgid "Up"
+#~ msgstr "Fel"
+
+#~ msgctxt "Wacom tablet button"
+#~ msgid "Down"
+#~ msgstr "Le"
+
+#~ msgctxt "Wacom action-type"
+#~ msgid "None"
+#~ msgstr "Nincs"
+
+#~ msgid "Left Ring"
+#~ msgstr "Bal gyűrű"
+
+#~ msgid "Left Ring Mode #%d"
+#~ msgstr "Bal gyűrű %d. módja "
+
+#~ msgid "Right Ring"
+#~ msgstr "Jobb gyűrű"
+
+#~ msgid "Right Ring Mode #%d"
+#~ msgstr "Jobb gyűrű %d. módja "
+
+#~ msgid "Left Touchstrip"
+#~ msgstr "Bal érintősáv"
+
+#~ msgid "Left Touchstrip Mode #%d"
+#~ msgstr "Bal érintősáv %d. módja"
+
+#~ msgid "Right Touchstrip"
+#~ msgstr "Jobb érintősáv"
+
+#~ msgid "Right Touchstrip Mode #%d"
+#~ msgstr "Jobb érintősáv %d. módja"
+
+#~ msgid "Left Touchring Mode Switch"
+#~ msgstr "Bal érintőgyűrű módkapcsolója"
+
+#~ msgid "Right Touchring Mode Switch"
+#~ msgstr "Jobb érintőgyűrű módkapcsolója"
+
+#~ msgid "Left Touchstrip Mode Switch"
+#~ msgstr "Bal érintősáv módkapcsolója"
+
+#~ msgid "Right Touchstrip Mode Switch"
+#~ msgstr "Jobb érintősáv módkapcsolója"
+
+#~ msgid "Mode Switch #%d"
+#~ msgstr "%d. módkapcsoló"
+
+#~ msgid "Left Button #%d"
+#~ msgstr "%d. bal gomb"
+
+#~ msgid "Right Button #%d"
+#~ msgstr "%d. jobb gomb"
+
+#~ msgid "Top Button #%d"
+#~ msgstr "%d. felső gomb"
+
+#~ msgid "Bottom Button #%d"
+#~ msgstr "%d. alsó gomb"
+
+#~ msgid "No Action"
+#~ msgstr "Nincs művelet"
+
+#~ msgid "Left Mouse Button Click"
+#~ msgstr "Kattintás a bal egérgombbal"
+
+#~ msgid "Scroll Up"
+#~ msgstr "Görgetés felfelé"
+
+#~ msgid "Scroll Down"
+#~ msgstr "Görgetés lefelé"
+
+#~ msgid "Scroll Left"
+#~ msgstr "Görgetés balra"
+
+#~ msgid "Scroll Right"
+#~ msgstr "Görgetés jobbra"
 
 #~ msgid "Wayland"
 #~ msgstr "Wayland"
