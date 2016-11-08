@@ -24,10 +24,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-27 16:35+0000\n"
-"PO-Revision-Date: 2016-10-28 09:19+0200\n"
+"POT-Creation-Date: 2016-11-04 22:39+0000\n"
+"PO-Revision-Date: 2016-11-08 12:35+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
-"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
+"Language-Team: čeština <gnome-cs-list@gnome.org>>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1581,8 +1581,8 @@ msgstr "Spouštěče"
 msgid "Launch help browser"
 msgstr "Spustit prohlížeč nápovědy"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:274
-#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1584
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
+#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Nastavení"
@@ -1845,7 +1845,7 @@ msgstr "Nahradit"
 msgid "Set"
 msgstr "Nastavit"
 
-#: ../panels/mouse/cc-mouse-panel.c:82
+#: ../panels/mouse/cc-mouse-panel.c:82 ../panels/wacom/cc-wacom-panel.c:402
 msgid "Test Your _Settings"
 msgstr "_Vyzkoušejte své nastavení"
 
@@ -1996,7 +1996,7 @@ msgstr "_Zabezpečení 802.1x"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:14 ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "strana 1"
 
@@ -2016,6 +2016,7 @@ msgstr "Vnitřní _oveření totožnosti"
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
 #: ../panels/printers/printers.ui.h:16
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "strana 2"
 
@@ -2127,7 +2128,7 @@ msgid "Excellent"
 msgstr "Výborná"
 
 #: ../panels/network/connection-editor/ce-page-details.c:225
-#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
+#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:269
 #: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Podrobnosti"
@@ -2696,7 +2697,7 @@ msgstr "Historie"
 
 #: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
-#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
+#: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
 msgstr "_Zavřít"
@@ -3918,7 +3919,7 @@ msgid "Media player"
 msgstr "Multimediální přehrávač"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:555
+#: ../panels/power/cc-power-panel.c:555 ../panels/wacom/cc-wacom-panel.c:793
 msgid "Tablet"
 msgstr "Tablet"
 
@@ -4060,7 +4061,7 @@ msgstr "Automaticky uspat"
 msgid "_When the Power Button is pressed"
 msgstr "_Když je zmáčknuto vypínací tlačítko"
 
-#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:270
+#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:273
 #: ../shell/panel-list.ui.h:1
 msgid "Devices"
 msgstr "Zařízení"
@@ -4726,6 +4727,7 @@ msgid "Setting new driver…"
 msgstr "Nastavuje se nový ovladač…"
 
 #: ../panels/printers/printers.ui.h:18
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "page 3"
 msgstr "strana 3"
 
@@ -5609,6 +5611,7 @@ msgid "Testing event sound"
 msgstr "Testování zvukové události"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:554
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "Default"
 msgstr "Výchozí"
 
@@ -6984,60 +6987,60 @@ msgstr ""
 msgid "Mis-click detected, restarting…"
 msgstr "Zjištěno chybějící kliknutí, začíná se znovu…"
 
-#: ../panels/wacom/cc-wacom-button-row.c:442
-msgctxt "Wacom tablet button"
-msgid "Up"
-msgstr "Nahoru"
+#: ../panels/wacom/cc-wacom-button-row.c:266
+#, c-format
+msgid "Button %d"
+msgstr "Tlačítko %d"
 
-#: ../panels/wacom/cc-wacom-button-row.c:443
-msgctxt "Wacom tablet button"
-msgid "Down"
-msgstr "Dolů"
+#: ../panels/wacom/cc-wacom-button-row.h:53
+msgctxt "Wacom action-type"
+msgid "Application defined"
+msgstr "Definováno aplikací"
 
 #: ../panels/wacom/cc-wacom-button-row.h:54
-msgctxt "Wacom action-type"
-msgid "None"
-msgstr "Žádná"
-
-#: ../panels/wacom/cc-wacom-button-row.h:55
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "Vyvolat klávesovou zkratku"
 
-#: ../panels/wacom/cc-wacom-button-row.h:56
+#: ../panels/wacom/cc-wacom-button-row.h:55
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Přepnout obrazovku"
 
-#: ../panels/wacom/cc-wacom-button-row.h:57
+#: ../panels/wacom/cc-wacom-button-row.h:56
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Zobrazit nápovědu na obrazovce"
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:263
+#: ../panels/wacom/cc-wacom-mapping-panel.c:260
 msgid "Output:"
 msgstr "Výstup:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+#: ../panels/wacom/cc-wacom-mapping-panel.c:272
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Zachovat poměr stran (omezit oblast):"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:286
+#: ../panels/wacom/cc-wacom-mapping-panel.c:283
 msgid "Map to single monitor"
 msgstr "Mapovat na jedinou obrazovku"
 
-#: ../panels/wacom/cc-wacom-nav-button.c:88
+#: ../panels/wacom/cc-wacom-nav-button.c:86
 #, c-format
 msgid "%d of %d"
 msgstr "%d z %d"
 
-#: ../panels/wacom/cc-wacom-page.c:522
+#: ../panels/wacom/cc-wacom-page.c:502
 msgid "Display Mapping"
 msgstr "Mapování zobrazení"
 
-#: ../panels/wacom/cc-wacom-stylus-page.c:377
+#: ../panels/wacom/cc-wacom-panel.c:790
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Stylus"
+msgstr "Pero"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:347
 msgid "Button"
 msgstr "Tlačítko"
 
@@ -7115,165 +7118,61 @@ msgstr "Režim sledování stopy"
 msgid "Left-Handed Orientation"
 msgstr "Orientace pro leváky"
 
-#. If no mode is available, we use "left-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1028
-msgid "Left Ring"
-msgstr "Levý prstenec"
-
-#: ../panels/wacom/gsd-wacom-device.c:1039
-#, c-format
-msgid "Left Ring Mode #%d"
-msgstr "Režim levého prstence č. %d"
-
-#. If no mode is available, we use "right-ring-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1059
-msgid "Right Ring"
-msgstr "Pravý prstenec"
-
-#: ../panels/wacom/gsd-wacom-device.c:1070
-#, c-format
-msgid "Right Ring Mode #%d"
-msgstr "Režim pravého prstence č. %d"
-
-#. If no mode is available, we use "left-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1112
-msgid "Left Touchstrip"
-msgstr "Levý dotykový pruh"
-
-#: ../panels/wacom/gsd-wacom-device.c:1123
-#, c-format
-msgid "Left Touchstrip Mode #%d"
-msgstr "Režim levého dotykového pruhu č. %d"
-
-#. If no mode is available, we use "right-strip-mode-1" for backward compat
-#: ../panels/wacom/gsd-wacom-device.c:1143
-msgid "Right Touchstrip"
-msgstr "Pravý dotykový pruh"
-
-#: ../panels/wacom/gsd-wacom-device.c:1154
-#, c-format
-msgid "Right Touchstrip Mode #%d"
-msgstr "Režim pravého dotykového pruhu č. %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1180
-#, c-format
-msgid "Left Touchring Mode Switch"
-msgstr "Přepínač režimů levého dotykového prstence"
-
-#: ../panels/wacom/gsd-wacom-device.c:1182
-#, c-format
-msgid "Right Touchring Mode Switch"
-msgstr "Přepínač režimů pravého dotykového prstence"
-
-#: ../panels/wacom/gsd-wacom-device.c:1185
-#, c-format
-msgid "Left Touchstrip Mode Switch"
-msgstr "Přepínač režimů levého dotykového pruhu"
-
-#: ../panels/wacom/gsd-wacom-device.c:1187
-#, c-format
-msgid "Right Touchstrip Mode Switch"
-msgstr "Přepínač režimů pravého dotykového pruhu"
-
-#: ../panels/wacom/gsd-wacom-device.c:1192
-#, c-format
-msgid "Mode Switch #%d"
-msgstr "Přepínač režimů č. %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1238
-#, c-format
-msgid "Left Button #%d"
-msgstr "Levé tlačítko č. %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1241
-#, c-format
-msgid "Right Button #%d"
-msgstr "Pravé tlačítko č. %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1244
-#, c-format
-msgid "Top Button #%d"
-msgstr "Horní tlačítko č. %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1247
-#, c-format
-msgid "Bottom Button #%d"
-msgstr "Dolní tlačítko č. %d"
-
 #: ../panels/wacom/gsd-wacom-key-shortcut-button.c:263
 msgid "New shortcut…"
 msgstr "Nová klávesová zkratka…"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:1
-msgid "No Action"
-msgstr "Žádná činnost"
-
 #: ../panels/wacom/wacom-stylus-page.ui.h:2
-msgid "Left Mouse Button Click"
-msgstr "Kliknutí levým tlačítkem myši"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:3
 msgid "Middle Mouse Button Click"
 msgstr "Kliknutí prostředním tlačítkem myši"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:4
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
 msgid "Right Mouse Button Click"
 msgstr "Kliknutí pravým tlačítkem myši"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:5
-msgid "Scroll Up"
-msgstr "Posunování nahoru"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:6
-msgid "Scroll Down"
-msgstr "Posunování dolů"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:7
-msgid "Scroll Left"
-msgstr "Posunování vlevo"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:8
-msgid "Scroll Right"
-msgstr "Posunování vpravo"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:9
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
 msgid "Back"
 msgstr "Zpět"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:10
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
 msgid "Forward"
 msgstr "Vpřed"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:11
-msgid "Stylus"
-msgstr "Pero"
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "No stylus found"
+msgstr "Nebyl nalezen žádný stylus"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:12
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Please move your stylus to the proximity of the tablet to configure it"
+msgstr ""
+"Přesuňte prosím stylus do blízkosti tabletu, aby jej bylo možné nastavit"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
 msgid "Eraser Pressure Feel"
 msgstr "Pocit z přítlaku gumy"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:13
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
 msgid "Soft"
 msgstr "Měkký"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:14
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
 msgid "Firm"
 msgstr "Tvrdý"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:15
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
 msgid "Top Button"
 msgstr "Horní tlačítko"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:16
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
 msgid "Lower Button"
 msgstr "Dolní tlačítko"
 
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
 msgid "Tip Pressure Feel"
 msgstr "Pocit z přítlaku hrotu"
 
-#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1478
+#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1482
 msgid "All Settings"
 msgstr "Všechna nastavení"
 
@@ -7334,17 +7233,17 @@ msgid "Quit"
 msgstr "Ukončit"
 
 #. Add categories
-#: ../shell/cc-window.c:871
+#: ../shell/cc-window.c:875
 msgctxt "category"
 msgid "Personal"
 msgstr "Osobní"
 
-#: ../shell/cc-window.c:872
+#: ../shell/cc-window.c:876
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/cc-window.c:873
+#: ../shell/cc-window.c:877
 msgctxt "category"
 msgid "System"
 msgstr "Systém"
