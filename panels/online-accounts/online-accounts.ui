@@ -75,6 +75,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="icon_name">list-add-symbolic</property>
                     <property name="label" translatable="yes">Add Account</property>
+                    <signal name="clicked" handler="on_toolbar_add_button_clicked" object="CcGoaPanel" swapped="no" />
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -88,6 +89,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="icon_name">list-remove-symbolic</property>
                     <property name="label" translatable="yes">Remove Account</property>
+                    <signal name="clicked" handler="on_toolbar_remove_button_clicked" object="CcGoaPanel" swapped="no" />
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -131,6 +133,7 @@
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="on_add_button_clicked" object="CcGoaPanel" swapped="no" />
                       </object>
                       <packing>
                         <property name="expand">False</property>

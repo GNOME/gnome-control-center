@@ -226,22 +226,9 @@ cc_goa_panel_init (CcGoaPanel *panel)
   g_object_bind_property (monitor, "network-available",
                           panel->toolbar_add_button, "sensitive",
                           G_BINDING_SYNC_CREATE);
-  g_signal_connect (panel->toolbar_add_button,
-                    "clicked",
-                    G_CALLBACK (on_toolbar_add_button_clicked),
-                    panel);
-  g_signal_connect (panel->toolbar_remove_button,
-                    "clicked",
-                    G_CALLBACK (on_toolbar_remove_button_clicked),
-                    panel);
-
   g_object_bind_property (monitor, "network-available",
                           panel->add_account_button, "sensitive",
                           G_BINDING_SYNC_CREATE);
-  g_signal_connect (panel->add_account_button,
-                    "clicked",
-                    G_CALLBACK (on_add_button_clicked),
-                    panel);
 
   /* TODO: probably want to avoid _sync() ... */
   error = NULL;
@@ -307,7 +294,10 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_add_button);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_remove_button);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_add_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_listbox_selection_changed);
+  gtk_widget_class_bind_template_callback (widget_class, on_toolbar_add_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_toolbar_remove_button_clicked);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
