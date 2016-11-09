@@ -5,110 +5,114 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">18</property>
-        <property name="border-width">8</property>
-        <property name="orientation">vertical</property>
-        <property name="margin">6</property>
+        <property name="can_focus">True</property>
+        <property name="hscrollbar_policy">never</property>
+        <property name="min_content_height">350</property>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Connect to your data in the cloud</property>
-            <attributes>
-              <attribute name="scale" value="1.66" />
-            </attributes>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox" id="accounts_tree_box">
-            <property name="visible">True</property>
+            <property name="spacing">18</property>
+            <property name="border-width">8</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">0</property>
+            <property name="margin">6</property>
             <child>
-              <object class="GtkOverlay" id="accounts-tree-overlay">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Connect to your data in the cloud</property>
+                <attributes>
+                  <attribute name="scale" value="1.66" />
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="accounts_tree_box">
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">0</property>
                 <child>
-                  <object class="GtkScrolledWindow">
+                  <object class="GtkOverlay" id="accounts-tree-overlay">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">never</property>
-                    <property name="shadow_type">in</property>
-                    <property name="min_content_height">300</property>
                     <child>
-                      <object class="GtkListBox" id="accounts_listbox">
+                      <object class="GtkFrame" id="accounts_frame">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hexpand">False</property>
-                        <property name="width_request">278</property>
-                        <property name="selection_mode">none</property>
-                        <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkListBox" id="accounts_listbox">
+                            <property name="vexpand">True</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="selection_mode">none</property>
+                            <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child type="overlay">
+                      <object class="GtkLabel" id="accounts_tree_label">
+                        <property name="can_focus">False</property>
+                        <property name="no-show-all">True</property>
+                        <property name="justify">center</property>
+                        <property name="label" translatable="yes">No online accounts configured</property>
+                        <property name="max-width-chars">18</property>
+                        <property name="wrap">True</property>
                       </object>
                     </child>
                   </object>
-                </child>
-                <child type="overlay">
-                  <object class="GtkLabel" id="accounts_tree_label">
-                    <property name="can_focus">False</property>
-                    <property name="no-show-all">True</property>
-                    <property name="justify">center</property>
-                    <property name="label" translatable="yes">No online accounts configured</property>
-                    <property name="max-width-chars">18</property>
-                    <property name="wrap">True</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolbar" id="toolbar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="toolbar_style">icons</property>
-                <property name="icon_size">1</property>
-                <style>
-                  <class name="inline-toolbar"/>
-                </style>
-                <child>
-                  <object class="GtkToolButton" id="toolbar_add_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="icon_name">list-add-symbolic</property>
-                    <property name="label" translatable="yes">Add Account</property>
-                    <signal name="clicked" handler="on_toolbar_add_button_clicked" object="CcGoaPanel" swapped="no" />
-                  </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToolButton" id="toolbar_remove_button">
+                  <object class="GtkToolbar" id="toolbar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="icon_name">list-remove-symbolic</property>
-                    <property name="label" translatable="yes">Remove Account</property>
-                    <signal name="clicked" handler="on_toolbar_remove_button_clicked" object="CcGoaPanel" swapped="no" />
+                    <property name="toolbar_style">icons</property>
+                    <property name="icon_size">1</property>
+                    <style>
+                      <class name="inline-toolbar"/>
+                    </style>
+                    <child>
+                      <object class="GtkToolButton" id="toolbar_add_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="icon_name">list-add-symbolic</property>
+                        <property name="label" translatable="yes">Add Account</property>
+                        <signal name="clicked" handler="on_toolbar_add_button_clicked" object="CcGoaPanel" swapped="no" />
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolButton" id="toolbar_remove_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="icon_name">list-remove-symbolic</property>
+                        <property name="label" translatable="yes">Remove Account</property>
+                        <signal name="clicked" handler="on_toolbar_remove_button_clicked" object="CcGoaPanel" swapped="no" />
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
         </child>
