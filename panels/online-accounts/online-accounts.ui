@@ -36,8 +36,8 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">False</property>
                         <property name="width_request">278</property>
-                        <property name="selection_mode">browse</property>
-                        <signal name="row-selected" handler="on_listbox_selection_changed" object="CcGoaPanel" swapped="yes" />
+                        <property name="selection_mode">none</property>
+                        <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
                       </object>
                     </child>
                   </object>
@@ -114,7 +114,7 @@
     <property name="use_header_bar">1</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
-    <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no" />
+    <signal name="delete-event" handler="on_edit_account_dialog_delete_event" object="CcGoaPanel" swapped="yes" />
     <child type="titlebar">
       <object class="GtkHeaderBar" id="edit_account_headerbar">
         <property name="visible">True</property>
