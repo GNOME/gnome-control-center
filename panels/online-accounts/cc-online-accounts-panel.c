@@ -32,7 +32,6 @@
 #include "cc-online-accounts-panel.h"
 
 #include "cc-online-accounts-add-account-dialog.h"
-#include "cc-online-accounts-model.h"
 #include "cc-online-accounts-resources.h"
 
 struct _CcGoaPanel
@@ -41,8 +40,7 @@ struct _CcGoaPanel
 
   GoaClient *client;
 
-  GoaPanelAccountsModel *accounts_model;
-
+  GtkWidget *accounts_listbox;
   GtkWidget *accounts_notebook;
   GtkWidget *accounts_tree_box;
   GtkWidget *accounts_tree_label;
@@ -50,20 +48,11 @@ struct _CcGoaPanel
   GtkWidget *toolbar;
   GtkWidget *toolbar_add_button;
   GtkWidget *toolbar_remove_button;
-  GtkWidget *accounts_treeview;
   GtkWidget *accounts_vbox;
 };
 
-static void on_model_row_deleted (GtkTreeModel *tree_model,
-                                  GtkTreePath  *path,
-                                  gpointer      user_data);
-static void on_model_row_inserted (GtkTreeModel *tree_model,
-                                   GtkTreePath  *path,
-                                   GtkTreeIter  *iter,
-                                   gpointer      user_data);
-
-static void on_tree_view_selection_changed (GtkTreeSelection *selection,
-                                            gpointer          user_data);
+static void on_listbox_selection_changed (CcGoaPanel    *self,
+                                          GtkListBoxRow *selected_row);
 
 static void on_toolbar_add_button_clicked (GtkToolButton *button,
                                            gpointer       user_data);
@@ -73,12 +62,22 @@ static void on_toolbar_remove_button_clicked (GtkToolButton *button,
 static void on_add_button_clicked (GtkButton *button,
                                    gpointer   user_data);
 
+static void fill_accounts_listbox (CcGoaPanel *self);
+
+static void on_account_added (GoaClient  *client,
+                              GoaObject  *object,
+                              gpointer    user_data);
+
 static void on_account_changed (GoaClient  *client,
                                 GoaObject  *object,
                                 gpointer    user_data);
 
-static gboolean select_account_by_id (CcGoaPanel    *panel,
-                                      const gchar *account_id);
+static void on_account_removed (GoaClient  *client,
+                                GoaObject  *object,
+                                gpointer    user_data);
+
+static void select_account_by_id (CcGoaPanel    *panel,
+                                  const gchar   *account_id);
 static void     add_account          (CcGoaPanel *panel,
                                       GoaProvider *provider,
                                       GVariant *preseed);
@@ -89,6 +88,23 @@ enum {
   PROP_0,
   PROP_PARAMETERS
 };
+
+static gint
+sort_func (GtkListBoxRow *a,
+           GtkListBoxRow *b,
+           gpointer       user_data)
+{
+  GoaObject *a_obj, *b_obj;
+  GoaAccount *a_account, *b_account;
+
+  a_obj = g_object_get_data (G_OBJECT (a), "goa-object");
+  a_account = goa_object_peek_account (a_obj);
+
+  b_obj = g_object_get_data (G_OBJECT (b), "goa-object");
+  b_account = goa_object_peek_account (b_obj);
+
+  return g_strcmp0 (goa_account_get_id (a_account), goa_account_get_id (b_account));
+}
 
 static void
 command_add (CcGoaPanel *panel,
@@ -185,7 +201,6 @@ cc_goa_panel_finalize (GObject *object)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (object);
 
-  g_clear_object (&panel->accounts_model);
   g_clear_object (&panel->client);
 
   G_OBJECT_CLASS (cc_goa_panel_parent_class)->finalize (object);
@@ -195,14 +210,16 @@ static void
 cc_goa_panel_init (CcGoaPanel *panel)
 {
   GError *error;
-  GtkTreeViewColumn *column;
-  GtkCellRenderer *renderer;
-  GtkTreeIter iter;
   GNetworkMonitor *monitor;
 
   g_resources_register (cc_online_accounts_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (panel));
+
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (panel->accounts_listbox),
+                              sort_func,
+                              panel,
+                              NULL);
 
   monitor = g_network_monitor_get_default();
 
@@ -216,11 +233,6 @@ cc_goa_panel_init (CcGoaPanel *panel)
   g_signal_connect (panel->toolbar_remove_button,
                     "clicked",
                     G_CALLBACK (on_toolbar_remove_button_clicked),
-                    panel);
-
-  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
-                    "changed",
-                    G_CALLBACK (on_tree_view_selection_changed),
                     panel);
 
   g_object_bind_property (monitor, "network-available",
@@ -240,60 +252,26 @@ cc_goa_panel_init (CcGoaPanel *panel)
                  error->message, g_quark_to_string (error->domain), error->code);
       gtk_widget_set_sensitive (GTK_WIDGET (panel), FALSE);
       g_error_free (error);
-      goto out;
+      return;
     }
+
+  g_signal_connect (panel->client,
+                    "account-added",
+                    G_CALLBACK (on_account_added),
+                    panel);
+
   g_signal_connect (panel->client,
                     "account-changed",
                     G_CALLBACK (on_account_changed),
                     panel);
 
-  panel->accounts_model = goa_panel_accounts_model_new (panel->client);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (panel->accounts_treeview), GTK_TREE_MODEL (panel->accounts_model));
-  g_signal_connect (panel->accounts_model, "row-deleted", G_CALLBACK (on_model_row_deleted), panel);
-  g_signal_connect (panel->accounts_model, "row-inserted", G_CALLBACK (on_model_row_inserted), panel);
+  g_signal_connect (panel->client,
+                    "account-removed",
+                    G_CALLBACK (on_account_removed),
+                    panel);
 
-  column = gtk_tree_view_column_new ();
-  gtk_tree_view_append_column (GTK_TREE_VIEW (panel->accounts_treeview), column);
+  fill_accounts_listbox (panel);
 
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  gtk_tree_view_column_pack_start (column, renderer, FALSE);
-  g_object_set (G_OBJECT (renderer),
-                "follow-state", TRUE,
-                "stock-size", GTK_ICON_SIZE_DIALOG,
-                NULL);
-  gtk_tree_view_column_set_attributes (column,
-                                       renderer,
-                                       "gicon", GOA_PANEL_ACCOUNTS_MODEL_COLUMN_ICON,
-                                       NULL);
-
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_tree_view_column_pack_start (column, renderer, TRUE);
-  g_object_set (G_OBJECT (renderer),
-                "ellipsize", PANGO_ELLIPSIZE_END,
-                "ellipsize-set", TRUE,
-                NULL);
-  gtk_tree_view_column_set_attributes (column,
-                                       renderer,
-                                       "markup", GOA_PANEL_ACCOUNTS_MODEL_COLUMN_MARKUP,
-                                       NULL);
-
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  gtk_tree_view_column_pack_end (column, renderer, FALSE);
-  g_object_set (G_OBJECT (renderer),
-                "icon-name", "dialog-warning-symbolic",
-                NULL);
-  gtk_tree_view_column_set_attributes (column,
-                                       renderer,
-                                       "visible", GOA_PANEL_ACCOUNTS_MODEL_COLUMN_ATTENTION_NEEDED,
-                                       NULL);
-
-  /* Select the first row, if any */
-  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (panel->accounts_model),
-                                     &iter))
-    gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
-                                    &iter);
-
- out:
   gtk_widget_show_all (GTK_WIDGET (panel));
 }
 
@@ -319,8 +297,8 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/online-accounts/online-accounts.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_notebook);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_treeview);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_tree_box);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_tree_label);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_vbox);
@@ -328,6 +306,8 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_add_button);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_remove_button);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_listbox_selection_changed);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -391,67 +371,157 @@ show_page_account (CcGoaPanel  *panel,
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static gboolean
+static void
 select_account_by_id (CcGoaPanel    *panel,
                       const gchar *account_id)
 {
-  GoaObject *goa_object = NULL;
-  GtkTreeIter iter;
-  gboolean iter_set = FALSE;
+  GtkListBoxRow *account_row;
+  GList *children, *l;
 
-  goa_object = goa_client_lookup_by_id (panel->client, account_id);
-  if (goa_object != NULL)
+  account_row = NULL;
+  children = gtk_container_get_children (GTK_CONTAINER (panel->accounts_listbox));
+
+  for (l = children; l != NULL; l = l->next)
     {
-      iter_set = goa_panel_accounts_model_get_iter_for_object (panel->accounts_model,
-                                                               goa_object,
-                                                               &iter);
-      g_object_unref (goa_object);
+      GoaAccount *account;
+      GoaObject *row_object;
+
+      row_object = g_object_get_data (l->data, "goa-object");
+      account = goa_object_peek_account (row_object);
+
+      if (g_strcmp0 (goa_account_get_id (account), account_id) == 0)
+        {
+          account_row = l->data;
+          break;
+        }
     }
 
-  if (iter_set)
-    {
-      GtkTreePath *path;
-      GtkTreeView *tree_view;
-      GtkTreeSelection *selection;
+  gtk_list_box_select_row (GTK_LIST_BOX (panel->accounts_listbox), account_row);
 
-      tree_view = GTK_TREE_VIEW (panel->accounts_treeview);
-      selection = gtk_tree_view_get_selection (tree_view);
-      gtk_tree_selection_select_iter (selection, &iter);
-      path = gtk_tree_model_get_path (GTK_TREE_MODEL (panel->accounts_model), &iter);
-      gtk_tree_view_scroll_to_cell (tree_view, path, NULL, FALSE, 0.0, 0.0);
-      gtk_tree_path_free (path);
-    }
-
-  return iter_set;
+  g_list_free (children);
 }
 
 static void
-on_tree_view_selection_changed (GtkTreeSelection *selection,
-                                gpointer          user_data)
+on_listbox_selection_changed (CcGoaPanel    *self,
+                              GtkListBoxRow *selected_row)
 {
-  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GtkTreeIter iter;
-
-  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+  if (selected_row != NULL)
     {
       GoaObject *object;
       gboolean is_locked;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (panel->accounts_model),
-                          &iter,
-                          GOA_PANEL_ACCOUNTS_MODEL_COLUMN_OBJECT, &object,
-                          -1);
-      show_page_account (panel, object);
-
+      object = g_object_get_data (G_OBJECT (selected_row), "goa-object");
       is_locked = goa_account_get_is_locked (goa_object_peek_account (object));
-      gtk_widget_set_sensitive (panel->toolbar_remove_button, !is_locked);
 
-      g_object_unref (object);
+      show_page_account (self, object);
+
+      gtk_widget_set_sensitive (self->toolbar_remove_button, !is_locked);
     }
   else
     {
-      show_page_nothing_selected (panel);
+      show_page_nothing_selected (self);
     }
+}
+
+static void
+fill_accounts_listbox (CcGoaPanel *self)
+{
+  GList *accounts, *l;
+  GtkListBoxRow *first_row;
+
+  accounts = goa_client_get_accounts (self->client);
+
+  if (accounts == NULL)
+    {
+      show_page_nothing_selected (self);
+    }
+  else
+    {
+      for (l = accounts; l != NULL; l = l->next)
+        on_account_added (self->client, l->data, self);
+
+      /* Select the first row */
+      first_row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->accounts_listbox), 0);
+      gtk_list_box_select_row (GTK_LIST_BOX (self->accounts_listbox), first_row);
+    }
+
+  g_list_free_full (accounts, g_object_unref);
+}
+
+static void
+on_account_added (GoaClient *client,
+                  GoaObject *object,
+                  gpointer   user_data)
+{
+  CcGoaPanel *self = user_data;
+  GtkWidget *row, *icon, *label, *box;
+  GoaAccount *account;
+  GError *error;
+  GIcon *gicon;
+  gchar* title = NULL;
+
+  account = goa_object_peek_account (object);
+
+  /* The main grid */
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_show (box);
+
+  /* The provider icon */
+  icon = gtk_image_new ();
+
+  error = NULL;
+  gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
+  if (error != NULL)
+    {
+      g_warning ("Error creating GIcon for account: %s (%s, %d)",
+                 error->message,
+                 g_quark_to_string (error->domain),
+                 error->code);
+
+      g_clear_error (&error);
+    }
+  else
+    {
+      gtk_image_set_from_gicon (GTK_IMAGE (icon), gicon, GTK_ICON_SIZE_DIALOG);
+    }
+
+  gtk_container_add (GTK_CONTAINER (box), icon);
+
+  /* The name of the provider */
+  title = g_strdup_printf ("<b>%s</b>\n<small>%s</small>",
+                           goa_account_get_provider_name (account),
+                           goa_account_get_presentation_identity (account));
+
+  label = g_object_new (GTK_TYPE_LABEL,
+                        "ellipsize", PANGO_ELLIPSIZE_END,
+                        "label", title,
+                        "xalign", 0.0,
+                        "use-markup", TRUE,
+                        "hexpand", TRUE,
+                        NULL);
+  gtk_container_add (GTK_CONTAINER (box), label);
+
+  /* "Needs attention" icon */
+  icon = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_set_no_show_all (icon, TRUE);
+  g_object_bind_property (goa_object_peek_account (object),
+                          "attention-needed",
+                          icon,
+                          "visible",
+                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+  gtk_container_add (GTK_CONTAINER (box), icon);
+
+  /* The row */
+  row = gtk_list_box_row_new ();
+  g_object_set_data (G_OBJECT (row), "goa-object", object);
+  gtk_container_add (GTK_CONTAINER (row), box);
+
+  /* Add to the listbox */
+  gtk_container_add (GTK_CONTAINER (self->accounts_listbox), row);
+  gtk_widget_show_all (row);
+
+  g_clear_pointer (&title, g_free);
+  g_clear_object (&gicon);
 }
 
 static void
@@ -460,73 +530,51 @@ on_account_changed (GoaClient  *client,
                     gpointer    user_data)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GtkTreeIter iter;
+  GtkListBoxRow *selected_row;
+  GoaObject *selected_object;
 
-  if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
-                                       NULL,
-                                       &iter))
-    {
-      GoaObject *selected_object;
-      gtk_tree_model_get (GTK_TREE_MODEL (panel->accounts_model),
-                          &iter,
-                          GOA_PANEL_ACCOUNTS_MODEL_COLUMN_OBJECT, &selected_object,
-                          -1);
-      if (selected_object == object)
-        show_page_account (panel, selected_object);
-      g_object_unref (selected_object);
-    }
-}
-
-/* ---------------------------------------------------------------------------------------------------- */
-
-static void
-on_model_row_changed (GtkTreeModel *tree_model,
-                      GtkTreePath  *path,
-                      GtkTreeIter  *iter,
-                      gpointer      user_data)
-{
-  GtkTreeSelection *selection = GTK_TREE_SELECTION (user_data);
-
-  gtk_tree_selection_select_iter (selection, iter);
-  g_signal_handlers_disconnect_by_func (tree_model, G_CALLBACK (on_model_row_changed), user_data);
-}
-
-static void
-on_model_row_deleted (GtkTreeModel *tree_model,
-                      GtkTreePath  *path,
-                      gpointer      user_data)
-{
-  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GtkTreeIter iter;
-  GtkTreeSelection *selection;
-
-  if (!gtk_tree_model_get_iter (tree_model, &iter, path))
-    {
-      if (!gtk_tree_path_prev (path))
-        return;
-    }
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview));
-  gtk_tree_selection_select_path (selection, path);
-}
-
-static void
-on_model_row_inserted (GtkTreeModel *tree_model,
-                       GtkTreePath  *path,
-                       GtkTreeIter  *iter,
-                       gpointer      user_data)
-{
-  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GtkTreeSelection *selection;
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview));
-  if (gtk_tree_selection_get_selected (selection, NULL, NULL))
+  selected_row = gtk_list_box_get_selected_row (GTK_LIST_BOX (panel->accounts_listbox));
+  if (selected_row == NULL)
     return;
 
-  /* An empty row has been inserted and is going to be filled in, so
-   * we expect selection to stay valid.
-   */
-  g_signal_connect (tree_model, "row-changed", G_CALLBACK (on_model_row_changed), selection);
+  selected_object = g_object_get_data (G_OBJECT (selected_row), "goa-object");
+
+  if (selected_object == object)
+    show_page_account (panel, selected_object);
+}
+
+static void
+on_account_removed (GoaClient *client,
+                    GoaObject *object,
+                    gpointer   user_data)
+{
+  CcGoaPanel *self = user_data;
+  GList *children, *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (self->accounts_listbox));
+
+  for (l = children; l != NULL; l = l->next)
+    {
+      GoaObject *row_object;
+
+      row_object = GOA_OBJECT (g_object_get_data (l->data, "goa-object"));
+
+      if (row_object == object)
+        {
+          GtkListBoxRow *row = NULL;
+
+          if (l->next != NULL)
+            row = GTK_LIST_BOX_ROW (l->next->data);
+          else if (l->prev != NULL)
+            row = GTK_LIST_BOX_ROW (l->prev->data);
+
+          gtk_list_box_select_row (GTK_LIST_BOX (self->accounts_listbox), row);
+          gtk_widget_destroy (l->data);
+          break;
+        }
+    }
+
+  g_list_free (children);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -584,16 +632,8 @@ get_all_providers_cb (GObject      *source,
 
   if (object != NULL)
     {
-      GtkTreeIter iter;
-      /* navigate to newly created object */
-      if (goa_panel_accounts_model_get_iter_for_object (data->panel->accounts_model,
-                                                        object,
-                                                        &iter))
-        {
-          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (data->panel->accounts_treeview)),
-                                          &iter);
-        }
-      g_object_unref (object);
+      GoaAccount *account = goa_object_peek_account (object);
+      select_account_by_id (data->panel, goa_account_get_id (account));
     }
 
   if (error != NULL)
@@ -681,41 +721,35 @@ on_toolbar_remove_button_clicked (GtkToolButton *button,
                                   gpointer       user_data)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GtkTreeIter iter;
+  GtkListBoxRow *selected_row;
+  GoaObject *object;
+  GtkWidget *dialog;
+  gint response;
 
-  if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
-                                       NULL,
-                                       &iter))
+  selected_row = gtk_list_box_get_selected_row (GTK_LIST_BOX (panel->accounts_listbox));
+  if (selected_row == NULL)
+    return;
+
+  object = g_object_get_data (G_OBJECT (selected_row), "goa-object");
+
+  dialog = gtk_message_dialog_new (GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
+                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_QUESTION,
+                                   GTK_BUTTONS_CANCEL,
+                                   _("Are you sure you want to remove the account?"));
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                            _("This will not remove the account on the server."));
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_OK);
+  gtk_widget_show_all (dialog);
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  if (response == GTK_RESPONSE_OK)
     {
-      GoaObject *object;
-      GtkWidget *dialog;
-      gint response;
-
-      gtk_tree_model_get (GTK_TREE_MODEL (panel->accounts_model),
-                          &iter,
-                          GOA_PANEL_ACCOUNTS_MODEL_COLUMN_OBJECT, &object,
-                          -1);
-
-      dialog = gtk_message_dialog_new (GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_QUESTION,
-                                       GTK_BUTTONS_CANCEL,
-                                       _("Are you sure you want to remove the account?"));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                _("This will not remove the account on the server."));
-      gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_OK);
-      gtk_widget_show_all (dialog);
-      response = gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      if (response == GTK_RESPONSE_OK)
-        {
-          goa_account_call_remove (goa_object_peek_account (object),
-                                   NULL, /* GCancellable */
-                                   (GAsyncReadyCallback) remove_account_cb,
-                                   g_object_ref (panel));
-        }
-      g_object_unref (object);
+      goa_account_call_remove (goa_object_peek_account (object),
+                               NULL, /* GCancellable */
+                               (GAsyncReadyCallback) remove_account_cb,
+                               g_object_ref (panel));
     }
 }
 

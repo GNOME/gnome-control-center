@@ -31,18 +31,13 @@
                     <property name="shadow_type">in</property>
                     <property name="min_content_height">300</property>
                     <child>
-                      <object class="GtkTreeView" id="accounts_treeview">
-                        <property name="width_request">278</property>
+                      <object class="GtkListBox" id="accounts_listbox">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="headers_visible">False</property>
-                        <property name="show_expanders">False</property>
-                        <property name="level_indentation">12</property>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection">
-                            <property name="mode">browse</property>
-                          </object>
-                        </child>
+                        <property name="hexpand">False</property>
+                        <property name="width_request">278</property>
+                        <property name="selection_mode">browse</property>
+                        <signal name="row-selected" handler="on_listbox_selection_changed" object="CcGoaPanel" swapped="yes" />
                       </object>
                     </child>
                   </object>

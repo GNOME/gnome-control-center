@@ -19,8 +19,6 @@ libonline_accounts_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
 	cc-online-accounts-add-account-dialog.c	\
 	cc-online-accounts-add-account-dialog.h	\
-	cc-online-accounts-model.c	\
-	cc-online-accounts-model.h	\
 	cc-online-accounts-panel.c	\
 	cc-online-accounts-panel.h
 
