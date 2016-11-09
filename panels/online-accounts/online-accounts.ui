@@ -29,88 +29,16 @@
               </object>
             </child>
             <child>
-              <object class="GtkBox" id="accounts_tree_box">
+              <object class="GtkFrame" id="accounts_frame">
                 <property name="visible">True</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">0</property>
+                <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkOverlay" id="accounts-tree-overlay">
+                  <object class="GtkListBox" id="accounts_listbox">
                     <property name="visible">True</property>
-                    <child>
-                      <object class="GtkFrame" id="accounts_frame">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkListBox" id="accounts_listbox">
-                            <property name="vexpand">True</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selection_mode">none</property>
-                            <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child type="overlay">
-                      <object class="GtkLabel" id="accounts_tree_label">
-                        <property name="can_focus">False</property>
-                        <property name="no-show-all">True</property>
-                        <property name="justify">center</property>
-                        <property name="label" translatable="yes">No online accounts configured</property>
-                        <property name="max-width-chars">18</property>
-                        <property name="wrap">True</property>
-                      </object>
-                    </child>
+                    <property name="can_focus">True</property>
+                    <property name="selection_mode">none</property>
+                    <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
                   </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolbar" id="toolbar">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="toolbar_style">icons</property>
-                    <property name="icon_size">1</property>
-                    <style>
-                      <class name="inline-toolbar"/>
-                    </style>
-                    <child>
-                      <object class="GtkToolButton" id="toolbar_add_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="icon_name">list-add-symbolic</property>
-                        <property name="label" translatable="yes">Add Account</property>
-                        <signal name="clicked" handler="on_toolbar_add_button_clicked" object="CcGoaPanel" swapped="no" />
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">True</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkToolButton" id="toolbar_remove_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="icon_name">list-remove-symbolic</property>
-                        <property name="label" translatable="yes">Remove Account</property>
-                        <signal name="clicked" handler="on_toolbar_remove_button_clicked" object="CcGoaPanel" swapped="no" />
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">True</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
                 </child>
               </object>
             </child>
@@ -159,56 +87,10 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox">
+      <object class="GtkBox" id="accounts_vbox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="margin">18</property>
-        <child>
-          <object class="GtkNotebook" id="accounts_notebook">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="show_tabs">False</property>
-            <property name="show_border">False</property>
-            <child>
-              <object class="GtkBox" id="accounts_vbox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">page 1</property>
-              </object>
-              <packing>
-                <property name="tab_fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-          </packing>
-        </child>
       </object>
     </child>
   </object>

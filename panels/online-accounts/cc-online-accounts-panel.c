@@ -42,15 +42,9 @@ struct _CcGoaPanel
   GoaObject *active_object;
 
   GtkWidget *accounts_listbox;
-  GtkWidget *accounts_notebook;
-  GtkWidget *accounts_tree_box;
-  GtkWidget *accounts_tree_label;
   GtkWidget *edit_account_dialog;
   GtkWidget *edit_account_headerbar;
   GtkWidget *providers_listbox;
-  GtkWidget *toolbar;
-  GtkWidget *toolbar_add_button;
-  GtkWidget *toolbar_remove_button;
   GtkWidget *accounts_vbox;
 };
 
@@ -58,11 +52,6 @@ static gboolean on_edit_account_dialog_delete_event (CcGoaPanel *self);
 
 static void on_listbox_row_activated (CcGoaPanel    *self,
                                       GtkListBoxRow *activated_row);
-
-static void on_toolbar_add_button_clicked (GtkToolButton *button,
-                                           gpointer       user_data);
-static void on_toolbar_remove_button_clicked (GtkToolButton *button,
-                                              gpointer       user_data);
 
 static void fill_accounts_listbox (CcGoaPanel *self);
 
@@ -280,10 +269,6 @@ cc_goa_panel_init (CcGoaPanel *panel)
                           panel->providers_listbox, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property (monitor, "network-available",
-                          panel->toolbar_add_button, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-
   /* TODO: probably want to avoid _sync() ... */
   error = NULL;
   panel->client = goa_client_new_sync (NULL /* GCancellable */, &error);
@@ -355,37 +340,20 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/online-accounts/online-accounts.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_notebook);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_tree_box);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_tree_label);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, providers_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_add_button);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_remove_button);
 
   gtk_widget_class_bind_template_callback (widget_class, on_edit_account_dialog_delete_event);
   gtk_widget_class_bind_template_callback (widget_class, on_listbox_row_activated);
-  gtk_widget_class_bind_template_callback (widget_class, on_toolbar_add_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, on_toolbar_remove_button_clicked);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
-show_page (CcGoaPanel *panel,
-           gint page_num)
-{
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (panel->accounts_notebook), page_num);
-}
-
-static void
 show_page_nothing_selected (CcGoaPanel *panel)
 {
-  gtk_widget_set_sensitive (panel->toolbar_remove_button, FALSE);
-  gtk_widget_show (panel->accounts_tree_label);
 }
 
 static void
@@ -396,7 +364,6 @@ show_page_account (CcGoaPanel  *panel,
   GList *l;
   GoaProvider *provider;
   GoaAccount *account;
-  gboolean is_locked;
   const gchar *provider_name;
   const gchar *provider_type;
   gchar *title;
@@ -404,13 +371,6 @@ show_page_account (CcGoaPanel  *panel,
   provider = NULL;
 
   panel->active_object = object;
-
-  show_page (panel, 0);
-  gtk_widget_set_sensitive (panel->accounts_tree_box, TRUE);
-  gtk_widget_hide (panel->accounts_tree_label);
-
-  is_locked = goa_account_get_is_locked (goa_object_peek_account (object));
-  gtk_widget_set_sensitive (panel->toolbar_remove_button, !is_locked);
 
   /* Out with the old */
   children = gtk_container_get_children (GTK_CONTAINER (panel->accounts_vbox));
@@ -650,77 +610,4 @@ get_all_providers_cb (GObject      *source,
     }
 
   g_list_free_full (providers, g_object_unref);
-}
-
-/* ---------------------------------------------------------------------------------------------------- */
-
-static void
-on_toolbar_add_button_clicked (GtkToolButton *button,
-                               gpointer       user_data)
-{
-}
-
-static void
-remove_account_cb (GoaAccount    *account,
-                   GAsyncResult  *res,
-                   gpointer       user_data)
-{
-  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GError *error;
-
-  error = NULL;
-  if (!goa_account_call_remove_finish (account, res, &error))
-    {
-      GtkWidget *dialog;
-      dialog = gtk_message_dialog_new (GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_CLOSE,
-                                       _("Error removing account"));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                "%s",
-                                                error->message);
-      gtk_widget_show_all (dialog);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      g_error_free (error);
-    }
-  g_object_unref (panel);
-}
-
-static void
-on_toolbar_remove_button_clicked (GtkToolButton *button,
-                                  gpointer       user_data)
-{
-  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GtkListBoxRow *selected_row;
-  GoaObject *object;
-  GtkWidget *dialog;
-  gint response;
-
-  selected_row = gtk_list_box_get_selected_row (GTK_LIST_BOX (panel->accounts_listbox));
-  if (selected_row == NULL)
-    return;
-
-  object = g_object_get_data (G_OBJECT (selected_row), "goa-object");
-
-  dialog = gtk_message_dialog_new (GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
-                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                   GTK_MESSAGE_QUESTION,
-                                   GTK_BUTTONS_CANCEL,
-                                   _("Are you sure you want to remove the account?"));
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                            _("This will not remove the account on the server."));
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_OK);
-  gtk_widget_show_all (dialog);
-  response = gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
-
-  if (response == GTK_RESPONSE_OK)
-    {
-      goa_account_call_remove (goa_object_peek_account (object),
-                               NULL, /* GCancellable */
-                               (GAsyncReadyCallback) remove_account_cb,
-                               g_object_ref (panel));
-    }
 }
