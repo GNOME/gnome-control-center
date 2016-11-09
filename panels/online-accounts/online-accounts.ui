@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-      <object class="GtkBox" id="goa-top-widget">
+  <template class="CcGoaPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">18</property>
@@ -12,7 +16,7 @@
         <property name="margin-top">6</property>
         <property name="margin-bottom">6</property>
         <child>
-          <object class="GtkBox" id="accounts-tree-box">
+          <object class="GtkBox" id="accounts_tree_box">
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
             <property name="spacing">0</property>
@@ -27,7 +31,7 @@
                     <property name="shadow_type">in</property>
                     <property name="min_content_height">300</property>
                     <child>
-                      <object class="GtkTreeView" id="accounts-tree-treeview">
+                      <object class="GtkTreeView" id="accounts_treeview">
                         <property name="width_request">278</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -44,7 +48,7 @@
                   </object>
                 </child>
                 <child type="overlay">
-                  <object class="GtkLabel" id="accounts-tree-label">
+                  <object class="GtkLabel" id="accounts_tree_label">
                     <property name="can_focus">False</property>
                     <property name="no-show-all">True</property>
                     <property name="justify">center</property>
@@ -61,7 +65,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolbar" id="accounts-tree-toolbar">
+              <object class="GtkToolbar" id="toolbar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="toolbar_style">icons</property>
@@ -70,7 +74,7 @@
                   <class name="inline-toolbar"/>
                 </style>
                 <child>
-                  <object class="GtkToolButton" id="accounts-tree-toolbutton-add">
+                  <object class="GtkToolButton" id="toolbar_add_button">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="use_action_appearance">False</property>
@@ -83,7 +87,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToolButton" id="accounts-tree-toolbutton-remove">
+                  <object class="GtkToolButton" id="toolbar_remove_button">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="use_action_appearance">False</property>
@@ -105,7 +109,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkNotebook" id="accounts-notebook">
+          <object class="GtkNotebook" id="accounts_notebook">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="show_tabs">False</property>
@@ -124,7 +128,7 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkButton" id="accounts-button-add">
+                      <object class="GtkButton" id="add_account_button">
                         <property name="label" translatable="yes">Add an online account</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -175,7 +179,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="accounts-vbox">
+              <object class="GtkBox" id="accounts_vbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
@@ -216,4 +220,6 @@
           </packing>
         </child>
       </object>
+    </child>
+  </template>
 </interface>
