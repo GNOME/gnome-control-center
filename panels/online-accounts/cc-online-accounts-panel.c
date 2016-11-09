@@ -47,6 +47,7 @@ struct _CcGoaPanel
   GtkWidget *accounts_tree_label;
   GtkWidget *edit_account_dialog;
   GtkWidget *edit_account_headerbar;
+  GtkWidget *providers_listbox;
   GtkWidget *toolbar;
   GtkWidget *toolbar_add_button;
   GtkWidget *toolbar_remove_button;
@@ -79,9 +80,10 @@ static void on_account_removed (GoaClient  *client,
 
 static void select_account_by_id (CcGoaPanel    *panel,
                                   const gchar   *account_id);
-static void     add_account          (CcGoaPanel *panel,
-                                      GoaProvider *provider,
-                                      GVariant *preseed);
+
+static void get_all_providers_cb (GObject      *source,
+                                  GAsyncResult *res,
+                                  gpointer      user_data);
 
 CC_PANEL_REGISTER (CcGoaPanel, cc_goa_panel);
 
@@ -89,6 +91,58 @@ enum {
   PROP_0,
   PROP_PARAMETERS
 };
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+static void
+add_provider_row (CcGoaPanel  *self,
+                  GoaProvider *provider)
+{
+  GIcon *icon;
+  GtkWidget *image;
+  GtkWidget *label;
+  GtkWidget *row;
+  GtkWidget *row_grid;
+  gchar *markup;
+  gchar *name;
+
+  row = gtk_list_box_row_new ();
+  gtk_container_add (GTK_CONTAINER (self->providers_listbox), row);
+
+  row_grid = gtk_grid_new ();
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (row_grid), GTK_ORIENTATION_HORIZONTAL);
+  gtk_grid_set_column_spacing (GTK_GRID (row_grid), 6);
+  gtk_container_add (GTK_CONTAINER (row), row_grid);
+
+  if (provider == NULL)
+    {
+      g_object_set_data (G_OBJECT (row), "provider", NULL);
+      icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
+      name = g_strdup (C_("Online Account", "Other"));
+    }
+  else
+    {
+      g_object_set_data_full (G_OBJECT (row), "goa-provider", g_object_ref (provider), g_object_unref);
+      icon = goa_provider_get_provider_icon (provider, NULL);
+      name = goa_provider_get_provider_name (provider, NULL);
+    }
+
+  image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_container_add (GTK_CONTAINER (row_grid), image);
+
+  markup = g_strdup_printf ("<b>%s</b>", name);
+  label = gtk_label_new (NULL);
+  gtk_label_set_markup (GTK_LABEL (label), markup);
+  gtk_container_add (GTK_CONTAINER (row_grid), label);
+
+  gtk_widget_show_all (row);
+
+  g_free (markup);
+  g_free (name);
+  g_object_unref (icon);
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
 
 static gint
 sort_func (GtkListBoxRow *a,
@@ -149,8 +203,6 @@ command_add (CcGoaPanel *panel,
           goto out;
         }
     }
-
-  add_account (panel, provider, preseed);
 
 out:
   g_clear_object (&provider);
@@ -225,6 +277,10 @@ cc_goa_panel_init (CcGoaPanel *panel)
   monitor = g_network_monitor_get_default();
 
   g_object_bind_property (monitor, "network-available",
+                          panel->providers_listbox, "sensitive",
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (monitor, "network-available",
                           panel->toolbar_add_button, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
@@ -256,6 +312,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
                     panel);
 
   fill_accounts_listbox (panel);
+  goa_provider_get_all (get_all_providers_cb, panel);
 
   gtk_widget_show_all (GTK_WIDGET (panel));
 }
@@ -304,6 +361,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_headerbar);
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, providers_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_add_button);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, toolbar_remove_button);
@@ -570,100 +628,28 @@ on_account_removed (GoaClient *client,
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-typedef struct
-{
-  CcGoaPanel *panel;
-  GoaProvider *provider;
-  GVariant *preseed;
-} AddAccountData;
-
 static void
 get_all_providers_cb (GObject      *source,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  AddAccountData *data = user_data;
-  GtkWindow *parent;
-  GtkWidget *dialog;
+  CcGoaPanel *self = user_data;
   GList *providers;
   GList *l;
-  GoaObject *object;
-  GError *error;
 
   providers = NULL;
   if (!goa_provider_get_all_finish (&providers, res, NULL))
-    goto out;
-
-  parent = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (data->panel))));
-
-  dialog = goa_panel_add_account_dialog_new (data->panel->client);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
+    return;
 
   for (l = providers; l != NULL; l = l->next)
     {
       GoaProvider *provider;
       provider = GOA_PROVIDER (l->data);
 
-      goa_panel_add_account_dialog_add_provider (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), provider);
-    }
-
-  goa_panel_add_account_dialog_set_preseed_data (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog),
-                                                 data->provider, data->preseed);
-
-  gtk_widget_show_all (dialog);
-  goa_panel_add_account_dialog_run (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog));
-
-  error = NULL;
-  object = goa_panel_add_account_dialog_get_account (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), &error);
-  gtk_widget_destroy (dialog);
-
-  /* We might have an object even when error is set.
-   * eg., if we failed to store the credentials in the keyring.
-   */
-
-  if (object != NULL)
-    gtk_widget_hide (data->panel->accounts_tree_label);
-
-  if (error != NULL)
-    {
-      if (!(error->domain == GOA_ERROR && error->code == GOA_ERROR_DIALOG_DISMISSED))
-        {
-          dialog = gtk_message_dialog_new (parent,
-                                           GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                           GTK_MESSAGE_ERROR,
-                                           GTK_BUTTONS_CLOSE,
-                                           _("Error creating account"));
-          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                    "%s",
-                                                    error->message);
-          gtk_widget_show_all (dialog);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
-        }
-      g_error_free (error);
+      add_provider_row (self, provider);
     }
 
   g_list_free_full (providers, g_object_unref);
-
-out:
-  g_clear_object (&data->panel);
-  g_clear_object (&data->provider);
-  g_clear_pointer (&data->preseed, g_variant_unref);
-  g_slice_free (AddAccountData, data);
-}
-
-static void
-add_account (CcGoaPanel *panel,
-             GoaProvider *provider,
-             GVariant *preseed)
-{
-  AddAccountData *data;
-
-  data = g_slice_new0 (AddAccountData);
-  data->panel = g_object_ref_sink (panel);
-  data->provider = (provider != NULL ? g_object_ref (provider) : NULL);
-  data->preseed = (preseed != NULL ? g_variant_ref (preseed) : NULL);
-  goa_provider_get_all (get_all_providers_cb, data);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -672,8 +658,6 @@ static void
 on_toolbar_add_button_clicked (GtkToolButton *button,
                                gpointer       user_data)
 {
-  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  add_account (panel, NULL, NULL);
 }
 
 static void
