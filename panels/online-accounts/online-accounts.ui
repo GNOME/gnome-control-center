@@ -10,11 +10,21 @@
         <property name="can_focus">False</property>
         <property name="spacing">18</property>
         <property name="border-width">8</property>
-        <property name="orientation">horizontal</property>
+        <property name="orientation">vertical</property>
         <property name="margin-start">6</property>
         <property name="margin-end">6</property>
         <property name="margin-top">6</property>
         <property name="margin-bottom">6</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Connect to your data in the cloud</property>
+            <attributes>
+              <attribute name="scale" value="1.66" />
+            </attributes>
+          </object>
+        </child>
         <child>
           <object class="GtkBox" id="accounts_tree_box">
             <property name="visible">True</property>
