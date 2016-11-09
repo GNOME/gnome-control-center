@@ -105,77 +105,34 @@
             </child>
           </object>
         </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkDialog" id="edit_account_dialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no" />
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="edit_account_headerbar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="show_close_button">True</property>
+      </object>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="margin">18</property>
         <child>
           <object class="GtkNotebook" id="accounts_notebook">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="show_tabs">False</property>
             <property name="show_border">False</property>
-            <child>
-              <object class="GtkAlignment" id="alignment2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="bottom_padding">18</property>
-                <child>
-                  <object class="GtkBox" id="box1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkButton" id="add_account_button">
-                        <property name="label" translatable="yes">Add an online account</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">center</property>
-                        <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_add_button_clicked" object="CcGoaPanel" swapped="no" />
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label3">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Adding an account allows your applications to access it for documents, mail, contacts, calendar, chat and more.</property>
-                        <property name="justify">center</property>
-                        <property name="wrap">True</property>
-                        <property name="max_width_chars">40</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="tab_fill">False</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">page 1</property>
-              </object>
-              <packing>
-                <property name="tab_fill">False</property>
-              </packing>
-            </child>
             <child>
               <object class="GtkBox" id="accounts_vbox">
                 <property name="visible">True</property>
@@ -196,13 +153,12 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label2">
+              <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label">page 2</property>
+                <property name="label">page 1</property>
               </object>
               <packing>
-                <property name="position">1</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -219,5 +175,5 @@
         </child>
       </object>
     </child>
-  </template>
+  </object>
 </interface>
