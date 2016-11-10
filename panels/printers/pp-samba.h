@@ -63,6 +63,10 @@ PpDevicesList *pp_samba_get_devices_finish (PpSamba             *samba,
                                             GAsyncResult        *result,
                                             GError             **error);
 
+void           pp_samba_set_auth_info      (PpSamba             *samba,
+                                            const gchar         *username,
+                                            const gchar         *password);
+
 G_END_DECLS
 
 #endif /* __PP_SAMBA_H__ */

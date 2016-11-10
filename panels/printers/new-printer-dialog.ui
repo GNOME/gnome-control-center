@@ -61,7 +61,7 @@
                 </style>
               </object>
               <packing>
-                <property name="name">add-button</property>
+                <property name="name">addprinter-page</property>
               </packing>
             </child>
             <child>
@@ -79,6 +79,23 @@
                 <property name="name">unlock-button</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkButton" id="authenticate-button">
+                <property name="label" translatable="yes" comments="Translators: This buttons submits the credentials for the selected server.">_Unlock</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="name">authentication-page</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="pack-type">GTK_PACK_END</property>
@@ -94,167 +111,270 @@
         <property name="spacing">10</property>
         <property name="border_width">0</property>
         <child>
-          <object class="GtkBox" id="box2">
+          <object class="GtkStack" id="dialog-stack">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
+            <property name="border_width">0</property>
             <child>
-              <object class="GtkStack" id="stack">
+              <object class="GtkBox" id="box2">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="transition-type">none</property>
-                <style>
-                  <class name="view"/>
-                </style>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkStack" id="stack">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkTreeView" id="devices-treeview">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="model">devices-model-filter</property>
-                        <property name="headers_visible">False</property>
-                        <property name="enable-grid-lines">GTK_TREE_VIEW_GRID_LINES_HORIZONTAL</property>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection"/>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">standard-page</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-                    <property name="valign">GTK_ALIGN_CENTER</property>
-                    <property name="spacing">10</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="valign">GTK_ALIGN_START</property>
-                        <property name="pixel_size">72</property>
-                        <property name="icon_name">printer-symbolic</property>
-                        <property name="opacity">0.6</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="no-devices-label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="sensitive">False</property>
-                        <property name="label" translatable="yes" comments="Translators: No printers were detected">No Printers Found</property>
-                        <property name="opacity">0.6</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">no-printers-page</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="transition-type">none</property>
                     <style>
                       <class name="view"/>
                     </style>
                     <child>
-                      <object class="GtkSpinner" id="spinner">
-                        <property name="visible">True</property>
-                        <property name="active">True</property>
-                        <property name="expand">True</property>
-                        <property name="sensitive">False</property>
-                        <property name="opacity">0.6</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">loading-page</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSeparator">
-                <property name="visible">True</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolbar" id="toolbar1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="toolbar_style">icons</property>
-                <property name="icon_size">1</property>
-                <style>
-                  <class name="toolbar"/>
-                </style>
-                <child>
-                  <object class="GtkToolItem" id="toolbutton1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkBox" id="box1">
+                      <object class="GtkScrolledWindow" id="scrolledwindow1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="border_width">4</property>
                         <child>
-                          <object class="GtkSearchEntry" id="search-entry">
+                          <object class="GtkTreeView" id="devices-treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="invisible_char">●</property>
-                            <property name="truncate_multiline">True</property>
-                            <property name="invisible_char_set">True</property>
-                            <property name="placeholder_text" translatable="yes" comments="Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)">Enter a network address or search for a printer</property>
-                            <property name="margin_start">40</property>
-                            <property name="margin_end">40</property>
+                            <property name="model">devices-model-filter</property>
+                            <property name="headers_visible">False</property>
+                            <property name="enable-grid-lines">GTK_TREE_VIEW_GRID_LINES_HORIZONTAL</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="treeview-selection"/>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
+                      <packing>
+                        <property name="name">standard-page</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+                        <property name="valign">GTK_ALIGN_CENTER</property>
+                        <property name="spacing">10</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">GTK_ALIGN_START</property>
+                            <property name="pixel_size">72</property>
+                            <property name="icon_name">printer-symbolic</property>
+                            <property name="opacity">0.6</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="no-devices-label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="sensitive">False</property>
+                            <property name="label" translatable="yes" comments="Translators: No printers were detected">No Printers Found</property>
+                            <property name="opacity">0.6</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="name">no-printers-page</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <style>
+                          <class name="view"/>
+                        </style>
+                        <child>
+                          <object class="GtkSpinner" id="spinner">
+                            <property name="visible">True</property>
+                            <property name="active">True</property>
+                            <property name="expand">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="opacity">0.6</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="name">loading-page</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
-                    <property name="homogeneous">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="visible">True</property>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolbar" id="toolbar1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="toolbar_style">icons</property>
+                    <property name="icon_size">1</property>
+                    <style>
+                      <class name="toolbar"/>
+                    </style>
+                    <child>
+                      <object class="GtkToolItem" id="toolbutton1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkBox" id="box1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="border_width">4</property>
+                            <child>
+                              <object class="GtkSearchEntry" id="search-entry">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="has_tooltip">True</property>
+                                <property name="invisible_char">●</property>
+                                <property name="truncate_multiline">True</property>
+                                <property name="invisible_char_set">True</property>
+                                <property name="placeholder_text" translatable="yes" comments="Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)">Enter a network address or search for a printer</property>
+                                <property name="margin_start">40</property>
+                                <property name="margin_end">40</property>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="name">addprinter-page</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkGrid">
+                <property name="visible">True</property>
+                <property name="margin">20</property>
+                <property name="row_spacing">10</property>
+                <property name="column_spacing">15</property>
+                <property name="expand">True</property>
+                <style>
+                  <class name="background"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="pixel_size">48</property>
+                    <property name="icon_name">dialog-password-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="height">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Authentication Required</property>
+                    <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="authentication-text">
+                    <property name="wrap">True</property>
+                    <property name="max_width_chars">36</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Enter username and password to view printers on Print Server.</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Username</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="username-entry">
+                    <property name="can_focus">True</property>
+                    <property name="invisible_char">●</property>
+                    <property name="activates_default">True</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Password</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="password-entry">
+                    <property name="can_focus">True</property>
+                    <property name="visibility">False</property>
+                    <property name="invisible_char">●</property>
+                    <property name="activates_default">True</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">3</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">authentication-page</property>
               </packing>
             </child>
           </object>

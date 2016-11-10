@@ -26,22 +26,20 @@
 #include <libsmbclient.h>
 #include <errno.h>
 
-#include "pp-authentication-dialog.h"
-
 #define POLL_DELAY 100000
 
 struct _PpSambaPrivate
 {
-  GtkWindow *parent;
+  /* Auth info */
+  gchar    *server;
+  gchar    *share;
+  gchar    *workgroup;
+  gchar    *username;
+  gchar    *password;
+  gboolean  waiting;
 };
 
 G_DEFINE_TYPE (PpSamba, pp_samba, PP_TYPE_HOST);
-
-enum
-{
-  PROP_0 = 0,
-  PROP_PARENT,
-};
 
 static void
 pp_samba_finalize (GObject *object)
@@ -50,53 +48,13 @@ pp_samba_finalize (GObject *object)
 
   priv = PP_SAMBA (object)->priv;
 
-  g_object_unref (priv->parent);
+  g_free (priv->server);
+  g_free (priv->share);
+  g_free (priv->workgroup);
+  g_free (priv->username);
+  g_free (priv->password);
 
   G_OBJECT_CLASS (pp_samba_parent_class)->finalize (object);
-}
-
-static void
-pp_samba_get_property (GObject    *object,
-                       guint       prop_id,
-                       GValue     *value,
-                       GParamSpec *param_spec)
-{
-  PpSamba *self = PP_SAMBA (object);
-
-  switch (prop_id)
-    {
-      case PROP_PARENT:
-        g_value_set_pointer (value, self->priv->parent);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-                                           prop_id,
-                                           param_spec);
-      break;
-    }
-}
-
-static void
-pp_samba_set_property (GObject      *object,
-                       guint         prop_id,
-                       const GValue *value,
-                       GParamSpec   *param_spec)
-{
-  PpSamba *self = PP_SAMBA (object);
-
-  switch (prop_id)
-    {
-      case PROP_PARENT:
-        if (self->priv->parent)
-          g_object_unref (self->priv->parent);
-        self->priv->parent = g_object_ref (G_OBJECT (g_value_get_pointer (value)));
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-                                           prop_id,
-                                           param_spec);
-        break;
-    }
 }
 
 static void
@@ -106,18 +64,7 @@ pp_samba_class_init (PpSambaClass *klass)
 
   g_type_class_add_private (klass, sizeof (PpSambaPrivate));
 
-  gobject_class->set_property = pp_samba_set_property;
-  gobject_class->get_property = pp_samba_get_property;
   gobject_class->finalize = pp_samba_finalize;
-
-  /*
-   * Used for authentication dialog.
-   */
-  g_object_class_install_property (gobject_class, PROP_PARENT,
-    g_param_spec_pointer ("parent",
-                          "Parent",
-                          "Parent window",
-                          G_PARAM_READWRITE));
 }
 
 static void
@@ -133,42 +80,17 @@ pp_samba_new (GtkWindow   *parent,
               const gchar *hostname)
 {
   return g_object_new (PP_TYPE_SAMBA,
-                       "parent", parent,
                        "hostname", hostname,
                        NULL);
 }
 
 typedef struct
 {
-  gchar    *server;
-  gchar    *share;
-  gchar    *workgroup;
-  gchar    *username;
-  gchar    *password;
-} SMBAuthInfo;
-
-static void
-smb_auth_info_free (SMBAuthInfo *auth_info)
-{
-  if (auth_info)
-    {
-      g_free (auth_info->server);
-      g_free (auth_info->share);
-      g_free (auth_info->workgroup);
-      g_free (auth_info->username);
-      g_free (auth_info->password);
-      g_free (auth_info);
-    }
-}
-
-typedef struct
-{
+  PpSamba       *samba;
   PpDevicesList *devices;
   GMainContext  *context;
   gboolean       waiting;
   gboolean       auth_if_needed;
-  GtkWindow     *parent;
-  SMBAuthInfo   *auth_info;
   gboolean       hostname_set;
   gboolean       cancelled;
 } SMBData;
@@ -179,61 +101,44 @@ smb_data_free (SMBData *data)
   if (data)
     {
       pp_devices_list_free (data->devices);
-      smb_auth_info_free (data->auth_info);
-      g_object_unref (data->parent);
 
       g_free (data);
     }
 }
 
-static void
-auth_cb (PpAuthenticationDialog *auth_dialog,
-         gint                    response_id,
-         const gchar            *username,
-         const gchar            *password,
-         gpointer                user_data)
-{
-  SMBData *data = (SMBData *) user_data;
-
-  if (username && username[0] != '\0')
-    {
-      g_free (data->auth_info->username);
-      data->auth_info->username = g_strdup (username);
-    }
-
-  if (password && password[0] != '\0')
-    {
-      g_free (data->auth_info->password);
-      data->auth_info->password = g_strdup (password);
-    }
-
-  g_object_unref (auth_dialog);
-
-  if (response_id == GTK_RESPONSE_CANCEL ||
-      response_id == GTK_RESPONSE_DELETE_EVENT)
-    data->cancelled = TRUE;
-
-  data->waiting = FALSE;
-}
-
 static gboolean
 get_auth_info (gpointer user_data)
 {
-  PpAuthenticationDialog *auth_dialog;
-  SMBData                *data = (SMBData *) user_data;
-  gchar                  *text;
+  SMBData *data = (SMBData *) user_data;
+  PpSamba *samba = PP_SAMBA (data->samba);
 
-  /* Translators: Samba server needs authentication of the user to show list of its printers. */
-  text = g_strdup_printf (_("Enter your username and password to view printers available on %s."),
-                          data->auth_info->server);
-  auth_dialog = pp_authentication_dialog_new (data->parent,
-                                              text,
-                                              data->auth_info->username);
-  g_signal_connect (auth_dialog, "response", G_CALLBACK (auth_cb), user_data);
+  samba->priv->waiting = TRUE;
 
-  g_free (text);
+  g_signal_emit_by_name (samba, "authentication-required");
 
   return FALSE;
+}
+
+void
+pp_samba_set_auth_info (PpSamba     *samba,
+                        const gchar *username,
+                        const gchar *password)
+{
+  PpSambaPrivate *priv = samba->priv;
+
+  if ((username != NULL) && (username[0] != '\0'))
+    {
+      g_free (priv->username);
+      priv->username = g_strdup (username);
+    }
+
+  if ((password != NULL) && (password[0] != '\0'))
+    {
+      g_free (priv->password);
+      priv->password = g_strdup (password);
+    }
+
+  priv->waiting = FALSE;
 }
 
 static void
@@ -247,21 +152,20 @@ auth_fn (SMBCCTX    *smb_context,
          char       *password,
          int         pwmaxlen)
 {
+  PpSamba *samba;
   GSource *source;
   SMBData *data;
 
   data = (SMBData *) smbc_getOptionUserData (smb_context);
+  samba = data->samba;
 
   if (!data->cancelled)
     {
-      data->auth_info = g_new (SMBAuthInfo, 1);
-      data->auth_info->server = g_strdup (server);
-      data->auth_info->share = g_strdup (share);
-      data->auth_info->workgroup = g_strdup (workgroup);
-      data->auth_info->username = g_strdup (username);
-      data->auth_info->password = g_strdup (password);
-
-      data->waiting = TRUE;
+      samba->priv->server = g_strdup (server);
+      samba->priv->share = g_strdup (share);
+      samba->priv->workgroup = g_strdup (workgroup);
+      samba->priv->username = g_strdup (username);
+      samba->priv->password = g_strdup (password);
 
       source = g_idle_source_new ();
       g_source_set_callback (source,
@@ -276,19 +180,16 @@ auth_fn (SMBCCTX    *smb_context,
        * from this synchronous callback so we are blocking
        * until we get them
        */
-      while (data->waiting)
+      while (samba->priv->waiting)
         {
           g_usleep (POLL_DELAY);
         }
 
-      if (g_strcmp0 (username, data->auth_info->username) != 0)
-        g_strlcpy (username, data->auth_info->username, unmaxlen);
+      if (g_strcmp0 (username, samba->priv->username) != 0)
+        g_strlcpy (username, samba->priv->username, unmaxlen);
 
-      if (g_strcmp0 (password, data->auth_info->password) != 0)
-        g_strlcpy (password, data->auth_info->password, pwmaxlen);
-
-      smb_auth_info_free (data->auth_info);
-      data->auth_info = NULL;
+      if (g_strcmp0 (password, samba->priv->password) != 0)
+        g_strlcpy (password, samba->priv->password, pwmaxlen);
     }
 }
 
@@ -448,6 +349,7 @@ _pp_samba_get_devices_thread (GSimpleAsyncResult *res,
   data = g_simple_async_result_get_op_res_gpointer (res);
   data->devices = g_new0 (PpDevicesList, 1);
   data->devices->devices = NULL;
+  data->samba = PP_SAMBA (object);
 
   g_mutex_lock (&mutex);
 
@@ -493,7 +395,6 @@ pp_samba_get_devices_async (PpSamba             *samba,
                             gpointer             user_data)
 {
   GSimpleAsyncResult *res;
-  PpSambaPrivate     *priv = samba->priv;
   SMBData            *data;
   gchar              *hostname = NULL;
 
@@ -504,7 +405,6 @@ pp_samba_get_devices_async (PpSamba             *samba,
   data->devices = NULL;
   data->context = g_main_context_default ();
   data->hostname_set = hostname != NULL;
-  data->parent = g_object_ref (priv->parent);
   data->auth_if_needed = auth_if_needed;
 
   g_simple_async_result_set_check_cancellable (res, cancellable);
