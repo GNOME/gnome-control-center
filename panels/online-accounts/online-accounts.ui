@@ -5,65 +5,126 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkScrolledWindow">
+      <object class="GtkOverlay">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="hscrollbar_policy">never</property>
-        <property name="min_content_height">350</property>
-        <child>
-          <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <child type="overlay">
+          <object class="GtkRevealer" id="notification_revealer">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">18</property>
-            <property name="border-width">8</property>
-            <property name="orientation">vertical</property>
-            <property name="margin">6</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Connect to your data in the cloud</property>
-                <attributes>
-                  <attribute name="scale" value="1.66" />
-                </attributes>
-              </object>
-            </child>
-            <child>
-              <object class="GtkFrame" id="accounts_frame">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkListBox" id="accounts_listbox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin-top">24</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Add an account</property>
-                <attributes>
-                  <attribute name="weight" value="bold" />
-                </attributes>
-              </object>
-            </child>
+            <property name="halign">center</property>
+            <property name="valign">start</property>
+            <property name="transition_type">slide-down</property>
             <child>
               <object class="GtkFrame">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkListBox" id="providers_listbox">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
+                    <property name="can_focus">False</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="notification_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="undo_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="label" translatable="yes">Undo</property>
+                        <signal name="clicked" handler="on_undo_button_clicked" object="CcGoaPanel" swapped="no" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="relief">none</property>
+                        <signal name="clicked" handler="on_notification_closed" object="CcGoaPanel" swapped="no" />
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon-name">window-close-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <style>
+                  <class name="app-notification" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="min_content_height">350</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">18</property>
+                <property name="border-width">8</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">6</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Connect to your data in the cloud</property>
+                    <attributes>
+                      <attribute name="scale" value="1.66" />
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame" id="accounts_frame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkListBox" id="accounts_listbox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="selection_mode">none</property>
+                        <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin-top">24</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Add an account</property>
+                    <attributes>
+                      <attribute name="weight" value="bold" />
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkListBox" id="providers_listbox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="selection_mode">none</property>
+                        <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -127,6 +188,7 @@
                     <property name="valign">end</property>
                     <property name="halign">end</property>
                     <property name="label" translatable="yes">Remove Account</property>
+                    <signal name="clicked" handler="on_remove_button_clicked" object="CcGoaPanel" swapped="yes" />
                     <style>
                       <class name="destructive-action" />
                     </style>
