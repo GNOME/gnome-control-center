@@ -51,6 +51,7 @@ struct _CcGoaPanel
   GtkWidget *notification_label;
   GtkWidget *notification_revealer;
   GtkWidget *providers_listbox;
+  GtkWidget *remove_account_button;
   GtkWidget *stack;
   GtkWidget *accounts_vbox;
 
@@ -425,6 +426,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_label);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, providers_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, remove_account_button);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_edit_account_dialog_delete_event);
@@ -450,6 +452,7 @@ show_page_account (CcGoaPanel  *panel,
   GList *l;
   GoaProvider *provider;
   GoaAccount *account;
+  gboolean is_locked;
   const gchar *provider_name;
   const gchar *provider_type;
   gchar *title;
@@ -469,6 +472,10 @@ show_page_account (CcGoaPanel  *panel,
   g_list_free (children);
 
   account = goa_object_peek_account (object);
+
+  is_locked = goa_account_get_is_locked (account);
+  gtk_widget_set_visible (panel->remove_account_button, !is_locked);
+
   provider_type = goa_account_get_provider_type (account);
   provider = goa_provider_get_for_provider_type (provider_type);
 
