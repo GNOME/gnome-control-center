@@ -34,6 +34,8 @@
 #include "cc-online-accounts-add-account-dialog.h"
 #include "cc-online-accounts-resources.h"
 
+#include "shell/list-box-helper.h"
+
 struct _CcGoaPanel
 {
   CcPanel parent_instance;
@@ -325,10 +327,19 @@ cc_goa_panel_init (CcGoaPanel *panel)
 
   gtk_widget_init_template (GTK_WIDGET (panel));
 
+  gtk_list_box_set_header_func (GTK_LIST_BOX (panel->accounts_listbox),
+                                cc_list_box_update_header_func,
+                                NULL,
+                                NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (panel->accounts_listbox),
                               sort_func,
                               panel,
                               NULL);
+
+  gtk_list_box_set_header_func (GTK_LIST_BOX (panel->providers_listbox),
+                                cc_list_box_update_header_func,
+                                NULL,
+                                NULL);
 
   monitor = g_network_monitor_get_default();
 
