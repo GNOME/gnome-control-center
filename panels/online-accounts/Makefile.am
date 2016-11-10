@@ -17,8 +17,6 @@ BUILT_SOURCES =				\
 
 libonline_accounts_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
-	cc-online-accounts-add-account-dialog.c	\
-	cc-online-accounts-add-account-dialog.h	\
 	cc-online-accounts-panel.c	\
 	cc-online-accounts-panel.h
 

@@ -30,8 +30,6 @@
 #include <goabackend/goabackend.h>
 
 #include "cc-online-accounts-panel.h"
-
-#include "cc-online-accounts-add-account-dialog.h"
 #include "cc-online-accounts-resources.h"
 
 #include "shell/list-box-helper.h"
