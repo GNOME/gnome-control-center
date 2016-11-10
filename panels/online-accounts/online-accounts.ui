@@ -127,6 +127,21 @@
                         <property name="can_focus">True</property>
                         <property name="selection_mode">none</property>
                         <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
+                        <child>
+                          <object class="GtkListBoxRow" id="more_providers_row">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="margin">12</property>
+                                <property name="icon-name">view-more-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
