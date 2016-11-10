@@ -87,10 +87,35 @@
       </object>
     </child>
     <child internal-child="vbox">
-      <object class="GtkBox" id="accounts_vbox">
+      <object class="GtkBox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="margin">18</property>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="transition_type">crossfade</property>
+            <child>
+              <object class="GtkBox" id="new_account_vbox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="name">new-account</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="accounts_vbox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin">18</property>
+              </object>
+              <packing>
+                <property name="name">editor</property>
+              </packing>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </object>

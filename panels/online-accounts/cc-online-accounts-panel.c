@@ -45,6 +45,7 @@ struct _CcGoaPanel
   GtkWidget *edit_account_dialog;
   GtkWidget *edit_account_headerbar;
   GtkWidget *providers_listbox;
+  GtkWidget *stack;
   GtkWidget *accounts_vbox;
 };
 
@@ -344,6 +345,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, providers_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_edit_account_dialog_delete_event);
   gtk_widget_class_bind_template_callback (widget_class, on_listbox_row_activated);
@@ -371,6 +373,9 @@ show_page_account (CcGoaPanel  *panel,
   provider = NULL;
 
   panel->active_object = object;
+
+  /* Move to the account editor page */
+  gtk_stack_set_visible_child_name (GTK_STACK (panel->stack), "editor");
 
   /* Out with the old */
   children = gtk_container_get_children (GTK_CONTAINER (panel->accounts_vbox));
