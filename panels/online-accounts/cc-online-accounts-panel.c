@@ -49,6 +49,7 @@ struct _CcGoaPanel
   GtkWidget *new_account_vbox;
   GtkWidget *notification_label;
   GtkWidget *notification_revealer;
+  GtkWidget *offline_label;
   GtkWidget *providers_listbox;
   GtkWidget *remove_account_button;
   GtkWidget *stack;
@@ -417,6 +418,10 @@ cc_goa_panel_init (CcGoaPanel *panel)
   monitor = g_network_monitor_get_default();
 
   g_object_bind_property (monitor, "network-available",
+                          panel->offline_label, "visible",
+                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+
+  g_object_bind_property (monitor, "network-available",
                           panel->providers_listbox, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
@@ -450,7 +455,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
   fill_accounts_listbox (panel);
   goa_provider_get_all (get_all_providers_cb, panel);
 
-  gtk_widget_show_all (GTK_WIDGET (panel));
+  gtk_widget_show (GTK_WIDGET (panel));
 }
 
 static const char *
@@ -498,6 +503,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, new_account_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_label);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, offline_label);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, providers_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, remove_account_button);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, stack);
