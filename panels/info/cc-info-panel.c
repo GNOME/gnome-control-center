@@ -351,8 +351,15 @@ get_graphics_data (void)
   display = gdk_display_get_default ();
 
 #if defined(GDK_WINDOWING_X11) || defined(GDK_WINDOWING_WAYLAND)
-  if (GDK_IS_X11_DISPLAY (display) ||
-      GDK_IS_WAYLAND_DISPLAY (display))
+  gboolean x11_or_wayland = FALSE;
+#ifdef GDK_WINDOWING_X11
+  x11_or_wayland = GDK_IS_X11_DISPLAY (display);
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  x11_or_wayland = x11_or_wayland || GDK_IS_WAYLAND_DISPLAY (display);
+#endif
+
+  if (x11_or_wayland)
     {
       char *discrete_renderer = NULL;
       char *renderer;
