@@ -70,10 +70,11 @@
             <property name="hscrollbar_policy">never</property>
             <property name="min_content_height">350</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkGrid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">18</property>
+                <property name="row-spacing">18</property>
+                <property name="column-spacing">18</property>
                 <property name="orientation">vertical</property>
                 <property name="margin_start">32</property>
                 <property name="margin_end">32</property>
@@ -81,71 +82,109 @@
                 <property name="margin_bottom">18</property>
                 <property name="hexpand">True</property>
                 <property name="width-request">300</property>
+
+                <!--
+                  Stub boxes to pull the widgets to the middle, and yet allow them to
+                  grow and cover a third of the available space
+                -->
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Connect to your data in the cloud</property>
-                    <attributes>
-                      <attribute name="scale" value="1.66" />
-                    </attributes>
+                    <property name="hexpand">True</property>
                   </object>
+                  <packing>
+                    <property name="top-attach">0</property>
+                    <property name="left-attach">0</property>
+                  </packing>
                 </child>
+
                 <child>
-                  <object class="GtkLabel" id="offline_label">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">No internet connection — connect to setup new online accounts</property>
+                    <property name="hexpand">True</property>
                   </object>
+                  <packing>
+                    <property name="top-attach">0</property>
+                    <property name="left-attach">2</property>
+                  </packing>
                 </child>
+
                 <child>
-                  <object class="GtkFrame" id="accounts_frame">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">18</property>
+                    <property name="orientation">vertical</property>
+                    <property name="hexpand">True</property>
+                    <property name="width-request">300</property>
+
                     <child>
-                      <object class="GtkListBox" id="accounts_listbox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="selection_mode">none</property>
-                        <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Connect to your data in the cloud</property>
+                        <attributes>
+                          <attribute name="scale" value="1.66" />
+                        </attributes>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin-top">24</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Add an account</property>
-                    <attributes>
-                      <attribute name="weight" value="bold" />
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkFrame">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkListBox" id="providers_listbox">
+                      <object class="GtkLabel" id="offline_label">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="selection_mode">none</property>
-                        <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
+                        <property name="can_focus">False</property>
+                        <property name="wrap">True</property>
+                        <property name="label" translatable="yes">No internet connection — connect to setup new online accounts</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame" id="accounts_frame">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkListBoxRow" id="more_providers_row">
+                          <object class="GtkListBox" id="accounts_listbox">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="selection_mode">none</property>
+                            <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin-top">24</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Add an account</property>
+                        <attributes>
+                          <attribute name="weight" value="bold" />
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkListBox" id="providers_listbox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="selection_mode">none</property>
+                            <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkListBoxRow" id="more_providers_row">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <property name="margin">12</property>
-                                <property name="icon-name">view-more-symbolic</property>
+                                <property name="can_focus">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="margin">12</property>
+                                    <property name="icon-name">view-more-symbolic</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -153,6 +192,10 @@
                       </object>
                     </child>
                   </object>
+                  <packing>
+                    <property name="top-attach">0</property>
+                    <property name="left-attach">1</property>
+                  </packing>
                 </child>
               </object>
             </child>
