@@ -46,8 +46,6 @@ libprinters_la_SOURCES =		\
 	pp-job.h			\
 	pp-jobs-dialog.c		\
 	pp-jobs-dialog.h		\
-	pp-authentication-dialog.c	\
-	pp-authentication-dialog.h	\
 	pp-samba.c			\
 	pp-samba.h			\
 	pp-print-device.c		\
