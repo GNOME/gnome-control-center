@@ -76,8 +76,7 @@ pp_samba_init (PpSamba *samba)
 }
 
 PpSamba *
-pp_samba_new (GtkWindow   *parent,
-              const gchar *hostname)
+pp_samba_new (const gchar *hostname)
 {
   return g_object_new (PP_TYPE_SAMBA,
                        "hostname", hostname,

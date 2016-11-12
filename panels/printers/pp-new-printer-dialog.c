@@ -460,7 +460,7 @@ authenticate_samba_server (GtkButton *button,
         {
           g_clear_object (&priv->samba_host);
 
-          priv->samba_host = pp_samba_new (GTK_WINDOW (priv->dialog), server_name);
+          priv->samba_host = pp_samba_new (server_name);
           g_signal_connect_object (priv->samba_host,
                                    "authentication-required",
                                    G_CALLBACK (on_authentication_required),
@@ -1562,8 +1562,7 @@ search_for_remote_printers (THostSearchData *data)
         g_object_set (priv->lpd_host, "port", data->host_port, NULL);
     }
 
-  priv->samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
-                                   data->host_name);
+  priv->samba_host = pp_samba_new (data->host_name);
 
   update_dialog_state (data->dialog);
 
@@ -2060,7 +2059,7 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   priv->samba_searching = TRUE;
   update_dialog_state (dialog);
 
-  samba = pp_samba_new (GTK_WINDOW (priv->dialog), NULL);
+  samba = pp_samba_new (NULL);
   pp_samba_get_devices_async (samba, FALSE, priv->cancellable, get_samba_devices_cb, dialog);
 }
 
