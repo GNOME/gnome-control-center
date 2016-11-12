@@ -37,17 +37,44 @@
         <property name="visible">True</property>
         <property name="show-close-button">False</property>
         <child>
-          <object class="GtkButton" id="new-printer-cancel-button">
-            <property name="label" translatable="yes">_Cancel</property>
+          <object class="GtkStack" id="headerbar-topleft-buttons">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_underline">True</property>
+            <property name="valign">center</property>
+            <child>
+              <object class="GtkButton" id="new-printer-cancel-button">
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="name">addprinter-page</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="go-back-button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">start</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">go-previous-symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="name">authentication-page</property>
+              </packing>
+            </child>
           </object>
         </child>
         <child>
           <object class="GtkStack" id="headerbar-topright-buttons">
             <property name="visible">True</property>
+            <property name="valign">center</property>
             <child>
               <object class="GtkButton" id="new-printer-add-button">
                 <property name="label" translatable="yes">_Add</property>

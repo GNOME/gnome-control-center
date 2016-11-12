@@ -88,7 +88,6 @@ typedef struct
   PpSamba       *samba;
   PpDevicesList *devices;
   GMainContext  *context;
-  gboolean       waiting;
   gboolean       auth_if_needed;
   gboolean       hostname_set;
   gboolean       cancelled;
@@ -111,8 +110,6 @@ get_auth_info (gpointer user_data)
   SMBData *data = (SMBData *) user_data;
   PpSamba *samba = PP_SAMBA (data->samba);
 
-  samba->priv->waiting = TRUE;
-
   g_signal_emit_by_name (samba, "authentication-required");
 
   return FALSE;
@@ -125,17 +122,17 @@ pp_samba_set_auth_info (PpSamba     *samba,
 {
   PpSambaPrivate *priv = samba->priv;
 
+  g_free (priv->username);
   if ((username != NULL) && (username[0] != '\0'))
-    {
-      g_free (priv->username);
-      priv->username = g_strdup (username);
-    }
+    priv->username = g_strdup (username);
+  else
+    priv->username = NULL;
 
+  g_free (priv->password);
   if ((password != NULL) && (password[0] != '\0'))
-    {
-      g_free (priv->password);
-      priv->password = g_strdup (password);
-    }
+    priv->password = g_strdup (password);
+  else
+    priv->password = NULL;
 
   priv->waiting = FALSE;
 }
@@ -174,6 +171,8 @@ auth_fn (SMBCCTX    *smb_context,
       g_source_attach (source, data->context);
       g_source_unref (source);
 
+      samba->priv->waiting = TRUE;
+
       /*
        * smbclient needs to get authentication data
        * from this synchronous callback so we are blocking
@@ -184,11 +183,32 @@ auth_fn (SMBCCTX    *smb_context,
           g_usleep (POLL_DELAY);
         }
 
-      if (g_strcmp0 (username, samba->priv->username) != 0)
-        g_strlcpy (username, samba->priv->username, unmaxlen);
+      /* Samba tries to call the auth_fn again if we just set the values
+       * to NULL when we want to cancel the authentication 
+       */
+      if (samba->priv->username == NULL && samba->priv->password == NULL)
+        data->cancelled = TRUE;
 
-      if (g_strcmp0 (password, samba->priv->password) != 0)
-        g_strlcpy (password, samba->priv->password, pwmaxlen);
+      if (samba->priv->username != NULL)
+        {
+          if (g_strcmp0 (username, samba->priv->username) != 0)
+            g_strlcpy (username, samba->priv->username, unmaxlen);
+        }
+      else
+        {
+          username[0] = '\0';
+        }
+
+      if (samba->priv->password != NULL)
+        {
+          if (g_strcmp0 (password, samba->priv->password) != 0)
+            g_strlcpy (password, samba->priv->password, pwmaxlen);
+        }
+      else
+        {
+          password[0] = '\0';
+        }
+
     }
 }
 

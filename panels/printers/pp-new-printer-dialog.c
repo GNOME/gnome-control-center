@@ -267,6 +267,8 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
   GError                    *error = NULL;
   GList                     *iter;
 
+  g_object_ref (samba);
+
   result = pp_samba_get_devices_finish (samba, res, &error);
   g_object_unref (source_object);
 
@@ -291,8 +293,6 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
 
       if (!cancelled)
         {
-          remove_device_from_list (dialog,
-                                   data->server_name);
 
           if (result->devices != NULL)
             {
@@ -344,6 +344,9 @@ go_to_page (PpNewPrinterDialog *dialog,
 
   stack = GTK_STACK (WID ("headerbar-topright-buttons"));
   gtk_stack_set_visible_child_name (stack, page);
+
+  stack = GTK_STACK (WID ("headerbar-topleft-buttons"));
+  gtk_stack_set_visible_child_name (stack, page);
 }
 
 static gchar *
@@ -361,6 +364,7 @@ on_authenticate (GtkWidget *button,
 {
   PpNewPrinterDialog        *dialog = PP_NEW_PRINTER_DIALOG (user_data);
   PpNewPrinterDialogPrivate *priv = dialog->priv;
+  gchar                     *hostname = NULL;
   gchar                     *username = NULL;
   gchar                     *password = NULL;
 
@@ -379,6 +383,9 @@ on_authenticate (GtkWidget *button,
 
   gtk_header_bar_set_title (GTK_HEADER_BAR (WID ("headerbar")), _("Add Printer"));
   go_to_page (dialog, ADDPRINTER_PAGE);
+
+  g_object_get (PP_HOST (priv->samba_host), "hostname", &hostname, NULL);
+  remove_device_from_list (dialog, hostname);
 }
 
 static void
@@ -433,6 +440,23 @@ auth_entries_changed (GtkEditable *editable,
 
   g_clear_pointer (&username, g_free);
   g_clear_pointer (&password, g_free);
+}
+
+static void
+on_go_back_button_clicked (GtkButton *button,
+                           gpointer   user_data)
+{
+  PpNewPrinterDialog        *dialog = PP_NEW_PRINTER_DIALOG (user_data);
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+
+  pp_samba_set_auth_info (priv->samba_host, NULL, NULL);
+  g_clear_object (&priv->samba_host);
+
+  go_to_page (dialog, ADDPRINTER_PAGE);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (WID ("headerbar")), _("Add Printer"));
+  gtk_widget_set_sensitive (WID ("new-printer-add-button"), FALSE);
+
+  gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (priv->treeview));
 }
 
 static void
@@ -535,6 +559,7 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
   /* Authentication form widgets */
   g_signal_connect (WID ("username-entry"), "changed", G_CALLBACK (auth_entries_changed), dialog);
   g_signal_connect (WID ("password-entry"), "changed", G_CALLBACK (auth_entries_changed), dialog);
+  g_signal_connect (WID ("go-back-button"), "clicked", G_CALLBACK (on_go_back_button_clicked), dialog);
 
   /* Set junctions */
   widget = WID ("scrolledwindow1");
