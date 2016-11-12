@@ -377,6 +377,7 @@ on_authenticate (GtkWidget *button,
 
   pp_samba_set_auth_info (PP_SAMBA (priv->samba_host), username, password);
 
+  gtk_header_bar_set_title (GTK_HEADER_BAR (WID ("headerbar")), _("Add Printer"));
   go_to_page (dialog, ADDPRINTER_PAGE);
 }
 
@@ -386,10 +387,25 @@ on_authentication_required (PpHost   *host,
 {
   PpNewPrinterDialogPrivate *priv;
   PpNewPrinterDialog        *dialog = PP_NEW_PRINTER_DIALOG (user_data);
+  gchar                     *text, *hostname;
 
   priv = dialog->priv;
 
   gtk_header_bar_set_subtitle (GTK_HEADER_BAR (WID ("headerbar")), NULL);
+  gtk_header_bar_set_title (GTK_HEADER_BAR (WID ("headerbar")), _("Unlock Print Server"));
+
+  g_object_get (G_OBJECT (host), "hostname", &hostname, NULL);
+  /* Translators: Samba server needs authentication of the user to show list of its printers. */
+  text = g_strdup_printf (_("Unlock %s."), hostname);
+  gtk_label_set_text (GTK_LABEL (WID ("authentication-title")), text);
+  g_free (text);
+
+  /* Translators: Samba server needs authentication of the user to show list of its printers. */
+  text = g_strdup_printf (_("Enter username and password to view printers on %s."), hostname);
+  gtk_label_set_text (GTK_LABEL (WID ("authentication-text")), text);
+  g_free (hostname);
+  g_free (text);
+
   go_to_page (dialog, AUTHENTICATION_PAGE);
 
   g_signal_connect (WID ("authenticate-button"), "clicked", G_CALLBACK (on_authenticate), dialog);
