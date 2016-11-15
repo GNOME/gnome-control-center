@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <template class="UmCarousel" parent="GtkRevealer">
+    <property name="transition_duration">400</property>
+    <property name="reveal-child">True</property>
+    <child>
+      <object class="GtkOverlay">
+        <property name="visible">True</property>
+        <property name="hexpand">True</property>
+        <property name="border_width">16</property>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+            <style>
+              <class name="location-bar"/>
+            </style>
+          </object>
+        </child>
+        <child type="overlay">
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
+            <property name="border_width">12</property>
+            <child>
+              <object class="GtkButton" id="go_back_button">
+                <property name="visible">False</property>
+                <property name="can_focus">True</property>
+                <property name="valign">center</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon-size">4</property>
+                    <property name="icon_name">go-previous-symbolic</property>
+                  </object>
+                </child>
+                <signal name="clicked" handler="um_carousel_goto_previous_page" object="UmCarousel" swapped="no"/>
+              </object>
+              <packing>
+                <property name="pack_type">start</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="go_next_button">
+                <property name="can_focus">True</property>
+                <property name="valign">center</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon-size">4</property>
+                    <property name="icon_name">go-next-symbolic</property>
+                  </object>
+                </child>
+                <signal name="clicked" handler="um_carousel_goto_next_page" object="UmCarousel" swapped="no"/>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="pass-through">True</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

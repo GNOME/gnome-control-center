@@ -95,48 +95,18 @@
           <object class="GtkVBox" id="accounts-vbox">
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
-            <property name="border_width">12</property>
+            <child>
+              <object class="UmCarousel" id="carousel">
+                <property name="visible">True</property>
+              </object>
+            </child>
             <child>
               <object class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
                 <property name="spacing">18</property>
                 <child>
-                  <object class="GtkVBox" id="userlist-vbox">
-                    <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">0</property>
-                    <child>
-                      <object class="GtkScrolledWindow" id="list-scrolledwindow">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hscrollbar_policy">never</property>
-                        <property name="vscrollbar_policy">automatic</property>
-                        <property name="shadow_type">in</property>
-                        <child>
-                          <object class="GtkTreeView" id="list-treeview">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="headers_visible">False</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkVBox" id="main-user-vbox">
                     <property name="visible">True</property>
-                    <property name="sensitive">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
