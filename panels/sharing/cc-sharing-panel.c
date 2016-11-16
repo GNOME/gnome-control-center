@@ -32,6 +32,9 @@
 #include "cc-sharing-switch.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#endif
 #include <glib/gi18n.h>
 #include <config.h>
 
@@ -1154,6 +1157,11 @@ cc_sharing_panel_init (CcSharingPanel *self)
   cc_sharing_panel_setup_remote_login_dialog (self);
 
   /* screen sharing */
+#ifdef GDK_WINDOWING_WAYLAND
+  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+    gtk_widget_hide (WID ("screen-sharing-button"));
+  else
+#endif
   if (cc_sharing_panel_check_schema_available (self, VINO_SCHEMA_ID))
     cc_sharing_panel_setup_screen_sharing_dialog (self);
   else
