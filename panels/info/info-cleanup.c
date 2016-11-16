@@ -39,6 +39,8 @@ prettify_info (const char *info)
     { "Intel[(]R[)]", "Intel<sup>\302\256</sup>"},
     { "Core[(]TM[)]", "Core<sup>\342\204\242</sup>"},
     { "Atom[(]TM[)]", "Atom<sup>\342\204\242</sup>"},
+    { "Gallium .* on (AMD .*)", "\\1"},
+    { "(AMD .*) [(].*[)]", "\\1"},
     { "Graphics Controller", "Graphics"},
   };
 
@@ -64,13 +66,13 @@ prettify_info (const char *info)
           continue;
         }
 
-      new = g_regex_replace_literal (re,
-                                     pretty,
-                                     -1,
-                                     0,
-                                     rs[i].replacement,
-                                     0,
-                                     &error);
+      new = g_regex_replace (re,
+                             pretty,
+                             -1,
+                             0,
+                             rs[i].replacement,
+                             0,
+                             &error);
 
       g_regex_unref (re);
 
