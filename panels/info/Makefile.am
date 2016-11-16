@@ -1,3 +1,5 @@
+include $(top_srcdir)/Makefile.decl
+
 cappletname = info
 
 AM_CPPFLAGS =							\
@@ -26,6 +28,15 @@ libinfo_la_SOURCES =		\
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
+noinst_PROGRAMS = test-info-cleanup
+TEST_PROGS += $(noinst_PROGRAMS)
+test_info_cleanup_SOURCES =		\
+	test-info-cleanup.c		\
+	info-cleanup.h			\
+	info-cleanup.c
+test_info_cleanup_LDADD = $(libinfo_la_LIBADD)
+test_info_cleanup_CFLAGS = $(AM_CPPFLAGS) -DTEST_SRCDIR="\"$(srcdir)\""
+
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/info.gresource.xml)
 cc-info-resources.c: info.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_info $<
@@ -45,6 +56,6 @@ update-from-gsd:
 	git commit -m "info: Update from gnome-settings-daemon" $(SPACEFILES)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
-EXTRA_DIST = $(resource_files) info.gresource.xml
+EXTRA_DIST = $(resource_files) info.gresource.xml info-cleanup-test.txt
 
 -include $(top_srcdir)/git.mk
