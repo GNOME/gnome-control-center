@@ -22,6 +22,7 @@
 
 #include "cc-info-panel.h"
 #include "cc-info-resources.h"
+#include "info-cleanup.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -214,71 +215,6 @@ load_gnome_version (char **version,
   return ret;
 };
 
-typedef struct
-{
-  char *regex;
-  char *replacement;
-} ReplaceStrings;
-
-static char *
-prettify_info (const char *info)
-{
-  char *pretty;
-  int   i;
-  static const ReplaceStrings rs[] = {
-    { "Mesa DRI ", ""},
-    { "Intel[(]R[)]", "Intel<sup>\302\256</sup>"},
-    { "Core[(]TM[)]", "Core<sup>\342\204\242</sup>"},
-    { "Atom[(]TM[)]", "Atom<sup>\342\204\242</sup>"},
-    { "Graphics Controller", "Graphics"},
-  };
-
-  if (*info == '\0')
-    return NULL;
-
-  pretty = g_markup_escape_text (info, -1);
-  pretty = g_strchug (g_strchomp (pretty));
-
-  for (i = 0; i < G_N_ELEMENTS (rs); i++)
-    {
-      GError *error;
-      GRegex *re;
-      char   *new;
-
-      error = NULL;
-
-      re = g_regex_new (rs[i].regex, 0, 0, &error);
-      if (re == NULL)
-        {
-          g_warning ("Error building regex: %s", error->message);
-          g_error_free (error);
-          continue;
-        }
-
-      new = g_regex_replace_literal (re,
-                                     pretty,
-                                     -1,
-                                     0,
-                                     rs[i].replacement,
-                                     0,
-                                     &error);
-
-      g_regex_unref (re);
-
-      if (error != NULL)
-        {
-          g_warning ("Error replacing %s: %s", rs[i].regex, error->message);
-          g_error_free (error);
-          continue;
-        }
-
-      g_free (pretty);
-      pretty = new;
-    }
-
-  return pretty;
-}
-
 static void
 graphics_data_free (GraphicsData *gdata)
 {
@@ -318,7 +254,7 @@ get_renderer_from_session (void)
       return NULL;
     }
 
-  renderer = prettify_info (g_variant_get_string (renderer_variant, NULL));
+  renderer = info_cleanup (g_variant_get_string (renderer_variant, NULL));
   g_variant_unref (renderer_variant);
 
   return renderer;
@@ -348,7 +284,7 @@ get_renderer_from_helper (gboolean discrete_gpu)
   if (renderer == NULL || *renderer == '\0')
     goto out;
 
-  ret = prettify_info (renderer);
+  ret = info_cleanup (renderer);
 
 out:
   g_free (renderer);
@@ -772,7 +708,7 @@ get_cpu_info (const glibtop_sysinfo *info)
 
   g_hash_table_destroy (counts);
 
-  ret = prettify_info (cpu->str);
+  ret = info_cleanup (cpu->str);
   g_string_free (cpu, TRUE);
 
   return ret;

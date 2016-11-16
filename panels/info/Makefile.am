@@ -20,7 +20,9 @@ libinfo_la_SOURCES =		\
 	cc-info-panel.c		\
 	cc-info-panel.h		\
 	gsd-disk-space-helper.h	\
-	gsd-disk-space-helper.c
+	gsd-disk-space-helper.c	\
+	info-cleanup.h		\
+	info-cleanup.c
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
