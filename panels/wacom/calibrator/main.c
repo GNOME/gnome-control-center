@@ -178,7 +178,7 @@ static struct Calib* CalibratorXorgPrint(const char* const device_name0, const X
     c->threshold_doubleclick = thr_doubleclick;
 
     printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
-    printf("\tcurrent calibration values: min_x=%d, max_x=%d and min_y=%d, max_y=%d\n",
+    printf("\tcurrent calibration values: min_x=%lf, max_x=%lf and min_y=%lf, max_y=%lf\n",
                 c->old_axis.x_min, c->old_axis.x_max, c->old_axis.y_min, c->old_axis.y_max);
     printf("\tIf these values are estimated wrong, either supply it manually with the --precalib option, or run the 'get_precalib.sh' script to automatically get it (through HAL).\n");
 
@@ -323,7 +323,7 @@ static struct Calib* main_common(int argc, char** argv)
             device_axis.y_max = pre_axis.y_max;
 
         if (verbose) {
-            printf("DEBUG: Setting precalibration: %i, %i, %i, %i\n",
+            printf("DEBUG: Setting precalibration: %lf, %lf, %lf, %lf\n",
                 device_axis.x_min, device_axis.x_max,
                 device_axis.y_min, device_axis.y_max);
         }
@@ -343,10 +343,10 @@ static gboolean output_xorgconfd(const XYinfo new_axis, int swap_xy, int new_swa
     printf("Section \"InputClass\"\n");
     printf("	Identifier	\"calibration\"\n");
     printf("	MatchProduct	\"%s\"\n", sysfs_name);
-    printf("	Option	\"MinX\"	\"%d\"\n", new_axis.x_min);
-    printf("	Option	\"MaxX\"	\"%d\"\n", new_axis.x_max);
-    printf("	Option	\"MinY\"	\"%d\"\n", new_axis.y_min);
-    printf("	Option	\"MaxY\"	\"%d\"\n", new_axis.y_max);
+    printf("	Option	\"MinX\"	\"%lf\"\n", new_axis.x_min);
+    printf("	Option	\"MaxX\"	\"%lf\"\n", new_axis.x_max);
+    printf("	Option	\"MinY\"	\"%lf\"\n", new_axis.y_min);
+    printf("	Option	\"MaxY\"	\"%lf\"\n", new_axis.y_max);
     if (swap_xy != 0)
         printf("	Option	\"SwapXY\"	\"%d\" # unless it was already set to 1\n", new_swap_xy);
     printf("EndSection\n");
