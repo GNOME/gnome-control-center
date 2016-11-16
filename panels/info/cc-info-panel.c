@@ -268,6 +268,7 @@ get_renderer_from_helper (gboolean discrete_gpu)
   char **envp = NULL;
   char *renderer = NULL;
   char *ret = NULL;
+  GError *error = NULL;
 
   if (discrete_gpu)
     {
@@ -275,8 +276,14 @@ get_renderer_from_helper (gboolean discrete_gpu)
       envp = g_environ_setenv (envp, "DRI_PRIME", "1", TRUE);
     }
 
-  if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, NULL))
-    goto out;
+  if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error))
+    {
+      g_debug ("Failed to get %s GPU: %s",
+               discrete_gpu ? "discrete" : "integrated",
+               error->message);
+      g_error_free (error);
+      goto out;
+    }
 
   if (!g_spawn_check_exit_status (status, NULL))
     goto out;
