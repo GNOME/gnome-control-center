@@ -88,8 +88,47 @@ prettify_info (const char *info)
   return pretty;
 }
 
+static char *
+remove_duplicate_whitespace (const char *old)
+{
+  char   *new;
+  GRegex *re;
+  GError *error;
+
+  error = NULL;
+  re = g_regex_new ("[ \t\n\r]+", G_REGEX_MULTILINE, 0, &error);
+  if (re == NULL)
+    {
+      g_warning ("Error building regex: %s", error->message);
+      g_error_free (error);
+      return g_strdup (old);
+    }
+  new = g_regex_replace (re,
+                         old,
+                         -1,
+                         0,
+                         " ",
+                         0,
+                         &error);
+  g_regex_unref (re);
+  if (new == NULL)
+    {
+      g_warning ("Error replacing string: %s", error->message);
+      g_error_free (error);
+      return g_strdup (old);
+    }
+
+  return new;
+}
+
 char *
 info_cleanup (const char *input)
 {
-  return prettify_info (input);
+  char *pretty, *ret;
+
+  pretty = prettify_info (input);
+  ret = remove_duplicate_whitespace (pretty);
+  g_free (pretty);
+
+  return ret;
 }

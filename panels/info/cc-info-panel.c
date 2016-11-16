@@ -619,40 +619,6 @@ get_primary_disc_info (CcInfoPanel *self)
 }
 
 static char *
-remove_duplicate_whitespace (const char *old)
-{
-  char   *new;
-  GRegex *re;
-  GError *error;
-
-  error = NULL;
-  re = g_regex_new ("[ \t\n\r]+", G_REGEX_MULTILINE, 0, &error);
-  if (re == NULL)
-    {
-      g_warning ("Error building regex: %s", error->message);
-      g_error_free (error);
-      return g_strdup (old);
-    }
-  new = g_regex_replace (re,
-                         old,
-                         -1,
-                         0,
-                         " ",
-                         0,
-                         &error);
-  g_regex_unref (re);
-  if (new == NULL)
-    {
-      g_warning ("Error replacing string: %s", error->message);
-      g_error_free (error);
-      return g_strdup (old);
-    }
-
-  return new;
-}
-
-
-static char *
 get_cpu_info (const glibtop_sysinfo *info)
 {
   GHashTable    *counts;
@@ -694,22 +660,21 @@ get_cpu_info (const glibtop_sysinfo *info)
   g_hash_table_iter_init (&iter, counts);
   while (g_hash_table_iter_next (&iter, &key, &value))
     {
-      char *stripped;
+      char *cleanedup;
       int   count;
 
       count = GPOINTER_TO_INT (value);
-      stripped = remove_duplicate_whitespace ((const char *)key);
+      cleanedup = info_cleanup ((const char *) key);
       if (count > 1)
-        g_string_append_printf (cpu, "%s \303\227 %d ", stripped, count);
+        g_string_append_printf (cpu, "%s \303\227 %d ", cleanedup, count);
       else
-        g_string_append_printf (cpu, "%s ", stripped);
-      g_free (stripped);
+        g_string_append_printf (cpu, "%s ", cleanedup);
+      g_free (cleanedup);
     }
 
   g_hash_table_destroy (counts);
 
-  ret = info_cleanup (cpu->str);
-  g_string_free (cpu, TRUE);
+  ret = g_string_free (cpu, FALSE);
 
   return ret;
 }
