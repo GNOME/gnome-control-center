@@ -737,10 +737,10 @@ update_dialog_state (PpNewPrinterDialog *dialog)
       gtk_header_bar_set_subtitle (GTK_HEADER_BAR (header), NULL);
     }
 
-  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->store), &iter) && !searching)
-    gtk_stack_set_visible_child_name (GTK_STACK (stack), "no-printers-page");
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->store), &iter))
+      gtk_stack_set_visible_child_name (GTK_STACK (stack), "standard-page");
   else
-      gtk_stack_set_visible_child_name (GTK_STACK (stack), searching ? "loading-page": "standard-page");
+      gtk_stack_set_visible_child_name (GTK_STACK (stack), searching ? "loading-page" : "no-printers-page");
 }
 
 static void
