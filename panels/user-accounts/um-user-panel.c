@@ -33,7 +33,6 @@
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
 #include <act/act.h>
-#include <libgd/gd-notification.h>
 #include <cairo-gobject.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -1043,11 +1042,17 @@ account_type_changed (GtkToggleButton    *button,
 }
 
 static void
+dismiss_notification (CcUserPanelPrivate *d)
+{
+        gtk_revealer_set_reveal_child (GTK_REVEALER (d->notification), FALSE);
+}
+
+static void
 restart_now (CcUserPanelPrivate *d)
 {
         GDBusConnection *bus;
 
-        gd_notification_dismiss (GD_NOTIFICATION (d->notification));
+        gtk_revealer_set_reveal_child (GTK_REVEALER (d->notification), FALSE);
 
         bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
         g_dbus_connection_call (bus,
@@ -1064,40 +1069,14 @@ restart_now (CcUserPanelPrivate *d)
 static void
 show_restart_notification (CcUserPanelPrivate *d, const gchar *locale)
 {
-        GtkWidget *box;
-        GtkWidget *label;
-        GtkWidget *button;
         gchar *current_locale;
-
-        if (d->notification)
-                return;
 
         if (locale) {
                 current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
                 setlocale (LC_MESSAGES, locale);
         }
 
-        d->notification = gd_notification_new ();
-        g_object_add_weak_pointer (G_OBJECT (d->notification), (gpointer *)&d->notification);
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-        gtk_widget_set_margin_start (box, 6);
-        gtk_widget_set_margin_end (box, 6);
-        gtk_widget_set_margin_top (box, 6);
-        gtk_widget_set_margin_bottom (box, 6);
-        label = gtk_label_new (_("Your session needs to be restarted for changes to take effect"));
-        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-        gtk_label_set_max_width_chars (GTK_LABEL (label), 30);
-        g_object_set (G_OBJECT (label), "xalign", 0, NULL);
-        button = gtk_button_new_with_label (_("Restart Now"));
-        gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-        g_signal_connect_swapped (button, "clicked", G_CALLBACK (restart_now), d);
-        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
-        gtk_widget_show_all (box);
-
-        gtk_container_add (GTK_CONTAINER (d->notification), box);
-        gtk_overlay_add_overlay (GTK_OVERLAY (get_widget (d, "overlay")), d->notification);
-        gtk_widget_show (d->notification);
+        gtk_revealer_set_reveal_child (GTK_REVEALER (d->notification), TRUE);
 
         if (locale) {
                 setlocale (LC_MESSAGES, current_locale);
@@ -1558,6 +1537,14 @@ setup_main_window (CcUserPanel *self)
         GError *error = NULL;
         gchar *names[3];
         gboolean loaded;
+
+        d->notification = get_widget (d, "notification");
+
+        button = get_widget (d, "restart-button");
+        g_signal_connect_swapped (button, "clicked", G_CALLBACK (restart_now), d);
+
+        button = get_widget (d, "dismiss-button");
+        g_signal_connect_swapped (button, "clicked", G_CALLBACK (dismiss_notification), d);
 
         userlist = get_widget (d, "list-treeview");
         store = gtk_list_store_new (NUM_USER_LIST_COLS,
