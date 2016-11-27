@@ -3,6 +3,53 @@
   <!-- interface-requires gtk+ 3.0 -->
     <object class="GtkOverlay" id="overlay">
       <property name="visible">True</property>
+      <child type="overlay">
+        <object class="GtkRevealer" id="notification">
+          <property name="visible">True</property>
+          <property name="halign">GTK_ALIGN_CENTER</property>
+          <property name="valign">GTK_ALIGN_START</property>
+          <child>
+            <object class="GtkBox">
+              <property name="visible">True</property>
+              <property name="spacing">6</property>
+              <style>
+                <class name="app-notification"/>
+              </style>
+              <child>
+                <object class="GtkLabel">
+                  <property name="visible">True</property>
+                  <property name="wrap">True</property>
+                  <property name="max_width_chars">30</property>
+                  <property name="label" translatable="yes">Your session needs to be restarted for changes to take effect</property>
+                </object>
+              </child>
+              <child>
+                <object class="GtkButton" id="restart-button">
+                  <property name="visible">True</property>
+                  <property name="can_focus">True</property>
+                  <property name="valign">GTK_ALIGN_CENTER</property>
+                  <property name="label" translatable="yes">Restart Now</property>
+                </object>
+              </child>
+              <child>
+                <object class="GtkButton" id="dismiss-button">
+                  <property name="visible">True</property>
+                  <property name="valign">GTK_ALIGN_CENTER</property>
+                  <style>
+                    <class name="flat"/>
+                  </style>
+                  <child>
+                    <object class="GtkImage">
+                      <property name="visible">True</property>
+                      <property name="icon_name">window-close-symbolic</property>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
     <child>
       <object class="GtkBox" id="vbox_region">
         <property name="visible">True</property>

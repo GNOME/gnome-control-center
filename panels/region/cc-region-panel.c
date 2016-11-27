@@ -47,8 +47,6 @@
 
 #include <act/act.h>
 
-#include <libgd/gd-notification.h>
-
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
 #define KEY_INPUT_SOURCES        "sources"
 
@@ -209,7 +207,7 @@ restart_now (CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
 
-        gd_notification_dismiss (GD_NOTIFICATION (self->priv->notification));
+        gtk_revealer_set_reveal_child (GTK_REVEALER (self->priv->notification), FALSE);
 
         g_dbus_proxy_call (priv->session,
                            "Logout",
@@ -223,47 +221,27 @@ show_restart_notification (CcRegionPanel *self,
                            const gchar   *locale)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GtkWidget *box;
-        GtkWidget *label;
-        GtkWidget *button;
         gchar *current_locale = NULL;
-
-        if (priv->notification)
-                return;
 
         if (locale) {
                 current_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
                 setlocale (LC_MESSAGES, locale);
         }
 
-        priv->notification = gd_notification_new ();
-        g_object_add_weak_pointer (G_OBJECT (priv->notification),
-                                   (gpointer *)&priv->notification);
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-        gtk_widget_set_margin_start (box, 6);
-        gtk_widget_set_margin_end (box, 6);
-        gtk_widget_set_margin_top (box, 6);
-        gtk_widget_set_margin_bottom (box, 6);
-        label = gtk_label_new (_("Your session needs to be restarted for changes to take effect"));
-        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-        gtk_label_set_max_width_chars (GTK_LABEL (label), 30);
-        g_object_set (G_OBJECT (label), "xalign", 0, NULL);
-        button = gtk_button_new_with_label (_("Restart Now"));
-        gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-        g_signal_connect_swapped (button, "clicked",
-                                  G_CALLBACK (restart_now), self);
-        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
-        gtk_widget_show_all (box);
-
-        gtk_container_add (GTK_CONTAINER (priv->notification), box);
-        gtk_overlay_add_overlay (GTK_OVERLAY (self->priv->overlay), priv->notification);
-        gtk_widget_show (priv->notification);
+        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->notification), TRUE);
 
         if (locale) {
                 setlocale (LC_MESSAGES, current_locale);
                 g_free (current_locale);
         }
+}
+
+static void
+dismiss_notification (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+
+        gtk_revealer_set_reveal_child (GTK_REVEALER (priv->notification), FALSE);
 }
 
 typedef struct {
@@ -1818,6 +1796,7 @@ static void
 cc_region_panel_init (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv;
+        GtkWidget *button;
 	GError *error = NULL;
 
 	priv = self->priv = REGION_PANEL_PRIVATE (self);
@@ -1847,6 +1826,14 @@ cc_region_panel_init (CcRegionPanel *self)
                                   priv->cancellable,
                                   session_proxy_ready,
                                   self);
+
+        priv->notification = GTK_WIDGET (gtk_builder_get_object (priv->builder, "notification"));
+
+        button = GTK_WIDGET (gtk_builder_get_object (priv->builder, "restart-button"));
+        g_signal_connect_swapped (button, "clicked", G_CALLBACK (restart_now), self);
+
+        button = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dismiss-button"));
+        g_signal_connect_swapped (button, "clicked", G_CALLBACK (dismiss_notification), self);
 
         setup_login_button (self);
         setup_language_section (self);
