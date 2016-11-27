@@ -1113,9 +1113,7 @@ language_response (GtkDialog         *dialog,
         GtkWidget *button;
         ActUser *user;
         const gchar *lang, *account_language;
-        gchar *current_language;
         gchar *name = NULL;
-        gboolean self_selected;
 
         if (response_id != GTK_RESPONSE_OK) {
                 gtk_widget_hide (GTK_WIDGET (dialog));
@@ -1124,18 +1122,11 @@ language_response (GtkDialog         *dialog,
 
         user = get_selected_user (d);
         account_language = act_user_get_language (user);
-        self_selected = act_user_get_uid (user) == geteuid ();
 
         lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
         if (lang) {
                 if (g_strcmp0 (lang, account_language) != 0) {
                         act_user_set_language (user, lang);
-
-                        /* Do not show the notification if the locale is already used. */
-                        current_language = gnome_normalize_locale (setlocale (LC_MESSAGES, NULL));
-                        if (self_selected && g_strcmp0 (lang, current_language) != 0)
-                                show_restart_notification (d, lang);
-                        g_free (current_language);
                 }
 
                 button = get_widget (d, "account-language-button-label");
