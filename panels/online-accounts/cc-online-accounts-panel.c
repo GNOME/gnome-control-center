@@ -35,8 +35,6 @@
 #include "cc-online-accounts-model.h"
 #include "cc-online-accounts-resources.h"
 
-typedef struct _CcGoaPanelClass CcGoaPanelClass;
-
 struct _CcGoaPanel
 {
   CcPanel parent_instance;
@@ -52,11 +50,6 @@ struct _CcGoaPanel
   GtkWidget *toolbar_remove_button;
   GtkWidget *accounts_treeview;
   GtkWidget *accounts_vbox;
-};
-
-struct _CcGoaPanelClass
-{
-  CcPanelClass parent_class;
 };
 
 static void on_model_row_deleted (GtkTreeModel *tree_model,
