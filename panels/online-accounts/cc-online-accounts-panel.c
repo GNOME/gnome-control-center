@@ -196,7 +196,6 @@ cc_goa_panel_init (CcGoaPanel *panel)
   GtkWidget *button;
   GtkWidget *w;
   GError *error;
-  GtkStyleContext *context;
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeIter iter;
@@ -231,11 +230,6 @@ cc_goa_panel_init (CcGoaPanel *panel)
                     "clicked",
                     G_CALLBACK (on_toolbar_remove_button_clicked),
                     panel);
-
-  context = gtk_widget_get_style_context (GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-scrolledwindow")));
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-  context = gtk_widget_get_style_context (panel->toolbar);
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   panel->accounts_treeview = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-treeview"));
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
