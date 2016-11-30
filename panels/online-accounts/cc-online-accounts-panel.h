@@ -25,9 +25,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_GOA_TYPE_PANEL  (cc_goa_panel_get_type ())
-#define CC_GOA_PANEL(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_GOA_TYPE_PANEL, CcGoaPanel))
-#define CC_GOA_IS_PANEL(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_GOA_TYPE_PANEL))
+#define CC_TYPE_GOA_PANEL  (cc_goa_panel_get_type ())
+#define CC_GOA_PANEL(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_GOA_PANEL, CcGoaPanel))
+#define CC_IS_GOA_PANEL(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_GOA_PANEL))
 
 typedef struct _CcGoaPanel              CcGoaPanel;
 
