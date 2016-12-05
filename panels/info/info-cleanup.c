@@ -99,6 +99,9 @@ remove_duplicate_whitespace (const char *old)
   GRegex *re;
   GError *error;
 
+  if (old == NULL)
+    return NULL;
+
   error = NULL;
   re = g_regex_new ("[ \t\n\r]+", G_REGEX_MULTILINE, 0, &error);
   if (re == NULL)
