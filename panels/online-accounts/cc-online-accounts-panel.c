@@ -349,6 +349,7 @@ show_page_account (CcGoaPanel  *panel,
   GList *l;
   GoaProvider *provider;
   GoaAccount *account;
+  gboolean is_locked;
   const gchar *provider_name;
   const gchar *provider_type;
   gchar *title;
@@ -358,6 +359,9 @@ show_page_account (CcGoaPanel  *panel,
   show_page (panel, 0);
   gtk_widget_set_sensitive (panel->accounts_tree_box, TRUE);
   gtk_widget_hide (panel->accounts_tree_label);
+
+  is_locked = goa_account_get_is_locked (goa_object_peek_account (object));
+  gtk_widget_set_sensitive (panel->toolbar_remove_button, !is_locked);
 
   /* Out with the old */
   children = gtk_container_get_children (GTK_CONTAINER (panel->accounts_vbox));
@@ -431,14 +435,9 @@ on_listbox_selection_changed (CcGoaPanel    *self,
   if (selected_row != NULL)
     {
       GoaObject *object;
-      gboolean is_locked;
 
       object = g_object_get_data (G_OBJECT (selected_row), "goa-object");
-      is_locked = goa_account_get_is_locked (goa_object_peek_account (object));
-
       show_page_account (self, object);
-
-      gtk_widget_set_sensitive (self->toolbar_remove_button, !is_locked);
     }
   else
     {
