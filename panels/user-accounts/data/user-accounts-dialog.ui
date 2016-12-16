@@ -95,389 +95,349 @@
           <object class="GtkVBox" id="accounts-vbox">
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
+            <property name="border_width">0</property>
             <child>
               <object class="UmCarousel" id="carousel">
                 <property name="visible">True</property>
               </object>
+              <packing>
+                <property name="fill">False</property>
+                <property name="expand">False</property>
+              </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="hbox2">
+              <object class="GtkGrid" id="user-options">
                 <property name="visible">True</property>
-                <property name="spacing">18</property>
+                <property name="can_focus">False</property>
+                <property name="column_spacing">10</property>
+                <property name="row_spacing">10</property>
+                <property name="border_width">30</property>
+                <property name="halign">GTK_ALIGN_CENTER</property>
                 <child>
-                  <object class="GtkVBox" id="main-user-vbox">
+                  <object class="GtkButton" id="account-fingerprint-button">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">5</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="account-type-box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="sensitive">False</property>
+                    <style>
+                      <class name="linked"/>
+                    </style>
                     <child>
-                      <object class="GtkGrid" id="grid1">
+                      <object class="GtkRadioButton" id="account-type-standard">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="column_spacing">10</property>
-                        <property name="row_spacing">10</property>
-                        <child>
-                          <object class="GtkButton" id="account-fingerprint-button">
-                            <property name="visible">True</property>
-                            <property name="hexpand">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">5</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox" id="account-type-box">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="sensitive">False</property>
-                            <style>
-                              <class name="linked"/>
-                            </style>
-                            <child>
-                              <object class="GtkRadioButton" id="account-type-standard">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">Standard</property>
-                                <property name="draw_indicator">False</property>
-                                <property name="hexpand">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkRadioButton" id="account-type-admin">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">Administrator</property>
-                                <property name="draw_indicator">False</property>
-                                <property name="group">account-type-standard</property>
-                                <property name="hexpand">True</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="account-type-label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">Account _Type</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">account-type-box</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkVBox" id="vbox10">
-                            <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkEntry" id="full-name-entry">
-                                <property name="visible">True</property>
-                                <property name="width-chars">30</property>
-                                <property name="max-width-chars">30</property>
-                                <property name="valign">GTK_ALIGN_CENTER</property>
-                              </object>
-                              <packing>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="password-label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">_Password</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">account-password-button</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">3</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="account-password-button">
-                            <property name="visible">True</property>
-                            <property name="hexpand">True</property>
-                            <style>
-                              <class name="text-button"/>
-                            </style>
-                            <child>
-                              <object class="GtkLabel" id="account-password-button-label">
-                                <property name="visible">True</property>
-                                <property name="halign">GTK_ALIGN_START</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">3</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="autologin-label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">A_utomatic Login</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">autologin-switch</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">4</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox" id="autologin-box">
-                            <property name="visible">True</property>
-                            <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
-                            <child>
-                              <object class="GtkSwitch" id="autologin-switch">
-                                <property name="visible">True</property>
-                                <property name="valign">GTK_ALIGN_CENTER</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <placeholder/>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">4</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="account-fingerprint-label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">_Fingerprint Login</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">account-fingerprint-button</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">5</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkHBox" id="hbox5">
-                            <property name="visible">True</property>
-                            <child>
-                              <object class="GtkLabel" id="label4">
-                                <property name="visible">True</property>
-                                <property name="hexpand">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="UmUserImage" id="user-icon-image">
-                                <property name="visible">True</property>
-                                <property name="icon_name">avatar-default</property>
-                                <property name="icon-size">6</property>
-                                <property name="halign">end</property>
-                                <child internal-child="accessible">
-                                  <object class="AtkObject" id="user-icon-image-a11y">
-                                    <property name="accessible-name" translatable="yes">User Icon</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkToggleButton" id="user-icon-button">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="relief">none</property>
-                                <child internal-child="accessible">
-                                  <object class="AtkObject" id="user-icon-image2-a11y">
-                                    <property name="accessible-name" translatable="yes">User Icon</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="UmUserImage" id="user-icon-image2">
-                                    <property name="visible">True</property>
-                                    <property name="icon_name">avatar-default</property>
-                                    <property name="icon-size">6</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="language-label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">_Language</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">account-language-button</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">2</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="account-language-button">
-                            <property name="visible">True</property>
-                            <property name="hexpand">True</property>
-                            <style>
-                              <class name="text-button"/>
-                            </style>
-                            <child>
-                              <object class="GtkLabel" id="account-language-button-label">
-                                <property name="visible">True</property>
-                                <property name="halign">GTK_ALIGN_START</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">2</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="last-login-label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">Last Login</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">last-login-button</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">6</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="last-login-button">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <style>
-                              <class name="text-button"/>
-                            </style>
-                            <child>
-                              <object class="GtkLabel" id="last-login-button-label">
-                                <property name="visible">True</property>
-                                <property name="halign">GTK_ALIGN_START</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">6</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
+                        <property name="can_focus">True</property>
+                        <property name="label" translatable="yes">Standard</property>
+                        <property name="draw_indicator">False</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkRadioButton" id="account-type-admin">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="label" translatable="yes">Administrator</property>
+                        <property name="draw_indicator">False</property>
+                        <property name="group">account-type-standard</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="account-type-label">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Account _Type</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">account-type-box</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="full-name-entry">
+                    <property name="visible">True</property>
+                    <property name="width-chars">30</property>
+                    <property name="max-width-chars">30</property>
+                    <property name="valign">GTK_ALIGN_CENTER</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="password-label">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">_Password</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">account-password-button</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">3</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="account-password-button">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                    <style>
+                      <class name="text-button"/>
+                    </style>
+                    <child>
+                      <object class="GtkLabel" id="account-password-button-label">
+                        <property name="visible">True</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">3</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="autologin-label">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">A_utomatic Login</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">autologin-switch</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">4</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="autologin-box">
+                    <property name="visible">True</property>
+                    <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
+                    <child>
+                      <object class="GtkSwitch" id="autologin-switch">
+                        <property name="visible">True</property>
+                        <property name="valign">GTK_ALIGN_CENTER</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">4</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="remove-user-toolbutton">
+                  <object class="GtkLabel" id="account-fingerprint-label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">GTK_ALIGN_END</property>
-                    <property name="valign">GTK_ALIGN_END</property>
-                    <property name="label" translatable="yes">Remove Account</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">_Fingerprint Login</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">account-fingerprint-button</property>
                     <style>
-                      <class name="destructive-action"/>
+                      <class name="dim-label"/>
                     </style>
                   </object>
                   <packing>
-                    <property name="position">2</property>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">5</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
+                    <property name="halign">GTK_ALIGN_END</property>
+                    <child>
+                      <object class="UmUserImage" id="user-icon-image">
+                        <property name="visible">True</property>
+                        <property name="icon_name">avatar-default</property>
+                        <property name="icon-size">6</property>
+                        <property name="halign">GTK_ALIGN_END</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="user-icon-image-a11y">
+                            <property name="accessible-name" translatable="yes">User Icon</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="user-icon-button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="relief">GTK_RELIEF_NONE</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="user-icon-image2-a11y">
+                            <property name="accessible-name" translatable="yes">User Icon</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="UmUserImage" id="user-icon-image2">
+                            <property name="visible">True</property>
+                            <property name="icon_name">avatar-default</property>
+                            <property name="icon-size">6</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="language-label">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">_Language</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">account-language-button</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="account-language-button">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                    <style>
+                      <class name="text-button"/>
+                    </style>
+                    <child>
+                      <object class="GtkLabel" id="account-language-button-label">
+                        <property name="visible">True</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="last-login-label">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Last Login</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">last-login-button</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">6</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="last-login-button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <style>
+                      <class name="text-button"/>
+                    </style>
+                    <child>
+                      <object class="GtkLabel" id="last-login-button-label">
+                        <property name="visible">True</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">6</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="remove-user-toolbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">GTK_ALIGN_END</property>
+                <property name="valign">GTK_ALIGN_END</property>
+                <property name="border_width">20</property>
+                <property name="label" translatable="yes">Remove Account</property>
+                <style>
+                  <class name="destructive-action"/>
+                </style>
               </object>
             </child>
           </object>
