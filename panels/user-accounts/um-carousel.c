@@ -23,6 +23,8 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
+#define ARROW_SIZE 20
+
 struct _UmCarouselItem {
         GtkRadioButton parent;
 
@@ -55,11 +57,14 @@ struct _UmCarousel {
         gint visible_page;
         UmCarouselItem *selected_item;
         GtkWidget *last_box;
+        GtkWidget *arrow;
 
         /* Widgets */
         GtkStack *stack;
         GtkWidget *go_back_button;
         GtkWidget *go_next_button;
+
+        GtkStyleProvider *provider;
 };
 
 G_DEFINE_TYPE (UmCarousel, um_carousel, GTK_TYPE_REVEALER)
@@ -72,6 +77,58 @@ enum {
 static guint signals[NUM_SIGNALS] = { 0, };
 
 #define ITEMS_PER_PAGE 3
+
+static gint
+um_carousel_item_get_x (UmCarouselItem *item,
+                        UmCarousel     *carousel)
+{
+        GtkWidget *widget, *parent;
+        gint width;
+        gint dest_x;
+
+        parent = GTK_WIDGET (carousel->stack);
+        widget = GTK_WIDGET (item);
+
+        width = gtk_widget_get_allocated_width (widget);
+        gtk_widget_translate_coordinates (widget,
+                                          parent,
+                                          width / 2,
+                                          0,
+                                          &dest_x,
+                                          NULL);
+
+        return CLAMP (dest_x - ARROW_SIZE,
+                      0,
+                      gtk_widget_get_allocated_width (parent));
+}
+
+static void
+um_carousel_move_arrow (UmCarousel *self)
+{
+        GtkStyleContext *context;
+        gchar *css;
+        gint end_x;
+
+        if (!self->selected_item)
+                return;
+
+        end_x = um_carousel_item_get_x (self->selected_item, self);
+
+        context = gtk_widget_get_style_context (self->arrow);
+        if (self->provider)
+                gtk_style_context_remove_provider (context, self->provider);
+        g_clear_object (&self->provider);
+
+        css = g_strdup_printf ("* {\n"
+                               "  margin-left: %dpx;\n"
+                               "}\n", end_x);
+
+        self->provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+        gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (self->provider), css, -1, NULL);
+        gtk_style_context_add_provider (context, self->provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        g_free (css);
+}
 
 static gint
 get_last_page_number (UmCarousel *self)
@@ -121,15 +178,27 @@ um_carousel_find_item (UmCarousel    *self,
         return NULL;
 }
 
+static void
+on_item_toggled (UmCarouselItem *item,
+                 GdkEvent       *event,
+                 gpointer        user_data)
+{
+        UmCarousel *self = UM_CAROUSEL (user_data);
+
+        self->selected_item = item;
+
+        g_signal_emit (user_data, signals[ITEM_ACTIVATED], 0, item);
+
+        um_carousel_move_arrow (self);
+}
+
 void
 um_carousel_select_item (UmCarousel     *self,
                          UmCarouselItem *item)
 {
         gchar *page_name;
 
-        self->selected_item = item;
-
-        g_signal_emit (self, signals[ITEM_ACTIVATED], 0, self->selected_item);
+        on_item_toggled (item, NULL, self);
 
         self->visible_page = item->page;
         page_name = g_strdup_printf ("%d", self->visible_page);
@@ -182,18 +251,6 @@ um_carousel_goto_next_page (GtkWidget *button,
 }
 
 static void
-on_item_toggled (UmCarouselItem *item,
-                 GdkEvent       *event,
-                 gpointer        user_data)
-{
-        UmCarousel *self = UM_CAROUSEL (user_data);
-
-        self->selected_item = item;
-
-        g_signal_emit (user_data, signals[ITEM_ACTIVATED], 0, item);
-}
-
-static void
 um_carousel_add (GtkContainer *container,
                  GtkWidget    *widget)
 {
@@ -228,6 +285,10 @@ um_carousel_add (GtkContainer *container,
         gtk_widget_show_all (self->last_box);
 
         update_buttons_visibility (self);
+
+        /* If there's only one child, select it. */
+        if (self->children->next == NULL)
+                um_carousel_select_item_at_index (self, 0);
 }
 
 void
@@ -240,6 +301,7 @@ um_carousel_purge_items (UmCarousel *self)
         g_list_free (self->children);
         self->children = NULL;
         self->visible_page = 0;
+        self->selected_item = NULL;
 }
 
 UmCarousel *
@@ -260,6 +322,7 @@ um_carousel_class_init (UmCarouselClass *klass)
         gtk_widget_class_bind_template_child (wclass, UmCarousel, stack);
         gtk_widget_class_bind_template_child (wclass, UmCarousel, go_back_button);
         gtk_widget_class_bind_template_child (wclass, UmCarousel, go_next_button);
+        gtk_widget_class_bind_template_child (wclass, UmCarousel, arrow);
 
         gtk_widget_class_bind_template_callback (wclass, um_carousel_goto_previous_page);
         gtk_widget_class_bind_template_callback (wclass, um_carousel_goto_next_page);
@@ -279,5 +342,19 @@ um_carousel_class_init (UmCarouselClass *klass)
 static void
 um_carousel_init (UmCarousel *self)
 {
+        GtkStyleProvider *provider;
+
         gtk_widget_init_template (GTK_WIDGET (self));
+
+        provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+        gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
+                                             "/org/gnome/control-center/user-accounts/carousel.css");
+
+        gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                                   provider,
+                                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        g_object_unref (provider);
+
+        g_signal_connect_swapped (self->stack, "size-allocate", G_CALLBACK (um_carousel_move_arrow), self);
 }
