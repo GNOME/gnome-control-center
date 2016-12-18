@@ -174,6 +174,7 @@ static GtkWidget *
 create_carousel_entry (CcUserPanelPrivate *d, ActUser *user)
 {
         GtkWidget *box, *widget;
+        gchar *label;
 
         box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
 
@@ -181,8 +182,12 @@ create_carousel_entry (CcUserPanelPrivate *d, ActUser *user)
         um_user_image_set_user (UM_USER_IMAGE (widget), user);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
 
-        widget = gtk_label_new (get_real_or_user_name (user));
+        label = g_strdup_printf ("<b>%s</b>",
+                                 get_real_or_user_name (user));
+        widget = gtk_label_new (label);
+        gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
+        g_free (label);
 
         return box;
 }
