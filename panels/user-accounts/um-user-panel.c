@@ -176,7 +176,7 @@ create_carousel_entry (CcUserPanelPrivate *d, ActUser *user)
         GtkWidget *box, *widget;
         gchar *label;
 
-        box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
+        box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
         widget = um_user_image_new ();
         um_user_image_set_user (UM_USER_IMAGE (widget), user);
@@ -186,8 +186,22 @@ create_carousel_entry (CcUserPanelPrivate *d, ActUser *user)
                                  get_real_or_user_name (user));
         widget = gtk_label_new (label);
         gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
+        gtk_widget_set_margin_top (widget, 5);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
         g_free (label);
+
+        if (act_user_get_uid (user) == getuid ())
+                label = g_strdup (_("<small>Your account</small>"));
+        else
+                label = g_strdup (" ");
+
+        widget = gtk_label_new (label);
+        gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
+        g_free (label);
+
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
+        gtk_style_context_add_class (gtk_widget_get_style_context (widget),
+                                     "dim-label");
 
         return box;
 }
