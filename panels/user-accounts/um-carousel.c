@@ -48,6 +48,8 @@ static void
 um_carousel_item_init (UmCarouselItem *self)
 {
         gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (self), FALSE);
+        gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
+                                     "carousel-item");
 }
 
 struct _UmCarousel {
