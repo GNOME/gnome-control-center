@@ -1435,6 +1435,9 @@ on_permission_changed (GPermission *permission,
 
                 gtk_widget_set_sensitive (get_widget (d, "account-fingerprint-button"), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-fingerprint-button"));
+
+                gtk_widget_set_sensitive (get_widget (d, "last-login-button"), TRUE);
+                remove_unlock_tooltip (get_widget (d, "last-login-button"));
         }
         else {
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
@@ -1448,6 +1451,9 @@ on_permission_changed (GPermission *permission,
 
                 gtk_widget_set_sensitive (get_widget (d, "account-fingerprint-button"), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-fingerprint-button"));
+
+                gtk_widget_set_sensitive (get_widget (d, "last-login-button"), FALSE);
+                add_unlock_tooltip (get_widget (d, "last-login-button"));
         }
 
         um_password_dialog_set_user (d->password_dialog, user);
