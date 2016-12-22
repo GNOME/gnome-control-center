@@ -514,6 +514,14 @@ device_off_toggled (GtkSwitch         *sw,
 }
 
 static void
+device_title_changed (NetDeviceEthernet *device,
+                      GParamSpec        *pspec,
+                      gpointer           user_data)
+{
+        device_ethernet_refresh_ui (device);
+}
+
+static void
 connection_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceEthernet *device)
 {
         NMClient *client;
@@ -625,4 +633,6 @@ net_device_ethernet_init (NetDeviceEthernet *device)
         }
 
         device->connections = g_hash_table_new (NULL, NULL);
+
+        g_signal_connect (device, "notify::title", G_CALLBACK (device_title_changed), NULL);
 }
