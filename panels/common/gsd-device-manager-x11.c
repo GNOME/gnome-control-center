@@ -51,6 +51,7 @@ device_get_device_type (GdkDevice *gdk_device)
 
 	switch (source) {
 	case GDK_SOURCE_MOUSE:
+	case GDK_SOURCE_TRACKPOINT:
 		return GSD_DEVICE_TYPE_MOUSE;
 	case GDK_SOURCE_PEN:
 	case GDK_SOURCE_ERASER:
@@ -62,10 +63,9 @@ device_get_device_type (GdkDevice *gdk_device)
 		return GSD_DEVICE_TYPE_TOUCHSCREEN;
 	case GDK_SOURCE_TOUCHPAD:
 		return GSD_DEVICE_TYPE_TOUCHPAD;
-	default:
-		g_warning ("Unhandled input source %d\n", source);
 	}
 
+	g_warning ("Unhandled input source %d\n", source);
 	return 0;
 }
 
