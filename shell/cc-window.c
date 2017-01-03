@@ -1260,6 +1260,8 @@ window_key_press_event (GtkWidget   *win,
           case GDK_KEY_w:
             if (!overview)
               shell_show_overview_page (self);
+            else
+              gtk_widget_destroy (GTK_WIDGET (self));
             retval = GDK_EVENT_STOP;
             break;
         }

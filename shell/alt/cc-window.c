@@ -738,11 +738,9 @@ window_key_press_event (GtkWidget   *win,
             break;
           case GDK_KEY_Q:
           case GDK_KEY_q:
-            gtk_widget_destroy (GTK_WIDGET (self));
-            retval = GDK_EVENT_STOP;
-            break;
           case GDK_KEY_W:
           case GDK_KEY_w:
+            gtk_widget_destroy (GTK_WIDGET (self));
             retval = GDK_EVENT_STOP;
             break;
         }
