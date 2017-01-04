@@ -137,14 +137,15 @@ security_combo_get_active (CEPageSecurity *self)
 static void
 wsec_size_group_clear (GtkSizeGroup *group)
 {
-        GSList *children;
         GSList *iter;
 
         g_return_if_fail (group != NULL);
 
-        children = gtk_size_group_get_widgets (group);
-        for (iter = children; iter; iter = g_slist_next (iter))
+        iter = gtk_size_group_get_widgets (group);
+        while (iter) {
                 gtk_size_group_remove_widget (group, GTK_WIDGET (iter->data));
+                iter = gtk_size_group_get_widgets (group);
+        }
 }
 
 static void
