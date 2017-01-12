@@ -1,15 +1,15 @@
 # Kazakh translation for gnome-control-center.
-# Copyright (C) 2016 gnome-control-center's COPYRIGHT HOLDER
+# Copyright (C) 2017 gnome-control-center's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-control-center package.
-# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010-2016.
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-12-15 17:21+0000\n"
-"PO-Revision-Date: 2016-12-24 22:35+0500\n"
+"POT-Creation-Date: 2017-01-11 11:33+0000\n"
+"PO-Revision-Date: 2017-01-12 14:18+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -1570,7 +1570,7 @@ msgid "Launch help browser"
 msgstr "Көмек шолушысын жөнелту"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
+#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Баптаулар"
@@ -3637,21 +3637,29 @@ msgstr "Дыбыстық х_абарламалар"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
 msgctxt "notifications"
-msgid "Notification _Banners"
+msgid "Notification _Popups"
 msgstr "Хабарламалық _баннерлер"
 
-#. Banners here refers to message tray notifications in the middle of the screen.
-#: ../panels/notifications/edit-dialog.ui.h:7
+#: ../panels/notifications/edit-dialog.ui.h:6
+msgid ""
+"Notifications will continue to appear in the notification list when popups "
+"are disabled."
+msgstr ""
+"Баннерлер сөндірілген кезде хабарламалар хабарламалар тізімінде көрсетілетін "
+"болады."
+
+#. Popups here refers to message tray notifications in the middle of the screen.
+#: ../panels/notifications/edit-dialog.ui.h:8
 msgctxt "notifications"
-msgid "Show Message _Content in Banners"
+msgid "Show Message _Content in Popups"
 msgstr "Баннерде хабарлама құр_амасын көрсету"
 
-#: ../panels/notifications/edit-dialog.ui.h:8
+#: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Б_локтау экранының хабарламалары"
 
-#: ../panels/notifications/edit-dialog.ui.h:9
+#: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Блоктау экранында хабарлама құра_масын көрсету"
@@ -3673,7 +3681,7 @@ msgstr ""
 "Қалқымалы;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification _Banners"
+msgid "Notification _Popups"
 msgstr "Хабарламалық _баннерлер"
 
 #: ../panels/notifications/notifications.ui.h:2
@@ -3687,13 +3695,13 @@ msgid "Applications"
 msgstr "Қолданбалар"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
+#: ../panels/online-accounts/cc-online-accounts-panel.c:111
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Басқа"
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Тіркелгіні қосу"
 
@@ -3719,30 +3727,10 @@ msgstr "Ресурстар"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:385
+#: ../panels/online-accounts/cc-online-accounts-panel.c:403
 #, c-format
 msgid "%s Account"
 msgstr "%s тіркелгісі"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:662
-msgid "Error creating account"
-msgstr "Тіркелгіні жасау қатесі"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:722
-msgid "Error removing account"
-msgstr "Тіркелгіні өшіру қатесі"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:754
-msgid "Are you sure you want to remove the account?"
-msgstr "Тіркелгіні өшіруді шынымен қалайсыз ба?"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:756
-msgid "This will not remove the account on the server."
-msgstr "Бұл әрекет нәтижесінде тіркелгі серверден өшірілмейді."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
-msgid "_Remove"
-msgstr "Ө_шіру"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3766,13 +3754,12 @@ msgstr ""
 "Контакт;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-msgid "No online accounts configured"
-msgstr "Желілік тіркелгілер бапталмады"
+msgid "Connect to your data in the cloud"
+msgstr "Бұлттық қызметтердегі деректеріңізге байланысыңыз"
 
-#: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-msgid "Remove Account"
-msgstr "Тіркелгіні өшіру"
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Add an account"
+msgstr "Тіркелгіні қосу"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
@@ -6314,6 +6301,10 @@ msgstr "Пайдаланушы таңбашасы"
 msgid "Last Login"
 msgstr "Соңғы рет жүйеге кіру"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove Account"
+msgstr "Тіркелгіні өшіру"
+
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Пайдаланушылар тіркелгілерін басқару"
@@ -7143,8 +7134,8 @@ msgstr "Төменгі батырма"
 msgid "Tip Pressure Feel"
 msgstr "Қалам басуының сезімталдылығы"
 
-#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1482
+#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "Барлық баптаулар"
 
@@ -7263,6 +7254,31 @@ msgstr "Қатынау нүктесі"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Нәтижелер табылмады"
+
+#~ msgctxt "notifications"
+#~ msgid "Notification _Banners"
+#~ msgstr "Хабарламалық _баннерлер"
+
+#~ msgid "Notification _Banners"
+#~ msgstr "Хабарламалық _баннерлер"
+
+#~ msgid "Error creating account"
+#~ msgstr "Тіркелгіні жасау қатесі"
+
+#~ msgid "Error removing account"
+#~ msgstr "Тіркелгіні өшіру қатесі"
+
+#~ msgid "Are you sure you want to remove the account?"
+#~ msgstr "Тіркелгіні өшіруді шынымен қалайсыз ба?"
+
+#~ msgid "This will not remove the account on the server."
+#~ msgstr "Бұл әрекет нәтижесінде тіркелгі серверден өшірілмейді."
+
+#~ msgid "_Remove"
+#~ msgstr "Ө_шіру"
+
+#~ msgid "No online accounts configured"
+#~ msgstr "Желілік тіркелгілер бапталмады"
 
 #~ msgid "Add an online account"
 #~ msgstr "Желілік тіркелгіні қосу"
@@ -8114,9 +8130,6 @@ msgstr "Нәтижелер табылмады"
 #~ msgctxt "universal access, threshold"
 #~ msgid "Large"
 #~ msgstr "Үлкен"
-
-#~ msgid "Add account"
-#~ msgstr "Тіркелгіні қосу"
 
 #~| msgid "Remove Account"
 #~ msgid "_Local Account"
