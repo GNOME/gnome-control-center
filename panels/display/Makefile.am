@@ -11,8 +11,12 @@ libdisplay_la_SOURCES =		\
 	$(BUILT_SOURCES)	\
 	cc-display-config.c	\
 	cc-display-config.h	\
+	cc-display-config-rr.c	\
+	cc-display-config-rr.h	\
 	cc-display-config-manager.c	\
 	cc-display-config-manager.h	\
+	cc-display-config-manager-rr.c	\
+	cc-display-config-manager-rr.h	\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
 	cc-night-light-dialog.c	\
