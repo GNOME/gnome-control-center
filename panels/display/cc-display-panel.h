@@ -23,8 +23,6 @@
 #define _CC_DISPLAY_PANEL_H
 
 #include <shell/cc-panel.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-rr-config.h>
 
 G_BEGIN_DECLS
 
@@ -67,7 +65,6 @@ struct _CcDisplayPanelClass
 };
 
 GType cc_display_panel_get_type (void) G_GNUC_CONST;
-gint cc_display_panel_get_output_id (GnomeRROutputInfo *output);
 
 G_END_DECLS
 

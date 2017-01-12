@@ -23,8 +23,6 @@
 #include <gtk/gtk.h>
 #include "scrollarea.h"
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-rr.h>
-#include <libgnome-desktop/gnome-rr-config.h>
 #include <libgnome-desktop/gnome-bg.h>
 #include <glib/gi18n.h>
 #include <stdlib.h>
@@ -34,6 +32,8 @@
 #include "shell/list-box-helper.h"
 #include <libupower-glib/upower.h>
 
+#include "cc-display-config-manager-rr.h"
+#include "cc-display-config.h"
 #include "cc-night-light-dialog.h"
 #include "cc-display-resources.h"
 
@@ -66,16 +66,16 @@ enum
 
 struct _CcDisplayPanelPrivate
 {
-  GnomeRRScreen     *screen;
-  GnomeRRConfig     *current_configuration;
-  GnomeRROutputInfo *current_output;
+  CcDisplayConfigManager *manager;
+  CcDisplayConfig *current_config;
+  CcDisplayMonitor *current_output;
 
   GnomeBG *background;
   GnomeDesktopThumbnailFactory *thumbnail_factory;
 
   guint           focus_id;
-  guint           screen_changed_handler_id;
 
+  GtkWidget *stack;
   GtkWidget *displays_listbox;
   GtkWidget *arrange_button;
   GtkWidget *res_combo;
@@ -113,8 +113,8 @@ typedef struct
 
 static GHashTable *output_ids;
 
-gint
-cc_display_panel_get_output_id (GnomeRROutputInfo *output)
+static gint
+cc_display_panel_get_output_id (CcDisplayMonitor *output)
 {
   if (output_ids)
     return GPOINTER_TO_INT (g_hash_table_lookup (output_ids, output));
@@ -126,21 +126,22 @@ static void
 monitor_labeler_show (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv = self->priv;
-  GnomeRROutputInfo **infos, **info;
-  GnomeRROutput *output;
+  GList *outputs, *l;
   GVariantBuilder builder;
   gint number;
   gboolean has_outputs;
 
-  if (!priv->shell_proxy)
+  if (!priv->shell_proxy || !priv->current_config)
     return;
 
   has_outputs = FALSE;
 
-  infos = gnome_rr_config_get_outputs (priv->current_configuration);
-  for (info = infos; *info; info++)
+  outputs = cc_display_config_get_monitors (priv->current_config);
+  for (l = outputs; l != NULL; l = l->next)
     {
-      number = cc_display_panel_get_output_id (*info);
+      CcDisplayMonitor *output = l->data;
+
+      number = cc_display_panel_get_output_id (output);
       if (number == 0)
         continue;
 
@@ -151,10 +152,8 @@ monitor_labeler_show (CcDisplayPanel *self)
           has_outputs = TRUE;
         }
 
-      output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                                   gnome_rr_output_info_get_name (*info));
       g_variant_builder_add (&builder, "{uv}",
-                             gnome_rr_output_get_id (output),
+                             cc_display_monitor_get_id (output),
                              g_variant_new_int32 (number));
     }
 
@@ -238,13 +237,8 @@ cc_display_panel_dispose (GObject *object)
       monitor_labeler_hide (CC_DISPLAY_PANEL (object));
     }
 
-  if (priv->screen_changed_handler_id)
-    {
-      g_signal_handler_disconnect (priv->screen, priv->screen_changed_handler_id);
-      priv->screen_changed_handler_id = 0;
-    }
-
-  g_clear_object (&priv->screen);
+  g_clear_object (&priv->manager);
+  g_clear_object (&priv->current_config);
   g_clear_object (&priv->up_client);
   g_clear_object (&priv->background);
   g_clear_object (&priv->thumbnail_factory);
@@ -298,12 +292,12 @@ should_show_resolution (gint output_width,
 }
 
 static void
-apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
+apply_rotation_to_geometry (CcDisplayMonitor *output, int *w, int *h)
 {
-  GnomeRRRotation rotation;
+  CcDisplayRotation rotation;
 
-  rotation = gnome_rr_output_info_get_rotation (output);
-  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
+  rotation = cc_display_monitor_get_rotation (output);
+  if ((rotation == CC_DISPLAY_ROTATION_90) || (rotation == CC_DISPLAY_ROTATION_270))
     {
       int tmp;
       tmp = *h;
@@ -313,17 +307,17 @@ apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
 }
 
 static void
-get_geometry (GnomeRROutputInfo *output, int *x, int *y, int *w, int *h)
+get_geometry (CcDisplayMonitor *output, int *x, int *y, int *w, int *h)
 {
-  if (gnome_rr_output_info_is_active (output))
+  if (cc_display_monitor_is_active (output))
     {
-      gnome_rr_output_info_get_geometry (output, x, y, w, h);
+      cc_display_monitor_get_geometry (output, x, y, w, h);
     }
   else
     {
-      gnome_rr_output_info_get_geometry (output, x, y, NULL, NULL);
-      *h = gnome_rr_output_info_get_preferred_height (output);
-      *w = gnome_rr_output_info_get_preferred_width (output);
+      cc_display_monitor_get_geometry (output, x, y, NULL, NULL);
+      cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (output),
+                                      w, h);
     }
 
   apply_rotation_to_geometry (output, w, h);
@@ -344,8 +338,8 @@ on_viewport_changed (FooScrollArea *scroll_area,
 static void
 paint_output (CcDisplayPanel    *panel,
               cairo_t           *cr,
-              GnomeRRConfig     *configuration,
-              GnomeRROutputInfo *output,
+              CcDisplayConfig   *configuration,
+              CcDisplayMonitor  *output,
               gint               num,
               gint               allocated_width,
               gint               allocated_height)
@@ -375,7 +369,7 @@ paint_output (CcDisplayPanel    *panel,
   cairo_rectangle (cr, x, y, width, height);
   cairo_fill (cr);
 
-  if (gnome_rr_output_info_is_active (output))
+  if (cc_display_monitor_is_active (output))
     {
       pixbuf = gnome_bg_create_thumbnail (panel->priv->background,
                                           panel->priv->thumbnail_factory,
@@ -384,8 +378,8 @@ paint_output (CcDisplayPanel    *panel,
   else
     pixbuf = NULL;
 
-  if (gnome_rr_output_info_get_primary (output)
-      || gnome_rr_config_get_clone (configuration))
+  if (cc_display_monitor_is_primary (output)
+      || cc_display_config_is_cloning (configuration))
     {
       y += TOP_BAR_HEIGHT;
       height -= TOP_BAR_HEIGHT;
@@ -450,8 +444,8 @@ display_preview_draw (GtkWidget      *widget,
                       cairo_t        *cr,
                       CcDisplayPanel *panel)
 {
-  GnomeRROutputInfo *output;
-  GnomeRRConfig *config;
+  CcDisplayMonitor *output;
+  CcDisplayConfig *config;
   gint num, width, height;
 
   output = g_object_get_data (G_OBJECT (widget), "output");
@@ -468,8 +462,8 @@ display_preview_draw (GtkWidget      *widget,
 
 static GtkWidget*
 display_preview_new (CcDisplayPanel    *panel,
-                     GnomeRROutputInfo *output,
-                     GnomeRRConfig     *config,
+                     CcDisplayMonitor  *output,
+                     CcDisplayConfig   *config,
                      gint               num,
                      gint               base_height)
 {
@@ -496,57 +490,49 @@ display_preview_new (CcDisplayPanel    *panel,
 static void
 on_screen_changed (CcDisplayPanel *panel)
 {
-  GnomeRRConfig *current;
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRROutputInfo **outputs;
-  gint i, num_connected_outputs = 0, number = 0;
-  gboolean clone, combined = FALSE;
+  CcDisplayConfig *current;
+  GList *outputs;
+  gint num_connected_outputs = 0, number = 0;
+  gboolean clone = FALSE, combined = FALSE;
   GtkSizeGroup *sizegroup;
   GList *sorted_outputs = NULL, *l;
 
   if (priv->dialog)
     gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_NONE);
 
-  gnome_rr_screen_refresh (priv->screen, NULL);
+  g_clear_object (&priv->current_config);
 
-  current = gnome_rr_config_new_current (priv->screen, NULL);
-  gnome_rr_config_ensure_primary (current);
+  current = cc_display_config_manager_get_current (priv->manager);
+  if (!current)
+    {
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "error");
+      return;
+    }
+  priv->current_config = current;
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "main");
 
   gtk_container_foreach (GTK_CONTAINER (priv->displays_listbox),
                          (GtkCallback) gtk_widget_destroy, NULL);
 
-  if (priv->current_configuration)
-    g_object_unref (priv->current_configuration);
-
-  priv->current_configuration = current;
-
-  clone = gnome_rr_config_get_clone (current);
-
-  outputs = gnome_rr_config_get_outputs (current);
-
-  g_hash_table_remove_all (output_ids);
-
+  outputs = cc_display_config_get_monitors (current);
   /* count the number of active and connected outputs */
-  for (i = 0; outputs[i]; i++)
+  for (l = outputs; l != NULL; l = l->next)
     {
-      GnomeRROutput *output;
-
-      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	continue;
-
-      output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                                   gnome_rr_output_info_get_name (outputs[i]));
+      CcDisplayMonitor *output = l->data;
 
       /* ensure the built in display is first in the list */
-      if (gnome_rr_output_is_builtin_display (output))
-        sorted_outputs = g_list_prepend (sorted_outputs, outputs[i]);
+      if (cc_display_monitor_is_builtin (output))
+        sorted_outputs = g_list_prepend (sorted_outputs, output);
       else
-        sorted_outputs = g_list_append (sorted_outputs, outputs[i]);
+        sorted_outputs = g_list_append (sorted_outputs, output);
 
       num_connected_outputs++;
     }
 
   sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+
+  g_hash_table_remove_all (output_ids);
 
   for (l = sorted_outputs; l; l = g_list_next (l))
     {
@@ -554,37 +540,31 @@ on_screen_changed (CcDisplayPanel *panel)
       gboolean primary, active;
       const gchar *status;
       gboolean display_closed = FALSE;
-      GnomeRROutput *output;
-      GnomeRROutputInfo *output_info;
-
-      output_info = l->data;
-
-      output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                                   gnome_rr_output_info_get_name (output_info));
+      CcDisplayMonitor *output = l->data;
 
       if (priv->lid_is_closed)
-        display_closed = gnome_rr_output_is_builtin_display (output);
+        display_closed = cc_display_monitor_is_builtin (output);
 
       row = gtk_list_box_row_new ();
       item = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
       gtk_container_set_border_width (GTK_CONTAINER (item), 12);
 
-      preview = display_preview_new (panel, output_info, current, ++number,
+      preview = display_preview_new (panel, output, current, ++number,
                                      DISPLAY_PREVIEW_LIST_HEIGHT);
       gtk_size_group_add_widget (sizegroup, preview);
 
       if (display_closed)
         gtk_widget_set_sensitive (row, FALSE);
 
-      g_hash_table_insert (output_ids, output_info, GINT_TO_POINTER (number));
+      g_hash_table_insert (output_ids, output, GINT_TO_POINTER (number));
 
       gtk_container_add (GTK_CONTAINER (item), preview);
 
-      label = gtk_label_new (gnome_rr_output_info_get_display_name (output_info));
+      label = gtk_label_new (cc_display_monitor_get_display_name (output));
       gtk_container_add (GTK_CONTAINER (item), label);
 
-      primary = gnome_rr_output_info_get_primary (output_info);
-      active = gnome_rr_output_info_is_active (output_info);
+      primary = cc_display_monitor_is_primary (output);
+      active = cc_display_monitor_is_active (output);
 
       if (num_connected_outputs > 1)
         {
@@ -609,7 +589,7 @@ on_screen_changed (CcDisplayPanel *panel)
           gtk_container_add (GTK_CONTAINER (item), label);
         }
 
-      g_object_set_data (G_OBJECT (row), "gnome-rr-output", output_info);
+      g_object_set_data (G_OBJECT (row), "cc-display-monitor", output);
       gtk_container_add (GTK_CONTAINER (row), item);
       gtk_container_add (GTK_CONTAINER (priv->displays_listbox), row);
       gtk_widget_show_all (row);
@@ -627,7 +607,7 @@ on_screen_changed (CcDisplayPanel *panel)
 
 
 static void
-realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo *output_that_changed, int old_width, int old_height, GnomeRRRotation old_rotation)
+realign_outputs_after_resolution_change (CcDisplayPanel *self, CcDisplayMonitor *output_that_changed, int old_width, int old_height, CcDisplayRotation old_rotation)
 {
   /* We find the outputs that were below or to the right of the output that
    * changed, and realign them; we also do that for outputs that shared the
@@ -635,30 +615,29 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
    * above or to the left of that output don't need to change.
    */
 
-  int i;
   int old_right_edge, old_bottom_edge;
   int dx, dy;
   int x, y, width, height;
-  GnomeRROutputInfo **outputs;
-  GnomeRRRotation rotation;
+  GList *outputs, *l;
+  CcDisplayRotation rotation;
 
-  g_assert (self->priv->current_configuration != NULL);
+  g_assert (self->priv->current_config != NULL);
 
-  gnome_rr_output_info_get_geometry (output_that_changed, &x, &y, &width, &height);
-  rotation = gnome_rr_output_info_get_rotation (output_that_changed);
+  cc_display_monitor_get_geometry (output_that_changed, &x, &y, &width, &height);
+  rotation = cc_display_monitor_get_rotation (output_that_changed);
 
   if (width == old_width && height == old_height && rotation == old_rotation)
     {
-      g_debug ("Not realigning outputs, configuration is the same for %s", gnome_rr_output_info_get_name (output_that_changed));
+      g_debug ("Not realigning outputs, configuration is the same for %s", cc_display_monitor_get_display_name (output_that_changed));
       return;
     }
 
-  g_debug ("Realigning outputs, configuration changed for %s", gnome_rr_output_info_get_name (output_that_changed));
+  g_debug ("Realigning outputs, configuration changed for %s", cc_display_monitor_get_display_name (output_that_changed));
 
   /* Apply rotation to the geometry of the newly changed output,
    * as well as to its old configuration */
   apply_rotation_to_geometry (output_that_changed, &width, &height);
-  if ((old_rotation & GNOME_RR_ROTATION_90) || (old_rotation & GNOME_RR_ROTATION_270))
+  if ((old_rotation == CC_DISPLAY_ROTATION_90) || (old_rotation == CC_DISPLAY_ROTATION_270))
     {
       int tmp;
       tmp = old_height;
@@ -672,20 +651,18 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
   dx = width - old_width;
   dy = height - old_height;
 
-  outputs = gnome_rr_config_get_outputs (self->priv->current_configuration);
+  outputs = cc_display_config_get_monitors (self->priv->current_config);
 
-  for (i = 0; outputs[i] != NULL; i++)
+  for (l = outputs; l != NULL; l = l->next)
     {
+      CcDisplayMonitor *output = l->data;
       int output_x, output_y;
       int output_width, output_height;
 
-      if (outputs[i] == output_that_changed || !gnome_rr_output_info_is_connected (outputs[i]))
+      if (output == output_that_changed)
         continue;
 
-      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	continue;
-
-      gnome_rr_output_info_get_geometry (outputs[i], &output_x, &output_y, &output_width, &output_height);
+      cc_display_monitor_get_geometry (output, &output_x, &output_y, &output_width, &output_height);
 
       if (output_x >= old_right_edge)
          output_x += dx;
@@ -697,17 +674,16 @@ realign_outputs_after_resolution_change (CcDisplayPanel *self, GnomeRROutputInfo
       else if (output_y + output_height == old_bottom_edge)
          output_y = y + height - output_height;
 
-      g_debug ("Setting geometry for %s: %dx%d+%d+%d", gnome_rr_output_info_get_name (outputs[i]), output_width, output_height, output_x, output_y);
-      gnome_rr_output_info_set_geometry (outputs[i], output_x, output_y, output_width, output_height);
+      g_debug ("Setting geometry for %s: %dx%d+%d+%d", cc_display_monitor_get_display_name (output), output_width, output_height, output_x, output_y);
+      cc_display_monitor_set_position (output, output_x, output_y);
     }
 }
 
 static void
 lay_out_outputs_horizontally (CcDisplayPanel *self)
 {
-  int i;
   int x;
-  GnomeRROutputInfo **outputs;
+  GList *outputs, *l;
 
   /* Lay out all the monitors horizontally when "mirror screens" is turned
    * off, to avoid having all of them overlapped initially.  We put the
@@ -717,28 +693,32 @@ lay_out_outputs_horizontally (CcDisplayPanel *self)
   x = 0;
 
   /* First pass, all "on" outputs */
-  outputs = gnome_rr_config_get_outputs (self->priv->current_configuration);
+  outputs = cc_display_config_get_monitors (self->priv->current_config);
 
-  for (i = 0; outputs[i]; ++i)
+  for (l = outputs; l != NULL; l = l->next)
     {
-      int width, height;
-      if (gnome_rr_output_info_is_connected (outputs[i]) && gnome_rr_output_info_is_active (outputs[i]))
+      CcDisplayMonitor *output = l->data;
+      int width;
+      if (cc_display_monitor_is_active (output))
         {
-          gnome_rr_output_info_get_geometry (outputs[i], NULL, NULL, &width, &height);
-          gnome_rr_output_info_set_geometry (outputs[i], x, 0, width, height);
+          cc_display_mode_get_resolution (cc_display_monitor_get_mode (output),
+                                          &width, NULL);
+          cc_display_monitor_set_position (output, x, 0);
           x += width;
         }
     }
 
   /* Second pass, all the black screens */
 
-    for (i = 0; outputs[i]; ++i)
+  for (l = outputs; l != NULL; l = l->next)
     {
-      int width, height;
-      if (!(gnome_rr_output_info_is_connected (outputs[i]) && gnome_rr_output_info_is_active (outputs[i])))
+      CcDisplayMonitor *output = l->data;
+      int width;
+      if (!cc_display_monitor_is_active (output))
         {
-          gnome_rr_output_info_get_geometry (outputs[i], NULL, NULL, &width, &height);
-          gnome_rr_output_info_set_geometry (outputs[i], x, 0, width, height);
+          cc_display_mode_get_resolution (cc_display_monitor_get_mode (output),
+                                          &width, NULL);
+          cc_display_monitor_set_position (output, x, 0);
           x += width;
         }
     }
@@ -750,52 +730,25 @@ lay_out_outputs_horizontally (CcDisplayPanel *self)
 #define SPACE 15
 #define MARGIN  15
 
-static GList *
-list_connected_outputs (CcDisplayPanel *self, int *total_w, int *total_h)
+static void
+get_total_size (CcDisplayPanel *self, int *total_w, int *total_h)
 {
-  int i, dummy;
-  GList *result = NULL;
-  GnomeRROutputInfo **outputs;
-
-  if (!total_w)
-    total_w = &dummy;
-  if (!total_h)
-    total_h = &dummy;
+  GList *outputs, *l;
 
   *total_w = 0;
   *total_h = 0;
 
-  outputs = gnome_rr_config_get_outputs (self->priv->current_configuration);
-  for (i = 0; outputs[i] != NULL; ++i)
+  outputs = cc_display_config_get_monitors (self->priv->current_config);
+  for (l = outputs; l != NULL; l = l->next)
     {
-      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	continue;
+      CcDisplayMonitor *output = l->data;
+      int w, h;
 
-      if (gnome_rr_output_info_is_connected (outputs[i]))
-	{
-	  int w, h;
+      get_geometry (output, NULL, NULL, &w, &h);
 
-	  result = g_list_prepend (result, outputs[i]);
-
-	  get_geometry (outputs[i], NULL, NULL, &w, &h);
-
-          *total_w += w;
-          *total_h += h;
-        }
+      *total_w += w;
+      *total_h += h;
     }
-
-  return g_list_reverse (result);
-}
-
-static int
-get_n_connected (CcDisplayPanel *self)
-{
-  GList *connected_outputs = list_connected_outputs (self, NULL, NULL);
-  int n = g_list_length (connected_outputs);
-
-  g_list_free (connected_outputs);
-
-  return n;
 }
 
 static double
@@ -805,15 +758,12 @@ compute_scale (CcDisplayPanel *self, FooScrollArea *area)
   int total_w, total_h;
   int n_monitors;
   GdkRectangle viewport;
-  GList *connected_outputs;
 
   foo_scroll_area_get_viewport (area, &viewport);
 
-  connected_outputs = list_connected_outputs (self, &total_w, &total_h);
+  get_total_size (self, &total_w, &total_h);
 
-  n_monitors = g_list_length (connected_outputs);
-
-  g_list_free (connected_outputs);
+  n_monitors = g_list_length (cc_display_config_get_monitors (self->priv->current_config));
 
   available_w = viewport.width - 2 * MARGIN - (n_monitors - 1) * SPACE;
   available_h = viewport.height - 2 * MARGIN - (n_monitors - 1) * SPACE;
@@ -823,7 +773,7 @@ compute_scale (CcDisplayPanel *self, FooScrollArea *area)
 
 typedef struct Edge
 {
-  GnomeRROutputInfo *output;
+  CcDisplayMonitor *output;
   int x1, y1;
   int x2, y2;
 } Edge;
@@ -836,7 +786,7 @@ typedef struct Snap
 } Snap;
 
 static void
-add_edge (GnomeRROutputInfo *output, int x1, int y1, int x2, int y2, GArray *edges)
+add_edge (CcDisplayMonitor *output, int x1, int y1, int x2, int y2, GArray *edges)
 {
   Edge e;
 
@@ -850,7 +800,7 @@ add_edge (GnomeRROutputInfo *output, int x1, int y1, int x2, int y2, GArray *edg
 }
 
 static void
-list_edges_for_output (GnomeRROutputInfo *output, GArray *edges)
+list_edges_for_output (CcDisplayMonitor *output, GArray *edges)
 {
   int x, y, w, h;
 
@@ -864,19 +814,17 @@ list_edges_for_output (GnomeRROutputInfo *output, GArray *edges)
 }
 
 static void
-list_edges (GnomeRRConfig *config, GArray *edges)
+list_edges (CcDisplayConfig *config, GArray *edges)
 {
-  int i;
-  GnomeRROutputInfo **outputs = gnome_rr_config_get_outputs (config);
+  GList *outputs, *l;
 
-  for (i = 0; outputs[i]; ++i)
+  outputs = cc_display_config_get_monitors (config);
+
+  for (l = outputs; l != NULL; l = l->next)
     {
-      if (gnome_rr_output_info_is_connected (outputs[i]))
-	{
-	  if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	    continue;
-	  list_edges_for_output (outputs[i], edges);
-	}
+      CcDisplayMonitor *output = l->data;
+
+      list_edges_for_output (output, edges);
     }
 }
 
@@ -961,7 +909,7 @@ add_edge_snaps (Edge *snapper, Edge *snappee, GArray *snaps)
 }
 
 static void
-list_snaps (GnomeRROutputInfo *output, GArray *edges, GArray *snaps)
+list_snaps (CcDisplayMonitor *output, GArray *edges, GArray *snaps)
 {
   int i;
 
@@ -1017,7 +965,7 @@ edges_align (Edge *e1, Edge *e2)
 }
 
 static gboolean
-output_is_aligned (GnomeRROutputInfo *output, GArray *edges)
+output_is_aligned (CcDisplayMonitor *output, GArray *edges)
 {
   gboolean result = FALSE;
   int i;
@@ -1054,32 +1002,29 @@ output_is_aligned (GnomeRROutputInfo *output, GArray *edges)
 }
 
 static void
-get_output_rect (GnomeRROutputInfo *output, GdkRectangle *rect)
+get_output_rect (CcDisplayMonitor *output, GdkRectangle *rect)
 {
   get_geometry (output, &rect->x, &rect->y, &rect->width, &rect->height);
 }
 
 static gboolean
-output_overlaps (GnomeRROutputInfo *output, GnomeRRConfig *config)
+output_overlaps (CcDisplayMonitor *output, CcDisplayConfig *config)
 {
-  int i;
   GdkRectangle output_rect;
-  GnomeRROutputInfo **outputs;
+  GList *outputs, *l;
 
   g_assert (output != NULL);
 
   get_output_rect (output, &output_rect);
 
-  outputs = gnome_rr_config_get_outputs (config);
-  for (i = 0; outputs[i]; ++i)
+  outputs = cc_display_config_get_monitors (config);
+  for (l = outputs; l != NULL; l = l->next)
     {
-      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	continue;
-      if (outputs[i] != output && gnome_rr_output_info_is_connected (outputs[i]))
+      CcDisplayMonitor *o = l->data;
+      if (o != output)
 	{
 	  GdkRectangle other_rect;
-
-	  get_output_rect (outputs[i], &other_rect);
+	  get_output_rect (o, &other_rect);
 	  if (gdk_rectangle_intersect (&output_rect, &other_rect, NULL))
 	    return TRUE;
 	}
@@ -1089,25 +1034,20 @@ output_overlaps (GnomeRROutputInfo *output, GnomeRRConfig *config)
 }
 
 static gboolean
-gnome_rr_config_is_aligned (GnomeRRConfig *config, GArray *edges)
+config_is_aligned (CcDisplayConfig *config, GArray *edges)
 {
-  int i;
   gboolean result = TRUE;
-  GnomeRROutputInfo **outputs;
+  GList *outputs, *l;
 
-  outputs = gnome_rr_config_get_outputs (config);
-  for (i = 0; outputs[i]; ++i)
+  outputs = cc_display_config_get_monitors (config);
+  for (l = outputs; l != NULL; l = l->next)
     {
-      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	continue;
-      if (gnome_rr_output_info_is_connected (outputs[i]))
-	{
-	  if (!output_is_aligned (outputs[i], edges))
-	    return FALSE;
+      CcDisplayMonitor *output = l->data;
+      if (!output_is_aligned (output, edges))
+        return FALSE;
 
-	  if (output_overlaps (outputs[i], config))
-	    return FALSE;
-	}
+      if (output_overlaps (output, config))
+        return FALSE;
     }
 
   return result;
@@ -1187,81 +1127,24 @@ grab_weak_ref_notify (gpointer  area,
   foo_scroll_area_end_grab (area, NULL);
 }
 
-static GnomeRROutputInfo *
-find_output (GnomeRROutputInfo **outputs,
-             const gchar        *name)
-{
-  int i;
-
-  for (i = 0; outputs[i]; i++)
-    {
-      if (g_str_equal (gnome_rr_output_info_get_name (outputs[i]), name))
-        return outputs[i];
-    }
-  return NULL;
-}
-
 static void
 update_apply_button (CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   gboolean config_equal;
-  GnomeRRConfig *current_configuration;
+  CcDisplayConfig *applied_config;
 
-  if (!gnome_rr_config_applicable (priv->current_configuration,
-                                   priv->screen, NULL))
+  if (!cc_display_config_is_applicable (priv->current_config))
     {
       gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, FALSE);
       return;
     }
 
-  current_configuration = gnome_rr_config_new_current (priv->screen, NULL);
+  applied_config = cc_display_config_manager_get_current (priv->manager);
 
-  /* this checks if the same modes will be set on the outputs */
-  config_equal = gnome_rr_config_equal (priv->current_configuration,
-                                        current_configuration);
-
-  if (config_equal)
-    {
-      /* check if clone state has changed */
-      if (gnome_rr_config_get_clone (priv->current_configuration)
-          != gnome_rr_config_get_clone (current_configuration))
-        {
-          config_equal = FALSE;
-        }
-      else
-        {
-          GnomeRROutputInfo **new_outputs, **current_outputs;
-          int i;
-
-          /* check if primary display has changed */
-          new_outputs = gnome_rr_config_get_outputs (priv->current_configuration);
-          current_outputs = gnome_rr_config_get_outputs (current_configuration);
-
-          for (i = 0; new_outputs[i]; i++)
-            {
-              GnomeRROutputInfo *output;
-
-              output = find_output (current_outputs,
-                                    gnome_rr_output_info_get_name (new_outputs[i]));
-
-              if (!output)
-                {
-                  config_equal = FALSE;
-                  break;
-                }
-
-              if (gnome_rr_output_info_get_primary (new_outputs[i])
-                  != gnome_rr_output_info_get_primary (output))
-                {
-                  config_equal = FALSE;
-                  break;
-                }
-            }
-        }
-    }
-
-  g_object_unref (current_configuration);
+  config_equal = cc_display_config_equal (priv->current_config,
+                                          applied_config);
+  g_object_unref (applied_config);
 
   gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->dialog), GTK_RESPONSE_ACCEPT, !config_equal);
 }
@@ -1271,8 +1154,9 @@ on_output_event (FooScrollArea *area,
                  FooScrollAreaEvent *event,
                  gpointer data)
 {
-  GnomeRROutputInfo *output = data;
+  CcDisplayMonitor *output = data;
   CcDisplayPanel *self = g_object_get_data (G_OBJECT (area), "panel");
+  int n_monitors;
 
   if (event->type == FOO_DRAG_HOVER)
     {
@@ -1284,11 +1168,14 @@ on_output_event (FooScrollArea *area,
       return;
     }
 
+  n_monitors = g_list_length (cc_display_config_get_monitors (self->priv->current_config));
+
   /* If the mouse is inside the outputs, set the cursor to "you can move me".  See
    * on_canvas_event() for where we reset the cursor to the default if it
    * exits the outputs' area.
    */
-  if (!gnome_rr_config_get_clone (self->priv->current_configuration) && get_n_connected (self) > 1)
+  if (!cc_display_config_is_cloning (self->priv->current_config) &&
+      n_monitors > 1)
     set_cursor (GTK_WIDGET (area), GDK_FLEUR);
 
   if (event->type == FOO_BUTTON_PRESS)
@@ -1298,10 +1185,11 @@ on_output_event (FooScrollArea *area,
       self->priv->current_output = output;
 
 
-      if (!gnome_rr_config_get_clone (self->priv->current_configuration) && get_n_connected (self) > 1)
+      if (!cc_display_config_is_cloning (self->priv->current_config) &&
+          n_monitors > 1)
 	{
 	  int output_x, output_y;
-	  gnome_rr_output_info_get_geometry (output, &output_x, &output_y, NULL, NULL);
+	  cc_display_monitor_get_geometry (output, &output_x, &output_y, NULL, NULL);
 
 	  foo_scroll_area_begin_grab (area, on_output_event, data);
 	  g_object_weak_ref (data, grab_weak_ref_notify, area);
@@ -1323,46 +1211,45 @@ on_output_event (FooScrollArea *area,
 	  GrabInfo *info = g_object_get_data (G_OBJECT (output), "grab-info");
 	  double scale = compute_scale (self, area);
 	  int old_x, old_y;
-	  int width, height;
 	  int new_x, new_y;
 	  int i;
 	  GArray *edges, *snaps, *new_edges;
 
-	  gnome_rr_output_info_get_geometry (output, &old_x, &old_y, &width, &height);
+	  cc_display_monitor_get_geometry (output, &old_x, &old_y, NULL, NULL);
 	  new_x = info->output_x + (event->x - info->grab_x) / scale;
 	  new_y = info->output_y + (event->y - info->grab_y) / scale;
 
-	  gnome_rr_output_info_set_geometry (output, new_x, new_y, width, height);
+	  cc_display_monitor_set_position (output, new_x, new_y);
 
 	  edges = g_array_new (TRUE, TRUE, sizeof (Edge));
 	  snaps = g_array_new (TRUE, TRUE, sizeof (Snap));
 	  new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
 
-	  list_edges (self->priv->current_configuration, edges);
+	  list_edges (self->priv->current_config, edges);
 	  list_snaps (output, edges, snaps);
 
 	  g_array_sort (snaps, compare_snaps);
 
-	  gnome_rr_output_info_set_geometry (output, old_x, old_y, width, height);
+	  cc_display_monitor_set_position (output, old_x, old_y);
 
 	  for (i = 0; i < snaps->len; ++i)
 	    {
 	      Snap *snap = &(g_array_index (snaps, Snap, i));
 	      GArray *new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
 
-	      gnome_rr_output_info_set_geometry (output, new_x + snap->dx, new_y + snap->dy, width, height);
+	      cc_display_monitor_set_position (output, new_x + snap->dx, new_y + snap->dy);
 
 	      g_array_set_size (new_edges, 0);
-	      list_edges (self->priv->current_configuration, new_edges);
+	      list_edges (self->priv->current_config, new_edges);
 
-	      if (gnome_rr_config_is_aligned (self->priv->current_configuration, new_edges))
+	      if (config_is_aligned (self->priv->current_config, new_edges))
 		{
 		  g_array_free (new_edges, TRUE);
 		  break;
 		}
 	      else
 		{
-		  gnome_rr_output_info_set_geometry (output, info->output_x, info->output_y, width, height);
+		  cc_display_monitor_set_position (output, info->output_x, info->output_y);
 		}
 	    }
 
@@ -1425,29 +1312,26 @@ on_area_paint (FooScrollArea  *area,
   CcDisplayPanel *self = data;
   GList *connected_outputs = NULL;
   GList *list;
+  int total_w, total_h;
 
   paint_background (area, cr);
 
-  if (!self->priv->current_configuration)
+  if (!self->priv->current_config)
     return;
 
-  connected_outputs = list_connected_outputs (self, NULL, NULL);
+  get_total_size (self, &total_w, &total_h);
 
+  connected_outputs = cc_display_config_get_monitors (self->priv->current_config);
   for (list = connected_outputs; list != NULL; list = list->next)
     {
       int w, h;
       double scale = compute_scale (self, area);
       gint x, y;
       int output_x, output_y;
-      int total_w, total_h;
-      GList *connected_outputs;
-      GnomeRROutputInfo *output = list->data;
+      CcDisplayMonitor *output = list->data;
       GdkRectangle viewport;
 
       cairo_save (cr);
-
-      connected_outputs = list_connected_outputs (self, &total_w, &total_h);
-      g_list_free (connected_outputs);
 
       foo_scroll_area_get_viewport (area, &viewport);
       get_geometry (output, &output_x, &output_y, &w, &h);
@@ -1465,72 +1349,14 @@ on_area_paint (FooScrollArea  *area,
       cairo_fill (cr);
 
       cairo_translate (cr, x, y);
-      paint_output (self, cr, self->priv->current_configuration, output,
+      paint_output (self, cr, self->priv->current_config, output,
                     cc_display_panel_get_output_id (output),
                     w * scale, h * scale);
 
       cairo_restore (cr);
 
-      if (gnome_rr_config_get_clone (self->priv->current_configuration))
+      if (cc_display_config_is_cloning (self->priv->current_config))
         break;
-    }
-}
-
-static void
-compute_virtual_size_for_configuration (GnomeRRConfig *config, int *ret_width, int *ret_height)
-{
-  int i;
-  int width, height;
-  int output_x, output_y, output_width, output_height;
-  GnomeRROutputInfo **outputs;
-
-  width = height = 0;
-
-  outputs = gnome_rr_config_get_outputs (config);
-  for (i = 0; outputs[i] != NULL; i++)
-    {
-
-      if (!gnome_rr_output_info_is_primary_tile (outputs[i]))
-	continue;
-
-      if (gnome_rr_output_info_is_active (outputs[i]))
-	{
-	  gnome_rr_output_info_get_geometry (outputs[i], &output_x, &output_y, &output_width, &output_height);
-	  width = MAX (width, output_x + output_width);
-	  height = MAX (height, output_y + output_height);
-	}
-    }
-
-  *ret_width = width;
-  *ret_height = height;
-}
-
-static void
-check_required_virtual_size (CcDisplayPanel *self)
-{
-  int req_width, req_height;
-  int min_width, max_width;
-  int min_height, max_height;
-
-  compute_virtual_size_for_configuration (self->priv->current_configuration, &req_width, &req_height);
-
-  gnome_rr_screen_get_ranges (self->priv->screen, &min_width, &max_width, &min_height, &max_height);
-
-#if 0
-  g_debug ("X Server supports:");
-  g_debug ("min_width = %d, max_width = %d", min_width, max_width);
-  g_debug ("min_height = %d, max_height = %d", min_height, max_height);
-
-  g_debug ("Requesting size of %dx%d", req_width, req_height);
-#endif
-
-  if (!(min_width <= req_width && req_width <= max_width
-        && min_height <= req_height && req_height <= max_height))
-    {
-      /* FIXME: present a useful dialog, maybe even before the user tries to Apply */
-#if 0
-      g_debug ("Your X server needs a larger Virtual size!");
-#endif
     }
 }
 
@@ -1539,13 +1365,7 @@ apply_current_configuration (CcDisplayPanel *self)
 {
   GError *error = NULL;
 
-  gnome_rr_config_sanitize (self->priv->current_configuration);
-  gnome_rr_config_ensure_primary (self->priv->current_configuration);
-
-  check_required_virtual_size (self);
-
-  gnome_rr_config_apply_persistent (self->priv->current_configuration,
-                                    self->priv->screen, &error);
+  cc_display_config_apply (self->priv->current_config, &error);
 
   /* re-read the configuration */
   on_screen_changed (self);
@@ -1675,12 +1495,14 @@ make_aspect_string (gint width,
 }
 
 static char *
-make_resolution_string (GnomeRRMode *mode)
+make_resolution_string (CcDisplayMode *mode)
 {
-  gint width = gnome_rr_mode_get_width (mode);
-  gint height = gnome_rr_mode_get_height (mode);
-  const char *aspect = make_aspect_string (width, height);
-  const char *interlaced = gnome_rr_mode_get_is_interlaced (mode) ? "i" : "";
+  const char *interlaced = cc_display_mode_is_interlaced (mode) ? "i" : "";
+  const char *aspect;
+  int width, height;
+
+  cc_display_mode_get_resolution (mode, &width, &height);
+  aspect = make_aspect_string (width, height);
 
   if (aspect != NULL)
     return g_strdup_printf ("%d × %d%s (%s)", width, height, interlaced, aspect);
@@ -1716,8 +1538,8 @@ list_box_item (const gchar *title,
 }
 
 static gboolean
-is_atsc_duplicate_freq (GnomeRRMode *mode,
-                        GnomeRRMode *next_mode)
+is_atsc_duplicate_freq (CcDisplayMode *mode,
+                        CcDisplayMode *next_mode)
 {
   double freq, next_freq;
   gboolean ret;
@@ -1725,8 +1547,8 @@ is_atsc_duplicate_freq (GnomeRRMode *mode,
   if (next_mode == NULL)
     return FALSE;
 
-  freq = gnome_rr_mode_get_freq_f (mode);
-  next_freq = gnome_rr_mode_get_freq_f (next_mode);
+  freq = cc_display_mode_get_freq_f (mode);
+  next_freq = cc_display_mode_get_freq_f (next_mode);
 
   ret = fabs (freq - (next_freq / 1000.0 * 1001.0)) < 0.01;
 
@@ -1740,24 +1562,23 @@ is_atsc_duplicate_freq (GnomeRRMode *mode,
 static int
 sort_frequencies (gconstpointer a, gconstpointer b)
 {
-  GnomeRRMode *mode_a = (GnomeRRMode *) a;
-  GnomeRRMode *mode_b = (GnomeRRMode *) b;
+  CcDisplayMode *mode_a = (CcDisplayMode *) a;
+  CcDisplayMode *mode_b = (CcDisplayMode *) b;
 
   /* Highest to lowest */
-  if (gnome_rr_mode_get_freq_f (mode_a) > gnome_rr_mode_get_freq_f (mode_b))
+  if (cc_display_mode_get_freq_f (mode_a) > cc_display_mode_get_freq_f (mode_b))
     return -1;
-  if (gnome_rr_mode_get_freq_f (mode_a) < gnome_rr_mode_get_freq_f (mode_b))
+  if (cc_display_mode_get_freq_f (mode_a) < cc_display_mode_get_freq_f (mode_b))
     return 1;
   return 0;
 }
 
 static void
 setup_frequency_combo_box (CcDisplayPanel *panel,
-                           GnomeRRMode    *resolution_mode)
+                           CcDisplayMode  *resolution_mode)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRROutput *current_output;
-  GnomeRRMode *current_mode;
+  CcDisplayMode *current_mode;
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *res;
@@ -1765,9 +1586,7 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
   guint i;
   gboolean prev_dup;
 
-  current_output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                                       gnome_rr_output_info_get_name (priv->current_output));
-  current_mode = gnome_rr_output_get_current_mode (current_output);
+  current_mode = cc_display_monitor_get_mode (priv->current_output);
 
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->freq_combo));
   gtk_list_store_clear (GTK_LIST_STORE (model));
@@ -1788,8 +1607,8 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
    * We also want to handle this for ~30Hz and ~120Hz */
   for (l = frequencies; l != NULL; l = l->next)
     {
-      GnomeRRMode *mode = l->data;
-      GnomeRRMode *next_mode;
+      CcDisplayMode *mode = l->data;
+      CcDisplayMode *next_mode;
       gchar *freq;
       gboolean dup;
 
@@ -1810,12 +1629,12 @@ setup_frequency_combo_box (CcDisplayPanel *panel,
           /* translators: example string is "60 Hz (NTSC)"
            * NTSC is https://en.wikipedia.org/wiki/NTSC */
           freq = g_strdup_printf (_("%d Hz (NTSC)"),
-                                  (int) (roundf (gnome_rr_mode_get_freq_f (mode))));
+                                  (int) (roundf (cc_display_mode_get_freq_f (mode))));
         }
       else
         {
           /* translators: example string is "60 Hz" */
-          freq = g_strdup_printf (_("%d Hz"), gnome_rr_mode_get_freq (mode));
+          freq = g_strdup_printf (_("%d Hz"), cc_display_mode_get_freq (mode));
         }
 
       gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &iter,
@@ -1864,12 +1683,12 @@ clear_res_freqs (CcDisplayPanel *panel)
 
 static void
 setup_resolution_combo_box (CcDisplayPanel  *panel,
-                            GnomeRRMode    **modes,
-                            GnomeRRMode     *current_mode)
+                            GList           *modes,
+                            CcDisplayMode   *current_mode)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkTreeModel *res_model;
-  gint i;
+  GList *m;
 
   clear_res_freqs (panel);
   priv->res_freqs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -1877,45 +1696,47 @@ setup_resolution_combo_box (CcDisplayPanel  *panel,
   res_model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->res_combo));
   gtk_list_store_clear (GTK_LIST_STORE (res_model));
 
-  for (i = 0; modes[i] != NULL; i++)
+  for (m = modes; m != NULL; m = m->next)
     {
+      CcDisplayMode *mode = m->data;
       GSList *l;
       gchar *res;
       gint output_width, output_height, mode_width, mode_height;
 
       if (!current_mode)
-        current_mode = modes[i];
+        current_mode = mode;
 
-      mode_width = gnome_rr_mode_get_width (modes[i]);
-      mode_height = gnome_rr_mode_get_height (modes[i]);
+      cc_display_mode_get_resolution (mode, &mode_width, &mode_height);
 
-      output_width = gnome_rr_output_info_get_preferred_width (priv->current_output);
-      output_height = gnome_rr_output_info_get_preferred_height (priv->current_output);
+      cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (priv->current_output),
+                                      &output_width, &output_height);
 
       if (!should_show_resolution (output_width, output_height, mode_width,
                                    mode_height))
         continue;
 
-      res = make_resolution_string (modes[i]);
+      res = make_resolution_string (mode);
 
       if ((l = g_hash_table_lookup (priv->res_freqs, res)) == NULL)
         {
           GtkTreeIter iter;
+          gint current_mode_width, current_mode_height;
 
           gtk_list_store_insert_with_values (GTK_LIST_STORE (res_model), &iter,
-                                             -1, 0, res, 1, modes[i], -1);
+                                             -1, 0, res, 1, mode, -1);
 
+          cc_display_mode_get_resolution (current_mode,
+                                          &current_mode_width, &current_mode_height);
           /* select the current mode in the combo box */
-          if (gnome_rr_mode_get_width (modes[i]) == gnome_rr_mode_get_width (current_mode)
-              && gnome_rr_mode_get_height (modes[i]) == gnome_rr_mode_get_height (current_mode)
-              && gnome_rr_mode_get_is_interlaced (modes[i]) == gnome_rr_mode_get_is_interlaced (current_mode))
+          if (mode_width == current_mode_width && mode_height == current_mode_height
+              && cc_display_mode_is_interlaced (mode) == cc_display_mode_is_interlaced (current_mode))
             {
               gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->res_combo),
                                              &iter);
             }
         }
 
-      l = g_slist_append (l, modes[i]);
+      l = g_slist_append (l, mode);
       g_hash_table_replace (priv->res_freqs, res, l);
     }
 
@@ -1933,37 +1754,34 @@ setup_listbox_row_activated (GtkListBox     *list_box,
                              CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRRMode **modes;
+  GList *modes;
   gint index;
-  GnomeRROutput *output;
 
   if (!row)
     return;
 
   index = gtk_list_box_row_get_index (row);
 
-  output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                               gnome_rr_output_info_get_name (priv->current_output));
   gtk_widget_set_sensitive (priv->config_grid, index != DISPLAY_MODE_OFF);
-  gnome_rr_output_info_set_active (priv->current_output,
-                                   (index != DISPLAY_MODE_OFF));
+  cc_display_monitor_set_active (priv->current_output,
+                                 (index != DISPLAY_MODE_OFF));
 
   if (index == DISPLAY_MODE_MIRROR)
     {
-      modes = gnome_rr_screen_list_clone_modes (priv->screen);
-      gnome_rr_config_set_clone (priv->current_configuration, TRUE);
+      modes = cc_display_config_get_cloning_modes (priv->current_config);
+      cc_display_config_set_cloning (priv->current_config, TRUE);
     }
   else
     {
-      gnome_rr_output_info_set_primary (priv->current_output,
-                                        (index == DISPLAY_MODE_PRIMARY));
-      gnome_rr_config_set_clone (priv->current_configuration, FALSE);
+      cc_display_monitor_set_primary (priv->current_output,
+                                      (index == DISPLAY_MODE_PRIMARY));
+      cc_display_config_set_cloning (priv->current_config, FALSE);
 
-      modes = gnome_rr_output_list_modes (output);
+      modes = cc_display_monitor_get_modes (priv->current_output);
     }
 
   setup_resolution_combo_box (panel, modes,
-                              gnome_rr_output_get_current_mode (output));
+                              cc_display_monitor_get_mode (priv->current_output));
   update_apply_button (panel);
 }
 
@@ -1972,7 +1790,7 @@ rotate_left_clicked (GtkButton      *button,
                      CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRRRotation rotation;
+  CcDisplayRotation rotation;
   gboolean active;
 
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
@@ -1981,14 +1799,14 @@ rotate_left_clicked (GtkButton      *button,
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), FALSE);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), FALSE);
-      rotation = GNOME_RR_ROTATION_90;
+      rotation = CC_DISPLAY_ROTATION_90;
     }
   else
     {
-      rotation = GNOME_RR_ROTATION_0;
+      rotation = CC_DISPLAY_ROTATION_NONE;
     }
 
-  gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+  cc_display_monitor_set_rotation (priv->current_output, rotation);
   update_apply_button (panel);
 }
 
@@ -1997,7 +1815,7 @@ upside_down_clicked (GtkButton      *button,
                      CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRRRotation rotation;
+  CcDisplayRotation rotation;
   gboolean active;
 
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
@@ -2006,14 +1824,14 @@ upside_down_clicked (GtkButton      *button,
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), FALSE);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), FALSE);
-      rotation = GNOME_RR_ROTATION_180;
+      rotation = CC_DISPLAY_ROTATION_180;
     }
   else
     {
-      rotation = GNOME_RR_ROTATION_0;
+      rotation = CC_DISPLAY_ROTATION_NONE;
     }
 
-  gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+  cc_display_monitor_set_rotation (priv->current_output, rotation);
   update_apply_button (panel);
 }
 
@@ -2022,7 +1840,7 @@ rotate_right_clicked (GtkButton      *button,
                       CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRRRotation rotation;
+  CcDisplayRotation rotation;
   gboolean active;
 
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
@@ -2031,14 +1849,14 @@ rotate_right_clicked (GtkButton      *button,
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), FALSE);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), FALSE);
-      rotation = GNOME_RR_ROTATION_270;
+      rotation = CC_DISPLAY_ROTATION_270;
     }
   else
     {
-      rotation = GNOME_RR_ROTATION_0;
+      rotation = CC_DISPLAY_ROTATION_NONE;
     }
 
-  gnome_rr_output_info_set_rotation (priv->current_output, rotation);
+  cc_display_monitor_set_rotation (priv->current_output, rotation);
   update_apply_button (panel);
 }
 
@@ -2088,7 +1906,7 @@ freq_combo_changed (GtkComboBox    *combo,
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  GnomeRRMode *mode;
+  CcDisplayMode *mode;
 
   model = gtk_combo_box_get_model (combo);
 
@@ -2097,8 +1915,7 @@ freq_combo_changed (GtkComboBox    *combo,
       gtk_tree_model_get (GTK_TREE_MODEL (model), &iter, 1, &mode, -1);
       if (mode)
         {
-          gnome_rr_output_info_set_refresh_rate (priv->current_output,
-                                                 gnome_rr_mode_get_freq (mode));
+          cc_display_monitor_set_mode (priv->current_output, mode);
           update_apply_button (panel);
         }
     }
@@ -2111,9 +1928,7 @@ res_combo_changed (GtkComboBox    *combo,
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkTreeModel *res_model;
   GtkTreeIter iter;
-  GnomeRRMode *mode;
-  gint x, y, width, height, i;
-  GnomeRROutputInfo **outputs;
+  CcDisplayMode *mode;
 
   res_model = gtk_combo_box_get_model (combo);
 
@@ -2121,20 +1936,16 @@ res_combo_changed (GtkComboBox    *combo,
     {
       gtk_tree_model_get (GTK_TREE_MODEL (res_model), &iter, 1, &mode, -1);
 
-      gnome_rr_output_info_get_geometry (priv->current_output, &x, &y, NULL, NULL);
-
-      width = gnome_rr_mode_get_width (mode);
-      height = gnome_rr_mode_get_height (mode);
-
-      if (gnome_rr_config_get_clone (priv->current_configuration))
+      if (cc_display_config_is_cloning (priv->current_config))
         {
-          outputs = gnome_rr_config_get_outputs (priv->current_configuration);
-          for (i = 0; outputs[i]; i++)
-            gnome_rr_output_info_set_geometry (outputs[i], x, y, width, height);
+          GList *outputs, *l;
+          outputs = cc_display_config_get_monitors (priv->current_config);
+          for (l = outputs; l != NULL; l = l->next)
+            cc_display_monitor_set_mode (CC_DISPLAY_MONITOR (l->data), mode);
         }
       else
         {
-          gnome_rr_output_info_set_geometry (priv->current_output, x, y, width, height);
+          cc_display_monitor_set_mode (priv->current_output, mode);
         }
 
       update_apply_button (panel);
@@ -2144,38 +1955,38 @@ res_combo_changed (GtkComboBox    *combo,
 }
 
 static void
-sanity_check_rotation (GnomeRROutputInfo *output)
+sanity_check_rotation (CcDisplayMonitor *output)
 {
-  GnomeRRRotation rotation;
+  CcDisplayRotation rotation;
 
-  rotation = gnome_rr_output_info_get_rotation (output);
+  rotation = cc_display_monitor_get_rotation (output);
 
   /* other options such as reflection are not supported */
-  rotation &= (GNOME_RR_ROTATION_0 | GNOME_RR_ROTATION_90
-               | GNOME_RR_ROTATION_180 | GNOME_RR_ROTATION_270);
+  rotation &= (CC_DISPLAY_ROTATION_NONE | CC_DISPLAY_ROTATION_90
+               | CC_DISPLAY_ROTATION_180 | CC_DISPLAY_ROTATION_270);
   if (rotation == 0)
-    rotation = GNOME_RR_ROTATION_0;
-  gnome_rr_output_info_set_rotation (output, rotation);
+    rotation = CC_DISPLAY_ROTATION_NONE;
+  cc_display_monitor_set_rotation (output, rotation);
 }
 
 static gboolean
 should_show_rotation (CcDisplayPanel *panel,
-                      GnomeRROutput  *output)
+                      CcDisplayMonitor  *output)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
   gboolean supports_rotation;
 
-  supports_rotation = gnome_rr_output_info_supports_rotation (priv->current_output,
-                                                              GNOME_RR_ROTATION_90 |
-                                                              GNOME_RR_ROTATION_180 |
-                                                              GNOME_RR_ROTATION_270);
+  supports_rotation = cc_display_monitor_supports_rotation (output,
+                                                            CC_DISPLAY_ROTATION_90 |
+                                                            CC_DISPLAY_ROTATION_180 |
+                                                            CC_DISPLAY_ROTATION_270);
 
   /* Doesn't support rotation at all */
   if (!supports_rotation)
     return FALSE;
 
   /* We can always rotate displays that aren't builtin */
-  if (!gnome_rr_output_is_builtin_display (output))
+  if (!cc_display_monitor_is_builtin (output))
     return TRUE;
 
   /* Only offer rotation if there's no accelerometer */
@@ -2189,7 +2000,7 @@ underscan_switch_toggled (CcDisplayPanel *panel)
   gboolean value;
 
   value = gtk_switch_get_active (GTK_SWITCH (priv->scaling_switch));
-  gnome_rr_output_info_set_underscanning (priv->current_output, value);
+  cc_display_monitor_set_underscanning (priv->current_output, value);
   update_apply_button (panel);
 }
 
@@ -2199,28 +2010,27 @@ show_setup_dialog (CcDisplayPanel *panel)
   CcDisplayPanelPrivate *priv = panel->priv;
   GtkWidget *listbox = NULL, *content_area, *item, *box, *frame, *preview;
   GtkWidget *label, *rotate_box;
-  gint i, width_mm, height_mm, old_width, old_height, grid_pos;
-  GnomeRROutput *output;
+  gint width_mm, height_mm, old_width, old_height, grid_pos;
   gchar *str;
-  gboolean clone, was_clone, primary, was_primary, active;
+  gboolean clone, was_clone, primary, active;
   GtkListStore *res_model, *freq_model;
   GtkCellRenderer *renderer;
-  GnomeRRRotation rotation;
+  CcDisplayRotation rotation;
   gboolean show_rotation;
   gint response, num_active_outputs = 0;
-  GnomeRROutputInfo **outputs;
+  GList *outputs, *l;
 
-  outputs = gnome_rr_config_get_outputs (priv->current_configuration);
+  outputs = cc_display_config_get_monitors (priv->current_config);
 
   /* count the number of active */
-  for (i = 0; outputs[i]; i++)
-    if (gnome_rr_output_info_is_active (outputs[i]))
-      num_active_outputs++;
+  for (l = outputs; l != NULL; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+      if (cc_display_monitor_is_active (output))
+        num_active_outputs++;
+    }
 
-  output = gnome_rr_screen_get_output_by_name (priv->screen,
-                                               gnome_rr_output_info_get_name (priv->current_output));
-
-  priv->dialog = gtk_dialog_new_with_buttons (gnome_rr_output_info_get_display_name (priv->current_output),
+  priv->dialog = gtk_dialog_new_with_buttons (cc_display_monitor_get_display_name (priv->current_output),
                                               GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)))),
                                               GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR,
                                               _("_Cancel"), GTK_RESPONSE_CANCEL,
@@ -2252,15 +2062,15 @@ show_setup_dialog (CcDisplayPanel *panel)
 
   /* preview */
   preview = display_preview_new (panel, priv->current_output,
-                                 priv->current_configuration,
+                                 priv->current_config,
                                  cc_display_panel_get_output_id (priv->current_output),
                                  DISPLAY_PREVIEW_SETUP_HEIGHT);
   gtk_grid_attach (GTK_GRID (priv->config_grid), preview, 0, grid_pos, 2, 1);
   grid_pos++;
 
   /* rotation */
-  show_rotation = should_show_rotation (panel, output);
-  rotation = gnome_rr_output_info_get_rotation (priv->current_output);
+  show_rotation = should_show_rotation (panel, priv->current_output);
+  rotation = cc_display_monitor_get_rotation (priv->current_output);
 
   if (show_rotation)
     {
@@ -2272,12 +2082,12 @@ show_setup_dialog (CcDisplayPanel *panel)
       gtk_widget_set_halign (rotate_box, GTK_ALIGN_CENTER);
       grid_pos++;
 
-      if (gnome_rr_output_info_supports_rotation (priv->current_output,
-                                                  GNOME_RR_ROTATION_90))
+      if (cc_display_monitor_supports_rotation (priv->current_output,
+                                                CC_DISPLAY_ROTATION_90))
         {
           priv->rotate_left_button = gtk_toggle_button_new ();
           gtk_widget_set_tooltip_text (priv->rotate_left_button, _("Rotate counterclockwise by 90\xc2\xb0"));
-          if (rotation == GNOME_RR_ROTATION_90)
+          if (rotation == CC_DISPLAY_ROTATION_90)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_left_button), TRUE);
           g_signal_connect (priv->rotate_left_button, "clicked",
                             G_CALLBACK (rotate_left_clicked), panel);
@@ -2290,12 +2100,12 @@ show_setup_dialog (CcDisplayPanel *panel)
           gtk_container_add (GTK_CONTAINER (rotate_box), priv->rotate_left_button);
         }
 
-      if (gnome_rr_output_info_supports_rotation (priv->current_output,
-                                                  GNOME_RR_ROTATION_180))
+      if (cc_display_monitor_supports_rotation (priv->current_output,
+                                                CC_DISPLAY_ROTATION_180))
         {
           priv->upside_down_button = gtk_toggle_button_new ();
           gtk_widget_set_tooltip_text (priv->upside_down_button, _("Rotate by 180\xc2\xb0"));
-          if (rotation == GNOME_RR_ROTATION_180)
+          if (rotation == CC_DISPLAY_ROTATION_180)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->upside_down_button), TRUE);
           g_signal_connect (priv->upside_down_button, "clicked",
                             G_CALLBACK (upside_down_clicked), panel);
@@ -2308,12 +2118,12 @@ show_setup_dialog (CcDisplayPanel *panel)
           gtk_container_add (GTK_CONTAINER (rotate_box), priv->upside_down_button);
         }
 
-      if (gnome_rr_output_info_supports_rotation (priv->current_output,
-                                                  GNOME_RR_ROTATION_270))
+      if (cc_display_monitor_supports_rotation (priv->current_output,
+                                                CC_DISPLAY_ROTATION_270))
         {
           priv->rotate_right_button = gtk_toggle_button_new ();
           gtk_widget_set_tooltip_text (priv->rotate_right_button, _("Rotate clockwise by 90\xc2\xb0"));
-          if (rotation == GNOME_RR_ROTATION_270)
+          if (rotation == CC_DISPLAY_ROTATION_270)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->rotate_right_button), TRUE);
           g_signal_connect (priv->rotate_right_button, "clicked",
                             G_CALLBACK (rotate_right_clicked), panel);
@@ -2328,7 +2138,7 @@ show_setup_dialog (CcDisplayPanel *panel)
     }
 
   /* size */
-  gnome_rr_output_get_physical_size (output, &width_mm, &height_mm);
+  cc_display_monitor_get_physical_size (priv->current_output, &width_mm, &height_mm);
   str = make_display_size_string (width_mm, height_mm);
 
   if (str != NULL)
@@ -2353,8 +2163,12 @@ show_setup_dialog (CcDisplayPanel *panel)
                                GTK_STYLE_CLASS_DIM_LABEL);
   gtk_grid_attach (GTK_GRID (priv->config_grid), label, 0, grid_pos, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_END);
-  label = gtk_label_new (make_aspect_string (gnome_rr_output_info_get_preferred_width (priv->current_output),
-                                             gnome_rr_output_info_get_preferred_height (priv->current_output)));
+  {
+    int w, h;
+    cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (priv->current_output),
+                                    &w, &h);
+    label = gtk_label_new (make_aspect_string (w, h));
+  }
   gtk_grid_attach (GTK_GRID (priv->config_grid), label, 1, grid_pos, 1, 1);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   grid_pos++;
@@ -2382,12 +2196,12 @@ show_setup_dialog (CcDisplayPanel *panel)
   gtk_widget_set_halign (priv->res_combo, GTK_ALIGN_START);
 
   /* overscan */
-  if (!gnome_rr_output_is_builtin_display (output) &&
-      gnome_rr_output_supports_underscanning (output))
+  if (!cc_display_monitor_is_builtin (priv->current_output) &&
+      cc_display_monitor_supports_underscanning (priv->current_output))
     {
       priv->scaling_switch = gtk_switch_new ();
       gtk_switch_set_active (GTK_SWITCH (priv->scaling_switch),
-                             gnome_rr_output_info_get_underscanning (priv->current_output));
+                             cc_display_monitor_get_underscanning (priv->current_output));
       g_signal_connect_swapped (G_OBJECT (priv->scaling_switch), "notify::active",
                                 G_CALLBACK (underscan_switch_toggled), panel);
 
@@ -2425,9 +2239,9 @@ show_setup_dialog (CcDisplayPanel *panel)
                           label, "visible", G_BINDING_BIDIRECTIONAL);
   grid_pos++;
 
-  was_clone = clone = gnome_rr_config_get_clone (priv->current_configuration);
-  was_primary = primary = gnome_rr_output_info_get_primary (priv->current_output);
-  active = gnome_rr_output_info_is_active (priv->current_output);
+  was_clone = clone = cc_display_config_is_cloning (priv->current_config);
+  primary = cc_display_monitor_is_primary (priv->current_output);
+  active = cc_display_monitor_is_active (priv->current_output);
 
   if (num_active_outputs > 1 || !active)
     {
@@ -2484,19 +2298,17 @@ show_setup_dialog (CcDisplayPanel *panel)
     }
   else
     {
-      GnomeRRMode **modes;
-
-      modes = gnome_rr_output_list_modes (output);
-      setup_resolution_combo_box (panel, modes,
-                                  gnome_rr_output_get_current_mode (output));
+      setup_resolution_combo_box (panel,
+                                  cc_display_monitor_get_modes (priv->current_output),
+                                  cc_display_monitor_get_mode (priv->current_output));
     }
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog));
   gtk_container_add (GTK_CONTAINER (box), priv->config_grid);
   gtk_widget_show_all (box);
 
-  gnome_rr_output_info_get_geometry (priv->current_output, NULL, NULL,
-                                     &old_width, &old_height);
+  cc_display_monitor_get_geometry (priv->current_output, NULL, NULL,
+                                   &old_width, &old_height);
 
   response = gtk_dialog_run (GTK_DIALOG (priv->dialog));
   if (response == GTK_RESPONSE_ACCEPT)
@@ -2506,11 +2318,7 @@ show_setup_dialog (CcDisplayPanel *panel)
 
       if (g_hash_table_size (output_ids) > 1)
         {
-          gint new_width, new_height;
           gboolean primary_chosen = FALSE;
-
-          gnome_rr_output_info_get_geometry (priv->current_output, NULL, NULL,
-                                             &new_width, &new_height);
 
           row = gtk_list_box_get_selected_row (GTK_LIST_BOX (listbox));
 
@@ -2544,34 +2352,37 @@ show_setup_dialog (CcDisplayPanel *panel)
               break;
             }
 
-          gnome_rr_output_info_set_active (priv->current_output, active);
-          gnome_rr_output_info_set_primary (priv->current_output, primary);
-          gnome_rr_config_set_clone (priv->current_configuration, clone);
+          cc_display_monitor_set_active (priv->current_output, active);
+          cc_display_monitor_set_primary (priv->current_output, primary);
+          cc_display_config_set_cloning (priv->current_config, clone);
 
-          for (i = 0; outputs[i]; i++)
+          for (l = outputs; l != NULL; l = l->next)
             {
-              if (!gnome_rr_output_info_is_active (outputs[i]))
+              CcDisplayMonitor *output = l->data;
+
+              if (!cc_display_monitor_is_active (output))
                 continue;
 
               if (clone)
                 {
                   /* set all active outputs to the same size and position when
                    * cloning */
-                  gnome_rr_output_info_set_geometry (outputs[i], 0, 0,
-                                                     new_width, new_height);
+                  cc_display_monitor_set_mode (output,
+                                               cc_display_monitor_get_mode (priv->current_output));
+                  cc_display_monitor_set_position (output, 0, 0);
                 }
-              else if (outputs[i] != priv->current_output)
+              else if (output != priv->current_output)
                 {
                   /* ensure no other outputs are primary if this output is now
                    * primary, or find another output to set as primary if this
                    * output is no longer primary */
                   if (primary)
                     {
-                      gnome_rr_output_info_set_primary (outputs[i], FALSE);
+                      cc_display_monitor_set_primary (output, FALSE);
                     }
-                  else if (!primary_chosen && gnome_rr_output_info_is_primary_tile (outputs[i]))
+                  else if (!primary_chosen)
                     {
-                      gnome_rr_output_info_set_primary (outputs[i], TRUE);
+                      cc_display_monitor_set_primary (output, TRUE);
                       primary_chosen = TRUE;
                     }
                 }
@@ -2629,16 +2440,16 @@ cc_display_panel_box_row_activated (GtkListBox     *listbox,
                                     CcDisplayPanel *panel)
 {
   CcDisplayPanelPrivate *priv = panel->priv;
-  GnomeRROutputInfo *output_info;
+  CcDisplayMonitor *output;
 
   gtk_list_box_select_row (listbox, NULL);
 
-  output_info = g_object_get_data (G_OBJECT (row), "gnome-rr-output");
+  output = g_object_get_data (G_OBJECT (row), "cc-display-monitor");
 
-  if (!output_info)
+  if (!output)
     return;
 
-  priv->current_output = output_info;
+  priv->current_output = output;
 
   show_setup_dialog (panel);
 }
@@ -2803,12 +2614,18 @@ cc_display_panel_init (CcDisplayPanel *self)
   GtkWidget *box;
   GtkWidget *label;
   GtkWidget *night_light_listbox;
-  GError *error = NULL;
   GSettings *settings;
 
   g_resources_register (cc_display_get_resource ());
 
   priv = self->priv = DISPLAY_PANEL_PRIVATE (self);
+
+  priv->stack = gtk_stack_new ();
+  gtk_stack_add_named (GTK_STACK (priv->stack),
+                       gtk_label_new (_("Could not get screen information")),
+                       "error");
+  gtk_container_add (GTK_CONTAINER (self), priv->stack);
+  gtk_widget_show_all (priv->stack);
 
   settings = g_settings_new ("org.gnome.desktop.background");
   priv->background = gnome_bg_new ();
@@ -2819,22 +2636,19 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   priv->night_light_dialog = cc_night_light_dialog_new ();
 
-  priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
-  if (!priv->screen)
+  priv->manager = cc_display_config_manager_rr_new ();
+  if (!priv->manager)
     {
-      gtk_container_add (GTK_CONTAINER (self),
-                         gtk_label_new (_("Could not get screen information")));
-      g_error_free (error);
-
-      gtk_widget_show_all (GTK_WIDGET (self));
-
+      /* TODO: try the other implementation before failing? */
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "error");
       return;
     }
 
   output_ids = g_hash_table_new (g_direct_hash, g_direct_equal);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 22);
-  gtk_container_add (GTK_CONTAINER (self), vbox);
+  gtk_stack_add_named (GTK_STACK (priv->stack), vbox, "main");
+  gtk_stack_set_visible_child (GTK_STACK (priv->stack), vbox);
 
   frame = gtk_frame_new (NULL);
   gtk_widget_set_margin_start (vbox, 134);
@@ -2892,11 +2706,10 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   gtk_widget_show_all (vbox);
 
-  on_screen_changed (self);
-  priv->screen_changed_handler_id = g_signal_connect_swapped (priv->screen,
-                                                              "changed",
-                                                              G_CALLBACK (on_screen_changed),
-                                                              self);
+  g_signal_connect_object (priv->manager, "changed",
+                           G_CALLBACK (on_screen_changed),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   self->priv->up_client = up_client_new ();
   if (up_client_get_lid_is_present (self->priv->up_client))
