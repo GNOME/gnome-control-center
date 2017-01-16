@@ -13,15 +13,15 @@
 #
 #
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2013, 2014, 2015, 2016.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2013, 2014, 2015, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-12-15 17:21+0000\n"
-"PO-Revision-Date: 2016-12-20 16:25+0100\n"
+"POT-Creation-Date: 2017-01-09 16:43+0000\n"
+"PO-Revision-Date: 2017-01-11 09:38+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -1584,7 +1584,7 @@ msgid "Launch help browser"
 msgstr "Lanzar el visor de ayuda"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
+#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Configuración"
@@ -3709,13 +3709,13 @@ msgid "Applications"
 msgstr "Aplicaciones"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
+#: ../panels/online-accounts/cc-online-accounts-panel.c:111
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Otra"
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Añadir cuenta"
 
@@ -3741,31 +3741,10 @@ msgstr "Recursos"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:385
+#: ../panels/online-accounts/cc-online-accounts-panel.c:403
 #, c-format
-#| msgid "My Account"
 msgid "%s Account"
 msgstr "Cuenta de %s"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:662
-msgid "Error creating account"
-msgstr "Error al crear la cuenta"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:722
-msgid "Error removing account"
-msgstr "Error al quitar la cuenta"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:754
-msgid "Are you sure you want to remove the account?"
-msgstr "¿Está seguro de que quiere quitar la cuenta?"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:756
-msgid "This will not remove the account on the server."
-msgstr "Esto no quitará la cuenta en el servidor."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
-msgid "_Remove"
-msgstr "_Quitar"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3786,13 +3765,13 @@ msgstr ""
 "ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-msgid "No online accounts configured"
-msgstr "No hay cuentas en línea configuradas"
+msgid "Connect to your data in the cloud"
+msgstr "Conectarse a sus datos en la nube"
 
-#: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-msgid "Remove Account"
-msgstr "Quitar cuenta"
+#: ../panels/online-accounts/online-accounts.ui.h:2
+#| msgid "Add account"
+msgid "Add an account"
+msgstr "Añadir una cuenta"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
@@ -6335,6 +6314,10 @@ msgstr "Icono de usuario"
 msgid "Last Login"
 msgstr "Último inicio de sesión"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove Account"
+msgstr "Quitar cuenta"
+
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Gestionar cuentas de usuario"
@@ -6980,12 +6963,10 @@ msgstr "Pulsación errónea detectada, reiniciando…"
 
 #: ../panels/wacom/cc-wacom-button-row.c:266
 #, c-format
-#| msgid "Button"
 msgid "Button %d"
 msgstr "Botón %d"
 
 #: ../panels/wacom/cc-wacom-button-row.h:53
-#| msgid "Applications"
 msgctxt "Wacom action-type"
 msgid "Application defined"
 msgstr "Aplicación definida"
@@ -7134,7 +7115,6 @@ msgid "Forward"
 msgstr "Adelante"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:6
-#| msgid "No results found"
 msgid "No stylus found"
 msgstr "No se ha encontrado ninguna tableta"
 
@@ -7166,8 +7146,8 @@ msgstr "Botón inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidad de presión del lápiz"
 
-#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1482
+#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
@@ -7286,6 +7266,24 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "No se han encontrado resultados"
+
+#~ msgid "Error creating account"
+#~ msgstr "Error al crear la cuenta"
+
+#~ msgid "Error removing account"
+#~ msgstr "Error al quitar la cuenta"
+
+#~ msgid "Are you sure you want to remove the account?"
+#~ msgstr "¿Está seguro de que quiere quitar la cuenta?"
+
+#~ msgid "This will not remove the account on the server."
+#~ msgstr "Esto no quitará la cuenta en el servidor."
+
+#~ msgid "_Remove"
+#~ msgstr "_Quitar"
+
+#~ msgid "No online accounts configured"
+#~ msgstr "No hay cuentas en línea configuradas"
 
 #~ msgid "Add an online account"
 #~ msgstr "Añadir una cuenta en línea"
@@ -8296,9 +8294,6 @@ msgstr "No se han encontrado resultados"
 #~ msgctxt "Password strength"
 #~ msgid "Strong"
 #~ msgstr "Fuerte"
-
-#~ msgid "Add account"
-#~ msgstr "Añadir cuenta"
 
 #~ msgid "_Local Account"
 #~ msgstr "Cuenta _local"
