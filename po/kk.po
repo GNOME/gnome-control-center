@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-11 11:33+0000\n"
-"PO-Revision-Date: 2017-01-12 14:18+0500\n"
+"POT-Creation-Date: 2017-01-18 14:43+0000\n"
+"PO-Revision-Date: 2017-01-20 11:23+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -2810,6 +2810,7 @@ msgstr "Топ паролі"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "Пайдаланушы аты"
 
@@ -2954,6 +2955,7 @@ msgstr "Қауіпсіздік түрі"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Пароль"
@@ -4115,6 +4117,7 @@ msgid "Authenticate"
 msgstr "Аутентификация"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "Аутентификация керек"
 
@@ -4331,11 +4334,11 @@ msgstr "Белсенді принтер тапсырмалары жоқ"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:380
 msgid "Add Printer"
 msgstr "Принтерді қосу"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "_Босату"
@@ -4349,6 +4352,12 @@ msgstr "Принтерлер табылмады"
 #: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter a network address or search for a printer"
 msgstr "Желілік адресін енгізіңіз немесе принтерді іздеп көріңіз"
+
+#: ../panels/printers/new-printer-dialog.ui.h:12
+msgid "Enter username and password to view printers on Print Server."
+msgstr ""
+"Баспаға шығару серверіндегі принтерлерді қарау үшін пайдаланушы атын және "
+"пароліңізді енгізіңіз."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4464,44 +4473,63 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Белсенді тапсырмалар"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
+#: ../panels/printers/pp-new-printer-dialog.c:395
+msgid "Unlock Print Server"
+msgstr "Баспаға шығару серверін блоктаудан босату"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:399
+#, c-format
+#| msgid "_Unlock"
+msgid "Unlock %s."
+msgstr "%s босату."
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:404
+#, c-format
+msgid "Enter username and password to view printers on %s."
+msgstr ""
+"%s жеріндегі принтерлерді қарау үшін пайдаланушы атын және пароліңізді "
+"енгізіңіз."
+
+#: ../panels/printers/pp-new-printer-dialog.c:851
 msgid "Searching for Printers"
 msgstr "Принтерлерді іздеу"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1774
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1779
 msgid "Serial Port"
 msgstr "Тізбектей порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1786
 msgid "Parallel Port"
 msgstr "Параллельді порт"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1791
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1828
 #, c-format
 msgid "Location: %s"
 msgstr "Орналасуы: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1833
 #, c-format
 msgid "Address: %s"
 msgstr "Адресі: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1862
 msgid "Server requires authentication"
 msgstr "Сервер аутентификацияны талап етеді"
 
@@ -4634,13 +4662,10 @@ msgstr "Шығарушы"
 msgid "Driver"
 msgstr "Драйвер"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
-#, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr ""
-"%s жерінде қолжетерлік принтерлерді қарау үшін пайдаланушы атын және "
-"пароліңізді енгізіңіз."
+#: ../panels/printers/printers.ui.h:1
+msgctxt "button"
+msgid "Add Printer"
+msgstr "Принтерді қосу"
 
 #: ../panels/printers/printers.ui.h:2
 msgid "Remove Printer"
