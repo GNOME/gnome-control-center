@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 19:59+0100\n"
+"POT-Creation-Date: 2017-01-22 10:04+0100\n"
 "PO-Revision-Date: 2017-01-05 12:22+0100\n"
 "Last-Translator: David <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -2826,6 +2826,7 @@ msgstr "Contrasenya del grup"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "Nom d'usuari"
 
@@ -2971,6 +2972,7 @@ msgstr "Tipus de seguretat"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Contrasenya"
@@ -4132,6 +4134,7 @@ msgid "Authenticate"
 msgstr "Autenticació"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "Cal autenticació"
 
@@ -4347,11 +4350,11 @@ msgstr "No hi ha tasques d'impressió actives"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:380
 msgid "Add Printer"
 msgstr "Afegeix una impressora"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "Desbloq_ueja"
@@ -4365,6 +4368,12 @@ msgstr "No s'ha trobat cap impressora"
 #: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter a network address or search for a printer"
 msgstr "Introduïu una adreça de xarxa o cerqueu una impressora"
+
+#: ../panels/printers/new-printer-dialog.ui.h:12
+msgid "Enter username and password to view printers on Print Server."
+msgstr ""
+"Introduïu el nom d'usuari i la contrasenya per visualitzar les impressores "
+"al servidor d'impressió."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4480,44 +4489,62 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - tasques actives"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
+#: ../panels/printers/pp-new-printer-dialog.c:395
+msgid "Unlock Print Server"
+msgstr "Desbloqueja el servidor d'impressió"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:399
+#, c-format
+msgid "Unlock %s."
+msgstr "Desbloqueja %s."
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:404
+#, c-format
+msgid "Enter username and password to view printers on %s."
+msgstr ""
+"Introduïu el nom d'usuari i la contrasenya per visualitzar les impressores "
+"a %s."
+
+#: ../panels/printers/pp-new-printer-dialog.c:851
 msgid "Searching for Printers"
 msgstr "S'estan cercant les impressores"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1774
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1779
 msgid "Serial Port"
 msgstr "Port en sèrie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1786
 msgid "Parallel Port"
 msgstr "Port paral·lel"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1791
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1828
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicació: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1833
 #, c-format
 msgid "Address: %s"
 msgstr "Adreça: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1862
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
 
@@ -4650,13 +4677,10 @@ msgstr "Fabricant"
 msgid "Driver"
 msgstr "Controlador"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
-#, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr ""
-"Introduïu el nom d'usuari i la contrasenya per visualitzar les impressores "
-"disponibles a %s."
+#: ../panels/printers/printers.ui.h:1
+msgctxt "button"
+msgid "Add Printer"
+msgstr "Afegeix una impressora"
 
 #: ../panels/printers/printers.ui.h:2
 msgid "Remove Printer"
