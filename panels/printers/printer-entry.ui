@@ -21,6 +21,17 @@
         </child>
 
         <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">Printer Details</property>
+            <signal name="clicked" handler="on_show_printer_details_dialog"/>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkCheckButton" id="printer_default_checkbutton">
             <property name="visible">True</property>
             <property name="valign">center</property>
