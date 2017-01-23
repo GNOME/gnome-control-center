@@ -24,6 +24,7 @@
 #include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
 
+#include "pp-details-dialog.h"
 #include "pp-options-dialog.h"
 #include "pp-jobs-dialog.h"
 #include "pp-utils.h"
@@ -58,6 +59,7 @@ struct _PpPrinterEntry
   GtkModelButton *remove_printer_menuitem;
 
   /* Dialogs */
+  PpDetailsDialog *pp_details_dialog;
   PpOptionsDialog *pp_options_dialog;
   PpJobsDialog    *pp_jobs_dialog;
 };
@@ -270,6 +272,35 @@ supply_levels_draw_cb (GtkWidget   *widget,
     }
 
   return TRUE;
+}
+
+static void
+details_dialog_cb (GtkDialog *dialog,
+                   gint       response_id,
+                   gpointer   user_data)
+{
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+
+  pp_details_dialog_free (self->pp_details_dialog);
+  self->pp_details_dialog = NULL;
+
+  g_signal_emit_by_name (self, "printer-changed");
+}
+
+static void
+on_show_printer_details_dialog (GtkButton      *button,
+                                PpPrinterEntry *self)
+{
+  self->pp_details_dialog = pp_details_dialog_new (
+    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+    self->printer_name,
+    self->printer_location,
+    self->printer_hostname,
+    self->printer_make_and_model,
+    self->is_authorized);
+
+  g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_cb), self);
+  gtk_widget_show_all (GTK_WIDGET (self->pp_details_dialog));
 }
 
 static void
@@ -489,6 +520,7 @@ pp_printer_entry_new (cups_dest_t  printer,
   gtk_widget_set_sensitive (GTK_WIDGET (self->printer_default_checkbutton), self->is_authorized);
   gtk_widget_set_sensitive (GTK_WIDGET (self->remove_printer_menuitem), self->is_authorized);
 
+  self->pp_details_dialog = NULL;
   self->pp_options_dialog = NULL;
   self->pp_jobs_dialog = NULL;
 
@@ -517,6 +549,7 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, show_jobs_dialog_button);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, remove_printer_menuitem);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_show_printer_details_dialog);
   gtk_widget_class_bind_template_callback (widget_class, on_show_printer_options_dialog);
   gtk_widget_class_bind_template_callback (widget_class, set_as_default_printer);
   gtk_widget_class_bind_template_callback (widget_class, remove_printer);

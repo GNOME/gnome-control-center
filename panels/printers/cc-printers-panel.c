@@ -527,7 +527,7 @@ enum
 
 static void
 on_printer_changed (PpPrinterEntry *printer_entry,
-                         gpointer        user_data)
+                    gpointer        user_data)
 {
   actualize_printers_list (user_data);
 }

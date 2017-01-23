@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <template class="PpDetailsDialog" parent="GtkDialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">0</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="use-header-bar">1</property>
+    <signal name="response" handler="printer_name_edit_cb" swapped="yes"/>
+    <signal name="response" handler="printer_location_edit_cb" swapped="yes"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="margin">20</property>
+        <property name="halign">center</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="row-spacing">10</property>
+            <property name="column-spacing">10</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Name</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="printer_name_entry">
+                <property name="halign">fill</property>
+                <property name="width_request">320</property>
+                <signal name="focus-out-event" handler="printer_name_edit_cb"/>
+                <signal name="changed" handler="printer_name_changed"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Location</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="printer_location_entry">
+                <property name="width_request">320</property>
+                <property name="halign">fill</property>
+                <signal name="focus-out-event" handler="printer_location_edit_cb"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Address</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="printer_address_label">
+                <property name="label">192.168.0.1</property>
+                <property name="halign">start</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Driver</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkStack" id="printer_model_stack">
+                <property name="halign">start</property>
+                <child>
+                  <object class="GtkLabel" id="printer_model_label">
+                    <property name="halign">start</property>
+                    <property name="label">HP Inkjet Delux 9000</property>
+                  </object>
+                  <packing>
+                    <property name="name">printer_model_label</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="halign">start</property>
+                    <property name="spacing">5</property>
+                    <child>
+                      <object class="GtkSpinner">
+                        <property name="active">True</property>
+                        <property name="halign">start</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Searching for preferred drivers…</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">loading</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkButtonBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <property name="halign">start</property>
+                <child>
+                  <object class="GtkButton" id="search_for_drivers_button">
+                    <property name="label" translatable="yes">Search for Drivers</property>
+                    <property name="halign">fill</property>
+                    <signal name="clicked" handler="search_for_drivers"/>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="select_from_database_button">
+                    <property name="label" translatable="yes">Select from Database…</property>
+                    <property name="halign">fill</property>
+                    <signal name="clicked" handler="select_ppd_in_dialog"/>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="install_ppd_button">
+                    <property name="label" translatable="yes">Install PPD File…</property>
+                    <property name="halign">fill</property>
+                    <signal name="clicked" handler="select_ppd_manually"/>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">5</property>
+              </packing>
+
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="search_for_drivers_button"/>
+      <widget name="select_from_database_button"/>
+      <widget name="install_ppd_button"/>
+    </widgets>
+  </object>
+</interface>
