@@ -28,10 +28,6 @@
     </child>
   </object>
   <object class="GtkStack" id="main-vbox">
-    <property name="margin-start">6</property>
-    <property name="margin-end">6</property>
-    <property name="margin-top">6</property>
-    <property name="margin-bottom">6</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -48,72 +44,17 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="hbox1">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="spacing">20</property>
-        <property name="border_width">10</property>
-        <child>
-          <object class="GtkBox" id="vbox4">
-            <property name="visible">True</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkScrolledWindow" id="printers-scrolledwindow">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">never</property>
-                <property name="vscrollbar_policy">automatic</property>
-                <property name="shadow_type">in</property>
-                <child>
-                  <object class="GtkTreeView" id="printers-treeview">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="headers_visible">False</property>
-                    <property name="width-request">200</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolbar" id="printers-toolbar">
-                <property name="visible">True</property>
-                <property name="icon_size">1</property>
-                <property name="icon_size_set">True</property>
-                <property name="toolbar-style">icons</property>
-                <style>
-                  <class name="inline-toolbar"/>
-                </style>
-                <child>
-                  <object class="GtkToolButton" id="printer-remove-button">
-                    <property name="visible">True</property>
-                    <property name="use_underline">True</property>
-                    <property name="icon_name">list-remove-symbolic</property>
-                    <property name="label" translatable="yes">Remove Printer</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox" id="content">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="border-width">30</property>
+	    <property name="margin-start">30</property>
+            <property name="margin-end">30</property>
+            <property name="spacing">20</property>
           </object>
         </child>
       </object>
