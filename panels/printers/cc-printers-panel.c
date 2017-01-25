@@ -41,6 +41,8 @@
 #include "pp-job.h"
 #include "pp-printer-entry.h"
 
+#define SCROLL_HEIGHT 490
+
 CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
 
 #define PRINTERS_PANEL_PRIVATE(o) \
@@ -866,6 +868,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-add-button2");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_add_cb), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "scrolled-window");
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), SCROLL_HEIGHT);
 
   priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   if (priv->lockdown_settings)
