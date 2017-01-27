@@ -549,7 +549,11 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       gtk_entry_set_text (GTK_ENTRY (self->command_entry), item->command);
       gtk_widget_set_sensitive (self->command_entry, item->cmd_editable);
 
+      /* Untoggle the edit button */
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->edit_button), FALSE);
+
       gtk_widget_show (self->remove_button);
+      gtk_widget_show (self->edit_button);
 
       g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
       g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
