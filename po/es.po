@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-09 16:43+0000\n"
-"PO-Revision-Date: 2017-01-11 09:38+0100\n"
+"POT-Creation-Date: 2017-01-18 14:43+0000\n"
+"PO-Revision-Date: 2017-01-27 14:50+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -2827,6 +2827,7 @@ msgstr "Contraseña del grupo"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -2972,6 +2973,7 @@ msgstr "Tipo de seguridad"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Contraseña"
@@ -3660,22 +3662,34 @@ msgid "Sound _Alerts"
 msgstr "_Alertas sonoras"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "_Notifications"
 msgctxt "notifications"
-msgid "Notification _Banners"
-msgstr "_Banners de notificación"
+msgid "Notification _Popups"
+msgstr "_Notificaciones emergentes"
 
-#. Banners here refers to message tray notifications in the middle of the screen.
-#: ../panels/notifications/edit-dialog.ui.h:7
-msgctxt "notifications"
-msgid "Show Message _Content in Banners"
-msgstr "Mostrar el _contenido del mensaje en los banners"
+#: ../panels/notifications/edit-dialog.ui.h:6
+msgid ""
+"Notifications will continue to appear in the notification list when popups "
+"are disabled."
+msgstr ""
+"Las notificaciones seguirán apareciendo en la lista de notificaciones cuando "
+"las ventanas emergentes estén desactivadas."
 
+#. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Show Message _Content in Banners"
+msgctxt "notifications"
+msgid "Show Message _Content in Popups"
+msgstr "Mostrar el _contenido del mensaje en las ventanas emergentes"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notificaciones de la pantalla de _bloqueo"
 
-#: ../panels/notifications/edit-dialog.ui.h:9
+#: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Mostrar el c_ontenido del mensaje en la pantalla de bloqueo"
@@ -3695,8 +3709,10 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "notificaciones;banner;mensaje;bandeja;emergente;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification _Banners"
-msgstr "_Banners de notificación"
+#| msgctxt "notifications"
+#| msgid "_Notifications"
+msgid "Notification _Popups"
+msgstr "_Notificaciones emergentes"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -3769,7 +3785,6 @@ msgid "Connect to your data in the cloud"
 msgstr "Conectarse a sus datos en la nube"
 
 #: ../panels/online-accounts/online-accounts.ui.h:2
-#| msgid "Add account"
 msgid "Add an account"
 msgstr "Añadir una cuenta"
 
@@ -4129,6 +4144,7 @@ msgid "Authenticate"
 msgstr "Autenticar"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
@@ -4344,11 +4360,11 @@ msgstr "No hay trabajos de impresión activos"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:380
 msgid "Add Printer"
 msgstr "Añadir impresora"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "Desbloq_uear"
@@ -4362,6 +4378,13 @@ msgstr "No se han encontrado impresoras"
 #: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter a network address or search for a printer"
 msgstr "Introduzca una dirección de red o busque una impresora"
+
+#: ../panels/printers/new-printer-dialog.ui.h:12
+#| msgid "Enter your username and password to view printers available on %s."
+msgid "Enter username and password to view printers on Print Server."
+msgstr ""
+"Introduzca su nombre de usuario y su contraseña para ver las impresoras "
+"disponibles en el servidor de impresión."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4477,44 +4500,65 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - trabajos activos"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
+#: ../panels/printers/pp-new-printer-dialog.c:395
+#| msgid "Select Printer Driver"
+msgid "Unlock Print Server"
+msgstr "Desbloquear servidor de impresión"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:399
+#, c-format
+#| msgid "_Unlock"
+msgid "Unlock %s."
+msgstr "Desbloquear %s."
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:404
+#, c-format
+#| msgid "Enter your username and password to view printers available on %s."
+msgid "Enter username and password to view printers on %s."
+msgstr ""
+"Introduzca su nombre de usuario y su contraseña para ver las impresoras en "
+"%s."
+
+#: ../panels/printers/pp-new-printer-dialog.c:851
 msgid "Searching for Printers"
 msgstr "Buscando impresoras"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1774
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1779
 msgid "Serial Port"
 msgstr "Puerto serie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1786
 msgid "Parallel Port"
 msgstr "Puerto paralelo"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1791
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1828
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicación: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1833
 #, c-format
 msgid "Address: %s"
 msgstr "Dirección: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1862
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
@@ -4647,13 +4691,11 @@ msgstr "Fabricante"
 msgid "Driver"
 msgstr "Controlador"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
-#, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr ""
-"Introduzca su nombre de usuario y su contraseña para ver las impresoras "
-"disponibles en %s."
+#: ../panels/printers/printers.ui.h:1
+#| msgid "Add Printer"
+msgctxt "button"
+msgid "Add Printer"
+msgstr "Añadir impresora"
 
 #: ../panels/printers/printers.ui.h:2
 msgid "Remove Printer"
@@ -7266,6 +7308,13 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "No se han encontrado resultados"
+
+#~ msgctxt "notifications"
+#~ msgid "Notification _Banners"
+#~ msgstr "_Banners de notificación"
+
+#~ msgid "Notification _Banners"
+#~ msgstr "_Banners de notificación"
 
 #~ msgid "Error creating account"
 #~ msgstr "Error al crear la cuenta"
