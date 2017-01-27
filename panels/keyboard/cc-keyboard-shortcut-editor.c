@@ -949,6 +949,8 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar), _("Add Custom Shortcut"));
 
       gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
+      gtk_widget_set_sensitive (self->command_entry, TRUE);
+      gtk_widget_set_sensitive (self->name_entry, TRUE);
 
       gtk_widget_hide (self->remove_button);
       gtk_widget_hide (self->edit_button);
