@@ -945,7 +945,7 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       /* Cleanup whatever was set before */
       clear_custom_entries (self);
 
-      set_header_mode (self, HEADER_MODE_CUSTOM_CANCEL);
+      set_header_mode (self, HEADER_MODE_ADD);
       gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar), _("Add Custom Shortcut"));
 
       gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
