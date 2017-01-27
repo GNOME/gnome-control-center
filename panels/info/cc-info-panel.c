@@ -502,21 +502,21 @@ get_os_type (void)
 
   if (build_id)
     {
-      /* translators: This is the name of the OS, followed by the type
-       * of architecture and the build id, for example:
-       * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-       * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)" */
       if (name)
+        /* translators: This is the name of the OS, followed by the type
+         * of architecture and the build id, for example:
+         * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+         * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)" */
         result = g_strdup_printf (_("%s %d-bit (Build ID: %s)"), name, bits, build_id);
       else
         result = g_strdup_printf (_("%d-bit (Build ID: %s)"), bits, build_id);
     }
   else
     {
-      /* translators: This is the name of the OS, followed by the type
-       * of architecture, for example:
-       * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit" */
       if (name)
+        /* translators: This is the name of the OS, followed by the type
+         * of architecture, for example:
+         * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit" */
         result = g_strdup_printf (_("%s %d-bit"), name, bits);
       else
         result = g_strdup_printf (_("%d-bit"), bits);
