@@ -205,7 +205,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
-                    <property name="sensitive" bind-source="edit_button" bind-property="active" bind-flags="default|invert-boolean" />
                     <signal name="notify::text" handler="name_entry_changed_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                   </object>
                   <packing>
@@ -219,7 +218,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
-                    <property name="sensitive" bind-source="edit_button" bind-property="active" bind-flags="default|invert-boolean" />
                     <signal name="notify::text" handler="command_entry_changed_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                   </object>
                   <packing>
@@ -229,12 +227,19 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="edit_button">
-                    <property name="label" translatable="yes">Edit</property>
+                  <object class="GtkButton" id="reset_custom_button">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="notify::active" handler="edit_custom_shortcut_button_toggled_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                    <property name="relief">none</property>
+                    <property name="halign">end</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon-name">edit-clear-symbolic</property>
+                      </object>
+                    </child>
+                    <signal name="clicked" handler="reset_custom_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
@@ -280,7 +285,6 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Remove</property>
                     <property name="valign">end</property>
-                    <property name="sensitive" bind-source="edit_button" bind-property="active" bind-flags="default|invert-boolean" />
                     <signal name="clicked" handler="remove_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                     <style>
                       <class name="destructive-action" />
