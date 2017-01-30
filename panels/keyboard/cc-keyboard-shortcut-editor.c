@@ -271,7 +271,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   GtkShortcutLabel *shortcut_label;
   CcKeyboardItem *collision_item;
   HeaderMode mode;
-  gboolean is_custom;
+  gboolean is_custom, is_accel_empty;
   gboolean valid, accel_valid;
   gchar *accel;
 
@@ -279,7 +279,10 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   accel_valid = is_valid_binding (self->custom_keyval, self->custom_mask, self->custom_keycode) &&
                 is_valid_accel (self->custom_keyval, self->custom_mask) &&
                 !self->custom_is_modifier;
-  if (is_empty_binding (self->custom_keyval, self->custom_mask, self->custom_keycode))
+
+  is_accel_empty = is_empty_binding (self->custom_keyval, self->custom_mask, self->custom_keycode);
+
+  if (is_accel_empty)
     accel_valid = TRUE;
   valid = accel_valid;
 
@@ -289,8 +292,12 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
       if (accel_valid)
         {
           gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
-          gtk_stack_set_visible_child_name (GTK_STACK (self->custom_shortcut_stack), "label");
-          gtk_widget_show (self->reset_custom_button);
+
+          /* We have to check if the current accelerator is empty in order to
+           * decide if we show the "Set Shortcut" button or the accelerator label */
+          gtk_stack_set_visible_child_name (GTK_STACK (self->custom_shortcut_stack),
+                                            is_accel_empty ? "button" : "label");
+          gtk_widget_set_visible (self->reset_custom_button, !is_accel_empty);
         }
 
       valid = accel_valid &&
@@ -504,6 +511,13 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
 
   is_custom = item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
   accel = gtk_accelerator_name (item->keyval, item->mask);
+
+  /* To avoid accidentally thinking we unset the current keybinding, set the values
+   * of the keyboard item that is being edited */
+  self->custom_is_modifier = FALSE;
+  self->custom_keycode = item->keycode;
+  self->custom_keyval = item->keyval;
+  self->custom_mask = item->mask;
 
   /* Headerbar */
   gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar),
