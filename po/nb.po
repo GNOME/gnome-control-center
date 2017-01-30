@@ -8,10 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.23.x\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-05 08:23+0000\n"
-"PO-Revision-Date: 2017-01-05 19:59+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-30 07:10+0100\n"
+"PO-Revision-Date: 2017-01-30 07:13+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -1245,6 +1244,10 @@ msgstr "Panel;Prosjektor;xrandr;Skjerm;Oppløsning;Oppdater;Skjerm;"
 msgid "Unknown"
 msgstr "Ukjent"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
 #: ../panels/info/cc-info-panel.c:510
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
@@ -1255,6 +1258,9 @@ msgstr "%s %d-bit (Bygg-ID: %s)"
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-bit (bygg-ID: %s)"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
 #: ../panels/info/cc-info-panel.c:520
 #, c-format
 msgid "%s %d-bit"
@@ -1736,7 +1742,7 @@ msgstr "Sett snarvei"
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Oppgi ny snarvei for å endre <b>%s</b>."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:949
 msgid "Add Custom Shortcut"
 msgstr "Legg til egendefinert snarvei"
 
@@ -2797,6 +2803,7 @@ msgstr "Gruppepassord"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "Brukernavn"
 
@@ -2942,6 +2949,7 @@ msgstr "Type sikkerhet"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Passord"
@@ -3517,7 +3525,8 @@ msgstr "mangler wep-nøkkel"
 #: ../panels/network/wireless-security/ws-wep-key.c:116
 #, c-format
 msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
-msgstr "ugyldig wep-nøkkel: nøkkel med lengde %zu må kun inneholde heksadesimale tall"
+msgstr ""
+"ugyldig wep-nøkkel: nøkkel med lengde %zu må kun inneholde heksadesimale tall"
 
 #: ../panels/network/wireless-security/ws-wep-key.c:124
 #, c-format
@@ -3617,21 +3626,28 @@ msgstr "Lydv_arsel"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
 msgctxt "notifications"
-msgid "Notification _Banners"
-msgstr "_Varslingslinjer"
+msgid "Notification _Popups"
+msgstr "_Varslinger"
 
-#. Banners here refers to message tray notifications in the middle of the screen.
-#: ../panels/notifications/edit-dialog.ui.h:7
+#: ../panels/notifications/edit-dialog.ui.h:6
+msgid ""
+"Notifications will continue to appear in the notification list when popups "
+"are disabled."
+msgstr ""
+
+#. Popups here refers to message tray notifications in the middle of the screen.
+#: ../panels/notifications/edit-dialog.ui.h:8
+#, fuzzy
 msgctxt "notifications"
-msgid "Show Message _Content in Banners"
+msgid "Show Message _Content in Popups"
 msgstr "Vis _meldingsinnhold på varslingslinjer"
 
-#: ../panels/notifications/edit-dialog.ui.h:8
+#: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Vars_linger på låseskjerm"
 
-#: ../panels/notifications/edit-dialog.ui.h:9
+#: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Vis meldingsinnh_old på låseskjerm"
@@ -3651,8 +3667,9 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Varslinger;Banner;Melding;Trau;Oppsprett;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification _Banners"
-msgstr "_Varslingslinjer"
+#, fuzzy
+msgid "Notification _Popups"
+msgstr "_Varslinger"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -4082,6 +4099,7 @@ msgid "Authenticate"
 msgstr "Autentiser"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "Autentisering kreves"
 
@@ -4297,11 +4315,11 @@ msgstr "Ingen aktive utskriftsjobber"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:380
 msgid "Add Printer"
 msgstr "Legg til skriver"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "Lås _opp"
@@ -4315,6 +4333,10 @@ msgstr "Fant ingen skrivere"
 #: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter a network address or search for a printer"
 msgstr "Skriv inn en nettverksadresse, eller søk etter en skriver"
+
+#: ../panels/printers/new-printer-dialog.ui.h:12
+msgid "Enter username and password to view printers on Print Server."
+msgstr "Oppgi brukernavn og passord for å se skrivere på utskriftstjener."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4430,44 +4452,60 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s – Aktive jobber"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
+#: ../panels/printers/pp-new-printer-dialog.c:395
+msgid "Unlock Print Server"
+msgstr "Lås opp utskriftstjener"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:399
+#, c-format
+msgid "Unlock %s."
+msgstr "Lås opp %s."
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:404
+#, c-format
+msgid "Enter username and password to view printers on %s."
+msgstr "Oppgi brukernavn og passord for å vise skrivere på %s."
+
+#: ../panels/printers/pp-new-printer-dialog.c:851
 msgid "Searching for Printers"
 msgstr "Søker etter skrivere"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1774
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1779
 msgid "Serial Port"
 msgstr "Seriellport"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1786
 msgid "Parallel Port"
 msgstr "Parallellport"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1791
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1828
 #, c-format
 msgid "Location: %s"
 msgstr "Plassering: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1833
 #, c-format
 msgid "Address: %s"
 msgstr "Adresse: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1862
 msgid "Server requires authentication"
 msgstr "Tjener krever autentisering"
 
@@ -4600,12 +4638,10 @@ msgstr "Produsent"
 msgid "Driver"
 msgstr "Driver"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
-#, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr ""
-"Oppgi brukernavn og passord for å vise skrivere som er tilgjengelig på %s."
+#: ../panels/printers/printers.ui.h:1
+msgctxt "button"
+msgid "Add Printer"
+msgstr "Legg til skriver"
 
 #: ../panels/printers/printers.ui.h:2
 msgid "Remove Printer"
@@ -5202,7 +5238,8 @@ msgid ""
 "Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
-"Når ekstern pålogging er aktivert kan eksterne brukere koble seg til med Secure Shell-kommandoen:\n"
+"Når ekstern pålogging er aktivert kan eksterne brukere koble seg til med "
+"Secure Shell-kommandoen:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:687
@@ -5210,7 +5247,9 @@ msgstr ""
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to <a href=\"vnc://%s\">vnc://%s</a>"
-msgstr "Skjermdeling lar eksterne brukere se eller kontrollere din skjerm ved å koble til <a href=\"vnc://%s\">vnc://%s</a>"
+msgstr ""
+"Skjermdeling lar eksterne brukere se eller kontrollere din skjerm ved å "
+"koble til <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/cc-sharing-panel.c:799
 msgid "Copy"
@@ -5563,7 +5602,10 @@ msgstr "Gjør det lettere å se, høre, skrive og peke og klikke"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
-msgstr "Tastatur;Mus;a11y;Tilgjengelighet;Kontrast;Zoom;Skjerm;Leser;tekst;skrift;størrelse;AccessX;Klebrige;Taster;Trege;Sprett;Mus;Dobbelt;klikk;Pause;Assister;"
+msgstr ""
+"Tastatur;Mus;a11y;Tilgjengelighet;Kontrast;Zoom;Skjerm;Leser;tekst;skrift;"
+"størrelse;AccessX;Klebrige;Taster;Trege;Sprett;Mus;Dobbelt;klikk;Pause;"
+"Assister;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6077,7 +6119,10 @@ msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
 "resources on the internet."
-msgstr "Bedriftspålogging lar deg bruke en eksisterende og sentralt håndtert brukerkoknto  på denne enheten. Du kan også bruke denne kontoen til å aksessere bedriftsressurser på internett."
+msgstr ""
+"Bedriftspålogging lar deg bruke en eksisterende og sentralt håndtert "
+"brukerkoknto  på denne enheten. Du kan også bruke denne kontoen til å "
+"aksessere bedriftsressurser på internett."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
 #: ../panels/user-accounts/data/join-dialog.ui.h:9
@@ -6793,6 +6838,10 @@ msgstr "Klarte ikke å kontakte kontotjenesten"
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
 #: ../panels/user-accounts/um-user-panel.c:1304
 msgid ""
 "To make changes,\n"
@@ -7041,7 +7090,8 @@ msgstr "Fant ingen penn"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:7
 msgid "Please move your stylus to the proximity of the tablet to configure it"
-msgstr "Vennligst flytt pennen din i nærhet av tegnebrettet for å konfigurere det"
+msgstr ""
+"Vennligst flytt pennen din i nærhet av tegnebrettet for å konfigurere det"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:10
 msgid "Eraser Pressure Feel"
