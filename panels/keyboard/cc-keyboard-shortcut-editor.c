@@ -89,7 +89,63 @@ typedef enum
   HEADER_MODE_CUSTOM_EDIT
 } HeaderMode;
 
+typedef enum
+{
+  PAGE_CUSTOM,
+  PAGE_CUSTOM_EDIT,
+  PAGE_STANDARD,
+  PAGE_STANDARD_EDIT
+} ShortcutEditorPage;
+
 static GParamSpec *properties [N_PROPS] = { NULL, };
+
+/* Getter and setter for ShortcutEditorPage */
+static ShortcutEditorPage
+get_shortcut_editor_page (CcKeyboardShortcutEditor *self)
+{
+  if (g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "change-shortcut"))
+    return PAGE_CUSTOM_EDIT;
+
+  if (g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "custom"))
+    return PAGE_CUSTOM;
+
+  if (g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "edit") &&
+      g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->standard_shortcut_stack)), "change-shortcut"))
+    {
+      return PAGE_STANDARD_EDIT;
+    }
+
+  return PAGE_STANDARD;
+}
+
+static void
+set_shortcut_editor_page (CcKeyboardShortcutEditor *self,
+                          ShortcutEditorPage        page)
+{
+  switch (page)
+    {
+    case PAGE_CUSTOM:
+      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
+      break;
+
+    case PAGE_CUSTOM_EDIT:
+      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "change-shortcut");
+      break;
+
+    case PAGE_STANDARD:
+      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "edit");
+      gtk_stack_set_visible_child_name (GTK_STACK (self->standard_shortcut_stack), "main");
+      break;
+
+    case PAGE_STANDARD_EDIT:
+      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "edit");
+      gtk_stack_set_visible_child_name (GTK_STACK (self->standard_shortcut_stack), "change-shortcut");
+      break;
+
+    default:
+      g_assert_not_reached ();
+    }
+}
 
 static void
 apply_custom_item_fields (CcKeyboardShortcutEditor *self,
@@ -291,7 +347,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
     {
       if (accel_valid)
         {
-          gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
+          set_shortcut_editor_page (self, PAGE_CUSTOM);
 
           /* We have to check if the current accelerator is empty in order to
            * decide if we show the "Set Shortcut" button or the accelerator label */
@@ -318,7 +374,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 
   /* Valid shortcut, show it in the standard page */
   if (!is_custom)
-    gtk_stack_set_visible_child_name (GTK_STACK (self->standard_shortcut_stack), "main");
+    set_shortcut_editor_page (self, PAGE_STANDARD);
 
   shortcut_label = get_current_shortcut_label (self);
 
@@ -424,7 +480,7 @@ cancel_button_clicked_cb (GtkWidget                *button,
 static void
 change_custom_shortcut_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
-  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "change-shortcut");
+  set_shortcut_editor_page (self, PAGE_CUSTOM_EDIT);
   set_header_mode (self, HEADER_MODE_NONE);
 }
 
@@ -578,10 +634,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   g_free (text);
 
   /* Show the apropriate view */
-  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), is_custom ? "custom" : "edit");
-
-  if (!is_custom)
-    gtk_stack_set_visible_child_name (GTK_STACK (self->standard_shortcut_stack), "change-shortcut");
+  set_shortcut_editor_page (self, is_custom ? PAGE_CUSTOM : PAGE_STANDARD_EDIT);
 }
 
 static void
@@ -649,18 +702,15 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
 {
   CcKeyboardShortcutEditor *self;
   GdkModifierType real_mask;
-  gboolean editing, is_custom;
+  gboolean editing;
   guint keyval_lower;
 
   self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
-  is_custom = is_custom_shortcut (self);
 
   /* Being in the "change-shortcut" page is the only check we must
    * perform to decide if we're editing a shortcut. */
-  if (is_custom)
-    editing = g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->stack)), "change-shortcut");
-  else
-    editing = g_str_equal (gtk_stack_get_visible_child_name (GTK_STACK (self->standard_shortcut_stack)), "change-shortcut");
+  editing = get_shortcut_editor_page (self) == PAGE_CUSTOM_EDIT ||
+            get_shortcut_editor_page (self) == PAGE_STANDARD_EDIT;
 
   if (!editing)
     return GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->key_press_event (widget, event);
@@ -963,9 +1013,9 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       clear_custom_entries (self);
 
       set_header_mode (self, HEADER_MODE_ADD);
+      set_shortcut_editor_page (self, PAGE_CUSTOM);
       gtk_header_bar_set_title (GTK_HEADER_BAR (self->headerbar), _("Add Custom Shortcut"));
 
-      gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "custom");
       gtk_widget_set_sensitive (self->command_entry, TRUE);
       gtk_widget_set_sensitive (self->name_entry, TRUE);
 
