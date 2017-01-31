@@ -145,6 +145,70 @@ shortcut_modified_changed_cb (CcKeyboardItem *item,
 }
 
 static void
+reset_all_shortcuts_cb (GtkWidget *widget,
+                        gpointer   user_data)
+{
+  CcKeyboardPanel *self;
+  RowData *data;
+
+  self = user_data;
+
+  if (widget == (GtkWidget *) self->add_shortcut_row)
+    return;
+
+  data = g_object_get_data (G_OBJECT (widget), "data");
+
+  /* Don't reset custom shortcuts */
+  if (data->item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+    return;
+
+  /* cc_keyboard_manager_reset_shortcut() already resets conflicting shortcuts,
+   * so no other check is needed here. */
+  cc_keyboard_manager_reset_shortcut (self->manager, data->item);
+}
+
+static void
+reset_all_clicked_cb (CcKeyboardPanel *self)
+{
+  GtkWidget *dialog, *toplevel, *button;
+  guint response;
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+                                   GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_WARNING,
+                                   GTK_BUTTONS_NONE,
+                                   _("Reset All Shortcuts?"));
+
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                            _("Resetting the shortcuts may affect your custom shortcuts. "
+                                              "This cannot be undone."));
+
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                          _("Cancel"), GTK_RESPONSE_CANCEL,
+                          _("Reset All"), GTK_RESPONSE_ACCEPT,
+                          NULL);
+
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+
+  /* Make the "Reset All" button destructive */
+  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
+  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+
+  /* Reset shortcuts if accepted */
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+  if (response == GTK_RESPONSE_ACCEPT)
+    {
+      gtk_container_foreach (GTK_CONTAINER (self->listbox),
+                             reset_all_shortcuts_cb,
+                             self);
+    }
+
+  gtk_widget_destroy (dialog);
+}
+
+static void
 reset_shortcut_cb (GtkWidget      *reset_button,
                    CcKeyboardItem *item)
 {
@@ -514,6 +578,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
 
+  gtk_widget_class_bind_template_callback (widget_class, reset_all_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_row_activated);
 }
 

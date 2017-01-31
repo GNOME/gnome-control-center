@@ -51,6 +51,34 @@
                 <property name="spacing">12</property>
                 <property name="halign">center</property>
                 <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="xalign">0.0</property>
+                        <property name="label" translatable="yes">Keyboard Shortcuts</property>
+                        <attributes>
+                          <attribute name="weight" value="bold" />
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="label" translatable="yes">Reset All</property>
+                        <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
+                        <signal name="clicked" handler="reset_all_clicked_cb" object="CcKeyboardPanel" swapped="yes" />
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
                   <object class="GtkFrame">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
