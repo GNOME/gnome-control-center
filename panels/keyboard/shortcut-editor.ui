@@ -369,11 +369,9 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
+            <property name="can_default">True</property>
             <property name="receives_default">True</property>
             <signal name="clicked" handler="add_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
-            <style>
-              <class name="suggested-action" />
-            </style>
           </object>
           <packing>
             <property name="pack_type">end</property>
@@ -398,11 +396,9 @@
             <property name="label" translatable="yes">Set</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="can_default">True</property>
             <property name="receives_default">True</property>
             <signal name="clicked" handler="set_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
-            <style>
-              <class name="suggested-action" />
-            </style>
           </object>
           <packing>
             <property name="pack_type">end</property>
@@ -411,6 +407,12 @@
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="cancel">cancel_button</action-widget>
+      <action-widget response="accept">replace_button</action-widget>
+      <action-widget response="apply">set_button</action-widget>
+      <action-widget response="ok" default="true">add_button</action-widget>
+    </action-widgets>
   </template>
   <object class="GtkSizeGroup">
     <widgets>

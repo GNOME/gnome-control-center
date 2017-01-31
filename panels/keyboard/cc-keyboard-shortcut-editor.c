@@ -319,6 +319,25 @@ set_header_mode (CcKeyboardShortcutEditor *self,
                                                mode != HEADER_MODE_CUSTOM_EDIT);
   gtk_widget_set_visible (self->replace_button, mode == HEADER_MODE_REPLACE);
   gtk_widget_set_visible (self->set_button, mode == HEADER_MODE_SET);
+
+  /* By setting the default response, the action button gets the 'suggested-action' applied */
+  switch (mode)
+    {
+    case HEADER_MODE_SET:
+      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_APPLY);
+      break;
+
+    case HEADER_MODE_REPLACE:
+      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_ACCEPT);
+      break;
+
+    case HEADER_MODE_ADD:
+      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
+      break;
+
+    default:
+      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_NONE);
+    }
 }
 
 static void
