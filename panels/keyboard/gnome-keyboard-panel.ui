@@ -36,37 +36,50 @@
           <object class="GtkScrolledWindow">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="halign">center</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
             <property name="hscrollbar_policy">never</property>
             <property name="propagate_natural_width">True</property>
             <property name="propagate_natural_height">True</property>
             <property name="max_content_height">350</property>
-            <property name="shadow_type">in</property>
-            <property name="border_width">18</property>
             <child>
-              <object class="GtkListBox" id="listbox">
+              <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="selection-mode">none</property>
-                <property name="width-request">250</property>
-                <signal name="row-activated" handler="shortcut_row_activated" object="CcKeyboardPanel" swapped="no" />
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">18</property>
+                <property name="spacing">12</property>
+                <property name="halign">center</property>
                 <child>
-                  <object class="GtkListBoxRow" id="add_shortcut_row">
+                  <object class="GtkFrame">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkListBox" id="listbox">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="hexpand">True</property>
-                        <property name="border_width">6</property>
-                        <child type="center">
-                          <object class="GtkImage">
+                        <property name="can_focus">True</property>
+                        <property name="selection-mode">none</property>
+                        <property name="width-request">250</property>
+                        <signal name="row-activated" handler="shortcut_row_activated" object="CcKeyboardPanel" swapped="no" />
+                        <child>
+                          <object class="GtkListBoxRow" id="add_shortcut_row">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="icon_name">list-add-symbolic</property>
+                            <property name="can_focus">True</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="border_width">6</property>
+                                <child type="center">
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">list-add-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
