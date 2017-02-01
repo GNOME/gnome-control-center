@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-18 14:43+0000\n"
-"PO-Revision-Date: 2017-01-27 14:50+0100\n"
+"POT-Creation-Date: 2017-01-31 11:58+0000\n"
+"PO-Revision-Date: 2017-02-01 11:05+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -1266,6 +1266,10 @@ msgstr "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;Monitor;"
 msgid "Unknown"
 msgstr "Desconocido"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
 #: ../panels/info/cc-info-panel.c:510
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
@@ -1276,6 +1280,9 @@ msgstr "%s %d-bit (ID de construcción: %s)"
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-bit (ID de construcción: %s)"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
 #: ../panels/info/cc-info-panel.c:520
 #, c-format
 msgid "%s %d-bit"
@@ -1734,32 +1741,58 @@ msgstr "Tecla de composición"
 msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+#| msgid "Set Shortcut"
+msgid "Reset All Shortcuts?"
+msgstr "¿Restablecer todos los atajos?"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr ""
+"Restablecer todos los atajos puede afectar a sus atajos personalizados. Esto "
+"no se puede deshacer."
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#| msgid "Reset"
+msgid "Reset All"
+msgstr "Restablecer todo"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
 msgstr "Restablecer el valor predeterminado del atajo"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:414
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s ya está en uso por <b>%s</b>.. Si lo reemplaza, %s se desactivará"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Custom Shortcut"
 msgstr "Establecer atajo personalizado"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Shortcut"
 msgstr "Establecer atajo"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:589
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Introduzca el nuevo atajo para cambiar <b>%s</b>."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1017
 msgid "Add Custom Shortcut"
 msgstr "Añadir un atajo personalizado"
 
@@ -1780,10 +1813,20 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Atajo;Repetir;Parpadear;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "Combinaciones de teclas"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#| msgid "Reset the shortcut to its default value"
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "Restablecer todos los atajos a sus valores predeterminados"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
 msgstr "No se ha encontrado un atajo del teclado"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "Pruebe una búsqueda diferente"
 
@@ -1806,44 +1849,35 @@ msgid "Shortcut"
 msgstr "Combinación"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "Editar"
+#| msgid "Set Shortcut"
+msgctxt "button"
+msgid "Set Shortcut…"
+msgstr "Establecer atajo…"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
-msgctxt "button"
-msgid "Set Shortcut"
-msgstr "Establecer atajo"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "Quitar"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Introduzca el atajo nuevo"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Añadir"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "Reemplazar"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "Establecer"
 
@@ -3662,8 +3696,6 @@ msgid "Sound _Alerts"
 msgstr "_Alertas sonoras"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Notificaciones emergentes"
@@ -3678,8 +3710,6 @@ msgstr ""
 
 #. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
-#| msgctxt "notifications"
-#| msgid "Show Message _Content in Banners"
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Mostrar el _contenido del mensaje en las ventanas emergentes"
@@ -3709,8 +3739,6 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "notificaciones;banner;mensaje;bandeja;emergente;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgid "Notification _Popups"
 msgstr "_Notificaciones emergentes"
 
@@ -4380,7 +4408,6 @@ msgid "Enter a network address or search for a printer"
 msgstr "Introduzca una dirección de red o busque una impresora"
 
 #: ../panels/printers/new-printer-dialog.ui.h:12
-#| msgid "Enter your username and password to view printers available on %s."
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras "
@@ -4501,21 +4528,18 @@ msgid "%s — Active Jobs"
 msgstr "%s - trabajos activos"
 
 #: ../panels/printers/pp-new-printer-dialog.c:395
-#| msgid "Select Printer Driver"
 msgid "Unlock Print Server"
 msgstr "Desbloquear servidor de impresión"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:399
 #, c-format
-#| msgid "_Unlock"
 msgid "Unlock %s."
 msgstr "Desbloquear %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:404
 #, c-format
-#| msgid "Enter your username and password to view printers available on %s."
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras en "
@@ -4692,7 +4716,6 @@ msgid "Driver"
 msgstr "Controlador"
 
 #: ../panels/printers/printers.ui.h:1
-#| msgid "Add Printer"
 msgctxt "button"
 msgid "Add Printer"
 msgstr "Añadir impresora"
@@ -5100,10 +5123,6 @@ msgstr "Usar la _misma fuente para todas las ventanas"
 #: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Permitir _diferentes fuentes para cada ventana"
-
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "Combinaciones de teclas"
 
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
@@ -6911,6 +6930,10 @@ msgstr "Falló al contactar con el servicio de cuentas"
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
 #: ../panels/user-accounts/um-user-panel.c:1304
 msgid ""
 "To make changes,\n"
@@ -7308,6 +7331,13 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "No se han encontrado resultados"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgctxt "button"
+#~ msgid "Set Shortcut"
+#~ msgstr "Establecer atajo"
 
 #~ msgctxt "notifications"
 #~ msgid "Notification _Banners"
