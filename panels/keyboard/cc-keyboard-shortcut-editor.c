@@ -1037,6 +1037,7 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
 
       gtk_widget_set_sensitive (self->command_entry, TRUE);
       gtk_widget_set_sensitive (self->name_entry, TRUE);
+      gtk_widget_set_sensitive (self->add_button, FALSE);
 
       gtk_widget_hide (self->reset_custom_button);
       gtk_widget_hide (self->remove_button);
