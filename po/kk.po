@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-18 14:43+0000\n"
-"PO-Revision-Date: 2017-01-20 11:23+0500\n"
+"POT-Creation-Date: 2017-01-31 11:58+0000\n"
+"PO-Revision-Date: 2017-02-03 09:13+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -216,7 +216,7 @@ msgstr ""
 #. Translators: those are keywords for the bluetooth control-center panel
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:5
 msgid "share;sharing;bluetooth;obex;"
-msgstr "share;sharing;bluetooth;obex;бөлісу;bluetooth;obex;"
+msgstr "share;sharing;bluetooth;obex;бөлісу;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
@@ -1253,6 +1253,10 @@ msgstr ""
 msgid "Unknown"
 msgstr "Белгісіз"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
 #: ../panels/info/cc-info-panel.c:510
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
@@ -1263,6 +1267,9 @@ msgstr "%s %d-бит (Жинақ ID: %s)"
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-бит (Жинақ ID: %s)"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
 #: ../panels/info/cc-info-panel.c:520
 #, c-format
 msgid "%s %d-bit"
@@ -1720,11 +1727,35 @@ msgstr "Compose пернесі"
 msgid "Modifiers-only switch to next source"
 msgstr "Түрлендіргіш пернесі келесі кіріс көзіне ауыстырады"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+msgid "Reset All Shortcuts?"
+msgstr "Барлық жарлықтарды тастау керек пе?"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr ""
+"Жарлықтарды тастау таңдауыңызша жарлықтарды кетіруі мүмкін. Бұл әрекетті "
+"болдырмау мүмкін болмайды."
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Болдырмау"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All"
+msgstr "Барлығын тастау"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
 msgstr "Жарлықты бастапқы мәніне тастау"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:414
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1733,21 +1764,21 @@ msgstr ""
 "%s жарлығы <b>%s</b> үшін қолданылуда болып тұр. Оны алмастырсаңыз, %s "
 "сөндірілетін болады"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты орнату"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Shortcut"
 msgstr "Жарлықты орнату"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:589
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "<b>%s</b> өзгерту үшін жаңа жарлықты енгізіңіз."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1017
 msgid "Add Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты қосу"
 
@@ -1766,10 +1797,19 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Shortcut;Repeat;Blink;Жарлық;Қайталау;Жыпылықтау;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "Пернетақта жарлықтары"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "Барлық жарлықтарды бастапқы мәндеріне тастау"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
 msgstr "Пернетақта жарлықтары табылмады"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "Басқа сөздерді іздеп көріңіз"
 
@@ -1792,44 +1832,34 @@ msgid "Shortcut"
 msgstr "Жарлық"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "Түзету"
+msgctxt "button"
+msgid "Set Shortcut…"
+msgstr "Жарлықты орнату…"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
-msgctxt "button"
-msgid "Set Shortcut"
-msgstr "Жарлықты орнату"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "Өшіру"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Жаңа пернетақта жарлығын енгізіңіз"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Болдырмау"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Қосу"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "Алмастыру"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "Орнату"
 
@@ -4480,7 +4510,6 @@ msgstr "Баспаға шығару серверін блоктаудан бос
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:399
 #, c-format
-#| msgid "_Unlock"
 msgid "Unlock %s."
 msgstr "%s босату."
 
@@ -5071,10 +5100,6 @@ msgstr "Бір кірі_с қайнар көзін барлық терезеле
 #: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Әр терезе үшін әр түр_лі кіріс қайнар көзін қолдануға рұқсат ету"
-
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "Пернетақта жарлықтары"
 
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
@@ -6880,6 +6905,10 @@ msgstr "Тіркелгілер қызметімен байланыс орнат�
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService орнатылған және іске қосылғанына көз жеткізіңіз."
 
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
 #: ../panels/user-accounts/um-user-panel.c:1304
 msgid ""
 "To make changes,\n"
@@ -7279,6 +7308,13 @@ msgstr "Қатынау нүктесі"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Нәтижелер табылмады"
+
+#~ msgid "Edit"
+#~ msgstr "Түзету"
+
+#~ msgctxt "button"
+#~ msgid "Set Shortcut"
+#~ msgstr "Жарлықты орнату"
 
 #~ msgctxt "notifications"
 #~ msgid "Notification _Banners"
