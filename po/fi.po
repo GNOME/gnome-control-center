@@ -19,15 +19,15 @@
 # Timo Jyrinki <timo.jyrinki@iki.fi>, 2008-2011.
 # Ville-Pekka Vainio <vpvainio@iki.fi>, 2013.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2013, 2014.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2014, 2015, 2016.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2014, 2015, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-12-15 17:21+0000\n"
-"PO-Revision-Date: 2016-12-16 22:40+0200\n"
+"POT-Creation-Date: 2017-01-31 11:58+0000\n"
+"PO-Revision-Date: 2017-02-04 20:26+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -238,7 +238,6 @@ msgstr "share;sharing;bluetooth;obex;jakaminen;jaot;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
-#| msgid "Place your calibration device over the square and press 'Start'"
 msgid "Place your calibration device over the square and press “Start”"
 msgstr "Aseta kalibrointilaite neliön päälle ja napsauta ”Käynnistä”"
 
@@ -246,9 +245,6 @@ msgstr "Aseta kalibrointilaite neliön päälle ja napsauta ”Käynnistä”"
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
 #: ../panels/color/cc-color-calibrate.c:367
-#| msgid ""
-#| "Move your calibration device to the calibrate position and press "
-#| "'Continue'"
 msgid ""
 "Move your calibration device to the calibrate position and press “Continue”"
 msgstr "Vaihda kalibrointilaite kalibrointiasentoon ja napsauta ”Jatka”"
@@ -257,9 +253,6 @@ msgstr "Vaihda kalibrointilaite kalibrointiasentoon ja napsauta ”Jatka”"
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
 #: ../panels/color/cc-color-calibrate.c:373
-#| msgid ""
-#| "Move your calibration device to the calibrate position and press "
-#| "'Continue'"
 msgid ""
 "Move your calibration device to the surface position and press “Continue”"
 msgstr "Vaihda kalibrointilaite kalibrointiasentoon ja napsauta ”Jatka”"
@@ -707,7 +700,6 @@ msgid "Summary"
 msgstr "Yhteenveto"
 
 #: ../panels/color/color.ui.h:28
-#| msgid "Add profile"
 msgid "Add Profile"
 msgstr "Lisää profiili"
 
@@ -1239,7 +1231,6 @@ msgid "Turn Off"
 msgstr "Sammuta"
 
 #: ../panels/display/cc-display-panel.c:2469
-#| msgid "Don't use this display"
 msgid "Don’t use this display"
 msgstr "Älä käytä tätä näyttöä"
 
@@ -1272,6 +1263,10 @@ msgstr ""
 msgid "Unknown"
 msgstr "Tuntematon"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
 #: ../panels/info/cc-info-panel.c:510
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
@@ -1282,6 +1277,9 @@ msgstr "%s %d-bit (Tunniste: %s)"
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-bit (Tunniste: %s)"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
 #: ../panels/info/cc-info-panel.c:520
 #, c-format
 msgid "%s %d-bit"
@@ -1589,7 +1587,7 @@ msgid "Launch help browser"
 msgstr "Käynnistä ohjeselain"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
+#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Asetukset"
@@ -1741,11 +1739,37 @@ msgstr "Compose-näppäin"
 msgid "Modifiers-only switch to next source"
 msgstr "Vaihda seuraavaan lähteeseen"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+#| msgid "Set Shortcut"
+msgid "Reset All Shortcuts?"
+msgstr "Palautetaanko kaikkien pikanäppäinten oletukset?"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr ""
+"Pikanäppäinten oletusten palauttaminen vaikuttaa asettamiisi pikanäppäimiin. "
+"Tätä toimintoa ei voi perua."
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Peru"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#| msgid "Reset"
+msgid "Reset All"
+msgstr "Palauta kaikki oletusasetukset"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
 msgstr "Palauta pikanäppäin oletusarvoon"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:414
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1754,21 +1778,21 @@ msgstr ""
 "Pikanäppäin %s on jo asetettu toimintoon <b>%s</b>. Jos korvaat sen, "
 "poistetaan toiminto %s poistetaan käytöstä"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Custom Shortcut"
 msgstr "Aseta oma pikanäppäin"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Shortcut"
 msgstr "Aseta pikanäppäin"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:589
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Anna uusi pikanäppäin vaihtaaksesi <b>%s</b>."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1017
 msgid "Add Custom Shortcut"
 msgstr "Lisää oma pikanäppäin"
 
@@ -1788,10 +1812,20 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Pikanäppäin;Toisto;Vilkkuminen;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "Pikanäppäimet"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#| msgid "Reset the shortcut to its default value"
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "Palauta kaikki pikanäppäimet oletusarvoihin"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
 msgstr "Näppäimistön pikanäppäintä ei löytynyt"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "Yritä eri hakuehdoilla"
 
@@ -1814,45 +1848,35 @@ msgid "Shortcut"
 msgstr "Pikanäppäin"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "Muokkaa"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:7
 #| msgid "Set Shortcut"
 msgctxt "button"
-msgid "Set Shortcut"
-msgstr "Aseta pikanäppäin"
+msgid "Set Shortcut…"
+msgstr "Aseta pikanäppäin…"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/keyboard/shortcut-editor.ui.h:7
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Ei mikään"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "Poista"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Anna uusi pikanäppäin"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Peru"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Lisää"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "Aseta"
 
@@ -2506,11 +2530,6 @@ msgstr "VPN-yhteyden tuonti epäonnistui"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:143
 #, c-format
-#| msgid ""
-#| "The file '%s' could not be read or does not contain recognized VPN "
-#| "connection information\n"
-#| "\n"
-#| "Error: %s."
 msgid ""
 "The file “%s” could not be read or does not contain recognized VPN "
 "connection information\n"
@@ -2535,7 +2554,6 @@ msgstr "_Avaa"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
-#| msgid "A file named \"%s\" already exists."
 msgid "A file named “%s” already exists."
 msgstr "Tiedosto nimeltä ”%s” on jo olemassa."
 
@@ -2555,10 +2573,6 @@ msgstr "VPN-yhteyden vienti epäonnistui"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:272
 #, c-format
-#| msgid ""
-#| "The VPN connection '%s' could not be exported to %s.\n"
-#| "\n"
-#| "Error: %s."
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
 "\n"
@@ -2845,6 +2859,7 @@ msgstr "Ryhmäsalasana"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
@@ -2940,7 +2955,6 @@ msgid "Hardware"
 msgstr "Laitteisto"
 
 #: ../panels/network/network-wifi.ui.h:51
-#| msgid "Reset"
 msgctxt "tab"
 msgid "Reset"
 msgstr "Tyhjennä asetukset"
@@ -2991,6 +3005,7 @@ msgstr "Salauksen tyyppi"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Salasana"
@@ -3666,22 +3681,33 @@ msgid "Sound _Alerts"
 msgstr "_Ääni-ilmoitukset"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "_Notifications"
 msgctxt "notifications"
-msgid "Notification _Banners"
-msgstr "Ilmoitus_bannerit"
+msgid "Notification _Popups"
+msgstr "_Ilmoitusponnahdukset"
 
-#. Banners here refers to message tray notifications in the middle of the screen.
-#: ../panels/notifications/edit-dialog.ui.h:7
-msgctxt "notifications"
-msgid "Show Message _Content in Banners"
-msgstr "Näy_tä viestin sisältö bannerissa"
+#: ../panels/notifications/edit-dialog.ui.h:6
+msgid ""
+"Notifications will continue to appear in the notification list when popups "
+"are disabled."
+msgstr ""
+"Ilmoitukset näkyvät ilmoitusluettelossa ponnahdusten ollessa pois käytöstä."
 
+#. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Show Message _Content in Banners"
+msgctxt "notifications"
+msgid "Show Message _Content in Popups"
+msgstr "Näy_tä viestin sisältö ponnahduksen yhteydessä"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Lukitusnäytön i_lmoitukset"
 
-#: ../panels/notifications/edit-dialog.ui.h:9
+#: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Näytä viestin sisältö _lukitusnäytöllä"
@@ -3702,8 +3728,10 @@ msgstr ""
 "Notifications;Banner;Message;Tray;Popup;ilmoitus;ilmoitukset;banneri;viesti;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification _Banners"
-msgstr "_Ilmoitusbannerit"
+#| msgctxt "notifications"
+#| msgid "_Notifications"
+msgid "Notification _Popups"
+msgstr "_Ilmoitusponnahdukset"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -3716,13 +3744,13 @@ msgid "Applications"
 msgstr "Sovellukset"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
+#: ../panels/online-accounts/cc-online-accounts-panel.c:111
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Muu"
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Lisää tili"
 
@@ -3748,31 +3776,10 @@ msgstr "Resurssit"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:385
+#: ../panels/online-accounts/cc-online-accounts-panel.c:403
 #, c-format
-#| msgid "My Account"
 msgid "%s Account"
 msgstr "%s-tili"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:662
-msgid "Error creating account"
-msgstr "Virhe tiliä luotaessa"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:722
-msgid "Error removing account"
-msgstr "Virhe tiliä poistaessa"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:754
-msgid "Are you sure you want to remove the account?"
-msgstr "Haluatko varmasti poistaa tilin?"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:756
-msgid "This will not remove the account on the server."
-msgstr "Tämä ei poista käyttäjää palvelimelta."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
-msgid "_Remove"
-msgstr "_Poista"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3794,13 +3801,13 @@ msgstr ""
 "yhteystiedot;kontaktit;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-msgid "No online accounts configured"
-msgstr "Verkkotilejä ei ole määritelty"
+msgid "Connect to your data in the cloud"
+msgstr "Muodosta yhteys pilvessä oleviin tietoihisi"
 
-#: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-msgid "Remove Account"
-msgstr "Poista tili"
+#: ../panels/online-accounts/online-accounts.ui.h:2
+#| msgid "Add an online account"
+msgid "Add an account"
+msgstr "Lisää tili"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
@@ -4158,6 +4165,7 @@ msgid "Authenticate"
 msgstr "Tunnistaudu"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "Tunnistautuminen vaaditaan"
 
@@ -4373,18 +4381,17 @@ msgstr "Ei aktiivisia tulostustöitä"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:380
 msgid "Add Printer"
 msgstr "Lisää tulostin"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "_Avaa lukitus"
 
 #. Translators: No printers were detected
 #: ../panels/printers/new-printer-dialog.ui.h:8
-#| msgid "No Pictures Found"
 msgid "No Printers Found"
 msgstr "Tulostimia ei löytynyt"
 
@@ -4392,6 +4399,13 @@ msgstr "Tulostimia ei löytynyt"
 #: ../panels/printers/new-printer-dialog.ui.h:10
 msgid "Enter a network address or search for a printer"
 msgstr "Kirjoita verkko-osoite tai etsi tulostinta"
+
+#: ../panels/printers/new-printer-dialog.ui.h:12
+#| msgid "Enter your username and password to view printers available on %s."
+msgid "Enter username and password to view printers on Print Server."
+msgstr ""
+"Syötä käyttäjätunnus ja salasana nähdäksesi tulostuspalvelimella olevat "
+"tulostimet."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4407,7 +4421,6 @@ msgid "Select"
 msgstr "Valitse"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
-#| msgid "Loading drivers database..."
 msgid "Loading drivers database…"
 msgstr "Ladataan ajuritietokantaa…"
 
@@ -4504,51 +4517,69 @@ msgstr "Valmis"
 #. Translators: This is the printer name for which we are showing the active jobs
 #: ../panels/printers/pp-jobs-dialog.c:289
 #, c-format
-#| msgctxt "Printer jobs dialog title"
-#| msgid "%s - Active Jobs"
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Aktiiviset työt"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
-#| msgid "Not searching for networks"
+#: ../panels/printers/pp-new-printer-dialog.c:395
+#| msgid "Select Printer Driver"
+msgid "Unlock Print Server"
+msgstr "Avaa tulostuspalvelimen lukitus"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:399
+#, c-format
+#| msgid "_Unlock"
+msgid "Unlock %s."
+msgstr "Avaa kohteen %s lukitus."
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:404
+#, c-format
+#| msgid "Enter your username and password to view printers available on %s."
+msgid "Enter username and password to view printers on %s."
+msgstr ""
+"Syötä käyttäjätunnus ja salasana nähdäksesi palvelimella %s olevat "
+"tulostimet."
+
+#: ../panels/printers/pp-new-printer-dialog.c:851
 msgid "Searching for Printers"
 msgstr "Etsitään tulostimia"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1774
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1779
 msgid "Serial Port"
 msgstr "Sarjaportti"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1786
 msgid "Parallel Port"
 msgstr "Rinnakkaisportti"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1791
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1828
 #, c-format
 msgid "Location: %s"
 msgstr "Sijainti: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1833
 #, c-format
 msgid "Address: %s"
 msgstr "Osoite: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1862
 msgid "Server requires authentication"
 msgstr "Palvelin vaatii tunnistautumisen"
 
@@ -4681,13 +4712,11 @@ msgstr "Valmistaja"
 msgid "Driver"
 msgstr "Ajuri"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
-#, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr ""
-"Syötä käyttäjätunnus ja salasana palvelimella %s olevien tulostimien "
-"katselemiseksi."
+#: ../panels/printers/printers.ui.h:1
+#| msgid "Add Printer"
+msgctxt "button"
+msgid "Add Printer"
+msgstr "Lisää tulostin"
 
 #: ../panels/printers/printers.ui.h:2
 msgid "Remove Printer"
@@ -4755,9 +4784,6 @@ msgstr "Lisää tulostin"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:27
-#| msgid ""
-#| "Sorry! The system printing service\n"
-#| "doesn't seem to be available."
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -5080,7 +5106,6 @@ msgid "Add an Input Source"
 msgstr "Lisää syötelähde"
 
 #: ../panels/region/input-chooser.ui.h:4
-#| msgid "Input methods can't be used on the login screen"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Syötemenetelmiä ei voi käyttää kirjautumisruudussa"
 
@@ -5095,10 +5120,6 @@ msgstr "Käytä _samaa lähdettä kaikille ikkunoille"
 #: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Salli _eri lähteet yksittäisille ikkunoille"
-
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "Pikanäppäimet"
 
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
@@ -5654,9 +5675,6 @@ msgstr "Helpota näkemistä, kuulemista, kirjoittamista ja hiiren käyttöä"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;"
-#| "size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
@@ -6350,6 +6368,10 @@ msgstr "Käyttäjän kuvake"
 msgid "Last Login"
 msgstr "Viimeisin kirjautuminen"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove Account"
+msgstr "Poista tili"
+
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Hallitse käyttäjätilejä"
@@ -6568,9 +6590,6 @@ msgid "Failed to join domain"
 msgstr "Toimialueeseen liittyminen epäonnistui"
 
 #: ../panels/user-accounts/um-account-dialog.c:1026
-#| msgid ""
-#| "That login name didn't work.\n"
-#| "Please try again."
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6579,9 +6598,6 @@ msgstr ""
 "Yritä uudelleen."
 
 #: ../panels/user-accounts/um-account-dialog.c:1033
-#| msgid ""
-#| "That login password didn't work.\n"
-#| "Please try again."
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6651,7 +6667,6 @@ msgstr "Valmis!"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:504
 #: ../panels/user-accounts/um-fingerprint-dialog.c:546
 #, c-format
-#| msgid "Could not access '%s' device"
 msgid "Could not access “%s” device"
 msgstr "Laitetta ”%s” ei voitu käsitellä"
 
@@ -6660,7 +6675,6 @@ msgstr "Laitetta ”%s” ei voitu käsitellä"
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
 #: ../panels/user-accounts/um-fingerprint-dialog.c:587
 #, c-format
-#| msgid "Could not start finger capture on '%s' device"
 msgid "Could not start finger capture on “%s” device"
 msgstr "Sormenjäljen tunnistusta ei voitu aloittaa laitteella ”%s”"
 
@@ -6679,9 +6693,6 @@ msgstr "Kysy apua järjestelmäsi ylläpitäjältä."
 #.
 #: ../panels/user-accounts/um-fingerprint-dialog.c:714
 #, c-format
-#| msgid ""
-#| "To enable fingerprint login, you need to save one of your fingerprints, "
-#| "using the '%s' device."
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the “%s” device."
@@ -6759,7 +6770,6 @@ msgstr "Istunto alkoi"
 #. The %s is the user real name.
 #: ../panels/user-accounts/um-history-dialog.c:299
 #, c-format
-#| msgid "%s - Account Activity"
 msgid "%s — Account Activity"
 msgstr "%s — Tilin käyttöhistoria"
 
@@ -6821,7 +6831,6 @@ msgstr "Virheellinen salasana, yritä uudelleen"
 
 #: ../panels/user-accounts/um-realm-manager.c:834
 #, c-format
-#| msgid "Couldn't connect to the %s domain: %s"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Toimialueeseen %s yhdistäminen epäonnistui: %s"
 
@@ -6858,7 +6867,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:695
 #, c-format
-#| msgid "Do you want to keep %s's files?"
 msgid "Do you want to keep %s’s files?"
 msgstr "Haluatko säilyttää käyttäjän %s tiedostot?"
 
@@ -6880,7 +6888,6 @@ msgstr "_Säilytä tiedostot"
 
 #: ../panels/user-accounts/um-user-panel.c:717
 #, c-format
-#| msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Haluatko varmasti kumota käyttöoikeudet etähallitulta tililtä %s?"
 
@@ -6915,6 +6922,10 @@ msgstr "Yhteys tilipalveluun (accounts service) epäonnistui"
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Varmista, että AccountService on asennettu ja käytössä."
 
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
 #: ../panels/user-accounts/um-user-panel.c:1304
 msgid ""
 "To make changes,\n"
@@ -6954,7 +6965,6 @@ msgid "My Account"
 msgstr "Oma tili"
 
 #: ../panels/user-accounts/um-utils.c:563
-#| msgid "Sorry, that user name isn't available. Please try another."
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr ""
 "Valitettavasti kyseinen käyttäjätunnus ei ole saatavilla. Valitse toinen "
@@ -6966,7 +6976,6 @@ msgid "The username is too long."
 msgstr "Käyttäjätunnus on liian pitkä."
 
 #: ../panels/user-accounts/um-utils.c:569
-#| msgid "The username cannot start with a '-'."
 msgid "The username cannot start with a “-”."
 msgstr "Käyttäjätunnus ei voi alkaa merkillä ”-”."
 
@@ -6979,7 +6988,6 @@ msgstr ""
 "numeroista sekä seuraavista merkeistä: . - _"
 
 #: ../panels/user-accounts/um-utils.c:576
-#| msgid "This will be used to name your home folder and can't be changed."
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr "Tätä käytetään kotikansiosi nimeämiseen, eikä sitä voi vaihtaa."
 
@@ -6992,10 +7000,6 @@ msgid "Map buttons to functions"
 msgstr "Määritä painikkeille toimintoja"
 
 #: ../panels/wacom/button-mapping.ui.h:4
-#| msgid ""
-#| "To edit a shortcut, choose the \"Send Keystroke\" action, press the "
-#| "keyboard shortcut button and hold down the new keys or press Backspace to "
-#| "clear."
 msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear."
@@ -7012,18 +7016,15 @@ msgid ""
 msgstr "Kosketa näytöllä näkyviä kohdemerkkejä piirtopöydän kalibroimiseksi."
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:87
-#| msgid "Mis-click detected, restarting..."
 msgid "Mis-click detected, restarting…"
 msgstr "Tunnistettiin ohi mennyt kosketus, aloitetaan alusta…"
 
 #: ../panels/wacom/cc-wacom-button-row.c:266
 #, c-format
-#| msgid "Button"
 msgid "Button %d"
 msgstr "Painike %d"
 
 #: ../panels/wacom/cc-wacom-button-row.h:53
-#| msgid "Applications"
 msgctxt "Wacom action-type"
 msgid "Application defined"
 msgstr "Sovelluksen määrittämä"
@@ -7170,7 +7171,6 @@ msgid "Forward"
 msgstr "Eteenpäin"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:6
-#| msgid "No results found"
 msgid "No stylus found"
 msgstr "Osoitinkynää ei löytynyt"
 
@@ -7202,8 +7202,8 @@ msgstr "Alanäppäin"
 msgid "Tip Pressure Feel"
 msgstr "Kynän kärjen paineentuntu"
 
-#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1482
+#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "Kaikki asetukset"
 
@@ -7216,9 +7216,6 @@ msgid "Utilities to configure the GNOME desktop"
 msgstr "Työkalut Gnome-työpöydän hallintaan"
 
 #: ../shell/appdata/gnome-control-center.appdata.xml.in.h:3
-#| msgid ""
-#| "The control center is GNOME's main interface for configuration of various "
-#| "aspects of your desktop."
 msgid ""
 "The control center is GNOME’s main interface for configuration of various "
 "aspects of your desktop."
@@ -7326,8 +7323,38 @@ msgstr "Yhteyspiste"
 msgid "No results found"
 msgstr "Tuloksia ei löytynyt"
 
-#~ msgid "Add an online account"
-#~ msgstr "Lisää verkkotili"
+#~ msgid "Edit"
+#~ msgstr "Muokkaa"
+
+#~| msgid "Set Shortcut"
+#~ msgctxt "button"
+#~ msgid "Set Shortcut"
+#~ msgstr "Aseta pikanäppäin"
+
+#~ msgctxt "notifications"
+#~ msgid "Notification _Banners"
+#~ msgstr "Ilmoitus_bannerit"
+
+#~ msgid "Notification _Banners"
+#~ msgstr "_Ilmoitusbannerit"
+
+#~ msgid "Error creating account"
+#~ msgstr "Virhe tiliä luotaessa"
+
+#~ msgid "Error removing account"
+#~ msgstr "Virhe tiliä poistaessa"
+
+#~ msgid "Are you sure you want to remove the account?"
+#~ msgstr "Haluatko varmasti poistaa tilin?"
+
+#~ msgid "This will not remove the account on the server."
+#~ msgstr "Tämä ei poista käyttäjää palvelimelta."
+
+#~ msgid "_Remove"
+#~ msgstr "_Poista"
+
+#~ msgid "No online accounts configured"
+#~ msgstr "Verkkotilejä ei ole määritelty"
 
 #~ msgid ""
 #~ "Adding an account allows your applications to access it for documents, "
