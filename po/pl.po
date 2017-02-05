@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 21:13+0100\n"
-"PO-Revision-Date: 2017-01-21 21:14+0100\n"
+"POT-Creation-Date: 2017-02-05 16:11+0100\n"
+"PO-Revision-Date: 2017-02-05 16:12+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -1260,6 +1260,10 @@ msgstr "Panel;Projektor;xrandr;Ekran;Rozdzielczość;Odświeżanie;Monitor;"
 msgid "Unknown"
 msgstr "Nieznany"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
 #: ../panels/info/cc-info-panel.c:510
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
@@ -1270,6 +1274,9 @@ msgstr "%s %d-bitowy (identyfikator: %s)"
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-bitowy (identyfikator: %s)"
 
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
 #: ../panels/info/cc-info-panel.c:520
 #, c-format
 msgid "%s %d-bit"
@@ -1726,11 +1733,35 @@ msgstr "Klawisz Compose"
 msgid "Modifiers-only switch to next source"
 msgstr "Przełączenie na następne źródło tylko dla modyfikatorów"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+msgid "Reset All Shortcuts?"
+msgstr "Przywrócić wszystkie skróty?"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr ""
+"Przywrócenie skrótów może wpłynąć na skróty ustawione przez użytkownika. Nie "
+"można tego cofnąć."
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All"
+msgstr "Przywróć wszystko"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
 msgstr "Przywraca skrót do domyślnej wartości"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:414
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1738,21 +1769,21 @@ msgid ""
 msgstr ""
 "%s jest już używane dla „<b>%s</b>”. Po zastąpieniu „%s” zostanie wyłączone."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Custom Shortcut"
 msgstr "Ustawienie niestandardowego skrótu"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
 msgid "Set Shortcut"
 msgstr "Ustawienie skrótu"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:589
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Proszę wprowadzić nowy skrót, aby zmienić „<b>%s</b>”."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1017
 msgid "Add Custom Shortcut"
 msgstr "Dodanie niestandardowego skrótu"
 
@@ -1773,10 +1804,19 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Skrót;Skróty;Powtarzanie;Miganie;Pisanie;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "Skróty klawiszowe"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "Przywraca wszystkie skróty do domyślnych wartości"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
 msgstr "Nie odnaleziono skrótów klawiszowych"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "Proszę spróbować innych słów"
 
@@ -1799,44 +1839,34 @@ msgid "Shortcut"
 msgstr "Skrót"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "Modyfikuj"
+msgctxt "button"
+msgid "Set Shortcut…"
+msgstr "Ustaw skrót…"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
-msgctxt "button"
-msgid "Set Shortcut"
-msgstr "Ustaw skrót"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Brak"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "Usuń"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Proszę wprowadzić nowy skrót"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Dodaj"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "Zastąp"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "Ustaw"
 
@@ -4358,7 +4388,8 @@ msgstr "Brak aktywnych zadań drukarki"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/pp-new-printer-dialog.c:380
+#: ../panels/printers/pp-new-printer-dialog.c:384
+#: ../panels/printers/pp-new-printer-dialog.c:456
 msgid "Add Printer"
 msgstr "Dodanie drukarki"
 
@@ -4497,61 +4528,61 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — aktywne zadania"
 
-#: ../panels/printers/pp-new-printer-dialog.c:395
+#: ../panels/printers/pp-new-printer-dialog.c:402
 msgid "Unlock Print Server"
 msgstr "Odblokowanie serwera wydruku"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:399
+#: ../panels/printers/pp-new-printer-dialog.c:406
 #, c-format
 msgid "Unlock %s."
 msgstr "Odblokowanie „%s”."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:404
+#: ../panels/printers/pp-new-printer-dialog.c:411
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Proszę wprowadzić nazwę użytkownika i hasło, aby wyświetlić drukarki w „%s”."
 
-#: ../panels/printers/pp-new-printer-dialog.c:851
+#: ../panels/printers/pp-new-printer-dialog.c:876
 msgid "Searching for Printers"
 msgstr "Wyszukiwanie drukarek"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1799
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1804
 msgid "Serial Port"
 msgstr "Port szeregowy"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1786
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "Port równoległy"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1791
+#: ../panels/printers/pp-new-printer-dialog.c:1816
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1828
+#: ../panels/printers/pp-new-printer-dialog.c:1853
 #, c-format
 msgid "Location: %s"
 msgstr "Położenie: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1833
+#: ../panels/printers/pp-new-printer-dialog.c:1858
 #, c-format
 msgid "Address: %s"
 msgstr "Adres: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1862
+#: ../panels/printers/pp-new-printer-dialog.c:1887
 msgid "Server requires authentication"
 msgstr "Serwer wymaga uwierzytelnienia"
 
@@ -5091,10 +5122,6 @@ msgstr "To _samo źródło dla wszystkich okien"
 #: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "_Różne źródła dla każdego okna"
-
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "Skróty klawiszowe"
 
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
@@ -6914,6 +6941,10 @@ msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Proszę się upewnić, że usługa AccountService jest zainstalowana i włączona."
 
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
 #: ../panels/user-accounts/um-user-panel.c:1304
 msgid ""
 "To make changes,\n"
