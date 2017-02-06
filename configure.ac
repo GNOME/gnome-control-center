@@ -129,6 +129,7 @@ PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES gnome-desktop-3.0 >= 3.1.0
+                  colord >= $COLORD_REQUIRED_VERSION
                   upower-glib >= 0.99.0)
 PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0
 		  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)

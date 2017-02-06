@@ -34,6 +34,9 @@
 #include "shell/list-box-helper.h"
 #include <libupower-glib/upower.h>
 
+#include "cc-natural-light-dialog.h"
+#include "cc-display-resources.h"
+
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
 #define DISPLAY_PANEL_PRIVATE(o) \
@@ -84,6 +87,10 @@ struct _CcDisplayPanelPrivate
   GtkWidget *rotate_right_button;
   GtkWidget *dialog;
   GtkWidget *config_grid;
+  GtkWidget *natural_light_filter_label;
+  CcNaturalLightDialog *natural_light_dialog;
+
+  GSettings *settings_color;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -241,6 +248,8 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&priv->up_client);
   g_clear_object (&priv->background);
   g_clear_object (&priv->thumbnail_factory);
+  g_clear_object (&priv->settings_color);
+  g_clear_object (&priv->natural_light_dialog);
 
   if (priv->dialog)
     {
@@ -2604,6 +2613,17 @@ show_setup_dialog (CcDisplayPanel *panel)
 }
 
 static void
+cc_display_panel_natural_light_activated (GtkListBox     *listbox,
+                                          GtkWidget      *row,
+                                          CcDisplayPanel *panel)
+{
+  CcDisplayPanelPrivate *priv = panel->priv;
+  GtkWindow *toplevel;
+  toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
+  cc_natural_light_dialog_present (priv->natural_light_dialog, toplevel);
+}
+
+static void
 cc_display_panel_box_row_activated (GtkListBox     *listbox,
                                     GtkWidget      *row,
                                     CcDisplayPanel *panel)
@@ -2756,12 +2776,37 @@ sensor_proxy_vanished_cb (GDBusConnection *connection,
 }
 
 static void
+natural_light_enabled_recheck (CcDisplayPanel *self)
+{
+  CcDisplayPanelPrivate *priv = DISPLAY_PANEL_PRIVATE (self);
+  gboolean ret = g_settings_get_boolean (priv->settings_color,
+                                         "natural-light-enabled");
+  gtk_label_set_label (GTK_LABEL (priv->natural_light_filter_label),
+                       /* TRANSLATORS: the state of the natural light setting */
+                       ret ? _("On") : _("Off"));
+}
+
+static void
+settings_color_changed_cb (GSettings *settings, gchar *key, gpointer user_data)
+{
+  CcDisplayPanel *self = CC_DISPLAY_PANEL (user_data);
+  if (g_strcmp0 (key, "natural-light-enabled") == 0)
+    natural_light_enabled_recheck (self);
+}
+
+static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
   GtkWidget *frame, *vbox;
+  GtkListBoxRow *row;
+  GtkWidget *box;
+  GtkWidget *label;
+  GtkWidget *natural_light_listbox;
   GError *error = NULL;
   GSettings *settings;
+
+  g_resources_register (cc_display_get_resource ());
 
   priv = self->priv = DISPLAY_PANEL_PRIVATE (self);
 
@@ -2772,6 +2817,7 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   priv->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
+  priv->natural_light_dialog = cc_natural_light_dialog_new ();
 
   priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
   if (!priv->screen)
@@ -2814,6 +2860,36 @@ cc_display_panel_init (CcDisplayPanel *self)
   gtk_widget_set_halign (priv->arrange_button, GTK_ALIGN_CENTER);
 
   gtk_container_add (GTK_CONTAINER (vbox), priv->arrange_button);
+
+  /* natural light section */
+  frame = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+  natural_light_listbox = gtk_list_box_new ();
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (natural_light_listbox),
+                                   GTK_SELECTION_NONE);
+  gtk_container_add (GTK_CONTAINER (frame), natural_light_listbox);
+  g_signal_connect (natural_light_listbox, "row-activated",
+                    G_CALLBACK (cc_display_panel_natural_light_activated),
+                    self);
+  row = GTK_LIST_BOX_ROW (gtk_list_box_row_new ());
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_container_add (GTK_CONTAINER (natural_light_listbox), GTK_WIDGET (row));
+  label = gtk_label_new (_("_Natural Light Filter"));
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_start (label, 20);
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+  priv->natural_light_filter_label = label = gtk_label_new ("");
+  gtk_widget_set_halign (label, GTK_ALIGN_END);
+  gtk_widget_set_margin_start (label, 24);
+  gtk_widget_set_margin_end (label, 24);
+  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
+
   gtk_widget_show_all (vbox);
 
   on_screen_changed (self);
@@ -2837,6 +2913,11 @@ cc_display_panel_init (CcDisplayPanel *self)
     }
   else
     g_clear_object (&self->priv->up_client);
+
+  priv->settings_color = g_settings_new ("org.gnome.settings-daemon.plugins.color");
+  g_signal_connect (priv->settings_color, "changed",
+                    G_CALLBACK (settings_color_changed_cb), self);
+  natural_light_enabled_recheck (self);
 
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
 
