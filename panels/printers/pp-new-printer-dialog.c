@@ -1974,8 +1974,30 @@ row_activated_cb (GtkTreeView       *tree_view,
 {
   PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
+  GtkTreeModel              *model;
+  GtkTreeIter                iter;
+  GtkWidget                 *widget;
+  gboolean                   authentication_needed;
+  gboolean                   selected;
 
-  gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_OK);
+  selected = gtk_tree_selection_get_selected (gtk_tree_view_get_selection (priv->treeview),
+                                              &model,
+                                              &iter);
+
+  if (selected)
+    {
+      gtk_tree_model_get (model, &iter, SERVER_NEEDS_AUTHENTICATION_COLUMN, &authentication_needed, -1);
+
+      if (authentication_needed)
+        {
+          widget = WID ("unlock-button");
+          authenticate_samba_server (GTK_BUTTON (widget), dialog);
+        }
+      else
+        {
+          gtk_dialog_response (GTK_DIALOG (priv->dialog), GTK_RESPONSE_OK);
+        }
+    }
 }
 
 static void
