@@ -327,27 +327,21 @@ else
 fi
 AM_CONDITIONAL(BUILD_CHEESE, test x${have_cheese} = xyes)
 
-# wacom is disabled for s390/s390x and non Linux platforms (needs udev)
-case $host_os in
-  linux*)
-    if test "$host_cpu" = s390 -o "$host_cpu" = s390x; then
-      have_wacom=no
-    else
-      PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
-                        gnome-settings-daemon >= $GSD_REQUIRED_VERSION
-                        xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
-                        gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
-                        clutter-gtk-1.0
-                        clutter-1.0 >= $CLUTTER_REQUIRED_VERSION)
-      have_wacom=yes
-      AC_DEFINE(BUILD_WACOM, 1, [Define to 1 to build the Wacom panel])
-      AC_DEFINE(HAVE_WACOM, 1, [Define to 1 is Wacom is supportted])
-    fi
-    ;;
-  *)
-    have_wacom=no
-    ;;
-esac
+# Wacom
+PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
+                  gnome-settings-daemon >= $GSD_REQUIRED_VERSION
+                  xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
+                  gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
+                  clutter-gtk-1.0
+                  clutter-1.0 >= $CLUTTER_REQUIRED_VERSION,
+                  [have_wacom=yes], [have_wacom=no])
+
+if test "x$have_wacom" = xyes ; then
+	AC_DEFINE(BUILD_WACOM, 1, [Define to 1 to build the Wacom panel])
+	AC_DEFINE(HAVE_WACOM, 1, [Define to 1 is Wacom is supportted])
+else
+	linux_usb_error_or_warn "*** Wacom panel will not be built"
+fi
 AM_CONDITIONAL(BUILD_WACOM, [test x${have_wacom} = xyes])
 
 # Kerberos kerberos support
