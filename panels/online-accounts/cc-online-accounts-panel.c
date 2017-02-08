@@ -106,7 +106,7 @@ add_provider_row (CcGoaPanel  *self,
 
   if (provider == NULL)
     {
-      g_object_set_data (G_OBJECT (row), "provider", NULL);
+      g_object_set_data (G_OBJECT (row), "goa-provider", NULL);
       icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
       name = g_strdup (C_("Online Account", "Other"));
     }
