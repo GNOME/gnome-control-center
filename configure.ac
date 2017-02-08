@@ -191,6 +191,38 @@ if test "x$have_wayland" = xyes ; then
 	fi
 fi
 
+# Panels that must be built on Linux systems
+linux_error_or_warn()
+{
+	case $host_os in
+	linux*)
+		AC_MSG_ERROR([$1])
+		;;
+	*)
+		AC_MSG_WARN([$1])
+		;;
+	esac
+
+}
+
+# Panels that must be built on Linux systems with
+# USB support (so not on S390)
+linux_usb_error_or_warn()
+{
+	case $host_os in
+	linux*)
+		if test "$host_cpu" = s390 -o "$host_cpu" = s390x; then
+			AC_MSG_WARN([$1 (no USB support on this platform) ***])
+		else
+			AC_MSG_ERROR([$1 ***])
+		fi
+		;;
+	*)
+		AC_MSG_NOTICE([$1])
+		;;
+	esac
+}
+
 PKG_CHECK_MODULES(NETWORK_MANAGER,
                   libnm >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnma >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION
