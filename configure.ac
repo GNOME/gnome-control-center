@@ -448,22 +448,6 @@ else
         AC_MSG_RESULT(no)
 fi
 
-case $host_os in
-  linux*)
-    if test "$host_cpu" = s390 -o "$host_cpu" = s390x; then
-      # Nothing
-      echo "USB-related panels disabled on S390"
-    else
-      if test "x$have_networkmanager" != "xyes" -o \
-              "x$have_bluetooth" != "xyes" -o \
-              "x$enable_cups" != "xyes" -o \
-              "x$have_wacom" != "xyes"; then
-        AC_MSG_ERROR([The Network, Bluetooth, Printers and Wacom panels are not optional on Linux systems])
-     fi
-    fi
-    ;;
-esac
-
 AC_CONFIG_FILES([
 Makefile
 panels/Makefile
