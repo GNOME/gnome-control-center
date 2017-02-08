@@ -147,7 +147,8 @@ PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES
                   libsoup-2.4
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
 PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                  smbclient)
 PKG_CHECK_MODULES(PRIVACY_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
@@ -228,14 +229,6 @@ fi
 AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
 if test x${have_bluetooth} = xyes; then
   AC_DEFINE(HAVE_BLUETOOTH, 1, [Define to 1 if bluetooth support is available])
-fi
-
-# Check for smbclient
-PKG_CHECK_MODULES(SMBCLIENT, smbclient, [have_smbclient=yes], [have_smbclient=no])
-
-if test x"$have_smbclient" = x"no"; then
-    AC_MSG_WARN(*** Printer panel will not be built (smbclient.pc not found) ***)
-    enable_cups=no
 fi
 
 # Check for CUPS 1.4 or newer
