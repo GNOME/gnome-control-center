@@ -7,7 +7,6 @@ AM_CPPFLAGS = 						\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	$(NULL)
 
-
 noinst_LTLIBRARIES = libwacom-calibrator.la libwacom-calibrator-test.la
 
 libwacom_calibrator_la_SOURCES =	\
@@ -20,7 +19,7 @@ libwacom_calibrator_la_SOURCES =	\
 	cc-target-actor.c		\
 	cc-target-actor.h
 
-libwacom_calibrator_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
+libwacom_calibrator_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(LIBM)
 libwacom_calibrator_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 libwacom_calibrator_test_la_SOURCES = $(libwacom_calibrator_la_SOURCES)
@@ -43,6 +42,6 @@ test_calibrator_SOURCES =		\
 	cc-target-actor.h
 
 test_calibrator_CPPFLAGS = $(AM_CPPFLAGS)
-test_calibrator_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
+test_calibrator_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(LIBM)
 
 -include $(top_srcdir)/git.mk

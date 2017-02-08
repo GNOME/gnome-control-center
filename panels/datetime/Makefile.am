@@ -30,11 +30,11 @@ noinst_PROGRAMS = $(TEST_PROGS) test-timezone
 TEST_PROGS += test-timezone-gfx test-endianess
 
 test_timezone_SOURCES = test-timezone.c cc-timezone-map.h cc-timezone-map.c tz.c tz.h cc-datetime-resources.c cc-datetime-resources.h
-test_timezone_LDADD = $(DATETIME_PANEL_LIBS) -lm
+test_timezone_LDADD = $(DATETIME_PANEL_LIBS) $(LIBM)
 test_timezone_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 
 test_timezone_gfx_SOURCES = test-timezone-gfx.c tz.c tz.h cc-datetime-resources.c cc-datetime-resources.h
-test_timezone_gfx_LDADD = $(DATETIME_PANEL_LIBS) -lm
+test_timezone_gfx_LDADD = $(DATETIME_PANEL_LIBS) $(LIBM)
 test_timezone_gfx_CFLAGS = $(DATETIME_PANEL_CFLAGS) -DSRCDIR="\"$(srcdir)\""
 
 test_endianess_SOURCES = test-endianess.c date-endian.c date-endian.h

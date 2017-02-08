@@ -27,11 +27,11 @@ libgvcgtk_la_SOURCES = 				\
 	$(NULL)
 
 libsound_la_LIBADD =				\
-	-lm					\
 	gvc/libgvc.la				\
 	libgvcgtk.la				\
 	$(PANEL_LIBS)				\
 	$(SOUND_PANEL_LIBS)			\
+	$(LIBM)					\
 	$(NULL)
 
 libsound_la_LDFLAGS =				\

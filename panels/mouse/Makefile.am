@@ -25,7 +25,7 @@ libmouse_properties_la_SOURCES =	\
 	gnome-mouse-test.c		\
 	gnome-mouse-test.h
 
-libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS) $(top_builddir)/panels/common/libdevice.la
+libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS) $(LIBM) $(top_builddir)/panels/common/libdevice.la
 
 test_gnome_mouse_test_SOURCES =		\
 	$(BUILT_SOURCES)		\
@@ -36,7 +36,7 @@ test_gnome_mouse_test_SOURCES =		\
 noinst_PROGRAMS = test-gnome-mouse-test
 
 test_gnome_mouse_test_CPPFLAGS = $(AM_CPPFLAGS)
-test_gnome_mouse_test_LDADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
+test_gnome_mouse_test_LDADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS) $(LIBM)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/mouse.gresource.xml)
 cc-mouse-resources.c: mouse.gresource.xml $(resource_files)

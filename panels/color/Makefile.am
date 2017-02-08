@@ -30,7 +30,7 @@ libcolor_la_SOURCES =		\
 	cc-color-panel.c	\
 	cc-color-panel.h
 
-libcolor_la_LIBADD = $(PANEL_LIBS) $(COLOR_PANEL_LIBS)
+libcolor_la_LIBADD = $(PANEL_LIBS) $(COLOR_PANEL_LIBS) $(LIBM)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/color.gresource.xml)
 cc-color-resources.c: color.gresource.xml $(resource_files)

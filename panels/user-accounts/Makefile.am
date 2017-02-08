@@ -64,7 +64,7 @@ libuser_accounts_la_LIBADD = 		\
 	$(builddir)/../common/liblanguage.la	\
 	-lpwquality			\
 	-lcrypt				\
-	-lm				\
+	$(LIBM)				\
 	$(top_builddir)/libgd/libgd.la
 
 if BUILD_CHEESE

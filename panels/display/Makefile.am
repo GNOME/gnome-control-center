@@ -9,7 +9,7 @@ libdisplay_la_SOURCES =		\
 	scrollarea.c		\
 	scrollarea.h
 
-libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
+libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS) $(LIBM)
 
 # You will need a recent intltool or the patch from this bug
 # http://bugzilla.gnome.org/show_bug.cgi?id=462312

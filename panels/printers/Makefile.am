@@ -54,7 +54,7 @@ libprinters_la_SOURCES =		\
 	cc-printers-panel.h
 
 libprinters_la_CPPFLAGS = $(AM_CPPFLAGS)
-libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS) $(SMBCLIENT_LIBS)
+libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS) $(SMBCLIENT_LIBS) $(LIBM)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/printers.gresource.xml)
 cc-printers-resources.c: printers.gresource.xml $(resource_files)
