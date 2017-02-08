@@ -229,7 +229,7 @@ PKG_CHECK_MODULES(NETWORK_MANAGER,
                   mm-glib >= $MODEM_MANAGER_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
-        AC_MSG_WARN(*** Network panel will not be built (NetworkManager or ModemManager not found) ***)
+        linux_error_or_warn "*** Network panel will not be built (NetworkManager or ModemManager not found) ***"
 else
 	AC_DEFINE(BUILD_NETWORK, 1, [Define to 1 to build the Network panel])
 fi
