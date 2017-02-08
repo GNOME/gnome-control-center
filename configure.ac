@@ -257,6 +257,8 @@ PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.18.2,
 		  [have_bluetooth=yes], have_bluetooth=no)
 if test "x$have_bluetooth" = xyes ; then
 	AC_DEFINE(BUILD_BLUETOOTH, 1, [Define to 1 to build the Bluetooth panel])
+else
+	linux_usb_error_or_warn "*** Bluetooth panel will not be built"
 fi
 AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
 if test x${have_bluetooth} = xyes; then
