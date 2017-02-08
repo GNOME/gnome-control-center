@@ -266,48 +266,38 @@ if test x${have_bluetooth} = xyes; then
 fi
 
 # Check for CUPS 1.4 or newer
-AC_ARG_ENABLE([cups],
-              AS_HELP_STRING([--disable-cups], [disable CUPS support (default: enabled)]),,
-              [enable_cups=yes])
+AC_PROG_SED
 
-if test x"$enable_cups" != x"no" ; then
-  AC_PROG_SED
+AC_PATH_PROG(CUPS_CONFIG, cups-config)
 
-  AC_PATH_PROG(CUPS_CONFIG, cups-config)
-
-  if test x$CUPS_CONFIG = x; then
-    AC_MSG_ERROR([cups-config not found but CUPS support requested])
-  fi
-
-  CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
-  CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 1`
-  CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 2`
-
-  AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h cups/ppd.h],,
-                   AC_MSG_ERROR([CUPS headers not found but CUPS support requested]))
-
-  if ! test $CUPS_API_MAJOR -gt 1 -o \
-            $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 4 ; then
-    AC_MSG_ERROR([CUPS 1.4 or newer not found, but CUPS support requested])
-  fi
-
-  AC_DEFINE(BUILD_PRINTERS, 1, [Define to 1 to build the Printers panel])
-
-  # https://bugzilla.gnome.org/show_bug.cgi?id=696766
-  CUPS_CPPFLAGS=""
-  if test $CUPS_API_MAJOR -gt 1 -o \
-          $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 6 ; then
-     CUPS_CPPFLAGS=-D_PPD_DEPRECATED=""
-  fi
-
-  CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e 's/-O\w*//g' -e 's/-m\w*//g'`
-  CUPS_LIBS=`$CUPS_CONFIG --libs`
-  AC_SUBST(CUPS_CPPFLAGS)
-  AC_SUBST(CUPS_CFLAGS)
-  AC_SUBST(CUPS_LIBS)
+if test x$CUPS_CONFIG = x; then
+  AC_MSG_ERROR([cups-config not found])
 fi
 
-AM_CONDITIONAL(BUILD_PRINTERS, [test x"$enable_cups" = x"yes"])
+CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
+CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 1`
+CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 2`
+
+AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h cups/ppd.h],,
+                 AC_MSG_ERROR([CUPS headers not found]))
+
+if ! test $CUPS_API_MAJOR -gt 1 -o \
+          $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 4 ; then
+  AC_MSG_ERROR([CUPS 1.4 or newer not found])
+fi
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=696766
+CUPS_CPPFLAGS=""
+if test $CUPS_API_MAJOR -gt 1 -o \
+        $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 6 ; then
+   CUPS_CPPFLAGS=-D_PPD_DEPRECATED=""
+fi
+
+CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e 's/-O\w*//g' -e 's/-m\w*//g'`
+CUPS_LIBS=`$CUPS_CONFIG --libs`
+AC_SUBST(CUPS_CPPFLAGS)
+AC_SUBST(CUPS_CFLAGS)
+AC_SUBST(CUPS_LIBS)
 
 # Optional dependency for the user accounts panel
 AC_ARG_WITH([cheese],
@@ -600,11 +590,6 @@ if test "x$have_bluetooth" = "xyes"; then
 	AC_MSG_NOTICE([** gnome-bluetooth (Bluetooth panel)])
 else
 	AC_MSG_NOTICE([   Bluetooth panel disabled])
-fi
-if test "x$enable_cups" = "xyes"; then
-	AC_MSG_NOTICE([** CUPS (Printers panel)])
-else
-	AC_MSG_NOTICE([   Printers panel disabled])
 fi
 if test "x$have_cheese" = "xyes"; then
 	AC_MSG_NOTICE([** Cheese (Users panel webcam support)])

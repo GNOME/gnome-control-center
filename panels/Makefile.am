@@ -16,14 +16,11 @@ SUBDIRS= \
 	datetime \
 	search \
 	privacy \
-	sharing
+	sharing \
+	printers
 
 if BUILD_WACOM
 SUBDIRS += wacom
-endif
-
-if BUILD_PRINTERS
-SUBDIRS += printers
 endif
 
 if BUILD_NETWORK
