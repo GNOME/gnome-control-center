@@ -60,6 +60,7 @@ struct _UmCarousel {
         UmCarouselItem *selected_item;
         GtkWidget *last_box;
         GtkWidget *arrow;
+        gint arrow_start_x;
 
         /* Widgets */
         GtkStack *stack;
@@ -121,9 +122,13 @@ um_carousel_move_arrow (UmCarousel *self)
                 gtk_style_context_remove_provider (context, self->provider);
         g_clear_object (&self->provider);
 
-        css = g_strdup_printf ("* {\n"
-                               "  margin-left: %dpx;\n"
-                               "}\n", end_x);
+        css = g_strdup_printf ("@keyframes arrow_keyframes-%d {\n"
+                               "  from { margin-left: %dpx; }\n"
+                               "  to { margin-left: %dpx; }\n"
+                               "}\n"
+                               "* {\n"
+                               "  animation-name: arrow_keyframes-%d;\n"
+                               "}\n", end_x, self->arrow_start_x, end_x, end_x);
 
         self->provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
         gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (self->provider), css, -1, NULL);
@@ -186,6 +191,9 @@ on_item_toggled (UmCarouselItem *item,
                  gpointer        user_data)
 {
         UmCarousel *self = UM_CAROUSEL (user_data);
+
+        if (self->selected_item != NULL)
+                self->arrow_start_x = um_carousel_item_get_x (self->selected_item, self);
 
         self->selected_item = item;
 
