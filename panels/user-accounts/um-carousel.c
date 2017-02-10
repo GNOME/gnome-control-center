@@ -192,14 +192,7 @@ on_item_toggled (UmCarouselItem *item,
 {
         UmCarousel *self = UM_CAROUSEL (user_data);
 
-        if (self->selected_item != NULL)
-                self->arrow_start_x = um_carousel_item_get_x (self->selected_item, self);
-
-        self->selected_item = item;
-
-        g_signal_emit (user_data, signals[ITEM_ACTIVATED], 0, item);
-
-        um_carousel_move_arrow (self);
+        um_carousel_select_item (self, item);
 }
 
 void
@@ -207,16 +200,32 @@ um_carousel_select_item (UmCarousel     *self,
                          UmCarouselItem *item)
 {
         gchar *page_name;
+        gboolean page_changed = TRUE;
 
-        on_item_toggled (item, NULL, self);
+        if (self->selected_item != NULL)
+        {
+                page_changed = (self->selected_item->page != item->page);
+                self->arrow_start_x = um_carousel_item_get_x (self->selected_item, self);
+        }
 
+        self->selected_item = item;
         self->visible_page = item->page;
+        g_signal_emit (self, signals[ITEM_ACTIVATED], 0, item);
+
+        if (!page_changed)
+        {
+                um_carousel_move_arrow (self);
+                return;
+        }
+
         page_name = g_strdup_printf ("%d", self->visible_page);
         gtk_stack_set_visible_child_name (self->stack, page_name);
 
         g_free (page_name);
 
         update_buttons_visibility (self);
+
+        /* um_carousel_move_arrow is called from on_transition_running */
 }
 
 static void
@@ -355,8 +364,18 @@ on_size_allocate (UmCarousel *self)
        if (self->selected_item == NULL)
                return;
 
+       if (gtk_stack_get_transition_running (self->stack))
+               return;
+
        self->arrow_start_x = um_carousel_item_get_x (self->selected_item, self);
        um_carousel_move_arrow (self);
+}
+
+static void
+on_transition_running (UmCarousel *self)
+{
+        if (!gtk_stack_get_transition_running (self->stack))
+                um_carousel_move_arrow (self);
 }
 
 static void
@@ -377,4 +396,5 @@ um_carousel_init (UmCarousel *self)
         g_object_unref (provider);
 
         g_signal_connect_swapped (self->stack, "size-allocate", G_CALLBACK (on_size_allocate), self);
+        g_signal_connect_swapped (self->stack, "notify::transition-running", G_CALLBACK (on_transition_running), self);
 }
