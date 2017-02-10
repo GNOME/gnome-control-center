@@ -23,10 +23,10 @@
 #include <gtk/gtk.h>
 #include <colord.h>
 
-#include "cc-natural-light-widget.h"
+#include "cc-night-light-widget.h"
 #include "cc-display-resources.h"
 
-struct _CcNaturalLightWidget {
+struct _CcNightLightWidget {
   GtkDrawingArea   parent;
   gdouble          to;
   gdouble          from;
@@ -35,26 +35,26 @@ struct _CcNaturalLightWidget {
   cairo_surface_t *surface_sunset;
 };
 
-G_DEFINE_TYPE (CcNaturalLightWidget, cc_natural_light_widget, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (CcNightLightWidget, cc_night_light_widget, GTK_TYPE_DRAWING_AREA);
 
-static gboolean cc_natural_light_widget_draw (GtkWidget *widget, cairo_t *cr);
+static gboolean cc_night_light_widget_draw (GtkWidget *widget, cairo_t *cr);
 
 void
-cc_natural_light_widget_set_to (CcNaturalLightWidget *self, gdouble to)
+cc_night_light_widget_set_to (CcNightLightWidget *self, gdouble to)
 {
   self->to = to;
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
 void
-cc_natural_light_widget_set_from (CcNaturalLightWidget *self, gdouble from)
+cc_night_light_widget_set_from (CcNightLightWidget *self, gdouble from)
 {
   self->from = from;
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
 void
-cc_natural_light_widget_set_now (CcNaturalLightWidget *self, gdouble now)
+cc_night_light_widget_set_now (CcNightLightWidget *self, gdouble now)
 {
   self->now = now;
   gtk_widget_queue_draw (GTK_WIDGET (self));
@@ -62,23 +62,23 @@ cc_natural_light_widget_set_now (CcNaturalLightWidget *self, gdouble now)
 
 
 static void
-cc_natural_light_widget_finalize (GObject *object)
+cc_night_light_widget_finalize (GObject *object)
 {
-  CcNaturalLightWidget *self = CC_NATURAL_LIGHT_WIDGET (object);
+  CcNightLightWidget *self = CC_NIGHT_LIGHT_WIDGET (object);
 
   g_clear_pointer (&self->surface_sunrise, (GDestroyNotify) cairo_surface_destroy);
   g_clear_pointer (&self->surface_sunset, (GDestroyNotify) cairo_surface_destroy);
 
-  G_OBJECT_CLASS (cc_natural_light_widget_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_night_light_widget_parent_class)->finalize (object);
 }
 
 static void
-cc_natural_light_widget_class_init (CcNaturalLightWidgetClass *klass)
+cc_night_light_widget_class_init (CcNightLightWidgetClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  object_class->finalize = cc_natural_light_widget_finalize;
-  widget_class->draw = cc_natural_light_widget_draw;
+  object_class->finalize = cc_night_light_widget_finalize;
+  widget_class->draw = cc_night_light_widget_draw;
 }
 
 static cairo_status_t
@@ -112,7 +112,7 @@ read_surface_from_resource (const gchar *path)
 }
 
 static void
-cc_natural_light_widget_init (CcNaturalLightWidget *self)
+cc_night_light_widget_init (CcNightLightWidget *self)
 {
   self->to = 8;
   self->from = 16;
@@ -176,7 +176,7 @@ rounded_rectangle (cairo_t *cr,
 }
 
 static gboolean
-cc_natural_light_widget_draw (GtkWidget *widget, cairo_t *cr)
+cc_night_light_widget_draw (GtkWidget *widget, cairo_t *cr)
 {
   CdColorRGB color;
   CdColorRGB color_temperature;
@@ -187,9 +187,9 @@ cc_natural_light_widget_draw (GtkWidget *widget, cairo_t *cr)
   guint line_x = 0; /* px */
   const guint bar_voffset = arrow_sz + icon_sz;
 
-  CcNaturalLightWidget *self = (CcNaturalLightWidget*) widget;
+  CcNightLightWidget *self = (CcNightLightWidget*) widget;
   g_return_val_if_fail (self != NULL, FALSE);
-  g_return_val_if_fail (CC_IS_NATURAL_LIGHT_WIDGET (self), FALSE);
+  g_return_val_if_fail (CC_IS_NIGHT_LIGHT_WIDGET (self), FALSE);
 
   cd_color_rgb_set (&color_temperature, 0.992, 0.796, 0.612);
   cd_color_rgb_set (&color_unity, 0.773, 0.862, 0.953);
@@ -278,8 +278,8 @@ cc_natural_light_widget_draw (GtkWidget *widget, cairo_t *cr)
 }
 
 GtkWidget *
-cc_natural_light_widget_new (void)
+cc_night_light_widget_new (void)
 {
-  return g_object_new (CC_TYPE_NATURAL_LIGHT_WIDGET, NULL);
+  return g_object_new (CC_TYPE_NIGHT_LIGHT_WIDGET, NULL);
 }
 

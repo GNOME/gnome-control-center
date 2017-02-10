@@ -11,10 +11,10 @@ libdisplay_la_SOURCES =		\
 	$(BUILT_SOURCES)	\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
-	cc-natural-light-dialog.c \
-	cc-natural-light-dialog.h \
-	cc-natural-light-widget.c \
-	cc-natural-light-widget.h \
+	cc-night-light-dialog.c	\
+	cc-night-light-dialog.h	\
+	cc-night-light-widget.c	\
+	cc-night-light-widget.h	\
 	scrollarea.c		\
 	scrollarea.h
 

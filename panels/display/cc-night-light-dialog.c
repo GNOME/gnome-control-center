@@ -24,10 +24,10 @@
 #include <gtk/gtk.h>
 #include <math.h>
 
-#include "cc-natural-light-dialog.h"
-#include "cc-natural-light-widget.h"
+#include "cc-night-light-dialog.h"
+#include "cc-night-light-widget.h"
 
-struct _CcNaturalLightDialog {
+struct _CcNightLightDialog {
   GObject              parent;
   GtkBuilder          *builder;
   GSettings           *settings_display;
@@ -35,21 +35,21 @@ struct _CcNaturalLightDialog {
   GDBusProxy          *proxy_color;
   GDBusProxy          *proxy_color_props;
   GCancellable        *cancellable;
-  GtkWidget           *natural_light_widget;
+  GtkWidget           *night_light_widget;
   GtkWidget           *main_window;
   gboolean             ignore_value_changed;
   guint                timer_id;
   GDesktopClockFormat  clock_format;
 };
 
-G_DEFINE_TYPE (CcNaturalLightDialog, cc_natural_light_dialog, G_TYPE_OBJECT);
+G_DEFINE_TYPE (CcNightLightDialog, cc_night_light_dialog, G_TYPE_OBJECT);
 
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 #define CLOCK_FORMAT_KEY "clock-format"
 
 void
-cc_natural_light_dialog_present (CcNaturalLightDialog *self, GtkWindow *parent)
+cc_night_light_dialog_present (CcNightLightDialog *self, GtkWindow *parent)
 {
   GtkWindow *window = GTK_WINDOW (self->main_window);
   if (parent != NULL)
@@ -61,9 +61,9 @@ cc_natural_light_dialog_present (CcNaturalLightDialog *self, GtkWindow *parent)
 }
 
 static void
-cc_natural_light_dialog_finalize (GObject *object)
+cc_night_light_dialog_finalize (GObject *object)
 {
-  CcNaturalLightDialog *self = CC_NATURAL_LIGHT_DIALOG (object);
+  CcNightLightDialog *self = CC_NIGHT_LIGHT_DIALOG (object);
 
   if (self->cancellable != NULL)
     {
@@ -85,14 +85,14 @@ cc_natural_light_dialog_finalize (GObject *object)
   if (self->timer_id > 0)
     g_source_remove (self->timer_id);
 
-  G_OBJECT_CLASS (cc_natural_light_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_night_light_dialog_parent_class)->finalize (object);
 }
 
 static void
-cc_natural_light_dialog_class_init (CcNaturalLightDialogClass *klass)
+cc_night_light_dialog_class_init (CcNightLightDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  object_class->finalize = cc_natural_light_dialog_finalize;
+  object_class->finalize = cc_night_light_dialog_finalize;
 }
 
 static gdouble
@@ -104,11 +104,11 @@ frac_day_from_dt (GDateTime *dt)
 }
 
 static void
-dialog_adjustments_set_frac_hours (CcNaturalLightDialog *self,
-                            gdouble value,
-                            const gchar *id_hours,
-                            const gchar *id_mins,
-                            const gchar *id_stack)
+dialog_adjustments_set_frac_hours (CcNightLightDialog *self,
+                                   gdouble value,
+                                   const gchar *id_hours,
+                                   const gchar *id_mins,
+                                   const gchar *id_stack)
 {
   GtkAdjustment *adj;
   gdouble hours;
@@ -159,7 +159,7 @@ dialog_adjustments_set_frac_hours (CcNaturalLightDialog *self,
 }
 
 static void
-dialog_update_state (CcNaturalLightDialog *self)
+dialog_update_state (CcNightLightDialog *self)
 {
   GtkWidget *widget;
   gboolean automatic;
@@ -181,7 +181,7 @@ dialog_update_state (CcNaturalLightDialog *self)
   gtk_widget_set_visible (widget, disabled_until_tomorrow);
 
   /* make things insensitive if the switch is disabled */
-  enabled = g_settings_get_boolean (self->settings_display, "natural-light-enabled");
+  enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
   gtk_widget_set_sensitive (widget, enabled);
   automatic = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
@@ -207,14 +207,14 @@ dialog_update_state (CcNaturalLightDialog *self)
     }
   else
     {
-      value = g_settings_get_double (self->settings_display, "natural-light-schedule-from");
+      value = g_settings_get_double (self->settings_display, "night-light-schedule-from");
       value = fmod (value, 24.f);
     }
   dialog_adjustments_set_frac_hours (self, value,
                                     "adjustment_from_hours",
                                     "adjustment_from_minutes",
                                     "stack_from");
-  cc_natural_light_widget_set_from (CC_NATURAL_LIGHT_WIDGET (self->natural_light_widget), value);
+  cc_night_light_widget_set_from (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), value);
 
   /* set to */
   if (automatic && self->proxy_color != NULL)
@@ -233,44 +233,44 @@ dialog_update_state (CcNaturalLightDialog *self)
     }
   else
     {
-      value = g_settings_get_double (self->settings_display, "natural-light-schedule-to");
+      value = g_settings_get_double (self->settings_display, "night-light-schedule-to");
       value = fmod (value, 24.f);
     }
   dialog_adjustments_set_frac_hours (self, value,
                                      "adjustment_to_hours",
                                      "adjustment_to_minutes",
                                      "stack_to");
-  cc_natural_light_widget_set_to (CC_NATURAL_LIGHT_WIDGET (self->natural_light_widget), value);
+  cc_night_light_widget_set_to (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget), value);
 
   /* set new time */
-  cc_natural_light_widget_set_now (CC_NATURAL_LIGHT_WIDGET (self->natural_light_widget),
+  cc_night_light_widget_set_now (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget),
                                    frac_day_from_dt (dt));
 }
 
 static gboolean
 dialog_tick_cb (gpointer user_data)
 {
-  CcNaturalLightDialog *self = (CcNaturalLightDialog *) user_data;
+  CcNightLightDialog *self = (CcNightLightDialog *) user_data;
   dialog_update_state (self);
   return G_SOURCE_CONTINUE;
 }
 
 static void
-dialog_enabled_notify_cb (GtkSwitch *sw, GParamSpec *pspec, CcNaturalLightDialog *self)
+dialog_enabled_notify_cb (GtkSwitch *sw, GParamSpec *pspec, CcNightLightDialog *self)
 {
-  g_settings_set_boolean (self->settings_display, "natural-light-enabled",
+  g_settings_set_boolean (self->settings_display, "night-light-enabled",
                           gtk_switch_get_active (sw));
 }
 
 static void
-dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNaturalLightDialog *self)
+dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNightLightDialog *self)
 {
   GtkWidget *widget;
   gboolean ret;
 
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
   ret = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-  g_settings_set_boolean (self->settings_display, "natural-light-schedule-automatic", ret);
+  g_settings_set_boolean (self->settings_display, "night-light-schedule-automatic", ret);
 }
 
 static void
@@ -289,7 +289,7 @@ dialog_undisable_call_cb (GObject *source_object, GAsyncResult *res, gpointer us
 }
 
 static void
-dialog_undisable_clicked_cb (GtkButton *button, CcNaturalLightDialog *self)
+dialog_undisable_clicked_cb (GtkButton *button, CcNightLightDialog *self)
 {
   g_dbus_proxy_call (self->proxy_color_props,
                      "Set",
@@ -305,7 +305,7 @@ dialog_undisable_clicked_cb (GtkButton *button, CcNaturalLightDialog *self)
 }
 
 static gdouble
-dialog_adjustments_get_frac_hours (CcNaturalLightDialog *self,
+dialog_adjustments_get_frac_hours (CcNightLightDialog *self,
                                    const gchar *id_hours,
                                    const gchar *id_mins,
                                    const gchar *id_stack)
@@ -324,7 +324,7 @@ dialog_adjustments_get_frac_hours (CcNaturalLightDialog *self,
 }
 
 static void
-dialog_time_from_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDialog *self)
+dialog_time_from_value_changed_cb (GtkAdjustment *adjustment, CcNightLightDialog *self)
 {
   gdouble value;
 
@@ -332,17 +332,17 @@ dialog_time_from_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDial
     return;
 
   value = dialog_adjustments_get_frac_hours (self,
-                                      "adjustment_from_hours",
-                                      "adjustment_from_minutes",
-                                      "stack_from");
+                                             "adjustment_from_hours",
+                                             "adjustment_from_minutes",
+                                             "stack_from");
   if (value >= 24.f)
     value = fmod (value, 24);
   g_debug ("new value = %.3f", value);
-  g_settings_set_double (self->settings_display, "natural-light-schedule-from", value);
+  g_settings_set_double (self->settings_display, "night-light-schedule-from", value);
 }
 
 static void
-dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDialog *self)
+dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNightLightDialog *self)
 {
   gdouble value;
 
@@ -356,14 +356,14 @@ dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDialog
   if (value >= 24.f)
     value = fmod (value, 24);
   g_debug ("new value = %.3f", value);
-  g_settings_set_double (self->settings_display, "natural-light-schedule-to", value);
+  g_settings_set_double (self->settings_display, "night-light-schedule-to", value);
 }
 
 static void
 dialog_color_properties_changed_cb (GDBusProxy *proxy,
                                     GVariant *changed_properties,
                                     GStrv invalidated_properties,
-                                    CcNaturalLightDialog *self)
+                                    CcNightLightDialog *self)
 {
   dialog_update_state (self);
 }
@@ -371,7 +371,7 @@ dialog_color_properties_changed_cb (GDBusProxy *proxy,
 static void
 dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
-  CcNaturalLightDialog *self = (CcNaturalLightDialog *) user_data;
+  CcNightLightDialog *self = (CcNightLightDialog *) user_data;
   g_autoptr(GError) error = NULL;
   self->proxy_color = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (self->proxy_color == NULL)
@@ -388,7 +388,7 @@ dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
 static void
 dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
-  CcNaturalLightDialog *self = (CcNaturalLightDialog *) user_data;
+  CcNightLightDialog *self = (CcNightLightDialog *) user_data;
   g_autoptr(GError) error = NULL;
   self->proxy_color_props = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (self->proxy_color_props == NULL)
@@ -399,7 +399,7 @@ dialog_got_proxy_props_cb (GObject *source_object, GAsyncResult *res, gpointer u
 }
 
 static gboolean
-dialog_format_minutes_combobox (GtkSpinButton *spin, CcNaturalLightDialog *self)
+dialog_format_minutes_combobox (GtkSpinButton *spin, CcNightLightDialog *self)
 {
   GtkAdjustment *adjustment;
   g_autofree gchar *text = NULL;
@@ -410,7 +410,7 @@ dialog_format_minutes_combobox (GtkSpinButton *spin, CcNaturalLightDialog *self)
 }
 
 static gboolean
-dialog_format_hours_combobox (GtkSpinButton *spin, CcNaturalLightDialog *self)
+dialog_format_hours_combobox (GtkSpinButton *spin, CcNightLightDialog *self)
 {
   GtkAdjustment *adjustment;
   g_autofree gchar *text = NULL;
@@ -424,7 +424,7 @@ dialog_format_hours_combobox (GtkSpinButton *spin, CcNaturalLightDialog *self)
 }
 
 static void
-dialog_update_adjustments (CcNaturalLightDialog *self)
+dialog_update_adjustments (CcNightLightDialog *self)
 {
   GtkAdjustment *adj;
   GtkWidget *widget;
@@ -467,13 +467,13 @@ dialog_update_adjustments (CcNaturalLightDialog *self)
 }
 
 static void
-dialog_settings_changed_cb (GSettings *settings_display, gchar *key, CcNaturalLightDialog *self)
+dialog_settings_changed_cb (GSettings *settings_display, gchar *key, CcNightLightDialog *self)
 {
   dialog_update_state (self);
 }
 
 static void
-dialog_clock_settings_changed_cb (GSettings *settings_display, gchar *key, CcNaturalLightDialog *self)
+dialog_clock_settings_changed_cb (GSettings *settings_display, gchar *key, CcNightLightDialog *self)
 {
   GtkAdjustment *adj;
   GtkWidget *widget;
@@ -500,46 +500,46 @@ dialog_clock_settings_changed_cb (GSettings *settings_display, gchar *key, CcNat
 }
 
 static void
-dialog_am_pm_from_button_clicked_cb (GtkButton *button, CcNaturalLightDialog *self)
+dialog_am_pm_from_button_clicked_cb (GtkButton *button, CcNightLightDialog *self)
 {
   gdouble value;
-  value = g_settings_get_double (self->settings_display, "natural-light-schedule-from");
+  value = g_settings_get_double (self->settings_display, "night-light-schedule-from");
   if (value > 12.f)
     value -= 12.f;
   else
     value += 12.f;
   if (value >= 24.f)
     value = fmod (value, 24);
-  g_settings_set_double (self->settings_display, "natural-light-schedule-from", value);
+  g_settings_set_double (self->settings_display, "night-light-schedule-from", value);
   g_debug ("new value = %.3f", value);
 }
 
 static void
-dialog_am_pm_to_button_clicked_cb (GtkButton *button, CcNaturalLightDialog *self)
+dialog_am_pm_to_button_clicked_cb (GtkButton *button, CcNightLightDialog *self)
 {
   gdouble value;
-  value = g_settings_get_double (self->settings_display, "natural-light-schedule-to");
+  value = g_settings_get_double (self->settings_display, "night-light-schedule-to");
   if (value > 12.f)
     value -= 12.f;
   else
     value += 12.f;
   if (value >= 24.f)
     value = fmod (value, 24);
-  g_settings_set_double (self->settings_display, "natural-light-schedule-to", value);
+  g_settings_set_double (self->settings_display, "night-light-schedule-to", value);
   g_debug ("new value = %.3f", value);
 }
 
 static gboolean
 dialog_delete_event_cb (GtkWidget *widget,
                         GdkEvent *event,
-                        CcNaturalLightDialog *self)
+                        CcNightLightDialog *self)
 {
   gtk_widget_hide (widget);
   return TRUE;
 }
 
 static void
-cc_natural_light_dialog_init (CcNaturalLightDialog *self)
+cc_night_light_dialog_init (CcNightLightDialog *self)
 {
   GdkScreen *screen;
   GtkAdjustment *adj;
@@ -569,13 +569,13 @@ cc_natural_light_dialog_init (CcNaturalLightDialog *self)
   /* connect widgets */
   sw = GTK_WIDGET (gtk_builder_get_object (self->builder, "switch_enable"));
   g_settings_bind (self->settings_display,
-                   "natural-light-enabled",
+                   "night-light-enabled",
                    GTK_SWITCH (sw),
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_signal_connect (sw, "notify::active",
                     G_CALLBACK (dialog_enabled_notify_cb), self);
-  g_settings_bind_writable (self->settings_display, "natural-light-enabled",
+  g_settings_bind_writable (self->settings_display, "night-light-enabled",
                             sw, "sensitive",
                             FALSE);
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
@@ -613,7 +613,7 @@ cc_natural_light_dialog_init (CcNaturalLightDialog *self)
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (dialog_am_pm_to_button_clicked_cb), self);
 
-  self->main_window = GTK_WIDGET (gtk_builder_get_object (self->builder, "window_natural_light"));
+  self->main_window = GTK_WIDGET (gtk_builder_get_object (self->builder, "window_night_light"));
   g_signal_connect (self->main_window, "delete-event",
                     G_CALLBACK (dialog_delete_event_cb), self);
 
@@ -651,11 +651,11 @@ cc_natural_light_dialog_init (CcNaturalLightDialog *self)
                     G_CALLBACK (dialog_format_minutes_combobox), self);
 
   /* add custom widget */
-  self->natural_light_widget = cc_natural_light_widget_new ();
-  gtk_widget_set_size_request (self->natural_light_widget, -1, 34);
+  self->night_light_widget = cc_night_light_widget_new ();
+  gtk_widget_set_size_request (self->night_light_widget, -1, 34);
   box = GTK_BOX (gtk_builder_get_object (self->builder, "box_content"));
-  gtk_box_pack_start (box, self->natural_light_widget, FALSE, FALSE, 0);
-  gtk_widget_show (self->natural_light_widget);
+  gtk_box_pack_start (box, self->night_light_widget, FALSE, FALSE, 0);
+  gtk_widget_show (self->night_light_widget);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
@@ -687,9 +687,9 @@ cc_natural_light_dialog_init (CcNaturalLightDialog *self)
   dialog_update_state (self);
 }
 
-CcNaturalLightDialog *
-cc_natural_light_dialog_new (void)
+CcNightLightDialog *
+cc_night_light_dialog_new (void)
 {
-  return g_object_new (CC_TYPE_NATURAL_LIGHT_DIALOG, NULL);
+  return g_object_new (CC_TYPE_NIGHT_LIGHT_DIALOG, NULL);
 }
 

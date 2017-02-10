@@ -18,23 +18,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CC_NATURAL_LIGHT_WIDGET_H__
-#define __CC_NATURAL_LIGHT_WIDGET_H__
+#ifndef __CC_NIGHT_LIGHT_DIALOG_H__
+#define __CC_NIGHT_LIGHT_DIALOG_H__
 
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_NATURAL_LIGHT_WIDGET (cc_natural_light_widget_get_type ())
-G_DECLARE_FINAL_TYPE (CcNaturalLightWidget, cc_natural_light_widget, CC, NATURAL_LIGHT_WIDGET, GtkDrawingArea)
+#define CC_TYPE_NIGHT_LIGHT_DIALOG (cc_night_light_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (CcNightLightDialog, cc_night_light_dialog, CC, NIGHT_LIGHT_DIALOG, GObject)
 
-GtkWidget   *cc_natural_light_widget_new      (void);
-void         cc_natural_light_widget_set_to   (CcNaturalLightWidget *self,
-                                               gdouble               to);
-void         cc_natural_light_widget_set_from (CcNaturalLightWidget *self,
-                                               gdouble               from);
-void         cc_natural_light_widget_set_now  (CcNaturalLightWidget *self,
-                                               gdouble               now);
+CcNightLightDialog  *cc_night_light_dialog_new      (void);
+void                 cc_night_light_dialog_present  (CcNightLightDialog *self,
+                                                     GtkWindow          *parent);
 
 G_END_DECLS
 
