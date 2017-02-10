@@ -276,7 +276,6 @@ dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNaturalLightDialog *sel
 static void
 dialog_undisable_call_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
-  CcNaturalLightDialog *self = (CcNaturalLightDialog *) user_data;
   g_autoptr(GVariant) val = NULL;
   g_autoptr(GError) error = NULL;
 
@@ -287,7 +286,6 @@ dialog_undisable_call_cb (GObject *source_object, GAsyncResult *res, gpointer us
       g_warning ("failed to undisable: %s", error->message);
       return;
     }
-  dialog_update_state (self);
 }
 
 static void
@@ -362,6 +360,15 @@ dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDialog
 }
 
 static void
+dialog_color_properties_changed_cb (GDBusProxy *proxy,
+                                    GVariant *changed_properties,
+                                    GStrv invalidated_properties,
+                                    CcNaturalLightDialog *self)
+{
+  dialog_update_state (self);
+}
+
+static void
 dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   CcNaturalLightDialog *self = (CcNaturalLightDialog *) user_data;
@@ -372,6 +379,8 @@ dialog_got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_da
       g_warning ("failed to connect to g-s-d: %s", error->message);
       return;
     }
+  g_signal_connect (self->proxy_color, "g-properties-changed",
+                    G_CALLBACK (dialog_color_properties_changed_cb), self);
   dialog_update_state (self);
   self->timer_id = g_timeout_add_seconds (10, dialog_tick_cb, self);
 }
