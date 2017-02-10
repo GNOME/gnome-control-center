@@ -27,7 +27,6 @@
   </object>
   <object class="GtkDialog" id="window_night_light">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
@@ -132,12 +131,12 @@
                 <property name="can_focus">False</property>
                 <property name="border_width">36</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">32</property>
+                <property name="spacing">22</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">4</property>
+                    <property name="margin_bottom">14</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -542,8 +541,13 @@
         </child>
       </object>
     </child>
-    <child>
-      <placeholder/>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
+        <property name="show_close_button">True</property>
+      </object>
     </child>
   </object>
 </interface>
