@@ -181,8 +181,7 @@ dialog_update_state (CcNaturalLightDialog *self)
   gtk_widget_set_visible (widget, disabled_until_tomorrow);
 
   /* make things insensitive if the switch is disabled */
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "switch_enable"));
-  enabled = gtk_switch_get_state (GTK_SWITCH (widget));
+  enabled = g_settings_get_boolean (self->settings_display, "natural-light-enabled");
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
   gtk_widget_set_sensitive (widget, enabled);
   automatic = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
@@ -261,7 +260,6 @@ dialog_enabled_notify_cb (GtkSwitch *sw, GParamSpec *pspec, CcNaturalLightDialog
 {
   g_settings_set_boolean (self->settings_display, "natural-light-enabled",
                           gtk_switch_get_active (sw));
-  dialog_update_state (self);
 }
 
 static void
@@ -273,8 +271,6 @@ dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNaturalLightDialog *sel
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
   ret = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
   g_settings_set_boolean (self->settings_display, "natural-light-schedule-automatic", ret);
-
-  dialog_update_state (self);
 }
 
 static void
@@ -345,7 +341,6 @@ dialog_time_from_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDial
     value = fmod (value, 24);
   g_debug ("new value = %.3f", value);
   g_settings_set_double (self->settings_display, "natural-light-schedule-from", value);
-  dialog_update_state (self);
 }
 
 static void
@@ -364,7 +359,6 @@ dialog_time_to_value_changed_cb (GtkAdjustment *adjustment, CcNaturalLightDialog
     value = fmod (value, 24);
   g_debug ("new value = %.3f", value);
   g_settings_set_double (self->settings_display, "natural-light-schedule-to", value);
-  dialog_update_state (self);
 }
 
 static void
@@ -464,6 +458,12 @@ dialog_update_adjustments (CcNaturalLightDialog *self)
 }
 
 static void
+dialog_settings_changed_cb (GSettings *settings_display, gchar *key, CcNaturalLightDialog *self)
+{
+  dialog_update_state (self);
+}
+
+static void
 dialog_clock_settings_changed_cb (GSettings *settings_display, gchar *key, CcNaturalLightDialog *self)
 {
   GtkAdjustment *adj;
@@ -503,7 +503,6 @@ dialog_am_pm_from_button_clicked_cb (GtkButton *button, CcNaturalLightDialog *se
     value = fmod (value, 24);
   g_settings_set_double (self->settings_display, "natural-light-schedule-from", value);
   g_debug ("new value = %.3f", value);
-  dialog_update_state (self);
 }
 
 static void
@@ -519,7 +518,6 @@ dialog_am_pm_to_button_clicked_cb (GtkButton *button, CcNaturalLightDialog *self
     value = fmod (value, 24);
   g_settings_set_double (self->settings_display, "natural-light-schedule-to", value);
   g_debug ("new value = %.3f", value);
-  dialog_update_state (self);
 }
 
 static gboolean
@@ -544,6 +542,8 @@ cc_natural_light_dialog_init (CcNaturalLightDialog *self)
 
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
+  g_signal_connect (self->settings_display, "changed",
+                    G_CALLBACK (dialog_settings_changed_cb), self);
 
   self->builder = gtk_builder_new ();
   gtk_builder_add_from_resource (self->builder,
@@ -559,8 +559,11 @@ cc_natural_light_dialog_init (CcNaturalLightDialog *self)
 
   /* connect widgets */
   sw = GTK_WIDGET (gtk_builder_get_object (self->builder, "switch_enable"));
-  gtk_switch_set_active (GTK_SWITCH (sw),
-                         g_settings_get_boolean (self->settings_display, "natural-light-enabled"));
+  g_settings_bind (self->settings_display,
+                   "natural-light-enabled",
+                   GTK_SWITCH (sw),
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
   g_signal_connect (sw, "notify::active",
                     G_CALLBACK (dialog_enabled_notify_cb), self);
   g_settings_bind_writable (self->settings_display, "natural-light-enabled",
