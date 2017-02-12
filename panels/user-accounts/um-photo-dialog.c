@@ -157,7 +157,7 @@ update_preview (GtkFileChooser               *chooser,
 
         if (uri) {
                 GdkPixbuf *pixbuf = NULL;
-                const gchar *mime_type = NULL;
+                char *mime_type = NULL;
                 GFile *file;
                 GFileInfo *file_info;
                 GtkWidget *preview;
@@ -173,7 +173,7 @@ update_preview (GtkFileChooser               *chooser,
 
                 if (file_info != NULL &&
                     g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY) {
-                        mime_type = g_file_info_get_content_type (file_info);
+                        mime_type = g_strdup (g_file_info_get_content_type (file_info));
                         g_object_unref (file_info);
                 }
 
@@ -181,6 +181,7 @@ update_preview (GtkFileChooser               *chooser,
                         pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (thumb_factory,
                                                                                      uri,
                                                                                      mime_type);
+                        g_free (mime_type);
                 }
 
                 gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
