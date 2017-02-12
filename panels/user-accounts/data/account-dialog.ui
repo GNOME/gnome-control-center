@@ -84,15 +84,15 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="transition-type">none</property>
-            <property name="border_width">6</property>
-            <property name="margin_bottom">6</property>
             <child>
               <object class="GtkGrid" id="local_area">
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
                 <property name="column_spacing">6</property>
-                <property name="row_spacing">6</property>
-                <property name="halign">center</property>
+                <property name="row_spacing">8</property>
+                <property name="border_width">30</property>
+                <property name="margin_start">10</property>
+                <property name="margin_end">10</property>
                 <child>
                   <object class="GtkComboBoxText" id="local_username">
                     <property name="visible">True</property>
@@ -142,7 +142,6 @@
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_username</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -171,7 +170,6 @@
                     <property name="label" translatable="yes">_Full Name</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_name</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -222,7 +220,6 @@
                     <property name="label" translatable="yes">Account _Type</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-account-type</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -238,6 +235,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Password</property>
                     <property name="margin_top">12</property>
+                    <property name="halign">start</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -260,7 +258,6 @@
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                         <property name="use_underline">True</property>
-                        <property name="margin_start">12</property>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -276,7 +273,6 @@
                         <property name="draw_indicator">True</property>
                         <property name="group">local_password_login_radio</property>
                         <property name="use_underline">True</property>
-                        <property name="margin_start">12</property>
                       </object>
                       <packing>
                         <property name="position">1</property>
@@ -298,7 +294,6 @@
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_password</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -380,7 +375,6 @@
                     <property name="label" translatable="yes">_Confirm</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_verify</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -474,7 +468,6 @@
                     <property name="label" translatable="yes">_Domain</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise_domain</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -494,7 +487,6 @@
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise_login</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -514,7 +506,6 @@
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise_password</property>
-                    <property name="margin_start">12</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
