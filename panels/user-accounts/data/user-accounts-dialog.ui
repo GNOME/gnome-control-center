@@ -291,9 +291,8 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkStack" id="user-icon">
                     <property name="visible">True</property>
-                    <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
                     <property name="halign">GTK_ALIGN_END</property>
                     <child>
                       <object class="UmUserImage" id="user-icon-image">
@@ -307,11 +306,6 @@
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="user-icon-button">
@@ -332,11 +326,6 @@
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                   <packing>

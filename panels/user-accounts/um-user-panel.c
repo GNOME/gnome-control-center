@@ -1269,8 +1269,8 @@ on_permission_changed (GPermission *permission,
         }
 
         if (is_authorized || self_selected) {
-                gtk_widget_show (get_widget (d, "user-icon-button"));
-                gtk_widget_hide (get_widget (d, "user-icon-image"));
+                gtk_stack_set_visible_child (GTK_STACK (get_widget (d, "user-icon")),
+                                             get_widget (d, "user-icon-button"));
 
                 gtk_widget_set_sensitive (get_widget (d, "account-language-button"), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-language-button"));
@@ -1285,8 +1285,8 @@ on_permission_changed (GPermission *permission,
                 remove_unlock_tooltip (get_widget (d, "last-login-button"));
         }
         else {
-                gtk_widget_hide (get_widget (d, "user-icon-button"));
-                gtk_widget_show (get_widget (d, "user-icon-image"));
+                gtk_stack_set_visible_child (GTK_STACK (get_widget (d, "user-icon")),
+                                             get_widget (d, "user-icon-image"));
 
                 gtk_widget_set_sensitive (get_widget (d, "account-language-button"), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-language-button"));
