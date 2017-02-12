@@ -59,13 +59,6 @@ void     rounded_rectangle                (cairo_t     *cr,
                                            gdouble      width,
                                            gdouble      height);
 
-void     down_arrow                       (GtkStyleContext *context,
-                                           cairo_t         *cr,
-                                           gint             x,
-                                           gint             y,
-                                           gint             width,
-                                           gint             height);
-
 gboolean is_valid_name                    (const gchar     *name);
 gboolean is_valid_username                (const gchar     *name,
                                            gchar          **tip);

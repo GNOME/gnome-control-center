@@ -404,62 +404,6 @@ rounded_rectangle (cairo_t *cr,
         cairo_close_path (cr);
 }
 
-void
-down_arrow (GtkStyleContext *context,
-            cairo_t         *cr,
-            gint             x,
-            gint             y,
-            gint             width,
-            gint             height)
-{
-        GtkStateFlags flags;
-        GdkRGBA fg_color;
-        gdouble vertical_overshoot;
-        gint diameter;
-        gdouble radius;
-        gdouble x_double, y_double;
-        gdouble angle;
-        gint line_width;
-
-        flags = gtk_style_context_get_state (context);
-
-        gtk_style_context_get_color (context, flags, &fg_color);
-
-        line_width = 1;
-        angle = G_PI / 2;
-        vertical_overshoot = line_width / 2.0 * (1. / tan (G_PI / 8));
-        if (line_width % 2 == 1)
-                vertical_overshoot = ceil (0.5 + vertical_overshoot) - 0.5;
-        else
-                vertical_overshoot = ceil (vertical_overshoot);
-        diameter = (gint) MAX (3, width - 2 * vertical_overshoot);
-        diameter -= (1 - (diameter + line_width) % 2);
-        radius = diameter / 2.;
-        x_double = floor ((x + width / 2) - (radius + line_width) / 2.) + (radius + line_width) / 2.;
-
-        y_double = (y + height / 2) - 0.5;
-
-        cairo_save (cr);
-
-        cairo_translate (cr, x_double, y_double);
-        cairo_rotate (cr, angle);
-
-        cairo_move_to (cr, - radius / 2., - radius);
-        cairo_line_to (cr,   radius / 2.,   0);
-        cairo_line_to (cr, - radius / 2.,   radius);
-
-        cairo_close_path (cr);
-
-        cairo_set_line_width (cr, line_width);
-
-        gdk_cairo_set_source_rgba (cr, &fg_color);
-
-        cairo_fill_preserve (cr);
-        cairo_stroke (cr);
-
-        cairo_restore (cr);
-}
-
 static guint
 get_login_name_max (void)
 {
