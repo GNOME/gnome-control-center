@@ -1456,8 +1456,6 @@ cc_user_panel_init (CcUserPanel *self)
         type = um_cell_renderer_user_image_get_type ();
         type = um_carousel_get_type ();
 
-        gtk_widget_set_size_request (GTK_WIDGET (self), -1, 350);
-
         d->builder = gtk_builder_new ();
         d->um = act_user_manager_get_default ();
         d->cancellable = g_cancellable_new ();
