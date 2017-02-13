@@ -35,10 +35,14 @@ static void
 render_image (UmUserImage *image)
 {
         cairo_surface_t *surface;
-        gint scale;
+        gint scale, pixel_size;
 
+        pixel_size = gtk_image_get_pixel_size (GTK_IMAGE (image));
         scale = gtk_widget_get_scale_factor (GTK_WIDGET (image));
-        surface = render_user_icon (image->priv->user, UM_ICON_STYLE_NONE, 48, scale);
+        surface = render_user_icon (image->priv->user,
+                                    UM_ICON_STYLE_NONE,
+                                    pixel_size > 0 ? pixel_size : 48,
+                                    scale);
         gtk_image_set_from_surface (GTK_IMAGE (image), surface);
         cairo_surface_destroy (surface);
 }
