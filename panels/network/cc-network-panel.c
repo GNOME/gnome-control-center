@@ -500,6 +500,24 @@ cc_network_panel_get_devices (CcNetworkPanel *panel)
 }
 
 static void
+panel_net_object_notify_title_cb (NetObject *net_object, GParamSpec *pspec, CcNetworkPanel *panel)
+{
+        GtkTreeIter iter;
+        GtkTreePath *path;
+        GtkListStore *liststore;
+
+        if (!find_in_model_by_id (panel, net_object_get_id (net_object), &iter))
+                return;
+
+        liststore = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                                            "liststore_devices"));
+
+        path = gtk_tree_model_get_path (GTK_TREE_MODEL (liststore), &iter);
+        gtk_tree_model_row_changed (GTK_TREE_MODEL (liststore), path, &iter);
+        gtk_tree_path_free (path);
+}
+
+static void
 panel_refresh_device_titles (CcNetworkPanel *panel)
 {
         GPtrArray *ndarray, *nmdarray;
@@ -780,6 +798,9 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
+        g_signal_connect (net_device, "notify::title",
+                          G_CALLBACK (panel_net_object_notify_title_cb), panel);
+
         g_object_unref (net_device);
         g_signal_connect (device, "state-changed",
                           G_CALLBACK (state_changed_cb), panel);
@@ -957,6 +978,10 @@ panel_add_proxy_device (CcNetworkPanel *panel)
                             PANEL_DEVICES_COLUMN_SORT, "9",
                             PANEL_DEVICES_COLUMN_OBJECT, proxy,
                             -1);
+
+        /* NOTE: No connect to notify::title here as it is guaranteed to not
+         *       be changed by anyone.*/
+
         g_object_unref (proxy);
 }
 
@@ -1135,6 +1160,9 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                             PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
                             -1);
+        g_signal_connect (net_vpn, "notify::title",
+                          G_CALLBACK (panel_net_object_notify_title_cb), panel);
+
         g_free (title);
         g_object_unref (net_vpn);
 }
