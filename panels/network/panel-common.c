@@ -73,38 +73,38 @@ panel_device_to_icon_name (NMDevice *device, gboolean symbolic)
 }
 
 /**
- * panel_device_to_sortable_string:
+ * panel_device_get_sort_category:
  *
  * Try to return order of approximate connection speed.
  * But sort wifi first, since thats the common case.
  **/
-const gchar *
-panel_device_to_sortable_string (NMDevice *device)
+gint
+panel_device_get_sort_category (NMDevice *device)
 {
-        const gchar *value = NULL;
+        gint value;
         NMDeviceModemCapabilities caps;
         switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
-                value = "2";
+                value = 2;
                 break;
         case NM_DEVICE_TYPE_WIFI:
-                value = "1";
+                value = 1;
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
                 if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
                     (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        value = "3";
+                        value = 3;
                 }
                 break;
         case NM_DEVICE_TYPE_BT:
-                value = "4";
+                value = 4;
                 break;
         case NM_DEVICE_TYPE_OLPC_MESH:
-                value = "5";
+                value = 5;
                 break;
         default:
-                value = "6";
+                value = 6;
                 break;
         }
         return value;

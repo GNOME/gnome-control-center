@@ -80,7 +80,6 @@ struct _CcNetworkPanelPrivate
 
 enum {
         PANEL_DEVICES_COLUMN_ICON,
-        PANEL_DEVICES_COLUMN_SORT,
         PANEL_DEVICES_COLUMN_OBJECT,
         PANEL_DEVICES_COLUMN_LAST
 };
@@ -499,11 +498,48 @@ cc_network_panel_get_devices (CcNetworkPanel *panel)
         return devices;
 }
 
+static gint
+panel_net_object_get_sort_category (NetObject *net_object)
+{
+        if (NET_IS_DEVICE (net_object)) {
+                return panel_device_get_sort_category (net_device_get_nm_device (NET_DEVICE (net_object)));
+        } else if (NET_IS_PROXY (net_object)) {
+                return 9;
+        } else if (NET_IS_VPN (net_object)) {
+                return 5;
+        }
+
+        g_assert_not_reached ();
+}
+
+static gint
+panel_net_object_sort_func (GtkTreeModel *model, GtkTreeIter *a,
+                            GtkTreeIter *b, void *data)
+{
+        g_autoptr(NetObject) obj_a = NULL;
+        g_autoptr(NetObject) obj_b = NULL;
+        gint cat_a, cat_b;
+
+        gtk_tree_model_get (model, a,
+                            PANEL_DEVICES_COLUMN_OBJECT, &obj_a,
+                            -1);
+        gtk_tree_model_get (model, b,
+                            PANEL_DEVICES_COLUMN_OBJECT, &obj_b,
+                            -1);
+
+        cat_a = panel_net_object_get_sort_category (obj_a);
+        cat_b = panel_net_object_get_sort_category (obj_b);
+
+        if (cat_a != cat_b)
+                return cat_a - cat_b;
+
+        return g_utf8_collate (net_object_get_title (obj_a), net_object_get_title (obj_b));
+}
+
 static void
 panel_net_object_notify_title_cb (NetObject *net_object, GParamSpec *pspec, CcNetworkPanel *panel)
 {
         GtkTreeIter iter;
-        GtkTreePath *path;
         GtkListStore *liststore;
 
         if (!find_in_model_by_id (panel, net_object_get_id (net_object), &iter))
@@ -512,9 +548,12 @@ panel_net_object_notify_title_cb (NetObject *net_object, GParamSpec *pspec, CcNe
         liststore = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                                             "liststore_devices"));
 
-        path = gtk_tree_model_get_path (GTK_TREE_MODEL (liststore), &iter);
-        gtk_tree_model_row_changed (GTK_TREE_MODEL (liststore), path, &iter);
-        gtk_tree_path_free (path);
+        /* gtk_tree_model_row_changed would not cause the list store to resort.
+         * Instead set the object column to the current value.
+         * See https://bugzilla.gnome.org/show_bug.cgi?id=782737 */
+        gtk_list_store_set (liststore, &iter,
+                            PANEL_DEVICES_COLUMN_OBJECT, net_object,
+                           -1);
 }
 
 static void
@@ -795,7 +834,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         gtk_list_store_set (liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
-                            PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
         g_signal_connect (net_device, "notify::title",
@@ -892,11 +930,14 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
                                                  renderer,
                                                  get_object_title,
                                                  NULL, NULL);
-        gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_SORT);
+        gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_OBJECT);
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
+        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (liststore_devices),
+                                         PANEL_DEVICES_COLUMN_OBJECT,
+                                         panel_net_object_sort_func, NULL, NULL);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (liststore_devices),
-                                              PANEL_DEVICES_COLUMN_SORT,
+                                              PANEL_DEVICES_COLUMN_OBJECT,
                                               GTK_SORT_ASCENDING);
         gtk_tree_view_append_column (treeview, column);
         gtk_tree_view_column_set_expand (column, TRUE);
@@ -975,7 +1016,6 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         gtk_list_store_set (liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "preferences-system-network-symbolic",
-                            PANEL_DEVICES_COLUMN_SORT, "9",
                             PANEL_DEVICES_COLUMN_OBJECT, proxy,
                             -1);
 
@@ -1157,7 +1197,6 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         gtk_list_store_set (liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "network-vpn-symbolic",
-                            PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
                             -1);
         g_signal_connect (net_vpn, "notify::title",

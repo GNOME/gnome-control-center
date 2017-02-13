@@ -41,6 +41,8 @@ typedef struct _NetObjectPrivate         NetObjectPrivate;
 typedef struct _NetObject                NetObject;
 typedef struct _NetObjectClass           NetObjectClass;
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (NetObject, g_object_unref)
+
 struct _NetObject
 {
          GObject                 parent;
