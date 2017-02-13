@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-31 11:58+0000\n"
-"PO-Revision-Date: 2017-02-03 09:13+0500\n"
+"POT-Creation-Date: 2017-02-12 15:15+0000\n"
+"PO-Revision-Date: 2017-02-13 09:04+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -105,8 +105,8 @@ msgstr ""
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1571
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2226
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
@@ -125,8 +125,8 @@ msgstr ""
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:704
-#: ../panels/user-accounts/um-user-panel.c:722
+#: ../panels/user-accounts/um-user-panel.c:638
+#: ../panels/user-accounts/um-user-panel.c:656
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
@@ -1092,21 +1092,22 @@ msgstr "Жүйелік уақыт пен күнді өзгерту"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Уақыт немесе күн баптауларын өзгерту үшін аутентификация керек."
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:592
 msgid "Lid Closed"
 msgstr "Қақпағы жабық"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:586
+#: ../panels/display/cc-display-panel.c:595
 msgid "Mirrored"
 msgstr "Айналы"
 
-#: ../panels/display/cc-display-panel.c:588
-#: ../panels/display/cc-display-panel.c:2440
+#: ../panels/display/cc-display-panel.c:597
+#: ../panels/display/cc-display-panel.c:2449
 msgid "Primary"
 msgstr "Біріншілік"
 
-#: ../panels/display/cc-display-panel.c:590
+#: ../panels/display/cc-display-panel.c:599
+#: ../panels/display/cc-display-panel.c:2786
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1120,117 +1121,191 @@ msgstr "Біріншілік"
 msgid "Off"
 msgstr "Сөнд."
 
-#: ../panels/display/cc-display-panel.c:593
+#: ../panels/display/cc-display-panel.c:602
 msgid "Secondary"
 msgstr "Екіншілік"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1568
+#: ../panels/display/cc-display-panel.c:1577
 msgid "Arrange Combined Displays"
 msgstr "Топталған экрандарды реттеу"
 
-#: ../panels/display/cc-display-panel.c:1572
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:1581
+#: ../panels/display/cc-display-panel.c:2227
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "Іске _асыру"
 
-#: ../panels/display/cc-display-panel.c:1596
+#: ../panels/display/cc-display-panel.c:1605
 msgid "Drag displays to rearrange them"
 msgstr "Экрандарды реттеу үшін оларды тартып жылжытыңыз"
 
 #. translators: example string is "60 Hz (NTSC)"
 #. * NTSC is https://en.wikipedia.org/wiki/NTSC
-#: ../panels/display/cc-display-panel.c:1803
+#: ../panels/display/cc-display-panel.c:1812
 #, c-format
 msgid "%d Hz (NTSC)"
 msgstr "%d Гц (NTSC)"
 
 #. translators: example string is "60 Hz"
-#: ../panels/display/cc-display-panel.c:1809
+#: ../panels/display/cc-display-panel.c:1818
 #, c-format
 msgid "%d Hz"
 msgstr "%d Гц"
 
-#: ../panels/display/cc-display-panel.c:2270
+#: ../panels/display/cc-display-panel.c:2279
 msgid "Rotate counterclockwise by 90°"
 msgstr "Сағат тілі бағытына қарсы 90°-қа бұру"
 
-#: ../panels/display/cc-display-panel.c:2288
+#: ../panels/display/cc-display-panel.c:2297
 msgid "Rotate by 180°"
 msgstr "180°-қа бұру"
 
-#: ../panels/display/cc-display-panel.c:2306
+#: ../panels/display/cc-display-panel.c:2315
 msgid "Rotate clockwise by 90°"
 msgstr "Сағат тілі бойымен 90°-қа бұру"
 
-#: ../panels/display/cc-display-panel.c:2327
+#: ../panels/display/cc-display-panel.c:2336
 msgid "Size"
 msgstr "Өлшемі"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2342
+#: ../panels/display/cc-display-panel.c:2351
 msgid "Aspect Ratio"
 msgstr "Жақтар арақатынасы"
 
-#: ../panels/display/cc-display-panel.c:2365
+#: ../panels/display/cc-display-panel.c:2374
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Ажыратылымдығы"
 
-#: ../panels/display/cc-display-panel.c:2385
+#: ../panels/display/cc-display-panel.c:2394
 msgid "Adjust for TV"
 msgstr "Теледидар үшін баптау"
 
-#: ../panels/display/cc-display-panel.c:2409
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Refresh Rate"
 msgstr "Жаңарту жиілігі"
 
-#: ../panels/display/cc-display-panel.c:2441
+#: ../panels/display/cc-display-panel.c:2450
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Жоғарғы панельді және белсенділік көрінісін бұл экранда көрсету"
 
-#: ../panels/display/cc-display-panel.c:2447
+#: ../panels/display/cc-display-panel.c:2456
 msgid "Secondary Display"
 msgstr "Екіншілік экран"
 
-#: ../panels/display/cc-display-panel.c:2448
+#: ../panels/display/cc-display-panel.c:2457
 msgid "Join this display with another to create an extra workspace"
 msgstr "Бұл экранды көбірек жұмыс орнын жасау үшін басқа экранмен біріктіру"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2464
 msgid "Presentation"
 msgstr "Презентация"
 
-#: ../panels/display/cc-display-panel.c:2456
+#: ../panels/display/cc-display-panel.c:2465
 msgid "Show slideshows and media only"
 msgstr "Тек слайдшоулар және медианы көрсету"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2461
+#: ../panels/display/cc-display-panel.c:2470
 msgid "Mirror"
 msgstr "Айналы"
 
-#: ../panels/display/cc-display-panel.c:2462
+#: ../panels/display/cc-display-panel.c:2471
 msgid "Show your existing view on both displays"
 msgstr "Бар болып тұрған көріністі екі экранда бірдей көрсету"
 
-#: ../panels/display/cc-display-panel.c:2468
+#: ../panels/display/cc-display-panel.c:2477
 msgid "Turn Off"
 msgstr "Сөндіру"
 
-#: ../panels/display/cc-display-panel.c:2469
+#: ../panels/display/cc-display-panel.c:2478
 msgid "Don’t use this display"
 msgstr "Бұл экранды қолданбау"
 
-#: ../panels/display/cc-display-panel.c:2780
+#. TRANSLATORS: the state of the night light setting
+#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:590
+#: ../panels/universal-access/cc-ua-panel.c:603
+#: ../panels/universal-access/cc-ua-panel.c:615
+#: ../panels/universal-access/cc-ua-panel.c:786
+msgid "On"
+msgstr "Іске қосулы"
+
+#: ../panels/display/cc-display-panel.c:2826
 msgid "Could not get screen information"
 msgstr "Экран ақпаратын алу мүмкін емес"
 
-#: ../panels/display/cc-display-panel.c:2811
+#: ../panels/display/cc-display-panel.c:2857
 msgid "_Arrange Combined Displays"
 msgstr "Топталған экрандарды р_еттеу"
+
+#: ../panels/display/cc-display-panel.c:2878
+msgid "_Night Light"
+msgstr "_Түнгі жарық"
+
+#. This cancels the redshift inhibit.
+#: ../panels/display/display.ui.h:2
+msgid "Restart Filter"
+msgstr "Сүзгіні қайта іске қосу"
+
+#. Inhibit the redshift functionality until the next day starts
+#: ../panels/display/display.ui.h:4
+msgid "Temporarily Disabled Until Tomorow"
+msgstr "Ертеңге дейін уақытша сөндірілген"
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: ../panels/display/display.ui.h:6
+msgid "Night Light"
+msgstr "Түнгі жарық"
+
+#. When the sun comes up in the morning to the time the sun goes down in the evening
+#: ../panels/display/display.ui.h:8
+msgid "Sunset to sunrise"
+msgstr "Күн батуынан күн шығысына дейін"
+
+#. This allows the user to schedule when the redshift functionality is triggered
+#: ../panels/display/display.ui.h:10
+msgid "Manual schedule"
+msgstr "Қолдан көрсетілген жоспарлау"
+
+#: ../panels/display/display.ui.h:11
+msgid "From"
+msgstr "Бастап"
+
+#: ../panels/display/display.ui.h:12
+msgid ":"
+msgstr ":"
+
+#. This is the short form for the time period in the morning
+#: ../panels/display/display.ui.h:14
+msgid "AM"
+msgstr "AM"
+
+#. This is the short form for the time period in the afternoon
+#: ../panels/display/display.ui.h:16
+msgid "PM"
+msgstr "PM"
+
+#: ../panels/display/display.ui.h:17
+msgid "To"
+msgstr "Дейін"
+
+#: ../panels/display/display.ui.h:18
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
+#: ../panels/display/display.ui.h:19
+msgid "0"
+msgstr "0"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1249,7 +1324,7 @@ msgstr ""
 "xrandr;Экран;Ажыратылымдығы;Жаңарту;Монитор;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:377 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Белгісіз"
 
@@ -1257,12 +1332,12 @@ msgstr "Белгісіз"
 #. * of architecture and the build id, for example:
 #. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
 #. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-panel.c:510
+#: ../panels/info/cc-info-panel.c:517
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
 msgstr "%s %d-бит (Жинақ ID: %s)"
 
-#: ../panels/info/cc-info-panel.c:512
+#: ../panels/info/cc-info-panel.c:519
 #, c-format
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-бит (Жинақ ID: %s)"
@@ -1270,49 +1345,49 @@ msgstr "%d-бит (Жинақ ID: %s)"
 #. translators: This is the name of the OS, followed by the type
 #. * of architecture, for example:
 #. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-panel.c:520
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-бит"
 
-#: ../panels/info/cc-info-panel.c:522
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%d-bit"
 msgstr "%d-бит"
 
-#: ../panels/info/cc-info-panel.c:1168
+#: ../panels/info/cc-info-panel.c:1175
 msgid "Ask what to do"
 msgstr "Не істеуді сұрау"
 
-#: ../panels/info/cc-info-panel.c:1172
+#: ../panels/info/cc-info-panel.c:1179
 msgid "Do nothing"
 msgstr "Ешнәрсе жасамау"
 
-#: ../panels/info/cc-info-panel.c:1176
+#: ../panels/info/cc-info-panel.c:1183
 msgid "Open folder"
 msgstr "Буманы ашу"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1274
 msgid "Other Media"
 msgstr "Басқа тасушылар"
 
-#: ../panels/info/cc-info-panel.c:1298
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for audio CDs"
 msgstr "Аудио CD үшін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1299
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application for video DVDs"
 msgstr "Видео DVD үшін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1300
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a music player is connected"
 msgstr "Музыкалық плеері салынған кезде жөнелтілетін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application to run when a camera is connected"
 msgstr "Камера байланысқан кезде жөнелтілетін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1302
+#: ../panels/info/cc-info-panel.c:1309
 msgid "Select an application for software CDs"
 msgstr "БҚ CD дискілері үшін қолданбаны таңдаңыз"
 
@@ -1321,71 +1396,71 @@ msgstr "БҚ CD дискілері үшін қолданбаны таңдаңы�
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1314
+#: ../panels/info/cc-info-panel.c:1321
 msgid "audio DVD"
 msgstr "аудио DVD"
 
-#: ../panels/info/cc-info-panel.c:1315
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank Blu-ray disc"
 msgstr "Таза Blu-Ray дискі"
 
-#: ../panels/info/cc-info-panel.c:1316
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank CD disc"
 msgstr "Таза CD-R дискі"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank DVD disc"
 msgstr "Таза DVD+R дискі"
 
-#: ../panels/info/cc-info-panel.c:1318
+#: ../panels/info/cc-info-panel.c:1325
 msgid "blank HD DVD disc"
 msgstr "Таза HD DVD дискі"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1326
 msgid "Blu-ray video disc"
 msgstr "Blu-ray видео дискі"
 
-#: ../panels/info/cc-info-panel.c:1320
+#: ../panels/info/cc-info-panel.c:1327
 msgid "e-book reader"
 msgstr "электронды кітаптарды оқу құрылғысы"
 
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:1328
 msgid "HD DVD video disc"
 msgstr "HD DVD видео дискі"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:1332
 msgid "Windows software"
 msgstr "Windows БҚ"
 
-#: ../panels/info/cc-info-panel.c:1448
+#: ../panels/info/cc-info-panel.c:1455
 msgid "Section"
 msgstr "Санат"
 
-#: ../panels/info/cc-info-panel.c:1457 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Шолу"
 
-#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Үнсіз келісім қолданбалары"
 
-#: ../panels/info/cc-info-panel.c:1468 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Ауыстырмалы тасушылар"
 
-#: ../panels/info/cc-info-panel.c:1493
+#: ../panels/info/cc-info-panel.c:1500
 #, c-format
 msgid "Version %s"
 msgstr "Нұсқасы %s"
@@ -1755,7 +1830,7 @@ msgstr "Барлығын тастау"
 msgid "Reset the shortcut to its default value"
 msgstr "Жарлықты бастапқы мәніне тастау"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:414
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1764,21 +1839,21 @@ msgstr ""
 "%s жарлығы <b>%s</b> үшін қолданылуда болып тұр. Оны алмастырсаңыз, %s "
 "сөндірілетін болады"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты орнату"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:580
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Shortcut"
 msgstr "Жарлықты орнату"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:589
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "<b>%s</b> өзгерту үшін жаңа жарлықты енгізіңіз."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1017
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1036
 msgid "Add Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты қосу"
 
@@ -1832,7 +1907,6 @@ msgid "Shortcut"
 msgstr "Жарлық"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgctxt "button"
 msgid "Set Shortcut…"
 msgstr "Жарлықты орнату…"
 
@@ -1849,9 +1923,11 @@ msgstr "Өшіру"
 msgid "Enter the new shortcut"
 msgstr "Жаңа пернетақта жарлығын енгізіңіз"
 
+#. Translators: This button adds new printer.
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
+#: ../panels/printers/printers.ui.h:2
 msgid "Add"
 msgstr "Қосу"
 
@@ -2014,7 +2090,7 @@ msgstr "802.1x қауі_псіздігі"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14 ../panels/wacom/wacom-stylus-page.ui.h:8
+#: ../panels/printers/printers.ui.h:15 ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "бет 1"
 
@@ -2033,7 +2109,7 @@ msgstr "Ішкі _аутентификация"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:17
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "бет 2"
@@ -2623,7 +2699,7 @@ msgstr "кеше"
 
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:13
+#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:14
 msgid "IP Address"
 msgstr "IP адресі"
 
@@ -3600,10 +3676,6 @@ msgstr "2"
 msgid "3"
 msgstr "3"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Ашық жүйе"
@@ -3642,18 +3714,6 @@ msgstr ""
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type"
 msgstr "Тү_рі"
-
-#: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
-#: ../panels/privacy/cc-privacy-panel.c:190
-#: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-msgid "On"
-msgstr "Іске қосулы"
 
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
@@ -3727,7 +3787,7 @@ msgid "Applications"
 msgstr "Қолданбалар"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
-#: ../panels/online-accounts/cc-online-accounts-panel.c:111
+#: ../panels/online-accounts/cc-online-accounts-panel.c:131
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Басқа"
@@ -3759,7 +3819,7 @@ msgstr "Ресурстар"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:403
+#: ../panels/online-accounts/cc-online-accounts-panel.c:459
 #, c-format
 msgid "%s Account"
 msgstr "%s тіркелгісі"
@@ -3792,6 +3852,11 @@ msgstr "Бұлттық қызметтердегі деректеріңізге �
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add an account"
 msgstr "Тіркелгіні қосу"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove Account"
+msgstr "Тіркелгіні өшіру"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
@@ -4364,7 +4429,8 @@ msgstr "Белсенді принтер тапсырмалары жоқ"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/pp-new-printer-dialog.c:380
+#: ../panels/printers/pp-new-printer-dialog.c:384
+#: ../panels/printers/pp-new-printer-dialog.c:456
 msgid "Add Printer"
 msgstr "Принтерді қосу"
 
@@ -4503,62 +4569,62 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Белсенді тапсырмалар"
 
-#: ../panels/printers/pp-new-printer-dialog.c:395
+#: ../panels/printers/pp-new-printer-dialog.c:402
 msgid "Unlock Print Server"
 msgstr "Баспаға шығару серверін блоктаудан босату"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:399
+#: ../panels/printers/pp-new-printer-dialog.c:406
 #, c-format
 msgid "Unlock %s."
 msgstr "%s босату."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:404
+#: ../panels/printers/pp-new-printer-dialog.c:411
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "%s жеріндегі принтерлерді қарау үшін пайдаланушы атын және пароліңізді "
 "енгізіңіз."
 
-#: ../panels/printers/pp-new-printer-dialog.c:851
+#: ../panels/printers/pp-new-printer-dialog.c:876
 msgid "Searching for Printers"
 msgstr "Принтерлерді іздеу"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1799
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1804
 msgid "Serial Port"
 msgstr "Тізбектей порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1786
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "Параллельді порт"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1791
+#: ../panels/printers/pp-new-printer-dialog.c:1816
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1828
+#: ../panels/printers/pp-new-printer-dialog.c:1853
 #, c-format
 msgid "Location: %s"
 msgstr "Орналасуы: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1833
+#: ../panels/printers/pp-new-printer-dialog.c:1858
 #, c-format
 msgid "Address: %s"
 msgstr "Адресі: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1862
+#: ../panels/printers/pp-new-printer-dialog.c:1887
 msgid "Server requires authentication"
 msgstr "Сервер аутентификацияны талап етеді"
 
@@ -4691,77 +4757,72 @@ msgstr "Шығарушы"
 msgid "Driver"
 msgstr "Драйвер"
 
-#: ../panels/printers/printers.ui.h:1
-msgctxt "button"
-msgid "Add Printer"
-msgstr "Принтерді қосу"
-
-#: ../panels/printers/printers.ui.h:2
+#: ../panels/printers/printers.ui.h:3
 msgid "Remove Printer"
 msgstr "Принтерді өшіру"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:4
+#: ../panels/printers/printers.ui.h:5
 msgid "Supply"
 msgstr "Жаратылатын заттар"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:7
 msgid "Location"
 msgstr "Орналасуы"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
+#: ../panels/printers/printers.ui.h:9
 msgid "_Default printer"
 msgstr "Ү_нсіз келісім принтері"
 
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "Тапсырмалар"
 
 #. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:11
+#: ../panels/printers/printers.ui.h:12
 msgid "Show _Jobs"
 msgstr "Та_псырмаларды көрсету"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "Модель"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:16
 msgid "label"
 msgstr "белгі"
 
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:18
 msgid "Setting new driver…"
 msgstr "Жаңа драйверді орнату…"
 
-#: ../panels/printers/printers.ui.h:18
+#: ../panels/printers/printers.ui.h:19
 #: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "page 3"
 msgstr "бет 3"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:20
+#: ../panels/printers/printers.ui.h:21
 msgid "Print _Test Page"
 msgstr "Сы_ану парағын баспаға шығару"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:8
+#: ../panels/printers/printers.ui.h:23 ../panels/region/region.ui.h:8
 msgid "_Options"
 msgstr "_Опциялар"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:24
 msgid "No printers"
 msgstr "Принтерлер жоқ"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:26
 msgid "Add a Printer"
 msgstr "Принтерді қосу"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:28
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -6351,10 +6412,6 @@ msgstr "Пайдаланушы таңбашасы"
 msgid "Last Login"
 msgstr "Соңғы рет жүйеге кіру"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-msgid "Remove Account"
-msgstr "Тіркелгіні өшіру"
-
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Пайдаланушылар тіркелгілерін басқару"
@@ -6727,7 +6784,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:840
+#: ../panels/user-accounts/um-user-panel.c:770
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6735,7 +6792,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:774
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6817,30 +6874,30 @@ msgstr "Пароль қате, қайтадан көріңіз"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "%s доменіне байланысу мүмкін емес: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:238
-msgid "Other Accounts"
-msgstr "Басқа тіркелгілер"
+#: ../panels/user-accounts/um-user-panel.c:194
+msgid "<small>Your account</small>"
+msgstr "<small>Сіздің тіркелгіңіз</small>"
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:384
 msgid "Failed to delete user"
 msgstr "Пайдаланушыны өшіру сәтсіз аяқталды"
 
-#: ../panels/user-accounts/um-user-panel.c:506
-#: ../panels/user-accounts/um-user-panel.c:565
-#: ../panels/user-accounts/um-user-panel.c:617
+#: ../panels/user-accounts/um-user-panel.c:442
+#: ../panels/user-accounts/um-user-panel.c:501
+#: ../panels/user-accounts/um-user-panel.c:553
 msgid "Failed to revoke remotely managed user"
 msgstr "Қашықтағы пайдаланушының күшін жою сәтсіз аяқталды"
 
-#: ../panels/user-accounts/um-user-panel.c:673
+#: ../panels/user-accounts/um-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Өз тіркелгіңізді өшіре алмайсыз."
 
-#: ../panels/user-accounts/um-user-panel.c:682
+#: ../panels/user-accounts/um-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s жүйеге кіріп тұр"
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6848,12 +6905,12 @@ msgstr ""
 "Жүйеге кіріп тұрған кезде пайдаланушыны өшіру жүйені екімәнді күйде қалдыруы "
 "мүмкін."
 
-#: ../panels/user-accounts/um-user-panel.c:695
+#: ../panels/user-accounts/um-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "%s файлдарын алып қалуды қалайсыз ба?"
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6861,47 +6918,47 @@ msgstr ""
 "Пайдаланушы тіркелгісін өшіру кезінде оның үй бумасын, пошта кезегін және "
 "уақытша файлдарын алып қалу мүмкіндігі бар."
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:636
 msgid "_Delete Files"
 msgstr "Файлдарды ө_шіру"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:637
 msgid "_Keep Files"
 msgstr "Ф_айлдарды қалдыру"
 
-#: ../panels/user-accounts/um-user-panel.c:717
+#: ../panels/user-accounts/um-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Қашықтан басқарылатын %s тіркелгісін өшіруді шынымен қалайсыз ба?"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:655
 msgid "_Delete"
 msgstr "Ө_шіру"
 
-#: ../panels/user-accounts/um-user-panel.c:773
+#: ../panels/user-accounts/um-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Тіркелгі сөндірілген"
 
-#: ../panels/user-accounts/um-user-panel.c:781
+#: ../panels/user-accounts/um-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Келесі рет кірген кезде орнатылады"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../panels/user-accounts/um-user-panel.c:833
+#: ../panels/user-accounts/um-user-panel.c:763
 msgid "Logged in"
 msgstr "Жүйеге кіріп тұр"
 
-#: ../panels/user-accounts/um-user-panel.c:1260
+#: ../panels/user-accounts/um-user-panel.c:1111
 msgid "Failed to contact the accounts service"
 msgstr "Тіркелгілер қызметімен байланыс орнату қатесі"
 
-#: ../panels/user-accounts/um-user-panel.c:1262
+#: ../panels/user-accounts/um-user-panel.c:1113
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService орнатылған және іске қосылғанына көз жеткізіңіз."
 
@@ -6909,7 +6966,7 @@ msgstr "AccountService орнатылған және іске қосылғаны
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: ../panels/user-accounts/um-user-panel.c:1304
+#: ../panels/user-accounts/um-user-panel.c:1149
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6917,12 +6974,12 @@ msgstr ""
 "Өзгерістерді жасау үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1344
+#: ../panels/user-accounts/um-user-panel.c:1189
 msgid "Create a user account"
 msgstr "Пайдаланушы тіркелгісін жасау"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
-#: ../panels/user-accounts/um-user-panel.c:1655
+#: ../panels/user-accounts/um-user-panel.c:1200
+#: ../panels/user-accounts/um-user-panel.c:1379
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6930,22 +6987,18 @@ msgstr ""
 "Пайдаланушы тіркелгісін жасау үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: ../panels/user-accounts/um-user-panel.c:1365
+#: ../panels/user-accounts/um-user-panel.c:1210
 msgid "Delete the selected user account"
 msgstr "Таңдалған пайдаланушы тіркелгісін өшіру"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
-#: ../panels/user-accounts/um-user-panel.c:1660
+#: ../panels/user-accounts/um-user-panel.c:1222
+#: ../panels/user-accounts/um-user-panel.c:1384
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
 "Таңдалған пайдаланушы тіркелгісін өшіру үшін,\n"
 "алдымен * таңбашасына шертіңіз"
-
-#: ../panels/user-accounts/um-user-panel.c:1569
-msgid "My Account"
-msgstr "Менің тіркелгім"
 
 #: ../panels/user-accounts/um-utils.c:563
 msgid "Sorry, that user name isn’t available. Please try another."
@@ -7309,6 +7362,16 @@ msgstr "Қатынау нүктесі"
 msgid "No results found"
 msgstr "Нәтижелер табылмады"
 
+#~ msgctxt "button"
+#~ msgid "Add Printer"
+#~ msgstr "Принтерді қосу"
+
+#~ msgid "Other Accounts"
+#~ msgstr "Басқа тіркелгілер"
+
+#~ msgid "My Account"
+#~ msgstr "Менің тіркелгім"
+
 #~ msgid "Edit"
 #~ msgstr "Түзету"
 
@@ -7368,9 +7431,6 @@ msgstr "Нәтижелер табылмады"
 
 #~ msgid "Left Ring Mode #%d"
 #~ msgstr "Сол жақ сақина режимі #%d"
-
-#~ msgid "Right Ring"
-#~ msgstr "Оң жақ сақина"
 
 #~ msgid "Right Ring Mode #%d"
 #~ msgstr "Оң жақ сақина режимі #%d"
@@ -8060,9 +8120,6 @@ msgstr "Нәтижелер табылмады"
 
 #~ msgid "_Network Time"
 #~ msgstr "Же_лілік уақыт"
-
-#~ msgid ":"
-#~ msgstr ":"
 
 #~ msgid "AM/PM"
 #~ msgstr "AM/PM"
