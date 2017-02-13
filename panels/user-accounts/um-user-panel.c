@@ -96,6 +96,7 @@ get_widget (CcUserPanelPrivate *d, const char *name)
 #define PAGE_ADDUSER "_adduser"
 
 static void show_restart_notification (CcUserPanelPrivate *d, const gchar *locale);
+static gint user_compare (gconstpointer i, gconstpointer u);
 
 typedef struct {
         CcUserPanel *self;
@@ -265,10 +266,18 @@ sort_users (gconstpointer a, gconstpointer b)
 }
 
 static void
-reload_users (CcUserPanelPrivate *d)
+reload_users (CcUserPanelPrivate *d, ActUser *selected_user)
 {
         ActUser *user;
         GSList *list, *l;
+        UmCarouselItem *item;
+        GtkSettings *settings;
+        gboolean animations;
+
+        settings = gtk_settings_get_default ();
+
+        g_object_get (settings, "gtk-enable-animations", &animations, NULL);
+        g_object_set (settings, "gtk-enable-animations", FALSE, NULL);
 
         um_carousel_purge_items (d->carousel);
 
@@ -284,6 +293,13 @@ reload_users (CcUserPanelPrivate *d)
                 user_added (d->um, user, d);
         }
         g_slist_free (list);
+
+        if (selected_user) {
+                item = um_carousel_find_item (d->carousel, selected_user, user_compare);
+                um_carousel_select_item (d->carousel, item);
+        }
+
+        g_object_set (settings, "gtk-enable-animations", animations, NULL);
 }
 
 static void
@@ -296,7 +312,7 @@ user_removed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         gtk_revealer_set_reveal_child (GTK_REVEALER (d->carousel),
                                        show_carousel);
 
-        reload_users (d);
+        reload_users (d, NULL);
 
         /* Show the current user */
         user = act_user_manager_get_user_by_id (d->um, getuid ());
@@ -326,15 +342,10 @@ user_compare (gconstpointer i,
 static void
 user_changed (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
 {
-        UmCarouselItem *item;
-
         if (act_user_get_uid (user) != act_user_get_uid (d->selected_user))
                 return;
 
-        reload_users (d);
-
-        item = um_carousel_find_item (d->carousel, user, user_compare);
-        um_carousel_select_item (d->carousel, item);
+        reload_users (d, user);
 }
 
 static void
@@ -344,7 +355,6 @@ select_created_user (GObject *object,
 {
         CcUserPanelPrivate *d = user_data;
         UmAccountDialog *dialog;
-        UmCarouselItem *item;
         ActUser *user;
 
         dialog = UM_ACCOUNT_DIALOG (object);
@@ -355,11 +365,7 @@ select_created_user (GObject *object,
         if (user == NULL)
                 return;
 
-        reload_users (d);
-
-        /* Find and select the last created user */
-        item = um_carousel_find_item (d->carousel, user, user_compare);
-        um_carousel_select_item (d->carousel, item);
+        reload_users (d, user);
 }
 
 static void
@@ -1124,7 +1130,7 @@ users_loaded (ActUserManager     *manager,
         g_signal_connect (d->um, "user-added", G_CALLBACK (user_added), d);
         g_signal_connect (d->um, "user-removed", G_CALLBACK (user_removed), d);
 
-        reload_users (d);
+        reload_users (d, NULL);
 
         /* Show the current user firstly. */
         user = act_user_manager_get_user_by_id (d->um, getuid ());
