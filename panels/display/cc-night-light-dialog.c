@@ -190,6 +190,11 @@ dialog_update_state (CcNightLightDialog *self)
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "box_manual"));
   gtk_widget_set_sensitive (widget, enabled && !automatic);
 
+  /* show the sunset & sunrise icons when required */
+  cc_night_light_widget_set_mode (CC_NIGHT_LIGHT_WIDGET (self->night_light_widget),
+                                  automatic ? CC_NIGHT_LIGHT_WIDGET_MODE_AUTOMATIC :
+                                              CC_NIGHT_LIGHT_WIDGET_MODE_MANUAL);
+
   /* set from */
   if (automatic && self->proxy_color != NULL)
     {

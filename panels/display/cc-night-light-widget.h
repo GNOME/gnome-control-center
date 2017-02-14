@@ -25,6 +25,12 @@
 
 G_BEGIN_DECLS
 
+typedef enum {
+  CC_NIGHT_LIGHT_WIDGET_MODE_MANUAL,
+  CC_NIGHT_LIGHT_WIDGET_MODE_AUTOMATIC,
+  CC_NIGHT_LIGHT_WIDGET_MODE_LAST
+} CcNightLightWidgetMode;
+
 #define CC_TYPE_NIGHT_LIGHT_WIDGET (cc_night_light_widget_get_type ())
 G_DECLARE_FINAL_TYPE (CcNightLightWidget, cc_night_light_widget, CC, NIGHT_LIGHT_WIDGET, GtkDrawingArea)
 
@@ -35,6 +41,8 @@ void         cc_night_light_widget_set_from   (CcNightLightWidget *self,
                                                gdouble             from);
 void         cc_night_light_widget_set_now    (CcNightLightWidget *self,
                                                gdouble             now);
+void         cc_night_light_widget_set_mode   (CcNightLightWidget *self,
+                                               CcNightLightWidgetMode mode);
 
 G_END_DECLS
 

@@ -33,6 +33,7 @@ struct _CcNightLightWidget {
   gdouble          now;
   cairo_surface_t *surface_sunrise;
   cairo_surface_t *surface_sunset;
+  CcNightLightWidgetMode mode;
 };
 
 G_DEFINE_TYPE (CcNightLightWidget, cc_night_light_widget, GTK_TYPE_DRAWING_AREA);
@@ -60,6 +61,13 @@ cc_night_light_widget_set_now (CcNightLightWidget *self, gdouble now)
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
+void
+cc_night_light_widget_set_mode (CcNightLightWidget *self,
+                                CcNightLightWidgetMode mode)
+{
+  self->mode = mode;
+  gtk_widget_queue_draw (GTK_WIDGET (self));
+}
 
 static void
 cc_night_light_widget_finalize (GObject *object)
@@ -261,19 +269,21 @@ cc_night_light_widget_draw (GtkWidget *widget, cairo_t *cr)
   cairo_fill (cr);
 
   /* draw icons */
-  if (self->to <= 0)
-    line_x = rect.width - icon_sz;
-  else
-    line_x = MIN (MAX ((self->to / subsect) - (icon_sz / 2), 0), rect.width - icon_sz);
-  cairo_set_source_surface (cr, self->surface_sunrise, line_x, 0);
-  cairo_paint (cr);
-  if (self->from <= 0)
-    line_x = rect.width - icon_sz;
-  else
-    line_x = MIN (MAX ((self->from / subsect) - (icon_sz / 2), 0), rect.width - icon_sz);
-  cairo_set_source_surface (cr, self->surface_sunset, line_x, 0);
-  cairo_paint (cr);
-
+  if (self->mode == CC_NIGHT_LIGHT_WIDGET_MODE_AUTOMATIC)
+    {
+      if (self->to <= 0)
+        line_x = rect.width - icon_sz;
+      else
+        line_x = MIN (MAX ((self->to / subsect) - (icon_sz / 2), 0), rect.width - icon_sz);
+      cairo_set_source_surface (cr, self->surface_sunrise, line_x, 0);
+      cairo_paint (cr);
+      if (self->from <= 0)
+        line_x = rect.width - icon_sz;
+      else
+        line_x = MIN (MAX ((self->from / subsect) - (icon_sz / 2), 0), rect.width - icon_sz);
+      cairo_set_source_surface (cr, self->surface_sunset, line_x, 0);
+      cairo_paint (cr);
+    }
   return FALSE;
 }
 
