@@ -37,6 +37,9 @@ render_image (UmUserImage *image)
         cairo_surface_t *surface;
         gint scale, pixel_size;
 
+        if (image->priv->user == NULL)
+                return;
+
         pixel_size = gtk_image_get_pixel_size (GTK_IMAGE (image));
         scale = gtk_widget_get_scale_factor (GTK_WIDGET (image));
         surface = render_user_icon (image->priv->user,
@@ -91,6 +94,7 @@ um_user_image_init (UmUserImage *image)
         image->priv = UM_USER_IMAGE_GET_PRIVATE (image);
 
         g_signal_connect (image, "notify::scale-factor", G_CALLBACK (on_scale_factor_changed), NULL);
+        g_signal_connect_swapped (image, "notify::pixel-size", G_CALLBACK (render_image), image);
 }
 
 GtkWidget *
