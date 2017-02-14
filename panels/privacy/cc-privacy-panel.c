@@ -1035,6 +1035,7 @@ static gboolean
 run_warning (GtkWindow *parent, char *prompt, char *text, char *button_title)
 {
   GtkWidget *dialog;
+  GtkWidget *button;
   int result;
   dialog = gtk_message_dialog_new (parent,
                                    0,
@@ -1049,6 +1050,9 @@ run_warning (GtkWindow *parent, char *prompt, char *text, char *button_title)
   gtk_dialog_add_button (GTK_DIALOG (dialog), button_title, GTK_RESPONSE_OK);
 
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), FALSE);
+
+  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
 
   result = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
