@@ -61,16 +61,6 @@ um_user_image_set_user (UmUserImage *image,
 }
 
 static void
-on_scale_factor_changed (GObject    *object,
-                         GParamSpec *pspec,
-                         gpointer    data)
-{
-        UmUserImage *image = UM_USER_IMAGE (object);
-
-        render_image (image);
-}
-
-static void
 um_user_image_finalize (GObject *object)
 {
         UmUserImage *image = UM_USER_IMAGE (object);
@@ -93,7 +83,7 @@ um_user_image_init (UmUserImage *image)
 {
         image->priv = UM_USER_IMAGE_GET_PRIVATE (image);
 
-        g_signal_connect (image, "notify::scale-factor", G_CALLBACK (on_scale_factor_changed), NULL);
+        g_signal_connect_swapped (image, "notify::scale-factor", G_CALLBACK (render_image), image);
         g_signal_connect_swapped (image, "notify::pixel-size", G_CALLBACK (render_image), image);
 }
 
