@@ -79,6 +79,7 @@ struct _UmAccountDialog {
         /* Local user account widgets */
         GtkWidget *local_username;
         GtkWidget *local_username_entry;
+        gboolean   has_custom_username;
         GtkWidget *local_name;
         gint       local_name_timeout_id;
         GtkWidget *local_username_hint;
@@ -368,13 +369,21 @@ on_username_changed (GtkComboBoxText *combo,
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GtkWidget *entry;
+        const gchar *username;
+
+        entry = gtk_bin_get_child (GTK_BIN (self->local_username));
+        username = gtk_entry_get_text (GTK_ENTRY (entry));
+        if (*username == '\0')
+                self->has_custom_username = FALSE;
+        else if (gtk_widget_has_focus (entry) ||
+                 gtk_combo_box_get_active (GTK_COMBO_BOX (self->local_username)) > 0)
+                self->has_custom_username = TRUE;
 
         if (self->local_username_timeout_id != 0) {
                 g_source_remove (self->local_username_timeout_id);
                 self->local_username_timeout_id = 0;
         }
 
-        entry = gtk_bin_get_child (GTK_BIN (self->local_username));
         clear_entry_validation_error (GTK_ENTRY (entry));
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
@@ -421,12 +430,13 @@ on_name_changed (GtkEditable *editable,
         gtk_list_store_clear (GTK_LIST_STORE (model));
 
         name = gtk_entry_get_text (GTK_ENTRY (editable));
-        if (strlen (name) == 0) {
+        if ((name == NULL || strlen (name) == 0) && !self->has_custom_username) {
                 entry = gtk_bin_get_child (GTK_BIN (self->local_username));
                 gtk_entry_set_text (GTK_ENTRY (entry), "");
-        } else {
+        } else if (name != NULL && strlen (name) != 0) {
                 generate_username_choices (name, GTK_LIST_STORE (model));
-                gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username), 0);
+                if (!self->has_custom_username)
+                        gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username), 0);
         }
 
         clear_entry_validation_error (GTK_ENTRY (editable));
@@ -587,6 +597,7 @@ local_prepare (UmAccountDialog *self)
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username));
         gtk_list_store_clear (GTK_LIST_STORE (model));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->account_type_standard), TRUE);
+        self->has_custom_username = FALSE;
 }
 
 static gboolean
