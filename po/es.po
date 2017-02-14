@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-31 11:58+0000\n"
-"PO-Revision-Date: 2017-02-01 11:05+0100\n"
+"POT-Creation-Date: 2017-02-07 11:55+0000\n"
+"PO-Revision-Date: 2017-02-07 18:38+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -1742,7 +1742,6 @@ msgid "Modifiers-only switch to next source"
 msgstr "Sólo los modificadores cambian a la fuente siguiente"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:181
-#| msgid "Set Shortcut"
 msgid "Reset All Shortcuts?"
 msgstr "¿Restablecer todos los atajos?"
 
@@ -1763,7 +1762,6 @@ msgstr "Cancelar"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:189
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#| msgid "Reset"
 msgid "Reset All"
 msgstr "Restablecer todo"
 
@@ -1818,7 +1816,6 @@ msgid "Keyboard Shortcuts"
 msgstr "Combinaciones de teclas"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#| msgid "Reset the shortcut to its default value"
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Restablecer todos los atajos a sus valores predeterminados"
 
@@ -1849,7 +1846,6 @@ msgid "Shortcut"
 msgstr "Combinación"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-#| msgid "Set Shortcut"
 msgctxt "button"
 msgid "Set Shortcut…"
 msgstr "Establecer atajo…"
@@ -2032,7 +2028,7 @@ msgstr "_Seguridad 802.1x"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:15
 #: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "página 1"
@@ -2052,7 +2048,7 @@ msgstr "Autenticación i_nterna"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:17
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "página 2"
@@ -2645,7 +2641,7 @@ msgstr "ayer"
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3
 #: ../panels/network/panel-common.c:647 ../panels/network/panel-common.c:649
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/printers/printers.ui.h:14
 msgid "IP Address"
 msgstr "Dirección IP"
 
@@ -4388,7 +4384,8 @@ msgstr "No hay trabajos de impresión activos"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/pp-new-printer-dialog.c:380
+#: ../panels/printers/pp-new-printer-dialog.c:384
+#: ../panels/printers/pp-new-printer-dialog.c:456
 msgid "Add Printer"
 msgstr "Añadir impresora"
 
@@ -4527,62 +4524,62 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - trabajos activos"
 
-#: ../panels/printers/pp-new-printer-dialog.c:395
+#: ../panels/printers/pp-new-printer-dialog.c:402
 msgid "Unlock Print Server"
 msgstr "Desbloquear servidor de impresión"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:399
+#: ../panels/printers/pp-new-printer-dialog.c:406
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloquear %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:404
+#: ../panels/printers/pp-new-printer-dialog.c:411
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras en "
 "%s."
 
-#: ../panels/printers/pp-new-printer-dialog.c:851
+#: ../panels/printers/pp-new-printer-dialog.c:876
 msgid "Searching for Printers"
 msgstr "Buscando impresoras"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1799
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1804
 msgid "Serial Port"
 msgstr "Puerto serie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1786
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "Puerto paralelo"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1791
+#: ../panels/printers/pp-new-printer-dialog.c:1816
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1828
+#: ../panels/printers/pp-new-printer-dialog.c:1853
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicación: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1833
+#: ../panels/printers/pp-new-printer-dialog.c:1858
 #, c-format
 msgid "Address: %s"
 msgstr "Dirección: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1862
+#: ../panels/printers/pp-new-printer-dialog.c:1887
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
 
@@ -4715,77 +4712,79 @@ msgstr "Fabricante"
 msgid "Driver"
 msgstr "Controlador"
 
-#: ../panels/printers/printers.ui.h:1
-msgctxt "button"
-msgid "Add Printer"
-msgstr "Añadir impresora"
-
+#. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:2
+#| msgid "Add"
+msgctxt "button"
+msgid "Add"
+msgstr "Añadir"
+
+#: ../panels/printers/printers.ui.h:3
 msgid "Remove Printer"
 msgstr "Quitar impresora"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:4
+#: ../panels/printers/printers.ui.h:5
 msgid "Supply"
 msgstr "Suministro"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:7
 msgid "Location"
 msgstr "Ubicación"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
+#: ../panels/printers/printers.ui.h:9
 msgid "_Default printer"
 msgstr "_Impresora predeterminada"
 
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "Trabajos"
 
 #. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:11
+#: ../panels/printers/printers.ui.h:12
 msgid "Show _Jobs"
 msgstr "Mostrar _tareas"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "Modelo"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:16
 msgid "label"
 msgstr "etiqueta"
 
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:18
 msgid "Setting new driver…"
 msgstr "Estableciendo el nuevo controlador…"
 
-#: ../panels/printers/printers.ui.h:18
+#: ../panels/printers/printers.ui.h:19
 #: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "page 3"
 msgstr "página 3"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:20
+#: ../panels/printers/printers.ui.h:21
 msgid "Print _Test Page"
 msgstr "I_mprimir página de prueba"
 
 #. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:8
+#: ../panels/printers/printers.ui.h:23 ../panels/region/region.ui.h:8
 msgid "_Options"
 msgstr "_Opciones"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:24
 msgid "No printers"
 msgstr "No hay impresoras"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:26
 msgid "Add a Printer"
 msgstr "Añadir una impresora"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:28
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -7331,6 +7330,10 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "No se han encontrado resultados"
+
+#~ msgctxt "button"
+#~ msgid "Add Printer"
+#~ msgstr "Añadir impresora"
 
 #~ msgid "Edit"
 #~ msgstr "Editar"
