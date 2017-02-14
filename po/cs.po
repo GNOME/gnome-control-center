@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-13 20:30+0000\n"
-"PO-Revision-Date: 2017-02-13 23:38+0100\n"
+"POT-Creation-Date: 2017-02-14 18:10+0000\n"
+"PO-Revision-Date: 2017-02-14 23:05+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -1837,7 +1837,6 @@ msgid "Cancel"
 msgstr "Zrušit"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:189
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Reset All"
 msgstr "Všechny na výchozí"
 
@@ -1891,6 +1890,10 @@ msgstr "zkratka;opakovat;blikat;"
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "Všechny na výchozí…"
+
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Vrátit všechny klávesové zkratky na výchozí klávesy"
@@ -1939,11 +1942,9 @@ msgstr "Odebrat"
 msgid "Enter the new shortcut"
 msgstr "Zadejte novou klávesovou zkratku"
 
-#. Translators: This button adds new printer.
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
-#: ../panels/printers/printers.ui.h:2
 msgid "Add"
 msgstr "Přidat"
 
@@ -4799,14 +4800,19 @@ msgstr "Po vyřešení problému prosím restartujte."
 msgid "Restart"
 msgstr "Restartovat"
 
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "Přidat…"
+
 #: ../panels/printers/printers.ui.h:3
 msgid "No printers"
 msgstr "Žádné tiskárny"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:5
-msgid "Add a Printer"
-msgstr "Přidat tiskárnu"
+msgid "Add a Printer…"
+msgstr "Přidat tiskárnu…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:7
@@ -4851,7 +4857,7 @@ msgstr "Vysypat všechny položky z koše?"
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Všechny položky v koši budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069
 msgid "_Empty Trash"
 msgstr "_Vyprázdnit koš"
 
@@ -4863,7 +4869,7 @@ msgstr "Odstranit dočasné soubory?"
 msgid "All the temporary files will be permanently deleted."
 msgstr "Všechny dočasné soubory budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094
 msgid "_Purge Temporary Files"
 msgstr "Odstranit dočasné soubor_y"
 
@@ -5014,6 +5020,14 @@ msgstr "Automaticky odstranit dočasné _soubory"
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
 msgstr "Vyčistit _po"
+
+#: ../panels/privacy/privacy.ui.h:34
+msgid "_Empty Trash…"
+msgstr "_Vyprázdnit koš…"
+
+#: ../panels/privacy/privacy.ui.h:35
+msgid "_Purge Temporary Files…"
+msgstr "Odstranit dočasné soubor_y…"
 
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
@@ -6598,29 +6612,29 @@ msgid "Should match the web address of your login provider."
 msgstr ""
 "Mělo by se shodovat s webovou adresou poskytovatele vašeho přihlašování."
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "Přidání účtu selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:458
 msgid "Passwords do not match."
 msgstr "Hesla si neodpovídají."
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:713
+#: ../panels/user-accounts/um-account-dialog.c:759
+#: ../panels/user-accounts/um-account-dialog.c:780
 msgid "Failed to register account"
 msgstr "Registrace účtu selhala"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:903
 msgid "No supported way to authenticate with this domain"
 msgstr "Ověření s touto doménou není podporováno"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:976
 msgid "Failed to join domain"
 msgstr "Připojení k doméně selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
+#: ../panels/user-accounts/um-account-dialog.c:1037
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6628,7 +6642,7 @@ msgstr ""
 "Toto přihlašovací jméno nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
+#: ../panels/user-accounts/um-account-dialog.c:1044
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6636,11 +6650,11 @@ msgstr ""
 "Toto přihlašovací heslo nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1052
 msgid "Failed to log into domain"
 msgstr "Přihlášení do domény selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1110
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Nelze najít doménu. Nemáte v názvu překlep?"
 
