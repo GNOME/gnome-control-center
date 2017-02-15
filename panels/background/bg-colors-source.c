@@ -40,6 +40,7 @@ struct {
   int orientation;
   const char *pcolor;
 } items[] = {
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#000000" },
   { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#db5d33" },
   { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#008094" },
   { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#5d479d" },
