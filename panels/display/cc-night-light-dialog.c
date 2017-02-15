@@ -181,12 +181,21 @@ dialog_update_state (CcNightLightDialog *self)
   gtk_widget_set_visible (widget, disabled_until_tomorrow);
 
   /* make things insensitive if the switch is disabled */
-  enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
+  enabled = g_settings_get_boolean (self->settings_display,
+                                    "night-light-enabled");
+  automatic = g_settings_get_boolean (self->settings_display,
+                                      "night-light-schedule-automatic");
+  gtk_widget_set_sensitive (self->night_light_widget, enabled);
+  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_automatic"));
   gtk_widget_set_sensitive (widget, enabled);
-  automatic = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_manual"));
+  self->ignore_value_changed = TRUE;
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), automatic);
+  self->ignore_value_changed = FALSE;
+  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_manual"));
   gtk_widget_set_sensitive (widget, enabled);
+  self->ignore_value_changed = TRUE;
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), !automatic);
+  self->ignore_value_changed = FALSE;
   widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "box_manual"));
   gtk_widget_set_sensitive (widget, enabled && !automatic);
 
@@ -270,12 +279,15 @@ dialog_enabled_notify_cb (GtkSwitch *sw, GParamSpec *pspec, CcNightLightDialog *
 static void
 dialog_mode_changed_cb (GtkToggleButton *togglebutton, CcNightLightDialog *self)
 {
-  GtkWidget *widget;
   gboolean ret;
 
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
-  ret = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-  g_settings_set_boolean (self->settings_display, "night-light-schedule-automatic", ret);
+  if (self->ignore_value_changed)
+    return;
+  if (!gtk_toggle_button_get_active (togglebutton))
+    return;
+
+  ret = g_settings_get_boolean (self->settings_display, "night-light-schedule-automatic");
+  g_settings_set_boolean (self->settings_display, "night-light-schedule-automatic", !ret);
 }
 
 static void
@@ -583,10 +595,10 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
   g_settings_bind_writable (self->settings_display, "night-light-enabled",
                             sw, "sensitive",
                             FALSE);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_automatic"));
+  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_automatic"));
   g_signal_connect (widget, "toggled",
                     G_CALLBACK (dialog_mode_changed_cb), self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "radio_manual"));
+  widget = GTK_WIDGET (gtk_builder_get_object (self->builder, "togglebutton_manual"));
   g_signal_connect (widget, "toggled",
                     G_CALLBACK (dialog_mode_changed_cb), self);
   adj = GTK_ADJUSTMENT (gtk_builder_get_object (self->builder, "adjustment_from_hours"));
@@ -657,7 +669,7 @@ cc_night_light_dialog_init (CcNightLightDialog *self)
 
   /* add custom widget */
   self->night_light_widget = cc_night_light_widget_new ();
-  gtk_widget_set_size_request (self->night_light_widget, -1, 34);
+  gtk_widget_set_size_request (self->night_light_widget, -1, 40);
   box = GTK_BOX (gtk_builder_get_object (self->builder, "box_content"));
   gtk_box_pack_start (box, self->night_light_widget, FALSE, FALSE, 0);
   gtk_widget_show (self->night_light_widget);
