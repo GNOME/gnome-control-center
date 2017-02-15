@@ -192,8 +192,10 @@ cc_night_light_widget_draw (GtkWidget *widget, cairo_t *cr)
   GtkAllocation rect;
   const guint arrow_sz = 5; /* px */
   const guint icon_sz = 16; /* px */
+  const guint pad_upper_sz = 6; /* px */
+  const guint pad_lower_sz = 4; /* px */
   guint line_x = 0; /* px */
-  const guint bar_voffset = arrow_sz + icon_sz;
+  guint bar_sz;
 
   CcNightLightWidget *self = (CcNightLightWidget*) widget;
   g_return_val_if_fail (self != NULL, FALSE);
@@ -202,74 +204,104 @@ cc_night_light_widget_draw (GtkWidget *widget, cairo_t *cr)
   cd_color_rgb_set (&color_temperature, 0.992, 0.796, 0.612);
   cd_color_rgb_set (&color_unity, 0.773, 0.862, 0.953);
 
+  /*
+   *      /
+   *      |  icon_sz
+   *      \
+   *            <- pad_upper_sz
+   *      /
+   *      |  bar_sz (calculated)
+   *      \
+   *            <- pad_lower_sz
+   *      /
+   *      |  arrow_sz
+   *      \
+   */
   gtk_widget_get_allocation (widget, &rect);
+  bar_sz = rect.height - (icon_sz + pad_upper_sz + pad_lower_sz + arrow_sz);
 
   /* clip to a rounded rectangle */
   cairo_save (cr);
   cairo_set_line_width (cr, 1);
-  rounded_rectangle (cr, 0, bar_voffset, 6,
-                     rect.width, rect.height - bar_voffset - 1);
+  rounded_rectangle (cr, 0, icon_sz + pad_upper_sz, 6,
+                     rect.width, bar_sz);
   cairo_clip (cr);
 
   /* draw each color line */
-  cairo_set_line_width (cr, 1);
   gdouble subsect = 24.f / (gdouble) rect.width;
-  for (guint x = 0; x < rect.width; x += 1)
+  if (gtk_widget_is_sensitive (widget))
     {
-      gdouble frac_hour = subsect * x;
-      if (frac_hour > self->now && line_x == 0)
+      cairo_set_line_width (cr, 1);
+      for (guint x = 0; x < rect.width; x += 1)
         {
-          cd_color_rgb_set (&color, 0.333, 0.333, 0.333);
-          line_x = x;
+          gdouble frac_hour = subsect * x;
+          if (is_frac_day_between (frac_hour, self->to - 1, self->to))
+            {
+              gdouble frac = 1.f - (self->to - frac_hour);
+              cd_color_rgb_interpolate (&color_temperature,
+                                        &color_unity,
+                                        frac,
+                                        &color);
+            }
+          else if (is_frac_day_between (frac_hour, self->from - 1, self->from))
+            {
+              gdouble frac = self->from - frac_hour;
+              cd_color_rgb_interpolate (&color_temperature,
+                                        &color_unity,
+                                        frac,
+                                        &color);
+            }
+          else if (is_frac_day_between (frac_hour, self->to, self->from))
+            {
+              cd_color_rgb_copy (&color_unity, &color);
+            }
+          else
+            {
+              cd_color_rgb_copy (&color_temperature, &color);
+            }
+          cairo_set_source_rgb (cr, color.R, color.G, color.B);
+          cairo_move_to (cr, x + 0.5, icon_sz + pad_upper_sz);
+          cairo_line_to (cr, x + 0.5, icon_sz + pad_upper_sz + bar_sz);
+          cairo_stroke (cr);
         }
-      else if (is_frac_day_between (frac_hour, self->to - 1, self->to))
-        {
-          gdouble frac = 1.f - (self->to - frac_hour);
-          cd_color_rgb_interpolate (&color_temperature,
-                                    &color_unity,
-                                    frac,
-                                    &color);
-        }
-      else if (is_frac_day_between (frac_hour, self->from - 1, self->from))
-        {
-          gdouble frac = self->from - frac_hour;
-          cd_color_rgb_interpolate (&color_temperature,
-                                    &color_unity,
-                                    frac,
-                                    &color);
-        }
-      else if (is_frac_day_between (frac_hour, self->to, self->from))
-        {
-          cd_color_rgb_copy (&color_unity, &color);
-        }
-      else
-        {
-          cd_color_rgb_copy (&color_temperature, &color);
-        }
-      cairo_set_source_rgb (cr, color.R, color.G, color.B);
-      cairo_move_to (cr, x + 0.5, bar_voffset);
-      cairo_line_to (cr, x + 0.5, bar_voffset + rect.height);
-      cairo_stroke (cr);
+    }
+  else
+    {
+      rounded_rectangle (cr, 0, icon_sz + pad_upper_sz, 6,
+                         rect.width, bar_sz);
+      cairo_set_source_rgb (cr, 0.95f, 0.95f, 0.95f);
+      cairo_fill (cr);
     }
 
   /* apply border */
-  rounded_rectangle (cr, 0, bar_voffset, 6,
-                     rect.width, rect.height - bar_voffset - 1);
+  rounded_rectangle (cr, 0, icon_sz + pad_upper_sz, 6,
+                     rect.width, bar_sz);
   cairo_set_source_rgb (cr, 0.65, 0.65, 0.65);
   cairo_set_line_width (cr, 1);
   cairo_stroke (cr);
   cairo_restore (cr);
 
   /* apply arrow */
-  cairo_move_to (cr, line_x - arrow_sz + 0.5, bar_voffset - arrow_sz);
-  cairo_line_to (cr, line_x + arrow_sz + 0.5, bar_voffset - arrow_sz);
-  cairo_line_to (cr, line_x + 0.5, arrow_sz + bar_voffset - arrow_sz);
-  cairo_close_path (cr);
-  cairo_set_source_rgb (cr, 0.333, 0.333, 0.333);
-  cairo_fill (cr);
+  if (gtk_widget_is_sensitive (widget))
+    {
+      line_x = self->now / subsect;
+      cairo_move_to (cr,
+                     line_x - arrow_sz + 0.5,
+                     icon_sz + pad_upper_sz + bar_sz + pad_lower_sz + arrow_sz);
+      cairo_line_to (cr,
+                     line_x + arrow_sz + 0.5,
+                     icon_sz + pad_upper_sz + bar_sz + pad_lower_sz + arrow_sz);
+      cairo_line_to (cr,
+                     line_x + 0.5,
+                     icon_sz + pad_upper_sz + bar_sz + pad_lower_sz);
+      cairo_close_path (cr);
+      cairo_set_source_rgb (cr, 0.333, 0.333, 0.333);
+      cairo_fill (cr);
+    }
 
   /* draw icons */
-  if (self->mode == CC_NIGHT_LIGHT_WIDGET_MODE_AUTOMATIC)
+  if (gtk_widget_is_sensitive (widget) &&
+      self->mode == CC_NIGHT_LIGHT_WIDGET_MODE_AUTOMATIC)
     {
       if (self->to <= 0)
         line_x = rect.width - icon_sz;
@@ -284,6 +316,7 @@ cc_night_light_widget_draw (GtkWidget *widget, cairo_t *cr)
       cairo_set_source_surface (cr, self->surface_sunset, line_x, 0);
       cairo_paint (cr);
     }
+
   return FALSE;
 }
 
