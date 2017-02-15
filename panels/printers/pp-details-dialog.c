@@ -36,6 +36,7 @@
 #include "cc-editable-entry.h"
 #include "pp-details-dialog.h"
 #include "pp-ppd-selection-dialog.h"
+#include "pp-printer.h"
 #include "pp-utils.h"
 
 struct _PpDetailsDialog {
@@ -68,6 +69,16 @@ struct _PpDetailsDialogClass
 G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 
 static void
+on_printer_rename_cb (GObject      *source_object,
+                      GAsyncResult *result,
+                      gpointer      user_data)
+{
+  pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL);
+
+  g_object_unref (source_object);
+}
+
+static void
 pp_details_dialog_response_cb (GtkDialog *dialog,
                                gint       response_id,
                                gpointer   user_data)
@@ -87,9 +98,13 @@ pp_details_dialog_response_cb (GtkDialog *dialog,
   new_name = gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
   if (g_strcmp0 (self->printer_name, new_name) != 0)
     {
-      printer_rename (self->printer_name, new_name);
+      PpPrinter *printer = pp_printer_new (self->printer_name);
 
-      self->printer_name = g_strdup (new_name);
+      pp_printer_rename_async (printer,
+                               new_name,
+                               NULL,
+                               on_printer_rename_cb,
+                               NULL);
     }
 }
 

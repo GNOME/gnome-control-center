@@ -267,6 +267,8 @@ pp_printer_rename_async (PpPrinter           *printer,
 {
   GTask *task;
 
+  g_return_if_fail (new_printer_name != NULL);
+
   task = g_task_new (G_OBJECT (printer), cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdup (new_printer_name), g_free);
 
