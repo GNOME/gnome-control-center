@@ -47,6 +47,7 @@ struct _PpDetailsDialog {
   GtkLabel *printer_model_label;
   GtkStack *printer_model_stack;
   GtkWidget *search_for_drivers_button;
+  GtkWidget *driver_buttons;
 
   gchar        *printer_name;
   gchar        *printer_location;
@@ -349,6 +350,15 @@ select_ppd_manually (GtkButton       *button,
 }
 
 static void
+update_sensitivity (PpDetailsDialog *self,
+                    gboolean         sensitive)
+{
+  gtk_widget_set_sensitive (GTK_WIDGET (self->printer_name_entry), sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->printer_location_entry), sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->driver_buttons), sensitive);
+}
+
+static void
 pp_details_dialog_init (PpDetailsDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -367,6 +377,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_label);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_stack);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, search_for_drivers_button);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
 
   gtk_widget_class_bind_template_callback (widget_class, printer_name_edit_cb);
   gtk_widget_class_bind_template_callback (widget_class, printer_name_changed);
@@ -409,7 +420,7 @@ pp_details_dialog_new (GtkWindow            *parent,
   gtk_entry_set_text (GTK_ENTRY (self->printer_location_entry), printer_location);
   gtk_label_set_text (GTK_LABEL (self->printer_model_label), printer_make_and_model);
 
-  gtk_widget_set_sensitive (gtk_dialog_get_content_area (GTK_DIALOG (self)), sensitive);
+  update_sensitivity (self, sensitive);
 
   return self;
 }
