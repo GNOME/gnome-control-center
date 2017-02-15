@@ -393,7 +393,7 @@ on_username_changed (GtkComboBoxText *combo,
 static gboolean
 local_name_timeout (UmAccountDialog *self)
 {
-        self->local_username_timeout_id = 0;
+        self->local_name_timeout_id = 0;
 
         dialog_validate (self);
 
@@ -439,10 +439,15 @@ on_name_changed (GtkEditable *editable,
                         gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username), 0);
         }
 
+        if (self->local_name_timeout_id != 0) {
+                g_source_remove (self->local_name_timeout_id);
+                self->local_name_timeout_id = 0;
+        }
+
         clear_entry_validation_error (GTK_ENTRY (editable));
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
-        self->local_username_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_name_timeout, self);
+        self->local_name_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_name_timeout, self);
 }
 
 static void
