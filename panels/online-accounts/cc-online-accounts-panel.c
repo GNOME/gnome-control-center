@@ -156,6 +156,7 @@ add_provider_row (CcGoaPanel  *self,
 
   image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (row_grid), image);
+  g_object_set (image, "margin", 6, NULL);
 
   markup = g_strdup_printf ("<b>%s</b>", name);
   label = gtk_label_new (NULL);
@@ -692,6 +693,8 @@ on_account_added (GoaClient *client,
       gtk_image_set_from_gicon (GTK_IMAGE (icon), gicon, GTK_ICON_SIZE_DIALOG);
     }
 
+  g_object_set (icon, "margin", 6, NULL);
+
   gtk_container_add (GTK_CONTAINER (box), icon);
 
   /* The name of the provider */
@@ -711,6 +714,7 @@ on_account_added (GoaClient *client,
   /* "Needs attention" icon */
   icon = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_no_show_all (icon, TRUE);
+  g_object_set (icon, "margin", 6, NULL);
   g_object_bind_property (goa_object_peek_account (object),
                           "attention-needed",
                           icon,
