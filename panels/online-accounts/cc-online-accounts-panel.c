@@ -769,7 +769,7 @@ on_account_added (GoaClient *client,
   /* "Needs attention" icon */
   icon = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_no_show_all (icon, TRUE);
-  g_object_set (icon, "margin", 6, NULL);
+  g_object_set (icon, "margin_end", 30, NULL);
   g_object_bind_property (goa_object_peek_account (object),
                           "attention-needed",
                           icon,
