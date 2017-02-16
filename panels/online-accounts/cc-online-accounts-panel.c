@@ -186,6 +186,9 @@ on_provider_row_activated (CcGoaPanel    *self,
   /* Move to the new account page */
   gtk_stack_set_visible_child_name (GTK_STACK (self->stack), "new-account");
 
+  /* Reset the dialog size */
+  gtk_window_resize (GTK_WINDOW (self->edit_account_dialog), 1, 1);
+
   /* This spins gtk_dialog_run() */
   object = goa_provider_add_account (provider,
                                      self->client,
@@ -493,6 +496,9 @@ show_page_account (CcGoaPanel  *panel,
   title = g_strdup_printf (_("%s Account"), provider_name);
   gtk_header_bar_set_title (GTK_HEADER_BAR (panel->edit_account_headerbar), title);
   g_free (title);
+
+  /* Reset the dialog size */
+  gtk_window_resize (GTK_WINDOW (panel->edit_account_dialog), 1, 1);
 
   gtk_widget_show_all (panel->accounts_vbox);
   gtk_widget_show (panel->edit_account_dialog);
