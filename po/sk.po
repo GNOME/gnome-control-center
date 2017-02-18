@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-10 18:18+0000\n"
-"PO-Revision-Date: 2017-02-12 14:33+0100\n"
+"POT-Creation-Date: 2017-02-16 19:57+0000\n"
+"PO-Revision-Date: 2017-02-18 11:07+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -125,9 +125,9 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: ../panels/network/net-device-wifi.c:1298
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2091
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -136,9 +136,9 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
-#: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:638
-#: ../panels/user-accounts/um-user-panel.c:656
+#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-user-panel.c:644
+#: ../panels/user-accounts/um-user-panel.c:662
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
@@ -1410,20 +1410,35 @@ msgstr "Reštartovať filter"
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Dočasne zakázané do zajtra"
 
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+"Nočné svetlo spôsobí, že bude farba obrazovky teplejšia. Tým sa pomôže "
+"znížiť námaha očí a zabrániť nespavosti."
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: ../panels/display/display.ui.h:6
+#: ../panels/display/display.ui.h:7
 msgid "Night Light"
 msgstr "Nočné svetlo"
 
-#. When the sun comes up in the morning to the time the sun goes down in the evening
 #: ../panels/display/display.ui.h:8
-msgid "Sunset to sunrise"
+msgid "Schedule"
+msgstr "Plánovanie"
+
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
 msgstr "Od západu slnka po východ slnka"
 
-#. This allows the user to schedule when the redshift functionality is triggered
+# GtkComboBox item
 #: ../panels/display/display.ui.h:10
-msgid "Manual schedule"
-msgstr "Ručné naplánovanie"
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Ručné"
 
 #: ../panels/display/display.ui.h:11
 msgid "From"
@@ -1447,17 +1462,6 @@ msgstr "odpoludnia"
 msgid "To"
 msgstr "Do"
 
-# WEP index
-# GtkListStore item
-#: ../panels/display/display.ui.h:18
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/display/display.ui.h:19
-msgid "0"
-msgstr "0"
-
 # desktop entry name
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1471,8 +1475,12 @@ msgstr "Volí spôsob použitia pripojených displejov a projektorov"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
-msgstr "Panel;Projektor;xrandr;Obrazovka;Rozlíšenie;Obnovovanie;Displej;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
+msgstr ""
+"Panel;Projektor;xrandr;Obrazovka;Rozlíšenie;Obnovovanie;Displej;Noc;Nočné;"
+"Svetlo;Modrá;Farba;Redshift;Západ;Východ;Slnka;"
 
 # * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 # grafika, AP typ
@@ -2082,7 +2090,6 @@ msgstr "Zrušiť"
 
 # GtkListStore item; page
 #: ../panels/keyboard/cc-keyboard-panel.c:189
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Reset All"
 msgstr "Obnoviť všetky"
 
@@ -2146,6 +2153,11 @@ msgstr "Skratka;Skratky;Opakovanie;Blikanie;Rýchlosť;"
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové skratky"
 
+# GtkListStore item; page
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "Obnoviť všetky…"
+
 # tooltip
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Reset all shortcuts to their default keybindings"
@@ -2166,6 +2178,7 @@ msgstr "Stlačte kláves Esc na zrušenie."
 
 # tree view column
 #: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/printers/details-dialog.ui.h:1
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
@@ -2182,7 +2195,6 @@ msgstr "Skratka"
 
 # tab
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgctxt "button"
 msgid "Set Shortcut…"
 msgstr "Nastaviť skratku…"
 
@@ -2388,7 +2400,7 @@ msgstr "_Zabezpečenie 802.1x"
 # tab
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:15 ../panels/wacom/wacom-stylus-page.ui.h:8
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "strana č. 1"
 
@@ -2411,7 +2423,6 @@ msgstr "Vnútorné _overenie totožnosti"
 # tab
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:17
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "strana č. 2"
@@ -2558,6 +2569,7 @@ msgstr "Totožnosť"
 #: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Adresa"
 
@@ -2612,14 +2624,6 @@ msgstr "Odstrániť smerovanie"
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Zistiť automaticky (DHCP)"
-
-# GtkComboBox item
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Ručné"
 
 # ListStore item (Manual, Automatic (DHCP))
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
@@ -2991,9 +2995,9 @@ msgid "Select file to import"
 msgstr "Výber súboru na importovanie"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2092
+#: ../panels/printers/pp-details-dialog.c:317
 #: ../panels/sharing/cc-sharing-panel.c:376
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
 msgstr "_Otvoriť"
 
@@ -3099,7 +3103,7 @@ msgstr "včera"
 
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:14
+#: ../panels/network/panel-common.c:649
 msgid "IP Address"
 msgstr "Adresa IP"
 
@@ -4200,6 +4204,12 @@ msgstr "2"
 msgid "3"
 msgstr "3"
 
+# WEP index
+# GtkListStore item
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
 # Overenie totožnosti
 # GtkListStore item
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
@@ -4327,48 +4337,29 @@ msgstr "Oznámenia v _uzamknutej obrazovke"
 msgid "Applications"
 msgstr "Aplikácie"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
-#: ../panels/online-accounts/cc-online-accounts-panel.c:131
+#: ../panels/online-accounts/cc-online-accounts-panel.c:145
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Iný"
 
-# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
-#. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-msgid "Add Account"
-msgstr "Pridanie účtu"
-
-# account dialog group
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
-msgid "Mail"
-msgstr "Pošta"
-
-# GtkLabel label
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-msgid "Calendar"
-msgstr "Kalendár"
-
-# account dialog group
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
-msgid "Contacts"
-msgstr "Kontakty"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:346
-msgid "Chat"
-msgstr "Rozhovor"
-
-# account dialog group
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:352
-msgid "Resources"
-msgstr "Zdroje"
-
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:459
+#: ../panels/online-accounts/cc-online-accounts-panel.c:493
 #, c-format
 msgid "%s Account"
 msgstr "Účet služby %s"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:767
+msgid "Error removing account"
+msgstr "Chyba pri odstraňovaní účtu"
+
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: ../panels/online-accounts/cc-online-accounts-panel.c:837
+#, c-format
+msgid "<b>%s</b> removed"
+msgstr "Účet <b>%s</b> bol odstránený"
 
 # desktop entry name
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
@@ -4392,17 +4383,20 @@ msgstr ""
 "email;pošta;kontakt;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
+msgid "Undo"
+msgstr "Vrátiť späť"
+
+#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Connect to your data in the cloud"
 msgstr "Pripojte sa k vašim údajom v cloude"
 
 # GtkButton label
-#: ../panels/online-accounts/online-accounts.ui.h:2
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Add an account"
 msgstr "Pridať účet"
 
 # GtkToolButton label
-#: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Remove Account"
 msgstr "Odstrániť účet"
 
@@ -4842,195 +4836,48 @@ msgstr "Overeniť totožnosť"
 msgid "Authentication Required"
 msgstr "Vyžaduje sa overenie totožnosti"
 
-#. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:698
-msgid "Low on toner"
-msgstr "Málo tonera"
-
-#. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:700
-msgid "Out of toner"
-msgstr "Minul sa toner"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:703
-msgid "Low on developer"
-msgstr "Málo vývojky"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:706
-msgid "Out of developer"
-msgstr "Minula sa vývojka"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:708
-msgid "Low on a marker supply"
-msgstr "Málo farby"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:710
-msgid "Out of a marker supply"
-msgstr "Minula sa farba"
-
-#. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:712
-msgid "Open cover"
-msgstr "Otvorený kryt"
-
-#. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:714
-msgid "Open door"
-msgstr "Otvorené dvierka"
-
-#. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:716
-msgid "Low on paper"
-msgstr "Málo papiera"
-
-#. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:718
-msgid "Out of paper"
-msgstr "Minul sa papier"
-
-#. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:720
-msgctxt "printer state"
-msgid "Offline"
-msgstr "Vypnutá"
-
-#. Translators: Someone has stopped the Printer
-#. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:722
-#: ../panels/printers/cc-printers-panel.c:912
-msgctxt "printer state"
-msgid "Stopped"
-msgstr "Zastavená"
-
-#. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:724
-msgid "Waste receptacle almost full"
-msgstr "Odpadová nádržka takmer plná"
-
-#. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:726
-msgid "Waste receptacle full"
-msgstr "Odpadová nádržka plná"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:728
-msgid "The optical photo conductor is near end of life"
-msgstr "Fotovalcu onedlho skončí životnosť"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:730
-msgid "The optical photo conductor is no longer functioning"
-msgstr "Fotovalec už nie je funkčný"
-
-#. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:839
-msgctxt "printer state"
-msgid "Configuring"
-msgstr "Nastavuje sa"
-
-#. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:898
-msgctxt "printer state"
-msgid "Ready"
-msgstr "Pripravená"
-
-#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:903
-msgctxt "printer state"
-msgid "Does not accept jobs"
-msgstr "Neprijíma úlohy"
-
-#. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:908
-msgctxt "printer state"
-msgid "Processing"
-msgstr "Pracuje"
-
-#. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1028
-msgid "Toner Level"
-msgstr "Úroveň tonera"
-
-#. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1031
-msgid "Ink Level"
-msgstr "Úroveň atramentu"
-
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1034
-msgid "Supply Level"
-msgstr "Úroveň náplne"
-
-#. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1052
-msgctxt "printer state"
-msgid "Installing"
-msgstr "Inštaluje sa"
-
-#. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1566
-#, c-format
-msgid "%u active"
-msgid_plural "%u active"
-msgstr[0] "%u aktívnych"
-msgstr[1] "%u aktívna"
-msgstr[2] "%u aktívne"
-
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1907
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Failed to add new printer."
 msgstr "Pridávanie novej tlačiarne zlyhalo."
 
-# file chooser dialog title
-#: ../panels/printers/cc-printers-panel.c:2088
-msgid "Select PPD File"
-msgstr "Výber súboru PPD"
-
-#: ../panels/printers/cc-printers-panel.c:2097
-msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
-"PPD.GZ)"
-msgstr ""
-"Súbory popisu PostScriptu tlačiarne (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
-"GZ)"
-
-# gtk_menu_item
-#: ../panels/printers/cc-printers-panel.c:2404
-msgid "No suitable driver found"
-msgstr "Nenašiel sa žiadny vhodný ovládač"
-
-# gtk_image_menu_item
-#: ../panels/printers/cc-printers-panel.c:2475
-msgid "Searching for preferred drivers…"
-msgstr "Hľadajú sa preferované ovládače…"
-
-# gtk_image_menu_item
-#: ../panels/printers/cc-printers-panel.c:2496
-msgid "Select from database…"
-msgstr "Vybrať z databázy…"
-
-# gtk_image_menu_item
-#: ../panels/printers/cc-printers-panel.c:2505
-msgid "Provide PPD File…"
-msgstr "Poskytnúť súbor PPD…"
-
-#. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2652
-#: ../panels/printers/cc-printers-panel.c:2675
-msgid "Test page"
-msgstr "Skúšobná strana"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3133
+#: ../panels/printers/cc-printers-panel.c:846
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepodarilo sa načítať súbor používateľského rozhrania: %s"
+
+# GtkLabel label
+#: ../panels/printers/details-dialog.ui.h:2
+#: ../panels/printers/printer-entry.ui.h:6
+msgid "Location"
+msgstr "Umiestnenie"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/details-dialog.ui.h:4
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
+msgid "Driver"
+msgstr "Ovládač"
+
+# gtk_image_menu_item
+#: ../panels/printers/details-dialog.ui.h:5
+msgid "Searching for preferred drivers…"
+msgstr "Hľadajú sa preferované ovládače…"
+
+# gtkbutton label
+#: ../panels/printers/details-dialog.ui.h:6
+msgid "Search for Drivers"
+msgstr "Vyhľadať ovládače"
+
+# gtk_image_menu_item
+#: ../panels/printers/details-dialog.ui.h:7
+msgid "Select from Database…"
+msgstr "Vybrať z databázy…"
+
+# gtk_image_menu_item
+#: ../panels/printers/details-dialog.ui.h:8
+msgid "Install PPD File…"
+msgstr "Inštalovať súbor PPD…"
 
 # desktop entry name
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
@@ -5094,6 +4941,32 @@ msgstr ""
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "Načítavajú sa voľby…"
+
+# 1.desktop entry name;2. page; 3. GtkListStore item
+#. Translators: This is the title of the dialog. %s is the printer name.
+#: ../panels/printers/pp-details-dialog.c:100
+#: ../panels/printers/pp-details-dialog.c:412
+#, c-format
+msgid "%s Details"
+msgstr "Podrobnosti o tlačiarni %s"
+
+# gtk_menu_item
+#: ../panels/printers/pp-details-dialog.c:169
+msgid "No suitable driver found"
+msgstr "Nenašiel sa žiadny vhodný ovládač"
+
+# file chooser dialog title
+#: ../panels/printers/pp-details-dialog.c:313
+msgid "Select PPD File"
+msgstr "Výber súboru PPD"
+
+#: ../panels/printers/pp-details-dialog.c:322
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr ""
+"Súbory popisu PostScriptu tlačiarne (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
+"GZ)"
 
 # GtkDialog title
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
@@ -5400,96 +5273,181 @@ msgstr "Žiadne predfiltrovanie"
 msgid "Manufacturer"
 msgstr "Výrobca"
 
-#. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:250
-msgid "Driver"
-msgstr "Ovládač"
+# GtkDialog title
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:368
+msgid "No Active Jobs"
+msgstr "Žiadne aktívne úlohy"
 
-# button atk
-#. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:2
-msgctxt "button"
-msgid "Add"
-msgstr "Pridať"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:373
+#, c-format
+msgid "%u Job"
+msgid_plural "%u Jobs"
+msgstr[0] "%u úloh"
+msgstr[1] "%u úloha"
+msgstr[2] "%u úlohy"
+
+#. Translators: The printer is low on toner
+#: ../panels/printers/pp-printer-entry.c:470
+msgid "Low on toner"
+msgstr "Málo tonera"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/pp-printer-entry.c:472
+msgid "Out of toner"
+msgstr "Minul sa toner"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:475
+msgid "Low on developer"
+msgstr "Málo vývojky"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:478
+msgid "Out of developer"
+msgstr "Minula sa vývojka"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:480
+msgid "Low on a marker supply"
+msgstr "Málo farby"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:482
+msgid "Out of a marker supply"
+msgstr "Minula sa farba"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/pp-printer-entry.c:484
+msgid "Open cover"
+msgstr "Otvorený kryt"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/pp-printer-entry.c:486
+msgid "Open door"
+msgstr "Otvorené dvierka"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/pp-printer-entry.c:488
+msgid "Low on paper"
+msgstr "Málo papiera"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/pp-printer-entry.c:490
+msgid "Out of paper"
+msgstr "Minul sa papier"
+
+#. Translators: The printer is offline
+#: ../panels/printers/pp-printer-entry.c:492
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Vypnutá"
+
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/pp-printer-entry.c:494
+#: ../panels/printers/pp-printer-entry.c:624
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Zastavená"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/pp-printer-entry.c:496
+msgid "Waste receptacle almost full"
+msgstr "Odpadová nádržka takmer plná"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/pp-printer-entry.c:498
+msgid "Waste receptacle full"
+msgstr "Odpadová nádržka plná"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:500
+msgid "The optical photo conductor is near end of life"
+msgstr "Fotovalcu onedlho skončí životnosť"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:502
+msgid "The optical photo conductor is no longer functioning"
+msgstr "Fotovalec už nie je funkčný"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/pp-printer-entry.c:610
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Pripravená"
+
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/pp-printer-entry.c:615
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "Neprijíma úlohy"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/pp-printer-entry.c:620
+msgctxt "printer state"
+msgid "Processing"
+msgstr "Pracuje"
+
+# GtkLabel
+#: ../panels/printers/printer-entry.ui.h:1
+msgid "Printing Options"
+msgstr "Voľby tlače"
+
+#: ../panels/printers/printer-entry.ui.h:2
+msgid "Printer Details"
+msgstr "Podrobnosti o tlačiarni"
+
+#: ../panels/printers/printer-entry.ui.h:3
+msgid "Use Printer by Default"
+msgstr "Použiť ako predvolenú tlačiareň"
 
 # GtkToolButton label
-#: ../panels/printers/printers.ui.h:3
+#: ../panels/printers/printer-entry.ui.h:4
 msgid "Remove Printer"
 msgstr "Odstrániť tlačiareň"
 
 # GtkLabel label
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:5
-msgid "Supply"
-msgstr "Náplň"
-
-# GtkLabel label
-#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:7
-msgid "Location"
-msgstr "Umiestnenie"
-
-# GtkLabel label
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:9
-msgid "_Default printer"
-msgstr "_Predvolená tlačiareň"
-
-# GtkLabel label
-#: ../panels/printers/printers.ui.h:10
-msgid "Jobs"
-msgstr "Úlohy"
-
-# GtkButton label
-#. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:12
-msgid "Show _Jobs"
-msgstr "_Zobraziť úlohy"
-
-# GtkLabel label
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/printers/printer-entry.ui.h:5
 msgid "Model"
 msgstr "Model"
 
-# GtkLabel label
-#: ../panels/printers/printers.ui.h:16
-msgid "label"
-msgstr "menovka"
+#: ../panels/printers/printer-entry.ui.h:7
+msgid "Ink Level"
+msgstr "Úroveň atramentu"
 
-# GtkLabel label
-#: ../panels/printers/printers.ui.h:18
-msgid "Setting new driver…"
-msgstr "Nastavuje sa nový ovládač…"
+#. Translators: This is the message which follows the printer error.
+#: ../panels/printers/printer-entry.ui.h:9
+msgid "Please restart when the problem is resolved."
+msgstr "Prosím, vykonajte reštart, keď bude problém vyriešený."
 
-# tab
-#: ../panels/printers/printers.ui.h:19
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
-msgid "page 3"
-msgstr "strana č. 3"
+# button
+#. Translators: This is the button which restarts the printer.
+#: ../panels/printers/printer-entry.ui.h:11
+msgid "Restart"
+msgstr "Reštartovať"
 
-#. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:21
-msgid "Print _Test Page"
-msgstr "Vytlačiť _skúšobnú stranu"
-
-#. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:23 ../panels/region/region.ui.h:8
-msgid "_Options"
-msgstr "_Voľby"
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "Pridať…"
 
 # desktop entry name
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:3
 msgid "No printers"
 msgstr "Žiadne tlačiarne"
 
 # GtkToolButton label
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:26
-msgid "Add a Printer"
-msgstr "Pridať tlačiareň"
+#: ../panels/printers/printers.ui.h:5
+msgid "Add a Printer…"
+msgstr "Pridať tlačiareň…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:7
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -5528,49 +5486,49 @@ msgstr "Služby umiestnenia"
 msgid "Usage & History"
 msgstr "Použitie a história"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "Vysypať všetky položky z Koša?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Všetky položky v koši budú natrvalo odstránené."
 
 # GtkButton label
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "_Vyprázdniť kôš"
 
 # 2 GtkDialog title
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "Odstrániť všetky dočasné súbory?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Všetky dočasné súbory budú natrvalo odstránené."
 
 # GtkButton label
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "_Vymazať dočasné súbory"
 
 # 2 GtkDialog title
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Vyprázdnenie koša a dočasné súbory"
 
 # GtkLabel label
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Používanie softvéru"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Hlásenie problémov"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5580,7 +5538,7 @@ msgstr ""
 "Hlásenia sú odosielané anonymne a neobsahujú osobné údaje."
 
 # desktop entry name
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Zabezpečenie súkromia"
 
@@ -5742,6 +5700,16 @@ msgstr "Automaticky vymazať Dočasné _súbory"
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
 msgstr "Vymazať _po dobe"
+
+# GtkButton label
+#: ../panels/privacy/privacy.ui.h:34
+msgid "_Empty Trash…"
+msgstr "_Vyprázdniť kôš…"
+
+# GtkButton label
+#: ../panels/privacy/privacy.ui.h:35
+msgid "_Purge Temporary Files…"
+msgstr "_Vymazať dočasné súbory…"
 
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
@@ -5960,6 +5928,10 @@ msgstr "Spojené Kráľovstvo"
 #: ../panels/region/region.ui.h:7
 msgid "Input Sources"
 msgstr "Zdroje vstupu"
+
+#: ../panels/region/region.ui.h:8
+msgid "_Options"
+msgstr "_Voľby"
 
 #: ../panels/region/region.ui.h:9
 msgid "Add input source"
@@ -7359,6 +7331,11 @@ msgstr "Ikona používateľa"
 msgid "Last Login"
 msgstr "Posledné prihlásenie"
 
+# GtkToolButton label
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove User…"
+msgstr "Odstrániť používateľský účet…"
+
 # policy action desc
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -7560,29 +7537,29 @@ msgstr "Neznáma chyba"
 msgid "Should match the web address of your login provider."
 msgstr "Mala by sa zhodovať s webovou adresou vášho poskytovateľa prihlásenia."
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "Zlyhalo pridanie účtu"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Heslá sa nezhodujú."
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Zlyhala registrácia účtu"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "Overenie totožnosti nie je pri tejto doméne podporované"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Zlyhalo pripojenie k doméne"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7590,7 +7567,7 @@ msgstr ""
 "Prihlasovacie meno nefunguje.\n"
 "Prosím, skúste to znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7598,11 +7575,11 @@ msgstr ""
 "Prihlasovacie heslo nefunguje.\n"
 "Prosím, skúste to znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Zlyhalo prihlásenie do domény"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Nepodarilo sa nájsť doménu. Napísali ste ju správne?"
 
@@ -7742,7 +7719,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:770
+#: ../panels/user-accounts/um-user-panel.c:776
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7750,7 +7727,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:774
+#: ../panels/user-accounts/um-user-panel.c:780
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7790,26 +7767,26 @@ msgstr "Heslá sa nezhodujú."
 
 # DK: nechajme zatial tento tvar, kym to rozdelia.je to neskodny preklad
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=701344
-#: ../panels/user-accounts/um-photo-dialog.c:214
+#: ../panels/user-accounts/um-photo-dialog.c:215
 msgid "Browse for more pictures"
 msgstr "Výber ďalších obrázkov"
 
 # menuitem
-#: ../panels/user-accounts/um-photo-dialog.c:448
+#: ../panels/user-accounts/um-photo-dialog.c:449
 msgid "Disable image"
 msgstr "Zakázať obrázok"
 
 # menuitem
-#: ../panels/user-accounts/um-photo-dialog.c:466
+#: ../panels/user-accounts/um-photo-dialog.c:467
 msgid "Take a photo…"
 msgstr "Odfotografovať…"
 
 # menuitem
-#: ../panels/user-accounts/um-photo-dialog.c:484
+#: ../panels/user-accounts/um-photo-dialog.c:485
 msgid "Browse for more pictures…"
 msgstr "Prehliadať ďalšie obrázky…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:708
+#: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
 msgid "Used by %s"
 msgstr "Používa ho %s"
@@ -7838,42 +7815,42 @@ msgstr "Neplatné heslo, skúste to znovu"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:194
+#: ../panels/user-accounts/um-user-panel.c:195
 msgid "<small>Your account</small>"
 msgstr "<small>Váš účet</small>"
 
-#: ../panels/user-accounts/um-user-panel.c:384
+#: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
 msgstr "Odstránenie používateľa zlyhalo"
 
-#: ../panels/user-accounts/um-user-panel.c:442
-#: ../panels/user-accounts/um-user-panel.c:501
-#: ../panels/user-accounts/um-user-panel.c:553
+#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:559
 msgid "Failed to revoke remotely managed user"
 msgstr "Zlyhalo zrušenie na diaľku spravovaného používateľa"
 
-#: ../panels/user-accounts/um-user-panel.c:607
+#: ../panels/user-accounts/um-user-panel.c:613
 msgid "You cannot delete your own account."
 msgstr "Nemôžete odstrániť vlastný účet."
 
-#: ../panels/user-accounts/um-user-panel.c:616
+#: ../panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "%s is still logged in"
 msgstr "Používateľ %s je stále prihlásený"
 
-#: ../panels/user-accounts/um-user-panel.c:620
+#: ../panels/user-accounts/um-user-panel.c:626
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 "Odstránenie prihláseného používateľa môže spôsobiť nestabilitu systému."
 
-#: ../panels/user-accounts/um-user-panel.c:629
+#: ../panels/user-accounts/um-user-panel.c:635
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Chcete ponechať súbory používateľa %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:633
+#: ../panels/user-accounts/um-user-panel.c:639
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7882,49 +7859,49 @@ msgstr ""
 "súbory pošty a dočasné súbory."
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:636
+#: ../panels/user-accounts/um-user-panel.c:642
 msgid "_Delete Files"
 msgstr "O_dstrániť súbory"
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:637
+#: ../panels/user-accounts/um-user-panel.c:643
 msgid "_Keep Files"
 msgstr "Po_nechať súbory"
 
-#: ../panels/user-accounts/um-user-panel.c:651
+#: ../panels/user-accounts/um-user-panel.c:657
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Naozaj chcete zrušiť na diaľku spravovaný účet používateľa %s?"
 
 # button
-#: ../panels/user-accounts/um-user-panel.c:655
+#: ../panels/user-accounts/um-user-panel.c:661
 msgid "_Delete"
 msgstr "O_dstrániť"
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:711
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet je zakázaný"
 
-#: ../panels/user-accounts/um-user-panel.c:713
+#: ../panels/user-accounts/um-user-panel.c:719
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastaviť pri najbližšom prihlásení"
 
-#: ../panels/user-accounts/um-user-panel.c:716
+#: ../panels/user-accounts/um-user-panel.c:722
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žiadne"
 
-#: ../panels/user-accounts/um-user-panel.c:763
+#: ../panels/user-accounts/um-user-panel.c:769
 msgid "Logged in"
 msgstr "Prihlásený"
 
-#: ../panels/user-accounts/um-user-panel.c:1111
+#: ../panels/user-accounts/um-user-panel.c:1117
 msgid "Failed to contact the accounts service"
 msgstr "Spojenie so službou účtov zlyhalo"
 
-#: ../panels/user-accounts/um-user-panel.c:1113
+#: ../panels/user-accounts/um-user-panel.c:1119
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Uistite sa, prosím, že je služba AccountService nainštalovaná a povolená."
@@ -7934,7 +7911,7 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: ../panels/user-accounts/um-user-panel.c:1149
+#: ../panels/user-accounts/um-user-panel.c:1155
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7943,13 +7920,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1189
+#: ../panels/user-accounts/um-user-panel.c:1195
 msgid "Create a user account"
 msgstr "Vytvorí používateľský účet"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1200
-#: ../panels/user-accounts/um-user-panel.c:1379
+#: ../panels/user-accounts/um-user-panel.c:1206
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7958,13 +7935,13 @@ msgstr ""
 "kliknite najprv na ikonu *"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1210
+#: ../panels/user-accounts/um-user-panel.c:1216
 msgid "Delete the selected user account"
 msgstr "Odstráni vybraný používateľský účet"
 
 # tooltip
-#: ../panels/user-accounts/um-user-panel.c:1222
-#: ../panels/user-accounts/um-user-panel.c:1384
+#: ../panels/user-accounts/um-user-panel.c:1228
+#: ../panels/user-accounts/um-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7972,21 +7949,21 @@ msgstr ""
 "Keď chcete odstrániť používateľský účet,\n"
 "kliknite najprv na ikonu *"
 
-#: ../panels/user-accounts/um-utils.c:563
+#: ../panels/user-accounts/um-utils.c:507
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr ""
 "Prepáčte, ale toto používateľské meno nie je dostupné. Prosím, skúste iné."
 
-#: ../panels/user-accounts/um-utils.c:566
+#: ../panels/user-accounts/um-utils.c:510
 #, c-format
 msgid "The username is too long."
 msgstr "Používateľské meno je príliš dlhé."
 
-#: ../panels/user-accounts/um-utils.c:569
+#: ../panels/user-accounts/um-utils.c:513
 msgid "The username cannot start with a “-”."
 msgstr "Používateľské meno nemôže začínať znakom „-“."
 
-#: ../panels/user-accounts/um-utils.c:572
+#: ../panels/user-accounts/um-utils.c:516
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7994,7 +7971,7 @@ msgstr ""
 "Používateľské meno by sa malo skladať iba z malých a veľkých písmen a-z, "
 "číslic a nasledovných znakov: . - _"
 
-#: ../panels/user-accounts/um-utils.c:576
+#: ../panels/user-accounts/um-utils.c:520
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Toto sa použije ako názov vášho domovského priečinka a nie je možné ho "
@@ -8247,6 +8224,11 @@ msgstr "Spodné tlačidlo"
 msgid "Tip Pressure Feel"
 msgstr "Pocit tlaku hrotu"
 
+# tab
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "page 3"
+msgstr "strana č. 3"
+
 #: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1484
 msgid "All Settings"
@@ -8380,6 +8362,87 @@ msgstr "Prístupový bod"
 msgid "No results found"
 msgstr "Nenašli sa žiadne výsledky"
 
+#~ msgid "0"
+#~ msgstr "0"
+
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+#~ msgid "Add Account"
+#~ msgstr "Pridanie účtu"
+
+# account dialog group
+#~ msgid "Mail"
+#~ msgstr "Pošta"
+
+# GtkLabel label
+#~ msgid "Calendar"
+#~ msgstr "Kalendár"
+
+# account dialog group
+#~ msgid "Contacts"
+#~ msgstr "Kontakty"
+
+#~ msgid "Chat"
+#~ msgstr "Rozhovor"
+
+# account dialog group
+#~ msgid "Resources"
+#~ msgstr "Zdroje"
+
+#~ msgctxt "printer state"
+#~ msgid "Configuring"
+#~ msgstr "Nastavuje sa"
+
+#~ msgid "Toner Level"
+#~ msgstr "Úroveň tonera"
+
+#~ msgid "Supply Level"
+#~ msgstr "Úroveň náplne"
+
+#~ msgctxt "printer state"
+#~ msgid "Installing"
+#~ msgstr "Inštaluje sa"
+
+#~ msgid "%u active"
+#~ msgid_plural "%u active"
+#~ msgstr[0] "%u aktívnych"
+#~ msgstr[1] "%u aktívna"
+#~ msgstr[2] "%u aktívne"
+
+#~ msgid "Test page"
+#~ msgstr "Skúšobná strana"
+
+# button atk
+#~ msgctxt "button"
+#~ msgid "Add"
+#~ msgstr "Pridať"
+
+# GtkLabel label
+#~ msgid "Supply"
+#~ msgstr "Náplň"
+
+# GtkLabel label
+#~ msgid "_Default printer"
+#~ msgstr "_Predvolená tlačiareň"
+
+# GtkLabel label
+#~ msgid "Jobs"
+#~ msgstr "Úlohy"
+
+# GtkButton label
+#~ msgid "Show _Jobs"
+#~ msgstr "_Zobraziť úlohy"
+
+# GtkLabel label
+#~ msgid "label"
+#~ msgstr "menovka"
+
+# GtkLabel label
+#~ msgid "Setting new driver…"
+#~ msgstr "Nastavuje sa nový ovládač…"
+
+#~ msgid "Print _Test Page"
+#~ msgstr "Vytlačiť _skúšobnú stranu"
+
 # button label
 #~ msgid "Edit"
 #~ msgstr "Upraviť"
@@ -8410,9 +8473,6 @@ msgstr "Nenašli sa žiadne výsledky"
 
 #~ msgid "Error creating account"
 #~ msgstr "Chyba pri vytváraní nového účtu"
-
-#~ msgid "Error removing account"
-#~ msgstr "Chyba pri odstraňovaní účtu"
 
 #~ msgid "Are you sure you want to remove the account?"
 #~ msgstr "Naozaj chcete odstrániť tento účet?"
@@ -8646,10 +8706,6 @@ msgstr "Nenašli sa žiadne výsledky"
 #~ msgid "Add User Account"
 #~ msgstr "Pridať používateľský účet"
 
-# GtkToolButton label
-#~ msgid "Remove User Account"
-#~ msgstr "Odstrániť používateľský účet"
-
 #~ msgid "Welcome to the Control Center"
 #~ msgstr "Vitajte v ovládacom stredisku"
 
@@ -8731,10 +8787,6 @@ msgstr "Nenašli sa žiadne výsledky"
 #~ msgid "_Verify"
 #~ msgstr "O_veriť"
 
-# GtkLabel
-#~ msgid "Login Options"
-#~ msgstr "Možnosti prihlásenia"
-
 #~ msgid "A user with the username '%s' already exists."
 #~ msgstr "Používateľ s menom „%s“ už existuje."
 
@@ -8753,10 +8805,6 @@ msgstr "Nenašli sa žiadne výsledky"
 # label
 #~ msgid "Used to determine your geographical location"
 #~ msgstr "Použije sa na určenie vášho geografického umiestnenia"
-
-# GtkDialog title
-#~ msgid "Active Jobs"
-#~ msgstr "Aktívne úlohy"
 
 # GtkToolButton label
 #~ msgid "Resume Printing"
