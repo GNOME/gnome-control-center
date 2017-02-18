@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-15 10:59+0000\n"
-"PO-Revision-Date: 2017-02-15 20:33+0200\n"
+"POT-Creation-Date: 2017-02-16 19:57+0000\n"
+"PO-Revision-Date: 2017-02-18 20:34+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -133,7 +133,7 @@ msgstr "Voit lisätä kuvia %s-kansioon, jolloin ne näkyvät täällä"
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:315
+#: ../panels/printers/pp-details-dialog.c:316
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -1258,13 +1258,11 @@ msgid "_Arrange Combined Displays"
 msgstr "_Järjestä yhdistetyt näytöt"
 
 #: ../panels/display/cc-display-panel.c:2878
-#| msgid "Right Ring"
 msgid "_Night Light"
 msgstr "_Yövalo"
 
 #. This cancels the redshift inhibit.
 #: ../panels/display/display.ui.h:2
-#| msgid "Restart Now"
 msgid "Restart Filter"
 msgstr "Käynnistä suodatin uudelleen"
 
@@ -1273,21 +1271,36 @@ msgstr "Käynnistä suodatin uudelleen"
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Poistettu väliaikaisesti käytöstä huomiseen asti"
 
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+"Yövalo tekee näytön väreistä tavallista lämpimämpiä. Tämän tarkoitus on "
+"estää silmien rasittumista ja unettomuutta."
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: ../panels/display/display.ui.h:6
-#| msgid "Right Ring"
+#: ../panels/display/display.ui.h:7
 msgid "Night Light"
 msgstr "Yövalo"
 
-#. When the sun comes up in the morning to the time the sun goes down in the evening
 #: ../panels/display/display.ui.h:8
-msgid "Sunset to sunrise"
+#| msgid "Manual schedule"
+msgid "Schedule"
+msgstr "Aikataulu"
+
+#: ../panels/display/display.ui.h:9
+#| msgid "Sunset to sunrise"
+msgid "Sunset to Sunrise"
 msgstr "Auringonlaskusta auringonnousuun"
 
-#. This allows the user to schedule when the redshift functionality is triggered
 #: ../panels/display/display.ui.h:10
-msgid "Manual schedule"
-msgstr "Mukautettu aikataulu"
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Manuaalinen"
 
 #: ../panels/display/display.ui.h:11
 msgid "From"
@@ -1311,15 +1324,6 @@ msgstr "PM"
 msgid "To"
 msgstr "Päättyy"
 
-#: ../panels/display/display.ui.h:18
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/display/display.ui.h:19
-msgid "0"
-msgstr "0"
-
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
 msgid "Dis­plays"
@@ -1331,7 +1335,6 @@ msgstr "Valitse kuinka näyttöjä ja projektoreja käsitellään"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
 msgid ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
 "redshift;color;sunset;sunrise;"
@@ -1896,7 +1899,6 @@ msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#| msgid "Reset All"
 msgid "Reset All…"
 msgstr "Palauta kaikki oletusasetukset…"
 
@@ -1932,8 +1934,6 @@ msgid "Shortcut"
 msgstr "Pikanäppäin"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-#| msgctxt "button"
-#| msgid "Set Shortcut…"
 msgid "Set Shortcut…"
 msgstr "Aseta pikanäppäin…"
 
@@ -2307,13 +2307,6 @@ msgstr "Poista reitti"
 msgid "Automatic (DHCP)"
 msgstr "Automaattinen (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Manuaalinen"
-
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
 msgid "Link-Local Only"
@@ -2630,7 +2623,7 @@ msgid "Select file to import"
 msgstr "Valitse tuotava tiedosto"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/printers/pp-details-dialog.c:317
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -3701,6 +3694,10 @@ msgstr "2"
 msgid "3"
 msgstr "3"
 
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Avoin järjestelmä"
@@ -4251,17 +4248,14 @@ msgid "Searching for preferred drivers…"
 msgstr "Etsitään ensisijaisia ajureita…"
 
 #: ../panels/printers/details-dialog.ui.h:6
-#| msgid "Searching for Printers"
 msgid "Search for Drivers"
 msgstr "Etsi ajureita"
 
 #: ../panels/printers/details-dialog.ui.h:7
-#| msgid "Select from database…"
 msgid "Select from Database…"
 msgstr "Valitse tietokannasta…"
 
 #: ../panels/printers/details-dialog.ui.h:8
-#| msgid "Provide PPD File…"
 msgid "Install PPD File…"
 msgstr "Asenna PPD-tiedosto…"
 
@@ -4324,22 +4318,21 @@ msgid "Loading options…"
 msgstr "Ladataan valintoja…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: ../panels/printers/pp-details-dialog.c:99
-#: ../panels/printers/pp-details-dialog.c:401
+#: ../panels/printers/pp-details-dialog.c:100
+#: ../panels/printers/pp-details-dialog.c:412
 #, c-format
-#| msgid "Details"
 msgid "%s Details"
 msgstr "Tulostimen %s tiedot"
 
-#: ../panels/printers/pp-details-dialog.c:168
+#: ../panels/printers/pp-details-dialog.c:169
 msgid "No suitable driver found"
 msgstr "Soveltuvaa ajuria ei löytynyt"
 
-#: ../panels/printers/pp-details-dialog.c:312
+#: ../panels/printers/pp-details-dialog.c:313
 msgid "Select PPD File"
 msgstr "Valitse PPD-tiedosto"
 
-#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/printers/pp-details-dialog.c:322
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4642,7 +4635,6 @@ msgstr "Valmistaja"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
 #: ../panels/printers/pp-printer-entry.c:368
-#| msgid "Active Jobs"
 msgid "No Active Jobs"
 msgstr "Ei aktiivisia töitä"
 
@@ -4759,17 +4751,14 @@ msgid "Processing"
 msgstr "Käsitellään"
 
 #: ../panels/printers/printer-entry.ui.h:1
-#| msgid "Login Options"
 msgid "Printing Options"
 msgstr "Tulostusvalinnat"
 
 #: ../panels/printers/printer-entry.ui.h:2
-#| msgid "Printer Default"
 msgid "Printer Details"
 msgstr "Tulostimen tiedot"
 
 #: ../panels/printers/printer-entry.ui.h:3
-#| msgid "Printer Default"
 msgid "Use Printer by Default"
 msgstr "Käytä tulostinta oletuksena"
 
@@ -4792,7 +4781,6 @@ msgstr "Käynnistä uudelleen kun ongelma on selvitetty."
 
 #. Translators: This is the button which restarts the printer.
 #: ../panels/printers/printer-entry.ui.h:11
-#| msgid "Restart Now"
 msgid "Restart"
 msgstr "Käynnistä uudelleen"
 
@@ -4807,7 +4795,6 @@ msgstr "Ei tulostimia"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:5
-#| msgid "Add a Printer"
 msgid "Add a Printer…"
 msgstr "Lisää tulostin…"
 
@@ -5021,12 +5008,10 @@ msgid "Purge _After"
 msgstr "Tyhjennä/tuhoa _viiveellä"
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "_Empty Trash"
 msgid "_Empty Trash…"
 msgstr "_Tyhjennä roskakori…"
 
 #: ../panels/privacy/privacy.ui.h:35
-#| msgid "_Purge Temporary Files"
 msgid "_Purge Temporary Files…"
 msgstr "Tu_hoa väliaikaistiedostot…"
 
@@ -6412,7 +6397,6 @@ msgid "Last Login"
 msgstr "Viimeisin kirjautuminen"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-#| msgid "Remove User Account"
 msgid "Remove User…"
 msgstr "Poista käyttäjätili…"
 
@@ -6614,26 +6598,26 @@ msgstr "Tulisi vastata kirjautumistilisi myöntäjän verkko-osoitetta."
 msgid "Failed to add account"
 msgstr "Tilin lisäys epäonnistui"
 
-#: ../panels/user-accounts/um-account-dialog.c:458
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Salasanat eivät täsmää."
 
-#: ../panels/user-accounts/um-account-dialog.c:713
-#: ../panels/user-accounts/um-account-dialog.c:759
-#: ../panels/user-accounts/um-account-dialog.c:780
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Tilin rekisteröinti epäonnistui"
 
-#: ../panels/user-accounts/um-account-dialog.c:903
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 "Tähän toimialueeseen vaadittavaa tunnistautumistapaa ei ole käytettävissä"
 
-#: ../panels/user-accounts/um-account-dialog.c:976
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Toimialueeseen liittyminen epäonnistui"
 
-#: ../panels/user-accounts/um-account-dialog.c:1037
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6641,7 +6625,7 @@ msgstr ""
 "Käyttäjätunnus ei kelvannut.\n"
 "Yritä uudelleen."
 
-#: ../panels/user-accounts/um-account-dialog.c:1044
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6649,11 +6633,11 @@ msgstr ""
 "Salasana ei kelvannut.\n"
 "Yritä uudelleen."
 
-#: ../panels/user-accounts/um-account-dialog.c:1052
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Toimialueeseen kirjautuminen epäonnistui"
 
-#: ../panels/user-accounts/um-account-dialog.c:1110
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Toimialuetta ei löytynyt. Kirjoititko sen oikein?"
 
@@ -7366,6 +7350,9 @@ msgstr "Yhteyspiste"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Tuloksia ei löytynyt"
+
+#~ msgid "0"
+#~ msgstr "0"
 
 #~ msgid "Add Account"
 #~ msgstr "Lisää tili"
