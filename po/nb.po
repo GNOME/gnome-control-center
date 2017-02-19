@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.23.x\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-13 18:58+0000\n"
-"PO-Revision-Date: 2017-02-13 20:37+0100\n"
+"POT-Creation-Date: 2017-02-16 19:57+0000\n"
+"PO-Revision-Date: 2017-02-19 14:58+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -115,7 +115,8 @@ msgstr "Du kan legge til bilder i mappen «%s» for å vise dem her"
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -1254,20 +1255,32 @@ msgstr "Start filter på nytt"
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Midlertidig deaktivert til i morgen"
 
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: ../panels/display/display.ui.h:6
+#: ../panels/display/display.ui.h:7
 msgid "Night Light"
 msgstr "Nattlys"
 
-#. When the sun comes up in the morning to the time the sun goes down in the evening
 #: ../panels/display/display.ui.h:8
-msgid "Sunset to sunrise"
+msgid "Schedule"
+msgstr "Tidsplan"
+
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
 msgstr "Solnedgang til soloppgang"
 
-#. This allows the user to schedule when the redshift functionality is triggered
 #: ../panels/display/display.ui.h:10
-msgid "Manual schedule"
-msgstr "Manuell tidsplan"
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Manuell"
 
 #: ../panels/display/display.ui.h:11
 msgid "From"
@@ -1291,15 +1304,6 @@ msgstr "PM"
 msgid "To"
 msgstr "Til"
 
-#: ../panels/display/display.ui.h:18
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/display/display.ui.h:19
-msgid "0"
-msgstr "0"
-
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
 msgid "Dis­plays"
@@ -1314,7 +1318,9 @@ msgstr "Velg hvordan tilkoblede skjermer og prosjektorer skal brukes"
 msgid ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
 "redshift;color;sunset;sunrise;"
-msgstr "Panel;Prosjektor;xrandr;Skjerm;Oppløsning;Oppdater;Skjerm;Natt;Lys;Blå;redshift;farge;solnedgang;soloppgang:"
+msgstr ""
+"Panel;Prosjektor;xrandr;Skjerm;Oppløsning;Oppdater;Skjerm;Natt;Lys;Blå;"
+"redshift;farge;solnedgang;soloppgang:"
 
 #. TRANSLATORS: AP type
 #: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
@@ -1811,7 +1817,6 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:189
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Reset All"
 msgstr "Nullstill alle"
 
@@ -1864,6 +1869,10 @@ msgstr "Snarvei;Repetisjon;Blinking;"
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "Nullstill alle …"
+
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Nullstill alle snarveier til sine forvalgte verdier"
@@ -1881,6 +1890,7 @@ msgid "Press Esc to cancel."
 msgstr "Trykk Esc for å avbryte."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/printers/details-dialog.ui.h:1
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
@@ -1911,11 +1921,9 @@ msgstr "Fjern"
 msgid "Enter the new shortcut"
 msgstr "Oppgi den nye snarveien"
 
-#. Translators: This button adds new printer.
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
-#: ../panels/printers/printers.ui.h:2
 msgid "Add"
 msgstr "Legg til"
 
@@ -2218,6 +2226,7 @@ msgstr "Identitet"
 #: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Adresse"
 
@@ -2265,13 +2274,6 @@ msgstr "Slett rute"
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Automatisk (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Manuell"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
@@ -2589,6 +2591,7 @@ msgid "Select file to import"
 msgstr "Velg fil som skal importeres"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
+#: ../panels/printers/pp-details-dialog.c:317
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -3658,6 +3661,10 @@ msgstr "2"
 msgid "3"
 msgstr "3"
 
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Åpent system"
@@ -4187,6 +4194,33 @@ msgstr "Klarte ikke å legge til ny skriver."
 msgid "Could not load ui: %s"
 msgstr "Klarte ikke å laste brukergrensesnitt: %s"
 
+#: ../panels/printers/details-dialog.ui.h:2
+#: ../panels/printers/printer-entry.ui.h:6
+msgid "Location"
+msgstr "Plassering"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/details-dialog.ui.h:4
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
+msgid "Driver"
+msgstr "Driver"
+
+#: ../panels/printers/details-dialog.ui.h:5
+msgid "Searching for preferred drivers…"
+msgstr "Søker etter foretrukne drivere …"
+
+#: ../panels/printers/details-dialog.ui.h:6
+msgid "Search for Drivers"
+msgstr "Søker etter drivere"
+
+#: ../panels/printers/details-dialog.ui.h:7
+msgid "Select from Database…"
+msgstr "Velg fra database …"
+
+#: ../panels/printers/details-dialog.ui.h:8
+msgid "Install PPD File…"
+msgstr "Installer PPD-fil …"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
 msgid "Prin­ters"
@@ -4242,6 +4276,27 @@ msgstr "Oppgi brukernavn og passord for å se skrivere på utskriftstjener."
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "Laster alternativer …"
+
+#. Translators: This is the title of the dialog. %s is the printer name.
+#: ../panels/printers/pp-details-dialog.c:100
+#: ../panels/printers/pp-details-dialog.c:412
+#, c-format
+msgid "%s Details"
+msgstr "Detaljer for %s"
+
+#: ../panels/printers/pp-details-dialog.c:169
+msgid "No suitable driver found"
+msgstr "Fant ingen passende driver"
+
+#: ../panels/printers/pp-details-dialog.c:313
+msgid "Select PPD File"
+msgstr "Velg PPD-fil"
+
+#: ../panels/printers/pp-details-dialog.c:322
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr "PostScript Printer Description-filer (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4534,10 +4589,163 @@ msgstr "Ingen forhåndsfiltrering"
 msgid "Manufacturer"
 msgstr "Produsent"
 
-#. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:250
-msgid "Driver"
-msgstr "Driver"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:368
+msgid "No Active Jobs"
+msgstr "Ingen aktive jobber"
+
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:373
+#, c-format
+msgid "%u Job"
+msgid_plural "%u Jobs"
+msgstr[0] "%u jobb"
+msgstr[1] "%u jobber"
+
+#. Translators: The printer is low on toner
+#: ../panels/printers/pp-printer-entry.c:470
+msgid "Low on toner"
+msgstr "Lite toner"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/pp-printer-entry.c:472
+msgid "Out of toner"
+msgstr "Tom for toner"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:475
+msgid "Low on developer"
+msgstr ""
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:478
+msgid "Out of developer"
+msgstr ""
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:480
+msgid "Low on a marker supply"
+msgstr "Lite farge"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:482
+msgid "Out of a marker supply"
+msgstr "Tom for farge"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/pp-printer-entry.c:484
+msgid "Open cover"
+msgstr "Åpent deksel"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/pp-printer-entry.c:486
+msgid "Open door"
+msgstr "Åpen dør"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/pp-printer-entry.c:488
+msgid "Low on paper"
+msgstr "Lite papir"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/pp-printer-entry.c:490
+msgid "Out of paper"
+msgstr "Tom for papir"
+
+#. Translators: The printer is offline
+#: ../panels/printers/pp-printer-entry.c:492
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Frakoblet"
+
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/pp-printer-entry.c:494
+#: ../panels/printers/pp-printer-entry.c:624
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Stoppet"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/pp-printer-entry.c:496
+msgid "Waste receptacle almost full"
+msgstr ""
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/pp-printer-entry.c:498
+msgid "Waste receptacle full"
+msgstr ""
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:500
+msgid "The optical photo conductor is near end of life"
+msgstr ""
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:502
+msgid "The optical photo conductor is no longer functioning"
+msgstr ""
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/pp-printer-entry.c:610
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Klar"
+
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/pp-printer-entry.c:615
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "Godtar ikke jobber"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/pp-printer-entry.c:620
+msgctxt "printer state"
+msgid "Processing"
+msgstr "Prosesserer"
+
+#: ../panels/printers/printer-entry.ui.h:1
+msgid "Printing Options"
+msgstr "Alternativer for utskrift"
+
+#: ../panels/printers/printer-entry.ui.h:2
+msgid "Printer Details"
+msgstr "Detaljer for skriver"
+
+#: ../panels/printers/printer-entry.ui.h:3
+#, fuzzy
+#| msgid "Printer Default"
+msgid "Use Printer by Default"
+msgstr "Forvalg for skriver"
+
+#: ../panels/printers/printer-entry.ui.h:4
+msgid "Remove Printer"
+msgstr "Fjern skriver"
+
+#: ../panels/printers/printer-entry.ui.h:5
+msgid "Model"
+msgstr "Modell"
+
+#: ../panels/printers/printer-entry.ui.h:7
+msgid "Ink Level"
+msgstr "Blekknivå"
+
+#. Translators: This is the message which follows the printer error.
+#: ../panels/printers/printer-entry.ui.h:9
+msgid "Please restart when the problem is resolved."
+msgstr ""
+
+#. Translators: This is the button which restarts the printer.
+#: ../panels/printers/printer-entry.ui.h:11
+msgid "Restart"
+msgstr "Start på nytt"
+
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "Legg til …"
 
 #: ../panels/printers/printers.ui.h:3
 msgid "No printers"
@@ -4545,8 +4753,8 @@ msgstr "Ingen skrivere"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:5
-msgid "Add a Printer"
-msgstr "Legg til en skriver"
+msgid "Add a Printer…"
+msgstr "Legg til en skriver …"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:7
@@ -4583,44 +4791,44 @@ msgstr "Stedstjenester"
 msgid "Usage & History"
 msgstr "Bruk og historikk"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "Tøm alle oppføringer fra papirkurven?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Alle elementer i papirkurven slettes permanent."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "_Tøm papirkurv"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "Slett alle midlertidige filer?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Alle midlertidige filer slettes permanent."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "_Fjern midlertidige filer"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Tøm papirkurv og midlertidige filer"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Bruk av programvare"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Problemrapportering"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4629,7 +4837,7 @@ msgstr ""
 "Problemrapportering hjelper oss med å forbedre %s. Rapporter sendes anonymt, "
 "og inneholder ikke personlig data."
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Personvernregler"
 
@@ -4754,6 +4962,14 @@ msgstr "Tøm _midlertidige filer automatisk"
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
 msgstr "Tøm _etter"
+
+#: ../panels/privacy/privacy.ui.h:34
+msgid "_Empty Trash…"
+msgstr "_Tøm papirkurv …"
+
+#: ../panels/privacy/privacy.ui.h:35
+msgid "_Purge Temporary Files…"
+msgstr "_Fjern midlertidige filer …"
 
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
@@ -6324,29 +6540,29 @@ msgstr "Ukjent feil"
 msgid "Should match the web address of your login provider."
 msgstr "Skal være lik kontotilbyders nettstedsadresse."
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "Klarte ikke å legge til en konto"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Passordene er ikke like."
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Klarte ikke å registrere konto"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "Ingen støttet måte å autentisere med dette domenet"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Klarte ikke å bli med i domenet"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6354,7 +6570,7 @@ msgstr ""
 "Brukernavnet virket ikke.\n"
 "Vennligst prøv igjen."
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6362,11 +6578,11 @@ msgstr ""
 "Passordet for påloggingen virket ikke.\n"
 "Vennligst prøv igjen."
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Klarte ikke å logge inn i domenet"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Fant ikke domenet. Kanskje du stavet det feil?"
 
@@ -7078,3 +7294,6 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Fant ingen resultater"
+
+#~ msgid "0"
+#~ msgstr "0"
