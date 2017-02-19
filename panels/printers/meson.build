@@ -57,11 +57,9 @@ sources += gnome.compile_resources(
   export: true
 )
 
-deps = common_deps + [
-  cups_dep,
+deps = common_deps + cups_deps + [
   m_dep,
-  polkit_gobject_dep,
-  dependency('smbclient')
+  polkit_gobject_dep
 ]
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
@@ -74,4 +72,3 @@ printers_panel_lib = static_library(
   c_args: cflags
 )
 panels_libs += [ printers_panel_lib ]
-
