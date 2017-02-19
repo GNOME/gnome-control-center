@@ -183,6 +183,16 @@ endif
 config_h.set('HAVE_IBUS', enable_ibus,
              description: 'Defined if IBus support is enabled')
 
+# Kerberos support
+enable_kerberos = get_option('kerberos')
+if enable_kerberos
+    kerberos_deps = [
+      dependency('krb5')
+    ]
+endif
+config_h.set('HAVE_KERBEROS', enable_kerberos,
+             description: 'Defined if kerberos support is enabled')
+
 # wayland
 enable_wayland = get_option('wayland')
 if enable_wayland
@@ -291,6 +301,7 @@ output += ' Panels \n'
 output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
 output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
+output += '     Kerberos ................................... ' + enable_kerberos.to_string() + '\n'
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
 output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Wayland .................................... ' + enable_wayland.to_string() + '\n'

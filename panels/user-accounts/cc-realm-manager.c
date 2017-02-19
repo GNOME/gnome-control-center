@@ -22,7 +22,9 @@
 
 #include "cc-realm-manager.h"
 
+#if defined(HAVE_KERBEROS)
 #include <krb5/krb5.h>
+#endif
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -613,6 +615,7 @@ login_closure_free (gpointer data)
         g_slice_free (LoginClosure, login);
 }
 
+#if defined(HAVE_KERBEROS)
 static krb5_error_code
 login_perform_kinit (krb5_context k5,
                      const gchar *realm,
@@ -764,6 +767,7 @@ kinit_thread_func (GTask *task,
 
         g_object_unref (task);
 }
+#endif
 
 void
 cc_realm_login (CcRealmObject *realm,
@@ -796,7 +800,12 @@ cc_realm_login (CcRealmObject *realm,
         g_task_set_task_data (task, login, login_closure_free);
 
         g_task_set_return_on_cancel (task, TRUE);
+#if defined(HAVE_KERBEROS)
         g_task_run_in_thread (task, kinit_thread_func);
+#else
+        g_task_return_new_error (task, CC_REALM_ERROR, CC_REALM_ERROR_NOT_SUPPORTED,
+                                 _("kerberos based authentication support is disabled"));
+#endif
 
         g_object_unref (kerberos);
 }

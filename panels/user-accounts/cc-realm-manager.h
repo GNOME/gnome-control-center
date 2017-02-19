@@ -29,6 +29,7 @@ typedef enum {
         CC_REALM_ERROR_BAD_PASSWORD,
         CC_REALM_ERROR_CANNOT_AUTH,
         CC_REALM_ERROR_GENERIC,
+        CC_REALM_ERROR_NOT_SUPPORTED,
 } CcRealmErrors;
 
 #define CC_REALM_ERROR (cc_realm_error_get_quark ())

@@ -156,16 +156,11 @@ sources = common_sources + files(
   'um-fingerprint-dialog.c',
 )
 
-# Kerberos support
-krb_dep = dependency('krb5', required: false)
-assert(krb_dep.found(), 'kerberos libraries not found in your path')
-
 deps = common_deps + [
   accounts_dep,
   gdk_pixbuf_dep,
   gnome_desktop_dep,
   liblanguage_dep,
-  krb_dep,
   m_dep,
   polkit_gobject_dep,
   dependency('pwquality', version: '>= 1.2.2')
@@ -173,6 +168,10 @@ deps = common_deps + [
 
 if enable_cheese
   deps += cheese_deps
+endif
+
+if enable_kerberos
+  deps += kerberos_deps
 endif
 
 cflags += [
