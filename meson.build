@@ -144,25 +144,33 @@ common_deps = [
   dependency('gtk+-3.0', version: '>= 3.22.20')
 ]
 
-# Check for CUPS 1.4 or newer
-cups_dep = dependency('cups', version : '>= 1.4', required: false)
-assert(cups_dep.found(), 'CUPS 1.4 or newer not found')
+# Optional dependency for the printers panel
+enable_cups = get_option('cups')
+if enable_cups
+  # Check for CUPS 1.4 or newer
+  cups_deps = [
+    dependency('cups', version : '>= 1.4'),
+    dependency('smbclient')
+  ]
 
-# https://bugzilla.gnome.org/show_bug.cgi?id=696766
-cups_cflags = []
-if cups_dep.version().version_compare('>= 1.6')
-  cups_cflags += '-D_PPD_DEPRECATED=""'
+  # https://bugzilla.gnome.org/show_bug.cgi?id=696766
+  cups_cflags = []
+  if cups_dep.version().version_compare('>= 1.6')
+    cups_cflags += '-D_PPD_DEPRECATED=""'
+  endif
+
+  # cups headers
+  check_headers = [
+    ['HAVE_CUPS_CUPS_H', 'cups/cups.h'],
+    ['HAVE_CUPS_PPD_H', 'cups/ppd.h']
+  ]
+
+  foreach header: check_headers
+    assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
+  endforeach
 endif
-
-# cups headers
-check_headers = [
-  ['HAVE_CUPS_CUPS_H', 'cups/cups.h'],
-  ['HAVE_CUPS_PPD_H', 'cups/ppd.h']
-]
-
-foreach header: check_headers
-  assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
-endforeach
+config_h.set('HAVE_CUPS', enable_cups,
+             description: 'Defined if cups support is enabled')
 
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
@@ -300,6 +308,7 @@ output += '     Optimized .................................. ' + control_center_
 output += ' Panels \n'
 output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
+output += '     Cups (Printer panel support) ..........;.... ' + enable_cups.to_string() + '\n'
 output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
 output += '     Kerberos ................................... ' + enable_kerberos.to_string() + '\n'
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
