@@ -123,6 +123,7 @@
                     <property name="height-request">50</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="hexpand">True</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -183,6 +184,7 @@
                   <object class="GtkBox" id="local-account-type">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
                     <style>
                       <class name="linked"/>
                     </style>
@@ -329,6 +331,7 @@
                     <property name="visible">True</property>
                     <property name="mode">discrete</property>
                     <property name="max-value">4</property>
+                    <property name="hexpand">True</property>
                     <offsets>
                       <offset name="low" value="1"/>
                       <offset name="high" value="3"/>
@@ -353,6 +356,7 @@
                     <property name="height-request">50</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="hexpand">True</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -414,6 +418,7 @@
                     <property name="max-width-chars">35</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="hexpand">True</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -530,6 +535,7 @@
                     <property name="height-request">50</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="hexpand">True</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -576,6 +582,7 @@
                     <property name="height-request">50</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="hexpand">True</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -776,13 +783,18 @@
   <object class="GtkSizeGroup" id="controls_sizegroup">
     <widgets>
       <widget name="local_username"/>
+      <widget name="local_username_hint"/>
       <widget name="local_name"/>
       <widget name="local-account-type"/>
       <widget name="local_password"/>
+      <widget name="local_hint"/>
       <widget name="local_verify"/>
+      <widget name="local_verify_hint"/>
       <widget name="enterprise_domain"/>
+      <widget name="enterprise_domain_hint"/>
       <widget name="enterprise_login"/>
       <widget name="enterprise_password"/>
+      <widget name="enterprise-hint"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup">
