@@ -90,9 +90,8 @@
                 <property name="hexpand">True</property>
                 <property name="column_spacing">6</property>
                 <property name="row_spacing">8</property>
-                <property name="border_width">30</property>
-                <property name="margin_start">10</property>
-                <property name="margin_end">10</property>
+                <property name="border_width">20</property>
+                <property name="margin_end">20</property>
                 <child>
                   <object class="GtkComboBoxText" id="local_username">
                     <property name="visible">True</property>
@@ -143,6 +142,7 @@
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_username</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -171,6 +171,7 @@
                     <property name="label" translatable="yes">_Full Name</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_name</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -222,6 +223,7 @@
                     <property name="label" translatable="yes">Account _Type</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-account-type</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -238,6 +240,7 @@
                     <property name="label" translatable="yes">Password</property>
                     <property name="margin_top">12</property>
                     <property name="halign">start</property>
+                    <property name="margin_start">20</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -251,6 +254,7 @@
                   <object class="GtkBox" id="box19">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
+                    <property name="margin_start">20</property>
                     <child>
                       <object class="GtkRadioButton" id="local_password_login_radio">
                         <property name="label" translatable="yes">Allow user to set a password when they next _login</property>
@@ -296,6 +300,7 @@
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_password</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -379,6 +384,7 @@
                     <property name="label" translatable="yes">_Confirm</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local_verify</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -445,6 +451,8 @@
                 <property name="hexpand">True</property>
                 <property name="row_spacing">8</property>
                 <property name="column_spacing">6</property>
+                <property name="border_width">20</property>
+                <property name="margin_end">20</property>
                 <child>
                   <object class="GtkLabel" id="label10">
                     <property name="visible">True</property>
@@ -474,6 +482,7 @@
                     <property name="label" translatable="yes">_Domain</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise_domain</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -493,6 +502,7 @@
                     <property name="label" translatable="yes">_Username</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise_login</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -512,6 +522,7 @@
                     <property name="label" translatable="yes">_Password</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enterprise_password</property>
+                    <property name="margin_start">20</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -645,6 +656,7 @@
                 <property name="hexpand">True</property>
                 <property name="column_spacing">6</property>
                 <property name="row_spacing">8</property>
+                <property name="border_width">20</property>
                 <child>
                   <object class="GtkLabel" id="label18">
                     <property name="visible">True</property>
@@ -653,6 +665,7 @@
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
                     <property name="margin_bottom">20</property>
+                    <property name="margin_end">20</property>
                     <property name="max_width_chars">55</property>
                     <property name="xalign">0</property>
                     <style>
