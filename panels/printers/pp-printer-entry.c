@@ -81,6 +81,7 @@ struct _PpPrinterEntryClass
   GtkListBoxRowClass parent_class;
 
   void (*printer_changed) (PpPrinterEntry *printer_entry);
+  void (*printer_delete)  (PpPrinterEntry *printer_entry);
 };
 
 G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
@@ -93,6 +94,7 @@ enum {
 
 enum {
   IS_DEFAULT_PRINTER,
+  PRINTER_DELETE,
   LAST_SIGNAL,
 };
 
@@ -530,25 +532,10 @@ clean_heads (GtkButton *button,
 }
 
 static void
-remove_printer_cb (GObject      *source_object,
-                   GAsyncResult *res,
-                   gpointer      user_data)
-{
-  pp_printer_delete_finish (PP_PRINTER (source_object), res, NULL);
-  g_object_unref (source_object);
-}
-
-static void
 remove_printer (GtkButton      *button,
                 PpPrinterEntry *self)
 {
-  PpPrinter *printer;
-
-  printer = pp_printer_new (self->printer_name);
-  pp_printer_delete_async (printer,
-                           NULL,
-                           remove_printer_cb,
-                           NULL);
+  g_signal_emit_by_name (self, "printer-delete", self->printer_name);
 }
 
 static void
@@ -1039,6 +1026,14 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (PpPrinterEntryClass, printer_changed),
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
+
+  signals[PRINTER_DELETE] =
+    g_signal_new ("printer-delete",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (PpPrinterEntryClass, printer_delete),
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
 }

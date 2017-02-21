@@ -89,6 +89,7 @@ struct _CcPrintersPanelPrivate
   guint            dbus_subscription_id;
 
   GtkWidget    *headerbar_buttons;
+  GtkRevealer  *notification;
   PPDList      *all_ppds_list;
   GCancellable *get_all_ppds_cancellable;
   GCancellable *subscription_renew_cancellable;
@@ -101,6 +102,7 @@ struct _CcPrintersPanelPrivate
   gboolean  select_new_printer;
 
   gchar    *renamed_printer_name;
+  gchar    *deleted_printer_name;
 
   GHashTable *printer_entries;
 
@@ -177,6 +179,23 @@ cc_printers_panel_constructed (GObject *object)
 }
 
 static void
+printer_removed_cb (GObject      *source_object,
+                    GAsyncResult *result,
+                    gpointer      user_data)
+{
+  GError *error = NULL;
+
+  pp_printer_delete_finish (PP_PRINTER (source_object), result, &error);
+  g_object_unref (source_object);
+
+  if (error != NULL)
+    {
+      g_warning ("Printer could not be deleted: %s", error->message);
+      g_error_free (error);
+    }
+}
+
+static void
 cc_printers_panel_dispose (GObject *object)
 {
   CcPrintersPanelPrivate *priv = CC_PRINTERS_PANEL (object)->priv;
@@ -235,6 +254,19 @@ cc_printers_panel_dispose (GObject *object)
       g_cancellable_cancel (priv->get_all_ppds_cancellable);
       g_object_unref (priv->get_all_ppds_cancellable);
       priv->get_all_ppds_cancellable = NULL;
+    }
+
+  if (priv->deleted_printer_name != NULL)
+    {
+      PpPrinter *printer;
+
+      printer = pp_printer_new (priv->deleted_printer_name);
+      g_clear_pointer (&priv->deleted_printer_name, g_free);
+
+      pp_printer_delete_async (printer,
+                               NULL,
+                               printer_removed_cb,
+                               NULL);
     }
 
   g_clear_pointer (&priv->printer_entries, g_hash_table_destroy);
@@ -589,6 +621,81 @@ free_dests (CcPrintersPanel *self)
 }
 
 static void
+on_printer_deletion_undone (GtkButton *button,
+                            gpointer   user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  gtk_revealer_set_reveal_child (priv->notification, FALSE);
+
+  g_clear_pointer (&priv->deleted_printer_name, g_free);
+  actualize_printers_list (self);
+}
+
+static void
+on_notification_dismissed (GtkButton *button,
+                           gpointer   user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->deleted_printer_name != NULL)
+    {
+      PpPrinter *printer;
+
+      printer = pp_printer_new (priv->deleted_printer_name);
+      pp_printer_delete_async (printer,
+                               NULL,
+                               printer_removed_cb,
+                               NULL);
+
+      g_clear_pointer (&priv->deleted_printer_name, g_free);
+    }
+
+  gtk_revealer_set_reveal_child (priv->notification, FALSE);
+}
+
+static void
+on_printer_deleted (PpPrinterEntry *printer_entry,
+                    gpointer        user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkLabel               *label;
+  gchar                  *notification_message;
+  gchar                  *printer_name;
+
+  gtk_widget_hide (GTK_WIDGET (printer_entry));
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  on_notification_dismissed (NULL, self);
+
+  g_object_get (printer_entry,
+                "printer-name", &printer_name,
+                NULL);
+
+  /* Translators: %s is the printer name */
+  notification_message = g_strdup_printf (_("Printer \"%s\" has been deleted"),
+                                          printer_name);
+  label = (GtkLabel*)
+    gtk_builder_get_object (priv->builder, "notification-label");
+  gtk_label_set_label (label, notification_message);
+
+  g_free (notification_message);
+
+  priv->deleted_printer_name = g_strdup (printer_name);
+  g_free (printer_name);
+
+  gtk_revealer_set_reveal_child (priv->notification, TRUE);
+}
+
+static void
 on_printer_changed (PpPrinterEntry *printer_entry,
                     gpointer        user_data)
 {
@@ -611,6 +718,10 @@ add_printer_entry (CcPrintersPanel *self,
   g_signal_connect (printer_entry,
                     "printer-changed",
                     G_CALLBACK (on_printer_changed),
+                    self);
+  g_signal_connect (printer_entry,
+                    "printer-delete",
+                    G_CALLBACK (on_printer_deleted),
                     self);
 
   gtk_list_box_insert (GTK_LIST_BOX (content), GTK_WIDGET (printer_entry), -1);
@@ -679,7 +790,12 @@ actualize_printers_list_cb (GObject      *source_object,
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "content");
   gtk_container_foreach (GTK_CONTAINER (widget), (GtkCallback) gtk_widget_destroy, NULL);
   for (i = 0; i < priv->num_dests; i++)
-    add_printer_entry (self, priv->dests[i]);
+    {
+      if (g_strcmp0 (priv->dests[i].name, priv->deleted_printer_name) == 0)
+          continue;
+
+      add_printer_entry (self, priv->dests[i]);
+    }
 }
 
 static void
@@ -993,7 +1109,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *widget;
   PpCups                 *cups;
   GError                 *error = NULL;
-  gchar                  *objects[] = { "main-vbox", "headerbar-buttons", "search-button", NULL };
+  gchar                  *objects[] = { "overlay", "headerbar-buttons", "search-button", NULL };
   guint                   builder_result;
 
   priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
@@ -1020,6 +1136,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->select_new_printer = FALSE;
 
   priv->renamed_printer_name = NULL;
+  priv->deleted_printer_name = NULL;
 
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
@@ -1049,9 +1166,20 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "headerbar-buttons");
   priv->headerbar_buttons = widget;
 
+  priv->notification = (GtkRevealer*)
+    gtk_builder_get_object (priv->builder, "notification");
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "notification-undo-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (on_printer_deletion_undone), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "notification-dismiss-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (on_notification_dismissed), self);
+
   /* add the top level widget */
   top_widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "main-vbox");
+    gtk_builder_get_object (priv->builder, "overlay");
 
   /* connect signals */
   widget = (GtkWidget*)

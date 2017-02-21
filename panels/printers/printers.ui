@@ -42,6 +42,56 @@
     </child>
   </object>
 
+<object class="GtkOverlay" id="overlay">
+  <property name="visible">True</property>
+  <child type="overlay">
+    <object class="GtkRevealer" id="notification">
+      <property name="visible">True</property>
+      <property name="halign">GTK_ALIGN_CENTER</property>
+      <property name="valign">GTK_ALIGN_START</property>
+      <child>
+        <object class="GtkBox">
+          <property name="visible">True</property>
+          <property name="spacing">6</property>
+          <style>
+            <class name="app-notification"/>
+          </style>
+          <child>
+            <object class="GtkLabel" id="notification-label">
+              <property name="visible">True</property>
+              <property name="wrap">True</property>
+              <property name="max_width_chars">50</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkButton" id="notification-undo-button">
+              <property name="visible">True</property>
+              <property name="can_focus">True</property>
+              <property name="valign">GTK_ALIGN_CENTER</property>
+              <property name="label" translatable="yes" comments="Translators: This is the button which allows undoing the removal of the printer.">Undo</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkButton" id="notification-dismiss-button">
+              <property name="visible">True</property>
+              <property name="valign">GTK_ALIGN_CENTER</property>
+              <style>
+                <class name="flat"/>
+              </style>
+              <child>
+                <object class="GtkImage">
+                  <property name="visible">True</property>
+                  <property name="icon_name">window-close-symbolic</property>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+
   <object class="GtkStack" id="main-vbox">
     <child>
       <object class="GtkBox">
@@ -209,6 +259,10 @@ doesn’t seem to be available.</property>
       </packing>
     </child>
   </object>
+
+  </child>
+</object>
+
   <object class="GtkSizeGroup" id="sizegroup1">
    <widgets>
       <widget name="back-button-1"/>
