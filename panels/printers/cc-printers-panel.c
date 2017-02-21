@@ -801,17 +801,24 @@ set_current_page (GObject      *source_object,
                   GAsyncResult *result,
                   gpointer      user_data)
 {
-  GtkWidget *widget = GTK_WIDGET (user_data);
-  PpCups    *cups = PP_CUPS (source_object);
-  gboolean   success;
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel *) user_data;
+  GtkWidget              *widget;
+  PpCups                 *cups = PP_CUPS (source_object);
+  gboolean               success;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
 
   success = pp_cups_connection_test_finish (cups, result);
   g_object_unref (source_object);
 
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
   if (success)
     gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty-state");
   else
     gtk_stack_set_visible_child_name (GTK_STACK (widget), "no-cups-page");
+
+  update_sensitivity (user_data);
 }
 
 static void
@@ -850,7 +857,7 @@ actualize_printers_list_cb (GObject      *source_object,
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
   if (priv->num_dests == 0 && !priv->new_printer_name)
-    pp_cups_connection_test_async (g_object_ref (cups), set_current_page, widget);
+    pp_cups_connection_test_async (g_object_ref (cups), set_current_page, self);
   else
     gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
 
@@ -874,6 +881,8 @@ actualize_printers_list_cb (GObject      *source_object,
 
       add_printer_entry (self, priv->dests[i]);
     }
+
+  update_sensitivity (user_data);
 }
 
 static void
@@ -1026,6 +1035,15 @@ update_sensitivity (gpointer user_data)
       g_ascii_strncasecmp (cups_server, "::1", 3) != 0 &&
       cups_server[0] != '/')
     local_server = FALSE;
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "headerbar-buttons");
+  gtk_widget_set_visible (widget, !no_cups);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "search-button");
+  gtk_widget_set_visible (widget, !no_cups);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "search-bar");
+  gtk_widget_set_visible (widget, !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button");
   gtk_widget_set_sensitive (widget, local_server && priv->is_authorized && !no_cups && !priv->new_printer_name);
