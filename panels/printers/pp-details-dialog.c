@@ -65,14 +65,24 @@ struct _PpDetailsDialogClass
   GtkDialogClass parent_class;
 };
 
-G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
 
-static gboolean
-printer_name_edit_cb (GtkWidget       *entry,
-                      GdkEventFocus   *event,
-                      PpDetailsDialog *self)
+static void
+pp_details_dialog_response_cb (GtkDialog *dialog,
+                               gint       response_id,
+                               gpointer   user_data)
 {
+  PpDetailsDialog *self = (PpDetailsDialog*) dialog;
   const gchar *new_name;
+  const gchar *new_location;
+
+  new_location = gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
+  if (g_strcmp0 (self->printer_location, new_location) != 0)
+    {
+      printer_set_location (self->printer_name, new_location);
+
+      self->printer_location = g_strdup (new_location);
+    }
 
   new_name = gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
   if (g_strcmp0 (self->printer_name, new_name) != 0)
@@ -81,8 +91,6 @@ printer_name_edit_cb (GtkWidget       *entry,
 
       self->printer_name = g_strdup (new_name);
     }
-
-  return FALSE;
 }
 
 static void
@@ -103,24 +111,6 @@ printer_name_changed (GtkEditable *editable,
   gtk_header_bar_set_title (GTK_HEADER_BAR (widget), title);
 
   g_free (title);
-}
-
-static gboolean
-printer_location_edit_cb (GtkWidget       *entry,
-                          GdkEventFocus   *event,
-                          PpDetailsDialog *self)
-{
-  const gchar *location;
-
-  location = gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
-  if (g_strcmp0 (self->printer_location, location) != 0)
-    {
-      printer_set_location (self->printer_name, location);
-
-      self->printer_location = g_strdup (location);
-    }
-
-  return FALSE;
 }
 
 static void
@@ -379,12 +369,11 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, search_for_drivers_button);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
 
-  gtk_widget_class_bind_template_callback (widget_class, printer_name_edit_cb);
   gtk_widget_class_bind_template_callback (widget_class, printer_name_changed);
-  gtk_widget_class_bind_template_callback (widget_class, printer_location_edit_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_for_drivers);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_in_dialog);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_manually);
+  gtk_widget_class_bind_template_callback (widget_class, pp_details_dialog_response_cb);
 }
 
 PpDetailsDialog *

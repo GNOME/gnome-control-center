@@ -10,8 +10,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="use-header-bar">1</property>
-    <signal name="response" handler="printer_name_edit_cb" swapped="yes"/>
-    <signal name="response" handler="printer_location_edit_cb" swapped="yes"/>
+    <signal name="response" handler="pp_details_dialog_response_cb"/>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="margin">20</property>
@@ -37,7 +36,6 @@
               <object class="GtkEntry" id="printer_name_entry">
                 <property name="halign">fill</property>
                 <property name="width_request">320</property>
-                <signal name="focus-out-event" handler="printer_name_edit_cb"/>
                 <signal name="changed" handler="printer_name_changed"/>
               </object>
               <packing>
@@ -63,7 +61,6 @@
               <object class="GtkEntry" id="printer_location_entry">
                 <property name="width_request">320</property>
                 <property name="halign">fill</property>
-                <signal name="focus-out-event" handler="printer_location_edit_cb"/>
               </object>
               <packing>
                 <property name="left-attach">1</property>
