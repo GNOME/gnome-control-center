@@ -42,6 +42,7 @@
 struct _PpDetailsDialog {
   GtkDialog parent;
 
+  GtkLabel *dialog_title;
   GtkEntry *printer_name_entry;
   GtkEntry *printer_location_entry;
   GtkLabel *printer_address_label;
@@ -113,7 +114,6 @@ printer_name_changed (GtkEditable *editable,
                       gpointer     user_data)
 {
   PpDetailsDialog *self = (PpDetailsDialog *) user_data;
-  GtkWidget *widget;
   const gchar *name;
   gchar *title;
 
@@ -121,9 +121,7 @@ printer_name_changed (GtkEditable *editable,
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), name);
-
-  widget = gtk_dialog_get_header_bar (GTK_DIALOG (self));
-  gtk_header_bar_set_title (GTK_HEADER_BAR (widget), title);
+  gtk_label_set_label (self->dialog_title, title);
 
   g_free (title);
 }
@@ -376,6 +374,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/details-dialog.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_label);
@@ -414,7 +413,7 @@ pp_details_dialog_new (GtkWindow            *parent,
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), printer_name);
-  gtk_window_set_title (GTK_WINDOW (self), title);
+  gtk_label_set_label (self->dialog_title, title);
 
   printer_url = g_strdup_printf ("<a href=\"http://%s:%d\">%s</a>", printer_address, ippPort (), printer_address);
   gtk_label_set_markup (GTK_LABEL (self->printer_address_label), printer_url);
