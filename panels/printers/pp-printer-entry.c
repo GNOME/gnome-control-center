@@ -29,7 +29,7 @@
 #include "pp-jobs-dialog.h"
 #include "pp-utils.h"
 
-#define SUPPLY_BAR_HEIGHT 12
+#define SUPPLY_BAR_HEIGHT 8
 
 struct _PpPrinterEntry
 {
@@ -164,6 +164,27 @@ typedef struct
   gchar *marker_types;
 } InkLevelData;
 
+/* To tone down the colors in the supply level bar
+ * we shade them by darkening the hue.
+ *
+ * Obs.: we don't know whether the color is already
+ * shaded.
+ *
+ */
+static void
+tone_down_color (GdkRGBA *color,
+                 gdouble  hue_ratio,
+                 gdouble  saturation_ratio,
+                 gdouble  value_ratio)
+{
+  gdouble h, s, v;
+
+  gtk_rgb_to_hsv (color->red, color->green, color->blue,
+                  &h, &s, &v);
+  gtk_hsv_to_rgb (h * hue_ratio, s * saturation_ratio, v * value_ratio,
+                  &color->red, &color->green, &color->blue);
+}
+
 static gboolean
 supply_levels_draw_cb (GtkWidget    *widget,
                        cairo_t      *cr,
@@ -233,13 +254,20 @@ supply_levels_draw_cb (GtkWidget    *widget,
                 value = ((MarkerItem*) tmp_list->data)->level;
 
                 gdk_rgba_parse (&color, ((MarkerItem*) tmp_list->data)->color);
+                tone_down_color (&color, 1.0, 0.6, 0.9);
 
                 if (value > 0)
                   {
                     display_value = value / 100.0 * (width - 3.0);
                     gdk_cairo_set_source_rgba (cr, &color);
-                    cairo_rectangle (cr, 3.5, 3.5, display_value, SUPPLY_BAR_HEIGHT - 3.0);
+                    cairo_rectangle (cr, 2.0, 2.0, display_value, SUPPLY_BAR_HEIGHT);
                     cairo_fill (cr);
+
+                    tone_down_color (&color, 1.0, 1.0, 0.85);
+                    gdk_cairo_set_source_rgba (cr, &color);
+                    cairo_set_line_width (cr, 1.0);
+                    cairo_rectangle (cr, 1.5, 1.5, display_value, SUPPLY_BAR_HEIGHT + 1);
+                    cairo_stroke (cr);
                   }
 
                 if (tooltip_text)
@@ -256,7 +284,7 @@ supply_levels_draw_cb (GtkWidget    *widget,
                                                   ((MarkerItem*) tmp_list->data)->name);
               }
 
-            gtk_render_frame (context, cr, 1, 1, width - 1, SUPPLY_BAR_HEIGHT + 3);
+            gtk_render_frame (context, cr, 1, 1, width - 1, SUPPLY_BAR_HEIGHT);
 
             for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
               {
