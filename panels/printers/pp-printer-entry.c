@@ -191,6 +191,7 @@ supply_levels_draw_cb (GtkWidget    *widget,
                        InkLevelData *inklevel)
 {
   GtkStyleContext        *context;
+  gboolean                is_empty = TRUE;
   gchar                  *tooltip_text = NULL;
   gint                    width;
   gint                    height;
@@ -268,6 +269,8 @@ supply_levels_draw_cb (GtkWidget    *widget,
                     cairo_set_line_width (cr, 1.0);
                     cairo_rectangle (cr, 1.5, 1.5, display_value, SUPPLY_BAR_HEIGHT + 1);
                     cairo_stroke (cr);
+
+                    is_empty = FALSE;
                   }
 
                 if (tooltip_text)
@@ -307,6 +310,13 @@ supply_levels_draw_cb (GtkWidget    *widget,
         gtk_widget_set_tooltip_text (widget, NULL);
         gtk_widget_set_has_tooltip (widget, FALSE);
       }
+    }
+
+  if (is_empty)
+    {
+      GtkWidget *frame = gtk_widget_get_parent (widget);
+      gtk_style_context_add_class (gtk_widget_get_style_context (frame),
+                                   "background");
     }
 
   return TRUE;
