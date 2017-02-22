@@ -654,6 +654,36 @@ fill_accounts_listbox (CcGoaPanel *self)
   g_list_free_full (accounts, g_object_unref);
 }
 
+/* ---------------------------------------------------------------------------------------------------- */
+
+static GtkWidget *
+get_row_for_account (CcGoaPanel *self,
+                     GoaObject *object)
+{
+  GtkWidget *row;
+  GList *children, *l;
+
+  row = NULL;
+  children = gtk_container_get_children (GTK_CONTAINER (self->accounts_listbox));
+
+  for (l = children; l != NULL; l = l->next)
+    {
+      GoaObject *row_object;
+
+      row_object = g_object_get_data (G_OBJECT (l->data), "goa-object");
+      if (row_object == object)
+        {
+          row = l->data;
+          break;
+        }
+    }
+
+  g_list_free (children);
+  return row;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
 static void
 on_account_added (GoaClient *client,
                   GoaObject *object,
@@ -800,33 +830,6 @@ get_all_providers_cb (GObject      *source,
 
 
 /* ---------------------------------------------------------------------------------------------------- */
-
-
-static GtkWidget *
-get_row_for_account (CcGoaPanel *self,
-                     GoaObject *object)
-{
-  GtkWidget *row;
-  GList *children, *l;
-
-  row = NULL;
-  children = gtk_container_get_children (GTK_CONTAINER (self->accounts_listbox));
-
-  for (l = children; l != NULL; l = l->next)
-    {
-      GoaObject *row_object;
-
-      row_object = g_object_get_data (G_OBJECT (l->data), "goa-object");
-      if (row_object == object)
-        {
-          row = l->data;
-          break;
-        }
-    }
-
-  g_list_free (children);
-  return row;
-}
 
 static void
 cancel_notification_timeout (CcGoaPanel *self)
