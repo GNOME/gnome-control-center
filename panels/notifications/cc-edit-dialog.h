@@ -27,7 +27,8 @@ G_BEGIN_DECLS
 void cc_build_edit_dialog (CcNotificationsPanel *panel,
                            GAppInfo             *app,
                            GSettings            *settings,
-                           GSettings            *master_settings);
+                           GSettings            *master_settings,
+                           GDBusProxy           *perm_store);
 
 G_END_DECLS
 

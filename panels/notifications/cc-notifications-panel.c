@@ -48,6 +48,8 @@ struct _CcNotificationsPanel {
 
   GList *sections;
   GList *sections_reverse;
+
+  GDBusProxy *perm_store;
 };
 
 struct _CcNotificationsPanelClass {
@@ -93,6 +95,7 @@ cc_notifications_panel_finalize (GObject *object)
   CcNotificationsPanel *panel = CC_NOTIFICATIONS_PANEL (object);
 
   g_clear_object (&panel->apps_load_cancellable);
+  g_clear_object (&panel->perm_store);
 
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->finalize (object);
 }
@@ -136,6 +139,29 @@ keynav_failed (GtkWidget            *widget,
     }
 
   return FALSE;
+}
+
+static void
+on_perm_store_ready (GObject *source_object,
+                     GAsyncResult *res,
+                     gpointer user_data)
+{
+  CcNotificationsPanel *self;
+  GDBusProxy *proxy;
+  GError *error = NULL;
+
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (proxy == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+          g_warning ("Failed to connect to xdg-app permission store: %s",
+                     error->message);
+      g_error_free (error);
+
+      return;
+    }
+  self = user_data;
+  self->perm_store = proxy;
 }
 
 static void
@@ -214,6 +240,16 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   gtk_container_add (GTK_CONTAINER (panel), w);
 
   gtk_widget_show (w);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            "/org/freedesktop/impl/portal/PermissionStore",
+                            "org.freedesktop.impl.portal.PermissionStore",
+                            panel->apps_load_cancellable,
+                            on_perm_store_ready,
+                            panel);
 }
 
 static const char *
@@ -535,7 +571,7 @@ select_app (GtkListBox           *list_box,
   Application *app;
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
-  cc_build_edit_dialog (panel, app->app_info, app->settings, panel->master_settings);
+  cc_build_edit_dialog (panel, app->app_info, app->settings, panel->master_settings, panel->perm_store);
 }
 
 static void
