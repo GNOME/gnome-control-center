@@ -71,6 +71,7 @@ struct _CcUserPanelPrivate {
         GSettings *login_screen_settings;
 
         GtkWidget *headerbar_buttons;
+        GtkWidget *stack;
         GtkWidget *main_box;
         UmCarousel *carousel;
         ActUser *selected_user;
@@ -92,8 +93,13 @@ get_widget (CcUserPanelPrivate *d, const char *name)
         return (GtkWidget *)gtk_builder_get_object (d->builder, name);
 }
 
+/* Headerbar button states. */
 #define PAGE_LOCK "_lock"
 #define PAGE_ADDUSER "_adduser"
+
+/* Panel states */
+#define PAGE_NO_USERS "_empty_state"
+#define PAGE_USERS "_users"
 
 static void show_restart_notification (CcUserPanelPrivate *d, const gchar *locale);
 static gint user_compare (gconstpointer i, gconstpointer u);
@@ -273,6 +279,7 @@ reload_users (CcUserPanelPrivate *d, ActUser *selected_user)
         UmCarouselItem *item;
         GtkSettings *settings;
         gboolean animations;
+        gboolean can_reload;
 
         settings = gtk_settings_get_default ();
 
@@ -285,6 +292,13 @@ reload_users (CcUserPanelPrivate *d, ActUser *selected_user)
 
         list = act_user_manager_list_users (d->um);
         g_debug ("Got %d users\n", g_slist_length (list));
+
+        can_reload = (list != NULL);
+        gtk_stack_set_visible_child_name (GTK_STACK (d->stack),
+                                          can_reload ? PAGE_USERS : PAGE_NO_USERS);
+
+        if (!can_reload)
+            return;
 
         list = g_slist_sort (list, (GCompareFunc) sort_users);
         for (l = list; l; l = l->next) {
@@ -1478,13 +1492,14 @@ cc_user_panel_init (CcUserPanel *self)
         g_object_unref (provider);
 
         d->headerbar_buttons = get_widget (d, "headerbar-buttons");
+        d->stack = get_widget (d, "stack");
         d->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         d->password_dialog = um_password_dialog_new ();
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
-        gtk_container_add (GTK_CONTAINER (self), get_widget (d, "overlay"));
+        gtk_container_add (GTK_CONTAINER (self), d->stack);
         d->history_dialog = um_history_dialog_new ();
         setup_main_window (self);
 }

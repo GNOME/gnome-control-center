@@ -42,6 +42,11 @@
       <column type="gchararray"/>
     </columns>
   </object>
+
+  <object class="GtkStack" id="stack">
+    <property name="visible">True</property>
+    <property name="visible-child">empty-state</property>
+    <child>
       <object class="GtkOverlay" id="overlay">
         <property name="visible">True</property>
         <child type="overlay">
@@ -435,6 +440,49 @@
           </object>
         </child>
       </object>
+      <packing>
+        <property name="name">_users</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="empty-state">
+        <property name="visible">True</property>
+        <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+        <property name="valign">GTK_ALIGN_CENTER</property>
+        <property name="spacing">12</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="icon_name">avatar-default-symbolic</property>
+            <property name="pixel_size">192</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes" comments="Translators: This is the empty state page label which states that there are no users to show in the panel.">No Users Found</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.6"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Unlock to add a user account.</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="name">_empty_state</property>
+      </packing>
+    </child>
+  </object>
+
   <object class="GtkSizeGroup" id="user-icon-sizegroup">
     <property name="mode">both</property>
     <widgets>
