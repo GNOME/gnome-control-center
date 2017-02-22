@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-11-26 16:32+0000\n"
-"PO-Revision-Date: 2016-11-29 00:01+0800\n"
+"POT-Creation-Date: 2017-02-16 19:57+0000\n"
+"PO-Revision-Date: 2017-02-21 15:55+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -110,17 +110,17 @@ msgstr "您可以將影像加入您的%s資料夾，它們會顯示在這裡"
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1571
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2226
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
 #: ../panels/network/net-device-wifi.c:1298
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2091
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -129,9 +129,9 @@ msgstr "您可以將影像加入您的%s資料夾，它們會顯示在這裡"
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
-#: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:705
-#: ../panels/user-accounts/um-user-panel.c:723
+#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-user-panel.c:644
+#: ../panels/user-accounts/um-user-panel.c:662
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -1077,21 +1077,22 @@ msgstr "改變系統時刻與日期設定值"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "要改變時刻或日期設定值，您需要通過核對。"
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:592
 msgid "Lid Closed"
 msgstr "上蓋已經關閉"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:586
+#: ../panels/display/cc-display-panel.c:595
 msgid "Mirrored"
 msgstr "相同顯示"
 
-#: ../panels/display/cc-display-panel.c:588
-#: ../panels/display/cc-display-panel.c:2440
+#: ../panels/display/cc-display-panel.c:597
+#: ../panels/display/cc-display-panel.c:2449
 msgid "Primary"
 msgstr "主要"
 
-#: ../panels/display/cc-display-panel.c:590
+#: ../panels/display/cc-display-panel.c:599
+#: ../panels/display/cc-display-panel.c:2786
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1105,117 +1106,194 @@ msgstr "主要"
 msgid "Off"
 msgstr "關閉"
 
-#: ../panels/display/cc-display-panel.c:593
+#: ../panels/display/cc-display-panel.c:602
 msgid "Secondary"
 msgstr "次要"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1568
+#: ../panels/display/cc-display-panel.c:1577
 msgid "Arrange Combined Displays"
 msgstr "排列顯示器的組合方式"
 
-#: ../panels/display/cc-display-panel.c:1572
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:1581
+#: ../panels/display/cc-display-panel.c:2227
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "套用(_A)"
 
-#: ../panels/display/cc-display-panel.c:1596
+#: ../panels/display/cc-display-panel.c:1605
 msgid "Drag displays to rearrange them"
 msgstr "拖拉顯示器以重新排列"
 
 #. translators: example string is "60 Hz (NTSC)"
 #. * NTSC is https://en.wikipedia.org/wiki/NTSC
-#: ../panels/display/cc-display-panel.c:1803
+#: ../panels/display/cc-display-panel.c:1812
 #, c-format
 msgid "%d Hz (NTSC)"
 msgstr "%d Hz (NTSC)"
 
 #. translators: example string is "60 Hz"
-#: ../panels/display/cc-display-panel.c:1809
+#: ../panels/display/cc-display-panel.c:1818
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../panels/display/cc-display-panel.c:2270
+#: ../panels/display/cc-display-panel.c:2279
 msgid "Rotate counterclockwise by 90°"
 msgstr "逆時針"
 
-#: ../panels/display/cc-display-panel.c:2288
+#: ../panels/display/cc-display-panel.c:2297
 msgid "Rotate by 180°"
 msgstr "旋轉 180°"
 
-#: ../panels/display/cc-display-panel.c:2306
+#: ../panels/display/cc-display-panel.c:2315
 msgid "Rotate clockwise by 90°"
 msgstr "順時針旋轉 90°"
 
-#: ../panels/display/cc-display-panel.c:2327
+#: ../panels/display/cc-display-panel.c:2336
 msgid "Size"
 msgstr "尺寸"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2342
+#: ../panels/display/cc-display-panel.c:2351
 msgid "Aspect Ratio"
 msgstr "長寬比"
 
-#: ../panels/display/cc-display-panel.c:2365
+#: ../panels/display/cc-display-panel.c:2374
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "解析度"
 
-#: ../panels/display/cc-display-panel.c:2385
+#: ../panels/display/cc-display-panel.c:2394
 msgid "Adjust for TV"
 msgstr "調整為電視"
 
-#: ../panels/display/cc-display-panel.c:2409
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Refresh Rate"
 msgstr "更新率"
 
-#: ../panels/display/cc-display-panel.c:2441
+#: ../panels/display/cc-display-panel.c:2450
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "在這個顯示器顯示頂端列與活動概覽"
 
-#: ../panels/display/cc-display-panel.c:2447
+#: ../panels/display/cc-display-panel.c:2456
 msgid "Secondary Display"
 msgstr "次要顯示器"
 
-#: ../panels/display/cc-display-panel.c:2448
+#: ../panels/display/cc-display-panel.c:2457
 msgid "Join this display with another to create an extra workspace"
 msgstr "將本顯示器與另一個顯示器組合以建立額外的工作空間"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2464
 msgid "Presentation"
 msgstr "展示"
 
-#: ../panels/display/cc-display-panel.c:2456
+#: ../panels/display/cc-display-panel.c:2465
 msgid "Show slideshows and media only"
 msgstr "只顯示投影片與媒體"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2461
+#: ../panels/display/cc-display-panel.c:2470
 msgid "Mirror"
 msgstr "相同"
 
-#: ../panels/display/cc-display-panel.c:2462
+#: ../panels/display/cc-display-panel.c:2471
 msgid "Show your existing view on both displays"
 msgstr "兩臺顯示器上皆顯示您現在的檢視畫面"
 
-#: ../panels/display/cc-display-panel.c:2468
+#: ../panels/display/cc-display-panel.c:2477
 msgid "Turn Off"
 msgstr "關閉"
 
-#: ../panels/display/cc-display-panel.c:2469
+#: ../panels/display/cc-display-panel.c:2478
 msgid "Don’t use this display"
 msgstr "不使用這臺顯示器"
 
-#: ../panels/display/cc-display-panel.c:2780
+#. TRANSLATORS: the state of the night light setting
+#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:590
+#: ../panels/universal-access/cc-ua-panel.c:603
+#: ../panels/universal-access/cc-ua-panel.c:615
+#: ../panels/universal-access/cc-ua-panel.c:786
+msgid "On"
+msgstr "開啟"
+
+#: ../panels/display/cc-display-panel.c:2826
 msgid "Could not get screen information"
 msgstr "無法取得螢幕資訊"
 
-#: ../panels/display/cc-display-panel.c:2811
+#: ../panels/display/cc-display-panel.c:2857
 msgid "_Arrange Combined Displays"
 msgstr "排列顯示器組合方式(_A)"
+
+#: ../panels/display/cc-display-panel.c:2878
+msgid "_Night Light"
+msgstr "夜光(_N)"
+
+#. This cancels the redshift inhibit.
+#: ../panels/display/display.ui.h:2
+msgid "Restart Filter"
+msgstr "重新啟動過濾器"
+
+#. Inhibit the redshift functionality until the next day starts
+#: ../panels/display/display.ui.h:4
+msgid "Temporarily Disabled Until Tomorrow"
+msgstr "暫時停用直到明天"
+
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr "夜光讓螢幕顏色變得溫暖。這可以幫助防止眼睛疲勞和失眠。"
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: ../panels/display/display.ui.h:7
+msgid "Night Light"
+msgstr "夜光"
+
+#: ../panels/display/display.ui.h:8
+msgid "Schedule"
+msgstr "排程"
+
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
+msgstr "日落到日出"
+
+#: ../panels/display/display.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "手動"
+
+#: ../panels/display/display.ui.h:11
+msgid "From"
+msgstr "從"
+
+#: ../panels/display/display.ui.h:12
+msgid ":"
+msgstr ":"
+
+#. This is the short form for the time period in the morning
+#: ../panels/display/display.ui.h:14
+msgid "AM"
+msgstr "上午"
+
+#. This is the short form for the time period in the afternoon
+#: ../panels/display/display.ui.h:16
+msgid "PM"
+msgstr "下午"
+
+#: ../panels/display/display.ui.h:17
+msgid "To"
+msgstr "到"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1228,69 +1306,79 @@ msgstr "選擇如何使用連接的顯示器和投影機"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
 msgstr ""
-"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;面板;投影機;螢幕;解"
-"析度;重新整理;螢幕;"
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;面板;投影機;螢幕;解析度;重新整理;螢幕;夜晚;夜"
+"光;藍光;日出;日落;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:377 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "不明"
 
-#: ../panels/info/cc-info-panel.c:510
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
+#: ../panels/info/cc-info-panel.c:517
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
 msgstr "%s %d 位元 (組建 ID：%s)"
 
-#: ../panels/info/cc-info-panel.c:512
+#: ../panels/info/cc-info-panel.c:519
 #, c-format
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d 位元 (組建 ID：%s)"
 
-#: ../panels/info/cc-info-panel.c:520
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d 位元"
 
-#: ../panels/info/cc-info-panel.c:522
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%d-bit"
 msgstr "%d 位元"
 
-#: ../panels/info/cc-info-panel.c:1168
+#: ../panels/info/cc-info-panel.c:1175
 msgid "Ask what to do"
 msgstr "詢問要做什麼"
 
-#: ../panels/info/cc-info-panel.c:1172
+#: ../panels/info/cc-info-panel.c:1179
 msgid "Do nothing"
 msgstr "不做任何事"
 
-#: ../panels/info/cc-info-panel.c:1176
+#: ../panels/info/cc-info-panel.c:1183
 msgid "Open folder"
 msgstr "開啟資料夾"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1274
 msgid "Other Media"
 msgstr "其他媒體"
 
-#: ../panels/info/cc-info-panel.c:1298
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for audio CDs"
 msgstr "選擇播放音樂 CD 的應用程式"
 
-#: ../panels/info/cc-info-panel.c:1299
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application for video DVDs"
 msgstr "選擇播放影片 DVD 的應用程式"
 
-#: ../panels/info/cc-info-panel.c:1300
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a music player is connected"
 msgstr "選擇當音樂播放器連接時要執行的應用程式"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application to run when a camera is connected"
 msgstr "選擇當攝影機連接時要執行的應用程式"
 
-#: ../panels/info/cc-info-panel.c:1302
+#: ../panels/info/cc-info-panel.c:1309
 msgid "Select an application for software CDs"
 msgstr "選擇軟體 CD 要用的應用程式"
 
@@ -1299,71 +1387,71 @@ msgstr "選擇軟體 CD 要用的應用程式"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1314
+#: ../panels/info/cc-info-panel.c:1321
 msgid "audio DVD"
 msgstr "音樂 DVD"
 
-#: ../panels/info/cc-info-panel.c:1315
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank Blu-ray disc"
 msgstr "空白 Blu-ray 碟片"
 
-#: ../panels/info/cc-info-panel.c:1316
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank CD disc"
 msgstr "空白 CD 碟片"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank DVD disc"
 msgstr "空白 DVD 碟片"
 
-#: ../panels/info/cc-info-panel.c:1318
+#: ../panels/info/cc-info-panel.c:1325
 msgid "blank HD DVD disc"
 msgstr "空白 HD DVD 碟片"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1326
 msgid "Blu-ray video disc"
 msgstr "Blu-Ray 影片碟片"
 
-#: ../panels/info/cc-info-panel.c:1320
+#: ../panels/info/cc-info-panel.c:1327
 msgid "e-book reader"
 msgstr "電子書閱讀器"
 
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:1328
 msgid "HD DVD video disc"
 msgstr "HD DVD 影片碟片"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Picture CD"
 msgstr "照片 CD"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Super Video CD"
 msgstr "SVCD"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Video CD"
 msgstr "影片 CD"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:1332
 msgid "Windows software"
 msgstr "Windows 軟體"
 
-#: ../panels/info/cc-info-panel.c:1448
+#: ../panels/info/cc-info-panel.c:1455
 msgid "Section"
 msgstr "節"
 
-#: ../panels/info/cc-info-panel.c:1457 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "概覽"
 
-#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "預設應用程式"
 
-#: ../panels/info/cc-info-panel.c:1468 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "可移除式媒體"
 
-#: ../panels/info/cc-info-panel.c:1493
+#: ../panels/info/cc-info-panel.c:1500
 #, c-format
 msgid "Version %s"
 msgstr "版本 %s"
@@ -1554,7 +1642,7 @@ msgid "Launch help browser"
 msgstr "執行說明文件瀏覽器"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
+#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "設定值"
@@ -1667,7 +1755,7 @@ msgstr "高對比開或關"
 #: ../panels/keyboard/cc-keyboard-manager.c:522
 #: ../panels/keyboard/cc-keyboard-manager.c:830
 msgid "Custom Shortcuts"
-msgstr "自訂捷徑鍵"
+msgstr "自訂快捷鍵"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
@@ -1704,34 +1792,55 @@ msgstr "組合鍵"
 msgid "Modifiers-only switch to next source"
 msgstr "只以修飾鍵切換至下個來源"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
-msgid "Reset the shortcut to its default value"
-msgstr "將捷徑鍵重設回預設值"
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+msgid "Reset All Shortcuts?"
+msgstr "重設所有的快捷鍵？"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr "重設快捷鍵可能會影響您自訂的快捷鍵。這個動作不能撤銷。"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "取消"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+msgid "Reset All"
+msgstr "全部重設"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
+msgid "Reset the shortcut to its default value"
+msgstr "將快捷鍵重設回預設值"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s 已經被 <b>%s</b> 使用。若您希望替換，則 %s 會被停用"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Custom Shortcut"
-msgstr "設定自訂捷徑鍵"
+msgstr "設定自訂快捷鍵"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Shortcut"
-msgstr "設定捷徑鍵"
+msgstr "設定快捷鍵"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
-msgstr "請輸入新的捷徑鍵來更改 <b>%s</b>。"
+msgstr "請輸入新的快捷鍵來更改 <b>%s</b>。"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1036
 msgid "Add Custom Shortcut"
-msgstr "加入自訂捷徑鍵"
+msgstr "加入自訂快捷鍵"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
@@ -1740,18 +1849,31 @@ msgstr "鍵盤"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:3
 msgid "View and change keyboard shortcuts and set your typing preferences"
-msgstr "檢視與變更鍵盤捷徑鍵並設定您的輸入偏好設定"
+msgstr "檢視與變更鍵盤快捷鍵並設定您的輸入偏好設定"
 
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:5
 msgid "Shortcut;Repeat;Blink;"
-msgstr "Shortcut;Repeat;Blink;捷徑鍵;重複;閃爍;"
+msgstr "Shortcut;Repeat;Blink;快捷鍵;重複;閃爍;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "No keyboard shortcut found"
-msgstr "找不到鍵盤捷徑鍵"
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "鍵盤快捷鍵"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "全部重設…"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "將快捷鍵重設回它們預設的按鍵組合"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+msgid "No keyboard shortcut found"
+msgstr "找不到鍵盤快捷鍵"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "嘗試不同的搜尋內容"
 
@@ -1760,6 +1882,7 @@ msgid "Press Esc to cancel."
 msgstr "按下 Esc 鍵取消。"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/printers/details-dialog.ui.h:1
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
@@ -1771,47 +1894,36 @@ msgstr "指令"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:5
 msgid "Shortcut"
-msgstr "捷徑鍵"
+msgstr "快捷鍵"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "編輯"
+msgid "Set Shortcut…"
+msgstr "設定快捷鍵…"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
-msgctxt "button"
-msgid "Set Shortcut"
-msgstr "設定捷徑鍵"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "沒有"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "移除"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
-msgstr "輸入新的捷徑鍵"
+msgstr "輸入新的快捷鍵"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "取消"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "加入"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "取代"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "設定"
 
@@ -1964,7 +2076,7 @@ msgstr "802.1x 防護(_S)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14 ../panels/wacom/wacom-stylus-page.ui.h:8
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "頁 1"
 
@@ -1983,7 +2095,6 @@ msgstr "內部核對(_A)"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:16
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "頁 2"
@@ -2106,6 +2217,7 @@ msgstr "身分"
 #: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "地址"
 
@@ -2153,13 +2265,6 @@ msgstr "刪除路由"
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "自動 (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "手動"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
@@ -2472,9 +2577,9 @@ msgid "Select file to import"
 msgstr "選擇要匯入的檔案"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2092
+#: ../panels/printers/pp-details-dialog.c:317
 #: ../panels/sharing/cc-sharing-panel.c:376
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
 msgstr "開啟(_O)"
 
@@ -2569,7 +2674,7 @@ msgstr "昨日"
 
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:13
+#: ../panels/network/panel-common.c:649
 msgid "IP Address"
 msgstr "IP 位址"
 
@@ -2778,6 +2883,7 @@ msgstr "群組密碼"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "使用者名稱"
 
@@ -2800,7 +2906,7 @@ msgstr "詳細資料"
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
 #: ../panels/sharing/sharing.ui.h:9
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Password"
 msgstr "密碼(_P)"
 
@@ -2919,6 +3025,7 @@ msgstr "安全性類型"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "密碼"
@@ -3569,18 +3676,6 @@ msgstr "無效的 wpa-psk：不能將 64 位元組金鑰轉譯為十六進位"
 msgid "_Type"
 msgstr "類型(_T)"
 
-#: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
-#: ../panels/privacy/cc-privacy-panel.c:190
-#: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-msgid "On"
-msgstr "開啟"
-
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
@@ -3595,21 +3690,27 @@ msgstr "音效警示(_A)"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
 msgctxt "notifications"
-msgid "Notification _Banners"
-msgstr "通知橫幅(_B)"
+msgid "Notification _Popups"
+msgstr "彈出式通知(_P)"
 
-#. Banners here refers to message tray notifications in the middle of the screen.
-#: ../panels/notifications/edit-dialog.ui.h:7
-msgctxt "notifications"
-msgid "Show Message _Content in Banners"
-msgstr "在橫幅中顯示訊息內容(_C)"
+#: ../panels/notifications/edit-dialog.ui.h:6
+msgid ""
+"Notifications will continue to appear in the notification list when popups "
+"are disabled."
+msgstr "當彈出視窗被停用時，通知將繼續出現在通知列表中。"
 
+#. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
+msgctxt "notifications"
+msgid "Show Message _Content in Popups"
+msgstr "在彈出視窗中顯示訊息內容(_C)"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "鎖定畫面通知(_L)"
 
-#: ../panels/notifications/edit-dialog.ui.h:9
+#: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "在鎖定畫面中顯示訊息內容(_O)"
@@ -3629,8 +3730,8 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notifications;Banner;Message;Tray;Popup;通知;橫幅;訊息;匣;彈出;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification _Banners"
-msgstr "通知橫幅(_B)"
+msgid "Notification _Popups"
+msgstr "彈出式通知(_P)"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -3642,56 +3743,29 @@ msgstr "鎖定畫面通知(_L)"
 msgid "Applications"
 msgstr "程式集"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
+#: ../panels/online-accounts/cc-online-accounts-panel.c:145
 msgctxt "Online Account"
 msgid "Other"
 msgstr "其他"
 
-#. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-#: ../panels/online-accounts/online-accounts.ui.h:2
-msgid "Add Account"
-msgstr "加入帳號"
+#. translators: This is the title of the "Show Account" dialog. The
+#. * %s is the name of the provider. e.g., 'Google'.
+#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#, c-format
+msgid "%s Account"
+msgstr "%s 帳號"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
-msgid "Mail"
-msgstr "郵件"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-msgid "Calendar"
-msgstr "行事曆"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
-msgid "Contacts"
-msgstr "連絡人"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:346
-msgid "Chat"
-msgstr "聊天"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:352
-msgid "Resources"
-msgstr "資源"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:640
-msgid "Error creating account"
-msgstr "建立帳號時發生錯誤"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:700
+#: ../panels/online-accounts/cc-online-accounts-panel.c:767
 msgid "Error removing account"
 msgstr "移除帳號時發生錯誤"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:736
-msgid "Are you sure you want to remove the account?"
-msgstr "確定要刪除這個帳號？"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:738
-msgid "This will not remove the account on the server."
-msgstr "這不會移除伺服器上的帳號。"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:739
-msgid "_Remove"
-msgstr "移除(_R)"
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: ../panels/online-accounts/cc-online-accounts-panel.c:837
+#, c-format
+msgid "<b>%s</b> removed"
+msgstr "<b>%s</b> 已移除"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3713,25 +3787,20 @@ msgstr ""
 "行事曆;郵件;連絡人;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-msgid "No online accounts configured"
-msgstr "尚未設定線上帳號"
+msgid "Undo"
+msgstr "復原"
+
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Connect to your data in the cloud"
+msgstr "連接您雲端上的資料"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "Remove Account"
-msgstr "移除帳號"
+msgid "Add an account"
+msgstr "加入帳號"
 
 #: ../panels/online-accounts/online-accounts.ui.h:4
-msgid "Add an online account"
-msgstr "加入線上帳號"
-
-#: ../panels/online-accounts/online-accounts.ui.h:5
-msgid ""
-"Adding an account allows your applications to access it for documents, mail, "
-"contacts, calendar, chat and more."
-msgstr ""
-"加入一個帳號以允許您的應用程式存取它用於文件、郵件、連絡人、行事曆、聊天等"
-"等。"
+msgid "Remove Account"
+msgstr "移除帳號"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
@@ -4084,189 +4153,47 @@ msgid "Authenticate"
 msgstr "核對"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "要求核對"
 
-#. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:698
-msgid "Low on toner"
-msgstr "碳粉不足"
-
-#. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:700
-msgid "Out of toner"
-msgstr "碳粉用完"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:703
-msgid "Low on developer"
-msgstr "顯像劑不足"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:706
-msgid "Out of developer"
-msgstr "顯像劑用完"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:708
-msgid "Low on a marker supply"
-msgstr "墨水匣不足"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:710
-msgid "Out of a marker supply"
-msgstr "墨水匣用完"
-
-#. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:712
-msgid "Open cover"
-msgstr "外殼開啟"
-
-#. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:714
-msgid "Open door"
-msgstr "紙匣門開啟"
-
-#. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:716
-msgid "Low on paper"
-msgstr "紙張不足。"
-
-#. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:718
-msgid "Out of paper"
-msgstr "紙張用完"
-
-#. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:720
-msgctxt "printer state"
-msgid "Offline"
-msgstr "離線"
-
-#. Translators: Someone has stopped the Printer
-#. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:722
-#: ../panels/printers/cc-printers-panel.c:912
-msgctxt "printer state"
-msgid "Stopped"
-msgstr "已停止"
-
-#. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:724
-msgid "Waste receptacle almost full"
-msgstr "廢墨收集器將滿"
-
-#. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:726
-msgid "Waste receptacle full"
-msgstr "廢墨收集器已滿"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:728
-msgid "The optical photo conductor is near end of life"
-msgstr "感光鼓接近使用壽命"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:730
-msgid "The optical photo conductor is no longer functioning"
-msgstr "感光鼓已無法使用"
-
-#. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:839
-msgctxt "printer state"
-msgid "Configuring"
-msgstr "正在設定"
-
-#. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:898
-msgctxt "printer state"
-msgid "Ready"
-msgstr "準備就緒"
-
-#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:903
-msgctxt "printer state"
-msgid "Does not accept jobs"
-msgstr "不接受工作"
-
-#. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:908
-msgctxt "printer state"
-msgid "Processing"
-msgstr "處理中"
-
-#. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1028
-msgid "Toner Level"
-msgstr "碳粉匣等級"
-
-#. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1031
-msgid "Ink Level"
-msgstr "墨水等級"
-
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1034
-msgid "Supply Level"
-msgstr "耗材等級"
-
-#. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1052
-msgctxt "printer state"
-msgid "Installing"
-msgstr "正在安裝"
-
-#. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1566
-#, c-format
-msgid "%u active"
-msgid_plural "%u active"
-msgstr[0] "%u 使用中"
-
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1907
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Failed to add new printer."
 msgstr "無法加入新的印表機。"
 
-#: ../panels/printers/cc-printers-panel.c:2088
-msgid "Select PPD File"
-msgstr "選擇 PPD 檔案"
-
-#: ../panels/printers/cc-printers-panel.c:2097
-msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
-"PPD.GZ)"
-msgstr "PostScript 印表機描述檔 (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
-
-#: ../panels/printers/cc-printers-panel.c:2404
-msgid "No suitable driver found"
-msgstr "找不到合適的驅動程式"
-
-#: ../panels/printers/cc-printers-panel.c:2475
-msgid "Searching for preferred drivers…"
-msgstr "正在搜尋偏好的驅動程式…"
-
-#: ../panels/printers/cc-printers-panel.c:2496
-msgid "Select from database…"
-msgstr "從資料庫搜尋…"
-
-#: ../panels/printers/cc-printers-panel.c:2505
-msgid "Provide PPD File…"
-msgstr "提供 PPD 檔案…"
-
-#. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2652
-#: ../panels/printers/cc-printers-panel.c:2675
-msgid "Test page"
-msgstr "測試頁"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3133
+#: ../panels/printers/cc-printers-panel.c:846
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "無法載入 ui：%s"
+
+#: ../panels/printers/details-dialog.ui.h:2
+#: ../panels/printers/printer-entry.ui.h:6
+msgid "Location"
+msgstr "位置"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/details-dialog.ui.h:4
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
+msgid "Driver"
+msgstr "驅動程式"
+
+#: ../panels/printers/details-dialog.ui.h:5
+msgid "Searching for preferred drivers…"
+msgstr "正在搜尋偏好的驅動程式…"
+
+#: ../panels/printers/details-dialog.ui.h:6
+msgid "Search for Drivers"
+msgstr "正在搜尋驅動程式"
+
+#: ../panels/printers/details-dialog.ui.h:7
+msgid "Select from Database…"
+msgstr "從資料庫選擇…"
+
+#: ../panels/printers/details-dialog.ui.h:8
+msgid "Install PPD File…"
+msgstr "安裝 PPD 檔案…"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
@@ -4294,11 +4221,12 @@ msgstr "沒有使用中的印表機工作"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:384
+#: ../panels/printers/pp-new-printer-dialog.c:456
 msgid "Add Printer"
 msgstr "加入印表機"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "解除鎖定(_U)"
@@ -4313,9 +4241,34 @@ msgstr "找不到印表機"
 msgid "Enter a network address or search for a printer"
 msgstr "輸入網路位址或搜尋印表機"
 
+#: ../panels/printers/new-printer-dialog.ui.h:12
+msgid "Enter username and password to view printers on Print Server."
+msgstr "輸入使用者名稱與密碼以檢視在印表機伺服器上的印表機。"
+
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "正在載入選項…"
+
+#. Translators: This is the title of the dialog. %s is the printer name.
+#: ../panels/printers/pp-details-dialog.c:100
+#: ../panels/printers/pp-details-dialog.c:412
+#, c-format
+msgid "%s Details"
+msgstr "%s 詳細資料"
+
+#: ../panels/printers/pp-details-dialog.c:169
+msgid "No suitable driver found"
+msgstr "找不到合適的驅動程式"
+
+#: ../panels/printers/pp-details-dialog.c:313
+msgid "Select PPD File"
+msgstr "選擇 PPD 檔案"
+
+#: ../panels/printers/pp-details-dialog.c:322
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr "PostScript 印表機描述檔 (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4427,44 +4380,60 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — 進行中的工作"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
+#: ../panels/printers/pp-new-printer-dialog.c:402
+msgid "Unlock Print Server"
+msgstr "解鎖印表機伺服器"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:406
+#, c-format
+msgid "Unlock %s."
+msgstr "解除鎖定 %s。"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:411
+#, c-format
+msgid "Enter username and password to view printers on %s."
+msgstr "輸入使用者名稱與密碼以檢視在 %s 的印表機。"
+
+#: ../panels/printers/pp-new-printer-dialog.c:876
 msgid "Searching for Printers"
 msgstr "正在搜尋印表機"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1799
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1804
 msgid "Serial Port"
 msgstr "序列埠"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "串列埠"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1816
 msgid "Bluetooth"
 msgstr "藍牙"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1853
 #, c-format
 msgid "Location: %s"
 msgstr "位置：%s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1858
 #, c-format
 msgid "Address: %s"
 msgstr "位址：%s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1887
 msgid "Server requires authentication"
 msgstr "伺服器需要核對身份"
 
@@ -4592,83 +4561,172 @@ msgstr "無前置過濾器"
 msgid "Manufacturer"
 msgstr "製造商"
 
-#. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:250
-msgid "Driver"
-msgstr "驅動程式"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:368
+msgid "No Active Jobs"
+msgstr "沒有進行中的工作"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:373
 #, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr "輸入您的使用者名稱與密碼以檢視在 %s 可用的印表機。"
+msgid "%u Job"
+msgid_plural "%u Jobs"
+msgstr[0] "%u 個工作"
 
-#: ../panels/printers/printers.ui.h:2
+#. Translators: The printer is low on toner
+#: ../panels/printers/pp-printer-entry.c:470
+msgid "Low on toner"
+msgstr "碳粉不足"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/pp-printer-entry.c:472
+msgid "Out of toner"
+msgstr "碳粉用完"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:475
+msgid "Low on developer"
+msgstr "顯像劑不足"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:478
+msgid "Out of developer"
+msgstr "顯像劑用完"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:480
+msgid "Low on a marker supply"
+msgstr "墨水匣不足"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:482
+msgid "Out of a marker supply"
+msgstr "墨水匣用完"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/pp-printer-entry.c:484
+msgid "Open cover"
+msgstr "外殼開啟"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/pp-printer-entry.c:486
+msgid "Open door"
+msgstr "紙匣門開啟"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/pp-printer-entry.c:488
+msgid "Low on paper"
+msgstr "紙張不足。"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/pp-printer-entry.c:490
+msgid "Out of paper"
+msgstr "紙張用完"
+
+#. Translators: The printer is offline
+#: ../panels/printers/pp-printer-entry.c:492
+msgctxt "printer state"
+msgid "Offline"
+msgstr "離線"
+
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/pp-printer-entry.c:494
+#: ../panels/printers/pp-printer-entry.c:624
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "已停止"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/pp-printer-entry.c:496
+msgid "Waste receptacle almost full"
+msgstr "廢墨收集器將滿"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/pp-printer-entry.c:498
+msgid "Waste receptacle full"
+msgstr "廢墨收集器已滿"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:500
+msgid "The optical photo conductor is near end of life"
+msgstr "感光鼓接近使用壽命"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:502
+msgid "The optical photo conductor is no longer functioning"
+msgstr "感光鼓已無法使用"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/pp-printer-entry.c:610
+msgctxt "printer state"
+msgid "Ready"
+msgstr "準備就緒"
+
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/pp-printer-entry.c:615
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "不接受工作"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/pp-printer-entry.c:620
+msgctxt "printer state"
+msgid "Processing"
+msgstr "處理中"
+
+#: ../panels/printers/printer-entry.ui.h:1
+msgid "Printing Options"
+msgstr "印表機選項"
+
+#: ../panels/printers/printer-entry.ui.h:2
+msgid "Printer Details"
+msgstr "印表機詳細資料"
+
+#: ../panels/printers/printer-entry.ui.h:3
+msgid "Use Printer by Default"
+msgstr "使用預設印表機"
+
+#: ../panels/printers/printer-entry.ui.h:4
 msgid "Remove Printer"
 msgstr "移除印表機"
 
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:4
-msgid "Supply"
-msgstr "耗材"
-
-#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:6
-msgid "Location"
-msgstr "位置"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
-msgid "_Default printer"
-msgstr "預設印表機(_D)"
-
-#: ../panels/printers/printers.ui.h:9
-msgid "Jobs"
-msgstr "工作"
-
-#. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:11
-msgid "Show _Jobs"
-msgstr "顯示工作(_J)"
-
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printer-entry.ui.h:5
 msgid "Model"
 msgstr "型號"
 
-#: ../panels/printers/printers.ui.h:15
-msgid "label"
-msgstr "標籤"
+#: ../panels/printers/printer-entry.ui.h:7
+msgid "Ink Level"
+msgstr "墨水等級"
 
-#: ../panels/printers/printers.ui.h:17
-msgid "Setting new driver…"
-msgstr "正在設定新的驅動程式…"
+#. Translators: This is the message which follows the printer error.
+#: ../panels/printers/printer-entry.ui.h:9
+msgid "Please restart when the problem is resolved."
+msgstr "請當問題得到解決，請重新啟動。"
 
-#: ../panels/printers/printers.ui.h:18
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
-msgid "page 3"
-msgstr "頁 3"
+#. Translators: This is the button which restarts the printer.
+#: ../panels/printers/printer-entry.ui.h:11
+msgid "Restart"
+msgstr "重新啟動"
 
-#. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:20
-msgid "Print _Test Page"
-msgstr "列印測試頁(_T)"
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "加入…"
 
-#. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:6
-msgid "_Options"
-msgstr "選項(_O)"
-
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:3
 msgid "No printers"
 msgstr "沒有印表機"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:25
-msgid "Add a Printer"
-msgstr "加入印表機"
+#: ../panels/printers/printers.ui.h:5
+msgid "Add a Printer…"
+msgstr "加入印表機…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:7
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -4702,44 +4760,44 @@ msgstr "位置服務"
 msgid "Usage & History"
 msgstr "使用與歷史紀錄"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "要清除回收筒中所有的項目？"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "所有在回收筒中的項目會永遠刪除。"
 
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "清理回收筒(_E)"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "刪除所有暫存檔案？"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "所有的暫存檔案會永遠刪除。"
 
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "清理暫存檔案(_P)"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "清除回收筒與暫存檔案"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "軟體使用率"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "問題回報"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4748,7 +4806,7 @@ msgstr ""
 "傳送技術問題的報告有助於我們改進 %s。報告是以匿名方式傳送，並且會消除個人資"
 "料。"
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "隱私權原則"
 
@@ -4872,6 +4930,14 @@ msgstr "自動清除暫存檔案(_F)"
 msgid "Purge _After"
 msgstr "清除於(_A)"
 
+#: ../panels/privacy/privacy.ui.h:34
+msgid "_Empty Trash…"
+msgstr "清理回收筒(_E)…"
+
+#: ../panels/privacy/privacy.ui.h:35
+msgid "_Purge Temporary Files…"
+msgstr "清理暫存檔案(_P)…"
+
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
 "Sending us information about which software you use helps us provide you "
@@ -4929,21 +4995,11 @@ msgctxt "Input Source"
 msgid "Other"
 msgstr "其他"
 
-#: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1087
-msgid "Your session needs to be restarted for changes to take effect"
-msgstr "您的作業階段需要重新啟動以讓變更生效"
-
-#: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1091
-msgid "Restart Now"
-msgstr "立刻重新啟動"
-
-#: ../panels/region/cc-region-panel.c:888
+#: ../panels/region/cc-region-panel.c:866
 msgid "No input source selected"
 msgstr "尚未選擇輸入來源"
 
-#: ../panels/region/cc-region-panel.c:1779
+#: ../panels/region/cc-region-panel.c:1757
 msgid "Login _Screen"
 msgstr "登入畫面(_S)"
 
@@ -5010,10 +5066,6 @@ msgstr "在所有視窗中使用相同的來源(_S)"
 msgid "Allow _different sources for each window"
 msgstr "每個視窗使用不同的輸入來源(_D)"
 
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "鍵盤捷徑鍵"
-
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "切換至上個來源"
@@ -5032,7 +5084,7 @@ msgstr "Super+Space"
 
 #: ../panels/region/input-options.ui.h:9
 msgid "You can change these shortcuts in the keyboard settings"
-msgstr "您可以在鍵盤設定值中改變這些捷徑鍵"
+msgstr "您可以在鍵盤設定值中改變這些快捷鍵"
 
 #: ../panels/region/input-options.ui.h:10
 msgid "Alternative switch to next source"
@@ -5043,51 +5095,65 @@ msgid "Left+Right Alt"
 msgstr "左+右 Alt"
 
 #: ../panels/region/region.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+msgid "Your session needs to be restarted for changes to take effect"
+msgstr "您的作業階段需要重新啟動以讓變更生效"
+
+#: ../panels/region/region.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+msgid "Restart Now"
+msgstr "立刻重新啟動"
+
+#: ../panels/region/region.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "_Language"
 msgstr "語言(_L)"
 
-#: ../panels/region/region.ui.h:2
+#: ../panels/region/region.ui.h:4
 msgid "English (United Kingdom)"
 msgstr "英文 (英國)"
 
-#: ../panels/region/region.ui.h:3
+#: ../panels/region/region.ui.h:5
 msgid "_Formats"
 msgstr "格式(_F)"
 
-#: ../panels/region/region.ui.h:4
+#: ../panels/region/region.ui.h:6
 msgid "United Kingdom"
 msgstr "英國"
 
-#: ../panels/region/region.ui.h:5
+#: ../panels/region/region.ui.h:7
 msgid "Input Sources"
 msgstr "輸入來源"
 
-#: ../panels/region/region.ui.h:7
+#: ../panels/region/region.ui.h:8
+msgid "_Options"
+msgstr "選項(_O)"
+
+#: ../panels/region/region.ui.h:9
 msgid "Add input source"
 msgstr "加入輸入來源"
 
-#: ../panels/region/region.ui.h:8
+#: ../panels/region/region.ui.h:10
 msgid "Remove input source"
 msgstr "移除輸入來源"
 
-#: ../panels/region/region.ui.h:9
+#: ../panels/region/region.ui.h:11
 msgid "Move input source up"
 msgstr "將輸入來源往上移"
 
-#: ../panels/region/region.ui.h:10
+#: ../panels/region/region.ui.h:12
 msgid "Move input source down"
 msgstr "將輸入來源往下移"
 
-#: ../panels/region/region.ui.h:11
+#: ../panels/region/region.ui.h:13
 msgid "Configure input source"
 msgstr "設定輸入來源"
 
-#: ../panels/region/region.ui.h:12
+#: ../panels/region/region.ui.h:14
 msgid "Show input source keyboard layout"
 msgstr "顯示輸入來源鍵盤配置"
 
-#: ../panels/region/region.ui.h:13
+#: ../panels/region/region.ui.h:15
 msgid "Login settings are used by all users when logging into the system"
 msgstr "登入設定值是所有的使用者在登入系統時會用到的"
 
@@ -6042,17 +6108,17 @@ msgid "_Full Name"
 msgstr "全名(_F)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Standard"
 msgstr "標準"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "Administrator"
 msgstr "管理員"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "帳號類型(_T)"
 
@@ -6223,21 +6289,25 @@ msgstr "立刻設定密碼"
 msgid "_Add User…"
 msgstr "加入使用者(_A)…"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "A_utomatic Login"
 msgstr "自動登入(_U)："
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Fingerprint Login"
 msgstr "指紋登入(_F)"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "User Icon"
 msgstr "使用者圖示"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Last Login"
 msgstr "上次登入"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove User…"
+msgstr "移除使用者…"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6429,29 +6499,29 @@ msgstr "不明的錯誤"
 msgid "Should match the web address of your login provider."
 msgstr "應符合您的登入提供者的網路位址。"
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "無法加入到帳號"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "密碼不相符。"
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "無法註冊帳號"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "沒有支援這個網域核對的方式"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "無法加入網域"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6459,7 +6529,7 @@ msgstr ""
 "登入名稱沒有作用。\n"
 "請再試一次。"
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6467,11 +6537,11 @@ msgstr ""
 "登入密碼沒有作用。\n"
 "請再試一次。"
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "無法登入到網域"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "找不到網域。也許您拼錯字了？"
 
@@ -6601,7 +6671,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:841
+#: ../panels/user-accounts/um-user-panel.c:776
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6609,7 +6679,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:845
+#: ../panels/user-accounts/um-user-panel.c:780
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6646,23 +6716,23 @@ msgstr "密碼無法變更"
 msgid "The passwords do not match."
 msgstr "密碼不相符。"
 
-#: ../panels/user-accounts/um-photo-dialog.c:214
+#: ../panels/user-accounts/um-photo-dialog.c:215
 msgid "Browse for more pictures"
 msgstr "瀏覽更多照片"
 
-#: ../panels/user-accounts/um-photo-dialog.c:448
+#: ../panels/user-accounts/um-photo-dialog.c:449
 msgid "Disable image"
 msgstr "停用影像"
 
-#: ../panels/user-accounts/um-photo-dialog.c:466
+#: ../panels/user-accounts/um-photo-dialog.c:467
 msgid "Take a photo…"
 msgstr "照相…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:484
+#: ../panels/user-accounts/um-photo-dialog.c:485
 msgid "Browse for more pictures…"
 msgstr "瀏覽更多照片…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:708
+#: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
 msgid "Used by %s"
 msgstr "由 %s 使用"
@@ -6691,91 +6761,95 @@ msgstr "密碼錯誤，請再試一次"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "無法連接到 %s 網域：%s"
 
-#: ../panels/user-accounts/um-user-panel.c:239
-msgid "Other Accounts"
-msgstr "其他帳號"
+#: ../panels/user-accounts/um-user-panel.c:195
+msgid "<small>Your account</small>"
+msgstr "<small>您的帳號</small>"
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
 msgstr "刪除使用者失敗"
 
+#: ../panels/user-accounts/um-user-panel.c:448
 #: ../panels/user-accounts/um-user-panel.c:507
-#: ../panels/user-accounts/um-user-panel.c:566
-#: ../panels/user-accounts/um-user-panel.c:618
+#: ../panels/user-accounts/um-user-panel.c:559
 msgid "Failed to revoke remotely managed user"
 msgstr "註銷遠端管理的使用者失敗"
 
-#: ../panels/user-accounts/um-user-panel.c:674
+#: ../panels/user-accounts/um-user-panel.c:613
 msgid "You cannot delete your own account."
 msgstr "您不能刪除自己的帳號。"
 
-#: ../panels/user-accounts/um-user-panel.c:683
+#: ../panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s 仍在登入中"
 
-#: ../panels/user-accounts/um-user-panel.c:687
+#: ../panels/user-accounts/um-user-panel.c:626
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "在使用者登入期間刪除他會使系統處於不穩定的狀態。"
 
-#: ../panels/user-accounts/um-user-panel.c:696
+#: ../panels/user-accounts/um-user-panel.c:635
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "您想要保留 %s 的檔案嗎？"
 
-#: ../panels/user-accounts/um-user-panel.c:700
+#: ../panels/user-accounts/um-user-panel.c:639
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "當刪除使用者時是可以保留家目錄、新進郵件(mail spool)和暫存檔案的。"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:642
 msgid "_Delete Files"
 msgstr "刪除檔案(_D)"
 
-#: ../panels/user-accounts/um-user-panel.c:704
+#: ../panels/user-accounts/um-user-panel.c:643
 msgid "_Keep Files"
 msgstr "保留檔案(_K)"
 
-#: ../panels/user-accounts/um-user-panel.c:718
+#: ../panels/user-accounts/um-user-panel.c:657
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "確定要註銷遠端管理的 %s 帳號？"
 
-#: ../panels/user-accounts/um-user-panel.c:722
+#: ../panels/user-accounts/um-user-panel.c:661
 msgid "_Delete"
 msgstr "刪除(_D)"
 
-#: ../panels/user-accounts/um-user-panel.c:774
+#: ../panels/user-accounts/um-user-panel.c:711
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "帳號已停用"
 
-#: ../panels/user-accounts/um-user-panel.c:782
+#: ../panels/user-accounts/um-user-panel.c:719
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "在下次登入時設定"
 
-#: ../panels/user-accounts/um-user-panel.c:785
+#: ../panels/user-accounts/um-user-panel.c:722
 msgctxt "Password mode"
 msgid "None"
 msgstr "沒有"
 
-#: ../panels/user-accounts/um-user-panel.c:834
+#: ../panels/user-accounts/um-user-panel.c:769
 msgid "Logged in"
 msgstr "已登入"
 
-#: ../panels/user-accounts/um-user-panel.c:1290
+#: ../panels/user-accounts/um-user-panel.c:1117
 msgid "Failed to contact the accounts service"
 msgstr "無法連接帳號服務"
 
-#: ../panels/user-accounts/um-user-panel.c:1292
+#: ../panels/user-accounts/um-user-panel.c:1119
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "請確定 AccountService 已經安裝並啟用。"
 
-#: ../panels/user-accounts/um-user-panel.c:1334
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
+#: ../panels/user-accounts/um-user-panel.c:1155
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6783,12 +6857,12 @@ msgstr ""
 "要進行變更，\n"
 "請先點選 * 圖示"
 
-#: ../panels/user-accounts/um-user-panel.c:1374
+#: ../panels/user-accounts/um-user-panel.c:1195
 msgid "Create a user account"
 msgstr "建立新的使用者帳號"
 
+#: ../panels/user-accounts/um-user-panel.c:1206
 #: ../panels/user-accounts/um-user-panel.c:1385
-#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6796,12 +6870,12 @@ msgstr ""
 "要建立使用者帳號，\n"
 "請先點選 * 圖示"
 
-#: ../panels/user-accounts/um-user-panel.c:1395
+#: ../panels/user-accounts/um-user-panel.c:1216
 msgid "Delete the selected user account"
 msgstr "刪除選取的使用者帳號"
 
-#: ../panels/user-accounts/um-user-panel.c:1407
-#: ../panels/user-accounts/um-user-panel.c:1682
+#: ../panels/user-accounts/um-user-panel.c:1228
+#: ../panels/user-accounts/um-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6809,24 +6883,20 @@ msgstr ""
 "要刪除選取的使用者帳號，\n"
 "請先點選 * 圖示"
 
-#: ../panels/user-accounts/um-user-panel.c:1591
-msgid "My Account"
-msgstr "我的帳號"
-
-#: ../panels/user-accounts/um-utils.c:563
+#: ../panels/user-accounts/um-utils.c:507
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "抱歉，使用者名稱無法使用。請嘗試另一個。"
 
-#: ../panels/user-accounts/um-utils.c:566
+#: ../panels/user-accounts/um-utils.c:510
 #, c-format
 msgid "The username is too long."
 msgstr "使用者名稱太長。"
 
-#: ../panels/user-accounts/um-utils.c:569
+#: ../panels/user-accounts/um-utils.c:513
 msgid "The username cannot start with a “-”."
 msgstr "使用者名稱不能以「-」字元開頭。"
 
-#: ../panels/user-accounts/um-utils.c:572
+#: ../panels/user-accounts/um-utils.c:516
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -6834,7 +6904,7 @@ msgstr ""
 "使用者名稱只能由大小寫字母英文字母 a 到 z、數字，與其他字元：「.」、「-」、"
 "「_」。"
 
-#: ../panels/user-accounts/um-utils.c:576
+#: ../panels/user-accounts/um-utils.c:520
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr "這會成為您家目錄資料夾的名稱，並且不能被改變。"
 
@@ -6851,7 +6921,7 @@ msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear."
 msgstr ""
-"若要編輯捷徑鍵，請選擇「傳送按鍵」動作，按下鍵盤捷徑按鈕與新的按鍵組合，或以 "
+"若要編輯快捷鍵，請選擇「傳送按鍵」動作，按下鍵盤捷徑按鈕與新的按鍵組合，或以 "
 "Backspace 鍵來清除。"
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:83
@@ -6997,7 +7067,7 @@ msgstr "左手方向"
 
 #: ../panels/wacom/gsd-wacom-key-shortcut-button.c:263
 msgid "New shortcut…"
-msgstr "新增捷徑鍵…"
+msgstr "新增快捷鍵…"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:2
 msgid "Middle Mouse Button Click"
@@ -7047,8 +7117,12 @@ msgstr "較低的按鈕"
 msgid "Tip Pressure Feel"
 msgstr "點選壓力感應"
 
-#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1482
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "page 3"
+msgstr "頁 3"
+
+#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "所有設定值"
 
@@ -7166,6 +7240,108 @@ msgstr "熱點"
 msgid "No results found"
 msgstr "找不到結果"
 
+#~ msgid "Edit"
+#~ msgstr "編輯"
+
+#~ msgctxt "button"
+#~ msgid "Set Shortcut"
+#~ msgstr "設定捷徑鍵"
+
+#~ msgctxt "notifications"
+#~ msgid "Notification _Banners"
+#~ msgstr "通知橫幅(_B)"
+
+#~ msgid "Notification _Banners"
+#~ msgstr "通知橫幅(_B)"
+
+#~ msgid "Add Account"
+#~ msgstr "加入帳號"
+
+#~ msgid "Mail"
+#~ msgstr "郵件"
+
+#~ msgid "Calendar"
+#~ msgstr "行事曆"
+
+#~ msgid "Contacts"
+#~ msgstr "連絡人"
+
+#~ msgid "Chat"
+#~ msgstr "聊天"
+
+#~ msgid "Resources"
+#~ msgstr "資源"
+
+#~ msgid "Error creating account"
+#~ msgstr "建立帳號時發生錯誤"
+
+#~ msgid "Are you sure you want to remove the account?"
+#~ msgstr "確定要刪除這個帳號？"
+
+#~ msgid "This will not remove the account on the server."
+#~ msgstr "這不會移除伺服器上的帳號。"
+
+#~ msgid "_Remove"
+#~ msgstr "移除(_R)"
+
+#~ msgid "No online accounts configured"
+#~ msgstr "尚未設定線上帳號"
+
+#~ msgid "Add an online account"
+#~ msgstr "加入線上帳號"
+
+#~ msgid ""
+#~ "Adding an account allows your applications to access it for documents, "
+#~ "mail, contacts, calendar, chat and more."
+#~ msgstr ""
+#~ "加入一個帳號以允許您的應用程式存取它用於文件、郵件、連絡人、行事曆、聊天等"
+#~ "等。"
+
+#~ msgctxt "printer state"
+#~ msgid "Configuring"
+#~ msgstr "正在設定"
+
+#~ msgid "Toner Level"
+#~ msgstr "碳粉匣等級"
+
+#~ msgid "Supply Level"
+#~ msgstr "耗材等級"
+
+#~ msgctxt "printer state"
+#~ msgid "Installing"
+#~ msgstr "正在安裝"
+
+#~ msgid "%u active"
+#~ msgid_plural "%u active"
+#~ msgstr[0] "%u 使用中"
+
+#~ msgid "Test page"
+#~ msgstr "測試頁"
+
+#~ msgid "Supply"
+#~ msgstr "耗材"
+
+#~ msgid "_Default printer"
+#~ msgstr "預設印表機(_D)"
+
+#~ msgid "Jobs"
+#~ msgstr "工作"
+
+#~ msgid "Show _Jobs"
+#~ msgstr "顯示工作(_J)"
+
+#~ msgid "label"
+#~ msgstr "標籤"
+
+#~ msgid "Setting new driver…"
+#~ msgstr "正在設定新的驅動程式…"
+
+#~ msgid "Print _Test Page"
+#~ msgstr "列印測試頁(_T)"
+
+#~ msgid "Other Accounts"
+#~ msgstr "其他帳號"
+
 #~ msgid "Wayland"
 #~ msgstr "Wayland"
 
@@ -7199,9 +7375,6 @@ msgstr "找不到結果"
 
 #~ msgid "Left Ring Mode #%d"
 #~ msgstr "左觸控環模式 #%d"
-
-#~ msgid "Right Ring"
-#~ msgstr "右環"
 
 #~ msgid "Right Ring Mode #%d"
 #~ msgstr "右觸控環模式 #%d"
@@ -7335,9 +7508,6 @@ msgstr "找不到結果"
 #~ msgid "Add User Account"
 #~ msgstr "加入使用者帳號"
 
-#~ msgid "Remove User Account"
-#~ msgstr "移除使用者帳號"
-
 #~ msgid "Color"
 #~ msgstr "顏色"
 
@@ -7422,9 +7592,6 @@ msgstr "找不到結果"
 #~ msgid "_Verify"
 #~ msgstr "驗證(_V)"
 
-#~ msgid "Login Options"
-#~ msgstr "登入選項"
-
 #~ msgid "A user with the username '%s' already exists."
 #~ msgstr "以「%s」為名的使用者已經存在。"
 
@@ -7436,9 +7603,6 @@ msgstr "找不到結果"
 
 #~ msgid "Time _Zone"
 #~ msgstr "時區(_Z)"
-
-#~ msgid "Active Jobs"
-#~ msgstr "使用中的工作"
 
 #~ msgid "Close"
 #~ msgstr "關閉"
@@ -7822,9 +7986,6 @@ msgstr "找不到結果"
 #~ msgid "_Network Time"
 #~ msgstr "網路時刻(_N)"
 
-#~ msgid ":"
-#~ msgstr ":"
-
 #~ msgid "Set the time one hour ahead."
 #~ msgstr "將時刻延後一小時。"
 
@@ -8100,9 +8261,6 @@ msgstr "找不到結果"
 #~ msgctxt "universal access, threshold"
 #~ msgid "Large"
 #~ msgstr "大"
-
-#~ msgid "Add account"
-#~ msgstr "加入帳號"
 
 #~ msgid "_Local Account"
 #~ msgstr "登入帳號(_L)"
