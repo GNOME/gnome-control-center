@@ -656,14 +656,33 @@ fill_accounts_listbox (CcGoaPanel *self)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static GtkWidget *
-get_row_for_account (CcGoaPanel *self,
-                     GoaObject *object)
+typedef void (*RowForAccountCallback) (CcGoaPanel *self, GtkWidget *row, GList *other_rows);
+
+static void
+hide_row_for_account (CcGoaPanel *self, GtkWidget *row, GList *other_rows)
 {
-  GtkWidget *row;
+  gtk_widget_hide (row);
+}
+
+static void
+remove_row_for_account (CcGoaPanel *self, GtkWidget *row, GList *other_rows)
+{
+  gtk_widget_destroy (row);
+}
+
+static void
+show_row_for_account (CcGoaPanel *self, GtkWidget *row, GList *other_rows)
+{
+  gtk_widget_show (row);
+}
+
+static void
+modify_row_for_account (CcGoaPanel *self,
+                        GoaObject *object,
+                        RowForAccountCallback callback)
+{
   GList *children, *l;
 
-  row = NULL;
   children = gtk_container_get_children (GTK_CONTAINER (self->accounts_listbox));
 
   for (l = children; l != NULL; l = l->next)
@@ -673,13 +692,16 @@ get_row_for_account (CcGoaPanel *self,
       row_object = g_object_get_data (G_OBJECT (l->data), "goa-object");
       if (row_object == object)
         {
-          row = l->data;
+          GtkWidget *row = GTK_WIDGET (l->data);
+
+          children = g_list_remove_link (children, l);
+          callback (self, row, children);
+          g_list_free (l);
           break;
         }
     }
 
   g_list_free (children);
-  return row;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -782,24 +804,7 @@ on_account_removed (GoaClient *client,
                     gpointer   user_data)
 {
   CcGoaPanel *self = user_data;
-  GList *children, *l;
-
-  children = gtk_container_get_children (GTK_CONTAINER (self->accounts_listbox));
-
-  for (l = children; l != NULL; l = l->next)
-    {
-      GoaObject *row_object;
-
-      row_object = GOA_OBJECT (g_object_get_data (l->data, "goa-object"));
-
-      if (row_object == object)
-        {
-          gtk_widget_destroy (l->data);
-          break;
-        }
-    }
-
-  g_list_free (children);
+  modify_row_for_account (self, object, remove_row_for_account);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -889,12 +894,8 @@ static void
 on_undo_button_clicked (GtkButton  *button,
                         CcGoaPanel *self)
 {
-  GtkWidget *row;
-
   /* Simply show the account row and hide the notification */
-  row = get_row_for_account (self, self->removed_object);
-  gtk_widget_show (row);
-
+  modify_row_for_account (self, self->removed_object, show_row_for_account);
   gtk_revealer_set_reveal_child (GTK_REVEALER (self->notification_revealer), FALSE);
 
   cancel_notification_timeout (self);
@@ -912,7 +913,6 @@ static void
 on_remove_button_clicked (CcGoaPanel *panel)
 {
   GoaAccount *account;
-  GtkWidget *row;
   gchar *label;
 
   if (panel->active_object == NULL)
@@ -932,10 +932,8 @@ on_remove_button_clicked (CcGoaPanel *panel)
   gtk_label_set_markup (GTK_LABEL (panel->notification_label), label);
   gtk_revealer_set_reveal_child (GTK_REVEALER (panel->notification_revealer), TRUE);
 
-  row = get_row_for_account (panel, panel->removed_object);
-
+  modify_row_for_account (panel, panel->removed_object, hide_row_for_account);
   gtk_widget_hide (panel->edit_account_dialog);
-  gtk_widget_hide (row);
 
   panel->remove_account_timeout_id = g_timeout_add_seconds (10, on_remove_account_timeout, panel);
 
