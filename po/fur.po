@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-27 16:22+0000\n"
-"PO-Revision-Date: 2017-01-28 22:30+0100\n"
+"POT-Creation-Date: 2017-02-23 04:39+0000\n"
+"PO-Revision-Date: 2017-02-23 17:45+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -105,17 +105,17 @@ msgstr ""
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1571
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2226
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
 #: ../panels/network/net-device-wifi.c:1298
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2091
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -124,9 +124,9 @@ msgstr ""
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
-#: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:704
-#: ../panels/user-accounts/um-user-panel.c:722
+#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-user-panel.c:644
+#: ../panels/user-accounts/um-user-panel.c:662
 msgid "_Cancel"
 msgstr "_Anule"
 
@@ -1094,21 +1094,22 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Par cambiâ lis impostazions de ore e de date al è necessari autenticâsi."
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:592
 msgid "Lid Closed"
 msgstr "Tapon sierât"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:586
+#: ../panels/display/cc-display-panel.c:595
 msgid "Mirrored"
 msgstr "Duplicâts"
 
-#: ../panels/display/cc-display-panel.c:588
-#: ../panels/display/cc-display-panel.c:2440
+#: ../panels/display/cc-display-panel.c:597
+#: ../panels/display/cc-display-panel.c:2449
 msgid "Primary"
 msgstr "Primari"
 
-#: ../panels/display/cc-display-panel.c:590
+#: ../panels/display/cc-display-panel.c:599
+#: ../panels/display/cc-display-panel.c:2786
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1122,117 +1123,196 @@ msgstr "Primari"
 msgid "Off"
 msgstr "Distudât"
 
-#: ../panels/display/cc-display-panel.c:593
+#: ../panels/display/cc-display-panel.c:602
 msgid "Secondary"
 msgstr "Secondari"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1568
+#: ../panels/display/cc-display-panel.c:1577
 msgid "Arrange Combined Displays"
 msgstr "Disponi visôrs cumbinâts"
 
-#: ../panels/display/cc-display-panel.c:1572
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:1581
+#: ../panels/display/cc-display-panel.c:2227
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Apliche"
 
-#: ../panels/display/cc-display-panel.c:1596
+#: ../panels/display/cc-display-panel.c:1605
 msgid "Drag displays to rearrange them"
 msgstr "Strissine i visôrs par tornâ a disponi"
 
 #. translators: example string is "60 Hz (NTSC)"
 #. * NTSC is https://en.wikipedia.org/wiki/NTSC
-#: ../panels/display/cc-display-panel.c:1803
+#: ../panels/display/cc-display-panel.c:1812
 #, c-format
 msgid "%d Hz (NTSC)"
 msgstr "%d Hz (NTSC)"
 
 #. translators: example string is "60 Hz"
-#: ../panels/display/cc-display-panel.c:1809
+#: ../panels/display/cc-display-panel.c:1818
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../panels/display/cc-display-panel.c:2270
+#: ../panels/display/cc-display-panel.c:2279
 msgid "Rotate counterclockwise by 90°"
 msgstr "Ribalte in sens antiorari di 90°"
 
-#: ../panels/display/cc-display-panel.c:2288
+#: ../panels/display/cc-display-panel.c:2297
 msgid "Rotate by 180°"
 msgstr "Ribalte di 180°"
 
-#: ../panels/display/cc-display-panel.c:2306
+#: ../panels/display/cc-display-panel.c:2315
 msgid "Rotate clockwise by 90°"
 msgstr "Ribalte in sens orari di 90°"
 
-#: ../panels/display/cc-display-panel.c:2327
+#: ../panels/display/cc-display-panel.c:2336
 msgid "Size"
 msgstr "Dimension"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2342
+#: ../panels/display/cc-display-panel.c:2351
 msgid "Aspect Ratio"
 msgstr "Rapuart"
 
-#: ../panels/display/cc-display-panel.c:2365
+#: ../panels/display/cc-display-panel.c:2374
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Risoluzion"
 
-#: ../panels/display/cc-display-panel.c:2385
+#: ../panels/display/cc-display-panel.c:2394
 msgid "Adjust for TV"
 msgstr "Juste par TV"
 
-#: ../panels/display/cc-display-panel.c:2409
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Refresh Rate"
 msgstr "Frecuence di inzornament"
 
-#: ../panels/display/cc-display-panel.c:2441
+#: ../panels/display/cc-display-panel.c:2450
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Mostre su chest visôr la sbare superiôr e la panoramiche ativitâts"
 
-#: ../panels/display/cc-display-panel.c:2447
+#: ../panels/display/cc-display-panel.c:2456
 msgid "Secondary Display"
 msgstr "Visôr secondari"
 
-#: ../panels/display/cc-display-panel.c:2448
+#: ../panels/display/cc-display-panel.c:2457
 msgid "Join this display with another to create an extra workspace"
 msgstr "Unìs chest visôr cuntun altri par creâ un spazi di lavôr in plui"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2464
 msgid "Presentation"
 msgstr "Presentazion"
 
-#: ../panels/display/cc-display-panel.c:2456
+#: ../panels/display/cc-display-panel.c:2465
 msgid "Show slideshows and media only"
 msgstr "Mostre dome presentazions e elements multimediâi"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2461
+#: ../panels/display/cc-display-panel.c:2470
 msgid "Mirror"
 msgstr "Duplicât"
 
-#: ../panels/display/cc-display-panel.c:2462
+#: ../panels/display/cc-display-panel.c:2471
 msgid "Show your existing view on both displays"
 msgstr "Mostre su ducj i doi i visôrs ce che tu âs visibil"
 
-#: ../panels/display/cc-display-panel.c:2468
+#: ../panels/display/cc-display-panel.c:2477
 msgid "Turn Off"
 msgstr "Stude"
 
-#: ../panels/display/cc-display-panel.c:2469
+#: ../panels/display/cc-display-panel.c:2478
 msgid "Don’t use this display"
 msgstr "No stâ doprâ chest visôr"
 
-#: ../panels/display/cc-display-panel.c:2780
+#. TRANSLATORS: the state of the night light setting
+#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:590
+#: ../panels/universal-access/cc-ua-panel.c:603
+#: ../panels/universal-access/cc-ua-panel.c:615
+#: ../panels/universal-access/cc-ua-panel.c:786
+msgid "On"
+msgstr "Piât"
+
+#: ../panels/display/cc-display-panel.c:2826
 msgid "Could not get screen information"
 msgstr "Impussibil vê informazions sul schermi"
 
-#: ../panels/display/cc-display-panel.c:2811
+#: ../panels/display/cc-display-panel.c:2857
 msgid "_Arrange Combined Displays"
 msgstr "_Dispon visôrs cumbinâts"
+
+#: ../panels/display/cc-display-panel.c:2878
+msgid "_Night Light"
+msgstr "Lûs _noturne"
+
+#. This cancels the redshift inhibit.
+#: ../panels/display/display.ui.h:2
+msgid "Restart Filter"
+msgstr "Torne invie il filtri"
+
+#. Inhibit the redshift functionality until the next day starts
+#: ../panels/display/display.ui.h:4
+msgid "Temporarily Disabled Until Tomorrow"
+msgstr "Disabilitât in maniere temporanie fintremai doman"
+
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+"La lûs noturne a rint i colôrs dal schermi plui cjalts. Chest al pues judâ a "
+"rilassâ i voi e prevignî la svearole."
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: ../panels/display/display.ui.h:7
+msgid "Night Light"
+msgstr "Lûs noturne"
+
+#: ../panels/display/display.ui.h:8
+msgid "Schedule"
+msgstr "Planificazion"
+
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
+msgstr "Tramont a cricâ dì"
+
+#: ../panels/display/display.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Manuâl"
+
+#: ../panels/display/display.ui.h:11
+msgid "From"
+msgstr "Di"
+
+#: ../panels/display/display.ui.h:12
+msgid ":"
+msgstr ":"
+
+#. This is the short form for the time period in the morning
+#: ../panels/display/display.ui.h:14
+msgid "AM"
+msgstr "AM"
+
+#. This is the short form for the time period in the afternoon
+#: ../panels/display/display.ui.h:16
+msgid "PM"
+msgstr "PM"
+
+#: ../panels/display/display.ui.h:17
+msgid "To"
+msgstr "A"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1245,67 +1325,78 @@ msgstr "Sielç ce mût doprâ i visôrs e i proietôrs tacâts"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
-msgstr "Panel;Proietôr;xrandr;Schermi;Risoluzion;Refresh;Visôr;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
+msgstr ""
+"Panel;Proietôr;xrandr;Schermi;Risoluzion;Refresh;Visôr;Gnot;Lûs;Blu;inrossâ;"
+"colôr;tramont;cricâ;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:377 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "No cognossût"
 
-#: ../panels/info/cc-info-panel.c:510
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
+#: ../panels/info/cc-info-panel.c:517
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
 msgstr "%s %d-bit (ID di costruzion: %s)"
 
-#: ../panels/info/cc-info-panel.c:512
+#: ../panels/info/cc-info-panel.c:519
 #, c-format
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-bit (ID di costruzion: %s)"
 
-#: ../panels/info/cc-info-panel.c:520
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:522
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1168
+#: ../panels/info/cc-info-panel.c:1175
 msgid "Ask what to do"
 msgstr "Domande ce fâ"
 
-#: ../panels/info/cc-info-panel.c:1172
+#: ../panels/info/cc-info-panel.c:1179
 msgid "Do nothing"
 msgstr "No sta fâ nie"
 
-#: ../panels/info/cc-info-panel.c:1176
+#: ../panels/info/cc-info-panel.c:1183
 msgid "Open folder"
 msgstr "Vierç cartele"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1274
 msgid "Other Media"
 msgstr "Vierç supuart"
 
-#: ../panels/info/cc-info-panel.c:1298
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for audio CDs"
 msgstr "Sielç une aplicazion par i CD audio"
 
-#: ../panels/info/cc-info-panel.c:1299
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application for video DVDs"
 msgstr "Sielç une aplicazion par i DVD video"
 
-#: ../panels/info/cc-info-panel.c:1300
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a music player is connected"
 msgstr "Sielç une aplicazion di eseguî cuant che al ven tacât un letôr musicâl"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application to run when a camera is connected"
 msgstr "Sielç une aplicazion di eseguî cuant che e ven tacade une fotocjamare"
 
-#: ../panels/info/cc-info-panel.c:1302
+#: ../panels/info/cc-info-panel.c:1309
 msgid "Select an application for software CDs"
 msgstr "Sielç une aplicazion par i CD di software"
 
@@ -1314,71 +1405,71 @@ msgstr "Sielç une aplicazion par i CD di software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1314
+#: ../panels/info/cc-info-panel.c:1321
 msgid "audio DVD"
 msgstr "DVD audio"
 
-#: ../panels/info/cc-info-panel.c:1315
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank Blu-ray disc"
 msgstr "Disc Blu-ray vueit"
 
-#: ../panels/info/cc-info-panel.c:1316
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank CD disc"
 msgstr "Disc CD vueit"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank DVD disc"
 msgstr "Disc DVD vueit"
 
-#: ../panels/info/cc-info-panel.c:1318
+#: ../panels/info/cc-info-panel.c:1325
 msgid "blank HD DVD disc"
 msgstr "Disc HD DVD vueit"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1326
 msgid "Blu-ray video disc"
 msgstr "Disc video Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1320
+#: ../panels/info/cc-info-panel.c:1327
 msgid "e-book reader"
 msgstr "Letôr e-book"
 
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:1328
 msgid "HD DVD video disc"
 msgstr "Disc video HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:1332
 msgid "Windows software"
 msgstr "Software Windows"
 
-#: ../panels/info/cc-info-panel.c:1448
+#: ../panels/info/cc-info-panel.c:1455
 msgid "Section"
 msgstr "Sezion"
 
-#: ../panels/info/cc-info-panel.c:1457 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Panoramiche"
 
-#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Aplicazions predefinidis"
 
-#: ../panels/info/cc-info-panel.c:1468 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Dispositîfs rimovibil"
 
-#: ../panels/info/cc-info-panel.c:1493
+#: ../panels/info/cc-info-panel.c:1500
 #, c-format
 msgid "Version %s"
 msgstr "Version %s"
@@ -1719,11 +1810,34 @@ msgstr "Tast Compose"
 msgid "Modifiers-only switch to next source"
 msgstr "Dome i \"modificadôrs\" a passin ae sorzint sucessive"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+msgid "Reset All Shortcuts?"
+msgstr "Ristabilìs dutis lis scurtis?"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr ""
+"Ristabilint lis scurtis al podarès influençâ lis tôs scurtis personalizadis. "
+"Cheste operazion no pues jessi anulade."
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Anule"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+msgid "Reset All"
+msgstr "Ristabilìs dut"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
 msgstr "Torne met la scurte al so valôr predefinît"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1732,21 +1846,21 @@ msgstr ""
 "%s al è za doprât par <b>%s</b>. Se tu lu rimplacis, %s al vegnarà "
 "disabilitât"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Custom Shortcut"
 msgstr "Stabilìs la scurte personalizade"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Shortcut"
 msgstr "Met la scurte"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Inserìs la gnove scurte di cambiâ <b>%s</b>."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:949
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1036
 msgid "Add Custom Shortcut"
 msgstr "Zonte scurte personalizade"
 
@@ -1766,10 +1880,23 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Scurte;Ripet;Lampâ;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "Scurte di tastiere"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "Ristabilìs dut..."
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "Torne met la scurte ae sô cumbinazion di tascj predefinide"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
 msgstr "Nissune scurte di tastiere cjatade"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "Prove une ricercje diferente"
 
@@ -1778,6 +1905,7 @@ msgid "Press Esc to cancel."
 msgstr "Frache Esc par anulâ."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/printers/details-dialog.ui.h:1
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
@@ -1792,44 +1920,33 @@ msgid "Shortcut"
 msgstr "Scurte"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "Modifiche"
+msgid "Set Shortcut…"
+msgstr "Met la scurte..."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
-msgctxt "button"
-msgid "Set Shortcut"
-msgstr "Met la scurte"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Nissun"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "Gjave"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Inserìs la gnove scurte"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Anule"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Zonte"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "Rimplace"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "Met"
 
@@ -1985,7 +2102,7 @@ msgstr "_Sigurece 802.1x"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14 ../panels/wacom/wacom-stylus-page.ui.h:8
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "pagjine 1"
 
@@ -2004,7 +2121,6 @@ msgstr "_Autenticazion interne"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:16
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "pagjine 2"
@@ -2128,6 +2244,7 @@ msgstr "Identitât"
 #: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Direzion"
 
@@ -2175,13 +2292,6 @@ msgstr "Elimine instradament"
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Automatic (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Manuâl"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
@@ -2497,9 +2607,9 @@ msgid "Select file to import"
 msgstr "Selezione un file di impuartâ"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2092
+#: ../panels/printers/pp-details-dialog.c:322
 #: ../panels/sharing/cc-sharing-panel.c:376
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
 msgstr "_Vierç"
 
@@ -2594,7 +2704,7 @@ msgstr "îr"
 
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:13
+#: ../panels/network/panel-common.c:649
 msgid "IP Address"
 msgstr "Direzions IP"
 
@@ -3614,18 +3724,6 @@ msgstr ""
 msgid "_Type"
 msgstr "_Gjenar"
 
-#: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
-#: ../panels/privacy/cc-privacy-panel.c:190
-#: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-msgid "On"
-msgstr "Piât"
-
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
@@ -3695,43 +3793,29 @@ msgstr "Notifichis sul schermi b_locât"
 msgid "Applications"
 msgstr "Aplicazions"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
-#: ../panels/online-accounts/cc-online-accounts-panel.c:111
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Altri"
 
-#. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-msgid "Add Account"
-msgstr "Zonte account"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
-msgid "Mail"
-msgstr "E-mail"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-msgid "Calendar"
-msgstr "Calendari"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
-msgid "Contacts"
-msgstr "Contats"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:346
-msgid "Chat"
-msgstr "Chat"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:352
-msgid "Resources"
-msgstr "Risorsis"
-
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:403
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
 msgid "%s Account"
 msgstr "Account di %s"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
+msgid "Error removing account"
+msgstr "Erôr tal gjava l'account"
+
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
+#, c-format
+msgid "<b>%s</b> removed"
+msgstr "<b>%s</b> gjavât"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3753,12 +3837,25 @@ msgstr ""
 "ReadItLater;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
+msgid "Undo"
+msgstr "Disfe"
+
+#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Connect to your data in the cloud"
 msgstr "Tachiti ai tiei dâts tal cloud"
 
-#: ../panels/online-accounts/online-accounts.ui.h:2
+#: ../panels/online-accounts/online-accounts.ui.h:3
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Nissune conession a internet — conetiti par configurâ gnûfs account onlinie"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
 msgstr "Zonte un account"
+
+#: ../panels/online-accounts/online-accounts.ui.h:5
+msgid "Remove Account"
+msgstr "Gjave account"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Unknown time"
@@ -4119,189 +4216,43 @@ msgstr "Autentiche"
 msgid "Authentication Required"
 msgstr "Autenticazion necessarie"
 
-#. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:698
-msgid "Low on toner"
-msgstr "Toner in esauriment"
-
-#. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:700
-msgid "Out of toner"
-msgstr "Toner esaurît"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:703
-msgid "Low on developer"
-msgstr "Developer in esauriment"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:706
-msgid "Out of developer"
-msgstr "Developer esaurît"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:708
-msgid "Low on a marker supply"
-msgstr "Furnidure toner in esauriment"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:710
-msgid "Out of a marker supply"
-msgstr "Furnidure toner esauride"
-
-#. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:712
-msgid "Open cover"
-msgstr "Tapon viert"
-
-#. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:714
-msgid "Open door"
-msgstr "Sportel viert"
-
-#. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:716
-msgid "Low on paper"
-msgstr "Cjarte in esauriment"
-
-#. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:718
-msgid "Out of paper"
-msgstr "Cjarte esauride"
-
-#. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:720
-msgctxt "printer state"
-msgid "Offline"
-msgstr "Fûr rêt"
-
-#. Translators: Someone has stopped the Printer
-#. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:722
-#: ../panels/printers/cc-printers-panel.c:912
-msgctxt "printer state"
-msgid "Stopped"
-msgstr "Ferme"
-
-#. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:724
-msgid "Waste receptacle almost full"
-msgstr "Bidon scovacis cuasi plen"
-
-#. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:726
-msgid "Waste receptacle full"
-msgstr "Bidon scovacis plen"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:728
-msgid "The optical photo conductor is near end of life"
-msgstr "Il fotocondutôr otic al sta par terminâ il sô timp di operativitât"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:730
-msgid "The optical photo conductor is no longer functioning"
-msgstr "Il fotocondutôr otic nol funzione plui"
-
-#. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:839
-msgctxt "printer state"
-msgid "Configuring"
-msgstr "In configurazion"
-
-#. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:898
-msgctxt "printer state"
-msgid "Ready"
-msgstr "Pronte"
-
-#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:903
-msgctxt "printer state"
-msgid "Does not accept jobs"
-msgstr "No acete lavôrs"
-
-#. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:908
-msgctxt "printer state"
-msgid "Processing"
-msgstr "In elaborazion"
-
-#. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1028
-msgid "Toner Level"
-msgstr "Nivel toner"
-
-#. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1031
-msgid "Ink Level"
-msgstr "Nivel ingjustri"
-
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1034
-msgid "Supply Level"
-msgstr "Nivel consumabii"
-
-#. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1052
-msgctxt "printer state"
-msgid "Installing"
-msgstr "Instalazion"
-
-#. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1566
-#, c-format
-msgid "%u active"
-msgid_plural "%u active"
-msgstr[0] "%u atîf"
-msgstr[1] "%u atîfs"
-
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1907
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Failed to add new printer."
 msgstr "Zonte de gnove stampant falide."
 
-#: ../panels/printers/cc-printers-panel.c:2088
-msgid "Select PPD File"
-msgstr "Selezione file PPD"
-
-#: ../panels/printers/cc-printers-panel.c:2097
-msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
-"PPD.GZ)"
-msgstr ""
-"File PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
-"GZ)"
-
-#: ../panels/printers/cc-printers-panel.c:2404
-msgid "No suitable driver found"
-msgstr "Nissun driver adat cjatât"
-
-#: ../panels/printers/cc-printers-panel.c:2475
-msgid "Searching for preferred drivers…"
-msgstr "Ricercje driver preferîts..."
-
-#: ../panels/printers/cc-printers-panel.c:2496
-msgid "Select from database…"
-msgstr "Selezione dal database..."
-
-#: ../panels/printers/cc-printers-panel.c:2505
-msgid "Provide PPD File…"
-msgstr "Furnìs file PPD..."
-
-#. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2652
-#: ../panels/printers/cc-printers-panel.c:2675
-msgid "Test page"
-msgstr "Pagjine di test"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3133
+#: ../panels/printers/cc-printers-panel.c:846
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impussibil cjariâ la interface: %s"
+
+#: ../panels/printers/details-dialog.ui.h:2
+#: ../panels/printers/printer-entry.ui.h:6
+msgid "Location"
+msgstr "Colocazion"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/details-dialog.ui.h:4
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
+msgid "Driver"
+msgstr "Driver"
+
+#: ../panels/printers/details-dialog.ui.h:5
+msgid "Searching for preferred drivers…"
+msgstr "Ricercje driver preferîts..."
+
+#: ../panels/printers/details-dialog.ui.h:6
+msgid "Search for Drivers"
+msgstr "Cîr Drivers"
+
+#: ../panels/printers/details-dialog.ui.h:7
+msgid "Select from Database…"
+msgstr "Selezione de Base di dâts..."
+
+#: ../panels/printers/details-dialog.ui.h:8
+msgid "Install PPD File…"
+msgstr "Instale file PPD..."
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
@@ -4329,7 +4280,8 @@ msgstr "Nissun lavôr di stampe atîf"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/pp-new-printer-dialog.c:380
+#: ../panels/printers/pp-new-printer-dialog.c:384
+#: ../panels/printers/pp-new-printer-dialog.c:456
 msgid "Add Printer"
 msgstr "Zonte stampant"
 
@@ -4356,6 +4308,29 @@ msgstr ""
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "Cjariament opzions..."
+
+#. Translators: This is the title of the dialog. %s is the printer name.
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:416
+#, c-format
+msgid "%s Details"
+msgstr "Detais di %s"
+
+#: ../panels/printers/pp-details-dialog.c:174
+msgid "No suitable driver found"
+msgstr "Nissun driver adat cjatât"
+
+#: ../panels/printers/pp-details-dialog.c:318
+msgid "Select PPD File"
+msgstr "Selezione file PPD"
+
+#: ../panels/printers/pp-details-dialog.c:327
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr ""
+"File PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
+"GZ)"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4467,60 +4442,60 @@ msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Lavôrs Atîfs"
 
-#: ../panels/printers/pp-new-printer-dialog.c:395
+#: ../panels/printers/pp-new-printer-dialog.c:402
 msgid "Unlock Print Server"
 msgstr "Sbloche servidôr di stampe"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:399
+#: ../panels/printers/pp-new-printer-dialog.c:406
 #, c-format
 msgid "Unlock %s."
 msgstr "Sbloche %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-new-printer-dialog.c:404
+#: ../panels/printers/pp-new-printer-dialog.c:411
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr "Scrîf non utent e password par viodi lis stampants su %s."
 
-#: ../panels/printers/pp-new-printer-dialog.c:851
+#: ../panels/printers/pp-new-printer-dialog.c:876
 msgid "Searching for Printers"
 msgstr "Daûr a cirî stampants"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1774
+#: ../panels/printers/pp-new-printer-dialog.c:1799
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1779
+#: ../panels/printers/pp-new-printer-dialog.c:1804
 msgid "Serial Port"
 msgstr "Puarte seriâl"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1786
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "Puarte paralele"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1791
+#: ../panels/printers/pp-new-printer-dialog.c:1816
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1828
+#: ../panels/printers/pp-new-printer-dialog.c:1853
 #, c-format
 msgid "Location: %s"
 msgstr "Colocazion: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1833
+#: ../panels/printers/pp-new-printer-dialog.c:1858
 #, c-format
 msgid "Address: %s"
 msgstr "Direzion: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1862
+#: ../panels/printers/pp-new-printer-dialog.c:1887
 msgid "Server requires authentication"
 msgstr "Il server al domande autenticazion"
 
@@ -4648,82 +4623,173 @@ msgstr "Nissune pre-filtradure"
 msgid "Manufacturer"
 msgstr "Produtôr"
 
-#. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:250
-msgid "Driver"
-msgstr "Driver"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:368
+msgid "No Active Jobs"
+msgstr "Nissun lavôr atîf"
 
-#: ../panels/printers/printers.ui.h:1
-msgctxt "button"
-msgid "Add Printer"
-msgstr "Zonte stampant"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:373
+#, c-format
+msgid "%u Job"
+msgid_plural "%u Jobs"
+msgstr[0] "%u Lavôr"
+msgstr[1] "%u Lavôrs"
 
-#: ../panels/printers/printers.ui.h:2
+#. Translators: The printer is low on toner
+#: ../panels/printers/pp-printer-entry.c:470
+msgid "Low on toner"
+msgstr "Toner in esauriment"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/pp-printer-entry.c:472
+msgid "Out of toner"
+msgstr "Toner esaurît"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:475
+msgid "Low on developer"
+msgstr "Developer in esauriment"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:478
+msgid "Out of developer"
+msgstr "Developer esaurît"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:480
+msgid "Low on a marker supply"
+msgstr "Furnidure toner in esauriment"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:482
+msgid "Out of a marker supply"
+msgstr "Furnidure toner esauride"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/pp-printer-entry.c:484
+msgid "Open cover"
+msgstr "Tapon viert"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/pp-printer-entry.c:486
+msgid "Open door"
+msgstr "Sportel viert"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/pp-printer-entry.c:488
+msgid "Low on paper"
+msgstr "Cjarte in esauriment"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/pp-printer-entry.c:490
+msgid "Out of paper"
+msgstr "Cjarte esauride"
+
+#. Translators: The printer is offline
+#: ../panels/printers/pp-printer-entry.c:492
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Fûr rêt"
+
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/pp-printer-entry.c:494
+#: ../panels/printers/pp-printer-entry.c:624
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Ferme"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/pp-printer-entry.c:496
+msgid "Waste receptacle almost full"
+msgstr "Bidon scovacis cuasi plen"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/pp-printer-entry.c:498
+msgid "Waste receptacle full"
+msgstr "Bidon scovacis plen"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:500
+msgid "The optical photo conductor is near end of life"
+msgstr "Il fotocondutôr otic al sta par terminâ il sô timp di operativitât"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:502
+msgid "The optical photo conductor is no longer functioning"
+msgstr "Il fotocondutôr otic nol funzione plui"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/pp-printer-entry.c:610
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Pronte"
+
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/pp-printer-entry.c:615
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "No acete lavôrs"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/pp-printer-entry.c:620
+msgctxt "printer state"
+msgid "Processing"
+msgstr "In elaborazion"
+
+#: ../panels/printers/printer-entry.ui.h:1
+msgid "Printing Options"
+msgstr "Opzions di stampe"
+
+#: ../panels/printers/printer-entry.ui.h:2
+msgid "Printer Details"
+msgstr "Detais stampant"
+
+#: ../panels/printers/printer-entry.ui.h:3
+msgid "Use Printer by Default"
+msgstr "Dopre la stampant come impostazion predefinide"
+
+#: ../panels/printers/printer-entry.ui.h:4
 msgid "Remove Printer"
 msgstr "Gjave stampant"
 
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:4
-msgid "Supply"
-msgstr "Nivei"
-
-#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:6
-msgid "Location"
-msgstr "Colocazion"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
-msgid "_Default printer"
-msgstr "_Stampant predefinide"
-
-#: ../panels/printers/printers.ui.h:9
-msgid "Jobs"
-msgstr "Lavôrs"
-
-#. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:11
-msgid "Show _Jobs"
-msgstr "Mostre _lavôrs"
-
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printer-entry.ui.h:5
 msgid "Model"
 msgstr "Model"
 
-#: ../panels/printers/printers.ui.h:15
-msgid "label"
-msgstr "etichete"
+#: ../panels/printers/printer-entry.ui.h:7
+msgid "Ink Level"
+msgstr "Nivel ingjustri"
 
-#: ../panels/printers/printers.ui.h:17
-msgid "Setting new driver…"
-msgstr "Impostazion gnûf driver..."
+#. Translators: This is the message which follows the printer error.
+#: ../panels/printers/printer-entry.ui.h:9
+msgid "Please restart when the problem is resolved."
+msgstr "Torne invie cuant che il probleme al ven risolt."
 
-#: ../panels/printers/printers.ui.h:18
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
-msgid "page 3"
-msgstr "pagjine 3"
+#. Translators: This is the button which restarts the printer.
+#: ../panels/printers/printer-entry.ui.h:11
+msgid "Restart"
+msgstr "Torne invie"
 
-#. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:20
-msgid "Print _Test Page"
-msgstr "Stampe _pagjine di prove"
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "Zonte..."
 
-#. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:8
-msgid "_Options"
-msgstr "_Opzions"
-
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:3
 msgid "No printers"
 msgstr "Nissune stampant"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:25
-msgid "Add a Printer"
-msgstr "Zonte une stampant"
+#: ../panels/printers/printers.ui.h:5
+msgid "Add a Printer…"
+msgstr "Zonte une stampant..."
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:7
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -4757,45 +4823,45 @@ msgstr "Servizis su la posizion"
 msgid "Usage & History"
 msgstr "Ûs e Cronologjie"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "Disvuedâ la scovacere?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr ""
 "Ducj i elements te scovacere a vegnaran eliminâts in maniere definitive."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "Dis_vuede scovacere"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "Eliminâ ducj i file temporanis?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Ducj i file temporanis a vegnaran eliminâts in maniere definitive."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "_Nete file temporanis"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Nete scovacere e file temporanis"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Utilizazion software"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Segnalazion problemis"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4804,7 +4870,7 @@ msgstr ""
 "Inviant lis segnalazions nus permet di miorâ %s. Lis segnalazions a vegnin "
 "inviadis in anonim e cualsisei dât personâl al ven prime eliminât."
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Informative su la privacy"
 
@@ -4931,6 +4997,14 @@ msgstr "Nete in automatic i file _temporanis"
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
 msgstr "Nete _dopo"
+
+#: ../panels/privacy/privacy.ui.h:34
+msgid "_Empty Trash…"
+msgstr "Dis_vuede scovacere..."
+
+#: ../panels/privacy/privacy.ui.h:35
+msgid "_Purge Temporary Files…"
+msgstr "_Nete file temporanis..."
 
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
@@ -5063,10 +5137,6 @@ msgstr "Dopre la _stesse sorzint par ducj i barcons"
 msgid "Allow _different sources for each window"
 msgstr "Permet sorzints _diviersis par ogni barcon"
 
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "Scurte di tastiere"
-
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
 msgstr "Passe ae sorzint precedent"
@@ -5125,6 +5195,10 @@ msgstr "Ream Unît"
 #: ../panels/region/region.ui.h:7
 msgid "Input Sources"
 msgstr "Sorzints Input"
+
+#: ../panels/region/region.ui.h:8
+msgid "_Options"
+msgstr "_Opzions"
 
 #: ../panels/region/region.ui.h:9
 msgid "Add input source"
@@ -6311,8 +6385,8 @@ msgid "Last Login"
 msgstr "Ultin acès"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-msgid "Remove Account"
-msgstr "Gjave account"
+msgid "Remove User…"
+msgstr "Gjave utent..."
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -6508,29 +6582,29 @@ msgstr "Erôr no cognossût"
 msgid "Should match the web address of your login provider."
 msgstr "Al varès di corispuindi ae direzion web dal to furnidôr di acès."
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "Zonte dal account falide"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Lis password no corispuindin."
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Regjistrazion account falide"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "Nissun mût supuartât par autenticâsi cun chest domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Falît a unîsi al domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6538,7 +6612,7 @@ msgstr ""
 "Non di acès no valit.\n"
 "Prove une altre volte."
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6546,11 +6620,11 @@ msgstr ""
 "Password no valide.\n"
 "Prove une altre volte."
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Acès al domini falît"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Impussibil cjatâ il domini. Forsit al è stât scrit mâl."
 
@@ -6685,7 +6759,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:840
+#: ../panels/user-accounts/um-user-panel.c:776
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -6693,7 +6767,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:780
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6730,23 +6804,23 @@ msgstr "Impussibil cambiâ la password"
 msgid "The passwords do not match."
 msgstr "Lis password no corispuindin."
 
-#: ../panels/user-accounts/um-photo-dialog.c:214
+#: ../panels/user-accounts/um-photo-dialog.c:215
 msgid "Browse for more pictures"
 msgstr "Esplore altris imagjins"
 
-#: ../panels/user-accounts/um-photo-dialog.c:448
+#: ../panels/user-accounts/um-photo-dialog.c:449
 msgid "Disable image"
 msgstr "Disabilite imagjin"
 
-#: ../panels/user-accounts/um-photo-dialog.c:466
+#: ../panels/user-accounts/um-photo-dialog.c:467
 msgid "Take a photo…"
 msgstr "Scate une foto..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:484
+#: ../panels/user-accounts/um-photo-dialog.c:485
 msgid "Browse for more pictures…"
 msgstr "Esplore altris imagjins..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:708
+#: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
 msgid "Used by %s"
 msgstr "Doprade di %s"
@@ -6775,30 +6849,30 @@ msgstr "Password no valide, prove di gnûf"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Impussibil tacâsi al domini %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:238
-msgid "Other Accounts"
-msgstr "Altris account"
+#: ../panels/user-accounts/um-user-panel.c:195
+msgid "<small>Your account</small>"
+msgstr "<small>Il to account</small>"
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
 msgstr "Eliminazion utent falide"
 
-#: ../panels/user-accounts/um-user-panel.c:506
-#: ../panels/user-accounts/um-user-panel.c:565
-#: ../panels/user-accounts/um-user-panel.c:617
+#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:559
 msgid "Failed to revoke remotely managed user"
 msgstr "Revoche dal utent gjestît di rimot falide"
 
-#: ../panels/user-accounts/um-user-panel.c:673
+#: ../panels/user-accounts/um-user-panel.c:613
 msgid "You cannot delete your own account."
 msgstr "Nol è permetût eliminâ il propri account."
 
-#: ../panels/user-accounts/um-user-panel.c:682
+#: ../panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s nol à ancjemò terminât la session"
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:626
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6806,12 +6880,12 @@ msgstr ""
 "Eliminâ un utent intant che la sô session e je ancjemò in cors, al pues "
 "lassâ il sisteme in stât incoerent."
 
-#: ../panels/user-accounts/um-user-panel.c:695
+#: ../panels/user-accounts/um-user-panel.c:635
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Tignî i file di %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:639
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6819,51 +6893,55 @@ msgstr ""
 "Al è pussibil tegnî la cartele home, i spool di pueste e i varis file "
 "temporanis cuant che si elimine un account utent."
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:642
 msgid "_Delete Files"
 msgstr "_Scancele file"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:643
 msgid "_Keep Files"
 msgstr "_Ten file"
 
-#: ../panels/user-accounts/um-user-panel.c:717
+#: ../panels/user-accounts/um-user-panel.c:657
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Sigûrs di revocâ l'account di %s gjestît di rimot?"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:661
 msgid "_Delete"
 msgstr "_Elimine"
 
-#: ../panels/user-accounts/um-user-panel.c:773
+#: ../panels/user-accounts/um-user-panel.c:711
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Account disabilitât"
 
-#: ../panels/user-accounts/um-user-panel.c:781
+#: ../panels/user-accounts/um-user-panel.c:719
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Di impostâ al prossim acès"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:722
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nissun"
 
-#: ../panels/user-accounts/um-user-panel.c:833
+#: ../panels/user-accounts/um-user-panel.c:769
 msgid "Logged in"
 msgstr "Acès eseguît"
 
-#: ../panels/user-accounts/um-user-panel.c:1260
+#: ../panels/user-accounts/um-user-panel.c:1117
 msgid "Failed to contact the accounts service"
 msgstr "Comunicazion cun servizi account falide"
 
-#: ../panels/user-accounts/um-user-panel.c:1262
+#: ../panels/user-accounts/um-user-panel.c:1119
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sigurâsi che AccountService al sedi instalât e abilitât."
 
-#: ../panels/user-accounts/um-user-panel.c:1304
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
+#: ../panels/user-accounts/um-user-panel.c:1155
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6871,12 +6949,12 @@ msgstr ""
 "Par aplicâ cambiaments,\n"
 "fâs prime clic su la icone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1344
+#: ../panels/user-accounts/um-user-panel.c:1195
 msgid "Create a user account"
 msgstr "Cree un account utent"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
-#: ../panels/user-accounts/um-user-panel.c:1655
+#: ../panels/user-accounts/um-user-panel.c:1206
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6884,12 +6962,12 @@ msgstr ""
 "Par creâ un account utent,\n"
 "fas prime clic su la icone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1365
+#: ../panels/user-accounts/um-user-panel.c:1216
 msgid "Delete the selected user account"
 msgstr "Elimine l'account utent selezionât"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
-#: ../panels/user-accounts/um-user-panel.c:1660
+#: ../panels/user-accounts/um-user-panel.c:1228
+#: ../panels/user-accounts/um-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6897,24 +6975,20 @@ msgstr ""
 "Par eliminâ l'account utent selezionât,\n"
 "fâs prime clic su la icone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1569
-msgid "My Account"
-msgstr "Account personâl"
-
-#: ../panels/user-accounts/um-utils.c:563
+#: ../panels/user-accounts/um-utils.c:507
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Mi displâs, chel non utent nol è disponibil. Prove cuntun altri."
 
-#: ../panels/user-accounts/um-utils.c:566
+#: ../panels/user-accounts/um-utils.c:510
 #, c-format
 msgid "The username is too long."
 msgstr "Il non utent al è masse lunc."
 
-#: ../panels/user-accounts/um-utils.c:569
+#: ../panels/user-accounts/um-utils.c:513
 msgid "The username cannot start with a “-”."
 msgstr "Il non utent nol pues tacâ cuntun “-”."
 
-#: ../panels/user-accounts/um-utils.c:572
+#: ../panels/user-accounts/um-utils.c:516
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -6922,7 +6996,7 @@ msgstr ""
 "Il non utent al à di jessi formât di letaris maiusculis e minusculis (de A "
 "ae Z), numars e dai caratars chi daurman: . - _"
 
-#: ../panels/user-accounts/um-utils.c:576
+#: ../panels/user-accounts/um-utils.c:520
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Chest al vignarà doprât par dâ un non ae tô cartele cjase (home) e nol "
@@ -7142,6 +7216,10 @@ msgstr "Boton inferiôr"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilitât de ponte"
 
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "page 3"
+msgstr "pagjine 3"
+
 #: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1484
 msgid "All Settings"
@@ -7263,6 +7341,84 @@ msgstr "Hotspot"
 msgid "No results found"
 msgstr "Nissun risultât cjatât"
 
+#~ msgid "Edit"
+#~ msgstr "Modifiche"
+
+#~ msgctxt "button"
+#~ msgid "Set Shortcut"
+#~ msgstr "Met la scurte"
+
+#~ msgid "Add Account"
+#~ msgstr "Zonte account"
+
+#~ msgid "Mail"
+#~ msgstr "E-mail"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendari"
+
+#~ msgid "Contacts"
+#~ msgstr "Contats"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Resources"
+#~ msgstr "Risorsis"
+
+#~ msgctxt "printer state"
+#~ msgid "Configuring"
+#~ msgstr "In configurazion"
+
+#~ msgid "Toner Level"
+#~ msgstr "Nivel toner"
+
+#~ msgid "Supply Level"
+#~ msgstr "Nivel consumabii"
+
+#~ msgctxt "printer state"
+#~ msgid "Installing"
+#~ msgstr "Instalazion"
+
+#~ msgid "%u active"
+#~ msgid_plural "%u active"
+#~ msgstr[0] "%u atîf"
+#~ msgstr[1] "%u atîfs"
+
+#~ msgid "Test page"
+#~ msgstr "Pagjine di test"
+
+#~ msgctxt "button"
+#~ msgid "Add Printer"
+#~ msgstr "Zonte stampant"
+
+#~ msgid "Supply"
+#~ msgstr "Nivei"
+
+#~ msgid "_Default printer"
+#~ msgstr "_Stampant predefinide"
+
+#~ msgid "Jobs"
+#~ msgstr "Lavôrs"
+
+#~ msgid "Show _Jobs"
+#~ msgstr "Mostre _lavôrs"
+
+#~ msgid "label"
+#~ msgstr "etichete"
+
+#~ msgid "Setting new driver…"
+#~ msgstr "Impostazion gnûf driver..."
+
+#~ msgid "Print _Test Page"
+#~ msgstr "Stampe _pagjine di prove"
+
+#~ msgid "Other Accounts"
+#~ msgstr "Altris account"
+
+#~ msgid "My Account"
+#~ msgstr "Account personâl"
+
 #~ msgctxt "notifications"
 #~ msgid "Notification _Banners"
 #~ msgstr "_Banner di notifiche"
@@ -7272,9 +7428,6 @@ msgstr "Nissun risultât cjatât"
 
 #~ msgid "Error creating account"
 #~ msgstr "Erôr tal creâ l'account"
-
-#~ msgid "Error removing account"
-#~ msgstr "Erôr tal gjava l'account"
 
 # Metût plurâl par risolvi masculin/feminin
 #~ msgid "Are you sure you want to remove the account?"
@@ -7313,9 +7466,6 @@ msgstr "Nissun risultât cjatât"
 
 #~ msgid "Left Ring Mode #%d"
 #~ msgstr "Modalitât Ring çamp #%d"
-
-#~ msgid "Right Ring"
-#~ msgstr "Ring diestri"
 
 #~ msgid "Right Ring Mode #%d"
 #~ msgstr "Modalitât Ring diestri #%d"
@@ -7474,9 +7624,6 @@ msgstr "Nissun risultât cjatât"
 #~ msgid "Add User Account"
 #~ msgstr "Zonte account utent"
 
-#~ msgid "Remove User Account"
-#~ msgstr "Gjave account utent"
-
 #~ msgid "_Account Activity"
 #~ msgstr "_Ativitât dal account"
 
@@ -7569,9 +7716,6 @@ msgstr "Nissun risultât cjatât"
 #~ msgid "Login History"
 #~ msgstr "Cronologjie acès"
 
-#~ msgid "Login Options"
-#~ msgstr "Opzions di acès"
-
 #~ msgid "A user with the username '%s' already exists."
 #~ msgstr "Un utent cul non utent '%s' al esist za."
 
@@ -7652,9 +7796,6 @@ msgstr "Nissun risultât cjatât"
 
 #~ msgid "No printers available"
 #~ msgstr "Nissune stampant disponibile"
-
-#~ msgid "Active Jobs"
-#~ msgstr "Lavôrs atîfs"
 
 #~ msgid "Close"
 #~ msgstr "Siere"
