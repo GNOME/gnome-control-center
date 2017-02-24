@@ -34,4 +34,6 @@ GType       pp_printer_entry_get_type (void);
 PpPrinterEntry *pp_printer_entry_new  (cups_dest_t printer,
                                        gboolean    is_authorized);
 
+void            pp_printer_entry_update_jobs_count (PpPrinterEntry *self);
+
 #endif /* PP_PRINTER_ENTRY_H */

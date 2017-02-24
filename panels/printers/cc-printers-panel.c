@@ -38,6 +38,7 @@
 #include "pp-utils.h"
 #include "pp-cups.h"
 #include "pp-printer-entry.h"
+#include "pp-job.h"
 
 CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
 
@@ -250,6 +251,58 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 }
 
 static void
+on_get_job_attributes_cb (GObject      *source_object,
+                          GAsyncResult *res,
+                          gpointer      user_data)
+{
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanelPrivate *priv;
+  const gchar            *job_originating_user_name;
+  const gchar            *job_printer_uri;
+  GVariant               *attributes;
+  GVariant               *username;
+  GVariant               *printer_uri;
+  GError                 *error = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  attributes = pp_job_get_attributes_finish (PP_JOB (source_object), res, &error);
+  g_object_unref (source_object);
+
+  if (attributes != NULL)
+    {
+      if ((username = g_variant_lookup_value (attributes, "job-originating-user-name", G_VARIANT_TYPE ("as"))) != NULL)
+        {
+          if ((printer_uri = g_variant_lookup_value (attributes, "job-printer-uri", G_VARIANT_TYPE ("as"))) != NULL)
+            {
+              job_originating_user_name = g_variant_get_string (g_variant_get_child_value (username, 0), NULL);
+              job_printer_uri = g_variant_get_string (g_variant_get_child_value (printer_uri, 0), NULL);
+
+              if (job_originating_user_name != NULL && job_printer_uri != NULL &&
+                  g_strcmp0 (job_originating_user_name, cupsUser ()) == 0 &&
+                  g_strrstr (job_printer_uri, "/") != 0 &&
+                  priv->dests != NULL)
+                {
+                  PpPrinterEntry *printer_entry;
+                  gchar *printer_name;
+
+                  printer_name = g_strrstr (job_printer_uri, "/") + 1;
+                  printer_entry = PP_PRINTER_ENTRY (g_hash_table_lookup (priv->printer_entries, printer_name));
+
+                  pp_printer_entry_update_jobs_count (printer_entry);
+                }
+
+              g_variant_unref (printer_uri);
+            }
+
+          g_variant_unref (username);
+        }
+
+      g_variant_unref (attributes);
+    }
+}
+
+static void
 on_cups_notification (GDBusConnection *connection,
                       const char      *sender_name,
                       const char      *object_path,
@@ -259,7 +312,22 @@ on_cups_notification (GDBusConnection *connection,
                       gpointer         user_data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  gboolean                printer_is_accepting_jobs;
+  gchar                  *printer_name = NULL;
   gchar                  *text = NULL;
+  gchar                  *printer_uri = NULL;
+  gchar                  *printer_state_reasons = NULL;
+  PpJob                  *job;
+  gchar                  *job_state_reasons = NULL;
+  gchar                  *job_name = NULL;
+  guint                   job_id;
+  gint                    printer_state;
+  gint                    job_state;
+  gint                    job_impressions_completed;
+  static gchar *requested_attrs[] = {
+    "job-printer-uri",
+    "job-originating-user-name",
+    NULL };
 
   if (g_strcmp0 (signal_name, "PrinterAdded") != 0 &&
       g_strcmp0 (signal_name, "PrinterDeleted") != 0 &&
@@ -271,13 +339,47 @@ on_cups_notification (GDBusConnection *connection,
 
   if (g_variant_n_children (parameters) == 1)
     g_variant_get (parameters, "(&s)", &text);
-  else if (g_strcmp0 (signal_name, "PrinterAdded") == 0 ||
-           g_strcmp0 (signal_name, "PrinterDeleted") == 0 ||
-           g_strcmp0 (signal_name, "PrinterStateChanged") == 0 ||
-           g_strcmp0 (signal_name, "PrinterStopped") == 0 ||
-           g_strcmp0 (signal_name, "JobCreated") == 0 ||
-           g_strcmp0 (signal_name, "JobCompleted") == 0)
+ else if (g_variant_n_children (parameters) == 6)
+    {
+      g_variant_get (parameters, "(&s&s&su&sb)",
+                     &text,
+                     &printer_uri,
+                     &printer_name,
+                     &printer_state,
+                     &printer_state_reasons,
+                     &printer_is_accepting_jobs);
+    }
+  else if (g_variant_n_children (parameters) == 11)
+    {
+      g_variant_get (parameters, "(&s&s&su&sbuu&s&su)",
+                     &text,
+                     &printer_uri,
+                     &printer_name,
+                     &printer_state,
+                     &printer_state_reasons,
+                     &printer_is_accepting_jobs,
+                     &job_id,
+                     &job_state,
+                     &job_state_reasons,
+                     &job_name,
+                     &job_impressions_completed);
+    }
+
+  if (g_strcmp0 (signal_name, "PrinterAdded") == 0 ||
+      g_strcmp0 (signal_name, "PrinterDeleted") == 0 ||
+      g_strcmp0 (signal_name, "PrinterStateChanged") == 0 ||
+      g_strcmp0 (signal_name, "PrinterStopped") == 0)
     actualize_printers_list (self);
+  else if (g_strcmp0 (signal_name, "JobCreated") == 0 ||
+           g_strcmp0 (signal_name, "JobCompleted") == 0)
+    {
+      job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
+      pp_job_get_attributes_async (job,
+                                   requested_attrs,
+                                   NULL,
+                                   on_get_job_attributes_cb,
+                                   self);
+    }
 }
 
 static gchar *subscription_events[] = {

@@ -390,8 +390,8 @@ remove_printer (GtkButton      *button,
   printer_delete (self->printer_name);
 }
 
-static void
-update_jobs_count (PpPrinterEntry *self)
+void
+pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
 {
   cups_job_t *jobs = NULL;
   gchar *button_label;
@@ -413,6 +413,11 @@ update_jobs_count (PpPrinterEntry *self)
 
   gtk_button_set_label (GTK_BUTTON (self->show_jobs_dialog_button), button_label);
   gtk_widget_set_sensitive (self->show_jobs_dialog_button, num_jobs > 0);
+
+  if (self->pp_jobs_dialog != NULL)
+    {
+      pp_jobs_dialog_update (self->pp_jobs_dialog);
+    }
 
   g_free (button_label);
 }
@@ -707,7 +712,7 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   g_signal_connect (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), inklevel);
 
-  update_jobs_count (self);
+  pp_printer_entry_update_jobs_count (self);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->printer_default_checkbutton), self->is_authorized);
   gtk_widget_set_sensitive (GTK_WIDGET (self->remove_printer_menuitem), self->is_authorized);
