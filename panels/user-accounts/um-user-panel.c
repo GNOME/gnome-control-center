@@ -192,7 +192,7 @@ create_carousel_entry (CcUserPanelPrivate *d, ActUser *user)
         g_free (label);
 
         if (act_user_get_uid (user) == getuid ())
-                label = g_strdup (_("<small>Your account</small>"));
+                label = g_strdup_printf ("<small>%s</small>", _("Your account"));
         else
                 label = g_strdup (" ");
 
