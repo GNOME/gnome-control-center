@@ -99,6 +99,8 @@ struct _CcPrintersPanelPrivate
 
   gchar    *renamed_printer_name;
 
+  GHashTable *printer_entries;
+
   gpointer dummy;
 };
 
@@ -217,6 +219,8 @@ cc_printers_panel_dispose (GObject *object)
       g_object_unref (priv->get_all_ppds_cancellable);
       priv->get_all_ppds_cancellable = NULL;
     }
+
+  g_clear_pointer (&priv->printer_entries, g_hash_table_destroy);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
@@ -594,6 +598,8 @@ add_printer_entry (CcPrintersPanel *self,
 
   gtk_box_pack_start (GTK_BOX (content), GTK_WIDGET (printer_entry), FALSE, TRUE, 5);
   gtk_widget_show_all (content);
+
+  g_hash_table_insert (priv->printer_entries, g_strdup (printer.name), printer_entry);
 }
 
 static void
@@ -937,6 +943,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->lockdown_settings = NULL;
 
   priv->all_ppds_list = NULL;
+
+  priv->printer_entries = g_hash_table_new_full (g_str_hash,
+                                                 g_str_equal,
+                                                 g_free,
+                                                 NULL);
 
   builder_result = gtk_builder_add_objects_from_resource (priv->builder,
                                                           "/org/gnome/control-center/printers/printers.ui",
