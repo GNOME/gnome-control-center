@@ -21,6 +21,8 @@ libinfo_la_SOURCES =		\
 	$(BUILT_SOURCES)	\
 	cc-info-panel.c		\
 	cc-info-panel.h		\
+	cc-info-overview-panel.c		\
+	cc-info-overview-panel.h		\
 	gsd-disk-space-helper.h	\
 	gsd-disk-space-helper.c	\
 	info-cleanup.h		\
