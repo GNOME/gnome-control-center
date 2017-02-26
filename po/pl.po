@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-19 21:39+0100\n"
-"PO-Revision-Date: 2017-02-19 21:40+0100\n"
+"POT-Creation-Date: 2017-02-26 21:11+0100\n"
+"PO-Revision-Date: 2017-02-26 21:12+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -118,7 +118,7 @@ msgstr "Po dodaniu obrazów do katalogu „%s” pojawią się one w tym miejsc
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/printers/pp-details-dialog.c:319
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -2618,7 +2618,7 @@ msgid "Select file to import"
 msgstr "Wybór pliku do zaimportowania"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:317
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -3812,26 +3812,26 @@ msgstr "Powiadomienia na ekranie _blokady"
 msgid "Applications"
 msgstr "Programy"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:145
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Inne"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
 msgid "%s Account"
 msgstr "Konto %s"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:777
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
 msgid "Error removing account"
 msgstr "Błąd podczas usuwania konta"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "Usunięto „<b>%s</b>”"
@@ -3864,10 +3864,16 @@ msgid "Connect to your data in the cloud"
 msgstr "Łączenie z danymi w chmurze"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Brak połączenia z Internetem — należy się połączyć, aby ustawić nowe konta "
+"online"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
 msgstr "Dodaj konto"
 
-#: ../panels/online-accounts/online-accounts.ui.h:4
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Usuń konto"
 
@@ -4335,21 +4341,21 @@ msgid "Loading options…"
 msgstr "Wczytywanie opcji…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: ../panels/printers/pp-details-dialog.c:100
-#: ../panels/printers/pp-details-dialog.c:412
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:415
 #, c-format
 msgid "%s Details"
 msgstr "Informacje o „%s”"
 
-#: ../panels/printers/pp-details-dialog.c:169
+#: ../panels/printers/pp-details-dialog.c:172
 msgid "No suitable driver found"
 msgstr "Nie odnaleziono odpowiedniego sterownika"
 
-#: ../panels/printers/pp-details-dialog.c:313
+#: ../panels/printers/pp-details-dialog.c:316
 msgid "Select PPD File"
 msgstr "Wybór pliku PPD"
 
-#: ../panels/printers/pp-details-dialog.c:322
+#: ../panels/printers/pp-details-dialog.c:325
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4650,12 +4656,12 @@ msgid "Manufacturer"
 msgstr "Producent"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:368
+#: ../panels/printers/pp-printer-entry.c:406
 msgid "No Active Jobs"
 msgstr "Brak aktywnych zadań"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:373
+#: ../panels/printers/pp-printer-entry.c:411
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4664,105 +4670,105 @@ msgstr[1] "%u zadania"
 msgstr[2] "%u zadań"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:470
+#: ../panels/printers/pp-printer-entry.c:508
 msgid "Low on toner"
 msgstr "Mało tonera"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:472
+#: ../panels/printers/pp-printer-entry.c:510
 msgid "Out of toner"
 msgstr "Brak tonera"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:475
+#: ../panels/printers/pp-printer-entry.c:513
 msgid "Low on developer"
 msgstr "Mało wywoływacza"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:478
+#: ../panels/printers/pp-printer-entry.c:516
 msgid "Out of developer"
 msgstr "Brak wywoływacza"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:480
+#: ../panels/printers/pp-printer-entry.c:518
 msgid "Low on a marker supply"
 msgstr "Mało atramentu"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:482
+#: ../panels/printers/pp-printer-entry.c:520
 msgid "Out of a marker supply"
 msgstr "Brak atramentu"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:484
+#: ../panels/printers/pp-printer-entry.c:522
 msgid "Open cover"
 msgstr "Otwarta pokrywa"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:486
+#: ../panels/printers/pp-printer-entry.c:524
 msgid "Open door"
 msgstr "Otwarte drzwiczki"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:488
+#: ../panels/printers/pp-printer-entry.c:526
 msgid "Low on paper"
 msgstr "Mało papieru"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:490
+#: ../panels/printers/pp-printer-entry.c:528
 msgid "Out of paper"
 msgstr "Brak papieru"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:492
+#: ../panels/printers/pp-printer-entry.c:530
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Offline"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:494
-#: ../panels/printers/pp-printer-entry.c:624
+#: ../panels/printers/pp-printer-entry.c:532
+#: ../panels/printers/pp-printer-entry.c:662
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zatrzymana"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:496
+#: ../panels/printers/pp-printer-entry.c:534
 msgid "Waste receptacle almost full"
 msgstr "Pojemnik na odpady jest prawie pełny"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:498
+#: ../panels/printers/pp-printer-entry.c:536
 msgid "Waste receptacle full"
 msgstr "Pojemnik na odpady jest pełny"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:500
+#: ../panels/printers/pp-printer-entry.c:538
 msgid "The optical photo conductor is near end of life"
 msgstr "Warstwa światłoczuła ledwo działa"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:502
+#: ../panels/printers/pp-printer-entry.c:540
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Warstwa światłoczuła już nie działa"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:610
+#: ../panels/printers/pp-printer-entry.c:648
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Gotowa"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:615
+#: ../panels/printers/pp-printer-entry.c:653
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nie przyjmuje zadań"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:620
+#: ../panels/printers/pp-printer-entry.c:658
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Przetwarzanie"
@@ -6896,8 +6902,8 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nie można połączyć z domeną %s: %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-msgid "<small>Your account</small>"
-msgstr "<small>Obecnie zalogowane konto</small>"
+msgid "Your account"
+msgstr "Obecnie zalogowane konto"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
