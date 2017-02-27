@@ -431,7 +431,7 @@ jobs_dialog_response_cb (GtkDialog  *dialog,
 
   if (self->pp_jobs_dialog != NULL)
     {
-      /*pp_jobs_dialog_free (self->pp_jobs_dialog);*/
+      pp_jobs_dialog_free (self->pp_jobs_dialog);
       self->pp_jobs_dialog = NULL;
     }
 }
