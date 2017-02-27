@@ -397,7 +397,7 @@ pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
   gchar *button_label;
   gint   num_jobs, num_of_jobs;
 
-  num_of_jobs = cupsGetJobs (&jobs, self->printer_name, 0, CUPS_WHICHJOBS_ACTIVE);
+  num_of_jobs = cupsGetJobs (&jobs, self->printer_name, 1, CUPS_WHICHJOBS_ACTIVE);
   num_jobs = num_of_jobs < 0 ? 0 : (guint) num_of_jobs;
 
   if (num_of_jobs <= 0)
