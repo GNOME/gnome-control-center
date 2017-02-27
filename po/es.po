@@ -18,10 +18,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-14 19:32+0000\n"
-"PO-Revision-Date: 2017-02-15 10:24+0100\n"
+"POT-Creation-Date: 2017-02-24 16:16+0000\n"
+"PO-Revision-Date: 2017-02-27 10:00+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -125,8 +125,8 @@ msgstr "Puede añadir imágenes a su carpeta %s y se mostrarán aquí"
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:315
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3
 #: ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -1263,13 +1263,11 @@ msgid "_Arrange Combined Displays"
 msgstr "_Ordenar las pantallas combinadas"
 
 #: ../panels/display/cc-display-panel.c:2878
-#| msgid "Right Ring"
 msgid "_Night Light"
 msgstr "Luz _nocturna"
 
 #. This cancels the redshift inhibit.
 #: ../panels/display/display.ui.h:2
-#| msgid "Restart Now"
 msgid "Restart Filter"
 msgstr "Reiniciar filtro"
 
@@ -1278,24 +1276,38 @@ msgstr "Reiniciar filtro"
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Desactivado temporalmente hasta mañana"
 
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+"La luz nocturna hace que los colores de la pantalla sean más cálidos. Esto "
+"puede ayudar a prevenir la fatiga visual y el insomnio."
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: ../panels/display/display.ui.h:6
-#| msgid "Right Ring"
+#: ../panels/display/display.ui.h:7
 msgid "Night Light"
 msgstr "Luz nocturna"
 
-#. When the sun comes up in the morning to the time the sun goes down in the evening
 #: ../panels/display/display.ui.h:8
-msgid "Sunset to sunrise"
+#| msgid "Manual schedule"
+msgid "Schedule"
+msgstr "Programar"
+
+#: ../panels/display/display.ui.h:9
+#| msgid "Sunset to sunrise"
+msgid "Sunset to Sunrise"
 msgstr "Desde el amanecer hasta la puesta del sol"
 
-#. This allows the user to schedule when the redshift functionality is triggered
 #: ../panels/display/display.ui.h:10
-msgid "Manual schedule"
-msgstr "Programación manual"
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Manual"
 
 #: ../panels/display/display.ui.h:11
-#| msgid "From URI"
 msgid "From"
 msgstr "De"
 
@@ -1317,15 +1329,6 @@ msgstr "PM"
 msgid "To"
 msgstr "Hasta"
 
-#: ../panels/display/display.ui.h:18
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/display/display.ui.h:19
-msgid "0"
-msgstr "0"
-
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
 msgid "Dis­plays"
@@ -1337,7 +1340,6 @@ msgstr "Elegir cómo usar las pantallas y los proyectores conectados"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
 msgid ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
 "redshift;color;sunset;sunrise;"
@@ -1899,7 +1901,6 @@ msgid "Keyboard Shortcuts"
 msgstr "Combinaciones de teclas"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#| msgid "Reset All"
 msgid "Reset All…"
 msgstr "Restablecer todo…"
 
@@ -1935,8 +1936,6 @@ msgid "Shortcut"
 msgstr "Combinación"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-#| msgctxt "button"
-#| msgid "Set Shortcut…"
 msgid "Set Shortcut…"
 msgstr "Establecer atajo…"
 
@@ -2309,13 +2308,6 @@ msgstr "Eliminar ruta"
 msgid "Automatic (DHCP)"
 msgstr "Automático (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Manual"
-
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
 msgid "Link-Local Only"
@@ -2632,7 +2624,7 @@ msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/printers/pp-details-dialog.c:322
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -3712,6 +3704,10 @@ msgstr "2"
 msgid "3"
 msgstr "3"
 
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Sistema abierto"
@@ -3820,26 +3816,26 @@ msgstr "_Notificaciones de la pantalla de bloqueo"
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:145
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Otra"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
 msgid "%s Account"
 msgstr "Cuenta de %s"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:767
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
 msgid "Error removing account"
 msgstr "Error al quitar la cuenta"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:837
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> eliminado"
@@ -3871,10 +3867,15 @@ msgid "Connect to your data in the cloud"
 msgstr "Conectarse a sus datos en la nube"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"No hay conexión a Internet; conéctese para configurar nuevas cuentas en línea"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
 msgstr "Añadir una cuenta"
 
-#: ../panels/online-accounts/online-accounts.ui.h:4
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Quitar cuenta"
 
@@ -4265,17 +4266,14 @@ msgid "Searching for preferred drivers…"
 msgstr "Buscando controladores preferidos…"
 
 #: ../panels/printers/details-dialog.ui.h:6
-#| msgid "Searching for Printers"
 msgid "Search for Drivers"
 msgstr "Buscar controladores"
 
 #: ../panels/printers/details-dialog.ui.h:7
-#| msgid "Select from database…"
 msgid "Select from Database…"
 msgstr "Seleccionar de la base de datos…"
 
 #: ../panels/printers/details-dialog.ui.h:8
-#| msgid "Provide PPD File…"
 msgid "Install PPD File…"
 msgstr "Instalar archivo PPD…"
 
@@ -4338,22 +4336,21 @@ msgid "Loading options…"
 msgstr "Cargando opciones…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: ../panels/printers/pp-details-dialog.c:99
-#: ../panels/printers/pp-details-dialog.c:401
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:416
 #, c-format
-#| msgid "Details"
 msgid "%s Details"
 msgstr "Detalles de %s"
 
-#: ../panels/printers/pp-details-dialog.c:168
+#: ../panels/printers/pp-details-dialog.c:174
 msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
-#: ../panels/printers/pp-details-dialog.c:312
+#: ../panels/printers/pp-details-dialog.c:318
 msgid "Select PPD File"
 msgstr "Seleccionar archivo PPD"
 
-#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/printers/pp-details-dialog.c:327
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4656,7 +4653,6 @@ msgstr "Fabricante"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
 #: ../panels/printers/pp-printer-entry.c:368
-#| msgid "Active Jobs"
 msgid "No Active Jobs"
 msgstr "No hay trabajos activos"
 
@@ -4773,17 +4769,14 @@ msgid "Processing"
 msgstr "Procesando"
 
 #: ../panels/printers/printer-entry.ui.h:1
-#| msgid "Printer Options"
 msgid "Printing Options"
 msgstr "Opciones de impresión"
 
 #: ../panels/printers/printer-entry.ui.h:2
-#| msgid "Printer Default"
 msgid "Printer Details"
 msgstr "Detalles de la impresora"
 
 #: ../panels/printers/printer-entry.ui.h:3
-#| msgid "Printer Default"
 msgid "Use Printer by Default"
 msgstr "Impresora de usuario predeterminada"
 
@@ -4801,13 +4794,11 @@ msgstr "Nivel de tinta"
 
 #. Translators: This is the message which follows the printer error.
 #: ../panels/printers/printer-entry.ui.h:9
-#| msgid "Please make sure that the applet is properly installed"
 msgid "Please restart when the problem is resolved."
 msgstr "Reinicie cuando se haya resuelto el problema."
 
 #. Translators: This is the button which restarts the printer.
 #: ../panels/printers/printer-entry.ui.h:11
-#| msgid "Restart Now"
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -4822,7 +4813,6 @@ msgstr "No hay impresoras"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:5
-#| msgid "Add a Printer"
 msgid "Add a Printer…"
 msgstr "Añadir una impresora…"
 
@@ -4861,44 +4851,44 @@ msgstr "Servicios de ubicación"
 msgid "Usage & History"
 msgstr "Uso e histórico"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "¿Quiere vaciar todos los elementos de la papelera?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Todos los elementos de la papelera se eliminarán de manera permanente."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "_Vaciar papelera"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "¿Quiere eliminar todos los archivos temporales?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos los archivos temporales se eliminarán de manera permanente."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "_Limpiar archivos temporales"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Vaciar papelera y archivos temporales"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Uso de software"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Informar de un error"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4907,7 +4897,7 @@ msgstr ""
 "Enviar informes de problemas técnicos ayuda a mejorar %s. Los informes se "
 "envían anónimamente y no contienen datos personales."
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Política de privacidad"
 
@@ -5034,12 +5024,10 @@ msgid "Purge _After"
 msgstr "Limpiar _después de"
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "_Empty Trash"
 msgid "_Empty Trash…"
 msgstr "_Vaciar papelera…"
 
 #: ../panels/privacy/privacy.ui.h:35
-#| msgid "_Purge Temporary Files"
 msgid "_Purge Temporary Files…"
 msgstr "_Limpiar archivos temporales…"
 
@@ -6432,7 +6420,6 @@ msgid "Last Login"
 msgstr "Último inicio de sesión"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-#| msgid "Remove User Account"
 msgid "Remove User…"
 msgstr "Quitar usuario…"
 
@@ -6634,25 +6621,25 @@ msgstr "Debe coincidir con la dirección web del proveedor de la cuenta."
 msgid "Failed to add account"
 msgstr "Falló al añadir la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:458
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Las contraseñas no coinciden."
 
-#: ../panels/user-accounts/um-account-dialog.c:713
-#: ../panels/user-accounts/um-account-dialog.c:759
-#: ../panels/user-accounts/um-account-dialog.c:780
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../panels/user-accounts/um-account-dialog.c:903
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:976
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:1037
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6660,7 +6647,7 @@ msgstr ""
 "El nombre de inicio de sesión no ha funcionado.\n"
 "Inténtelo de nuevo."
 
-#: ../panels/user-accounts/um-account-dialog.c:1044
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6668,11 +6655,11 @@ msgstr ""
 "La contraseña de inicio de sesión no ha funcionado.\n"
 "Inténtelo de nuevo."
 
-#: ../panels/user-accounts/um-account-dialog.c:1052
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
-#: ../panels/user-accounts/um-account-dialog.c:1110
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "No se pudo encontrar el dominio. ¿Está bien escrito?"
 
@@ -6899,9 +6886,9 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-#| msgid "<small><i>Short</i></small>"
-msgid "<small>Your account</small>"
-msgstr "<small>Su cuenta</small>"
+#| msgid "User Accounts"
+msgid "Your account"
+msgstr "Su cuenta"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
@@ -7389,6 +7376,13 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "No se han encontrado resultados"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~| msgid "<small><i>Short</i></small>"
+#~ msgid "<small>Your account</small>"
+#~ msgstr "<small>Su cuenta</small>"
 
 #~ msgid "Add Account"
 #~ msgstr "Añadir cuenta"
@@ -9039,9 +9033,6 @@ msgstr "No se han encontrado resultados"
 
 #~ msgid "Options..."
 #~ msgstr "Opciones…"
-
-#~ msgid "User Accounts"
-#~ msgstr "Cuentas de usuario"
 
 #~ msgid "Browse for more pictures..."
 #~ msgstr "Examinar para buscar más imágenes…"
