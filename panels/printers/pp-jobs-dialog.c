@@ -36,6 +36,7 @@
 #include "pp-utils.h"
 #include "pp-job.h"
 #include "pp-cups.h"
+#include "pp-printer.h"
 
 #define EMPTY_TEXT "\xe2\x80\x94"
 
@@ -56,6 +57,8 @@ struct _PpJobsDialog {
   gpointer             user_data;
 
   gchar *printer_name;
+
+  GCancellable *get_jobs_cancellable;
 
   gint ref_count;
 };
@@ -157,20 +160,36 @@ create_listbox_row (gpointer item,
 }
 
 static void
-update_jobs_list_cb (cups_job_t *jobs,
-                     gint        num_of_jobs,
-                     gpointer    user_data)
+update_jobs_list_cb (GObject      *source_object,
+                     GAsyncResult *result,
+                     gpointer      user_data)
 {
   PpJobsDialog *dialog = user_data;
+  PpPrinter    *printer = PP_PRINTER (source_object);
   GtkWidget    *clear_all_button;
   GtkStack     *stack;
-  guint         i;
+  GError       *error = NULL;
+  GList        *jobs, *l;
+  gint          num_of_jobs;
 
   g_list_store_remove_all (dialog->store);
 
   stack = GTK_STACK (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "stack"));
   clear_all_button = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog->builder), "jobs-clear-all-button"));
 
+  jobs = pp_printer_get_jobs_finish (printer, result, &error);
+  if (error != NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Could not get jobs: %s", error->message);
+        }
+
+      g_error_free (error);
+      return;
+    }
+
+  num_of_jobs = g_list_length (jobs);
   if (num_of_jobs > 0)
     {
       gtk_widget_set_sensitive (clear_all_button, TRUE);
@@ -182,17 +201,13 @@ update_jobs_list_cb (cups_job_t *jobs,
       gtk_stack_set_visible_child_name (stack, "no-jobs-page");
     }
 
-  for (i = 0; i < num_of_jobs; i++)
+  for (l = jobs; l != NULL; l = l->next)
     {
-      PpJob *job;
-
-      job = g_object_new (pp_job_get_type (),
-                          "id", jobs[i].id,
-                          "title", jobs[i].title,
-                          "state", jobs[i].state,
-                          NULL);
-      g_list_store_append (dialog->store, job);
+      g_list_store_append (dialog->store, l->data);
     }
+
+  g_list_free (jobs);
+  g_clear_object (&dialog->get_jobs_cancellable);
 
   dialog->ref_count--;
 }
@@ -200,14 +215,27 @@ update_jobs_list_cb (cups_job_t *jobs,
 static void
 update_jobs_list (PpJobsDialog *dialog)
 {
+  PpPrinter *printer;
+
   if (dialog->printer_name != NULL)
     {
       dialog->ref_count++;
-      cups_get_jobs_async (dialog->printer_name,
-                           TRUE,
-                           CUPS_WHICHJOBS_ACTIVE,
-                           update_jobs_list_cb,
-                           dialog);
+
+      if (dialog->get_jobs_cancellable != NULL)
+        {
+          g_cancellable_cancel (dialog->get_jobs_cancellable);
+          g_clear_object (&dialog->get_jobs_cancellable);
+        }
+
+      dialog->get_jobs_cancellable = g_cancellable_new ();
+
+      printer = pp_printer_new (dialog->printer_name);
+      pp_printer_get_jobs_async (printer,
+                                 TRUE,
+                                 CUPS_WHICHJOBS_ACTIVE,
+                                 dialog->get_jobs_cancellable,
+                                 update_jobs_list_cb,
+                                 dialog);
     }
 }
 
@@ -340,6 +368,12 @@ pp_jobs_dialog_free_idle (gpointer user_data)
 void
 pp_jobs_dialog_free (PpJobsDialog *dialog)
 {
+  if (dialog->get_jobs_cancellable != NULL)
+    {
+      g_cancellable_cancel (dialog->get_jobs_cancellable);
+      g_clear_object (&dialog->get_jobs_cancellable);
+    }
+
   g_idle_add (pp_jobs_dialog_free_idle, dialog);
 }
 
