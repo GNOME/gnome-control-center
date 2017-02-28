@@ -24,6 +24,8 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 
+#include "pp-utils.h"
+
 G_BEGIN_DECLS
 
 #define PP_TYPE_PRINTER (pp_printer_get_type ())
@@ -43,6 +45,17 @@ void         pp_printer_rename_async  (PpPrinter            *printer,
 gboolean     pp_printer_rename_finish (PpPrinter            *printer,
                                        GAsyncResult         *res,
                                        GError              **error);
+
+void         pp_printer_get_jobs_async (PpPrinter           *printer,
+                                        gboolean             myjobs,
+                                        gint                 which_jobs,
+                                        GCancellable        *cancellable,
+                                        GAsyncReadyCallback  callback,
+                                        gpointer             user_data);
+
+GList       *pp_printer_get_jobs_finish (PpPrinter          *printer,
+                                         GAsyncResult       *res,
+                                         GError            **error);
 
 G_END_DECLS
 

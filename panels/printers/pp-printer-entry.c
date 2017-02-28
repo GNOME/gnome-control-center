@@ -27,6 +27,7 @@
 #include "pp-details-dialog.h"
 #include "pp-options-dialog.h"
 #include "pp-jobs-dialog.h"
+#include "pp-printer.h"
 #include "pp-utils.h"
 
 #define SUPPLY_BAR_HEIGHT 8
@@ -65,6 +66,8 @@ struct _PpPrinterEntry
   PpDetailsDialog *pp_details_dialog;
   PpOptionsDialog *pp_options_dialog;
   PpJobsDialog    *pp_jobs_dialog;
+
+  GCancellable *get_jobs_cancellable;
 };
 
 struct _PpPrinterEntryClass
@@ -318,7 +321,6 @@ supply_levels_draw_cb (GtkWidget    *widget,
       gtk_style_context_add_class (gtk_widget_get_style_context (frame),
                                    "background");
     }
-
   return TRUE;
 }
 
@@ -390,17 +392,36 @@ remove_printer (GtkButton      *button,
   printer_delete (self->printer_name);
 }
 
-void
-pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
+static void
+get_jobs_cb (GObject      *source_object,
+             GAsyncResult *result,
+             gpointer      user_data)
 {
-  cups_job_t *jobs = NULL;
-  gchar *button_label;
-  gint   num_jobs, num_of_jobs;
+  PpPrinterEntry *self;
+  PpPrinter      *printer = PP_PRINTER (source_object);
+  GError         *error = NULL;
+  GList          *jobs;
+  gchar          *button_label;
+  gint            num_jobs;
 
-  num_of_jobs = cupsGetJobs (&jobs, self->printer_name, 1, CUPS_WHICHJOBS_ACTIVE);
-  num_jobs = num_of_jobs < 0 ? 0 : (guint) num_of_jobs;
+  jobs = pp_printer_get_jobs_finish (printer, result, &error);
+  num_jobs = g_list_length (jobs);
 
-  if (num_of_jobs <= 0)
+  g_object_unref (source_object);
+  g_list_free_full (jobs, (GDestroyNotify) g_object_unref);
+
+  if (error != NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Could not get jobs: %s", error->message);
+        }
+
+      g_error_free (error);
+      return;
+    }
+
+  if (num_jobs == 0)
     {
       /* Translators: This is the label of the button that opens the Jobs Dialog. */
       button_label = g_strdup (_("No Active Jobs"));
@@ -411,6 +432,8 @@ pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
       button_label = g_strdup_printf (ngettext ("%u Job", "%u Jobs", num_jobs), num_jobs);
     }
 
+  self = PP_PRINTER_ENTRY (user_data);
+
   gtk_button_set_label (GTK_BUTTON (self->show_jobs_dialog_button), button_label);
   gtk_widget_set_sensitive (self->show_jobs_dialog_button, num_jobs > 0);
 
@@ -420,6 +443,30 @@ pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
     }
 
   g_free (button_label);
+
+  g_clear_object (&self->get_jobs_cancellable);
+}
+
+void
+pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
+{
+  PpPrinter *printer;
+
+  if (self->get_jobs_cancellable != NULL)
+    {
+      g_cancellable_cancel (self->get_jobs_cancellable);
+      g_clear_object (&self->get_jobs_cancellable);
+    }
+
+  self->get_jobs_cancellable = g_cancellable_new ();
+
+  printer = pp_printer_new (self->printer_name);
+  pp_printer_get_jobs_async (printer,
+                             TRUE,
+                             CUPS_WHICHJOBS_ACTIVE,
+                             self->get_jobs_cancellable,
+                             get_jobs_cb,
+                             self);
 }
 
 static void
@@ -733,6 +780,12 @@ pp_printer_entry_dispose (GObject *object)
   g_clear_pointer (&self->printer_location, g_free);
   g_clear_pointer (&self->printer_make_and_model, g_free);
   g_clear_pointer (&self->printer_hostname, g_free);
+
+  if (self->get_jobs_cancellable != NULL)
+    {
+      g_cancellable_cancel (self->get_jobs_cancellable);
+      g_clear_object (&self->get_jobs_cancellable);
+    }
 
   G_OBJECT_CLASS (pp_printer_entry_parent_class)->dispose (object);
 }

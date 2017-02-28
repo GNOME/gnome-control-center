@@ -20,7 +20,7 @@
 
 #include "pp-printer.h"
 
-#include "pp-utils.h"
+#include "pp-job.h"
 
 typedef struct _PpPrinter        PpPrinter;
 typedef struct _PpPrinterPrivate PpPrinterPrivate;
@@ -287,4 +287,84 @@ pp_printer_rename_finish (PpPrinter     *printer,
   g_object_unref (res);
 
   return g_task_propagate_boolean (G_TASK (res), error);
+}
+
+typedef struct
+{
+  gboolean  myjobs;
+  gint      which_jobs;
+} GetJobsData;
+
+static void
+get_jobs_thread (GTask        *task,
+                 gpointer      source_object,
+                 gpointer      task_data,
+                 GCancellable *cancellable)
+{
+  GetJobsData *get_jobs_data = task_data;
+  cups_job_t  *jobs = NULL;
+  PpPrinter   *printer = PP_PRINTER (source_object);
+  gchar       *printer_name;
+  GList       *list = NULL;
+  gint         num_jobs;
+  gint         i;
+
+  g_object_get (printer, "printer-name", &printer_name, NULL);
+
+  num_jobs = cupsGetJobs (&jobs,
+                          printer_name,
+                          get_jobs_data->myjobs ? 1 : 0,
+                          get_jobs_data->which_jobs);
+  g_free (printer_name);
+
+  for (i = 0; i < num_jobs; i++)
+    {
+      PpJob *job;
+
+      job = g_object_new (pp_job_get_type (),
+                          "id",    jobs[i].id,
+                          "title", jobs[i].title,
+                          "state", jobs[i].state,
+                          NULL);
+
+      list = g_list_append (list, job);
+    }
+  cupsFreeJobs (num_jobs, jobs);
+
+  if (g_task_set_return_on_cancel (task, FALSE))
+    {
+      g_task_return_pointer (task, list, (GDestroyNotify) g_list_free);
+    }
+}
+
+void
+pp_printer_get_jobs_async (PpPrinter           *printer,
+                           gboolean             myjobs,
+                           gint                 which_jobs,
+                           GCancellable        *cancellable,
+                           GAsyncReadyCallback  callback,
+                           gpointer             user_data)
+{
+  GetJobsData *get_jobs_data;
+  GTask       *task;
+
+  get_jobs_data = g_new (GetJobsData, 1);
+  get_jobs_data->myjobs = myjobs;
+  get_jobs_data->which_jobs = which_jobs;
+
+  task = g_task_new (G_OBJECT (printer), cancellable, callback, user_data);
+  g_task_set_task_data (task, get_jobs_data, g_free);
+  g_task_set_return_on_cancel (task, TRUE);
+  g_task_run_in_thread (task, get_jobs_thread);
+  g_object_unref (task);
+}
+
+GList *
+pp_printer_get_jobs_finish (PpPrinter          *printer,
+                            GAsyncResult       *res,
+                            GError            **error)
+{
+  g_return_val_if_fail (g_task_is_valid (res, printer), NULL);
+
+  return g_task_propagate_pointer (G_TASK (res), error);
 }
