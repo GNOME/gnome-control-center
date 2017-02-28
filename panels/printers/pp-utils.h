@@ -242,16 +242,6 @@ void        printer_add_option_async (const gchar   *printer_name,
                                       PAOCallback    callback,
                                       gpointer       user_data);
 
-typedef void (*CGJCallback) (cups_job_t *jobs,
-                             gint        num_of_jobs,
-                             gpointer    user_data);
-
-void        cups_get_jobs_async (const gchar *printer_name,
-                                 gboolean     my_jobs,
-                                 gint         which_jobs,
-                                 CGJCallback  callback,
-                                 gpointer     user_data);
-
 void         pp_devices_list_free (PpDevicesList *result);
 
 const gchar *get_page_size_from_locale (void);
