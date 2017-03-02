@@ -1,5 +1,5 @@
 # Danish translation of the Gnome Control Center.
-# Copyright (C) 1998-2016
+# Copyright (C) 1998-2017
 # This file is distributed under the same license as the gnome-control-center package.
 # Kenneth Christiansen <kenneth@ripen.dk>, 1998-2000.
 # Birger Langkjer <birger.langkjer@image.dk>
@@ -9,7 +9,7 @@
 # Lasse Bang Mikkelsen <lbm@fatalerror.dk>, 2006.
 # flemming christensen <fc@stromata.dk>, 2011.
 # Kris Thomsen <mail@kristhomsen.dk> 2014.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2007, 08, 09, 10, 11, 12, 13, 14, 15, 16.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2007, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17.
 # scootergrisen, 2015, 2016.
 # Konventioner:
 # detach -> frigøre
@@ -28,10 +28,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: "
-"http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-09 18:31+0000\n"
-"PO-Revision-Date: 2016-09-16 02:15+0200\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"control-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-02-24 16:16+0000\n"
+"PO-Revision-Date: 2017-03-02 11:50+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -127,17 +127,17 @@ msgstr "Du kan tilføje billeder til din %s-mappe, og de vil blive vist her"
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1571
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2226
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
 #: ../panels/network/net-device-wifi.c:1298
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2091
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -146,9 +146,9 @@ msgstr "Du kan tilføje billeder til din %s-mappe, og de vil blive vist her"
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
-#: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:638
-#: ../panels/user-accounts/um-user-panel.c:656
+#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-user-panel.c:644
+#: ../panels/user-accounts/um-user-panel.c:662
 msgid "_Cancel"
 msgstr "_Annullér"
 
@@ -260,8 +260,7 @@ msgstr ""
 #: ../panels/color/cc-color-calibrate.c:373
 msgid ""
 "Move your calibration device to the surface position and press “Continue”"
-msgstr ""
-"Flyt din kalibreringsenhed til overfladepositionen og tryk \"Fortsæt\""
+msgstr "Flyt din kalibreringsenhed til overfladepositionen og tryk \"Fortsæt\""
 
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
@@ -696,13 +695,13 @@ msgstr "Kræver internetforbindelse"
 
 #: ../panels/color/color.ui.h:26
 msgid ""
-"You may find these instructions on how to use the profile on <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
-"href=\"windows\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
 msgstr ""
-"Du vil måske finde instruktionerne om brug af profilen på systemerne <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> samt <a "
-"href=\"windows\">Microsoft Windows</a> nyttige."
+"Du vil måske finde instruktionerne om brug af profilen på systemerne <a href="
+"\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> samt <a href="
+"\"windows\">Microsoft Windows</a> nyttige."
 
 #: ../panels/color/color.ui.h:27
 #: ../panels/user-accounts/um-fingerprint-dialog.c:723
@@ -710,8 +709,6 @@ msgid "Summary"
 msgstr "Sammenfatning"
 
 #: ../panels/color/color.ui.h:28
-#, fuzzy
-#| msgid "Add profile"
 msgid "Add Profile"
 msgstr "Tilføj profil"
 
@@ -1114,21 +1111,22 @@ msgstr "Skift systemindstillinger for tidspunkt og dato"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Du skal godkende for at kunne ændre indstillinger for tid og dato."
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:592
 msgid "Lid Closed"
 msgstr "Låg lukket"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:586
+#: ../panels/display/cc-display-panel.c:595
 msgid "Mirrored"
 msgstr "Klonede"
 
-#: ../panels/display/cc-display-panel.c:588
-#: ../panels/display/cc-display-panel.c:2440
+#: ../panels/display/cc-display-panel.c:597
+#: ../panels/display/cc-display-panel.c:2449
 msgid "Primary"
 msgstr "Primær"
 
-#: ../panels/display/cc-display-panel.c:590
+#: ../panels/display/cc-display-panel.c:599
+#: ../panels/display/cc-display-panel.c:2786
 #: ../panels/notifications/cc-notifications-panel.c:257
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
@@ -1142,118 +1140,196 @@ msgstr "Primær"
 msgid "Off"
 msgstr "Slået fra"
 
-#: ../panels/display/cc-display-panel.c:593
+#: ../panels/display/cc-display-panel.c:602
 msgid "Secondary"
 msgstr "Sekundær"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1568
+#: ../panels/display/cc-display-panel.c:1577
 msgid "Arrange Combined Displays"
 msgstr "Arrangér kombinerede skærme"
 
-#: ../panels/display/cc-display-panel.c:1572
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:1581
+#: ../panels/display/cc-display-panel.c:2227
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Anvend"
 
-#: ../panels/display/cc-display-panel.c:1596
+#: ../panels/display/cc-display-panel.c:1605
 msgid "Drag displays to rearrange them"
 msgstr "Træk visninger for at flytte dem"
 
 #. translators: example string is "60 Hz (NTSC)"
 #. * NTSC is https://en.wikipedia.org/wiki/NTSC
-#: ../panels/display/cc-display-panel.c:1803
+#: ../panels/display/cc-display-panel.c:1812
 #, c-format
 msgid "%d Hz (NTSC)"
 msgstr "%d Hz (NTSC)"
 
 #. translators: example string is "60 Hz"
-#: ../panels/display/cc-display-panel.c:1809
+#: ../panels/display/cc-display-panel.c:1818
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../panels/display/cc-display-panel.c:2270
+#: ../panels/display/cc-display-panel.c:2279
 msgid "Rotate counterclockwise by 90°"
 msgstr "Rotér 90° mod uret"
 
-#: ../panels/display/cc-display-panel.c:2288
+#: ../panels/display/cc-display-panel.c:2297
 msgid "Rotate by 180°"
 msgstr "Rotér 180°"
 
-#: ../panels/display/cc-display-panel.c:2306
+#: ../panels/display/cc-display-panel.c:2315
 msgid "Rotate clockwise by 90°"
 msgstr "Rotér 90° med uret"
 
-#: ../panels/display/cc-display-panel.c:2327
+#: ../panels/display/cc-display-panel.c:2336
 msgid "Size"
 msgstr "Størrelse"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2342
+#: ../panels/display/cc-display-panel.c:2351
 msgid "Aspect Ratio"
 msgstr "Højde-/breddeforhold"
 
-#: ../panels/display/cc-display-panel.c:2365
+#: ../panels/display/cc-display-panel.c:2374
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Opløsning"
 
-#: ../panels/display/cc-display-panel.c:2385
+#: ../panels/display/cc-display-panel.c:2394
 msgid "Adjust for TV"
 msgstr "Tilpas tv"
 
-#: ../panels/display/cc-display-panel.c:2409
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Refresh Rate"
 msgstr "Opdateringsfrekvens"
 
-#: ../panels/display/cc-display-panel.c:2441
+#: ../panels/display/cc-display-panel.c:2450
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Vis topbjælken og aktivitetsoversigten i denne visning"
 
-#: ../panels/display/cc-display-panel.c:2447
+#: ../panels/display/cc-display-panel.c:2456
 msgid "Secondary Display"
 msgstr "Sekundær skærm"
 
-#: ../panels/display/cc-display-panel.c:2448
+#: ../panels/display/cc-display-panel.c:2457
 msgid "Join this display with another to create an extra workspace"
 msgstr ""
 "Slå denne skærm sammen med en anden for at oprette et ekstra arbejdsområde"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2464
 msgid "Presentation"
 msgstr "Præsentation"
 
-#: ../panels/display/cc-display-panel.c:2456
+#: ../panels/display/cc-display-panel.c:2465
 msgid "Show slideshows and media only"
 msgstr "Vis kun diasshow og medier"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2461
+#: ../panels/display/cc-display-panel.c:2470
 msgid "Mirror"
 msgstr "Klon"
 
-#: ../panels/display/cc-display-panel.c:2462
+#: ../panels/display/cc-display-panel.c:2471
 msgid "Show your existing view on both displays"
 msgstr "Brug din eksisterende konfiguration på begge skærme"
 
-#: ../panels/display/cc-display-panel.c:2468
+#: ../panels/display/cc-display-panel.c:2477
 msgid "Turn Off"
 msgstr "Sluk"
 
-#: ../panels/display/cc-display-panel.c:2469
+#: ../panels/display/cc-display-panel.c:2478
 msgid "Don’t use this display"
 msgstr "Brug ikke denne skærm"
 
-#: ../panels/display/cc-display-panel.c:2780
+#. TRANSLATORS: the state of the night light setting
+#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:590
+#: ../panels/universal-access/cc-ua-panel.c:603
+#: ../panels/universal-access/cc-ua-panel.c:615
+#: ../panels/universal-access/cc-ua-panel.c:786
+msgid "On"
+msgstr "Slået til"
+
+#: ../panels/display/cc-display-panel.c:2826
 msgid "Could not get screen information"
 msgstr "Kunne ikke finde skærminformation"
 
-#: ../panels/display/cc-display-panel.c:2811
+#: ../panels/display/cc-display-panel.c:2857
 msgid "_Arrange Combined Displays"
 msgstr "_Arrangér kombinerede skærme"
+
+#: ../panels/display/cc-display-panel.c:2878
+msgid "_Night Light"
+msgstr "_Nattelys"
+
+#. This cancels the redshift inhibit.
+#: ../panels/display/display.ui.h:2
+msgid "Restart Filter"
+msgstr "Genstart filter"
+
+#. Inhibit the redshift functionality until the next day starts
+#: ../panels/display/display.ui.h:4
+msgid "Temporarily Disabled Until Tomorrow"
+msgstr "Midlertidigt slået fra indtil i morgen"
+
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr "Nattelys gør skærmfarven varmere. Dette kan hjælpe med at forhindre anstrengelse af øjnene og søvnløshed."
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: ../panels/display/display.ui.h:7
+msgid "Night Light"
+msgstr "Nattelys"
+
+#: ../panels/display/display.ui.h:8
+msgid "Schedule"
+msgstr "Skema"
+
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
+msgstr "Solnedgang til solopgang"
+
+#: ../panels/display/display.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Manuel"
+
+#: ../panels/display/display.ui.h:11
+msgid "From"
+msgstr "Fra"
+
+#: ../panels/display/display.ui.h:12
+msgid ":"
+msgstr ":"
+
+# Bliver nok ikke brugt; antager at de automatisk anvender et "ordentligt" dansk klokkeslæt jf. regionsindstillinger
+#. This is the short form for the time period in the morning
+#: ../panels/display/display.ui.h:14
+msgid "AM"
+msgstr "AM"
+
+#. This is the short form for the time period in the afternoon
+#: ../panels/display/display.ui.h:16
+msgid "PM"
+msgstr "PM"
+
+#: ../panels/display/display.ui.h:17
+msgid "To"
+msgstr "Til"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1266,8 +1342,10 @@ msgstr "Vælg hvordan forbundne skærme og projektorer skal bruges"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
-msgstr "Panel;Projektor;xrandr;Skærm;Opløsning;Opdatering;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
+msgstr "Panel;Projektor;xrandr;Skærm;Opløsning;Opdatering;Opdater;Opdatér;Monitor;Nat;Lys;Blå;rødforskyd;farve;solnedgang;solopgang;"
 
 #. TRANSLATORS: AP type
 #: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
@@ -1423,11 +1501,11 @@ msgstr "Vis information om systemet"
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:5
 msgid ""
-""
-"device;system;information;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+"device;system;information;memory;processor;version;default;application;"
+"preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
-""
-"enhed;system;information;hukommelse;processor;version;standard;program;foretrukken;cd;dvd;usb;lyd;video;disk;flytbar;medie;autokørsel;"
+"enhed;system;information;hukommelse;processor;version;standard;program;"
+"foretrukken;cd;dvd;usb;lyd;video;disk;flytbar;medie;autokørsel;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
@@ -1751,16 +1829,14 @@ msgid "Modifiers-only switch to next source"
 msgstr "Skift til næste kilde med kun modifikatorer"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:181
-#, fuzzy
-#| msgid "Set Shortcut"
 msgid "Reset All Shortcuts?"
-msgstr "Angiv genvej"
+msgstr "Nulstil alle genveje?"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:184
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
-msgstr ""
+msgstr "Nulstilling af genvejene kan påvirke dine brugertilpassede genveje. Dette kan ikke fortrydes."
 
 #: ../panels/keyboard/cc-keyboard-panel.c:188
 #: ../panels/keyboard/shortcut-editor.ui.h:10
@@ -1770,11 +1846,8 @@ msgid "Cancel"
 msgstr "Annullér"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:189
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
-#, fuzzy
-#| msgid "Reset"
 msgid "Reset All"
-msgstr "Nulstil"
+msgstr "Nulstil alle"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
@@ -1826,11 +1899,13 @@ msgstr "Genvej;Gentagelse;Blink;"
 msgid "Keyboard Shortcuts"
 msgstr "Tastaturgenveje"
 
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "Nulstil alle …"
+
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#, fuzzy
-#| msgid "Reset the shortcut to its default value"
 msgid "Reset all shortcuts to their default keybindings"
-msgstr "Nulstil genvejen til dens standardværdi"
+msgstr "Nulstil alle genveje til deres standardbindinger"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
@@ -1845,6 +1920,7 @@ msgid "Press Esc to cancel."
 msgstr "Tryk Esc for at annullere."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/printers/details-dialog.ui.h:1
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
@@ -1859,11 +1935,8 @@ msgid "Shortcut"
 msgstr "Genvej"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-#, fuzzy
-#| msgid "Set Shortcut"
-msgctxt "button"
 msgid "Set Shortcut…"
-msgstr "Angiv genvej"
+msgstr "Angiv genvej …"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
 #: ../panels/network/network-wifi.ui.h:20
@@ -2041,7 +2114,7 @@ msgstr "802.1x-_sikkerhed"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:15 ../panels/wacom/wacom-stylus-page.ui.h:8
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "side 1"
 
@@ -2060,7 +2133,6 @@ msgstr "Indre _godkendelse"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:17
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "side 2"
@@ -2185,6 +2257,7 @@ msgstr "Identitet"
 #: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Adresse"
 
@@ -2233,13 +2306,6 @@ msgstr "Slet rute"
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Automatisk (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Manuel"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
@@ -2557,9 +2623,9 @@ msgid "Select file to import"
 msgstr "Vælg fil at importere"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2092
+#: ../panels/printers/pp-details-dialog.c:322
 #: ../panels/sharing/cc-sharing-panel.c:376
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
 msgstr "_Åbn"
 
@@ -2631,8 +2697,8 @@ msgstr "Angiv hvordan du forbinder til internettet"
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:5
 msgid ""
-""
-"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
+"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
+"DNS;"
 msgstr ""
 "Netværk;Trådløs;Wi-fi;Wifi;IP;LAN;Proxy:WAN;Bredbånd;Modem;Bluetooth;vpn;DNS;"
 
@@ -2653,7 +2719,7 @@ msgstr "i går"
 
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:14
+#: ../panels/network/panel-common.c:649
 msgid "IP Address"
 msgstr "IP-adresse"
 
@@ -3672,18 +3738,6 @@ msgstr "ugyldig wpa-psk: kan ikke fortolke nøgle med 64 byte som hex"
 msgid "_Type"
 msgstr "_Type"
 
-#: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
-#: ../panels/privacy/cc-privacy-panel.c:190
-#: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-msgid "On"
-msgstr "Slået til"
-
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
@@ -3697,27 +3751,21 @@ msgid "Sound _Alerts"
 msgstr "_Påmindelseslyde"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgctxt "notifications"
 msgid "Notification _Popups"
-msgstr "_Påmindelser"
+msgstr "_Pop op'er til påmindelser"
 
 #: ../panels/notifications/edit-dialog.ui.h:6
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
-msgstr ""
+msgstr "Påmindelser vil fortsat blive vist i påmindelseslisten, når pop op'er er slået fra."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "Show Message _Content in Banners"
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
-msgstr "Vis _indhold af meddelelser i bannere"
+msgstr "Vis _indhold af meddelelser i pop op'er"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
@@ -3744,11 +3792,8 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Påmindelser;Banner;Besked;Meddelelse;Statusfelt;Status;Pop;Pop-op;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgid "Notification _Popups"
-msgstr "_Påmindelser"
+msgstr "_Påmindelses-pop op'er"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -3760,44 +3805,29 @@ msgstr "Påmindelser ved _låst skærm"
 msgid "Applications"
 msgstr "Programmer"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
-#: ../panels/online-accounts/cc-online-accounts-panel.c:131
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Anden"
 
-#. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-msgid "Add Account"
-msgstr "Tilføj konto"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
-msgid "Mail"
-msgstr "Post"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-msgid "Calendar"
-msgstr "Kalender"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
-msgid "Contacts"
-msgstr "Kontakter"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:346
-msgid "Chat"
-msgstr "Chat"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:352
-msgid "Resources"
-msgstr "Ressourcer"
-
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:459
-#, c-format, fuzzy
-#| msgid "My Account"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
+#, c-format
 msgid "%s Account"
-msgstr "Min konto"
+msgstr "%s-konto"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
+msgid "Error removing account"
+msgstr "Fejl ved sletning af konto"
+
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
+#, c-format
+msgid "<b>%s</b> removed"
+msgstr "<b>%s</b> fjernet"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3812,24 +3842,30 @@ msgstr ""
 #. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:5
 msgid ""
-""
-"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
-""
-"Google;Facebook;Twitter;Yahoo;Internet;Web;Online;Chat;Kalender;Post;E-post;Mail;Email;E-mail;Kontaktpersoner;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
+"Google;Facebook;Twitter;Yahoo;Internet;Web;Online;Chat;Kalender;Post;E-post;"
+"Mail;Email;E-mail;Kontaktpersoner;ownCloud;Kerberos;IMAP;SMTP;Pocket;"
+"ReadItLater;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-msgid "Connect to your data in the cloud"
-msgstr ""
+msgid "Undo"
+msgstr "Fortryd"
 
 #: ../panels/online-accounts/online-accounts.ui.h:2
-#, fuzzy
-#| msgid "Add an online account"
-msgid "Add an account"
-msgstr "Tilføj en onlinekonto"
+msgid "Connect to your data in the cloud"
+msgstr "Forbind til dine data i skyen"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "No internet connection — connect to set up new online accounts"
+msgstr "Ingen internetforbindelse — forbind for at sætte nye onlinekonti op"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
+msgid "Add an account"
+msgstr "Tilføj en konto"
+
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Fjern konto"
 
@@ -4109,8 +4145,8 @@ msgstr "Vis din batteristatus og skift indstillinger for strømstyring"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
-""
-"Strøm;Sove;Hvile;Dvale;Batteri;Lysstyrke;Dæmp;Dæmpning;Blank;Sort;Skærm;DPMS;Tomgang;Inaktiv;"
+"Strøm;Sove;Hvile;Dvale;Batteri;Lysstyrke;Dæmp;Dæmpning;Blank;Sort;Skærm;DPMS;"
+"Tomgang;Inaktiv;"
 
 #: ../panels/power/power.ui.h:3
 msgid "45 minutes"
@@ -4193,190 +4229,43 @@ msgstr "Godkend"
 msgid "Authentication Required"
 msgstr "Godkendelse påkrævet"
 
-#. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:698
-msgid "Low on toner"
-msgstr "Lavt tonerniveau"
-
-#. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:700
-msgid "Out of toner"
-msgstr "Løbet tør for toner"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:703
-msgid "Low on developer"
-msgstr "Lavt niveau af fremkaldervæske"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:706
-msgid "Out of developer"
-msgstr "Løbet tør for fremkaldervæske"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:708
-msgid "Low on a marker supply"
-msgstr "Markerfarveforsyning lav"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:710
-msgid "Out of a marker supply"
-msgstr "Løbet tør for markerfarve"
-
-#. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:712
-msgid "Open cover"
-msgstr "Kabinet åbent"
-
-#. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:714
-msgid "Open door"
-msgstr "Låge åben"
-
-#. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:716
-msgid "Low on paper"
-msgstr "Lavt papirniveau"
-
-#. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:718
-msgid "Out of paper"
-msgstr "Løbet tør for papir"
-
-#. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:720
-msgctxt "printer state"
-msgid "Offline"
-msgstr "Ikke tilsluttet"
-
-#. Translators: Someone has stopped the Printer
-#. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:722
-#: ../panels/printers/cc-printers-panel.c:912
-msgctxt "printer state"
-msgid "Stopped"
-msgstr "Standset"
-
-#. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:724
-msgid "Waste receptacle almost full"
-msgstr "Affaldsbeholderen er næsten fuld"
-
-#. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:726
-msgid "Waste receptacle full"
-msgstr "Affaldsbeholderen er fuld"
-
-# optical photo conductor == lys-lys-leder.  Det er vist lidt dobbeltkonfekt. Den kan vi nok tillade os at skrive ordentligt
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:728
-msgid "The optical photo conductor is near end of life"
-msgstr "Lyslederen fungerer snart ikke længere"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:730
-msgid "The optical photo conductor is no longer functioning"
-msgstr "Lyslederen fungerer ikke længere"
-
-#. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:839
-msgctxt "printer state"
-msgid "Configuring"
-msgstr "Konfigurerer"
-
-#. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:898
-msgctxt "printer state"
-msgid "Ready"
-msgstr "Klar"
-
-#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:903
-msgctxt "printer state"
-msgid "Does not accept jobs"
-msgstr "Accepterer ikke job"
-
-#. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:908
-msgctxt "printer state"
-msgid "Processing"
-msgstr "Behandler"
-
-#. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1028
-msgid "Toner Level"
-msgstr "Tonerniveau"
-
-#. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1031
-msgid "Ink Level"
-msgstr "Blækniveau"
-
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1034
-msgid "Supply Level"
-msgstr "Forsyningsniveau"
-
-#. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1052
-msgctxt "printer state"
-msgid "Installing"
-msgstr "Installerer"
-
-#. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1566
-#, c-format
-msgid "%u active"
-msgid_plural "%u active"
-msgstr[0] "%u aktiv"
-msgstr[1] "%u aktive"
-
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1907
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Failed to add new printer."
 msgstr "Kunne ikke tilføje den nye printer."
 
-#: ../panels/printers/cc-printers-panel.c:2088
-msgid "Select PPD File"
-msgstr "Vælg PPD-fil"
-
-#: ../panels/printers/cc-printers-panel.c:2097
-msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, "
-"*.PPD.GZ)"
-msgstr ""
-"PostScript-printerbeskrivelsesfiler (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, "
-"*.PPD.GZ)"
-
-#: ../panels/printers/cc-printers-panel.c:2404
-msgid "No suitable driver found"
-msgstr "Ingen passende driver fundet"
-
-#: ../panels/printers/cc-printers-panel.c:2475
-msgid "Searching for preferred drivers…"
-msgstr "Søger efter foretrukne drivere …"
-
-#: ../panels/printers/cc-printers-panel.c:2496
-msgid "Select from database…"
-msgstr "Vælg fra database …"
-
-#: ../panels/printers/cc-printers-panel.c:2505
-msgid "Provide PPD File…"
-msgstr "Angiv PPD-fil …"
-
-#. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2652
-#: ../panels/printers/cc-printers-panel.c:2675
-msgid "Test page"
-msgstr "Testside"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3133
+#: ../panels/printers/cc-printers-panel.c:846
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Kunne ikke indlæse brugerfladen: %s"
+
+#: ../panels/printers/details-dialog.ui.h:2
+#: ../panels/printers/printer-entry.ui.h:6
+msgid "Location"
+msgstr "Placering"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/details-dialog.ui.h:4
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
+msgid "Driver"
+msgstr "Driver"
+
+#: ../panels/printers/details-dialog.ui.h:5
+msgid "Searching for preferred drivers…"
+msgstr "Søger efter foretrukne drivere …"
+
+#: ../panels/printers/details-dialog.ui.h:6
+msgid "Search for Drivers"
+msgstr "Søg efter drivere"
+
+#: ../panels/printers/details-dialog.ui.h:7
+msgid "Select from Database…"
+msgstr "Vælg fra database …"
+
+#: ../panels/printers/details-dialog.ui.h:8
+msgid "Install PPD File…"
+msgstr "Angiv PPD-fil …"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
@@ -4412,14 +4301,12 @@ msgstr "Tilføj printer"
 #. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
-msgstr ""
+msgstr "_Lås op"
 
 #. Translators: No printers were detected
 #: ../panels/printers/new-printer-dialog.ui.h:8
-#, fuzzy
-#| msgid "No Pictures Found"
 msgid "No Printers Found"
-msgstr "Ingen billeder fundet"
+msgstr "Ingen printere fundet"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: ../panels/printers/new-printer-dialog.ui.h:10
@@ -4427,16 +4314,35 @@ msgid "Enter a network address or search for a printer"
 msgstr "Indtast en netværksadresse eller søg efter en printer"
 
 #: ../panels/printers/new-printer-dialog.ui.h:12
-#, fuzzy
-#| msgid "Enter your username and password to view printers available on %s."
 msgid "Enter username and password to view printers on Print Server."
-msgstr ""
-"Indtast dit brugernavn samt adgangskode for at se tilgængelige printere på "
-"%s."
+msgstr "Indtast dit brugernavn samt adgangskode for at se tilgængelige printere på printerserveren."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "Indlæser indstillinger …"
+
+#. Translators: This is the title of the dialog. %s is the printer name.
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:416
+#, c-format
+msgid "%s Details"
+msgstr "Detaljer for %s"
+
+#: ../panels/printers/pp-details-dialog.c:174
+msgid "No suitable driver found"
+msgstr "Ingen passende driver fundet"
+
+#: ../panels/printers/pp-details-dialog.c:318
+msgid "Select PPD File"
+msgstr "Vælg PPD-fil"
+
+#: ../panels/printers/pp-details-dialog.c:327
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr ""
+"PostScript-printerbeskrivelsesfiler (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
+"GZ)"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4543,39 +4449,30 @@ msgstr "Fuldført"
 
 #. Translators: This is the printer name for which we are showing the active jobs
 #: ../panels/printers/pp-jobs-dialog.c:289
-#, c-format, fuzzy
-#| msgctxt "Printer jobs dialog title"
-#| msgid "%s - Active Jobs"
+#, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
-msgstr "%s - aktive jobs"
+msgstr "%s — aktive job"
 
 #: ../panels/printers/pp-new-printer-dialog.c:402
-#, fuzzy
-#| msgid "Select Printer Driver"
 msgid "Unlock Print Server"
-msgstr "Vælg printerdriver"
+msgstr "Lås printerserver op"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:406
 #, c-format
 msgid "Unlock %s."
-msgstr ""
+msgstr "Lås %s op."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:411
-#, c-format, fuzzy
-#| msgid "Enter your username and password to view printers available on %s."
+#, c-format
 msgid "Enter username and password to view printers on %s."
-msgstr ""
-"Indtast dit brugernavn samt adgangskode for at se tilgængelige printere på "
-"%s."
+msgstr "Indtast brugernavn og adgangskode for at se printerne på %s."
 
 #: ../panels/printers/pp-new-printer-dialog.c:876
-#, fuzzy
-#| msgid "Not searching for networks"
 msgid "Searching for Printers"
-msgstr "Søger ikke efter netværk"
+msgstr "Søger efter printere"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1799
@@ -4738,83 +4635,174 @@ msgstr "Ingen præfiltrering"
 msgid "Manufacturer"
 msgstr "Producent"
 
-#. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:250
-msgid "Driver"
-msgstr "Driver"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:368
+msgid "No Active Jobs"
+msgstr "Ingen aktive job"
 
-#. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:2
-msgctxt "button"
-msgid "Add"
-msgstr "Tilføj"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:373
+#, c-format
+msgid "%u Job"
+msgid_plural "%u Jobs"
+msgstr[0] "%u job"
+msgstr[1] "%u job"
 
-#: ../panels/printers/printers.ui.h:3
+#. Translators: The printer is low on toner
+#: ../panels/printers/pp-printer-entry.c:470
+msgid "Low on toner"
+msgstr "Lavt tonerniveau"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/pp-printer-entry.c:472
+msgid "Out of toner"
+msgstr "Løbet tør for toner"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:475
+msgid "Low on developer"
+msgstr "Lavt niveau af fremkaldervæske"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:478
+msgid "Out of developer"
+msgstr "Løbet tør for fremkaldervæske"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:480
+msgid "Low on a marker supply"
+msgstr "Markerfarveforsyning lav"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:482
+msgid "Out of a marker supply"
+msgstr "Løbet tør for markerfarve"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/pp-printer-entry.c:484
+msgid "Open cover"
+msgstr "Kabinet åbent"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/pp-printer-entry.c:486
+msgid "Open door"
+msgstr "Låge åben"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/pp-printer-entry.c:488
+msgid "Low on paper"
+msgstr "Lavt papirniveau"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/pp-printer-entry.c:490
+msgid "Out of paper"
+msgstr "Løbet tør for papir"
+
+#. Translators: The printer is offline
+#: ../panels/printers/pp-printer-entry.c:492
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Ikke tilsluttet"
+
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/pp-printer-entry.c:494
+#: ../panels/printers/pp-printer-entry.c:624
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Standset"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/pp-printer-entry.c:496
+msgid "Waste receptacle almost full"
+msgstr "Affaldsbeholderen er næsten fuld"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/pp-printer-entry.c:498
+msgid "Waste receptacle full"
+msgstr "Affaldsbeholderen er fuld"
+
+# optical photo conductor == lys-lys-leder.  Det er vist lidt dobbeltkonfekt. Den kan vi nok tillade os at skrive ordentligt
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:500
+msgid "The optical photo conductor is near end of life"
+msgstr "Lyslederen fungerer snart ikke længere"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:502
+msgid "The optical photo conductor is no longer functioning"
+msgstr "Lyslederen fungerer ikke længere"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/pp-printer-entry.c:610
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Klar"
+
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/pp-printer-entry.c:615
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "Accepterer ikke job"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/pp-printer-entry.c:620
+msgctxt "printer state"
+msgid "Processing"
+msgstr "Behandler"
+
+#: ../panels/printers/printer-entry.ui.h:1
+msgid "Printing Options"
+msgstr "Udskriftsindstillinger"
+
+#: ../panels/printers/printer-entry.ui.h:2
+msgid "Printer Details"
+msgstr "Printerdetaljer"
+
+#: ../panels/printers/printer-entry.ui.h:3
+msgid "Use Printer by Default"
+msgstr "Brug printer som standard"
+
+#: ../panels/printers/printer-entry.ui.h:4
 msgid "Remove Printer"
 msgstr "Fjern printer"
 
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:5
-msgid "Supply"
-msgstr "Forsyning"
-
-#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:7
-msgid "Location"
-msgstr "Placering"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:9
-msgid "_Default printer"
-msgstr "_Standardprinter"
-
-#: ../panels/printers/printers.ui.h:10
-msgid "Jobs"
-msgstr "Job"
-
-#. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:12
-msgid "Show _Jobs"
-msgstr "Vis _job"
-
-#: ../panels/printers/printers.ui.h:13
+#: ../panels/printers/printer-entry.ui.h:5
 msgid "Model"
 msgstr "Model"
 
-#: ../panels/printers/printers.ui.h:16
-msgid "label"
-msgstr "etiket"
+#: ../panels/printers/printer-entry.ui.h:7
+msgid "Ink Level"
+msgstr "Blækniveau"
 
-#: ../panels/printers/printers.ui.h:18
-msgid "Setting new driver…"
-msgstr "Angiver ny driver …"
+#. Translators: This is the message which follows the printer error.
+#: ../panels/printers/printer-entry.ui.h:9
+msgid "Please restart when the problem is resolved."
+msgstr "Genstart venligst, når problemet er løst."
 
-#: ../panels/printers/printers.ui.h:19
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
-msgid "page 3"
-msgstr "side 3"
+#. Translators: This is the button which restarts the printer.
+#: ../panels/printers/printer-entry.ui.h:11
+msgid "Restart"
+msgstr "Genstart"
 
-#. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:21
-msgid "Print _Test Page"
-msgstr "Udskriv _testside"
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "Tilføj …"
 
-#. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:23 ../panels/region/region.ui.h:8
-msgid "_Options"
-msgstr "_Indstillinger"
-
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:3
 msgid "No printers"
 msgstr "Ingen printere"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:26
-msgid "Add a Printer"
-msgstr "Tilføj en printer"
+#: ../panels/printers/printers.ui.h:5
+msgid "Add a Printer…"
+msgstr "Tilføj en printer …"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:7
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -4848,44 +4836,44 @@ msgstr "Placeringstjenester"
 msgid "Usage & History"
 msgstr "Brug & historik"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "Tøm papirkurven for alle elementer?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Alle elementer i papirkurven vil blive slettet permanent."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "_Tøm papirkurv"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "Slet alle de midlertidige filer?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Alle de midlertidige filer vil blive slettet permanent."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "_Slet midlertidige filer"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Tøm papirkurv & midlertidige filer"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Programforbrug"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Problemrapportering"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4894,7 +4882,7 @@ msgstr ""
 "Afsendelse af rapporter om tekniske problemer hjælper os med at forbedre %s. "
 "Rapporterne sendes anonymt og renses for personlige data."
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Privatlivspolitik"
 
@@ -4910,11 +4898,11 @@ msgstr "Beskyt dine personlige oplysninger og bestem hvad andre kan se"
 #. Translators: those are keywords for the privacy control-center panel
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:5
 msgid ""
-""
-"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;network;identity;"
+"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+"network;identity;"
 msgstr ""
-""
-"skærm;lås;diagnostik;baglås;nedbrud;privat;seneste;midlertidig;tmp;indeks;navn;netværk;identitet;"
+"skærm;lås;diagnostik;baglås;nedbrud;privat;seneste;midlertidig;tmp;indeks;"
+"navn;netværk;identitet;"
 
 #: ../panels/privacy/privacy.ui.h:1
 msgid "Screen Turns Off"
@@ -5019,6 +5007,14 @@ msgstr "Slet automatisk midlertidige _filer"
 #: ../panels/privacy/privacy.ui.h:33
 msgid "Purge _After"
 msgstr "Ryd _efter"
+
+#: ../panels/privacy/privacy.ui.h:34
+msgid "_Empty Trash…"
+msgstr "_Tøm papirkurv …"
+
+#: ../panels/privacy/privacy.ui.h:35
+msgid "_Purge Temporary Files…"
+msgstr "_Slet midlertidige filer …"
 
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
@@ -5210,6 +5206,10 @@ msgstr "Storbritannien"
 msgid "Input Sources"
 msgstr "Inputkilder"
 
+#: ../panels/region/region.ui.h:8
+msgid "_Options"
+msgstr "_Indstillinger"
+
 #: ../panels/region/region.ui.h:9
 msgid "Add input source"
 msgstr "Tilføj inputkilde"
@@ -5375,11 +5375,11 @@ msgstr "Bestem hvad du vil dele med andre"
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:5
 msgid ""
-""
-"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;movies;server;renderer;"
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
+"movies;server;renderer;"
 msgstr ""
-""
-"del;deling;ssh;vært;navn;fjern;skrivebord;medie;lyd;video;billeder;fotos;film;videoer;server;rendering;"
+"del;deling;ssh;vært;navn;fjern;skrivebord;medie;lyd;video;billeder;fotos;"
+"film;videoer;server;rendering;"
 
 #: ../panels/sharing/networks.ui.h:1
 msgid "Networks"
@@ -5482,8 +5482,8 @@ msgstr "Skift lydstyrke, input, output samt påmindelseslyde"
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
 msgstr ""
-""
-"Kort;Mikrofon;Volumen;Lydstyrke;Fade;Udtoning;Balance;Bluetooth;Hovedtelefoner;Lyd;Audio;"
+"Kort;Mikrofon;Volumen;Lydstyrke;Fade;Udtoning;Balance;Bluetooth;"
+"Hovedtelefoner;Lyd;Audio;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
@@ -5708,17 +5708,10 @@ msgstr "Gør det nemmere at se, høre, skrive, pege og klikke"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
-#, fuzzy
-#| msgid ""
-#| ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgid ""
-""
-"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
-msgstr ""
-""
-"Tastatur;Mus;a11y;Tilgængelighed;Kontrast;Zoom;Skærm;Skærmoplæser;Oplæser;tekst;skrifttype;størrelse;AccessX;Klæbetaster;Langsomme "
-"taster;Rystetaster;Musetaster;"
+"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
+"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
+msgstr "Tastatur;Mus;a11y;Tilgængelighed;Kontrast;Zoom;Skærm;Skærmoplæser;Oplæser;tekst;skrifttype;størrelse;AccessX;Klæbetaster;Taster;Langsomme;Rystetaster;Ryste;Mus;Musetaster;Dobbelt;Dobbeltklik;Ventetid;Hjælp;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6400,6 +6393,10 @@ msgstr "Brugerikon"
 msgid "Last Login"
 msgstr "Sidste login"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Remove User…"
+msgstr "Fjern bruger …"
+
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Håndtér brugerkonti"
@@ -6595,29 +6592,29 @@ msgstr "Ukendt fejl"
 msgid "Should match the web address of your login provider."
 msgstr "Bør svare til webadressen for din logind-udbyder."
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "Kunne ikke tilføje konto"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Adgangskoderne stemmer ikke."
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Kunne ikke registrere konto"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "Ingen understøttet måde at godkende med dette domæne"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Kunne ikke slutte til domænet"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6625,7 +6622,7 @@ msgstr ""
 "Det loginnavn virkede ikke.\n"
 "Prøv venligst igen."
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6633,11 +6630,11 @@ msgstr ""
 "Adgangskoden for login virkede ikke.\n"
 "Prøv venligst igen."
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Kunne ikke logge ind på domænet"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Kan ikke finde domænet. Måske stavede du det forkert?"
 
@@ -6767,12 +6764,12 @@ msgstr "%e. %b, %Y"
 #, c-format
 msgctxt "login history week label"
 msgid "%s — %s"
-msgstr ""
+msgstr "%s — %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:770
+#: ../panels/user-accounts/um-user-panel.c:776
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6780,7 +6777,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:774
+#: ../panels/user-accounts/um-user-panel.c:780
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6797,10 +6794,9 @@ msgstr "Session påbegyndt"
 #. Translators: This is the title of the "Account Activity" dialog.
 #. The %s is the user real name.
 #: ../panels/user-accounts/um-history-dialog.c:299
-#, c-format, fuzzy
-#| msgid "%s - Account Activity"
+#, c-format
 msgid "%s — Account Activity"
-msgstr "%s - Kontoaktivitet"
+msgstr "%s — Kontoaktivitet"
 
 #: ../panels/user-accounts/um-password-dialog.c:145
 msgid "Please choose another password."
@@ -6818,23 +6814,23 @@ msgstr "Adgangskoden kunne ikke ændres"
 msgid "The passwords do not match."
 msgstr "Adgangskoderne stemmer ikke overens."
 
-#: ../panels/user-accounts/um-photo-dialog.c:214
+#: ../panels/user-accounts/um-photo-dialog.c:215
 msgid "Browse for more pictures"
 msgstr "Gennemse flere billeder"
 
-#: ../panels/user-accounts/um-photo-dialog.c:448
+#: ../panels/user-accounts/um-photo-dialog.c:449
 msgid "Disable image"
 msgstr "Deaktivér billede"
 
-#: ../panels/user-accounts/um-photo-dialog.c:466
+#: ../panels/user-accounts/um-photo-dialog.c:467
 msgid "Take a photo…"
 msgstr "Tag et billede …"
 
-#: ../panels/user-accounts/um-photo-dialog.c:484
+#: ../panels/user-accounts/um-photo-dialog.c:485
 msgid "Browse for more pictures…"
 msgstr "Gennemse flere billeder …"
 
-#: ../panels/user-accounts/um-photo-dialog.c:708
+#: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
 msgid "Used by %s"
 msgstr "Bruges af %s"
@@ -6863,30 +6859,30 @@ msgstr "Ugyldig adgangskode; prøv venligst igen"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Kunne ikke forbinde til domænet %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:194
-msgid "<small>Your account</small>"
-msgstr ""
+#: ../panels/user-accounts/um-user-panel.c:195
+msgid "Your account"
+msgstr "Din konto"
 
-#: ../panels/user-accounts/um-user-panel.c:384
+#: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
 msgstr "Kunne ikke slette bruger"
 
-#: ../panels/user-accounts/um-user-panel.c:442
-#: ../panels/user-accounts/um-user-panel.c:501
-#: ../panels/user-accounts/um-user-panel.c:553
+#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:559
 msgid "Failed to revoke remotely managed user"
 msgstr "Kunne ikke tilbagekalde fjernhåndteret bruger"
 
-#: ../panels/user-accounts/um-user-panel.c:607
+#: ../panels/user-accounts/um-user-panel.c:613
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: ../panels/user-accounts/um-user-panel.c:616
+#: ../panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s er stadig logget ind"
 
-#: ../panels/user-accounts/um-user-panel.c:620
+#: ../panels/user-accounts/um-user-panel.c:626
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6894,12 +6890,12 @@ msgstr ""
 "Sletning af en bruger, mens denne stadig er logget ind, kan bringe systemet "
 "i en inkonsistent tilstand."
 
-#: ../panels/user-accounts/um-user-panel.c:629
+#: ../panels/user-accounts/um-user-panel.c:635
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Vil du beholde %ss filer?"
 
-#: ../panels/user-accounts/um-user-panel.c:633
+#: ../panels/user-accounts/um-user-panel.c:639
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6907,49 +6903,49 @@ msgstr ""
 "Det er muligt at beholde hjemmemappen, postarkivet samt midlertidige filer, "
 "når en brugerkonto slettes."
 
-#: ../panels/user-accounts/um-user-panel.c:636
+#: ../panels/user-accounts/um-user-panel.c:642
 msgid "_Delete Files"
 msgstr "_Slet filer"
 
-#: ../panels/user-accounts/um-user-panel.c:637
+#: ../panels/user-accounts/um-user-panel.c:643
 msgid "_Keep Files"
 msgstr "_Behold filer"
 
-#: ../panels/user-accounts/um-user-panel.c:651
+#: ../panels/user-accounts/um-user-panel.c:657
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Er du sikker på, at du vil tilbagekalde den fjernhåndterede konto tilhørende "
 "%s?"
 
-#: ../panels/user-accounts/um-user-panel.c:655
+#: ../panels/user-accounts/um-user-panel.c:661
 msgid "_Delete"
 msgstr "_Slet"
 
-#: ../panels/user-accounts/um-user-panel.c:705
+#: ../panels/user-accounts/um-user-panel.c:711
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktiveret"
 
-#: ../panels/user-accounts/um-user-panel.c:713
+#: ../panels/user-accounts/um-user-panel.c:719
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Vælges ved næste login"
 
-#: ../panels/user-accounts/um-user-panel.c:716
+#: ../panels/user-accounts/um-user-panel.c:722
 msgctxt "Password mode"
 msgid "None"
 msgstr "Intet"
 
-#: ../panels/user-accounts/um-user-panel.c:763
+#: ../panels/user-accounts/um-user-panel.c:769
 msgid "Logged in"
 msgstr "Logget ind"
 
-#: ../panels/user-accounts/um-user-panel.c:1111
+#: ../panels/user-accounts/um-user-panel.c:1117
 msgid "Failed to contact the accounts service"
 msgstr "Kunne ikke kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:1113
+#: ../panels/user-accounts/um-user-panel.c:1119
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Kontrollér venligst at AccountService er installeret og aktiveret."
 
@@ -6957,7 +6953,7 @@ msgstr "Kontrollér venligst at AccountService er installeret og aktiveret."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: ../panels/user-accounts/um-user-panel.c:1149
+#: ../panels/user-accounts/um-user-panel.c:1155
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6965,12 +6961,12 @@ msgstr ""
 "Klik først på *-ikonet\n"
 "for at lave ændringer"
 
-#: ../panels/user-accounts/um-user-panel.c:1189
+#: ../panels/user-accounts/um-user-panel.c:1195
 msgid "Create a user account"
 msgstr "Opret ny brugerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1200
-#: ../panels/user-accounts/um-user-panel.c:1379
+#: ../panels/user-accounts/um-user-panel.c:1206
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6978,12 +6974,12 @@ msgstr ""
 "Klik først *-ikonet\n"
 "for at oprette en brugerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1210
+#: ../panels/user-accounts/um-user-panel.c:1216
 msgid "Delete the selected user account"
 msgstr "Slet den valgte brugerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1222
-#: ../panels/user-accounts/um-user-panel.c:1384
+#: ../panels/user-accounts/um-user-panel.c:1228
+#: ../panels/user-accounts/um-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6991,20 +6987,20 @@ msgstr ""
 "Klik først *-ikonet\n"
 "for at slette den valgte brugerkonto"
 
-#: ../panels/user-accounts/um-utils.c:563
+#: ../panels/user-accounts/um-utils.c:507
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Beklager, men det brugernavn er ikke tilgængeligt. Prøv et andet."
 
-#: ../panels/user-accounts/um-utils.c:566
+#: ../panels/user-accounts/um-utils.c:510
 #, c-format
 msgid "The username is too long."
 msgstr "Brugernavnet er for langt."
 
-#: ../panels/user-accounts/um-utils.c:569
+#: ../panels/user-accounts/um-utils.c:513
 msgid "The username cannot start with a “-”."
 msgstr "Brugernavnet kan ikke begynde med \"-\"."
 
-#: ../panels/user-accounts/um-utils.c:572
+#: ../panels/user-accounts/um-utils.c:516
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7012,7 +7008,7 @@ msgstr ""
 "Brugernavnet kan kun bestå af små og store bogstaver fra a til z, tal og "
 "følgende tegn: . - _"
 
-#: ../panels/user-accounts/um-utils.c:576
+#: ../panels/user-accounts/um-utils.c:520
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Dette vil blive brugt til at navngive din hjemmemappe og kan ikke ændres."
@@ -7047,17 +7043,15 @@ msgid "Mis-click detected, restarting…"
 msgstr "Fejlklik detekteret, genstarter …"
 
 #: ../panels/wacom/cc-wacom-button-row.c:266
-#, c-format, fuzzy
-#| msgid "Button"
+#, c-format
 msgid "Button %d"
-msgstr "Knap"
+msgstr "Knap %d"
 
+# læser det som "programdefineret handling"
 #: ../panels/wacom/cc-wacom-button-row.h:53
-#, fuzzy
-#| msgid "Applications"
 msgctxt "Wacom action-type"
 msgid "Application defined"
-msgstr "Programmer"
+msgstr "Programdefineret"
 
 #: ../panels/wacom/cc-wacom-button-row.h:54
 msgctxt "Wacom action-type"
@@ -7115,8 +7109,8 @@ msgstr "Wa­com-tegne­plade"
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:3
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Angiv tasteafbildninger og justér følsomhed for digital pen til "
-"grafik-tavle-pc'er"
+"Angiv tasteafbildninger og justér følsomhed for digital pen til grafik-tavle-"
+"pc'er"
 
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:5
@@ -7205,14 +7199,12 @@ msgid "Forward"
 msgstr "Fremad"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:6
-#, fuzzy
-#| msgid "No languages found"
 msgid "No stylus found"
-msgstr "Ingen sprog fundet"
+msgstr "Ingen pen fundet"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:7
 msgid "Please move your stylus to the proximity of the tablet to configure it"
-msgstr ""
+msgstr "Flyt din pen hen til pegepladen for at konfigurere den"
 
 # Måske?
 # scootergrisen: "pressure fell" kunne måske oversættes til "trykfølsomhed"
@@ -7242,6 +7234,10 @@ msgstr "Underste knap"
 #: ../panels/wacom/wacom-stylus-page.ui.h:15
 msgid "Tip Pressure Feel"
 msgstr "Følelsen af pres med spidsen"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "page 3"
+msgstr "side 3"
 
 #: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1484
@@ -7361,10 +7357,73 @@ msgid "Hotspot"
 msgstr "Hotspot"
 
 #: ../shell/panel-list.ui.h:3
-#, fuzzy
-#| msgid "No regions found"
 msgid "No results found"
-msgstr "Ingen regioner fundet"
+msgstr "Ingen resultater fundet"
+
+#~ msgid "Add Account"
+#~ msgstr "Tilføj konto"
+
+#~ msgid "Mail"
+#~ msgstr "Post"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontakter"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Resources"
+#~ msgstr "Ressourcer"
+
+#~ msgctxt "printer state"
+#~ msgid "Configuring"
+#~ msgstr "Konfigurerer"
+
+#~ msgid "Toner Level"
+#~ msgstr "Tonerniveau"
+
+#~ msgid "Supply Level"
+#~ msgstr "Forsyningsniveau"
+
+#~ msgctxt "printer state"
+#~ msgid "Installing"
+#~ msgstr "Installerer"
+
+#~ msgid "%u active"
+#~ msgid_plural "%u active"
+#~ msgstr[0] "%u aktiv"
+#~ msgstr[1] "%u aktive"
+
+#~ msgid "Test page"
+#~ msgstr "Testside"
+
+#~ msgctxt "button"
+#~ msgid "Add"
+#~ msgstr "Tilføj"
+
+#~ msgid "Supply"
+#~ msgstr "Forsyning"
+
+#~ msgid "_Default printer"
+#~ msgstr "_Standardprinter"
+
+#~ msgid "Jobs"
+#~ msgstr "Job"
+
+#~ msgid "Show _Jobs"
+#~ msgstr "Vis _job"
+
+#~ msgid "label"
+#~ msgstr "etiket"
+
+#~ msgid "Setting new driver…"
+#~ msgstr "Angiver ny driver …"
+
+#~ msgid "Print _Test Page"
+#~ msgstr "Udskriv _testside"
 
 #~ msgid "Wayland"
 #~ msgstr "Wayland"
@@ -7382,9 +7441,6 @@ msgstr "Ingen regioner fundet"
 #~ msgid "Error creating account"
 #~ msgstr "Fejl ved oprettelse af konto"
 
-#~ msgid "Error removing account"
-#~ msgstr "Fejl ved sletning af konto"
-
 #~ msgid "Are you sure you want to remove the account?"
 #~ msgstr "Er du sikker på, at du vil slette kontoen?"
 
@@ -7398,11 +7454,11 @@ msgstr "Ingen regioner fundet"
 #~ msgstr "Ingen onlinekonti konfigureret"
 
 #~ msgid ""
-#~ "Adding an account allows your applications to access it for documents, mail, "
-#~ "contacts, calendar, chat and more."
+#~ "Adding an account allows your applications to access it for documents, "
+#~ "mail, contacts, calendar, chat and more."
 #~ msgstr ""
-#~ "Tilføjelse af en konto tillader dine programmer at tilgå den for dokumenter, "
-#~ "e-mail, kontakter, kalender, chat med mere."
+#~ "Tilføjelse af en konto tillader dine programmer at tilgå den for "
+#~ "dokumenter, e-mail, kontakter, kalender, chat med mere."
 
 #~ msgid "Add a New Printer"
 #~ msgstr "Tilføj en ny printer"
@@ -7437,9 +7493,6 @@ msgstr "Ingen regioner fundet"
 
 #~ msgid "Left Ring Mode #%d"
 #~ msgstr "Venstre ringtilstand #%d"
-
-#~ msgid "Right Ring"
-#~ msgstr "Højre ring"
 
 #~ msgid "Right Ring Mode #%d"
 #~ msgstr "Højre ringtilstand #%d"
@@ -7524,12 +7577,12 @@ msgstr "Ingen regioner fundet"
 #~ msgstr "<ukendt handling>"
 
 #~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to type "
-#~ "using this key.\n"
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
 #~ "Please try with a key such as Control, Alt or Shift at the same time."
 #~ msgstr ""
-#~ "Genvejen \"%s\" kan ikke bruges da det derved vil være umuligt at skrive med "
-#~ "denne tast.\n"
+#~ "Genvejen \"%s\" kan ikke bruges da det derved vil være umuligt at skrive "
+#~ "med denne tast.\n"
 #~ "Prøv venligst med f.eks. Ctrl-, Alt- eller Skift-tasten på samme tid."
 
 #~ msgid ""
@@ -7540,9 +7593,11 @@ msgstr "Ingen regioner fundet"
 #~ "\"%s\""
 
 #~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
 #~ msgstr ""
-#~ "Hvis du laver genvejen til \"%s\" om, vil \"%s\"-genvejen blive deaktiveret."
+#~ "Hvis du laver genvejen til \"%s\" om, vil \"%s\"-genvejen blive "
+#~ "deaktiveret."
 
 #~ msgid "_Reassign"
 #~ msgstr "_Omtildel"
@@ -7555,11 +7610,11 @@ msgstr "Ingen regioner fundet"
 #~ "til \"%s\" automatisk?"
 
 #~ msgid ""
-#~ "\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
-#~ "if you move forward."
+#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
+#~ "disabled if you move forward."
 #~ msgstr ""
-#~ "\"%s\" er i øjeblikket associeret med \"%s\", denne genvej blive deaktiveret "
-#~ "hvis du vælger at fortsætte."
+#~ "\"%s\" er i øjeblikket associeret med \"%s\", denne genvej blive "
+#~ "deaktiveret hvis du vælger at fortsætte."
 
 #~ msgid "_Assign"
 #~ msgstr "_Tildel"
@@ -7601,13 +7656,13 @@ msgstr "Ingen regioner fundet"
 #~ msgstr "Intet certifikat fra certifikatautoritet valgt"
 
 #~ msgid ""
-#~ "Not using a Certificate Authority (CA) certificate can result in connections "
-#~ "to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
-#~ "Authority certificate?"
+#~ "Not using a Certificate Authority (CA) certificate can result in "
+#~ "connections to insecure, rogue Wi-Fi networks.  Would you like to choose "
+#~ "a Certificate Authority certificate?"
 #~ msgstr ""
-#~ "Hvis man ikke bruger et certifikat fra en certifikatautoritet (CA), kan man "
-#~ "komme til at forbinde til usikre, fjendtligtsindede netværk.  Vil du vælge "
-#~ "et certifikat fra en certifikatautoritet?"
+#~ "Hvis man ikke bruger et certifikat fra en certifikatautoritet (CA), kan "
+#~ "man komme til at forbinde til usikre, fjendtligtsindede netværk.  Vil du "
+#~ "vælge et certifikat fra en certifikatautoritet?"
 
 #~ msgid "Ignore"
 #~ msgstr "Ignorér"
@@ -7645,7 +7700,7 @@ msgstr "Ingen regioner fundet"
 #~ msgid "Privacy"
 #~ msgstr "Privatliv"
 
-#~ # Flertal med vilje
+# Flertal med vilje
 #~ msgctxt "Search Location"
 #~ msgid "Other"
 #~ msgstr "Andre"
@@ -7665,15 +7720,8 @@ msgstr "Ingen regioner fundet"
 #~ msgid "Add User Account"
 #~ msgstr "Tilføj brugerkonti"
 
-#~ msgid "Remove User Account"
-#~ msgstr "Fjern brugerkonti"
-
-#~ msgid "Login Options"
-#~ msgstr "Indstillinger for login"
-
 #~ msgid "A user with the username '%s' already exists."
 #~ msgstr "Der findes allerede en bruger med brugernavnet \"%s\"."
 
 #~ msgid "Used to determine your geographical location"
 #~ msgstr "Bruges til at bestemme din geografiske placering"
-
