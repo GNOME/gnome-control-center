@@ -59,8 +59,6 @@ struct _PpJobsDialog {
   gchar *printer_name;
 
   GCancellable *get_jobs_cancellable;
-
-  gint ref_count;
 };
 
 static void
@@ -208,8 +206,6 @@ update_jobs_list_cb (GObject      *source_object,
 
   g_list_free (jobs);
   g_clear_object (&dialog->get_jobs_cancellable);
-
-  dialog->ref_count--;
 }
 
 static void
@@ -219,8 +215,6 @@ update_jobs_list (PpJobsDialog *dialog)
 
   if (dialog->printer_name != NULL)
     {
-      dialog->ref_count++;
-
       if (dialog->get_jobs_cancellable != NULL)
         {
           g_cancellable_cancel (dialog->get_jobs_cancellable);
@@ -304,7 +298,6 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   dialog->user_callback = user_callback;
   dialog->user_data = user_data;
   dialog->printer_name = g_strdup (printer_name);
-  dialog->ref_count = 0;
 
   /* connect signals */
   g_signal_connect (dialog->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -340,31 +333,6 @@ pp_jobs_dialog_update (PpJobsDialog *dialog)
   update_jobs_list (dialog);
 }
 
-static gboolean
-pp_jobs_dialog_free_idle (gpointer user_data)
-{
-  PpJobsDialog *dialog = (PpJobsDialog*) user_data;
-
-  if (dialog->ref_count == 0)
-    {
-      gtk_widget_destroy (GTK_WIDGET (dialog->dialog));
-      dialog->dialog = NULL;
-
-      g_object_unref (dialog->builder);
-      dialog->builder = NULL;
-
-      g_free (dialog->printer_name);
-
-      g_free (dialog);
-
-      return FALSE;
-    }
-  else
-    {
-      return TRUE;
-    }
-}
-
 void
 pp_jobs_dialog_free (PpJobsDialog *dialog)
 {
@@ -374,7 +342,12 @@ pp_jobs_dialog_free (PpJobsDialog *dialog)
       g_clear_object (&dialog->get_jobs_cancellable);
     }
 
-  g_idle_add (pp_jobs_dialog_free_idle, dialog);
+  gtk_widget_destroy (GTK_WIDGET (dialog->dialog));
+  dialog->dialog = NULL;
+
+  g_clear_object (&dialog->builder);
+  g_free (dialog->printer_name);
+  g_free (dialog);
 }
 
 static void
