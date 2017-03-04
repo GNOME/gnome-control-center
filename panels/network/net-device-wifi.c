@@ -1906,7 +1906,10 @@ open_history (NetDeviceWifi *device_wifi)
         CcNetworkPanel *panel;
         GtkWidget *button;
         GtkWidget *forget;
+        GtkWidget *header;
         GtkWidget *swin;
+        GtkWidget *content_area;
+        GtkWidget *separator;
         GSList *connections;
         GSList *l;
         const GPtrArray *aps;
@@ -1919,40 +1922,36 @@ open_history (NetDeviceWifi *device_wifi)
         GtkSizeGroup *rows;
         GtkSizeGroup *icons;
 
-        dialog = gtk_dialog_new ();
+        dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", 1, NULL);
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
-        gtk_window_set_title (GTK_WINDOW (dialog), _("History"));
+        gtk_window_set_title (GTK_WINDOW (dialog), _("Known Wi-Fi Networks"));
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-        gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 400);
+        gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 
-        button = gtk_button_new_with_mnemonic (_("_Close"));
-        gtk_widget_set_can_default (button, TRUE);
-        gtk_widget_show (button);
-        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, 0);
-        g_signal_connect_swapped (button, "clicked",
+        /* Dialog's header */
+        header = gtk_header_bar_new ();
+        gtk_widget_show (header);
+        gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Known Wi-Fi Networks"));
+        gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
+        gtk_window_set_titlebar (GTK_WINDOW (dialog), header);
+
+        g_signal_connect_swapped (dialog, "response",
                                   G_CALLBACK (gtk_widget_destroy), dialog);
 
-        /* translators: This is the label for the "Forget wireless network" functionality */
-        forget = gtk_button_new_with_mnemonic (C_("Wi-Fi Network", "_Forget"));
-        gtk_widget_show (forget);
-        gtk_widget_set_sensitive (forget, FALSE);
-        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), forget, 0);
-        g_signal_connect (forget, "clicked",
-                          G_CALLBACK (forget_selected), device_wifi);
-        gtk_container_child_set (GTK_CONTAINER (gtk_widget_get_parent (forget)), forget, "secondary", TRUE, NULL);
-        g_object_set_data (G_OBJECT (forget), "net", device_wifi);
+        g_signal_connect_swapped (dialog, "delete-event",
+                                  G_CALLBACK (gtk_widget_destroy), dialog);
+
+        content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+        gtk_container_set_border_width (GTK_CONTAINER (content_area), 0);
 
         swin = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (swin);
+        gtk_widget_set_vexpand (swin, TRUE);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swin), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (swin), GTK_SHADOW_IN);
-        gtk_widget_set_margin_start (swin, 50);
-        gtk_widget_set_margin_end (swin, 50);
-        gtk_widget_set_margin_top (swin, 12);
-        gtk_widget_set_margin_bottom (swin, 12);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), swin, TRUE, TRUE, 0);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (swin), GTK_SHADOW_NONE);
+        gtk_container_add (GTK_CONTAINER (content_area), swin);
 
         list = GTK_WIDGET (gtk_list_box_new ());
         gtk_widget_show (list);
@@ -1960,6 +1959,26 @@ open_history (NetDeviceWifi *device_wifi)
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)history_sort, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (swin), list);
+
+        /* Horizontal separator */
+        separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+        gtk_widget_show (separator);
+        gtk_container_add (GTK_CONTAINER (content_area), separator);
+
+        /* translators: This is the label for the "Forget wireless network" functionality */
+        forget = gtk_button_new_with_mnemonic (C_("Wi-Fi Network", "_Forget"));
+        gtk_widget_show (forget);
+        gtk_widget_set_halign (forget, GTK_ALIGN_START);
+        gtk_widget_set_margin_top (forget, 6);
+        gtk_widget_set_margin_bottom (forget, 6);
+        gtk_widget_set_margin_start (forget, 6);
+        gtk_widget_set_sensitive (forget, FALSE);
+        gtk_style_context_add_class (gtk_widget_get_style_context (forget), "destructive-action");
+
+        g_signal_connect (forget, "clicked",
+                          G_CALLBACK (forget_selected), device_wifi);
+        g_object_set_data (G_OBJECT (forget), "net", device_wifi);
+        gtk_container_add (GTK_CONTAINER (content_area), forget);
 
         rows = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
         icons = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
