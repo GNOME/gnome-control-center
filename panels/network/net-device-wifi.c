@@ -1886,7 +1886,7 @@ open_history (NetDeviceWifi *device_wifi)
         GtkSizeGroup *rows;
         GtkSizeGroup *icons;
 
-        dialog = gtk_dialog_new ();
+        dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", 1, NULL);
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
@@ -1894,22 +1894,19 @@ open_history (NetDeviceWifi *device_wifi)
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 400);
 
-        button = gtk_button_new_with_mnemonic (_("_Close"));
-        gtk_widget_set_can_default (button, TRUE);
-        gtk_widget_show (button);
-        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, 0);
-        g_signal_connect_swapped (button, "clicked",
-                                  G_CALLBACK (gtk_widget_destroy), dialog);
-
         /* translators: This is the label for the "Forget wireless network" functionality */
         forget = gtk_button_new_with_mnemonic (C_("Wi-Fi Network", "_Forget"));
         gtk_widget_show (forget);
         gtk_widget_set_sensitive (forget, FALSE);
-        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), forget, 0);
+
+        /* GTK_RESPONSE_HELP is needed to move the button to the start of the headerbar
+         * without hiding the close button. */
+        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), forget, GTK_RESPONSE_HELP);
         g_signal_connect (forget, "clicked",
                           G_CALLBACK (forget_selected), device_wifi);
-        gtk_container_child_set (GTK_CONTAINER (gtk_widget_get_parent (forget)), forget, "secondary", TRUE, NULL);
         g_object_set_data (G_OBJECT (forget), "net", device_wifi);
+
+        gtk_style_context_add_class (gtk_widget_get_style_context (forget), "destructive-action");
 
         swin = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (swin);
