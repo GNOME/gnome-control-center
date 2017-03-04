@@ -8,7 +8,7 @@
 # Joan Duran <jodufi@gmail.com>, 2008-2013.
 # Jordi Serratosa <jordis@softcatala.cat>, 2012.
 # Josep Sànchez <papapep@gmx.com>, 2013.
-# Jordi Mas <jmas@softcatala.org>, 2015-2016
+# Jordi Mas i Hernàndez <jmas@softcatala.org>, 2015-2016
 # Gil Forcada <gilforcada@guifi.net>, 2013, 2014, 2016.
 #
 # Terminologia
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-23 08:17+0100\n"
+"POT-Creation-Date: 2017-03-04 20:10+0100\n"
 "PO-Revision-Date: 2017-02-23 08:18+0100\n"
-"Last-Translator: David <rbndavid@gmail.com>\n"
+"Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +124,7 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/printers/pp-details-dialog.c:319
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -1122,7 +1122,7 @@ msgstr "Primària"
 
 #: ../panels/display/cc-display-panel.c:599
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1244,7 +1244,7 @@ msgstr "No usis aquesta pantalla"
 
 #. TRANSLATORS: the state of the night light setting
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -2623,7 +2623,7 @@ msgid "Select file to import"
 msgstr "Seleccioneu el fitxer a importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:322
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -4237,12 +4237,12 @@ msgid "Authentication Required"
 msgstr "Cal autenticació"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:713
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:959
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
@@ -4334,20 +4334,20 @@ msgstr "S'estan carregant les opcions…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: ../panels/printers/pp-details-dialog.c:123
-#: ../panels/printers/pp-details-dialog.c:416
+#: ../panels/printers/pp-details-dialog.c:415
 #, c-format
 msgid "%s Details"
 msgstr "Detalls %s"
 
-#: ../panels/printers/pp-details-dialog.c:174
+#: ../panels/printers/pp-details-dialog.c:172
 msgid "No suitable driver found"
 msgstr "No s'ha trobat cap controlador adequat"
 
-#: ../panels/printers/pp-details-dialog.c:318
+#: ../panels/printers/pp-details-dialog.c:316
 msgid "Select PPD File"
 msgstr "Selecció d'un fitxer PPD"
 
-#: ../panels/printers/pp-details-dialog.c:327
+#: ../panels/printers/pp-details-dialog.c:325
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4649,12 +4649,12 @@ msgid "Manufacturer"
 msgstr "Fabricant"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:368
+#: ../panels/printers/pp-printer-entry.c:406
 msgid "No Active Jobs"
 msgstr "No hi ha tasques actives"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:373
+#: ../panels/printers/pp-printer-entry.c:411
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4662,105 +4662,105 @@ msgstr[0] "%u tasca"
 msgstr[1] "%u tasques"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:470
+#: ../panels/printers/pp-printer-entry.c:513
 msgid "Low on toner"
 msgstr "Tòner baix"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:472
+#: ../panels/printers/pp-printer-entry.c:515
 msgid "Out of toner"
 msgstr "Sense tòner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:475
+#: ../panels/printers/pp-printer-entry.c:518
 msgid "Low on developer"
 msgstr "Revelador baix"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:478
+#: ../panels/printers/pp-printer-entry.c:521
 msgid "Out of developer"
 msgstr "Sense revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:480
+#: ../panels/printers/pp-printer-entry.c:523
 msgid "Low on a marker supply"
 msgstr "Marcador baix"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:482
+#: ../panels/printers/pp-printer-entry.c:525
 msgid "Out of a marker supply"
 msgstr "Sense marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:484
+#: ../panels/printers/pp-printer-entry.c:527
 msgid "Open cover"
 msgstr "Tapa oberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:486
+#: ../panels/printers/pp-printer-entry.c:529
 msgid "Open door"
 msgstr "Porta oberta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:488
+#: ../panels/printers/pp-printer-entry.c:531
 msgid "Low on paper"
 msgstr "Paper baix"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:490
+#: ../panels/printers/pp-printer-entry.c:533
 msgid "Out of paper"
 msgstr "Sense paper"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:492
+#: ../panels/printers/pp-printer-entry.c:535
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Apagada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:494
-#: ../panels/printers/pp-printer-entry.c:624
+#: ../panels/printers/pp-printer-entry.c:537
+#: ../panels/printers/pp-printer-entry.c:667
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:496
+#: ../panels/printers/pp-printer-entry.c:539
 msgid "Waste receptacle almost full"
 msgstr "El receptacle de residus està quasi ple"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:498
+#: ../panels/printers/pp-printer-entry.c:541
 msgid "Waste receptacle full"
 msgstr "El receptacle de residus està ple"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:500
+#: ../panels/printers/pp-printer-entry.c:543
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor òptic fotogràfic està al final de la seva vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:502
+#: ../panels/printers/pp-printer-entry.c:545
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor òptic fotogràfic ja no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:610
+#: ../panels/printers/pp-printer-entry.c:653
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Apunt"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:615
+#: ../panels/printers/pp-printer-entry.c:658
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No accepta tasques"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:620
+#: ../panels/printers/pp-printer-entry.c:663
 msgctxt "printer state"
 msgid "Processing"
 msgstr "S'està processant"
@@ -6879,8 +6879,8 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No s'ha pogut connectar al domini %s: %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-msgid "<small>Your account</small>"
-msgstr "<small>Compte</small>"
+msgid "Your account"
+msgstr "El vostre compte"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
@@ -7369,6 +7369,9 @@ msgstr "Punt d'accés Wi-Fi"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "No s'ha trobat cap resultat."
+
+#~ msgid "<small>Your account</small>"
+#~ msgstr "<small>Compte</small>"
 
 #~ msgid "Edit"
 #~ msgstr "Edita"
