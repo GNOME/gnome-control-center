@@ -9,18 +9,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-16 19:57+0000\n"
-"PO-Revision-Date: 2017-02-20 19:08+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2017-02-24 16:16+0000\n"
+"PO-Revision-Date: 2017-02-25 17:41+0700\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -117,7 +117,7 @@ msgstr ""
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/printers/pp-details-dialog.c:321
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -2600,7 +2600,7 @@ msgid "Select file to import"
 msgstr "Pilih berkas untuk diimpor"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:317
+#: ../panels/printers/pp-details-dialog.c:322
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -3787,26 +3787,26 @@ msgstr "Notifikasi _Layar Kunci"
 msgid "Applications"
 msgstr "Aplikasi"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:145
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Lainnya"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
 msgid "%s Account"
 msgstr "Akun %s"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:767
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
 msgid "Error removing account"
 msgstr "Galat saat menghapus akun"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:837
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> dihapus"
@@ -3838,10 +3838,15 @@ msgid "Connect to your data in the cloud"
 msgstr "Hubungkan ke data Anda di awan"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Tidak ada koneksi internet — koneksikan untuk mengatur akun daring baru"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
 msgstr "Tambah akun"
 
-#: ../panels/online-accounts/online-accounts.ui.h:4
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Hapus Akun"
 
@@ -4297,21 +4302,21 @@ msgid "Loading options…"
 msgstr "Opsi Mematikan Mesin…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: ../panels/printers/pp-details-dialog.c:100
-#: ../panels/printers/pp-details-dialog.c:412
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:416
 #, c-format
 msgid "%s Details"
 msgstr "Rincian %s"
 
-#: ../panels/printers/pp-details-dialog.c:169
+#: ../panels/printers/pp-details-dialog.c:174
 msgid "No suitable driver found"
 msgstr "Tak ditemukan penggerak yang cocok"
 
-#: ../panels/printers/pp-details-dialog.c:313
+#: ../panels/printers/pp-details-dialog.c:318
 msgid "Select PPD File"
 msgstr "Pilih Berkas PPD"
 
-#: ../panels/printers/pp-details-dialog.c:322
+#: ../panels/printers/pp-details-dialog.c:327
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -6837,8 +6842,8 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Tak bisa menyambung ke domain %s: %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-msgid "<small>Your account</small>"
-msgstr "<small>Akun Anda</small>"
+msgid "Your account"
+msgstr "Akun Anda"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
@@ -7323,3 +7328,6 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Hasil tak ditemukan"
+
+#~ msgid "<small>Your account</small>"
+#~ msgstr "<small>Akun Anda</small>"
