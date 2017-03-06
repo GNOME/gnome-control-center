@@ -50,6 +50,7 @@
 #define KEY_ICON_THEME               "icon-theme"
 #define KEY_CURSOR_BLINKING          "cursor-blink"
 #define KEY_CURSOR_BLINKING_TIME     "cursor-blink-time"
+#define KEY_MOUSE_CURSOR_SIZE        "cursor-size"
 
 /* application settings */
 #define APPLICATION_SETTINGS         "org.gnome.desktop.a11y.applications"
@@ -178,6 +179,67 @@ zoom_options_launch (CcUaPanel *self)
 			     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
 }
 
+/* cursor size dialog */
+static void
+cursor_size_toggled (GtkWidget *button,
+                     CcUaPanel *self)
+{
+  CcUaPanelPrivate *priv = self->priv;
+  guint cursor_size;
+
+  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+    return;
+
+  cursor_size = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (button), "cursor-size"));
+  g_settings_set_int (priv->interface_settings, KEY_MOUSE_CURSOR_SIZE, cursor_size);
+  g_debug ("Setting cursor size to %d", cursor_size);
+}
+
+static void
+cursor_size_setup (CcUaPanel *self)
+{
+  guint cursor_sizes[] = { 24, 32, 48, 64, 96 };
+  guint current_cursor_size, i;
+  CcUaPanelPrivate *priv = self->priv;
+  GtkWidget *grid;
+  GtkSizeGroup *size_group;
+  GtkWidget *last_radio_button = NULL;
+
+  grid = WID ("cursor_size_grid");
+  gtk_style_context_add_class (gtk_widget_get_style_context (grid), "linked");
+
+  current_cursor_size = g_settings_get_int (priv->interface_settings,
+                                            KEY_MOUSE_CURSOR_SIZE);
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
+    {
+      GtkWidget *image, *button;
+      char *cursor_image_name;
+
+      cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
+      image = gtk_image_new_from_resource (cursor_image_name);
+      g_free (cursor_image_name);
+
+      button = gtk_radio_button_new_from_widget (GTK_RADIO_BUTTON (last_radio_button));
+      last_radio_button = button;
+      gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
+      g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
+
+      gtk_container_add (GTK_CONTAINER (button), image);
+      gtk_grid_attach (GTK_GRID (grid), button, i, 0, 1, 1);
+      gtk_size_group_add_widget (size_group, button);
+
+      g_signal_connect (button, "toggled",
+                        G_CALLBACK (cursor_size_toggled), self);
+
+      if (current_cursor_size == cursor_sizes[i])
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+    }
+
+  gtk_widget_show_all (grid);
+}
+
 /* seeing section */
 
 static gboolean
@@ -267,6 +329,45 @@ on_off_label_mapping_get (GValue   *value,
                           gpointer  user_data)
 {
   g_value_set_string (value, g_variant_get_boolean (variant) ? _("On") : _("Off"));
+
+  return TRUE;
+}
+
+static gboolean
+cursor_size_label_mapping_get (GValue   *value,
+                               GVariant *variant,
+                               gpointer  user_data)
+{
+  char *label;
+  int cursor_size;
+
+  cursor_size = g_variant_get_int32 (variant);
+
+  switch (cursor_size)
+    {
+      case 24:
+        /* translators: the labels will read:
+         * Cursor Size: Default */
+        label = g_strdup (C_("cursor size", "Default"));
+        break;
+      case 32:
+        label = g_strdup (C_("cursor size", "Medium"));
+        break;
+      case 48:
+        label = g_strdup (C_("cursor size", "Large"));
+        break;
+      case 64:
+        label = g_strdup (C_("cursor size", "Larger"));
+        break;
+      case 96:
+        label = g_strdup (C_("cursor size", "Largest"));
+        break;
+      default:
+        label = g_strdup_printf (_("%d pixels"), g_variant_get_int32 (variant));
+        break;
+    }
+
+  g_value_take_string (value, label);
 
   return TRUE;
 }
@@ -433,6 +534,23 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 set_large_text_mapping,
                                 priv->interface_settings,
                                 NULL);
+
+  /* cursor size */
+
+  cursor_size_setup (self);
+
+  g_settings_bind_with_mapping (priv->interface_settings, KEY_MOUSE_CURSOR_SIZE,
+                                WID ("value_cursor_size"),
+                                "label", G_SETTINGS_BIND_GET,
+                                cursor_size_label_mapping_get,
+                                NULL, NULL, NULL);
+
+  dialog = WID ("cursor_size_dialog");
+  priv->toplevels = g_slist_prepend (priv->toplevels, dialog);
+
+  g_object_set_data (G_OBJECT (WID ("row_cursor_size")), "dialog", dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   /* zoom */
 
