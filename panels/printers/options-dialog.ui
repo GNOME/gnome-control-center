@@ -12,6 +12,12 @@
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar">
+        <property name="visible">True</property>
+      </object>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <child>
