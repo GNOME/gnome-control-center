@@ -40,6 +40,8 @@
 #include "pp-printer-entry.h"
 #include "pp-job.h"
 
+#include "cc-util.h"
+
 CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
 
 #define PRINTERS_PANEL_PRIVATE(o) \
@@ -150,7 +152,7 @@ cc_printers_panel_constructed (GObject *object)
 {
   CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
   CcPrintersPanelPrivate *priv = self->priv;
-  GtkLockButton *button;
+  GtkWidget *widget;
   CcShell *shell;
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
@@ -158,9 +160,20 @@ cc_printers_panel_constructed (GObject *object)
   shell = cc_panel_get_shell (CC_PANEL (self));
   cc_shell_embed_widget_in_header (shell, priv->headerbar_buttons);
 
-  button = (GtkLockButton*)
+  widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "lock-button");
-  gtk_lock_button_set_permission (button, priv->permission);
+  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (widget), priv->permission);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "search-button");
+  cc_shell_embed_widget_in_header (shell, widget);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "search-bar");
+  g_signal_connect_swapped (shell,
+                            "key-press-event",
+                            G_CALLBACK (gtk_search_bar_handle_event),
+                            widget);
 }
 
 static void
@@ -925,6 +938,41 @@ get_all_ppds_async_cb (PPDList  *ppds,
   priv->get_all_ppds_cancellable = NULL;
 }
 
+static gboolean
+filter_function (GtkListBoxRow *row,
+                 gpointer       user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkWidget              *search_entry;
+  gboolean                retval;
+  gchar                  *search;
+  gchar                  *name;
+  gchar                  *printer_name;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  search_entry = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "search-entry");
+
+  if (gtk_entry_get_text_length (GTK_ENTRY (search_entry)) == 0)
+    return TRUE;
+
+  g_object_get (G_OBJECT (row), "printer-name", &printer_name, NULL);
+  name = cc_util_normalize_casefold_and_unaccent (printer_name);
+
+  g_free (printer_name);
+
+  search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (search_entry)));
+
+  retval = strstr (name, search) != NULL;
+
+  g_free (search);
+  g_free (name);
+
+  return retval;
+}
+
 static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
@@ -933,7 +981,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *widget;
   PpCups                 *cups;
   GError                 *error = NULL;
-  gchar                  *objects[] = { "main-vbox", "headerbar-buttons", NULL };
+  gchar                  *objects[] = { "main-vbox", "headerbar-buttons", "search-button", NULL };
   guint                   builder_result;
 
   priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
@@ -1002,6 +1050,17 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "printer-add-button2");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_add_cb), self);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "content");
+  gtk_list_box_set_filter_func (GTK_LIST_BOX (widget),
+                                filter_function,
+                                self,
+                                NULL);
+  g_signal_connect_swapped (gtk_builder_get_object (priv->builder, "search-entry"),
+                            "search-changed",
+                            G_CALLBACK (gtk_list_box_invalidate_filter),
+                            widget);
+
   priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   if (priv->lockdown_settings)
     g_signal_connect_object (priv->lockdown_settings,
@@ -1039,7 +1098,6 @@ Please check your installation");
 
   cups = pp_cups_new ();
   pp_cups_connection_test_async (cups, connection_test_cb, self);
-
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
 }

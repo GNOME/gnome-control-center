@@ -86,11 +86,53 @@ struct _PpPrinterEntryClass
 G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
 
 enum {
+  PROP_0,
+  PROP_PRINTER_NAME,
+};
+
+enum {
   IS_DEFAULT_PRINTER,
   LAST_SIGNAL,
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
+
+static void
+pp_printer_entry_get_property (GObject    *object,
+                               guint       prop_id,
+                               GValue     *value,
+                               GParamSpec *pspec)
+{
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
+
+  switch (prop_id)
+    {
+      case PROP_PRINTER_NAME:
+        g_value_set_string (value, self->printer_name);
+        break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+pp_printer_entry_set_property (GObject      *object,
+                               guint         prop_id,
+                               const GValue *value,
+                               GParamSpec   *pspec)
+{
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
+
+  switch (prop_id)
+    {
+      case PROP_PRINTER_NAME:
+        self->printer_name = g_value_dup_string (value);
+        break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
 
 static void
 pp_printer_entry_init (PpPrinterEntry *self)
@@ -695,7 +737,7 @@ pp_printer_entry_new (cups_dest_t  printer,
       N_("The optical photo conductor is no longer functioning")
     };
 
-  self = g_object_new (PP_PRINTER_ENTRY_TYPE, NULL);
+  self = g_object_new (PP_PRINTER_ENTRY_TYPE, "printer-name", printer.name, NULL);
 
   inklevel = g_slice_new0 (InkLevelData);
 
@@ -823,7 +865,6 @@ pp_printer_entry_new (cups_dest_t  printer,
   else
     printer_icon_name = g_strdup ("printer-network");
 
-  self->printer_name = g_strdup (printer.name);
   self->is_accepting_jobs = is_accepting_jobs;
   self->printer_location = g_strdup (location);
   self->is_authorized = is_authorized;
@@ -950,7 +991,17 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, show_jobs_dialog);
   gtk_widget_class_bind_template_callback (widget_class, restart_printer);
 
+  object_class->get_property = pp_printer_entry_get_property;
+  object_class->set_property = pp_printer_entry_set_property;
   object_class->dispose = pp_printer_entry_dispose;
+
+  g_object_class_install_property (object_class,
+                                   PROP_PRINTER_NAME,
+                                   g_param_spec_string ("printer-name",
+                                                        "Printer Name",
+                                                        "The Printer unique name",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
 
   signals[IS_DEFAULT_PRINTER] =
     g_signal_new ("printer-changed",

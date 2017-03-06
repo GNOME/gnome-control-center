@@ -6,6 +6,7 @@ AM_CPPFLAGS = 						\
 	$(PANEL_CFLAGS)					\
 	$(PRINTERS_PANEL_CFLAGS)			\
 	$(CUPS_CFLAGS)					\
+	-I$(srcdir)/../common/				\
 	-I$(top_srcdir)/shell/				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DTEST_SRCDIR=\""$(srcdir)/"\"			\

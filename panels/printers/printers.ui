@@ -27,6 +27,21 @@
       </packing>
     </child>
   </object>
+
+  <object class="GtkToggleButton" id="search-button">
+    <property name="visible">True</property>
+    <property name="margin-end">6</property> <!-- since we don't have access to the shell header bar -->
+    <style>
+      <class name="image-button"/>
+    </style>
+    <child>
+      <object class="GtkImage">
+        <property name="visible">True</property>
+        <property name="icon_name">system-search-symbolic</property>
+      </object>
+    </child>
+  </object>
+
   <object class="GtkStack" id="main-vbox">
     <child>
       <object class="GtkBox">
@@ -44,18 +59,37 @@
       </packing>
     </child>
     <child>
-      <object class="GtkScrolledWindow">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="hscrollbar-policy">GTK_POLICY_NEVER</property>
-        <property name="min-content-height">490</property>
+        <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
         <child>
-          <object class="GtkListBox" id="content">
+          <object class="GtkSearchBar" id="search-bar">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="selection-mode">GTK_SELECTION_NONE</property>
-            <style>
-              <class name="background"/>
-            </style>
+            <property name="hexpand">True</property>
+            <property name="search_mode_enabled" bind-source="search-button" bind-property="active" bind-flags="bidirectional" />
+            <child>
+              <object class="GtkSearchEntry" id="search-entry">
+                <property name="visible">True</property>
+                <property name="width_chars">30</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="hscrollbar-policy">GTK_POLICY_NEVER</property>
+            <property name="min-content-height">490</property>
+            <child>
+              <object class="GtkListBox" id="content">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="selection-mode">GTK_SELECTION_NONE</property>
+                <style>
+                  <class name="background"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
       </object>
