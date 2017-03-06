@@ -358,7 +358,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
   const gchar *dialog_id;
   const gchar *widget_name;
 
-  // Check switches to toggle
+  /* Check switches to toggle */
   widget_name = gtk_buildable_get_name (GTK_BUILDABLE (row));
   if (widget_name)
     {
@@ -384,7 +384,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
         }
     }
 
-  // Check dialog to open
+  /* Check dialog to open */
   dialog_id = (const gchar *)g_object_get_data (G_OBJECT (row), "dialog-id");
   if (g_strcmp0 (dialog_id, "zoom") == 0)
     {
