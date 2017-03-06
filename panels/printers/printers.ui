@@ -49,14 +49,13 @@
         <property name="hscrollbar-policy">GTK_POLICY_NEVER</property>
         <property name="min-content-height">490</property>
         <child>
-          <object class="GtkBox" id="content">
+          <object class="GtkListBox" id="content">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="border-width">30</property>
-	    <property name="margin-start">30</property>
-            <property name="margin-end">30</property>
-            <property name="spacing">20</property>
+            <property name="selection-mode">GTK_SELECTION_NONE</property>
+            <style>
+              <class name="background"/>
+            </style>
           </object>
         </child>
       </object>

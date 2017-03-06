@@ -35,7 +35,7 @@
 
 struct _PpPrinterEntry
 {
-  GtkBox parent;
+  GtkListBoxRow parent;
 
   gchar    *printer_uri;
   gchar    *printer_name;
@@ -78,12 +78,12 @@ struct _PpPrinterEntry
 
 struct _PpPrinterEntryClass
 {
-  GtkBoxClass parent_class;
+  GtkListBoxRowClass parent_class;
 
   void (*printer_changed) (PpPrinterEntry *printer_entry);
 };
 
-G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_BOX)
+G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
 
 enum {
   IS_DEFAULT_PRINTER,

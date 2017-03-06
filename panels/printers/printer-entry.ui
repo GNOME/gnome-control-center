@@ -70,8 +70,12 @@
     </child>
   </object>
 
-  <template class="PpPrinterEntry" parent="GtkBox">
+  <template class="PpPrinterEntry" parent="GtkListBoxRow">
     <property name="valign">center</property>
+    <property name="margin">10</property>
+    <property name="margin-start">60</property>
+    <property name="margin-end">60</property>
+    <property name="activatable">False</property>
 
     <child>
       <object class="GtkFrame" id="content_area">

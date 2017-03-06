@@ -600,7 +600,7 @@ add_printer_entry (CcPrintersPanel *self,
                     G_CALLBACK (on_printer_changed),
                     self);
 
-  gtk_box_pack_start (GTK_BOX (content), GTK_WIDGET (printer_entry), FALSE, TRUE, 5);
+  gtk_list_box_insert (GTK_LIST_BOX (content), GTK_WIDGET (printer_entry), -1);
   gtk_widget_show_all (content);
 
   g_hash_table_insert (priv->printer_entries, g_strdup (printer.name), printer_entry);
