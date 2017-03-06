@@ -16,6 +16,15 @@
     <child internal-child="headerbar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="print-test-page">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes" comments="Translators: This button triggers the printing of a test page.">Test Page</property>
+          </object>
+          <packing>
+            <property name="pack_type">start</property>
+          </packing>
+        </child>
       </object>
     </child>
     <child internal-child="vbox">

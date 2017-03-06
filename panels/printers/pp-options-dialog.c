@@ -34,9 +34,11 @@
 #include <cups/ppd.h>
 
 #include "pp-options-dialog.h"
+#include "pp-maintenance-command.h"
 #include "pp-ppd-option-widget.h"
 #include "pp-ipp-option-widget.h"
 #include "pp-utils.h"
+#include "pp-printer.h"
 
 struct _PpOptionsDialog {
   GtkBuilder *builder;
@@ -811,6 +813,106 @@ populate_options (PpOptionsDialog *dialog)
 }
 
 static void
+pp_maintenance_command_execute_cb (GObject      *source_object,
+                                   GAsyncResult *res,
+                                   gpointer      user_data)
+{
+  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
+
+  pp_maintenance_command_execute_finish (command, res, NULL);
+
+  g_object_unref (command);
+}
+
+static gchar *
+get_testprint_filename (const gchar *datadir)
+{
+  const gchar *testprint[] = { "/data/testprint",
+                               "/data/testprint.ps",
+                               NULL };
+  gchar       *filename = NULL;
+  gint         i;
+
+  for (i = 0; testprint[i] != NULL; i++)
+    {
+      filename = g_strconcat (datadir, testprint[i], NULL);
+      if (g_access (filename, R_OK) == 0)
+        break;
+
+      g_clear_pointer (&filename, g_free);
+    }
+
+  return filename;
+}
+
+static void
+print_test_page_cb (GObject      *source_object,
+                    GAsyncResult *result,
+                    gpointer      user_data)
+{
+  pp_printer_print_file_finish (PP_PRINTER (source_object),
+                                result, NULL);
+
+  g_object_unref (source_object);
+}
+
+static void
+test_page_cb (GtkButton *button,
+              gpointer   user_data)
+{
+  PpOptionsDialog *dialog = (PpOptionsDialog*) user_data;
+  gint             i;
+
+  if (dialog->printer_name)
+    {
+      const gchar  *const dirs[] = { "/usr/share/cups",
+                                     "/usr/local/share/cups",
+                                     NULL };
+      const gchar  *datadir = NULL;
+      gchar        *filename = NULL;
+
+      datadir = getenv ("CUPS_DATADIR");
+      if (datadir != NULL)
+        {
+          filename = get_testprint_filename (datadir);
+        }
+      else
+        {
+          for (i = 0; dirs[i] != NULL && filename == NULL; i++)
+            filename = get_testprint_filename (dirs[i]);
+        }
+
+      if (filename != NULL)
+        {
+          PpPrinter *printer;
+
+          printer = pp_printer_new (dialog->printer_name);
+          pp_printer_print_file_async (printer,
+                                       filename,
+          /* Translators: Name of job which makes printer to print test page */
+                                       _("Test Page"),
+                                       NULL,
+                                       print_test_page_cb,
+                                       NULL);
+
+          g_free (filename);
+        }
+      else
+        {
+          PpMaintenanceCommand *command;
+
+          command = pp_maintenance_command_new (dialog->printer_name,
+                                                "PrintSelfTestPage",
+                                                NULL,
+          /* Translators: Name of job which makes printer to print test page */
+                                                _("Test page"));
+
+          pp_maintenance_command_execute_async (command, NULL, pp_maintenance_command_execute_cb, NULL);
+        }
+    }
+}
+
+static void
 options_dialog_response_cb (GtkDialog *_dialog,
                             gint       response_id,
                             gpointer   user_data)
@@ -832,6 +934,7 @@ pp_options_dialog_new (GtkWindow            *parent,
                        gboolean              sensitive)
 {
   PpOptionsDialog *dialog;
+  GtkWidget       *test_page_button;
   GError          *error = NULL;
   gchar           *objects[] = { "options-dialog", NULL };
   guint            builder_result;
@@ -875,6 +978,8 @@ pp_options_dialog_new (GtkWindow            *parent,
 
   /* connect signals */
   g_signal_connect (dialog->dialog, "response", G_CALLBACK (options_dialog_response_cb), dialog);
+  test_page_button = (GtkWidget*) gtk_builder_get_object (dialog->builder, "print-test-page");
+  g_signal_connect (test_page_button, "clicked", G_CALLBACK (test_page_cb), dialog);
 
   gtk_window_set_title (GTK_WINDOW (dialog->dialog), printer_name);
 

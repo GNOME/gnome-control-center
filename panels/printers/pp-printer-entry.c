@@ -425,8 +425,11 @@ printer_options_dialog_cb (GtkDialog *dialog,
 {
   PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
 
-  pp_options_dialog_free (self->pp_options_dialog);
-  self->pp_options_dialog = NULL;
+  if (self->pp_options_dialog != NULL)
+    {
+      pp_options_dialog_free (self->pp_options_dialog);
+      self->pp_options_dialog = NULL;
+    }
 }
 
 static void
