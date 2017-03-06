@@ -33,6 +33,7 @@
 #include <libupower-glib/upower.h>
 
 #include "cc-display-config-manager-rr.h"
+#include "cc-display-config-manager-dbus.h"
 #include "cc-display-config.h"
 #include "cc-night-light-dialog.h"
 #include "cc-display-resources.h"
@@ -66,6 +67,7 @@ enum
 
 struct _CcDisplayPanelPrivate
 {
+  gboolean have_new_dbus_api;
   CcDisplayConfigManager *manager;
   CcDisplayConfig *current_config;
   CcDisplayMonitor *current_output;
@@ -152,9 +154,14 @@ monitor_labeler_show (CcDisplayPanel *self)
           has_outputs = TRUE;
         }
 
-      g_variant_builder_add (&builder, "{uv}",
-                             cc_display_monitor_get_id (output),
-                             g_variant_new_int32 (number));
+      if (priv->have_new_dbus_api)
+        g_variant_builder_add (&builder, "{sv}",
+                               cc_display_monitor_get_connector_name (output),
+                               g_variant_new_int32 (number));
+      else
+        g_variant_builder_add (&builder, "{uv}",
+                               cc_display_monitor_get_id (output),
+                               g_variant_new_int32 (number));
     }
 
   if (!has_outputs)
@@ -163,7 +170,7 @@ monitor_labeler_show (CcDisplayPanel *self)
   g_variant_builder_close (&builder);
 
   g_dbus_proxy_call (priv->shell_proxy,
-                     "ShowMonitorLabels",
+                     priv->have_new_dbus_api ? "ShowMonitorLabels2" : "ShowMonitorLabels",
                      g_variant_builder_end (&builder),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1, NULL, NULL, NULL);
@@ -2606,6 +2613,83 @@ settings_color_changed_cb (GSettings *settings, gchar *key, gpointer user_data)
 }
 
 static void
+init_config_manager (GObject        *source,
+                     GAsyncResult   *res,
+                     CcDisplayPanel *self)
+{
+  GVariant *variant;
+  GDBusConnection *bus = G_DBUS_CONNECTION (source);
+  GError *error = NULL;
+
+  variant = g_dbus_connection_call_finish (bus, res, &error);
+  if (!variant)
+    {
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        goto out;
+    }
+  else
+    {
+      GVariant *value = NULL;
+
+      g_variant_get_child (variant, 0, "v", &value);
+      g_variant_get (value, "b", &self->priv->have_new_dbus_api);
+
+      g_variant_unref (value);
+      g_variant_unref (variant);
+    }
+
+  if (self->priv->have_new_dbus_api)
+    self->priv->manager = cc_display_config_manager_dbus_new ();
+  else
+    self->priv->manager = cc_display_config_manager_rr_new ();
+
+  g_signal_connect_object (self->priv->manager, "changed",
+                           G_CALLBACK (on_screen_changed),
+                           self,
+                           G_CONNECT_SWAPPED);
+
+ out:
+  g_clear_error (&error);
+  g_object_unref (bus);
+}
+
+static void
+session_bus_ready (GObject        *source,
+                   GAsyncResult   *res,
+                   CcDisplayPanel *self)
+{
+  GDBusConnection *bus;
+  GError *error = NULL;
+
+  bus = g_bus_get_finish (res, &error);
+  if (!bus)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Failed to get session bus: %s", error->message);
+          gtk_stack_set_visible_child_name (GTK_STACK (self->priv->stack), "error");
+        }
+      g_error_free (error);
+      return;
+    }
+
+  g_dbus_connection_call (bus,
+                          "org.gnome.Mutter.DisplayConfig",
+                          "/org/gnome/Mutter/DisplayConfig",
+                          "org.freedesktop.DBus.Properties",
+                          "Get",
+                          g_variant_new ("(ss)",
+                                         "org.gnome.Mutter.DisplayConfig",
+                                         "IsExperimentalApiEnabled"),
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NO_AUTO_START,
+                          -1,
+                          self->priv->shell_cancellable,
+                          (GAsyncReadyCallback) init_config_manager,
+                          self);
+}
+
+static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   CcDisplayPanelPrivate *priv;
@@ -2635,14 +2719,6 @@ cc_display_panel_init (CcDisplayPanel *self)
   priv->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
   priv->night_light_dialog = cc_night_light_dialog_new ();
-
-  priv->manager = cc_display_config_manager_rr_new ();
-  if (!priv->manager)
-    {
-      /* TODO: try the other implementation before failing? */
-      gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "error");
-      return;
-    }
 
   output_ids = g_hash_table_new (g_direct_hash, g_direct_equal);
 
@@ -2706,11 +2782,6 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   gtk_widget_show_all (vbox);
 
-  g_signal_connect_object (priv->manager, "changed",
-                           G_CALLBACK (on_screen_changed),
-                           self,
-                           G_CONNECT_SWAPPED);
-
   self->priv->up_client = up_client_new ();
   if (up_client_get_lid_is_present (self->priv->up_client))
     {
@@ -2746,6 +2817,11 @@ cc_display_panel_init (CcDisplayPanel *self)
                             self->priv->shell_cancellable,
                             (GAsyncReadyCallback) shell_proxy_ready,
                             self);
+
+  g_bus_get (G_BUS_TYPE_SESSION,
+             self->priv->shell_cancellable,
+             (GAsyncReadyCallback) session_bus_ready,
+             self);
 
   priv->sensor_watch_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
                                             "net.hadess.SensorProxy",
