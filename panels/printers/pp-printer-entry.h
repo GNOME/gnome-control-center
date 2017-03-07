@@ -36,4 +36,6 @@ PpPrinterEntry *pp_printer_entry_new  (cups_dest_t printer,
 
 void            pp_printer_entry_update_jobs_count (PpPrinterEntry *self);
 
+GSList         *pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self);
+
 #endif /* PP_PRINTER_ENTRY_H */

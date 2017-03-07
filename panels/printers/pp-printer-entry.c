@@ -33,6 +33,14 @@
 
 #define SUPPLY_BAR_HEIGHT 8
 
+typedef struct
+{
+  gchar *marker_names;
+  gchar *marker_levels;
+  gchar *marker_colors;
+  gchar *marker_types;
+} InkLevelData;
+
 struct _PpPrinterEntry
 {
   GtkListBoxRow parent;
@@ -47,6 +55,7 @@ struct _PpPrinterEntry
   gchar    *printer_hostname;
   gboolean  is_authorized;
   gint      printer_state;
+  InkLevelData *inklevel;
 
   /* Maintenance commands */
   PpMaintenanceCommand *clean_command;
@@ -60,6 +69,8 @@ struct _PpPrinterEntry
   GtkLabel       *printer_model;
   GtkLabel       *printer_location_label;
   GtkLabel       *printer_location_address_label;
+  GtkLabel       *printer_inklevel_label;
+  GtkFrame       *supply_frame;
   GtkDrawingArea *supply_drawing_area;
   GtkWidget      *show_jobs_dialog_button;
   GtkWidget      *clean_heads_menuitem;
@@ -216,14 +227,6 @@ sanitize_printer_model (gchar *printer_make_and_model)
   return g_strdup (printer_model);
 }
 
-typedef struct
-{
-  gchar *marker_names;
-  gchar *marker_levels;
-  gchar *marker_colors;
-  gchar *marker_types;
-} InkLevelData;
-
 /* To tone down the colors in the supply level bar
  * we shade them by darkening the hue.
  *
@@ -246,9 +249,9 @@ tone_down_color (GdkRGBA *color,
 }
 
 static gboolean
-supply_levels_draw_cb (GtkWidget    *widget,
-                       cairo_t      *cr,
-                       InkLevelData *inklevel)
+supply_levels_draw_cb (GtkWidget      *widget,
+                       cairo_t        *cr,
+                       PpPrinterEntry *self)
 {
   GtkStyleContext        *context;
   gboolean                is_empty = TRUE;
@@ -264,7 +267,8 @@ supply_levels_draw_cb (GtkWidget    *widget,
 
   gtk_render_background (context, cr, 0, 0, width, height);
 
-  if (inklevel->marker_levels && inklevel->marker_colors && inklevel->marker_names && inklevel->marker_types)
+  if (self->inklevel->marker_levels && self->inklevel->marker_colors &&
+      self->inklevel->marker_names && self->inklevel->marker_types)
     {
       GSList   *markers = NULL;
       GSList   *tmp_list = NULL;
@@ -276,10 +280,10 @@ supply_levels_draw_cb (GtkWidget    *widget,
 
       gtk_style_context_save (context);
 
-      marker_levelsv = g_strsplit (inklevel->marker_levels, ",", -1);
-      marker_colorsv = g_strsplit (inklevel->marker_colors, ",", -1);
-      marker_namesv = g_strsplit (inklevel->marker_names, ",", -1);
-      marker_typesv = g_strsplit (inklevel->marker_types, ",", -1);
+      marker_levelsv = g_strsplit (self->inklevel->marker_levels, ",", -1);
+      marker_colorsv = g_strsplit (self->inklevel->marker_colors, ",", -1);
+      marker_namesv = g_strsplit (self->inklevel->marker_names, ",", -1);
+      marker_typesv = g_strsplit (self->inklevel->marker_types, ",", -1);
 
       if (g_strv_length (marker_levelsv) == g_strv_length (marker_colorsv) &&
           g_strv_length (marker_colorsv) == g_strv_length (marker_namesv) &&
@@ -372,12 +376,9 @@ supply_levels_draw_cb (GtkWidget    *widget,
       }
     }
 
-  if (is_empty)
-    {
-      GtkWidget *frame = gtk_widget_get_parent (widget);
-      gtk_style_context_add_class (gtk_widget_get_style_context (frame),
-                                   "background");
-    }
+  gtk_widget_set_visible (GTK_WIDGET (self->printer_inklevel_label), !is_empty);
+  gtk_widget_set_visible (GTK_WIDGET (self->supply_frame), !is_empty);
+
   return TRUE;
 }
 
@@ -673,12 +674,24 @@ restart_printer (GtkButton      *button,
   g_signal_emit_by_name (self, "printer-changed");
 }
 
+GSList *
+pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self)
+{
+  GSList *widgets = NULL;
+
+  widgets = g_slist_prepend (widgets, self->printer_icon);
+  widgets = g_slist_prepend (widgets, self->printer_location_label);
+  widgets = g_slist_prepend (widgets, self->printer_model_label);
+  widgets = g_slist_prepend (widgets, self->printer_inklevel_label);
+
+  return widgets;
+}
+
 PpPrinterEntry *
 pp_printer_entry_new (cups_dest_t  printer,
                       gboolean     is_authorized)
 {
   PpPrinterEntry *self;
-  InkLevelData   *inklevel;
   cups_ptype_t    printer_type = 0;
   gboolean        is_accepting_jobs;
   gchar          *instance;
@@ -751,7 +764,7 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   self = g_object_new (PP_PRINTER_ENTRY_TYPE, "printer-name", printer.name, NULL);
 
-  inklevel = g_slice_new0 (InkLevelData);
+  self->inklevel = g_slice_new0 (InkLevelData);
 
   if (printer.instance)
     {
@@ -777,13 +790,13 @@ pp_printer_entry_new (cups_dest_t  printer,
       else if (g_strcmp0 (printer.options[i].name, "printer-state-reasons") == 0)
         reason = printer.options[i].value;
       else if (g_strcmp0 (printer.options[i].name, "marker-names") == 0)
-        inklevel->marker_names = g_strcompress (printer.options[i].value);
+        self->inklevel->marker_names = g_strcompress (printer.options[i].value);
       else if (g_strcmp0 (printer.options[i].name, "marker-levels") == 0)
-        inklevel->marker_levels = g_strdup (printer.options[i].value);
+        self->inklevel->marker_levels = g_strdup (printer.options[i].value);
       else if (g_strcmp0 (printer.options[i].name, "marker-colors") == 0)
-        inklevel->marker_colors = g_strdup (printer.options[i].value);
+        self->inklevel->marker_colors = g_strdup (printer.options[i].value);
       else if (g_strcmp0 (printer.options[i].name, "marker-types") == 0)
-        inklevel->marker_types = g_strdup (printer.options[i].value);
+        self->inklevel->marker_types = g_strdup (printer.options[i].value);
       else if (g_strcmp0 (printer.options[i].name, "printer-make-and-model") == 0)
         printer_make_and_model = printer.options[i].value;
       else if (g_strcmp0 (printer.options[i].name, "printer-state") == 0)
@@ -921,7 +934,7 @@ pp_printer_entry_new (cups_dest_t  printer,
       gtk_label_set_text (self->printer_location_address_label, location);
     }
 
-  g_signal_connect (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), inklevel);
+  g_signal_connect (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), self);
 
   pp_printer_entry_update_jobs_count (self);
 
@@ -988,6 +1001,8 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_model);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_location_label);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_location_address_label);
+  gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_inklevel_label);
+  gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, supply_frame);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, supply_drawing_area);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_default_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, show_jobs_dialog_button);

@@ -106,6 +106,8 @@ struct _CcPrintersPanelPrivate
 
   GHashTable *printer_entries;
 
+  GtkSizeGroup *size_group;
+
   gpointer dummy;
 };
 
@@ -742,12 +744,19 @@ add_printer_entry (CcPrintersPanel *self,
   CcPrintersPanelPrivate *priv;
   PpPrinterEntry         *printer_entry;
   GtkWidget              *content;
+  GSList                 *widgets, *l;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   content = (GtkWidget*) gtk_builder_get_object (priv->builder, "content");
 
   printer_entry = pp_printer_entry_new (printer, priv->is_authorized);
+
+  widgets = pp_printer_entry_get_size_group_widgets (printer_entry);
+  for (l = widgets; l != NULL; l = l->next)
+    gtk_size_group_add_widget (priv->size_group, GTK_WIDGET (l->data));
+  g_slist_free (widgets);
+
   g_signal_connect (printer_entry,
                     "printer-changed",
                     G_CALLBACK (on_printer_changed),
@@ -1275,6 +1284,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
 Please check your installation");
 
   priv->subscription_renew_cancellable = g_cancellable_new ();
+
+  priv->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
   actualize_printers_list (self);
   attach_to_cups_notifier (self);
