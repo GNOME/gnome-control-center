@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the gnome-control-center package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 # Michael Bauer <fios@akerbeltz.org>, 2014.
-# GunChleoc <fios@foramnagaidhlig.net>, 2016.
+# GunChleoc <fios@foramnagaidhlig.net>, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-10 15:20+0000\n"
-"PO-Revision-Date: 2016-06-11 08:22+0100\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product"
+"=gnome-control-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-03-03 10:01+0000\n"
+"PO-Revision-Date: 2017-03-07 10:26+0100\n"
 "Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "Language: gd\n"
@@ -111,24 +111,23 @@ msgstr ""
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
 #: ../panels/display/cc-display-panel.c:1561
-#: ../panels/display/cc-display-panel.c:2206
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/display/cc-display-panel.c:2207
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1305
-#: ../panels/network/net-device-wifi.c:1542
+#: ../panels/network/net-device-wifi.c:1298
+#: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2052
+#: ../panels/printers/cc-printers-panel.c:2077
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:982
+#: ../panels/privacy/cc-privacy-panel.c:1048
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
-#: ../panels/sharing/cc-sharing-panel.c:372
-#: ../panels/user-accounts/data/account-dialog.ui.h:17
+#: ../panels/sharing/cc-sharing-panel.c:375
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/join-dialog.ui.h:2
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1472
-#: ../panels/user-accounts/um-fingerprint-dialog.c:266
+#: ../panels/user-accounts/um-fingerprint-dialog.c:265
 #: ../panels/user-accounts/um-photo-dialog.c:94
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/um-user-panel.c:705
@@ -702,7 +701,7 @@ msgstr ""
 "<a href=\"windows\">Microsoft Windows</a> feumail dhut."
 
 #: ../panels/color/color.ui.h:27
-#: ../panels/user-accounts/um-fingerprint-dialog.c:731
+#: ../panels/user-accounts/um-fingerprint-dialog.c:730
 msgid "Summary"
 msgstr "Gearr-chunntas"
 
@@ -714,11 +713,11 @@ msgstr "Cuir ris pròifil"
 msgid "_Import File…"
 msgstr "_Ion-phortaich faidhle…"
 
-#: ../panels/color/color.ui.h:31 ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/color/color.ui.h:31
 #: ../panels/network/connection-editor/net-connection-editor.c:546
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/region/input-chooser.ui.h:3
-#: ../panels/user-accounts/um-account-dialog.c:1473
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "_Add"
 msgstr "_Cuir ris"
 
@@ -1125,15 +1124,15 @@ msgid "Mirrored"
 msgstr "Sgàthanaichte"
 
 #: ../panels/display/cc-display-panel.c:578
-#: ../panels/display/cc-display-panel.c:2429
+#: ../panels/display/cc-display-panel.c:2430
 msgid "Primary"
 msgstr "Prìomh-phanail"
 
 #: ../panels/display/cc-display-panel.c:580
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1960 ../panels/power/cc-power-panel.c:1971
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -1153,7 +1152,7 @@ msgid "Arrange Combined Displays"
 msgstr "Cuir air gleus na co-thaisbeanaidhean"
 
 #: ../panels/display/cc-display-panel.c:1562
-#: ../panels/display/cc-display-panel.c:2207
+#: ../panels/display/cc-display-panel.c:2208
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
@@ -1177,85 +1176,85 @@ msgstr "%d Hz (NTSC)"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../panels/display/cc-display-panel.c:2259
+#: ../panels/display/cc-display-panel.c:2260
 msgid "Rotate counterclockwise by 90°"
 msgstr "Cuairtich gu tuathail le 90°"
 
-#: ../panels/display/cc-display-panel.c:2277
+#: ../panels/display/cc-display-panel.c:2278
 msgid "Rotate by 180°"
 msgstr "Cuairtich le 180°"
 
-#: ../panels/display/cc-display-panel.c:2295
+#: ../panels/display/cc-display-panel.c:2296
 msgid "Rotate clockwise by 90°"
 msgstr "Cuairtich gu deiseal le 90°"
 
-#: ../panels/display/cc-display-panel.c:2316
+#: ../panels/display/cc-display-panel.c:2317
 msgid "Size"
 msgstr "Meud"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2331
+#: ../panels/display/cc-display-panel.c:2332
 msgid "Aspect Ratio"
 msgstr "Co-mheas an deilbh"
 
-#: ../panels/display/cc-display-panel.c:2354
+#: ../panels/display/cc-display-panel.c:2355
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Dùmhlachd-bhreacaidh"
 
-#: ../panels/display/cc-display-panel.c:2374
+#: ../panels/display/cc-display-panel.c:2375
 msgid "Adjust for TV"
 msgstr "Gleus airson TBh"
 
-#: ../panels/display/cc-display-panel.c:2398
+#: ../panels/display/cc-display-panel.c:2399
 msgid "Refresh Rate"
 msgstr "Tricead an ath-nuadhachaidh"
 
-#: ../panels/display/cc-display-panel.c:2430
+#: ../panels/display/cc-display-panel.c:2431
 msgid "Show the top bar and Activities Overview on this display"
 msgstr ""
 "Seall am bàr mullaich is foir-shealladh na gnìomhachd air an taisbeanadh seo"
 
-#: ../panels/display/cc-display-panel.c:2436
+#: ../panels/display/cc-display-panel.c:2437
 msgid "Secondary Display"
 msgstr "Uidheam-taisbeanaidh dàrnach"
 
-#: ../panels/display/cc-display-panel.c:2437
+#: ../panels/display/cc-display-panel.c:2438
 msgid "Join this display with another to create an extra workspace"
 msgstr ""
 "Cuir an taisbeanadh seo còmhla ri fear eile airson rum-obrach a bharrachd a "
 "chruthachadh"
 
-#: ../panels/display/cc-display-panel.c:2444
+#: ../panels/display/cc-display-panel.c:2445
 msgid "Presentation"
 msgstr "Taisbeanadh"
 
-#: ../panels/display/cc-display-panel.c:2445
+#: ../panels/display/cc-display-panel.c:2446
 msgid "Show slideshows and media only"
 msgstr "Na seall ach taisbeanaidhean-shleamhnagan is meadhanan"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2450
+#: ../panels/display/cc-display-panel.c:2451
 msgid "Mirror"
 msgstr "Sgàthanaich"
 
-#: ../panels/display/cc-display-panel.c:2451
+#: ../panels/display/cc-display-panel.c:2452
 msgid "Show your existing view on both displays"
 msgstr "Seall an sealladh làithreach agad air an dà uidheam-taisbeanaidh"
 
-#: ../panels/display/cc-display-panel.c:2457
+#: ../panels/display/cc-display-panel.c:2458
 msgid "Turn Off"
 msgstr "Cuir dheth"
 
-#: ../panels/display/cc-display-panel.c:2458
+#: ../panels/display/cc-display-panel.c:2459
 msgid "Don't use this display"
 msgstr "Na cleachd an t-uidheam-taisbeanaidh seo"
 
-#: ../panels/display/cc-display-panel.c:2769
+#: ../panels/display/cc-display-panel.c:2770
 msgid "Could not get screen information"
 msgstr "Cha b' urrainn dhuinn fiosrachadh na sgrìn fhaighinn"
 
-#: ../panels/display/cc-display-panel.c:2800
+#: ../panels/display/cc-display-panel.c:2801
 msgid "_Arrange Combined Displays"
 msgstr "Cuir _air gleus na co-thaisbeanaidhean"
 
@@ -1277,58 +1276,64 @@ msgstr ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;panail,proiseactar,"
 "tilgear,sgrìn,dùmhlachd-bhreacaidh;ath-nuadhaich;ath-nuadhachadh;monatar;"
 
-#: ../panels/info/cc-info-panel.c:345
-msgid "Wayland"
-msgstr "Wayland"
-
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:348 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-panel.c:377 ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Neo-aithnichte"
 
-#: ../panels/info/cc-info-panel.c:433
+#: ../panels/info/cc-info-panel.c:510
+#, c-format
+msgid "%s %d-bit (Build ID: %s)"
+msgstr "%s %d-biod (ID na togail: %s)"
+
+#: ../panels/info/cc-info-panel.c:512
+#, c-format
+msgid "%d-bit (Build ID: %s)"
+msgstr "%d-biod (ID na togail: %s)"
+
+#: ../panels/info/cc-info-panel.c:520
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:435
+#: ../panels/info/cc-info-panel.c:522
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:1115
+#: ../panels/info/cc-info-panel.c:1168
 msgid "Ask what to do"
 msgstr "Faighnich dhìom dè nithear"
 
-#: ../panels/info/cc-info-panel.c:1119
+#: ../panels/info/cc-info-panel.c:1172
 msgid "Do nothing"
 msgstr "Na dèan dad"
 
-#: ../panels/info/cc-info-panel.c:1123
+#: ../panels/info/cc-info-panel.c:1176
 msgid "Open folder"
 msgstr "Fosgail am pasgan"
 
-#: ../panels/info/cc-info-panel.c:1214
+#: ../panels/info/cc-info-panel.c:1267
 msgid "Other Media"
 msgstr "Meadhanan eile"
 
-#: ../panels/info/cc-info-panel.c:1245
+#: ../panels/info/cc-info-panel.c:1298
 msgid "Select an application for audio CDs"
 msgstr "Tagh aplacaid airson CDan fuaime"
 
-#: ../panels/info/cc-info-panel.c:1246
+#: ../panels/info/cc-info-panel.c:1299
 msgid "Select an application for video DVDs"
 msgstr "Tagh apalacaid airson DVDan video"
 
-#: ../panels/info/cc-info-panel.c:1247
+#: ../panels/info/cc-info-panel.c:1300
 msgid "Select an application to run when a music player is connected"
 msgstr "Tagh aplacaid a thèid a ruith nuair a cheanglar cluicheadair ciùil ris"
 
-#: ../panels/info/cc-info-panel.c:1248
+#: ../panels/info/cc-info-panel.c:1301
 msgid "Select an application to run when a camera is connected"
 msgstr "Tagh aplacaid a thèid a ruith nuair a cheanglar camara ris"
 
-#: ../panels/info/cc-info-panel.c:1249
+#: ../panels/info/cc-info-panel.c:1302
 msgid "Select an application for software CDs"
 msgstr "Tagh apalacaid airson CDan bathair-bhog"
 
@@ -1337,72 +1342,71 @@ msgstr "Tagh apalacaid airson CDan bathair-bhog"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1261
+#: ../panels/info/cc-info-panel.c:1314
 msgid "audio DVD"
 msgstr "DVD fuaime"
 
-#: ../panels/info/cc-info-panel.c:1262
+#: ../panels/info/cc-info-panel.c:1315
 msgid "blank Blu-ray disc"
 msgstr "diosg Blu-ray bàn"
 
-#: ../panels/info/cc-info-panel.c:1263
+#: ../panels/info/cc-info-panel.c:1316
 msgid "blank CD disc"
 msgstr "diosg CD bàn"
 
-#: ../panels/info/cc-info-panel.c:1264
+#: ../panels/info/cc-info-panel.c:1317
 msgid "blank DVD disc"
 msgstr "diosg DVD bàn"
 
-#: ../panels/info/cc-info-panel.c:1265
+#: ../panels/info/cc-info-panel.c:1318
 msgid "blank HD DVD disc"
 msgstr "diosg DVD HD bàn"
 
-#: ../panels/info/cc-info-panel.c:1266
+#: ../panels/info/cc-info-panel.c:1319
 msgid "Blu-ray video disc"
 msgstr "diosg video Blu-ray bàn"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1320
 msgid "e-book reader"
 msgstr "leughadair leabhair-d"
 
-#: ../panels/info/cc-info-panel.c:1268
+#: ../panels/info/cc-info-panel.c:1321
 msgid "HD DVD video disc"
 msgstr "diosg video HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1269
+#: ../panels/info/cc-info-panel.c:1322
 msgid "Picture CD"
 msgstr "CD dhealbhan"
 
-#: ../panels/info/cc-info-panel.c:1270
+#: ../panels/info/cc-info-panel.c:1323
 msgid "Super Video CD"
 msgstr "CD Super Video"
 
-#: ../panels/info/cc-info-panel.c:1271
+#: ../panels/info/cc-info-panel.c:1324
 msgid "Video CD"
 msgstr "CD video"
 
-#: ../panels/info/cc-info-panel.c:1272
+#: ../panels/info/cc-info-panel.c:1325
 msgid "Windows software"
 msgstr "Bathar-bog Windows"
 
-#: ../panels/info/cc-info-panel.c:1395
-#: ../panels/keyboard/keyboard-shortcuts.c:1949
+#: ../panels/info/cc-info-panel.c:1448
 msgid "Section"
 msgstr "Earrann"
 
-#: ../panels/info/cc-info-panel.c:1404 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1457 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Foir-shealladh"
 
-#: ../panels/info/cc-info-panel.c:1410 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Apalacaidean bunaiteach"
 
-#: ../panels/info/cc-info-panel.c:1415 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1468 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Meadhan so-ghiùlain"
 
-#: ../panels/info/cc-info-panel.c:1440
+#: ../panels/info/cc-info-panel.c:1493
 #, c-format
 msgid "Version %s"
 msgstr "Tionndadh %s"
@@ -1594,9 +1598,9 @@ msgstr "Lòinsearan"
 msgid "Launch help browser"
 msgstr "Cuir gu dol brabhsair na cobharach"
 
-#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:934
-#: ../shell/cc-window.c:1584 ../shell/gnome-control-center.desktop.in.in.h:1
-#: ../shell/window.ui.h:3
+#: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:274
+#: ../shell/alt/cc-window.c:829 ../shell/cc-window.c:1584
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Roghainnean"
 
@@ -1704,14 +1708,24 @@ msgstr "Lùghdaich meud an teacsa"
 msgid "High contrast on or off"
 msgstr "Àrd-iomsgaradh air no dheth"
 
+#: ../panels/keyboard/cc-keyboard-manager.c:514
+#: ../panels/keyboard/cc-keyboard-manager.c:522
+#: ../panels/keyboard/cc-keyboard-manager.c:830
+msgid "Custom Shortcuts"
+msgstr "Ath-ghoiridean gnàthaichte"
+
+#. This label is displayed in a treeview cell displaying
+#. * a disabled accelerator key combination.
+#.
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:276
 #: ../panels/keyboard/cc-keyboard-option.c:395
-#: ../panels/keyboard/keyboard-shortcuts.c:1220
+#: ../panels/keyboard/keyboard-shortcuts.c:440
+#: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
 #: ../panels/sound/gvc/gvc-mixer-control.c:1830
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:213
 msgid "Disabled"
 msgstr "À comas"
 
@@ -1735,6 +1749,41 @@ msgstr "Compose Key"
 msgid "Modifiers-only switch to next source"
 msgstr "Gluaisidh na h-iuchraichean atharrachaidh dhan ath-thùs thu"
 
+#: ../panels/keyboard/cc-keyboard-panel.c:217
+msgid "Reset the shortcut to its default value"
+msgstr "Ath-shuidhich an ath-ghoirid air a luach tùsail"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#, c-format
+msgid ""
+"%s is already being used for <b>%s</b>. If you replace it, %s will be "
+"disabled"
+msgstr ""
+"Tha %s 'ga chleachdadh airson <b>%s</b> mar-thà. Ma chuireas tu rud 'na "
+"àite, thèid %s a chur à comas"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#| msgid "Custom Shortcut"
+msgid "Set Custom Shortcut"
+msgstr "Suidhich ath-ghoirid ghnàthaichte"
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/shortcut-editor.ui.h:7
+#| msgid "Shortcuts"
+msgid "Set Shortcut"
+msgstr "Suidhich ath-ghoirid"
+
+#. Setup the top label
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#, c-format
+msgid "Enter new shortcut to change <b>%s</b>."
+msgstr "Cuir a-steach an ath-ghoirid a dh'atharrachadh <b>%s</b>."
+
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:949
+#| msgid "Custom Shortcut"
+msgid "Add Custom Shortcut"
+msgstr "Cuir ath-ghoirid ghnàthaichte ris"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Key­board"
@@ -1752,95 +1801,73 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Ath-ghoirid;Ath-dhèan;Priobadh;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "Custom Shortcut"
-msgstr "Ath-ghoirid ghnàthaichte"
+#| msgid "Keyboard Shortcuts"
+msgid "No keyboard shortcut found"
+msgstr "Cha deach ath-ghoirid a' mheur-chlàir a lorg"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-msgid "_Name:"
-msgstr "_Ainm:"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+msgid "Try a different search"
+msgstr "Feuch lorg eile"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
-msgid "C_ommand:"
-msgstr "À_ithne:"
+#: ../panels/keyboard/shortcut-editor.ui.h:1
+msgid "Press Esc to cancel."
+msgstr "Brùth air Esc airson sgur dheth."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-msgid "Add Shortcut"
-msgstr "Cuir ath-ghoirid ris"
+#: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/sound/gvc-mixer-dialog.c:1493
+#: ../panels/sound/gvc-sound-theme-chooser.c:564
+msgid "Name"
+msgstr "Ainm"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-msgid "Remove Shortcut"
-msgstr "Thoir an ath-ghoirid air falbh"
+#: ../panels/keyboard/shortcut-editor.ui.h:4
+#| msgid "C_ommand:"
+msgid "Command"
+msgstr "Àithne"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
-msgid ""
-"To edit a shortcut, click the row and hold down the new keys or press "
-"Backspace to clear."
-msgstr ""
-"Gu ath-ghoirid a dheasachadh, briog air an ràgh agus cum sìos na h-"
-"iuchraichean ùra no brùth Backspace gus an toirt air falbh."
+#: ../panels/keyboard/shortcut-editor.ui.h:5
+#| msgid "Shortcuts"
+msgid "Shortcut"
+msgstr "Ath-ghoirid"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:633
-#: ../panels/keyboard/keyboard-shortcuts.c:641
-msgid "Custom Shortcuts"
-msgstr "Ath-ghoiridean gnàthaichte"
+#: ../panels/keyboard/shortcut-editor.ui.h:6
+msgid "Edit"
+msgstr "Deasaich"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:858
-msgid "<Unknown Action>"
-msgstr "<Gnìomh nach aithne dhuinn>"
+#: ../panels/keyboard/shortcut-editor.ui.h:8
+#: ../panels/network/network-wifi.ui.h:20
+msgid "None"
+msgstr "Chan eil gin"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1359
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"Chan urrainn dhut an ath-ghoirid \"%s\" a chleachdadh a chionn 's nach b' "
-"urrainn dhut sgrìobhadh leis an iuchair seo.\n"
-"Feuch iuchair mar Ctrl, Alt no Shift aig an aon àm."
+#: ../panels/keyboard/shortcut-editor.ui.h:9
+#| msgid "_Remove"
+msgid "Remove"
+msgstr "Thoir air falbh"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1389
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"Tha an ath-ghoirid \"%s\" 'ga chleachdadh airson na leanas mu thràth: \n"
-"\"%s\""
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Enter the new shortcut"
+msgstr "Cuir an-steach an ath-ghoirid ùr"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1394
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr ""
-"Ma thaghas tu \"%s\" mar an ath-ghoirid ùr, thèid an seann ath-ghoirid \"%s"
-"\" a chur à comas."
+#: ../panels/keyboard/shortcut-editor.ui.h:11
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Sguir dheth"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1400
-msgid "_Reassign"
-msgstr "_Ath-shònraich"
+#: ../panels/keyboard/shortcut-editor.ui.h:12
+#: ../panels/network/connection-editor/ce-page-ip4.c:305
+#: ../panels/network/connection-editor/ce-page-ip6.c:277
+msgid "Add"
+msgstr "Cuir ris"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1441
-#, c-format
-msgid ""
-"The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
-"automatically set it to \"%s\"?"
-msgstr ""
-"Tha ath-ghoirid \"%2$s\" an cois na h-ath-ghoirid \"%1$s\". A bheil thu "
-"airson a suidheachadh air \"%3$s\" gu fèin-obrachail?"
+#: ../panels/keyboard/shortcut-editor.ui.h:13
+#| msgid "_Replace"
+msgid "Replace"
+msgstr "Cuir 'na àite"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1451
-#, c-format
-msgid ""
-"\"%s\" is currently associated with \"%s\", this shortcut will be disabled "
-"if you move forward."
-msgstr ""
-"Tha ath-ghoirid \"%2$s\" an cois na h-ath-ghoirid \"%1$s\" an-dràsta, thèid "
-"an ath-ghoirid ud a chur à comas ma leanas tu air adhart leis."
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1458
-msgid "_Assign"
-msgstr "Sònr_aich"
+#: ../panels/keyboard/shortcut-editor.ui.h:14
+#| msgid "Select"
+msgid "Set"
+msgstr "Suidhich"
 
 #: ../panels/mouse/cc-mouse-panel.c:82
 msgid "Test Your _Settings"
@@ -1921,6 +1948,11 @@ msgid "Tap to Click"
 msgstr "Thoir gnogag airson briogadh"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#| msgid "Two _finger scroll"
+msgid "Two-finger Scrolling"
+msgstr "Sgroladh dà-chorragach"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "Edge Scrolling"
 msgstr "Sgroladh oir"
 
@@ -2016,7 +2048,7 @@ msgid "page 2"
 msgstr "duilleag 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:458
+#: ../panels/network/connection-editor/ce-page-security.c:459
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2119,88 +2151,84 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Fìor-mhath"
 
-#: ../panels/network/connection-editor/ce-page-details.c:236
-#: ../panels/network/network-wifi.ui.h:46
+#: ../panels/network/connection-editor/ce-page-details.c:225
+#: ../panels/network/network-wifi.ui.h:46 ../shell/alt/cc-window.c:266
+#: ../shell/panel-list.ui.h:2
 msgid "Details"
 msgstr "Mion-fhiosrachadh"
 
 #: ../panels/network/connection-editor/ce-page-ethernet.c:215
-#: ../panels/network/connection-editor/ce-page-vpn.c:215
+#: ../panels/network/connection-editor/ce-page-vpn.c:221
 #: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
 msgstr "Dearbh-aithne"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:178
-#: ../panels/network/connection-editor/ce-page-ip4.c:432
+#: ../panels/network/connection-editor/ce-page-ip4.c:202
+#: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
 msgid "Address"
 msgstr "Seòladh"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:191
-#: ../panels/network/connection-editor/ce-page-ip4.c:445
+#: ../panels/network/connection-editor/ce-page-ip4.c:215
+#: ../panels/network/connection-editor/ce-page-ip4.c:474
 msgid "Netmask"
 msgstr "Netmask"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:205
-#: ../panels/network/connection-editor/ce-page-ip4.c:458
+#: ../panels/network/connection-editor/ce-page-ip4.c:229
+#: ../panels/network/connection-editor/ce-page-ip4.c:487
 #: ../panels/network/connection-editor/ce-page-ip6.c:206
 #: ../panels/network/connection-editor/ce-page-ip6.c:453
 #: ../panels/network/network-vpn.ui.h:2
 msgid "Gateway"
 msgstr "Bealach"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:222
+#: ../panels/network/connection-editor/ce-page-ip4.c:250
 #: ../panels/network/connection-editor/ce-page-ip6.c:223
 msgid "Delete Address"
 msgstr "Sguab às an seòladh"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:276
-#: ../panels/network/connection-editor/ce-page-ip6.c:277
-msgid "Add"
-msgstr "Cuir ris"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:339
+#: ../panels/network/connection-editor/ce-page-ip4.c:368
 #: ../panels/network/connection-editor/ce-page-ip6.c:334
 msgid "Server"
 msgstr "Frithealaiche"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:356
+#: ../panels/network/connection-editor/ce-page-ip4.c:385
 #: ../panels/network/connection-editor/ce-page-ip6.c:351
 msgid "Delete DNS Server"
 msgstr "Sguab às am frithealaiche DNS"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: ../panels/network/connection-editor/ce-page-ip4.c:472
+#: ../panels/network/connection-editor/ce-page-ip4.c:501
 #: ../panels/network/connection-editor/ce-page-ip6.c:467
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Meatraigeachd"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:493
+#: ../panels/network/connection-editor/ce-page-ip4.c:522
 #: ../panels/network/connection-editor/ce-page-ip6.c:484
 msgid "Delete Route"
 msgstr "Sguab às an t-slighe"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:597
+#: ../panels/network/connection-editor/ce-page-ip4.c:626
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Fèin-obrachail (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:601
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
 #: ../panels/network/connection-editor/ce-page-ip6.c:592
 #: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Manual"
 msgstr "A làimh"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:605
+#: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
 msgid "Link-Local Only"
 msgstr "Link-Local a-mhàin"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:935
+#: ../panels/network/connection-editor/ce-page-ip4.c:979
 #: ../panels/network/network-wifi.ui.h:48
 msgid "IPv4"
 msgstr "IPv4"
@@ -2215,7 +2243,7 @@ msgstr "Ro-leasachan"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#: ../panels/privacy/cc-privacy-panel.c:199
+#: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Fèin-obrachail"
 
@@ -2223,12 +2251,12 @@ msgstr "Fèin-obrachail"
 msgid "Automatic, DHCP only"
 msgstr "Fèin-obrachail, DHCP a-mhàin"
 
-#: ../panels/network/connection-editor/ce-page-ip6.c:893
+#: ../panels/network/connection-editor/ce-page-ip6.c:898
 #: ../panels/network/network-wifi.ui.h:49
 msgid "IPv6"
 msgstr "IPv6"
 
-#: ../panels/network/connection-editor/ce-page-reset.c:89
+#: ../panels/network/connection-editor/ce-page-reset.c:78
 #: ../panels/network/network-wifi.ui.h:51
 msgid "Reset"
 msgstr "Ath-shuidhich"
@@ -2446,17 +2474,18 @@ msgstr "Chan urrainn dhuinn deasaiche nan ceanglaichean fhosgladh"
 msgid "New Profile"
 msgstr "Pròifil ùr"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:613
+#: ../panels/network/connection-editor/net-connection-editor.c:635
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:795
+#: ../panels/network/connection-editor/net-connection-editor.c:783
 msgid "Import from file…"
 msgstr "Ion-phortaich o fhaidhle…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:866
-msgid "Add Network Connection"
-msgstr "Cuir ceangal lìonraidh ris"
+#: ../panels/network/connection-editor/net-connection-editor.c:817
+#| msgid "%s VPN"
+msgid "Add VPN"
+msgstr "Cuir ris VPN"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:41
@@ -2464,7 +2493,7 @@ msgid "_Reset"
 msgstr "_Ath-shuidhich"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1543
+#: ../panels/network/net-device-wifi.c:1536
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Dìochuimhnich"
@@ -2512,8 +2541,8 @@ msgid "Select file to import"
 msgstr "Tagh faidhle a thèid ion-phortadh"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2053
-#: ../panels/sharing/cc-sharing-panel.c:373
+#: ../panels/printers/cc-printers-panel.c:2078
+#: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "_Open"
 msgstr "F_osgail"
@@ -2584,19 +2613,16 @@ msgstr "Lìonra"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:3
 msgid "Control how you connect to the Internet"
-msgstr "Cum smachd air an dòigh a cheanglas tu ris an eadar-lìon"
+msgstr "Stiùirich an dòigh a cheanglas tu ris an eadar-lìon"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
-#| "vpn;vlan;bridge;bond;DNS;"
 msgid ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
 "DNS;"
 msgstr ""
-"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;D"
-"NS;lìonra,uèirleas,progsaidh;bann-leathann;drochaid;"
+"Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;"
+"DNS;lìonra,uèirleas,progsaidh;bann-leathann;drochaid;"
 
 #: ../panels/network/net-device-ethernet.c:106
 #: ../panels/network/net-device-wifi.c:471
@@ -2636,7 +2662,7 @@ msgid "Wired"
 msgstr "Uèirichte"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1701
+#: ../panels/network/net-device-wifi.c:1694
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2647,7 +2673,7 @@ msgstr "Roghainnean…"
 msgid "Add new connection"
 msgstr "Cuir ceangal ùr ris"
 
-#: ../panels/network/net-device-wifi.c:1212
+#: ../panels/network/net-device-wifi.c:1205
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2656,14 +2682,14 @@ msgstr ""
 "'s urrainn dhut hotspot uèirleas a shuidheachadh gus an ceangal agad a cho-"
 "roinneadh le daoine eile."
 
-#: ../panels/network/net-device-wifi.c:1216
+#: ../panels/network/net-device-wifi.c:1209
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Ma chuireas tu air an hotspot uèirleas, thèid an ceangal ri <b>%s</b> a "
 "bhriseadh."
 
-#: ../panels/network/net-device-wifi.c:1220
+#: ../panels/network/net-device-wifi.c:1213
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2671,27 +2697,27 @@ msgstr ""
 "Chan fhaigh thu cothrom air an eadar-lìon slighe a' cheangal uèirleas agad "
 "fhad 's a bhios an hotspot gnìomhach."
 
-#: ../panels/network/net-device-wifi.c:1303
+#: ../panels/network/net-device-wifi.c:1296
 msgid "Stop hotspot and disconnect any users?"
 msgstr ""
 "A bheil thu airson stad a chur air an hotspot is cleachdaiche sam bith eile "
 "a dhì-cheangal?"
 
-#: ../panels/network/net-device-wifi.c:1306
+#: ../panels/network/net-device-wifi.c:1299
 msgid "_Stop Hotspot"
 msgstr "_Cuir stad air an hotspot"
 
-#: ../panels/network/net-device-wifi.c:1404
+#: ../panels/network/net-device-wifi.c:1397
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 "Chan eil e ceadaichte a chleachdadh mar hotspot ri linn poileasaidh an t-"
 "siostaim"
 
-#: ../panels/network/net-device-wifi.c:1407
+#: ../panels/network/net-device-wifi.c:1400
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Chan eil an t-uidheam uèirleas a' cur taic ris a' mhodh hotspot"
 
-#: ../panels/network/net-device-wifi.c:1539
+#: ../panels/network/net-device-wifi.c:1532
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2699,11 +2725,11 @@ msgstr ""
 "Thèid fiosrachadh nan lìonraidhean a thagh thu, a' gabhail a-steach an "
 "fhacail-fhaire 's rèiteachadh gnàthaichte sam bith, air chall."
 
-#: ../panels/network/net-device-wifi.c:1849
+#: ../panels/network/net-device-wifi.c:1842
 msgid "History"
 msgstr "An eachdraidh"
 
-#: ../panels/network/net-device-wifi.c:1853
+#: ../panels/network/net-device-wifi.c:1846
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:525
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2711,7 +2737,7 @@ msgid "_Close"
 msgstr "_Dùin"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1861
+#: ../panels/network/net-device-wifi.c:1854
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Dìochuimhnich"
@@ -2858,14 +2884,10 @@ msgstr "mion-fhiosrachadh"
 #: ../panels/network/wireless-security/ws-leap.ui.h:2
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
 #: ../panels/sharing/sharing.ui.h:9
-#: ../panels/user-accounts/data/account-dialog.ui.h:9
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "_Password"
 msgstr "_Facal-faire"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "None"
-msgstr "Chan eil gin"
 
 #: ../panels/network/network-wifi.ui.h:21
 msgid "Show P_assword"
@@ -2960,7 +2982,6 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Ceangail ri lìonra falaichte…"
 
 #: ../panels/network/network-wifi.ui.h:58
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "_History"
 msgstr "An eachdraid_h"
 
@@ -2982,7 +3003,7 @@ msgstr "Seòrsa na tèarainteachd"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Facal-faire"
 
@@ -3272,7 +3293,6 @@ msgid "undefined error in 802.1x security (wpa-eap)"
 msgstr "mearachd gun sònrachadh san tèarainteachd 802.1x (wpa-eap)"
 
 #: ../panels/network/wireless-security/eap-method.c:245
-#| msgid "No input source selected"
 msgid "no file selected"
 msgstr "cha deach faidhle a thaghadh"
 
@@ -3281,7 +3301,6 @@ msgid "unspecified error validating eap-method file"
 msgstr "mearachd gun sònrachadh le dearbhadh an fhaidhle eap-method"
 
 #: ../panels/network/wireless-security/eap-method.c:480
-#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr ""
 "Iuchraichean prìobhaideach DER, PEM no PKCS#12 (*.der, *.pem, *.p12, *.key)"
@@ -3346,7 +3365,6 @@ msgid "_Inner authentication"
 msgstr "De_arbhadh a-staigh"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
-#| msgid "PAC pro_visioning"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Ceadaich PAC _Provisioning fèin-obrachail"
 
@@ -3361,7 +3379,7 @@ msgstr "tha facal-faire EAP-LEAP a dhìth"
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
 #: ../panels/network/wireless-security/ws-leap.ui.h:1
-#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
 msgid "_Username"
 msgstr "_Ainm-cleachdaiche"
 
@@ -3412,7 +3430,6 @@ msgstr "Teiste_anas le ùghdarras theisteanasan"
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#| msgid "Authentication required"
 msgid "No CA certificate is _required"
 msgstr "Chan eil teisteanas CA _riatanach"
 
@@ -3425,7 +3442,6 @@ msgid "missing EAP username"
 msgstr "tha ainm-cleachdaiche EAP a dhìth"
 
 #: ../panels/network/wireless-security/eap-method-simple.c:87
-#| msgid "Change Password"
 msgid "missing EAP password"
 msgstr "tha facal-faire EAP a dhìth"
 
@@ -3440,7 +3456,8 @@ msgstr "teisteanas EAP-TLS CA mì-dhligheach: %s"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:84
 msgid "invalid EAP-TLS CA certificate: no certificate specified"
-msgstr "teisteanas EAP-TLS CA mì-dhligheach: cha deach teisteanas a shònrachadh"
+msgstr ""
+"teisteanas EAP-TLS CA mì-dhligheach: cha deach teisteanas a shònrachadh"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:95
 msgid "invalid EAP-TLS password: missing"
@@ -3653,9 +3670,9 @@ msgid "_Type"
 msgstr "_Seòrsa"
 
 #: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1966 ../panels/power/cc-power-panel.c:1973
-#: ../panels/privacy/cc-privacy-panel.c:172
-#: ../panels/privacy/cc-privacy-panel.c:239
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
 #: ../panels/universal-access/cc-ua-panel.c:269
 #: ../panels/universal-access/cc-ua-panel.c:590
 #: ../panels/universal-access/cc-ua-panel.c:603
@@ -3743,7 +3760,6 @@ msgid "Mail"
 msgstr "Post"
 
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-#| msgid "_Calendar"
 msgid "Calendar"
 msgstr "Mìosachan"
 
@@ -3759,40 +3775,24 @@ msgstr "Cabadaich"
 msgid "Resources"
 msgstr "Goireasan"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:422
-msgid "Error logging into the account"
-msgstr "Mearachd a' clàradh a-steach dhan chunntas"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:492
-msgid "Credentials have expired."
-msgstr "Dh'fhalbh an ùine air an ainm is air an facal-fhaire."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:496
-msgid "Sign in to enable this account."
-msgstr "Clàraich a-steach gus an cunntas seo a chur an comas."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
-msgid "_Sign In"
-msgstr "Clàraich a-_steach"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:748
+#: ../panels/online-accounts/cc-online-accounts-panel.c:640
 msgid "Error creating account"
 msgstr "Mearachd a' cruthachadh a' chunntais"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:808
+#: ../panels/online-accounts/cc-online-accounts-panel.c:700
 msgid "Error removing account"
 msgstr "Mearachd a' toirt air falbh a' chunntais"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:844
+#: ../panels/online-accounts/cc-online-accounts-panel.c:736
 msgid "Are you sure you want to remove the account?"
 msgstr ""
 "A bheil thu cinnteach gu bheil thu airson an cunntas seo a thoirt air falbh?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:846
+#: ../panels/online-accounts/cc-online-accounts-panel.c:738
 msgid "This will not remove the account on the server."
 msgstr "Cha doir seo air falbh an cunntas air an fhrithealaiche."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:847
+#: ../panels/online-accounts/cc-online-accounts-panel.c:739
 msgid "_Remove"
 msgstr "_Thoir air falbh"
 
@@ -3821,6 +3821,7 @@ msgid "No online accounts configured"
 msgstr "Cha deach cunntas air loidhne sam bith a rèiteachadh"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Remove Account"
 msgstr "Thoir air falbh an cunntas"
 
@@ -3972,7 +3973,7 @@ msgstr "Coimpiutair"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:561 ../panels/power/cc-power-panel.c:801
-#: ../panels/power/cc-power-panel.c:2358
+#: ../panels/power/cc-power-panel.c:2366
 msgid "Battery"
 msgstr "Bataraidh"
 
@@ -4020,90 +4021,91 @@ msgstr "Bataraidhean"
 msgid "When _idle"
 msgstr "Nua_ir a bhios e 'na thàmh"
 
-#: ../panels/power/cc-power-panel.c:1680
+#: ../panels/power/cc-power-panel.c:1681
 msgid "Power Saving"
 msgstr "Caomhnadh cumhachd"
 
-#: ../panels/power/cc-power-panel.c:1715
+#: ../panels/power/cc-power-panel.c:1716
 msgid "_Screen brightness"
 msgstr "_Soilleireachd na sgrìn"
 
-#: ../panels/power/cc-power-panel.c:1734
+#: ../panels/power/cc-power-panel.c:1735
 msgid "Automatic brightness"
 msgstr "Soilleireachd fhèin-obrachail"
 
-#: ../panels/power/cc-power-panel.c:1754
+#: ../panels/power/cc-power-panel.c:1755
 msgid "_Keyboard brightness"
 msgstr "Soilleireachd a' _mheur-chlàir"
 
-#: ../panels/power/cc-power-panel.c:1764
+#: ../panels/power/cc-power-panel.c:1765
 msgid "_Dim screen when inactive"
 msgstr "_Doilleirich an sgrìn mur eil gnìomhachd sam bith"
 
-#: ../panels/power/cc-power-panel.c:1789
+#: ../panels/power/cc-power-panel.c:1790
 msgid "_Blank screen"
 msgstr "Sgrìn _bhàn"
 
-#: ../panels/power/cc-power-panel.c:1826
+#: ../panels/power/cc-power-panel.c:1827
 msgid "_Wi-Fi"
 msgstr "_WiFi"
 
-#: ../panels/power/cc-power-panel.c:1831
+#: ../panels/power/cc-power-panel.c:1832
 msgid "Turn off Wi-Fi to save power."
 msgstr "Cuir WiFi dheth gus cumhachd a shàbhaladh."
 
-#: ../panels/power/cc-power-panel.c:1856
+#: ../panels/power/cc-power-panel.c:1857
 msgid "_Mobile broadband"
 msgstr "Bann-leathann _mobile"
 
-#: ../panels/power/cc-power-panel.c:1861
+#: ../panels/power/cc-power-panel.c:1862
 msgid "Turn off mobile broadband (3G, 4G, LTE, etc.) to save power."
 msgstr ""
 "Cuir am bann-leathan mobile (3G, 4G, LTE, is msaa.) dheth gus cumhachd a "
 "shàbhaladh."
 
-#: ../panels/power/cc-power-panel.c:1906
+#: ../panels/power/cc-power-panel.c:1907
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1962
+#: ../panels/power/cc-power-panel.c:1970
 msgid "When on battery power"
 msgstr "Nuair a bhithear air cumhachd bataraidh"
 
-#: ../panels/power/cc-power-panel.c:1964
+#: ../panels/power/cc-power-panel.c:1972
 msgid "When plugged in"
 msgstr "Nuair a bhios e air a phlugadh a-steach"
 
-#: ../panels/power/cc-power-panel.c:2059
+#: ../panels/power/cc-power-panel.c:2067
 msgid "Suspend"
 msgstr "Cuir 'na dhàil"
 
-#: ../panels/power/cc-power-panel.c:2060
+#: ../panels/power/cc-power-panel.c:2068
 msgid "Hibernate"
 msgstr "Dèan cadal-geamhraidh"
 
-#: ../panels/power/cc-power-panel.c:2061
+#: ../panels/power/cc-power-panel.c:2069
 msgid "Nothing"
 msgstr "Na dèan dad"
 
 #. Frame header
-#: ../panels/power/cc-power-panel.c:2175
+#: ../panels/power/cc-power-panel.c:2183
 msgid "Suspend & Power Button"
 msgstr "Putan cur 'na dhàil ⁊ na cumhachd"
 
-#: ../panels/power/cc-power-panel.c:2218
+#: ../panels/power/cc-power-panel.c:2226
 msgid "_Automatic suspend"
 msgstr "Cuir 'n_a dhàil gu fèin-obrachail"
 
-#: ../panels/power/cc-power-panel.c:2219
+#: ../panels/power/cc-power-panel.c:2227
 msgid "Automatic suspend"
 msgstr "Cur 'na dhàil fèin-obrachail"
 
-#: ../panels/power/cc-power-panel.c:2286
+#: ../panels/power/cc-power-panel.c:2294
 msgid "_When the Power Button is pressed"
 msgstr "_Nuair a bhios putan na cumhachd 'ga bhrùthadh"
 
-#: ../panels/power/cc-power-panel.c:2412
+#: ../panels/power/cc-power-panel.c:2420 ../shell/alt/cc-window.c:270
+#: ../shell/panel-list.ui.h:1
 msgid "Devices"
 msgstr "Innleadan"
 
@@ -4198,11 +4200,6 @@ msgstr "Air cumhachd a' _bhataraidh"
 msgid "Delay"
 msgstr "Dàil"
 
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Sguir dheth"
-
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
 msgstr "Dearbhaich"
@@ -4212,138 +4209,138 @@ msgid "Authentication Required"
 msgstr "Tha feum air dearbhadh"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:678
+#: ../panels/printers/cc-printers-panel.c:684
 msgid "Low on toner"
 msgstr "Tònair gann"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:680
+#: ../panels/printers/cc-printers-panel.c:686
 msgid "Out of toner"
 msgstr "Chan eil tònair air fhàgail"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:683
+#: ../panels/printers/cc-printers-panel.c:689
 msgid "Low on developer"
 msgstr "Stuth-leasachaidh gann"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:686
+#: ../panels/printers/cc-printers-panel.c:692
 msgid "Out of developer"
 msgstr "Chan eil stuth-leasachaidh air fhàgail"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:688
+#: ../panels/printers/cc-printers-panel.c:694
 msgid "Low on a marker supply"
 msgstr "Dath gann ann am biona a' chlò-bhualadair"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:690
+#: ../panels/printers/cc-printers-panel.c:696
 msgid "Out of a marker supply"
 msgstr "Chan eil dath air fhàgail ann am biona a' chlò-bhualadair"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:692
+#: ../panels/printers/cc-printers-panel.c:698
 msgid "Open cover"
 msgstr "Tha am mullach fosgailte"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:694
+#: ../panels/printers/cc-printers-panel.c:700
 msgid "Open door"
 msgstr "Tha an doras fosgailte"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:696
+#: ../panels/printers/cc-printers-panel.c:702
 msgid "Low on paper"
 msgstr "Pàipear gann"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:698
+#: ../panels/printers/cc-printers-panel.c:704
 msgid "Out of paper"
 msgstr "Chan eil pàipear air fhàgail"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:700
+#: ../panels/printers/cc-printers-panel.c:706
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Far loidhne"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:702
-#: ../panels/printers/cc-printers-panel.c:893
+#: ../panels/printers/cc-printers-panel.c:708
+#: ../panels/printers/cc-printers-panel.c:898
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Sguireadh dheth"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:704
+#: ../panels/printers/cc-printers-panel.c:710
 msgid "Waste receptacle almost full"
 msgstr "Tha soitheach an sgudail cha mhòr làn"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:706
+#: ../panels/printers/cc-printers-panel.c:712
 msgid "Waste receptacle full"
 msgstr "Tha soitheach an sgudail làn"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:708
+#: ../panels/printers/cc-printers-panel.c:714
 msgid "The optical photo conductor is near end of life"
 msgstr "Tha am foto-ghiùlanair lèirsinneach a' dol bàs"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:710
+#: ../panels/printers/cc-printers-panel.c:716
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Chan eil am foto-ghiùlanair lèirsinneach ag obair tuilleadh"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:820
+#: ../panels/printers/cc-printers-panel.c:825
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "'Ga rèiteachadh"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:879
+#: ../panels/printers/cc-printers-panel.c:884
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Deiseil"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:884
+#: ../panels/printers/cc-printers-panel.c:889
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Cha ghabh e ri obraichean"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:889
+#: ../panels/printers/cc-printers-panel.c:894
 msgctxt "printer state"
 msgid "Processing"
 msgstr "'Ga làimhseachadh"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1009
+#: ../panels/printers/cc-printers-panel.c:1014
 msgid "Toner Level"
 msgstr "Ìre an tònair"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1012
+#: ../panels/printers/cc-printers-panel.c:1017
 msgid "Ink Level"
 msgstr "Ìre na h-ince"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1015
+#: ../panels/printers/cc-printers-panel.c:1020
 msgid "Supply Level"
 msgstr "Ìre a' ghoireis"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1033
+#: ../panels/printers/cc-printers-panel.c:1038
 msgctxt "printer state"
 msgid "Installing"
 msgstr "'Ga stàladh"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1541
+#: ../panels/printers/cc-printers-panel.c:1552
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -4353,15 +4350,15 @@ msgstr[2] "%u gnìomhach"
 msgstr[3] "%u gnìomhach"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1882
+#: ../panels/printers/cc-printers-panel.c:1893
 msgid "Failed to add new printer."
 msgstr "Cha b' urrainn dhuinn an clò-bhualadair ùr a chur ris."
 
-#: ../panels/printers/cc-printers-panel.c:2049
+#: ../panels/printers/cc-printers-panel.c:2074
 msgid "Select PPD File"
 msgstr "Tagh faidhle PPD"
 
-#: ../panels/printers/cc-printers-panel.c:2058
+#: ../panels/printers/cc-printers-panel.c:2083
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4369,34 +4366,30 @@ msgstr ""
 "Faidhlichean PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD."
 "gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2365
+#: ../panels/printers/cc-printers-panel.c:2390
 msgid "No suitable driver found"
 msgstr "Cha deach draibhear freagarrach a lorg"
 
-#: ../panels/printers/cc-printers-panel.c:2436
+#: ../panels/printers/cc-printers-panel.c:2461
 msgid "Searching for preferred drivers…"
 msgstr "A' lorg nan draibhearan as fhearr…"
 
-#: ../panels/printers/cc-printers-panel.c:2457
+#: ../panels/printers/cc-printers-panel.c:2482
 msgid "Select from database…"
 msgstr "Tagh o stòr-dàta…"
 
-#: ../panels/printers/cc-printers-panel.c:2466
+#: ../panels/printers/cc-printers-panel.c:2491
 msgid "Provide PPD File…"
 msgstr "Solair faidhle PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2613
-#: ../panels/printers/cc-printers-panel.c:2636
+#: ../panels/printers/cc-printers-panel.c:2638
+#: ../panels/printers/cc-printers-panel.c:2661
 msgid "Test page"
 msgstr "Duilleag deuchainne"
 
-#: ../panels/printers/cc-printers-panel.c:2749
-msgid "No printers"
-msgstr "Chan eil clò-bhualadair ann"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3095
+#: ../panels/printers/cc-printers-panel.c:3116
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Cha b' urrainn dhuinn an eadar-aghaidh %s a luchdadh"
@@ -4792,13 +4785,17 @@ msgstr "Clò-bhuail _duilleag deuchainne"
 msgid "_Options"
 msgstr "_Roghainnean"
 
+#: ../panels/printers/printers.ui.h:23
+msgid "No printers"
+msgstr "Chan eil clò-bhualadair ann"
+
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:25
 msgid "Add a Printer"
 msgstr "Cuir clò-bhualadair ris"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:26
+#: ../panels/printers/printers.ui.h:27
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -4806,70 +4803,70 @@ msgstr ""
 "Tha sinn duilich ach chan eil seirbheis clò-bhualadh\n"
 "an t-siostaim ri làimh a-rèir coltais."
 
-#: ../panels/privacy/cc-privacy-panel.c:369 ../panels/privacy/privacy.ui.h:24
+#: ../panels/privacy/cc-privacy-panel.c:387 ../panels/privacy/privacy.ui.h:24
 msgid "Screen Lock"
 msgstr "Glas na sgrìn"
 
-#: ../panels/privacy/cc-privacy-panel.c:420
+#: ../panels/privacy/cc-privacy-panel.c:438
 msgid "In use"
 msgstr "'Ga chleachdadh"
 
-#: ../panels/privacy/cc-privacy-panel.c:425
+#: ../panels/privacy/cc-privacy-panel.c:443
 msgctxt "Location services status"
 msgid "On"
 msgstr "Air"
 
-#: ../panels/privacy/cc-privacy-panel.c:426
+#: ../panels/privacy/cc-privacy-panel.c:444
 msgctxt "Location services status"
 msgid "Off"
 msgstr "Dheth"
 
-#: ../panels/privacy/cc-privacy-panel.c:762 ../panels/privacy/privacy.ui.h:42
+#: ../panels/privacy/cc-privacy-panel.c:823 ../panels/privacy/privacy.ui.h:42
 msgid "Location Services"
 msgstr "Seirbheisean ionaid"
 
-#: ../panels/privacy/cc-privacy-panel.c:876 ../panels/privacy/privacy.ui.h:19
+#: ../panels/privacy/cc-privacy-panel.c:942 ../panels/privacy/privacy.ui.h:19
 msgid "Usage & History"
 msgstr "Cleachdadh ⁊ an eachraidh"
 
-#: ../panels/privacy/cc-privacy-panel.c:1001
+#: ../panels/privacy/cc-privacy-panel.c:1067
 msgid "Empty all items from Trash?"
 msgstr "A bheil thu airson an sgudal fhalamhachadh gu tur?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1002
+#: ../panels/privacy/cc-privacy-panel.c:1068
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Thèid gach rud san sgudal a sguabadh às gu buan."
 
-#: ../panels/privacy/cc-privacy-panel.c:1003 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
 msgid "_Empty Trash"
 msgstr "_Falamhaich an sgudal"
 
-#: ../panels/privacy/cc-privacy-panel.c:1026
+#: ../panels/privacy/cc-privacy-panel.c:1092
 msgid "Delete all the temporary files?"
 msgstr "A bheil thu airson na faidhlichean sealach a sguabadh às?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1027
+#: ../panels/privacy/cc-privacy-panel.c:1093
 msgid "All the temporary files will be permanently deleted."
 msgstr "Thèid gach faidhle sealach a sguabadh às gu buan."
 
-#: ../panels/privacy/cc-privacy-panel.c:1028 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
 msgid "_Purge Temporary Files"
 msgstr "_Purgaidich na faidhlichean sealach"
 
-#: ../panels/privacy/cc-privacy-panel.c:1050 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Purgaidich an sgudal ⁊ na faidhlichean sealach"
 
-#: ../panels/privacy/cc-privacy-panel.c:1090 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Cleachdadh bathair-bhog"
 
-#: ../panels/privacy/cc-privacy-panel.c:1131 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Ag aithris air duilgheadasan"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1145
+#: ../panels/privacy/cc-privacy-panel.c:1211
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4879,7 +4876,7 @@ msgstr ""
 "seo ach an leasaich sinn %s. Thèid na h-aithrisean a chur gun urra agus gach "
 "dàta pearsanta a thoirt air falbh uapa."
 
-#: ../panels/privacy/cc-privacy-panel.c:1157 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Am poileasaidh prìobhaideachd"
 
@@ -4890,7 +4887,7 @@ msgstr "Prìobhaideachd"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:3
 msgid "Protect your personal information and control what others might see"
-msgstr "Dìon am fiosrachadh pearsanta agad is cum smachd air na chì càch"
+msgstr "Dìon am fiosrachadh pearsanta agad is stiùirich na chì càch"
 
 #. Translators: those are keywords for the privacy control-center panel
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:5
@@ -5067,14 +5064,14 @@ msgid "Other"
 msgstr "Eile"
 
 #: ../panels/region/cc-region-panel.c:247
-#: ../panels/user-accounts/um-user-panel.c:1073
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "Feumaidh tu an seisean ath-thòiseachadh gus bi buaidh aig na dh'atharraich "
 "thu"
 
 #: ../panels/region/cc-region-panel.c:251
-#: ../panels/user-accounts/um-user-panel.c:1077
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "Restart Now"
 msgstr "Ath-thòisich an-dràsta"
 
@@ -5185,7 +5182,7 @@ msgid "Left+Right Alt"
 msgstr "Alt clì + deas"
 
 #: ../panels/region/region.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Language"
 msgstr "_Cànan"
 
@@ -5271,20 +5268,14 @@ msgid "Search Locations"
 msgstr "Ionadan luirg"
 
 #: ../panels/search/search-locations-dialog.ui.h:2
-#| msgctxt "Search Location"
-#| msgid "Places"
 msgid "Places"
 msgstr "Àitichean"
 
 #: ../panels/search/search-locations-dialog.ui.h:3
-#| msgctxt "Search Location"
-#| msgid "Bookmarks"
 msgid "Bookmarks"
 msgstr "Comharran-lìn"
 
 #: ../panels/search/search-locations-dialog.ui.h:4
-#| msgctxt "Online Account"
-#| msgid "Other"
 msgid "Other"
 msgstr "Eile"
 
@@ -5300,32 +5291,37 @@ msgstr "Gluais sìos"
 msgid "Preferences"
 msgstr "Roghainnean"
 
-#: ../panels/sharing/cc-sharing-panel.c:263
+#. Label
+#: ../panels/sharing/cc-sharing-networks.c:303
+msgid "No networks selected for sharing"
+msgstr "Cha deach lìonra a thaghadh a chum co-roinnidh"
+
+#: ../panels/sharing/cc-sharing-panel.c:266
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Air"
 
-#: ../panels/sharing/cc-sharing-panel.c:265
-#: ../panels/sharing/cc-sharing-panel.c:292
+#: ../panels/sharing/cc-sharing-panel.c:268
+#: ../panels/sharing/cc-sharing-panel.c:295
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Dheth"
 
-#: ../panels/sharing/cc-sharing-panel.c:295
+#: ../panels/sharing/cc-sharing-panel.c:298
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "An comas"
 
-#: ../panels/sharing/cc-sharing-panel.c:298
+#: ../panels/sharing/cc-sharing-panel.c:301
 msgctxt "service is active"
 msgid "Active"
 msgstr "Gnìomhach"
 
-#: ../panels/sharing/cc-sharing-panel.c:369
+#: ../panels/sharing/cc-sharing-panel.c:372
 msgid "Choose a Folder"
 msgstr "Tagh pasgan"
 
-#: ../panels/sharing/cc-sharing-panel.c:680
+#: ../panels/sharing/cc-sharing-panel.c:683
 #, c-format
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
@@ -5335,30 +5331,38 @@ msgstr ""
 "a cho-roinneadh le daoine eile air an lìonra làithreach agad slighe: <a href="
 "\"dav://%s\">dav://%s</a>"
 
-#: ../panels/sharing/cc-sharing-panel.c:682
+#: ../panels/sharing/cc-sharing-panel.c:685
 #, c-format
+#| msgid ""
+#| "Allow remote users to connect using the Secure Shell command:\n"
+#| "<a href=\"ssh %s\">ssh %s</a>"
 msgid ""
-"Allow remote users to connect using the Secure Shell command:\n"
+"When remote login is enabled, remote users can connect using the Secure "
+"Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
-"Thoir cead do chleachdaichean ceangal a dhèanamh slighe na h-àithne Secure "
-"Shell:\n"
+"Ma tha an clàradh a-steach cèin an coma, 's urrainn dha chleachdaichean "
+"ceangal a dhèanamh on taobh a-muigh slighe na h-àithne Secure Shell:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: ../panels/sharing/cc-sharing-panel.c:684
+#: ../panels/sharing/cc-sharing-panel.c:687
 #, c-format
+#| msgid ""
+#| "Allow remote users to view or control your screen by connecting to: <a "
+#| "href=\"vnc://%s\">vnc://%s</a>"
 msgid ""
-"Allow remote users to view or control your screen by connecting to: <a href="
-"\"vnc://%s\">vnc://%s</a>"
+"Screen sharing allows remote users to view or control your screen by "
+"connecting to <a href=\"vnc://%s\">vnc://%s</a>"
 msgstr ""
-"Thoir cead do chleachdaichean an sgrìn agad fhaicinn no a stiùireadh slighe: "
-"<a href=\"vnc://%s\">vnc://%s</a>"
+"Bheir co-roinneadh na sgrìn cead do chleachdaichean an sgrìn agad a "
+"shealltainn no a stiùireadh on taobh a-muigh slighe <a href=\"vnc://%"
+"s\">vnc://%s</a>"
 
-#: ../panels/sharing/cc-sharing-panel.c:796
+#: ../panels/sharing/cc-sharing-panel.c:799
 msgid "Copy"
 msgstr "Dèan lethbhreac"
 
-#: ../panels/sharing/cc-sharing-panel.c:1122
+#: ../panels/sharing/cc-sharing-panel.c:1125
 msgid "Sharing"
 msgstr "Co-roinneadh"
 
@@ -5369,7 +5373,7 @@ msgstr "Co-roinneadh"
 
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:3
 msgid "Control what you want to share with others"
-msgstr "Cum smachd air na cho-roinneas tu le daoine eile"
+msgstr "Stiùirich na cho-roinneas tu le daoine eile"
 
 #. Translators: those are keywords for the sharing control-center panel
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:5
@@ -5381,6 +5385,10 @@ msgstr ""
 "movies;server;renderer;co-roinn;co-roinneadh;òstair;cèin;meadhan;fuaim;"
 "dealbhan;deilbh;filmichean;frithealaiche;reandaraiche;"
 
+#: ../panels/sharing/networks.ui.h:1
+msgid "Networks"
+msgstr "Lìonraidhean"
+
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
 msgstr "Cuir an comas no à comas clàradh a-steach cèin"
@@ -5390,25 +5398,14 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "Tha feum air dearbhadh mus gabh clàradh cèin a chur an comas no à comas"
 
-#. Label
-#: ../panels/sharing/cc-sharing-networks.c:303
-msgid "No networks selected for sharing"
-msgstr "Cha deach lìonra a thaghadh a chum co-roinnidh"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../panels/sharing/networks.ui.h:1
-msgid "Networks"
-msgstr "Lìonraidhean"
-
 #: ../panels/sharing/sharing.ui.h:1
 msgid "_Computer Name"
 msgstr "Ainm a' _choimpiutair"
 
 #: ../panels/sharing/sharing.ui.h:2
-msgid "_Personal File Sharing"
-msgstr "Co-roinneadh fhaidhlichean _pearsanta"
+#| msgid "_Personal File Sharing"
+msgid "_File Sharing"
+msgstr "Co-roinneadh _fhaidhlichean"
 
 #: ../panels/sharing/sharing.ui.h:3
 msgid "_Screen Sharing"
@@ -5429,8 +5426,9 @@ msgstr ""
 "air an lìonra."
 
 #: ../panels/sharing/sharing.ui.h:7
-msgid "Personal File Sharing"
-msgstr "Co-roinneadh fhaidhlichean pearsanta"
+#| msgid "Sharing"
+msgid "File Sharing"
+msgstr "Co-roinneadh fhaidhlichean"
 
 #: ../panels/sharing/sharing.ui.h:8
 msgid "_Require Password"
@@ -5445,8 +5443,8 @@ msgid "Screen Sharing"
 msgstr "Co-roinneadh sgrìnichean"
 
 #: ../panels/sharing/sharing.ui.h:12
-msgid "_Allow Remote Control"
-msgstr "Ce_adaich smachd cèin"
+msgid "_Allow connections to control the screen"
+msgstr "Leig le ce_anglaichean an sgrìn a stiùireadh"
 
 #: ../panels/sharing/sharing.ui.h:13
 msgid "_Password:"
@@ -5473,11 +5471,11 @@ msgid "Media Sharing"
 msgstr "Co-roinneadh mheadhanan"
 
 #: ../panels/sharing/sharing.ui.h:19
-msgid ""
-"Media sharing allows you to share music, photos and videos over the network."
-msgstr ""
-"Leigidh co-roinneadh nam meadhanan leat gun co-roinn thu ceòl, dealbhan is "
-"videothan air an lìonra."
+#| msgid ""
+#| "Media sharing allows you to share music, photos and videos over the "
+#| "network."
+msgid "Share music, photos and videos over the network."
+msgstr "Co-roinn ceòl, dealbhan is videothan air an lìonra."
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Folders"
@@ -5612,11 +5610,6 @@ msgstr "Cuir na glaodhairean _fo dheuchainn"
 #: ../panels/sound/gvc-mixer-dialog.c:420
 msgid "Peak detect"
 msgstr "Lorg am mullach"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1493
-#: ../panels/sound/gvc-sound-theme-chooser.c:564
-msgid "Name"
-msgstr "Ainm"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1512
 msgid "Device"
@@ -5973,7 +5966,8 @@ msgstr "Cuir an comas l_eis a' mheur-chlàr"
 
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Turn accessibility features on and off using the keyboard"
-msgstr "Cuiridh seo gleusan na so-ruigsinneach air no dheth leis a' mheur-chlàr"
+msgstr ""
+"Cuiridh seo gleusan na so-ruigsinneach air no dheth leis a' mheur-chlàr"
 
 #: ../panels/universal-access/uap.ui.h:61
 msgid "Click Assist"
@@ -6213,51 +6207,45 @@ msgstr "Èifeachdan dhathan:"
 msgid "Color Effects"
 msgstr "Èifeachdan dhathan"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/join-dialog.ui.h:1
+msgid "Add User"
+msgstr "Cuir ris Cleachdaiche"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
 msgid "_Full Name"
 msgstr "Ainm _slàn"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-#: ../panels/user-accounts/um-user-panel.c:900
-#| msgctxt "Account type"
-#| msgid "Standard"
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Standard"
 msgstr "Stannardach"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-#: ../panels/user-accounts/um-user-panel.c:898
-#| msgctxt "Account type"
-#| msgid "Administrator"
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Administrator"
 msgstr "Rianaire"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account _Type"
 msgstr "_Seòrsa a' chunntais"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "Allow user to set a password when they next _login"
 msgstr ""
 "Leig leis a' chleachdaiche facal-faire a thaghadh nuair a ch_làraicheas iad "
 "a-steach an ath-thuras"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "Set a password _now"
 msgstr "Suidhich facal-faire a_n-dràsta"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:10
-#| msgctxt "printer state"
-#| msgid "Configuring"
+#: ../panels/user-accounts/data/account-dialog.ui.h:13
 msgid "_Confirm"
 msgstr "_Dearbhaich"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
-#| msgid ""
-#| "Enterprise login allows an existing centrally managed user account to be "
-#| "used on this device."
+#: ../panels/user-accounts/data/account-dialog.ui.h:14
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -6268,58 +6256,23 @@ msgstr ""
 "seo a chleachdadh cuideachd gus goireasan na companaidh inntrigeadh air an "
 "eadar-lìn."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:12
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/join-dialog.ui.h:9
 msgid "_Domain"
 msgstr "_Àrainn"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:13
-#| msgctxt "printer state"
-#| msgid "Offline"
+#: ../panels/user-accounts/data/account-dialog.ui.h:16
 msgid "You are Offline"
 msgstr "Tha thu far loidhne"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:14
-#| msgid ""
-#| "Go online to add\n"
-#| "enterprise login accounts."
+#: ../panels/user-accounts/data/account-dialog.ui.h:17
 msgid "You must be online in order to add enterprise users."
-msgstr "Feumaidh tu bhith air loidhne gus cleachdaichean enterprise a chur ris."
+msgstr ""
+"Feumaidh tu bhith air loidhne gus cleachdaichean enterprise a chur ris."
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:15
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
 msgid "_Enterprise Login"
 msgstr "Clàradh a-steach _Enterprise"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:16
-#: ../panels/user-accounts/um-account-dialog.c:1462
-msgid "Add User"
-msgstr "Cuir ris Cleachdaiche"
-
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: ../panels/user-accounts/data/account-dialog.ui.h:19
-msgid "_Enroll"
-msgstr "_Clàraich"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:20
-msgid "Domain Administrator Login"
-msgstr "Clàradh a-steach rianaire na h-àrainne"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:21
-msgid ""
-"In order to use enterprise logins, this computer needs to be\n"
-"enrolled in the domain. Please have your network administrator\n"
-"type their domain password here."
-msgstr ""
-"Feumaidh an coimpiutair agad a bhith clàraichte aig an àrainn\n"
-"mus urrainn dhut clàradh a-steach Enterprise a dhèanamh. Iarr air\n"
-"rianaire an lìonraidh facal-faire na h-àrainne a chur a-steach an-seo."
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:24
-msgid "Administrator _Name"
-msgstr "_Ainm an rianaire"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:25
-msgid "Administrator Password"
-msgstr "Facal-faire an rianaire"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Left thumb"
@@ -6354,7 +6307,7 @@ msgid "Right little finger"
 msgstr "An lùdag bheag dheas"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:688
+#: ../panels/user-accounts/um-fingerprint-dialog.c:687
 msgid "Enable Fingerprint Login"
 msgstr "Cuir an comas clàradh a-steach le meur-lorg"
 
@@ -6394,9 +6347,32 @@ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr ""
 "Clàraich a-steach;Ainm;Meur-lorg;Avatar;Suaicheantas;Aodann;Facal-faire;"
 
-#: ../panels/user-accounts/data/history-dialog.ui.h:1
-msgid "Login History"
-msgstr "Eachdraidh nan daoine a chlàraich a-steach"
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: ../panels/user-accounts/data/join-dialog.ui.h:4
+msgid "_Enroll"
+msgstr "_Clàraich"
+
+#: ../panels/user-accounts/data/join-dialog.ui.h:5
+msgid "Domain Administrator Login"
+msgstr "Clàradh a-steach rianaire na h-àrainne"
+
+#: ../panels/user-accounts/data/join-dialog.ui.h:6
+msgid ""
+"In order to use enterprise logins, this computer needs to be\n"
+"enrolled in the domain. Please have your network administrator\n"
+"type their domain password here."
+msgstr ""
+"Feumaidh an coimpiutair agad a bhith clàraichte aig an àrainn\n"
+"mus urrainn dhut clàradh a-steach Enterprise a dhèanamh. Iarr air\n"
+"rianaire an lìonraidh facal-faire na h-àrainne a chur a-steach an-seo."
+
+#: ../panels/user-accounts/data/join-dialog.ui.h:10
+msgid "Administrator _Name"
+msgstr "_Ainm an rianaire"
+
+#: ../panels/user-accounts/data/join-dialog.ui.h:11
+msgid "Administrator Password"
+msgstr "Facal-faire an rianaire"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid "Change Password"
@@ -6419,7 +6395,6 @@ msgid "Current _Password"
 msgstr "Am _facal-faire làithreach"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:7
-#| msgid "Allow user to set a password when they next login"
 msgid "Allow user to change their password on next login"
 msgstr ""
 "Leig leis a' chleachdaiche am facal-faire atharrachadh nuair a chlàraicheas "
@@ -6430,38 +6405,23 @@ msgid "Set a password now"
 msgstr "Suidhich facal-faire an-dràsta"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#: ../panels/user-accounts/um-account-type.c:34
-msgctxt "Account type"
-msgid "Standard"
-msgstr "Stannardach"
+#| msgid "Add User"
+msgid "_Add User…"
+msgstr "Cuir cle_achdaiche ris…"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-type.c:36
-msgctxt "Account type"
-msgid "Administrator"
-msgstr "Rianaire"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-msgid "Add User Account"
-msgstr "Cuir cunntas cleachdaiche ris"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
-msgid "Remove User Account"
-msgstr "Thoir air falbh cunntas a' chleachdaiche"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "A_utomatic Login"
 msgstr "Clàradh a-steach fèin-_obrachail"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "_Fingerprint Login"
 msgstr "Clàradh a-steach le _meur-lorg"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "User Icon"
 msgstr "Ìomhaigheag a' chleachdaiche"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Last Login"
 msgstr "An clàradh a-steach mu dheireadh"
 
@@ -6565,8 +6525,6 @@ msgid "Try to add more letters, numbers and symbols."
 msgstr "Feuch is cleachd barrachd litrichean, àireamhan is chomharran."
 
 #: ../panels/user-accounts/pw-utils.c:117
-#| msgctxt "Password hint"
-#| msgid "Mix uppercase and lowercase and use a number or two."
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and try to use a number or two."
 msgstr ""
@@ -6663,37 +6621,36 @@ msgid "Unknown error"
 msgstr "Mearachd neo-aithnichte"
 
 #: ../panels/user-accounts/um-account-dialog.c:34
-#| msgid "Should match the web address of your account provider."
 msgid "Should match the web address of your login provider."
 msgstr ""
-"Bu chòir dha a bhith co-ionnann ri seòladh-lìn solaraiche a' chlàraidh "
-"a-steach agad."
+"Bu chòir dha a bhith co-ionnann ri seòladh-lìn solaraiche a' chlàraidh a-"
+"steach agad."
 
 #: ../panels/user-accounts/um-account-dialog.c:228
 msgid "Failed to add account"
 msgstr "Cha b' urrainn dhuinn an cunntas a chur ris"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:453
 msgid "Passwords do not match."
 msgstr "Chan eil an dà fhacal-faire co-ionnann."
 
-#: ../panels/user-accounts/um-account-dialog.c:729
-#: ../panels/user-accounts/um-account-dialog.c:775
-#: ../panels/user-accounts/um-account-dialog.c:796
+#: ../panels/user-accounts/um-account-dialog.c:707
+#: ../panels/user-accounts/um-account-dialog.c:753
+#: ../panels/user-accounts/um-account-dialog.c:774
 msgid "Failed to register account"
 msgstr "Cha b' urrainn dhuinn an cunntas a chlàradh"
 
-#: ../panels/user-accounts/um-account-dialog.c:919
+#: ../panels/user-accounts/um-account-dialog.c:897
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 "Chan eil dòigh sam bith ann ris a bheil taic agus leis an urrainnear "
 "dearbhadh a dhèanamh air an àrainn seo"
 
-#: ../panels/user-accounts/um-account-dialog.c:978
+#: ../panels/user-accounts/um-account-dialog.c:970
 msgid "Failed to join domain"
 msgstr "Cha b' urrainn dhuinn ceangal ris an àrainn"
 
-#: ../panels/user-accounts/um-account-dialog.c:1039
+#: ../panels/user-accounts/um-account-dialog.c:1031
 msgid ""
 "That login name didn't work.\n"
 "Please try again."
@@ -6701,7 +6658,7 @@ msgstr ""
 "Cha do dh'obraich an t-ainm sin.\n"
 "Feuch ris a-rithist."
 
-#: ../panels/user-accounts/um-account-dialog.c:1046
+#: ../panels/user-accounts/um-account-dialog.c:1038
 msgid ""
 "That login password didn't work.\n"
 "Please try again."
@@ -6709,44 +6666,54 @@ msgstr ""
 "Cha do dh'obraich am facal-faire sin.\n"
 "Feuch ris a-rithist."
 
-#: ../panels/user-accounts/um-account-dialog.c:1054
+#: ../panels/user-accounts/um-account-dialog.c:1046
 msgid "Failed to log into domain"
 msgstr "Cha b' urrainn dhuinn clàradh a-steach aig an àrainn"
 
-#: ../panels/user-accounts/um-account-dialog.c:1112
+#: ../panels/user-accounts/um-account-dialog.c:1104
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr ""
 "Chan fhaigh sinn greim air an àrainn. Saoil a bheil e air a dheagh-"
 "litreachadh?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:140
+#: ../panels/user-accounts/um-account-type.c:34
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Stannardach"
+
+#: ../panels/user-accounts/um-account-type.c:36
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Rianaire"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:138
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "Chan eil cead-inntrigidh agad dhan uidheam seo. Cuir fios gu rianaire an t-"
 "siostaim agad."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:142
+#: ../panels/user-accounts/um-fingerprint-dialog.c:140
 msgid "The device is already in use."
 msgstr "Tha an t-uidheam seo 'ga chleachdadh mu thràth."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:144
+#: ../panels/user-accounts/um-fingerprint-dialog.c:142
 msgid "An internal error occurred."
 msgstr "Thachair mearachd inntearnail."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:218
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "An comas"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:265
+#: ../panels/user-accounts/um-fingerprint-dialog.c:264
 msgid "Delete registered fingerprints?"
 msgstr "A bheil thu airson na meur-lorgan clàraichte a sguabadh às?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:269
+#: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "_Delete Fingerprints"
 msgstr "_Sguab às na meur-lorgan"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:275
+#: ../panels/user-accounts/um-fingerprint-dialog.c:274
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -6754,15 +6721,15 @@ msgstr ""
 "A bheil thu airson na meur-lorgan clàraichte a sguabadh às airson 's nach "
 "urrainnear clàradh a-steach leotha tuilleadh?"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:445
+#: ../panels/user-accounts/um-fingerprint-dialog.c:444
 msgid "Done!"
 msgstr "Deiseil!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:506
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:505
+#: ../panels/user-accounts/um-fingerprint-dialog.c:547
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Cha b' urrainn dhuinn cothrom fhaighinn air an uidheam \"%s\""
@@ -6770,18 +6737,18 @@ msgstr "Cha b' urrainn dhuinn cothrom fhaighinn air an uidheam \"%s\""
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:589
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr ""
 "Cha b' urrainn dhuinn glacadh a' mheòir a thòiseachadh air an uidheam \"%s\""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:639
+#: ../panels/user-accounts/um-fingerprint-dialog.c:638
 msgid "Could not access any fingerprint readers"
 msgstr ""
 "Cha b' urrainn dhuinn cothrom fhaighinn air leughadair mheur-lorgan sam bith"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:640
+#: ../panels/user-accounts/um-fingerprint-dialog.c:639
 msgid "Please contact your system administrator for help."
 msgstr "Cuir fios gu rianaire an t-siostaim agad airson cuideachadh."
 
@@ -6790,7 +6757,7 @@ msgstr "Cuir fios gu rianaire an t-siostaim agad airson cuideachadh."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:722
+#: ../panels/user-accounts/um-fingerprint-dialog.c:721
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -6799,11 +6766,11 @@ msgstr ""
 "Feumaidh tu lorg do mheòir a chlàradh leis an uidheam \"%s\" mus urrainn "
 "dhut clàradh a-steach le meur-lorg."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:729
+#: ../panels/user-accounts/um-fingerprint-dialog.c:728
 msgid "Selecting finger"
 msgstr "A' taghadh meur"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:730
+#: ../panels/user-accounts/um-fingerprint-dialog.c:729
 msgid "Enrolling fingerprints"
 msgstr "A' clàradh nam meur-lorgan"
 
@@ -6857,13 +6824,20 @@ msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: ../panels/user-accounts/um-history-dialog.c:249
+#: ../panels/user-accounts/um-history-dialog.c:250
 msgid "Session Ended"
 msgstr "Thàinig an seisean gu crìoch"
 
-#: ../panels/user-accounts/um-history-dialog.c:255
+#: ../panels/user-accounts/um-history-dialog.c:256
 msgid "Session Started"
 msgstr "Thòisich an seisean"
+
+#. Translators: This is the title of the "Account Activity" dialog.
+#. The %s is the user real name.
+#: ../panels/user-accounts/um-history-dialog.c:299
+#, c-format
+msgid "%s - Account Activity"
+msgstr "%s - Gnìomhachd a' chunntais"
 
 #: ../panels/user-accounts/um-password-dialog.c:145
 msgid "Please choose another password."
@@ -6928,7 +6902,7 @@ msgstr "Tha am facal-faire cearr, nach fheuch thu ris a-rithist?"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Cha b' urrainn ceangal ris an àrainn %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:237
+#: ../panels/user-accounts/um-user-panel.c:239
 msgid "Other Accounts"
 msgstr "Cunntasan eile"
 
@@ -7010,15 +6984,15 @@ msgstr "Chan eil gin"
 msgid "Logged in"
 msgstr "Air clàradh a-steach"
 
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:1290
 msgid "Failed to contact the accounts service"
 msgstr "Cha b' urrainn dhuinn fios a chur gu seirbheis nan cunntasan"
 
-#: ../panels/user-accounts/um-user-panel.c:1278
+#: ../panels/user-accounts/um-user-panel.c:1292
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Dèan cinnteach gun deach AccountService a stàladh agus an comas."
 
-#: ../panels/user-accounts/um-user-panel.c:1319
+#: ../panels/user-accounts/um-user-panel.c:1334
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7026,12 +7000,12 @@ msgstr ""
 "Gus atharraichean a dhèanamh,\n"
 "briog an ìomhaigheag * an toiseach"
 
-#: ../panels/user-accounts/um-user-panel.c:1357
+#: ../panels/user-accounts/um-user-panel.c:1374
 msgid "Create a user account"
 msgstr "Cruthaich cunntas cleachdaiche"
 
-#: ../panels/user-accounts/um-user-panel.c:1368
-#: ../panels/user-accounts/um-user-panel.c:1680
+#: ../panels/user-accounts/um-user-panel.c:1385
+#: ../panels/user-accounts/um-user-panel.c:1677
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7039,12 +7013,12 @@ msgstr ""
 "Gus cunntas cleachdaiche a chruthachadh,\n"
 "briog air an ìomhaigheag * an toiseach"
 
-#: ../panels/user-accounts/um-user-panel.c:1378
+#: ../panels/user-accounts/um-user-panel.c:1395
 msgid "Delete the selected user account"
 msgstr "Sguab às cunntas a' chleachdaiche a thagh thu"
 
-#: ../panels/user-accounts/um-user-panel.c:1390
-#: ../panels/user-accounts/um-user-panel.c:1685
+#: ../panels/user-accounts/um-user-panel.c:1407
+#: ../panels/user-accounts/um-user-panel.c:1682
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7052,7 +7026,7 @@ msgstr ""
 "Gus cunntas a' chleachdaiche a thagh thu a sguabadh às,\n"
 "briog air an ìomhaigheag * an toiseach"
 
-#: ../panels/user-accounts/um-user-panel.c:1594
+#: ../panels/user-accounts/um-user-panel.c:1591
 msgid "My Account"
 msgstr "An cunntas agam"
 
@@ -7072,9 +7046,6 @@ msgid "The username cannot start with a '-'."
 msgstr "Chan fhaod an t-ainm-cleachdaiche tòiseachadh le \"-\"."
 
 #: ../panels/user-accounts/um-utils.c:572
-#| msgid ""
-#| "The username should only consist of lower and upper case letters from a-"
-#| "z, digits and any of characters '.', '-' and '_'."
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7407,14 +7378,14 @@ msgstr "Am putan aig a' bhonn"
 msgid "Tip Pressure Feel"
 msgstr "Faireachdainn brùthadh a' chinn"
 
-#: ../shell/alt/cc-window.c:882 ../shell/cc-window.c:53
+#: ../shell/alt/cc-window.c:765 ../shell/cc-window.c:53
 #: ../shell/cc-window.c:1478
 msgid "All Settings"
 msgstr "Na h-uile roghainn"
 
 #: ../shell/appdata/gnome-control-center.appdata.xml.in.h:1
 msgid "GNOME Control Center"
-msgstr "Ionad smachd GNOME"
+msgstr "Ionad-stiùiridh GNOME"
 
 #: ../shell/appdata/gnome-control-center.appdata.xml.in.h:2
 msgid "Utilities to configure the GNOME desktop"
@@ -7425,7 +7396,7 @@ msgid ""
 "The control center is GNOME's main interface for configuration of various "
 "aspects of your desktop."
 msgstr ""
-"'S e a' phrìomh eadar-aghaidh aig GNOME a tha san ionad smachd gus iomadh "
+"'S e a' phrìomh eadar-aghaidh aig GNOME a tha san ionad-stiùiridh gus iomadh "
 "gleus dhen deasg agad a rèiteachadh."
 
 #: ../shell/cc-application.c:45
@@ -7520,21 +7491,118 @@ msgstr "Sguir dhen lorg"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: ../shell/hostname-helper.c:189
-#| msgid "_Stop Hotspot"
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: ../shell/window.ui.h:1
-#| msgid "GNOME Control Center"
-msgid "Welcome to the Control Center"
-msgstr "Fàilte gun ionad smachd"
+#: ../shell/panel-list.ui.h:3
+#| msgid "No regions found"
+msgid "No results found"
+msgstr "Cha deach toradh a lorg"
 
-#: ../shell/window.ui.h:2
-msgid "Select a panel in the sidelist to see the available options"
-msgstr ""
-"Tagh panail air an liosta-thaoibh gus na roghainnean a shealltainn a tha ri "
-"am faighinn"
+#~ msgid "Wayland"
+#~ msgstr "Wayland"
+
+#~ msgid "_Name:"
+#~ msgstr "_Ainm:"
+
+#~ msgid "Add Shortcut"
+#~ msgstr "Cuir ath-ghoirid ris"
+
+#~ msgid "Remove Shortcut"
+#~ msgstr "Thoir an ath-ghoirid air falbh"
+
+#~ msgid ""
+#~ "To edit a shortcut, click the row and hold down the new keys or press "
+#~ "Backspace to clear."
+#~ msgstr ""
+#~ "Gu ath-ghoirid a dheasachadh, briog air an ràgh agus cum sìos na h-"
+#~ "iuchraichean ùra no brùth Backspace gus an toirt air falbh."
+
+#~ msgid "<Unknown Action>"
+#~ msgstr "<Gnìomh nach aithne dhuinn>"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
+#~ "Please try with a key such as Control, Alt or Shift at the same time."
+#~ msgstr ""
+#~ "Chan urrainn dhut an ath-ghoirid \"%s\" a chleachdadh a chionn 's nach b' "
+#~ "urrainn dhut sgrìobhadh leis an iuchair seo.\n"
+#~ "Feuch iuchair mar Ctrl, Alt no Shift aig an aon àm."
+
+#~ msgid ""
+#~ "The shortcut \"%s\" is already used for\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "Tha an ath-ghoirid \"%s\" 'ga chleachdadh airson na leanas mu thràth: \n"
+#~ "\"%s\""
+
+#~ msgid ""
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
+#~ msgstr ""
+#~ "Ma thaghas tu \"%s\" mar an ath-ghoirid ùr, thèid an seann ath-ghoirid "
+#~ "\"%s\" a chur à comas."
+
+#~ msgid "_Reassign"
+#~ msgstr "_Ath-shònraich"
+
+#~ msgid ""
+#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
+#~ "automatically set it to \"%s\"?"
+#~ msgstr ""
+#~ "Tha ath-ghoirid \"%2$s\" an cois na h-ath-ghoirid \"%1$s\". A bheil thu "
+#~ "airson a suidheachadh air \"%3$s\" gu fèin-obrachail?"
+
+#~ msgid ""
+#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
+#~ "disabled if you move forward."
+#~ msgstr ""
+#~ "Tha ath-ghoirid \"%2$s\" an cois na h-ath-ghoirid \"%1$s\" an-dràsta, "
+#~ "thèid an ath-ghoirid ud a chur à comas ma leanas tu air adhart leis."
+
+#~ msgid "_Assign"
+#~ msgstr "Sònr_aich"
+
+#~ msgid "Add Network Connection"
+#~ msgstr "Cuir ceangal lìonraidh ris"
+
+#~ msgid "Error logging into the account"
+#~ msgstr "Mearachd a' clàradh a-steach dhan chunntas"
+
+#~ msgid "Credentials have expired."
+#~ msgstr "Dh'fhalbh an ùine air an ainm is air an facal-fhaire."
+
+#~ msgid "Sign in to enable this account."
+#~ msgstr "Clàraich a-steach gus an cunntas seo a chur an comas."
+
+#~ msgid "_Sign In"
+#~ msgstr "Clàraich a-_steach"
+
+#~ msgid "Personal File Sharing"
+#~ msgstr "Co-roinneadh fhaidhlichean pearsanta"
+
+#~ msgid "_Allow Remote Control"
+#~ msgstr "Ce_adaich smachd cèin"
+
+#~ msgid "Login History"
+#~ msgstr "Eachdraidh nan daoine a chlàraich a-steach"
+
+#~ msgid "Add User Account"
+#~ msgstr "Cuir cunntas cleachdaiche ris"
+
+#~ msgid "Remove User Account"
+#~ msgstr "Thoir air falbh cunntas a' chleachdaiche"
+
+#~| msgid "GNOME Control Center"
+#~ msgid "Welcome to the Control Center"
+#~ msgstr "Fàilte gun ionad smachd"
+
+#~ msgid "Select a panel in the sidelist to see the available options"
+#~ msgstr ""
+#~ "Tagh panail air an liosta-thaoibh gus na roghainnean a shealltainn a tha "
+#~ "ri am faighinn"
 
 #~ msgid "Bond"
 #~ msgstr "Bann"
@@ -7657,9 +7725,6 @@ msgstr ""
 #~ msgid "S_peed:"
 #~ msgstr "A_star:"
 
-#~ msgid "Shortcuts"
-#~ msgstr "Ath-ghoiridean"
-
 #~ msgid "Test Your Settings"
 #~ msgstr "Cuir na roghainnean agad fo dheuchainn"
 
@@ -7697,9 +7762,6 @@ msgstr ""
 #~ msgctxt "touchpad pointer, speed"
 #~ msgid "Fast"
 #~ msgstr "Luath"
-
-#~ msgid "Two _finger scroll"
-#~ msgstr "Sgroladh dà _chorraige"
 
 #~ msgid "Apply system wide"
 #~ msgstr "Cuir an gnìomh air feadh an t-siostaim"
