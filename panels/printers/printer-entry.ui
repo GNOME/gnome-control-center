@@ -74,18 +74,18 @@
         <child>
           <object class="GtkGrid">
             <property name="visible">True</property>
-            <property name="row-spacing">10</property>
+            <property name="row-spacing">8</property>
             <property name="column-spacing">15</property>
-            <property name="margin_start">20</property>
+            <property name="margin_start">24</property>
             <property name="margin_end">20</property>
-            <property name="margin_top">5</property>
+            <property name="margin_top">14</property>
             <property name="margin_bottom">20</property>
             <property name="no-show-all">True</property>
 
             <child>
               <object class="GtkImage" id="printer_icon">
                 <property name="visible">True</property>
-                <property name="pixel-size">64</property>
+                <property name="pixel-size">48</property>
                 <property name="icon_name">printer</property>
                 <property name="halign">end</property>
               </object>
@@ -111,7 +111,7 @@
                     <property name="max-width-chars">30</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
-                      <attribute name="scale" value="1.5"/>
+                      <attribute name="scale" value="1.2"/>
                     </attributes>
                   </object>
                   <packing>
@@ -140,7 +140,7 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="spacing">5</property>
+                <property name="spacing">12</property>
                 <property name="orientation">horizontal</property>
                 <property name="valign">center</property>
                 <child>
@@ -268,6 +268,7 @@
               <object class="GtkBox" id="printer_error">
                 <property name="visible">False</property>
                 <property name="spacing">10</property>
+                <property name="margin-top">6</property>
 
                 <child>
                   <object class="GtkImage">
