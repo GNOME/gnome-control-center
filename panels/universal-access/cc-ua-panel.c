@@ -363,7 +363,11 @@ cursor_size_label_mapping_get (GValue   *value,
         label = g_strdup (C_("cursor size", "Largest"));
         break;
       default:
-        label = g_strdup_printf (_("%d pixels"), g_variant_get_int32 (variant));
+        label = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                              "%d pixel",
+                                              "%d pixels",
+                                              cursor_size),
+                                 cursor_size);
         break;
     }
 
