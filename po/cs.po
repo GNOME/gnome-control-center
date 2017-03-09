@@ -21,11 +21,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Project-Id-Version: gnome-control-center gnome-3.24\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-14 18:10+0000\n"
-"PO-Revision-Date: 2017-02-14 23:05+0100\n"
+"POT-Creation-Date: 2017-03-08 13:36+0000\n"
+"PO-Revision-Date: 2017-03-09 21:12+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -130,8 +130,8 @@ msgstr "Můžete obrázky přidat do své složky %s a potom se zde objeví"
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:315
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:319
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -1120,7 +1120,7 @@ msgstr "Hlavní"
 
 #: ../panels/display/cc-display-panel.c:599
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1239,7 +1239,7 @@ msgstr "Tento displej nepoužívat"
 
 #. TRANSLATORS: the state of the night light setting
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1273,20 +1273,34 @@ msgstr "Restartovat filtr"
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Dočasně vypnout do zítřka"
 
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+"Noční světlo dělá barvy obrazovky teplejší. To pomáhá zabránit únavě očí a "
+"nespavosti."
+
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: ../panels/display/display.ui.h:6
+#: ../panels/display/display.ui.h:7
 msgid "Night Light"
 msgstr "Noční světlo"
 
-#. When the sun comes up in the morning to the time the sun goes down in the evening
 #: ../panels/display/display.ui.h:8
-msgid "Sunset to sunrise"
-msgstr "Od rozbřesku do soumraku"
+msgid "Schedule"
+msgstr "Plánování"
 
-#. This allows the user to schedule when the redshift functionality is triggered
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
+msgstr "Od soumraku do rozbřesku"
+
 #: ../panels/display/display.ui.h:10
-msgid "Manual schedule"
-msgstr "Ruční plánování"
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Ruční"
 
 #: ../panels/display/display.ui.h:11
 msgid "From"
@@ -1309,15 +1323,6 @@ msgstr "odp."
 #: ../panels/display/display.ui.h:17
 msgid "To"
 msgstr "Do"
-
-#: ../panels/display/display.ui.h:18
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/display/display.ui.h:19
-msgid "0"
-msgstr "0"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -2303,13 +2308,6 @@ msgstr "Smazat směrování"
 msgid "Automatic (DHCP)"
 msgstr "Automatické (DHCP)"
 
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Ruční"
-
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
 msgid "Link-Local Only"
@@ -2626,7 +2624,7 @@ msgid "Select file to import"
 msgstr "Vybrat soubor pro import"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -3707,6 +3705,10 @@ msgstr "2"
 msgid "3"
 msgstr "3"
 
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Otevřený systém"
@@ -3814,26 +3816,26 @@ msgstr "Upozornění na za_mykací obrazovce"
 msgid "Applications"
 msgstr "Aplikace"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:145
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Jiný"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
 msgid "%s Account"
 msgstr "Účet %s"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:767
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
 msgid "Error removing account"
 msgstr "Chyba při odebírání účtu"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:837
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> byl odebrán"
@@ -3865,10 +3867,15 @@ msgid "Connect to your data in the cloud"
 msgstr "Připojení k vašim datům v cloudu"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Bez internetového připojení – připojte se, abyste mohli nastavit nové účty"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
 msgstr "Přidání účtu"
 
-#: ../panels/online-accounts/online-accounts.ui.h:4
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Odebrat účet"
 
@@ -4238,12 +4245,12 @@ msgid "Authentication Required"
 msgstr "Požadováno ověření totožnosti"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:713
 msgid "Failed to add new printer."
 msgstr "Selhalo přidání nové tiskárny."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:959
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nelze načíst uživatelské rozhraní: %s"
@@ -4334,21 +4341,21 @@ msgid "Loading options…"
 msgstr "Načítají se nastavení…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: ../panels/printers/pp-details-dialog.c:99
-#: ../panels/printers/pp-details-dialog.c:401
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:415
 #, c-format
 msgid "%s Details"
 msgstr "Podrobnosti o tiskárně %s"
 
-#: ../panels/printers/pp-details-dialog.c:168
+#: ../panels/printers/pp-details-dialog.c:172
 msgid "No suitable driver found"
 msgstr "Nenalezen vyhovující ovladač"
 
-#: ../panels/printers/pp-details-dialog.c:312
+#: ../panels/printers/pp-details-dialog.c:316
 msgid "Select PPD File"
 msgstr "Vyberte soubor PPD"
 
-#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/printers/pp-details-dialog.c:325
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4418,49 +4425,49 @@ msgid "Reverse portrait"
 msgstr "Obráceně na výšku"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "Čeká"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pozastaveno"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "Zpracovává se"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Zastaveno"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Zrušeno"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Přerušeno"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončeno"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
@@ -4649,12 +4656,12 @@ msgid "Manufacturer"
 msgstr "Výrobce"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:368
+#: ../panels/printers/pp-printer-entry.c:427
 msgid "No Active Jobs"
 msgstr "Nejsou žádné aktivní úlohy"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:373
+#: ../panels/printers/pp-printer-entry.c:432
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4663,105 +4670,105 @@ msgstr[1] "%u úlohy"
 msgstr[2] "%u úloh"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:470
+#: ../panels/printers/pp-printer-entry.c:560
 msgid "Low on toner"
 msgstr "Dochází toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:472
+#: ../panels/printers/pp-printer-entry.c:562
 msgid "Out of toner"
 msgstr "Došel toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:475
+#: ../panels/printers/pp-printer-entry.c:565
 msgid "Low on developer"
 msgstr "Životnost vývojové jednotka se blíží ke konci"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:478
+#: ../panels/printers/pp-printer-entry.c:568
 msgid "Out of developer"
 msgstr "Opotřebená vývojová jednotka"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:480
+#: ../panels/printers/pp-printer-entry.c:570
 msgid "Low on a marker supply"
 msgstr "Životnost zásobníku se blíží ke konci"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:482
+#: ../panels/printers/pp-printer-entry.c:572
 msgid "Out of a marker supply"
 msgstr "Opotřebený zásobník"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:484
+#: ../panels/printers/pp-printer-entry.c:574
 msgid "Open cover"
 msgstr "Otevřen kryt"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:486
+#: ../panels/printers/pp-printer-entry.c:576
 msgid "Open door"
 msgstr "Otevřena dvířka"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:488
+#: ../panels/printers/pp-printer-entry.c:578
 msgid "Low on paper"
 msgstr "Dochází papír"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:490
+#: ../panels/printers/pp-printer-entry.c:580
 msgid "Out of paper"
 msgstr "Došel papír"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:492
+#: ../panels/printers/pp-printer-entry.c:582
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Off-line"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:494
-#: ../panels/printers/pp-printer-entry.c:624
+#: ../panels/printers/pp-printer-entry.c:584
+#: ../panels/printers/pp-printer-entry.c:714
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zastaveno"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:496
+#: ../panels/printers/pp-printer-entry.c:586
 msgid "Waste receptacle almost full"
 msgstr "Odpadní nádobka je téměř plná"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:498
+#: ../panels/printers/pp-printer-entry.c:588
 msgid "Waste receptacle full"
 msgstr "Odpadní nádobka je plná"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:500
+#: ../panels/printers/pp-printer-entry.c:590
 msgid "The optical photo conductor is near end of life"
 msgstr "Životnost optického válce se blíží ke konci"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:502
+#: ../panels/printers/pp-printer-entry.c:592
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optický válec není nadále funkční"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:610
+#: ../panels/printers/pp-printer-entry.c:700
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Připraveno"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:615
+#: ../panels/printers/pp-printer-entry.c:705
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nepřijímá úlohy"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:620
+#: ../panels/printers/pp-printer-entry.c:710
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Zpracovává se"
@@ -4849,44 +4856,44 @@ msgstr "Služby určování polohy"
 msgid "Usage & History"
 msgstr "Použití a historie"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "Vysypat všechny položky z koše?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Všechny položky v koši budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "_Vyprázdnit koš"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "Odstranit dočasné soubory?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Všechny dočasné soubory budou trvale smazány."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "Odstranit dočasné soubor_y"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Čištění koše a dočasných souborů"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Využití softwaru"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Hlášení problémů"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4895,7 +4902,7 @@ msgstr ""
 "Díky odesílání hlášení o technických problémech se může %s vylepšovat. "
 "Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje."
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Zásady soukromí"
 
@@ -6616,25 +6623,25 @@ msgstr ""
 msgid "Failed to add account"
 msgstr "Přidání účtu selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:458
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Hesla si neodpovídají."
 
-#: ../panels/user-accounts/um-account-dialog.c:713
-#: ../panels/user-accounts/um-account-dialog.c:759
-#: ../panels/user-accounts/um-account-dialog.c:780
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Registrace účtu selhala"
 
-#: ../panels/user-accounts/um-account-dialog.c:903
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "Ověření s touto doménou není podporováno"
 
-#: ../panels/user-accounts/um-account-dialog.c:976
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Připojení k doméně selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:1037
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6642,7 +6649,7 @@ msgstr ""
 "Toto přihlašovací jméno nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:1044
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6650,11 +6657,11 @@ msgstr ""
 "Toto přihlašovací heslo nefunguje.\n"
 "Zkuste to, prosím, znovu."
 
-#: ../panels/user-accounts/um-account-dialog.c:1052
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Přihlášení do domény selhalo"
 
-#: ../panels/user-accounts/um-account-dialog.c:1110
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Nelze najít doménu. Nemáte v názvu překlep?"
 
@@ -6880,8 +6887,8 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nelze se připojit k doméně „%s“: %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-msgid "<small>Your account</small>"
-msgstr "<small>Váš účet</small>"
+msgid "Your account"
+msgstr "Váš účet"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
@@ -7371,3 +7378,9 @@ msgstr "Přístupový bod"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Nebyly nalezeny žádné výsledky"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "<small>Your account</small>"
+#~ msgstr "<small>Váš účet</small>"
