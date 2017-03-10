@@ -344,8 +344,9 @@ get_secrets_cb (GObject            *source_object,
 
         secrets = nm_remote_connection_get_secrets_finish (NM_REMOTE_CONNECTION (source_object), res, &error);
         if (!secrets) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Could not get secrets: %s", error->message);
                 g_error_free (error);
-                //FIXME ignore cancelled
                 return;
         }
 
@@ -651,12 +652,13 @@ connection_add_activate_cb (GObject *source_object,
 
         conn = nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error);
         if (!conn) {
-                //FIXME cancelled
-                nm_device_wifi_refresh_ui (user_data);
-                /* failed to activate */
-                g_debug ("Failed to add and activate connection '%d': %s",
-                         error->code,
-                         error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        nm_device_wifi_refresh_ui (user_data);
+                        /* failed to activate */
+                        g_warning ("Failed to add and activate connection '%d': %s",
+                                   error->code,
+                                   error->message);
+                }
                 g_error_free (error);
                 return;
         }
@@ -670,12 +672,13 @@ connection_activate_cb (GObject *source_object,
         GError *error = NULL;
 
         if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
-                //FIXME cancelled
-                nm_device_wifi_refresh_ui (user_data);
-                /* failed to activate */
-                g_debug ("Failed to add and activate connection '%d': %s",
-                         error->code,
-                         error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        nm_device_wifi_refresh_ui (user_data);
+                        /* failed to activate */
+                        g_debug ("Failed to add and activate connection '%d': %s",
+                                 error->code,
+                                 error->message);
+                }
                 g_error_free (error);
                 return;
         }
