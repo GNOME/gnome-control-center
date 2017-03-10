@@ -50,6 +50,7 @@ typedef enum {
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi);
 static void show_wifi_list (NetDeviceWifi *device_wifi);
 static void populate_ap_list (NetDeviceWifi *device_wifi);
+static void show_hotspot_ui (NetDeviceWifi *device_wifi);
 
 struct _NetDeviceWifiPrivate
 {
@@ -514,6 +515,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         is_hotspot = device_is_hotspot (device_wifi);
         if (is_hotspot) {
                 nm_device_wifi_refresh_hotspot (device_wifi);
+                show_hotspot_ui (device_wifi);
                 return;
         }
 
@@ -602,6 +604,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_status (priv->builder, "heading_status", nm_device, NULL);
 
         /* update list of APs */
+        show_wifi_list (device_wifi);
         populate_ap_list (device_wifi);
 }
 
@@ -995,7 +998,6 @@ activate_cb (GObject            *source_object,
 
         /* show hotspot tab */
         nm_device_wifi_refresh_ui (user_data);
-        show_hotspot_ui (user_data);
 }
 
 static void
@@ -1018,7 +1020,6 @@ activate_new_cb (GObject            *source_object,
 
         /* show hotspot tab */
         nm_device_wifi_refresh_ui (user_data);
-        show_hotspot_ui (user_data);
 }
 
 static NMConnection *
@@ -1307,7 +1308,6 @@ stop_shared_connection (NetDeviceWifi *device_wifi)
         }
 
         nm_device_wifi_refresh_ui (device_wifi);
-        show_wifi_list (device_wifi);
 }
 
 static void
@@ -1366,14 +1366,16 @@ client_connection_added_cb (NMClient           *client,
 {
         gboolean is_hotspot;
 
-        populate_ap_list (device_wifi);
-
         /* go straight to the hotspot UI */
         is_hotspot = device_is_hotspot (device_wifi);
         if (is_hotspot) {
                 nm_device_wifi_refresh_hotspot (device_wifi);
                 show_hotspot_ui (device_wifi);
+                return;
         }
+
+        populate_ap_list (device_wifi);
+        show_wifi_list (device_wifi);
 }
 
 static void
