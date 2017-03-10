@@ -16,15 +16,15 @@
 # Dmitry Shachnev <mitya57@ubuntu.com>, 2012.
 # Mihail Gurin <mikegurin@yandex.ru>, 2015.
 # Yuri Myasoedov <ymyasoedov@yandex.ru>, 2012, 2014, 2015.
-# Stas Solovey <whats_up@tut.by>, 2012, 2013, 2014, 2015, 2016.
+# Stas Solovey <whats_up@tut.by>, 2012, 2013, 2014, 2015, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-12-29 22:20+0000\n"
-"PO-Revision-Date: 2016-12-30 01:41+0300\n"
+"POT-Creation-Date: 2017-03-08 13:36+0000\n"
+"PO-Revision-Date: 2017-03-10 12:20+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -120,17 +120,17 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/color/cc-color-panel.c:225 ../panels/color/cc-color-panel.c:963
 #: ../panels/color/color-calibrate.ui.h:2 ../panels/color/color.ui.h:30
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/display/cc-display-panel.c:1571
-#: ../panels/display/cc-display-panel.c:2217
+#: ../panels/display/cc-display-panel.c:1580
+#: ../panels/display/cc-display-panel.c:2226
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
 #: ../panels/network/net-device-wifi.c:1298
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
-#: ../panels/printers/cc-printers-panel.c:2091
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/privacy/cc-privacy-panel.c:1048
+#: ../panels/printers/pp-details-dialog.c:319
+#: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
 #: ../panels/sharing/cc-sharing-panel.c:375
@@ -139,9 +139,9 @@ msgstr "Можно добавить изображения в папку %s и �
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 #: ../panels/user-accounts/um-fingerprint-dialog.c:264
 #: ../panels/user-accounts/um-photo-dialog.c:94
-#: ../panels/user-accounts/um-photo-dialog.c:217
-#: ../panels/user-accounts/um-user-panel.c:704
-#: ../panels/user-accounts/um-user-panel.c:722
+#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-user-panel.c:644
+#: ../panels/user-accounts/um-user-panel.c:662
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -234,7 +234,6 @@ msgstr "общий;доступ;bluetooth;obex;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:361
-#| msgid "Place your calibration device over the square and press 'Start'"
 msgid "Place your calibration device over the square and press “Start”"
 msgstr "Поместите устройство калибровки на квадрат и нажмите «Запустить»"
 
@@ -242,9 +241,6 @@ msgstr "Поместите устройство калибровки на ква
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
 #: ../panels/color/cc-color-calibrate.c:367
-#| msgid ""
-#| "Move your calibration device to the calibrate position and press "
-#| "'Continue'"
 msgid ""
 "Move your calibration device to the calibrate position and press “Continue”"
 msgstr ""
@@ -254,8 +250,6 @@ msgstr ""
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
 #: ../panels/color/cc-color-calibrate.c:373
-#| msgid ""
-#| "Move your calibration device to the surface position and press 'Continue'"
 msgid ""
 "Move your calibration device to the surface position and press “Continue”"
 msgstr ""
@@ -709,7 +703,6 @@ msgid "Summary"
 msgstr "Краткая информация"
 
 #: ../panels/color/color.ui.h:28
-#| msgid "Add profile"
 msgid "Add Profile"
 msgstr "Добавить профиль"
 
@@ -1117,22 +1110,23 @@ msgstr "Изменить системное время и дату"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Для изменения времени или даты требуется аутентификация."
 
-#: ../panels/display/cc-display-panel.c:583
+#: ../panels/display/cc-display-panel.c:592
 msgid "Lid Closed"
 msgstr "Крышка ноутбука закрыта"
 
 #. translators: "Mirrored" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:586
+#: ../panels/display/cc-display-panel.c:595
 msgid "Mirrored"
 msgstr "Дублируемый"
 
-#: ../panels/display/cc-display-panel.c:588
-#: ../panels/display/cc-display-panel.c:2440
+#: ../panels/display/cc-display-panel.c:597
+#: ../panels/display/cc-display-panel.c:2449
 msgid "Primary"
 msgstr "Основной"
 
-#: ../panels/display/cc-display-panel.c:590
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/display/cc-display-panel.c:599
+#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1145,118 +1139,199 @@ msgstr "Основной"
 msgid "Off"
 msgstr "Выключено"
 
-#: ../panels/display/cc-display-panel.c:593
+#: ../panels/display/cc-display-panel.c:602
 msgid "Secondary"
 msgstr "Дополнительный"
 
 #. Title of displays dialog when multiple monitors are present.
-#: ../panels/display/cc-display-panel.c:1568
+#: ../panels/display/cc-display-panel.c:1577
 msgid "Arrange Combined Displays"
 msgstr "Упорядочить сгруппированные экраны"
 
-#: ../panels/display/cc-display-panel.c:1572
-#: ../panels/display/cc-display-panel.c:2218
+#: ../panels/display/cc-display-panel.c:1581
+#: ../panels/display/cc-display-panel.c:2227
 #: ../panels/network/connection-editor/connection-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Apply"
 msgstr "_Применить"
 
-#: ../panels/display/cc-display-panel.c:1596
+#: ../panels/display/cc-display-panel.c:1605
 msgid "Drag displays to rearrange them"
 msgstr "Перетащите экраны, чтобы изменить их порядок"
 
 #. translators: example string is "60 Hz (NTSC)"
 #. * NTSC is https://en.wikipedia.org/wiki/NTSC
-#: ../panels/display/cc-display-panel.c:1803
+#: ../panels/display/cc-display-panel.c:1812
 #, c-format
 msgid "%d Hz (NTSC)"
 msgstr "%d Гц (NTSC)"
 
 #. translators: example string is "60 Hz"
-#: ../panels/display/cc-display-panel.c:1809
+#: ../panels/display/cc-display-panel.c:1818
 #, c-format
 msgid "%d Hz"
 msgstr "%d Гц"
 
-#: ../panels/display/cc-display-panel.c:2270
+#: ../panels/display/cc-display-panel.c:2279
 msgid "Rotate counterclockwise by 90°"
 msgstr "Повернуть против часовой стрелки на 90°"
 
-#: ../panels/display/cc-display-panel.c:2288
+#: ../panels/display/cc-display-panel.c:2297
 msgid "Rotate by 180°"
 msgstr "Повернуть на 180°"
 
-#: ../panels/display/cc-display-panel.c:2306
+#: ../panels/display/cc-display-panel.c:2315
 msgid "Rotate clockwise by 90°"
 msgstr "Повернуть по часовой стрелке на 90°"
 
-#: ../panels/display/cc-display-panel.c:2327
+#: ../panels/display/cc-display-panel.c:2336
 msgid "Size"
 msgstr "Размер"
 
 #. aspect ratio
-#: ../panels/display/cc-display-panel.c:2342
+#: ../panels/display/cc-display-panel.c:2351
 msgid "Aspect Ratio"
 msgstr "Соотношение сторон"
 
-#: ../panels/display/cc-display-panel.c:2365
+#: ../panels/display/cc-display-panel.c:2374
 #: ../panels/printers/pp-options-dialog.c:85
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: ../panels/display/cc-display-panel.c:2385
+#: ../panels/display/cc-display-panel.c:2394
 msgid "Adjust for TV"
 msgstr "Отрегулировать для ТВ"
 
-#: ../panels/display/cc-display-panel.c:2409
+#: ../panels/display/cc-display-panel.c:2418
 msgid "Refresh Rate"
 msgstr "Частота обновления"
 
-#: ../panels/display/cc-display-panel.c:2441
+#: ../panels/display/cc-display-panel.c:2450
 msgid "Show the top bar and Activities Overview on this display"
 msgstr "Показывать верхнюю панель и режим обзора на этом дисплее"
 
-#: ../panels/display/cc-display-panel.c:2447
+#: ../panels/display/cc-display-panel.c:2456
 msgid "Secondary Display"
 msgstr "Дополнительный экран"
 
-#: ../panels/display/cc-display-panel.c:2448
+#: ../panels/display/cc-display-panel.c:2457
 msgid "Join this display with another to create an extra workspace"
 msgstr "Объединить этот дисплей с другим для увеличения рабочего пространства"
 
-#: ../panels/display/cc-display-panel.c:2455
+#: ../panels/display/cc-display-panel.c:2464
 msgid "Presentation"
 msgstr "Презентация"
 
-#: ../panels/display/cc-display-panel.c:2456
+#: ../panels/display/cc-display-panel.c:2465
 msgid "Show slideshows and media only"
 msgstr "Показывать только слайд-шоу и мультимедиа"
 
 #. translators: "Mirror" describes when both displays show the same view
-#: ../panels/display/cc-display-panel.c:2461
+#: ../panels/display/cc-display-panel.c:2470
 msgid "Mirror"
 msgstr "Зеркало"
 
-#: ../panels/display/cc-display-panel.c:2462
+#: ../panels/display/cc-display-panel.c:2471
 msgid "Show your existing view on both displays"
 msgstr "Показывать текущий вид на обоих дисплеях"
 
-#: ../panels/display/cc-display-panel.c:2468
+#: ../panels/display/cc-display-panel.c:2477
 msgid "Turn Off"
 msgstr "Выключить"
 
-#: ../panels/display/cc-display-panel.c:2469
-#| msgid "Don't use this display"
+#: ../panels/display/cc-display-panel.c:2478
 msgid "Don’t use this display"
 msgstr "Не использовать этот монитор"
 
-#: ../panels/display/cc-display-panel.c:2780
+#. TRANSLATORS: the state of the night light setting
+#: ../panels/display/cc-display-panel.c:2786
+#: ../panels/notifications/cc-notifications-panel.c:293
+#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
+#: ../panels/privacy/cc-privacy-panel.c:190
+#: ../panels/privacy/cc-privacy-panel.c:257
+#: ../panels/universal-access/cc-ua-panel.c:269
+#: ../panels/universal-access/cc-ua-panel.c:590
+#: ../panels/universal-access/cc-ua-panel.c:603
+#: ../panels/universal-access/cc-ua-panel.c:615
+#: ../panels/universal-access/cc-ua-panel.c:786
+msgid "On"
+msgstr "Включено"
+
+#: ../panels/display/cc-display-panel.c:2826
 msgid "Could not get screen information"
 msgstr "Не удалось получить информацию об экране"
 
-#: ../panels/display/cc-display-panel.c:2811
+#: ../panels/display/cc-display-panel.c:2857
 msgid "_Arrange Combined Displays"
 msgstr "_Расположить объединённые дисплеи"
+
+#: ../panels/display/cc-display-panel.c:2878
+#| msgid "Right Ring"
+msgid "_Night Light"
+msgstr "_Ночная подсветка"
+
+#. This cancels the redshift inhibit.
+#: ../panels/display/display.ui.h:2
+#| msgid "Restart Now"
+msgid "Restart Filter"
+msgstr "Перезапустить фильтр"
+
+#. Inhibit the redshift functionality until the next day starts
+#: ../panels/display/display.ui.h:4
+msgid "Temporarily Disabled Until Tomorrow"
+msgstr "Временно отключено до завтра"
+
+#: ../panels/display/display.ui.h:5
+msgid ""
+"Night light makes the screen color warmer. This can help to prevent eye "
+"strain and sleeplessness."
+msgstr ""
+"Ночная подсветка делает цвет экрана теплее. Это может помочь предотвратить "
+"напряжение глаз и бессонницу."
+
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
+#: ../panels/display/display.ui.h:7
+#| msgid "Right Ring"
+msgid "Night Light"
+msgstr "Ночная подсветка"
+
+#: ../panels/display/display.ui.h:8
+msgid "Schedule"
+msgstr "График"
+
+#: ../panels/display/display.ui.h:9
+msgid "Sunset to Sunrise"
+msgstr "От заката до восхода солнца"
+
+#: ../panels/display/display.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:630
+#: ../panels/network/connection-editor/ce-page-ip6.c:592
+#: ../panels/network/network-wifi.ui.h:26
+#: ../panels/privacy/cc-privacy-panel.c:217
+msgid "Manual"
+msgstr "Вручную"
+
+#: ../panels/display/display.ui.h:11
+msgid "From"
+msgstr "От"
+
+#: ../panels/display/display.ui.h:12
+msgid ":"
+msgstr ":"
+
+#. This is the short form for the time period in the morning
+#: ../panels/display/display.ui.h:14
+msgid "AM"
+msgstr "ДП (AM)"
+
+#. This is the short form for the time period in the afternoon
+#: ../panels/display/display.ui.h:16
+msgid "PM"
+msgstr "ПП (PM)"
+
+#: ../panels/display/display.ui.h:17
+msgid "To"
+msgstr "До"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1269,67 +1344,79 @@ msgstr "Выберите, как использовать подключённы
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
-msgstr "Панель;Проектор;xrandr;Экран;Разрешение;Обновить;Монитор;"
+#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
+msgstr ""
+"Панель;Проектор;xrandr;Экран;Разрешение;Обновить;Монитор;Ночь;Подсветка;"
+"Синий;смещение;цвет;закат;рассвет;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:377 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../panels/info/cc-info-panel.c:510
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture and the build id, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
+#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
+#: ../panels/info/cc-info-panel.c:517
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
 msgstr "%s %d-бит (ID сборки: %s)"
 
-#: ../panels/info/cc-info-panel.c:512
+#: ../panels/info/cc-info-panel.c:519
 #, c-format
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-бит (ID сборки: %s)"
 
-#: ../panels/info/cc-info-panel.c:520
+#. translators: This is the name of the OS, followed by the type
+#. * of architecture, for example:
+#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
+#: ../panels/info/cc-info-panel.c:527
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-бит"
 
-#: ../panels/info/cc-info-panel.c:522
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%d-bit"
 msgstr "%d-бит"
 
-#: ../panels/info/cc-info-panel.c:1168
+#: ../panels/info/cc-info-panel.c:1175
 msgid "Ask what to do"
 msgstr "Спрашивать, что делать"
 
-#: ../panels/info/cc-info-panel.c:1172
+#: ../panels/info/cc-info-panel.c:1179
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
-#: ../panels/info/cc-info-panel.c:1176
+#: ../panels/info/cc-info-panel.c:1183
 msgid "Open folder"
 msgstr "Открыть папку"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1274
 msgid "Other Media"
 msgstr "Другой носитель"
 
-#: ../panels/info/cc-info-panel.c:1298
+#: ../panels/info/cc-info-panel.c:1305
 msgid "Select an application for audio CDs"
 msgstr "Выберите приложение для звуковых компакт-дисков"
 
-#: ../panels/info/cc-info-panel.c:1299
+#: ../panels/info/cc-info-panel.c:1306
 msgid "Select an application for video DVDs"
 msgstr "Выберите приложения для видео DVD"
 
-#: ../panels/info/cc-info-panel.c:1300
+#: ../panels/info/cc-info-panel.c:1307
 msgid "Select an application to run when a music player is connected"
 msgstr "Выберите приложение, запускаемое при подключении музыкального плеера"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1308
 msgid "Select an application to run when a camera is connected"
 msgstr "Выберите приложение, запускаемое при подключении камеры"
 
-#: ../panels/info/cc-info-panel.c:1302
+#: ../panels/info/cc-info-panel.c:1309
 msgid "Select an application for software CDs"
 msgstr "Выберите приложение для компакт-дисков с программами"
 
@@ -1338,71 +1425,71 @@ msgstr "Выберите приложение для компакт-дисков
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1314
+#: ../panels/info/cc-info-panel.c:1321
 msgid "audio DVD"
 msgstr "звуковой DVD"
 
-#: ../panels/info/cc-info-panel.c:1315
+#: ../panels/info/cc-info-panel.c:1322
 msgid "blank Blu-ray disc"
 msgstr "чистый диск Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1316
+#: ../panels/info/cc-info-panel.c:1323
 msgid "blank CD disc"
 msgstr "чистый компакт-диск"
 
-#: ../panels/info/cc-info-panel.c:1317
+#: ../panels/info/cc-info-panel.c:1324
 msgid "blank DVD disc"
 msgstr "чистый диск DVD"
 
-#: ../panels/info/cc-info-panel.c:1318
+#: ../panels/info/cc-info-panel.c:1325
 msgid "blank HD DVD disc"
 msgstr "чистый диск HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1319
+#: ../panels/info/cc-info-panel.c:1326
 msgid "Blu-ray video disc"
 msgstr "видеодиск Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1320
+#: ../panels/info/cc-info-panel.c:1327
 msgid "e-book reader"
 msgstr "устройство чтения электронных книг"
 
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:1328
 msgid "HD DVD video disc"
 msgstr "видеодиск HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Picture CD"
 msgstr "диск Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Super Video CD"
 msgstr "компакт-диск Super Video"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Video CD"
 msgstr "видеодиск VCD"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:1332
 msgid "Windows software"
 msgstr "приложение Windows"
 
-#: ../panels/info/cc-info-panel.c:1448
+#: ../panels/info/cc-info-panel.c:1455
 msgid "Section"
 msgstr "Раздел"
 
-#: ../panels/info/cc-info-panel.c:1457 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Обзор"
 
-#: ../panels/info/cc-info-panel.c:1463 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
 msgid "Default Applications"
 msgstr "Приложения по умолчанию"
 
-#: ../panels/info/cc-info-panel.c:1468 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
 msgid "Removable Media"
 msgstr "Съёмный носитель"
 
-#: ../panels/info/cc-info-panel.c:1493
+#: ../panels/info/cc-info-panel.c:1500
 #, c-format
 msgid "Version %s"
 msgstr "Версия %s"
@@ -1594,7 +1681,7 @@ msgid "Launch help browser"
 msgstr "Запустить справочный браузер"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3 ../shell/alt/cc-window.c:277
-#: ../shell/alt/cc-window.c:832 ../shell/cc-window.c:1588
+#: ../shell/alt/cc-window.c:830 ../shell/cc-window.c:1590
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/window.ui.h:1
 msgid "Settings"
 msgstr "Параметры"
@@ -1744,11 +1831,36 @@ msgstr "Композиционная клавиша"
 msgid "Modifiers-only switch to next source"
 msgstr "Клавиша-модификатор переключает источник ввода"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:217
+#: ../panels/keyboard/cc-keyboard-panel.c:181
+#| msgid "Set Shortcut"
+msgid "Reset All Shortcuts?"
+msgstr "Сбросить все комбинации клавиш?"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:184
+msgid ""
+"Resetting the shortcuts may affect your custom shortcuts. This cannot be "
+"undone."
+msgstr ""
+"Сброс комбинаций клавиш может также повлиять на пользовательские комбинации "
+"клавиш. Это действие нельзя отменить."
+
+#: ../panels/keyboard/cc-keyboard-panel.c:188
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/printers/authentication-dialog.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:189
+#| msgid "Reset"
+msgid "Reset All"
+msgstr "Сбросить все"
+
+#: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
 msgstr "Сбросить комбинацию на значение по умолчанию"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:357
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1757,21 +1869,21 @@ msgstr ""
 "%s уже используется для <b>%s</b>. Если применить, комбинация для %s будет "
 "отключена"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Custom Shortcut"
 msgstr "Установить пользовательскую комбинацию клавиш"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:514
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
 msgid "Set Shortcut"
 msgstr "Установить комбинацию клавиш"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:523
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Введите новую комбинацию для изменения <b>%s</b>."
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:945
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:1036
 msgid "Add Custom Shortcut"
 msgstr "Добавить пользовательскую комбинацию клавиш"
 
@@ -1779,7 +1891,7 @@ msgstr "Добавить пользовательскую комбинацию �
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Key­board"
-msgstr "Клавиа­тура"
+msgstr "Клавиатура"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:3
 msgid "View and change keyboard shortcuts and set your typing preferences"
@@ -1791,10 +1903,24 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "Комбинация;Повтор;Мигание;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "No keyboard shortcut found"
-msgstr "Комбинации клавиш не найдена"
+#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
+msgid "Keyboard Shortcuts"
+msgstr "Комбинации клавиш"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2 ../shell/panel-list.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Reset All…"
+msgstr "Сбросить все…"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#| msgid "Reset the shortcut to its default value"
+msgid "Reset all shortcuts to their default keybindings"
+msgstr "Сбросить все комбинации клавиш на значения по умолчанию"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+msgid "No keyboard shortcut found"
+msgstr "Комбинация клавиш не найдена"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5 ../shell/panel-list.ui.h:4
 msgid "Try a different search"
 msgstr "Попробуйте другой поисковый запрос"
 
@@ -1803,6 +1929,7 @@ msgid "Press Esc to cancel."
 msgstr "Нажмите клавишу Esc для отмены."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
+#: ../panels/printers/details-dialog.ui.h:1
 #: ../panels/sound/gvc-mixer-dialog.c:1493
 #: ../panels/sound/gvc-sound-theme-chooser.c:564
 msgid "Name"
@@ -1814,48 +1941,37 @@ msgstr "Команда"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:5
 msgid "Shortcut"
-msgstr "Комбинация"
+msgstr "Комбинация клавиш"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:6
-msgid "Edit"
-msgstr "Правка"
+#| msgid "Set Shortcut"
+msgid "Set Shortcut…"
+msgstr "Установить комбинацию клавиш…"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:7
-#| msgid "Set Shortcut"
-msgctxt "button"
-msgid "Set Shortcut"
-msgstr "Установить комбинацию"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:8
 #: ../panels/network/network-wifi.ui.h:20
 msgid "None"
 msgstr "Нет"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:9
+#: ../panels/keyboard/shortcut-editor.ui.h:8
 msgid "Remove"
 msgstr "Удалить"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Введите новую комбинацию"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
-#: ../panels/printers/authentication-dialog.ui.h:2
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-msgid "Cancel"
-msgstr "Отменить"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:12
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
 #: ../panels/network/connection-editor/ce-page-ip6.c:277
 msgid "Add"
 msgstr "Добавить"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:13
+#: ../panels/keyboard/shortcut-editor.ui.h:12
 msgid "Replace"
 msgstr "Заменить"
 
-#: ../panels/keyboard/shortcut-editor.ui.h:14
+#: ../panels/keyboard/shortcut-editor.ui.h:13
 msgid "Set"
 msgstr "Установить"
 
@@ -2011,7 +2127,7 @@ msgstr "_Безопасность 802.1x"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
 #: ../panels/network/connection-editor/security-page.ui.h:3
-#: ../panels/printers/printers.ui.h:14 ../panels/wacom/wacom-stylus-page.ui.h:8
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "страница 1"
 
@@ -2030,7 +2146,6 @@ msgstr "Внутренняя _аутентификация"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
 #: ../panels/network/connection-editor/security-page.ui.h:6
-#: ../panels/printers/printers.ui.h:16
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "страница 2"
@@ -2155,6 +2270,7 @@ msgstr "Идентификация"
 #: ../panels/network/connection-editor/ce-page-ip4.c:461
 #: ../panels/network/connection-editor/ce-page-ip6.c:180
 #: ../panels/network/connection-editor/ce-page-ip6.c:427
+#: ../panels/printers/details-dialog.ui.h:3
 msgid "Address"
 msgstr "Адрес"
 
@@ -2202,13 +2318,6 @@ msgstr "Удалить маршрут"
 #: ../panels/network/network-wifi.ui.h:27
 msgid "Automatic (DHCP)"
 msgstr "Автоматический (DHCP)"
-
-#: ../panels/network/connection-editor/ce-page-ip4.c:630
-#: ../panels/network/connection-editor/ce-page-ip6.c:592
-#: ../panels/network/network-wifi.ui.h:26
-#: ../panels/privacy/cc-privacy-panel.c:217
-msgid "Manual"
-msgstr "Вручную"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:634
 #: ../panels/network/connection-editor/ce-page-ip6.c:596
@@ -2510,11 +2619,6 @@ msgstr "Не удалось импортировать соединение VPN"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:143
 #, c-format
-#| msgid ""
-#| "The file '%s' could not be read or does not contain recognized VPN "
-#| "connection information\n"
-#| "\n"
-#| "Error: %s."
 msgid ""
 "The file “%s” could not be read or does not contain recognized VPN "
 "connection information\n"
@@ -2531,15 +2635,14 @@ msgid "Select file to import"
 msgstr "Выберите файл для импортирования"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/cc-printers-panel.c:2092
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
-#: ../panels/user-accounts/um-photo-dialog.c:218
+#: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
 msgstr "_Открыть"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:230
 #, c-format
-#| msgid "A file named \"%s\" already exists."
 msgid "A file named “%s” already exists."
 msgstr "Файл с именем «%s» уже существует."
 
@@ -2558,10 +2661,6 @@ msgstr "Не удалось экспортировать соединение VP
 
 #: ../panels/network/connection-editor/vpn-helpers.c:272
 #, c-format
-#| msgid ""
-#| "The VPN connection '%s' could not be exported to %s.\n"
-#| "\n"
-#| "Error: %s."
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
 "\n"
@@ -2633,7 +2732,7 @@ msgstr "вчера"
 
 #: ../panels/network/net-device-ethernet.c:156
 #: ../panels/network/network-mobile.ui.h:3 ../panels/network/panel-common.c:647
-#: ../panels/network/panel-common.c:649 ../panels/printers/printers.ui.h:13
+#: ../panels/network/panel-common.c:649
 msgid "IP Address"
 msgstr "Адрес IP"
 
@@ -2851,6 +2950,7 @@ msgstr "Пароль группы"
 
 #: ../panels/network/network-vpn.ui.h:5
 #: ../panels/printers/authentication-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:13
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -2946,7 +3046,6 @@ msgid "Hardware"
 msgstr "Аппаратура"
 
 #: ../panels/network/network-wifi.ui.h:51
-#| msgid "Reset"
 msgctxt "tab"
 msgid "Reset"
 msgstr "Сбросить"
@@ -2997,6 +3096,7 @@ msgstr "Тип безопасности"
 
 #: ../panels/network/network-wifi.ui.h:63
 #: ../panels/printers/authentication-dialog.ui.h:5
+#: ../panels/printers/new-printer-dialog.ui.h:14
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
 msgid "Password"
 msgstr "Пароль"
@@ -3657,18 +3757,6 @@ msgstr ""
 msgid "_Type"
 msgstr "_Тип"
 
-#: ../panels/notifications/cc-notifications-panel.c:257
-#: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
-#: ../panels/privacy/cc-privacy-panel.c:190
-#: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-msgid "On"
-msgstr "Включено"
-
 #. This is the per application switch for message tray usage.
 #: ../panels/notifications/edit-dialog.ui.h:2
 msgctxt "notifications"
@@ -3682,30 +3770,42 @@ msgid "Sound _Alerts"
 msgstr "_Звуковые уведомления"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
+#| msgctxt "notifications"
+#| msgid "_Notifications"
 msgctxt "notifications"
-msgid "Notification _Banners"
-msgstr "В_сплывающие уведомления"
+msgid "Notification _Popups"
+msgstr "Всплывающие у_ведомления"
 
-#. Banners here refers to message tray notifications in the middle of the screen.
-#: ../panels/notifications/edit-dialog.ui.h:7
-msgctxt "notifications"
-msgid "Show Message _Content in Banners"
-msgstr "По_казывать подробности в всплывающих уведомлениях"
+#: ../panels/notifications/edit-dialog.ui.h:6
+msgid ""
+"Notifications will continue to appear in the notification list when popups "
+"are disabled."
+msgstr ""
+"При отключённых всплывающих уведомлениях, уведомления по-прежнему будут "
+"отображаться в списке уведомлений."
 
+#. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
+#| msgctxt "notifications"
+#| msgid "Show Message _Content in Banners"
+msgctxt "notifications"
+msgid "Show Message _Content in Popups"
+msgstr "По_казывать содержимое сообщения в всплывающих уведомлениях"
+
+#: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Уведомления на _экране блокировки"
 
-#: ../panels/notifications/edit-dialog.ui.h:9
+#: ../panels/notifications/edit-dialog.ui.h:10
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
-msgstr "Показывать _подробности уведомлений на заблокированном экране"
+msgstr "По_казывать содержимое сообщения на заблокированном экране"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
 msgid "No­ti­fi­ca­tions"
-msgstr "Уведомле­ния"
+msgstr "Уведомления"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:3
 msgid "Control which notifications are displayed and what they show"
@@ -3717,8 +3817,10 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Уведомления;Всплывающее;Сообщение;Лоток;Всплывающее;"
 
 #: ../panels/notifications/notifications.ui.h:1
-msgid "Notification _Banners"
-msgstr "Всп_лывающее уведомление"
+#| msgctxt "notifications"
+#| msgid "_Notifications"
+msgid "Notification _Popups"
+msgstr "Всплывающие у_ведомления"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -3730,69 +3832,34 @@ msgstr "Уведомления на экране _блокировки"
 msgid "Applications"
 msgstr "Приложения"
 
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:170
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Другое"
 
-#. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:291
-#: ../panels/online-accounts/online-accounts.ui.h:2
-msgid "Add Account"
-msgstr "Добавление учётной записи"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:328
-msgid "Mail"
-msgstr "Почта"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:334
-msgid "Calendar"
-msgstr "Календарь"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:340
-msgid "Contacts"
-msgstr "Контакты"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:346
-msgid "Chat"
-msgstr "Чат"
-
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:352
-msgid "Resources"
-msgstr "Ресурсы"
-
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:380
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
-#| msgid "My Account"
 msgid "%s Account"
 msgstr "Учётная запись %s"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:635
-msgid "Error creating account"
-msgstr "Ошибка при создании учётной записи"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:695
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
 msgid "Error removing account"
 msgstr "Ошибка при удалении учётной записи"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:727
-msgid "Are you sure you want to remove the account?"
-msgstr "Действительно удалить учётную запись?"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:729
-msgid "This will not remove the account on the server."
-msgstr "Это не приведёт к удалению учётной записи на сервере."
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:730
-msgid "_Remove"
-msgstr "_Удалить"
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
+#, c-format
+msgid "<b>%s</b> removed"
+msgstr "<b>%s</b> удалён"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
 msgid "On­line Accounts"
-msgstr "Сетевые учётные записи"
+msgstr "Сетевые ­учётные записи"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:3
 msgid "Connect to your online accounts and decide what to use them for"
@@ -3809,11 +3876,25 @@ msgstr ""
 "ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-msgid "No online accounts configured"
-msgstr "Нет ни одной настроенной сетевой учётной записи"
+msgid "Undo"
+msgstr "Отменить"
+
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Connect to your data in the cloud"
+msgstr "Подключение к данным в облаке"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Нет подключения к Интернету — подключитесь для настройки новой сетевой "
+"учётной записи"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
+#| msgid "Add an online account"
+msgid "Add an account"
+msgstr "Добавить учётную запись"
+
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Удалить учётную запись"
 
@@ -4193,193 +4274,50 @@ msgid "Authenticate"
 msgstr "Аутентификация"
 
 #: ../panels/printers/authentication-dialog.ui.h:6
+#: ../panels/printers/new-printer-dialog.ui.h:11
 msgid "Authentication Required"
 msgstr "Требуется аутентификация"
 
-#. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:698
-msgid "Low on toner"
-msgstr "Мало тонера"
-
-#. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:700
-msgid "Out of toner"
-msgstr "Тонер закончился"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:703
-msgid "Low on developer"
-msgstr "Мало проявителя"
-
-#. Translators: "Developer" is a chemical for photo development,
-#. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:706
-msgid "Out of developer"
-msgstr "Проявитель закончился"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:708
-msgid "Low on a marker supply"
-msgstr "Маркер скоро закончится"
-
-#. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:710
-msgid "Out of a marker supply"
-msgstr "Маркер закончился"
-
-#. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:712
-msgid "Open cover"
-msgstr "Открыта крышка"
-
-#. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:714
-msgid "Open door"
-msgstr "Открыта дверца"
-
-#. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:716
-msgid "Low on paper"
-msgstr "Мало бумаги"
-
-#. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:718
-msgid "Out of paper"
-msgstr "Бумага закончилась"
-
-#. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:720
-msgctxt "printer state"
-msgid "Offline"
-msgstr "Выключен"
-
-#. Translators: Someone has stopped the Printer
-#. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:722
-#: ../panels/printers/cc-printers-panel.c:912
-msgctxt "printer state"
-msgid "Stopped"
-msgstr "Остановлен"
-
-#. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:724
-msgid "Waste receptacle almost full"
-msgstr "Резервуар почти полон"
-
-#. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:726
-msgid "Waste receptacle full"
-msgstr "Резервуар заполнен"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:728
-msgid "The optical photo conductor is near end of life"
-msgstr "Фотобарабан скоро выйдет из строя"
-
-#. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:730
-msgid "The optical photo conductor is no longer functioning"
-msgstr "Фотобарабан перестал работать"
-
-#. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:839
-msgctxt "printer state"
-msgid "Configuring"
-msgstr "Настройка"
-
-#. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:898
-msgctxt "printer state"
-msgid "Ready"
-msgstr "Готов"
-
-#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/cc-printers-panel.c:903
-msgctxt "printer state"
-msgid "Does not accept jobs"
-msgstr "Не принимает задания"
-
-#. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:908
-msgctxt "printer state"
-msgid "Processing"
-msgstr "Обработка"
-
-#. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:1028
-msgid "Toner Level"
-msgstr "Уровень тонера"
-
-#. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:1031
-msgid "Ink Level"
-msgstr "Уровень чернил"
-
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:1034
-msgid "Supply Level"
-msgstr "Уровень ресурсов"
-
-#. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:1052
-msgctxt "printer state"
-msgid "Installing"
-msgstr "Установка"
-
-#. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1566
-#, c-format
-msgid "%u active"
-msgid_plural "%u active"
-msgstr[0] "%u активное"
-msgstr[1] "%u активных"
-msgstr[2] "%u активных"
-
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1907
+#: ../panels/printers/cc-printers-panel.c:713
 msgid "Failed to add new printer."
 msgstr "Не удалось добавить новый принтер."
 
-#: ../panels/printers/cc-printers-panel.c:2088
-msgid "Select PPD File"
-msgstr "Выберите файл PPD"
-
-#: ../panels/printers/cc-printers-panel.c:2097
-msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
-"PPD.GZ)"
-msgstr ""
-"Файлы PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
-"PPD.GZ)"
-
-#: ../panels/printers/cc-printers-panel.c:2404
-msgid "No suitable driver found"
-msgstr "Подходящий драйвер не найден"
-
-#: ../panels/printers/cc-printers-panel.c:2475
-msgid "Searching for preferred drivers…"
-msgstr "Поиск предпочтительных драйверов…"
-
-#: ../panels/printers/cc-printers-panel.c:2496
-msgid "Select from database…"
-msgstr "Выбрать из базы данных…"
-
-#: ../panels/printers/cc-printers-panel.c:2505
-msgid "Provide PPD File…"
-msgstr "Использовать файл PPD…"
-
-#. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2652
-#: ../panels/printers/cc-printers-panel.c:2675
-msgid "Test page"
-msgstr "Пробная страница"
-
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:3133
+#: ../panels/printers/cc-printers-panel.c:959
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не удалось загрузить интерфейс пользователя: %s"
+
+#: ../panels/printers/details-dialog.ui.h:2
+#: ../panels/printers/printer-entry.ui.h:6
+msgid "Location"
+msgstr "Местоположение"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/details-dialog.ui.h:4
+#: ../panels/printers/pp-ppd-selection-dialog.c:250
+msgid "Driver"
+msgstr "Драйвер"
+
+#: ../panels/printers/details-dialog.ui.h:5
+msgid "Searching for preferred drivers…"
+msgstr "Поиск предпочтительных драйверов…"
+
+#: ../panels/printers/details-dialog.ui.h:6
+#| msgid "Searching for Printers"
+msgid "Search for Drivers"
+msgstr "Поиск драйверов"
+
+#: ../panels/printers/details-dialog.ui.h:7
+#| msgid "Select from database…"
+msgid "Select from Database…"
+msgstr "Выбрать из базы данных…"
+
+#: ../panels/printers/details-dialog.ui.h:8
+#| msgid "Provide PPD File…"
+msgid "Install PPD File…"
+msgstr "Использовать файл PPD…"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:2
@@ -4407,18 +4345,18 @@ msgstr "Нет активных заданий печати"
 
 #. Translators: This is the title presented at top of the dialog.
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/printers/printers.ui.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:384
+#: ../panels/printers/pp-new-printer-dialog.c:456
 msgid "Add Printer"
 msgstr "Добавить принтер"
 
-#. Translators: This button opens authentication dialog for selected server.
+#. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
 msgstr "_Разблокировать"
 
 #. Translators: No printers were detected
 #: ../panels/printers/new-printer-dialog.ui.h:8
-#| msgid "No Pictures Found"
 msgid "No Printers Found"
 msgstr "Принтеры не найдены"
 
@@ -4427,9 +4365,39 @@ msgstr "Принтеры не найдены"
 msgid "Enter a network address or search for a printer"
 msgstr "Введите сетевой адрес или найдите принтер"
 
+#: ../panels/printers/new-printer-dialog.ui.h:12
+#| msgid "Enter your username and password to view printers available on %s."
+msgid "Enter username and password to view printers on Print Server."
+msgstr ""
+"Введите имя пользователя и пароль для просмотра принтеров на сервере печати."
+
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
 msgstr "Загрузка параметров…"
+
+#. Translators: This is the title of the dialog. %s is the printer name.
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:415
+#, c-format
+#| msgid "Details"
+msgid "%s Details"
+msgstr "Подробности %s"
+
+#: ../panels/printers/pp-details-dialog.c:172
+msgid "No suitable driver found"
+msgstr "Подходящий драйвер не найден"
+
+#: ../panels/printers/pp-details-dialog.c:316
+msgid "Select PPD File"
+msgstr "Выберите файл PPD"
+
+#: ../panels/printers/pp-details-dialog.c:325
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr ""
+"Файлы PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid "Select Printer Driver"
@@ -4441,7 +4409,6 @@ msgid "Select"
 msgstr "Выбрать"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
-#| msgid "Loading drivers database..."
 msgid "Loading drivers database…"
 msgstr "Загрузка базы данных драйверов…"
 
@@ -4494,95 +4461,111 @@ msgid "Reverse portrait"
 msgstr "Перевёрнутая портретная"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "Ожидание"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "Приостановлено"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "Выполняется"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Остановлено"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Отменено"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Прервано"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Выполнено"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
-#| msgctxt "Printer jobs dialog title"
-#| msgid "%s - Active Jobs"
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "Текущие задания — %s"
 
-#: ../panels/printers/pp-new-printer-dialog.c:733
-#| msgid "Not searching for networks"
+#: ../panels/printers/pp-new-printer-dialog.c:402
+#| msgid "Select Printer Driver"
+msgid "Unlock Print Server"
+msgstr "Разблокировать сервер печати"
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:406
+#, c-format
+#| msgid "_Unlock"
+msgid "Unlock %s."
+msgstr "Разблокировать %s."
+
+#. Translators: Samba server needs authentication of the user to show list of its printers.
+#: ../panels/printers/pp-new-printer-dialog.c:411
+#, c-format
+#| msgid "Enter your username and password to view printers available on %s."
+msgid "Enter username and password to view printers on %s."
+msgstr "Введите имя пользователя и пароль для просмотра принтеров на %s."
+
+#: ../panels/printers/pp-new-printer-dialog.c:876
 msgid "Searching for Printers"
 msgstr "Поиск принтеров"
 
 #. Translators: The found device is a printer connected via USB
-#: ../panels/printers/pp-new-printer-dialog.c:1657
+#: ../panels/printers/pp-new-printer-dialog.c:1799
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: ../panels/printers/pp-new-printer-dialog.c:1662
+#: ../panels/printers/pp-new-printer-dialog.c:1804
 msgid "Serial Port"
 msgstr "Последовательный порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: ../panels/printers/pp-new-printer-dialog.c:1669
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Parallel Port"
 msgstr "Параллельный порт"
 
 #. Translators: The found device is a printer connected via Bluetooth
-#: ../panels/printers/pp-new-printer-dialog.c:1674
+#: ../panels/printers/pp-new-printer-dialog.c:1816
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: ../panels/printers/pp-new-printer-dialog.c:1711
+#: ../panels/printers/pp-new-printer-dialog.c:1853
 #, c-format
 msgid "Location: %s"
 msgstr "Расположение: %s"
 
 #. Translators: Network address of found printer
-#: ../panels/printers/pp-new-printer-dialog.c:1716
+#: ../panels/printers/pp-new-printer-dialog.c:1858
 #, c-format
 msgid "Address: %s"
 msgstr "Адрес: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: ../panels/printers/pp-new-printer-dialog.c:1745
+#: ../panels/printers/pp-new-printer-dialog.c:1887
 msgid "Server requires authentication"
 msgstr "Сервер требует аутентификацию"
 
@@ -4710,87 +4693,180 @@ msgstr "Без предварительной фильтрации"
 msgid "Manufacturer"
 msgstr "Производитель"
 
-#. Translators: Name of column showing printer drivers
-#: ../panels/printers/pp-ppd-selection-dialog.c:250
-msgid "Driver"
-msgstr "Драйвер"
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:427
+#| msgid "Active Jobs"
+msgid "No Active Jobs"
+msgstr "Нет активных заданий"
 
-#. Translators: Samba server needs authentication of the user to show list of its printers.
-#: ../panels/printers/pp-samba.c:227
+#. Translators: This is the label of the button that opens the Jobs Dialog.
+#: ../panels/printers/pp-printer-entry.c:432
 #, c-format
-msgid "Enter your username and password to view printers available on %s."
-msgstr ""
-"Для просмотра принтеров, доступных на %s, введите имя пользователя и пароль."
+msgid "%u Job"
+msgid_plural "%u Jobs"
+msgstr[0] "%u задание"
+msgstr[1] "%u задания"
+msgstr[2] "%u заданий"
 
-#: ../panels/printers/printers.ui.h:2
+#. Translators: The printer is low on toner
+#: ../panels/printers/pp-printer-entry.c:560
+msgid "Low on toner"
+msgstr "Мало тонера"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/pp-printer-entry.c:562
+msgid "Out of toner"
+msgstr "Тонер закончился"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:565
+msgid "Low on developer"
+msgstr "Мало проявителя"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/pp-printer-entry.c:568
+msgid "Out of developer"
+msgstr "Проявитель закончился"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:570
+msgid "Low on a marker supply"
+msgstr "Маркер скоро закончится"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/pp-printer-entry.c:572
+msgid "Out of a marker supply"
+msgstr "Маркер закончился"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/pp-printer-entry.c:574
+msgid "Open cover"
+msgstr "Открыта крышка"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/pp-printer-entry.c:576
+msgid "Open door"
+msgstr "Открыта дверца"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/pp-printer-entry.c:578
+msgid "Low on paper"
+msgstr "Мало бумаги"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/pp-printer-entry.c:580
+msgid "Out of paper"
+msgstr "Бумага закончилась"
+
+#. Translators: The printer is offline
+#: ../panels/printers/pp-printer-entry.c:582
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Выключен"
+
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/pp-printer-entry.c:584
+#: ../panels/printers/pp-printer-entry.c:714
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Остановлен"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/pp-printer-entry.c:586
+msgid "Waste receptacle almost full"
+msgstr "Резервуар почти полон"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/pp-printer-entry.c:588
+msgid "Waste receptacle full"
+msgstr "Резервуар заполнен"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:590
+msgid "The optical photo conductor is near end of life"
+msgstr "Фотобарабан скоро выйдет из строя"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/pp-printer-entry.c:592
+msgid "The optical photo conductor is no longer functioning"
+msgstr "Фотобарабан перестал работать"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/pp-printer-entry.c:700
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Готов"
+
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/pp-printer-entry.c:705
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "Не принимает задания"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/pp-printer-entry.c:710
+msgctxt "printer state"
+msgid "Processing"
+msgstr "Обработка"
+
+#: ../panels/printers/printer-entry.ui.h:1
+#| msgid "Login Options"
+msgid "Printing Options"
+msgstr "Параметры печати"
+
+#: ../panels/printers/printer-entry.ui.h:2
+#| msgid "Printer Default"
+msgid "Printer Details"
+msgstr "Сведения о принтере"
+
+#: ../panels/printers/printer-entry.ui.h:3
+#| msgid "Printer Default"
+msgid "Use Printer by Default"
+msgstr "Использовать как принтер по умолчанию"
+
+#: ../panels/printers/printer-entry.ui.h:4
 msgid "Remove Printer"
 msgstr "Удалить принтер"
 
-#. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:4
-msgid "Supply"
-msgstr "Ресурс"
-
-#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:6
-msgid "Location"
-msgstr "Местоположение"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
-msgid "_Default printer"
-msgstr "_Принтер по умолчанию"
-
-#: ../panels/printers/printers.ui.h:9
-msgid "Jobs"
-msgstr "Задания"
-
-#. Translators: Opens a dialog containing printer
-#: ../panels/printers/printers.ui.h:11
-msgid "Show _Jobs"
-msgstr "Показать _задания"
-
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printer-entry.ui.h:5
 msgid "Model"
 msgstr "Модель"
 
-#: ../panels/printers/printers.ui.h:15
-msgid "label"
-msgstr "метка"
+#: ../panels/printers/printer-entry.ui.h:7
+msgid "Ink Level"
+msgstr "Уровень чернил"
 
-#: ../panels/printers/printers.ui.h:17
-msgid "Setting new driver…"
-msgstr "Установка нового драйвера…"
+#. Translators: This is the message which follows the printer error.
+#: ../panels/printers/printer-entry.ui.h:9
+msgid "Please restart when the problem is resolved."
+msgstr "Запустите снова когда проблема будет решена."
 
-#: ../panels/printers/printers.ui.h:18
-#: ../panels/wacom/wacom-stylus-page.ui.h:17
-msgid "page 3"
-msgstr "страница 3"
+#. Translators: This is the button which restarts the printer.
+#: ../panels/printers/printer-entry.ui.h:11
+#| msgid "Restart Now"
+msgid "Restart"
+msgstr "Перезапустить"
 
-#. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:20
-msgid "Print _Test Page"
-msgstr "Печать п_робной страницы"
+#. Translators: This button adds new printer.
+#: ../panels/printers/printers.ui.h:2
+msgid "Add…"
+msgstr "Добавить…"
 
-#. Translators: This button opens printer
-#: ../panels/printers/printers.ui.h:22 ../panels/region/region.ui.h:8
-msgid "_Options"
-msgstr "_Параметры"
-
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:3
 msgid "No printers"
 msgstr "Принтеров нет"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:25
-msgid "Add a Printer"
-msgstr "Добавить принтер"
+#: ../panels/printers/printers.ui.h:5
+#| msgid "Add a Printer"
+msgid "Add a Printer…"
+msgstr "Добавить принтер…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
-#| msgid ""
-#| "Sorry! The system printing service\n"
-#| "doesn't seem to be available."
+#: ../panels/printers/printers.ui.h:7
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -4824,44 +4900,44 @@ msgstr "Сервисы местоположения"
 msgid "Usage & History"
 msgstr "Статистика и история"
 
-#: ../panels/privacy/cc-privacy-panel.c:1067
+#: ../panels/privacy/cc-privacy-panel.c:1071
 msgid "Empty all items from Trash?"
 msgstr "Удалить все объекты из корзины?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1068
+#: ../panels/privacy/cc-privacy-panel.c:1072
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Все объекты корзины будут безвозвратно удалены."
 
-#: ../panels/privacy/cc-privacy-panel.c:1069 ../panels/privacy/privacy.ui.h:34
+#: ../panels/privacy/cc-privacy-panel.c:1073
 msgid "_Empty Trash"
 msgstr "_Очистить корзину"
 
-#: ../panels/privacy/cc-privacy-panel.c:1092
+#: ../panels/privacy/cc-privacy-panel.c:1096
 msgid "Delete all the temporary files?"
 msgstr "Удалить все временные файлы?"
 
-#: ../panels/privacy/cc-privacy-panel.c:1093
+#: ../panels/privacy/cc-privacy-panel.c:1097
 msgid "All the temporary files will be permanently deleted."
 msgstr "Все временные файлы будут безвозвратно удалены."
 
-#: ../panels/privacy/cc-privacy-panel.c:1094 ../panels/privacy/privacy.ui.h:35
+#: ../panels/privacy/cc-privacy-panel.c:1098
 msgid "_Purge Temporary Files"
 msgstr "_Удалить временные файлы"
 
-#: ../panels/privacy/cc-privacy-panel.c:1116 ../panels/privacy/privacy.ui.h:29
+#: ../panels/privacy/cc-privacy-panel.c:1120 ../panels/privacy/privacy.ui.h:29
 msgid "Purge Trash & Temporary Files"
 msgstr "Очистка корзины и временные файлы"
 
-#: ../panels/privacy/cc-privacy-panel.c:1156 ../panels/privacy/privacy.ui.h:36
+#: ../panels/privacy/cc-privacy-panel.c:1160 ../panels/privacy/privacy.ui.h:36
 msgid "Software Usage"
 msgstr "Использование ПО"
 
-#: ../panels/privacy/cc-privacy-panel.c:1197 ../panels/privacy/privacy.ui.h:46
+#: ../panels/privacy/cc-privacy-panel.c:1201 ../panels/privacy/privacy.ui.h:46
 msgid "Problem Reporting"
 msgstr "Сообщение об ошибках"
 
 #. translators: '%s' is the distributor's name, such as 'Fedora'
-#: ../panels/privacy/cc-privacy-panel.c:1211
+#: ../panels/privacy/cc-privacy-panel.c:1215
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -4870,7 +4946,7 @@ msgstr ""
 "Отправка сообщения о технических проблемах помогает нам улучшить %s. Отчеты "
 "отправляются анонимно и не содержат персональных данных."
 
-#: ../panels/privacy/cc-privacy-panel.c:1223 ../panels/privacy/privacy.ui.h:41
+#: ../panels/privacy/cc-privacy-panel.c:1227 ../panels/privacy/privacy.ui.h:41
 msgid "Privacy Policy"
 msgstr "Политика конфиденциальности"
 
@@ -4878,7 +4954,7 @@ msgstr "Политика конфиденциальности"
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:2
 msgid "Pri­va­cy"
-msgstr "Конфиденциаль-­ность"
+msgstr "Конфиденци-­альность"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:3
 msgid "Protect your personal information and control what others might see"
@@ -5000,6 +5076,16 @@ msgstr "Автоматически удалять временные _файлы
 msgid "Purge _After"
 msgstr "Очищать _через"
 
+#: ../panels/privacy/privacy.ui.h:34
+#| msgid "_Empty Trash"
+msgid "_Empty Trash…"
+msgstr "_Очистить корзину…"
+
+#: ../panels/privacy/privacy.ui.h:35
+#| msgid "_Purge Temporary Files"
+msgid "_Purge Temporary Files…"
+msgstr "_Удалить временные файлы…"
+
 #: ../panels/privacy/privacy.ui.h:37
 msgid ""
 "Sending us information about which software you use helps us provide you "
@@ -5117,7 +5203,6 @@ msgid "Add an Input Source"
 msgstr "Добавить источник ввода"
 
 #: ../panels/region/input-chooser.ui.h:4
-#| msgid "Input methods can't be used on the login screen"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Методы ввода нельзя использовать на экране входа в систему"
 
@@ -5132,10 +5217,6 @@ msgstr "Использовать _один источник для всех ок
 #: ../panels/region/input-options.ui.h:3
 msgid "Allow _different sources for each window"
 msgstr "Использовать _различные источники для каждого окна"
-
-#: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
-msgid "Keyboard Shortcuts"
-msgstr "Комбинации клавиш"
 
 #: ../panels/region/input-options.ui.h:5
 msgid "Switch to previous source"
@@ -5195,6 +5276,10 @@ msgstr "Великобритания"
 #: ../panels/region/region.ui.h:7
 msgid "Input Sources"
 msgstr "Источники ввода"
+
+#: ../panels/region/region.ui.h:8
+msgid "_Options"
+msgstr "_Параметры"
 
 #: ../panels/region/region.ui.h:9
 msgid "Add input source"
@@ -5684,7 +5769,7 @@ msgstr "Другой"
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Uni­ver­sal Access"
-msgstr "Универсальный доступ"
+msgstr "Универсальный ­доступ"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Make it easier to see, hear, type, point and click"
@@ -5694,9 +5779,6 @@ msgstr ""
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;"
-#| "size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
@@ -6389,6 +6471,11 @@ msgstr "Значок пользователя"
 msgid "Last Login"
 msgstr "Последний вход"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#| msgid "Remove User Account"
+msgid "Remove User…"
+msgstr "Удалить пользователя…"
+
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Управление учётными записями"
@@ -6585,32 +6672,29 @@ msgstr "Неизвестная ошибка"
 msgid "Should match the web address of your login provider."
 msgstr "Должно совпадать с веб-адресом провайдера вашей учётной записи."
 
-#: ../panels/user-accounts/um-account-dialog.c:228
+#: ../panels/user-accounts/um-account-dialog.c:229
 msgid "Failed to add account"
 msgstr "Не удалось добавить учётную запись"
 
-#: ../panels/user-accounts/um-account-dialog.c:448
+#: ../panels/user-accounts/um-account-dialog.c:463
 msgid "Passwords do not match."
 msgstr "Пароли не совпадают."
 
-#: ../panels/user-accounts/um-account-dialog.c:702
-#: ../panels/user-accounts/um-account-dialog.c:748
-#: ../panels/user-accounts/um-account-dialog.c:769
+#: ../panels/user-accounts/um-account-dialog.c:718
+#: ../panels/user-accounts/um-account-dialog.c:764
+#: ../panels/user-accounts/um-account-dialog.c:785
 msgid "Failed to register account"
 msgstr "Не удалось зарегистрировать учётную запись"
 
-#: ../panels/user-accounts/um-account-dialog.c:892
+#: ../panels/user-accounts/um-account-dialog.c:908
 msgid "No supported way to authenticate with this domain"
 msgstr "Нет поддерживаемого метода аутентификации в этом домене"
 
-#: ../panels/user-accounts/um-account-dialog.c:965
+#: ../panels/user-accounts/um-account-dialog.c:981
 msgid "Failed to join domain"
 msgstr "Не удалось подключить к домену"
 
-#: ../panels/user-accounts/um-account-dialog.c:1026
-#| msgid ""
-#| "That login name didn't work.\n"
-#| "Please try again."
+#: ../panels/user-accounts/um-account-dialog.c:1042
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6618,10 +6702,7 @@ msgstr ""
 "Неправильное имя пользователя.\n"
 "Попробуйте ещё раз."
 
-#: ../panels/user-accounts/um-account-dialog.c:1033
-#| msgid ""
-#| "That login password didn't work.\n"
-#| "Please try again."
+#: ../panels/user-accounts/um-account-dialog.c:1049
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6629,11 +6710,11 @@ msgstr ""
 "Неправильный пароль.\n"
 "Попробуйте ещё раз."
 
-#: ../panels/user-accounts/um-account-dialog.c:1041
+#: ../panels/user-accounts/um-account-dialog.c:1057
 msgid "Failed to log into domain"
 msgstr "Не удалось войти в домен"
 
-#: ../panels/user-accounts/um-account-dialog.c:1099
+#: ../panels/user-accounts/um-account-dialog.c:1115
 msgid "Unable find the domain. Maybe you misspelled it?"
 msgstr "Не удалось найти домен. Может быть, он написан с ошибкой?"
 
@@ -6690,7 +6771,6 @@ msgstr "Выполнено!"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:504
 #: ../panels/user-accounts/um-fingerprint-dialog.c:546
 #, c-format
-#| msgid "Could not access '%s' device"
 msgid "Could not access “%s” device"
 msgstr "Не удалось получить доступ к устройству «%s»"
 
@@ -6699,7 +6779,6 @@ msgstr "Не удалось получить доступ к устройств�
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
 #: ../panels/user-accounts/um-fingerprint-dialog.c:587
 #, c-format
-#| msgid "Could not start finger capture on '%s' device"
 msgid "Could not start finger capture on “%s” device"
 msgstr "Не удалось снять отпечаток с устройства «%s»"
 
@@ -6718,9 +6797,6 @@ msgstr "Для получения помощи свяжитесь с систе�
 #.
 #: ../panels/user-accounts/um-fingerprint-dialog.c:714
 #, c-format
-#| msgid ""
-#| "To enable fingerprint login, you need to save one of your fingerprints, "
-#| "using the '%s' device."
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the “%s” device."
@@ -6773,7 +6849,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: ../panels/user-accounts/um-history-dialog.c:177
-#: ../panels/user-accounts/um-user-panel.c:840
+#: ../panels/user-accounts/um-user-panel.c:776
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -6781,7 +6857,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: ../panels/user-accounts/um-history-dialog.c:180
-#: ../panels/user-accounts/um-user-panel.c:844
+#: ../panels/user-accounts/um-user-panel.c:780
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -6799,7 +6875,6 @@ msgstr "Сеанс начат"
 #. The %s is the user real name.
 #: ../panels/user-accounts/um-history-dialog.c:299
 #, c-format
-#| msgid "%s - Account Activity"
 msgid "%s — Account Activity"
 msgstr "%s — активность учётной записи"
 
@@ -6819,23 +6894,23 @@ msgstr "Не удалось изменить пароль"
 msgid "The passwords do not match."
 msgstr "Пароли не совпадают."
 
-#: ../panels/user-accounts/um-photo-dialog.c:214
+#: ../panels/user-accounts/um-photo-dialog.c:215
 msgid "Browse for more pictures"
 msgstr "Найти дополнительные изображения"
 
-#: ../panels/user-accounts/um-photo-dialog.c:448
+#: ../panels/user-accounts/um-photo-dialog.c:449
 msgid "Disable image"
 msgstr "Выключить изображение"
 
-#: ../panels/user-accounts/um-photo-dialog.c:466
+#: ../panels/user-accounts/um-photo-dialog.c:467
 msgid "Take a photo…"
 msgstr "Сделать фотоснимок…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:484
+#: ../panels/user-accounts/um-photo-dialog.c:485
 msgid "Browse for more pictures…"
 msgstr "Найти дополнительные изображения…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:708
+#: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
 msgid "Used by %s"
 msgstr "Используется %s"
@@ -6861,34 +6936,34 @@ msgstr "Неправильный пароль, попробуйте ещё ра�
 
 #: ../panels/user-accounts/um-realm-manager.c:834
 #, c-format
-#| msgid "Couldn't connect to the %s domain: %s"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не удалось подключиться к домену %s: %s"
 
-#: ../panels/user-accounts/um-user-panel.c:238
-msgid "Other Accounts"
-msgstr "Другие учётные записи"
+#: ../panels/user-accounts/um-user-panel.c:195
+#| msgid "%s Account"
+msgid "Your account"
+msgstr "Ваша учётная запись"
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
 msgstr "Не удалось удалить пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:506
-#: ../panels/user-accounts/um-user-panel.c:565
-#: ../panels/user-accounts/um-user-panel.c:617
+#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:559
 msgid "Failed to revoke remotely managed user"
 msgstr "Не удалось аннулировать удалённого пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:673
+#: ../panels/user-accounts/um-user-panel.c:613
 msgid "You cannot delete your own account."
 msgstr "Нельзя удалить собственную учётную запись."
 
-#: ../panels/user-accounts/um-user-panel.c:682
+#: ../panels/user-accounts/um-user-panel.c:622
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s всё ещё находится в системе"
 
-#: ../panels/user-accounts/um-user-panel.c:686
+#: ../panels/user-accounts/um-user-panel.c:626
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -6896,13 +6971,12 @@ msgstr ""
 "Удаление пользователя, с незавершённым сеансом, может привести систему в "
 "противоречивое состояние."
 
-#: ../panels/user-accounts/um-user-panel.c:695
+#: ../panels/user-accounts/um-user-panel.c:635
 #, c-format
-#| msgid "Do you want to keep %s's files?"
 msgid "Do you want to keep %s’s files?"
 msgstr "Хотите сохранить файлы пользователя %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:699
+#: ../panels/user-accounts/um-user-panel.c:639
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -6910,52 +6984,55 @@ msgstr ""
 "Можно сохранить домашнюю папку, почтовый ящик и временные файлы при удалении "
 "учётной записи пользователя."
 
-#: ../panels/user-accounts/um-user-panel.c:702
+#: ../panels/user-accounts/um-user-panel.c:642
 msgid "_Delete Files"
 msgstr "_Удалить файлы"
 
-#: ../panels/user-accounts/um-user-panel.c:703
+#: ../panels/user-accounts/um-user-panel.c:643
 msgid "_Keep Files"
 msgstr "_Сохранить файлы"
 
-#: ../panels/user-accounts/um-user-panel.c:717
+#: ../panels/user-accounts/um-user-panel.c:657
 #, c-format
-#| msgid "Are you sure you want to revoke remotely managed %s's account?"
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Действительно аннулировать удалённую учётную запись %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:721
+#: ../panels/user-accounts/um-user-panel.c:661
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: ../panels/user-accounts/um-user-panel.c:773
+#: ../panels/user-accounts/um-user-panel.c:711
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Учётная запись отключена"
 
-#: ../panels/user-accounts/um-user-panel.c:781
+#: ../panels/user-accounts/um-user-panel.c:719
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Установить при следующем входе в систему"
 
-#: ../panels/user-accounts/um-user-panel.c:784
+#: ../panels/user-accounts/um-user-panel.c:722
 msgctxt "Password mode"
 msgid "None"
 msgstr "Нет"
 
-#: ../panels/user-accounts/um-user-panel.c:833
+#: ../panels/user-accounts/um-user-panel.c:769
 msgid "Logged in"
 msgstr "Авторизованный"
 
-#: ../panels/user-accounts/um-user-panel.c:1260
+#: ../panels/user-accounts/um-user-panel.c:1117
 msgid "Failed to contact the accounts service"
 msgstr "Не удалось связаться со службой учётных записей"
 
-#: ../panels/user-accounts/um-user-panel.c:1262
+#: ../panels/user-accounts/um-user-panel.c:1119
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Убедитесь, что AccountService установлен и включён."
 
-#: ../panels/user-accounts/um-user-panel.c:1304
+#. Translator comments:
+#. * We split the line in 2 here to "make it look good", as there's
+#. * no good way to do this in GTK+ for tooltips. See:
+#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
+#: ../panels/user-accounts/um-user-panel.c:1155
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -6963,12 +7040,12 @@ msgstr ""
 "Чтобы изменить,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1344
+#: ../panels/user-accounts/um-user-panel.c:1195
 msgid "Create a user account"
 msgstr "Создать учётную запись пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:1355
-#: ../panels/user-accounts/um-user-panel.c:1655
+#: ../panels/user-accounts/um-user-panel.c:1206
+#: ../panels/user-accounts/um-user-panel.c:1385
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -6976,12 +7053,12 @@ msgstr ""
 "Чтобы создать учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1365
+#: ../panels/user-accounts/um-user-panel.c:1216
 msgid "Delete the selected user account"
 msgstr "Удалить выбранную учётную запись пользователя"
 
-#: ../panels/user-accounts/um-user-panel.c:1377
-#: ../panels/user-accounts/um-user-panel.c:1660
+#: ../panels/user-accounts/um-user-panel.c:1228
+#: ../panels/user-accounts/um-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -6989,26 +7066,20 @@ msgstr ""
 "Чтобы удалить выбранную учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: ../panels/user-accounts/um-user-panel.c:1569
-msgid "My Account"
-msgstr "Моя учётная запись"
-
-#: ../panels/user-accounts/um-utils.c:563
-#| msgid "Sorry, that user name isn't available. Please try another."
+#: ../panels/user-accounts/um-utils.c:507
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Данное имя пользователя недоступно. Попробуйте ввести другое."
 
-#: ../panels/user-accounts/um-utils.c:566
+#: ../panels/user-accounts/um-utils.c:510
 #, c-format
 msgid "The username is too long."
 msgstr "Имя пользователя слишком длинное."
 
-#: ../panels/user-accounts/um-utils.c:569
-#| msgid "The username cannot start with a '-'."
+#: ../panels/user-accounts/um-utils.c:513
 msgid "The username cannot start with a “-”."
 msgstr "Имя пользователя не может начинаться с символа «-»."
 
-#: ../panels/user-accounts/um-utils.c:572
+#: ../panels/user-accounts/um-utils.c:516
 msgid ""
 "The username should only consist of upper and lower case letters from a-z, "
 "digits and the following characters: . - _"
@@ -7016,8 +7087,7 @@ msgstr ""
 "Имя пользователя может состоять только из букв латинского алфавита в верхнем "
 "и нижнем регистре, цифр и следующих символов: . - _"
 
-#: ../panels/user-accounts/um-utils.c:576
-#| msgid "This will be used to name your home folder and can't be changed."
+#: ../panels/user-accounts/um-utils.c:520
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Используется для именования вашей домашней папки и не может быть изменено."
@@ -7031,10 +7101,6 @@ msgid "Map buttons to functions"
 msgstr "Соответствие кнопок и функций"
 
 #: ../panels/wacom/button-mapping.ui.h:4
-#| msgid ""
-#| "To edit a shortcut, choose the \"Send Keystroke\" action, press the "
-#| "keyboard shortcut button and hold down the new keys or press Backspace to "
-#| "clear."
 msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear."
@@ -7052,18 +7118,15 @@ msgstr ""
 "планшет."
 
 #: ../panels/wacom/calibrator/calibrator-gui.c:87
-#| msgid "Mis-click detected, restarting..."
 msgid "Mis-click detected, restarting…"
 msgstr "Обнаружено ложное нажатие, выполняется перезапуск…"
 
 #: ../panels/wacom/cc-wacom-button-row.c:266
 #, c-format
-#| msgid "Button"
 msgid "Button %d"
 msgstr "Кнопка %d"
 
 #: ../panels/wacom/cc-wacom-button-row.h:53
-#| msgid "Applications"
 msgctxt "Wacom action-type"
 msgid "Application defined"
 msgstr "Приложение определено"
@@ -7212,7 +7275,6 @@ msgid "Forward"
 msgstr "Вперёд"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:6
-#| msgid "No results found"
 msgid "No stylus found"
 msgstr "Стилус не найден"
 
@@ -7248,8 +7310,12 @@ msgstr "Нижняя кнопка"
 msgid "Tip Pressure Feel"
 msgstr "Чувствительность нажатия пера"
 
-#: ../shell/alt/cc-window.c:768 ../shell/cc-window.c:53
-#: ../shell/cc-window.c:1482
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "page 3"
+msgstr "страница 3"
+
+#: ../shell/alt/cc-window.c:766 ../shell/cc-window.c:53
+#: ../shell/cc-window.c:1484
 msgid "All Settings"
 msgstr "Все параметры"
 
@@ -7262,9 +7328,6 @@ msgid "Utilities to configure the GNOME desktop"
 msgstr "Инструменты для настройки рабочего стола GNOME"
 
 #: ../shell/appdata/gnome-control-center.appdata.xml.in.h:3
-#| msgid ""
-#| "The control center is GNOME's main interface for configuration of various "
-#| "aspects of your desktop."
 msgid ""
 "The control center is GNOME’s main interface for configuration of various "
 "aspects of your desktop."
@@ -7372,8 +7435,103 @@ msgstr "Точка доступа"
 msgid "No results found"
 msgstr "Результатов не найдено"
 
-#~ msgid "Add an online account"
-#~ msgstr "Добавить сетевую учётную запись"
+#~ msgid "Edit"
+#~ msgstr "Правка"
+
+#~| msgid "Set Shortcut"
+#~ msgctxt "button"
+#~ msgid "Set Shortcut"
+#~ msgstr "Установить комбинацию"
+
+#~ msgctxt "notifications"
+#~ msgid "Notification _Banners"
+#~ msgstr "В_сплывающие уведомления"
+
+#~ msgid "Notification _Banners"
+#~ msgstr "Всп_лывающее уведомление"
+
+#~ msgid "Add Account"
+#~ msgstr "Добавление учётной записи"
+
+#~ msgid "Mail"
+#~ msgstr "Почта"
+
+#~ msgid "Calendar"
+#~ msgstr "Календарь"
+
+#~ msgid "Contacts"
+#~ msgstr "Контакты"
+
+#~ msgid "Chat"
+#~ msgstr "Чат"
+
+#~ msgid "Resources"
+#~ msgstr "Ресурсы"
+
+#~ msgid "Error creating account"
+#~ msgstr "Ошибка при создании учётной записи"
+
+#~ msgid "Are you sure you want to remove the account?"
+#~ msgstr "Действительно удалить учётную запись?"
+
+#~ msgid "This will not remove the account on the server."
+#~ msgstr "Это не приведёт к удалению учётной записи на сервере."
+
+#~ msgid "_Remove"
+#~ msgstr "_Удалить"
+
+#~ msgid "No online accounts configured"
+#~ msgstr "Нет ни одной настроенной сетевой учётной записи"
+
+#~ msgctxt "printer state"
+#~ msgid "Configuring"
+#~ msgstr "Настройка"
+
+#~ msgid "Toner Level"
+#~ msgstr "Уровень тонера"
+
+#~ msgid "Supply Level"
+#~ msgstr "Уровень ресурсов"
+
+#~ msgctxt "printer state"
+#~ msgid "Installing"
+#~ msgstr "Установка"
+
+#~ msgid "%u active"
+#~ msgid_plural "%u active"
+#~ msgstr[0] "%u активное"
+#~ msgstr[1] "%u активных"
+#~ msgstr[2] "%u активных"
+
+#~ msgid "Test page"
+#~ msgstr "Пробная страница"
+
+#~ msgid "Supply"
+#~ msgstr "Ресурс"
+
+#~ msgid "_Default printer"
+#~ msgstr "_Принтер по умолчанию"
+
+#~ msgid "Jobs"
+#~ msgstr "Задания"
+
+#~ msgid "Show _Jobs"
+#~ msgstr "Показать _задания"
+
+#~ msgid "label"
+#~ msgstr "метка"
+
+#~ msgid "Setting new driver…"
+#~ msgstr "Установка нового драйвера…"
+
+#~ msgid "Print _Test Page"
+#~ msgstr "Печать п_робной страницы"
+
+#~ msgid "Other Accounts"
+#~ msgstr "Другие учётные записи"
+
+#~ msgid "My Account"
+#~ msgstr "Моя учётная запись"
 
 #~ msgid ""
 #~ "Adding an account allows your applications to access it for documents, "
@@ -7412,9 +7570,6 @@ msgstr "Результатов не найдено"
 
 #~ msgid "Left Ring Mode #%d"
 #~ msgstr "Режим левого кольца #%d"
-
-#~ msgid "Right Ring"
-#~ msgstr "Кольцо справа"
 
 #~ msgid "Right Ring Mode #%d"
 #~ msgstr "Режим правого кольца #%d"
@@ -7641,20 +7796,11 @@ msgstr "Результатов не найдено"
 #~ msgid "Add User Account"
 #~ msgstr "Добавить учётную запись пользователя"
 
-#~ msgid "Remove User Account"
-#~ msgstr "Удалить учётную запись пользователя"
-
-#~ msgid "Login Options"
-#~ msgstr "Параметры входа в систему"
-
 #~ msgid "A user with the username '%s' already exists."
 #~ msgstr "Пользователь с именем «%s» уже существует."
 
 #~ msgid "Used to determine your geographical location"
 #~ msgstr "Используется для определения вашего географического местоположения"
-
-#~ msgid "Active Jobs"
-#~ msgstr "Текущие задания"
 
 #~ msgid "Resume Printing"
 #~ msgstr "Возобновить печать"
