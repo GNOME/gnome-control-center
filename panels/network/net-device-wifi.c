@@ -1041,6 +1041,43 @@ net_device_wifi_get_hotspot_connection (NetDeviceWifi *device_wifi)
 }
 
 static void
+overwrite_ssid_cb (GObject      *source_object,
+                   GAsyncResult *res,
+                   gpointer      user_data)
+{
+        GError *error = NULL;
+        NMClient *client;
+        NMRemoteConnection *connection;
+        NMDevice *device;
+        NMConnection *c;
+        NetDeviceWifi *device_wifi;
+
+        connection = NM_REMOTE_CONNECTION (source_object);
+
+        if (!nm_remote_connection_commit_changes_finish (connection, res, &error)) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to save hotspot's settings to disk: %s",
+                                   error->message);
+                g_error_free (error);
+                return;
+        }
+
+        device_wifi = user_data;
+        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+        client = net_object_get_client (NET_OBJECT (device_wifi));
+        c = net_device_wifi_get_hotspot_connection (device_wifi);
+
+        g_debug ("activate existing hotspot connection\n");
+        nm_client_activate_connection_async (client,
+                                             c,
+                                             device,
+                                             NULL,
+                                             NULL,
+                                             activate_cb,
+                                             device_wifi);
+}
+
+static void
 start_shared_connection (NetDeviceWifi *device_wifi)
 {
         NMConnection *c;
@@ -1066,19 +1103,23 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         client = net_object_get_client (NET_OBJECT (device_wifi));
         if (c != NULL) {
                 NMSettingWireless *sw;
+                const char *c_path;
+                NMRemoteConnection *connection;
 
                 sw = nm_connection_get_setting_wireless (c);
                 g_object_set (sw, "ssid", ssid, NULL);
                 g_bytes_unref (ssid);
 
-                g_debug ("activate existing hotspot connection\n");
-                nm_client_activate_connection_async (client,
-                                                     c,
-                                                     device,
-                                                     NULL,
-                                                     NULL,
-                                                     activate_cb,
-                                                     device_wifi);
+                c_path = nm_connection_get_path (c);
+                connection = nm_client_get_connection_by_path (client, c_path);
+
+                g_debug ("overwriting ssid to %s", (char *) g_bytes_get_data (ssid, NULL));
+
+                nm_remote_connection_commit_changes_async (connection,
+                                                           TRUE,
+                                                           NULL,
+                                                           overwrite_ssid_cb,
+                                                           device_wifi);
                 return;
         }
 
