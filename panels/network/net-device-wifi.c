@@ -499,7 +499,6 @@ static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
         const gchar *str;
-        gboolean is_hotspot;
         gchar *str_tmp = NULL;
         gint strength = 0;
         guint speed = 0;
@@ -512,8 +511,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         NetDeviceWifiPrivate *priv = device_wifi->priv;
         GtkWidget *dialog;
 
-        is_hotspot = device_is_hotspot (device_wifi);
-        if (is_hotspot) {
+        if (device_is_hotspot (device_wifi)) {
                 nm_device_wifi_refresh_hotspot (device_wifi);
                 return;
         }
