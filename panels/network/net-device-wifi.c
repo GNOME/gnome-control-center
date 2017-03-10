@@ -1021,11 +1021,29 @@ activate_new_cb (GObject            *source_object,
         show_hotspot_ui (user_data);
 }
 
+static NMConnection *
+net_device_wifi_get_hotspot_connection (NetDeviceWifi *device_wifi)
+{
+        GSList *connections, *l;
+        NMConnection *c = NULL;
+
+        connections = net_device_get_valid_connections (NET_DEVICE (device_wifi));
+        for (l = connections; l; l = l->next) {
+                NMConnection *tmp = l->data;
+                if (is_hotspot_connection (tmp)) {
+                        c = tmp;
+                        break;
+                }
+        }
+        g_slist_free (connections);
+
+        return c;
+}
+
 static void
 start_shared_connection (NetDeviceWifi *device_wifi)
 {
         NMConnection *c;
-        NMConnection *tmp;
         NMSettingConnection *sc;
         NMSettingWireless *sw;
         NMSettingIP4Config *sip;
@@ -1034,8 +1052,6 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         GBytes *ssid;
         const gchar *str_mac;
         struct ether_addr *bin_mac;
-        GSList *connections;
-        GSList *l;
         NMClient *client;
         const char *mode;
         NMDeviceWifiCapabilities caps;
@@ -1043,16 +1059,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
 
-        connections = net_device_get_valid_connections (NET_DEVICE (device_wifi));
-        c = NULL;
-        for (l = connections; l; l = l->next) {
-                tmp = l->data;
-                if (is_hotspot_connection (tmp)) {
-                        c = tmp;
-                        break;
-                }
-        }
-        g_slist_free (connections);
+        c = net_device_wifi_get_hotspot_connection (device_wifi);
 
         ssid = generate_ssid_for_hotspot (device_wifi);
 
