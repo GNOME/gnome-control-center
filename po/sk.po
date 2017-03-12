@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-16 19:57+0000\n"
-"PO-Revision-Date: 2017-02-18 11:07+0100\n"
+"POT-Creation-Date: 2017-03-11 04:33+0000\n"
+"PO-Revision-Date: 2017-03-12 10:37+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 "X-Launchpad-Export-Date: 2012-10-06 09:48+0000\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 
 # desktop entry name
 #: ../panels/background/background.ui.h:1
@@ -126,7 +126,7 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: ../panels/network/net-device-wifi.c:1535
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:316
+#: ../panels/printers/pp-details-dialog.c:319
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -1241,7 +1241,7 @@ msgstr "Hlavný"
 # * https://bugzilla.gnome.org/show_bug.cgi?id=708580
 #: ../panels/display/cc-display-panel.c:599
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1374,7 +1374,7 @@ msgstr "Nepoužívať tento displej"
 #
 #. TRANSLATORS: the state of the night light setting
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -2995,7 +2995,7 @@ msgid "Select file to import"
 msgstr "Výber súboru na importovanie"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:317
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -4337,26 +4337,26 @@ msgstr "Oznámenia v _uzamknutej obrazovke"
 msgid "Applications"
 msgstr "Aplikácie"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:145
+#: ../panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Iný"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:493
+#: ../panels/online-accounts/cc-online-accounts-panel.c:580
 #, c-format
 msgid "%s Account"
 msgstr "Účet služby %s"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:767
+#: ../panels/online-accounts/cc-online-accounts-panel.c:872
 msgid "Error removing account"
 msgstr "Chyba pri odstraňovaní účtu"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: ../panels/online-accounts/cc-online-accounts-panel.c:837
+#: ../panels/online-accounts/cc-online-accounts-panel.c:937
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "Účet <b>%s</b> bol odstránený"
@@ -4390,13 +4390,18 @@ msgstr "Vrátiť späť"
 msgid "Connect to your data in the cloud"
 msgstr "Pripojte sa k vašim údajom v cloude"
 
-# GtkButton label
 #: ../panels/online-accounts/online-accounts.ui.h:3
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Bez pripojenia k internetu — pripojte sa pre nastavenie nového účtu služieb"
+
+# GtkButton label
+#: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
 msgstr "Pridať účet"
 
 # GtkToolButton label
-#: ../panels/online-accounts/online-accounts.ui.h:4
+#: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
 msgstr "Odstrániť účet"
 
@@ -4837,12 +4842,12 @@ msgid "Authentication Required"
 msgstr "Vyžaduje sa overenie totožnosti"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:713
 msgid "Failed to add new printer."
 msgstr "Pridávanie novej tlačiarne zlyhalo."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:959
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepodarilo sa načítať súbor používateľského rozhrania: %s"
@@ -4944,23 +4949,23 @@ msgstr "Načítavajú sa voľby…"
 
 # 1.desktop entry name;2. page; 3. GtkListStore item
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: ../panels/printers/pp-details-dialog.c:100
-#: ../panels/printers/pp-details-dialog.c:412
+#: ../panels/printers/pp-details-dialog.c:123
+#: ../panels/printers/pp-details-dialog.c:415
 #, c-format
 msgid "%s Details"
 msgstr "Podrobnosti o tlačiarni %s"
 
 # gtk_menu_item
-#: ../panels/printers/pp-details-dialog.c:169
+#: ../panels/printers/pp-details-dialog.c:172
 msgid "No suitable driver found"
 msgstr "Nenašiel sa žiadny vhodný ovládač"
 
 # file chooser dialog title
-#: ../panels/printers/pp-details-dialog.c:313
+#: ../panels/printers/pp-details-dialog.c:316
 msgid "Select PPD File"
 msgstr "Výber súboru PPD"
 
-#: ../panels/printers/pp-details-dialog.c:322
+#: ../panels/printers/pp-details-dialog.c:325
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5036,49 +5041,49 @@ msgid "Reverse portrait"
 msgstr "Opačne na výšku"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "Čaká"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pozastavená"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "Spracúva sa"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Zrušená"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Prerušená"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončená"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
@@ -5275,12 +5280,12 @@ msgstr "Výrobca"
 
 # GtkDialog title
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:368
+#: ../panels/printers/pp-printer-entry.c:427
 msgid "No Active Jobs"
 msgstr "Žiadne aktívne úlohy"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:373
+#: ../panels/printers/pp-printer-entry.c:432
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5289,105 +5294,105 @@ msgstr[1] "%u úloha"
 msgstr[2] "%u úlohy"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:470
+#: ../panels/printers/pp-printer-entry.c:560
 msgid "Low on toner"
 msgstr "Málo tonera"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:472
+#: ../panels/printers/pp-printer-entry.c:562
 msgid "Out of toner"
 msgstr "Minul sa toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:475
+#: ../panels/printers/pp-printer-entry.c:565
 msgid "Low on developer"
 msgstr "Málo vývojky"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:478
+#: ../panels/printers/pp-printer-entry.c:568
 msgid "Out of developer"
 msgstr "Minula sa vývojka"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:480
+#: ../panels/printers/pp-printer-entry.c:570
 msgid "Low on a marker supply"
 msgstr "Málo farby"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:482
+#: ../panels/printers/pp-printer-entry.c:572
 msgid "Out of a marker supply"
 msgstr "Minula sa farba"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:484
+#: ../panels/printers/pp-printer-entry.c:574
 msgid "Open cover"
 msgstr "Otvorený kryt"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:486
+#: ../panels/printers/pp-printer-entry.c:576
 msgid "Open door"
 msgstr "Otvorené dvierka"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:488
+#: ../panels/printers/pp-printer-entry.c:578
 msgid "Low on paper"
 msgstr "Málo papiera"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:490
+#: ../panels/printers/pp-printer-entry.c:580
 msgid "Out of paper"
 msgstr "Minul sa papier"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:492
+#: ../panels/printers/pp-printer-entry.c:582
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Vypnutá"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:494
-#: ../panels/printers/pp-printer-entry.c:624
+#: ../panels/printers/pp-printer-entry.c:584
+#: ../panels/printers/pp-printer-entry.c:714
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:496
+#: ../panels/printers/pp-printer-entry.c:586
 msgid "Waste receptacle almost full"
 msgstr "Odpadová nádržka takmer plná"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:498
+#: ../panels/printers/pp-printer-entry.c:588
 msgid "Waste receptacle full"
 msgstr "Odpadová nádržka plná"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:500
+#: ../panels/printers/pp-printer-entry.c:590
 msgid "The optical photo conductor is near end of life"
 msgstr "Fotovalcu onedlho skončí životnosť"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:502
+#: ../panels/printers/pp-printer-entry.c:592
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Fotovalec už nie je funkčný"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:610
+#: ../panels/printers/pp-printer-entry.c:700
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pripravená"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:615
+#: ../panels/printers/pp-printer-entry.c:705
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Neprijíma úlohy"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:620
+#: ../panels/printers/pp-printer-entry.c:710
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Pracuje"
@@ -7816,8 +7821,8 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-msgid "<small>Your account</small>"
-msgstr "<small>Váš účet</small>"
+msgid "Your account"
+msgstr "Váš účet"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
@@ -8361,6 +8366,9 @@ msgstr "Prístupový bod"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Nenašli sa žiadne výsledky"
+
+#~ msgid "<small>Your account</small>"
+#~ msgstr "<small>Váš účet</small>"
 
 #~ msgid "0"
 #~ msgstr "0"
