@@ -338,6 +338,14 @@ details_dialog_cb (GtkDialog *dialog,
 }
 
 static void
+details_dialog_free_cb (GtkDialog *dialog,
+                        gint       response_id,
+                        gpointer   user_data)
+{
+  pp_details_dialog_free (PP_DETAILS_DIALOG (dialog));
+}
+
+static void
 on_show_printer_details_dialog (GtkButton      *button,
                                 PpPrinterEntry *self)
 {
@@ -362,6 +370,14 @@ printer_options_dialog_cb (GtkDialog *dialog,
 
   pp_options_dialog_free (self->pp_options_dialog);
   self->pp_options_dialog = NULL;
+}
+
+static void
+printer_options_dialog_free_cb (GtkDialog *dialog,
+                                gint       response_id,
+                                gpointer   user_data)
+{
+  pp_options_dialog_free ((PpOptionsDialog *) user_data);
 }
 
 static void
@@ -481,6 +497,14 @@ jobs_dialog_response_cb (GtkDialog  *dialog,
       pp_jobs_dialog_free (self->pp_jobs_dialog);
       self->pp_jobs_dialog = NULL;
     }
+}
+
+static void
+printer_jobs_dialog_free_cb (GtkDialog *dialog,
+                             gint       response_id,
+                             gpointer   user_data)
+{
+  pp_jobs_dialog_free ((PpJobsDialog *) user_data);
 }
 
 static void
@@ -775,6 +799,18 @@ static void
 pp_printer_entry_dispose (GObject *object)
 {
   PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
+
+  if (self->pp_details_dialog != NULL)
+    {
+      g_signal_handlers_disconnect_by_data (self->pp_details_dialog, self);
+      g_signal_connect (self->pp_details_dialog, "response", G_CALLBACK (details_dialog_free_cb), NULL);
+    }
+
+  if (self->pp_options_dialog != NULL)
+    pp_options_dialog_set_callback (self->pp_options_dialog, printer_options_dialog_free_cb, self->pp_options_dialog);
+
+  if (self->pp_jobs_dialog != NULL)
+    pp_jobs_dialog_set_callback (self->pp_jobs_dialog, printer_jobs_dialog_free_cb, self->pp_jobs_dialog);
 
   g_clear_pointer (&self->printer_name, g_free);
   g_clear_pointer (&self->printer_location, g_free);

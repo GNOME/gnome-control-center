@@ -334,6 +334,18 @@ pp_jobs_dialog_update (PpJobsDialog *dialog)
 }
 
 void
+pp_jobs_dialog_set_callback (PpJobsDialog         *dialog,
+                             UserResponseCallback  user_callback,
+                             gpointer              user_data)
+{
+  if (dialog != NULL)
+    {
+      dialog->user_callback = user_callback;
+      dialog->user_data = user_data;
+    }
+}
+
+void
 pp_jobs_dialog_free (PpJobsDialog *dialog)
 {
   if (dialog->get_jobs_cancellable != NULL)

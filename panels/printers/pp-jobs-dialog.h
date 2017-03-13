@@ -28,12 +28,15 @@ G_BEGIN_DECLS
 
 typedef struct _PpJobsDialog PpJobsDialog;
 
-PpJobsDialog *pp_jobs_dialog_new    (GtkWindow            *parent,
-                                     UserResponseCallback  user_callback,
-                                     gpointer              user_data,
-                                     gchar                *printer_name);
-void          pp_jobs_dialog_update (PpJobsDialog         *dialog);
-void          pp_jobs_dialog_free   (PpJobsDialog         *dialog);
+PpJobsDialog *pp_jobs_dialog_new           (GtkWindow            *parent,
+                                            UserResponseCallback  user_callback,
+                                            gpointer              user_data,
+                                            gchar                *printer_name);
+void          pp_jobs_dialog_update        (PpJobsDialog         *dialog);
+void          pp_jobs_dialog_set_callback  (PpJobsDialog         *dialog,
+                                            UserResponseCallback  user_callback,
+                                            gpointer              user_data);
+void          pp_jobs_dialog_free          (PpJobsDialog         *dialog);
 
 G_END_DECLS
 

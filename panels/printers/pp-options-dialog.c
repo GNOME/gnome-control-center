@@ -889,6 +889,18 @@ pp_options_dialog_new (GtkWindow            *parent,
 }
 
 void
+pp_options_dialog_set_callback (PpOptionsDialog      *dialog,
+                                UserResponseCallback  user_callback,
+                                gpointer              user_data)
+{
+  if (dialog != NULL)
+    {
+      dialog->user_callback = user_callback;
+      dialog->user_data = user_data;
+    }
+}
+
+void
 pp_options_dialog_free (PpOptionsDialog *dialog)
 {
   gtk_widget_destroy (GTK_WIDGET (dialog->dialog));
