@@ -38,6 +38,21 @@
 
 #include <gtk/gtk.h>
 
+#include <libnm/nm-connection.h>
+#include <libnm/nm-setting-wireless-security.h>
+#include <libnm/nm-setting-8021x.h>
+
+static inline gboolean
+nm_clear_g_source (guint *id)
+{
+	if (id && *id) {
+		g_source_remove (*id);
+		*id = 0;
+		return TRUE;
+	}
+	return FALSE;
+}
+
 /*****************************************************************************/
 
 #include <glib/gi18n.h>

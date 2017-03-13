@@ -23,18 +23,6 @@
 #ifndef EAP_METHOD_H
 #define EAP_METHOD_H
 
-#include <glib.h>
-#include <gtk/gtk.h>
-
-#if defined (LIBNM_BUILD)
-#include <NetworkManager.h>
-#elif defined (LIBNM_GLIB_BUILD)
-#include <nm-connection.h>
-#include <nm-setting-8021x.h>
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
-
 typedef struct _EAPMethod EAPMethod;
 
 typedef void        (*EMAddToSizeGroupFunc) (EAPMethod *method, GtkSizeGroup *group);
@@ -141,4 +129,3 @@ void eap_method_ca_cert_ignore_save (NMConnection *connection);
 void eap_method_ca_cert_ignore_load (NMConnection *connection);
 
 #endif /* EAP_METHOD_H */
-

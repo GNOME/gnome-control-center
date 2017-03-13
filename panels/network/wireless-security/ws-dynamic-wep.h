@@ -23,14 +23,6 @@
 #ifndef WS_DYNAMIC_WEP_H
 #define WS_DYNAMIC_WEP_H
 
-#if defined (LIBNM_BUILD)
-#include <NetworkManager.h>
-#elif defined (LIBNM_GLIB_BUILD)
-#include <nm-connection.h>
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
-
 typedef struct _WirelessSecurityDynamicWEP WirelessSecurityDynamicWEP;
 
 WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection,
@@ -38,4 +30,3 @@ WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection,
                                                 gboolean secrets_only);
 
 #endif /* WS_DYNAMIC_WEP_H */
-

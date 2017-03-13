@@ -316,7 +316,7 @@ private_key_picker_helper (EAPMethod *parent, const char *filename, gboolean cha
 		                                 _("Unencrypted private keys are insecure"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 		                                          "%s",
-		                                          _("The selected private key does not appear to be protected by a password.  This could allow your security credentials to be compromised.  Please select a password-protected private key.\n\n(You can password-protect your private key with openssl)"));
+		                                          _("The selected private key does not appear to be protected by a password. This could allow your security credentials to be compromised. Please select a password-protected private key.\n\n(You can password-protect your private key with openssl)"));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
@@ -458,7 +458,7 @@ eap_method_tls_new (WirelessSecurity *ws_parent,
 	                          fill_connection,
 	                          update_secrets,
 	                          NULL,
-	                          "/org/gnome/control-center/network/eap-method-tls.ui",
+	                          "/org/freedesktop/network-manager-applet/eap-method-tls.ui",
 	                          "eap_tls_notebook",
 	                          "eap_tls_identity_entry",
 	                          phase2);

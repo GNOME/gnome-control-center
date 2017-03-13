@@ -37,7 +37,7 @@ wireless_security_get_type (void)
 	if (!type_id) {
 		g_resources_register (wireless_security_get_resource ());
 
-		type_id = g_boxed_type_register_static ("CcWirelessSecurity",
+		type_id = g_boxed_type_register_static ("WirelessSecurity",
 							(GBoxedCopyFunc) wireless_security_ref,
 							(GBoxedFreeFunc) wireless_security_unref);
 	}
@@ -84,7 +84,7 @@ wireless_security_validate (WirelessSecurity *sec, GError **error)
 	g_assert (sec->validate);
 	result = (*(sec->validate)) (sec, error);
 	if (!result && error && !*error)
-		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Unknown error validating 802.1x security"));
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Unknown error validating 802.1X security"));
 	return result;
 }
 
@@ -186,7 +186,7 @@ wireless_security_init (gsize obj_size,
 
 	sec->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (sec->builder, ui_resource, &error)) {
-		g_warning ("Couldn't load UI builder file %s: %s",
+		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
 		g_error_free (error);
 		wireless_security_unref (sec);

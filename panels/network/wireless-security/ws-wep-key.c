@@ -264,7 +264,7 @@ ws_wep_key_new (NMConnection *connection,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 destroy,
-	                                 "/org/gnome/control-center/network/ws-wep-key.ui",
+	                                 "/org/freedesktop/network-manager-applet/ws-wep-key.ui",
 	                                 "wep_key_notebook",
 	                                 "wep_key_entry");
 	if (!parent)

@@ -23,14 +23,6 @@
 #ifndef WS_WEP_KEY_H
 #define WS_WEP_KEY_H
 
-#if defined (LIBNM_BUILD)
-#include <NetworkManager.h>
-#elif defined (LIBNM_GLIB_BUILD)
-#include <nm-setting-wireless-security.h>
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
-
 typedef struct _WirelessSecurityWEPKey WirelessSecurityWEPKey;
 
 WirelessSecurityWEPKey *ws_wep_key_new (NMConnection *connection,
@@ -39,4 +31,3 @@ WirelessSecurityWEPKey *ws_wep_key_new (NMConnection *connection,
                                         gboolean secrets_only);
 
 #endif /* WS_WEP_KEY_H */
-

@@ -23,17 +23,8 @@
 #ifndef WS_LEAP_H
 #define WS_LEAP_H
 
-#if defined (LIBNM_BUILD)
-#include <NetworkManager.h>
-#elif defined (LIBNM_GLIB_BUILD)
-#include <nm-connection.h>
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
-
 typedef struct _WirelessSecurityLEAP WirelessSecurityLEAP;
 
 WirelessSecurityLEAP * ws_leap_new (NMConnection *connection, gboolean secrets_only);
 
 #endif /* WS_LEAP_H */
-

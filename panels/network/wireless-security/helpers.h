@@ -23,18 +23,6 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
-#include <glib.h>
-#include <gtk/gtk.h>
-
-#if defined (LIBNM_BUILD)
-#include <NetworkManager.h>
-#elif defined (LIBNM_GLIB_BUILD)
-#include <nm-connection.h>
-#include <nm-setting.h>
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
-
 typedef const char * (*HelperSecretFunc)(NMSetting *);
 
 void helper_fill_secret_entry (NMConnection *connection,

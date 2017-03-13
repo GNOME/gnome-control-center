@@ -110,7 +110,7 @@ ws_wpa_eap_new (NMConnection *connection,
 	                                 fill_connection,
 	                                 update_secrets,
 	                                 destroy,
-	                                 "/org/gnome/control-center/network/ws-wpa-eap.ui",
+	                                 "/org/freedesktop/network-manager-applet/ws-wpa-eap.ui",
 	                                 "wpa_eap_notebook",
 	                                 NULL);
 	if (!parent)

@@ -176,15 +176,11 @@ destroy (EAPMethod *parent)
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
 	g_assert (widget);
+	g_signal_handlers_disconnect_by_data (widget, method);
 
-	g_signal_handlers_disconnect_by_func (G_OBJECT (widget),
-	                                      (GCallback) widgets_realized,
-	                                      method);
-	g_signal_handlers_disconnect_by_func (G_OBJECT (widget),
-	                                      (GCallback) widgets_unrealized,
-	                                      method);
-
-	wireless_security_unref (method->ws_parent);
+	g_signal_handlers_disconnect_by_data (method->username_entry, method->ws_parent);
+	g_signal_handlers_disconnect_by_data (method->password_entry, method->ws_parent);
+	g_signal_handlers_disconnect_by_data (method->show_password, method);
 }
 
 EAPMethodLEAP *
@@ -203,7 +199,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          fill_connection,
 	                          update_secrets,
 	                          destroy,
-	                          "/org/gnome/control-center/network/eap-method-leap.ui",
+	                          "/org/freedesktop/network-manager-applet/eap-method-leap.ui",
 	                          "eap_leap_notebook",
 	                          "eap_leap_username_entry",
 	                          FALSE);
@@ -213,7 +209,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
 	method = (EAPMethodLEAP *) parent;
 	method->editing_connection = secrets_only ? FALSE : TRUE;
-	method->ws_parent = wireless_security_ref (ws_parent);
+	method->ws_parent = ws_parent;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
 	g_assert (widget);

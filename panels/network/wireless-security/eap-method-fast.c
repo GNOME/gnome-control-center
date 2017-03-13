@@ -349,7 +349,7 @@ eap_method_fast_new (WirelessSecurity *ws_parent,
 	                          fill_connection,
 	                          update_secrets,
 	                          destroy,
-	                          "/org/gnome/control-center/network/eap-method-fast.ui",
+	                          "/org/freedesktop/network-manager-applet/eap-method-fast.ui",
 	                          "eap_fast_notebook",
 	                          "eap_fast_anon_identity_entry",
 	                          FALSE);

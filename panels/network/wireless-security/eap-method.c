@@ -34,19 +34,7 @@
 #include "utils.h"
 #include "helpers.h"
 
-GType
-eap_method_get_type (void)
-{
-	static GType type_id = 0;
-
-	if (!type_id) {
-		type_id = g_boxed_type_register_static ("CcEAPMethod",
-							(GBoxedCopyFunc) eap_method_ref,
-							(GBoxedFreeFunc) eap_method_unref);
-	}
-
-	return type_id;
-}
+G_DEFINE_BOXED_TYPE (EAPMethod, eap_method, eap_method_ref, eap_method_unref)
 
 GtkWidget *
 eap_method_get_widget (EAPMethod *method)
@@ -66,7 +54,7 @@ eap_method_validate (EAPMethod *method, GError **error)
 	g_assert (method->validate);
 	result = (*(method->validate)) (method, error);
 	if (!result && error && !*error)
-		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("undefined error in 802.1x security (wpa-eap)"));
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("undefined error in 802.1X security (wpa-eap)"));
 	return result;
 }
 
@@ -167,7 +155,7 @@ eap_method_init (gsize obj_size,
 
 	method->builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_resource (method->builder, ui_resource, &error)) {
-		g_warning ("Couldn't load UI builder file %s: %s",
+		g_warning ("Couldn't load UI builder resource %s: %s",
 		           ui_resource, error->message);
 		eap_method_unref (method);
 		return NULL;
@@ -282,31 +270,6 @@ out:
 	return success;
 }
 
-#ifdef LIBNM_GLIB_BUILD
-static const char *
-find_tag (const char *tag, const char *buf, gsize len)
-{
-	gsize i, taglen;
-
-	taglen = strlen (tag);
-	if (len < taglen)
-		return NULL;
-
-	for (i = 0; i < len - taglen + 1; i++) {
-		if (memcmp (buf + i, tag, taglen) == 0)
-			return buf + i;
-	}
-	return NULL;
-}
-
-static const char *pem_rsa_key_begin = "-----BEGIN RSA PRIVATE KEY-----";
-static const char *pem_dsa_key_begin = "-----BEGIN DSA PRIVATE KEY-----";
-static const char *pem_pkcs8_enc_key_begin = "-----BEGIN ENCRYPTED PRIVATE KEY-----";
-static const char *pem_pkcs8_dec_key_begin = "-----BEGIN PRIVATE KEY-----";
-static const char *pem_cert_begin = "-----BEGIN CERTIFICATE-----";
-static const char *proc_type_tag = "Proc-Type: 4,ENCRYPTED";
-static const char *dek_info_tag = "DEK-Info:";
-
 static gboolean
 file_has_extension (const char *filename, const char *extensions[])
 {
@@ -331,6 +294,31 @@ file_has_extension (const char *filename, const char *extensions[])
 
 	return found;
 }
+
+#if !LIBNM_BUILD
+static const char *
+find_tag (const char *tag, const char *buf, gsize len)
+{
+	gsize i, taglen;
+
+	taglen = strlen (tag);
+	if (len < taglen)
+		return NULL;
+
+	for (i = 0; i < len - taglen + 1; i++) {
+		if (memcmp (buf + i, tag, taglen) == 0)
+			return buf + i;
+	}
+	return NULL;
+}
+
+static const char *pem_rsa_key_begin = "-----BEGIN RSA PRIVATE KEY-----";
+static const char *pem_dsa_key_begin = "-----BEGIN DSA PRIVATE KEY-----";
+static const char *pem_pkcs8_enc_key_begin = "-----BEGIN ENCRYPTED PRIVATE KEY-----";
+static const char *pem_pkcs8_dec_key_begin = "-----BEGIN PRIVATE KEY-----";
+static const char *pem_cert_begin = "-----BEGIN CERTIFICATE-----";
+static const char *proc_type_tag = "Proc-Type: 4,ENCRYPTED";
+static const char *dek_info_tag = "DEK-Info:";
 
 static gboolean
 pem_file_is_encrypted (const char *buffer, gsize bytes_read)
@@ -415,56 +403,27 @@ out:
 static gboolean
 default_filter_privkey (const GtkFileFilterInfo *filter_info, gpointer user_data)
 {
-#ifdef LIBNM_GLIB_BUILD
 	const char *extensions[] = { ".der", ".pem", ".p12", ".key", NULL };
-#endif
-	gboolean require_encrypted = !!user_data;
-	gboolean is_encrypted;
 
 	if (!filter_info->filename)
 		return FALSE;
 
-#if defined (LIBNM_GLIB_BUILD)
 	if (!file_has_extension (filter_info->filename, extensions))
 		return FALSE;
 
-	is_encrypted = TRUE;
-	if (   !file_is_der_or_pem (filter_info->filename, TRUE, &is_encrypted)
-	    && !nm_utils_file_is_pkcs12 (filter_info->filename))
-		return FALSE;
-#elif defined (LIBNM_BUILD)
-	is_encrypted = FALSE;
-	if (!nm_utils_file_is_private_key (filter_info->filename, &is_encrypted))
-		return FALSE;
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
-
-	return require_encrypted ? is_encrypted : TRUE;
+	return TRUE;
 }
 
 static gboolean
 default_filter_cert (const GtkFileFilterInfo *filter_info, gpointer user_data)
 {
-#ifdef LIBNM_GLIB_BUILD
 	const char *extensions[] = { ".der", ".pem", ".crt", ".cer", NULL };
-#endif
 
 	if (!filter_info->filename)
 		return FALSE;
 
-#if defined (LIBNM_GLIB_BUILD)
 	if (!file_has_extension (filter_info->filename, extensions))
 		return FALSE;
-
-	if (!file_is_der_or_pem (filter_info->filename, FALSE, NULL))
-		return FALSE;
-#elif defined (LIBNM_BUILD)
-	if (!nm_utils_file_is_certificate (filter_info->filename))
-		return FALSE;
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
 
 	return TRUE;
 }
@@ -489,8 +448,22 @@ gboolean
 eap_method_is_encrypted_private_key (const char *path)
 {
 	GtkFileFilterInfo info = { .filename = path };
+	gboolean is_encrypted;
 
-	return default_filter_privkey (&info, (gpointer) TRUE);
+	if (!default_filter_privkey (&info, NULL))
+		return FALSE;
+
+#if LIBNM_BUILD
+	is_encrypted = FALSE;
+	if (!nm_utils_file_is_private_key (path, &is_encrypted))
+		return FALSE;
+#else
+	is_encrypted = TRUE;
+	if (   !file_is_der_or_pem (path, TRUE, &is_encrypted)
+	    && !nm_utils_file_is_pkcs12 (path))
+		return FALSE;
+#endif
+	return is_encrypted;
 }
 
 /* Some methods (PEAP, TLS, TTLS) require a CA certificate. The user can choose
