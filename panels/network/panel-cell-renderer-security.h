@@ -44,8 +44,8 @@ typedef enum {
   NM_AP_SEC_UNKNOWN,
   NM_AP_SEC_NONE,
   NM_AP_SEC_WEP,
-  NM_AP_SEC_WPA_PSK,
-  NM_AP_SEC_WPA_OTHER
+  NM_AP_SEC_WPA,
+  NM_AP_SEC_WPA2
 } NMAccessPointSecurity;
 
 struct _PanelCellRendererSecurity

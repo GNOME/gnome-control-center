@@ -23,8 +23,6 @@
 #include <nm-access-point.h>
 #include "cc-network-panel.h"
 
-gboolean cc_network_panel_default_to_private_connection (NMClient *client);
-
 void cc_network_panel_create_wifi_network (CcNetworkPanel   *panel,
 					   NMClient         *client,
 					   NMRemoteSettings *settings);

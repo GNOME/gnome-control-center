@@ -233,14 +233,6 @@ show_wireless_dialog (CcNetworkPanel   *panel,
         gtk_widget_show (dialog);
 }
 
-gboolean
-cc_network_panel_default_to_private_connection (NMClient *client)
-{
-        NMClientPermissionResult perms;
-        perms = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM);
-        return (perms != NM_CLIENT_PERMISSION_RESULT_YES);
-}
-
 void
 cc_network_panel_create_wifi_network (CcNetworkPanel   *panel,
 				      NMClient         *client,
@@ -314,10 +306,6 @@ cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
         g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "mschapv2", NULL);
         nm_connection_add_setting (connection, NM_SETTING (s_8021x));
 
-        if (cc_network_panel_default_to_private_connection (client)) {
-                nm_setting_connection_add_permission (s_con, "user", g_get_user_name(), NULL);
-        }
-
         dialog = nma_wireless_dialog_new (client, settings, connection, device, ap, FALSE);
         show_wireless_dialog (panel, client, settings, dialog);
 }
@@ -371,7 +359,6 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_CDMA_NUMBER, "#777",
 		              NM_SETTING_CDMA_USERNAME, method->username,
 		              NM_SETTING_CDMA_PASSWORD, method->password,
-		              NM_SETTING_CDMA_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 		              NULL);
 		nm_connection_add_setting (connection, setting);
 
@@ -401,7 +388,6 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NULL);
 		g_free (uuid);
 		g_free (id);
-		nm_setting_connection_add_permission (setting, "user", g_get_user_name (), NULL);
 		nm_connection_add_setting (connection, setting);
 	}
 
@@ -435,7 +421,6 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_GSM_NUMBER, "*99#",
 		              NM_SETTING_GSM_USERNAME, method->username,
 		              NM_SETTING_GSM_PASSWORD, method->password,
-		              NM_SETTING_GSM_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 		              NM_SETTING_GSM_APN, method->gsm_apn,
 		              NULL);
 		nm_connection_add_setting (connection, setting);
@@ -466,7 +451,6 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NULL);
 		g_free (uuid);
 		g_free (id);
-		nm_setting_connection_add_permission ((NMSettingConnection *) setting, "user", g_get_user_name (), NULL);
 		nm_connection_add_setting (connection, setting);
 	}
 

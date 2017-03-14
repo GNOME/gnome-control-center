@@ -927,16 +927,20 @@ get_access_point_security (NMAccessPoint *ap)
         wpa_flags = nm_access_point_get_wpa_flags (ap);
         rsn_flags = nm_access_point_get_rsn_flags (ap);
 
-        if ((rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_PSK) ||
-            (wpa_flags & NM_802_11_AP_SEC_KEY_MGMT_PSK))
-                type = NM_AP_SEC_WPA_PSK;
-        else if (rsn_flags != NM_802_11_AP_SEC_NONE ||
-                 wpa_flags != NM_802_11_AP_SEC_NONE)
-                type = NM_AP_SEC_WPA_OTHER;
-        else if (flags & NM_802_11_AP_FLAGS_PRIVACY)
-                type = NM_AP_SEC_WEP;
-        else
+        if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+            wpa_flags == NM_802_11_AP_SEC_NONE &&
+            rsn_flags == NM_802_11_AP_SEC_NONE)
                 type = NM_AP_SEC_NONE;
+        else if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+                 wpa_flags == NM_802_11_AP_SEC_NONE &&
+                 rsn_flags == NM_802_11_AP_SEC_NONE)
+                type = NM_AP_SEC_WEP;
+        else if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+                 wpa_flags != NM_802_11_AP_SEC_NONE &&
+                 rsn_flags != NM_802_11_AP_SEC_NONE)
+                type = NM_AP_SEC_WPA;
+        else
+                type = NM_AP_SEC_WPA2;
 
         return type;
 }
@@ -2822,7 +2826,6 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         gboolean ret;
         gchar *object_path = NULL;
         gchar *ssid_target = NULL;
-        NMAccessPointSecurity security = NM_AP_SEC_UNKNOWN;
         GSList *list, *l;
         GSList *filtered;
         GtkTreeIter iter;
@@ -2830,7 +2833,6 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         NetObject *object;
         NMConnection *connection;
         NMConnection *connection_activate = NULL;
-        NMConnection *connection_partial = NULL;
         NMDevice *device;
         NMSettingWireless *setting_wireless;
 
@@ -2854,7 +2856,6 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         gtk_tree_model_get (model, &iter,
                             PANEL_WIRELESS_COLUMN_ID, &object_path,
                             PANEL_WIRELESS_COLUMN_TITLE, &ssid_target,
-                            PANEL_WIRELESS_COLUMN_SECURITY, &security,
                             -1);
         g_debug ("try to connect to WIFI network %s [%s]",
                  ssid_target, object_path);
@@ -2902,27 +2903,8 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         /* create one, as it's missing */
         g_debug ("no existing connection found for %s, creating",
                  ssid_target);
-        if (cc_network_panel_default_to_private_connection (panel->priv->client)) {
-                NMSettingConnection *s_con;
-
-                connection_partial = nm_connection_new ();
-                s_con = (NMSettingConnection *) nm_setting_connection_new ();
-                nm_setting_connection_add_permission (s_con, "user", g_get_user_name(), NULL);
-                nm_connection_add_setting (connection_partial, NM_SETTING (s_con));
-
-                if (security == NM_AP_SEC_WPA_PSK) {
-                        NMSettingWirelessSecurity *s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
-                        g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_PSK_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
-                        nm_connection_add_setting (connection_partial, NM_SETTING (s_wsec));
-                }
-                if (security == NM_AP_SEC_WEP) {
-                        NMSettingWirelessSecurity *s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
-                        g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
-                        nm_connection_add_setting (connection_partial, NM_SETTING (s_wsec));
-                }
-        }
         nm_client_add_and_activate_connection (panel->priv->client,
-                                               connection_partial,
+                                               NULL,
                                                device, object_path,
                                                connection_add_activate_cb, panel);
 out:
