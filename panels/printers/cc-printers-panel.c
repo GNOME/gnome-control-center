@@ -948,7 +948,9 @@ filter_function (GtkListBoxRow *row,
   gboolean                retval;
   gchar                  *search;
   gchar                  *name;
+  gchar                  *location;
   gchar                  *printer_name;
+  gchar                  *printer_location;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -958,17 +960,27 @@ filter_function (GtkListBoxRow *row,
   if (gtk_entry_get_text_length (GTK_ENTRY (search_entry)) == 0)
     return TRUE;
 
-  g_object_get (G_OBJECT (row), "printer-name", &printer_name, NULL);
+  g_object_get (G_OBJECT (row),
+                "printer-name", &printer_name,
+                "printer-location", &printer_location,
+                NULL);
+
   name = cc_util_normalize_casefold_and_unaccent (printer_name);
+  location = cc_util_normalize_casefold_and_unaccent (printer_location);
 
   g_free (printer_name);
+  g_free (printer_location);
 
   search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (search_entry)));
 
+
   retval = strstr (name, search) != NULL;
+  if (location != NULL)
+      retval = retval || (strstr (location, search) != NULL);
 
   g_free (search);
   g_free (name);
+  g_free (location);
 
   return retval;
 }

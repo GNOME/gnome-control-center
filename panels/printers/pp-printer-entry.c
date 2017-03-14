@@ -88,6 +88,7 @@ G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
 enum {
   PROP_0,
   PROP_PRINTER_NAME,
+  PROP_PRINTER_LOCATION,
 };
 
 enum {
@@ -110,6 +111,9 @@ pp_printer_entry_get_property (GObject    *object,
       case PROP_PRINTER_NAME:
         g_value_set_string (value, self->printer_name);
         break;
+      case PROP_PRINTER_LOCATION:
+        g_value_set_string (value, self->printer_location);
+        break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -127,6 +131,9 @@ pp_printer_entry_set_property (GObject      *object,
     {
       case PROP_PRINTER_NAME:
         self->printer_name = g_value_dup_string (value);
+        break;
+      case PROP_PRINTER_LOCATION:
+        self->printer_location = g_value_dup_string (value);
         break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -865,8 +872,9 @@ pp_printer_entry_new (cups_dest_t  printer,
   else
     printer_icon_name = g_strdup ("printer-network");
 
+  g_object_set (self, "printer-location", location, NULL);
+
   self->is_accepting_jobs = is_accepting_jobs;
-  self->printer_location = g_strdup (location);
   self->is_authorized = is_authorized;
 
   self->printer_hostname = printer_get_hostname (printer_type, self->printer_uri, printer_uri);
@@ -1000,6 +1008,14 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
                                    g_param_spec_string ("printer-name",
                                                         "Printer Name",
                                                         "The Printer unique name",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+                                   PROP_PRINTER_LOCATION,
+                                   g_param_spec_string ("printer-location",
+                                                        "Printer Location",
+                                                        "Printer location string",
                                                         NULL,
                                                         G_PARAM_READWRITE));
 
