@@ -214,8 +214,6 @@ have_key_for_group (CcKeyboardManager *self,
             {
               return TRUE;
             }
-
-          return FALSE;
         }
     }
 
