@@ -755,7 +755,7 @@ on_perm_store_lookup_done(GObject *source_object,
   if (ret == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed fetch permissions from xdg-app permission store: %s",
+        g_warning ("Failed fetch permissions from flatpak permission store: %s",
                    error->message);
       g_error_free (error);
 
@@ -787,7 +787,7 @@ on_perm_store_ready (GObject *source_object,
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("Failed to connect to xdg-app permission store: %s",
+          g_warning ("Failed to connect to flatpak permission store: %s",
                      error->message);
       g_error_free (error);
 
