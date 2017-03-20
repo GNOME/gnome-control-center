@@ -90,6 +90,7 @@ struct _CcPrintersPanelPrivate
   PPDList      *all_ppds_list;
   GCancellable *get_all_ppds_cancellable;
   GCancellable *subscription_renew_cancellable;
+  GCancellable *actualize_printers_list_cancellable;
 
   gchar    *new_printer_name;
   gchar    *new_printer_location;
@@ -198,6 +199,9 @@ cc_printers_panel_dispose (GObject *object)
 
   g_cancellable_cancel (priv->subscription_renew_cancellable);
   g_clear_object (&priv->subscription_renew_cancellable);
+
+  g_cancellable_cancel (priv->actualize_printers_list_cancellable);
+  g_clear_object (&priv->actualize_printers_list_cancellable);
 
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
@@ -630,13 +634,25 @@ actualize_printers_list_cb (GObject      *source_object,
   GtkWidget              *widget;
   PpCups                 *cups = PP_CUPS (source_object);
   PpCupsDests            *cups_dests;
+  GError                 *error = NULL;
   int                     i;
+
+  cups_dests = pp_cups_get_dests_finish (cups, result, &error);
+
+  if (cups_dests == NULL && error != NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Could not get dests: %s", error->message);
+        }
+
+      g_error_free (error);
+      return;
+    }
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   free_dests (self);
-  cups_dests = pp_cups_get_dests_finish (cups, result, NULL);
-
   priv->dests = cups_dests->dests;
   priv->num_dests = cups_dests->num_of_dests;
   g_free (cups_dests);
@@ -656,10 +672,16 @@ actualize_printers_list_cb (GObject      *source_object,
 static void
 actualize_printers_list (CcPrintersPanel *self)
 {
-  PpCups *cups;
+  CcPrintersPanelPrivate *priv;
+  PpCups                 *cups;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
 
   cups = pp_cups_new ();
-  pp_cups_get_dests_async (cups, NULL, actualize_printers_list_cb, self);
+  pp_cups_get_dests_async (cups,
+                           priv->actualize_printers_list_cancellable,
+                           actualize_printers_list_cb,
+                           self);
 }
 
 static void
@@ -948,6 +970,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
                                                  g_str_equal,
                                                  g_free,
                                                  NULL);
+
+  priv->actualize_printers_list_cancellable = g_cancellable_new ();
 
   builder_result = gtk_builder_add_objects_from_resource (priv->builder,
                                                           "/org/gnome/control-center/printers/printers.ui",
