@@ -25,7 +25,7 @@
 # Laurent Coudeur <laurentc@iol.ie>, 2009, 2010.
 # Gérard Baylard <Geodebay@gmail.com>, 2011.
 # Grawok <grawok@gmx.com>, 2012.
-# Alain Lojewski <allomervan@gmail.com>, 2011-2016.
+# Alain Lojewski <allomervan@gmail.com>, 2011-2017.
 # Julien Hardelin <jhardlin@orange.fr>, 2013.
 # Alexandre Franke <alexandre.franke@gmail.com>, 2013-2016.
 # Guillaume Bernard <translate@filorin.fr>, 2015.
@@ -37,10 +37,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-23 04:39+0000\n"
-"PO-Revision-Date: 2016-10-28 12:11+0200\n"
-"Last-Translator: Charles Monzat <superboa@hotmail.fr>\n"
-"Language-Team: français <gnomefr@traduc.org>\n"
+"POT-Creation-Date: 2017-03-17 21:54+0000\n"
+"PO-Revision-Date: 2017-03-18 10:10+0200\n"
+"Last-Translator: Alain Lojewski <allomervan@gmail.com>\n"
+"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,11 +139,11 @@ msgstr ""
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1298
-#: ../panels/network/net-device-wifi.c:1535
+#: ../panels/network/net-device-wifi.c:1346
+#: ../panels/network/net-device-wifi.c:1585
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/printers/pp-details-dialog.c:319
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -1143,7 +1143,7 @@ msgstr "Principal"
 
 #: ../panels/display/cc-display-panel.c:599
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1263,7 +1263,7 @@ msgstr "Ne pas utiliser cet écran"
 
 #. TRANSLATORS: the state of the night light setting
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
@@ -1285,7 +1285,7 @@ msgstr "_Organiser les écrans associés"
 
 #: ../panels/display/cc-display-panel.c:2878
 msgid "_Night Light"
-msgstr ""
+msgstr "Mode _nuit"
 
 #. This cancels the redshift inhibit.
 #: ../panels/display/display.ui.h:2
@@ -1302,19 +1302,20 @@ msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
 msgstr ""
+"Le mode nuit adoucit les couleurs bleues de l'écran. Il peut réduire la fatigue des yeux et les risques d'insomnies."
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: ../panels/display/display.ui.h:7
 msgid "Night Light"
-msgstr ""
+msgstr "Mode nuit"
 
 #: ../panels/display/display.ui.h:8
 msgid "Schedule"
-msgstr ""
+msgstr "Horaires"
 
 #: ../panels/display/display.ui.h:9
 msgid "Sunset to Sunrise"
-msgstr ""
+msgstr "Lever au coucher du soleil"
 
 #: ../panels/display/display.ui.h:10
 #: ../panels/network/connection-editor/ce-page-ip4.c:630
@@ -1326,7 +1327,7 @@ msgstr "Manuel"
 
 #: ../panels/display/display.ui.h:11
 msgid "From"
-msgstr ""
+msgstr "De"
 
 #: ../panels/display/display.ui.h:12
 msgid ":"
@@ -1335,16 +1336,16 @@ msgstr ":"
 #. This is the short form for the time period in the morning
 #: ../panels/display/display.ui.h:14
 msgid "AM"
-msgstr ""
+msgstr "matin"
 
 #. This is the short form for the time period in the afternoon
 #: ../panels/display/display.ui.h:16
 msgid "PM"
-msgstr ""
+msgstr "après midi"
 
 #: ../panels/display/display.ui.h:17
 msgid "To"
-msgstr ""
+msgstr "à"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -1357,13 +1358,13 @@ msgstr "Choisir le mode d'utilisation des écrans et projecteurs connectés"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:5
-#, fuzzy
-#| msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;"
 msgid ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
 "redshift;color;sunset;sunrise;"
 msgstr ""
 "Panneau;Projecteur;xrandr;Écran;Définition;Résolution;Rafraîchissement;"
+"Moniteur;Nuit;Éclairage;Lumière;Bleue;redshift;décalage;spectral;couleur;"
+"lever;coucher;"
 
 #. TRANSLATORS: AP type
 #: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
@@ -1846,16 +1847,16 @@ msgstr ""
 "Avec les touches de modification seules, basculer vers la source suivante"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:181
-#, fuzzy
-#| msgid "Set Shortcut"
 msgid "Reset All Shortcuts?"
-msgstr "Définir un raccourci"
+msgstr "Réinitialiser tous les raccourcis ?"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:184
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
 msgstr ""
+"Réinitialiser tous les raccourcis peut aussi affecter vos raccourcis "
+"personnalisés. Cette action est irréversible."
 
 #: ../panels/keyboard/cc-keyboard-panel.c:188
 #: ../panels/keyboard/shortcut-editor.ui.h:10
@@ -1865,10 +1866,8 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:189
-#, fuzzy
-#| msgid "Reset"
 msgid "Reset All"
-msgstr "Réinitialiser"
+msgstr "Réinitialiser tout"
 
 #: ../panels/keyboard/cc-keyboard-panel.c:281
 msgid "Reset the shortcut to its default value"
@@ -1923,13 +1922,11 @@ msgstr "Raccourcis clavier"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Reset All…"
-msgstr ""
+msgstr "Réinitialiser tout…"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
-#, fuzzy
-#| msgid "Reset the shortcut to its default value"
 msgid "Reset all shortcuts to their default keybindings"
-msgstr "Réinitialiser le raccourci à sa valeur par défaut"
+msgstr "Réinitialiser tous les raccourcis à leurs combinaisons par défaut"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "No keyboard shortcut found"
@@ -2181,34 +2178,34 @@ msgstr "Profil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
-#: ../panels/network/net-device-wifi.c:214
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:215
+#: ../panels/network/net-device-wifi.c:391
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:395
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:396
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:58
-#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:223
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:63
-#: ../panels/network/net-device-wifi.c:227
+#: ../panels/network/net-device-wifi.c:228
 msgid "Enterprise"
 msgstr "Entreprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:68
-#: ../panels/network/net-device-wifi.c:232
-#: ../panels/network/net-device-wifi.c:380
+#: ../panels/network/net-device-wifi.c:233
+#: ../panels/network/net-device-wifi.c:381
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Aucune"
@@ -2220,7 +2217,7 @@ msgstr "Jamais"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:486
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2230,37 +2227,37 @@ msgstr[1] "Il y a %i jours"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:542
+#: ../panels/network/net-device-wifi.c:544
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:571
+#: ../panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Aucun"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:573
+#: ../panels/network/net-device-wifi.c:575
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Faible"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:575
+#: ../panels/network/net-device-wifi.c:577
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Correct"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:577
+#: ../panels/network/net-device-wifi.c:579
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bon"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:579
+#: ../panels/network/net-device-wifi.c:581
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excellent"
@@ -2599,7 +2596,7 @@ msgid "_Reset"
 msgstr "_Réinitialiser"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1536
+#: ../panels/network/net-device-wifi.c:1586
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Oublier"
@@ -2647,7 +2644,7 @@ msgid "Select file to import"
 msgstr "Sélectionner le fichier à importer"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:322
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -2729,17 +2726,17 @@ msgstr ""
 "vpn;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:471
+#: ../panels/network/net-device-wifi.c:472
 msgid "never"
 msgstr "jamais"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:482
 msgid "today"
 msgstr "aujourd'hui"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:484
 msgid "yesterday"
 msgstr "hier"
 
@@ -2766,7 +2763,7 @@ msgid "Wired"
 msgstr "Filaire"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1694
+#: ../panels/network/net-device-wifi.c:1744
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2777,7 +2774,7 @@ msgstr "Options…"
 msgid "Add new connection"
 msgstr "Ajouter une nouvelle connexion"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1254
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2785,13 +2782,13 @@ msgstr ""
 "Si vous disposez d'une connexion filaire vers Internet, vous pouvez créer un "
 "point d'accès sans fil pour partager votre connexion avec les autres."
 
-#: ../panels/network/net-device-wifi.c:1209
+#: ../panels/network/net-device-wifi.c:1258
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Basculer sur le point d'accès sans fil va vous déconnecter de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1213
+#: ../panels/network/net-device-wifi.c:1262
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2799,24 +2796,24 @@ msgstr ""
 "Vous ne pouvez pas accéder à Internet par votre connexion sans fil pendant "
 "que le point d'accès est actif."
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1344
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Interrompre le point d'accès et déconnecter tous les utilisateurs ?"
 
-#: ../panels/network/net-device-wifi.c:1299
+#: ../panels/network/net-device-wifi.c:1347
 msgid "_Stop Hotspot"
 msgstr "_Interrompre le point d'accès"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1447
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Les règles du système interdisent son utilisation comme point d'accès"
 
-#: ../panels/network/net-device-wifi.c:1400
+#: ../panels/network/net-device-wifi.c:1450
 msgid "Wireless device does not support Hotspot mode"
 msgstr ""
 "Le périphérique sans fil ne prend pas en charge le mode « point d'accès »"
 
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1582
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2824,11 +2821,11 @@ msgstr ""
 "Les informations des réseaux sélectionnés, y compris les mots de passe et "
 "toute configuration personnalisée seront perdus."
 
-#: ../panels/network/net-device-wifi.c:1842
+#: ../panels/network/net-device-wifi.c:1892
 msgid "History"
 msgstr "Historique"
 
-#: ../panels/network/net-device-wifi.c:1846
+#: ../panels/network/net-device-wifi.c:1896
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2836,7 +2833,7 @@ msgid "_Close"
 msgstr "_Fermer"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1854
+#: ../panels/network/net-device-wifi.c:1904
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oublier"
@@ -3058,8 +3055,6 @@ msgid "Hardware"
 msgstr "Matériel"
 
 #: ../panels/network/network-wifi.ui.h:51
-#, fuzzy
-#| msgid "Reset"
 msgctxt "tab"
 msgid "Reset"
 msgstr "Réinitialiser"
@@ -3783,27 +3778,23 @@ msgid "Sound _Alerts"
 msgstr "_Alertes sonores"
 
 #: ../panels/notifications/edit-dialog.ui.h:5
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgctxt "notifications"
 msgid "Notification _Popups"
-msgstr "_Notifications"
+msgstr "_Bannières de notifications"
 
 #: ../panels/notifications/edit-dialog.ui.h:6
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
 msgstr ""
+"Les notifications continuent à s'afficher dans la liste du tiroir lorsque "
+"l'affichage des bannières est désactivé."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
 #: ../panels/notifications/edit-dialog.ui.h:8
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "Show Message _Content in Banners"
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
-msgstr "Afficher le _contenu du message dans les bannières"
+msgstr "Afficher le _contenu du message dans le tiroir des notifications"
 
 #: ../panels/notifications/edit-dialog.ui.h:9
 msgctxt "notifications"
@@ -3827,14 +3818,11 @@ msgstr "Contrôler quelles notifications s'affichent et leur contenu"
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:5
 msgid "Notifications;Banner;Message;Tray;Popup;"
-msgstr "Notifications;Messages surgissants;Message;Tiroir;Popup;"
+msgstr "Notifications;Messages surgissants;Bannières;Message;Tiroir;Popup;"
 
 #: ../panels/notifications/notifications.ui.h:1
-#, fuzzy
-#| msgctxt "notifications"
-#| msgid "_Notifications"
 msgid "Notification _Popups"
-msgstr "_Notifications"
+msgstr "_Bannières de notifications"
 
 #: ../panels/notifications/notifications.ui.h:2
 msgid "_Lock Screen Notifications"
@@ -3868,7 +3856,7 @@ msgstr "Erreur lors de la suppression du compte"
 #: ../panels/online-accounts/cc-online-accounts-panel.c:937
 #, c-format
 msgid "<b>%s</b> removed"
-msgstr ""
+msgstr "<b>%s</b> supprimé"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
@@ -3890,15 +3878,17 @@ msgstr ""
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "Undo"
-msgstr ""
+msgstr "Annuler"
 
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Connect to your data in the cloud"
-msgstr ""
+msgstr "Connexion à vos données du nuage"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "No internet connection — connect to set up new online accounts"
 msgstr ""
+"Aucune connexion Internet — connectez-vous pour configurer de nouveaux "
+"comptes en ligne"
 
 #: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
@@ -4272,12 +4262,12 @@ msgid "Authentication Required"
 msgstr "Authentification requise"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:713
 msgid "Failed to add new printer."
 msgstr "L'ajout de la nouvelle imprimante a échoué."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:959
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impossible de charger l'interface utilisateur : %s"
@@ -4295,13 +4285,11 @@ msgstr "Pilote"
 
 #: ../panels/printers/details-dialog.ui.h:5
 msgid "Searching for preferred drivers…"
-msgstr "Recherche de pilotes préférés…"
+msgstr "Recherche des pilotes préférés…"
 
 #: ../panels/printers/details-dialog.ui.h:6
-#, fuzzy
-#| msgid "Search for a city"
 msgid "Search for Drivers"
-msgstr "Rechercher une ville"
+msgstr "Rechercher des pilotes"
 
 #: ../panels/printers/details-dialog.ui.h:7
 msgid "Select from Database…"
@@ -4347,7 +4335,7 @@ msgstr "Ajouter une imprimante"
 #. Translators: This buttons submits the credentials for the selected server.
 #: ../panels/printers/new-printer-dialog.ui.h:6
 msgid "_Unlock"
-msgstr ""
+msgstr "_Déverrouiller"
 
 #. Translators: No printers were detected
 #: ../panels/printers/new-printer-dialog.ui.h:8
@@ -4360,12 +4348,10 @@ msgid "Enter a network address or search for a printer"
 msgstr "Saisissez l'adresse d'un réseau ou recherchez une imprimante"
 
 #: ../panels/printers/new-printer-dialog.ui.h:12
-#, fuzzy
-#| msgid "Enter your username and password to view printers available on %s."
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Saisissez votre nom d'utilisateur et votre mot de passe pour afficher les "
-"imprimantes disponibles sur %s."
+"imprimantes sur le serveur."
 
 #: ../panels/printers/options-dialog.ui.h:1
 msgid "Loading options…"
@@ -4373,21 +4359,20 @@ msgstr "Chargement des options…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: ../panels/printers/pp-details-dialog.c:123
-#: ../panels/printers/pp-details-dialog.c:416
-#, fuzzy, c-format
-#| msgid "Details"
+#: ../panels/printers/pp-details-dialog.c:415
+#, c-format
 msgid "%s Details"
-msgstr "Détails"
+msgstr "Informations sur %s"
 
-#: ../panels/printers/pp-details-dialog.c:174
+#: ../panels/printers/pp-details-dialog.c:172
 msgid "No suitable driver found"
 msgstr "Aucun pilote adéquat trouvé"
 
-#: ../panels/printers/pp-details-dialog.c:318
+#: ../panels/printers/pp-details-dialog.c:316
 msgid "Select PPD File"
 msgstr "Sélectionnez un fichier PPD"
 
-#: ../panels/printers/pp-details-dialog.c:327
+#: ../panels/printers/pp-details-dialog.c:325
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4457,65 +4442,63 @@ msgid "Reverse portrait"
 msgstr "Portrait inversé"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "En attente"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "En pause"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "Traitement en cours"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Arrêtée"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Interrompue"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Annulée"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Terminée"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - tâches d'impression actives"
 
 #: ../panels/printers/pp-new-printer-dialog.c:402
-#, fuzzy
-#| msgid "Select Printer Driver"
 msgid "Unlock Print Server"
-msgstr "Sélectionner un pilote d'imprimante"
+msgstr "Déverrouiller le serveur d'imprimantes"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:406
 #, c-format
 msgid "Unlock %s."
-msgstr ""
+msgstr "Déverrouiller %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
 #: ../panels/printers/pp-new-printer-dialog.c:411
@@ -4526,10 +4509,8 @@ msgstr ""
 "imprimantes sur %s."
 
 #: ../panels/printers/pp-new-printer-dialog.c:876
-#, fuzzy
-#| msgid "Not searching for networks"
 msgid "Searching for Printers"
-msgstr "Aucune recherche de réseau en cours"
+msgstr "Recherche d'imprimantes"
 
 #. Translators: The found device is a printer connected via USB
 #: ../panels/printers/pp-new-printer-dialog.c:1799
@@ -4693,118 +4674,118 @@ msgid "Manufacturer"
 msgstr "Fabricant"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:368
+#: ../panels/printers/pp-printer-entry.c:443
 msgid "No Active Jobs"
 msgstr "Aucune tâche d'impression active"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:373
+#: ../panels/printers/pp-printer-entry.c:448
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u tâche"
+msgstr[1] "%u tâches"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:470
+#: ../panels/printers/pp-printer-entry.c:584
 msgid "Low on toner"
 msgstr "Toner pratiquement épuisé"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:472
+#: ../panels/printers/pp-printer-entry.c:586
 msgid "Out of toner"
 msgstr "Plus de toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:475
+#: ../panels/printers/pp-printer-entry.c:589
 msgid "Low on developer"
 msgstr "Révélateur pratiquement épuisé"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:478
+#: ../panels/printers/pp-printer-entry.c:592
 msgid "Out of developer"
 msgstr "Plus de révélateur"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:480
+#: ../panels/printers/pp-printer-entry.c:594
 msgid "Low on a marker supply"
 msgstr "Cartouche de couleur pratiquement vide"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:482
+#: ../panels/printers/pp-printer-entry.c:596
 msgid "Out of a marker supply"
 msgstr "Cartouche de couleur vide"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:484
+#: ../panels/printers/pp-printer-entry.c:598
 msgid "Open cover"
 msgstr "Couvercle ouvert"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:486
+#: ../panels/printers/pp-printer-entry.c:600
 msgid "Open door"
 msgstr "Porte ouverte"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:488
+#: ../panels/printers/pp-printer-entry.c:602
 msgid "Low on paper"
 msgstr "Pratiquement plus de papier"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:490
+#: ../panels/printers/pp-printer-entry.c:604
 msgid "Out of paper"
 msgstr "Plus de papier"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:492
+#: ../panels/printers/pp-printer-entry.c:606
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Hors ligne"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:494
-#: ../panels/printers/pp-printer-entry.c:624
+#: ../panels/printers/pp-printer-entry.c:608
+#: ../panels/printers/pp-printer-entry.c:738
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Arrêtée"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:496
+#: ../panels/printers/pp-printer-entry.c:610
 msgid "Waste receptacle almost full"
 msgstr "Récipient à déchets pratiquement plein"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:498
+#: ../panels/printers/pp-printer-entry.c:612
 msgid "Waste receptacle full"
 msgstr "Récipient à déchets plein"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:500
+#: ../panels/printers/pp-printer-entry.c:614
 msgid "The optical photo conductor is near end of life"
 msgstr "Le photo-conducteur optique est pratiquement en fin de vie"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:502
+#: ../panels/printers/pp-printer-entry.c:616
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Le photo-conducteur optique n'est plus en état"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:610
+#: ../panels/printers/pp-printer-entry.c:724
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Prête"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:615
+#: ../panels/printers/pp-printer-entry.c:729
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "N'accepte plus de tâche supplémentaire"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:620
+#: ../panels/printers/pp-printer-entry.c:734
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Traitement en cours"
@@ -4814,16 +4795,12 @@ msgid "Printing Options"
 msgstr "Options d'impression"
 
 #: ../panels/printers/printer-entry.ui.h:2
-#, fuzzy
-#| msgid "Printer Default"
 msgid "Printer Details"
-msgstr "Option par défaut de l'imprimante"
+msgstr "Informations sur l'imprimante"
 
 #: ../panels/printers/printer-entry.ui.h:3
-#, fuzzy
-#| msgid "Printer Default"
 msgid "Use Printer by Default"
-msgstr "Option par défaut de l'imprimante"
+msgstr "Utiliser l'imprimante par défaut"
 
 #: ../panels/printers/printer-entry.ui.h:4
 msgid "Remove Printer"
@@ -4840,7 +4817,7 @@ msgstr "Niveau d'encre"
 #. Translators: This is the message which follows the printer error.
 #: ../panels/printers/printer-entry.ui.h:9
 msgid "Please restart when the problem is resolved."
-msgstr ""
+msgstr "Veuillez redémarrer après résolution du problème."
 
 #. Translators: This is the button which restarts the printer.
 #: ../panels/printers/printer-entry.ui.h:11
@@ -5775,17 +5752,13 @@ msgstr "Faciliter la vision, l'écoute, la saisie, la sélection et le clic"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;"
-#| "size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
 "AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
 msgstr ""
 "Clavier;Souris;lien;Accessibilité;Contraste;Zoom;Lecteur d'écran;texte;"
 "police;taille;Touches rémanentes;Touches lentes;Rebonds de touches;Touches "
-"de la souris;"
+"de la souris;Double clic;Délai;Assistance;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6883,8 +6856,7 @@ msgstr "Début de session"
 #. Translators: This is the title of the "Account Activity" dialog.
 #. The %s is the user real name.
 #: ../panels/user-accounts/um-history-dialog.c:299
-#, fuzzy, c-format
-#| msgid "%s - Account Activity"
+#, c-format
 msgid "%s — Account Activity"
 msgstr "Activité du compte de %s"
 
@@ -6950,8 +6922,8 @@ msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Connexion au domaine %s impossible : %s"
 
 #: ../panels/user-accounts/um-user-panel.c:195
-msgid "<small>Your account</small>"
-msgstr "<small>Votre compte</small>"
+msgid "Your account"
+msgstr "Votre compte"
 
 #: ../panels/user-accounts/um-user-panel.c:390
 msgid "Failed to delete user"
@@ -7293,6 +7265,8 @@ msgstr "Aucun stylet trouvé"
 #: ../panels/wacom/wacom-stylus-page.ui.h:7
 msgid "Please move your stylus to the proximity of the tablet to configure it"
 msgstr ""
+"Veuillez placer votre stylet sur les cibles du bord de la tablette pour la "
+"configurer"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:10
 msgid "Eraser Pressure Feel"
@@ -7442,6 +7416,9 @@ msgstr "Point d'accès"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Aucun résultat trouvé"
+
+#~ msgid "<small>Your account</small>"
+#~ msgstr "<small>Votre compte</small>"
 
 #~ msgid "Edit"
 #~ msgstr "Modifier"
