@@ -1315,6 +1315,7 @@ printer_configure_async (PpNewPrinter *new_printer)
       PpMaintenanceCommand *command;
       command = pp_maintenance_command_new (priv->name,
                                             "autoconfigure",
+                                            NULL,
       /* Translators: Name of job which makes printer to autoconfigure itself */
                                             _("Automatic configuration"));
 

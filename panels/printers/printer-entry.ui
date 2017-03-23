@@ -44,7 +44,17 @@
             <property name="width">3</property>
           </packing>
         </child>
-
+        <child>
+          <object class="GtkModelButton" id="clean_heads_menuitem">
+            <property name="visible">False</property>
+            <property name="text" translatable="yes" comments="Translators: This button executes command which cleans print heads of the printer.">Clean Print Heads</property>
+	    <signal name="clicked" handler="clean_heads"/>
+	  </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">3</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkModelButton" id="remove_printer_menuitem">
             <property name="visible">True</property>
@@ -53,7 +63,7 @@
           </object>
           <packing>
             <property name="left-attach">1</property>
-            <property name="top-attach">3</property>
+            <property name="top-attach">4</property>
           </packing>
         </child>
       </object>

@@ -25,6 +25,7 @@
 #include <glib/gstdio.h>
 
 #include "pp-details-dialog.h"
+#include "pp-maintenance-command.h"
 #include "pp-options-dialog.h"
 #include "pp-jobs-dialog.h"
 #include "pp-printer.h"
@@ -47,6 +48,10 @@ struct _PpPrinterEntry
   gboolean  is_authorized;
   gint      printer_state;
 
+  /* Maintenance commands */
+  PpMaintenanceCommand *clean_command;
+  GCancellable *check_clean_heads_cancellable;
+
   /* Widgets */
   GtkImage       *printer_icon;
   GtkLabel       *printer_status;
@@ -57,6 +62,7 @@ struct _PpPrinterEntry
   GtkLabel       *printer_location_address_label;
   GtkDrawingArea *supply_drawing_area;
   GtkWidget      *show_jobs_dialog_button;
+  GtkWidget      *clean_heads_menuitem;
   GtkCheckButton *printer_default_checkbutton;
   GtkModelButton *remove_printer_menuitem;
   GtkBox         *printer_error;
@@ -399,6 +405,79 @@ set_as_default_printer (GtkToggleButton *button,
   printer_set_default (self->printer_name);
 
   g_signal_emit_by_name (self, "printer-changed");
+}
+
+static void
+check_clean_heads_maintenance_command_cb (GObject      *source_object,
+                                          GAsyncResult *res,
+                                          gpointer      user_data)
+{
+  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
+  gboolean              is_supported = FALSE;
+  GError               *error = NULL;
+
+  is_supported = pp_maintenance_command_is_supported_finish (command, res, &error);
+  if (error != NULL)
+    {
+      g_debug ("Could not check 'Clean' maintenance command: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  if (is_supported)
+    {
+      PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+      gtk_widget_show (GTK_WIDGET (self->clean_heads_menuitem));
+    }
+
+ out:
+  g_object_unref (source_object);
+}
+
+static void
+check_clean_heads_maintenance_command (PpPrinterEntry *self)
+{
+  if (self->clean_command == NULL)
+    return;
+
+  g_object_ref (self->clean_command);
+  self->check_clean_heads_cancellable = g_cancellable_new ();
+
+  pp_maintenance_command_is_supported_async (self->clean_command,
+                                             self->check_clean_heads_cancellable,
+                                             check_clean_heads_maintenance_command_cb,
+                                             self);
+}
+
+static void
+clean_heads_maintenance_command_cb (GObject      *source_object,
+                                    GAsyncResult *res,
+                                    gpointer      user_data)
+{
+  PpPrinterEntry       *self = PP_PRINTER_ENTRY (user_data);
+  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
+  GError               *error = NULL;
+
+  if (!pp_maintenance_command_execute_finish (command, res, &error))
+    {
+      g_warning ("Error cleaning print heads for %s: %s", self->printer_name, error->message);
+      g_error_free (error);
+    }
+  g_object_unref (source_object);
+}
+
+static void
+clean_heads (GtkButton *button,
+             PpPrinterEntry *self)
+{
+  if (self->clean_command == NULL)
+    return;
+
+  g_object_ref (self->clean_command);
+  pp_maintenance_command_execute_async (self->clean_command,
+                                        NULL,
+                                        clean_heads_maintenance_command_cb,
+                                        self);
 }
 
 static void
@@ -751,6 +830,13 @@ pp_printer_entry_new (cups_dest_t  printer,
 
   self->printer_hostname = printer_get_hostname (printer_type, self->printer_uri, printer_uri);
 
+  self->clean_command = pp_maintenance_command_new (self->printer_name,
+                                                    "Clean",
+                                                    "all",
+                                                    /* Translators: Name of job which makes printer to clean its heads */
+                                                    _("Clean print heads"));
+  check_clean_heads_maintenance_command (self);
+
   gtk_image_set_from_icon_name (self->printer_icon, printer_icon_name, GTK_ICON_SIZE_DIALOG);
   gtk_label_set_text (self->printer_status, printer_status);
   g_free (printer_status);
@@ -823,6 +909,13 @@ pp_printer_entry_dispose (GObject *object)
       g_clear_object (&self->get_jobs_cancellable);
     }
 
+  if (self->check_clean_heads_cancellable)
+    {
+      g_cancellable_cancel (self->check_clean_heads_cancellable);
+      g_clear_object (&self->check_clean_heads_cancellable);
+    }
+  g_clear_object (&self->clean_command);
+
   G_OBJECT_CLASS (pp_printer_entry_parent_class)->dispose (object);
 }
 
@@ -844,6 +937,7 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, supply_drawing_area);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_default_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, show_jobs_dialog_button);
+  gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, clean_heads_menuitem);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, remove_printer_menuitem);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, error_status);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_error);
@@ -851,6 +945,7 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_show_printer_details_dialog);
   gtk_widget_class_bind_template_callback (widget_class, on_show_printer_options_dialog);
   gtk_widget_class_bind_template_callback (widget_class, set_as_default_printer);
+  gtk_widget_class_bind_template_callback (widget_class, clean_heads);
   gtk_widget_class_bind_template_callback (widget_class, remove_printer);
   gtk_widget_class_bind_template_callback (widget_class, show_jobs_dialog);
   gtk_widget_class_bind_template_callback (widget_class, restart_printer);
