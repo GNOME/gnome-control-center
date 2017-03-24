@@ -496,10 +496,11 @@ static void
 popup_icon_menu (GtkToggleButton *button, UmPhotoDialog *um)
 {
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)) && !gtk_widget_get_visible (um->photo_popup)) {
-                gtk_menu_popup (GTK_MENU (um->photo_popup),
-                                NULL, NULL,
-                                (GtkMenuPositionFunc) popup_menu_below_button, um->popup_button,
-                                0, gtk_get_current_event_time ());
+                gtk_menu_popup_at_widget (GTK_MENU (um->photo_popup),
+                                          GTK_WIDGET (button),
+                                          GDK_GRAVITY_NORTH_WEST,
+                                          GDK_GRAVITY_SOUTH_WEST,
+                                          NULL);
         } else {
                 gtk_menu_popdown (GTK_MENU (um->photo_popup));
         }
