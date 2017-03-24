@@ -495,14 +495,21 @@ skip_faces:
 static void
 popup_icon_menu (GtkToggleButton *button, UmPhotoDialog *um)
 {
+        GtkWindow *window;
+
+        window = GTK_WINDOW (gtk_widget_get_toplevel (um->photo_popup));
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)) && !gtk_widget_get_visible (um->photo_popup)) {
                 gtk_menu_popup_at_widget (GTK_MENU (um->photo_popup),
                                           GTK_WIDGET (button),
                                           GDK_GRAVITY_NORTH_WEST,
                                           GDK_GRAVITY_SOUTH_WEST,
                                           NULL);
+
+                gtk_window_set_transient_for (window, GTK_WINDOW (gtk_widget_get_toplevel (um->popup_button)));
         } else {
                 gtk_menu_popdown (GTK_MENU (um->photo_popup));
+
+                gtk_window_set_transient_for (window, NULL);
         }
 }
 
