@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-25 20:09+0100\n"
-"PO-Revision-Date: 2017-03-25 20:10+0100\n"
+"POT-Creation-Date: 2017-03-27 21:48+0200\n"
+"PO-Revision-Date: 2017-03-27 21:49+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -900,12 +900,12 @@ msgstr "Wczoraj"
 #. Translators: This is a date format string in the style of "Feb 24".
 #: ../panels/common/cc-util.c:138
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%-d %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
 #: ../panels/common/cc-util.c:143
 msgid "%b %e, %Y"
-msgstr "%e %b, %Y"
+msgstr "%-d %b %Y"
 
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Language"
@@ -929,12 +929,12 @@ msgstr "Rok"
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:340
 msgid "%e %B %Y, %l:%M %p"
-msgstr "%e %B %Y, %l∶%M %p"
+msgstr "%-d %B %Y, %l∶%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
 #: ../panels/datetime/cc-datetime-panel.c:345
 msgid "%e %B %Y, %R"
-msgstr "%e %B %Y, %H∶%M"
+msgstr "%-d %B %Y, %H∶%M"
 
 #. Translators: "city, country"
 #: ../panels/datetime/cc-datetime-panel.c:523
@@ -1154,17 +1154,17 @@ msgstr "Przeciąganie zmienia położenie"
 #: ../panels/display/cc-display-panel.c:1812
 #, c-format
 msgid "%d Hz (NTSC)"
-msgstr "%d Hz (NTSC)"
+msgstr "%d Hz (NTSC)"
 
 #. translators: example string is "60 Hz"
 #: ../panels/display/cc-display-panel.c:1818
 #, c-format
 msgid "%d Hz"
-msgstr "%d Hz"
+msgstr "%d Hz"
 
 #: ../panels/display/cc-display-panel.c:2279
 msgid "Rotate counterclockwise by 90°"
-msgstr "Obraca przeciwnie do ruchu wskazówek zegara o 90°"
+msgstr "Obraca w lewo o 90°"
 
 #: ../panels/display/cc-display-panel.c:2297
 msgid "Rotate by 180°"
@@ -1172,11 +1172,11 @@ msgstr "Obraca o 180°"
 
 #: ../panels/display/cc-display-panel.c:2315
 msgid "Rotate clockwise by 90°"
-msgstr "Obraca zgodnie z ruchem wskazówek zegara o 90°"
+msgstr "Obraca w prawo o 90°"
 
 #: ../panels/display/cc-display-panel.c:2336
 msgid "Size"
-msgstr "Rozmiar"
+msgstr "Wymiary"
 
 #. aspect ratio
 #: ../panels/display/cc-display-panel.c:2351
@@ -1679,7 +1679,7 @@ msgstr "Uruchomienie kalkulatora"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:5
 msgid "Launch email client"
-msgstr "Uruchomienie klienta poczty e-mail"
+msgstr "Uruchomienie klienta poczty"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Launch web browser"
@@ -2147,7 +2147,7 @@ msgstr "automatycznie"
 #: ../panels/network/connection-editor/ce-page.c:521
 #, c-format
 msgid "Profile %d"
-msgstr "Profil %d"
+msgstr "%d. profil"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
@@ -2204,7 +2204,7 @@ msgstr[2] "%i dni temu"
 #: ../panels/network/net-device-wifi.c:544
 #, c-format
 msgid "%d Mb/s"
-msgstr "%d Mb/s"
+msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
 #: ../panels/network/net-device-wifi.c:573
@@ -2442,19 +2442,19 @@ msgstr "MII (Media Independent Interface)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:6
 msgid "10 Mb/s"
-msgstr "10 Mb/s"
+msgstr "10 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:7
 msgid "100 Mb/s"
-msgstr "100 Mb/s"
+msgstr "100 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:8
 msgid "1 Gb/s"
-msgstr "1 Gb/s"
+msgstr "1 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:9
 msgid "10 Gb/s"
-msgstr "10 Gb/s"
+msgstr "10 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:10
 #: ../panels/network/connection-editor/vpn-page.ui.h:1
@@ -2803,7 +2803,7 @@ msgstr "Historia"
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "_Close"
-msgstr "_Zamknij"
+msgstr "Za_mknij"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: ../panels/network/net-device-wifi.c:1904
@@ -3729,7 +3729,7 @@ msgid ""
 "digits"
 msgstr ""
 "nieprawidłowe WPA-PSK: nieprawidłowa długość klucza %zu. Musi mieć [8,63] "
-"bajtów lub 64 cyfry szesnastkowe"
+"bajty lub 64 cyfry szesnastkowe"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.c:79
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
@@ -3871,7 +3871,7 @@ msgstr ""
 
 #: ../panels/online-accounts/online-accounts.ui.h:4
 msgid "Add an account"
-msgstr "Dodaj konto"
+msgstr "Dodawanie konta"
 
 #: ../panels/online-accounts/online-accounts.ui.h:5
 msgid "Remove Account"
@@ -3902,7 +3902,7 @@ msgstr[2] "%i godzin"
 #: ../panels/power/cc-power-panel.c:279
 #, c-format
 msgid "%i %s %i %s"
-msgstr "%i %s %i %s"
+msgstr "%i %s i %i %s"
 
 #: ../panels/power/cc-power-panel.c:280
 msgid "hour"
@@ -4638,12 +4638,12 @@ msgstr "Osadzanie tylko czcionek GhostScript"
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:92
 msgid "Convert to PS level 1"
-msgstr "Konwertowanie na PostScript poziomu 1"
+msgstr "Konwertowanie na PostScript 1. poziomu"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:94
 msgid "Convert to PS level 2"
-msgstr "Konwertowanie na PostScript poziomu 2"
+msgstr "Konwertowanie na PostScript 2. poziomu"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:96
@@ -6791,14 +6791,14 @@ msgstr "Ostatni tydzień"
 #: ../panels/user-accounts/um-history-dialog.c:83
 msgctxt "login history week label"
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%-d %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
 #: ../panels/user-accounts/um-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e, %Y"
-msgstr "%e %b, %Y"
+msgstr "%-d %b %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
