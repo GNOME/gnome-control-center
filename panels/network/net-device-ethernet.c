@@ -81,6 +81,7 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
         value_label = gtk_label_new (value);
         gtk_widget_set_halign (value_label, GTK_ALIGN_START);
         gtk_widget_set_hexpand (value_label, TRUE);
+        gtk_label_set_selectable (GTK_LABEL (value_label), TRUE);
 
         gtk_label_set_mnemonic_widget (GTK_LABEL (heading_label), value_label);
 
