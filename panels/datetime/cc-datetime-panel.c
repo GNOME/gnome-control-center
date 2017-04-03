@@ -87,7 +87,6 @@ struct _CcDateTimePanelPrivate
   GSettings *datetime_settings;
   GSettings *filechooser_settings;
   GDesktopClockFormat clock_format;
-  gboolean ampm_available;
   GtkWidget *am_label;
   GtkWidget *pm_label;
   GtkWidget *am_pm_stack;
@@ -289,7 +288,7 @@ update_time (CcDateTimePanel *self)
   g_signal_handlers_block_by_func (m_spinbutton, change_time, self);
   g_signal_handlers_block_by_func (am_pm_button, am_pm_button_clicked, self);
 
-  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
     use_ampm = TRUE;
   else
     use_ampm = FALSE;
@@ -541,7 +540,7 @@ update_timezone (CcDateTimePanel *self)
   char *tz_desc;
   gboolean use_ampm;
 
-  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
     use_ampm = TRUE;
   else
     use_ampm = FALSE;
@@ -715,7 +714,7 @@ change_time (CcDateTimePanel *panel)
   h = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("h_spinbutton")));
   m = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("m_spinbutton")));
 
-  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
     {
       gboolean is_pm_time;
       GtkWidget *visible_child;
@@ -1003,7 +1002,7 @@ format_hours_combobox (GtkSpinButton   *spin,
   int hour;
   gboolean use_ampm;
 
-  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
     use_ampm = TRUE;
   else
     use_ampm = FALSE;
@@ -1206,7 +1205,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   GtkWidget *widget;
   GError *error;
   GtkTreeModelSort *city_modelsort;
-  const char *ampm;
   int ret;
   const char *date_grid_name;
   char *tmp;
@@ -1314,19 +1312,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* Clock settings */
   priv->clock_settings = g_settings_new (CLOCK_SCHEMA);
-
-  ampm = nl_langinfo (AM_STR);
-  /* There are no AM/PM indicators for this locale, so
-   * offer the 24 hr clock as the only option */
-  if (ampm == NULL || ampm[0] == '\0')
-    {
-      gtk_widget_set_visible (W("timeformat-frame"), FALSE);
-      priv->ampm_available = FALSE;
-    }
-  else
-    {
-      priv->ampm_available = TRUE;
-    }
 
   widget = W ("vbox_datetime");
   gtk_container_add (GTK_CONTAINER (self), widget);

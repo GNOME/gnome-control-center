@@ -86,7 +86,7 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-GLIB_REQUIRED_VERSION=2.44.0
+GLIB_REQUIRED_VERSION=2.53.0
 GTK_REQUIRED_VERSION=3.22.0
 PA_REQUIRED_VERSION=2.0
 CANBERRA_REQUIRED_VERSION=0.13
