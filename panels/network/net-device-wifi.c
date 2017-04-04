@@ -56,7 +56,6 @@ struct _NetDeviceWifiPrivate
 {
         GtkBuilder              *builder;
         GtkWidget               *details_dialog;
-        GtkWidget               *hotspot_dialog;
         GtkSwitch               *hotspot_switch;
         gboolean                 updating_device;
         gchar                   *selected_ssid_title;
@@ -1212,7 +1211,7 @@ start_hotspot_response_cb (GtkWidget *dialog, gint response, NetDeviceWifi *devi
         if (response == GTK_RESPONSE_OK) {
                 start_shared_connection (device_wifi);
         }
-        gtk_widget_hide (dialog);
+        gtk_widget_destroy (dialog);
 }
 
 static void
@@ -1224,7 +1223,8 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
         NMClient *client;
         GtkWidget *dialog;
         GtkWidget *window;
-        GtkWidget *widget;
+        GtkWidget *message_area;
+        GtkWidget *label;
         GString *str;
 
         active_ssid = NULL;
@@ -1252,11 +1252,7 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
 
         window = gtk_widget_get_toplevel (GTK_WIDGET (button));
 
-        dialog = device_wifi->priv->hotspot_dialog;
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
-
-        str = g_string_new (_("If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with others."));
-        g_string_append (str, "\n\n");
+        str = g_string_new ("");
 
         if (active_ssid) {
                 g_string_append_printf (str, _("Switching on the wireless hotspot will disconnect you from <b>%s</b>."), active_ssid);
@@ -1265,17 +1261,52 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
 
         g_string_append (str, _("It is not possible to access the Internet through your wireless while the hotspot is active."));
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "hotspot-dialog-content"));
-        gtk_label_set_markup (GTK_LABEL (widget), str->str);
-        g_string_free (str, TRUE);
+        dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
+                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                     GTK_MESSAGE_OTHER,
+                                                     GTK_BUTTONS_NONE,
+                                                     "<big><b>%s</b></big>",
+                                                     _("Turn On Wi-Fi Hotspot?"));
 
+        /* Because we can't control the text alignment with markup, add
+         * the strings as labels directly */
+        message_area = gtk_message_dialog_get_message_area (GTK_MESSAGE_DIALOG (dialog));
+
+        label = g_object_new (GTK_TYPE_LABEL,
+                              "use-markup", TRUE,
+                              "xalign", 0.5,
+                              "max-width-chars", 50,
+                              "wrap", TRUE,
+                              "label", str->str,
+                              "justify", GTK_JUSTIFY_CENTER,
+                              "halign", GTK_ALIGN_CENTER,
+                              NULL);
+        gtk_container_add (GTK_CONTAINER (message_area), label);
+
+        label = g_object_new (GTK_TYPE_LABEL,
+                              "use-markup", TRUE,
+                              "xalign", 0.5,
+                              "max-width-chars", 50,
+                              "wrap", TRUE,
+                              "label", _("Wi-Fi hotspots are usually used to share an additional Internet connection over Wi-Fi."),
+                              "justify", GTK_JUSTIFY_CENTER,
+                              "halign", GTK_ALIGN_CENTER,
+                              NULL);
+        gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+        gtk_container_add (GTK_CONTAINER (message_area), label);
+
+        gtk_widget_show_all (message_area);
+
+        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                _("_Turn On"), GTK_RESPONSE_OK,
+                                NULL);
         g_signal_connect (dialog, "response",
                           G_CALLBACK (start_hotspot_response_cb), device_wifi);
-        g_signal_connect (dialog, "delete-event",
-                        G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
         gtk_window_present (GTK_WINDOW (dialog));
         g_free (active_ssid);
+        g_string_free (str, TRUE);
 }
 
 static void
@@ -1474,7 +1505,6 @@ net_device_wifi_finalize (GObject *object)
         NetDeviceWifiPrivate *priv = device_wifi->priv;
 
         g_clear_pointer (&priv->details_dialog, gtk_widget_destroy);
-        g_clear_pointer (&priv->hotspot_dialog, gtk_widget_destroy);
         g_object_unref (priv->builder);
         g_free (priv->selected_ssid_title);
         g_free (priv->selected_connection_id);
@@ -2119,10 +2149,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "details_dialog"));
         device_wifi->priv->details_dialog = widget;
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "hotspot-dialog"));
-        device_wifi->priv->hotspot_dialog = widget;
 
         /* setup wifi views */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
