@@ -1447,6 +1447,7 @@ cc_user_panel_init (CcUserPanel *self)
         GError *error;
         volatile GType type G_GNUC_UNUSED;
         GtkWidget *button;
+        GtkCssProvider *provider;
 
         d = self->priv = UM_USER_PANEL_PRIVATE (self);
         g_resources_register (um_get_resource ());
@@ -1468,6 +1469,13 @@ cc_user_panel_init (CcUserPanel *self)
                 g_error_free (error);
                 return;
         }
+
+        provider = gtk_css_provider_new ();
+        gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/user-accounts/user-accounts-dialog.css");
+        gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                                   GTK_STYLE_PROVIDER (provider),
+                                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        g_object_unref (provider);
 
         d->headerbar_buttons = get_widget (d, "headerbar-buttons");
         d->login_screen_settings = settings_or_null ("org.gnome.login-screen");
