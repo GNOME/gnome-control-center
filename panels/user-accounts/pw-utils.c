@@ -127,7 +127,7 @@ pw_strength (const gchar  *password,
              const gchar **hint,
              gint         *strength_level)
 {
-        gint rv, level = 0;
+        gint rv, level, length = 0;
         gdouble strength = 0.0;
         void *auxerror;
 
@@ -135,17 +135,21 @@ pw_strength (const gchar  *password,
                               password, old_password, username,
                               &auxerror);
 
+        if (password != NULL)
+                length = strlen (password);
+
         strength = CLAMP (0.01 * rv, 0.0, 1.0);
         if (rv < 0) {
+                level = (length > 0) ? 1 : 0;
         }
         else if (strength < 0.50) {
-                level = 1;
-        } else if (strength < 0.75) {
                 level = 2;
-        } else if (strength < 0.90) {
+        } else if (strength < 0.75) {
                 level = 3;
-        } else {
+        } else if (strength < 0.90) {
                 level = 4;
+        } else {
+                level = 5;
         }
 
         *hint = pw_error_hint (rv);

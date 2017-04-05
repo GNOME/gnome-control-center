@@ -84,7 +84,7 @@ update_password_strength (UmPasswordDialog *um)
         gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
         gtk_label_set_label (GTK_LABEL (um->password_hint), hint);
 
-        if (strength_level > 0) {
+        if (strength_level > 1) {
                 set_entry_validation_checkmark (GTK_ENTRY (um->password_entry));
         } else if (strlen (password) == 0) {
                 set_entry_generation_icon (GTK_ENTRY (um->password_entry));

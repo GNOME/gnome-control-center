@@ -335,11 +335,14 @@
                   <object class="GtkLevelBar" id="local_strength_indicator">
                     <property name="visible">True</property>
                     <property name="mode">discrete</property>
-                    <property name="max-value">4</property>
+                    <property name="max-value">5</property>
                     <property name="hexpand">True</property>
                     <offsets>
-                      <offset name="low" value="1"/>
-                      <offset name="high" value="3"/>
+                      <offset name="strength-weak" value="1"/>
+                      <offset name="strength-low" value="2"/>
+                      <offset name="strength-medium" value="3"/>
+                      <offset name="strength-good" value="4"/>
+                      <offset name="strength-high" value="5"/>
                     </offsets>
                   </object>
                   <packing>

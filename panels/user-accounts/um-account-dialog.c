@@ -282,7 +282,7 @@ update_password_strength (UmAccountDialog *self)
         gtk_label_set_label (GTK_LABEL (self->local_hint), hint);
         gtk_level_bar_set_value (GTK_LEVEL_BAR (self->local_strength_indicator), strength_level);
 
-        if (strength_level > 0) {
+        if (strength_level > 1) {
                 set_entry_validation_checkmark (GTK_ENTRY (self->local_password));
         } else if (strlen (password) == 0) {
                 set_entry_generation_icon (GTK_ENTRY (self->local_password));
