@@ -69,7 +69,6 @@ update_password_strength (UmPasswordDialog *um)
         const gchar *username;
         gint strength_level;
         const gchar *hint;
-        const gchar *long_hint;
 
         if (um->user == NULL) {
                 return 0;
@@ -80,10 +79,10 @@ update_password_strength (UmPasswordDialog *um)
         username = act_user_get_user_name (um->user);
 
         pw_strength (password, old_password, username,
-                     &hint, &long_hint, &strength_level);
+                     &hint, &strength_level);
 
         gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
-        gtk_label_set_label (GTK_LABEL (um->password_hint), long_hint);
+        gtk_label_set_label (GTK_LABEL (um->password_hint), hint);
 
         if (strength_level > 0) {
                 set_entry_validation_checkmark (GTK_ENTRY (um->password_entry));

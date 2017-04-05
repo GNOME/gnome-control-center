@@ -272,15 +272,14 @@ update_password_strength (UmAccountDialog *self)
         const gchar *password;
         const gchar *username;
         const gchar *hint;
-        const gchar *long_hint;
         gint strength_level;
 
         password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
         username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->local_username));
 
-        pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
+        pw_strength (password, NULL, username, &hint, &strength_level);
 
-        gtk_label_set_label (GTK_LABEL (self->local_hint), long_hint);
+        gtk_label_set_label (GTK_LABEL (self->local_hint), hint);
         gtk_level_bar_set_value (GTK_LEVEL_BAR (self->local_strength_indicator), strength_level);
 
         if (strength_level > 0) {

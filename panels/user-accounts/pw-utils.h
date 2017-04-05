@@ -26,6 +26,4 @@ gdouble  pw_strength   (const gchar  *password,
                         const gchar  *old_password,
                         const gchar  *username,
                         const gchar **hint,
-                        const gchar **long_hints,
                         gint         *strength_level);
-int      pw_strength_hint_get_width_chars (void);
