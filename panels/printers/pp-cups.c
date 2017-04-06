@@ -73,7 +73,10 @@ _pp_cups_get_dests_thread (GTask        *task,
   dests = g_new0 (PpCupsDests, 1);
   dests->num_of_dests = cupsGetDests (&dests->dests);
 
-  g_task_return_pointer (task, dests, (GDestroyNotify) pp_cups_dests_free);
+  if (g_task_set_return_on_cancel (task, FALSE))
+    {
+      g_task_return_pointer (task, dests, (GDestroyNotify) pp_cups_dests_free);
+    }
 }
 
 void
@@ -85,6 +88,7 @@ pp_cups_get_dests_async (PpCups              *cups,
   GTask       *task;
 
   task = g_task_new (cups, cancellable, callback, user_data);
+  g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, (GTaskThreadFunc) _pp_cups_get_dests_thread);
   g_object_unref (task);
 }
