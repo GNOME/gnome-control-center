@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-03-11 04:33+0000\n"
-"PO-Revision-Date: 2017-03-12 10:37+0100\n"
+"POT-Creation-Date: 2017-03-23 16:18+0000\n"
+"PO-Revision-Date: 2017-04-06 18:28+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 "X-Launchpad-Export-Date: 2012-10-06 09:48+0000\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 1.8.11\n"
 
 # desktop entry name
 #: ../panels/background/background.ui.h:1
@@ -122,8 +122,8 @@ msgstr "Môžete pridať obrázky do vášho priečinka %s a potom sa zobrazia t
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1298
-#: ../panels/network/net-device-wifi.c:1535
+#: ../panels/network/net-device-wifi.c:1346
+#: ../panels/network/net-device-wifi.c:1585
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -1416,7 +1416,7 @@ msgid ""
 "strain and sleeplessness."
 msgstr ""
 "Nočné svetlo spôsobí, že bude farba obrazovky teplejšia. Tým sa pomôže "
-"znížiť námaha očí a zabrániť nespavosti."
+"znížiť námahu očí a zabrániť nespavosti."
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: ../panels/display/display.ui.h:7
@@ -2020,9 +2020,9 @@ msgid "High contrast on or off"
 msgstr "Zapnúť alebo vypnúť vysoký kontrast"
 
 # KeyListEntry name
-#: ../panels/keyboard/cc-keyboard-manager.c:514
-#: ../panels/keyboard/cc-keyboard-manager.c:522
-#: ../panels/keyboard/cc-keyboard-manager.c:830
+#: ../panels/keyboard/cc-keyboard-manager.c:512
+#: ../panels/keyboard/cc-keyboard-manager.c:520
+#: ../panels/keyboard/cc-keyboard-manager.c:828
 msgid "Custom Shortcuts"
 msgstr "Vlastné skratky"
 
@@ -2451,16 +2451,16 @@ msgstr "Profil č. %d"
 # zabezpečenie
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
-#: ../panels/network/net-device-wifi.c:214
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:215
+#: ../panels/network/net-device-wifi.c:391
 msgid "WEP"
 msgstr "WEP"
 
 # zabezpečenie
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:395
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:396
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
@@ -2468,7 +2468,7 @@ msgstr "WPA"
 # zabezpečenie
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:58
-#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:223
 msgid "WPA2"
 msgstr "WPA2"
 
@@ -2476,14 +2476,14 @@ msgstr "WPA2"
 # zabezpečenie
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:63
-#: ../panels/network/net-device-wifi.c:227
+#: ../panels/network/net-device-wifi.c:228
 msgid "Enterprise"
 msgstr "Podnikové"
 
 # zabezpečenie
 #: ../panels/network/connection-editor/ce-page-details.c:68
-#: ../panels/network/net-device-wifi.c:232
-#: ../panels/network/net-device-wifi.c:380
+#: ../panels/network/net-device-wifi.c:233
+#: ../panels/network/net-device-wifi.c:381
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Žiadne"
@@ -2497,7 +2497,7 @@ msgstr "Nikdy"
 # naposledy použité
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:486
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2509,42 +2509,42 @@ msgstr[2] "pred %i dňami"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:542
+#: ../panels/network/net-device-wifi.c:544
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mbit/s"
 
 # sila signálu
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:571
+#: ../panels/network/net-device-wifi.c:573
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Žiadny"
 
 # sila signálu
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:573
+#: ../panels/network/net-device-wifi.c:575
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slabý"
 
 # sila signálu
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:575
+#: ../panels/network/net-device-wifi.c:577
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 # sila signálu
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:577
+#: ../panels/network/net-device-wifi.c:579
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobrý"
 
 # sila signálu
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:579
+#: ../panels/network/net-device-wifi.c:581
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Vynikajúci"
@@ -2942,7 +2942,7 @@ msgstr "_Vrátiť predvolené"
 
 # GtkButton label
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1536
+#: ../panels/network/net-device-wifi.c:1586
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Zabudnúť"
@@ -3085,19 +3085,19 @@ msgstr ""
 
 # last used
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:471
+#: ../panels/network/net-device-wifi.c:472
 msgid "never"
 msgstr "nikdy"
 
 # last used
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:482
 msgid "today"
 msgstr "dnes"
 
 # last used
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:484
 msgid "yesterday"
 msgstr "včera"
 
@@ -3127,7 +3127,7 @@ msgstr "Drôtové"
 
 # button atk;
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1694
+#: ../panels/network/net-device-wifi.c:1744
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -3139,7 +3139,7 @@ msgstr "Voľby…"
 msgid "Add new connection"
 msgstr "Pridať nové pripojenie"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1254
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -3147,13 +3147,13 @@ msgstr ""
 "Ak ste pripojený k internetu bez použitia bezdrôtovej siete, tak môžete "
 "vytvoriť bezdrôtový prístupový bod a sprístupniť pripojenie ostatným."
 
-#: ../panels/network/net-device-wifi.c:1209
+#: ../panels/network/net-device-wifi.c:1258
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Zapnutím bezdrôtového prístupového bodu budete odpojený od siete <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1213
+#: ../panels/network/net-device-wifi.c:1262
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -3161,24 +3161,24 @@ msgstr ""
 "Ak je aktívny prístupový bod, tak nie je možné pristupovať k internetu "
 "pomocou bezdrôtovej siete."
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1344
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Zastaviť prístupový bod a odpojiť všetkých používateľov?"
 
 # button
-#: ../panels/network/net-device-wifi.c:1299
+#: ../panels/network/net-device-wifi.c:1347
 msgid "_Stop Hotspot"
 msgstr "_Zastaviť prístupový bod"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1447
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systémové pravidlá zakazujú použitie režimu prístupového bodu"
 
-#: ../panels/network/net-device-wifi.c:1400
+#: ../panels/network/net-device-wifi.c:1450
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Bezdrôtové zariadenie nepodporuje režim prístupového bodu"
 
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1582
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3187,12 +3187,12 @@ msgstr ""
 "stratené."
 
 # window title;
-#: ../panels/network/net-device-wifi.c:1842
+#: ../panels/network/net-device-wifi.c:1892
 msgid "History"
 msgstr "História"
 
 # GtkButton label
-#: ../panels/network/net-device-wifi.c:1846
+#: ../panels/network/net-device-wifi.c:1896
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -3201,7 +3201,7 @@ msgstr "_Zavrieť"
 
 # button
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1854
+#: ../panels/network/net-device-wifi.c:1904
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Zabudnúť"
@@ -5280,12 +5280,12 @@ msgstr "Výrobca"
 
 # GtkDialog title
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:427
+#: ../panels/printers/pp-printer-entry.c:443
 msgid "No Active Jobs"
 msgstr "Žiadne aktívne úlohy"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:432
+#: ../panels/printers/pp-printer-entry.c:448
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5294,105 +5294,105 @@ msgstr[1] "%u úloha"
 msgstr[2] "%u úlohy"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:560
+#: ../panels/printers/pp-printer-entry.c:584
 msgid "Low on toner"
 msgstr "Málo tonera"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:562
+#: ../panels/printers/pp-printer-entry.c:586
 msgid "Out of toner"
 msgstr "Minul sa toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:565
+#: ../panels/printers/pp-printer-entry.c:589
 msgid "Low on developer"
 msgstr "Málo vývojky"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:568
+#: ../panels/printers/pp-printer-entry.c:592
 msgid "Out of developer"
 msgstr "Minula sa vývojka"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:570
+#: ../panels/printers/pp-printer-entry.c:594
 msgid "Low on a marker supply"
 msgstr "Málo farby"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:572
+#: ../panels/printers/pp-printer-entry.c:596
 msgid "Out of a marker supply"
 msgstr "Minula sa farba"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:574
+#: ../panels/printers/pp-printer-entry.c:598
 msgid "Open cover"
 msgstr "Otvorený kryt"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:576
+#: ../panels/printers/pp-printer-entry.c:600
 msgid "Open door"
 msgstr "Otvorené dvierka"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:578
+#: ../panels/printers/pp-printer-entry.c:602
 msgid "Low on paper"
 msgstr "Málo papiera"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:580
+#: ../panels/printers/pp-printer-entry.c:604
 msgid "Out of paper"
 msgstr "Minul sa papier"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:582
+#: ../panels/printers/pp-printer-entry.c:606
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Vypnutá"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:584
-#: ../panels/printers/pp-printer-entry.c:714
+#: ../panels/printers/pp-printer-entry.c:608
+#: ../panels/printers/pp-printer-entry.c:738
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zastavená"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:586
+#: ../panels/printers/pp-printer-entry.c:610
 msgid "Waste receptacle almost full"
 msgstr "Odpadová nádržka takmer plná"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:588
+#: ../panels/printers/pp-printer-entry.c:612
 msgid "Waste receptacle full"
 msgstr "Odpadová nádržka plná"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:590
+#: ../panels/printers/pp-printer-entry.c:614
 msgid "The optical photo conductor is near end of life"
 msgstr "Fotovalcu onedlho skončí životnosť"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:592
+#: ../panels/printers/pp-printer-entry.c:616
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Fotovalec už nie je funkčný"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:700
+#: ../panels/printers/pp-printer-entry.c:724
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pripravená"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:705
+#: ../panels/printers/pp-printer-entry.c:729
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Neprijíma úlohy"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:710
+#: ../panels/printers/pp-printer-entry.c:734
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Pracuje"
