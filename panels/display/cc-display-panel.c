@@ -2354,6 +2354,7 @@ show_setup_dialog (CcDisplayPanel *panel)
               break;
 
             case DISPLAY_MODE_OFF:
+              primary = FALSE;
               clone = FALSE;
               active = FALSE;
               break;
