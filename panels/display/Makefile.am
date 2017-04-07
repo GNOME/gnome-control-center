@@ -20,11 +20,11 @@ libdisplay_la_SOURCES =		\
 
 libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS) $(LIBM)
 
-resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --sourcedir=$(srcdir)/icons/16x16 --generate-dependencies $(srcdir)/display.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --sourcedir=$(srcdir)/icons --generate-dependencies $(srcdir)/display.gresource.xml)
 cc-display-resources.c: display.gresource.xml $(resource_files)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --sourcedir=$(srcdir)/icons/16x16 --generate-source --c-name cc_display $<
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --sourcedir=$(srcdir)/icons --generate-source --c-name cc_display $<
 cc-display-resources.h: display.gresource.xml $(resource_files)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --sourcedir=$(srcdir)/icons/16x16 --generate-header --c-name cc_display $<
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --sourcedir=$(srcdir)/icons --generate-header --c-name cc_display $<
 
 # You will need a recent intltool or the patch from this bug
 # http://bugzilla.gnome.org/show_bug.cgi?id=462312

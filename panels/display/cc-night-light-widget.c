@@ -69,6 +69,84 @@ cc_night_light_widget_set_mode (CcNightLightWidget *self,
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
+static cairo_status_t
+_png_read_func (void *closure, unsigned char *data, unsigned int length)
+{
+  GInputStream *stream = G_INPUT_STREAM (closure);
+  gssize read;
+  g_autoptr(GError) error = NULL;
+  read = g_input_stream_read (stream, data, (gsize) length, NULL, &error);
+  if (read < 0)
+    {
+      g_warning ("failed to read form stream: %s", error->message);
+      return CAIRO_STATUS_READ_ERROR;
+    }
+  return CAIRO_STATUS_SUCCESS;
+}
+
+static const char *scaled_sizes[] = {
+  NULL,
+  "16x16",
+};
+
+static cairo_surface_t *
+read_surface_from_resource (const gchar *dirname,
+                            int scale_factor,
+                            const gchar *basename)
+{
+  /* Always ensure that we have a resource for the scale factor */
+  scale_factor = CLAMP (scale_factor, 1, G_N_ELEMENTS (scaled_sizes) - 1);
+
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GInputStream) stream = NULL;
+  g_autofree char *path = g_build_filename (dirname, scaled_sizes[scale_factor], basename, NULL);
+
+  stream = g_resource_open_stream (cc_display_get_resource (), path,
+                                   G_RESOURCE_LOOKUP_FLAGS_NONE, &error);
+  if (stream == NULL)
+    {
+      g_error ("failed to load PNG data: %s", error->message);
+      return NULL;
+    }
+  return cairo_image_surface_create_from_png_stream (_png_read_func, stream);
+}
+
+static void
+cc_night_light_widget_style_updated (GtkWidget *widget)
+{
+  GTK_WIDGET_CLASS (cc_night_light_widget_parent_class)->style_updated (widget);
+
+  CcNightLightWidget *self = CC_NIGHT_LIGHT_WIDGET (widget);
+  GtkIconTheme *icon_theme = gtk_icon_theme_get_default ();
+
+  g_clear_pointer (&self->surface_sunrise, (GDestroyNotify) cairo_surface_destroy);
+  g_clear_pointer (&self->surface_sunset, (GDestroyNotify) cairo_surface_destroy);
+
+  self->surface_sunrise =
+    gtk_icon_theme_load_surface (icon_theme, "daytime-sunrise-symbolic",
+                                 16,
+                                 gtk_widget_get_scale_factor (widget),
+                                 gtk_widget_get_window (widget),
+                                 0,
+                                 NULL);
+  if (self->surface_sunrise == NULL)
+    self->surface_sunrise = read_surface_from_resource ("/org/gnome/control-center/display",
+                                                        gtk_widget_get_scale_factor (widget),
+                                                        "sunrise.png");
+
+  self->surface_sunset =
+    gtk_icon_theme_load_surface (icon_theme, "daytime-sunset-symbolic",
+                                 16,
+                                 gtk_widget_get_scale_factor (widget),
+                                 gtk_widget_get_window (widget),
+                                 0,
+                                 NULL);
+  if (self->surface_sunset == NULL)
+    self->surface_sunset = read_surface_from_resource ("/org/gnome/control-center/display",
+                                                       gtk_widget_get_scale_factor (widget),
+                                                       "sunset.png");
+}
+
 static void
 cc_night_light_widget_finalize (GObject *object)
 {
@@ -87,36 +165,7 @@ cc_night_light_widget_class_init (CcNightLightWidgetClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   object_class->finalize = cc_night_light_widget_finalize;
   widget_class->draw = cc_night_light_widget_draw;
-}
-
-static cairo_status_t
-_png_read_func (void *closure, unsigned char *data, unsigned int length)
-{
-  GInputStream *stream = G_INPUT_STREAM (closure);
-  gssize read;
-  g_autoptr(GError) error = NULL;
-  read = g_input_stream_read (stream, data, (gsize) length, NULL, &error);
-  if (read < 0)
-    {
-      g_warning ("failed to read form stream: %s", error->message);
-      return CAIRO_STATUS_READ_ERROR;
-    }
-  return CAIRO_STATUS_SUCCESS;
-}
-
-static cairo_surface_t *
-read_surface_from_resource (const gchar *path)
-{
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GInputStream) stream = NULL;
-  stream = g_resource_open_stream (cc_display_get_resource (), path,
-                                   G_RESOURCE_LOOKUP_FLAGS_NONE, &error);
-  if (stream == NULL)
-    {
-      g_error ("failed to load PNG data: %s", error->message);
-      return NULL;
-    }
-  return cairo_image_surface_create_from_png_stream (_png_read_func, stream);
+  widget_class->style_updated = cc_night_light_widget_style_updated;
 }
 
 static void
@@ -125,8 +174,6 @@ cc_night_light_widget_init (CcNightLightWidget *self)
   self->to = 8;
   self->from = 16;
   self->now = 11;
-  self->surface_sunrise = read_surface_from_resource ("/org/gnome/control-center/display/sunrise.png");
-  self->surface_sunset = read_surface_from_resource ("/org/gnome/control-center/display/sunset.png");
 }
 
 static gboolean
