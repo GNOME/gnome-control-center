@@ -2398,15 +2398,22 @@ show_setup_dialog (CcDisplayPanel *panel)
 
           sanity_check_rotation (priv->current_output);
 
-          /* if the display was previously in clone mode, ensure the outputs
-           * are arranged correctly */
-          if ((was_clone && !clone))
-            lay_out_outputs_horizontally (panel);
+          /* The new API checks with mutter every time
+             update_apply_button() is called and mutter is very
+             strict about this so it already does these adjustments
+             internally. */
+          if (!priv->have_new_dbus_api)
+            {
+              /* if the display was previously in clone mode, ensure the outputs
+               * are arranged correctly */
+              if ((was_clone && !clone))
+                lay_out_outputs_horizontally (panel);
 
-          if (!clone)
-            realign_outputs_after_resolution_change (panel,
-                                                     priv->current_output,
-                                                     old_width, old_height, rotation);
+              if (!clone)
+                realign_outputs_after_resolution_change (panel,
+                                                         priv->current_output,
+                                                         old_width, old_height, rotation);
+            }
         }
       else
         {
