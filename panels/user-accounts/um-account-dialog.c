@@ -1112,7 +1112,7 @@ on_realm_discover_input (GObject *source,
                 g_dbus_error_strip_remote_error (error);
 
                 if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC)) {
-                        message = g_strdup(_("Unable find the domain. Maybe you misspelled it?"));
+                        message = g_strdup (_("Unable to find the domain. Maybe you misspelled it?"));
                 } else {
                         message = g_strdup_printf ("%s.", error->message);
                 }
