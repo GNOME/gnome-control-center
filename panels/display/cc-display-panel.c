@@ -2011,6 +2011,27 @@ underscan_switch_toggled (CcDisplayPanel *panel)
   update_apply_button (panel);
 }
 
+static guint
+n_supported_scales (CcDisplayConfig *config)
+{
+  const double *scales = cc_display_config_get_supported_scales (config);
+  guint n = 0;
+
+  while (scales[n] != 0.0)
+    n++;
+
+  return n;
+}
+
+static void
+scale_slider_changed (GtkRange *slider,
+                      CcDisplayPanel *panel)
+{
+  cc_display_monitor_set_scale (panel->priv->current_output,
+                                gtk_range_get_value (slider));
+  update_apply_button (panel);
+}
+
 static void
 show_setup_dialog (CcDisplayPanel *panel)
 {
@@ -2245,6 +2266,33 @@ show_setup_dialog (CcDisplayPanel *panel)
   g_object_bind_property (priv->freq_combo, "visible",
                           label, "visible", G_BINDING_BIDIRECTIONAL);
   grid_pos++;
+
+  /* scale */
+  if (n_supported_scales (priv->current_config) > 1)
+  {
+    GtkWidget *slider;
+    const double *scales = cc_display_config_get_supported_scales (priv->current_config);
+    guint n = n_supported_scales (priv->current_config);
+    guint i = 0;
+
+    slider = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL,
+                                       scales[0], scales[n - 1],
+                                       scales[1] - scales[0]);
+    gtk_scale_set_draw_value (GTK_SCALE (slider), FALSE);
+    gtk_scale_set_has_origin (GTK_SCALE (slider), FALSE);
+    for (i = 0; i < n; i++)
+      {
+        gchar *s = g_strdup_printf ("%.1lg×", scales[i]);
+        gtk_scale_add_mark (GTK_SCALE (slider), scales[i], GTK_POS_TOP, s);
+        g_free (s);
+      }
+    gtk_range_set_value (GTK_RANGE (slider), cc_display_monitor_get_scale (priv->current_output));
+    g_signal_connect (slider, "value-changed", G_CALLBACK (scale_slider_changed), panel);
+
+    gtk_grid_attach (GTK_GRID (priv->config_grid), slider, 1, grid_pos, 1, 1);
+    gtk_widget_set_halign (priv->freq_combo, GTK_ALIGN_CENTER);
+    grid_pos++;
+  }
 
   was_clone = clone = cc_display_config_is_cloning (priv->current_config);
   primary = cc_display_monitor_is_primary (priv->current_output);
