@@ -753,6 +753,13 @@ get_total_size (CcDisplayPanel *self, int *total_w, int *total_h)
 
       get_geometry (output, NULL, NULL, &w, &h);
 
+      if (cc_display_config_is_layout_logical (self->priv->current_config))
+        {
+          double scale = cc_display_monitor_get_scale (output);
+          w /= scale;
+          h /= scale;
+        }
+
       *total_w += w;
       *total_h += h;
     }
@@ -807,11 +814,18 @@ add_edge (CcDisplayMonitor *output, int x1, int y1, int x2, int y2, GArray *edge
 }
 
 static void
-list_edges_for_output (CcDisplayMonitor *output, GArray *edges)
+list_edges_for_output (CcDisplayMonitor *output, GArray *edges, gboolean should_scale)
 {
   int x, y, w, h;
 
   get_geometry (output, &x, &y, &w, &h);
+
+  if (should_scale)
+    {
+      double scale = cc_display_monitor_get_scale (output);
+      w /= scale;
+      h /= scale;
+    }
 
   /* Top, Bottom, Left, Right */
   add_edge (output, x, y, x + w, y, edges);
@@ -821,17 +835,19 @@ list_edges_for_output (CcDisplayMonitor *output, GArray *edges)
 }
 
 static void
-list_edges (CcDisplayConfig *config, GArray *edges)
+list_edges (CcDisplayPanel *panel, GArray *edges)
 {
   GList *outputs, *l;
+  gboolean should_scale;
 
-  outputs = cc_display_config_get_monitors (config);
+  should_scale = cc_display_config_is_layout_logical (panel->priv->current_config);
+  outputs = cc_display_config_get_monitors (panel->priv->current_config);
 
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
 
-      list_edges_for_output (output, edges);
+      list_edges_for_output (output, edges, should_scale);
     }
 }
 
@@ -1009,29 +1025,37 @@ output_is_aligned (CcDisplayMonitor *output, GArray *edges)
 }
 
 static void
-get_output_rect (CcDisplayMonitor *output, GdkRectangle *rect)
+get_output_rect (CcDisplayMonitor *output, GdkRectangle *rect, gboolean should_scale)
 {
   get_geometry (output, &rect->x, &rect->y, &rect->width, &rect->height);
+  if (should_scale)
+    {
+      double scale = cc_display_monitor_get_scale (output);
+      rect->height /= scale;
+      rect->width /= scale;
+    }
 }
 
 static gboolean
-output_overlaps (CcDisplayMonitor *output, CcDisplayConfig *config)
+output_overlaps (CcDisplayMonitor *output, CcDisplayPanel *panel)
 {
   GdkRectangle output_rect;
   GList *outputs, *l;
+  gboolean should_scale;
 
   g_assert (output != NULL);
 
-  get_output_rect (output, &output_rect);
+  should_scale = cc_display_config_is_layout_logical (panel->priv->current_config);
+  get_output_rect (output, &output_rect, should_scale);
 
-  outputs = cc_display_config_get_monitors (config);
+  outputs = cc_display_config_get_monitors (panel->priv->current_config);
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *o = l->data;
       if (o != output)
 	{
 	  GdkRectangle other_rect;
-	  get_output_rect (o, &other_rect);
+	  get_output_rect (o, &other_rect, should_scale);
 	  if (gdk_rectangle_intersect (&output_rect, &other_rect, NULL))
 	    return TRUE;
 	}
@@ -1041,19 +1065,19 @@ output_overlaps (CcDisplayMonitor *output, CcDisplayConfig *config)
 }
 
 static gboolean
-config_is_aligned (CcDisplayConfig *config, GArray *edges)
+config_is_aligned (CcDisplayPanel *panel, GArray *edges)
 {
   gboolean result = TRUE;
   GList *outputs, *l;
 
-  outputs = cc_display_config_get_monitors (config);
+  outputs = cc_display_config_get_monitors (panel->priv->current_config);
   for (l = outputs; l != NULL; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
       if (!output_is_aligned (output, edges))
         return FALSE;
 
-      if (output_overlaps (output, config))
+      if (output_overlaps (output, panel))
         return FALSE;
     }
 
@@ -1232,7 +1256,7 @@ on_output_event (FooScrollArea *area,
 	  snaps = g_array_new (TRUE, TRUE, sizeof (Snap));
 	  new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
 
-	  list_edges (self->priv->current_config, edges);
+	  list_edges (self, edges);
 	  list_snaps (output, edges, snaps);
 
 	  g_array_sort (snaps, compare_snaps);
@@ -1247,9 +1271,9 @@ on_output_event (FooScrollArea *area,
 	      cc_display_monitor_set_position (output, new_x + snap->dx, new_y + snap->dy);
 
 	      g_array_set_size (new_edges, 0);
-	      list_edges (self->priv->current_config, new_edges);
+	      list_edges (self, new_edges);
 
-	      if (config_is_aligned (self->priv->current_config, new_edges))
+	      if (config_is_aligned (self, new_edges))
 		{
 		  g_array_free (new_edges, TRUE);
 		  break;
@@ -1342,6 +1366,12 @@ on_area_paint (FooScrollArea  *area,
 
       foo_scroll_area_get_viewport (area, &viewport);
       get_geometry (output, &output_x, &output_y, &w, &h);
+      if (cc_display_config_is_layout_logical (self->priv->current_config))
+        {
+          double scale = cc_display_monitor_get_scale (output);
+          w /= scale;
+          h /= scale;
+        }
 
       viewport.height -= 2 * MARGIN;
       viewport.width -= 2 * MARGIN;
