@@ -28,7 +28,6 @@
 
 #include "ce-page-vpn.h"
 #include "vpn-helpers.h"
-#include "firewall-helpers.h"
 
 G_DEFINE_TYPE (CEPageVpn, ce_page_vpn, CE_TYPE_PAGE)
 
@@ -122,7 +121,6 @@ connect_vpn_page (CEPageVpn *page)
 {
         const gchar *name;
         GtkWidget *widget;
-        GtkWidget *heading;
 
         name = nm_setting_connection_get_id (page->setting_connection);
         gtk_entry_set_text (page->name, name);
@@ -134,12 +132,6 @@ connect_vpn_page (CEPageVpn *page)
                                       nm_setting_connection_get_num_permissions (page->setting_connection) == 0);
         g_signal_connect (widget, "toggled",
                           G_CALLBACK (all_user_changed), page);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_zone"));
-        firewall_ui_setup (page->setting_connection, widget, heading, CE_PAGE (page)->cancellable);
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
-
 }
 
 static gboolean
@@ -148,13 +140,10 @@ validate (CEPage        *page,
           GError       **error)
 {
         CEPageVpn *self = CE_PAGE_VPN (page);
-        GtkWidget *widget;
 
         g_object_set (self->setting_connection,
                       NM_SETTING_CONNECTION_ID, gtk_entry_get_text (self->name),
                       NULL);
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        firewall_ui_to_setting (self->setting_connection, widget);
 
         if (!nm_setting_verify (NM_SETTING (self->setting_connection), NULL, error))
                 return FALSE;

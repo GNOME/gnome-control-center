@@ -28,7 +28,6 @@
 #include <NetworkManager.h>
 
 
-#include "firewall-helpers.h"
 #include "ce-page-ethernet.h"
 #include "ui-helpers.h"
 
@@ -66,7 +65,6 @@ connect_ethernet_page (CEPageEthernet *page)
         char **mac_list;
         const char *s_mac_str;
         GtkWidget *widget;
-        GtkWidget *heading;
         const gchar *name;
         const gchar *cloned_mac;
 
@@ -114,11 +112,6 @@ connect_ethernet_page (CEPageEthernet *page)
         g_signal_connect (widget, "toggled",
                           G_CALLBACK (all_user_changed), page);
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_zone"));
-        firewall_ui_setup (sc, widget, heading, CE_PAGE (page)->cancellable);
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
 }
 
 static void
@@ -146,9 +139,6 @@ ui_to_setting (CEPageEthernet *page)
         g_object_set (page->setting_connection,
                       NM_SETTING_CONNECTION_ID, gtk_entry_get_text (page->name),
                       NULL);
-
-        entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
-        firewall_ui_to_setting (page->setting_connection, entry);
 
         g_free (cloned_mac);
         g_free (device_mac);

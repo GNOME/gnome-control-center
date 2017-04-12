@@ -30,8 +30,6 @@ libconnection_editor_la_SOURCES = 		\
 	ce-page-vpn.c				\
 	vpn-helpers.h				\
 	vpn-helpers.c				\
-	firewall-helpers.h			\
-	firewall-helpers.c			\
 	ui-helpers.h				\
 	ui-helpers.c
 
