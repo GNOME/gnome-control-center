@@ -16,9 +16,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-03-03 16:56+0000\n"
-"PO-Revision-Date: 2017-03-03 20:00+0200\n"
-"Last-Translator: Moo\n"
+"POT-Creation-Date: 2017-04-23 13:13+0000\n"
+"PO-Revision-Date: 2017-04-24 23:21+0300\n"
+"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Project-Style: gnome\n"
 
@@ -120,8 +120,8 @@ msgstr "Galite pridėti paveikslėlių į aplanką %s ir juos matysite čia"
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1298
-#: ../panels/network/net-device-wifi.c:1535
+#: ../panels/network/net-device-wifi.c:1347
+#: ../panels/network/net-device-wifi.c:1586
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -926,17 +926,17 @@ msgid "Year"
 msgstr "Metai"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:340
+#: ../panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y %B %d, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:345
+#: ../panels/datetime/cc-datetime-panel.c:344
 msgid "%e %B %Y, %R"
 msgstr "%Y %B %d, %R"
 
 #. Translators: "city, country"
-#: ../panels/datetime/cc-datetime-panel.c:523
+#: ../panels/datetime/cc-datetime-panel.c:522
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -944,7 +944,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:552
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -952,23 +952,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:561
+#: ../panels/datetime/cc-datetime-panel.c:560
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:566
+#: ../panels/datetime/cc-datetime-panel.c:565
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:571
+#: ../panels/datetime/cc-datetime-panel.c:570
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: ../panels/datetime/cc-datetime-panel.c:576
+#: ../panels/datetime/cc-datetime-panel.c:575
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1118,12 +1118,12 @@ msgstr "Pagrindinis"
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-#: ../panels/universal-access/uap.ui.h:6
+#: ../panels/universal-access/cc-ua-panel.c:331
+#: ../panels/universal-access/cc-ua-panel.c:712
+#: ../panels/universal-access/cc-ua-panel.c:725
+#: ../panels/universal-access/cc-ua-panel.c:737
+#: ../panels/universal-access/cc-ua-panel.c:908
+#: ../panels/universal-access/uap.ui.h:7
 msgid "Off"
 msgstr "Išjungta"
 
@@ -1237,11 +1237,11 @@ msgstr "Nenaudoti šio vaizduoklio"
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
+#: ../panels/universal-access/cc-ua-panel.c:331
+#: ../panels/universal-access/cc-ua-panel.c:712
+#: ../panels/universal-access/cc-ua-panel.c:725
+#: ../panels/universal-access/cc-ua-panel.c:737
+#: ../panels/universal-access/cc-ua-panel.c:908
 msgid "On"
 msgstr "Įjungta"
 
@@ -1337,7 +1337,8 @@ msgstr ""
 "Apšvietimas;rausvumas;spalva;saulėtekis;saulėlydis;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-overview-panel.c:380
+#: ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -1345,12 +1346,12 @@ msgstr "Nežinomas"
 #. * of architecture and the build id, for example:
 #. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
 #. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-panel.c:517
+#: ../panels/info/cc-info-overview-panel.c:471
 #, c-format
 msgid "%s %d-bit (Build ID: %s)"
 msgstr "%s %d-bitų (Sukūrimo ID: %s)"
 
-#: ../panels/info/cc-info-panel.c:519
+#: ../panels/info/cc-info-overview-panel.c:473
 #, c-format
 msgid "%d-bit (Build ID: %s)"
 msgstr "%d-bitų (Sukūrimo ID: %s)"
@@ -1358,49 +1359,54 @@ msgstr "%d-bitų (Sukūrimo ID: %s)"
 #. translators: This is the name of the OS, followed by the type
 #. * of architecture, for example:
 #. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-panel.c:527
+#: ../panels/info/cc-info-overview-panel.c:481
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bitų"
 
-#: ../panels/info/cc-info-panel.c:529
+#: ../panels/info/cc-info-overview-panel.c:483
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bitų"
 
-#: ../panels/info/cc-info-panel.c:1175
+#: ../panels/info/cc-info-overview-panel.c:784
+#, c-format
+msgid "Version %s"
+msgstr "Versija %s"
+
+#: ../panels/info/cc-info-panel.c:514
 msgid "Ask what to do"
 msgstr "Klausti, ką daryti"
 
-#: ../panels/info/cc-info-panel.c:1179
+#: ../panels/info/cc-info-panel.c:518
 msgid "Do nothing"
 msgstr "Nieko nedaryti"
 
-#: ../panels/info/cc-info-panel.c:1183
+#: ../panels/info/cc-info-panel.c:522
 msgid "Open folder"
 msgstr "Atverti aplanką"
 
-#: ../panels/info/cc-info-panel.c:1274
+#: ../panels/info/cc-info-panel.c:613
 msgid "Other Media"
 msgstr "Kitos laikmenos"
 
-#: ../panels/info/cc-info-panel.c:1305
+#: ../panels/info/cc-info-panel.c:644
 msgid "Select an application for audio CDs"
 msgstr "Parinkite programą, kuria norėtumėte klausytis garso CD"
 
-#: ../panels/info/cc-info-panel.c:1306
+#: ../panels/info/cc-info-panel.c:645
 msgid "Select an application for video DVDs"
 msgstr "Parinkite programą vaizdo DVD rodymui"
 
-#: ../panels/info/cc-info-panel.c:1307
+#: ../panels/info/cc-info-panel.c:646
 msgid "Select an application to run when a music player is connected"
 msgstr "Pasirinkite paleistiną programą, kai muzikos grotuvas prijungiamas"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:647
 msgid "Select an application to run when a camera is connected"
 msgstr "Pasirinkite paleistiną programą, kai prijungiamas fotoaparatas"
 
-#: ../panels/info/cc-info-panel.c:1309
+#: ../panels/info/cc-info-panel.c:648
 msgid "Select an application for software CDs"
 msgstr "Parinkite programą programinės įrangos CD paleidimui"
 
@@ -1409,74 +1415,69 @@ msgstr "Parinkite programą programinės įrangos CD paleidimui"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:660
 msgid "audio DVD"
 msgstr "garso DVD"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:661
 msgid "blank Blu-ray disc"
 msgstr "tuščias Blu-ray diskas"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:662
 msgid "blank CD disc"
 msgstr "tuščias CD diskas"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:663
 msgid "blank DVD disc"
 msgstr "tuščias DVD diskas"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:664
 msgid "blank HD DVD disc"
 msgstr "tuščias HD DVD diskas"
 
-#: ../panels/info/cc-info-panel.c:1326
+#: ../panels/info/cc-info-panel.c:665
 msgid "Blu-ray video disc"
 msgstr "Blu-ray vaizdo diskas"
 
-#: ../panels/info/cc-info-panel.c:1327
+#: ../panels/info/cc-info-panel.c:666
 msgid "e-book reader"
 msgstr "el. knygų skaitytuvas"
 
-#: ../panels/info/cc-info-panel.c:1328
+#: ../panels/info/cc-info-panel.c:667
 msgid "HD DVD video disc"
 msgstr "HD DVD vaizdo diskas"
 
-#: ../panels/info/cc-info-panel.c:1329
+#: ../panels/info/cc-info-panel.c:668
 msgid "Picture CD"
 msgstr "Paveikslėlių CD"
 
-#: ../panels/info/cc-info-panel.c:1330
+#: ../panels/info/cc-info-panel.c:669
 msgid "Super Video CD"
 msgstr "Super vaizdo CD"
 
-#: ../panels/info/cc-info-panel.c:1331
+#: ../panels/info/cc-info-panel.c:670
 msgid "Video CD"
 msgstr "Vaizdo CD"
 
-#: ../panels/info/cc-info-panel.c:1332
+#: ../panels/info/cc-info-panel.c:671
 msgid "Windows software"
 msgstr "Windows programinė įranga"
 
-#: ../panels/info/cc-info-panel.c:1455
+#: ../panels/info/cc-info-panel.c:794
 msgid "Section"
 msgstr "Skyrius"
 
-#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:803 ../panels/info/info.ui.h:4
 msgid "Overview"
 msgstr "Apžvalga"
 
-#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:809 ../panels/info/info.ui.h:11
 msgid "Default Applications"
 msgstr "Numatytosios programos"
 
-#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:814 ../panels/info/info.ui.h:19
 msgid "Removable Media"
 msgstr "Išimamos laikmenos"
-
-#: ../panels/info/cc-info-panel.c:1500
-#, c-format
-msgid "Version %s"
-msgstr "Versija %s"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
@@ -1497,6 +1498,43 @@ msgstr ""
 "atsarginė;pageidaujama;cd;dvd;usb;audio;video;diskas;išimama;laikmena;"
 "autopaleidimas;"
 
+#: ../panels/info/info-overview.ui.h:1
+msgid "Device name"
+msgstr "Įrenginio pavadinimas"
+
+#: ../panels/info/info-overview.ui.h:2
+msgid "Memory"
+msgstr "Atmintis"
+
+#: ../panels/info/info-overview.ui.h:3
+msgid "Processor"
+msgstr "Procesorius"
+
+#. To translators: this field contains the distro name, version and type
+#: ../panels/info/info-overview.ui.h:5
+msgid "Base system"
+msgstr "Bazinė sistema"
+
+#: ../panels/info/info-overview.ui.h:6
+msgid "Disk"
+msgstr "Diskas"
+
+#: ../panels/info/info-overview.ui.h:7
+msgid "Calculating…"
+msgstr "Skaičiuojama..."
+
+#: ../panels/info/info-overview.ui.h:8
+msgid "Graphics"
+msgstr "Grafika"
+
+#: ../panels/info/info-overview.ui.h:9
+msgid "Virtualization"
+msgstr "Virtualizacija"
+
+#: ../panels/info/info-overview.ui.h:10
+msgid "Check for updates"
+msgstr "Tikrinti, ar yra atnaujinimų"
+
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
 msgstr "Pasirinkite, kaip kitos laikmenos turi būti apdorotos"
@@ -1509,92 +1547,55 @@ msgstr "_Veiksmas:"
 msgid "_Type:"
 msgstr "_Tipas:"
 
-#: ../panels/info/info.ui.h:4
-msgid "Device name"
-msgstr "Įrenginio pavadinimas"
-
 #: ../panels/info/info.ui.h:5
-msgid "Memory"
-msgstr "Atmintis"
-
-#: ../panels/info/info.ui.h:6
-msgid "Processor"
-msgstr "Procesorius"
-
-#. To translators: this field contains the distro name, version and type
-#: ../panels/info/info.ui.h:8
-msgid "Base system"
-msgstr "Bazinė sistema"
-
-#: ../panels/info/info.ui.h:9
-msgid "Disk"
-msgstr "Diskas"
-
-#: ../panels/info/info.ui.h:10
-msgid "Calculating…"
-msgstr "Skaičiuojama..."
-
-#: ../panels/info/info.ui.h:11
-msgid "Graphics"
-msgstr "Grafika"
-
-#: ../panels/info/info.ui.h:12
-msgid "Virtualization"
-msgstr "Virtualizacija"
-
-#: ../panels/info/info.ui.h:13
-msgid "Check for updates"
-msgstr "Tikrinti, ar yra atnaujinimų"
-
-#: ../panels/info/info.ui.h:15
 msgid "_Web"
 msgstr "_Žiniatinklis"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:6
 msgid "_Mail"
 msgstr "_Paštas"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:7
 msgid "_Calendar"
 msgstr "_Kalendorius"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:8
 msgid "M_usic"
 msgstr "M_uzika"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:9
 msgid "_Video"
 msgstr "_Vaizdas"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:10
 msgid "_Photos"
 msgstr "_Nuotraukos"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:12
 msgid "Select how media should be handled"
 msgstr "Pasirinkite, kaip laikmena turi būti apdorota"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:13
 msgid "CD _audio"
 msgstr "_Garso CD"
 
-#: ../panels/info/info.ui.h:24
+#: ../panels/info/info.ui.h:14
 msgid "_DVD video"
 msgstr "Vaizdo _DVD"
 
-#: ../panels/info/info.ui.h:25
+#: ../panels/info/info.ui.h:15
 msgid "_Music player"
 msgstr "_Muzikos grotuvas"
 
-#: ../panels/info/info.ui.h:26
+#: ../panels/info/info.ui.h:16
 msgid "_Software"
 msgstr "_Programinė įranga"
 
-#: ../panels/info/info.ui.h:27
+#: ../panels/info/info.ui.h:17
 msgid "_Other Media…"
 msgstr "Kit_os laikmenos"
 
-#: ../panels/info/info.ui.h:28
+#: ../panels/info/info.ui.h:18
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_Niekada neprašyti ir nepaleisti programų įdėjus laikmeną"
 
@@ -1643,7 +1644,7 @@ msgid "Eject"
 msgstr "Išstumti"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/universal-access/uap.ui.h:11
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Typing"
 msgstr "Rašymas"
 
@@ -1773,9 +1774,9 @@ msgstr "Sumažinti teksto dydį"
 msgid "High contrast on or off"
 msgstr "Įjungti arba išjungti didelį kontrastą"
 
-#: ../panels/keyboard/cc-keyboard-manager.c:514
-#: ../panels/keyboard/cc-keyboard-manager.c:522
-#: ../panels/keyboard/cc-keyboard-manager.c:830
+#: ../panels/keyboard/cc-keyboard-manager.c:512
+#: ../panels/keyboard/cc-keyboard-manager.c:520
+#: ../panels/keyboard/cc-keyboard-manager.c:828
 msgid "Custom Shortcuts"
 msgstr "Pasirinktiniai susiejimai"
 
@@ -1789,7 +1790,7 @@ msgstr "Pasirinktiniai susiejimai"
 #: ../panels/keyboard/keyboard-shortcuts.c:440
 #: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/sound/gvc/gvc-mixer-control.c:1866
 #: ../panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Disabled"
 msgstr "Išjungta"
@@ -1877,8 +1878,11 @@ msgstr "Rodyti ir keisti klaviatūros trumpinius bei nustatyti rašymo nuostatas
 
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:5
-msgid "Shortcut;Repeat;Blink;"
-msgstr "Trumpinys;Pakartoti;Mirksėti;"
+msgid ""
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+msgstr ""
+"Trumpinus;Darbo sritis;Langas;Dydžio keitimas;Mastelis;Kontrastas;Įvestis;"
+"Šaltinis;Rakinimas;Garsas;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 #: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
@@ -2102,32 +2106,32 @@ msgid "802.1x _Security"
 msgstr "802.1x _Sauga"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "puslapis 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
 msgid "Anony_mous identity"
 msgstr "Anoni_minė tapatybė"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:4
 msgid "Inner _authentication"
 msgstr "Vidinis t_apatybės patvirtinimas"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:6
+#: ../panels/network/connection-editor/security-page.ui.h:5
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "puslapis 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:459
+#: ../panels/network/connection-editor/ce-page-security.c:445
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2144,34 +2148,34 @@ msgstr "Profilis %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
-#: ../panels/network/net-device-wifi.c:214
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:215
+#: ../panels/network/net-device-wifi.c:392
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:395
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:397
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:58
-#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:223
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:63
-#: ../panels/network/net-device-wifi.c:227
+#: ../panels/network/net-device-wifi.c:228
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:68
-#: ../panels/network/net-device-wifi.c:232
-#: ../panels/network/net-device-wifi.c:380
+#: ../panels/network/net-device-wifi.c:233
+#: ../panels/network/net-device-wifi.c:382
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nėra"
@@ -2183,7 +2187,7 @@ msgstr "Niekada"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:487
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2194,37 +2198,37 @@ msgstr[2] "Prieš %i dienų"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:542
+#: ../panels/network/net-device-wifi.c:543
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:571
+#: ../panels/network/net-device-wifi.c:572
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Joks"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:573
+#: ../panels/network/net-device-wifi.c:574
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Silpnas"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:575
+#: ../panels/network/net-device-wifi.c:576
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Gerai"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:577
+#: ../panels/network/net-device-wifi.c:578
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Geras"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:579
+#: ../panels/network/net-device-wifi.c:580
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Puikus"
@@ -2235,8 +2239,8 @@ msgstr "Puikus"
 msgid "Details"
 msgstr "Išsamiau"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:215
-#: ../panels/network/connection-editor/ce-page-vpn.c:221
+#: ../panels/network/connection-editor/ce-page-ethernet.c:205
+#: ../panels/network/connection-editor/ce-page-vpn.c:210
 #: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2314,7 +2318,7 @@ msgstr "Priešdėlis"
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
 #: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automatinis"
@@ -2332,33 +2336,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Atstatyti"
 
-#: ../panels/network/connection-editor/ce-page-security.c:248
+#: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Joks"
 
-#: ../panels/network/connection-editor/ce-page-security.c:271
+#: ../panels/network/connection-editor/ce-page-security.c:268
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-bitų raktas (šešioliktainis arba ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:281
+#: ../panels/network/connection-editor/ce-page-security.c:278
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bitų slaptažodis"
 
-#: ../panels/network/connection-editor/ce-page-security.c:294
+#: ../panels/network/connection-editor/ce-page-security.c:291
 #: ../panels/network/wireless-security/wireless-security.c:463
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:307
+#: ../panels/network/connection-editor/ce-page-security.c:304
 msgid "Dynamic WEP (802.1x)"
 msgstr "Dynaminis WEP (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:321
+#: ../panels/network/connection-editor/ce-page-security.c:318
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 asmeninis"
 
-#: ../panels/network/connection-editor/ce-page-security.c:335
+#: ../panels/network/connection-editor/ce-page-security.c:332
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 kompanijos"
 
@@ -2474,7 +2478,7 @@ msgid "bytes"
 msgstr "baitai"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "Make available to other _users"
 msgstr "Padaryti prieinamu kitiems na_udotojams"
 
@@ -2482,22 +2486,6 @@ msgstr "Padaryti prieinamu kitiems na_udotojams"
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Connect _automatically"
 msgstr "Prisijungti _automatiškai"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:17
-#: ../panels/network/connection-editor/security-page.ui.h:2
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Firewall _Zone"
-msgstr "Ugniasienės _zona"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:49
-#: ../panels/network/connection-editor/firewall-helpers.c:118
-msgctxt "Firewall zone"
-msgid "Default"
-msgstr "Numatyta"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:50
-msgid "The zone defines the trust level of the connection"
-msgstr "Zona nustato ryšio pasitikėjimo lygį"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:24
@@ -2563,7 +2551,7 @@ msgid "_Reset"
 msgstr "_Atstatyti"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1536
+#: ../panels/network/net-device-wifi.c:1587
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Pamiršti"
@@ -2650,7 +2638,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "Eksportuoti VPN ryšį"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:4
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Klaida: nepavyko įkelti VPN ryšių redaktoriaus)"
 
@@ -2692,17 +2680,17 @@ msgstr ""
 "vpn;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:471
+#: ../panels/network/net-device-wifi.c:473
 msgid "never"
 msgstr "niekada"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:483
 msgid "today"
 msgstr "šiandien"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:485
 msgid "yesterday"
 msgstr "vakar"
 
@@ -2729,18 +2717,18 @@ msgid "Wired"
 msgstr "Laidinis"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1694
+#: ../panels/network/net-device-wifi.c:1745
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Parametrai..."
 
-#: ../panels/network/net-device-mobile.c:223
+#: ../panels/network/net-device-mobile.c:238
 msgid "Add new connection"
 msgstr "Pridėti naują ryšį"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1255
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2748,12 +2736,12 @@ msgstr ""
 "Jei turite kitokį interneto ryšį nei belaidis, galite nustatyti belaidį "
 "prieigos tašką ir dalintis interneto ryšiu su kitais."
 
-#: ../panels/network/net-device-wifi.c:1209
+#: ../panels/network/net-device-wifi.c:1259
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Persijungimas prie belaidžio prieigos taško atjungs jus nuo <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1213
+#: ../panels/network/net-device-wifi.c:1263
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2761,23 +2749,23 @@ msgstr ""
 "Neįmanoma pasiekti interneto per jūsų belaidį, kol prieigos taškas yra "
 "aktyvus."
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1345
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stabdyti prieigos tašką ir atjungti visus naudotojus?"
 
-#: ../panels/network/net-device-wifi.c:1299
+#: ../panels/network/net-device-wifi.c:1348
 msgid "_Stop Hotspot"
 msgstr "_Stabdyti prieigos tašką"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1448
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistemos taisyklės neleidžia naudoti kaip prieigos taško"
 
-#: ../panels/network/net-device-wifi.c:1400
+#: ../panels/network/net-device-wifi.c:1451
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Belaidis įrenginys nepalaiko prieigos taško veiksenos"
 
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1583
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2785,11 +2773,11 @@ msgstr ""
 "Tinklo nustatymai pasirinktiems tinklams įskaitant slaptažodžius ir bet "
 "kokius asmeninius nustatymus bus prarasti."
 
-#: ../panels/network/net-device-wifi.c:1842
+#: ../panels/network/net-device-wifi.c:1893
 msgid "History"
 msgstr "Istorija"
 
-#: ../panels/network/net-device-wifi.c:1846
+#: ../panels/network/net-device-wifi.c:1897
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2797,7 +2785,7 @@ msgid "_Close"
 msgstr "_Užverti"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1854
+#: ../panels/network/net-device-wifi.c:1905
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Pamiršti"
@@ -3355,23 +3343,24 @@ msgstr "Trūksta aparatinės programinės įrangos"
 msgid "Cable unplugged"
 msgstr "Kabelis neįjungtas"
 
-#: ../panels/network/wireless-security/eap-method.c:69
-msgid "undefined error in 802.1x security (wpa-eap)"
+#: ../panels/network/wireless-security/eap-method.c:57
+#| msgid "undefined error in 802.1x security (wpa-eap)"
+msgid "undefined error in 802.1X security (wpa-eap)"
 msgstr "nežinoma klaida 802.1x saugume (wpa-eap)"
 
-#: ../panels/network/wireless-security/eap-method.c:245
+#: ../panels/network/wireless-security/eap-method.c:233
 msgid "no file selected"
 msgstr "nepasirinktas failas"
 
-#: ../panels/network/wireless-security/eap-method.c:276
+#: ../panels/network/wireless-security/eap-method.c:264
 msgid "unspecified error validating eap-method file"
 msgstr "nežinoma klaida tikrinant eap-metodo failą"
 
-#: ../panels/network/wireless-security/eap-method.c:480
+#: ../panels/network/wireless-security/eap-method.c:439
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, arba PKCS#12 privatūs raktai (*.der, *.pem, *.p12, *.key)"
 
-#: ../panels/network/wireless-security/eap-method.c:483
+#: ../panels/network/wireless-security/eap-method.c:442
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "DER arba PEM liudijimai (*.der, *.pem, *.crt, *.cer)"
 
@@ -3381,13 +3370,13 @@ msgstr "trūksta EAP-FAST PAC failo"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:268
 #: ../panels/network/wireless-security/eap-method-peap.c:302
-#: ../panels/network/wireless-security/eap-method-ttls.c:333
+#: ../panels/network/wireless-security/eap-method-ttls.c:351
 msgid "GTC"
 msgstr "GTC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:283
 #: ../panels/network/wireless-security/eap-method-peap.c:272
-#: ../panels/network/wireless-security/eap-method-ttls.c:288
+#: ../panels/network/wireless-security/eap-method-ttls.c:289
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
@@ -3400,37 +3389,28 @@ msgid "PAC files (*.pac)"
 msgstr "PAC failai (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
-#: ../panels/printers/authentication-dialog.ui.h:1
-msgid " "
-msgstr " "
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Anonymous"
 msgstr "Anonimas"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Authenticated"
 msgstr "Tapatybė patvirtinta"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 msgid "Both"
 msgstr "Abu"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 msgid "PAC _file"
 msgstr "PAC _failas"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:5
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
 msgid "_Inner authentication"
 msgstr "_Vidinis tapatybės patvirtinimas"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Leisti automatinius PAC _priskyrimus"
 
@@ -3467,38 +3447,38 @@ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "netinkamas EAP-PEAP LĮ liudijimas: nenurodytas liudijimas"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:287
-#: ../panels/network/wireless-security/eap-method-ttls.c:318
+#: ../panels/network/wireless-security/eap-method-ttls.c:336
 #: ../panels/network/wireless-security/wireless-security.c:439
 msgid "MD5"
 msgstr "MD5"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:381
 #: ../panels/network/wireless-security/eap-method-tls.c:501
-#: ../panels/network/wireless-security/eap-method-ttls.c:412
+#: ../panels/network/wireless-security/eap-method-ttls.c:430
 msgid "Choose a Certificate Authority certificate"
 msgstr "Pasirinkite liudijimų įstaigos liudijimą"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
 msgid "Version 0"
 msgstr "Versija 0"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 1"
 msgstr "Versija 1"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
 msgid "C_A certificate"
 msgstr "L_Į liudijimas"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
 msgid "No CA certificate is _required"
 msgstr "Ne_reikia LĮ liudijimo"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:9
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
 msgstr "PEAP _versija"
 
@@ -3542,10 +3522,16 @@ msgid "Unencrypted private keys are insecure"
 msgstr "Nešifruoti privatūs raktai yra nesaugūs"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:319
+#| msgid ""
+#| "The selected private key does not appear to be protected by a password.  "
+#| "This could allow your security credentials to be compromised.  Please "
+#| "select a password-protected private key.\n"
+#| "\n"
+#| "(You can password-protect your private key with openssl)"
 msgid ""
-"The selected private key does not appear to be protected by a password.  "
-"This could allow your security credentials to be compromised.  Please select "
-"a password-protected private key.\n"
+"The selected private key does not appear to be protected by a password. This "
+"could allow your security credentials to be compromised. Please select a "
+"password-protected private key.\n"
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
@@ -3588,21 +3574,27 @@ msgstr "netinkamas EAP-TTLS LĮ liudijimas: %s"
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
 msgstr "netinkamas EAP-TTLS LĮ liudijimas: nenurodytas liudijimas"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:258
+#: ../panels/network/wireless-security/eap-method-ttls.c:259
 msgid "PAP"
 msgstr "PAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:273
+#: ../panels/network/wireless-security/eap-method-ttls.c:274
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:303
+#: ../panels/network/wireless-security/eap-method-ttls.c:305
+#| msgid "MSCHAPv2"
+msgid "MSCHAPv2 (no EAP)"
+msgstr "MSCHAPv2 (be EAP)"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:321
 msgid "CHAP"
 msgstr "CHAP"
 
 #: ../panels/network/wireless-security/wireless-security.c:87
-msgid "Unknown error validating 802.1x security"
-msgstr "Nežinoma klaida saugiai tikrinant 802.1x"
+#| msgid "Unknown error validating 802.1x security"
+msgid "Unknown error validating 802.1X security"
+msgstr "Nežinoma klaida tikrinant 802.1x saugumą"
 
 #: ../panels/network/wireless-security/wireless-security.c:451
 msgid "TLS"
@@ -3624,9 +3616,9 @@ msgstr "Tunneled TLS"
 msgid "Protected EAP (PEAP)"
 msgstr "Apsaugotas EAP (PEAP)"
 
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
 msgid "Au_thentication"
 msgstr "_Tapatybės patvirtinimas"
 
@@ -3679,34 +3671,22 @@ msgid "1 (Default)"
 msgstr "1 (numatyta)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:2
-msgid "2"
-msgstr "2"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
-msgid "3"
-msgstr "3"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Atvira sistema"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
 msgid "Shared Key"
 msgstr "Bendrinami raktai"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
 msgid "_Key"
 msgstr "Ra_ktas"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Sho_w key"
 msgstr "_Rodyti raktą"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "WEP inde_x"
 msgstr "WEP _indeksas"
 
@@ -4211,9 +4191,13 @@ msgstr "_Prijungtas prie elektros tinklo"
 msgid "On _Battery Power"
 msgstr "Naudoja _baterijos energiją"
 
-#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:36
 msgid "Delay"
 msgstr "Delsa"
+
+#: ../panels/printers/authentication-dialog.ui.h:1
+msgid " "
+msgstr " "
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4225,18 +4209,18 @@ msgid "Authentication Required"
 msgstr "Reikia patvirtinti tapatybę"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:713
+#: ../panels/printers/cc-printers-panel.c:735
 msgid "Failed to add new printer."
 msgstr "Nepavyko pridėti naujo spausdintuvo."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:959
+#: ../panels/printers/cc-printers-panel.c:983
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepavyko įkelti sąsajos: %s"
 
 #: ../panels/printers/details-dialog.ui.h:2
-#: ../panels/printers/printer-entry.ui.h:6
+#: ../panels/printers/printer-entry.ui.h:8
 msgid "Location"
 msgstr "Vieta"
 
@@ -4405,49 +4389,49 @@ msgid "Reverse portrait"
 msgstr "Apverstas stačias"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "Laukia"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pristabdytas"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "Apdorojamas"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Sustabdytas"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Atšauktas"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Atmestas"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Baigtas"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
@@ -4637,12 +4621,12 @@ msgid "Manufacturer"
 msgstr "Gamintojas"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:406
+#: ../panels/printers/pp-printer-entry.c:522
 msgid "No Active Jobs"
 msgstr "Nėra aktyvių darbų"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:411
+#: ../panels/printers/pp-printer-entry.c:527
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4651,108 +4635,113 @@ msgstr[1] "%u darbai"
 msgstr[2] "%u darbų"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:513
+#: ../panels/printers/pp-printer-entry.c:663
 msgid "Low on toner"
 msgstr "Baigiasi rašalas"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:515
+#: ../panels/printers/pp-printer-entry.c:665
 msgid "Out of toner"
 msgstr "Baigiasi rašalas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:518
+#: ../panels/printers/pp-printer-entry.c:668
 msgid "Low on developer"
 msgstr "Baigiasi ryškalas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:521
+#: ../panels/printers/pp-printer-entry.c:671
 msgid "Out of developer"
 msgstr "Baigėsi ryškalas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:523
+#: ../panels/printers/pp-printer-entry.c:673
 msgid "Low on a marker supply"
 msgstr "Baigiasi spalvos tiekimas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:525
+#: ../panels/printers/pp-printer-entry.c:675
 msgid "Out of a marker supply"
 msgstr "Baigėsi spalvos tiekimas"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:527
+#: ../panels/printers/pp-printer-entry.c:677
 msgid "Open cover"
 msgstr "Atvertas dangtis"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:529
+#: ../panels/printers/pp-printer-entry.c:679
 msgid "Open door"
 msgstr "Atvertos durys"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:531
+#: ../panels/printers/pp-printer-entry.c:681
 msgid "Low on paper"
 msgstr "Baigiasi popierius"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:533
+#: ../panels/printers/pp-printer-entry.c:683
 msgid "Out of paper"
 msgstr "Baigėsi popierius"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:535
+#: ../panels/printers/pp-printer-entry.c:685
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Išjungta"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:537
-#: ../panels/printers/pp-printer-entry.c:667
+#: ../panels/printers/pp-printer-entry.c:687
+#: ../panels/printers/pp-printer-entry.c:817
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Sustabdytas"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:539
+#: ../panels/printers/pp-printer-entry.c:689
 msgid "Waste receptacle almost full"
 msgstr "Atliekų konteineris beveik pilnas"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:541
+#: ../panels/printers/pp-printer-entry.c:691
 msgid "Waste receptacle full"
 msgstr "Atliekų konteineris pilnas"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:543
+#: ../panels/printers/pp-printer-entry.c:693
 msgid "The optical photo conductor is near end of life"
 msgstr "Optinio fotokonduktoriaus tarnavimo laikas baigiasi"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:545
+#: ../panels/printers/pp-printer-entry.c:695
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optinis fotokonduktorius nebeveikia"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:653
+#: ../panels/printers/pp-printer-entry.c:803
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pasirengęs"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:658
+#: ../panels/printers/pp-printer-entry.c:808
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nepriima darbų"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:663
+#: ../panels/printers/pp-printer-entry.c:813
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Apdorojama"
+
+#. Translators: Name of job which makes printer to clean its heads
+#: ../panels/printers/pp-printer-entry.c:837
+msgid "Clean print heads"
+msgstr "Išvalyti spausdinimo galvutes"
 
 #: ../panels/printers/printer-entry.ui.h:1
 msgid "Printing Options"
@@ -4766,25 +4755,31 @@ msgstr "Spausdintuvo informacija"
 msgid "Use Printer by Default"
 msgstr "Numatytai naudoti spausdintuvą"
 
-#: ../panels/printers/printer-entry.ui.h:4
+#. Translators: This button executes command which cleans print heads of the printer.
+#: ../panels/printers/printer-entry.ui.h:5
+#| msgid "Cancel Print Job"
+msgid "Clean Print Heads"
+msgstr "Išvalyti spausdinimo galvutes"
+
+#: ../panels/printers/printer-entry.ui.h:6
 msgid "Remove Printer"
 msgstr "Pašalinti spausdintuvą"
 
-#: ../panels/printers/printer-entry.ui.h:5
+#: ../panels/printers/printer-entry.ui.h:7
 msgid "Model"
 msgstr "Modelis"
 
-#: ../panels/printers/printer-entry.ui.h:7
+#: ../panels/printers/printer-entry.ui.h:9
 msgid "Ink Level"
 msgstr "Rašalo lygis"
 
 #. Translators: This is the message which follows the printer error.
-#: ../panels/printers/printer-entry.ui.h:9
+#: ../panels/printers/printer-entry.ui.h:11
 msgid "Please restart when the problem is resolved."
 msgstr "Išsprendę problemą paleiskite iš naujo."
 
 #. Translators: This is the button which restarts the printer.
-#: ../panels/printers/printer-entry.ui.h:11
+#: ../panels/printers/printer-entry.ui.h:13
 msgid "Restart"
 msgstr "Perleisti"
 
@@ -5569,7 +5564,7 @@ msgstr "_Profilis:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1837
+#: ../panels/sound/gvc/gvc-mixer-control.c:1873
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -5579,7 +5574,7 @@ msgstr[2] "%u išvesčių"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1847
+#: ../panels/sound/gvc/gvc-mixer-control.c:1883
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -5587,7 +5582,7 @@ msgstr[0] "%u įvestis"
 msgstr[1] "%u įvestys"
 msgstr[2] "%u įvesčių"
 
-#: ../panels/sound/gvc/gvc-mixer-control.c:2373
+#: ../panels/sound/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Sistemos garsai"
 
@@ -5698,6 +5693,50 @@ msgstr "Žemų garsų stiprintuvas"
 msgid "Custom"
 msgstr "Pasirinktinė"
 
+#. translators: the labels will read:
+#. * Cursor Size: Default
+#: ../panels/universal-access/cc-ua-panel.c:351
+#| msgid "Default"
+msgctxt "cursor size"
+msgid "Default"
+msgstr "Numatytasis"
+
+#: ../panels/universal-access/cc-ua-panel.c:354
+#| msgctxt "Calibration quality"
+#| msgid "Medium"
+msgctxt "cursor size"
+msgid "Medium"
+msgstr "Vidutinis"
+
+#: ../panels/universal-access/cc-ua-panel.c:357
+#| msgctxt "dwell click threshold"
+#| msgid "Large"
+msgctxt "cursor size"
+msgid "Large"
+msgstr "Didelis"
+
+#: ../panels/universal-access/cc-ua-panel.c:360
+#| msgctxt "dwell click threshold"
+#| msgid "Large"
+msgctxt "cursor size"
+msgid "Larger"
+msgstr "Didesnis"
+
+#: ../panels/universal-access/cc-ua-panel.c:363
+#| msgctxt "dwell click threshold"
+#| msgid "Large"
+msgctxt "cursor size"
+msgid "Largest"
+msgstr "Didžiausias"
+
+#: ../panels/universal-access/cc-ua-panel.c:367
+#, c-format
+msgid "%d pixel"
+msgid_plural "%d pixels"
+msgstr[0] "%d pikselis"
+msgstr[1] "%d pikseliai"
+msgstr[2] "%d pikselių"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Uni­ver­sal Access"
@@ -5709,13 +5748,16 @@ msgstr "Padarykite matymą, išgirdimą, rašymą, rodymą ir spaudimą papraste
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
+#| msgid ""
+#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;"
+#| "size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
+"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
 msgstr ""
 "Klaviatūra;Pelė;a11y;Prieinamumas;Kontrastas;Mastelis;Ekranas;Skaityklė;"
 "tekstas;šriftas;dydis;AccessX;Kibūs;Klavišai;Lėtieji;Pasikartojantys;Pelė; "
-"Dvigubas;paspaudimas;Delsa;Pagalba;"
+"Dvigubas;paspaudimas;Delsa;Pagalba;Pasikartojimas;Mirksėjimas;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -5734,280 +5776,296 @@ msgid "_Large Text"
 msgstr "Dide_lis šriftas"
 
 #: ../panels/universal-access/uap.ui.h:5
+msgid "C_ursor Size"
+msgstr "Ž_ymiklio dydis"
+
+#: ../panels/universal-access/uap.ui.h:6
 #: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Mastelis"
 
-#: ../panels/universal-access/uap.ui.h:7
+#: ../panels/universal-access/uap.ui.h:8
 msgid "Screen _Reader"
 msgstr "Ekrano _skaityklė"
 
-#: ../panels/universal-access/uap.ui.h:8
+#: ../panels/universal-access/uap.ui.h:9
 msgid "_Sound Keys"
 msgstr "_Garso klavišai"
 
-#: ../panels/universal-access/uap.ui.h:9
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Hearing"
 msgstr "Klausa"
 
-#: ../panels/universal-access/uap.ui.h:10
+#: ../panels/universal-access/uap.ui.h:11
 msgid "_Visual Alerts"
 msgstr "_Vaizdo įspėjimai"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Screen _Keyboard"
 msgstr "_Klaviatūra ekrane"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:14
 msgid "R_epeat Keys"
 msgstr "K_artojimo klavišai"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Cursor _Blinking"
 msgstr "Žymeklio mir_ksėjimas"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "_Typing Assist (AccessX)"
 msgstr "Rašymo _pagalbininkas (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Pointing & Clicking"
 msgstr "Rodymas ir spaudimas"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Mouse Keys"
 msgstr "Pelės _mygtukai"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:19
 msgid "_Click Assist"
 msgstr "_Paspaudimo pagalba"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:20
 msgid "_Double-Click Delay"
 msgstr "_Dvigubas paspaudimo delsa"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Double-Click Delay"
 msgstr "Dvigubas paspaudimo delsa"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:22
+#| msgid "Cursor Blinking"
+msgid "Cursor Size"
+msgstr "Žymiklio dydis"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid ""
+"Cursor size can be combined with zoom to make it easier to see the cursor."
+msgstr ""
+"Žymiklio dydį galima sujungti su masteliu ir taip jį padaryti lengviau "
+"pastebimą."
+
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
 msgstr "Ekrano skaityklė"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:25
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "Ekrano skaityklė skaito rodomą tekstą jums perkeliant fokusą."
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:26
 msgid "_Screen Reader"
 msgstr "Ekrano _skaityklė"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Sound Keys"
 msgstr "Garso klavišai"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Pyptelėti, kai įjungiama skaitmenų klaviatūra arba didžiosios raidės."
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Visual Alerts"
 msgstr "Vaizdo įspėjimai"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Test flash"
 msgstr "_Testuoti blykstelėjimą"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Naudoti vizualų indikatorių, kai kyla pranešimo garsas."
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Flash the _window title"
 msgstr "Blykstelti _lango antraštę"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the entire _screen"
 msgstr "Blykstelti visą _ekraną"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Repeat Keys"
 msgstr "Kartojimo klavišai"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Key presses repeat when key is held down."
 msgstr "Klavišų paspaudimai kartojami, kai klavišas laikomas nuspaustu."
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Repeat keys delay"
 msgstr "Kartojamų klavišų delsa"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Speed"
 msgstr "Greitis"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Repeat keys speed"
 msgstr "Kartojamų klavišų greitis"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Cursor Blinking"
 msgstr "Žymeklio mirksėjimas"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Cursor blinks in text fields."
 msgstr "Žymeklis teksto laukeliuose mirksi."
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Cursor blinking speed"
 msgstr "Žymeklio mirksėjimo greitis"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Typing Assist"
 msgstr "Rašymo pagalbininkas"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:44
 msgid "_Sticky Keys"
 msgstr "_Kibieji klavišai"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Traktuoja modifikavimo klavišų seką kaip klavišų kombinaciją"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:46
 msgid "_Disable if two keys are pressed together"
 msgstr "Iš_jungti, jei du klavišai paspaudžiami kartu"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Beep when a _modifier key is pressed"
 msgstr "Pyptelėti, kai paspaustas _modifikatorius"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:48
 msgid "S_low Keys"
 msgstr "_Lėtieji klavišai"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Nustato delsą tarp klavišo paspaudimo ir jo priėmimo"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:50
 msgid "A_cceptance delay:"
 msgstr "_Priėmimo delsa:"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:51
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Trumpas"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Slow keys typing delay"
 msgstr "Rodyti klavišų rašymo delsą"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:53
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Ilgas"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Beep when a key is pr_essed"
 msgstr "Pyptelėti, kai paspaudžiamas klavišas"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Beep when a key is _accepted"
 msgstr "Pyptelėti, kai klavišas _priimamas"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Beep when a key is _rejected"
 msgstr "Pyptelėti, jei klavišas _atmestas"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:57
 msgid "_Bounce Keys"
 msgstr "Pasi_kartojantys klavišai"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Ignores fast duplicate keypresses"
 msgstr "Nepaiso greitų dvigubų klavišų paspaudimų"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:59
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Trumpas"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Bounce keys typing delay"
 msgstr "Pasikartojančių klavišų rašymo delsa"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:61
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Ilgas"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:62
 msgid "_Enable by Keyboard"
 msgstr "Į_jungti klaviatūra"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Įjungti pritaikymo neįgaliesiems funkcijas klaviatūra"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Click Assist"
 msgstr "Spaudimo pagalba"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:65
 msgid "_Simulated Secondary Click"
 msgstr "_Imituotas antrinis spustelėjimas"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Pradėti antrinį spustelėjimą laikant pagrindinį mygtuką"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:67
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Trumpas"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Secondary click delay"
 msgstr "Antrinis spustelėjimo vėlavimas"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:69
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Ilgas"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:70
 msgid "_Hover Click"
 msgstr "_Uždelstas spustelėjimas"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Trigger a click when the pointer hovers"
 msgstr "Pradėti spustelėjimą sustabdžius pelės žymeklį"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:72
 msgid "D_elay:"
 msgstr "D_elsa:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Trumpas"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Ilgas"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Motion _threshold:"
 msgstr "_Judesio slenkstis:"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:76
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Mažas"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:77
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Didelis"
@@ -7353,6 +7411,28 @@ msgstr "Prieigos tašką"
 msgid "No results found"
 msgstr "Nerasta rezultatų"
 
+#~ msgid "Shortcut;Repeat;Blink;"
+#~ msgstr "Trumpinys;Pakartoti;Mirksėti;"
+
+#~ msgid "Firewall _Zone"
+#~ msgstr "Ugniasienės _zona"
+
+#~ msgctxt "Firewall zone"
+#~ msgid "Default"
+#~ msgstr "Numatyta"
+
+#~ msgid "The zone defines the trust level of the connection"
+#~ msgstr "Zona nustato ryšio pasitikėjimo lygį"
+
+#~ msgid "2"
+#~ msgstr "2"
+
+#~ msgid "3"
+#~ msgstr "3"
+
+#~ msgid "4"
+#~ msgstr "4"
+
 #~ msgid "<small>Your account</small>"
 #~ msgstr "<small>Jūsų paskyra</small>"
 
@@ -7743,9 +7823,6 @@ msgstr "Nerasta rezultatų"
 
 #~ msgid "Pause Printing"
 #~ msgstr "Pristabdyti spausdinimą"
-
-#~ msgid "Cancel Print Job"
-#~ msgstr "Atšaukti spausdinimo darbą"
 
 #~ msgctxt "print job"
 #~ msgid "Held"
