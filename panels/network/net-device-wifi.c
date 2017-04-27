@@ -326,9 +326,8 @@ device_get_hotspot_ssid (NetDeviceWifi *device_wifi,
         NMSettingWireless *sw;
 
         c = find_connection_for_device (device_wifi, device);
-        if (c == NULL) {
-                return FALSE;
-        }
+        if (c == NULL)
+                return NULL;
 
         sw = nm_connection_get_setting_wireless (c);
         return nm_setting_wireless_get_ssid (sw);
