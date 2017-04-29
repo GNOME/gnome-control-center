@@ -488,15 +488,12 @@ get_os_name (void)
 static char *
 get_os_type (void)
 {
-  int bits;
-
   if (GLIB_SIZEOF_VOID_P == 8)
-    bits = 64;
+    /* translators: This is the type of architecture for the OS */
+    return g_strdup_printf (_("64-bit"));
   else
-    bits = 32;
-
-  /* translators: This is the type of architecture for the OS */
-  return g_strdup_printf (_("%d-bit"), bits);
+    /* translators: This is the type of architecture for the OS */
+    return g_strdup_printf (_("32-bit"));
 }
 
 static void
