@@ -435,6 +435,9 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
                                              &hotspot_secret,
                                              &hotspot_security);
 
+        g_debug ("Refreshing hotspot labels to name: '%s', security key: '%s', security: '%s'",
+                 hotspot_ssid, hotspot_secret, hotspot_security);
+
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "hotspot_network_name",
                                          hotspot_ssid);
