@@ -431,11 +431,133 @@ switch_settings_mapping_get_default_disabled (GValue *value,
 }
 
 static void
+update_row_position (GtkWidget *row,
+                     gpointer   user_data)
+{
+  CcSearchPanel *self = CC_SEARCH_PANEL (user_data);
+  const gchar *app_id;
+  GAppInfo *app_info;
+  gint idx;
+
+  app_info = g_object_get_data (G_OBJECT (row), "app-info");
+  app_id = g_app_info_get_id (app_info);
+  idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row));
+
+  g_hash_table_replace (self->priv->sort_order, g_strdup (app_id), GINT_TO_POINTER (idx));
+}
+
+static GtkTargetEntry drag_target_entries[] = {
+   { "GTK_LIST_BOX_ROW", GTK_TARGET_SAME_APP, 0 }
+};
+
+static void
+drag_begin (GtkWidget      *widget,
+            GdkDragContext *context,
+            GtkListBox     *list_box)
+{
+  GtkWidget *row;
+  GtkAllocation alloc;
+  cairo_surface_t *surface;
+  cairo_t *cr;
+  int x, y;
+
+  /* Lets invalidate the list box sorting so we can move rows around.
+   * We don't drop the sorting entirely because you want the list to be
+   * sorted when there is no previous sorting stored. */
+  gtk_list_box_set_sort_func (list_box, NULL, NULL, NULL);
+
+  row = gtk_widget_get_ancestor (widget, GTK_TYPE_LIST_BOX_ROW);
+  gtk_widget_get_allocation (row, &alloc);
+  surface = gdk_window_create_similar_surface (gtk_widget_get_window (widget),
+                                               CAIRO_CONTENT_COLOR_ALPHA,
+                                               alloc.width, alloc.height);
+  cr = cairo_create (surface);
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (row), "drag-icon");
+  gtk_widget_draw (row, cr);
+  gtk_style_context_remove_class (gtk_widget_get_style_context (row), "drag-icon");
+
+  gtk_widget_translate_coordinates (widget, row, 0, 0, &x, &y);
+  cairo_surface_set_device_offset (surface, -x, -y);
+  gtk_drag_set_icon_surface (context, surface);
+
+  cairo_destroy (cr);
+  cairo_surface_destroy (surface);
+}
+
+static void
+drag_end (GtkWidget      *widget,
+          GdkDragContext *context,
+          CcSearchPanel  *self)
+{
+  /* Lets undo the things done in drag_begin. */
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->priv->list_box),
+                              (GtkListBoxSortFunc)list_sort_func, self, NULL);
+}
+
+static void
+drag_data_get (GtkWidget        *widget,
+               GdkDragContext   *context,
+               GtkSelectionData *selection_data,
+               guint             info,
+               guint             time,
+               gpointer          data)
+{
+  gtk_selection_data_set (selection_data,
+                          gdk_atom_intern_static_string ("GTK_LIST_BOX_ROW"),
+                          32,
+                          (const guchar *)&widget,
+                          sizeof (gpointer));
+}
+
+static void
+drag_data_received (GtkWidget        *widget,
+                    GdkDragContext   *context,
+                    gint              x,
+                    gint              y,
+                    GtkSelectionData *selection_data,
+                    guint             info,
+                    guint32           time,
+                    gpointer          data)
+{
+  CcSearchPanel *self = CC_SEARCH_PANEL (data);
+  GtkWidget *target;
+  GtkWidget *row;
+  GtkWidget *source;
+  gboolean success = TRUE;
+  int idx;
+
+  target = widget;
+
+  row = (gpointer)* (gpointer*)gtk_selection_data_get_data (selection_data);
+  source = gtk_widget_get_ancestor (row, GTK_TYPE_LIST_BOX_ROW);
+  idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (target));
+
+  if (source == target)
+    {
+      success = FALSE;
+      goto out;
+    }
+
+  g_object_ref (source);
+  gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (source)), source);
+  gtk_list_box_insert (GTK_LIST_BOX (gtk_widget_get_parent (target)), source, idx);
+  g_object_unref (source);
+
+  gtk_container_foreach (GTK_CONTAINER (self->priv->list_box), update_row_position, self);
+
+  search_panel_propagate_sort_order (self);
+
+out:
+  gtk_drag_finish (context, success, TRUE, time);
+}
+
+static void
 search_panel_add_one_app_info (CcSearchPanel *self,
                                GAppInfo *app_info,
                                gboolean default_enabled)
 {
-  GtkWidget *row, *box, *w;
+  GtkWidget *row, *box, *handle, *w;
   GIcon *icon;
   gint width, height;
 
@@ -457,6 +579,20 @@ search_panel_add_one_app_info (CcSearchPanel *self,
                           g_object_ref (app_info), g_object_unref);
   g_object_set_data (G_OBJECT (row), "self", self);
   gtk_container_add (GTK_CONTAINER (self->priv->list_box), row);
+
+  /* Drag and Drop */
+  handle = gtk_event_box_new ();
+  gtk_container_add (GTK_CONTAINER (handle),
+                     gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_MENU));
+  gtk_container_add (GTK_CONTAINER (box), handle);
+
+  gtk_drag_source_set (handle, GDK_BUTTON1_MASK, drag_target_entries, 1, GDK_ACTION_MOVE);
+  g_signal_connect (handle, "drag-begin", G_CALLBACK (drag_begin), self->priv->list_box);
+  g_signal_connect (handle, "drag-end", G_CALLBACK (drag_end), self);
+  g_signal_connect (handle, "drag-data-get", G_CALLBACK (drag_data_get), NULL);
+
+  gtk_drag_dest_set (row, GTK_DEST_DEFAULT_ALL, drag_target_entries, 1, GDK_ACTION_MOVE);
+  g_signal_connect (row, "drag-data-received", G_CALLBACK (drag_data_received), self);
 
   icon = g_app_info_get_icon (app_info);
   if (icon == NULL)
