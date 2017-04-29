@@ -34,8 +34,6 @@ struct _CcSearchPanelPrivate
 {
   GtkBuilder *builder;
   GtkWidget  *list_box;
-  GtkWidget  *up_button;
-  GtkWidget  *down_button;
 
   GCancellable *load_cancellable;
   GSettings  *search_settings;
@@ -92,28 +90,6 @@ list_sort_func (gconstpointer a,
 }
 
 static void
-search_panel_invalidate_button_state (CcSearchPanel *self)
-{
-  GList *children;
-  gboolean is_first, is_last;
-  GtkListBoxRow *row;
-
-  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->priv->list_box));
-  children = gtk_container_get_children (GTK_CONTAINER (self->priv->list_box));
-
-  if (!row || !children)
-    return;
-
-  is_first = (row == g_list_first (children)->data);
-  is_last = (row == g_list_last (children)->data);
-
-  gtk_widget_set_sensitive (self->priv->up_button, !is_first);
-  gtk_widget_set_sensitive (self->priv->down_button, !is_last);
-
-  g_list_free (children);
-}
-
-static void
 search_panel_invalidate_sort_order (CcSearchPanel *self)
 {
   gchar **sort_order;
@@ -127,8 +103,6 @@ search_panel_invalidate_sort_order (CcSearchPanel *self)
 
   gtk_list_box_invalidate_sort (GTK_LIST_BOX (self->priv->list_box));
   g_strfreev (sort_order);
-
-  search_panel_invalidate_button_state (self);
 }
 
 static gint
@@ -179,129 +153,6 @@ search_panel_set_no_providers (CcSearchPanel *self)
   gtk_widget_show (w);
 
   gtk_container_add (GTK_CONTAINER (self->priv->list_box), w);
-}
-
-static void
-search_panel_move_selected (CcSearchPanel *self,
-                            gboolean down)
-{
-  GtkListBoxRow *row, *other_row;
-  GAppInfo *app_info, *other_app_info;
-  const gchar *app_id, *other_app_id;
-  const gchar *last_good_app, *target_app;
-  gint idx, other_idx;
-  gpointer idx_ptr;
-  gboolean found;
-  GList *children, *l, *other;
-
-  row = gtk_list_box_get_selected_row (GTK_LIST_BOX (self->priv->list_box));
-  app_info = g_object_get_data (G_OBJECT (row), "app-info");
-  app_id = g_app_info_get_id (app_info);
-
-  children = gtk_container_get_children (GTK_CONTAINER (self->priv->list_box));
-
-  /* The assertions are valid only as long as we don't move the first
-     or the last item. */
-
-  l = g_list_find (children, row);
-  g_assert (l != NULL);
-
-  other = down ? g_list_next(l) : g_list_previous(l);
-  g_assert (other != NULL);
-
-  other_row = other->data;
-  other_app_info = g_object_get_data (G_OBJECT (other_row), "app-info");
-  other_app_id = g_app_info_get_id (other_app_info);
-
-  g_assert (other_app_id != NULL);
-
-  /* Check if we're moving one of the unsorted providers at the end of
-     the list; in that case, the value we obtain from the sort order table
-     is garbage.
-     We need to find the last app with a valid sort order, and
-     then set the sort order on all intermediate apps until we find the
-     one we want to move, if moving up, or the neighbor, if moving down.
-  */
-  last_good_app = target_app = app_id;
-  found = g_hash_table_lookup_extended (self->priv->sort_order, last_good_app, NULL, &idx_ptr);
-  while (!found)
-    {
-      GAppInfo *tmp;
-      const char *tmp_id;
-
-      l = g_list_previous (l);
-      if (l == NULL)
-        {
-          last_good_app = NULL;
-          break;
-        }
-
-      tmp =  g_object_get_data (G_OBJECT (l->data), "app-info");
-      tmp_id = g_app_info_get_id (tmp);
-
-      last_good_app = tmp_id;
-      found = g_hash_table_lookup_extended (self->priv->sort_order, tmp_id, NULL, &idx_ptr);
-    }
-
-  /* For simplicity's sake, set all sort orders to the previously visible state
-     first, and only then do the modification requested.
-
-     The loop actually sets the sort order on last_good_app even if we found a
-     valid one already, but I preferred to keep the logic simple, at the expense
-     of a small performance penalty.
-  */
-  if (found)
-    {
-      idx = GPOINTER_TO_INT (idx_ptr);
-    }
-  else
-    {
-      /* If not found, there is no configured app that has a sort order, so we start
-         from the first position and walk the entire list.
-         Sort orders are 1 based, so that 0 (NULL) is not a valid value.
-      */
-      idx = 1;
-      l = children;
-    }
-
-  while (last_good_app != target_app)
-    {
-      GAppInfo *tmp;
-      const char *tmp_id;
-
-      tmp = g_object_get_data (G_OBJECT (l->data), "app-info");
-      tmp_id = g_app_info_get_id (tmp);
-
-      g_hash_table_replace (self->priv->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
-
-      l = g_list_next (l);
-      idx++;
-      last_good_app = tmp_id;
-    }
-
-  other_idx = GPOINTER_TO_INT (g_hash_table_lookup (self->priv->sort_order, app_id));
-  idx = down ? (other_idx + 1) : (other_idx - 1);
-
-  g_hash_table_replace (self->priv->sort_order, g_strdup (other_app_id), GINT_TO_POINTER (other_idx));
-  g_hash_table_replace (self->priv->sort_order, g_strdup (app_id), GINT_TO_POINTER (idx));
-
-  search_panel_propagate_sort_order (self);
-
-  g_list_free (children);
-}
-
-static void
-down_button_clicked (GtkWidget *widget,
-                     CcSearchPanel *self)
-{
-  search_panel_move_selected (self, TRUE);
-}
-
-static void
-up_button_clicked (GtkWidget *widget,
-                   CcSearchPanel *self)
-{
-  search_panel_move_selected (self, FALSE);
 }
 
 static void
@@ -916,19 +767,6 @@ cc_search_panel_init (CcSearchPanel *self)
   gtk_container_add (GTK_CONTAINER (frame), widget);
   self->priv->list_box = widget;
   gtk_widget_show (widget);
-
-  g_signal_connect_swapped (widget, "row-selected",
-                            G_CALLBACK (search_panel_invalidate_button_state), self);
-
-  self->priv->up_button = WID ("up_button");
-  g_signal_connect (self->priv->up_button, "clicked",
-                    G_CALLBACK (up_button_clicked), self);
-  gtk_widget_set_sensitive (self->priv->up_button, FALSE);
-
-  self->priv->down_button = WID ("down_button");
-  g_signal_connect (self->priv->down_button, "clicked",
-                    G_CALLBACK (down_button_clicked), self);
-  gtk_widget_set_sensitive (self->priv->down_button, FALSE);
 
   widget = WID ("settings_button");
   g_signal_connect (widget, "clicked",
