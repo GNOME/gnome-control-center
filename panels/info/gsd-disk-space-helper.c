@@ -57,6 +57,7 @@ gsd_should_ignore_unix_mount (GUnixMountEntry *mount)
                 "fdescfs",
                 "gfs",
                 "gfs2",
+                "gpfs",
                 "kernfs",
                 "linprocfs",
                 "linsysfs",
