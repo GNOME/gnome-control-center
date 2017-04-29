@@ -38,6 +38,44 @@
             <property name="margin">32</property>
             <property name="hexpand">True</property>
             <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="margin-bottom">22</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="wrap">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="max-width-chars">30</property>
+                    <property name="label" translatable="yes">Move items to change the order of search results in the Activities Overview</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="settings_button">
+                    <property name="visible">True</property>
+                    <property name="valign">center</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="settings_button_a11y">
+                        <property name="accessible-name" translatable="yes">Preferences</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="settings_image">
+                        <property name="visible">True</property>
+                        <property name="icon-name">emblem-system-symbolic</property>
+                        <property name="icon-size">1</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="pack_type">end</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+
+            <child>
               <object class="GtkFrame" id="search_frame">
                 <property name="visible">True</property>
               </object>
@@ -96,6 +134,7 @@
                     </child>
                   </object>
                 </child>
+
                 <child>
                   <object class="GtkSeparatorToolItem" id="sep1">
                     <property name="visible">True</property>
@@ -105,38 +144,11 @@
                     <property name="expand">True</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkToolItem" id="settings_item">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkBox" id="i_s_ud_box">
-                        <property name="visible">True</property>
-                        <child>
-                           <object class="GtkButton" id="settings_button">
-                             <property name="visible">True</property>
-                             <child internal-child="accessible">
-                               <object class="AtkObject" id="settings_button_a11y">
-                                 <property name="accessible-name" translatable="yes">Preferences</property>
-                               </object>
-                             </child>
-                             <child>
-                                <object class="GtkImage" id="settings_image">
-                                  <property name="visible">True</property>
-                                  <property name="icon-name">emblem-system-symbolic</property>
-                                  <property name="icon-size">1</property>
-                                </object>
-                             </child>
-                           </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
