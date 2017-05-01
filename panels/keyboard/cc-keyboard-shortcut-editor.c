@@ -319,6 +319,7 @@ set_header_mode (CcKeyboardShortcutEditor *self,
                                                mode != HEADER_MODE_CUSTOM_EDIT);
   gtk_widget_set_visible (self->replace_button, mode == HEADER_MODE_REPLACE);
   gtk_widget_set_visible (self->set_button, mode == HEADER_MODE_SET);
+  gtk_widget_set_visible (self->remove_button, mode == HEADER_MODE_CUSTOM_EDIT);
 
   /* By setting the default response, the action button gets the 'suggested-action' applied */
   switch (mode)
@@ -643,7 +644,6 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
                                         is_accel_empty ? "button" : "label");
 
       gtk_widget_set_visible (self->reset_custom_button, !is_accel_empty);
-      gtk_widget_show (self->remove_button);
 
       g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
       g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
@@ -1040,6 +1040,5 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       gtk_widget_set_sensitive (self->add_button, FALSE);
 
       gtk_widget_hide (self->reset_custom_button);
-      gtk_widget_hide (self->remove_button);
     }
 }

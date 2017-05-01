@@ -280,22 +280,6 @@
                     <property name="top_attach">2</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkButton" id="remove_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Remove</property>
-                    <property name="valign">end</property>
-                    <signal name="clicked" handler="remove_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
-                    <style>
-                      <class name="destructive-action" />
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">3</property>
-                  </packing>
-                </child>
               </object>
               <packing>
                 <property name="name">custom</property>
@@ -362,6 +346,18 @@
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <signal name="clicked" handler="cancel_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="no" />
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="remove_button">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Remove</property>
+            <property name="valign">end</property>
+            <signal name="clicked" handler="remove_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+            <style>
+              <class name="destructive-action" />
+            </style>
           </object>
         </child>
         <child>
