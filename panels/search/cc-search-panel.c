@@ -406,6 +406,7 @@ switch_settings_mapping_get_generic (GValue *value,
         }
     }
 
+  g_free (apps);
   g_value_set_boolean (value, !!default_enabled != !!found);
 
   return TRUE;
