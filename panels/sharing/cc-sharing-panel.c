@@ -553,7 +553,7 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                     G_CALLBACK (cc_sharing_panel_remove_folder), self);
   g_object_set_data (G_OBJECT (w), "row", row);
 
-  g_object_set_data_full (G_OBJECT (row), "path", g_strdup (path), g_free);
+  g_object_set_data_full (G_OBJECT (row), "path", path, g_free);
 
   gtk_widget_show_all (row);
 
