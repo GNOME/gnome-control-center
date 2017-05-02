@@ -1509,6 +1509,7 @@ on_localed_properties_changed (GDBusProxy     *proxy,
                 g_free (priv->system_region);
                 priv->system_region = g_strdup (time);
                 g_variant_unref (v);
+                g_free (strv);
 
                 update_language_label (self);
         }
