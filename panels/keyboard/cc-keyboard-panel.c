@@ -33,6 +33,8 @@
 
 #include "cc-util.h"
 
+#define SHORTCUT_DELIMITERS "+ "
+
 typedef struct {
   CcKeyboardItem *item;
   gchar          *section_title;
@@ -334,6 +336,96 @@ remove_item (CcKeyboardPanel *self,
   g_list_free (children);
 }
 
+static gboolean
+strv_contains_prefix_or_match (gchar       **strv,
+                               const gchar  *prefix)
+{
+  guint i;
+
+  const struct {
+    const gchar *key;
+    const gchar *untranslated;
+    const gchar *synonym;
+  } key_aliases[] =
+    {
+      { "ctrl",  "Ctrl",  "ctrl" },
+      { "win",   "Super", "super" },
+    };
+
+  for (i = 0; strv[i]; i++)
+    {
+      if (g_str_has_prefix (strv[i], prefix))
+        return TRUE;
+    }
+
+  for (i = 0; i < G_N_ELEMENTS (key_aliases); i++)
+    {
+      g_autofree gchar *alias = NULL;
+      const gchar *translated_label, *synonym;
+
+      if (!g_str_has_prefix (key_aliases[i].key, prefix))
+        continue;
+
+      /* Get GTK+'s translation */
+      translated_label = g_dpgettext2 ("gtk30", "keyboard label", key_aliases[i].untranslated);
+
+      alias = g_utf8_strdown (translated_label, -1);
+      synonym = key_aliases[i].synonym;
+
+      /* If a translation or synonym of the key is in the accelerator, and we typed
+       * the key, also consider that a prefix */
+      if ((alias && g_strv_contains ((const gchar * const *) strv, alias)) ||
+          (synonym && g_strv_contains ((const gchar * const *) strv, synonym)))
+        {
+          return TRUE;
+        }
+    }
+
+  return FALSE;
+}
+
+static gboolean
+search_match_shortcut (CcKeyboardItem *item,
+                       const gchar    *search)
+{
+  GStrv shortcut_tokens, search_tokens;
+  g_autofree gchar *normalized_accel = NULL;
+  g_autofree gchar *accel = NULL;
+  gboolean match;
+  guint i;
+
+  if (is_empty_binding (item->keyval, item->mask, item->keycode))
+    return FALSE;
+
+  match = TRUE;
+  accel = convert_keysym_state_to_string (item->keyval, item->mask, item->keycode);
+  normalized_accel = cc_util_normalize_casefold_and_unaccent (accel);
+
+  shortcut_tokens = g_strsplit_set (normalized_accel, SHORTCUT_DELIMITERS, -1);
+  search_tokens = g_strsplit_set (search, SHORTCUT_DELIMITERS, -1);
+
+  for (i = 0; search_tokens[i] != NULL; i++)
+    {
+      const gchar *token;
+
+      /* Strip leading and trailing whitespaces */
+      token = g_strstrip (search_tokens[i]);
+
+      if (g_utf8_strlen (token, -1) == 0)
+        continue;
+
+      match = match && strv_contains_prefix_or_match (shortcut_tokens, token);
+
+      if (!match)
+        break;
+    }
+
+  g_strfreev (shortcut_tokens);
+  g_strfreev (search_tokens);
+
+  return match;
+}
+
 static gint
 sort_function (GtkListBoxRow *a,
                GtkListBoxRow *b,
@@ -443,6 +535,7 @@ filter_function (GtkListBoxRow *row,
                  gpointer       user_data)
 {
   CcKeyboardPanel *self = user_data;
+  CcKeyboardItem *item;
   RowData *data;
   gboolean retval;
   gchar *search, *name;
@@ -455,10 +548,11 @@ filter_function (GtkListBoxRow *row,
     return FALSE;
 
   data = g_object_get_data (G_OBJECT (row), "data");
-  name = cc_util_normalize_casefold_and_unaccent (data->item->description);
+  item = data->item;
+  name = cc_util_normalize_casefold_and_unaccent (item->description);
   search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (self->search_entry)));
 
-  retval = strstr (name, search) != NULL;
+  retval = strstr (name, search) != NULL || search_match_shortcut (item, search);
 
   g_free (search);
   g_free (name);
