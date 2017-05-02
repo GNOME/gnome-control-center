@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-04-13 08:25+0000\n"
-"PO-Revision-Date: 2017-04-27 10:01+0700\n"
+"POT-Creation-Date: 2017-05-01 15:43+0000\n"
+"PO-Revision-Date: 2017-05-02 13:20+0700\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -113,8 +113,8 @@ msgstr ""
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1347
-#: ../panels/network/net-device-wifi.c:1586
+#: ../panels/network/net-device-wifi.c:1349
+#: ../panels/network/net-device-wifi.c:1588
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -1331,39 +1331,34 @@ msgstr ""
 "redshift;warna;matahari terbit; matahari tenggelam"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-overview-panel.c:380
+#: ../panels/info/cc-info-overview-panel.c:381
+#: ../panels/info/cc-info-overview-panel.c:468
 #: ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Unknown"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture and the build id, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-overview-panel.c:471
+#. translators: This is the name of the OS, followed by the build ID, for
+#. * example:
+#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
+#. * "Ubuntu 16.04 LTS; Build ID: jki"
+#: ../panels/info/cc-info-overview-panel.c:476
 #, c-format
-msgid "%s %d-bit (Build ID: %s)"
-msgstr "%s %d-bit (ID Build: %s)"
+msgid "%s; Build ID: %s"
+msgstr "%s; ID Build: %s"
 
-#: ../panels/info/cc-info-overview-panel.c:473
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:493
 #, c-format
-msgid "%d-bit (Build ID: %s)"
-msgstr "%d-bit (ID Build: %s)"
+msgid "64-bit"
+msgstr "64-bit"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-overview-panel.c:481
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:496
 #, c-format
-msgid "%s %d-bit"
-msgstr "%s %d-bit"
+msgid "32-bit"
+msgstr "32-bit"
 
-#: ../panels/info/cc-info-overview-panel.c:483
-#, c-format
-msgid "%d-bit"
-msgstr "%d-bit"
-
-#: ../panels/info/cc-info-overview-panel.c:784
+#: ../panels/info/cc-info-overview-panel.c:802
 #, c-format
 msgid "Version %s"
 msgstr "Versi %s"
@@ -1503,28 +1498,33 @@ msgstr "Memori"
 msgid "Processor"
 msgstr "Prosesor"
 
-#. To translators: this field contains the distro name, version and type
+#. To translators: this field contains the distro name and version
 #: ../panels/info/info-overview.ui.h:5
-msgid "Base system"
-msgstr "Sistem basis"
+msgid "OS name"
+msgstr "Nama SO (Sistem Operasi)"
 
-#: ../panels/info/info-overview.ui.h:6
+#. To translators: this field contains the distro type
+#: ../panels/info/info-overview.ui.h:7
+msgid "OS type"
+msgstr "Tipe SO (Sistem Operasi)"
+
+#: ../panels/info/info-overview.ui.h:8
 msgid "Disk"
 msgstr "Diska"
 
-#: ../panels/info/info-overview.ui.h:7
+#: ../panels/info/info-overview.ui.h:9
 msgid "Calculating…"
 msgstr "Menghitung…"
 
-#: ../panels/info/info-overview.ui.h:8
+#: ../panels/info/info-overview.ui.h:10
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../panels/info/info-overview.ui.h:9
+#: ../panels/info/info-overview.ui.h:11
 msgid "Virtualization"
 msgstr "Virtualisasi"
 
-#: ../panels/info/info-overview.ui.h:10
+#: ../panels/info/info-overview.ui.h:12
 msgid "Check for updates"
 msgstr "Memeriksa pemutakhiran"
 
@@ -2141,14 +2141,14 @@ msgstr "Profil %d"
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
 #: ../panels/network/net-device-wifi.c:215
-#: ../panels/network/net-device-wifi.c:392
+#: ../panels/network/net-device-wifi.c:391
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
 #: ../panels/network/net-device-wifi.c:219
-#: ../panels/network/net-device-wifi.c:397
+#: ../panels/network/net-device-wifi.c:396
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
@@ -2167,7 +2167,7 @@ msgstr "Enterprise"
 
 #: ../panels/network/connection-editor/ce-page-details.c:68
 #: ../panels/network/net-device-wifi.c:233
-#: ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:381
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nihil"
@@ -2179,7 +2179,7 @@ msgstr "Tak pernah"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:487
+#: ../panels/network/net-device-wifi.c:489
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2188,37 +2188,37 @@ msgstr[0] "%i hari yang lalu"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:543
+#: ../panels/network/net-device-wifi.c:545
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:574
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nihil"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:574
+#: ../panels/network/net-device-wifi.c:576
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Lemah"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:576
+#: ../panels/network/net-device-wifi.c:578
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:578
+#: ../panels/network/net-device-wifi.c:580
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bagus"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:580
+#: ../panels/network/net-device-wifi.c:582
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Sempurna"
@@ -2541,7 +2541,7 @@ msgid "_Reset"
 msgstr "_Reset"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1587
+#: ../panels/network/net-device-wifi.c:1589
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Lupakan"
@@ -2671,17 +2671,17 @@ msgstr ""
 "vlan;bridge;bond;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:475
 msgid "never"
 msgstr "tak pernah"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:485
 msgid "today"
 msgstr "hari ini"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:487
 msgid "yesterday"
 msgstr "kemarin"
 
@@ -2708,18 +2708,18 @@ msgid "Wired"
 msgstr "Kabel"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1745
+#: ../panels/network/net-device-wifi.c:1747
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opsi…"
 
-#: ../panels/network/net-device-mobile.c:223
+#: ../panels/network/net-device-mobile.c:238
 msgid "Add new connection"
 msgstr "Tambah sambungan baru"
 
-#: ../panels/network/net-device-wifi.c:1255
+#: ../panels/network/net-device-wifi.c:1257
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2728,12 +2728,12 @@ msgstr ""
 "menggunakannya sebagai hotspot nirkabel untuk berbagi koneksi dengan yang "
 "lain."
 
-#: ../panels/network/net-device-wifi.c:1259
+#: ../panels/network/net-device-wifi.c:1261
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Mengaktifkan hotspot nirkabel akan memutuskan Anda dari <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1263
+#: ../panels/network/net-device-wifi.c:1265
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2741,23 +2741,23 @@ msgstr ""
 "Anda tidak dapat mengakses Internet melalui nirkabel Anda selama hotspot "
 "aktif."
 
-#: ../panels/network/net-device-wifi.c:1345
+#: ../panels/network/net-device-wifi.c:1347
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Hentikan hotspot dan putuskan semua pengguna?"
 
-#: ../panels/network/net-device-wifi.c:1348
+#: ../panels/network/net-device-wifi.c:1350
 msgid "_Stop Hotspot"
 msgstr "_Stop Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1448
+#: ../panels/network/net-device-wifi.c:1450
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Kebijakan sistem melarang pemakaian sebagai Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1451
+#: ../panels/network/net-device-wifi.c:1453
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1583
+#: ../panels/network/net-device-wifi.c:1585
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2765,11 +2765,11 @@ msgstr ""
 "Rincian jaringan bagi jaringan yang dipilih, termasuk sandi dan sebarang "
 "konfigurasi gubahan akan hilang."
 
-#: ../panels/network/net-device-wifi.c:1893
+#: ../panels/network/net-device-wifi.c:1895
 msgid "History"
 msgstr "Riwayat"
 
-#: ../panels/network/net-device-wifi.c:1897
+#: ../panels/network/net-device-wifi.c:1899
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2777,7 +2777,7 @@ msgid "_Close"
 msgstr "_Tutup"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1905
+#: ../panels/network/net-device-wifi.c:1907
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Lupakan"
@@ -5214,7 +5214,7 @@ msgstr "Pilih Lokasi"
 msgid "_OK"
 msgstr "_OK"
 
-#: ../panels/search/cc-search-panel.c:177
+#: ../panels/search/cc-search-panel.c:178
 msgid "No applications found"
 msgstr "Tak menemukan aplikasi"
 
@@ -7361,6 +7361,15 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Hasil tak ditemukan"
+
+#~ msgid "%s %d-bit (Build ID: %s)"
+#~ msgstr "%s %d-bit (ID Build: %s)"
+
+#~ msgid "%s %d-bit"
+#~ msgstr "%s %d-bit"
+
+#~ msgid "Base system"
+#~ msgstr "Sistem basis"
 
 #~ msgid "Shortcut;Repeat;Blink;"
 #~ msgstr "Pintasan;Pengulangan;Kedip;"
