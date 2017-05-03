@@ -348,8 +348,11 @@ strv_contains_prefix_or_match (gchar       **strv,
     const gchar *synonym;
   } key_aliases[] =
     {
-      { "ctrl",  "Ctrl",  "ctrl" },
-      { "win",   "Super", "super" },
+      { "ctrl",   "Ctrl",  "ctrl" },
+      { "win",    "Super", "super" },
+      { "option",  NULL,   "alt" },
+      { "command", NULL,   "super" },
+      { "apple",   NULL,   "super" },
     };
 
   for (i = 0; strv[i]; i++)
@@ -361,15 +364,20 @@ strv_contains_prefix_or_match (gchar       **strv,
   for (i = 0; i < G_N_ELEMENTS (key_aliases); i++)
     {
       g_autofree gchar *alias = NULL;
-      const gchar *translated_label, *synonym;
+      const gchar *synonym;
 
       if (!g_str_has_prefix (key_aliases[i].key, prefix))
         continue;
 
-      /* Get GTK+'s translation */
-      translated_label = g_dpgettext2 ("gtk30", "keyboard label", key_aliases[i].untranslated);
+      if (key_aliases[i].untranslated)
+        {
+          const gchar *translated_label;
 
-      alias = g_utf8_strdown (translated_label, -1);
+          /* Steal GTK+'s translation */
+          translated_label = g_dpgettext2 ("gtk30", "keyboard label", key_aliases[i].untranslated);
+          alias = g_utf8_strdown (translated_label, -1);
+        }
+
       synonym = key_aliases[i].synonym;
 
       /* If a translation or synonym of the key is in the accelerator, and we typed
