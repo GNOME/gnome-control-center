@@ -208,6 +208,9 @@ pretty_hostname_to_ssid (const char *pretty)
 			break;
 		}
 
+		if (*p == '\0')
+			break;
+
 		prev = p;
 	}
 
