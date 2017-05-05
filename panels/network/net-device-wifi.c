@@ -1127,7 +1127,8 @@ start_shared_connection (NetDeviceWifi *device_wifi)
                 return;
         }
 
-        g_debug ("create new hotspot connection\n");
+        g_debug ("create new hotspot connection with SSID '%s'",
+                 (char *) g_bytes_get_data (ssid, NULL));
         c = nm_simple_connection_new ();
 
         sc = (NMSettingConnection *)nm_setting_connection_new ();
