@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-04-27 17:45+0000\n"
-"PO-Revision-Date: 2017-04-30 13:36+0200\n"
+"POT-Creation-Date: 2017-05-03 09:41+0000\n"
+"PO-Revision-Date: 2017-05-05 11:12+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -110,8 +110,8 @@ msgstr ""
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1346
-#: ../panels/network/net-device-wifi.c:1585
+#: ../panels/network/net-device-wifi.c:1349
+#: ../panels/network/net-device-wifi.c:1588
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -295,7 +295,7 @@ msgstr "Al è pussibil gjavâ il dispositîf di calibrazion."
 #. * detected early enough)
 #: ../panels/color/cc-color-calibrate.c:553
 msgid "Do not disturb the calibration device while in progress"
-msgstr "No stâ disturbâ il dispositîf di calibrazion intant che al lavore"
+msgstr "No sta disturbâ il dispositîf di calibrazion intant che al lavore"
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
@@ -1225,7 +1225,7 @@ msgstr "Distude"
 
 #: ../panels/display/cc-display-panel.c:2478
 msgid "Don’t use this display"
-msgstr "No stâ doprâ chest visôr"
+msgstr "No sta doprâ chest visôr"
 
 #. TRANSLATORS: the state of the night light setting
 #: ../panels/display/cc-display-panel.c:2786
@@ -1333,39 +1333,37 @@ msgstr ""
 "colôr;tramont;cricâ;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-overview-panel.c:380
+#: ../panels/info/cc-info-overview-panel.c:381
+#: ../panels/info/cc-info-overview-panel.c:468
 #: ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "No cognossût"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture and the build id, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-overview-panel.c:471
+#. translators: This is the name of the OS, followed by the build ID, for
+#. * example:
+#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
+#. * "Ubuntu 16.04 LTS; Build ID: jki"
+#: ../panels/info/cc-info-overview-panel.c:476
 #, c-format
-msgid "%s %d-bit (Build ID: %s)"
-msgstr "%s %d-bit (ID di costruzion: %s)"
+#| msgid "%d-bit (Build ID: %s)"
+msgid "%s; Build ID: %s"
+msgstr "%s; ID di costruzion: %s"
 
-#: ../panels/info/cc-info-overview-panel.c:473
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:493
 #, c-format
-msgid "%d-bit (Build ID: %s)"
-msgstr "%d-bit (ID di costruzion: %s)"
+#| msgid "%d-bit"
+msgid "64-bit"
+msgstr "64-bit"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-overview-panel.c:481
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:496
 #, c-format
-msgid "%s %d-bit"
-msgstr "%s %d-bit"
+#| msgid "%d-bit"
+msgid "32-bit"
+msgstr "32-bit"
 
-#: ../panels/info/cc-info-overview-panel.c:483
-#, c-format
-msgid "%d-bit"
-msgstr "%d-bit"
-
-#: ../panels/info/cc-info-overview-panel.c:784
+#: ../panels/info/cc-info-overview-panel.c:802
 #, c-format
 msgid "Version %s"
 msgstr "Version %s"
@@ -1506,28 +1504,34 @@ msgstr "Memorie"
 msgid "Processor"
 msgstr "Procesôr"
 
-#. To translators: this field contains the distro name, version and type
+#. To translators: this field contains the distro name and version
 #: ../panels/info/info-overview.ui.h:5
-msgid "Base system"
-msgstr "Sisteme base"
+msgid "OS name"
+msgstr "Non SO"
 
-#: ../panels/info/info-overview.ui.h:6
+#. To translators: this field contains the distro type
+#: ../panels/info/info-overview.ui.h:7
+#| msgid "Security type"
+msgid "OS type"
+msgstr "Gjenar di SO"
+
+#: ../panels/info/info-overview.ui.h:8
 msgid "Disk"
 msgstr "Disc"
 
-#: ../panels/info/info-overview.ui.h:7
+#: ../panels/info/info-overview.ui.h:9
 msgid "Calculating…"
 msgstr "Calcul..."
 
-#: ../panels/info/info-overview.ui.h:8
+#: ../panels/info/info-overview.ui.h:10
 msgid "Graphics"
 msgstr "Grafiche"
 
-#: ../panels/info/info-overview.ui.h:9
+#: ../panels/info/info-overview.ui.h:11
 msgid "Virtualization"
 msgstr "Virtualizazion"
 
-#: ../panels/info/info-overview.ui.h:10
+#: ../panels/info/info-overview.ui.h:12
 msgid "Check for updates"
 msgstr "Controle inzornaments"
 
@@ -1824,7 +1828,7 @@ msgstr ""
 "Cheste operazion no pues jessi anulade."
 
 #: ../panels/keyboard/cc-keyboard-panel.c:188
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
@@ -1838,7 +1842,7 @@ msgstr "Ristabilìs dut"
 msgid "Reset the shortcut to its default value"
 msgstr "Torne met la scurte al so valôr predefinît"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:434
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1847,16 +1851,16 @@ msgstr ""
 "%s al è za doprât par <b>%s</b>. Se tu lu rimplacis, %s al vegnarà "
 "disabilitât"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Custom Shortcut"
 msgstr "Stabilìs la scurte personalizade"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Shortcut"
 msgstr "Met la scurte"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:609
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Inserìs la gnove scurte di cambiâ <b>%s</b>."
@@ -1933,12 +1937,12 @@ msgid "None"
 msgstr "Nissun"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:8
-msgid "Remove"
-msgstr "Gjave"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Inserìs la gnove scurte"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Remove"
+msgstr "Gjave"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
@@ -2186,7 +2190,7 @@ msgstr "Mai"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:486
+#: ../panels/network/net-device-wifi.c:489
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2196,37 +2200,37 @@ msgstr[1] "%i diis indaûr"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:542
+#: ../panels/network/net-device-wifi.c:545
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:571
+#: ../panels/network/net-device-wifi.c:574
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nissune"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:573
+#: ../panels/network/net-device-wifi.c:576
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Debul"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:575
+#: ../panels/network/net-device-wifi.c:578
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:577
+#: ../panels/network/net-device-wifi.c:580
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bon"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:579
+#: ../panels/network/net-device-wifi.c:582
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Ecelent"
@@ -2549,7 +2553,7 @@ msgid "_Reset"
 msgstr "_Reset"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1586
+#: ../panels/network/net-device-wifi.c:1589
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Dismentee"
@@ -2566,7 +2570,7 @@ msgstr ""
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect"
-msgstr "Gjave ducj i detais di cheste rêt e no stâ cirî di coneti in automatic"
+msgstr "Gjave ducj i detais di cheste rêt e no sta cirî di coneti in automatic"
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:16
@@ -2676,17 +2680,17 @@ msgstr ""
 "Bluetooth;vpn;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:475
 msgid "never"
 msgstr "mai"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:482
+#: ../panels/network/net-device-wifi.c:485
 msgid "today"
 msgstr "vuê"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:484
+#: ../panels/network/net-device-wifi.c:487
 msgid "yesterday"
 msgstr "îr"
 
@@ -2713,7 +2717,7 @@ msgid "Wired"
 msgstr "Fîl"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1744
+#: ../panels/network/net-device-wifi.c:1747
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
@@ -2724,7 +2728,7 @@ msgstr "Opzions..."
 msgid "Add new connection"
 msgstr "Zonte gnove conession"
 
-#: ../panels/network/net-device-wifi.c:1254
+#: ../panels/network/net-device-wifi.c:1257
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2732,12 +2736,12 @@ msgstr ""
 "Se tu âs une altre conession a internet oltri a chê wireless, tu puedis "
 "impuestâ un hotspot wireless par condividi la conession cun altris."
 
-#: ../panels/network/net-device-wifi.c:1258
+#: ../panels/network/net-device-wifi.c:1261
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Impiant il hotspot wireless tu ti gjavarâs de conession cun <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1262
+#: ../panels/network/net-device-wifi.c:1265
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2745,23 +2749,23 @@ msgstr ""
 "Al è impussibil conetisi a internet vie wireless fintremai che il hotspost "
 "al è atîf."
 
-#: ../panels/network/net-device-wifi.c:1344
+#: ../panels/network/net-device-wifi.c:1347
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Fermâ il hotspot e disconeti ducj i utents?"
 
-#: ../panels/network/net-device-wifi.c:1347
+#: ../panels/network/net-device-wifi.c:1350
 msgid "_Stop Hotspot"
 msgstr "_Ferme Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1447
+#: ../panels/network/net-device-wifi.c:1450
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La politiche di sisteme e proibìs l'ûs come Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1450
+#: ../panels/network/net-device-wifi.c:1453
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Il dispositîf wireless nol supuarte la modalitât Hotspot"
 
-#: ../panels/network/net-device-wifi.c:1582
+#: ../panels/network/net-device-wifi.c:1585
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2769,11 +2773,11 @@ msgstr ""
 "A vegnaran pierdûts i detais par lis rêts selezionadis, includût lis "
 "password e ogni configurazion personalizade."
 
-#: ../panels/network/net-device-wifi.c:1892
+#: ../panels/network/net-device-wifi.c:1895
 msgid "History"
 msgstr "Cronologjie"
 
-#: ../panels/network/net-device-wifi.c:1896
+#: ../panels/network/net-device-wifi.c:1899
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2781,7 +2785,7 @@ msgid "_Close"
 msgstr "_Siere"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1904
+#: ../panels/network/net-device-wifi.c:1907
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Dismentee"
@@ -5053,7 +5057,7 @@ msgstr "Altri"
 msgid "No input source selected"
 msgstr "Nissune sorzint input selezionade"
 
-#: ../panels/region/cc-region-panel.c:1757
+#: ../panels/region/cc-region-panel.c:1758
 msgid "Login _Screen"
 msgstr "_Schermade di acès"
 
@@ -5223,7 +5227,7 @@ msgstr "Selezione posizion"
 msgid "_OK"
 msgstr "_OK"
 
-#: ../panels/search/cc-search-panel.c:177
+#: ../panels/search/cc-search-panel.c:178
 msgid "No applications found"
 msgstr "Nissune aplicazion cjatade"
 
@@ -5898,7 +5902,7 @@ msgstr "Trate une secuence di tascj di modifiche come une cumbinazion di tascj"
 
 #: ../panels/universal-access/uap.ui.h:46
 msgid "_Disable if two keys are pressed together"
-msgstr "_No stâ abilitâ se doi tascj a vegnin scliçâts tal stes moment"
+msgstr "_No sta abilitâ se doi tascj a vegnin fracâts tal stes moment"
 
 #: ../panels/universal-access/uap.ui.h:47
 msgid "Beep when a _modifier key is pressed"
@@ -6236,7 +6240,7 @@ msgstr "_Gjenar di account"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "Allow user to set a password when they next _login"
-msgstr "Permet al utent di impostâ une password al prossim _acès"
+msgstr "Permet al utent di stabilî une password al prossim _acès"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:11
 msgid "Set a password _now"
@@ -6515,9 +6519,15 @@ msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Cîr di evitâ secuencis come 1234 o abcd."
 
 #: ../panels/user-accounts/pw-utils.c:115
+#| msgctxt "Password hint"
+#| msgid "Try to use a mixture of letters, numbers and punctuation."
 msgctxt "Password hint"
-msgid "Try to add more letters, numbers and symbols."
-msgstr "Cîr di zontâ plui letaris, numars e simbui."
+msgid ""
+"Password needs to be longer. Try to add more letters, numbers and "
+"punctuation."
+msgstr ""
+"La password e scugne jessi plui lungje. Cîr di zontâ plui letaris, numars e "
+"ponts."
 
 #: ../panels/user-accounts/pw-utils.c:117
 msgctxt "Password hint"
@@ -6525,43 +6535,16 @@ msgid "Mix uppercase and lowercase and try to use a number or two."
 msgstr "Misture letaris maiusculis e minusculis e cîr di doprâ un numar o doi."
 
 #: ../panels/user-accounts/pw-utils.c:119
+#| msgctxt "Password hint"
+#| msgid ""
+#| "Good password! Adding more letters, numbers and punctuation will make it "
+#| "stronger."
 msgctxt "Password hint"
 msgid ""
-"Good password! Adding more letters, numbers and punctuation will make it "
-"stronger."
+"Adding more letters, numbers and punctuation will make the password stronger."
 msgstr ""
-"Password buine! Zontant plui letaris, numars e ponts le fasarà diventâ plui "
+"Zontant plui letaris, numars e ponts si fasarà diventâ la password plui "
 "robuste."
-
-#: ../panels/user-accounts/pw-utils.c:141
-#: ../panels/user-accounts/pw-utils.c:171
-msgctxt "Password strength"
-msgid "Strength: Weak"
-msgstr "Robustece: Debule"
-
-#: ../panels/user-accounts/pw-utils.c:145
-#: ../panels/user-accounts/pw-utils.c:172
-msgctxt "Password strength"
-msgid "Strength: Low"
-msgstr "Robustece: Basse"
-
-#: ../panels/user-accounts/pw-utils.c:148
-#: ../panels/user-accounts/pw-utils.c:173
-msgctxt "Password strength"
-msgid "Strength: Medium"
-msgstr "Robustece: Medie"
-
-#: ../panels/user-accounts/pw-utils.c:151
-#: ../panels/user-accounts/pw-utils.c:174
-msgctxt "Password strength"
-msgid "Strength: Good"
-msgstr "Robustece: Buine"
-
-#: ../panels/user-accounts/pw-utils.c:154
-#: ../panels/user-accounts/pw-utils.c:175
-msgctxt "Password strength"
-msgid "Strength: High"
-msgstr "Robustece: Alte"
 
 #: ../panels/user-accounts/run-passwd.c:422
 msgid "Authentication failed"
@@ -6620,25 +6603,25 @@ msgstr "Al varès di corispuindi ae direzion web dal to furnidôr di acès."
 msgid "Failed to add account"
 msgstr "Zonte dal account falide"
 
-#: ../panels/user-accounts/um-account-dialog.c:463
+#: ../panels/user-accounts/um-account-dialog.c:462
 msgid "Passwords do not match."
 msgstr "Lis password no corispuindin."
 
-#: ../panels/user-accounts/um-account-dialog.c:718
-#: ../panels/user-accounts/um-account-dialog.c:764
-#: ../panels/user-accounts/um-account-dialog.c:785
+#: ../panels/user-accounts/um-account-dialog.c:717
+#: ../panels/user-accounts/um-account-dialog.c:763
+#: ../panels/user-accounts/um-account-dialog.c:784
 msgid "Failed to register account"
 msgstr "Regjistrazion account falide"
 
-#: ../panels/user-accounts/um-account-dialog.c:908
+#: ../panels/user-accounts/um-account-dialog.c:907
 msgid "No supported way to authenticate with this domain"
 msgstr "Nissun mût supuartât par autenticâsi cun chest domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:981
+#: ../panels/user-accounts/um-account-dialog.c:980
 msgid "Failed to join domain"
 msgstr "Falît a unîsi al domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1041
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6646,7 +6629,7 @@ msgstr ""
 "Non di acès no valit.\n"
 "Prove une altre volte."
 
-#: ../panels/user-accounts/um-account-dialog.c:1049
+#: ../panels/user-accounts/um-account-dialog.c:1048
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6654,13 +6637,14 @@ msgstr ""
 "Password no valide.\n"
 "Prove une altre volte."
 
-#: ../panels/user-accounts/um-account-dialog.c:1057
+#: ../panels/user-accounts/um-account-dialog.c:1056
 msgid "Failed to log into domain"
 msgstr "Acès al domini falît"
 
-#: ../panels/user-accounts/um-account-dialog.c:1115
-msgid "Unable find the domain. Maybe you misspelled it?"
-msgstr "Impussibil cjatâ il domini. Forsit al è stât scrit mâl."
+#: ../panels/user-accounts/um-account-dialog.c:1114
+#| msgid "Unable find the domain. Maybe you misspelled it?"
+msgid "Unable to find the domain. Maybe you misspelled it?"
+msgstr "Impussibil cjatâ il domini. Isal stât scrit mâl?."
 
 #: ../panels/user-accounts/um-account-type.c:34
 msgctxt "Account type"
@@ -6822,19 +6806,19 @@ msgstr "Inizi session"
 msgid "%s — Account Activity"
 msgstr "%s — Ativitât dal account"
 
-#: ../panels/user-accounts/um-password-dialog.c:145
+#: ../panels/user-accounts/um-password-dialog.c:144
 msgid "Please choose another password."
 msgstr "Sielç une altre password."
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#: ../panels/user-accounts/um-password-dialog.c:153
 msgid "Please type your current password again."
 msgstr "Scrîf di gnûf la tô password atuâl."
 
-#: ../panels/user-accounts/um-password-dialog.c:160
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Password could not be changed"
 msgstr "Impussibil cambiâ la password"
 
-#: ../panels/user-accounts/um-password-dialog.c:286
+#: ../panels/user-accounts/um-password-dialog.c:285
 msgid "The passwords do not match."
 msgstr "Lis password no corispuindin."
 
@@ -6952,7 +6936,7 @@ msgstr "Account disabilitât"
 #: ../panels/user-accounts/um-user-panel.c:719
 msgctxt "Password mode"
 msgid "To be set at next login"
-msgstr "Di impostâ al prossim acès"
+msgstr "Di stabilî al prossim acès"
 
 #: ../panels/user-accounts/um-user-panel.c:722
 msgctxt "Password mode"
@@ -7374,6 +7358,39 @@ msgstr "Hotspot"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Nissun risultât cjatât"
+
+#~ msgid "%s %d-bit (Build ID: %s)"
+#~ msgstr "%s %d-bit (ID di costruzion: %s)"
+
+#~ msgid "%s %d-bit"
+#~ msgstr "%s %d-bit"
+
+#~ msgid "Base system"
+#~ msgstr "Sisteme base"
+
+#~ msgctxt "Password hint"
+#~ msgid "Try to add more letters, numbers and symbols."
+#~ msgstr "Cîr di zontâ plui letaris, numars e simbui."
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Weak"
+#~ msgstr "Robustece: Debule"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Low"
+#~ msgstr "Robustece: Basse"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Medium"
+#~ msgstr "Robustece: Medie"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Good"
+#~ msgstr "Robustece: Buine"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: High"
+#~ msgstr "Robustece: Alte"
 
 #~ msgid "Shortcut;Repeat;Blink;"
 #~ msgstr "Scurte;Ripet;Lampâ;"
