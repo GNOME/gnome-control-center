@@ -145,6 +145,7 @@ row_data_free (RowData *data)
 {
   g_free (data->description);
   g_free (data->name);
+  g_free (data->id);
   g_free (data);
 }
 
