@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 2.0\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-04-08 14:38+0000\n"
-"PO-Revision-Date: 2017-04-10 13:42+0200\n"
+"POT-Creation-Date: 2017-05-05 17:32+0000\n"
+"PO-Revision-Date: 2017-05-06 21:26+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -110,8 +110,8 @@ msgstr "Možete dodati slike u vašu %s mapu i zatim će se prikazati ovdje gore
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1347
-#: ../panels/network/net-device-wifi.c:1586
+#: ../panels/network/net-device-wifi.c:1350
+#: ../panels/network/net-device-wifi.c:1589
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -1329,39 +1329,34 @@ msgstr ""
 "crveni pomak; boja;zalazak;izlazak;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-overview-panel.c:380
+#: ../panels/info/cc-info-overview-panel.c:381
+#: ../panels/info/cc-info-overview-panel.c:468
 #: ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Nepoznato"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture and the build id, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-overview-panel.c:471
+#. translators: This is the name of the OS, followed by the build ID, for
+#. * example:
+#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
+#. * "Ubuntu 16.04 LTS; Build ID: jki"
+#: ../panels/info/cc-info-overview-panel.c:476
 #, c-format
-msgid "%s %d-bit (Build ID: %s)"
-msgstr "%s %d-bitni (ID izgradnje: %s)"
+msgid "%s; Build ID: %s"
+msgstr "%s; ID izgradnje: %s"
 
-#: ../panels/info/cc-info-overview-panel.c:473
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:493
 #, c-format
-msgid "%d-bit (Build ID: %s)"
-msgstr "%d-bitni (ID izgradnje: %s)"
+msgid "64-bit"
+msgstr "64-bitni"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-overview-panel.c:481
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:496
 #, c-format
-msgid "%s %d-bit"
-msgstr "%s %d-bitna"
+msgid "32-bit"
+msgstr "32-bitni"
 
-#: ../panels/info/cc-info-overview-panel.c:483
-#, c-format
-msgid "%d-bit"
-msgstr "%d-bitna"
-
-#: ../panels/info/cc-info-overview-panel.c:784
+#: ../panels/info/cc-info-overview-panel.c:802
 #, c-format
 msgid "Version %s"
 msgstr "Inačica %s"
@@ -1502,28 +1497,33 @@ msgstr "Memorija"
 msgid "Processor"
 msgstr "Procesor"
 
-#. To translators: this field contains the distro name, version and type
+#. To translators: this field contains the distro name and version
 #: ../panels/info/info-overview.ui.h:5
-msgid "Base system"
-msgstr "Osnovni sustav"
+msgid "OS name"
+msgstr "Naziv operativnog sustava"
 
-#: ../panels/info/info-overview.ui.h:6
+#. To translators: this field contains the distro type
+#: ../panels/info/info-overview.ui.h:7
+msgid "OS type"
+msgstr "Vrsta operativnog sustava"
+
+#: ../panels/info/info-overview.ui.h:8
 msgid "Disk"
 msgstr "Disk"
 
-#: ../panels/info/info-overview.ui.h:7
+#: ../panels/info/info-overview.ui.h:9
 msgid "Calculating…"
 msgstr "Izračunavanje…"
 
-#: ../panels/info/info-overview.ui.h:8
+#: ../panels/info/info-overview.ui.h:10
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../panels/info/info-overview.ui.h:9
+#: ../panels/info/info-overview.ui.h:11
 msgid "Virtualization"
 msgstr "Virtualizacija"
 
-#: ../panels/info/info-overview.ui.h:10
+#: ../panels/info/info-overview.ui.h:12
 msgid "Check for updates"
 msgstr "Provjeri nadopune"
 
@@ -1807,11 +1807,11 @@ msgstr "Tipka za sastavljanje"
 msgid "Modifiers-only switch to next source"
 msgstr "Samo promjena, prebacivanje na sljedeći izvor"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:181
+#: ../panels/keyboard/cc-keyboard-panel.c:183
 msgid "Reset All Shortcuts?"
 msgstr "Vrati sve prečace na izvorno stanje?"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:184
+#: ../panels/keyboard/cc-keyboard-panel.c:186
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -1819,22 +1819,22 @@ msgstr ""
 "Vraćanje prečaca na izvorno stanje može utjecati na vaše prilagođene "
 "prečace. To se ne može poništit?"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:188
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/cc-keyboard-panel.c:190
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Odustani"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/cc-keyboard-panel.c:191
 msgid "Reset All"
 msgstr "Vrati sve na izvorno"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:281
+#: ../panels/keyboard/cc-keyboard-panel.c:283
 msgid "Reset the shortcut to its default value"
 msgstr "Vrati izvorne vrijednosti prečaca"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:434
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1842,16 +1842,16 @@ msgid ""
 msgstr ""
 "%s se već koristi za <b>%s</b>. Ako ga zamjenjujete, %s biti će onemogućen"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Custom Shortcut"
 msgstr "Postavi prilagođen prečac"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Shortcut"
 msgstr "Postavi prečac"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:609
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Upišite novi prečac za promjenu <b>%s</b>."
@@ -1872,8 +1872,11 @@ msgstr ""
 
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:5
-msgid "Shortcut;Repeat;Blink;"
-msgstr "Prečac;Ponovi;Treptanje;"
+msgid ""
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+msgstr ""
+"Prečac;Radni prostor;Prozor;Promjena veličine;Uvečanje;Kontrast;Ulaz;Izvor;"
+"Zaključavanje;Glasnoća zvuka;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 #: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
@@ -1925,12 +1928,12 @@ msgid "None"
 msgstr "Nepoznata"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:8
-msgid "Remove"
-msgstr "Ukloni"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Upišite novi prečac"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Remove"
+msgstr "Ukloni"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
@@ -2095,13 +2098,13 @@ msgid "802.1x _Security"
 msgstr "802.1x _sigurnost"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "stranica 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:3
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:4
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
@@ -2109,18 +2112,18 @@ msgid "Anony_mous identity"
 msgstr "Anoni_man identitet"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:4
 msgid "Inner _authentication"
 msgstr "Unutrašnja _ovjera"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:6
+#: ../panels/network/connection-editor/security-page.ui.h:5
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "stranica 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:459
+#: ../panels/network/connection-editor/ce-page-security.c:445
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2138,14 +2141,14 @@ msgstr "Profil %d"
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
 #: ../panels/network/net-device-wifi.c:215
-#: ../panels/network/net-device-wifi.c:392
+#: ../panels/network/net-device-wifi.c:391
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
 #: ../panels/network/net-device-wifi.c:219
-#: ../panels/network/net-device-wifi.c:397
+#: ../panels/network/net-device-wifi.c:396
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
@@ -2164,7 +2167,7 @@ msgstr "Poslovanje"
 
 #: ../panels/network/connection-editor/ce-page-details.c:68
 #: ../panels/network/net-device-wifi.c:233
-#: ../panels/network/net-device-wifi.c:382
+#: ../panels/network/net-device-wifi.c:381
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nepoznata"
@@ -2176,7 +2179,7 @@ msgstr "Nikada"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:487
+#: ../panels/network/net-device-wifi.c:489
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2187,37 +2190,37 @@ msgstr[2] "prije %i dana"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:543
+#: ../panels/network/net-device-wifi.c:545
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:572
+#: ../panels/network/net-device-wifi.c:574
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nepoznata"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:574
+#: ../panels/network/net-device-wifi.c:576
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slaba"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:576
+#: ../panels/network/net-device-wifi.c:578
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "U redu"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:578
+#: ../panels/network/net-device-wifi.c:580
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobra"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:580
+#: ../panels/network/net-device-wifi.c:582
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Izvrsna"
@@ -2228,8 +2231,8 @@ msgstr "Izvrsna"
 msgid "Details"
 msgstr "Pojedinosti"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:215
-#: ../panels/network/connection-editor/ce-page-vpn.c:221
+#: ../panels/network/connection-editor/ce-page-ethernet.c:205
+#: ../panels/network/connection-editor/ce-page-vpn.c:210
 #: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2325,33 +2328,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Vrati izvorno"
 
-#: ../panels/network/connection-editor/ce-page-security.c:248
+#: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Nepoznata"
 
-#: ../panels/network/connection-editor/ce-page-security.c:271
+#: ../panels/network/connection-editor/ce-page-security.c:268
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-bitni ključ (Heks. ili ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:281
+#: ../panels/network/connection-editor/ce-page-security.c:278
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bitna lozinka"
 
-#: ../panels/network/connection-editor/ce-page-security.c:294
+#: ../panels/network/connection-editor/ce-page-security.c:291
 #: ../panels/network/wireless-security/wireless-security.c:463
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:307
+#: ../panels/network/connection-editor/ce-page-security.c:304
 msgid "Dynamic WEP (802.1x)"
 msgstr "Promjenjivi WEP (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:321
+#: ../panels/network/connection-editor/ce-page-security.c:318
 msgid "WPA & WPA2 Personal"
 msgstr "WPA i WPA2 osobni"
 
-#: ../panels/network/connection-editor/ce-page-security.c:335
+#: ../panels/network/connection-editor/ce-page-security.c:332
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA i WPA2 poslovni"
 
@@ -2467,7 +2470,7 @@ msgid "bytes"
 msgstr "bajtova"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "Make available to other _users"
 msgstr "Učini dostupnim ostalim _korisnicima"
 
@@ -2475,22 +2478,6 @@ msgstr "Učini dostupnim ostalim _korisnicima"
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Connect _automatically"
 msgstr "Poveži se _automatski"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:17
-#: ../panels/network/connection-editor/security-page.ui.h:2
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Firewall _Zone"
-msgstr "Vatrozid _zona"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:49
-#: ../panels/network/connection-editor/firewall-helpers.c:118
-msgctxt "Firewall zone"
-msgid "Default"
-msgstr "Uobičajena"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:50
-msgid "The zone defines the trust level of the connection"
-msgstr "Zona određuje pouzdanu razinu povezivanja"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:24
@@ -2556,7 +2543,7 @@ msgid "_Reset"
 msgstr "_Vrati izvorno"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1587
+#: ../panels/network/net-device-wifi.c:1590
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Zaboravi"
@@ -2641,7 +2628,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "Izvezi VPN povezivanje"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:4
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Greška: nemoguće učitavanje uređivača VPN povezivanja)"
 
@@ -2683,17 +2670,17 @@ msgstr ""
 "vlan;most;povezano;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:475
 msgid "never"
 msgstr "nikada"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:485
 msgid "today"
 msgstr "danas"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:487
 msgid "yesterday"
 msgstr "jučer"
 
@@ -2720,18 +2707,18 @@ msgid "Wired"
 msgstr "Žična mreža"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1745
+#: ../panels/network/net-device-wifi.c:1748
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Mogućnosti…"
 
-#: ../panels/network/net-device-mobile.c:223
+#: ../panels/network/net-device-mobile.c:238
 msgid "Add new connection"
 msgstr "Dodaj novu mrežu"
 
-#: ../panels/network/net-device-wifi.c:1255
+#: ../panels/network/net-device-wifi.c:1258
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2739,12 +2726,12 @@ msgstr ""
 "Ako niste povezani na Internet bežičnim putem, možete postaviti bežičnu "
 "pristupnu točku za dijeljenje povezivanja s ostalim korisnicima."
 
-#: ../panels/network/net-device-wifi.c:1259
+#: ../panels/network/net-device-wifi.c:1262
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Prebacivanje na bežičnu pristupnu točku odspojiti će vas s <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1263
+#: ../panels/network/net-device-wifi.c:1266
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2752,23 +2739,23 @@ msgstr ""
 "Pristup Internetu nije moguć putem vašeg bežičnog povezivanja dok je "
 "pristupna točka aktivna."
 
-#: ../panels/network/net-device-wifi.c:1345
+#: ../panels/network/net-device-wifi.c:1348
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Zaustaviti pristupnu točku i odspojiti sve korisnike?"
 
-#: ../panels/network/net-device-wifi.c:1348
+#: ../panels/network/net-device-wifi.c:1351
 msgid "_Stop Hotspot"
 msgstr "_Zaustavi pristupnu točku"
 
-#: ../panels/network/net-device-wifi.c:1448
+#: ../panels/network/net-device-wifi.c:1451
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Pravila sustava ne dopuštaju korištenje kao pristupne točke"
 
-#: ../panels/network/net-device-wifi.c:1451
+#: ../panels/network/net-device-wifi.c:1454
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Bežični uređaj ne podržava način pristupne točke"
 
-#: ../panels/network/net-device-wifi.c:1583
+#: ../panels/network/net-device-wifi.c:1586
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2776,11 +2763,11 @@ msgstr ""
 "Mrežne pojedinosti za odabrane mreže, uključujući lozinke i sve prilagođene "
 "postavke će biti izgubljene."
 
-#: ../panels/network/net-device-wifi.c:1893
+#: ../panels/network/net-device-wifi.c:1896
 msgid "History"
 msgstr "Povijest"
 
-#: ../panels/network/net-device-wifi.c:1897
+#: ../panels/network/net-device-wifi.c:1900
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2788,7 +2775,7 @@ msgid "_Close"
 msgstr "_Zatvori"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1905
+#: ../panels/network/net-device-wifi.c:1908
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Zaboravi"
@@ -5068,7 +5055,7 @@ msgstr "Ostalo"
 msgid "No input source selected"
 msgstr "Nema odabranih načina unosa"
 
-#: ../panels/region/cc-region-panel.c:1757
+#: ../panels/region/cc-region-panel.c:1758
 msgid "Login _Screen"
 msgstr "Zaslon _prijave"
 
@@ -5235,7 +5222,7 @@ msgstr "Odaberi lokaciju"
 msgid "_OK"
 msgstr "_U redu"
 
-#: ../panels/search/cc-search-panel.c:177
+#: ../panels/search/cc-search-panel.c:178
 msgid "No applications found"
 msgstr "Aplikacije nisu pronađene"
 
@@ -5732,11 +5719,11 @@ msgstr "Make it easier to see, hear, type, point and click"
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
+"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
 msgstr ""
 "Tipkovnica;Miš;a11y;Pristupačnost;Kontrast;Uvećanje;Zaslon;Čitač;tekst;slova;"
 "veličina;AccessX;Pričvrstiv;Tipke;Sporo;Odbijanje;Miš;Dvostruko;klik;Odgoda;"
-"Pomoć;"
+"Pomoć;Ponovi;Blinkaj;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -6534,8 +6521,11 @@ msgstr "Pokušajte izbjeći slijedove poput 1234 ili abcd."
 
 #: ../panels/user-accounts/pw-utils.c:115
 msgctxt "Password hint"
-msgid "Try to add more letters, numbers and symbols."
-msgstr "Pokušajte dodati više slova, brojeva i simbola."
+msgid ""
+"Password needs to be longer. Try to add more letters, numbers and "
+"punctuation."
+msgstr ""
+"Lozinka mora biti dulja. Pokušajte dodati više slova, brojeva i interpukcija."
 
 #: ../panels/user-accounts/pw-utils.c:117
 msgctxt "Password hint"
@@ -6545,41 +6535,9 @@ msgstr "Izmješajte velika i mala slova i dodajte slovo ili dva."
 #: ../panels/user-accounts/pw-utils.c:119
 msgctxt "Password hint"
 msgid ""
-"Good password! Adding more letters, numbers and punctuation will make it "
-"stronger."
+"Adding more letters, numbers and punctuation will make the password stronger."
 msgstr ""
-"Dobra lozinka! Dodavanjem više slova, brojeva i punktacija učinit će je "
-"snažnijom."
-
-#: ../panels/user-accounts/pw-utils.c:141
-#: ../panels/user-accounts/pw-utils.c:171
-msgctxt "Password strength"
-msgid "Strength: Weak"
-msgstr "Snaga: slaba"
-
-#: ../panels/user-accounts/pw-utils.c:145
-#: ../panels/user-accounts/pw-utils.c:172
-msgctxt "Password strength"
-msgid "Strength: Low"
-msgstr "Snaga: mala"
-
-#: ../panels/user-accounts/pw-utils.c:148
-#: ../panels/user-accounts/pw-utils.c:173
-msgctxt "Password strength"
-msgid "Strength: Medium"
-msgstr "Snaga: srednja"
-
-#: ../panels/user-accounts/pw-utils.c:151
-#: ../panels/user-accounts/pw-utils.c:174
-msgctxt "Password strength"
-msgid "Strength: Good"
-msgstr "Snaga: dobra"
-
-#: ../panels/user-accounts/pw-utils.c:154
-#: ../panels/user-accounts/pw-utils.c:175
-msgctxt "Password strength"
-msgid "Strength: High"
-msgstr "Snaga: velika"
+"Dodavanje više slova, brojeva i interpunkcija učinit će lozinku snažnijom."
 
 #: ../panels/user-accounts/run-passwd.c:422
 msgid "Authentication failed"
@@ -6638,25 +6596,25 @@ msgstr "Treba se podudarati web adresa vašeg pružatelja računa."
 msgid "Failed to add account"
 msgstr "Dodavanje računa nije upjelo"
 
-#: ../panels/user-accounts/um-account-dialog.c:463
+#: ../panels/user-accounts/um-account-dialog.c:462
 msgid "Passwords do not match."
 msgstr "Lozinke se ne podudaraju."
 
-#: ../panels/user-accounts/um-account-dialog.c:718
-#: ../panels/user-accounts/um-account-dialog.c:764
-#: ../panels/user-accounts/um-account-dialog.c:785
+#: ../panels/user-accounts/um-account-dialog.c:717
+#: ../panels/user-accounts/um-account-dialog.c:763
+#: ../panels/user-accounts/um-account-dialog.c:784
 msgid "Failed to register account"
 msgstr "Registracija računa nije uspjela"
 
-#: ../panels/user-accounts/um-account-dialog.c:908
+#: ../panels/user-accounts/um-account-dialog.c:907
 msgid "No supported way to authenticate with this domain"
 msgstr "Nema podaržanog načina za ovjeru s ovom domenom"
 
-#: ../panels/user-accounts/um-account-dialog.c:981
+#: ../panels/user-accounts/um-account-dialog.c:980
 msgid "Failed to join domain"
 msgstr "Pridruživanje s domenom nije uspjelo"
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1041
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6664,7 +6622,7 @@ msgstr ""
 "To ime prijave ne radi.\n"
 "Pokušajte ponovno."
 
-#: ../panels/user-accounts/um-account-dialog.c:1049
+#: ../panels/user-accounts/um-account-dialog.c:1048
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6672,12 +6630,12 @@ msgstr ""
 "Ta lozinka prijave ne radi.\n"
 "Pokušajte ponovno."
 
-#: ../panels/user-accounts/um-account-dialog.c:1057
+#: ../panels/user-accounts/um-account-dialog.c:1056
 msgid "Failed to log into domain"
 msgstr "Prijava na domenu nije uspjela"
 
-#: ../panels/user-accounts/um-account-dialog.c:1115
-msgid "Unable find the domain. Maybe you misspelled it?"
+#: ../panels/user-accounts/um-account-dialog.c:1114
+msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Nemoguće je pronaći domenu. Možda ste ju pogrešno upisali?"
 
 #: ../panels/user-accounts/um-account-type.c:34
@@ -6840,19 +6798,19 @@ msgstr "Sesija pokrenuta"
 msgid "%s — Account Activity"
 msgstr "%s — Aktivnost računa"
 
-#: ../panels/user-accounts/um-password-dialog.c:145
+#: ../panels/user-accounts/um-password-dialog.c:144
 msgid "Please choose another password."
 msgstr "Odaberite drugu lozinku."
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#: ../panels/user-accounts/um-password-dialog.c:153
 msgid "Please type your current password again."
 msgstr "Ponovo upišite vašu trenutnu lozinku."
 
-#: ../panels/user-accounts/um-password-dialog.c:160
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Password could not be changed"
 msgstr "Lozinka ne može biti promijenjena"
 
-#: ../panels/user-accounts/um-password-dialog.c:286
+#: ../panels/user-accounts/um-password-dialog.c:285
 msgid "The passwords do not match."
 msgstr "Lozinka se ne podudara."
 
@@ -6872,7 +6830,7 @@ msgstr "Uslikaj…"
 msgid "Browse for more pictures…"
 msgstr "Pregledaj za više slika..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:711
 #, c-format
 msgid "Used by %s"
 msgstr "Koristio %s"
@@ -7390,6 +7348,52 @@ msgstr "Pristupna točka"
 #: ../shell/panel-list.ui.h:3
 msgid "No results found"
 msgstr "Nema pronađenih rezultata"
+
+#~ msgid "%s %d-bit (Build ID: %s)"
+#~ msgstr "%s %d-bitni (ID izgradnje: %s)"
+
+#~ msgid "%s %d-bit"
+#~ msgstr "%s %d-bitna"
+
+#~ msgid "Base system"
+#~ msgstr "Osnovni sustav"
+
+#~ msgid "Shortcut;Repeat;Blink;"
+#~ msgstr "Prečac;Ponovi;Treptanje;"
+
+#~ msgid "Firewall _Zone"
+#~ msgstr "Vatrozid _zona"
+
+#~ msgctxt "Firewall zone"
+#~ msgid "Default"
+#~ msgstr "Uobičajena"
+
+#~ msgid "The zone defines the trust level of the connection"
+#~ msgstr "Zona određuje pouzdanu razinu povezivanja"
+
+#~ msgctxt "Password hint"
+#~ msgid "Try to add more letters, numbers and symbols."
+#~ msgstr "Pokušajte dodati više slova, brojeva i simbola."
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Weak"
+#~ msgstr "Snaga: slaba"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Low"
+#~ msgstr "Snaga: mala"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Medium"
+#~ msgstr "Snaga: srednja"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Good"
+#~ msgstr "Snaga: dobra"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: High"
+#~ msgstr "Snaga: velika"
 
 #~ msgid "2"
 #~ msgstr "2"
