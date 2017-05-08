@@ -18,8 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 20:10+0100\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"control-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-05-05 17:32+0000\n"
 "PO-Revision-Date: 2017-02-23 08:18+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -120,8 +121,8 @@ msgstr "Podeu afegir imatges a la carpeta %s i apareixeran aquí"
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1298
-#: ../panels/network/net-device-wifi.c:1535
+#: ../panels/network/net-device-wifi.c:1350
+#: ../panels/network/net-device-wifi.c:1589
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
 #: ../panels/printers/pp-details-dialog.c:319
@@ -934,17 +935,17 @@ msgid "Year"
 msgstr "Any"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:340
+#: ../panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e de %B del %Y a les %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:345
+#: ../panels/datetime/cc-datetime-panel.c:344
 msgid "%e %B %Y, %R"
 msgstr "%e de %B de %Y a les %R"
 
 #. Translators: "city, country"
-#: ../panels/datetime/cc-datetime-panel.c:523
+#: ../panels/datetime/cc-datetime-panel.c:522
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -952,7 +953,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:552
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -960,23 +961,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:561
+#: ../panels/datetime/cc-datetime-panel.c:560
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:566
+#: ../panels/datetime/cc-datetime-panel.c:565
 msgid "%l:%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:571
+#: ../panels/datetime/cc-datetime-panel.c:570
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: ../panels/datetime/cc-datetime-panel.c:576
+#: ../panels/datetime/cc-datetime-panel.c:575
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1126,12 +1127,12 @@ msgstr "Primària"
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-#: ../panels/universal-access/uap.ui.h:6
+#: ../panels/universal-access/cc-ua-panel.c:331
+#: ../panels/universal-access/cc-ua-panel.c:712
+#: ../panels/universal-access/cc-ua-panel.c:725
+#: ../panels/universal-access/cc-ua-panel.c:737
+#: ../panels/universal-access/cc-ua-panel.c:908
+#: ../panels/universal-access/uap.ui.h:7
 msgid "Off"
 msgstr "Desactivat"
 
@@ -1248,11 +1249,11 @@ msgstr "No usis aquesta pantalla"
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
+#: ../panels/universal-access/cc-ua-panel.c:331
+#: ../panels/universal-access/cc-ua-panel.c:712
+#: ../panels/universal-access/cc-ua-panel.c:725
+#: ../panels/universal-access/cc-ua-panel.c:737
+#: ../panels/universal-access/cc-ua-panel.c:908
 msgid "On"
 msgstr "Activat"
 
@@ -1283,8 +1284,8 @@ msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
 msgstr ""
-"La llum nocturna fa que el color de pantalla sigui més càlid. Això us pot ajudar a "
-"prevenir la fatiga visual i la sensació de son."
+"La llum nocturna fa que el color de pantalla sigui més càlid. Això us pot "
+"ajudar a prevenir la fatiga visual i la sensació de son."
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: ../panels/display/display.ui.h:7
@@ -1348,72 +1349,73 @@ msgstr ""
 "color;posta de sol;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-overview-panel.c:381
+#: ../panels/info/cc-info-overview-panel.c:468
+#: ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Desconegut"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture and the build id, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-panel.c:517
+#. translators: This is the name of the OS, followed by the build ID, for
+#. * example:
+#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
+#. * "Ubuntu 16.04 LTS; Build ID: jki"
+#: ../panels/info/cc-info-overview-panel.c:476
 #, c-format
-msgid "%s %d-bit (Build ID: %s)"
-msgstr "%s %d-bit (ID del muntatge: %s)"
+msgid "%s; Build ID: %s"
+msgstr "%s; ID del muntatge: %s"
 
-#: ../panels/info/cc-info-panel.c:519
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:493
+#,  c-format
+msgid "64-bit"
+msgstr "64-bit"
+
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:496
 #, c-format
-msgid "%d-bit (Build ID: %s)"
-msgstr "%d-bit (ID del muntatge: %s)"
+msgid "32-bit"
+msgstr "32-bit"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-panel.c:527
+#: ../panels/info/cc-info-overview-panel.c:802
 #, c-format
-msgid "%s %d-bit"
-msgstr "%s %d-bit"
+msgid "Version %s"
+msgstr "Versió %s"
 
-#: ../panels/info/cc-info-panel.c:529
-#, c-format
-msgid "%d-bit"
-msgstr "%d-bit"
-
-#: ../panels/info/cc-info-panel.c:1175
+#: ../panels/info/cc-info-panel.c:514
 msgid "Ask what to do"
 msgstr "Pregunta què fer"
 
-#: ../panels/info/cc-info-panel.c:1179
+#: ../panels/info/cc-info-panel.c:518
 msgid "Do nothing"
 msgstr "No facis res"
 
-#: ../panels/info/cc-info-panel.c:1183
+#: ../panels/info/cc-info-panel.c:522
 msgid "Open folder"
 msgstr "Obre la carpeta"
 
-#: ../panels/info/cc-info-panel.c:1274
+#: ../panels/info/cc-info-panel.c:613
 msgid "Other Media"
 msgstr "Altres suports"
 
-#: ../panels/info/cc-info-panel.c:1305
+#: ../panels/info/cc-info-panel.c:644
 msgid "Select an application for audio CDs"
 msgstr "Seleccioneu l'aplicació per als CD d'àudio"
 
-#: ../panels/info/cc-info-panel.c:1306
+#: ../panels/info/cc-info-panel.c:645
 msgid "Select an application for video DVDs"
 msgstr "Seleccioneu l'aplicació per als DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1307
+#: ../panels/info/cc-info-panel.c:646
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccioneu l'aplicació que s'iniciarà quan es connecti un reproductor de "
 "música"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:647
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccioneu l'aplicació que s'iniciarà quan es connecti una càmera"
 
-#: ../panels/info/cc-info-panel.c:1309
+#: ../panels/info/cc-info-panel.c:648
 msgid "Select an application for software CDs"
 msgstr "Seleccioneu l'aplicació per als CD de programari"
 
@@ -1422,74 +1424,69 @@ msgstr "Seleccioneu l'aplicació per als CD de programari"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:660
 msgid "audio DVD"
 msgstr "DVD d'àudio"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:661
 msgid "blank Blu-ray disc"
 msgstr "Disc Blu-ray en blanc"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:662
 msgid "blank CD disc"
 msgstr "Disc CD en blanc"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:663
 msgid "blank DVD disc"
 msgstr "Disc DVD en blanc"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:664
 msgid "blank HD DVD disc"
 msgstr "Disc HD DVD en blanc"
 
-#: ../panels/info/cc-info-panel.c:1326
+#: ../panels/info/cc-info-panel.c:665
 msgid "Blu-ray video disc"
 msgstr "Disc Blu-ray de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1327
+#: ../panels/info/cc-info-panel.c:666
 msgid "e-book reader"
 msgstr "Lector de llibres digitals"
 
-#: ../panels/info/cc-info-panel.c:1328
+#: ../panels/info/cc-info-panel.c:667
 msgid "HD DVD video disc"
 msgstr "Disc HD DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1329
+#: ../panels/info/cc-info-panel.c:668
 msgid "Picture CD"
 msgstr "CD de fotos"
 
-#: ../panels/info/cc-info-panel.c:1330
+#: ../panels/info/cc-info-panel.c:669
 msgid "Super Video CD"
 msgstr "Supervídeo CD"
 
-#: ../panels/info/cc-info-panel.c:1331
+#: ../panels/info/cc-info-panel.c:670
 msgid "Video CD"
 msgstr "CD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1332
+#: ../panels/info/cc-info-panel.c:671
 msgid "Windows software"
 msgstr "Programari de Windows"
 
-#: ../panels/info/cc-info-panel.c:1455
+#: ../panels/info/cc-info-panel.c:794
 msgid "Section"
 msgstr "Secció"
 
-#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:803 ../panels/info/info.ui.h:4
 msgid "Overview"
 msgstr "Vista general"
 
-#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:809 ../panels/info/info.ui.h:11
 msgid "Default Applications"
 msgstr "Aplicacions per defecte"
 
-#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:814 ../panels/info/info.ui.h:19
 msgid "Removable Media"
 msgstr "Suport extraïble"
-
-#: ../panels/info/cc-info-panel.c:1500
-#, c-format
-msgid "Version %s"
-msgstr "Versió %s"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
@@ -1510,6 +1507,48 @@ msgstr ""
 "aplicació;preferit;cd;dvd;usb;àudio;vídeo;disc;extraïble;multimèdia;execució "
 "automàtica;"
 
+#: ../panels/info/info-overview.ui.h:1
+msgid "Device name"
+msgstr "Nom del dispositiu"
+
+#: ../panels/info/info-overview.ui.h:2
+msgid "Memory"
+msgstr "Memòria"
+
+#: ../panels/info/info-overview.ui.h:3
+msgid "Processor"
+msgstr "Processador"
+
+#. To translators: this field contains the distro name and version
+#: ../panels/info/info-overview.ui.h:5
+msgid "OS name"
+msgstr "Nom del sistema operatiu"
+
+#. To translators: this field contains the distro type
+#: ../panels/info/info-overview.ui.h:7
+msgid "OS type"
+msgstr "Tipus de sistema operatiu"
+
+#: ../panels/info/info-overview.ui.h:8
+msgid "Disk"
+msgstr "Disc"
+
+#: ../panels/info/info-overview.ui.h:9
+msgid "Calculating…"
+msgstr "S'està calculant…"
+
+#: ../panels/info/info-overview.ui.h:10
+msgid "Graphics"
+msgstr "Gràfics"
+
+#: ../panels/info/info-overview.ui.h:11
+msgid "Virtualization"
+msgstr "Virtualització"
+
+#: ../panels/info/info-overview.ui.h:12
+msgid "Check for updates"
+msgstr "Comprova si hi ha actualitzacions"
+
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
 msgstr "Seleccioneu com s'han de gestionar els altres suports"
@@ -1522,92 +1561,55 @@ msgstr "_Acció:"
 msgid "_Type:"
 msgstr "_Tipus:"
 
-#: ../panels/info/info.ui.h:4
-msgid "Device name"
-msgstr "Nom del dispositiu"
-
 #: ../panels/info/info.ui.h:5
-msgid "Memory"
-msgstr "Memòria"
-
-#: ../panels/info/info.ui.h:6
-msgid "Processor"
-msgstr "Processador"
-
-#. To translators: this field contains the distro name, version and type
-#: ../panels/info/info.ui.h:8
-msgid "Base system"
-msgstr "Sistema base"
-
-#: ../panels/info/info.ui.h:9
-msgid "Disk"
-msgstr "Disc"
-
-#: ../panels/info/info.ui.h:10
-msgid "Calculating…"
-msgstr "S'està calculant…"
-
-#: ../panels/info/info.ui.h:11
-msgid "Graphics"
-msgstr "Gràfics"
-
-#: ../panels/info/info.ui.h:12
-msgid "Virtualization"
-msgstr "Virtualització"
-
-#: ../panels/info/info.ui.h:13
-msgid "Check for updates"
-msgstr "Comprova si hi ha actualitzacions"
-
-#: ../panels/info/info.ui.h:15
 msgid "_Web"
 msgstr "_Web"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:6
 msgid "_Mail"
 msgstr "_Correu"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:7
 msgid "_Calendar"
 msgstr "Ca_lendari"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:8
 msgid "M_usic"
 msgstr "_Música"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:9
 msgid "_Video"
 msgstr "_Vídeo"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:10
 msgid "_Photos"
 msgstr "_Fotos"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:12
 msgid "Select how media should be handled"
 msgstr "Seleccioneu com s'han de gestionar els suports"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:13
 msgid "CD _audio"
 msgstr "_CD d'àudio"
 
-#: ../panels/info/info.ui.h:24
+#: ../panels/info/info.ui.h:14
 msgid "_DVD video"
 msgstr "_DVD de vídeo"
 
-#: ../panels/info/info.ui.h:25
+#: ../panels/info/info.ui.h:15
 msgid "_Music player"
 msgstr "Reproductor de _música"
 
-#: ../panels/info/info.ui.h:26
+#: ../panels/info/info.ui.h:16
 msgid "_Software"
 msgstr "_Programari"
 
-#: ../panels/info/info.ui.h:27
+#: ../panels/info/info.ui.h:17
 msgid "_Other Media…"
 msgstr "_Altres suports…"
 
-#: ../panels/info/info.ui.h:28
+#: ../panels/info/info.ui.h:18
 msgid "_Never prompt or start programs on media insertion"
 msgstr "_No preguntis mai ni iniciïs programes quan s'insereixin suports"
 
@@ -1656,7 +1658,7 @@ msgid "Eject"
 msgstr "Expulsa"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/universal-access/uap.ui.h:11
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Typing"
 msgstr "Escriptura"
 
@@ -1786,9 +1788,9 @@ msgstr "Redueix la mida del text"
 msgid "High contrast on or off"
 msgstr "Activa o desactiva el contrast alt"
 
-#: ../panels/keyboard/cc-keyboard-manager.c:514
-#: ../panels/keyboard/cc-keyboard-manager.c:522
-#: ../panels/keyboard/cc-keyboard-manager.c:830
+#: ../panels/keyboard/cc-keyboard-manager.c:512
+#: ../panels/keyboard/cc-keyboard-manager.c:520
+#: ../panels/keyboard/cc-keyboard-manager.c:828
 msgid "Custom Shortcuts"
 msgstr "Dreceres personalitzades"
 
@@ -1802,7 +1804,7 @@ msgstr "Dreceres personalitzades"
 #: ../panels/keyboard/keyboard-shortcuts.c:440
 #: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/sound/gvc/gvc-mixer-control.c:1866
 #: ../panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Disabled"
 msgstr "Inhabilitat"
@@ -1827,11 +1829,11 @@ msgstr "Tecla de composició"
 msgid "Modifiers-only switch to next source"
 msgstr "Només els modificadors commuten a la font següent"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:181
+#: ../panels/keyboard/cc-keyboard-panel.c:183
 msgid "Reset All Shortcuts?"
 msgstr "Voleu restablir totes les dreceres?"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:184
+#: ../panels/keyboard/cc-keyboard-panel.c:186
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -1839,38 +1841,38 @@ msgstr ""
 "Restablir les dreceres pot afectar les vostres dreceres personalitzades. "
 "Aquesta acció no es pot desfer."
 
-#: ../panels/keyboard/cc-keyboard-panel.c:188
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/cc-keyboard-panel.c:190
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/cc-keyboard-panel.c:191
 msgid "Reset All"
 msgstr "Restableix-ho tot"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:281
+#: ../panels/keyboard/cc-keyboard-panel.c:283
 msgid "Reset the shortcut to its default value"
 msgstr "Restableix la drecera al seu valor per omissió"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:434
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
 "disabled"
 msgstr "%s ja s'utilitza per <b>%s</b>. Si la reemplaceu, %s s'inhabilitarà"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Custom Shortcut"
 msgstr "Estableix la drecera personalitzada"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Shortcut"
 msgstr "Estableix la drecera"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:609
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "Introduïu una drecera nova per canviar <b>%s</b>."
@@ -1892,8 +1894,10 @@ msgstr ""
 
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:5
-msgid "Shortcut;Repeat;Blink;"
-msgstr "Drecera;Repeteix;Parpelleig;"
+msgid ""
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+msgstr ""
+"Drecera;Espai de treball;Finestra;Canvia la mida;Amplia;Contrast;Entrada;Font;Bloqueig;Volum;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 #: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
@@ -1945,12 +1949,12 @@ msgid "None"
 msgstr "Cap"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:8
-msgid "Remove"
-msgstr "Suprimeix"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Introduïu la drecera nova"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Remove"
+msgstr "Suprimeix"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
@@ -2115,32 +2119,32 @@ msgid "802.1x _Security"
 msgstr "_Seguretat 802.1x"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "pàgina 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
 msgid "Anony_mous identity"
 msgstr "Identitat _anònima"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:4
 msgid "Inner _authentication"
 msgstr "_Autenticació interna"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:6
+#: ../panels/network/connection-editor/security-page.ui.h:5
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "pàgina 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:459
+#: ../panels/network/connection-editor/ce-page-security.c:445
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2157,34 +2161,34 @@ msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
-#: ../panels/network/net-device-wifi.c:214
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:215
+#: ../panels/network/net-device-wifi.c:391
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:395
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:396
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:58
-#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:223
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:63
-#: ../panels/network/net-device-wifi.c:227
+#: ../panels/network/net-device-wifi.c:228
 msgid "Enterprise"
 msgstr "Corporativa"
 
 #: ../panels/network/connection-editor/ce-page-details.c:68
-#: ../panels/network/net-device-wifi.c:232
-#: ../panels/network/net-device-wifi.c:380
+#: ../panels/network/net-device-wifi.c:233
+#: ../panels/network/net-device-wifi.c:381
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Cap"
@@ -2196,7 +2200,7 @@ msgstr "Mai"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:489
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2206,37 +2210,37 @@ msgstr[1] "fa %i dies"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:542
+#: ../panels/network/net-device-wifi.c:545
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:571
+#: ../panels/network/net-device-wifi.c:574
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Cap"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:573
+#: ../panels/network/net-device-wifi.c:576
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Dèbil"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:575
+#: ../panels/network/net-device-wifi.c:578
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Acceptable"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:577
+#: ../panels/network/net-device-wifi.c:580
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bona"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:579
+#: ../panels/network/net-device-wifi.c:582
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excel·lent"
@@ -2247,8 +2251,8 @@ msgstr "Excel·lent"
 msgid "Details"
 msgstr "Detalls"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:215
-#: ../panels/network/connection-editor/ce-page-vpn.c:221
+#: ../panels/network/connection-editor/ce-page-ethernet.c:205
+#: ../panels/network/connection-editor/ce-page-vpn.c:210
 #: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2326,7 +2330,7 @@ msgstr "Prefix"
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
 #: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Automàtic"
@@ -2344,33 +2348,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Reinicia"
 
-#: ../panels/network/connection-editor/ce-page-security.c:248
+#: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Cap"
 
-#: ../panels/network/connection-editor/ce-page-security.c:271
+#: ../panels/network/connection-editor/ce-page-security.c:268
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "Clau WEP 40/128-bit (hexadecimal o ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:281
+#: ../panels/network/connection-editor/ce-page-security.c:278
 msgid "WEP 128-bit Passphrase"
 msgstr "Contrasenya WEP 128-bit"
 
-#: ../panels/network/connection-editor/ce-page-security.c:294
+#: ../panels/network/connection-editor/ce-page-security.c:291
 #: ../panels/network/wireless-security/wireless-security.c:463
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:307
+#: ../panels/network/connection-editor/ce-page-security.c:304
 msgid "Dynamic WEP (802.1x)"
 msgstr "WEP dinàmic (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:321
+#: ../panels/network/connection-editor/ce-page-security.c:318
 msgid "WPA & WPA2 Personal"
 msgstr "WPA i WPA2 personal"
 
-#: ../panels/network/connection-editor/ce-page-security.c:335
+#: ../panels/network/connection-editor/ce-page-security.c:332
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA i WPA2 corporativa"
 
@@ -2486,7 +2490,7 @@ msgid "bytes"
 msgstr "bytes"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "Make available to other _users"
 msgstr "Fes-la disponible a altres _usuaris"
 
@@ -2494,22 +2498,6 @@ msgstr "Fes-la disponible a altres _usuaris"
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Connect _automatically"
 msgstr "Connecta _automàticament"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:17
-#: ../panels/network/connection-editor/security-page.ui.h:2
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Firewall _Zone"
-msgstr "_Zona del tallafoc"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:49
-#: ../panels/network/connection-editor/firewall-helpers.c:118
-msgctxt "Firewall zone"
-msgid "Default"
-msgstr "Per defecte"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:50
-msgid "The zone defines the trust level of the connection"
-msgstr "La zona defineix el nivell de confiança en la connexió"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:24
@@ -2575,7 +2563,7 @@ msgid "_Reset"
 msgstr "_Reinicia"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1536
+#: ../panels/network/net-device-wifi.c:1590
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "_Oblida"
@@ -2662,7 +2650,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "Exporta la connexió VPN"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:4
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Error: no s'ha pogut carregar l'editor de connexió VPN)"
 
@@ -2704,17 +2692,17 @@ msgstr ""
 "Mòdem;Bluetooth;vpn;DNS;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:471
+#: ../panels/network/net-device-wifi.c:475
 msgid "never"
 msgstr "mai"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:485
 msgid "today"
 msgstr "avui"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:487
 msgid "yesterday"
 msgstr "ahir"
 
@@ -2741,18 +2729,18 @@ msgid "Wired"
 msgstr "Amb fil"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1694
+#: ../panels/network/net-device-wifi.c:1748
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Opcions…"
 
-#: ../panels/network/net-device-mobile.c:223
+#: ../panels/network/net-device-mobile.c:238
 msgid "Add new connection"
 msgstr "Afegeix una connexió nova"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1258
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2760,12 +2748,12 @@ msgstr ""
 "Si teniu una connexió a Internet que no sigui la xarxa sense fil, podeu "
 "establir un punt d'accés sense fil per compartir-la amb altres."
 
-#: ../panels/network/net-device-wifi.c:1209
+#: ../panels/network/net-device-wifi.c:1262
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Si activeu el punt d'accés sense fil us desconnectareu de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1213
+#: ../panels/network/net-device-wifi.c:1266
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2773,24 +2761,24 @@ msgstr ""
 "No és possible accedir a Internet a través de la xarxa sense fil mentre el "
 "punt d'accés està actiu."
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1348
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Voleu aturar el punt d'accés Wi-Fi i desconnectar els usuaris?"
 
-#: ../panels/network/net-device-wifi.c:1299
+#: ../panels/network/net-device-wifi.c:1351
 msgid "_Stop Hotspot"
 msgstr "_Atura el punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1451
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 "La política del sistema prohibeix utilitzar-lo com a punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1400
+#: ../panels/network/net-device-wifi.c:1454
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositiu sense fil no admet el mode punt d'accés Wi-Fi"
 
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1586
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2798,11 +2786,11 @@ msgstr ""
 "Es perdran les dades de xarxa de les xarxes seleccionades, incloent les "
 "contrasenyes i la configuració personalitzada."
 
-#: ../panels/network/net-device-wifi.c:1842
+#: ../panels/network/net-device-wifi.c:1896
 msgid "History"
 msgstr "Historial"
 
-#: ../panels/network/net-device-wifi.c:1846
+#: ../panels/network/net-device-wifi.c:1900
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2810,7 +2798,7 @@ msgid "_Close"
 msgstr "_Tanca"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1854
+#: ../panels/network/net-device-wifi.c:1908
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oblida"
@@ -3368,23 +3356,24 @@ msgstr "manca el microprogramari"
 msgid "Cable unplugged"
 msgstr "Cable desconnectat"
 
-#: ../panels/network/wireless-security/eap-method.c:69
-msgid "undefined error in 802.1x security (wpa-eap)"
-msgstr "s'ha produït un error no definit en la seguretat de 802.1x (wpa-eap)"
+#: ../panels/network/wireless-security/eap-method.c:57
 
-#: ../panels/network/wireless-security/eap-method.c:245
+msgid "undefined error in 802.1X security (wpa-eap)"
+msgstr "s'ha produït un error no definit en la seguretat de 802.1X (wpa-eap)"
+
+#: ../panels/network/wireless-security/eap-method.c:233
 msgid "no file selected"
 msgstr "no s'ha seleccionat cap fitxer"
 
-#: ../panels/network/wireless-security/eap-method.c:276
+#: ../panels/network/wireless-security/eap-method.c:264
 msgid "unspecified error validating eap-method file"
 msgstr "s'ha produït un error no especificat en validar el fitxer eap-method"
 
-#: ../panels/network/wireless-security/eap-method.c:480
+#: ../panels/network/wireless-security/eap-method.c:439
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "Claus privades DER, PEM o PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
-#: ../panels/network/wireless-security/eap-method.c:483
+#: ../panels/network/wireless-security/eap-method.c:442
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "Certificats DER o PEM (*.der, *.pem, *.crt, *.cer)"
 
@@ -3394,13 +3383,13 @@ msgstr "falta el fitxer EAP-FAST PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:268
 #: ../panels/network/wireless-security/eap-method-peap.c:302
-#: ../panels/network/wireless-security/eap-method-ttls.c:333
+#: ../panels/network/wireless-security/eap-method-ttls.c:351
 msgid "GTC"
 msgstr "GTC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:283
 #: ../panels/network/wireless-security/eap-method-peap.c:272
-#: ../panels/network/wireless-security/eap-method-ttls.c:288
+#: ../panels/network/wireless-security/eap-method-ttls.c:289
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
@@ -3413,37 +3402,28 @@ msgid "PAC files (*.pac)"
 msgstr "Fitxers PAC (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
-#: ../panels/printers/authentication-dialog.ui.h:1
-msgid " "
-msgstr " "
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Anonymous"
 msgstr "Anònim"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Authenticated"
 msgstr "S'ha autenticat"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 msgid "Both"
 msgstr "Ambdós"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 msgid "PAC _file"
 msgstr "_Fitxer PAC"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:5
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
 msgid "_Inner authentication"
 msgstr "Autenticació _interna"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
 msgid "Allow automatic PAC pro_visioning"
 msgstr "_Permet la provisió automàtica PAC"
 
@@ -3480,38 +3460,38 @@ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "certificat CA EAP-PEAP no vàlid: no s'ha especificat un certificat"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:287
-#: ../panels/network/wireless-security/eap-method-ttls.c:318
+#: ../panels/network/wireless-security/eap-method-ttls.c:336
 #: ../panels/network/wireless-security/wireless-security.c:439
 msgid "MD5"
 msgstr "MD5"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:381
 #: ../panels/network/wireless-security/eap-method-tls.c:501
-#: ../panels/network/wireless-security/eap-method-ttls.c:412
+#: ../panels/network/wireless-security/eap-method-ttls.c:430
 msgid "Choose a Certificate Authority certificate"
 msgstr "Trieu un certificat d'una autoritat de certificació"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
 msgid "Version 0"
 msgstr "Versió 0"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 1"
 msgstr "Versió 1"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
 msgid "C_A certificate"
 msgstr "Certificat C_A"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
 msgid "No CA certificate is _required"
 msgstr "_No es requereix un certificat CA"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:9
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
 msgstr "_Versió PEAP"
 
@@ -3556,17 +3536,17 @@ msgstr "Les claus privades sense encriptar no són segures"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:319
 msgid ""
-"The selected private key does not appear to be protected by a password.  "
-"This could allow your security credentials to be compromised.  Please select "
-"a password-protected private key.\n"
+"The selected private key does not appear to be protected by a password. This "
+"could allow your security credentials to be compromised. Please select a "
+"password-protected private key.\n"
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
 "La clau privada que heu seleccionat no sembla protegida amb una "
-"contrasenya.  Això podria permetre que les credencials de seguretat fossin "
+"contrasenya. Això podria permetre que les credencials de seguretat fossin "
 "compromeses. Seleccioneu una clau privada protegida per contrasenya.\n"
 "\n"
-"(Podeu protegir la vostra clau privada amb una contrasenya amb l'OpenSSL)"
+"(Podeu protegir la vostra clau privada amb una contrasenya amb l'openssl)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:495
 msgid "Choose your personal certificate"
@@ -3601,21 +3581,25 @@ msgstr "certificat CA EAP-TTLS no vàlid: %s"
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
 msgstr "certificat CA EAP-TTLS no vàlid: no s'ha especificat un certificat"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:258
+#: ../panels/network/wireless-security/eap-method-ttls.c:259
 msgid "PAP"
 msgstr "PAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:273
+#: ../panels/network/wireless-security/eap-method-ttls.c:274
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:303
+#: ../panels/network/wireless-security/eap-method-ttls.c:305
+msgid "MSCHAPv2 (no EAP)"
+msgstr "MSCHAPv2 (sense EAP)"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:321
 msgid "CHAP"
 msgstr "CHAP"
 
 #: ../panels/network/wireless-security/wireless-security.c:87
-msgid "Unknown error validating 802.1x security"
-msgstr "S'ha produït un error desconegut en validar la seguretat de 802.1x"
+msgid "Unknown error validating 802.1X security"
+msgstr "S'ha produït un error desconegut en validar la seguretat de 802.1X"
 
 #: ../panels/network/wireless-security/wireless-security.c:451
 msgid "TLS"
@@ -3637,9 +3621,9 @@ msgstr "TLS a través de túnel"
 msgid "Protected EAP (PEAP)"
 msgstr "EAP protegit (PEAP)"
 
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
 msgid "Au_thentication"
 msgstr "Au_tenticació"
 
@@ -3692,34 +3676,22 @@ msgid "1 (Default)"
 msgstr "1 (per defecte)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:2
-msgid "2"
-msgstr "2"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
-msgid "3"
-msgstr "3"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Sistema obert"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
 msgid "Shared Key"
 msgstr "Clau compartida"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
 msgid "_Key"
 msgstr "_Clau"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Sho_w key"
 msgstr "_Mostra la clau"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "WEP inde_x"
 msgstr "Índe_x WEP"
 
@@ -4223,9 +4195,13 @@ msgstr "_Connectat"
 msgid "On _Battery Power"
 msgstr "Utilitzant la _bateria"
 
-#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:36
 msgid "Delay"
 msgstr "Retard"
+
+#: ../panels/printers/authentication-dialog.ui.h:1
+msgid " "
+msgstr " "
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4237,18 +4213,18 @@ msgid "Authentication Required"
 msgstr "Cal autenticació"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:713
+#: ../panels/printers/cc-printers-panel.c:735
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:959
+#: ../panels/printers/cc-printers-panel.c:983
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
 
 #: ../panels/printers/details-dialog.ui.h:2
-#: ../panels/printers/printer-entry.ui.h:6
+#: ../panels/printers/printer-entry.ui.h:8
 msgid "Location"
 msgstr "Ubicació:"
 
@@ -4417,49 +4393,49 @@ msgid "Reverse portrait"
 msgstr "Vertical del revés"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendent"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pausat"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "S'està processant"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancel·lada"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Interrompuda"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Completada"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
@@ -4649,12 +4625,12 @@ msgid "Manufacturer"
 msgstr "Fabricant"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:406
+#: ../panels/printers/pp-printer-entry.c:522
 msgid "No Active Jobs"
 msgstr "No hi ha tasques actives"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:411
+#: ../panels/printers/pp-printer-entry.c:527
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -4662,108 +4638,113 @@ msgstr[0] "%u tasca"
 msgstr[1] "%u tasques"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:513
+#: ../panels/printers/pp-printer-entry.c:663
 msgid "Low on toner"
 msgstr "Tòner baix"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:515
+#: ../panels/printers/pp-printer-entry.c:665
 msgid "Out of toner"
 msgstr "Sense tòner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:518
+#: ../panels/printers/pp-printer-entry.c:668
 msgid "Low on developer"
 msgstr "Revelador baix"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:521
+#: ../panels/printers/pp-printer-entry.c:671
 msgid "Out of developer"
 msgstr "Sense revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:523
+#: ../panels/printers/pp-printer-entry.c:673
 msgid "Low on a marker supply"
 msgstr "Marcador baix"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:525
+#: ../panels/printers/pp-printer-entry.c:675
 msgid "Out of a marker supply"
 msgstr "Sense marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:527
+#: ../panels/printers/pp-printer-entry.c:677
 msgid "Open cover"
 msgstr "Tapa oberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:529
+#: ../panels/printers/pp-printer-entry.c:679
 msgid "Open door"
 msgstr "Porta oberta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:531
+#: ../panels/printers/pp-printer-entry.c:681
 msgid "Low on paper"
 msgstr "Paper baix"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:533
+#: ../panels/printers/pp-printer-entry.c:683
 msgid "Out of paper"
 msgstr "Sense paper"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:535
+#: ../panels/printers/pp-printer-entry.c:685
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Apagada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:537
-#: ../panels/printers/pp-printer-entry.c:667
+#: ../panels/printers/pp-printer-entry.c:687
+#: ../panels/printers/pp-printer-entry.c:817
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:539
+#: ../panels/printers/pp-printer-entry.c:689
 msgid "Waste receptacle almost full"
 msgstr "El receptacle de residus està quasi ple"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:541
+#: ../panels/printers/pp-printer-entry.c:691
 msgid "Waste receptacle full"
 msgstr "El receptacle de residus està ple"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:543
+#: ../panels/printers/pp-printer-entry.c:693
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor òptic fotogràfic està al final de la seva vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:545
+#: ../panels/printers/pp-printer-entry.c:695
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor òptic fotogràfic ja no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:653
+#: ../panels/printers/pp-printer-entry.c:803
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Apunt"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:658
+#: ../panels/printers/pp-printer-entry.c:808
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No accepta tasques"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:663
+#: ../panels/printers/pp-printer-entry.c:813
 msgctxt "printer state"
 msgid "Processing"
 msgstr "S'està processant"
+
+#. Translators: Name of job which makes printer to clean its heads
+#: ../panels/printers/pp-printer-entry.c:837
+msgid "Clean print heads"
+msgstr "Neteja els capçals d'impressió"
 
 #: ../panels/printers/printer-entry.ui.h:1
 msgid "Printing Options"
@@ -4777,25 +4758,30 @@ msgstr "Detalls de la impressora"
 msgid "Use Printer by Default"
 msgstr "Utilitza la impressora per defecte"
 
-#: ../panels/printers/printer-entry.ui.h:4
+#. Translators: This button executes command which cleans print heads of the printer.
+#: ../panels/printers/printer-entry.ui.h:5
+msgid "Clean Print Heads"
+msgstr "Neteja els capçals d'impressió"
+
+#: ../panels/printers/printer-entry.ui.h:6
 msgid "Remove Printer"
 msgstr "Suprimeix una impressora"
 
-#: ../panels/printers/printer-entry.ui.h:5
+#: ../panels/printers/printer-entry.ui.h:7
 msgid "Model"
 msgstr "Model"
 
-#: ../panels/printers/printer-entry.ui.h:7
+#: ../panels/printers/printer-entry.ui.h:9
 msgid "Ink Level"
 msgstr "Nivell de tinta"
 
 #. Translators: This is the message which follows the printer error.
-#: ../panels/printers/printer-entry.ui.h:9
+#: ../panels/printers/printer-entry.ui.h:11
 msgid "Please restart when the problem is resolved."
 msgstr "Reinicieu quan el problema "
 
 #. Translators: This is the button which restarts the printer.
-#: ../panels/printers/printer-entry.ui.h:11
+#: ../panels/printers/printer-entry.ui.h:13
 msgid "Restart"
 msgstr "Torna a iniciar"
 
@@ -5092,7 +5078,7 @@ msgstr "Altres"
 msgid "No input source selected"
 msgstr "No s'ha seleccionat cap font d'entrada"
 
-#: ../panels/region/cc-region-panel.c:1757
+#: ../panels/region/cc-region-panel.c:1758
 msgid "Login _Screen"
 msgstr "_Pantalla d'entrada"
 
@@ -5261,7 +5247,7 @@ msgstr "Seleccioneu una ubicació"
 msgid "_OK"
 msgstr "_D'acord"
 
-#: ../panels/search/cc-search-panel.c:177
+#: ../panels/search/cc-search-panel.c:178
 msgid "No applications found"
 msgstr "No s'han trobat aplicacions"
 
@@ -5580,7 +5566,7 @@ msgstr "_Perfil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1837
+#: ../panels/sound/gvc/gvc-mixer-control.c:1873
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -5589,14 +5575,14 @@ msgstr[1] "%u sortides"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1847
+#: ../panels/sound/gvc/gvc-mixer-control.c:1883
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entrades"
 
-#: ../panels/sound/gvc/gvc-mixer-control.c:2373
+#: ../panels/sound/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Sons del sistema"
 
@@ -5708,6 +5694,40 @@ msgstr "Altaveu de greus"
 msgid "Custom"
 msgstr "Personalitzat"
 
+#. translators: the labels will read:
+#. * Cursor Size: Default
+#: ../panels/universal-access/cc-ua-panel.c:351
+msgctxt "cursor size"
+msgid "Default"
+msgstr "Per defecte"
+
+#: ../panels/universal-access/cc-ua-panel.c:354
+msgctxt "cursor size"
+msgid "Medium"
+msgstr "Mitjà"
+
+#: ../panels/universal-access/cc-ua-panel.c:357
+msgctxt "cursor size"
+msgid "Large"
+msgstr "Gran"
+
+#: ../panels/universal-access/cc-ua-panel.c:360
+msgctxt "cursor size"
+msgid "Larger"
+msgstr "Més gran"
+
+#: ../panels/universal-access/cc-ua-panel.c:363
+msgctxt "cursor size"
+msgid "Largest"
+msgstr "El més gran"
+
+#: ../panels/universal-access/cc-ua-panel.c:367
+#, c-format
+msgid "%d pixel"
+msgid_plural "%d pixels"
+msgstr[0] "%d píxel"
+msgstr[1] "%d píxels"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Uni­ver­sal Access"
@@ -5721,11 +5741,11 @@ msgstr "Feu més fàcil veure, escoltar, teclejar, apuntar i fer clic"
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
+"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
 msgstr ""
 "Teclat;Ratolí;a11y;Accessibilitat;Contrast;Zoom;Pantalla;Lector;text;lletra;"
 "mida;AccessX;Tecles enganxoses;Tecles;Lent;Salt;Ratolí;Doble;clic;Retard;"
-"Assistència;"
+"Assistència;Repetició;Parpelleig;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -5744,284 +5764,298 @@ msgid "_Large Text"
 msgstr "Text _gran"
 
 #: ../panels/universal-access/uap.ui.h:5
+msgid "C_ursor Size"
+msgstr "Mida del _cursor"
+
+#: ../panels/universal-access/uap.ui.h:6
 #: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Amplia"
 
-#: ../panels/universal-access/uap.ui.h:7
+#: ../panels/universal-access/uap.ui.h:8
 msgid "Screen _Reader"
 msgstr "Lector de _pantalla"
 
-#: ../panels/universal-access/uap.ui.h:8
+#: ../panels/universal-access/uap.ui.h:9
 msgid "_Sound Keys"
 msgstr "_So de les tecles"
 
-#: ../panels/universal-access/uap.ui.h:9
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Hearing"
 msgstr "Audició"
 
-#: ../panels/universal-access/uap.ui.h:10
+#: ../panels/universal-access/uap.ui.h:11
 msgid "_Visual Alerts"
 msgstr "Alertes _visuals"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Screen _Keyboard"
 msgstr "_Teclat en pantalla"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:14
 msgid "R_epeat Keys"
 msgstr "_Repetició de tecles"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Cursor _Blinking"
 msgstr "_Parpelleig del cursor"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "_Typing Assist (AccessX)"
 msgstr "Assistent d'escriptura (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Pointing & Clicking"
 msgstr "Apuntar i fer clic"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Mouse Keys"
 msgstr "Tecles del _ratolí"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:19
 msgid "_Click Assist"
 msgstr "Feu _clic a l'assistent"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:20
 msgid "_Double-Click Delay"
 msgstr "_Retard en el doble clic"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Double-Click Delay"
 msgstr "Retard en el doble clic"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Cursor Size"
+msgstr "Mida del cursor"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid ""
+"Cursor size can be combined with zoom to make it easier to see the cursor."
+msgstr ""
+"La mida del cursor pot combinar-se amb l'ampliació perquè sigui més fàcil veure el cursor."
+
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
 msgstr "Lector de pantalla"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:25
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr ""
 "El lector de pantalla llegeix el text visualitzat mentre moveu el focus."
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:26
 msgid "_Screen Reader"
 msgstr "Lector de _pantalla"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Sound Keys"
 msgstr "So de les tecles"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr ""
 "Pita quan s'activin o desactivin la fixació numèrica o la de majúscules."
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Visual Alerts"
 msgstr "Alertes visuals"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Test flash"
 msgstr "_Prova el parpelleig"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Utilitza una indicació visual quan es produeixi una alerta sonora."
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Flash the _window title"
 msgstr "Parpelleja el títol de la _finestra"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the entire _screen"
 msgstr "Parpelleja la _pantalla sencera"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Repeat Keys"
 msgstr "Tecles de repetició"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Key presses repeat when key is held down."
 msgstr "Es repeteix la tecla quan es manté premuda."
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Repeat keys delay"
 msgstr "Retard en la repetició de tecles"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Speed"
 msgstr "Velocitat:"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Repeat keys speed"
 msgstr "Velocitat de la repetició de tecles"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Cursor Blinking"
 msgstr "Parpelleig del cursor"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Cursor blinks in text fields."
 msgstr "El cursor parpelleja en els camps de text."
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Cursor blinking speed"
 msgstr "Velocitat del parpelleig del cursor"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Typing Assist"
 msgstr "Assistent d'escriptura"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:44
 msgid "_Sticky Keys"
 msgstr "Tecles _enganxoses"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 "Tracta una seqüència de tecles modificadores com una combinació de tecles"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:46
 msgid "_Disable if two keys are pressed together"
 msgstr "_Inhabilita si es premen dues tecles alhora"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Beep when a _modifier key is pressed"
 msgstr "Fes un avís sonor quan es premi una tecla _modificadora"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:48
 msgid "S_low Keys"
 msgstr "Tecles _lentes"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Introdueix un retard entre prémer una tecla i quan aquesta és acceptada"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:50
 msgid "A_cceptance delay:"
 msgstr "Retard d'a_cceptació:"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:51
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Curt"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Slow keys typing delay"
 msgstr "Retard d'escriptura de les tecles lentes"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:53
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Llarg"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Beep when a key is pr_essed"
 msgstr "Fes un avís sonor quan es _premi una tecla"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Beep when a key is _accepted"
 msgstr "Fes un avís sonor quan s'_accepti una tecla"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Beep when a key is _rejected"
 msgstr "Fes un avís sonor quan es _rebutgi una tecla"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:57
 msgid "_Bounce Keys"
 msgstr "Tecles de _salt"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignora les pulsacions duplicades ràpides"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:59
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Curt"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Bounce keys typing delay"
 msgstr "Retard d'escriptura de les tecles de salt"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:61
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Llarg"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:62
 msgid "_Enable by Keyboard"
 msgstr "_Habilita per teclat"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Activa i desactiva les funcions d'accessibilitat utilitzant el teclat"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Click Assist"
 msgstr "Feu clic a l'assistent"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:65
 msgid "_Simulated Secondary Click"
 msgstr "Clic secundari _simulat"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Fes un clic secundari en mantenir premut el botó primari"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:67
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Curt"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Secondary click delay"
 msgstr "Retard del clic secundari"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:69
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Llarg"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:70
 msgid "_Hover Click"
 msgstr "Clic en _mantenir"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Trigger a click when the pointer hovers"
 msgstr "Fes un clic quan es mantingui el punter"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:72
 msgid "D_elay:"
 msgstr "R_etard:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Curt"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Llarg"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Motion _threshold:"
 msgstr "Llindar del _moviment:"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:76
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Petita"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:77
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Gran"
@@ -6509,8 +6543,11 @@ msgstr "Eviteu emprar seqüències com ara 1234 o abcd."
 
 #: ../panels/user-accounts/pw-utils.c:115
 msgctxt "Password hint"
-msgid "Try to add more letters, numbers and symbols."
-msgstr "Afegiu-hi més lletres, nombres i símbols."
+msgid ""
+"Password needs to be longer. Try to add more letters, numbers and "
+"punctuation."
+msgstr ""
+"Cal que la contrasenya sigui més gran. Intenteu utilitzar una combinació de lletres, nombres i signes de puntuació."
 
 #: ../panels/user-accounts/pw-utils.c:117
 msgctxt "Password hint"
@@ -6520,41 +6557,9 @@ msgstr "Combineu majúscules i minúscules i empreu un o dos nombres."
 #: ../panels/user-accounts/pw-utils.c:119
 msgctxt "Password hint"
 msgid ""
-"Good password! Adding more letters, numbers and punctuation will make it "
-"stronger."
+"Adding more letters, numbers and punctuation will make the password stronger."
 msgstr ""
-"Bona contrasenya! Si hi afegiu més lletres, nombres i signes de puntuació "
-"encara serà més segura."
-
-#: ../panels/user-accounts/pw-utils.c:141
-#: ../panels/user-accounts/pw-utils.c:171
-msgctxt "Password strength"
-msgid "Strength: Weak"
-msgstr "Seguretat: dèbil"
-
-#: ../panels/user-accounts/pw-utils.c:145
-#: ../panels/user-accounts/pw-utils.c:172
-msgctxt "Password strength"
-msgid "Strength: Low"
-msgstr "Seguretat: baixa"
-
-#: ../panels/user-accounts/pw-utils.c:148
-#: ../panels/user-accounts/pw-utils.c:173
-msgctxt "Password strength"
-msgid "Strength: Medium"
-msgstr "Seguretat: mitjana"
-
-#: ../panels/user-accounts/pw-utils.c:151
-#: ../panels/user-accounts/pw-utils.c:174
-msgctxt "Password strength"
-msgid "Strength: Good"
-msgstr "Seguretat: bona"
-
-#: ../panels/user-accounts/pw-utils.c:154
-#: ../panels/user-accounts/pw-utils.c:175
-msgctxt "Password strength"
-msgid "Strength: High"
-msgstr "Seguretat: alta"
+"Si hi afegiu més lletres, nombres i signes de puntuació la contrasenya serà més segura."
 
 #: ../panels/user-accounts/run-passwd.c:422
 msgid "Authentication failed"
@@ -6613,25 +6618,25 @@ msgstr "Ha de coincidir amb l'adreça web del proveïdor del compte."
 msgid "Failed to add account"
 msgstr "No s'ha pogut afegir el compte"
 
-#: ../panels/user-accounts/um-account-dialog.c:463
+#: ../panels/user-accounts/um-account-dialog.c:462
 msgid "Passwords do not match."
 msgstr "Les contrasenyes no coincideixen."
 
-#: ../panels/user-accounts/um-account-dialog.c:718
-#: ../panels/user-accounts/um-account-dialog.c:764
-#: ../panels/user-accounts/um-account-dialog.c:785
+#: ../panels/user-accounts/um-account-dialog.c:717
+#: ../panels/user-accounts/um-account-dialog.c:763
+#: ../panels/user-accounts/um-account-dialog.c:784
 msgid "Failed to register account"
 msgstr "No s'ha pogut registrar el compte"
 
-#: ../panels/user-accounts/um-account-dialog.c:908
+#: ../panels/user-accounts/um-account-dialog.c:907
 msgid "No supported way to authenticate with this domain"
 msgstr "No hi ha cap manera compatible per autenticar-se amb aquest domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:981
+#: ../panels/user-accounts/um-account-dialog.c:980
 msgid "Failed to join domain"
 msgstr "No s'ha pogut unir al domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1041
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6639,7 +6644,7 @@ msgstr ""
 "El nom d'usuari no és correcte.\n"
 "Torneu-ho a provar."
 
-#: ../panels/user-accounts/um-account-dialog.c:1049
+#: ../panels/user-accounts/um-account-dialog.c:1048
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6647,12 +6652,12 @@ msgstr ""
 "La contrasenya no és vàlida.\n"
 "Torneu-ho a provar."
 
-#: ../panels/user-accounts/um-account-dialog.c:1057
+#: ../panels/user-accounts/um-account-dialog.c:1056
 msgid "Failed to log into domain"
 msgstr "No s'ha pogut entrar al domini"
 
-#: ../panels/user-accounts/um-account-dialog.c:1115
-msgid "Unable find the domain. Maybe you misspelled it?"
+#: ../panels/user-accounts/um-account-dialog.c:1114
+msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "No s'ha trobat el domini. Potser l'heu escrit malament?"
 
 #: ../panels/user-accounts/um-account-type.c:34
@@ -6817,19 +6822,19 @@ msgstr "S'ha iniciat la sessió"
 msgid "%s — Account Activity"
 msgstr "%s - Activitat del compte"
 
-#: ../panels/user-accounts/um-password-dialog.c:145
+#: ../panels/user-accounts/um-password-dialog.c:144
 msgid "Please choose another password."
 msgstr "Trieu una altra contrasenya."
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#: ../panels/user-accounts/um-password-dialog.c:153
 msgid "Please type your current password again."
 msgstr "Escriviu un altre cop la vostra contrasenya actual."
 
-#: ../panels/user-accounts/um-password-dialog.c:160
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Password could not be changed"
 msgstr "No s'ha pogut canviar la contrasenya"
 
-#: ../panels/user-accounts/um-password-dialog.c:286
+#: ../panels/user-accounts/um-password-dialog.c:285
 msgid "The passwords do not match."
 msgstr "Les contrasenyes no coincideixen."
 
@@ -6849,7 +6854,7 @@ msgstr "Fes una fotografia…"
 msgid "Browse for more pictures…"
 msgstr "Cerca més imatges…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:711
 #, c-format
 msgid "Used by %s"
 msgstr "Utilitzat per %s"
@@ -7370,6 +7375,61 @@ msgstr "Punt d'accés Wi-Fi"
 msgid "No results found"
 msgstr "No s'ha trobat cap resultat."
 
+#~ msgid "%s %d-bit (Build ID: %s)"
+#~ msgstr "%s %d-bit (ID del muntatge: %s)"
+
+#~ msgid "%s %d-bit"
+#~ msgstr "%s %d-bit"
+
+#~ msgid "Base system"
+#~ msgstr "Sistema base"
+
+#~ msgid "Shortcut;Repeat;Blink;"
+#~ msgstr "Drecera;Repeteix;Parpelleig;"
+
+#~ msgid "Firewall _Zone"
+#~ msgstr "_Zona del tallafoc"
+
+#~ msgctxt "Firewall zone"
+#~ msgid "Default"
+#~ msgstr "Per defecte"
+
+#~ msgid "The zone defines the trust level of the connection"
+#~ msgstr "La zona defineix el nivell de confiança en la connexió"
+
+#~ msgid "2"
+#~ msgstr "2"
+
+#~ msgid "3"
+#~ msgstr "3"
+
+#~ msgid "4"
+#~ msgstr "4"
+
+#~ msgctxt "Password hint"
+#~ msgid "Try to add more letters, numbers and symbols."
+#~ msgstr "Afegiu-hi més lletres, nombres i símbols."
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Weak"
+#~ msgstr "Seguretat: dèbil"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Low"
+#~ msgstr "Seguretat: baixa"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Medium"
+#~ msgstr "Seguretat: mitjana"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Good"
+#~ msgstr "Seguretat: bona"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: High"
+#~ msgstr "Seguretat: alta"
+
 #~ msgid "<small>Your account</small>"
 #~ msgstr "<small>Compte</small>"
 
@@ -7835,9 +7895,6 @@ msgstr "No s'ha trobat cap resultat."
 
 #~ msgid "Pause Printing"
 #~ msgstr "Fes una pausa a la impressió"
-
-#~ msgid "Cancel Print Job"
-#~ msgstr "Cancel·la la tasca d'impressió"
 
 #~ msgctxt "print job"
 #~ msgid "Held"
