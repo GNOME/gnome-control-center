@@ -87,6 +87,7 @@ struct _CcPrintersPanelPrivate
   guint            subscription_renewal_id;
   guint            cups_status_check_id;
   guint            dbus_subscription_id;
+  guint            remove_printer_timeout_id;
 
   GtkWidget    *headerbar_buttons;
   GtkRevealer  *notification;
@@ -241,6 +242,12 @@ cc_printers_panel_dispose (GObject *object)
     {
       g_source_remove (priv->cups_status_check_id);
       priv->cups_status_check_id = 0;
+    }
+
+  if (priv->remove_printer_timeout_id > 0)
+    {
+      g_source_remove (priv->remove_printer_timeout_id);
+      priv->remove_printer_timeout_id = 0;
     }
 
   if (priv->all_ppds_list)
@@ -621,6 +628,21 @@ free_dests (CcPrintersPanel *self)
 }
 
 static void
+cancel_notification_timeout (CcPrintersPanel *self)
+{
+  CcPrintersPanelPrivate *priv;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->remove_printer_timeout_id == 0)
+    return;
+
+  g_source_remove (priv->remove_printer_timeout_id);
+
+  priv->remove_printer_timeout_id = 0;
+}
+
+static void
 on_printer_deletion_undone (GtkButton *button,
                             gpointer   user_data)
 {
@@ -633,6 +655,8 @@ on_printer_deletion_undone (GtkButton *button,
 
   g_clear_pointer (&priv->deleted_printer_name, g_free);
   actualize_printers_list (self);
+
+  cancel_notification_timeout (self);
 }
 
 static void
@@ -658,6 +682,14 @@ on_notification_dismissed (GtkButton *button,
     }
 
   gtk_revealer_set_reveal_child (priv->notification, FALSE);
+}
+
+static gboolean
+on_remove_printer_timeout (gpointer user_data)
+{
+  on_notification_dismissed (NULL, user_data);
+
+  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -693,6 +725,8 @@ on_printer_deleted (PpPrinterEntry *printer_entry,
   g_free (printer_name);
 
   gtk_revealer_set_reveal_child (priv->notification, TRUE);
+
+  priv->remove_printer_timeout_id = g_timeout_add_seconds (10, on_remove_printer_timeout, self);
 }
 
 static void
@@ -1128,6 +1162,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->cups_proxy = NULL;
   priv->cups_bus_connection = NULL;
   priv->dbus_subscription_id = 0;
+  priv->remove_printer_timeout_id = 0;
 
   priv->new_printer_name = NULL;
   priv->new_printer_location = NULL;
