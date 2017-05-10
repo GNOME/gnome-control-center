@@ -46,6 +46,15 @@ gboolean     pp_printer_rename_finish (PpPrinter            *printer,
                                        GAsyncResult         *res,
                                        GError              **error);
 
+void         pp_printer_delete_async  (PpPrinter            *printer,
+                                       GCancellable         *cancellable,
+                                       GAsyncReadyCallback   callback,
+                                       gpointer              user_data);
+
+gboolean     pp_printer_delete_finish (PpPrinter            *printer,
+                                       GAsyncResult         *res,
+                                       GError              **error);
+
 void         pp_printer_get_jobs_async (PpPrinter           *printer,
                                         gboolean             myjobs,
                                         gint                 which_jobs,

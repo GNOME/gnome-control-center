@@ -530,10 +530,25 @@ clean_heads (GtkButton *button,
 }
 
 static void
+remove_printer_cb (GObject      *source_object,
+                   GAsyncResult *res,
+                   gpointer      user_data)
+{
+  pp_printer_delete_finish (PP_PRINTER (source_object), res, NULL);
+  g_object_unref (source_object);
+}
+
+static void
 remove_printer (GtkButton      *button,
                 PpPrinterEntry *self)
 {
-  printer_delete (self->printer_name);
+  PpPrinter *printer;
+
+  printer = pp_printer_new (self->printer_name);
+  pp_printer_delete_async (printer,
+                           NULL,
+                           remove_printer_cb,
+                           NULL);
 }
 
 static void

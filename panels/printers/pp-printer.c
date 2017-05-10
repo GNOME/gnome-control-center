@@ -368,3 +368,111 @@ pp_printer_get_jobs_finish (PpPrinter          *printer,
 
   return g_task_propagate_pointer (G_TASK (res), error);
 }
+
+static void
+pp_printer_delete_dbus_cb (GObject      *source_object,
+                           GAsyncResult *res,
+                           gpointer      user_data)
+{
+  GVariant  *output;
+  gboolean   result = FALSE;
+  GError    *error = NULL;
+  GTask     *task = user_data;
+  gchar     *printer_name;
+
+  output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                          res,
+                                          &error);
+  g_object_unref (source_object);
+
+  if (output != NULL)
+    {
+      const gchar *ret_error;
+
+      g_object_get (g_task_get_source_object (task), "printer-name", &printer_name, NULL);
+
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
+      else
+        result = TRUE;
+
+      g_task_return_boolean (task, result);
+
+      g_free (printer_name);
+      g_variant_unref (output);
+    }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+
+      g_task_return_boolean (task, FALSE);
+    }
+}
+
+static void
+pp_printer_delete_cb (GObject      *source_object,
+                      GAsyncResult *res,
+                      gpointer      user_data)
+{
+  GDBusConnection *bus;
+  GError          *error = NULL;
+  GTask           *task = user_data;
+  gchar           *printer_name;
+
+  bus = g_bus_get_finish (res, &error);
+  if (bus != NULL)
+    {
+      g_object_get (g_task_get_source_object (task),
+                    "printer-name", &printer_name,
+                    NULL);
+
+      g_dbus_connection_call (bus,
+                              MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              "PrinterDelete",
+                              g_variant_new ("(s)", printer_name),
+                              G_VARIANT_TYPE ("(s)"),
+                              G_DBUS_CALL_FLAGS_NONE,
+                              -1,
+                              g_task_get_cancellable (task),
+                              pp_printer_delete_dbus_cb,
+                              task);
+
+      g_free (printer_name);
+    }
+  else
+    {
+      g_warning ("Failed to get system bus: %s", error->message);
+      g_error_free (error);
+      g_task_return_boolean (task, FALSE);
+    }
+}
+
+void
+pp_printer_delete_async (PpPrinter           *printer,
+                         GCancellable        *cancellable,
+                         GAsyncReadyCallback  callback,
+                         gpointer             user_data)
+{
+  GTask *task;
+
+  task = g_task_new (G_OBJECT (printer), cancellable, callback, user_data);
+
+  g_bus_get (G_BUS_TYPE_SYSTEM,
+             cancellable,
+             pp_printer_delete_cb,
+             task);
+}
+
+gboolean
+pp_printer_delete_finish (PpPrinter     *printer,
+                          GAsyncResult  *res,
+                          GError       **error)
+{
+  g_return_val_if_fail (g_task_is_valid (res, printer), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (res), error);
+}
