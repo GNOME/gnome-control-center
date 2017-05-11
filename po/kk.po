@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-24 16:16+0000\n"
-"PO-Revision-Date: 2017-02-27 14:30+0500\n"
+"POT-Creation-Date: 2017-05-10 23:45+0000\n"
+"PO-Revision-Date: 2017-05-11 19:09+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "_Background"
@@ -110,11 +110,11 @@ msgstr ""
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
 #: ../panels/network/connection-editor/vpn-helpers.c:181
 #: ../panels/network/connection-editor/vpn-helpers.c:310
-#: ../panels/network/net-device-wifi.c:1298
-#: ../panels/network/net-device-wifi.c:1535
+#: ../panels/network/net-device-wifi.c:1350
+#: ../panels/network/net-device-wifi.c:1589
 #: ../panels/network/network-wifi.ui.h:1
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#: ../panels/printers/pp-details-dialog.c:321
+#: ../panels/printers/pp-details-dialog.c:319
 #: ../panels/privacy/cc-privacy-panel.c:1049
 #: ../panels/region/format-chooser.ui.h:3 ../panels/region/input-chooser.ui.h:2
 #: ../panels/search/cc-search-locations-dialog.c:637
@@ -920,17 +920,17 @@ msgid "Year"
 msgstr "Жыл"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:340
+#: ../panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:345
+#: ../panels/datetime/cc-datetime-panel.c:344
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: ../panels/datetime/cc-datetime-panel.c:523
+#: ../panels/datetime/cc-datetime-panel.c:522
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -938,7 +938,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: ../panels/datetime/cc-datetime-panel.c:553
+#: ../panels/datetime/cc-datetime-panel.c:552
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -946,23 +946,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: ../panels/datetime/cc-datetime-panel.c:561
+#: ../panels/datetime/cc-datetime-panel.c:560
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:566
+#: ../panels/datetime/cc-datetime-panel.c:565
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: ../panels/datetime/cc-datetime-panel.c:571
+#: ../panels/datetime/cc-datetime-panel.c:570
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: ../panels/datetime/cc-datetime-panel.c:576
+#: ../panels/datetime/cc-datetime-panel.c:575
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1108,16 +1108,16 @@ msgstr "Біріншілік"
 
 #: ../panels/display/cc-display-panel.c:599
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1968 ../panels/power/cc-power-panel.c:1979
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
-#: ../panels/universal-access/uap.ui.h:6
+#: ../panels/universal-access/cc-ua-panel.c:331
+#: ../panels/universal-access/cc-ua-panel.c:712
+#: ../panels/universal-access/cc-ua-panel.c:725
+#: ../panels/universal-access/cc-ua-panel.c:737
+#: ../panels/universal-access/cc-ua-panel.c:908
+#: ../panels/universal-access/uap.ui.h:7
 msgid "Off"
 msgstr "Сөнд."
 
@@ -1227,15 +1227,15 @@ msgstr "Бұл экранды қолданбау"
 
 #. TRANSLATORS: the state of the night light setting
 #: ../panels/display/cc-display-panel.c:2786
-#: ../panels/notifications/cc-notifications-panel.c:257
+#: ../panels/notifications/cc-notifications-panel.c:293
 #: ../panels/power/cc-power-panel.c:1974 ../panels/power/cc-power-panel.c:1981
 #: ../panels/privacy/cc-privacy-panel.c:190
 #: ../panels/privacy/cc-privacy-panel.c:257
-#: ../panels/universal-access/cc-ua-panel.c:269
-#: ../panels/universal-access/cc-ua-panel.c:590
-#: ../panels/universal-access/cc-ua-panel.c:603
-#: ../panels/universal-access/cc-ua-panel.c:615
-#: ../panels/universal-access/cc-ua-panel.c:786
+#: ../panels/universal-access/cc-ua-panel.c:331
+#: ../panels/universal-access/cc-ua-panel.c:712
+#: ../panels/universal-access/cc-ua-panel.c:725
+#: ../panels/universal-access/cc-ua-panel.c:737
+#: ../panels/universal-access/cc-ua-panel.c:908
 msgid "On"
 msgstr "Іске қосулы"
 
@@ -1332,70 +1332,71 @@ msgstr ""
 "Жаңарту;Монитор;Түн;Жарық;Көк;түс;күннің шығуы;күннің батуы;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:384 ../panels/network/panel-common.c:123
+#: ../panels/info/cc-info-overview-panel.c:381
+#: ../panels/info/cc-info-overview-panel.c:468
+#: ../panels/network/panel-common.c:123
 msgid "Unknown"
 msgstr "Белгісіз"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture and the build id, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit (Build ID: xyz)" or
-#. * "Ubuntu (Oneric Ocelot) 32-bit (Build ID: jki)"
-#: ../panels/info/cc-info-panel.c:517
+#. translators: This is the name of the OS, followed by the build ID, for
+#. * example:
+#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
+#. * "Ubuntu 16.04 LTS; Build ID: jki"
+#: ../panels/info/cc-info-overview-panel.c:476
 #, c-format
-msgid "%s %d-bit (Build ID: %s)"
-msgstr "%s %d-бит (Жинақ ID: %s)"
+msgid "%s; Build ID: %s"
+msgstr "%s; Жинақ ID: %s"
 
-#: ../panels/info/cc-info-panel.c:519
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:493
 #, c-format
-msgid "%d-bit (Build ID: %s)"
-msgstr "%d-бит (Жинақ ID: %s)"
+msgid "64-bit"
+msgstr "64-биттік"
 
-#. translators: This is the name of the OS, followed by the type
-#. * of architecture, for example:
-#. * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit"
-#: ../panels/info/cc-info-panel.c:527
+#. translators: This is the type of architecture for the OS
+#: ../panels/info/cc-info-overview-panel.c:496
 #, c-format
-msgid "%s %d-bit"
-msgstr "%s %d-бит"
+msgid "32-bit"
+msgstr "32-биттік"
 
-#: ../panels/info/cc-info-panel.c:529
+#: ../panels/info/cc-info-overview-panel.c:802
 #, c-format
-msgid "%d-bit"
-msgstr "%d-бит"
+msgid "Version %s"
+msgstr "Нұсқасы %s"
 
-#: ../panels/info/cc-info-panel.c:1175
+#: ../panels/info/cc-info-panel.c:514
 msgid "Ask what to do"
 msgstr "Не істеуді сұрау"
 
-#: ../panels/info/cc-info-panel.c:1179
+#: ../panels/info/cc-info-panel.c:518
 msgid "Do nothing"
 msgstr "Ешнәрсе жасамау"
 
-#: ../panels/info/cc-info-panel.c:1183
+#: ../panels/info/cc-info-panel.c:522
 msgid "Open folder"
 msgstr "Буманы ашу"
 
-#: ../panels/info/cc-info-panel.c:1274
+#: ../panels/info/cc-info-panel.c:613
 msgid "Other Media"
 msgstr "Басқа тасушылар"
 
-#: ../panels/info/cc-info-panel.c:1305
+#: ../panels/info/cc-info-panel.c:644
 msgid "Select an application for audio CDs"
 msgstr "Аудио CD үшін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1306
+#: ../panels/info/cc-info-panel.c:645
 msgid "Select an application for video DVDs"
 msgstr "Видео DVD үшін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1307
+#: ../panels/info/cc-info-panel.c:646
 msgid "Select an application to run when a music player is connected"
 msgstr "Музыкалық плеері салынған кезде жөнелтілетін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1308
+#: ../panels/info/cc-info-panel.c:647
 msgid "Select an application to run when a camera is connected"
 msgstr "Камера байланысқан кезде жөнелтілетін қолданбаны таңдаңыз"
 
-#: ../panels/info/cc-info-panel.c:1309
+#: ../panels/info/cc-info-panel.c:648
 msgid "Select an application for software CDs"
 msgstr "БҚ CD дискілері үшін қолданбаны таңдаңыз"
 
@@ -1404,74 +1405,69 @@ msgstr "БҚ CD дискілері үшін қолданбаны таңдаңы�
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1321
+#: ../panels/info/cc-info-panel.c:660
 msgid "audio DVD"
 msgstr "аудио DVD"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:661
 msgid "blank Blu-ray disc"
 msgstr "Таза Blu-Ray дискі"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:662
 msgid "blank CD disc"
 msgstr "Таза CD-R дискі"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:663
 msgid "blank DVD disc"
 msgstr "Таза DVD+R дискі"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:664
 msgid "blank HD DVD disc"
 msgstr "Таза HD DVD дискі"
 
-#: ../panels/info/cc-info-panel.c:1326
+#: ../panels/info/cc-info-panel.c:665
 msgid "Blu-ray video disc"
 msgstr "Blu-ray видео дискі"
 
-#: ../panels/info/cc-info-panel.c:1327
+#: ../panels/info/cc-info-panel.c:666
 msgid "e-book reader"
 msgstr "электронды кітаптарды оқу құрылғысы"
 
-#: ../panels/info/cc-info-panel.c:1328
+#: ../panels/info/cc-info-panel.c:667
 msgid "HD DVD video disc"
 msgstr "HD DVD видео дискі"
 
-#: ../panels/info/cc-info-panel.c:1329
+#: ../panels/info/cc-info-panel.c:668
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1330
+#: ../panels/info/cc-info-panel.c:669
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1331
+#: ../panels/info/cc-info-panel.c:670
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1332
+#: ../panels/info/cc-info-panel.c:671
 msgid "Windows software"
 msgstr "Windows БҚ"
 
-#: ../panels/info/cc-info-panel.c:1455
+#: ../panels/info/cc-info-panel.c:794
 msgid "Section"
 msgstr "Санат"
 
-#: ../panels/info/cc-info-panel.c:1464 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:803 ../panels/info/info.ui.h:4
 msgid "Overview"
 msgstr "Шолу"
 
-#: ../panels/info/cc-info-panel.c:1470 ../panels/info/info.ui.h:21
+#: ../panels/info/cc-info-panel.c:809 ../panels/info/info.ui.h:11
 msgid "Default Applications"
 msgstr "Үнсіз келісім қолданбалары"
 
-#: ../panels/info/cc-info-panel.c:1475 ../panels/info/info.ui.h:29
+#: ../panels/info/cc-info-panel.c:814 ../panels/info/info.ui.h:19
 msgid "Removable Media"
 msgstr "Ауыстырмалы тасушылар"
-
-#: ../panels/info/cc-info-panel.c:1500
-#, c-format
-msgid "Version %s"
-msgstr "Нұсқасы %s"
 
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
@@ -1493,6 +1489,48 @@ msgstr ""
 "ақпарат;жады;процессор;нұсқасы;үнсіз келісім;қолданба;таңдамалы;аудио;видео;"
 "диск;ауыстырмалы;тасушы;автожөнелту;"
 
+#: ../panels/info/info-overview.ui.h:1
+msgid "Device name"
+msgstr "Құрылғы аты"
+
+#: ../panels/info/info-overview.ui.h:2
+msgid "Memory"
+msgstr "Жады"
+
+#: ../panels/info/info-overview.ui.h:3
+msgid "Processor"
+msgstr "Процессор"
+
+#. To translators: this field contains the distro name and version
+#: ../panels/info/info-overview.ui.h:5
+msgid "OS name"
+msgstr "ОЖ атауы"
+
+#. To translators: this field contains the distro type
+#: ../panels/info/info-overview.ui.h:7
+msgid "OS type"
+msgstr "Стиль:"
+
+#: ../panels/info/info-overview.ui.h:8
+msgid "Disk"
+msgstr "Диск"
+
+#: ../panels/info/info-overview.ui.h:9
+msgid "Calculating…"
+msgstr "Есептеу…"
+
+#: ../panels/info/info-overview.ui.h:10
+msgid "Graphics"
+msgstr "Графика"
+
+#: ../panels/info/info-overview.ui.h:11
+msgid "Virtualization"
+msgstr "Виртуализация"
+
+#: ../panels/info/info-overview.ui.h:12
+msgid "Check for updates"
+msgstr "Жаңартуларға тексеру"
+
 #: ../panels/info/info.ui.h:1
 msgid "Select how other media should be handled"
 msgstr "Басқа медиа қалай өнделетінін таңдаңыз"
@@ -1505,92 +1543,55 @@ msgstr "Әр_екет:"
 msgid "_Type:"
 msgstr "Тү_рі:"
 
-#: ../panels/info/info.ui.h:4
-msgid "Device name"
-msgstr "Құрылғы аты"
-
 #: ../panels/info/info.ui.h:5
-msgid "Memory"
-msgstr "Жады"
-
-#: ../panels/info/info.ui.h:6
-msgid "Processor"
-msgstr "Процессор"
-
-#. To translators: this field contains the distro name, version and type
-#: ../panels/info/info.ui.h:8
-msgid "Base system"
-msgstr "Базалық жүйе"
-
-#: ../panels/info/info.ui.h:9
-msgid "Disk"
-msgstr "Диск"
-
-#: ../panels/info/info.ui.h:10
-msgid "Calculating…"
-msgstr "Есептеу…"
-
-#: ../panels/info/info.ui.h:11
-msgid "Graphics"
-msgstr "Графика"
-
-#: ../panels/info/info.ui.h:12
-msgid "Virtualization"
-msgstr "Виртуализация"
-
-#: ../panels/info/info.ui.h:13
-msgid "Check for updates"
-msgstr "Жаңартуларға тексеру"
-
-#: ../panels/info/info.ui.h:15
 msgid "_Web"
 msgstr "В_еб"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:6
 msgid "_Mail"
 msgstr "_Пошта"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:7
 msgid "_Calendar"
 msgstr "_Күнтізбе"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:8
 msgid "M_usic"
 msgstr "Му_зыка"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:9
 msgid "_Video"
 msgstr "В_идео"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:10
 msgid "_Photos"
 msgstr "Фо_толар"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:12
 msgid "Select how media should be handled"
 msgstr "Медиа қалай өнделетінін таңдаңыз"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:13
 msgid "CD _audio"
 msgstr "CD _аудио"
 
-#: ../panels/info/info.ui.h:24
+#: ../panels/info/info.ui.h:14
 msgid "_DVD video"
 msgstr "DVD ви_део"
 
-#: ../panels/info/info.ui.h:25
+#: ../panels/info/info.ui.h:15
 msgid "_Music player"
 msgstr "_Музыка плеері"
 
-#: ../panels/info/info.ui.h:26
+#: ../panels/info/info.ui.h:16
 msgid "_Software"
 msgstr "Б_ағд. қамтамасы"
 
-#: ../panels/info/info.ui.h:27
+#: ../panels/info/info.ui.h:17
 msgid "_Other Media…"
 msgstr "Б_асқа медиа…"
 
-#: ../panels/info/info.ui.h:28
+#: ../panels/info/info.ui.h:18
 msgid "_Never prompt or start programs on media insertion"
 msgstr "Тасушы са_лынған кезде ешқашан сұрамау және бағдарламаларды жөнелтпеу"
 
@@ -1639,7 +1640,7 @@ msgid "Eject"
 msgstr "Шығару"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/universal-access/uap.ui.h:11
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Typing"
 msgstr "Теру"
 
@@ -1769,9 +1770,9 @@ msgstr "Мәтін өлшемін кішірейту"
 msgid "High contrast on or off"
 msgstr "Жоғары контраст іске қосулы/сөндірулі"
 
-#: ../panels/keyboard/cc-keyboard-manager.c:514
-#: ../panels/keyboard/cc-keyboard-manager.c:522
-#: ../panels/keyboard/cc-keyboard-manager.c:830
+#: ../panels/keyboard/cc-keyboard-manager.c:512
+#: ../panels/keyboard/cc-keyboard-manager.c:520
+#: ../panels/keyboard/cc-keyboard-manager.c:828
 msgid "Custom Shortcuts"
 msgstr "Таңдауыңызша жарлықтар"
 
@@ -1785,7 +1786,7 @@ msgstr "Таңдауыңызша жарлықтар"
 #: ../panels/keyboard/keyboard-shortcuts.c:440
 #: ../panels/keyboard/shortcut-editor.ui.h:2
 #: ../panels/network/network-wifi.ui.h:31
-#: ../panels/sound/gvc/gvc-mixer-control.c:1830
+#: ../panels/sound/gvc/gvc-mixer-control.c:1866
 #: ../panels/user-accounts/um-fingerprint-dialog.c:214
 msgid "Disabled"
 msgstr "Сөндірулі"
@@ -1810,11 +1811,11 @@ msgstr "Compose пернесі"
 msgid "Modifiers-only switch to next source"
 msgstr "Түрлендіргіш пернесі келесі кіріс көзіне ауыстырады"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:181
+#: ../panels/keyboard/cc-keyboard-panel.c:183
 msgid "Reset All Shortcuts?"
 msgstr "Барлық жарлықтарды тастау керек пе?"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:184
+#: ../panels/keyboard/cc-keyboard-panel.c:186
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -1822,22 +1823,22 @@ msgstr ""
 "Жарлықтарды тастау таңдауыңызша жарлықтарды кетіруі мүмкін. Бұл әрекетті "
 "болдырмау мүмкін болмайды."
 
-#: ../panels/keyboard/cc-keyboard-panel.c:188
-#: ../panels/keyboard/shortcut-editor.ui.h:10
+#: ../panels/keyboard/cc-keyboard-panel.c:190
+#: ../panels/keyboard/shortcut-editor.ui.h:9
 #: ../panels/printers/authentication-dialog.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 msgid "Cancel"
 msgstr "Болдырмау"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:189
+#: ../panels/keyboard/cc-keyboard-panel.c:191
 msgid "Reset All"
 msgstr "Барлығын тастау"
 
-#: ../panels/keyboard/cc-keyboard-panel.c:281
+#: ../panels/keyboard/cc-keyboard-panel.c:283
 msgid "Reset the shortcut to its default value"
 msgstr "Жарлықты бастапқы мәніне тастау"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:433
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:434
 #, c-format
 msgid ""
 "%s is already being used for <b>%s</b>. If you replace it, %s will be "
@@ -1846,16 +1847,16 @@ msgstr ""
 "%s жарлығы <b>%s</b> үшін қолданылуда болып тұр. Оны алмастырсаңыз, %s "
 "сөндірілетін болады"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты орнату"
 
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:599
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:600
 msgid "Set Shortcut"
 msgstr "Жарлықты орнату"
 
 #. Setup the top label
-#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:608
+#: ../panels/keyboard/cc-keyboard-shortcut-editor.c:609
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>."
 msgstr "<b>%s</b> өзгерту үшін жаңа жарлықты енгізіңіз."
@@ -1875,8 +1876,12 @@ msgstr "Пернетақта жарлықтарын қарау және өзге
 
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:5
-msgid "Shortcut;Repeat;Blink;"
-msgstr "Shortcut;Repeat;Blink;Жарлық;Қайталау;Жыпылықтау;"
+msgid ""
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+msgstr ""
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+"Жарлық;Жұмыс орны;Терезе;Өлшемді өзгерту;Масштаб;Контраст;Енгізу;Қайнар көзі;"
+"Блоктау;Дыбыс;"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 #: ../panels/region/input-options.ui.h:4 ../shell/cc-application.c:251
@@ -1900,8 +1905,9 @@ msgid "Try a different search"
 msgstr "Басқа сөздерді іздеп көріңіз"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:1
-msgid "Press Esc to cancel."
-msgstr "Бас тарту үшін Esc басыңыз."
+msgid "Press Esc to cancel or Backspace to reset the keyboard shortcut."
+msgstr ""
+"Бас тарту үшін Esc, ал, пернетақта жарлығын тастау үшін Backspace басыңыз."
 
 #: ../panels/keyboard/shortcut-editor.ui.h:3
 #: ../panels/printers/details-dialog.ui.h:1
@@ -1928,12 +1934,12 @@ msgid "None"
 msgstr "Ешнәрсе"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:8
-msgid "Remove"
-msgstr "Өшіру"
-
-#: ../panels/keyboard/shortcut-editor.ui.h:9
 msgid "Enter the new shortcut"
 msgstr "Жаңа пернетақта жарлығын енгізіңіз"
+
+#: ../panels/keyboard/shortcut-editor.ui.h:10
+msgid "Remove"
+msgstr "Өшіру"
 
 #: ../panels/keyboard/shortcut-editor.ui.h:11
 #: ../panels/network/connection-editor/ce-page-ip4.c:305
@@ -2099,32 +2105,32 @@ msgid "802.1x _Security"
 msgstr "802.1x қауі_псіздігі"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:2
-#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:2
 #: ../panels/wacom/wacom-stylus-page.ui.h:8
 msgid "page 1"
 msgstr "бет 1"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:3
-#: ../panels/network/connection-editor/security-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
 msgid "Anony_mous identity"
 msgstr "А_нонимды аутентификация"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
-#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:4
 msgid "Inner _authentication"
 msgstr "Ішкі _аутентификация"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:5
-#: ../panels/network/connection-editor/security-page.ui.h:6
+#: ../panels/network/connection-editor/security-page.ui.h:5
 #: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "page 2"
 msgstr "бет 2"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:101
-#: ../panels/network/connection-editor/ce-page-security.c:459
+#: ../panels/network/connection-editor/ce-page-security.c:445
 #: ../panels/network/connection-editor/details-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:6
 msgid "Security"
@@ -2141,34 +2147,34 @@ msgstr "Профиль %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:50
-#: ../panels/network/net-device-wifi.c:214
-#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/net-device-wifi.c:215
+#: ../panels/network/net-device-wifi.c:391
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:54
-#: ../panels/network/net-device-wifi.c:218
-#: ../panels/network/net-device-wifi.c:395
+#: ../panels/network/net-device-wifi.c:219
+#: ../panels/network/net-device-wifi.c:396
 #: ../panels/network/network-wifi.ui.h:19
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:58
-#: ../panels/network/net-device-wifi.c:222
+#: ../panels/network/net-device-wifi.c:223
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
 #: ../panels/network/connection-editor/ce-page-details.c:63
-#: ../panels/network/net-device-wifi.c:227
+#: ../panels/network/net-device-wifi.c:228
 msgid "Enterprise"
 msgstr "Кәсіпорын"
 
 #: ../panels/network/connection-editor/ce-page-details.c:68
-#: ../panels/network/net-device-wifi.c:232
-#: ../panels/network/net-device-wifi.c:380
+#: ../panels/network/net-device-wifi.c:233
+#: ../panels/network/net-device-wifi.c:381
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Жоқ"
@@ -2180,7 +2186,7 @@ msgstr "Ешқашан"
 
 #: ../panels/network/connection-editor/ce-page-details.c:104
 #: ../panels/network/net-device-ethernet.c:120
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:489
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2189,37 +2195,37 @@ msgstr[0] "%i күн бұрын"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:153
 #: ../panels/network/net-device-ethernet.c:50
-#: ../panels/network/net-device-wifi.c:542
+#: ../panels/network/net-device-wifi.c:545
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
 #: ../panels/network/connection-editor/ce-page-details.c:179
-#: ../panels/network/net-device-wifi.c:571
+#: ../panels/network/net-device-wifi.c:574
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Жоқ"
 
 #: ../panels/network/connection-editor/ce-page-details.c:181
-#: ../panels/network/net-device-wifi.c:573
+#: ../panels/network/net-device-wifi.c:576
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Әлсіз"
 
 #: ../panels/network/connection-editor/ce-page-details.c:183
-#: ../panels/network/net-device-wifi.c:575
+#: ../panels/network/net-device-wifi.c:578
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "ОК"
 
 #: ../panels/network/connection-editor/ce-page-details.c:185
-#: ../panels/network/net-device-wifi.c:577
+#: ../panels/network/net-device-wifi.c:580
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Жақсы"
 
 #: ../panels/network/connection-editor/ce-page-details.c:187
-#: ../panels/network/net-device-wifi.c:579
+#: ../panels/network/net-device-wifi.c:582
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Тамаша"
@@ -2230,8 +2236,8 @@ msgstr "Тамаша"
 msgid "Details"
 msgstr "Көбірек білу"
 
-#: ../panels/network/connection-editor/ce-page-ethernet.c:215
-#: ../panels/network/connection-editor/ce-page-vpn.c:221
+#: ../panels/network/connection-editor/ce-page-ethernet.c:205
+#: ../panels/network/connection-editor/ce-page-vpn.c:210
 #: ../panels/network/connection-editor/ce-page-wifi.c:227
 #: ../panels/network/network-wifi.ui.h:47
 msgid "Identity"
@@ -2309,7 +2315,7 @@ msgstr "Префикс"
 #: ../panels/network/connection-editor/ethernet-page.ui.h:1
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
 #: ../panels/privacy/cc-privacy-panel.c:217
 msgid "Automatic"
 msgstr "Автоматты түрде"
@@ -2327,33 +2333,33 @@ msgstr "IPv6"
 msgid "Reset"
 msgstr "Тастау"
 
-#: ../panels/network/connection-editor/ce-page-security.c:248
+#: ../panels/network/connection-editor/ce-page-security.c:245
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../panels/network/connection-editor/ce-page-security.c:271
+#: ../panels/network/connection-editor/ce-page-security.c:268
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128 биттік кілті (Hex не ASCII)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:281
+#: ../panels/network/connection-editor/ce-page-security.c:278
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 биттік кілттік фразасы"
 
-#: ../panels/network/connection-editor/ce-page-security.c:294
+#: ../panels/network/connection-editor/ce-page-security.c:291
 #: ../panels/network/wireless-security/wireless-security.c:463
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ../panels/network/connection-editor/ce-page-security.c:307
+#: ../panels/network/connection-editor/ce-page-security.c:304
 msgid "Dynamic WEP (802.1x)"
 msgstr "Динамикалық WEP (802.1x)"
 
-#: ../panels/network/connection-editor/ce-page-security.c:321
+#: ../panels/network/connection-editor/ce-page-security.c:318
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: ../panels/network/connection-editor/ce-page-security.c:335
+#: ../panels/network/connection-editor/ce-page-security.c:332
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
@@ -2469,7 +2475,7 @@ msgid "bytes"
 msgstr "байт"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
-#: ../panels/network/connection-editor/vpn-page.ui.h:3
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
 msgid "Make available to other _users"
 msgstr "Басқа па_йдаланушыларға қолжетерлік қылу"
 
@@ -2477,22 +2483,6 @@ msgstr "Басқа па_йдаланушыларға қолжетерлік қы
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Connect _automatically"
 msgstr "_Автоматты түрде байланысу"
-
-#: ../panels/network/connection-editor/ethernet-page.ui.h:17
-#: ../panels/network/connection-editor/security-page.ui.h:2
-#: ../panels/network/connection-editor/vpn-page.ui.h:2
-msgid "Firewall _Zone"
-msgstr "Файрволл _зонасы"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:49
-#: ../panels/network/connection-editor/firewall-helpers.c:118
-msgctxt "Firewall zone"
-msgid "Default"
-msgstr "Бастапқы"
-
-#: ../panels/network/connection-editor/firewall-helpers.c:50
-msgid "The zone defines the trust level of the connection"
-msgstr "Зона байланыстың сенімділік деңгейін анықтайды"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:24
@@ -2558,7 +2548,7 @@ msgid "_Reset"
 msgstr "_Тастау"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1536
+#: ../panels/network/net-device-wifi.c:1590
 #: ../panels/network/network-wifi.ui.h:42
 msgid "_Forget"
 msgstr "Ұ_мыту"
@@ -2605,7 +2595,7 @@ msgid "Select file to import"
 msgstr "Импорттау үшін файлды таңдаңыз"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:182
-#: ../panels/printers/pp-details-dialog.c:322
+#: ../panels/printers/pp-details-dialog.c:320
 #: ../panels/sharing/cc-sharing-panel.c:376
 #: ../panels/user-accounts/um-photo-dialog.c:219
 msgid "_Open"
@@ -2644,7 +2634,7 @@ msgstr ""
 msgid "Export VPN connection"
 msgstr "VPN байланысын экспорттау"
 
-#: ../panels/network/connection-editor/vpn-page.ui.h:4
+#: ../panels/network/connection-editor/vpn-page.ui.h:3
 msgid "(Error: unable to load VPN connection editor)"
 msgstr "(Қате: VPN байланыстары түзетушісін жүктеу мүмкін емес)"
 
@@ -2686,17 +2676,17 @@ msgstr ""
 "DNS;Желі;Сымсыз;Прокси;Кеңжолақты;Модем;"
 
 #: ../panels/network/net-device-ethernet.c:106
-#: ../panels/network/net-device-wifi.c:471
+#: ../panels/network/net-device-wifi.c:475
 msgid "never"
 msgstr "ешқашан"
 
 #: ../panels/network/net-device-ethernet.c:116
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:485
 msgid "today"
 msgstr "бүгін"
 
 #: ../panels/network/net-device-ethernet.c:118
-#: ../panels/network/net-device-wifi.c:483
+#: ../panels/network/net-device-wifi.c:487
 msgid "yesterday"
 msgstr "кеше"
 
@@ -2723,18 +2713,18 @@ msgid "Wired"
 msgstr "Сымды"
 
 #: ../panels/network/net-device-ethernet.c:348
-#: ../panels/network/net-device-wifi.c:1694
+#: ../panels/network/net-device-wifi.c:1748
 #: ../panels/network/network-ethernet.ui.h:3
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:8 ../panels/network/network-vpn.ui.h:7
 msgid "Options…"
 msgstr "Опциялар…"
 
-#: ../panels/network/net-device-mobile.c:223
+#: ../panels/network/net-device-mobile.c:238
 msgid "Add new connection"
 msgstr "Жаңа байланысты қосу"
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1258
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2743,14 +2733,14 @@ msgstr ""
 "байланыспен басқа пайдаланушылармен бөлісу үшін, сымсыз қатынау нүктесін "
 "жасауға болады."
 
-#: ../panels/network/net-device-wifi.c:1209
+#: ../panels/network/net-device-wifi.c:1262
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "Сымсыз қатынау нүктесін іске қосу нәтижесінде <b>%s</b> желісіне байланыс "
 "үзіледі."
 
-#: ../panels/network/net-device-wifi.c:1213
+#: ../panels/network/net-device-wifi.c:1266
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2758,23 +2748,23 @@ msgstr ""
 "Бұл сымсыз қатынау нүктесі белсенді болып тұрған кезде, сымсыз байланысыңыз "
 "арқылы Интернетке қатынау мүмкін емес."
 
-#: ../panels/network/net-device-wifi.c:1296
+#: ../panels/network/net-device-wifi.c:1348
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Қатынау нүктесін тоқтатып, барлық пайдаланушыларды үзу керек пе?"
 
-#: ../panels/network/net-device-wifi.c:1299
+#: ../panels/network/net-device-wifi.c:1351
 msgid "_Stop Hotspot"
 msgstr "Қа_тынау нүктесін тоқтату"
 
-#: ../panels/network/net-device-wifi.c:1397
+#: ../panels/network/net-device-wifi.c:1451
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Қатынау нүктесі ретінде қолдануды жүйелік саясат рұқсат етпейді"
 
-#: ../panels/network/net-device-wifi.c:1400
+#: ../panels/network/net-device-wifi.c:1454
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Сымсыз құрылғы қатынау нүкте режимін қолдамайды"
 
-#: ../panels/network/net-device-wifi.c:1532
+#: ../panels/network/net-device-wifi.c:1586
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2782,11 +2772,11 @@ msgstr ""
 "Таңдалған желілер үшін желі ақпараты, парольдер және таңдауыңызша жасалған "
 "баптаулар жоғалатын болады."
 
-#: ../panels/network/net-device-wifi.c:1842
+#: ../panels/network/net-device-wifi.c:1896
 msgid "History"
 msgstr "Тарихы"
 
-#: ../panels/network/net-device-wifi.c:1846
+#: ../panels/network/net-device-wifi.c:1900
 #: ../panels/printers/options-dialog.ui.h:2
 #: ../panels/wacom/button-mapping.ui.h:2 ../panels/wacom/cc-wacom-page.c:505
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
@@ -2794,7 +2784,7 @@ msgid "_Close"
 msgstr "Жа_бу"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1854
+#: ../panels/network/net-device-wifi.c:1908
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "Ұ_мыту"
@@ -3350,23 +3340,23 @@ msgstr "Бинарлы кодтары жоқ"
 msgid "Cable unplugged"
 msgstr "Кабель ажыратылған"
 
-#: ../panels/network/wireless-security/eap-method.c:69
-msgid "undefined error in 802.1x security (wpa-eap)"
-msgstr "802.1x қауіпсіздігі (wpa-eap) ішіндегі анықталмаған қате"
+#: ../panels/network/wireless-security/eap-method.c:57
+msgid "undefined error in 802.1X security (wpa-eap)"
+msgstr "802.1X қауіпсіздігі (wpa-eap) ішіндегі анықталмаған қате"
 
-#: ../panels/network/wireless-security/eap-method.c:245
+#: ../panels/network/wireless-security/eap-method.c:233
 msgid "no file selected"
 msgstr "файл таңдалмады"
 
-#: ../panels/network/wireless-security/eap-method.c:276
+#: ../panels/network/wireless-security/eap-method.c:264
 msgid "unspecified error validating eap-method file"
 msgstr "eap-method файлын растаудағы анықталмаған қате"
 
-#: ../panels/network/wireless-security/eap-method.c:480
+#: ../panels/network/wireless-security/eap-method.c:439
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, не PKCS#12 жеке кілттері (*.der, *.pem, *.p12, *.key)"
 
-#: ../panels/network/wireless-security/eap-method.c:483
+#: ../panels/network/wireless-security/eap-method.c:442
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "DER не PEM сертификаттары (*.der, *.pem, *.crt, *.cer)"
 
@@ -3376,13 +3366,13 @@ msgstr "EAP-FAST PAC файлы жоқ"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:268
 #: ../panels/network/wireless-security/eap-method-peap.c:302
-#: ../panels/network/wireless-security/eap-method-ttls.c:333
+#: ../panels/network/wireless-security/eap-method-ttls.c:351
 msgid "GTC"
 msgstr "GTC"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:283
 #: ../panels/network/wireless-security/eap-method-peap.c:272
-#: ../panels/network/wireless-security/eap-method-ttls.c:288
+#: ../panels/network/wireless-security/eap-method-ttls.c:289
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
@@ -3395,37 +3385,28 @@ msgid "PAC files (*.pac)"
 msgstr "PAC файлдары (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:1
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
-#: ../panels/printers/authentication-dialog.ui.h:1
-msgid " "
-msgstr " "
-
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Anonymous"
 msgstr "Анонимды"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
 msgid "Authenticated"
 msgstr "Аутентификациядан өткен"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 msgid "Both"
 msgstr "Екеуі де"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
 msgid "PAC _file"
 msgstr "PAC _файлы"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:5
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
 msgid "_Inner authentication"
 msgstr "Ішкі _аутентификация"
 
-#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Автоматты PAC ұсы_нуды рұқсат ету"
 
@@ -3462,38 +3443,38 @@ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "жарамсыз EAP-PEAP CA сертификаты: сертификат көрсетілмеген"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:287
-#: ../panels/network/wireless-security/eap-method-ttls.c:318
+#: ../panels/network/wireless-security/eap-method-ttls.c:336
 #: ../panels/network/wireless-security/wireless-security.c:439
 msgid "MD5"
 msgstr "MD5"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:381
 #: ../panels/network/wireless-security/eap-method-tls.c:501
-#: ../panels/network/wireless-security/eap-method-ttls.c:412
+#: ../panels/network/wireless-security/eap-method-ttls.c:430
 msgid "Choose a Certificate Authority certificate"
 msgstr "Сертификаттау орталығының сертификатын таңдаңыз"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
 msgid "Version 0"
 msgstr "Нұсқасы 0"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
 msgid "Version 1"
 msgstr "Нұсқасы 1"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:3
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
 msgid "C_A certificate"
 msgstr "С_О сертификаты"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
 msgid "No CA certificate is _required"
 msgstr "СО сертификаты _керек емес"
 
-#: ../panels/network/wireless-security/eap-method-peap.ui.h:9
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
 msgid "PEAP _version"
 msgstr "PEAP _нұсқасы"
 
@@ -3538,9 +3519,9 @@ msgstr "Шифрленбеген жеке кілттері қауіпсіз ем
 
 #: ../panels/network/wireless-security/eap-method-tls.c:319
 msgid ""
-"The selected private key does not appear to be protected by a password.  "
-"This could allow your security credentials to be compromised.  Please select "
-"a password-protected private key.\n"
+"The selected private key does not appear to be protected by a password. This "
+"could allow your security credentials to be compromised. Please select a "
+"password-protected private key.\n"
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
@@ -3583,21 +3564,25 @@ msgstr "жарамсыз EAP-TTLS CA сертификаты: %s"
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
 msgstr "жарамсыз EAP-TTLS CA сертификаты: сертификат көрсетілмеген"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:258
+#: ../panels/network/wireless-security/eap-method-ttls.c:259
 msgid "PAP"
 msgstr "PAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:273
+#: ../panels/network/wireless-security/eap-method-ttls.c:274
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
-#: ../panels/network/wireless-security/eap-method-ttls.c:303
+#: ../panels/network/wireless-security/eap-method-ttls.c:305
+msgid "MSCHAPv2 (no EAP)"
+msgstr "MSCHAPv2 (EAP емес)"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:321
 msgid "CHAP"
 msgstr "CHAP"
 
 #: ../panels/network/wireless-security/wireless-security.c:87
-msgid "Unknown error validating 802.1x security"
-msgstr "802.1x қауіпсіздігін тексерудің белгісіз қатесі"
+msgid "Unknown error validating 802.1X security"
+msgstr "802.1X қауіпсіздігін тексерудің белгісіз қатесі"
 
 #: ../panels/network/wireless-security/wireless-security.c:451
 msgid "TLS"
@@ -3619,9 +3604,9 @@ msgstr "Туннельденген TLS"
 msgid "Protected EAP (PEAP)"
 msgstr "Қорғалған EAP (PEAP)"
 
-#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
-#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
 msgid "Au_thentication"
 msgstr "Аутен_тификация"
 
@@ -3672,34 +3657,22 @@ msgid "1 (Default)"
 msgstr "1 (Бастапқы)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:2
-msgid "2"
-msgstr "2"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
-msgid "3"
-msgstr "3"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-msgid "4"
-msgstr "4"
-
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
 msgstr "Ашық жүйе"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
 msgid "Shared Key"
 msgstr "Ортақ кілт"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
 msgid "_Key"
 msgstr "_Кілт"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
 msgid "Sho_w key"
 msgstr "Кіл_тті көрсету"
 
-#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "WEP inde_x"
 msgstr "WEP и_ндексі"
 
@@ -4205,9 +4178,13 @@ msgstr "Эл. желісіне қосы_лған кезде"
 msgid "On _Battery Power"
 msgstr "_Батареядан жұмыс істеу кезінде"
 
-#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:33
+#: ../panels/power/power.ui.h:21 ../panels/universal-access/uap.ui.h:36
 msgid "Delay"
 msgstr "Кідіріс"
+
+#: ../panels/printers/authentication-dialog.ui.h:1
+msgid " "
+msgstr " "
 
 #: ../panels/printers/authentication-dialog.ui.h:3
 msgid "Authenticate"
@@ -4219,18 +4196,18 @@ msgid "Authentication Required"
 msgstr "Аутентификация керек"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:748
 msgid "Failed to add new printer."
 msgstr "Жаңа принтерді қосу сәтсіз аяқталды"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:1043
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui жүктеу мүмкін емес: %s"
 
 #: ../panels/printers/details-dialog.ui.h:2
-#: ../panels/printers/printer-entry.ui.h:6
+#: ../panels/printers/printer-entry.ui.h:8
 msgid "Location"
 msgstr "Орналасуы"
 
@@ -4318,20 +4295,20 @@ msgstr "Жүктеу опциялары…"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: ../panels/printers/pp-details-dialog.c:123
-#: ../panels/printers/pp-details-dialog.c:416
+#: ../panels/printers/pp-details-dialog.c:415
 #, c-format
 msgid "%s Details"
 msgstr "%s ақпараты"
 
-#: ../panels/printers/pp-details-dialog.c:174
+#: ../panels/printers/pp-details-dialog.c:172
 msgid "No suitable driver found"
 msgstr "Сәйкес келетін драйвер табылмады"
 
-#: ../panels/printers/pp-details-dialog.c:318
+#: ../panels/printers/pp-details-dialog.c:316
 msgid "Select PPD File"
 msgstr "PPD айлын таңдаңыз"
 
-#: ../panels/printers/pp-details-dialog.c:327
+#: ../panels/printers/pp-details-dialog.c:325
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4401,49 +4378,49 @@ msgid "Reverse portrait"
 msgstr "Теріс тік"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/pp-jobs-dialog.c:103
+#: ../panels/printers/pp-jobs-dialog.c:104
 msgctxt "print job"
 msgid "Pending"
 msgstr "Кезекте"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/pp-jobs-dialog.c:107
+#: ../panels/printers/pp-jobs-dialog.c:108
 msgctxt "print job"
 msgid "Paused"
 msgstr "Аялдатылған"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/pp-jobs-dialog.c:111
+#: ../panels/printers/pp-jobs-dialog.c:112
 msgctxt "print job"
 msgid "Processing"
 msgstr "Өңдеуде"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/pp-jobs-dialog.c:115
+#: ../panels/printers/pp-jobs-dialog.c:116
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Тоқтатылды"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/pp-jobs-dialog.c:119
+#: ../panels/printers/pp-jobs-dialog.c:120
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Бас тартылған"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/pp-jobs-dialog.c:123
+#: ../panels/printers/pp-jobs-dialog.c:124
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Үзілді"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/pp-jobs-dialog.c:127
+#: ../panels/printers/pp-jobs-dialog.c:128
 msgctxt "print job"
 msgid "Completed"
 msgstr "Аяқталған"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: ../panels/printers/pp-jobs-dialog.c:289
+#: ../panels/printers/pp-jobs-dialog.c:310
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
@@ -4633,120 +4610,125 @@ msgid "Manufacturer"
 msgstr "Шығарушы"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:368
+#: ../panels/printers/pp-printer-entry.c:571
 msgid "No Active Jobs"
 msgstr "Белсенді тапсырмалар жоқ"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: ../panels/printers/pp-printer-entry.c:373
+#: ../panels/printers/pp-printer-entry.c:576
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "%u тапсырма"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/pp-printer-entry.c:470
+#: ../panels/printers/pp-printer-entry.c:712
 msgid "Low on toner"
 msgstr "Тонер аз"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/pp-printer-entry.c:472
+#: ../panels/printers/pp-printer-entry.c:714
 msgid "Out of toner"
 msgstr "Тонер жоқ"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:475
+#: ../panels/printers/pp-printer-entry.c:717
 msgid "Low on developer"
 msgstr "Айқындауышы аз"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/pp-printer-entry.c:478
+#: ../panels/printers/pp-printer-entry.c:720
 msgid "Out of developer"
 msgstr "Айқындауышы бітті"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:480
+#: ../panels/printers/pp-printer-entry.c:722
 msgid "Low on a marker supply"
 msgstr "Тонер бітіп жатыр"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/pp-printer-entry.c:482
+#: ../panels/printers/pp-printer-entry.c:724
 msgid "Out of a marker supply"
 msgstr "Тонер бітті"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/pp-printer-entry.c:484
+#: ../panels/printers/pp-printer-entry.c:726
 msgid "Open cover"
 msgstr "Қақпағы ашық"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/pp-printer-entry.c:486
+#: ../panels/printers/pp-printer-entry.c:728
 msgid "Open door"
 msgstr "Есігі ашық"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/pp-printer-entry.c:488
+#: ../panels/printers/pp-printer-entry.c:730
 msgid "Low on paper"
 msgstr "Қағазы аз"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/pp-printer-entry.c:490
+#: ../panels/printers/pp-printer-entry.c:732
 msgid "Out of paper"
 msgstr "Қағаз бітті"
 
 #. Translators: The printer is offline
-#: ../panels/printers/pp-printer-entry.c:492
+#: ../panels/printers/pp-printer-entry.c:734
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Желіде емес"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/pp-printer-entry.c:494
-#: ../panels/printers/pp-printer-entry.c:624
+#: ../panels/printers/pp-printer-entry.c:736
+#: ../panels/printers/pp-printer-entry.c:866
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Тоқтатылды"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/pp-printer-entry.c:496
+#: ../panels/printers/pp-printer-entry.c:738
 msgid "Waste receptacle almost full"
 msgstr "Қоқысты қабылдағыш толуға жақын"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/pp-printer-entry.c:498
+#: ../panels/printers/pp-printer-entry.c:740
 msgid "Waste receptacle full"
 msgstr "Қоқысты қабылдағыш толып қалды"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:500
+#: ../panels/printers/pp-printer-entry.c:742
 msgid "The optical photo conductor is near end of life"
 msgstr "Фоторезист жақында жарамсыз болып қалады"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/pp-printer-entry.c:502
+#: ../panels/printers/pp-printer-entry.c:744
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Фоторезист жұмыс істемейді"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/pp-printer-entry.c:610
+#: ../panels/printers/pp-printer-entry.c:852
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Дайын"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: ../panels/printers/pp-printer-entry.c:615
+#: ../panels/printers/pp-printer-entry.c:857
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Тапрсырмаларды қабылдамайды"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/pp-printer-entry.c:620
+#: ../panels/printers/pp-printer-entry.c:862
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Өңдеуде"
+
+#. Translators: Name of job which makes printer to clean its heads
+#: ../panels/printers/pp-printer-entry.c:886
+msgid "Clean print heads"
+msgstr "Баспа бастиектерін тазарту"
 
 #: ../panels/printers/printer-entry.ui.h:1
 msgid "Printing Options"
@@ -4760,25 +4742,30 @@ msgstr "Принтер ақпараты"
 msgid "Use Printer by Default"
 msgstr "Принтерді негізгі ретінде қолдану"
 
-#: ../panels/printers/printer-entry.ui.h:4
+#. Translators: This button executes command which cleans print heads of the printer.
+#: ../panels/printers/printer-entry.ui.h:5
+msgid "Clean Print Heads"
+msgstr "Баспа бастиектерін тазарту"
+
+#: ../panels/printers/printer-entry.ui.h:6
 msgid "Remove Printer"
 msgstr "Принтерді өшіру"
 
-#: ../panels/printers/printer-entry.ui.h:5
+#: ../panels/printers/printer-entry.ui.h:7
 msgid "Model"
 msgstr "Модель"
 
-#: ../panels/printers/printer-entry.ui.h:7
+#: ../panels/printers/printer-entry.ui.h:9
 msgid "Ink Level"
 msgstr "Сия деңгейі"
 
 #. Translators: This is the message which follows the printer error.
-#: ../panels/printers/printer-entry.ui.h:9
+#: ../panels/printers/printer-entry.ui.h:11
 msgid "Please restart when the problem is resolved."
 msgstr "Мәселе шешілген кезде жүйені қайта іске қосыңыз."
 
 #. Translators: This is the button which restarts the printer.
-#: ../panels/printers/printer-entry.ui.h:11
+#: ../panels/printers/printer-entry.ui.h:13
 msgid "Restart"
 msgstr "Қайта қосу"
 
@@ -5077,7 +5064,7 @@ msgstr "Басқа"
 msgid "No input source selected"
 msgstr "Кіріс қайнар көзді таңдалмады"
 
-#: ../panels/region/cc-region-panel.c:1757
+#: ../panels/region/cc-region-panel.c:1758
 msgid "Login _Screen"
 msgstr "Жүйеге кіру _экраны"
 
@@ -5246,7 +5233,7 @@ msgstr "Орналасуды таңдау"
 msgid "_OK"
 msgstr "_ОК"
 
-#: ../panels/search/cc-search-panel.c:177
+#: ../panels/search/cc-search-panel.c:178
 msgid "No applications found"
 msgstr "Қолданбалар табылмады"
 
@@ -5568,7 +5555,7 @@ msgstr "Проф_иль:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1837
+#: ../panels/sound/gvc/gvc-mixer-control.c:1873
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -5576,13 +5563,13 @@ msgstr[0] "%u шығыс"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1847
+#: ../panels/sound/gvc/gvc-mixer-control.c:1883
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u кіріс"
 
-#: ../panels/sound/gvc/gvc-mixer-control.c:2373
+#: ../panels/sound/gvc/gvc-mixer-control.c:2738
 msgid "System Sounds"
 msgstr "Жүйелік дыбыстар"
 
@@ -5693,6 +5680,39 @@ msgstr "Сабвуфер"
 msgid "Custom"
 msgstr "Таңдауыңызша"
 
+#. translators: the labels will read:
+#. * Cursor Size: Default
+#: ../panels/universal-access/cc-ua-panel.c:351
+msgctxt "cursor size"
+msgid "Default"
+msgstr "Бастапқы"
+
+#: ../panels/universal-access/cc-ua-panel.c:354
+msgctxt "cursor size"
+msgid "Medium"
+msgstr "Орташа"
+
+#: ../panels/universal-access/cc-ua-panel.c:357
+msgctxt "cursor size"
+msgid "Large"
+msgstr "Үлкен"
+
+#: ../panels/universal-access/cc-ua-panel.c:360
+msgctxt "cursor size"
+msgid "Larger"
+msgstr "Үлкенірек"
+
+#: ../panels/universal-access/cc-ua-panel.c:363
+msgctxt "cursor size"
+msgid "Largest"
+msgstr "Ең үлкен"
+
+#: ../panels/universal-access/cc-ua-panel.c:367
+#, c-format
+msgid "%d pixel"
+msgid_plural "%d pixels"
+msgstr[0] "%d пиксель"
+
 #. Translators: Add soft hyphens to your translations so that the icon view won't clip your translations. See https://bugzilla.gnome.org/show_bug.cgi?id=647087#c13 for details
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Uni­ver­sal Access"
@@ -5706,12 +5726,13 @@ msgstr "Көру, есту, теру, көрсету және шертуді ж�
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:5
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;"
+"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen;Reader;text;font;size;"
-"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Пернетақта;"
-"Тышқан;қолжетерлілік;контраст;масштаб;экран;оқу қолданбасы;мәтін;қаріп;"
-"өлшемі;жабысқақ;пернелер;баяу;қайталанатын;қос;шерту;кідіріс;көмек;"
+"AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Assist;Repeat;Blink;"
+"Пернетақта;Тышқан;қолжетерлілік;контраст;масштаб;экран;оқу қолданбасы;мәтін;"
+"қаріп;өлшемі;жабысқақ;пернелер;баяу;қайталанатын;қос;шерту;кідіріс;көмек;"
+"қайталау;жыпылықтау;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "_Always Show Universal Access Menu"
@@ -5730,282 +5751,297 @@ msgid "_Large Text"
 msgstr "Ү_лкен мәтін"
 
 #: ../panels/universal-access/uap.ui.h:5
+msgid "C_ursor Size"
+msgstr "К_урсор өлшемі"
+
+#: ../panels/universal-access/uap.ui.h:6
 #: ../panels/universal-access/zoom-options.ui.h:7
 msgid "_Zoom"
 msgstr "_Масштаб"
 
-#: ../panels/universal-access/uap.ui.h:7
+#: ../panels/universal-access/uap.ui.h:8
 msgid "Screen _Reader"
 msgstr "Экраннан оқитын қол_данба"
 
-#: ../panels/universal-access/uap.ui.h:8
+#: ../panels/universal-access/uap.ui.h:9
 msgid "_Sound Keys"
 msgstr "_Дыбыс пернелері"
 
-#: ../panels/universal-access/uap.ui.h:9
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Hearing"
 msgstr "Есту"
 
-#: ../panels/universal-access/uap.ui.h:10
+#: ../panels/universal-access/uap.ui.h:11
 msgid "_Visual Alerts"
 msgstr "_Визуалды хабарлаулар"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Screen _Keyboard"
 msgstr "Экрандағы перне_тақта"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:14
 msgid "R_epeat Keys"
 msgstr "П_ернелер қайталануы"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Cursor _Blinking"
 msgstr "Курсор _жыпылықтауы"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "_Typing Assist (AccessX)"
 msgstr "_Теру көмекшісі (AccessX)"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Pointing & Clicking"
 msgstr "Көрсету және шерту"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "_Mouse Keys"
 msgstr "Ты_шқан пернелері"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:19
 msgid "_Click Assist"
 msgstr "_Шертулер көмекшісі"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:20
 msgid "_Double-Click Delay"
 msgstr "Қ_ос шерту кідірісі"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Double-Click Delay"
 msgstr "Қос шерту кідірісі"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Cursor Size"
+msgstr "Курсор өлшемі"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid ""
+"Cursor size can be combined with zoom to make it easier to see the cursor."
+msgstr ""
+"Курсорды көруді жақсарту үшін курсор өлшемін масштабпен бірге қолдануға "
+"болады."
+
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
 msgstr "Экраннан оқитын қолданба"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:25
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr ""
 "Экраннан оқу қолданбасы фокус ауысу кезінде көрсетілетін мәтінді оқиды."
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:26
 msgid "_Screen Reader"
 msgstr "Экра_ннан оқитын қолданба"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Sound Keys"
 msgstr "Дыбыс пернелері"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Num Lock немесе Caps Lock іске қосулы/сөндірулі кезінде дыбыс беру."
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Visual Alerts"
 msgstr "Бейнелік хабарлау"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:30
 msgid "_Test flash"
 msgstr "Жыпылықтауды сы_нау"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Use a visual indication when an alert sound occurs."
 msgstr "Хабарлау дыбысы кезінде визуалды хабарлауды көрсету."
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Flash the _window title"
 msgstr "Тере_зе атауын жыпылықтау"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the entire _screen"
 msgstr "Толық _экранмен жыпылықтау"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Repeat Keys"
 msgstr "Пернелер қайталануы"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Key presses repeat when key is held down."
 msgstr "Перне басулы кезінде перне басулары қайталанады."
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Repeat keys delay"
 msgstr "Қайталану кідірісі"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Speed"
 msgstr "Жылдамдығы"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Repeat keys speed"
 msgstr "Қайталану жылдамдығы"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Cursor Blinking"
 msgstr "Курсор жыпылықтауы"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Cursor blinks in text fields."
 msgstr "Курсор мәтіндік өрістерде жыпылықтайды."
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Cursor blinking speed"
 msgstr "Курсордың жыпылықтау жиілігі"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Typing Assist"
 msgstr "Теру көмекшісі"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:44
 msgid "_Sticky Keys"
 msgstr "Жабы_сқақ пернелер"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 "Түрлендіргіш пернелер басылу тізбегін пернелер комбинациясы ретінде талдайды"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:46
 msgid "_Disable if two keys are pressed together"
 msgstr "Екі перне бірдей басылса, сөн_діру"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Beep when a _modifier key is pressed"
 msgstr "_Түрлендіргіш перне басылған кезде дыбысты беру"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:48
 msgid "S_low Keys"
 msgstr "Ба_яу пернелер"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Перне басылған және қабылданған кездері арасында кідірісті орнатады"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:50
 msgid "A_cceptance delay:"
 msgstr "Қа_былдау кідірісі:"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:51
 msgctxt "slow keys delay"
 msgid "Short"
 msgstr "Қысқа"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Slow keys typing delay"
 msgstr "Баяу пернелер теру кідірісі"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:53
 msgctxt "slow keys delay"
 msgid "Long"
 msgstr "Ұзақ"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Beep when a key is pr_essed"
 msgstr "Перне _басылған кезде дыбыс беру"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Beep when a key is _accepted"
 msgstr "Перне қ_абылданған кезде дыбыс беру"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Beep when a key is _rejected"
 msgstr "Перне та_йдырылған кезде дыбыс беру"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:57
 msgid "_Bounce Keys"
 msgstr "Қа_йталанатын пернелер"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Ignores fast duplicate keypresses"
 msgstr "Жылдам қайталатын пернелер басуларын елемейді"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:59
 msgctxt "bounce keys delay"
 msgid "Short"
 msgstr "Қысқа"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Bounce keys typing delay"
 msgstr "Қайталанатын пернелер теру кідірісі"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:61
 msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Ұзақ"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:62
 msgid "_Enable by Keyboard"
 msgstr "Пернетақтамен іск_е қосу"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Арнайы мүмкіндіктерді пернетақта көмегімен іске қосу және сөндіру"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Click Assist"
 msgstr "Шертулер көмекшісі"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:65
 msgid "_Simulated Secondary Click"
 msgstr "_Симуляцияланған ккіншілік шерту"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Біріншілік батырманы басып ұстау арқылы екіншілік шертуді генерациялау"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:67
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Қысқа"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Secondary click delay"
 msgstr "Екіншілік шерту кідірісі"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:69
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Ұзақ"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:70
 msgid "_Hover Click"
 msgstr "Үстінен өткенде _шерту"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Trigger a click when the pointer hovers"
 msgstr "Курсор үстінен өткен кезде шерту оқиғасын жіберу"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:72
 msgid "D_elay:"
 msgstr "Кі_діріс:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:73
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Қысқа"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:74
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Ұзақ"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Motion _threshold:"
 msgstr "Жылжудың _табалдырықты мәні:"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:76
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Кішкентай"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:77
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Үлкен"
@@ -6497,8 +6533,12 @@ msgstr "1234 не аәбв сияқты тізбектерді қолданба�
 
 #: ../panels/user-accounts/pw-utils.c:115
 msgctxt "Password hint"
-msgid "Try to add more letters, numbers and symbols."
-msgstr "Көбірек әріптер, сандар және белгілерді қосып көріңіз."
+msgid ""
+"Password needs to be longer. Try to add more letters, numbers and "
+"punctuation."
+msgstr ""
+"Пароль ұзынырақ болуы тиіс. Көбірек әріптер, сандар және тыныс белгілерін "
+"қосып көріңіз."
 
 #: ../panels/user-accounts/pw-utils.c:117
 msgctxt "Password hint"
@@ -6509,41 +6549,10 @@ msgstr ""
 #: ../panels/user-accounts/pw-utils.c:119
 msgctxt "Password hint"
 msgid ""
-"Good password! Adding more letters, numbers and punctuation will make it "
-"stronger."
+"Adding more letters, numbers and punctuation will make the password stronger."
 msgstr ""
-"Жақсы пароль! Көбірек әріптер, сандар және тыныс белгілерін қосу арқылы оны "
-"күштірек қылуға болады."
-
-#: ../panels/user-accounts/pw-utils.c:141
-#: ../panels/user-accounts/pw-utils.c:171
-msgctxt "Password strength"
-msgid "Strength: Weak"
-msgstr "Деңгейі: Әлсіз"
-
-#: ../panels/user-accounts/pw-utils.c:145
-#: ../panels/user-accounts/pw-utils.c:172
-msgctxt "Password strength"
-msgid "Strength: Low"
-msgstr "Мықтылығы: Төмен"
-
-#: ../panels/user-accounts/pw-utils.c:148
-#: ../panels/user-accounts/pw-utils.c:173
-msgctxt "Password strength"
-msgid "Strength: Medium"
-msgstr "Деңгейі: Орташа"
-
-#: ../panels/user-accounts/pw-utils.c:151
-#: ../panels/user-accounts/pw-utils.c:174
-msgctxt "Password strength"
-msgid "Strength: Good"
-msgstr "Деңгейі: Жақсы"
-
-#: ../panels/user-accounts/pw-utils.c:154
-#: ../panels/user-accounts/pw-utils.c:175
-msgctxt "Password strength"
-msgid "Strength: High"
-msgstr "Деңгейі: Жоғары"
+"Көбірек әріптер, сандар және тыныс белгілерін қосу арқылы парольді күштірек "
+"қылуға болады."
 
 #: ../panels/user-accounts/run-passwd.c:422
 msgid "Authentication failed"
@@ -6602,25 +6611,25 @@ msgstr "Логинді ұсынушының веб адресіне сәйкес
 msgid "Failed to add account"
 msgstr "Тіркелгіні қосу сәтсіз"
 
-#: ../panels/user-accounts/um-account-dialog.c:463
+#: ../panels/user-accounts/um-account-dialog.c:462
 msgid "Passwords do not match."
 msgstr "Парольдер өзара сәйкес келмейді."
 
-#: ../panels/user-accounts/um-account-dialog.c:718
-#: ../panels/user-accounts/um-account-dialog.c:764
-#: ../panels/user-accounts/um-account-dialog.c:785
+#: ../panels/user-accounts/um-account-dialog.c:717
+#: ../panels/user-accounts/um-account-dialog.c:763
+#: ../panels/user-accounts/um-account-dialog.c:784
 msgid "Failed to register account"
 msgstr "Тіркелгіні тіркеу сәтсіз аяқталды"
 
-#: ../panels/user-accounts/um-account-dialog.c:908
+#: ../panels/user-accounts/um-account-dialog.c:907
 msgid "No supported way to authenticate with this domain"
 msgstr "Бұл доменде аутентификациялаудың қолдауы бар тәсілдері жоқ"
 
-#: ../panels/user-accounts/um-account-dialog.c:981
+#: ../panels/user-accounts/um-account-dialog.c:980
 msgid "Failed to join domain"
 msgstr "Доменде тіркелу сәтсіз"
 
-#: ../panels/user-accounts/um-account-dialog.c:1042
+#: ../panels/user-accounts/um-account-dialog.c:1041
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -6628,7 +6637,7 @@ msgstr ""
 "Бұл логин жасамады.\n"
 "Қайталап көріңіз."
 
-#: ../panels/user-accounts/um-account-dialog.c:1049
+#: ../panels/user-accounts/um-account-dialog.c:1048
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -6636,12 +6645,12 @@ msgstr ""
 "Бұл логин паролі жасамады.\n"
 "Қайталап көріңіз."
 
-#: ../panels/user-accounts/um-account-dialog.c:1057
+#: ../panels/user-accounts/um-account-dialog.c:1056
 msgid "Failed to log into domain"
 msgstr "Доменге кіру сәтсіз"
 
-#: ../panels/user-accounts/um-account-dialog.c:1115
-msgid "Unable find the domain. Maybe you misspelled it?"
+#: ../panels/user-accounts/um-account-dialog.c:1114
+msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Доменді табу мүмкін емес. Оны дұрыс көрсеттіңіз бе?"
 
 #: ../panels/user-accounts/um-account-type.c:34
@@ -6804,19 +6813,19 @@ msgstr "Сессия басталды"
 msgid "%s — Account Activity"
 msgstr "%s — Тіркелгі белсенділігі"
 
-#: ../panels/user-accounts/um-password-dialog.c:145
+#: ../panels/user-accounts/um-password-dialog.c:144
 msgid "Please choose another password."
 msgstr "Басқа парольді таңдаңыз."
 
-#: ../panels/user-accounts/um-password-dialog.c:154
+#: ../panels/user-accounts/um-password-dialog.c:153
 msgid "Please type your current password again."
 msgstr "Ағымдағы пароліңізді қайта енгізіңіз."
 
-#: ../panels/user-accounts/um-password-dialog.c:160
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Password could not be changed"
 msgstr "Парольді өзгерту мүмкін емес"
 
-#: ../panels/user-accounts/um-password-dialog.c:286
+#: ../panels/user-accounts/um-password-dialog.c:285
 msgid "The passwords do not match."
 msgstr "Парольдер өзара сәйкес емес."
 
@@ -6836,7 +6845,7 @@ msgstr "Фото түсіру..."
 msgid "Browse for more pictures…"
 msgstr "Көбірек суретті шолу…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:711
 #, c-format
 msgid "Used by %s"
 msgstr "%s қолданған"
@@ -7357,6 +7366,64 @@ msgstr "Қатынау нүктесі"
 msgid "No results found"
 msgstr "Нәтижелер табылмады"
 
+#~ msgid "Press Esc to cancel."
+#~ msgstr "Бас тарту үшін Esc басыңыз."
+
+#~ msgid "%s %d-bit (Build ID: %s)"
+#~ msgstr "%s %d-бит (Жинақ ID: %s)"
+
+#~ msgid "%s %d-bit"
+#~ msgstr "%s %d-бит"
+
+#~ msgid "Base system"
+#~ msgstr "Базалық жүйе"
+
+#~ msgid "Shortcut;Repeat;Blink;"
+#~ msgstr "Shortcut;Repeat;Blink;Жарлық;Қайталау;Жыпылықтау;"
+
+#~ msgid "Firewall _Zone"
+#~ msgstr "Файрволл _зонасы"
+
+#~ msgctxt "Firewall zone"
+#~ msgid "Default"
+#~ msgstr "Бастапқы"
+
+#~ msgid "The zone defines the trust level of the connection"
+#~ msgstr "Зона байланыстың сенімділік деңгейін анықтайды"
+
+#~ msgid "2"
+#~ msgstr "2"
+
+#~ msgid "3"
+#~ msgstr "3"
+
+#~ msgid "4"
+#~ msgstr "4"
+
+#~ msgctxt "Password hint"
+#~ msgid "Try to add more letters, numbers and symbols."
+#~ msgstr "Көбірек әріптер, сандар және белгілерді қосып көріңіз."
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Weak"
+#~ msgstr "Деңгейі: Әлсіз"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Low"
+#~ msgstr "Мықтылығы: Төмен"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Medium"
+#~ msgstr "Деңгейі: Орташа"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: Good"
+#~ msgstr "Деңгейі: Жақсы"
+
+#~ msgctxt "Password strength"
+#~ msgid "Strength: High"
+#~ msgstr "Деңгейі: Жоғары"
+
 #~ msgid "<small>Your account</small>"
 #~ msgstr "<small>Сіздің тіркелгіңіз</small>"
 
@@ -7761,9 +7828,6 @@ msgstr "Нәтижелер табылмады"
 
 #~ msgid "Pause Printing"
 #~ msgstr "Баспаға шығаруды аялдату"
-
-#~ msgid "Cancel Print Job"
-#~ msgstr "Баспаға шығару тапсырмасынан бас тарту"
 
 #~ msgctxt "print job"
 #~ msgid "Held"
@@ -8255,10 +8319,6 @@ msgstr "Нәтижелер табылмады"
 #~ msgid "150%"
 #~ msgstr "150%"
 
-#~ msgctxt "universal access, text size"
-#~ msgid "Larger"
-#~ msgstr "Үлкенірек"
-
 #~| msgid "Zoom"
 #~ msgctxt "universal access, zoom"
 #~ msgid "Zoom"
@@ -8441,10 +8501,6 @@ msgstr "Нәтижелер табылмады"
 
 #~ msgid "System Information"
 #~ msgstr "Жүйелік ақпарат"
-
-#~| msgid "Style:"
-#~ msgid "OS type"
-#~ msgstr "Стиль:"
 
 #~| msgid "Appearance"
 #~ msgid "Experience"
