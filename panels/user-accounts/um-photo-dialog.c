@@ -124,7 +124,7 @@ file_chooser_response (GtkDialog     *chooser,
 {
         gchar *filename;
         GError *error;
-        GdkPixbuf *pixbuf;
+        GdkPixbuf *pixbuf, *pixbuf2;
 
         if (response != GTK_RESPONSE_ACCEPT) {
                 gtk_widget_destroy (GTK_WIDGET (chooser));
@@ -141,10 +141,13 @@ file_chooser_response (GtkDialog     *chooser,
         }
         g_free (filename);
 
+        pixbuf2 = gdk_pixbuf_apply_embedded_orientation (pixbuf);
+        g_object_unref (pixbuf);
+
         gtk_widget_destroy (GTK_WIDGET (chooser));
 
-        um_photo_dialog_crop (um, pixbuf);
-        g_object_unref (pixbuf);
+        um_photo_dialog_crop (um, pixbuf2);
+        g_object_unref (pixbuf2);
 }
 
 static void
