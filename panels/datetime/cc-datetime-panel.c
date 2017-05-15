@@ -1128,8 +1128,8 @@ setup_datetime_dialog (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
   GtkAdjustment *adjustment;
+  GdkScreen *screen;
   GtkCssProvider *provider;
-  GtkStyleContext *context;
   GtkWidget *dialog;
   guint num_days;
 
@@ -1138,13 +1138,17 @@ setup_datetime_dialog (CcDateTimePanel *self)
   /* Big time buttons */
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
-                                   ".gnome-control-center-datetime-setup-time {\n"
-                                   "    font-size: 32px;\n"
+                                   ".gnome-control-center-datetime-setup-time>spinbutton,\n"
+                                   ".gnome-control-center-datetime-setup-time>label {\n"
+                                   "    font-size: 250%;\n"
+                                   "}\n"
+                                   ".gnome-control-center-datetime-setup-time>spinbutton>entry {\n"
+                                   "    padding: 8px 13px;\n"
                                    "}", -1, NULL);
-  context = gtk_widget_get_style_context (GTK_WIDGET (W ("time_grid")));
-  gtk_style_context_add_provider (context,
-                                  GTK_STYLE_PROVIDER (provider),
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  screen = gdk_screen_get_default ();
+  gtk_style_context_add_provider_for_screen (screen,
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (provider);
 
   dialog = W ("datetime-dialog");
