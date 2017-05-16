@@ -100,7 +100,6 @@ struct _CcPrintersPanelPrivate
   gchar    *new_printer_location;
   gchar    *new_printer_make_and_model;
   gboolean  new_printer_on_network;
-  gboolean  select_new_printer;
 
   gchar    *renamed_printer_name;
   gchar    *deleted_printer_name;
@@ -864,7 +863,6 @@ new_printer_dialog_pre_response_cb (PpNewPrinterDialog *dialog,
   priv->new_printer_location = g_strdup (device_location);
   priv->new_printer_make_and_model = g_strdup (device_make_and_model);
   priv->new_printer_on_network = is_network_device;
-  priv->select_new_printer = TRUE;
 
   actualize_printers_list (self);
 }
@@ -1168,7 +1166,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->new_printer_location = NULL;
   priv->new_printer_make_and_model = NULL;
   priv->new_printer_on_network = FALSE;
-  priv->select_new_printer = FALSE;
 
   priv->renamed_printer_name = NULL;
   priv->deleted_printer_name = NULL;
