@@ -874,13 +874,16 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *dialog,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkScrolledWindow      *scrolled_window;
+  GtkAllocation           allocation;
+  GtkAdjustment          *adjustment;
+  GtkWidget              *printer_entry;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   if (priv->pp_new_printer_dialog)
     g_clear_object (&priv->pp_new_printer_dialog);
 
-  g_clear_pointer (&priv->new_printer_name, g_free);
   g_clear_pointer (&priv->new_printer_location, g_free);
   g_clear_pointer (&priv->new_printer_make_and_model, g_free);
 
@@ -902,6 +905,19 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *dialog,
     }
 
   actualize_printers_list (self);
+
+  /* Scroll the view to show the newly added printer-entry. */
+  scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (priv->builder,
+                                                                 "scrolled-window"));
+  adjustment = gtk_scrolled_window_get_vadjustment (scrolled_window);
+
+  printer_entry = GTK_WIDGET (g_hash_table_lookup (priv->printer_entries,
+                                                   priv->new_printer_name));
+  gtk_widget_get_allocation (printer_entry, &allocation);
+  g_clear_pointer (&priv->new_printer_name, g_free);
+
+  gtk_adjustment_set_value (adjustment,
+                            allocation.y - gtk_widget_get_margin_top (printer_entry));
 }
 
 static void
