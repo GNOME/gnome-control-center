@@ -120,8 +120,6 @@ connect_wifi_page (CEPageWifi *page)
         g_signal_connect (widget, "toggled",
                           G_CALLBACK (all_user_changed), page);
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_zone"));
 }
 
 static void
