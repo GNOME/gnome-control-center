@@ -141,6 +141,7 @@ connect_details_page (CEPageDetails *page)
         NMDeviceState state;
         NMAccessPoint *active_ap;
         const gchar *str;
+        const gchar *type;
         gboolean device_is_active;
 
         if (NM_IS_DEVICE_WIFI (page->device))
@@ -241,6 +242,16 @@ connect_details_page (CEPageDetails *page)
         /* Forget button */
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_forget"));
         g_signal_connect (widget, "clicked", G_CALLBACK (forget_cb), page);
+
+        type = nm_setting_connection_get_connection_type (sc);
+        if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))
+                gtk_button_set_label (GTK_BUTTON (widget), _("Forget Connection"));
+        else if (g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME))
+                gtk_button_set_label (GTK_BUTTON (widget), _("Remove Connection Profile"));
+        else if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME))
+                gtk_button_set_label (GTK_BUTTON (widget), _("Remove VPN"));
+        else
+                gtk_widget_hide (widget);
 }
 
 static void
