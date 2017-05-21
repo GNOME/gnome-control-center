@@ -53,23 +53,6 @@ G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, G_TYPE_OBJECT)
 static void page_changed (CEPage *page, gpointer user_data);
 
 static void
-selection_changed (GtkTreeSelection *selection, NetConnectionEditor *editor)
-{
-        GtkWidget *widget;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gint page;
-
-        if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-                return;
-        gtk_tree_model_get (model, &iter, 1, &page, -1);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (editor->builder,
-                                                     "details_notebook"));
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), page);
-}
-
-static void
 cancel_editing (NetConnectionEditor *editor)
 {
         gtk_widget_hide (editor->window);
@@ -164,7 +147,6 @@ static void
 net_connection_editor_init (NetConnectionEditor *editor)
 {
         GError *error = NULL;
-        GtkTreeSelection *selection;
 
         editor->builder = gtk_builder_new ();
 
@@ -178,10 +160,6 @@ net_connection_editor_init (NetConnectionEditor *editor)
         }
 
         editor->window = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_dialog"));
-        selection = GTK_TREE_SELECTION (gtk_builder_get_object (editor->builder,
-                                                                "details_page_list_selection"));
-        g_signal_connect (selection, "changed",
-                          G_CALLBACK (selection_changed), editor);
 }
 
 void
@@ -431,6 +409,7 @@ page_initialized (CEPage *page, GError *error, NetConnectionEditor *editor)
 {
         GtkNotebook *notebook;
         GtkWidget *widget;
+        GtkWidget *label;
         gint position;
         GList *children, *l;
         gint i;
@@ -446,7 +425,10 @@ page_initialized (CEPage *page, GError *error, NetConnectionEditor *editor)
                         break;
         }
         g_list_free (children);
-        gtk_notebook_insert_page (notebook, widget, NULL, i);
+
+        label = gtk_label_new (ce_page_get_title (page));
+
+        gtk_notebook_insert_page (notebook, widget, label, i);
 
         editor->initializing_pages = g_slist_remove (editor->initializing_pages, page);
         editor->pages = g_slist_append (editor->pages, page);
@@ -506,20 +488,11 @@ get_secrets_for_page (NetConnectionEditor *editor,
 static void
 add_page (NetConnectionEditor *editor, CEPage *page)
 {
-        GtkListStore *store;
-        GtkTreeIter iter;
-        const gchar *title;
         gint position;
 
-        store = GTK_LIST_STORE (gtk_builder_get_object (editor->builder,
-                                                "details_store"));
-        title = ce_page_get_title (page);
         position = g_slist_length (editor->initializing_pages);
         g_object_set_data (G_OBJECT (page), "position", GINT_TO_POINTER (position));
-        gtk_list_store_insert_with_values (store, &iter, -1,
-                                           0, title,
-                                           1, position,
-                                           -1);
+
         editor->initializing_pages = g_slist_append (editor->initializing_pages, page);
 
         g_signal_connect (page, "changed", G_CALLBACK (page_changed), editor);
@@ -533,8 +506,6 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         GSList *pages, *l;
         NMSettingConnection *sc;
         const gchar *type;
-        GtkTreeSelection *selection;
-        GtkTreePath *path;
 
         editor->is_new_connection = !nm_client_get_connection_by_uuid (editor->client,
                                                                        nm_connection_get_uuid (connection));
@@ -596,12 +567,6 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                 }
         }
         g_slist_free (pages);
-
-        selection = GTK_TREE_SELECTION (gtk_builder_get_object (editor->builder,
-                                                                "details_page_list_selection"));
-        path = gtk_tree_path_new_first ();
-        gtk_tree_selection_select_path (selection, path);
-        gtk_tree_path_free (path);
 }
 
 static NMConnection *
