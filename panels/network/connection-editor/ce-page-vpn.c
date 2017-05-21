@@ -31,20 +31,6 @@
 
 G_DEFINE_TYPE (CEPageVpn, ce_page_vpn, CE_TYPE_PAGE)
 
-static void
-all_user_changed (GtkToggleButton *b, CEPageVpn *page)
-{
-        gboolean all_users;
-        NMSettingConnection *sc;
-
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        all_users = gtk_toggle_button_get_active (b);
-
-        g_object_set (sc, "permissions", NULL, NULL);
-        if (!all_users)
-                nm_setting_connection_add_permission (sc, "user", g_get_user_name (), NULL);
-}
-
 /* Hack to make the plugin-provided editor widget fit in better with
  * the control center by changing
  *
@@ -120,18 +106,10 @@ static void
 connect_vpn_page (CEPageVpn *page)
 {
         const gchar *name;
-        GtkWidget *widget;
 
         name = nm_setting_connection_get_id (page->setting_connection);
         gtk_entry_set_text (page->name, name);
         g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "all_user_check"));
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
-                                      nm_setting_connection_get_num_permissions (page->setting_connection) == 0);
-        g_signal_connect (widget, "toggled",
-                          G_CALLBACK (all_user_changed), page);
 }
 
 static gboolean

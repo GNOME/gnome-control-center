@@ -34,20 +34,6 @@
 G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 
 static void
-all_user_changed (GtkToggleButton *b, CEPageEthernet *page)
-{
-        gboolean all_users;
-        NMSettingConnection *sc;
-
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        all_users = gtk_toggle_button_get_active (b);
-
-        g_object_set (sc, "permissions", NULL, NULL);
-        if (!all_users)
-                nm_setting_connection_add_permission (sc, "user", g_get_user_name (), NULL);
-}
-
-static void
 mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
 {
         if (gtk_spin_button_get_value_as_int (mtu) == 0)
@@ -60,11 +46,9 @@ static void
 connect_ethernet_page (CEPageEthernet *page)
 {
         NMSettingWired *setting = page->setting_wired;
-        NMSettingConnection *sc;
         int mtu_def;
         char **mac_list;
         const char *s_mac_str;
-        GtkWidget *widget;
         const gchar *name;
         const gchar *cloned_mac;
 
@@ -96,22 +80,6 @@ connect_ethernet_page (CEPageEthernet *page)
 
         g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
         g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (ce_page_changed), page);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "auto_connect_check"));
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        g_object_bind_property (sc, "autoconnect",
-                                widget, "active",
-                                G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-        g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "all_user_check"));
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
-                                      nm_setting_connection_get_num_permissions (sc) == 0);
-        g_signal_connect (widget, "toggled",
-                          G_CALLBACK (all_user_changed), page);
-        g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
 }
 
 static void
