@@ -20,8 +20,6 @@ libconnection_editor_la_SOURCES = 		\
 	ce-page-ip6.c				\
 	ce-page-security.h			\
 	ce-page-security.c			\
-	ce-page-reset.h				\
-	ce-page-reset.c				\
 	ce-page-ethernet.h			\
 	ce-page-ethernet.c			\
 	ce-page-8021x-security.h		\

@@ -31,6 +31,12 @@
 
 G_DEFINE_TYPE (CEPageDetails, ce_page_details, CE_TYPE_PAGE)
 
+static void
+forget_cb (GtkButton *button, CEPageDetails *page)
+{
+        net_connection_editor_forget (page->editor);
+}
+
 static gchar *
 get_ap_security_string (NMAccessPoint *ap)
 {
@@ -231,6 +237,10 @@ connect_details_page (CEPageDetails *page)
         g_signal_connect (widget, "toggled",
                           G_CALLBACK (all_user_changed), page);
         g_signal_connect_swapped (widget, "toggled", G_CALLBACK (ce_page_changed), page);
+
+        /* Forget button */
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_forget"));
+        g_signal_connect (widget, "clicked", G_CALLBACK (forget_cb), page);
 }
 
 static void
@@ -244,10 +254,11 @@ ce_page_details_class_init (CEPageDetailsClass *class)
 }
 
 CEPage *
-ce_page_details_new (NMConnection     *connection,
-                     NMClient         *client,
-                     NMDevice         *device,
-                     NMAccessPoint    *ap)
+ce_page_details_new (NMConnection        *connection,
+                     NMClient            *client,
+                     NMDevice            *device,
+                     NMAccessPoint       *ap,
+                     NetConnectionEditor *editor)
 {
         CEPageDetails *page;
 
@@ -257,6 +268,7 @@ ce_page_details_new (NMConnection     *connection,
                                              "/org/gnome/control-center/network/details-page.ui",
                                              _("Details")));
 
+        page->editor = editor;
         page->device = device;
         page->ap = ap;
 
@@ -264,4 +276,3 @@ ce_page_details_new (NMConnection     *connection,
 
         return CE_PAGE (page);
 }
-
