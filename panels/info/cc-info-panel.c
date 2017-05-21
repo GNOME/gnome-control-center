@@ -64,11 +64,6 @@ CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
 #define INFO_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
 
-typedef struct {
-  /* Will be one or 2 GPU name strings, or "Unknown" */
-  char *hardware_string;
-} GraphicsData;
-
 typedef struct
 {
   const char *content_type;
@@ -83,11 +78,6 @@ struct _CcInfoPanelPrivate
 {
   GtkBuilder    *builder;
   GtkWidget     *extra_options_dialog;
-  char          *gnome_version;
-  char          *gnome_distributor;
-  char          *gnome_date;
-
-  GCancellable  *cancellable;
 
   /* Free space */
   GList         *primary_mounts;
@@ -96,17 +86,7 @@ struct _CcInfoPanelPrivate
   /* Media */
   GSettings     *media_settings;
   GtkWidget     *other_application_combo;
-
-  GraphicsData  *graphics_data;
 };
-
-
-static void
-graphics_data_free (GraphicsData *gdata)
-{
-  g_free (gdata->hardware_string);
-  g_slice_free (GraphicsData, gdata);
-}
 
 static void
 cc_info_panel_dispose (GObject *object)
@@ -114,7 +94,6 @@ cc_info_panel_dispose (GObject *object)
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
 
   g_clear_object (&priv->builder);
-  g_clear_pointer (&priv->graphics_data, graphics_data_free);
   g_clear_pointer (&priv->extra_options_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->dispose (object);
@@ -124,15 +103,6 @@ static void
 cc_info_panel_finalize (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
-
-  if (priv->cancellable)
-    {
-      g_cancellable_cancel (priv->cancellable);
-      g_clear_object (&priv->cancellable);
-    }
-  g_free (priv->gnome_version);
-  g_free (priv->gnome_date);
-  g_free (priv->gnome_distributor);
 
   g_clear_object (&priv->media_settings);
 
