@@ -182,62 +182,47 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="box3">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">24</property>
-                    <property name="margin_bottom">5</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="heading_routes">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
+                        <property name="hexpand">True</property>
                         <property name="label" translatable="yes">Routes</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label2">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="xalign">1</property>
                         <property name="label" translatable="yes">Automatic</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="auto_routes_switch">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="auto_routes_switch-accessible">
                             <property name="accessible-name" translatable="yes">Automatic Routes</property>
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
                     <property name="position">5</property>
                   </packing>
                 </child>
@@ -247,7 +232,76 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <placeholder/>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">horizontal</property>
+                        <child>
+                          <object class="GtkLabel" id="routes_address_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Address</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="routes_netmask_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Netmask</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="routes_gateway_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Gateway</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="routes_metric_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes" comments="Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)">Metric</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+
+                        <!-- This invisible box is used to add some width in the
+                             end of the header row, assuming the space used by the
+                             delete button in the rows -->
+                        <child>
+                          <object class="GtkBox" id="routes_stub_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                        </child>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -283,5 +337,17 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkSizeGroup" id="routes_metric_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="routes_metric_label" />
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="routes_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="routes_stub_box" />
+    </widgets>
   </object>
 </interface>
