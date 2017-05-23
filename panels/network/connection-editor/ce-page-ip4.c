@@ -69,7 +69,7 @@ method_changed (GtkToggleButton *radio, CEPageIP4 *page)
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_section"));
         gtk_widget_set_visible (widget, addr_enabled);
-        gtk_widget_set_sensitive (page->dns_list, dns_enabled);
+        gtk_widget_set_sensitive (page->dns_entry, dns_enabled);
         gtk_widget_set_sensitive (page->routes_list, routes_enabled);
         gtk_widget_set_sensitive (page->never_default, routes_enabled);
 
@@ -343,93 +343,36 @@ add_address_section (CEPageIP4 *page)
 }
 
 static void
-add_dns_row (CEPageIP4   *page,
-             const gchar *address)
-{
-        GtkWidget *row;
-        GtkWidget *row_box;
-        GtkWidget *label;
-        GtkWidget *widget;
-        GtkWidget *delete_button;
-        GtkWidget *image;
-
-        row = gtk_list_box_row_new ();
-
-        row_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        label = gtk_label_new (_("Server"));
-        gtk_widget_set_halign (label, GTK_ALIGN_END);
-        gtk_box_pack_start (GTK_BOX (row_box), label, FALSE, FALSE, 0);
-        widget = gtk_entry_new ();
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-        g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
-        g_object_set_data (G_OBJECT (row), "address", widget);
-        gtk_entry_set_text (GTK_ENTRY (widget), address);
-        gtk_widget_set_margin_start (widget, 10);
-        gtk_widget_set_margin_end (widget, 10);
-        gtk_widget_set_hexpand (widget, TRUE);
-        gtk_box_pack_start (GTK_BOX (row_box), widget, TRUE, TRUE, 0);
-
-        delete_button = gtk_button_new ();
-        gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect (delete_button, "clicked", G_CALLBACK (remove_row), page);
-        image = gtk_image_new_from_icon_name ("user-trash-symbolic", GTK_ICON_SIZE_MENU);
-        atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete DNS Server"));
-        gtk_button_set_image (GTK_BUTTON (delete_button), image);
-        gtk_box_pack_start (GTK_BOX (row_box), delete_button, FALSE, FALSE, 0);
-        g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
-
-        gtk_widget_set_margin_start (row_box, 10);
-        gtk_widget_set_margin_end (row_box, 10);
-        gtk_widget_set_margin_top (row_box, 10);
-        gtk_widget_set_margin_bottom (row_box, 10);
-        gtk_widget_set_halign (row_box, GTK_ALIGN_FILL);
-
-        gtk_container_add (GTK_CONTAINER (row), row_box);
-        gtk_widget_show_all (row);
-        gtk_container_add (GTK_CONTAINER (page->dns_list), row);
-
-        update_row_sensitivity (page, page->dns_list);
-}
-
-static void
-add_empty_dns_row (CEPageIP4 *page)
-{
-        add_dns_row (page, "");
-}
-
-static void
 add_dns_section (CEPageIP4 *page)
 {
-        GtkWidget *widget;
-        GtkWidget *frame;
-        GtkWidget *list;
+        GtkEntry *entry;
+        GString *string;
         gint i;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_section"));
-
-        frame = gtk_frame_new (NULL);
-        gtk_container_add (GTK_CONTAINER (widget), frame);
-        page->dns_list = list = gtk_list_box_new ();
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
         gtk_switch_set_active (page->auto_dns, !nm_setting_ip_config_get_ignore_auto_dns (page->setting));
         g_signal_connect (page->auto_dns, "notify::active", G_CALLBACK (switch_toggled), page);
 
-        add_section_toolbar (page, widget, G_CALLBACK (add_empty_dns_row));
+        page->dns_entry = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "dns_entry"));
+        entry = GTK_ENTRY (page->dns_entry);
+        string = g_string_new ("");
 
         for (i = 0; i < nm_setting_ip_config_get_num_dns (page->setting); i++) {
                 const char *address;
 
                 address = nm_setting_ip_config_get_dns (page->setting, i);
-                add_dns_row (page, address);
-        }
-        if (nm_setting_ip_config_get_num_dns (page->setting) == 0)
-                add_empty_dns_row (page);
 
-        gtk_widget_show_all (widget);
+                if (i > 0)
+                        g_string_append (string, ", ");
+
+                g_string_append (string, address);
+        }
+
+        gtk_entry_set_text (entry, string->str);
+
+        g_signal_connect_swapped (entry, "notify::text", G_CALLBACK (ce_page_changed), page);
+
+        g_string_free (string, TRUE);
 }
 
 static void
@@ -698,9 +641,12 @@ ui_to_setting (CEPageIP4 *page)
         GPtrArray *addresses = NULL;
         GPtrArray *dns_servers = NULL;
         GPtrArray *routes = NULL;
+        GStrv dns_addresses = NULL;
         GList *children, *l;
         gboolean ret = TRUE;
         const char *default_gateway = NULL;
+        gchar *dns_text = NULL;
+        guint i;
 
         if (gtk_toggle_button_get_active (page->disabled)) {
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
@@ -789,37 +735,32 @@ ui_to_setting (CEPageIP4 *page)
         }
 
         dns_servers = g_ptr_array_new_with_free_func (g_free);
+        dns_text = g_strstrip (g_strdup (gtk_entry_get_text (GTK_ENTRY (page->dns_entry))));
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
             g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
-                children = gtk_container_get_children (GTK_CONTAINER (page->dns_list));
+                dns_addresses = g_strsplit_set (dns_text, ", ", -1);
         else
-                children = NULL;
+                dns_addresses = NULL;
 
-        for (l = children; l; l = l->next) {
-                GtkWidget *row = l->data;
-                GtkEntry *entry;
+        for (i = 0; dns_addresses && dns_addresses[i]; i++) {
                 const gchar *text;
 
-                entry = GTK_ENTRY (g_object_get_data (G_OBJECT (row), "address"));
-                if (!entry)
+                text = dns_addresses[i];
+
+                if (!text || !*text)
                         continue;
 
-                text = gtk_entry_get_text (entry);
-                if (!*text) {
-                        /* ignore empty rows */
-                        widget_unset_error (GTK_WIDGET (entry));
-                        continue;
-                }
-
-                if (text && !nm_utils_ipaddr_valid (AF_INET, text)) {
-                        widget_set_error (GTK_WIDGET (entry));
+                if (!nm_utils_ipaddr_valid (AF_INET, text)) {
+                        g_ptr_array_remove_range (dns_servers, 0, dns_servers->len);
+                        widget_set_error (page->dns_entry);
                         ret = FALSE;
+                        break;
                 } else {
-                        widget_unset_error (GTK_WIDGET (entry));
+                        widget_unset_error (page->dns_entry);
                         g_ptr_array_add (dns_servers, g_strdup (text));
                 }
         }
-        g_list_free (children);
+        g_clear_pointer (&dns_addresses, g_strfreev);
 
         if (dns_servers->len == 0) {
                 g_ptr_array_free (dns_servers, TRUE);
@@ -936,6 +877,8 @@ out:
 
         if (routes)
                 g_ptr_array_free (routes, TRUE);
+
+        g_clear_pointer (&dns_text, g_free);
 
         return ret;
 }
