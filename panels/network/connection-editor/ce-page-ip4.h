@@ -48,7 +48,7 @@ struct _CEPageIP4
         GtkToggleButton *disabled;
         GtkWidget       *address_list;
         GtkSwitch       *auto_dns;
-        GtkWidget       *dns_list;
+        GtkWidget       *dns_entry;
         GtkSwitch       *auto_routes;
         GtkWidget       *routes_list;
         GtkWidget       *never_default;

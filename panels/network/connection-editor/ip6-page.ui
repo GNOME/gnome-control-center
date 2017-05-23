@@ -128,80 +128,72 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="box1">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">24</property>
-                    <property name="margin_bottom">6</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="heading_dns">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">DNS</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label1">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="xalign">1</property>
                         <property name="label" translatable="yes">Automatic</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="auto_dns_switch">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">end</property>
+                        <property name="valign">center</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="auto_dns_switch-accessible">
                             <property name="accessible-name" translatable="yes">Automatic DNS</property>
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="dns_section">
+                  <object class="GtkEntry" id="dns_entry">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
+                    <property name="can_focus">True</property>
+                    </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
                     <property name="position">3</property>
                   </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Separate IP addresses with commas</property>
+                    <style>
+                      <class name="dim-label" />
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="0.8"/>
+                    </attributes>
+                  </object>
                 </child>
                 <child>
                   <object class="GtkBox" id="box3">
@@ -260,7 +252,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                   </packing>
                 </child>
                 <child>
@@ -275,7 +267,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                   </packing>
                 </child>
                 <child>
