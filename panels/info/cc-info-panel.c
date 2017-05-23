@@ -22,6 +22,7 @@
 
 #include "cc-info-panel.h"
 #include "cc-info-overview-panel.h"
+#include "cc-info-default-apps-panel.h"
 #include "cc-info-resources.h"
 #include "info-cleanup.h"
 
@@ -63,16 +64,6 @@ CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
 
 #define INFO_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
-
-typedef struct
-{
-  const char *content_type;
-  const char *label;
-  /* A pattern used to filter supported mime types
-     when changing preferred applications. NULL
-     means no other types should be changed */
-  const char *extra_type_filter;
-} DefaultAppData;
 
 struct _CcInfoPanelPrivate
 {
@@ -120,6 +111,7 @@ cc_info_panel_class_init (CcInfoPanelClass *klass)
   object_class->finalize = cc_info_panel_finalize;
 
   g_type_ensure (CC_TYPE_INFO_OVERVIEW_PANEL);
+  g_type_ensure (CC_TYPE_INFO_DEFAULT_APPS_PANEL);
 }
 
 static void
@@ -149,116 +141,6 @@ on_section_changed (GtkTreeSelection  *selection,
 
   gtk_tree_path_free (path);
 }
-
-static void
-default_app_changed (GtkAppChooserButton *button,
-                     CcInfoPanel         *self)
-{
-  GAppInfo *info;
-  GError *error = NULL;
-  DefaultAppData *app_data;
-  int i;
-
-  info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (button));
-  app_data = g_object_get_data (G_OBJECT (button), "cc-default-app-data");
-
-  if (g_app_info_set_as_default_for_type (info, app_data->content_type, &error) == FALSE)
-    {
-      g_warning ("Failed to set '%s' as the default application for '%s': %s",
-                 g_app_info_get_name (info), app_data->content_type, error->message);
-      g_error_free (error);
-      error = NULL;
-    }
-  else
-    {
-      g_debug ("Set '%s' as the default handler for '%s'",
-               g_app_info_get_name (info), app_data->content_type);
-    }
-
-  if (app_data->extra_type_filter)
-    {
-      const char *const *mime_types;
-      GPatternSpec *pattern;
-
-      pattern = g_pattern_spec_new (app_data->extra_type_filter);
-      mime_types = g_app_info_get_supported_types (info);
-
-      for (i = 0; mime_types && mime_types[i]; i++)
-        {
-          if (!g_pattern_match_string (pattern, mime_types[i]))
-            continue;
-
-          if (g_app_info_set_as_default_for_type (info, mime_types[i], &error) == FALSE)
-            {
-              g_warning ("Failed to set '%s' as the default application for secondary "
-                         "content type '%s': %s",
-                         g_app_info_get_name (info), mime_types[i], error->message);
-              g_error_free (error);
-            }
-          else
-            {
-              g_debug ("Set '%s' as the default handler for '%s'",
-              g_app_info_get_name (info), mime_types[i]);
-            }
-        }
-
-      g_pattern_spec_free (pattern);
-    }
-
-  g_object_unref (info);
-}
-
-static void
-info_panel_setup_default_app (CcInfoPanel    *self,
-                              DefaultAppData *data,
-                              guint           left_attach,
-                              guint           top_attach)
-{
-  GtkWidget *button;
-  GtkWidget *grid;
-  GtkWidget *label;
-
-  grid = WID ("default_apps_grid");
-
-  button = gtk_app_chooser_button_new (data->content_type);
-  g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
-
-  gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
-  gtk_grid_attach (GTK_GRID (grid), button, left_attach, top_attach,
-                   1, 1);
-  g_signal_connect (G_OBJECT (button), "changed",
-                    G_CALLBACK (default_app_changed), self);
-  gtk_widget_show (button);
-
-  label = WID(data->label);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
-}
-
-static DefaultAppData preferred_app_infos[] = {
-  /* for web, we need to support text/html,
-     application/xhtml+xml and x-scheme-handler/https,
-     hence the "*" pattern
-  */
-  { "x-scheme-handler/http", "web-label", "*" },
-  { "x-scheme-handler/mailto", "mail-label", NULL },
-  { "text/calendar", "calendar-label", NULL },
-  { "audio/x-vorbis+ogg", "music-label", "audio/*" },
-  { "video/x-ogm+ogg", "video-label", "video/*" },
-  { "image/jpeg", "photos-label", "image/*" }
-};
-
-static void
-info_panel_setup_default_apps (CcInfoPanel  *self)
-{
-  int i;
-
-  for (i = 0; i < G_N_ELEMENTS(preferred_app_infos); i++)
-    {
-      info_panel_setup_default_app (self, &preferred_app_infos[i],
-                                    1, i);
-    }
-}
-
 static char **
 remove_elem_from_str_array (char **v,
                             const char *s)
@@ -825,6 +707,5 @@ cc_info_panel_init (CcInfoPanel *self)
 
   info_panel_setup_selector (self);
   info_panel_setup_overview (self);
-  info_panel_setup_default_apps (self);
   info_panel_setup_media (self);
 }
