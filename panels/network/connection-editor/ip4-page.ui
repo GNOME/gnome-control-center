@@ -104,7 +104,76 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <placeholder/>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Addresses</property>
+                        <property name="margin_top">24</property>
+                        <property name="margin_bottom">12</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">horizontal</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Address</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Netmask</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Gateway</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/>
+                            </attributes>
+                          </object>
+                        </child>
+
+                        <!-- This invisible box is used to add some width in the
+                             end of the header row, assuming the space used by the
+                             delete button in the rows -->
+                        <child>
+                          <object class="GtkBox" id="address_stub_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                        </child>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -348,6 +417,12 @@
     <property name="mode">horizontal</property>
     <widgets>
       <widget name="routes_stub_box" />
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="address_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="address_stub_box" />
     </widgets>
   </object>
 </interface>
