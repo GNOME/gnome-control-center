@@ -34,6 +34,7 @@
 
 #define RADIO_IS_ACTIVE(x) (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(CE_PAGE (page)->builder, x))))
 
+static void ensure_empty_address_row (CEPageIP6 *page);
 static void ensure_empty_routes_row (CEPageIP6 *page);
 
 G_DEFINE_TYPE (CEPageIP6, ce_page_ip6, CE_TYPE_PAGE)
@@ -182,72 +183,59 @@ add_address_row (CEPageIP6   *page,
                  const gchar *network,
                  const gchar *gateway)
 {
+        GtkSizeGroup *group;
         GtkWidget *row;
-        GtkWidget *row_grid;
-        GtkWidget *label;
+        GtkWidget *row_box;
         GtkWidget *widget;
         GtkWidget *delete_button;
         GtkWidget *image;
 
         row = gtk_list_box_row_new ();
 
-        row_grid = gtk_grid_new ();
-        label = gtk_label_new (_("Address"));
-        gtk_widget_set_halign (label, GTK_ALIGN_END);
-        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 1, 1, 1);
+        row_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_style_context_add_class (gtk_widget_get_style_context (row_box), "linked");
+
         widget = gtk_entry_new ();
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_address_row), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
-        gtk_widget_set_margin_start (widget, 10);
-        gtk_widget_set_margin_end (widget, 10);
+        gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 1, 1, 1);
+        gtk_container_add (GTK_CONTAINER (row_box), widget);
 
-        label = gtk_label_new (_("Prefix"));
-        gtk_widget_set_halign (label, GTK_ALIGN_END);
-        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 2, 1, 1);
         widget = gtk_entry_new ();
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_address_row), page);
         g_object_set_data (G_OBJECT (row), "prefix", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), network);
-        gtk_widget_set_margin_start (widget, 10);
-        gtk_widget_set_margin_end (widget, 10);
+        gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 2, 1, 1);
+        gtk_container_add (GTK_CONTAINER (row_box), widget);
 
-        label = gtk_label_new (_("Gateway"));
-        gtk_widget_set_halign (label, GTK_ALIGN_END);
-        gtk_grid_attach (GTK_GRID (row_grid), label, 1, 3, 1, 1);
         widget = gtk_entry_new ();
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
+        g_signal_connect_swapped (widget, "activate", G_CALLBACK (ensure_empty_address_row), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "");
-        gtk_widget_set_margin_start (widget, 10);
-        gtk_widget_set_margin_end (widget, 10);
+        gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
         gtk_widget_set_hexpand (widget, TRUE);
-        gtk_grid_attach (GTK_GRID (row_grid), widget, 2, 3, 1, 1);
+        gtk_container_add (GTK_CONTAINER (row_box), widget);
 
         delete_button = gtk_button_new ();
+        gtk_widget_set_sensitive (delete_button, FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
         g_signal_connect (delete_button, "clicked", G_CALLBACK (remove_row), page);
-        image = gtk_image_new_from_icon_name ("user-trash-symbolic", GTK_ICON_SIZE_MENU);
+        image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Address"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
-        gtk_grid_attach (GTK_GRID (row_grid), delete_button, 3, 2, 1, 1);
+        gtk_container_add (GTK_CONTAINER (row_box), delete_button);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
-        gtk_grid_set_row_spacing (GTK_GRID (row_grid), 10);
-        gtk_widget_set_margin_start (row_grid, 10);
-        gtk_widget_set_margin_end (row_grid, 10);
-        gtk_widget_set_margin_top (row_grid, 10);
-        gtk_widget_set_margin_bottom (row_grid, 10);
-        gtk_widget_set_halign (row_grid, GTK_ALIGN_FILL);
+        group = GTK_SIZE_GROUP (gtk_builder_get_object (CE_PAGE (page)->builder, "address_sizegroup"));
+        gtk_size_group_add_widget (group, delete_button);
 
-        gtk_container_add (GTK_CONTAINER (row), row_grid);
+        gtk_container_add (GTK_CONTAINER (row), row_box);
         gtk_widget_show_all (row);
         gtk_container_add (GTK_CONTAINER (page->address_list), row);
 
@@ -255,65 +243,37 @@ add_address_row (CEPageIP6   *page,
 }
 
 static void
-add_empty_address_row (CEPageIP6 *page)
+ensure_empty_address_row (CEPageIP6 *page)
 {
-        add_address_row (page, "", "", "");
-}
+        GList *children, *l;
 
-static void
-add_section_toolbar (CEPageIP6 *page, GtkWidget *section, GCallback add_cb)
-{
-        GtkWidget *toolbar;
-        GtkToolItem *item;
-        GtkStyleContext *context;
-        GtkWidget *box;
-        GtkWidget *button;
-        GtkWidget *image;
+        children = gtk_container_get_children (GTK_CONTAINER (page->address_list));
+        l = children;
 
-        toolbar = gtk_toolbar_new ();
-        gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
-        gtk_toolbar_set_icon_size (GTK_TOOLBAR (toolbar), GTK_ICON_SIZE_MENU);
-        context = gtk_widget_get_style_context (toolbar);
-        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
-        gtk_style_context_add_class (context, GTK_STYLE_CLASS_INLINE_TOOLBAR);
-        gtk_container_add (GTK_CONTAINER (section), toolbar);
+        while (l && l->next)
+                l = l->next;
 
-        item = gtk_separator_tool_item_new ();
-        gtk_tool_item_set_expand (item, TRUE);
-        gtk_separator_tool_item_set_draw (GTK_SEPARATOR_TOOL_ITEM (item), FALSE);
-        gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (item), 0);
+        /* Add the last, stub row if needed*/
+        if (!l || validate_row (l->data))
+                add_address_row (page, "", "", "");
 
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        item = gtk_tool_item_new ();
-        gtk_container_add (GTK_CONTAINER (item), box);
-        button = gtk_button_new ();
-        g_signal_connect_swapped (button, "clicked", G_CALLBACK (add_cb), page);
-        image = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_MENU);
-        atk_object_set_name (gtk_widget_get_accessible (button), _("Add"));
-        gtk_button_set_image (GTK_BUTTON (button), image);
-        gtk_container_add (GTK_CONTAINER (box), button);
-        gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (item), 1);
+        g_list_free (children);
 }
 
 static void
 add_address_section (CEPageIP6 *page)
 {
         GtkWidget *widget;
-        GtkWidget *frame;
         GtkWidget *list;
         gint i;
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_section"));
 
-        frame = gtk_frame_new (NULL);
-        gtk_container_add (GTK_CONTAINER (widget), frame);
         page->address_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
         gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (frame), list);
-
-        add_section_toolbar (page, widget, G_CALLBACK (add_empty_address_row));
+        gtk_container_add (GTK_CONTAINER (widget), list);
 
         for (i = 0; i < nm_setting_ip_config_get_num_addresses (page->setting); i++) {
                 NMIPAddress *addr;
@@ -326,7 +286,7 @@ add_address_section (CEPageIP6 *page)
                 g_free (netmask);
         }
         if (nm_setting_ip_config_get_num_addresses (page->setting) == 0)
-                add_empty_address_row (page);
+                ensure_empty_address_row (page);
 
         gtk_widget_show_all (widget);
 }
@@ -688,6 +648,9 @@ ui_to_setting (CEPageIP6 *page)
                                       NM_SETTING_IP_CONFIG_GATEWAY, text_gateway,
                                       NULL);
                 nm_setting_ip_config_add_address (page->setting, addr);
+
+                if (!l || !l->next)
+                        ensure_empty_address_row (page);
         }
         g_list_free (children);
 
