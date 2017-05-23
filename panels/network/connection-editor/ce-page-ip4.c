@@ -32,6 +32,8 @@
 #include "ce-page-ip4.h"
 #include "ui-helpers.h"
 
+#define RADIO_IS_ACTIVE(x) (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(CE_PAGE (page)->builder, x))))
+
 G_DEFINE_TYPE (CEPageIP4, ce_page_ip4, CE_TYPE_PAGE)
 
 enum {
@@ -48,32 +50,21 @@ enum {
 };
 
 static void
-method_changed (GtkComboBox *combo, CEPageIP4 *page)
+method_changed (GtkToggleButton *radio, CEPageIP4 *page)
 {
         gboolean addr_enabled;
         gboolean dns_enabled;
         gboolean routes_enabled;
-        guint method;
         GtkWidget *widget;
 
-        method = gtk_combo_box_get_active (combo);
-        switch (method) {
-        case IP4_METHOD_AUTO:
-                addr_enabled = FALSE;
-                dns_enabled = TRUE;
-                routes_enabled = TRUE;
-                break;
-        case IP4_METHOD_MANUAL:
-                addr_enabled = TRUE;
-                dns_enabled = TRUE;
-                routes_enabled = TRUE;
-                break;
-        case IP4_METHOD_LINK_LOCAL:
-        default:
+        if (RADIO_IS_ACTIVE ("radio_disabled")) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
-                break;
+        } else {
+                addr_enabled = RADIO_IS_ACTIVE ("radio_manual");
+                dns_enabled = !RADIO_IS_ACTIVE ("radio_local");
+                routes_enabled = !RADIO_IS_ACTIVE ("radio_local");
         }
 
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "address_section"));
@@ -593,50 +584,38 @@ add_routes_section (CEPageIP4 *page)
         gtk_widget_show_all (widget);
 }
 
+enum
+{
+        RADIO_AUTOMATIC,
+        RADIO_LOCAL,
+        RADIO_MANUAL,
+        RADIO_DISABLED,
+        N_RADIO
+};
+
 static void
 connect_ip4_page (CEPageIP4 *page)
 {
+        GtkToggleButton *radios[N_RADIO];
         GtkWidget *content;
         const gchar *str_method;
         gboolean disabled;
-        GtkListStore *store;
-        GtkTreeIter iter;
-        guint method;
+        guint method, i;
 
         add_address_section (page);
         add_dns_section (page);
         add_routes_section (page);
 
-        page->enabled = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "switch_enable"));
-        g_signal_connect (page->enabled, "notify::active", G_CALLBACK (switch_toggled), page);
+        page->disabled = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_disabled"));
 
         str_method = nm_setting_ip_config_get_method (page->setting);
         disabled = g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_DISABLED) == 0;
-        gtk_switch_set_active (page->enabled, !disabled);
-        g_signal_connect_swapped (page->enabled, "notify::active", G_CALLBACK (ce_page_changed), page);
+        gtk_toggle_button_set_active (page->disabled, disabled);
+        g_signal_connect_swapped (page->disabled, "notify::active", G_CALLBACK (ce_page_changed), page);
         content = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "page_content"));
-        g_object_bind_property (page->enabled, "active",
+        g_object_bind_property (page->disabled, "active",
                                 content, "sensitive",
-                                G_BINDING_SYNC_CREATE);
-
-        page->method = GTK_COMBO_BOX (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_addresses"));
-
-        store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_UINT);
-        gtk_list_store_insert_with_values (store, &iter, -1,
-                                           METHOD_COL_NAME, _("Automatic (DHCP)"),
-                                           METHOD_COL_METHOD, IP4_METHOD_AUTO,
-                                           -1);
-        gtk_list_store_insert_with_values (store, &iter, -1,
-                                           METHOD_COL_NAME, _("Manual"),
-                                           METHOD_COL_METHOD, IP4_METHOD_MANUAL,
-                                           -1);
-        gtk_list_store_insert_with_values (store, &iter, -1,
-                                           METHOD_COL_NAME, _("Link-Local Only"),
-                                           METHOD_COL_METHOD, IP4_METHOD_LINK_LOCAL,
-                                           -1);
-
-        gtk_combo_box_set_model (page->method, GTK_TREE_MODEL (store));
-        g_object_unref (G_OBJECT (store));
+                                G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
         method = IP4_METHOD_AUTO;
         if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL) == 0) {
@@ -654,9 +633,33 @@ connect_ip4_page (CEPageIP4 *page)
                                       nm_setting_ip_config_get_never_default (page->setting));
         g_signal_connect_swapped (page->never_default, "toggled", G_CALLBACK (ce_page_changed), page);
 
-        g_signal_connect (page->method, "changed", G_CALLBACK (method_changed), page);
-        if (method != IP4_METHOD_SHARED && method != IP4_METHOD_DISABLED)
-                gtk_combo_box_set_active (page->method, method);
+        /* Connect radio buttons */
+        radios[RADIO_AUTOMATIC] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_automatic"));
+        radios[RADIO_LOCAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_local"));
+        radios[RADIO_MANUAL] = GTK_TOGGLE_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "radio_manual"));
+        radios[RADIO_DISABLED] = page->disabled;
+
+        for (i = RADIO_AUTOMATIC; i < RADIO_DISABLED; i++)
+                g_signal_connect (radios[i], "toggled", G_CALLBACK (method_changed), page);
+
+        switch (method) {
+        case IP4_METHOD_AUTO:
+                gtk_toggle_button_set_active (radios[RADIO_AUTOMATIC], TRUE);
+                break;
+        case IP4_METHOD_LINK_LOCAL:
+                gtk_toggle_button_set_active (radios[RADIO_LOCAL], TRUE);
+                break;
+        case IP4_METHOD_MANUAL:
+                gtk_toggle_button_set_active (radios[RADIO_MANUAL], TRUE);
+                break;
+        case IP4_METHOD_DISABLED:
+                gtk_toggle_button_set_active (radios[RADIO_DISABLED], TRUE);
+                break;
+        default:
+                break;
+        }
+
+        method_changed (NULL, page);
 }
 
 static gboolean
@@ -699,21 +702,15 @@ ui_to_setting (CEPageIP4 *page)
         gboolean ret = TRUE;
         const char *default_gateway = NULL;
 
-        if (!gtk_switch_get_active (page->enabled)) {
+        if (gtk_toggle_button_get_active (page->disabled)) {
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
         } else {
-                switch (gtk_combo_box_get_active (page->method)) {
-                case IP4_METHOD_MANUAL:
-                        method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
-                        break;
-                case IP4_METHOD_LINK_LOCAL:
-                        method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
-                        break;
-                default:
-                case IP4_METHOD_AUTO:
+                if (RADIO_IS_ACTIVE ("radio_automatic"))
                         method = NM_SETTING_IP4_CONFIG_METHOD_AUTO;
-                        break;
-                }
+                else if (RADIO_IS_ACTIVE ("radio_local"))
+                        method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
+                else if (RADIO_IS_ACTIVE ("radio_manual"))
+                        method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
         }
 
         addresses = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_address_unref);

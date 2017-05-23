@@ -45,14 +45,13 @@ struct _CEPageIP6
 
         NMSettingIPConfig *setting;
 
-        GtkSwitch      *enabled;
-        GtkComboBox    *method;
-        GtkWidget      *address_list;
-        GtkSwitch      *auto_dns;
-        GtkWidget      *dns_list;
-        GtkSwitch      *auto_routes;
-        GtkWidget      *routes_list;
-        GtkWidget      *never_default;
+        GtkToggleButton *disabled;
+        GtkWidget       *address_list;
+        GtkSwitch       *auto_dns;
+        GtkWidget       *dns_list;
+        GtkSwitch       *auto_routes;
+        GtkWidget       *routes_list;
+        GtkWidget       *never_default;
 };
 
 struct _CEPageIP6Class
