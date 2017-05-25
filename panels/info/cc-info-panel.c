@@ -70,10 +70,6 @@ struct _CcInfoPanelPrivate
   GtkBuilder    *builder;
   GtkWidget     *extra_options_dialog;
 
-  /* Free space */
-  GList         *primary_mounts;
-  guint64        total_bytes;
-
   /* Media */
   GSettings     *media_settings;
   GtkWidget     *other_application_combo;
