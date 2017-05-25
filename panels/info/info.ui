@@ -1,145 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="extra_options_dialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">10</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">dialog</property>
-    <property name="use_header_bar">1</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="extras-dialog-vbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child>
-          <object class="GtkBox" id="vbox1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="border_width">5</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkBox" id="vbox50">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">10</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="label61">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Select how other media should be handled</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkAlignment" id="alignment20">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="left_padding">12</property>
-                    <child>
-                      <object class="GtkBox" id="vbox51">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="spacing">6</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkGrid" id="table5">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="column_spacing">6</property>
-                            <property name="row_spacing">10</property>
-                            <child>
-                              <object class="GtkComboBox" id="media_other_type_combobox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="media_other_action_label">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Action:</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox" id="media_other_action_container">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="label63">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Type:</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_other_type_combobox</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
       <object class="GtkBox" id="info_vbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -221,326 +82,332 @@
                         <property name="tab_fill">False</property>
                       </packing>
                     </child>
+                    <!-- here -->
+                    <!-- <child>
+                         <object class="GtkBox" id="media_preferences_vbox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="orientation">horizontal</property>
+                         <child>
+                         <object class="GtkAlignment" id="alignment1">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <child>
+                         <object class="GtkBox" id="media_preferences_vbox3">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="border_width">10</property>
+                         <property name="spacing">10</property>
+                         <property name="orientation">vertical</property>
+                         <child>
+                         <object class="GtkBox" id="media_handling_vbox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="spacing">10</property>
+                         <property name="valign">start</property>
+                         <property name="vexpand">False</property>
+                         <property name="orientation">vertical</property>
+                         <child>
+                         <object class="GtkBox" id="vbox44">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="spacing">10</property>
+                         <property name="orientation">vertical</property>
+                         <child>
+                         <object class="GtkLabel" id="label42">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="xalign">0</property>
+                         <property name="label" translatable="yes">Select how media should be handled</property>
+                         <attributes>
+                         <attribute name="weight" value="bold"/>
+                         </attributes>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">False</property>
+                         <property name="position">0</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkAlignment" id="alignment18">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="left_padding">12</property>
+                         <child>
+                         <object class="GtkBox" id="vbox52">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="spacing">6</property>
+                         <property name="orientation">vertical</property>
+                         <child>
+                         <object class="GtkTable" id="table4">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="n_rows">5</property>
+                         <property name="n_columns">2</property>
+                         <property name="column_spacing">6</property>
+                         <property name="row_spacing">6</property>
+                         <child>
+                         <object class="GtkLabel" id="label44">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="xalign">1</property>
+                         <property name="label" translatable="yes">CD _audio</property>
+                         <property name="use_underline">True</property>
+                         <property name="mnemonic_widget">media_audio_cdda_combobox</property>
+                         <style>
+                         <class name="dim-label"/>
+                         </style>
+                         </object>
+                         <packing>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options"></property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkLabel" id="label50">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="xalign">1</property>
+                         <property name="label" translatable="yes">_DVD video</property>
+                         <property name="use_underline">True</property>
+                         <property name="mnemonic_widget">media_video_dvd_combobox</property>
+                         <style>
+                         <class name="dim-label"/>
+                         </style>
+                         </object>
+                         <packing>
+                         <property name="top_attach">1</property>
+                         <property name="bottom_attach">2</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options"></property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkAppChooserButton" id="media_audio_cdda_combobox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="content_type">x-content/audio-cdda</property>
+                         </object>
+                         <packing>
+                         <property name="left_attach">1</property>
+                         <property name="right_attach">2</property>
+                         <property name="y_options">GTK_FILL</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkAppChooserButton" id="media_video_dvd_combobox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="content_type">x-content/video-dvd</property>
+                         </object>
+                         <packing>
+                         <property name="left_attach">1</property>
+                         <property name="right_attach">2</property>
+                         <property name="top_attach">1</property>
+                         <property name="bottom_attach">2</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options">GTK_FILL</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkLabel" id="label54">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="xalign">1</property>
+                         <property name="label" translatable="yes">_Music player</property>
+                         <property name="use_underline">True</property>
+                         <property name="mnemonic_widget">media_music_player_combobox</property>
+                         <style>
+                         <class name="dim-label"/>
+                         </style>
+                         </object>
+                         <packing>
+                         <property name="top_attach">2</property>
+                         <property name="bottom_attach">3</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options"></property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkAppChooserButton" id="media_music_player_combobox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="content_type">x-content/audio-player</property>
+                         </object>
+                         <packing>
+                         <property name="left_attach">1</property>
+                         <property name="right_attach">2</property>
+                         <property name="top_attach">2</property>
+                         <property name="bottom_attach">3</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options">GTK_FILL</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkLabel" id="label59">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="xalign">1</property>
+                         <property name="label" translatable="yes">_Photos</property>
+                         <property name="use_underline">True</property>
+                         <property name="mnemonic_widget">media_dcf_combobox</property>
+                         <style>
+                         <class name="dim-label"/>
+                         </style>
+                         </object>
+                         <packing>
+                         <property name="top_attach">3</property>
+                         <property name="bottom_attach">4</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options"></property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkAppChooserButton" id="media_dcf_combobox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="content_type">x-content/image-dcf</property>
+                         </object>
+                         <packing>
+                         <property name="left_attach">1</property>
+                         <property name="right_attach">2</property>
+                         <property name="top_attach">3</property>
+                         <property name="bottom_attach">4</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options">GTK_FILL</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkLabel" id="label57">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="xalign">1</property>
+                         <property name="label" translatable="yes">_Software</property>
+                         <property name="use_underline">True</property>
+                         <property name="mnemonic_widget">media_software_combobox</property>
+                         <style>
+                         <class name="dim-label"/>
+                         </style>
+                         </object>
+                         <packing>
+                         <property name="top_attach">4</property>
+                         <property name="bottom_attach">5</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options"></property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkAppChooserButton" id="media_software_combobox">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="content_type">x-content/unix-software</property>
+                         </object>
+                         <packing>
+                         <property name="left_attach">1</property>
+                         <property name="right_attach">2</property>
+                         <property name="top_attach">4</property>
+                         <property name="bottom_attach">5</property>
+                         <property name="x_options">GTK_FILL</property>
+                         <property name="y_options">GTK_FILL</property>
+                         </packing>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">True</property>
+                         <property name="position">0</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkBox" id="hbox2">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <property name="orientation">horizontal</property>
+                         <child>
+                         <object class="GtkButton" id="extra_options_button">
+                         <property name="label" translatable="yes">_Other Media…</property>
+                         <property name="visible">True</property>
+                         <property name="can_focus">True</property>
+                         <property name="receives_default">True</property>
+                         <property name="use_action_appearance">False</property>
+                         <property name="use_underline">True</property>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">False</property>
+                         <property name="pack_type">end</property>
+                         <property name="position">0</property>
+                         </packing>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="expand">True</property>
+                         <property name="fill">True</property>
+                         <property name="position">1</property>
+                         </packing>
+                         </child>
+                         </object>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">True</property>
+                         <property name="position">1</property>
+                         </packing>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">True</property>
+                         <property name="position">0</property>
+                         </packing>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">False</property>
+                         <property name="position">0</property>
+                         </packing>
+                         </child>
+                         <child>
+                         <object class="GtkCheckButton" id="media_autorun_never_checkbutton">
+                         <property name="label" translatable="yes">_Never prompt or start programs on media insertion</property>
+                         <property name="visible">True</property>
+                         <property name="can_focus">True</property>
+                         <property name="receives_default">False</property>
+                         <property name="use_action_appearance">False</property>
+                         <property name="use_underline">True</property>
+                         <property name="xalign">0</property>
+                         <property name="draw_indicator">True</property>
+                         <property name="valign">end</property>
+                         <property name="vexpand">False</property>
+                         </object>
+                         <packing>
+                         <property name="expand">False</property>
+                         <property name="fill">False</property>
+                         <property name="position">1</property>
+                         </packing>
+                         </child>
+                         </object>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="expand">True</property>
+                         <property name="fill">False</property>
+                         <property name="position">0</property>
+                         </packing>
+                         </child>
+                         </object>
+                         <packing>
+                         <property name="position">2</property>
+                         </packing>
+                         </child> -->
                     <child>
-                      <object class="GtkBox" id="media_preferences_vbox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="orientation">horizontal</property>
-                        <child>
-                          <object class="GtkAlignment" id="alignment1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkBox" id="media_preferences_vbox3">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="border_width">10</property>
-                                <property name="spacing">10</property>
-                                <property name="orientation">vertical</property>
-                                <child>
-                                  <object class="GtkBox" id="media_handling_vbox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="spacing">10</property>
-                                    <property name="valign">start</property>
-                                    <property name="vexpand">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkBox" id="vbox44">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="spacing">10</property>
-                                        <property name="orientation">vertical</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label42">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Select how media should be handled</property>
-                                            <attributes>
-                                              <attribute name="weight" value="bold"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkAlignment" id="alignment18">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="left_padding">12</property>
-                                            <child>
-                                              <object class="GtkBox" id="vbox52">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <property name="spacing">6</property>
-                                                <property name="orientation">vertical</property>
-                                                <child>
-                                                  <object class="GtkTable" id="table4">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="n_rows">5</property>
-                                                    <property name="n_columns">2</property>
-                                                    <property name="column_spacing">6</property>
-                                                    <property name="row_spacing">6</property>
-                                                    <child>
-                                                      <object class="GtkLabel" id="label44">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">CD _audio</property>
-                                                        <property name="use_underline">True</property>
-                                                        <property name="mnemonic_widget">media_audio_cdda_combobox</property>
-                                                        <style>
-                                                          <class name="dim-label"/>
-                                                        </style>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options"></property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel" id="label50">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">_DVD video</property>
-                                                        <property name="use_underline">True</property>
-                                                        <property name="mnemonic_widget">media_video_dvd_combobox</property>
-                                                        <style>
-                                                          <class name="dim-label"/>
-                                                        </style>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="top_attach">1</property>
-                                                        <property name="bottom_attach">2</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options"></property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkAppChooserButton" id="media_audio_cdda_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="content_type">x-content/audio-cdda</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">1</property>
-                                                        <property name="right_attach">2</property>
-                                                        <property name="y_options">GTK_FILL</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkAppChooserButton" id="media_video_dvd_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="content_type">x-content/video-dvd</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">1</property>
-                                                        <property name="right_attach">2</property>
-                                                        <property name="top_attach">1</property>
-                                                        <property name="bottom_attach">2</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options">GTK_FILL</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel" id="label54">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">_Music player</property>
-                                                        <property name="use_underline">True</property>
-                                                        <property name="mnemonic_widget">media_music_player_combobox</property>
-                                                        <style>
-                                                          <class name="dim-label"/>
-                                                        </style>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="top_attach">2</property>
-                                                        <property name="bottom_attach">3</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options"></property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkAppChooserButton" id="media_music_player_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="content_type">x-content/audio-player</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">1</property>
-                                                        <property name="right_attach">2</property>
-                                                        <property name="top_attach">2</property>
-                                                        <property name="bottom_attach">3</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options">GTK_FILL</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel" id="label59">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">_Photos</property>
-                                                        <property name="use_underline">True</property>
-                                                        <property name="mnemonic_widget">media_dcf_combobox</property>
-                                                        <style>
-                                                          <class name="dim-label"/>
-                                                        </style>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="top_attach">3</property>
-                                                        <property name="bottom_attach">4</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options"></property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkAppChooserButton" id="media_dcf_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="content_type">x-content/image-dcf</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">1</property>
-                                                        <property name="right_attach">2</property>
-                                                        <property name="top_attach">3</property>
-                                                        <property name="bottom_attach">4</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options">GTK_FILL</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel" id="label57">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">_Software</property>
-                                                        <property name="use_underline">True</property>
-                                                        <property name="mnemonic_widget">media_software_combobox</property>
-                                                        <style>
-                                                          <class name="dim-label"/>
-                                                        </style>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="top_attach">4</property>
-                                                        <property name="bottom_attach">5</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options"></property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkAppChooserButton" id="media_software_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">False</property>
-                                                        <property name="content_type">x-content/unix-software</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">1</property>
-                                                        <property name="right_attach">2</property>
-                                                        <property name="top_attach">4</property>
-                                                        <property name="bottom_attach">5</property>
-                                                        <property name="x_options">GTK_FILL</property>
-                                                        <property name="y_options">GTK_FILL</property>
-                                                      </packing>
-                                                    </child>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">0</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkBox" id="hbox2">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="orientation">horizontal</property>
-                                                    <child>
-                                                      <object class="GtkButton" id="extra_options_button">
-                                                        <property name="label" translatable="yes">_Other Media…</property>
-                                                        <property name="visible">True</property>
-                                                        <property name="can_focus">True</property>
-                                                        <property name="receives_default">True</property>
-                                                        <property name="use_action_appearance">False</property>
-                                                        <property name="use_underline">True</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="expand">False</property>
-                                                        <property name="fill">False</property>
-                                                        <property name="pack_type">end</property>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">1</property>
-                                                  </packing>
-                                                </child>
-                                              </object>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkCheckButton" id="media_autorun_never_checkbutton">
-                                    <property name="label" translatable="yes">_Never prompt or start programs on media insertion</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="xalign">0</property>
-                                    <property name="draw_indicator">True</property>
-                                    <property name="valign">end</property>
-                                    <property name="vexpand">False</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                      <object class="CcInfoRemovableMediaPanel" id="media_preferences_vbox">
+                        <property name="visible">true</property>
                       </object>
-                      <packing>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                     <child type="tab">
                       <object class="GtkLabel" id="label16">

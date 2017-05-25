@@ -25,6 +25,8 @@ libinfo_la_SOURCES =		\
 	cc-info-overview-panel.h		\
 	cc-info-default-apps-panel.c		\
 	cc-info-default-apps-panel.h		\
+	cc-info-removable-media-panel.c		\
+	cc-info-removable-media-panel.h		\
 	gsd-disk-space-helper.h	\
 	gsd-disk-space-helper.c	\
 	info-cleanup.h		\
