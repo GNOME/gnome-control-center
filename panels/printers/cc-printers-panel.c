@@ -713,7 +713,7 @@ on_printer_deleted (PpPrinterEntry *printer_entry,
                 NULL);
 
   /* Translators: %s is the printer name */
-  notification_message = g_strdup_printf (_("Printer \"%s\" has been deleted"),
+  notification_message = g_strdup_printf (_("Printer “%s” has been deleted"),
                                           printer_name);
   label = (GtkLabel*)
     gtk_builder_get_object (priv->builder, "notification-label");
