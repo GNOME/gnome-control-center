@@ -689,6 +689,25 @@ selected_rows_changed (GtkListBox *box,
   gtk_widget_set_sensitive (priv->add_button, sensitive);
 }
 
+static gboolean
+list_button_release_event (GtkListBox *box,
+                           GdkEvent   *event,
+                           GtkWidget  *chooser)
+{
+  gdouble x, y;
+  GtkListBoxRow *row;
+
+  gdk_event_get_coords (event, &x, &y);
+  row = gtk_list_box_get_row_at_y (box, y);
+  if (row && g_object_get_data (G_OBJECT (row), "back"))
+    {
+      g_signal_emit_by_name (row, "activate", NULL);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 static void
 add_default_row (GtkWidget   *chooser,
                  LocaleInfo  *info,
@@ -1078,6 +1097,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   gtk_list_box_set_sort_func (GTK_LIST_BOX (priv->list), (GtkListBoxSortFunc)list_sort, chooser, NULL);
   g_signal_connect (priv->list, "row-activated", G_CALLBACK (row_activated), chooser);
   g_signal_connect (priv->list, "selected-rows-changed", G_CALLBACK (selected_rows_changed), chooser);
+  g_signal_connect (priv->list, "button-release-event", G_CALLBACK (list_button_release_event), chooser);
 
   g_signal_connect_swapped (priv->filter_entry, "search-changed", G_CALLBACK (filter_changed), chooser);
   g_signal_connect (priv->filter_entry, "key-release-event", G_CALLBACK (reset_on_escape), chooser);
