@@ -660,9 +660,10 @@ row_activated (GtkListBox *box,
   data = g_object_get_data (G_OBJECT (row), "name");
   if (data)
     {
-      gtk_dialog_response (GTK_DIALOG (chooser),
-                           gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
-                                                               priv->add_button));
+      if (gtk_widget_is_sensitive (priv->add_button))
+        gtk_dialog_response (GTK_DIALOG (chooser),
+                             gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
+                                                                 priv->add_button));
       return;
     }
 
