@@ -1114,7 +1114,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
 
   /* Try to come up with a sensible size */
   gtk_window_get_size (main_window, &width, &height);
-  gtk_widget_set_size_request (chooser, width * MAIN_WINDOW_WIDTH_RATIO, height);
+  gtk_widget_set_size_request (chooser, width * MAIN_WINDOW_WIDTH_RATIO, -1);
   gtk_window_set_resizable (GTK_WINDOW (chooser), TRUE);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), main_window);
