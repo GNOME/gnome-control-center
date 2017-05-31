@@ -476,3 +476,127 @@ pp_printer_delete_finish (PpPrinter     *printer,
 
   return g_task_propagate_boolean (G_TASK (res), error);
 }
+
+typedef struct
+{
+  gchar *filename;
+  gchar *job_name;
+} PrintFileData;
+
+static void
+print_file_data_free (PrintFileData *print_file_data)
+{
+  g_free (print_file_data->filename);
+  g_free (print_file_data->job_name);
+
+  g_slice_free (PrintFileData, print_file_data);
+}
+
+static void
+print_file_thread (GTask        *task,
+                   gpointer      source_object,
+                   gpointer      task_data,
+                   GCancellable *cancellable)
+{
+  PrintFileData *print_file_data;
+  cups_ptype_t  type = 0;
+  cups_dest_t  *dest = NULL;
+  const gchar  *printer_type = NULL;
+  PpPrinter    *printer;
+  gboolean      ret = FALSE;
+  gchar        *printer_name = NULL;
+  gchar        *printer_uri = NULL;
+  gchar        *resource = NULL;
+  ipp_t        *response = NULL;
+  ipp_t        *request;
+
+  printer = PP_PRINTER (source_object);
+
+  g_object_get (printer, "printer-name", &printer_name, NULL);
+  dest = cupsGetNamedDest (CUPS_HTTP_DEFAULT, printer_name, NULL);
+  if (dest != NULL)
+    {
+      printer_type = cupsGetOption ("printer-type",
+                                    dest->num_options,
+                                    dest->options);
+      cupsFreeDests (1, dest);
+
+      if (printer_type)
+        type = atoi (printer_type);
+    }
+
+  if (type & CUPS_PRINTER_CLASS)
+    {
+      printer_uri = g_strdup_printf ("ipp://localhost/classes/%s", printer_name);
+      resource = g_strdup_printf ("/classes/%s", printer_name);
+    }
+  else
+    {
+      printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
+      resource = g_strdup_printf ("/printers/%s", printer_name);
+    }
+
+  print_file_data = g_task_get_task_data (task);
+
+  request = ippNewRequest (IPP_PRINT_JOB);
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                "printer-uri", NULL, printer_uri);
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                "requesting-user-name", NULL, cupsUser ());
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                "job-name", NULL, print_file_data->job_name);
+  response = cupsDoFileRequest (CUPS_HTTP_DEFAULT, request, resource, print_file_data->filename);
+
+  if (response != NULL)
+    {
+      if (ippGetState (response) == IPP_ERROR)
+        g_warning ("An error has occured during printing of test page.");
+      if (ippGetState (response) == IPP_STATE_IDLE)
+        ret = TRUE;
+
+      ippDelete (response);
+    }
+
+  g_free (printer_name);
+  g_free (printer_uri);
+  g_free (resource);
+
+  if (g_task_set_return_on_cancel (task, FALSE))
+    {
+      g_task_return_boolean (task, ret);
+    }
+}
+
+void
+pp_printer_print_file_async (PpPrinter           *printer,
+                             const gchar         *filename,
+                             const gchar         *job_name,
+                             GCancellable        *cancellable,
+                             GAsyncReadyCallback  callback,
+                             gpointer             user_data)
+{
+  PrintFileData *print_file_data;
+  GTask *task;
+
+  print_file_data = g_new (PrintFileData, 1);
+  print_file_data->filename = g_strdup (filename);
+  print_file_data->job_name = g_strdup (job_name);
+
+  task = g_task_new (G_OBJECT (printer), cancellable, callback, user_data);
+
+  g_task_set_return_on_cancel (task, TRUE);
+  g_task_set_task_data (task, print_file_data, (GDestroyNotify) print_file_data_free);
+
+  g_task_run_in_thread (task, print_file_thread);
+  g_object_unref (task);
+}
+
+gboolean
+pp_printer_print_file_finish (PpPrinter     *printer,
+                              GAsyncResult  *res,
+                              GError       **error)
+{
+  g_return_val_if_fail (g_task_is_valid (res, printer), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (res), error);
+}

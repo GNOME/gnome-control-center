@@ -66,6 +66,17 @@ GList       *pp_printer_get_jobs_finish (PpPrinter          *printer,
                                          GAsyncResult       *res,
                                          GError            **error);
 
+void         pp_printer_print_file_async (PpPrinter           *printer,
+                                          const gchar         *filename,
+                                          const gchar         *job_name,
+                                          GCancellable        *cancellable,
+                                          GAsyncReadyCallback  callback,
+                                          gpointer             user_data);
+
+gboolean     pp_printer_print_file_finish (PpPrinter         *printer,
+                                           GAsyncResult      *res,
+                                           GError           **error);
+
 G_END_DECLS
 
 #endif /* __PP_PRINTER_H__ */
